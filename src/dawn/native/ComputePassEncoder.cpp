@@ -452,7 +452,8 @@ void ComputePassEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t quer
                                                 Feature::TimestampQueryInsidePasses));
             }
 
-            mCommandEncoder->TrackQueryAvailability(querySet, queryIndex);
+            mCommandEncoder->TrackQueryAvailability(querySet, queryIndex,
+                                                    QueryAvailability::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

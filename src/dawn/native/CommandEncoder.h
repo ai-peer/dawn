@@ -36,6 +36,11 @@ Color ClampClearColorValueToLegalRange(const Color& originalColor, const Format&
 MaybeError ValidateCommandEncoderDescriptor(const DeviceBase* device,
                                             const CommandEncoderDescriptor* descriptor);
 
+enum class QueryAvailability {
+    Available,  // Query has begin+end
+    Empty,      // Query has begin+end, but was not written
+};
+
 class CommandEncoder final : public ApiObjectBase {
   public:
     static Ref<CommandEncoder> Create(DeviceBase* device,
@@ -48,7 +53,9 @@ class CommandEncoder final : public ApiObjectBase {
     CommandBufferResourceUsage AcquireResourceUsages();
 
     void TrackUsedQuerySet(QuerySetBase* querySet);
-    void TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex);
+    void TrackQueryAvailability(QuerySetBase* querySet,
+                                uint32_t queryIndex,
+                                QueryAvailability availability);
 
     // Dawn API
     ComputePassEncoder* APIBeginComputePass(const ComputePassDescriptor* descriptor);

@@ -1081,6 +1081,29 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                         UNREACHABLE();
                     }
                 }
+
+                auto startIt = querySet->GetQueryAvailability().begin() + cmd->firstQuery;
+                auto endIt =
+                    querySet->GetQueryAvailability().begin() + cmd->firstQuery + cmd->queryCount;
+
+                // Clear all unavailable resolved queries to zero.
+                auto firstUnavailable = std::find(startIt, endIt, false);
+                while (firstUnavailable != endIt) {
+                    // Find the next available, or the end.
+                    auto nextAvailableOrEnd = std::find(firstUnavailable + 1, endIt, true);
+
+                    // clear range [firstUnavailable, nextAvailableOrEnd)
+                    auto first = std::distance(startIt, firstUnavailable);
+                    auto count = std::distance(firstUnavailable, nextAvailableOrEnd);
+                    [commandContext->EnsureBlit()
+                        fillBuffer:destination->GetMTLBuffer()
+                             range:NSMakeRange(cmd->destinationOffset + first * sizeof(uint64_t),
+                                               count * sizeof(uint64_t))
+                             value:0u];
+
+                    // Find the next unavailable for the next loop iteration
+                    firstUnavailable = std::find(nextAvailableOrEnd, endIt, false);
+                }
                 break;
             }
 

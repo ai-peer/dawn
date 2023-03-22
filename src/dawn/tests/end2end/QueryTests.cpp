@@ -366,8 +366,6 @@ TEST_P(OcclusionQueryTests, ResolveWithoutWritten) {
 
 // Test setting an occlusion query to non-zero, then rewriting it without drawing, resolves to 0.
 TEST_P(OcclusionQueryTests, RewriteNoDrawToZero) {
-    // TODO(crbug.com/dawn/1707): The second query does not reset it to 0.
-    DAWN_SUPPRESS_TEST_IF(IsMacOS() && IsMetal() && IsApple());
     constexpr uint32_t kQueryCount = 1;
 
     wgpu::QuerySet querySet = CreateOcclusionQuerySet(kQueryCount);
@@ -406,8 +404,6 @@ TEST_P(OcclusionQueryTests, RewriteNoDrawToZero) {
 // Test setting an occlusion query to non-zero, then rewriting it without drawing, resolves to 0.
 // Do the two queries+resolves in separate submits.
 TEST_P(OcclusionQueryTests, RewriteNoDrawToZeroSeparateSubmit) {
-    // TODO(crbug.com/dawn/1707): The second query does not reset it to 0.
-    DAWN_SUPPRESS_TEST_IF(IsMacOS() && IsMetal() && IsApple());
     constexpr uint32_t kQueryCount = 1;
 
     wgpu::QuerySet querySet = CreateOcclusionQuerySet(kQueryCount);

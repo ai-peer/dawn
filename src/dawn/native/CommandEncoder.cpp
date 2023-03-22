@@ -757,15 +757,27 @@ void CommandEncoder::TrackUsedQuerySet(QuerySetBase* querySet) {
     mUsedQuerySets.insert(querySet);
 }
 
-void CommandEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex) {
+void CommandEncoder::TrackQueryAvailability(QuerySetBase* querySet,
+                                            uint32_t queryIndex,
+                                            QueryAvailability availability) {
     DAWN_ASSERT(querySet != nullptr);
 
     if (GetDevice()->IsValidationEnabled()) {
         TrackUsedQuerySet(querySet);
     }
 
-    // Set the query at queryIndex to available for resolving in query set.
-    querySet->SetQueryAvailability(queryIndex, true);
+    // Mark whether the the query at queryIndex is available and non-zero for resolving in query
+    // set.
+    switch (availability) {
+        case QueryAvailability::Available:
+            querySet->SetQueryAvailability(queryIndex, true);
+            break;
+        case QueryAvailability::Empty:
+            // If the query was empty, mark it as unavailable so that the resolve operation fills it
+            // with zeros.
+            querySet->SetQueryAvailability(queryIndex, false);
+            break;
+    }
 }
 
 // Implementation of the API's command recording methods
@@ -807,7 +819,7 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
                         break;
                 }
 
-                TrackQueryAvailability(querySet, queryIndex);
+                TrackQueryAvailability(querySet, queryIndex, QueryAvailability::Available);
             }
 
             return {};
@@ -978,7 +990,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                         break;
                 }
 
-                TrackQueryAvailability(querySet, queryIndex);
+                TrackQueryAvailability(querySet, queryIndex, QueryAvailability::Available);
                 // Track the query availability with true on render pass again for rewrite
                 // validation and query reset on Vulkan
                 usageTracker.TrackQueryAvailability(querySet, queryIndex);
@@ -1573,7 +1585,7 @@ void CommandEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryInd
                 DAWN_TRY(ValidateTimestampQuery(GetDevice(), querySet, queryIndex));
             }
 
-            TrackQueryAvailability(querySet, queryIndex);
+            TrackQueryAvailability(querySet, queryIndex, QueryAvailability::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

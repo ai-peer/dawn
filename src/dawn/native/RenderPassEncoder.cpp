@@ -124,7 +124,9 @@ ObjectType RenderPassEncoder::GetType() const {
     return ObjectType::RenderPassEncoder;
 }
 
-void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex) {
+void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet,
+                                               uint32_t queryIndex,
+                                               QueryAvailability availability) {
     DAWN_ASSERT(querySet != nullptr);
 
     // Track the query availability with true on render pass for rewrite validation and query
@@ -132,7 +134,7 @@ void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t 
     mUsageTracker.TrackQueryAvailability(querySet, queryIndex);
 
     // Track it again on command encoder for zero-initializing when resolving unused queries.
-    mCommandEncoder->TrackQueryAvailability(querySet, queryIndex);
+    mCommandEncoder->TrackQueryAvailability(querySet, queryIndex, availability);
 }
 
 void RenderPassEncoder::APIEnd() {
@@ -379,6 +381,7 @@ void RenderPassEncoder::APIBeginOcclusionQuery(uint32_t queryIndex) {
             // Record the current query index for endOcclusionQuery.
             mCurrentOcclusionQueryIndex = queryIndex;
             mOcclusionQueryActive = true;
+            mDrawCountAtBeginOcclusionQuery = GetDrawCount();
 
             BeginOcclusionQueryCmd* cmd =
                 allocator->Allocate<BeginOcclusionQueryCmd>(Command::BeginOcclusionQuery);
@@ -398,7 +401,10 @@ void RenderPassEncoder::APIEndOcclusionQuery() {
                 DAWN_INVALID_IF(!mOcclusionQueryActive, "No occlusion queries are active.");
             }
 
-            TrackQueryAvailability(mOcclusionQuerySet.Get(), mCurrentOcclusionQueryIndex);
+            const bool isEmpty = (GetDrawCount() - mDrawCountAtBeginOcclusionQuery) == 0;
+            TrackQueryAvailability(
+                mOcclusionQuerySet.Get(), mCurrentOcclusionQueryIndex,
+                isEmpty ? QueryAvailability::Empty : QueryAvailability::Available);
 
             mOcclusionQueryActive = false;
 
@@ -425,7 +431,7 @@ void RenderPassEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t query
                                  querySet);
             }
 
-            TrackQueryAvailability(querySet, queryIndex);
+            TrackQueryAvailability(querySet, queryIndex, QueryAvailability::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

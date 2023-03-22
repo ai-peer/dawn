@@ -83,7 +83,9 @@ class RenderPassEncoder final : public RenderEncoderBase {
   private:
     void DestroyImpl() override;
 
-    void TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex);
+    void TrackQueryAvailability(QuerySetBase* querySet,
+                                uint32_t queryIndex,
+                                QueryAvailability availability);
 
     // For render and compute passes, the encoding context is borrowed from the command encoder.
     // Keep a reference to the encoder to make sure the context isn't freed.
@@ -96,6 +98,7 @@ class RenderPassEncoder final : public RenderEncoderBase {
     Ref<QuerySetBase> mOcclusionQuerySet;
     uint32_t mCurrentOcclusionQueryIndex = 0;
     bool mOcclusionQueryActive = false;
+    uint64_t mDrawCountAtBeginOcclusionQuery = 0;
 
     // This is the hardcoded value in the WebGPU spec.
     uint64_t mMaxDrawCount = 50000000;
