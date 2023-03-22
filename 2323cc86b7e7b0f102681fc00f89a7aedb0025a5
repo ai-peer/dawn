@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cfeefde_5904b0da",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-22T03:35:19Z",
+      "side": 1,
+      "message": "How about trying to do the restriction \"devices can not use any features other than adapter exposed under adapter toggles\" for now, and relax this restriction later if necessary (e.g. required by Skia)? That could simplify this CL a lot while having less complexity exposed outside Adapter. In this way `use_dxc` toggle will still be temporally promoted as instance toggle (as this CL did), but just serve as an input to adapter toggles, and will be downgrade to adapter toggle later. And this may be simpler than the alternative way of setting adapter toggles outside, which also requires adapter checking `UseDXC` when reporting toggles.\n\nI will update this CL today.",
+      "parentUuid": "56173235_74ef2c2c",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
