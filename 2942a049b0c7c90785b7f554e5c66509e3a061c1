@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "450ba68a_fdb861f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-03-22T19:00:53Z",
+      "side": 1,
+      "message": "LGTM, side question",
+      "revId": "2942a049b0c7c90785b7f554e5c66509e3a061c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "219051c9_41a1b4f4",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-03-22T19:00:53Z",
+      "side": 1,
+      "message": "Do we have tests which resolve in a separate submit from when the query set is written?",
+      "revId": "2942a049b0c7c90785b7f554e5c66509e3a061c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
