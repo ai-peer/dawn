@@ -141,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46e20961_da2a8b5a",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-22T02:36:47Z",
+      "side": 1,
+      "message": "Thanks for reviewing!\n\nAlthough eventually we would have adapter toggles and making `Use_DXC` as an adapter toggle, I am not sure if we can get rid of the \"feature not exposed, but a toggle can make it OK to use\" semantics. \n* There are several experimental features go behind `disallow_unsafe_apis`, and they can not exposed if the toggle is not disabled, which is the default state.\n* However we may create internal devices (for e.g. Skia usage) that disable `disallow_unsafe_apis` out of such adapter (override the toggle) for convenience like resource sharing etc, and if we want such devices be able to use experimental features, we again comes into the situation that \"some features not exposed, but a toggle can make it OK to use\"\n* Otherwise we can decide to not allow such devices to use any features other than adapter exposed under adapter toggles, in this case the semantics and logic is much simpler, but the restriction may be too strict?\n\nThe suggested alternative way can work as a temporary solution, but I am worried about setting adapter toggles state back and forth outside its creation (and initialization), which seems that may allow introducing inconsistent behavior if not carefully handled.",
+      "parentUuid": "15622442_d392a3fe",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
