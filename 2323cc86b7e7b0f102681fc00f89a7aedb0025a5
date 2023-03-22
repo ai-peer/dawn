@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56173235_74ef2c2c",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-22T03:14:15Z",
+      "side": 1,
+      "message": "\u003e feature not exposed, but a toggle can make it OK to use\" semantics.\n\njust to clarify, I\u0027m specifically referring to the case in the current CL where the adapter does not support shader-f16, but if you make a device with use_dxc using shader-f16 it works. I don\u0027t think this is overly strict but would appreciate your opinion.\n\n\u003e in this case the semantics and logic is much simpler, but the restriction may be too strict?\n\nwhat cases would not be supported that you think might be important?\n\n\nyes, it\u0027s a trade off that it could be bad if not carefully handled, but I\u0027m thinking it\u0027s closer to the end state we want of adapter toggles. and, after V1 branch we can spend the time to refactor and fully support adapter toggles",
+      "parentUuid": "46e20961_da2a8b5a",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
