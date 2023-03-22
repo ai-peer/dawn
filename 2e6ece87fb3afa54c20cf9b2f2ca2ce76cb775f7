@@ -173,6 +173,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d55dd57_f36a7108",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-22T22:55:09Z",
+      "side": 1,
+      "message": "After thinking about it. How worried are we about this list changing, these are the primitive types in protobuf and C++. I\u0027m not sure if it is worth keeping a dynamic list in dawn_lpm.json. I also don\u0027t think it\u0027s worth adding something like a protobuf type in dawn_wire.json adjacent to the C++ types when the mappings are  clearly defined.",
+      "parentUuid": "e50b1341_bdadf8e1",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "138cf326_1e07b90d",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 31
