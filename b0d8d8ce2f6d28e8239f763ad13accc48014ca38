@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c0055ba_76ea4918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-22T19:57:45Z",
+      "side": 1,
+      "message": "Talked to @sunnyps@chromium.org today and got some more interesting ideas from him on how to tackle this race conditioning issue. I have created a doc to gather more opinions. Just sent everyone the email.",
+      "revId": "b0d8d8ce2f6d28e8239f763ad13accc48014ca38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
