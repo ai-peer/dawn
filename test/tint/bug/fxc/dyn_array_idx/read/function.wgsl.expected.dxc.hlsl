@@ -6,7 +6,7 @@ struct S {
   int data[64];
 };
 
-RWByteAddressBuffer result : register(u1, space0);
+RWByteAddressBuffer result : register(u1);
 
 [numthreads(1, 1, 1)]
 void f() {

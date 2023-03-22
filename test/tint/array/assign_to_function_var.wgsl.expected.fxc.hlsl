@@ -12,7 +12,7 @@ groupshared int4 src_workgroup[4];
 cbuffer cbuffer_src_uniform : register(b0, space0) {
   uint4 src_uniform[4];
 };
-RWByteAddressBuffer src_storage : register(u1, space0);
+RWByteAddressBuffer src_storage : register(u1);
 
 typedef int4 ret_arr_ret[4];
 ret_arr_ret ret_arr() {

@@ -2,9 +2,9 @@ cbuffer cbuffer_ubo : register(b0, space0) {
   uint4 ubo[1];
 };
 
-RWByteAddressBuffer result : register(u2, space0);
+RWByteAddressBuffer result : register(u2);
 
-RWByteAddressBuffer ssbo : register(u1, space0);
+RWByteAddressBuffer ssbo : register(u1);
 
 [numthreads(1, 1, 1)]
 void f() {

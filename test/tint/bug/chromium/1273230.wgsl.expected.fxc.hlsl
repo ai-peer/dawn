@@ -8,11 +8,11 @@ void marg8uintin() {
 cbuffer cbuffer_uniforms : register(b0, space0) {
   uint4 uniforms[3];
 };
-RWByteAddressBuffer indices : register(u10, space0);
-RWByteAddressBuffer positions : register(u11, space0);
-RWByteAddressBuffer counters : register(u20, space0);
-RWByteAddressBuffer LUT : register(u21, space0);
-RWByteAddressBuffer dbg : register(u50, space0);
+RWByteAddressBuffer indices : register(u10);
+RWByteAddressBuffer positions : register(u11);
+RWByteAddressBuffer counters : register(u20);
+RWByteAddressBuffer LUT : register(u21);
+RWByteAddressBuffer dbg : register(u50);
 
 float3 toVoxelPos(float3 position) {
   float3 bbMin = float3(asfloat(uniforms[1].x), asfloat(uniforms[1].y), asfloat(uniforms[1].z));
