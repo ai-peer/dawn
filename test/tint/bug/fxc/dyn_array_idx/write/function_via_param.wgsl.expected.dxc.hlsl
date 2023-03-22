@@ -6,7 +6,7 @@ struct S {
   int data[64];
 };
 
-RWByteAddressBuffer result : register(u1, space0);
+RWByteAddressBuffer result : register(u1);
 
 void x(inout S p) {
   {

@@ -1,4 +1,4 @@
-SamplerState samp : register(s0, space0);
+SamplerState samp : register(s0);
 cbuffer cbuffer_params : register(b1, space0) {
   uint4 params[1];
 };
