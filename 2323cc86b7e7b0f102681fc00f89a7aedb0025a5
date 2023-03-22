@@ -231,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ab80d2b_d496e197",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-22T15:08:30Z",
+      "side": 1,
+      "message": "\u003e can we make two separate instances?\n\nThat would be a rather large change to DawnTest, because currently all end-to-end test reuse a single instance stored in `gTestEnv`...\n\n---\n\nAbout the \"restriction \u0027devices can not use any features other than adapter exposed under adapter toggles\u0027\", I recall that (if I get it right) in the previous CL Corentin said (https://dawn-review.googlesource.com/c/dawn/+/122021/comment/745e3c2f_40a8cacc/) that we may want device toggles (like `DisallowUnsafeAPIs`) can be override the adapter toggles and we do required features validation on device toggles, so maybe we must have two separate concept of \"features supported under adapter toggles\" and \"features supported under device toggles\" (which may be different from each other), but both are subsets of \"features could be supported by adapter without the toggles restriction\" (here comes the third concept...)\n\nI write a draft CL (https://dawn-review.googlesource.com/c/dawn/+/125020) that do such restriction, but maybe that is not the way to go... Sorry about that, that would be more reviewing work...\n\n---\n\nMaybe it is worth mentioned that current state (before this CL) of adapter features management are:\n* Adapter may report (expose) all features it could support (i.e. without toggles restriction, this CL is trying to add such restriction), which means that it will just expose experimental features even if `DisallowUnsafeAPIs` is enabled on instance;\n* Chrome filter away the experimental features in webgpu_decoder_impl.cc, so JS user won\u0027t see them;\n* Adapter validate the device required features based on device toggles (\"toggles restriction\" I mentioned in this CL), including `DisallowUnsafeAPIs` and `UseDXC`. This is the concept \"features supported under device toggles\".\n\nWhat this CL trying to do is making Adapter only report supported features under the restriction of adapter toggles, so this introduce the concept \"features supported under adapter toggles\".\n\nActually it is a possible to handle \"shader-f16\" features and \"use_dxc\" toggle in webgpu_decoder_impl.cc, just filter it if use d3d12 backend and \"use_dxc\" toggle is not enabled. I tried to write a CL in this way, but raised concern about it (https://chromium-review.googlesource.com/c/chromium/src/+/3885086/comment/1ef187f4_5225ed98/). That is actually why we start the toggles refactoring.....",
+      "parentUuid": "a643939e_cf91cfed",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
