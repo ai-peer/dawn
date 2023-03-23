@@ -21,6 +21,7 @@ if (NOT TARGET SPIRV-Headers)
 
     message(STATUS "Dawn: using SPIRV-Headers at ${DAWN_SPIRV_HEADERS_DIR}")
     add_subdirectory(${DAWN_SPIRV_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/spirv-headers")
+    set(SPIRV-Headers_SOURCE_DIR ${DAWN_SPIRV_HEADERS_DIR})
 endif()
 
 # Needs to come before SPIR-V Tools
