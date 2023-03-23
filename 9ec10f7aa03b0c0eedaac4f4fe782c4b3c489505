@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a906b7d_80808e2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-23T17:42:12Z",
+      "side": 1,
+      "message": "LGTM, but I\u0027d like to hold of landing anything non-critical for the next week.\nWe\u0027re branching for M113 today, which we\u0027re hoping to be the V1 release of WebGPU.",
+      "revId": "9ec10f7aa03b0c0eedaac4f4fe782c4b3c489505",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
