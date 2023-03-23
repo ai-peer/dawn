@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5cddc8f_74d4e3fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-23T08:05:52Z",
+      "side": 1,
+      "message": "There is already an existing test in end2end tests: `DeviceLifetimeTests.DroppedThenMapBuffer`.\n\nmapAsync would have created an async task but instead it will return a callback with `DeviceLost` error.\n\nI guess it should be enough?",
+      "parentUuid": "6f787a32_f06f9448",
+      "revId": "b0d8d8ce2f6d28e8239f763ad13accc48014ca38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e1480df_b34b3e5d",
         "filename": "src/dawn/tests/unittests/native/DeviceAsyncTaskTests.cpp",
         "patchSetId": 7
