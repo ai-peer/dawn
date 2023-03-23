@@ -249,6 +249,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72258bd3_29a6c971",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-23T22:46:53Z",
+      "side": 1,
+      "message": "I understand the desire to get shader-f16 in v1 so I landed your handling of shader-f16 and use_dxc with some modification in webgpu_decoder_impl.cc in [this CL](https://chromium-review.googlesource.com/c/chromium/src/+/4366493). hopefully it makes the branch. I still think adapter toggles are the better way, and I\u0027m sorry I wasn\u0027t response enough with these reviews to make progress. I\u0027d still like to revisit the toggles after we\u0027re sure WebGPU is looking stable in 113.",
+      "parentUuid": "7ab80d2b_d496e197",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
