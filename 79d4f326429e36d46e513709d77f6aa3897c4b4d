@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe378f4f_e9d73f5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-23T00:39:09Z",
+      "side": 1,
+      "message": "Yea we could but I hope no one relies on empty queries too much... \n\nbut yes, we can\u0027t do 0 fill because resolving the query will still copy the stale data into the resolved destination buffer.\n\nThe alternative can be to do 0 fill first, then partial resolve based only on the non-empty queries. but it\u0027s roughly the same in terms of 1 full operation and 1 scattered operation.",
+      "parentUuid": "290113c7_74007807",
+      "revId": "79d4f326429e36d46e513709d77f6aa3897c4b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bda826da_e7023a0a",
@@ -54,6 +72,30 @@
       "writtenOn": "2023-03-22T23:55:30Z",
       "side": 1,
       "message": "Do we need both of these? IIUC, this is giving us coverage on the toggle on platforms that we don\u0027t need the toggle on? Is that necessary?",
+      "range": {
+        "startLine": 1298,
+        "startChar": 22,
+        "endLine": 1299,
+        "endChar": 85
+      },
+      "revId": "79d4f326429e36d46e513709d77f6aa3897c4b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0da9d8_fb76c4f3",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-23T00:39:09Z",
+      "side": 1,
+      "message": "verifies it still is correct even if not needed and that it doesn\u0027t go horribly wrong with crashing or validation layers.\nespecially since we have no apple GPU bots now, so we would otherwise have no coverage of the code path.",
+      "parentUuid": "34eabfbe_449a3e9c",
       "range": {
         "startLine": 1298,
         "startChar": 22,
