@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a78aed3_7be62140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-23T18:26:31Z",
+      "side": 1,
+      "message": "Kokoro is broken for unrelated reasons, manually adding +1.",
+      "revId": "be32e7f19ca2baf509683c247f6addba7dda4e93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
