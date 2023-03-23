@@ -159,6 +159,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "129c234c_f327cbae",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 36
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-23T00:46:19Z",
+      "side": 1,
+      "message": "Ok, it does lead to different code paths in the impl but sounds fine to do later",
+      "parentUuid": "983d8cb8_65b6686c",
+      "range": {
+        "startLine": 106,
+        "startChar": 9,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa3e959f_ced571fc",
@@ -337,6 +361,30 @@
       "side": 1,
       "message": "I handle these four in a custom serializer in a future CL:\n\n\"device create shader module\" - Custom shader that always compiles. Once this stack of CLs is merged I\u0027m going to try to merge my token-level shader fuzzer which. One thing I\u0027ve noticed about dawn_wire_fuzzer is that it very rarely actually compiles a shader so it\u0027s missing a lot of coverage when managing shader objects, compute pipelines, etc. This fuzzer (dawnlpm) is more about fuzzing the, however it won\u0027t fuzz tint\u0027s lexer/parsers at all, but we have a lot of coverage there in dawn_wire_fuzzer. Just passing a string to CreateShaderModule (which is what the generated code would do) wouldn\u0027t be that interesting in the context of this fuzzer.\n\n\"destroy object\" - Handled uniquely so we can manage the objects we\u0027re destroying more easily.\n\n\"device create render pipeline\" - Adding support in the future\n\"device create render pipeline async\" - Adding support in the future",
       "parentUuid": "0c234a96_898bc87f",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fefbf9f9_8593fe23",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
+        "patchSetId": 36
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-23T00:46:19Z",
+      "side": 1,
+      "message": "got it",
+      "parentUuid": "f2946f7d_46d2c430",
       "range": {
         "startLine": 26,
         "startChar": 8,
