@@ -56,6 +56,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f787a32_f06f9448",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-23T01:06:12Z",
+      "side": 1,
+      "message": "Overall LGTM! Would it be possible to implement unit tests for the case when we have async tasks after the device is gone? I think they won\u0027t work atm (but should compile?) with the mock infra, but it would be nice to have the tests implemented but skipped with crbug.com/dawn/1702 in the comment as to why they are skipped.\n\nTalking with Austin, such a test should be possible by creating a buffer, losing the last ref to the device, then calling mapAsync on the buffer with a callback.",
+      "revId": "b0d8d8ce2f6d28e8239f763ad13accc48014ca38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e1480df_b34b3e5d",
         "filename": "src/dawn/tests/unittests/native/DeviceAsyncTaskTests.cpp",
         "patchSetId": 7
