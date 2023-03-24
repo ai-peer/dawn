@@ -539,6 +539,9 @@ inline std::optional<AInt> CheckedDiv(AInt a, AInt b) {
 /// @returns a / b, or an empty optional if the resulting value overflowed the float value
 template <typename FloatingPointT, typename = traits::EnableIf<IsFloatingPoint<FloatingPointT>>>
 inline std::optional<FloatingPointT> CheckedDiv(FloatingPointT a, FloatingPointT b) {
+    if (b == FloatingPointT{0}) {
+        return {};
+    }
     auto result = FloatingPointT{a.value / b.value};
     if (!std::isfinite(result.value)) {
         return {};
