@@ -16,6 +16,23 @@
       "message": "Hi Austin, PTAL. Thanks",
       "revId": "84b9b3431d6e69dc26c80e3a4be228c8009ebed0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe72ab9_e5c5ca1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-24T19:59:47Z",
+      "side": 1,
+      "message": "LGTM - we\u0027re going to hold off on landing additional changes like this for a bit until we\u0027re more confident Canary is stable for the 113 branch. There\u0027s a concern that cherry-picks might end up with a lot of merge conflicts.\n\nIf you\u0027d like, you can send the rest of the d3d11 stuff for review altogether and I\u0027ll look at it so we can make progress in the meantime.",
+      "revId": "84b9b3431d6e69dc26c80e3a4be228c8009ebed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
