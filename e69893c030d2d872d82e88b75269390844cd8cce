@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d5fb759_98f74d94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-24T15:49:49Z",
+      "side": 1,
+      "message": "Kokoro seems unhappy (?!)\n\n```\n[ RUN      ] ResolverConstEvalRuntimeSemanticsTest.Mod_AFloat_ZeroDenominator\n/dawn/src/src/tint/number.h:560:40: runtime error: division by zero\n    #0 0x2e93d50 in tint::utils::Result\u003ctint::Number\u003cdouble\u003e, tint::utils::FailureType\u003e tint::resolver::ConstEval::Mod\u003ctint::Number\u003cdouble\u003e \u003e(tint::Source const\u0026, tint::Number\u003cdouble\u003e, tint::Number\u003cdouble\u003e) (/dawn/build/tint_unittests+0x2e93d50)\n    #1 0x2e11d82 in auto tint::Switch\u003ctint::detail::Infer, tint::type::Type const, auto tint::resolver::(anonymous namespace)::Dispatch_fia_fiu32_f16\u003ctint::resolver::ConstEval::ModFunc(tint::Source const\u0026, tint::type::Type const*)::$_30, tint::constant::Value const*\u0026, tint::constant::Value const*\u0026\u003e(tint::resolver::ConstEval::ModFunc(tint::Source const\u0026, tint::type::Type const*)::$_30\u0026\u0026, tint::constant::Value const*\u0026, tint::constant::Value const*\u0026)::\u0027lambda\u0027(tint::type::AbstractInt const*), auto tint::resolver::(anonymous namespace)::Dispatch_fia_fiu32_f16\u003ctint::resolver::ConstEval::ModFunc(tint::Source const\u0026, tint::type::Type const*)::$_30, tint::constant::Value const*\u0026, tint::constant::Value const*\u0026\u003e(tint::resolver::ConstEval::ModFunc(tint::Source const\u0026, tint::type::Type const*)::$_30\u0026\u0026, tint::constant::Value const*\u0026, tint::constant::Value const*\u0026)::\u0027lambda\u0027(tint::type::AbstractFloat const*), auto tint::resolver::(anonymous namespace)::Dispatch_fia_fiu32_f16\u003ctint::resolver::ConstEval::ModFunc(tint::Source const\u0026, tint::type::Type const*)::$_30, tint::constant::Value const*\u0026, tint::constant::Value const*\u0026\u003e\n```",
+      "revId": "e69893c030d2d872d82e88b75269390844cd8cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
