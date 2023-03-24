@@ -55,8 +55,16 @@ void PrintDeviceError(WGPUErrorType errorType, const char* message, void*) {
     dawn::ErrorLog() << errorTypeName << " error: " << message;
 }
 
+void DeviceLostCallback(WGPUDeviceLostReason reason, const char* message, void*) {
+    dawn::ErrorLog() << "Device lost: " << message;
+}
+
 void PrintGLFWError(int code, const char* message) {
     dawn::ErrorLog() << "GLFW error: " << code << " - " << message;
+}
+
+void DeviceLogCallback(WGPULoggingType type, const char* message, void*) {
+    dawn::ErrorLog() << "Device log: " << message;
 }
 
 enum class CmdBufType {
@@ -69,6 +77,8 @@ enum class CmdBufType {
 // their respective platforms, and Vulkan is preferred to OpenGL
 #if defined(DAWN_ENABLE_BACKEND_D3D12)
 static wgpu::BackendType backendType = wgpu::BackendType::D3D12;
+#elif defined(DAWN_ENABLE_BACKEND_D3D11)
+static wgpu::BackendType backendType = wgpu::BackendType::D3D11;
 #elif defined(DAWN_ENABLE_BACKEND_METAL)
 static wgpu::BackendType backendType = wgpu::BackendType::Metal;
 #elif defined(DAWN_ENABLE_BACKEND_VULKAN)
@@ -91,6 +101,9 @@ static dawn::wire::WireServer* wireServer = nullptr;
 static dawn::wire::WireClient* wireClient = nullptr;
 static utils::TerribleCommandBuffer* c2sBuf = nullptr;
 static utils::TerribleCommandBuffer* s2cBuf = nullptr;
+
+static constexpr uint32_t kWidth = 640;
+static constexpr uint32_t kHeight = 480;
 
 wgpu::Device CreateCppDawnDevice() {
     ScopedEnvironmentVar angleDefaultPlatform;
@@ -137,11 +150,11 @@ wgpu::Device CreateCppDawnDevice() {
     surfaceDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(surfaceChainedDesc.get());
     WGPUSurface surface = backendProcs.instanceCreateSurface(instance->Get(), &surfaceDesc);
 
-    WGPUSwapChainDescriptor swapChainDesc;
+    WGPUSwapChainDescriptor swapChainDesc = {};
     swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
     swapChainDesc.format = static_cast<WGPUTextureFormat>(GetPreferredSwapChainTextureFormat());
-    swapChainDesc.width = 640;
-    swapChainDesc.height = 480;
+    swapChainDesc.width = kWidth;
+    swapChainDesc.height = kHeight;
     swapChainDesc.presentMode = WGPUPresentMode_Mailbox;
     swapChainDesc.implementation = 0;
     WGPUSwapChain backendSwapChain =
@@ -191,6 +204,8 @@ wgpu::Device CreateCppDawnDevice() {
 
     dawnProcSetProcs(&procs);
     procs.deviceSetUncapturedErrorCallback(cDevice, PrintDeviceError, nullptr);
+    procs.deviceSetDeviceLostCallback(cDevice, DeviceLostCallback, nullptr);
+    procs.deviceSetLoggingCallback(cDevice, DeviceLogCallback, nullptr);
     return wgpu::Device::Acquire(cDevice);
 }
 
@@ -206,8 +221,8 @@ wgpu::SwapChain GetSwapChain() {
 wgpu::TextureView CreateDefaultDepthStencilView(const wgpu::Device& device) {
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = 640;
-    descriptor.size.height = 480;
+    descriptor.size.width = kWidth;
+    descriptor.size.height = kHeight;
     descriptor.size.depthOrArrayLayers = 1;
     descriptor.sampleCount = 1;
     descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
@@ -223,6 +238,10 @@ bool InitSample(int argc, const char** argv) {
             i++;
             if (i < argc && std::string("d3d12") == argv[i]) {
                 backendType = wgpu::BackendType::D3D12;
+                continue;
+            }
+            if (i < argc && std::string("d3d11") == argv[i]) {
+                backendType = wgpu::BackendType::D3D11;
                 continue;
             }
             if (i < argc && std::string("metal") == argv[i]) {
@@ -245,9 +264,10 @@ bool InitSample(int argc, const char** argv) {
                 backendType = wgpu::BackendType::Vulkan;
                 continue;
             }
-            fprintf(stderr,
-                    "--backend expects a backend name (opengl, opengles, metal, d3d12, null, "
-                    "vulkan)\n");
+            fprintf(
+                stderr,
+                "--backend expects a backend name (opengl, opengles, metal, d3d12, d3d11, null, "
+                "vulkan)\n");
             return false;
         }
         if (std::string("-c") == argv[i] || std::string("--command-buffer") == argv[i]) {
