@@ -78,6 +78,7 @@ TEST_P(BufferAllocatedSizeTests, UniformUsage) {
 }
 
 DAWN_INSTANTIATE_TEST(BufferAllocatedSizeTests,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
