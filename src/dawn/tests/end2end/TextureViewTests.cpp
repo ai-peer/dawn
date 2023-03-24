@@ -439,6 +439,8 @@ TEST_P(TextureViewSamplingTest, Texture2DArrayViewOnOneLevelOf2DArrayTexture) {
 TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
     // TODO(crbug.com/dawn/1360): OpenGLES doesn't support view format reinterpretation.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+    // TODO(crbug.com/dawn/1360): D3D11 doesn't support view format reinterpretation.
+    DAWN_TEST_UNSUPPORTED_IF(IsD3D11());
 
     wgpu::TextureViewDescriptor viewDesc = {};
     viewDesc.format = wgpu::TextureFormat::RGBA8UnormSrgb;
@@ -761,6 +763,8 @@ TEST_P(TextureViewRenderingTest, Texture2DArrayViewOnALayerOf2DArrayTextureAsCol
 TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
     // TODO(crbug.com/dawn/1360): OpenGLES doesn't support view format reinterpretation.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+    // TODO(crbug.com/dawn/1360): D3D11 doesn't support view format reinterpretation.
+    DAWN_TEST_UNSUPPORTED_IF(IsD3D11());
 
     // Test will render into an SRGB view
     wgpu::TextureViewDescriptor viewDesc = {};
@@ -867,6 +871,8 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
 TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
     // TODO(crbug.com/dawn/1360): OpenGLES doesn't support view format reinterpretation.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+    // TODO(crbug.com/dawn/1360): D3D11 doesn't support view format reinterpretation.
+    DAWN_TEST_UNSUPPORTED_IF(IsD3D11());
 
     // Test will resolve into an SRGB view
     wgpu::TextureViewDescriptor viewDesc = {};
@@ -977,6 +983,7 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
 }
 
 DAWN_INSTANTIATE_TEST(TextureViewSamplingTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -984,6 +991,7 @@ DAWN_INSTANTIATE_TEST(TextureViewSamplingTest,
                       VulkanBackend());
 
 DAWN_INSTANTIATE_TEST(TextureViewRenderingTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_render_pass"}),
                       MetalBackend(),
@@ -1024,6 +1032,7 @@ TEST_P(TextureViewTest, DestroyedTexture) {
 }
 
 DAWN_INSTANTIATE_TEST(TextureViewTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -1040,6 +1049,7 @@ TEST_P(TextureView3DTest, BasicTest) {
 }
 
 DAWN_INSTANTIATE_TEST(TextureView3DTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -1114,6 +1124,7 @@ TEST_P(TextureView1DTest, Sampling) {
 }
 
 DAWN_INSTANTIATE_TEST(TextureView1DTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       VulkanBackend(),
