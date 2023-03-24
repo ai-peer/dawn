@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f73f2fa3_8979ee2f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-24T20:07:46Z",
+      "side": 1,
+      "message": "how is this different from the existing `proto_generated_commands`?",
+      "range": {
+        "startLine": 600,
+        "startChar": 1,
+        "endLine": 605,
+        "endChar": 36
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f48e8574_4f764ccd",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-24T20:07:46Z",
+      "side": 1,
+      "message": "I don\u0027t see where this is used",
+      "range": {
+        "startLine": 611,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 44
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09fd45f2_535b2fcb",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 43
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-24T20:07:46Z",
+      "side": 1,
+      "message": "nit: possible to have these in a separate .proto file? or like #include another .proto? It\u0027s not a dealbreaker, but it\u0027s nice to have manually-written things not be in the templates/ directory.",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
