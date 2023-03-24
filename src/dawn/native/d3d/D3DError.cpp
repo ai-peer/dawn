@@ -14,11 +14,36 @@
 
 #include "dawn/native/d3d/D3DError.h"
 
+#include <comdef.h>
+
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 #include <string>
 
+#include "dawn/common/WindowsUtils.h"
+
 namespace dawn::native::d3d {
+namespace {
+
+std::string ConvertWCSToMBS(const wchar_t* pstr, long wslen) {
+    int len = ::WideCharToMultiByte(CP_ACP, 0, pstr, wslen, NULL, 0, NULL, NULL);
+
+    std::string dblstr(len, '\0');
+    len = ::WideCharToMultiByte(CP_ACP, 0 /* no flags */, pstr,
+                                wslen /* not necessary NULL-terminated */, &dblstr[0], len, NULL,
+                                NULL /* no default char */);
+
+    return dblstr;
+}
+
+std::string ConvertBSTRToMBS(BSTR bstr) {
+    int wslen = ::SysStringLen(bstr);
+    return ConvertWCSToMBS((wchar_t*)bstr, wslen);
+}
+
+}  // namespace
+
 const char* HRESULTAsString(HRESULT result) {
     // There's a lot of possible HRESULTS, but these ones are the ones specifically listed as
     // being returned from D3D11 and D3D12, in addition to fake codes used internally for testing.
@@ -54,7 +79,10 @@ const char* HRESULTAsString(HRESULT result) {
             return "E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING";
 
         default:
-            return "<Unknown HRESULT>";
+            _com_error err(result);
+            std::cerr << "ERROR is:=====" << WCharToUTF8(err.ErrorMessage()) << std::endl;
+            std::cerr << "ERROR is:=====" << ConvertBSTRToMBS(err.Source()) << std::endl;
+            return "Unknown HRESULT";
     }
 }
 
