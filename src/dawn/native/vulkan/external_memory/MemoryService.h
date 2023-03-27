@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_VULKAN_EXTERNAL_MEMORY_MEMORYSERVICE_H_
 
 #include <memory>
+#include <unordered_map>
 
 #include "dawn/native/Error.h"
 #include "dawn/native/vulkan/ExternalHandle.h"
@@ -38,7 +39,8 @@ class Service {
     static bool CheckSupport(const VulkanDeviceInfo& deviceInfo);
 
     // True if the device reports it supports importing external memory.
-    bool SupportsImportMemory(VkFormat format,
+    bool SupportsImportMemory(ExternalImageType externalImageType,
+                              VkFormat format,
                               VkImageType type,
                               VkImageTiling tiling,
                               VkImageUsageFlags usage,
@@ -56,10 +58,11 @@ class Service {
         VkImage image);
 
     // Returns the index of the queue memory from this services should be exported with.
-    uint32_t GetQueueFamilyIndex();
+    uint32_t GetQueueFamilyIndex(const ExternalImageType externalImageType);
 
     // Given an external handle pointing to memory, import it into a VkDeviceMemory
-    ResultOrError<VkDeviceMemory> ImportMemory(ExternalMemoryHandle handle,
+    ResultOrError<VkDeviceMemory> ImportMemory(ExternalImageType externalImageType,
+                                               ExternalMemoryHandle handle,
                                                const MemoryImportParams& importParams,
                                                VkImage image);
 
@@ -68,7 +71,10 @@ class Service {
                                        const VkImageCreateInfo& baseCreateInfo);
 
   private:
-    std::unique_ptr<ServiceImplementation> mImpl;
+    ServiceImplementation* GetServiceImplementation(ExternalImageType externalImageType);
+
+    Device* mDevice = nullptr;
+    std::unordered_map<ExternalImageType, std::unique_ptr<ServiceImplementation>> mServiceImpls;
 };
 
 }  // namespace dawn::native::vulkan::external_memory
