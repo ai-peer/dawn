@@ -70,6 +70,24 @@
       "parentUuid": "44f46e1c_0a5c5e63",
       "revId": "9ec10f7aa03b0c0eedaac4f4fe782c4b3c489505",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f3bf5c1_d8239c5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-27T15:59:29Z",
+      "side": 1,
+      "message": "I\u0027d like to wait until the end of this week.\n\n\u003e BTW, I think gerrit can generate cherry-pick CL with conflict, and then CL can be modified manually to resolve conflicts within gerrit.\n\nYes, they can, but we currently have limited CQ testing on release branches. So manual conflict resolution is even more risky than I\u0027d like for our launch.",
+      "parentUuid": "3a33d2dc_028454f2",
+      "revId": "9ec10f7aa03b0c0eedaac4f4fe782c4b3c489505",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
