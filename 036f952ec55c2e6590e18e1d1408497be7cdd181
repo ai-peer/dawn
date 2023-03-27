@@ -16,6 +16,24 @@
       "message": "Removed remainder_compound entries from expectations.txt as these should now pass.",
       "revId": "036f952ec55c2e6590e18e1d1408497be7cdd181",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0069fb20_285d7734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-27T18:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3451b60_830381bb",
+      "revId": "036f952ec55c2e6590e18e1d1408497be7cdd181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
