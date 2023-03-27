@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbf3326_21cb15de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-27T11:20:46Z",
+      "side": 1,
+      "message": "nit: implementation",
+      "range": {
+        "startLine": 13,
+        "startChar": 46,
+        "endLine": 13,
+        "endChar": 59
+      },
+      "revId": "6f0ed54b7242a15eaf4dd7ea2bb2c455c1c700d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3496389e_8f6ecf7a",
@@ -14,6 +37,57 @@
       "writtenOn": "2023-03-27T08:31:31Z",
       "side": 1,
       "message": "PTAL this CL.\nIt is the 2/3 of \"Refactor Memory Service\"(https://dawn-review.googlesource.com/c/dawn/+/124880)",
+      "revId": "6f0ed54b7242a15eaf4dd7ea2bb2c455c1c700d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7cef3b_4e6639bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-27T11:20:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6f0ed54b7242a15eaf4dd7ea2bb2c455c1c700d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "236cb045_5a54f8aa",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceImplementation.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-27T11:20:46Z",
+      "side": 1,
+      "message": "nit: this method can be const.",
+      "revId": "6f0ed54b7242a15eaf4dd7ea2bb2c455c1c700d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4682bf51_5172fb61",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-27T11:20:46Z",
+      "side": 1,
+      "message": "I assume the only significant changes to these files is the additional indentation level?",
       "revId": "6f0ed54b7242a15eaf4dd7ea2bb2c455c1c700d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
