@@ -52,6 +52,24 @@
       "parentUuid": "6b5d5429_ad989f58",
       "revId": "9ec10f7aa03b0c0eedaac4f4fe782c4b3c489505",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a33d2dc_028454f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-27T14:53:03Z",
+      "side": 1,
+      "message": "How long do we need to wait?\nBTW, I think gerrit can generate cherry-pick CL with conflict, and then CL can be modified manually to resolve conflicts within gerrit.",
+      "parentUuid": "44f46e1c_0a5c5e63",
+      "revId": "9ec10f7aa03b0c0eedaac4f4fe782c4b3c489505",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
