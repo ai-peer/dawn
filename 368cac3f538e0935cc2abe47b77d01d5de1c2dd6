@@ -34,6 +34,24 @@
       "parentUuid": "80e2c217_d316d1bd",
       "revId": "368cac3f538e0935cc2abe47b77d01d5de1c2dd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4436a01_c8687a99",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-27T13:50:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "40037bab_7fad9fa5",
+      "revId": "368cac3f538e0935cc2abe47b77d01d5de1c2dd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
