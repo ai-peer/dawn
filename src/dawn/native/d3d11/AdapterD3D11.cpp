@@ -134,7 +134,8 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     limits->v1.maxColorAttachments = D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT;
 
     // TODO(dawn:1720): support more than one bind group?
-    limits->v1.maxBindGroups = 1;
+    limits->v1.maxBindGroups = 4;
+
     // TODO(dawn:1721): support dynamic uniform buffers and storage buffers?
     limits->v1.maxDynamicUniformBuffersPerPipelineLayout = 0;
     limits->v1.maxDynamicStorageBuffersPerPipelineLayout = 0;
