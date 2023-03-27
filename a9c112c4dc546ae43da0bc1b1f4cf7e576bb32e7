@@ -16,6 +16,23 @@
       "message": "PTAL this CL.\nIt is the 1/3 of the \"refactor memory service\" (https://dawn-review.googlesource.com/c/dawn/+/124880)",
       "revId": "a9c112c4dc546ae43da0bc1b1f4cf7e576bb32e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b6c593_e8e047cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-27T11:12:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a9c112c4dc546ae43da0bc1b1f4cf7e576bb32e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
