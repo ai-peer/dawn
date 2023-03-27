@@ -16,6 +16,24 @@
       "message": "Given that this is just an issue for FXC (might be worth confirming), perhaps this should be on a FXC option for the writer. That way there\u0027s no potential loss of performance for DXC.",
       "revId": "368cac3f538e0935cc2abe47b77d01d5de1c2dd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40037bab_7fad9fa5",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2126,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-27T13:45:18Z",
+      "side": 1,
+      "message": "Tested and can confirm this is only FXC. I agree that we should probably have an option to enable this workaround, along with the many other workarounds I\u0027ve implemented, just for when FXC is being used. Created a bug for that: https://bugs.chromium.org/p/tint/issues/detail?id\u003d1885",
+      "parentUuid": "80e2c217_d316d1bd",
+      "revId": "368cac3f538e0935cc2abe47b77d01d5de1c2dd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
