@@ -15,10 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNAL_MEMORY_MEMORYSERVICE_H_
 #define SRC_DAWN_NATIVE_VULKAN_EXTERNAL_MEMORY_MEMORYSERVICE_H_
 
-#include "dawn/common/vulkan_platform.h"
-#include "dawn/native/Error.h"
-#include "dawn/native/VulkanBackend.h"
-#include "dawn/native/vulkan/ExternalHandle.h"
+#include "dawn/native/vulkan/external_memory/MemoryServiceImplementation.h"
 
 namespace dawn::native::vulkan {
 class Device;
@@ -71,12 +68,7 @@ class Service {
                                        const VkImageCreateInfo& baseCreateInfo);
 
   private:
-    bool RequiresDedicatedAllocation(const ExternalImageDescriptorVk* descriptor, VkImage image);
-
-    Device* mDevice = nullptr;
-
-    // True if early checks pass that determine if the service is supported
-    bool mSupported = false;
+    std::unique_ptr<ServiceImplementation> mImpl = nullptr;
 };
 
 }  // namespace dawn::native::vulkan::external_memory
