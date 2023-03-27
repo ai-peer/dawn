@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e2c217_d316d1bd",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-27T08:47:24Z",
+      "side": 1,
+      "message": "Given that this is just an issue for FXC (might be worth confirming), perhaps this should be on a FXC option for the writer. That way there\u0027s no potential loss of performance for DXC.",
+      "revId": "368cac3f538e0935cc2abe47b77d01d5de1c2dd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
