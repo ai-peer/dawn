@@ -1731,6 +1731,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae9e37b_01c31373",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-28T19:58:07Z",
+      "side": 1,
+      "message": "I don\u0027t see it is used elsewhere.",
+      "parentUuid": "cf64a1f8_c6c107e9",
+      "range": {
+        "startLine": 39,
+        "startChar": 5,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bb4863c_a2ccc4a8",
