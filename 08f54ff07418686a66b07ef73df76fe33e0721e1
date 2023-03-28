@@ -84,6 +84,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de823975_76116ad4",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T09:55:31Z",
+      "side": 1,
+      "message": "There is a leftover merge conflict here.",
+      "revId": "08f54ff07418686a66b07ef73df76fe33e0721e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c1b76c_e8bfbd30",
         "filename": "src/dawn/native/CMakeLists.txt",
         "patchSetId": 3
@@ -370,6 +387,52 @@
         "startChar": 0,
         "endLine": 146,
         "endChar": 42
+      },
+      "revId": "08f54ff07418686a66b07ef73df76fe33e0721e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb3e99f_02497ef4",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T09:55:31Z",
+      "side": 1,
+      "message": "nit: This is a value type, no need for const here and below.",
+      "range": {
+        "startLine": 41,
+        "startChar": 30,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "08f54ff07418686a66b07ef73df76fe33e0721e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff650174_47522fb7",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceImplementationZirconHandle.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T09:55:31Z",
+      "side": 1,
+      "message": "nit: Zircon",
+      "range": {
+        "startLine": 29,
+        "startChar": 39,
+        "endLine": 29,
+        "endChar": 64
       },
       "revId": "08f54ff07418686a66b07ef73df76fe33e0721e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"

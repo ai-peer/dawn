@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75613713_74c10c50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T09:55:31Z",
+      "side": 1,
+      "message": "nit: implementation",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "8a4123a279505ecfb9269c5208ac5fd4efebaf62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f620f984_8a6e0741",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T09:55:31Z",
+      "side": 1,
+      "message": "nit: instead of creating implementations lazily, we could create them on Service initialization",
+      "revId": "8a4123a279505ecfb9269c5208ac5fd4efebaf62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d974935_46c29481",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T09:55:31Z",
+      "side": 1,
+      "message": "nit: this could likely just be an array given there are only 3-4 choices.",
+      "revId": "8a4123a279505ecfb9269c5208ac5fd4efebaf62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
