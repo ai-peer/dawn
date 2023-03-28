@@ -467,6 +467,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a103e58_ccc4e277",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-28T02:12:43Z",
+      "side": 1,
+      "message": "for large buffers, they keep a CPU shadow copy around forever, and make a new revision of the buffer. for small buffers, they read it back, then change the cpu temporary copy, and re-upload a new revision of the buffer.\n\nThat\u0027s all pretty unfortunate but probably have to do something similar.\n\nwhat do you think about the following approach to start:\n - never actually create the buffer with D3D11_BIND_CONSTANT_BUFFER\n - increment a serial every time a uniform buffer is used in a draw/dispatch/copy-cmd with writable usage\n - BufferD3D11 stores mConstantBuffer and mConstantBufferSerial\n - BufferD3D11 has a getter GetConstantBufferCopy(Serial serial); which either returns the mConstantBuffer directly if the serial matches, or it replaces mConstantBuffer with a new one, and performs the copy to it from the real buffer contents.\n   We do GetConstantBufferCopy(GetLastMutationSerial()) when we SetBindGroup, before VS/PS/CSSetConstantBuffer\n\n?",
+      "parentUuid": "d12afa1a_ed7a4be4",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 81
+      },
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e1dd0c5_9743a781",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 11
