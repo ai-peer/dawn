@@ -228,6 +228,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc5442a_a92e8892",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-28T16:04:04Z",
+      "side": 1,
+      "message": "Acknowledged\n\nFYI later, we should have dawn.json optional features that surface to the application what type of external imports are supported (one for DmaBuf, one for AHardwareBuffer, one for OpaqueFD, etc.) Then, we can remove SupportsExternalImages and replace it in Chromium with a check for WebGPU that makes sure it supports the one of semaphore types that Chromium uses on the platform, and one of the external memory types that Chromium uses on the platform.",
+      "parentUuid": "4ebbcb9a_9831ad45",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "08f54ff07418686a66b07ef73df76fe33e0721e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3042956e_9081d704",
@@ -382,6 +406,30 @@
       "side": 1,
       "message": "Addressed return nullptr.\nBut not quite sure what is `IsSupported` used for? Adding nullptr checks in Service API implementations. And I think SemaphoreService side also need this change (with follow-up CL).",
       "parentUuid": "f95be66b_7bc7c4bb",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 42
+      },
+      "revId": "08f54ff07418686a66b07ef73df76fe33e0721e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac20cf27_9a5a41a2",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-28T16:04:04Z",
+      "side": 1,
+      "message": "IsSupported checks are so we can check it just once before doing GetMemoryImportParams and ImportMemory, so we shouldn\u0027t need the other checks at [a] they could be ASSERTs.\n\nGiven that we always should check support first, it makes me think that slightly restructuring the API could be beneficial. So that you need to check support before even getting the object on which to call GetMemoryImportParams and ImportMemory. That said, this is complex enough right now that I think we should keep the structure the same for now and revisit it after we can support runtime selection of the service. There\u0027s other things that should eventually be improved as well - see [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;l\u003d928;drc\u003d8101d6d81854e4f437e0f03f77694a01aaa8df7a;bpv\u003d1;bpt\u003d1)",
+      "parentUuid": "861f3e05_2acdde97",
       "range": {
         "startLine": 146,
         "startChar": 0,
