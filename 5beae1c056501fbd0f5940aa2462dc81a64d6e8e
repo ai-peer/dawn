@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83ec585a_caf0c240",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-28T05:49:24Z",
+      "side": 1,
+      "message": "(Patch Set 13 compared with Patch set 10)",
+      "revId": "5beae1c056501fbd0f5940aa2462dc81a64d6e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
