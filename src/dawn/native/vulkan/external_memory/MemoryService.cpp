@@ -13,46 +13,46 @@
 // limitations under the License.
 
 #include "dawn/native/vulkan/external_memory/MemoryService.h"
-#include "dawn/native/vulkan/external_memory/MemoryServiceImplementation.h"
+
+#include "dawn/native/vulkan/DeviceVk.h"
 
 namespace dawn::native::vulkan::external_memory {
 
-Service::~Service() = default;
+bool Service::RequiresDedicatedAllocation(const ExternalImageDescriptorVk* descriptor,
+                                          VkImage image) {
+    switch (descriptor->dedicatedAllocation) {
+        case NeedsDedicatedAllocation::Yes:
+            return true;
 
-bool Service::SupportsImportMemory(VkFormat format,
-                                   VkImageType type,
-                                   VkImageTiling tiling,
-                                   VkImageUsageFlags usage,
-                                   VkImageCreateFlags flags) {
-    return mImpl->SupportsImportMemory(format, type, tiling, usage, flags);
-}
+        case NeedsDedicatedAllocation::No:
+            return false;
 
-bool Service::SupportsCreateImage(const ExternalImageDescriptor* descriptor,
-                                  VkFormat format,
-                                  VkImageUsageFlags usage,
-                                  bool* supportsDisjoint) {
-    return mImpl->SupportsCreateImage(descriptor, format, usage, supportsDisjoint);
-}
+        case NeedsDedicatedAllocation::Detect:
+            if (!mDevice->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation)) {
+                return false;
+            }
 
-ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
-    const ExternalImageDescriptor* descriptor,
-    VkImage image) {
-    return mImpl->GetMemoryImportParams(descriptor, image);
-}
+            VkMemoryDedicatedRequirements dedicatedRequirements;
+            dedicatedRequirements.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
+            dedicatedRequirements.pNext = nullptr;
 
-uint32_t Service::GetQueueFamilyIndex() {
-    return mImpl->GetQueueFamilyIndex();
-}
+            VkMemoryRequirements2 baseRequirements;
+            baseRequirements.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
+            baseRequirements.pNext = &dedicatedRequirements;
 
-ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
-                                                    const MemoryImportParams& importParams,
-                                                    VkImage image) {
-    return mImpl->ImportMemory(handle, importParams, image);
-}
+            VkImageMemoryRequirementsInfo2 imageInfo;
+            imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
+            imageInfo.pNext = nullptr;
+            imageInfo.image = image;
 
-ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descriptor,
-                                            const VkImageCreateInfo& baseCreateInfo) {
-    return mImpl->CreateImage(descriptor, baseCreateInfo);
+            mDevice->fn.GetImageMemoryRequirements2(mDevice->GetVkDevice(), &imageInfo,
+                                                    &baseRequirements);
+
+            // The Vulkan spec requires that prefersDA is set if requiresDA is, so we can just check
+            // for prefersDA.
+            return dedicatedRequirements.prefersDedicatedAllocation;
+    }
+    DAWN_UNREACHABLE();
 }
 
 }  // namespace dawn::native::vulkan::external_memory
