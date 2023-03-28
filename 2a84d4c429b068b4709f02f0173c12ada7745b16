@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed5e93a6_273e7e28",
+        "filename": "src/dawn/native/d3d11/NativeSwapChainImplD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-28T01:51:31Z",
+      "side": 0,
+      "message": "no need to implement this - it\u0027s the old swap chain path",
+      "revId": "2a84d4c429b068b4709f02f0173c12ada7745b16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
