@@ -16,6 +16,24 @@
       "message": "A typo in the commit message is probably not enough to cause a revert TBH.",
       "revId": "61f5ba0e4fb302e9675ba64c274a8d866700c1e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a1a729_05fc0484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-28T07:57:11Z",
+      "side": 1,
+      "message": "Got it. Sry about that. Abandon the revert.",
+      "parentUuid": "cc20b2bf_1313b3ad",
+      "revId": "61f5ba0e4fb302e9675ba64c274a8d866700c1e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
