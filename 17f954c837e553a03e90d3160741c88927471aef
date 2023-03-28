@@ -18,6 +18,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6d9240_91326012",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "Thanks, I started doing a review and stopped after a while because there are some architectural things to change like you commented.\n\n - Multiple bindgroups\n - Staging buffers vs. actual buffers for d3d11::Buffer\n - Handling of uniform buffers.",
+      "parentUuid": "f7107035_b85409df",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ceb0e01_3c6d6c0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "Overall looks like great progress and a LOT of tests work! That said given some of the architectural comments it would be good to split things into multiple CLs that add only the necessary things one step at a time.\n\nWhat I have found works great to start making backends in the past is:\n\n - Add just buffer mapping and enable a few BufferTests (we need to see what to do for staging vs. not).\n - Add WriteBuffer and CopyB2B, enable more tests.\n - Add textures and CopyB2T/T2B, WriteTexture.\n - Add copyT2T\n - Add render pipelines without bindings\n - Add support for vertex buffers / bindings / other stuff\n - Add the rest.",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc7ba0e6_50105076",
@@ -60,6 +95,63 @@
         "endLine": 1,
         "endChar": 17
       },
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b191a9_4fbe598b",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "nit: unnecessary?",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "957afd05_516ad2f1",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "ToBackend might work.",
+      "range": {
+        "startLine": 47,
+        "startChar": 11,
+        "endLine": 47,
+        "endChar": 32
+      },
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "382cb991_b701eb6a",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "All of this seems like it could be shared with D3D12.",
       "revId": "17f954c837e553a03e90d3160741c88927471aef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -669,6 +761,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38620db7_8f86dece",
+        "filename": "src/dawn/native/d3d11/PlatformFunctionsD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "nit: isn\u0027t this lowercase usually?",
+      "range": {
+        "startLine": 36,
+        "startChar": 25,
+        "endLine": 36,
+        "endChar": 30
+      },
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e2b3ab_1f1c6272",
+        "filename": "src/dawn/native/d3d11/PlatformFunctionsD3D11.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "nit: comment needs to be updated.",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b34d58_13b6de40",
+        "filename": "src/dawn/native/d3d11/PlatformFunctionsD3D11.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7748ee75_0718cd2e",
         "filename": "src/dawn/native/d3d11/SamplerD3D11.cpp",
         "patchSetId": 11
@@ -818,6 +967,108 @@
         "endLine": 42,
         "endChar": 26
       },
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bdd0b99_6088cfac",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "Why was this change necessary?",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16b6175a_3df7ca3a",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "Couldn\u0027t this be done with --enable-toggles and --disable-toggles instead? I think we have utilities somewhere to handle these arguments.",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bcab474_d80634c1",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "nit: comment needs an update.",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67ca3e3_d42d25bf",
+        "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "As Austin noted, this should be possible to support by linearizing the pipeline layout, the same way that it is done in the Metal backend for example.",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85606e9a_35e99dce",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "This is quite unfortunate because it makes the API less consistent depending on the backends. Would it be possible to keep the same behavior even if it is a bit less optimal?",
+      "revId": "17f954c837e553a03e90d3160741c88927471aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ce67d1a_b6fc68bf",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-28T11:32:24Z",
+      "side": 1,
+      "message": "I think it should be possible to support it: there is a D3D11_SRV_DESC::Format https://learn.microsoft.com/en-us/windows/win32/api/d3d11/ns-d3d11-d3d11_shader_resource_view_desc#remarks",
       "revId": "17f954c837e553a03e90d3160741c88927471aef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
