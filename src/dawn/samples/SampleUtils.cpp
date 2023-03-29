@@ -105,8 +105,8 @@ static dawn::wire::WireClient* wireClient = nullptr;
 static dawn::utils::TerribleCommandBuffer* c2sBuf = nullptr;
 static dawn::utils::TerribleCommandBuffer* s2cBuf = nullptr;
 
-static constexpr uint32_t kWidth = 640;
-static constexpr uint32_t kHeight = 480;
+static constexpr uint32_t kWidth = 1024;
+static constexpr uint32_t kHeight = 768;
 
 wgpu::Device CreateCppDawnDevice() {
     dawn::ScopedEnvironmentVar angleDefaultPlatform;
