@@ -85,6 +85,24 @@
       "parentUuid": "277de94c_bf9941e7",
       "revId": "65e62c3c4a8139602b5251c01d24e05ef091a18a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec05f848_f481cbb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-30T21:34:51Z",
+      "side": 1,
+      "message": "Okay, FXC doesn\u0027t like mixing min16float with IEEE strictness for some reason. Having said that, I found a proper workaround that actually is more correct than what we\u0027re doing in Tint right now. Currently, the HLSL backend is making use of min16float to turn an f32 into an f16, then it brings it back to f32:\n\n```\nbool GeneratorImpl::EmitQuantizeToF16Call(std::ostream\u0026 out,\n                                          const ast::CallExpression* expr,\n                                          const sem::Builtin* builtin) {\n    // Emulate by casting to min16float and back again.\n    std::string width;\n    if (auto* vec \u003d builtin-\u003eReturnType()-\u003eAs\u003ctype::Vector\u003e()) {\n        width \u003d std::to_string(vec-\u003eWidth());\n    }\n    out \u003c\u003c \"float\" \u003c\u003c width \u003c\u003c \"(min16float\" \u003c\u003c width \u003c\u003c \"(\";\n    if (!EmitExpression(out, expr-\u003eargs[0])) {\n        return false;\n    }\n    out \u003c\u003c \"))\";\n    return true;\n}\n```\n\nThe key line is:\n```\n    out \u003c\u003c \"float\" \u003c\u003c width \u003c\u003c \"(min16float\" \u003c\u003c width \u003c\u003c \"(\";\n```\n\nReading about `min16float`, it\u0027s not actually guaranteed that the driver will convert the result to f16 - indeed that\u0027s why it\u0027s called _min_16float (it can be mininum 16-bits or more). Instead, we can make use of `f32tof16` and `f16tof32` to properly convert the value, so we change the line to:\n\n```\n    out \u003c\u003c \"f16tof32(f32tof16\" \u003c\u003c \"(\";\n```\n\nWith this change, FXC no longer fails to compile, and CTS passes all tests for quantizeToF16.\n\nI\u0027m going to make a CL with this fix in Tint, and land that first. Then we can rebase this CL on top.",
+      "parentUuid": "5e7fa372_957819fa",
+      "revId": "65e62c3c4a8139602b5251c01d24e05ef091a18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
