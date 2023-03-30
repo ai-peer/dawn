@@ -33,6 +33,23 @@
       "message": "Note that the Kokoro failure is just an infra error.",
       "revId": "65e62c3c4a8139602b5251c01d24e05ef091a18a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc07d031_af598513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-30T17:56:45Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "65e62c3c4a8139602b5251c01d24e05ef091a18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
