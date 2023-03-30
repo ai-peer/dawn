@@ -67,6 +67,24 @@
       "message": "Hmm, CTS is failing on quantizeToF16 execution tests:\n\n```\ngpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu:shader,execution,expression,call,builtin,quantizeToF16:f32:inputSource\u003d\"storage_rw\";vectorize\u003d3\n```\n\n```\nwebgpu_cts_integration_test.py(330): AssertionError:   - EXPECTATION FAILED: D3D compile failed with: error X4028: note that in IEEE strict mode, all values are implicitly marked precise\n    C:\\b\\s\\w\\ir\\out\\Release_x64\\Shader@0x0000365C25E9B660(8,81-160): error X4028: expression has a minimum precision type and cannot be marked precise\n    \n     - While calling [Device].CreateComputePipeline([ComputePipelineDescriptor]).\n    \n        at GPUTest.fail (http://127.0.0.1:49482/third_party/webgpu-cts/src/common/framework/fixture.js:143:36)\n        at http://127.0.0.1:49482/third_party/webgpu-cts/src/webgpu/shader/execution/expression/expression.js:180:19\n        at async Promise.all (index 0)\n        at async run (http://127.0.0.1:49482/third_party/webgpu-cts/src/webgpu/shader/execution/expression/expression.js:185:5)\n        at async RunCaseSpecific.fn (http://127.0.0.1:49482/third_party/webgpu-cts/src/webgpu/shader/execution/expression/call/builtin/quantizeToF16.spec.js:54:5)\n```",
       "revId": "65e62c3c4a8139602b5251c01d24e05ef091a18a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7fa372_957819fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-30T20:58:06Z",
+      "side": 1,
+      "message": "Looked into this, and it\u0027s because Tint\u0027s HLSL backend uses `min16float` to implement `quantizeToF16`, and apparently this doesn\u0027t play nicely with the IEEE flag. Not sure why yet...",
+      "parentUuid": "277de94c_bf9941e7",
+      "revId": "65e62c3c4a8139602b5251c01d24e05ef091a18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
