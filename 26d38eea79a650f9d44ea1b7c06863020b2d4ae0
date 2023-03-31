@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "108be548_293c06dc",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-31T13:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50d6d9df_f393e1bb",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 0
+      },
+      "revId": "26d38eea79a650f9d44ea1b7c06863020b2d4ae0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e6220a0_d00a03d5",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-03-31T00:04:03Z",
       "side": 1,
       "message": "range-based for-loop so you we don\u0027t rely on this number being exactly correct?",
+      "range": {
+        "startLine": 291,
+        "startChar": 24,
+        "endLine": 291,
+        "endChar": 25
+      },
+      "revId": "26d38eea79a650f9d44ea1b7c06863020b2d4ae0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c373613e_0f897889",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-31T13:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e6220a0_d00a03d5",
       "range": {
         "startLine": 291,
         "startChar": 24,
