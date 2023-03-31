@@ -16,6 +16,257 @@
       "message": "PTAL",
       "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1e1731c_e4e4ec1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 69
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "a few comments:\n - please move the AutoLock, MutexBase, etc. classes to common/ with unittests. we should try to separate out the DeviceBase aspects of the lock and have them be independent utilities. I think you\u0027ll be able to use gtest death tests to check for locking an already-locked mutex as well.\n - to handle when the autolock feature is disabled, the device can still have it\u0027s wrapper, but it will be a simpler one - perhaps as simple as creating a std::optional\u003cAutoLock\u003e which is nullopt unless autolock is enabled.\n - the lifetime issue that makes it necessary to make the mutex refcounted could be simplified by using a static global std::mutex. I believe std::mutex can be static without requiring a global constructor. Lifting the lifetime out will also make it simpler for you to separate the mutex utilities from the Device.\n   This will have more contention if you have multiple devices but - Skia probably doesn\u0027t need that. And, it\u0027s a temporary measure that we will eventually remove.\n   To have the thread id check behind ASSERTs, I think the thread id will need to be stored in std::atomic\u003cstd::optional\u003cstd::thread::id\u003e\u003e to avoid the global constructor",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "255da1a0_79c15f97",
+        "filename": "dawn.json",
+        "patchSetId": 69
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "I\u0027d call it something like \"implicit device synchronization\"",
+      "range": {
+        "startLine": 1476,
+        "startChar": 37,
+        "endLine": 1476,
+        "endChar": 52
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c4199d_f21090b0",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "why is this part needed versus forwarding `isMultiThreadUnsafe` into `ApiObjectBase::DeleteThis`?",
+      "range": {
+        "startLine": 471,
+        "startChar": 4,
+        "endLine": 480,
+        "endChar": 0
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ecc7f9f_cb7af4c7",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "what needs a lock here?",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ec545a_a710e0ab",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "nit: comment why we\u0027re locking",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda6770c_a30e77ef",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 1883,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "Instead of the AutoUnlock concept, I think it should be feasible to put Autolock around the callsites of this such that it\u0027s not locked during the flush. We can keep this helper and have an ASSERT that it is not locked\n\nI think that means that APISet*Callback and APITick will be \"no autolock\"",
+      "range": {
+        "startLine": 1880,
+        "startChar": 4,
+        "endLine": 1883,
+        "endChar": 0
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71733dd_461027cf",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 1918,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "nit: comment why we\u0027re locking",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709fbcc5_a16c713f",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "nit: comment why we\u0027re locking",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c5b06b_034adb2a",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 69
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "these classes can have [[no_discard]] so people don\u0027t accidentally make it and throw it away immediately",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 21
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19ef6b30_2d340484",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 69
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "also, make it non-copyable and non-movable. There is a NonMovable base class for that",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc50f915_ca0387aa",
+        "filename": "src/dawn/native/EncodingContext.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "comment why we\u0027re locking",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8cd7cde_043f5b92",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "nit: comment why we\u0027re locking",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc129d91_f2bcbdc8",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-31T01:21:51Z",
+      "side": 1,
+      "message": "instead of adding a new DeferLock concept, I\u0027d rather have separate definitions of DeleteThis. One that acquires the lock and one that does. That also means we have two definitions of release. Something like:\n\n```\npublic:\n void Release() {\n   if (mRefCount.Decrement()) {\n     DeleteThis();\n   }\n } \n \n void APIRelease() {\n   ReleaseAndLockBeforeDestroy();\n }\n\nprivate:\n void ReleaseAndLockBeforeDestroy() {\n   if (mRefCount.Decrement()) {\n     AcquireDeviceLockAndDeleteThis();\n   }\n }\n  \n // ApiObjectBase overrides this version.\n virtual void AcquireDeviceLockAndDeleteThis() {\n   DeleteThis();\n }\n```\n\nreasons are:\n - no DeferLock object which looks like it makes things safe, but it\u0027s not safe if you forget to lock it\n - We split release into public/private versions so it\u0027s less likely you do the wrong one - and the names are clear what they do. No one calls it directly so the verbosity is fine.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 44
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
