@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbba11d7_f8a26fe2",
+        "filename": "dawn.json",
+        "patchSetId": 69
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "I still think thread safe API is an OK name. Even in future, when we implement \"long term\"/\"fine-grained locking\" approach, this name could still be applied. i.e. It allows user to enable thread-safety internally in Dawn.",
+      "parentUuid": "255da1a0_79c15f97",
+      "range": {
+        "startLine": 1476,
+        "startChar": 37,
+        "endLine": 1476,
+        "endChar": 52
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4c4199d_f21090b0",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 69
@@ -71,6 +95,30 @@
       "writtenOn": "2023-03-31T01:21:51Z",
       "side": 1,
       "message": "why is this part needed versus forwarding `isMultiThreadUnsafe` into `ApiObjectBase::DeleteThis`?",
+      "range": {
+        "startLine": 471,
+        "startChar": 4,
+        "endLine": 480,
+        "endChar": 0
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73bd057_4b83cd98",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Because layout object (kept alive by extra Ref below) could be deleted after ApiObjectBase::DeleteThis() and no mutex to protect its destruction by that point.\n\nnvm, changed to use LockAndDeleteThis() as suggested.",
+      "parentUuid": "d4c4199d_f21090b0",
       "range": {
         "startLine": 471,
         "startChar": 4,
@@ -100,6 +148,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b074bdc5_2ff457ef",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "mSerial could be changed by another thread. CallbackTask is triggered unprotected by default.",
+      "parentUuid": "5ecc7f9f_cb7af4c7",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36ec545a_a710e0ab",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 69
@@ -111,6 +177,24 @@
       "writtenOn": "2023-03-31T01:21:51Z",
       "side": 1,
       "message": "nit: comment why we\u0027re locking",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81860d84_0fea0be8",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36ec545a_a710e0ab",
       "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -138,6 +222,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5981c826_076eb8b1",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 1883,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "A lot of places calling this method have to do something like this:\n- Lock\n- Do something with the Device.\n- Unlock\n- Flush callbacks.\n- Lock\n- Do something else with the Device.\n- Unlock.\n\nIt makes the multiple locking/unlocking look messy to me. Instead of doing that, I added the auto unlocking to FlushCallbackTaskQueue() instead.\n\nNote: it\u0027s difficult to move the flushing to the end. Because in most of the cases, such as changing the registered callbacks, we have to make sure that the pending callback tasks are called with old registered callbacks first before changing.\n\nI removed the auto unlocking as you suggested anw, but let see if the implementation of the callsites look OK to you.",
+      "parentUuid": "dda6770c_a30e77ef",
+      "range": {
+        "startLine": 1880,
+        "startChar": 4,
+        "endLine": 1883,
+        "endChar": 0
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e71733dd_461027cf",
@@ -155,6 +263,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c382186_7f00438b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 1918,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e71733dd_461027cf",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "709fbcc5_a16c713f",
@@ -168,6 +294,24 @@
       "writtenOn": "2023-03-31T01:21:51Z",
       "side": 1,
       "message": "nit: comment why we\u0027re locking",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6181303_f1a0353f",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "709fbcc5_a16c713f",
       "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -195,6 +339,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "373ac2e0_c67a23c9",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 69
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7c5b06b_034adb2a",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 21
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19ef6b30_2d340484",
@@ -208,6 +376,24 @@
       "writtenOn": "2023-03-31T01:21:51Z",
       "side": 1,
       "message": "also, make it non-copyable and non-movable. There is a NonMovable base class for that",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df317eff_a021b89b",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 69
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Done. In Mutex.h",
+      "parentUuid": "19ef6b30_2d340484",
       "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -229,6 +415,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9e6187b_b7d20098",
+        "filename": "src/dawn/native/EncodingContext.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc50f915_ca0387aa",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8cd7cde_043f5b92",
@@ -246,6 +450,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1632674_29b63b4f",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "Done. No need for locking here. APITick() will have implicit locking.",
+      "parentUuid": "c8cd7cde_043f5b92",
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc129d91_f2bcbdc8",
@@ -259,6 +481,30 @@
       "writtenOn": "2023-03-31T01:21:51Z",
       "side": 1,
       "message": "instead of adding a new DeferLock concept, I\u0027d rather have separate definitions of DeleteThis. One that acquires the lock and one that does. That also means we have two definitions of release. Something like:\n\n```\npublic:\n void Release() {\n   if (mRefCount.Decrement()) {\n     DeleteThis();\n   }\n } \n \n void APIRelease() {\n   ReleaseAndLockBeforeDestroy();\n }\n\nprivate:\n void ReleaseAndLockBeforeDestroy() {\n   if (mRefCount.Decrement()) {\n     AcquireDeviceLockAndDeleteThis();\n   }\n }\n  \n // ApiObjectBase overrides this version.\n virtual void AcquireDeviceLockAndDeleteThis() {\n   DeleteThis();\n }\n```\n\nreasons are:\n - no DeferLock object which looks like it makes things safe, but it\u0027s not safe if you forget to lock it\n - We split release into public/private versions so it\u0027s less likely you do the wrong one - and the names are clear what they do. No one calls it directly so the verbosity is fine.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 44
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab108529_2ce8142f",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-31T21:05:19Z",
+      "side": 1,
+      "message": "I was trying to avoid double virtual calls in the case of AcquireDeviceLockAndDeleteThis() -\u003e DeleteThis(). But I guess that\u0027s fine since deleting calls should be one of rarer cases.\n\nDone.",
+      "parentUuid": "bc129d91_f2bcbdc8",
       "range": {
         "startLine": 99,
         "startChar": 0,
