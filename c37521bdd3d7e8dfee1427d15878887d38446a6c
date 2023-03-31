@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8223b45c_b9c19f6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Corentin Wallez:\n\nnit: implementation",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4322cce_e1d20a61",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Austin Eng:\nmerge artifact.\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/87c1b76c_e8bfbd30/)\n\nCorentin Wallez:\nThere is a leftover merge conflict here.\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/de823975_76116ad4/)",
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6a4d529_41251fd1",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Austin Eng\n[a] Right now, all the nullptr checks should never happen, because usages are guarded by SupportsImportMemory and SupportsCreateImage.\n\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/d564044a_24720784/)",
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86f8cc49_37e56c8a",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Austin Eng\nif the image type isn\u0027t supported, then there will be no service found.\n\nInstead, return nullptr, and then in IsSupported implementations, check service !\u003d nullptr \u0026\u0026 service-\u003eSupportsImportMemory(...) ?\n\nShaobo Yan\nAddressed return nullptr.\nBut not quite sure what is IsSupported used for? Adding nullptr checks in Service API implementations. And I think SemaphoreService side also need this change (with follow-up CL).\n\nAustin Eng\nIsSupported checks are so we can check it just once before doing GetMemoryImportParams and ImportMemory, so we shouldn\u0027t need the other checks at [a] they could be ASSERTs.\n\nGiven that we always should check support first, it makes me think that slightly restructuring the API could be beneficial. So that you need to check support before even getting the object on which to call GetMemoryImportParams and ImportMemory. That said, this is complex enough right now that I think we should keep the structure the same for now and revisit it after we can support runtime selection of the service. There\u0027s other things that should eventually be improved as well - see https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;l\u003d928;drc\u003d8101d6d81854e4f437e0f03f77694a01aaa8df7a;bpv\u003d1;bpt\u003d1\n\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/f95be66b_7bc7c4bb/)",
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe03a461_cdc5bd5a",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Corentin Wallez\nnit: instead of creating implementations lazily, we could create them on Service initialization\n\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/f620f984_8a6e0741/)",
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44e2d54_4a2dc2d1",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Corentin Wallez:\nnit: This is a value type, no need for const here and below.\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/bdb3e99f_02497ef4/)",
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b8fa7e_b218439d",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Corentin Wallez:\nnit: this could likely just be an array given there are only 3-4 choices.\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/4d974935_46c29481/)",
+      "range": {
+        "startLine": 76,
+        "startChar": 3,
+        "endLine": 76,
+        "endChar": 97
+      },
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb1db4e8_2a1a8a0f",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceImplementationZirconHandle.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:52:46Z",
+      "side": 1,
+      "message": "Corentin Wallez\nnit: Zircon\n(https://dawn-review.googlesource.com/c/dawn/+/125482/comment/ff650174_47522fb7/)",
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
