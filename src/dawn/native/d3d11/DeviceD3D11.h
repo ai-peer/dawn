@@ -26,9 +26,7 @@
 #include "dawn/native/d3d11/TextureD3D11.h"
 
 namespace dawn::native::d3d11 {
-
 class CommandAllocatorManager;
-struct ExternalImageDescriptorDXGISharedHandle;
 class ExternalImageDXGIImpl;
 class PlatformFunctions;
 class ResidencyManager;
@@ -178,6 +176,9 @@ class Device final : public d3d::Device {
 
     MaybeError CheckDebugLayerAndGenerateErrors();
     void AppendDebugLayerMessages(ErrorData* error) override;
+
+    std::unique_ptr<d3d::ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
+        const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) override;
 
     MaybeError CreateZeroBuffer();
 

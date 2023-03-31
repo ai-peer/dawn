@@ -398,6 +398,11 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
     AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error);
 }
 
+std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
+    const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
+    return {};
+}
+
 void Device::DestroyImpl() {
     ASSERT(GetState() == State::Disconnected);
 
