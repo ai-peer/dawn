@@ -24,6 +24,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38430663_c74b9675",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-31T02:54:12Z",
+      "side": 1,
+      "message": "Due to gerrit issue https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1428783\nAbandon CL under reviewing https://dawn-review.googlesource.com/c/dawn/+/125482/15.\nUpload a new CL and copy remain comments here.",
+      "revId": "c37521bdd3d7e8dfee1427d15878887d38446a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4322cce_e1d20a61",
