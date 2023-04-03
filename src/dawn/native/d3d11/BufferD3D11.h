@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2023 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_BUFFERD3D12_H_
-#define SRC_DAWN_NATIVE_D3D12_BUFFERD3D12_H_
+#ifndef SRC_DAWN_NATIVE_D3D11_BUFFERD3D11_H_
+#define SRC_DAWN_NATIVE_D3D11_BUFFERD3D11_H_
 
 #include <limits>
+#include <memory>
+#include <optional>
 
 #include "dawn/native/Buffer.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
-#include "dawn/native/d3d12/ResourceHeapAllocationD3D12.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
-
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d11 {
 
 class CommandRecordingContext;
 class Device;
@@ -31,17 +31,8 @@ class Buffer final : public BufferBase {
   public:
     static ResultOrError<Ref<Buffer>> Create(Device* device, const BufferDescriptor* descriptor);
 
-    ID3D12Resource* GetD3D12Resource() const;
-    D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
-
-    bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                         D3D12_RESOURCE_BARRIER* barrier,
-                                         wgpu::BufferUsage newUsage);
     void TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
                                     wgpu::BufferUsage newUsage);
-
-    bool CheckAllocationMethodForTesting(AllocationMethod allocationMethod) const;
-    bool CheckIsResidentForTesting() const;
 
     MaybeError EnsureDataInitialized(CommandRecordingContext* commandContext);
     ResultOrError<bool> EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
@@ -53,10 +44,25 @@ class Buffer final : public BufferBase {
     // Dawn API
     void SetLabelImpl() override;
 
+    ID3D11Buffer* GetD3D11Buffer() const { return mD3d11Buffer.Get(); }
+    uint8_t* GetStagingBufferPointer() { return mStagingBuffer.get(); }
+    ResultOrError<ID3D11ShaderResourceView*> GetD3D11ShaderResourceView(uint64_t offset,
+                                                                        uint64_t size) const;
+    ResultOrError<ID3D11UnorderedAccessView1*> GetD3D11UnorderedAccessView1() const;
+
     MaybeError ClearBuffer(CommandRecordingContext* commandContext,
                            uint8_t clearValue,
-                           uint64_t offset = 0,
-                           uint64_t size = 0);
+                           uint64_t offset,
+                           uint64_t size);
+    MaybeError WriteBuffer(CommandRecordingContext* commandContext,
+                           uint64_t offset,
+                           const void* data,
+                           size_t size);
+    MaybeError CopyFromBuffer(CommandRecordingContext* commandContext,
+                              uint64_t offset,
+                              size_t size,
+                              Buffer* source,
+                              uint64_t sourceOffset);
 
   private:
     Buffer(Device* device, const BufferDescriptor* descriptor);
@@ -73,16 +79,36 @@ class Buffer final : public BufferBase {
     MaybeError MapInternal(bool isWrite, size_t start, size_t end, const char* contextInfo);
 
     MaybeError InitializeToZero(CommandRecordingContext* commandContext);
+    // CLear the buffer without checking if the buffer is initialized.
+    MaybeError ClearBufferInternal(CommandRecordingContext* commandContext,
+                                   uint8_t clearValue,
+                                   uint64_t offset = 0,
+                                   uint64_t size = 0);
+    // Write the buffer without checking if the buffer is initialized.
+    MaybeError WriteBufferInternal(CommandRecordingContext* commandContext,
+                                   uint64_t bufferOffset,
+                                   const void* data,
+                                   size_t size);
 
-    ResourceHeapAllocation mResourceAllocation;
+    // The buffer object can be used as vertex, index, uniform, storage, or indirect buffer.
+    ComPtr<ID3D11Buffer> mD3d11Buffer;
+
+    // The staging memory is used for mapping and copying.
+    struct Deleter {
+        void operator()(uint8_t* ptr) { free(ptr); }
+    };
+    std::unique_ptr<uint8_t, Deleter> mStagingBuffer;
+
+    mutable std::optional<ComPtr<ID3D11ShaderResourceView>> mShaderResourceView;
+    mutable std::optional<ComPtr<ID3D11UnorderedAccessView1>> mUnorderedAccessView1;
+
     bool mFixedResourceState = false;
     wgpu::BufferUsage mLastUsage = wgpu::BufferUsage::None;
     ExecutionSerial mLastUsedSerial = std::numeric_limits<ExecutionSerial>::max();
 
-    D3D12_RANGE mWrittenMappedRange = {0, 0};
     void* mMappedData = nullptr;
 };
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d11
 
-#endif  // SRC_DAWN_NATIVE_D3D12_BUFFERD3D12_H_
+#endif  // SRC_DAWN_NATIVE_D3D11_BUFFERD3D11_H_
