@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "dawn/common/Log.h"
+#include "dawn/native/D3DBackend.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d/PlatformFunctions.h"
@@ -235,6 +236,54 @@ bool Backend::IsDXCAvailableAndVersionAtLeast(uint64_t minimumCompilerMajorVersi
 
 const PlatformFunctions* Backend::GetFunctions() const {
     return mFunctions.get();
+}
+
+std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(const TogglesState& adapterToggles) {
+    AdapterDiscoveryOptions options(static_cast<WGPUBackendType>(GetType()), nullptr);
+    auto result = DiscoverAdapters(&options, adapterToggles);
+    if (result.IsError()) {
+        GetInstance()->ConsumedError(result.AcquireError());
+        return {};
+    }
+    return result.AcquireSuccess();
+}
+
+ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
+    const AdapterDiscoveryOptionsBase* optionsBase,
+    const TogglesState& adapterToggles) {
+    ASSERT(optionsBase->backendType == static_cast<WGPUBackendType>(GetType()));
+    const AdapterDiscoveryOptions* options =
+        static_cast<const AdapterDiscoveryOptions*>(optionsBase);
+
+    std::vector<Ref<AdapterBase>> adapters;
+    if (options->dxgiAdapter != nullptr) {
+        // |dxgiAdapter| was provided. Discover just that adapter.
+        Ref<AdapterBase> adapter;
+        DAWN_TRY_ASSIGN(adapter,
+                        this->CreateAdapterFromIDXGIAdapter(options->dxgiAdapter, adapterToggles));
+        adapters.push_back(std::move(adapter));
+        return std::move(adapters);
+    }
+
+    // Enumerate and discover all available adapters.
+    for (uint32_t adapterIndex = 0;; ++adapterIndex) {
+        ComPtr<IDXGIAdapter1> dxgiAdapter = nullptr;
+        if (GetFactory()->EnumAdapters1(adapterIndex, &dxgiAdapter) == DXGI_ERROR_NOT_FOUND) {
+            break;  // No more adapters to enumerate.
+        }
+
+        ASSERT(dxgiAdapter != nullptr);
+        ResultOrError<Ref<AdapterBase>> adapter =
+            this->CreateAdapterFromIDXGIAdapter(dxgiAdapter, adapterToggles);
+        if (adapter.IsError()) {
+            GetInstance()->ConsumedError(adapter.AcquireError());
+            continue;
+        }
+
+        adapters.push_back(adapter.AcquireSuccess());
+    }
+
+    return adapters;
 }
 
 }  // namespace dawn::native::d3d
