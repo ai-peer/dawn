@@ -20,19 +20,27 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
-#include "dawn/native/Buffer.h"
-#include "dawn/native/ComputePipeline.h"
 #include "dawn/native/D3D11Backend.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
-#include "dawn/native/RenderPipeline.h"
-#include "dawn/native/Texture.h"
+#include "dawn/native/Queue.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/AdapterD3D11.h"
 #include "dawn/native/d3d11/BackendD3D11.h"
+#include "dawn/native/d3d11/BindGroupD3D11.h"
+#include "dawn/native/d3d11/BindGroupLayoutD3D11.h"
+#include "dawn/native/d3d11/BufferD3D11.h"
+#include "dawn/native/d3d11/CommandBufferD3D11.h"
+#include "dawn/native/d3d11/ComputePipelineD3D11.h"
+#include "dawn/native/d3d11/FenceD3D11.h"
+#include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
+#include "dawn/native/d3d11/RenderPipelineD3D11.h"
 #include "dawn/native/d3d11/SamplerD3D11.h"
+#include "dawn/native/d3d11/ShaderModuleD3D11.h"
+#include "dawn/native/d3d11/SwapChainD3D11.h"
+#include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
@@ -219,33 +227,33 @@ MaybeError Device::ExecutePendingCommandContext() {
 
 ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(
     const BindGroupDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("");
+    return BindGroup::Create(this, descriptor);
 }
 
 ResultOrError<Ref<BindGroupLayoutBase>> Device::CreateBindGroupLayoutImpl(
     const BindGroupLayoutDescriptor* descriptor,
     PipelineCompatibilityToken pipelineCompatibilityToken) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateBindGroupLayoutImpl");
+    return BindGroupLayout::Create(this, descriptor, pipelineCompatibilityToken);
 }
 
 ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateBufferImpl");
+    return Buffer::Create(this, descriptor);
 }
 
 ResultOrError<Ref<CommandBufferBase>> Device::CreateCommandBuffer(
     CommandEncoder* encoder,
     const CommandBufferDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateCommandBuffer");
+    return CommandBuffer::Create(encoder, descriptor);
 }
 
 Ref<ComputePipelineBase> Device::CreateUninitializedComputePipelineImpl(
     const ComputePipelineDescriptor* descriptor) {
-    return nullptr;
+    return ComputePipeline::CreateUninitialized(this, descriptor);
 }
 
 ResultOrError<Ref<PipelineLayoutBase>> Device::CreatePipelineLayoutImpl(
     const PipelineLayoutDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreatePipelineLayoutImpl");
+    return PipelineLayout::Create(this, descriptor);
 }
 
 ResultOrError<Ref<QuerySetBase>> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
@@ -254,7 +262,7 @@ ResultOrError<Ref<QuerySetBase>> Device::CreateQuerySetImpl(const QuerySetDescri
 
 Ref<RenderPipelineBase> Device::CreateUninitializedRenderPipelineImpl(
     const RenderPipelineDescriptor* descriptor) {
-    return nullptr;
+    return RenderPipeline::CreateUninitialized(this, descriptor);
 }
 
 ResultOrError<Ref<SamplerBase>> Device::CreateSamplerImpl(const SamplerDescriptor* descriptor) {
@@ -265,7 +273,7 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     const ShaderModuleDescriptor* descriptor,
     ShaderModuleParseResult* parseResult,
     OwnedCompilationMessages* compilationMessages) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateShaderModuleImpl");
+    return ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
 }
 
 ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
@@ -277,26 +285,30 @@ ResultOrError<Ref<NewSwapChainBase>> Device::CreateSwapChainImpl(
     Surface* surface,
     NewSwapChainBase* previousSwapChain,
     const SwapChainDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateSwapChainImpl");
+    return SwapChain::Create(this, surface, previousSwapChain, descriptor);
 }
 
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateTextureImpl");
+    return Texture::Create(this, descriptor);
 }
 
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
     TextureBase* texture,
     const TextureViewDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateTextureViewImpl");
+    return TextureView::Create(texture, descriptor);
 }
 
 void Device::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
                                                 WGPUCreateComputePipelineAsyncCallback callback,
-                                                void* userdata) {}
+                                                void* userdata) {
+    ComputePipeline::InitializeAsync(std::move(computePipeline), callback, userdata);
+}
 
 void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                WGPUCreateRenderPipelineAsyncCallback callback,
-                                               void* userdata) {}
+                                               void* userdata) {
+    RenderPipeline::InitializeAsync(std::move(renderPipeline), callback, userdata);
+}
 
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
                                                uint64_t sourceOffset,
@@ -370,6 +382,11 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
     AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error);
 }
 
+std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
+    const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
+    return {};
+}
+
 void Device::DestroyImpl() {
     ASSERT(GetState() == State::Disconnected);
 
@@ -426,6 +443,21 @@ uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
 
 HANDLE Device::GetFenceHandle() const {
     return mFenceHandle;
+}
+
+Ref<TextureBase> Device::CreateD3D11ExternalTexture(const TextureDescriptor* descriptor,
+                                                    ComPtr<ID3D11Resource> d3d11Texture,
+                                                    std::vector<Ref<Fence>> waitFences,
+                                                    bool isSwapChainTexture,
+                                                    bool isInitialized) {
+    Ref<Texture> dawnTexture;
+    if (ConsumedError(
+            Texture::CreateExternalImage(this, descriptor, std::move(d3d11Texture),
+                                         std::move(waitFences), isSwapChainTexture, isInitialized),
+            &dawnTexture)) {
+        return {};
+    }
+    return dawnTexture;
 }
 
 }  // namespace dawn::native::d3d11

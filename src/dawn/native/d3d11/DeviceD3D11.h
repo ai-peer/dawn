@@ -26,6 +26,8 @@
 
 namespace dawn::native::d3d11 {
 
+class Fence;
+
 // Definition of backend types
 class Device final : public d3d::Device {
   public:
@@ -35,12 +37,6 @@ class Device final : public d3d::Device {
     ~Device() override;
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);
-
-    ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
-        CommandEncoder* encoder,
-        const CommandBufferDescriptor* descriptor) override;
-
-    MaybeError TickImpl() override;
 
     ID3D11Device* GetD3D11Device() const;
     ID3D11Device5* GetD3D11Device5() const;
@@ -54,11 +50,19 @@ class Device final : public d3d::Device {
     MaybeError WaitForSerial(ExecutionSerial serial);
 
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
-
-    void ForceEventualFlushOfCommands() override;
-
     MaybeError ExecutePendingCommandContext();
+    HANDLE GetFenceHandle() const;
+    Ref<TextureBase> CreateD3D11ExternalTexture(const TextureDescriptor* descriptor,
+                                                ComPtr<ID3D11Resource> d3d11Texture,
+                                                std::vector<Ref<Fence>> waitFences,
+                                                bool isSwapChainTexture,
+                                                bool isInitialized);
 
+    ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
+        CommandEncoder* encoder,
+        const CommandBufferDescriptor* descriptor) override;
+    MaybeError TickImpl() override;
+    void ForceEventualFlushOfCommands() override;
     MaybeError CopyFromStagingToBufferImpl(BufferBase* source,
                                            uint64_t sourceOffset,
                                            BufferBase* destination,
@@ -68,25 +72,15 @@ class Device final : public d3d::Device {
                                             const TextureDataLayout& src,
                                             const TextureCopy& dst,
                                             const Extent3D& copySizePixels) override;
-
-    HANDLE GetFenceHandle() const;
-
     uint32_t GetOptimalBytesPerRowAlignment() const override;
     uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
-
     float GetTimestampPeriodInNS() const override;
-
     bool ShouldDuplicateNumWorkgroupsForDispatchIndirect(
         ComputePipelineBase* computePipeline) const override;
-
     bool MayRequireDuplicationOfIndirectParameters() const override;
-
     bool ShouldDuplicateParametersForDrawIndirect(
         const RenderPipelineBase* renderPipelineBase) const override;
-
     uint64_t GetBufferCopyOffsetAlignmentForDepthStencil() const override;
-
-    // Dawn APIs
     void SetLabelImpl() override;
 
   private:
@@ -128,24 +122,21 @@ class Device final : public d3d::Device {
     void InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                            WGPUCreateRenderPipelineAsyncCallback callback,
                                            void* userdata) override;
-
     void DestroyImpl() override;
     MaybeError WaitForIdleForDestruction() override;
     bool HasPendingCommands() const override;
-
     MaybeError CheckDebugLayerAndGenerateErrors();
     void AppendDebugLayerMessages(ErrorData* error) override;
+    std::unique_ptr<d3d::ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
+        const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) override;
+    ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
 
     ComPtr<ID3D11Fence> mFence;
     HANDLE mFenceHandle = nullptr;
     HANDLE mFenceEvent = nullptr;
 
-    ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
-
     ComPtr<ID3D11Device5> mD3d11Device5;  // Device is owned by adapter and will not be outlived.
-
     CommandRecordingContext mPendingCommands;
-
     SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
 };
 
