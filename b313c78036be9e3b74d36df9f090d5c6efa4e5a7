@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4278a3c0_79dc71c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T21:44:47Z",
+      "side": 1,
+      "message": "I haven\u0027t time to check all the tests and suppress some of them. Right now, Intel folks is joining this project. We plan to working on the end2end tests after landing those CLs. We will suppress failed tests when we turn on the d3d11 backend on the bot. WDYT?",
+      "parentUuid": "ef755eb0_3ad70257",
+      "range": {
+        "startLine": 10,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "b313c78036be9e3b74d36df9f090d5c6efa4e5a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cc4b8794_121831a4",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-04-03T21:22:59Z",
       "side": 1,
       "message": "resolving ahead of onSubmittedWorkDone violates the specification. please lets keep the semantics the same if you\u0027re running on d3d11. It\u0027s allowed to resolve in the same task as onSubmittedWorkDone, but it still must happen after it.\n\nif graphite wants the lower latency, they can check if the backend type is d3d11 and use mappedAtCreation: true instead",
+      "range": {
+        "startLine": 669,
+        "startChar": 1,
+        "endLine": 688,
+        "endChar": 22
+      },
+      "revId": "b313c78036be9e3b74d36df9f090d5c6efa4e5a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c30e286_585ed6da",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T21:44:47Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "5a11ed7b_91ab9cae",
       "range": {
         "startLine": 669,
         "startChar": 1,
