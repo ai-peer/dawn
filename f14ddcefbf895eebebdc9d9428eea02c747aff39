@@ -16,6 +16,80 @@
       "message": "This is the compatible dawn end2end test for new Memory/Semaphore service. PTAL, thanks!",
       "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781db75f_21980a7d",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T09:48:46Z",
+      "side": 1,
+      "message": "nit: Instead of whole new structures, it seems that this could just be helper functions that return a ExternalImageDescriptorVkForTesting initialized with the correct image type?",
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "810a86df_03102ad7",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T09:48:46Z",
+      "side": 1,
+      "message": "nit: Maybe test for the backend being supported before asking it whether the specific params are supported. Or we could have the Create method return nullptr if the backend is not supported.",
+      "range": {
+        "startLine": 101,
+        "startChar": 74,
+        "endLine": 101,
+        "endChar": 97
+      },
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeecd185_9d249c02",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T09:48:46Z",
+      "side": 1,
+      "message": "Can you describe what the changes to these files are? It\u0027s hard to see at a first glance. Also [1] would mean most of the indentation changes wouldn\u0027t be necessary anymore and would reduce the diff size.",
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec0865ca_7a7c5fd3",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T09:48:46Z",
+      "side": 1,
+      "message": "[1] We shouldn\u0027t need to expose everything in headers and instead could just have a CreateDMABufImageWrappingBackend -\u003e unique_ptr\u003cVulkanImageWrappingTestBackend\u003e similarly to how we do the memory services, am I missing something?",
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
