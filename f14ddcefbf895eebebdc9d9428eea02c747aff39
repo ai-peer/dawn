@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91ccf1b_817d142f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-03T08:27:37Z",
+      "side": 1,
+      "message": "This is the compatible dawn end2end test for new Memory/Semaphore service. PTAL, thanks!",
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
