@@ -25,6 +25,11 @@
 
 namespace dawn::native::d3d11 {
 
+using d3d::ExternalImageDescriptorDXGISharedHandle;
+using d3d::ExternalImageDXGI;
+using d3d::ExternalImageDXGIBeginAccessDescriptor;
+using d3d::ExternalImageDXGIFenceDescriptor;
+
 struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public d3d::AdapterDiscoveryOptions {
     AdapterDiscoveryOptions();
     explicit AdapterDiscoveryOptions(Microsoft::WRL::ComPtr<IDXGIAdapter> adapter);
