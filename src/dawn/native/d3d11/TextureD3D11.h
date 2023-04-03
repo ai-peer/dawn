@@ -30,10 +30,17 @@ namespace dawn::native::d3d11 {
 
 class CommandRecordingContext;
 class Device;
+class Fence;
 
 class Texture final : public TextureBase {
   public:
     static ResultOrError<Ref<Texture>> Create(Device* device, const TextureDescriptor* descriptor);
+    static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
+                                                           const TextureDescriptor* descriptor,
+                                                           ComPtr<ID3D11Resource> d3d11Texture,
+                                                           std::vector<Ref<Fence>> waitFences,
+                                                           bool isSwapChainTexture,
+                                                           bool isInitialized);
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D11Resource> d3d11Texture);
@@ -61,12 +68,20 @@ class Texture final : public TextureBase {
                                     wgpu::TextureUsage usage,
                                     const SubresourceRange& range) {}
 
+    // For external textures, returns the Device internal fence's value associated with the last
+    // ExecuteCommandLists that used this texture. If nullopt is returned, the texture wasn't used
+    // or keyed mutex is used instead of fences for synchronization.
+    ResultOrError<ExecutionSerial> EndAccess();
+
   private:
     Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
     ~Texture() override;
     using TextureBase::TextureBase;
 
     MaybeError InitializeAsInternalTexture();
+    MaybeError InitializeAsExternalTexture(ComPtr<ID3D11Resource> d3d11Texture,
+                                           std::vector<Ref<Fence>> waitFences,
+                                           bool isSwapChainTexture);
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D11Resource> d3d11Texture);
 
     void SetLabelHelper(const char* prefix);
@@ -82,6 +97,7 @@ class Texture final : public TextureBase {
     MaybeError WriteTexture();
 
     ComPtr<ID3D11Resource> mD3d11Resource;
+    std::vector<Ref<Fence>> mWaitFences;
 };
 
 class TextureView final : public TextureViewBase {
