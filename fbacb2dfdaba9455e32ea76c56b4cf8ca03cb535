@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63559913_556eab8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 73
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "LGTM, although I\u0027m looking forward to finding finer-grained mechanisms for handling synchronization.",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ec43951_97833436",
+        "filename": "dawn.json",
+        "patchSetId": 73
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "Can this be documented in docs/dawn/generator.md?",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb820c51_4a8f142f",
+        "filename": "generator/templates/dawn/native/ProcTable.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "I have some performance concerns about adding this to most of the procs in the proc table that every dawn::native project will use. WDYT of generating two versions of this proc table, one with the auto locking and the other one without? Chromium/Skia would use the former while most other projects would use the latter (and eventually when we have proper fine-grained synchronization we would merge them again)",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad7148c4_81b2959a",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 73
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "nit: \"synchronization\" as well?",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a7d879_1e3f4d7e",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 73
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "nit: APIRelease() can be called without any synchronization guarantees so we need to use a Release method that will call LockAndDeleteThis() on destruction.",
+      "range": {
+        "startLine": 54,
+        "startChar": 45,
+        "endLine": 54,
+        "endChar": 51
+      },
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "605d6372_86a0c045",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "For these, could we link to dawn:1618 explaining that it would remove the need for the locking? Ditto in other places in this file.",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc0902a_39e0f393",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "It should be possible to have a constexpr constructor for Mutex such that just declaring `static Mutex gMutex` would work I believe.",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e323306_a88d8332",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a helper function \"LockedIfNeeded\" for this",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36f1819f_5db791a0",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 73
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "nit: the optional here is going to be bigger than just the AutoLock that\u0027s a pointer to the Mutex. If we made the Autolock contain a nullable pointer and added an if Mutex !\u003d null then the generated code would likely be better.",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ae8ed5d_af63d915",
+        "filename": "src/dawn/wire/SupportedFeatures.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "I\u0027m a bit surprised that this is a feature and not a device toggle: it shouldn\u0027t really be a user-visible thing and more of a backdoor for Graphite at the moment. I remember there might have been a thread about why this was chosen to be a features, do you have a link to it?",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b43750e4_c22b1924",
+        "filename": "dawn.json",
+        "patchSetId": 69
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T13:11:03Z",
+      "side": 1,
+      "message": "That\u0027s just naming so a nit, but thread-safety is a \"defensive\" name where it seems this property is bolted on (which it is now, but hopefully not in the future). So +1 implicit device synchronization or similar.",
+      "parentUuid": "dbba11d7_f8a26fe2",
+      "range": {
+        "startLine": 1476,
+        "startChar": 37,
+        "endLine": 1476,
+        "endChar": 52
+      },
+      "revId": "d61adc70a53111c1df6a8dd66941f26279689fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4c4199d_f21090b0",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 69
