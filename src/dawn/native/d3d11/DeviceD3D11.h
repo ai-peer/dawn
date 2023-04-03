@@ -48,8 +48,6 @@ class Device final : public d3d::Device {
 
     MaybeError NextSerial();
     MaybeError WaitForSerial(ExecutionSerial serial);
-
-    void ReferenceUntilUnused(ComPtr<IUnknown> object);
     MaybeError ExecutePendingCommandContext();
     HANDLE GetFenceHandle() const;
     Ref<TextureBase> CreateD3D11ExternalTexture(const TextureDescriptor* descriptor,
@@ -127,14 +125,17 @@ class Device final : public d3d::Device {
     void AppendDebugLayerMessages(ErrorData* error) override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
 
-    ComPtr<ID3D11Fence> mFence;
+    // d3d::Device implementation:
+    std::unique_ptr<d3d::ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
+        const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) override;
+
+    ComPtr<ID3D11Fence> mD3d11Fence;
     HANDLE mFenceHandle = nullptr;
     HANDLE mFenceEvent = nullptr;
 
     ComPtr<ID3D11Device> mD3d11Device;
     ComPtr<ID3D11Device5> mD3d11Device5;
     CommandRecordingContext mPendingCommands;
-    SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
 };
 
 }  // namespace dawn::native::d3d11
