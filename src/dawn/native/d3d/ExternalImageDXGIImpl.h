@@ -21,48 +21,41 @@
 #include <vector>
 
 #include "dawn/common/LinkedList.h"
-#include "dawn/native/D3D12Backend.h"
+#include "dawn/common/RefCounted.h"
+#include "dawn/native/D3DBackend.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
-#include "dawn/native/d3d12/FenceD3D12.h"
 #include "dawn/webgpu_cpp.h"
 
-struct ID3D12Resource;
-struct ID3D12Fence;
+namespace dawn::native {
+class DeviceBase;
+}
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d {
 
-class D3D11on12ResourceCache;
-class Device;
 struct ExternalImageDXGIBeginAccessDescriptor;
 struct ExternalImageDescriptorDXGISharedHandle;
 
 class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
   public:
     ExternalImageDXGIImpl(Device* backendDevice,
-                          Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
                           const TextureDescriptor* textureDescriptor,
                           bool useFenceSynchronization);
-    ~ExternalImageDXGIImpl();
+    virtual ~ExternalImageDXGIImpl();
 
     ExternalImageDXGIImpl(const ExternalImageDXGIImpl&) = delete;
     ExternalImageDXGIImpl& operator=(const ExternalImageDXGIImpl&) = delete;
 
-    void Destroy();
-
     bool IsValid() const;
 
-    WGPUTexture BeginAccess(const ExternalImageDXGIBeginAccessDescriptor* descriptor);
+    virtual void Destroy();
+    virtual WGPUTexture BeginAccess(const ExternalImageDXGIBeginAccessDescriptor* descriptor) = 0;
+    virtual void EndAccess(WGPUTexture texture, ExternalImageDXGIFenceDescriptor* signalFence) = 0;
 
-    void EndAccess(WGPUTexture texture, ExternalImageDXGIFenceDescriptor* signalFence);
-
-  private:
-    Ref<Device> mBackendDevice;
-    Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
+  protected:
+    Ref<DeviceBase> mBackendDevice;
     const bool mUseFenceSynchronization;
-
-    std::unique_ptr<D3D11on12ResourceCache> mD3D11on12ResourceCache;
 
     wgpu::TextureUsage mUsage;
     wgpu::TextureUsage mUsageInternal = wgpu::TextureUsage::None;
@@ -74,6 +67,6 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
     std::vector<wgpu::TextureFormat> mViewFormats;
 };
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D12_EXTERNALIMAGEDXGIIMPL_H_
+#endif  // SRC_DAWN_NATIVE_D3D_EXTERNALIMAGEDXGIIMPL_H_

@@ -23,6 +23,7 @@
 #include "dawn/native/D3D11Backend.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Queue.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/AdapterD3D11.h"
 #include "dawn/native/d3d11/BackendD3D11.h"
@@ -31,6 +32,7 @@
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/CommandBufferD3D11.h"
 #include "dawn/native/d3d11/ComputePipelineD3D11.h"
+#include "dawn/native/d3d11/FenceD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
@@ -108,12 +110,13 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     DAWN_TRY(CheckHRESULT(mD3d11Device.As(&mD3d11Device5), "D3D11: getting ID3D11Device5"));
 
     // Create the fence.
-    DAWN_TRY(
-        CheckHRESULT(mD3d11Device5->CreateFence(0, D3D11_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mFence)),
-                     "D3D11: creating fence"));
+    DAWN_TRY(CheckHRESULT(
+        mD3d11Device5->CreateFence(0, D3D11_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mD3d11Fence)),
+        "D3D11: creating fence"));
 
-    DAWN_TRY(CheckHRESULT(mFence->CreateSharedHandle(nullptr, GENERIC_ALL, nullptr, &mFenceHandle),
-                          "D3D11: creating fence shared handle"));
+    DAWN_TRY(
+        CheckHRESULT(mD3d11Fence->CreateSharedHandle(nullptr, GENERIC_ALL, nullptr, &mFenceHandle),
+                     "D3D11: creating fence shared handle"));
 
     // Create the fence event.
     mFenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
@@ -180,7 +183,7 @@ MaybeError Device::NextSerial() {
     DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
 
     DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Signal(
-                              mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
+                              mD3d11Fence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
                           "D3D11 command queue signal fence"));
 
     return {};
@@ -189,7 +192,7 @@ MaybeError Device::NextSerial() {
 MaybeError Device::WaitForSerial(ExecutionSerial serial) {
     DAWN_TRY(CheckPassedSerials());
     if (GetCompletedCommandSerial() < serial) {
-        DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(uint64_t(serial), mFenceEvent),
+        DAWN_TRY(CheckHRESULT(mD3d11Fence->SetEventOnCompletion(uint64_t(serial), mFenceEvent),
                               "D3D11 set event on completion"));
         WaitForSingleObject(mFenceEvent, INFINITE);
         DAWN_TRY(CheckPassedSerials());
@@ -198,7 +201,7 @@ MaybeError Device::WaitForSerial(ExecutionSerial serial) {
 }
 
 ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
-    ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
+    ExecutionSerial completedSerial = ExecutionSerial(mD3d11Fence->GetCompletedValue());
     if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
         // GetCompletedValue returns UINT64_MAX if the device was removed.
         // Try to query the failure reason.
@@ -213,10 +216,6 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
     }
 
     return completedSerial;
-}
-
-void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
-    mUsedComObjectRefs.Enqueue(object, GetPendingCommandSerial());
 }
 
 bool Device::HasPendingCommands() const {
@@ -385,8 +384,14 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
     AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error);
 }
 
+std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
+    const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
+    return {};
+}
+
 void Device::DestroyImpl() {
     ASSERT(GetState() == State::Disconnected);
+
 
     if (mFenceEvent != nullptr) {
         ::CloseHandle(mFenceEvent);
@@ -418,6 +423,21 @@ uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
 
 HANDLE Device::GetFenceHandle() const {
     return mFenceHandle;
+}
+
+Ref<TextureBase> Device::CreateD3D11ExternalTexture(const TextureDescriptor* descriptor,
+                                                    ComPtr<ID3D11Resource> d3d11Texture,
+                                                    std::vector<Ref<Fence>> waitFences,
+                                                    bool isSwapChainTexture,
+                                                    bool isInitialized) {
+    Ref<Texture> dawnTexture;
+    if (ConsumedError(
+            Texture::CreateExternalImage(this, descriptor, std::move(d3d11Texture),
+                                         std::move(waitFences), isSwapChainTexture, isInitialized),
+            &dawnTexture)) {
+        return {};
+    }
+    return dawnTexture;
 }
 
 }  // namespace dawn::native::d3d11
