@@ -16,6 +16,217 @@
       "message": "Hi Austin \u0026 Corentin, I plan to split the huge d3d11 backend CL to several CLs. Hope it can make the review easier. This is the first CL, PTAL. Thanks.",
       "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee364769_003631db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "Thank you for splitting this off! It made it much easier to review. Bunch of nits but nothing major! LGTM",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a32b9cc8_c7197c7f",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "nit: I think ToAPI() might work.",
+      "range": {
+        "startLine": 242,
+        "startChar": 36,
+        "endLine": 242,
+        "endChar": 65
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa63b995_240fa2e2",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "nit: I think the following might work and avoids manual memory handling:\n\n```\nif (GetInstance()-\u003eConsumedError(DiscoverAdapters(...))) {\n  return {};\n}\n```",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6696a7b4_e8cdebf6",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "nit: There\u0027s a ConsumedError that handles ResultOrError as well so it could be (it avoid manual error handling):\n\n Ref\u003cAdapterBase\u003e adapter;\n if (GetInstance()-\u003eConsumedError(CreateAdapterFromIDXGIAdapter(dxgiAdapter, adapterToggles), \u0026adapter)) {\n   continue;\n }",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0aded8_c9089799",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "I might have asked this in the other CL but doesn\u0027t ToBackend() work instead of the static cast? Maybe we could add support for BackendBase to ToBackend().",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00b1c44a_38b4f913",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "nit: leftover code?",
+      "range": {
+        "startLine": 57,
+        "startChar": 51,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d651cabb_1d5bef7a",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "Did you check that all of these are unconditionally supported? Otherwise I think the only one we need to implement for now is TextureCompressionBC2.",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5744943c_ab2cf4be",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "nit: IMHO could be removed, and in the D3D12 backend too.",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e707a5c6_229e0293",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "nit: kReservedCBVSlots to say what kind of slot it is?",
+      "range": {
+        "startLine": 123,
+        "startChar": 23,
+        "endLine": 123,
+        "endChar": 37
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11944905_12faa320",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "nit: Putting code in an ASSERT means that it will not run when ASSERTS are disabled in release. Consider putting the result in a temporary variable and ASSERTing on that variable. (if this is a bug in D3D12 then we can fix it too)",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2703c1d8_aa555ae7",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:02:58Z",
+      "side": 1,
+      "message": "I think this should still say D3D11",
+      "range": {
+        "startLine": 118,
+        "startChar": 35,
+        "endLine": 118,
+        "endChar": 56
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
