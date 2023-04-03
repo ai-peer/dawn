@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e50cc255_c72abda3",
+        "filename": "generator/templates/dawn/native/ProcTable.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-03T14:46:38Z",
+      "side": 1,
+      "message": "Currently graphite uses `wgpu::` C++ API defined in https://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/include/dawn/webgpu_cpp.h\n\nAnd the underlying proc table is controlled by `dawnProcSetProcs()` function IIUC https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:out/Debug/gen/third_party/dawn/src/dawn/dawn_proc.c;drc\u003d563462e6dee3014de2f13db70d50cc3879c783d9;l\u003d10\n`dawnProcSetProcs` will override the global proc table which could affect every module in the same process.\n\nWhich means if we use `dawnProcSetProcs` in graphite, it will override any other modules that call `wgpu::` or the `wgpu...` C API to implicitly use \"thread safe\" procs as well. Unless we manually use the \"thread safe\" function pointers in graphite and/or the other modules use the \"default\" function pointers explicitly. This is a bit error prone IMO.\n\nFurthermore, as you mentioned, I think using an AutoLock with null mutex (when \"thread safe\" feature is disabled) could be relatively cheap. Compare to the actual works that an API function is going to do, the cost of checking the mutex is null or not should be insignificant.",
+      "parentUuid": "fb820c51_4a8f142f",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad7148c4_81b2959a",
         "filename": "src/dawn/common/RefCounted.h",
         "patchSetId": 73
@@ -173,6 +191,24 @@
       "writtenOn": "2023-04-03T13:11:03Z",
       "side": 1,
       "message": "I\u0027m a bit surprised that this is a feature and not a device toggle: it shouldn\u0027t really be a user-visible thing and more of a backdoor for Graphite at the moment. I remember there might have been a thread about why this was chosen to be a features, do you have a link to it?",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7287a1_df2cfbbc",
+        "filename": "src/dawn/wire/SupportedFeatures.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-03T14:46:38Z",
+      "side": 1,
+      "message": "I CC-ed you in the doc\u0027s comment thread about this.",
+      "parentUuid": "3ae8ed5d_af63d915",
       "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
