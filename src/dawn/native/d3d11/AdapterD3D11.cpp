@@ -21,6 +21,7 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/BackendD3D11.h"
+#include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
 
 namespace dawn::native::d3d11 {
@@ -150,8 +151,7 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {}
 
 ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
                                                          const TogglesState& deviceToggles) {
-    // TODO(dawn:1705): Implement D3D11 backend.
-    return DAWN_UNIMPLEMENTED_ERROR("D3D11 backend is not implemented yet");
+    return Device::Create(this, descriptor, deviceToggles);
 }
 
 // Resets the backend device and creates a new one. If any D3D11 objects belonging to the
