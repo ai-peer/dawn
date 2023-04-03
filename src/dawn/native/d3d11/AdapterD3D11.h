@@ -47,6 +47,8 @@ class Adapter : public d3d::Adapter {
 
     MaybeError ResetInternalDeviceForTestingImpl() override;
 
+    bool AreTimestampQueriesSupported() const;
+
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
