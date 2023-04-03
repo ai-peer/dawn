@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6523a3_adbb7f5d",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a32b9cc8_c7197c7f",
+      "range": {
+        "startLine": 242,
+        "startChar": 36,
+        "endLine": 242,
+        "endChar": 65
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa63b995_240fa2e2",
@@ -71,6 +95,24 @@
       "writtenOn": "2023-04-03T16:02:58Z",
       "side": 1,
       "message": "nit: I think the following might work and avoids manual memory handling:\n\n```\nif (GetInstance()-\u003eConsumedError(DiscoverAdapters(...))) {\n  return {};\n}\n```",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "996f2ee1_bf4437a9",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa63b995_240fa2e2",
       "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "343073ca_6798dd3d",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6696a7b4_e8cdebf6",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef0aded8_c9089799",
@@ -105,6 +165,24 @@
       "writtenOn": "2023-04-03T16:02:58Z",
       "side": 1,
       "message": "I might have asked this in the other CL but doesn\u0027t ToBackend() work instead of the static cast? Maybe we could add support for BackendBase to ToBackend().",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f765cb_8945577a",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "I tried to support BackendBase, but not very successful. I haven\u0027t figure out how to do it. So I would like to do it in a follow up CL.",
+      "parentUuid": "ef0aded8_c9089799",
       "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -132,6 +210,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d6a1754_a3dfcf0e",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00b1c44a_38b4f913",
+      "range": {
+        "startLine": 57,
+        "startChar": 51,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d651cabb_1d5bef7a",
@@ -149,6 +251,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e701bb_18f68a6a",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "I didn\u0027t check everything carefully. I will remove others for now. Done",
+      "parentUuid": "d651cabb_1d5bef7a",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5744943c_ab2cf4be",
@@ -162,6 +282,24 @@
       "writtenOn": "2023-04-03T16:02:58Z",
       "side": 1,
       "message": "nit: IMHO could be removed, and in the D3D12 backend too.",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3781eb6_1bbf5861",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5744943c_ab2cf4be",
       "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +327,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee0570fa_cb95ed47",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e707a5c6_229e0293",
+      "range": {
+        "startLine": 123,
+        "startChar": 23,
+        "endLine": 123,
+        "endChar": 37
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11944905_12faa320",
@@ -206,6 +368,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a638667_4d5c8fe3",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11944905_12faa320",
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2703c1d8_aa555ae7",
@@ -219,6 +399,30 @@
       "writtenOn": "2023-04-03T16:02:58Z",
       "side": 1,
       "message": "I think this should still say D3D11",
+      "range": {
+        "startLine": 118,
+        "startChar": 35,
+        "endLine": 118,
+        "endChar": 56
+      },
+      "revId": "a194582864d15ce2edda9ec388e0951d8b4c5f26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34b2237f_407b0e66",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-03T16:55:51Z",
+      "side": 1,
+      "message": "Oops! Done",
+      "parentUuid": "2703c1d8_aa555ae7",
       "range": {
         "startLine": 118,
         "startChar": 35,
