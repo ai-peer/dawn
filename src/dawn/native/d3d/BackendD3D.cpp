@@ -239,19 +239,18 @@ const PlatformFunctions* Backend::GetFunctions() const {
 }
 
 std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(const TogglesState& adapterToggles) {
-    AdapterDiscoveryOptions options(static_cast<WGPUBackendType>(GetType()), nullptr);
-    auto result = DiscoverAdapters(&options, adapterToggles);
-    if (result.IsError()) {
-        GetInstance()->ConsumedError(result.AcquireError());
+    AdapterDiscoveryOptions options(ToAPI(GetType()), nullptr);
+    std::vector<Ref<AdapterBase>> adapters;
+    if (GetInstance()->ConsumedError(DiscoverAdapters(&options, adapterToggles), &adapters)) {
         return {};
     }
-    return result.AcquireSuccess();
+    return adapters;
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     const AdapterDiscoveryOptionsBase* optionsBase,
     const TogglesState& adapterToggles) {
-    ASSERT(optionsBase->backendType == static_cast<WGPUBackendType>(GetType()));
+    ASSERT(optionsBase->backendType == ToAPI(GetType()));
     const AdapterDiscoveryOptions* options =
         static_cast<const AdapterDiscoveryOptions*>(optionsBase);
 
@@ -260,7 +259,7 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         // |dxgiAdapter| was provided. Discover just that adapter.
         Ref<AdapterBase> adapter;
         DAWN_TRY_ASSIGN(adapter,
-                        this->CreateAdapterFromIDXGIAdapter(options->dxgiAdapter, adapterToggles));
+                        CreateAdapterFromIDXGIAdapter(options->dxgiAdapter, adapterToggles));
         adapters.push_back(std::move(adapter));
         return std::move(adapters);
     }
@@ -273,14 +272,13 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         }
 
         ASSERT(dxgiAdapter != nullptr);
-        ResultOrError<Ref<AdapterBase>> adapter =
-            this->CreateAdapterFromIDXGIAdapter(dxgiAdapter, adapterToggles);
-        if (adapter.IsError()) {
-            GetInstance()->ConsumedError(adapter.AcquireError());
+        Ref<AdapterBase> adapter;
+        if (GetInstance()->ConsumedError(CreateAdapterFromIDXGIAdapter(dxgiAdapter, adapterToggles),
+                                         &adapter)) {
             continue;
         }
 
-        adapters.push_back(adapter.AcquireSuccess());
+        adapters.push_back(std::move(adapter));
     }
 
     return adapters;

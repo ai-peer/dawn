@@ -115,6 +115,6 @@ uint64_t SetExternalMemoryReservation(WGPUDevice device,
 AdapterDiscoveryOptions::AdapterDiscoveryOptions() : AdapterDiscoveryOptions(nullptr) {}
 
 AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
-    : d3d::AdapterDiscoveryOptions(WGPUBackendType_D3D11, std::move(adapter)) {}
+    : d3d::AdapterDiscoveryOptions(WGPUBackendType_D3D12, std::move(adapter)) {}
 
 }  // namespace dawn::native::d3d12

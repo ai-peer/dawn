@@ -590,7 +590,8 @@ ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor*
 // and the subequent call to CreateDevice will return a handle the existing device instead of
 // creating a new one.
 MaybeError Adapter::ResetInternalDeviceForTestingImpl() {
-    ASSERT(mD3d12Device.Reset() == 0);
+    [[maybe_unused]] auto refCount = mD3d12Device.Reset();
+    ASSERT(refCount == 0);
     DAWN_TRY(Initialize());
 
     return {};

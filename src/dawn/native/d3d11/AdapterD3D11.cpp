@@ -54,7 +54,7 @@ MaybeError Adapter::InitializeImpl() {
     const D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0};
 
     UINT flags = 0;
-    if (GetInstance()->IsBackendValidationEnabled() || true) {
+    if (GetInstance()->IsBackendValidationEnabled()) {
         flags |= D3D11_CREATE_DEVICE_DEBUG;
     }
 
@@ -75,26 +75,8 @@ MaybeError Adapter::InitializeImpl() {
     return {};
 }
 
-bool Adapter::AreTimestampQueriesSupported() const {
-    // TODO(dawn:1723): Implement timestamp queries on D3D11.
-    return false;
-}
-
 void Adapter::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::TextureCompressionBC);
-    EnableFeature(Feature::MultiPlanarFormats);
-    EnableFeature(Feature::Depth32FloatStencil8);
-    EnableFeature(Feature::IndirectFirstInstance);
-    EnableFeature(Feature::RG11B10UfloatRenderable);
-    EnableFeature(Feature::DepthClipControl);
-
-    if (AreTimestampQueriesSupported()) {
-        EnableFeature(Feature::TimestampQuery);
-        EnableFeature(Feature::TimestampQueryInsidePasses);
-    }
-
-    // TODO(dawn:1722): Implement pipeline statistics queries on D3D11.
-    // EnableFeature(Feature::PipelineStatisticsQuery);
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
@@ -120,9 +102,9 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     uint32_t maxUAVsPerStage = maxUAVsAllStages / 2;
 
     // Reserve one slot for builtin constants.
-    constexpr uint32_t kReservedSlots = 1;
+    constexpr uint32_t kReservedCBVSlots = 1;
     limits->v1.maxUniformBuffersPerShaderStage =
-        D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT - kReservedSlots;
+        D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT - kReservedCBVSlots;
 
     // Allocate half of the UAVs to storage buffers, and half to storage textures.
     limits->v1.maxStorageTexturesPerShaderStage = maxUAVsPerStage / 2;
@@ -177,7 +159,8 @@ ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor*
 // and the subequent call to CreateDevice will return a handle the existing device instead of
 // creating a new one.
 MaybeError Adapter::ResetInternalDeviceForTestingImpl() {
-    ASSERT(mD3d11Device.Reset() == 0);
+    [[maybe_unused]] auto refCount = mD3d11Device.Reset();
+    ASSERT(refCount == 0);
     DAWN_TRY(Initialize());
 
     return {};
