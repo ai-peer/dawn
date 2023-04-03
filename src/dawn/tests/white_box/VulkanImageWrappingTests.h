@@ -33,7 +33,6 @@ struct ExternalImageExportInfoVkForTesting;
 
 class VulkanImageWrappingTestBackend {
   public:
-    static std::unique_ptr<VulkanImageWrappingTestBackend> Create(const wgpu::Device& device);
     virtual ~VulkanImageWrappingTestBackend() = default;
 
     class ExternalTexture : NonCopyable {
@@ -49,6 +48,7 @@ class VulkanImageWrappingTestBackend {
     // backends. The DAWN_TEST_PARAM_STRUCT is not declared here because it is unnecessary but also
     // because it declares a bunch of functions that would cause ODR violations.
     struct TestParams {
+        ExternalImageType externalImageType = ExternalImageType::OpaqueFD;
         bool useDedicatedAllocation = false;
         bool detectDedicatedAllocation = false;
     };
@@ -74,12 +74,12 @@ class VulkanImageWrappingTestBackend {
 
 struct ExternalImageDescriptorVkForTesting : public ExternalImageDescriptorVk {
   public:
-    ExternalImageDescriptorVkForTesting();
+    explicit ExternalImageDescriptorVkForTesting(ExternalImageType type);
 };
 
 struct ExternalImageExportInfoVkForTesting : public ExternalImageExportInfoVk {
   public:
-    ExternalImageExportInfoVkForTesting();
+    explicit ExternalImageExportInfoVkForTesting(ExternalImageType type);
     std::vector<std::unique_ptr<VulkanImageWrappingTestBackend::ExternalSemaphore>> semaphores;
 };
 
