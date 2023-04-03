@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "598dc8fa_c9401b96",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1002886
+      },
+      "writtenOn": "2023-04-03T18:20:40Z",
+      "side": 1,
+      "message": "I think this else if should just be an if. Skia is noticing a link error where these files are missing when we build for Android because of lines 55-60 in src/dawn/native/vulkan/external_memory/MemoryService.cpp\n\nEither that or the #if logic in MemoryService.cpp needs revision.",
+      "range": {
+        "startLine": 720,
+        "startChar": 8,
+        "endLine": 720,
+        "endChar": 12
+      },
+      "revId": "07b88f3aef3c4be4994a3a1b8aba4bab0eb626e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
