@@ -12,22 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// D3D11Backend.cpp: contains the definition of symbols exported by D3D11Backend.h so that they
-// can be compiled twice: once export (shared library), once not exported (static library)
+#ifndef SRC_DAWN_NATIVE_D3D11_D3D11INFO_H_
+#define SRC_DAWN_NATIVE_D3D11_D3D11INFO_H_
 
-#include "dawn/native/D3D11Backend.h"
-
-#include <utility>
-
+#include "dawn/native/Error.h"
+#include "dawn/native/PerStage.h"
 #include "dawn/native/d3d/d3d_platform.h"
-#include "dawn/native/d3d11/DeviceD3D11.h"
-#include "dawn/native/d3d11/Forward.h"
 
 namespace dawn::native::d3d11 {
 
-AdapterDiscoveryOptions::AdapterDiscoveryOptions() : AdapterDiscoveryOptions(nullptr) {}
+class Adapter;
 
-AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
-    : d3d::AdapterDiscoveryOptions(WGPUBackendType_D3D11, std::move(adapter)) {}
+struct D3D11DeviceInfo {
+    bool isUMA;
 
+    // shaderModel indicates the maximum supported shader model, for example, the value 62
+    // indicates that current driver supports the maximum shader model is shader model 6.2.
+    uint32_t shaderModel;
+    PerStage<std::wstring> shaderProfiles;
+};
+
+ResultOrError<D3D11DeviceInfo> GatherDeviceInfo(const Adapter& adapter);
 }  // namespace dawn::native::d3d11
+
+#endif  // SRC_DAWN_NATIVE_D3D11_D3D11INFO_H_

@@ -12,22 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// D3D11Backend.cpp: contains the definition of symbols exported by D3D11Backend.h so that they
-// can be compiled twice: once export (shared library), once not exported (static library)
+#ifndef SRC_DAWN_NATIVE_D3D11_SAMPLERD3D11_H_
+#define SRC_DAWN_NATIVE_D3D11_SAMPLERD3D11_H_
 
-#include "dawn/native/D3D11Backend.h"
-
-#include <utility>
+#include "dawn/native/Sampler.h"
 
 #include "dawn/native/d3d/d3d_platform.h"
-#include "dawn/native/d3d11/DeviceD3D11.h"
-#include "dawn/native/d3d11/Forward.h"
 
 namespace dawn::native::d3d11 {
 
-AdapterDiscoveryOptions::AdapterDiscoveryOptions() : AdapterDiscoveryOptions(nullptr) {}
+class Device;
 
-AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
-    : d3d::AdapterDiscoveryOptions(WGPUBackendType_D3D11, std::move(adapter)) {}
+class Sampler final : public SamplerBase {
+  public:
+    static ResultOrError<Ref<Sampler>> Create(Device* device, const SamplerDescriptor* descriptor);
+
+    ID3D11SamplerState* GetD3D11SamplerState() const;
+
+  private:
+    using SamplerBase::SamplerBase;
+
+    ~Sampler() override = default;
+    MaybeError Initialize(const SamplerDescriptor* descriptor);
+
+    ComPtr<ID3D11SamplerState> mD3D11SamplerState;
+};
 
 }  // namespace dawn::native::d3d11
+
+#endif  // SRC_DAWN_NATIVE_D3D11_SAMPLERD3D11_H_
