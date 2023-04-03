@@ -69,13 +69,13 @@ class RenderPipelineBase : public PipelineBase {
 
     ObjectType GetType() const override;
 
-    const ityp::bitset<VertexAttributeLocation, kMaxVertexAttributes>& GetAttributeLocationsUsed()
+    const ::ityp::bitset<VertexAttributeLocation, kMaxVertexAttributes>& GetAttributeLocationsUsed()
         const;
     const VertexAttributeInfo& GetAttribute(VertexAttributeLocation location) const;
-    const ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>& GetVertexBufferSlotsUsed() const;
-    const ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>&
+    const ::ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>& GetVertexBufferSlotsUsed() const;
+    const ::ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>&
     GetVertexBufferSlotsUsedAsVertexBuffer() const;
-    const ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>&
+    const ::ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>&
     GetVertexBufferSlotsUsedAsInstanceBuffer() const;
     const VertexBufferInfo& GetVertexBuffer(VertexBufferSlot slot) const;
     uint32_t GetVertexBufferCount() const;
@@ -92,7 +92,7 @@ class RenderPipelineBase : public PipelineBase {
     float GetDepthBiasClamp() const;
     bool HasUnclippedDepth() const;
 
-    ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> GetColorAttachmentsMask() const;
+    ::ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> GetColorAttachmentsMask() const;
     bool HasDepthStencilAttachment() const;
     wgpu::TextureFormat GetColorAttachmentFormat(ColorAttachmentIndex attachment) const;
     wgpu::TextureFormat GetDepthStencilFormat() const;
@@ -120,17 +120,18 @@ class RenderPipelineBase : public PipelineBase {
 
     // Vertex state
     uint32_t mVertexBufferCount;
-    ityp::bitset<VertexAttributeLocation, kMaxVertexAttributes> mAttributeLocationsUsed;
-    ityp::array<VertexAttributeLocation, VertexAttributeInfo, kMaxVertexAttributes> mAttributeInfos;
-    ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsed;
-    ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsedAsVertexBuffer;
-    ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsedAsInstanceBuffer;
-    ityp::array<VertexBufferSlot, VertexBufferInfo, kMaxVertexBuffers> mVertexBufferInfos;
+    ::ityp::bitset<VertexAttributeLocation, kMaxVertexAttributes> mAttributeLocationsUsed;
+    ::ityp::array<VertexAttributeLocation, VertexAttributeInfo, kMaxVertexAttributes>
+        mAttributeInfos;
+    ::ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsed;
+    ::ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsedAsVertexBuffer;
+    ::ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsedAsInstanceBuffer;
+    ::ityp::array<VertexBufferSlot, VertexBufferInfo, kMaxVertexBuffers> mVertexBufferInfos;
 
     // Attachments
     Ref<AttachmentState> mAttachmentState;
-    ityp::array<ColorAttachmentIndex, ColorTargetState, kMaxColorAttachments> mTargets;
-    ityp::array<ColorAttachmentIndex, BlendState, kMaxColorAttachments> mTargetBlend;
+    ::ityp::array<ColorAttachmentIndex, ColorTargetState, kMaxColorAttachments> mTargets;
+    ::ityp::array<ColorAttachmentIndex, BlendState, kMaxColorAttachments> mTargetBlend;
 
     // Other state
     PrimitiveState mPrimitive;
