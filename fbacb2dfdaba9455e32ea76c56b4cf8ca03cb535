@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d979c6e4_05781e8a",
+        "filename": "generator/templates/dawn/native/ProcTable.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:06:53Z",
+      "side": 1,
+      "message": "Yeah the idea would be that Chromium\u0027s GPU process would always use the lock version of the procs. But maybe the perf difference wouldn\u0027t matter on the calls that have automatic locking since the majority of the calls is in command encoding. And in the future we\u0027d want to always have internal synchronization in Dawn so we\u0027d go back to a single proctable.\n\nEither way sounds good then, thanks!",
+      "parentUuid": "e50cc255_c72abda3",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad7148c4_81b2959a",
         "filename": "src/dawn/common/RefCounted.h",
         "patchSetId": 73
@@ -209,6 +227,24 @@
       "side": 1,
       "message": "I CC-ed you in the doc\u0027s comment thread about this.",
       "parentUuid": "3ae8ed5d_af63d915",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b77207d_ee9fdb64",
+        "filename": "src/dawn/wire/SupportedFeatures.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-03T16:06:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9b7287a1_df2cfbbc",
       "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
