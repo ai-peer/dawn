@@ -12,22 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// D3D11Backend.cpp: contains the definition of symbols exported by D3D11Backend.h so that they
-// can be compiled twice: once export (shared library), once not exported (static library)
+#include "dawn/native/d3d11/BindGroupD3D11.h"
 
-#include "dawn/native/D3D11Backend.h"
+#include <memory>
 
-#include <utility>
-
-#include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/native/Texture.h"
+#include "dawn/native/d3d11/BindGroupLayoutD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
-#include "dawn/native/d3d11/Forward.h"
 
 namespace dawn::native::d3d11 {
 
-AdapterDiscoveryOptions::AdapterDiscoveryOptions() : AdapterDiscoveryOptions(nullptr) {}
+// static
+Ref<BindGroup> BindGroup::Create(Device* device, const BindGroupDescriptor* descriptor) {
+    return ToBackend(descriptor->layout)->AllocateBindGroup(device, descriptor);
+}
 
-AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
-    : d3d::AdapterDiscoveryOptions(WGPUBackendType_D3D11, std::move(adapter)) {}
+BindGroup::BindGroup(Device* device, const BindGroupDescriptor* descriptor)
+    : BindGroupBase(this, device, descriptor) {}
+
+BindGroup::~BindGroup() = default;
+
+void BindGroup::DestroyImpl() {
+    BindGroupBase::DestroyImpl();
+    ToBackend(GetLayout())->DeallocateBindGroup(this);
+}
 
 }  // namespace dawn::native::d3d11

@@ -129,6 +129,10 @@ class Device final : public d3d::Device {
     void AppendDebugLayerMessages(ErrorData* error) override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
 
+    // d3d::Device implementation:
+    std::unique_ptr<d3d::ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
+        const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) override;
+
     ComPtr<ID3D11Fence> mFence;
     HANDLE mFenceHandle = nullptr;
     HANDLE mFenceEvent = nullptr;
