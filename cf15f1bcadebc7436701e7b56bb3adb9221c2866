@@ -246,6 +246,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efcc7e2a_35ecb014",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T16:46:48Z",
+      "side": 1,
+      "message": "I think sharing ID3D11Device means sharing device context. It will cause problem. I changed it to have separate d3d11 device for eache wgpu::Device.",
+      "parentUuid": "c373f25a_25359feb",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e15b8a5_e20949f6",
