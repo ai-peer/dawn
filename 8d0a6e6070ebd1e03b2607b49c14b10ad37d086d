@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab259148_9e69e355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-04T00:58:11Z",
+      "side": 1,
+      "message": "PTAL, this should fix android platform issue by not including unexpected files.",
+      "revId": "8d0a6e6070ebd1e03b2607b49c14b10ad37d086d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
