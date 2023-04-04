@@ -164,6 +164,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "feda9461_bebfe791",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 73
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T19:00:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04a7d879_1e3f4d7e",
+      "range": {
+        "startLine": 54,
+        "startChar": 45,
+        "endLine": 54,
+        "endChar": 51
+      },
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "605d6372_86a0c045",
@@ -248,6 +272,24 @@
       "side": 1,
       "message": "how about optional\u003catomic\u003cthread::id\u003e\u003e ?\n\nhttps://godbolt.org/z/vqGGeehfr",
       "parentUuid": "6874d785_6f812878",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c54e4ad_fb238bde",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T19:00:02Z",
+      "side": 1,
+      "message": "Using `optional` as outer most type of the owner id, the `IsLockedByCurrentThread()` method will no longer be thread safe without using a separate mutex to protect it. (any other suggestion to work around this?)\n\n```\nbool IsLockedByCurrentThread() {\n   std::lock_guard lg(mOwnerMutex);\n   return mOwner.value();\n}\n```\n\nAlso default constructed `optional` will not hold any value.",
+      "parentUuid": "658e8cdc_c17f2fec",
       "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
