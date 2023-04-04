@@ -22,6 +22,30 @@
       },
       "revId": "ff507d1a0b912b5dbd70988cb43788c5d024c54f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37efa95_af5e4e8a",
+        "filename": "src/dawn/tests/unittests/wire/WireDeviceLifetimeTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-04T22:12:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5b05dd6_e52e3e7c",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 59
+      },
+      "revId": "ff507d1a0b912b5dbd70988cb43788c5d024c54f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
