@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c62b3a4_70a6a3c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-04T23:52:39Z",
+      "side": 1,
+      "message": "Thanks for all the cleanup!!",
+      "revId": "1a80668d889c94fcd0fa3f67e5b9e379fd7c134e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e0c21e4_94df659f",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-04-04T22:44:55Z",
       "side": 1,
       "message": "why not make errors?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 60
+      },
+      "revId": "1a80668d889c94fcd0fa3f67e5b9e379fd7c134e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9841a526_dc63ca30",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-04T23:52:39Z",
+      "side": 1,
+      "message": "Hmm, I think we use `UNREACHABLE()`\u0027s in other error objects, i.e. Buffers, so I think it could be fine to leave as is.",
+      "parentUuid": "3e0c21e4_94df659f",
       "range": {
         "startLine": 34,
         "startChar": 4,
