@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f1a65f_3b3111ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T15:30:40Z",
+      "side": 1,
+      "message": "PTAL the whole stack! I removed the last uses for dawn_wsi in Chromium/Skia/google3 so we should be good to go!",
+      "revId": "d8ee8d76b90ad5f2596518170fce8aaf058c872f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
