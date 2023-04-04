@@ -21,7 +21,10 @@
 
 namespace dawn::native::d3d11 {
 
+class Device;
+
 D3D11_COMPARISON_FUNC ToD3D11ComparisonFunc(wgpu::CompareFunction func);
+void SetDebugName(Device* device, ID3D11DeviceChild* object, const char* prefix, std::string label);
 
 }  // namespace dawn::native::d3d11
 
