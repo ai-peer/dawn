@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd36b9d_21808271",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-04T01:30:14Z",
+      "side": 1,
+      "message": "Personally, I think a clear fix is to make DAWN_PLATFORM_IS(LINUX) is not true on Android platform.",
+      "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0550250a_83f13ca0",
@@ -37,6 +54,23 @@
         "endLine": 20,
         "endChar": 89
       },
+      "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a69520_b00c55ba",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-04T01:30:14Z",
+      "side": 1,
+      "message": "This is unnecessary but intend to keep the form to make it aligns with other condition statement.",
       "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
