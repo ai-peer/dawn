@@ -16,6 +16,24 @@
       "message": "Ah... IIRC, I think this will break the google3 rolls because of Earth :/",
       "revId": "dc8a1fc1e9aaa095eb0170fe10a5d17a4204f668",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f4a2eb8_a470d848",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-04T22:33:56Z",
+      "side": 1,
+      "message": "Corentin deleted it in cl/520284346 ;-)",
+      "parentUuid": "a8c75244_6975ffcb",
+      "revId": "dc8a1fc1e9aaa095eb0170fe10a5d17a4204f668",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
