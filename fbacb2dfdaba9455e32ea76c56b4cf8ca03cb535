@@ -404,6 +404,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89c00a46_5ecb12f2",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T20:59:44Z",
+      "side": 1,
+      "message": "No, I\u0027m on Mac. I think the issue is that mutex is not trivially destructible on clang https://stackoverflow.com/questions/49342421/is-stdmutex-trivially-destructible\n\nStoring mutex in the instance would work. But the users have to make sure they don\u0027t drop the instance before the device. Otherwise, it could happen that inside one object\u0027s `DeleteThis`, the device and instance are both deleted before the mutex is unlocked.\n\nFurthermore, that also requires we implement mock adapter \u0026 instance for a mock device (currently we set it to null). Given that too many unrelated works would be required, I think the ref counted mutex could be better. We only need to increment the ref to keep the mutex alive inside `DeleteThis`.",
+      "parentUuid": "7903982b_7e2d50e9",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e323306_a88d8332",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 73
