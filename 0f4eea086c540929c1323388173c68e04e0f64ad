@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9db2145_d8710f66",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T16:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "543e5d93_b2405711",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 41
+      },
+      "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66b6d5cf_02a40781",
@@ -106,6 +130,24 @@
       "side": 1,
       "message": "agree it would be better to introduce it in the next CL. It\u0027s also interesting that it\u0027s an enum. Why not make it a static constant?",
       "parentUuid": "e45dec71_18215f55",
+      "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21653fa8_fd1e9060",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T16:46:59Z",
+      "side": 1,
+      "message": "Changed them to const.\n\nYes. They will be used in next CL.",
+      "parentUuid": "2f916c7e_ceebb00e",
       "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
