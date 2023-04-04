@@ -32,6 +32,7 @@
 #include "dawn/native/d3d11/BackendD3D11.h"
 #include "dawn/native/d3d11/BindGroupD3D11.h"
 #include "dawn/native/d3d11/BindGroupLayoutD3D11.h"
+#include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/ComputePipelineD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
@@ -247,7 +248,7 @@ ResultOrError<Ref<BindGroupLayoutBase>> Device::CreateBindGroupLayoutImpl(
 }
 
 ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateBufferImpl");
+    return Buffer::Create(this, descriptor);
 }
 
 ResultOrError<Ref<CommandBufferBase>> Device::CreateCommandBuffer(
@@ -320,7 +321,10 @@ MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
                                                uint64_t size) {
-    return DAWN_UNIMPLEMENTED_ERROR("CopyFromStagingToBufferImpl");
+    CommandRecordingContext* commandContext;
+    DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
+    return ToBackend(destination)
+        ->CopyFromBuffer(commandContext, destinationOffset, size, ToBackend(source), sourceOffset);
 }
 
 MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
