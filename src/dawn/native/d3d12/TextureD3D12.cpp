@@ -218,16 +218,6 @@ ResultOrError<Ref<Texture>> Texture::CreateExternalImage(
     return std::move(dawnTexture);
 }
 
-// static
-ResultOrError<Ref<Texture>> Texture::Create(Device* device,
-                                            const TextureDescriptor* descriptor,
-                                            ComPtr<ID3D12Resource> d3d12Texture) {
-    Ref<Texture> dawnTexture =
-        AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
-    DAWN_TRY(dawnTexture->InitializeAsSwapChainTexture(std::move(d3d12Texture)));
-    return std::move(dawnTexture);
-}
-
 MaybeError Texture::InitializeAsExternalTexture(ComPtr<ID3D12Resource> d3d12Texture,
                                                 std::vector<Ref<Fence>> waitFences,
                                                 Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
@@ -318,19 +308,6 @@ MaybeError Texture::InitializeAsInternalTexture() {
         DAWN_TRY(
             ClearTexture(commandContext, GetAllSubresources(), TextureBase::ClearValue::NonZero));
     }
-
-    return {};
-}
-
-MaybeError Texture::InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture) {
-    AllocationInfo info;
-    info.mMethod = AllocationMethod::kExternal;
-    // When creating the ResourceHeapAllocation, the resource heap is set to nullptr because the
-    // texture is owned externally. The texture's owning entity must remain responsible for
-    // memory management.
-    mResourceAllocation = {info, 0, std::move(d3d12Texture), nullptr};
-
-    SetLabelHelper("Dawn_SwapChainTexture");
 
     return {};
 }
