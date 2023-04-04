@@ -545,10 +545,14 @@ void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* use
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
     // callback tasks to guarantee we are never going to use the previous callback after
     // this call.
+    mCallbackTaskManager->Flush();
     if (IsLost()) {
         return;
     }
+<<<<<<< HEAD   (de2484 [M112] More expectations for M112 branch builder)
     FlushCallbackTaskQueue();
+=======
+>>>>>>> CHANGE (95c26c Always flush device callbacks when the callbacks are changed)
     mLoggingCallback = callback;
     mLoggingUserdata = userdata;
 }
@@ -559,10 +563,14 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
     // callback tasks to guarantee we are never going to use the previous callback after
     // this call.
+    mCallbackTaskManager->Flush();
     if (IsLost()) {
         return;
     }
+<<<<<<< HEAD   (de2484 [M112] More expectations for M112 branch builder)
     FlushCallbackTaskQueue();
+=======
+>>>>>>> CHANGE (95c26c Always flush device callbacks when the callbacks are changed)
     mUncapturedErrorCallback = callback;
     mUncapturedErrorUserdata = userdata;
 }
@@ -573,10 +581,14 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
     // callback tasks to guarantee we are never going to use the previous callback after
     // this call.
+    mCallbackTaskManager->Flush();
     if (IsLost()) {
         return;
     }
+<<<<<<< HEAD   (de2484 [M112] More expectations for M112 branch builder)
     FlushCallbackTaskQueue();
+=======
+>>>>>>> CHANGE (95c26c Always flush device callbacks when the callbacks are changed)
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
 }
