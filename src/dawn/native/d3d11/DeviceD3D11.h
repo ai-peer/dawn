@@ -102,8 +102,6 @@ class Device final : public d3d::Device {
         const ShaderModuleDescriptor* descriptor,
         ShaderModuleParseResult* parseResult,
         OwnedCompilationMessages* compilationMessages) override;
-    ResultOrError<Ref<SwapChainBase>> CreateSwapChainImpl(
-        const SwapChainDescriptor* descriptor) override;
     ResultOrError<Ref<NewSwapChainBase>> CreateSwapChainImpl(
         Surface* surface,
         NewSwapChainBase* previousSwapChain,
