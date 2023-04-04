@@ -314,6 +314,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c048f21f_74b4ea05",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T20:09:58Z",
+      "side": 1,
+      "message": "Still got this error after using union. It seems the clang we are using is different from the one on that website.\n```\nerror: declaration requires a global destructor [-Werror,-Wglobal-constructors]\n```\n\nThis code is compiled fine on the website but failed using our compiler\nhttps://godbolt.org/z/T7zzbhTxG",
+      "parentUuid": "c22d2253_32cea513",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e323306_a88d8332",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 73
