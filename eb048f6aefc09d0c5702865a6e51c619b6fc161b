@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "911cf9d6_1fb3ae8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-04T01:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2056c68f_9f602d81",
+      "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9bd36b9d_21808271",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -76,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57414c4_34171c3d",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-04T01:57:15Z",
+      "side": 1,
+      "message": "Resolve the redundant by introducing LINUX_DESKTOP",
+      "parentUuid": "0550250a_83f13ca0",
+      "range": {
+        "startLine": 20,
+        "startChar": 60,
+        "endLine": 20,
+        "endChar": 89
+      },
+      "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38a69520_b00c55ba",
@@ -89,6 +131,24 @@
       "writtenOn": "2023-04-04T01:30:14Z",
       "side": 1,
       "message": "This is unnecessary but intend to keep the form to make it aligns with other condition statement.",
+      "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff18505d_b5b25ed3",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-04T01:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38a69520_b00c55ba",
       "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
