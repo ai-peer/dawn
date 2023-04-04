@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed6cf08_184630d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T17:03:10Z",
+      "side": 1,
+      "message": "Rafael, what level of D3D11 support is guaranteed on Windows 10?",
+      "revId": "8dc3148f2aa00acb4936ace5c1860302d9fadfe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
