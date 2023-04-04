@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2056c68f_9f602d81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-04T01:19:54Z",
+      "side": 1,
+      "message": "nit: this may need to be in the \"last paragraph\" in order to be picked up (i.e. remove the blank line after this)",
+      "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0550250a_83f13ca0",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-04T01:19:54Z",
+      "side": 1,
+      "message": "nit: This should be redundant, LINUX should be true on ChromeOS too. Though may still want to compile test this.\n\nSame in other places.",
+      "range": {
+        "startLine": 20,
+        "startChar": 60,
+        "endLine": 20,
+        "endChar": 89
+      },
+      "revId": "eb048f6aefc09d0c5702865a6e51c619b6fc161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
