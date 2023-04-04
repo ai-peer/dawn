@@ -34,6 +34,24 @@
       "parentUuid": "a8c75244_6975ffcb",
       "revId": "dc8a1fc1e9aaa095eb0170fe10a5d17a4204f668",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73c71542_b06fe6b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-04T22:35:37Z",
+      "side": 1,
+      "message": "Oh nice! I didn\u0027t know/see that CL! Ok then good to go.",
+      "parentUuid": "0f4a2eb8_a470d848",
+      "revId": "dc8a1fc1e9aaa095eb0170fe10a5d17a4204f668",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
