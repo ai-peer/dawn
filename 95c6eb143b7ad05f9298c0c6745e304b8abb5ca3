@@ -16,6 +16,74 @@
       "message": "Hi Corentin \u0026 Austin, PTAL. Thanks",
       "revId": "95c6eb143b7ad05f9298c0c6745e304b8abb5ca3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "413301c0_191e6098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:29:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "95c6eb143b7ad05f9298c0c6745e304b8abb5ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7284088e_89e592f1",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:29:34Z",
+      "side": 1,
+      "message": "Isn\u0027t this always going to be 50 for D3D11? Do we need to pass it?",
+      "revId": "95c6eb143b7ad05f9298c0c6745e304b8abb5ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "358e6418_21b8a719",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:29:34Z",
+      "side": 1,
+      "message": "I don\u0027t think D3D11 will ever have that 😞",
+      "revId": "95c6eb143b7ad05f9298c0c6745e304b8abb5ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9463afa1_27fff74c",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:29:34Z",
+      "side": 1,
+      "message": "Not that in the future this might be better handled through push constants, see go/wgsl-push-constants",
+      "revId": "95c6eb143b7ad05f9298c0c6745e304b8abb5ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
