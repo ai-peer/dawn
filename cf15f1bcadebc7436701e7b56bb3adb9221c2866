@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58a59d13_487fc120",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "I uses this style, so we can easily switch to using deferred device context which is similar to command list. Maybe we will have a toggle to use the deferred device context.",
+      "parentUuid": "0056942b_fb9d319b",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f0ee19a_ed57c628",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-04T14:15:54Z",
       "side": 1,
       "message": "Couldn\u0027t this be in an Initialize step done in Device::Initialize?",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "969c29c9_f7eea4b8",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "If we want to support deferred device context, we have to put those stuff here. so we can initialize different device context base on toggle.",
+      "parentUuid": "0f0ee19a_ed57c628",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05c17469_b6fa271d",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "I am not sure. But we need it for fence for implementing done callback for submitted work and external textures.\n\nBTW, ID3D11DeviceContext4 is defined in d3d11_3.h, and ID3D11Device5 is defined in  d3d11_4.h. If ID3D11Device5 is available, ID3D11DeviceContext4  must be available, so maybe we just need to check ID3D11Device5 during discover adapter or adapter initialization.",
+      "parentUuid": "88785532_c1229600",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2431d7bb_84be434e",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
@@ -65,6 +119,24 @@
       "writtenOn": "2023-04-04T14:15:54Z",
       "side": 1,
       "message": "Why do we assert this? It\u0027s basically what is written above.",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a696f47_57ba8437",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2431d7bb_84be434e",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e43543_81e835f9",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "776c4be9_cd5d77f8",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce54f80f_c454b98b",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-04-04T14:15:54Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bede76e_0da1d6d7",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce54f80f_c454b98b",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c373f25a_25359feb",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "I saw D3D12 reuses ID3D12Device, so I just copied it. Does webgpu clients share adapters?",
+      "parentUuid": "0fdea96e_eca386b7",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e15b8a5_e20949f6",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 6
@@ -133,6 +259,30 @@
       "writtenOn": "2023-04-04T14:15:54Z",
       "side": 1,
       "message": "Do we have documentation on which Windows OSes or which devices the various D3D11Device interfaces are available on? We could ask Rafael for this data if needed.",
+      "range": {
+        "startLine": 100,
+        "startChar": 37,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5dc3597_196f3462",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "https://learn.microsoft.com/en-us/windows/win32/api/d3d11_4/nn-d3d11_4-id3d11device5\n\nNote  This interface, introduced in the Windows 10 Creators Update, is the latest version of the ID3D11Device interface. Applications targetting Windows 10 Creators Update should use this interface instead of earlier versions.\n\nLooks like Since chrome 110, we only support Windows 10 or later.\n\nhttps://blogs.windows.com/windowsexperience/2017/04/11/whats-new-in-the-windows-10-creators-update/\nLooks like the Windows 10 Creators Update was released before April 11, 2017.",
+      "parentUuid": "1e15b8a5_e20949f6",
       "range": {
         "startLine": 100,
         "startChar": 37,
@@ -166,6 +316,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faab7c17_f371f8ff",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "751f6f5d_8ed8e18e",
+      "range": {
+        "startLine": 222,
+        "startChar": 37,
+        "endLine": 222,
+        "endChar": 38
+      },
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0516219b_5f112927",
@@ -179,6 +353,24 @@
       "writtenOn": "2023-04-04T14:15:54Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a41630c_32c5bbc9",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "This method is an implementation for a virtual method in base class.",
+      "parentUuid": "0516219b_5f112927",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -200,6 +392,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9692b47e_80b73d0d",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "No. Removed",
+      "parentUuid": "a7155f21_682b4e06",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e3a153f_9de64d16",
@@ -213,6 +423,24 @@
       "writtenOn": "2023-04-04T14:15:54Z",
       "side": 1,
       "message": "nit: Use UNIMPLEMENTED() or similar instead of commented out code? Ditto in SetLabelImpl and ShouldDuplicateParametersForDrawIndirect",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d5fd22e_3f371b3a",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-04T15:00:55Z",
+      "side": 1,
+      "message": "Seems UNIMPLEMENTED() cannot be used here. It is defined in dawn/node. Remove those comment out code.",
+      "parentUuid": "4e3a153f_9de64d16",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
