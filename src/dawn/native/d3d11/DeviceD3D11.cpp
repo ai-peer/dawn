@@ -30,6 +30,8 @@
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/AdapterD3D11.h"
 #include "dawn/native/d3d11/BackendD3D11.h"
+#include "dawn/native/d3d11/BindGroupLayoutD3D11.h"
+#include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
 #include "dawn/native/d3d11/SamplerD3D11.h"
@@ -225,7 +227,7 @@ ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(
 ResultOrError<Ref<BindGroupLayoutBase>> Device::CreateBindGroupLayoutImpl(
     const BindGroupLayoutDescriptor* descriptor,
     PipelineCompatibilityToken pipelineCompatibilityToken) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateBindGroupLayoutImpl");
+    return BindGroupLayout::Create(this, descriptor, pipelineCompatibilityToken);
 }
 
 ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
@@ -245,7 +247,7 @@ Ref<ComputePipelineBase> Device::CreateUninitializedComputePipelineImpl(
 
 ResultOrError<Ref<PipelineLayoutBase>> Device::CreatePipelineLayoutImpl(
     const PipelineLayoutDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreatePipelineLayoutImpl");
+    return PipelineLayout::Create(this, descriptor);
 }
 
 ResultOrError<Ref<QuerySetBase>> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
