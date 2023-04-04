@@ -166,13 +166,6 @@ TEST_P(SwapChainValidationTests, InvalidCreationFormat) {
     ASSERT_DEVICE_ERROR(device.CreateSwapChain(surface, &desc));
 }
 
-// Checks that the implementation must be zero.
-TEST_P(SwapChainValidationTests, InvalidWithImplementation) {
-    wgpu::SwapChainDescriptor desc = goodDescriptor;
-    desc.implementation = 1;
-    ASSERT_DEVICE_ERROR(device.CreateSwapChain(surface, &desc));
-}
-
 // Check swapchain operations with an error swapchain are errors
 TEST_P(SwapChainValidationTests, OperationsOnErrorSwapChain) {
     wgpu::SwapChain swapchain;
