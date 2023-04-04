@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c641ed4c_7390589b",
+        "filename": "dawn.json",
+        "patchSetId": 73
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T09:07:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ec43951_97833436",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb820c51_4a8f142f",
@@ -105,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b48c9a6_c34a37ff",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 73
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T09:07:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad7148c4_81b2959a",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04a7d879_1e3f4d7e",
@@ -145,6 +181,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e096ea2_4b83e5bb",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T09:07:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "605d6372_86a0c045",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fc0902a_39e0f393",
@@ -158,6 +212,24 @@
       "writtenOn": "2023-04-03T13:11:03Z",
       "side": 1,
       "message": "It should be possible to have a constexpr constructor for Mutex such that just declaring `static Mutex gMutex` would work I believe.",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6874d785_6f812878",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T09:07:04Z",
+      "side": 1,
+      "message": "I tried. This `constexpr` ctor trick doesn\u0027t seem to work. Using `std::atomic\u003cstd::optional\u003cstd::thread::id\u003e\u003e` doesn\u0027t work either.",
+      "parentUuid": "2fc0902a_39e0f393",
       "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -179,6 +251,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75bcd21b_a383a0d7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T09:07:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e323306_a88d8332",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36f1819f_5db791a0",
@@ -192,6 +282,24 @@
       "writtenOn": "2023-04-03T13:11:03Z",
       "side": 1,
       "message": "nit: the optional here is going to be bigger than just the AutoLock that\u0027s a pointer to the Mutex. If we made the Autolock contain a nullable pointer and added an if Mutex !\u003d null then the generated code would likely be better.",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e7400a_b0821a22",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 73
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T09:07:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36f1819f_5db791a0",
       "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
