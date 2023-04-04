@@ -16,6 +16,46 @@
       "message": "A chromium side android bots try result here https://chromium-review.googlesource.com/c/chromium/src/+/4394299",
       "revId": "fda3a42c515f38c2c7a29572c7e6c92389ea416d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e939ee5c_ae9a1dcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T06:48:37Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "fda3a42c515f38c2c7a29572c7e6c92389ea416d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7a9cb3_f3119262",
+        "filename": "src/dawn/common/Platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T06:48:37Z",
+      "side": 1,
+      "message": "nit: I think this could be\n\n```\n#if defined(__ANDROID__)\n#define DAWN_PLATFORM_IS_ANDROID 1\n#elif defined(DAWN_OS_CHROMEOS)\n#define DAWN_PLATFORM_IS_CHROMEOS 1\n#else\n#define DAWN_PLATFORM_IS_LINUX_DESKTOP 1\n#endif\n```",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 6
+      },
+      "revId": "fda3a42c515f38c2c7a29572c7e6c92389ea416d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
