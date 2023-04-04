@@ -350,6 +350,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a87147c_7d7fc718",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-04T20:39:29Z",
+      "side": 1,
+      "message": "My question is are we OK with leaky static mutex inside in `GetGlobalDeviceMutex()` function? There is a possibility `libfuzzer` would report a memory leak here.\n\nOr alternative, maybe we could go back to the ref counted mutex approach.",
+      "parentUuid": "806aef66_8cdfe203",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e323306_a88d8332",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 73
