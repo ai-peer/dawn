@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "658e8cdc_c17f2fec",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-04T15:54:58Z",
+      "side": 1,
+      "message": "how about optional\u003catomic\u003cthread::id\u003e\u003e ?\n\nhttps://godbolt.org/z/vqGGeehfr",
+      "parentUuid": "6874d785_6f812878",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e323306_a88d8332",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 73
