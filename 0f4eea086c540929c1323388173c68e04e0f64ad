@@ -16,6 +16,80 @@
       "message": "Hi Corentin \u0026 Austin, PTAL. Thanks",
       "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "275e69e4_eaf94ecb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:20:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "543e5d93_b2405711",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:20:00Z",
+      "side": 1,
+      "message": "nit: Maybe this could use the D3D11 names which would be UAV/SRV/CBV etc?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 41
+      },
+      "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b6d5cf_02a40781",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:20:00Z",
+      "side": 1,
+      "message": "Can we have a comment describing the D3D11 binding model briefly and how the WebGPU binding model is mapped to the D3D11 binding model?",
+      "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45dec71_18215f55",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T14:20:00Z",
+      "side": 1,
+      "message": "nit: unused for now, but do we need it in the future?",
+      "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
