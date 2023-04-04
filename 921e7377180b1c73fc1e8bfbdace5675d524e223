@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b1c84d_9d4641ad",
+        "filename": "include/dawn/native/NullBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-04T22:35:13Z",
+      "side": 1,
+      "message": "I was hoping these CLs would be 100% deletions but nope; you\u0027ve added three lines here",
+      "revId": "921e7377180b1c73fc1e8bfbdace5675d524e223",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
