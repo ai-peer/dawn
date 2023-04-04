@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e422ac18_a4d3ca08",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T17:02:47Z",
+      "side": 1,
+      "message": "That makes sense, but then couldn\u0027t we directly start using DeferredContext?",
+      "parentUuid": "969c29c9_f7eea4b8",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88785532_c1229600",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I am not sure. But we need it for fence for implementing done callback for submitted work and external textures.\n\nBTW, ID3D11DeviceContext4 is defined in d3d11_3.h, and ID3D11Device5 is defined in  d3d11_4.h. If ID3D11Device5 is available, ID3D11DeviceContext4  must be available, so maybe we just need to check ID3D11Device5 during discover adapter or adapter initialization.",
       "parentUuid": "88785532_c1229600",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f6b226_630233c2",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T17:02:47Z",
+      "side": 1,
+      "message": "Rafael, do you have info on what we can expect to always be present in Windows 10?",
+      "parentUuid": "05c17469_b6fa271d",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -389,6 +425,24 @@
       "side": 1,
       "message": "This method is an implementation for a virtual method in base class.",
       "parentUuid": "0516219b_5f112927",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adee15d2_4978d702",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-04T17:02:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a41630c_32c5bbc9",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
