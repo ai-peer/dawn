@@ -296,6 +296,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c22d2253_32cea513",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-04T19:30:49Z",
+      "side": 1,
+      "message": "this is my last idea :-/ \nhttps://godbolt.org/z/zE88rjxMb\n\nreally under the hood it\u0027s probably just adding yet another mutex.",
+      "parentUuid": "8c54e4ad_fb238bde",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e323306_a88d8332",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 73
