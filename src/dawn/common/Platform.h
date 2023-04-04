@@ -55,6 +55,9 @@
 #if defined(DAWN_OS_CHROMEOS)
 #define DAWN_PLATFORM_IS_CHROMEOS 1
 #endif
+#if !defined(DAWN_PLATFORM_IS_CHROMEOS) && !defined(DAWN_PLATFORM_IS_ANDROID)
+#define DAWN_PLATFORM_IS_LINUX_DESKTOP 1
+#endif
 
 #elif defined(__APPLE__)
 #define DAWN_PLATFORM_IS_APPLE 1
@@ -196,6 +199,9 @@ static_assert(sizeof(sizeof(char)) == 4, "Expect sizeof(size_t) == 4");
 #endif
 #if !defined(DAWN_PLATFORM_IS_CHROMEOS)
 #define DAWN_PLATFORM_IS_CHROMEOS 0
+#endif
+#if !defined(DAWN_PLATFORM_IS_LINUX_DESKTOP)
+#define DAWN_PLATFORM_IS_LINUX_DESKTOP 0
 #endif
 
 #if !defined(DAWN_PLATFORM_IS_APPLE)
