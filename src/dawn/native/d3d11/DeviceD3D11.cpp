@@ -32,6 +32,7 @@
 #include "dawn/native/d3d11/BackendD3D11.h"
 #include "dawn/native/d3d11/BindGroupD3D11.h"
 #include "dawn/native/d3d11/BindGroupLayoutD3D11.h"
+#include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
@@ -243,7 +244,7 @@ ResultOrError<Ref<BindGroupLayoutBase>> Device::CreateBindGroupLayoutImpl(
 }
 
 ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateBufferImpl");
+    return Buffer::Create(this, descriptor);
 }
 
 ResultOrError<Ref<CommandBufferBase>> Device::CreateCommandBuffer(
@@ -280,11 +281,6 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     ShaderModuleParseResult* parseResult,
     OwnedCompilationMessages* compilationMessages) {
     return ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
-}
-
-ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
-    const SwapChainDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateSwapChainImpl");
 }
 
 ResultOrError<Ref<NewSwapChainBase>> Device::CreateSwapChainImpl(
