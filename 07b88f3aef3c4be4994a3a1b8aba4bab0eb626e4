@@ -22,6 +22,30 @@
       },
       "revId": "07b88f3aef3c4be4994a3a1b8aba4bab0eb626e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ef93724_d348f661",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-04T00:39:02Z",
+      "side": 1,
+      "message": "Sry for the break change. I think the problem is that DAWN_PLATFORM_IS_LINUX covers DAWN_PLATFORM_IS_ANDROID. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Platform.h;drc\u003d86fbd1a7de5a7925b21803c604533dbad0072285;l\u003d53\n\nI\u0027ll update the #if- #else in MemoryService to make the inclusion clear.",
+      "parentUuid": "598dc8fa_c9401b96",
+      "range": {
+        "startLine": 720,
+        "startChar": 8,
+        "endLine": 720,
+        "endChar": 12
+      },
+      "revId": "07b88f3aef3c4be4994a3a1b8aba4bab0eb626e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
