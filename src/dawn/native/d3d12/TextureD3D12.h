@@ -51,9 +51,6 @@ class Texture final : public TextureBase {
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
         bool isSwapChainTexture,
         bool isInitialized);
-    static ResultOrError<Ref<Texture>> Create(Device* device,
-                                              const TextureDescriptor* descriptor,
-                                              ComPtr<ID3D12Resource> d3d12Texture);
 
     // For external textures, returns the Device internal fence's value associated with the last
     // ExecuteCommandLists that used this texture. If nullopt is returned, the texture wasn't used
@@ -110,7 +107,6 @@ class Texture final : public TextureBase {
                                            std::vector<Ref<Fence>> waitFences,
                                            Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
                                            bool isSwapChainTexture);
-    MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
 
     void SetLabelHelper(const char* prefix);
 
