@@ -91,42 +91,6 @@ struct DeviceBase::DeprecationWarnings {
     size_t count = 0;
 };
 
-namespace {
-struct LoggingCallbackTask : CallbackTask {
-  public:
-    LoggingCallbackTask() = delete;
-    LoggingCallbackTask(wgpu::LoggingCallback loggingCallback,
-                        WGPULoggingType loggingType,
-                        const char* message,
-                        void* userdata)
-        : mCallback(loggingCallback),
-          mLoggingType(loggingType),
-          mMessage(message),
-          mUserdata(userdata) {
-        // Since the FinishImpl() will be called in uncertain future in which time the message
-        // may already disposed, we must keep a local copy in the CallbackTask.
-    }
-
-  private:
-    void FinishImpl() override { mCallback(mLoggingType, mMessage.c_str(), mUserdata); }
-
-    void HandleShutDownImpl() override {
-        // Do the logging anyway
-        mCallback(mLoggingType, mMessage.c_str(), mUserdata);
-    }
-
-    void HandleDeviceLossImpl() override { mCallback(mLoggingType, mMessage.c_str(), mUserdata); }
-
-    // As all deferred callback tasks will be triggered before modifying the registered
-    // callback or shutting down, we are ensured that callback function and userdata pointer
-    // stored in tasks is valid when triggered.
-    wgpu::LoggingCallback mCallback;
-    WGPULoggingType mLoggingType;
-    std::string mMessage;
-    void* mUserdata;
-};
-}  // anonymous namespace
-
 ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(
     DeviceBase* device,
     const ComputePipelineDescriptor& descriptor,
@@ -396,10 +360,14 @@ void DeviceBase::Destroy() {
     if (mState != State::BeingCreated) {
         // The device is being destroyed so it will be lost, call the application callback.
         if (mDeviceLostCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask(
-                std::bind(mDeviceLostCallback, WGPUDeviceLostReason_Destroyed,
-                          "Device was destroyed.", mDeviceLostUserdata));
-            mDeviceLostCallback = nullptr;
+            mCallbackTaskManager->AddCallbackTask([deviceRef = Ref<DeviceBase>(this)] {
+                if (deviceRef->mDeviceLostCallback != nullptr) {
+                    deviceRef->mDeviceLostCallback(WGPUDeviceLostReason_Destroyed,
+                                                   "Device was destroyed.",
+                                                   deviceRef->mDeviceLostUserdata);
+                    deviceRef->mDeviceLostCallback = nullptr;
+                }
+            });
         }
 
         // Call all the callbacks immediately as the device is about to shut down.
@@ -527,11 +495,14 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         // Note: we don't invoke the callbacks directly here because it could cause re-entrances ->
         // possible deadlock.
         if (mDeviceLostCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mDeviceLostCallback, lost_reason,
-                                                   messageStr, userdata = mDeviceLostUserdata] {
-                callback(lost_reason, messageStr.c_str(), userdata);
-            });
-            mDeviceLostCallback = nullptr;
+            mCallbackTaskManager->AddCallbackTask(
+                [deviceRef = Ref<DeviceBase>(this), lost_reason, messageStr] {
+                    if (deviceRef->mDeviceLostCallback != nullptr) {
+                        deviceRef->mDeviceLostCallback(lost_reason, messageStr.c_str(),
+                                                       deviceRef->mDeviceLostUserdata);
+                        deviceRef->mDeviceLostCallback = nullptr;
+                    }
+                });
         }
 
         mQueue->HandleDeviceLoss();
@@ -547,13 +518,15 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         // if it isn't handled. DeviceLost is not handled here because it should be
         // handled by the lost callback.
         bool captured = mErrorScopeStack->HandleError(ToWGPUErrorType(type), messageStr.c_str());
-        if (!captured && mUncapturedErrorCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mUncapturedErrorCallback, type,
-                                                   messageStr,
-                                                   userdata = mUncapturedErrorUserdata] {
-                callback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)), messageStr.c_str(),
-                         userdata);
-            });
+        if (!captured) {
+            mCallbackTaskManager->AddCallbackTask(
+                [deviceRef = Ref<DeviceBase>(this), type, messageStr = std::move(messageStr)] {
+                    if (deviceRef->mUncapturedErrorCallback != nullptr) {
+                        deviceRef->mUncapturedErrorCallback(
+                            static_cast<WGPUErrorType>(ToWGPUErrorType(type)), messageStr.c_str(),
+                            deviceRef->mUncapturedErrorUserdata);
+                    }
+                });
         }
     }
 }
@@ -565,43 +538,16 @@ void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error,
 }
 
 void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
-    // The registered callback function and userdata pointer are stored and used by deferred
-    // callback tasks, and after setting a different callback (especially in the case of
-    // resetting) the resources pointed by such pointer may be freed. Flush all deferred
-    // callback tasks to guarantee we are never going to use the previous callback after
-    // this call.
-    if (IsLost()) {
-        return;
-    }
-    mCallbackTaskManager->Flush();
     mLoggingCallback = callback;
     mLoggingUserdata = userdata;
 }
 
 void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
-    // The registered callback function and userdata pointer are stored and used by deferred
-    // callback tasks, and after setting a different callback (especially in the case of
-    // resetting) the resources pointed by such pointer may be freed. Flush all deferred
-    // callback tasks to guarantee we are never going to use the previous callback after
-    // this call.
-    if (IsLost()) {
-        return;
-    }
-    mCallbackTaskManager->Flush();
     mUncapturedErrorCallback = callback;
     mUncapturedErrorUserdata = userdata;
 }
 
 void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
-    // The registered callback function and userdata pointer are stored and used by deferred
-    // callback tasks, and after setting a different callback (especially in the case of
-    // resetting) the resources pointed by such pointer may be freed. Flush all deferred
-    // callback tasks to guarantee we are never going to use the previous callback after
-    // this call.
-    if (IsLost()) {
-        return;
-    }
-    mCallbackTaskManager->Flush();
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
 }
@@ -1392,17 +1338,17 @@ void DeviceBase::EmitDeprecationWarning(const std::string& message) {
     }
 }
 
-void DeviceBase::EmitLog(const char* message) {
-    this->EmitLog(WGPULoggingType_Info, message);
+void DeviceBase::EmitLog(std::string message) {
+    this->EmitLog(WGPULoggingType_Info, std::move(message));
 }
 
-void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
-    if (mLoggingCallback != nullptr) {
-        // Use the thread-safe CallbackTaskManager routine
-        std::unique_ptr<LoggingCallbackTask> callbackTask = std::make_unique<LoggingCallbackTask>(
-            mLoggingCallback, loggingType, message, mLoggingUserdata);
-        mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
-    }
+void DeviceBase::EmitLog(WGPULoggingType loggingType, std::string message) {
+    mCallbackTaskManager->AddCallbackTask([deviceRef = Ref<DeviceBase>(this), loggingType,
+                                           message = std::move(message)] {
+        if (deviceRef->mLoggingCallback != nullptr) {
+            deviceRef->mLoggingCallback(loggingType, message.c_str(), deviceRef->mLoggingUserdata);
+        }
+    });
 }
 
 bool DeviceBase::APIGetLimits(SupportedLimits* limits) const {

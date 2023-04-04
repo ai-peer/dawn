@@ -306,7 +306,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     if (device->IsToggleEnabled(Toggle::DumpShaders)) {
         std::ostringstream dumpedMsg;
         dumpedMsg << "/* Dumped generated MSL */" << std::endl << mslCompilation->msl;
-        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str());
     }
 
     return mslCompilation;

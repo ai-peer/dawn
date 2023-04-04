@@ -985,7 +985,7 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
     if (device->IsToggleEnabled(Toggle::DumpShaders)) {
         std::ostringstream dumpedMsg;
         dumpedMsg << "// Dumped WGSL:" << std::endl << wgslDesc->source;
-        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str());
     }
 
     tint::Program program;
@@ -1197,7 +1197,7 @@ void ShaderModuleBase::InjectCompilationMessages(
         }
         t << *pMessage;
     }
-    this->GetDevice()->EmitLog(WGPULoggingType_Warning, t.str().c_str());
+    this->GetDevice()->EmitLog(WGPULoggingType_Warning, t.str());
 }
 
 OwnedCompilationMessages* ShaderModuleBase::GetCompilationMessages() const {

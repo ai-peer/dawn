@@ -50,7 +50,7 @@ MaybeError ValidateSpirv(DeviceBase* device,
 
         std::ostringstream ss;
         ss << "SPIRV line " << position.index << ": " << message << std::endl;
-        device->EmitLog(wgpuLogLevel, ss.str().c_str());
+        device->EmitLog(wgpuLogLevel, ss.str());
     });
 
     const bool valid = spirvTools.Validate(spirv, wordCount);
@@ -64,7 +64,7 @@ MaybeError ValidateSpirv(DeviceBase* device,
         } else {
             dumpedMsg << "/* Failed to disassemble generated SPIRV */";
         }
-        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str());
     }
 
     DAWN_INVALID_IF(!valid, "Produced invalid SPIRV. Please file a bug at https://crbug.com/tint.");

@@ -380,7 +380,7 @@ void DumpCompiledShader(Device* device,
                                           disassembly->GetBufferSize());
         }
     }
-    device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+    device->EmitLog(WGPULoggingType_Info, dumpedMsg.str());
 }
 
 }  // namespace dawn::native::d3d

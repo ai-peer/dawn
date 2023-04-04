@@ -358,8 +358,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     void IncrementLazyClearCountForTesting();
     size_t GetDeprecationWarningCountForTesting();
     void EmitDeprecationWarning(const std::string& warning);
-    void EmitLog(const char* message);
-    void EmitLog(WGPULoggingType loggingType, const char* message);
+    void EmitLog(std::string message);
+    void EmitLog(WGPULoggingType loggingType, std::string message);
     void APIForceLoss(wgpu::DeviceLostReason reason, const char* message);
     QueueBase* GetQueue() const;
 

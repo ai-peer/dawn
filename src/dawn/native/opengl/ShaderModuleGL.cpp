@@ -275,7 +275,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
         std::ostringstream dumpedMsg;
         dumpedMsg << "/* Dumped generated GLSL */" << std::endl << compilationResult->glsl;
 
-        GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str());
     }
 
     GLuint shader = gl.CreateShader(GLShaderType(stage));
