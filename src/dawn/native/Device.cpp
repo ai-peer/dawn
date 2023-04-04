@@ -549,10 +549,10 @@ void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* use
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
     // callback tasks to guarantee we are never going to use the previous callback after
     // this call.
+    FlushCallbackTaskQueue();
     if (IsLost()) {
         return;
     }
-    FlushCallbackTaskQueue();
     mLoggingCallback = callback;
     mLoggingUserdata = userdata;
 }
@@ -563,10 +563,10 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
     // callback tasks to guarantee we are never going to use the previous callback after
     // this call.
+    FlushCallbackTaskQueue();
     if (IsLost()) {
         return;
     }
-    FlushCallbackTaskQueue();
     mUncapturedErrorCallback = callback;
     mUncapturedErrorUserdata = userdata;
 }
@@ -577,10 +577,10 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
     // callback tasks to guarantee we are never going to use the previous callback after
     // this call.
+    FlushCallbackTaskQueue();
     if (IsLost()) {
         return;
     }
-    FlushCallbackTaskQueue();
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
 }
