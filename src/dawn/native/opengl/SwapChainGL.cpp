@@ -18,8 +18,6 @@
 #include "dawn/native/opengl/Forward.h"
 #include "dawn/native/opengl/TextureGL.h"
 
-#include "dawn/dawn_wsi.h"
-
 namespace dawn::native::opengl {
 
 SwapChain::SwapChain(Device* device, const SwapChainDescriptor* descriptor)
