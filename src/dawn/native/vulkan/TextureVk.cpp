@@ -645,15 +645,6 @@ ResultOrError<Texture*> Texture::CreateFromExternal(
     return texture.Detach();
 }
 
-// static
-Ref<Texture> Texture::CreateForSwapChain(Device* device,
-                                         const TextureDescriptor* descriptor,
-                                         VkImage nativeImage) {
-    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
-    texture->InitializeForSwapChain(nativeImage);
-    return texture;
-}
-
 Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureState state)
     : TextureBase(device, descriptor, state),
       mCombinedAspect(ComputeCombinedAspect(device, GetFormat())),
@@ -838,11 +829,6 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
     SetLabelHelper("Dawn_ExternalTexture");
 
     return {};
-}
-
-void Texture::InitializeForSwapChain(VkImage nativeImage) {
-    mHandle = nativeImage;
-    SetLabelHelper("Dawn_SwapChainTexture");
 }
 
 MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descriptor,

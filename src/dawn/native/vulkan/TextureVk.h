@@ -59,11 +59,6 @@ class Texture final : public TextureBase {
         const TextureDescriptor* textureDescriptor,
         external_memory::Service* externalMemoryService);
 
-    // Creates a texture that wraps a swapchain-allocated VkImage.
-    static Ref<Texture> CreateForSwapChain(Device* device,
-                                           const TextureDescriptor* descriptor,
-                                           VkImage nativeImage);
-
     VkImage GetHandle() const;
     // Returns the aspects used for tracking of Vulkan state. These can be the combined aspects.
     Aspect GetDisjointVulkanAspects() const;
@@ -113,7 +108,6 @@ class Texture final : public TextureBase {
     MaybeError InitializeAsInternalTexture(VkImageUsageFlags extraUsages);
     MaybeError InitializeFromExternal(const ExternalImageDescriptorVk* descriptor,
                                       external_memory::Service* externalMemoryService);
-    void InitializeForSwapChain(VkImage nativeImage);
 
     void DestroyImpl() override;
     MaybeError ClearTexture(CommandRecordingContext* recordingContext,
