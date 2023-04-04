@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c75244_6975ffcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-04T18:55:43Z",
+      "side": 1,
+      "message": "Ah... IIRC, I think this will break the google3 rolls because of Earth :/",
+      "revId": "dc8a1fc1e9aaa095eb0170fe10a5d17a4204f668",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
