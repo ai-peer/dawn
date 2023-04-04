@@ -368,6 +368,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1b27ebf_91f690bd",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 73
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-04T20:48:52Z",
+      "side": 1,
+      "message": "are you perhaps on Windows with MSVC? I found this comment:\nhttps://chromium.googlesource.com/chromium/src/third_party/+/refs/heads/main/protobuf/src/google/protobuf/stubs/mutex.h#97\n\nI don\u0027t think we want to use too many hacks to makes constexpr mutex work since this is a temporary solution anyway.\nIt\u0027s unfortunate we can\u0027t have the global static one.\n\nAnother alternative is to store the mutex on the instance. Then, the device needs to grab it from the instance instead. Would that work?",
+      "parentUuid": "1a87147c_7d7fc718",
+      "revId": "fbacb2dfdaba9455e32ea76c56b4cf8ca03cb535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e323306_a88d8332",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 73
