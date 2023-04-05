@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e624429_d8d4d6cf",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 47
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "can we use our own Mutex and Autolock?\n\nThat way when we add Clang thread safety analysis to them, we\u0027ll get the value in the test harness as well.",
+      "range": {
+        "startLine": 657,
+        "startChar": 0,
+        "endLine": 657,
+        "endChar": 22
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d837c0f3_080b9132",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "return a reference instead of a value?",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 5
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2a0f89_f60d7a96",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "what about dropping the last ref to the device inside a callback?",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 54
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14e464ab_6b1f0c73",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "is the randomly choosing which thread drops the last ref for this test / does it test something novel in the implementation? I\u0027m wondering whether it would be better to have something that is more deterministic. If the test starts failing due to a regression, it would be better to have it be consistent rather than flaky",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 67
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63e28a23_213823b8",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "what is the error scope for?",
+      "range": {
+        "startLine": 153,
+        "startChar": 12,
+        "endLine": 163,
+        "endChar": 12
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "459fea14_ca72259c",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "same question - must this be guarded? Each thread writes a separate index. Then the pipelines are all verified after the threads join",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 54
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc60718_16b31a29",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "can we use `utils::RequiredBytesInCopy` ?",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 432,
+        "endChar": 5
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17578833_243298d3",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "I don\u0027t think this case is ever used? we can instead use EXPECT_TEXTURE_EQ directly in the tests",
+      "range": {
+        "startLine": 512,
+        "startChar": 20,
+        "endLine": 515,
+        "endChar": 30
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba6273ba_c4a4b1ed",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "we have UNREACHABLE() macro",
+      "range": {
+        "startLine": 517,
+        "startChar": 24,
+        "endLine": 518,
+        "endChar": 32
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "780f2eac_cabb13bd",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "can we hoist CreateBuffer out? then we don\u0027t need to have GuardedBuffer",
+      "range": {
+        "startLine": 615,
+        "startChar": 8,
+        "endLine": 617,
+        "endChar": 69
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed0516f9_67274bea",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "Why must these be GuardedTexture?\n\nSeems like it would be sufficient to break `CreateAndWriteTexture` in half so you only race writeTexture and copyTextureToTexture",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 786,
+        "endChar": 30
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19928eb5_654f9358",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T21:10:35Z",
+      "side": 1,
+      "message": "why this versus push/pop error scope?\n\nOverwriting the uncaptured error callback will change the test fixture\u0027s default error callback - which checks that no errors happen.",
+      "range": {
+        "startLine": 880,
+        "startChar": 0,
+        "endLine": 888,
+        "endChar": 26
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
