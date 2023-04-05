@@ -16,6 +16,23 @@
       "message": "PTAL! For after the Chromium CL lands",
       "revId": "df9609523254fa95559432f76fed26ff67c58d15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6340e63_b2ccf494",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-05T10:10:31Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "df9609523254fa95559432f76fed26ff67c58d15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
