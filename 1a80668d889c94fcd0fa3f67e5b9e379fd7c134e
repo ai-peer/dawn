@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b297991_feddc6ea",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-05T11:06:23Z",
+      "side": 1,
+      "message": "This should never be hit because frontend validation would run and early out before these calls.",
+      "parentUuid": "9841a526_dc63ca30",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 60
+      },
+      "revId": "1a80668d889c94fcd0fa3f67e5b9e379fd7c134e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adbd25e1_626ab8f6",
@@ -95,6 +119,30 @@
       "writtenOn": "2023-04-04T22:44:55Z",
       "side": 1,
       "message": "add some to WindowSurfaceTests.cpp?",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 30
+      },
+      "revId": "1a80668d889c94fcd0fa3f67e5b9e379fd7c134e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad054e3c_bc088e6e",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-05T11:06:23Z",
+      "side": 1,
+      "message": "It was already tested in SwapChainValidationTests. Added a reference to it.",
+      "parentUuid": "adbd25e1_626ab8f6",
       "range": {
         "startLine": 203,
         "startChar": 0,
