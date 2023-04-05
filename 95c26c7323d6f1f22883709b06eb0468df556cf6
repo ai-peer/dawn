@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f80e187a_1c0f3507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-05T11:44:41Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "95c26c7323d6f1f22883709b06eb0468df556cf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d1dcdc_953f9ba1",
+        "filename": "src/dawn/tests/unittests/wire/WireDeviceLifetimeTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-05T11:44:41Z",
+      "side": 1,
+      "message": "When are the wire procs set up?",
+      "revId": "95c26c7323d6f1f22883709b06eb0468df556cf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc815751_4a6c66a5",
+        "filename": "src/dawn/tests/unittests/wire/WireDeviceLifetimeTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-05T11:44:41Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a small comment explaining what this does.",
+      "revId": "95c26c7323d6f1f22883709b06eb0468df556cf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c50b7c7_c2af1088",
+        "filename": "src/dawn/tests/unittests/wire/WireDeviceLifetimeTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-05T11:44:41Z",
+      "side": 1,
+      "message": "I think \"all\" can be dropped too. ditto below",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 26
+      },
+      "revId": "95c26c7323d6f1f22883709b06eb0468df556cf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
