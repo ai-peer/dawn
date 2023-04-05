@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fa5339a_125cd101",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-05T15:06:02Z",
+      "side": 1,
+      "message": "ID3D11Device5 is needed for creating ID3D11Fence. If it is not available, I think we can use ID3D11Query to check if submitted work are finished.\n\nHowever Chrome is also using ID3D11Fence for dawn and ANGLE synchronization[1]. Without fence, synchronize between between ANGLE and Dawn will become difficult. \n\n\n[1] https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:gpu/command_buffer/service/shared_image/d3d_image_backing.cc;drc\u003d924687d1434ce6b38796d97be60c93e1e5622ebe;bpv\u003d1;bpt\u003d1;l\u003d879\n\nFiled a bug and add a TODO here",
+      "parentUuid": "62f6b226_630233c2",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2431d7bb_84be434e",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
