@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dedac154_49c850f4",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T15:25:52Z",
+      "side": 1,
+      "message": "It might be OK to use fence. I\u0027ll confirm with sunny on the bug.",
+      "parentUuid": "9fa5339a_125cd101",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2431d7bb_84be434e",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
