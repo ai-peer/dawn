@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc51d15_6d289d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 78
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T17:22:39Z",
+      "side": 1,
+      "message": "LGTM - thanks for all the iteration",
+      "revId": "eeddb946d15f6b9d51182a29a076dd47e999f587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bc6bc3b_0e259279",
+        "filename": "src/dawn/common/Mutex.h",
+        "patchSetId": 78
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-05T17:22:39Z",
+      "side": 1,
+      "message": "nit: the `\u003d default` should go in the .cpp file",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 32
+      },
+      "revId": "eeddb946d15f6b9d51182a29a076dd47e999f587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
