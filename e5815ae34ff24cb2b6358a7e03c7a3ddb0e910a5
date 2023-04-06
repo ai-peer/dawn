@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "975fb343_bab5b787",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T13:38:40Z",
+      "side": 1,
+      "message": "edit: I this misread your comment. Right, the wait on the atomic variable should be enough.",
+      "parentUuid": "25f701ef_93c63f54",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "041240ef_de986603",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 46
@@ -206,6 +224,24 @@
       "side": 1,
       "message": "Same as above.",
       "parentUuid": "041240ef_de986603",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0786a3f1_ba396f57",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T13:38:40Z",
+      "side": 1,
+      "message": "edit: ack, I think I misread the comment.",
+      "parentUuid": "b5fe974b_7e014170",
       "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
