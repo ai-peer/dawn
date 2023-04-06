@@ -99,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4b18de_4c47920f",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-06T18:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66b6d5cf_02a40781",
+      "revId": "0f4eea086c540929c1323388173c68e04e0f64ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e45dec71_18215f55",
