@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b2a20c_336fa4b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T09:50:54Z",
+      "side": 1,
+      "message": "LGTM, the CommandRecordingContext might need some work but we want to have a CommandRecordingContextBase one day anyway.",
+      "revId": "dde7079407391262503544f76ab710537346914e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
