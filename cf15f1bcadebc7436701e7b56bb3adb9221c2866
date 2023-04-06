@@ -252,6 +252,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfbaeaaa_70c0659a",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-04-06T17:13:09Z",
+      "side": 1,
+      "message": "Thank you for your patience. D3D11 is available on all versions of Windows 10 but D3D11 fences are not available until the Windows 10 Creators Update. \n\nTo synchronize textures across D3D11 devices on the same adapter, DXGI keyed mutexes are available on all Windows 10 versions.\n\nI would not recommend using D3D11 deferred contexts. Not all commands are available and I\u0027ve been told it is difficult to get them to work well.  \n\nSince Dawn runs in the same process and thread as ANGLE, I recommend using creating a D3D11 device context state object for Dawn on the ANGLE device using ID3D11Device1::CreateDeviceContext and swapping it in using ID3D11DeviceContext1::SwapDeviceContextState when Dawn wants issue calls to the D3D11 immediate context. All of the Dawn state is preserved in the state object; ANGLE is non-the-wiser to its existence or that its own state is swapped out from under it.\n\nOld Edge used device context state objects to interop different WebGL contexts, as well as with D2D, which has its own context state. All was pulled off with good success.",
+      "parentUuid": "76a5f3cf_c7f90295",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2431d7bb_84be434e",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
