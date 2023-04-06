@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec369d1_d4794829",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T15:09:16Z",
+      "side": 1,
+      "message": "PTAL. I think this CL doesn\u0027t really depend on the multithreaded tests CL.",
+      "revId": "e9a09289fd449b8487f8f49b8ef74905d81d7fab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
