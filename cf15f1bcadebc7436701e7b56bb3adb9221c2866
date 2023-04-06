@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99fe7d5b_73cb6194",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-06T15:58:47Z",
+      "side": 1,
+      "message": "sounds fine to me. deferred context might be even slower unless we more eagerly record commands ahead of submit.",
+      "parentUuid": "6b249398_bf384bab",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88785532_c1229600",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
