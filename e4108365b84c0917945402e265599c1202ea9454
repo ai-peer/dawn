@@ -33,6 +33,24 @@
       "message": "Maybe this could put an error in the dawn::ErrorLog() and UNREACHABLE() like other error paths?",
       "revId": "e4108365b84c0917945402e265599c1202ea9454",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d1d676_62e45054",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T11:26:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e966ec6d_f9dec872",
+      "revId": "e4108365b84c0917945402e265599c1202ea9454",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
