@@ -58,6 +58,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb0a802_308e74d2",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T11:06:17Z",
+      "side": 1,
+      "message": "Done. Created another CL to enable implicit sync via command line, in preparing for a CI config. https://dawn-review.googlesource.com/c/dawn/+/126580",
+      "parentUuid": "1cb9d1f6_d70bc00f",
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0c6396e0_e8436bad",
