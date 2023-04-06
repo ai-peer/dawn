@@ -288,6 +288,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5c67de5_d60f940e",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-04-06T19:52:58Z",
+      "side": 1,
+      "message": "\u003e Is there any security concerns for this model?\n\nNo. It\u0027s the same arrangement ANGLE already has with the GL contexts it multiplexes on top of one D3D11 immediate context.\n\n\u003e Any idea about about the performance impact of sharing one device? Is ID3D11DeviceContext1::SwapDeviceContextState() call heavy?\n\nPerformance should be improved on account of:\n-Only loading ONE instance of the UMD per GPU process instead of one per Dawn instance.\n-Reduced synchronization costs from having kernel manage one command queues instead of multiple ones.\n\nThere is already an intrinsic, default context state. Calling `SwapDeviceContextState` swaps out the pointer for yours. It\u0027s not free so don\u0027t be reckless and do it for every draw. Instead, do it when Dawn flushes its local command list.",
+      "parentUuid": "2386be30_94152d8d",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2431d7bb_84be434e",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
