@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9295f759_5a9d35c6",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T13:11:55Z",
+      "side": 1,
+      "message": "`mNumPendingMapOperations` is modified inside `SlotMapCallback` alongside other test\u0027s states. There is already a mutex used in that method to protect `mNumPendingMapOperations` and other states, hence I think it\u0027s overkill to use additional atomic wrapper for that variable.\n\nWe could use relaxed memory order and mutex\u0027s locking scope in `SlotMapCallback` and check if the atomic\u0027s value is zero in `MapSlotsSynchronously`. However, I think it is not safe, since the order is not guaranteed .i.e. even if `mNumPendingMapOperations` is zero, it doesn\u0027t mean all pending works have finished (it is only guaranteed if we use the same mutex in `MapSlotsSynchronously`). Unless we use strong memory order and it\u0027s basically an overkill (with mutex + strong ordered atomic, why not just use mutex anw).",
+      "parentUuid": "138adf50_87ea37b6",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "516df569_90938c44",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 46
