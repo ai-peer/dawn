@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "832cd573f87547192e7509c3db77ba2bb9f82a5e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4a1825_14ea8cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-06T20:08:26Z",
+      "side": 1,
+      "message": "I\u0027m lacking context on why this is needed, but I see nothing wrong with the change.\nCorentin for +2",
+      "revId": "832cd573f87547192e7509c3db77ba2bb9f82a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
