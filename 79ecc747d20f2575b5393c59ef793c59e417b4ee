@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d32d695_77e454cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-06T17:22:08Z",
+      "side": 1,
+      "message": "this is ok for now, but we really should have a better solution for the wrapping APIs. I filed crbug.bug.com/dawn/1745 about this",
+      "revId": "79ecc747d20f2575b5393c59ef793c59e417b4ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
