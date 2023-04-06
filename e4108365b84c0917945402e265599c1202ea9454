@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec1ad0c_43b60f99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T11:07:03Z",
+      "side": 1,
+      "message": "LGTM and then you can add it to the CQ recipe I think: https://source.chromium.org/chromium/chromium/tools/build/+/main:recipes/recipes/dawn.py;drc\u003d13be1febe007b491c63c26acb0105dbf602c90ba;l\u003d136",
+      "revId": "e4108365b84c0917945402e265599c1202ea9454",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e966ec6d_f9dec872",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T11:07:03Z",
+      "side": 1,
+      "message": "Maybe this could put an error in the dawn::ErrorLog() and UNREACHABLE() like other error paths?",
+      "revId": "e4108365b84c0917945402e265599c1202ea9454",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
