@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dce2a01_79d32561",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T10:01:11Z",
+      "side": 1,
+      "message": "I happened to run into https://awesomekling.github.io/MutexProtected-A-C++-Pattern-for-Easier-Concurrency/ today that describes something similar to Rust\u0027s Mutex but in C++. It might be worth having this and it would make sure we don\u0027t forget to lock mDeferredExpectations.\n\nNote that it could be a followup",
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e624429_d8d4d6cf",
         "filename": "src/dawn/tests/DawnTest.h",
         "patchSetId": 47
@@ -20,6 +37,40 @@
         "endLine": 657,
         "endChar": 22
       },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cb9d1f6_d70bc00f",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T10:01:11Z",
+      "side": 1,
+      "message": "Why these tests in particular are checked with ImplicitDeviceSynchronization?\n\nAlso maybe it would be worth having a new run of the Dawn end2end tests on CI that run with the implicit synchronization on, similarly to how we have them run with the wire. (it would avoid the need to special case each test that we want to run with implicit sync)",
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c6396e0_e8436bad",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T10:01:11Z",
+      "side": 1,
+      "message": "I skipped reviewing this file for now",
       "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
