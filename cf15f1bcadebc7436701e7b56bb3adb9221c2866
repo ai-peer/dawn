@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68b992f_7390466c",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T09:50:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "58a59d13_487fc120",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f0ee19a_ed57c628",
@@ -174,6 +192,24 @@
       "side": 1,
       "message": "It might be OK to use fence. I\u0027ll confirm with sunny on the bug.",
       "parentUuid": "9fa5339a_125cd101",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76a5f3cf_c7f90295",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T09:50:06Z",
+      "side": 1,
+      "message": "Let\u0027s go forward with this for and see if we need changes later.",
+      "parentUuid": "dedac154_49c850f4",
       "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -373,6 +409,30 @@
       "side": 1,
       "message": "https://learn.microsoft.com/en-us/windows/win32/api/d3d11_4/nn-d3d11_4-id3d11device5\n\nNote  This interface, introduced in the Windows 10 Creators Update, is the latest version of the ID3D11Device interface. Applications targetting Windows 10 Creators Update should use this interface instead of earlier versions.\n\nLooks like Since chrome 110, we only support Windows 10 or later.\n\nhttps://blogs.windows.com/windowsexperience/2017/04/11/whats-new-in-the-windows-10-creators-update/\nLooks like the Windows 10 Creators Update was released before April 11, 2017.",
       "parentUuid": "1e15b8a5_e20949f6",
+      "range": {
+        "startLine": 100,
+        "startChar": 37,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca918b84_fb61e094",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-06T09:50:06Z",
+      "side": 1,
+      "message": "Ok it seems we might be able to rely on it, let\u0027s move forward with this CL with fences and Device5 and change things later if needed. Thank you for filing the bug.",
+      "parentUuid": "d5dc3597_196f3462",
       "range": {
         "startLine": 100,
         "startChar": 37,
