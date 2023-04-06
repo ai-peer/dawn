@@ -398,6 +398,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49e6b65b_05724c0b",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T15:01:45Z",
+      "side": 1,
+      "message": "Now I have checked again, there is no need to guard even if we create buffer on this thread. Because the copy thread will wait for \"buffer written\" conditional variable to signal first before proceeding.",
+      "parentUuid": "780f2eac_cabb13bd",
+      "range": {
+        "startLine": 615,
+        "startChar": 8,
+        "endLine": 617,
+        "endChar": 69
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed0516f9_67274bea",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 47
@@ -409,6 +433,30 @@
       "writtenOn": "2023-04-05T21:10:35Z",
       "side": 1,
       "message": "Why must these be GuardedTexture?\n\nSeems like it would be sufficient to break `CreateAndWriteTexture` in half so you only race writeTexture and copyTextureToTexture",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 786,
+        "endChar": 30
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8f0b03_fa76903a",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T15:01:45Z",
+      "side": 1,
+      "message": "Actually, after looking at again, I don\u0027t think we need to guard even if the texture is created here because there is already a conditional variable wait in the copy thread.",
+      "parentUuid": "ed0516f9_67274bea",
       "range": {
         "startLine": 786,
         "startChar": 0,
