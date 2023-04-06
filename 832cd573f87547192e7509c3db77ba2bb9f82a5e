@@ -33,6 +33,24 @@
       "message": "I\u0027m lacking context on why this is needed, but I see nothing wrong with the change.\nCorentin for +2",
       "revId": "832cd573f87547192e7509c3db77ba2bb9f82a5e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a39910_4bc03e51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-06T20:11:07Z",
+      "side": 1,
+      "message": "Without it, if you don\u0027t have markupsafe installed globally, `jinja2` fails to load. So we have to add it to the path in order to work. I don\u0027t really understand how it works without it (maybe it\u0027s added automatically from dawn third_party?)\n\nI\u0027m trying to use dawn as a submodule in a repo and have to add all the other dependencies as submodules.",
+      "parentUuid": "1c4a1825_14ea8cb5",
+      "revId": "832cd573f87547192e7509c3db77ba2bb9f82a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
