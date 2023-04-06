@@ -75,11 +75,7 @@ class Device final : public d3d::Device {
     uint32_t GetOptimalBytesPerRowAlignment() const override;
     uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
     float GetTimestampPeriodInNS() const override;
-    bool ShouldDuplicateNumWorkgroupsForDispatchIndirect(
-        ComputePipelineBase* computePipeline) const override;
     bool MayRequireDuplicationOfIndirectParameters() const override;
-    bool ShouldDuplicateParametersForDrawIndirect(
-        const RenderPipelineBase* renderPipelineBase) const override;
     uint64_t GetBufferCopyOffsetAlignmentForDepthStencil() const override;
     void SetLabelImpl() override;
 
