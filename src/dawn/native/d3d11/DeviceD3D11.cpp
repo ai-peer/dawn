@@ -36,6 +36,7 @@
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
+#include "dawn/native/d3d11/RenderPipelineD3D11.h"
 #include "dawn/native/d3d11/SamplerD3D11.h"
 #include "dawn/native/d3d11/ShaderModuleD3D11.h"
 #include "dawn/native/d3d11/TextureD3D11.h"
@@ -270,7 +271,7 @@ ResultOrError<Ref<QuerySetBase>> Device::CreateQuerySetImpl(const QuerySetDescri
 
 Ref<RenderPipelineBase> Device::CreateUninitializedRenderPipelineImpl(
     const RenderPipelineDescriptor* descriptor) {
-    return nullptr;
+    return RenderPipeline::CreateUninitialized(this, descriptor);
 }
 
 ResultOrError<Ref<SamplerBase>> Device::CreateSamplerImpl(const SamplerDescriptor* descriptor) {
@@ -314,7 +315,9 @@ void Device::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> compute
 
 void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                WGPUCreateRenderPipelineAsyncCallback callback,
-                                               void* userdata) {}
+                                               void* userdata) {
+    RenderPipeline::InitializeAsync(std::move(renderPipeline), callback, userdata);
+}
 
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
                                                uint64_t sourceOffset,
@@ -422,8 +425,7 @@ bool Device::MayRequireDuplicationOfIndirectParameters() const {
 
 bool Device::ShouldDuplicateParametersForDrawIndirect(
     const RenderPipelineBase* renderPipelineBase) const {
-    // return ToBackend(renderPipelineBase)->UsesVertexOrInstanceIndex();
-    return false;
+    return ToBackend(renderPipelineBase)->GetUsesVertexOrInstanceIndex();
 }
 
 uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
