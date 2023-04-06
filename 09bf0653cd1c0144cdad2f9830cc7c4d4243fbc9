@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02507d4_fd75f34c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-06T21:14:43Z",
+      "side": 1,
+      "message": "Rafael, are partial updates to constant buffers allowed if we use CopySubresourceRegion ?",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 13
+      },
+      "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
