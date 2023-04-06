@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68a2828_f0a91bc1",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-04-06T21:10:50Z",
+      "side": 1,
+      "message": "If ANGLE and Dawn share a D3D11 device, no need to make this fence be shared, or have fences altogether.",
+      "range": {
+        "startLine": 106,
+        "startChar": 51,
+        "endLine": 106,
+        "endChar": 74
+      },
+      "revId": "4faf3d31ba97b0d98695cd1dedca8514052e252e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb55fbc_b0ba00a4",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-04-06T21:10:50Z",
+      "side": 1,
+      "message": "In D3D11, there\u0027s no need to keep a list of \"used\" objects or deal with serial queues of any kind. Unlike D3D12, the D3D11 runtime tracks usage and, itself, deals with avoiding crashes when you Release your last reference to a resource while it is still in use by the GPU.",
+      "range": {
+        "startLine": 139,
+        "startChar": 4,
+        "endLine": 139,
+        "endChar": 70
+      },
+      "revId": "4faf3d31ba97b0d98695cd1dedca8514052e252e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
