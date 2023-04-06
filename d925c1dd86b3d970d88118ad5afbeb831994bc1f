@@ -258,6 +258,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e60a3f46_699f09bf",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-06T13:33:34Z",
+      "side": 1,
+      "message": "Same as above, `WaitAbit` will flush the pending callbacks of any device on any thread, i.e. the pipeline could be written on another thread different from the one that does that wait.",
+      "parentUuid": "459fea14_ca72259c",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 54
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6fc60718_16b31a29",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 47
