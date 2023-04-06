@@ -201,6 +201,11 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             continue;
         }
 
+        if (strcmp("-s", argv[i]) == 0 || strcmp("--enable-implicit-device-sync", argv[i]) == 0) {
+            mEnableImplicitDeviceSync = true;
+            continue;
+        }
+
         if (strcmp("--run-suppressed-tests", argv[i]) == 0) {
             mRunSuppressedTests = true;
             continue;
@@ -327,6 +332,8 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
                    "[--enable-backend-validation[=full,partial,disabled]]\n"
                    "    [--exclusive-device-type-preference=integrated,cpu,discrete]\n\n"
                    "  -w, --use-wire: Run the tests through the wire (defaults to no wire)\n"
+                   "  -s, --enable-implicit-device-sync: Run the tests with implicit device "
+                   "synchronization feature (defaults to false)\n"
                    "  -c, --begin-capture-on-startup: Begin debug capture on startup "
                    "(defaults to no capture)\n"
                    "  --enable-backend-validation: Enables backend validation. Defaults to \n"
@@ -356,6 +363,9 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
 
         dawn::WarningLog() << " Unused argument: " << argv[i];
     }
+
+    // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+    ASSERT(!mUseWire || !mEnableImplicitDeviceSync);
 }
 
 std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDiscoverAdapters() {
@@ -508,6 +518,9 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo(
            "UseWire: "
         << (mUseWire ? "true" : "false")
         << "\n"
+           "Implicit device synchronization: "
+        << (mEnableImplicitDeviceSync ? "enabled" : "disabled")
+        << "\n"
            "Run suppressed tests: "
         << (mRunSuppressedTests ? "true" : "false")
         << "\n"
@@ -590,6 +603,10 @@ void DawnTestEnvironment::TearDown() {
 
 bool DawnTestEnvironment::UsesWire() const {
     return mUseWire;
+}
+
+bool DawnTestEnvironment::IsImplicitDeviceSyncEnabled() const {
+    return mEnableImplicitDeviceSync;
 }
 
 bool DawnTestEnvironment::RunSuppressedTests() const {
@@ -838,6 +855,10 @@ bool DawnTestBase::UsesWire() const {
     return gTestEnv->UsesWire();
 }
 
+bool DawnTestBase::IsImplicitDeviceSyncEnabled() const {
+    return gTestEnv->IsImplicitDeviceSyncEnabled();
+}
+
 bool DawnTestBase::IsBackendValidationEnabled() const {
     return gTestEnv->GetBackendValidationLevel() != dawn::native::BackendValidationLevel::Disabled;
 }
@@ -942,6 +963,9 @@ bool DawnTestBase::SupportsFeatures(const std::vector<wgpu::FeatureName>& featur
 WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     // Create the device from the adapter
     std::vector<wgpu::FeatureName> requiredFeatures = GetRequiredFeatures();
+    if (IsImplicitDeviceSyncEnabled()) {
+        requiredFeatures.push_back(wgpu::FeatureName::ImplicitDeviceSynchronization);
+    }
 
     wgpu::SupportedLimits supportedLimits;
     mBackendAdapter.GetLimits(reinterpret_cast<WGPUSupportedLimits*>(&supportedLimits));
