@@ -20,19 +20,16 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
-#include "dawn/native/Buffer.h"
-#include "dawn/native/ComputePipeline.h"
 #include "dawn/native/D3D11Backend.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
-#include "dawn/native/RenderPipeline.h"
-#include "dawn/native/Texture.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/AdapterD3D11.h"
 #include "dawn/native/d3d11/BackendD3D11.h"
 #include "dawn/native/d3d11/BindGroupD3D11.h"
 #include "dawn/native/d3d11/BindGroupLayoutD3D11.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
+#include "dawn/native/d3d11/CommandBufferD3D11.h"
 #include "dawn/native/d3d11/ComputePipelineD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
@@ -254,7 +251,7 @@ ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* 
 ResultOrError<Ref<CommandBufferBase>> Device::CreateCommandBuffer(
     CommandEncoder* encoder,
     const CommandBufferDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("CreateCommandBuffer");
+    return CommandBuffer::Create(encoder, descriptor);
 }
 
 Ref<ComputePipelineBase> Device::CreateUninitializedComputePipelineImpl(
