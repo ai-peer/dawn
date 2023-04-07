@@ -264,8 +264,36 @@ D3D11_DEPTH_STENCIL_VIEW_DESC Texture::GetDSVDescriptor(const SubresourceRange& 
 MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                  const SubresourceRange& range,
                                  TextureBase::ClearValue clearValue) {
-    // TODO(dawn:1740): Implement this.
-    return DAWN_UNIMPLEMENTED_ERROR("ClearTexture");
+    TextureViewDescriptor desc;
+    desc.format = GetFormat().format;
+    switch (GetDimension()) {
+        case wgpu::TextureDimension::e1D:
+            desc.dimension = wgpu::TextureViewDimension::e1D;
+            break;
+        case wgpu::TextureDimension::e2D:
+            desc.dimension = wgpu::TextureViewDimension::e2D;
+            break;
+        case wgpu::TextureDimension::e3D:
+            desc.dimension = wgpu::TextureViewDimension::e3D;
+            break;
+    }
+    desc.baseMipLevel = range.baseMipLevel;
+    desc.mipLevelCount = range.levelCount;
+    desc.baseArrayLayer = range.baseArrayLayer;
+    desc.arrayLayerCount = range.layerCount;
+    desc.aspect = wgpu::TextureAspect::All;
+
+    Ref<TextureView> view = TextureView::Create(this, &desc);
+    ComPtr<ID3D11RenderTargetView> d3d11RTV;
+    DAWN_TRY_ASSIGN(d3d11RTV, view->GetD3D11RenderTargetView());
+
+    static constexpr std::array<float, 4> zero = {0.0f, 0.0f, 0.0f, 0.0f};
+    static constexpr std::array<float, 4> nonZero = {1.0f, 1.0f, 1.0f, 1.0f};
+
+    commandContext->GetD3D11DeviceContext()->ClearRenderTargetView(
+        d3d11RTV.Get(), clearValue == TextureBase::ClearValue::Zero ? zero.data() : nonZero.data());
+
+    return {};
 }
 
 void Texture::SetLabelHelper(const char* prefix) {
