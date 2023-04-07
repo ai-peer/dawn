@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40cab969_65894a0d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T05:44:34Z",
+      "side": 1,
+      "message": "not used, and probably not needed since d3d11 doesn\u0027t have transitions",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebc581be_bb21e3f0",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T05:44:34Z",
+      "side": 1,
+      "message": "same comment as in the Texture CL about these mutable members",
+      "range": {
+        "startLine": 102,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 84
+      },
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
