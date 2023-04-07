@@ -67,6 +67,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94962a63_5c526ad1",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T06:06:17Z",
+      "side": 1,
+      "message": "I think that should work as well.",
+      "parentUuid": "0da1bff0_c1f4eeac",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 33
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59fc8ef8_c66b9395",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T06:06:17Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1134,
+        "startChar": 0,
+        "endLine": 1136,
+        "endChar": 0
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "787360aa_24006029",
         "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 15
@@ -102,6 +149,30 @@
       "side": 1,
       "message": "Fence should work that way. All of theses are using GPU to access the texture (there is no CPU works involved), so the GPU will just wait until the fence signaled value become the desired value before executing the next commands. It\u0027s how metal\u0027s `MTLEvent` work too (their doc mentioned that the wait can be encoded even before the signal command is encoded on another thread). I don\u0027t see how is D3D fence any different. I would defeat the multithreading capabilities of these APIs anw.\n\nI used this scenario to test even though it might not be the way chrome works atm because I want to see there is no problem if we issues the commands in parallel on CPU. Whereas if doing chrome way every thing will just be serialized on CPU side, do work A then do work B.\n\nWhen did the hang happen with WARP?",
       "parentUuid": "787360aa_24006029",
+      "range": {
+        "startLine": 1159,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 31
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ca6133_79cea2e2",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T06:06:17Z",
+      "side": 1,
+      "message": "this comment [1]\n\nI guess you copy-pasted the comment from someone else :)",
+      "parentUuid": "6f30c4df_26d23c8e",
       "range": {
         "startLine": 1159,
         "startChar": 8,
