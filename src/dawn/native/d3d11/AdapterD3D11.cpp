@@ -49,7 +49,7 @@ ResultOrError<ComPtr<ID3D11Device>> Adapter::CreateD3D11Device() {
         const D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0};
 
         UINT flags = 0;
-        if (GetInstance()->IsBackendValidationEnabled()) {
+        if (GetInstance()->IsBackendValidationEnabled() || true) {
             flags |= D3D11_CREATE_DEVICE_DEBUG;
         }
 
