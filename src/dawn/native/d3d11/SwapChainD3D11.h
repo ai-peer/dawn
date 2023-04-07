@@ -26,11 +26,11 @@ namespace dawn::native::d3d11 {
 class Device;
 class Texture;
 
-class SwapChain final : public NewSwapChainBase {
+class SwapChain final : public SwapChainBase {
   public:
     static ResultOrError<Ref<SwapChain>> Create(Device* device,
                                                 Surface* surface,
-                                                NewSwapChainBase* previousSwapChain,
+                                                SwapChainBase* previousSwapChain,
                                                 const SwapChainDescriptor* descriptor);
 
   private:
@@ -38,10 +38,10 @@ class SwapChain final : public NewSwapChainBase {
 
     void DestroyImpl() override;
 
-    using NewSwapChainBase::NewSwapChainBase;
-    MaybeError Initialize(NewSwapChainBase* previousSwapChain);
+    using SwapChainBase::SwapChainBase;
+    MaybeError Initialize(SwapChainBase* previousSwapChain);
 
-    // NewSwapChainBase implementation
+    // SwapChainBase implementation
     MaybeError PresentImpl() override;
     ResultOrError<Ref<TextureViewBase>> GetCurrentTextureViewImpl() override;
     void DetachFromSurfaceImpl() override;
