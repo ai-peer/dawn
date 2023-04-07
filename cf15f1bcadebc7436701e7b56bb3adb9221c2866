@@ -306,6 +306,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "311b34ef_6b2a987d",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T07:45:59Z",
+      "side": 1,
+      "message": "Could we put this discussion in an issue? It\u0027s all very useful so we should record it somewhere.",
+      "parentUuid": "a5c67de5_d60f940e",
+      "revId": "cf15f1bcadebc7436701e7b56bb3adb9221c2866",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2431d7bb_84be434e",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 6
