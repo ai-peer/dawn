@@ -18,6 +18,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2126f97b_1a481e06",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfcf4938_0689cbfb",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e4ad890_5d71f530",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfcf4938_0689cbfb",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a4b0319_1f50704e",
@@ -31,6 +67,42 @@
       "writtenOn": "2023-04-07T09:36:30Z",
       "side": 1,
       "message": "Indirect needs D3D11_RESOURCE_MISC_DRAWINDIRECT_ARGS",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d68fce2b_ee7e7d5e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7a4b0319_1f50704e",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8624c3b7_629cf777",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a4b0319_1f50704e",
       "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5780e7f_d7fc104e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a446305b_ba1fee0a",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "814d631b_8de2599c",
@@ -69,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "845aa959_367809fc",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "814d631b_8de2599c",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41b40889_1512a7ff",
@@ -82,6 +190,24 @@
       "writtenOn": "2023-04-07T09:36:30Z",
       "side": 1,
       "message": "nit: I assume indirect is a GPU usage as well?",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31363232_3f3e5cf8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41b40889_1512a7ff",
       "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d04fc7de_f34d0fe3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "https://learn.microsoft.com/en-us/windows/win32/api/d3d11/ne-d3d11-d3d11_bind_flag\n\nBind a buffer as a constant buffer to a shader stage; this flag may NOT be combined with any other bind flag.",
+      "parentUuid": "55de5b31_285a694c",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d74f813a_14c832b8",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
@@ -116,6 +260,24 @@
       "writtenOn": "2023-04-07T09:36:30Z",
       "side": 1,
       "message": "Why aren\u0027t mappable buffers created with D3D11_CPU_ACCESS_WRITE/READ instead of having a staging allocation? Then DeviceContext::Map can be used to map them and get a pointer. This would make the d3d11 buffers be handled basically the same as other types of buffers.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2263449_9339880c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "It is because at this point, we don\u0027t know a staging buffer will be used as src buffer for updating a texture or a GPU buffer(vertex, uniform, etc). And D3D11 doesn\u0027t allow copy data between D3D11Buffer and D3D11Texture. If we want to uploading data to a D3D11Texture, we have to create a D3D11Texture with D3D11_CPU_ACCESS_WRITE, and call map on that texture to get a pointer to write, and then copy data from that staging texture to other textures.\n\nSo if we create the mappable buffer here, later we found we need to copy data from it to a texture, we have to either use UpdateSubresource() with the pointer returned from the Map() call (So we have to keep the staging buffer mapped all the time, not sure if it will work.). Or use some compute shader to copy the data.",
+      "parentUuid": "d74f813a_14c832b8",
       "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +316,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb9521d0_3d9e4c68",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "801d9340_4d3fcd98",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52ba7803_c57d164c",
@@ -167,6 +347,24 @@
       "writtenOn": "2023-04-07T09:36:30Z",
       "side": 1,
       "message": "This shouldn\u0027t give us a lot of gains compared to just an UpdateSurbresource. The only gain I could see is that maybe when a buffer uses GPU memory allocated for the first time then 0 init can be skipped, but that seems no that important and we can also deal with optimizations like this later.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16d9c47c_aee0ec32",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ba7803_c57d164c",
       "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -188,6 +386,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73032fb1_2cb131b8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c73bf68_f2126ac8",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40cab969_65894a0d",
@@ -201,6 +417,30 @@
       "writtenOn": "2023-04-07T05:44:34Z",
       "side": 1,
       "message": "not used, and probably not needed since d3d11 doesn\u0027t have transitions",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "182cfd10_eeedce1b",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40cab969_65894a0d",
       "range": {
         "startLine": 34,
         "startChar": 0,
@@ -234,6 +474,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97954ca5_4d9d10f4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done. Changed to always creating a new view on fly, and we can optimize it later, if it is necessary.",
+      "parentUuid": "ebc581be_bb21e3f0",
+      "range": {
+        "startLine": 102,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 84
+      },
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb233456_671a0721",
@@ -247,6 +511,54 @@
       "writtenOn": "2023-04-07T09:36:30Z",
       "side": 1,
       "message": "nit: Write() since this is already a buffer?",
+      "range": {
+        "startLine": 37,
+        "startChar": 35,
+        "endLine": 37,
+        "endChar": 41
+      },
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab42c11_17a7e17d",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb233456_671a0721",
+      "range": {
+        "startLine": 37,
+        "startChar": 35,
+        "endLine": 37,
+        "endChar": 41
+      },
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53bf0651_abacb8d4",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb233456_671a0721",
       "range": {
         "startLine": 37,
         "startChar": 35,
