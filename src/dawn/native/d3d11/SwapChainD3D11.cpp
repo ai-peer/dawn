@@ -18,7 +18,6 @@
 
 #include <utility>
 
-#include "dawn/dawn_wsi.h"
 #include "dawn/native/Surface.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d/UtilsD3D.h"
@@ -77,7 +76,7 @@ DXGI_USAGE ToDXGIUsage(wgpu::TextureUsage usage) {
 // static
 ResultOrError<Ref<SwapChain>> SwapChain::Create(Device* device,
                                                 Surface* surface,
-                                                NewSwapChainBase* previousSwapChain,
+                                                SwapChainBase* previousSwapChain,
                                                 const SwapChainDescriptor* descriptor) {
     Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, descriptor));
     DAWN_TRY(swapchain->Initialize(previousSwapChain));
@@ -94,7 +93,7 @@ void SwapChain::DestroyImpl() {
 // Initializes the swapchain on the surface. Note that `previousSwapChain` may or may not be
 // nullptr. If it is not nullptr it means that it is the swapchain previously in use on the
 // surface and that we have a chance to reuse it's underlying IDXGISwapChain and "buffers".
-MaybeError SwapChain::Initialize(NewSwapChainBase* previousSwapChain) {
+MaybeError SwapChain::Initialize(SwapChainBase* previousSwapChain) {
     ASSERT(GetSurface()->GetType() == Surface::Type::WindowsHWND);
 
     // Precompute the configuration parameters we want for the DXGI swapchain.
@@ -128,9 +127,8 @@ MaybeError SwapChain::Initialize(NewSwapChainBase* previousSwapChain) {
     // The previous swapchain is on the same device so we want to reuse it but it is still not
     // always possible. Because DXGI requires that a new swapchain be created if the
     // DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING flag is changed.
-    bool canReuseSwapChain =
-        ((mSwapChainFlags ^ previousD3D11SwapChain->mSwapChainFlags) &
-         DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING) == 0;
+    bool canReuseSwapChain = ((mSwapChainFlags ^ previousD3D11SwapChain->mSwapChainFlags) &
+                              DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING) == 0;
 
     // We can't reuse the previous swapchain, so we destroy it and wait for all of its reference
     // to be forgotten (otherwise DXGI complains that there are outstanding references).
@@ -159,10 +157,9 @@ MaybeError SwapChain::Initialize(NewSwapChainBase* previousSwapChain) {
     // using them so we have no choice but to synchrounously wait for all operations to complete
     // on the previous swapchain and then lose references to its buffers.
     DAWN_TRY(previousD3D11SwapChain->DetachAndWaitForDeallocation());
-    DAWN_TRY(
-        CheckHRESULT(mDXGISwapChain->ResizeBuffers(mBufferCount, GetWidth(), GetHeight(),
-                                                   mFormat, mSwapChainFlags),
-                     "IDXGISwapChain::ResizeBuffer"));
+    DAWN_TRY(CheckHRESULT(mDXGISwapChain->ResizeBuffers(mBufferCount, GetWidth(), GetHeight(),
+                                                        mFormat, mSwapChainFlags),
+                          "IDXGISwapChain::ResizeBuffer"));
 
     // Get buffers from the swapchain.
     DAWN_TRY(CheckHRESULT(mDXGISwapChain->GetBuffer(0, IID_PPV_ARGS(&mBuffer)),
