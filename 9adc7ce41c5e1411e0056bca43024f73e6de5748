@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0da1bff0_c1f4eeac",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-07T06:02:42Z",
+      "side": 1,
+      "message": "`mBackendDevice` device is only set to a value in ctor. Can we just set it to null in dtor instead of `Destroy`?",
+      "parentUuid": "12e12898_ca126659",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 33
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "787360aa_24006029",
         "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 15
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-07T05:16:01Z",
       "side": 1,
       "message": "here, this wait could be issued before the signal from ClearD3D11Texture is issued on the CPU side - is that well-defined behavior by D3D? I\u0027m not sure. It\u0027s not how Chromium uses things. Chrome uses SyncTokens to ensure we never enqueue a wait that we haven\u0027t enqueued a signal for yet.\n\nThis could be why it hangs with WARP",
+      "range": {
+        "startLine": 1159,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 31
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f30c4df_26d23c8e",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-07T06:02:42Z",
+      "side": 1,
+      "message": "Fence should work that way. All of theses are using GPU to access the texture (there is no CPU works involved), so the GPU will just wait until the fence signaled value become the desired value before executing the next commands. It\u0027s how metal\u0027s `MTLEvent` work too (their doc mentioned that the wait can be encoded even before the signal command is encoded on another thread). I don\u0027t see how is D3D fence any different. I would defeat the multithreading capabilities of these APIs anw.\n\nI used this scenario to test even though it might not be the way chrome works atm because I want to see there is no problem if we issues the commands in parallel on CPU. Whereas if doing chrome way every thing will just be serialized on CPU side, do work A then do work B.\n\nWhen did the hang happen with WARP?",
+      "parentUuid": "787360aa_24006029",
       "range": {
         "startLine": 1159,
         "startChar": 8,
