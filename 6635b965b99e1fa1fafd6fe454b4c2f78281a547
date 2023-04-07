@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be2be14c_6e1132e6",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 0,
+      "message": "Whoops I forgot to update this one.",
+      "revId": "6635b965b99e1fa1fafd6fe454b4c2f78281a547",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

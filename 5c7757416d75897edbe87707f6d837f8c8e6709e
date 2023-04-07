@@ -3,6 +3,193 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfcf4938_0689cbfb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "nit: basically unused?",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a4b0319_1f50704e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "Indirect needs D3D11_RESOURCE_MISC_DRAWINDIRECT_ARGS",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a446305b_ba1fee0a",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "We most likely are never going to use StructuredBuffers in Dawn, so this function can be removed and 0 hardcoded everywhere.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "814d631b_8de2599c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "nit: We don\u0027t use structured buffers, I assume you meant UAV?",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41b40889_1512a7ff",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "nit: I assume indirect is a GPU usage as well?",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55de5b31_285a694c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "Where is the error for this given? It seems like a pretty big restriction.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d74f813a_14c832b8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "Why aren\u0027t mappable buffers created with D3D11_CPU_ACCESS_WRITE/READ instead of having a staging allocation? Then DeviceContext::Map can be used to map them and get a pointer. This would make the d3d11 buffers be handled basically the same as other types of buffers.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0f3479_f33af3ee",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "This would change if we use truely mappable buffers.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801d9340_4d3fcd98",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "Could we create this on buffer creation so that OOM is handled correctly? We just wouldn\u0027t use the buffer until Unmap.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ba7803_c57d164c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "This shouldn\u0027t give us a lot of gains compared to just an UpdateSurbresource. The only gain I could see is that maybe when a buffer uses GPU memory allocated for the first time then 0 init can be skipped, but that seems no that important and we can also deal with optimizations like this later.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c73bf68_f2126ac8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "Same comment as for Texture I think.",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40cab969_65894a0d",
         "filename": "src/dawn/native/d3d11/BufferD3D11.h",
         "patchSetId": 6
@@ -42,6 +229,29 @@
         "startChar": 3,
         "endLine": 103,
         "endChar": 84
+      },
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb233456_671a0721",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T09:36:30Z",
+      "side": 1,
+      "message": "nit: Write() since this is already a buffer?",
+      "range": {
+        "startLine": 37,
+        "startChar": 35,
+        "endLine": 37,
+        "endChar": 41
       },
       "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
