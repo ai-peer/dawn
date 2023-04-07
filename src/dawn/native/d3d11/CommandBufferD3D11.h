@@ -40,8 +40,11 @@ class CommandBuffer final : public CommandBufferBase {
     using CommandBufferBase::CommandBufferBase;
 
     MaybeError ExecuteComputePass(CommandRecordingContext* commandContext);
-    MaybeError ExecuteRenderPass(BeginRenderPassCmd* renderPass,
-                                 CommandRecordingContext* commandContext);
+    void HandleDebugCommands(CommandRecordingContext* commandContext, Command command);
+
+    MaybeError RecordNumWorkgroupsForDispatch(ComputePipeline* computePipeline,
+                                              CommandRecordingContext* commandContext,
+                                              DispatchCmd* dispatchCmd);
 };
 
 }  // namespace dawn::native::d3d11
