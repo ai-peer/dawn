@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "989d6814_dc788e51",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:36:59Z",
+      "side": 1,
+      "message": "Probably we need texture to be reinterpreted, I remember I saw some failed tests related it. I think we will need to revisit it later.\n\nRemove the needsTypelessFormat for now",
+      "parentUuid": "c98a95ef_33a55650",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 78
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8452fc2b_aba91411",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-07T05:40:44Z",
       "side": 1,
       "message": "\u003d default",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 22
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d36b67b_6be76e92",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8452fc2b_aba91411",
       "range": {
         "startLine": 177,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49913fe6_ba15d71e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcdce79f_92c68e7d",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 1
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e8c5841_40f0c4b7",
@@ -106,6 +178,30 @@
       "writtenOn": "2023-04-07T05:40:44Z",
       "side": 1,
       "message": "it would definitely be great if to share if there\u0027s a clean way to do it",
+      "range": {
+        "startLine": 334,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 56
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e396f2b4_cacc02dd",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:36:59Z",
+      "side": 1,
+      "message": "Maybe has a base class d3d::Texture and d3d::TextureView, so we can move some common code into it.\nFor example GetD3D11CopyableSubresourceFormat(), and some code in this method.",
+      "parentUuid": "0e8c5841_40f0c4b7",
       "range": {
         "startLine": 334,
         "startChar": 0,
@@ -139,6 +235,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b6d9a5c_105bf66a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7662a1aa_2969f25a",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 38
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc8a0575_3714e792",
@@ -152,6 +272,30 @@
       "writtenOn": "2023-04-07T05:40:44Z",
       "side": 1,
       "message": "lazy creation of these is not going to be good for multithreading. I\u0027d like to avoid mutability like this if possible.\n\nA few options:\n - Can we create them up front on initialization based on the texture usage?\n - Can we create them on the fly on runtime, when needed?\n - Call the methods GetOrCreateD3D11XYZView() and don\u0027t make them const.\n\nIt depends on how heavy the memory cost is to create them or how heavy the runtime cost is to create them on the fly.\n\nIn the D3D12 backend even, RTV and DSV descriptors are always created on the fly since they\u0027re transient CPU-side allocations, not GPU side things.\n\nLater we can optimize things, but it should stay simple first.",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 82
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68b3f9cb_504c8fa7",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T15:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc8a0575_3714e792",
       "range": {
         "startLine": 103,
         "startChar": 4,
