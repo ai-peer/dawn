@@ -20,6 +20,7 @@
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
+#include "dawn/native/CommandBuffer.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/IntegerTypes.h"
@@ -264,8 +265,41 @@ D3D11_DEPTH_STENCIL_VIEW_DESC Texture::GetDSVDescriptor(const SubresourceRange& 
 MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                  const SubresourceRange& range,
                                  TextureBase::ClearValue clearValue) {
-    // TODO(dawn:1740): Implement this.
-    return DAWN_UNIMPLEMENTED_ERROR("ClearTexture");
+    // TODO(dawn:1740): Clear non-renderable texture.
+    if (!GetFormat().isRenderable) {
+        return DAWN_UNIMPLEMENTED_ERROR("Clearing non-renderable textures is not implemented");
+    }
+
+    TextureViewDescriptor desc;
+    desc.format = GetFormat().format;
+    switch (GetDimension()) {
+        case wgpu::TextureDimension::e1D:
+            desc.dimension = wgpu::TextureViewDimension::e1D;
+            break;
+        case wgpu::TextureDimension::e2D:
+            desc.dimension = wgpu::TextureViewDimension::e2D;
+            break;
+        case wgpu::TextureDimension::e3D:
+            desc.dimension = wgpu::TextureViewDimension::e3D;
+            break;
+    }
+    desc.baseMipLevel = range.baseMipLevel;
+    desc.mipLevelCount = range.levelCount;
+    desc.baseArrayLayer = range.baseArrayLayer;
+    desc.arrayLayerCount = range.layerCount;
+    desc.aspect = wgpu::TextureAspect::All;
+
+    Ref<TextureView> view = TextureView::Create(this, &desc);
+    ComPtr<ID3D11RenderTargetView> d3d11RTV;
+    DAWN_TRY_ASSIGN(d3d11RTV, view->GetD3D11RenderTargetView());
+
+    static constexpr std::array<float, 4> zero = {0.0f, 0.0f, 0.0f, 0.0f};
+    static constexpr std::array<float, 4> nonZero = {1.0f, 1.0f, 1.0f, 1.0f};
+
+    commandContext->GetD3D11DeviceContext()->ClearRenderTargetView(
+        d3d11RTV.Get(), clearValue == TextureBase::ClearValue::Zero ? zero.data() : nonZero.data());
+
+    return {};
 }
 
 void Texture::SetLabelHelper(const char* prefix) {
@@ -286,6 +320,38 @@ MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext*
         // dirty bits from recycled memory
         DAWN_TRY(ClearTexture(commandContext, range, TextureBase::ClearValue::Zero));
     }
+    return {};
+}
+
+MaybeError Texture::WriteTexture(CommandRecordingContext* commandContext,
+                                 const SubresourceRange& subresources,
+                                 const Origin3D& origin,
+                                 const Extent3D& size,
+                                 const uint8_t* data,
+                                 uint32_t bytesPerRow,
+                                 uint32_t rowsPerImage) {
+    DAWN_ASSERT(size.width != 0 && size.height != 0 && size.depthOrArrayLayers != 0);
+
+    if (IsCompleteSubresourceCopiedTo(this, size, subresources.baseMipLevel)) {
+        SetIsSubresourceContentInitialized(true, subresources);
+    } else {
+        DAWN_TRY(EnsureSubresourceContentInitialized(commandContext, subresources));
+    }
+
+    D3D11_BOX dstBox;
+    dstBox.left = origin.x;
+    dstBox.right = origin.x + size.width;
+    dstBox.top = origin.y;
+    dstBox.bottom = origin.y + size.height;
+    dstBox.front = origin.z;
+    dstBox.back = origin.z + size.depthOrArrayLayers;
+
+    uint32_t subresource =
+        GetSubresourceIndex(subresources.baseMipLevel, origin.z, subresources.aspects);
+
+    commandContext->GetD3D11DeviceContext1()->UpdateSubresource(
+        GetD3D11Resource(), subresource, &dstBox, data, bytesPerRow, rowsPerImage * bytesPerRow);
+
     return {};
 }
 
