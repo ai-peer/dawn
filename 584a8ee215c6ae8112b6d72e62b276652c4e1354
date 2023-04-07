@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8372c778_2614450e",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 49
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "mark_variable_lengths_non_... might be a better name. \"Link\" makes me thing we\u0027re giving the object a reference to some other object",
+      "range": {
+        "startLine": 633,
+        "startChar": 4,
+        "endLine": 633,
+        "endChar": 19
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53bd01ed_2010ee55",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "nit: extra whitespace, throughout",
+      "range": {
+        "startLine": 28,
+        "startChar": 72,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72449b94_155af3a3",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "I think it would be helpful to describe how member_access_pairs works\n\nbut also, it looks like we start with `[(member, None)]` and then push/pop, etc. to it. perhaps we can pass a function to the generator that creates the initial `member_access_pairs` as a python class? Then we can have some more methods on it that better communicate what is being accessed. For example, it would be better to access things as .member and .access instead of pair[0] and pair[1]. And, all of the `{% set member \u003d member_access_pairs[-1][0] %}` look kinda odd with the -1 index I think it would be more clear if we named it a \"stack\" or something and used .top() instead of [-1]",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e873e2fb_0112d432",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "always \"main\" ?",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 10
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5034ca0_6edce340",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "and, length is strlen",
+      "range": {
+        "startLine": 288,
+        "startChar": 12,
+        "endLine": 288,
+        "endChar": 46
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ee7b37_1ab710dc",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "? not sure what this refers to.\n\nalso, we have UNREACHABLE() instead of ASSERT(false)",
+      "range": {
+        "startLine": 297,
+        "startChar": 24,
+        "endLine": 297,
+        "endChar": 87
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb8be0c5_d5a6613d",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "\"pointer\" not \"reference\"",
+      "range": {
+        "startLine": 311,
+        "startChar": 35,
+        "endLine": 311,
+        "endChar": 45
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7d6281f_09dd180a",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "I don\u0027t immediately see what the function tries to do, or why it does why uses std::lower_bound. Could you explain in a comment?",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ed2be8_d3c98c60",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:30:43Z",
+      "side": 1,
+      "message": "any chance we could factor this with the client\u0027s ObjectStore?",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
