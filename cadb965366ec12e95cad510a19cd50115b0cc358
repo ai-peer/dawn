@@ -1,6 +1,63 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c549112b_07422fce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "Some comments in additions to avoiding mutable variables and instead doing the simple thing for now.",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "265df296_20fe16b8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "This could be using dawn::native::Format::HasDepthOrStencil() which removes the need for the helper function.",
+      "range": {
+        "startLine": 49,
+        "startChar": 34,
+        "endLine": 49,
+        "endChar": 64
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb05243_d75e5398",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to validate this as long as the MultiplanarFormat feature isn\u0027t enabled on the Adapter: Format.cpp while mark the format as unavailable.",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c98a95ef_33a55650",
@@ -43,6 +100,29 @@
         "startChar": 2,
         "endLine": 92,
         "endChar": 78
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1fc1ccb_7a4eff4c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "nit: This is the same for each case statement so it could maybe be extract outside of the switch.",
+      "range": {
+        "startLine": 144,
+        "startChar": 42,
+        "endLine": 144,
+        "endChar": 95
       },
       "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -113,6 +193,63 @@
         "startChar": 0,
         "endLine": 212,
         "endChar": 0
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6351b1a_140d521a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "Any reason these \"view\" methods aren\u0027t on the TextureView? Is it because they would be used in ClearTexture in the future?",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92160232_22c5e7e1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "nit: these could almost be a SubresourceRange. Ditto for DSV.",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61699275_ab714760",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "u-nit: dawn:1740",
+      "range": {
+        "startLine": 290,
+        "startChar": 12,
+        "endLine": 290,
+        "endChar": 16
       },
       "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -208,6 +345,40 @@
         "endLine": 334,
         "endChar": 56
       },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35e21d39_269a44af",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "nit: this can be removed, multiplanar formats are not supported in D3D11 at the moment.",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6773bdd0_15987953",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-07T17:04:27Z",
+      "side": 1,
+      "message": "Do you implement SwapChain later down the line?",
       "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
