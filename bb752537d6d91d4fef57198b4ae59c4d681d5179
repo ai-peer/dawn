@@ -16,6 +16,24 @@
       "message": "@cwallez@chromium.org this one can\u0027t be generated unfortunately. Do you have any ideas here by chance? Maybe managing custom C++ stuff within DawnLPMSerializer.cpp is the way to go here as well.",
       "revId": "bb752537d6d91d4fef57198b4ae59c4d681d5179",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de6db6d_460381e4",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T21:31:16Z",
+      "side": 1,
+      "message": "Not exactly sure what you\u0027re asking - but I think the placement is fine. I think it\u0027s better organized that the custom stuff is not in the template file.\n\nMaybe there\u0027s a way we can have LPM generate chained structs based on the \"chain roots\" in dawn.json.\n\nThen, we only need to specially generate the WGSL source code.",
+      "parentUuid": "195eeb0a_fa65c5db",
+      "revId": "bb752537d6d91d4fef57198b4ae59c4d681d5179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
