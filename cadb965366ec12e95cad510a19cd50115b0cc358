@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ed833e_abc4c2fe",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "265df296_20fe16b8",
+      "range": {
+        "startLine": 49,
+        "startChar": 34,
+        "endLine": 49,
+        "endChar": 64
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afb05243_d75e5398",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-04-07T17:04:27Z",
       "side": 1,
       "message": "I don\u0027t think we need to validate this as long as the MultiplanarFormat feature isn\u0027t enabled on the Adapter: Format.cpp while mark the format as unavailable.",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab6dfce_7b81e249",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afb05243_d75e5398",
       "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -118,6 +160,30 @@
       "writtenOn": "2023-04-07T17:04:27Z",
       "side": 1,
       "message": "nit: This is the same for each case statement so it could maybe be extract outside of the switch.",
+      "range": {
+        "startLine": 144,
+        "startChar": 42,
+        "endLine": 144,
+        "endChar": 95
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd47741d_f653107b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "each case is using different DESC(D3D11_TEXTURE{1D, 2D, 3D}_DESC. So it is not easy to extract them out, unless to use template. I think it make code not easy to read.",
+      "parentUuid": "d1fc1ccb_7a4eff4c",
       "range": {
         "startLine": 144,
         "startChar": 42,
@@ -200,6 +266,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fd6a886_ea45944a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "Added a TODO here. And I feel this method is too simple, seems not worth to make it a helper.",
+      "parentUuid": "944ca865_e1db687f",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 0
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6351b1a_140d521a",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -211,6 +301,24 @@
       "writtenOn": "2023-04-07T17:04:27Z",
       "side": 1,
       "message": "Any reason these \"view\" methods aren\u0027t on the TextureView? Is it because they would be used in ClearTexture in the future?",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de1d5a0_36fea453",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "f6351b1a_140d521a",
       "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -234,6 +342,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22f73a03_463aa1ba",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment. could you please explain it?",
+      "parentUuid": "92160232_22c5e7e1",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61699275_ab714760",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -245,6 +371,30 @@
       "writtenOn": "2023-04-07T17:04:27Z",
       "side": 1,
       "message": "u-nit: dawn:1740",
+      "range": {
+        "startLine": 290,
+        "startChar": 12,
+        "endLine": 290,
+        "endChar": 16
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed001c5_eca35ed3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61699275_ab714760",
       "range": {
         "startLine": 290,
         "startChar": 12,
@@ -366,6 +516,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b3f3173_e066f0d5",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35e21d39_269a44af",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6773bdd0_15987953",
@@ -379,6 +547,24 @@
       "writtenOn": "2023-04-07T17:04:27Z",
       "side": 1,
       "message": "Do you implement SwapChain later down the line?",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a23b9db_a844c526",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-07T21:04:31Z",
+      "side": 1,
+      "message": "Yes. SwapChain related code is split into a follow CL.",
+      "parentUuid": "6773bdd0_15987953",
       "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
