@@ -181,6 +181,30 @@
       },
       "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2884f6f_aed3a57a",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-07T06:17:45Z",
+      "side": 1,
+      "message": "Oh yeah, this CL is on gerrit for a long time that I forgot the hang (or how I added the suppression in the code) happened. Probably because it already existed in single threaded tests.",
+      "parentUuid": "e6ca6133_79cea2e2",
+      "range": {
+        "startLine": 1159,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 31
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
