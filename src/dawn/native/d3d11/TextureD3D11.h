@@ -48,6 +48,14 @@ class Texture final : public TextureBase {
     MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                    const SubresourceRange& range);
 
+    MaybeError WriteTexture(CommandRecordingContext* commandContext,
+                            const SubresourceRange& subresources,
+                            const Origin3D& origin,
+                            const Extent3D& size,
+                            const uint8_t* data,
+                            uint32_t bytesPerRow,
+                            uint32_t rowsPerImage);
+
   private:
     Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
     ~Texture() override;
@@ -65,8 +73,6 @@ class Texture final : public TextureBase {
     MaybeError ClearTexture(CommandRecordingContext* commandContext,
                             const SubresourceRange& range,
                             TextureBase::ClearValue clearValue);
-
-    MaybeError WriteTexture();
 
     ComPtr<ID3D11Resource> mD3d11Resource;
 };
