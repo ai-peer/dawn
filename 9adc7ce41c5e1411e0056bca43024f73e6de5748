@@ -16,6 +16,52 @@
       "message": "PTAL. I think this CL doesn\u0027t really depend on the multithreaded tests CL.",
       "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e12898_ca126659",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T05:16:01Z",
+      "side": 1,
+      "message": "I think that checking this against nullptr and assigning it to nullptr in DestroyImpl can race. We check it\u0027s non-null, then it\u0027s set to null, then we dereference a nullptr trying to do mBackendDevice-\u003eGetScopedLock.\nIt can race because externally calling ExternalImageDXGI::IsValid can race with ExternalImageDXGIImpl::DestroyImpl.\n\nTo fix this, maybe we can just have an atomic isValid boolean.\n\nBut, it would be better if we did https://crbug.com/dawn/1745 so the object lifetime tracking is consistent with the other objects.\n\nSee how destruction of other objects is handled [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/ObjectBase.cpp;l\u003d55;drc\u003d2dfb6431910db3004672ccb94df3ce09d13e8770;bpv\u003d0;bpt\u003d1?q\u003dApiObjectList\u0026ss\u003dchromium%2Fchromium%2Fsrc)\n\nIt\u0027s more tech debt to add extra synchronization here when we\u0027ll rework it in the future. I suppose we can have a small fix for now, then do dawn:1745, then reimplement ExternalImageDXGI on top of \"WGPUSharedImageDXGI\", then switch Chrome to use WGPUSharedImageDXGI instead of ExternalImageDXGI.",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 33
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787360aa_24006029",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-07T05:16:01Z",
+      "side": 1,
+      "message": "here, this wait could be issued before the signal from ClearD3D11Texture is issued on the CPU side - is that well-defined behavior by D3D? I\u0027m not sure. It\u0027s not how Chromium uses things. Chrome uses SyncTokens to ensure we never enqueue a wait that we haven\u0027t enqueued a signal for yet.\n\nThis could be why it hangs with WARP",
+      "range": {
+        "startLine": 1159,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 31
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
