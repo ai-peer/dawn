@@ -33,6 +33,24 @@
       "message": "Is it better to use this, or do do a `device.Tick()` in each of the samples?",
       "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99298787_e2b74177",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-08T17:05:13Z",
+      "side": 1,
+      "message": "device.Tick is meant to disappear in favor of this method eventually, so this is good. Or better `wgpu::Instance(instance-\u003eGet()).ProcessEvents()`. At some point we should try to stop using dawn::native::Instance and instead go through wgpu::Instance as much as we can.",
+      "parentUuid": "6f8a442d_adaac8d3",
+      "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
