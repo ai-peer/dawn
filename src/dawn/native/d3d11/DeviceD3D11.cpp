@@ -392,7 +392,6 @@ std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
 void Device::DestroyImpl() {
     ASSERT(GetState() == State::Disconnected);
 
-
     if (mFenceEvent != nullptr) {
         ::CloseHandle(mFenceEvent);
         mFenceEvent = nullptr;
