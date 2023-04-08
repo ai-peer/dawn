@@ -258,6 +258,7 @@ MaybeError RenderPipeline::Initialize() {
     DAWN_TRY(InitializeShaders());
     DAWN_TRY(InitializeDepthStencilState());
 
+    SetLabelImpl();
     return {};
 }
 
@@ -280,8 +281,14 @@ bool RenderPipeline::GetUsesVertexOrInstanceIndex() const {
     return mUsesVertexOrInstanceIndex;
 }
 
-void RenderPipeline::DestroyImpl() {
-    RenderPipelineBase::DestroyImpl();
+void RenderPipeline::SetLabelImpl() {
+    SetDebugName(ToBackend(GetDevice()), mRasterizerState.Get(), "Dawn_RenderPipeline", GetLabel());
+    SetDebugName(ToBackend(GetDevice()), mInputLayout.Get(), "Dawn_RenderPipeline", GetLabel());
+    SetDebugName(ToBackend(GetDevice()), mVertexShader.Get(), "Dawn_RenderPipeline", GetLabel());
+    SetDebugName(ToBackend(GetDevice()), mPixelShader.Get(), "Dawn_RenderPipeline", GetLabel());
+    SetDebugName(ToBackend(GetDevice()), mBlendState.Get(), "Dawn_RenderPipeline", GetLabel());
+    SetDebugName(ToBackend(GetDevice()), mDepthStencilState.Get(), "Dawn_RenderPipeline",
+                 GetLabel());
 }
 
 MaybeError RenderPipeline::InitializeRasterizerState() {
