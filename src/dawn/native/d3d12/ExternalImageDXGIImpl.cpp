@@ -57,15 +57,35 @@ ExternalImageDXGIImpl::~ExternalImageDXGIImpl() {
 }
 
 bool ExternalImageDXGIImpl::IsValid() const {
+    if (mBackendDevice != nullptr) {
+        auto deviceLock(mBackendDevice->GetScopedLock());
+        return IsValidImpl();
+    }
+
+    return IsValidImpl();
+}
+
+bool IsValidImpl() const {
     return IsInList();
 }
 
 void ExternalImageDXGIImpl::Destroy() {
+    if (mBackendDevice != nullptr) {
+        auto deviceLock(mBackendDevice->GetScopedLock());
+        DestroyImpl();
+        return;
+    }
+    DestroyImpl();
+}
+
+void ExternalImageDXGIImpl::DestroyImpl() {
     if (IsInList()) {
         RemoveFromList();
-        mBackendDevice = nullptr;
         mD3D12Resource = nullptr;
         mD3D11on12ResourceCache = nullptr;
+
+        // We don't set mBackendDevice to null here to keep the device's mutex accessible until
+        // this object's dtor.
     }
 }
 
@@ -73,6 +93,14 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
     const ExternalImageDXGIBeginAccessDescriptor* descriptor) {
     ASSERT(mBackendDevice != nullptr);
     ASSERT(descriptor != nullptr);
+
+    auto deviceLock(mBackendDevice->GetScopedLock());
+
+    if (!IsValidImpl()) {
+        dawn::ErrorLog() << "Cannot use external image after device destruction";
+        return nullptr;
+    }
+
     // Ensure the texture usage is allowed
     if (!IsSubset(descriptor->usage, static_cast<WGPUTextureUsageFlags>(mUsage))) {
         dawn::ErrorLog() << "Texture usage is not valid for external image";
@@ -130,6 +158,14 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
 
 void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
                                       ExternalImageDXGIFenceDescriptor* signalFence) {
+    ASSERT(mBackendDevice != nullptr);
+    auto deviceLock(mBackendDevice->GetScopedLock());
+
+    if (!IsValidImpl()) {
+        dawn::ErrorLog() << "Cannot use external image after device destruction";
+        return;
+    }
+
     ASSERT(signalFence != nullptr);
 
     Texture* backendTexture = ToBackend(FromAPI(texture));
