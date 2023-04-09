@@ -396,6 +396,8 @@ void Device::ForceEventualFlushOfCommands() {
 }
 
 MaybeError Device::ExecutePendingCommandContext() {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
+
     return mPendingCommands.ExecuteCommandList(this);
 }
 
@@ -730,7 +732,7 @@ void Device::DestroyImpl() {
     while (!mExternalImageList.empty()) {
         ExternalImageDXGIImpl* externalImage = mExternalImageList.head()->value();
         // ExternalImageDXGIImpl::Destroy() calls RemoveFromList().
-        externalImage->Destroy();
+        externalImage->DestroyInternal();
     }
 
     mZeroBuffer = nullptr;
