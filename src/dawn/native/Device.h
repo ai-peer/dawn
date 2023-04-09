@@ -430,6 +430,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     // This lock won't guarantee the wrapped mutex will be alive if the Device is deleted before the
     // AutoLock. It would crash if such thing happens.
     [[nodiscard]] Mutex::AutoLock GetScopedLock();
+    // Return the internal mutex that is normally wrapped by GetScopedLock*(). Useful for call sites
+    // wanting to keep the mutex alive or manually lock the mutex themselves.
+    const Ref<Mutex>& GetMutex() { return mMutex; }
 
     // In the 'Normal' mode, currently recorded commands in the backend normally will be actually
     // submitted in the next Tick. However in the 'Passive' mode, the submission will be postponed
