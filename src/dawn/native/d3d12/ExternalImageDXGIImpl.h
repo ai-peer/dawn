@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "dawn/common/LinkedList.h"
+#include "dawn/common/Mutex.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
@@ -49,8 +50,6 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
     ExternalImageDXGIImpl(const ExternalImageDXGIImpl&) = delete;
     ExternalImageDXGIImpl& operator=(const ExternalImageDXGIImpl&) = delete;
 
-    void Destroy();
-
     bool IsValid() const;
 
     WGPUTexture BeginAccess(const ExternalImageDXGIBeginAccessDescriptor* descriptor);
@@ -58,7 +57,13 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
     void EndAccess(WGPUTexture texture, ExternalImageDXGIFenceDescriptor* signalFence);
 
   private:
+    // Device class can call Destroy() on this object.
+    friend class Device;
+
+    void Destroy();
+
     Ref<Device> mBackendDevice;
+    Ref<Mutex> mBackendDeviceMutex;
     Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
     const bool mUseFenceSynchronization;
 
