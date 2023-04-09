@@ -455,6 +455,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
 
+    const Ref<Mutex>& GetMutex() { return mMutex; }
+
   private:
     void WillDropLastExternalRef() override;
 
