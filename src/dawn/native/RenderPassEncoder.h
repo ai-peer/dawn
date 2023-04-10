@@ -63,6 +63,10 @@ class RenderPassEncoder final : public RenderEncoderBase {
 
     void APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex);
 
+    // Internal code that already locked the device should call this method instead of
+    // APIEnd() to avoid the device being locked again.
+    void EndWithDeviceAlreadyLocked();
+
   protected:
     RenderPassEncoder(DeviceBase* device,
                       const RenderPassDescriptor* descriptor,
@@ -82,6 +86,8 @@ class RenderPassEncoder final : public RenderEncoderBase {
 
   private:
     void DestroyImpl() override;
+
+    void EndImpl(bool deviceLocked);
 
     void TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex);
 
