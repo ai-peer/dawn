@@ -187,6 +187,7 @@ MaybeError EncodeConvertTimestampsToNanoseconds(CommandEncoder* encoder,
                                                 BufferBase* availability,
                                                 BufferBase* params) {
     DeviceBase* device = encoder->GetDevice();
+    ASSERT(device->IsLockedByCurrentThreadIfNeeded());
 
     ComputePipelineBase* pipeline;
     DAWN_TRY_ASSIGN(pipeline, GetOrCreateTimestampComputePipeline(device));
@@ -204,7 +205,7 @@ MaybeError EncodeConvertTimestampsToNanoseconds(CommandEncoder* encoder,
 
     // Create compute encoder and issue dispatch.
     Ref<ComputePassEncoder> pass =
-        encoder->BeginComputePass(nullptr, /*deviceAlreadyLocked=*/false);
+        encoder->BeginComputePass(nullptr, /*deviceAlreadyLocked=*/true);
     pass->APISetPipeline(pipeline);
     pass->APISetBindGroup(0, bindGroup.Get());
     pass->APIDispatchWorkgroups(
