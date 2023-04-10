@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cad0c4e8_023203b7",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T10:39:52Z",
+      "side": 1,
+      "message": "Alternatively, maybe `EndAccess` should be no-op when the image becomes invalid.",
+      "parentUuid": "6d882c9a_a7edd8d4",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4878fcb8_c6c25e63",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 16
