@@ -871,8 +871,12 @@ MaybeError CommandBuffer::RecordFirstIndexOffset(RenderPipeline* renderPipeline,
         return {};
     }
 
+    if (firstVertex == 0 && firstInstance == 0) {
+        return {};
+    }
+
     // TODO: only update the uniform buffer when the value changes.
-    std::array<uint32_t, 256 / sizeof(uint32_t)> offsets = {
+    std::array<uint32_t, 2> offsets = {
         firstVertex,
         firstInstance,
     };
@@ -885,6 +889,10 @@ MaybeError CommandBuffer::RecordFirstIndexOffset(RenderPipeline* renderPipeline,
 MaybeError CommandBuffer::RecordNumWorkgroupsForDispatch(ComputePipeline* computePipeline,
                                                          CommandRecordingContext* commandContext,
                                                          DispatchCmd* dispatchCmd) {
+    if (commandContext->GetUniformBuffer()->IsDataInitialized()) {
+        return {};
+    }
+
     if (commandContext->GetUniformBuffer()->IsDataInitialized()) {
         return {};
     }
