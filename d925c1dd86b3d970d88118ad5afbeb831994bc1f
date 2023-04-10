@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0bf25a1_889ff9d4",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 47
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e624429_d8d4d6cf",
+      "range": {
+        "startLine": 657,
+        "startChar": 0,
+        "endLine": 657,
+        "endChar": 22
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cb9d1f6_d70bc00f",
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "Done. Created another CL to enable implicit sync via command line, in preparing for a CI config. https://dawn-review.googlesource.com/c/dawn/+/126580",
       "parentUuid": "1cb9d1f6_d70bc00f",
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa3886f4_61a0a92c",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done. No longer checking these tests specifically with ImplicitDeviceSynchronization.",
+      "parentUuid": "bdb0a802_308e74d2",
       "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -116,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcf68bb3_5b2b65ba",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done. Removed `GuardedObject`.",
+      "parentUuid": "d837c0f3_080b9132",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 5
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb2a0f89_f60d7a96",
@@ -129,6 +195,30 @@
       "writtenOn": "2023-04-05T21:10:35Z",
       "side": 1,
       "message": "what about dropping the last ref to the device inside a callback?",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 54
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b280d987_4a8e716d",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done. Added a 2nd test for this.",
+      "parentUuid": "fb2a0f89_f60d7a96",
       "range": {
         "startLine": 126,
         "startChar": 25,
@@ -304,6 +394,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09d8c107_bee3e8b4",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e130936c_6c3fa862",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 54
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fc60718_16b31a29",
@@ -317,6 +431,30 @@
       "writtenOn": "2023-04-05T21:10:35Z",
       "side": 1,
       "message": "can we use `utils::RequiredBytesInCopy` ?",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 432,
+        "endChar": 5
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc939503_2b50a67d",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "6fc60718_16b31a29",
       "range": {
         "startLine": 428,
         "startChar": 4,
@@ -350,6 +488,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8361da09_0cf463e7",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17578833_243298d3",
+      "range": {
+        "startLine": 512,
+        "startChar": 20,
+        "endLine": 515,
+        "endChar": 30
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba6273ba_c4a4b1ed",
@@ -363,6 +525,30 @@
       "writtenOn": "2023-04-05T21:10:35Z",
       "side": 1,
       "message": "we have UNREACHABLE() macro",
+      "range": {
+        "startLine": 517,
+        "startChar": 24,
+        "endLine": 518,
+        "endChar": 32
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14c5733b_ed51e6a4",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done. Removed.",
+      "parentUuid": "ba6273ba_c4a4b1ed",
       "range": {
         "startLine": 517,
         "startChar": 24,
@@ -420,6 +606,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab32d698_dc6289cf",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done. no need for guarding.",
+      "parentUuid": "49e6b65b_05724c0b",
+      "range": {
+        "startLine": 615,
+        "startChar": 8,
+        "endLine": 617,
+        "endChar": 69
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed0516f9_67274bea",
@@ -467,6 +677,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d55d44_7b60399c",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done. No need for guarding.",
+      "parentUuid": "4d8f0b03_fa76903a",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 786,
+        "endChar": 30
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19928eb5_654f9358",
@@ -480,6 +714,30 @@
       "writtenOn": "2023-04-05T21:10:35Z",
       "side": 1,
       "message": "why this versus push/pop error scope?\n\nOverwriting the uncaptured error callback will change the test fixture\u0027s default error callback - which checks that no errors happen.",
+      "range": {
+        "startLine": 880,
+        "startChar": 0,
+        "endLine": 888,
+        "endChar": 26
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa548ff9_c9542f3d",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19928eb5_654f9358",
       "range": {
         "startLine": 880,
         "startChar": 0,

@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03dd1536_ca8e3397",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e7e34e3_d820851e",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "138adf50_87ea37b6",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "`mNumPendingMapOperations` is modified inside `SlotMapCallback` alongside other test\u0027s states. There is already a mutex used in that method to protect `mNumPendingMapOperations` and other states, hence I think it\u0027s overkill to use additional atomic wrapper for that variable.\n\nWe could use relaxed memory order and mutex\u0027s locking scope in `SlotMapCallback` and check if the atomic\u0027s value is zero in `MapSlotsSynchronously`. However, I think it is not safe, since the order is not guaranteed .i.e. even if `mNumPendingMapOperations` is zero, it doesn\u0027t mean all pending works have finished (it is only guaranteed if we use the same mutex in `MapSlotsSynchronously`). Unless we use strong memory order and it\u0027s basically an overkill (with mutex + strong ordered atomic, why not just use mutex anw).",
       "parentUuid": "138adf50_87ea37b6",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edadcdf6_f57505e9",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done, changed to atomic anw. Since we have decided to use `dawn::Mutex` instead of `std::mutex`, there is no `std::unique_lock` implemented yet for `dawn::Mutex` to temporarily unlock and relock like the previous version.\n\nbtw, reading the code again, it seems `SlotMapCallback` won\u0027t be called by anywhere else besides `MapSlotsSynchronously`. So the mutex and atomic are not really needed here. But might be needed for clang thread safety\u0027s static analysis in future.",
+      "parentUuid": "9295f759_5a9d35c6",
       "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -106,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32b5dfa2_40d36e18",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "282912ae_633974f8",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dce7eeb_90fafc05",
@@ -123,6 +177,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d89e9d_e5261429",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dce7eeb_90fafc05",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "370523cf_6a30ba92",
@@ -136,6 +208,24 @@
       "writtenOn": "2023-04-05T21:10:35Z",
       "side": 1,
       "message": "unit: capitalize the lambda name. same below",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8a86ce_7cd2b708",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "370523cf_6a30ba92",
       "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -193,6 +283,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4eb387f_c66b6ae7",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "975fb343_bab5b787",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "041240ef_de986603",
@@ -246,6 +354,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a0493d_30062284",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0786a3f1_ba396f57",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a61f565b_cf968a84",
@@ -259,6 +385,24 @@
       "writtenOn": "2023-04-05T21:10:35Z",
       "side": 1,
       "message": "why tick?",
+      "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32db7f04_27f499fb",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:31:20Z",
+      "side": 1,
+      "message": "Not really needed. Removed.",
+      "parentUuid": "a61f565b_cf968a84",
       "revId": "e5815ae34ff24cb2b6358a7e03c7a3ddb0e910a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
