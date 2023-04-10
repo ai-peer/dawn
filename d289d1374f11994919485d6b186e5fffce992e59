@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d882c9a_a7edd8d4",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T10:37:58Z",
+      "side": 1,
+      "message": "OK, you are right that this scenario could happen theoretically. However, I am not sure the way chrome uses external images currently would let that happen. CC @sunnyps@chromium.org.\n\nIf we want to guard against this scenario, the internal locking implemented in Dawn might not be enough. Since chrome\u0027s code also uses `IsInvalid()` then `EndAccess` non-atomically in several places: https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:gpu/command_buffer/service/shared_image/d3d_image_backing.cc;drc\u003d57181fb7c366875dd8b56e32d2d18059071a7593;l\u003d934\n\nWe might need to modify chrome as well. Possibly allowing returning the scoped lock to chrome.",
+      "parentUuid": "4e721e17_7db9fa4b",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4878fcb8_c6c25e63",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 16
