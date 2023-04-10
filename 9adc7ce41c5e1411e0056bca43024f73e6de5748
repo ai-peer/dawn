@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf7eb95_cea6c38c",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:24:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94962a63_5c526ad1",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 33
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59fc8ef8_c66b9395",
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "Oh yeah, this CL is on gerrit for a long time that I forgot the hang (or how I added the suppression in the code) happened. Probably because it already existed in single threaded tests.",
       "parentUuid": "e6ca6133_79cea2e2",
+      "range": {
+        "startLine": 1159,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 31
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1542157c_325d021a",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:24:26Z",
+      "side": 1,
+      "message": "The test has been moved to https://dawn-review.googlesource.com/c/dawn/+/122060",
+      "parentUuid": "c2884f6f_aed3a57a",
       "range": {
         "startLine": 1159,
         "startChar": 8,
