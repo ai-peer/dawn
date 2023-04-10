@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b659b63e_2814d628",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-10T17:56:29Z",
+      "side": 1,
+      "message": "Surprised this was broken but guessing we broke the error callbacks at some point (probably moving their call site from immediate to ProcessEvents) and didn\u0027t notice?",
+      "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f8a442d_adaac8d3",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "device.Tick is meant to disappear in favor of this method eventually, so this is good. Or better `wgpu::Instance(instance-\u003eGet()).ProcessEvents()`. At some point we should try to stop using dawn::native::Instance and instead go through wgpu::Instance as much as we can.",
       "parentUuid": "6f8a442d_adaac8d3",
+      "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63959f29_2b0c922d",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-10T17:56:29Z",
+      "side": 1,
+      "message": "+1, and rename this helper from Tick to ProcessEvents maybe (to adopt the new language)",
+      "parentUuid": "99298787_e2b74177",
       "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
