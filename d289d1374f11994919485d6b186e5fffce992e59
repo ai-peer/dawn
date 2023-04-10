@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcc1ad8d_549bb3b3",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T11:14:21Z",
+      "side": 1,
+      "message": "I have moved `IsInvalid` call to inside `ExternalImageDXGIImpl::Begin/EndAccess` so that it will be protected by a lock together with the begin/end access\u0027s code.",
+      "parentUuid": "cad0c4e8_023203b7",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4878fcb8_c6c25e63",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 16
@@ -109,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d559030_b7e8de83",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T11:14:21Z",
+      "side": 1,
+      "message": "I have inserted `IsInvalidImpl` check to `Begin/EndAccess`.",
+      "parentUuid": "3430fd84_3a8f7f87",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c66f529_5bb5c5cc",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 16
@@ -156,6 +192,24 @@
       "side": 1,
       "message": "Indeed, what about:\n\n```\nif (mBackendDevice !\u003d nullptr) {\n  lock\n  if (IsInList()) {\n    RemoveFromList();\n  }\n}\n\nmBackendDevice \u003d nullptr;\nmD3D12Resource \u003d nullptr;\nmD3D11on12ResourceCache \u003d nullptr;\n```\n\nOr do we expect the setting to nullptr to cause calls to code that needs to be synchronized?",
       "parentUuid": "8ae549f3_cbcbff02",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f0554a_0515bbc2",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T11:14:21Z",
+      "side": 1,
+      "message": "Won\u0027t it change the original logic of the code? The original code only set those to null if `IsInList` is true. Not sure that is intended. cc @sunnyps@chromium.org",
+      "parentUuid": "c943ac04_1719dde0",
       "revId": "d289d1374f11994919485d6b186e5fffce992e59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
