@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e721e17_7db9fa4b",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-10T10:00:54Z",
+      "side": 1,
+      "message": "[1]\n\nThread A: Enter this function, check IsValid locking the mutex then unlocking it.\nThread B: destroy the device or the external image.\nThread A: Call BeginAccess that assumes the device and external image are still valid.\n\nThis is a general TOCTOU concept we have to be careful about when adding multithreading support.",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4878fcb8_c6c25e63",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 16
@@ -38,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3430fd84_3a8f7f87",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-10T10:00:54Z",
+      "side": 1,
+      "message": "See comment at [1]",
+      "parentUuid": "75654ec9_4585e92d",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c66f529_5bb5c5cc",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 16
@@ -67,6 +102,24 @@
       "side": 1,
       "message": "I think `IsInList` is not thread safe either. We need to protect both `IsInList` and `RemoveFromList`.",
       "parentUuid": "0c66f529_5bb5c5cc",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c943ac04_1719dde0",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-10T10:00:54Z",
+      "side": 1,
+      "message": "Indeed, what about:\n\n```\nif (mBackendDevice !\u003d nullptr) {\n  lock\n  if (IsInList()) {\n    RemoveFromList();\n  }\n}\n\nmBackendDevice \u003d nullptr;\nmD3D12Resource \u003d nullptr;\nmD3D11on12ResourceCache \u003d nullptr;\n```\n\nOr do we expect the setting to nullptr to cause calls to code that needs to be synchronized?",
+      "parentUuid": "8ae549f3_cbcbff02",
       "revId": "d289d1374f11994919485d6b186e5fffce992e59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
