@@ -128,7 +128,8 @@ class EncodingContext {
     MaybeError ExitRenderPass(const ApiObjectBase* passEncoder,
                               RenderPassResourceUsageTracker usageTracker,
                               CommandEncoder* commandEncoder,
-                              IndirectDrawMetadata indirectDrawMetadata);
+                              IndirectDrawMetadata indirectDrawMetadata,
+                              bool deviceAlreadyLocked);
     void ExitComputePass(const ApiObjectBase* passEncoder, ComputePassResourceUsage usages);
     MaybeError Finish();
 
