@@ -38,7 +38,7 @@ void Mutex::Unlock() {
     mNativeMutex.unlock();
 }
 
-bool Mutex::IsLockedByCurrentThread() {
+bool Mutex::IsLockedByCurrentThread() const {
 #if defined(DAWN_ENABLE_ASSERTS)
     return mOwner.load(std::memory_order_acquire) == std::this_thread::get_id();
 #else
