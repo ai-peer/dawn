@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eecd61b_468ba493",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-10T07:29:38Z",
+      "side": 1,
+      "message": "Just want to confirm with @sunnyps@chromium.org.\nIs there any problem if we set `mBackendDevice` to null in dtor instead of `Destroy`?",
+      "parentUuid": "ecf7eb95_cea6c38c",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 33
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59fc8ef8_c66b9395",
