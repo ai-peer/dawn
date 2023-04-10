@@ -20,6 +20,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Mutex.h"
 #include "dawn/native/CommandAllocator.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/ErrorData.h"
@@ -128,7 +129,8 @@ class EncodingContext {
     MaybeError ExitRenderPass(const ApiObjectBase* passEncoder,
                               RenderPassResourceUsageTracker usageTracker,
                               CommandEncoder* commandEncoder,
-                              IndirectDrawMetadata indirectDrawMetadata);
+                              IndirectDrawMetadata indirectDrawMetadata,
+                              bool deviceAlreadyLocked);
     void ExitComputePass(const ApiObjectBase* passEncoder, ComputePassResourceUsage usages);
     MaybeError Finish();
 
@@ -149,6 +151,8 @@ class EncodingContext {
 
     bool IsFinished() const;
     void MoveToIterator();
+
+    [[nodiscard]] Mutex::AutoLock GetScopedDeviceLock(bool deviceAlreadyLocked) const;
 
     DeviceBase* mDevice;
 

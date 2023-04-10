@@ -216,11 +216,11 @@ MaybeError BlitDepthToDepth(DeviceBase* device,
         rpDesc.depthStencilAttachment = &dsAttachment;
 
         // Draw to perform the blit.
-        Ref<RenderPassEncoder> pass = AcquireRef(commandEncoder->APIBeginRenderPass(&rpDesc));
+        Ref<RenderPassEncoder> pass = commandEncoder->BeginRenderPass(&rpDesc);
         pass->APISetBindGroup(0, bindGroup.Get());
         pass->APISetPipeline(pipeline.Get());
         pass->APIDraw(3, 1, 0, 0);
-        pass->APIEnd();
+        pass->EndInternal();
     }
 
     return {};

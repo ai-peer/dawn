@@ -50,6 +50,16 @@ void EncodingContext::Destroy() {
     mCurrentEncoder = nullptr;
 }
 
+Mutex::AutoLock EncodingContext::GetScopedDeviceLock(bool deviceAlreadyLocked) const {
+    if (!deviceAlreadyLocked) {
+        return mDevice->GetScopedLock();
+    }
+
+    // return no-op lock.
+    ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
+    return Mutex::AutoLock();
+}
+
 CommandIterator EncodingContext::AcquireCommands() {
     MoveToIterator();
     ASSERT(!mWereCommandsAcquired);
@@ -118,7 +128,8 @@ void EncodingContext::EnterPass(const ApiObjectBase* passEncoder) {
 MaybeError EncodingContext::ExitRenderPass(const ApiObjectBase* passEncoder,
                                            RenderPassResourceUsageTracker usageTracker,
                                            CommandEncoder* commandEncoder,
-                                           IndirectDrawMetadata indirectDrawMetadata) {
+                                           IndirectDrawMetadata indirectDrawMetadata,
+                                           bool deviceAlreadyLocked) {
     ASSERT(mCurrentEncoder != mTopLevelEncoder);
     ASSERT(mCurrentEncoder == passEncoder);
 
@@ -133,9 +144,19 @@ MaybeError EncodingContext::ExitRenderPass(const ApiObjectBase* passEncoder,
         // Note: If encoding validation commands fails, no commands should be in mPendingCommands,
         //       so swap back the renderCommands to ensure that they are not leaked.
         CommandAllocator renderCommands = std::move(mPendingCommands);
-        DAWN_TRY_WITH_CLEANUP(EncodeIndirectDrawValidationCommands(
-                                  mDevice, commandEncoder, &usageTracker, &indirectDrawMetadata),
-                              { mPendingCommands = std::move(renderCommands); });
+
+        // The below function might create new resources. Need to lock the Device.
+        // TODO(crbug.com/dawn/1618): In future, all temp resources should be created at
+        // Command Submit time, so the locking would be removed from here at that point.
+        {
+            Mutex::AutoLock deviceLock(GetScopedDeviceLock(deviceAlreadyLocked));
+
+            DAWN_TRY_WITH_CLEANUP(
+                EncodeIndirectDrawValidationCommands(mDevice, commandEncoder, &usageTracker,
+                                                     &indirectDrawMetadata),
+                { mPendingCommands = std::move(renderCommands); });
+        }
+
         CommitCommands(std::move(mPendingCommands));
         CommitCommands(std::move(renderCommands));
     }

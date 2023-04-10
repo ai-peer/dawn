@@ -136,6 +136,16 @@ void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t 
 }
 
 void RenderPassEncoder::APIEnd() {
+    EndImpl(/*deviceLocked=*/false);
+}
+
+void RenderPassEncoder::EndInternal() {
+    EndImpl(/*deviceLocked=*/true);
+}
+
+void RenderPassEncoder::EndImpl(bool deviceLocked) {
+    ASSERT(!deviceLocked || GetDevice()->IsLockedByCurrentThreadIfNeeded());
+
     if (mEnded && IsValidationEnabled()) {
         GetDevice()->HandleError(DAWN_VALIDATION_ERROR("%s was already ended.", this));
         return;
@@ -161,9 +171,9 @@ void RenderPassEncoder::APIEnd() {
 
             allocator->Allocate<EndRenderPassCmd>(Command::EndRenderPass);
 
-            DAWN_TRY(mEncodingContext->ExitRenderPass(this, std::move(mUsageTracker),
-                                                      mCommandEncoder.Get(),
-                                                      std::move(mIndirectDrawMetadata)));
+            DAWN_TRY(mEncodingContext->ExitRenderPass(
+                this, std::move(mUsageTracker), mCommandEncoder.Get(),
+                std::move(mIndirectDrawMetadata), deviceLocked));
             return {};
         },
         "encoding %s.End().", this);

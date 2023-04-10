@@ -297,7 +297,7 @@ MaybeError BlitRG8ToDepth16Unorm(DeviceBase* device,
         RenderPassDescriptor rpDesc = {};
         rpDesc.depthStencilAttachment = &dsAttachment;
 
-        Ref<RenderPassEncoder> pass = AcquireRef(commandEncoder->APIBeginRenderPass(&rpDesc));
+        Ref<RenderPassEncoder> pass = commandEncoder->BeginRenderPass(&rpDesc);
         // Bind the resources.
         pass->APISetBindGroup(0, bindGroup.Get());
         // Discard all fragments outside the copy region.
@@ -307,7 +307,7 @@ MaybeError BlitRG8ToDepth16Unorm(DeviceBase* device,
         pass->APISetPipeline(pipeline.Get());
         pass->APIDraw(3, 1, 0, 0);
 
-        pass->APIEnd();
+        pass->EndInternal();
     }
     return {};
 }
@@ -415,7 +415,7 @@ MaybeError BlitR8ToStencil(DeviceBase* device,
         RenderPassDescriptor rpDesc = {};
         rpDesc.depthStencilAttachment = &dsAttachment;
 
-        Ref<RenderPassEncoder> pass = AcquireRef(commandEncoder->APIBeginRenderPass(&rpDesc));
+        Ref<RenderPassEncoder> pass = commandEncoder->BeginRenderPass(&rpDesc);
         // Bind the resources.
         pass->APISetBindGroup(0, bindGroup.Get());
         // Discard all fragments outside the copy region.
@@ -438,7 +438,7 @@ MaybeError BlitR8ToStencil(DeviceBase* device,
             // since WebGPU doesn't have push constants.
             pass->APIDraw(3, 1, 0, 1u << bit);
         }
-        pass->APIEnd();
+        pass->EndInternal();
     }
     return {};
 }
