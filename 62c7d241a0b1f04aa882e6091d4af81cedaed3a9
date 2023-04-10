@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c64946_79e08b02",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-04-10T19:27:14Z",
+      "side": 1,
+      "message": "Even here (and in BeginAccess) you can probably use `mBackendDevice !\u003d nullptr` check - before you take the lock - so you don\u0027t need to split up IsValid into two methods.",
+      "range": {
+        "startLine": 164,
+        "startChar": 9,
+        "endLine": 164,
+        "endChar": 20
+      },
+      "revId": "62c7d241a0b1f04aa882e6091d4af81cedaed3a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

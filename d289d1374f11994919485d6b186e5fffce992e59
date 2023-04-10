@@ -212,6 +212,24 @@
       "parentUuid": "c943ac04_1719dde0",
       "revId": "d289d1374f11994919485d6b186e5fffce992e59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b22e943_2a81f1b8",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-04-10T19:27:14Z",
+      "side": 1,
+      "message": "Note that RemoveFromList is a no-op if IsInList is false, so we can do this:\n\n```\nif (mBackendDevice !\u003d nullptr) {\n  auto deviceLock...\n  RemoveFromList();\n}\n```\n\nWe don\u0027t care about the thread-safety of ExternalImageDXGI itself i.e. we don\u0027t guarantee that a particular instance of ExternalImageDXGI(Impl) can be used concurrently so it\u0027s ok to rely on mBackendDevice being non-null instead of checking IsInList. And yes, it\u0027s ok to set the other fields to null outside of the IsInList block - it doesn\u0027t need to be that way IIRC.",
+      "parentUuid": "a5f0554a_0515bbc2",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
