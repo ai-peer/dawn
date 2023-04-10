@@ -37,7 +37,7 @@ float RandomFloat(float min, float max) {
     return zeroOne * (max - min) + min;
 }
 
-constexpr size_t kNumTriangles = 10000;
+constexpr size_t kNumTriangles = 10000 * 5;
 
 // Aligned as minUniformBufferOffsetAlignment
 struct alignas(256) ShaderData {
@@ -184,12 +184,17 @@ int main(int argc, const char* argv[]) {
 
     utils::Timer* timer = utils::CreateTimer();
     timer->Start();
+    int lastFrameCount = 0;
     while (!ShouldQuit()) {
         utils::ScopedAutoreleasePool pool;
         frameCount++;
         frame();
-        if (frameCount % 60 == 0) {
-            printf("FPS: %lf\n", static_cast<double>(frameCount) / timer->GetElapsedTime());
+        double time = timer->GetElapsedTime();
+        if (time < 1.0) {
+            continue;
         }
+        printf("FPS: %lf\n", (frameCount - lastFrameCount) / timer->GetElapsedTime());
+        lastFrameCount = frameCount;
+        timer->Start();
     }
 }
