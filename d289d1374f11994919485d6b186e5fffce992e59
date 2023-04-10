@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4878fcb8_c6c25e63",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-10T09:13:25Z",
+      "side": 1,
+      "message": "Couldn\u0027t there be a race where the image is valid but becomes invalid between the check and the call to BeginAccess / EndAccess?",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c66f529_5bb5c5cc",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-10T09:13:25Z",
+      "side": 1,
+      "message": "Don\u0027t we only need to lock the call to RemoveFromList() ?",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
