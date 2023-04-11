@@ -46,6 +46,30 @@
       },
       "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fba6485_1b8b09e6",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-11T20:00:15Z",
+      "side": 1,
+      "message": "Great to know! some more follow-ups:\n - what about CupySubresourceRegion? can you use it with constant buffers and does it also have partial update restrictions in some versions?\n - d3d11.1 does that map exactly to D3D_FEATURE_LEVEL_11_1? we still have uses on D3D_FEATURE_LEVEL_11_0 so might need a workaround there..",
+      "parentUuid": "272ad6a1_1ad055a6",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 13
+      },
+      "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
