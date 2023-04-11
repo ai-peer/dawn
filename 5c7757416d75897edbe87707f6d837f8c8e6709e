@@ -249,6 +249,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b911f99_1ace7073",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T14:58:33Z",
+      "side": 1,
+      "message": "Rafael, do you know the rational for that? Would it be ok to go through SRV all the time to avoid this very annoying restriction?",
+      "parentUuid": "d04fc7de_f34d0fe3",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d74f813a_14c832b8",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
