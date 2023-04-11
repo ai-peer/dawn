@@ -94,6 +94,30 @@
       },
       "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15884cb1_c6006710",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-11T20:32:34Z",
+      "side": 1,
+      "message": "Got it - for now then, Peng, I think it would be simplest to have all buffer copies use CopySubresourceRegion. If we\u0027re writing CPU data, then we can upload it into a staging buffer, then issue a CopySubresourceRegion. Would that work?\nB2T and T2B would still need to do the readback and upload or use a blit.\n\nFor `ConstantBufferPartialUpdate`, let\u0027s add a UMA stat to record how prevalent it is.",
+      "parentUuid": "b68d7934_44ff93c1",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 13
+      },
+      "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
