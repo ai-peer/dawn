@@ -70,6 +70,30 @@
       },
       "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b68d7934_44ff93c1",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-04-11T20:28:21Z",
+      "side": 1,
+      "message": "@Austin, my understanding is CopySubresourceRegion has always allowed partial resource update. \n\nAs for UpdateSubResource1, you need to check the `ConstantBufferPartialUpdate` field of `D3D11_FEATURE_DATA_D3D11_OPTIONS`, which is retrieved by calling `ID3D11Device::CheckFeatureSupport` with the `D3D11_FEATURE_D3D11_OPTIONS` enum.",
+      "parentUuid": "0fba6485_1b8b09e6",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 13
+      },
+      "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
