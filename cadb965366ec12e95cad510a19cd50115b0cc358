@@ -196,6 +196,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d29e6d95_87c45804",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T15:02:21Z",
+      "side": 1,
+      "message": "Sorry, I meant the call to `D3D11TextureBindFlags(GetUsage(), GetFormat())`, but that\u0027s a very optional nit anyway.",
+      "parentUuid": "dd47741d_f653107b",
+      "range": {
+        "startLine": 144,
+        "startChar": 42,
+        "endLine": 144,
+        "endChar": 95
+      },
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8452fc2b_aba91411",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -323,6 +347,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d328a2_9f0678d9",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T15:02:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1de1d5a0_36fea453",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92160232_22c5e7e1",
@@ -354,6 +396,24 @@
       "side": 1,
       "message": "I don\u0027t understand this comment. could you please explain it?",
       "parentUuid": "92160232_22c5e7e1",
+      "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1134665_c8bd33e1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T15:02:21Z",
+      "side": 1,
+      "message": "Whoops, typing out loud a bit here, this was referring to dawn::native::SubresourceRange https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Subresource.h;drc\u003d84532462f62cf2ae98d9a3080c8e8cb371fa36fb;l\u003d71 we have a bunch of functions like this that take things to specify subresources but we rarely use that helper struct. It seems it is maybe not very convenient. Not sure.\n\nThis is definitely an optional nit.",
+      "parentUuid": "22f73a03_463aa1ba",
       "revId": "cadb965366ec12e95cad510a19cd50115b0cc358",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
