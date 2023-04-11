@@ -86,6 +86,24 @@
       "parentUuid": "99298787_e2b74177",
       "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc6f628_350a91a2",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-11T19:22:27Z",
+      "side": 1,
+      "message": "I renamed to `ProcessEvents`. I am unable to get the alternate method call to work. It seems like with the `dawn::native` call we get the right serializer, but with the `ProcessEvents` version we don\u0027t have a serializer set.\n\nThe right serialize is setup when it creates the terrible command buffer as the `c2sBuf` but I don\u0027t know how to get that hooked into the instance created?",
+      "parentUuid": "63959f29_2b0c922d",
+      "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
