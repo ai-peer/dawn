@@ -248,6 +248,24 @@
       "parentUuid": "0b22e943_2a81f1b8",
       "revId": "d289d1374f11994919485d6b186e5fffce992e59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2be3e94e_b46ec34e",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-11T17:40:24Z",
+      "side": 1,
+      "message": "I have updated a new version. We don\u0027t need to check `mBackendDevice` is null or not multiple times in order to use the mutex anymore. We can query the mutex from the device in ctor and keep a ref of the mutex. If the device doesn\u0027t have mutex (due to ImplicitDeviceSynchronization disabled), this will just store a nullptr ref.\n\nLater we can use `Autolock` directly on the mutex\u0027s ref. `AutoLock` on a null mutex is no-op. Even after `mBackendDevice` is set to null in `Destroy`, the mutex\u0027s ref will still be valid to be locked.\n\nPTAL @enga@chromium.org @cwallez@chromium.org @sunnyps@chromium.org",
+      "parentUuid": "c230ae9d_7fde15da",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
