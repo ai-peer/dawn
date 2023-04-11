@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbcb3c12_324218a5",
+        "filename": "src/dawn/native/d3d11/ComputePipelineD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-11T23:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "474f6bed_216cf940",
+      "revId": "dd78f35b60ab961be7c2f1cc93671551a3d875a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e64a4079_10be20de",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-04-11T17:36:03Z",
       "side": 1,
       "message": "Does passing nullptr to the function instead work?",
+      "revId": "dd78f35b60ab961be7c2f1cc93671551a3d875a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fc2e736_f291a990",
+        "filename": "src/dawn/native/d3d11/ComputePipelineD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-11T23:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e64a4079_10be20de",
       "revId": "dd78f35b60ab961be7c2f1cc93671551a3d875a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8510afb_609bf7b3",
+        "filename": "src/dawn/native/d3d11/ComputePipelineD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-11T23:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd039f40_97f5d858",
+      "revId": "dd78f35b60ab961be7c2f1cc93671551a3d875a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b80c5df_ec35708d",
@@ -99,6 +153,24 @@
       "writtenOn": "2023-04-11T17:36:03Z",
       "side": 1,
       "message": "When is that not the case?",
+      "revId": "dd78f35b60ab961be7c2f1cc93671551a3d875a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc50dc06_bd80fe52",
+        "filename": "src/dawn/native/d3d11/ComputePipelineD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-11T23:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b80c5df_ec35708d",
       "revId": "dd78f35b60ab961be7c2f1cc93671551a3d875a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
