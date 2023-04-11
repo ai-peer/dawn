@@ -39,6 +39,30 @@
       },
       "revId": "4e01a85e91bf87675443aebfa86ecac5f2e01584",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d12cb64_92fd47e8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-11T19:32:54Z",
+      "side": 1,
+      "message": "SG. I will do it in a follow up cl.",
+      "parentUuid": "65748db3_4a7ecc2b",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "4e01a85e91bf87675443aebfa86ecac5f2e01584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
