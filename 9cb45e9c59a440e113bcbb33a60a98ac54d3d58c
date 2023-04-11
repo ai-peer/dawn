@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88fee737_23b1da05",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-11T20:17:09Z",
+      "side": 1,
+      "message": "won\u0027t this deadlock? \n\nAPIDestroy and WillDropLastExternalRef both acquire the scoped lock, then call Device::Destroy\n\nwhich iterates the external image list and calls Destroy on each one.\n\nWhy can\u0027t we use an atomic to mark it as destroyed?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
