@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "102b3423_7d41bdc5",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T12:04:46Z",
+      "side": 1,
+      "message": "nit: 2023, same for the cpp.",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "fb4be4d1445c16134782aacdb62fca2edc69f63f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
