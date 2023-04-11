@@ -73,7 +73,6 @@
 # Skipped instead of just Crash because of the number of failures
 # KEEP
 ################################################################################
-crbug.com/1236130 [ linux ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:* [ Skip ]
 
 ################################################################################
 # web_platform crashes on SwiftShader
@@ -116,7 +115,6 @@ crbug.com/1406064 [ intel-gen-9 win10 ] webgpu:api,validation,error_scope:curren
 # external_texture failures
 # KEEP
 ################################################################################
-crbug.com/dawn/0000 [ linux ] webgpu:web_platform,external_texture,* [ Failure ]
 
 ################################################################################
 # texel_data failures
