@@ -362,6 +362,46 @@ MaybeError Buffer::WriteInternal(CommandRecordingContext* commandContext,
         // For non-staging buffers, we can use UpdateSubresource to write the data.
         ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
         if (this->GetUsage() & wgpu::BufferUsage::Uniform) {
+#if 1
+            ComPtr<ID3D11Buffer> stagingBuffer;
+            D3D11_BUFFER_DESC desc;
+            desc.ByteWidth = static_cast<UINT>(size);
+            desc.Usage = D3D11_USAGE_STAGING;
+            desc.BindFlags = 0;
+            desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+            desc.MiscFlags = 0;
+            desc.StructureByteStride = 0;
+            DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
+                                      ->GetD3D11Device()
+                                      ->CreateBuffer(&desc, nullptr, &stagingBuffer),
+                                  "Buffer creation"));
+
+            D3D11_MAPPED_SUBRESOURCE mappedResource;
+            DAWN_TRY(CheckHRESULT(d3d11DeviceContext1->Map(stagingBuffer.Get(), 0, D3D11_MAP_WRITE,
+                                                           0, &mappedResource),
+                                  "Map staging buffer"));
+
+            memcpy(mappedResource.pData, data, size);
+            d3d11DeviceContext1->Unmap(stagingBuffer.Get(), 0);
+
+            D3D11_BOX srcBox;
+            srcBox.left = 0;
+            srcBox.right = static_cast<UINT>(size) / 2;
+            srcBox.top = 0;
+            srcBox.bottom = 1;
+            srcBox.front = 0;
+            srcBox.back = 1;
+
+            d3d11DeviceContext1->CopySubresourceRegion(mD3d11Buffer.Get(), 0, offset, 0, 0,
+                                                       stagingBuffer.Get(), 0, &srcBox);
+            srcBox.left = static_cast<UINT>(size) / 2;
+            srcBox.right = static_cast<UINT>(size);
+
+            d3d11DeviceContext1->CopySubresourceRegion(mD3d11Buffer.Get(), 0,
+                                                       offset + static_cast<UINT>(size) / 2, 0, 0,
+                                                       stagingBuffer.Get(), 0, &srcBox);
+            return {};
+#else
             if (offset != 0 || size != this->GetSize()) {
                 // TODO(dawn:1739): Support partial updates to uniform buffers.
                 return DAWN_VALIDATION_ERROR(
@@ -382,6 +422,7 @@ MaybeError Buffer::WriteInternal(CommandRecordingContext* commandContext,
 
             d3d11DeviceContext1->UpdateSubresource(this->GetD3D11Buffer(), 0, nullptr, data, 0, 0);
             return {};
+#endif
         }
 
         D3D11_BOX dstBox;
