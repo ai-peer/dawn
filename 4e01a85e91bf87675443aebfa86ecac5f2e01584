@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "4e01a85e91bf87675443aebfa86ecac5f2e01584",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65748db3_4a7ecc2b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-11T19:17:53Z",
+      "side": 1,
+      "message": "fyi: thinking about it a second time - it\u0027s likely these creations will move elsewhere - like into d3d11::BindGroup, or in the d3d11::CommandBuffer.\nWe can keep it here now or change it now. Probably we\u0027ll just return the descriptor here, and let the creation of the ComPtr occur elsewhere.",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "4e01a85e91bf87675443aebfa86ecac5f2e01584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
