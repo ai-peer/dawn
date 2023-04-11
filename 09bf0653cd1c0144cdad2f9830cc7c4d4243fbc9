@@ -22,6 +22,30 @@
       },
       "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272ad6a1_1ad055a6",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-04-11T19:51:59Z",
+      "side": 1,
+      "message": "Partial updates to constant buffers are allowed in D3D11.1.  \n\nSee https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm#5.3.4.3.1%20Partial%20Constant%20Buffer%20Updates.",
+      "parentUuid": "a02507d4_fd75f34c",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 13
+      },
+      "revId": "09bf0653cd1c0144cdad2f9830cc7c4d4243fbc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
