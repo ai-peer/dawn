@@ -34,6 +34,24 @@
       "parentUuid": "195eeb0a_fa65c5db",
       "revId": "bb752537d6d91d4fef57198b4ae59c4d681d5179",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "529d80b7_20a48387",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T12:08:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2de6db6d_460381e4",
+      "revId": "bb752537d6d91d4fef57198b4ae59c4d681d5179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

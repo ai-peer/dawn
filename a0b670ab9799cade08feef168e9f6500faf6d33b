@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "706a94af_036a4ded",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 48
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T12:08:07Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7da83471_b970e753",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-04-07T21:31:16Z",
       "side": 1,
       "message": "we should load the number of objects from a constant so it stays in sync as more are added",
+      "range": {
+        "startLine": 85,
+        "startChar": 90,
+        "endLine": 85,
+        "endChar": 94
+      },
+      "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cdb28c3_45bb9b1a",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T12:08:07Z",
+      "side": 1,
+      "message": "Feel free to add a constexpr for it in the ObjectType.h generated header. Also 24 object types \u003e_\u003e I didn\u0027t realize we had so many.",
+      "parentUuid": "7da83471_b970e753",
       "range": {
         "startLine": 85,
         "startChar": 90,
@@ -66,6 +107,23 @@
         "endLine": 1,
         "endChar": 17
       },
+      "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0387c9c_ed0f65c0",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-11T12:08:07Z",
+      "side": 1,
+      "message": "ditto as the other CL, this can be `PerObjectType\u003cdawn::wire::DawnLPMObjectStore\u003e`",
       "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
