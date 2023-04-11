@@ -22,6 +22,30 @@
       },
       "revId": "62c7d241a0b1f04aa882e6091d4af81cedaed3a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c64a58_9ce4febc",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-11T07:13:28Z",
+      "side": 1,
+      "message": "As above, we need to call `IsInList` to verify that the image is still valid. Checking `mBackendDevice` is null or not might not be enough.",
+      "parentUuid": "d2c64946_79e08b02",
+      "range": {
+        "startLine": 164,
+        "startChar": 9,
+        "endLine": 164,
+        "endChar": 20
+      },
+      "revId": "62c7d241a0b1f04aa882e6091d4af81cedaed3a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

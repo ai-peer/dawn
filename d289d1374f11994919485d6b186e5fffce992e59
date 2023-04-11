@@ -230,6 +230,24 @@
       "parentUuid": "a5f0554a_0515bbc2",
       "revId": "d289d1374f11994919485d6b186e5fffce992e59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c230ae9d_7fde15da",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-11T07:13:28Z",
+      "side": 1,
+      "message": "I think device could be destroyed on another thread (possibly by graphite because of loss) between the time the current thread calls `IsValid` and `BeginAccess`. When that happen, the device will remove all images from the resources linked list and call the image\u0027s Destroy method.\n\nAt that point, we need to call `IsInList` to verify that the image is still valid, checking `mBackendDevice` is null or not might not be enough. We might set `mBackendDevice` to null in `Destroy` but it is a race if we check its value without locking.",
+      "parentUuid": "0b22e943_2a81f1b8",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
