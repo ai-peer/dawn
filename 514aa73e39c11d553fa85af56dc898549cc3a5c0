@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5daae919_f00e3f2b",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-11T19:29:31Z",
+      "side": 1,
+      "message": "seems not relevant",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 14
+      },
+      "revId": "514aa73e39c11d553fa85af56dc898549cc3a5c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58293178_f1114288",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-11T19:29:31Z",
+      "side": 1,
+      "message": "ShouldDuplicateParametersForDrawIndirect is not so relevant for d3d11 I think because it doesn\u0027t have root signature constants (that\u0027s what the parameters are dup\u0027ed for).\n\nWe probably need to figure out a different way to specify the builtins for d3d11. It\u0027ll probably involve issuing a copy from the indirect buffer to the buffer holding the constants\n\nFor now, we can delete this, and also don\u0027t need GetUsesVertexOrInstanceIndex\n\nWe should file a bug about handling the builtins for indirect draws and dispatches",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 423,
+        "endChar": 0
+      },
+      "revId": "514aa73e39c11d553fa85af56dc898549cc3a5c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
