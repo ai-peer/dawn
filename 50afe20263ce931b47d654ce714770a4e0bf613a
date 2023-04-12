@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "711b2ceb_5f415c76",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T15:03:46Z",
+      "side": 1,
+      "message": "But doesn\u0027t GetScopedDeviceLock return an empty lock if the device is nullptr? So if we DestroyImpl and unlink then we don\u0027t need to keep the device around for the lock.",
+      "parentUuid": "7d73b42f_7e0f832a",
+      "revId": "50afe20263ce931b47d654ce714770a4e0bf613a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ab8f1f0_0e27bcad",
         "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 28
