@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e49c254_95ce2445",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:13:05Z",
+      "side": 1,
+      "message": "Thank you for rebasing on top of all the small changes I made while removing the deprecated swapchains!",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97184ed4_98249c36",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:13:05Z",
+      "side": 1,
+      "message": "It seems a bunch of code could be shared between D3D11 and D3D12 here because they both use DXGI swapchains. For example by adding a DXGISwapChainParams struct and a helper function to convert from Dawn\u0027s SwapChainDescriptor to it. A TODO would work as well.",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d508716_dac0fc4e",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:13:05Z",
+      "side": 1,
+      "message": "We can use ToBackend now! \\o/",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e909e4_cbb08ee5",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:13:05Z",
+      "side": 1,
+      "message": "This needs to be updated for D3D11. Do we need to synchronously wait in D3D11? The comment seems to indicated that we don\u0027t.",
+      "range": {
+        "startLine": 155,
+        "startChar": 68,
+        "endLine": 158,
+        "endChar": 73
+      },
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd13769_30e31933",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:13:05Z",
+      "side": 1,
+      "message": "note: This could easily be shared as well.",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5931b014_f2c71b5f",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:13:05Z",
+      "side": 1,
+      "message": "This variable seems like it could be removed in D3D11 because the synchronization should be done for us by the driver maybe?",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
