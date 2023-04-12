@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2821cb92_55ff0cb2",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T19:26:07Z",
+      "side": 1,
+      "message": "Done. This is a bit tricky since there is a lot of internal code calling `BeginRenderPass` and mutex might already be locked before entering this method. For example, queue.APICopyExternalTextureForBrowser() -\u003e BeginRenderPass()",
+      "parentUuid": "3d0fcbd2_8ed4e3e8",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b3dd376_b906a856",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-12T12:26:50Z",
       "side": 1,
       "message": "nit: maybe `|| IsD3D11()` now 😄 (and we should add the backend to the params at the bottom)",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452d250c_079503e9",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b3dd376_b906a856",
       "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a86d30_bf160430",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "996e80de_f015a873",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2426168_60edbb30",
@@ -118,6 +172,24 @@
       "writtenOn": "2023-04-12T12:26:50Z",
       "side": 1,
       "message": "nit: Verify that the command buffers executed correctly.",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81931448_151e0484",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2426168_60edbb30",
       "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f51ae6_fef9328d",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebf1ac3_128c71da",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15ced588_c46aa1ee",
@@ -152,6 +242,24 @@
       "writtenOn": "2023-04-12T12:26:50Z",
       "side": 1,
       "message": "nit: We might not want to run all the multithreaded tests with this toggle because it will combinatorially explode the number of tests if we add even more toggles afterwards. Maybe here or in the future we could use a subclass fixture like `MultithreadTests_BeginPass`?",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85cc51c2_b751a759",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15ced588_c46aa1ee",
       "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
