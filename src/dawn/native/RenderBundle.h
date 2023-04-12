@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_RENDERBUNDLE_H_
 
 #include <bitset>
+#include <string>
 
 #include "dawn/common/Constants.h"
 #include "dawn/native/AttachmentState.h"
@@ -46,6 +47,7 @@ class RenderBundleBase final : public ApiObjectBase {
     static RenderBundleBase* MakeError(DeviceBase* device, const char* label);
 
     ObjectType GetType() const override;
+    void FormatLabel(absl::FormatSink* s) const override;
 
     CommandIterator* GetCommands();
 
@@ -55,6 +57,9 @@ class RenderBundleBase final : public ApiObjectBase {
     uint64_t GetDrawCount() const;
     const RenderPassResourceUsage& GetResourceUsage() const;
     const IndirectDrawMetadata& GetIndirectDrawMetadata();
+
+    const std::string& GetEncoderLabel() const { return mEncoderLabel; }
+    void SetEncoderLabel(std::string encoderLabel) { mEncoderLabel = encoderLabel; }
 
   private:
     RenderBundleBase(DeviceBase* device, ErrorTag errorTag, const char* label);
@@ -68,6 +73,7 @@ class RenderBundleBase final : public ApiObjectBase {
     bool mStencilReadOnly;
     uint64_t mDrawCount;
     RenderPassResourceUsage mResourceUsage;
+    std::string mEncoderLabel;
 };
 
 }  // namespace dawn::native
