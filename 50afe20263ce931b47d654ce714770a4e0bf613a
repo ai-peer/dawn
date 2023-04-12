@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d73b42f_7e0f832a",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T14:50:20Z",
+      "side": 1,
+      "message": "IsValid() grabs the mutex which may be deleted if we drop the device ref. there isn\u0027t a need to reset the device to nullptr, except to make it reclaim memory a bit faster. But we have the same situation for all the other webgpu objects. They have a Ref\u003cDeviceBase\u003e which hangs around even if the object is destroyed. They still need to do things like check device-\u003eIsAlive, etc.",
+      "parentUuid": "ffcd998c_382895c8",
+      "revId": "50afe20263ce931b47d654ce714770a4e0bf613a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ab8f1f0_0e27bcad",
         "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 28
