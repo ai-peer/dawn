@@ -144,6 +144,8 @@ class EncodingContext {
     void PushDebugGroupLabel(const char* groupLabel);
     void PopDebugGroupLabel();
 
+    void FormatTopLevelEncoderLabel(absl::FormatSink* s) const;
+
   private:
     void CommitCommands(CommandAllocator allocator);
 

@@ -865,6 +865,21 @@ ObjectType TextureViewBase::GetType() const {
     return ObjectType::TextureView;
 }
 
+void TextureViewBase::FormatLabel(absl::FormatSink* s) const {
+    s->Append(GetTypeName());
+
+    const std::string& label = GetLabel();
+    if (!label.empty()) {
+        s->Append(absl::StrFormat(" \"%s\"", label));
+    }
+
+    const std::string& textureLabel = GetTexture()->GetLabel();
+    if (!textureLabel.empty()) {
+        s->Append(" of ");
+        GetTexture()->FormatLabel(s);
+    }
+}
+
 const TextureBase* TextureViewBase::GetTexture() const {
     ASSERT(!IsError());
     return mTexture.Get();

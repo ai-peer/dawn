@@ -143,6 +143,7 @@ class TextureViewBase : public ApiObjectBase {
     static TextureViewBase* MakeError(DeviceBase* device);
 
     ObjectType GetType() const override;
+    void FormatLabel(absl::FormatSink* s) const override;
 
     const TextureBase* GetTexture() const;
     TextureBase* GetTexture();

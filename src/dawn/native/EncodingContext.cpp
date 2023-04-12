@@ -203,6 +203,14 @@ void EncodingContext::PopDebugGroupLabel() {
     mDebugGroupLabels.pop_back();
 }
 
+void EncodingContext::FormatTopLevelEncoderLabel(absl::FormatSink* s) const {
+    if (mTopLevelEncoder && !mTopLevelEncoder->GetLabel().empty()) {
+        s->Append(" of ");
+        mTopLevelEncoder->FormatLabel(s);
+    }
+    // TODO: Capture the formatted label on finish are return here?
+}
+
 MaybeError EncodingContext::Finish() {
     DAWN_INVALID_IF(IsFinished(), "Command encoding already finished.");
 
