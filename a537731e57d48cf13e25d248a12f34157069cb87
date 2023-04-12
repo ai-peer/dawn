@@ -170,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a7b8ba_c279a3fd",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T14:25:25Z",
+      "side": 1,
+      "message": "I just found out using zero for rest of descriptor doesn\u0027t work. It is because zero is not validate value for some fields.",
+      "parentUuid": "3547f3fa_fd414651",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6839baa_8334fcf5",
