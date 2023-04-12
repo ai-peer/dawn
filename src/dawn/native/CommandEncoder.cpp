@@ -771,10 +771,11 @@ void CommandEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t que
 // Implementation of the API's command recording methods
 
 ComputePassEncoder* CommandEncoder::APIBeginComputePass(const ComputePassDescriptor* descriptor) {
-    return BeginComputePass(descriptor).Detach();
+    return BeginComputePass(descriptor, /*deviceAlreadyLocked=*/false).Detach();
 }
 
-Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescriptor* descriptor) {
+Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescriptor* descriptor,
+                                                         bool deviceAlreadyLocked) {
     DeviceBase* device = GetDevice();
 
     bool success = mEncodingContext.TryEncode(
@@ -814,6 +815,9 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
         },
         "encoding %s.BeginComputePass(%s).", this, descriptor);
 
+    // We are creating new object, need to lock the device.
+    auto deviceLock(device->GetScopedLockOrNoOp(deviceAlreadyLocked));
+
     if (success) {
         const ComputePassDescriptor defaultDescriptor = {};
         if (descriptor == nullptr) {
@@ -830,10 +834,11 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
 }
 
 RenderPassEncoder* CommandEncoder::APIBeginRenderPass(const RenderPassDescriptor* descriptor) {
-    return BeginRenderPass(descriptor).Detach();
+    return BeginRenderPass(descriptor, /*deviceAlreadyLocked=*/false).Detach();
 }
 
-Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescriptor* descriptor) {
+Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescriptor* descriptor,
+                                                       bool deviceAlreadyLocked) {
     DeviceBase* device = GetDevice();
 
     RenderPassResourceUsageTracker usageTracker;
@@ -859,7 +864,11 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
             BeginRenderPassCmd* cmd =
                 allocator->Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
 
-            cmd->attachmentState = device->GetOrCreateAttachmentState(descriptor);
+            {
+                // Accessing device's cache requires locking the device.
+                auto deviceLock(device->GetScopedLockOrNoOp(deviceAlreadyLocked));
+                cmd->attachmentState = device->GetOrCreateAttachmentState(descriptor);
+            }
             attachmentState = cmd->attachmentState;
 
             for (ColorAttachmentIndex index :
@@ -984,12 +993,15 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 usageTracker.TrackQueryAvailability(querySet, queryIndex);
             }
 
-            DAWN_TRY_ASSIGN(passEndCallback,
-                            ApplyRenderPassWorkarounds(device, &usageTracker, cmd));
+            DAWN_TRY_ASSIGN(passEndCallback, ApplyRenderPassWorkarounds(device, deviceAlreadyLocked,
+                                                                        &usageTracker, cmd));
 
             return {};
         },
         "encoding %s.BeginRenderPass(%s).", this, descriptor);
+
+    // We are creating new object, need to lock the device.
+    auto deviceLock(device->GetScopedLockOrNoOp(deviceAlreadyLocked));
 
     if (success) {
         Ref<RenderPassEncoder> passEncoder =
@@ -1018,6 +1030,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 // recursively to handle the next workaround if needed.
 ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
     DeviceBase* device,
+    bool deviceAlreadyLocked,
     RenderPassResourceUsageTracker* usageTracker,
     BeginRenderPassCmd* cmd,
     std::function<void()> passEndCallback) {
@@ -1047,13 +1060,13 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                 descriptor.dimension = wgpu::TextureDimension::e2D;
                 descriptor.mipLevelCount = 1;
 
-                // We are creating new resources. Need to lock the Device.
+                // We are creating new resources. Need to lock the device.
                 // TODO(crbug.com/dawn/1618): In future, all temp resources should be created at
                 // Command Submit time, so the locking would be removed from here at that point.
                 Ref<TextureBase> temporaryResolveTexture;
                 Ref<TextureViewBase> temporaryResolveView;
                 {
-                    auto deviceLock(GetDevice()->GetScopedLock());
+                    auto deviceLock(device->GetScopedLockOrNoOp(deviceAlreadyLocked));
 
                     DAWN_TRY_ASSIGN(temporaryResolveTexture, device->CreateTexture(&descriptor));
 
@@ -1077,8 +1090,8 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
         if (temporaryResolveAttachments.size()) {
             // Check for other workarounds that need to be applied recursively.
             return ApplyRenderPassWorkarounds(
-                device, usageTracker, cmd,
-                [this, passEndCallback = std::move(passEndCallback),
+                device, deviceAlreadyLocked, usageTracker, cmd,
+                [this, deviceAlreadyLocked, passEndCallback = std::move(passEndCallback),
                  temporaryResolveAttachments = std::move(temporaryResolveAttachments)]() -> void {
                     // Called once the render pass has been ended.
                     // Handle any copies needed for the AlwaysResolveIntoZeroLevelAndLayer
@@ -1100,8 +1113,9 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
 
                         Extent3D extent3D = copyTarget.copySrc->GetTexture()->GetSize();
 
-                        this->APICopyTextureToTextureInternal(&srcImageCopyTexture,
-                                                              &dstImageCopyTexture, &extent3D);
+                        this->CopyTextureToTextureInternal(&srcImageCopyTexture,
+                                                           &dstImageCopyTexture, &extent3D,
+                                                           deviceAlreadyLocked);
                     }
 
                     // If there were any other callbacks in the workaround stack, call the next one.
@@ -1307,19 +1321,27 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
 void CommandEncoder::APICopyTextureToTexture(const ImageCopyTexture* source,
                                              const ImageCopyTexture* destination,
                                              const Extent3D* copySize) {
-    APICopyTextureToTextureHelper<false>(source, destination, copySize);
+    CopyTextureToTextureHelper<false>(source, destination, copySize, /*deviceAlreadyLocked=*/false);
 }
 
 void CommandEncoder::APICopyTextureToTextureInternal(const ImageCopyTexture* source,
                                                      const ImageCopyTexture* destination,
                                                      const Extent3D* copySize) {
-    APICopyTextureToTextureHelper<true>(source, destination, copySize);
+    CopyTextureToTextureInternal(source, destination, copySize, /*deviceAlreadyLocked=*/false);
+}
+
+void CommandEncoder::CopyTextureToTextureInternal(const ImageCopyTexture* source,
+                                                  const ImageCopyTexture* destination,
+                                                  const Extent3D* copySize,
+                                                  bool deviceAlreadyLocked) {
+    CopyTextureToTextureHelper<true>(source, destination, copySize, deviceAlreadyLocked);
 }
 
 template <bool Internal>
-void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* source,
-                                                   const ImageCopyTexture* destination,
-                                                   const Extent3D* copySize) {
+void CommandEncoder::CopyTextureToTextureHelper(const ImageCopyTexture* source,
+                                                const ImageCopyTexture* destination,
+                                                const Extent3D* copySize,
+                                                bool deviceAlreadyLocked) {
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
@@ -1395,7 +1417,7 @@ void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* sourc
                 // This function might create new resources. Need to lock the Device.
                 // TODO(crbug.com/dawn/1618): In future, all temp resources should be created at
                 // Command Submit time, so the locking would be removed from here at that point.
-                auto deviceLock(GetDevice()->GetScopedLock());
+                auto deviceLock(GetDevice()->GetScopedLockOrNoOp(deviceAlreadyLocked));
 
                 DAWN_TRY_CONTEXT(BlitDepthToDepth(GetDevice(), this, src, dst, *copySize),
                                  "copying depth aspect from %s to %s using blit workaround.",

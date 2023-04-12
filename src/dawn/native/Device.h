@@ -430,6 +430,14 @@ class DeviceBase : public RefCountedWithExternalCount {
     // This lock won't guarantee the wrapped mutex will be alive if the Device is deleted before the
     // AutoLock. It would crash if such thing happens.
     [[nodiscard]] Mutex::AutoLock GetScopedLock();
+    // Same as GetScopedLock() but return default no-op AutoLock if deviceAlreadyLocked=true.
+    [[nodiscard]] Mutex::AutoLock GetScopedLockOrNoOp(bool deviceAlreadyLocked);
+
+    // This method returns true if Feature::ImplicitDeviceSynchronization is turned on and the
+    // device is locked by current thread. This method is only enabled when DAWN_ENABLE_ASSERTS is
+    // turned on. Thus it should only be wrapped inside ASSERT() macro. i.e.
+    // ASSERT(device.IsLockedByCurrentThread())
+    bool IsLockedByCurrentThreadIfNeeded() const;
 
     // In the 'Normal' mode, currently recorded commands in the backend normally will be actually
     // submitted in the next Tick. However in the 'Passive' mode, the submission will be postponed

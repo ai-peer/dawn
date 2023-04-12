@@ -91,8 +91,14 @@ class CommandEncoder final : public ApiObjectBase {
 
     CommandBufferBase* APIFinish(const CommandBufferDescriptor* descriptor = nullptr);
 
-    Ref<ComputePassEncoder> BeginComputePass(const ComputePassDescriptor* descriptor = nullptr);
-    Ref<RenderPassEncoder> BeginRenderPass(const RenderPassDescriptor* descriptor);
+    void CopyTextureToTextureInternal(const ImageCopyTexture* source,
+                                      const ImageCopyTexture* destination,
+                                      const Extent3D* copySize,
+                                      bool deviceAlreadyLocked);
+    Ref<ComputePassEncoder> BeginComputePass(const ComputePassDescriptor* descriptor,
+                                             bool deviceAlreadyLocked);
+    Ref<RenderPassEncoder> BeginRenderPass(const RenderPassDescriptor* descriptor,
+                                           bool deviceAlreadyLocked);
     ResultOrError<Ref<CommandBufferBase>> Finish(
         const CommandBufferDescriptor* descriptor = nullptr);
 
@@ -125,6 +131,7 @@ class CommandEncoder final : public ApiObjectBase {
 
     ResultOrError<std::function<void()>> ApplyRenderPassWorkarounds(
         DeviceBase* device,
+        bool deviceAlreadyLocked,
         RenderPassResourceUsageTracker* usageTracker,
         BeginRenderPassCmd* cmd,
         std::function<void()> passEndCallback = nullptr);
@@ -133,9 +140,10 @@ class CommandEncoder final : public ApiObjectBase {
     // APICopyTextureToTextureInternal. The only difference between both
     // copies, is that the Internal one will also check internal usage.
     template <bool Internal>
-    void APICopyTextureToTextureHelper(const ImageCopyTexture* source,
-                                       const ImageCopyTexture* destination,
-                                       const Extent3D* copySize);
+    void CopyTextureToTextureHelper(const ImageCopyTexture* source,
+                                    const ImageCopyTexture* destination,
+                                    const Extent3D* copySize,
+                                    bool deviceAlreadyLocked);
 
     MaybeError ValidateFinish() const;
 

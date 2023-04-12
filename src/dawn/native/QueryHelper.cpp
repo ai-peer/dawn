@@ -203,7 +203,8 @@ MaybeError EncodeConvertTimestampsToNanoseconds(CommandEncoder* encoder,
                              UsageValidationMode::Internal));
 
     // Create compute encoder and issue dispatch.
-    Ref<ComputePassEncoder> pass = encoder->BeginComputePass();
+    Ref<ComputePassEncoder> pass =
+        encoder->BeginComputePass(nullptr, /*deviceAlreadyLocked=*/false);
     pass->APISetPipeline(pipeline);
     pass->APISetBindGroup(0, bindGroup.Get());
     pass->APIDispatchWorkgroups(
