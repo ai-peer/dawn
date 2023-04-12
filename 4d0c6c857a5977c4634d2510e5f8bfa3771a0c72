@@ -137,6 +137,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "236dad30_c9cafcab",
+        "filename": "src/tint/writer/text_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-12T01:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e86a2d5d_9120b8b6",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "870dc3db_b9d9e67e",
@@ -281,6 +305,30 @@
       "side": 1,
       "message": "These tests are for implementation detail. We\u0027re calling implementation-detail methods.\n\nThe public interface for all of this is `Program + Options` -\u003e `Binary/String + Diagnostics`. That\u0027s the contract. The public API has no internal state.",
       "parentUuid": "5985e447_81661b96",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 49
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81078097_a5a1cbdd",
+        "filename": "src/tint/writer/wgsl/generator_impl_alias_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-12T01:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "506cb547_760de929",
       "range": {
         "startLine": 28,
         "startChar": 4,
