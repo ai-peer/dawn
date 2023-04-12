@@ -42,7 +42,8 @@ namespace interop {
 void Initialize(Napi::Env env);
 
 {{  range $ := .Declarations}}
-{{-        if IsDictionary $}}{{template "Dictionary" $}}
+{{-        if IsCallback   $}}{{template "Callback" $}}
+{{-   else if IsDictionary $}}{{template "Dictionary" $}}
 {{-   else if IsNamespace  $}}{{template "Namespace" $}}
 {{-   else if IsInterface  $}}{{template "Interface" $}}
 {{-   else if IsEnum       $}}{{template "Enum" $}}
@@ -54,6 +55,18 @@ void Initialize(Napi::Env env);
 }  // namespace wgpu
 
 #endif // DAWN_NODE_GEN_INTEROP_WEBGPU_H_
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Callback emits the C++ header declaration that defines the interop type for
+-- the given ast.Callback
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Callback"}}
+// callback {{$.Name}}
+using {{$.Name}} = Function;
+{{end}}
 
 
 {{- /*
@@ -220,7 +233,7 @@ std::ostream& operator<<(std::ostream& o, {{$.Name}});
   virtual bool has(Napi::Env, {{template "Type" $.Key}}) = 0;
   virtual std::vector<{{template "Type" $.Key}}> keys(Napi::Env) = 0;
   virtual std::vector<{{template "Type" $.Elem}}> values(Napi::Env) = 0;
-  virtual std::optional<{{template "Type" $.Elem}}> get(Napi::Env, {{template "Type" $.Key}}) = 0;
+  virtual {{template "Type" $.Elem}} get(Napi::Env, {{template "Type" $.Key}}) = 0;
 {{- /* TODO(crbug.com/dawn/1143):
         entries, forEach, get, has, keys, values,
         @@iterator methods, and a size getter.
