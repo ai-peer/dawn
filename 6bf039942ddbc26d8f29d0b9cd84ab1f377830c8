@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd1a1739_68c0f51d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-04-12T18:29:06Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "6bf039942ddbc26d8f29d0b9cd84ab1f377830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6593f9ff_f21d4ef0",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-04-12T18:29:06Z",
+      "side": 1,
+      "message": "nit: DestroyInternal?",
+      "range": {
+        "startLine": 734,
+        "startChar": 34,
+        "endLine": 734,
+        "endChar": 41
+      },
+      "revId": "6bf039942ddbc26d8f29d0b9cd84ab1f377830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2043e7f_a297c95b",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-04-12T18:29:06Z",
+      "side": 1,
+      "message": "nit: this comment is probably redundant since the class itself is not importable outside of Dawn - it\u0027s already an internal implementation detail. Its sibling ExternalImageDXGI without the Impl is a public interface though.",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 58
+      },
+      "revId": "6bf039942ddbc26d8f29d0b9cd84ab1f377830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f7549a_6e39cd38",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-04-12T18:29:06Z",
+      "side": 1,
+      "message": "nit: Given that there\u0027s no \"Destroy\" method now, shouldn\u0027t we just call this Destroy - maybe it made sense in one of the previous patches where we had Destroy as well as DestroyInternal?",
+      "range": {
+        "startLine": 60,
+        "startChar": 9,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "6bf039942ddbc26d8f29d0b9cd84ab1f377830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
