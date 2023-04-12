@@ -104,6 +104,24 @@
       "parentUuid": "63959f29_2b0c922d",
       "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33bc1282_2ba29fd9",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-12T03:24:25Z",
+      "side": 1,
+      "message": "Not sure if this makes sense, but it seems like they\u0027re two different `Instance` objects? It seems like the one is a `dawn::native::Instance` and the other is expecting a `dawn::wire::client::Instance` the native::Instance doesn\u0027t have the Client, while the client::Instance would. We cast, pull out the non-existant client, and get random memory.",
+      "parentUuid": "8fc6f628_350a91a2",
+      "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
