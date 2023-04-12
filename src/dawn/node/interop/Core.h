@@ -51,6 +51,7 @@ namespace wgpu::interop {
 ////////////////////////////////////////////////////////////////////////////////
 // Primitive JavaScript types
 ////////////////////////////////////////////////////////////////////////////////
+using Any = Napi::Value;
 using Object = Napi::Object;
 using ArrayBuffer = Napi::ArrayBuffer;
 using Int8Array = Napi::TypedArrayOf<int8_t>;
@@ -144,6 +145,11 @@ class Interface {
   public:
     // Constructs an Interface with no JS object.
     inline Interface() {}
+
+    // Copy constructor.
+    // U must be of type T, or derive from T.
+    template <typename U, typename = std::enable_if_t<std::is_base_of_v<T, U>>>
+    inline Interface(const Interface<U>& other) : object(other) {}
 
     // Constructs an Interface wrapping the given JS object.
     // The JS object must have been created with a call to T::Bind().
@@ -286,6 +292,16 @@ class Promise<void> : public detail::PromiseBase {
 //  static Napi::Value ToJS(Napi::Env, T in);
 template <typename T>
 class Converter {};
+
+template <>
+class Converter<Any> {
+  public:
+    static inline Result FromJS(Napi::Env, Napi::Value value, Any& out) {
+        out = value;
+        return Success;
+    }
+    static inline Napi::Value ToJS(Napi::Env, Any value) { return value; }
+};
 
 template <>
 class Converter<Napi::Object> {
