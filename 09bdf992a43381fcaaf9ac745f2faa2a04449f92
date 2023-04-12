@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7bb7434_553d1b46",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T17:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97184ed4_98249c36",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d508716_dac0fc4e",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-12T12:13:05Z",
       "side": 1,
       "message": "We can use ToBackend now! \\o/",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47379fd7_da16fbd3",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T17:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d508716_dac0fc4e",
       "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6d72c7_573b1ef4",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T17:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9e909e4_cbb08ee5",
+      "range": {
+        "startLine": 155,
+        "startChar": 68,
+        "endLine": 158,
+        "endChar": 73
+      },
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebd13769_30e31933",
@@ -92,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b9fe19_1dd5629b",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T17:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebd13769_30e31933",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5931b014_f2c71b5f",
@@ -105,6 +183,24 @@
       "writtenOn": "2023-04-12T12:13:05Z",
       "side": 1,
       "message": "This variable seems like it could be removed in D3D11 because the synchronization should be done for us by the driver maybe?",
+      "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c6f4e94_378edde4",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T17:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5931b014_f2c71b5f",
       "revId": "09bdf992a43381fcaaf9ac745f2faa2a04449f92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
