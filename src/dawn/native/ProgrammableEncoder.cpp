@@ -196,4 +196,15 @@ void ProgrammableEncoder::RecordSetBindGroup(CommandAllocator* allocator,
     }
 }
 
+void ProgrammableEncoder::FormatLabel(absl::FormatSink* s) const {
+    s->Append(GetTypeName());
+
+    const std::string& label = GetLabel();
+    if (!label.empty()) {
+        s->Append(absl::StrFormat(" \"%s\"", label));
+    }
+
+    mEncodingContext->FormatTopLevelEncoderLabel(s);
+}
+
 }  // namespace dawn::native
