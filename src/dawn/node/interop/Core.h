@@ -145,6 +145,11 @@ class Interface {
     // Constructs an Interface with no JS object.
     inline Interface() {}
 
+    // Copy constructor.
+    // U must be of type T, or derive from T.
+    template <typename U, typename = std::enable_if_t<std::is_base_of_v<T, U>>>
+    inline Interface(const Interface<U>& other) : object(other) {}
+
     // Constructs an Interface wrapping the given JS object.
     // The JS object must have been created with a call to T::Bind().
     explicit inline Interface(Napi::Object o) : object(o) {}
