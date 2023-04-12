@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "816f844e_c5efb9a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T11:25:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "341027df_e066facf",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T11:25:33Z",
+      "side": 1,
+      "message": "nit: Could we have a TODO to deduplicate these objects in the backend eventually, and to avoid redundant state setting?",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c7626d1_6ff5613a",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T11:25:33Z",
+      "side": 1,
+      "message": "nit: TRUE, scissor is always enabled in WebGPU",
+      "range": {
+        "startLine": 299,
+        "startChar": 35,
+        "endLine": 299,
+        "endChar": 40
+      },
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "682f6a7e_208aa627",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T11:25:33Z",
+      "side": 1,
+      "message": "nit: if the extra indentation level is the reason for separating the method, this can also be achieved with an early out. And `inputElementDescriptors` can be declared after that early out.",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6bca5b2_f54ad5ec",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T11:25:33Z",
+      "side": 1,
+      "message": "nit: In D3D12 we just zero-initialize the rest of the descriptor. Would it be sufficient here? https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/d3d12/RenderPipelineD3D12.cpp;drc\u003d9329f990b89052f1e7f82e0a1a4b298b72359263;l\u003d239",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6839baa_8334fcf5",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T11:25:33Z",
+      "side": 1,
+      "message": "nit: this method can likely be const. But also any reason why it is separated from InitializeInputLayout?",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
