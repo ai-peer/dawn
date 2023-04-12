@@ -1,0 +1,195 @@
+enum WGSLKind {
+    "bool",
+    "i32",
+    "u32",
+    "f32",
+    "f16",
+    "vector",
+    "matrix",
+    "array",
+    "struct",
+    "atomic",
+    "sampler",
+    "sampler-comparison",
+    "sampled-texture",
+    "multisampled-texture",
+    "depth-texture",
+    "depth-multisampled-texture",
+};
+
+interface WGSLType {
+    // The kind of the WGSL type
+    readonly attribute WGSLKind kind;
+}
+
+interface WGSLSizedType : WGSLType {
+    // The size in bytes of the type
+    readonly attribute GPUSize64 size;
+    // The alignment in bytes of the type
+    readonly attribute GPUSize64 align;
+    // Create a view of the type on a array buffer
+    WGSLView createView(WGSLViewDescriptor descriptor);
+};
+
+typedef(GPUSize64 or DOMString) WGSLViewIndex;
+
+interface WGSLView {
+    // Returns a new sub-view on the array element, vector element or matrix
+    // column or structure member.
+    // TODO: Make this variadic?
+    WGSLView index(WGSLViewIndex);
+
+    // The WGSL type this view represents.
+    readonly attribute WGSLSizedType type;
+
+    // Deserializes the value from the buffer, returning a JavaScript number,
+    // array or object.
+    any get();
+
+    // Serializes the JavaScript number, array or object to the buffer.
+    undefined set(any value);
+}
+
+// The behavior used for incomplete struct members, vectors, matrices or array
+// elements in the value passed to WGSLView.set().
+enum WGSLViewMissingValue {
+    // Write a zero value.
+    "zero",
+    // Preserve the existing value.
+    "preserve",
+};
+
+dictionary WGSLViewDescriptor : GPUObjectDescriptorBase {
+    // The buffer to apply the view to
+    required ArrayBuffer buffer;
+    // The byte offset within the buffer
+    GPUSize64 offset = 0;
+    // The behavior used when calling set() with incomplete struct members or
+    // array elements
+    WGSLViewMissingValue missingValue = "zero";
+};
+
+interface WGSLScalarType : WGSLSizedType {};
+
+interface WGSLAtomicType : WGSLSizedType {
+    // The element type
+    readonly attribute WGSLSizedType elementType;
+};
+
+interface WGSLVectorType : WGSLSizedType {
+    // The number of elements in the vector
+    readonly attribute GPUSize64 elementCount;
+    // The element type
+    readonly attribute WGSLSizedType elementType;
+};
+
+interface WGSLMatrixType : WGSLSizedType {
+    // The number of columns of the matrix
+    readonly attribute GPUSize64 columnCount;
+    // The number of rows of the matrix
+    readonly attribute GPUSize64 rowCount;
+    // The element type
+    readonly attribute WGSLSizedType elementType;
+    // The column vector type
+    readonly attribute WGSLSizedType columnType;
+};
+
+enum WGSLRuntimeSizedArrayCount {
+    "runtime-sized",
+};
+
+typedef(GPUSize64 or WGSLRuntimeSizedArrayCount) WGSLArrayCount;
+
+interface WGSLArrayType : WGSLSizedType {
+    // The number of elements of the array
+    readonly attribute WGSLArrayCount elementCount;
+    // The element type
+    readonly attribute WGSLSizedType elementType;
+};
+
+interface WGSLStructMember {
+    // The name of the structure member
+    readonly attribute DOMString name;
+    // Tha type of the structure member
+    readonly attribute WGSLSizedType type;
+    // The index of the member in the structure
+    readonly attribute GPUIndex32 index;
+    // The offset in bytes of the structure member from the start of the
+    // structure
+    readonly attribute GPUSize64 offset;
+    // The size of the structure member.
+    // If the member was annotated with a @size(N) attribute, then this is the
+    // value of N, otherwise this is equal to type.size.
+    readonly attribute GPUSize64 size;
+    // The alignment of the structure member.
+    // If the member was annotated with a @align(N) attribute, then this is
+    // the value of N, otherwise this is equal to type.align.
+    readonly attribute GPUSize64 align;
+}
+
+interface WGSLStructType : WGSLSizedType {
+    // The name of the structure
+    readonly attribute DOMString name;
+    // The members in the structure
+    readonly attribute FrozenArray<WGSLStructMember> members;
+};
+
+interface WGSLSamplerType : WGSLType {};
+
+interface WGSLSampledTextureType : WGSLType {
+    // The dimensions of the texture
+    readonly attribute GPUTextureViewDimension dimensions;
+    // The sampled type of the texture
+    readonly attribute WGSLSizedType sampledType;
+};
+
+interface WGSLMultisampledTextureType : WGSLType {
+    // The sampled type of the texture
+    readonly attribute WGSLSizedType sampledType;
+};
+
+interface WGSLDepthTextureType : WGSLType {
+    // The dimensions of the texture
+    readonly attribute GPUTextureViewDimension dimensions;
+};
+
+interface WGSLDepthMultisampledTexture : WGSLType {};
+
+// TODO: Storage texture, external texture
+
+interface WGSLBindPoint {
+    // TODO: Address space, access mode
+    readonly attribute GPUIndex32 group;
+    readonly attribute GPUIndex32 binding;
+    readonly attribute DOMString name;
+    readonly attribute WGSLType type;
+};
+
+interface WGSLBindGroup {
+    readonly maplike<GPUIndex32, WGSLBindPoint>;
+    readonly attribute GPUIndex32 group;
+};
+
+interface WGSLBindGroups {
+    readonly maplike<GPUIndex32, WGSLBindGroup>;
+};
+
+enum WGSLShaderStage {
+    "compute",
+    "fragment",
+    "vertex",
+};
+
+interface WGSLEntryPoint {
+    readonly attribute WGSLShaderStage stage;
+    readonly attribute WGSLBindGroups bindgroups;
+    readonly attribute DOMString name;
+};
+
+interface WGSLEntryPoints {
+    readonly maplike<DOMString, WGSLEntryPoint>;
+};
+
+interface GPUCompilationInfo {
+    readonly attribute WGSLEntryPoints entrypoints;
+};
