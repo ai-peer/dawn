@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bdcac8d_f8ccaa8a",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T14:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "341027df_e066facf",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c7626d1_6ff5613a",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-04-12T11:25:33Z",
       "side": 1,
       "message": "nit: TRUE, scissor is always enabled in WebGPU",
+      "range": {
+        "startLine": 299,
+        "startChar": 35,
+        "endLine": 299,
+        "endChar": 40
+      },
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d863b62_950dc29a",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T14:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c7626d1_6ff5613a",
       "range": {
         "startLine": 299,
         "startChar": 35,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "273f4176_1c38966f",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T14:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "682f6a7e_208aa627",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6bca5b2_f54ad5ec",
@@ -92,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3547f3fa_fd414651",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T14:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6bca5b2_f54ad5ec",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6839baa_8334fcf5",
@@ -105,6 +183,24 @@
       "writtenOn": "2023-04-12T11:25:33Z",
       "side": 1,
       "message": "nit: this method can likely be const. But also any reason why it is separated from InitializeInputLayout?",
+      "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5fbaf0c_0f237a99",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-12T14:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6839baa_8334fcf5",
       "revId": "a537731e57d48cf13e25d248a12f34157069cb87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
