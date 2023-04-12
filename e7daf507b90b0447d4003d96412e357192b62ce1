@@ -16,6 +16,24 @@
       "message": "I tried to do MSAA resolve to a mip level of a texture. However, D3D12 debug layer threw this error:\n```\nD3D12 ERROR: ID3D12CommandQueue::ExecuteCommandLists: Using BeginRenderPass on\nCommand List (0x00000264694F1EC0:\u0027Unnamed ID3D12GraphicsCommandList Object\u0027):\nResource state (0x0: D3D12_RESOURCE_STATE_[COMMON|PRESENT]) of resource\n(0x0000026469480430:\u0027Dawn_InternalTexture\u0027) (subresource: 0) is invalid for use as\na Render Pass Resolve Dest.  Expected State Bits (all): 0x1000:\nD3D12_RESOURCE_STATE_RESOLVE_DEST, Actual State: 0x0:\nD3D12_RESOURCE_STATE_[COMMON|PRESENT], Missing State: 0x1000:\nD3D12_RESOURCE_STATE_RESOLVE_DEST. [ EXECUTION ERROR #538:\nINVALID_SUBRESOURCE_STATE]\n```\n\nIt seems the state transition wasn\u0027t done correctly.\nNot sure this is correct way to do that. The error won\u0027t be thrown if `always_resolve_into_zero_level_and_layer` toggle is turned on.",
       "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cff9fb_251338d5",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T11:46:16Z",
+      "side": 1,
+      "message": "OK, this is known issue https://bugs.chromium.org/p/dawn/issues/detail?id\u003d462",
+      "parentUuid": "e6abec58_748cbd6d",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
