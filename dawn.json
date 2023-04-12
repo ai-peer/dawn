@@ -739,7 +739,8 @@
         "extensible": "in",
         "members": [
             {"name": "message count", "type": "uint32_t"},
-            {"name": "messages", "type": "compilation message", "annotation": "const*", "length": "message count"}
+            {"name": "messages", "type": "compilation message", "annotation": "const*", "length": "message count"},
+            {"name": "program", "type": "uint64_t"}
         ]
     },
     "compilation info callback": {

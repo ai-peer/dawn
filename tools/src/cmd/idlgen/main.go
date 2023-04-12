@@ -117,8 +117,10 @@ func run() error {
 		"FlattenedConstantsOf":       g.flattenedConstantsOf,
 		"FlattenedMethodsOf":         g.flattenedMethodsOf,
 		"Include":                    g.include,
+		"IsAnyType":                  is(ast.AnyType{}),
 		"IsBasicLiteral":             is(ast.BasicLiteral{}),
 		"IsInitializer":              isInitializer,
+		"IsCallback":                 is(ast.Callback{}),
 		"IsDefaultDictionaryLiteral": is(ast.DefaultDictionaryLiteral{}),
 		"IsDictionary":               is(ast.Dictionary{}),
 		"IsEnum":                     is(ast.Enum{}),
@@ -172,6 +174,8 @@ func nameOf(n ast.Node) string {
 	case *ast.Namespace:
 		return n.Name
 	case *ast.Interface:
+		return n.Name
+	case *ast.Callback:
 		return n.Name
 	case *ast.Dictionary:
 		return n.Name
@@ -350,6 +354,14 @@ func (s *simplifier) visit(d ast.Decl) {
 		if register(d.Name) {
 			return
 		}
+	case *ast.Callback:
+		if register(d.Name) {
+			return
+		}
+		s.visitType(d.Return)
+		for _, p := range d.Parameters {
+			s.visitType(p.Type)
+		}
 	default:
 		panic(fmt.Errorf("unhandled AST declaration %T", d))
 	}
@@ -362,6 +374,7 @@ func (s *simplifier) visit(d ast.Decl) {
 func (s *simplifier) visitType(t ast.Type) {
 	switch t := t.(type) {
 	case nil:
+	case *ast.AnyType:
 	case *ast.TypeName:
 		if d, ok := s.declarations[t.Name]; ok {
 			s.visit(d)

@@ -1164,8 +1164,10 @@ void ShaderModuleBase::APIGetCompilationInfo(wgpu::CompilationInfoCallback callb
         return;
     }
 
-    callback(WGPUCompilationInfoRequestStatus_Success, mCompilationMessages->GetCompilationInfo(),
-             userdata);
+    auto info = mCompilationMessages->GetCompilationInfo();
+    const_cast<WGPUCompilationInfo*>(info)->program =
+        static_cast<uint64_t>(reinterpret_cast<uintptr_t>(mTintProgram.get()));
+    callback(WGPUCompilationInfoRequestStatus_Success, info, userdata);
 }
 
 void ShaderModuleBase::InjectCompilationMessages(

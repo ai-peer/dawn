@@ -51,7 +51,9 @@ namespace wgpu::interop {
 ////////////////////////////////////////////////////////////////////////////////
 // Primitive JavaScript types
 ////////////////////////////////////////////////////////////////////////////////
+using Any = Napi::Value;
 using Object = Napi::Object;
+using Function = Napi::Function;
 using ArrayBuffer = Napi::ArrayBuffer;
 using Int8Array = Napi::TypedArrayOf<int8_t>;
 using Int16Array = Napi::TypedArrayOf<int16_t>;
@@ -144,6 +146,11 @@ class Interface {
   public:
     // Constructs an Interface with no JS object.
     inline Interface() {}
+
+    // Copy constructor.
+    // U must be of type T, or derive from T.
+    template <typename U, typename = std::enable_if_t<std::is_base_of_v<T, U>>>
+    inline Interface(const Interface<U>& other) : object(other) {}
 
     // Constructs an Interface wrapping the given JS object.
     // The JS object must have been created with a call to T::Bind().
@@ -288,16 +295,39 @@ template <typename T>
 class Converter {};
 
 template <>
-class Converter<Napi::Object> {
+class Converter<Any> {
   public:
-    static inline Result FromJS(Napi::Env, Napi::Value value, Napi::Object& out) {
+    static inline Result FromJS(Napi::Env, Napi::Value value, Any& out) {
+        out = value;
+        return Success;
+    }
+    static inline Napi::Value ToJS(Napi::Env, Any value) { return value; }
+};
+
+template <>
+class Converter<Object> {
+  public:
+    static inline Result FromJS(Napi::Env, Napi::Value value, Object& out) {
         if (value.IsObject()) {
             out = value.ToObject();
             return Success;
         }
         return Error("value is not an object");
     }
-    static inline Napi::Value ToJS(Napi::Env, Napi::Object value) { return value; }
+    static inline Napi::Value ToJS(Napi::Env, Object value) { return value; }
+};
+
+template <>
+class Converter<Function> {
+  public:
+    static inline Result FromJS(Napi::Env, Napi::Value value, Function& out) {
+        if (value.IsFunction()) {
+            out = value.As<Napi::Function>();
+            return Success;
+        }
+        return Error("value is not an object");
+    }
+    static inline Napi::Value ToJS(Napi::Env, Function value) { return value; }
 };
 
 template <>
