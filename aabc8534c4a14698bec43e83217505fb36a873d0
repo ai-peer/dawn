@@ -22,6 +22,30 @@
       },
       "revId": "aabc8534c4a14698bec43e83217505fb36a873d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ebdcf82_d2123f94",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T15:09:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d70dc409_9ce39af8",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 19
+      },
+      "revId": "aabc8534c4a14698bec43e83217505fb36a873d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

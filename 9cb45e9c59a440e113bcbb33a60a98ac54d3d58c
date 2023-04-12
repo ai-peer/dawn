@@ -94,6 +94,30 @@
       },
       "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8a2fca_68aab33a",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T15:09:05Z",
+      "side": 1,
+      "message": "Done. No longer set mBackendDevice to null in Destroy nor expose Device::GetMutex().",
+      "parentUuid": "1a03cf11_e3f94cec",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "414a097d_d81c4a6c",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T15:09:05Z",
+      "side": 1,
+      "message": "I think if we set device to null before dtor, it could lead to a race in `GetScopedDeviceLock`. Between the time `mBackendDevice` is check for nullability and the time we grab the scope lock, another thread would destroy the device and force this image\u0027s `mBackendDevice` to null.\n```\n    if (mBackendDevice !\u003d nullptr) {\n        // race can happen at this point.\n        return mBackendDevice-\u003eGetScopedLock();\n    }\n```",
+      "parentUuid": "711b2ceb_5f415c76",
+      "revId": "50afe20263ce931b47d654ce714770a4e0bf613a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ab8f1f0_0e27bcad",
         "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 28
