@@ -143,6 +143,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48cf791f_2dfc7aef",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:35:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3d559030_b7e8de83",
+      "revId": "d289d1374f11994919485d6b186e5fffce992e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c66f529_5bb5c5cc",
