@@ -83,6 +83,20 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
     const absl::FormatConversionSpec& spec,
     absl::FormatSink* s);
 
+// Special case for ProgrammableEncoders and CommandBuffers, since frequently the CommandEncoder
+// will be the thing that's labeled.
+class ProgrammableEncoder;
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const ProgrammableEncoder* value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s);
+
+class CommandBufferBase;
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const CommandBufferBase* value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s);
+
 class AttachmentState;
 absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
     const AttachmentState* value,

@@ -29,7 +29,8 @@ CommandBufferBase::CommandBufferBase(CommandEncoder* encoder,
                                      const CommandBufferDescriptor* descriptor)
     : ApiObjectBase(encoder->GetDevice(), descriptor->label),
       mCommands(encoder->AcquireCommands()),
-      mResourceUsages(encoder->AcquireResourceUsages()) {
+      mResourceUsages(encoder->AcquireResourceUsages()),
+      mEncoderLabel(encoder->GetLabel()) {
     GetObjectTrackingList()->Track(this);
 }
 

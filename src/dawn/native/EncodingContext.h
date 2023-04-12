@@ -144,6 +144,8 @@ class EncodingContext {
     void PushDebugGroupLabel(const char* groupLabel);
     void PopDebugGroupLabel();
 
+    const std::string& GetTopLevelEncoderLabel() const { return mTopLevelEncoder->GetLabel(); }
+
   private:
     void CommitCommands(CommandAllocator allocator);
 
