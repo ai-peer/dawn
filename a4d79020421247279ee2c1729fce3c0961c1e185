@@ -16,6 +16,23 @@
       "message": "That\u0027s just a lot of code to review at once. If you don\u0027t mind I\u0027ll defer this at least until tomorrow.",
       "revId": "a4d79020421247279ee2c1729fce3c0961c1e185",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a458619_983fbc07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:56:29Z",
+      "side": 1,
+      "message": "Could we land parts of this in bits? I\u0027m thinking that we can start just with what\u0027s needed for buffer to buffer copies, then expand to buffer to texture and texture to buffer copies, etc. This code is a lot more interesting than all the state setup since it actually executes work on the GPU.\n\nThat way we can also incrementally enable the tests and verify it works",
+      "revId": "a4d79020421247279ee2c1729fce3c0961c1e185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
