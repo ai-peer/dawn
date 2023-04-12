@@ -259,7 +259,7 @@ GeneratorImpl::GeneratorImpl(const Program* program, const Version& version)
 
 GeneratorImpl::~GeneratorImpl() = default;
 
-bool GeneratorImpl::Generate() {
+void GeneratorImpl::Generate() {
     {
         auto out = line();
         out << "#version " << version_.major_version << version_.minor_version << "0";
@@ -278,7 +278,7 @@ bool GeneratorImpl::Generate() {
             continue;  // These are not emitted.
         }
 
-        bool ok = Switch(
+        Switch(
             decl,  //
             [&](const ast::Variable* global) { return EmitGlobalVariable(global); },
             [&](const ast::Struct* str) {
@@ -290,31 +290,24 @@ bool GeneratorImpl::Generate() {
                 bool is_block = ast::HasAttribute<transform::AddBlockAttribute::BlockAttribute>(
                     str->attributes);
                 if (!has_rt_arr && !is_block) {
-                    if (!EmitStructType(current_buffer_, sem)) {
-                        return false;
-                    }
+                    EmitStructType(current_buffer_, sem);
                 }
-                return true;
             },
             [&](const ast::Function* func) {
                 if (func->IsEntryPoint()) {
-                    return EmitEntryPointFunction(func);
+                    EmitEntryPointFunction(func);
+                } else {
+                    EmitFunction(func);
                 }
-                return EmitFunction(func);
             },
             [&](const ast::Enable* enable) {
                 // Record the required extension for generating extension directive later
-                return RecordExtension(enable);
+                RecordExtension(enable);
             },
             [&](Default) {
                 TINT_ICE(Writer, diagnostics_)
                     << "unhandled module-scope declaration: " << decl->TypeInfo().name;
-                return false;
             });
-
-        if (TINT_UNLIKELY(!ok)) {
-            return false;
-        }
     }
 
     TextBuffer extensions;
@@ -343,36 +336,25 @@ bool GeneratorImpl::Generate() {
         current_buffer_->Insert(helpers_, helpers_insertion_point, indent);
         helpers_insertion_point += helpers_.lines.size();
     }
-
-    return true;
 }
 
-bool GeneratorImpl::RecordExtension(const ast::Enable* enable) {
+void GeneratorImpl::RecordExtension(const ast::Enable* enable) {
     // Deal with extension node here, recording it within the generator for later emition.
 
     if (enable->HasExtension(builtin::Extension::kF16)) {
         requires_f16_extension_ = true;
     }
-
-    return true;
 }
 
-bool GeneratorImpl::EmitIndexAccessor(utils::StringStream& out,
+void GeneratorImpl::EmitIndexAccessor(utils::StringStream& out,
                                       const ast::IndexAccessorExpression* expr) {
-    if (!EmitExpression(out, expr->object)) {
-        return false;
-    }
+    EmitExpression(out, expr->object);
     out << "[";
-
-    if (!EmitExpression(out, expr->index)) {
-        return false;
-    }
+    EmitExpression(out, expr->index);
     out << "]";
-
-    return true;
 }
 
-bool GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr) {
+void GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr) {
     auto* src_type = TypeOf(expr->expr)->UnwrapRef();
     auto* dst_type = TypeOf(expr)->UnwrapRef();
 
@@ -380,7 +362,7 @@ bool GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpr
         diagnostics_.add_error(
             diag::System::Writer,
             "Unable to do bitcast to type " + dst_type->FriendlyName(builder_.Symbols()));
-        return false;
+        return;
     }
 
     if (src_type == dst_type) {
@@ -399,32 +381,21 @@ bool GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpr
                dst_type->is_float_scalar_or_vector()) {
         out << "uintBitsToFloat";
     } else {
-        if (!EmitType(out, dst_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite,
-                      "")) {
-            return false;
-        }
+        EmitType(out, dst_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite, "");
     }
     ScopedParen sp(out);
-    if (!EmitExpression(out, expr->expr)) {
-        return false;
-    }
-    return true;
+    EmitExpression(out, expr->expr);
 }
 
-bool GeneratorImpl::EmitAssign(const ast::AssignmentStatement* stmt) {
+void GeneratorImpl::EmitAssign(const ast::AssignmentStatement* stmt) {
     auto out = line();
-    if (!EmitExpression(out, stmt->lhs)) {
-        return false;
-    }
+    EmitExpression(out, stmt->lhs);
     out << " = ";
-    if (!EmitExpression(out, stmt->rhs)) {
-        return false;
-    }
+    EmitExpression(out, stmt->rhs);
     out << ";";
-    return true;
 }
 
-bool GeneratorImpl::EmitVectorRelational(utils::StringStream& out,
+void GeneratorImpl::EmitVectorRelational(utils::StringStream& out,
                                          const ast::BinaryExpression* expr) {
     switch (expr->op) {
         case ast::BinaryOp::kEqual:
@@ -449,37 +420,24 @@ bool GeneratorImpl::EmitVectorRelational(utils::StringStream& out,
             break;
     }
     ScopedParen sp(out);
-    if (!EmitExpression(out, expr->lhs)) {
-        return false;
-    }
+    EmitExpression(out, expr->lhs);
     out << ", ";
-    if (!EmitExpression(out, expr->rhs)) {
-        return false;
-    }
-    return true;
+    EmitExpression(out, expr->rhs);
 }
 
-bool GeneratorImpl::EmitBitwiseBoolOp(utils::StringStream& out, const ast::BinaryExpression* expr) {
+void GeneratorImpl::EmitBitwiseBoolOp(utils::StringStream& out, const ast::BinaryExpression* expr) {
     auto* bool_type = TypeOf(expr->lhs)->UnwrapRef();
     auto* uint_type = BoolTypeToUint(bool_type);
 
     // Cast result to bool scalar or vector type.
-    if (!EmitType(out, bool_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite,
-                  "")) {
-        return false;
-    }
+    EmitType(out, bool_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite, "");
     ScopedParen outerCastParen(out);
     // Cast LHS to uint scalar or vector type.
-    if (!EmitType(out, uint_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite,
-                  "")) {
-        return false;
-    }
+    EmitType(out, uint_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite, "");
     {
         ScopedParen innerCastParen(out);
         // Emit LHS.
-        if (!EmitExpression(out, expr->lhs)) {
-            return false;
-        }
+        EmitExpression(out, expr->lhs);
     }
     // Emit operator.
     if (expr->op == ast::BinaryOp::kAnd) {
@@ -488,24 +446,19 @@ bool GeneratorImpl::EmitBitwiseBoolOp(utils::StringStream& out, const ast::Binar
         out << " | ";
     } else {
         TINT_ICE(Writer, diagnostics_) << "unexpected binary op: " << FriendlyName(expr->op);
-        return false;
+        return;
     }
+
     // Cast RHS to uint scalar or vector type.
-    if (!EmitType(out, uint_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite,
-                  "")) {
-        return false;
-    }
+    EmitType(out, uint_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite, "");
     {
         ScopedParen innerCastParen(out);
         // Emit RHS.
-        if (!EmitExpression(out, expr->rhs)) {
-            return false;
-        }
+        EmitExpression(out, expr->rhs);
     }
-    return true;
 }
 
-bool GeneratorImpl::EmitFloatModulo(utils::StringStream& out, const ast::BinaryExpression* expr) {
+void GeneratorImpl::EmitFloatModulo(utils::StringStream& out, const ast::BinaryExpression* expr) {
     std::string fn;
     auto* ret_ty = TypeOf(expr)->UnwrapRef();
     auto* lhs_ty = TypeOf(expr->lhs)->UnwrapRef();
@@ -549,37 +502,32 @@ bool GeneratorImpl::EmitFloatModulo(utils::StringStream& out, const ast::BinaryE
         });
 
     if (fn.empty()) {
-        return false;
+        return;
     }
 
     // Call the helper
     out << fn;
     {
         ScopedParen sp(out);
-        if (!EmitExpression(out, expr->lhs)) {
-            return false;
-        }
+        EmitExpression(out, expr->lhs);
         out << ", ";
-        if (!EmitExpression(out, expr->rhs)) {
-            return false;
-        }
+        EmitExpression(out, expr->rhs);
     }
-    return true;
 }
 
-bool GeneratorImpl::EmitBinary(utils::StringStream& out, const ast::BinaryExpression* expr) {
+void GeneratorImpl::EmitBinary(utils::StringStream& out, const ast::BinaryExpression* expr) {
     if (IsRelational(expr->op) && !TypeOf(expr->lhs)->UnwrapRef()->is_scalar()) {
-        return EmitVectorRelational(out, expr);
+        EmitVectorRelational(out, expr);
+        return;
     }
+
     if (expr->op == ast::BinaryOp::kLogicalAnd || expr->op == ast::BinaryOp::kLogicalOr) {
         auto name = UniqueIdentifier(kTempNamePrefix);
 
         {
             auto pre = line();
             pre << "bool " << name << " = ";
-            if (!EmitExpression(pre, expr->lhs)) {
-                return false;
-            }
+            EmitExpression(pre, expr->lhs);
             pre << ";";
         }
 
@@ -593,32 +541,31 @@ bool GeneratorImpl::EmitBinary(utils::StringStream& out, const ast::BinaryExpres
             ScopedIndent si(this);
             auto pre = line();
             pre << name << " = ";
-            if (!EmitExpression(pre, expr->rhs)) {
-                return false;
-            }
+            EmitExpression(pre, expr->rhs);
             pre << ";";
         }
 
         line() << "}";
 
         out << "(" << name << ")";
-        return true;
+        return;
     }
+
     if ((expr->op == ast::BinaryOp::kAnd || expr->op == ast::BinaryOp::kOr) &&
         TypeOf(expr->lhs)->UnwrapRef()->is_bool_scalar_or_vector()) {
-        return EmitBitwiseBoolOp(out, expr);
+        EmitBitwiseBoolOp(out, expr);
+        return;
     }
 
     if (expr->op == ast::BinaryOp::kModulo &&
         (TypeOf(expr->lhs)->UnwrapRef()->is_float_scalar_or_vector() ||
          TypeOf(expr->rhs)->UnwrapRef()->is_float_scalar_or_vector())) {
-        return EmitFloatModulo(out, expr);
+        EmitFloatModulo(out, expr);
+        return;
     }
 
     ScopedParen sp(out);
-    if (!EmitExpression(out, expr->lhs)) {
-        return false;
-    }
+    EmitExpression(out, expr->lhs);
     out << " ";
 
     switch (expr->op) {
@@ -659,10 +606,6 @@ bool GeneratorImpl::EmitBinary(utils::StringStream& out, const ast::BinaryExpres
             out << "<<";
             break;
         case ast::BinaryOp::kShiftRight:
-            // TODO(dsinclair): MSL is based on C++14, and >> in C++14 has
-            // implementation-defined behaviour for negative LHS.  We may have to
-            // generate extra code to implement WGSL-specified behaviour for negative
-            // LHS.
             out << R"(>>)";
             break;
 
@@ -683,71 +626,55 @@ bool GeneratorImpl::EmitBinary(utils::StringStream& out, const ast::BinaryExpres
             break;
         case ast::BinaryOp::kNone:
             diagnostics_.add_error(diag::System::Writer, "missing binary operation type");
-            return false;
+            return;
     }
     out << " ";
-
-    if (!EmitExpression(out, expr->rhs)) {
-        return false;
-    }
-
-    return true;
+    EmitExpression(out, expr->rhs);
 }
 
-bool GeneratorImpl::EmitStatements(utils::VectorRef<const ast::Statement*> stmts) {
+void GeneratorImpl::EmitStatements(utils::VectorRef<const ast::Statement*> stmts) {
     for (auto* s : stmts) {
-        if (!EmitStatement(s)) {
-            return false;
-        }
+        EmitStatement(s);
     }
-    return true;
 }
 
-bool GeneratorImpl::EmitStatementsWithIndent(utils::VectorRef<const ast::Statement*> stmts) {
+void GeneratorImpl::EmitStatementsWithIndent(utils::VectorRef<const ast::Statement*> stmts) {
     ScopedIndent si(this);
-    return EmitStatements(stmts);
+    EmitStatements(stmts);
 }
 
-bool GeneratorImpl::EmitBlock(const ast::BlockStatement* stmt) {
+void GeneratorImpl::EmitBlock(const ast::BlockStatement* stmt) {
     line() << "{";
-    if (!EmitStatementsWithIndent(stmt->statements)) {
-        return false;
-    }
+    EmitStatementsWithIndent(stmt->statements);
     line() << "}";
-    return true;
 }
 
-bool GeneratorImpl::EmitBreak(const ast::BreakStatement*) {
+void GeneratorImpl::EmitBreak(const ast::BreakStatement*) {
     line() << "break;";
-    return true;
 }
 
-bool GeneratorImpl::EmitBreakIf(const ast::BreakIfStatement* b) {
+void GeneratorImpl::EmitBreakIf(const ast::BreakIfStatement* b) {
     auto out = line();
     out << "if (";
-    if (!EmitExpression(out, b->condition)) {
-        return false;
-    }
+    EmitExpression(out, b->condition);
     out << ") { break; }";
-    return true;
 }
 
-bool GeneratorImpl::EmitCall(utils::StringStream& out, const ast::CallExpression* expr) {
+void GeneratorImpl::EmitCall(utils::StringStream& out, const ast::CallExpression* expr) {
     auto* call = builder_.Sem().Get<sem::Call>(expr);
-    return Switch(
+    Switch(
         call->Target(),  //
-        [&](const sem::Function* fn) { return EmitFunctionCall(out, call, fn); },
-        [&](const sem::Builtin* builtin) { return EmitBuiltinCall(out, call, builtin); },
-        [&](const sem::ValueConversion* conv) { return EmitValueConversion(out, call, conv); },
-        [&](const sem::ValueConstructor* ctor) { return EmitValueConstructor(out, call, ctor); },
+        [&](const sem::Function* fn) { EmitFunctionCall(out, call, fn); },
+        [&](const sem::Builtin* builtin) { EmitBuiltinCall(out, call, builtin); },
+        [&](const sem::ValueConversion* conv) { EmitValueConversion(out, call, conv); },
+        [&](const sem::ValueConstructor* ctor) { EmitValueConstructor(out, call, ctor); },
         [&](Default) {
             TINT_ICE(Writer, diagnostics_)
                 << "unhandled call target: " << call->Target()->TypeInfo().name;
-            return false;
         });
 }
 
-bool GeneratorImpl::EmitFunctionCall(utils::StringStream& out,
+void GeneratorImpl::EmitFunctionCall(utils::StringStream& out,
                                      const sem::Call* call,
                                      const sem::Function* fn) {
     const auto& args = call->Arguments();
@@ -763,77 +690,57 @@ bool GeneratorImpl::EmitFunctionCall(utils::StringStream& out,
         }
         first = false;
 
-        if (!EmitExpression(out, arg->Declaration())) {
-            return false;
-        }
+        EmitExpression(out, arg->Declaration());
     }
-
-    return true;
 }
 
-bool GeneratorImpl::EmitBuiltinCall(utils::StringStream& out,
+void GeneratorImpl::EmitBuiltinCall(utils::StringStream& out,
                                     const sem::Call* call,
                                     const sem::Builtin* builtin) {
     auto* expr = call->Declaration();
     if (builtin->IsTexture()) {
-        return EmitTextureCall(out, call, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kCountOneBits) {
-        return EmitCountOneBitsCall(out, expr);
-    }
-    if (builtin->Type() == builtin::Function::kSelect) {
-        return EmitSelectCall(out, expr, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kDot) {
-        return EmitDotCall(out, expr, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kModf) {
-        return EmitModfCall(out, expr, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kFrexp) {
-        return EmitFrexpCall(out, expr, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kDegrees) {
-        return EmitDegreesCall(out, expr, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kRadians) {
-        return EmitRadiansCall(out, expr, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kQuantizeToF16) {
-        return EmitQuantizeToF16Call(out, expr, builtin);
-    }
-    if (builtin->Type() == builtin::Function::kArrayLength) {
-        return EmitArrayLength(out, expr);
-    }
-    if (builtin->Type() == builtin::Function::kExtractBits) {
-        return EmitExtractBits(out, expr);
-    }
-    if (builtin->Type() == builtin::Function::kInsertBits) {
-        return EmitInsertBits(out, expr);
-    }
-    if (builtin->Type() == builtin::Function::kFma && version_.IsES()) {
-        return EmitEmulatedFMA(out, expr);
-    }
-    if (builtin->Type() == builtin::Function::kAbs &&
-        TypeOf(expr->args[0])->UnwrapRef()->is_unsigned_integer_scalar_or_vector()) {
+        EmitTextureCall(out, call, builtin);
+    } else if (builtin->Type() == builtin::Function::kCountOneBits) {
+        EmitCountOneBitsCall(out, expr);
+    } else if (builtin->Type() == builtin::Function::kSelect) {
+        EmitSelectCall(out, expr, builtin);
+    } else if (builtin->Type() == builtin::Function::kDot) {
+        EmitDotCall(out, expr, builtin);
+    } else if (builtin->Type() == builtin::Function::kModf) {
+        EmitModfCall(out, expr, builtin);
+    } else if (builtin->Type() == builtin::Function::kFrexp) {
+        EmitFrexpCall(out, expr, builtin);
+    } else if (builtin->Type() == builtin::Function::kDegrees) {
+        EmitDegreesCall(out, expr, builtin);
+    } else if (builtin->Type() == builtin::Function::kRadians) {
+        EmitRadiansCall(out, expr, builtin);
+    } else if (builtin->Type() == builtin::Function::kQuantizeToF16) {
+        EmitQuantizeToF16Call(out, expr, builtin);
+    } else if (builtin->Type() == builtin::Function::kArrayLength) {
+        EmitArrayLength(out, expr);
+    } else if (builtin->Type() == builtin::Function::kExtractBits) {
+        EmitExtractBits(out, expr);
+    } else if (builtin->Type() == builtin::Function::kInsertBits) {
+        EmitInsertBits(out, expr);
+    } else if (builtin->Type() == builtin::Function::kFma && version_.IsES()) {
+        EmitEmulatedFMA(out, expr);
+    } else if (builtin->Type() == builtin::Function::kAbs &&
+               TypeOf(expr->args[0])->UnwrapRef()->is_unsigned_integer_scalar_or_vector()) {
         // GLSL does not support abs() on unsigned arguments. However, it's a no-op.
-        return EmitExpression(out, expr->args[0]);
-    }
-    if ((builtin->Type() == builtin::Function::kAny ||
-         builtin->Type() == builtin::Function::kAll) &&
-        TypeOf(expr->args[0])->UnwrapRef()->is_scalar()) {
+        EmitExpression(out, expr->args[0]);
+    } else if ((builtin->Type() == builtin::Function::kAny ||
+                builtin->Type() == builtin::Function::kAll) &&
+               TypeOf(expr->args[0])->UnwrapRef()->is_scalar()) {
         // GLSL does not support any() or all() on scalar arguments. It's a no-op.
-        return EmitExpression(out, expr->args[0]);
-    }
-    if (builtin->IsBarrier()) {
-        return EmitBarrierCall(out, builtin);
-    }
-    if (builtin->IsAtomic()) {
-        return EmitWorkgroupAtomicCall(out, expr, builtin);
+        EmitExpression(out, expr->args[0]);
+    } else if (builtin->IsBarrier()) {
+        EmitBarrierCall(out, builtin);
+    } else if (builtin->IsAtomic()) {
+        EmitWorkgroupAtomicCall(out, expr, builtin);
     }
     auto name = generate_builtin_name(builtin);
     if (name.empty()) {
-        return false;
+        return;
     }
 
     out << name;
@@ -846,31 +753,20 @@ bool GeneratorImpl::EmitBuiltinCall(utils::StringStream& out,
         }
         first = false;
 
-        if (!EmitExpression(out, arg->Declaration())) {
-            return false;
-        }
+        EmitExpression(out, arg->Declaration());
     }
-
-    return true;
 }
 
-bool GeneratorImpl::EmitValueConversion(utils::StringStream& out,
+void GeneratorImpl::EmitValueConversion(utils::StringStream& out,
                                         const sem::Call* call,
                                         const sem::ValueConversion* conv) {
-    if (!EmitType(out, conv->Target(), builtin::AddressSpace::kUndefined,
-                  builtin::Access::kReadWrite, "")) {
-        return false;
-    }
+    EmitType(out, conv->Target(), builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite,
+             "");
     ScopedParen sp(out);
-
-    if (!EmitExpression(out, call->Arguments()[0]->Declaration())) {
-        return false;
-    }
-
-    return true;
+    EmitExpression(out, call->Arguments()[0]->Declaration());
 }
 
-bool GeneratorImpl::EmitValueConstructor(utils::StringStream& out,
+void GeneratorImpl::EmitValueConstructor(utils::StringStream& out,
                                          const sem::Call* call,
                                          const sem::ValueConstructor* ctor) {
     auto* type = ctor->ReturnType();
@@ -878,12 +774,11 @@ bool GeneratorImpl::EmitValueConstructor(utils::StringStream& out,
     // If the value constructor is empty then we need to construct with the zero value for all
     // components.
     if (call->Arguments().IsEmpty()) {
-        return EmitZeroValue(out, type);
+        EmitZeroValue(out, type);
+        return;
     }
 
-    if (!EmitType(out, type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite, "")) {
-        return false;
-    }
+    EmitType(out, type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite, "");
     ScopedParen sp(out);
 
     bool first = true;
@@ -893,15 +788,11 @@ bool GeneratorImpl::EmitValueConstructor(utils::StringStream& out,
         }
         first = false;
 
-        if (!EmitExpression(out, arg->Declaration())) {
-            return false;
-        }
+        EmitExpression(out, arg->Declaration());
     }
-
-    return true;
 }
 
-bool GeneratorImpl::EmitWorkgroupAtomicCall(utils::StringStream& out,
+void GeneratorImpl::EmitWorkgroupAtomicCall(utils::StringStream& out,
                                             const ast::CallExpression* expr,
                                             const sem::Builtin* builtin) {
     auto call = [&](const char* name) {
@@ -913,12 +804,10 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(utils::StringStream& out,
                 if (i > 0) {
                     out << ", ";
                 }
-                if (!EmitExpression(out, arg)) {
-                    return false;
-                }
+                EmitExpression(out, arg);
             }
         }
-        return true;
+        return;
     };
 
     switch (builtin->Type()) {
@@ -936,12 +825,10 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(utils::StringStream& out,
                     out << "u";
                 }
             }
-            return true;
+            return;
         }
         case builtin::Function::kAtomicCompareExchangeWeak: {
-            if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
-                return false;
-            }
+            EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>());
 
             auto* dest = expr->args[0];
             auto* compare_value = expr->args[1];
@@ -951,10 +838,8 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(utils::StringStream& out,
 
             {
                 auto pre = line();
-                if (!EmitTypeAndName(pre, builtin->ReturnType(), builtin::AddressSpace::kUndefined,
-                                     builtin::Access::kUndefined, result)) {
-                    return false;
-                }
+                EmitTypeAndName(pre, builtin->ReturnType(), builtin::AddressSpace::kUndefined,
+                                builtin::Access::kUndefined, result);
                 pre << ";";
             }
             {
@@ -962,64 +847,62 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(utils::StringStream& out,
                 pre << result << ".old_value = atomicCompSwap";
                 {
                     ScopedParen sp(pre);
-                    if (!EmitExpression(pre, dest)) {
-                        return false;
-                    }
+                    EmitExpression(pre, dest);
                     pre << ", ";
-                    if (!EmitExpression(pre, compare_value)) {
-                        return false;
-                    }
+                    EmitExpression(pre, compare_value);
                     pre << ", ";
-                    if (!EmitExpression(pre, value)) {
-                        return false;
-                    }
+                    EmitExpression(pre, value);
                 }
                 pre << ";";
             }
             {
                 auto pre = line();
                 pre << result << ".exchanged = " << result << ".old_value == ";
-                if (!EmitExpression(pre, compare_value)) {
-                    return false;
-                }
+                EmitExpression(pre, compare_value);
                 pre << ";";
             }
 
             out << result;
-            return true;
+            return;
         }
 
         case builtin::Function::kAtomicAdd:
         case builtin::Function::kAtomicSub:
-            return call("atomicAdd");
+            call("atomicAdd");
+            return;
 
         case builtin::Function::kAtomicMax:
-            return call("atomicMax");
+            call("atomicMax");
+            return;
 
         case builtin::Function::kAtomicMin:
-            return call("atomicMin");
+            call("atomicMin");
+            return;
 
         case builtin::Function::kAtomicAnd:
-            return call("atomicAnd");
+            call("atomicAnd");
+            return;
 
         case builtin::Function::kAtomicOr:
-            return call("atomicOr");
+            call("atomicOr");
+            return;
 
         case builtin::Function::kAtomicXor:
-            return call("atomicXor");
+            call("atomicXor");
+            return;
 
         case builtin::Function::kAtomicExchange:
         case builtin::Function::kAtomicStore:
             // GLSL does not have an atomicStore, so we emulate it with
             // atomicExchange.
-            return call("atomicExchange");
+            call("atomicExchange");
+            return;
 
         default:
             break;
     }
 
     TINT_UNREACHABLE(Writer, diagnostics_) << "unsupported atomic builtin: " << builtin->Type();
-    return false;
 }
 
 bool GeneratorImpl::EmitArrayLength(utils::StringStream& out, const ast::CallExpression* expr) {
