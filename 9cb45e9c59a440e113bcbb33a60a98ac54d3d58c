@@ -22,6 +22,30 @@
       },
       "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0421ea5e_376b0bdb",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T02:04:10Z",
+      "side": 1,
+      "message": "\u003e won\u0027t this deadlock?\n\nOk Thanks, I missed this case. `Destroy` looks like it would have been called directly from public API.\nThe locking has been removed from here, replaced by an assertion instead. Added the locking to dtor.\nI have also created a test case to this CL to catch this deadlock and another test case to verify there is no race when using the external image and destroying the device simultaneously.\n\n\n\u003e Why can\u0027t we use an atomic to mark it as destroyed?\n\nHow do you suggest the atomic to be used? AFAIK, atomic alone is not useful in this class. Without locking, the device could be destroyed between the time the atomic is checked and the time the image is used. e.g.\n```\nif (!mDestroyed.load()) {\n  // the device could be destroyed on another thread at this point.\n  lock(device) --\u003e crash since device is null\n  RemoveFromList();\n  \n  mDestroyed.store(true);\n}\n```\n\nWe can rework to make `ExternalImageDXGIImpl` \u0027s lifetime tracking consistent with other objects in future.",
+      "parentUuid": "88fee737_23b1da05",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
