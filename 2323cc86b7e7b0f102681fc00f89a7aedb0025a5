@@ -285,6 +285,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ddf68b1b_8146ac0a",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-04-12T10:51:46Z",
+      "side": 1,
+      "message": "\u003e I still think adapter toggles are the better way\n\nYes I think UseDXC should be an adapter toggle, and should be required when creating adapter from an instance. But there are more complexity of implementing adapter toggles (thus of the same backend), specifically of managing multiple adapters that only different in required toggles within a single instance. Maybe it would be clearer to do that in a separate CL, and downgrade UseDXC with that.",
+      "parentUuid": "d0a64158_831c9687",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11

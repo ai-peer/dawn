@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba1be1a8_84bce317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-04-12T10:51:46Z",
+      "side": 1,
+      "message": "Please take a look, thanks!\n\nThis CL now mainly serve as a step of implementing adapter toggles, as the `shader-f16` feature is now exposed in Chrome as expected with `UseDXC` checked in Chrome (thanks for Austin\u0027s help). This CL add the concept of `allowed features under the restriction of adapter\u0027s toggles` (to properly handle the feature query in adapters) and `allowed features under the restriction of required device\u0027s toggles` (to allow device toggles override adapter toggles when creating devices).\n\n`UseDXC` may be downgraded as an adapter toggle after implemented, but now it is promoted as an instance toggle, only to get inherited to adapters because currently we don\u0027t have a method to require adapter toggles.",
+      "revId": "4e88d4f2ded33e68d663dcb8713682d74bb1eaff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
