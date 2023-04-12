@@ -70,6 +70,30 @@
       },
       "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a03cf11_e3f94cec",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T06:01:17Z",
+      "side": 1,
+      "message": "Thanks for the extra tests!\nI see - we still need the mutex ref. We could have the atomic would only be used for answering IsValid. But since we already have the mutex, your way is simpler.\n\nLooking at how we handle other object destruction though.. the Destroy calls do not set ObjectBase::mDevice to nullptr. Is it necessary for ExternalImageDXGI to set mBackendDevice to nullptr inside Destroy? If not, then we can always acquire the device\u0027s mutex without worrying about the device being null. This would be nice so we can avoid exposing DeviceBase::GetMutex.\n\nIsValid is odd and it\u0027s something we can reconsider when we revisit the shared image code. Its original intent was not for the purpose of checking IsValid, then doing something else with the image. The reason it exists is because sunnyps@ added it so that ExternalImageDXGI can outlive the device in a cache. Chrome needs to know when to remove ExternalImageDXGI from the cache (when the device it was created from has been destroyed or lost all external references). It means that ExternalImageDXGI is ~kinda like a weak ref where IsValid returns false when the device is gone - and any further usage of it does nothing and logs an error.",
+      "parentUuid": "a8ebe780_cd1ee817",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

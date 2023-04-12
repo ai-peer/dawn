@@ -160,6 +160,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cfde55a_21c629b2",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T06:01:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "59fc8ef8_c66b9395",
+      "range": {
+        "startLine": 1134,
+        "startChar": 0,
+        "endLine": 1136,
+        "endChar": 0
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "787360aa_24006029",
@@ -269,6 +293,30 @@
       "side": 1,
       "message": "The test has been moved to https://dawn-review.googlesource.com/c/dawn/+/122060",
       "parentUuid": "c2884f6f_aed3a57a",
+      "range": {
+        "startLine": 1159,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 31
+      },
+      "revId": "9adc7ce41c5e1411e0056bca43024f73e6de5748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e543aee_b0d27718",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T06:01:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1542157c_325d021a",
       "range": {
         "startLine": 1159,
         "startChar": 8,
