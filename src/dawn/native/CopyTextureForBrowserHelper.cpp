@@ -574,7 +574,8 @@ MaybeError DoCopyForBrowser(DeviceBase* device,
     RenderPassDescriptor renderPassDesc;
     renderPassDesc.colorAttachmentCount = 1;
     renderPassDesc.colorAttachments = &colorAttachmentDesc;
-    Ref<RenderPassEncoder> passEncoder = encoder->BeginRenderPass(&renderPassDesc);
+    Ref<RenderPassEncoder> passEncoder =
+        encoder->BeginRenderPass(&renderPassDesc, /*deviceAlreadyLocked=*/true);
 
     // Start pipeline and encode commands to complete
     // the copy from src texture to dst texture with transformation.

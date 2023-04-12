@@ -429,7 +429,8 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
                                        static_cast<const uint8_t*>(pass.batchData.get()),
                                        pass.batchDataSize);
 
-        Ref<ComputePassEncoder> passEncoder = commandEncoder->BeginComputePass();
+        Ref<ComputePassEncoder> passEncoder =
+            commandEncoder->BeginComputePass(nullptr, /*deviceAlreadyLocked=*/false);
         passEncoder->APISetPipeline(pipeline);
 
         inputIndirectBinding.buffer = pass.inputIndirectBuffer;
