@@ -150,6 +150,12 @@ Wrappers* Wrappers::instance = nullptr;
         InstanceMethod("has", &W{{$.Name}}::has),
         InstanceMethod("keys", &W{{$.Name}}::keys),
 {{-  end}}
+{{   if $s := MaplikeOf $}}
+        InstanceMethod("has", &W{{$.Name}}::has),
+        InstanceMethod("keys", &W{{$.Name}}::keys),
+        InstanceMethod("values", &W{{$.Name}}::values),
+        InstanceMethod("get", &W{{$.Name}}::get),
+{{-  end}}
 {{-  range $m := $methods}}
         InstanceMethod("{{$m.Name}}", &W{{$.Name}}::{{$m.Name}}),
 {{-  end}}
@@ -180,6 +186,32 @@ Wrappers* Wrappers::instance = nullptr;
     }
     Napi::Value keys(const Napi::CallbackInfo& info) {
       return ToJS(info.Env(), impl->keys(info.Env()));
+    }
+{{-  end}}
+{{-  if $m := MaplikeOf $}}
+    Napi::Value has(const Napi::CallbackInfo& info) {
+      std::tuple<{{template "Type" $m.Key}}> args;
+      auto res = FromJS(info, args);
+      if (res) {
+          return ToJS(info.Env(), impl->has(info.Env(), std::get<0>(args)));
+      }
+      Napi::TypeError::New(info.Env(), res.error).ThrowAsJavaScriptException();
+      return {};
+    }
+    Napi::Value keys(const Napi::CallbackInfo& info) {
+      return ToJS(info.Env(), impl->keys(info.Env()));
+    }
+    Napi::Value values(const Napi::CallbackInfo& info) {
+      return ToJS(info.Env(), impl->values(info.Env()));
+    }
+    Napi::Value get(const Napi::CallbackInfo& info) {
+      std::tuple<{{template "Type" $m.Key}}> args;
+      auto res = FromJS(info, args);
+      if (res) {
+          return ToJS(info.Env(), impl->get(info.Env(), std::get<0>(args)));
+      }
+      Napi::TypeError::New(info.Env(), res.error).ThrowAsJavaScriptException();
+      return {};
     }
 {{-  end}}
 {{-  range $m := $methods}}

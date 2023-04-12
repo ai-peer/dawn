@@ -137,6 +137,7 @@ func run() error {
 		"Lookup":                     g.lookup,
 		"MethodsOf":                  methodsOf,
 		"SetlikeOf":                  setlikeOf,
+		"MaplikeOf":                  maplikeOf,
 		"Title":                      strings.Title,
 	}
 	t, err := g.t.
@@ -307,6 +308,10 @@ func (s *simplifier) visit(d ast.Decl) {
 				}
 			}
 		}
+		for _, p := range d.Patterns {
+			s.visitType(p.Key)
+			s.visitType(p.Elem)
+		}
 	case *ast.Dictionary:
 		if register(d.Name) {
 			return
@@ -356,6 +361,7 @@ func (s *simplifier) visit(d ast.Decl) {
 // s.out.
 func (s *simplifier) visitType(t ast.Type) {
 	switch t := t.(type) {
+	case nil:
 	case *ast.TypeName:
 		if d, ok := s.declarations[t.Name]; ok {
 			s.visit(d)
@@ -373,6 +379,7 @@ func (s *simplifier) visitType(t ast.Type) {
 	case *ast.SequenceType:
 		s.visitType(t.Elem)
 	case *ast.RecordType:
+		s.visitType(t.Key)
 		s.visitType(t.Elem)
 	default:
 		panic(fmt.Errorf("unhandled AST type %T", t))
@@ -682,6 +689,20 @@ func setlikeOf(obj interface{}) *ast.Pattern {
 	}
 	for _, pattern := range iface.Patterns {
 		if pattern.Type == ast.Setlike {
+			return pattern
+		}
+	}
+	return nil
+}
+
+// maplikeOf returns the maplike ast.Pattern, if obj is a maplike interface.
+func maplikeOf(obj interface{}) *ast.Pattern {
+	iface, ok := obj.(*ast.Interface)
+	if !ok {
+		return nil
+	}
+	for _, pattern := range iface.Patterns {
+		if pattern.Type == ast.Maplike {
 			return pattern
 		}
 	}

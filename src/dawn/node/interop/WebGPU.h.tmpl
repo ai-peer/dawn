@@ -126,6 +126,9 @@ public:
 {{-  if $s := SetlikeOf $}}
 {{-    template "InterfaceSetlike" $s}}
 {{-  end}}
+{{-  if $s := MaplikeOf $}}
+{{-    template "InterfaceMaplike" $s}}
+{{-  end}}
 {{-  range $m := MethodsOf $}}
 {{-    template "InterfaceMethod" $m}}
 {{-  end}}
@@ -204,6 +207,24 @@ std::ostream& operator<<(std::ostream& o, {{$.Name}});
 {{- /* TODO(crbug.com/dawn/1143):
        entries, forEach, size, values
        read-write: add, clear, or delete
+*/}}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- InterfaceMaplike emits the C++ methods for a maplike interface
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "InterfaceMaplike"}}
+  virtual bool has(Napi::Env, {{template "Type" $.Key}}) = 0;
+  virtual std::vector<{{template "Type" $.Key}}> keys(Napi::Env) = 0;
+  virtual std::vector<{{template "Type" $.Elem}}> values(Napi::Env) = 0;
+  virtual std::optional<{{template "Type" $.Elem}}> get(Napi::Env, {{template "Type" $.Key}}) = 0;
+{{- /* TODO(crbug.com/dawn/1143):
+        entries, forEach, get, has, keys, values,
+        @@iterator methods, and a size getter.
+        For read–write maplikes, it also includes clear, delete, and set methods.
 */}}
 {{- end }}
 
