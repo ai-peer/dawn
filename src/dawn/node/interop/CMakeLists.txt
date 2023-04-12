@@ -22,6 +22,7 @@ idlgen(
         "${CMAKE_CURRENT_SOURCE_DIR}/WebGPU.h.tmpl"
     IDLS
         "${CMAKE_CURRENT_SOURCE_DIR}/Browser.idl"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Reflection.idl"
         "${WEBGPU_IDL_PATH}"
     DEPENDS
         "${CMAKE_CURRENT_SOURCE_DIR}/WebGPUCommon.tmpl"
@@ -34,6 +35,7 @@ idlgen(
         "${CMAKE_CURRENT_SOURCE_DIR}/WebGPU.cpp.tmpl"
     IDLS
         "${CMAKE_CURRENT_SOURCE_DIR}/Browser.idl"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Reflection.idl"
         "${WEBGPU_IDL_PATH}"
     DEPENDS
         "${CMAKE_CURRENT_SOURCE_DIR}/WebGPUCommon.tmpl"
