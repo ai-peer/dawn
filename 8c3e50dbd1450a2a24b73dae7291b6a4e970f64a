@@ -122,6 +122,24 @@
       "parentUuid": "8fc6f628_350a91a2",
       "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88af7155_33ecf5a7",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:59:22Z",
+      "side": 1,
+      "message": "So, we never have a wire instance, I thought somehow we did but instead we inject the device directly when running on the wire. So the mInstance is not a wire instance but always a native instance. And when we try to use it with the wire procs, well that\u0027s a type confusion and everything explodes.\n\nSorry for leading you in a rabbit hole. Let\u0027s land as is.",
+      "parentUuid": "33bc1282_2ba29fd9",
+      "revId": "8c3e50dbd1450a2a24b73dae7291b6a4e970f64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
