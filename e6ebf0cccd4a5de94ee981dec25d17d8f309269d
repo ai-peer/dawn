@@ -1,0 +1,297 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0c55b38_779fa537",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "it\u0027s surprising these are the copy usages and not the map usages.\nIIUC it\u0027s so we can to B2T copies and T2B copies.\n\nHowever, will this strategy pessimize B2B copies? Those will want to use CopySubresourceRegion which means the GPU will be going and reading from CPU staging data to write into other CPU staging data.\n\nI think for now it might be simpler to always have two buffers. One with DEFAULT usage and one with STAGING usage. When we copy from the buffer to a texture, we copy from the DEFAULT buffer into the STAGING buffer, then do UpdateSubresource. When we copy from a texture to a buffer, we copy from the DEFAULT texture to the STAGING texture, (into the STAGING buffer?), then into the DEFAULT buffer.\n\nIn the future we can optimize memory usage things so the staging buffers/textures don\u0027t live forever and we create it on the fly or grab it from a cache.\n\nThis makes B2T and T2B copies slower, but remember we will have a blit in the future to alleviate the intermediate copies for most formats. And then, CopySrc/CopyDst buffers operate more like normal buffers.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 1
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cd74a20_e4eb8357",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t communicate why we need D3D11_CPU_ACCESS_WRITE. Is it for copies *to* the buffer? i.e. a CPU upload?\n\nI think what we need for that is CopyDst -\u003e D3D11_CPU_ACCESS_WRITE and CopySrc -\u003e D3D11_CPU_ACCESS_READ ?",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 5
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52db9d82_ce4f2d09",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "not handled? can have a TODO",
+      "range": {
+        "startLine": 143,
+        "startChar": 30,
+        "endLine": 143,
+        "endChar": 51
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369c97fa_33c03352",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "with the above comments, this might need to check only for D3D11_CPU_ACCESS_WRITE",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 38
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08fab5cb_11daad07",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "what about read?",
+      "range": {
+        "startLine": 192,
+        "startChar": 69,
+        "endLine": 192,
+        "endChar": 84
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39243c5c_2840ba07",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": ":-/",
+      "range": {
+        "startLine": 203,
+        "startChar": 3,
+        "endLine": 205,
+        "endChar": 11
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fb785c1_f76954bb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "worth explaining why we don\u0027t really do anything here",
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ecb708_033a4018",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "why do we pass null here?",
+      "range": {
+        "startLine": 224,
+        "startChar": 35,
+        "endLine": 224,
+        "endChar": 42
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06587f9c_7497d692",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "it\u0027s worth a comment explaining why we don\u0027t unmap.\n\nI believe it\u0027s only needed for D3D11_USAGE_DYNAMIC to return access to the GPU. And we don\u0027t use that usage now.\n(maybe one day we will want it and upgrade buffers to dynamic usage if they are frequently updated using WriteBuffer)\n\n\nalso, when we handle mappedAtCreation we will need to flush the writes here.",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 27
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c265df54_78bbd04f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "Create, not Get\n\nwe could wait until the BindGroup uses this though before adding.",
+      "range": {
+        "startLine": 302,
+        "startChar": 56,
+        "endLine": 302,
+        "endChar": 59
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1a06bf_0d535d1f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "offset/size args?",
+      "range": {
+        "startLine": 322,
+        "startChar": 87,
+        "endLine": 322,
+        "endChar": 88
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c645fb6_0d7e1549",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "Create, not Get\n\n\nwe could wait until the BindGroup uses this though before adding.",
+      "range": {
+        "startLine": 322,
+        "startChar": 58,
+        "endLine": 322,
+        "endChar": 61
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d98ebd_8da395b1",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "See D3D12\u0027s mZeroBuffer. We can do the same thing when the value is zero so that this is a GPU-GPU copy instead of a CPU upload.\nThe value is only non-zero for testing since we initialize the data all to a non-zero value to ensure zero-init works.\nFor D3D11, we could use the Buffer\u0027s initialData to do that instead though.",
+      "range": {
+        "startLine": 368,
+        "startChar": 4,
+        "endLine": 369,
+        "endChar": 79
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

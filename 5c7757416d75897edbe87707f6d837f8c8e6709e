@@ -267,6 +267,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1bb4ba44_78c24a1e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T23:54:29Z",
+      "side": 1,
+      "message": "shouldn\u0027t this also check Vertex and Index?\n\nalso we should have a TODO about working around the limitation. Likely we have a shadow copy of the buffer with uniform usage which we update when the other version is dirty.",
+      "parentUuid": "0b911f99_1ace7073",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d74f813a_14c832b8",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
