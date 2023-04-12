@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46dc8fb0_67766198",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T16:01:24Z",
+      "side": 1,
+      "message": "Ok makes sense. Thanks for the explanation, can we extend the comment a bit with this?",
+      "parentUuid": "414a097d_d81c4a6c",
+      "revId": "50afe20263ce931b47d654ce714770a4e0bf613a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ab8f1f0_0e27bcad",
         "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 28
