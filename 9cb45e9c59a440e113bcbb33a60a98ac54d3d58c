@@ -46,6 +46,30 @@
       },
       "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8ebe780_cd1ee817",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-12T02:27:25Z",
+      "side": 1,
+      "message": "Using an atomic could be useful to avoid a locking in `IsValid` method. But the locking is still required in `BeginAccess`/`EndAccess`.\n\nI think the `IsValid` method should be removed in future after we add multithreading support to this class. Using that method to check before accessing the image is not thread safe. Chrome should only use those methods that do \"IsValid check + other works\" in one \"atomic\" sequence.",
+      "parentUuid": "0421ea5e_376b0bdb",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "9cb45e9c59a440e113bcbb33a60a98ac54d3d58c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
