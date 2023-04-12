@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e053e231_6186f667",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T19:30:01Z",
+      "side": 1,
+      "message": "mmmmm I think Corentin probably didn\u0027t realize it was reused in this way.\n\nI\u0027d prefer if we didn\u0027t have to pass the bool around to indicate the device is already locked and we go back to how you originally had it.\nWe can optimize it if it ends up being a really hot spot - but I hope that that sooner than later we have more granular synchronization in Dawn and don\u0027t need the global lock at all.",
+      "parentUuid": "2821cb92_55ff0cb2",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b3dd376_b906a856",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 1
