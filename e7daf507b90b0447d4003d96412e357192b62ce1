@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e461d1e3_06768ec9",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T20:25:28Z",
+      "side": 1,
+      "message": "ok, thanks!",
+      "parentUuid": "67fe3eda_ca3a3cac",
+      "revId": "e7daf507b90b0447d4003d96412e357192b62ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b3dd376_b906a856",
