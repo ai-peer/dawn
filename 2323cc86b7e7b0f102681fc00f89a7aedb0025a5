@@ -303,6 +303,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4849b5ec_665b81f5",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-12T17:46:58Z",
+      "side": 1,
+      "message": "Yes I think it would be better if we refactored things to support multiple adapters with different exposed capabilities - which really use the same backend adapter. It will be useful longer term as well. I wrote a [doc](https://docs.google.com/document/d/1Ag3UAD6D1OVt9-MwKltzLefVhwKRdX0RqML2etrYVS4/edit#) about my ideas on how to do it and what it can look like. Maybe you could look into helping do the refactor? (the doc\u0027s scope includes some things beyond supporting toggles which don\u0027t need to be done just yet).",
+      "parentUuid": "ddf68b1b_8146ac0a",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
