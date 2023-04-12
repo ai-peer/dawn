@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31090ab_6c8c9380",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-12T12:14:49Z",
+      "side": 1,
+      "message": "That\u0027s just a lot of code to review at once. If you don\u0027t mind I\u0027ll defer this at least until tomorrow.",
+      "revId": "a4d79020421247279ee2c1729fce3c0961c1e185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
