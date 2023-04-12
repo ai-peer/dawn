@@ -35,6 +35,8 @@ add_library(dawn_node_binding STATIC
     "GPUCommandBuffer.h"
     "GPUCommandEncoder.cpp"
     "GPUCommandEncoder.h"
+    "GPUCompilationInfo.cpp"
+    "GPUCompilationInfo.h"
     "GPUComputePassEncoder.cpp"
     "GPUComputePassEncoder.h"
     "GPUComputePipeline.cpp"
@@ -67,6 +69,8 @@ add_library(dawn_node_binding STATIC
     "GPUTexture.h"
     "GPUTextureView.cpp"
     "GPUTextureView.h"
+    "WGSL.cpp"
+    "WGSL.h"
 )
 common_compile_options(dawn_node_binding)
 
