@@ -14,8 +14,10 @@
 
 #include <mutex>
 
+#include "absl/strings/str_format.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectBase.h"
+#include "dawn/native/ObjectType_autogen.h"
 
 namespace dawn::native {
 
@@ -90,7 +92,18 @@ const std::string& ApiObjectBase::GetLabel() const {
     return mLabel;
 }
 
+void ApiObjectBase::FormatLabel(absl::FormatSink* s) const {
+    s->Append(GetTypeName());
+    if (!mLabel.empty()) {
+        s->Append(absl::StrFormat(" \"%s\"", mLabel));
+    }
+}
+
 void ApiObjectBase::SetLabelImpl() {}
+
+const char* ApiObjectBase::GetTypeName() const {
+    return ObjectTypeAsString(GetType());
+}
 
 bool ApiObjectBase::IsAlive() const {
     return IsInList();
