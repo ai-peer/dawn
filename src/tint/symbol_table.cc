@@ -14,7 +14,14 @@
 
 #include "src/tint/symbol_table.h"
 
+#include "src/tint/ast/const.h"
+#include "src/tint/ast/identifier.h"
+#include "src/tint/ast/let.h"
+#include "src/tint/ast/override.h"
+#include "src/tint/ast/type_decl.h"
+#include "src/tint/ast/var.h"
 #include "src/tint/debug.h"
+#include "src/tint/switch.h"
 
 namespace tint {
 
@@ -94,6 +101,69 @@ Symbol SymbolTable::New(std::string prefix /* = "" */) {
     }
 
     return Register(name);
+}
+
+std::string ResolvedIdentifier::String(const SymbolTable& symbols, diag::List& diagnostics) const {
+    if (auto* node = Node()) {
+        return Switch(
+            node,
+            [&](const ast::TypeDecl* n) {  //
+                return "type '" + symbols.NameFor(n->name->symbol) + "'";
+            },
+            [&](const ast::Var* n) {  //
+                return "var '" + symbols.NameFor(n->name->symbol) + "'";
+            },
+            [&](const ast::Let* n) {  //
+                return "let '" + symbols.NameFor(n->name->symbol) + "'";
+            },
+            [&](const ast::Const* n) {  //
+                return "const '" + symbols.NameFor(n->name->symbol) + "'";
+            },
+            [&](const ast::Override* n) {  //
+                return "override '" + symbols.NameFor(n->name->symbol) + "'";
+            },
+            [&](const ast::Function* n) {  //
+                return "function '" + symbols.NameFor(n->name->symbol) + "'";
+            },
+            [&](const ast::Parameter* n) {  //
+                return "parameter '" + symbols.NameFor(n->name->symbol) + "'";
+            },
+            [&](Default) {
+                TINT_UNREACHABLE(Resolver, diagnostics)
+                    << "unhandled ast::Node: " << node->TypeInfo().name;
+                return "<unknown>";
+            });
+    }
+    if (auto builtin_fn = BuiltinFunction(); builtin_fn != builtin::Function::kNone) {
+        return "builtin function '" + utils::ToString(builtin_fn) + "'";
+    }
+    if (auto builtin_ty = BuiltinType(); builtin_ty != builtin::Builtin::kUndefined) {
+        return "builtin type '" + utils::ToString(builtin_ty) + "'";
+    }
+    if (auto builtin_val = BuiltinValue(); builtin_val != builtin::BuiltinValue::kUndefined) {
+        return "builtin value '" + utils::ToString(builtin_val) + "'";
+    }
+    if (auto access = Access(); access != builtin::Access::kUndefined) {
+        return "access '" + utils::ToString(access) + "'";
+    }
+    if (auto addr = AddressSpace(); addr != builtin::AddressSpace::kUndefined) {
+        return "address space '" + utils::ToString(addr) + "'";
+    }
+    if (auto type = InterpolationType(); type != builtin::InterpolationType::kUndefined) {
+        return "interpolation type '" + utils::ToString(type) + "'";
+    }
+    if (auto smpl = InterpolationSampling(); smpl != builtin::InterpolationSampling::kUndefined) {
+        return "interpolation sampling '" + utils::ToString(smpl) + "'";
+    }
+    if (auto fmt = TexelFormat(); fmt != builtin::TexelFormat::kUndefined) {
+        return "texel format '" + utils::ToString(fmt) + "'";
+    }
+    if (auto* unresolved = Unresolved()) {
+        return "unresolved identifier '" + unresolved->name + "'";
+    }
+
+    TINT_UNREACHABLE(Resolver, diagnostics) << "unhandled ResolvedIdentifier";
+    return "<unknown>";
 }
 
 }  // namespace tint

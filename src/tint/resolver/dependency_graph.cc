@@ -149,7 +149,7 @@ class DependencyScanner {
     /// @param graph the dependency graph to populate with resolved symbols
     /// @param edges the map of globals-to-global dependency edges, which will
     /// be populated by calls to Scan()
-    DependencyScanner(const SymbolTable& syms,
+    DependencyScanner(SymbolTable& syms,
                       const GlobalMap& globals_by_name,
                       diag::List& diagnostics,
                       DependencyGraph& graph,
@@ -440,48 +440,74 @@ class DependencyScanner {
     void AddDependency(const ast::Identifier* from, Symbol to) {
         auto* resolved = scope_stack_.Get(to);
         if (!resolved) {
+            // If this symbol has previously resolved to a builtin, just return the resolved result
+            // as it will resolve to the same builtin.
+            auto r = symbols_.GetIfResolved(to);
+            if (r.has_value()) {
+                graph_.resolved_identifiers.Add(from, r.value());
+                return;
+            }
+
             auto s = symbols_.NameFor(to);
             if (auto builtin_fn = builtin::ParseFunction(s);
                 builtin_fn != builtin::Function::kNone) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(builtin_fn));
+                ResolvedIdentifier ri(builtin_fn);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
             if (auto builtin_ty = builtin::ParseBuiltin(s);
                 builtin_ty != builtin::Builtin::kUndefined) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(builtin_ty));
+                ResolvedIdentifier ri(builtin_ty);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
             if (auto builtin_val = builtin::ParseBuiltinValue(s);
                 builtin_val != builtin::BuiltinValue::kUndefined) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(builtin_val));
+                ResolvedIdentifier ri(builtin_val);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
             if (auto addr = builtin::ParseAddressSpace(s);
                 addr != builtin::AddressSpace::kUndefined) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(addr));
+                ResolvedIdentifier ri(addr);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
             if (auto fmt = builtin::ParseTexelFormat(s); fmt != builtin::TexelFormat::kUndefined) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(fmt));
+                ResolvedIdentifier ri(fmt);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
             if (auto access = builtin::ParseAccess(s); access != builtin::Access::kUndefined) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(access));
+                ResolvedIdentifier ri(access);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
             if (auto i_type = builtin::ParseInterpolationType(s);
                 i_type != builtin::InterpolationType::kUndefined) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(i_type));
+                ResolvedIdentifier ri(i_type);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
             if (auto i_smpl = builtin::ParseInterpolationSampling(s);
                 i_smpl != builtin::InterpolationSampling::kUndefined) {
-                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(i_smpl));
+                ResolvedIdentifier ri(i_smpl);
+                graph_.resolved_identifiers.Add(from, ri);
+                symbols_.SetResolved(to, ri);
                 return;
             }
 
             // Unresolved.
-            graph_.resolved_identifiers.Add(from, UnresolvedIdentifier{s});
+            UnresolvedIdentifier ui{s};
+            graph_.resolved_identifiers.Add(from, ui);
+            symbols_.SetResolved(to, ui);
             return;
         }
 
@@ -496,7 +522,7 @@ class DependencyScanner {
     }
 
     using VariableMap = utils::Hashmap<Symbol, const ast::Variable*, 32>;
-    const SymbolTable& symbols_;
+    SymbolTable& symbols_;
     const GlobalMap& globals_;
     diag::List& diagnostics_;
     DependencyGraph& graph_;
@@ -510,7 +536,7 @@ class DependencyScanner {
 struct DependencyAnalysis {
   public:
     /// Constructor
-    DependencyAnalysis(const SymbolTable& symbols, diag::List& diagnostics, DependencyGraph& graph)
+    DependencyAnalysis(SymbolTable& symbols, diag::List& diagnostics, DependencyGraph& graph)
         : symbols_(symbols), diagnostics_(diagnostics), graph_(graph) {}
 
     /// Performs global dependency analysis on the module, emitting any errors to
@@ -771,7 +797,7 @@ struct DependencyAnalysis {
     }
 
     /// Program symbols
-    const SymbolTable& symbols_;
+    SymbolTable& symbols_;
 
     /// Program diagnostics
     diag::List& diagnostics_;
@@ -802,74 +828,11 @@ DependencyGraph::DependencyGraph(DependencyGraph&&) = default;
 DependencyGraph::~DependencyGraph() = default;
 
 bool DependencyGraph::Build(const ast::Module& module,
-                            const SymbolTable& symbols,
+                            SymbolTable& symbols,
                             diag::List& diagnostics,
                             DependencyGraph& output) {
     DependencyAnalysis da{symbols, diagnostics, output};
     return da.Run(module);
-}
-
-std::string ResolvedIdentifier::String(const SymbolTable& symbols, diag::List& diagnostics) const {
-    if (auto* node = Node()) {
-        return Switch(
-            node,
-            [&](const ast::TypeDecl* n) {  //
-                return "type '" + symbols.NameFor(n->name->symbol) + "'";
-            },
-            [&](const ast::Var* n) {  //
-                return "var '" + symbols.NameFor(n->name->symbol) + "'";
-            },
-            [&](const ast::Let* n) {  //
-                return "let '" + symbols.NameFor(n->name->symbol) + "'";
-            },
-            [&](const ast::Const* n) {  //
-                return "const '" + symbols.NameFor(n->name->symbol) + "'";
-            },
-            [&](const ast::Override* n) {  //
-                return "override '" + symbols.NameFor(n->name->symbol) + "'";
-            },
-            [&](const ast::Function* n) {  //
-                return "function '" + symbols.NameFor(n->name->symbol) + "'";
-            },
-            [&](const ast::Parameter* n) {  //
-                return "parameter '" + symbols.NameFor(n->name->symbol) + "'";
-            },
-            [&](Default) {
-                TINT_UNREACHABLE(Resolver, diagnostics)
-                    << "unhandled ast::Node: " << node->TypeInfo().name;
-                return "<unknown>";
-            });
-    }
-    if (auto builtin_fn = BuiltinFunction(); builtin_fn != builtin::Function::kNone) {
-        return "builtin function '" + utils::ToString(builtin_fn) + "'";
-    }
-    if (auto builtin_ty = BuiltinType(); builtin_ty != builtin::Builtin::kUndefined) {
-        return "builtin type '" + utils::ToString(builtin_ty) + "'";
-    }
-    if (auto builtin_val = BuiltinValue(); builtin_val != builtin::BuiltinValue::kUndefined) {
-        return "builtin value '" + utils::ToString(builtin_val) + "'";
-    }
-    if (auto access = Access(); access != builtin::Access::kUndefined) {
-        return "access '" + utils::ToString(access) + "'";
-    }
-    if (auto addr = AddressSpace(); addr != builtin::AddressSpace::kUndefined) {
-        return "address space '" + utils::ToString(addr) + "'";
-    }
-    if (auto type = InterpolationType(); type != builtin::InterpolationType::kUndefined) {
-        return "interpolation type '" + utils::ToString(type) + "'";
-    }
-    if (auto smpl = InterpolationSampling(); smpl != builtin::InterpolationSampling::kUndefined) {
-        return "interpolation sampling '" + utils::ToString(smpl) + "'";
-    }
-    if (auto fmt = TexelFormat(); fmt != builtin::TexelFormat::kUndefined) {
-        return "texel format '" + utils::ToString(fmt) + "'";
-    }
-    if (auto* unresolved = Unresolved()) {
-        return "unresolved identifier '" + unresolved->name + "'";
-    }
-
-    TINT_UNREACHABLE(Resolver, diagnostics) << "unhandled ResolvedIdentifier";
-    return "<unknown>";
 }
 
 }  // namespace tint::resolver
