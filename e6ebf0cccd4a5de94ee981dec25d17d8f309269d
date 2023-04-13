@@ -141,6 +141,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c82fc314_8f572d83",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-13T00:04:29Z",
+      "side": 1,
+      "message": "whoops I didn\u0027t say anything contentful.\n\nIt\u0027s not great we\u0027re not handling the error.\nBut also this is only used for staging buffers right now, and only called when they are destroyed. Does D3D11 require us to destroy them?",
+      "parentUuid": "39243c5c_2840ba07",
+      "range": {
+        "startLine": 203,
+        "startChar": 3,
+        "endLine": 205,
+        "endChar": 11
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fb785c1_f76954bb",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 16
