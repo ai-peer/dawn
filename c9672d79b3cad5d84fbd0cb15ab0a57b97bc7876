@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "c9672d79b3cad5d84fbd0cb15ab0a57b97bc7876",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85408f2_e5c13cec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-13T20:37:21Z",
+      "side": 1,
+      "message": "it\u0027s unfortunate but this is probably fine for now until we figure out why it crashes. Unless of course it really is only because the handle is INVALID. In that case we may as well always check whether or not it is INVALID. Log messages aren\u0027t performance critical",
+      "revId": "c9672d79b3cad5d84fbd0cb15ab0a57b97bc7876",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37174efc_32911088",
+        "filename": "src/dawn/common/Log.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-13T20:37:21Z",
+      "side": 1,
+      "message": "not 100% sure\nDawn\u0027s GN files don\u0027t define OFFICIAL_BUILD. Does it get defined when we are inside a chromium checkout?",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 56
+      },
+      "revId": "c9672d79b3cad5d84fbd0cb15ab0a57b97bc7876",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
