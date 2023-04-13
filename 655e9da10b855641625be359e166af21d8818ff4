@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d70d2dfd_ebec6877",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-04-13T08:49:04Z",
+      "side": 1,
+      "message": "Hi Ben, will you continue rolling WebGPU CTS in this CL?",
+      "revId": "655e9da10b855641625be359e166af21d8818ff4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
