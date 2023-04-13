@@ -311,17 +311,15 @@ TEST_F(ParserImplTest, TypeDecl_Array_ExpressionSize) {
     ASSERT_NE(t.value, nullptr) << p->error();
     ASSERT_FALSE(p->has_error());
 
-    auto name_for = [&](const Symbol& sym) { return p->builder().Symbols().NameFor(sym); };
-
     auto* arr = t->expr->identifier->As<ast::TemplatedIdentifier>();
-    EXPECT_EQ(name_for(arr->symbol), "array");
+    EXPECT_EQ(arr->symbol.Name(), "array");
     EXPECT_TRUE(arr->attributes.IsEmpty());
 
     ASSERT_EQ(arr->arguments.Length(), 2u);
 
     auto* ty = As<ast::IdentifierExpression>(arr->arguments[0]);
     ASSERT_NE(ty, nullptr);
-    EXPECT_EQ(name_for(ty->identifier->symbol), "f32");
+    EXPECT_EQ(ty->identifier->symbol.Name(), "f32");
 
     auto* count = As<ast::BinaryExpression>(arr->arguments[1]);
     ASSERT_NE(count, nullptr);
@@ -329,7 +327,7 @@ TEST_F(ParserImplTest, TypeDecl_Array_ExpressionSize) {
 
     auto* count_lhs = As<ast::IdentifierExpression>(count->lhs);
     ASSERT_NE(count_lhs, nullptr);
-    EXPECT_EQ(name_for(count_lhs->identifier->symbol), "size");
+    EXPECT_EQ(count_lhs->identifier->symbol.Name(), "size");
 
     auto* count_rhs = As<ast::IntLiteralExpression>(count->rhs);
     ASSERT_NE(count_rhs, nullptr);

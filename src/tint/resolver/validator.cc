@@ -413,9 +413,7 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
         return required_align;
     };
 
-    auto member_name_of = [this](const sem::StructMember* sm) {
-        return symbols_.NameFor(sm->Name());
-    };
+    auto member_name_of = [this](const sem::StructMember* sm) { return sm->Name().Name(); };
 
     // Only validate the [type + address space] once
     if (!valid_type_storage_layouts_.Add(TypeAndAddressSpace{store_ty, address_space})) {
@@ -1070,7 +1068,7 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
         } else if (TINT_UNLIKELY(IsValidationEnabled(
                        decl->attributes, ast::DisabledValidation::kFunctionHasNoBody))) {
             TINT_ICE(Resolver, diagnostics_)
-                << "Function " << symbols_.NameFor(decl->name->symbol) << " has no body";
+                << "Function " << decl->name->symbol.Name() << " has no body";
         }
 
         for (auto* attr : decl->return_type_attributes) {
@@ -1102,7 +1100,7 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
     // a function behavior is always one of {}, or {Next}.
     if (TINT_UNLIKELY(func->Behaviors() != sem::Behaviors{} &&
                       func->Behaviors() != sem::Behavior::kNext)) {
-        auto name = symbols_.NameFor(decl->name->symbol);
+        auto name = decl->name->symbol.Name();
         TINT_ICE(Resolver, diagnostics_)
             << "function '" << name << "' behaviors are: " << func->Behaviors();
     }
@@ -1284,8 +1282,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                             member->Declaration()->attributes, member->Type(), member->Source(),
                             param_or_ret,
                             /*is_struct_member*/ true, member->Location())) {
-                        AddNote("while analyzing entry point '" +
-                                    symbols_.NameFor(decl->name->symbol) + "'",
+                        AddNote("while analyzing entry point '" + decl->name->symbol.Name() + "'",
                                 decl->source);
                         return false;
                     }
@@ -1364,7 +1361,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
             // Bindings must not alias within a shader stage: two different variables in the
             // resource interface of a given shader must not have the same group and binding values,
             // when considered as a pair of values.
-            auto func_name = symbols_.NameFor(decl->name->symbol);
+            auto func_name = decl->name->symbol.Name();
             AddError(
                 "entry point '" + func_name +
                     "' references multiple variables that use the same resource binding @group(" +
@@ -1505,8 +1502,7 @@ bool Validator::Call(const sem::Call* call, sem::Statement* current_statement) c
             call->Target(),  //
             [&](const sem::Function* fn) {
                 AddError("ignoring return value of function '" +
-                             symbols_.NameFor(fn->Declaration()->name->symbol) +
-                             "' annotated with @must_use",
+                             fn->Declaration()->name->symbol.Name() + "' annotated with @must_use",
                          call->Declaration()->source);
                 sem_.NoteDeclarationSource(fn->Declaration());
             },
@@ -1741,7 +1737,7 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
     auto* decl = call->Declaration();
     auto* target = call->Target()->As<sem::Function>();
     auto sym = target->Declaration()->name->symbol;
-    auto name = symbols_.NameFor(sym);
+    auto name = sym.Name();
 
     if (!current_statement) {  // Function call at module-scope.
         AddError("functions cannot be called at module-scope", decl->source);
@@ -1928,13 +1924,12 @@ bool Validator::PipelineStages(utils::VectorRef<sem::Function*> entry_points) co
     auto backtrace = [&](const sem::Function* func, const sem::Function* entry_point) {
         if (func != entry_point) {
             TraverseCallChain(diagnostics_, entry_point, func, [&](const sem::Function* f) {
-                AddNote(
-                    "called by function '" + symbols_.NameFor(f->Declaration()->name->symbol) + "'",
-                    f->Declaration()->source);
+                AddNote("called by function '" + f->Declaration()->name->symbol.Name() + "'",
+                        f->Declaration()->source);
             });
-            AddNote("called by entry point '" +
-                        symbols_.NameFor(entry_point->Declaration()->name->symbol) + "'",
-                    entry_point->Declaration()->source);
+            AddNote(
+                "called by entry point '" + entry_point->Declaration()->name->symbol.Name() + "'",
+                entry_point->Declaration()->source);
         }
     };
 
@@ -2040,33 +2035,33 @@ bool Validator::PushConstants(utils::VectorRef<sem::Function*> entry_points) con
                     continue;
                 }
 
-                AddError("entry point '" + symbols_.NameFor(ep->Declaration()->name->symbol) +
+                AddError("entry point '" + ep->Declaration()->name->symbol.Name() +
                              "' uses two different 'push_constant' variables.",
                          ep->Declaration()->source);
                 AddNote("first 'push_constant' variable declaration is here",
                         var->Declaration()->source);
                 if (func != ep) {
                     TraverseCallChain(diagnostics_, ep, func, [&](const sem::Function* f) {
-                        AddNote("called by function '" +
-                                    symbols_.NameFor(f->Declaration()->name->symbol) + "'",
-                                f->Declaration()->source);
+                        AddNote(
+                            "called by function '" + f->Declaration()->name->symbol.Name() + "'",
+                            f->Declaration()->source);
                     });
-                    AddNote("called by entry point '" +
-                                symbols_.NameFor(ep->Declaration()->name->symbol) + "'",
-                            ep->Declaration()->source);
+                    AddNote(
+                        "called by entry point '" + ep->Declaration()->name->symbol.Name() + "'",
+                        ep->Declaration()->source);
                 }
                 AddNote("second 'push_constant' variable declaration is here",
                         push_constant_var->Declaration()->source);
                 if (push_constant_func != ep) {
-                    TraverseCallChain(
-                        diagnostics_, ep, push_constant_func, [&](const sem::Function* f) {
-                            AddNote("called by function '" +
-                                        symbols_.NameFor(f->Declaration()->name->symbol) + "'",
-                                    f->Declaration()->source);
-                        });
-                    AddNote("called by entry point '" +
-                                symbols_.NameFor(ep->Declaration()->name->symbol) + "'",
-                            ep->Declaration()->source);
+                    TraverseCallChain(diagnostics_, ep, push_constant_func,
+                                      [&](const sem::Function* f) {
+                                          AddNote("called by function '" +
+                                                      f->Declaration()->name->symbol.Name() + "'",
+                                                  f->Declaration()->source);
+                                      });
+                    AddNote(
+                        "called by entry point '" + ep->Declaration()->name->symbol.Name() + "'",
+                        ep->Declaration()->source);
                 }
                 return false;
             }
@@ -2484,7 +2479,7 @@ bool Validator::IncrementDecrementStatement(const ast::IncrementDecrementStateme
             [&](const ast::Override*) { return "cannot modify 'override'"; });
         if (err) {
             AddError(err, lhs->source);
-            AddNote("'" + symbols_.NameFor(v->name->symbol) + "' is declared here:", v->source);
+            AddNote("'" + v->name->symbol.Name() + "' is declared here:", v->source);
             return false;
         }
     }
@@ -2544,7 +2539,7 @@ bool Validator::DiagnosticControls(utils::VectorRef<const ast::DiagnosticControl
             }
             {
                 utils::StringStream ss;
-                ss << "severity of '" << symbols_.NameFor(dc->rule_name->symbol) << "' set to '"
+                ss << "severity of '" << dc->rule_name->symbol.Name() << "' set to '"
                    << dc->severity << "' here";
                 AddNote(ss.str(), (*diag_added.value)->rule_name->source);
             }

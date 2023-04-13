@@ -89,8 +89,7 @@ void Disassembler::Walk(const FlowNode* node) {
     tint::Switch(
         node,
         [&](const ir::Function* f) {
-            Indent() << "%bb" << GetIdForNode(f) << " = Function " << mod_.symbols.NameFor(f->name)
-                     << std::endl;
+            Indent() << "%bb" << GetIdForNode(f) << " = Function " << f->name.Name() << std::endl;
 
             {
                 ScopedIndent func_indent(&indent_size_);

@@ -224,7 +224,7 @@ TEST_F(TypeStructTest, Clone) {
     auto* st = s->Clone(ctx);
 
     EXPECT_TRUE(new_st.Get("my_struct").IsValid());
-    EXPECT_EQ(new_st.NameFor(st->Name()), "my_struct");
+    EXPECT_EQ(st->Name().Name(), "my_struct");
 
     EXPECT_EQ(st->Align(), 4u);
     EXPECT_EQ(st->Size(), 8u);
@@ -233,14 +233,14 @@ TEST_F(TypeStructTest, Clone) {
     auto members = st->Members();
     ASSERT_EQ(members.Length(), 2u);
 
-    EXPECT_EQ(new_st.NameFor(members[0]->Name()), "b");
+    EXPECT_EQ(members[0]->Name().Name(), "b");
     EXPECT_TRUE(members[0]->Type()->Is<Vector>());
     EXPECT_EQ(members[0]->Index(), 0u);
     EXPECT_EQ(members[0]->Offset(), 0u);
     EXPECT_EQ(members[0]->Align(), 16u);
     EXPECT_EQ(members[0]->Size(), 12u);
 
-    EXPECT_EQ(new_st.NameFor(members[1]->Name()), "a");
+    EXPECT_EQ(members[1]->Name().Name(), "a");
     EXPECT_TRUE(members[1]->Type()->Is<I32>());
     EXPECT_EQ(members[1]->Index(), 1u);
     EXPECT_EQ(members[1]->Offset(), 16u);

@@ -191,9 +191,8 @@ struct PackedVec3::State {
                             }
                         }
                         // Create the new structure.
-                        auto struct_name = b.Symbols().New(
-                            src->Symbols().NameFor(str->Declaration()->name->symbol) +
-                            "_tint_packed_vec3");
+                        auto struct_name = b.Symbols().New(str->Declaration()->name->symbol.Name() +
+                                                           "_tint_packed_vec3");
                         b.Structure(struct_name, std::move(members));
                         return struct_name;
                     });

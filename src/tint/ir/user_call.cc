@@ -27,7 +27,7 @@ UserCall::~UserCall() = default;
 utils::StringStream& UserCall::ToString(utils::StringStream& out, const SymbolTable& st) const {
     Result()->ToString(out, st);
     out << " = call(";
-    out << st.NameFor(name_) << ", ";
+    out << name_.Name() << ", ";
     EmitArgs(out, st);
     out << ")";
     return out;

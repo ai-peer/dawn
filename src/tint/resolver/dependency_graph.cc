@@ -331,7 +331,7 @@ class DependencyScanner {
     void Declare(Symbol symbol, const ast::Node* node) {
         auto* old = scope_stack_.Set(symbol, node);
         if (old != nullptr && node != old) {
-            auto name = symbols_.NameFor(symbol);
+            auto name = symbol.Name();
             AddError(diagnostics_, "redeclaration of '" + name + "'", node->source);
             AddNote(diagnostics_, "'" + name + "' previously declared here", old->source);
         }
@@ -440,7 +440,7 @@ class DependencyScanner {
     void AddDependency(const ast::Identifier* from, Symbol to) {
         auto* resolved = scope_stack_.Get(to);
         if (!resolved) {
-            auto s = symbols_.NameFor(to);
+            auto s = to.Name();
             if (auto builtin_fn = builtin::ParseFunction(s);
                 builtin_fn != builtin::Function::kNone) {
                 graph_.resolved_identifiers.Add(from, ResolvedIdentifier(builtin_fn));
@@ -562,7 +562,7 @@ struct DependencyAnalysis {
     /// @returns the name of the global declaration node
     /// @note will raise an ICE if the node is not a type, function or variable
     /// declaration
-    std::string NameOf(const ast::Node* node) const { return symbols_.NameFor(SymbolOf(node)); }
+    std::string NameOf(const ast::Node* node) const { return SymbolOf(node).Name(); }
 
     /// @param node the ast::Node of the global declaration
     /// @returns a string representation of the global declaration kind
@@ -762,7 +762,7 @@ struct DependencyAnalysis {
         for (auto* node : sorted_) {
             auto symbol = SymbolOf(node);
             auto* global = *globals_.Find(symbol);
-            printf("%s depends on:\n", symbols_.NameFor(symbol).c_str());
+            printf("%s depends on:\n", symbol.Name().c_str());
             for (auto* dep : global->deps) {
                 printf("  %s\n", NameOf(dep->node).c_str());
             }
@@ -814,25 +814,25 @@ std::string ResolvedIdentifier::String(const SymbolTable& symbols, diag::List& d
         return Switch(
             node,
             [&](const ast::TypeDecl* n) {  //
-                return "type '" + symbols.NameFor(n->name->symbol) + "'";
+                return "type '" + n->name->symbol.Name() + "'";
             },
             [&](const ast::Var* n) {  //
-                return "var '" + symbols.NameFor(n->name->symbol) + "'";
+                return "var '" + n->name->symbol.Name() + "'";
             },
             [&](const ast::Let* n) {  //
-                return "let '" + symbols.NameFor(n->name->symbol) + "'";
+                return "let '" + n->name->symbol.Name() + "'";
             },
             [&](const ast::Const* n) {  //
-                return "const '" + symbols.NameFor(n->name->symbol) + "'";
+                return "const '" + n->name->symbol.Name() + "'";
             },
             [&](const ast::Override* n) {  //
-                return "override '" + symbols.NameFor(n->name->symbol) + "'";
+                return "override '" + n->name->symbol.Name() + "'";
             },
             [&](const ast::Function* n) {  //
-                return "function '" + symbols.NameFor(n->name->symbol) + "'";
+                return "function '" + n->name->symbol.Name() + "'";
             },
             [&](const ast::Parameter* n) {  //
-                return "parameter '" + symbols.NameFor(n->name->symbol) + "'";
+                return "parameter '" + n->name->symbol.Name() + "'";
             },
             [&](Default) {
                 TINT_UNREACHABLE(Resolver, diagnostics)

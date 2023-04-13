@@ -265,8 +265,7 @@ void EmitJson(const tint::Program* program) {
             }
 
             std::cout << "{" << std::endl;
-            std::cout << "\"name\": \"" << program->Symbols().NameFor(m->Name()) << "\","
-                      << std::endl;
+            std::cout << "\"name\": \"" << m->Name().Name() << "\"," << std::endl;
             std::cout << "\"offset\": " << m->Offset() << "," << std::endl;
             std::cout << "\"align\": " << m->Align() << "," << std::endl;
             std::cout << "\"size\": " << m->Size() << std::endl;
