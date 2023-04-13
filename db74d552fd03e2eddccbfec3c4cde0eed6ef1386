@@ -33,6 +33,41 @@
       "message": "These encoder pointers get cleared out on Finish()\n\nmaybe as an alternative, we can set the label in the ProgrammableEncoder constructor when we see that one was not provided? At that stage, we know we have the top level encoder. It also means we don\u0027t have to specialize the printing",
       "revId": "db74d552fd03e2eddccbfec3c4cde0eed6ef1386",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f535015_04db5733",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-13T19:30:55Z",
+      "side": 1,
+      "message": "mEncoderLabel already gets captured at CommandBuffer creation time. But I think we do need to be able to print passes after finish(), like for example if you try to keep using the pass after finish() and it generates a validation error.\n\nI thought about setting default labels initially, but it would get the object label out of sync with the JS-side label. Better to keep it in a separate slot, I think, as this CL does for CommandBuffers.",
+      "parentUuid": "8506cee1_8f78b542",
+      "revId": "db74d552fd03e2eddccbfec3c4cde0eed6ef1386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57e225dd_6aeff51b",
+        "filename": "src/dawn/native/webgpu_absl_format.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-13T19:30:55Z",
+      "side": 1,
+      "message": "It just occurred to me that RenderBundles also have this problem.",
+      "revId": "db74d552fd03e2eddccbfec3c4cde0eed6ef1386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
