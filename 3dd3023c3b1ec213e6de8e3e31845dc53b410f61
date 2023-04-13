@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "776d6ebc_216fa369",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-13T14:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f6c288_e03ee593",
+      "range": {
+        "startLine": 105,
+        "startChar": 21,
+        "endLine": 105,
+        "endChar": 26
+      },
+      "revId": "3dd3023c3b1ec213e6de8e3e31845dc53b410f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4db26baf_27fa9130",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-12T23:02:30Z",
       "side": 1,
       "message": "nit: now this should be \"previousD3DSwapChain\" not \"previousD3D12..\"",
+      "range": {
+        "startLine": 108,
+        "startChar": 15,
+        "endLine": 108,
+        "endChar": 37
+      },
+      "revId": "3dd3023c3b1ec213e6de8e3e31845dc53b410f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0012f77d_e4abb1c0",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-13T14:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4db26baf_27fa9130",
       "range": {
         "startLine": 108,
         "startChar": 15,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1461f5f2_3ed18aec",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-13T14:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a19dbf6b_bf5c00b8",
+      "range": {
+        "startLine": 114,
+        "startChar": 21,
+        "endLine": 114,
+        "endChar": 26
+      },
+      "revId": "3dd3023c3b1ec213e6de8e3e31845dc53b410f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85fd6ecb_17f237b6",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b805465_b104a8ad",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-13T14:13:49Z",
+      "side": 1,
+      "message": "We can only read and write buffer 0 with D3D11. Comment added.",
+      "parentUuid": "85fd6ecb_17f237b6",
+      "range": {
+        "startLine": 53,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 60
+      },
+      "revId": "3dd3023c3b1ec213e6de8e3e31845dc53b410f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dea05f1_1bb95132",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-04-12T23:02:30Z",
       "side": 1,
       "message": "looking at Base::PresentImpl and Base::DetachFromSurfaceImpl, I think it would be better if d3d::SwapChain just had separate protected methods which are PresentDXGISwapChain and DeleteDXGISwapChain. We do want to share the code between d3d11 and d3d12, but having it be named DetachFromSurfaceImpl doesn\u0027t really communicate so much what it\u0027s doing. It\u0027s not obvious why here, we\u0027re calling PresentImpl in the middle of the function. Or in DetachFromSurfaceImpl why we call Base::DetachFromSurfaceImpl at the end of the function. With some different names, we can have the same amount of code shared, but better communicate what is happening.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 34
+      },
+      "revId": "3dd3023c3b1ec213e6de8e3e31845dc53b410f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c894b3ea_445bded7",
+        "filename": "src/dawn/native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-13T14:13:49Z",
+      "side": 1,
+      "message": "It makes sense. Done",
+      "parentUuid": "7dea05f1_1bb95132",
       "range": {
         "startLine": 80,
         "startChar": 0,

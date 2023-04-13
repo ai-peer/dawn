@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23b38d6_a1ef8abd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-13T14:13:49Z",
+      "side": 1,
+      "message": "I tested it, and found an issue, and fixed it.",
+      "parentUuid": "c952db21_4b203d34",
+      "revId": "1b9f2882bcd5c355ae77e46320c9435dfad2566c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ab92ddd_2dbd5229",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-13T11:14:30Z",
       "side": 1,
       "message": "nit: Can we have a small comment explaining what this class factors between the backends (the creation mostly) and what it doesn\u0027t (present and nexttexture?)",
+      "revId": "1b9f2882bcd5c355ae77e46320c9435dfad2566c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "988475d0_8487591a",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-13T14:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ab92ddd_2dbd5229",
       "revId": "1b9f2882bcd5c355ae77e46320c9435dfad2566c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
