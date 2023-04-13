@@ -216,8 +216,6 @@ libtint_source_set("libtint_base_src") {
     "switch.h",
     "symbol.cc",
     "symbol.h",
-    "symbol_table.cc",
-    "symbol_table.h",
     "traits.h",
     "utils/bitcast.h",
     "utils/bitset.h",
@@ -284,6 +282,8 @@ libtint_source_set("libtint_program_src") {
     "resolver/uniformity.h",
     "resolver/validator.cc",
     "resolver/validator.h",
+    "symbol_table.cc",
+    "symbol_table.h",
   ]
   public = [
     "program.h",
@@ -1998,7 +1998,6 @@ if (tint_build_unittests) {
       "scope_stack_test.cc",
       "source_test.cc",
       "switch_test.cc",
-      "symbol_table_test.cc",
       "symbol_test.cc",
       "traits_test.cc",
     ]
@@ -2010,6 +2009,7 @@ if (tint_build_unittests) {
       "clone_context_test.cc",
       "program_builder_test.cc",
       "program_test.cc",
+      "symbol_table_test.cc",
     ]
 
     deps = [
