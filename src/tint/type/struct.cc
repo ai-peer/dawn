@@ -93,13 +93,13 @@ uint32_t Struct::Size() const {
 }
 
 std::string Struct::FriendlyName(const SymbolTable& symbols) const {
-    return symbols.NameFor(name_);
+    return name_.Name();
 }
 
 std::string Struct::Layout(const tint::SymbolTable& symbols) const {
     utils::StringStream ss;
 
-    auto member_name_of = [&](const StructMember* sm) { return symbols.NameFor(sm->Name()); };
+    auto member_name_of = [&](const StructMember* sm) { return sm->Name().Name(); };
 
     if (Members().IsEmpty()) {
         return {};
@@ -163,7 +163,7 @@ std::string Struct::Layout(const tint::SymbolTable& symbols) const {
 }
 
 Struct* Struct::Clone(CloneContext& ctx) const {
-    auto sym = ctx.dst.st->Register(ctx.src.st->NameFor(name_));
+    auto sym = ctx.dst.st->Register(name_.Name());
 
     utils::Vector<const StructMember*, 4> members;
     for (const auto& mem : members_) {
@@ -192,7 +192,7 @@ StructMember::StructMember(tint::Source source,
 StructMember::~StructMember() = default;
 
 StructMember* StructMember::Clone(CloneContext& ctx) const {
-    auto sym = ctx.dst.st->Register(ctx.src.st->NameFor(name_));
+    auto sym = ctx.dst.st->Register(name_.Name());
     auto* ty = type_->Clone(ctx);
     return ctx.dst.mgr->Get<StructMember>(source_, sym, ty, index_, offset_, align_, size_,
                                           location_);

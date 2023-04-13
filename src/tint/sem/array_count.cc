@@ -34,7 +34,7 @@ bool NamedOverrideArrayCount::Equals(const UniqueNode& other) const {
 }
 
 std::string NamedOverrideArrayCount::FriendlyName(const SymbolTable& symbols) const {
-    return symbols.NameFor(variable->Declaration()->name->symbol);
+    return variable->Declaration()->name->symbol.Name();
 }
 
 type::ArrayCount* NamedOverrideArrayCount::Clone(type::CloneContext&) const {

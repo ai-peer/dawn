@@ -661,7 +661,7 @@ bool GeneratorImpl::EmitCall(utils::StringStream& out, const ast::CallExpression
 bool GeneratorImpl::EmitFunctionCall(utils::StringStream& out,
                                      const sem::Call* call,
                                      const sem::Function* fn) {
-    out << program_->Symbols().NameFor(fn->Declaration()->name->symbol) << "(";
+    out << fn->Declaration()->name->symbol.Name() << "(";
 
     bool first = true;
     for (auto* arg : call->Arguments()) {
@@ -852,7 +852,7 @@ bool GeneratorImpl::EmitTypeInitializer(utils::StringStream& out,
         if (auto* struct_ty = type->As<sem::Struct>()) {
             // Emit field designators for structures to account for padding members.
             auto* member = struct_ty->Members()[i]->Declaration();
-            auto name = program_->Symbols().NameFor(member->name->symbol);
+            auto name = member->name->symbol.Name();
             out << "." << name << "=";
         }
 
@@ -1782,7 +1782,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
                 if (i > 0) {
                     out << ", ";
                 }
-                out << "." << program_->Symbols().NameFor(members[i]->Name()) << "=";
+                out << "." << members[i]->Name().Name() << "=";
                 if (!EmitConstant(out, constant->Index(i))) {
                     return false;
                 }
@@ -1882,7 +1882,7 @@ bool GeneratorImpl::EmitFunction(const ast::Function* func) {
         if (!EmitType(out, func_sem->ReturnType(), "")) {
             return false;
         }
-        out << " " << program_->Symbols().NameFor(func->name->symbol) << "(";
+        out << " " << func->name->symbol.Name() << "(";
 
         bool first = true;
         for (auto* v : func->params) {
@@ -1893,13 +1893,13 @@ bool GeneratorImpl::EmitFunction(const ast::Function* func) {
 
             auto* type = program_->Sem().Get(v)->Type();
 
-            std::string param_name = "const " + program_->Symbols().NameFor(v->name->symbol);
+            std::string param_name = "const " + v->name->symbol.Name();
             if (!EmitType(out, type, param_name)) {
                 return false;
             }
             // Parameter name is output as part of the type for pointers.
             if (!type->Is<type::Pointer>()) {
-                out << " " << program_->Symbols().NameFor(v->name->symbol);
+                out << " " << v->name->symbol.Name();
             }
         }
 
@@ -1985,7 +1985,7 @@ std::string GeneratorImpl::interpolation_to_attribute(
 bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
     auto* func_sem = builder_.Sem().Get(func);
 
-    auto func_name = program_->Symbols().NameFor(func->name->symbol);
+    auto func_name = func->name->symbol.Name();
 
     // Returns the binding index of a variable, requiring that the group
     // attribute have a value of zero.
@@ -2026,7 +2026,7 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
 
             auto* type = program_->Sem().Get(param)->Type()->UnwrapRef();
 
-            auto param_name = program_->Symbols().NameFor(param->name->symbol);
+            auto param_name = param->name->symbol.Name();
             if (!EmitType(out, type, param_name)) {
                 return false;
             }
@@ -2136,7 +2136,7 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
 
 bool GeneratorImpl::EmitIdentifier(utils::StringStream& out,
                                    const ast::IdentifierExpression* expr) {
-    out << program_->Symbols().NameFor(expr->identifier->symbol);
+    out << expr->identifier->symbol.Name();
     return true;
 }
 
@@ -2398,7 +2398,7 @@ bool GeneratorImpl::EmitMemberAccessor(utils::StringStream& out,
                 if (!write_lhs()) {
                     return false;
                 }
-                out << "." << program_->Symbols().NameFor(expr->member->symbol);
+                out << "." << expr->member->symbol.Name();
             }
             return true;
         },
@@ -2406,7 +2406,7 @@ bool GeneratorImpl::EmitMemberAccessor(utils::StringStream& out,
             if (!write_lhs()) {
                 return false;
             }
-            out << "." << program_->Symbols().NameFor(member_access->Member()->Name());
+            out << "." << member_access->Member()->Name().Name();
             return true;
         },
         [&](Default) {
@@ -2827,7 +2827,7 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
     uint32_t msl_offset = 0;
     for (auto* mem : str->Members()) {
         auto out = line(b);
-        auto mem_name = program_->Symbols().NameFor(mem->Name());
+        auto mem_name = mem->Name().Name();
         auto wgsl_offset = mem->Offset();
 
         if (is_host_shareable) {
@@ -3058,7 +3058,7 @@ bool GeneratorImpl::EmitVar(const ast::Var* var) {
             return false;
     }
 
-    std::string name = program_->Symbols().NameFor(var->name->symbol);
+    std::string name = var->name->symbol.Name();
     if (!EmitType(out, type, name)) {
         return false;
     }
@@ -3107,7 +3107,7 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
             return false;
     }
 
-    std::string name = "const " + program_->Symbols().NameFor(let->name->symbol);
+    std::string name = "const " + let->name->symbol.Name();
     if (!EmitType(out, type, name)) {
         return false;
     }
