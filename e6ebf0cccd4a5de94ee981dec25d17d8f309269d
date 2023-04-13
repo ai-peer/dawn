@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86d4a342_b16c0a90",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:27:36Z",
+      "side": 1,
+      "message": "nit: the flags coerce to booleans so I think that `return usage \u0026 kAcceleratedUsage` should work. Ditto below.",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 65
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0c55b38_779fa537",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 16
@@ -49,6 +72,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8be55ed9_6dfb5c87",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:27:36Z",
+      "side": 1,
+      "message": "What else needs figuring out in this function?",
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52db9d82_ce4f2d09",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 16
@@ -66,6 +106,23 @@
         "endLine": 143,
         "endChar": 51
       },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59e8975_03e1bd6e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:27:36Z",
+      "side": 1,
+      "message": "optional-nit: IsStaging ends up being recomputed multiple times in these helpers and put specific flags. Also IsStaging is a super important property of the buffer that is kinda of hidden when imho it would be helpful to have it front and center given it is core to the implementation on d3d11.",
       "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -153,6 +210,30 @@
       "side": 1,
       "message": "whoops I didn\u0027t say anything contentful.\n\nIt\u0027s not great we\u0027re not handling the error.\nBut also this is only used for staging buffers right now, and only called when they are destroyed. Does D3D11 require us to destroy them?",
       "parentUuid": "39243c5c_2840ba07",
+      "range": {
+        "startLine": 203,
+        "startChar": 3,
+        "endLine": 205,
+        "endChar": 11
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d3b58d7_d36af7ef",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:27:36Z",
+      "side": 1,
+      "message": "Don\u0027t we do a thing in other backends where the PendingCommandContext is created on Device::Initialize so that the getter is always error-less?",
+      "parentUuid": "c82fc314_8f572d83",
       "range": {
         "startLine": 203,
         "startChar": 3,

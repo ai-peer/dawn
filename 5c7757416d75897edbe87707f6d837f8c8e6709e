@@ -285,6 +285,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "852bd1de_f24f3f57",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:27:36Z",
+      "side": 1,
+      "message": "+1, and Indirect.\n\nMaybe we could have some constexpr flags at the top of the file that describe the various conditions, then assert in Initialize that the descriptor doesn\u0027t have any flags that we don\u0027t know about. This would help ensure that we don\u0027t forget to handle usages. I\u0027ve commented about Indirect, but turns out we are also missing QueryResolve.",
+      "parentUuid": "1bb4ba44_78c24a1e",
+      "revId": "5c7757416d75897edbe87707f6d837f8c8e6709e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d74f813a_14c832b8",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
