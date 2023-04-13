@@ -33,6 +33,24 @@
       "message": "Let\u0027s chat about this. I don\u0027t really understand this change, and the easiest way for me to understand is to discuss it in a call.",
       "revId": "e096cf7362056c5e27f6d2cd668e2948f9770e4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69fb92ed_02905be2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T13:27:27Z",
+      "side": 1,
+      "message": "Sounds good. At a high level, the primary change is in dependency_graph.cc. We call the methods to check if a given identifier is a builtin a .... lot .... in these shaders, often in the same dependency graph build.\n\nBecause a symbol is interned, it can\u0027t change, so if we\u0027ve already checked if a symbol resolves to something, we can just reuse it, as the string can\u0027t change, it \nresolves to the same thing every time. This cuts out a lot of `strlen`, and `\u003d\u003d` on the string view cutting out a good chunk of time in AddDependency.",
+      "parentUuid": "3231c82f_751b6e18",
+      "revId": "e096cf7362056c5e27f6d2cd668e2948f9770e4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
