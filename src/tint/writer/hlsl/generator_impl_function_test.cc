@@ -231,29 +231,38 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_SharedStruct_Di
     GeneratorImpl& gen = SanitizeAndBuild();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_EQ(gen.result(), R"(struct Interface {
+    EXPECT_EQ(gen.result(), R"(struct tint_symbol_3 {
+  float4 pos : SV_Position;
+};
+struct tint_symbol {
+  float col1;
+  float col2;
+  float4 pos;
+};
+
+tint_symbol_3 truncate_shader_output(tint_symbol io) {
+  const tint_symbol_3 tint_symbol_4 = {io.pos};
+  return tint_symbol_4;
+}
+
+struct Interface {
   float4 pos;
   float col1;
   float col2;
 };
-struct tint_symbol {
-  float col1 : TEXCOORD1;
-  float col2 : TEXCOORD2;
-  float4 pos : SV_Position;
-};
 
 Interface vert_main_inner() {
-  const Interface tint_symbol_3 = {(0.0f).xxxx, 0.5f, 0.25f};
-  return tint_symbol_3;
+  const Interface tint_symbol_5 = {(0.0f).xxxx, 0.5f, 0.25f};
+  return tint_symbol_5;
 }
 
-tint_symbol vert_main() {
+tint_symbol_3 vert_main() {
   const Interface inner_result = vert_main_inner();
   tint_symbol wrapper_result = (tint_symbol)0;
   wrapper_result.pos = inner_result.pos;
   wrapper_result.col1 = inner_result.col1;
   wrapper_result.col2 = inner_result.col2;
-  return wrapper_result;
+  return truncate_shader_output(wrapper_result);
 }
 
 struct tint_symbol_2 {
@@ -269,8 +278,8 @@ void frag_main_inner(Interface inputs) {
 }
 
 void frag_main(tint_symbol_2 tint_symbol_1) {
-  const Interface tint_symbol_4 = {tint_symbol_1.pos, tint_symbol_1.col1, tint_symbol_1.col2};
-  frag_main_inner(tint_symbol_4);
+  const Interface tint_symbol_6 = {tint_symbol_1.pos, tint_symbol_1.col1, tint_symbol_1.col2};
+  frag_main_inner(tint_symbol_6);
   return;
 }
 )");
