@@ -517,6 +517,7 @@ list(APPEND TINT_LIB_SRCS
   utils/bitcast.h
   utils/bitset.h
   utils/block_allocator.h
+  utils/bump_allocator.h
   utils/compiler_macros.h
   utils/concat.h
   utils/crc32.h
@@ -785,9 +786,6 @@ target_link_libraries(tint_val tint_utils_io)
 add_library(libtint ${TINT_LIB_SRCS})
 tint_default_compile_options(libtint)
 target_link_libraries(libtint tint_diagnostic_utils absl_strings)
-if (${TINT_SYMBOL_STORE_DEBUG_NAME})
-    target_compile_definitions(libtint PUBLIC "TINT_SYMBOL_STORE_DEBUG_NAME=1")
-endif()
 set_target_properties(libtint PROPERTIES OUTPUT_NAME "tint")
 
 if (${TINT_BUILD_FUZZERS})
@@ -998,6 +996,7 @@ if(TINT_BUILD_TESTS)
     utils/bitcast_test.cc
     utils/bitset_test.cc
     utils/block_allocator_test.cc
+    utils/bump_allocator_test.cc
     utils/crc32_test.cc
     utils/defer_test.cc
     utils/enum_set_test.cc
