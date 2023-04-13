@@ -16,6 +16,29 @@
       "message": "Still LGTM",
       "revId": "aff66550e45303211d6c5f5d9876baf932723aee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce83b0ca_6e20d093",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T15:23:26Z",
+      "side": 1,
+      "message": "nit: Actually all this could be `DAWN_TRY(previousD3DSwapChain-\u003eDetachAndWaitForDeallocation());` since the D3D11 implementation just calls `DetachFromSurface()`.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "aff66550e45303211d6c5f5d9876baf932723aee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
