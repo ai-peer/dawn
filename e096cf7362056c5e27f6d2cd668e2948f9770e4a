@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "178a7d89_0885e44d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T04:10:34Z",
+      "side": 1,
+      "message": "Thoughts? This seems to be giving me a pretty good savings on my machine. For some reason it still did the symbol lookup per-transform (I thought it would do it once for all program transforms but I must have missed something). Even without that, it\u0027s saving 20ms of compile time on a large fragment shader.\n\nThe sticky bit is, the symbol table is modified in the resolver during dependency graph building. We could put it somewhere other then the symbol table, maybe just do it on a per-dependency graph build (storing directly in DependencyScanner), which may give good savings. I put it in SymbolTable because I was hoping to re-use it over transforms, so a symbol is processed and marked resolved or unresolved _once_ for the whole pipeline, but that didn\u0027t seem to happen.\n\nBut, wanted to get it up and get thoughts before sinking time into shuffling things around.\n\nSo.... thoughts?",
+      "revId": "e096cf7362056c5e27f6d2cd668e2948f9770e4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
