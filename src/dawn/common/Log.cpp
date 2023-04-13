@@ -24,9 +24,25 @@
 #include <android/log.h>
 #endif
 
+#if DAWN_PLATFORM_IS(WINDOWS)
+#include <io.h>
+#endif
+
 namespace dawn {
 
 namespace {
+
+void WriteToFd(int fd, const char* data, size_t length) {
+    size_t bytes_written = 0;
+    while (bytes_written < length) {
+        auto rv = write(fd, data + bytes_written, length - bytes_written);
+        if (rv < 0) {
+            // Give up, nothing we can do now.
+            break;
+        }
+        bytes_written += static_cast<size_t>(rv);
+    }
+}
 
 #if !defined(DAWN_DISABLE_LOGGING)
 const char* SeverityName(LogSeverity severity) {
@@ -100,7 +116,9 @@ LogMessage::~LogMessage() {
     }
 
     // Note: we use fprintf because <iostream> includes static initializers.
-    fprintf(outputStream, "%s: %s\n", severityName, fullMessage.c_str());
+    // fprintf(outputStream, "%s: %s\n", severityName, fullMessage.c_str());
+    std::string msg = std::string(severityName) + ": " + fullMessage + "\n";
+    WriteToFd(2, msg.c_str(), msg.length());
     fflush(outputStream);
 #endif  // DAWN_PLATFORM_IS(ANDROID)
 }
