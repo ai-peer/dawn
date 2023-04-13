@@ -1,3 +1,23 @@
+struct tint_symbol_1 {
+  float4 pos : SV_Position;
+};
+struct tint_symbol {
+  float none;
+  float flat;
+  float perspective_center;
+  float perspective_centroid;
+  float perspective_sample;
+  float linear_center;
+  float linear_centroid;
+  float linear_sample;
+  float4 pos;
+};
+
+tint_symbol_1 truncate_shader_output(tint_symbol io) {
+  const tint_symbol_1 tint_symbol_2 = {io.pos};
+  return tint_symbol_2;
+}
+
 struct Out {
   float4 pos;
   float none;
@@ -9,24 +29,13 @@ struct Out {
   float linear_centroid;
   float linear_sample;
 };
-struct tint_symbol {
-  float none : TEXCOORD0;
-  nointerpolation float flat : TEXCOORD1;
-  linear float perspective_center : TEXCOORD2;
-  linear centroid float perspective_centroid : TEXCOORD3;
-  linear sample float perspective_sample : TEXCOORD4;
-  noperspective float linear_center : TEXCOORD5;
-  noperspective centroid float linear_centroid : TEXCOORD6;
-  noperspective sample float linear_sample : TEXCOORD7;
-  float4 pos : SV_Position;
-};
 
 Out main_inner() {
-  const Out tint_symbol_1 = (Out)0;
-  return tint_symbol_1;
+  const Out tint_symbol_3 = (Out)0;
+  return tint_symbol_3;
 }
 
-tint_symbol main() {
+tint_symbol_1 main() {
   const Out inner_result = main_inner();
   tint_symbol wrapper_result = (tint_symbol)0;
   wrapper_result.pos = inner_result.pos;
@@ -38,5 +47,5 @@ tint_symbol main() {
   wrapper_result.linear_center = inner_result.linear_center;
   wrapper_result.linear_centroid = inner_result.linear_centroid;
   wrapper_result.linear_sample = inner_result.linear_sample;
-  return wrapper_result;
+  return truncate_shader_output(wrapper_result);
 }

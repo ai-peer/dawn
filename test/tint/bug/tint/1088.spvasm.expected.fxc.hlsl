@@ -1,3 +1,16 @@
+struct tint_symbol_3 {
+  float4 gl_Position : SV_Position;
+};
+struct tint_symbol_2 {
+  float2 vUV_1;
+  float4 gl_Position;
+};
+
+tint_symbol_3 truncate_shader_output(tint_symbol_2 io) {
+  const tint_symbol_3 tint_symbol_4 = {io.gl_Position};
+  return tint_symbol_4;
+}
+
 static float3 position_1 = float3(0.0f, 0.0f, 0.0f);
 cbuffer cbuffer_x_14 : register(b2, space2) {
   uint4 x_14[17];
@@ -49,24 +62,20 @@ struct tint_symbol_1 {
   float3 normal_param : TEXCOORD1;
   float2 uv_param : TEXCOORD2;
 };
-struct tint_symbol_2 {
-  float2 vUV_1 : TEXCOORD0;
-  float4 gl_Position : SV_Position;
-};
 
 main_out main_inner(float3 position_1_param, float2 uv_param, float3 normal_param) {
   position_1 = position_1_param;
   uv = uv_param;
   normal = normal_param;
   main_1();
-  const main_out tint_symbol_3 = {gl_Position, vUV};
-  return tint_symbol_3;
+  const main_out tint_symbol_5 = {gl_Position, vUV};
+  return tint_symbol_5;
 }
 
-tint_symbol_2 main(tint_symbol_1 tint_symbol) {
+tint_symbol_3 main(tint_symbol_1 tint_symbol) {
   const main_out inner_result = main_inner(tint_symbol.position_1_param, tint_symbol.uv_param, tint_symbol.normal_param);
   tint_symbol_2 wrapper_result = (tint_symbol_2)0;
   wrapper_result.gl_Position = inner_result.gl_Position;
   wrapper_result.vUV_1 = inner_result.vUV_1;
-  return wrapper_result;
+  return truncate_shader_output(wrapper_result);
 }

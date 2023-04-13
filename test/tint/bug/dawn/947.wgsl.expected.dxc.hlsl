@@ -1,5 +1,18 @@
 static bool tint_discarded = false;
 
+struct tint_symbol_6 {
+  float4 position : SV_Position;
+};
+struct tint_symbol_2 {
+  float2 texcoords;
+  float4 position;
+};
+
+tint_symbol_6 truncate_shader_output(tint_symbol_2 io) {
+  const tint_symbol_6 tint_symbol_7 = {io.position};
+  return tint_symbol_7;
+}
+
 cbuffer cbuffer_uniforms : register(b0) {
   uint4 uniforms[1];
 };
@@ -10,10 +23,6 @@ struct VertexOutputs {
 };
 struct tint_symbol_1 {
   uint VertexIndex : SV_VertexID;
-};
-struct tint_symbol_2 {
-  float2 texcoords : TEXCOORD0;
-  float4 position : SV_Position;
 };
 
 VertexOutputs vs_main_inner(uint VertexIndex) {
@@ -29,12 +38,12 @@ VertexOutputs vs_main_inner(uint VertexIndex) {
   return output;
 }
 
-tint_symbol_2 vs_main(tint_symbol_1 tint_symbol) {
+tint_symbol_6 vs_main(tint_symbol_1 tint_symbol) {
   const VertexOutputs inner_result = vs_main_inner(tint_symbol.VertexIndex);
   tint_symbol_2 wrapper_result = (tint_symbol_2)0;
   wrapper_result.texcoords = inner_result.texcoords;
   wrapper_result.position = inner_result.position;
-  return wrapper_result;
+  return truncate_shader_output(wrapper_result);
 }
 
 SamplerState mySampler : register(s1);

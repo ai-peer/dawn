@@ -1,3 +1,17 @@
+struct tint_symbol_3 {
+  float4 member : SV_Position;
+};
+struct tint_symbol_2 {
+  float4 v_Color;
+  float2 v_TexCoord;
+  float4 member;
+};
+
+tint_symbol_3 truncate_shader_output(tint_symbol_2 io) {
+  const tint_symbol_3 tint_symbol_4 = {io.member};
+  return tint_symbol_4;
+}
+
 int tint_ftoi(float v) {
   return ((v < 2147483520.0f) ? ((v < -2147483648.0f) ? -2147483648 : int(v)) : 2147483647);
 }
@@ -217,8 +231,8 @@ Mat4x3_ global2_load(uint offset) {
   const uint scalar_offset = ((offset + 0u)) / 4;
   const uint scalar_offset_1 = ((offset + 16u)) / 4;
   const uint scalar_offset_2 = ((offset + 32u)) / 4;
-  const Mat4x3_ tint_symbol_3 = {asfloat(global2[scalar_offset / 4]), asfloat(global2[scalar_offset_1 / 4]), asfloat(global2[scalar_offset_2 / 4])};
-  return tint_symbol_3;
+  const Mat4x3_ tint_symbol_5 = {asfloat(global2[scalar_offset / 4]), asfloat(global2[scalar_offset_1 / 4]), asfloat(global2[scalar_offset_2 / 4])};
+  return tint_symbol_5;
 }
 
 Mat4x4_ global_load(uint offset) {
@@ -226,15 +240,15 @@ Mat4x4_ global_load(uint offset) {
   const uint scalar_offset_4 = ((offset + 16u)) / 4;
   const uint scalar_offset_5 = ((offset + 32u)) / 4;
   const uint scalar_offset_6 = ((offset + 48u)) / 4;
-  const Mat4x4_ tint_symbol_4 = {asfloat(global[scalar_offset_3 / 4]), asfloat(global[scalar_offset_4 / 4]), asfloat(global[scalar_offset_5 / 4]), asfloat(global[scalar_offset_6 / 4])};
-  return tint_symbol_4;
+  const Mat4x4_ tint_symbol_6 = {asfloat(global[scalar_offset_3 / 4]), asfloat(global[scalar_offset_4 / 4]), asfloat(global[scalar_offset_5 / 4]), asfloat(global[scalar_offset_6 / 4])};
+  return tint_symbol_6;
 }
 
 Mat4x2_ global1_load_1(uint offset) {
   const uint scalar_offset_7 = ((offset + 0u)) / 4;
   const uint scalar_offset_8 = ((offset + 16u)) / 4;
-  const Mat4x2_ tint_symbol_5 = {asfloat(global1[scalar_offset_7 / 4]), asfloat(global1[scalar_offset_8 / 4])};
-  return tint_symbol_5;
+  const Mat4x2_ tint_symbol_7 = {asfloat(global1[scalar_offset_7 / 4]), asfloat(global1[scalar_offset_8 / 4])};
+  return tint_symbol_7;
 }
 
 void main1() {
@@ -291,11 +305,6 @@ struct tint_symbol_1 {
   float3 a_Normal : TEXCOORD3;
   float a_PosMtxIdx : TEXCOORD4;
 };
-struct tint_symbol_2 {
-  float4 v_Color : TEXCOORD0;
-  float2 v_TexCoord : TEXCOORD1;
-  float4 member : SV_Position;
-};
 
 VertexOutput main_inner(float3 a_Position, float2 a_UV, float4 a_Color, float3 a_Normal, float a_PosMtxIdx) {
   a_Position1 = a_Position;
@@ -307,15 +316,15 @@ VertexOutput main_inner(float3 a_Position, float2 a_UV, float4 a_Color, float3 a
   const float4 x_e11 = v_Color;
   const float2 x_e13 = v_TexCoord;
   const float4 x_e15 = gl_Position;
-  const VertexOutput tint_symbol_6 = {x_e11, x_e13, x_e15};
-  return tint_symbol_6;
+  const VertexOutput tint_symbol_8 = {x_e11, x_e13, x_e15};
+  return tint_symbol_8;
 }
 
-tint_symbol_2 main(tint_symbol_1 tint_symbol) {
+tint_symbol_3 main(tint_symbol_1 tint_symbol) {
   const VertexOutput inner_result = main_inner(tint_symbol.a_Position, tint_symbol.a_UV, tint_symbol.a_Color, tint_symbol.a_Normal, tint_symbol.a_PosMtxIdx);
   tint_symbol_2 wrapper_result = (tint_symbol_2)0;
   wrapper_result.v_Color = inner_result.v_Color;
   wrapper_result.v_TexCoord = inner_result.v_TexCoord;
   wrapper_result.member = inner_result.member;
-  return wrapper_result;
+  return truncate_shader_output(wrapper_result);
 }

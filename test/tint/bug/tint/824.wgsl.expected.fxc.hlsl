@@ -1,3 +1,16 @@
+struct tint_symbol_3 {
+  float4 Position : SV_Position;
+};
+struct tint_symbol_2 {
+  float4 color;
+  float4 Position;
+};
+
+tint_symbol_3 truncate_shader_output(tint_symbol_2 io) {
+  const tint_symbol_3 tint_symbol_4 = {io.Position};
+  return tint_symbol_4;
+}
+
 struct Output {
   float4 Position;
   float4 color;
@@ -5,10 +18,6 @@ struct Output {
 struct tint_symbol_1 {
   uint VertexIndex : SV_VertexID;
   uint InstanceIndex : SV_InstanceID;
-};
-struct tint_symbol_2 {
-  float4 color : TEXCOORD0;
-  float4 Position : SV_Position;
 };
 
 Output main_inner(uint VertexIndex, uint InstanceIndex) {
@@ -21,10 +30,10 @@ Output main_inner(uint VertexIndex, uint InstanceIndex) {
   return output;
 }
 
-tint_symbol_2 main(tint_symbol_1 tint_symbol) {
+tint_symbol_3 main(tint_symbol_1 tint_symbol) {
   const Output inner_result = main_inner(tint_symbol.VertexIndex, tint_symbol.InstanceIndex);
   tint_symbol_2 wrapper_result = (tint_symbol_2)0;
   wrapper_result.Position = inner_result.Position;
   wrapper_result.color = inner_result.color;
-  return wrapper_result;
+  return truncate_shader_output(wrapper_result);
 }

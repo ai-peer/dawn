@@ -1,3 +1,16 @@
+struct tint_symbol_6 {
+  float4 Position : SV_Position;
+};
+struct tint_symbol_2 {
+  float4 vtxFragColor;
+  float4 Position;
+};
+
+tint_symbol_6 truncate_shader_output(tint_symbol_2 io) {
+  const tint_symbol_6 tint_symbol_7 = {io.Position};
+  return tint_symbol_7;
+}
+
 cbuffer cbuffer_uniforms : register(b0) {
   uint4 uniforms[4];
 };
@@ -13,10 +26,6 @@ struct VertexOutput {
 struct tint_symbol_1 {
   float4 cur_position : TEXCOORD0;
   float4 color : TEXCOORD1;
-};
-struct tint_symbol_2 {
-  float4 vtxFragColor : TEXCOORD0;
-  float4 Position : SV_Position;
 };
 
 float4x4 uniforms_load(uint offset) {
@@ -34,13 +43,13 @@ VertexOutput vtx_main_inner(VertexInput input) {
   return output;
 }
 
-tint_symbol_2 vtx_main(tint_symbol_1 tint_symbol) {
-  const VertexInput tint_symbol_6 = {tint_symbol.cur_position, tint_symbol.color};
-  const VertexOutput inner_result = vtx_main_inner(tint_symbol_6);
+tint_symbol_6 vtx_main(tint_symbol_1 tint_symbol) {
+  const VertexInput tint_symbol_8 = {tint_symbol.cur_position, tint_symbol.color};
+  const VertexOutput inner_result = vtx_main_inner(tint_symbol_8);
   tint_symbol_2 wrapper_result = (tint_symbol_2)0;
   wrapper_result.vtxFragColor = inner_result.vtxFragColor;
   wrapper_result.Position = inner_result.Position;
-  return wrapper_result;
+  return truncate_shader_output(wrapper_result);
 }
 
 struct tint_symbol_4 {
