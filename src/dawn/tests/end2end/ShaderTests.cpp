@@ -549,6 +549,305 @@ fn fragmentMain() -> @location(0) vec4f {
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
 }
 
+//
+TEST_P(ShaderTests, WGSLInterstageVariablesShareSameModule) {
+    std::string vertexShader = R"(
+struct ub_view {
+  /* @offset(0) */
+  uResolution : vec2<f32>,
+}
+
+var<private> aPosition : vec2<f32>;
+
+var<private> vUv0 : vec2<f32>;
+
+@group(0) @binding(0) var<uniform> x_51 : ub_view;
+
+@group(0) @binding(1) var uColorBuffer : texture_2d<f32>;
+
+@group(0) @binding(2) var uColorBuffer_sampler : sampler;
+
+var<private> gl_Position : vec4<f32>;
+
+fn getImageEffectUV_vf2_(uv : ptr<function, vec2<f32>>) -> vec2<f32> {
+  let x_18 : f32 = (*(uv)).y;
+  (*(uv)).y = (1.0f - x_18);
+  let x_21 : vec2<f32> = *(uv);
+  return x_21;
+}
+
+fn main_1() {
+  var param : vec2<f32>;
+  let x_33 : vec2<f32> = aPosition;
+  gl_Position = vec4<f32>(x_33.x, x_33.y, 0.0f, 1.0f);
+  let x_42 : vec2<f32> = aPosition;
+  param = ((x_42 + vec2<f32>(1.0f, 1.0f)) * 0.5f);
+  let x_48 : vec2<f32> = getImageEffectUV_vf2_(&(param));
+  vUv0 = x_48;
+  return;
+}
+
+struct main_out {
+  @builtin(position)
+  gl_Position : vec4<f32>,
+  @location(0)
+  vUv0_1 : vec2<f32>,
+}
+
+@vertex
+// fn main(@location(0) aPosition_param : vec2<f32>) -> main_out {
+//   aPosition = aPosition_param;
+fn main() -> main_out {
+  aPosition = vec2f(0.0);
+  main_1();
+  return main_out(gl_Position, vUv0);
+}
+)";
+
+    wgpu::ShaderModule vertexModule = utils::CreateShaderModule(device, vertexShader.c_str());
+
+    std::string fragmentShader = R"(
+ struct ub_view {
+  /* @offset(0) */
+  uResolution : vec2<f32>,
+}
+
+@group(0) @binding(1) var uColorBuffer : texture_2d<f32>;
+
+@group(0) @binding(2) var uColorBuffer_sampler : sampler;
+
+var<private> gl_FragCoord : vec4<f32>;
+
+@group(0) @binding(0) var<uniform> x_31 : ub_view;
+
+var<private> pc_fragColor : vec4<f32>;
+
+fn main_1() {
+  var rgbNW : vec3<f32>;
+  var rgbNE : vec3<f32>;
+  var rgbSW : vec3<f32>;
+  var rgbSE : vec3<f32>;
+  var rgbaM : vec4<f32>;
+  var rgbM : vec3<f32>;
+  var opacity : f32;
+  var luma : vec3<f32>;
+  var lumaNW : f32;
+  var lumaNE : f32;
+  var lumaSW : f32;
+  var lumaSE : f32;
+  var lumaM : f32;
+  var lumaMin : f32;
+  var lumaMax : f32;
+  var dir : vec2<f32>;
+  var dirReduce : f32;
+  var rcpDirMin : f32;
+  var rgbA : vec3<f32>;
+  var rgbB : vec3<f32>;
+  var lumaB : f32;
+  let x_24 : vec4<f32> = gl_FragCoord;
+  let x_36 : vec2<f32> = x_31.uResolution;
+  let x_38 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_24.x, x_24.y) + vec2<f32>(-1.0f, -1.0f)) * x_36));
+  rgbNW = vec3<f32>(x_38.x, x_38.y, x_38.z);
+  let x_44 : vec4<f32> = gl_FragCoord;
+  let x_50 : vec2<f32> = x_31.uResolution;
+  let x_52 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_44.x, x_44.y) + vec2<f32>(1.0f, -1.0f)) * x_50));
+  rgbNE = vec3<f32>(x_52.x, x_52.y, x_52.z);
+  let x_58 : vec4<f32> = gl_FragCoord;
+  let x_63 : vec2<f32> = x_31.uResolution;
+  let x_65 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_58.x, x_58.y) + vec2<f32>(-1.0f, 1.0f)) * x_63));
+  rgbSW = vec3<f32>(x_65.x, x_65.y, x_65.z);
+  let x_71 : vec4<f32> = gl_FragCoord;
+  let x_76 : vec2<f32> = x_31.uResolution;
+  let x_78 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_71.x, x_71.y) + vec2<f32>(1.0f, 1.0f)) * x_76));
+  rgbSE = vec3<f32>(x_78.x, x_78.y, x_78.z);
+  let x_85 : vec4<f32> = gl_FragCoord;
+  let x_88 : vec2<f32> = x_31.uResolution;
+  let x_90 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, (vec2<f32>(x_85.x, x_85.y) * x_88));
+  rgbaM = x_90;
+  let x_92 : vec4<f32> = rgbaM;
+  rgbM = vec3<f32>(x_92.x, x_92.y, x_92.z);
+  let x_99 : f32 = rgbaM.w;
+  opacity = x_99;
+  luma = vec3<f32>(0.298999995f, 0.587000012f, 0.114f);
+  let x_106 : vec3<f32> = rgbNW;
+  let x_107 : vec3<f32> = luma;
+  lumaNW = dot(x_106, x_107);
+  let x_110 : vec3<f32> = rgbNE;
+  let x_111 : vec3<f32> = luma;
+  lumaNE = dot(x_110, x_111);
+  let x_114 : vec3<f32> = rgbSW;
+  let x_115 : vec3<f32> = luma;
+  lumaSW = dot(x_114, x_115);
+  let x_118 : vec3<f32> = rgbSE;
+  let x_119 : vec3<f32> = luma;
+  lumaSE = dot(x_118, x_119);
+  let x_122 : vec3<f32> = rgbM;
+  let x_123 : vec3<f32> = luma;
+  lumaM = dot(x_122, x_123);
+  let x_126 : f32 = lumaM;
+  let x_127 : f32 = lumaNW;
+  let x_128 : f32 = lumaNE;
+  let x_130 : f32 = lumaSW;
+  let x_131 : f32 = lumaSE;
+  lumaMin = min(x_126, min(min(x_127, x_128), min(x_130, x_131)));
+  let x_136 : f32 = lumaM;
+  let x_137 : f32 = lumaNW;
+  let x_138 : f32 = lumaNE;
+  let x_140 : f32 = lumaSW;
+  let x_141 : f32 = lumaSE;
+  lumaMax = max(x_136, max(max(x_137, x_138), max(x_140, x_141)));
+  let x_147 : f32 = lumaNW;
+  let x_148 : f32 = lumaNE;
+  let x_150 : f32 = lumaSW;
+  let x_151 : f32 = lumaSE;
+  dir.x = -(((x_147 + x_148) - (x_150 + x_151)));
+  let x_157 : f32 = lumaNW;
+  let x_158 : f32 = lumaSW;
+  let x_160 : f32 = lumaNE;
+  let x_161 : f32 = lumaSE;
+  dir.y = ((x_157 + x_158) - (x_160 + x_161));
+  let x_167 : f32 = lumaNW;
+  let x_168 : f32 = lumaNE;
+  let x_170 : f32 = lumaSW;
+  let x_172 : f32 = lumaSE;
+  dirReduce = max(((((x_167 + x_168) + x_170) + x_172) * 0.03125f), 0.0078125f);
+  let x_180 : f32 = dir.x;
+  let x_183 : f32 = dir.y;
+  let x_186 : f32 = dirReduce;
+  rcpDirMin = (1.0f / (min(abs(x_180), abs(x_183)) + x_186));
+  let x_193 : vec2<f32> = dir;
+  let x_194 : f32 = rcpDirMin;
+  let x_199 : vec2<f32> = x_31.uResolution;
+  dir = (min(vec2<f32>(8.0f, 8.0f), max(vec2<f32>(-8.0f, -8.0f), (x_193 * x_194))) * x_199);
+  let x_206 : vec4<f32> = gl_FragCoord;
+  let x_209 : vec2<f32> = x_31.uResolution;
+  let x_211 : vec2<f32> = dir;
+  let x_215 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_206.x, x_206.y) * x_209) + (x_211 * -0.166666672f)));
+  let x_220 : vec4<f32> = gl_FragCoord;
+  let x_223 : vec2<f32> = x_31.uResolution;
+  let x_225 : vec2<f32> = dir;
+  let x_229 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_220.x, x_220.y) * x_223) + (x_225 * 0.166666672f)));
+  rgbA = ((vec3<f32>(x_215.x, x_215.y, x_215.z) + vec3<f32>(x_229.x, x_229.y, x_229.z)) * 0.5f);
+  let x_234 : vec3<f32> = rgbA;
+  let x_240 : vec4<f32> = gl_FragCoord;
+  let x_243 : vec2<f32> = x_31.uResolution;
+  let x_245 : vec2<f32> = dir;
+  let x_249 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_240.x, x_240.y) * x_243) + (x_245 * -0.5f)));
+  let x_254 : vec4<f32> = gl_FragCoord;
+  let x_257 : vec2<f32> = x_31.uResolution;
+  let x_259 : vec2<f32> = dir;
+  let x_262 : vec4<f32> = textureSample(uColorBuffer, uColorBuffer_sampler, ((vec2<f32>(x_254.x, x_254.y) * x_257) + (x_259 * 0.5f)));
+  rgbB = ((x_234 * 0.5f) + ((vec3<f32>(x_249.x, x_249.y, x_249.z) + vec3<f32>(x_262.x, x_262.y, x_262.z)) * 0.25f));
+  let x_268 : vec3<f32> = rgbB;
+  let x_269 : vec3<f32> = luma;
+  lumaB = dot(x_268, x_269);
+  let x_271 : f32 = lumaB;
+  let x_272 : f32 = lumaMin;
+  let x_275 : f32 = lumaB;
+  let x_276 : f32 = lumaMax;
+  if (((x_271 < x_272) | (x_275 > x_276))) {
+    let x_283 : vec3<f32> = rgbA;
+    let x_284 : f32 = opacity;
+    pc_fragColor = vec4<f32>(x_283.x, x_283.y, x_283.z, x_284);
+  } else {
+    let x_290 : vec3<f32> = rgbB;
+    let x_291 : f32 = opacity;
+    pc_fragColor = vec4<f32>(x_290.x, x_290.y, x_290.z, x_291);
+  }
+  return;
+}
+
+struct main_out {
+  @location(0)
+  pc_fragColor_1 : vec4<f32>,
+}
+
+@fragment
+fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {
+  gl_FragCoord = gl_FragCoord_param;
+  main_1();
+  return main_out(pc_fragColor);
+}
+)";
+
+    wgpu::ShaderModule fragmentModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+
+    {
+        utils::ComboRenderPipelineDescriptor rpDesc;
+        rpDesc.vertex.module = vertexModule;
+        rpDesc.vertex.entryPoint = "main";
+        rpDesc.cFragment.module = fragmentModule;
+        rpDesc.cFragment.entryPoint = "main";
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+    }
+
+    // {
+    //     utils::ComboRenderPipelineDescriptor rpDesc;
+    //     rpDesc.vertex.module = vertexModule;
+    //     rpDesc.vertex.entryPoint = "vertexMain";
+    //     rpDesc.cFragment.module = fragmentModule;
+    //     rpDesc.cFragment.entryPoint = "fragmentMain1";
+    //     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+    // }
+}
+
+// //
+// TEST_P(ShaderTests, WGSLInterstageVariablesShareSameModule) {
+//     std::string vertexShader = R"(
+// struct VertexOut {
+//     @builtin(position) position : vec4f,
+//     @location(0) attribute0 : vec2f,
+// }
+
+// @vertex
+// fn vertexMain() -> VertexOut {
+//     var output : VertexOut;
+//     output.position = vec4f(0.0, 0.0, 0.0, 1.0);
+//     output.attribute0 = vec2f(1.0, 1.0);
+//     return output;
+// })";
+
+//     wgpu::ShaderModule vertexModule = utils::CreateShaderModule(device, vertexShader.c_str());
+
+//     std::string fragmentShader = R"(
+// @fragment
+// fn fragmentMain0() -> @location(0) vec4f {
+//     return vec4f(0.0, 0.0, 0.0, 1.0);
+// }
+
+// struct FragmentInput {
+//     @location(0) attribute0 : vec2f,
+// }
+
+// @fragment
+// fn fragmentMain1(input : FragmentInput) -> @location(0) vec4f {
+//     return vec4f(input.attribute0, 0.0, 1.0);
+// }
+// )";
+
+//     wgpu::ShaderModule fragmentModule = utils::CreateShaderModule(device,
+//     fragmentShader.c_str());
+
+//     {
+//         utils::ComboRenderPipelineDescriptor rpDesc;
+//         rpDesc.vertex.module = vertexModule;
+//         rpDesc.vertex.entryPoint = "vertexMain";
+//         rpDesc.cFragment.module = fragmentModule;
+//         rpDesc.cFragment.entryPoint = "fragmentMain0";
+//         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+//     }
+
+//     {
+//         utils::ComboRenderPipelineDescriptor rpDesc;
+//         rpDesc.vertex.module = vertexModule;
+//         rpDesc.vertex.entryPoint = "vertexMain";
+//         rpDesc.cFragment.module = fragmentModule;
+//         rpDesc.cFragment.entryPoint = "fragmentMain1";
+//         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+//     }
+
+// }
+
 // This is a regression test for an issue caused by the FirstIndexOffset transfrom being done before
 // the BindingRemapper, causing an intermediate AST to be invalid (and fail the overall
 // compilation).
