@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1048f6eb_66567867",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:14:30Z",
+      "side": 1,
+      "message": "LGTM, thanks for factoring things!",
+      "revId": "1b9f2882bcd5c355ae77e46320c9435dfad2566c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ab92ddd_2dbd5229",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:14:30Z",
+      "side": 1,
+      "message": "nit: Can we have a small comment explaining what this class factors between the backends (the creation mostly) and what it doesn\u0027t (present and nexttexture?)",
+      "revId": "1b9f2882bcd5c355ae77e46320c9435dfad2566c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
