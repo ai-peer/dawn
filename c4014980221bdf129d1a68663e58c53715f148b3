@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d387d97_f1838018",
+        "filename": "src/tint/symbol_table_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T22:20:23Z",
+      "side": 1,
+      "message": "This goes away in a followup removing NameFor",
+      "parentUuid": "e3b80505_e61f7424",
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "255f2d5f_a534a198",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-13T20:57:53Z",
       "side": 1,
       "message": "Recommend moving this to its own CL",
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf6324d2_ea35f168",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T22:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "255f2d5f_a534a198",
       "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d25863_c6c7a146",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T22:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40c6c533_135d5214",
+      "range": {
+        "startLine": 30,
+        "startChar": 34,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a7c6e75_a6b6afe4",
@@ -88,6 +148,30 @@
       "writtenOn": "2023-04-13T20:57:53Z",
       "side": 1,
       "message": "`@p size_in_bytes`",
+      "range": {
+        "startLine": 61,
+        "startChar": 18,
+        "endLine": 61,
+        "endChar": 33
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ce622f_0b18e5cb",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T22:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a7c6e75_a6b6afe4",
       "range": {
         "startLine": 61,
         "startChar": 18,
@@ -134,6 +218,54 @@
       "writtenOn": "2023-04-13T20:57:53Z",
       "side": 1,
       "message": "nit: I\u0027d just call this `size`. There\u0027s no template type, so there\u0027s going to be no confusion over the units.",
+      "range": {
+        "startLine": 65,
+        "startChar": 26,
+        "endLine": 65,
+        "endChar": 39
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff4d40a_01cde965",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T22:20:23Z",
+      "side": 1,
+      "message": "Yea, I\u0027ll leave it until we need it. Can always add a second `Allocate(size, alignment)` that this calls into.",
+      "parentUuid": "2686b015_bbd2811c",
+      "range": {
+        "startLine": 65,
+        "startChar": 39,
+        "endLine": 65,
+        "endChar": 40
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "891aa598_9c8692c3",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-13T22:20:23Z",
+      "side": 1,
+      "message": "Mostly it\u0027s because I forget, and this makes it _very_ obvious.",
+      "parentUuid": "62bac4a5_8c5ab2b0",
       "range": {
         "startLine": 65,
         "startChar": 26,
