@@ -56,6 +56,30 @@
       },
       "revId": "c9672d79b3cad5d84fbd0cb15ab0a57b97bc7876",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c8a9961_ae82c445",
+        "filename": "src/dawn/common/Log.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-04-13T20:39:49Z",
+      "side": 1,
+      "message": "Yes, it\u0027s defined here in Chromium https://source.chromium.org/chromium/chromium/src/+/main:build/config/BUILD.gn;l\u003d96?q\u003dOFFICIAL_BUILD%20case:yes and I\u0027ve tested that an official build with this CL works.",
+      "parentUuid": "37174efc_32911088",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 56
+      },
+      "revId": "c9672d79b3cad5d84fbd0cb15ab0a57b97bc7876",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
