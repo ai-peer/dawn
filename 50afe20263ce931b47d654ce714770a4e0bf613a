@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c0aacdf_f03a3f1b",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-13T08:42:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46dc8fb0_67766198",
+      "revId": "50afe20263ce931b47d654ce714770a4e0bf613a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ab8f1f0_0e27bcad",
@@ -103,6 +121,30 @@
       "writtenOn": "2023-04-12T12:35:49Z",
       "side": 1,
       "message": "In this file we should already be skipping tests on backends that aren\u0027t D3D12 and on the wire so I think all of SetUp can be removed.",
+      "range": {
+        "startLine": 1075,
+        "startChar": 0,
+        "endLine": 1079,
+        "endChar": 61
+      },
+      "revId": "50afe20263ce931b47d654ce714770a4e0bf613a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "900f96e4_fddabb92",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-13T08:42:54Z",
+      "side": 1,
+      "message": "Done. Still need to keep `DAWN_TEST_UNSUPPORTED_IF(UsesWire())` anw since the parent class doesn\u0027t skip when using wire, it only returns early in `SetUp`.",
+      "parentUuid": "6ab8f1f0_0e27bcad",
       "range": {
         "startLine": 1075,
         "startChar": 0,

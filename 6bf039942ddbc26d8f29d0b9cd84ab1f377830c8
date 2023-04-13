@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f5c59a4_7f3098e5",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-13T08:42:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6593f9ff_f21d4ef0",
+      "range": {
+        "startLine": 734,
+        "startChar": 34,
+        "endLine": 734,
+        "endChar": 41
+      },
+      "revId": "6bf039942ddbc26d8f29d0b9cd84ab1f377830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2043e7f_a297c95b",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54ac4d3_108edd31",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-13T08:42:54Z",
+      "side": 1,
+      "message": "Changed the comment a little bit.",
+      "parentUuid": "d2043e7f_a297c95b",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 58
+      },
+      "revId": "6bf039942ddbc26d8f29d0b9cd84ab1f377830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20f7549a_6e39cd38",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-04-12T18:29:06Z",
       "side": 1,
       "message": "nit: Given that there\u0027s no \"Destroy\" method now, shouldn\u0027t we just call this Destroy - maybe it made sense in one of the previous patches where we had Destroy as well as DestroyInternal?",
+      "range": {
+        "startLine": 60,
+        "startChar": 9,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "6bf039942ddbc26d8f29d0b9cd84ab1f377830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63127a0d_35d23e86",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-13T08:42:54Z",
+      "side": 1,
+      "message": "This method is a bit different from other ExternalImageDXGIImpl\u0027s public methods in that the other methods are called directly from D3D12Backend\u0027s ExternalImageDXGI\u0027s public API functions. They map 1 to 1 to ExternalImageDXGI\u0027s counterpart methods. Those methods also have self-locking code inside.\n\nWhereas there is no `Destroy` method in ExternalImageDXGI and `DestroyImpl` will only be indirectly called by Device\u0027s Destroy process internally. Furthermore, inside `DestroyImpl` we won\u0027t lock the mutex.",
+      "parentUuid": "20f7549a_6e39cd38",
       "range": {
         "startLine": 60,
         "startChar": 9,
