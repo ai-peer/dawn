@@ -16,6 +16,23 @@
       "message": "PTAL! Addresses half of Kai\u0027s error message feedback.",
       "revId": "db74d552fd03e2eddccbfec3c4cde0eed6ef1386",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8506cee1_8f78b542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-13T00:23:23Z",
+      "side": 1,
+      "message": "These encoder pointers get cleared out on Finish()\n\nmaybe as an alternative, we can set the label in the ProgrammableEncoder constructor when we see that one was not provided? At that stage, we know we have the top level encoder. It also means we don\u0027t have to specialize the printing",
+      "revId": "db74d552fd03e2eddccbfec3c4cde0eed6ef1386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
