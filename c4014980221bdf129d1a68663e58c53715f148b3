@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a917aba_cd64591a",
+        "filename": "src/tint/symbol_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-13T20:57:53Z",
+      "side": 1,
+      "message": "Followup: These should all be changed to `std::string_view` for more performance wins.",
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b80505_e61f7424",
+        "filename": "src/tint/symbol_table_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-13T20:57:53Z",
+      "side": 1,
+      "message": "Suggest renaming this test. `$2` is not blank.",
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "255f2d5f_a534a198",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-13T20:57:53Z",
+      "side": 1,
+      "message": "Recommend moving this to its own CL",
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c6c533_135d5214",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-13T20:57:53Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 30,
+        "startChar": 34,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7c6e75_a6b6afe4",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-13T20:57:53Z",
+      "side": 1,
+      "message": "`@p size_in_bytes`",
+      "range": {
+        "startLine": 61,
+        "startChar": 18,
+        "endLine": 61,
+        "endChar": 33
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2686b015_bbd2811c",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-13T20:57:53Z",
+      "side": 1,
+      "message": "We\u0027ll probably want `alignment` as an argument. Clearly not needed for this particular usage.",
+      "range": {
+        "startLine": 65,
+        "startChar": 39,
+        "endLine": 65,
+        "endChar": 40
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62bac4a5_8c5ab2b0",
+        "filename": "src/tint/utils/bump_allocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-13T20:57:53Z",
+      "side": 1,
+      "message": "nit: I\u0027d just call this `size`. There\u0027s no template type, so there\u0027s going to be no confusion over the units.",
+      "range": {
+        "startLine": 65,
+        "startChar": 26,
+        "endLine": 65,
+        "endChar": 39
+      },
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
