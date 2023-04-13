@@ -33,6 +33,47 @@
       "message": "LGTM. keep in mind that Dawn\u0027s end2end_tests get built in a Chromium checkout, so when we want to run the first test on CQ, we\u0027ll need to disable d3d11 elsewhere so we can set dawn_enable_d3d11 to true",
       "revId": "0069d377bf12dc380924ab429336e0c4209f8819",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8dd067b_f2f6dd75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-13T23:30:02Z",
+      "side": 1,
+      "message": "nevermind. I thought [1] was all tests. it\u0027s just some of them.",
+      "parentUuid": "d5261a73_2cb56b14",
+      "revId": "0069d377bf12dc380924ab429336e0c4209f8819",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1184fbb_9be68da2",
+        "filename": "src/dawn/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-13T23:30:02Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "0069d377bf12dc380924ab429336e0c4209f8819",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
