@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c952db21_4b203d34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-13T11:16:00Z",
+      "side": 1,
+      "message": "BTW did you run the ManualSwapchainTests sample and go through the manual testing checklist at the top of https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/samples/ManualSwapChainTest.cpp;drc\u003d0b3fc055d3df8a2eb4a17cce2efda19f82316314;l\u003d29 ?",
+      "revId": "1b9f2882bcd5c355ae77e46320c9435dfad2566c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ab92ddd_2dbd5229",
