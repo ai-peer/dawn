@@ -26,19 +26,6 @@
 
 namespace tint::builtin {
 
-diag::Severity ToSeverity(DiagnosticSeverity sc) {
-    switch (sc) {
-        case DiagnosticSeverity::kError:
-            return diag::Severity::Error;
-        case DiagnosticSeverity::kWarning:
-            return diag::Severity::Warning;
-        case DiagnosticSeverity::kInfo:
-            return diag::Severity::Note;
-        default:
-            return diag::Severity::InternalCompilerError;
-    }
-}
-
 /// ParseDiagnosticSeverity parses a DiagnosticSeverity from a string.
 /// @param str the string to parse
 /// @returns the parsed enum, or DiagnosticSeverity::kUndefined if the string could not be parsed.

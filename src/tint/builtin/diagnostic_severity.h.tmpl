@@ -18,15 +18,11 @@ See:
 
 #include "src/tint/utils/string_stream.h"
 #include "src/tint/builtin/diagnostic_rule.h"
-#include "src/tint/diagnostic/diagnostic.h"
 
 namespace tint::builtin {
 
 /// The diagnostic severity control.
 {{ Eval "DeclareEnum" (Sem.Enum "diagnostic_severity") }}
-
-/// Convert a DiagnosticSeverity to the corresponding diag::Severity.
-diag::Severity ToSeverity(DiagnosticSeverity sc);
 
 /// DiagnosticRuleSeverities is a map from diagnostic rule to diagnostic severity.
 using DiagnosticRuleSeverities = std::unordered_map<DiagnosticRule, DiagnosticSeverity>;

@@ -21,6 +21,7 @@
 #include <utility>
 #include <vector>
 
+#include "src/tint/builtin/diagnostic_severity.h"
 #include "src/tint/source.h"
 
 namespace tint::diag {
@@ -254,6 +255,9 @@ class List {
 /// @param list the list to emit
 /// @returns the output stream
 std::ostream& operator<<(std::ostream& out, const List& list);
+
+/// Convert a DiagnosticSeverity to the corresponding diag::Severity.
+Severity FromBuiltinSeverity(builtin::DiagnosticSeverity sc);
 
 }  // namespace tint::diag
 

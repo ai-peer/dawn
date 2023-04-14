@@ -27,7 +27,6 @@
 #include <unordered_map>
 
 #include "src/tint/builtin/diagnostic_rule.h"
-#include "src/tint/diagnostic/diagnostic.h"
 #include "src/tint/utils/string_stream.h"
 
 namespace tint::builtin {
@@ -57,9 +56,6 @@ constexpr const char* kDiagnosticSeverityStrings[] = {
     "off",
     "warning",
 };
-
-/// Convert a DiagnosticSeverity to the corresponding diag::Severity.
-diag::Severity ToSeverity(DiagnosticSeverity sc);
 
 /// DiagnosticRuleSeverities is a map from diagnostic rule to diagnostic severity.
 using DiagnosticRuleSeverities = std::unordered_map<DiagnosticRule, DiagnosticSeverity>;
