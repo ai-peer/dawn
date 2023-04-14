@@ -22,6 +22,30 @@
       },
       "revId": "a5c9f35917aedd367b6716bc516c6e2321f37d1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "733cbadf_e4f4ba48",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-14T21:20:02Z",
+      "side": 1,
+      "message": "I wasn\u0027t aware that THREAD_SANITIZER is defined. I just read clang website and their guide says using `__has_feature` to check tsan.\n\nJust checked, no need to manually define THREAD_SANITIZER, it is already defined with tsan.",
+      "parentUuid": "a4ba7fc9_5525ba0a",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "a5c9f35917aedd367b6716bc516c6e2321f37d1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
