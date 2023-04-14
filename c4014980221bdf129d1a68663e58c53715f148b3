@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04cf9c21_4cd260a4",
+        "filename": "src/tint/symbol_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-14T01:46:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9a917aba_cd64591a",
+      "revId": "c4014980221bdf129d1a68663e58c53715f148b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3b80505_e61f7424",
