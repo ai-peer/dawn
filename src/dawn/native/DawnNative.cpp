@@ -22,6 +22,7 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/Texture.h"
+#include "dawn/native/null/DeviceNull.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "tint/tint.h"
 
@@ -330,6 +331,21 @@ uint64_t GetAllocatedSizeForTesting(WGPUBuffer buffer) {
 bool BindGroupLayoutBindingsEqualForTesting(WGPUBindGroupLayout a, WGPUBindGroupLayout b) {
     bool excludePipelineCompatibiltyToken = true;
     return FromAPI(a)->IsLayoutEqual(FromAPI(b), excludePipelineCompatibiltyToken);
+}
+
+void NullAdapterSetSupportedFeaturesForTesting(
+    WGPUAdapter adapter,
+    const std::vector<WGPUFeatureName>& requiredFeaturesIn) {
+    auto adapterBase = FromAPI(adapter);
+    ASSERT(adapterBase->GetBackendType() == wgpu::BackendType::Null);
+
+    auto adapterNull = static_cast<null::Adapter*>(adapterBase);
+
+    std::vector<wgpu::FeatureName> requiredFeatures(requiredFeaturesIn.size());
+    for (size_t i = 0; i < requiredFeaturesIn.size(); ++i) {
+        requiredFeatures[i] = static_cast<wgpu::FeatureName>(requiredFeaturesIn[i]);
+    }
+    adapterNull->SetSupportedFeaturesForTesting(requiredFeatures);
 }
 
 }  // namespace dawn::native
