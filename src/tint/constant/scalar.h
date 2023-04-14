@@ -17,6 +17,7 @@
 
 #include "src/tint/castable.h"
 #include "src/tint/constant/value.h"
+#include "src/tint/debug.h"
 #include "src/tint/number.h"
 #include "src/tint/type/type.h"
 #include "src/tint/utils/hash.h"

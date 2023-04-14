@@ -22,7 +22,6 @@
 #include <tuple>
 #include <utility>
 
-#include "src/tint/debug.h"
 #include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/vector.h"
 

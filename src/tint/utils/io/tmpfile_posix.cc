@@ -17,8 +17,6 @@
 #include <unistd.h>
 #include <limits>
 
-#include "src/tint/debug.h"
-
 namespace tint::utils {
 
 namespace {
@@ -34,7 +32,10 @@ std::string TmpFilePath(std::string ext) {
     // (when the source value exceeds the representable range) is implementation
     // defined. While such a large file extension is unlikely in practice, we
     // enforce this here at runtime.
-    TINT_ASSERT(Utils, ext.length() <= static_cast<size_t>(std::numeric_limits<int>::max()));
+    if (ext.length() > static_cast<size_t>(std::numeric_limits<int>::max())) {
+        return "";
+    }
+
     std::string name = std::string(dir) + "/tint_XXXXXX" + ext;
     int file = mkstemps(&name[0], static_cast<int>(ext.length()));
     if (file != -1) {
