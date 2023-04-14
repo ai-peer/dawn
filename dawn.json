@@ -2492,6 +2492,13 @@
                 "args": [
                     {"name": "adapter", "type": "adapter"}
                 ]
+            },
+            {
+                "name": "get supported usages",
+                "returns": "texture usage",
+                "args": [
+                    {"name": "adapter", "type": "adapter"}
+                ]
             }
         ]
     },

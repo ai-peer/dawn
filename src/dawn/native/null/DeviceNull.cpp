@@ -50,6 +50,10 @@ bool Adapter::SupportsExternalImages() const {
     return false;
 }
 
+wgpu::TextureUsage Adapter::GetSupportedSurfaceUsages(const Surface* surface) const {
+    return wgpu::TextureUsage::RenderAttachment;
+}
+
 MaybeError Adapter::InitializeImpl() {
     return {};
 }
