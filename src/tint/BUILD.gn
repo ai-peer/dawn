@@ -131,7 +131,7 @@ source_set("tint_utils_io") {
     sources += [ "utils/io/tmpfile_other.cc" ]
   }
 
-  deps = [ ":libtint_base_src" ]
+  deps = [ ":libtint_utils_src" ]
 }
 
 ###############################################################################
@@ -147,8 +147,8 @@ source_set("tint_val") {
   ]
   deps = [
     ":libtint_ast_src",
-    ":libtint_base_src",
     ":libtint_program_src",
+    ":libtint_utils_src",
     ":tint_utils_io",
   ]
 }
@@ -216,6 +216,24 @@ libtint_source_set("libtint_base_src") {
     "symbol.h",
     "symbol_table.cc",
     "symbol_table.h",
+  ]
+
+  if (is_linux || is_mac) {
+    sources += [ "diagnostic/printer_posix.cc" ]
+  } else if (is_win) {
+    sources += [ "diagnostic/printer_windows.cc" ]
+  } else {
+    sources += [ "diagnostic/printer_other.cc" ]
+  }
+
+  deps = [
+    ":libtint_builtins_src",
+    ":libtint_utils_src",
+  ]
+}
+
+libtint_source_set("libtint_utils_src") {
+  sources = [
     "utils/bitcast.h",
     "utils/bitset.h",
     "utils/block_allocator.h",
@@ -248,19 +266,14 @@ libtint_source_set("libtint_base_src") {
     "utils/unique_vector.h",
     "utils/vector.h",
   ]
-
-  if (is_linux || is_mac) {
-    sources += [ "diagnostic/printer_posix.cc" ]
-  } else if (is_win) {
-    sources += [ "diagnostic/printer_windows.cc" ]
-  } else {
-    sources += [ "diagnostic/printer_other.cc" ]
-  }
 }
 
 libtint_source_set("libtint_clone_context_hdrs") {
   sources = [ "clone_context.h" ]
-  deps = [ ":libtint_base_src" ]
+  deps = [
+    ":libtint_base_src",
+    ":libtint_utils_src",
+  ]
 }
 
 libtint_source_set("libtint_program_src") {
@@ -303,6 +316,7 @@ libtint_source_set("libtint_program_src") {
     ":libtint_constant_src",
     ":libtint_sem_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -312,8 +326,8 @@ libtint_source_set("libtint_demangler_src") {
     "demangler.h",
   ]
   deps = [
-    ":libtint_base_src",
     ":libtint_program_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -339,6 +353,7 @@ libtint_source_set("libtint_inspector_src") {
     ":libtint_program_src",
     ":libtint_sem_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -454,6 +469,7 @@ libtint_source_set("libtint_transform_src") {
     ":libtint_program_src",
     ":libtint_sem_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -541,6 +557,7 @@ libtint_source_set("libtint_ast_hdrs") {
     ":libtint_builtins_src",
     ":libtint_clone_context_hdrs",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -708,6 +725,7 @@ libtint_source_set("libtint_sem_src") {
     ":libtint_builtins_src",
     ":libtint_constant_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -738,7 +756,7 @@ libtint_source_set("libtint_builtins_src") {
     "builtin/texel_format.cc",
     "builtin/texel_format.h",
   ]
-  deps = [ ":libtint_base_src" ]
+  deps = [ ":libtint_utils_src" ]
 }
 
 libtint_source_set("libtint_type_src") {
@@ -811,6 +829,7 @@ libtint_source_set("libtint_type_src") {
   deps = [
     ":libtint_base_src",
     ":libtint_builtins_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -831,6 +850,7 @@ libtint_source_set("libtint_constant_src") {
   deps = [
     ":libtint_base_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -878,6 +898,7 @@ libtint_source_set("libtint_spv_reader_src") {
     ":libtint_reader_src",
     ":libtint_sem_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     "${tint_spirv_tools_dir}/:spvtools_opt",
   ]
 
@@ -918,6 +939,7 @@ libtint_source_set("libtint_writer_src") {
     ":libtint_sem_src",
     ":libtint_transform_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -949,6 +971,7 @@ libtint_source_set("libtint_spv_writer_src") {
     ":libtint_sem_src",
     ":libtint_transform_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     ":libtint_writer_src",
   ]
 }
@@ -976,6 +999,7 @@ libtint_source_set("libtint_wgsl_reader_src") {
     ":libtint_program_src",
     ":libtint_reader_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
   ]
 }
 
@@ -994,6 +1018,7 @@ libtint_source_set("libtint_wgsl_writer_src") {
     ":libtint_program_src",
     ":libtint_sem_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     ":libtint_writer_src",
   ]
 }
@@ -1015,6 +1040,7 @@ libtint_source_set("libtint_msl_writer_src") {
     ":libtint_sem_src",
     ":libtint_transform_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     ":libtint_writer_src",
   ]
 }
@@ -1036,6 +1062,7 @@ libtint_source_set("libtint_hlsl_writer_src") {
     ":libtint_sem_src",
     ":libtint_transform_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     ":libtint_writer_src",
   ]
 }
@@ -1057,6 +1084,7 @@ libtint_source_set("libtint_glsl_writer_src") {
     ":libtint_sem_src",
     ":libtint_transform_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     ":libtint_writer_src",
   ]
 }
@@ -1076,6 +1104,7 @@ libtint_source_set("libtint_syntax_tree_writer_src") {
     ":libtint_program_src",
     ":libtint_sem_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     ":libtint_writer_src",
   ]
 }
@@ -1092,6 +1121,7 @@ source_set("libtint") {
     ":libtint_sem_src",
     ":libtint_transform_src",
     ":libtint_type_src",
+    ":libtint_utils_src",
     ":libtint_writer_src",
   ]
 
@@ -1272,10 +1302,7 @@ if (tint_build_unittests) {
       "ast/test_helper.h",
       "ast/test_helper_test.cc",
     ]
-    deps = [
-      ":libtint_ast_src",
-      ":libtint_base_src",
-    ]
+    deps = [ ":libtint_ast_src" ]
   }
 
   tint_unittests_source_set("tint_unittests_ast_src") {
@@ -1340,7 +1367,6 @@ if (tint_build_unittests) {
     ]
     deps = [
       ":libtint_ast_src",
-      ":libtint_base_src",
       ":libtint_builtins_src",
       ":libtint_transform_src",
       ":libtint_unittests_ast_helper",
@@ -1375,7 +1401,6 @@ if (tint_build_unittests) {
       "diagnostic/formatter_test.cc",
       "diagnostic/printer_test.cc",
     ]
-    deps = [ ":libtint_base_src" ]
   }
 
   tint_unittests_source_set("tint_unittests_inspector_src") {
@@ -1457,7 +1482,6 @@ if (tint_build_unittests) {
       "resolver/variable_validation_test.cc",
     ]
     deps = [
-      ":libtint_base_src",
       ":libtint_builtins_src",
       ":libtint_transform_src",
       ":tint_unittests_ast_src",
@@ -1505,10 +1529,7 @@ if (tint_build_unittests) {
       "type/u32_test.cc",
       "type/vector_test.cc",
     ]
-    deps = [
-      ":libtint_base_src",
-      ":libtint_builtins_src",
-    ]
+    deps = [ ":libtint_builtins_src" ]
   }
 
   tint_unittests_source_set("tint_unittests_transform_src") {
@@ -1570,7 +1591,6 @@ if (tint_build_unittests) {
     ]
 
     deps = [
-      ":libtint_base_src",
       ":libtint_builtins_src",
       ":libtint_transform_src",
       ":libtint_unittests_ast_helper",
@@ -1608,7 +1628,6 @@ if (tint_build_unittests) {
       "utils/unique_vector_test.cc",
       "utils/vector_test.cc",
     ]
-    deps = [ ":libtint_base_src" ]
   }
 
   tint_unittests_source_set("tint_unittests_writer_src") {
@@ -1620,7 +1639,6 @@ if (tint_build_unittests) {
       "writer/text_generator_test.cc",
     ]
     deps = [
-      ":libtint_base_src",
       ":libtint_unittests_ast_helper",
       ":libtint_writer_src",
     ]
@@ -1675,7 +1693,6 @@ if (tint_build_unittests) {
     ]
 
     deps = [
-      ":libtint_base_src",
       ":libtint_spv_reader_src",
       ":libtint_wgsl_writer_src",
       "${tint_spirv_tools_dir}/:spvtools_opt",
@@ -1720,7 +1737,6 @@ if (tint_build_unittests) {
     ]
 
     deps = [
-      ":libtint_base_src",
       ":libtint_builtins_src",
       ":libtint_spv_writer_src",
       ":tint_unittests_ast_src",
@@ -1801,7 +1817,6 @@ if (tint_build_unittests) {
     ]
 
     deps = [
-      ":libtint_base_src",
       ":libtint_builtins_src",
       ":libtint_unittests_ast_helper",
       ":libtint_wgsl_reader_src",
@@ -1969,7 +1984,6 @@ if (tint_build_unittests) {
     ]
 
     deps = [
-      ":libtint_base_src",
       ":libtint_glsl_writer_src",
       ":libtint_transform_src",
       ":tint_unittests_ast_src",
@@ -1998,7 +2012,6 @@ if (tint_build_unittests) {
     ]
 
     deps = [
-      ":libtint_base_src",
       ":libtint_unittests_ast_helper",
       ":tint_unittests_ast_src",
     ]

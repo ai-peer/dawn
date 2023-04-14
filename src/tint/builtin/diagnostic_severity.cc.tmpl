@@ -16,19 +16,6 @@ See:
 
 namespace tint::builtin {
 
-diag::Severity ToSeverity(DiagnosticSeverity sc) {
-    switch (sc) {
-        case DiagnosticSeverity::kError:
-            return diag::Severity::Error;
-        case DiagnosticSeverity::kWarning:
-            return diag::Severity::Warning;
-        case DiagnosticSeverity::kInfo:
-            return diag::Severity::Note;
-        default:
-            return diag::Severity::InternalCompilerError;
-    }
-}
-
 {{ Eval "ParseEnum" (Sem.Enum "diagnostic_severity")}}
 
 {{ Eval "EnumOStream" (Sem.Enum "diagnostic_severity")}}
