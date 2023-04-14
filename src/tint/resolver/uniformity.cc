@@ -1898,7 +1898,7 @@ class UniformityGraph {
         // Helper to produce a diagnostic message, as a note or with the global failure severity.
         auto report = [&](Source source, std::string msg, bool note) {
             diag::Diagnostic error{};
-            error.severity = note ? diag::Severity::Note : builtin::ToSeverity(severity);
+            error.severity = note ? diag::Severity::Note : diag::FromBuiltinSeverity(severity);
             error.system = diag::System::Resolver;
             error.source = source;
             error.message = msg;

@@ -185,7 +185,7 @@ bool Validator::AddDiagnostic(builtin::DiagnosticRule rule,
     auto severity = diagnostic_filters_.Get(rule);
     if (severity != builtin::DiagnosticSeverity::kOff) {
         diag::Diagnostic d{};
-        d.severity = ToSeverity(severity);
+        d.severity = diag::FromBuiltinSeverity(severity);
         d.system = diag::System::Resolver;
         d.source = source;
         d.message = msg;

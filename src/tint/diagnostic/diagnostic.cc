@@ -43,6 +43,19 @@ std::string List::str() const {
     return Formatter{style}.format(*this);
 }
 
+diag::Severity FromBuiltinSeverity(builtin::DiagnosticSeverity sc) {
+    switch (sc) {
+        case builtin::DiagnosticSeverity::kError:
+            return Severity::Error;
+        case builtin::DiagnosticSeverity::kWarning:
+            return Severity::Warning;
+        case builtin::DiagnosticSeverity::kInfo:
+            return Severity::Note;
+        default:
+            return Severity::InternalCompilerError;
+    }
+}
+
 std::ostream& operator<<(std::ostream& out, const List& list) {
     out << list.str();
     return out;
