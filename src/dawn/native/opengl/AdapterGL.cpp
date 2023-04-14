@@ -69,6 +69,12 @@ bool Adapter::SupportsExternalImages() const {
     return GetBackendType() == wgpu::BackendType::OpenGLES;
 }
 
+ResultOrError<wgpu::TextureUsage> Adapter::GetSupportedSurfaceUsages(const Surface* surface) const {
+    wgpu::TextureUsage usages =
+        wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding;
+    return usages;
+}
+
 MaybeError Adapter::InitializeImpl() {
     if (mFunctions.GetVersion().IsES()) {
         ASSERT(GetBackendType() == wgpu::BackendType::OpenGLES);

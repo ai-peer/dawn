@@ -71,4 +71,10 @@ MaybeError Adapter::InitializeImpl() {
     return {};
 }
 
+ResultOrError<wgpu::TextureUsage> Adapter::GetSupportedSurfaceUsages(const Surface* surface) const {
+    wgpu::TextureUsage usages =
+        wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding;
+    return usages;
+}
+
 }  // namespace dawn::native::d3d
