@@ -51,6 +51,42 @@
       "parentUuid": "c38791e5_a91ebc1a",
       "revId": "208504d9d708ff89768006c9d7f391a209f7e50a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22498eb_8ce7a1e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-14T22:26:16Z",
+      "side": 1,
+      "message": "Resolved in chat",
+      "parentUuid": "edd4a0f0_ee429e99",
+      "revId": "208504d9d708ff89768006c9d7f391a209f7e50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064efdf5_2a96f237",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-14T22:26:16Z",
+      "side": 1,
+      "message": "Question for enga@:\nWill the pipeline and shader cache invalidate automatically on their own?\nThe generated hlsl is changed but the compile option is unchanged.\n\nThis comes to me when I tried local built chromium with the repro case in the bug ticket, the error only goes away after I set a new `--user-data-dir`.",
+      "parentUuid": "e46d1323_95d3e5bf",
+      "revId": "208504d9d708ff89768006c9d7f391a209f7e50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
