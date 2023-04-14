@@ -23,11 +23,11 @@
 #include "src/tint/builtin/access.h"
 #include "src/tint/builtin/address_space.h"
 #include "src/tint/builtin/texel_format.h"
-#include "src/tint/castable.h"
 #include "src/tint/symbol.h"
 #include "src/tint/type/sampler_kind.h"
 #include "src/tint/type/texture_dimension.h"
 #include "src/tint/utils/block_allocator.h"
+#include "src/tint/utils/castable.h"
 
 // Forward declarations
 namespace tint {

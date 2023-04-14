@@ -18,8 +18,8 @@
 #include <tuple>
 #include <utility>
 
-#include "src/tint/castable.h"
 #include "src/tint/utils/bitcast.h"
+#include "src/tint/utils/castable.h"
 #include "src/tint/utils/defer.h"
 
 namespace tint {
