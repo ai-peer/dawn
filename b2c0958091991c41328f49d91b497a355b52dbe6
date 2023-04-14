@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f740ea71_90293662",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-14T17:11:42Z",
+      "side": 1,
+      "message": "to clarify:\n\nthis copies existing RetryOnFailure status into the new result tree?\n\nshould we avoid changing the status if the new tree sees it as [ Failure ] ? I suppose that could have a problem where RetryOnFailure gets upgraded to Failure, and then only partially downgraded back to RetryOnFailure - which doesn\u0027t preserve the expectations as we intended\n\n\nwhat is the difference between doing this, versus having RetryOnFailure imply `keep` in `func (u *updater) expectation(in Expectation, keep bool)`?",
+      "revId": "b2c0958091991c41328f49d91b497a355b52dbe6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
