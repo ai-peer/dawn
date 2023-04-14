@@ -22,6 +22,7 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/Texture.h"
+#include "dawn/native/null/DeviceNull.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "tint/tint.h"
 

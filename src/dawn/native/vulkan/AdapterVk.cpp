@@ -18,9 +18,11 @@
 #include <string>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/Limits.h"
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/SwapChainVk.h"
 
 namespace dawn::native::vulkan {
 
@@ -263,6 +265,8 @@ void Adapter::InitializeSupportedFeaturesImpl() {
     // features.
     EnableFeature(Feature::MultiPlanarFormats);
 #endif  // DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
+
+    EnableFeature(Feature::SurfaceCapabilities);
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
