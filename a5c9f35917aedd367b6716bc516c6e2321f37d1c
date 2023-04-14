@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ba7fc9_5525ba0a",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-14T20:59:45Z",
+      "side": 1,
+      "message": "we don\u0027t do this to manually define ADDRESS_SANITIZER or MEMORY_SANITIZER.\n\nAre we currently doing those wrong, or does TSAN set up the defines differently?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "a5c9f35917aedd367b6716bc516c6e2321f37d1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
