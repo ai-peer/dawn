@@ -87,6 +87,24 @@
       "parentUuid": "e46d1323_95d3e5bf",
       "revId": "208504d9d708ff89768006c9d7f391a209f7e50a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a21b278_304c7667",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-14T22:28:26Z",
+      "side": 1,
+      "message": "yes it will. this is a problem we have for local builds. when dawn rolls into Chrome, the commit hash is saved and that becomes part of the cache key, invalidating all the old entries\n\nin a local build it\u0027s still using the stale hash",
+      "parentUuid": "064efdf5_2a96f237",
+      "revId": "208504d9d708ff89768006c9d7f391a209f7e50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
