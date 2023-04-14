@@ -313,4 +313,21 @@ uint32_t Surface::GetXWindow() const {
     return mXWindow;
 }
 
+wgpu::TextureUsage Surface::APIGetSupportedUsages(AdapterBase* adapter) const {
+    if (!adapter->APIHasFeature(wgpu::FeatureName::SurfaceCapabilities)) {
+        GetInstance()->ConsumedError(
+            DAWN_VALIDATION_ERROR("%s is not enabled.", wgpu::FeatureName::SurfaceCapabilities));
+        return wgpu::TextureUsage::None;
+    }
+
+    auto result = adapter->GetSupportedSurfaceUsages(this);
+
+    if (result.IsError()) {
+        GetInstance()->ConsumedError(result.AcquireError());
+        return wgpu::TextureUsage::None;
+    }
+
+    return result.AcquireSuccess();
+}
+
 }  // namespace dawn::native
