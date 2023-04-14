@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "128688b3_7b90a64e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-14T21:01:43Z",
+      "side": 1,
+      "message": "Hi Austin \u0026 Coretin, I split copy related code from CommandBuffer CL to this CL. PTAL. Thanks.",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
