@@ -18,9 +18,11 @@
 #include <string>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/Limits.h"
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/SwapChainVk.h"
 
 namespace dawn::native::vulkan {
 
@@ -396,6 +398,17 @@ bool Adapter::SupportsExternalImages() const {
     return external_memory::Service::CheckSupport(mDeviceInfo) &&
            external_semaphore::Service::CheckSupport(mDeviceInfo, mPhysicalDevice,
                                                      mVulkanInstance->GetFunctions());
+}
+
+wgpu::TextureUsage Adapter::GetSupportedSurfaceUsages(const Surface* surface) const {
+    auto result = SwapChain::GetSupportedSurfaceUsages(this, surface);
+
+    if (result.IsError()) {
+        GetInstance()->ConsumedError(result.AcquireError());
+        return wgpu::TextureUsage::RenderAttachment;
+    }
+
+    return result.AcquireSuccess();
 }
 
 void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
