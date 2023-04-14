@@ -16,6 +16,24 @@
       "message": "to clarify:\n\nthis copies existing RetryOnFailure status into the new result tree?\n\nshould we avoid changing the status if the new tree sees it as [ Failure ] ? I suppose that could have a problem where RetryOnFailure gets upgraded to Failure, and then only partially downgraded back to RetryOnFailure - which doesn\u0027t preserve the expectations as we intended\n\n\nwhat is the difference between doing this, versus having RetryOnFailure imply `keep` in `func (u *updater) expectation(in Expectation, keep bool)`?",
       "revId": "b2c0958091991c41328f49d91b497a355b52dbe6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9c33afa_a8f368d8",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-14T18:23:57Z",
+      "side": 1,
+      "message": "\u003e this copies existing RetryOnFailure status into the new result tree?\n\nCorrect.\n\n\u003e should we avoid changing the status if the new tree sees it as [ Failure ] ? I suppose that could have a problem where RetryOnFailure gets upgraded to Failure, and then only partially downgraded back to RetryOnFailure - which doesn\u0027t preserve the expectations as we intended\n\nYeah exactly. This reduces flapping, which is what I think infra wants.\n\n\u003e what is the difference between doing this, versus having RetryOnFailure imply `keep` in `func (u *updater) expectation(in Expectation, keep bool)`?\n\nFaking the results means that it can glob higher than the existing `RetryOnFailure` expectations. This might be important to keep the ever-growing list under control.",
+      "parentUuid": "f740ea71_90293662",
+      "revId": "b2c0958091991c41328f49d91b497a355b52dbe6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
