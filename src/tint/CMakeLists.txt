@@ -230,8 +230,6 @@ list(APPEND TINT_LIB_SRCS
   ast/while_statement.h
   ast/workgroup_attribute.cc
   ast/workgroup_attribute.h
-  castable.cc
-  castable.h
   clone_context.cc
   clone_context.h
   constant/clone_context.h
@@ -518,6 +516,8 @@ list(APPEND TINT_LIB_SRCS
   utils/bitcast.h
   utils/bitset.h
   utils/block_allocator.h
+  utils/castable.cc
+  utils/castable.h
   utils/compiler_macros.h
   utils/concat.h
   utils/crc32.h
@@ -886,7 +886,6 @@ if(TINT_BUILD_TESTS)
     ast/variable_test.cc
     ast/while_statement_test.cc
     ast/workgroup_attribute_test.cc
-    castable_test.cc
     clone_context_test.cc
     constant/composite_test.cc
     constant/scalar_test.cc
@@ -1000,6 +999,7 @@ if(TINT_BUILD_TESTS)
     utils/bitcast_test.cc
     utils/bitset_test.cc
     utils/block_allocator_test.cc
+    utils/castable_test.cc
     utils/crc32_test.cc
     utils/defer_test.cc
     utils/enum_set_test.cc
