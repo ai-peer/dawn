@@ -19,7 +19,6 @@
 #include <optional>
 #include <utility>
 
-#include "src/tint/debug.h"
 #include "src/tint/utils/hash.h"
 #include "src/tint/utils/hashmap_base.h"
 #include "src/tint/utils/vector.h"
@@ -67,11 +66,8 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
         operator T*() const { return Get(); }
 
         /// @returns the pointer to the Value
-        /// @warning if the Hashmap does not contain a value for the reference, then this will
-        /// trigger a TINT_ASSERT, or invalid pointer dereference.
         T* operator->() const {
             auto* hashmap_reference_lookup = Get();
-            TINT_ASSERT(Utils, hashmap_reference_lookup != nullptr);
             return hashmap_reference_lookup;
         }
 
