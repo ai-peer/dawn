@@ -34,6 +34,24 @@
       "parentUuid": "f740ea71_90293662",
       "revId": "b2c0958091991c41328f49d91b497a355b52dbe6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e971d6c0_4e8be6a1",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-14T18:25:40Z",
+      "side": 1,
+      "message": "got it - thanks!",
+      "parentUuid": "c9c33afa_a8f368d8",
+      "revId": "b2c0958091991c41328f49d91b497a355b52dbe6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
