@@ -30,7 +30,6 @@
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/struct.h"
 #include "src/tint/sem/variable.h"
-#include "src/tint/switch.h"
 #include "src/tint/type/array.h"
 #include "src/tint/type/atomic.h"
 #include "src/tint/type/reference.h"
@@ -38,6 +37,7 @@
 #include "src/tint/utils/hash.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/string_stream.h"
+#include "src/tint/utils/switch.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 

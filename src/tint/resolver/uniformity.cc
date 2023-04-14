@@ -37,11 +37,11 @@
 #include "src/tint/sem/value_conversion.h"
 #include "src/tint/sem/variable.h"
 #include "src/tint/sem/while_statement.h"
-#include "src/tint/switch.h"
 #include "src/tint/utils/block_allocator.h"
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/string_stream.h"
+#include "src/tint/utils/switch.h"
 #include "src/tint/utils/unique_vector.h"
 
 // Set to `1` to dump the uniformity graph for each function in graphviz format.

@@ -23,11 +23,11 @@
 #include "src/tint/builtin/builtin_value.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/variable.h"
-#include "src/tint/switch.h"
 #include "src/tint/utils/compiler_macros.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/string_stream.h"
+#include "src/tint/utils/switch.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::transform::VertexPulling);
 TINT_INSTANTIATE_TYPEINFO(tint::transform::VertexPulling::Config);

@@ -24,10 +24,10 @@
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/type_expression.h"
 #include "src/tint/sem/value_conversion.h"
-#include "src/tint/switch.h"
 #include "src/tint/type/storage_texture.h"
 #include "src/tint/type/texture_dimension.h"
 #include "src/tint/utils/map.h"
+#include "src/tint/utils/switch.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 

@@ -24,7 +24,6 @@
 #include "src/tint/sem/pipeline_stage_set.h"
 #include "src/tint/sem/value_constructor.h"
 #include "src/tint/sem/value_conversion.h"
-#include "src/tint/switch.h"
 #include "src/tint/type/abstract_float.h"
 #include "src/tint/type/abstract_int.h"
 #include "src/tint/type/abstract_numeric.h"
@@ -41,6 +40,7 @@
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/scoped_assignment.h"
 #include "src/tint/utils/string_stream.h"
+#include "src/tint/utils/switch.h"
 
 namespace tint::resolver {
 namespace {

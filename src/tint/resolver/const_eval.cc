@@ -30,7 +30,6 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/value_constructor.h"
-#include "src/tint/switch.h"
 #include "src/tint/type/abstract_float.h"
 #include "src/tint/type/abstract_int.h"
 #include "src/tint/type/array.h"
@@ -46,6 +45,7 @@
 #include "src/tint/utils/compiler_macros.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/string_stream.h"
+#include "src/tint/utils/switch.h"
 #include "src/tint/utils/transform.h"
 
 using namespace tint::number_suffixes;  // NOLINT

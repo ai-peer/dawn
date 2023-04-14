@@ -40,7 +40,6 @@
 #include "src/tint/sem/value_constructor.h"
 #include "src/tint/sem/value_conversion.h"
 #include "src/tint/sem/variable.h"
-#include "src/tint/switch.h"
 #include "src/tint/transform/array_length_from_uniform.h"
 #include "src/tint/transform/binding_remapper.h"
 #include "src/tint/transform/builtin_polyfill.h"
@@ -83,6 +82,7 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/scoped_assignment.h"
 #include "src/tint/utils/string_stream.h"
+#include "src/tint/utils/switch.h"
 #include "src/tint/writer/check_supported_extensions.h"
 #include "src/tint/writer/float_to_string.h"
 

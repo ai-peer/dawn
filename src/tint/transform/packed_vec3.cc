@@ -27,12 +27,12 @@
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/type_expression.h"
 #include "src/tint/sem/variable.h"
-#include "src/tint/switch.h"
 #include "src/tint/type/array.h"
 #include "src/tint/type/reference.h"
 #include "src/tint/type/vector.h"
 #include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/hashset.h"
+#include "src/tint/utils/switch.h"
 #include "src/tint/utils/vector.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::transform::PackedVec3);

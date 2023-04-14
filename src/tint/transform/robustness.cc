@@ -28,9 +28,9 @@
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/value_expression.h"
-#include "src/tint/switch.h"
 #include "src/tint/transform/utils/hoist_to_decl_before.h"
 #include "src/tint/type/reference.h"
+#include "src/tint/utils/switch.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::transform::Robustness);
 TINT_INSTANTIATE_TYPEINFO(tint::transform::Robustness::Config);

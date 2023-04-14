@@ -280,7 +280,6 @@ list(APPEND TINT_LIB_SRCS
   resolver/validator.cc
   resolver/validator.h
   scope_stack.h
-  switch.h
   sem/array_count.cc
   sem/array_count.h
   sem/behavior.cc
@@ -535,6 +534,7 @@ list(APPEND TINT_LIB_SRCS
   utils/string.h
   utils/string_stream.cc
   utils/string_stream.h
+  utils/switch.h
   utils/traits.h
   utils/unique_allocator.h
   utils/unique_vector.h
@@ -968,7 +968,6 @@ if(TINT_BUILD_TESTS)
     sem/struct_test.cc
     sem/value_expression_test.cc
     source_test.cc
-    switch_test.cc
     symbol_table_test.cc
     symbol_test.cc
     test_main.cc
@@ -1015,6 +1014,7 @@ if(TINT_BUILD_TESTS)
     utils/slice_test.cc
     utils/string_stream_test.cc
     utils/string_test.cc
+    utils/switch_test.cc
     utils/traits_test.cc
     utils/transform_test.cc
     utils/unicode_test.cc
@@ -1471,7 +1471,7 @@ if(TINT_BUILD_BENCHMARKS)
   endif()
 
   list(APPEND TINT_BENCHMARK_SRCS
-    "switch_bench.cc"
+    "utils/switch_bench.cc"
     "bench/benchmark.cc"
     "reader/wgsl/parser_bench.cc"
   )

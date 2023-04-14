@@ -14,11 +14,11 @@
 
 #include "src/tint/constant/value.h"
 
-#include "src/tint/switch.h"
 #include "src/tint/type/array.h"
 #include "src/tint/type/matrix.h"
 #include "src/tint/type/struct.h"
 #include "src/tint/type/vector.h"
+#include "src/tint/utils/switch.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::constant::Value);
 

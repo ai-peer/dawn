@@ -14,7 +14,6 @@
 
 #include "src/tint/type/type.h"
 
-#include "src/tint/switch.h"
 #include "src/tint/type/abstract_float.h"
 #include "src/tint/type/abstract_int.h"
 #include "src/tint/type/array.h"
@@ -30,6 +29,7 @@
 #include "src/tint/type/texture.h"
 #include "src/tint/type/u32.h"
 #include "src/tint/type/vector.h"
+#include "src/tint/utils/switch.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::type::Type);
 

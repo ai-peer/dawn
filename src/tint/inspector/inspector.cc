@@ -39,7 +39,6 @@
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/struct.h"
 #include "src/tint/sem/variable.h"
-#include "src/tint/switch.h"
 #include "src/tint/type/array.h"
 #include "src/tint/type/bool.h"
 #include "src/tint/type/depth_multisampled_texture.h"
@@ -57,6 +56,7 @@
 #include "src/tint/type/void.h"
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/string.h"
+#include "src/tint/utils/switch.h"
 #include "src/tint/utils/unique_vector.h"
 
 namespace tint::inspector {

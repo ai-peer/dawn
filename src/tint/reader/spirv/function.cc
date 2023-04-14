@@ -33,13 +33,13 @@
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/builtin/builtin_value.h"
 #include "src/tint/builtin/function.h"
-#include "src/tint/switch.h"
 #include "src/tint/transform/spirv_atomic.h"
 #include "src/tint/type/depth_texture.h"
 #include "src/tint/type/sampled_texture.h"
 #include "src/tint/type/texture_dimension.h"
 #include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/hashset.h"
+#include "src/tint/utils/switch.h"
 
 // Terms:
 //    CFG: the control flow graph of the function, where basic blocks are the

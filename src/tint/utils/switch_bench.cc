@@ -16,7 +16,7 @@
 
 #include "benchmark/benchmark.h"
 
-#include "src/tint/switch.h"
+#include "src/tint/utils/switch.h"
 
 namespace tint {
 namespace {

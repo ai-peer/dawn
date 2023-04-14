@@ -18,7 +18,7 @@
 
 #include "src/tint/ast/type_decl.h"
 #include "src/tint/program_builder.h"
-#include "src/tint/switch.h"
+#include "src/tint/utils/switch.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Module);
 
