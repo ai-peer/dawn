@@ -277,6 +277,10 @@ DAWN_NATIVE_EXPORT uint64_t GetAllocatedSizeForTesting(WGPUBuffer buffer);
 DAWN_NATIVE_EXPORT bool BindGroupLayoutBindingsEqualForTesting(WGPUBindGroupLayout a,
                                                                WGPUBindGroupLayout b);
 
+DAWN_NATIVE_EXPORT void NullAdapterSetSupportedFeaturesForTesting(
+    WGPUAdapter adapter,
+    const std::vector<WGPUFeatureName>& requiredFeatures);
+
 }  // namespace dawn::native
 
 // TODO(dawn:824): Remove once the deprecation period is passed.
