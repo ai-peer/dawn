@@ -18,7 +18,6 @@
 #include <utility>
 #include <variant>
 
-#include "src/tint/debug.h"
 #include "src/tint/utils/string_stream.h"
 
 namespace tint::utils {
@@ -77,50 +76,31 @@ struct [[nodiscard]] Result {
     }
 
     /// @returns true if the result was a success
-    operator bool() const {
-        Validate();
-        return std::holds_alternative<SUCCESS_TYPE>(value);
-    }
+    operator bool() const { return std::holds_alternative<SUCCESS_TYPE>(value); }
 
     /// @returns true if the result was a failure
-    bool operator!() const {
-        Validate();
-        return std::holds_alternative<FAILURE_TYPE>(value);
-    }
+    bool operator!() const { return std::holds_alternative<FAILURE_TYPE>(value); }
 
     /// @returns the success value
     /// @warning attempting to call this when the Result holds an failure will result in UB.
-    const SUCCESS_TYPE* operator->() const {
-        Validate();
-        return &(Get());
-    }
+    const SUCCESS_TYPE* operator->() const { return &(Get()); }
 
     /// @returns the success value
     /// @warning attempting to call this when the Result holds an failure value will result in UB.
-    const SUCCESS_TYPE& Get() const {
-        Validate();
-        return std::get<SUCCESS_TYPE>(value);
-    }
+    const SUCCESS_TYPE& Get() const { return std::get<SUCCESS_TYPE>(value); }
 
     /// @returns the success value
     /// @warning attempting to call this when the Result holds an failure value will result in UB.
-    SUCCESS_TYPE&& Move() {
-        Validate();
-        return std::get<SUCCESS_TYPE>(std::move(value));
-    }
+    SUCCESS_TYPE&& Move() { return std::get<SUCCESS_TYPE>(std::move(value)); }
 
     /// @returns the failure value
     /// @warning attempting to call this when the Result holds a success value will result in UB.
-    const FAILURE_TYPE& Failure() const {
-        Validate();
-        return std::get<FAILURE_TYPE>(value);
-    }
+    const FAILURE_TYPE& Failure() const { return std::get<FAILURE_TYPE>(value); }
 
     /// Equality operator
     /// @param val the value to compare this Result to
     /// @returns true if this result holds a success value equal to `value`
     bool operator==(SUCCESS_TYPE val) const {
-        Validate();
         if (auto* v = std::get_if<SUCCESS_TYPE>(&value)) {
             return *v == val;
         }
@@ -131,7 +111,6 @@ struct [[nodiscard]] Result {
     /// @param val the value to compare this Result to
     /// @returns true if this result holds a failure value equal to `value`
     bool operator==(FAILURE_TYPE val) const {
-        Validate();
         if (auto* v = std::get_if<FAILURE_TYPE>(&value)) {
             return *v == val;
         }
@@ -139,8 +118,6 @@ struct [[nodiscard]] Result {
     }
 
   private:
-    void Validate() const { TINT_ASSERT(Utils, !std::holds_alternative<std::monostate>(value)); }
-
     /// The result. Either a success of failure value.
     std::variant<std::monostate, SUCCESS_TYPE, FAILURE_TYPE> value;
 };

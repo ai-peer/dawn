@@ -59,7 +59,6 @@ TEST(Hashset, AddMany) {
         ASSERT_TRUE(set.Add(prime)) << "i: " << i;
         ASSERT_FALSE(set.Add(prime)) << "i: " << i;
         ASSERT_EQ(set.Count(), i + 1);
-        set.ValidateIntegrity();
     }
     ASSERT_EQ(set.Count(), kPrimes.size());
     for (int prime : kPrimes) {
@@ -136,7 +135,6 @@ TEST(Hashset, Soak) {
                 break;
             }
         }
-        set.ValidateIntegrity();
     }
 }
 

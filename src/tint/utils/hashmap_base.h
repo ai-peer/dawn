@@ -21,7 +21,6 @@
 #include <tuple>
 #include <utility>
 
-#include "src/tint/debug.h"
 #include "src/tint/utils/hash.h"
 #include "src/tint/utils/vector.h"
 
@@ -383,22 +382,6 @@ class HashmapBase {
     /// @returns an iterator to the end of the map.
     Iterator end() { return Iterator{slots_.end(), slots_.end()}; }
 
-    /// A debug function for checking that the map is in good health.
-    /// Asserts if the map is corrupted.
-    void ValidateIntegrity() const {
-        size_t num_alive = 0;
-        for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
-            const auto& slot = slots_[slot_idx];
-            if (slot.entry.has_value()) {
-                num_alive++;
-                auto const [index, hash] = Hash(KeyOf(*slot.entry));
-                TINT_ASSERT(Utils, hash == slot.hash);
-                TINT_ASSERT(Utils, slot_idx == Wrap(index + slot.distance));
-            }
-        }
-        TINT_ASSERT(Utils, num_alive == count_);
-    }
-
   protected:
     /// The behaviour of Put() when an entry already exists with the given key.
     enum class PutMode {
@@ -485,9 +468,6 @@ class HashmapBase {
 
             index = (index == count - 1) ? 0 : index + 1;
         }
-
-        tint::diag::List diags;
-        TINT_ICE(Utils, diags) << "HashmapBase::Put() looped entire map without finding a slot";
         return PutResult{};
     }
 
@@ -535,8 +515,6 @@ class HashmapBase {
             index = (index == count - 1) ? 0 : index + 1;
         }
 
-        tint::diag::List diags;
-        TINT_ICE(Utils, diags) << "HashmapBase::IndexOf() looped entire map without finding a slot";
         return {/* found */ false, /* index */ 0};
     }
 
