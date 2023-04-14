@@ -20,7 +20,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace tint::traits {
+namespace tint::utils::traits {
 
 /// Convience type definition for std::decay<T>::type
 template <typename T>
@@ -183,6 +183,6 @@ static constexpr bool IsStringLike =
     std::is_same_v<Decay<T>, std::string> || std::is_same_v<Decay<T>, std::string_view> ||
     std::is_same_v<Decay<T>, const char*>;
 
-}  // namespace tint::traits
+}  // namespace tint::utils::traits
 
 #endif  // SRC_TINT_TRAITS_H_
