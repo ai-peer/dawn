@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_CASTABLE_H_
-#define SRC_TINT_CASTABLE_H_
+#ifndef SRC_TINT_UTILS_CASTABLE_H_
+#define SRC_TINT_UTILS_CASTABLE_H_
 
 #include <stdint.h>
 #include <functional>
@@ -534,4 +534,4 @@ using CastableCommonBase = detail::CastableCommonBase<TYPES...>;
 
 TINT_CASTABLE_POP_DISABLE_WARNINGS();
 
-#endif  // SRC_TINT_CASTABLE_H_
+#endif  // SRC_TINT_UTILS_CASTABLE_H_

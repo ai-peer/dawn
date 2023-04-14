@@ -21,10 +21,10 @@
 #include <utility>
 #include <vector>
 
-#include "src/tint/castable.h"
 #include "src/tint/debug.h"
 #include "src/tint/program_id.h"
 #include "src/tint/symbol.h"
+#include "src/tint/utils/castable.h"
 #include "src/tint/utils/compiler_macros.h"
 #include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/hashset.h"
