@@ -177,6 +177,7 @@ class Adapter : public AdapterBase {
 
     // AdapterBase Implementation
     bool SupportsExternalImages() const override;
+    wgpu::TextureUsage GetSupportedSurfaceUsages(const Surface* surface) const override;
 
     // Used for the tests that intend to use an adapter without all features enabled.
     using AdapterBase::SetSupportedFeaturesForTesting;
