@@ -102,6 +102,9 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
       "Public API methods (except encoding) will have implicit device synchronization. So they "
       "will be safe to be used on multiple threads.",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=1662", FeatureInfo::FeatureState::Stable}},
+    {Feature::ReadableSwapChain,
+     {"readable-swapchain", "Allows TextureBinding usage when creating SwapChain.",
+      "https://bugs.chromium.org/p/dawn/issues/detail?id=1760", FeatureInfo::FeatureState::Stable}},
 }};
 
 Feature FromAPIFeature(wgpu::FeatureName feature) {
@@ -146,6 +149,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::BGRA8UnormStorage;
         case wgpu::FeatureName::ImplicitDeviceSynchronization:
             return Feature::ImplicitDeviceSynchronization;
+        case wgpu::FeatureName::ReadableSwapChain:
+            return Feature::ReadableSwapChain;
     }
     return Feature::InvalidEnum;
 }
@@ -186,6 +191,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::BGRA8UnormStorage;
         case Feature::ImplicitDeviceSynchronization:
             return wgpu::FeatureName::ImplicitDeviceSynchronization;
+        case Feature::ReadableSwapChain:
+            return wgpu::FeatureName::ReadableSwapChain;
 
         case Feature::EnumCount:
             break;
