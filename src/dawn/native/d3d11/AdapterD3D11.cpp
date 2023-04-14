@@ -84,6 +84,7 @@ MaybeError Adapter::InitializeImpl() {
 
 void Adapter::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::TextureCompressionBC);
+    EnableFeature(Feature::ReadableSwapChain);
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {

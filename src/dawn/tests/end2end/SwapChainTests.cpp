@@ -14,8 +14,11 @@
 
 #include "dawn/tests/DawnTest.h"
 
+#include <thread>
+
 #include "dawn/common/Constants.h"
 #include "dawn/common/Log.h"
+#include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 #include "webgpu/webgpu_glfw.h"
 
@@ -235,4 +238,98 @@ TEST_P(SwapChainTests, SwitchingDevice) {
     }
 }
 
+class SwapChainSamplingTests : public SwapChainTests {
+  protected:
+    void SetUp() override {
+        SwapChainTests::SetUp();
+
+        // Skip all tests if readable swap chain feature is not supported
+        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::ReadableSwapChain}));
+    }
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> requiredFeatures = SwapChainTests::GetRequiredFeatures();
+        if (SupportsFeatures({wgpu::FeatureName::ReadableSwapChain})) {
+            requiredFeatures.push_back(wgpu::FeatureName::ReadableSwapChain);
+        }
+        return requiredFeatures;
+    }
+
+    void SampleTexture(wgpu::TextureView view,
+                       uint32_t width,
+                       uint32_t height,
+                       utils::RGBA8 expectedColor) {
+        wgpu::TextureDescriptor texDescriptor;
+        texDescriptor.size = {width, height, 1};
+        texDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+        texDescriptor.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc |
+                              wgpu::TextureUsage::CopyDst;
+        texDescriptor.mipLevelCount = 1;
+        texDescriptor.sampleCount = 1;
+
+        wgpu::Texture dstTexture = device.CreateTexture(&texDescriptor);
+        wgpu::TextureView dstView = dstTexture.CreateView();
+
+        // Create a render pipeline to blit |view| into |dstView|.
+        utils::ComboRenderPipelineDescriptor pipelineDesc;
+        pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+            @vertex
+            fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
+                var pos = array(
+                                            vec2f(-1.0, -1.0),
+                                            vec2f(-1.0,  1.0),
+                                            vec2f( 1.0, -1.0),
+                                            vec2f(-1.0,  1.0),
+                                            vec2f( 1.0, -1.0),
+                                            vec2f( 1.0,  1.0));
+                return vec4f(pos[VertexIndex], 0.0, 1.0);
+            }
+        )");
+        pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+            @group(0) @binding(0) var texture : texture_2d<f32>;
+
+            @fragment
+            fn main(@builtin(position) coord: vec4f) -> @location(0) vec4f {
+                return textureLoad(texture, vec2i(coord.xy), 0);
+            }
+        )");
+        pipelineDesc.cTargets[0].format = texDescriptor.format;
+
+        // Submit a render pass to perform the blit from |view| to |dstView|.
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
+
+            wgpu::BindGroup bindGroup =
+                utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, view}});
+
+            utils::ComboRenderPassDescriptor renderPassInfo({dstView});
+
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassInfo);
+            pass.SetPipeline(pipeline);
+            pass.SetBindGroup(0, bindGroup);
+            pass.Draw(6);
+            pass.End();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        EXPECT_TEXTURE_EQ(expectedColor, dstTexture, {0, 0});
+        EXPECT_TEXTURE_EQ(expectedColor, dstTexture, {width - 1, height - 1});
+    }
+};
+
+// Test that sampling from swapchain is supported.
+TEST_P(SwapChainSamplingTests, SamplingFromSwapChain) {
+    wgpu::SwapChainDescriptor desc = baseDescriptor;
+    desc.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment;
+    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &desc);
+    ClearTexture(swapchain.GetCurrentTextureView(), {1.0, 0.0, 0.0, 1.0});
+
+    SampleTexture(swapchain.GetCurrentTextureView(), desc.width, desc.height, utils::RGBA8::kRed);
+
+    swapchain.Present();
+}
+
 DAWN_INSTANTIATE_TEST(SwapChainTests, MetalBackend(), VulkanBackend());
+DAWN_INSTANTIATE_TEST(SwapChainSamplingTests, MetalBackend(), VulkanBackend());

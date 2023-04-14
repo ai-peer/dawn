@@ -57,9 +57,22 @@ MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
                     "Format (%s) is not %s, which is (currently) the only accepted format.",
                     descriptor->format, kRequireSwapChainFormat);
 
-    DAWN_INVALID_IF(descriptor->usage != wgpu::TextureUsage::RenderAttachment,
-                    "Usage (%s) is not %s, which is (currently) the only accepted usage.",
-                    descriptor->usage, wgpu::TextureUsage::RenderAttachment);
+    wgpu::TextureUsage validUsages = wgpu::TextureUsage::RenderAttachment;
+    if (device->HasFeature(Feature::ReadableSwapChain)) {
+        validUsages |= wgpu::TextureUsage::TextureBinding;
+    } else {
+        DAWN_INVALID_IF((descriptor->usage & wgpu::TextureUsage::TextureBinding) != 0,
+                        "Usage (%s) requires %s.", wgpu::TextureUsage::TextureBinding,
+                        wgpu::FeatureName::ReadableSwapChain);
+    }
+
+    DAWN_INVALID_IF((descriptor->usage & wgpu::TextureUsage::RenderAttachment) == 0,
+                    "Usage (%s) doesn't include %s.", descriptor->usage,
+                    wgpu::TextureUsage::RenderAttachment);
+
+    DAWN_INVALID_IF((descriptor->usage | validUsages) != validUsages,
+                    "Usage (%s) are not supported, %s are (currently) the only accepted usage.",
+                    descriptor->usage, validUsages);
 
     DAWN_INVALID_IF(descriptor->width == 0 || descriptor->height == 0,
                     "Swap Chain size (width: %u, height: %u) is empty.", descriptor->width,

@@ -121,6 +121,7 @@ void Adapter::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::IndirectFirstInstance);
     EnableFeature(Feature::RG11B10UfloatRenderable);
     EnableFeature(Feature::DepthClipControl);
+    EnableFeature(Feature::ReadableSwapChain);
 
     if (AreTimestampQueriesSupported()) {
         EnableFeature(Feature::TimestampQuery);
