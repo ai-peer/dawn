@@ -33,6 +33,7 @@ class Adapter : public AdapterBase {
 
     // AdapterBase Implementation
     bool SupportsExternalImages() const override;
+    wgpu::TextureUsage GetSupportedSurfaceUsages(const Surface* surface) const override;
 
   private:
     MaybeError InitializeImpl() override;

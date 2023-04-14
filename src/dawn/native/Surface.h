@@ -48,6 +48,8 @@ class Surface final : public ErrorMonad {
 
     Surface(InstanceBase* instance, const SurfaceDescriptor* descriptor);
 
+    wgpu::TextureUsage APIGetSupportedUsages(AdapterBase* adapter) const;
+
     void SetAttachedSwapChain(SwapChainBase* swapChain);
     SwapChainBase* GetAttachedSwapChain();
 

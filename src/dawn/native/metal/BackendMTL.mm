@@ -289,6 +289,10 @@ class Adapter : public AdapterBase {
         return true;
     }
 
+    wgpu::TextureUsage GetSupportedSurfaceUsages(const Surface* surface) const override {
+        return wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding;
+    }
+
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
                                                     const TogglesState& deviceToggles) override {
