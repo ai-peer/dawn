@@ -228,7 +228,8 @@
             "DeviceCreateErrorTexture",
             "DeviceGetAdapter",
             "DeviceGetQueue",
-            "DeviceInjectError"
+            "DeviceInjectError",
+            "SurfaceGetSupportedUsages"
         ],
         "client_special_objects": [
             "Adapter",
@@ -238,6 +239,7 @@
             "QuerySet",
             "Queue",
             "ShaderModule",
+            "Surface",
             "Texture"
         ],
         "server_custom_pre_handler_commands": [

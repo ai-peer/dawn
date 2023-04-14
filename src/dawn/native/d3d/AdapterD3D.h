@@ -34,6 +34,10 @@ class Adapter : public AdapterBase {
     IDXGIAdapter3* GetHardwareAdapter() const;
     Backend* GetBackend() const;
 
+    // AdapterBase implementation
+    ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsages(
+        const Surface* surface) const override;
+
   protected:
     MaybeError InitializeImpl() override;
 

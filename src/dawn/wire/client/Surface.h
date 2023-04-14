@@ -1,4 +1,4 @@
-// Copyright 2019 The Dawn Authors
+// Copyright 2023 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,21 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_WIRE_CLIENT_APIOBJECTS_H_
-#define SRC_DAWN_WIRE_CLIENT_APIOBJECTS_H_
+#ifndef SRC_DAWN_WIRE_CLIENT_SURFACE_H_
+#define SRC_DAWN_WIRE_CLIENT_SURFACE_H_
 
 #include "dawn/wire/client/ObjectBase.h"
 
-#include "dawn/wire/client/Adapter.h"
-#include "dawn/wire/client/Buffer.h"
-#include "dawn/wire/client/Device.h"
-#include "dawn/wire/client/Instance.h"
-#include "dawn/wire/client/QuerySet.h"
-#include "dawn/wire/client/Queue.h"
-#include "dawn/wire/client/ShaderModule.h"
-#include "dawn/wire/client/Surface.h"
-#include "dawn/wire/client/Texture.h"
+namespace dawn::wire::client {
 
-#include "dawn/wire/client/ApiObjects_autogen.h"
+class Device;
 
-#endif  // SRC_DAWN_WIRE_CLIENT_APIOBJECTS_H_
+class Surface final : public ObjectBase {
+  public:
+    explicit Surface(const ObjectBaseParams& params);
+    ~Surface() override;
+
+    WGPUTextureUsage GetSupportedUsages(WGPUAdapter);  // Not implemented in the wire.
+};
+
+}  // namespace dawn::wire::client
+
+#endif

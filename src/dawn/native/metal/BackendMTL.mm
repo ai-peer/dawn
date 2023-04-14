@@ -289,6 +289,13 @@ class Adapter : public AdapterBase {
         return true;
     }
 
+    ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsages(
+        const Surface* surface) const override {
+        wgpu::TextureUsage usages =
+            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding;
+        return usages;
+    }
+
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
                                                     const TogglesState& deviceToggles) override {
@@ -517,6 +524,7 @@ class Adapter : public AdapterBase {
         EnableFeature(Feature::ShaderF16);
         EnableFeature(Feature::RG11B10UfloatRenderable);
         EnableFeature(Feature::BGRA8UnormStorage);
+        EnableFeature(Feature::SurfaceCapabilities);
     }
 
     void InitializeVendorArchitectureImpl() override {
