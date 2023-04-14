@@ -77,6 +77,8 @@ class AdapterBase : public RefCounted {
 
     virtual bool SupportsExternalImages() const = 0;
 
+    virtual wgpu::TextureUsage GetSupportedSurfaceUsages(const Surface* surface) const = 0;
+
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
     std::string mVendorName;

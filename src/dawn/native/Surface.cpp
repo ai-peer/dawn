@@ -313,4 +313,10 @@ uint32_t Surface::GetXWindow() const {
     return mXWindow;
 }
 
+wgpu::TextureUsage Surface::APIGetSupportedUsages(AdapterBase* adapter) const {
+    ASSERT(!IsError());
+
+    return adapter->GetSupportedSurfaceUsages(this);
+}
+
 }  // namespace dawn::native
