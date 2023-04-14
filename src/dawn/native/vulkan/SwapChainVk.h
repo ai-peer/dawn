@@ -23,6 +23,7 @@
 
 namespace dawn::native::vulkan {
 
+class Adapter;
 class Device;
 class Texture;
 struct VulkanSurfaceInfo;
@@ -33,6 +34,10 @@ class SwapChain : public SwapChainBase {
                                                 Surface* surface,
                                                 SwapChainBase* previousSwapChain,
                                                 const SwapChainDescriptor* descriptor);
+
+    static ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsages(const Adapter* adapter,
+                                                                       const Surface* surface);
+
     ~SwapChain() override;
 
   private:
