@@ -147,6 +147,8 @@ void Adapter::InitializeSupportedFeaturesImpl() {
     if (mFunctions.IsGLExtensionSupported("GL_AMD_gpu_shader_half_float")) {
         EnableFeature(Feature::ShaderF16);
     }
+
+    EnableFeature(Feature::ReadableSwapChain);
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
