@@ -101,7 +101,7 @@ def _CheckNonInclusiveLanguage(input_api, output_api, source_file_filter=None):
 
 def _NonInclusiveFileFilter(file):
     filter_list = [
-        "Doxyfile",  # References to main pages
+        "Doxyfile",  # References to main pages foo
         "PRESUBMIT.py",  # Non-inclusive language check data
         "PRESUBMIT.py.tint",  # Non-inclusive language check data
         "docs/dawn/debug_markers.md",  # External URL
