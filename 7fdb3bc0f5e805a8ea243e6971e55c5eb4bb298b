@@ -16,6 +16,224 @@
       "message": "Hi Austin \u0026 Coretin, I split copy related code from CommandBuffer CL to this CL. PTAL. Thanks.",
       "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88554fce_a05ee23a",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "return directly",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af5d7484_857a394d",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "I\u0027m thinking we should move `CopyFromBuffer` to be a helper function `RecordCopyBufferToBuffer`. \n\nThis usage here is ambiguous. I initially read it as \"copy from destination into source\" which is obviously backward. I could also see reading it the other way as well. We similarly have other RecordCopy... helpers from source to destination in other parts of Dawn.",
+      "range": {
+        "startLine": 82,
+        "startChar": 25,
+        "endLine": 82,
+        "endChar": 52
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f808df_fbeff447",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "I think the EnsureDataInitialized should happen before the ScopedMap.\n\neventually we will zero initialize with GPU copy which will perform better then memset",
+      "range": {
+        "startLine": 96,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 0
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589b15f5_ac4a3af9",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "ditto: initialize before map",
+      "range": {
+        "startLine": 169,
+        "startChar": 16,
+        "endLine": 174,
+        "endChar": 90
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66021158_54f57e8c",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "shouldn\u0027t it always be mappedResource.RowPitch? \n\nand bytesPerRow should be strictly \u003e\u003d to it",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a3d4692_e444cae8",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "may as well return the error inside the switch for now",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 1
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33015635_a5afb9f8",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "D3D11, not GL",
+      "range": {
+        "startLine": 33,
+        "startChar": 63,
+        "endLine": 33,
+        "endChar": 78
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f2d28b_a282fb92",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "this should be called Create, not Get",
+      "range": {
+        "startLine": 294,
+        "startChar": 36,
+        "endLine": 294,
+        "endChar": 60
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f90772_5e0faaef",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "what doesn\u0027t work?",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199b8971_d28b7363",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 1,
+      "message": "what doesn\u0027t work?",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d778e3_48dba9a4",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-15T03:52:29Z",
+      "side": 0,
+      "message": "in order to make the tests run, you need to set `dawn_enable_d3d11\u003dtrue` for the test bots.\n\nYou can do that [here](https://source.chromium.org/chromium/chromium/src/+/main:tools/mb/mb_config.pyl;l\u003d4169?q\u003dmb_config.pyl)",
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
