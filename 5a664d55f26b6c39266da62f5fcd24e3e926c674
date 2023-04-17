@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bda02d0_d17dfff8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:50:02Z",
+      "side": 1,
+      "message": "Could move the body over, and alias these two at `tint::` for now?",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 56
+      },
+      "revId": "5a664d55f26b6c39266da62f5fcd24e3e926c674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
