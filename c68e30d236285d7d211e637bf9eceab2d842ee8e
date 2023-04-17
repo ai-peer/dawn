@@ -16,6 +16,24 @@
       "message": "in order to make the tests run, you need to set `dawn_enable_d3d11\u003dtrue` for the test bots.\n\nYou can do that [here](https://source.chromium.org/chromium/chromium/src/+/main:tools/mb/mb_config.pyl;l\u003d4169?q\u003dmb_config.pyl)",
       "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdb77b9f_9c425467",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 0,
+      "message": "Looks like d3d11 end2end tests are run on win-dawn-rel. I enabled d3d11 backend for standalone dawn build.\n\n[1] https://luci-milo.appspot.com/ui/inv/task-chromium-swarm.appspot.com-619a57dc27a26c11/test-results?sortby\u003d\u0026groupby\u003d",
+      "parentUuid": "f3d778e3_48dba9a4",
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

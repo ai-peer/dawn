@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7cef7f_b829c30a",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88554fce_a05ee23a",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af5d7484_857a394d",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-15T03:52:29Z",
       "side": 1,
       "message": "I\u0027m thinking we should move `CopyFromBuffer` to be a helper function `RecordCopyBufferToBuffer`. \n\nThis usage here is ambiguous. I initially read it as \"copy from destination into source\" which is obviously backward. I could also see reading it the other way as well. We similarly have other RecordCopy... helpers from source to destination in other parts of Dawn.",
+      "range": {
+        "startLine": 82,
+        "startChar": 25,
+        "endLine": 82,
+        "endChar": 52
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f63111_6dd93abe",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af5d7484_857a394d",
       "range": {
         "startLine": 82,
         "startChar": 25,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3392715d_3e6b0fbf",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "It is hard to say. I don\u0027t see D3D11 has a way to use GPU to clear a buffer easily. We have to use copy. It needs extra zero buffer as copy source, and GPU need read from one buffer and then write to another buffer. And it need synchronize between GPU and CPU. However memset() only need write one buffer.\n\nAnd right now, if the buffer is not mapped, UpdateSubresource() will be used to clear the buffer. The performance is worse than memset().",
+      "parentUuid": "88f808df_fbeff447",
+      "range": {
+        "startLine": 96,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 0
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "589b15f5_ac4a3af9",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-04-15T03:52:29Z",
       "side": 1,
       "message": "ditto: initialize before map",
+      "range": {
+        "startLine": 169,
+        "startChar": 16,
+        "endLine": 174,
+        "endChar": 90
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71bc111b_b440f579",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "Same.",
+      "parentUuid": "589b15f5_ac4a3af9",
       "range": {
         "startLine": 169,
         "startChar": 16,
@@ -135,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0aaf139b_e9fc4e4b",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "Changed it to `uint32_t memcpySize \u003d blockInfo.byteSize * copy-\u003ecopySize.width;`",
+      "parentUuid": "66021158_54f57e8c",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a3d4692_e444cae8",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
@@ -146,6 +266,30 @@
       "writtenOn": "2023-04-15T03:52:29Z",
       "side": 1,
       "message": "may as well return the error inside the switch for now",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 1
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a4f0ea5_c14608d7",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a3d4692_e444cae8",
       "range": {
         "startLine": 283,
         "startChar": 0,
@@ -179,6 +323,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1caf52_3b035d00",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33015635_a5afb9f8",
+      "range": {
+        "startLine": 33,
+        "startChar": 63,
+        "endLine": 33,
+        "endChar": 78
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9f2d28b_a282fb92",
@@ -192,6 +360,30 @@
       "writtenOn": "2023-04-15T03:52:29Z",
       "side": 1,
       "message": "this should be called Create, not Get",
+      "range": {
+        "startLine": 294,
+        "startChar": 36,
+        "endLine": 294,
+        "endChar": 60
+      },
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "834fa234_5120a803",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9f2d28b_a282fb92",
       "range": {
         "startLine": 294,
         "startChar": 36,
