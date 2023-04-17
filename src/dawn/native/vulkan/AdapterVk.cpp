@@ -326,8 +326,6 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
                                maxUniformBuffersPerShaderStage);
     CHECK_AND_SET_V1_MAX_LIMIT(maxUniformBufferRange, maxUniformBufferBindingSize);
     CHECK_AND_SET_V1_MAX_LIMIT(maxStorageBufferRange, maxStorageBufferBindingSize);
-    CHECK_AND_SET_V1_MAX_LIMIT(maxFragmentCombinedOutputResources,
-                               maxFragmentCombinedOutputResources);
 
     CHECK_AND_SET_V1_MIN_LIMIT(minUniformBufferOffsetAlignment, minUniformBufferOffsetAlignment);
     CHECK_AND_SET_V1_MIN_LIMIT(minStorageBufferOffsetAlignment, minStorageBufferOffsetAlignment);
