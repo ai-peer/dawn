@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d80e21_60825837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-17T15:12:57Z",
+      "side": 1,
+      "message": "One day it\u0027ll be cool to have perfmon run these too - for now, just setting it up so you can build with either CMake or GN. Going to build but not run them on Dawn CQ",
+      "revId": "abe85f59a5984fb4228fb3b2deca7276747b86ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

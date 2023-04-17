@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f4590bb_3de0d15a",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-17T15:12:57Z",
+      "side": 0,
+      "message": "I moved the path because I wanted to put it in the same place that Chrome has it. So the GN build will work in a chromium checkout.",
+      "range": {
+        "startLine": 207,
+        "startChar": 2,
+        "endLine": 210,
+        "endChar": 4
+      },
+      "revId": "3e7a114a6e3e2d9594d8ede45fb404339dc4cbfd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
