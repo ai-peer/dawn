@@ -413,6 +413,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a576d0a5_cc6cfc22",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T16:40:42Z",
+      "side": 1,
+      "message": "I think it is because ID3D11DeviceContext::Map() will check if the buffer is being used by GPU, and blocks if necessary. So we don\u0027t need to track buffer\u0027s last usage and wait by ourselves.",
+      "parentUuid": "f8f90772_5e0faaef",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "199b8971_d28b7363",
         "filename": "src/dawn/tests/end2end/BufferTests.cpp",
         "patchSetId": 5
@@ -424,6 +442,24 @@
       "writtenOn": "2023-04-15T03:52:29Z",
       "side": 1,
       "message": "what doesn\u0027t work?",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23d60dff_a651b4ff",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T16:40:42Z",
+      "side": 1,
+      "message": "Same reason here.",
+      "parentUuid": "199b8971_d28b7363",
       "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
