@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a1141a_20f155dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-17T23:57:26Z",
+      "side": 1,
+      "message": "Still waiting on the other CLs to be rolled/submitted, but figured might as well send it out for review now.",
+      "revId": "baae375a96de3339cd1afd7fe4ee62f9164b1edb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
