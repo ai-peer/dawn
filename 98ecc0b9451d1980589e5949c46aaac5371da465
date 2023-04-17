@@ -34,6 +34,23 @@
       "parentUuid": "3d7ff629_aac3e92b",
       "revId": "98ecc0b9451d1980589e5949c46aaac5371da465",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd550248_97267cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-17T20:39:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "98ecc0b9451d1980589e5949c46aaac5371da465",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
