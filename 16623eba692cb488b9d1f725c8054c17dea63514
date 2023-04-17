@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "309a2ef3_38ecc4b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-17T23:24:33Z",
+      "side": 1,
+      "message": "Looking at the Vulkan implementation, it appears the problem is that if the usage isn\u0027t directly supported by the swapchain, we do a blit. That blit doesn\u0027t always work because the blit need TRANSFER_DST. So then in that case we need to use a shader to do the blit.\n\nSo it looks like it will all be possible on Vulkan - but do we want to do the blits?\nAn alternative here could be to expose a way to query what WGPUUsages the WGPUSurface supports - then the embedder has full control about doing blits before presentation.",
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d17c68_2c3ba87f",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-17T23:24:33Z",
+      "side": 1,
+      "message": "readable implies it would work with CopySrc and StorageBinding as well. Could we have a test for that too?\n\nIf it doesn\u0027t work, perhaps the feature should be renamed.",
+      "range": {
+        "startLine": 61,
+        "startChar": 36,
+        "endLine": 62,
+        "endChar": 57
+      },
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86784553_85ce230b",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-17T23:24:33Z",
+      "side": 1,
+      "message": "does it work on D3D11/D3D12/GL/GLES?\n\nYou\u0027ve added the code to enable the feature, but not test. I\u0027d expect them to come together",
+      "range": {
+        "startLine": 334,
+        "startChar": 46,
+        "endLine": 334,
+        "endChar": 77
+      },
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
