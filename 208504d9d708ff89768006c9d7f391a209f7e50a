@@ -159,6 +159,24 @@
       "parentUuid": "885e0f99_41955cd3",
       "revId": "208504d9d708ff89768006c9d7f391a209f7e50a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee6fa75d_f221b7ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T21:38:29Z",
+      "side": 1,
+      "message": "\u003e Looks like it\u0027s due to on my windows, it picks up the dxc from vulkan path for hlsl-dxc validation\n`hlsl-dxc validation ENABLED (C:\\VulkanSDK\\1.2.162.1\\Bin\\dxc.exe)`\n\nThat\u0027s a first for us, and I didn\u0027t know the VulkanSDK shipped a dxc binary with HLSL omitted. We can add a `--fxc` path, but that would be annoying for you to remember to specify. Maybe there\u0027s something we could detect and warn about here.\n\n\u003e The other problem is, if using tint as a standalone parser for wgsl, it could only takes in vertex stage only wgsl and output it as hlsl (e.g. the end2end tests case). With no interstage locations used for next stage labeled, the output are always truncated, which doesn\u0027t seem the appropriate approach for this case.\n\nAgreed - that wouldn\u0027t be great.\n\n\u003e My current thought is to add a new: `boolean truncate_unused_interstage` to `src/tint/writer/hlsl/generator.h`. Dawn will always turn this flag on to run the truncate transform. Tint as a standalone parser will have this flag set to false by default to avoid unintended all-time truncating.\n\nSounds like a good solution to me.",
+      "parentUuid": "04ccb56d_3fc32652",
+      "revId": "208504d9d708ff89768006c9d7f391a209f7e50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
