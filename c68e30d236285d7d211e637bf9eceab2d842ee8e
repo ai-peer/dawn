@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a2ca86f_3beae9f7",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Line 66 uses `IsSubset(usage, kStagingUsages)`. So CopySrc|Storage will use `DEFAULT` instead of `STAGING`. And compute shader copies can use those buffer directly.",
+      "parentUuid": "9dd6af97_c4c10425",
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "487472cc_47a975a3",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cabfd0a_c6fade0c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Since Storage|Copy will be allocated as `DEFAULT`. Here is only for `Map|Copy` or `Copy` buffers. We use Map() for B2T and T2B copy temporarily. After landing this CL and rest command buffers CLs, many end2end tests can be enabled. So Intel can join to implement those optimizations and fix issues easily.",
+      "parentUuid": "487472cc_47a975a3",
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8078e7a6_b89e8e86",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 22
@@ -48,6 +84,30 @@
       "writtenOn": "2023-04-15T03:12:17Z",
       "side": 1,
       "message": "depending on the use, we can be more discerning about which type of map we\u0027re doing. There\u0027s wgpu::MapMode::Read/Write.",
+      "range": {
+        "startLine": 201,
+        "startChar": 69,
+        "endLine": 201,
+        "endChar": 89
+      },
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53164e47_a8f2aded",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Every time when the buffer is about to be used, we will call EnsureInitializationData() which needs write access even for read data. So always Map() with READ_WRITE makes code simpler. And in follow up, we can check the performance and change it if it is necessary.",
+      "parentUuid": "8078e7a6_b89e8e86",
       "range": {
         "startLine": 201,
         "startChar": 69,
@@ -81,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2af7e8_b7911ee4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3fc76a_77306a6e",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 70
+      },
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1f7e28a_b3b3cf6c",
@@ -94,6 +178,30 @@
       "writtenOn": "2023-04-15T03:12:17Z",
       "side": 1,
       "message": "If you really don\u0027t want to pass the command context, it would be better to memset right here; we shouldn\u0027t pass nullptr since downstream code generally assumes that arguments are not null.\n\nWe already get the command context inside MapInternal - so you could alternatively get it first, and pass it in as an argument to MapInternal.",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 64
+      },
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d933f7_52f3fbac",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1f7e28a_b3b3cf6c",
       "range": {
         "startLine": 230,
         "startChar": 4,
@@ -127,6 +235,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60cef7f_495816da",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de2d5285_54f63ca7",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 40
+      },
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdbe2866_d4a4388b",
@@ -140,6 +272,30 @@
       "writtenOn": "2023-04-15T03:12:17Z",
       "side": 1,
       "message": "instead of having ScopedMap set mMappedData (slight action at a distance), it would be better if you could get to the data directly on ScopedMap. That way it\u0027s clear that you\u0027re using the data precisely from that mapping.\n\ni.e.\n```\nScopedMap scopedMap...;\nif (scopedMap) {\n  memcpy(scopedMap.GetData(), ...);\n}\n```",
+      "range": {
+        "startLine": 429,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 20
+      },
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "148741cf_863f8c64",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdbe2866_d4a4388b",
       "range": {
         "startLine": 429,
         "startChar": 4,

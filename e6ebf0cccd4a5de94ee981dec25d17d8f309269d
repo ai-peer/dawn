@@ -248,6 +248,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbde0354_611e0fb3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T11:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a63d6276_3fce3ec7",
+      "range": {
+        "startLine": 143,
+        "startChar": 30,
+        "endLine": 143,
+        "endChar": 51
+      },
+      "revId": "e6ebf0cccd4a5de94ee981dec25d17d8f309269d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f59e8975_03e1bd6e",
