@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d89b7b10_4d045e64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-17T22:52:22Z",
+      "side": 1,
+      "message": "Hi Corentin \u0026 Austin, PTAL. Thanks",
+      "revId": "2c515eebc86bbf4c5b14b29909c4ee0d4268b3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
