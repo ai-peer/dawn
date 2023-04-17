@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0288166_89c491b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:39:55Z",
+      "side": 1,
+      "message": "`CloneContextTest.CloneNewUnnamedSymbols` is failing on windows.",
+      "revId": "355baa204d453034986389b559beb71f42ca5d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17ccde1d_21714a61",
+        "filename": "src/tint/symbol_table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:39:55Z",
+      "side": 1,
+      "message": "`std::string_view` is lightweight enough to be passed by value.",
+      "range": {
+        "startLine": 59,
+        "startChar": 20,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "355baa204d453034986389b559beb71f42ca5d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
