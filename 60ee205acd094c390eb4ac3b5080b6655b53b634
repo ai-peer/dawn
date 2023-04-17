@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7199aeb7_581f305c",
+        "filename": "src/tint/utils/hashmap_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:48:45Z",
+      "side": 0,
+      "message": "Removing this is unfortunate, as it\u0027s a non-trivial thing to reimplement and not something I\u0027m going to remember to look for in git history. Maybe put it back with a C++ `assert()`? (it\u0027s not production code, so who cares about what assertion method it uses)",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 401,
+        "endChar": 0
+      },
+      "revId": "60ee205acd094c390eb4ac3b5080b6655b53b634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4eab181_30910829",
+        "filename": "src/tint/utils/hashmap_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:48:45Z",
+      "side": 0,
+      "message": "humm... this one, and the one below... yeah, not so happy with no alarm bells on these. I\u0027ll have to think about what we can do here.",
+      "range": {
+        "startLine": 488,
+        "startChar": 0,
+        "endLine": 491,
+        "endChar": 27
+      },
+      "revId": "60ee205acd094c390eb4ac3b5080b6655b53b634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

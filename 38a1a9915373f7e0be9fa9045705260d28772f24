@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07020678_fd060ad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:48:45Z",
+      "side": 1,
+      "message": "Going to have to think about this one.",
+      "revId": "38a1a9915373f7e0be9fa9045705260d28772f24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa53865_9f3034a3",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:48:45Z",
+      "side": 1,
+      "message": "This is okay, things will still go bang, loudly.",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 44
+      },
+      "revId": "38a1a9915373f7e0be9fa9045705260d28772f24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
