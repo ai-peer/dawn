@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcca087_609cd124",
+        "filename": "src/tint/utils/unicode_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-17T19:51:04Z",
+      "side": 0,
+      "message": "why did these go bye bye?",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 54
+      },
+      "revId": "5a664d55f26b6c39266da62f5fcd24e3e926c674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
