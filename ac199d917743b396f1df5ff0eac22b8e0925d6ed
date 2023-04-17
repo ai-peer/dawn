@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e01a0a6_9d3cbfdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-17T23:58:23Z",
+      "side": 1,
+      "message": "Looking at the histories, I don\u0027t see the flakiness anymore after serializing the test in https://chromium-review.googlesource.com/c/chromium/src/+/4355885. So removing the suppression.",
+      "revId": "ac199d917743b396f1df5ff0eac22b8e0925d6ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
