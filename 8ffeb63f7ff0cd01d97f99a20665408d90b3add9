@@ -322,6 +322,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bdee5aac_2bee8885",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T09:04:02Z",
+      "side": 1,
+      "message": "btw, I think even without adding expectations on the writing thread, this test is still useful to verify that there is no race between texture\u0027s ref count dropped on writing thread and copy works being done on the copying thread.",
+      "parentUuid": "7e70da3c_3b2616b5",
+      "range": {
+        "startLine": 671,
+        "startChar": 8,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76425bf7_17d5ac0a",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 67
