@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c33563_be2ba184",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-18T16:17:57Z",
+      "side": 1,
+      "message": "There used to be logic here to skip the check on Intel/AMD/NVIDIA, because they report the limit incorrectly. I thought we still had that, because we\u0027d have seen the same bug with passing the limit through? But looks removed in https://dawn-review.googlesource.com/c/dawn/+/122801\n\nIn any case I\u0027m pretty sure we need that again, because otherwise we\u0027ll end up blocklisting tons of Intel/AMD/NVIDIA devices.\n\nAlso add ImgTec to the list because they\u0027ve told us they have the same bug.",
+      "revId": "f86ed19909747af064023df40bdedc674b94f23e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
