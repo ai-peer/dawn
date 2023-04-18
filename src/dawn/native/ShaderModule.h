@@ -250,7 +250,7 @@ struct EntryPointMetadata {
     bool usesSampleMaskOutput = false;
 };
 
-class ShaderModuleBase : public ApiObjectBase, public CachedObject {
+class ShaderModuleBase : public ApiObjectBaseWithLockedAPIRelease, public CachedObject {
   public:
     ShaderModuleBase(DeviceBase* device,
                      const ShaderModuleDescriptor* descriptor,

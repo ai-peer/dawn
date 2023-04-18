@@ -59,7 +59,7 @@ MaybeError ValidatePipelineLayoutDescriptor(DeviceBase* device,
 PipelineLayoutBase::PipelineLayoutBase(DeviceBase* device,
                                        const PipelineLayoutDescriptor* descriptor,
                                        ApiObjectBase::UntrackedByDeviceTag tag)
-    : ApiObjectBase(device, descriptor->label) {
+    : ApiObjectBaseWithLockedAPIRelease(device, descriptor->label) {
     ASSERT(descriptor->bindGroupLayoutCount <= kMaxBindGroups);
     for (BindGroupIndex group(0); group < BindGroupIndex(descriptor->bindGroupLayoutCount);
          ++group) {
@@ -75,7 +75,7 @@ PipelineLayoutBase::PipelineLayoutBase(DeviceBase* device,
 }
 
 PipelineLayoutBase::PipelineLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag) {}
+    : ApiObjectBaseWithLockedAPIRelease(device, tag) {}
 
 PipelineLayoutBase::~PipelineLayoutBase() = default;
 
