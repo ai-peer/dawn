@@ -34,6 +34,24 @@
       "parentUuid": "16c33563_be2ba184",
       "revId": "f86ed19909747af064023df40bdedc674b94f23e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae181de_ff30d9b1",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-18T22:13:02Z",
+      "side": 1,
+      "message": "1. Yes, if the vulkan limit is lower than the sum of those base limits (8+4+8\u003d20) then we can be pretty confident it\u0027s wrong.\n\nI think this is a good idea. It might be conservative on a few systems, but it should avoid ever setting the limit too high. I edited my query script and added the full table of values where buf+tex+attachments \u003c combined limit, see the last collapsible section here. Note the amd,nvidia,intel lines with values 159 and 208. It\u0027s hard to tell if those are reporting incorrectly or if those are real limits, but they\u0027re high enough that it would definitely be best to treat them as real limits.\nhttps://github.com/gpuweb/gpuweb/issues/4018#issuecomment-1502396615",
+      "parentUuid": "20510de6_673ed5b5",
+      "revId": "f86ed19909747af064023df40bdedc674b94f23e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
