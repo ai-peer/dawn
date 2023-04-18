@@ -36,6 +36,7 @@
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/TextureCopySplitter.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
+#include "dawn/utils/SystemUtils.h"
 
 namespace dawn::native::d3d12 {
 
@@ -212,6 +213,8 @@ ResultOrError<Ref<Texture>> Texture::CreateExternalImage(
         !isInitialized && dawnTexture->GetFormat().IsMultiPlanar(),
         "Cannot create a texture with a multi-planar format (%s) with uninitialized data.",
         dawnTexture->GetFormat().format);
+    
+    utils::USleep(100);
 
     dawnTexture->SetIsSubresourceContentInitialized(isInitialized,
                                                     dawnTexture->GetAllSubresources());
