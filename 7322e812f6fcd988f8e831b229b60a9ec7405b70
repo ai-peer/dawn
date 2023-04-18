@@ -223,6 +223,24 @@
       "parentUuid": "731daedd_01c0bf91",
       "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd09597_0a4eecdf",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T18:18:12Z",
+      "side": 1,
+      "message": "I think we should not remove it for now and try removing it later. Don\u0027t want this to get reverted if the sInstance removal doesn\u0027t work out.",
+      "parentUuid": "c45a1180_96a2fd7a",
+      "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
