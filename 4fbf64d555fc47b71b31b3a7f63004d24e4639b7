@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c184e7_b8dd3e00",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-18T16:40:23Z",
+      "side": 1,
+      "message": "GetPendingCommandContext() doesn\u0027t return error anymore. Done",
+      "parentUuid": "ccd96780_aec6df5f",
+      "range": {
+        "startLine": 216,
+        "startChar": 9,
+        "endLine": 216,
+        "endChar": 35
+      },
+      "revId": "4fbf64d555fc47b71b31b3a7f63004d24e4639b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce444a30_f6f09286",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-18T13:58:56Z",
       "side": 1,
       "message": "this condition for \"inheriting\" the already mapped data so that mBuffer is null and isn\u0027t unmapped at the end isn\u0027t the most clear or intuitive.\n\nI\u0027m starting to think it would be better to inline the MapInternal and UnmapInternal calls when you need them.\n\nAlso because UnmapInternal will eventually need to have better error handling. We can\u0027t handle it correctly in ~ScopedMap right now",
+      "range": {
+        "startLine": 503,
+        "startChar": 4,
+        "endLine": 505,
+        "endChar": 5
+      },
+      "revId": "4fbf64d555fc47b71b31b3a7f63004d24e4639b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "580f19b0_da092b15",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-18T16:40:23Z",
+      "side": 1,
+      "message": "UnmapInternal() doesn\u0027t need to handle errors anymore.\n\nAnd also added a comment to make ScopedMap more readable.",
+      "parentUuid": "ce444a30_f6f09286",
       "range": {
         "startLine": 503,
         "startChar": 4,
