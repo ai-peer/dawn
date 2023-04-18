@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b961387f_501fd6cd",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T00:14:05Z",
+      "side": 1,
+      "message": "It\u0027s great that we could enable many tests.\nBut it\u0027s more important from the start that the tests that do work have the implementation in a state that matches the vision of what the backend will look like.\n\nIt\u0027s OK to implement a subset of WebGPU that\u0027s needed for Graphite for now. However, I don\u0027t think we should implement something that is divergent from how it should ultimately work. Allocating Copy buffers in DEFAULT and having an intermediate copy to STAGING before readback is in line with the end goal; we need it for compressed textures in the future, and it will work with some performance cost for all other formats now. Allocating Copy buffers in STAGING fundamentally changes how the buffers are created and the restrictions they have from D3D11. I really disagree with doing that unless we are convinced it is the long term direction (I\u0027m not).\n\nEven if the current approach could enable many tests, it would be painful and a lot of extra work if we discover later down the line that we unintentionally ended up relying on the assumption that the buffers are STAGING. We could have a non-trivial refactor to fix it. I\u0027m not very willing to take on that technical debt and risk.",
+      "parentUuid": "8cabfd0a_c6fade0c",
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8078e7a6_b89e8e86",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 22
