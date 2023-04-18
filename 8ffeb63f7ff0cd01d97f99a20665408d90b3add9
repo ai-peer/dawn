@@ -118,6 +118,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7276bca6_503be6e0",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T06:48:51Z",
+      "side": 1,
+      "message": "without a sleep, WaitABit() would be reached too fast here before the other threads even do the dropping. If that happened, the scenario that I want to test \"one or many devices being dropped while processEvents is in process\" wouldn\u0027t happen.\n\nbtw, I guess we can rely on the randomness nature of multithreading to make it happen without any sleep or random variable. But when testing locally, I noticed inserting a sleep here make it happen more consistently.",
+      "parentUuid": "81265844_1db64441",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86bd6c57_3e172688",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 67
@@ -175,6 +199,30 @@
       "writtenOn": "2023-04-18T04:43:07Z",
       "side": 1,
       "message": "what is Wait important for? We\u0027re going to join and all the threads perform WaitABit",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 15
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59765e85_2b3e35e0",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T06:48:51Z",
+      "side": 1,
+      "message": "same as previous test, the scenario we want to test is that while processEvents is in progress on main thread, other threads drop devices (inside callback in this particular test).",
+      "parentUuid": "572ab856_a678a53d",
       "range": {
         "startLine": 223,
         "startChar": 0,
@@ -250,6 +298,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e70da3c_3b2616b5",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T06:48:51Z",
+      "side": 1,
+      "message": "We can insert some renderings and expectations to the writing thread after it signals the copying thread to let some thing happen in parallel while the copying thread to the copying.\n\nThat\u0027s being said, originally I wanted to test that there is no deadlock happening when copying depth textures. Internally, this will create temp resources and queue a temp render pass do to a blit in BlitDepthToDepth.cpp.\n\nAfter several iterations, I realized the deadlock would be tested by enabling --enable-implicit-device-sync to test all singlethreaded tests with mutex in future. So we could modify this test a little bit, adding expectations to writing thread in parellel while the copying thread does the copy.",
+      "parentUuid": "0f20e0c5_11f90c7a",
+      "range": {
+        "startLine": 671,
+        "startChar": 8,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76425bf7_17d5ac0a",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 67
@@ -261,6 +333,30 @@
       "writtenOn": "2023-04-18T04:43:07Z",
       "side": 1,
       "message": "can be after the joins to keep the test precise",
+      "range": {
+        "startLine": 675,
+        "startChar": 8,
+        "endLine": 676,
+        "endChar": 83
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0439b4_8f3a6027",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T06:48:51Z",
+      "side": 1,
+      "message": "Why doing expectations on main thread is more precise? We might want to do another expectation in parallel on writing thread as well.",
+      "parentUuid": "76425bf7_17d5ac0a",
       "range": {
         "startLine": 675,
         "startChar": 8,
