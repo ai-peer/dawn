@@ -91,6 +91,24 @@
       "parentUuid": "3e843e6d_a7ad856a",
       "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e52b9c_47a1d40e",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-04-18T17:53:34Z",
+      "side": 1,
+      "message": "The code just above that sets the `sInstance` doesn\u0027t bother with this kind of check, so I don\u0027t think it\u0027s necessary. Also, this isn\u0027t the right macro, apparently.",
+      "parentUuid": "3e843e6d_a7ad856a",
+      "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
