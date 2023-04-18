@@ -848,8 +848,70 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
 }
 
 // Tests if the sample_mask builtin is a pipeline output of fragment shader,
-// then alphaToCoverageEnabled must be false
-TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleMaskOutput) {
+// then alphaToCoverageEnabled must be false.
+// TODO(dawn:1759) Use RenderPipelineValidationTest instead after deprecation period.
+TEST_F(DeprecationTests, AlphaToCoverageAndSampleMaskOutput) {
+    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+            @vertex fn main() -> @builtin(position) vec4f {
+                return vec4f(0.0, 0.0, 0.0, 1.0);
+            })");
+
+    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        @fragment fn main() -> @location(0) vec4f {
+            return vec4f(0.0, 1.0, 0.0, 1.0);
+        })");
+    {
+        // Control case
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = true;
+
+        device.CreateRenderPipeline(&descriptor);
+    }
+
+    {
+        // Fragment state must exist
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment = nullptr;
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = true;
+
+        EXPECT_DEPRECATION_ERROR_OR_WARNING(device.CreateRenderPipeline(&descriptor));
+    }
+
+    {
+        // Fragment targets[0] must exist
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cFragment.targetCount = 2;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::Undefined;
+        descriptor.cTargets[1].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = true;
+
+        EXPECT_DEPRECATION_ERROR_OR_WARNING(device.CreateRenderPipeline(&descriptor));
+    }
+
+    {
+        // Fragment targets[0].format must have alpha channel
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::R8Unorm;
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = true;
+
+        EXPECT_DEPRECATION_ERROR_OR_WARNING(device.CreateRenderPipeline(&descriptor));
+    }
+}
+
+// Tests when alphaToCoverageEnabled is true, targets[0] must exist and have alpha channel.
+TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndColorTargetAlpha) {
     wgpu::ShaderModule fsModuleSampleMaskOutput = utils::CreateShaderModule(device, R"(
         struct Output {
             @builtin(sample_mask) mask_out: u32,
