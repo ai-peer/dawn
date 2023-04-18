@@ -16,6 +16,23 @@
       "message": "Not sure if this is the best way to approach this. Another alternative would be to feed the build environment into the generation scripts and have it output only the appropriate format for the environment. That felt like it may cause complications for developers (like most of the Dawn team) that end up using the same Dawn checkout both for native and browser builds. Curious what others think!",
       "revId": "e3c37c7447ee4dad92a6359e19a8bd97ebf64209",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0159847e_9fbc4412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T18:14:32Z",
+      "side": 1,
+      "message": "I don\u0027t have any real solutions for this. I think the best thing would be to have some Toggle on the device that formats them in JS style. Then we only set that Toggle for WebGPU (js) contexts.\n\nWe\u0027re soon going to have both WebGPU (js) and Graphite-Dawn. So in the same build we\u0027ll want potentially two different types of strings.\n\nOR maybe it\u0027s fine because Skia is not supposed to generate errors anyway. Not completely opposed to the change - it would just be great to think through whether this solution is going to be good enough in the future as well.\n\nLike maybe before we print things, we can set a bit in thread-local storage that says what type of format string you\u0027d like. That way the formatting code can switch on it. Or something else??",
+      "revId": "e3c37c7447ee4dad92a6359e19a8bd97ebf64209",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
