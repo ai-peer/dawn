@@ -1088,7 +1088,7 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
 ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
                                    const ShaderModuleDescriptor* descriptor,
                                    ApiObjectBase::UntrackedByDeviceTag tag)
-    : ApiObjectBase(device, descriptor->label), mType(Type::Undefined) {
+    : ApiObjectBaseWithLockedAPIRelease(device, descriptor->label), mType(Type::Undefined) {
     ASSERT(descriptor->nextInChain != nullptr);
     const ShaderModuleSPIRVDescriptor* spirvDesc = nullptr;
     FindInChain(descriptor->nextInChain, &spirvDesc);
@@ -1111,7 +1111,7 @@ ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescrip
 }
 
 ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag), mType(Type::Undefined) {}
+    : ApiObjectBaseWithLockedAPIRelease(device, tag), mType(Type::Undefined) {}
 
 ShaderModuleBase::~ShaderModuleBase() = default;
 
