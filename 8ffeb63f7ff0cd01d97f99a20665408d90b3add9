@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23263722_2a1491d6",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc7933ed_9b2b893b",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 620,
+        "endChar": 42
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "276fbb83_477800f5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-18T04:43:07Z",
       "side": 1,
       "message": "ditto: RunInParallel",
+      "range": {
+        "startLine": 655,
+        "startChar": 3,
+        "endLine": 657,
+        "endChar": 34
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "809de635_9d17b6d4",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "276fbb83_477800f5",
       "range": {
         "startLine": 655,
         "startChar": 3,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7951c858_c04550bd",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "301dbe53_f5bd8b49",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 49
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7e59856_21ef97f1",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-04-18T04:43:07Z",
       "side": 1,
       "message": "nit: std::move here would make it more obvious we\u0027re taking the original ref and setting it to nullptr it at the end of this for-block",
+      "range": {
+        "startLine": 140,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 44
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c355307_72d47c4d",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7e59856_21ef97f1",
       "range": {
         "startLine": 140,
         "startChar": 8,
@@ -140,6 +236,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae840e8e_3648f62d",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done. Removed all the explicit randomness \u0026 sleep.",
+      "parentUuid": "7276bca6_503be6e0",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86bd6c57_3e172688",
@@ -163,6 +283,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc15de1_35a14671",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86bd6c57_3e172688",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 49
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ebdf51d_bc538641",
@@ -176,6 +320,30 @@
       "writtenOn": "2023-04-18T04:43:07Z",
       "side": 1,
       "message": "ditto: std::move",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 44
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49fcf9ad_eab003fb",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ebdf51d_bc538641",
       "range": {
         "startLine": 190,
         "startChar": 0,
@@ -233,6 +401,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c0a5575_2a4f36a5",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "oh wait, we already do `WaitABit()` on the child threads.",
+      "parentUuid": "59765e85_2b3e35e0",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 15
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "675fcb4e_51d130ed",
@@ -256,6 +448,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9a68ea_51de8bcf",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "I think the purpose of this thread is creating pipeline in parallel doesn\u0027t race. Particularly the internal pipeline cache and async threads should be thread safe. We don\u0027t necessarily need to have unique pipeline returned on each thread.\n\nDone as suggested anw.",
+      "parentUuid": "675fcb4e_51d130ed",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 28
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf1d79b6_69a2f8c9",
@@ -269,6 +485,24 @@
       "writtenOn": "2023-04-18T04:43:07Z",
       "side": 1,
       "message": "same comments as in compute pipeline test",
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd50e9b1_f275188f",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf1d79b6_69a2f8c9",
       "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -334,6 +568,30 @@
       "side": 1,
       "message": "btw, I think even without adding expectations on the writing thread, this test is still useful to verify that there is no race between texture\u0027s ref count dropped on writing thread and copy works being done on the copying thread.",
       "parentUuid": "7e70da3c_3b2616b5",
+      "range": {
+        "startLine": 671,
+        "startChar": 8,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a5d64dd_7eee4231",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T15:05:44Z",
+      "side": 1,
+      "message": "\u003e I like how writeThread has the signal/wait operations separately in the test body which makes it more clear what ordering is being tested.\n\u003e\n\u003e Could we have CopyTextureToTextureInLockStep do something similar? For example, I think the srcView, dstView, Wait, and Signal could be factored out to the caller.\n\nDone",
+      "parentUuid": "bdee5aac_2bee8885",
       "range": {
         "startLine": 671,
         "startChar": 8,
