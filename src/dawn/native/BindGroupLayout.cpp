@@ -458,7 +458,7 @@ BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
                                          const BindGroupLayoutDescriptor* descriptor,
                                          PipelineCompatibilityToken pipelineCompatibilityToken,
                                          ApiObjectBase::UntrackedByDeviceTag tag)
-    : ApiObjectBase(device, descriptor->label),
+    : ApiObjectBaseWithLockedAPIRelease(device, descriptor->label),
       mPipelineCompatibilityToken(pipelineCompatibilityToken),
       mUnexpandedBindingCount(descriptor->entryCount) {
     std::vector<BindGroupLayoutEntry> sortedBindings = ExtractAndExpandBglEntries(
@@ -492,7 +492,7 @@ BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
 }
 
 BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag) {}
+    : ApiObjectBaseWithLockedAPIRelease(device, tag) {}
 
 BindGroupLayoutBase::~BindGroupLayoutBase() = default;
 
