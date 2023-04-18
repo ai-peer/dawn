@@ -128,6 +128,16 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     std::string mLabel;
 };
 
+// A version of ApiObjectBase that will lock the device whenever APIRelease is called
+// instead of only doing that when last ref dropped.
+class ApiObjectBaseWithLockedAPIRelease : public ApiObjectBase {
+  public:
+    void APIRelease();
+
+  protected:
+    using ApiObjectBase::ApiObjectBase;
+};
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_OBJECTBASE_H_

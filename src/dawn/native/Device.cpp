@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <array>
 #include <mutex>
+#include <type_traits>
 #include <unordered_set>
 
 #include "dawn/common/Log.h"
@@ -62,9 +63,36 @@ namespace dawn::native {
 
 // The caches are unordered_sets of pointers with special hash and compare functions
 // to compare the value of the objects, instead of the pointers.
-template <typename Object>
+// Note: we expect the object to be a subclass of ApiObjectBaseWithLockedAPIRelease.
+// This is because normal ApiObjectBase will only lock the mutex after the last ref dropped.
+// It is a race with a call that looks up the cache.
+// Example assuming the object is subclass of ApiObjectBase:
+// - thread A:
+//    - objectA.APIRealease()
+//    - objectA.refCount.Decrement() == true (ref count has reached zero)
+//    - going to call ReleaseAndLockBeforeDestroy().
+// - thread B:
+//    - device.CreateShaderModule().
+//    - lock()
+//    - device.GetOrCreateShaderModule()
+//    - objectA is in the cache, so return it.
+//    - unlock()
+// - thread A:
+//    - starting to call ReleaseAndLockBeforeDestroy()
+//    - lock()
+//    - erase objectA from the cache.
+//    - delete objectA.
+//    - unlock()
+// To avoid this, we have to lock the entire APIRelease() function.
+template <typename Object,
+          typename = std::enable_if_t<std::is_base_of_v<ApiObjectBaseWithLockedAPIRelease, Object>>>
 using ContentLessObjectCache =
     std::unordered_set<Object*, typename Object::HashFunc, typename Object::EqualityFunc>;
+
+using ContentLessAttachmentStateBlueprintCache =
+    std::unordered_set<AttachmentStateBlueprint*,
+                       AttachmentStateBlueprint::HashFunc,
+                       typename AttachmentStateBlueprint::EqualityFunc>;
 
 struct DeviceBase::Caches {
     ~Caches() {
@@ -77,7 +105,7 @@ struct DeviceBase::Caches {
         ASSERT(shaderModules.empty());
     }
 
-    ContentLessObjectCache<AttachmentStateBlueprint> attachmentStates;
+    ContentLessAttachmentStateBlueprintCache attachmentStates;
     ContentLessObjectCache<BindGroupLayoutBase> bindGroupLayouts;
     ContentLessObjectCache<ComputePipelineBase> computePipelines;
     ContentLessObjectCache<PipelineLayoutBase> pipelineLayouts;

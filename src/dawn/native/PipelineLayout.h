@@ -49,7 +49,7 @@ struct StageAndDescriptor {
     ConstantEntry const* constants = nullptr;
 };
 
-class PipelineLayoutBase : public ApiObjectBase, public CachedObject {
+class PipelineLayoutBase : public ApiObjectBaseWithLockedAPIRelease, public CachedObject {
   public:
     PipelineLayoutBase(DeviceBase* device,
                        const PipelineLayoutDescriptor* descriptor,

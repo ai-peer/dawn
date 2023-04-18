@@ -72,7 +72,7 @@ MaybeError ValidateSamplerDescriptor(DeviceBase*, const SamplerDescriptor* descr
 SamplerBase::SamplerBase(DeviceBase* device,
                          const SamplerDescriptor* descriptor,
                          ApiObjectBase::UntrackedByDeviceTag tag)
-    : ApiObjectBase(device, descriptor->label),
+    : ApiObjectBaseWithLockedAPIRelease(device, descriptor->label),
       mAddressModeU(descriptor->addressModeU),
       mAddressModeV(descriptor->addressModeV),
       mAddressModeW(descriptor->addressModeW),
@@ -90,7 +90,7 @@ SamplerBase::SamplerBase(DeviceBase* device, const SamplerDescriptor* descriptor
 }
 
 SamplerBase::SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag) {}
+    : ApiObjectBaseWithLockedAPIRelease(device, tag) {}
 
 SamplerBase::~SamplerBase() = default;
 

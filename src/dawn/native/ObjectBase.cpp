@@ -117,4 +117,9 @@ void ApiObjectBase::Destroy() {
     }
 }
 
+void ApiObjectBaseWithLockedAPIRelease::APIRelease() {
+    auto deviceLock(GetDevice()->GetScopedLockSafeForDelete());
+    Release();
+}
+
 }  // namespace dawn::native

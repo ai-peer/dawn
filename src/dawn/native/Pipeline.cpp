@@ -173,7 +173,7 @@ PipelineBase::PipelineBase(DeviceBase* device,
                            PipelineLayoutBase* layout,
                            const char* label,
                            std::vector<StageAndDescriptor> stages)
-    : ApiObjectBase(device, label), mLayout(layout) {
+    : ApiObjectBaseWithLockedAPIRelease(device, label), mLayout(layout) {
     ASSERT(!stages.empty());
 
     for (const StageAndDescriptor& stage : stages) {
@@ -214,7 +214,7 @@ PipelineBase::PipelineBase(DeviceBase* device,
 }
 
 PipelineBase::PipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag) {}
+    : ApiObjectBaseWithLockedAPIRelease(device, tag) {}
 
 PipelineBase::~PipelineBase() = default;
 
