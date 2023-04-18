@@ -17,7 +17,9 @@
 #include <algorithm>
 #include <array>
 #include <mutex>
+#include <type_traits>
 #include <unordered_set>
+#include <utility>
 
 #include "dawn/common/Log.h"
 #include "dawn/common/Version_autogen.h"
@@ -66,24 +68,57 @@ template <typename Object>
 using ContentLessObjectCache =
     std::unordered_set<Object*, typename Object::HashFunc, typename Object::EqualityFunc>;
 
+template <typename Object>
+class RefCountedObjectCache final {
+  public:
+    Ref<Object> Find(Object* key) {
+        auto iter = mTable.find(key);
+        return IteratorToRefIfValid(iter);
+    }
+
+    std::pair<Ref<Object>, bool> Insert(Object* object) {
+        auto result = mTable.insert(object);
+        return std::make_pair(IteratorToRefIfValid(result.first), result.second);
+    }
+
+    void Erase(Object* object) { mTable.erase(object); }
+
+    bool IsEmpty() const { return mTable.empty(); }
+
+  private:
+    Ref<Object> IteratorToRefIfValid(const ContentLessObjectCache<Object>::iterator& iter) {
+        if (iter != mTable.end()) {
+            if ((*iter)->TryReference()) {
+                return AcquireRef(*iter);
+            }
+
+            mTable.erase(iter);
+        }
+
+        return nullptr;
+    }
+
+    ContentLessObjectCache<Object> mTable;
+};
+
 struct DeviceBase::Caches {
     ~Caches() {
         ASSERT(attachmentStates.empty());
-        ASSERT(bindGroupLayouts.empty());
-        ASSERT(computePipelines.empty());
-        ASSERT(pipelineLayouts.empty());
-        ASSERT(renderPipelines.empty());
-        ASSERT(samplers.empty());
-        ASSERT(shaderModules.empty());
+        ASSERT(bindGroupLayouts.IsEmpty());
+        ASSERT(computePipelines.IsEmpty());
+        ASSERT(pipelineLayouts.IsEmpty());
+        ASSERT(renderPipelines.IsEmpty());
+        ASSERT(samplers.IsEmpty());
+        ASSERT(shaderModules.IsEmpty());
     }
 
     ContentLessObjectCache<AttachmentStateBlueprint> attachmentStates;
-    ContentLessObjectCache<BindGroupLayoutBase> bindGroupLayouts;
-    ContentLessObjectCache<ComputePipelineBase> computePipelines;
-    ContentLessObjectCache<PipelineLayoutBase> pipelineLayouts;
-    ContentLessObjectCache<RenderPipelineBase> renderPipelines;
-    ContentLessObjectCache<SamplerBase> samplers;
-    ContentLessObjectCache<ShaderModuleBase> shaderModules;
+    RefCountedObjectCache<BindGroupLayoutBase> bindGroupLayouts;
+    RefCountedObjectCache<ComputePipelineBase> computePipelines;
+    RefCountedObjectCache<PipelineLayoutBase> pipelineLayouts;
+    RefCountedObjectCache<RenderPipelineBase> renderPipelines;
+    RefCountedObjectCache<SamplerBase> samplers;
+    RefCountedObjectCache<ShaderModuleBase> shaderModules;
 };
 
 struct DeviceBase::DeprecationWarnings {
@@ -806,30 +841,29 @@ const Format& DeviceBase::GetValidInternalFormat(FormatIndex index) const {
 ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
     const BindGroupLayoutDescriptor* descriptor,
     PipelineCompatibilityToken pipelineCompatibilityToken) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     BindGroupLayoutBase blueprint(this, descriptor, pipelineCompatibilityToken,
                                   ApiObjectBase::kUntrackedByDevice);
 
     const size_t blueprintHash = blueprint.ComputeContentHash();
     blueprint.SetContentHash(blueprintHash);
 
-    Ref<BindGroupLayoutBase> result;
-    auto iter = mCaches->bindGroupLayouts.find(&blueprint);
-    if (iter != mCaches->bindGroupLayouts.end()) {
-        result = *iter;
-    } else {
+    Ref<BindGroupLayoutBase> result = mCaches->bindGroupLayouts.Find(&blueprint);
+
+    if (result == nullptr) {
         DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
         result->SetIsCachedReference();
         result->SetContentHash(blueprintHash);
-        mCaches->bindGroupLayouts.insert(result.Get());
+        mCaches->bindGroupLayouts.Insert(result.Get());
     }
 
     return std::move(result);
 }
 
 void DeviceBase::UncacheBindGroupLayout(BindGroupLayoutBase* obj) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(obj->IsCachedReference());
-    size_t removedCount = mCaches->bindGroupLayouts.erase(obj);
-    ASSERT(removedCount == 1);
+    mCaches->bindGroupLayouts.Erase(obj);
 }
 
 // Private function used at initialization
@@ -848,53 +882,44 @@ BindGroupLayoutBase* DeviceBase::GetEmptyBindGroupLayout() {
 
 Ref<ComputePipelineBase> DeviceBase::GetCachedComputePipeline(
     ComputePipelineBase* uninitializedComputePipeline) {
-    Ref<ComputePipelineBase> cachedPipeline;
-    auto iter = mCaches->computePipelines.find(uninitializedComputePipeline);
-    if (iter != mCaches->computePipelines.end()) {
-        cachedPipeline = *iter;
-    }
-
-    return cachedPipeline;
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
+    return mCaches->computePipelines.Find(uninitializedComputePipeline);
 }
 
 Ref<RenderPipelineBase> DeviceBase::GetCachedRenderPipeline(
     RenderPipelineBase* uninitializedRenderPipeline) {
-    Ref<RenderPipelineBase> cachedPipeline;
-    auto iter = mCaches->renderPipelines.find(uninitializedRenderPipeline);
-    if (iter != mCaches->renderPipelines.end()) {
-        cachedPipeline = *iter;
-    }
-    return cachedPipeline;
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
+    return mCaches->renderPipelines.Find(uninitializedRenderPipeline);
 }
 
 Ref<ComputePipelineBase> DeviceBase::AddOrGetCachedComputePipeline(
     Ref<ComputePipelineBase> computePipeline) {
     ASSERT(IsLockedByCurrentThreadIfNeeded());
-    auto [cachedPipeline, inserted] = mCaches->computePipelines.insert(computePipeline.Get());
+    auto [cachedPipeline, inserted] = mCaches->computePipelines.Insert(computePipeline.Get());
     if (inserted) {
         computePipeline->SetIsCachedReference();
         return computePipeline;
     } else {
-        return *cachedPipeline;
+        return cachedPipeline;
     }
 }
 
 Ref<RenderPipelineBase> DeviceBase::AddOrGetCachedRenderPipeline(
     Ref<RenderPipelineBase> renderPipeline) {
     ASSERT(IsLockedByCurrentThreadIfNeeded());
-    auto [cachedPipeline, inserted] = mCaches->renderPipelines.insert(renderPipeline.Get());
+    auto [cachedPipeline, inserted] = mCaches->renderPipelines.Insert(renderPipeline.Get());
     if (inserted) {
         renderPipeline->SetIsCachedReference();
         return renderPipeline;
     } else {
-        return *cachedPipeline;
+        return cachedPipeline;
     }
 }
 
 void DeviceBase::UncacheComputePipeline(ComputePipelineBase* obj) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(obj->IsCachedReference());
-    size_t removedCount = mCaches->computePipelines.erase(obj);
-    ASSERT(removedCount == 1);
+    mCaches->computePipelines.Erase(obj);
 }
 
 ResultOrError<Ref<TextureViewBase>>
@@ -928,68 +953,66 @@ DeviceBase::GetOrCreatePlaceholderTextureViewForExternalTexture() {
 
 ResultOrError<Ref<PipelineLayoutBase>> DeviceBase::GetOrCreatePipelineLayout(
     const PipelineLayoutDescriptor* descriptor) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     PipelineLayoutBase blueprint(this, descriptor, ApiObjectBase::kUntrackedByDevice);
 
     const size_t blueprintHash = blueprint.ComputeContentHash();
     blueprint.SetContentHash(blueprintHash);
 
-    Ref<PipelineLayoutBase> result;
-    auto iter = mCaches->pipelineLayouts.find(&blueprint);
-    if (iter != mCaches->pipelineLayouts.end()) {
-        result = *iter;
-    } else {
+    Ref<PipelineLayoutBase> result = mCaches->pipelineLayouts.Find(&blueprint);
+
+    if (result == nullptr) {
         DAWN_TRY_ASSIGN(result, CreatePipelineLayoutImpl(descriptor));
         result->SetIsCachedReference();
         result->SetContentHash(blueprintHash);
-        mCaches->pipelineLayouts.insert(result.Get());
+        mCaches->pipelineLayouts.Insert(result.Get());
     }
 
     return std::move(result);
 }
 
 void DeviceBase::UncachePipelineLayout(PipelineLayoutBase* obj) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(obj->IsCachedReference());
-    size_t removedCount = mCaches->pipelineLayouts.erase(obj);
-    ASSERT(removedCount == 1);
+    mCaches->pipelineLayouts.Erase(obj);
 }
 
 void DeviceBase::UncacheRenderPipeline(RenderPipelineBase* obj) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(obj->IsCachedReference());
-    size_t removedCount = mCaches->renderPipelines.erase(obj);
-    ASSERT(removedCount == 1);
+    mCaches->renderPipelines.Erase(obj);
 }
 
 ResultOrError<Ref<SamplerBase>> DeviceBase::GetOrCreateSampler(
     const SamplerDescriptor* descriptor) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     SamplerBase blueprint(this, descriptor, ApiObjectBase::kUntrackedByDevice);
 
     const size_t blueprintHash = blueprint.ComputeContentHash();
     blueprint.SetContentHash(blueprintHash);
 
-    Ref<SamplerBase> result;
-    auto iter = mCaches->samplers.find(&blueprint);
-    if (iter != mCaches->samplers.end()) {
-        result = *iter;
-    } else {
+    Ref<SamplerBase> result = mCaches->samplers.Find(&blueprint);
+    if (result == nullptr) {
         DAWN_TRY_ASSIGN(result, CreateSamplerImpl(descriptor));
         result->SetIsCachedReference();
         result->SetContentHash(blueprintHash);
-        mCaches->samplers.insert(result.Get());
+        mCaches->samplers.Insert(result.Get());
     }
 
     return std::move(result);
 }
 
 void DeviceBase::UncacheSampler(SamplerBase* obj) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(obj->IsCachedReference());
-    size_t removedCount = mCaches->samplers.erase(obj);
-    ASSERT(removedCount == 1);
+    mCaches->samplers.Erase(obj);
 }
 
 ResultOrError<Ref<ShaderModuleBase>> DeviceBase::GetOrCreateShaderModule(
     const ShaderModuleDescriptor* descriptor,
     ShaderModuleParseResult* parseResult,
     OwnedCompilationMessages* compilationMessages) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(parseResult != nullptr);
 
     ShaderModuleBase blueprint(this, descriptor, ApiObjectBase::kUntrackedByDevice);
@@ -997,11 +1020,8 @@ ResultOrError<Ref<ShaderModuleBase>> DeviceBase::GetOrCreateShaderModule(
     const size_t blueprintHash = blueprint.ComputeContentHash();
     blueprint.SetContentHash(blueprintHash);
 
-    Ref<ShaderModuleBase> result;
-    auto iter = mCaches->shaderModules.find(&blueprint);
-    if (iter != mCaches->shaderModules.end()) {
-        result = *iter;
-    } else {
+    Ref<ShaderModuleBase> result = mCaches->shaderModules.Find(&blueprint);
+    if (result == nullptr) {
         if (!parseResult->HasParsedShader()) {
             // We skip the parse on creation if validation isn't enabled which let's us quickly
             // lookup in the cache without validating and parsing. We need the parsed module
@@ -1014,19 +1034,20 @@ ResultOrError<Ref<ShaderModuleBase>> DeviceBase::GetOrCreateShaderModule(
                         CreateShaderModuleImpl(descriptor, parseResult, compilationMessages));
         result->SetIsCachedReference();
         result->SetContentHash(blueprintHash);
-        mCaches->shaderModules.insert(result.Get());
+        mCaches->shaderModules.Insert(result.Get());
     }
 
     return std::move(result);
 }
 
 void DeviceBase::UncacheShaderModule(ShaderModuleBase* obj) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(obj->IsCachedReference());
-    size_t removedCount = mCaches->shaderModules.erase(obj);
-    ASSERT(removedCount == 1);
+    mCaches->shaderModules.Erase(obj);
 }
 
 Ref<AttachmentState> DeviceBase::GetOrCreateAttachmentState(AttachmentStateBlueprint* blueprint) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     auto iter = mCaches->attachmentStates.find(blueprint);
     if (iter != mCaches->attachmentStates.end()) {
         return static_cast<AttachmentState*>(*iter);
@@ -1058,6 +1079,7 @@ Ref<AttachmentState> DeviceBase::GetOrCreateAttachmentState(
 }
 
 void DeviceBase::UncacheAttachmentState(AttachmentState* obj) {
+    ASSERT(IsLockedByCurrentThreadIfNeeded());
     ASSERT(obj->IsCachedReference());
     size_t removedCount = mCaches->attachmentStates.erase(obj);
     ASSERT(removedCount == 1);

@@ -12,10 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <atomic>
 #include <thread>
 #include <utility>
 
 #include "dawn/common/RefCounted.h"
+#include "dawn/utils/SystemUtils.h"
 #include "gtest/gtest.h"
 
 class RCTest : public RefCounted {
@@ -94,6 +96,68 @@ TEST(RefCounted, RaceOnReferenceRelease) {
     EXPECT_EQ(test->GetRefCountForTesting(), 1u);
 
     test->Release();
+    EXPECT_TRUE(deleted);
+}
+
+// Test that TryReference() will return false after last ref counted drop but before DeleteThis() is
+// called.
+TEST(RefCounted, TryReferenceBeforeDeleteThis) {
+    class Object : public RCTest {
+      public:
+        Object(bool* deleted) : RCTest(deleted) {}
+
+      protected:
+        void DeleteThis() override {
+            EXPECT_FALSE(TryReference());
+            delete this;
+        }
+    };
+
+    bool deleted = false;
+    auto object = new Object(&deleted);
+
+    EXPECT_TRUE(object->TryReference());
+    EXPECT_EQ(object->GetRefCountForTesting(), 2u);
+    object->Release();
+    object->Release();
+
+    EXPECT_TRUE(deleted);
+}
+
+// Test that TryReference() will atomically check whether the ref count is non zero and increment it
+// if so.
+TEST(RefCounted, TryReferenceBeforeDeleteThisOnDifferentThreads) {
+    class Object : public RCTest {
+      public:
+        Object(bool* deleted) : RCTest(deleted) {}
+        void SetCanDelete() { mCanDelete = true; }
+
+      protected:
+        void DeleteThis() override {
+            // Wait for main thread to signal
+            while (!mCanDelete.load()) {
+                utils::USleep(10);
+            }
+            delete this;
+        }
+
+        std::atomic<bool> mCanDelete;
+    };
+
+    bool deleted = false;
+    auto object = new Object(&deleted);
+
+    std::thread releaseThread([object] { object->Release(); });
+
+    while (object->TryReference()) {
+        object->Release();
+        utils::USleep(10);
+    }
+
+    object->SetCanDelete();
+
+    releaseThread.join();
+
     EXPECT_TRUE(deleted);
 }
 
