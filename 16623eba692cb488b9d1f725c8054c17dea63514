@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a4c68ab_f079f316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T09:30:32Z",
+      "side": 1,
+      "message": "Done anw. Added GetSupportedUsages to WGPUSurface. Implemented for vulkan as well.",
+      "parentUuid": "3a683f71_220af595",
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d17c68_2c3ba87f",
@@ -83,6 +101,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "110cebf1_4c469984",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T09:30:32Z",
+      "side": 1,
+      "message": "Removed readable swap chain feature anw. I changed to exposing GetSupportedUsages method on a surface object instead.",
+      "parentUuid": "95f13f47_e494a94b",
+      "range": {
+        "startLine": 61,
+        "startChar": 36,
+        "endLine": 62,
+        "endChar": 57
+      },
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86784553_85ce230b",
@@ -120,6 +162,30 @@
       "side": 1,
       "message": "Not sure while we only enable swap chain tests on metal and vulkan previously.",
       "parentUuid": "86784553_85ce230b",
+      "range": {
+        "startLine": 334,
+        "startChar": 46,
+        "endLine": 334,
+        "endChar": 77
+      },
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "984f37ff_915b2859",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T09:30:32Z",
+      "side": 1,
+      "message": "Done. GL swapchain is not implemented yet so excluding.",
+      "parentUuid": "a3bd9f87_77a757c7",
       "range": {
         "startLine": 334,
         "startChar": 46,
