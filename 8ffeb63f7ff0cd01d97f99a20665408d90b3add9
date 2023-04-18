@@ -647,6 +647,30 @@
       },
       "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d2a6f8f_79215322",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T16:56:26Z",
+      "side": 1,
+      "message": "because the test name is about testing WriteTexture and CopyTexture\n\nthat said, to me, it seems like what the test is actually testing is Read(depthTexture) and Copy(depthTexture, destTexture)+Read(destTexture) on two threads\n\nit\u0027s helpful to be precise so we can look at the test names and get an understanding of what is tested and what is not.\nOtherwise, it\u0027s hard to manage and keep track that actually these multithreaded Read cases occur in \"Depth_WriteAndCopyOnDifferentThreads\" and there isn\u0027t actually a test where CopyT2T and WriteTexture race with each other.",
+      "parentUuid": "9a0439b4_8f3a6027",
+      "range": {
+        "startLine": 675,
+        "startChar": 8,
+        "endLine": 676,
+        "endChar": 83
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

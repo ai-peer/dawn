@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7417c1_58b754e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 72
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T16:56:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "780ce73befd60d1dfbd04d13a6536fda1a7abfc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d6c133f_e3fa3dc4",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 72
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T16:56:26Z",
+      "side": 1,
+      "message": "now that I understand that this is the thing we\u0027re intending to test (running ProcessEvents), would it be better to aggressively call mInstance.ProcessEvents() so we have a ton of races between processing events and dropping devices?\nWe can call it in a while-loop until the number of devices left is zero",
+      "range": {
+        "startLine": 121,
+        "startChar": 12,
+        "endLine": 122,
+        "endChar": 23
+      },
+      "revId": "780ce73befd60d1dfbd04d13a6536fda1a7abfc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
