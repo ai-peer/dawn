@@ -28,7 +28,7 @@ class DeviceBase;
 
 MaybeError ValidateSamplerDescriptor(DeviceBase* device, const SamplerDescriptor* descriptor);
 
-class SamplerBase : public ApiObjectBase, public CachedObject {
+class SamplerBase : public ApiObjectBaseWithLockedAPIRelease, public CachedObject {
   public:
     SamplerBase(DeviceBase* device,
                 const SamplerDescriptor* descriptor,

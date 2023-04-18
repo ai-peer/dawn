@@ -52,7 +52,7 @@ struct ProgrammableStage {
     PipelineConstantEntries constants;
 };
 
-class PipelineBase : public ApiObjectBase, public CachedObject {
+class PipelineBase : public ApiObjectBaseWithLockedAPIRelease, public CachedObject {
   public:
     ~PipelineBase() override;
 
