@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3618cf52_0af45007",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-18T01:44:30Z",
+      "side": 1,
+      "message": "Done. I changed to use `DEFAULT` for `COPY` only buffers. However, since we still need to support Mappable Buffer -\u003e Texture and Texture -\u003eMappable buffer copies. so we have to create buffer with both MAP_READ | MAP_WRITE for mappable buffers.",
+      "parentUuid": "b961387f_501fd6cd",
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8078e7a6_b89e8e86",
