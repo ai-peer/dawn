@@ -60,6 +60,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b303c13a_8ef1a8c8",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-18T17:54:01Z",
+      "side": 1,
+      "message": "Marl actually falls back to\n\n```\n#if defined(__clang__)\n#if __has_feature(address_sanitizer)\n```\n\nWhich is a bit more verbose. I\u0027ll leave this to enga@\u0027s discression.",
+      "parentUuid": "56874667_049205db",
+      "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e843e6d_a7ad856a",
         "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
         "patchSetId": 1
