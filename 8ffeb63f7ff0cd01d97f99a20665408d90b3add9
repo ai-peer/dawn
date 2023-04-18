@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc7933ed_9b2b893b",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "Move `RunInParallel` to TestUtils.h/cpp and reuse it?",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 620,
+        "endChar": 42
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276fbb83_477800f5",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "ditto: RunInParallel",
+      "range": {
+        "startLine": 655,
+        "startChar": 3,
+        "endLine": 657,
+        "endChar": 34
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301dbe53_f5bd8b49",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "nit: can use RunInParallel",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 49
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7e59856_21ef97f1",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "nit: std::move here would make it more obvious we\u0027re taking the original ref and setting it to nullptr it at the end of this for-block",
+      "range": {
+        "startLine": 140,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 44
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81265844_1db64441",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "what is sleep and wait here important for?",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86bd6c57_3e172688",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "nit: can use RunInParallel",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 49
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ebdf51d_bc538641",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "ditto: std::move",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 44
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "572ab856_a678a53d",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "what is Wait important for? We\u0027re going to join and all the threads perform WaitABit",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 15
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "675fcb4e_51d130ed",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "should have each thread write a different value.\n\nRight now, I believe all these pipelines are going to get deduped into the same one.\nNot only that, even if they weren\u0027t deduped, the test would pass if the implementation returned to you the \"wrong\" pipeline created by a different thread.\n\nBy having unique shaders, you can test that you actually got the pipeline you requested to compile.\n\n\nThere can be a separate test that creating multiple identical pipelines simultaneously on multiple threads yields pointer-equal pipelines. i.e. pipeline1.Get() \u003d\u003d pipeline2.Get(). That test would only be enabled without the wire",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 28
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1d79b6_69a2f8c9",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "same comments as in compute pipeline test",
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f20e0c5_11f90c7a",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "I like how `writeThread` has the signal/wait operations separately in the test body which makes it more clear what ordering is being tested.\n\nCould we have `CopyTextureToTextureInLockStep` do something similar? For example, I think the srcView, dstView, Wait, and Signal could be factored out to the caller.\n\nditto for `CopyBufferToTextureInLockStep`\n\nthat said.. what precisely is this testing?\n\nThe threads race on creating resources and views, then the copyThread waits for the writeThread to signal WriteTexture. Those are strictly ordered.\nMaybe you want to *encode* the CopyT2T at the same time as WriteTexture but defer submitting it until after WriteTexture occurs?\n\nI didn\u0027t fully review the tests after this - similar comments though",
+      "range": {
+        "startLine": 671,
+        "startChar": 8,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76425bf7_17d5ac0a",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "can be after the joins to keep the test precise",
+      "range": {
+        "startLine": 675,
+        "startChar": 8,
+        "endLine": 676,
+        "endChar": 83
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

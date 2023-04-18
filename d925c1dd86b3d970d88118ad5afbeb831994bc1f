@@ -278,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "441b48dd_9d629735",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "still - is the randomness important? you could likewise pick 5 arbitrary time values that are hardcoded. It would be more clear exactly what\u0027s happening",
+      "parentUuid": "23ae0b4b_ab16f74b",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 67
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e28a23_213823b8",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 47
@@ -313,6 +337,30 @@
       "side": 1,
       "message": "Just trying to use the device before dropping it. Push \u0026 pop error scope are easy to use. Unlike most other methods requiring creating additional resources.",
       "parentUuid": "63e28a23_213823b8",
+      "range": {
+        "startLine": 153,
+        "startChar": 12,
+        "endLine": 163,
+        "endChar": 12
+      },
+      "revId": "d925c1dd86b3d970d88118ad5afbeb831994bc1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6441d87d_c52f6dae",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T04:43:07Z",
+      "side": 1,
+      "message": "I see - but why are we using the device? could use a comment\n\nis it to test that it\u0027s still alive and not dead?",
+      "parentUuid": "58c60150_2bee30c3",
       "range": {
         "startLine": 153,
         "startChar": 12,
