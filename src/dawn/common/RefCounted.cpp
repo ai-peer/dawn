@@ -43,6 +43,20 @@ uint64_t RefCount::GetPayload() const {
     return kPayloadMask & mRefCount.load(std::memory_order_relaxed);
 }
 
+bool RefCount::TryIncrement() {
+    uint64_t previousRefCount = mRefCount.load(std::memory_order_relaxed);
+    // Only do the increase if the previous reference count was strictly >= 2, ignoring payload
+    // bits.
+    while (previousRefCount >= kRefCountIncrement) {
+        if (mRefCount.compare_exchange_weak(previousRefCount, previousRefCount + kRefCountIncrement,
+                                            std::memory_order_relaxed, std::memory_order_relaxed)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void RefCount::Increment() {
     ASSERT((mRefCount & ~kPayloadMask) != 0);
 
@@ -100,6 +114,10 @@ uint64_t RefCounted::GetRefCountPayload() const {
 
 void RefCounted::Reference() {
     mRefCount.Increment();
+}
+
+bool RefCounted::TryReference() {
+    return mRefCount.TryIncrement();
 }
 
 void RefCounted::Release() {

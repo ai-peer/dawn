@@ -31,6 +31,11 @@ class RefCount {
     // Add a reference.
     void Increment();
 
+    // Perform reference's increase then return true.
+    // However if the ref count was already "zero", this will return false and no reference will be
+    // added.
+    bool TryIncrement();
+
     // Remove a reference. Returns true if this was the last reference.
     bool Decrement();
 
@@ -46,6 +51,7 @@ class RefCounted {
     uint64_t GetRefCountPayload() const;
 
     void Reference();
+    bool TryReference();
     // Release() is called by internal code, so it's assumed that there is already a thread
     // synchronization in place for destruction.
     void Release();
