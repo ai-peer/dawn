@@ -96,11 +96,24 @@ using ResultOrError = Result<T, ErrorData>;
         : MaybeError(DAWN_VALIDATION_ERROR(__VA_ARGS__))
 
 // DAWN_DEPRECATED_IF is used analogous to DAWN_INVALID_IF at deprecation paths.
+// This is meant to be used for old deprecation paths before V1.
+// It looks at Toggle::AllowDeprecatedAPIs to decide whether to emit warnings or to generate
+// validation errors.
 #define DAWN_DEPRECATED_IF(device, EXPR, ...)                    \
     if (DAWN_UNLIKELY(EXPR)) {                                   \
         return DAWN_MAKE_DEPRECATION_ERROR(device, __VA_ARGS__); \
     }                                                            \
     for (;;)                                                     \
+    break
+
+// DAWN_WARNING_IF is used analogous to DAWN_INVALID_IF at deprecation paths.
+// This is meant to be used for changes after V1 to have a deprecation period.
+// It emits warnings instead of generating validation errors.
+#define DAWN_WARNING_IF(device, EXPR, ...)                            \
+    if (DAWN_UNLIKELY(EXPR)) {                                        \
+        device->EmitDeprecationWarning(absl::StrFormat(__VA_ARGS__)); \
+    }                                                                 \
+    for (;;)                                                          \
     break
 
 // DAWN_DEVICE_LOST_ERROR means that there was a real unrecoverable native device lost error.

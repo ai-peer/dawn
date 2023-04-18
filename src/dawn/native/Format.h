@@ -96,6 +96,7 @@ struct Format {
     bool supportsStorageUsage = false;
     bool supportsMultisample = false;
     bool supportsResolveTarget = false;
+    bool hasAlphaChannel = false;
     Aspect aspects{};
     // Only used for renderable color formats:
     uint8_t componentCount = 0;                  // number of color channels
@@ -106,6 +107,8 @@ struct Format {
     bool HasDepth() const;
     bool HasStencil() const;
     bool HasDepthOrStencil() const;
+
+    bool HasAlphaChannel() const;
 
     // IsMultiPlanar() returns true if the format allows selecting a plane index. This is only
     // allowed by multi-planar formats (ex. NV12).

@@ -427,10 +427,28 @@ MaybeError ValidateFragmentState(DeviceBase* device,
     }
     DAWN_TRY(ValidateColorAttachmentBytesPerSample(device, colorAttachmentFormats));
 
-    DAWN_INVALID_IF(fragmentMetadata.usesSampleMaskOutput && alphaToCoverageEnabled,
-                    "alphaToCoverageEnabled is true when the sample_mask builtin is a "
-                    "pipeline output of fragment stage of %s.",
-                    descriptor->module);
+    if (alphaToCoverageEnabled) {
+        DAWN_INVALID_IF(fragmentMetadata.usesSampleMaskOutput,
+                        "alphaToCoverageEnabled is true when the sample_mask builtin is a "
+                        "pipeline output of fragment stage of %s.",
+                        descriptor->module);
+
+        // TODO(dawn:1759) alphaToCoverage addtional requirement for alpha channel at target[0] for
+        // WebGPU V1. Promote to DAWN_INVALID_IF after deprecation period.
+        DAWN_WARNING_IF(device,
+                        descriptor->targetCount == 0 ||
+                            descriptor->targets[0].format == wgpu::TextureFormat::Undefined,
+                        "alphaToCoverageEnabled is true when color target[0] is not present.");
+
+        if (descriptor->targetCount > 0) {
+            const Format* format;
+            DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->targets[0].format));
+            DAWN_WARNING_IF(
+                device, !format->HasAlphaChannel(),
+                "alphaToCoverageEnabled is true when target[0].format (%s) has no alpha channel.",
+                format->format);
+        }
+    }
 
     return {};
 }
@@ -532,6 +550,11 @@ MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
 
     DAWN_TRY_CONTEXT(ValidateMultisampleState(&descriptor->multisample),
                      "validating multisample state.");
+
+    // TODO(dawn:1759) Promote to DAWN_INVALID_IF after deprecation period.
+    DAWN_WARNING_IF(
+        device, descriptor->multisample.alphaToCoverageEnabled && descriptor->fragment == nullptr,
+        "alphaToCoverageEnabled is true when fragment state is not present.");
 
     if (descriptor->fragment != nullptr) {
         DAWN_TRY_CONTEXT(ValidateFragmentState(device, descriptor->fragment, descriptor->layout,
