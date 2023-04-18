@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6d72280_a7dc2d67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003546
+      },
+      "writtenOn": "2023-04-18T18:32:57Z",
+      "side": 1,
+      "message": "This change seems to be breaking the vulkan-deps -\u003e dawn autoroller, because it didn\u0027t include a .gitignore entry for third_party/google_benchmark/src/.  This results in the roller thinking that there are untracked files.",
+      "revId": "6a7bba54fa597011f6b34ace757385df744db7a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
