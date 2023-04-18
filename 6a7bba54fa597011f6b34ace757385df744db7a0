@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5af3ac7_4c464d12",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T00:25:46Z",
+      "side": 0,
+      "message": "Kai\u0027s comment says [here](https://github.com/gpuweb/gpuweb/issues/4018#issuecomment-1502396615) that on some GPUs we should restrict the other three limits such that they sum to less than this.\n\nI think that means we can have:\n```\nif (GPUUsesTheLimit) {\n  Validate maxFragmentCombinedOutputResources \u003e\u003d \n    default maxPerStageDescriptorStorageBuffers + \n    default maxPerStageDescriptorStorageImages + \n    default maxColorAttachments\n  \n  then,\n\n  raise distribute the extra outputs exceeding the defaults across\n     maxPerStageDescriptorStorageBuffers, maxPerStageDescriptorStorageImages,\n     and maxColorAttachments \n}\n```",
+      "revId": "6a7bba54fa597011f6b34ace757385df744db7a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
