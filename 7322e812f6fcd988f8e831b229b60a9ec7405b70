@@ -205,6 +205,24 @@
       "parentUuid": "f88a658f_12a56111",
       "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c45a1180_96a2fd7a",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-04-18T18:14:59Z",
+      "side": 1,
+      "message": "Is it worth removing the sInstance hack, and seeing if the fuzzers are happy? https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1427723#c12 says that we have until April 25th, though, so maybe we shouldn\u0027t take that chance.",
+      "parentUuid": "731daedd_01c0bf91",
+      "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
