@@ -73,6 +73,24 @@
       "message": "`\u0026\u0026 defined(__SANITIZE_ADDRESS__)`",
       "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8686c0e9_78f9dc91",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-18T17:50:56Z",
+      "side": 1,
+      "message": "I\u0027d also push this up to a `#define ASAN_WORKAROUND_ONLY(x) x` at the top of the file, with this comment.",
+      "parentUuid": "3e843e6d_a7ad856a",
+      "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
