@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22f51ec8_b38ae816",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T19:17:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t work because it will add a new `surfaceGetSupportedUsages` entry to the `DawnProcTable`. But the auto generated wire client code doesn\u0027t assign anything to this entry leading to a compilation error.\n\nThe only way I know of is manually implementing the function and mark it as `client_handwritten_commands`.",
+      "parentUuid": "c1f83b88_d2576596",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0221d469_21d3494c",
         "filename": "dawn.json",
         "patchSetId": 13
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Yes, querying the usages without enabling the feature should be a validation error.\nAnd, using any supported usages that are not RenderAttachment (without a query) without enabling the feature should also be a validation error. We should have unittests for those cases too",
       "parentUuid": "362860c7_25e7518e",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66288f34_dcfead8b",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T19:17:59Z",
+      "side": 1,
+      "message": "What should be the name of the feature? `ExtendedSwapChainUsages` or `ReadableSwapChain`?",
+      "parentUuid": "f7f7849a_acaa6913",
       "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
