@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a683f71_220af595",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T07:03:31Z",
+      "side": 1,
+      "message": "We can do a blit to work around vulkan\u0027s limitations. But I realized that blitting would be in control of users instead. Currently this feature is needed because we need to do an extra blit in graphite to load the resolve texture to an MSAA attachment. Having another blit happens behind the scene would be too wasteful.\n\nThe goal is launching graphite on metal first, there won\u0027t be any blit needed for this texture binding usage. Furthermore, in future we are going to implement the loading of resolve texture inside Dawn, which a subpass on vulkan. There won\u0027t be any need for texture binding usage flag or any blitting hack at that point.\n\nExpose supported WGPUUsages from WGPUSurface would be another option. But I think we won\u0027t implement anything for vulkan here yet. We would only simply return `WGPUsage_RenderAttachment` on vulkan for now. It can be implemented fully in future on another CL.",
+      "parentUuid": "309a2ef3_38ecc4b9",
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d17c68_2c3ba87f",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95f13f47_e494a94b",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T07:03:31Z",
+      "side": 1,
+      "message": "right now swap chain only exposes a texture view to the caller. CopySrc doesn\u0027t make sense for a texture view because we cannot do a copy on it. So that usage flag can be omitted from a swap chain.\n\nFor storage binding, I just think we don\u0027t have any immediate use case for that at least in graphite. But it\u0027s ok to add a test.",
+      "parentUuid": "02d17c68_2c3ba87f",
+      "range": {
+        "startLine": 61,
+        "startChar": 36,
+        "endLine": 62,
+        "endChar": 57
+      },
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86784553_85ce230b",
         "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
         "patchSetId": 6
@@ -54,6 +96,30 @@
       "writtenOn": "2023-04-17T23:24:33Z",
       "side": 1,
       "message": "does it work on D3D11/D3D12/GL/GLES?\n\nYou\u0027ve added the code to enable the feature, but not test. I\u0027d expect them to come together",
+      "range": {
+        "startLine": 334,
+        "startChar": 46,
+        "endLine": 334,
+        "endChar": 77
+      },
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3bd9f87_77a757c7",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-18T07:03:31Z",
+      "side": 1,
+      "message": "Not sure while we only enable swap chain tests on metal and vulkan previously.",
+      "parentUuid": "86784553_85ce230b",
       "range": {
         "startLine": 334,
         "startChar": 46,
