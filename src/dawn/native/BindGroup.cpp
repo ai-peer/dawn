@@ -103,7 +103,7 @@ MaybeError ValidateBufferBinding(const DeviceBase* device,
                     bindingInfo.buffer.type, requiredBindingAlignment);
 
     DAWN_INVALID_IF(!(entry.buffer->GetUsage() & requiredUsage),
-                    "Binding usage (%s) of %s doesn't match expected usage (%s).",
+                    "Binding usage (%s) of %s doesn't include expected usage (%s).",
                     entry.buffer->GetUsageExternalOnly(), entry.buffer, requiredUsage);
 
     DAWN_INVALID_IF(bindingSize < bindingInfo.buffer.minBindingSize,

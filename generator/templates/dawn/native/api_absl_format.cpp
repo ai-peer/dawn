@@ -100,6 +100,17 @@ namespace {{namespace}} {
                       const absl::FormatConversionSpec& spec,
                       absl::FormatSink* s) {
         if (spec.conversion_char() == absl::FormatConversionChar::s) {
+#ifdef BUILD_WITH_CHROMIUM
+            // Output the JavaScript enum string
+            switch (value) {
+            {% for value in type.values %}
+                case {{as_cppType(type.name)}}::{{as_cppEnum(value.name)}}:
+                    s->Append("{{as_jsEnumValue(value)}}");
+                    break;
+            {% endfor %}
+            }
+#else
+            // Output the C++ enum value
             s->Append("{{as_cppType(type.name)}}::");
             switch (value) {
             {% for value in type.values %}
@@ -108,6 +119,7 @@ namespace {{namespace}} {
                     break;
             {% endfor %}
             }
+#endif
         } else {
             s->Append(absl::StrFormat("%u", static_cast<typename std::underlying_type<{{as_cppType(type.name)}}>::type>(value)));
         }
@@ -125,6 +137,38 @@ namespace {{namespace}} {
                       const absl::FormatConversionSpec& spec,
                       absl::FormatSink* s) {
         if (spec.conversion_char() == absl::FormatConversionChar::s) {
+#ifdef BUILD_WITH_CHROMIUM
+            // Output the JavaScript bitmask values
+            if (!static_cast<bool>(value)) {
+                {% for value in type.values if value.value == 0 %}
+                    // 0 is often explicitly declared as None.
+                    s->Append("GPU{{as_cppType(type.name)}}.{{as_jsBitmaskValue(value)}}");
+                {% else %}
+                    s->Append(absl::StrFormat("%x", 0));
+                {% endfor %}
+                return {true};
+            }
+
+            bool first = true;
+            {% for value in type.values if value.value != 0 %}
+                if (value & {{as_cppType(type.name)}}::{{as_cppEnum(value.name)}}) {
+                    if (!first) {
+                        s->Append("|");
+                    }
+                    first = false;
+                    s->Append("GPU{{as_cppType(type.name)}}.{{as_jsBitmaskValue(value)}}");
+                    value &= ~{{as_cppType(type.name)}}::{{as_cppEnum(value.name)}};
+                }
+            {% endfor %}
+
+            if (static_cast<bool>(value)) {
+                if (!first) {
+                    s->Append("|");
+                }
+                s->Append(absl::StrFormat("%x", static_cast<typename std::underlying_type<{{as_cppType(type.name)}}>::type>(value)));
+            }
+#else
+            // Output the C++ enum values
             s->Append("{{as_cppType(type.name)}}::");
             if (!static_cast<bool>(value)) {
                 {% for value in type.values if value.value == 0 %}
@@ -163,6 +207,7 @@ namespace {{namespace}} {
             if (moreThanOneBit) {
                 s->Append(")");
             }
+#endif
         } else {
             s->Append(absl::StrFormat("%u", static_cast<typename std::underlying_type<{{as_cppType(type.name)}}>::type>(value)));
         }

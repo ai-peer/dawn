@@ -671,6 +671,11 @@ def as_jsEnumValue(value):
     return "'" + value.name.js_enum_case() + "'"
 
 
+def as_jsBitmaskValue(value):
+    if 'jsrepr' in value.json_data: return value.json_data['jsrepr']
+    return value.name.SNAKE_CASE()
+
+
 def convert_cType_to_cppType(typ, annotation, arg, indent=0):
     if typ.category == 'native':
         return arg
@@ -838,6 +843,7 @@ def make_base_render_params(metadata):
             'as_cType': lambda name: as_cType(c_prefix, name),
             'as_cppType': as_cppType,
             'as_jsEnumValue': as_jsEnumValue,
+            'as_jsBitmaskValue': as_jsBitmaskValue,
             'convert_cType_to_cppType': convert_cType_to_cppType,
             'as_varName': as_varName,
             'decorate': decorate,
