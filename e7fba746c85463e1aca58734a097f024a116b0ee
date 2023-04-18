@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667a43f9_d8c273cc",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T13:58:56Z",
+      "side": 1,
+      "message": "I don\u0027t see any usage that actually uses the bool result. Is it needed?",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 20
+      },
+      "revId": "e7fba746c85463e1aca58734a097f024a116b0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf38e3b_bb4fae85",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T13:58:56Z",
+      "side": 1,
+      "message": "since it\u0027s the whole buffer, we can use UpdateSubresource ? (no 1 suffix)",
+      "range": {
+        "startLine": 442,
+        "startChar": 29,
+        "endLine": 442,
+        "endChar": 47
+      },
+      "revId": "e7fba746c85463e1aca58734a097f024a116b0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1fee7c4_6e16fca5",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T13:58:56Z",
+      "side": 1,
+      "message": "I think this can use UpdateSubresource (no 1 suffix) in the non-uniform case",
+      "revId": "e7fba746c85463e1aca58734a097f024a116b0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

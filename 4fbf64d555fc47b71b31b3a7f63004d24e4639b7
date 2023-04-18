@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce06f460_013b6614",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T13:58:56Z",
+      "side": 1,
+      "message": "mostly LGTM",
+      "revId": "4fbf64d555fc47b71b31b3a7f63004d24e4639b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd96780_aec6df5f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T13:58:56Z",
+      "side": 1,
+      "message": "this still isn\u0027t going to be quite right for error handling.\nthe error needs to bubble up such that we return MaybeError all the way out to the top-level caller, or we need to make it so getting the command context has no errors. For correct error handling, ConsumedError is not meant to be used except at top-level functions (prefixed with API*).\n(we should find a way to make it non-public or rename it to be more obivous)\n\nMaking it so getting the command context has no errors will be better. Could you file a bug about doing so and add a TODO here?",
+      "range": {
+        "startLine": 216,
+        "startChar": 9,
+        "endLine": 216,
+        "endChar": 35
+      },
+      "revId": "4fbf64d555fc47b71b31b3a7f63004d24e4639b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce444a30_f6f09286",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T13:58:56Z",
+      "side": 1,
+      "message": "this condition for \"inheriting\" the already mapped data so that mBuffer is null and isn\u0027t unmapped at the end isn\u0027t the most clear or intuitive.\n\nI\u0027m starting to think it would be better to inline the MapInternal and UnmapInternal calls when you need them.\n\nAlso because UnmapInternal will eventually need to have better error handling. We can\u0027t handle it correctly in ~ScopedMap right now",
+      "range": {
+        "startLine": 503,
+        "startChar": 4,
+        "endLine": 505,
+        "endChar": 5
+      },
+      "revId": "4fbf64d555fc47b71b31b3a7f63004d24e4639b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
