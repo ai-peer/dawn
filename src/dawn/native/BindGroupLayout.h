@@ -50,7 +50,7 @@ MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
 // Bindings are specified as a |BindingNumber| in the BindGroupLayoutDescriptor.
 // These numbers may be arbitrary and sparse. Internally, Dawn packs these numbers
 // into a packed range of |BindingIndex| integers.
-class BindGroupLayoutBase : public ApiObjectBase, public CachedObject {
+class BindGroupLayoutBase : public ApiObjectBaseWithLockedAPIRelease, public CachedObject {
   public:
     BindGroupLayoutBase(DeviceBase* device,
                         const BindGroupLayoutDescriptor* descriptor,
