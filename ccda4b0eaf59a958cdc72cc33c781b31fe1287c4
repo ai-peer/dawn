@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbec1f3d_2c1e8742",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-18T15:49:03Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a64cb2_4a417011",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-18T15:49:03Z",
+      "side": 1,
+      "message": "nit: \"tags\": [\"dawn\"] would ensure we don\u0027t expose this method to the upstream header or emscripten",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0221d469_21d3494c",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 2497,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-18T15:49:03Z",
+      "side": 1,
+      "message": "Do the supported usages depend on the format?",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6229bab9_8022ce72",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-18T15:49:03Z",
+      "side": 1,
+      "message": "Does the usage absolutely need render attachmend?",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "362860c7_25e7518e",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-18T15:49:03Z",
+      "side": 1,
+      "message": "This means that non-Chromium projects using Dawn will have a portability hazard. Would it be possible to make this an extension that enables additional usages that you query from the surface? WDYT Austin?",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0839b042_534873d5",
+        "filename": "src/dawn/wire/client/Surface.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-18T15:49:03Z",
+      "side": 1,
+      "message": "We don\u0027t need to implement surface in the wire at this time. What caused the compilation require this file?",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8e069d_72ae8ff4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-18T15:49:03Z",
+      "side": 1,
+      "message": "In general in WebGPU, even in native, we try to have things work for the user as portably as possible so that they can test on their machine and trust that things will work everywhere. Chromium might not need this because we have a lot of engineering and testing on a variety of platforms, but it is important for other developers.\n\nWe can have an experimental API for Chromium (clearly labelled as that with \"dawn\", \"chromium\" or \"experimental\" in the name) but need to eventually resolve a lot of swapchain-related questions with Mozilla for the upstream webgpu.h",
+      "parentUuid": "1a4c68ab_f079f316",
+      "revId": "16623eba692cb488b9d1f725c8054c17dea63514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d17c68_2c3ba87f",
