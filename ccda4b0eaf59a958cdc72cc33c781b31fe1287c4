@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4d70ba_d6269df0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T20:05:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96a64cb2_4a417011",
@@ -71,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8daf4328_8c790dc1",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T20:05:09Z",
+      "side": 1,
+      "message": "Ok it\u0027s fine for now. We\u0027ll need to improve the generator in the future.",
+      "parentUuid": "22f51ec8_b38ae816",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0221d469_21d3494c",
@@ -90,6 +125,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4c293cf_d7bfc4ae",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 2497,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T20:05:09Z",
+      "side": 1,
+      "message": "in vulkan they don\u0027t appear to",
+      "parentUuid": "0221d469_21d3494c",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c561814_bbef3256",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T20:05:09Z",
+      "side": 1,
+      "message": "ConsumedError should be done here - as close to the top level API call as possible.\n\nSuggest something like:\n\n```\nwgpu::TextureUsage usage;\nif (mInstance-\u003eConsumedError(adapter-\u003eGetSupported..., \u0026usage)) {\n  return wgpu::TextureUsage::None;\n}\nreturn usage;\n```",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6229bab9_8022ce72",
         "filename": "src/dawn/native/SwapChain.cpp",
         "patchSetId": 13
@@ -101,6 +171,24 @@
       "writtenOn": "2023-04-18T15:49:03Z",
       "side": 1,
       "message": "Does the usage absolutely need render attachmend?",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c64cae4_e8d8f291",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T20:05:09Z",
+      "side": 1,
+      "message": "+1 - it\u0027s probably ok if it\u0027s only configured with CopyDst, for example\n\nWhile the backend texture may always be renderable under the hood - the client could express that the texture isn\u0027t supposed to be rendered to",
+      "parentUuid": "6229bab9_8022ce72",
       "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +242,47 @@
       "side": 1,
       "message": "What should be the name of the feature? `ExtendedSwapChainUsages` or `ReadableSwapChain`?",
       "parentUuid": "f7f7849a_acaa6913",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63277234_e52645a2",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T20:05:09Z",
+      "side": 1,
+      "message": "borrowing from Vulkan \"capabilities\" about wgpu::FeatureName::SurfaceCapabilities ?\n\nlooking at the Vulkan extension, I\u0027m wondering if maybe we ought to write out the capabilities to a struct in case we need to add things in the future. It\u0027ll have just one member for now. I\u0027m not sure if it it\u0027s worth it considering we don\u0027t 100% know this is going to be the API we settle on in webgpu.h\n\nI suppose it is fine for now, and if we add the struct in the future, we can name the getter \"GetSurfaceCapabilities\"\n\nLet\u0027s also put a doc describing the feature in third_party/dawn/docs/dawn/features/",
+      "parentUuid": "66288f34_dcfead8b",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a5c239_5ec8cd69",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T20:05:09Z",
+      "side": 1,
+      "message": "error case should probably return None.",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 52
+      },
       "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
