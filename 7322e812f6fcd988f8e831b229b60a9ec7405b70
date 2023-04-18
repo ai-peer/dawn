@@ -127,6 +127,24 @@
       "parentUuid": "3e843e6d_a7ad856a",
       "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f88a658f_12a56111",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-18T18:06:03Z",
+      "side": 1,
+      "message": "#if defined(ADDRESS_SANITIZER) is what we use in other places. I believe the fuzzer builds define it.\n\nDoes loading the DLL like this mean we can remove the sInstance hack?",
+      "parentUuid": "44e52b9c_47a1d40e",
+      "revId": "7322e812f6fcd988f8e831b229b60a9ec7405b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
