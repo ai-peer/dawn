@@ -80,6 +80,11 @@ bool Format::HasDepthOrStencil() const {
     return aspects & (Aspect::Depth | Aspect::Stencil);
 }
 
+bool Format::HasAlphaChannel() const {
+    // This is true for current formats.
+    return componentCount == 4 && IsColor();
+}
+
 bool Format::IsMultiPlanar() const {
     return aspects & (Aspect::Plane0 | Aspect::Plane1);
 }
