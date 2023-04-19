@@ -32,6 +32,21 @@ vars = {
 
   # Fetch clang-tidy into the same bin/ directory as our clang binary.
   'checkout_clang_tidy': False,
+
+  # Current revision of googletest.
+  # Note: this dep cannot be auto-rolled b/c of nesting.
+  'googletest_revision': 'af29db7ec28d6df1c7f0f745186884091e602e07',
+
+  # Current revision of Chrome's third_party googletest directory. This
+  # repository is mirrored as a separate repository, with separate git hashes
+  # that don't match the external googletest repository or Chrome. Mirrored
+  # patches will have a different git hash associated with them.
+  # To roll, first get the new hash for chromium_googletest_revision from the
+  # mirror of third_party/googletest located here:
+  # https://chromium.googlesource.com/chromium/src/third_party/googletest/
+  # Then get the new hash for googletest_revision from the root Chrome DEPS
+  # file: https://source.chromium.org/chromium/chromium/src/+/main:DEPS
+  'chromium_googletest_revision': '39342c077fc0eaa3ba17d5f51a774b843a20df48',
 }
 
 deps = {
@@ -102,7 +117,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
   'third_party/googletest': {
-    'url': '{chromium_git}/external/github.com/google/googletest@7a7231c442484be389fdf01594310349ca0e42a8',
+    'url': '{chromium_git}/chromium/src/third_party/googletest@{chromium_googletest_revision}',
     'condition': 'dawn_standalone',
   },
   # This is a dependency of //testing
@@ -432,5 +447,6 @@ hooks = [
 ]
 
 recursedeps = [
+  'third_party/googletest',
   'third_party/vulkan-deps',
 ]

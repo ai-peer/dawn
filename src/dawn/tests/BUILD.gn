@@ -38,42 +38,11 @@ group("tests") {
 # and because otherwise the "gn check" fails.
 
 if (!build_with_chromium) {
-  # When we aren't in Chromium we define out own targets based on the location
-  # of the googletest repo.
-  googletest_dir = dawn_googletest_dir
-
-  config("gtest_config") {
-    include_dirs = [
-      "${googletest_dir}/googletest",
-      "${googletest_dir}/googletest/include",
-    ]
-  }
-
-  static_library("gtest") {
-    testonly = true
-    sources = [ "${googletest_dir}/googletest/src/gtest-all.cc" ]
-    public_configs = [ ":gtest_config" ]
-  }
-
-  config("gmock_config") {
-    include_dirs = [
-      "${googletest_dir}/googlemock",
-      "${googletest_dir}/googlemock/include",
-      "${googletest_dir}/googletest/include",
-    ]
-  }
-
-  static_library("gmock") {
-    testonly = true
-    sources = [ "${googletest_dir}/googlemock/src/gmock-all.cc" ]
-    public_configs = [ ":gmock_config" ]
-  }
-
   group("gmock_and_gtest") {
     testonly = true
     public_deps = [
-      ":gmock",
-      ":gtest",
+      "//testing/gmock",
+      "//testing/gtest",
     ]
   }
 } else {
