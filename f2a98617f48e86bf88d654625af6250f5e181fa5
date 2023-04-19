@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "f2a98617f48e86bf88d654625af6250f5e181fa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c9c611_af9feaf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-19T21:37:06Z",
+      "side": 1,
+      "message": "Thanks for reviewing. Landing this first. Even if M113 merge fails we can still change it back to emit warning",
+      "revId": "f2a98617f48e86bf88d654625af6250f5e181fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
