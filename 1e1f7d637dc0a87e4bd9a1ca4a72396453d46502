@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02ca5f2d_85160ad0",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-19T20:02:08Z",
+      "side": 1,
+      "message": "There are no luminance-alpha formats, I think it\u0027s safe to assume there will not be (and fix the bug later if there are).",
+      "parentUuid": "3c074686_e35a914c",
+      "revId": "1e1f7d637dc0a87e4bd9a1ca4a72396453d46502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb8034b6_632430dd",
         "filename": "src/dawn/native/RenderPipeline.cpp",
         "patchSetId": 3
