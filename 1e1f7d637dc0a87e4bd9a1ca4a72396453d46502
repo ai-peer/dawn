@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c074686_e35a914c",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-19T00:36:07Z",
+      "side": 1,
+      "message": "Better approach to decide if a format has alpha channel?\n\nRight now I just manually add this info.\n\nI had a thought about looking at `componentCount \u003d\u003d 4 \u0026\u0026 IsColor()`. But isn\u0027t there luminance + alpha? Didn\u0027t find it in existing format. Not sure about extension \u0026 renderable.",
+      "revId": "1e1f7d637dc0a87e4bd9a1ca4a72396453d46502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
