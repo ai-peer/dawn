@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc8f8777_f0cc86b1",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T18:02:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cda4217e_b36c2db9",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "caf67371_6dbdba8d",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-19T13:39:31Z",
       "side": 1,
       "message": "u-nit: could we have block comments?",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485f47ca_639059a1",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T18:02:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf67371_6dbdba8d",
       "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff5b9927_dec0f8f3",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T18:02:02Z",
+      "side": 1,
+      "message": "I am not sure how to do it right now. Added a TODO here.",
+      "parentUuid": "803545ca_df1ace65",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e160687d_fa3383ec",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11de8e19_9671f22b",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T18:02:02Z",
+      "side": 1,
+      "message": "I don\u0027t see any problem right now. I am not sure if we need to set vertex buffer back to nullptr for pass which doesn\u0027t use vertex buffer.\n\nRefine the comment.",
+      "parentUuid": "e160687d_fa3383ec",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64b537c9_1907e2ba",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-04-19T13:39:31Z",
       "side": 1,
       "message": "nit: Can we have a tracking issue for this TODO (or just the catchall D3D11 issue)",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17d7eace_bd195516",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T18:02:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64b537c9_1907e2ba",
       "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
