@@ -158,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5581d26f_ffd143ff",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-19T09:59:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c561814_bbef3256",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6229bab9_8022ce72",
@@ -189,6 +207,24 @@
       "side": 1,
       "message": "+1 - it\u0027s probably ok if it\u0027s only configured with CopyDst, for example\n\nWhile the backend texture may always be renderable under the hood - the client could express that the texture isn\u0027t supposed to be rendered to",
       "parentUuid": "6229bab9_8022ce72",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c6bb9ea_4e73ea3d",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-19T09:59:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c64cae4_e8d8f291",
       "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -264,6 +300,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9358930c_ce8cbe7b",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-19T09:59:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63277234_e52645a2",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5a5c239_5ec8cd69",
@@ -287,6 +341,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "037ddc9c_2f0836bb",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-19T09:59:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5a5c239_5ec8cd69",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 52
+      },
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0839b042_534873d5",
@@ -300,6 +378,24 @@
       "writtenOn": "2023-04-18T15:49:03Z",
       "side": 1,
       "message": "We don\u0027t need to implement surface in the wire at this time. What caused the compilation require this file?",
+      "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "216f0215_ca42e332",
+        "filename": "src/dawn/wire/client/Surface.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-19T09:59:53Z",
+      "side": 1,
+      "message": "This doesn\u0027t work without manual implementation because the current generator will add a new `surfaceGetSupportedUsages` entry to the `DawnProcTable`. But the auto generated wire client code wouldn\u0027t assign anything to this entry leading to a compilation error.\n\nUsing \"dawn\", \"native\" tags have the same problem.\n\nThe only way I know of is manually implementing the function and mark it as `client_handwritten_commands`.",
+      "parentUuid": "0839b042_534873d5",
       "revId": "ccda4b0eaf59a958cdc72cc33c781b31fe1287c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
