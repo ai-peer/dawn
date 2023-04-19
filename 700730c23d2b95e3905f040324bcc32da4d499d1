@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a648511_97bde9a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "Had to review this for the BindGroupTracker",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "086fd5c0_47f18ca5",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886b2b4d_d7732ed7",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "The comment seems to indicate that the offset should be aligned to 16*16 which is 256. Luckily this is guaranteed by the WebGPU spec.",
+      "range": {
+        "startLine": 95,
+        "startChar": 53,
+        "endLine": 95,
+        "endChar": 55
+      },
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619328d2_d046f85c",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "This should probably be another type of error. A validation error isn\u0027t fatal, which means we could have partial state if this validation error is hit.",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e084ed5_c2e00336",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "What about other shader stages?",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9360c9a9_264de4ad",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "We should probably handle errors here so that we don\u0027t keep going with a partially cleared texture. Iterate() should be able to take a lambda that returns a MaybeError and return a MaybeError itself.",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49503380_8d19fd0c",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8e5b94_2f06d599",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "What about NumWorkgroups for the indirect dispatches? Can we have a tracking issue? Also isn\u0027t this Write going to cause synchronization points?",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f71ee5_5dee82da",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:34:25Z",
+      "side": 1,
+      "message": "De we need to do this given that we will never reuse the device context?",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
