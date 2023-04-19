@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5349e3_b22cb328",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-19T23:04:06Z",
+      "side": 1,
+      "message": "Blocked in favor of https://dawn-review.googlesource.com/c/dawn/+/128061",
+      "revId": "814f4dd20471697d1fadb9479b110f4029e1a090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8670d5f_38e45a44",
