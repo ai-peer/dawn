@@ -449,6 +449,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "663aa992_f3ac044d",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Sure. so I added a TODO here. BTW, ID3D11DeviceContext::Map() is not thread safe like other backends. So we need to adjust the implementation somehow, So I don\u0027t want to do too much map related work before landing command buffer render pass and compute pass code.",
+      "parentUuid": "86bfdc44_86616302",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "199b8971_d28b7363",
         "filename": "src/dawn/tests/end2end/BufferTests.cpp",
         "patchSetId": 5

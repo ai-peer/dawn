@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbd72137_4bcb02b5",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca3ddb0c_a3ac5402",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89e4bc20_e5a8e13f",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-04-19T13:20:50Z",
       "side": 1,
       "message": "TBH it seems a bit weird that the logic for Copy would be inside buffer and not here. Any reason for this choice?",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6cd1a8_34c3ab51",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "This methods will be used here and in DeviceD3D11.cpp. So I thinkmaybe just put it in Buffer.cpp.",
+      "parentUuid": "89e4bc20_e5a8e13f",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "510e74bb_a20c8750",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "For non-mappable buffer, Buffer::ScopedMap::Create() is a noop, it will not sync with gpu.\n\nFor mappable buffer, the D3D11Buffer is created with USAGE_STAGING, it cannot be used with compute shader. so we have to copy data to a staging texture first and then copy to the final target.",
+      "parentUuid": "e3511089_433e62e8",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "596cb47d_02c104d0",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 8
@@ -88,6 +148,24 @@
       "writtenOn": "2023-04-19T13:20:50Z",
       "side": 1,
       "message": "this code path seems incomplete, there is no copy performed for 3D textures.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c326814d_383e6a25",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Done. return error here for 3d and 1d textures.",
+      "parentUuid": "596cb47d_02c104d0",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +183,24 @@
       "writtenOn": "2023-04-19T13:20:50Z",
       "side": 1,
       "message": "Is 1D handled with the code below?",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b193a3_4e50a213",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "I haven\u0027t test with 1d texture. So return error for 1d textures as well.",
+      "parentUuid": "be1d6983_2c630b0b",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -128,6 +224,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5700a225_c95ef314",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Just personal preference. This file has too much content (buffer copies, texture copies, write buffer, write texture, pipeline setup, etc), and some methods could be used elsewhere (Queue, Device, etc). I feel putting code to related files is cleaner, right?",
+      "parentUuid": "86daa03c_56005afc",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b211af2c_32525096",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.h",
         "patchSetId": 8
@@ -139,6 +253,24 @@
       "writtenOn": "2023-04-19T13:20:50Z",
       "side": 1,
       "message": "nit: unused",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b610cda7_4aa0667b",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "It will be used in follow up CLs. remove it now.",
+      "parentUuid": "b211af2c_32525096",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +292,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd14bc6_b72fd1dc",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a0b7a6a_247eadf1",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2eb71bfc_21e0e1e1",
@@ -173,6 +323,24 @@
       "writtenOn": "2023-04-19T13:20:50Z",
       "side": 1,
       "message": "u-nit: the arguments to Buffer::Copy are shuffled compared to CopyB2B.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0695d77_81b170ef",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb71bfc_21e0e1e1",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +362,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab69d2a_5dc26f37",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "642d6722_440ac726",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07e5af49_d73946aa",
@@ -207,6 +393,24 @@
       "writtenOn": "2023-04-19T13:20:50Z",
       "side": 1,
       "message": "I think we need both the format to be renderable, and the texture to have been created with the RenderAttachment usage.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d21e13_4dd9fa91",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07e5af49_d73946aa",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -228,6 +432,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b90d10c4_ae94a185",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "I think you are right. Added a TODO and return unimplemented error if layer count is not 1.",
+      "parentUuid": "c83d96f4_712cceab",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db82240d_69335084",
@@ -245,6 +467,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e736a723_c145b333",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "Probably not. I didn\u0027t test it.",
+      "parentUuid": "db82240d_69335084",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77e6f461_81b742a4",
@@ -258,6 +498,24 @@
       "writtenOn": "2023-04-19T13:20:50Z",
       "side": 1,
       "message": "Maybe we can reuse this to perform the copies from staging. Dawn is a very reentrant API so we could create a dawn::native::d3d11::Texture for the staging texture, then use the `Texture::Copy(source, destination, size)` that this method would become and reuse code.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e591e1_c24d43e6",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T15:36:17Z",
+      "side": 1,
+      "message": "That is my idea too. But CopyTextureToTextureCmd has too many fields({src,dst}Texture, {src,dst}Origin, {src,dst}MipLevel, {src,dst}Aspects, copySize), so I didn\u0027t expends it to method arguments. For copies from staging, we can just fill this `CopyTextureToTextureCmd` struct.\n\nRename to Texture::Copy",
+      "parentUuid": "77e6f461_81b742a4",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
