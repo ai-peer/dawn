@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8670d5f_38e45a44",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-19T19:50:13Z",
+      "side": 1,
+      "message": "nit. Maybe `DAWN_DEPRECATION_WARNING_IF`? I think/suspect that we should remove `DAWN_DEPRECATED_IF` entirely in it\u0027s current form once we remove all the other code paths that are using it because the flag doesn\u0027t actually make sense with rolling deprecation stuff, only with the V1 launch.\n\nThen as we deprecate stuff we can just go from `DAWN_DEPRECATION_WARNING_IF` to `DAWN_INVALID_IF` as you mention in the comments.",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 23
+      },
+      "revId": "814f4dd20471697d1fadb9479b110f4029e1a090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbcad21_5790ad3c",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-19T19:50:13Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to use the `DeprecationTests` fixture for this given that the fixture was specifically for testing with and without the flag which doesn\u0027t really apply here.",
+      "range": {
+        "startLine": 902,
+        "startChar": 7,
+        "endLine": 902,
+        "endChar": 23
+      },
+      "revId": "814f4dd20471697d1fadb9479b110f4029e1a090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
