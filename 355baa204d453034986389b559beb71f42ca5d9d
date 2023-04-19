@@ -63,6 +63,30 @@
       },
       "revId": "355baa204d453034986389b559beb71f42ca5d9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5297c0f_c1d034aa",
+        "filename": "src/tint/symbol_table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-19T16:52:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17ccde1d_21714a61",
+      "range": {
+        "startLine": 59,
+        "startChar": 20,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "355baa204d453034986389b559beb71f42ca5d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
