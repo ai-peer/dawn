@@ -16,6 +16,24 @@
       "message": "potentially valuable to keep the part of the test that trues to use the max of three other limits? (unless we have it elsewhere)",
       "revId": "f0d4449d5fc8a8ee49da9067152e1cf5afc42aea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404513cd_f92a27af",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-19T05:36:01Z",
+      "side": 0,
+      "message": "Added it back only for test case when all three limits are at their maximums.",
+      "parentUuid": "8bbeb364_19184189",
+      "revId": "f0d4449d5fc8a8ee49da9067152e1cf5afc42aea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
