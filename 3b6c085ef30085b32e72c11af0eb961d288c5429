@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d4c812_6b9937ca",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:49Z",
+      "side": 1,
+      "message": "have a TODO for how to update num workgroups",
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c94d987_a091c329",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:49Z",
+      "side": 1,
+      "message": "uunit: extra newline?",
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ccba9b_7840c5b6",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:49Z",
+      "side": 1,
+      "message": "should it be `sizeof(uint32_t) * 3` ?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053cdade_6b0af28a",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:49Z",
+      "side": 1,
+      "message": "is it an error to not set it back to null?",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 64
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
