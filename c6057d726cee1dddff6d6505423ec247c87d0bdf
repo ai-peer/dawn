@@ -46,6 +46,30 @@
       },
       "revId": "c6057d726cee1dddff6d6505423ec247c87d0bdf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06dd9ee1_565d930e",
+        "filename": "src/tint/symbol_table.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-19T17:04:10Z",
+      "side": 1,
+      "message": "Seems like we can avoid a heap allocation for a bunch of control-flow paths. Seems like a good thing to try.\nHappy to be done as follow-up.",
+      "parentUuid": "a24e4bd5_c4ea85dd",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 15
+      },
+      "revId": "c6057d726cee1dddff6d6505423ec247c87d0bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
