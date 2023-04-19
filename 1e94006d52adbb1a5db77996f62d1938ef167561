@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b651487f_e22846f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:39:31Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda4217e_b36c2db9",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:39:31Z",
+      "side": 1,
+      "message": "nit: leftover?",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf67371_6dbdba8d",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:39:31Z",
+      "side": 1,
+      "message": "u-nit: could we have block comments?",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "803545ca_df1ace65",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:39:31Z",
+      "side": 1,
+      "message": "How do we plan to handle the first index offset etc for indirect draws?",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e160687d_fa3383ec",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:39:31Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand this TODO. Could you clarify it? Is it that we should lazily apply vertex buffers so that we have the correct ArrayStride? Are any tests failing at the moment because we don\u0027t do that? (if there are none, we should probably add some)",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b537c9_1907e2ba",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:39:31Z",
+      "side": 1,
+      "message": "nit: Can we have a tracking issue for this TODO (or just the catchall D3D11 issue)",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
