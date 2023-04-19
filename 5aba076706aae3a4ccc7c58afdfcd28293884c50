@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33544fae_5365fd5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5aba076706aae3a4ccc7c58afdfcd28293884c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b176b78c_049a2315",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:43Z",
+      "side": 1,
+      "message": "TODO for handling the builtins",
+      "revId": "5aba076706aae3a4ccc7c58afdfcd28293884c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a1a18b_a8535004",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:43Z",
+      "side": 1,
+      "message": "TODO for handling the builtins",
+      "revId": "5aba076706aae3a4ccc7c58afdfcd28293884c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

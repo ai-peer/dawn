@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ffae59_d2580298",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:43Z",
+      "side": 1,
+      "message": "hmm, I think you didn\u0027t upload the CL that has the TODO",
+      "parentUuid": "ff5b9927_dec0f8f3",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e160687d_fa3383ec",
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "I don\u0027t see any problem right now. I am not sure if we need to set vertex buffer back to nullptr for pass which doesn\u0027t use vertex buffer.\n\nRefine the comment.",
       "parentUuid": "e160687d_fa3383ec",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44362006_bf1e8d50",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:42:43Z",
+      "side": 1,
+      "message": "hmm, I think you didn\u0027t upload the CL that has the comment",
+      "parentUuid": "11de8e19_9671f22b",
       "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
