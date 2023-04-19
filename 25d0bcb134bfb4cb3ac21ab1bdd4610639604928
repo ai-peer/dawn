@@ -56,6 +56,24 @@
       "message": "What\u0027s kind of weird is that we don\u0027t need to enable the feature explicitly to use it. It\u0027s just either present in the adapter or not. I\u0027m not sure how to handle this. Should it be a device extension? WDYT Austin?",
       "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c752fed6_00666c98",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-19T14:54:03Z",
+      "side": 1,
+      "message": "We can move `GetSuportedSurfaceUsages` method to `Device` instead of `Surface`. If that\u0027s ok I will make a change.\n\nThat way no need to hacking around the null device\u0027s SetSupportedFeaturesForTesting anymore.",
+      "parentUuid": "f5a327ee_96e7365f",
+      "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
