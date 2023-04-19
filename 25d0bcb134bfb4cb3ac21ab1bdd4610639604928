@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "174cb98d_093d81d5",
+        "filename": "docs/dawn/features/surface_capabilities.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:53:01Z",
+      "side": 1,
+      "message": "unit: here and throughout, I think that we should use \"usage\" without an \"s\" (at least for the public API names. Because in the descriptors, it is also called \"usage\", singular. It\u0027s a singular concept even though it may contain multiple bits",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 73
+      },
+      "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0830ffb7_ce35e956",
         "filename": "include/dawn/native/DawnNative.h",
         "patchSetId": 18
@@ -72,6 +95,24 @@
       "side": 1,
       "message": "We can move `GetSuportedSurfaceUsages` method to `Device` instead of `Surface`. If that\u0027s ok I will make a change.\n\nThat way no need to hacking around the null device\u0027s SetSupportedFeaturesForTesting anymore.",
       "parentUuid": "f5a327ee_96e7365f",
+      "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c4f0b8_e06e9c08",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:53:01Z",
+      "side": 1,
+      "message": "Putting it on the device should be OK. Since you pass the usages you want in device-\u003eCreateSwapChain(surface, desc), so you can query support first with device-\u003eSupportedUsage(surface). And it\u0027s an error if you don\u0027t enable the feature on the device.\n\nSorry - I had intended that this should be a device extension, didn\u0027t communicate that well apparently.",
+      "parentUuid": "c752fed6_00666c98",
       "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
