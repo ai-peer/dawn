@@ -140,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66279d5d_763fc6ce",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T15:42:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ab3afb33_cc780426",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3b6ae6b_1993d4a4",
@@ -175,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c4b828_a3f0b276",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T15:42:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f5f0a952_8a4bc099",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "260244f5_46e02fde",
@@ -206,6 +242,24 @@
       "side": 1,
       "message": "It will be used in CommandBufferD3D11 for B2T and T2B copies.",
       "parentUuid": "260244f5_46e02fde",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f70c1e_8b4920b9",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T15:42:05Z",
+      "side": 1,
+      "message": "Ok, as noted in the other CL, we probably want to avoid synchronous mapping for copy operations in the future, so maybe we\u0027ll get to a point where there are few enough ScopedMap uses that we can just remove the class.",
+      "parentUuid": "b192ad72_aa48a879",
       "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
