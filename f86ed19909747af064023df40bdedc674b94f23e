@@ -52,6 +52,24 @@
       "parentUuid": "20510de6_673ed5b5",
       "revId": "f86ed19909747af064023df40bdedc674b94f23e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e840af86_390198e1",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-19T00:44:40Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "20510de6_673ed5b5",
+      "revId": "f86ed19909747af064023df40bdedc674b94f23e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
