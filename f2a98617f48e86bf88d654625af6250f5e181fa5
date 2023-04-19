@@ -33,6 +33,23 @@
       "message": "Thanks for reviewing. Landing this first. Even if M113 merge fails we can still change it back to emit warning",
       "revId": "f2a98617f48e86bf88d654625af6250f5e181fa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "034237cb_90bc9f88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-19T22:19:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f2a98617f48e86bf88d654625af6250f5e181fa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
