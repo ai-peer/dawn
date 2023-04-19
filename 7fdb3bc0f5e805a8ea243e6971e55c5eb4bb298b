@@ -467,6 +467,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0e6e761_72e27526",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:24:02Z",
+      "side": 1,
+      "message": "ok - for any tests suppressed, if you have a general understanding of what needs to be done to fix it, you should include that information so whoever comes to fix the tests in the future has a starting place.\n\nEven better, you could file a new bug blocking dawn:1705 which clearly describes the issue, then link that bug in the TODO",
+      "parentUuid": "663aa992_f3ac044d",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "199b8971_d28b7363",
         "filename": "src/dawn/tests/end2end/BufferTests.cpp",
         "patchSetId": 5

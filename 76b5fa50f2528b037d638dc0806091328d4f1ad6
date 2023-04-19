@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "914991de_d3ba4518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:24:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "76b5fa50f2528b037d638dc0806091328d4f1ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4480b26a_ab845ba6",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:24:02Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 2
+      },
+      "revId": "76b5fa50f2528b037d638dc0806091328d4f1ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39be4708_e5053c80",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T21:24:02Z",
+      "side": 1,
+      "message": "\"If you specify zero for no copy option, CopySubresourceRegion1 behaves like ID3D11DeviceContext::CopySubresourceRegion\"\n\nuse CopySubresourceRegion instead?\n\nCopySubresourceRegion1 is in d3d11_1.h and not in d3d11.h - so we need to check feature support if you want that version\n\n\"To determine whether the display driver supports overlapping, check the CopyWithOverlap member of D3D11_FEATURE_DATA_D3D11_OPTIONS.\"\n\n\nwe shouldn\u0027t need the overlap version though. WebGPU disallows those types of copies",
+      "range": {
+        "startLine": 402,
+        "startChar": 46,
+        "endLine": 402,
+        "endChar": 68
+      },
+      "revId": "76b5fa50f2528b037d638dc0806091328d4f1ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
