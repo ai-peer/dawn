@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0830ffb7_ce35e956",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:56:25Z",
+      "side": 1,
+      "message": "Backend-specific things usually go in their own header, so here it would be NullBackend.h But also shouldn\u0027t the null backend support all features already? Ah this is to Disable features for validation? Gotcha. It could still go in NullBackend.h",
+      "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4f5a7c_2e389d7e",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:56:25Z",
+      "side": 1,
+      "message": "Usually we would split APISomething into APISomething and Something. Something would return a ResultOrError\u003c\u003e while APISomething just does a `if ConsumedError(Something())`. This both allows reducing the amount of manual error handling, and avoids calls like this one to generate two errors if SurfaceCapabilities is not enabled (even if we just check it here).",
+      "range": {
+        "startLine": 61,
+        "startChar": 36,
+        "endLine": 61,
+        "endChar": 57
+      },
+      "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a327ee_96e7365f",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:56:25Z",
+      "side": 1,
+      "message": "What\u0027s kind of weird is that we don\u0027t need to enable the feature explicitly to use it. It\u0027s just either present in the adapter or not. I\u0027m not sure how to handle this. Should it be a device extension? WDYT Austin?",
+      "revId": "25d0bcb134bfb4cb3ac21ab1bdd4610639604928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
