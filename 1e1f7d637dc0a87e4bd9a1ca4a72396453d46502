@@ -39,6 +39,30 @@
       },
       "revId": "1e1f7d637dc0a87e4bd9a1ca4a72396453d46502",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21caa8b6_759d1bae",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-19T17:52:20Z",
+      "side": 1,
+      "message": "Thanks for reminding me of that. I think adding a new macro regardless of the deprecation toggle maybe better. I will add comments saying DAWN_DEPRECATED_IF looks at the toggle while the other doesn\u0027t. It should be useful as post-V1 if we want to change any behavior, it likely needs to go through the deprecation process.",
+      "parentUuid": "fb8034b6_632430dd",
+      "range": {
+        "startLine": 438,
+        "startChar": 8,
+        "endLine": 438,
+        "endChar": 26
+      },
+      "revId": "1e1f7d637dc0a87e4bd9a1ca4a72396453d46502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
