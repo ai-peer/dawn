@@ -16,7 +16,7 @@
 #define SRC_DAWN_NATIVE_VULKAN_VULKANEXTENSIONS_H_
 
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/ityp_bitset.h"
 
@@ -62,7 +62,7 @@ struct InstanceExtInfo {
 // Returns the information about a known InstanceExt
 const InstanceExtInfo& GetInstanceExtInfo(InstanceExt ext);
 // Returns a map that maps a Vulkan extension name to its InstanceExt.
-std::unordered_map<std::string, InstanceExt> CreateInstanceExtNameMap();
+absl::flat_hash_map<std::string, InstanceExt> CreateInstanceExtNameMap();
 
 // Sets entries in `extensions` to true if that entry was promoted in Vulkan version `version`
 void MarkPromotedExtensions(InstanceExtSet* extensions, uint32_t version);
@@ -131,7 +131,7 @@ struct DeviceExtInfo {
 // Returns the information about a known DeviceExt
 const DeviceExtInfo& GetDeviceExtInfo(DeviceExt ext);
 // Returns a map that maps a Vulkan extension name to its DeviceExt.
-std::unordered_map<std::string, DeviceExt> CreateDeviceExtNameMap();
+absl::flat_hash_map<std::string, DeviceExt> CreateDeviceExtNameMap();
 
 // Sets entries in `extensions` to true if that entry was promoted in Vulkan version `version`
 void MarkPromotedExtensions(DeviceExtSet* extensions, uint32_t version);
@@ -167,7 +167,7 @@ struct VulkanLayerInfo {
 // Returns the information about a known VulkanLayer
 const VulkanLayerInfo& GetVulkanLayerInfo(VulkanLayer layer);
 // Returns a map that maps a Vulkan layer name to its VulkanLayer.
-std::unordered_map<std::string, VulkanLayer> CreateVulkanLayerNameMap();
+absl::flat_hash_map<std::string, VulkanLayer> CreateVulkanLayerNameMap();
 
 }  // namespace dawn::native::vulkan
 

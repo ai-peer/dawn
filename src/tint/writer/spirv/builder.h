@@ -17,9 +17,9 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "spirv/unified1/spirv.h"
 #include "src/tint/ast/assignment_statement.h"
@@ -519,19 +519,19 @@ class Builder {
         Scope();
         Scope(const Scope&);
         ~Scope();
-        std::unordered_map<OperandListKey, uint32_t> type_init_to_id_;
+        absl::flat_hash_map<OperandListKey, uint32_t> type_init_to_id_;
     };
 
-    std::unordered_map<const sem::Variable*, uint32_t> var_to_id_;
-    std::unordered_map<uint32_t, const sem::Variable*> id_to_var_;
-    std::unordered_map<std::string, uint32_t> import_name_to_id_;
-    std::unordered_map<Symbol, uint32_t> func_symbol_to_id_;
-    std::unordered_map<sem::CallTargetSignature, uint32_t> func_sig_to_id_;
-    std::unordered_map<const type::Type*, uint32_t> type_to_id_;
-    std::unordered_map<ScalarConstant, uint32_t> const_to_id_;
-    std::unordered_map<const type::Type*, uint32_t> const_null_to_id_;
-    std::unordered_map<uint64_t, uint32_t> const_splat_to_id_;
-    std::unordered_map<const type::Type*, uint32_t> texture_type_to_sampled_image_type_id_;
+    absl::flat_hash_map<const sem::Variable*, uint32_t> var_to_id_;
+    absl::flat_hash_map<uint32_t, const sem::Variable*> id_to_var_;
+    absl::flat_hash_map<std::string, uint32_t> import_name_to_id_;
+    absl::flat_hash_map<Symbol, uint32_t> func_symbol_to_id_;
+    absl::flat_hash_map<sem::CallTargetSignature, uint32_t> func_sig_to_id_;
+    absl::flat_hash_map<const type::Type*, uint32_t> type_to_id_;
+    absl::flat_hash_map<ScalarConstant, uint32_t> const_to_id_;
+    absl::flat_hash_map<const type::Type*, uint32_t> const_null_to_id_;
+    absl::flat_hash_map<uint64_t, uint32_t> const_splat_to_id_;
+    absl::flat_hash_map<const type::Type*, uint32_t> texture_type_to_sampled_image_type_id_;
     std::vector<Scope> scope_stack_;
     std::vector<uint32_t> merge_stack_;
     std::vector<uint32_t> continue_stack_;

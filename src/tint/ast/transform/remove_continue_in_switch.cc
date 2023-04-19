@@ -15,8 +15,8 @@
 #include "src/tint/ast/transform/remove_continue_in_switch.h"
 
 #include <string>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/continue_statement.h"
 #include "src/tint/ast/switch_statement.h"
@@ -103,7 +103,7 @@ struct RemoveContinueInSwitch::State {
     const sem::Info& sem = src->Sem();
 
     // Map of switch statement to 'tint_continue' variable.
-    std::unordered_map<const SwitchStatement*, Symbol> switch_to_cont_var_name;
+    absl::flat_hash_map<const SwitchStatement*, Symbol> switch_to_cont_var_name;
 
     // If `cont` is within a switch statement within a loop, returns a pointer to
     // that switch statement.

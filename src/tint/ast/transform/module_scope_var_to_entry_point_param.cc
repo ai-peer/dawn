@@ -14,10 +14,10 @@
 
 #include "src/tint/ast/transform/module_scope_var_to_entry_point_param.h"
 
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/program_builder.h"
@@ -302,7 +302,7 @@ struct ModuleScopeVarToEntryPointParam::State {
     void Process() {
         // Predetermine the list of function calls that need to be replaced.
         using CallList = utils::Vector<const CallExpression*, 8>;
-        std::unordered_map<const Function*, CallList> calls_to_replace;
+        absl::flat_hash_map<const Function*, CallList> calls_to_replace;
 
         utils::Vector<const Function*, 8> functions_to_process;
 
@@ -395,7 +395,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                 bool is_pointer;
                 bool is_wrapped;
             };
-            std::unordered_map<const sem::Variable*, NewVar> var_to_newvar;
+            absl::flat_hash_map<const sem::Variable*, NewVar> var_to_newvar;
 
             // We aggregate all workgroup variables into a struct to avoid hitting MSL's limit for
             // threadgroup memory arguments.
@@ -576,7 +576,7 @@ struct ModuleScopeVarToEntryPointParam::State {
     std::unordered_set<const sem::Struct*> cloned_structs_;
 
     // Map from identifier expression to the address-of expression that uses it.
-    std::unordered_map<const IdentifierExpression*, const UnaryOpExpression*> ident_to_address_of_;
+    absl::flat_hash_map<const IdentifierExpression*, const UnaryOpExpression*> ident_to_address_of_;
 
     // The name of the structure that contains all the module-scope private variables.
     Symbol private_struct_name;

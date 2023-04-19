@@ -17,8 +17,8 @@
 
 #include <bitset>
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/native/DawnNative.h"
@@ -191,7 +191,7 @@ class TogglesInfo {
     void EnsureToggleNameToEnumMapInitialized();
 
     bool mToggleNameToEnumMapInitialized = false;
-    std::unordered_map<std::string, Toggle> mToggleNameToEnumMap;
+    absl::flat_hash_map<std::string, Toggle> mToggleNameToEnumMap;
 };
 
 }  // namespace dawn::native

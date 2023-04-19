@@ -19,10 +19,10 @@
 #include <memory>
 #include <optional>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/program_builder.h"
 #include "src/tint/reader/spirv/attributes.h"
@@ -111,7 +111,7 @@ struct BlockInfo {
     const Construct* construct = nullptr;
 
     /// Maps the ID of a successor block (in the CFG) to its edge classification.
-    std::unordered_map<uint32_t, EdgeKind> succ_edge;
+    absl::flat_hash_map<uint32_t, EdgeKind> succ_edge;
 
     /// The following fields record relationships among blocks in a selection
     /// construct for an OpSwitch instruction.
@@ -1320,21 +1320,21 @@ class FunctionEmitter {
 
     // The map of IDs that have already had an identifier name generated for it,
     // to their Type.
-    std::unordered_map<uint32_t, const Type*> identifier_types_;
+    absl::flat_hash_map<uint32_t, const Type*> identifier_types_;
     // Mapping from SPIR-V ID that is used at most once, to its AST expression.
-    std::unordered_map<uint32_t, TypedExpression> singly_used_values_;
+    absl::flat_hash_map<uint32_t, TypedExpression> singly_used_values_;
 
     // The IDs of basic blocks, in reverse structured post-order (RSPO).
     // This is the output order for the basic blocks.
     std::vector<uint32_t> block_order_;
 
     // Mapping from block ID to its bookkeeping info.
-    std::unordered_map<uint32_t, std::unique_ptr<BlockInfo>> block_info_;
+    absl::flat_hash_map<uint32_t, std::unique_ptr<BlockInfo>> block_info_;
 
     // Mapping from a result ID to its bookkeeping info.  This may be
     // either a result ID defined in the function body, or the ID of a
     // module-scope variable.
-    std::unordered_map<uint32_t, std::unique_ptr<DefInfo>> def_info_;
+    absl::flat_hash_map<uint32_t, std::unique_ptr<DefInfo>> def_info_;
 
     // Structured constructs, where enclosing constructs precede their children.
     ConstructList constructs_;

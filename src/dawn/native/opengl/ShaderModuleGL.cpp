@@ -55,7 +55,7 @@ tint::writer::glsl::Version::Standard ToTintGLStandard(opengl::OpenGLVersion::St
     UNREACHABLE();
 }
 
-using BindingMap = std::unordered_map<tint::writer::BindingPoint, tint::writer::BindingPoint>;
+using BindingMap = absl::flat_hash_map<tint::writer::BindingPoint, tint::writer::BindingPoint>;
 
 #define GLSL_COMPILATION_REQUEST_MEMBERS(X)                                                      \
     X(const tint::Program*, inputProgram)                                                        \
@@ -155,7 +155,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
     // variables to the 1D space.
     const BindingInfoArray& moduleBindingInfo =
         GetEntryPoint(programmableStage.entryPoint).bindings;
-    std::unordered_map<tint::writer::BindingPoint, tint::writer::BindingPoint> glBindings;
+    absl::flat_hash_map<tint::writer::BindingPoint, tint::writer::BindingPoint> glBindings;
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(group);
         const auto& groupBindingInfo = moduleBindingInfo[group];

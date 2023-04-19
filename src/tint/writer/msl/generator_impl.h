@@ -17,9 +17,9 @@
 
 #include <string>
 #include <tuple>
-#include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/binary_expression.h"
@@ -94,7 +94,7 @@ class GeneratorImpl : public TextGenerator {
     bool HasInvariant() { return !invariant_define_name_.empty(); }
 
     /// @returns a map from entry point to list of required workgroup allocations
-    const std::unordered_map<std::string, std::vector<uint32_t>>& DynamicWorkgroupAllocations()
+    const absl::flat_hash_map<std::string, std::vector<uint32_t>>& DynamicWorkgroupAllocations()
         const {
         return workgroup_allocations_;
     }
@@ -419,7 +419,7 @@ class GeneratorImpl : public TextGenerator {
     /// class and struct return type
     using ACEWKeyType =
         utils::UnorderedKeyWrapper<std::tuple<builtin::AddressSpace, const type::Struct*>>;
-    std::unordered_map<ACEWKeyType, std::string> atomicCompareExchangeWeak_;
+    absl::flat_hash_map<ACEWKeyType, std::string> atomicCompareExchangeWeak_;
 
     /// Unique name of the 'TINT_INVARIANT' preprocessor define.
     /// Non-empty only if an invariant attribute has been generated.
@@ -435,11 +435,11 @@ class GeneratorImpl : public TextGenerator {
     /// A map from entry point name to a list of dynamic workgroup allocations.
     /// Each entry in the vector is the size of the workgroup allocation that
     /// should be created for that index.
-    std::unordered_map<std::string, std::vector<uint32_t>> workgroup_allocations_;
+    absl::flat_hash_map<std::string, std::vector<uint32_t>> workgroup_allocations_;
 
-    std::unordered_map<const sem::Builtin*, std::string> builtins_;
-    std::unordered_map<const type::Type*, std::string> unary_minus_funcs_;
-    std::unordered_map<uint32_t, std::string> int_dot_funcs_;
+    absl::flat_hash_map<const sem::Builtin*, std::string> builtins_;
+    absl::flat_hash_map<const type::Type*, std::string> unary_minus_funcs_;
+    absl::flat_hash_map<uint32_t, std::string> int_dot_funcs_;
     std::unordered_set<const type::Struct*> emitted_structs_;
 };
 

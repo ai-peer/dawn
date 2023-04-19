@@ -18,10 +18,10 @@
 #include <memory>
 #include <string>
 #include <tuple>
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/constant/value.h"
 #include "src/tint/program_builder.h"
@@ -575,9 +575,9 @@ class Resolver {
     /// of determining if any two arguments alias at any callsite.
     struct AliasAnalysisInfo {
         /// The set of module-scope variables that are written to, and where that write occurs.
-        std::unordered_map<const sem::Variable*, const sem::ValueExpression*> module_scope_writes;
+        absl::flat_hash_map<const sem::Variable*, const sem::ValueExpression*> module_scope_writes;
         /// The set of module-scope variables that are read from, and where that read occurs.
-        std::unordered_map<const sem::Variable*, const sem::ValueExpression*> module_scope_reads;
+        absl::flat_hash_map<const sem::Variable*, const sem::ValueExpression*> module_scope_reads;
         /// The set of function parameters that are written to.
         std::unordered_set<const sem::Variable*> parameter_writes;
         /// The set of function parameters that are read from.
@@ -607,7 +607,7 @@ class Resolver {
     utils::Hashmap<const type::Type*, const Source*, 8> atomic_composite_info_;
     utils::Bitset<0> marked_;
     ExprEvalStageConstraint expr_eval_stage_constraint_;
-    std::unordered_map<const sem::Function*, AliasAnalysisInfo> alias_analysis_infos_;
+    absl::flat_hash_map<const sem::Function*, AliasAnalysisInfo> alias_analysis_infos_;
     utils::Hashmap<OverrideId, const sem::Variable*, 8> override_ids_;
     utils::Hashmap<ArrayConstructorSig, sem::CallTarget*, 8> array_ctors_;
     utils::Hashmap<StructConstructorSig, sem::CallTarget*, 8> struct_ctors_;

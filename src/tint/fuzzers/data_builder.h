@@ -19,8 +19,8 @@
 #include <functional>
 #include <optional>
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/fuzzers/random_generator.h"
 
@@ -178,15 +178,15 @@ class DataBuilder {
         }
     };
 
-    /// Specialization for std::unordered_map<K, V>
+    /// Specialization for absl::flat_hash_map<K, V>
     template <typename K, typename V>
-    struct BuildImpl<std::unordered_map<K, V>> {
-        /// Generate a pseudo-random std::unordered_map<K, V>
+    struct BuildImpl<absl::flat_hash_map<K, V>> {
+        /// Generate a pseudo-random absl::flat_hash_map<K, V>
         /// @param b - data builder to use
-        /// @returns std::unordered_map<K, V> filled with
+        /// @returns absl::flat_hash_map<K, V> filled with
         /// pseudo-random data
-        static std::unordered_map<K, V> impl(DataBuilder* b) {
-            std::unordered_map<K, V> out;
+        static absl::flat_hash_map<K, V> impl(DataBuilder* b) {
+            absl::flat_hash_map<K, V> out;
             uint8_t count = b->build<uint8_t>();
             for (uint8_t i = 0; i < count; ++i) {
                 out.emplace(b->build<K>(), b->build<V>());

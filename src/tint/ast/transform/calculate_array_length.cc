@@ -14,8 +14,8 @@
 
 #include "src/tint/ast/transform/calculate_array_length.h"
 
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/disable_validation_attribute.h"
@@ -101,7 +101,7 @@ Transform::ApplyResult CalculateArrayLength::Apply(const Program* src,
     // get_buffer_size_intrinsic() emits the function decorated with
     // BufferSizeIntrinsic that is transformed by the HLSL writer into a call to
     // [RW]ByteAddressBuffer.GetDimensions().
-    std::unordered_map<const type::Reference*, Symbol> buffer_size_intrinsics;
+    absl::flat_hash_map<const type::Reference*, Symbol> buffer_size_intrinsics;
     auto get_buffer_size_intrinsic = [&](const type::Reference* buffer_type) {
         return utils::GetOrCreate(buffer_size_intrinsics, buffer_type, [&] {
             auto name = b.Sym();
@@ -124,7 +124,7 @@ Transform::ApplyResult CalculateArrayLength::Apply(const Program* src,
         });
     };
 
-    std::unordered_map<ArrayUsage, Symbol, ArrayUsage::Hasher> array_length_by_usage;
+    absl::flat_hash_map<ArrayUsage, Symbol, ArrayUsage::Hasher> array_length_by_usage;
 
     // Find all the arrayLength() calls...
     for (auto* node : src->ASTNodes().Objects()) {

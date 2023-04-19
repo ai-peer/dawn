@@ -112,7 +112,10 @@ group("abseil") {
   if (build_with_chromium) {
     public_deps = [ "$dawn_abseil_dir:absl" ]
   } else {
-    public_deps = [ "${dawn_root}/third_party/gn/abseil-cpp:strings" ]
+    public_deps = [
+      "//third_party/abseil-cpp/absl/container:flat_hash_map",
+      "//third_party/abseil-cpp/absl/strings:strings",
+    ]
   }
 }
 
@@ -273,6 +276,8 @@ libtint_source_set("libtint_utils_src") {
   } else {
     sources += [ "diagnostic/printer_other.cc" ]
   }
+
+  public_deps = [ ":abseil" ]
 }
 
 libtint_source_set("libtint_clone_context_hdrs") {
@@ -331,6 +336,7 @@ libtint_source_set("libtint_program_src") {
 
 libtint_source_set("libtint_initializer_src") {
   sources = [ "tint.cc" ]
+  deps = [ ":abseil" ]
 }
 
 libtint_source_set("libtint_inspector_src") {
@@ -360,6 +366,7 @@ libtint_source_set("libtint_transform_src") {
     "transform/transform.h",
   ]
   deps = [ ":libtint_utils_src" ]
+  public_deps = [ ":abseil" ]
 }
 
 libtint_source_set("libtint_ast_transform_base_src") {
@@ -916,7 +923,10 @@ libtint_source_set("libtint_reader_src") {
     "reader/reader.h",
   ]
 
-  public_deps = [ ":libtint_program_src" ]
+  public_deps = [
+    ":abseil",
+    ":libtint_program_src",
+  ]
 }
 
 libtint_source_set("libtint_spv_reader_src") {
@@ -1062,7 +1072,6 @@ libtint_source_set("libtint_wgsl_reader_src") {
   ]
 
   deps = [
-    ":abseil",
     ":libtint_ast_src",
     ":libtint_builtins_src",
     ":libtint_program_src",
@@ -1355,39 +1364,11 @@ if (tint_build_unittests) {
   # and because otherwise the "gn check" fails.
 
   if (!build_with_chromium) {
-    # When we aren't in Chromium we define out own targets based on the location
-    # of the googletest repo.
-    config("gtest_config") {
-      include_dirs = [
-        "${tint_googletest_dir}/googletest",
-        "${tint_googletest_dir}/googletest/include",
-      ]
-    }
-    static_library("gtest") {
-      testonly = true
-      sources = [ "${tint_googletest_dir}/googletest/src/gtest-all.cc" ]
-      public_configs = [ ":gtest_config" ]
-    }
-
-    config("gmock_config") {
-      include_dirs = [
-        "${tint_googletest_dir}/googlemock",
-        "${tint_googletest_dir}/googlemock/include",
-        "${tint_googletest_dir}/googletest/include",
-      ]
-    }
-
-    static_library("gmock") {
-      testonly = true
-      sources = [ "${tint_googletest_dir}/googlemock/src/gmock-all.cc" ]
-      public_configs = [ ":gmock_config" ]
-    }
-
     group("gmock_and_gtest") {
       testonly = true
       public_deps = [
-        ":gmock",
-        ":gtest",
+        "//testing/gmock",
+        "//testing/gtest",
       ]
     }
   } else {

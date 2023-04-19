@@ -23,10 +23,10 @@
 #include <optional>
 #include <string>
 #include <type_traits>
-#include <unordered_map>
 #include <utility>
 #include <variant>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/dawn/node/interop/Napi.h"
 #include "src/dawn/node/utils/Debug.h"
@@ -589,15 +589,15 @@ class Converter<std::vector<T>> {
 };
 
 template <typename K, typename V>
-class Converter<std::unordered_map<K, V>> {
+class Converter<absl::flat_hash_map<K, V>> {
   public:
-    static inline Result FromJS(Napi::Env env, Napi::Value value, std::unordered_map<K, V>& out) {
+    static inline Result FromJS(Napi::Env env, Napi::Value value, absl::flat_hash_map<K, V>& out) {
         if (!value.IsObject()) {
             return Error("value is not an object");
         }
         auto obj = value.ToObject();
         auto keys = obj.GetPropertyNames();
-        std::unordered_map<K, V> map(keys.Length());
+        absl::flat_hash_map<K, V> map(keys.Length());
         for (uint32_t i = 0; i < static_cast<uint32_t>(keys.Length()); i++) {
             K key{};
             V value{};
@@ -614,7 +614,7 @@ class Converter<std::unordered_map<K, V>> {
         out = std::move(map);
         return Success;
     }
-    static inline Napi::Value ToJS(Napi::Env env, std::unordered_map<K, V> value) {
+    static inline Napi::Value ToJS(Napi::Env env, absl::flat_hash_map<K, V> value) {
         auto obj = Napi::Object::New(env);
         for (auto it : value) {
             obj.Set(Converter<K>::ToJS(env, it.first), Converter<V>::ToJS(env, it.second));

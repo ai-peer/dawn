@@ -17,8 +17,8 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/native/Serializable.h"
 #include "dawn/native/ShaderModule.h"

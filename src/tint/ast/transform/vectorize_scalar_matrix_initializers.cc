@@ -14,8 +14,8 @@
 
 #include "src/tint/ast/transform/vectorize_scalar_matrix_initializers.h"
 
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/call.h"
@@ -59,7 +59,7 @@ Transform::ApplyResult VectorizeScalarMatrixInitializers::Apply(const Program* s
     ProgramBuilder b;
     CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
 
-    std::unordered_map<const type::Matrix*, Symbol> scalar_inits;
+    absl::flat_hash_map<const type::Matrix*, Symbol> scalar_inits;
 
     ctx.ReplaceAll([&](const CallExpression* expr) -> const CallExpression* {
         auto* call = src->Sem().Get(expr)->UnwrapMaterialize()->As<sem::Call>();

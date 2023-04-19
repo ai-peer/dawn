@@ -16,7 +16,7 @@
 #define SRC_TINT_AST_TRANSFORM_COMBINE_SAMPLERS_H_
 
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/transform/transform.h"
 #include "src/tint/sem/sampler_texture_pair.h"
@@ -58,7 +58,7 @@ class CombineSamplers final : public utils::Castable<CombineSamplers, Transform>
     using SamplerTexturePair = sem::SamplerTexturePair;
 
     /// A map from a sampler/texture pair to a named global.
-    using BindingMap = std::unordered_map<SamplerTexturePair, std::string>;
+    using BindingMap = absl::flat_hash_map<SamplerTexturePair, std::string>;
 
     /// The client-provided mapping from separate texture and sampler binding
     /// points to combined sampler binding point.

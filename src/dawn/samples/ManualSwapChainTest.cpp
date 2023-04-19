@@ -53,9 +53,9 @@
 
 #include <algorithm>
 #include <memory>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "GLFW/glfw3.h"
 #include "dawn/common/Assert.h"
@@ -84,7 +84,7 @@ struct WindowData {
     wgpu::SwapChainDescriptor targetDesc;
 };
 
-static std::unordered_map<GLFWwindow*, std::unique_ptr<WindowData>> windows;
+static absl::flat_hash_map<GLFWwindow*, std::unique_ptr<WindowData>> windows;
 static uint64_t windowSerial = 0;
 
 static std::unique_ptr<dawn::native::Instance> instance;
@@ -346,7 +346,7 @@ int main(int argc, const char* argv[]) {
 
             if (glfwWindowShouldClose(window)) {
                 glfwDestroyWindow(window);
-                it = windows.erase(it);
+                windows.erase(it++);
             } else {
                 it++;
             }

@@ -38,6 +38,7 @@ static_library("utils") {
     "${dawn_root}/src/dawn/common",
     "${dawn_root}/src/dawn/glfw",
     "${dawn_root}/src/dawn/native",
+    "${dawn_root}/src/dawn/native:abseil",
     "${dawn_root}/src/dawn/utils",
     "${dawn_root}/src/dawn/wire",
   ]

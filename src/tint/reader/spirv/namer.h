@@ -16,8 +16,8 @@
 #define SRC_TINT_READER_SPIRV_NAMER_H_
 
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/reader/spirv/fail_stream.h"
 
@@ -138,18 +138,18 @@ class Namer {
     FailStream fail_stream_;
 
     // Maps an ID to its registered name.
-    std::unordered_map<uint32_t, std::string> id_to_name_;
+    absl::flat_hash_map<uint32_t, std::string> id_to_name_;
     // Maps a name to a SPIR-V ID, or 0 (the case for derived names).
-    std::unordered_map<std::string, uint32_t> name_to_id_;
+    absl::flat_hash_map<std::string, uint32_t> name_to_id_;
 
     // Maps a struct id and member index to a suggested sanitized name.
     // If entry k in the vector is an empty string, then a suggestion
     // was recorded for a higher-numbered index, but not for index k.
-    std::unordered_map<uint32_t, std::vector<std::string>> struct_member_names_;
+    absl::flat_hash_map<uint32_t, std::vector<std::string>> struct_member_names_;
 
     // Saved search id suffix for a given base name. Used by
     // FindUnusedDerivedName().
-    std::unordered_map<std::string, uint32_t> next_unusued_derived_name_id_;
+    absl::flat_hash_map<std::string, uint32_t> next_unusued_derived_name_id_;
 };
 
 }  // namespace tint::reader::spirv

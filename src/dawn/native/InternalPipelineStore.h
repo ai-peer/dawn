@@ -15,7 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_INTERNALPIPELINESTORE_H_
 #define SRC_DAWN_NATIVE_INTERNALPIPELINESTORE_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/native/ApplyClearColorValueWithDrawHelper.h"
 #include "dawn/native/ObjectBase.h"
@@ -34,8 +34,9 @@ struct InternalPipelineStore {
     explicit InternalPipelineStore(DeviceBase* device);
     ~InternalPipelineStore();
 
-    std::unordered_map<wgpu::TextureFormat, Ref<RenderPipelineBase>> copyTextureForBrowserPipelines;
-    std::unordered_map<wgpu::TextureFormat, Ref<RenderPipelineBase>>
+    absl::flat_hash_map<wgpu::TextureFormat, Ref<RenderPipelineBase>>
+        copyTextureForBrowserPipelines;
+    absl::flat_hash_map<wgpu::TextureFormat, Ref<RenderPipelineBase>>
         copyExternalTextureForBrowserPipelines;
 
     Ref<ShaderModuleBase> copyForBrowser;
@@ -67,9 +68,9 @@ struct InternalPipelineStore {
         Ref<RenderPipelineBase> clearPipeline;
         std::array<Ref<RenderPipelineBase>, 8> setStencilPipelines;
     };
-    std::unordered_map<wgpu::TextureFormat, BlitR8ToStencilPipelines> blitR8ToStencilPipelines;
+    absl::flat_hash_map<wgpu::TextureFormat, BlitR8ToStencilPipelines> blitR8ToStencilPipelines;
 
-    std::unordered_map<wgpu::TextureFormat, Ref<RenderPipelineBase>> depthBlitPipelines;
+    absl::flat_hash_map<wgpu::TextureFormat, Ref<RenderPipelineBase>> depthBlitPipelines;
 };
 
 }  // namespace dawn::native

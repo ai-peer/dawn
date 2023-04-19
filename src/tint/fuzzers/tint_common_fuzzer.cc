@@ -22,9 +22,9 @@
 #include <memory>
 #include <sstream>
 #include <string>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #if TINT_BUILD_SPV_READER || TINT_BUILD_SPV_WRITER
 #include "spirv-tools/libspirv.hpp"
@@ -269,7 +269,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
         output_ == OutputFormat::kSpv) {
         // Gather external texture binding information
         // Collect next valid binding number per group
-        std::unordered_map<uint32_t, uint32_t> group_to_next_binding_number;
+        absl::flat_hash_map<uint32_t, uint32_t> group_to_next_binding_number;
         std::vector<sem::BindingPoint> ext_tex_bps;
         for (auto* var : program.AST().GlobalVariables()) {
             if (auto* sem_var = program.Sem().Get(var)->As<sem::GlobalVariable>()) {

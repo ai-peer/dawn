@@ -46,6 +46,7 @@ namespace {
 using ::testing::_;
 using ::testing::ByMove;
 using ::testing::InSequence;
+using ::testing::Invoke;
 using ::testing::Mock;
 using testing::MockCallback;
 using ::testing::NiceMock;
@@ -790,7 +791,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         bindGroupMock = AcquireRef(new BindGroupMock(mDeviceMock, &desc));
-        EXPECT_CALL(*mDeviceMock, CreateBindGroupImpl).WillOnce(Return(bindGroupMock));
+        EXPECT_CALL(*mDeviceMock, CreateBindGroupImpl).WillOnce(Invoke([bindGroupMock]() {
+            return bindGroupMock;
+        }));
         bindGroup = device.CreateBindGroup(ToCppAPI(&desc));
     }
 
@@ -808,7 +811,8 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         bindGroupLayoutMock = AcquireRef(new BindGroupLayoutMock(mDeviceMock, &desc));
-        EXPECT_CALL(*mDeviceMock, CreateBindGroupLayoutImpl).WillOnce(Return(bindGroupLayoutMock));
+        EXPECT_CALL(*mDeviceMock, CreateBindGroupLayoutImpl)
+            .WillOnce(Invoke([bindGroupLayoutMock]() { return bindGroupLayoutMock; }));
         bindGroupLayout = device.CreateBindGroupLayout(ToCppAPI(&desc));
     }
 
@@ -822,7 +826,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         csModuleMock = ShaderModuleMock::Create(mDeviceMock, &desc);
-        EXPECT_CALL(*mDeviceMock, CreateShaderModuleImpl).WillOnce(Return(csModuleMock));
+        EXPECT_CALL(*mDeviceMock, CreateShaderModuleImpl).WillOnce(Invoke([csModuleMock]() {
+            return csModuleMock;
+        }));
         csModule = device.CreateShaderModule(ToCppAPI(&desc));
     }
 
@@ -836,7 +842,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         vsModuleMock = ShaderModuleMock::Create(mDeviceMock, &desc);
-        EXPECT_CALL(*mDeviceMock, CreateShaderModuleImpl).WillOnce(Return(vsModuleMock));
+        EXPECT_CALL(*mDeviceMock, CreateShaderModuleImpl).WillOnce(Invoke([vsModuleMock]() {
+            return vsModuleMock;
+        }));
         vsModule = device.CreateShaderModule(ToCppAPI(&desc));
     }
 
@@ -849,7 +857,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         bufferMock = AcquireRef(new BufferMock(mDeviceMock, &desc));
-        EXPECT_CALL(*mDeviceMock, CreateBufferImpl).WillOnce(Return(bufferMock));
+        EXPECT_CALL(*mDeviceMock, CreateBufferImpl).WillOnce(Invoke([bufferMock]() {
+            return bufferMock;
+        }));
         buffer = device.CreateBuffer(ToCppAPI(&desc));
     }
 
@@ -865,7 +875,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
         ScopedRawPtrExpectation scoped(mDeviceMock);
         commandBufferMock = AcquireRef(
             new CommandBufferMock(mDeviceMock, FromAPI(commandEncoder.Get()), &commandBufferDesc));
-        EXPECT_CALL(*mDeviceMock, CreateCommandBuffer).WillOnce(Return(commandBufferMock));
+        EXPECT_CALL(*mDeviceMock, CreateCommandBuffer).WillOnce(Invoke([commandBufferMock]() {
+            return commandBufferMock;
+        }));
         commandBuffer = commandEncoder.Finish(ToCppAPI(&commandBufferDesc));
     }
 
@@ -880,7 +892,7 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
         computePipelineMock = ComputePipelineMock::Create(mDeviceMock, &desc);
         EXPECT_CALL(*computePipelineMock.Get(), Initialize).Times(1);
         EXPECT_CALL(*mDeviceMock, CreateUninitializedComputePipelineImpl)
-            .WillOnce(Return(computePipelineMock));
+            .WillOnce(Invoke([computePipelineMock]() { return computePipelineMock; }));
         computePipeline = device.CreateComputePipeline(ToCppAPI(&desc));
     }
 
@@ -895,7 +907,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         pipelineLayoutMock = AcquireRef(new PipelineLayoutMock(mDeviceMock, &desc));
-        EXPECT_CALL(*mDeviceMock, CreatePipelineLayoutImpl).WillOnce(Return(pipelineLayoutMock));
+        EXPECT_CALL(*mDeviceMock, CreatePipelineLayoutImpl).WillOnce(Invoke([pipelineLayoutMock]() {
+            return pipelineLayoutMock;
+        }));
         pipelineLayout = device.CreatePipelineLayout(ToCppAPI(&desc));
     }
 
@@ -908,7 +922,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         querySetMock = AcquireRef(new QuerySetMock(mDeviceMock, &desc));
-        EXPECT_CALL(*mDeviceMock, CreateQuerySetImpl).WillOnce(Return(querySetMock));
+        EXPECT_CALL(*mDeviceMock, CreateQuerySetImpl).WillOnce(Invoke([querySetMock]() {
+            return querySetMock;
+        }));
         querySet = device.CreateQuerySet(ToCppAPI(&desc));
     }
 
@@ -923,7 +939,7 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
         renderPipelineMock = RenderPipelineMock::Create(mDeviceMock, &desc);
         EXPECT_CALL(*renderPipelineMock.Get(), Initialize).Times(1);
         EXPECT_CALL(*mDeviceMock, CreateUninitializedRenderPipelineImpl)
-            .WillOnce(Return(renderPipelineMock));
+            .WillOnce(Invoke([renderPipelineMock]() { return renderPipelineMock; }));
         renderPipeline = device.CreateRenderPipeline(ToCppAPI(&desc));
     }
 
@@ -934,7 +950,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         samplerMock = AcquireRef(new SamplerMock(mDeviceMock, &desc));
-        EXPECT_CALL(*mDeviceMock, CreateSamplerImpl).WillOnce(Return(samplerMock));
+        EXPECT_CALL(*mDeviceMock, CreateSamplerImpl).WillOnce(Invoke([samplerMock]() {
+            return samplerMock;
+        }));
         sampler = device.CreateSampler(ToCppAPI(&desc));
     }
 
@@ -949,7 +967,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         textureMock = AcquireRef(new NiceMock<TextureMock>(mDeviceMock, &desc));
-        EXPECT_CALL(*mDeviceMock, CreateTextureImpl).WillOnce(Return(textureMock));
+        EXPECT_CALL(*mDeviceMock, CreateTextureImpl).WillOnce(Invoke([textureMock]() {
+            return textureMock;
+        }));
         texture = device.CreateTexture(ToCppAPI(&desc));
     }
 
@@ -961,7 +981,9 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         textureViewMock = AcquireRef(new TextureViewMock(textureMock.Get(), &desc));
-        EXPECT_CALL(*mDeviceMock, CreateTextureViewImpl).WillOnce(Return(textureViewMock));
+        EXPECT_CALL(*mDeviceMock, CreateTextureViewImpl).WillOnce(Invoke([textureViewMock]() {
+            return textureViewMock;
+        }));
         textureView = texture.CreateView(ToCppAPI(&desc));
     }
 
@@ -979,7 +1001,8 @@ TEST_F(DestroyObjectTests, DestroyObjectsApiExplicit) {
 
         ScopedRawPtrExpectation scoped(mDeviceMock);
         externalTextureMock = ExternalTextureMock::Create(mDeviceMock, &desc);
-        EXPECT_CALL(*mDeviceMock, CreateExternalTextureImpl).WillOnce(Return(externalTextureMock));
+        EXPECT_CALL(*mDeviceMock, CreateExternalTextureImpl)
+            .WillOnce(Invoke([externalTextureMock]() { return externalTextureMock; }));
         externalTexture = device.CreateExternalTexture(ToCppAPI(&desc));
     }
 

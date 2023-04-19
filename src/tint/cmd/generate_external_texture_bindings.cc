@@ -15,8 +15,8 @@
 #include "src/tint/cmd/generate_external_texture_bindings.h"
 
 #include <algorithm>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/module.h"
 #include "src/tint/program.h"
@@ -32,7 +32,7 @@ writer::ExternalTextureOptions::BindingsMap GenerateExternalTextureBindings(
     // variables, not just those referenced by entry points.
 
     // Collect next valid binding number per group
-    std::unordered_map<uint32_t, uint32_t> group_to_next_binding_number;
+    absl::flat_hash_map<uint32_t, uint32_t> group_to_next_binding_number;
     std::vector<sem::BindingPoint> ext_tex_bps;
     for (auto* var : program->AST().GlobalVariables()) {
         if (auto* sem_var = program->Sem().Get(var)->As<sem::GlobalVariable>()) {

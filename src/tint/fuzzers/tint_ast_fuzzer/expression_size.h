@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_FUZZERS_TINT_AST_FUZZER_EXPRESSION_SIZE_H_
 #define SRC_TINT_FUZZERS_TINT_AST_FUZZER_EXPRESSION_SIZE_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/expression.h"
 #include "src/tint/program.h"
@@ -39,7 +39,7 @@ class ExpressionSize {
     }
 
   private:
-    std::unordered_map<const ast::Expression*, size_t> expr_to_size_;
+    absl::flat_hash_map<const ast::Expression*, size_t> expr_to_size_;
 };
 
 }  // namespace tint::fuzzers::ast_fuzzer

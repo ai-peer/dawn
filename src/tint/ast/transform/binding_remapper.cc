@@ -69,7 +69,7 @@ Transform::ApplyResult BindingRemapper::Apply(const Program* src,
                 continue;
             }
             auto* func = src->Sem().Get(func_ast);
-            std::unordered_map<sem::BindingPoint, int> binding_point_counts;
+            absl::flat_hash_map<sem::BindingPoint, int> binding_point_counts;
             for (auto* global : func->TransitivelyReferencedGlobals()) {
                 if (auto from = global->BindingPoint()) {
                     auto bp_it = remappings->binding_points.find(*from);

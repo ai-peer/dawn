@@ -72,6 +72,7 @@ add_library(tint_diagnostic_utils
   utils/unicode.h
 )
 tint_default_compile_options(tint_diagnostic_utils)
+target_link_libraries(tint_diagnostic_utils absl::flat_hash_map)
 
 if (TINT_ENABLE_BREAK_IN_DEBUGGER)
   set_source_files_properties(utils/debugger.cc
@@ -825,14 +826,14 @@ target_link_libraries(tint_val tint_utils_io)
 ## Tint library
 add_library(libtint ${TINT_LIB_SRCS})
 tint_default_compile_options(libtint)
-target_link_libraries(libtint tint_diagnostic_utils absl_strings)
+target_link_libraries(libtint tint_diagnostic_utils absl::strings absl::flat_hash_map)
 set_target_properties(libtint PROPERTIES OUTPUT_NAME "tint")
 
 if (${TINT_BUILD_FUZZERS})
   # Tint library with fuzzer instrumentation
   add_library(libtint-fuzz ${TINT_LIB_SRCS})
   tint_default_compile_options(libtint-fuzz)
-  target_link_libraries(libtint-fuzz tint_diagnostic_utils absl_strings)
+  target_link_libraries(libtint-fuzz tint_diagnostic_utils absl::strings)
   if (${COMPILER_IS_LIKE_GNU})
     target_compile_options(libtint-fuzz PRIVATE -fvisibility=hidden)
   endif()

@@ -14,9 +14,9 @@
 
 #include "src/tint/ast/transform/demote_to_helper.h"
 
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/transform/utils/hoist_to_decl_before.h"
 #include "src/tint/program_builder.h"
@@ -104,7 +104,7 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program* src, const DataMap&,
     // Mask all writes to host-visible memory using the discarded flag.
     // We also insert a discard statement before all return statements in entry points for shaders
     // that discard.
-    std::unordered_map<const type::Type*, Symbol> atomic_cmpxchg_result_types;
+    absl::flat_hash_map<const type::Type*, Symbol> atomic_cmpxchg_result_types;
     for (auto* node : src->ASTNodes().Objects()) {
         Switch(
             node,

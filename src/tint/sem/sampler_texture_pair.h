@@ -58,7 +58,7 @@ inline utils::StringStream& operator<<(utils::StringStream& o, const SamplerText
 namespace std {
 
 /// Custom std::hash specialization for tint::sem::SamplerTexturePair so
-/// SamplerTexturePairs be used as keys for std::unordered_map and
+/// SamplerTexturePairs be used as keys for absl::flat_hash_map and
 /// std::unordered_set.
 template <>
 class hash<tint::sem::SamplerTexturePair> {

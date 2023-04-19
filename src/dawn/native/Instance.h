@@ -20,8 +20,8 @@
 #include <mutex>
 #include <set>
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/RefCounted.h"
 #include "dawn/common/ityp_bitset.h"

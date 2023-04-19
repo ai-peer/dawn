@@ -14,7 +14,7 @@
 
 #include "src/tint/utils/map.h"
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "gtest/gtest.h"
 
@@ -22,7 +22,7 @@ namespace tint::utils {
 namespace {
 
 TEST(Lookup, Test) {
-    std::unordered_map<int, int> map;
+    absl::flat_hash_map<int, int> map;
     map.emplace(10, 1);
     EXPECT_EQ(Lookup(map, 10, 0), 1);    // exists, with if_missing
     EXPECT_EQ(Lookup(map, 10), 1);       // exists, without if_missing
@@ -31,14 +31,14 @@ TEST(Lookup, Test) {
 }
 
 TEST(GetOrCreateTest, NewKey) {
-    std::unordered_map<int, int> map;
+    absl::flat_hash_map<int, int> map;
     EXPECT_EQ(GetOrCreate(map, 1, [&] { return 2; }), 2);
     EXPECT_EQ(map.size(), 1u);
     EXPECT_EQ(map[1], 2);
 }
 
 TEST(GetOrCreateTest, ExistingKey) {
-    std::unordered_map<int, int> map;
+    absl::flat_hash_map<int, int> map;
     map[1] = 2;
     bool called = false;
     EXPECT_EQ(GetOrCreate(map, 1,

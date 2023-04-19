@@ -787,7 +787,7 @@ void Inspector::GenerateSamplerTargets() {
     }
 
     sampler_targets_ = std::make_unique<
-        std::unordered_map<std::string, utils::UniqueVector<SamplerTexturePair, 4>>>();
+        absl::flat_hash_map<std::string, utils::UniqueVector<SamplerTexturePair, 4>>>();
 
     auto& sem = program_->Sem();
 

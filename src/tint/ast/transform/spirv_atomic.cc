@@ -15,10 +15,10 @@
 #include "src/tint/ast/transform/spirv_atomic.h"
 
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/block_statement.h"
@@ -53,7 +53,7 @@ struct SpirvAtomic::State {
     ProgramBuilder b;
     /// The clone context
     CloneContext ctx = {&b, src, /* auto_clone_symbols */ true};
-    std::unordered_map<const type::Struct*, ForkedStruct> forked_structs;
+    absl::flat_hash_map<const type::Struct*, ForkedStruct> forked_structs;
     std::unordered_set<const sem::Variable*> atomic_variables;
     utils::UniqueVector<const sem::ValueExpression*, 8> atomic_expressions;
 

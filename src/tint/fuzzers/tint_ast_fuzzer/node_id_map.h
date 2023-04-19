@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_FUZZERS_TINT_AST_FUZZER_NODE_ID_MAP_H_
 #define SRC_TINT_FUZZERS_TINT_AST_FUZZER_NODE_ID_MAP_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/program.h"
 
@@ -83,8 +83,8 @@ class NodeIdMap {
   private:
     IdType fresh_id_ = 1;
 
-    std::unordered_map<const ast::Node*, IdType> node_to_id_;
-    std::unordered_map<IdType, const ast::Node*> id_to_node_;
+    absl::flat_hash_map<const ast::Node*, IdType> node_to_id_;
+    absl::flat_hash_map<IdType, const ast::Node*> id_to_node_;
 };
 
 }  // namespace tint::fuzzers::ast_fuzzer

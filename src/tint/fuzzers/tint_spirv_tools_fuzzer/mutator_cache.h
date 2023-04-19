@@ -18,9 +18,9 @@
 #include <cassert>
 #include <list>
 #include <memory>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/fuzzers/tint_spirv_tools_fuzzer/mutator.h"
 
@@ -81,7 +81,7 @@ class MutatorCache {
     };
 
     using Entry = std::pair<const Key*, Value>;
-    using Map = std::unordered_map<Key, std::list<Entry>::iterator, KeyHash>;
+    using Map = absl::flat_hash_map<Key, std::list<Entry>::iterator, KeyHash>;
 
     void UpdateUsage(Map::iterator it);
 

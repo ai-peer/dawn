@@ -17,8 +17,8 @@
 
 #include <bitset>
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/ityp_bitset.h"
 #include "dawn/native/DawnNative.h"
@@ -84,7 +84,7 @@ class FeaturesInfo {
     wgpu::FeatureName FeatureNameToAPIEnum(const char* featureName) const;
 
   private:
-    std::unordered_map<std::string, Feature> mFeatureNameToEnumMap;
+    absl::flat_hash_map<std::string, Feature> mFeatureNameToEnumMap;
 };
 
 }  // namespace dawn::native

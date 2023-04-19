@@ -16,9 +16,9 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/call_statement.h"
@@ -330,15 +330,15 @@ struct DecomposeMemoryAccess::State {
     /// expressions chain the access.
     /// Subset of #expression_order, as expressions are not removed from
     /// #expression_order.
-    std::unordered_map<const Expression*, BufferAccess> accesses;
+    absl::flat_hash_map<const Expression*, BufferAccess> accesses;
     /// The visited order of AST expressions (superset of #accesses)
     std::vector<const Expression*> expression_order;
     /// [buffer-type, element-type] -> load function name
-    std::unordered_map<LoadStoreKey, Symbol, LoadStoreKey::Hasher> load_funcs;
+    absl::flat_hash_map<LoadStoreKey, Symbol, LoadStoreKey::Hasher> load_funcs;
     /// [buffer-type, element-type] -> store function name
-    std::unordered_map<LoadStoreKey, Symbol, LoadStoreKey::Hasher> store_funcs;
+    absl::flat_hash_map<LoadStoreKey, Symbol, LoadStoreKey::Hasher> store_funcs;
     /// [buffer-type, element-type, atomic-op] -> load function name
-    std::unordered_map<AtomicKey, Symbol, AtomicKey::Hasher> atomic_funcs;
+    absl::flat_hash_map<AtomicKey, Symbol, AtomicKey::Hasher> atomic_funcs;
     /// List of storage or uniform buffer writes
     std::vector<Store> stores;
     /// Allocations for offsets

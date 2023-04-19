@@ -56,7 +56,7 @@ See:
 {{-   else if IsNullableType     $}}std::optional<{{template "Type" $.Type}}>
 {{-   else if IsUnionType        $}}std::variant<{{template "VariantTypeList" $.Types}}>
 {{-   else if IsSequenceType     $}}std::vector<{{template "Type" $.Elem}}>
-{{-   else if IsRecordType       $}}std::unordered_map<{{template "Type" $.Key}}, {{template "Type" $.Elem}}>
+{{-   else if IsRecordType       $}}absl::flat_hash_map<{{template "Type" $.Key}}, {{template "Type" $.Elem}}>
 {{-   else                        }} /* Unhandled Type {{printf "%T" $}} */
 {{-   end -}}
 {{- end }}

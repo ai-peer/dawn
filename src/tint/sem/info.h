@@ -17,8 +17,8 @@
 
 #include <algorithm>
 #include <type_traits>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/diagnostic_control.h"
 #include "src/tint/ast/node.h"
@@ -170,7 +170,7 @@ class Info {
     // AST node index to semantic node
     std::vector<const utils::CastableBase*> nodes_;
     // Lists transitively referenced overrides for the given item
-    std::unordered_map<const utils::CastableBase*, TransitivelyReferenced> referenced_overrides_;
+    absl::flat_hash_map<const utils::CastableBase*, TransitivelyReferenced> referenced_overrides_;
     // The semantic module
     sem::Module* module_ = nullptr;
 };

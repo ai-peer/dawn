@@ -19,8 +19,8 @@
 #include <mutex>
 #include <optional>
 #include <string>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/HashUtils.h"
 #include "dawn/common/vulkan_platform.h"

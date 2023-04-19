@@ -221,7 +221,8 @@ target_link_libraries(dawn_native
             dawn_internal_config
             libtint
             SPIRV-Tools-opt
-            absl_strings
+            absl::strings
+	    absl::flat_hash_map
             absl_str_format_internal
 )
 

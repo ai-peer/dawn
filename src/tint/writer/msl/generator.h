@@ -17,9 +17,9 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/reflection.h"
 #include "src/tint/writer/array_length_from_uniform_options.h"
@@ -113,7 +113,7 @@ struct Result {
     /// A map from entry point name to a list of dynamic workgroup allocations.
     /// Each entry in the vector is the size of the workgroup allocation that
     /// should be created for that index.
-    std::unordered_map<std::string, std::vector<uint32_t>> workgroup_allocations;
+    absl::flat_hash_map<std::string, std::vector<uint32_t>> workgroup_allocations;
 
     /// Indices into the array_length_from_uniform binding that are statically
     /// used.

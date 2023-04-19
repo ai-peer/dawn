@@ -16,9 +16,9 @@
 #define SRC_TINT_WRITER_HLSL_GENERATOR_IMPL_H_
 
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/bitcast_expression.h"
@@ -563,12 +563,12 @@ class GeneratorImpl : public TextGenerator {
 
     TextBuffer helpers_;  // Helper functions emitted at the top of the output
     std::function<bool()> emit_continuing_;
-    std::unordered_map<const type::Matrix*, std::string> matrix_scalar_inits_;
-    std::unordered_map<const sem::Builtin*, std::string> builtins_;
-    std::unordered_map<const type::Vector*, std::string> dynamic_vector_write_;
-    std::unordered_map<const type::Matrix*, std::string> dynamic_matrix_vector_write_;
-    std::unordered_map<const type::Matrix*, std::string> dynamic_matrix_scalar_write_;
-    std::unordered_map<const type::Type*, std::string> value_or_one_if_zero_;
+    absl::flat_hash_map<const type::Matrix*, std::string> matrix_scalar_inits_;
+    absl::flat_hash_map<const sem::Builtin*, std::string> builtins_;
+    absl::flat_hash_map<const type::Vector*, std::string> dynamic_vector_write_;
+    absl::flat_hash_map<const type::Matrix*, std::string> dynamic_matrix_vector_write_;
+    absl::flat_hash_map<const type::Matrix*, std::string> dynamic_matrix_scalar_write_;
+    absl::flat_hash_map<const type::Type*, std::string> value_or_one_if_zero_;
     std::unordered_set<const type::Struct*> emitted_structs_;
 };
 

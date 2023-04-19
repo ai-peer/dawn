@@ -16,8 +16,8 @@
 #define SRC_TINT_TRANSFORM_TRANSFORM_H_
 
 #include <memory>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/utils/castable.h"
 
@@ -118,7 +118,7 @@ class DataMap {
         PutAll(std::forward<Tn>(remainder)...);
     }
 
-    std::unordered_map<const utils::TypeInfo*, std::unique_ptr<Data>> map_;
+    absl::flat_hash_map<const utils::TypeInfo*, std::unique_ptr<Data>> map_;
 };
 
 /// Interface for transforms.

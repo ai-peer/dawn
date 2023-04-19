@@ -78,7 +78,7 @@ struct MultiplanarExternalTexture::State {
 
     /// Storage for new bindings that have been created corresponding to an original
     /// texture_external binding.
-    std::unordered_map<const sem::Variable*, NewBindingSymbols> new_binding_symbols;
+    absl::flat_hash_map<const sem::Variable*, NewBindingSymbols> new_binding_symbols;
 
     /// Constructor
     /// @param context the clone

@@ -16,7 +16,7 @@
 #define SRC_TINT_AST_TRANSFORM_RENAMER_H_
 
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/transform/transform.h"
 
@@ -29,7 +29,7 @@ class Renamer final : public utils::Castable<Renamer, Transform> {
     /// Data holds information about shader usage and constant buffer offsets.
     struct Data final : public utils::Castable<Data, tint::transform::Data> {
         /// Remappings is a map of old symbol name to new symbol name
-        using Remappings = std::unordered_map<std::string, std::string>;
+        using Remappings = absl::flat_hash_map<std::string, std::string>;
 
         /// Constructor
         /// @param remappings the symbol remappings

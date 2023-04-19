@@ -16,9 +16,9 @@
 
 #include <cassert>
 #include <memory>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/fuzzers/tint_ast_fuzzer/mutation_finders/change_binary_operators.h"
 #include "src/tint/fuzzers/tint_ast_fuzzer/mutation_finders/change_unary_operators.h"

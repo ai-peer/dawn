@@ -15,8 +15,8 @@
 #include "src/tint/ast/transform/vectorize_matrix_conversions.h"
 
 #include <tuple>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/call.h"
@@ -68,7 +68,7 @@ Transform::ApplyResult VectorizeMatrixConversions::Apply(const Program* src,
     using HelperFunctionKey =
         utils::UnorderedKeyWrapper<std::tuple<const type::Matrix*, const type::Matrix*>>;
 
-    std::unordered_map<HelperFunctionKey, Symbol> matrix_convs;
+    absl::flat_hash_map<HelperFunctionKey, Symbol> matrix_convs;
 
     ctx.ReplaceAll([&](const CallExpression* expr) -> const CallExpression* {
         auto* call = src->Sem().Get(expr)->UnwrapMaterialize()->As<sem::Call>();

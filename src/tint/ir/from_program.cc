@@ -15,8 +15,8 @@
 #include "src/tint/ir/from_program.h"
 
 #include <iostream>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/alias.h"
 #include "src/tint/ast/assignment_statement.h"

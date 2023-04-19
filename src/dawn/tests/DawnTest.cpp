@@ -21,8 +21,8 @@
 #include <regex>
 #include <set>
 #include <sstream>
-#include <unordered_map>
 #include <unordered_set>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/GPUInfo.h"

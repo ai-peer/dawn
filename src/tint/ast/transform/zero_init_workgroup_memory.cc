@@ -16,9 +16,9 @@
 
 #include <algorithm>
 #include <map>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/builtin/builtin_value.h"
@@ -123,7 +123,7 @@ struct ZeroInitWorkgroupMemory::State {
 
     /// A map of ArrayIndex to the name reserved for the `let` declaration of that
     /// index.
-    std::unordered_map<ArrayIndex, Symbol, ArrayIndex::Hasher> array_index_names;
+    absl::flat_hash_map<ArrayIndex, Symbol, ArrayIndex::Hasher> array_index_names;
 
     /// Constructor
     /// @param c the CloneContext used for the transform
@@ -194,7 +194,7 @@ struct ZeroInitWorkgroupMemory::State {
         // Take the zeroing statements and bin them by the number of iterations
         // required to zero the workgroup data. We then emit these in blocks,
         // possibly wrapped in if-statements or for-loops.
-        std::unordered_map<uint32_t, std::vector<Statement>> stmts_by_num_iterations;
+        absl::flat_hash_map<uint32_t, std::vector<Statement>> stmts_by_num_iterations;
         std::vector<uint32_t> num_sorted_iterations;
         for (auto& s : statements) {
             auto& stmts = stmts_by_num_iterations[s.num_iterations];

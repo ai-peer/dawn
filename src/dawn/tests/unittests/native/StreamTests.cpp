@@ -16,9 +16,9 @@
 #include <iomanip>
 #include <string>
 #include <tuple>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/TypedInteger.h"
 #include "dawn/native/Blob.h"
@@ -240,9 +240,9 @@ TEST(SerializeTests, StdOptional) {
     }
 }
 
-// Test that ByteVectorSink serializes std::unordered_map as expected.
+// Test that ByteVectorSink serializes absl::flat_hash_map as expected.
 TEST(SerializeTests, StdUnorderedMap) {
-    std::unordered_map<uint32_t, std::string_view> m;
+    absl::flat_hash_map<uint32_t, std::string_view> m;
 
     m[4] = "hello";
     m[1] = "world";

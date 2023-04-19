@@ -161,7 +161,7 @@ inline ProgramID ProgramIDOf(Symbol sym) {
 namespace std {
 
 /// Custom std::hash specialization for tint::Symbol so symbols can be used as
-/// keys for std::unordered_map and std::unordered_set.
+/// keys for absl::flat_hash_map and std::unordered_set.
 template <>
 class hash<tint::Symbol> {
   public:

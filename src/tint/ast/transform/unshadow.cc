@@ -15,8 +15,8 @@
 #include "src/tint/ast/transform/unshadow.h"
 
 #include <memory>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/block_statement.h"

@@ -61,7 +61,7 @@ inline utils::StringStream& operator<<(utils::StringStream& o, const BindingPoin
 namespace std {
 
 /// Custom std::hash specialization for tint::sem::BindingPoint so
-/// BindingPoints can be used as keys for std::unordered_map and
+/// BindingPoints can be used as keys for absl::flat_hash_map and
 /// std::unordered_set.
 template <>
 class hash<tint::sem::BindingPoint> {

@@ -17,10 +17,10 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/utils/compiler_macros.h"
 #include "src/tint/utils/hashmap.h"
@@ -710,7 +710,7 @@ class ParserImpl : Reader {
     const spvtools::opt::Instruction* GetInstructionForTest(uint32_t id) const;
 
     /// A map of SPIR-V identifiers to builtins
-    using BuiltInsMap = std::unordered_map<uint32_t, spv::BuiltIn>;
+    using BuiltInsMap = absl::flat_hash_map<uint32_t, spv::BuiltIn>;
 
     /// @returns a map of builtins that should be handled specially by code
     /// generation. Either the builtin does not exist in WGSL, or a type
@@ -846,7 +846,7 @@ class ParserImpl : Reader {
     // is in effect for the instruction, map the instruction to its position
     // in the SPIR-V module, counting by instructions, where the first
     // instruction is line 1.
-    std::unordered_map<const spvtools::opt::Instruction*, Source::Location> inst_source_;
+    absl::flat_hash_map<const spvtools::opt::Instruction*, Source::Location> inst_source_;
 
     // The set of IDs that are imports of the GLSL.std.450 extended instruction
     // sets.
@@ -880,30 +880,30 @@ class ParserImpl : Reader {
     std::unordered_set<Symbol> read_only_struct_types_;
 
     // Maps from OpConstantComposite IDs to identifiers of module-scope const declarations.
-    std::unordered_map<uint32_t, Symbol> declared_constant_composites_;
+    absl::flat_hash_map<uint32_t, Symbol> declared_constant_composites_;
 
     // The IDs of scalar spec constants
     std::unordered_set<uint32_t> scalar_spec_constants_;
 
     // Maps function_id to a list of entrypoint information
-    std::unordered_map<uint32_t, std::vector<EntryPointInfo>> function_to_ep_info_;
+    absl::flat_hash_map<uint32_t, std::vector<EntryPointInfo>> function_to_ep_info_;
 
     // Maps from a SPIR-V ID to its underlying memory object declaration,
     // following image paths. This a memoization table for
     // GetMemoryObjectDeclarationForHandle. (A SPIR-V memory object declaration is
     // an OpVariable or an OpFunctinParameter with pointer type).
-    std::unordered_map<uint32_t, const spvtools::opt::Instruction*> mem_obj_decl_image_;
+    absl::flat_hash_map<uint32_t, const spvtools::opt::Instruction*> mem_obj_decl_image_;
     // Maps from a SPIR-V ID to its underlying memory object declaration,
     // following sampler paths. This a memoization table for
     // GetMemoryObjectDeclarationForHandle.
-    std::unordered_map<uint32_t, const spvtools::opt::Instruction*> mem_obj_decl_sampler_;
+    absl::flat_hash_map<uint32_t, const spvtools::opt::Instruction*> mem_obj_decl_sampler_;
 
     // Maps a memory-object-declaration instruction to any sampler or texture
     // usages implied by usages of the memory-object-declaration.
-    std::unordered_map<const spvtools::opt::Instruction*, Usage> handle_usage_;
+    absl::flat_hash_map<const spvtools::opt::Instruction*, Usage> handle_usage_;
     // The inferred WGSL handle type for the given SPIR-V image, sampler, or
     // memory object declaration for an image or sampler.
-    std::unordered_map<const spvtools::opt::Instruction*, const Type*> handle_type_;
+    absl::flat_hash_map<const spvtools::opt::Instruction*, const Type*> handle_type_;
 
     /// Maps the SPIR-V ID of a module-scope variable to its AST variable.
     utils::Hashmap<uint32_t, ModuleVariable, 16> module_variable_;
@@ -913,7 +913,7 @@ class ParserImpl : Reader {
     std::unordered_set<Symbol> declared_types_;
 
     // Maps a struct type name to the SPIR-V ID for the structure type.
-    std::unordered_map<Symbol, uint32_t> struct_id_for_symbol_;
+    absl::flat_hash_map<Symbol, uint32_t> struct_id_for_symbol_;
 
     /// Maps the SPIR-V ID of a module-scope builtin variable that should be
     /// ignored or type-converted, to its builtin kind.

@@ -19,9 +19,9 @@
 #include <memory>
 #include <queue>
 #include <string>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/Log.h"
 #include "dawn/common/Mutex.h"

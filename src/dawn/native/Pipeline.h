@@ -66,7 +66,7 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
 
     ResultOrError<Ref<BindGroupLayoutBase>> GetBindGroupLayout(uint32_t groupIndex);
 
-    // Helper functions for std::unordered_map-based pipeline caches.
+    // Helper functions for absl::flat_hash_map-based pipeline caches.
     size_t ComputeContentHash() override;
     static bool EqualForCache(const PipelineBase* a, const PipelineBase* b);
 

@@ -17,7 +17,7 @@
 
 #include <optional>
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 namespace wgpu::binding {
 // Flags maintains a key-value mapping of input flags passed into the module's create()
@@ -28,7 +28,7 @@ class Flags {
     std::optional<std::string> Get(const std::string& key) const;
 
   private:
-    std::unordered_map<std::string, std::string> flags_;
+    absl::flat_hash_map<std::string, std::string> flags_;
 };
 }  // namespace wgpu::binding
 

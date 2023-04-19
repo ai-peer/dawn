@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_WRITER_BINDING_REMAPPER_OPTIONS_H_
 #define SRC_TINT_WRITER_BINDING_REMAPPER_OPTIONS_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/builtin/access.h"
 #include "src/tint/writer/binding_point.h"
@@ -26,10 +26,10 @@ namespace tint::writer {
 class BindingRemapperOptions {
   public:
     /// BindingPoints is a map of old binding point to new binding point
-    using BindingPoints = std::unordered_map<BindingPoint, BindingPoint>;
+    using BindingPoints = absl::flat_hash_map<BindingPoint, BindingPoint>;
 
     /// AccessControls is a map of old binding point to new access control
-    using AccessControls = std::unordered_map<BindingPoint, builtin::Access>;
+    using AccessControls = absl::flat_hash_map<BindingPoint, builtin::Access>;
 
     /// Constructor
     BindingRemapperOptions();

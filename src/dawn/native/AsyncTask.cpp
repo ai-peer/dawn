@@ -54,7 +54,7 @@ void AsyncTaskManager::HandleTaskCompletion(WaitableTask* task) {
 }
 
 void AsyncTaskManager::WaitAllPendingTasks() {
-    std::unordered_map<WaitableTask*, Ref<WaitableTask>> allPendingTasks;
+    absl::flat_hash_map<WaitableTask*, Ref<WaitableTask>> allPendingTasks;
 
     {
         std::lock_guard<std::mutex> lock(mPendingTasksMutex);

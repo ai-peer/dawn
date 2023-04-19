@@ -14,7 +14,7 @@
 
 #include "dawn/native/InternalPipelineStore.h"
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/native/ComputePipeline.h"
 #include "dawn/native/Device.h"

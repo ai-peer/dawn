@@ -686,7 +686,7 @@ class StructuredTraverser {
     }
 
     const spvtools::opt::Function& function_;
-    std::unordered_map<uint32_t, const spvtools::opt::BasicBlock*> id_to_block_;
+    absl::flat_hash_map<uint32_t, const spvtools::opt::BasicBlock*> id_to_block_;
     utils::Vector<uint32_t, 32> visit_order_;
     std::unordered_set<uint32_t> visited_;
 };
@@ -1946,7 +1946,7 @@ bool FunctionEmitter::FindSwitchCaseHeaders() {
         default_block->default_is_merge = default_block->pos == construct->end_pos;
 
         // Map a case target to the list of values selecting that case.
-        std::unordered_map<uint32_t, utils::Vector<uint64_t, 4>> block_to_values;
+        absl::flat_hash_map<uint32_t, utils::Vector<uint64_t, 4>> block_to_values;
         utils::Vector<uint32_t, 4> case_targets;
         std::unordered_set<uint64_t> case_values;
 

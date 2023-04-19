@@ -24,7 +24,7 @@
 #define SRC_TINT_BUILTIN_DIAGNOSTIC_SEVERITY_H_
 
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/builtin/diagnostic_rule.h"
 #include "src/tint/diagnostic/diagnostic.h"
@@ -62,7 +62,7 @@ constexpr const char* kDiagnosticSeverityStrings[] = {
 diag::Severity ToSeverity(DiagnosticSeverity sc);
 
 /// DiagnosticRuleSeverities is a map from diagnostic rule to diagnostic severity.
-using DiagnosticRuleSeverities = std::unordered_map<DiagnosticRule, DiagnosticSeverity>;
+using DiagnosticRuleSeverities = absl::flat_hash_map<DiagnosticRule, DiagnosticSeverity>;
 
 }  // namespace tint::builtin
 

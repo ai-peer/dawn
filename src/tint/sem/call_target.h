@@ -130,7 +130,7 @@ class CallTarget : public utils::Castable<CallTarget, Node> {
 namespace std {
 
 /// Custom std::hash specialization for tint::sem::CallTargetSignature so
-/// CallTargetSignature can be used as keys for std::unordered_map and
+/// CallTargetSignature can be used as keys for absl::flat_hash_map and
 /// std::unordered_set.
 template <>
 class hash<tint::sem::CallTargetSignature> {

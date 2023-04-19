@@ -32,7 +32,10 @@ dawn_component("platform") {
     "tracing/TraceEvent.h",
   ]
 
-  deps = [ "${dawn_root}/src/dawn/common" ]
+  deps = [
+    "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/native:abseil",
+  ]
 
   public_deps = [
     # DawnPlatform.h has #include "dawn/webgpu.h"

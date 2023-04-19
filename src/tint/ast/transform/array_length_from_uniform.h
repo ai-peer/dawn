@@ -15,8 +15,8 @@
 #ifndef SRC_TINT_AST_TRANSFORM_ARRAY_LENGTH_FROM_UNIFORM_H_
 #define SRC_TINT_AST_TRANSFORM_ARRAY_LENGTH_FROM_UNIFORM_H_
 
-#include <unordered_map>
 #include <unordered_set>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/transform/transform.h"
 #include "src/tint/sem/binding_point.h"
@@ -79,7 +79,7 @@ class ArrayLengthFromUniform final : public utils::Castable<ArrayLengthFromUnifo
         sem::BindingPoint ubo_binding;
 
         /// The mapping from binding point to the index for the buffer size lookup.
-        std::unordered_map<sem::BindingPoint, uint32_t> bindpoint_to_size_index;
+        absl::flat_hash_map<sem::BindingPoint, uint32_t> bindpoint_to_size_index;
     };
 
     /// Information produced about what the transform did.

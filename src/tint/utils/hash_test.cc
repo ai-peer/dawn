@@ -16,7 +16,7 @@
 
 #include <string>
 #include <tuple>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "gtest/gtest.h"
 #include "src/tint/utils/vector.h"
@@ -51,7 +51,7 @@ TEST(HashTests, Tuple) {
 TEST(HashTests, UnorderedKeyWrapper) {
     using W = UnorderedKeyWrapper<std::vector<int>>;
 
-    std::unordered_map<W, int> m;
+    absl::flat_hash_map<W, int> m;
 
     m.emplace(W{{1, 2}}, -1);
     EXPECT_EQ(m.size(), 1u);

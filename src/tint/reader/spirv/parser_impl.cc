@@ -96,7 +96,7 @@ class FunctionTraverser {
 
     const spvtools::opt::Module& module_;
     std::unordered_set<const spvtools::opt::Function*> visited_;
-    std::unordered_map<uint32_t, const spvtools::opt::Function*> id_to_func_;
+    absl::flat_hash_map<uint32_t, const spvtools::opt::Function*> id_to_func_;
     std::vector<const spvtools::opt::Function*> ordered_;
 };
 
@@ -845,7 +845,7 @@ bool ParserImpl::RegisterWorkgroupSizeBuiltin() {
 bool ParserImpl::RegisterEntryPoints() {
     // Mapping from entry point ID to GridSize computed from LocalSize
     // decorations.
-    std::unordered_map<uint32_t, GridSize> local_size;
+    absl::flat_hash_map<uint32_t, GridSize> local_size;
     for (const spvtools::opt::Instruction& inst : module_->execution_modes()) {
         auto mode = static_cast<spv::ExecutionMode>(inst.GetSingleWordInOperand(1));
         if (mode == spv::ExecutionMode::LocalSize) {
@@ -2641,7 +2641,7 @@ bool ParserImpl::RegisterHandleUsage() {
 
     // Map a function ID to the list of its function parameter instructions, in
     // order.
-    std::unordered_map<uint32_t, std::vector<const spvtools::opt::Instruction*>> function_params;
+    absl::flat_hash_map<uint32_t, std::vector<const spvtools::opt::Instruction*>> function_params;
     for (const auto* f : topologically_ordered_functions_) {
         // Record the instructions defining this function's parameters.
         auto& params = function_params[f->result_id()];

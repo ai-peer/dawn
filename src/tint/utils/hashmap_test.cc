@@ -18,7 +18,7 @@
 #include <random>
 #include <string>
 #include <tuple>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "gmock/gmock.h"
 
@@ -428,7 +428,7 @@ TEST(Hashmap, GetOrCreate_CreateAddsSameKeyedValue) {
 
 TEST(Hashmap, Soak) {
     std::mt19937 rnd;
-    std::unordered_map<std::string, std::string> reference;
+    absl::flat_hash_map<std::string, std::string> reference;
     Hashmap<std::string, std::string, 8> map;
     for (size_t i = 0; i < 1000000; i++) {
         std::string key = std::to_string(rnd() & 64);

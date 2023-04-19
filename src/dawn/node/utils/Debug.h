@@ -18,10 +18,10 @@
 #include <iostream>
 #include <optional>
 #include <sstream>
-#include <unordered_map>
 #include <utility>
 #include <variant>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/webgpu_cpp_print.h"
 
@@ -39,7 +39,7 @@ inline std::ostream& Write(std::ostream& out, const std::optional<T>& value);
 template <typename T>
 inline std::ostream& Write(std::ostream& out, const std::vector<T>& value);
 template <typename K, typename V>
-inline std::ostream& Write(std::ostream& out, const std::unordered_map<K, V>& value);
+inline std::ostream& Write(std::ostream& out, const absl::flat_hash_map<K, V>& value);
 template <typename... TYS>
 inline std::ostream& Write(std::ostream& out, const std::variant<TYS...>& value);
 template <typename VALUE>
@@ -69,7 +69,7 @@ std::ostream& Write(std::ostream& out, const std::vector<T>& value) {
 }
 
 template <typename K, typename V>
-std::ostream& Write(std::ostream& out, const std::unordered_map<K, V>& value) {
+std::ostream& Write(std::ostream& out, const absl::flat_hash_map<K, V>& value) {
     out << "{";
     bool first = true;
     for (auto& [key, value] : value) {

@@ -569,6 +569,12 @@ function(tint_default_compile_options TARGET)
     -Wno-undefined-var-template
     -Wno-unsafe-buffer-usage
     -Wno-used-but-marked-unused
+    -Wno-comma
+    -Wno-conversion
+    -Wno-double-promotion
+    -Wno-reserved-identifier
+    -Wno-thread-safety-negative
+    -Wno-weak-vtables
     -Weverything
   )
 

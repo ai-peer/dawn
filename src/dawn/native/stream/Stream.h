@@ -19,9 +19,9 @@
 #include <bitset>
 #include <functional>
 #include <limits>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include <optional>
 
@@ -290,12 +290,12 @@ class Stream<std::pair<A, B>> {
     }
 };
 
-// Stream specialization for std::unordered_map<K, V> which sorts the entries
+// Stream specialization for absl::flat_hash_map<K, V> which sorts the entries
 // to provide a stable ordering.
 template <typename K, typename V>
-class Stream<std::unordered_map<K, V>> {
+class Stream<absl::flat_hash_map<K, V>> {
   public:
-    static void Write(stream::Sink* sink, const std::unordered_map<K, V>& m) {
+    static void Write(stream::Sink* sink, const absl::flat_hash_map<K, V>& m) {
         std::vector<std::pair<K, V>> ordered(m.begin(), m.end());
         std::sort(
             ordered.begin(), ordered.end(),

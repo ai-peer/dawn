@@ -19,8 +19,8 @@
 #include <mutex>
 #include <string>
 #include <thread>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/platform/DawnPlatform.h"
 
@@ -86,7 +86,7 @@ class DawnPerfTestPlatform : public dawn::platform::Platform {
     // Each uses their own trace event buffer, but the PerfTestPlatform owns all of them in
     // this map. The map stores all of them so we can iterate through them and flush when
     // AcquireTraceEventBuffer is called.
-    std::unordered_map<std::thread::id, std::unique_ptr<std::vector<TraceEvent>>>
+    absl::flat_hash_map<std::thread::id, std::unique_ptr<std::vector<TraceEvent>>>
         mTraceEventBuffers;
     std::mutex mTraceEventBufferMapMutex;
 };

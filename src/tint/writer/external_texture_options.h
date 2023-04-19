@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_WRITER_EXTERNAL_TEXTURE_OPTIONS_H_
 #define SRC_TINT_WRITER_EXTERNAL_TEXTURE_OPTIONS_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/sem/external_texture.h"
 

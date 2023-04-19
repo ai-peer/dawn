@@ -15,9 +15,9 @@
 #include "src/tint/ast/transform/remove_phonies.h"
 
 #include <memory>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/traverse_expressions.h"
 #include "src/tint/program_builder.h"

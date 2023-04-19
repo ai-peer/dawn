@@ -15,8 +15,8 @@
 #include "src/tint/ast/transform/pad_structs.h"
 
 #include <string>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/parameter.h"
@@ -59,7 +59,7 @@ Transform::ApplyResult PadStructs::Apply(const Program* src, const DataMap&, Dat
     CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
     auto& sem = src->Sem();
 
-    std::unordered_map<const Struct*, const Struct*> replaced_structs;
+    absl::flat_hash_map<const Struct*, const Struct*> replaced_structs;
     utils::Hashset<const StructMember*, 8> padding_members;
 
     ctx.ReplaceAll([&](const Struct* ast_str) -> const Struct* {

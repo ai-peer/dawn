@@ -16,7 +16,7 @@
 #define SRC_TINT_AST_TRANSFORM_REMOVE_PHONIES_H_
 
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/transform/transform.h"
 

@@ -15,8 +15,8 @@
 #ifndef SRC_TINT_AST_TRANSFORM_MULTIPLANAR_EXTERNAL_TEXTURE_H_
 #define SRC_TINT_AST_TRANSFORM_MULTIPLANAR_EXTERNAL_TEXTURE_H_
 
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/struct_member.h"
 #include "src/tint/ast/transform/transform.h"

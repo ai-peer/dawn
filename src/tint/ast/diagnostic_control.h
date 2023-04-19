@@ -16,7 +16,7 @@
 #define SRC_TINT_AST_DIAGNOSTIC_CONTROL_H_
 
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/builtin/diagnostic_severity.h"
 #include "src/tint/diagnostic/diagnostic.h"

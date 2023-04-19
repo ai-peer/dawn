@@ -14,8 +14,8 @@
 
 #include "src/tint/ir/debug.h"
 
-#include <unordered_map>
 #include <unordered_set>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ir/block.h"
 #include "src/tint/ir/function_terminator.h"
@@ -33,7 +33,7 @@ std::string Debug::AsDotGraph(const Module* mod) {
 
     std::unordered_set<const FlowNode*> visited;
     std::unordered_set<const FlowNode*> merge_nodes;
-    std::unordered_map<const FlowNode*, std::string> node_to_name;
+    absl::flat_hash_map<const FlowNode*, std::string> node_to_name;
     utils::StringStream out;
 
     auto name_for = [&](const FlowNode* node) -> std::string {

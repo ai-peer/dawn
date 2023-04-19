@@ -13,8 +13,8 @@
 // limitations under the License.
 
 #include <memory>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/tests/DawnTest.h"
 #include "dawn/tests/mocks/platform/CachingInterfaceMock.h"

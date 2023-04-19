@@ -18,9 +18,9 @@
 #include <memory>
 #include <string>
 #include <string_view>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/builtin/access.h"
 #include "src/tint/program_builder.h"

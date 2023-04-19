@@ -17,9 +17,9 @@
 
 #include <string>
 #include <tuple>
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/bitcast_expression.h"
@@ -456,10 +456,10 @@ class GeneratorImpl : public TextGenerator {
 
     TextBuffer helpers_;  // Helper functions emitted at the top of the output
     std::function<void()> emit_continuing_;
-    std::unordered_map<const sem::Builtin*, std::string> builtins_;
-    std::unordered_map<const type::Vector*, std::string> dynamic_vector_write_;
-    std::unordered_map<const type::Vector*, std::string> int_dot_funcs_;
-    std::unordered_map<BinaryOperandType, std::string> float_modulo_funcs_;
+    absl::flat_hash_map<const sem::Builtin*, std::string> builtins_;
+    absl::flat_hash_map<const type::Vector*, std::string> dynamic_vector_write_;
+    absl::flat_hash_map<const type::Vector*, std::string> int_dot_funcs_;
+    absl::flat_hash_map<BinaryOperandType, std::string> float_modulo_funcs_;
     std::unordered_set<const type::Struct*> emitted_structs_;
     bool requires_oes_sample_variables_ = false;
     bool requires_default_precision_qualifier_ = false;

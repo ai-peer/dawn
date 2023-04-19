@@ -288,12 +288,12 @@ struct VertexPulling::State {
     ProgramBuilder b;
     /// The clone context
     CloneContext ctx = {&b, src, /* auto_clone_symbols */ true};
-    std::unordered_map<uint32_t, LocationInfo> location_info;
+    absl::flat_hash_map<uint32_t, LocationInfo> location_info;
     std::function<const Expression*()> vertex_index_expr = nullptr;
     std::function<const Expression*()> instance_index_expr = nullptr;
     Symbol pulling_position_name;
     Symbol struct_buffer_name;
-    std::unordered_map<uint32_t, Symbol> vertex_buffer_names;
+    absl::flat_hash_map<uint32_t, Symbol> vertex_buffer_names;
     utils::Vector<const Parameter*, 8> new_function_parameters;
 
     /// Generate the vertex buffer binding name

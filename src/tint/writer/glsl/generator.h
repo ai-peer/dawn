@@ -17,9 +17,9 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/pipeline_stage.h"
 #include "src/tint/builtin/access.h"
@@ -36,7 +36,7 @@ class Program;
 
 namespace tint::writer::glsl {
 
-using BindingMap = std::unordered_map<sem::SamplerTexturePair, std::string>;
+using BindingMap = absl::flat_hash_map<sem::SamplerTexturePair, std::string>;
 
 /// Configuration options used for generating GLSL.
 struct Options {
@@ -58,11 +58,11 @@ struct Options {
 
     /// A map of old binding point to new binding point for the BindingRemapper
     /// transform
-    std::unordered_map<sem::BindingPoint, sem::BindingPoint> binding_points;
+    absl::flat_hash_map<sem::BindingPoint, sem::BindingPoint> binding_points;
 
     /// A map of old binding point to new access control for the BindingRemapper
     /// transform
-    std::unordered_map<sem::BindingPoint, builtin::Access> access_controls;
+    absl::flat_hash_map<sem::BindingPoint, builtin::Access> access_controls;
 
     /// Set to `true` to disable software robustness that prevents out-of-bounds accesses.
     bool disable_robustness = false;

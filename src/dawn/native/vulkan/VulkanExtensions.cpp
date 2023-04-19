@@ -61,8 +61,8 @@ const InstanceExtInfo& GetInstanceExtInfo(InstanceExt ext) {
     return sInstanceExtInfos[index];
 }
 
-std::unordered_map<std::string, InstanceExt> CreateInstanceExtNameMap() {
-    std::unordered_map<std::string, InstanceExt> result;
+absl::flat_hash_map<std::string, InstanceExt> CreateInstanceExtNameMap() {
+    absl::flat_hash_map<std::string, InstanceExt> result;
     for (const InstanceExtInfo& info : sInstanceExtInfos) {
         result[info.name] = info.index;
     }
@@ -182,8 +182,8 @@ const DeviceExtInfo& GetDeviceExtInfo(DeviceExt ext) {
     return sDeviceExtInfos[index];
 }
 
-std::unordered_map<std::string, DeviceExt> CreateDeviceExtNameMap() {
-    std::unordered_map<std::string, DeviceExt> result;
+absl::flat_hash_map<std::string, DeviceExt> CreateDeviceExtNameMap() {
+    absl::flat_hash_map<std::string, DeviceExt> result;
     for (const DeviceExtInfo& info : sDeviceExtInfos) {
         result[info.name] = info.index;
     }
@@ -349,8 +349,8 @@ const VulkanLayerInfo& GetVulkanLayerInfo(VulkanLayer layer) {
     return sVulkanLayerInfos[index];
 }
 
-std::unordered_map<std::string, VulkanLayer> CreateVulkanLayerNameMap() {
-    std::unordered_map<std::string, VulkanLayer> result;
+absl::flat_hash_map<std::string, VulkanLayer> CreateVulkanLayerNameMap() {
+    absl::flat_hash_map<std::string, VulkanLayer> result;
     for (const VulkanLayerInfo& info : sVulkanLayerInfos) {
         result[info.name] = info.layer;
     }

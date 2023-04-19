@@ -16,9 +16,9 @@
 #define SRC_TINT_WRITER_TEXT_GENERATOR_H_
 
 #include <string>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/diagnostic/diagnostic.h"
 #include "src/tint/program_builder.h"
@@ -215,7 +215,7 @@ class TextGenerator {
     /// The primary text buffer that the generator will emit
     TextBuffer main_buffer_;
     /// Map of builtin structure to unique generated name
-    std::unordered_map<const type::Struct*, std::string> builtin_struct_names_;
+    absl::flat_hash_map<const type::Struct*, std::string> builtin_struct_names_;
 };
 
 }  // namespace tint::writer

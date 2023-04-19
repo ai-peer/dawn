@@ -19,8 +19,8 @@
 #include <gmock/gmock.h>
 
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/TypedInteger.h"
 
@@ -78,7 +78,7 @@ class CachingInterfaceMock : public dawn::platform::CachingInterface {
 
     bool mEnabled = true;
     size_t mHitCount = 0;
-    std::unordered_map<std::string, std::vector<uint8_t>> mCache;
+    absl::flat_hash_map<std::string, std::vector<uint8_t>> mCache;
 };
 
 // Dawn platform used for testing with a mock caching interface.

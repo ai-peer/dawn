@@ -14,8 +14,8 @@
 
 #include "src/tint/ast/transform/localize_struct_array_assignment.h"
 
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/transform/simplify_pointers.h"

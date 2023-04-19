@@ -18,9 +18,9 @@
 #include <functional>
 #include <string>
 #include <type_traits>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/native/DawnNative.h"
 #include "dawn/webgpu_cpp.h"
@@ -389,7 +389,7 @@ class Converter {
     template <typename OUT, typename IN_KEY, typename IN_VALUE>
     inline bool Convert(OUT*& out_els,
                         uint32_t& out_count,
-                        const std::unordered_map<IN_KEY, IN_VALUE>& in) {
+                        const absl::flat_hash_map<IN_KEY, IN_VALUE>& in) {
         if (in.size() == 0) {
             out_els = nullptr;
             out_count = 0;

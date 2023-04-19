@@ -15,8 +15,8 @@
 #include "src/tint/ast/transform/first_index_offset.h"
 
 #include <memory>
-#include <unordered_map>
 #include <utility>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/builtin/builtin_value.h"
 #include "src/tint/program_builder.h"
@@ -78,8 +78,8 @@ Transform::ApplyResult FirstIndexOffset::Apply(const Program* src,
     }
 
     // Map of builtin usages
-    std::unordered_map<const sem::Variable*, const char*> builtin_vars;
-    std::unordered_map<const type::StructMember*, const char*> builtin_members;
+    absl::flat_hash_map<const sem::Variable*, const char*> builtin_vars;
+    absl::flat_hash_map<const type::StructMember*, const char*> builtin_members;
 
     bool has_vertex_or_instance_index = false;
 

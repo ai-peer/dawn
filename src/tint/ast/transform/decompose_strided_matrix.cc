@@ -14,9 +14,9 @@
 
 #include "src/tint/ast/transform/decompose_strided_matrix.h"
 
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/transform/simplify_pointers.h"
 #include "src/tint/program_builder.h"
@@ -126,7 +126,7 @@ Transform::ApplyResult DecomposeStridedMatrix::Apply(const Program* src,
     // structure.
     // Example:
     //   ssbo.mat = mat_to_arr(m)
-    std::unordered_map<MatrixInfo, Symbol, MatrixInfo::Hasher> mat_to_arr;
+    absl::flat_hash_map<MatrixInfo, Symbol, MatrixInfo::Hasher> mat_to_arr;
     ctx.ReplaceAll([&](const AssignmentStatement* stmt) -> const Statement* {
         if (auto* access = src->Sem().Get<sem::StructMemberAccess>(stmt->lhs)) {
             if (auto info = decomposed.Find(access->Member())) {
@@ -165,7 +165,7 @@ Transform::ApplyResult DecomposeStridedMatrix::Apply(const Program* src,
     // For all other struct member accesses, we need to convert the array to the
     // matrix type. Example:
     //   m = arr_to_mat(ssbo.mat)
-    std::unordered_map<MatrixInfo, Symbol, MatrixInfo::Hasher> arr_to_mat;
+    absl::flat_hash_map<MatrixInfo, Symbol, MatrixInfo::Hasher> arr_to_mat;
     ctx.ReplaceAll([&](const MemberAccessorExpression* expr) -> const Expression* {
         if (auto* access = src->Sem().Get(expr)->UnwrapLoad()->As<sem::StructMemberAccess>()) {
             if (auto info = decomposed.Find(access->Member())) {

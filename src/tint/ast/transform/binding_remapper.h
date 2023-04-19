@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_AST_TRANSFORM_BINDING_REMAPPER_H_
 #define SRC_TINT_AST_TRANSFORM_BINDING_REMAPPER_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/ast/transform/transform.h"
 #include "src/tint/builtin/access.h"
@@ -31,10 +31,10 @@ using BindingPoint = sem::BindingPoint;
 class BindingRemapper final : public utils::Castable<BindingRemapper, Transform> {
   public:
     /// BindingPoints is a map of old binding point to new binding point
-    using BindingPoints = std::unordered_map<BindingPoint, BindingPoint>;
+    using BindingPoints = absl::flat_hash_map<BindingPoint, BindingPoint>;
 
     /// AccessControls is a map of old binding point to new access control
-    using AccessControls = std::unordered_map<BindingPoint, builtin::Access>;
+    using AccessControls = absl::flat_hash_map<BindingPoint, builtin::Access>;
 
     /// Remappings is consumed by the BindingRemapper transform.
     /// Data holds information about shader usage and constant buffer offsets.

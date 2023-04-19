@@ -19,10 +19,10 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/ityp_array.h"
@@ -87,7 +87,7 @@ using PipelineConstantEntries = std::map<std::string, double>;
 
 // A map from name to EntryPointMetadata.
 using EntryPointMetadataTable =
-    std::unordered_map<std::string, std::unique_ptr<EntryPointMetadata>>;
+    absl::flat_hash_map<std::string, std::unique_ptr<EntryPointMetadata>>;
 
 // Source for a tint program
 class TintSource;
@@ -232,7 +232,7 @@ struct EntryPointMetadata {
         bool isInitialized;
     };
 
-    using OverridesMap = std::unordered_map<std::string, Override>;
+    using OverridesMap = absl::flat_hash_map<std::string, Override>;
 
     // Map identifier to override variable
     // Identifier is unique: either the variable name or the numeric ID if specified

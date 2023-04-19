@@ -21,8 +21,8 @@
 #include <optional>
 #include <sstream>
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #if TINT_BUILD_GLSL_WRITER
 #include "glslang/Public/ResourceLimits.h"
@@ -105,7 +105,7 @@ struct Options {
     std::string fxc_path;
     std::string dxc_path;
     std::string xcrun_path;
-    std::unordered_map<std::string, double> overrides;
+    absl::flat_hash_map<std::string, double> overrides;
     std::optional<tint::sem::BindingPoint> hlsl_root_constant_binding_point;
 
 #if TINT_BUILD_IR
@@ -973,7 +973,7 @@ int main(int argc, const char** argv) {
              tint::transform::DataMap& i) {
              tint::ast::transform::SubstituteOverride::Config cfg;
 
-             std::unordered_map<tint::OverrideId, double> values;
+             absl::flat_hash_map<tint::OverrideId, double> values;
              values.reserve(options.overrides.size());
 
              for (const auto& [name, value] : options.overrides) {

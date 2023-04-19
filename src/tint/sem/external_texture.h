@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_SEM_EXTERNAL_TEXTURE_H_
 #define SRC_TINT_SEM_EXTERNAL_TEXTURE_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/sem/binding_point.h"
 
@@ -38,7 +38,7 @@ struct BindingPoints {
 /// BindingsMap is a map where the key is the binding location of a
 /// texture_external and the value is a struct containing the desired
 /// locations for new bindings expanded from the texture_external instance.
-using BindingsMap = std::unordered_map<BindingPoint, BindingPoints>;
+using BindingsMap = absl::flat_hash_map<BindingPoint, BindingPoints>;
 
 }  // namespace tint::sem::external_texture
 

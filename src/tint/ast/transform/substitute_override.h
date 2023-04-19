@@ -16,7 +16,7 @@
 #define SRC_TINT_AST_TRANSFORM_SUBSTITUTE_OVERRIDE_H_
 
 #include <string>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "tint/override_id.h"
 
@@ -63,7 +63,7 @@ class SubstituteOverride final : public utils::Castable<SubstituteOverride, Tran
         /// The map of override identifier to the override value.
         /// The value is always a double coming into the transform and will be
         /// converted to the correct type through and initializer.
-        std::unordered_map<OverrideId, double> map;
+        absl::flat_hash_map<OverrideId, double> map;
 
         /// Reflect the fields of this class so that it can be used by tint::ForeachField()
         TINT_REFLECT(map);

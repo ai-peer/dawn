@@ -15,9 +15,9 @@
 #include "src/tint/ast/transform/combine_samplers.h"
 
 #include <string>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/function.h"
@@ -61,7 +61,7 @@ struct CombineSamplers::State {
 
     /// Map from a texture/sampler pair to the corresponding combined sampler
     /// variable
-    using CombinedTextureSamplerMap = std::unordered_map<sem::VariablePair, const Variable*>;
+    using CombinedTextureSamplerMap = absl::flat_hash_map<sem::VariablePair, const Variable*>;
 
     /// Use sem::BindingPoint without scope.
     using BindingPoint = sem::BindingPoint;
@@ -72,7 +72,7 @@ struct CombineSamplers::State {
 
     /// A map of all texture/sampler variable pairs that contain a function
     /// parameter to the combined sampler function paramter that will replace it.
-    std::unordered_map<const sem::Function*, CombinedTextureSamplerMap>
+    absl::flat_hash_map<const sem::Function*, CombinedTextureSamplerMap>
         function_combined_texture_samplers_;
 
     /// Placeholder global samplers used when a function contains texture-only

@@ -20,6 +20,7 @@
 #include <limits>
 #include <utility>
 
+#include "absl/container/flat_hash_map.h"
 #include "src/tint/ast/alias.h"
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/attribute.h"
@@ -1653,8 +1654,8 @@ bool Resolver::AliasAnalysis(const sem::Call* call) {
 
     // Track the set of root identifiers that are read and written by arguments passed in this
     // call.
-    std::unordered_map<const sem::Variable*, const sem::ValueExpression*> arg_reads;
-    std::unordered_map<const sem::Variable*, const sem::ValueExpression*> arg_writes;
+    absl::flat_hash_map<const sem::Variable*, const sem::ValueExpression*> arg_reads;
+    absl::flat_hash_map<const sem::Variable*, const sem::ValueExpression*> arg_writes;
     for (size_t i = 0; i < args.Length(); i++) {
         auto* arg = args[i];
         if (!arg->Type()->Is<type::Pointer>()) {

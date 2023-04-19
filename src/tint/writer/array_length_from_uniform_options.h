@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_WRITER_ARRAY_LENGTH_FROM_UNIFORM_OPTIONS_H_
 #define SRC_TINT_WRITER_ARRAY_LENGTH_FROM_UNIFORM_OPTIONS_H_
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/writer/binding_point.h"
 
@@ -41,7 +41,7 @@ struct ArrayLengthFromUniformOptions {
     BindingPoint ubo_binding;
     /// The mapping from storage buffer binding points to the index into the
     /// uniform buffer where the length of the buffer is stored.
-    std::unordered_map<BindingPoint, uint32_t> bindpoint_to_size_index;
+    absl::flat_hash_map<BindingPoint, uint32_t> bindpoint_to_size_index;
 
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(ubo_binding, bindpoint_to_size_index);

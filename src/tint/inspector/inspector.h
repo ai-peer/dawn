@@ -19,9 +19,9 @@
 #include <memory>
 #include <string>
 #include <tuple>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+#include "absl/container/flat_hash_map.h"
 
 #include "tint/override_id.h"
 
@@ -157,7 +157,7 @@ class Inspector {
   private:
     const Program* program_;
     diag::List diagnostics_;
-    std::unique_ptr<std::unordered_map<std::string, utils::UniqueVector<SamplerTexturePair, 4>>>
+    std::unique_ptr<absl::flat_hash_map<std::string, utils::UniqueVector<SamplerTexturePair, 4>>>
         sampler_targets_;
 
     /// @param name name of the entry point to find

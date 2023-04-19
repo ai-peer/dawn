@@ -14,7 +14,7 @@
 
 #include "src/tint/diagnostic/diagnostic.h"
 
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 
 #include "src/tint/diagnostic/formatter.h"
 
