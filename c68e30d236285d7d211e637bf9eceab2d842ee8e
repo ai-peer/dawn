@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cb26756_06655956",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "Sounds good. Can we still have a TODO for this?",
+      "parentUuid": "53164e47_a8f2aded",
+      "range": {
+        "startLine": 201,
+        "startChar": 69,
+        "endLine": 201,
+        "endChar": 89
+      },
+      "revId": "c68e30d236285d7d211e637bf9eceab2d842ee8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e3fc76a_77306a6e",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 22

@@ -16,6 +16,154 @@
       "message": "Hi Corentin, do you have more comments? thanks,",
       "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0e91d4_737c550e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "LGTM overall. There is a lot of complexity around Clear/Write that doesn\u0027t seem strictly necessary though.",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194c53c5_14bc41a0",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "Does this cause D3D11 to synchronously wait for previous operations to complete? If that\u0027s the case, can we add a TODO to fix the synchronization point later?",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc97c2cd_dfdff80f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "That issue seems D3D12 specific. It isn\u0027t clear that there is a way to know if the resource is already zeroed in D3D11.",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6a1b5a_db8d9b1c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "nit: never used?",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b6ae6b_1993d4a4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "Why do we have this ScopeMap here? WriteInternal does it\u0027s own ScopedMap, and ClearInternal (used by EnsureDataInitializedAsDestination) handles both the mapped and unmapped case.",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260244f5_46e02fde",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "It seems this is the only place where ScopedMap is used. Because it is used only once, do we really need this RAII class?",
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "997dcfe4_b0e87e65",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "nit: this can use third_party/dawn/src/dawn/common/NonCopyable.h",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 62
+      },
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48ae0413_291cb13a",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T12:50:35Z",
+      "side": 1,
+      "message": "nit: Clear",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 12
+      },
+      "revId": "c3f401f3f949ba9723fcea694e1fe91c26cd7c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
