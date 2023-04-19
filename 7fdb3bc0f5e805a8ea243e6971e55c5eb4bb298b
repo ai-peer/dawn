@@ -431,6 +431,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86bfdc44_86616302",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "Backends should be consistent as much as possible. Could we track serials ourselves and call Map when we know that the GPU is done with the buffer instead of making `MapAsync` implicitly block on all previous operations?",
+      "parentUuid": "a576d0a5_cc6cfc22",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "199b8971_d28b7363",
         "filename": "src/dawn/tests/end2end/BufferTests.cpp",
         "patchSetId": 5

@@ -1,0 +1,265 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6825f98d_afdb8a0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "LGTM. It seems we are adding a bunch of synchronization points and readbacks to get things started before we implement one of the copies proposals fully. We\u0027ll have to be sure to revisit and do the possible simplifications later.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca3ddb0c_a3ac5402",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "nit: this is likely to produce uneachable code warnings. Maybe we could just have the return?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89e4bc20_e5a8e13f",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "TBH it seems a bit weird that the logic for Copy would be inside buffer and not here. Any reason for this choice?",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3511089_433e62e8",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "nit: is there an issue tracking this?\n\nAlso ScopeMap here will cause a synchronization point. There isn\u0027t a single memcpy outside of WriteBuffer in Proposal 2 so wouldn\u0027t ScopedMap disappear eventually? (we are doing proposal 2 right?)",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "596cb47d_02c104d0",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "this code path seems incomplete, there is no copy performed for 3D textures.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be1d6983_2c630b0b",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "Is 1D handled with the code below?",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86daa03c_56005afc",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "Ditto, why does this code need to leave inside Texture? Is it because D3D11 is an immediate API that we\u0027d like to structure things this way?",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b211af2c_32525096",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a0b7a6a_247eadf1",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "nit: pipelines are unused, so is Device.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb71bfc_21e0e1e1",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "u-nit: the arguments to Buffer::Copy are shuffled compared to CopyB2B.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "642d6722_440ac726",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "nit: Write",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e5af49_d73946aa",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "I think we need both the format to be renderable, and the texture to have been created with the RenderAttachment usage.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83d96f4_712cceab",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "Can we create RTVs with more than 1 mip level and array layer? That would be surprising since rendering usually happens on a single subresource. It seems most likely that we\u0027d need a loop over subresources like in other backends.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db82240d_69335084",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "Do we need special handling for 1D textures?",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e6f461_81b742a4",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-19T13:20:50Z",
+      "side": 1,
+      "message": "Maybe we can reuse this to perform the copies from staging. Dawn is a very reentrant API so we could create a dawn::native::d3d11::Texture for the staging texture, then use the `Texture::Copy(source, destination, size)` that this method would become and reuse code.",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
