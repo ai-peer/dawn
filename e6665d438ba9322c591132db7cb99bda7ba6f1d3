@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a11e430_7fcb4944",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-19T01:59:10Z",
+      "side": 1,
+      "message": "spec PR landed Yunchao\nhttps://github.com/gpuweb/gpuweb/pull/3938\n\nLooks like we need to update this to only allow zero size and offset for SetVertexBuffer(null, ..) and SetBindGroup(null, ..)",
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "753daa44_fe73ca82",
