@@ -483,6 +483,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65dfaa98_78f73a60",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T23:53:39Z",
+      "side": 1,
+      "message": "Add more detail of d3d11\u0027s MapAsync()",
+      "parentUuid": "b0e6e761_72e27526",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "199b8971_d28b7363",
@@ -514,6 +532,24 @@
       "side": 1,
       "message": "Same reason here.",
       "parentUuid": "199b8971_d28b7363",
+      "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f235fae9_da2c0990",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T23:53:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23d60dff_a651b4ff",
       "revId": "7fdb3bc0f5e805a8ea243e6971e55c5eb4bb298b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

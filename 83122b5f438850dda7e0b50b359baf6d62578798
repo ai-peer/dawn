@@ -260,6 +260,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6cf48b7_ebb2a588",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-19T23:53:39Z",
+      "side": 1,
+      "message": "There are also Buffer::Write(), Buffer::Clear(), Texture::Clear(), Texture::Write(). They will be used by CommandBufferD3D11 and Buffer, Texture themselves. Those methods are better to be in the Texture and Buffer source files. Otherwise Texture and Buffer have to include CommandBuffer header files. It is weird that CommandBuffer depends on Texture and Buffer, but Buffer and Texture also depend on CommandBuffer. Or we have to move all code uses RecordingCommandContext (EnsureDataInitialized(), etc) into CommandBuffer.  And I also feel Buffer::Copy() and Texture::Copy() are similar to Write() and Clear(). So I put them in the same place.\n\nAnd another benefit is those methods can use private members and methods of Texture and Buffer directly. So we can remove all getters for internal D3D11 objects and don\u0027t public some unnecessary methods to avoid being unintentionally used elsewhere.\n\nThat are all reasons. Do they make sense to you?",
+      "parentUuid": "f5d2dad4_140cd1b9",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b211af2c_32525096",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.h",
         "patchSetId": 8
