@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd73f099_be012df2",
+        "filename": "go.sum",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-19T20:03:55Z",
+      "side": 1,
+      "message": "This was a `go mod tidy` - cleans up cruft that\u0027s accumulated and isn\u0027t used any more",
+      "revId": "77f30e23b3de35532b389f0d27ad107cac079e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
