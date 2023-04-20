@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb711b4_163c603f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T16:09:28Z",
+      "side": 1,
+      "message": "nit: say something about making OOM an allowed error in Buffer/Texture creation",
+      "revId": "039c3ed7d42f8532ac6f4fecf863367ba747eb85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4527fc4e_d6c2b422",
