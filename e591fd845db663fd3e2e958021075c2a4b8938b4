@@ -33,6 +33,23 @@
       "message": "LGTM, but we should really get to a CommandRecordingContextBase at some point. Right now the API contracts between frontend and backend are not clear at all which makes it hard to reason about what the code does.",
       "revId": "e591fd845db663fd3e2e958021075c2a4b8938b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c85dc5_90273471",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T17:53:59Z",
+      "side": 1,
+      "message": "Thanks for the fixing them. CL lgtm. However I am working on enabling d3d11 end2end on trybots. could you please wait and land this CL after [1] is landed, and make sure those tests are run on bots. thanks.\n\n[1] https://chromium-review.googlesource.com/c/chromium/src/+/4450573",
+      "revId": "e591fd845db663fd3e2e958021075c2a4b8938b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
