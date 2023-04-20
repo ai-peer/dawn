@@ -45,6 +45,54 @@
       },
       "revId": "caaef3ff34d1d41a194f73f6e6585e891f827d01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ab3897_10576aab",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-20T23:05:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b45253b_7e4239ee",
+      "range": {
+        "startLine": 119,
+        "startChar": 53,
+        "endLine": 119,
+        "endChar": 61
+      },
+      "revId": "caaef3ff34d1d41a194f73f6e6585e891f827d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c244dad_d476003a",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-20T23:05:23Z",
+      "side": 1,
+      "message": "Good point! I actually removed one instance of sample type because its the same? Lmk what you think about this.",
+      "parentUuid": "5f45124c_5988dd5c",
+      "range": {
+        "startLine": 119,
+        "startChar": 12,
+        "endLine": 119,
+        "endChar": 28
+      },
+      "revId": "caaef3ff34d1d41a194f73f6e6585e891f827d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
