@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "eb1318da3f06d09a2d05b6930ad0480e3d664356",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d4958c1_c5349f28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T07:27:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eb1318da3f06d09a2d05b6930ad0480e3d664356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6d3788_cf4915c4",
+        "filename": "src/dawn/node/binding/GPUAdapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T07:27:26Z",
+      "side": 1,
+      "message": "nit: maybe we could pass the WGPUAdapterProperties to GPUAdapterInfo directly so we don\u0027t need to convert to the same structure in C++",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 0
+      },
+      "revId": "eb1318da3f06d09a2d05b6930ad0480e3d664356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
