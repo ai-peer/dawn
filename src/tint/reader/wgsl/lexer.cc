@@ -132,6 +132,10 @@ size_t Lexer::length() const {
 
 const char& Lexer::at(size_t pos) const {
     auto l = line();
+    return at_from_line(l, pos);
+}
+
+const char& Lexer::at_from_line(const std::string_view l, size_t pos) const {
     // Unlike for std::string, if pos == l.size(), indexing `l[pos]` is UB for
     // std::string_view.
     if (pos >= l.size()) {
@@ -231,10 +235,15 @@ bool Lexer::matches(size_t pos, std::string_view sub_string) {
 }
 
 bool Lexer::matches(size_t pos, char ch) {
-    if (pos >= length()) {
+    auto l = line();
+    return matches_in_line(l, pos, ch);
+}
+
+bool Lexer::matches_in_line(const std::string_view l, size_t pos, char ch) {
+    if (pos >= l.size()) {
         return false;
     }
-    return line()[pos] == ch;
+    return l[pos] == ch;
 }
 
 Token Lexer::skip_blankspace_and_comments() {
@@ -331,9 +340,12 @@ Token Lexer::try_float() {
     auto source = begin_source();
     bool has_mantissa_digits = false;
 
+    auto src = line();
+    auto len = src.size();
+
     std::optional<size_t> first_significant_digit_position;
-    while (end < length() && is_digit(at(end))) {
-        if (!first_significant_digit_position.has_value() && (at(end) != '0')) {
+    while (end < len && is_digit(at_from_line(src, end))) {
+        if (!first_significant_digit_position.has_value() && (at_from_line(src, end) != '0')) {
             first_significant_digit_position = end;
         }
 
@@ -342,15 +354,15 @@ Token Lexer::try_float() {
     }
 
     std::optional<size_t> dot_position;
-    if (end < length() && matches(end, '.')) {
+    if (end < len && matches_in_line(src, end, '.')) {
         dot_position = end;
         end++;
     }
 
     size_t zeros_before_digit = 0;
-    while (end < length() && is_digit(at(end))) {
+    while (end < len && is_digit(at_from_line(src, end))) {
         if (!first_significant_digit_position.has_value()) {
-            if (at(end) == '0') {
+            if (at_from_line(src, end) == '0') {
                 zeros_before_digit += 1;
             } else {
                 first_significant_digit_position = end;
@@ -368,16 +380,16 @@ Token Lexer::try_float() {
     // Parse the exponent if one exists
     std::optional<size_t> exponent_value_position;
     bool negative_exponent = false;
-    if (end < length() && (matches(end, 'e') || matches(end, 'E'))) {
+    if (end < len && (matches_in_line(src, end, 'e') || matches_in_line(src, end, 'E'))) {
         end++;
-        if (end < length() && (matches(end, '+') || matches(end, '-'))) {
-            negative_exponent = matches(end, '-');
+        if (end < len && (matches_in_line(src, end, '+') || matches_in_line(src, end, '-'))) {
+            negative_exponent = matches_in_line(src, end, '-');
             end++;
         }
         exponent_value_position = end;
 
         bool has_digits = false;
-        while (end < length() && isdigit(at(end))) {
+        while (end < len && isdigit(at_from_line(src, end))) {
             has_digits = true;
             end++;
         }
@@ -392,9 +404,9 @@ Token Lexer::try_float() {
 
     bool has_f_suffix = false;
     bool has_h_suffix = false;
-    if (end < length() && matches(end, 'f')) {
+    if (end < len && matches_in_line(src, end, 'f')) {
         has_f_suffix = true;
-    } else if (end < length() && matches(end, 'h')) {
+    } else if (end < len && matches_in_line(src, end, 'h')) {
         has_h_suffix = true;
     }
 
@@ -407,13 +419,13 @@ Token Lexer::try_float() {
     // Note, the `at` method will return a static `0` if the provided position is >= length. We
     // actually need the end pointer to point to the correct memory location to use `from_chars`.
     // So, handle the case where we point past the length specially.
-    auto* end_ptr = &at(end);
-    if (end >= length()) {
-        end_ptr = &at(length() - 1) + 1;
+    auto* end_ptr = &at_from_line(src, end);
+    if (end >= len) {
+        end_ptr = &at_from_line(src, len - 1) + 1;
     }
 
     double value = 0;
-    auto ret = absl::from_chars(&at(start), end_ptr, value);
+    auto ret = absl::from_chars(&at_from_line(src, start), end_ptr, value);
     bool overflow = ret.ec != std::errc();
 
     // Value didn't fit in a double, check for underflow as that is 0.0 in WGSL and not an error.
@@ -429,8 +441,8 @@ Token Lexer::try_float() {
             bool exp_conversion_succeeded = true;
             if (exponent_value_position.has_value()) {
                 auto exp_end_ptr = end_ptr - (has_f_suffix || has_h_suffix ? 1 : 0);
-                auto exp_ret = std::from_chars(&at(exponent_value_position.value()), exp_end_ptr,
-                                               exp_value, 10);
+                auto exp_ret = std::from_chars(&at_from_line(src, exponent_value_position.value()),
+                                               exp_end_ptr, exp_value, 10);
 
                 if (exp_ret.ec != std::errc{}) {
                     exp_conversion_succeeded = false;
@@ -1011,74 +1023,75 @@ Token Lexer::try_punctuation() {
     auto source = begin_source();
     auto type = Token::Type::kUninitialized;
 
-    if (matches(pos(), '@')) {
+    auto l = line();
+    if (matches_in_line(l, pos(), '@')) {
         type = Token::Type::kAttr;
         advance(1);
-    } else if (matches(pos(), '(')) {
+    } else if (matches_in_line(l, pos(), '(')) {
         type = Token::Type::kParenLeft;
         advance(1);
-    } else if (matches(pos(), ')')) {
+    } else if (matches_in_line(l, pos(), ')')) {
         type = Token::Type::kParenRight;
         advance(1);
-    } else if (matches(pos(), '[')) {
+    } else if (matches_in_line(l, pos(), '[')) {
         type = Token::Type::kBracketLeft;
         advance(1);
-    } else if (matches(pos(), ']')) {
+    } else if (matches_in_line(l, pos(), ']')) {
         type = Token::Type::kBracketRight;
         advance(1);
-    } else if (matches(pos(), '{')) {
+    } else if (matches_in_line(l, pos(), '{')) {
         type = Token::Type::kBraceLeft;
         advance(1);
-    } else if (matches(pos(), '}')) {
+    } else if (matches_in_line(l, pos(), '}')) {
         type = Token::Type::kBraceRight;
         advance(1);
-    } else if (matches(pos(), '&')) {
-        if (matches(pos() + 1, '&')) {
+    } else if (matches_in_line(l, pos(), '&')) {
+        if (matches_in_line(l, pos() + 1, '&')) {
             type = Token::Type::kAndAnd;
             advance(2);
-        } else if (matches(pos() + 1, '=')) {
+        } else if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kAndEqual;
             advance(2);
         } else {
             type = Token::Type::kAnd;
             advance(1);
         }
-    } else if (matches(pos(), '/')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '/')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kDivisionEqual;
             advance(2);
         } else {
             type = Token::Type::kForwardSlash;
             advance(1);
         }
-    } else if (matches(pos(), '!')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '!')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kNotEqual;
             advance(2);
         } else {
             type = Token::Type::kBang;
             advance(1);
         }
-    } else if (matches(pos(), ':')) {
+    } else if (matches_in_line(l, pos(), ':')) {
         type = Token::Type::kColon;
         advance(1);
-    } else if (matches(pos(), ',')) {
+    } else if (matches_in_line(l, pos(), ',')) {
         type = Token::Type::kComma;
         advance(1);
-    } else if (matches(pos(), '=')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '=')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kEqualEqual;
             advance(2);
         } else {
             type = Token::Type::kEqual;
             advance(1);
         }
-    } else if (matches(pos(), '>')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '>')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kGreaterThanEqual;
             advance(2);
-        } else if (matches(pos() + 1, '>')) {
-            if (matches(pos() + 2, '=')) {
+        } else if (matches_in_line(l, pos() + 1, '>')) {
+            if (matches_in_line(l, pos() + 2, '=')) {
                 type = Token::Type::kShiftRightEqual;
                 advance(3);
             } else {
@@ -1089,12 +1102,12 @@ Token Lexer::try_punctuation() {
             type = Token::Type::kGreaterThan;
             advance(1);
         }
-    } else if (matches(pos(), '<')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '<')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kLessThanEqual;
             advance(2);
-        } else if (matches(pos() + 1, '<')) {
-            if (matches(pos() + 2, '=')) {
+        } else if (matches_in_line(l, pos() + 1, '<')) {
+            if (matches_in_line(l, pos() + 2, '=')) {
                 type = Token::Type::kShiftLeftEqual;
                 advance(3);
             } else {
@@ -1105,72 +1118,72 @@ Token Lexer::try_punctuation() {
             type = Token::Type::kLessThan;
             advance(1);
         }
-    } else if (matches(pos(), '%')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '%')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kModuloEqual;
             advance(2);
         } else {
             type = Token::Type::kMod;
             advance(1);
         }
-    } else if (matches(pos(), '-')) {
-        if (matches(pos() + 1, '>')) {
+    } else if (matches_in_line(l, pos(), '-')) {
+        if (matches_in_line(l, pos() + 1, '>')) {
             type = Token::Type::kArrow;
             advance(2);
-        } else if (matches(pos() + 1, '-')) {
+        } else if (matches_in_line(l, pos() + 1, '-')) {
             type = Token::Type::kMinusMinus;
             advance(2);
-        } else if (matches(pos() + 1, '=')) {
+        } else if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kMinusEqual;
             advance(2);
         } else {
             type = Token::Type::kMinus;
             advance(1);
         }
-    } else if (matches(pos(), '.')) {
+    } else if (matches_in_line(l, pos(), '.')) {
         type = Token::Type::kPeriod;
         advance(1);
-    } else if (matches(pos(), '+')) {
-        if (matches(pos() + 1, '+')) {
+    } else if (matches_in_line(l, pos(), '+')) {
+        if (matches_in_line(l, pos() + 1, '+')) {
             type = Token::Type::kPlusPlus;
             advance(2);
-        } else if (matches(pos() + 1, '=')) {
+        } else if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kPlusEqual;
             advance(2);
         } else {
             type = Token::Type::kPlus;
             advance(1);
         }
-    } else if (matches(pos(), '|')) {
-        if (matches(pos() + 1, '|')) {
+    } else if (matches_in_line(l, pos(), '|')) {
+        if (matches_in_line(l, pos() + 1, '|')) {
             type = Token::Type::kOrOr;
             advance(2);
-        } else if (matches(pos() + 1, '=')) {
+        } else if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kOrEqual;
             advance(2);
         } else {
             type = Token::Type::kOr;
             advance(1);
         }
-    } else if (matches(pos(), ';')) {
+    } else if (matches_in_line(l, pos(), ';')) {
         type = Token::Type::kSemicolon;
         advance(1);
-    } else if (matches(pos(), '*')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '*')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kTimesEqual;
             advance(2);
         } else {
             type = Token::Type::kStar;
             advance(1);
         }
-    } else if (matches(pos(), '~')) {
+    } else if (matches_in_line(l, pos(), '~')) {
         type = Token::Type::kTilde;
         advance(1);
-    } else if (matches(pos(), '_')) {
+    } else if (matches_in_line(l, pos(), '_')) {
         type = Token::Type::kUnderscore;
         advance(1);
-    } else if (matches(pos(), '^')) {
-        if (matches(pos() + 1, '=')) {
+    } else if (matches_in_line(l, pos(), '^')) {
+        if (matches_in_line(l, pos() + 1, '=')) {
             type = Token::Type::kXorEqual;
             advance(2);
         } else {
