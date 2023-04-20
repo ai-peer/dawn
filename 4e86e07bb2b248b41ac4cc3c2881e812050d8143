@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c2cdc5_213fec22",
+        "filename": "src/tint/reader/wgsl/token.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-20T14:25:53Z",
+      "side": 1,
+      "message": "Could just return `std::string_view{}` if `value_` is not a `std::string_view` or `std::string`. That would match `to_str()`, and lessens risk of UB in case of bugs.",
+      "revId": "4e86e07bb2b248b41ac4cc3c2881e812050d8143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
