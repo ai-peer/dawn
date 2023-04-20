@@ -13,8 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_SOURCE_H_
-#define SRC_TINT_SOURCE_H_
+#ifndef SRC_TINT_UTILS_SOURCE_H_
+#define SRC_TINT_UTILS_SOURCE_H_
 
 #include <string>
 #include <string_view>
@@ -23,7 +23,7 @@
 
 #include "src/tint/utils/string_stream.h"
 
-namespace tint {
+namespace tint::utils {
 
 /// Source describes a range of characters within a source file.
 class Source {
@@ -226,6 +226,12 @@ inline utils::StringStream& operator<<(utils::StringStream& out,
     return out;
 }
 
+}  // namespace tint::utils
+
+namespace tint {
+
+using utils::Source;
+
 }  // namespace tint
 
-#endif  // SRC_TINT_SOURCE_H_
+#endif  // SRC_TINT_UTILS_SOURCE_H_

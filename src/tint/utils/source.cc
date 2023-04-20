@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/source.h"
+#include "src/tint/utils/source.h"
 
 #include <algorithm>
 #include <string_view>
@@ -20,7 +20,7 @@
 
 #include "src/tint/utils/unicode.h"
 
-namespace tint {
+namespace tint::utils {
 namespace {
 
 bool ParseLineBreak(std::string_view str, size_t i, bool* is_line_break, size_t* line_break_size) {
@@ -174,4 +174,4 @@ utils::StringStream& operator<<(utils::StringStream& out, const Source& source) 
     return out;
 }
 
-}  // namespace tint
+}  // namespace tint::utils

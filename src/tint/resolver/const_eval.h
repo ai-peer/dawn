@@ -26,7 +26,6 @@
 // Forward declarations
 namespace tint {
 class ProgramBuilder;
-class Source;
 }  // namespace tint
 namespace tint::ast {
 class LiteralExpression;
@@ -40,6 +39,9 @@ class ValueExpression;
 namespace tint::type {
 class StructMember;
 }  // namespace tint::type
+namespace tint::utils {
+class Source;
+}  // namespace tint::utils
 
 namespace tint::resolver {
 

@@ -58,8 +58,6 @@ endfunction()
 add_library(tint_diagnostic_utils
   debug.cc
   debug.h
-  source.h
-  source.cc
   diagnostic/diagnostic.cc
   diagnostic/diagnostic.h
   diagnostic/formatter.cc
@@ -68,6 +66,8 @@ add_library(tint_diagnostic_utils
   diagnostic/printer.h
   utils/debugger.cc
   utils/debugger.h
+  utils/source.h
+  utils/source.cc
   utils/unicode.cc
   utils/unicode.h
 )
@@ -962,7 +962,6 @@ if(TINT_BUILD_TESTS)
     sem/diagnostic_severity_test.cc
     sem/struct_test.cc
     sem/value_expression_test.cc
-    source_test.cc
     switch_test.cc
     symbol_table_test.cc
     symbol_test.cc
@@ -1009,6 +1008,7 @@ if(TINT_BUILD_TESTS)
     utils/reverse_test.cc
     utils/scoped_assignment_test.cc
     utils/slice_test.cc
+    utils/source_test.cc
     utils/string_stream_test.cc
     utils/string_test.cc
     utils/traits_test.cc

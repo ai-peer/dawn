@@ -24,9 +24,9 @@
 #include "src/tint/resolver/sem_helper.h"
 #include "src/tint/scope_stack.h"
 #include "src/tint/sem/evaluation_stage.h"
-#include "src/tint/source.h"
 #include "src/tint/utils/hash.h"
 #include "src/tint/utils/hashmap.h"
+#include "src/tint/utils/source.h"
 #include "src/tint/utils/vector.h"
 
 // Forward declarations

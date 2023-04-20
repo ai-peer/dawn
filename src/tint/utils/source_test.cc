@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/source.h"
+#include "src/tint/utils/source.h"
 
 #include <memory>
 #include <utility>
 
 #include "gtest/gtest.h"
 
-namespace tint {
+namespace tint::utils {
 namespace {
 
 static constexpr const char* kSource = R"(line one
@@ -96,4 +96,4 @@ INSTANTIATE_TEST_SUITE_P(SourceFileContentTest,
                          testing::Values(kVTab, kFF, kNL, kLS, kPS, kLF, kCR, kCR kLF));
 
 }  // namespace
-}  // namespace tint
+}  // namespace tint::utils

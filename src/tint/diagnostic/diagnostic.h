@@ -21,7 +21,7 @@
 #include <utility>
 #include <vector>
 
-#include "src/tint/source.h"
+#include "src/tint/utils/source.h"
 
 namespace tint::diag {
 
