@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d051011d_3331f556",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-20T12:38:02Z",
+      "side": 1,
+      "message": "This is very tricky \u0026 rare racing condition, hence I want to increase the chance of catching it by using large number of duplicated objects.\n\nWith 10 I observed that the crash didn\u0027t happen every time.",
+      "parentUuid": "51e3a59c_956b36b2",
+      "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e822bd8_44531d25",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 13
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-20T11:39:25Z",
       "side": 1,
       "message": "nit: Why a sleep here and not the other tests?",
+      "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c7e225f_6f5ece27",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-20T12:38:02Z",
+      "side": 1,
+      "message": "I can remove the sleep.\n\nActually this is to increase the chance of racing between pipeline object\u0027s deletion and the cache lookup to happen.\n\nI noticed that for compute/render pipelines, there are a lot of preprocessing works before the cache lookup is performed. For example validating the pipeline descriptor, calling `ComputeRequiredBufferSizesForLayout`, ..v.v. are done before we look for duplication in the cache.\n\nSo if we don\u0027t sleep here, the cached object might be deleted too fast and when the other threads finish their preprocessing works and start to look up the cache, the object might already be erased, there wouldn\u0027t be any race.\n\nThe preprocessing works are not performing in parallel because we currently lock the entire `CreateComputePipeline` function, so the other threads have to wait for their turn to do the preprocessing.",
+      "parentUuid": "0e822bd8_44531d25",
       "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-04-20T11:39:25Z",
       "side": 1,
       "message": "ditto",
+      "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "941789b5_6c06a1cb",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-20T12:38:02Z",
+      "side": 1,
+      "message": "Removed as above.",
+      "parentUuid": "05e5747e_f9b3b721",
       "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
