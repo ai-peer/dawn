@@ -93,3 +93,12 @@ target_link_libraries(dawn_wire
     PUBLIC dawn_headers
     PRIVATE dawn_common dawn_internal_config
 )
+
+install(TARGETS dawn_wire
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+file(GLOB HEADERS "${DAWN_INCLUDE_DIR}/dawn/wire/*.h")
+
+install(FILES ${HEADERS}  DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}/dawn/wire)
