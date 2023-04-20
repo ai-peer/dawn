@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76589142_f273e64f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-20T23:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d2131b7_06bdf506",
+      "revId": "d7bce974e0a18e33a066fc339dcd09c3febe6796",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1024f50d_fbb7468d",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-20T22:42:21Z",
       "side": 1,
       "message": "There are failures of requestDevice,limit and requestDevice,limits as well.",
+      "revId": "d7bce974e0a18e33a066fc339dcd09c3febe6796",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8659aaa7_5b8b75be",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-20T23:07:50Z",
+      "side": 1,
+      "message": "They are addressed right below this.",
+      "parentUuid": "1024f50d_fbb7468d",
       "revId": "d7bce974e0a18e33a066fc339dcd09c3febe6796",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
