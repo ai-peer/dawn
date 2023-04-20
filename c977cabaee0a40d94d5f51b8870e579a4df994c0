@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc1a997_410ebe4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-04-20T21:30:49Z",
+      "side": 1,
+      "message": "Noticed these were getting dropped on the floor while working on https://dawn-review.googlesource.com/c/dawn/+/127120. Tried to partially fix it in that patch but it quickly ballooned into something that definitely justified it\u0027s own CL. I\u0027d like to get this landed first, as it\u0027s a bit more straightforward, then I can refactor https://dawn-review.googlesource.com/c/dawn/+/127120 on top of it.\n\nThis is the patch we were discussing on the Dawn reviewers call, Austin.",
+      "revId": "c977cabaee0a40d94d5f51b8870e579a4df994c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
