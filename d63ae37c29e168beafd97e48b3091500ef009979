@@ -22,6 +22,30 @@
       },
       "revId": "d63ae37c29e168beafd97e48b3091500ef009979",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a80e52e6_475d74c7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-20T23:05:29Z",
+      "side": 1,
+      "message": "Done! I actually decided to merge the message below this as well. Lmk if that\u0027s a problem.",
+      "parentUuid": "bc99a7e1_e5b56d4f",
+      "range": {
+        "startLine": 304,
+        "startChar": 13,
+        "endLine": 304,
+        "endChar": 24
+      },
+      "revId": "d63ae37c29e168beafd97e48b3091500ef009979",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
