@@ -16,6 +16,24 @@
       "message": "I\u0027m worried that adding more complexity to the object hierarchy may make it difficult to do the future changes for proper synchronization with the cache\n\nQuyen, would you be opposed to the heavier approach of putting the lock around all the APIRelease calls? As soon as the cache itself is thread-safe, we can remove the heavy approach. So making the cache thread-safe can be one of the first things we do for the more fine-grained multithreading approach.",
       "revId": "54fe0632c7109a625ba3dca70a4b3444e2427bae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd52dbf1_c3fb887c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-20T08:12:57Z",
+      "side": 1,
+      "message": "Then I opt to disable the cache when multithreading is enabled instead. This will only affect the cachable objects and not everything like locking every APIRelease() which is too heavy.",
+      "parentUuid": "cacc2221_44df6c95",
+      "revId": "54fe0632c7109a625ba3dca70a4b3444e2427bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
