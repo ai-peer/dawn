@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa08991_febf2560",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T21:50:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9302de6f_b8b5bf63",
+      "range": {
+        "startLine": 319,
+        "startChar": 20,
+        "endLine": 319,
+        "endChar": 50
+      },
+      "revId": "b709b2cad2774d918a3289181a1534c1c10c5b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4296342d_4e2d4f9e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-20T19:16:35Z",
       "side": 1,
       "message": "this copy is going to overwrite the padded regions in the destination buffer when the bytes per row is not exactly equal to blockInfo.byteSize * copy-\u003ecopySize.width. It\u0027ll also overwrite the padding when rowsPerImage introduces padding as well.\n\nprobably the easiest way to handle this right now is to copy row-by-row.",
+      "range": {
+        "startLine": 457,
+        "startChar": 15,
+        "endLine": 462,
+        "endChar": 17
+      },
+      "revId": "b709b2cad2774d918a3289181a1534c1c10c5b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53044ebc_484bd5e7",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T21:50:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4296342d_4e2d4f9e",
       "range": {
         "startLine": 457,
         "startChar": 15,
