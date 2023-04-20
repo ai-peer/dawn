@@ -211,6 +211,30 @@
       },
       "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd385d57_0bc76d92",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T11:32:58Z",
+      "side": 1,
+      "message": "If we plan to do it for everything, it\u0027s weird to have a very partial implementation here instead of either a full implementation or a TODO. Can we at least add a TODO with an issue explaining what we want to do?",
+      "parentUuid": "e8a4463f_5d1dc5e3",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 64
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
