@@ -46,7 +46,7 @@ MaybeError CommandRecordingContext::Open(Device* device) {
             d3d11DeviceContext4.As(&mD3D11UserDefinedAnnotation),
             "D3D11 querying immediate context for ID3DUserDefinedAnnotation interface"));
 
-        constexpr size_t kMaxNumBuiltinElements = 3;
+        constexpr size_t kMaxNumBuiltinElements = 4;
 
         // Create a uniform buffer for built in variables.
         BufferDescriptor descriptor;
