@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c25b657_f309c4a6",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T07:38:58Z",
+      "side": 1,
+      "message": "Can we have a comment about that to make it clear to future readers?",
+      "parentUuid": "199f6897_b69c6ac5",
+      "revId": "700730c23d2b95e3905f040324bcc32da4d499d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "886b2b4d_d7732ed7",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 2
