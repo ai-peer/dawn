@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580f42c5_2301c4a1",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-04-20T18:26:34Z",
+      "side": 1,
+      "message": "Recommend updating `RenamerTest.PreserveDiagnosticControls` to cover preservation of diagnostic categories too.",
+      "range": {
+        "startLine": 1292,
+        "startChar": 0,
+        "endLine": 1294,
+        "endChar": 17
+      },
+      "revId": "5531a422627f54e5664648e06f183cbab6103955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
