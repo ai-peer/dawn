@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc99a7e1_e5b56d4f",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T16:10:52Z",
+      "side": 1,
+      "message": "uunit: make the message say \"Both depthLoadOp ...\" so it\u0027s super clear now that the two checks are merged",
+      "range": {
+        "startLine": 304,
+        "startChar": 13,
+        "endLine": 304,
+        "endChar": 24
+      },
+      "revId": "d63ae37c29e168beafd97e48b3091500ef009979",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
