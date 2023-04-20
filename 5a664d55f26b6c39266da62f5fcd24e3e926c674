@@ -22,6 +22,30 @@
       },
       "revId": "5a664d55f26b6c39266da62f5fcd24e3e926c674",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7a0ed99_25ac1b25",
+        "filename": "src/tint/utils/unicode_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T00:05:37Z",
+      "side": 0,
+      "message": "vi sees them as blank space, and when I save it strips blank space from the end of lines, so they get removed. I added trailing `//`s on those lines so they aren\u0027t treated as end of line and it leaves them alone.",
+      "parentUuid": "dbcca087_609cd124",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 54
+      },
+      "revId": "5a664d55f26b6c39266da62f5fcd24e3e926c674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
