@@ -52,6 +52,7 @@ MaybeError CommandRecordingContext::Open(Device* device) {
 
 MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
     // Consider using deferred DeviceContext.
+    mNeedsSubmit = false;
     return {};
 }
 

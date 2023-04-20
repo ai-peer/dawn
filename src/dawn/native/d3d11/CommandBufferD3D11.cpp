@@ -77,6 +77,8 @@ MaybeError CommandBuffer::Execute() {
                 // Buffer::Copy() will ensure the source and destination buffers are initialized.
                 DAWN_TRY(Buffer::Copy(commandContext, source, copy->sourceOffset, copy->size,
                                       destination, copy->destinationOffset));
+                source->MarkUsedInPendingCommands();
+                destination->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -107,6 +109,7 @@ MaybeError CommandBuffer::Execute() {
                 DAWN_TRY(texture->Write(commandContext, subresources, copy->destination.origin,
                                         copy->copySize, data, copy->source.bytesPerRow,
                                         copy->source.rowsPerImage));
+                buffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -204,6 +207,7 @@ MaybeError CommandBuffer::Execute() {
                     d3d11DeviceContext1->Unmap(stagingTexture.Get(), z);
                 }
 
+                dst.buffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -227,6 +231,7 @@ MaybeError CommandBuffer::Execute() {
                 }
                 Buffer* buffer = ToBackend(cmd->buffer.Get());
                 DAWN_TRY(buffer->Clear(commandContext, 0, cmd->offset, cmd->size));
+                buffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -248,6 +253,7 @@ MaybeError CommandBuffer::Execute() {
                 Buffer* dstBuffer = ToBackend(cmd->buffer.Get());
                 uint8_t* data = mCommands.NextData<uint8_t>(cmd->size);
                 DAWN_TRY(dstBuffer->Write(commandContext, cmd->offset, data, cmd->size));
+                dstBuffer->MarkUsedInPendingCommands();
 
                 break;
             }
