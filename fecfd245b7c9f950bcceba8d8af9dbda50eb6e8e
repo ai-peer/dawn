@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3716116_cf3915a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T16:25:00Z",
+      "side": 1,
+      "message": "so.. I\u0027ve realized that this is going to break validation depending on the usage of the API.\n\nThe spec says BGLs are compatible if they are value-equal.\n\nDawn validates that the bind group\u0027s BGL is equal to the pipeline\u0027s BGLs [by pointer comparison](https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/CommandBufferStateTracker.cpp;l\u003d448;drc\u003db0f57b7e98590319f0f0786d00e683299b4e96f9) because the cache makes value-equal BGLs the same pointer.\n\nThe result here is that when you enable implicit device sync, Dawn will be more strict. You must use exactly the same pointer BGL for your pipeline layout as for the bind groups.\n\nSorry I hadn\u0027t noticed this earlier.\nUltimately, maybe this is fine for Graphite\u0027s use case right now. I don\u0027t know enough about the internals - it would be good to double check.\n\nWhen we go fix this later, it should only relax the restrictions - so if Graphite works with this change it\u0027ll also work when we implement the better locking mechanism.",
+      "revId": "fecfd245b7c9f950bcceba8d8af9dbda50eb6e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
