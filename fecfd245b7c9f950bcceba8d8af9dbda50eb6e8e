@@ -34,6 +34,24 @@
       "parentUuid": "e3716116_cf3915a2",
       "revId": "fecfd245b7c9f950bcceba8d8af9dbda50eb6e8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27497357_cf0db867",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T17:19:57Z",
+      "side": 1,
+      "message": "and you *always* either:\n -  use GetBindGroupLayout before making bind groups?\nor:\n - make the BGLs once and pass it both to the pipeline\u0027s layout and the bind groups?",
+      "parentUuid": "979c583a_3ae8e82c",
+      "revId": "fecfd245b7c9f950bcceba8d8af9dbda50eb6e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
