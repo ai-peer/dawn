@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02be5d81_f9dccbc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-20T17:16:36Z",
+      "side": 1,
+      "message": "LGTM with nit comment",
+      "revId": "36b9e4cb387d9617e382f14324bc5363a85e88f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d300b79_180fb611",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-20T17:16:36Z",
+      "side": 1,
+      "message": "nit: this can be `vsModule` now as base test class changed",
+      "revId": "36b9e4cb387d9617e382f14324bc5363a85e88f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
