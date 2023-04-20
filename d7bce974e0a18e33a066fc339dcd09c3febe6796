@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d2131b7_06bdf506",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-20T22:42:21Z",
+      "side": 1,
+      "message": "Need `No-Try: true` because CQ builds don\u0027t work on the branch. The presubmit check will still run though.",
+      "revId": "d7bce974e0a18e33a066fc339dcd09c3febe6796",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1024f50d_fbb7468d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-20T22:42:21Z",
+      "side": 1,
+      "message": "There are failures of requestDevice,limit and requestDevice,limits as well.",
+      "revId": "d7bce974e0a18e33a066fc339dcd09c3febe6796",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
