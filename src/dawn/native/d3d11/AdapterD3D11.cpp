@@ -52,6 +52,7 @@ ResultOrError<ComPtr<ID3D11Device>> Adapter::CreateD3D11Device() {
         if (GetInstance()->IsBackendValidationEnabled()) {
             flags |= D3D11_CREATE_DEVICE_DEBUG;
         }
+        flags |= D3D11_CREATE_DEVICE_DEBUG;
 
         DAWN_TRY(CheckHRESULT(functions->d3d11CreateDevice(
                                   GetHardwareAdapter(), D3D_DRIVER_TYPE_UNKNOWN,
