@@ -16,6 +16,29 @@
       "message": "PTAL. I\u0027m curious to see what perfmon says. This wasn\u0027t a huge amount on my profile, but it just seems like wasted work.",
       "revId": "684441ae985abcfa0c35369bc104d905fb127078",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d57a61b_6966ac0a",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-20T10:05:03Z",
+      "side": 1,
+      "message": "The reason this hurts performance so much is that you\u0027re now forcing a heap allocation. `operator\u003d\u003d` compares the `std::string_view` and then the `std::string` without making any additional copies of the string.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "684441ae985abcfa0c35369bc104d905fb127078",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
