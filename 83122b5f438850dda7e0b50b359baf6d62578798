@@ -276,6 +276,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baee3aa0_cac0f781",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T00:11:01Z",
+      "side": 1,
+      "message": "all fair points - it doesn\u0027t really match the rest of the backends, but we can always revisit it.",
+      "parentUuid": "a6cf48b7_ebb2a588",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b211af2c_32525096",
