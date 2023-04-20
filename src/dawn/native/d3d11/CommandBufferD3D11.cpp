@@ -309,21 +309,35 @@ MaybeError CommandBuffer::Execute() {
                 }
 
                 Buffer* buffer = ToBackend(copy->source.buffer.Get());
+                Ref<Buffer> stagingBuffer;
+
+                // If the buffer is not mappable, we need to create a staging buffer and copy the
+                // data from the buffer to the staging buffer.
+                if (!(buffer->GetUsage() & kMappableBufferUsages)) {
+                    // TODO(dawn:1768): use compute shader to copy data from buffer to texture.
+                    BufferDescriptor desc;
+                    desc.size = buffer->GetSize();
+                    desc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead;
+                    DAWN_TRY_ASSIGN(stagingBuffer, Buffer::Create(ToBackend(GetDevice()), &desc));
+
+                    // The buffer will be initialized by the copy, call SetIsDataInitialized() to
+                    // avoid an unnecessary initialization.
+                    stagingBuffer->SetIsDataInitialized();
+                    DAWN_TRY(Buffer::Copy(commandContext, buffer, 0, stagingBuffer->GetSize(),
+                                          stagingBuffer.Get(), 0));
+                    buffer = stagingBuffer.Get();
+                }
+
                 Buffer::ScopedMap scopedMap;
                 DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(buffer));
                 DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
-                if (!scopedMap.GetMappedData()) {
-                    // TODO(dawn:1768): implement CopyBufferToTexture with non-mappable buffers.
-                    return DAWN_UNIMPLEMENTED_ERROR(
-                        "CopyBufferToTexture isn't implemented with non-mappable buffers");
-                }
-
                 Texture* texture = ToBackend(copy->destination.texture.Get());
                 SubresourceRange subresources =
                     GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
-                const uint8_t* data = scopedMap.GetMappedData() + copy->source.offset;
 
+                DAWN_ASSERT(scopedMap.GetMappedData());
+                const uint8_t* data = scopedMap.GetMappedData() + copy->source.offset;
                 DAWN_TRY(texture->Write(commandContext, subresources, copy->destination.origin,
                                         copy->copySize, data, copy->source.bytesPerRow,
                                         copy->source.rowsPerImage));
@@ -393,6 +407,26 @@ MaybeError CommandBuffer::Execute() {
                     }
                 }
 
+                Ref<Buffer> stagingBuffer;
+                Buffer* buffer = ToBackend(dst.buffer.Get());
+                // If the buffer is not mappable, we need to create a staging buffer and copy the
+                // texture data to the staging buffer first, and then use GPU to copy the data from
+                // the staging buffer to the buffer.
+                if (!(buffer->GetUsage() & kMappableBufferUsages)) {
+                    // TODO(dawn:1768): use compute shader to copy data from texture to buffer.
+                    BufferDescriptor desc;
+                    desc.size = buffer->GetSize();
+                    desc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+                    DAWN_TRY_ASSIGN(stagingBuffer, Buffer::Create(ToBackend(GetDevice()), &desc));
+
+                    // The buffer will be initialized below, call SetIsDataInitialized() to
+                    // avoid an unnecessary initialization.
+                    stagingBuffer->SetIsDataInitialized();
+                    buffer = stagingBuffer.Get();
+                }
+
+                Buffer::ScopedMap scopedMap;
+                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(buffer));
                 for (uint32_t z = 0; z < copy->copySize.depthOrArrayLayers; ++z) {
                     // Copy the staging texture to the buffer.
                     // The Map() will block until the GPU is done with the texture.
@@ -403,14 +437,10 @@ MaybeError CommandBuffer::Execute() {
                                                               D3D11_MAP_READ, 0, &mappedResource),
                                      "D3D11 map staging texture"));
 
-                    Buffer* buffer = ToBackend(dst.buffer.Get());
-
-                    Buffer::ScopedMap scopedMap;
-                    DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(buffer));
                     DAWN_TRY(buffer->EnsureDataInitializedAsDestination(
                         commandContext, dst.offset, dst.bytesPerRow * copy->copySize.height));
-                    uint8_t* pSrcData = reinterpret_cast<uint8_t*>(mappedResource.pData);
 
+                    uint8_t* pSrcData = reinterpret_cast<uint8_t*>(mappedResource.pData);
                     const TexelBlockInfo& blockInfo =
                         ToBackend(src.texture)->GetFormat().GetAspectInfo(src.aspect).block;
                     uint32_t memcpySize = blockInfo.byteSize * copy->copySize.width;
@@ -422,6 +452,13 @@ MaybeError CommandBuffer::Execute() {
                         pSrcData += mappedResource.RowPitch;
                     }
                     d3d11DeviceContext1->Unmap(stagingTexture.Get(), z);
+                }
+
+                // Copy the staging buffer to the final destination buffer.
+                if (stagingBuffer.Get()) {
+                    DAWN_TRY(Buffer::Copy(commandContext, stagingBuffer.Get(), 0,
+                                          stagingBuffer->GetSize(), ToBackend(dst.buffer.Get()),
+                                          0));
                 }
 
                 break;
