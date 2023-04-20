@@ -100,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe29f8b_34ff30de",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T07:36:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5b6cd1a8_34c3ab51",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3511089_433e62e8",
@@ -131,6 +149,24 @@
       "side": 1,
       "message": "For non-mappable buffer, Buffer::ScopedMap::Create() is a noop, it will not sync with gpu.\n\nFor mappable buffer, the D3D11Buffer is created with USAGE_STAGING, it cannot be used with compute shader. so we have to copy data to a staging texture first and then copy to the final target.",
       "parentUuid": "e3511089_433e62e8",
+      "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed0c8c4_e3daeca2",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T07:36:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "510e74bb_a20c8750",
       "revId": "83122b5f438850dda7e0b50b359baf6d62578798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
