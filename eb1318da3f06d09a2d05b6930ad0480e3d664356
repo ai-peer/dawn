@@ -56,6 +56,30 @@
       },
       "revId": "eb1318da3f06d09a2d05b6930ad0480e3d664356",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a4f60a_2d4e6265",
+        "filename": "src/dawn/node/binding/GPUAdapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-04-20T08:30:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb6d3788_cf4915c4",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 0
+      },
+      "revId": "eb1318da3f06d09a2d05b6930ad0480e3d664356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
