@@ -16,6 +16,23 @@
       "message": "This function is 5% of the time in the `atan2-const-eval.wgsl` test which goes away with this change.",
       "revId": "39691ddbf4ed203c60fc8f08942abeb7f77bc7bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df74f5a0_4118ebc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T03:23:11Z",
+      "side": 1,
+      "message": "PTAL. I\u0027m curious to see what perfmon says, and if the change is similar to what I was seeing locally. Although, I believe this makes sense regardless as our common case will be ASCII I believe.",
+      "revId": "39691ddbf4ed203c60fc8f08942abeb7f77bc7bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
