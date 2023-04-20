@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e108c989_501a1e93",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T12:45:36Z",
+      "side": 1,
+      "message": "Ok, my understanding is that all the tests in this file would fail flakily if they start failing. So maybe it\u0027s ok if it\u0027s rare as long as we get notified of the flake and know to treat them seriously. But also keeping the increased count works. Whichever way you think is best.",
+      "parentUuid": "d051011d_3331f556",
+      "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e822bd8_44531d25",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 13
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "I can remove the sleep.\n\nActually this is to increase the chance of racing between pipeline object\u0027s deletion and the cache lookup to happen.\n\nI noticed that for compute/render pipelines, there are a lot of preprocessing works before the cache lookup is performed. For example validating the pipeline descriptor, calling `ComputeRequiredBufferSizesForLayout`, ..v.v. are done before we look for duplication in the cache.\n\nSo if we don\u0027t sleep here, the cached object might be deleted too fast and when the other threads finish their preprocessing works and start to look up the cache, the object might already be erased, there wouldn\u0027t be any race.\n\nThe preprocessing works are not performing in parallel because we currently lock the entire `CreateComputePipeline` function, so the other threads have to wait for their turn to do the preprocessing.",
       "parentUuid": "0e822bd8_44531d25",
+      "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f22c61_c7a2fe2b",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T12:45:36Z",
+      "side": 1,
+      "message": "Thank you for the explanation.",
+      "parentUuid": "5c7e225f_6f5ece27",
       "revId": "1e823e395fbd146a05163b67021d26a925533dc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
