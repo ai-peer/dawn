@@ -39,6 +39,30 @@
       },
       "revId": "684441ae985abcfa0c35369bc104d905fb127078",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2382398e_83ebec12",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T12:50:45Z",
+      "side": 1,
+      "message": "Yea, I wondered if that might happen on perfmon. I switch it to have a `to_str_view` method which is used by `is_reserved`, so we\u0027ll see what it says now.",
+      "parentUuid": "1d57a61b_6966ac0a",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "684441ae985abcfa0c35369bc104d905fb127078",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
