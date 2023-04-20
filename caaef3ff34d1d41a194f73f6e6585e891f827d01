@@ -93,6 +93,30 @@
       },
       "revId": "caaef3ff34d1d41a194f73f6e6585e891f827d01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f12e75_12ad398c",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T23:24:51Z",
+      "side": 1,
+      "message": "lgtm",
+      "parentUuid": "1c244dad_d476003a",
+      "range": {
+        "startLine": 119,
+        "startChar": 12,
+        "endLine": 119,
+        "endChar": 28
+      },
+      "revId": "caaef3ff34d1d41a194f73f6e6585e891f827d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
