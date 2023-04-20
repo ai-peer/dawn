@@ -33,6 +33,24 @@
       "message": "nit: this can be `vsModule` now as base test class changed",
       "revId": "36b9e4cb387d9617e382f14324bc5363a85e88f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f17286_1b45ff79",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-20T23:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d300b79_180fb611",
+      "revId": "36b9e4cb387d9617e382f14324bc5363a85e88f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
