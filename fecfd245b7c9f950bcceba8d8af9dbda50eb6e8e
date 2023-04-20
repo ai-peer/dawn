@@ -70,6 +70,24 @@
       "parentUuid": "27497357_cf0db867",
       "revId": "fecfd245b7c9f950bcceba8d8af9dbda50eb6e8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb77f485_f2323d6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T17:33:28Z",
+      "side": 1,
+      "message": "alright.. let\u0027s add a doc about implicit device synchronization in third_party/dawn/docs/dawn/features/ so that when it inevitably doesn\u0027t work for someone we can point them to it and explain why.\n\n(other people on the internet like to pick up Dawn and use features)",
+      "parentUuid": "756d7ea7_d77f5494",
+      "revId": "fecfd245b7c9f950bcceba8d8af9dbda50eb6e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
