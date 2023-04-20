@@ -31,3 +31,8 @@ target_sources(dawn_platform PRIVATE
     "tracing/TraceEvent.h"
 )
 target_link_libraries(dawn_platform PUBLIC dawn_headers PRIVATE dawn_internal_config dawn_common)
+
+install(TARGETS dawn_platform
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})

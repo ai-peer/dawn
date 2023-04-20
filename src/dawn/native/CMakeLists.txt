@@ -691,3 +691,16 @@ if(BUILD_SHARED_LIBS)
     target_compile_definitions(webgpu_dawn PRIVATE "WGPU_SHARED_LIBRARY")
 endif()
 target_sources(webgpu_dawn PRIVATE ${WEBGPU_DAWN_NATIVE_PROC_GEN})
+
+install(TARGETS dawn_native webgpu_dawn
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+set(HEADERS
+        ${DAWN_INCLUDE_DIR}/dawn/native/DawnNative.h
+        ${DAWN_INCLUDE_DIR}/dawn/native/NullBackend.h
+        ${DAWN_INCLUDE_DIR}/dawn/native/dawn_native_export.h
+        )
+
+install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dawn/native)
