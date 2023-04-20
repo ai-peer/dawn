@@ -80,6 +80,8 @@ class Lexer {
     size_t length() const;
     /// @returns reference to character at `pos` within current line
     const char& at(size_t pos) const;
+    /// @returns reference to character at `pos` within line `l`
+    const char& at_from_line(const std::string_view l, size_t pos) const;
     /// @returns substring view at `offset` within current line of length `count`
     std::string_view substr(size_t offset, size_t count);
     /// advances current position by `offset` within current line
@@ -105,6 +107,8 @@ class Lexer {
     bool matches(size_t pos, std::string_view substr);
     /// @returns true if char at `pos` matches `ch`
     bool matches(size_t pos, char ch);
+    /// @returns true if char at `pos` matches `ch` in line `l`
+    bool matches_in_line(const std::string_view l, size_t pos, char ch);
     /// The source file content
     Source::File const* const file_;
     /// The current location within the input
