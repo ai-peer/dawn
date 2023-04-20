@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b714eeb0_4c62c62c",
+        "filename": "src/tint/ast/diagnostic_rule_name.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T19:03:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "292142d9_a4cfca35",
+      "revId": "5531a422627f54e5664648e06f183cbab6103955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "339621c1_fd3abf26",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Dana from the security team asked why we didn\u0027t use references for everything that is non-nullable. Our current style is to use pointers. I think she\u0027s right - and this would make sense to do then.",
       "parentUuid": "339621c1_fd3abf26",
+      "revId": "5531a422627f54e5664648e06f183cbab6103955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4401bee0_682ea26e",
+        "filename": "src/tint/ast/diagnostic_rule_name.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T19:03:34Z",
+      "side": 1,
+      "message": "I wasn\u0027t thinking about making it a ref but something like `std::optional\u003cIdentifier*\u003e`. But seems a closer match to may not exist then depending on nullpt.r",
+      "parentUuid": "7d3ecf6c_d8e6a92b",
       "revId": "5531a422627f54e5664648e06f183cbab6103955",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
