@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61df5b50_eae83871",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28d4c812_6b9937ca",
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c94d987_a091c329",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-19T21:42:49Z",
       "side": 1,
       "message": "uunit: extra newline?",
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "536dcbda_e44df362",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c94d987_a091c329",
       "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b22060_01b2b767",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18ccba9b_7840c5b6",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "053cdade_6b0af28a",
@@ -71,6 +131,30 @@
       "writtenOn": "2023-04-19T21:42:49Z",
       "side": 1,
       "message": "is it an error to not set it back to null?",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 64
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ebd040a_a52c7eb0",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T11:13:47Z",
+      "side": 1,
+      "message": "No. Just want to make the code cleaner. \nI guess if we sharing the device with chrome and ANGLE, the buffer will not be released until chrome or ANGLE set a buffer to the same slot.",
+      "parentUuid": "053cdade_6b0af28a",
       "range": {
         "startLine": 110,
         "startChar": 8,
