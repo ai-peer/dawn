@@ -99,5 +99,10 @@ endif()
 
 target_link_libraries(dawn_common PUBLIC dawncpp_headers PRIVATE dawn_internal_config)
 
+install(TARGETS dawn_common
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
 # TODO Android Log support
 # TODO Vulkan headers support

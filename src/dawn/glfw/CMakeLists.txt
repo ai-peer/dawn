@@ -42,4 +42,9 @@ endif()
 
 add_library(webgpu_glfw ALIAS dawn_glfw)
 
+install(TARGETS dawn_glfw
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
 endif()

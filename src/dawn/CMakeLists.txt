@@ -76,6 +76,16 @@ common_compile_options(dawn_headers)
 target_sources(dawn_headers PRIVATE ${DAWN_HEADERS_GEN_SOURCES})
 target_link_libraries(dawn_headers INTERFACE dawn_public_config)
 
+install(TARGETS dawn_headers
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+file(GLOB WEBGPU_HEADERS "${DAWN_INCLUDE_DIR}/webgpu/*.h")
+
+install(FILES ${WEBGPU_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/webgpu)
+install(FILES ${DAWN_HEADERS_GEN_SOURCES} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dawn)
+
 ###############################################################################
 # Dawn C++ headers
 ###############################################################################
@@ -96,6 +106,16 @@ target_sources(dawncpp_headers PRIVATE
 )
 target_link_libraries(dawncpp_headers INTERFACE dawn_headers)
 
+install(TARGETS dawncpp_headers
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+install(FILES
+    ${DAWNCPP_HEADERS_GEN_SOURCES}
+    ${DAWN_INCLUDE_DIR}/dawn/EnumClassBitmasks.h
+    DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}/dawn/)
+
 ###############################################################################
 # Dawn C++ wrapper
 ###############################################################################
@@ -112,6 +132,11 @@ target_sources(dawncpp PRIVATE ${DAWNCPP_GEN_SOURCES})
 target_link_libraries(dawncpp PUBLIC dawncpp_headers)
 
 add_library(webgpu_cpp ALIAS dawncpp)
+
+install(TARGETS dawncpp
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 ###############################################################################
 # libdawn_proc
@@ -131,6 +156,15 @@ if(BUILD_SHARED_LIBS)
 endif()
 target_sources(dawn_proc PRIVATE ${DAWNPROC_GEN_SOURCES})
 target_link_libraries(dawn_proc PUBLIC dawn_headers)
+
+install(TARGETS dawn_proc
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+file(GLOB DAWN_INCLUDE_HEADERS "${DAWN_INCLUDE_DIR}/dawn/*.h")
+
+install(FILES ${DAWN_INCLUDE_HEADERS}  DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}/dawn/)
 
 ###############################################################################
 # Other generated files (upstream header, emscripten header, emscripten bits)
