@@ -22,6 +22,30 @@
       },
       "revId": "5531a422627f54e5664648e06f183cbab6103955",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1f10df5_fb4c3359",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-04-20T18:31:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "580f42c5_2301c4a1",
+      "range": {
+        "startLine": 1292,
+        "startChar": 0,
+        "endLine": 1294,
+        "endChar": 17
+      },
+      "revId": "5531a422627f54e5664648e06f183cbab6103955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
