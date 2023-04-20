@@ -50,6 +50,23 @@
       "message": "Thanks for the fixing them. CL lgtm. However I am working on enabling d3d11 end2end on trybots. could you please wait and land this CL after [1] is landed, and make sure those tests are run on bots. thanks.\n\n[1] https://chromium-review.googlesource.com/c/chromium/src/+/4450573",
       "revId": "e591fd845db663fd3e2e958021075c2a4b8938b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab514a5_14d1a31b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T19:23:21Z",
+      "side": 1,
+      "message": "LGTM - please wait as Peng said until the tests are running though",
+      "revId": "e591fd845db663fd3e2e958021075c2a4b8938b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
