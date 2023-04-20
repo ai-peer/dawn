@@ -187,6 +187,30 @@
       },
       "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a4463f_5d1dc5e3",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T11:31:14Z",
+      "side": 1,
+      "message": "yes. I plan to either use context state or track context state by dawn itself in follow up cls, like unset all buffers, blend state, shaders, etc after every drawn. However I am not sure the cost of them, if we need to track context state and only reset them when it is needed.",
+      "parentUuid": "3a220ad6_a0eb23a6",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 64
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
