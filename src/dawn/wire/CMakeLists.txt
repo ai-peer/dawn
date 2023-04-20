@@ -93,3 +93,5 @@ target_link_libraries(dawn_wire
     PUBLIC dawn_headers
     PRIVATE dawn_common dawn_internal_config
 )
+
+install_if_enabled(dawn_wire)

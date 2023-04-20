@@ -76,6 +76,15 @@ common_compile_options(dawn_headers)
 target_sources(dawn_headers PRIVATE ${DAWN_HEADERS_GEN_SOURCES})
 target_link_libraries(dawn_headers INTERFACE dawn_public_config)
 
+install(FILES
+        ${DAWN_INCLUDE_DIR}/webgpu/webgpu.h
+        ${DAWN_INCLUDE_DIR}/webgpu/webgpu_cpp.h
+        ${DAWN_INCLUDE_DIR}/webgpu/webgpu_glfw.h
+    DESTINATION
+        ${CMAKE_INSTALL_INCLUDEDIR}/webgpu
+    )
+install(FILES ${DAWN_HEADERS_GEN_SOURCES} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dawn)
+
 ###############################################################################
 # Dawn C++ headers
 ###############################################################################
@@ -96,6 +105,13 @@ target_sources(dawncpp_headers PRIVATE
 )
 target_link_libraries(dawncpp_headers INTERFACE dawn_headers)
 
+install_if_enabled(dawncpp_headers)
+
+install(FILES
+    ${DAWNCPP_HEADERS_GEN_SOURCES}
+    ${DAWN_INCLUDE_DIR}/dawn/EnumClassBitmasks.h
+    DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}/dawn/)
+
 ###############################################################################
 # Dawn C++ wrapper
 ###############################################################################
@@ -112,6 +128,8 @@ target_sources(dawncpp PRIVATE ${DAWNCPP_GEN_SOURCES})
 target_link_libraries(dawncpp PUBLIC dawncpp_headers)
 
 add_library(webgpu_cpp ALIAS dawncpp)
+
+install_if_enabled(dawncpp)
 
 ###############################################################################
 # libdawn_proc
@@ -131,6 +149,13 @@ if(BUILD_SHARED_LIBS)
 endif()
 target_sources(dawn_proc PRIVATE ${DAWNPROC_GEN_SOURCES})
 target_link_libraries(dawn_proc PUBLIC dawn_headers)
+
+install_if_enabled(dawn_proc)
+
+install(FILES
+    ${DAWN_INCLUDE_DIR}/dawn/dawn_thread_dispatch_proc.h
+    ${DAWN_INCLUDE_DIR}/dawn/dawn_proc.h
+    DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}/dawn/)
 
 ###############################################################################
 # Other generated files (upstream header, emscripten header, emscripten bits)
