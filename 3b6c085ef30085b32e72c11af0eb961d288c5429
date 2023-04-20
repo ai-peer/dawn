@@ -235,6 +235,30 @@
       },
       "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c85235_52db4738",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-20T13:17:06Z",
+      "side": 1,
+      "message": "Sure. I filed crbug.com/dawn/1753 and crbug.com/dawn/1770.",
+      "parentUuid": "cd385d57_0bc76d92",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 64
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
