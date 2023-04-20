@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7744fa17_6058c017",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T19:57:00Z",
+      "side": 1,
+      "message": "PTAL. I did this as a logical split instead of a physical split. It would be nice to move the files, but moving `diagnostics` seems... odd? So, held off on the actual file moving but made the split in the GN source sets so its enforced at the GN level.",
+      "revId": "081eb8ae3f82fa59c75871e6bcfa59b9a6d443a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
