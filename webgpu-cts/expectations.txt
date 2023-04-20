@@ -477,7 +477,8 @@ crbug.com/1421045 [ nvidia-0x2184 ubuntu ] webgpu:api,validation,capability_chec
 ################################################################################
 # GPUDeviceLostReason test needs to be updated for spec change
 ################################################################################
-crbug.com/1424883 webgpu:api,operation,adapter,requestDevice:invalid: [ Failure ]
+# Commented out for conflict with 1756:
+#crbug.com/1424883 webgpu:api,operation,adapter,requestDevice:invalid: [ Failure ]
 
 ################################################################################
 # Failures due to deprecated API usage in the CTS
@@ -568,7 +569,8 @@ crbug.com/tint/1881 [ ventura ] webgpu:shader,execution,expression,call,builtin,
 crbug.com/dawn/0000 [ dawn-backend-validation win10 ] webgpu:api,operation,render_pass,resolve:* [ Failure ]
 
 # New failures. Please triage:
-crbug.com/dawn/0000 webgpu:api,operation,adapter,requestDevice:stale: [ Failure ]
+# Commented out for conflict with 1756:
+#crbug.com/dawn/0000 webgpu:api,operation,adapter,requestDevice:stale: [ Failure ]
 crbug.com/dawn/0000 [ amd-0x67ef ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:* [ Failure ]
 crbug.com/dawn/0000 [ intel-0x3e9b ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:* [ Failure ]
 crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:* [ Failure ]
@@ -761,6 +763,21 @@ crbug.com/dawn/0000 [ intel-0x9bc5 ubuntu webgpu-adapter-default ] webgpu:web_pl
 # M113 branch failures/flakes
 # KEEP
 ################################################################################
+
+crbug.com/dawn/1756 webgpu:api,operation,adapter,requestDevice:* [ Failure ]
+# Split for conflict with 1421045
+crbug.com/dawn/1756 [ linux intel ] webgpu:api,validation,capability_checks,limits,colorAttachmentBytesPerSample,* [ Failure ]
+crbug.com/dawn/1756 [ linux intel ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage,* [ Failure ]
+crbug.com/dawn/1756 [ linux intel ] webgpu:api,validation,capability_checks,limits,maxStorageTexturesPerShaderStage,* [ Failure ]
+crbug.com/dawn/1756 [ linux amd ] webgpu:api,validation,capability_checks,limits,colorAttachmentBytesPerSample,* [ Failure ]
+crbug.com/dawn/1756 [ linux amd ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage,* [ Failure ]
+crbug.com/dawn/1756 [ linux amd ] webgpu:api,validation,capability_checks,limits,maxStorageTexturesPerShaderStage,* [ Failure ]
+crbug.com/dawn/1756 [ mac ] webgpu:api,validation,capability_checks,limits,colorAttachmentBytesPerSample,* [ Failure ]
+crbug.com/dawn/1756 [ mac ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage,* [ Failure ]
+crbug.com/dawn/1756 [ mac ] webgpu:api,validation,capability_checks,limits,maxStorageTexturesPerShaderStage,* [ Failure ]
+crbug.com/dawn/1756 [ win10 ] webgpu:api,validation,capability_checks,limits,colorAttachmentBytesPerSample,* [ Failure ]
+crbug.com/dawn/1756 [ win10 ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage,* [ Failure ]
+crbug.com/dawn/1756 [ win10 ] webgpu:api,validation,capability_checks,limits,maxStorageTexturesPerShaderStage,* [ Failure ]
 
 crbug.com/1406064 [ intel-gen-9 win10 ] webgpu:api,validation,error_scope:current_scope:errorFilter="out-of-memory";stackDepth=100000 [ Slow ]
 [ intel-gen-9 win10 ] webgpu:shader,execution,expression,binary,f32_arithmetic:addition* [ Slow ]
