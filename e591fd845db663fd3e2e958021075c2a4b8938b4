@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ccc6fab_c277ed40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-20T11:53:02Z",
+      "side": 1,
+      "message": "I happen to be looking into the failed cases recently.  It seems the current implementations of `GetPendingCommandContext`, `HasPendingCommands`, `ForceEventualFlushOfCommands`, and `TickImpl` don\u0027t exactly follow the expected contract between frontend and backend. Probably it\u0027s because that it was not innately designed for immediate context.\n\n@penghuang@chromium.org I am not very sure about your current progress. I\u0027d directly work on the deferred context rather than this fix if it won\u0027t disturb your pace too much. Please let me know when you feel okay with that, thanks!",
+      "revId": "e591fd845db663fd3e2e958021075c2a4b8938b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
