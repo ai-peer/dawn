@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bdb74f3_b5f0de45",
+        "filename": "src/tint/ast/diagnostic_rule_name.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T18:37:52Z",
+      "side": 1,
+      "message": "nit: else not needed as if returns",
+      "revId": "5531a422627f54e5664648e06f183cbab6103955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339621c1_fd3abf26",
+        "filename": "src/tint/ast/diagnostic_rule_name.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T18:37:52Z",
+      "side": 1,
+      "message": "Did you think about using std::optional here instead of nullptr?",
+      "revId": "5531a422627f54e5664648e06f183cbab6103955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd622f0c_46cc43a9",
+        "filename": "src/tint/ast/diagnostic_rule_name_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-20T18:37:52Z",
+      "side": 1,
+      "message": "Test `String` method for `name` and `category.name` ?",
+      "revId": "5531a422627f54e5664648e06f183cbab6103955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "580f42c5_2301c4a1",
         "filename": "src/tint/transform/renamer.cc",
         "patchSetId": 2
