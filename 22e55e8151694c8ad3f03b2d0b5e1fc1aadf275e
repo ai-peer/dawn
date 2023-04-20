@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7568788c_321a33e6",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 78
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T11:55:26Z",
+      "side": 1,
+      "message": "It\u0027s interesting how this test has potentially the D3D12 submission happening before the D3D11 one. Hopefully this wait-before-signal is correctly supported on Windows.",
+      "revId": "22e55e8151694c8ad3f03b2d0b5e1fc1aadf275e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

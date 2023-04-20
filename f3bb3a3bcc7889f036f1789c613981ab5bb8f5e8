@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "721e8e86_9f2fcf0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 83
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T11:55:26Z",
+      "side": 1,
+      "message": "Sorry for taking this long to review this CL. No additional comments. We can iterate on this file over time.",
+      "revId": "f3bb3a3bcc7889f036f1789c613981ab5bb8f5e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
