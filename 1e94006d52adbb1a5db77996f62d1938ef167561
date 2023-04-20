@@ -194,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad3c842f_10daaab9",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T15:12:23Z",
+      "side": 1,
+      "message": "still not very clear to me from the comment why it would be necessary to set back to nullptr.\n\nis it because of state sharing if Dawn is not the only user of the context?\nis it because it\u0027s incorrect to have the vertex buffer bound if it\u0027s also bound say - in a compute pass?",
+      "parentUuid": "44362006_bf1e8d50",
+      "revId": "1e94006d52adbb1a5db77996f62d1938ef167561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64b537c9_1907e2ba",
