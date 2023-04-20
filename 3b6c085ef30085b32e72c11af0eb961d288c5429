@@ -163,6 +163,30 @@
       },
       "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a220ad6_a0eb23a6",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-20T11:22:11Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that be the case for all resources that are bound, not just vertex buffers? Would the use of context state object help reset state completely?",
+      "parentUuid": "5ebd040a_a52c7eb0",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 64
+      },
+      "revId": "3b6c085ef30085b32e72c11af0eb961d288c5429",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
