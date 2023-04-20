@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b45253b_7e4239ee",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T15:27:43Z",
+      "side": 1,
+      "message": "existing nit: singular - this is about one binding entry",
+      "range": {
+        "startLine": 119,
+        "startChar": 53,
+        "endLine": 119,
+        "endChar": 61
+      },
+      "revId": "caaef3ff34d1d41a194f73f6e6585e891f827d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f45124c_5988dd5c",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-20T15:27:43Z",
+      "side": 1,
+      "message": "existing nit:\nthe formatting will print \"TextureSampleType::Foo\" so may be don\u0027t need \"Sample type \"\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:out/mac-Debug/gen/third_party/dawn/src/dawn/native/webgpu_absl_format_autogen.cpp;l\u003d1874?q\u003df:dawn%20f:absl%20f:format%20TextureSampleType",
+      "range": {
+        "startLine": 119,
+        "startChar": 12,
+        "endLine": 119,
+        "endChar": 28
+      },
+      "revId": "caaef3ff34d1d41a194f73f6e6585e891f827d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
