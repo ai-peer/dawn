@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51b48b20_275fd248",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-21T01:30:42Z",
+      "side": 1,
+      "message": "didn\u0027t get to reviewing this today; will be OOO tomorrow",
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb214821_9a627974",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-21T01:30:42Z",
+      "side": 1,
+      "message": "didn\u0027t get to reviewing this today and will be OOO tomorrow.",
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
