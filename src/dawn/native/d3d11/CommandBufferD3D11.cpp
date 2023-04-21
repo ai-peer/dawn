@@ -393,34 +393,87 @@ MaybeError CommandBuffer::Execute() {
 
                 DAWN_TRY(buffer->EnsureDataInitializedAsDestination(commandContext, copy));
 
-                for (uint32_t z = 0; z < copy->copySize.depthOrArrayLayers; ++z) {
-                    // Copy the staging texture to the buffer.
-                    // The Map() will block until the GPU is done with the texture.
-                    // TODO(dawn:1705): avoid blocking the CPU.
-                    D3D11_MAPPED_SUBRESOURCE mappedResource;
-                    DAWN_TRY(
-                        CheckHRESULT(d3d11DeviceContext1->Map(stagingTexture->GetD3D11Resource(), z,
-                                                              D3D11_MAP_READ, 0, &mappedResource),
-                                     "D3D11 map staging texture"));
+                if (src.texture->GetDimension() == wgpu::TextureDimension::e2D) {
+                    for (uint32_t z = 0; z < copy->copySize.depthOrArrayLayers; ++z) {
+                        // Copy the staging texture to the buffer.
+                        // The Map() will block until the GPU is done with the texture.
+                        // TODO(dawn:1705): avoid blocking the CPU.
+                        D3D11_MAPPED_SUBRESOURCE mappedResource;
+                        DAWN_TRY(CheckHRESULT(
+                            d3d11DeviceContext1->Map(stagingTexture->GetD3D11Resource(), z,
+                                                     D3D11_MAP_READ, 0, &mappedResource),
+                            "D3D11 map staging texture"));
 
-                    uint8_t* pSrcData = reinterpret_cast<uint8_t*>(mappedResource.pData);
-                    const TexelBlockInfo& blockInfo =
-                        ToBackend(src.texture)->GetFormat().GetAspectInfo(src.aspect).block;
-                    uint32_t bytesPerRow = blockInfo.byteSize * copy->copySize.width;
-                    if (scopedDstMap.GetMappedData()) {
+                        uint8_t* pSrcData = reinterpret_cast<uint8_t*>(mappedResource.pData);
+                        const TexelBlockInfo& blockInfo =
+                            ToBackend(src.texture)->GetFormat().GetAspectInfo(src.aspect).block;
+                        uint32_t bytesPerRow = blockInfo.byteSize * copy->copySize.width;
+                        if (scopedDstMap.GetMappedData()) {
+                            uint8_t* pDstData = scopedDstMap.GetMappedData() + dst.offset +
+                                                dst.bytesPerRow * dst.rowsPerImage * z;
+                            for (uint32_t y = 0; y < copy->copySize.height; ++y) {
+                                memcpy(pDstData, pSrcData, bytesPerRow);
+                                pDstData += dst.bytesPerRow;
+                                pSrcData += mappedResource.RowPitch;
+                            }
+                        } else {
+                            uint64_t dstOffset =
+                                dst.offset + dst.bytesPerRow * dst.rowsPerImage * z;
+                            if (dst.bytesPerRow == bytesPerRow &&
+                                mappedResource.RowPitch == bytesPerRow) {
+                                // If there is no padding in the rows, we can upload the whole image
+                                // in one buffer->Write() call.
+                                DAWN_TRY(buffer->Write(commandContext, dstOffset, pSrcData,
+                                                       dst.bytesPerRow * copy->copySize.height));
+                            } else {
+                                // Otherwise, we need to upload each row separately.
+                                for (uint32_t y = 0; y < copy->copySize.height; ++y) {
+                                    DAWN_TRY(buffer->Write(commandContext, dstOffset, pSrcData,
+                                                           bytesPerRow));
+                                    dstOffset += dst.bytesPerRow;
+                                    pSrcData += mappedResource.RowPitch;
+                                }
+                            }
+                        }
+                        d3d11DeviceContext1->Unmap(stagingTexture->GetD3D11Resource(), z);
+                    }
+                    break;
+                }
+
+                // 3D textures are copied one slice at a time.
+                // Copy the staging texture to the buffer.
+                // The Map() will block until the GPU is done with the texture.
+                // TODO(dawn:1705): avoid blocking the CPU.
+                D3D11_MAPPED_SUBRESOURCE mappedResource;
+                DAWN_TRY(
+                    CheckHRESULT(d3d11DeviceContext1->Map(stagingTexture->GetD3D11Resource(), 0,
+                                                          D3D11_MAP_READ, 0, &mappedResource),
+                                 "D3D11 map staging texture"));
+
+                const TexelBlockInfo& blockInfo =
+                    ToBackend(src.texture)->GetFormat().GetAspectInfo(src.aspect).block;
+                uint32_t bytesPerRow = blockInfo.byteSize * copy->copySize.width;
+                if (scopedDstMap.GetMappedData()) {
+                    for (uint32_t z = 0; z < copy->copySize.depthOrArrayLayers; ++z) {
                         uint8_t* pDstData = scopedDstMap.GetMappedData() + dst.offset +
                                             dst.bytesPerRow * dst.rowsPerImage * z;
+                        uint8_t* pSrcData = reinterpret_cast<uint8_t*>(mappedResource.pData) +
+                                            z * mappedResource.DepthPitch;
                         for (uint32_t y = 0; y < copy->copySize.height; ++y) {
                             memcpy(pDstData, pSrcData, bytesPerRow);
                             pDstData += dst.bytesPerRow;
                             pSrcData += mappedResource.RowPitch;
                         }
-                    } else {
+                    }
+                } else {
+                    for (uint32_t z = 0; z < copy->copySize.depthOrArrayLayers; ++z) {
                         uint64_t dstOffset = dst.offset + dst.bytesPerRow * dst.rowsPerImage * z;
+                        uint8_t* pSrcData = reinterpret_cast<uint8_t*>(mappedResource.pData) +
+                                            z * mappedResource.DepthPitch;
                         if (dst.bytesPerRow == bytesPerRow &&
                             mappedResource.RowPitch == bytesPerRow) {
-                            // If there is no padding in the rows, we can upload the whole image in
-                            // one buffer->Write() call.
+                            // If there is no padding in the rows, we can upload the whole image
+                            // in one buffer->Write() call.
                             DAWN_TRY(buffer->Write(commandContext, dstOffset, pSrcData,
                                                    dst.bytesPerRow * copy->copySize.height));
                         } else {
@@ -433,8 +486,8 @@ MaybeError CommandBuffer::Execute() {
                             }
                         }
                     }
-                    d3d11DeviceContext1->Unmap(stagingTexture->GetD3D11Resource(), z);
                 }
+                d3d11DeviceContext1->Unmap(stagingTexture->GetD3D11Resource(), 0);
                 break;
             }
 
