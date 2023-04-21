@@ -31,6 +31,11 @@ class RefCount {
     // Add a reference.
     void Increment();
 
+    // Perform reference's increase then return true.
+    // However if the ref count was already "zero", this will return false and no reference will be
+    // added.
+    bool TryIncrement();
+
     // Remove a reference. Returns true if this was the last reference.
     bool Decrement();
 
@@ -46,6 +51,17 @@ class RefCounted {
     uint64_t GetRefCountPayload() const;
 
     void Reference();
+
+    // Attempt to increase the ref count of the object then return true.
+    // However if the ref count was already "zero", this will return false and no reference will be
+    // added.
+    // Note: since normally an object whose ref count reaches zero will be deleted immediaty, this
+    // method is intended to be used by a cache that stores raw pointer to the object. When being
+    // used on multiple threads, the stored object's destruction must have some forms of
+    // synchronization with the cache so that it won't try to call TryReference() on the already
+    // deleted object.
+    bool TryReference();
+
     // Release() is called by internal code, so it's assumed that there is already a thread
     // synchronization in place for destruction.
     void Release();

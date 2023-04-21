@@ -76,18 +76,6 @@ class MultithreadTests : public DawnTest {
         return device.CreateTexture(&texDescriptor);
     }
 
-    void RunInParallel(uint32_t numThreads, const std::function<void(uint32_t)>& workerFunc) {
-        std::vector<std::unique_ptr<std::thread>> threads(numThreads);
-
-        for (uint32_t i = 0; i < threads.size(); ++i) {
-            threads[i] = std::make_unique<std::thread>([i, workerFunc] { workerFunc(i); });
-        }
-
-        for (auto& thread : threads) {
-            thread->join();
-        }
-    }
-
     dawn::Mutex mutex;
 };
 
@@ -116,7 +104,7 @@ class MultithreadCachingTests : public MultithreadTests {
 // Test that creating a same shader module (which will return the cached shader module) and release
 // it on multiple threads won't race.
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedShaderModulesInParallel) {
-    RunInParallel(100, [this](uint32_t) {
+    utils::RunInParallel(100, [this](uint32_t) {
         wgpu::ShaderModule csModule = CreateComputeShaderModule();
         EXPECT_NE(nullptr, csModule.Get());
     });
@@ -134,7 +122,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedComputePipelinesInParallel) {
     csDesc.compute.entryPoint = "main";
     csDesc.layout = pipelineLayout;
 
-    RunInParallel(100, [&, this](uint32_t) {
+    utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
         EXPECT_NE(nullptr, pipeline.Get());
     });
@@ -143,7 +131,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedComputePipelinesInParallel) {
 // Test that creating a same bind group layout (which will return the cached layout) and
 // release it on multiple threads won't race.
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedBindGroupLayoutsInParallel) {
-    RunInParallel(100, [&, this](uint32_t) {
+    utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::BindGroupLayout layout = CreateComputeBindGroupLayout();
         EXPECT_NE(nullptr, layout.Get());
     });
@@ -154,7 +142,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedBindGroupLayoutsInParallel) {
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedPipelineLayoutsInParallel) {
     wgpu::BindGroupLayout bglayout = CreateComputeBindGroupLayout();
 
-    RunInParallel(100, [&, this](uint32_t) {
+    utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::PipelineLayout pipelineLayout = utils::MakePipelineLayout(device, {bglayout});
         EXPECT_NE(nullptr, pipelineLayout.Get());
     });
@@ -177,7 +165,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedRenderPipelinesInParallel) {
     renderPipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
     renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
 
-    RunInParallel(100, [&, this](uint32_t) {
+    utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
         EXPECT_NE(nullptr, pipeline.Get());
     });
@@ -187,7 +175,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedRenderPipelinesInParallel) {
 // on multiple threads won't race.
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedSamplersInParallel) {
     wgpu::SamplerDescriptor desc = {};
-    RunInParallel(100, [&, this](uint32_t) {
+    utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::Sampler sampler = device.CreateSampler(&desc);
         EXPECT_NE(nullptr, sampler.Get());
     });
@@ -213,7 +201,7 @@ TEST_P(MultithreadEncodingTests, RenderPassEncodersInParallel) {
 
     std::vector<wgpu::CommandBuffer> commandBuffers(kNumThreads);
 
-    RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
+    utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         // Clear the renderTarget to red.
@@ -263,7 +251,7 @@ TEST_P(MultithreadEncodingTests, ComputePassEncodersInParallel) {
 
     std::vector<wgpu::CommandBuffer> commandBuffers(kNumThreads);
 
-    RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
+    utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
         pass.SetPipeline(pipeline);
@@ -397,7 +385,7 @@ TEST_P(MultithreadDrawIndexedIndirectTests, IndirectOffsetInParallel) {
     utils::RGBA8 filled(0, 255, 0, 255);
     utils::RGBA8 notFilled(0, 0, 0, 0);
 
-    RunInParallel(10, [=](uint32_t) {
+    utils::RunInParallel(10, [=](uint32_t) {
         // Test an offset draw call, with indirect buffer containing 2 calls:
         // 1) first 3 indices of the second quad (top right triangle)
         // 2) last 3 indices of the second quad
@@ -473,7 +461,7 @@ TEST_P(MultithreadTimestampQueryTests, ResolveQuerySets_InParallel) {
         destinations[i] = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
     }
 
-    RunInParallel(kNumThreads, [&](uint32_t index) {
+    utils::RunInParallel(kNumThreads, [&](uint32_t index) {
         const auto& querySet = querySets[index];
         const auto& destination = destinations[index];
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
