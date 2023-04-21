@@ -68,6 +68,24 @@
       "message": "It just occurred to me that RenderBundles also have this problem.",
       "revId": "db74d552fd03e2eddccbfec3c4cde0eed6ef1386",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da375ae_0aaf4ee6",
+        "filename": "src/dawn/native/webgpu_absl_format.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-04-21T18:01:31Z",
+      "side": 1,
+      "message": "Render bundles are included in the latest patch.",
+      "parentUuid": "57e225dd_6aeff51b",
+      "revId": "db74d552fd03e2eddccbfec3c4cde0eed6ef1386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
