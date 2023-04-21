@@ -63,6 +63,7 @@ target_sources(dawn_common PRIVATE
     "RefBase.h"
     "RefCounted.cpp"
     "RefCounted.h"
+    "RefCountedObjectCache.h"
     "Result.cpp"
     "Result.h"
     "SerialMap.h"
