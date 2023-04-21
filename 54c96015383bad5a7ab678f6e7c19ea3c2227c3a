@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1108a0f4_227f355f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-04-21T20:52:27Z",
+      "side": 1,
+      "message": "Merge approved for M113: https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1434828#c5",
+      "revId": "54c96015383bad5a7ab678f6e7c19ea3c2227c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
