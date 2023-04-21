@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc643aef_4f84c181",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-21T12:06:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f402089c_ef10f192",
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7949277_8a0cd0fa",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af298b89_f91bafd7",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-21T12:06:47Z",
+      "side": 1,
+      "message": "It is not necessary. Removed it.",
+      "parentUuid": "d7949277_8a0cd0fa",
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ecbf483_2e159acd",
@@ -99,6 +135,30 @@
       "writtenOn": "2023-04-21T10:46:22Z",
       "side": 1,
       "message": "nit: this is a bit confusing because we have two things mapped but the names don\u0027t tell which is which. Maybe mappedSrc and mappedDst?",
+      "range": {
+        "startLine": 422,
+        "startChar": 34,
+        "endLine": 422,
+        "endChar": 43
+      },
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cffc4906_bb0b8ef3",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-21T12:06:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ecbf483_2e159acd",
       "range": {
         "startLine": 422,
         "startChar": 34,
