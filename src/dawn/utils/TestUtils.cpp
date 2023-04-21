@@ -13,8 +13,9 @@
 // limitations under the License.
 
 #include <algorithm>
+#include <memory>
 #include <ostream>
-#include <vector>
+#include <thread>
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
@@ -188,6 +189,18 @@ uint32_t VertexFormatSize(wgpu::VertexFormat format) {
             break;
     }
     UNREACHABLE();
+}
+
+void RunInParallel(uint32_t numThreads, const std::function<void(uint32_t)>& workerFunc) {
+    std::vector<std::unique_ptr<std::thread>> threads(numThreads);
+
+    for (uint32_t i = 0; i < threads.size(); ++i) {
+        threads[i] = std::make_unique<std::thread>([i, workerFunc] { workerFunc(i); });
+    }
+
+    for (auto& thread : threads) {
+        thread->join();
+    }
 }
 
 }  // namespace utils
