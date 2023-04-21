@@ -33,6 +33,80 @@
       "message": "didn\u0027t get to reviewing this today and will be OOO tomorrow.",
       "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45349f3f_14d28d2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-21T10:46:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f402089c_ef10f192",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-21T10:46:22Z",
+      "side": 1,
+      "message": "I thought we had a helper for this computation but there\u0027s only ComputeRequiredBytesInCopy which returns a ResultOrError. Could still probably use it.",
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7949277_8a0cd0fa",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-21T10:46:22Z",
+      "side": 1,
+      "message": "Doesn\u0027t the copy skip the initialization if it touches the whole buffer, which should be the case here? Or is it not going to happen because of padding bytes at the end?",
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ecbf483_2e159acd",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-21T10:46:22Z",
+      "side": 1,
+      "message": "nit: this is a bit confusing because we have two things mapped but the names don\u0027t tell which is which. Maybe mappedSrc and mappedDst?",
+      "range": {
+        "startLine": 422,
+        "startChar": 34,
+        "endLine": 422,
+        "endChar": 43
+      },
+      "revId": "1a8255aa636b86d836249e7cec032b19a10eb50a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
