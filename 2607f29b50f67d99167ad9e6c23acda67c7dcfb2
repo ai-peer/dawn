@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfb09fb_468b8c79",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-04-21T22:30:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8c8488a_aadb6809",
+      "revId": "2607f29b50f67d99167ad9e6c23acda67c7dcfb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5553250_48ad90d7",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-21T21:32:51Z",
       "side": 1,
       "message": "same",
+      "revId": "2607f29b50f67d99167ad9e6c23acda67c7dcfb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5754be2f_de172fb7",
+        "filename": "src/dawn/native/RenderBundle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-04-21T22:30:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5553250_48ad90d7",
       "revId": "2607f29b50f67d99167ad9e6c23acda67c7dcfb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
