@@ -257,6 +257,7 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android) {
       "RefBase.h",
       "RefCounted.cpp",
       "RefCounted.h",
+      "RefCountedObjectCache.h",
       "Result.cpp",
       "Result.h",
       "SerialMap.h",

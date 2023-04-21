@@ -301,6 +301,7 @@ dawn_test("dawn_unittests") {
     "unittests/PlacementAllocatedTests.cpp",
     "unittests/RefBaseTests.cpp",
     "unittests/RefCountedTests.cpp",
+    "unittests/RefCountedObjectCacheTests.cpp",
     "unittests/ResultTests.cpp",
     "unittests/RingBufferAllocatorTests.cpp",
     "unittests/SerialMapTests.cpp",
