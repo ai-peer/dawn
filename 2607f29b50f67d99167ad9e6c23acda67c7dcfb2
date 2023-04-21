@@ -16,6 +16,40 @@
       "message": "Okay, a bit of a shift in the direction of this CL.\n\nThe primary thing it does is start including the encoder labels when command buffer and render bundle labels are included in error messages. I think this is a big improvement, and worth the CL alone.\n\nI\u0027ve dropped the encoder label inclusion for render passes and compute passes because trying to keep track of the state of the encoding context is proving to be fairly complex and I was getting a lot of crashes because of it. I want to revisit it eventually, but for now I mostly want to land this and move on to other more pressing issues like getting other canvas context formats supported.\n\nThis CL also restructures where the formatted labels come from, because there\u0027s some cases (such as when we check for invalid objects) that the object was passed in as a generic ApiObjectBase pointer, which then was ALWAYS being formatted with the ApiObjectBase absl formatter, losing any object-specific context may be available. Worked around that by moving the object label formatting to a virtual function.\n\nPTAL!",
       "revId": "2607f29b50f67d99167ad9e6c23acda67c7dcfb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c8488a_aadb6809",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-21T21:32:51Z",
+      "side": 1,
+      "message": "Perhaps use ObjectTypeAsString here in case we do crbug.com/1433071 for interfaces too",
+      "revId": "2607f29b50f67d99167ad9e6c23acda67c7dcfb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5553250_48ad90d7",
+        "filename": "src/dawn/native/RenderBundle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-21T21:32:51Z",
+      "side": 1,
+      "message": "same",
+      "revId": "2607f29b50f67d99167ad9e6c23acda67c7dcfb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
