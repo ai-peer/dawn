@@ -892,10 +892,8 @@ MaybeError CommandBuffer::RecordFirstIndexOffset(RenderPipeline* renderPipeline,
         firstVertex,
         firstInstance,
     };
-    DAWN_TRY(
-        commandContext->GetUniformBuffer()->Write(commandContext, 0, offsets, sizeof(offsets)));
-
-    return {};
+    DAWN_ASSERT(commandContext->GetUniformBuffer()->GetSize() >= sizeof(offsets));
+    return commandContext->GetUniformBuffer()->Write(commandContext, 0, offsets, sizeof(offsets));
 }
 
 MaybeError CommandBuffer::RecordNumWorkgroupsForDispatch(ComputePipeline* computePipeline,
@@ -903,10 +901,9 @@ MaybeError CommandBuffer::RecordNumWorkgroupsForDispatch(ComputePipeline* comput
                                                          DispatchCmd* dispatchCmd) {
     // TODO(dawn:1705): only update the uniform buffer when the value changes.
     static_assert(sizeof(DispatchCmd) == sizeof(uint32_t[3]));
-    DAWN_TRY(commandContext->GetUniformBuffer()->Write(commandContext, 0, dispatchCmd,
-                                                       sizeof(*dispatchCmd)));
-
-    return {};
+    DAWN_ASSERT(commandContext->GetUniformBuffer()->GetSize() >= sizeof(DispatchCmd));
+    return commandContext->GetUniformBuffer()->Write(commandContext, 0, dispatchCmd,
+                                                     sizeof(*dispatchCmd));
 }
 
 }  // namespace dawn::native::d3d11
