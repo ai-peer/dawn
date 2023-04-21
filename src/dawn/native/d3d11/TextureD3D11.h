@@ -37,8 +37,6 @@ class Texture final : public TextureBase {
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D11Resource> d3d11Texture);
-    static ResultOrError<Ref<Texture>> CreateStaging(Device* device,
-                                                     const TextureDescriptor* descriptor);
 
     DXGI_FORMAT GetD3D11Format() const;
     ID3D11Resource* GetD3D11Resource() const;
@@ -61,9 +59,20 @@ class Texture final : public TextureBase {
                      const uint8_t* data,
                      uint32_t bytesPerRow,
                      uint32_t rowsPerImage);
+    using ReadCallback = std::function<MaybeError(const uint8_t* data, size_t offset, size_t size)>;
+    MaybeError Read(CommandRecordingContext* commandContext,
+                    const SubresourceRange& subresources,
+                    const Origin3D& origin,
+                    Extent3D size,
+                    uint32_t bytesPerRow,
+                    uint32_t rowsPerImage,
+                    ReadCallback callback);
     static MaybeError Copy(CommandRecordingContext* commandContext, CopyTextureToTextureCmd* copy);
 
   private:
+    static ResultOrError<Ref<Texture>> CreateStaging(Device* device,
+                                                     const TextureDescriptor* descriptor);
+
     Texture(Device* device,
             const TextureDescriptor* descriptor,
             TextureState state,
@@ -85,6 +94,13 @@ class Texture final : public TextureBase {
     MaybeError Clear(CommandRecordingContext* commandContext,
                      const SubresourceRange& range,
                      TextureBase::ClearValue clearValue);
+    MaybeError ReadStaging(CommandRecordingContext* commandContext,
+                           const SubresourceRange& subresources,
+                           const Origin3D& origin,
+                           Extent3D size,
+                           uint32_t bytesPerRow,
+                           uint32_t rowsPerImage,
+                           ReadCallback callback);
 
     const bool mIsStaging = false;
     ComPtr<ID3D11Resource> mD3d11Resource;
