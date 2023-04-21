@@ -69,6 +69,24 @@
       "parentUuid": "1024f50d_fbb7468d",
       "revId": "d7bce974e0a18e33a066fc339dcd09c3febe6796",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae010fc3_c468cb38",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-04-21T16:24:52Z",
+      "side": 1,
+      "message": "Sorry for some reason I didn\u0027t see them. This file is too hard to read :)",
+      "parentUuid": "8659aaa7_5b8b75be",
+      "revId": "d7bce974e0a18e33a066fc339dcd09c3febe6796",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
