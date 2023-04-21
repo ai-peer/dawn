@@ -1594,7 +1594,6 @@
     },
     "mipmap filter mode": {
         "category": "enum",
-        "tags": ["upstream"],
         "values": [
             {"value": 0, "name": "nearest"},
             {"value": 1, "name": "linear"}
