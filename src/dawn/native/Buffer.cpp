@@ -457,6 +457,9 @@ MaybeError BufferBase::CopyFromStagingBuffer() {
         return {};
     }
 
+    // D3D11 debug layer complains of copy from a mapped buffer, so unmap it before using it.
+    DAWN_TRY(mStagingBuffer->Unmap());
+
     DAWN_TRY(
         GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.Get(), 0, this, 0, GetAllocatedSize()));
 
