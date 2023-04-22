@@ -673,7 +673,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             case Command::SetRenderPipeline: {
                 SetRenderPipelineCmd* cmd = iter->NextCommand<SetRenderPipelineCmd>();
 
-                lastPipeline = ToBackend(cmd->pipeline).Get();
+                lastPipeline = ToBackend(cmd->pipeline.Get());
                 lastPipeline->ApplyNow(commandContext, blendColor, stencilReference);
                 bindGroupTracker.OnSetPipeline(lastPipeline);
 
@@ -749,6 +749,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             case Command::SetStencilReference: {
                 SetStencilReferenceCmd* cmd = mCommands.NextCommand<SetStencilReferenceCmd>();
                 stencilReference = cmd->reference;
+                if (lastPipeline) {
+                    lastPipeline->ApplyDepthStencilState(commandContext, stencilReference);
+                }
                 return {};
             }
 
@@ -779,6 +782,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             case Command::SetBlendConstant: {
                 SetBlendConstantCmd* cmd = mCommands.NextCommand<SetBlendConstantCmd>();
                 blendColor = ConvertToFloatColor(cmd->color);
+                if (lastPipeline) {
+                    lastPipeline->ApplyBlendState(commandContext, blendColor);
+                }
                 break;
             }
 
