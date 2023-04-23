@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f508c5_7885d73f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-04-23T07:54:19Z",
+      "side": 1,
+      "message": "Do we know how could we check Cmake build on Android through bots (I assume Kokora helps on this before but it seems Kokora didn\u0027t catch build error on Android)?",
+      "revId": "bf1826c752f7bbf7f7e287a42eaa283696d53eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
