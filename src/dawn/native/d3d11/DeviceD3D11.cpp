@@ -47,11 +47,18 @@ namespace {
 
 static constexpr uint64_t kMaxDebugMessagesToPrint = 5;
 
-void AppendDebugLayerMessagesToError(ID3D11InfoQueue* infoQueue,
+bool AppendDebugLayerMessagesToError(ID3D11InfoQueue* infoQueue,
                                      uint64_t totalErrors,
                                      ErrorData* error) {
     ASSERT(totalErrors > 0);
     ASSERT(error != nullptr);
+
+    constexpr static D3D11_MESSAGE_ID kIgnoredMessages[] = {
+        // D3D11 Debug layer warns no RTV set, however it is allowed.
+        D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET,
+    };
+
+    bool result = false;
 
     uint64_t errorsToPrint = std::min(kMaxDebugMessagesToPrint, totalErrors);
     for (uint64_t i = 0; i < errorsToPrint; ++i) {
@@ -73,6 +80,12 @@ void AppendDebugLayerMessagesToError(ID3D11InfoQueue* infoQueue,
             continue;
         }
 
+        if (std::find(std::begin(kIgnoredMessages), std::end(kIgnoredMessages), message->ID) !=
+            std::end(kIgnoredMessages)) {
+            continue;
+        }
+
+        result = true;
         messageStream << message->pDescription << " (" << message->ID << ")";
         error->AppendBackendMessage(messageStream.str());
     }
@@ -84,6 +97,8 @@ void AppendDebugLayerMessagesToError(ID3D11InfoQueue* infoQueue,
 
     // We only print up to the first kMaxDebugMessagesToPrint errors
     infoQueue->ClearStoredMessages();
+
+    return result;
 }
 
 }  // namespace
@@ -363,7 +378,9 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
 
     auto error = DAWN_INTERNAL_ERROR("The D3D11 debug layer reported uncaught errors.");
 
-    AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error.get());
+    if (!AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error.get())) {
+        return {};
+    }
 
     return error;
 }
