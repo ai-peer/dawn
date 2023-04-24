@@ -33,6 +33,138 @@
       "message": "I don\u0027t think I\u0027ll be able to take a look at this today. The Buffer-related parts look very easy to land and could be separated from the ::Read part.",
       "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "363b3cc4_77532790",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T23:08:09Z",
+      "side": 1,
+      "message": "agree we should split these CLs - it\u0027s not clear to me what Texture::Read gives us. Seems like it\u0027s only used once which doesn\u0027t seem worth it for the complexity of adding a callback",
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ed51588_cd411b09",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T23:08:09Z",
+      "side": 1,
+      "message": "The preferred way to do this now is to add an \"internal usage\" on creation, which you get with TextureBase::GetInternalUsage()",
+      "range": {
+        "startLine": 48,
+        "startChar": 57,
+        "endLine": 48,
+        "endChar": 76
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d5bf22_eff38403",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T23:08:09Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 131,
+        "startChar": 41,
+        "endLine": 131,
+        "endChar": 77
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fce6a908_2999aab4",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T23:08:09Z",
+      "side": 1,
+      "message": "nit: prefer enums than bools like this",
+      "range": {
+        "startLine": 313,
+        "startChar": 68,
+        "endLine": 313,
+        "endChar": 80
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8007f876_13c342a2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T23:08:09Z",
+      "side": 1,
+      "message": "should this ASSERT be hoisted out given the rest of the function body uses Aspect::Color always?",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 372,
+        "endChar": 54
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7db9ec64_a8ba6af8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T23:08:09Z",
+      "side": 1,
+      "message": "this doesn\u0027t make sense given the function also handles copying depth/stencil.\nSee Vulkan\u0027s ComputeCombinedAspect - maybe we need a similar helper instead to convert Depth|Stencil to Aspect::CombinedDepthStencil on d3d11 since we can\u0027t copy just one of them on d3d11.",
+      "range": {
+        "startLine": 546,
+        "startChar": 81,
+        "endLine": 546,
+        "endChar": 94
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
