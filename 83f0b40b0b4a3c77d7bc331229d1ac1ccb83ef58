@@ -16,6 +16,23 @@
       "message": "Hi Austin, PTAL. Thanks.",
       "revId": "83f0b40b0b4a3c77d7bc331229d1ac1ccb83ef58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdaac1de_6359bfcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T22:21:26Z",
+      "side": 1,
+      "message": "can we do this somewhere else to avoid generating an error at all (vs. catching and ignoring it)? see d3d12::Adapter::InitializeDebugLayerFilters",
+      "revId": "83f0b40b0b4a3c77d7bc331229d1ac1ccb83ef58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
