@@ -16,6 +16,23 @@
       "message": "Dependent on https://chromium-review.googlesource.com/c/chromium/src/+/4460959",
       "revId": "38886ab0846dbd48740bb134d3b35e43b4bb8840",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "725bc7fa_34a26e3a",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-24T08:21:51Z",
+      "side": 1,
+      "message": "Note: if it helps we can temporarily add defines to webpug.h in \"dawn\" mode only that convert the `WGPUMipmapFilterMode*` tokens to the `WGPUFilterMode*` ones so that dependencies can be updated first, then the header fixed in one go. We used a similar technique when renaming enums in the past.",
+      "revId": "38886ab0846dbd48740bb134d3b35e43b4bb8840",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
