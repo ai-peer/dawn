@@ -671,6 +671,30 @@
       },
       "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc07db9_5329f908",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 67
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-24T17:37:23Z",
+      "side": 1,
+      "message": "OK, renamed the tests. Now I remember again, the purpose of these tests is that since most of command encoder\u0027s commands are not synchronized, but CopyTextureToTexture()/CopyBufferToTexture() commands are special cases. They will allocate temp resources so we need to verify that they won\u0027t race with other threads\u0027 commands.\n\nThe additional things these tests verify is that there won\u0027t be any deadlock that would have happened because these commands will create a temp render pass behind the scene.\n\nThe original name mentioned WriteTexture and CopyTexture because actually it tests that `WriteTexture` won\u0027t race with 2nd thread\u0027s works (in this case command encoder and texture\u0027s creations before the copy), and `CopyTexture` won\u0027t race with 1st thread\u0027s works (in this case the read after the write). But yeah it didn\u0027t test that WriteTexture and CopyTexture won\u0027t race with each other because there is a dependency between them wrt the texture under test.",
+      "parentUuid": "1d2a6f8f_79215322",
+      "range": {
+        "startLine": 675,
+        "startChar": 8,
+        "endLine": 676,
+        "endChar": 83
+      },
+      "revId": "8ffeb63f7ff0cd01d97f99a20665408d90b3add9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
