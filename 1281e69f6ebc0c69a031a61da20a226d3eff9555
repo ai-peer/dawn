@@ -16,6 +16,24 @@
       "message": "LGTM! Just to be sure, we have these tests on CQ now? I think I saw a CL go through that enabled D3D11 on CQ.",
       "revId": "1281e69f6ebc0c69a031a61da20a226d3eff9555",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2b4e76_2326ae5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-24T14:33:06Z",
+      "side": 1,
+      "message": "Yes. D3D11 is enabled in CQ.",
+      "parentUuid": "f852402f_8ebb678b",
+      "revId": "1281e69f6ebc0c69a031a61da20a226d3eff9555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
