@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c01376_7240eb46",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-24T20:00:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5dc525c_10771378",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 6
+      },
+      "revId": "87310a619f43493def563e067b64ff749f386b5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4fc3b08_96d55ba7",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-04-24T19:06:58Z",
       "side": 1,
       "message": "nit: this could be in GetD3D11TextureDesc",
+      "range": {
+        "startLine": 129,
+        "startChar": 14,
+        "endLine": 132,
+        "endChar": 13
+      },
+      "revId": "87310a619f43493def563e067b64ff749f386b5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da6f95f1_a0ee465d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-24T20:00:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4fc3b08_96d55ba7",
       "range": {
         "startLine": 129,
         "startChar": 14,
