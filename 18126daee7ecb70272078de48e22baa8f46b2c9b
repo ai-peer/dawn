@@ -16,6 +16,40 @@
       "message": "Hi Austin, PTAL. Thanks.",
       "revId": "18126daee7ecb70272078de48e22baa8f46b2c9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c26cd6d_c35b4d19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T22:17:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "18126daee7ecb70272078de48e22baa8f46b2c9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd223f0_e213ae55",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-24T22:17:35Z",
+      "side": 1,
+      "message": "can you duplicate the comment from d3d12 here?\n\nEven better, we can probably have a conversion function from wgpu::BlendFactor -\u003e wgpu::BlendFactor based on the ColorTargetState. that way it is shared between the two",
+      "revId": "18126daee7ecb70272078de48e22baa8f46b2c9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
