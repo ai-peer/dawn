@@ -16,6 +16,23 @@
       "message": "FYI :)",
       "revId": "3237c5e7ee4f4c8e992e21846412ba27feb082ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36ca0723_be075374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T08:43:13Z",
+      "side": 1,
+      "message": "PTAL trivial CL",
+      "revId": "3237c5e7ee4f4c8e992e21846412ba27feb082ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
