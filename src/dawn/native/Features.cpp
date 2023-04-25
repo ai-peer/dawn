@@ -107,6 +107,9 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
       "Support querying Surface's capabilities such as supported usage flags. This feature also "
       "enables swap chain to be created with usage other than RenderAttachment.",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=1760", FeatureInfo::FeatureState::Stable}},
+    {Feature::MemorylessTextures,
+     {"memoryless-textures", "Support memoryless textures.",
+      "https://bugs.chromium.org/p/dawn/issues/detail?id=1695", FeatureInfo::FeatureState::Stable}},
 }};
 
 Feature FromAPIFeature(wgpu::FeatureName feature) {
@@ -153,6 +156,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::ImplicitDeviceSynchronization;
         case wgpu::FeatureName::SurfaceCapabilities:
             return Feature::SurfaceCapabilities;
+        case wgpu::FeatureName::MemorylessTextures:
+            return Feature::MemorylessTextures;
     }
     return Feature::InvalidEnum;
 }
@@ -195,6 +200,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::ImplicitDeviceSynchronization;
         case Feature::SurfaceCapabilities:
             return wgpu::FeatureName::SurfaceCapabilities;
+        case Feature::MemorylessTextures:
+            return wgpu::FeatureName::MemorylessTextures;
 
         case Feature::EnumCount:
             break;

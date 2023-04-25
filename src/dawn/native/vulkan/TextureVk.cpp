@@ -575,6 +575,10 @@ VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage
         case kPresentTextureUsage:
             return VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 
+        case wgpu::TextureUsage::TransientAttachment:
+            // TODO(1695): Handle this case in Vulkan.
+            break;
+
         case wgpu::TextureUsage::None:
             break;
     }
