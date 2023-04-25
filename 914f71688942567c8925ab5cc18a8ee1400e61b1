@@ -22,6 +22,30 @@
       },
       "revId": "914f71688942567c8925ab5cc18a8ee1400e61b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93cc74a3_3b370254",
+        "filename": "src/tint/ir/store_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-25T22:03:47Z",
+      "side": 1,
+      "message": "There are a whole pile of these already. I\u0027m going to leave this one and will do a followup that renames all of them.",
+      "parentUuid": "1c19e5ab_301c160c",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 21
+      },
+      "revId": "914f71688942567c8925ab5cc18a8ee1400e61b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
