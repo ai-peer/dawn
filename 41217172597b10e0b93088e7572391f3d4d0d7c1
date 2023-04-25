@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7bfc31_7c0c7456",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T08:46:18Z",
+      "side": 1,
+      "message": "FYI Shaobo I think this is the same fix you have.\n\nAlbin, are you able to CQ+2 or do you need someone else to do it?",
+      "revId": "41217172597b10e0b93088e7572391f3d4d0d7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
