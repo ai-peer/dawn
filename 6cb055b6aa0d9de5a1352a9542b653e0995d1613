@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c651f9d_d00fbfb5",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T11:49:04Z",
+      "side": 1,
+      "message": "nit as I\u0027m looking at this to help make release notes. When can the descriptor be null? It seems that the Dawn API always guarantees there is a descriptor except for a very few number of cases (samplers only?)",
+      "revId": "6cb055b6aa0d9de5a1352a9542b653e0995d1613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
