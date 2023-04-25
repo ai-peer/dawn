@@ -33,6 +33,23 @@
       "message": "Loko PTAL",
       "revId": "5abf96eafeb58ef2fd29b1d38422d346a2f01cfa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32616bac_9ba3d370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-25T18:26:30Z",
+      "side": 1,
+      "message": "Seems fine! I can\u0027t open the bug link for some reason though.",
+      "revId": "5abf96eafeb58ef2fd29b1d38422d346a2f01cfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
