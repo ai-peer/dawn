@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ed543a_34be628f",
+        "filename": "src/tint/reader/spirv/parser_impl_handle_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4240,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-04-25T19:15:01Z",
+      "side": 1,
+      "message": "If this passes validation, then that seems like a bug?\nPlease file an issue against SPIRV-Tools validator.",
+      "revId": "9f3a08bffff34e4050dbdbeadd3897856b3d1f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
