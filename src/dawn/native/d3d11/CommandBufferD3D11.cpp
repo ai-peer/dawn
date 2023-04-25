@@ -106,7 +106,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                             // of 16.
                             ASSERT(IsAligned(offset, 256));
                             UINT firstConstant = static_cast<UINT>(offset / 16);
-                            UINT size = static_cast<UINT>(binding.size / 16);
+                            UINT size = static_cast<UINT>(Align(binding.size, 16) / 16);
                             UINT numConstants = Align(size, 16);
 
                             if (bindingInfo.visibility & wgpu::ShaderStage::Vertex) {
@@ -145,7 +145,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                             ComPtr<ID3D11ShaderResourceView> d3d11SRV;
                             DAWN_TRY_ASSIGN(d3d11SRV, ToBackend(binding.buffer)
                                                           ->CreateD3D11ShaderResourceView(
-                                                              binding.offset, binding.size));
+                                                              offset, binding.size));
                             if (bindingInfo.visibility & wgpu::ShaderStage::Vertex) {
                                 deviceContext->VSSetShaderResources(bindingSlot, 1,
                                                                     d3d11SRV.GetAddressOf());

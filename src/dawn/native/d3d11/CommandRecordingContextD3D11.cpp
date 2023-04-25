@@ -50,7 +50,8 @@ MaybeError CommandRecordingContext::Open(Device* device) {
 
         // Create a uniform buffer for built in variables.
         BufferDescriptor descriptor;
-        descriptor.size = sizeof(uint32_t) * kMaxNumBuiltinElements;
+        // D3D11 'updatesubresource1' requires 16-byte aligned.
+        descriptor.size = Align(sizeof(uint32_t) * kMaxNumBuiltinElements, 16);
         descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
         descriptor.mappedAtCreation = false;
         descriptor.label = "builtin uniform buffer";
