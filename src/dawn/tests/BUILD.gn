@@ -562,6 +562,7 @@ source_set("end2end_tests_sources") {
     "end2end/TextureCorruptionTests.cpp",
     "end2end/TextureFormatTests.cpp",
     "end2end/TextureSubresourceTests.cpp",
+    "end2end/TextureUsageTests.cpp",
     "end2end/TextureViewTests.cpp",
     "end2end/TextureZeroInitTests.cpp",
     "end2end/VertexFormatTests.cpp",
