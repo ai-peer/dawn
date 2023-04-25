@@ -50,7 +50,8 @@ MaybeError CommandRecordingContext::Open(Device* device) {
         BufferDescriptor descriptor;
         // The maximum number of builtin elements is 4 (vec4). It must be multiple of 4.
         constexpr size_t kMaxNumBuiltinElements = 4;
-        descriptor.size = sizeof(uint32_t) * kMaxNumBuiltinElements;
+        // D3D11 'updatesubresource1' requires 16-byte aligned.
+        descriptor.size = Align(sizeof(uint32_t) * kMaxNumBuiltinElements, 16);
         descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
         descriptor.mappedAtCreation = false;
         descriptor.label = "builtin uniform buffer";
