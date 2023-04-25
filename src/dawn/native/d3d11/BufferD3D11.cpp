@@ -318,7 +318,7 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Buffer::CreateD3D11ShaderResourc
     UINT numElements = static_cast<UINT>(size / 4);
 
     D3D11_SHADER_RESOURCE_VIEW_DESC desc;
-    desc.Format = DXGI_FORMAT_R32_TYPELESS;
+    desc.Format = DXGI_FORMAT_R32_UINT;
     desc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
     desc.Buffer.FirstElement = firstElement;
     desc.Buffer.NumElements = numElements;
@@ -457,6 +457,12 @@ MaybeError Buffer::WriteInternal(CommandRecordingContext* commandContext,
 
     // TODO(dawn:1739): check whether driver supports partial update of uniform buffer.
     if ((GetUsage() & wgpu::BufferUsage::Uniform)) {
+        // https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-updatesubresource1
+        // The runtime also drops the call if you update a constant buffer with a partial region
+        // whose extent is not aligned to 16-byte granularity (16 bytes being a full constant).
+        ASSERT(dstBox.left == Align(dstBox.left, 16));
+        dstBox.right = Align(dstBox.right, 16);
+        ASSERT(dstBox.right <= mAllocatedSize);
         d3d11DeviceContext1->UpdateSubresource1(GetD3D11Buffer(), /*DstSubresource=*/0, &dstBox,
                                                 data,
                                                 /*SrcRowPitch=*/0,
