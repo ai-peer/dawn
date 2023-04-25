@@ -33,6 +33,24 @@
       "message": "Note: if it helps we can temporarily add defines to webpug.h in \"dawn\" mode only that convert the `WGPUMipmapFilterMode*` tokens to the `WGPUFilterMode*` ones so that dependencies can be updated first, then the header fixed in one go. We used a similar technique when renaming enums in the past.",
       "revId": "38886ab0846dbd48740bb134d3b35e43b4bb8840",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78b54a23_f5f50e36",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2362,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-25T00:04:15Z",
+      "side": 1,
+      "message": "Updated the chain to reflect this! Thanks!",
+      "parentUuid": "725bc7fa_34a26e3a",
+      "revId": "38886ab0846dbd48740bb134d3b35e43b4bb8840",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
