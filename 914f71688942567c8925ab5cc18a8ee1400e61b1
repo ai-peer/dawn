@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c19e5ab_301c160c",
+        "filename": "src/tint/ir/store_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-25T21:50:51Z",
+      "side": 1,
+      "message": "Please use `inst`. `instr` was used on occasion in swiftshader and it caused much angst for those of us that have muscle memory with typing `inst`, which is far more common.",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 21
+      },
+      "revId": "914f71688942567c8925ab5cc18a8ee1400e61b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
