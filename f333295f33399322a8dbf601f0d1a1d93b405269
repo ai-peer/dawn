@@ -16,6 +16,24 @@
       "message": "seems dawn.node is unhappy",
       "revId": "f333295f33399322a8dbf601f0d1a1d93b405269",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5700194b_adbe8ccf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-25T21:34:32Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "3d6ac84a_b465dd27",
+      "revId": "f333295f33399322a8dbf601f0d1a1d93b405269",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
