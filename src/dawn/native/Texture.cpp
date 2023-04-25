@@ -285,7 +285,8 @@ MaybeError ValidateTextureSize(const DeviceBase* device,
     return {};
 }
 
-MaybeError ValidateTextureUsage(const TextureDescriptor* descriptor,
+MaybeError ValidateTextureUsage(const DeviceBase* device,
+                                const TextureDescriptor* descriptor,
                                 wgpu::TextureUsage usage,
                                 const Format* format) {
     DAWN_TRY(dawn::native::ValidateTextureUsage(usage));
@@ -316,6 +317,20 @@ MaybeError ValidateTextureUsage(const TextureDescriptor* descriptor,
         !format->supportsStorageUsage && (usage & wgpu::TextureUsage::StorageBinding),
         "The texture usage (%s) includes %s, which is incompatible with the format (%s).", usage,
         wgpu::TextureUsage::StorageBinding, format->format);
+
+    auto transient_attachment = wgpu::TextureUsage::TransientAttachment;
+    if (usage & transient_attachment) {
+        DAWN_INVALID_IF(
+            !device->HasFeature(Feature::TransientAttachments),
+            "The texture usage (%s) includes %s, which requires the %s feature to be set", usage,
+            transient_attachment, FeatureEnumToAPIFeature(Feature::TransientAttachments));
+
+        auto allowed_usage = transient_attachment | wgpu::TextureUsage::RenderAttachment;
+        DAWN_INVALID_IF(usage != allowed_usage,
+                        "The texture usage (%s) includes %s, which requires that the texture usage "
+                        "be exactly %s",
+                        usage, transient_attachment, allowed_usage);
+    }
 
     // Only allows simple readonly texture usages.
     constexpr wgpu::TextureUsage kValidMultiPlanarUsages =
@@ -355,7 +370,7 @@ MaybeError ValidateTextureDescriptor(const DeviceBase* device,
         usage |= internalUsageDesc->internalUsage;
     }
 
-    DAWN_TRY(ValidateTextureUsage(descriptor, usage, format));
+    DAWN_TRY(ValidateTextureUsage(device, descriptor, usage, format));
     DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
     DAWN_TRY(ValidateSampleCount(descriptor, usage, format));
 
