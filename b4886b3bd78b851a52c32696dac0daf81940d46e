@@ -46,6 +46,30 @@
       },
       "revId": "b4886b3bd78b851a52c32696dac0daf81940d46e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84f87f1_ff6d6dd3",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-25T19:59:35Z",
+      "side": 1,
+      "message": "sorry I didn\u0027t notice this earlier. could we avoid all the const_cast? there\u0027s no need for these to be constexpr, especially since the initialization code here is not performance sensitive.",
+      "parentUuid": "c51a2fa0_80257267",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 14
+      },
+      "revId": "b4886b3bd78b851a52c32696dac0daf81940d46e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
