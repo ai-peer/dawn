@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dce6e2c_76942413",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-25T15:47:01Z",
+      "side": 1,
+      "message": "you don\u0027t need \"native\" - the enum should pass through the wire OK and be usable when remoting as well. Probably need to add it to this list src/dawn/wire/SupportedFeatures.cpp",
+      "range": {
+        "startLine": 1458,
+        "startChar": 76,
+        "endLine": 1458,
+        "endChar": 84
+      },
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0327d8d6_db6b49c3",
         "filename": "src/dawn/native/Features.cpp",
         "patchSetId": 3
