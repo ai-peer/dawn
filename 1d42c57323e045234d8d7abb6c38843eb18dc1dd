@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4df36b2f_79a2282a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-25T16:49:32Z",
+      "side": 1,
+      "message": "I added Texture::Read() because Texture::Read() has similar logic (accessing layers) with Texture::Writte() and Texture::Copy(). Putting it near the other two methods, so I can reference each others easier, when I modify the logic for different dimensions (1D, 2D, 3D) . And with the readcallbback, it makes Texture::Read() simpler, it doesn\u0027t need to care the upload data to buffer related code, it also reduce branches in on code block.",
+      "parentUuid": "363b3cc4_77532790",
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ed51588_cd411b09",
@@ -65,6 +83,30 @@
       "writtenOn": "2023-04-24T23:08:09Z",
       "side": 1,
       "message": "The preferred way to do this now is to add an \"internal usage\" on creation, which you get with TextureBase::GetInternalUsage()",
+      "range": {
+        "startLine": 48,
+        "startChar": 57,
+        "endLine": 48,
+        "endChar": 76
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8204e1be_a2dfcd32",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-25T16:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed51588_cd411b09",
       "range": {
         "startLine": 48,
         "startChar": 57,
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a7a776_17d23ac7",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-25T16:49:32Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "10d5bf22_eff38403",
+      "range": {
+        "startLine": 131,
+        "startChar": 41,
+        "endLine": 131,
+        "endChar": 77
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fce6a908_2999aab4",
@@ -111,6 +177,30 @@
       "writtenOn": "2023-04-24T23:08:09Z",
       "side": 1,
       "message": "nit: prefer enums than bools like this",
+      "range": {
+        "startLine": 313,
+        "startChar": 68,
+        "endLine": 313,
+        "endChar": 80
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfdc349_9df8a399",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-25T16:49:32Z",
+      "side": 1,
+      "message": "I added comment to make it more readable.",
+      "parentUuid": "fce6a908_2999aab4",
       "range": {
         "startLine": 313,
         "startChar": 68,
@@ -144,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ad59af_e3b1d91e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-25T16:49:32Z",
+      "side": 1,
+      "message": "D3D doesn\u0027t allow partial upload a  depth or stencil textures, so at here the texture must be color texture.\n\n\n[1]https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/Texture.cpp;l\u003d687;drc\u003da61b95c63b0b75c1cfe872d9c8cdf927c226046e;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "8007f876_13c342a2",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 372,
+        "endChar": 54
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7db9ec64_a8ba6af8",
@@ -157,6 +271,30 @@
       "writtenOn": "2023-04-24T23:08:09Z",
       "side": 1,
       "message": "this doesn\u0027t make sense given the function also handles copying depth/stencil.\nSee Vulkan\u0027s ComputeCombinedAspect - maybe we need a similar helper instead to convert Depth|Stencil to Aspect::CombinedDepthStencil on d3d11 since we can\u0027t copy just one of them on d3d11.",
+      "range": {
+        "startLine": 546,
+        "startChar": 81,
+        "endLine": 546,
+        "endChar": 94
+      },
+      "revId": "1d42c57323e045234d8d7abb6c38843eb18dc1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd2966c_e9cdcb8e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-25T16:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7db9ec64_a8ba6af8",
       "range": {
         "startLine": 546,
         "startChar": 81,
