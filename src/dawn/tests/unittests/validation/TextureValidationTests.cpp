@@ -1025,4 +1025,26 @@ TEST_F(TextureValidationTest, APIValidateTextureDescriptor) {
     ASSERT_DEVICE_ERROR(device.ValidateTextureDescriptor(&desc));
 }
 
+// Tests that specification of the transient attachment without specification of
+// the render attachment causes an error.
+TEST_F(TextureValidationTest, TransientAttachmentWithoutRenderAttachment) {
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.size = {1, 1, 1};
+    desc.usage = wgpu::TextureUsage::TransientAttachment;
+
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
+}
+
+// Tests that specification of the transient attachment on an unsupported device
+// causes an error.
+TEST_F(TextureValidationTest, TransientAttachmentOnUnsupportedDevice) {
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.size = {1, 1, 1};
+    desc.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TransientAttachment;
+
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
+}
+
 }  // namespace
