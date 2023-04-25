@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d20bcbd0_6517c48e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-25T22:31:37Z",
+      "side": 1,
+      "message": "As I\u0027m looking closer, I\u0027m noticing a few more things. I think we probably should be enabling a few other test suite to be sure this works.\n\n - D3D11Aspect needs to handle other aspect combinations like Aspect::Depth|Stencil. This is the case for T2T copies which according to the spec need to copy both aspects. I guess that code path isn\u0027t tested yet\n - the approach to adding RenderAttachment works, but it\u0027s insufficient for the Clear implementation. We also have InitializeFromExternalTexture which is for importing externally-allocated resources (shared image). For these types of textures, we don\u0027t have opportunity to add BindFlags. What needs to be done is similar to the d3d12 backend. Instead of branching based on wgpu::TextureUsage in Clear, we should branch based on the actual BindFlags of the texture. We\u0027ll need multiple Clear implementations - one for when the texture is renderable, and one for when it is only copyable. So, it might actually be better to NOT add BindFlags so we can test the non-renderable case. That\u0027s how d3d12 works.\nImplementing Texture::Clear should eventually come along with enabling TextureZeroInitTests and NonzeroTextureCreationTests\n - the implementation of Texture::Write doesn\u0027t look like it will work for depth/stencil textures (probably also not tested yet). In D3D12 and the other backends, you have to write depth/stencil textures per-plane. In fact, the webgpu spec requires that you only write one plane at a time. D3D11 is different. You need to write BOTH depth and stencil simultaneously. You can\u0027t write just one. For depth32float-stencil8 that means you should have 32 bits for the float, then 8 bits for the stencil packed right next to each other - so the data is interleaved. The data coming in from WebGPU is not in that format. It is only one plane. So Write there will need some other approach - perhaps by using BlitBufferToDepth and BlitBufferToStencil\nTake a look at DepthStencilCopyTests to verify things work\n - implementation of Texture::Read isn\u0027t going to work for depth/stencil as well given that the data is interleaved D/S/D/S/D/S/... instead of per-plane\n - docs for UpdateSubresource say it\u0027s invalid for depth/stencil textures\n\nI think I\u0027d suggest tackling this incrementally:\n - non-renderable color since we always need the copy path\n - renderable color as an optimization\n - then depth/stencil",
+      "revId": "1d134a045213ee5c937a357515b74109f19859c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "435f7653_67e91106",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-25T22:31:37Z",
+      "side": 1,
+      "message": "what about 3D textures?",
+      "range": {
+        "startLine": 579,
+        "startChar": 2,
+        "endLine": 580,
+        "endChar": 80
+      },
+      "revId": "1d134a045213ee5c937a357515b74109f19859c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
