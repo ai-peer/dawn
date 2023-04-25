@@ -16,6 +16,23 @@
       "message": "lgtm!",
       "revId": "5abf96eafeb58ef2fd29b1d38422d346a2f01cfa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ced8c04_f93c5a4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-25T18:04:26Z",
+      "side": 1,
+      "message": "Loko PTAL",
+      "revId": "5abf96eafeb58ef2fd29b1d38422d346a2f01cfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
