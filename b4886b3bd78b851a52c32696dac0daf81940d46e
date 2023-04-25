@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147dfa7d_85c85b23",
+        "filename": "src/dawn/native/d3d11/AdapterD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-25T17:58:37Z",
+      "side": 1,
+      "message": "I think this syntax won\u0027t compile. It\u0027s a C++ extension that MSVC doesn\u0027t implement (at least that was the case last time we used it)\n\nD3D11 backend I realize probably is not built on our MSVC bots right now. We can do that by editing [dawn.py](recipes/recipes/dawn.py) to set the GN args. Or enabling it with dawn_standalone (but fix the problem so that it doesn\u0027t get enabled in Skia builds).\n\nFor now, I\u0027d recommend not using the syntax and separately getting the d3d11 build enabled on the Dawn standalone bots so we don\u0027t end up with compile failures later.",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 14
+      },
+      "revId": "b4886b3bd78b851a52c32696dac0daf81940d46e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
