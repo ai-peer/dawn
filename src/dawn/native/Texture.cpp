@@ -285,7 +285,8 @@ MaybeError ValidateTextureSize(const DeviceBase* device,
     return {};
 }
 
-MaybeError ValidateTextureUsage(const TextureDescriptor* descriptor,
+MaybeError ValidateTextureUsage(const DeviceBase* device,
+                                const TextureDescriptor* descriptor,
                                 wgpu::TextureUsage usage,
                                 const Format* format) {
     DAWN_TRY(dawn::native::ValidateTextureUsage(usage));
@@ -316,6 +317,12 @@ MaybeError ValidateTextureUsage(const TextureDescriptor* descriptor,
         !format->supportsStorageUsage && (usage & wgpu::TextureUsage::StorageBinding),
         "The texture usage (%s) includes %s, which is incompatible with the format (%s).", usage,
         wgpu::TextureUsage::StorageBinding, format->format);
+
+    DAWN_INVALID_IF(!device->HasFeature(Feature::MemorylessTextures) &&
+                        (usage & wgpu::TextureUsage::TransientAttachment),
+                    "The texture usage (%s) includes %s, which requires the memoryless-textures "
+                    "feature to be set",
+                    usage, wgpu::TextureUsage::TransientAttachment);
 
     // Only allows simple readonly texture usages.
     constexpr wgpu::TextureUsage kValidMultiPlanarUsages =
@@ -355,7 +362,7 @@ MaybeError ValidateTextureDescriptor(const DeviceBase* device,
         usage |= internalUsageDesc->internalUsage;
     }
 
-    DAWN_TRY(ValidateTextureUsage(descriptor, usage, format));
+    DAWN_TRY(ValidateTextureUsage(device, descriptor, usage, format));
     DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
     DAWN_TRY(ValidateSampleCount(descriptor, usage, format));
 

@@ -513,6 +513,12 @@ class Adapter : public AdapterBase {
             EnableFeature(Feature::MultiPlanarFormats);
         }
 
+        DAWN_DEBUG() << "Checking for memoryless textures";
+        if (@available(macOS 11.0, iOS 10.0, *)) {
+            DAWN_DEBUG() << "Enabled memoryless textures";
+            EnableFeature(Feature::MemorylessTextures);
+        }
+
         EnableFeature(Feature::IndirectFirstInstance);
         EnableFeature(Feature::ShaderF16);
         EnableFeature(Feature::RG11B10UfloatRenderable);
