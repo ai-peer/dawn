@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d53ced4_02bca9f8",
+        "filename": "src/tint/reader/spirv/parser_impl_handle_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-04-25T19:13:31Z",
+      "side": 1,
+      "message": "Kind of interesting/lucky the name \u0027offsets2d\u0027 is as good as it is.",
+      "revId": "900d97dd20cba6a13aaae25337605e76d28ce755",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
