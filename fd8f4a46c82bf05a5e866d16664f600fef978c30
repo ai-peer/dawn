@@ -16,6 +16,233 @@
       "message": "Hi Corentin,\n\nI need to resolve some issues with the tests (which passed locally) on the bots, but can you take a look over the body of the CL in parallel? Thanks!",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138d823b_ec8b31df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "Nice first shot at a Dawn feature. Left a bunch of comments with pointers left and right.",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72d0ccb_70961b95",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "nit: given that that the implementation is phrased in terms of transient attachments, we could use that terminology for the feature name as well.",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0327d8d6_db6b49c3",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "nit: we could describe a bit more, wdyt of something like \"Support transient attachments that allows render pass operations to stay in tile memory and avoid VRAM traffic and potentially avoid VRAM allocation for the textures.\" (the potentially is because in some cases there might be an actual memory allocation in case the GPU needs to spill. See https://rosenzweig.io/blog/asahi-gpu-part-5.html for some insights)",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d787b0_c6b7cd8f",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "nit: I think this could be %s with the FeatureName passed as varg (so that it is compile-time checked and formatted consistently).",
+      "range": {
+        "startLine": 323,
+        "startChar": 76,
+        "endLine": 323,
+        "endChar": 95
+      },
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ec8d22_e2dfac75",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "IIRC Vulkan (and Metal probably?) require that TransientAttachment be only used with RenderAttachment (and maybe even require that it is used with RenderAttachment such that the only valid combination with TransientAttachment would be Render|Transient). Can we have an additional validation check for this?",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d74222_000d2efb",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "This needs to be gated on the \"Apple2\" family of GPUs. See the Metal feature tables here https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf Basically this feature requires an explicit tiler GPU like Apple\u0027s (derived from PowerVR GPU design, ARM and Qualcomm are tilers as well). AMD / Intel / Nvidia GPUs are either non-tilers, or opportunistic tilers and can\u0027t support the performance guarantees of this feature.\n\nFor that reason we\u0027ll have to decide what to do for the Vulkan and D3D12 backend: is it better to always advertise the feature so it\u0027s easy to use, but fallback to non-memoryless textures if not available, or is it better to expose it only when available? (I\u0027m leaning towards the former because the structure of Graphite / the program is not likely to change either way so we might as well make it simple to use with no dynamic checks, but could be easily convinced otherwise, for example Graphite will need to support the feature not being present in WASM).",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84959888_2c7d5f94",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "FYI: we have some guidelines for error messages https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md#error-message-formatting though here it is less important because the IOSurface import path is not visible to JS and seldomly used.\n\nAlso it could be worth having a tiny test for this in IOSurfaceWrappingTests.cpp. Though making a device with that feature could be mildly annoying.",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e49b4673_611cb832",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92cdc0ad_ca5a1029",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "No need to handle it here, this is not a usage that represents a use by the GPU and is covered with `wgpu::TextureUsage::RenderAttachment`. However an update will be needed at [1].",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0797a35_c4f8aa99",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "In the validation tests, could we have coverage for the two DAWN_INVALID_IF in TextureBase.cpp?",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ecfa307_f72829a7",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "The way we test optional features in end2end tests is slightly awkward because we need to optionally add the feature then DAWN_TEST_UNSUPPORTED_IF(!has the feature). See for example https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/QueryTests.cpp;drc\u003d34d52ffa4c3a4767b1f3ef38cb9c1f5a7a0bdfb7;l\u003d1155\n\nWe also tend to separate the tests into validation and end2end such that end2end only tests the valid cases on the various backends. (and the frontend must catch all validation errors since the validation tests use the null backend that does nothing).",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a7040fd_671d5f88",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "For end2end tests it might be useful to check one of the expected usages of transient attachments from Graphite: creating a transient MSAAx4 texture, rendering into it (with LoadOp::Clear for example) then resolving into a texture. Then we can check that the resolving correctly worked. Do you think this would be representative or would we need to test something else?",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f41125_5b8bcf9b",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-25T15:33:28Z",
+      "side": 1,
+      "message": "Note that even on a validation error, Dawn will return a valid wgpu::Texture pointer. This is part of the general handling mechanism of WebGPU: https://gpuweb.github.io/gpuweb/explainer/#invalid-and-destroyed\n\nThe test harness checks that no unexpected validation error happens outside of an ASSERT_DEVICE_ERROR and that\u0027s how we test the \"success cases\": doing the call doesn\u0027t trigger this check. Note that just checking that the creation succeeds is more of a validation test.",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
