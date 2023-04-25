@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1f11ffa_3e06b8a1",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-25T22:02:33Z",
+      "side": 1,
+      "message": "Yes, the resolver has to have run before IR, which means const-eval has already run. So, the IR assumes const-eval has happened.\n\nTechnically for this it doesn\u0027t matter as it would just generate the expression anyway, so it would work, I believe.",
+      "parentUuid": "cf3a25f2_8ccd5a74",
+      "range": {
+        "startLine": 177,
+        "startChar": 51,
+        "endLine": 177,
+        "endChar": 64
+      },
+      "revId": "a79332053b0418cee60d32f927c409e6c488f885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b49e5683_ddd84427",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-25T21:47:43Z",
       "side": 1,
       "message": "Still feel this separation is unnecessary and inefficient.",
+      "range": {
+        "startLine": 642,
+        "startChar": 11,
+        "endLine": 642,
+        "endChar": 27
+      },
+      "revId": "a79332053b0418cee60d32f927c409e6c488f885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a304c429_c84b3441",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-25T22:02:33Z",
+      "side": 1,
+      "message": "Possibly, if we find it\u0027s causing perf issues we can change it later. Conceptually, to me, it makes sense as they\u0027re different things.",
+      "parentUuid": "b49e5683_ddd84427",
       "range": {
         "startLine": 642,
         "startChar": 11,
