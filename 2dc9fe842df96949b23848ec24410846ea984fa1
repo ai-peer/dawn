@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b1842c0_26f063a5",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-25T17:57:10Z",
+      "side": 1,
+      "message": "So this is a local static variable, so this would also result in a bug. Can we make this a global static variable?\n\nenga@ cwallez@",
+      "revId": "2dc9fe842df96949b23848ec24410846ea984fa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
