@@ -16,6 +16,52 @@
       "message": "PTAL.",
       "revId": "a79332053b0418cee60d32f927c409e6c488f885",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3a25f2_8ccd5a74",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-25T21:47:43Z",
+      "side": 1,
+      "message": "So all constant expressions are folded before the IR is generated? I forget where we landed on this.",
+      "range": {
+        "startLine": 177,
+        "startChar": 51,
+        "endLine": 177,
+        "endChar": 64
+      },
+      "revId": "a79332053b0418cee60d32f927c409e6c488f885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49e5683_ddd84427",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-25T21:47:43Z",
+      "side": 1,
+      "message": "Still feel this separation is unnecessary and inefficient.",
+      "range": {
+        "startLine": 642,
+        "startChar": 11,
+        "endLine": 642,
+        "endChar": 27
+      },
+      "revId": "a79332053b0418cee60d32f927c409e6c488f885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
