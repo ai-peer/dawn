@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcdea322_2af6371c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-26T16:33:01Z",
+      "side": 1,
+      "message": "I thought this problem again. I think we need to force the callers to use offset and size with right alignment for uniform buffers for below reasons:\n1. If the it is not aligned, we have to add padding to the source data. But the padding data will overwrite part of uniform buffer. Those area of the uniform could be meaningful to shaders.\n2. Even if we use `CopySubresourceRegion()`, it still requires the offset and size alignment. it will overwrite padding area as well.\n3. Otherwise, we have to readback padding area first.",
+      "parentUuid": "6067cdb4_cbbe7666",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
