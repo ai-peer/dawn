@@ -75,6 +75,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b27faf58_242021a5",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b72d0ccb_70961b95",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5772fbf2_51266110",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dce6e2c_76942413",
+      "range": {
+        "startLine": 1458,
+        "startChar": 76,
+        "endLine": 1458,
+        "endChar": 84
+      },
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0327d8d6_db6b49c3",
@@ -88,6 +130,24 @@
       "writtenOn": "2023-04-25T15:33:28Z",
       "side": 1,
       "message": "nit: we could describe a bit more, wdyt of something like \"Support transient attachments that allows render pass operations to stay in tile memory and avoid VRAM traffic and potentially avoid VRAM allocation for the textures.\" (the potentially is because in some cases there might be an actual memory allocation in case the GPU needs to spill. See https://rosenzweig.io/blog/asahi-gpu-part-5.html for some insights)",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "863c3ff0_64f3e649",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "SGTM! Done.",
+      "parentUuid": "0327d8d6_db6b49c3",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bcfa812_56f7b796",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90d787b0_c6b7cd8f",
+      "range": {
+        "startLine": 323,
+        "startChar": 76,
+        "endLine": 323,
+        "endChar": 95
+      },
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68ec8d22_e2dfac75",
@@ -128,6 +212,24 @@
       "writtenOn": "2023-04-25T15:33:28Z",
       "side": 1,
       "message": "IIRC Vulkan (and Metal probably?) require that TransientAttachment be only used with RenderAttachment (and maybe even require that it is used with RenderAttachment such that the only valid combination with TransientAttachment would be Render|Transient). Can we have an additional validation check for this?",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da79a1a6_6e025155",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68ec8d22_e2dfac75",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -151,6 +253,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef1980d1_b2d8d295",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Nice! I was wondering what to do about that. We can reach out to Skia whether they would prefer to have it always possible to set the usage bit or would prefer to know whether transient attachments are actually supported?",
+      "parentUuid": "39d74222_000d2efb",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84959888_2c7d5f94",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
@@ -162,6 +282,24 @@
       "writtenOn": "2023-04-25T15:33:28Z",
       "side": 1,
       "message": "FYI: we have some guidelines for error messages https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md#error-message-formatting though here it is less important because the IOSurface import path is not visible to JS and seldomly used.\n\nAlso it could be worth having a tiny test for this in IOSurfaceWrappingTests.cpp. Though making a device with that feature could be mildly annoying.",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "476979c5_271f534a",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Thanks for the pointer! Error message updated.",
+      "parentUuid": "84959888_2c7d5f94",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -202,6 +340,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f09e24c_a30155ce",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Thanks! Done.",
+      "parentUuid": "92cdc0ad_ca5a1029",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0797a35_c4f8aa99",
         "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
         "patchSetId": 3
@@ -213,6 +369,24 @@
       "writtenOn": "2023-04-25T15:33:28Z",
       "side": 1,
       "message": "In the validation tests, could we have coverage for the two DAWN_INVALID_IF in TextureBase.cpp?",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b569787_232d981c",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0797a35_c4f8aa99",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -230,6 +404,24 @@
       "writtenOn": "2023-04-25T15:33:28Z",
       "side": 1,
       "message": "The way we test optional features in end2end tests is slightly awkward because we need to optionally add the feature then DAWN_TEST_UNSUPPORTED_IF(!has the feature). See for example https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/QueryTests.cpp;drc\u003d34d52ffa4c3a4767b1f3ef38cb9c1f5a7a0bdfb7;l\u003d1155\n\nWe also tend to separate the tests into validation and end2end such that end2end only tests the valid cases on the various backends. (and the frontend must catch all validation errors since the validation tests use the null backend that does nothing).",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4faaf81a_a80b5276",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ecfa307_f72829a7",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -253,6 +445,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c20b86c_e9cbb11f",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Naively this sounds right to me, but I can check with Skia. In the meantime I adapted one of the existing tests in MultisampledRenderingTests.cpp, but it fails when on all variants of the Metal backend other than \"always_resolve_into_zero_level_and_layer\" when run locally:\n\n[ RUN      ] MultisampledRenderingWithTransientAttachmentTest.ResolveTransientAttachmentInto2DTexture/Metal_Apple_M1_Max\n../../src/dawn/tests/DawnTest.cpp:1620: Failure\nValue of: result\n  Actual: false (Expected data[0] to be within RGBA8(1, 1, 1, 1) of RGBA8(0, 102, 0, 102), actual RGBA8(0, 0, 0, 0)\nExpected:\n00 66 00 66 \nActual:\n00 00 00 00 \n Expectation created at ../../src/dawn/tests/end2end/MultisampledRenderingTests.cpp:199\n)\nExpected: true\n\nI\u0027m out of my depth as to whether it\u0027s failing because I\u0027m holding it wrong somehow, or because there\u0027s something else going on. Feedback welcome!",
+      "parentUuid": "6a7040fd_671d5f88",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6f41125_5b8bcf9b",
         "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
         "patchSetId": 3
@@ -264,6 +474,24 @@
       "writtenOn": "2023-04-25T15:33:28Z",
       "side": 1,
       "message": "Note that even on a validation error, Dawn will return a valid wgpu::Texture pointer. This is part of the general handling mechanism of WebGPU: https://gpuweb.github.io/gpuweb/explainer/#invalid-and-destroyed\n\nThe test harness checks that no unexpected validation error happens outside of an ASSERT_DEVICE_ERROR and that\u0027s how we test the \"success cases\": doing the call doesn\u0027t trigger this check. Note that just checking that the creation succeeds is more of a validation test.",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7742c90e_5bc098b8",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Thanks for the info!",
+      "parentUuid": "d6f41125_5b8bcf9b",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

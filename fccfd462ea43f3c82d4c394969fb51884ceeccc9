@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124c2f4e_f43cb9f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T09:50:29Z",
+      "side": 1,
+      "message": "Thanks! Addressed all comments, but I couldn\u0027t quite get the E2E test working and have a question to you about that [1]. Sending out to get feedback on that question while running the rest of the change through the trybots. Feel free to defer the rest of the re-review until we resolve that question and I can verify that the trybots are working.\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/129080/comment/6a7040fd_671d5f88/",
+      "revId": "fccfd462ea43f3c82d4c394969fb51884ceeccc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
