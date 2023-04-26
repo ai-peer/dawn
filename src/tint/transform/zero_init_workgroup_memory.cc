@@ -444,7 +444,7 @@ struct ZeroInitWorkgroupMemory::State {
         if (ty->Is<type::Atomic>()) {
             return false;
         }
-        if (auto* str = ty->As<sem::Struct>()) {
+        if (auto* str = ty->As<type::Struct>()) {
             for (auto* member : str->Members()) {
                 if (!CanTriviallyZero(member->Type())) {
                     return false;
