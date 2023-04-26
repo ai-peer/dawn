@@ -74,6 +74,8 @@ class MultithreadTests : public DawnTest {
 
         // TODO(crbug.com/dawn/1679): OpenGL backend doesn't support thread safe API yet.
         DAWN_TEST_UNSUPPORTED_IF(IsOpenGL() || IsOpenGLES());
+
+        DAWN_TEST_UNSUPPORTED_IF(IsD3D12());
     }
 
     wgpu::Buffer CreateBuffer(uint32_t size, wgpu::BufferUsage usage) {
@@ -652,6 +654,8 @@ class MultithreadTextureCopyTests : public MultithreadTests {
         // TODO(crbug.com/dawn/1291): These tests are failing on GLES (both native and ANGLE)
         // when using Tint/GLSL.
         DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+
+        DAWN_TEST_UNSUPPORTED_IF(IsD3D12());
     }
 
     wgpu::Texture CreateAndWriteTexture(uint32_t width,
