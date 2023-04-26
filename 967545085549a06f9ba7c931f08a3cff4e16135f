@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beab3985_917027fd",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-26T19:27:12Z",
+      "side": 1,
+      "message": "This is probably fine for now, but we may want to consider breaking ir into the ir and the ir_creation srcs. Then `ast` and `sem` would be unknown to `ir` and known to `ir_creation`. (possibly `program` as well?)",
+      "revId": "967545085549a06f9ba7c931f08a3cff4e16135f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4e81c3c_6290d290",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-26T19:27:12Z",
+      "side": 1,
+      "message": "Should we add the ir tests into gn as well?",
+      "revId": "967545085549a06f9ba7c931f08a3cff4e16135f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
