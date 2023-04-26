@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19f36a53_60c628c6",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-26T20:42:34Z",
+      "side": 1,
+      "message": "Ugh, yea we\u0027ll need to untangle it at some point. Let\u0027s ignore for now, can you file a bug to remove `libtint_ast_src` and `libtint_sem_src` from the core IR by splitting it apart and we can do it later?",
+      "parentUuid": "177ab52f_eb9f30e6",
+      "revId": "967545085549a06f9ba7c931f08a3cff4e16135f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4e81c3c_6290d290",
         "filename": "src/tint/BUILD.gn",
         "patchSetId": 3
