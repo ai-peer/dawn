@@ -1003,7 +1003,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
         func->AddParameter(p);
 
         auto* p_ty = const_cast<type::Type*>(p->Type());
-        if (auto* str = p_ty->As<sem::Struct>()) {
+        if (auto* str = p_ty->As<type::Struct>()) {
             switch (decl->PipelineStage()) {
                 case ast::PipelineStage::kVertex:
                     str->AddUsage(type::PipelineStageUsage::kVertexInput);
@@ -1105,7 +1105,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
         }
     }
 
-    if (auto* str = return_type->As<sem::Struct>()) {
+    if (auto* str = return_type->As<type::Struct>()) {
         if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kUndefined, str, decl->source)) {
             AddNote("while instantiating return type for " + decl->name->symbol.Name(),
                     decl->source);
