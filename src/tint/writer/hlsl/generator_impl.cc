@@ -4224,7 +4224,7 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
                             TINT_ICE(Writer, diagnostics_) << "invalid entry point IO struct uses";
                         }
 
-                        auto loc = mem->Location().value();
+                        auto loc = mem->Attributes().location.value();
                         if (pipeline_stage_uses.count(type::PipelineStageUsage::kVertexInput)) {
                             post += " : TEXCOORD" + std::to_string(loc);
                         } else if (pipeline_stage_uses.count(

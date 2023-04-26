@@ -100,10 +100,9 @@ Transform::ApplyResult TruncateInterstageVariables::Apply(const Program* src,
         utils::Hashset<const sem::StructMember*, 16u> omit_members;
 
         for (auto* member : struct_ty->members) {
-            if (ast::GetAttribute<ast::LocationAttribute>(member->attributes)) {
-                auto* m = sem.Get(member);
-                uint32_t location = m->Location().value();
-                if (!data->interstage_locations.test(location)) {
+            auto* m = sem.Get(member);
+            if (auto location = m->Attributes().location) {
+                if (!data->interstage_locations.test(*location)) {
                     omit_members.Add(m);
                 }
             }

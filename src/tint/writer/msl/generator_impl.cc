@@ -2873,7 +2873,7 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
                             return false;
                         }
 
-                        uint32_t loc = mem->Location().value();
+                        uint32_t loc = mem->Attributes().location.value();
                         if (pipeline_stage_uses.count(type::PipelineStageUsage::kVertexInput)) {
                             out << " [[attribute(" + std::to_string(loc) + ")]]";
                         } else if (pipeline_stage_uses.count(

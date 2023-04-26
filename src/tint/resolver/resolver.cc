@@ -4033,7 +4033,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         bool has_offset_attr = false;
         bool has_align_attr = false;
         bool has_size_attr = false;
-        std::optional<uint32_t> location;
+        type::StructMemberAttributes attributes;
         for (auto* attribute : member->attributes) {
             Mark(attribute);
             bool ok = Switch(
@@ -4134,10 +4134,17 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                     if (!value) {
                         return false;
                     }
-                    location = value.Get();
+                    attributes.location = value.Get();
                     return true;
                 },
-                [&](const ast::BuiltinAttribute* attr) -> bool { return BuiltinAttribute(attr); },
+                [&](const ast::BuiltinAttribute* attr) {
+                    auto value = BuiltinAttribute(attr);
+                    if (!value) {
+                        return false;
+                    }
+                    attributes.builtin = value.Get();
+                    return true;
+                },
                 [&](const ast::InterpolateAttribute* attr) { return InterpolateAttribute(attr); },
                 [&](const ast::InvariantAttribute* attr) { return InvariantAttribute(attr); },
                 [&](const ast::StrideAttribute* attr) {
@@ -4175,7 +4182,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         auto* sem_member = builder_->create<sem::StructMember>(
             member, member->source, member->name->symbol, type,
             static_cast<uint32_t>(sem_members.Length()), static_cast<uint32_t>(offset),
-            static_cast<uint32_t>(align), static_cast<uint32_t>(size), location);
+            static_cast<uint32_t>(align), static_cast<uint32_t>(size), attributes);
         builder_->Sem().Add(member, sem_member);
         sem_members.Push(sem_member);
 
