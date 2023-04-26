@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4e3f7e0_e6a8d657",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-26T16:04:11Z",
+      "side": 1,
+      "message": "`DynamicUploader` assumes the backend can use unmapped buffers as copy source. However it is not allowed with D3D11. If we want to use `CopySubresourceRegioin()`, we have to implement another DynaimcUploader inside d3d11 backend. And `Map` \u0026 `Unmap` are not threadsafe, will DynamicUploader be used off the GPU main thread?\n\n``` Note  D3D11_USAGE_DYNAMIC resources consume specific hardware capabilities. Therefore, use them sparingly. ``` Seems it consumes limited GPU resources, over allocating dynamic resources will affect system performance? I think dynamic resources are not designed for staging usage?\n\nThe simplest way is just split this upload to two UpdateSubresource() calls if the data size is not 16 bytes aligned. One for `[0, Align(size - 16, 16))`, and one for `[Align(size - 16, 16), Align(size - 16, 16) + 16)` with a 16 bytes temp buffer.",
+      "parentUuid": "08be0c1b_02e9fe03",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
