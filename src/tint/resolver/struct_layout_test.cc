@@ -34,7 +34,7 @@ TEST_F(ResolverStructLayoutTest, Scalars) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 12u);
     EXPECT_EQ(sem->SizeNoPadding(), 12u);
@@ -69,7 +69,7 @@ TEST_F(ResolverStructLayoutTest, ScalarsWithF16) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 24u);
     EXPECT_EQ(sem->SizeNoPadding(), 22u);
@@ -116,7 +116,7 @@ TEST_F(ResolverStructLayoutTest, Alias) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 8u);
     EXPECT_EQ(sem->SizeNoPadding(), 8u);
@@ -145,7 +145,7 @@ TEST_F(ResolverStructLayoutTest, ImplicitStrideArrayStaticSize) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 52u);
     EXPECT_EQ(sem->SizeNoPadding(), 52u);
@@ -185,7 +185,7 @@ TEST_F(ResolverStructLayoutTest, ExplicitStrideArrayStaticSize) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 164u);
     EXPECT_EQ(sem->SizeNoPadding(), 164u);
@@ -220,7 +220,7 @@ TEST_F(ResolverStructLayoutTest, ImplicitStrideArrayRuntimeSized) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 4u);
     EXPECT_EQ(sem->SizeNoPadding(), 4u);
@@ -241,7 +241,7 @@ TEST_F(ResolverStructLayoutTest, ExplicitStrideArrayRuntimeSized) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 32u);
     EXPECT_EQ(sem->SizeNoPadding(), 32u);
@@ -264,7 +264,7 @@ TEST_F(ResolverStructLayoutTest, ImplicitStrideArrayOfExplicitStrideArray) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 384u);
     EXPECT_EQ(sem->SizeNoPadding(), 384u);
@@ -291,7 +291,7 @@ TEST_F(ResolverStructLayoutTest, ImplicitStrideArrayOfStructure) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 576u);
     EXPECT_EQ(sem->SizeNoPadding(), 576u);
@@ -314,7 +314,7 @@ TEST_F(ResolverStructLayoutTest, Vector) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 48u);
     EXPECT_EQ(sem->SizeNoPadding(), 48u);
@@ -360,7 +360,7 @@ TEST_F(ResolverStructLayoutTest, Matrix) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 576u);
     EXPECT_EQ(sem->SizeNoPadding(), 576u);
@@ -438,7 +438,7 @@ TEST_F(ResolverStructLayoutTest, NestedStruct) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 80u);
     EXPECT_EQ(sem->SizeNoPadding(), 68u);
@@ -473,7 +473,7 @@ TEST_F(ResolverStructLayoutTest, SizeAttributes) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 76u);
     EXPECT_EQ(sem->SizeNoPadding(), 76u);
@@ -511,7 +511,7 @@ TEST_F(ResolverStructLayoutTest, AlignAttributes) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 96u);
     EXPECT_EQ(sem->SizeNoPadding(), 68u);
@@ -541,7 +541,7 @@ TEST_F(ResolverStructLayoutTest, StructWithLotsOfPadding) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 1024u);
     EXPECT_EQ(sem->SizeNoPadding(), 4u);
@@ -571,7 +571,7 @@ TEST_F(ResolverStructLayoutTest, OffsetAttributes) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
-    auto* sem = TypeOf(s)->As<sem::Struct>();
+    auto* sem = TypeOf(s)->As<type::Struct>();
     ASSERT_NE(sem, nullptr);
     EXPECT_EQ(sem->Size(), 132u);
     EXPECT_EQ(sem->SizeNoPadding(), 132u);
