@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08be0c1b_02e9fe03",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-26T15:08:39Z",
+      "side": 1,
+      "message": "I\u0027m not sure we can make this ASSERT about dstBox.left. In WebGPU, the buffer offset for writeBuffer must be aligned to 4 bytes, so the application can easily send writeBuffers that aren\u0027t aligned.\n\nThis could be a may be a good reason for us to implement the DynamicUploader class in Dawn using buffers with D3D11_USAGE_DYNAMIC. writeBuffer will write into that buffer, and then CopySubresourceRegion into the destination.\n\nwe\u0027ll have to use this fallback mechanism whenever the sizes are not nicely aligned, or `UpdateSubresource1` is not supported by the driver.",
+      "parentUuid": "c4d873e8_a192fc3d",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
