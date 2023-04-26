@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c6d94cf_9e4cee4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-26T17:09:17Z",
+      "side": 1,
+      "message": "This CL only enables part of tests in CopyTests.cpp. There are functions are missing. For example: Copy between 2d and 3d textures. there will be following up CLs for then.\n\nAnd because using GPU to clear textures is easier to implement. So I did it first. For clearing textures with data copy, I will implement it in follow-up CLs as well.\n\nI tried enabling TextureZeroInitTests, and found out it needs B2T, T2B and T2T copies. So they have to be enabled after CopyTests.\n\nFYI, we are using [1] to track end2end tests, will make sure all tests will be processed.\n\n[1] https://docs.google.com/spreadsheets/d/1q92nfMMLc9MUW976Y-Txk3tzNOdp9eY1MKhqbFarJpk/edit?resourcekey\u003d0-QurcuMefwg447hihiz1P7A#gid\u003d0",
+      "parentUuid": "d20bcbd0_6517c48e",
+      "revId": "1d134a045213ee5c937a357515b74109f19859c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "435f7653_67e91106",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 11
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-25T22:31:37Z",
       "side": 1,
       "message": "what about 3D textures?",
+      "range": {
+        "startLine": 579,
+        "startChar": 2,
+        "endLine": 580,
+        "endChar": 80
+      },
+      "revId": "1d134a045213ee5c937a357515b74109f19859c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33bfc7ab_ea2df0fc",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-26T17:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "435f7653_67e91106",
       "range": {
         "startLine": 579,
         "startChar": 2,
