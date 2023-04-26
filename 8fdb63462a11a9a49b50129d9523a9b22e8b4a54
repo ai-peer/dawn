@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a090e82f_61ca0ba5",
+        "filename": "src/dawn/native/CommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-04-26T18:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad7ffecd_f6949e2e",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 84
+      },
+      "revId": "8fdb63462a11a9a49b50129d9523a9b22e8b4a54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85ea221b_0ff0c426",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-04-24T16:46:03Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 84
+      },
+      "revId": "8fdb63462a11a9a49b50129d9523a9b22e8b4a54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f63463_ab9a3187",
+        "filename": "src/dawn/native/RenderBundle.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-04-26T18:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85ea221b_0ff0c426",
       "range": {
         "startLine": 61,
         "startChar": 4,
