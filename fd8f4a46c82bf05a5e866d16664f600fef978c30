@@ -463,6 +463,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70e852d6_29c5b17b",
+        "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T12:06:38Z",
+      "side": 1,
+      "message": "Thanks for the offline discussion - the problem was indeed that the pipeline was configured to store rather than discard. Fixed, and the test now passes locally. Do you think that there\u0027s a way that we can detect this case and raise an error of some kind?",
+      "parentUuid": "4c20b86c_e9cbb11f",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6f41125_5b8bcf9b",
         "filename": "src/dawn/tests/end2end/TextureUsageTests.cpp",
         "patchSetId": 3

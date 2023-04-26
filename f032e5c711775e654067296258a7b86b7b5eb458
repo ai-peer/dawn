@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8048911_a6987c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-26T12:06:38Z",
+      "side": 1,
+      "message": "Ready for re-review now, thanks! Response to reviews is diff between PS3 and PS6.",
+      "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
