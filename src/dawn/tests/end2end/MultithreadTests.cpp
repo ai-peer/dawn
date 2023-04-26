@@ -215,6 +215,10 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
     // TODO(crbug.com/dawn/1766): TSAN reported race conditions in NVIDIA's vk driver.
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia() && IsTsan());
 
+    // TODO(crbug.com/dawn/1779): This test seems to cause flakiness in other sampling tests on
+    // NVIDIA.
+    DAWN_SUPPRESS_TEST_IF(IsNvidia());
+
     std::vector<wgpu::ComputePipeline> pipelines(10);
     std::vector<std::string> shaderSources(pipelines.size());
     std::vector<uint32_t> expectedValues(shaderSources.size());
@@ -303,6 +307,10 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
 TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
     // TODO(crbug.com/dawn/1766): TSAN reported race conditions in NVIDIA's vk driver.
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia() && IsTsan());
+
+    // TODO(crbug.com/dawn/1779): This test seems to cause flakiness in other sampling tests on
+    // NVIDIA.
+    DAWN_SUPPRESS_TEST_IF(IsNvidia());
 
     constexpr uint32_t kNumThreads = 10;
     constexpr wgpu::TextureFormat kRenderAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
