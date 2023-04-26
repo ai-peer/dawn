@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "177ab52f_eb9f30e6",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-04-26T20:36:15Z",
+      "side": 1,
+      "message": "I had a quick go at this but there appears to be a cyclical dependency between `ir::Builder` and `ir::Module`. Perhaps `Module::FromProgram()` needs to be moved to the IR builder headers instead?",
+      "parentUuid": "beab3985_917027fd",
+      "revId": "967545085549a06f9ba7c931f08a3cff4e16135f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4e81c3c_6290d290",
         "filename": "src/tint/BUILD.gn",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-26T19:27:12Z",
       "side": 1,
       "message": "Should we add the ir tests into gn as well?",
+      "revId": "967545085549a06f9ba7c931f08a3cff4e16135f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39a4416_dd54346b",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-04-26T20:36:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4e81c3c_6290d290",
       "revId": "967545085549a06f9ba7c931f08a3cff4e16135f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
