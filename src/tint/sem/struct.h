@@ -42,7 +42,6 @@ class Struct final : public utils::Castable<Struct, type::Struct> {
   public:
     /// Constructor
     /// @param declaration the AST structure declaration
-    /// @param source the source of the structure
     /// @param name the name of the structure
     /// @param members the structure members
     /// @param align the byte alignment of the structure
@@ -50,7 +49,6 @@ class Struct final : public utils::Castable<Struct, type::Struct> {
     /// @param size_no_padding size of the members without the end of structure
     /// alignment padding
     Struct(const ast::Struct* declaration,
-           tint::Source source,
            Symbol name,
            utils::VectorRef<const StructMember*> members,
            uint32_t align,
@@ -77,7 +75,6 @@ class StructMember final : public utils::Castable<StructMember, type::StructMemb
   public:
     /// Constructor
     /// @param declaration the AST declaration node
-    /// @param source the source of the struct member
     /// @param name the name of the structure member
     /// @param type the type of the member
     /// @param index the index of the member in the structure
@@ -86,7 +83,6 @@ class StructMember final : public utils::Castable<StructMember, type::StructMemb
     /// @param size the byte size of the member
     /// @param location the location attribute, if present
     StructMember(const ast::StructMember* declaration,
-                 tint::Source source,
                  Symbol name,
                  const type::Type* type,
                  uint32_t index,

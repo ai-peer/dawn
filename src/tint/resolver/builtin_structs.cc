@@ -46,7 +46,6 @@ sem::Struct* BuildStruct(ProgramBuilder& b,
         max_align = std::max(max_align, align);
         members.Push(b.create<sem::StructMember>(
             /* declaration */ nullptr,
-            /* source */ Source{},
             /* name */ b.Sym(m.name),
             /* type */ m.type,
             /* index */ static_cast<uint32_t>(members.Length()),
@@ -60,7 +59,6 @@ sem::Struct* BuildStruct(ProgramBuilder& b,
     uint32_t size_with_padding = utils::RoundUp(max_align, offset);
     return b.create<sem::Struct>(
         /* declaration */ nullptr,
-        /* source */ Source{},
         /* name */ b.Sym(name),
         /* members */ std::move(members),
         /* align */ max_align,
