@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77c73fbb_036cce72",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-04-26T20:50:24Z",
+      "side": 1,
+      "message": "Done: crbug.com/tint/1921",
+      "parentUuid": "19f36a53_60c628c6",
+      "revId": "967545085549a06f9ba7c931f08a3cff4e16135f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4e81c3c_6290d290",
