@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6067cdb4_cbbe7666",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-26T16:11:28Z",
+      "side": 1,
+      "message": "we\u0027d just have one or a couple D3D11_USAGE_DYNAMIC so I\u0027m not that worried. But yes the usage pattern is slightly different for d3d11 because of the map contraints.\nit would also be fine to use a staging buffer, but the microsoft folks suggested DYNAMIC could be could for MapWrite|CopySrc which is the use case here.\nThese uploads happen in WriteBuffer/WriteTexture which is an \"Execution\" concept. So it would have acquired the lock for that already.\n\n\u003e The simplest way is just split this upload to two UpdateSubresource() calls\n\nI don\u0027t understand - how do you write region [4, 24) ?\nIf I\u0027m understanding the docs right, BOTH the offset and offset+size need to be 16-byte aligned.",
+      "parentUuid": "b4e3f7e0_e6a8d657",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
