@@ -152,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc0d907_ad43ca6c",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "863c3ff0_64f3e649",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90d787b0_c6b7cd8f",
@@ -271,6 +289,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b16aa8a_25b17b15",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "That sounds good! And we can always changes things later when memoryless is upstreamed in the WebGPU spec (I expect it to be an important post-V1 feature, especially for us on Android and for Apple on all their Apple GPUs)",
+      "parentUuid": "ef1980d1_b2d8d295",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84959888_2c7d5f94",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
@@ -300,6 +336,24 @@
       "side": 1,
       "message": "Thanks for the pointer! Error message updated.",
       "parentUuid": "84959888_2c7d5f94",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbfd6bd1_5166c7bc",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "476979c5_271f534a",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -352,6 +406,24 @@
       "side": 1,
       "message": "Thanks! Done.",
       "parentUuid": "92cdc0ad_ca5a1029",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9b4e9c_78d33ddd",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1f09e24c_a30155ce",
       "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

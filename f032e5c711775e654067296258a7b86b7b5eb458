@@ -16,6 +16,97 @@
       "message": "Ready for re-review now, thanks! Response to reviews is diff between PS3 and PS6.",
       "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57af2f4_d158b843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "Whoops, missed a couple things in the first review. It\u0027s nice that the test caught some of them.",
+      "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f121eef7_b6ac35af",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "I think we need to check that the usage must be exactly Render | Transient, for example Render | Transient | Sampled is invalid because the texture can never be sampled. We probably need at least one validation to cover that.",
+      "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35b2cec_86473cfd",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "nit: here or as a follow-up can we add support for Feature in https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/webgpu_absl_format.h;drc\u003de8dd681f1954bc3c780a887e4a0d87c9d1621369;l\u003d139 so that we don\u0027t need to convert to the APIFeature?",
+      "range": {
+        "startLine": 333,
+        "startChar": 20,
+        "endLine": 333,
+        "endChar": 43
+      },
+      "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696d845a_ec24c66f",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "We should add validation for that and LoadOp::Clear being forced as well as discussed at lunch. And probably more validation tests :/",
+      "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff960e6b_8cd0bcb6",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T12:23:05Z",
+      "side": 1,
+      "message": "nit: Would it be possible to have a control case as well (where we enable the extension and create a valid transient texture?)",
+      "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
