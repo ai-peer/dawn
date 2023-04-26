@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "512c62bd_150e9300",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-26T14:22:46Z",
+      "side": 1,
+      "message": "lgtm w/ nits.",
+      "revId": "ef837fb4816d52b1b4529119058ff6d185decf8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e8bdcb_1ed1e950",
+        "filename": "src/tint/builtin/attribute_bench.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-26T14:22:46Z",
+      "side": 1,
+      "message": "I assume this generated here? Can we move it to the next line as it looks like it\u0027s associated to the previous declaration, but really it\u0027s the rest of the file (i believe)",
+      "revId": "ef837fb4816d52b1b4529119058ff6d185decf8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59245c1_2f03ff0b",
+        "filename": "src/tint/resolver/builtin_structs_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-26T14:22:46Z",
+      "side": 1,
+      "message": "I know your timezone is ahead of ours, but I didn\u0027t realize it was _this far_ ahead.",
+      "revId": "ef837fb4816d52b1b4529119058ff6d185decf8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
