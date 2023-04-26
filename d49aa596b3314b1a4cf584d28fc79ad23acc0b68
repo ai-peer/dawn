@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "d49aa596b3314b1a4cf584d28fc79ad23acc0b68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5280b1fd_4855c7e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-26T11:33:35Z",
+      "side": 1,
+      "message": "I appreciate the effort here, but this analysis really belongs at the level of the new IR, which isn\u0027t ready just yet.\n\nMost of the existing transforms will be replaced with an equivalent IR transform, so I\u0027m hesitant to add more logic to the old framework.\n\nThe `IntergerValueRange` looks like the seed of something I\u0027d imagine we\u0027ll need for interval lists. I\u0027d be happy to land some well-tested utility code for interval ranges. Something that can represent unbounded intervals of various data types, and support interval union / difference ops, queries, etc.",
+      "revId": "d49aa596b3314b1a4cf584d28fc79ad23acc0b68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
