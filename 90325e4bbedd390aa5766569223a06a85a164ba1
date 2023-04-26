@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3b253a7_7a17c54a",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-26T12:40:06Z",
+      "side": 1,
+      "message": "Makes sense. \u0027else\u0027 is unnecessary. I confused it with CRV.",
+      "parentUuid": "4a66a8e4_39a40ca6",
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbab96fe_19ab592a",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4740d462_815624e1",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-26T12:40:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bbab96fe_19ab592a",
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f1bfbaf_a5bac5e5",
@@ -82,6 +118,30 @@
       "writtenOn": "2023-04-26T11:51:14Z",
       "side": 1,
       "message": "nit: alignment. But why is this needed? Shouldn\u0027t the code at [1] already take care of it?",
+      "range": {
+        "startLine": 53,
+        "startChar": 55,
+        "endLine": 53,
+        "endChar": 62
+      },
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95894e17_48c086a6",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-26T12:40:06Z",
+      "side": 1,
+      "message": "You are right. [1] should take care of it already. Can\u0027t recall how it came to me.",
+      "parentUuid": "2f1bfbaf_a5bac5e5",
       "range": {
         "startLine": 53,
         "startChar": 55,
