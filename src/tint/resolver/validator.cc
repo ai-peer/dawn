@@ -401,7 +401,7 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
     };
 
     auto is_uniform_struct = [address_space](const type::Type* ty) {
-        return address_space == builtin::AddressSpace::kUniform && ty->Is<sem::Struct>();
+        return address_space == builtin::AddressSpace::kUniform && ty->Is<type::Struct>();
     };
 
     auto required_alignment_of = [&](const type::Type* ty) {
@@ -413,7 +413,7 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
         return required_align;
     };
 
-    auto member_name_of = [](const sem::StructMember* sm) { return sm->Name().Name(); };
+    auto member_name_of = [](const type::StructMember* sm) { return sm->Name().Name(); };
 
     // Only validate the [type + address space] once
     if (!valid_type_storage_layouts_.Add(TypeAndAddressSpace{store_ty, address_space})) {
