@@ -68,6 +68,24 @@
       "message": "I know your timezone is ahead of ours, but I didn\u0027t realize it was _this far_ ahead.",
       "revId": "ef837fb4816d52b1b4529119058ff6d185decf8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce2df90e_85733e55",
+        "filename": "src/tint/resolver/builtin_structs_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-26T14:30:47Z",
+      "side": 1,
+      "message": "heh. Done.",
+      "parentUuid": "d59245c1_2f03ff0b",
+      "revId": "ef837fb4816d52b1b4529119058ff6d185decf8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
