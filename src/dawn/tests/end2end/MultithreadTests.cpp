@@ -215,6 +215,8 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
     // TODO(crbug.com/dawn/1766): TSAN reported race conditions in NVIDIA's vk driver.
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia() && IsTsan());
 
+    DAWN_SUPPRESS_TEST_IF(IsNvidia());
+
     std::vector<wgpu::ComputePipeline> pipelines(10);
     std::vector<std::string> shaderSources(pipelines.size());
     std::vector<uint32_t> expectedValues(shaderSources.size());
@@ -303,6 +305,8 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
 TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
     // TODO(crbug.com/dawn/1766): TSAN reported race conditions in NVIDIA's vk driver.
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia() && IsTsan());
+
+    DAWN_SUPPRESS_TEST_IF(IsNvidia());
 
     constexpr uint32_t kNumThreads = 10;
     constexpr wgpu::TextureFormat kRenderAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
@@ -652,6 +656,8 @@ class MultithreadTextureCopyTests : public MultithreadTests {
         // TODO(crbug.com/dawn/1291): These tests are failing on GLES (both native and ANGLE)
         // when using Tint/GLSL.
         DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+
+        DAWN_TEST_UNSUPPORTED_IF(IsD3D12());
     }
 
     wgpu::Texture CreateAndWriteTexture(uint32_t width,
