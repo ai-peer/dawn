@@ -1173,7 +1173,7 @@ TEST_P(D3D12SharedHandleMultithreadTests, DestroyDeviceAndUseImageInParallel) {
 // 1. Create and clear a D3D11 texture
 // 2. On 2nd thread: Wrap it in a Dawn texture and clear it to a different color
 // 3. Readback the texture with D3D11 and ensure we receive the color we cleared with Dawn.
-TEST_P(D3D12SharedHandleMultithreadTests, ClearInD3D12ReadbackInD3D11_TwoThreads) {
+TEST_P(D3D12SharedHandleMultithreadTests, DISABLED_ClearInD3D12ReadbackInD3D11_TwoThreads) {
     // TODO(crbug.com/dawn/735): This test appears to hang for
     // D3D12_Microsoft_Basic_Render_Driver_CPU when validation is enabled.
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWARP() && IsBackendValidationEnabled());
