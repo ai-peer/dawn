@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0acfce0_0f36da7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-04-26T15:37:57Z",
+      "side": 1,
+      "message": "Disabling these devices\u0027 destructions tests seem to deflake a lot of sampling tests on NIVIDIA (dawn-try-win10-x86-rel \u0026 win-dawn-rel bots)",
+      "revId": "07059247a618688112cea5a11a4f27fadc30aaf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
