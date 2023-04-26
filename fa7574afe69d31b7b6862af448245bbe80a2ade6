@@ -16,6 +16,52 @@
       "message": "Thanks for reviewing!",
       "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d873e8_a192fc3d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-26T14:17:29Z",
+      "side": 1,
+      "message": "It may increase copy size, if the `data`\u0027s size is smaller than the adjusted size, will it cause problem?\nMaybe we should just DAWN_ASSERT() it, make sure caller always passed in right size? Or we have to use a temp aligned buffer here.",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7162b034_3fac2010",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-26T14:17:29Z",
+      "side": 1,
+      "message": "nit: should we add `DAWN_ASSERT((Align(binding.size)+ offset) \u003c\u003d binding.buffer-\u003eGetAllocatedSize());`",
+      "range": {
+        "startLine": 110,
+        "startChar": 58,
+        "endLine": 110,
+        "endChar": 81
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
