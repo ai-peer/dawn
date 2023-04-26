@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc3c9dfa_d6b68cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-26T15:28:30Z",
+      "side": 1,
+      "message": "no additional comments \n\ncould we also have a short .md about the feature in //docs/dawn/features/ ? we\u0027re starting to have at least some documentation / informal spec for optional features",
+      "revId": "f032e5c711775e654067296258a7b86b7b5eb458",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f121eef7_b6ac35af",
