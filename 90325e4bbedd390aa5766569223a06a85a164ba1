@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6970bc0f_729b6ff1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T11:51:14Z",
+      "side": 1,
+      "message": "LGTM. Peng PTAL",
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d217337_70a45051",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T11:51:14Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a66a8e4_39a40ca6",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T11:51:14Z",
+      "side": 1,
+      "message": "The creation of an SRV is only for readonly storage buffers, so this should always be the case. I don\u0027t think we need the else {} part. Readonly storage buffers should always use raw buffer views. (and the comment about Tint casting the format is a bit confusing, maybe remove it or expand it to explain that the HLSL is a ByteAddressBuffer so we can pass any valid raw view format)",
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbab96fe_19ab592a",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T11:51:14Z",
+      "side": 1,
+      "message": "nit: IsAligned(dstBox.left, 16)",
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1bfbaf_a5bac5e5",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-26T11:51:14Z",
+      "side": 1,
+      "message": "nit: alignment. But why is this needed? Shouldn\u0027t the code at [1] already take care of it?",
+      "range": {
+        "startLine": 53,
+        "startChar": 55,
+        "endLine": 53,
+        "endChar": 62
+      },
+      "revId": "90325e4bbedd390aa5766569223a06a85a164ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
