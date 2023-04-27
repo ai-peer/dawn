@@ -1289,12 +1289,12 @@ TEST_F(IR_BuilderImplTest, Switch) {
   %bb1 = Block
   BranchTo %bb2 ()
 
-  %bb2 = Switch (1)
-    # Case 0
+  %bb2 = Switch (1i)
+    # Case 0i
     %bb3 = Block
     BranchTo %bb4 ()
 
-    # Case 1
+    # Case 1i
     %bb5 = Block
     BranchTo %bb4 ()
 
@@ -1341,7 +1341,7 @@ TEST_F(IR_BuilderImplTest, Switch_OnlyDefault) {
   %bb1 = Block
   BranchTo %bb2 ()
 
-  %bb2 = Switch (1)
+  %bb2 = Switch (1i)
     # Case default
     %bb3 = Block
     BranchTo %bb4 ()
@@ -1394,8 +1394,8 @@ TEST_F(IR_BuilderImplTest, Switch_WithBreak) {
   %bb1 = Block
   BranchTo %bb2 ()
 
-  %bb2 = Switch (1)
-    # Case 0
+  %bb2 = Switch (1i)
+    # Case 0i
     %bb3 = Block
     BranchTo %bb4 ()
 
@@ -1453,8 +1453,8 @@ TEST_F(IR_BuilderImplTest, Switch_AllReturn) {
   %bb1 = Block
   BranchTo %bb2 ()
 
-  %bb2 = Switch (1)
-    # Case 0
+  %bb2 = Switch (1i)
+    # Case 0i
     %bb3 = Block
     Return ()
     # Case default
@@ -1565,8 +1565,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Add) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) + 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = add %1(u32), 4u
 )");
 }
 
@@ -1583,8 +1583,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Subtract) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) - 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = sub %1(u32), 4u
 )");
 }
 
@@ -1601,8 +1601,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Multiply) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) * 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = mul %1(u32), 4u
 )");
 }
 
@@ -1619,8 +1619,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Div) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) / 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = div %1(u32), 4u
 )");
 }
 
@@ -1637,8 +1637,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Modulo) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) % 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = mod %1(u32), 4u
 )");
 }
 
@@ -1655,8 +1655,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_And) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) & 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = bitwise_and %1(u32), 4u
 )");
 }
 
@@ -1673,8 +1673,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Or) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) | 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = bitwise_or %1(u32), 4u
 )");
 }
 
@@ -1691,8 +1691,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Xor) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) ^ 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = bitwise_xor %1(u32), 4u
 )");
 }
 
@@ -1709,8 +1709,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalAnd) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(bool) = call(my_func, )
-%2(bool) = %1(bool) && false
+    EXPECT_EQ(d.AsString(), R"(%1(bool) = call my_func
+%2(bool) = logical_and %1(bool), false
 )");
 }
 
@@ -1727,8 +1727,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalOr) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(bool) = call(my_func, )
-%2(bool) = %1(bool) || true
+    EXPECT_EQ(d.AsString(), R"(%1(bool) = call my_func
+%2(bool) = logical_or %1(bool), true
 )");
 }
 
@@ -1745,8 +1745,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Equal) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(bool) = %1(u32) == 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(bool) = eq %1(u32), 4u
 )");
 }
 
@@ -1763,8 +1763,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_NotEqual) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(bool) = %1(u32) != 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(bool) = not_eq %1(u32), 4u
 )");
 }
 
@@ -1781,8 +1781,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LessThan) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(bool) = %1(u32) < 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(bool) = less_than %1(u32), 4u
 )");
 }
 
@@ -1799,8 +1799,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_GreaterThan) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(bool) = %1(u32) > 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(bool) = greater_than %1(u32), 4u
 )");
 }
 
@@ -1817,8 +1817,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LessThanEqual) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(bool) = %1(u32) <= 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(bool) = less_than_eq %1(u32), 4u
 )");
 }
 
@@ -1835,8 +1835,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_GreaterThanEqual) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(bool) = %1(u32) >= 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(bool) = greater_than_eq %1(u32), 4u
 )");
 }
 
@@ -1853,8 +1853,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_ShiftLeft) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) << 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = shift_left %1(u32), 4u
 )");
 }
 
@@ -1871,8 +1871,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_ShiftRight) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(u32) = call(my_func, )
-%2(u32) = %1(u32) >> 4
+    EXPECT_EQ(d.AsString(), R"(%1(u32) = call my_func
+%2(u32) = shift_right %1(u32), 4u
 )");
 }
 
@@ -1891,14 +1891,14 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(f32) = call(my_func, )
-%2(bool) = %1(f32) < 2.0
-%3(f32) = call(my_func, )
-%4(f32) = call(my_func, )
-%5(f32) = 2.29999995231628417969 * %4(f32)
-%6(f32) = %3(f32) / %5(f32)
-%7(bool) = 2.5 > %6(f32)
-%8(bool) = %2(bool) && %7(bool)
+    EXPECT_EQ(d.AsString(), R"(%1(f32) = call my_func
+%2(bool) = less_than %1(f32), 2.0f
+%3(f32) = call my_func
+%4(f32) = call my_func
+%5(f32) = mul 2.29999995231628417969f, %4(f32)
+%6(f32) = div %3(f32), %5(f32)
+%7(bool) = greater_than 2.5f, %6(f32)
+%8(bool) = logical_and %2(bool), %7(bool)
 )");
 }
 
@@ -1916,7 +1916,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound_WithConstEval) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(bool) = call(my_func, false)
+    EXPECT_EQ(d.AsString(), R"(%1(bool) = call my_func, false
 )");
 }
 
@@ -1934,8 +1934,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Bitcast) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(f32) = call(my_func, )
-%2(f32) = bitcast(%1(f32))
+    EXPECT_EQ(d.AsString(), R"(%1(f32) = call my_func
+%2(f32) = bitcast %1(f32)
 )");
 }
 
@@ -1960,7 +1960,7 @@ TEST_F(IR_BuilderImplTest, EmitStatement_Discard) {
 TEST_F(IR_BuilderImplTest, EmitStatement_UserFunction) {
     Func("my_func", utils::Vector{Param("p", ty.f32())}, ty.void_(), utils::Empty);
 
-    auto* stmt = CallStmt(Call("my_func", Mul(2_f, 3_f)));
+    auto* stmt = CallStmt(Call("my_func", Mul(2_a, 3_a)));
     WrapInFunction(stmt);
 
     auto& b = CreateBuilder();
@@ -1971,7 +1971,7 @@ TEST_F(IR_BuilderImplTest, EmitStatement_UserFunction) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(void) = call(my_func, 6.0)
+    EXPECT_EQ(d.AsString(), R"(%1(void) = call my_func, 6.0f
 )");
 }
 
@@ -1990,7 +1990,7 @@ TEST_F(IR_BuilderImplTest, DISABLED_EmitExpression_ConstructEmpty) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(vec3<f32>) = construct()
+    EXPECT_EQ(d.AsString(), R"(%1(vec3<f32>) = construct
 )");
 }
 
@@ -2008,7 +2008,7 @@ TEST_F(IR_BuilderImplTest, DISABLED_EmitExpression_Construct) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%2(vec3<f32>) = construct(2.0, 3.0, %1(void))
+    EXPECT_EQ(d.AsString(), R"(%2(vec3<f32>) = construct 2.0f, 3.0f, %1(void)
 )");
 }
 
@@ -2026,7 +2026,7 @@ TEST_F(IR_BuilderImplTest, DISABLED_EmitExpression_Convert) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%2(f32) = convert(i32, %1(void))
+    EXPECT_EQ(d.AsString(), R"(%2(f32) = convert i32, %1(void)
 )");
 }
 
@@ -2041,7 +2041,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_MaterializedCall) {
 
     EXPECT_EQ(Disassemble(m), R"(%bb0 = Function test_function
   %bb1 = Block
-  Return (2.0)
+  Return (2.0f)
 FunctionEnd
 
 )");
@@ -2061,7 +2061,7 @@ TEST_F(IR_BuilderImplTest, DISABLED_EmitExpression_Builtin) {
 
     Disassembler d(b.builder.ir);
     d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%2(f32) = asin(%1(void))
+    EXPECT_EQ(d.AsString(), R"(%2(f32) = asin %1(void)
 )");
 }
 

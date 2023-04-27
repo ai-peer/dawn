@@ -25,9 +25,14 @@ Bitcast::Bitcast(uint32_t id, const type::Type* type, Value* val)
 Bitcast::~Bitcast() = default;
 
 utils::StringStream& Bitcast::ToInstruction(utils::StringStream& out) const {
+<<<<<<< PATCH SET (d00dae [ir] Make dump output more consistent.)
+    ToValue(out) << " = bitcast ";
+    val_->ToValue(out);
+=======
     ToValue(out) << " = bitcast(";
     EmitArgs(out);
     out << ")";
+>>>>>>> BASE      (f26b12 [ir] Move `ir::Bitcast` to inherit `ir::Call`.)
     return out;
 }
 
