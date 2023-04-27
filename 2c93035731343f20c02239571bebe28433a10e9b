@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d0f1c31_b921be73",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T22:46:16Z",
+      "side": 1,
+      "message": "it\u0027s the format, not the written aspect that is the problem. If the DXGI format has both depth and stencil, it is not correct.",
+      "range": {
+        "startLine": 371,
+        "startChar": 7,
+        "endLine": 373,
+        "endChar": 80
+      },
+      "revId": "2c93035731343f20c02239571bebe28433a10e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
