@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b23378e9_4a9dcc28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T12:42:22Z",
+      "side": 1,
+      "message": "nit: dawn:1695, otherwise it will be associated with the Chromium issue 1695",
+      "revId": "3ad0fb6c7341cbf3e1b51cb907a61d21679b2c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e06c65af_20b7e5fc",
