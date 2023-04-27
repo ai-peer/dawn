@@ -215,6 +215,10 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // For OpenGL ES, we must use a placeholder fragment shader for vertex-only render pipeline.
     deviceToggles->Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline,
                            gl.GetVersion().IsES());
+    // For OpenGL/OpenGL ES, use compute shader blit to emulate depth texture to buffer copies.
+    // TODO(crbug.com/dawn/1782): split toggle for depth16unorm/depth32float, opengl only use blit
+    // for depth16unorm.
+    deviceToggles->Default(Toggle::UseBlitForDepthTextureToBufferCopy, gl.GetVersion().IsES());
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(const DeviceDescriptor* descriptor,
