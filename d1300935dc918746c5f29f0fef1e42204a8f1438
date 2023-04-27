@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "298deeec_dbd719b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-04-27T08:25:41Z",
+      "side": 1,
+      "message": "FYI Here\u0027s the WIP Blink CL: https://chromium-review.googlesource.com/c/chromium/src/+/4481472",
+      "revId": "d1300935dc918746c5f29f0fef1e42204a8f1438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
