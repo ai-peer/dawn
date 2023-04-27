@@ -215,6 +215,8 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
     // For OpenGL ES, we must use a placeholder fragment shader for vertex-only render pipeline.
     deviceToggles->Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline,
                            gl.GetVersion().IsES());
+    // For OpenGL ES, use compute shader blit to emulate unsupported texture to buffer copies.
+    deviceToggles->Default(Toggle::UseBlitForDepthTextureToBufferCopy, gl.GetVersion().IsES());
 }
 
 ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
