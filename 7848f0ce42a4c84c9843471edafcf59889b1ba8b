@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f715726_184ae031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T23:22:46Z",
+      "side": 1,
+      "message": "the CL fixes it because:\n\n1. Allocate descriptors in PopulateViews for pending serial `N`, at offset `n`. The descriptors have last usage serial `N`.\n2. Submit serial `N`\n3. PopulateViews for pending serial `N+1`, the old descriptors are no longer valid because their usage serial N \u003d\u003d the last submitted serial N. They are not \u003e\n   Populate new descriptors at offset `n + m`. The descriptors have last usage serial `N+1`.\n4. Submit serial `N+1`\n5. Serial `N` completes. Now descriptors in range `[n, n+m)` may be reused\n\nI\u0027ve convinced myself this fixes the problem, but I\u0027d like Corentin to review too\n\nIf possible, we should extend D3D12DescriptorHeapTests.cpp to catch the problem",
+      "parentUuid": "822e4c4d_43e99acf",
+      "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bc49e1b_00930d63",
         "filename": "src/dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 1
