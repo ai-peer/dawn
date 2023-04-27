@@ -447,14 +447,15 @@ class DepthCopyTests : public DepthStencilCopyTests {
                              uint32_t textureWidth,
                              uint32_t textureHeight,
                              uint32_t testLevel) {
-        // TODO(crbug.com/dawn/1237): Depth16Unorm test failed on OpenGL and OpenGLES which says
-        // Invalid format and type combination in glReadPixels
-        DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm &&
-                                 (IsOpenGL() || IsOpenGLES()));
+        // // TODO(crbug.com/dawn/1237): Depth16Unorm test failed on OpenGL and OpenGLES which says
+        // // Invalid format and type combination in glReadPixels
+        // DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm
+        // &&
+        //                          (IsOpenGL() || IsOpenGLES()));
 
-        // TODO(crbug.com/dawn/1291): These tests are failing on GLES (both native and ANGLE)
-        // when using Tint/GLSL.
-        DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+        // // TODO(crbug.com/dawn/1291): These tests are failing on GLES (both native and ANGLE)
+        // // when using Tint/GLSL.
+        // DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
 
         uint32_t mipLevelCount = testLevel + 1;
         wgpu::Texture texture = CreateTexture(
@@ -1055,9 +1056,13 @@ DAWN_INSTANTIATE_TEST_P(
     {D3D12Backend(),
      D3D12Backend({"d3d12_use_temp_buffer_in_depth_stencil_texture_and_buffer_"
                    "copy_with_non_zero_buffer_offset"}),
+     //  // temp test ? internal error
+     //  D3D12Backend({"use_blit_for_depth_texture_to_buffer_copy"}),
      MetalBackend(),
      MetalBackend({"use_blit_for_depth_texture_to_texture_copy_to_nonzero_subresource"}),
-     OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+     OpenGLBackend(), OpenGLESBackend({"use_blit_for_depth_texture_to_buffer_copy"}),
+     //  VulkanBackend()},
+     VulkanBackend(), VulkanBackend({"use_blit_for_depth_texture_to_buffer_copy"})},
     std::vector<wgpu::TextureFormat>(kValidDepthCopyTextureFormats.begin(),
                                      kValidDepthCopyTextureFormats.end()));
 

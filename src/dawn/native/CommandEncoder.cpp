@@ -23,6 +23,7 @@
 #include "dawn/native/ApplyClearColorValueWithDrawHelper.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BlitBufferToDepthStencil.h"
+#include "dawn/native/BlitDepthStencilToBuffer.h"
 #include "dawn/native/BlitDepthToDepth.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/ChainUtils_autogen.h"
@@ -1269,6 +1270,32 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
 
             TextureDataLayout dstLayout = destination->layout;
             ApplyDefaultTextureDataLayoutOptions(&dstLayout, blockInfo, *copySize);
+
+            TextureCopy src;
+            src.texture = source->texture;
+            src.origin = source->origin;
+            src.mipLevel = source->mipLevel;
+            src.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+
+            BufferCopy dst;
+            dst.buffer = destination->buffer;
+            dst.bytesPerRow = destination->layout.bytesPerRow;
+            dst.rowsPerImage = destination->layout.rowsPerImage;
+            dst.offset = destination->layout.offset;
+
+            if (src.aspect == Aspect::Depth &&
+                GetDevice()->IsToggleEnabled(Toggle::UseBlitForDepthTextureToBufferCopy)) {
+                DAWN_TRY_CONTEXT(BlitDepthToBuffer(GetDevice(), this, src, dst, *copySize),
+                                 "copying depth aspect from %s to %s using blit workaround.",
+                                 src.texture.Get(), destination->buffer);
+
+                return {};
+            } else if (src.aspect == Aspect::Stencil &&
+                       GetDevice()->IsToggleEnabled(Toggle::UseBlitForDepthTextureToBufferCopy)) {
+                // TODOGPUImageDataLayout
+
+                return {};
+            }
 
             CopyTextureToBufferCmd* t2b =
                 allocator->Allocate<CopyTextureToBufferCmd>(Command::CopyTextureToBuffer);
