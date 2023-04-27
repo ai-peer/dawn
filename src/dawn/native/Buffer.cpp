@@ -375,7 +375,7 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
     if (mState == BufferState::PendingMap) {
         if (callback) {
             GetDevice()->GetCallbackTaskManager()->AddCallbackTask(
-                callback, WGPUBufferMapAsyncStatus_Error, userdata);
+                callback, WGPUBufferMapAsyncStatus_PendingMap, userdata);
         }
         return;
     }
