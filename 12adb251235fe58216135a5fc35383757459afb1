@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e29d2484_35ca4f7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:31:30Z",
+      "side": 1,
+      "message": "nit: Bug: chromium:1431622",
+      "revId": "12adb251235fe58216135a5fc35383757459afb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d624ad6a_65109fbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:31:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "12adb251235fe58216135a5fc35383757459afb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "110be704_b8584de2",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:31:30Z",
+      "side": 1,
+      "message": "nit: \"mapping already pending\" maybe for grammatical consistency with the other enums?",
+      "range": {
+        "startLine": 505,
+        "startChar": 34,
+        "endLine": 505,
+        "endChar": 45
+      },
+      "revId": "12adb251235fe58216135a5fc35383757459afb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "540e6bff_0d0ecff9",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:31:30Z",
+      "side": 1,
+      "message": "Why didn\u0027t we need to modify this method? Is it because the error is surfaced as a validation error so it becomes to the developer? Can you explain again why the errors modified in this CL don\u0027t produce validation errors?",
+      "revId": "12adb251235fe58216135a5fc35383757459afb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
