@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ecf6b9_29796a4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-04-27T08:17:02Z",
+      "side": 1,
+      "message": "PTAL\n\nI wonder if we should rename \"Error\" to \"BufferInvalid\" also. WDYT?",
+      "revId": "1b608c62884f169ad17ee48b19a8886494534964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
