@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e96f1dd2_2105a87d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:57:36Z",
+      "side": 1,
+      "message": "Sorry. It is not done. I found implementing clear() for staging texture is not a simple task. Will do it in a separate CL.",
+      "parentUuid": "8a5eb3fe_d5308e97",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ee04d8f_9c9c39a3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 14
