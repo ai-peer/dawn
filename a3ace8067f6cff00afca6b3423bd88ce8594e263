@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d79d696_c62d5de9",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1268,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T14:47:35Z",
+      "side": 1,
+      "message": "I feel like I named this poorly when getting rid of `NameFor`.",
+      "revId": "a3ace8067f6cff00afca6b3423bd88ce8594e263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
