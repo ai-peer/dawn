@@ -33,6 +33,23 @@
       "message": "Also, cc Peng since it might intersect with D3D11 external image support",
       "revId": "6066783bea36a6493f2e2c1e496c3df9aa348953",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd31a98_b2a75fa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:34:20Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the cleanup!",
+      "revId": "6066783bea36a6493f2e2c1e496c3df9aa348953",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
