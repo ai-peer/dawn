@@ -215,6 +215,24 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // For OpenGL ES, we must use a placeholder fragment shader for vertex-only render pipeline.
     deviceToggles->Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline,
                            gl.GetVersion().IsES());
+    // For OpenGL/OpenGL ES, use compute shader blit to emulate depth16unorm texture to buffer
+    // copies.
+    // Disable Angle on windows as it seems to have side-effect.
+#if DAWN_PLATFORM_IS(WINDOWS)
+    constexpr bool kIsWindows = true;
+#else
+    constexpr bool kIsWindows = false;
+#endif
+    bool isAngle = false;
+    if (mName.find("ANGLE") != std::string::npos) {
+        isAngle = true;
+    }
+    deviceToggles->Default(Toggle::UseBlitForDepth16UnormTextureToBufferCopy,
+                           !(kIsWindows && isAngle));
+
+    // For OpenGL ES, use compute shader blit to emulate depth32float texture to buffer copies.
+    deviceToggles->Default(Toggle::UseBlitForDepth32FloatTextureToBufferCopy,
+                           gl.GetVersion().IsES() && !(kIsWindows && isAngle));
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(const DeviceDescriptor* descriptor,
