@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9abda9_5f24c64f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-27T19:37:36Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.0207505s (average 4.40867525s)",
+      "revId": "fe8a76cbbc447db0ebbe7da4818accca70900b13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31e7be8a_3cff2dd0",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-27T19:37:36Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,basic:writeMask\u003d0;renderMode\u003d\"direct\";bufferOffset\u003d\"zero\";querySetOffset\u003d\"non-zero\"\u0027 with tags [Intel, win10]",
+      "revId": "fe8a76cbbc447db0ebbe7da4818accca70900b13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
