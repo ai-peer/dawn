@@ -106,9 +106,24 @@ static uint32_t sZeroSizedMappingData = 0xCAFED00D;
 
 }  // anonymous namespace
 
-MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor) {
+MaybeError ValidateBufferDescriptor(DeviceBase* device,
+                                    const BufferDescriptor* descriptor,
+                                    UsageValidationMode mode) {
     DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr");
-    DAWN_TRY(ValidateBufferUsage(descriptor->usage));
+    switch (mode) {
+        case UsageValidationMode::Default:
+            DAWN_TRY(ValidateBufferUsage(descriptor->usage));
+            break;
+        case UsageValidationMode::Internal:
+            // TODO(dawn:1485): Validate buffer binding with usage validation mode.
+            DAWN_INVALID_IF(!(descriptor->usage &
+                              (kAllInternalBufferUsages | static_cast<wgpu::BufferUsage>(~1023))),
+                            "Value %i is invalid for internal WGPUBufferUsage.",
+                            static_cast<uint32_t>(descriptor->usage));
+            break;
+        default:
+            UNREACHABLE();
+    }
 
     wgpu::BufferUsage usage = descriptor->usage;
 
@@ -170,6 +185,13 @@ BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
     // compute pass.
     if (mUsage & wgpu::BufferUsage::Indirect) {
         mUsage |= kInternalStorageBuffer;
+    }
+
+    if (mUsage & wgpu::BufferUsage::CopyDst) {
+        if (device->IsToggleEnabled(Toggle::UseBlitForDepth16UnormTextureToBufferCopy) ||
+            device->IsToggleEnabled(Toggle::UseBlitForDepth32FloatTextureToBufferCopy)) {
+            mUsage |= kInternalStorageBuffer;
+        }
     }
 
     GetObjectTrackingList()->Track(this);

@@ -175,8 +175,10 @@ ResultOrError<uint64_t> ComputeRequiredBytesInCopy(const TexelBlockInfo& blockIn
 
 MaybeError ValidateCopySizeFitsInBuffer(const Ref<BufferBase>& buffer,
                                         uint64_t offset,
-                                        uint64_t size) {
-    uint64_t bufferSize = buffer->GetSize();
+                                        uint64_t size,
+                                        bool checkAgainstAllocatedSize) {
+    uint64_t bufferSize =
+        checkAgainstAllocatedSize ? buffer->GetAllocatedSize() : buffer->GetSize();
     bool fitsInBuffer = offset <= bufferSize && (size <= (bufferSize - offset));
     DAWN_INVALID_IF(!fitsInBuffer,
                     "Copy range (offset: %u, size: %u) does not fit in %s size (%u).", offset, size,

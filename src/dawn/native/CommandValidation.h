@@ -76,7 +76,8 @@ MaybeError ValidateImageCopyTexture(DeviceBase const* device,
 
 MaybeError ValidateCopySizeFitsInBuffer(const Ref<BufferBase>& buffer,
                                         uint64_t offset,
-                                        uint64_t size);
+                                        uint64_t size,
+                                        bool checkAgainstAllocatedSize = false);
 
 bool IsRangeOverlapped(uint32_t startA, uint32_t startB, uint32_t length);
 
