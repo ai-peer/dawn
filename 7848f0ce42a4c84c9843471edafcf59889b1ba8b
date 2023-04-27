@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "822e4c4d_43e99acf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T23:03:26Z",
+      "side": 1,
+      "message": "Ok - I think. is it because when we **reuse a descriptor allocation** we don\u0027t actually *extend its lifetime*?\n\nConsider:\n\n1. Allocate descriptors in PopulateViews for pending serial `N`, at offset `n`. The descriptors have last usage serial `N`.\n2. Submit\n3. PopulateViews for pending serial `N+1`, reusing descriptors at offset `n`. The descriptors have last usage serial `N`.\n4. Submit\n5. Serial `N` completes\n6. PopulateViews for pending serial `N+2`, **overwriting descriptors** at offset `n`. The descriptors have last usage serial `N+2`.\n   This is a problem!!!\n   Serial N+1 is still in flight and is using descriptors at offset `n`, and in use by the GPU!!!",
+      "parentUuid": "44fd57b9_3a1c9c7c",
+      "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bc49e1b_00930d63",
         "filename": "src/dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 1
