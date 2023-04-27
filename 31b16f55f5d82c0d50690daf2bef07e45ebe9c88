@@ -51,6 +51,24 @@
       "parentUuid": "55e86f3c_f6dd8b28",
       "revId": "31b16f55f5d82c0d50690daf2bef07e45ebe9c88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6423e23b_fe79f99d",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4222,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T15:32:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bae6ec07_2c7ea528",
+      "revId": "31b16f55f5d82c0d50690daf2bef07e45ebe9c88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
