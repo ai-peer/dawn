@@ -428,7 +428,7 @@ TEST_P(BufferMappingTests, OffsetNotUpdatedOnError) {
     buffer.MapAsync(
         wgpu::MapMode::Read, 0, 4,
         [](WGPUBufferMapAsyncStatus status, void* userdata) {
-            ASSERT_EQ(WGPUBufferMapAsyncStatus_Error, status);
+            ASSERT_EQ(WGPUBufferMapAsyncStatus_MappingAlreadyPending, status);
             *static_cast<bool*>(userdata) = true;
         },
         &done2);
