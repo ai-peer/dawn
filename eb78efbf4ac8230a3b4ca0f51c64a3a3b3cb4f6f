@@ -76,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf6144cf_68a2e72b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T22:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcc80a28_74be1955",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1bcfb77_f372868f",
@@ -252,6 +276,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0a20519_ffc5b08b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T22:42:18Z",
+      "side": 1,
+      "message": "Actually checking `GetInternalUsage() \u0026 wgpu::TextureUsage::RenderAttachment` is sufficient as well include handling mIsStaging.",
+      "parentUuid": "6a6b8cbe_78f39cc9",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae752186_28c8f57c",
@@ -300,6 +342,24 @@
       "writtenOn": "2023-04-27T20:01:27Z",
       "side": 1,
       "message": "would prefer to return UNIMPLMENTED_ERROR for Depth/Stencil.\nThe implementation here really isn\u0027t going to work in many cases because of the interleaved data the D3D11 expects, but non-interleaved planar data that comes in",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a201b5_c6e9e8e3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T22:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "888970e0_2c406597",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -397,6 +457,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a57b2e73_13b36198",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T22:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3de83d1_bc866dbf",
+      "range": {
+        "startLine": 440,
+        "startChar": 32,
+        "endLine": 440,
+        "endChar": 48
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "684e4659_dec3fd3a",
@@ -410,6 +494,30 @@
       "writtenOn": "2023-04-27T20:01:27Z",
       "side": 1,
       "message": "```suggestion\n            static_cast\u003cuint8_t*\u003e(mappedResource.pData) + z * mappedResource.DepthPitch;\n```",
+      "range": {
+        "startLine": 473,
+        "startChar": 12,
+        "endLine": 473,
+        "endChar": 28
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b97adba4_e709d5c7",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T22:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "684e4659_dec3fd3a",
       "range": {
         "startLine": 473,
         "startChar": 12,
@@ -598,6 +706,24 @@
       "side": 1,
       "message": "can we switch everything to `ASSERT` instead?",
       "parentUuid": "22ca137d_0a790f6d",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2f651f5_dabe4cd8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T22:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d774bd3_34e7d688",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
