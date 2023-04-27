@@ -55,6 +55,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcc80a28_74be1955",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T20:01:27Z",
+      "side": 1,
+      "message": "it could be both depth+stencil\n\nConsider instead:\n```suggestion\n    // https://learn.microsoft.com/en-us/windows/win32/direct3d12/subresources\n    // Planar formats existed in Direct3D 11, but individual planes could not be addressed\n    if (IsSubset(aspect, Aspect::Depth | Aspect::Stencil)) {\n      return Aspect::CombinedDepthStencil;\n    }\n    ASSERT(HasOneBit(aspect));\n    return aspect;\n```",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1bcfb77_f372868f",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 14
@@ -213,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a6b8cbe_78f39cc9",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T20:01:27Z",
+      "side": 1,
+      "message": "either need to reflect the texture bind flags,\n\nor use internal usage + reflect texture bind flags for external textures and set internal usage appropriately.\n\nIMO reflecting and saving the bind flags is better. That\u0027s what d3d12 does. I believe it will handle the mIsStaging case as well?",
+      "parentUuid": "5ee04d8f_9c9c39a3",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae752186_28c8f57c",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 14
@@ -242,6 +283,23 @@
       "side": 1,
       "message": "Same reason here. It is needed for test suits in CopyTest.cpp",
       "parentUuid": "ae752186_28c8f57c",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "888970e0_2c406597",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T20:01:27Z",
+      "side": 1,
+      "message": "would prefer to return UNIMPLMENTED_ERROR for Depth/Stencil.\nThe implementation here really isn\u0027t going to work in many cases because of the interleaved data the D3D11 expects, but non-interleaved planar data that comes in",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -312,6 +370,52 @@
       "side": 1,
       "message": "All changes in this CL are needed for the test suits in CopyTest.cpp. Otherwise we have to have CLs which don\u0027t have tests coverage until the last CL is landed, or check and suppress some tests for each CL.",
       "parentUuid": "e9f0e3b2_0bd27f00",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3de83d1_bc866dbf",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T20:01:27Z",
+      "side": 1,
+      "message": "```suggestion\n            uint8_t* pSrcData \u003d static_cast\u003cuint8_t*\u003e(mappedResource.pData);\n```",
+      "range": {
+        "startLine": 440,
+        "startChar": 32,
+        "endLine": 440,
+        "endChar": 48
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "684e4659_dec3fd3a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T20:01:27Z",
+      "side": 1,
+      "message": "```suggestion\n            static_cast\u003cuint8_t*\u003e(mappedResource.pData) + z * mappedResource.DepthPitch;\n```",
+      "range": {
+        "startLine": 473,
+        "startChar": 12,
+        "endLine": 473,
+        "endChar": 28
+      },
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -476,6 +580,24 @@
       "side": 1,
       "message": "Just unify assert in this file.",
       "parentUuid": "09f252f9_aa55b3b3",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d774bd3_34e7d688",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T20:01:27Z",
+      "side": 1,
+      "message": "can we switch everything to `ASSERT` instead?",
+      "parentUuid": "22ca137d_0a790f6d",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

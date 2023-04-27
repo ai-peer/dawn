@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b2bc759_1fba3230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T20:01:27Z",
+      "side": 1,
+      "message": "ok, I add some other inline comments about things that would be nice to have in this CL.\n\nnamely that Depth/Stencil and some clearing situations don\u0027t work for quite a few cases, and it would be preferable to leave it unimplemented than incorrectly implemented",
+      "parentUuid": "5c6d94cf_9e4cee4d",
+      "revId": "1d134a045213ee5c937a357515b74109f19859c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "435f7653_67e91106",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 11
