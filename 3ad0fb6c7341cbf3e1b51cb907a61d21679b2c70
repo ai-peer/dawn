@@ -16,6 +16,23 @@
       "message": "Thanks, both!",
       "revId": "3ad0fb6c7341cbf3e1b51cb907a61d21679b2c70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e60892fc_3a2c96d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-27T12:33:23Z",
+      "side": 1,
+      "message": "Is the CR+1 bit not at all sticky for Dawn?",
+      "revId": "3ad0fb6c7341cbf3e1b51cb907a61d21679b2c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
