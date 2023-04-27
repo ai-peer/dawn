@@ -127,6 +127,18 @@ function wrapPromiseWithHeartbeat(prototype, key) {
   }
 }
 
+function wrapSyncFunctionWithHeartbeat(prototype, key) {
+  const old = prototype[key];
+  prototype[key] = function(...args) {
+    // Send the heartbeat both before and after in case this is a long-running
+    // synchronous function.
+    sendHeartbeat();
+    const retval = old.call(this, ...args);
+    sendHeartbeat();
+    return retval;
+  }
+}
+
 wrapPromiseWithHeartbeat(GPU.prototype, 'requestAdapter');
 wrapPromiseWithHeartbeat(GPUAdapter.prototype, 'requestAdapterInfo');
 wrapPromiseWithHeartbeat(GPUAdapter.prototype, 'requestDevice');
@@ -136,6 +148,9 @@ wrapPromiseWithHeartbeat(GPUDevice.prototype, 'popErrorScope');
 wrapPromiseWithHeartbeat(GPUQueue.prototype, 'onSubmittedWorkDone');
 wrapPromiseWithHeartbeat(GPUBuffer.prototype, 'mapAsync');
 wrapPromiseWithHeartbeat(GPUShaderModule.prototype, 'getCompilationInfo');
+
+wrapSyncFunctionWithHeartbeat(GPUDevice.prototype, 'createRenderPipeline');
+wrapSyncFunctionWithHeartbeat(GPUDevice.prototype, 'createComputePipeline');
 
 globalTestConfig.testHeartbeatCallback = sendHeartbeat;
 globalTestConfig.noRaceWithRejectOnTimeout = true;
