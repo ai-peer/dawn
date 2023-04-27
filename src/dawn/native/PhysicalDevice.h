@@ -84,6 +84,7 @@ class PhysicalDeviceBase : public RefCounted {
     uint32_t mDeviceId = 0xFFFFFFFF;
     std::string mName;
     wgpu::AdapterType mAdapterType = wgpu::AdapterType::Unknown;
+    bool mIsAngle = false;
     gpu_info::DriverVersion mDriverVersion;
     std::string mDriverDescription;
 

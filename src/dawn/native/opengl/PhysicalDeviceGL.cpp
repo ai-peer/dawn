@@ -89,6 +89,10 @@ MaybeError PhysicalDevice::InitializeImpl() {
         mAdapterType = wgpu::AdapterType::CPU;
     }
 
+    if (mName.find("ANGLE") != std::string::npos) {
+        mIsAngle = true;
+    }
+
     return {};
 }
 
@@ -215,6 +219,20 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // For OpenGL ES, we must use a placeholder fragment shader for vertex-only render pipeline.
     deviceToggles->Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline,
                            gl.GetVersion().IsES());
+    // For OpenGL/OpenGL ES, use compute shader blit to emulate depth16unorm texture to buffer
+    // copies.
+    // Disable Angle on windows as it seems to have side-effect.
+#if DAWN_PLATFORM_IS(WINDOWS)
+    constexpr bool isWindows = true;
+#else
+    constexpr bool isWindows = false;
+#endif
+    deviceToggles->Default(Toggle::UseBlitForDepth16UnormTextureToBufferCopy,
+                           !(isWindows && mIsAngle));
+
+    // For OpenGL ES, use compute shader blit to emulate depth32float texture to buffer copies.
+    deviceToggles->Default(Toggle::UseBlitForDepth32FloatTextureToBufferCopy,
+                           gl.GetVersion().IsES() && !(isWindows && mIsAngle));
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(const DeviceDescriptor* descriptor,
