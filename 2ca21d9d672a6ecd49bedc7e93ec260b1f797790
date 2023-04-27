@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "040c2170_496ce880",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-27T15:06:19Z",
+      "side": 1,
+      "message": "It makes it easy to add new attributes, it\u0027s consistent with the other attribute handling, and it also avoids an over-zealous compiler warning-as-error that a for loop would only run once. So I\u0027m opting to keep as is.",
+      "parentUuid": "a0c52c4e_8fe66bf2",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5343923_ef4cc111",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-27T14:24:41Z",
       "side": 1,
       "message": "`enum class`",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec4a004a_287f5ff8",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-27T15:06:19Z",
+      "side": 1,
+      "message": "The scoping of this is tight. There\u0027s no real gain in requiring a `Status::` prefix.",
+      "parentUuid": "b5343923_ef4cc111",
       "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +135,24 @@
       "writtenOn": "2023-04-27T14:24:41Z",
       "side": 1,
       "message": "nit: Switch isn\u0027t needed as this always errors.",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb7dd02_332981c7",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-27T15:06:19Z",
+      "side": 1,
+      "message": "See other comment.",
+      "parentUuid": "c3206ea7_c0def585",
       "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
