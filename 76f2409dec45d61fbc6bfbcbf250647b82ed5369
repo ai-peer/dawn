@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "822d29b1_f9cca99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-27T12:31:37Z",
+      "side": 1,
+      "message": "Ensuring that the test set the store op to Discard rather than Store, as it had been doing under the hood - thanks for the pointer on that front!",
+      "parentUuid": "604a14d8_d8d0540c",
+      "revId": "76f2409dec45d61fbc6bfbcbf250647b82ed5369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a8057c8_6a6faa84",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c61a2b60_85e0eacf",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-27T12:31:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a8057c8_6a6faa84",
+      "range": {
+        "startLine": 244,
+        "startChar": 61,
+        "endLine": 244,
+        "endChar": 85
+      },
+      "revId": "76f2409dec45d61fbc6bfbcbf250647b82ed5369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9232e99_d4947de2",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-04-27T11:45:48Z",
       "side": 1,
       "message": "u-nit: `transientAttachment` (yeah it\u0027s different from Chromium :( ) ditto for `kAllowedTransientUsage` below.",
+      "range": {
+        "startLine": 321,
+        "startChar": 9,
+        "endLine": 321,
+        "endChar": 29
+      },
+      "revId": "76f2409dec45d61fbc6bfbcbf250647b82ed5369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b591e08_062be54b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-27T12:31:37Z",
+      "side": 1,
+      "message": "😊 Done.",
+      "parentUuid": "b9232e99_d4947de2",
       "range": {
         "startLine": 321,
         "startChar": 9,
