@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "591742e8_a26a7ec8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "7acd343a_f38b896c",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1bcfb77_f372868f",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-27T16:30:36Z",
       "side": 1,
       "message": "We could have a TextureBase::GetSubresourceSize() for this. Or TextureBase::CoversFullSubresource(Extent3D). We can add a lot of such helpers to TextureBase as they are generally useful.",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0682101f_198c6861",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1bcfb77_f372868f",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e5dd43_d73c3653",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33ce5fc0_4565ad4f",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c69208c_fb583764",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5eb3fe_d5308e97",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Right now, clearing staging texture need to fill mapped texture manually, it is not implemented yet. And this toggle is for testing only, so just skipped it for now. \n\nImplemented clear() for staging texture.",
+      "parentUuid": "3c69208c_fb583764",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee04d8f_9c9c39a3",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-04-27T16:30:36Z",
       "side": 1,
       "message": "Maybe we could check the internal usage instead? In the future we might not always add RenderAttachment even if the format is renderable.",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62477a4e_ae0f3672",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ee04d8f_9c9c39a3",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4a2c03c_45caf883",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Same reason here. It is needed for test suits in CopyTest.cpp",
+      "parentUuid": "ae752186_28c8f57c",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9278e3f8_8d5f94a7",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 14
@@ -133,6 +241,24 @@
       "writtenOn": "2023-04-27T16:30:36Z",
       "side": 1,
       "message": "nit: maybe comment that this is a D3D restriction that is guarded by the WebGPU validation rules.",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abd42b63_940596cd",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9278e3f8_8d5f94a7",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +282,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebffcfe4_597551e5",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "All changes in this CL are needed for the test suits in CopyTest.cpp. Otherwise we have to have CLs which don\u0027t have tests coverage until the last CL is landed, or check and suppress some tests for each CL.",
+      "parentUuid": "e9f0e3b2_0bd27f00",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e6e7193_c7d8875e",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 14
@@ -173,6 +317,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0ad0c3c_e926fd94",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Same reason here.",
+      "parentUuid": "8e6e7193_c7d8875e",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e86dc44e_6ec4accd",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 14
@@ -184,6 +346,30 @@
       "writtenOn": "2023-04-27T16:30:36Z",
       "side": 1,
       "message": "optional-nit: dawn:1705 maybe.",
+      "range": {
+        "startLine": 543,
+        "startChar": 12,
+        "endLine": 543,
+        "endChar": 16
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deaf0385_aaf3d741",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e86dc44e_6ec4accd",
       "range": {
         "startLine": 543,
         "startChar": 12,
@@ -219,6 +405,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3bf0c54_8b4597a5",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "For 2d texture. src.origin.z indicates the slice index. But for CopySubresourceRegion(), srxBox.front should always be 0, srcBoxBack. should always be 1 for 2d texture. I am not sure how to setup for 1d texture yet. Add TODO for 1d texture. Will implement it when I found a test for 1d texture.",
+      "parentUuid": "848608a9_a6424e8a",
+      "range": {
+        "startLine": 571,
+        "startChar": 0,
+        "endLine": 572,
+        "endChar": 71
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09f252f9_aa55b3b3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 14
@@ -230,6 +440,24 @@
       "writtenOn": "2023-04-27T16:30:36Z",
       "side": 1,
       "message": "Why DAWN_ASSERT everywhere? ASSERT() works.",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ca137d_0a790f6d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Just unify assert in this file.",
+      "parentUuid": "09f252f9_aa55b3b3",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -251,6 +479,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcbc16b0_ff26376e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "952bf084_7483d0e1",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6d981b8_91bd8cd1",
@@ -264,6 +510,30 @@
       "writtenOn": "2023-04-27T16:30:36Z",
       "side": 1,
       "message": "u-u-u-nit: double space.",
+      "range": {
+        "startLine": 2452,
+        "startChar": 26,
+        "endLine": 2452,
+        "endChar": 28
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c4ae7c_ef50f811",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 2452,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T18:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d981b8_91bd8cd1",
       "range": {
         "startLine": 2452,
         "startChar": 26,
