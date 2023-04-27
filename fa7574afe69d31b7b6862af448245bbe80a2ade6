@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f396ea03_20acdcba",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-27T13:52:14Z",
+      "side": 1,
+      "message": "@penghuang@chromium.org I am not exactly sure about \"using a staging buffer\". Could you expound your view on this at length a little bit? Will we keep it in frontend or backend?\n\nAnyway, let\u0027s do that in a separate CL. You can work on it directly if you would.",
+      "parentUuid": "f2688d7a_7679dc7e",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
@@ -198,6 +222,30 @@
       "writtenOn": "2023-04-26T14:17:29Z",
       "side": 1,
       "message": "nit: should we add `DAWN_ASSERT((Align(binding.size)+ offset) \u003c\u003d binding.buffer-\u003eGetAllocatedSize());`",
+      "range": {
+        "startLine": 110,
+        "startChar": 58,
+        "endLine": 110,
+        "endChar": 81
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e22b73f_eba8c1f5",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-27T13:52:14Z",
+      "side": 1,
+      "message": "Sorry, I missed this comment.\nGood point. More precisely maybe it should be:\n`DAWN_ASSERT(offset + numConstants * 16 \u003c\u003d binding.buffer-\u003eGetAllocatedSize());`",
+      "parentUuid": "7162b034_3fac2010",
       "range": {
         "startLine": 110,
         "startChar": 58,
