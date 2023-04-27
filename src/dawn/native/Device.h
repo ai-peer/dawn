@@ -233,7 +233,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor,
         bool allowInternalBinding = false);
-    ResultOrError<Ref<BufferBase>> CreateBuffer(const BufferDescriptor* descriptor);
+    ResultOrError<Ref<BufferBase>> CreateBuffer(
+        const BufferDescriptor* descriptor,
+        UsageValidationMode mode = UsageValidationMode::Default);
     ResultOrError<Ref<CommandEncoder>> CreateCommandEncoder(
         const CommandEncoderDescriptor* descriptor = nullptr);
     ResultOrError<Ref<ComputePipelineBase>> CreateComputePipeline(

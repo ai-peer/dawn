@@ -1260,7 +1260,8 @@ BufferBase* DeviceBase::APICreateErrorBuffer(const BufferDescriptor* desc) {
 
     // The validation errors on BufferDescriptor should be prior to any OOM errors when
     // MapppedAtCreation == false.
-    MaybeError maybeError = ValidateBufferDescriptor(this, &fakeDescriptor);
+    MaybeError maybeError =
+        ValidateBufferDescriptor(this, &fakeDescriptor, UsageValidationMode::Default);
 
     // Set the size of the error buffer to 0 as this function is called only when an OOM happens at
     // the client side.
@@ -1508,10 +1509,11 @@ ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateBindGroupLayout(
     return GetOrCreateBindGroupLayout(descriptor);
 }
 
-ResultOrError<Ref<BufferBase>> DeviceBase::CreateBuffer(const BufferDescriptor* descriptor) {
+ResultOrError<Ref<BufferBase>> DeviceBase::CreateBuffer(const BufferDescriptor* descriptor,
+                                                        UsageValidationMode mode) {
     DAWN_TRY(ValidateIsAlive());
     if (IsValidationEnabled()) {
-        DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
+        DAWN_TRY(ValidateBufferDescriptor(this, descriptor, mode));
     }
 
     Ref<BufferBase> buffer;

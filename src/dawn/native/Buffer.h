@@ -24,6 +24,7 @@
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/ObjectBase.h"
+#include "dawn/native/UsageValidationMode.h"
 
 #include "dawn/native/dawn_platform.h"
 
@@ -33,7 +34,9 @@ struct CopyTextureToBufferCmd;
 
 enum class MapType : uint32_t;
 
-MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor);
+MaybeError ValidateBufferDescriptor(DeviceBase* device,
+                                    const BufferDescriptor* descriptor,
+                                    UsageValidationMode mode);
 
 static constexpr wgpu::BufferUsage kReadOnlyBufferUsages =
     wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::Index |
