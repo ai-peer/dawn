@@ -239,7 +239,7 @@ bool ShaderVisibleDescriptorAllocator::IsAllocationStillValid(
     const GPUDescriptorHeapAllocation& allocation) const {
     // Consider valid if allocated for the pending submit and the shader visible heaps
     // have not switched over.
-    return (allocation.GetLastUsageSerial() > mDevice->GetCompletedCommandSerial() &&
+    return (allocation.GetLastUsageSerial() > mDevice->GetLastSubmittedCommandSerial() &&
             allocation.GetHeapSerial() == mHeapSerial);
 }
 
