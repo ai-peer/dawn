@@ -50,6 +50,23 @@
       "message": "LGTM! Thanks for the cleanup!",
       "revId": "6066783bea36a6493f2e2c1e496c3df9aa348953",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "638755f6_f1ac411a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T14:45:44Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "6066783bea36a6493f2e2c1e496c3df9aa348953",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
