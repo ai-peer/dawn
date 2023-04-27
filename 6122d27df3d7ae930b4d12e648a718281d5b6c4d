@@ -39,6 +39,30 @@
       },
       "revId": "6122d27df3d7ae930b4d12e648a718281d5b6c4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1004bf_72fa0f0b",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T13:56:58Z",
+      "side": 1,
+      "message": "True, but seems better safe then crashy.",
+      "parentUuid": "3228b504_f11640f7",
+      "range": {
+        "startLine": 661,
+        "startChar": 12,
+        "endLine": 661,
+        "endChar": 50
+      },
+      "revId": "6122d27df3d7ae930b4d12e648a718281d5b6c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
