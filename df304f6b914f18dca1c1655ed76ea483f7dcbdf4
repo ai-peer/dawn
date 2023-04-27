@@ -16,6 +16,23 @@
       "message": "CTS also needs to be updated. I already made a PR.\n\nhttps://github.com/gpuweb/cts/pull/2519#issuecomment-1524504067\n\nUntil the CTS is updated and rolled, some test failures need to be suppressed. So I added some suppressions in the expectations.txt.",
       "revId": "df304f6b914f18dca1c1655ed76ea483f7dcbdf4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf110c1_bad16a0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T07:57:40Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "df304f6b914f18dca1c1655ed76ea483f7dcbdf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
