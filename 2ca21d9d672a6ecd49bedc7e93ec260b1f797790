@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80bcd67a_42264972",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-04-27T15:13:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03358c1b_5632b1e8",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d69d3e5c_ac05ebbb",
@@ -118,6 +136,24 @@
       "writtenOn": "2023-04-27T14:24:41Z",
       "side": 1,
       "message": "Location is also on line 1046",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf2b912_63bbe181",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-04-27T15:13:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d69d3e5c_ac05ebbb",
       "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
