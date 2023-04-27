@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ba6d92_6318a1cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T14:57:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b32c80c9552290eb37d632436e350b832993c8a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de0075ce_8188bacb",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T14:57:10Z",
+      "side": 1,
+      "message": "existing nit: use uint32_t instead of UINT \n\n```suggestion\n                            uint32_t firstConstant \u003d static_cast\u003cuint32_t\u003e(offset / 16);\n                            uint32_t size \u003d static_cast\u003cuint32_t\u003e(Align(binding.size, 16) / 16);\n                            uint32_t numConstants \u003d Align(size, 16);\n```",
+      "range": {
+        "startLine": 109,
+        "startChar": 28,
+        "endLine": 111,
+        "endChar": 64
+      },
+      "revId": "b32c80c9552290eb37d632436e350b832993c8a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
