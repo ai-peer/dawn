@@ -16,6 +16,69 @@
       "message": "Thanks, PTAL!",
       "revId": "76f2409dec45d61fbc6bfbcbf250647b82ed5369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "604a14d8_d8d0540c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:45:48Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the iteration! What ended up fixing the tests?",
+      "revId": "76f2409dec45d61fbc6bfbcbf250647b82ed5369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8057c8_6a6faa84",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:45:48Z",
+      "side": 1,
+      "message": "u-nit: we don\u0027t need to say this isn\u0027t supported as it\u0027s a validation error so it\u0027s clear from that. (also missing period at the end?)",
+      "range": {
+        "startLine": 244,
+        "startChar": 61,
+        "endLine": 244,
+        "endChar": 85
+      },
+      "revId": "76f2409dec45d61fbc6bfbcbf250647b82ed5369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9232e99_d4947de2",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:45:48Z",
+      "side": 1,
+      "message": "u-nit: `transientAttachment` (yeah it\u0027s different from Chromium :( ) ditto for `kAllowedTransientUsage` below.",
+      "range": {
+        "startLine": 321,
+        "startChar": 9,
+        "endLine": 321,
+        "endChar": 29
+      },
+      "revId": "76f2409dec45d61fbc6bfbcbf250647b82ed5369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

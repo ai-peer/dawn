@@ -305,6 +305,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca563d6_b5465d13",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-27T11:45:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8b16aa8a_25b17b15",
+      "revId": "fd8f4a46c82bf05a5e866d16664f600fef978c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84959888_2c7d5f94",
