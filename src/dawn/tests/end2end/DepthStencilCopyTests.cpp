@@ -38,6 +38,52 @@ constexpr std::array<wgpu::TextureFormat, 3> kValidDepthCopyTextureFormats = {
 constexpr std::array<wgpu::TextureFormat, 1> kValidDepthCopyFromBufferFormats = {
     wgpu::TextureFormat::Depth16Unorm,
 };
+
+uint32_t GetBytesPerPixel(wgpu::TextureFormat format, wgpu::TextureAspect aspect) {
+    uint32_t bytesPerPixel = 0;
+    switch (format) {
+        case wgpu::TextureFormat::Depth24PlusStencil8: {
+            ASSERT(aspect == wgpu::TextureAspect::StencilOnly);
+            bytesPerPixel = 1;
+            break;
+        }
+        case wgpu::TextureFormat::Depth32FloatStencil8: {
+            switch (aspect) {
+                case wgpu::TextureAspect::DepthOnly:
+                    bytesPerPixel = 4;
+                    break;
+                case wgpu::TextureAspect::StencilOnly:
+                    bytesPerPixel = 1;
+                    break;
+                default:
+                    UNREACHABLE();
+                    break;
+            }
+            break;
+        }
+        default:
+            bytesPerPixel = utils::GetTexelBlockSizeInBytes(format);
+            break;
+    }
+    return bytesPerPixel;
+}
+
+// constexpr float kClearDepthValues[] = {
+//     // Bytes of unorm 16 of 0.23 is 0xA3B0.
+//     // Use a non-zero clear depth to better test unorm16 compute emulation path.
+//     0.69f,
+//     // Having different clear values for different array layers for better testing.
+//     0.2f
+// };
+
+// Bytes of unorm 16 of 0.23 is 0xE13A, of which the 2 bytes are different.
+// This helps better test unorm 16 compute emulation path.
+constexpr float kInitDepth = 0.23f;
+
+// Bytes of unorm 16 of 0.23 is 0xA3B0.
+// Use a non-zero clear depth to better test unorm16 compute emulation path.
+constexpr float kClearDepth = 0.69f;
+
 }  // namespace
 
 class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestParams> {
@@ -90,9 +136,10 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
     wgpu::Texture CreateTexture(uint32_t width,
                                 uint32_t height,
                                 wgpu::TextureUsage usage,
-                                uint32_t mipLevelCount = 1) {
+                                uint32_t mipLevelCount = 1,
+                                uint32_t arrayLayerCount = 1) {
         wgpu::TextureDescriptor texDescriptor = {};
-        texDescriptor.size = {width, height, 1};
+        texDescriptor.size = {width, height, arrayLayerCount};
         texDescriptor.format = GetParam().mTextureFormat;
         texDescriptor.usage = usage;
         texDescriptor.mipLevelCount = mipLevelCount;
@@ -132,7 +179,8 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
                                              uint8_t clearStencil,
                                              uint8_t regionStencil,
                                              uint32_t mipLevel = 0,
-                                             uint32_t arrayLayer = 0) {
+                                             uint32_t arrayLayer = 0,
+                                             uint32_t arrayLayerCount = 1) {
         wgpu::TextureFormat format = GetParam().mTextureFormat;
         // Create the render pass used for the initialization.
         utils::ComboRenderPipelineDescriptor renderPipelineDesc;
@@ -159,26 +207,29 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
         }
 
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&renderPipelineDesc);
-
-        // Build the render pass used for initialization.
-        wgpu::TextureViewDescriptor viewDesc = {};
-        viewDesc.baseMipLevel = mipLevel;
-        viewDesc.mipLevelCount = 1;
-        viewDesc.baseArrayLayer = arrayLayer;
-        viewDesc.arrayLayerCount = 1;
-
-        utils::ComboRenderPassDescriptor renderPassDesc({}, texture.CreateView(&viewDesc));
-        renderPassDesc.UnsetDepthStencilLoadStoreOpsForFormat(format);
-        renderPassDesc.cDepthStencilAttachmentInfo.depthClearValue = clearDepth;
-        renderPassDesc.cDepthStencilAttachmentInfo.stencilClearValue = clearStencil;
-
-        // Draw the quad (two triangles)
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
-        wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPassDesc);
-        pass.SetPipeline(pipeline);
-        pass.SetStencilReference(regionStencil);
-        pass.Draw(6);
-        pass.End();
+
+        for (uint32_t curArrayLayer = 0; curArrayLayer < arrayLayerCount; curArrayLayer++) {
+            // Build the render pass used for initialization.
+            wgpu::TextureViewDescriptor viewDesc = {};
+            viewDesc.baseMipLevel = mipLevel;
+            viewDesc.mipLevelCount = 1;
+            viewDesc.baseArrayLayer = arrayLayer + curArrayLayer;
+            viewDesc.arrayLayerCount = 1;
+
+            utils::ComboRenderPassDescriptor renderPassDesc({}, texture.CreateView(&viewDesc));
+            renderPassDesc.UnsetDepthStencilLoadStoreOpsForFormat(format);
+            // TODO(dawn:1782): use different clear value for each array layer.
+            renderPassDesc.cDepthStencilAttachmentInfo.depthClearValue = clearDepth;
+            renderPassDesc.cDepthStencilAttachmentInfo.stencilClearValue = clearStencil;
+
+            // Draw the quad (two triangles)
+            wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPassDesc);
+            pass.SetPipeline(pipeline);
+            pass.SetStencilReference(regionStencil);
+            pass.Draw(6);
+            pass.End();
+        }
 
         wgpu::CommandBuffer commands = commandEncoder.Finish();
         queue.Submit(1, &commands);
@@ -224,34 +275,16 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
                                       uint32_t depth,
                                       wgpu::TextureFormat format = wgpu::TextureFormat::RGBA8Unorm,
                                       wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
-        uint32_t bytesPerPixel = 0;
-        switch (format) {
-            case wgpu::TextureFormat::Depth24PlusStencil8: {
-                ASSERT(aspect == wgpu::TextureAspect::StencilOnly);
-                bytesPerPixel = 1;
-                break;
-            }
-            case wgpu::TextureFormat::Depth32FloatStencil8: {
-                switch (aspect) {
-                    case wgpu::TextureAspect::DepthOnly:
-                        bytesPerPixel = 4;
-                        break;
-                    case wgpu::TextureAspect::StencilOnly:
-                        bytesPerPixel = 1;
-                        break;
-                    default:
-                        UNREACHABLE();
-                        break;
-                }
-                break;
-            }
-            default:
-                bytesPerPixel = utils::GetTexelBlockSizeInBytes(format);
-                break;
-        }
+        uint32_t bytesPerPixel = GetBytesPerPixel(format, aspect);
 
         uint32_t bytesPerRow = Align(width * bytesPerPixel, kTextureBytesPerRowAlignment);
-        return (bytesPerRow * (height - 1) + width * bytesPerPixel) * depth;
+
+        // Bytes per image before last array layer
+        uint32_t bytesPerImage = bytesPerRow * height;
+
+        return Align(
+            bytesPerImage * (depth - 1) + (bytesPerRow * (height - 1) + width * bytesPerPixel),
+            uint64_t(4));
     }
 
     wgpu::ShaderModule mVertexModule;
@@ -446,70 +479,100 @@ class DepthCopyTests : public DepthStencilCopyTests {
                              float initDepth,
                              uint32_t textureWidth,
                              uint32_t textureHeight,
+                             uint32_t textureArrayLayerCount,
                              uint32_t testLevel) {
-        // TODO(crbug.com/dawn/1237): Depth16Unorm test failed on OpenGL and OpenGLES which says
-        // Invalid format and type combination in glReadPixels
-        DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm &&
-                                 (IsOpenGL() || IsOpenGLES()));
-
-        // TODO(crbug.com/dawn/1291): These tests are failing on GLES (both native and ANGLE)
-        // when using Tint/GLSL.
-        DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
-
-        uint32_t mipLevelCount = testLevel + 1;
-        wgpu::Texture texture = CreateTexture(
-            textureWidth, textureHeight,
-            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, mipLevelCount);
-
-        InitializeDepthStencilTextureRegion(texture, 0.f, initDepth, 0, 0, testLevel);
-
         uint32_t copyWidth = textureWidth >> testLevel;
         uint32_t copyHeight = textureHeight >> testLevel;
-        wgpu::Extent3D copySize = {copyWidth, copyHeight, 1};
-
-        constexpr uint32_t kBytesPerRow = kTextureBytesPerRowAlignment;
         wgpu::BufferDescriptor bufferDescriptor = {};
         bufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
         bufferDescriptor.size =
-            bufferCopyOffset + BufferSizeForTextureCopy(copyWidth, copyHeight, 1,
-                                                        GetParam().mTextureFormat,
-                                                        wgpu::TextureAspect::DepthOnly);
+            bufferCopyOffset +
+            BufferSizeForTextureCopy(copyWidth, copyHeight, textureArrayLayerCount,
+                                     GetParam().mTextureFormat, wgpu::TextureAspect::DepthOnly);
         wgpu::Buffer destinationBuffer = device.CreateBuffer(&bufferDescriptor);
 
+        DoCopyFromDepthTestWithBuffer(destinationBuffer, bufferCopyOffset, initDepth, textureWidth,
+                                      textureHeight, textureArrayLayerCount, testLevel);
+    }
+
+    void DoCopyFromDepthTestWithBuffer(wgpu::Buffer destinationBuffer,
+                                       uint32_t bufferCopyOffset,
+                                       float initDepth,
+                                       uint32_t textureWidth,
+                                       uint32_t textureHeight,
+                                       uint32_t textureArrayLayerCount,
+                                       uint32_t testLevel) {
+        // TODO(crbug.com/dawn/1291): Compute emulation path fails for Angle on Windows.
+        DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
+
+        uint32_t mipLevelCount = testLevel + 1;
+        wgpu::Texture texture =
+            CreateTexture(textureWidth, textureHeight,
+                          wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc,
+                          mipLevelCount, textureArrayLayerCount);
+
+        // Initialize other mip levels with different init values for better testing
+        constexpr float garbageDepth = 0.123456789f;
+        ASSERT(initDepth != garbageDepth);
+
+        for (uint32_t level = 0; level < mipLevelCount; level++) {
+            float regionDepth = (level == testLevel) ? initDepth : garbageDepth;
+            InitializeDepthStencilTextureRegion(texture, kClearDepth, regionDepth, 0, 0, level, 0,
+                                                textureArrayLayerCount);
+        }
+
+        uint32_t copyWidth = textureWidth >> testLevel;
+        uint32_t copyHeight = textureHeight >> testLevel;
+        wgpu::Extent3D copySize = {copyWidth, copyHeight, textureArrayLayerCount};
+
+        wgpu::TextureFormat format = GetParam().mTextureFormat;
+        constexpr wgpu::TextureAspect aspect = wgpu::TextureAspect::DepthOnly;
+        uint32_t bytesPerPixel = GetBytesPerPixel(format, aspect);
+        uint32_t bytesPerRow = Align(copyWidth * bytesPerPixel, kTextureBytesPerRowAlignment);
+        uint32_t bytesPerImage = bytesPerRow * copyHeight;
+
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
-            texture, testLevel, {0, 0, 0}, wgpu::TextureAspect::DepthOnly);
+        wgpu::ImageCopyTexture imageCopyTexture =
+            utils::CreateImageCopyTexture(texture, testLevel, {0, 0, 0}, aspect);
         wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
-            destinationBuffer, bufferCopyOffset, kBytesPerRow, copyHeight);
+            destinationBuffer, bufferCopyOffset, bytesPerRow, copyHeight);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);
         wgpu::CommandBuffer commandBuffer = encoder.Finish();
         queue.Submit(1, &commandBuffer);
 
-        if (GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm) {
+        // Expected data pattern is that initDepth value at bottom left corner, while other region
+        // is kClearDepth. Data of each layer is the same.
+        if (format == wgpu::TextureFormat::Depth16Unorm) {
             uint16_t expected = FloatToUnorm<uint16_t>(initDepth);
-            std::vector<uint16_t> expectedData = {
-                0,        0,        0, 0,  //
-                0,        0,        0, 0,  //
-                expected, expected, 0, 0,  //
-                expected, expected, 0, 0,  //
-            };
-
-            for (uint32_t y = 0; y < copyHeight; ++y) {
-                EXPECT_BUFFER_U16_RANGE_EQ(expectedData.data() + copyWidth * y, destinationBuffer,
-                                           bufferCopyOffset + y * kBytesPerRow, copyWidth);
+            uint16_t cleared = FloatToUnorm<uint16_t>(kClearDepth);
+            std::vector<uint16_t> expectedData(copyWidth * copyHeight, cleared);
+            for (uint32_t y = copyHeight / 2; y < copyHeight; y++) {
+                auto rowStart = expectedData.data() + y * copyWidth;
+                std::fill(rowStart, rowStart + copyWidth / 2, expected);
             }
 
+            for (uint32_t z = 0; z < textureArrayLayerCount; ++z) {
+                uint32_t bufferOffsetPerArrayLayer = bytesPerImage * z;
+                for (uint32_t y = 0; y < copyHeight; ++y) {
+                    EXPECT_BUFFER_U16_RANGE_EQ(
+                        expectedData.data() + copyWidth * y, destinationBuffer,
+                        bufferCopyOffset + bufferOffsetPerArrayLayer + y * bytesPerRow, copyWidth);
+                }
+            }
         } else {
-            std::vector<float> expectedData = {
-                0.0,       0.0,       0.0, 0.0,  //
-                0.0,       0.0,       0.0, 0.0,  //
-                initDepth, initDepth, 0.0, 0.0,  //
-                initDepth, initDepth, 0.0, 0.0,  //
-            };
+            std::vector<float> expectedData(copyWidth * copyHeight, kClearDepth);
+            for (uint32_t y = copyHeight / 2; y < copyHeight; y++) {
+                auto rowStart = expectedData.data() + y * copyWidth;
+                std::fill(rowStart, rowStart + copyWidth / 2, initDepth);
+            }
 
-            for (uint32_t y = 0; y < copyHeight; ++y) {
-                EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedData.data() + copyWidth * y, destinationBuffer,
-                                             bufferCopyOffset + y * kBytesPerRow, copyWidth);
+            for (uint32_t z = 0; z < textureArrayLayerCount; ++z) {
+                uint32_t bufferOffsetPerArrayLayer = bytesPerImage * z;
+                for (uint32_t y = 0; y < copyHeight; ++y) {
+                    EXPECT_BUFFER_FLOAT_RANGE_EQ(
+                        expectedData.data() + copyWidth * y, destinationBuffer,
+                        bufferCopyOffset + bufferOffsetPerArrayLayer + y * bytesPerRow, copyWidth);
+                }
             }
         }
     }
@@ -517,34 +580,116 @@ class DepthCopyTests : public DepthStencilCopyTests {
 
 // Test copying the depth-only aspect into a buffer.
 TEST_P(DepthCopyTests, FromDepthAspect) {
-    constexpr float kInitDepth = 0.2f;
     constexpr uint32_t kBufferCopyOffset = 0;
-    constexpr uint32_t kWidth = 4;
-    constexpr uint32_t kHeight = 4;
     constexpr uint32_t kTestLevel = 0;
-    DoCopyFromDepthTest(kBufferCopyOffset, kInitDepth, kWidth, kHeight, kTestLevel);
+    constexpr uint32_t kTestTextureSizes[][2] = {
+        // Original test parameter
+        {4, 4},
+        // Only 1 pixel at bottom left has value, test compute emulation path for unorm 16
+        {2, 2},
+        // Odd number texture width to test compute emulation path for unorm 16
+        {3, 3},
+        // float 32 needs bytesPerRow alignment
+        {65, 1},
+        // unorm 16 and float 32 need bytesPerRow alignment
+        {129, 1},
+    };
+    constexpr uint32_t kTestTextureArrayLayerCounts[] = {
+        1,
+        2,
+    };
+
+    for (const uint32_t sizeZ : kTestTextureArrayLayerCounts) {
+        for (const auto& size : kTestTextureSizes) {
+            DoCopyFromDepthTest(kBufferCopyOffset, kInitDepth, size[0], size[1], sizeZ, kTestLevel);
+        }
+    }
 }
 
 // Test copying the depth-only aspect into a buffer at a non-zero offset.
 TEST_P(DepthCopyTests, FromDepthAspectToBufferAtNonZeroOffset) {
-    constexpr float kInitDepth = 0.2f;
-    constexpr uint32_t kWidth = 4;
-    constexpr uint32_t kHeight = 4;
     constexpr uint32_t kTestLevel = 0;
-    constexpr std::array<uint32_t, 2> kBufferCopyOffsets = {4u, 512u};
-    for (uint32_t offset : kBufferCopyOffsets) {
-        DoCopyFromDepthTest(offset, kInitDepth, kWidth, kHeight, kTestLevel);
+    constexpr uint32_t kBufferCopyOffsets[] = {4u, 512u};
+    constexpr uint32_t kTestTextureSizes[][2] = {
+        // Original test parameter
+        {4, 4},
+        // Only 1 pixel at bottom left has value, test compute emulation path for unorm 16
+        {2, 2},
+        // Odd number texture width to test compute emulation path for unorm 16
+        {3, 3},
+        // float 32 needs bytesPerRow alignment
+        {65, 1},
+        // unorm 16 and float 32 need bytesPerRow alignment
+        {129, 1},
+    };
+    constexpr uint32_t kTestTextureArrayLayerCounts[] = {
+        1,
+        2,
+    };
+    for (const uint32_t sizeZ : kTestTextureArrayLayerCounts) {
+        for (uint32_t offset : kBufferCopyOffsets) {
+            for (const auto& size : kTestTextureSizes) {
+                DoCopyFromDepthTest(offset, kInitDepth, size[0], size[1], sizeZ, kTestLevel);
+            }
+        }
     }
 }
 
 // Test copying the non-zero mip, depth-only aspect into a buffer.
 TEST_P(DepthCopyTests, FromNonZeroMipDepthAspect) {
-    constexpr float kInitDepth = 0.2f;
     constexpr uint32_t kBufferCopyOffset = 0;
     constexpr uint32_t kWidth = 9;
     constexpr uint32_t kHeight = 9;
-    constexpr uint32_t kTestLevel = 1;
-    DoCopyFromDepthTest(kBufferCopyOffset, kInitDepth, kWidth, kHeight, kTestLevel);
+    DoCopyFromDepthTest(kBufferCopyOffset, kInitDepth, kWidth, kHeight, 1, 1);
+    DoCopyFromDepthTest(kBufferCopyOffset, kInitDepth, kWidth, kHeight, 2, 2);
+}
+
+// Test buffer content outside of copy extent is preserved.
+// This test is made specifially for compute blit for depth emulation path.
+// When the copy extent width is an odd number, we need to make sure the original content of the
+// buffer that's outside of the copy extent is still correctly preserved instead of overwritten.
+TEST_P(DepthCopyTests, PreserveBufferContent) {
+    constexpr uint32_t kBufferCopyOffsets[] = {0u, 4u, 512u};
+    constexpr uint32_t kTestTextureSizes[][2] = {
+        {1, 1},
+        {3, 3},
+        {1, 2},
+    };
+    const uint32_t kSizeZ = 1;
+    constexpr uint32_t kTestLevel = 0;
+
+    wgpu::TextureFormat format = GetParam().mTextureFormat;
+
+    for (uint32_t offset : kBufferCopyOffsets) {
+        for (const auto& size : kTestTextureSizes) {
+            wgpu::BufferDescriptor bufferDescriptor = {};
+            bufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+            // Buffer size is always large enough
+            bufferDescriptor.size = 2048;
+            bufferDescriptor.mappedAtCreation = true;
+            wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+            uint8_t* ptr = static_cast<uint8_t*>(buffer.GetMappedRange());
+            constexpr uint8_t kOriginalValue = 0xff;
+            std::fill(ptr, ptr + bufferDescriptor.size, kOriginalValue);
+            buffer.Unmap();
+
+            DoCopyFromDepthTestWithBuffer(buffer, offset, kInitDepth, size[0], size[1], kSizeZ,
+                                          kTestLevel);
+
+            // Check buffer content outside of copy extent.
+            if (offset > 0) {
+                std::vector<uint8_t> expected(offset, kOriginalValue);
+                EXPECT_BUFFER_U8_RANGE_EQ(expected.data(), buffer, 0, offset);
+            }
+
+            uint32_t o = offset + BufferSizeForTextureCopy(size[0], size[1], kSizeZ, format,
+                                                           wgpu::TextureAspect::DepthOnly);
+            ASSERT(bufferDescriptor.size > o);
+            uint32_t checkSize = bufferDescriptor.size - o;
+            std::vector<uint8_t> expected(checkSize, kOriginalValue);
+            EXPECT_BUFFER_U8_RANGE_EQ(expected.data(), buffer, o, checkSize);
+        }
+    }
 }
 
 class DepthCopyFromBufferTests : public DepthStencilCopyTests {
@@ -580,8 +725,6 @@ class DepthCopyFromBufferTests : public DepthStencilCopyTests {
         wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
             destTexture, 0, {0, 0, 0}, wgpu::TextureAspect::DepthOnly);
         wgpu::Extent3D extent = {kWidth, kHeight, 1};
-
-        constexpr float kInitDepth = 0.2f;
 
         // This expectation is the test as it performs the CopyTextureToBuffer.
         if (GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm) {
