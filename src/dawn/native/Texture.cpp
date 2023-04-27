@@ -592,6 +592,12 @@ TextureBase::TextureBase(DeviceBase* device,
             AddInternalUsage(wgpu::TextureUsage::RenderAttachment);
         }
     }
+    if (mFormat.HasDepth() && device->IsToggleEnabled(Toggle::UseBlitForDepthTextureToBufferCopy)) {
+        if (mInternalUsage & wgpu::TextureUsage::CopySrc) {
+            AddInternalUsage(wgpu::TextureUsage::TextureBinding);
+        }
+    }
+    // TODO: stencil
 }
 
 TextureBase::~TextureBase() = default;
