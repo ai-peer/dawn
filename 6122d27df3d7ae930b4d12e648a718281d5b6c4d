@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "6122d27df3d7ae930b4d12e648a718281d5b6c4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3228b504_f11640f7",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-27T13:55:52Z",
+      "side": 1,
+      "message": "I can\u0027t think of any cases where we\u0027d expect `Clone` to return nullptr.",
+      "range": {
+        "startLine": 661,
+        "startChar": 12,
+        "endLine": 661,
+        "endChar": 50
+      },
+      "revId": "6122d27df3d7ae930b4d12e648a718281d5b6c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
