@@ -381,6 +381,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Use a blit to copy from a depth texture to the nonzero subresource of a depth texture. "
       "Works around an issue where nonzero layers are not written.",
       "https://crbug.com/dawn/1083", ToggleStage::Device}},
+    {Toggle::UseBlitForDepthTextureToBufferCopy,
+     {"use_blit_for_depth_texture_to_buffer_copy",
+      "Use a blit instead of a copy command to copy depth aspect of a texture to a buffer."
+      "Works around GLES not allowing glReadPixels() on depth or stencil formats.",
+      "https://crbug.com/dawn/1782", ToggleStage::Device}},
     {Toggle::D3D12ReplaceAddWithMinusWhenDstFactorIsZeroAndSrcFactorIsDstAlpha,
      {"d3d12_replace_add_with_minus_when_dst_factor_is_zero_and_src_factor_is_dst_alpha",
       "Replace the blending operation 'Add' with 'Minus' when dstBlendFactor is 'Zero' and "

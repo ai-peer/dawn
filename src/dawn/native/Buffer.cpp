@@ -172,6 +172,10 @@ BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
         mUsage |= kInternalStorageBuffer;
     }
 
+    if (device->IsToggleEnabled(Toggle::UseBlitForDepthTextureToBufferCopy)) {
+        mUsage |= kInternalStorageBuffer;
+    }
+
     GetObjectTrackingList()->Track(this);
 }
 
