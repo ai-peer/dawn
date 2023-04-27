@@ -211,6 +211,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9f29c44_739be7ad",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-27T14:37:47Z",
+      "side": 1,
+      "message": "The idea is:\n\nCreate a temp d3d11::Buffer with `MapWrite|CopySrc` here as staging buffer, and then map and fill it with the `data`, and then use `CopySubresourceRegion()` to copy the data to final destination. It can workaround 16 bytes alignment. However it needs an extra copy for some cases[1]. For example, with integrated GPU, `UpdateSubresource()` can copy data to final destination directly, if the buffer is not being used by GPU.\n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-updatesubresource\n\n\n@enga@chromium.org suggests using DynamicUploader and allocating staging buffer with `D3D11_DYNAMIC_USAGE`, so the staging buffer can not only be used for B2B copy but also B2T and T2B copy as well.\n\nHowever the current DynamicUploader sub-allocates block from staging buffers for uploading data. So the buffers have to be always mapped all the time. But d3d11 doesn\u0027t allow GPU read and write on a mapped buffer. So with this approach, we need to implement a new DynamicUploader for D3D11 only.",
+      "parentUuid": "f396ea03_20acdcba",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
