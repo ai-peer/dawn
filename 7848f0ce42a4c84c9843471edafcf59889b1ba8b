@@ -16,6 +16,46 @@
       "message": "This seems like the right fix to me. PTAL. Fixes dawn:1701.",
       "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44fd57b9_3a1c9c7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T22:43:06Z",
+      "side": 1,
+      "message": "if it fixes the problem, then I think we should probably land this since it\u0027s a pretty small and targeted change.\n\nThat said, I\u0027m still trying to understand *how* it fixes the problem. It\u0027ll definitely make the heaps switch over faster - but is that simply masking the problem in some other way?\n\nFrom what I understand, the descriptors are allocated from some pending serial `N`.\nThese descriptors are marked as free in the descriptor allocator once `N` has completed on the GPU. After they are complete, we\u0027ll reuse that space in the ring buffer to put new GPU descriptors.\n\nSo, using CompletedSerial *sounds* right to me. the descriptors are still valid if that serial hasn\u0027t passed yet......\n\nOHHH is it because we are checking `lastUsageSerial \u003e CompletedSerial` when it should be `lastUsageSerial \u003e\u003d CompletedSerial ????",
+      "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bc49e1b_00930d63",
+        "filename": "src/dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T22:43:06Z",
+      "side": 1,
+      "message": "```suggestion\n    return (allocation.GetLastUsageSerial() \u003e\u003d mDevice-\u003eGetCompletedCommandSerial() \u0026\u0026\n```\n\nI think this might be the actual problem :o",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 89
+      },
+      "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
