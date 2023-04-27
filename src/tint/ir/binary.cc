@@ -31,67 +31,66 @@ Binary::~Binary() = default;
 
 utils::StringStream& Binary::ToInstruction(utils::StringStream& out) const {
     ToValue(out) << " = ";
-    lhs_->ToValue(out) << " ";
 
     switch (GetKind()) {
         case Binary::Kind::kAdd:
-            out << "+";
+            out << "add";
             break;
         case Binary::Kind::kSubtract:
-            out << "-";
+            out << "sub";
             break;
         case Binary::Kind::kMultiply:
-            out << "*";
+            out << "mul";
             break;
         case Binary::Kind::kDivide:
-            out << "/";
+            out << "div";
             break;
         case Binary::Kind::kModulo:
-            out << "%";
+            out << "mod";
             break;
         case Binary::Kind::kAnd:
-            out << "&";
+            out << "bitwise_and";
             break;
         case Binary::Kind::kOr:
-            out << "|";
+            out << "bitwise_or";
             break;
         case Binary::Kind::kXor:
-            out << "^";
+            out << "bitwise_xor";
             break;
         case Binary::Kind::kLogicalAnd:
-            out << "&&";
+            out << "logical_and";
             break;
         case Binary::Kind::kLogicalOr:
-            out << "||";
+            out << "logical_or";
             break;
         case Binary::Kind::kEqual:
-            out << "==";
+            out << "eq";
             break;
         case Binary::Kind::kNotEqual:
-            out << "!=";
+            out << "not_eq";
             break;
         case Binary::Kind::kLessThan:
-            out << "<";
+            out << "less_than";
             break;
         case Binary::Kind::kGreaterThan:
-            out << ">";
+            out << "greater_than";
             break;
         case Binary::Kind::kLessThanEqual:
-            out << "<=";
+            out << "less_than_eq";
             break;
         case Binary::Kind::kGreaterThanEqual:
-            out << ">=";
+            out << "greater_than_eq";
             break;
         case Binary::Kind::kShiftLeft:
-            out << "<<";
+            out << "shift_left";
             break;
         case Binary::Kind::kShiftRight:
-            out << ">>";
+            out << "shift_right";
             break;
     }
     out << " ";
+    lhs_->ToValue(out) << ", ";
     rhs_->ToValue(out);
-
     return out;
 }
 
