@@ -56,6 +56,30 @@
       },
       "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4de3715_9989f1af",
+        "filename": "src/dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-27T22:44:10Z",
+      "side": 1,
+      "message": "nevermind. I\u0027m wrong; this is the opposite condition. it\u0027s checking that it is still valid, not that it is invalid.",
+      "parentUuid": "7bc49e1b_00930d63",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 89
+      },
+      "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
