@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e9adc81_3e6d21a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T14:24:41Z",
+      "side": 1,
+      "message": "It\u0027s a little weird the validation for attributes happens in the resolver now, but I guess it makes things simpler.",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c52c4e_8fe66bf2",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T14:24:41Z",
+      "side": 1,
+      "message": "Does this even need a switch, this is always an error isn\u0027t it?",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5343923_ef4cc111",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T14:24:41Z",
+      "side": 1,
+      "message": "`enum class`",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03358c1b_5632b1e8",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T14:24:41Z",
+      "side": 1,
+      "message": "LocationAttribute is also on line 597",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d69d3e5c_ac05ebbb",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T14:24:41Z",
+      "side": 1,
+      "message": "Location is also on line 1046",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3206ea7_c0def585",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-27T14:24:41Z",
+      "side": 1,
+      "message": "nit: Switch isn\u0027t needed as this always errors.",
+      "revId": "2ca21d9d672a6ecd49bedc7e93ec260b1f797790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
