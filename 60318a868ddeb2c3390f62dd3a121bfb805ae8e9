@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9adcdb9_1b0f482e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-28T12:04:46Z",
+      "side": 1,
+      "message": "`Map()` call may block CPU if the last `CopySubresourceRegion()` call is not done with GPU. Maybe creating a new copy size staging buffer every time will be better (especially for huge size constant buffer or multiple writes per frame) until we have some thing like DynamicUploader for D3D11.",
+      "range": {
+        "startLine": 475,
+        "startChar": 43,
+        "endLine": 475,
+        "endChar": 60
+      },
+      "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
