@@ -151,7 +151,7 @@ InstanceBase::~InstanceBase() = default;
 void InstanceBase::WillDropLastExternalRef() {
     // InstanceBase uses RefCountedWithExternalCount to break refcycles.
     //
-    // InstanceBase holds Refs to AdapterBases it has discovered, which hold Refs back to the
+    // InstanceBase holds Refs to PhysicalDeviceBases it has discovered, which hold Refs back to the
     // InstanceBase.
     // In order to break this cycle and prevent leaks, when the application drops the last external
     // ref and WillDropLastExternalRef is called, the instance clears out any member refs to
@@ -204,13 +204,13 @@ void InstanceBase::APIRequestAdapter(const RequestAdapterOptions* options,
         // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
         callback(WGPURequestAdapterStatus_Error, nullptr, msg.c_str(), userdata);
     } else {
-        Ref<AdapterBase> adapter = result.AcquireSuccess();
+        Ref<PhysicalDeviceBase> adapter = result.AcquireSuccess();
         // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
         callback(WGPURequestAdapterStatus_Success, ToAPI(adapter.Detach()), nullptr, userdata);
     }
 }
 
-ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
+ResultOrError<Ref<PhysicalDeviceBase>> InstanceBase::RequestAdapterInternal(
     const RequestAdapterOptions* options) {
     ASSERT(options != nullptr);
     if (options->forceFallbackAdapter) {
@@ -224,11 +224,11 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
                 dawn::WarningLog() << absl::StrFormat(
                     "Skipping Vulkan Swiftshader adapter because initialization failed: %s",
                     result.AcquireError()->GetFormattedMessage());
-                return Ref<AdapterBase>(nullptr);
+                return Ref<PhysicalDeviceBase>(nullptr);
             }
         }
 #else
-        return Ref<AdapterBase>(nullptr);
+        return Ref<PhysicalDeviceBase>(nullptr);
 #endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
     } else {
         DiscoverDefaultAdapters();
@@ -293,7 +293,7 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
         return mAdapters[*unknownAdapterIndex];
     }
 
-    return Ref<AdapterBase>(nullptr);
+    return Ref<PhysicalDeviceBase>(nullptr);
 }
 
 void InstanceBase::DiscoverDefaultAdapters() {
@@ -313,10 +313,10 @@ void InstanceBase::DiscoverDefaultAdapters() {
         TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
         adapterToggles.InheritFrom(mToggles);
 
-        std::vector<Ref<AdapterBase>> backendAdapters =
+        std::vector<Ref<PhysicalDeviceBase>> backendAdapters =
             backend->DiscoverDefaultAdapters(adapterToggles);
 
-        for (Ref<AdapterBase>& adapter : backendAdapters) {
+        for (Ref<PhysicalDeviceBase>& adapter : backendAdapters) {
             ASSERT(adapter->GetBackendType() == backend->GetType());
             ASSERT(adapter->GetInstance() == this);
             mAdapters.push_back(std::move(adapter));
@@ -356,7 +356,7 @@ const FeatureInfo* InstanceBase::GetFeatureInfo(wgpu::FeatureName feature) {
     return mFeaturesInfo.GetFeatureInfo(feature);
 }
 
-const std::vector<Ref<AdapterBase>>& InstanceBase::GetAdapters() const {
+const std::vector<Ref<PhysicalDeviceBase>>& InstanceBase::GetAdapters() const {
     return mAdapters;
 }
 
@@ -447,10 +447,10 @@ MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsB
         TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
         adapterToggles.InheritFrom(mToggles);
 
-        std::vector<Ref<AdapterBase>> newAdapters;
+        std::vector<Ref<PhysicalDeviceBase>> newAdapters;
         DAWN_TRY_ASSIGN(newAdapters, backend->DiscoverAdapters(options, adapterToggles));
 
-        for (Ref<AdapterBase>& adapter : newAdapters) {
+        for (Ref<PhysicalDeviceBase>& adapter : newAdapters) {
             ASSERT(adapter->GetBackendType() == backend->GetType());
             ASSERT(adapter->GetInstance() == this);
             mAdapters.push_back(std::move(adapter));

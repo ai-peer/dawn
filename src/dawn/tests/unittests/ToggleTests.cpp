@@ -133,7 +133,7 @@ TEST_F(InstanceToggleTest, InstanceTogglesInheritToAdapterAndDevice) {
         instance->DiscoverDefaultAdapters();
 
         // Get the adapter created by instance with default toggles.
-        dawn::native::AdapterBase* nullAdapter = nullptr;
+        dawn::native::PhysicalDeviceBase* nullAdapter = nullptr;
         for (auto& adapter : instance->GetAdapters()) {
             if (adapter->GetBackendType() == wgpu::BackendType::Null) {
                 nullAdapter = adapter.Get();

@@ -510,7 +510,7 @@ NSRef<MTLVertexDescriptor> RenderPipeline::MakeVertexDesc() {
 void RenderPipeline::InitializeAsync(Ref<RenderPipelineBase> renderPipeline,
                                      WGPUCreateRenderPipelineAsyncCallback callback,
                                      void* userdata) {
-    AdapterBase* adapter = renderPipeline->GetDevice()->GetAdapter();
+    PhysicalDeviceBase* adapter = renderPipeline->GetDevice()->GetAdapter();
     std::unique_ptr<CreateRenderPipelineAsyncTask> asyncTask =
         std::make_unique<CreateRenderPipelineAsyncTask>(std::move(renderPipeline), callback,
                                                         userdata);

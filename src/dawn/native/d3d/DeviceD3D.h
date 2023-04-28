@@ -28,7 +28,7 @@ class PlatformFunctions;
 
 class Device : public DeviceBase {
   public:
-    Device(AdapterBase* adapter,
+    Device(PhysicalDeviceBase* adapter,
            const DeviceDescriptor* descriptor,
            const TogglesState& deviceToggles);
     ~Device() override;

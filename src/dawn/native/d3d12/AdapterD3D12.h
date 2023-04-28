@@ -32,7 +32,7 @@ class Adapter : public d3d::Adapter {
             const TogglesState& adapterToggles);
     ~Adapter() override;
 
-    // AdapterBase Implementation
+    // PhysicalDeviceBase Implementation
     bool SupportsExternalImages() const override;
 
     const D3D12DeviceInfo& GetDeviceInfo() const;

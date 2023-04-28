@@ -86,7 +86,7 @@ bool ComputePipeline::RequiresStorageBufferLength() const {
 void ComputePipeline::InitializeAsync(Ref<ComputePipelineBase> computePipeline,
                                       WGPUCreateComputePipelineAsyncCallback callback,
                                       void* userdata) {
-    AdapterBase* adapter = computePipeline->GetDevice()->GetAdapter();
+    PhysicalDeviceBase* adapter = computePipeline->GetDevice()->GetAdapter();
     std::unique_ptr<CreateComputePipelineAsyncTask> asyncTask =
         std::make_unique<CreateComputePipelineAsyncTask>(std::move(computePipeline), callback,
                                                          userdata);

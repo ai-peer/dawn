@@ -21,7 +21,7 @@
 
 namespace dawn::native::opengl {
 
-class Adapter : public AdapterBase {
+class Adapter : public PhysicalDeviceBase {
   public:
     Adapter(InstanceBase* instance,
             wgpu::BackendType backendType,
@@ -31,7 +31,7 @@ class Adapter : public AdapterBase {
 
     ~Adapter() override = default;
 
-    // AdapterBase Implementation
+    // PhysicalDeviceBase Implementation
     bool SupportsExternalImages() const override;
 
   private:

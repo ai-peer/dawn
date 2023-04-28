@@ -104,7 +104,7 @@ void API_AVAILABLE(macos(10.15), ios(14)) UpdateTimestampPeriod(id<MTLDevice> de
 }  // namespace
 
 // static
-ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
+ResultOrError<Ref<Device>> Device::Create(PhysicalDeviceBase* adapter,
                                           NSPRef<id<MTLDevice>> mtlDevice,
                                           const DeviceDescriptor* descriptor,
                                           const TogglesState& deviceToggles) {
@@ -114,7 +114,7 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
     return device;
 }
 
-Device::Device(AdapterBase* adapter,
+Device::Device(PhysicalDeviceBase* adapter,
                NSPRef<id<MTLDevice>> mtlDevice,
                const DeviceDescriptor* descriptor,
                const TogglesState& deviceToggles)

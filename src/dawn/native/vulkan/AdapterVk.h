@@ -25,7 +25,7 @@ namespace dawn::native::vulkan {
 
 class VulkanInstance;
 
-class Adapter : public AdapterBase {
+class Adapter : public PhysicalDeviceBase {
   public:
     Adapter(InstanceBase* instance,
             VulkanInstance* vulkanInstance,
@@ -33,7 +33,7 @@ class Adapter : public AdapterBase {
             const TogglesState& adapterToggles);
     ~Adapter() override;
 
-    // AdapterBase Implementation
+    // PhysicalDeviceBase Implementation
     bool SupportsExternalImages() const override;
 
     const VulkanDeviceInfo& GetDeviceInfo() const;

@@ -170,7 +170,7 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescrip
 
 // DeviceBase
 
-DeviceBase::DeviceBase(AdapterBase* adapter,
+DeviceBase::DeviceBase(PhysicalDeviceBase* adapter,
                        const DeviceDescriptor* descriptor,
                        const TogglesState& deviceToggles)
     : mAdapter(adapter), mToggles(deviceToggles), mNextPipelineCompatibilityToken(1) {
@@ -719,7 +719,7 @@ ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) {
     return &mObjectLists[type];
 }
 
-AdapterBase* DeviceBase::GetAdapter() const {
+PhysicalDeviceBase* DeviceBase::GetAdapter() const {
     return mAdapter.Get();
 }
 
@@ -1345,7 +1345,7 @@ MaybeError DeviceBase::Tick() {
     return {};
 }
 
-AdapterBase* DeviceBase::APIGetAdapter() {
+PhysicalDeviceBase* DeviceBase::APIGetAdapter() {
     mAdapter->Reference();
     return mAdapter.Get();
 }

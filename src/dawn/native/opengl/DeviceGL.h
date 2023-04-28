@@ -40,7 +40,7 @@ namespace dawn::native::opengl {
 class Device final : public DeviceBase {
   public:
     class Context;
-    static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
+    static ResultOrError<Ref<Device>> Create(PhysicalDeviceBase* adapter,
                                              const DeviceDescriptor* descriptor,
                                              const OpenGLFunctions& functions,
                                              std::unique_ptr<Context> context,
@@ -91,7 +91,7 @@ class Device final : public DeviceBase {
     };
 
   private:
-    Device(AdapterBase* adapter,
+    Device(PhysicalDeviceBase* adapter,
            const DeviceDescriptor* descriptor,
            const OpenGLFunctions& functions,
            std::unique_ptr<Context> context,

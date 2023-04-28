@@ -167,7 +167,7 @@ class Device final : public d3d::Device {
   private:
     using Base = d3d::Device;
 
-    Device(AdapterBase* adapter,
+    Device(PhysicalDeviceBase* adapter,
            const DeviceDescriptor* descriptor,
            const TogglesState& deviceToggles);
 

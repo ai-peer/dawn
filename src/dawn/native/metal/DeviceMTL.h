@@ -38,7 +38,7 @@ struct ExternalImageMTLSharedEventDescriptor;
 
 class Device final : public DeviceBase {
   public:
-    static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
+    static ResultOrError<Ref<Device>> Create(PhysicalDeviceBase* adapter,
                                              NSPRef<id<MTLDevice>> mtlDevice,
                                              const DeviceDescriptor* descriptor,
                                              const TogglesState& deviceToggles);
@@ -88,7 +88,7 @@ class Device final : public DeviceBase {
     void ForceEventualFlushOfCommands() override;
 
   private:
-    Device(AdapterBase* adapter,
+    Device(PhysicalDeviceBase* adapter,
            NSPRef<id<MTLDevice>> mtlDevice,
            const DeviceDescriptor* descriptor,
            const TogglesState& deviceToggles);
