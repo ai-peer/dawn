@@ -61,7 +61,7 @@ using WGSLExtensionSet = std::unordered_set<std::string>;
 
 class DeviceBase : public RefCountedWithExternalCount {
   public:
-    DeviceBase(AdapterBase* adapter,
+    DeviceBase(AdapterBase* physicalDevice,
                const DeviceDescriptor* descriptor,
                const TogglesState& deviceToggles);
     ~DeviceBase() override;
