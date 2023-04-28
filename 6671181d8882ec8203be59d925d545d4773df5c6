@@ -71,6 +71,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4473fbe0_fc336016",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:24:30Z",
+      "side": 1,
+      "message": "Let us know if the requests for changes are too much for a hobby project, we can  take over the patch if needed.",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37af72b1_e754e2e9",
@@ -166,6 +183,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d82da3b0_558e8ec3",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:24:30Z",
+      "side": 1,
+      "message": "I wrote that mechanism and forgot `previousSwapChain` could be `this` ^^. Agreed that it is easiest to schedule for deletion. However isn\u0027t there a problem where the deletion should wait for the presentation engine to be done (so the next AcquireImageKHR that returns that index) instead of calling DeleteWhenUnused which will only wait for the last submitted commands?",
+      "parentUuid": "bd399f32_d91f9982",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a725883_35a10a75",
         "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
         "patchSetId": 1
@@ -195,6 +230,24 @@
       "side": 1,
       "message": "Note the language in that quote:\n\u003e This automatic visibility operation for an image happens-after the semaphore signal operation[...]\n\nSo we need a semaphore for this visibility operation to happen.\n\nThis is made explicit in this part of the spec:\n\u003e The processing of the presentation happens in issue order with other queue operations, but semaphores have to be used to ensure that prior rendering and other commands in the specified queue complete before the presentation begins.\n\nThough it\u0027s easy to miss this part of the spec as it comes after all the extension structs you can add in `VkPresentInfoKHR.pNext`. So you won\u0027t see it if you read the individual manual pages for `vkQueuePresentKHR` or `VkPresentInfoKHR`, you have to view the full spec.",
       "parentUuid": "5a725883_35a10a75",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e1d145_f3dc56b0",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:24:30Z",
+      "side": 1,
+      "message": "Thank you for the reference, it makes sense.",
+      "parentUuid": "12c87291_5116d0a4",
       "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
