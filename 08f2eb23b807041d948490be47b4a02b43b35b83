@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65df2230_6b1b8c4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T21:50:08Z",
+      "side": 1,
+      "message": "Austin: PTAL.\n\nLMK if this is headed in the right direction. For now, I\u0027ve just replaced Adapter with a \"using Adapter \u003d PhysicalDevice;\". Eventually, it should be its on class, holding a ref\u003cPhysicalDevice\u003e.",
+      "revId": "08f2eb23b807041d948490be47b4a02b43b35b83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
