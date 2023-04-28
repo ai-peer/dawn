@@ -114,7 +114,7 @@ ValidationTest::ValidationTest() {
                                     WGPURequestDeviceCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
         WGPUDevice cDevice = gCurrentTest->CreateTestDevice(
-            dawn::native::Adapter(reinterpret_cast<dawn::native::AdapterBase*>(adapter)));
+            dawn::native::Adapter(reinterpret_cast<dawn::native::PhysicalDeviceBase*>(adapter)));
         ASSERT(cDevice != nullptr);
         gCurrentTest->mLastCreatedBackendDevice = cDevice;
         callback(WGPURequestDeviceStatus_Success, cDevice, nullptr, userdata);
