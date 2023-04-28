@@ -16,10 +16,10 @@
 #include <vector>
 
 #include "dawn/dawn_proc.h"
-#include "dawn/native/Adapter.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/dawn_platform.h"
 #include "dawn/tests/MockCallback.h"
@@ -133,7 +133,7 @@ TEST_F(InstanceToggleTest, InstanceTogglesInheritToAdapterAndDevice) {
         instance->DiscoverDefaultAdapters();
 
         // Get the adapter created by instance with default toggles.
-        dawn::native::AdapterBase* nullAdapter = nullptr;
+        dawn::native::PhysicalDeviceBase* nullAdapter = nullptr;
         for (auto& adapter : instance->GetAdapters()) {
             if (adapter->GetBackendType() == wgpu::BackendType::Null) {
                 nullAdapter = adapter.Get();

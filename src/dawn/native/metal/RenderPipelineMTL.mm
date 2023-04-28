@@ -14,9 +14,9 @@
 
 #include "dawn/native/metal/RenderPipelineMTL.h"
 
-#include "dawn/native/Adapter.h"
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/VertexFormat.h"
 #include "dawn/native/metal/DeviceMTL.h"
 #include "dawn/native/metal/PipelineLayoutMTL.h"
@@ -510,7 +510,7 @@ NSRef<MTLVertexDescriptor> RenderPipeline::MakeVertexDesc() {
 void RenderPipeline::InitializeAsync(Ref<RenderPipelineBase> renderPipeline,
                                      WGPUCreateRenderPipelineAsyncCallback callback,
                                      void* userdata) {
-    AdapterBase* adapter = renderPipeline->GetDevice()->GetAdapter();
+    PhysicalDeviceBase* adapter = renderPipeline->GetDevice()->GetAdapter();
     std::unique_ptr<CreateRenderPipelineAsyncTask> asyncTask =
         std::make_unique<CreateRenderPipelineAsyncTask>(std::move(renderPipeline), callback,
                                                         userdata);

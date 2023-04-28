@@ -34,7 +34,7 @@ struct DeviceDescriptor;
 namespace dawn::native {
 
 class InstanceBase;
-class AdapterBase;
+class PhysicalDeviceBase;
 
 // An optional parameter of Adapter::CreateDevice() to send additional information when creating
 // a Device. For example, we can use it to enable a workaround, optimization or feature.
@@ -86,7 +86,7 @@ class DAWN_NATIVE_EXPORT Adapter {
   public:
     Adapter();
     // NOLINTNEXTLINE(runtime/explicit)
-    Adapter(AdapterBase* impl);
+    Adapter(PhysicalDeviceBase* impl);
     ~Adapter();
 
     Adapter(const Adapter& other);
@@ -131,7 +131,7 @@ class DAWN_NATIVE_EXPORT Adapter {
     void ResetInternalDeviceForTesting();
 
   private:
-    AdapterBase* mImpl = nullptr;
+    PhysicalDeviceBase* mImpl = nullptr;
 };
 
 // Base class for options passed to Instance::DiscoverAdapters.
