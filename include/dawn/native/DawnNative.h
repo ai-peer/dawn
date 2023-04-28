@@ -34,7 +34,9 @@ struct DeviceDescriptor;
 namespace dawn::native {
 
 class InstanceBase;
-class AdapterBase;
+
+class PhysicalDeviceBase;                // TODO(dawn:1774): remove this when AdapterBase
+using AdapterBase = PhysicalDeviceBase;  // becomes a real class again.
 
 // An optional parameter of Adapter::CreateDevice() to send additional information when creating
 // a Device. For example, we can use it to enable a workaround, optimization or feature.
