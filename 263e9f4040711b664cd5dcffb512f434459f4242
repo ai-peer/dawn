@@ -16,6 +16,23 @@
       "message": "Please have another look.",
       "revId": "263e9f4040711b664cd5dcffb512f434459f4242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06584337_2cc5ba0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T13:03:42Z",
+      "side": 1,
+      "message": "LGTM, Austin PTAL as well.",
+      "revId": "263e9f4040711b664cd5dcffb512f434459f4242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

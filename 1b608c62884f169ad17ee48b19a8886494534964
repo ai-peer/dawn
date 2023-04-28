@@ -34,6 +34,24 @@
       "parentUuid": "b5ecf6b9_29796a4b",
       "revId": "1b608c62884f169ad17ee48b19a8886494534964",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e9b9c94_bce1352a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T13:03:42Z",
+      "side": 1,
+      "message": "SGTM to rename as `ValidationError`, you\u0027ll need a multi-step CL to do that though.",
+      "parentUuid": "58451489_3ed4feb3",
+      "revId": "1b608c62884f169ad17ee48b19a8886494534964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

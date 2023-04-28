@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24ff0dfe_cfdf10e5",
+        "filename": "dawn.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T13:03:42Z",
+      "side": 0,
+      "message": "note: You\u0027ll need to keep this enum (even if its value changes) until Chromium no longer uses it.",
+      "revId": "d7501160a83ab878ed8bd09eb15e9ccd2d0e8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
