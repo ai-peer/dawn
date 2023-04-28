@@ -283,6 +283,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c3fcbf8_3909fa15",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-28T07:30:41Z",
+      "side": 1,
+      "message": "I would rather postpone the new D3D11 DynamicUploader to implementing compute shader B2T/T2B. For now let\u0027s quickly go through all E2E tests to have an overall evaluation of where we are now.",
+      "parentUuid": "bf2b07b2_295cad51",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
