@@ -34,6 +34,97 @@
       "parentUuid": "1b180fed_96e08418",
       "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87c682b_d3beb5b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:59:48Z",
+      "side": 1,
+      "message": "LGTM provided it is necessary in the Vulkan spec (and even if it isn\u0027t necessary but needed as a workaround, then we need to keep it as well, just under a Toggle)",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37af72b1_e754e2e9",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:59:48Z",
+      "side": 1,
+      "message": "nit: slight preference for adding a signalSemaphores to the CommandRecordingContext and appending to it in SwapChainVk.cpp, this is the good place to store everything related to a submission.\n\nThen scopedSignalSemaphore could be pushed to the vector and the vector used directly in pSignalSemaphores.\n\nAnd then maybe a TODO(dawn:\u003csomething\u003e) to have an AppendSignalSemaphore() that modifies needsSubmit directly so we don\u0027t need to check both conditions in here.",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127d3a28_8e149952",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:59:48Z",
+      "side": 1,
+      "message": "nit: maybe rename `externalTextureSemaphore` to differentiate it from the other signal semaphores?",
+      "range": {
+        "startLine": 317,
+        "startChar": 26,
+        "endLine": 317,
+        "endChar": 47
+      },
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a7bf270_b9c48126",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:59:48Z",
+      "side": 1,
+      "message": "nit: Maybe the code in DetachFromSurfaceImpl() is sufficient and there is no need to eagerly destroy semaphores here.",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a725883_35a10a75",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:59:48Z",
+      "side": 1,
+      "message": "The spec for vkQueuePresentKHR says:\n\n\u003e Any writes to memory backing the images referenced by the pImageIndices and pSwapchains members of pPresentInfo, that are available before vkQueuePresentKHR is executed, are automatically made visible to the read access performed by the presentation engine. This automatic visibility operation for an image happens-after the semaphore signal operation, and happens-before the presentation engine accesses the image.\n\nIsn\u0027t that sufficient for the synchronization? Or does it only perform the memory operations and not the execution dependency? (the Vulkan spec could be made slightly more clear if it\u0027s not sufficient and I\u0027ll file a bug there)",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
