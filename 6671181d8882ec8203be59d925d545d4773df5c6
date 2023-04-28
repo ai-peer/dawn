@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f109c847_878c30a3",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-04-28T13:30:34Z",
+      "side": 1,
+      "message": "Yes, I wasn\u0027t too happy with supplying an optional signal semaphore to the submission function. It\u0027s fine for now but if we want an optional fence in the future, then timeline semaphores etc, the function signature will get messy quickly. Adding it to the recording context might be cleaner.",
+      "parentUuid": "37af72b1_e754e2e9",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "127d3a28_8e149952",
         "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -130,6 +148,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd399f32_d91f9982",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-04-28T13:30:34Z",
+      "side": 1,
+      "message": "`previousSwapChain` can be `this`. In that case I would be overwriting the contents of `mSwapChainSemaphores` when allocating the semaphores after this, meaning the semaphores would never be freed. In case `previousSwapChain` is `this`, I could reuse the semaphores instead of scheduling them for deletion and creating new ones, but this was the easiest way to handle both the case where `previousSwapChain` is `this` and when it isn\u0027t.",
+      "parentUuid": "6a7bf270_b9c48126",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a725883_35a10a75",
         "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
         "patchSetId": 1
@@ -141,6 +177,24 @@
       "writtenOn": "2023-04-28T12:59:48Z",
       "side": 1,
       "message": "The spec for vkQueuePresentKHR says:\n\n\u003e Any writes to memory backing the images referenced by the pImageIndices and pSwapchains members of pPresentInfo, that are available before vkQueuePresentKHR is executed, are automatically made visible to the read access performed by the presentation engine. This automatic visibility operation for an image happens-after the semaphore signal operation, and happens-before the presentation engine accesses the image.\n\nIsn\u0027t that sufficient for the synchronization? Or does it only perform the memory operations and not the execution dependency? (the Vulkan spec could be made slightly more clear if it\u0027s not sufficient and I\u0027ll file a bug there)",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c87291_5116d0a4",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-04-28T13:30:34Z",
+      "side": 1,
+      "message": "Note the language in that quote:\n\u003e This automatic visibility operation for an image happens-after the semaphore signal operation[...]\n\nSo we need a semaphore for this visibility operation to happen.\n\nThis is made explicit in this part of the spec:\n\u003e The processing of the presentation happens in issue order with other queue operations, but semaphores have to be used to ensure that prior rendering and other commands in the specified queue complete before the presentation begins.\n\nThough it\u0027s easy to miss this part of the spec as it comes after all the extension structs you can add in `VkPresentInfoKHR.pNext`. So you won\u0027t see it if you read the individual manual pages for `vkQueuePresentKHR` or `VkPresentInfoKHR`, you have to view the full spec.",
+      "parentUuid": "5a725883_35a10a75",
       "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
