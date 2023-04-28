@@ -1101,11 +1101,7 @@ ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
         mOriginalSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
     } else if (wgslDesc) {
         mType = Type::Wgsl;
-        if (wgslDesc->code) {
-            mWgsl = std::string(wgslDesc->code);
-        } else {
-            mWgsl = std::string(wgslDesc->source);
-        }
+        mWgsl = std::string(wgslDesc->code);
     }
 }
 
