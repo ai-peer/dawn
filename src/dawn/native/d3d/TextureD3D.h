@@ -12,30 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D_FORWARD_H_
-#define SRC_DAWN_NATIVE_D3D_FORWARD_H_
+#ifndef SRC_DAWN_NATIVE_D3D_TEXTURED3D_H_
+#define SRC_DAWN_NATIVE_D3D_TEXTURED3D_H_
 
-#include "dawn/native/ToBackend.h"
+#include <vector>
+
+#include "dawn/native/DawnNative.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/IntegerTypes.h"
+#include "dawn/native/PassResourceUsage.h"
+#include "dawn/native/Texture.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d {
 
-class PhysicalDevice;
-class Device;
-class SwapChain;
-class Texture;
+class Texture : public TextureBase {
+  public:
+    virtual ResultOrError<ExecutionSerial> EndAccess() = 0;
 
-struct D3DBackendTraits {
-    using DeviceType = Device;
-    using PhysicalDeviceType = PhysicalDevice;
-    using SwapChainType = SwapChain;
-    using TextureType = Texture;
+  protected:
+    using TextureBase::TextureBase;
+
+    ~Texture() override;
 };
-
-template <typename T>
-auto ToBackend(T&& common) -> decltype(ToBackendBase<D3DBackendTraits>(common)) {
-    return ToBackendBase<D3DBackendTraits>(common);
-}
 
 }  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D_FORWARD_H_
+#endif  // SRC_DAWN_NATIVE_D3D_TEXTURED3D_H_
