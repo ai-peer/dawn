@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d592dc74_4ebd8a62",
+        "filename": "src/dawn/native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-04-28T11:30:40Z",
+      "side": 1,
+      "message": "oops, I think that this check should either be above or be integrated with the check at starting at line 262?",
+      "revId": "758d8a88b9ed780e273d8bbf19aca694787c4af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
