@@ -270,6 +270,19 @@ int ResourceMemoryAllocator::FindBestTypeIndex(VkMemoryRequirements requirements
             continue;
         }
 
+        // For resources that can be lazily allocated, favor lazy allocation.
+        bool currentLazilyAllocated =
+            info.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT;
+        bool bestLazilyAllocated =
+            info.memoryTypes[bestType].propertyFlags & VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT;
+        if ((kind == MemoryKind::LazilyAllocated) &&
+            (currentLazilyAllocated != bestLazilyAllocated)) {
+            if (currentLazilyAllocated) {
+                bestType = static_cast<int>(i);
+            }
+            continue;
+        }
+
         // All things equal favor the memory in the biggest heap
         VkDeviceSize bestTypeHeapSize = info.memoryHeaps[info.memoryTypes[bestType].heapIndex].size;
         VkDeviceSize candidateHeapSize = info.memoryHeaps[info.memoryTypes[i].heapIndex].size;
