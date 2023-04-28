@@ -120,6 +120,9 @@ class Buffer final : public BufferBase {
     // The buffer object can be used as vertex, index, uniform, storage, or indirect buffer.
     ComPtr<ID3D11Buffer> mD3d11Buffer;
     uint8_t* mMappedData = nullptr;
+
+    // The temp staging buffer to work around the 16-byte alignment issue for UpdateSubresource1.
+    Ref<Buffer> mStagingBuffer = nullptr;
 };
 
 }  // namespace dawn::native::d3d11
