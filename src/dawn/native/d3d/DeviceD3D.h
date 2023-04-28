@@ -21,6 +21,8 @@
 
 namespace dawn::native::d3d {
 
+struct ExternalImageDescriptorDXGISharedHandle;
+class ExternalImageDXGIImpl;
 class PlatformFunctions;
 
 class Device : public DeviceBase {
@@ -42,6 +44,9 @@ class Device : public DeviceBase {
     ComPtr<IDxcLibrary> GetDxcLibrary() const;
     ComPtr<IDxcCompiler> GetDxcCompiler() const;
     ComPtr<IDxcValidator> GetDxcValidator() const;
+
+    virtual std::unique_ptr<ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
+        const ExternalImageDescriptorDXGISharedHandle* descriptor) = 0;
 };
 
 }  // namespace dawn::native::d3d
