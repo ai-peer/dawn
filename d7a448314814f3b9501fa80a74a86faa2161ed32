@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91818751_dd21de73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:42:52Z",
+      "side": 1,
+      "message": "I think this is causing a linker error:\n\nlld-link: error: undefined symbol: __declspec(dllimport) public: __thiscall dawn::native::d3d::ExternalImageDescriptorDXGISharedHandle::ExternalImageDescriptorDXGISharedHandle(void)\n\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4492348?tab\u003dchecks",
+      "revId": "d7a448314814f3b9501fa80a74a86faa2161ed32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
