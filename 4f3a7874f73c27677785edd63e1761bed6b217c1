@@ -237,6 +237,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38399351_ef864d06",
+        "filename": "src/tint/ir/binary.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-28T11:35:56Z",
+      "side": 1,
+      "message": "Please file a bug. They\u0027re _already_ emitted, this is just changing the name so removing the functionality is out of scope for this CL..",
+      "parentUuid": "3bb1cc2d_d1d19183",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 18
+      },
+      "revId": "4f3a7874f73c27677785edd63e1761bed6b217c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "271e26b5_7e503603",
