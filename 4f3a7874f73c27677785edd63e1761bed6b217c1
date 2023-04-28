@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c00dc288_0d136c21",
+        "filename": "src/tint/ir/binary.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-28T08:58:19Z",
+      "side": 1,
+      "message": "I feel strongly that `log_*` shouldn\u0027t exist. See my other comment.",
+      "parentUuid": "7d8a5fd2_619dbe67",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 31
+      },
+      "revId": "4f3a7874f73c27677785edd63e1761bed6b217c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14be1167_c8df0da3",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Yes, they can exist:\n\n```\nfn a() -\u003e bool {\n  return true;\n}\n\nfn b() -\u003e bool {\n  return a() \u0026\u0026 a();\n}\n```\n\nWe can\u0027t fold all of them away.",
       "parentUuid": "45fbfc91_a903fc84",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 18
+      },
+      "revId": "4f3a7874f73c27677785edd63e1761bed6b217c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb1cc2d_d1d19183",
+        "filename": "src/tint/ir/binary.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-04-28T08:58:19Z",
+      "side": 1,
+      "message": "But the short circuiting should have been lowered to a conditional at the AST -\u003e IR translation. We shouldn\u0027t have short-circuiting as an IR instruction - it involves control flow.",
+      "parentUuid": "3eb51933_ee0c2383",
       "range": {
         "startLine": 60,
         "startChar": 0,
