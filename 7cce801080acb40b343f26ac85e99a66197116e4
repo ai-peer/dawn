@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23fc7400_6051a9fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:39:30Z",
+      "side": 1,
+      "message": "and also:\n - device constructors should still refer to the arg as \"Adapter\" since we will create them from the Adapter, and fetch the physical device out later",
+      "parentUuid": "e33f6fac_be8f7941",
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "544505f0_23387b75",
