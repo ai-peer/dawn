@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0818ab3c_b982d9ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-04-28T19:48:30Z",
+      "side": 1,
+      "message": "Merging the fix. Will leave the bug open until I\u0027ve figured out how to write a test.",
+      "revId": "a79b4183fef4a9617bc589d16ac7897f1bfda025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

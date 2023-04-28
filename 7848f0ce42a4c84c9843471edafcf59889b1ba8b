@@ -210,6 +210,30 @@
       },
       "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d9fc0a_f95a826d",
+        "filename": "src/dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-04-28T19:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f7ac701_3c38e684",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 89
+      },
+      "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
