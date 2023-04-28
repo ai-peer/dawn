@@ -39,6 +39,30 @@
       },
       "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c93397b_34ced6ab",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-28T14:27:27Z",
+      "side": 1,
+      "message": "Good point.\nAnother idea is to use only one large size staging buffer of \" D3D11_MAP_WRITE_NO_OVERWRITE\" for all copies. How does that sound to you?\n\nhttps://learn.microsoft.com/en-us/windows/win32/direct3d11/how-to--use-dynamic-resources#using-dynamic-buffers",
+      "parentUuid": "e9adcdb9_1b0f482e",
+      "range": {
+        "startLine": 475,
+        "startChar": 43,
+        "endLine": 475,
+        "endChar": 60
+      },
+      "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
