@@ -313,12 +313,13 @@ void InstanceBase::DiscoverDefaultAdapters() {
         TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
         adapterToggles.InheritFrom(mToggles);
 
-        std::vector<Ref<AdapterBase>> backendAdapters =
+        std::vector<Ref<PhysicalDeviceBase>> physicalDevices =
             backend->DiscoverDefaultAdapters(adapterToggles);
 
-        for (Ref<AdapterBase>& adapter : backendAdapters) {
-            ASSERT(adapter->GetBackendType() == backend->GetType());
-            ASSERT(adapter->GetInstance() == this);
+        for (Ref<PhysicalDeviceBase>& physicalDevice : physicalDevices) {
+            ASSERT(physicalDevice->GetBackendType() == backend->GetType());
+            ASSERT(physicalDevice->GetInstance() == this);
+            Ref<AdapterBase> adapter = AcquireRef(new AdapterBase(physicalDevice, adapterToggles));
             mAdapters.push_back(std::move(adapter));
         }
     }
@@ -447,12 +448,13 @@ MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsB
         TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
         adapterToggles.InheritFrom(mToggles);
 
-        std::vector<Ref<AdapterBase>> newAdapters;
-        DAWN_TRY_ASSIGN(newAdapters, backend->DiscoverAdapters(options, adapterToggles));
+        std::vector<Ref<PhysicalDeviceBase>> newPhysicalDevices;
+        DAWN_TRY_ASSIGN(newPhysicalDevices, backend->DiscoverAdapters(options, adapterToggles));
 
-        for (Ref<AdapterBase>& adapter : newAdapters) {
-            ASSERT(adapter->GetBackendType() == backend->GetType());
-            ASSERT(adapter->GetInstance() == this);
+        for (Ref<PhysicalDeviceBase>& physicalDevice : newPhysicalDevices) {
+            ASSERT(physicalDevice->GetBackendType() == backend->GetType());
+            ASSERT(physicalDevice->GetInstance() == this);
+            Ref<AdapterBase> adapter = AcquireRef(new AdapterBase(physicalDevice, adapterToggles));
             mAdapters.push_back(std::move(adapter));
         }
     }

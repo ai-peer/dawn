@@ -56,13 +56,15 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
     GetProcAddressTests()
         : testing::TestWithParam<DawnFlavor>(),
           mNativeInstance(dawn::native::InstanceBase::Create()),
-          mNativeAdapter(mNativeInstance.Get()) {}
+          mPhysicalDevice(mNativeInstance.Get()),
+          mAdapterBase(&mPhysicalDevice,
+                       dawn::native::TogglesState(dawn::native::ToggleStage::Adapter)) {}
 
     void SetUp() override {
         switch (GetParam()) {
             case DawnFlavor::Native: {
                 mDevice = wgpu::Device::Acquire(
-                    reinterpret_cast<WGPUDevice>(mNativeAdapter.APICreateDevice()));
+                    reinterpret_cast<WGPUDevice>(mPhysicalDevice.CreateDevice(&mAdapterBase)));
                 mProcs = dawn::native::GetProcs();
                 break;
             }
@@ -94,7 +96,8 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
 
   protected:
     Ref<dawn::native::InstanceBase> mNativeInstance;
-    dawn::native::null::PhysicalDevice mNativeAdapter;
+    dawn::native::null::PhysicalDevice mPhysicalDevice;
+    dawn::native::AdapterBase mAdapterBase;
 
     std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
     std::unique_ptr<dawn::wire::WireClient> mWireClient;

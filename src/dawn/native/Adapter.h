@@ -15,12 +15,51 @@
 #ifndef SRC_DAWN_NATIVE_ADAPTER_H_
 #define SRC_DAWN_NATIVE_ADAPTER_H_
 
-#include "dawn/native/PhysicalDevice.h"
+#include <string>
+#include <vector>
+
+#include "dawn/native/DawnNative.h"
+
+#include "dawn/common/GPUInfo.h"
+#include "dawn/common/RefCounted.h"
+#include "dawn/common/ityp_span.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/Features.h"
+#include "dawn/native/Limits.h"
+#include "dawn/native/Toggles.h"
+#include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
 
-using AdapterBase = PhysicalDeviceBase;
+class DeviceBase;
 
-}
+class AdapterBase : public RefCounted {
+  public:
+    AdapterBase(const Ref<PhysicalDeviceBase> physicalDevice, const TogglesState& adapterToggles);
+    ~AdapterBase() override;
+
+    // WebGPU API
+    InstanceBase* APIGetInstance() const;
+    bool APIGetLimits(SupportedLimits* limits) const;
+    void APIGetProperties(AdapterProperties* properties) const;
+    bool APIHasFeature(wgpu::FeatureName feature) const;
+    size_t APIEnumerateFeatures(wgpu::FeatureName* features) const;
+    void APIRequestDevice(const DeviceDescriptor* descriptor,
+                          WGPURequestDeviceCallback callback,
+                          void* userdata);
+    DeviceBase* APICreateDevice(const DeviceDescriptor* descriptor = nullptr);
+    PhysicalDeviceBase* GetPhysicalDevice();
+
+    // Get the actual toggles state of the adapter.
+    const TogglesState& GetTogglesState() const;
+
+  private:
+    Ref<PhysicalDeviceBase> mPhysicalDevice;
+
+    // Adapter toggles state, currently only inherited from instance toggles state.
+    TogglesState mTogglesState;
+};
+
+}  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_ADAPTER_H_

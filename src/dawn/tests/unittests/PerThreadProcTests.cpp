@@ -27,12 +27,15 @@ class PerThreadProcTests : public testing::Test {
   public:
     PerThreadProcTests()
         : mNativeInstance(dawn::native::InstanceBase::Create()),
-          mNativeAdapter(mNativeInstance.Get()) {}
+          mPhysicalDevice(mNativeInstance.Get()),
+          mAdapterBase(&mPhysicalDevice,
+                       dawn::native::TogglesState(dawn::native::ToggleStage::Adapter)) {}
     ~PerThreadProcTests() override = default;
 
   protected:
     Ref<dawn::native::InstanceBase> mNativeInstance;
-    dawn::native::null::PhysicalDevice mNativeAdapter;
+    dawn::native::null::PhysicalDevice mPhysicalDevice;
+    dawn::native::AdapterBase mAdapterBase;
 };
 
 // Test that procs can be set per thread. This test overrides deviceCreateBuffer with a placeholder
@@ -56,11 +59,11 @@ TEST_F(PerThreadProcTests, DispatchesPerThread) {
     constexpr int kThreadBTargetCount = 40420;
 
     // Note: Acquire doesn't call reference or release.
-    wgpu::Device deviceA =
-        wgpu::Device::Acquire(reinterpret_cast<WGPUDevice>(mNativeAdapter.APICreateDevice()));
+    wgpu::Device deviceA = wgpu::Device::Acquire(
+        reinterpret_cast<WGPUDevice>(mPhysicalDevice.CreateDevice(&mAdapterBase)));
 
-    wgpu::Device deviceB =
-        wgpu::Device::Acquire(reinterpret_cast<WGPUDevice>(mNativeAdapter.APICreateDevice()));
+    wgpu::Device deviceB = wgpu::Device::Acquire(
+        reinterpret_cast<WGPUDevice>(mPhysicalDevice.CreateDevice(&mAdapterBase)));
 
     std::thread threadA([&]() {
         DawnProcTable procs = dawn::native::GetProcs();
