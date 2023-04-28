@@ -15,7 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_ADAPTERD3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_ADAPTERD3D11_H_
 
-#include "dawn/native/d3d/AdapterD3D.h"
+#include "dawn/native/d3d/PhysicalDeviceD3D.h"
 
 #include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/native/d3d11/DeviceInfoD3D11.h"
