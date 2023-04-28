@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D_ADAPTERD3D_H_
-#define SRC_DAWN_NATIVE_D3D_ADAPTERD3D_H_
+#ifndef SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
+#define SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
 
 #include "dawn/native/PhysicalDevice.h"
 
@@ -44,4 +44,4 @@ class Adapter : public PhysicalDeviceBase {
 
 }  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D_ADAPTERD3D_H_
+#endif  // SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
