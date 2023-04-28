@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a234c8a8_0024bfea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:37:38Z",
+      "side": 1,
+      "message": "LGTM! +2 to unblock 5-way CL and Austin FYI",
+      "revId": "d2699908c648bdaef843cd41ee02396149f3ed14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
