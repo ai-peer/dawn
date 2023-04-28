@@ -137,6 +137,7 @@ class Device final : public d3d::Device {
 
     StagingDescriptorAllocator* GetDepthStencilViewAllocator() const;
 
+    ComPtr<IUnknown> GetD3DDevice() const override;
     std::unique_ptr<d3d::ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
         const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) override;
 

@@ -303,6 +303,10 @@ if (DAWN_ENABLE_D3D11)
         "d3d11/DeviceD3D11.h"
         "d3d11/DeviceInfoD3D11.cpp"
         "d3d11/DeviceInfoD3D11.h"
+        "d3d11/ExternalImageDXGIImplD3D11.cpp"
+        "d3d11/ExternalImageDXGIImplD3D11.h"
+        "d3d11/FenceD3D12.cpp",
+        "d3d11/FenceD3D12.h",
         "d3d11/Forward.h"
         "d3d11/PhysicalDeviceD3D11.cpp"
         "d3d11/PhysicalDeviceD3D11.h"
