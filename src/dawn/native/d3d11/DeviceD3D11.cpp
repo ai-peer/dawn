@@ -411,6 +411,12 @@ float Device::GetTimestampPeriodInNS() const {
 
 void Device::SetLabelImpl() {}
 
+std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
+    const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
+    UNREACHABLE();
+    return {};
+}
+
 bool Device::MayRequireDuplicationOfIndirectParameters() const {
     return true;
 }
