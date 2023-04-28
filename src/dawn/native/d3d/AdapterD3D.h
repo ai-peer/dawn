@@ -23,7 +23,7 @@ namespace dawn::native::d3d {
 
 class Backend;
 
-class Adapter : public AdapterBase {
+class Adapter : public PhysicalDeviceBase {
   public:
     Adapter(Backend* backend,
             ComPtr<IDXGIAdapter3> hardwareAdapter,

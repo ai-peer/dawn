@@ -134,13 +134,13 @@ TEST_F(DeviceCreationTest, CreateDeviceWithTogglesSuccess) {
 // instance but can be overriden by device toggles.
 TEST_F(DeviceCreationTest, CreateDeviceRequiringExperimentalFeatures) {
     // Ensure that DisallowUnsafeApis adapter toggle is enabled on safe adapter.
-    auto safeAdapterBase = dawn::native::FromAPI(adapter.Get());
-    ASSERT_TRUE(
-        safeAdapterBase->GetTogglesState().IsEnabled(dawn::native::Toggle::DisallowUnsafeAPIs));
+    auto safePhysicalDeviceBase = dawn::native::FromAPI(adapter.Get());
+    ASSERT_TRUE(safePhysicalDeviceBase->GetTogglesState().IsEnabled(
+        dawn::native::Toggle::DisallowUnsafeAPIs));
     // Ensure that DisallowUnsafeApis adapter toggle is disabled on unsafe adapter.
-    auto unsafeAdapterBase = dawn::native::FromAPI(unsafeAdapter.Get());
-    ASSERT_FALSE(
-        unsafeAdapterBase->GetTogglesState().IsEnabled(dawn::native::Toggle::DisallowUnsafeAPIs));
+    auto unsafePhysicalDeviceBase = dawn::native::FromAPI(unsafeAdapter.Get());
+    ASSERT_FALSE(unsafePhysicalDeviceBase->GetTogglesState().IsEnabled(
+        dawn::native::Toggle::DisallowUnsafeAPIs));
 
     for (size_t i = 0; i < kTotalFeaturesCount; i++) {
         dawn::native::Feature feature = static_cast<dawn::native::Feature>(i);

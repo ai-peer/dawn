@@ -61,7 +61,7 @@ using WGSLExtensionSet = std::unordered_set<std::string>;
 
 class DeviceBase : public RefCountedWithExternalCount {
   public:
-    DeviceBase(AdapterBase* adapter,
+    DeviceBase(PhysicalDeviceBase* adapter,
                const DeviceDescriptor* descriptor,
                const TogglesState& deviceToggles);
     ~DeviceBase() override;
@@ -154,7 +154,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError ValidateObject(const ApiObjectBase* object) const;
 
-    AdapterBase* GetAdapter() const;
+    PhysicalDeviceBase* GetAdapter() const;
     virtual dawn::platform::Platform* GetPlatform() const;
 
     // Returns the Format corresponding to the wgpu::TextureFormat or an error if the format
@@ -295,7 +295,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     ExternalTextureBase* APICreateErrorExternalTexture();
     TextureBase* APICreateErrorTexture(const TextureDescriptor* desc);
 
-    AdapterBase* APIGetAdapter();
+    PhysicalDeviceBase* APIGetAdapter();
     QueueBase* APIGetQueue();
 
     bool APIGetLimits(SupportedLimits* limits) const;
@@ -577,7 +577,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 
-    Ref<AdapterBase> mAdapter;
+    Ref<PhysicalDeviceBase> mAdapter;
 
     // The object caches aren't exposed in the header as they would require a lot of
     // additional includes.

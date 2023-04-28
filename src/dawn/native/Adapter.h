@@ -33,12 +33,12 @@ namespace dawn::native {
 
 class DeviceBase;
 
-class AdapterBase : public RefCounted {
+class PhysicalDeviceBase : public RefCounted {
   public:
-    AdapterBase(InstanceBase* instance,
-                wgpu::BackendType backend,
-                const TogglesState& adapterToggles);
-    ~AdapterBase() override;
+    PhysicalDeviceBase(InstanceBase* instance,
+                       wgpu::BackendType backend,
+                       const TogglesState& adapterToggles);
+    ~PhysicalDeviceBase() override;
 
     MaybeError Initialize();
 
