@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb0da26_c8e90d88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-04-28T12:36:09Z",
+      "side": 1,
+      "message": "As discussed offline, here\u0027s the first CL.",
+      "revId": "d7501160a83ab878ed8bd09eb15e9ccd2d0e8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
