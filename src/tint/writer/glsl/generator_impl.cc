@@ -2149,7 +2149,7 @@ void GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
         [&](Default) {
             diagnostics_.add_error(
                 diag::System::Writer,
-                "unhandled constant type: " + builder_.FriendlyName(constant->Type()));
+                "unhandled constant type: " + constant->Type()->FriendlyName());
         });
 }
 

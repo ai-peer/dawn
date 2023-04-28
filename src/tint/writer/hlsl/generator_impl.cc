@@ -3484,7 +3484,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out,
         [&](Default) {
             diagnostics_.add_error(
                 diag::System::Writer,
-                "unhandled constant type: " + builder_.FriendlyName(constant->Type()));
+                "unhandled constant type: " + constant->Type()->FriendlyName());
             return false;
         });
 }
