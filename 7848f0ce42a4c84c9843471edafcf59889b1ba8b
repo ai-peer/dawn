@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7e0799c_7de86f0a",
+        "filename": "src/dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:36:05Z",
+      "side": 1,
+      "message": "Actually, it is a ringbuffer, nvm.",
+      "parentUuid": "be5da57b_bab43bc1",
+      "revId": "7848f0ce42a4c84c9843471edafcf59889b1ba8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bc49e1b_00930d63",
