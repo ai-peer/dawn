@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbf84a5_ccb7ba33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T11:58:34Z",
+      "side": 1,
+      "message": "LGTM! Loko PTAL as well!",
+      "revId": "758d8a88b9ed780e273d8bbf19aca694787c4af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d592dc74_4ebd8a62",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-04-28T11:30:40Z",
       "side": 1,
       "message": "oops, I think that this check should either be above or be integrated with the check at starting at line 262?",
+      "revId": "758d8a88b9ed780e273d8bbf19aca694787c4af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7800f881_7eae1694",
+        "filename": "src/dawn/native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T11:58:34Z",
+      "side": 1,
+      "message": "We can probably put it above the check at 262 as being actually lazily allocated is a more important property than being device local (and comment on that)",
+      "parentUuid": "d592dc74_4ebd8a62",
       "revId": "758d8a88b9ed780e273d8bbf19aca694787c4af0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
