@@ -186,7 +186,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     return {};
 }
 
-Device::Device(AdapterBase* adapter,
+Device::Device(PhysicalDeviceBase* adapter,
                const DeviceDescriptor* descriptor,
                const TogglesState& deviceToggles)
     : Base(adapter, descriptor, deviceToggles) {}
