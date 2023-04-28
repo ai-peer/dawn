@@ -1199,7 +1199,6 @@
             },
             {
                 "name": "pop error scope",
-                "returns": "bool",
                 "args": [
                     {"name": "callback", "type": "error callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
