@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D_EXTERNALIMAGEDXGIIMPL_H_
-#define SRC_DAWN_NATIVE_D3D_EXTERNALIMAGEDXGIIMPL_H_
+#ifndef SRC_DAWN_NATIVE_D3D11_EXTERNALIMAGEDXGIIMPLD3D11_H_
+#define SRC_DAWN_NATIVE_D3D11_EXTERNALIMAGEDXGIIMPLD3D11_H_
 
 #include <wrl/client.h>
 
@@ -22,53 +22,53 @@
 
 #include "dawn/common/LinkedList.h"
 #include "dawn/common/Mutex.h"
+#include "dawn/native/D3D12Backend.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
+#include "dawn/native/d3d/ExternalImageDXGIImpl.h"
+#include "dawn/native/d3d11/FenceD3D11.h"
 #include "dawn/webgpu_cpp.h"
 
+struct ID3D12Resource;
+struct ID3D12Fence;
+
 namespace dawn::native::d3d {
+struct ExternalImageDXGIBeginAccessDescriptor;
+struct ExternalImageDescriptorDXGISharedHandle;
+}  // namespace dawn::native::d3d
+
+namespace dawn::native::d3d11 {
 
 class Device;
-struct ExternalImageDXGIBeginAccessDescriptor;
-struct ExternalImageDXGIFenceDescriptor;
-struct ExternalImageDescriptorDXGISharedHandle;
 
-MaybeError ValidateTextureDescriptorCanBeWrapped(const TextureDescriptor* descriptor);
-
-class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
+class ExternalImageDXGIImpl : public d3d::ExternalImageDXGIImpl {
   public:
-    ExternalImageDXGIImpl(Device* backendDevice, const TextureDescriptor* textureDescriptor);
-    virtual ~ExternalImageDXGIImpl();
+    ExternalImageDXGIImpl(Device* backendDevice,
+                          Microsoft::WRL::ComPtr<ID3D11Resource> d3d11Resource,
+                          const TextureDescriptor* textureDescriptor);
+    ~ExternalImageDXGIImpl() override;
 
     ExternalImageDXGIImpl(const ExternalImageDXGIImpl&) = delete;
     ExternalImageDXGIImpl& operator=(const ExternalImageDXGIImpl&) = delete;
 
     bool IsValid() const;
 
-    virtual WGPUTexture BeginAccess(const ExternalImageDXGIBeginAccessDescriptor* descriptor) = 0;
+    WGPUTexture BeginAccess(const d3d::ExternalImageDXGIBeginAccessDescriptor* descriptor) override;
 
-    virtual void EndAccess(WGPUTexture texture, ExternalImageDXGIFenceDescriptor* signalFence) = 0;
+    void EndAccess(WGPUTexture texture,
+                   d3d::ExternalImageDXGIFenceDescriptor* signalFence) override;
 
     // This method should only be called by internal code. Don't call this from D3D12Backend side,
     // or without locking.
-    virtual void DestroyInternal();
+    void DestroyInternal() override;
 
-  protected:
-    [[nodiscard]] Mutex::AutoLock GetScopedDeviceLock() const;
+  private:
+    using Base = d3d::ExternalImageDXGIImpl;
 
-    Ref<DeviceBase> mBackendDevice;
-
-    wgpu::TextureUsage mUsage;
-    wgpu::TextureUsage mUsageInternal = wgpu::TextureUsage::None;
-    wgpu::TextureDimension mDimension;
-    Extent3D mSize;
-    wgpu::TextureFormat mFormat;
-    uint32_t mMipLevelCount;
-    uint32_t mSampleCount;
-    std::vector<wgpu::TextureFormat> mViewFormats;
+    Microsoft::WRL::ComPtr<ID3D11Resource> mD3D11Resource;
 };
 
-}  // namespace dawn::native::d3d
+}  // namespace dawn::native::d3d11
 
-#endif  // SRC_DAWN_NATIVE_D3D_EXTERNALIMAGEDXGIIMPL_H_
+#endif  // SRC_DAWN_NATIVE_D3D11_EXTERNALIMAGEDXGIIMPLD3D11_H_

@@ -28,6 +28,10 @@ namespace dawn::native::d3d {
 
 class ExternalImageDXGIImpl;
 
+DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<IDXGIAdapter> GetDXGIAdapter(WGPUAdapter adapter);
+
+DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<IUnknown> GetD3DDevice(WGPUDevice device);
+
 struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
     AdapterDiscoveryOptions(WGPUBackendType type, Microsoft::WRL::ComPtr<IDXGIAdapter> adapter);
     Microsoft::WRL::ComPtr<IDXGIAdapter> dxgiAdapter;

@@ -545,6 +545,10 @@ ResultOrError<ResourceHeapAllocation> Device::AllocateMemory(
                                                      forceAllocateAsCommittedResource);
 }
 
+ComPtr<IUnknown> Device::GetD3DDevice() const {
+    return mD3d12Device;
+}
+
 std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
     const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
     // ExternalImageDXGIImpl holds a weak reference to the device. If the device is destroyed before
@@ -566,13 +570,13 @@ std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
         return nullptr;
     }
 
-    if (ConsumedError(ValidateTextureDescriptorCanBeWrapped(textureDescriptor),
+    if (ConsumedError(d3d::ValidateTextureDescriptorCanBeWrapped(textureDescriptor),
                       "validating that a D3D12 external image can be wrapped with %s",
                       textureDescriptor)) {
         return nullptr;
     }
 
-    if (ConsumedError(ValidateD3D12TextureCanBeWrapped(d3d12Resource.Get(), textureDescriptor))) {
+    if (ConsumedError(ValidateTextureCanBeWrapped(d3d12Resource.Get(), textureDescriptor))) {
         return nullptr;
     }
 
@@ -580,7 +584,7 @@ std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
     // shared capability tier must agree to share resources between D3D devices.
     const Format* format = GetInternalFormat(textureDescriptor->format).AcquireSuccess();
     if (format->IsMultiPlanar()) {
-        if (ConsumedError(ValidateD3D12VideoTextureCanBeShared(
+        if (ConsumedError(ValidateVideoTextureCanBeShared(
                 this, d3d::DXGITextureFormat(textureDescriptor->format)))) {
             return nullptr;
         }
