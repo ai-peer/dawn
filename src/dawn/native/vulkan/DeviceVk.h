@@ -68,7 +68,7 @@ class Device final : public DeviceBase {
     CommandRecordingContext* GetPendingRecordingContext(
         Device::SubmitMode submitMode = Device::SubmitMode::Normal);
     MaybeError SplitRecordingContext(CommandRecordingContext* recordingContext);
-    MaybeError SubmitPendingCommands();
+    MaybeError SubmitPendingCommands(VkSemaphore signalSemaphore = VK_NULL_HANDLE);
 
     void EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator);
 

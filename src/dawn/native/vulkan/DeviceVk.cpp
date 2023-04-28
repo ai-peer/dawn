@@ -303,8 +303,8 @@ void Device::ForceEventualFlushOfCommands() {
     mRecordingContext.needsSubmit |= mRecordingContext.used;
 }
 
-MaybeError Device::SubmitPendingCommands() {
-    if (!mRecordingContext.needsSubmit) {
+MaybeError Device::SubmitPendingCommands(VkSemaphore signalSemaphore) {
+    if (!mRecordingContext.needsSubmit && signalSemaphore == VK_NULL_HANDLE) {
         return {};
     }
 
@@ -336,6 +336,18 @@ MaybeError Device::SubmitPendingCommands() {
     std::vector<VkPipelineStageFlags> dstStageMasks(mRecordingContext.waitSemaphores.size(),
                                                     VK_PIPELINE_STAGE_ALL_COMMANDS_BIT);
 
+    // Gather all semaphores to signal.
+    VkSemaphore signalSemaphores[2];
+    uint32_t signalSemaphoreCount = 0;
+
+    if (scopedSignalSemaphore.Get() != VK_NULL_HANDLE) {
+        signalSemaphores[signalSemaphoreCount++] = scopedSignalSemaphore.Get();
+    }
+
+    if (signalSemaphore != VK_NULL_HANDLE) {
+        signalSemaphores[signalSemaphoreCount++] = signalSemaphore;
+    }
+
     VkSubmitInfo submitInfo;
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
     submitInfo.pNext = nullptr;
@@ -344,8 +356,8 @@ MaybeError Device::SubmitPendingCommands() {
     submitInfo.pWaitDstStageMask = dstStageMasks.data();
     submitInfo.commandBufferCount = mRecordingContext.commandBufferList.size();
     submitInfo.pCommandBuffers = mRecordingContext.commandBufferList.data();
-    submitInfo.signalSemaphoreCount = (scopedSignalSemaphore.Get() == VK_NULL_HANDLE ? 0 : 1);
-    submitInfo.pSignalSemaphores = AsVkArray(scopedSignalSemaphore.InitializeInto());
+    submitInfo.signalSemaphoreCount = signalSemaphoreCount;
+    submitInfo.pSignalSemaphores = AsVkArray(signalSemaphores);
 
     VkFence fence = VK_NULL_HANDLE;
     DAWN_TRY_ASSIGN(fence, GetUnusedFence());
