@@ -63,6 +63,30 @@
       },
       "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b462d7c8_71371a3a",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-28T14:38:00Z",
+      "side": 1,
+      "message": "`D3D11_MAP_WRITE_NO_OVERWRITE` is only valid on vertex and\nindex buffers. I am not sure if it can be used as copy. \n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d11/ne-d3d11-d3d11_map",
+      "parentUuid": "1c93397b_34ced6ab",
+      "range": {
+        "startLine": 475,
+        "startChar": 43,
+        "endLine": 475,
+        "endChar": 60
+      },
+      "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
