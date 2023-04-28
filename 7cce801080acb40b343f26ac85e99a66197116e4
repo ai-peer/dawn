@@ -1,0 +1,429 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33f6fac_be8f7941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "mostly naming nits\n\nI think the general theme is:\n - external usage of Dawn, like in tests should still call things \"Adapter\"\n - but internally we call it PhysicalDevice",
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "544505f0_23387b75",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "note: I think this eventually will take AdapterBase* but this is fine for now if you don\u0027t want to #include the alias",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e643e889_2eac92c5",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "we\u0027ll probably pass in Adapter* here, and save both the adapter, and adapter-\u003eGetPhysicalDevice on the device as mAdapter and mPhysicalDevice.\n\nSo nit: perhaps keep the existing AdapterBase* name?",
+      "range": {
+        "startLine": 173,
+        "startChar": 23,
+        "endLine": 173,
+        "endChar": 41
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b82900a_b6832246",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto AdapterBase*",
+      "range": {
+        "startLine": 722,
+        "startChar": 0,
+        "endLine": 722,
+        "endChar": 18
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a182f111_082c4687",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto AdapterBase*",
+      "range": {
+        "startLine": 1348,
+        "startChar": 0,
+        "endLine": 1348,
+        "endChar": 18
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b50a83b_6bd82fca",
+        "filename": "src/dawn/native/Forward.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "FYI: here, we can also do using AdapterBase \u003d Adapter when we add the Adapter class.\n\n\nThen, the rest of Dawn can use \"Adapter\" since it is a frontend-only concept. And the generator can reference it by \"AdapterBase\"",
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db38d41_4bb155e1",
+        "filename": "src/dawn/native/d3d/AdapterD3D.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "is it possible to also rename this to PhysicalDevice?\n\nMay need to specify the backend traits so you can do ToBackend(PhysicalDeviceBase\\*) -\u003e PhysicalDevice\\*\n\nhttps://source.chromium.org/search?q\u003df:dawn%20%22BackendTraits%20%7B%22%20Adapter\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78dd13ef_89bdc704",
+        "filename": "src/dawn/native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase* unless you add GetPhysicalDevice on Device",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1109b988_90135608",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 41,
+        "startChar": 45,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6700ac5b_9b5a853e",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 29
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9cf3c3_fa3e7a09",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 107,
+        "startChar": 42,
+        "endLine": 107,
+        "endChar": 60
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38db27f2_3412fb27",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 117,
+        "endChar": 33
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc03503a_bc441059",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase* unless you add GetPhysicalDevice on Device",
+      "range": {
+        "startLine": 513,
+        "startChar": 4,
+        "endLine": 513,
+        "endChar": 22
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "989b9637_814f2428",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 106,
+        "startChar": 42,
+        "endLine": 106,
+        "endChar": 60
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50cc8c1_efb83d7e",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 117,
+        "endChar": 33
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d54a63_86088dc9",
+        "filename": "src/dawn/native/opengl/DeviceGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6829accf_cc380c5c",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "nit: I\u0027d keep names in the tests as \"Adapter\" since they\u0027ll be referencing the new Adapter class in the future after it\u0027s added",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d591e7_c1c54b36",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 136,
+        "startChar": 22,
+        "endLine": 136,
+        "endChar": 40
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2562774f_f325299a",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T22:35:41Z",
+      "side": 1,
+      "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 117,
+        "startChar": 65,
+        "endLine": 117,
+        "endChar": 83
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
