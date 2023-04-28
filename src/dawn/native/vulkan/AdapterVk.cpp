@@ -265,6 +265,7 @@ void Adapter::InitializeSupportedFeaturesImpl() {
 #endif  // DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
 
     EnableFeature(Feature::SurfaceCapabilities);
+    EnableFeature(Feature::TransientAttachments);
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
