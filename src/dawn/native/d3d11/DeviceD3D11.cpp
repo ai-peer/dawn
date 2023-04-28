@@ -24,13 +24,15 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
-#include "dawn/native/d3d/ExternalImageDXGIImpl.h"
+#include "dawn/native/d3d/UtilsD3D.h"
 #include "dawn/native/d3d11/BackendD3D11.h"
 #include "dawn/native/d3d11/BindGroupD3D11.h"
 #include "dawn/native/d3d11/BindGroupLayoutD3D11.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/CommandBufferD3D11.h"
 #include "dawn/native/d3d11/ComputePipelineD3D11.h"
+#include "dawn/native/d3d11/ExternalImageDXGIImplD3D11.h"
+#include "dawn/native/d3d11/FenceD3D11.h"
 #include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
@@ -390,6 +392,12 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
 void Device::DestroyImpl() {
     ASSERT(GetState() == State::Disconnected);
 
+    while (!mExternalImageList.empty()) {
+        d3d::ExternalImageDXGIImpl* externalImage = mExternalImageList.head()->value();
+        // ExternalImageDXGIImpl::DestroyInternal() calls RemoveFromList().
+        externalImage->DestroyInternal();
+    }
+
     if (mFenceEvent != nullptr) {
         ::CloseHandle(mFenceEvent);
         mFenceEvent = nullptr;
@@ -412,11 +420,55 @@ float Device::GetTimestampPeriodInNS() const {
 
 void Device::SetLabelImpl() {}
 
+ComPtr<IUnknown> Device::GetD3DDevice() const {
+    return mD3d11Device;
+}
+
 std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
     const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
-    // TODO(dawn:1724): Implement this
-    UNREACHABLE();
-    return {};
+    // ExternalImageDXGIImpl holds a weak reference to the device. If the device is destroyed before
+    // the image is created, the image will have a dangling reference to the device which can cause
+    // a use-after-free.
+    if (ConsumedError(ValidateIsAlive())) {
+        return nullptr;
+    }
+
+    ComPtr<ID3D11Resource> d3d11Resource;
+    if (FAILED(mD3d11Device5->OpenSharedResource1(descriptor->sharedHandle,
+                                                  IID_PPV_ARGS(&d3d11Resource)))) {
+        return nullptr;
+    }
+
+    const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
+
+    if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor))) {
+        return nullptr;
+    }
+
+    if (ConsumedError(d3d::ValidateTextureDescriptorCanBeWrapped(textureDescriptor),
+                      "validating that a D3D12 external image can be wrapped with %s",
+                      textureDescriptor)) {
+        return nullptr;
+    }
+
+    if (ConsumedError(ValidateTextureCanBeWrapped(d3d11Resource.Get(), textureDescriptor))) {
+        return nullptr;
+    }
+
+    // Shared handle is assumed to support resource sharing capability. The resource
+    // shared capability tier must agree to share resources between D3D devices.
+    const Format* format = GetInternalFormat(textureDescriptor->format).AcquireSuccess();
+    if (format->IsMultiPlanar()) {
+        if (ConsumedError(ValidateVideoTextureCanBeShared(
+                this, d3d::DXGITextureFormat(textureDescriptor->format)))) {
+            return nullptr;
+        }
+    }
+
+    auto impl =
+        std::make_unique<ExternalImageDXGIImpl>(this, std::move(d3d11Resource), textureDescriptor);
+    mExternalImageList.Append(impl.get());
+    return impl;
 }
 
 bool Device::MayRequireDuplicationOfIndirectParameters() const {
@@ -429,6 +481,21 @@ uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
 
 HANDLE Device::GetFenceHandle() const {
     return mFenceHandle;
+}
+
+Ref<TextureBase> Device::CreateD3D11ExternalTexture(const TextureDescriptor* descriptor,
+                                                    ComPtr<ID3D11Resource> d3d11Texture,
+                                                    std::vector<Ref<Fence>> waitFences,
+                                                    bool isSwapChainTexture,
+                                                    bool isInitialized) {
+    Ref<Texture> dawnTexture;
+    if (ConsumedError(
+            Texture::CreateExternalImage(this, descriptor, std::move(d3d11Texture),
+                                         std::move(waitFences), isSwapChainTexture, isInitialized),
+            &dawnTexture)) {
+        return nullptr;
+    }
+    return {dawnTexture};
 }
 
 }  // namespace dawn::native::d3d11

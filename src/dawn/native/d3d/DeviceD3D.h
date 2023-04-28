@@ -46,6 +46,7 @@ class Device : public DeviceBase {
     ComPtr<IDxcCompiler> GetDxcCompiler() const;
     ComPtr<IDxcValidator> GetDxcValidator() const;
 
+    virtual ComPtr<IUnknown> GetD3DDevice() const = 0;
     virtual std::unique_ptr<ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
         const ExternalImageDescriptorDXGISharedHandle* descriptor) = 0;
 };

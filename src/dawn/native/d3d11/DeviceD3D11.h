@@ -79,6 +79,7 @@ class Device final : public d3d::Device {
     uint64_t GetBufferCopyOffsetAlignmentForDepthStencil() const override;
     void SetLabelImpl() override;
 
+    ComPtr<IUnknown> GetD3DDevice() const override;
     std::unique_ptr<d3d::ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
         const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) override;
 
@@ -134,6 +135,9 @@ class Device final : public d3d::Device {
     ComPtr<ID3D11Device5> mD3d11Device5;
     CommandRecordingContext mPendingCommands;
     SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
+
+    // List of external image resources opened using this device.
+    LinkedList<d3d::ExternalImageDXGIImpl> mExternalImageList;
 };
 
 }  // namespace dawn::native::d3d11

@@ -112,25 +112,8 @@ D3D12_RESOURCE_DIMENSION D3D12TextureDimension(wgpu::TextureDimension dimension)
 
 }  // namespace
 
-MaybeError ValidateTextureDescriptorCanBeWrapped(const TextureDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
-                    "Texture dimension (%s) is not %s.", descriptor->dimension,
-                    wgpu::TextureDimension::e2D);
-
-    DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",
-                    descriptor->mipLevelCount);
-
-    DAWN_INVALID_IF(descriptor->size.depthOrArrayLayers != 1, "Array layer count (%u) is not 1.",
-                    descriptor->size.depthOrArrayLayers);
-
-    DAWN_INVALID_IF(descriptor->sampleCount != 1, "Sample count (%u) is not 1.",
-                    descriptor->sampleCount);
-
-    return {};
-}
-
-MaybeError ValidateD3D12TextureCanBeWrapped(ID3D12Resource* d3d12Resource,
-                                            const TextureDescriptor* dawnDescriptor) {
+MaybeError ValidateTextureCanBeWrapped(ID3D12Resource* d3d12Resource,
+                                       const TextureDescriptor* dawnDescriptor) {
     const D3D12_RESOURCE_DESC d3dDescriptor = d3d12Resource->GetDesc();
     DAWN_INVALID_IF(
         (dawnDescriptor->size.width != d3dDescriptor.Width) ||
@@ -160,7 +143,7 @@ MaybeError ValidateD3D12TextureCanBeWrapped(ID3D12Resource* d3d12Resource,
 }
 
 // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_shared_resource_compatibility_tier
-MaybeError ValidateD3D12VideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFormat) {
+MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFormat) {
     const bool supportsSharedResourceCapabilityTier1 =
         device->GetDeviceInfo().supportsSharedResourceCapabilityTier1;
     switch (textureFormat) {

@@ -34,10 +34,9 @@ namespace dawn::native::d3d12 {
 class CommandRecordingContext;
 class Device;
 
-MaybeError ValidateD3D12TextureCanBeWrapped(ID3D12Resource* d3d12Resource,
-                                            const TextureDescriptor* descriptor);
-MaybeError ValidateTextureDescriptorCanBeWrapped(const TextureDescriptor* descriptor);
-MaybeError ValidateD3D12VideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFormat);
+MaybeError ValidateTextureCanBeWrapped(ID3D12Resource* d3d12Resource,
+                                       const TextureDescriptor* descriptor);
+MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFormat);
 
 class Texture final : public TextureBase {
   public:

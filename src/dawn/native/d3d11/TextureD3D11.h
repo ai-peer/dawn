@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_TEXTURED3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_TEXTURED3D11_H_
 
+#include <vector>
+
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/IntegerTypes.h"
@@ -30,6 +32,11 @@ namespace dawn::native::d3d11 {
 
 class CommandRecordingContext;
 class Device;
+class Fence;
+
+MaybeError ValidateTextureCanBeWrapped(ID3D11Resource* d3d12Resource,
+                                       const TextureDescriptor* descriptor);
+MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFormat);
 
 class Texture final : public TextureBase {
   public:
@@ -37,7 +44,12 @@ class Texture final : public TextureBase {
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D11Resource> d3d11Texture);
-
+    static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
+                                                           const TextureDescriptor* descriptor,
+                                                           ComPtr<ID3D11Resource> d3d11Texture,
+                                                           std::vector<Ref<Fence>> waitFences,
+                                                           bool isSwapChainTexture,
+                                                           bool isInitialized);
     DXGI_FORMAT GetD3D11Format() const;
     ID3D11Resource* GetD3D11Resource() const;
 
@@ -67,6 +79,8 @@ class Texture final : public TextureBase {
                     ReadCallback callback);
     static MaybeError Copy(CommandRecordingContext* commandContext, CopyTextureToTextureCmd* copy);
 
+    ResultOrError<ExecutionSerial> EndAccess();
+
   private:
     static ResultOrError<Ref<Texture>> CreateStaging(Device* device,
                                                      const TextureDescriptor* descriptor);
@@ -82,7 +96,9 @@ class Texture final : public TextureBase {
 
     MaybeError InitializeAsInternalTexture();
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D11Resource> d3d11Texture);
-
+    MaybeError InitializeAsExternalTexture(ComPtr<ID3D11Resource> d3d11Texture,
+                                           std::vector<Ref<Fence>> waitFences,
+                                           bool isSwapChainTexture);
     void SetLabelHelper(const char* prefix);
 
     // Dawn API
