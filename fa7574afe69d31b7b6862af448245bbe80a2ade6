@@ -259,6 +259,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf2b07b2_295cad51",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-28T02:39:27Z",
+      "side": 1,
+      "message": "Got it. Thanks Peng.",
+      "parentUuid": "a96d0e09_81f22804",
+      "range": {
+        "startLine": 464,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 47
+      },
+      "revId": "fa7574afe69d31b7b6862af448245bbe80a2ade6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b034_3fac2010",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 5
