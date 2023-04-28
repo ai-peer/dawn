@@ -87,6 +87,30 @@
       },
       "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59987e90_1078e318",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T17:30:51Z",
+      "side": 1,
+      "message": "agreed it will be simpler and non-blocking to make a one-off staging buffer every time. It\u0027ll be local to this function and easy to improve by adding DynamicUploader in the future",
+      "parentUuid": "b462d7c8_71371a3a",
+      "range": {
+        "startLine": 475,
+        "startChar": 43,
+        "endLine": 475,
+        "endChar": 60
+      },
+      "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
