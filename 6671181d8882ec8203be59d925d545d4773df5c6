@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b180fed_96e08418",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T12:40:54Z",
+      "side": 1,
+      "message": "Switching reviewers, Austin, myself (and Loko) are better reviewers for Vulkan.\n\nOut of curiosity, are you able to share what you are building with Dawn on Android? We are planning to support native use cases on Android eventually, but as you can tell we haven\u0027t looked at it just yet. There\u0027s tons of optimizations needed to run well on mobile tilers still.",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
