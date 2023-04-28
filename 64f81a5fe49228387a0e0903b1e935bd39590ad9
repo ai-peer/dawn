@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ba6ecf_c33dd9f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:44:11Z",
+      "side": 1,
+      "message": "LGTM as well, thank you for your patience.",
+      "revId": "64f81a5fe49228387a0e0903b1e935bd39590ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "658feb41_83e7dfab",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:44:11Z",
+      "side": 1,
+      "message": "nit: this is weird, did you meant `copyToStagingCmd`. The weird part is `buffer` as we\u0027re copying between two textures.",
+      "range": {
+        "startLine": 514,
+        "startChar": 28,
+        "endLine": 514,
+        "endChar": 50
+      },
+      "revId": "64f81a5fe49228387a0e0903b1e935bd39590ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

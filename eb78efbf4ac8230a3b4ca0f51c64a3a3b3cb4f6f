@@ -223,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dfd995f_58409cde",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:44:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e96f1dd2_2105a87d",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee04d8f_9c9c39a3",
@@ -329,6 +347,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50fc2873_f05d9891",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:44:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a4a2c03c_45caf883",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "888970e0_2c406597",
@@ -430,6 +466,24 @@
       "side": 1,
       "message": "All changes in this CL are needed for the test suits in CopyTest.cpp. Otherwise we have to have CLs which don\u0027t have tests coverage until the last CL is landed, or check and suppress some tests for each CL.",
       "parentUuid": "e9f0e3b2_0bd27f00",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "583d5691_e9191a36",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:44:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ebffcfe4_597551e5",
       "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -563,6 +617,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd3b0a0_95524bc2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:44:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b0ad0c3c_e926fd94",
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e86dc44e_6ec4accd",
@@ -647,6 +719,30 @@
       "side": 1,
       "message": "For 2d texture. src.origin.z indicates the slice index. But for CopySubresourceRegion(), srxBox.front should always be 0, srcBoxBack. should always be 1 for 2d texture. I am not sure how to setup for 1d texture yet. Add TODO for 1d texture. Will implement it when I found a test for 1d texture.",
       "parentUuid": "848608a9_a6424e8a",
+      "range": {
+        "startLine": 571,
+        "startChar": 0,
+        "endLine": 572,
+        "endChar": 71
+      },
+      "revId": "eb78efbf4ac8230a3b4ca0f51c64a3a3b3cb4f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a9c8508_4f9db4f6",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-04-28T15:44:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c3bf0c54_8b4597a5",
       "range": {
         "startLine": 571,
         "startChar": 0,
