@@ -205,7 +205,7 @@ TEST_F(ShaderModuleValidationTest, MultipleChainedDescriptor_WgslAndSpirv) {
     spirv_desc.code = &code;
     spirv_desc.codeSize = 1;
     wgpu::ShaderModuleWGSLDescriptor wgsl_desc = {};
-    wgsl_desc.source = "";
+    wgsl_desc.code = "";
     wgsl_desc.nextInChain = &spirv_desc;
     desc.nextInChain = &wgsl_desc;
     ASSERT_DEVICE_ERROR(device.CreateShaderModule(&desc),
@@ -219,7 +219,7 @@ TEST_F(ShaderModuleValidationTest, MultipleChainedDescriptor_WgslAndDawnSpirvOpt
     wgpu::DawnShaderModuleSPIRVOptionsDescriptor spirv_options_desc = {};
     wgpu::ShaderModuleWGSLDescriptor wgsl_desc = {};
     wgsl_desc.nextInChain = &spirv_options_desc;
-    wgsl_desc.source = "";
+    wgsl_desc.code = "";
     desc.nextInChain = &wgsl_desc;
     ASSERT_DEVICE_ERROR(
         device.CreateShaderModule(&desc),
