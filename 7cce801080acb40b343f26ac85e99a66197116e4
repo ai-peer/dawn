@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f18dd266_6fce7962",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Yes, I agree it\u0027ll have to be an AdapterBase once that class is real again, so I\u0027ve reverted the .cpp. However, I had to repeat the alias, since I think #including the header breaks layering somehow. Kind of gross but it\u0027ll go away shortly. Added a comment.",
+      "parentUuid": "544505f0_23387b75",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e643e889_2eac92c5",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
@@ -72,6 +96,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "we\u0027ll probably pass in Adapter* here, and save both the adapter, and adapter-\u003eGetPhysicalDevice on the device as mAdapter and mPhysicalDevice.\n\nSo nit: perhaps keep the existing AdapterBase* name?",
+      "range": {
+        "startLine": 173,
+        "startChar": 23,
+        "endLine": 173,
+        "endChar": 41
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ff98598_d1915017",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e643e889_2eac92c5",
       "range": {
         "startLine": 173,
         "startChar": 23,
@@ -105,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db14cda5_fd977966",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b82900a_b6832246",
+      "range": {
+        "startLine": 722,
+        "startChar": 0,
+        "endLine": 722,
+        "endChar": 18
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a182f111_082c4687",
@@ -118,6 +190,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "ditto AdapterBase*",
+      "range": {
+        "startLine": 1348,
+        "startChar": 0,
+        "endLine": 1348,
+        "endChar": 18
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07ecd2c8_c4e7424e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a182f111_082c4687",
       "range": {
         "startLine": 1348,
         "startChar": 0,
@@ -145,6 +241,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8f3809_4602e211",
+        "filename": "src/dawn/native/Forward.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2b50a83b_6bd82fca",
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2db38d41_4bb155e1",
@@ -158,6 +272,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "is it possible to also rename this to PhysicalDevice?\n\nMay need to specify the backend traits so you can do ToBackend(PhysicalDeviceBase\\*) -\u003e PhysicalDevice\\*\n\nhttps://source.chromium.org/search?q\u003df:dawn%20%22BackendTraits%20%7B%22%20Adapter\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c0c894_a25e1cee",
+        "filename": "src/dawn/native/d3d/AdapterD3D.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "I have another patch that renames all the backend Adapters, if that\u0027s ok.",
+      "parentUuid": "2db38d41_4bb155e1",
       "range": {
         "startLine": 26,
         "startChar": 6,
@@ -191,6 +329,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a8cb89_9835b991",
+        "filename": "src/dawn/native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78dd13ef_89bdc704",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1109b988_90135608",
@@ -204,6 +366,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 41,
+        "startChar": 45,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57c3995_63bf33ee",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1109b988_90135608",
       "range": {
         "startLine": 41,
         "startChar": 45,
@@ -237,6 +423,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f609464f_a83c5913",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6700ac5b_9b5a853e",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 29
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c9cf3c3_fa3e7a09",
@@ -250,6 +460,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 107,
+        "startChar": 42,
+        "endLine": 107,
+        "endChar": 60
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51cf2a26_dbff858e",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c9cf3c3_fa3e7a09",
       "range": {
         "startLine": 107,
         "startChar": 42,
@@ -283,6 +517,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67e5aaf4_d1e9626a",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38db27f2_3412fb27",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 117,
+        "endChar": 33
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc03503a_bc441059",
@@ -296,6 +554,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "ditto: AdapterBase* unless you add GetPhysicalDevice on Device",
+      "range": {
+        "startLine": 513,
+        "startChar": 4,
+        "endLine": 513,
+        "endChar": 22
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07119c44_b86332b6",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc03503a_bc441059",
       "range": {
         "startLine": 513,
         "startChar": 4,
@@ -329,6 +611,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "264480e9_02a283ca",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "989b9637_814f2428",
+      "range": {
+        "startLine": 106,
+        "startChar": 42,
+        "endLine": 106,
+        "endChar": 60
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a50cc8c1_efb83d7e",
@@ -342,6 +648,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 117,
+        "endChar": 33
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88743e0b_d6be7ce5",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a50cc8c1_efb83d7e",
       "range": {
         "startLine": 117,
         "startChar": 15,
@@ -375,6 +705,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95c668ac_c20ca5b3",
+        "filename": "src/dawn/native/opengl/DeviceGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93d54a63_86088dc9",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6829accf_cc380c5c",
@@ -388,6 +742,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "nit: I\u0027d keep names in the tests as \"Adapter\" since they\u0027ll be referencing the new Adapter class in the future after it\u0027s added",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4210d3c_cb73ba48",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6829accf_cc380c5c",
       "range": {
         "startLine": 28,
         "startChar": 10,
@@ -421,6 +799,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06cbc077_f547e2e8",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52d591e7_c1c54b36",
+      "range": {
+        "startLine": 136,
+        "startChar": 22,
+        "endLine": 136,
+        "endChar": 40
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2562774f_f325299a",
@@ -434,6 +836,30 @@
       "writtenOn": "2023-04-28T22:35:41Z",
       "side": 1,
       "message": "ditto: AdapterBase*",
+      "range": {
+        "startLine": 117,
+        "startChar": 65,
+        "endLine": 117,
+        "endChar": 83
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32152622_48ced423",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-04-28T23:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2562774f_f325299a",
       "range": {
         "startLine": 117,
         "startChar": 65,
