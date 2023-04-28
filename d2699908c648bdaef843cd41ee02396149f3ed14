@@ -16,6 +16,23 @@
       "message": "LGTM! +2 to unblock 5-way CL and Austin FYI",
       "revId": "d2699908c648bdaef843cd41ee02396149f3ed14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba611b86_b4aa65df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-28T16:35:51Z",
+      "side": 1,
+      "message": "So I suppose an alternative is to adjust `buffer map callback` to have a message. +Kai for an API perspective on this\n\nsomething like that may be preferable because IMO, I\u0027m not sure that extra status enums are programmatically useful. Because these errors aren\u0027t spurious, they shouldn\u0027t exist at all in a production application. i.e. There\u0027s no situation where you should be handling \"offset out of range\" and then trying to map again.\n\nI don\u0027t have strong opinions though, so I\u0027ll defer to others and move myself to cc",
+      "revId": "d2699908c648bdaef843cd41ee02396149f3ed14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
