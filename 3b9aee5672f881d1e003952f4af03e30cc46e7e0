@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ab2f47_7d8b4fa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-04-29T01:29:26Z",
+      "side": 1,
+      "message": "The problem should be fixed with https://dawn-review.googlesource.com/c/dawn/+/130400 . This CL is not necessary anymore.",
+      "revId": "3b9aee5672f881d1e003952f4af03e30cc46e7e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
