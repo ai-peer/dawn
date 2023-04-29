@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e477dc8d_bbc19469",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-29T00:04:35Z",
+      "side": 1,
+      "message": "hopefully we don\u0027t get compile/link errors in some situations",
+      "parentUuid": "f18dd266_6fce7962",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e643e889_2eac92c5",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
@@ -296,6 +320,30 @@
       "side": 1,
       "message": "I have another patch that renames all the backend Adapters, if that\u0027s ok.",
       "parentUuid": "2db38d41_4bb155e1",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba8f992_a91d3fc8",
+        "filename": "src/dawn/native/d3d/AdapterD3D.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-29T00:04:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c7c0c894_a25e1cee",
       "range": {
         "startLine": 26,
         "startChar": 6,
