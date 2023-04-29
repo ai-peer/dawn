@@ -436,4 +436,22 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
     return {true};
 }
 
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    TextureComponentType value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s) {
+    switch (value) {
+        case TextureComponentType::Float:
+            s->Append("float");
+            break;
+        case TextureComponentType::Sint:
+            s->Append("sint");
+            break;
+        case TextureComponentType::Uint:
+            s->Append("uint");
+            break;
+    }
+    return {true};
+}
+
 }  // namespace dawn::native
