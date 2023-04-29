@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a882035e_e18ae713",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-04-29T00:52:35Z",
+      "side": 1,
+      "message": "Dawn has validation\n```\nif (fragmentWritten) {\n        DAWN_INVALID_IF(\n            fragmentOutputVariable.baseType !\u003d format-\u003eGetAspectInfo(Aspect::Color).baseType,\n            \"Color format (%s) base type (%s) doesn\u0027t match the fragment \"\n            \"module output type (%s).\",\n            descriptor-\u003eformat, format-\u003eGetAspectInfo(Aspect::Color).baseType,\n            fragmentOutputVariable.baseType);\n```\nwhich I couldn\u0027t actually find in the spec.\n\nClosest thing I found is:\nhttps://gpuweb.github.io/gpuweb/#abstract-opdef-validating-gpufragmentstate\n\u003e For each component in colorState.format, there must be a corresponding component in output. (That is, RGBA requires vec4, RGB requires vec3 or vec4, RG requires vec2 or vec3 or vec4.)\n\nSo Dawn checks the component type AND the component count. the spec only checks the component count",
+      "revId": "d3a2a397b304d2dfcc9e47fd9ea1a0b998ba5ca1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
