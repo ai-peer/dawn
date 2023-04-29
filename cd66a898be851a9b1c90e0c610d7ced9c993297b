@@ -34,6 +34,24 @@
       "parentUuid": "67827616_9cfabecb",
       "revId": "cd66a898be851a9b1c90e0c610d7ced9c993297b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b032f6f_5d0d7207",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-04-29T08:07:05Z",
+      "side": 1,
+      "message": "Ah.. actually I tried adding it in PS3 and it breaks unit tests because I think we check for deprecation warnings in the test... Since I am going to fix this shortly with https://chromium-review.googlesource.com/c/chromium/src/+/4494183 followed by https://dawn-review.googlesource.com/c/dawn/+/130321 shortly afterwards, I want to avoid the extra work to fix the tests. Will wait for your reply before submitting though.",
+      "parentUuid": "a7d6e657_4d42de08",
+      "revId": "cd66a898be851a9b1c90e0c610d7ced9c993297b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
