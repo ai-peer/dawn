@@ -329,13 +329,23 @@ MaybeError RenderPipeline::Initialize() {
         AcquireNSRef([MTLRenderPipelineDescriptor new]);
     MTLRenderPipelineDescriptor* descriptorMTL = descriptorMTLRef.Get();
 
-    // TODO(dawn:1384): MakeVertexDesc should be const in the future, so we don't need to call
-    // it here when vertex pulling is enabled
-    NSRef<MTLVertexDescriptor> vertexDesc = MakeVertexDesc();
+    // Build a mapping of vertex buffer slots to packed indices
+    {
+        // Vertex buffers are placed after all the buffers for the bind groups.
+        uint32_t mtlVertexBufferIndex =
+            ToBackend(GetLayout())->GetBufferBindingCount(SingleShaderStage::Vertex);
 
-    // Calling MakeVertexDesc first is important since it sets indices for packed bindings
+        for (VertexBufferSlot slot : IterateBitSet(GetVertexBufferSlotsUsed())) {
+            mMtlVertexBufferIndices[slot] = mtlVertexBufferIndex;
+            mtlVertexBufferIndex++;
+        }
+    }
+
+    NSRef<MTLVertexDescriptor> vertexDesc;
     if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling)) {
         vertexDesc = AcquireNSRef([MTLVertexDescriptor new]);
+    } else {
+        vertexDesc = MakeVertexDesc();
     }
     descriptorMTL.vertexDescriptor = vertexDesc.Get();
 
@@ -449,12 +459,8 @@ wgpu::ShaderStage RenderPipeline::GetStagesRequiringStorageBufferLength() const 
     return mStagesRequiringStorageBufferLength;
 }
 
-NSRef<MTLVertexDescriptor> RenderPipeline::MakeVertexDesc() {
+NSRef<MTLVertexDescriptor> RenderPipeline::MakeVertexDesc() const {
     MTLVertexDescriptor* mtlVertexDescriptor = [MTLVertexDescriptor new];
-
-    // Vertex buffers are packed after all the buffers for the bind groups.
-    uint32_t mtlVertexBufferIndex =
-        ToBackend(GetLayout())->GetBufferBindingCount(SingleShaderStage::Vertex);
 
     for (VertexBufferSlot slot : IterateBitSet(GetVertexBufferSlotsUsed())) {
         const VertexBufferInfo& info = GetVertexBuffer(slot);
@@ -486,11 +492,8 @@ NSRef<MTLVertexDescriptor> RenderPipeline::MakeVertexDesc() {
             layoutDesc.stride = info.arrayStride;
         }
 
-        mtlVertexDescriptor.layouts[mtlVertexBufferIndex] = layoutDesc;
+        mtlVertexDescriptor.layouts[GetMtlVertexBufferIndex(slot)] = layoutDesc;
         [layoutDesc release];
-
-        mMtlVertexBufferIndices[slot] = mtlVertexBufferIndex;
-        mtlVertexBufferIndex++;
     }
 
     for (VertexAttributeLocation loc : IterateBitSet(GetAttributeLocationsUsed())) {
@@ -499,7 +502,7 @@ NSRef<MTLVertexDescriptor> RenderPipeline::MakeVertexDesc() {
         auto attribDesc = [MTLVertexAttributeDescriptor new];
         attribDesc.format = VertexFormatType(info.format);
         attribDesc.offset = info.offset;
-        attribDesc.bufferIndex = mMtlVertexBufferIndices[info.vertexBufferSlot];
+        attribDesc.bufferIndex = GetMtlVertexBufferIndex(info.vertexBufferSlot);
         mtlVertexDescriptor.attributes[static_cast<uint8_t>(loc)] = attribDesc;
         [attribDesc release];
     }
