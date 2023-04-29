@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dbe5240_df895ab1",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-29T04:07:22Z",
+      "side": 1,
+      "message": "Should there be a `preamble` block where the declaration is emitted too, to keep the `lhs` block just the lhs values?",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0dda689_64c5a12b",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-29T04:07:22Z",
+      "side": 1,
+      "message": "This should be something like:\n\n- emit a `var\u003cprivate\u003e bool result`\n- before the branch above, emit an `Assign` of the `lhs` to the `result`\n- at the end of the if block emitted, emit an `Assign` of the `rhs` to the `result`\n- drop the `and/or` stuff at the end.",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bb64e77_bb16e440",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-29T04:07:22Z",
+      "side": 1,
+      "message": "Not sure how I feel about this, choosing which side of the `if` to write too based on the kind of short-circuit feels like it might lead to errors later if we use the wrong side.\n\nThe alternative is to emit a Negation operation if this is a `||` and alway use the if `true` block",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8fcd4f_3570b137",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-04-29T04:07:22Z",
+      "side": 1,
+      "message": "This `rhs` value isn\u0027t accessible outside the if block which is where the temporary would be needed.",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
