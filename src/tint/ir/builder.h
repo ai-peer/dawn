@@ -29,6 +29,7 @@
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/loop.h"
 #include "src/tint/ir/module.h"
+#include "src/tint/ir/short_circuit.h"
 #include "src/tint/ir/store.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/terminator.h"
@@ -68,6 +69,10 @@ class Builder {
     /// Creates an if flow node
     /// @returns the flow node
     If* CreateIf();
+
+    /// Creates a short-circuit flow node
+    /// @returns the flow node
+    ShortCircuit* CreateShortCircuit(ShortCircuit::Type type);
 
     /// Creates a loop flow node
     /// @returns the flow node

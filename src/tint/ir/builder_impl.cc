@@ -56,6 +56,7 @@
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/loop.h"
 #include "src/tint/ir/module.h"
+#include "src/tint/ir/short_circuit.h"
 #include "src/tint/ir/store.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/terminator.h"
@@ -750,7 +751,84 @@ utils::Result<Value*> BuilderImpl::EmitUnary(const ast::UnaryOpExpression* expr)
     return inst;
 }
 
+// A short-circut needs special treatment. In some of our backends the operation does not
+// short-circuit so we need to inject if control statements. Some backends do short circuit so we
+// want to use the && and || as expected. This injects a new `ShortCircuit` node into the control
+// flow, spliting the current block. This control flow can then be replaced by a IfNode in a
+// transform for backends which do not do logical, or emitted directly for ones that do support
+// short-circuiting.
+utils::Result<Value*> BuilderImpl::EmitShortCircuit(const ast::BinaryExpression* expr) {
+    ShortCircuit::Type type;
+    switch (expr->op) {
+        case ast::BinaryOp::kLogicalAnd:
+            type = ShortCircuit::Type::kAnd;
+            break;
+        case ast::BinaryOp::kLogicalOr:
+            type = ShortCircuit::Type::kOr;
+            break;
+        default:
+            TINT_ICE(IR, diagnostics_) << "invalid operation type for ShortCircut";
+            return utils::Failure;
+    }
+
+    auto* sc_node = builder.CreateShortCircuit(type);
+    BranchTo(sc_node);
+    current_flow_block = sc_node->lhs.target->As<Block>();
+
+    auto lhs = EmitExpression(expr->lhs);
+    if (!lhs) {
+        return utils::Failure;
+    }
+
+    sc_node->rhs->condition = lhs.Get();
+    BranchTo(sc_node->rhs);
+
+    // TODO(dsinclair): This needs to emit something into the sc preamble which is the var that will
+    // be assigned too with the rhs value.
+    utils::Result<Value*> rhs;
+    {
+        FlowStackScope scope(this, sc_node->rhs);
+
+        // If this is an `&&` we do the work in the true block, for an `||` we do the work in the
+        // false block to calculate the RHS
+        if (type == ShortCircuit::Type::kAnd) {
+            current_flow_block = sc_node->rhs->true_.target->As<Block>();
+        } else {
+            current_flow_block = sc_node->rhs->false_.target->As<Block>();
+        }
+
+        rhs = EmitExpression(expr->rhs);
+        if (!rhs) {
+            return utils::Failure;
+        }
+        BranchTo(sc_node->merge.target);
+    }
+    current_flow_block = sc_node->merge.target->As<Block>();
+
+    // Build the result value
+    auto* ty = builder.ir.types.Get<type::Bool>();
+    Binary* val = nullptr;
+    if (type == ShortCircuit::Type::kAnd) {
+        val = builder.And(ty, lhs.Get(), rhs.Get());
+    } else {
+        val = builder.Or(ty, lhs.Get(), rhs.Get());
+    }
+    current_flow_block->instructions.Push(val);
+
+    // Create a new node which will contain the continuation of what was written before injecting
+    // the short-circuit. This keeps the short-circuit merge block only containing the result.
+    auto* b = builder.CreateBlock();
+    BranchTo(b);
+    current_flow_block = b;
+
+    return val;
+}
+
 utils::Result<Value*> BuilderImpl::EmitBinary(const ast::BinaryExpression* expr) {
+    if (expr->op == ast::BinaryOp::kLogicalAnd || expr->op == ast::BinaryOp::kLogicalOr) {
+        return EmitShortCircuit(expr);
+    }
+
     auto lhs = EmitExpression(expr->lhs);
     if (!lhs) {
         return utils::Failure;
@@ -774,12 +852,6 @@ utils::Result<Value*> BuilderImpl::EmitBinary(const ast::BinaryExpression* expr)
             break;
         case ast::BinaryOp::kXor:
             inst = builder.Xor(ty, lhs.Get(), rhs.Get());
-            break;
-        case ast::BinaryOp::kLogicalAnd:
-            inst = builder.LogicalAnd(ty, lhs.Get(), rhs.Get());
-            break;
-        case ast::BinaryOp::kLogicalOr:
-            inst = builder.LogicalOr(ty, lhs.Get(), rhs.Get());
             break;
         case ast::BinaryOp::kEqual:
             inst = builder.Equal(ty, lhs.Get(), rhs.Get());
@@ -820,6 +892,10 @@ utils::Result<Value*> BuilderImpl::EmitBinary(const ast::BinaryExpression* expr)
         case ast::BinaryOp::kModulo:
             inst = builder.Modulo(ty, lhs.Get(), rhs.Get());
             break;
+        case ast::BinaryOp::kLogicalAnd:
+        case ast::BinaryOp::kLogicalOr:
+            TINT_ICE(IR, diagnostics_) << "short circuit op should have already been handled";
+            return utils::Failure;
         case ast::BinaryOp::kNone:
             TINT_ICE(IR, diagnostics_) << "missing binary operand type";
             return utils::Failure;

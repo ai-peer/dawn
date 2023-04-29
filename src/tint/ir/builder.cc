@@ -56,6 +56,18 @@ If* Builder::CreateIf() {
     return ir_if;
 }
 
+ShortCircuit* Builder::CreateShortCircuit(ShortCircuit::Type type) {
+    auto* ir_sc = ir.flow_nodes.Create<ShortCircuit>(type);
+    ir_sc->lhs.target = CreateBlock();
+    ir_sc->rhs = CreateIf();
+    ir_sc->merge.target = CreateBlock();
+
+    ir_sc->lhs.target->inbound_branches.Push(ir_sc);
+    ir_sc->rhs->inbound_branches.Push(ir_sc->lhs.target);
+
+    return ir_sc;
+}
+
 Loop* Builder::CreateLoop() {
     auto* ir_loop = ir.flow_nodes.Create<Loop>();
     ir_loop->start.target = CreateBlock();

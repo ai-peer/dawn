@@ -17,6 +17,7 @@
 #include "src/tint/ir/block.h"
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/loop.h"
+#include "src/tint/ir/short_circuit.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/terminator.h"
 #include "src/tint/switch.h"
@@ -200,14 +201,40 @@ void Disassembler::Walk(const FlowNode* node) {
                 Indent() << "# true branch" << std::endl;
                 Walk(i->true_.target);
 
-                Indent() << "# false branch" << std::endl;
-                Walk(i->false_.target);
+                if (!i->false_.target->IsDead()) {
+                    Indent() << "# false branch" << std::endl;
+                    Walk(i->false_.target);
+                }
             }
 
             if (i->merge.target->IsConnected()) {
                 Indent() << "# if merge" << std::endl;
                 Walk(i->merge.target);
             }
+        },
+        [&](const ir::ShortCircuit* sc) {
+            Indent() << "%fn" << GetIdForNode(sc) << " = short_circuit ";
+            switch (sc->type) {
+                case ShortCircuit::Type::kAnd:
+                    out_ << "and";
+                    break;
+                case ShortCircuit::Type::kOr:
+                    out_ << "or";
+                    break;
+            }
+
+            out_ << " [l: %fn" << GetIdForNode(sc->lhs.target) << ", r: %fn"
+                 << GetIdForNode(sc->rhs) << ", m: %fn" << GetIdForNode(sc->merge.target) << "]"
+                 << std::endl;
+            {
+                ScopedIndent indent(&indent_size_);
+                // This will walk both the lhs and rhs because they chain together to the merge
+                ScopedStopNode scope(&stop_nodes_, sc->merge.target);
+                Walk(sc->lhs.target);
+            }
+
+            Indent() << "# short-circut merge" << std::endl;
+            Walk(sc->merge.target);
         },
         [&](const ir::Loop* l) {
             Indent() << "%fn" << GetIdForNode(l) << " = loop [s: %fn"

@@ -738,6 +738,8 @@ if(${TINT_BUILD_IR})
     ir/loop.h
     ir/module.cc
     ir/module.h
+    ir/short_circuit.cc
+    ir/short_circuit.h
     ir/store.cc
     ir/store.h
     ir/switch.cc
