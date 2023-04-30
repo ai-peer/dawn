@@ -750,14 +750,17 @@ bool TextureBase::IsMultisampledTexture() const {
     return mSampleCount > 1;
 }
 
-bool TextureBase::CoverFullSubresource(const Extent3D& size) const {
+bool TextureBase::CoverFullSubresource(uint32_t mipLevel, const Extent3D& size) const {
     switch (GetDimension()) {
         case wgpu::TextureDimension::e1D:
-            return size.width == GetSize().width;
+            return size.width == (GetSize().width >> mipLevel);
         case wgpu::TextureDimension::e2D:
-            return size.width == GetSize().width && size.height == GetSize().height;
+            return size.width == (GetSize().width >> mipLevel) &&
+                   size.height == (GetSize().height >> mipLevel);
         case wgpu::TextureDimension::e3D:
-            return size == GetSize();
+            return size.width == (GetSize().width >> mipLevel) &&
+                   size.height == (GetSize().height >> mipLevel) &&
+                   size.depthOrArrayLayers == GetSize().depthOrArrayLayers;
     }
 }
 
