@@ -38,7 +38,7 @@ TEST_F(BuilderTest, Block) {
     EXPECT_TRUE(b.GenerateStatement(outer)) << b.error();
     EXPECT_FALSE(b.has_error());
 
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%3 = OpTypeFloat 32
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%3 = OpTypeFloat 32
 %2 = OpTypePointer Function %3
 %4 = OpConstantNull %3
 %5 = OpConstant %3 1
@@ -46,12 +46,12 @@ TEST_F(BuilderTest, Block) {
 %8 = OpConstant %3 3
 )");
 
-    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().variables()),
               R"(%1 = OpVariable %2 Function %4
 %6 = OpVariable %2 Function %4
 )");
 
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(OpStore %1 %5
 OpStore %6 %7
 OpStore %1 %8
