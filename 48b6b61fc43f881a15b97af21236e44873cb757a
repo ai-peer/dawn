@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c3330ee_a2e25b21",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T21:04:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "35e02b14_5cde7dcd",
+      "revId": "48b6b61fc43f881a15b97af21236e44873cb757a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78994971_a580b020",
@@ -89,6 +107,30 @@
       "side": 1,
       "message": "See my comment below (which I neglected to send, oops): they will become two AdapterBases wrapping a single PhysicalDevice, so I think the names should stay.",
       "parentUuid": "78994971_a580b020",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 58
+      },
+      "revId": "48b6b61fc43f881a15b97af21236e44873cb757a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8520af_25d8f442",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T21:04:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fbd382b3_8ccefdbb",
       "range": {
         "startLine": 50,
         "startChar": 4,
