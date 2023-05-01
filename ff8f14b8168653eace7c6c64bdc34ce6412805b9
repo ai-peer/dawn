@@ -51,6 +51,24 @@
       "parentUuid": "86c4c5b8_997f65dc",
       "revId": "ff8f14b8168653eace7c6c64bdc34ce6412805b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e45aff_8b433b03",
+        "filename": "src/tint/ir/unary.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-01T21:00:29Z",
+      "side": 1,
+      "message": "Opened crbug.com/tint/1928 for considering dropping the ops. Not urgent or necessary.",
+      "parentUuid": "634a11fa_3a41de57",
+      "revId": "ff8f14b8168653eace7c6c64bdc34ce6412805b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
