@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3589bde5_5b6c17e9",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-01T21:11:14Z",
+      "side": 1,
+      "message": "I\u0027m confused by this comment. Isn\u0027t the RHS value assigned to the `result_var` declaration emitted above? What else needs to be emitted here?",
+      "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9eca409_45c6e59d",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-01T21:11:14Z",
+      "side": 1,
+      "message": "Should we emit the block even if it\u0027s empty? `%fn5` is referenced above (as the `true` target), but never defined. Is that sort of thing going to be problematic for parsing the IR?\n\nI assume it\u0027s not even an empty block, there\u0027s presumably a (implicit?) branch to the if-merge block?",
+      "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
