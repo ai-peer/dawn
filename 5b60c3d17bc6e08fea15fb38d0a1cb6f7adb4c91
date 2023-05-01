@@ -16,6 +16,23 @@
       "message": "Hi Corentin, PTAL. Thanks",
       "revId": "5b60c3d17bc6e08fea15fb38d0a1cb6f7adb4c91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e72335c3_28b054de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-01T18:37:28Z",
+      "side": 1,
+      "message": "LGTM but there seems to be a missing deps on the MSVC build?",
+      "revId": "5b60c3d17bc6e08fea15fb38d0a1cb6f7adb4c91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
