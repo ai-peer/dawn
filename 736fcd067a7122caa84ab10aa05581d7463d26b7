@@ -22,6 +22,30 @@
       },
       "revId": "736fcd067a7122caa84ab10aa05581d7463d26b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f4868c_d41049a1",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-01T23:25:14Z",
+      "side": 1,
+      "message": "I think it\u0027s not too important for this because it\u0027s just the internal testing count that is affected. The message is only logged once to the user side.",
+      "parentUuid": "269c2f42_670878bb",
+      "range": {
+        "startLine": 704,
+        "startChar": 4,
+        "endLine": 707,
+        "endChar": 0
+      },
+      "revId": "736fcd067a7122caa84ab10aa05581d7463d26b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
