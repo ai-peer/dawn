@@ -38,6 +38,10 @@ class Function {
     /// Copy constructor
     /// @param other the function to copy
     Function(const Function& other);
+    /// Copy assignment operator
+    /// @param other the function to copy
+    Function& operator=(const Function& other);
+    /// Destructor
     ~Function();
 
     /// Iterates over the function call the cb on each instruction
@@ -83,6 +87,9 @@ class Function {
         }
         return size;
     }
+
+    /// @returns true if the function has a valid declaration
+    explicit operator bool() const { return declaration_.opcode() == spv::Op::OpFunction; }
 
   private:
     Instruction declaration_;
