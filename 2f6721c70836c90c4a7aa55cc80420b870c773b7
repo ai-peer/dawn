@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8af1fc9_8869dea8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T16:08:15Z",
+      "side": 1,
+      "message": "nit: relocate this comment down to the call of `UpdateSubresource1`",
+      "range": {
+        "startLine": 458,
+        "startChar": 0,
+        "endLine": 458,
+        "endChar": 87
+      },
+      "revId": "2f6721c70836c90c4a7aa55cc80420b870c773b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
