@@ -32,7 +32,7 @@ TEST_F(BuilderTest, Return) {
     EXPECT_TRUE(b.GenerateReturnStatement(ret));
     ASSERT_FALSE(b.has_error()) << b.error();
 
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()), R"(OpReturn
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()), R"(OpReturn
 )");
 }
 
@@ -48,13 +48,13 @@ TEST_F(BuilderTest, Return_WithValue) {
     EXPECT_TRUE(b.GenerateReturnStatement(ret));
     ASSERT_FALSE(b.has_error()) << b.error();
 
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeVector %2 3
 %3 = OpConstant %2 1
 %4 = OpConstant %2 3
 %5 = OpConstantComposite %1 %3 %3 %4
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(OpReturnValue %5
 )");
 }
@@ -72,14 +72,14 @@ TEST_F(BuilderTest, Return_WithValue_GeneratesLoad) {
     EXPECT_TRUE(b.GenerateReturnStatement(ret)) << b.error();
     ASSERT_FALSE(b.has_error()) << b.error();
 
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%3 = OpTypeFloat 32
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%3 = OpTypeFloat 32
 %2 = OpTypePointer Function %3
 %4 = OpConstantNull %3
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().variables()),
               R"(%1 = OpVariable %2 Function %4
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(%5 = OpLoad %3 %1
 OpReturnValue %5
 )");
