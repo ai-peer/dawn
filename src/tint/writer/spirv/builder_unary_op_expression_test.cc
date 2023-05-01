@@ -30,10 +30,10 @@ TEST_F(BuilderTest, UnaryOp_Negation_Integer) {
 
     b.push_function(Function{});
     EXPECT_EQ(b.GenerateUnaryOpExpression(expr), 1u) << b.error();
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeInt 32 1
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeInt 32 1
 %3 = OpConstant %2 1
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(%1 = OpSNegate %2 %3
 )");
 }
@@ -46,10 +46,10 @@ TEST_F(BuilderTest, UnaryOp_Negation_Float) {
 
     b.push_function(Function{});
     EXPECT_EQ(b.GenerateUnaryOpExpression(expr), 1u) << b.error();
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeFloat 32
 %3 = OpConstant %2 1
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(%1 = OpFNegate %2 %3
 )");
 }
@@ -62,10 +62,10 @@ TEST_F(BuilderTest, UnaryOp_Complement) {
 
     b.push_function(Function{});
     EXPECT_EQ(b.GenerateUnaryOpExpression(expr), 1u) << b.error();
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeInt 32 1
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeInt 32 1
 %3 = OpConstant %2 1
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(%1 = OpNot %2 %3
 )");
 }
@@ -78,10 +78,10 @@ TEST_F(BuilderTest, UnaryOp_Not) {
 
     b.push_function(Function{});
     EXPECT_EQ(b.GenerateUnaryOpExpression(expr), 1u) << b.error();
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeBool
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeBool
 %3 = OpConstantNull %2
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(%1 = OpLogicalNot %2 %3
 )");
 }
@@ -99,15 +99,15 @@ TEST_F(BuilderTest, UnaryOp_LoadRequired) {
     EXPECT_EQ(b.GenerateUnaryOpExpression(expr), 6u) << b.error();
     ASSERT_FALSE(b.has_error()) << b.error();
 
-    EXPECT_EQ(DumpInstructions(b.types()), R"(%4 = OpTypeFloat 32
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%4 = OpTypeFloat 32
 %3 = OpTypeVector %4 3
 %2 = OpTypePointer Function %3
 %5 = OpConstantNull %3
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().variables()),
               R"(%1 = OpVariable %2 Function %5
 )");
-    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
+    EXPECT_EQ(DumpInstructions(b.CurrentFunction().instructions()),
               R"(%7 = OpLoad %3 %1
 %6 = OpFNegate %3 %7
 )");
