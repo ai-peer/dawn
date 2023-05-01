@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bbb1ce4_165fc52d",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-01T20:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dbe5240_df895ab1",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0dda689_64c5a12b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-29T04:07:22Z",
       "side": 1,
       "message": "This should be something like:\n\n- emit a `var\u003cprivate\u003e bool result`\n- before the branch above, emit an `Assign` of the `lhs` to the `result`\n- at the end of the if block emitted, emit an `Assign` of the `rhs` to the `result`\n- drop the `and/or` stuff at the end.",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59cf1d02_4ee3a706",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-01T20:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0dda689_64c5a12b",
       "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b19a86f0_83d2e9f2",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-01T20:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bb64e77_bb16e440",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df8fcd4f_3570b137",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-04-29T04:07:22Z",
       "side": 1,
       "message": "This `rhs` value isn\u0027t accessible outside the if block which is where the temporary would be needed.",
+      "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e8820e_6c3b10a8",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-01T20:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df8fcd4f_3570b137",
       "revId": "eb8a24023636cf8bcb920b8454bd71948d7442ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
