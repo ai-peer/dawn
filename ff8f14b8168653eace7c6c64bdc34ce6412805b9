@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d2819e7_c9d098ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-01T19:51:01Z",
+      "side": 1,
+      "message": "LGTM, assuming that the logical ops will go away in a future CL.\n\nIf they do, I\u0027d also prefer dropping the `bit_` prefixes on and/or/xor, but I don\u0027t care that much.",
+      "revId": "ff8f14b8168653eace7c6c64bdc34ce6412805b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86c4c5b8_997f65dc",
+        "filename": "src/tint/ir/unary.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-01T19:51:01Z",
+      "side": 1,
+      "message": "übernit: I don\u0027t love the \"log_\" prefix here. \"log\" doesn\u0027t immediately strike me as being shorthand for \"logical\" (my brain goes to logging and logarithm first).\n\nBut I don\u0027t care that much.\n\nCould even just get rid of the op entirely since it\u0027s just shorthand for `x\u003d\u003dfalse`, and we don\u0027t need these shorthands in the IR (some goes for complement above).",
+      "revId": "ff8f14b8168653eace7c6c64bdc34ce6412805b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
