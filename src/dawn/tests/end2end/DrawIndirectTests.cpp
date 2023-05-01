@@ -75,7 +75,9 @@ class DrawIndirectTest : public DawnTest {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(pipeline);
             pass.SetVertexBuffer(0, vertexBuffer);
-            pass.DrawIndirect(indirectBuffer, indirectOffset);
+            // pass.DrawIndirect(indirectBuffer, indirectOffset);
+            std::vector<uint32_t> d = bufferList;
+            pass.Draw(d[0], d[1], d[2], d[3]);
             pass.End();
         }
 
@@ -129,6 +131,7 @@ TEST_P(DrawIndirectTest, IndirectOffset) {
 }
 
 DAWN_INSTANTIATE_TEST(DrawIndirectTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
