@@ -33,6 +33,52 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "48b6b61fc43f881a15b97af21236e44873cb757a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78994971_a580b020",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T20:37:32Z",
+      "side": 1,
+      "message": "nit: rename these to physical device too, I think",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 58
+      },
+      "revId": "48b6b61fc43f881a15b97af21236e44873cb757a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c90fe79_e499ac5c",
+        "filename": "src/dawn/tests/unittests/PerThreadProcTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T20:37:32Z",
+      "side": 1,
+      "message": "this one we only ever call API* methods on. Could it be a normal AdapterBase?\n\nthe change is fine for now though until we add the AdapterBase class back",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "48b6b61fc43f881a15b97af21236e44873cb757a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
