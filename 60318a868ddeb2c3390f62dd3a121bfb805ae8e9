@@ -111,6 +111,30 @@
       },
       "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5904b9e_39df8281",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-01T07:39:54Z",
+      "side": 1,
+      "message": "The `D3D11_MAP_WRITE_NO_OVERWRITE` limitation was for D3D11.0. D3D11.1 should work. Anyway let\u0027s consider it later for DynamicUploader. For now, one-off staging buffer would be good enough.\n\u003eNote  The Direct3D 11.1 runtime, which is available starting with Windows 8, enables mapping dynamic constant buffers and shader resource views (SRVs) of dynamic buffers with D3D11_MAP_WRITE_NO_OVERWRITE. The Direct3D 11 and earlier runtimes limited mapping to vertex or index buffers.",
+      "parentUuid": "59987e90_1078e318",
+      "range": {
+        "startLine": 475,
+        "startChar": 43,
+        "endLine": 475,
+        "endChar": 60
+      },
+      "revId": "60318a868ddeb2c3390f62dd3a121bfb805ae8e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
