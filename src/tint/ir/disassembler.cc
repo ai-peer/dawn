@@ -89,6 +89,7 @@ void Disassembler::Walk(const FlowNode* node) {
     tint::Switch(
         node,
         [&](const ir::Function* f) {
+            in_function_ = true;
             Indent() << "%fn" << GetIdForNode(f) << " = func " << f->name.Name() << std::endl;
 
             {
@@ -97,6 +98,7 @@ void Disassembler::Walk(const FlowNode* node) {
                 Walk(f->start_target);
             }
             Walk(f->end_target);
+            in_function_ = false;
         },
         [&](const ir::Block* b) {
             // If this block is dead, nothing to do
@@ -241,11 +243,19 @@ void Disassembler::Walk(const FlowNode* node) {
                 Walk(l->merge.target);
             }
         },
-        [&](const ir::Terminator*) { Indent() << "func_end" << std::endl
-                                              << std::endl; });
+        [&](const ir::Terminator*) {
+            if (in_function_) {
+                Indent() << "func_end" << std::endl;
+            }
+            out_ << std::endl;
+        });
 }
 
 std::string Disassembler::Disassemble() {
+    if (mod_.root_block) {
+        Walk(mod_.root_block);
+    }
+
     for (const auto* func : mod_.functions) {
         Walk(func);
     }
