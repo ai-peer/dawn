@@ -1707,16 +1707,12 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalAnd) {
     auto* expr = LogicalAnd(Call("my_func"), false);
     WrapInFunction(expr);
 
-    auto& b = CreateBuilder();
-    InjectFlowBlock();
-    auto r = b.EmitExpression(expr);
-    ASSERT_THAT(b.Diagnostics(), testing::IsEmpty());
-    ASSERT_TRUE(r);
+    auto r = Build();
+    ASSERT_TRUE(r) << Error();
+    auto m = r.Move();
 
-    Disassembler d(b.builder.ir);
-    d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(bool) = call my_func
-%2(bool) = log_and %1(bool), false
+    EXPECT_EQ(Disassemble(m), R"(%1(bool) = call my_func
+%2(bool) = bit_and %1(bool), false
 )");
 }
 
@@ -1725,16 +1721,12 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalOr) {
     auto* expr = LogicalOr(Call("my_func"), true);
     WrapInFunction(expr);
 
-    auto& b = CreateBuilder();
-    InjectFlowBlock();
-    auto r = b.EmitExpression(expr);
-    ASSERT_THAT(b.Diagnostics(), testing::IsEmpty());
-    ASSERT_TRUE(r);
+    auto r = Build();
+    ASSERT_TRUE(r) << Error();
+    auto m = r.Move();
 
-    Disassembler d(b.builder.ir);
-    d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(bool) = call my_func
-%2(bool) = log_or %1(bool), true
+    EXPECT_EQ(Disassemble(m), R"(%1(bool) = call my_func
+%2(bool) = bit_or %1(bool), true
 )");
 }
 
@@ -1889,22 +1881,18 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound) {
                             GreaterThan(2.5_f, Div(Call("my_func"), Mul(2.3_f, Call("my_func")))));
     WrapInFunction(expr);
 
-    auto& b = CreateBuilder();
-    InjectFlowBlock();
-    auto r = b.EmitExpression(expr);
-    ASSERT_THAT(b.Diagnostics(), testing::IsEmpty());
-    ASSERT_TRUE(r);
+    auto r = Build();
+    ASSERT_TRUE(r) << Error();
+    auto m = r.Move();
 
-    Disassembler d(b.builder.ir);
-    d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(f32) = call my_func
+    EXPECT_EQ(Disassemble(m), R"(%1(f32) = call my_func
 %2(bool) = lt %1(f32), 2.0f
 %3(f32) = call my_func
 %4(f32) = call my_func
 %5(f32) = mul 2.29999995231628417969f, %4(f32)
 %6(f32) = div %3(f32), %5(f32)
 %7(bool) = gt 2.5f, %6(f32)
-%8(bool) = log_and %2(bool), %7(bool)
+%8(bool) = bit_and %2(bool), %7(bool)
 )");
 }
 
@@ -1914,15 +1902,11 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound_WithConstEval) {
                                             GreaterThan(2.5_f, Div(10_f, Mul(2.3_f, 9.4_f)))));
     WrapInFunction(expr);
 
-    auto& b = CreateBuilder();
-    InjectFlowBlock();
-    auto r = b.EmitExpression(expr);
-    ASSERT_THAT(b.Diagnostics(), testing::IsEmpty());
-    ASSERT_TRUE(r);
+    auto r = Build();
+    ASSERT_TRUE(r) << Error();
+    auto m = r.Move();
 
-    Disassembler d(b.builder.ir);
-    d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
-    EXPECT_EQ(d.AsString(), R"(%1(bool) = call my_func, false
+    EXPECT_EQ(Disassemble(m), R"(%1(bool) = call my_func, false
 )");
 }
 
