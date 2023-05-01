@@ -14,9 +14,9 @@
 
 #include "dawn/native/d3d/DeviceD3D.h"
 
-#include "dawn/native/d3d/AdapterD3D.h"
 #include "dawn/native/d3d/BackendD3D.h"
 #include "dawn/native/d3d/Forward.h"
+#include "dawn/native/d3d/PhysicalDeviceD3D.h"
 
 namespace dawn::native::d3d {
 

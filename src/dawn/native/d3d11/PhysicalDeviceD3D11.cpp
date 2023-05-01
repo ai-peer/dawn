@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/native/d3d11/AdapterD3D11.h"
+#include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 
 #include <string>
 #include <utility>
