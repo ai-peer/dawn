@@ -107,6 +107,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c53a34_f283c7c7",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-01T15:09:28Z",
+      "side": 1,
+      "message": "Good point. I\u0027ve reverted back to using PhysicalDeviceBase for now to be on the safe side.",
+      "parentUuid": "e477dc8d_bbc19469",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "7cce801080acb40b343f26ac85e99a66197116e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e643e889_2eac92c5",
