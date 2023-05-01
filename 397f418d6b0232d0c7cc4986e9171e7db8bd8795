@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72551cb1_e456b184",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T22:21:33Z",
+      "side": 1,
+      "message": "make sure to add a test for it somewhere",
+      "range": {
+        "startLine": 1107,
+        "startChar": 12,
+        "endLine": 1109,
+        "endChar": 60
+      },
+      "revId": "397f418d6b0232d0c7cc4986e9171e7db8bd8795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
