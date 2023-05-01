@@ -692,35 +692,3 @@ enable f16;
 
 @compute @workgroup_size(1) fn main() {})"));
 }
-
-// Test that passing a WGSL extension without setting the shader string should fail.
-TEST_F(ShaderModuleValidationTest, WgslNullptrShader) {
-    wgpu::ShaderModuleWGSLDescriptor wgslDesc = {};
-    wgpu::ShaderModuleDescriptor descriptor = {};
-    descriptor.nextInChain = &wgslDesc;
-    ASSERT_DEVICE_ERROR(device.CreateShaderModule(&descriptor));
-}
-
-// Tests that WGSL extension with deprecated source member still works but emits warning.
-TEST_F(ShaderModuleValidationTest, SourceToCodeMemberDeprecation) {
-    // This test works assuming ShaderModule is backed by a dawn::native::ShaderModuleBase, which
-    // is not the case on the wire.
-    DAWN_SKIP_TEST_IF(UsesWire());
-
-    wgpu::ShaderModuleWGSLDescriptor wgslDesc = {};
-    wgpu::ShaderModuleDescriptor descriptor = {};
-    descriptor.nextInChain = &wgslDesc;
-
-    wgpu::ShaderModule sourceShader;
-    wgslDesc.source = "@compute @workgroup_size(1) fn main() {}";
-    // Note that there are actually 2 warnings emitted because 1 is for the blueprint and one is for
-    // the actual shader.
-    EXPECT_DEPRECATION_WARNINGS(sourceShader = device.CreateShaderModule(&descriptor), 2);
-
-    wgslDesc.source = nullptr;
-    wgslDesc.code = "@compute @workgroup_size(1) fn main() {}";
-    wgpu::ShaderModule codeShader = device.CreateShaderModule(&descriptor);
-
-    EXPECT_TRUE(dawn::native::ShaderModuleBase::EqualityFunc()(
-        dawn::native::FromAPI(sourceShader.Get()), dawn::native::FromAPI(codeShader.Get())));
-}
