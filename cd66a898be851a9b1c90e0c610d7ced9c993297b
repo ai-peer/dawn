@@ -52,6 +52,24 @@
       "parentUuid": "a7d6e657_4d42de08",
       "revId": "cd66a898be851a9b1c90e0c610d7ced9c993297b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a76c0d79_693bc979",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T16:01:43Z",
+      "side": 1,
+      "message": "ok that\u0027s fine if we agreed that it\u0027s OK not to do incremental deprecation for this one",
+      "parentUuid": "8b032f6f_5d0d7207",
+      "revId": "cd66a898be851a9b1c90e0c610d7ced9c993297b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
