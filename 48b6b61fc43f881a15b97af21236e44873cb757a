@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35e02b14_5cde7dcd",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-01T21:01:47Z",
+      "side": 1,
+      "message": "When the real AdapterBase comes back, these tests will likely have to create a single null::PhysicalDevice, and multiple AdapterBases to wrap them. For now, I\u0027ve left the variable names alone and just modified the types.",
+      "revId": "48b6b61fc43f881a15b97af21236e44873cb757a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78994971_a580b020",
         "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
         "patchSetId": 2
@@ -48,6 +65,30 @@
       "writtenOn": "2023-05-01T20:37:32Z",
       "side": 1,
       "message": "nit: rename these to physical device too, I think",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 58
+      },
+      "revId": "48b6b61fc43f881a15b97af21236e44873cb757a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbd382b3_8ccefdbb",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-01T21:01:47Z",
+      "side": 1,
+      "message": "See my comment below (which I neglected to send, oops): they will become two AdapterBases wrapping a single PhysicalDevice, so I think the names should stay.",
+      "parentUuid": "78994971_a580b020",
       "range": {
         "startLine": 50,
         "startChar": 4,
