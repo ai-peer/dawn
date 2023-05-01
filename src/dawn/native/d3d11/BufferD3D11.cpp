@@ -82,7 +82,7 @@ UINT D3D11BufferBindFlags(wgpu::BufferUsage usage) {
     if (usage & (wgpu::BufferUsage::Uniform)) {
         bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
     }
-    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
+    if (usage & (wgpu::BufferUsage::Storage)) {
         bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_UNORDERED_ACCESS;
     }
     if (usage & kReadOnlyStorageBuffer) {
@@ -120,7 +120,7 @@ UINT D3D11CpuAccessFlags(wgpu::BufferUsage usage) {
 
 UINT D3D11BufferMiscFlags(wgpu::BufferUsage usage) {
     UINT miscFlags = 0;
-    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
+    if (usage & wgpu::BufferUsage::Storage) {
         miscFlags |= D3D11_RESOURCE_MISC_BUFFER_ALLOW_RAW_VIEWS;
     }
     if (usage & wgpu::BufferUsage::Indirect) {
@@ -137,7 +137,7 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
         return sizeof(float) * 4 * 16;
     }
 
-    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
+    if (usage & wgpu::BufferUsage::Storage) {
         // Unordered access buffers must be 4-byte aligned.
         return sizeof(uint32_t);
     }

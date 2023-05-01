@@ -67,8 +67,8 @@ class DrawIndirectTest : public DawnTest {
               uint64_t indirectOffset,
               utils::RGBA8 bottomLeftExpected,
               utils::RGBA8 topRightExpected) {
-        wgpu::Buffer indirectBuffer =
-            utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect, bufferList);
+        wgpu::Buffer indirectBuffer = utils::CreateBufferFromData<uint32_t>(
+            device, wgpu::BufferUsage::Indirect | wgpu::BufferUsage::CopySrc, bufferList);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
@@ -76,12 +76,15 @@ class DrawIndirectTest : public DawnTest {
             pass.SetPipeline(pipeline);
             pass.SetVertexBuffer(0, vertexBuffer);
             pass.DrawIndirect(indirectBuffer, indirectOffset);
+            // std::vector<uint32_t> data = bufferList;
+            // pass.Draw(data[0], data[1], data[2], data[3]);
             pass.End();
         }
 
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
+        EXPECT_BUFFER_U32_RANGE_EQ(bufferList.begin(), indirectBuffer, 0, bufferList.size());
         EXPECT_PIXEL_RGBA8_EQ(bottomLeftExpected, renderPass.color, 1, 3);
         EXPECT_PIXEL_RGBA8_EQ(topRightExpected, renderPass.color, 3, 1);
     }
@@ -129,6 +132,7 @@ TEST_P(DrawIndirectTest, IndirectOffset) {
 }
 
 DAWN_INSTANTIATE_TEST(DrawIndirectTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),

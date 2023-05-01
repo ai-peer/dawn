@@ -648,12 +648,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply(commandContext));
-                uint64_t indirectBufferOffset = draw->indirectOffset;
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
                 ASSERT(indirectBuffer != nullptr);
-
                 commandContext->GetD3D11DeviceContext()->DrawInstancedIndirect(
-                    indirectBuffer->GetD3D11Buffer(), indirectBufferOffset);
+                    indirectBuffer->GetD3D11Buffer(), static_cast<UINT>(draw->indirectOffset));
 
                 break;
             }
@@ -663,12 +661,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply(commandContext));
-
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
                 ASSERT(indirectBuffer != nullptr);
-
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstancedIndirect(
-                    indirectBuffer->GetD3D11Buffer(), draw->indirectOffset);
+                    indirectBuffer->GetD3D11Buffer(), static_cast<UINT>(draw->indirectOffset));
 
                 break;
             }
