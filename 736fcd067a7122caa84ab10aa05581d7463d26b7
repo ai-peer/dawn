@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269c2f42_670878bb",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-01T23:22:22Z",
+      "side": 1,
+      "message": "to avoid this, instead we could do the deprecation in the Create portion of DeviceBase::GetOrCreateShaderModule ?",
+      "range": {
+        "startLine": 704,
+        "startChar": 4,
+        "endLine": 707,
+        "endChar": 0
+      },
+      "revId": "736fcd067a7122caa84ab10aa05581d7463d26b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
