@@ -147,6 +147,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58ed904_9589da55",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T14:46:26Z",
+      "side": 1,
+      "message": "Yup, train review fail.",
+      "parentUuid": "755f58ef_7f99f74a",
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a59b544_f59a58b2",
@@ -178,6 +196,24 @@
       "side": 1,
       "message": "It isn\u0027t an error beacuse the terminator is now used by the RootBlock as well.",
       "parentUuid": "8a59b544_f59a58b2",
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "015ed2db_65d69a83",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T14:46:26Z",
+      "side": 1,
+      "message": "Interesting. What\u0027s the root block terminator look like?",
+      "parentUuid": "6686a7bf_1480dfee",
       "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
