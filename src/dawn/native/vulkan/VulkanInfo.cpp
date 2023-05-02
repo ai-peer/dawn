@@ -139,11 +139,11 @@ ResultOrError<std::vector<VkPhysicalDevice>> GatherPhysicalDevices(
     return std::move(physicalDevices);
 }
 
-ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
+ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const PhysicalDevice& device) {
     VulkanDeviceInfo info = {};
-    VkPhysicalDevice physicalDevice = adapter.GetPhysicalDevice();
-    const VulkanGlobalInfo& globalInfo = adapter.GetVulkanInstance()->GetGlobalInfo();
-    const VulkanFunctions& vkFunctions = adapter.GetVulkanInstance()->GetFunctions();
+    VkPhysicalDevice physicalDevice = device.GetPhysicalDevice();
+    const VulkanGlobalInfo& globalInfo = device.GetVulkanInstance()->GetGlobalInfo();
+    const VulkanFunctions& vkFunctions = device.GetVulkanInstance()->GetFunctions();
 
     // Query the device properties first to get the ICD's `apiVersion`
     vkFunctions.GetPhysicalDeviceProperties(physicalDevice, &info.properties);
@@ -282,11 +282,12 @@ ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
     return std::move(info);
 }
 
-ResultOrError<VulkanSurfaceInfo> GatherSurfaceInfo(const Adapter& adapter, VkSurfaceKHR surface) {
+ResultOrError<VulkanSurfaceInfo> GatherSurfaceInfo(const PhysicalDevice& device,
+                                                   VkSurfaceKHR surface) {
     VulkanSurfaceInfo info = {};
 
-    VkPhysicalDevice physicalDevice = adapter.GetPhysicalDevice();
-    const VulkanFunctions& vkFunctions = adapter.GetVulkanInstance()->GetFunctions();
+    VkPhysicalDevice physicalDevice = device.GetPhysicalDevice();
+    const VulkanFunctions& vkFunctions = device.GetVulkanInstance()->GetFunctions();
 
     // Get the surface capabilities
     DAWN_TRY(CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfaceCapabilitiesKHR(
@@ -295,7 +296,7 @@ ResultOrError<VulkanSurfaceInfo> GatherSurfaceInfo(const Adapter& adapter, VkSur
 
     // Query which queue families support presenting this surface
     {
-        size_t nQueueFamilies = adapter.GetDeviceInfo().queueFamilies.size();
+        size_t nQueueFamilies = device.GetDeviceInfo().queueFamilies.size();
         info.supportedQueueFamilies.resize(nQueueFamilies, false);
 
         for (uint32_t i = 0; i < nQueueFamilies; ++i) {

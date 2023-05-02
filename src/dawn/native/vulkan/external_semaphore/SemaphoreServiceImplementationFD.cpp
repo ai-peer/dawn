@@ -36,7 +36,7 @@ class ServiceImplementationFD : public ServiceImplementation {
     explicit ServiceImplementationFD(Device* device)
         : ServiceImplementation(device),
           mSupported(CheckSupport(device->GetDeviceInfo(),
-                                  ToBackend(device->GetAdapter())->GetPhysicalDevice(),
+                                  ToBackend(device->GetPhysicalDevice())->GetPhysicalDevice(),
                                   device->fn)) {}
 
     ~ServiceImplementationFD() override = default;
