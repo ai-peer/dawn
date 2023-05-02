@@ -21,6 +21,7 @@
 #include "dawn/native/metal/DeviceMTL.h"
 #include "dawn/native/metal/PipelineLayoutMTL.h"
 #include "dawn/native/metal/RenderPipelineMTL.h"
+#include "dawn/native/metal/UtilsMetal.h"
 #include "dawn/native/stream/BlobSource.h"
 #include "dawn/native/stream/ByteVectorSink.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -376,6 +377,7 @@ MaybeError ShaderModule::CreateFunction(SingleShaderStage stage,
         out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
     }
 
+    SetDebugName(GetDevice(), out->function.Get(), "Dawn_ShaderModule", GetLabel());
     GetDevice()->GetBlobCache()->EnsureStored(mslCompilation);
 
     if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling) &&

@@ -20,6 +20,7 @@
 #include "dawn/common/ityp_array.h"
 
 #include <cstdint>
+#include <ostream>
 
 {% set native_namespace = namespace_name.namespace_case() %}
 namespace {{native_namespace}} {
