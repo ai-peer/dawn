@@ -376,6 +376,9 @@ MaybeError ShaderModule::CreateFunction(SingleShaderStage stage,
         out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
     }
 
+    NSRef<NSString> label = AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+    [*(out->function) setLabel:label.Get()];
+
     GetDevice()->GetBlobCache()->EnsureStored(mslCompilation);
 
     if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling) &&

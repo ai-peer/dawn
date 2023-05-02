@@ -118,6 +118,8 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     if (mMtlBuffer == nullptr) {
         return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation failed");
     }
+    NSRef<NSString> label = AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+    [*mMtlBuffer setLabel:label.Get()];
 
     // The buffers with mappedAtCreation == true will be initialized in
     // BufferBase::MapAtCreation().

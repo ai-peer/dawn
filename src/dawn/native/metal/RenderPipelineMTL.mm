@@ -329,6 +329,9 @@ MaybeError RenderPipeline::Initialize() {
         AcquireNSRef([MTLRenderPipelineDescriptor new]);
     MTLRenderPipelineDescriptor* descriptorMTL = descriptorMTLRef.Get();
 
+    NSRef<NSString> label = AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+    descriptorMTL.label = label.Get();
+
     // TODO(dawn:1384): MakeVertexDesc should be const in the future, so we don't need to call
     // it here when vertex pulling is enabled
     NSRef<MTLVertexDescriptor> vertexDesc = MakeVertexDesc();
