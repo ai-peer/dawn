@@ -18,13 +18,13 @@
     "_doc": "See docs/dawn/codegen.md",
 
     "custom_cmds": [
+        "device create render pipeline",
+        "device create render pipeline async",
         "device create shader module",
         "destroy object"
     ],
 
     "blocklisted_cmds": [
-        "device create render pipeline",
-        "device create render pipeline async",
         "surface descriptor from windows core window",
         "surface descriptor from windows swap chain panel",
         "surface descriptor from canvas html selector"
