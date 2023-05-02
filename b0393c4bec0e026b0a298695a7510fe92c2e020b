@@ -218,6 +218,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36dad649_056ff722",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-05-02T14:51:26Z",
+      "side": 1,
+      "message": "Not sure I understand the question. The terminator is a node that doesn\u0027t have anything in it, it\u0027s just the terminator.",
+      "parentUuid": "015ed2db_65d69a83",
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aae9292_0e38ef01",
