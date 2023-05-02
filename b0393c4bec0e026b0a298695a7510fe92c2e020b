@@ -16,6 +16,109 @@
       "message": "PTAL.",
       "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d744a8_847e04ca",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T08:51:59Z",
+      "side": 1,
+      "message": "übernit: I\u0027d have personally called this `RootBlock()`, as too many words scramble my brain (Java actually hurts me) and some folks (I) might consider the lazy creation an implementation detail.",
+      "range": {
+        "startLine": 27,
+        "startChar": 20,
+        "endLine": 27,
+        "endChar": 43
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ade9f44_10237cce",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T08:51:59Z",
+      "side": 1,
+      "message": "`TINT_SCOPED_ASSIGNMENT(current_flow_block, builder.CreateRootBlockIfNeeded());`",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 34
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24a253f5_b776c6b9",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T08:51:59Z",
+      "side": 1,
+      "message": "Safer to use  `TINT_SCOPED_ASSIGNMENT(in_function_, false);` - then you don\u0027t go out of whack if you early return, or decide one day to nest them (unlikely, but still).\n\nAlso - I\u0027ll bet that you\u0027ll eventually want to know something about the current function, so it might be better to make this an `ir::Function` pointer.",
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a59b544_f59a58b2",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T08:51:59Z",
+      "side": 1,
+      "message": "Maybe error / emit a comment if you find a terminator instruction outside of a function?",
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da00ed62_8e6036ec",
+        "filename": "src/tint/ir/var.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T08:51:59Z",
+      "side": 1,
+      "message": "I see we have the a node-implements-writer virtual method pattern here.\nThis is okay for now, but we may want to consider moving this out to a writer. That would allow additional context to be kept out of the IR nodes themselves, would fit better with the existing codebase, and would make a lot more sense if / when we can parse IR and/or bitstream encodings.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 80
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
