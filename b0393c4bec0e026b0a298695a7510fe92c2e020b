@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00e25b4_5f899590",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T14:18:50Z",
+      "side": 1,
+      "message": "Ack. I prefer the explicit-ness as otherwise I have to go and lookup how to make sure the root block exists.",
+      "parentUuid": "a1d744a8_847e04ca",
+      "range": {
+        "startLine": 27,
+        "startChar": 20,
+        "endLine": 27,
+        "endChar": 43
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ade9f44_10237cce",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-05-02T08:51:59Z",
       "side": 1,
       "message": "`TINT_SCOPED_ASSIGNMENT(current_flow_block, builder.CreateRootBlockIfNeeded());`",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 34
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdccf59a_ce18cccf",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T14:18:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ade9f44_10237cce",
       "range": {
         "startLine": 178,
         "startChar": 16,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "755f58ef_7f99f74a",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T14:18:50Z",
+      "side": 1,
+      "message": "I assume you ment `true` when you said `false`. I\u0027ll update to an ir::Function when we need it.",
+      "parentUuid": "24a253f5_b776c6b9",
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a59b544_f59a58b2",
@@ -94,6 +160,24 @@
       "writtenOn": "2023-05-02T08:51:59Z",
       "side": 1,
       "message": "Maybe error / emit a comment if you find a terminator instruction outside of a function?",
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6686a7bf_1480dfee",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T14:18:50Z",
+      "side": 1,
+      "message": "It isn\u0027t an error beacuse the terminator is now used by the RootBlock as well.",
+      "parentUuid": "8a59b544_f59a58b2",
       "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "999a3a47_451046a4",
+        "filename": "src/tint/ir/var.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T14:18:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aae9292_0e38ef01",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da00ed62_8e6036ec",
@@ -134,6 +242,30 @@
       "writtenOn": "2023-05-02T08:51:59Z",
       "side": 1,
       "message": "I see we have the a node-implements-writer virtual method pattern here.\nThis is okay for now, but we may want to consider moving this out to a writer. That would allow additional context to be kept out of the IR nodes themselves, would fit better with the existing codebase, and would make a lot more sense if / when we can parse IR and/or bitstream encodings.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 80
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75837dae_53050fb2",
+        "filename": "src/tint/ir/var.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T14:18:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "da00ed62_8e6036ec",
       "range": {
         "startLine": 51,
         "startChar": 0,
