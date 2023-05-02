@@ -72,6 +72,9 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     NSRef<MTLSamplerDescriptor> mtlDescRef = AcquireNSRef([MTLSamplerDescriptor new]);
     MTLSamplerDescriptor* mtlDesc = mtlDescRef.Get();
 
+    NSRef<NSString> label = AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+    mtlDesc.label = label.Get();
+
     mtlDesc.minFilter = FilterModeToMinMagFilter(descriptor->minFilter);
     mtlDesc.magFilter = FilterModeToMinMagFilter(descriptor->magFilter);
     mtlDesc.mipFilter = FilterModeToMipFilter(descriptor->mipmapFilter);

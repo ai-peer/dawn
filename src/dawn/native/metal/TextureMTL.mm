@@ -760,6 +760,8 @@ MaybeError Texture::InitializeAsInternalTexture(const TextureDescriptor* descrip
     if (mMtlTexture == nil) {
         return DAWN_OUT_OF_MEMORY_ERROR("Failed to allocate texture.");
     }
+    NSRef<NSString> label = AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+    [*mMtlTexture setLabel:label.Get()];
 
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
         DAWN_TRY(ClearTexture(device->GetPendingCommandContext(), GetAllSubresources(),
@@ -777,6 +779,8 @@ void Texture::InitializeAsWrapping(const TextureDescriptor* descriptor,
     NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
     mMtlUsage = [*mtlDesc usage];
     mMtlTexture = std::move(wrapped);
+    NSRef<NSString> label = AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+    [*mMtlTexture setLabel:label.Get()];
 }
 
 MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descriptor,
@@ -807,6 +811,9 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
         mMtlTexture = AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
                                                                            iosurface:ioSurface
                                                                                plane:0]);
+        NSRef<NSString> label =
+            AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+        [*mMtlTexture setLabel:label.Get()];
     }
     SetIsSubresourceContentInitialized(descriptor->isInitialized, GetAllSubresources());
     return {};
@@ -1186,6 +1193,9 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
             return DAWN_INTERNAL_ERROR("Failed to create MTLTexture view.");
         }
     }
+
+    NSRef<NSString> label = AcquireNSRef([[NSString alloc] initWithUTF8String:GetLabel().c_str()]);
+    [*mMtlTextureView setLabel:label.Get()];
 
     return {};
 }
