@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e98c054_f0322578",
+        "filename": "src/dawn/native/Limits.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T15:14:52Z",
+      "side": 1,
+      "message": "hm.. this works since there is only a single limit (maxStorageBufferBindingSize) in the group, but it wouldn\u0027t necessary work if there were other limits in the group that weren\u0027t related to maxBufferSize at all (like maxThreadsPerWorkgroup or something). There, it wouldn\u0027t make sense to compare maxThreads to maxBufferSize.\n\nSince the two limits we care about right now are maxStorageBufferBindingSize and maxUniformBufferBindingSize, where maxUniformBufferBindingSize is never exceeding maxBufferSize, and maxStorageBufferBindingSize lives in its own group, my suggestion is to do something simpler.\n\nI think it should be sufficient to call NormalizeLimits inside ApplyLimitTiers.\nThis could eventually create more possible combinations of limits than we originally intended, but we can revisit that problem when it happens. I don\u0027t expect it to be significant because if that does happen, then I think it points more to a problem with how we chose to organize the limit groups versus a concern about additional fingerprinting surface.",
+      "range": {
+        "startLine": 267,
+        "startChar": 4,
+        "endLine": 267,
+        "endChar": 78
+      },
+      "revId": "dccdd50e07a3713571b547986c7e06971645fde1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
