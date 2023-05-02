@@ -33,6 +33,24 @@
       "message": "nit: At least some of these objects inherit from MTLResource that is what contains the label property. Maybe we could have a small helper to set the label and factor in the initWithUTF8String etc?",
       "revId": "90bec37c62099077483466268239e956f8f752ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da571bef_23aa1320",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T14:43:43Z",
+      "side": 1,
+      "message": "would also match SetDebugName in vulkan/d3d\n\nand can do handling for Toggle::UseUserDefinedLabelsInBackend",
+      "parentUuid": "93727e13_60b3ddc2",
+      "revId": "90bec37c62099077483466268239e956f8f752ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
