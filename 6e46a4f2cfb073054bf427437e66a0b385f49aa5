@@ -157,6 +157,30 @@
       },
       "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc76d26c_320bd17f",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 43
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T04:06:24Z",
+      "side": 1,
+      "message": "\u003e a generated file that depends on a custom written file which depends on a generated file\n\nto clarify, we would have dependencies:\n - (generated) dawn_lpm.proto -\u003e (generated) dawn_objects_types_lpm.proto\n - (generated) dawn_lpm.proto -\u003e (custom) dawn_custom_lpm.proto -\u003e (generated) dawn_objects_types_lpm.proto\n\n\u003e better to break out dawn_lpm_custom.proto into generator/templates and not combine everything in this file\n\nnot sure what you mean by this\n\n\noverall, having dawn_lpm.proto depend on dawn_custom_lpm.proto depend on dawn_objects_types_lpm.proto doesn\u0027t seem so bad to me, but maybe I\u0027m not seeing something that you\u0027re considering.\n\nI could see that dawn_lpm.proto depend on dawn_custom_lpm.proto could be problematic if the generator is relying on some non-trivial behavior in the custom proto file, but in this scenario, it\u0027s more like they\u0027re being \"concatenated\".\nActually - that\u0027s another way we could shape it. The generator could read in the custom proto file and paste its contents directly into the generated one?",
+      "parentUuid": "502e63d2_84b43b13",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
