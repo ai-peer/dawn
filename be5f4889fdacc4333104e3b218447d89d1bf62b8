@@ -22,6 +22,30 @@
       },
       "revId": "be5f4889fdacc4333104e3b218447d89d1bf62b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95dbd415_b53186d2",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-02T19:15:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3db32186_9b99b370",
+      "range": {
+        "startLine": 39,
+        "startChar": 74,
+        "endLine": 39,
+        "endChar": 91
+      },
+      "revId": "be5f4889fdacc4333104e3b218447d89d1bf62b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
