@@ -31,4 +31,9 @@ namespace {{native_namespace}} {
         }
     }
 
+    std::ostream& operator<< (std::ostream& stream, const ObjectType& type) {
+        stream << ObjectTypeAsString(type);
+        return stream;
+    }
+
 } // namespace {{native_namespace}}

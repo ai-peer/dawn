@@ -20,6 +20,7 @@
 #include "dawn/common/ityp_array.h"
 
 #include <cstdint>
+#include <ostream>
 
 {% set native_namespace = namespace_name.namespace_case() %}
 namespace {{native_namespace}} {
@@ -34,6 +35,7 @@ namespace {{native_namespace}} {
     using PerObjectType = ityp::array<ObjectType, T, {{len(by_category["object"])}}>;
 
     const char* ObjectTypeAsString(ObjectType type);
+    std::ostream& operator<< (std::ostream& stream, const ObjectType& type);
 
 } // namespace {{native_namespace}}
 

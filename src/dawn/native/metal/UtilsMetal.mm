@@ -143,6 +143,24 @@ void ResolveInAnotherRenderPass(
 
 }  // anonymous namespace
 
+NSRef<NSString> GetDebugName(ApiObjectBase* object, const char* prefix) {
+    std::ostringstream objectNameStream;
+    objectNameStream << "Dawn_" << object->GetType();
+    if (prefix) {
+        objectNameStream << "_" << prefix;
+    }
+
+    const std::string& label = object->GetLabel();
+    if (!label.empty() &&
+        object->GetDevice()->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
+        objectNameStream << "_" << label;
+    }
+    const std::string debugName = objectNameStream.str();
+    NSRef<NSString> nsDebugName =
+        AcquireNSRef([[NSString alloc] initWithUTF8String:debugName.c_str()]);
+    return nsDebugName;
+}
+
 Aspect GetDepthStencilAspects(MTLPixelFormat format) {
     switch (format) {
         case MTLPixelFormatDepth16Unorm:
