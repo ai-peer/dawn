@@ -201,6 +201,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41f557e2_bd073f18",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-05-02T12:06:03Z",
+      "side": 1,
+      "message": "You\u0027re right, and the same applies to the `VkSwapchainKHR`, which is currently destroyed in the same way, without waiting for presentation to complete. Unfortunately, there is no way in core Vulkan to know when presentation has completed. Using `vkAcquireNextImageKHR` doesn\u0027t work if the swapchain is out of date or retired.\nThis was addressed in `VK_EXT_swapchain_maintenance1` by adding a way to signal a fence in `vkQueuePresentKHR` (`VkSwapchainPresentFenceInfoEXT`). This fence is signalled when it is safe to destroy the resources associated with the presentation (eg. swapchain and wait semaphores).\nBut `VK_EXT_swapchain_maintenance1` was only recently released and barely any devices support it (no Android devices).",
+      "parentUuid": "d82da3b0_558e8ec3",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a725883_35a10a75",
         "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
         "patchSetId": 1
