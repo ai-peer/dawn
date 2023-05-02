@@ -100,6 +100,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8aae9292_0e38ef01",
+        "filename": "src/tint/ir/var.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T08:58:25Z",
+      "side": 1,
+      "message": "I\u0027d recommend changing this to `var`. As seen in a later CL `%blah \u003d declare function` looks way too much like you\u0027re declaring a function.",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "b0393c4bec0e026b0a298695a7510fe92c2e020b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da00ed62_8e6036ec",
         "filename": "src/tint/ir/var.h",
         "patchSetId": 1
