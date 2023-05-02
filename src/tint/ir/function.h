@@ -15,6 +15,9 @@
 #ifndef SRC_TINT_IR_FUNCTION_H_
 #define SRC_TINT_IR_FUNCTION_H_
 
+#include <optional>
+
+#include "src/tint/builtin/attribute.h"
 #include "src/tint/ir/flow_node.h"
 #include "src/tint/symbol.h"
 
@@ -35,6 +38,12 @@ class Function : public utils::Castable<Function, FlowNode> {
 
     /// The function name
     Symbol name;
+
+    /// The pipeline stage for the function, `kUndefined` if the function is not an entry point
+    builtin::Attribute pipeline_stage = builtin::Attribute::kUndefined;
+
+    /// If this is a `compute` entry point, holds the workgroup size information
+    std::optional<std::array<uint32_t, 3>> workgroup_size;
 
     /// The start target is the first block in a function.
     Block* start_target = nullptr;
