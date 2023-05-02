@@ -50,6 +50,24 @@
       "message": "I\u0027m leaning against using `builtin::Attribute` here and defining something similar to `ast::PipelineStage` inside `Function` which is just `kNone`, `kVertex`, `kCompute` and `kFragment`.",
       "revId": "d61de5679cf61a4ae04c8b129bd242035a56e784",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1a49f5_7dfe09a5",
+        "filename": "src/tint/ir/function.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T19:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c30cd68_cedf9cde",
+      "revId": "d61de5679cf61a4ae04c8b129bd242035a56e784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
