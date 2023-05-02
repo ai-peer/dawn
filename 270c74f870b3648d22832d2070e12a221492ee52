@@ -16,6 +16,167 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "270c74f870b3648d22832d2070e12a221492ee52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "505e6da6_fc4b7a78",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T21:23:52Z",
+      "side": 1,
+      "message": "nit: std::move",
+      "range": {
+        "startLine": 22,
+        "startChar": 22,
+        "endLine": 22,
+        "endChar": 36
+      },
+      "revId": "270c74f870b3648d22832d2070e12a221492ee52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3e65d3_1565d3f1",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T21:23:52Z",
+      "side": 1,
+      "message": "nit: why `const` ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 25,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "270c74f870b3648d22832d2070e12a221492ee52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc0f2509_f814a273",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T21:23:52Z",
+      "side": 1,
+      "message": "nit: \"adapter\"",
+      "range": {
+        "startLine": 64,
+        "startChar": 15,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "270c74f870b3648d22832d2070e12a221492ee52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32339bdf_54afbaf9",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T21:23:52Z",
+      "side": 1,
+      "message": "probably can be:\n\n```suggestion\n            mAdapters.push_back(AcquireRef(new AdapterBase(std::move(physicalDevice))));\n```",
+      "range": {
+        "startLine": 322,
+        "startChar": 12,
+        "endLine": 323,
+        "endChar": 52
+      },
+      "revId": "270c74f870b3648d22832d2070e12a221492ee52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7462c06e_f25e1db3",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T21:23:52Z",
+      "side": 1,
+      "message": "probably can be:\n```suggestion\n            mAdapters.push_back(AcquireRef(new AdapterBase(std::move(physicalDevice))));\n```",
+      "range": {
+        "startLine": 457,
+        "startChar": 12,
+        "endLine": 458,
+        "endChar": 52
+      },
+      "revId": "270c74f870b3648d22832d2070e12a221492ee52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f872f0a3_670c03c8",
+        "filename": "src/dawn/tests/unittests/GetProcAddressTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T21:23:52Z",
+      "side": 1,
+      "message": "mAdapterBase.APICreateDevice ?\nmay not need mPhysicalDevice as a member",
+      "range": {
+        "startLine": 66,
+        "startChar": 49,
+        "endLine": 66,
+        "endChar": 93
+      },
+      "revId": "270c74f870b3648d22832d2070e12a221492ee52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "631ae23a_5a9f0a3d",
+        "filename": "src/dawn/tests/unittests/PerThreadProcTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T21:23:52Z",
+      "side": 1,
+      "message": "could this instead do mAdapterBase.APICreateDevice ?\n\nthen mPhysicalDevice may not need to be a member of the test fixture",
+      "range": {
+        "startLine": 62,
+        "startChar": 53,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "270c74f870b3648d22832d2070e12a221492ee52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
