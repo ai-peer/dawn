@@ -219,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2985cda8_ce9b19d5",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T13:11:37Z",
+      "side": 1,
+      "message": "Ah uh ok, thanks for the explanation! Can we add a TODO(dawn:269) explaining that and leave it for future us then?",
+      "parentUuid": "41f557e2_bd073f18",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a725883_35a10a75",
         "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
         "patchSetId": 1
