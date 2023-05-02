@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "788afcb2c56bdd3b51d18190e363cd4be7bf59de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b09f0d_ca3958e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T03:51:45Z",
+      "side": 1,
+      "message": "The var usages are a bit weird at the moment, but that\u0027s because the Load/Store nodes are not being handled from the sem at this point. Once those are handled that should fixup the usages in here.",
+      "revId": "788afcb2c56bdd3b51d18190e363cd4be7bf59de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
