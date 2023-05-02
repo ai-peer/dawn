@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4a19e0c_2f737578",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-02T08:59:20Z",
+      "side": 1,
+      "message": "```suggestion\n        // If this is an `\u0026\u0026` then we only evaluate the RHS expression in the true block.\n        // If this is an `||` then we only evaluate the RHS expression in the false block.\n```",
+      "range": {
+        "startLine": 814,
+        "startChar": 8,
+        "endLine": 815,
+        "endChar": 43
+      },
+      "revId": "6323c28f919626a40f025905fe41a8a18e85ff88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
