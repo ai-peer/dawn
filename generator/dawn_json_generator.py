@@ -17,6 +17,7 @@ import json, os, sys
 from collections import namedtuple
 
 from generator_lib import Generator, run_generator, FileRender
+from dawn_lpm_helpers import CmdState
 
 ############################################################
 # OBJECT MODEL
@@ -181,12 +182,17 @@ class RecordMember:
         self.optional = optional
         self.is_return_value = is_return_value
         self.handle_type = None
+        self.id_type = None
         self.default_value = default_value
         self.skip_serialize = skip_serialize
 
     def set_handle_type(self, handle_type):
         assert self.type.dict_name == "ObjectHandle"
         self.handle_type = handle_type
+
+    def set_id_type(self, id_type):
+        assert self.type.dict_name == "ObjectId"
+        self.id_type = id_type
 
 
 Method = namedtuple(
@@ -308,6 +314,9 @@ def linked_record_members(json_data, types):
         handle_type = m.get('handle_type')
         if handle_type:
             member.set_handle_type(types[handle_type])
+        id_type = m.get('id_type')
+        if id_type:
+            member.set_id_type(types[id_type])
         members.append(member)
         members_by_name[member.name.canonical_case()] = member
 
@@ -330,6 +339,18 @@ def linked_record_members(json_data, types):
 
     return members
 
+
+def mark_lengths_non_serializable_lpm(record_members):
+    # Remove member length values from command metadata,
+    # these are set to the length of the protobuf array.
+    for record_member in record_members:
+        lengths = set()
+        for member in record_member.members:
+            lengths.add(member.length)
+
+        for member in record_member.members:
+            if member in lengths:
+                member.skip_serialize = True
 
 ############################################################
 # PARSE
@@ -375,7 +396,6 @@ def link_function(function, types):
     function.return_type = types[function.json_data.get('returns', 'void')]
     function.arguments = linked_record_members(function.json_data['args'],
                                                types)
-
 
 # Sort structures so that if struct A has struct B as a member, then B is
 # listed before A.
@@ -601,10 +621,21 @@ def compute_lpm_params(api_and_wire_params, lpm_json):
             generated_commands.append(command)
         all_commands.append(command)
 
+    # Set all fields that are marked as the "length" of another field to
+    # skip_serialize. The values passed by libprotobuf-mutator will cause
+    # an instant crash during serialization if these don't match the length
+    # of the data they are passing. These values aren't used in
+    # deserialization.
+    mark_lengths_non_serializable_lpm(
+        api_and_wire_params['cmd_records']['command'])
+    mark_lengths_non_serializable_lpm(
+        api_and_wire_params['by_category']['structure'])
+
     lpm_params['cmd_records'] = {
         'proto_generated_commands': generated_commands,
         'proto_all_commands': all_commands,
-        'cpp_generated_commands': generated_commands
+        'cpp_generated_commands': generated_commands,
+        'lpm_info': lpm_json.get("lpm_info")
     }
 
     return lpm_params
@@ -636,15 +667,36 @@ def as_protobufTypeLPM(member):
     return member.type.name.CamelCase()
 
 
+# Helper that generates names for protobuf grammars from contents
+# of dawn*.json like files. example: membera
 def as_protobufNameLPM(*names):
-    # `descriptor` is a reserved keyword in lpm
+    # `descriptor` is a reserved keyword in lib-protobuf-mutator
     if (names[0].concatcase() == "descriptor"):
         return "desc"
     return as_varName(*names)
 
 
+# Generated C++ variable names: varname_membera_memberb
+# for cmd.membera().memberb()
+def as_varLocalLPM(variable, *members):
+    return '_'.join([variable] +
+                    [member.name.concatcase() for member in members])
+
+
+# Generated C++ arrays: varnameN_membera_memberb
+def as_varLocalArrayLPM(variable, *members):
+    return variable + 'N_' + '_'.join(
+        [member.name.concatcase() for member in members])
+
+
+# Generated C++ array sizes: varnameN_membera_size
+def as_varSizeLPM(variable, member):
+    return variable + 'N_' + member.name.concatcase() + '_size'
+
+
 def unreachable_code():
     assert False
+
 
 #############################################################
 # Generator
@@ -1152,8 +1204,15 @@ class MultiGeneratorFromDawnJSON(Generator):
             fuzzer_params = compute_lpm_params(api_and_wire_params, lpm_json)
 
             lpm_params = [
-                RENDER_PARAMS_BASE, params_dawn_wire, {}, api_and_wire_params,
-                fuzzer_params
+                RENDER_PARAMS_BASE, params_dawn_wire, {
+                    'as_varLocalLPM': as_varLocalLPM,
+                    'as_varLocalArrayLPM': as_varLocalArrayLPM,
+                    'as_varSizeLPM': as_varSizeLPM,
+                    'as_indexedAccess': lambda s: '[' + s + ']',
+                    'as_memberAccess': lambda s: '.' + s,
+                    'unreachable_code': unreachable_code,
+                    'CmdState': CmdState
+                }, api_and_wire_params, fuzzer_params
             ]
 
             renders.append(
