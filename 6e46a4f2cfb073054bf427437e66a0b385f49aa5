@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5f90d4_0b650c48",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-02T03:24:35Z",
+      "side": 1,
+      "message": "Good catch, it\u0027s not!",
+      "parentUuid": "f73f2fa3_8979ee2f",
+      "range": {
+        "startLine": 600,
+        "startChar": 1,
+        "endLine": 605,
+        "endChar": 36
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f48e8574_4f764ccd",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ada3ccfb_3d6714de",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-02T03:24:35Z",
+      "side": 1,
+      "message": "Good catch, and my bad I moved the bits of code into the next commit \"4/N\u0027 after a previous code review and forgot to take this line out of this CL.",
+      "parentUuid": "f48e8574_4f764ccd",
+      "range": {
+        "startLine": 611,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 44
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09fd45f2_535b2fcb",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-03-24T20:07:46Z",
       "side": 1,
       "message": "nit: possible to have these in a separate .proto file? or like #include another .proto? It\u0027s not a dealbreaker, but it\u0027s nice to have manually-written things not be in the templates/ directory.",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502e63d2_84b43b13",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 43
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-02T03:24:35Z",
+      "side": 1,
+      "message": "We originally had this in a separate proto file early on in this CL chain, however we wanted to generate `ObjectType` (which DestroyObject a customcommand depends on).\n\nThe main issue is that protobuf doesn\u0027t support circular dependencies. So if we wanted to go down that route of keeping the custom `.proto` file in-tree we\u0027d need a generated file that depends on a custom written file which depends on a generate file which might not be a path we want to go down. However, I\u0027m okay going back to this or maybe it would be better to break out dawn_lpm_custom.proto into generator/templates and not combine everything in this file? I couldn\u0027t find a _nice_ solution to this.\n\nWhat do you think the best path forward is?",
+      "parentUuid": "09fd45f2_535b2fcb",
       "range": {
         "startLine": 144,
         "startChar": 0,
