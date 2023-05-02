@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9bb3ec_a3598a9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2023-05-02T23:10:56Z",
+      "side": 1,
+      "message": "LGTM! The span formatter is nice.",
+      "revId": "4142f31b68bc9e3cd58733c7092035b1a7df6de7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
