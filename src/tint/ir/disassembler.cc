@@ -92,7 +92,17 @@ void Disassembler::Walk(const FlowNode* node) {
         [&](const ir::Function* f) {
             TINT_SCOPED_ASSIGNMENT(in_function_, true);
 
-            Indent() << "%fn" << GetIdForNode(f) << " = func " << f->name.Name() << std::endl;
+            Indent() << "%fn" << GetIdForNode(f) << " = func " << f->name.Name();
+            if (f->pipeline_stage != builtin::Attribute::kUndefined) {
+                out_ << " [" << f->pipeline_stage;
+
+                if (f->workgroup_size) {
+                    auto arr = f->workgroup_size.value();
+                    out_ << " {" << arr[0] << ", " << arr[1] << ", " << arr[2] << "}";
+                }
+                out_ << "]";
+            }
+            out_ << std::endl;
 
             {
                 ScopedIndent func_indent(&indent_size_);
