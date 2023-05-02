@@ -229,6 +229,30 @@
       },
       "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f29c12c_6f7c8fd9",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 43
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-02T19:11:56Z",
+      "side": 1,
+      "message": "I was able to figure out how to get this to build without the need for pasting. Let me know what you think.",
+      "parentUuid": "6c40422b_f2dff828",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
