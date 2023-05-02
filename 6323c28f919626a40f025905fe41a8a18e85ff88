@@ -22,6 +22,30 @@
       },
       "revId": "6323c28f919626a40f025905fe41a8a18e85ff88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1342773_ad25e2c4",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T12:10:32Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "b4a19e0c_2f737578",
+      "range": {
+        "startLine": 814,
+        "startChar": 8,
+        "endLine": 815,
+        "endChar": 43
+      },
+      "revId": "6323c28f919626a40f025905fe41a8a18e85ff88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
