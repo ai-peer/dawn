@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7257cd2d_988a4e44",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T03:06:24Z",
+      "side": 1,
+      "message": "Doh, the side effect of writing my CLs out of order. I added `declare` after creating this CL and then updated .... and misssed removing the comment. \n\nGood catch.",
+      "parentUuid": "3589bde5_5b6c17e9",
+      "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9eca409_45c6e59d",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-01T21:11:14Z",
       "side": 1,
       "message": "Should we emit the block even if it\u0027s empty? `%fn5` is referenced above (as the `true` target), but never defined. Is that sort of thing going to be problematic for parsing the IR?\n\nI assume it\u0027s not even an empty block, there\u0027s presumably a (implicit?) branch to the if-merge block?",
+      "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca8e657_376f0fd1",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-02T03:06:24Z",
+      "side": 1,
+      "message": "This is a bug in the disassembler, it should only be emitting the ones that actually get used. I\u0027ll fix the disassembly in a followup it should be something like:\n\n```\n%fn4 \u003d if %1(bool) [f: %fn6, m: %fn7]\n  # false branch\n  %fn6 \u003d block\n  ...\n```\n\nIn the IR itself, both of these nodes exist, but the empty block _does not_ branch to the if-merge. It\u0027s a dead block `IsDead()` on the block will be `true`.\n\n(The block would be `empty` as the branch isn\u0027t an instruction, it\u0027s an element of the Block itself)",
+      "parentUuid": "d9eca409_45c6e59d",
       "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
