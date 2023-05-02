@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "a887d5ae7d248569d63db7082b463edf939a964c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76d370ae_05c325e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-02T02:29:12Z",
+      "side": 1,
+      "message": "I commented on the issue but these function calls should never synchronously block. They\u0027re actually asynchronous like everything else in WebGPU and just differ in how they return the result (whether you can synchronously go and use the returned handle or not). It wouldn\u0027t hurt to add this but I don\u0027t think it will do anything useful.",
+      "revId": "a887d5ae7d248569d63db7082b463edf939a964c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
