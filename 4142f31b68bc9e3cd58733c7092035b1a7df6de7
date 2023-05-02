@@ -33,6 +33,24 @@
       "message": "this version of brandon doesn\u0027t actually have reviewer powers (though I could add it..)",
       "revId": "4142f31b68bc9e3cd58733c7092035b1a7df6de7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4756e63f_8c074f16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T23:19:44Z",
+      "side": 1,
+      "message": "actually nvm you should have the power already",
+      "parentUuid": "05b24831_0a065939",
+      "revId": "4142f31b68bc9e3cd58733c7092035b1a7df6de7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
