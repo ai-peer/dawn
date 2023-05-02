@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bccd36e_2ede2da8",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T15:09:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f109c847_878c30a3",
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "127d3a28_8e149952",
@@ -136,6 +154,30 @@
       "writtenOn": "2023-04-28T12:59:48Z",
       "side": 1,
       "message": "nit: maybe rename `externalTextureSemaphore` to differentiate it from the other signal semaphores?",
+      "range": {
+        "startLine": 317,
+        "startChar": 26,
+        "endLine": 317,
+        "endChar": 47
+      },
+      "revId": "6671181d8882ec8203be59d925d545d4773df5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6292358f_ff997d55",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T15:09:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "127d3a28_8e149952",
       "range": {
         "startLine": 317,
         "startChar": 26,

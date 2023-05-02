@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c43ff8ec_d672e99e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T15:09:58Z",
+      "side": 1,
+      "message": "LGTM too! (just the one comment about semaphore destruction would be nice). Thank you for the iteration.",
+      "revId": "2e73499092e5d10a0d80345a6bb11a4187da5bcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
