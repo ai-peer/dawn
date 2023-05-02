@@ -88,7 +88,7 @@ void DestroyCommandPoolAndBuffer(const VulkanFunctions& fn,
 }  // namespace
 
 // static
-ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
+ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
                                           const DeviceDescriptor* descriptor,
                                           const TogglesState& deviceToggles) {
     Ref<Device> device = AcquireRef(new Device(adapter, descriptor, deviceToggles));
@@ -96,7 +96,7 @@ ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
     return device;
 }
 
-Device::Device(Adapter* adapter,
+Device::Device(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
                const TogglesState& deviceToggles)
     : DeviceBase(adapter, descriptor, deviceToggles), mDebugPrefix(GetNextDeviceDebugPrefix()) {}
