@@ -253,6 +253,30 @@
       },
       "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c58ed273_6f2e54e6",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 43
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-02T19:35:18Z",
+      "side": 1,
+      "message": "To get around this I copy the dawn_custom_lpm.proto file to the `gen` directory and set proto_in_file\u003d\"$root_dir/gen\" as well.",
+      "parentUuid": "5f29c12c_6f7c8fd9",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
