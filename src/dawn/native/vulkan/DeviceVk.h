@@ -43,7 +43,7 @@ class ResourceMemoryAllocator;
 
 class Device final : public DeviceBase {
   public:
-    static ResultOrError<Ref<Device>> Create(Adapter* adapter,
+    static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
                                              const DeviceDescriptor* descriptor,
                                              const TogglesState& deviceToggles);
     ~Device() override;
@@ -118,7 +118,9 @@ class Device final : public DeviceBase {
     void ForceEventualFlushOfCommands() override;
 
   private:
-    Device(Adapter* adapter, const DeviceDescriptor* descriptor, const TogglesState& deviceToggles);
+    Device(AdapterBase* adapter,
+           const DeviceDescriptor* descriptor,
+           const TogglesState& deviceToggles);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
