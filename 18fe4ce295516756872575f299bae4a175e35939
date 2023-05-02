@@ -16,6 +16,52 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "18fe4ce295516756872575f299bae4a175e35939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ba529b_96bae22b",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T17:34:11Z",
+      "side": 1,
+      "message": "mmm.. we should probably rename the other getter \"GetVkPhysicalDevice\"",
+      "range": {
+        "startLine": 117,
+        "startChar": 52,
+        "endLine": 117,
+        "endChar": 91
+      },
+      "revId": "18fe4ce295516756872575f299bae4a175e35939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe951bf5_c0040a05",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T17:34:11Z",
+      "side": 1,
+      "message": "ToBackend seems unnecessary here now",
+      "range": {
+        "startLine": 269,
+        "startChar": 12,
+        "endLine": 269,
+        "endChar": 43
+      },
+      "revId": "18fe4ce295516756872575f299bae4a175e35939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
