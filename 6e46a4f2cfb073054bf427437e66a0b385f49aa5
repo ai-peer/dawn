@@ -205,6 +205,30 @@
       },
       "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c40422b_f2dff828",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 43
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T17:28:46Z",
+      "side": 1,
+      "message": "ah I see..\n\n\u003e I meant that it seemed better to add the contents of dawn_custom_lpm.proto to dawn_lpm.proto\n\nso just \"paste\" the contents into it at generation time? that would be ok IMO",
+      "parentUuid": "cc75a94c_81642a2e",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
