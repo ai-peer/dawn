@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6e181d4_6d5ef326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T07:33:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c4a544deedcd38898c084b14a4425e4352603856",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a333a6ed_c2f66496",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T07:33:09Z",
+      "side": 1,
+      "message": "Can we have a test that if neither are set we get a validation error? I think that\u0027s a bug that could cause the renderer process to cause an NPE at the moment.",
+      "revId": "c4a544deedcd38898c084b14a4425e4352603856",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
