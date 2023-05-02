@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0643631_97162444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-02T20:03:49Z",
+      "side": 1,
+      "message": "IDK - the more I\u0027m looking at it, the more it feels it would be better to instead change the map callback to have a `const char*` message. it would be annoying to roll into various dependencies, but we could do a simultaneous roll+update.",
+      "revId": "9abb0247ad0a03998ee0e43bdc99eb0c0b068e27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
