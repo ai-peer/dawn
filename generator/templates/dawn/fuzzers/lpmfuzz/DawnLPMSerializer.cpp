@@ -14,6 +14,7 @@
 
 #include "dawn/fuzzers/lpmfuzz/DawnLPMConstants_autogen.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.h"
+#include "dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h"
 #include "dawn/wire/Wire.h"
@@ -350,6 +351,7 @@ void SerializedData(const fuzzing::Program& program, dawn::wire::ChunkedCommandS
             }
             {% endfor %}
             default: {
+                GetCustomSerializedData(command, serializer, gObjectStores, provider);
                 break;
             }
         }
