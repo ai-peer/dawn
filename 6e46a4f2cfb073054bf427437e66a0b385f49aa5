@@ -181,6 +181,30 @@
       },
       "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc75a94c_81642a2e",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 43
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-02T17:22:36Z",
+      "side": 1,
+      "message": "Yeah the dependencies would be:\n\n(generated) dawn_lpm.proto -\u003e (generated) dawn_objects_types_lpm.proto\n(generated) dawn_lpm.proto -\u003e (custom) dawn_custom_lpm.proto -\u003e (generated) dawn_objects_types_lpm.proto\n\n\n\u003e better to break out dawn_lpm_custom.proto into generator/templates and not combine everything in this file\n\nAh sorry that was confusingly worded. I meant that it seemed better to add the contents of dawn_custom_lpm.proto to dawn_lpm.proto than to do `(generated) dawn_lpm.proto -\u003e (custom) dawn_custom_lpm.proto -\u003e (generated) dawn_objects_types_lpm.proto`.\n\n\u003e overall, having dawn_lpm.proto depend on dawn_custom_lpm.proto depend on dawn_objects_types_lpm.proto doesn\u0027t seem so bad to me, but maybe I\u0027m not seeing something that you\u0027re considering.\n\nThe main issue is I\u0027m not sure how to import a generated protobuf file from an in-tree protobuf file (for `(custom) dawn_custom_lpm.proto -\u003e (generated) dawn_objects_types_lpm.proto`). I think we\u0027re the first user who has needed to do this.\n\nFor example, this works:\n```\nsyntax \u003d \"proto2\";\npackage fuzzing;\n\nimport \"out/libfuzzer/gen/third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_object_types_lpm_autogen.proto\"\n\nmessage DeviceCreateShaderModule {\n    required uint32 self \u003d 1;\n}\n\nmessage DestroyObject {\n    required ObjectType objectType \u003d 1;\n    required uint32 objectId \u003d 2;\n}\n```\n\nThe protoc command that is executed is:\n`python3 ../../tools/protoc_wrapper/protoc_wrapper.py out/libfuzzer/gen/third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_lpm_autogen.proto out/libfuzzer/gen/third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_object_types_lpm_autogen.proto third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_custom_lpm.proto --protoc ./protoc --proto-in-dir ../../ --cc-out-dir gen/ --py-out-dir pyproto/\n`",
+      "parentUuid": "cc76d26c_320bd17f",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "6e46a4f2cfb073054bf427437e66a0b385f49aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
