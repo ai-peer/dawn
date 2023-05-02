@@ -33,6 +33,24 @@
       "message": "Can we have a test that if neither are set we get a validation error? I think that\u0027s a bug that could cause the renderer process to cause an NPE at the moment.",
       "revId": "c4a544deedcd38898c084b14a4425e4352603856",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "661c3b33_90c5b1b1",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-02T20:11:08Z",
+      "side": 1,
+      "message": "Added temporary validation for it, and appropriate test.",
+      "parentUuid": "a333a6ed_c2f66496",
+      "revId": "c4a544deedcd38898c084b14a4425e4352603856",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
