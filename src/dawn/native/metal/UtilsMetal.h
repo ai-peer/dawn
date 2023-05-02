@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_METAL_UTILSMETAL_H_
 #define SRC_DAWN_NATIVE_METAL_UTILSMETAL_H_
 
+#include "dawn/common/NSRef.h"
 #include "dawn/common/StackContainer.h"
 #include "dawn/native/dawn_platform.h"
 #include "dawn/native/metal/DeviceMTL.h"
@@ -31,6 +32,16 @@ enum class SingleShaderStage;
 }  // namespace dawn::native
 
 namespace dawn::native::metal {
+
+NSRef<NSString> GetDebugName(ApiObjectBase* object, const char* prefix = nullptr);
+
+// Templating for setting the label because not all label-able MTL objects are of the same base
+// class. For example MTLBuffer and MTLTexture inherit MTLResource, but MTLFunction does not.
+template <typename T>
+void SetDebugName(ApiObjectBase* object, T* labellable, const char* prefix = nullptr) {
+    NSRef<NSString> label = GetDebugName(object, prefix);
+    [labellable setLabel:label.Get()];
+}
 
 Aspect GetDepthStencilAspects(MTLPixelFormat format);
 MTLCompareFunction ToMetalCompareFunction(wgpu::CompareFunction compareFunction);
