@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74f5bc11_ca9e2a3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-02T18:29:17Z",
+      "side": 1,
+      "message": "Thanks for your review!\n\nAlso realized I forgot to rename the files. :) Done.",
+      "revId": "18fe4ce295516756872575f299bae4a175e35939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41ba529b_96bae22b",
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62a90f18_8e07e8cf",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-02T18:29:17Z",
+      "side": 1,
+      "message": "Done\n\nAlso renamed the member var. Happy to rename the locals too if you\u0027d like.",
+      "parentUuid": "41ba529b_96bae22b",
+      "range": {
+        "startLine": 117,
+        "startChar": 52,
+        "endLine": 117,
+        "endChar": 91
+      },
+      "revId": "18fe4ce295516756872575f299bae4a175e35939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe951bf5_c0040a05",
         "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 4
@@ -54,6 +95,30 @@
       "writtenOn": "2023-05-02T17:34:11Z",
       "side": 1,
       "message": "ToBackend seems unnecessary here now",
+      "range": {
+        "startLine": 269,
+        "startChar": 12,
+        "endLine": 269,
+        "endChar": 43
+      },
+      "revId": "18fe4ce295516756872575f299bae4a175e35939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345aeb6b_254cc620",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-02T18:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe951bf5_c0040a05",
       "range": {
         "startLine": 269,
         "startChar": 12,
