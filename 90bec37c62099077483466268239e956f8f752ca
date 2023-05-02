@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "461f843b_bc0ccb9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T08:31:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "90bec37c62099077483466268239e956f8f752ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93727e13_60b3ddc2",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-02T08:31:59Z",
+      "side": 1,
+      "message": "nit: At least some of these objects inherit from MTLResource that is what contains the label property. Maybe we could have a small helper to set the label and factor in the initWithUTF8String etc?",
+      "revId": "90bec37c62099077483466268239e956f8f752ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
