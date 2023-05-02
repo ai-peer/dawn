@@ -1,4 +1,5 @@
 // Copyright 2022 The Tint Authors.
+// Copyright 2022 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +17,7 @@
 
 #include <utility>
 
+#include "src/tint/transform/direct_variable_access.h"
 #include "src/tint/transform/test_helper.h"
 
 namespace tint::transform {
@@ -3673,8 +3675,23 @@ fn f() {
 DataMap polyfillWorkgroupUniformLoad() {
     BuiltinPolyfill::Builtins builtins;
     builtins.workgroup_uniform_load = true;
+
     DataMap data;
     data.Add<BuiltinPolyfill::Config>(builtins);
+
+    return data;
+}
+
+DataMap polyfillWorkgroupUniformLoadWithDirectVariableAccess() {
+    DataMap data;
+
+    BuiltinPolyfill::Builtins builtins;
+    builtins.workgroup_uniform_load = true;
+    data.Add<BuiltinPolyfill::Config>(builtins);
+
+    DirectVariableAccess::Options options;
+    data.Add<DirectVariableAccess::Config>(options);
+
     return data;
 }
 
@@ -3826,6 +3843,50 @@ fn f() {
 )";
 
     auto got = Run<BuiltinPolyfill>(src, polyfillWorkgroupUniformLoad());
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(BuiltinPolyfillTest, WorkgroupUniformLoad_DirectVariableAccess) {
+    auto* src = R"(
+var<workgroup> v : i32;
+var<workgroup> v2 : i32;
+
+fn f() {
+  let r = workgroupUniformLoad(&v);
+  let s = workgroupUniformLoad(&v2);
+}
+)";
+
+    auto* expect = R"(
+enable chromium_experimental_full_ptr_parameters;
+
+fn tint_workgroupUniformLoad_v() -> i32 {
+  workgroupBarrier();
+  let result = v;
+  workgroupBarrier();
+  return result;
+}
+
+fn tint_workgroupUniformLoad_v2() -> i32 {
+  workgroupBarrier();
+  let result = v2;
+  workgroupBarrier();
+  return result;
+}
+
+var<workgroup> v : i32;
+
+var<workgroup> v2 : i32;
+
+fn f() {
+  let r = tint_workgroupUniformLoad_v();
+  let s = tint_workgroupUniformLoad_v2();
+}
+)";
+
+    auto got = Run<BuiltinPolyfill, DirectVariableAccess>(
+        src, polyfillWorkgroupUniformLoadWithDirectVariableAccess());
 
     EXPECT_EQ(expect, str(got));
 }

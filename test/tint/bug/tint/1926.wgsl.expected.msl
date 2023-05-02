@@ -1,0 +1,205 @@
+#include <metal_stdlib>
+
+using namespace metal;
+
+template<typename T, size_t N>
+struct tint_array {
+    const constant T& operator[](size_t i) const constant { return elements[i]; }
+    device T& operator[](size_t i) device { return elements[i]; }
+    const device T& operator[](size_t i) const device { return elements[i]; }
+    thread T& operator[](size_t i) thread { return elements[i]; }
+    const thread T& operator[](size_t i) const thread { return elements[i]; }
+    threadgroup T& operator[](size_t i) threadgroup { return elements[i]; }
+    const threadgroup T& operator[](size_t i) const threadgroup { return elements[i]; }
+    T elements[N];
+};
+
+struct tint_symbol_16 {
+  /* 0x0000 */ tint_array<uint, 1> arr;
+};
+
+struct tint_symbol_18 {
+  /* 0x0000 */ tint_array<float4, 1> arr;
+};
+
+struct Path {
+  /* 0x0000 */ uint4 bbox;
+  /* 0x0010 */ uint tiles;
+  /* 0x0014 */ tint_array<int8_t, 12> tint_pad;
+};
+
+struct tint_symbol_20 {
+  /* 0x0000 */ tint_array<Path, 1> arr;
+};
+
+struct Tile {
+  /* 0x0000 */ int backdrop;
+  /* 0x0004 */ uint segments;
+};
+
+struct tint_symbol_22 {
+  /* 0x0000 */ tint_array<Tile, 1> arr;
+};
+
+uint tint_workgroupUniformLoad(threadgroup uint* const p) {
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  uint const result = *(p);
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  return result;
+}
+
+int tint_ftoi(float v) {
+  return select(2147483647, select(int(v), (-2147483647 - 1), (v < -2147483648.0f)), (v < 2147483520.0f));
+}
+
+int tint_clamp(int e, int low, int high) {
+  return min(max(e, low), high);
+}
+
+struct Config {
+  /* 0x0000 */ uint width_in_tiles;
+  /* 0x0004 */ uint height_in_tiles;
+  /* 0x0008 */ uint target_width;
+  /* 0x000c */ uint target_height;
+  /* 0x0010 */ uint base_color;
+  /* 0x0014 */ uint n_drawobj;
+  /* 0x0018 */ uint n_path;
+  /* 0x001c */ uint n_clip;
+  /* 0x0020 */ uint bin_data_start;
+  /* 0x0024 */ uint pathtag_base;
+  /* 0x0028 */ uint pathdata_base;
+  /* 0x002c */ uint drawtag_base;
+  /* 0x0030 */ uint drawdata_base;
+  /* 0x0034 */ uint transform_base;
+  /* 0x0038 */ uint linewidth_base;
+  /* 0x003c */ uint binning_size;
+  /* 0x0040 */ uint tiles_size;
+  /* 0x0044 */ uint segments_size;
+  /* 0x0048 */ uint ptcl_size;
+};
+
+struct BumpAllocators {
+  /* 0x0000 */ atomic_uint failed;
+  /* 0x0004 */ atomic_uint binning;
+  /* 0x0008 */ atomic_uint ptcl;
+  /* 0x000c */ atomic_uint tile;
+  /* 0x0010 */ atomic_uint segments;
+  /* 0x0014 */ atomic_uint blend;
+};
+
+struct DrawMonoid {
+  uint path_ix;
+  uint clip_ix;
+  uint scene_offset;
+  uint info_offset;
+};
+
+DrawMonoid draw_monoid_identity() {
+  DrawMonoid const tint_symbol_2 = DrawMonoid{};
+  return tint_symbol_2;
+}
+
+DrawMonoid combine_draw_monoid(DrawMonoid a, DrawMonoid b) {
+  DrawMonoid c = {};
+  c.path_ix = (a.path_ix + b.path_ix);
+  c.clip_ix = (a.clip_ix + b.clip_ix);
+  c.scene_offset = (a.scene_offset + b.scene_offset);
+  c.info_offset = (a.info_offset + b.info_offset);
+  return c;
+}
+
+DrawMonoid map_draw_tag(uint tag_word) {
+  DrawMonoid c = {};
+  c.path_ix = uint((tag_word != 0u));
+  c.clip_ix = (tag_word & 1u);
+  c.scene_offset = ((tag_word >> 2u) & 7u);
+  c.info_offset = ((tag_word >> 6u) & 15u);
+  return c;
+}
+
+void assign_and_preserve_padding(device Path* const dest, Path value) {
+  (*(dest)).bbox = value.bbox;
+  (*(dest)).tiles = value.tiles;
+}
+
+void tint_symbol_inner(uint3 global_id, uint3 local_id, uint local_invocation_index, threadgroup uint* const tint_symbol_3, threadgroup tint_array<uint, 256>* const tint_symbol_4, device BumpAllocators* const tint_symbol_5, const constant Config* const tint_symbol_6, const device tint_array<uint, 1>* const tint_symbol_7, const device tint_array<float4, 1>* const tint_symbol_8, device tint_array<Path, 1>* const tint_symbol_9, device tint_array<Tile, 1>* const tint_symbol_10) {
+  if ((local_invocation_index < 1u)) {
+    *(tint_symbol_3) = 0u;
+  }
+  {
+    uint const i_1 = local_invocation_index;
+    (*(tint_symbol_4))[i_1] = 0u;
+  }
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  if ((local_id[0] == 0u)) {
+    *(tint_symbol_3) = atomic_load_explicit(&((*(tint_symbol_5)).failed), memory_order_relaxed);
+  }
+  uint const failed = tint_workgroupUniformLoad(tint_symbol_3);
+  if (((failed & 1u) != 0u)) {
+    return;
+  }
+  float const SX = 0.0625f;
+  float const SY = 0.0625f;
+  uint const drawobj_ix = global_id[0];
+  uint drawtag = 0u;
+  if ((drawobj_ix < (*(tint_symbol_6)).n_drawobj)) {
+    drawtag = (*(tint_symbol_7))[((*(tint_symbol_6)).drawtag_base + drawobj_ix)];
+  }
+  int x0 = 0;
+  int y0 = 0;
+  int x1 = 0;
+  int y1 = 0;
+  if (((drawtag != 0u) && (drawtag != 33u))) {
+    float4 const bbox = (*(tint_symbol_8))[drawobj_ix];
+    x0 = tint_ftoi(floor((bbox[0] * SX)));
+    y0 = tint_ftoi(floor((bbox[1] * SY)));
+    x1 = tint_ftoi(ceil((bbox[2] * SX)));
+    y1 = tint_ftoi(ceil((bbox[3] * SY)));
+  }
+  uint const ux0 = uint(tint_clamp(x0, 0, int((*(tint_symbol_6)).width_in_tiles)));
+  uint const uy0 = uint(tint_clamp(y0, 0, int((*(tint_symbol_6)).height_in_tiles)));
+  uint const ux1 = uint(tint_clamp(x1, 0, int((*(tint_symbol_6)).width_in_tiles)));
+  uint const uy1 = uint(tint_clamp(y1, 0, int((*(tint_symbol_6)).height_in_tiles)));
+  uint const tile_count = ((ux1 - ux0) * (uy1 - uy0));
+  uint total_tile_count = tile_count;
+  (*(tint_symbol_4))[local_id[0]] = tile_count;
+  for(uint i = 0u; (i < 8u); i = (i + 1u)) {
+    threadgroup_barrier(mem_flags::mem_threadgroup);
+    if ((local_id[0] >= (1u << (i & 31u)))) {
+      total_tile_count = (total_tile_count + (*(tint_symbol_4))[(local_id[0] - (1u << (i & 31u)))]);
+    }
+    threadgroup_barrier(mem_flags::mem_threadgroup);
+    (*(tint_symbol_4))[local_id[0]] = total_tile_count;
+  }
+  if ((local_id[0] == 255u)) {
+    uint const count = (*(tint_symbol_4))[255u];
+    uint offset = atomic_fetch_add_explicit(&((*(tint_symbol_5)).tile), count, memory_order_relaxed);
+    if (((offset + count) > (*(tint_symbol_6)).tiles_size)) {
+      offset = 0u;
+      atomic_fetch_or_explicit(&((*(tint_symbol_5)).failed), 2u, memory_order_relaxed);
+    }
+    (*(tint_symbol_9))[drawobj_ix].tiles = offset;
+  }
+  threadgroup_barrier(mem_flags::mem_device);
+  uint const tile_offset = (*(tint_symbol_9))[(drawobj_ix | 255u)].tiles;
+  threadgroup_barrier(mem_flags::mem_device);
+  if ((drawobj_ix < (*(tint_symbol_6)).n_drawobj)) {
+    uint const tile_subix = select(0u, (*(tint_symbol_4))[(local_id[0] - 1u)], (local_id[0] > 0u));
+    uint4 const bbox = uint4(ux0, uy0, ux1, uy1);
+    Path const path = {.bbox=bbox, .tiles=(tile_offset + tile_subix)};
+    assign_and_preserve_padding(&((*(tint_symbol_9))[drawobj_ix]), path);
+  }
+  uint const total_count = (*(tint_symbol_4))[255u];
+  for(uint i = local_id[0]; (i < total_count); i = (i + 256u)) {
+    Tile const tint_symbol_1 = Tile{};
+    (*(tint_symbol_10))[(tile_offset + i)] = tint_symbol_1;
+  }
+}
+
+kernel void tint_symbol(device BumpAllocators* tint_symbol_13 [[buffer(1)]], const constant Config* tint_symbol_14 [[buffer(0)]], const device tint_symbol_16* tint_symbol_15 [[buffer(4)]], const device tint_symbol_18* tint_symbol_17 [[buffer(5)]], device tint_symbol_20* tint_symbol_19 [[buffer(2)]], device tint_symbol_22* tint_symbol_21 [[buffer(3)]], uint3 global_id [[thread_position_in_grid]], uint3 local_id [[thread_position_in_threadgroup]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  threadgroup uint tint_symbol_11;
+  threadgroup tint_array<uint, 256> tint_symbol_12;
+  tint_symbol_inner(global_id, local_id, local_invocation_index, &(tint_symbol_11), &(tint_symbol_12), tint_symbol_13, tint_symbol_14, &((*(tint_symbol_15)).arr), &((*(tint_symbol_17)).arr), &((*(tint_symbol_19)).arr), &((*(tint_symbol_21)).arr));
+  return;
+}
+
