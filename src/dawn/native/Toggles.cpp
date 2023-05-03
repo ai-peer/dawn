@@ -177,6 +177,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Produces validation errors on API entry points or parameter combinations that aren't "
       "considered secure yet.",
       "http://crbug.com/1138528", ToggleStage::Instance}},
+    {Toggle::AllowUnsafeAPIs,
+     {"allow_unsafe_apis",
+      "Suppresses validation errors on API entry points or parameter combinations that aren't "
+      "considered secure yet.",
+      "http://crbug.com/1138528", ToggleStage::Instance}},
     {Toggle::FlushBeforeClientWaitSync,
      {"flush_before_client_wait_sync",
       "Call glFlush before glClientWaitSync to work around bugs in the latter",
