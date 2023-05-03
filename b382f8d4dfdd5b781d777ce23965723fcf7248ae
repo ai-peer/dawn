@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a81c90_a4d3394d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-05-03T23:35:13Z",
+      "side": 1,
+      "message": "Approved with nit: please add a fail message.",
+      "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc212d6_a020665d",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4079,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-05-03T23:35:13Z",
+      "side": 1,
+      "message": "nit:  Are there other ways flow could get here?\nPlease add a Fail() message.",
+      "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e641a7d_ed91e22d",
+        "filename": "src/tint/reader/spirv/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-05-03T23:35:13Z",
+      "side": 1,
+      "message": "As a followup should also do the other OpSpecConstant* instructions:\n OpSpecConstant\n OpSpecConstantOp\n OpSpecConstantTrue\n OpSpecConstantFalse",
+      "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ba73da_6c6d6fc6",
+        "filename": "src/tint/reader/spirv/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1955,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-05-03T23:35:13Z",
+      "side": 1,
+      "message": "I\u0027m fine not having a unit test for this, since it\u0027s unsupported for now, and there is a tracking bug.",
+      "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
