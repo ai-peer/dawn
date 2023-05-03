@@ -34,6 +34,24 @@
       "parentUuid": "e8c01a71_f6706275",
       "revId": "9e5c78d6fb3d592440416802e2cae7fba712ec72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e027cd1_f48694b5",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1997,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T20:01:52Z",
+      "side": 1,
+      "message": "Discussed with James, going to do `func foo(): bool` and change the other types to use `:` instead of `()`. Will do as a followup.",
+      "parentUuid": "501e601e_a7059012",
+      "revId": "9e5c78d6fb3d592440416802e2cae7fba712ec72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
