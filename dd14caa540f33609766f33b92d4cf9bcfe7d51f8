@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c9b605_9bee2acd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-03T09:37:22Z",
+      "side": 1,
+      "message": "Thank you! Are you able to Commit-Queue +2 yourself or does one of us need to do it?",
+      "revId": "dd14caa540f33609766f33b92d4cf9bcfe7d51f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
