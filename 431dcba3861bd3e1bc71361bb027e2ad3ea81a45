@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5802d72_f80099ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-03T12:52:33Z",
+      "side": 1,
+      "message": "+2 with a request for changes",
+      "revId": "431dcba3861bd3e1bc71361bb027e2ad3ea81a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c515e44_3ee7425a",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-03T12:52:33Z",
+      "side": 1,
+      "message": "rm",
+      "revId": "431dcba3861bd3e1bc71361bb027e2ad3ea81a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7a194b_04d4ba8b",
+        "filename": "test/tint/bug/tint/1926.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-03T12:52:33Z",
+      "side": 1,
+      "message": "This is likely to upset license checking headers. Please can you minimise this to the particular issue the fuzzer found?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 58
+      },
+      "revId": "431dcba3861bd3e1bc71361bb027e2ad3ea81a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
