@@ -86,6 +86,24 @@
       "parentUuid": "d9eca409_45c6e59d",
       "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c13b9919_18021f63",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-03T14:54:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eca8e657_376f0fd1",
+      "revId": "38d333c38b60b506ad4aef3fb442d589fe3c0143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
