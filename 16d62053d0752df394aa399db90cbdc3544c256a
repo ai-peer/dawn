@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3d8d2a_9936a3e8",
+        "filename": "src/tint/writer/spirv/generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T17:54:30Z",
+      "side": 1,
+      "message": "nit: `  // TINT_BUILD_IR`",
+      "revId": "16d62053d0752df394aa399db90cbdc3544c256a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c60ee175_104a733d",
+        "filename": "src/tint/writer/spirv/generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T17:54:30Z",
+      "side": 1,
+      "message": "This `#endif` needs to come before the `{` I think?\n\n```\n} else\n#endif\n{\n```",
+      "revId": "16d62053d0752df394aa399db90cbdc3544c256a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5580a38b_cb46487f",
+        "filename": "src/tint/writer/spirv/generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T17:54:30Z",
+      "side": 1,
+      "message": "\u003d false ?",
+      "revId": "16d62053d0752df394aa399db90cbdc3544c256a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb960c5a_f3170c96",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T17:54:30Z",
+      "side": 1,
+      "message": "Should we use this opportunity to move the spirv generator ir over to diagnostics instead of an error string?",
+      "revId": "16d62053d0752df394aa399db90cbdc3544c256a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
