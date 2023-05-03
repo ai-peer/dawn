@@ -16,6 +16,24 @@
       "message": "IDK - the more I\u0027m looking at it, the more it feels it would be better to instead change the map callback to have a `const char*` message. it would be annoying to roll into various dependencies, but we could do a simultaneous roll+update.",
       "revId": "9abb0247ad0a03998ee0e43bdc99eb0c0b068e27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0fe3b3d_29237478",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-03T09:41:57Z",
+      "side": 1,
+      "message": "Yeah it would be pretty annoying, and with Skia-Graphite it might not be possible to do atomic rolls like this :/ But also I\u0027m not sure why strings would be better, isn\u0027t it a bit overkill because there aren\u0027t that many cases that are possible?",
+      "parentUuid": "c0643631_97162444",
+      "revId": "9abb0247ad0a03998ee0e43bdc99eb0c0b068e27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
