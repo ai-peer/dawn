@@ -1891,8 +1891,6 @@ TypedExpression ParserImpl::MakeConstantExpression(uint32_t id) {
     }
     auto source = GetSourceForInst(inst);
 
-    // TODO(dneto): Handle spec constants too?
-
     auto* original_ast_type = ConvertType(inst->type_id());
     if (original_ast_type == nullptr) {
         return {};
@@ -1951,6 +1949,11 @@ TypedExpression ParserImpl::MakeConstantExpression(uint32_t id) {
             auto* decl = builder_.GlobalConst(name, expr);
             declared_constant_composites_.insert({id, decl->name->symbol});
             return {original_ast_type, builder_.Expr(name)};
+        }
+        case spv::Op::OpSpecConstantComposite: {
+            // TODO(crbug.com/tint/111): Handle OpSpecConstantComposite here.
+            Fail() << "unimplemented: OpSpecConstantComposite as expressions";
+            return {};
         }
         default:
             break;
