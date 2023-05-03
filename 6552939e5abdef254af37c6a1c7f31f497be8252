@@ -95,6 +95,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ddb4a33_773c901a",
+        "filename": "src/dawn/native/metal/UtilsMetal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T00:22:52Z",
+      "side": 1,
+      "message": "yup makes sense; we can change all the backends if we\u0027d like in a follow up",
+      "parentUuid": "a44a9b25_688dfe10",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 87
+      },
+      "revId": "6552939e5abdef254af37c6a1c7f31f497be8252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8d14ae_3e84a4e1",

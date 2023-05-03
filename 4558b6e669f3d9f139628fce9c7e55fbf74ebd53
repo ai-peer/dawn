@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87268241_c91a1bbb",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T00:22:52Z",
+      "side": 1,
+      "message": "hm, we could probably append the entryPointName behind the user-defined labels toggle as well",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 84
+      },
+      "revId": "4558b6e669f3d9f139628fce9c7e55fbf74ebd53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
