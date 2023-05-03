@@ -22,8 +22,8 @@ namespace tint::ir {
 Convert::Convert(uint32_t id,
                  const type::Type* to_type,
                  const type::Type* from_type,
-                 utils::VectorRef<Value*> args)
-    : Base(id, to_type, args), from_type_(from_type) {}
+                 utils::VectorRef<Value*> arguments)
+    : Base(id, to_type, arguments), from_type_(from_type) {}
 
 Convert::~Convert() = default;
 

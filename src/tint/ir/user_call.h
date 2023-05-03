@@ -38,16 +38,13 @@ class UserCall : public utils::Castable<UserCall, Call> {
     UserCall& operator=(const UserCall& inst) = delete;
     UserCall& operator=(UserCall&& inst) = delete;
 
-    /// @returns the function name
-    Symbol Name() const { return name_; }
+    /// The function name
+    Symbol name;
 
     /// Write the instruction to the given stream
     /// @param out the stream to write to
     /// @returns the stream
     utils::StringStream& ToInstruction(utils::StringStream& out) const override;
-
-  private:
-    Symbol name_{};
 };
 
 }  // namespace tint::ir

@@ -12,32 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/call.h"
+#ifndef SRC_TINT_IR_TO_PROGRAM_H_
+#define SRC_TINT_IR_TO_PROGRAM_H_
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Call);
+#include "src/tint/program.h"
+
+namespace tint::ir {
+class Module;
+}
 
 namespace tint::ir {
 
-Call::Call() : Base() {}
-
-Call::Call(uint32_t id, const type::Type* type, utils::VectorRef<Value*> arguments)
-    : Base(id, type), args(std::move(arguments)) {
-    for (auto* arg : args) {
-        arg->AddUsage(this);
-    }
-}
-
-Call::~Call() = default;
-
-void Call::EmitArgs(utils::StringStream& out) const {
-    bool first = true;
-    for (const auto* arg : args) {
-        if (!first) {
-            out << ", ";
-        }
-        first = false;
-        arg->ToValue(out);
-    }
-}
+Program ToProgram(const Module& module);
 
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_TO_PROGRAM_H_

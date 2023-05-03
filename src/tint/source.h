@@ -54,7 +54,7 @@ class Source {
         /// Constructs the File with the given file path and content.
         /// @param p the path for this file
         /// @param c the file contents
-        inline File(const std::string& p, const std::string& c) : path(p), content(c) {}
+        inline File(const std::string& p, std::string c) : path(p), content(std::move(c)) {}
 
         /// Copy constructor
         File(const File&) = default;

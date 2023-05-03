@@ -23,8 +23,8 @@ namespace tint::ir {
 Builtin::Builtin(uint32_t id,
                  const type::Type* type,
                  builtin::Function func,
-                 utils::VectorRef<Value*> args)
-    : Base(id, type, args), func_(func) {}
+                 utils::VectorRef<Value*> arguments)
+    : Base(id, type, std::move(arguments)), func_(func) {}
 
 Builtin::~Builtin() = default;
 
