@@ -46,6 +46,32 @@ class PipelineLayout final : public PipelineLayoutBase {
         ityp::array<BindGroupIndex, ityp::vector<BindingIndex, uint32_t>, kMaxBindGroups>;
     const BindingIndexInfo& GetBindingIndexInfo() const;
 
+    struct Slots {
+        ityp::bitset<UINT, D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT> mConstantBufferSlots;
+        ityp::bitset<UINT, D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT> mInputResourceSlots;
+        ityp::bitset<UINT, D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT> mSamplerSlots;
+        ityp::bitset<UINT, D3D11_1_UAV_SLOT_COUNT> mUAVSlots;
+
+        const Slots& operator|=(const Slots& other) {
+            mConstantBufferSlots |= other.mConstantBufferSlots;
+            mInputResourceSlots |= other.mInputResourceSlots;
+            mSamplerSlots |= other.mSamplerSlots;
+            mUAVSlots |= other.mUAVSlots;
+            return *this;
+        }
+    };
+
+    struct PreStageSlots : public PerStage<Slots> {
+        const PreStageSlots& operator|=(const PreStageSlots& other) {
+            this->operator[](wgpu::ShaderStage::Vertex) |= other[wgpu::ShaderStage::Vertex];
+            this->operator[](wgpu::ShaderStage::Fragment) |= other[wgpu::ShaderStage::Fragment];
+            this->operator[](wgpu::ShaderStage::Compute) |= other[wgpu::ShaderStage::Compute];
+            return *this;
+        }
+    };
+
+    const PreStageSlots& GetUsedSlots() const;
+
   private:
     using PipelineLayoutBase::PipelineLayoutBase;
 
@@ -54,6 +80,8 @@ class PipelineLayout final : public PipelineLayoutBase {
     MaybeError Initialize();
 
     BindingIndexInfo mIndexInfo;
+    // Used pipeline D3D11 slots.
+    PreStageSlots mUsedSlots;
 };
 
 }  // namespace dawn::native::d3d11
