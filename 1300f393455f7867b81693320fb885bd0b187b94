@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d62d9ac7_e4cf058c",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T17:48:17Z",
+      "side": 1,
+      "message": "Ugh, can we just ... not make it a unique ptr as this is kind of frightening.",
+      "revId": "1300f393455f7867b81693320fb885bd0b187b94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ab4487_ab0c6508",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T17:48:17Z",
+      "side": 1,
+      "message": "This seems wrong, why are you assigning ownership of the function to the builder? The function will get cleaned up which seems surprising?",
+      "revId": "1300f393455f7867b81693320fb885bd0b187b94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
