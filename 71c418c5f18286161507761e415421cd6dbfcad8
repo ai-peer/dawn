@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce49b0fe_5409820f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T20:54:57Z",
+      "side": 1,
+      "message": "seems like a fine approach to me!\n\nbikeshedding:\n - probably don\u0027t need \"WebGPU\" in the name\n - \"feature level\" instead of \"version\" ? We\u0027ll have `gles20, gles30, compat, k1/core, ...` ? (not sure of the gles20 and gles30 names). or \n - requestAdapter({ featureLevel: \"compat\" }) and adapterProperties.featureLevel ?",
+      "parentUuid": "93ac834f_6129937e",
+      "revId": "71c418c5f18286161507761e415421cd6dbfcad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1542b4a_c6f19724",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 2
