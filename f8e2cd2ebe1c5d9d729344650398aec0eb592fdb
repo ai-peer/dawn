@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec0c2f1_e3c4a550",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T17:19:50Z",
+      "side": 1,
+      "message": "Thanks for taking care of this!",
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44370cbd_749be782",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T17:19:50Z",
+      "side": 1,
+      "message": "If we do this, the console will contain \"/* Dumped generated HLSL */\", and then nothing. I think we should just not call this function if the compiledShader is invalid at the call (see my comment below).",
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85973076_cba74a9d",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T17:19:50Z",
+      "side": 1,
+      "message": "We could add a condition here: `\u0026\u0026 !compiledShader-\u003eshaderBlock.Empty()`",
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bddd5b6_35e22a35",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T17:19:50Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
