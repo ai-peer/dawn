@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0442059e_cc6c98fa",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-03T12:03:36Z",
+      "side": 1,
+      "message": "its more verbose, but might scale better to just keep the WGSL attribute syntax.\n\ne.g. `@workgroup_size(1, 2, 3)`",
+      "range": {
+        "startLine": 101,
+        "startChar": 20,
+        "endLine": 101,
+        "endChar": 32
+      },
+      "revId": "8fd8b7ce95a947a131f1c13ed0e43cb1e6712905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
