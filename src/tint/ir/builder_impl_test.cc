@@ -45,6 +45,7 @@ TEST_F(IR_BuilderImplTest, Func) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func f
   %fn1 = block
   ret
+
 func_end
 
 )");
@@ -104,6 +105,7 @@ TEST_F(IR_BuilderImplTest, IfStatement) {
   # if merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -144,6 +146,7 @@ TEST_F(IR_BuilderImplTest, IfStatement_TrueReturns) {
     # true branch
     %fn3 = block
     ret
+
     # false branch
     %fn4 = block
     branch %fn5
@@ -151,6 +154,7 @@ TEST_F(IR_BuilderImplTest, IfStatement_TrueReturns) {
   # if merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -195,9 +199,11 @@ TEST_F(IR_BuilderImplTest, IfStatement_FalseReturns) {
     # false branch
     %fn4 = block
     ret
+
   # if merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -238,9 +244,11 @@ TEST_F(IR_BuilderImplTest, IfStatement_BothReturn) {
     # true branch
     %fn3 = block
     ret
+
     # false branch
     %fn4 = block
     ret
+
 func_end
 
 )");
@@ -298,6 +306,7 @@ TEST_F(IR_BuilderImplTest, IfStatement_JumpChainToMerge) {
   # if merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -342,6 +351,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithBreak) {
   # loop merge
   %fn4 = block
   ret
+
 func_end
 
 )");
@@ -417,6 +427,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithContinue) {
   # loop merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -492,6 +503,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithContinuing_BreakIf) {
   # loop merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -551,6 +563,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithReturn) {
       # true branch
       %fn6 = block
       ret
+
       # false branch
       %fn7 = block
       branch %fn8
@@ -603,6 +616,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithOnlyReturn) {
     # loop start
     %fn3 = block
     ret
+
 func_end
 
 )");
@@ -665,6 +679,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithOnlyReturn_ContinuingBreakIf) {
     # loop start
     %fn3 = block
     ret
+
 func_end
 
 )");
@@ -732,6 +747,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithIf_BothBranchesBreak) {
   # loop merge
   %fn4 = block
   ret
+
 func_end
 
 )");
@@ -960,6 +976,7 @@ TEST_F(IR_BuilderImplTest, Loop_Nested) {
   # loop merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -1030,6 +1047,7 @@ TEST_F(IR_BuilderImplTest, While) {
   # loop merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -1092,9 +1110,11 @@ TEST_F(IR_BuilderImplTest, While_Return) {
     # if merge
     %fn8 = block
     ret
+
   # loop merge
   %fn4 = block
   ret
+
 func_end
 
 )");
@@ -1190,6 +1210,7 @@ TEST_F(IR_BuilderImplTest, For_NoInitCondOrContinuing) {
   # loop merge
   %fn4 = block
   ret
+
 func_end
 
 )");
@@ -1257,6 +1278,7 @@ TEST_F(IR_BuilderImplTest, Switch) {
   # switch merge
   %fn6 = block
   ret
+
 func_end
 
 )");
@@ -1313,6 +1335,7 @@ TEST_F(IR_BuilderImplTest, Switch_MultiSelector) {
   # switch merge
   %fn4 = block
   ret
+
 func_end
 
 )");
@@ -1357,6 +1380,7 @@ TEST_F(IR_BuilderImplTest, Switch_OnlyDefault) {
   # switch merge
   %fn4 = block
   ret
+
 func_end
 
 )");
@@ -1414,6 +1438,7 @@ TEST_F(IR_BuilderImplTest, Switch_WithBreak) {
   # switch merge
   %fn5 = block
   ret
+
 func_end
 
 )");
@@ -1465,9 +1490,11 @@ TEST_F(IR_BuilderImplTest, Switch_AllReturn) {
     # case 0i
     %fn3 = block
     ret
+
     # case default
     %fn4 = block
     ret
+
 func_end
 
 )");
@@ -1567,7 +1594,8 @@ TEST_F(IR_BuilderImplTest, Emit_GlobalVar_NoInit) {
 
     EXPECT_EQ(Disassemble(m), R"(%fn0 = block
 %1(ref<private, u32, read_write>) = var private read_write
-ret
+
+
 
 )");
 }
@@ -1583,7 +1611,8 @@ TEST_F(IR_BuilderImplTest, Emit_GlobalVar_Init) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = block
 %1(ref<private, u32, read_write>) = var private read_write
 store %1(ref<private, u32, read_write>), 2u
-ret
+
+
 
 )");
 }
@@ -1600,6 +1629,7 @@ TEST_F(IR_BuilderImplTest, Emit_Var_NoInit) {
   %fn1 = block
   %1(ref<function, u32, read_write>) = var function read_write
   ret
+
 func_end
 
 )");
@@ -1619,6 +1649,7 @@ TEST_F(IR_BuilderImplTest, Emit_Var_Init) {
   %1(ref<function, u32, read_write>) = var function read_write
   store %1(ref<function, u32, read_write>), 2u
   ret
+
 func_end
 
 )");
@@ -1780,6 +1811,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalAnd) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func my_func
   %fn1 = block
   ret true
+
 func_end
 
 %fn2 = func test_function [@compute @workgroup_size(1, 1, 1)]
@@ -1798,6 +1830,7 @@ func_end
   # if merge
   %fn7 = block
   ret
+
 func_end
 
 )");
@@ -1815,6 +1848,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalOr) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func my_func
   %fn1 = block
   ret true
+
 func_end
 
 %fn2 = func test_function [@compute @workgroup_size(1, 1, 1)]
@@ -1834,6 +1868,7 @@ func_end
   # if merge
   %fn7 = block
   ret
+
 func_end
 
 )");
@@ -1997,6 +2032,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func my_func
   %fn1 = block
   ret 0.0f
+
 func_end
 
 %fn2 = func test_function [@compute @workgroup_size(1, 1, 1)]
@@ -2021,6 +2057,7 @@ func_end
   # if merge
   %fn7 = block
   ret
+
 func_end
 
 )");
@@ -2039,12 +2076,14 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound_WithConstEval) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func my_func
   %fn1 = block
   ret true
+
 func_end
 
 %fn2 = func test_function [@compute @workgroup_size(1, 1, 1)]
   %fn3 = block
   %1(bool) = call my_func, false
   ret
+
 func_end
 
 )");
@@ -2117,7 +2156,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_ConstructEmpty) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = block
 %1(ref<private, vec3<f32>, read_write>) = var private read_write
 store %1(ref<private, vec3<f32>, read_write>), vec3<f32> 0.0f
-ret
+
+
 
 )");
 }
@@ -2135,12 +2175,14 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Construct) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = block
 %1(ref<private, f32, read_write>) = var private read_write
 store %1(ref<private, f32, read_write>), 1.0f
-ret
+
+
 
 %fn1 = func test_function [@compute @workgroup_size(1, 1, 1)]
   %fn2 = block
   %2(vec3<f32>) = construct 2.0f, 3.0f, %1(ref<private, f32, read_write>)
   ret
+
 func_end
 
 )");
@@ -2159,12 +2201,14 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Convert) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = block
 %1(ref<private, i32, read_write>) = var private read_write
 store %1(ref<private, i32, read_write>), 1i
-ret
+
+
 
 %fn1 = func test_function [@compute @workgroup_size(1, 1, 1)]
   %fn2 = block
   %2(f32) = convert i32, %1(ref<private, i32, read_write>)
   ret
+
 func_end
 
 )");
@@ -2182,6 +2226,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_MaterializedCall) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func test_function
   %fn1 = block
   ret 2.0f
+
 func_end
 
 )");
@@ -2199,12 +2244,14 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Builtin) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = block
 %1(ref<private, f32, read_write>) = var private read_write
 store %1(ref<private, f32, read_write>), 1.0f
-ret
+
+
 
 %fn1 = func test_function [@compute @workgroup_size(1, 1, 1)]
   %fn2 = block
   %2(f32) = asin %1(ref<private, f32, read_write>)
   ret
+
 func_end
 
 )");
@@ -2222,6 +2269,7 @@ TEST_F(IR_BuilderImplTest, EmitFunction_Vertex) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func test [@vertex]
   %fn1 = block
   ret vec4<f32> 0.0f
+
 func_end
 
 )");
@@ -2238,6 +2286,7 @@ TEST_F(IR_BuilderImplTest, EmitFunction_Fragment) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func test [@fragment]
   %fn1 = block
   ret
+
 func_end
 
 )");
@@ -2254,6 +2303,7 @@ TEST_F(IR_BuilderImplTest, EmitFunction_Compute) {
     EXPECT_EQ(Disassemble(m), R"(%fn0 = func test [@compute @workgroup_size(8, 4, 2)]
   %fn1 = block
   ret
+
 func_end
 
 )");
