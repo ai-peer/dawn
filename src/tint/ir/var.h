@@ -18,6 +18,7 @@
 #include "src/tint/builtin/access.h"
 #include "src/tint/builtin/address_space.h"
 #include "src/tint/ir/instruction.h"
+#include "src/tint/symbol.h"
 #include "src/tint/utils/castable.h"
 #include "src/tint/utils/string_stream.h"
 
@@ -26,6 +27,12 @@ namespace tint::ir {
 /// An instruction in the IR.
 class Var : public utils::Castable<Var, Instruction> {
   public:
+    /// Optional metadata for the variable
+    struct Metadata {
+        /// The authored name of the variable
+        Symbol name;
+    };
+
     /// Constructor
     /// @param id the instruction id
     /// @param type the type
@@ -42,20 +49,19 @@ class Var : public utils::Castable<Var, Instruction> {
     Var& operator=(const Var& inst) = delete;
     Var& operator=(Var&& inst) = delete;
 
-    /// @returns the address space
-    builtin::AddressSpace AddressSpace() const { return address_space_; }
+    /// The variable address space
+    builtin::AddressSpace address_space;
 
-    /// @returns the access mode
-    builtin::Access Access() const { return access_; }
+    /// The variable access mode
+    builtin::Access access;
+
+    /// Optional metadata for the variable
+    Metadata* metadata = nullptr;
 
     /// Write the instruction to the given stream
     /// @param out the stream to write to
     /// @returns the stream
     utils::StringStream& ToInstruction(utils::StringStream& out) const override;
-
-  private:
-    builtin::AddressSpace address_space_;
-    builtin::Access access_;
 };
 
 }  // namespace tint::ir

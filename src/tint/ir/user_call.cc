@@ -19,14 +19,17 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::UserCall);
 
 namespace tint::ir {
 
-UserCall::UserCall(uint32_t id, const type::Type* type, Symbol name, utils::VectorRef<Value*> args)
-    : Base(id, type, args), name_(name) {}
+UserCall::UserCall(uint32_t ident,
+                   const type::Type* type,
+                   Symbol n,
+                   utils::VectorRef<Value*> arguments)
+    : Base(ident, type, std::move(arguments)), name(n) {}
 
 UserCall::~UserCall() = default;
 
 utils::StringStream& UserCall::ToInstruction(utils::StringStream& out) const {
-    ToValue(out) << " = call " << name_.Name();
-    if (Args().Length() > 0) {
+    ToValue(out) << " = call " << name.Name();
+    if (args.Length() > 0) {
         out << ", ";
     }
     EmitArgs(out);

@@ -24,6 +24,9 @@ namespace tint::ir {
 /// An instruction in the IR.
 class Instruction : public utils::Castable<Instruction, Value> {
   public:
+    /// The identifier used by instructions that have no value.
+    static constexpr uint32_t kNoID = 0xffffffff;
+
     Instruction(const Instruction& inst) = delete;
     Instruction(Instruction&& inst) = delete;
     /// Destructor
@@ -39,7 +42,7 @@ class Instruction : public utils::Castable<Instruction, Value> {
     /// @param out the stream to write to
     /// @returns the stream
     utils::StringStream& ToValue(utils::StringStream& out) const override {
-        out << "%" << std::to_string(id_);
+        out << "%" << std::to_string(id);
         if (type_ != nullptr) {
             out << "(" << Type()->FriendlyName() << ")";
         }
@@ -51,6 +54,9 @@ class Instruction : public utils::Castable<Instruction, Value> {
     /// @returns the stream
     virtual utils::StringStream& ToInstruction(utils::StringStream& out) const = 0;
 
+    /// The instruction identifier
+    const uint32_t id;
+
   protected:
     /// Constructor
     Instruction();
@@ -60,7 +66,6 @@ class Instruction : public utils::Castable<Instruction, Value> {
     Instruction(uint32_t id, const type::Type* type);
 
   private:
-    uint32_t id_ = 0;
     const type::Type* type_ = nullptr;
 };
 

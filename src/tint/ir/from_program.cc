@@ -12,22 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/bitcast.h"
-#include "src/tint/debug.h"
+#include "src/tint/ir/from_program.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Bitcast);
+#include "src/tint/ir/builder_impl.h"
+#include "src/tint/program.h"
 
 namespace tint::ir {
 
-Bitcast::Bitcast(uint32_t ident, const type::Type* type, Value* val)
-    : Base(ident, type, utils::Vector{val}) {}
+utils::Result<Module, std::string> FromProgram(const Program* program) {
+    if (!program->IsValid()) {
+        return std::string("input program is not valid");
+    }
 
-Bitcast::~Bitcast() = default;
+    BuilderImpl b(program);
+    auto r = b.Build();
+    if (!r) {
+        return b.Diagnostics().str();
+    }
 
-utils::StringStream& Bitcast::ToInstruction(utils::StringStream& out) const {
-    ToValue(out) << " = bitcast ";
-    EmitArgs(out);
-    return out;
+    return r.Move();
 }
 
 }  // namespace tint::ir

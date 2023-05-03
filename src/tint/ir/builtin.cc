@@ -20,11 +20,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Builtin);
 // \cond DO_NOT_DOCUMENT
 namespace tint::ir {
 
-Builtin::Builtin(uint32_t id,
+Builtin::Builtin(uint32_t ident,
                  const type::Type* type,
                  builtin::Function func,
-                 utils::VectorRef<Value*> args)
-    : Base(id, type, args), func_(func) {}
+                 utils::VectorRef<Value*> arguments)
+    : Base(ident, type, std::move(arguments)), func_(func) {}
 
 Builtin::~Builtin() = default;
 

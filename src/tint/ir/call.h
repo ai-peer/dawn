@@ -31,8 +31,8 @@ class Call : public utils::Castable<Call, Instruction> {
     Call& operator=(const Call& inst) = delete;
     Call& operator=(Call&& inst) = delete;
 
-    /// @returns the constructor arguments
-    utils::VectorRef<Value*> Args() const { return args_; }
+    /// The constructor arguments
+    utils::Vector<Value*, 1> args;
 
     /// Writes the call arguments to the given stream.
     /// @param out the output stream
@@ -40,15 +40,12 @@ class Call : public utils::Castable<Call, Instruction> {
 
   protected:
     /// Constructor
-    Call();
+    Call() = delete;
     /// Constructor
     /// @param id the instruction id
     /// @param type the result type
     /// @param args the constructor arguments
     Call(uint32_t id, const type::Type* type, utils::VectorRef<Value*> args);
-
-  private:
-    utils::Vector<Value*, 1> args_;
 };
 
 }  // namespace tint::ir

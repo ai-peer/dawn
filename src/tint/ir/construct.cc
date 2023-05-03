@@ -19,8 +19,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Construct);
 
 namespace tint::ir {
 
-Construct::Construct(uint32_t id, const type::Type* type, utils::VectorRef<Value*> args)
-    : Base(id, type, args) {}
+Construct::Construct(uint32_t ident, const type::Type* type, utils::VectorRef<Value*> arguments)
+    : Base(ident, type, std::move(arguments)) {}
 
 Construct::~Construct() = default;
 
