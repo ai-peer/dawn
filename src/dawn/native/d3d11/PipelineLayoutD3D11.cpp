@@ -46,12 +46,26 @@ MaybeError PipelineLayout::Initialize() {
                 case BindingInfoType::Buffer:
                     switch (bindingInfo.buffer.type) {
                         case wgpu::BufferBindingType::Uniform:
-                            mIndexInfo[group][bindingIndex] = constantBufferIndex++;
+                            mIndexInfo[group][bindingIndex] = constantBufferIndex;
+                            for (SingleShaderStage stage : IterateStages(bindingInfo.visibility)) {
+                                mUsedSlots[stage].mConstantBufferSlots.set(constantBufferIndex);
+                            }
+                            ++constantBufferIndex;
                             break;
                         case wgpu::BufferBindingType::Storage:
                         case kInternalStorageBufferBinding:
+                            mIndexInfo[group][bindingIndex] = unorderedAccessViewIndex;
+                            for (SingleShaderStage stage : IterateStages(bindingInfo.visibility)) {
+                                mUsedSlots[stage].mUAVSlots.set(unorderedAccessViewIndex);
+                            }
+                            ++unorderedAccessViewIndex;
+                            break;
                         case wgpu::BufferBindingType::ReadOnlyStorage:
-                            mIndexInfo[group][bindingIndex] = unorderedAccessViewIndex++;
+                            mIndexInfo[group][bindingIndex] = shaderResourceViewIndex;
+                            for (SingleShaderStage stage : IterateStages(bindingInfo.visibility)) {
+                                mUsedSlots[stage].mInputResourceSlots.set(shaderResourceViewIndex);
+                            }
+                            ++shaderResourceViewIndex;
                             break;
                         case wgpu::BufferBindingType::Undefined:
                             UNREACHABLE();
@@ -59,12 +73,20 @@ MaybeError PipelineLayout::Initialize() {
                     break;
 
                 case BindingInfoType::Sampler:
-                    mIndexInfo[group][bindingIndex] = samplerIndex++;
+                    mIndexInfo[group][bindingIndex] = samplerIndex;
+                    for (SingleShaderStage stage : IterateStages(bindingInfo.visibility)) {
+                        mUsedSlots[stage].mSamplerSlots.set(samplerIndex);
+                    }
+                    ++samplerIndex;
                     break;
 
                 case BindingInfoType::Texture:
                 case BindingInfoType::ExternalTexture:
-                    mIndexInfo[group][bindingIndex] = shaderResourceViewIndex++;
+                    mIndexInfo[group][bindingIndex] = shaderResourceViewIndex;
+                    for (SingleShaderStage stage : IterateStages(bindingInfo.visibility)) {
+                        mUsedSlots[stage].mInputResourceSlots.set(shaderResourceViewIndex);
+                    }
+                    ++shaderResourceViewIndex;
                     break;
 
                 case BindingInfoType::StorageTexture:
@@ -79,6 +101,10 @@ MaybeError PipelineLayout::Initialize() {
 
 const PipelineLayout::BindingIndexInfo& PipelineLayout::GetBindingIndexInfo() const {
     return mIndexInfo;
+}
+
+const PipelineLayout::PreStageSlots& PipelineLayout::GetUsedSlots() const {
+    return mUsedSlots;
 }
 
 }  // namespace dawn::native::d3d11
