@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cacbaef_a865cd0a",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T17:22:12Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 351,
+        "startChar": 14,
+        "endLine": 351,
+        "endChar": 56
+      },
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44370cbd_749be782",
         "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
         "patchSetId": 2
@@ -31,6 +54,24 @@
       "writtenOn": "2023-05-03T17:19:50Z",
       "side": 1,
       "message": "If we do this, the console will contain \"/* Dumped generated HLSL */\", and then nothing. I think we should just not call this function if the compiledShader is invalid at the call (see my comment below).",
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93fb27c6_a63ec844",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T17:22:12Z",
+      "side": 1,
+      "message": "it should contain the HLSL at [1] ?\n\nCompiledShader contains two things: the hlslSource, and the FXC/DXC-produced shaderBlob\n\nalthough I suppose I should check that hlslSource is non-empty before printing that one.",
+      "parentUuid": "44370cbd_749be782",
       "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
