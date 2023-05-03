@@ -322,6 +322,18 @@ class Vector {
         Sort([](auto& a, auto& b) { return a < b; });
     }
 
+    /// @returns true if any of the elements of the vector are equal to @p v
+    /// @param v the comparision value
+    template <typename U>
+    bool Any(U&& v) {
+        for (auto& el : *this) {
+            if (el == v) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /// @returns true if the vector is empty.
     bool IsEmpty() const { return impl_.slice.len == 0; }
 
