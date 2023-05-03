@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8752ee66_090a5fd1",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-03T12:01:27Z",
+      "side": 1,
+      "message": "I\u0027d recommend a RAII style push-pop gadget or callback helper for these, to make it impossible to accidentally early return and forget to pop.",
+      "range": {
+        "startLine": 217,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 23
+      },
+      "revId": "a2011d49d26aafecf826dd4eeb125cce845f8507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
