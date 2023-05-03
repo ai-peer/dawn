@@ -12,22 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/bitcast.h"
-#include "src/tint/debug.h"
+#ifndef SRC_TINT_IR_TO_PROGRAM_H_
+#define SRC_TINT_IR_TO_PROGRAM_H_
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Bitcast);
+#include "src/tint/program.h"
+
+namespace tint::ir {
+class Module;
+}
 
 namespace tint::ir {
 
-Bitcast::Bitcast(uint32_t ident, const type::Type* type, Value* val)
-    : Base(ident, type, utils::Vector{val}) {}
-
-Bitcast::~Bitcast() = default;
-
-utils::StringStream& Bitcast::ToInstruction(utils::StringStream& out) const {
-    ToValue(out) << " = bitcast ";
-    EmitArgs(out);
-    return out;
-}
+Program ToProgram(const Module& module);
 
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_TO_PROGRAM_H_

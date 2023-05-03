@@ -18,9 +18,9 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Instruction);
 
 namespace tint::ir {
 
-Instruction::Instruction() = default;
+Instruction::Instruction() : id(kNoID), type_(nullptr) {}
 
-Instruction::Instruction(uint32_t id, const type::Type* ty) : id_(id), type_(ty) {}
+Instruction::Instruction(uint32_t ident, const type::Type* ty) : id(ident), type_(ty) {}
 
 Instruction::~Instruction() = default;
 

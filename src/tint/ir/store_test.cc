@@ -32,10 +32,10 @@ TEST_F(IR_InstructionTest, CreateStore) {
     const auto* inst = b.builder.Store(to, b.builder.Constant(4_i));
 
     ASSERT_TRUE(inst->Is<Store>());
-    ASSERT_EQ(inst->to(), to);
+    ASSERT_EQ(inst->to, to);
 
-    ASSERT_TRUE(inst->from()->Is<Constant>());
-    auto lhs = inst->from()->As<Constant>()->value;
+    ASSERT_TRUE(inst->from->Is<Constant>());
+    auto lhs = inst->from->As<Constant>()->value;
     ASSERT_TRUE(lhs->Is<constant::Scalar<i32>>());
     EXPECT_EQ(4_i, lhs->As<constant::Scalar<i32>>()->ValueAs<i32>());
 
@@ -50,13 +50,13 @@ TEST_F(IR_InstructionTest, Store_Usage) {
     auto* to = b.builder.Discard();
     const auto* inst = b.builder.Store(to, b.builder.Constant(4_i));
 
-    ASSERT_NE(inst->to(), nullptr);
-    ASSERT_EQ(inst->to()->Usage().Length(), 1u);
-    EXPECT_EQ(inst->to()->Usage()[0], inst);
+    ASSERT_NE(inst->to, nullptr);
+    ASSERT_EQ(inst->to->Usage().Length(), 1u);
+    EXPECT_EQ(inst->to->Usage()[0], inst);
 
-    ASSERT_NE(inst->from(), nullptr);
-    ASSERT_EQ(inst->from()->Usage().Length(), 1u);
-    EXPECT_EQ(inst->from()->Usage()[0], inst);
+    ASSERT_NE(inst->from, nullptr);
+    ASSERT_EQ(inst->from->Usage().Length(), 1u);
+    EXPECT_EQ(inst->from->Usage()[0], inst);
 }
 
 }  // namespace

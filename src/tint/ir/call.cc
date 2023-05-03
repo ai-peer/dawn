@@ -18,10 +18,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Call);
 
 namespace tint::ir {
 
-Call::Call() : Base() {}
-
-Call::Call(uint32_t id, const type::Type* type, utils::VectorRef<Value*> args)
-    : Base(id, type), args_(args) {
+Call::Call(uint32_t ident, const type::Type* type, utils::VectorRef<Value*> arguments)
+    : Base(ident, type), args(std::move(arguments)) {
     for (auto* arg : args) {
         arg->AddUsage(this);
     }
@@ -31,7 +29,7 @@ Call::~Call() = default;
 
 void Call::EmitArgs(utils::StringStream& out) const {
     bool first = true;
-    for (const auto* arg : args_) {
+    for (const auto* arg : args) {
         if (!first) {
             out << ", ";
         }
