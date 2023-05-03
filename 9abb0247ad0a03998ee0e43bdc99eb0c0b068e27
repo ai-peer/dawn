@@ -34,6 +34,24 @@
       "parentUuid": "c0643631_97162444",
       "revId": "9abb0247ad0a03998ee0e43bdc99eb0c0b068e27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "052ef60d_0f1dede8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T14:30:01Z",
+      "side": 1,
+      "message": "I guess - it felt odd because having differentiation between the types here makes you wonder if you\u0027re supposed to be handling those statuses in some way. ~When all the other errors in webgpu come back via error messages. These errors are no different, so it\u0027s odd to report with a different mechanism. And, the errors are technically not as nice as the other errors we report - \"offset (43) was greater than the...~\n\nnevermind - in the spec some parts of the validation happen in the \"validation steps\" and those all already to generate the usual error messages. whereas the other parts that cause promise rejection are validated slightly differently - like:\n\u003e If this.[[pending_map]] is not null:\n\u003e    Return a promise rejected with OperationError.\n\nso I guess it\u0027s fine..?",
+      "parentUuid": "d0fe3b3d_29237478",
+      "revId": "9abb0247ad0a03998ee0e43bdc99eb0c0b068e27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
