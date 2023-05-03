@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd33835_212b00e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "typo: \"support\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0f2059b7_6bac9aa0",
@@ -14,6 +37,230 @@
       "writtenOn": "2023-05-03T19:06:48Z",
       "side": 1,
       "message": "Hi Austin \u0026 Corentin, PTAL. Thanks",
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76d5b41_151b6d66",
+        "filename": "include/dawn/native/D3DBackend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "I don\u0027t see it used - what is this for?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 84
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf127459_5944d91e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "just \"d3d\" ?",
+      "range": {
+        "startLine": 449,
+        "startChar": 41,
+        "endLine": 449,
+        "endChar": 46
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7b6e79_a90dfe1f",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "the implementation here is super similar to the d3d12 one - is there no way we could share it?\n\nI see there are some 11-specific things like Fence::CreateFromHandle, but there could be a way we have a virtual function on d3d::Device like device-\u003eCreateFenceFromHandle that returns the base abstract d3d::Fence",
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e9ad43_06639da0",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "sType in the C++ api is defaulted",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 77
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6276f0eb_face0ed0",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "d3d11",
+      "range": {
+        "startLine": 90,
+        "startChar": 50,
+        "endLine": 90,
+        "endChar": 55
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19989ed2_7610a146",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "d3d11",
+      "range": {
+        "startLine": 121,
+        "startChar": 29,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77c516ac_aae3ffd8",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "is this defined?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "437e7a96_e45b78ac",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "d3d11",
+      "range": {
+        "startLine": 62,
+        "startChar": 80,
+        "endLine": 62,
+        "endChar": 85
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2860bd7_1d73e3e7",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "this should probably do what d3d12 does and save the fences. Then, we could wait only when the texture is actually used which should improve parallelism in some situations",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 261,
+        "endChar": 5
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44085bde_dd2034bf",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T23:51:55Z",
+      "side": 1,
+      "message": "ditto: like d3d12, we can track mSignalFenceValue so that we have the exact serial when we stopped using the texture. this way the synchronization is more tightly scoped",
+      "range": {
+        "startLine": 685,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 56
+      },
       "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
