@@ -74,6 +74,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/switch.h"
 #include "src/tint/type/void.h"
+#include "src/tint/utils/defer.h"
 #include "src/tint/utils/scoped_assignment.h"
 
 namespace tint::ir {
@@ -214,6 +215,9 @@ void BuilderImpl::EmitFunction(const ast::Function* ast_func) {
     }
 
     {
+        scopes_.Push();
+        TINT_DEFER(scopes_.Pop());
+
         FlowStackScope scope(this, ir_func);
 
         current_flow_block = ir_func->start_target;
@@ -386,6 +390,9 @@ void BuilderImpl::EmitIf(const ast::IfStatement* stmt) {
     {
         FlowStackScope scope(this, if_node);
 
+        scopes_.Push();
+        TINT_DEFER(scopes_.Pop());
+
         current_flow_block = if_node->true_.target->As<Block>();
         EmitStatement(stmt->body);
 
@@ -394,6 +401,9 @@ void BuilderImpl::EmitIf(const ast::IfStatement* stmt) {
 
         current_flow_block = if_node->false_.target->As<Block>();
         if (stmt->else_statement) {
+            scopes_.Push();
+            TINT_DEFER(scopes_.Pop());
+
             EmitStatement(stmt->else_statement);
         }
 
@@ -420,6 +430,9 @@ void BuilderImpl::EmitLoop(const ast::LoopStatement* stmt) {
     {
         FlowStackScope scope(this, loop_node);
 
+        scopes_.Push();
+        TINT_DEFER(scopes_.Pop());
+
         current_flow_block = loop_node->start.target->As<Block>();
         EmitStatement(stmt->body);
 
@@ -428,6 +441,9 @@ void BuilderImpl::EmitLoop(const ast::LoopStatement* stmt) {
 
         current_flow_block = loop_node->continuing.target->As<Block>();
         if (stmt->continuing) {
+            scopes_.Push();
+            TINT_DEFER(scopes_.Pop());
+
             EmitStatement(stmt->continuing);
         }
 
@@ -476,6 +492,9 @@ void BuilderImpl::EmitWhile(const ast::WhileStatement* stmt) {
 
         BranchTo(if_node);
 
+        scopes_.Push();
+        TINT_DEFER(scopes_.Pop());
+
         current_flow_block = if_node->merge.target->As<Block>();
         EmitStatement(stmt->body);
 
@@ -491,6 +510,9 @@ void BuilderImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
     TINT_ASSERT(IR, loop_node->continuing.target->Is<Block>());
     builder.Branch(loop_node->continuing.target->As<Block>(), loop_node->start.target,
                    utils::Empty);
+
+    scopes_.Push();
+    TINT_DEFER(scopes_.Pop());
 
     if (stmt->initializer) {
         // Emit the for initializer before branching to the loop
@@ -535,6 +557,7 @@ void BuilderImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
             EmitStatement(stmt->continuing);
         }
     }
+
     // The while loop always has a path to the merge target as the break statement comes before
     // anything inside the loop.
     current_flow_block = loop_node->merge.target->As<Block>();
@@ -568,8 +591,12 @@ void BuilderImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
                 }
             }
 
+            scopes_.Push();
+            TINT_DEFER(scopes_.Pop());
+
             current_flow_block = builder.CreateCase(switch_node, selectors);
             EmitStatement(c->Body()->Declaration());
+
             BranchToIfNeeded(switch_node->merge.target);
         }
     }
@@ -677,9 +704,10 @@ utils::Result<Value*> BuilderImpl::EmitExpression(const ast::Expression* expr) {
         [&](const ast::BinaryExpression* b) { return EmitBinary(b); },
         [&](const ast::BitcastExpression* b) { return EmitBitcast(b); },
         [&](const ast::CallExpression* c) { return EmitCall(c); },
-        // [&](const ast::IdentifierExpression* i) {
-        // TODO(dsinclair): Implement
-        // },
+        [&](const ast::IdentifierExpression* i) {
+            auto* v = scopes_.Get(i->identifier->symbol);
+            return utils::Result<Value*>{v};
+        },
         [&](const ast::LiteralExpression* l) { return EmitLiteral(l); },
         // [&](const ast::MemberAccessorExpression* m) {
         // TODO(dsinclair): Implement
@@ -714,7 +742,8 @@ void BuilderImpl::EmitVariable(const ast::Variable* var) {
                 auto* store = builder.Store(val, init.Get());
                 current_flow_block->instructions.Push(store);
             }
-            // TODO(dsinclair): Store the mapping from the var name to the `Declare` value
+            // Store the declaration so we can get the instruction to store too
+            scopes_.Set(v->name->symbol, val);
         },
         [&](const ast::Let* l) {
             // A `let` doesn't exist as a standalone item in the IR, it's just the result of the
@@ -723,7 +752,9 @@ void BuilderImpl::EmitVariable(const ast::Variable* var) {
             if (!init) {
                 return;
             }
-            // TODO(dsinclair): Store the mapping from the let name to the `init` value
+
+            // Store the results of the initialization
+            scopes_.Set(l->name->symbol, init.Get());
         },
         [&](const ast::Override*) {
             add_error(var->source,
