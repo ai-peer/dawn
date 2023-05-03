@@ -16,6 +16,23 @@
       "message": "Hi Ausltin, PTAL. Thanks",
       "revId": "8886d85b604511574ef653dd8559165f0e2f01c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3997a91_4023f8e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T14:18:32Z",
+      "side": 1,
+      "message": "could we modify IsWebGPUAdapterBlocklisted (in Chromium) first?\n\nI don\u0027t think we want it showing up as available in about://gpu either",
+      "revId": "8886d85b604511574ef653dd8559165f0e2f01c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
