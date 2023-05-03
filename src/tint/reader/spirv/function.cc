@@ -4075,6 +4075,9 @@ TypedExpression FunctionEmitter::EmitGlslStd450ExtInst(const spvtools::opt::Inst
     // All parameters to GLSL.std.450 extended instructions are IDs.
     for (uint32_t iarg = 2; iarg < inst.NumInOperands(); ++iarg) {
         TypedExpression operand = MakeOperand(inst, iarg);
+        if (!operand.expr) {
+            return {};
+        }
         if (first_operand_type == nullptr) {
             first_operand_type = operand.type;
         }
