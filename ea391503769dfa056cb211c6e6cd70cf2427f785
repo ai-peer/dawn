@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "661bacb5_78728f41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-03T20:04:36Z",
+      "side": 1,
+      "message": "Browsing around for deprecated Dawn stuff and this caught my eye. Hasn\u0027t been used for a while, from the looks of it.",
+      "revId": "ea391503769dfa056cb211c6e6cd70cf2427f785",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
