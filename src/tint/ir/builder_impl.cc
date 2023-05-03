@@ -211,6 +211,7 @@ void BuilderImpl::EmitFunction(const ast::Function* ast_func) {
 
     ast_to_flow_[ast_func] = ir_func;
 
+    const auto* sem = program_->Sem().Get(ast_func);
     if (ast_func->IsEntryPoint()) {
         builder.ir.entry_points.Push(ir_func);
 
@@ -224,7 +225,6 @@ void BuilderImpl::EmitFunction(const ast::Function* ast_func) {
             case ast::PipelineStage::kCompute: {
                 ir_func->pipeline_stage = Function::PipelineStage::kCompute;
 
-                const auto* sem = program_->Sem().Get(ast_func);
                 auto wg_size = sem->WorkgroupSize();
 
                 uint32_t x = wg_size[0].value();
@@ -246,7 +246,38 @@ void BuilderImpl::EmitFunction(const ast::Function* ast_func) {
                 return;
             }
         }
+
+        if (ast::GetAttribute<ast::LocationAttribute>(ast_func->return_type_attributes)) {
+            ir_func->return_attribute = Function::ReturnAttribute::kLocation;
+        } else if (auto* b =
+                       ast::GetAttribute<ast::BuiltinAttribute>(ast_func->return_type_attributes)) {
+            if (auto* ident_sem = program_->Sem()
+                                      .Get(b)
+                                      ->As<sem::BuiltinEnumExpression<builtin::BuiltinValue>>()) {
+                switch (ident_sem->Value()) {
+                    case builtin::BuiltinValue::kPosition:
+                        ir_func->return_attribute = Function::ReturnAttribute::kPosition;
+                        break;
+                    case builtin::BuiltinValue::kFragDepth:
+                        ir_func->return_attribute = Function::ReturnAttribute::kFragDepth;
+                        break;
+                    case builtin::BuiltinValue::kSampleMask:
+                        ir_func->return_attribute = Function::ReturnAttribute::kSampleMask;
+                        break;
+                    default:
+                        TINT_ICE(IR, diagnostics_)
+                            << "Unknown builtin value in return attributes " << ident_sem->Value();
+                        return;
+                }
+            } else {
+                TINT_ICE(IR, diagnostics_) << "Builtin attribute sem invalid";
+                return;
+            }
+        }
     }
+
+    ir_func->return_type = sem->ReturnType()->Clone(clone_ctx_.type_ctx);
+    ir_func->return_location = sem->ReturnLocation();
 
     {
         FlowStackScope scope(this, ir_func);
