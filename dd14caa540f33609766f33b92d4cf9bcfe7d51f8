@@ -16,6 +16,24 @@
       "message": "Thank you! Are you able to Commit-Queue +2 yourself or does one of us need to do it?",
       "revId": "dd14caa540f33609766f33b92d4cf9bcfe7d51f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "800de934_7b7b2843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-05-03T09:55:01Z",
+      "side": 1,
+      "message": "I don\u0027t have the rights.",
+      "parentUuid": "06c9b605_9bee2acd",
+      "revId": "dd14caa540f33609766f33b92d4cf9bcfe7d51f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
