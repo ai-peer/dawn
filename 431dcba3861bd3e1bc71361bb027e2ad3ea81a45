@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2c9eb9_bddd61f1",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T13:44:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c515e44_3ee7425a",
+      "revId": "431dcba3861bd3e1bc71361bb027e2ad3ea81a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e7a194b_04d4ba8b",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-05-03T12:52:33Z",
       "side": 1,
       "message": "This is likely to upset license checking headers. Please can you minimise this to the particular issue the fuzzer found?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 58
+      },
+      "revId": "431dcba3861bd3e1bc71361bb027e2ad3ea81a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99aff9cd_02b88aa6",
+        "filename": "test/tint/bug/tint/1926.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T13:44:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e7a194b_04d4ba8b",
       "range": {
         "startLine": 1,
         "startChar": 0,
