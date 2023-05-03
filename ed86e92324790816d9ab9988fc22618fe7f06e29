@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1cbc6a_4eaa4b0a",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-03T15:10:37Z",
+      "side": 1,
+      "message": "Can we do this inside `EmitBlock` instead so that you don\u0027t have to remember to do this all over the place?",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 34
+      },
+      "revId": "ed86e92324790816d9ab9988fc22618fe7f06e29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
