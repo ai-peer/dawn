@@ -755,6 +755,8 @@ if(${TINT_BUILD_IR})
     ir/store.h
     ir/switch.cc
     ir/switch.h
+    ir/to_program.cc
+    ir/to_program.h
     ir/unary.cc
     ir/unary.h
     ir/user_call.cc
@@ -1445,6 +1447,7 @@ if(TINT_BUILD_TESTS)
       ir/discard_test.cc
       ir/store_test.cc
       ir/test_helper.h
+      ir/to_program_roundtrip_test.cc
       ir/unary_test.cc
     )
   endif()
