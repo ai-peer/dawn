@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c01a71_f6706275",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1997,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-03T19:50:25Z",
+      "side": 1,
+      "message": "I\u0027m wondering if there\u0027s a better place for the return type in the disassembly. This is where I\u0027d expect the parameters to be, and that might be a little confusing.\n\nMaybe `func f32 my_func(param1, param2)`? Or maybe after the closing `)` so that\u0027s it\u0027s next to the return attributes?",
+      "revId": "9e5c78d6fb3d592440416802e2cae7fba712ec72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
