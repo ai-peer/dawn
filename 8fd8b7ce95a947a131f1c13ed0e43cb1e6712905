@@ -22,6 +22,30 @@
       },
       "revId": "8fd8b7ce95a947a131f1c13ed0e43cb1e6712905",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a97eb0f2_fe8f1fd3",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T15:06:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0442059e_cc6c98fa",
+      "range": {
+        "startLine": 101,
+        "startChar": 20,
+        "endLine": 101,
+        "endChar": 32
+      },
+      "revId": "8fd8b7ce95a947a131f1c13ed0e43cb1e6712905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
