@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "beabc76c_040666b0",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-03T20:37:01Z",
+      "side": 1,
+      "message": "Changed this, see other comment.",
+      "parentUuid": "d62d9ac7_e4cf058c",
+      "revId": "1300f393455f7867b81693320fb885bd0b187b94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43ab4487_ab0c6508",
@@ -31,6 +49,42 @@
       "writtenOn": "2023-05-03T17:48:17Z",
       "side": 1,
       "message": "This seems wrong, why are you assigning ownership of the function to the builder? The function will get cleaned up which seems surprising?",
+      "revId": "1300f393455f7867b81693320fb885bd0b187b94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "887d67dc_68d3d64f",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-03T20:37:01Z",
+      "side": 1,
+      "message": "Yeah, the existing",
+      "parentUuid": "43ab4487_ab0c6508",
+      "revId": "1300f393455f7867b81693320fb885bd0b187b94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b77a2e8_1058af83",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-03T20:37:01Z",
+      "side": 1,
+      "message": "The builder owns the function while it is building it, and then hands the fully built function to the module when function emission completes.\n\nI agree that the unique_ptr was really awkward though. Part of the awkwardness here comes from the fact that the unit tests use `push_function` directly instead of emitting an actual AST function. I\u0027ve renamed this method to make it clearer that this is now just used for testing. I\u0027ve also switched to just a non-ptr `Function` for the current function. Hopefully that\u0027s less terrible. LMK.",
+      "parentUuid": "43ab4487_ab0c6508",
       "revId": "1300f393455f7867b81693320fb885bd0b187b94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
