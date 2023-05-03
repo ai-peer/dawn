@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f254749_7595348f",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T17:23:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5cacbaef_a865cd0a",
+      "range": {
+        "startLine": 351,
+        "startChar": 14,
+        "endLine": 351,
+        "endChar": 56
+      },
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44370cbd_749be782",
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "it should contain the HLSL at [1] ?\n\nCompiledShader contains two things: the hlslSource, and the FXC/DXC-produced shaderBlob\n\nalthough I suppose I should check that hlslSource is non-empty before printing that one.",
       "parentUuid": "44370cbd_749be782",
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb56f42_92bcb05e",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-03T17:23:56Z",
+      "side": 1,
+      "message": "Ah, you\u0027re right. Okay, keep as is then. One nit: hoist out `const Blob\u0026 shaderBlob \u003d compiledShader.shaderBlob;`",
+      "parentUuid": "93fb27c6_a63ec844",
       "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
