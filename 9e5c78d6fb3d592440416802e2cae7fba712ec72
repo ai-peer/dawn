@@ -16,6 +16,24 @@
       "message": "I\u0027m wondering if there\u0027s a better place for the return type in the disassembly. This is where I\u0027d expect the parameters to be, and that might be a little confusing.\n\nMaybe `func f32 my_func(param1, param2)`? Or maybe after the closing `)` so that\u0027s it\u0027s next to the return attributes?",
       "revId": "9e5c78d6fb3d592440416802e2cae7fba712ec72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501e601e_a7059012",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1997,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T19:53:56Z",
+      "side": 1,
+      "message": "I could do it wgsl style and do:\n\n```\nfunc my_func() -\u003e f32\n```\n\n?  I did it with the `(f32)` for consistency with other places I emitted types but your right it read weird here and we\u0027d probably end up with:\n\n```\nfunc myfunc(param1: f32)(f32)\n```\n\nwhich is also weird, heh.",
+      "parentUuid": "e8c01a71_f6706275",
+      "revId": "9e5c78d6fb3d592440416802e2cae7fba712ec72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
