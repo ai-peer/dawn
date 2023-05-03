@@ -78,6 +78,57 @@ void SuggestAlternatives(std::string_view got,
                          utils::StringStream& ss,
                          std::string_view prefix = "");
 
+/// @param str the input string
+/// @param pred the predicate function
+/// @return @p str with characters passing the predicate function @p pred removed from the start of
+/// the string.
+template <typename PREDICATE>
+std::string_view TrimLeft(std::string_view str, PREDICATE&& pred) {
+    while (!str.empty() && pred(str.front())) {
+        str = str.substr(1);
+    }
+    return str;
+}
+
+/// @param str the input string
+/// @param pred the predicate function
+/// @return @p str with characters passing the predicate function @p pred removed from the end of
+/// the string.
+template <typename PREDICATE>
+std::string_view TrimRight(std::string_view str, PREDICATE&& pred) {
+    while (!str.empty() && pred(str.back())) {
+        str = str.substr(0, str.length() - 1);
+    }
+    return str;
+}
+
+/// @param str the input string
+/// @param pred the predicate function
+/// @return @p str with characters passing the predicate function @p pred removed from the start and
+/// end of the string.
+template <typename PREDICATE>
+std::string_view Trim(std::string_view str, PREDICATE&& pred) {
+    return TrimLeft(TrimRight(str, pred), pred);
+}
+
+/// @param c the character to test
+/// @returns true if @p c is one of the following:
+/// * space (' ')
+/// * form feed ('\f')
+/// * line feed ('\n')
+/// * carriage return ('\r')
+/// * horizontal tab ('\t')
+/// * vertical tab ('\v')
+inline bool IsSpace(char c) {
+    return c == ' ' || c == '\f' || c == '\n' || c == '\r' || c == '\t' || c == '\v';
+}
+
+/// @param str the input string
+/// @return @p str with all whitespace (' ') removed from the start and end of the string.
+inline std::string_view TrimSpace(std::string_view str) {
+    return Trim(str, IsSpace);
+}
+
 }  // namespace tint::utils
 
 #endif  // SRC_TINT_UTILS_STRING_H_

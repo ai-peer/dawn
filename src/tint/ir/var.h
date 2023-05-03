@@ -18,6 +18,7 @@
 #include "src/tint/builtin/access.h"
 #include "src/tint/builtin/address_space.h"
 #include "src/tint/ir/instruction.h"
+#include "src/tint/symbol.h"
 #include "src/tint/utils/castable.h"
 
 namespace tint::ir {
@@ -25,6 +26,12 @@ namespace tint::ir {
 /// An instruction in the IR.
 class Var : public utils::Castable<Var, Instruction> {
   public:
+    /// Optional metadata for the variable
+    struct Metadata {
+        /// The authored name of the variable
+        Symbol name;
+    };
+
     /// Constructor
     /// @param type the type of the var
     /// @param address_space the address space of the var
