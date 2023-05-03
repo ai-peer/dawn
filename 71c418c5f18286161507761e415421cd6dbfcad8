@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ac834f_6129937e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-03T14:33:11Z",
+      "side": 1,
+      "message": "Hey Austin and Corentin,\n\nThis is a sketch of Dawn-side compat mode as built on top of the new AdapterBase wrapper. An enum defines the two versions (compat and full-fat). AdapterBase takes a version on construction and stores it. Each PhysicalDevice reports whether it supports a given version (OpenGL only supports compat; all others support both). For each PhysicalDevice returned by the backend, InstanceBase queries which versions it supports, and creates AdapterBases for each supported version. RequestAdapterOptions contains a bool whether we want compat mode, in which case only Adapter[Bases] of the Compat version are returned.\n\nConsider this a starting point for discussion. 😊",
+      "revId": "71c418c5f18286161507761e415421cd6dbfcad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
