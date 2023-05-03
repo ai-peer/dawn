@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "669eda2c_fd0c0b15",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 49
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b2f0d31_8e92c703",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad919b2c_ff8b74d3",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-04-11T12:04:46Z",
       "side": 1,
       "message": "nit: skip_serialize",
+      "range": {
+        "startLine": 629,
+        "startChar": 6,
+        "endLine": 629,
+        "endChar": 21
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57dff4e2_5a06e5ee",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 49
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ad919b2c_ff8b74d3",
       "range": {
         "startLine": 629,
         "startChar": 6,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79c05ea_ae2a2ae4",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 49
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Good call!",
+      "parentUuid": "8372c778_2614450e",
+      "range": {
+        "startLine": 633,
+        "startChar": 4,
+        "endLine": 633,
+        "endChar": 19
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e17c629_c99d3d74",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-04-11T12:04:46Z",
       "side": 1,
       "message": "Isn\u0027t this just `\u0027\u0027.join([name.concatcase().lower() for name in names])`?",
+      "range": {
+        "startLine": 689,
+        "startChar": 11,
+        "endLine": 690,
+        "endChar": 58
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f00b36a_f25b0c28",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 49
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "ack, I originally had this as name[0].camelCase()",
+      "parentUuid": "2e17c629_c99d3d74",
       "range": {
         "startLine": 689,
         "startChar": 11,
@@ -127,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "316e47ac_f04bd113",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "53bd01ed_2010ee55",
+      "range": {
+        "startLine": 28,
+        "startChar": 72,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72449b94_155af3a3",
@@ -146,6 +260,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b26fdecb_a5f1fae3",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Thank you! I have been trying to think of a better way to do this for a while as I\u0027m relatively new to Jinja. I\u0027ll try this out.",
+      "parentUuid": "72449b94_155af3a3",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e873e2fb_0112d432",
         "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
         "patchSetId": 49
@@ -157,6 +289,30 @@
       "writtenOn": "2023-04-07T21:30:43Z",
       "side": 1,
       "message": "always \"main\" ?",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 10
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "211785a2_0ab10c6f",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "I\u0027m currently doing this because arbitrary strings don\u0027t lead to any new coverage in Dawn (currently), but having a valid entrypoint for compute pipeline execution leads to a lot of coverage.\n\nIn a future CL I will add \"entrypoint\" to the list of overrides and statically set it to \"main\". Once that is finished I\u0027ll change this to return the string passed from lib-protobuf-mutator.\n\nAdded a comment and a todo!",
+      "parentUuid": "e873e2fb_0112d432",
       "range": {
         "startLine": 92,
         "startChar": 4,
@@ -190,6 +346,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b0348a4_78534e19",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d5034ca0_6edce340",
+      "range": {
+        "startLine": 288,
+        "startChar": 12,
+        "endLine": 288,
+        "endChar": 46
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73ee7b37_1ab710dc",
@@ -213,6 +393,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6335d39_bae39473",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "73ee7b37_1ab710dc",
+      "range": {
+        "startLine": 297,
+        "startChar": 24,
+        "endLine": 297,
+        "endChar": 87
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb8be0c5_d5a6613d",
@@ -226,6 +430,30 @@
       "writtenOn": "2023-04-07T21:30:43Z",
       "side": 1,
       "message": "\"pointer\" not \"reference\"",
+      "range": {
+        "startLine": 311,
+        "startChar": 35,
+        "endLine": 311,
+        "endChar": 45
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40a8d60_bb070ce7",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bb8be0c5_d5a6613d",
       "range": {
         "startLine": 311,
         "startChar": 35,
@@ -272,6 +500,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8896ede_0d82b154",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Added a comment, hopefully that clears things up!",
+      "parentUuid": "b7d6281f_09dd180a",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2ed2be8_d3c98c60",
         "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
         "patchSetId": 49
@@ -295,6 +541,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79e073f1_e5e03efc",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "I think the comment added in DawnLPMObjectStore.cpp explains why this is probably not possible. This ObjectStore is made specifically for efficient fuzzing and effective libfuzzer minimization.",
+      "parentUuid": "d2ed2be8_d3c98c60",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c468cf96_d32df8d8",
         "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
         "patchSetId": 49
@@ -306,6 +576,24 @@
       "writtenOn": "2023-04-11T12:04:46Z",
       "side": 1,
       "message": "nit: there is no object called `binding` so this seems unused?",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c3201b_3fe702c3",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
+        "patchSetId": 49
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-03T03:25:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c468cf96_d32df8d8",
       "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
