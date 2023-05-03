@@ -118,6 +118,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5906cfa9_07fce12f",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-03T19:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb56f42_92bcb05e",
+      "revId": "f8e2cd2ebe1c5d9d729344650398aec0eb592fdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85973076_cba74a9d",
