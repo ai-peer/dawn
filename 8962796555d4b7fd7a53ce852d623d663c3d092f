@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a483d2_20334783",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T13:38:18Z",
+      "side": 1,
+      "message": "This needs to be in `libtint_ir_builder_src` otherwise you don\u0027t have access to AST and SEM.",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5afd4dc5_37c78dfd",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T13:38:18Z",
+      "side": 1,
+      "message": "FYI, when it lands, you\u0027ll also need to process the `RootBlock` just before this loop.",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecaada14_a4777c3a",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T13:38:18Z",
+      "side": 1,
+      "message": "Before processing the `Block` you probably want to check:\n\n```\nif (block-\u003eIsDead()) {\n   return \u003csomethign\u003e;\n}\n```\n\nA block is dead if it doesn\u0027t branch anywhere, meaning there is no way out of the block.",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46200171_293c3c6c",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T13:38:18Z",
+      "side": 1,
+      "message": "You can either check before the switch, or before calling, but:\n\n```\nif (!node-\u003eIsConnected()) {\n   return;\n```\n\nA node is not connected if there is no path _into_ the node. So, an `if-\u003emerge` where both the `true` and `false` branches do a `return` is a disconnected node.",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54dfb59c_19b204da",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T13:38:18Z",
+      "side": 1,
+      "message": "Need to emit the `i-\u003emerge` block as well",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51cb715a_ba5a8658",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T13:38:18Z",
+      "side": 1,
+      "message": "nit: Maybe call this one `Branch` as it works on the Branches, not the blocks. Was confused reading as I thought line 49 was calling 55, but it\u0027s calling here.",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f25ffc_d6a77475",
+        "filename": "src/tint/utils/string.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T13:38:18Z",
+      "side": 1,
+      "message": "Should we also match \\u200e and \\u200f for the L2R and R2L marks that WGSL matches?",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
