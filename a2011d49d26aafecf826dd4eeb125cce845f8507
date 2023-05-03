@@ -22,6 +22,30 @@
       },
       "revId": "a2011d49d26aafecf826dd4eeb125cce845f8507",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df583bf7_42fa02b3",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-03T14:28:34Z",
+      "side": 1,
+      "message": "Switched to using `TINT_DEFER(scopes_.Pop())` this matches how we use the scope stack in the dependency_graph and uniformity.",
+      "parentUuid": "8752ee66_090a5fd1",
+      "range": {
+        "startLine": 217,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 23
+      },
+      "revId": "a2011d49d26aafecf826dd4eeb125cce845f8507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
