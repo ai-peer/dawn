@@ -57,7 +57,7 @@ class SpirvReduceMutator : public Mutator {
 
     Result Mutate() override;
     std::vector<uint32_t> GetBinary() const override;
-    void LogErrors(const std::string* path, uint32_t count) const override;
+    void LogErrors(std::string_view path, uint32_t count) const override;
     std::string GetErrors() const override;
 
   private:

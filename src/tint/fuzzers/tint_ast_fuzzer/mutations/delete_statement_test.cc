@@ -16,6 +16,7 @@
 
 #include <functional>
 #include <string>
+#include <utility>
 
 #include "gtest/gtest.h"
 
@@ -36,13 +37,13 @@ namespace tint::fuzzers::ast_fuzzer {
 namespace {
 
 void CheckStatementDeletionWorks(
-    const std::string& original,
-    const std::string& expected,
+    std::string original,
+    std::string expected,
     const std::function<const ast::Statement*(const Program&)>& statement_finder) {
-    Source::File original_file("original.wgsl", original);
+    Source::File original_file("original.wgsl", std::move(original));
     auto program = reader::wgsl::Parse(&original_file);
 
-    Source::File expected_file("expected.wgsl", expected);
+    Source::File expected_file("expected.wgsl", std::move(expected));
     auto expected_program = reader::wgsl::Parse(&expected_file);
 
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
@@ -65,9 +66,9 @@ void CheckStatementDeletionWorks(
 }
 
 void CheckStatementDeletionNotAllowed(
-    const std::string& original,
+    std::string original,
     const std::function<const ast::Statement*(const Program&)>& statement_finder) {
-    Source::File original_file("original.wgsl", original);
+    Source::File original_file("original.wgsl", std::move(original));
     auto program = reader::wgsl::Parse(&original_file);
 
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();

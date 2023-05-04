@@ -861,7 +861,7 @@ void FunctionEmitter::PushNewStatementBlock(const Construct* construct,
     statements_stack_.Push(StatementBlock{construct, end_id, action});
 }
 
-void FunctionEmitter::PushGuard(const std::string& guard_name, uint32_t end_id) {
+void FunctionEmitter::PushGuard(std::string_view guard_name, uint32_t end_id) {
     TINT_ASSERT(Reader, !statements_stack_.IsEmpty());
     TINT_ASSERT(Reader, !guard_name.empty());
     // Guard control flow by the guard variable.  Introduce a new

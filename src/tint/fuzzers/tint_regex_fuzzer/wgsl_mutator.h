@@ -38,7 +38,7 @@ class WgslMutator {
     /// @param delimiter - the delimiter that will be used to find enclosed regions.
     /// @param wgsl_code - the initial string (WGSL code) that will be mutated.
     /// @return true if a swap happened or false otherwise.
-    bool SwapRandomIntervals(const std::string& delimiter, std::string& wgsl_code);
+    bool SwapRandomIntervals(std::string_view delimiter, std::string& wgsl_code);
 
     /// A function that, given a WGSL-like string and a delimiter,
     /// generates another WGSL-like string by deleting a random
@@ -46,7 +46,7 @@ class WgslMutator {
     /// @param delimiter - the delimiter that will be used to find enclosed regions.
     /// @param wgsl_code - the initial string (WGSL code) that will be mutated.
     /// @return true if a deletion happened or false otherwise.
-    bool DeleteRandomInterval(const std::string& delimiter, std::string& wgsl_code);
+    bool DeleteRandomInterval(std::string_view delimiter, std::string& wgsl_code);
 
     /// A function that, given a WGSL-like string and a delimiter,
     /// generates another WGSL-like string by duplicating a random
@@ -54,7 +54,7 @@ class WgslMutator {
     /// @param delimiter - the delimiter that will be used to find enclosed regions.
     /// @param wgsl_code - the initial string (WGSL code) that will be mutated.
     /// @return true if a duplication happened or false otherwise.
-    bool DuplicateRandomInterval(const std::string& delimiter, std::string& wgsl_code);
+    bool DuplicateRandomInterval(std::string_view delimiter, std::string& wgsl_code);
 
     /// Replaces a randomly-chosen identifier in wgsl_code.
     /// @param wgsl_code - WGSL-like string where the replacement will occur.
@@ -124,7 +124,7 @@ class WgslMutator {
     /// @return the position of the closing bracket or 0 if there is no closing
     /// bracket.
     size_t FindClosingBracket(size_t opening_bracket_pos,
-                              const std::string& wgsl_code,
+                              std::string_view wgsl_code,
                               char opening_bracket_character,
                               char closing_bracket_character);
 
@@ -134,26 +134,26 @@ class WgslMutator {
     /// searched.
     /// @return a vector of pairs, where each pair provides the starting position of the function
     /// body, and the value true if and only if the function returns a value.
-    std::vector<std::pair<size_t, bool>> GetFunctionBodyPositions(const std::string& wgsl_code);
+    std::vector<std::pair<size_t, bool>> GetFunctionBodyPositions(std::string_view wgsl_code);
 
     /// Returns the starting position of the bodies of the loops identified by an appropriate
     /// regular expressions.
     /// @param wgsl_code - the WGSL-like string in which loops will be searched for.
     /// @return a vector with the starting position of the loop bodies in wgsl_code.
-    std::vector<size_t> GetLoopBodyPositions(const std::string& wgsl_code);
+    std::vector<size_t> GetLoopBodyPositions(std::string_view wgsl_code);
 
     /// A function that finds all the identifiers in a WGSL-like string.
     /// @param wgsl_code - the WGSL-like string where the identifiers will be found.
     /// @return a vector with the positions and the length of all the
     /// identifiers in wgsl_code.
-    std::vector<std::pair<size_t, size_t>> GetIdentifiers(const std::string& wgsl_code);
+    std::vector<std::pair<size_t, size_t>> GetIdentifiers(std::string_view wgsl_code);
 
     /// A function that finds the identifiers in a WGSL-like string that appear to be used as
     /// function names in function call expressions.
     /// @param wgsl_code - the WGSL-like string where the identifiers will be found.
     /// @return a vector with the positions and the length of all the
     /// identifiers in wgsl_code.
-    std::vector<std::pair<size_t, size_t>> GetFunctionCallIdentifiers(const std::string& wgsl_code);
+    std::vector<std::pair<size_t, size_t>> GetFunctionCallIdentifiers(std::string_view wgsl_code);
 
     /// A function that returns returns the starting position
     /// and the length of all the integer literals in a WGSL-like string.
@@ -161,7 +161,7 @@ class WgslMutator {
     /// will be found.
     /// @return a vector with the starting positions and the length
     /// of all the integer literals.
-    std::vector<std::pair<size_t, size_t>> GetIntLiterals(const std::string& wgsl_code);
+    std::vector<std::pair<size_t, size_t>> GetIntLiterals(std::string_view wgsl_code);
 
     /// Replaces a region of a WGSL-like string of length id2_len starting
     /// at position idx2 with a region of length id1_len starting at
@@ -203,19 +203,18 @@ class WgslMutator {
     /// @param start_index - the index at which search should start
     /// @return empty if no operator is found, otherwise a pair comprising the index at which the
     /// operator starts and the character length of the operator.
-    std::optional<std::pair<uint32_t, uint32_t>> FindOperatorOccurrence(
-        const std::string& wgsl_code,
-        uint32_t start_index);
+    std::optional<std::pair<uint32_t, uint32_t>> FindOperatorOccurrence(std::string_view wgsl_code,
+                                                                        uint32_t start_index);
 
     /// Finds all the swizzle operations in a WGSL-like string.
     /// @param wgsl_code - the WGSL-like string where the swizzles will be found.
     /// @return a vector with the positions and lengths of all the swizzles in wgsl_code.
-    std::vector<std::pair<size_t, size_t>> GetSwizzles(const std::string& wgsl_code);
+    std::vector<std::pair<size_t, size_t>> GetSwizzles(std::string_view wgsl_code);
 
     /// Finds all the vector initializers in a WGSL-like string.
     /// @param wgsl_code - the WGSL-like string where the vector initializers will be found.
     /// @return a vector with the positions and lengths of all the vector initializers in wgsl_code.
-    std::vector<std::pair<size_t, size_t>> GetVectorInitializers(const std::string& wgsl_code);
+    std::vector<std::pair<size_t, size_t>> GetVectorInitializers(std::string_view wgsl_code);
 
   private:
     /// A function that given a delimiter, returns a vector that contains
@@ -223,8 +222,8 @@ class WgslMutator {
     /// @param delimiter - the delimiter of the enclosed region.
     /// @param wgsl_code - the initial string (WGSL code) that will be mutated.
     /// @return a vector with the positions of the delimiter in the WGSL code.
-    std::vector<size_t> FindDelimiterIndices(const std::string& delimiter,
-                                             const std::string& wgsl_code);
+    std::vector<size_t> FindDelimiterIndices(std::string_view delimiter,
+                                             std::string_view wgsl_code);
 
     /// Replaces an interval of length `length` starting at start_index
     /// with the `replacement_text`.
@@ -242,7 +241,7 @@ class WgslMutator {
     /// as = and +=), expression operators (such as + and ^) and increment operators (++ and --).
     /// @param existing_operator - the characters comprising some WGSL operator
     /// @return another WGSL operator falling into the same category.
-    std::string ChooseRandomReplacementForOperator(const std::string& existing_operator);
+    std::string ChooseRandomReplacementForOperator(std::string_view existing_operator);
 
     /// Yields a fixed set of commonly-used WGSL keywords. The regex fuzzer relies heavily on
     /// recognizing possible identifiers via regular expressions. There is a high chance that

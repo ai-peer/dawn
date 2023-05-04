@@ -238,7 +238,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         fuzzer.Run(reinterpret_cast<const uint8_t*>(wgsl.data()), wgsl.size());
         if (fuzzer.HasErrors()) {
             auto error = spv_to_wgsl.Diagnostics().str();
-            util::LogWgslError(error, data, size, wgsl, target.second, context->params.error_dir);
+            util::LogWgslError(error, data, size, std::string(wgsl), target.second,
+                               context->params.error_dir);
         }
     }
 

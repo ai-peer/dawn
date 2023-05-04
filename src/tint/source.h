@@ -19,6 +19,7 @@
 #include <string>
 #include <string_view>
 #include <tuple>
+#include <utility>
 #include <vector>
 
 #include "src/tint/utils/string_stream.h"
@@ -33,7 +34,7 @@ class Source {
       public:
         /// Constructs the FileContent with the given file content.
         /// @param data the file contents
-        explicit FileContent(const std::string& data);
+        explicit FileContent(std::string_view data);
 
         /// Copy constructor
         /// @param rhs the FileContent to copy
@@ -54,7 +55,7 @@ class Source {
         /// Constructs the File with the given file path and content.
         /// @param p the path for this file
         /// @param c the file contents
-        inline File(const std::string& p, const std::string& c) : path(p), content(c) {}
+        inline File(std::string p, std::string c) : path(std::move(p)), content(std::move(c)) {}
 
         /// Copy constructor
         File(const File&) = default;
