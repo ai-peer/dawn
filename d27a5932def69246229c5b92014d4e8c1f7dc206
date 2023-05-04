@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec03a219_7bef3bcf",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-04T21:28:19Z",
+      "side": 1,
+      "message": "Sure, I don\u0027t think we need it. I can do that as a follow-up CL.",
+      "parentUuid": "ae8cacfa_ac8d23a2",
+      "revId": "d27a5932def69246229c5b92014d4e8c1f7dc206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba0f4fb2_8b09b6ef",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-04T17:39:14Z",
       "side": 1,
       "message": "Same comment as other CL about dropping the `bool` return.",
+      "revId": "d27a5932def69246229c5b92014d4e8c1f7dc206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "221c4c75_0b779730",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-04T21:28:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba0f4fb2_8b09b6ef",
       "revId": "d27a5932def69246229c5b92014d4e8c1f7dc206",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
