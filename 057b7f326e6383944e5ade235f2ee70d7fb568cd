@@ -22,6 +22,30 @@
       },
       "revId": "057b7f326e6383944e5ade235f2ee70d7fb568cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8291dfa_30da175d",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-04T10:15:40Z",
+      "side": 1,
+      "message": "Agreed. The new IR-based generator has no such method. I didn\u0027t remove this one just to reduce churn, but it\u0027ll go away when we delete all of this code :-)",
+      "parentUuid": "5afae859_f012ae68",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 0
+      },
+      "revId": "057b7f326e6383944e5ade235f2ee70d7fb568cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
