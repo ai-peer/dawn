@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed526e03_2a36d10d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T17:34:02Z",
+      "side": 1,
+      "message": "LGTM. One nit and one comment.",
+      "revId": "63d89100675eb43c944c83170cb27d21323f08e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29fd747d_b8bb5884",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T17:34:02Z",
+      "side": 1,
+      "message": "We\u0027ve, slowly, been moving the writers away from returning `bool` everywhere. I\u0027d suggest dropping the return from `EmitFunction` and just continuing and then have the whole writer fail when it checks diagnostics.",
+      "revId": "63d89100675eb43c944c83170cb27d21323f08e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b0f2e16_106702c8",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T17:34:02Z",
+      "side": 1,
+      "message": "The branch _to_ the terminator contains an `args` entry which has the return value. So, when you emit the branch it would be an `OpReturn` with the right value.\n\n(Since you can have multiple returns from a function)",
+      "revId": "63d89100675eb43c944c83170cb27d21323f08e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
