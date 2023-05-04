@@ -89,6 +89,11 @@ class EncodingContext {
                 HandleError(DAWN_VALIDATION_ERROR(
                     "Command cannot be recorded while %s is locked and %s is currently open.",
                     mTopLevelEncoder, mCurrentEncoder));
+            } else if (mTopLevelEncoder == nullptr) {
+                // Note: mTopLevelEncoder == nullptr is used as a flag for if Finish() has been
+                // called.
+                HandleError(DAWN_VALIDATION_ERROR("Cannot record commands on a finished encoder %s",
+                                                  encoder));
             } else {
                 HandleError(DAWN_VALIDATION_ERROR("Recording in an error %s.", encoder));
             }

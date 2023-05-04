@@ -58,7 +58,7 @@ TEST_F(CommandBufferValidationTest, EndedMidRenderPass) {
         ASSERT_DEVICE_ERROR(
             encoder.Finish(),
             HasSubstr("Command buffer recording ended before [RenderPassEncoder] was ended."));
-        ASSERT_DEVICE_ERROR(pass.End(), HasSubstr("Recording in an error [RenderPassEncoder]."));
+        ASSERT_DEVICE_ERROR(pass.End(), HasSubstr("Cannot record commands on a finished encoder"));
     }
 }
 
@@ -89,7 +89,7 @@ TEST_F(CommandBufferValidationTest, EndedMidComputePass) {
         ASSERT_DEVICE_ERROR(
             encoder.Finish(),
             HasSubstr("Command buffer recording ended before [ComputePassEncoder] was ended."));
-        ASSERT_DEVICE_ERROR(pass.End(), HasSubstr("Recording in an error [ComputePassEncoder]."));
+        ASSERT_DEVICE_ERROR(pass.End(), HasSubstr("Cannot record commands on a finished encoder"));
     }
 }
 
@@ -223,7 +223,8 @@ TEST_F(CommandBufferValidationTest, CallsAfterASuccessfulFinish) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     encoder.Finish();
 
-    ASSERT_DEVICE_ERROR(encoder.CopyBufferToBuffer(copyBuffer, 0, copyBuffer, 0, 0));
+    ASSERT_DEVICE_ERROR(encoder.CopyBufferToBuffer(copyBuffer, 0, copyBuffer, 0, 0),
+                        HasSubstr("Cannot record commands on a finished encoder"));
 }
 
 // Test that encoding command after a failed finish produces an error
@@ -244,7 +245,8 @@ TEST_F(CommandBufferValidationTest, CallsAfterAFailedFinish) {
     encoder.CopyBufferToBuffer(buffer, 0, buffer, 0, 0);
     ASSERT_DEVICE_ERROR(encoder.Finish());
 
-    ASSERT_DEVICE_ERROR(encoder.CopyBufferToBuffer(copyBuffer, 0, copyBuffer, 0, 0));
+    ASSERT_DEVICE_ERROR(encoder.CopyBufferToBuffer(copyBuffer, 0, copyBuffer, 0, 0),
+                        HasSubstr("Cannot record commands on a finished encoder"));
 }
 
 // Test that passes which are de-referenced prior to ending still allow the correct errors to be
