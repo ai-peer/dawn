@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27f95302_a7ba4374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-04T17:39:50Z",
+      "side": 1,
+      "message": "Thanks guys. \"WebGPU\" removed, and renamed FeatureLevel.\n\nI like Core; renamed k1_0 -\u003e Core. (We might need to reconsider this for future hardware which might need a k2_0, but this is only internal so we can burn that bridge when we get to it.)\n\nAs to what\u0027s exposed in JS, on the Chrome side I\u0027m currently exposing a compatibilityMode bool. https://chromium-review.googlesource.com/c/chromium/src/+/4209473. Undoubtedly we\u0027ll need to discuss that in the group, but having a feature level there might be contentious. Anyway we can discuss that before we go to the group. It likely won\u0027t be 1:1 with what\u0027s in dawn.js anyway, since I doubt WebGPU will support gles20 or gles30.",
+      "parentUuid": "c9a3d21a_a5ffc437",
+      "revId": "71c418c5f18286161507761e415421cd6dbfcad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1542b4a_c6f19724",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 2

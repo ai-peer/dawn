@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5bda116_885b0c9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-04T17:39:50Z",
+      "side": 1,
+      "message": "PTAL. Thanks!",
+      "revId": "c876a1caf85b952cdb24db3ff96c8a53301d045b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee64bfab_2c3cda35",
@@ -18,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18e571a0_112077c7",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-04T17:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee64bfab_2c3cda35",
+      "revId": "c876a1caf85b952cdb24db3ff96c8a53301d045b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f5d262a_aca4c90c",
@@ -31,6 +66,30 @@
       "writtenOn": "2023-05-03T20:54:57Z",
       "side": 1,
       "message": "minor preference to make this pure virtual and copy-paste returning true in the various backends",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 62
+      },
+      "revId": "c876a1caf85b952cdb24db3ff96c8a53301d045b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4369a1_4b292f5f",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-04T17:39:50Z",
+      "side": 1,
+      "message": "Since it\u0027s a minor preference I\u0027ve left it as is for conciseness. Ask twice and I will obey. :)",
+      "parentUuid": "6f5d262a_aca4c90c",
       "range": {
         "startLine": 83,
         "startChar": 0,
