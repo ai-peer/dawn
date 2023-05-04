@@ -16,6 +16,23 @@
       "message": "Note, for some reason the `cl format` causes `src/dawn/tests/unittests/native/DeviceCreationTests.cpp` to become really strangely formatted? Not sure if it will let me submit it with the presubmit error / whether it will just end up getting messed up in someone else\u0027s change by accident. Should I add like a `// clang-format off`?",
       "revId": "b34344e7181c3297f9855d13e6bbd6b176efa6c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f7bd52_6ce2d4a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T12:03:36Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "b34344e7181c3297f9855d13e6bbd6b176efa6c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
