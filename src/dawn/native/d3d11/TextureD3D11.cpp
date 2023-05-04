@@ -426,8 +426,12 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
 
     ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
     const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(subresources.aspects).block;
-
+    uint32_t bytesPerRow = blockInfo.byteSize * size.width;
+    size_t dstFullSize = bytesPerRow == dstBytesPerRow && size.height == dstRowsPerImage
+                             ? dstBytesPerRow * dstRowsPerImage
+                             : 0u;
     if (GetDimension() == wgpu::TextureDimension::e2D) {
+        dstFullSize *= subresources.layerCount;
         for (uint32_t layer = 0; layer < subresources.layerCount; ++layer) {
             // Copy the staging texture to the buffer.
             // The Map() will block until the GPU is done with the texture.
@@ -438,16 +442,15 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
                                   "D3D11 map staging texture"));
 
             uint8_t* pSrcData = static_cast<uint8_t*>(mappedResource.pData);
-            uint32_t bytesPerRow = blockInfo.byteSize * size.width;
             uint64_t dstOffset = dstBytesPerRow * dstRowsPerImage * layer;
             if (dstBytesPerRow == bytesPerRow && mappedResource.RowPitch == bytesPerRow) {
                 // If there is no padding in the rows, we can upload the whole image
                 // in one read.
-                DAWN_TRY(callback(pSrcData, dstOffset, dstBytesPerRow * size.height));
+                DAWN_TRY(callback(pSrcData, dstOffset, dstBytesPerRow * size.height, dstFullSize));
             } else {
                 // Otherwise, we need to read each row separately.
                 for (uint32_t y = 0; y < size.height; ++y) {
-                    DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow));
+                    DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow, dstFullSize));
                     dstOffset += dstBytesPerRow;
                     pSrcData += mappedResource.RowPitch;
                 }
@@ -466,7 +469,7 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
         d3d11DeviceContext1->Map(GetD3D11Resource(), 0, D3D11_MAP_READ, 0, &mappedResource),
         "D3D11 map staging texture"));
 
-    uint32_t bytesPerRow = blockInfo.byteSize * size.width;
+    dstFullSize *= size.depthOrArrayLayers;
     for (uint32_t z = 0; z < size.depthOrArrayLayers; ++z) {
         uint64_t dstOffset = dstBytesPerRow * dstRowsPerImage * z;
         uint8_t* pSrcData =
@@ -474,11 +477,11 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
         if (dstBytesPerRow == bytesPerRow && mappedResource.RowPitch == bytesPerRow) {
             // If there is no padding in the rows, we can upload the whole image
             // in one read.
-            DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow * size.height));
+            DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow * size.height, dstFullSize));
         } else {
             // Otherwise, we need to read each row separately.
             for (uint32_t y = 0; y < size.height; ++y) {
-                DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow));
+                DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow, dstFullSize));
                 dstOffset += dstBytesPerRow;
                 pSrcData += mappedResource.RowPitch;
             }
