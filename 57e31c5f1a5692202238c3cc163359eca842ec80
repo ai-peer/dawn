@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5171931_19395510",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "ComputeStorageBufferBarrierTests.*PingPong tests trigger the problem. If I add new tests, they will be similar to pingpong test.\n\nAnd I think I can add tests in a follow up CL. I am not familiar to compute shader right, i need to learn how to write compute shader to use multiple bind groups.",
+      "parentUuid": "1bb5d613_c8901f6e",
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed49f5ad_b4461ead",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 3
@@ -48,6 +66,30 @@
       "writtenOn": "2023-05-03T23:24:30Z",
       "side": 1,
       "message": "I believe we only need to look at mDirtyBindGroups, not mDirtyBindGroupsObjectChangedOrIsDynamic.\nmDirtyBindGroupsObjectChangedOrIsDynamic includes when the same bind group is bound, at a different offset. In this scenario, we shouldn\u0027t need to unbind to resolve a read-write resource conflict. Dynamic offsets mean we will re-bind the same resource to the same slot, at different offset.",
+      "range": {
+        "startLine": 95,
+        "startChar": 46,
+        "endLine": 95,
+        "endChar": 86
+      },
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7dc0a97_0db26ec6",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed49f5ad_b4461ead",
       "range": {
         "startLine": 95,
         "startChar": 46,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24eb6f6_10a0a58d",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "No. If one resource was bind as input resource, and then bind it again as UAV will fail too.",
+      "parentUuid": "97f3a20d_7387a4a7",
+      "range": {
+        "startLine": 99,
+        "startChar": 47,
+        "endLine": 100,
+        "endChar": 14
+      },
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddcd1a29_7543ec86",
@@ -94,6 +160,24 @@
       "writtenOn": "2023-05-03T23:24:30Z",
       "side": 1,
       "message": "an alternative might be to track the previously bound bind groups, and then only unbind the previous bind groups based on mDirtyBindGroups\n\nin this world, we may not need the PipelineLayout::PreStageSlots bitsets and can instead have an UnbindBindGroup call which effectively does the same thing as ApplyBindGroup but unbinds the resources.\n\nI think if we did that, we wouldn\u0027t need to accumulate into mUsedSlots. Instead, at the end of the tracker scope, we can unbind everything in `mPreviousBindGroups` - which should be fewer slots?",
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7437c33e_4d121495",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddcd1a29_7543ec86",
       "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d154fc_de3d66e2",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "632ea727_87bb3473",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 61
+      },
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f36841d_192aa5f8",
@@ -134,6 +242,24 @@
       "writtenOn": "2023-05-03T23:24:30Z",
       "side": 1,
       "message": "this could use a comment about why the 16 is OK.\n\nIt\u0027s because WebGPU\u0027s base minUniformBufferOffsetAlignment is 256, and then we pad uniform buffer allocations to be big enough",
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4735c0ab_91947593",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f36841d_192aa5f8",
       "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +281,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e29eac_f52757cd",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "I see.",
+      "parentUuid": "cb8b15d2_69154fb3",
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03627b14_ed6e88d6",
@@ -168,6 +312,30 @@
       "writtenOn": "2023-05-03T23:24:30Z",
       "side": 1,
       "message": "nit: maybe \"ScopedRenderPassState\"\n\nthis change could be separable since it\u0027s simpler and mostly moving code.\n\nthat said do we get the same functionality by putting `d3d11DeviceContext1-\u003eOMSetRenderTargets(0, nullptr, nullptr);` inside the block for Command::EndRenderPass ?\n\nThis may be the simpler solution unless RenderPassHelper will gain other functionality",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 22
+      },
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1978ebd_b3aaa68f",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "More cleanup could be added later. For example: cleanup blandState, shaders, etc",
+      "parentUuid": "03627b14_ed6e88d6",
       "range": {
         "startLine": 53,
         "startChar": 6,
@@ -201,6 +369,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c3df492_b2017232",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9262db31_2f96d8a3",
+      "range": {
+        "startLine": 50,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cd8eb4e_cf606567",
@@ -214,6 +406,30 @@
       "writtenOn": "2023-05-03T23:24:30Z",
       "side": 1,
       "message": "typo: \"PerStageSlots\"",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2731b81b_dd182e4c",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cd8eb4e_cf606567",
       "range": {
         "startLine": 64,
         "startChar": 11,
