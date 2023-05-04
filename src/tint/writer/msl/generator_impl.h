@@ -322,14 +322,14 @@ class GeneratorImpl : public TextGenerator {
     /// @returns true if the type is emitted
     bool EmitType(utils::StringStream& out,
                   const type::Type* type,
-                  const std::string& name,
+                  std::string_view name,
                   bool* name_printed = nullptr);
     /// Handles generating type and name
     /// @param out the output stream
     /// @param type the type to generate
     /// @param name the name to emit
     /// @returns true if the type is emitted
-    bool EmitTypeAndName(utils::StringStream& out, const type::Type* type, const std::string& name);
+    bool EmitTypeAndName(utils::StringStream& out, const type::Type* type, std::string_view name);
     /// Handles generating a address space
     /// @param out the output of the type stream
     /// @param sc the address space to generate
@@ -405,7 +405,7 @@ class GeneratorImpl : public TextGenerator {
 
     /// @returns the name of the templated tint_array helper type, generating it if this is the
     /// first call.
-    const std::string& ArrayType();
+    std::string_view ArrayType();
 
     TextBuffer helpers_;  // Helper functions emitted at the top of the output
 

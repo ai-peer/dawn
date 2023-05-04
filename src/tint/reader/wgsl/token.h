@@ -230,7 +230,7 @@ class Token {
     /// @param type the Token::Type of the token
     /// @param source the source of the token
     /// @param str the source string for the token
-    Token(Type type, const Source& source, const std::string& str);
+    Token(Type type, const Source& source, std::string str);
     /// Create a string Token
     /// @param type the Token::Type of the token
     /// @param source the source of the token
