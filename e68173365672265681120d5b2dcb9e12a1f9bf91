@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2044b08f_49ea95ba",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T14:11:23Z",
+      "side": 1,
+      "message": "nit: It is better to call `Buffer::ScopedMap::Create(buffer)` before `read()` and `DAWN_TRY(buffer-\u003eEnsureDataInitializedAsDestination(commandContext, copy));`, to avoid map and unmap the buffer for each `Write()` call.",
+      "range": {
+        "startLine": 388,
+        "startChar": 16,
+        "endLine": 388,
+        "endChar": 49
+      },
+      "revId": "e68173365672265681120d5b2dcb9e12a1f9bf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
