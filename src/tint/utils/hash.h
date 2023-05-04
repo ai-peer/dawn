@@ -18,6 +18,7 @@
 #include <stdint.h>
 #include <cstdio>
 #include <functional>
+#include <string>
 #include <tuple>
 #include <utility>
 #include <variant>
@@ -152,6 +153,29 @@ struct Hasher<std::variant<TYPES...>> {
     }
 };
 
+/// Hasher specialization for std::string, which also supports hashing of const char* and
+/// std::string_view without first constructing a std::string.
+template <>
+struct Hasher<std::string> {
+    /// @param str the string to hash
+    /// @returns a hash of the string
+    size_t operator()(const std::string& str) const {
+        return std::hash<std::string_view>()(std::string_view(str));
+    }
+
+    /// @param str the string to hash
+    /// @returns a hash of the string
+    size_t operator()(const char* str) const {
+        return std::hash<std::string_view>()(std::string_view(str));
+    }
+
+    /// @param str the string to hash
+    /// @returns a hash of the string
+    size_t operator()(const std::string_view& str) const {
+        return std::hash<std::string_view>()(str);
+    }
+};
+
 /// @returns a hash of the variadic list of arguments.
 ///          The returned hash is dependent on the order of the arguments.
 template <typename... ARGS>
@@ -175,6 +199,39 @@ size_t HashCombine(size_t hash, const ARGS&... values) {
     ((hash ^= Hash(values) + (offset ^ (hash >> 2))), ...);
     return hash;
 }
+
+/// A STL-compatible equal_to implementation that specializes for types.
+template <typename T>
+struct EqualTo {
+    /// @param lhs the left hand side value
+    /// @param rhs the right hand side value
+    /// @returns a hash of the value
+    constexpr bool operator()(const T& lhs, const T& rhs) const {
+        return std::equal_to<T>()(lhs, rhs);
+    }
+};
+
+/// A specialization for EqualTo for std::string, which supports additional comparision with
+/// std::string_view and const char*.
+template <>
+struct EqualTo<std::string> {
+    /// @param lhs the left hand side value
+    /// @param rhs the right hand side value
+    /// @returns a hash of the value
+    template <typename T>
+    constexpr bool operator()(const std::string& lhs, T&& rhs) const {
+        return lhs == std::forward<T>(rhs);
+    }
+
+    /// @param lhs the left hand side value
+    /// @param rhs the right hand side value
+    /// @returns a hash of the value
+    template <typename T,
+              typename = std::enable_if_t<!std::is_same_v<std::decay_t<T>, std::string>>>
+    constexpr bool operator()(T&& lhs, const std::string& rhs) const {
+        return std::forward<T>(lhs) == rhs;
+    }
+};
 
 /// Wrapper for a hashable type enabling the wrapped value to be used as a key
 /// for an unordered_map or unordered_set.

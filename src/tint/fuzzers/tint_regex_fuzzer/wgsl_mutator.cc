@@ -29,8 +29,8 @@ namespace tint::fuzzers::regex_fuzzer {
 
 WgslMutator::WgslMutator(RandomGenerator& generator) : generator_(generator) {}
 
-std::vector<size_t> WgslMutator::FindDelimiterIndices(const std::string& delimiter,
-                                                      const std::string& wgsl_code) {
+std::vector<size_t> WgslMutator::FindDelimiterIndices(std::string_view delimiter,
+                                                      std::string_view wgsl_code) {
     std::vector<size_t> result;
     for (size_t pos = wgsl_code.find(delimiter, 0); pos != std::string::npos;
          pos = wgsl_code.find(delimiter, pos + 1)) {
@@ -46,7 +46,7 @@ std::unordered_set<std::string> WgslMutator::GetCommonKeywords() {
             "struct", "u32",  "var",   "vec2",    "vec3",     "vec4", "vertex", "while"};
 }
 
-std::vector<std::pair<size_t, size_t>> WgslMutator::GetIdentifiers(const std::string& wgsl_code) {
+std::vector<std::pair<size_t, size_t>> WgslMutator::GetIdentifiers(std::string_view wgsl_code) {
     std::vector<std::pair<size_t, size_t>> result;
 
     // To reduce the rate that invalid programs are produced, common keywords will be excluded from
@@ -76,7 +76,7 @@ std::vector<std::pair<size_t, size_t>> WgslMutator::GetIdentifiers(const std::st
 }
 
 std::vector<std::pair<size_t, size_t>> WgslMutator::GetFunctionCallIdentifiers(
-    const std::string& wgsl_code) {
+    std::string_view wgsl_code) {
     std::vector<std::pair<size_t, size_t>> result;
 
     std::regex call_regex("([_a-zA-Z][0-9a-zA-Z_]*)[ \\n]*\\(");
@@ -92,7 +92,7 @@ std::vector<std::pair<size_t, size_t>> WgslMutator::GetFunctionCallIdentifiers(
     return result;
 }
 
-std::vector<std::pair<size_t, size_t>> WgslMutator::GetIntLiterals(const std::string& s) {
+std::vector<std::pair<size_t, size_t>> WgslMutator::GetIntLiterals(std::string_view s) {
     std::vector<std::pair<size_t, size_t>> result;
 
     // Looks for integer literals in decimal or hexadecimal form.
@@ -115,7 +115,7 @@ std::vector<std::pair<size_t, size_t>> WgslMutator::GetIntLiterals(const std::st
 }
 
 size_t WgslMutator::FindClosingBracket(size_t opening_bracket_pos,
-                                       const std::string& wgsl_code,
+                                       std::string_view wgsl_code,
                                        char opening_bracket_character,
                                        char closing_bracket_character) {
     size_t open_bracket_count = 1;
@@ -132,7 +132,7 @@ size_t WgslMutator::FindClosingBracket(size_t opening_bracket_pos,
 }
 
 std::vector<std::pair<size_t, bool>> WgslMutator::GetFunctionBodyPositions(
-    const std::string& wgsl_code) {
+    std::string_view wgsl_code) {
     // Finds all the functions with a non-void return value.
     std::regex function_regex("fn[^a-zA-Z_0-9][^\\{]*\\{");
     std::vector<std::pair<size_t, bool>> result;
@@ -148,7 +148,7 @@ std::vector<std::pair<size_t, bool>> WgslMutator::GetFunctionBodyPositions(
     return result;
 }
 
-std::vector<size_t> WgslMutator::GetLoopBodyPositions(const std::string& wgsl_code) {
+std::vector<size_t> WgslMutator::GetLoopBodyPositions(std::string_view wgsl_code) {
     // Finds all loops.
     std::regex loop_regex("[^a-zA-Z_0-9](for|while|loop)[^\\{]*\\{");
     std::vector<size_t> result;
@@ -292,7 +292,7 @@ void WgslMutator::ReplaceInterval(size_t start_index,
     wgsl_code.replace(start_index, length, replacement_text);
 }
 
-bool WgslMutator::SwapRandomIntervals(const std::string& delimiter, std::string& wgsl_code) {
+bool WgslMutator::SwapRandomIntervals(std::string_view delimiter, std::string& wgsl_code) {
     std::vector<size_t> delimiter_positions = FindDelimiterIndices(delimiter, wgsl_code);
 
     // Need to have at least 3 indices.
@@ -320,7 +320,7 @@ bool WgslMutator::SwapRandomIntervals(const std::string& delimiter, std::string&
     return true;
 }
 
-bool WgslMutator::DeleteRandomInterval(const std::string& delimiter, std::string& wgsl_code) {
+bool WgslMutator::DeleteRandomInterval(std::string_view delimiter, std::string& wgsl_code) {
     std::vector<size_t> delimiter_positions = FindDelimiterIndices(delimiter, wgsl_code);
 
     // Need to have at least 2 indices.
@@ -340,7 +340,7 @@ bool WgslMutator::DeleteRandomInterval(const std::string& delimiter, std::string
     return true;
 }
 
-bool WgslMutator::DuplicateRandomInterval(const std::string& delimiter, std::string& wgsl_code) {
+bool WgslMutator::DuplicateRandomInterval(std::string_view delimiter, std::string& wgsl_code) {
     std::vector<size_t> delimiter_positions = FindDelimiterIndices(delimiter, wgsl_code);
 
     // Need to have at least 2 indices
@@ -406,7 +406,7 @@ bool WgslMutator::ReplaceRandomIntLiteral(std::string& wgsl_code) {
     return true;
 }
 
-std::string WgslMutator::ChooseRandomReplacementForOperator(const std::string& existing_operator) {
+std::string WgslMutator::ChooseRandomReplacementForOperator(std::string_view existing_operator) {
     // Operators are partitioned into three classes: assignment, expression and increment. The regex
     // mutator will swap operators in the same class. The hypothesis is that this should exercise a
     // number of type-safe swaps (e.g. changing += to *=), as well as some badly-typed yet
@@ -450,7 +450,7 @@ bool WgslMutator::ReplaceRandomOperator(std::string& wgsl_code) {
 }
 
 std::optional<std::pair<uint32_t, uint32_t>> WgslMutator::FindOperatorOccurrence(
-    const std::string& wgsl_code,
+    std::string_view wgsl_code,
     uint32_t start_index) {
     // Loops through the characters of the code in a wrap-around fashion, looking for the first
     // encountered token that is a WGSL operator.
@@ -745,7 +745,7 @@ bool WgslMutator::AddSwizzle(std::string& wgsl_code) {
     return true;
 }
 
-std::vector<std::pair<size_t, size_t>> WgslMutator::GetSwizzles(const std::string& wgsl_code) {
+std::vector<std::pair<size_t, size_t>> WgslMutator::GetSwizzles(std::string_view wgsl_code) {
     std::regex swizzle_regex("\\.(([xyzw]+)|([rgba]+))");
     std::vector<std::pair<size_t, size_t>> result;
 
@@ -760,7 +760,7 @@ std::vector<std::pair<size_t, size_t>> WgslMutator::GetSwizzles(const std::strin
 }
 
 std::vector<std::pair<size_t, size_t>> WgslMutator::GetVectorInitializers(
-    const std::string& wgsl_code) {
+    std::string_view wgsl_code) {
     // This regex recognises the prefixes of vector initializers, which have the form:
     // "vecn<type>(", with possible whitespace between tokens.
     std::regex vector_initializer_prefix_regex("vec\\d[ \\n]*<[ \\n]*[a-z0-9_]+[ \\n]*>[^\\(]*\\(");

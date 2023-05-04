@@ -757,7 +757,7 @@ bool ParserImpl::RegisterUserAndStructMemberNames() {
     return true;
 }
 
-bool ParserImpl::IsValidIdentifier(const std::string& str) {
+bool ParserImpl::IsValidIdentifier(std::string_view str) {
     if (str.empty()) {
         return false;
     }

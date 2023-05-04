@@ -1159,8 +1159,8 @@ struct DirectVariableAccess::State {
 
     /// @returns a new Symbol starting with @p symbol concatenated with @p suffix, and possibly an
     /// underscore and number, if the symbol is already taken.
-    Symbol UniqueSymbolWithSuffix(Symbol symbol, const std::string& suffix) {
-        auto str = symbol.Name() + suffix;
+    Symbol UniqueSymbolWithSuffix(Symbol symbol, std::string_view suffix) {
+        auto str = symbol.Name() + std::string(suffix);
         return unique_symbols.GetOrCreate(str, [&] { return b.Symbols().New(str); });
     }
 

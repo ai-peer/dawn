@@ -21,7 +21,7 @@ namespace tint::utils {
 
 namespace {
 
-std::string TmpFilePath(const std::string& ext) {
+std::string TmpFilePath(std::string_view ext) {
     char name[L_tmpnam];
     // As we're adding an extension, to ensure the file is really unique, try
     // creating it, failing if it already exists.
