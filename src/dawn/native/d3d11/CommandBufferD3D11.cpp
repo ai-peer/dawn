@@ -207,6 +207,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                 }
 
                 case BindingInfoType::StorageTexture: {
+                    // TODO(dawn: 1798): Support storage textures.
                     return DAWN_UNIMPLEMENTED_ERROR("Storage textures are not supported");
                 }
 
@@ -220,6 +221,23 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
 
     std::vector<UINT> mUnorderedAccessViews;
 };
+
+void DoSetVertexBufferCmd(SetVertexBufferCmd* cmd,
+                          RenderPipeline* pipeline,
+                          CommandRecordingContext* commandContext) {
+    ASSERT(cmd);
+    ASSERT(pipeline);
+    ASSERT(commandContext);
+    const VertexBufferInfo& info = pipeline->GetVertexBuffer(cmd->slot);
+
+    // TODO(dawn:1705): should we set vertex back to nullptr after the draw call?
+    UINT slot = static_cast<uint8_t>(cmd->slot);
+    ID3D11Buffer* buffer = ToBackend(cmd->buffer)->GetD3D11Buffer();
+    UINT arrayStride = info.arrayStride;
+    UINT offset = cmd->offset;
+    commandContext->GetD3D11DeviceContext()->IASetVertexBuffers(slot, 1, &buffer, &arrayStride,
+                                                                &offset);
+}
 
 }  // namespace
 
@@ -371,16 +389,19 @@ MaybeError CommandBuffer::Execute() {
 
                 Texture::ReadCallback callback;
                 if (scopedDstMap.GetMappedData()) {
-                    callback = [&](const uint8_t* data, uint64_t offset,
-                                   uint64_t size) -> MaybeError {
+                    callback = [&](const uint8_t* data, size_t offset, size_t size,
+                                   size_t full_size) -> MaybeError {
                         memcpy(scopedDstMap.GetMappedData() + dst.offset + offset, data, size);
                         return {};
                     };
                 } else {
-                    callback = [&](const uint8_t* data, uint64_t offset,
-                                   uint64_t size) -> MaybeError {
-                        DAWN_TRY(ToBackend(dst.buffer)
-                                     ->Write(commandContext, dst.offset + offset, data, size));
+                    callback = [&](const uint8_t* data, size_t offset, size_t size,
+                                   size_t full_size) -> MaybeError {
+                        // No need to clear the buffer if it's going to a full range buffer write.
+                        if (buffer->IsFullBufferRange(dst.offset, full_size)) {
+                            buffer->SetIsDataInitialized();
+                        }
+                        DAWN_TRY(buffer->Write(commandContext, dst.offset + offset, data, size));
                         return {};
                     };
                 }
@@ -612,6 +633,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     d3d11DeviceContext1->RSSetScissorRects(1, &scissor);
 
     RenderPipeline* lastPipeline = nullptr;
+    SetVertexBufferCmd* lastSetVertexBufferCmd = nullptr;
     BindGroupTracker bindGroupTracker = {};
     std::array<float, 4> blendColor = {0.0f, 0.0f, 0.0f, 0.0f};
     uint32_t stencilReference = 0;
@@ -679,6 +701,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 lastPipeline = ToBackend(cmd->pipeline.Get());
                 lastPipeline->ApplyNow(commandContext, blendColor, stencilReference);
                 bindGroupTracker.OnSetPipeline(lastPipeline);
+                if (lastSetVertexBufferCmd) {
+                    DoSetVertexBufferCmd(lastSetVertexBufferCmd, lastPipeline, commandContext);
+                    lastSetVertexBufferCmd = nullptr;
+                }
 
                 break;
             }
@@ -711,17 +737,12 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
 
             case Command::SetVertexBuffer: {
                 SetVertexBufferCmd* cmd = iter->NextCommand<SetVertexBufferCmd>();
-                ASSERT(lastPipeline);
-                const VertexBufferInfo& info = lastPipeline->GetVertexBuffer(cmd->slot);
-
-                // TODO(dawn:1705): should we set vertex back to nullptr after the draw call?
-                UINT slot = static_cast<uint8_t>(cmd->slot);
-                ID3D11Buffer* buffer = ToBackend(cmd->buffer)->GetD3D11Buffer();
-                UINT arrayStride = info.arrayStride;
-                UINT offset = cmd->offset;
-                commandContext->GetD3D11DeviceContext()->IASetVertexBuffers(slot, 1, &buffer,
-                                                                            &arrayStride, &offset);
-
+                // SetRenderPipeline may come thereafter.
+                if (lastPipeline) {
+                    DoSetVertexBufferCmd(cmd, lastPipeline, commandContext);
+                } else {
+                    lastSetVertexBufferCmd = cmd;
+                }
                 break;
             }
 
