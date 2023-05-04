@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae8cacfa_ac8d23a2",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T17:39:14Z",
+      "side": 1,
+      "message": "Should we remove the `entry_point` list from `ir::Module` as it doesn\u0027t seem like we need it?",
+      "revId": "d27a5932def69246229c5b92014d4e8c1f7dc206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba0f4fb2_8b09b6ef",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T17:39:14Z",
+      "side": 1,
+      "message": "Same comment as other CL about dropping the `bool` return.",
+      "revId": "d27a5932def69246229c5b92014d4e8c1f7dc206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
