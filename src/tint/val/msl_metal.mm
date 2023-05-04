@@ -24,7 +24,7 @@
 
 namespace tint::val {
 
-Result MslUsingMetalAPI(const std::string& src) {
+Result MslUsingMetalAPI(std::string_view src) {
     tint::val::Result result;
 
     NSError* error = nil;

@@ -1254,7 +1254,7 @@ class FunctionEmitter {
     /// statement block ending (and not including) the given block.
     /// @param flow_guard name of the flow guard variable
     /// @param end_id first block after the if construct.
-    void PushGuard(const std::string& flow_guard, uint32_t end_id);
+    void PushGuard(std::string_view flow_guard, uint32_t end_id);
 
     /// Emits an if-statement with 'true' condition, and pushes onto the
     /// statement stack the corresponding statement block ending (and not

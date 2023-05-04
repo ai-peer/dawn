@@ -147,13 +147,13 @@ std::string SpirvReduceMutator::GetErrors() const {
     return errors_.str();
 }
 
-void SpirvReduceMutator::LogErrors(const std::string* path, uint32_t count) const {
+void SpirvReduceMutator::LogErrors(std::string_view path, uint32_t count) const {
     auto message = GetErrors();
     std::cout << count << " | SpirvReduceMutator (seed: " << seed_ << ")" << std::endl;
     std::cout << message << std::endl;
 
-    if (path) {
-        auto prefix = *path + std::to_string(count);
+    if (!path.empty()) {
+        auto prefix = std::string(path) + std::to_string(count);
 
         // Write errors to file.
         std::ofstream(prefix + ".reducer.log") << "seed: " << seed_ << std::endl

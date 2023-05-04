@@ -228,7 +228,7 @@ EntryPoint Inspector::GetEntryPoint(const tint::ast::Function* func) {
     return entry_point;
 }
 
-EntryPoint Inspector::GetEntryPoint(const std::string& entry_point_name) {
+EntryPoint Inspector::GetEntryPoint(std::string_view entry_point_name) {
     auto* func = FindEntryPointByName(entry_point_name);
     if (!func) {
         return EntryPoint();
@@ -302,7 +302,7 @@ std::map<std::string, OverrideId> Inspector::GetNamedOverrideIds() {
     return result;
 }
 
-uint32_t Inspector::GetStorageSize(const std::string& entry_point) {
+uint32_t Inspector::GetStorageSize(std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return 0;
@@ -323,7 +323,7 @@ uint32_t Inspector::GetStorageSize(const std::string& entry_point) {
     return static_cast<uint32_t>(size);
 }
 
-std::vector<ResourceBinding> Inspector::GetResourceBindings(const std::string& entry_point) {
+std::vector<ResourceBinding> Inspector::GetResourceBindings(std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return {};
@@ -349,7 +349,7 @@ std::vector<ResourceBinding> Inspector::GetResourceBindings(const std::string& e
 }
 
 std::vector<ResourceBinding> Inspector::GetUniformBufferResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return {};
@@ -383,16 +383,16 @@ std::vector<ResourceBinding> Inspector::GetUniformBufferResourceBindings(
 }
 
 std::vector<ResourceBinding> Inspector::GetStorageBufferResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetStorageBufferResourceBindingsImpl(entry_point, false);
 }
 
 std::vector<ResourceBinding> Inspector::GetReadOnlyStorageBufferResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetStorageBufferResourceBindingsImpl(entry_point, true);
 }
 
-std::vector<ResourceBinding> Inspector::GetSamplerResourceBindings(const std::string& entry_point) {
+std::vector<ResourceBinding> Inspector::GetSamplerResourceBindings(std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return {};
@@ -416,7 +416,7 @@ std::vector<ResourceBinding> Inspector::GetSamplerResourceBindings(const std::st
 }
 
 std::vector<ResourceBinding> Inspector::GetComparisonSamplerResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return {};
@@ -440,22 +440,22 @@ std::vector<ResourceBinding> Inspector::GetComparisonSamplerResourceBindings(
 }
 
 std::vector<ResourceBinding> Inspector::GetSampledTextureResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetSampledTextureResourceBindingsImpl(entry_point, false);
 }
 
 std::vector<ResourceBinding> Inspector::GetMultisampledTextureResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetSampledTextureResourceBindingsImpl(entry_point, true);
 }
 
 std::vector<ResourceBinding> Inspector::GetWriteOnlyStorageTextureResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetStorageTextureResourceBindingsImpl(entry_point);
 }
 
 std::vector<ResourceBinding> Inspector::GetTextureResourceBindings(
-    const std::string& entry_point,
+    std::string_view entry_point,
     const tint::utils::TypeInfo* texture_type,
     ResourceBinding::ResourceType resource_type) {
     auto* func = FindEntryPointByName(entry_point);
@@ -484,26 +484,26 @@ std::vector<ResourceBinding> Inspector::GetTextureResourceBindings(
 }
 
 std::vector<ResourceBinding> Inspector::GetDepthTextureResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetTextureResourceBindings(entry_point, &utils::TypeInfo::Of<type::DepthTexture>(),
                                       ResourceBinding::ResourceType::kDepthTexture);
 }
 
 std::vector<ResourceBinding> Inspector::GetDepthMultisampledTextureResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetTextureResourceBindings(entry_point,
                                       &utils::TypeInfo::Of<type::DepthMultisampledTexture>(),
                                       ResourceBinding::ResourceType::kDepthMultisampledTexture);
 }
 
 std::vector<ResourceBinding> Inspector::GetExternalTextureResourceBindings(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     return GetTextureResourceBindings(entry_point, &utils::TypeInfo::Of<type::ExternalTexture>(),
                                       ResourceBinding::ResourceType::kExternalTexture);
 }
 
 utils::VectorRef<SamplerTexturePair> Inspector::GetSamplerTextureUses(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return {};
@@ -511,15 +511,14 @@ utils::VectorRef<SamplerTexturePair> Inspector::GetSamplerTextureUses(
 
     GenerateSamplerTargets();
 
-    auto it = sampler_targets_->find(entry_point);
-    if (it == sampler_targets_->end()) {
-        return {};
+    if (auto ref = sampler_targets_->Find(entry_point)) {
+        return *ref.Get();
     }
-    return it->second;
+    return {};
 }
 
 std::vector<SamplerTexturePair> Inspector::GetSamplerTextureUses(
-    const std::string& entry_point,
+    std::string_view entry_point,
     const sem::BindingPoint& placeholder) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
@@ -539,7 +538,7 @@ std::vector<SamplerTexturePair> Inspector::GetSamplerTextureUses(
     return new_pairs;
 }
 
-uint32_t Inspector::GetWorkgroupStorageSize(const std::string& entry_point) {
+uint32_t Inspector::GetWorkgroupStorageSize(std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return 0;
@@ -590,15 +589,16 @@ std::vector<std::pair<std::string, Source>> Inspector::GetEnableDirectives() {
     return result;
 }
 
-const ast::Function* Inspector::FindEntryPointByName(const std::string& name) {
+const ast::Function* Inspector::FindEntryPointByName(std::string_view name) {
     auto* func = program_->AST().Functions().Find(program_->Symbols().Get(name));
     if (!func) {
-        diagnostics_.add_error(diag::System::Inspector, name + " was not found!");
+        diagnostics_.add_error(diag::System::Inspector, std::string(name) + " was not found!");
         return nullptr;
     }
 
     if (!func->IsEntryPoint()) {
-        diagnostics_.add_error(diag::System::Inspector, name + " is not an entry point!");
+        diagnostics_.add_error(diag::System::Inspector,
+                               std::string(name) + " is not an entry point!");
         return nullptr;
     }
 
@@ -668,7 +668,7 @@ bool Inspector::ContainsBuiltin(builtin::BuiltinValue builtin,
 }
 
 std::vector<ResourceBinding> Inspector::GetStorageBufferResourceBindingsImpl(
-    const std::string& entry_point,
+    std::string_view entry_point,
     bool read_only) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
@@ -706,7 +706,7 @@ std::vector<ResourceBinding> Inspector::GetStorageBufferResourceBindingsImpl(
 }
 
 std::vector<ResourceBinding> Inspector::GetSampledTextureResourceBindingsImpl(
-    const std::string& entry_point,
+    std::string_view entry_point,
     bool multisampled_only) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
@@ -747,7 +747,7 @@ std::vector<ResourceBinding> Inspector::GetSampledTextureResourceBindingsImpl(
 }
 
 std::vector<ResourceBinding> Inspector::GetStorageTextureResourceBindingsImpl(
-    const std::string& entry_point) {
+    std::string_view entry_point) {
     auto* func = FindEntryPointByName(entry_point);
     if (!func) {
         return {};
@@ -780,14 +780,11 @@ std::vector<ResourceBinding> Inspector::GetStorageTextureResourceBindingsImpl(
 }
 
 void Inspector::GenerateSamplerTargets() {
-    // Do not re-generate, since |program_| should not change during the lifetime
-    // of the inspector.
-    if (sampler_targets_ != nullptr) {
+    if (sampler_targets_.has_value()) {
         return;
     }
 
-    sampler_targets_ = std::make_unique<
-        std::unordered_map<std::string, utils::UniqueVector<SamplerTexturePair, 4>>>();
+    sampler_targets_ = utils::Hashmap<std::string, utils::UniqueVector<SamplerTexturePair, 4>, 4>{};
 
     auto& sem = program_->Sem();
 
@@ -839,9 +836,9 @@ void Inspector::GenerateSamplerTargets() {
                                     auto sampler_binding_point = *globals[1]->BindingPoint();
 
                                     for (auto* entry_point : entry_points) {
-                                        const auto& ep_name =
+                                        auto ep_name =
                                             entry_point->Declaration()->name->symbol.Name();
-                                        (*sampler_targets_)[ep_name].Add(
+                                        sampler_targets_->GetOrZero(ep_name)->Add(
                                             {sampler_binding_point, texture_binding_point});
                                     }
                                 });

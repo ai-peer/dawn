@@ -124,8 +124,8 @@ BuilderImpl::BuilderImpl(const Program* program)
 
 BuilderImpl::~BuilderImpl() = default;
 
-void BuilderImpl::add_error(const Source& s, const std::string& err) {
-    diagnostics_.add_error(tint::diag::System::IR, err, s);
+void BuilderImpl::add_error(const Source& s, std::string err) {
+    diagnostics_.add_error(tint::diag::System::IR, std::move(err), s);
 }
 
 void BuilderImpl::BranchTo(FlowNode* node, utils::VectorRef<Value*> args) {

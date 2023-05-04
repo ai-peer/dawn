@@ -36,7 +36,7 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     using Base = HashmapBase<KEY, VALUE, N, HASH, EQUAL>;
     using PutMode = typename Base::PutMode;
 
-    template<typename T>
+    template <typename T>
     using ReferenceKeyType = traits::CharArrayToCharPtr<std::remove_reference_t<T>>;
 
   public:

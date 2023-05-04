@@ -3752,20 +3752,20 @@ ConstEval::Result ConstEval::Convert(const type::Type* target_ty,
     return ConvertInternal(value, builder, target_ty, source, use_runtime_semantics_);
 }
 
-void ConstEval::AddError(const std::string& msg, const Source& source) const {
+void ConstEval::AddError(std::string msg, const Source& source) const {
     if (use_runtime_semantics_) {
-        builder.Diagnostics().add_warning(diag::System::Resolver, msg, source);
+        builder.Diagnostics().add_warning(diag::System::Resolver, std::move(msg), source);
     } else {
-        builder.Diagnostics().add_error(diag::System::Resolver, msg, source);
+        builder.Diagnostics().add_error(diag::System::Resolver, std::move(msg), source);
     }
 }
 
-void ConstEval::AddWarning(const std::string& msg, const Source& source) const {
-    builder.Diagnostics().add_warning(diag::System::Resolver, msg, source);
+void ConstEval::AddWarning(std::string msg, const Source& source) const {
+    builder.Diagnostics().add_warning(diag::System::Resolver, std::move(msg), source);
 }
 
-void ConstEval::AddNote(const std::string& msg, const Source& source) const {
-    builder.Diagnostics().add_note(diag::System::Resolver, msg, source);
+void ConstEval::AddNote(std::string msg, const Source& source) const {
+    builder.Diagnostics().add_note(diag::System::Resolver, std::move(msg), source);
 }
 
 }  // namespace tint::resolver

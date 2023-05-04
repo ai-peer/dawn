@@ -47,13 +47,13 @@ run it with -help=1 to check out libfuzzer parameters.
                        See https://bugs.chromium.org/p/tint/issues/detail?id=1356
 )";
 
-[[noreturn]] void InvalidParam(const std::string& param) {
+[[noreturn]] void InvalidParam(std::string_view param) {
     std::cout << "Invalid value for " << param << std::endl;
     std::cout << kHelpMessage << std::endl;
     exit(1);
 }
 
-bool ParseBool(const std::string& value, bool* out) {
+bool ParseBool(std::string_view value, bool* out) {
     if (value.compare("true") == 0) {
         *out = true;
     } else if (value.compare("false") == 0) {
