@@ -16,9 +16,9 @@
 
 namespace tint::utils {
 
-Command::Command(const std::string&) {}
+Command::Command(std::string_view) {}
 
-Command Command::LookPath(const std::string&) {
+Command Command::LookPath(std::string_view) {
     return Command("");
 }
 

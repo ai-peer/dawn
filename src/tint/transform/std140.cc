@@ -297,7 +297,7 @@ struct Std140::State {
 
                             // Build a struct member for each column of the matrix
                             auto column_members = DecomposedMatrixStructMembers(
-                                mat, name_prefix, member->Align(), member->Size());
+                                mat, std::move(name_prefix), member->Align(), member->Size());
 
                             // Add the member to the forked structure
                             for (auto* column_member : column_members) {
@@ -457,7 +457,7 @@ struct Std140::State {
     /// @returns a vector of decomposed matrix column vectors as structure members (in ctx.dst).
     utils::Vector<const ast::StructMember*, 4> DecomposedMatrixStructMembers(
         const type::Matrix* mat,
-        const std::string& name_prefix,
+        std::string name_prefix,
         uint32_t align,
         uint32_t size) {
         // Replace the member with column vectors.

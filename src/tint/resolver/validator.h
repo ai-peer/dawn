@@ -109,26 +109,24 @@ class Validator {
     /// Adds the given error message to the diagnostics
     /// @param msg the error message
     /// @param source the error source
-    void AddError(const std::string& msg, const Source& source) const;
+    void AddError(std::string msg, const Source& source) const;
 
     /// Adds the given warning message to the diagnostics
     /// @param msg the warning message
     /// @param source the warning source
-    void AddWarning(const std::string& msg, const Source& source) const;
+    void AddWarning(std::string msg, const Source& source) const;
 
     /// Adds the given note message to the diagnostics
     /// @param msg the note message
     /// @param source the note source
-    void AddNote(const std::string& msg, const Source& source) const;
+    void AddNote(std::string msg, const Source& source) const;
 
     /// Adds the given message to the diagnostics with current severity for the given rule.
     /// @param rule the diagnostic trigger rule
     /// @param msg the diagnostic message
     /// @param source the diagnostic source
     /// @returns false if the diagnostic is an error for the given trigger rule
-    bool AddDiagnostic(builtin::DiagnosticRule rule,
-                       const std::string& msg,
-                       const Source& source) const;
+    bool AddDiagnostic(builtin::DiagnosticRule rule, std::string msg, const Source& source) const;
 
     /// @returns the diagnostic filter stack
     DiagnosticFilterStack& DiagnosticFilters() { return diagnostic_filters_; }

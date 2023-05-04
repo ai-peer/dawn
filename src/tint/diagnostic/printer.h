@@ -59,7 +59,7 @@ class Printer {
     /// writes the string str to the printer with the given style.
     /// @param str the string to write to the printer
     /// @param style the style used to print `str`
-    virtual void write(const std::string& str, const Style& style) = 0;
+    virtual void write(std::string_view str, const Style& style) = 0;
 };
 
 /// StringPrinter is an implementation of Printer that writes to a std::string.
@@ -71,7 +71,7 @@ class StringPrinter : public Printer {
     /// @returns the printed string.
     std::string str() const;
 
-    void write(const std::string& str, const Style&) override;
+    void write(std::string_view str, const Style&) override;
 
   private:
     utils::StringStream stream;

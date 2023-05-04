@@ -14,6 +14,8 @@
 
 #include "src/tint/reader/wgsl/token.h"
 
+#include <utility>
+
 namespace tint::reader::wgsl {
 
 // static
@@ -203,8 +205,8 @@ Token::Token() : type_(Type::kUninitialized) {}
 Token::Token(Type type, const Source& source, const std::string_view& view)
     : type_(type), source_(source), value_(view) {}
 
-Token::Token(Type type, const Source& source, const std::string& str)
-    : type_(type), source_(source), value_(str) {}
+Token::Token(Type type, const Source& source, std::string str)
+    : type_(type), source_(source), value_(std::move(str)) {}
 
 Token::Token(Type type, const Source& source, const char* str)
     : type_(type), source_(source), value_(std::string_view(str)) {}

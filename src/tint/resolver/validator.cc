@@ -167,20 +167,20 @@ Validator::Validator(
 
 Validator::~Validator() = default;
 
-void Validator::AddError(const std::string& msg, const Source& source) const {
-    diagnostics_.add_error(diag::System::Resolver, msg, source);
+void Validator::AddError(std::string msg, const Source& source) const {
+    diagnostics_.add_error(diag::System::Resolver, std::move(msg), source);
 }
 
-void Validator::AddWarning(const std::string& msg, const Source& source) const {
-    diagnostics_.add_warning(diag::System::Resolver, msg, source);
+void Validator::AddWarning(std::string msg, const Source& source) const {
+    diagnostics_.add_warning(diag::System::Resolver, std::move(msg), source);
 }
 
-void Validator::AddNote(const std::string& msg, const Source& source) const {
-    diagnostics_.add_note(diag::System::Resolver, msg, source);
+void Validator::AddNote(std::string msg, const Source& source) const {
+    diagnostics_.add_note(diag::System::Resolver, std::move(msg), source);
 }
 
 bool Validator::AddDiagnostic(builtin::DiagnosticRule rule,
-                              const std::string& msg,
+                              std::string msg,
                               const Source& source) const {
     auto severity = diagnostic_filters_.Get(rule);
     if (severity != builtin::DiagnosticSeverity::kOff) {
@@ -188,7 +188,7 @@ bool Validator::AddDiagnostic(builtin::DiagnosticRule rule,
         d.severity = ToSeverity(severity);
         d.system = diag::System::Resolver;
         d.source = source;
-        d.message = msg;
+        d.message = std::move(msg);
         diagnostics_.add(std::move(d));
         if (severity == builtin::DiagnosticSeverity::kError) {
             return false;
