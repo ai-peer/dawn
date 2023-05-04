@@ -81,6 +81,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62baa09b_9bfe06b5",
+        "filename": "include/dawn/native/D3DBackend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e76d5b41_151b6d66",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 84
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cb90bdc_b3eadac0",
@@ -94,6 +118,24 @@
       "writtenOn": "2023-05-04T12:16:39Z",
       "side": 1,
       "message": "Should this code somehow be shared at the d3d:: level or is it not worth it?",
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9b8e3cb_f2495adb",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cb90bdc_b3eadac0",
       "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abac727a_03c92b66",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0f78db4_8fb6be6f",
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf127459_5944d91e",
@@ -128,6 +188,30 @@
       "writtenOn": "2023-05-03T23:51:55Z",
       "side": 1,
       "message": "just \"d3d\" ?",
+      "range": {
+        "startLine": 449,
+        "startChar": 41,
+        "endLine": 449,
+        "endChar": 46
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0573e2e_b2126606",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf127459_5944d91e",
       "range": {
         "startLine": 449,
         "startChar": 41,
@@ -178,6 +262,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f29ef72_294c9b60",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42e9ad43_06639da0",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 77
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6276f0eb_face0ed0",
@@ -191,6 +299,30 @@
       "writtenOn": "2023-05-03T23:51:55Z",
       "side": 1,
       "message": "d3d11",
+      "range": {
+        "startLine": 90,
+        "startChar": 50,
+        "endLine": 90,
+        "endChar": 55
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa65a71_f0276a29",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6276f0eb_face0ed0",
       "range": {
         "startLine": 90,
         "startChar": 50,
@@ -224,6 +356,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef585ee0_9ea6087d",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19989ed2_7610a146",
+      "range": {
+        "startLine": 121,
+        "startChar": 29,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77c516ac_aae3ffd8",
@@ -247,6 +403,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb001bf_abca029f",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77c516ac_aae3ffd8",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "437e7a96_e45b78ac",
@@ -260,6 +440,30 @@
       "writtenOn": "2023-05-03T23:51:55Z",
       "side": 1,
       "message": "d3d11",
+      "range": {
+        "startLine": 62,
+        "startChar": 80,
+        "endLine": 62,
+        "endChar": 85
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08621768_aa415335",
+        "filename": "src/dawn/native/d3d11/ExternalImageDXGIImplD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "437e7a96_e45b78ac",
       "range": {
         "startLine": 62,
         "startChar": 80,
@@ -295,6 +499,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0aca7bd7_d13ec213",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "I didn\u0027t do that is because below reasons:\n1. Right now, d3d11::Texture doesn\u0027t track last usage, it needs extra work. it will make the CL complex to review.\n2. In chrome, we always call BeginAccess() and EndAccess() just before and after using it. So the optimization is good to have, but it doesn\u0027t have any benefit for chrome. And I think chrome is the only user for external texture API.",
+      "parentUuid": "f2860bd7_1d73e3e7",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 261,
+        "endChar": 5
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44085bde_dd2034bf",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 3
@@ -306,6 +534,30 @@
       "writtenOn": "2023-05-03T23:51:55Z",
       "side": 1,
       "message": "ditto: like d3d12, we can track mSignalFenceValue so that we have the exact serial when we stopped using the texture. this way the synchronization is more tightly scoped",
+      "range": {
+        "startLine": 685,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 56
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea2a1915_1e968778",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-04T15:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44085bde_dd2034bf",
       "range": {
         "startLine": 685,
         "startChar": 0,
