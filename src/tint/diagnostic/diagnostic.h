@@ -142,12 +142,12 @@ class List {
     /// @param system the system raising the note message
     /// @param note_msg the note message
     /// @param source the source of the note diagnostic
-    void add_note(System system, std::string_view note_msg, const Source& source) {
+    void add_note(System system, std::string note_msg, const Source& source) {
         diag::Diagnostic note{};
         note.severity = diag::Severity::Note;
         note.system = system;
         note.source = source;
-        note.message = note_msg;
+        note.message = std::move(note_msg);
         add(std::move(note));
     }
 
@@ -155,23 +155,23 @@ class List {
     /// @param system the system raising the warning message
     /// @param warning_msg the warning message
     /// @param source the source of the warning diagnostic
-    void add_warning(System system, std::string_view warning_msg, const Source& source) {
+    void add_warning(System system, std::string warning_msg, const Source& source) {
         diag::Diagnostic warning{};
         warning.severity = diag::Severity::Warning;
         warning.system = system;
         warning.source = source;
-        warning.message = warning_msg;
+        warning.message = std::move(warning_msg);
         add(std::move(warning));
     }
 
     /// adds the error message without a source to the end of this list.
     /// @param system the system raising the error message
     /// @param err_msg the error message
-    void add_error(System system, std::string_view err_msg) {
+    void add_error(System system, std::string err_msg) {
         diag::Diagnostic error{};
         error.severity = diag::Severity::Error;
         error.system = system;
-        error.message = err_msg;
+        error.message = std::move(err_msg);
         add(std::move(error));
     }
 
@@ -179,12 +179,12 @@ class List {
     /// @param system the system raising the error message
     /// @param err_msg the error message
     /// @param source the source of the error diagnostic
-    void add_error(System system, std::string_view err_msg, const Source& source) {
+    void add_error(System system, std::string err_msg, const Source& source) {
         diag::Diagnostic error{};
         error.severity = diag::Severity::Error;
         error.system = system;
         error.source = source;
-        error.message = err_msg;
+        error.message = std::move(err_msg);
         add(std::move(error));
     }
 
@@ -194,16 +194,13 @@ class List {
     /// @param code the error code
     /// @param err_msg the error message
     /// @param source the source of the error diagnostic
-    void add_error(System system,
-                   const char* code,
-                   std::string_view err_msg,
-                   const Source& source) {
+    void add_error(System system, const char* code, std::string err_msg, const Source& source) {
         diag::Diagnostic error{};
         error.code = code;
         error.severity = diag::Severity::Error;
         error.system = system;
         error.source = source;
-        error.message = err_msg;
+        error.message = std::move(err_msg);
         add(std::move(error));
     }
 
@@ -213,14 +210,14 @@ class List {
     /// @param source the source of the internal compiler error
     /// @param file the Source::File owned by this diagnostic
     void add_ice(System system,
-                 std::string_view err_msg,
+                 std::string err_msg,
                  const Source& source,
                  std::shared_ptr<Source::File> file) {
         diag::Diagnostic ice{};
         ice.severity = diag::Severity::InternalCompilerError;
         ice.system = system;
         ice.source = source;
-        ice.message = err_msg;
+        ice.message = std::move(err_msg);
         ice.owned_file = std::move(file);
         add(std::move(ice));
     }

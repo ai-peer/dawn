@@ -25,7 +25,7 @@ std::string StringPrinter::str() const {
     return stream.str();
 }
 
-void StringPrinter::write(const std::string& str, const Style&) {
+void StringPrinter::write(std::string_view str, const Style&) {
     stream << str;
 }
 

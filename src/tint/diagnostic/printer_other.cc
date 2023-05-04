@@ -23,7 +23,7 @@ class PrinterOther : public Printer {
   public:
     explicit PrinterOther(FILE* f) : file(f) {}
 
-    void write(const std::string& str, const Style&) override {
+    void write(std::string_view str, const Style&) override {
         fwrite(str.data(), 1, str.size(), file);
     }
 

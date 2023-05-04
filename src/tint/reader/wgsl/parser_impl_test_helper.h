@@ -35,8 +35,8 @@ class ParserImplTest : public testing::Test {
     /// Retrieves the parser from the helper
     /// @param str the string to parse
     /// @returns the parser implementation
-    std::unique_ptr<ParserImpl> parser(const std::string& str) {
-        auto file = std::make_unique<Source::File>("test.wgsl", str);
+    std::unique_ptr<ParserImpl> parser(std::string str) {
+        auto file = std::make_unique<Source::File>("test.wgsl", std::move(str));
         auto impl = std::make_unique<ParserImpl>(file.get());
         impl->InitializeLex();
         files_.emplace_back(std::move(file));
@@ -58,8 +58,8 @@ class ParserImplTestWithParam : public testing::TestWithParam<T>, public Program
     /// Retrieves the parser from the helper
     /// @param str the string to parse
     /// @returns the parser implementation
-    std::unique_ptr<ParserImpl> parser(const std::string& str) {
-        auto file = std::make_unique<Source::File>("test.wgsl", str);
+    std::unique_ptr<ParserImpl> parser(std::string str) {
+        auto file = std::make_unique<Source::File>("test.wgsl", std::move(str));
         auto impl = std::make_unique<ParserImpl>(file.get());
         impl->InitializeLex();
         files_.emplace_back(std::move(file));

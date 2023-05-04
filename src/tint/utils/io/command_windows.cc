@@ -101,9 +101,9 @@ class Pipe {
 };
 
 /// Queries whether the file at the given path is an executable or DLL.
-bool ExecutableExists(const std::string& path) {
-    auto file = Handle(CreateFileA(path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr,
-                                   OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, nullptr));
+bool ExecutableExists(std::string_view path) {
+    auto file = Handle(CreateFileA(std::string(path).c_str(), GENERIC_READ, FILE_SHARE_READ,
+                                   nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, nullptr));
     if (!file) {
         return false;
     }
@@ -130,7 +130,7 @@ bool ExecutableExists(const std::string& path) {
     return false;
 }
 
-std::string FindExecutable(const std::string& name) {
+std::string FindExecutable(std::string name) {
     if (ExecutableExists(name)) {
         return name;
     }
@@ -161,10 +161,10 @@ std::string FindExecutable(const std::string& name) {
 
 }  // namespace
 
-Command::Command(const std::string& path) : path_(path) {}
+Command::Command(std::string_view path) : path_(path) {}
 
-Command Command::LookPath(const std::string& executable) {
-    return Command(FindExecutable(executable));
+Command Command::LookPath(std::string_view executable) {
+    return Command(FindExecutable(std::string(executable)));
 }
 
 bool Command::Found() const {
