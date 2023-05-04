@@ -140,6 +140,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb8b15d2_69154fb3",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T12:00:07Z",
+      "side": 1,
+      "message": "In the future would it possible to first do a CL that move the code to a new file with no functional changes at all, and then a CL that does the functional changes? This would help when reviewing to know what logic changed.",
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03627b14_ed6e88d6",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 3
