@@ -32,7 +32,6 @@ TEST_F(IR_BuilderImplTest, Func) {
     ASSERT_TRUE(r) << Error();
     auto m = r.Move();
 
-    ASSERT_EQ(0u, m.entry_points.Length());
     ASSERT_EQ(1u, m.functions.Length());
 
     auto* f = m.functions[0];
@@ -41,6 +40,8 @@ TEST_F(IR_BuilderImplTest, Func) {
 
     EXPECT_EQ(1u, f->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, f->end_target->inbound_branches.Length());
+
+    EXPECT_EQ(m.functions[0]->pipeline_stage, Function::PipelineStage::kUndefined);
 
     EXPECT_EQ(Disassemble(m), R"(%fn1 = func f():void
   %fn2 = block
@@ -57,8 +58,7 @@ TEST_F(IR_BuilderImplTest, EntryPoint) {
     ASSERT_TRUE(r) << Error();
     auto m = r.Move();
 
-    ASSERT_EQ(1u, m.entry_points.Length());
-    EXPECT_EQ(m.functions[0], m.entry_points[0]);
+    EXPECT_EQ(m.functions[0]->pipeline_stage, Function::PipelineStage::kFragment);
 }
 
 TEST_F(IR_BuilderImplTest, IfStatement) {

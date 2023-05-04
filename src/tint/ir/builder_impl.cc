@@ -213,8 +213,6 @@ void BuilderImpl::EmitFunction(const ast::Function* ast_func) {
 
     const auto* sem = program_->Sem().Get(ast_func);
     if (ast_func->IsEntryPoint()) {
-        builder.ir.entry_points.Push(ir_func);
-
         switch (ast_func->PipelineStage()) {
             case ast::PipelineStage::kVertex:
                 ir_func->pipeline_stage = Function::PipelineStage::kVertex;
