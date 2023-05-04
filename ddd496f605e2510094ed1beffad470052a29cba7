@@ -16,6 +16,57 @@
       "message": "Will start breaking off bits as separate changes. The actual `ToProgram()` and tests are still just experimental code.",
       "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "873a524c_f5f13bea",
+        "filename": "src/tint/ir/instruction.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T11:59:20Z",
+      "side": 1,
+      "message": "This could just be \u003d default if we initiaize in the header",
+      "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7657a8_44483a66",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T11:59:20Z",
+      "side": 1,
+      "message": "The `NoID` was previously `0`. If we switch to this, we could change the generating code to start at `0` instead of `1`.",
+      "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8be6fa_46d45cb8",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T11:59:20Z",
+      "side": 1,
+      "message": "nit: We should either initialize this one, or not initialize type_ and then either skip both initializtions in the empty constructor or keep it initializing both.",
+      "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
