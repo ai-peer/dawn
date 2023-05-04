@@ -65,6 +65,12 @@ class GeneratorImplIr {
     /// @returns true on success, false on failure
     bool EmitFunction(const ir::Function* func);
 
+    /// Emit entry point declarations for a function.
+    /// @param func the function to emit entry point declarations for
+    /// @param id the result ID of the function declaration
+    /// @returns true on success, false on failure
+    bool EmitEntryPoint(const ir::Function* func, uint32_t id);
+
   private:
     const ir::Module* ir_;
     spirv::Module module_;
