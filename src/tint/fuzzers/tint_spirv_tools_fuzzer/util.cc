@@ -14,35 +14,36 @@
 
 #include <fstream>
 #include <iostream>
+#include <optional>
 
 #include "src/tint/fuzzers/tint_spirv_tools_fuzzer/util.h"
 
 namespace tint::fuzzers::spvtools_fuzzer::util {
 namespace {
 
-bool WriteBinary(const std::string& path, const uint8_t* data, size_t size) {
-    std::ofstream spv(path, std::ios::binary);
+bool WriteBinary(std::string_view path, const uint8_t* data, size_t size) {
+    std::ofstream spv(std::string(path), std::ios::binary);
     return spv &&
            spv.write(reinterpret_cast<const char*>(data), static_cast<std::streamsize>(size));
 }
 
 void LogError(uint32_t index,
-              const std::string& type,
-              const std::string& message,
-              const std::string* path,
+              std::string_view type,
+              std::string_view message,
+              std::string_view path,
               const uint8_t* data,
               size_t size,
-              const std::string* wgsl) {
+              std::string_view wgsl) {
     std::cout << index << " | " << type << ": " << message << std::endl;
 
-    if (path) {
-        auto prefix = *path + std::to_string(index);
+    if (!path.empty()) {
+        auto prefix = std::string(path) + std::to_string(index);
         std::ofstream(prefix + ".log") << message << std::endl;
 
         WriteBinary(prefix + ".spv", data, size);
 
-        if (wgsl) {
-            std::ofstream(prefix + ".wgsl") << *wgsl << std::endl;
+        if (!wgsl.empty()) {
+            std::ofstream(prefix + ".wgsl") << wgsl << std::endl;
         }
     }
 }
@@ -70,18 +71,22 @@ spvtools::MessageConsumer GetBufferMessageConsumer(std::stringstream* buffer) {
     };
 }
 
-void LogMutatorError(const Mutator& mutator, const std::string& error_dir) {
+void LogMutatorError(const Mutator& mutator, std::string_view error_dir) {
     static uint32_t mutator_count = 0;
-    auto error_path = error_dir.empty() ? error_dir : error_dir + "/mutator/";
-    mutator.LogErrors(error_dir.empty() ? nullptr : &error_path, mutator_count++);
+    if (error_dir.empty()) {
+        mutator.LogErrors(error_dir, mutator_count++);
+    } else {
+        std::string error_path = std::string(error_dir) + "/mutator/";
+        mutator.LogErrors(error_path, mutator_count++);
+    }
 }
 
-void LogWgslError(const std::string& message,
+void LogWgslError(std::string_view message,
                   const uint8_t* data,
                   size_t size,
-                  const std::string& wgsl,
+                  std::string_view wgsl,
                   OutputFormat output_format,
-                  const std::string& error_dir) {
+                  std::string_view error_dir) {
     static uint32_t wgsl_count = 0;
     std::string error_type;
     switch (output_format) {
@@ -98,27 +103,33 @@ void LogWgslError(const std::string& message,
             error_type = "WGSL -> WGSL";
             break;
     }
-    auto error_path = error_dir.empty() ? error_dir : error_dir + "/wgsl/";
-    LogError(wgsl_count++, error_type, message, error_dir.empty() ? nullptr : &error_path, data,
-             size, &wgsl);
+    if (error_dir.empty()) {
+        LogError(wgsl_count++, error_type, message, error_dir, data, size, wgsl);
+    } else {
+        auto error_path = std::string(error_dir) + "/wgsl/";
+        LogError(wgsl_count++, error_type, message, error_path, data, size, wgsl);
+    }
 }
 
-void LogSpvError(const std::string& message,
+void LogSpvError(std::string_view message,
                  const uint8_t* data,
                  size_t size,
-                 const std::string& error_dir) {
+                 std::string_view error_dir) {
     static uint32_t spv_count = 0;
-    auto error_path = error_dir.empty() ? error_dir : error_dir + "/spv/";
-    LogError(spv_count++, "SPV -> WGSL", message, error_dir.empty() ? nullptr : &error_path, data,
-             size, nullptr);
+    if (error_dir.empty()) {
+        LogError(spv_count++, "SPV -> WGSL", message, error_dir, data, size, "");
+    } else {
+        auto error_path = std::string(error_dir) + "/spv/";
+        LogError(spv_count++, "SPV -> WGSL", message, error_path, data, size, "");
+    }
 }
 
-bool ReadBinary(const std::string& path, std::vector<uint32_t>* out) {
+bool ReadBinary(std::string_view path, std::vector<uint32_t>* out) {
     if (!out) {
         return false;
     }
 
-    std::ifstream file(path, std::ios::binary | std::ios::ate);
+    std::ifstream file(std::string(path), std::ios::binary | std::ios::ate);
     if (!file) {
         return false;
     }
@@ -143,7 +154,7 @@ bool ReadBinary(const std::string& path, std::vector<uint32_t>* out) {
     return true;
 }
 
-bool WriteBinary(const std::string& path, const std::vector<uint32_t>& binary) {
+bool WriteBinary(std::string_view path, const std::vector<uint32_t>& binary) {
     return WriteBinary(path, reinterpret_cast<const uint8_t*>(binary.data()),
                        binary.size() * sizeof(uint32_t));
 }

@@ -46,7 +46,7 @@ class PrinterPosix : public Printer {
   public:
     PrinterPosix(FILE* f, bool colors) : file(f), use_colors(colors && supports_colors(f)) {}
 
-    void write(const std::string& str, const Style& style) override {
+    void write(std::string_view str, const Style& style) override {
         write_color(style.color, style.bold);
         fwrite(str.data(), 1, str.size(), file);
         write_color(Color::kDefault, false);

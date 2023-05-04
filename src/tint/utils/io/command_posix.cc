@@ -96,15 +96,15 @@ class Pipe {
     File write;
 };
 
-bool ExecutableExists(const std::string& path) {
+bool ExecutableExists(std::string_view path) {
     struct stat s {};
-    if (stat(path.c_str(), &s) != 0) {
+    if (stat(std::string(path).c_str(), &s) != 0) {
         return false;
     }
     return s.st_mode & S_IXUSR;
 }
 
-std::string FindExecutable(const std::string& name) {
+std::string FindExecutable(std::string name) {
     if (ExecutableExists(name)) {
         return name;
     }
@@ -127,10 +127,10 @@ std::string FindExecutable(const std::string& name) {
 
 }  // namespace
 
-Command::Command(const std::string& path) : path_(path) {}
+Command::Command(std::string_view path) : path_(path) {}
 
-Command Command::LookPath(const std::string& executable) {
-    return Command(FindExecutable(executable));
+Command Command::LookPath(std::string_view executable) {
+    return Command(FindExecutable(std::string(executable)));
 }
 
 bool Command::Found() const {

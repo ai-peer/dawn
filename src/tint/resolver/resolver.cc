@@ -4718,25 +4718,25 @@ bool Resolver::CheckNotTemplated(const char* use, const ast::Identifier* ident) 
 
 void Resolver::ErrorMismatchedResolvedIdentifier(const Source& source,
                                                  const ResolvedIdentifier& resolved,
-                                                 std::string_view wanted) {
-    AddError("cannot use " + resolved.String(diagnostics_) + " as " + std::string(wanted), source);
+                                                 std::string wanted) {
+    AddError("cannot use " + resolved.String(diagnostics_) + " as " + std::move(wanted), source);
     sem_.NoteDeclarationSource(resolved.Node());
 }
 
-void Resolver::ErrorInvalidAttribute(const ast::Attribute* attr, std::string_view use) {
-    AddError("@" + attr->Name() + " is not valid for " + std::string(use), attr->source);
+void Resolver::ErrorInvalidAttribute(const ast::Attribute* attr, std::string use) {
+    AddError("@" + attr->Name() + " is not valid for " + std::move(use), attr->source);
 }
 
-void Resolver::AddError(const std::string& msg, const Source& source) const {
-    diagnostics_.add_error(diag::System::Resolver, msg, source);
+void Resolver::AddError(std::string msg, const Source& source) const {
+    diagnostics_.add_error(diag::System::Resolver, std::move(msg), source);
 }
 
-void Resolver::AddWarning(const std::string& msg, const Source& source) const {
-    diagnostics_.add_warning(diag::System::Resolver, msg, source);
+void Resolver::AddWarning(std::string msg, const Source& source) const {
+    diagnostics_.add_warning(diag::System::Resolver, std::move(msg), source);
 }
 
-void Resolver::AddNote(const std::string& msg, const Source& source) const {
-    diagnostics_.add_note(diag::System::Resolver, msg, source);
+void Resolver::AddNote(std::string msg, const Source& source) const {
+    diagnostics_.add_note(diag::System::Resolver, std::move(msg), source);
 }
 
 }  // namespace tint::resolver

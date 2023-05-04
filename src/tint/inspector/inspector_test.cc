@@ -2097,8 +2097,8 @@ TEST_F(InspectorGetUniformBufferResourceBindingsTest, MultipleUniformBuffers) {
     AddUniformBuffer("ub_bar", ty.Of(ub_struct_type), 0, 1);
     AddUniformBuffer("ub_baz", ty.Of(ub_struct_type), 2, 0);
 
-    auto AddReferenceFunc = [this](const std::string& func_name, const std::string& var_name) {
-        MakeStructVariableReferenceBodyFunction(func_name, var_name,
+    auto AddReferenceFunc = [this](std::string func_name, std::string var_name) {
+        MakeStructVariableReferenceBodyFunction(std::move(func_name), std::move(var_name),
                                                 utils::Vector{
                                                     MemberInfo{0, ty.i32()},
                                                     MemberInfo{1, ty.u32()},
@@ -2109,7 +2109,7 @@ TEST_F(InspectorGetUniformBufferResourceBindingsTest, MultipleUniformBuffers) {
     AddReferenceFunc("ub_bar_func", "ub_bar");
     AddReferenceFunc("ub_baz_func", "ub_baz");
 
-    auto FuncCall = [&](const std::string& callee) { return CallStmt(Call(callee)); };
+    auto FuncCall = [&](std::string_view callee) { return CallStmt(Call(callee)); };
 
     Func("ep_func", utils::Empty, ty.void_(),
          utils::Vector{
@@ -2280,8 +2280,8 @@ TEST_F(InspectorGetStorageBufferResourceBindingsTest, MultipleStorageBuffers) {
     AddStorageBuffer("sb_bar", sb_struct_type(), builtin::Access::kReadWrite, 0, 1);
     AddStorageBuffer("sb_baz", sb_struct_type(), builtin::Access::kReadWrite, 2, 0);
 
-    auto AddReferenceFunc = [this](const std::string& func_name, const std::string& var_name) {
-        MakeStructVariableReferenceBodyFunction(func_name, var_name,
+    auto AddReferenceFunc = [this](std::string func_name, std::string var_name) {
+        MakeStructVariableReferenceBodyFunction(std::move(func_name), std::move(var_name),
                                                 utils::Vector{
                                                     MemberInfo{0, ty.i32()},
                                                     MemberInfo{1, ty.u32()},
@@ -2292,7 +2292,7 @@ TEST_F(InspectorGetStorageBufferResourceBindingsTest, MultipleStorageBuffers) {
     AddReferenceFunc("sb_bar_func", "sb_bar");
     AddReferenceFunc("sb_baz_func", "sb_baz");
 
-    auto FuncCall = [&](const std::string& callee) { return CallStmt(Call(callee)); };
+    auto FuncCall = [&](std::string_view callee) { return CallStmt(Call(callee)); };
 
     Func("ep_func", utils::Empty, ty.void_(),
          utils::Vector{
@@ -2503,8 +2503,8 @@ TEST_F(InspectorGetReadOnlyStorageBufferResourceBindingsTest, MultipleStorageBuf
     AddStorageBuffer("sb_bar", sb_struct_type(), builtin::Access::kRead, 0, 1);
     AddStorageBuffer("sb_baz", sb_struct_type(), builtin::Access::kRead, 2, 0);
 
-    auto AddReferenceFunc = [this](const std::string& func_name, const std::string& var_name) {
-        MakeStructVariableReferenceBodyFunction(func_name, var_name,
+    auto AddReferenceFunc = [this](std::string func_name, std::string var_name) {
+        MakeStructVariableReferenceBodyFunction(std::move(func_name), std::move(var_name),
                                                 utils::Vector{
                                                     MemberInfo{0, ty.i32()},
                                                     MemberInfo{1, ty.u32()},
@@ -2515,7 +2515,7 @@ TEST_F(InspectorGetReadOnlyStorageBufferResourceBindingsTest, MultipleStorageBuf
     AddReferenceFunc("sb_bar_func", "sb_bar");
     AddReferenceFunc("sb_baz_func", "sb_baz");
 
-    auto FuncCall = [&](const std::string& callee) { return CallStmt(Call(callee)); };
+    auto FuncCall = [&](std::string_view callee) { return CallStmt(Call(callee)); };
 
     Func("ep_func", utils::Empty, ty.void_(),
          utils::Vector{
