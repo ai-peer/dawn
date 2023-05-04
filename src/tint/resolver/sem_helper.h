@@ -232,13 +232,13 @@ class SemHelper {
 
   private:
     /// Adds the given error message to the diagnostics
-    void AddError(const std::string& msg, const Source& source) const;
+    void AddError(std::string msg, const Source& source) const;
 
     /// Adds the given warning message to the diagnostics
-    void AddWarning(const std::string& msg, const Source& source) const;
+    void AddWarning(std::string msg, const Source& source) const;
 
     /// Adds the given note message to the diagnostics
-    void AddNote(const std::string& msg, const Source& source) const;
+    void AddNote(std::string msg, const Source& source) const;
 
     ProgramBuilder* builder_;
 };

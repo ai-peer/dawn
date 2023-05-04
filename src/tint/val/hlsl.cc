@@ -31,8 +31,8 @@ using Microsoft::WRL::ComPtr;
 
 namespace tint::val {
 
-Result HlslUsingDXC(const std::string& dxc_path,
-                    const std::string& source,
+Result HlslUsingDXC(std::string_view dxc_path,
+                    std::string_view source,
                     const EntryPointList& entry_points,
                     bool require_16bit_types) {
     Result result;
@@ -107,8 +107,8 @@ Result HlslUsingDXC(const std::string& dxc_path,
 }
 
 #ifdef _WIN32
-Result HlslUsingFXC(const std::string& fxc_path,
-                    const std::string& source,
+Result HlslUsingFXC(std::string_view fxc_path,
+                    std::string_view source,
                     const EntryPointList& entry_points) {
     Result result;
 

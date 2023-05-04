@@ -148,9 +148,7 @@ SanitizedResult::SanitizedResult() = default;
 SanitizedResult::~SanitizedResult() = default;
 SanitizedResult::SanitizedResult(SanitizedResult&&) = default;
 
-SanitizedResult Sanitize(const Program* in,
-                         const Options& options,
-                         const std::string& entry_point) {
+SanitizedResult Sanitize(const Program* in, const Options& options, std::string entry_point) {
     transform::Manager manager;
     transform::DataMap data;
 
@@ -161,7 +159,7 @@ SanitizedResult Sanitize(const Program* in,
 
     if (!entry_point.empty()) {
         manager.Add<transform::SingleEntryPoint>();
-        data.Add<transform::SingleEntryPoint::Config>(entry_point);
+        data.Add<transform::SingleEntryPoint::Config>(std::move(entry_point));
     }
     manager.Add<transform::Renamer>();
     data.Add<transform::Renamer::Config>(transform::Renamer::Target::kGlslKeywords,
@@ -2492,7 +2490,7 @@ void GeneratorImpl::EmitType(utils::StringStream& out,
                              const type::Type* type,
                              builtin::AddressSpace address_space,
                              builtin::Access access,
-                             const std::string& name,
+                             std::string_view name,
                              bool* name_printed /* = nullptr */) {
     if (name_printed) {
         *name_printed = false;
@@ -2661,7 +2659,7 @@ void GeneratorImpl::EmitTypeAndName(utils::StringStream& out,
                                     const type::Type* type,
                                     builtin::AddressSpace address_space,
                                     builtin::Access access,
-                                    const std::string& name) {
+                                    std::string_view name) {
     bool printed_name = false;
     EmitType(out, type, address_space, access, name, &printed_name);
     if (!name.empty() && !printed_name) {

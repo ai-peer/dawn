@@ -153,13 +153,13 @@ TEST(ChangeBinaryOperatorTest, Applicable_Simple) {
     ASSERT_EQ(expected_shader, result.wgsl);
 }
 
-void CheckMutations(const std::string& lhs_type,
-                    const std::string& rhs_type,
-                    const std::string& result_type,
+void CheckMutations(std::string_view lhs_type,
+                    std::string_view rhs_type,
+                    std::string_view result_type,
                     ast::BinaryOp original_operator,
                     const std::unordered_set<ast::BinaryOp>& allowed_replacement_operators) {
     std::stringstream shader;
-    shader << "fn foo(a : " << lhs_type << ", b : " << rhs_type + ") {\n"
+    shader << "fn foo(a : " << lhs_type << ", b : " << rhs_type << ") {\n"
            << "  let r : " << result_type << " = (a " + OpToString(original_operator)
            << " b);\n}\n";
 

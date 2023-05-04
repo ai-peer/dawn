@@ -26,7 +26,7 @@ TextGenerator::TextGenerator(const Program* program)
 
 TextGenerator::~TextGenerator() = default;
 
-std::string TextGenerator::UniqueIdentifier(const std::string& prefix) {
+std::string TextGenerator::UniqueIdentifier(std::string_view prefix) {
     return builder_.Symbols().New(prefix).Name();
 }
 
@@ -39,7 +39,7 @@ std::string TextGenerator::StructName(const type::Struct* s) {
     return name;
 }
 
-std::string TextGenerator::TrimSuffix(std::string str, const std::string& suffix) {
+std::string TextGenerator::TrimSuffix(std::string str, std::string_view suffix) {
     if (str.size() >= suffix.size()) {
         if (str.substr(str.size() - suffix.size(), suffix.size()) == suffix) {
             return str.substr(0, str.size() - suffix.size());
@@ -72,11 +72,11 @@ void TextGenerator::TextBuffer::DecrementIndent() {
     current_indent = std::max(2u, current_indent) - 2u;
 }
 
-void TextGenerator::TextBuffer::Append(const std::string& line) {
-    lines.emplace_back(Line{current_indent, line});
+void TextGenerator::TextBuffer::Append(std::string line) {
+    lines.emplace_back(Line{current_indent, std::move(line)});
 }
 
-void TextGenerator::TextBuffer::Insert(const std::string& line, size_t before, uint32_t indent) {
+void TextGenerator::TextBuffer::Insert(std::string line, size_t before, uint32_t indent) {
     if (TINT_UNLIKELY(before >= lines.size())) {
         diag::List d;
         TINT_ICE(Writer, d) << "TextBuffer::Insert() called with before >= lines.size()\n"
@@ -85,7 +85,7 @@ void TextGenerator::TextBuffer::Insert(const std::string& line, size_t before, u
         return;
     }
     using DT = decltype(lines)::difference_type;
-    lines.insert(lines.begin() + static_cast<DT>(before), Line{indent, line});
+    lines.insert(lines.begin() + static_cast<DT>(before), Line{indent, std::move(line)});
 }
 
 void TextGenerator::TextBuffer::Append(const TextBuffer& tb) {

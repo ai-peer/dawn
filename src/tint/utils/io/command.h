@@ -37,7 +37,7 @@ class Command {
 
     /// Constructor
     /// @param path path to the executable
-    explicit Command(const std::string& path);
+    explicit Command(std::string_view path);
 
     /// Looks for an executable with the given name in the current working
     /// directory, and if not found there, in each of the directories in the
@@ -45,14 +45,14 @@ class Command {
     /// @param executable the executable name
     /// @returns a Command which will return true for Found() if the executable
     /// was found.
-    static Command LookPath(const std::string& executable);
+    static Command LookPath(std::string_view executable);
 
     /// @return true if the executable exists at the path provided to the
     /// constructor
     bool Found() const;
 
     /// @returns the path of the command
-    const std::string& Path() const { return path_; }
+    std::string_view Path() const { return path_; }
 
     /// Invokes the command with the given argument strings, blocking until the
     /// process has returned.
@@ -70,7 +70,7 @@ class Command {
     Output Exec(std::initializer_list<std::string> args) const;
 
     /// @param input the input data to pipe to the process's stdin
-    void SetInput(const std::string& input) { input_ = input; }
+    void SetInput(std::string input) { input_ = std::move(input); }
 
   private:
     std::string const path_;
