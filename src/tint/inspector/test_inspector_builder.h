@@ -113,7 +113,7 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param vec Vector of StageVariable to be searched
     /// @param name Name to be searching for
     /// @returns true if name is in vec, otherwise false
-    bool ContainsName(utils::VectorRef<StageVariable> vec, const std::string& name);
+    bool ContainsName(utils::VectorRef<StageVariable> vec, std::string_view name);
 
     /// Builds a string for accessing a member in a generated struct
     /// @param idx index of member
@@ -125,7 +125,7 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param name name for the type
     /// @param member_types a vector of member types
     /// @returns a struct type
-    const ast::Struct* MakeStructType(const std::string& name,
+    const ast::Struct* MakeStructType(std::string_view name,
                                       utils::VectorRef<ast::Type> member_types);
 
     /// Generates a struct type from a list of member nodes.
@@ -133,7 +133,7 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param members a vector of members
     /// @returns a struct type
     const ast::Struct* MakeStructTypeFromMembers(
-        const std::string& name,
+        std::string_view name,
         utils::VectorRef<const ast::StructMember*> members);
 
     /// Generates a struct member with a specified index and type.
@@ -149,14 +149,14 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param name name for the type
     /// @param member_types a vector of member types
     /// @returns a struct type that has the layout for an uniform buffer.
-    const ast::Struct* MakeUniformBufferType(const std::string& name,
+    const ast::Struct* MakeUniformBufferType(std::string_view name,
                                              utils::VectorRef<ast::Type> member_types);
 
     /// Generates types appropriate for using in a storage buffer
     /// @param name name for the type
     /// @param member_types a vector of member types
     /// @returns a function that returns the created structure.
-    std::function<ast::Type()> MakeStorageBufferTypes(const std::string& name,
+    std::function<ast::Type()> MakeStorageBufferTypes(std::string_view name,
                                                       utils::VectorRef<ast::Type> member_types);
 
     /// Adds an uniform buffer variable to the program
@@ -164,15 +164,12 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param type the type to use
     /// @param group the binding/group/ to use for the uniform buffer
     /// @param binding the binding number to use for the uniform buffer
-    void AddUniformBuffer(const std::string& name,
-                          ast::Type type,
-                          uint32_t group,
-                          uint32_t binding);
+    void AddUniformBuffer(std::string_view name, ast::Type type, uint32_t group, uint32_t binding);
 
     /// Adds a workgroup storage variable to the program
     /// @param name the name of the variable
     /// @param type the type of the variable
-    void AddWorkgroupStorage(const std::string& name, ast::Type type);
+    void AddWorkgroupStorage(std::string_view name, ast::Type type);
 
     /// Adds a storage buffer variable to the program
     /// @param name the name of the variable
@@ -180,7 +177,7 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param access the storage buffer access control
     /// @param group the binding/group to use for the storage buffer
     /// @param binding the binding number to use for the storage buffer
-    void AddStorageBuffer(const std::string& name,
+    void AddStorageBuffer(std::string_view name,
                           ast::Type type,
                           builtin::Access access,
                           uint32_t group,
@@ -191,35 +188,35 @@ class InspectorBuilder : public ProgramBuilder {
 
     /// Generates a function that references a specific struct variable
     /// @param func_name name of the function created
-    /// @param struct_name name of the struct variabler to be accessed
+    /// @param struct_name name of the struct variable to be accessed
     /// @param members list of members to access, by index and type
-    void MakeStructVariableReferenceBodyFunction(std::string func_name,
-                                                 std::string struct_name,
+    void MakeStructVariableReferenceBodyFunction(std::string_view func_name,
+                                                 std::string_view struct_name,
                                                  utils::VectorRef<MemberInfo> members);
 
     /// Adds a regular sampler variable to the program
     /// @param name the name of the variable
     /// @param group the binding/group to use for the storage buffer
     /// @param binding the binding number to use for the storage buffer
-    void AddSampler(const std::string& name, uint32_t group, uint32_t binding);
+    void AddSampler(std::string_view name, uint32_t group, uint32_t binding);
 
     /// Adds a comparison sampler variable to the program
     /// @param name the name of the variable
     /// @param group the binding/group to use for the storage buffer
     /// @param binding the binding number to use for the storage buffer
-    void AddComparisonSampler(const std::string& name, uint32_t group, uint32_t binding);
+    void AddComparisonSampler(std::string_view name, uint32_t group, uint32_t binding);
 
     /// Adds a sampler or texture variable to the program
     /// @param name the name of the variable
     /// @param type the type to use
     /// @param group the binding/group to use for the resource
     /// @param binding the binding number to use for the resource
-    void AddResource(const std::string& name, ast::Type type, uint32_t group, uint32_t binding);
+    void AddResource(std::string_view name, ast::Type type, uint32_t group, uint32_t binding);
 
     /// Add a module scope private variable to the progames
     /// @param name the name of the variable
     /// @param type the type to use
-    void AddGlobalVariable(const std::string& name, ast::Type type);
+    void AddGlobalVariable(std::string_view name, ast::Type type);
 
     /// Generates a function that references a specific sampler variable
     /// @param func_name name of the function created
@@ -230,10 +227,10 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param attributes the function attributes
     /// @returns a function that references all of the values specified
     const ast::Function* MakeSamplerReferenceBodyFunction(
-        const std::string& func_name,
-        const std::string& texture_name,
-        const std::string& sampler_name,
-        const std::string& coords_name,
+        std::string_view func_name,
+        std::string_view texture_name,
+        std::string_view sampler_name,
+        std::string_view coords_name,
         ast::Type base_type,
         utils::VectorRef<const ast::Attribute*> attributes);
 
@@ -247,11 +244,11 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param attributes the function attributes
     /// @returns a function that references all of the values specified
     const ast::Function* MakeSamplerReferenceBodyFunction(
-        const std::string& func_name,
-        const std::string& texture_name,
-        const std::string& sampler_name,
-        const std::string& coords_name,
-        const std::string& array_index,
+        std::string_view func_name,
+        std::string_view texture_name,
+        std::string_view sampler_name,
+        std::string_view coords_name,
+        std::string_view array_index,
         ast::Type base_type,
         utils::VectorRef<const ast::Attribute*> attributes);
 
@@ -266,11 +263,11 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param attributes the function attributes
     /// @returns a function that references all of the values specified
     const ast::Function* MakeComparisonSamplerReferenceBodyFunction(
-        const std::string& func_name,
-        const std::string& texture_name,
-        const std::string& sampler_name,
-        const std::string& coords_name,
-        const std::string& depth_name,
+        std::string_view func_name,
+        std::string_view texture_name,
+        std::string_view sampler_name,
+        std::string_view coords_name,
+        std::string_view depth_name,
         ast::Type base_type,
         utils::VectorRef<const ast::Attribute*> attributes);
 
@@ -297,10 +294,7 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param type the type to use
     /// @param group the binding/group to use for the sampled texture
     /// @param binding the binding57 number to use for the sampled texture
-    void AddStorageTexture(const std::string& name,
-                           ast::Type type,
-                           uint32_t group,
-                           uint32_t binding);
+    void AddStorageTexture(std::string_view name, ast::Type type, uint32_t group, uint32_t binding);
 
     /// Generates a function that references a storage texture variable.
     /// @param func_name name of the function created
@@ -309,8 +303,8 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param attributes the function attributes
     /// @returns a function that references all of the values specified
     const ast::Function* MakeStorageTextureBodyFunction(
-        const std::string& func_name,
-        const std::string& st_name,
+        std::string_view func_name,
+        std::string_view st_name,
         ast::Type dim_type,
         utils::VectorRef<const ast::Attribute*> attributes);
 

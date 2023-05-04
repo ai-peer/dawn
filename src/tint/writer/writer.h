@@ -16,6 +16,7 @@
 #define SRC_TINT_WRITER_WRITER_H_
 
 #include <string>
+#include <utility>
 
 namespace tint::writer {
 
@@ -25,7 +26,7 @@ class Writer {
     virtual ~Writer();
 
     /// @returns the writer error string
-    const std::string& error() const { return error_; }
+    std::string_view error() const { return error_; }
 
     /// Converts the module into the desired format
     /// @returns true on success; false on failure
@@ -34,7 +35,7 @@ class Writer {
   protected:
     /// Sets the error string
     /// @param msg the error message
-    void set_error(const std::string& msg) { error_ = msg; }
+    void set_error(std::string msg) { error_ = std::move(msg); }
 
     /// An error message, if an error was encountered
     std::string error_;

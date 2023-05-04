@@ -568,7 +568,7 @@ func_end
 )");
 }
 
-#if 0
+#if 0 // TODO(bclayton): Reenable these
 
 TEST_F(IR_BuilderImplTest, Loop_WithOnlyReturn_ContinuingBreakIf) {
     // Note, even though there is code in the loop merge (specifically, the
