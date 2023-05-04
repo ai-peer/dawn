@@ -55,13 +55,13 @@ class TextGenerator {
 
         /// Appends the line to the end of the TextBuffer
         /// @param line the line to append to the TextBuffer
-        void Append(const std::string& line);
+        void Append(std::string line);
 
         /// Inserts the line to the TextBuffer before the line with index `before`
         /// @param line the line to append to the TextBuffer
         /// @param before the zero-based index of the line to insert the text before
         /// @param indent the indentation to apply to the inserted lines
-        void Insert(const std::string& line, size_t before, uint32_t indent);
+        void Insert(std::string line, size_t before, uint32_t indent);
 
         /// Appends the lines of `tb` to the end of this TextBuffer
         /// @param tb the TextBuffer to append to the end of this TextBuffer
@@ -105,7 +105,7 @@ class TextGenerator {
     /// @return a new, unique identifier with the given prefix.
     /// @param prefix optional prefix to apply to the generated identifier. If
     /// empty "tint_symbol" will be used.
-    std::string UniqueIdentifier(const std::string& prefix = "");
+    std::string UniqueIdentifier(std::string_view prefix = "");
 
     /// @param s the semantic structure
     /// @returns the name of the structure, taking special care of builtin

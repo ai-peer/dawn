@@ -867,7 +867,7 @@ bool GeneratorImpl::EmitTypeInitializer(utils::StringStream& out,
 bool GeneratorImpl::EmitAtomicCall(utils::StringStream& out,
                                    const ast::CallExpression* expr,
                                    const sem::Builtin* builtin) {
-    auto call = [&](const std::string& name, bool append_memory_order_relaxed) {
+    auto call = [&](std::string_view name, bool append_memory_order_relaxed) {
         out << name;
         {
             ScopedParen sp(out);
@@ -2548,7 +2548,7 @@ bool GeneratorImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
 
 bool GeneratorImpl::EmitType(utils::StringStream& out,
                              const type::Type* type,
-                             const std::string& name,
+                             std::string_view name,
                              bool* name_printed /* = nullptr */) {
     if (name_printed) {
         *name_printed = false;
@@ -2755,7 +2755,7 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
 
 bool GeneratorImpl::EmitTypeAndName(utils::StringStream& out,
                                     const type::Type* type,
-                                    const std::string& name) {
+                                    std::string_view name) {
     bool name_printed = false;
     if (!EmitType(out, type, name, &name_printed)) {
         return false;
@@ -3264,7 +3264,7 @@ bool GeneratorImpl::CallBuiltinHelper(utils::StringStream& out,
     return true;
 }
 
-const std::string& GeneratorImpl::ArrayType() {
+std::string_view GeneratorImpl::ArrayType() {
     if (array_template_name_.empty()) {
         array_template_name_ = UniqueIdentifier("tint_array");
         auto* buf = &helpers_;

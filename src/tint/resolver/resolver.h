@@ -527,21 +527,21 @@ class Resolver {
     /// @param wanted the expected kind
     void ErrorMismatchedResolvedIdentifier(const Source& source,
                                            const ResolvedIdentifier& resolved,
-                                           std::string_view wanted);
+                                           std::string wanted);
 
     /// Raises an error that the attribute is not valid for the given use.
     /// @param attr the invalue attribute
     /// @param use the thing that the attribute was applied to
-    void ErrorInvalidAttribute(const ast::Attribute* attr, std::string_view use);
+    void ErrorInvalidAttribute(const ast::Attribute* attr, std::string use);
 
     /// Adds the given error message to the diagnostics
-    void AddError(const std::string& msg, const Source& source) const;
+    void AddError(std::string msg, const Source& source) const;
 
     /// Adds the given warning message to the diagnostics
-    void AddWarning(const std::string& msg, const Source& source) const;
+    void AddWarning(std::string msg, const Source& source) const;
 
     /// Adds the given note message to the diagnostics
-    void AddNote(const std::string& msg, const Source& source) const;
+    void AddNote(std::string msg, const Source& source) const;
 
     /// @returns the type::Type for the builtin type @p builtin_ty with the identifier @p ident
     /// @note: Will raise an ICE if @p symbol is not a builtin type.

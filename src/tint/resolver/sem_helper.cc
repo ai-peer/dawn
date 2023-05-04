@@ -14,6 +14,8 @@
 
 #include "src/tint/resolver/sem_helper.h"
 
+#include <utility>
+
 #include "src/tint/sem/builtin_enum_expression.h"
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/function_expression.h"
@@ -152,15 +154,16 @@ void SemHelper::NoteDeclarationSource(const ast::Node* node) const {
         });
 }
 
-void SemHelper::AddError(const std::string& msg, const Source& source) const {
-    builder_->Diagnostics().add_error(diag::System::Resolver, msg, source);
+void SemHelper::AddError(std::string msg, const Source& source) const {
+    builder_->Diagnostics().add_error(diag::System::Resolver, std::move(msg), source);
 }
 
-void SemHelper::AddWarning(const std::string& msg, const Source& source) const {
-    builder_->Diagnostics().add_warning(diag::System::Resolver, msg, source);
+void SemHelper::AddWarning(std::string msg, const Source& source) const {
+    builder_->Diagnostics().add_warning(diag::System::Resolver, std::move(msg), source);
 }
 
-void SemHelper::AddNote(const std::string& msg, const Source& source) const {
-    builder_->Diagnostics().add_note(diag::System::Resolver, msg, source);
+void SemHelper::AddNote(std::string msg, const Source& source) const {
+    builder_->Diagnostics().add_note(diag::System::Resolver, std::move(msg), source);
 }
+
 }  // namespace tint::resolver
