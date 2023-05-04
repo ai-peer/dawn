@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee64bfab_2c3cda35",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T12:19:50Z",
+      "side": 1,
+      "message": "nit: we tend to put these in the .cpp and let the LTCG inline for us.",
+      "revId": "c876a1caf85b952cdb24db3ff96c8a53301d045b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f5d262a_aca4c90c",
         "filename": "src/dawn/native/PhysicalDevice.h",
         "patchSetId": 5

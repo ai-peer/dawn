@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9a3d21a_a5ffc437",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T12:19:50Z",
+      "side": 1,
+      "message": "+1 but the approach is good! I think in native it would be better to define feature levels for sure instead of a single compat vs. not switch. Device creation (with swapchains as well) is a fine place where to differ from the Web API.",
+      "parentUuid": "ce49b0fe_5409820f",
+      "revId": "71c418c5f18286161507761e415421cd6dbfcad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1542b4a_c6f19724",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 2
