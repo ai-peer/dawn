@@ -16,6 +16,23 @@
       "message": "I was expecting more major merge conflicts with this one - has something not landed yet?",
       "revId": "5e4a2c860f78cc2da44aa7d085e8d8c0e4d8ab10",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "216200b1_73ca1c86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-04T18:29:18Z",
+      "side": 1,
+      "message": "na, this one looks pretty stand-alone, doesn\u0027t touch the builder at all.",
+      "revId": "5e4a2c860f78cc2da44aa7d085e8d8c0e4d8ab10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
