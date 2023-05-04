@@ -41,6 +41,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3666041_3892d811",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T12:16:39Z",
+      "side": 1,
+      "message": "Same comments as Austin for sharing more between D3D backends.",
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e76d5b41_151b6d66",
@@ -60,6 +77,40 @@
         "endLine": 33,
         "endChar": 84
       },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb90bdc_b3eadac0",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T12:16:39Z",
+      "side": 1,
+      "message": "Should this code somehow be shared at the d3d:: level or is it not worth it?",
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f78db4_8fb6be6f",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T12:16:39Z",
+      "side": 1,
+      "message": "nit: Instead of all the consumedError, could we refactor to a function that does a bunch of DAWN_TRY and a wrapper function that does the single ConsumedError?",
       "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
