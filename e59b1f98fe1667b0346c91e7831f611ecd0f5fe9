@@ -56,6 +56,30 @@
       },
       "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12436ba1_9eae2aaa",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-04T11:49:00Z",
+      "side": 1,
+      "message": "You are right, thanks!",
+      "parentUuid": "3b4147af_ff6662af",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 34
+      },
+      "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
