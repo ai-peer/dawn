@@ -81,13 +81,13 @@ std::string SpirvFuzzMutator::GetErrors() const {
     return errors_->str();
 }
 
-void SpirvFuzzMutator::LogErrors(const std::string* path, uint32_t count) const {
+void SpirvFuzzMutator::LogErrors(std::string_view path, uint32_t count) const {
     auto message = GetErrors();
     std::cout << count << " | SpirvFuzzMutator (seed: " << seed_ << ")" << std::endl;
     std::cout << message << std::endl;
 
-    if (path) {
-        auto prefix = *path + std::to_string(count);
+    if (!path.empty()) {
+        auto prefix = std::string(path) + std::to_string(count);
 
         // Write errors to file.
         std::ofstream(prefix + ".fuzzer.log") << "seed: " << seed_ << std::endl

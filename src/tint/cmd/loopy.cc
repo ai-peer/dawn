@@ -59,7 +59,7 @@ const char kUsage[] = R"(Usage: tint-loopy [options] <input-file>
   --loop-count <num>                   -- Number of loops to run, default 100.
 )";
 
-Format parse_format(const std::string& fmt) {
+Format parse_format(std::string_view fmt) {
     (void)fmt;
 
 #if TINT_BUILD_SPV_WRITER

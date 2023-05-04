@@ -58,7 +58,7 @@ class Inspector {
 
     /// @param entry_point name of the entry point to get information about
     /// @returns the entry point information
-    EntryPoint GetEntryPoint(const std::string& entry_point);
+    EntryPoint GetEntryPoint(std::string_view entry_point);
 
     /// @returns map of override identifier to initial value
     std::map<OverrideId, Scalar> GetOverrideDefaultValues();
@@ -69,78 +69,77 @@ class Inspector {
     /// @param entry_point name of the entry point to get information about.
     /// @returns the total size of shared storage required by an entry point,
     ///          including all uniform storage buffers.
-    uint32_t GetStorageSize(const std::string& entry_point);
+    uint32_t GetStorageSize(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the resource bindings.
-    std::vector<ResourceBinding> GetResourceBindings(const std::string& entry_point);
+    std::vector<ResourceBinding> GetResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for uniform buffers.
-    std::vector<ResourceBinding> GetUniformBufferResourceBindings(const std::string& entry_point);
+    std::vector<ResourceBinding> GetUniformBufferResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for storage buffers.
-    std::vector<ResourceBinding> GetStorageBufferResourceBindings(const std::string& entry_point);
+    std::vector<ResourceBinding> GetStorageBufferResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for read-only storage buffers.
     std::vector<ResourceBinding> GetReadOnlyStorageBufferResourceBindings(
-        const std::string& entry_point);
+        std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for regular samplers.
-    std::vector<ResourceBinding> GetSamplerResourceBindings(const std::string& entry_point);
+    std::vector<ResourceBinding> GetSamplerResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for comparison samplers.
-    std::vector<ResourceBinding> GetComparisonSamplerResourceBindings(
-        const std::string& entry_point);
+    std::vector<ResourceBinding> GetComparisonSamplerResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for sampled textures.
-    std::vector<ResourceBinding> GetSampledTextureResourceBindings(const std::string& entry_point);
+    std::vector<ResourceBinding> GetSampledTextureResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for multisampled textures.
     std::vector<ResourceBinding> GetMultisampledTextureResourceBindings(
-        const std::string& entry_point);
+        std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for write-only storage textures.
     std::vector<ResourceBinding> GetWriteOnlyStorageTextureResourceBindings(
-        const std::string& entry_point);
+        std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for depth textures.
-    std::vector<ResourceBinding> GetDepthTextureResourceBindings(const std::string& entry_point);
+    std::vector<ResourceBinding> GetDepthTextureResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for depth textures.
     std::vector<ResourceBinding> GetDepthMultisampledTextureResourceBindings(
-        const std::string& entry_point);
+        std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for external textures.
-    std::vector<ResourceBinding> GetExternalTextureResourceBindings(const std::string& entry_point);
+    std::vector<ResourceBinding> GetExternalTextureResourceBindings(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the sampler/texture sampling pairs that are used
     /// by that entry point.
-    utils::VectorRef<SamplerTexturePair> GetSamplerTextureUses(const std::string& entry_point);
+    utils::VectorRef<SamplerTexturePair> GetSamplerTextureUses(std::string_view entry_point);
 
     /// @param entry_point name of the entry point to get information about.
     /// @param placeholder the sampler binding point to use for texture-only
     /// access (e.g., textureLoad)
     /// @returns vector of all of the sampler/texture sampling pairs that are used
     /// by that entry point.
-    std::vector<SamplerTexturePair> GetSamplerTextureUses(const std::string& entry_point,
+    std::vector<SamplerTexturePair> GetSamplerTextureUses(std::string_view entry_point,
                                                           const sem::BindingPoint& placeholder);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns the total size in bytes of all Workgroup storage-class storage
     /// referenced transitively by the entry point.
-    uint32_t GetWorkgroupStorageSize(const std::string& entry_point);
+    uint32_t GetWorkgroupStorageSize(std::string_view entry_point);
 
     /// @returns vector of all valid extension names used by the program. There
     /// will be no duplicated names in the returned vector even if an extension
@@ -157,13 +156,13 @@ class Inspector {
   private:
     const Program* program_;
     diag::List diagnostics_;
-    std::unique_ptr<std::unordered_map<std::string, utils::UniqueVector<SamplerTexturePair, 4>>>
+    std::optional<utils::Hashmap<std::string, utils::UniqueVector<SamplerTexturePair, 4>, 4>>
         sampler_targets_;
 
     /// @param name name of the entry point to find
     /// @returns a pointer to the entry point if it exists, otherwise returns
     ///          nullptr and sets the error string.
-    const ast::Function* FindEntryPointByName(const std::string& name);
+    const ast::Function* FindEntryPointByName(std::string_view name);
 
     /// Recursively add entry point IO variables.
     /// If `type` is a struct, recurse into members, appending the member name.
@@ -194,7 +193,7 @@ class Inspector {
     /// texture type.
     /// @returns vector of all of the bindings for depth textures.
     std::vector<ResourceBinding> GetTextureResourceBindings(
-        const std::string& entry_point,
+        std::string_view entry_point,
         const tint::utils::TypeInfo* texture_type,
         ResourceBinding::ResourceType resource_type);
 
@@ -202,22 +201,20 @@ class Inspector {
     /// @param read_only if true get only read-only bindings, if false get
     ///                  write-only bindings.
     /// @returns vector of all of the bindings for the requested storage buffers.
-    std::vector<ResourceBinding> GetStorageBufferResourceBindingsImpl(
-        const std::string& entry_point,
-        bool read_only);
+    std::vector<ResourceBinding> GetStorageBufferResourceBindingsImpl(std::string_view entry_point,
+                                                                      bool read_only);
 
     /// @param entry_point name of the entry point to get information about.
     /// @param multisampled_only only get multisampled textures if true, otherwise
     ///                          only get sampled textures.
     /// @returns vector of all of the bindings for the request storage buffers.
-    std::vector<ResourceBinding> GetSampledTextureResourceBindingsImpl(
-        const std::string& entry_point,
-        bool multisampled_only);
+    std::vector<ResourceBinding> GetSampledTextureResourceBindingsImpl(std::string_view entry_point,
+                                                                       bool multisampled_only);
 
     /// @param entry_point name of the entry point to get information about.
     /// @returns vector of all of the bindings for the requested storage textures.
     std::vector<ResourceBinding> GetStorageTextureResourceBindingsImpl(
-        const std::string& entry_point);
+        std::string_view entry_point);
 
     /// Constructs |sampler_targets_| if it hasn't already been instantiated.
     void GenerateSamplerTargets();

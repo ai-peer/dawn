@@ -128,13 +128,13 @@ void UnhandledNode(diag::List& diagnostics, const ast::Node* node) {
 }
 
 /// Raises an error diagnostic with the given message and source.
-void AddError(diag::List& diagnostics, const std::string& msg, const Source& source) {
-    diagnostics.add_error(diag::System::Resolver, msg, source);
+void AddError(diag::List& diagnostics, std::string msg, const Source& source) {
+    diagnostics.add_error(diag::System::Resolver, std::move(msg), source);
 }
 
 /// Raises a note diagnostic with the given message and source.
-void AddNote(diag::List& diagnostics, const std::string& msg, const Source& source) {
-    diagnostics.add_note(diag::System::Resolver, msg, source);
+void AddNote(diag::List& diagnostics, std::string msg, const Source& source) {
+    diagnostics.add_note(diag::System::Resolver, std::move(msg), source);
 }
 
 /// DependencyScanner is used to traverse a module to build the list of

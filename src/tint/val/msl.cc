@@ -21,7 +21,7 @@
 
 namespace tint::val {
 
-Result Msl(const std::string& xcrun_path, const std::string& source) {
+Result Msl(std::string_view xcrun_path, std::string_view source) {
     Result result;
 
     auto xcrun = utils::Command(xcrun_path);
