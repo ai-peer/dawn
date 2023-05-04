@@ -43,8 +43,12 @@ bool GeneratorImplIr::Generate() {
     // TODO(crbug.com/tint/1906): Emit variables.
     (void)zero_init_workgroup_memory_;
 
-    // TODO(crbug.com/tint/1906): Emit functions.
-    (void)ir_;
+    // Emit functions.
+    for (auto* func : ir_->functions) {
+        if (!EmitFunction(func)) {
+            return false;
+        }
+    }
 
     // Serialize the module into binary SPIR-V.
     writer_.WriteHeader(module_.IdBound());
@@ -77,6 +81,51 @@ uint32_t GeneratorImplIr::Type(const type::Type* ty) {
             });
         return id;
     });
+}
+
+bool GeneratorImplIr::EmitFunction(const ir::Function* func) {
+    // Make an ID for the function.
+    auto id = module_.NextId();
+
+    // Emit the function name.
+    module_.PushDebug(spv::Op::OpName, {id, Operand(func->name.Name())});
+
+    // TODO(jrprice): Emit OpEntryPoint and OpExecutionMode declarations if needed.
+
+    // Get the ID for the return type.
+    auto return_type_id = Type(func->return_type);
+
+    // Get the ID for the function type (creating it if needed).
+    // TODO(jrprice): Add the parameter types when they are supported in the IR.
+    FunctionType function_type{return_type_id, {}};
+    auto function_type_id = function_types_.GetOrCreate(function_type, [&]() {
+        auto func_ty_id = module_.NextId();
+        OperandList operands = {func_ty_id, return_type_id};
+        operands.insert(operands.end(), function_type.param_type_ids.begin(),
+                        function_type.param_type_ids.end());
+        module_.PushType(spv::Op::OpTypeFunction, operands);
+        return func_ty_id;
+    });
+
+    // Declare the function.
+    auto decl =
+        Instruction{spv::Op::OpFunction,
+                    {return_type_id, id, U32Operand(SpvFunctionControlMaskNone), function_type_id}};
+
+    // Create a function that we will add instructions to.
+    // TODO(jrprice): Add the parameter declarations when they are supported in the IR.
+    auto entry_block = module_.NextId();
+    Function current_function_(decl, entry_block, {});
+
+    // TODO(jrprice): Emit the body of the function.
+
+    // TODO(jrprice): Emit the return value when the FunctionTerminator supports it.
+    current_function_.push_inst(spv::Op::OpReturn, {});
+
+    // Add the function to the module.
+    module_.PushFunction(current_function_);
+
+    return true;
 }
 
 }  // namespace tint::writer::spirv
