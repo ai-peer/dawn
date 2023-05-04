@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5afae859_f012ae68",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-04T08:36:47Z",
+      "side": 1,
+      "message": "As I argued on one of the IR changes, I\u0027d prefer it if `has_error()` went away. Having methods like this that are shorthand have limited use, and risk diverging from the diagnostics SSoT.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 0
+      },
+      "revId": "057b7f326e6383944e5ade235f2ee70d7fb568cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
