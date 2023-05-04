@@ -73,7 +73,7 @@ const ast::Function* InspectorBuilder::MakePlainGlobalReferenceBodyFunction(
     return Func(func, utils::Empty, ty.void_(), std::move(stmts), std::move(attributes));
 }
 
-bool InspectorBuilder::ContainsName(utils::VectorRef<StageVariable> vec, const std::string& name) {
+bool InspectorBuilder::ContainsName(utils::VectorRef<StageVariable> vec, std::string_view name) {
     for (auto& s : vec) {
         if (s.name == name) {
             return true;
@@ -86,7 +86,7 @@ std::string InspectorBuilder::StructMemberName(size_t idx, ast::Type type) {
     return std::to_string(idx) + type->identifier->symbol.Name();
 }
 
-const ast::Struct* InspectorBuilder::MakeStructType(const std::string& name,
+const ast::Struct* InspectorBuilder::MakeStructType(std::string_view name,
                                                     utils::VectorRef<ast::Type> member_types) {
     utils::Vector<const ast::StructMember*, 8> members;
     for (auto type : member_types) {
@@ -96,7 +96,7 @@ const ast::Struct* InspectorBuilder::MakeStructType(const std::string& name,
 }
 
 const ast::Struct* InspectorBuilder::MakeStructTypeFromMembers(
-    const std::string& name,
+    std::string_view name,
     utils::VectorRef<const ast::StructMember*> members) {
     return Structure(name, std::move(members));
 }
@@ -109,19 +109,19 @@ const ast::StructMember* InspectorBuilder::MakeStructMember(
 }
 
 const ast::Struct* InspectorBuilder::MakeUniformBufferType(
-    const std::string& name,
+    std::string_view name,
     utils::VectorRef<ast::Type> member_types) {
     return MakeStructType(name, member_types);
 }
 
 std::function<ast::Type()> InspectorBuilder::MakeStorageBufferTypes(
-    const std::string& name,
+    std::string_view name,
     utils::VectorRef<ast::Type> member_types) {
     MakeStructType(name, member_types);
     return [this, name] { return ty(name); };
 }
 
-void InspectorBuilder::AddUniformBuffer(const std::string& name,
+void InspectorBuilder::AddUniformBuffer(std::string_view name,
                                         ast::Type type,
                                         uint32_t group,
                                         uint32_t binding) {
@@ -129,11 +129,11 @@ void InspectorBuilder::AddUniformBuffer(const std::string& name,
               Group(AInt(group)));
 }
 
-void InspectorBuilder::AddWorkgroupStorage(const std::string& name, ast::Type type) {
+void InspectorBuilder::AddWorkgroupStorage(std::string_view name, ast::Type type) {
     GlobalVar(name, type, builtin::AddressSpace::kWorkgroup);
 }
 
-void InspectorBuilder::AddStorageBuffer(const std::string& name,
+void InspectorBuilder::AddStorageBuffer(std::string_view name,
                                         ast::Type type,
                                         builtin::Access access,
                                         uint32_t group,
@@ -143,8 +143,8 @@ void InspectorBuilder::AddStorageBuffer(const std::string& name,
 }
 
 void InspectorBuilder::MakeStructVariableReferenceBodyFunction(
-    std::string func_name,
-    std::string struct_name,
+    std::string_view func_name,
+    std::string_view struct_name,
     utils::VectorRef<std::tuple<size_t, ast::Type>> members) {
     utils::Vector<const ast::Statement*, 8> stmts;
     for (auto member : members) {
@@ -170,34 +170,34 @@ void InspectorBuilder::MakeStructVariableReferenceBodyFunction(
     Func(func_name, utils::Empty, ty.void_(), stmts);
 }
 
-void InspectorBuilder::AddSampler(const std::string& name, uint32_t group, uint32_t binding) {
+void InspectorBuilder::AddSampler(std::string_view name, uint32_t group, uint32_t binding) {
     GlobalVar(name, ty.sampler(type::SamplerKind::kSampler), Binding(AInt(binding)),
               Group(AInt(group)));
 }
 
-void InspectorBuilder::AddComparisonSampler(const std::string& name,
+void InspectorBuilder::AddComparisonSampler(std::string_view name,
                                             uint32_t group,
                                             uint32_t binding) {
     GlobalVar(name, ty.sampler(type::SamplerKind::kComparisonSampler), Binding(AInt(binding)),
               Group(AInt(group)));
 }
 
-void InspectorBuilder::AddResource(const std::string& name,
+void InspectorBuilder::AddResource(std::string_view name,
                                    ast::Type type,
                                    uint32_t group,
                                    uint32_t binding) {
     GlobalVar(name, type, Binding(AInt(binding)), Group(AInt(group)));
 }
 
-void InspectorBuilder::AddGlobalVariable(const std::string& name, ast::Type type) {
+void InspectorBuilder::AddGlobalVariable(std::string_view name, ast::Type type) {
     GlobalVar(name, type, builtin::AddressSpace::kPrivate);
 }
 
 const ast::Function* InspectorBuilder::MakeSamplerReferenceBodyFunction(
-    const std::string& func_name,
-    const std::string& texture_name,
-    const std::string& sampler_name,
-    const std::string& coords_name,
+    std::string_view func_name,
+    std::string_view texture_name,
+    std::string_view sampler_name,
+    std::string_view coords_name,
     ast::Type base_type,
     utils::VectorRef<const ast::Attribute*> attributes) {
     std::string result_name = "sampler_result";
@@ -211,11 +211,11 @@ const ast::Function* InspectorBuilder::MakeSamplerReferenceBodyFunction(
 }
 
 const ast::Function* InspectorBuilder::MakeSamplerReferenceBodyFunction(
-    const std::string& func_name,
-    const std::string& texture_name,
-    const std::string& sampler_name,
-    const std::string& coords_name,
-    const std::string& array_index,
+    std::string_view func_name,
+    std::string_view texture_name,
+    std::string_view sampler_name,
+    std::string_view coords_name,
+    std::string_view array_index,
     ast::Type base_type,
     utils::VectorRef<const ast::Attribute*> attributes) {
     std::string result_name = "sampler_result";
@@ -230,11 +230,11 @@ const ast::Function* InspectorBuilder::MakeSamplerReferenceBodyFunction(
 }
 
 const ast::Function* InspectorBuilder::MakeComparisonSamplerReferenceBodyFunction(
-    const std::string& func_name,
-    const std::string& texture_name,
-    const std::string& sampler_name,
-    const std::string& coords_name,
-    const std::string& depth_name,
+    std::string_view func_name,
+    std::string_view texture_name,
+    std::string_view sampler_name,
+    std::string_view coords_name,
+    std::string_view depth_name,
     ast::Type base_type,
     utils::VectorRef<const ast::Attribute*> attributes) {
     std::string result_name = "sampler_result";
@@ -287,7 +287,7 @@ ast::Type InspectorBuilder::MakeStorageTextureTypes(type::TextureDimension dim,
     return ty.storage_texture(dim, format, builtin::Access::kWrite);
 }
 
-void InspectorBuilder::AddStorageTexture(const std::string& name,
+void InspectorBuilder::AddStorageTexture(std::string_view name,
                                          ast::Type type,
                                          uint32_t group,
                                          uint32_t binding) {
@@ -295,8 +295,8 @@ void InspectorBuilder::AddStorageTexture(const std::string& name,
 }
 
 const ast::Function* InspectorBuilder::MakeStorageTextureBodyFunction(
-    const std::string& func_name,
-    const std::string& st_name,
+    std::string_view func_name,
+    std::string_view st_name,
     ast::Type dim_type,
     utils::VectorRef<const ast::Attribute*> attributes) {
     utils::Vector stmts{
