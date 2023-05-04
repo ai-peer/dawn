@@ -162,7 +162,7 @@ ${transforms} --parse-only              -- Stop after parsing the input
   --rename-all              -- Renames all symbols.
 )";
 
-Format parse_format(const std::string& fmt) {
+Format parse_format(std::string_view fmt) {
     (void)fmt;
 
 #if TINT_BUILD_SPV_WRITER
@@ -207,7 +207,7 @@ Format parse_format(const std::string& fmt) {
 
 /// @param filename the filename to inspect
 /// @returns the inferred format for the filename suffix
-Format infer_format(const std::string& filename) {
+Format infer_format(std::string_view filename) {
     (void)filename;
 
 #if TINT_BUILD_SPV_WRITER
@@ -452,7 +452,7 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
 /// like `std::string` and `std::vector` do.
 /// @returns true on success
 template <typename ContainerT>
-bool WriteFile(const std::string& output_file, const std::string mode, const ContainerT& buffer) {
+bool WriteFile(const std::string& output_file, const std::string& mode, const ContainerT& buffer) {
     const bool use_stdout = output_file.empty() || output_file == "-";
     FILE* file = stdout;
 

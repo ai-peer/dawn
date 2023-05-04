@@ -21,12 +21,12 @@ namespace tint::utils {
 
 namespace {
 
-std::string TmpFilePath(const std::string& ext) {
+std::string TmpFilePath(std::string_view ext) {
     char name[L_tmpnam];
     // As we're adding an extension, to ensure the file is really unique, try
     // creating it, failing if it already exists.
     while (tmpnam_s(name, L_tmpnam - 1) == 0) {
-        std::string name_with_ext = std::string(name) + ext;
+        std::string name_with_ext = std::string(name) + std::string(ext);
         FILE* f = nullptr;
         // The "x" arg forces the function to fail if the file already exists.
         fopen_s(&f, name_with_ext.c_str(), "wbx");

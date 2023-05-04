@@ -190,8 +190,8 @@ class Impl {
         Impl* impl_;
     };
 
-    void add_error(const Source& s, const std::string& err) {
-        diagnostics_.add_error(tint::diag::System::IR, err, s);
+    void add_error(const Source& s, std::string err) {
+        diagnostics_.add_error(tint::diag::System::IR, std::move(err), s);
     }
 
     void BranchTo(FlowNode* node, utils::VectorRef<Value*> args = {}) {

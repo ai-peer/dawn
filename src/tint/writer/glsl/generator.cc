@@ -28,7 +28,7 @@ Result::Result() = default;
 Result::~Result() = default;
 Result::Result(const Result&) = default;
 
-Result Generate(const Program* program, const Options& options, const std::string& entry_point) {
+Result Generate(const Program* program, const Options& options, std::string entry_point) {
     Result result;
     if (!program->IsValid()) {
         result.error = "input program is not valid";
@@ -36,7 +36,7 @@ Result Generate(const Program* program, const Options& options, const std::strin
     }
 
     // Sanitize the program.
-    auto sanitized_result = Sanitize(program, options, entry_point);
+    auto sanitized_result = Sanitize(program, options, std::move(entry_point));
     if (!sanitized_result.program.IsValid()) {
         result.success = false;
         result.error = sanitized_result.program.Diagnostics().str();

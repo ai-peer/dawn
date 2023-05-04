@@ -2188,7 +2188,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverTest,
                          ResolverBuiltinTest_Texture,
                          testing::ValuesIn(ast::builtin::test::TextureOverloadCase::ValidCases()));
 
-static std::string to_str(const std::string& function,
+static std::string to_str(std::string_view function,
                           utils::VectorRef<const sem::Parameter*> params) {
     utils::StringStream out;
     out << function << "(";
