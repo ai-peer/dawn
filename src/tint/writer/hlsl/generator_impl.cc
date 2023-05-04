@@ -3964,7 +3964,7 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
                              const type::Type* type,
                              builtin::AddressSpace address_space,
                              builtin::Access access,
-                             const std::string& name,
+                             std::string_view name,
                              bool* name_printed /* = nullptr */) {
     if (name_printed) {
         *name_printed = false;
@@ -4190,7 +4190,7 @@ bool GeneratorImpl::EmitTypeAndName(utils::StringStream& out,
                                     const type::Type* type,
                                     builtin::AddressSpace address_space,
                                     builtin::Access access,
-                                    const std::string& name) {
+                                    std::string_view name) {
     bool name_printed = false;
     if (!EmitType(out, type, address_space, access, name, &name_printed)) {
         return false;

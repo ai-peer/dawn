@@ -69,7 +69,7 @@ class StringStream {
     /// Emit `value` to the stream
     /// @param value the value to emit
     /// @returns a reference to this
-    StringStream& operator<<(const std::string& value) { return EmitValue(value); }
+    StringStream& operator<<(std::string value) { return EmitValue(std::move(value)); }
     /// Emit `value` to the stream
     /// @param value the value to emit
     /// @returns a reference to this
