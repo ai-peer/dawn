@@ -70,9 +70,7 @@ struct SanitizedResult {
 /// @param options The HLSL generator options.
 /// @param entry_point the entry point to generate GLSL for
 /// @returns the sanitized program and any supplementary information
-SanitizedResult Sanitize(const Program* program,
-                         const Options& options,
-                         const std::string& entry_point);
+SanitizedResult Sanitize(const Program* program, const Options& options, std::string entry_point);
 
 /// Implementation class for GLSL generator
 class GeneratorImpl : public TextGenerator {
@@ -366,7 +364,7 @@ class GeneratorImpl : public TextGenerator {
                   const type::Type* type,
                   builtin::AddressSpace address_space,
                   builtin::Access access,
-                  const std::string& name,
+                  std::string_view name,
                   bool* name_printed = nullptr);
     /// Handles generating type and name
     /// @param out the output stream
@@ -378,7 +376,7 @@ class GeneratorImpl : public TextGenerator {
                          const type::Type* type,
                          builtin::AddressSpace address_space,
                          builtin::Access access,
-                         const std::string& name);
+                         std::string_view name);
     /// Handles generating a structure declaration. If the structure has already been emitted, then
     /// this function will simply return `true` without emitting anything.
     /// @param buffer the text buffer that the type declaration will be written to

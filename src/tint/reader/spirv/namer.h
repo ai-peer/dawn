@@ -16,10 +16,10 @@
 #define SRC_TINT_READER_SPIRV_NAMER_H_
 
 #include <string>
-#include <unordered_map>
 #include <vector>
 
 #include "src/tint/reader/spirv/fail_stream.h"
+#include "src/tint/utils/hashmap.h"
 
 namespace tint::reader::spirv {
 
@@ -39,11 +39,11 @@ class Namer {
     ~Namer();
 
     /// Sanitizes the given string, to replace unusual characters with
-    /// obviously-valid idenfier characters. An empy string yields "empty".
+    /// obviously-valid identifier characters. An empty string yields "empty".
     /// A sanitized name never starts with an underscore.
     /// @param suggested_name input string
     /// @returns sanitized name, suitable for use as an identifier
-    static std::string Sanitize(const std::string& suggested_name);
+    static std::string Sanitize(std::string_view suggested_name);
 
     /// Registers a failure.
     /// @returns a fail stream to accumulate diagnostics.
@@ -51,17 +51,15 @@ class Namer {
 
     /// @param id the SPIR-V ID
     /// @returns true if we the given ID already has a registered name.
-    bool HasName(uint32_t id) { return id_to_name_.find(id) != id_to_name_.end(); }
+    bool HasName(uint32_t id) { return id_to_name_.Contains(id); }
 
     /// @param name a string
     /// @returns true if the string has been registered as a name.
-    bool IsRegistered(const std::string& name) const {
-        return name_to_id_.find(name) != name_to_id_.end();
-    }
+    bool IsRegistered(const std::string& name) const { return name_to_id_.Contains(name); }
 
     /// @param id the SPIR-V ID
     /// @returns the name for the ID. It must have been registered.
-    const std::string& GetName(uint32_t id) const { return id_to_name_.find(id)->second; }
+    const std::string& GetName(uint32_t id) const { return *id_to_name_.Find(id).Get(); }
 
     /// Gets a unique name for the ID. If one already exists, then return
     /// that, otherwise synthesize a name and remember it for later.
@@ -100,13 +98,13 @@ class Namer {
     /// @param id the SPIR-V ID
     /// @param name the name to map to the ID
     /// @returns true if the ID did not have a previously registered name.
-    bool Register(uint32_t id, const std::string& name);
+    bool Register(uint32_t id, std::string name);
 
     /// Registers a name, but not associated to any ID. Fails and emits
     /// a diagnostic if the name was already registered.
     /// @param name the name to register
     /// @returns true if the name was not already reegistered.
-    bool RegisterWithoutId(const std::string& name);
+    bool RegisterWithoutId(std::string name);
 
     /// Saves a sanitized name for the given ID, if that ID does not yet
     /// have a registered name, and if the sanitized name has not already
@@ -114,7 +112,7 @@ class Namer {
     /// @param id the SPIR-V ID
     /// @param suggested_name the suggested name
     /// @returns true if a name was newly registered for the ID
-    bool SuggestSanitizedName(uint32_t id, const std::string& suggested_name);
+    bool SuggestSanitizedName(uint32_t id, std::string_view suggested_name);
 
     /// Saves a sanitized name for a member of a struct, if that member
     /// does not yet have a registered name.
@@ -124,7 +122,7 @@ class Namer {
     /// @returns true if a name was newly registered
     bool SuggestSanitizedMemberName(uint32_t struct_id,
                                     uint32_t member_index,
-                                    const std::string& suggested_name);
+                                    std::string_view suggested_name);
 
     /// Ensure there are member names registered for members of the given struct
     /// such that:
@@ -138,18 +136,18 @@ class Namer {
     FailStream fail_stream_;
 
     // Maps an ID to its registered name.
-    std::unordered_map<uint32_t, std::string> id_to_name_;
+    utils::Hashmap<uint32_t, std::string, 32> id_to_name_;
     // Maps a name to a SPIR-V ID, or 0 (the case for derived names).
-    std::unordered_map<std::string, uint32_t> name_to_id_;
+    utils::Hashmap<std::string, uint32_t, 32> name_to_id_;
 
     // Maps a struct id and member index to a suggested sanitized name.
     // If entry k in the vector is an empty string, then a suggestion
     // was recorded for a higher-numbered index, but not for index k.
-    std::unordered_map<uint32_t, std::vector<std::string>> struct_member_names_;
+    utils::Hashmap<uint32_t, std::vector<std::string>, 32> struct_member_names_;
 
     // Saved search id suffix for a given base name. Used by
     // FindUnusedDerivedName().
-    std::unordered_map<std::string, uint32_t> next_unusued_derived_name_id_;
+    utils::Hashmap<std::string, uint32_t, 32> next_unusued_derived_name_id_;
 };
 
 }  // namespace tint::reader::spirv

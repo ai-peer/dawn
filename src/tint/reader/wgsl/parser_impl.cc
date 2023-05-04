@@ -212,7 +212,7 @@ ParserImpl::ParserImpl(Source::File const* file) : file_(file) {}
 ParserImpl::~ParserImpl() = default;
 
 ParserImpl::Failure::Errored ParserImpl::add_error(const Source& source,
-                                                   std::string_view err,
+                                                   std::string err,
                                                    std::string_view use) {
     if (silence_diags_ == 0) {
         utils::StringStream msg;
@@ -225,29 +225,28 @@ ParserImpl::Failure::Errored ParserImpl::add_error(const Source& source,
     return Failure::kErrored;
 }
 
-ParserImpl::Failure::Errored ParserImpl::add_error(const Token& t, std::string_view err) {
-    add_error(t.source(), err);
+ParserImpl::Failure::Errored ParserImpl::add_error(const Token& t, std::string err) {
+    add_error(t.source(), std::move(err));
     return Failure::kErrored;
 }
 
-ParserImpl::Failure::Errored ParserImpl::add_error(const Source& source, std::string_view err) {
+ParserImpl::Failure::Errored ParserImpl::add_error(const Source& source, std::string err) {
     if (silence_diags_ == 0) {
-        builder_.Diagnostics().add_error(diag::System::Reader, err, source);
+        builder_.Diagnostics().add_error(diag::System::Reader, std::move(err), source);
     }
     return Failure::kErrored;
 }
 
-void ParserImpl::add_note(const Source& source, std::string_view err) {
+void ParserImpl::add_note(const Source& source, std::string err) {
     if (silence_diags_ == 0) {
-        builder_.Diagnostics().add_note(diag::System::Reader, err, source);
+        builder_.Diagnostics().add_note(diag::System::Reader, std::move(err), source);
     }
 }
 
-void ParserImpl::deprecated(const Source& source, std::string_view msg) {
+void ParserImpl::deprecated(const Source& source, std::string msg) {
     if (silence_diags_ == 0) {
-        builder_.Diagnostics().add_warning(
-            diag::System::Reader, "use of deprecated language feature: " + std::string(msg),
-            source);
+        builder_.Diagnostics().add_warning(diag::System::Reader,
+                                           "use of deprecated language feature: " + msg, source);
     }
 }
 

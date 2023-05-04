@@ -345,7 +345,7 @@ class ParserImpl {
     /// @param msg the error message
     /// @return `Failure::Errored::kError` so that you can combine an add_error()
     /// call and return on the same line.
-    Failure::Errored add_error(const Token& t, std::string_view msg);
+    Failure::Errored add_error(const Token& t, std::string msg);
     /// Appends an error raised when parsing `use` at `t` with the message
     /// `msg`
     /// @param source the source to associate the error with
@@ -354,22 +354,22 @@ class ParserImpl {
     /// raised.
     /// @return `Failure::Errored::kError` so that you can combine an add_error()
     /// call and return on the same line.
-    Failure::Errored add_error(const Source& source, std::string_view msg, std::string_view use);
+    Failure::Errored add_error(const Source& source, std::string msg, std::string_view use);
     /// Appends an error at `source` with the message `msg`
     /// @param source the source to associate the error with
     /// @param msg the error message
     /// @return `Failure::Errored::kError` so that you can combine an add_error()
     /// call and return on the same line.
-    Failure::Errored add_error(const Source& source, std::string_view msg);
+    Failure::Errored add_error(const Source& source, std::string msg);
     /// Appends a note at `source` with the message `msg`
     /// @param source the source to associate the error with
     /// @param msg the note message
-    void add_note(const Source& source, std::string_view msg);
+    void add_note(const Source& source, std::string msg);
     /// Appends a deprecated-language-feature warning at `source` with the message
     /// `msg`
     /// @param source the source to associate the error with
     /// @param msg the warning message
-    void deprecated(const Source& source, std::string_view msg);
+    void deprecated(const Source& source, std::string msg);
     /// Parses the `translation_unit` grammar element
     void translation_unit();
     /// Parses the `global_directive` grammar element, erroring on parse failure.

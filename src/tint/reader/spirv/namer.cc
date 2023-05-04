@@ -16,6 +16,7 @@
 
 #include <algorithm>
 #include <unordered_set>
+#include <utility>
 
 #include "src/tint/debug.h"
 #include "src/tint/utils/string_stream.h"
@@ -173,13 +174,13 @@ const char* kWGSLReservedWords[] = {
 
 Namer::Namer(const FailStream& fail_stream) : fail_stream_(fail_stream) {
     for (const auto* reserved : kWGSLReservedWords) {
-        name_to_id_[std::string(reserved)] = 0;
+        name_to_id_.Add(reserved, 0u);
     }
 }
 
 Namer::~Namer() = default;
 
-std::string Namer::Sanitize(const std::string& suggested_name) {
+std::string Namer::Sanitize(std::string_view suggested_name) {
     if (suggested_name.empty()) {
         return "empty";
     }
@@ -204,11 +205,10 @@ std::string Namer::Sanitize(const std::string& suggested_name) {
 
 std::string Namer::GetMemberName(uint32_t struct_id, uint32_t member_index) const {
     std::string result;
-    auto where = struct_member_names_.find(struct_id);
-    if (where != struct_member_names_.end()) {
-        auto& member_names = where->second;
-        if (member_index < member_names.size()) {
-            result = member_names[member_index];
+
+    if (auto member_names = struct_member_names_.Find(struct_id)) {
+        if (member_index < member_names->size()) {
+            result = (*member_names.Get())[member_index];
         }
     }
     return result;
@@ -217,7 +217,7 @@ std::string Namer::GetMemberName(uint32_t struct_id, uint32_t member_index) cons
 std::string Namer::FindUnusedDerivedName(const std::string& base_name) {
     // Ensure uniqueness among names.
     std::string derived_name;
-    uint32_t& i = next_unusued_derived_name_id_[base_name];
+    uint32_t& i = *next_unusued_derived_name_id_.GetOrZero(base_name).Get();
     while (i != 0xffffffff) {
         utils::StringStream new_name_stream;
         new_name_stream << base_name;
@@ -241,28 +241,28 @@ std::string Namer::MakeDerivedName(const std::string& base_name) {
     return result;
 }
 
-bool Namer::Register(uint32_t id, const std::string& name) {
-    if (HasName(id)) {
+bool Namer::Register(uint32_t id, std::string name) {
+    if (auto existing = id_to_name_.Get(id)) {
         return Fail() << "internal error: ID " << id
-                      << " already has registered name: " << id_to_name_[id];
+                      << " already has registered name: " << existing.value();
     }
     if (!RegisterWithoutId(name)) {
         return false;
     }
-    id_to_name_[id] = name;
-    name_to_id_[name] = id;
+    id_to_name_.Add(id, name);
+    name_to_id_.Add(std::move(name), id);
     return true;
 }
 
-bool Namer::RegisterWithoutId(const std::string& name) {
+bool Namer::RegisterWithoutId(std::string name) {
     if (IsRegistered(name)) {
         return Fail() << "internal error: name already registered: " << name;
     }
-    name_to_id_[name] = 0;
+    name_to_id_.Add(std::move(name), 0u);
     return true;
 }
 
-bool Namer::SuggestSanitizedName(uint32_t id, const std::string& suggested_name) {
+bool Namer::SuggestSanitizedName(uint32_t id, std::string_view suggested_name) {
     if (HasName(id)) {
         return false;
     }
@@ -272,12 +272,12 @@ bool Namer::SuggestSanitizedName(uint32_t id, const std::string& suggested_name)
 
 bool Namer::SuggestSanitizedMemberName(uint32_t struct_id,
                                        uint32_t member_index,
-                                       const std::string& suggested_name) {
+                                       std::string_view suggested_name) {
     // Creates an empty vector the first time we visit this struct.
-    auto& name_vector = struct_member_names_[struct_id];
+    auto name_vector = struct_member_names_.GetOrZero(struct_id);
     // Resizing will set new entries to the empty string.
-    name_vector.resize(std::max(name_vector.size(), size_t(member_index + 1)));
-    auto& entry = name_vector[member_index];
+    name_vector->resize(std::max(name_vector->size(), size_t(member_index + 1)));
+    auto& entry = (*name_vector)[member_index];
     if (entry.empty()) {
         entry = Sanitize(suggested_name);
         return true;
@@ -286,17 +286,17 @@ bool Namer::SuggestSanitizedMemberName(uint32_t struct_id,
 }
 
 void Namer::ResolveMemberNamesForStruct(uint32_t struct_id, uint32_t num_members) {
-    auto& name_vector = struct_member_names_[struct_id];
+    auto name_vector = struct_member_names_.GetOrZero(struct_id);
     // Resizing will set new entries to the empty string.
     // It would have been an error if the client had registered a name for
     // an out-of-bounds member index, so toss those away.
-    name_vector.resize(num_members);
+    name_vector->resize(num_members);
 
     std::unordered_set<std::string> used_names;
 
     // Returns a name, based on the suggestion, which does not equal
     // any name in the used_names set.
-    auto disambiguate_name = [&used_names](const std::string& suggestion) -> std::string {
+    auto disambiguate_name = [&used_names](std::string suggestion) -> std::string {
         if (used_names.find(suggestion) == used_names.end()) {
             // There is no collision.
             return suggestion;
@@ -315,11 +315,11 @@ void Namer::ResolveMemberNamesForStruct(uint32_t struct_id, uint32_t num_members
 
     // First ensure uniqueness among names for which we have already taken
     // suggestions.
-    for (auto& name : name_vector) {
+    for (auto& name : *name_vector) {
         if (!name.empty()) {
             // This modifies the names in-place, i.e. update the name_vector
             // entries.
-            name = disambiguate_name(name);
+            name = disambiguate_name(std::move(name));
             used_names.insert(name);
         }
     }
@@ -329,7 +329,7 @@ void Namer::ResolveMemberNamesForStruct(uint32_t struct_id, uint32_t num_members
     // a generated name such as 'field1' might collide with a user-suggested
     // name of 'field1' attached to a later member.
     uint32_t index = 0;
-    for (auto& name : name_vector) {
+    for (auto& name : *name_vector) {
         if (name.empty()) {
             utils::StringStream suggestion;
             suggestion << "field" << index;

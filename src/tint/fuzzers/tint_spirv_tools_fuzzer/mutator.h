@@ -92,7 +92,7 @@ class Mutator {
     ///     are created if the `path` is nullptr.
     /// @param count - the number of the error. Files for this error will be
     ///     prefixed with `count`.
-    virtual void LogErrors(const std::string* path, uint32_t count) const = 0;
+    virtual void LogErrors(std::string_view path, uint32_t count) const = 0;
 
     /// @return errors encountered during the mutation. The returned string is
     ///     if there were no errors during mutation.

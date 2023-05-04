@@ -32,7 +32,7 @@ enum class InputFormat {
     kSpirvAsm,
 };
 
-InputFormat InputFormatFromFilename(const std::string& filename) {
+InputFormat InputFormatFromFilename(std::string_view filename) {
     auto input_format = InputFormat::kUnknown;
 
     if (filename.size() > 5 && filename.substr(filename.size() - 5) == ".wgsl") {
@@ -45,7 +45,7 @@ InputFormat InputFormatFromFilename(const std::string& filename) {
     return input_format;
 }
 
-void PrintBindings(tint::inspector::Inspector& inspector, const std::string& ep_name) {
+void PrintBindings(tint::inspector::Inspector& inspector, std::string_view ep_name) {
     auto bindings = inspector.GetResourceBindings(ep_name);
     if (!inspector.error().empty()) {
         std::cerr << "Failed to get bindings from Inspector: " << inspector.error() << std::endl;
