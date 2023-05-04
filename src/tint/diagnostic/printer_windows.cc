@@ -56,7 +56,7 @@ class PrinterWindows : public Printer {
     PrinterWindows(FILE* f, bool use_colors)
         : file(f), console(console_info(use_colors ? f : nullptr)) {}
 
-    void write(const std::string& str, const Style& style) override {
+    void write(std::string_view str, const Style& style) override {
         write_color(style.color, style.bold);
         fwrite(str.data(), 1, str.size(), file);
         write_color(Color::kDefault, false);

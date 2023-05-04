@@ -97,13 +97,13 @@ class CommonFuzzer {
     const std::vector<uint32_t>& GetGeneratedSpirv() const { return generated_spirv_; }
 
     /// @returns generated WGSL string, if WGSL was emitted.
-    const std::string& GetGeneratedWgsl() const { return generated_wgsl_; }
+    std::string_view GetGeneratedWgsl() const { return generated_wgsl_; }
 
     /// @returns generated HLSL string, if HLSL was emitted.
-    const std::string& GetGeneratedHlsl() const { return generated_hlsl_; }
+    std::string_view GetGeneratedHlsl() const { return generated_hlsl_; }
 
     /// @returns generated MSL string, if HLSL was emitted.
-    const std::string& GetGeneratedMsl() const { return generated_msl_; }
+    std::string_view GetGeneratedMsl() const { return generated_msl_; }
 
     /// @param options SPIR-V emission options
     void SetOptionsSpirv(const writer::spirv::Options& options) { options_spirv_ = options; }

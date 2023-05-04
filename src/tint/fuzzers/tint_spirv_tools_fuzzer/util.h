@@ -40,10 +40,10 @@ spvtools::MessageConsumer GetBufferMessageConsumer(std::stringstream* buffer);
 /// @param error_dir - the directory, to which the binary will be printed to.
 ///     If it's empty, the invalid binary and supplemental files will not be
 ///     printed. Otherwise, it must have a `spv/` subdirectory.
-void LogSpvError(const std::string& message,
+void LogSpvError(std::string_view message,
                  const uint8_t* data,
                  size_t size,
-                 const std::string& error_dir);
+                 std::string_view error_dir);
 
 /// Output errors from the WGSL -> `output_format` conversion.
 ///
@@ -55,12 +55,12 @@ void LogSpvError(const std::string& message,
 /// @param error_dir - the directory, to which the binary will be printed out.
 ///     If it's empty, the invalid binary and supplemental files will not be
 ///     printed. Otherwise, it must have a `wgsl/` subdirectory.
-void LogWgslError(const std::string& message,
+void LogWgslError(std::string_view message,
                   const uint8_t* data,
                   size_t size,
-                  const std::string& wgsl,
+                  std::string_view wgsl,
                   OutputFormat output_format,
-                  const std::string& error_dir);
+                  std::string_view error_dir);
 
 /// Output errors produced by the mutator.
 ///
@@ -68,7 +68,7 @@ void LogWgslError(const std::string& message,
 /// @param error_dir - the directory, to which invalid files will be printed to.
 ///     If it's empty, the invalid binary and supplemental files will not be
 ///     printed. Otherwise, it must have a `mutator/` subdirectory.
-void LogMutatorError(const Mutator& mutator, const std::string& error_dir);
+void LogMutatorError(const Mutator& mutator, std::string_view error_dir);
 
 /// Reads SPIR-V binary from `path` into `out`. Returns `true` if successful and
 /// `false` otherwise (in this case, `out` is unchanged).
@@ -76,14 +76,14 @@ void LogMutatorError(const Mutator& mutator, const std::string& error_dir);
 /// @param path - the path to the SPIR-V binary.
 /// @param out - may be a `nullptr`. In this case, `false` is returned.
 /// @return `true` if successful and `false` otherwise.
-bool ReadBinary(const std::string& path, std::vector<uint32_t>* out);
+bool ReadBinary(std::string_view path, std::vector<uint32_t>* out);
 
 /// Writes `binary` into `path`.
 ///
 /// @param path - the path to write `binary` to.
 /// @param binary - SPIR-V binary.
 /// @return whether the operation was successful.
-bool WriteBinary(const std::string& path, const std::vector<uint32_t>& binary);
+bool WriteBinary(std::string_view path, const std::vector<uint32_t>& binary);
 
 }  // namespace tint::fuzzers::spvtools_fuzzer::util
 
