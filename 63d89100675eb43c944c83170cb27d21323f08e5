@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e84db46_272b008e",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-04T18:52:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29fd747d_b8bb5884",
+      "revId": "63d89100675eb43c944c83170cb27d21323f08e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b0f2e16_106702c8",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-04T17:34:02Z",
       "side": 1,
       "message": "The branch _to_ the terminator contains an `args` entry which has the return value. So, when you emit the branch it would be an `OpReturn` with the right value.\n\n(Since you can have multiple returns from a function)",
+      "revId": "63d89100675eb43c944c83170cb27d21323f08e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9216a813_547d61c7",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-04T18:52:12Z",
+      "side": 1,
+      "message": "Ack - I\u0027ve updated the comment to better reflect what will be done.",
+      "parentUuid": "2b0f2e16_106702c8",
       "revId": "63d89100675eb43c944c83170cb27d21323f08e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
