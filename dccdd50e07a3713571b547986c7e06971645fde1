@@ -22,6 +22,30 @@
       },
       "revId": "dccdd50e07a3713571b547986c7e06971645fde1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "008e80ad_55fa6c9b",
+        "filename": "src/dawn/native/Limits.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-05-04T09:19:35Z",
+      "side": 1,
+      "message": "Done. This could possibly result in `maxStorageBufferBindingSize` not being one of the predefined tiers but clamped to a `maxBufferSize` tier, although I think it should rarely happen.",
+      "parentUuid": "9e98c054_f0322578",
+      "range": {
+        "startLine": 267,
+        "startChar": 4,
+        "endLine": 267,
+        "endChar": 78
+      },
+      "revId": "dccdd50e07a3713571b547986c7e06971645fde1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
