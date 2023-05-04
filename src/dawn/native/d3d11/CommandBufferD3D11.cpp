@@ -207,6 +207,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                 }
 
                 case BindingInfoType::StorageTexture: {
+                    // TODO(dawn:1798): Support storage textures.
                     return DAWN_UNIMPLEMENTED_ERROR("Storage textures are not supported");
                 }
 
