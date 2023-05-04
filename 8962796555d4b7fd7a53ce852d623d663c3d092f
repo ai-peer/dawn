@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f187cd3e_e11b45af",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-04T09:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7a483d2_20334783",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5afd4dc5_37c78dfd",
@@ -116,6 +134,24 @@
       "writtenOn": "2023-05-04T03:54:40Z",
       "side": 1,
       "message": "There is an existing `Converter::ToProgram` which either should be where this lives, or be removed. The original idea was Converter  held the `FromProgram` and `ToProgram` calls.",
+      "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b088f6d7_e2caef74",
+        "filename": "src/tint/ir/to_program.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-04T09:33:56Z",
+      "side": 1,
+      "message": "Given that we\u0027ll probably want to conditionally compile the `ToProgram()` (maybe for tests only), I\u0027ve moved `Converter` to a `FromProgram()` free function, and renamed the files accordingly.",
+      "parentUuid": "d734435f_1dd9f3f2",
       "revId": "8962796555d4b7fd7a53ce852d623d663c3d092f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
