@@ -222,19 +222,26 @@ func run() error {
 		flags.Set("validate=1")
 	}
 
-	// While running the CTS, always allow unsafe APIs so they can be tested.
-	disableDawnFeaturesFound := false
+	// Append (or add) dawn features as appropriate.
+	enableDawnFeaturesFound := false
 	for i, flag := range flags {
-		if strings.HasPrefix(flag, "disable-dawn-features=") {
-			flags[i] = flag + ",disallow_unsafe_apis"
-			disableDawnFeaturesFound = true
+		if strings.HasPrefix(flag, "enable-dawn-features=") {
+			// While running the CTS, always allow unsafe APIs so they can be tested.
+			flags[i] = flag + ",allow-unsafe-apis"
+			if dumpShaders {
+				flags[i] = flag + ",dump_shaders,disable_symbol_renaming"
+			}
+			enableDawnFeaturesFound = true
 		}
 	}
-	if !disableDawnFeaturesFound {
-		flags = append(flags, "disable-dawn-features=disallow_unsafe_apis")
+	if !enableDawnFeaturesFound {
+		features := "enable-dawn-features=allow-unsafe-apis"
+		if dumpShaders {
+			features = features + ",dump_shaders,disable_symbol_renaming"
+		}
+		flags = append(flags, features)
 	}
 	if dumpShaders {
-		flags = append(flags, "enable-dawn-features=dump_shaders,disable_symbol_renaming")
 		verbose = true
 	}
 
