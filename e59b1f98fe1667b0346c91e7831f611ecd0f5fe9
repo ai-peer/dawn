@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af40e59e_9031e6c4",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T11:57:41Z",
+      "side": 1,
+      "message": "optional-nit: Other places don\u0027t have a space here.",
+      "range": {
+        "startLine": 210,
+        "startChar": 33,
+        "endLine": 210,
+        "endChar": 34
+      },
+      "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b4147af_ff6662af",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 1
@@ -78,6 +101,40 @@
         "endLine": 395,
         "endChar": 34
       },
+      "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5d3bb8_d3094ed7",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T11:57:41Z",
+      "side": 1,
+      "message": "This logic can be done with \n\n```\nDAWN_TRY(buffer-\u003eEnsureDataInitializedAsDestination(commandContext, copy));\n```\n\nSo we don\u0027t need to pass in the full size in the callback. See:\n\nhttps://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/d3d12/CommandBufferD3D12.cpp;drc\u003de0e0d24aaa54727dc0a8bc4b159ccdf80d3f5d8d;l\u003d873",
+      "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b204d3ba_d915e067",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-04T11:57:41Z",
+      "side": 1,
+      "message": "Could you separate individual fixes in different CLs? It would help land parts faster, and would make it more clear in the review which parts are related.\n\nAlso I don\u0027t think that this fix is sufficient, what if there are multiple vertex buffer calls since the last pipeline? The D3D12 backend has a more complete solution: https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/d3d12/CommandBufferD3D12.cpp;drc\u003de0e0d24aaa54727dc0a8bc4b159ccdf80d3f5d8d;l\u003d650",
       "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
