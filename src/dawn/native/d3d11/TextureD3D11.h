@@ -57,7 +57,8 @@ class Texture final : public TextureBase {
                      const uint8_t* data,
                      uint32_t bytesPerRow,
                      uint32_t rowsPerImage);
-    using ReadCallback = std::function<MaybeError(const uint8_t* data, size_t offset, size_t size)>;
+    using ReadCallback = std::function<
+        MaybeError(const uint8_t* data, size_t offset, size_t size, size_t full_size)>;
     MaybeError Read(CommandRecordingContext* commandContext,
                     const SubresourceRange& subresources,
                     const Origin3D& origin,
