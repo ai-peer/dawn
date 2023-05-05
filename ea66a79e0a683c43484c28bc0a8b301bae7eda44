@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e972b99_3bd4ecff",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T18:11:25Z",
+      "side": 1,
+      "message": "nit: size is unused",
+      "range": {
+        "startLine": 230,
+        "startChar": 27,
+        "endLine": 230,
+        "endChar": 40
+      },
+      "revId": "ea66a79e0a683c43484c28bc0a8b301bae7eda44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af57de72_ace93b61",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 1
