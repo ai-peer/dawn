@@ -37,6 +37,9 @@ class Var : public utils::Castable<Var, Instruction> {
     Var& operator=(const Var& inst) = delete;
     Var& operator=(Var&& inst) = delete;
 
+    /// The optional initializer
+    Value* initializer = nullptr;
+
     /// The variable address space
     builtin::AddressSpace address_space = builtin::AddressSpace::kUndefined;
 
