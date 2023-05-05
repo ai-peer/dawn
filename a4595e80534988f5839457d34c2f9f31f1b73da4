@@ -244,6 +244,24 @@
       "message": "This fails copy size validation even for vulkan depth16unorm.\nThis size a \"multiple of 4 bytes\" restriction for copy size? (depth16unorm element is 2 byte so if we need to align for the last row?)",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05bc11e3_abd99bbc",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "not sure what you mean?",
+      "parentUuid": "ee7999b1_8fd0c1e2",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

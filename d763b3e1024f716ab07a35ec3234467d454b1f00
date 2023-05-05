@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e03c98ba_d1ef75c5",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think you need to assign the override size. That makes it more clear it\u0027s always provided externally",
+      "range": {
+        "startLine": 54,
+        "startChar": 31,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e459b60_db28c22a",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "params.rowsPerImage not used in this computation\n\ncan add a test for it if we don\u0027t have one",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 78
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f62e7b03_940c847a",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think you need to assign the override size. That makes it more clear it\u0027s always provided externally",
+      "range": {
+        "startLine": 100,
+        "startChar": 31,
+        "endLine": 100,
+        "endChar": 33
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccfbd76_751d20bc",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "in the else case, I think we need to read from dst_buf so we preserve the original contents there. I believe the current implementation will clear those higher bits in the buffer to 0. We want to do something like `buffer[offset] \u003d (buffer[offset] \u0026 0xFFFF0000) + r0;`\n\ncan add a test for it if we don\u0027t have one.\nYou\u0027ll want to fill the buffer with some other contents, do the copy, and then check that the buffer contents just past the right edge of the odd-sized copy region are still the same. and the texels on the right edge of the copy region are copied correctly\n\nNow that I\u0027m thinking about it though, in the case where the width of the copy region is odd, I think it could be be more efficient to do the copy in two passes. One which copies the even-sized subregion. And then a second pass which copies the last column:\n```\n____________________________\n|                         | |\n|                         | |\n|                         | |\n|                         | |\n|                         | |\n|_________________________|_|\n```\n\nThat\u0027s because copying the last column needs to both read+write from the destination buffer, whereas copying the rest of the region is only writes.\n\nWe want the threads in the shader to be performing the same type of workload.\n\nI think that we can keep the shader and pipelines identical, to avoid duplicating them. But issue two copies with two different sets of params.\nFeel free to look into this as an optimization later since it needs some testing and verification to determine whether it would actually be faster.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 56
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1694de_49098710",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "hm, this feels slightly easy to mess up. Instead, could we pass an enum into the function instead of the string, then you can switch on the enum to choose the right shader",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 59
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb421c1c_ae382a1f",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "stale comments",
+      "range": {
+        "startLine": 217,
+        "startChar": 28,
+        "endLine": 218,
+        "endChar": 62
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607fdc20_99baba73",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "could you also explain that we don\u0027t need them (right now) because we only use the workaround on platforms that don\u0027t support Depth32FloatStencil8 (only depth24plus-stencil8)",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 75
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2b4eb5_99336051",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1286,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T20:34:16Z",
+      "side": 1,
+      "message": "nit: only compute the aspect and check it here,\n\nthen make the `TextureCopy src` / `BufferCopy dst` inside the if-block?",
+      "range": {
+        "startLine": 1286,
+        "startChar": 12,
+        "endLine": 1286,
+        "endChar": 46
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
