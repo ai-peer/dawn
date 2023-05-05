@@ -231,6 +231,7 @@ ComputePassEncoder::TransformIndirectDispatchBuffer(Ref<BufferBase> indirectBuff
     const bool shouldDuplicateNumWorkgroups =
         device->ShouldDuplicateNumWorkgroupsForDispatchIndirect(
             mCommandBufferState.GetComputePipeline());
+
     if (!IsValidationEnabled() && !shouldDuplicateNumWorkgroups) {
         return std::make_pair(indirectBuffer, indirectOffset);
     }

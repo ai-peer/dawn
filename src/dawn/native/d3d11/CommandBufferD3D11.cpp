@@ -309,16 +309,18 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
             }
 
             case Command::DispatchIndirect: {
-                // TODO(1716): figure how to update num workgroups builtins
                 DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply());
 
-                uint64_t indirectBufferOffset = dispatch->indirectOffset;
                 Buffer* indirectBuffer = ToBackend(dispatch->indirectBuffer.Get());
 
+                // Copy indirect args into the uniform buffer for built-in workgroup variables.
+                DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, dispatch->indirectOffset,
+                                      sizeof(uint32_t) * 3, commandContext->GetUniformBuffer(), 0));
+
                 commandContext->GetD3D11DeviceContext()->DispatchIndirect(
-                    indirectBuffer->GetD3D11Buffer(), indirectBufferOffset);
+                    indirectBuffer->GetD3D11Buffer(), dispatch->indirectOffset);
 
                 break;
             }
@@ -470,28 +472,44 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             }
 
             case Command::DrawIndirect: {
-                // TODO(dawn:1716): figure how to setup built-in variables for indirect draw.
                 DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
-                DAWN_TRY(bindGroupTracker.Apply());
-                uint64_t indirectBufferOffset = draw->indirectOffset;
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
                 ASSERT(indirectBuffer != nullptr);
 
+                DAWN_TRY(bindGroupTracker.Apply());
+
+                if (lastPipeline->GetUsesVertexOrInstanceIndex()) {
+                    uint64_t offset =
+                        draw->indirectOffset +
+                        offsetof(D3D11_DRAW_INSTANCED_INDIRECT_ARGS, StartVertexLocation);
+                    DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, offset,
+                                          sizeof(uint32_t) * 2, commandContext->GetUniformBuffer(),
+                                          0));
+                }
+
                 commandContext->GetD3D11DeviceContext()->DrawInstancedIndirect(
-                    indirectBuffer->GetD3D11Buffer(), indirectBufferOffset);
+                    indirectBuffer->GetD3D11Buffer(), draw->indirectOffset);
 
                 break;
             }
 
             case Command::DrawIndexedIndirect: {
-                // TODO(dawn:1716): figure how to setup built-in variables for indirect draw.
                 DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
-
-                DAWN_TRY(bindGroupTracker.Apply());
 
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
                 ASSERT(indirectBuffer != nullptr);
+
+                DAWN_TRY(bindGroupTracker.Apply());
+
+                if (lastPipeline->GetUsesVertexOrInstanceIndex()) {
+                    uint64_t offset =
+                        draw->indirectOffset +
+                        offsetof(D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS, BaseVertexLocation);
+                    DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, offset,
+                                          sizeof(uint32_t) * 2, commandContext->GetUniformBuffer(),
+                                          0));
+                }
 
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstancedIndirect(
                     indirectBuffer->GetD3D11Buffer(), draw->indirectOffset);
