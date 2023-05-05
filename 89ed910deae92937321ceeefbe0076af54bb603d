@@ -16,6 +16,24 @@
       "message": "Worried it\u0027s not super clear which finished encoder its referring to.\n\nMaybe:\n\n\"%s is already finished.\", encoder\n\nOR\n\n\"Parent encoder of %s is already finished.\", encoder\n\nyou can determine if you\u0027re in a CommandEncoder vs some pass encoder by checking if GetType is CommandEncoder or RenderBundleEncoder",
       "revId": "89ed910deae92937321ceeefbe0076af54bb603d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5db5861_8f5a8206",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-05T02:02:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16f07f58_055af6f2",
+      "revId": "89ed910deae92937321ceeefbe0076af54bb603d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
