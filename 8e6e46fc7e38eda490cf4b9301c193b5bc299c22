@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28f1129_debf4c0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-05T20:16:13Z",
+      "side": 1,
+      "message": "This adds a DAWN_FETCH_DEPENDENCIES CMake option (default: OFF) that if turned ON fetches dependencies using a basic Python script that reads DEPS files instead of requiring the installation of depot_tools by all projects that depend on Dawn.\n\nThe script is not equivalent to gclient as it is not aware of advanced configuration options (it always gets the list of dependencies that is hardcoded at the beginning) but at least for a regular use of Dawn as a dependency that provides a WebGPU backend (the intended use of this DAWN_FETCH_DEPENDENCIES option) it is enough.\n\nThis is an attempt at merging upstream [this repository](https://github.com/eliemichel/WebGPU-distribution/tree/dawn) that I currently recommend in [Learn WebGPU for native C++](https://eliemichel.github.io/LearnWebGPU/getting-started/hello-webgpu.html) as a shallow intermediary to avoid requiring depot_tools (and turn some options on/off).",
+      "revId": "8e6e46fc7e38eda490cf4b9301c193b5bc299c22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
