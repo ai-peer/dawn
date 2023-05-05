@@ -98,6 +98,30 @@
       },
       "revId": "c876a1caf85b952cdb24db3ff96c8a53301d045b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a07bc6da_683bd476",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T00:54:05Z",
+      "side": 1,
+      "message": "ok - request #2 ;-)\n\nsince it\u0027s fundamentally a property of the backend, not something the frontend  should be able to implement. It can only implement it based on assumptions about the backends that exist in Dawn",
+      "parentUuid": "fe4369a1_4b292f5f",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 62
+      },
+      "revId": "c876a1caf85b952cdb24db3ff96c8a53301d045b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2522cdb7_0ebbfd60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T00:54:05Z",
+      "side": 1,
+      "message": "fair enough. Things like gles20 and gles30 might even be in Dawn-specific DawnAdapterProperties structs (if we really need it to be query-able) since we probably won\u0027t want to go through the effort of standardizing those reduced feature sets as well.",
+      "parentUuid": "27f95302_a7ba4374",
+      "revId": "71c418c5f18286161507761e415421cd6dbfcad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1542b4a_c6f19724",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 2
