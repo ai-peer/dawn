@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9384c735_5d92e2a1",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-05T15:17:59Z",
+      "side": 1,
+      "message": "There\u0027s a `U32Operand` helper for this that should be preferred for consistency with other parts of the code.",
+      "revId": "9cedaec192027c2e0553ce6d4f7ade2d17946e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
