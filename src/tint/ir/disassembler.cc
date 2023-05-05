@@ -429,7 +429,7 @@ void Disassembler::EmitArgs(const Call* call) {
 void Disassembler::EmitBinary(const Binary* b) {
     EmitValue(b);
     out_ << " = ";
-    switch (b->GetKind()) {
+    switch (b->kind) {
         case Binary::Kind::kAdd:
             out_ << "add";
             break;
@@ -480,15 +480,15 @@ void Disassembler::EmitBinary(const Binary* b) {
             break;
     }
     out_ << " ";
-    EmitValue(b->LHS());
+    EmitValue(b->lhs);
     out_ << ", ";
-    EmitValue(b->RHS());
+    EmitValue(b->rhs);
 }
 
 void Disassembler::EmitUnary(const Unary* u) {
     EmitValue(u);
     out_ << " = ";
-    switch (u->GetKind()) {
+    switch (u->kind) {
         case Unary::Kind::kAddressOf:
             out_ << "addr_of";
             break;
@@ -503,7 +503,7 @@ void Disassembler::EmitUnary(const Unary* u) {
             break;
     }
     out_ << " ";
-    EmitValue(u->Val());
+    EmitValue(u->val);
 }
 
 }  // namespace tint::ir
