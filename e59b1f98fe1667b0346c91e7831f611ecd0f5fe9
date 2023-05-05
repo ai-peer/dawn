@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2df2f18_3491f7ec",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-05T09:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af40e59e_9031e6c4",
+      "range": {
+        "startLine": 210,
+        "startChar": 33,
+        "endLine": 210,
+        "endChar": 34
+      },
+      "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b4147af_ff6662af",
@@ -124,6 +148,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfed9769_1983d03d",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-05T09:01:46Z",
+      "side": 1,
+      "message": "Thanks for the right fix!",
+      "parentUuid": "2e5d3bb8_d3094ed7",
+      "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b204d3ba_d915e067",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 1
@@ -135,6 +177,24 @@
       "writtenOn": "2023-05-04T11:57:41Z",
       "side": 1,
       "message": "Could you separate individual fixes in different CLs? It would help land parts faster, and would make it more clear in the review which parts are related.\n\nAlso I don\u0027t think that this fix is sufficient, what if there are multiple vertex buffer calls since the last pipeline? The D3D12 backend has a more complete solution: https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/d3d12/CommandBufferD3D12.cpp;drc\u003de0e0d24aaa54727dc0a8bc4b159ccdf80d3f5d8d;l\u003d650",
+      "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beda721f_6bc2a67e",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-05T09:01:46Z",
+      "side": 1,
+      "message": "The CL has been split.\n\nRight, we should do the same for D3D11 backend.",
+      "parentUuid": "b204d3ba_d915e067",
       "revId": "e59b1f98fe1667b0346c91e7831f611ecd0f5fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
