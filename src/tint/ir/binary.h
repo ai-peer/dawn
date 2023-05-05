@@ -48,10 +48,10 @@ class Binary : public utils::Castable<Binary, Instruction> {
 
     /// Constructor
     /// @param kind the kind of binary instruction
-    /// @param type the result type
+    /// @param result_type the result type
     /// @param lhs the lhs of the instruction
     /// @param rhs the rhs of the instruction
-    Binary(Kind kind, const type::Type* type, Value* lhs, Value* rhs);
+    Binary(Kind kind, const type::Type* result_type, Value* lhs, Value* rhs);
     Binary(const Binary& inst) = delete;
     Binary(Binary&& inst) = delete;
     ~Binary() override;
@@ -59,19 +59,20 @@ class Binary : public utils::Castable<Binary, Instruction> {
     Binary& operator=(const Binary& inst) = delete;
     Binary& operator=(Binary&& inst) = delete;
 
-    /// @returns the kind of instruction
-    Kind GetKind() const { return kind_; }
+    /// @returns the type of the value
+    const type::Type* Type() const override { return result_type; }
 
-    /// @returns the left-hand-side value for the instruction
-    const Value* LHS() const { return lhs_; }
+    /// the kind of binary instruction
+    Kind kind = Kind::kAdd;
 
-    /// @returns the right-hand-side value for the instruction
-    const Value* RHS() const { return rhs_; }
+    /// the result type of the instruction
+    const type::Type* result_type = nullptr;
 
-  private:
-    Kind kind_;
-    Value* lhs_ = nullptr;
-    Value* rhs_ = nullptr;
+    /// the lhs of the instruction
+    Value* lhs = nullptr;
+
+    /// the rhs of the instruction
+    Value* rhs = nullptr;
 };
 
 }  // namespace tint::ir
