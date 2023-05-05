@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "562003ed_31fefd24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T01:36:15Z",
+      "side": 1,
+      "message": "It\u0027s failing for Angle. Do you think this patch itself can be used as the repro case to report to the angle team? (This may not be considered as a small enough repro case, but should be fairly easy for them to run. build and run dawn_end2end_tests under chromium checkout with gtest_filter)",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7431903a_a696070f",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T01:36:15Z",
+      "side": 1,
+      "message": "This toggle has side effect for angle swiftshader: https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8781989628629549697/+/u/Run_the_Dawn_end2end_tests_with_ANGLE_SwiftShader/stdout\n\nBut I just realized I should turned it off for `mAdapterType \u003d\u003d wgpu::AdapterType::CPU;` instead of isAngle. Will fix for the next patch.",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
