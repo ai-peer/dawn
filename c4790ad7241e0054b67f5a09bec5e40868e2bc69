@@ -51,6 +51,24 @@
       "parentUuid": "cb8e383e_db8e3d15",
       "revId": "c4790ad7241e0054b67f5a09bec5e40868e2bc69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc00f44_5b2c15b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2023-05-05T23:12:38Z",
+      "side": 1,
+      "message": "Thanks so much for sussing that out!\n\nI\u0027ve changed the test to just skip all compatibilityMode adapters in the first\nloop. That way, it won\u0027t expect to find them in the RequestAdapter() calls either.",
+      "parentUuid": "e37d91aa_b910a4eb",
+      "revId": "c4790ad7241e0054b67f5a09bec5e40868e2bc69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
