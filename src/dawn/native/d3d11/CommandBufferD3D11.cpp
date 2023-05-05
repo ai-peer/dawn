@@ -222,6 +222,62 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
     std::vector<UINT> mUnorderedAccessViews;
 };
 
+class VertexBufferTracker {
+  public:
+    void OnSetVertexBuffer(VertexBufferSlot slot,
+                           ID3D11Buffer* buffer,
+                           uint64_t offset,
+                           uint64_t size) {
+        mStartSlot = std::min(mStartSlot, slot);
+        mEndSlot = std::max(mEndSlot, ityp::Add(slot, VertexBufferSlot(uint8_t(1))));
+
+        mD3D11Buffers[slot] = buffer;
+        mOffsets[slot] = offset;
+    }
+
+    void Apply(CommandRecordingContext* commandContext, const RenderPipeline* renderPipeline) {
+        ASSERT(renderPipeline != nullptr);
+
+        VertexBufferSlot startSlot = mStartSlot;
+        VertexBufferSlot endSlot = mEndSlot;
+
+        // If the vertex state has changed, we need to update the strides. We also need to extend
+        // the dirty range to touch all these slots because the stride may have changed.
+        if (mLastAppliedRenderPipeline != renderPipeline) {
+            mLastAppliedRenderPipeline = renderPipeline;
+            for (VertexBufferSlot slot :
+                 IterateBitSet(renderPipeline->GetVertexBufferSlotsUsed())) {
+                startSlot = std::min(startSlot, slot);
+                endSlot = std::max(endSlot, ityp::Add(slot, VertexBufferSlot(uint8_t(1))));
+                mStrides[slot] = renderPipeline->GetVertexBuffer(slot).arrayStride;
+            }
+        }
+
+        if (endSlot <= startSlot) {
+            return;
+        }
+
+        commandContext->GetD3D11DeviceContext()->IASetVertexBuffers(
+            static_cast<uint8_t>(startSlot), static_cast<uint8_t>(ityp::Sub(endSlot, startSlot)),
+            &mD3D11Buffers[startSlot], &mStrides[startSlot], &mOffsets[startSlot]);
+
+        mStartSlot = VertexBufferSlot(kMaxVertexBuffers);
+        mEndSlot = VertexBufferSlot(uint8_t(0));
+    }
+
+  private:
+    // startSlot and endSlot indicate the range of dirty vertex buffers.
+    // If there are multiple calls to SetVertexBuffer, the start and end
+    // represent the union of the dirty ranges (the union may have non-dirty
+    // data in the middle of the range).
+    const RenderPipeline* mLastAppliedRenderPipeline = nullptr;
+    VertexBufferSlot mStartSlot{kMaxVertexBuffers};
+    VertexBufferSlot mEndSlot{uint8_t(0)};
+    ityp::array<VertexBufferSlot, ID3D11Buffer*, kMaxVertexBuffers> mD3D11Buffers = {};
+    ityp::array<VertexBufferSlot, UINT, kMaxVertexBuffers> mStrides = {};
+    ityp::array<VertexBufferSlot, UINT, kMaxVertexBuffers> mOffsets = {};
+};
+
 }  // namespace
 
 // Create CommandBuffer
@@ -613,6 +669,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     d3d11DeviceContext1->RSSetScissorRects(1, &scissor);
 
     RenderPipeline* lastPipeline = nullptr;
+    VertexBufferTracker vertexBufferTracker = {};
     BindGroupTracker bindGroupTracker = {};
     std::array<float, 4> blendColor = {0.0f, 0.0f, 0.0f, 0.0f};
     uint32_t stencilReference = 0;
@@ -623,6 +680,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply(commandContext));
+                vertexBufferTracker.Apply(commandContext, lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->firstVertex,
                                                 draw->firstInstance));
                 commandContext->GetD3D11DeviceContext()->DrawInstanced(
@@ -635,6 +693,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply(commandContext));
+                vertexBufferTracker.Apply(commandContext, lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->baseVertex,
                                                 draw->firstInstance));
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstanced(
@@ -649,6 +708,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply(commandContext));
+                vertexBufferTracker.Apply(commandContext, lastPipeline);
                 uint64_t indirectBufferOffset = draw->indirectOffset;
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
                 ASSERT(indirectBuffer != nullptr);
@@ -664,6 +724,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply(commandContext));
+                vertexBufferTracker.Apply(commandContext, lastPipeline);
 
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
                 ASSERT(indirectBuffer != nullptr);
@@ -712,17 +773,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
 
             case Command::SetVertexBuffer: {
                 SetVertexBufferCmd* cmd = iter->NextCommand<SetVertexBufferCmd>();
-                ASSERT(lastPipeline);
-                const VertexBufferInfo& info = lastPipeline->GetVertexBuffer(cmd->slot);
-
-                // TODO(dawn:1705): should we set vertex back to nullptr after the draw call?
-                UINT slot = static_cast<uint8_t>(cmd->slot);
                 ID3D11Buffer* buffer = ToBackend(cmd->buffer)->GetD3D11Buffer();
-                UINT arrayStride = info.arrayStride;
-                UINT offset = cmd->offset;
-                commandContext->GetD3D11DeviceContext()->IASetVertexBuffers(slot, 1, &buffer,
-                                                                            &arrayStride, &offset);
-
+                vertexBufferTracker.OnSetVertexBuffer(cmd->slot, buffer, cmd->offset, cmd->size);
                 break;
             }
 
