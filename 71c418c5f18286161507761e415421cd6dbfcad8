@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c788aa54_ce3ad144",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-05T14:03:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2522cdb7_0ebbfd60",
+      "revId": "71c418c5f18286161507761e415421cd6dbfcad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1542b4a_c6f19724",
@@ -103,6 +121,30 @@
       "writtenOn": "2023-05-03T14:40:00Z",
       "side": 1,
       "message": "This default arg should be made mandatory, I just didn\u0027t want to modify all the tests.",
+      "range": {
+        "startLine": 33,
+        "startChar": 49,
+        "endLine": 33,
+        "endChar": 62
+      },
+      "revId": "71c418c5f18286161507761e415421cd6dbfcad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db532fac_739b4cfd",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-05T14:03:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1542b4a_c6f19724",
       "range": {
         "startLine": 33,
         "startChar": 49,
