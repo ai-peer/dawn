@@ -370,6 +370,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c45748d5_864c8670",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-05T12:20:34Z",
+      "side": 1,
+      "message": "Removed this change right now. Maybe put it in a separate CL.",
+      "parentUuid": "9960f0eb_870bb886",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 22
+      },
+      "revId": "57e31c5f1a5692202238c3cc163359eca842ec80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9262db31_2f96d8a3",
