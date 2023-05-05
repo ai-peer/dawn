@@ -16,6 +16,52 @@
       "message": "PTAL",
       "revId": "ea66a79e0a683c43484c28bc0a8b301bae7eda44",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99e84268_1d154be1",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-05T11:39:29Z",
+      "side": 1,
+      "message": "FYI, I am going to add a ScopedRenderPassState[1], it is used for tracking device context state related render pass, and unset all resources when render pass is end. I think VertexBufferTracker and ScopedRenderPassState will be merged into one object.\n\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/131380/6/src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+      "range": {
+        "startLine": 225,
+        "startChar": 6,
+        "endLine": 225,
+        "endChar": 25
+      },
+      "revId": "ea66a79e0a683c43484c28bc0a8b301bae7eda44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af57de72_ace93b61",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-05T11:39:29Z",
+      "side": 1,
+      "message": "nit: do we really need to track start slot and end slot? can we just call IASetVertexBuffers() to update all 8 slots, even some slots are null?\n\nBTW, we will want to unset all slots to null when pass is end, so the related vertex buffers can be released properly.",
+      "range": {
+        "startLine": 274,
+        "startChar": 21,
+        "endLine": 274,
+        "endChar": 31
+      },
+      "revId": "ea66a79e0a683c43484c28bc0a8b301bae7eda44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
