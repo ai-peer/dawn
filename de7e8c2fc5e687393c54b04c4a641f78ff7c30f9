@@ -33,6 +33,29 @@
       "message": "Hi Austin or Corentin, PTAL. Thanks.",
       "revId": "de7e8c2fc5e687393c54b04c4a641f78ff7c30f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d98c7fa_60633934",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T18:26:18Z",
+      "side": 1,
+      "message": "we should be able to gate this copy on something like `UsesNumWorkgroups`",
+      "range": {
+        "startLine": 318,
+        "startChar": 16,
+        "endLine": 321,
+        "endChar": 0
+      },
+      "revId": "de7e8c2fc5e687393c54b04c4a641f78ff7c30f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
