@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a8c221_1ead1587",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-05T10:20:08Z",
+      "side": 1,
+      "message": "```suggestion\n// Consolidates all the delimiter separated flags with the given prefix into a single flag.\n// Example:\n// Given the flags: [\"foo\u003da\", \"bar\", \"foo\u003db,c\"]\n// GlobListFlags(\"foo\u003d\", \",\") will transform the flags to: [\"bar\", \"foo\u003da,b,c\"]\nfunc (f *dawnNodeFlags) GlobListFlags(prefix, delimiter string) {\n\tlist :\u003d []string{}\n\tfor i :\u003d 0; i \u003c len(*f); i++ {\n\t\tif strings.HasPrefix((*f)[i], prefix) {\n\t\t\t// trim prefix\n\t\t\tvalue :\u003d (*f)[i][len(prefix):]\n\t\t\t// extract values\n\t\t\tlist \u003d append(list, strings.Split(value, delimiter)...)\n\t\t\t// remove flag from f\n\t\t\t(*f) \u003d append((*f)[:i], (*f)[i+1:]...)\n\t\t\ti--\n\t\t}\n\t}\n\tif len(list) \u003e 0 {\n\t\t// append globbed list to the end of f\n\t\tf.Set(prefix + strings.Join(list, delimiter))\n\t}\n}\n```",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 0
+      },
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f2be12_9bf0ce0f",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-05T10:20:08Z",
+      "side": 1,
+      "message": "While likely correct, this is extremely complicated.\nSuggested a cleanup that will scale with future flags.",
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426c7467_4c183fab",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-05T10:20:08Z",
+      "side": 1,
+      "message": "```suggestion\n\t// Append (or add) dawn features as appropriate.\n\tenableDawnFeaturesFound :\u003d false\n\tfor i, flag :\u003d range flags {\n\t\tif strings.HasPrefix(flag, \"enable-dawn-features\u003d\") {\n\t\t\t// While running the CTS, always allow unsafe APIs so they can be tested.\n\t\t\tflags[i] \u003d flag + \",allow_unsafe_apis\"\n\t\t\tif dumpShaders {\n\t\t\t\tflags[i] \u003d flag + \",dump_shaders,disable_symbol_renaming\"\n\t\t\t}\n\t\t\tenableDawnFeaturesFound \u003d true\n\t\t}\n\t}\n\tif !enableDawnFeaturesFound {\n\t\tfeatures :\u003d \"enable-dawn-features\u003dallow_unsafe_apis\"\n\t\tif dumpShaders {\n\t\t\tfeatures \u003d features + \",dump_shaders,disable_symbol_renaming\"\n\t\t}\n\t\tflags \u003d append(flags, features)\n\t}\n```",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 2
+      },
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0310f0b_a50cff83",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-05T10:20:08Z",
+      "side": 1,
+      "message": "```suggestion\n\t// While running the CTS, always allow unsafe APIs so they can be tested.\n\tflags.Set(\"enable-dawn-features\u003dallow_unsafe_apis\")\n\tif dumpShaders {\n\t\tflags.Set(\"enable-dawn-features\u003ddump_shaders,disable_symbol_renaming\")\n\t}\n\tflags.GlobListFlags(\"enable-dawn-features\u003d\", \",\")\n```",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 2
+      },
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
