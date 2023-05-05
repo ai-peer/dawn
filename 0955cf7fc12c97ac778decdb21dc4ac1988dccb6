@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "694fbd67_11086b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-05T08:05:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0955cf7fc12c97ac778decdb21dc4ac1988dccb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ce8743_0c202716",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-05T08:05:38Z",
+      "side": 1,
+      "message": "u-nit: To avoid the ifdefs etc we could ASSERT(AllSlotsAreEmpty(mCommandContext)) with AllSlotsAreEmpty returning a boolean. We don\u0027t get to see easily what type of slot is problematic if the ASSERT triggers, but then it\u0027s super easy to add logging so the slight simplification could be worth it.",
+      "revId": "0955cf7fc12c97ac778decdb21dc4ac1988dccb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
