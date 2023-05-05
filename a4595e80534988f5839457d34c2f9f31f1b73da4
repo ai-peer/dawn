@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e419e8e5_7b1b8c2f",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0138d6eb_5cbcf67d",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ec6224f_1e8b5b97",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-05-05T14:47:43Z",
       "side": 1,
       "message": "Nit: why is this comment here? If it\u0027s to explain why we\u0027re doing f32 and not f16 math, mention that?",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a05d5a0_525d49c2",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ec6224f_1e8b5b97",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "445bf4bd_9aa59879",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "My mistake. Removed the word to clear confusion.",
+      "parentUuid": "2a4ed2f1_15dd3047",
+      "range": {
+        "startLine": 85,
+        "startChar": 10,
+        "endLine": 85,
+        "endChar": 19
+      },
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94f0c3e8_42b48d97",
@@ -105,6 +165,24 @@
       "writtenOn": "2023-05-05T14:47:43Z",
       "side": 1,
       "message": "Nit: as above, could probably be if (any(coord0 \u003e\u003d srcBoundary)) {",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cdaae1d_aaf8ff2a",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94f0c3e8_42b48d97",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57556d50_173e0db1",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4494aa2c_35e370cd",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb0e0b69_8a6a6628",
@@ -139,6 +235,24 @@
       "writtenOn": "2023-05-05T14:47:43Z",
       "side": 1,
       "message": "uNit: +\u003d",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b812c34_eded086c",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb0e0b69_8a6a6628",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -178,6 +292,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e2281aa_715fb246",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f53fcf7_7dc826f8",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0126320f_270caeed",
@@ -191,6 +323,24 @@
       "writtenOn": "2023-05-05T14:47:43Z",
       "side": 1,
       "message": "Nit: Other formats (e.g., Depth32FloatStencil8) are not supported\"",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42184330_78fdae95",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0126320f_270caeed",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -212,6 +362,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4626f75d_005a345f",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb244487_bdc1690c",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7431903a_a696070f",
@@ -225,6 +393,24 @@
       "writtenOn": "2023-05-05T01:36:15Z",
       "side": 1,
       "message": "This toggle has side effect for angle swiftshader: https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8781989628629549697/+/u/Run_the_Dawn_end2end_tests_with_ANGLE_SwiftShader/stdout\n\nBut I just realized I should turned it off for `mAdapterType \u003d\u003d wgpu::AdapterType::CPU;` instead of isAngle. Will fix for the next patch.",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df63b28d_5410973f",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "seems it only fails for angle on win (including angle_swiftshader. angle and angle_swift shader passed on linux locally). Only skipping for `angle \u0026\u0026 win` seems to make bots happy.\n\nI\u0027m trying to reproduce the bug: https://chromium-review.googlesource.com/c/angle/angle/+/4509710 using dumped glsl.\nIt now runs fine now on windows locally. Need further effort to try to reproduce.",
+      "parentUuid": "7431903a_a696070f",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -260,6 +446,24 @@
       "side": 1,
       "message": "not sure what you mean?",
       "parentUuid": "ee7999b1_8fd0c1e2",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5133e9d_3bf2fffa",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Fixed. It\u0027s copy buffer to buffer validation fail for expect readback. The test code for computing buffer size needs to align by 4 byte.",
+      "parentUuid": "05bc11e3_abd99bbc",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

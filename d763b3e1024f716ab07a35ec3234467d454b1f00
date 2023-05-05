@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a7be94c_66663a1e",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e03c98ba_d1ef75c5",
+      "range": {
+        "startLine": 54,
+        "startChar": 31,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e459b60_db28c22a",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-05-05T20:34:16Z",
       "side": 1,
       "message": "nit: I don\u0027t think you need to assign the override size. That makes it more clear it\u0027s always provided externally",
+      "range": {
+        "startLine": 100,
+        "startChar": 31,
+        "endLine": 100,
+        "endChar": 33
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6575f0cb_a26c7c31",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f62e7b03_940c847a",
       "range": {
         "startLine": 100,
         "startChar": 31,
@@ -116,6 +164,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4270492a_537d9548",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f1694de_49098710",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 59
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb421c1c_ae382a1f",
@@ -129,6 +201,30 @@
       "writtenOn": "2023-05-05T20:34:16Z",
       "side": 1,
       "message": "stale comments",
+      "range": {
+        "startLine": 217,
+        "startChar": 28,
+        "endLine": 218,
+        "endChar": 62
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b800b0_ebf47395",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb421c1c_ae382a1f",
       "range": {
         "startLine": 217,
         "startChar": 28,
@@ -162,6 +258,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e99c92_e4312352",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "607fdc20_99baba73",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 75
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e2b4eb5_99336051",
@@ -175,6 +295,30 @@
       "writtenOn": "2023-05-05T20:34:16Z",
       "side": 1,
       "message": "nit: only compute the aspect and check it here,\n\nthen make the `TextureCopy src` / `BufferCopy dst` inside the if-block?",
+      "range": {
+        "startLine": 1286,
+        "startChar": 12,
+        "endLine": 1286,
+        "endChar": 46
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1be35f7_47647bfe",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1286,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-05T23:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e2b4eb5_99336051",
       "range": {
         "startLine": 1286,
         "startChar": 12,
