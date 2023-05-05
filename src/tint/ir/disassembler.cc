@@ -406,7 +406,12 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
         },
         [&](const ir::Var* v) {
             EmitValue(v);
-            out_ << " = var " << v->address_space << " " << v->access;
+            out_ << " = var ";
+            if (v->initializer) {
+                EmitValue(v->initializer);
+                out_ << ", ";
+            }
+            out_ << v->address_space << ", " << v->access;
         });
 }
 
