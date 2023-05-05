@@ -24,4 +24,33 @@ Module::~Module() = default;
 
 Module& Module::operator=(Module&&) = default;
 
+Symbol Module::NameOf(const Value* value) const {
+    return value_to_id_.Get(value).value_or(Symbol{});
+}
+
+Symbol Module::SetName(const Value* value, std::string_view name) {
+    TINT_ASSERT(IR, !name.empty());
+
+    if (auto old = value_to_id_.Get(value)) {
+        value_to_id_.Remove(value);
+        id_to_value_.Remove(old.value());
+    }
+
+    auto sym = symbols.Register(name);
+    if (id_to_value_.Add(sym, value)) {
+        value_to_id_.Add(value, sym);
+        return sym;
+    }
+    auto prefix = std::string(name) + "_";
+    for (uint64_t suffix = 1; suffix != std::numeric_limits<uint64_t>::max(); suffix++) {
+        sym = symbols.Register(prefix + std::to_string(suffix));
+        if (id_to_value_.Add(sym, value)) {
+            value_to_id_.Add(value, sym);
+            return sym;
+        }
+    }
+    TINT_ASSERT(IR, false);  // !
+    return Symbol{};
+}
+
 }  // namespace tint::ir
