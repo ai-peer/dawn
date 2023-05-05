@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e31ad6_0b297be1",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-05T21:11:46Z",
+      "side": 1,
+      "message": "Done, with some minor modifications. Thanks for the suggestion!",
+      "parentUuid": "a5a8c221_1ead1587",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 0
+      },
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4f2be12_9bf0ce0f",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-05-05T10:20:08Z",
       "side": 1,
       "message": "While likely correct, this is extremely complicated.\nSuggested a cleanup that will scale with future flags.",
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "317d0883_4b25c6e3",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-05T21:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4f2be12_9bf0ce0f",
       "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +119,54 @@
       "writtenOn": "2023-05-05T10:20:08Z",
       "side": 1,
       "message": "```suggestion\n\t// While running the CTS, always allow unsafe APIs so they can be tested.\n\tflags.Set(\"enable-dawn-features\u003dallow_unsafe_apis\")\n\tif dumpShaders {\n\t\tflags.Set(\"enable-dawn-features\u003ddump_shaders,disable_symbol_renaming\")\n\t}\n\tflags.GlobListFlags(\"enable-dawn-features\u003d\", \",\")\n```",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 2
+      },
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f09e5f_3c8120c4",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-05T21:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "426c7467_4c183fab",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 2
+      },
+      "revId": "fd81ff0df1e92345ad4f49dbca243bca8ccbf96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb58e75_ec67750b",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-05T21:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0310f0b_a50cff83",
       "range": {
         "startLine": 225,
         "startChar": 0,
