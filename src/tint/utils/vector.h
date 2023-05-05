@@ -322,6 +322,30 @@ class Vector {
         Sort([](auto& a, auto& b) { return a < b; });
     }
 
+    /// @returns true if the predicate function returns true for any of the elements of the vector
+    /// @param pred a function-like with the signature `bool(T)`
+    template <typename PREDICATE>
+    bool Any(PREDICATE&& pred) {
+        for (auto& el : *this) {
+            if (pred(el)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// @returns false if the predicate function returns false for any of the elements of the vector
+    /// @param pred a function-like with the signature `bool(T)`
+    template <typename PREDICATE>
+    bool All(PREDICATE&& pred) {
+        for (auto& el : *this) {
+            if (!pred(el)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /// @returns true if the vector is empty.
     bool IsEmpty() const { return impl_.slice.len == 0; }
 
