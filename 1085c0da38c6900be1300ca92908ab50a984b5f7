@@ -33,6 +33,24 @@
       "message": "I overrode it to kokoro+1",
       "revId": "1085c0da38c6900be1300ca92908ab50a984b5f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6787628_b9877abd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-05-05T15:39:10Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "36a5625f_64bfba89",
+      "revId": "1085c0da38c6900be1300ca92908ab50a984b5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
