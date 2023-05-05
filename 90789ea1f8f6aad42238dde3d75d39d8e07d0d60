@@ -16,6 +16,24 @@
       "message": "This has compilation errors on MSVC 2019. The errors can be seen in the CI build log: https://source.cloud.google.com/results/invocations/a7e91050-2784-4a0c-b930-592c44835a22/targets/dawn%2Fwindows%2Fcmake-msvc2019-release%2Fpresubmit/log\nMSVC complains about the implicit conversions from an enum type to std::variant\u003cuint32_t, std::string\u003e when initializing OperandList from an initializer_list. Can be solved by doing explicit conversion.\n\nIf I fix those, there is a warning (treated as an error) about stage being potentially uninitialized in EmitEntryPoint.",
       "revId": "90789ea1f8f6aad42238dde3d75d39d8e07d0d60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53621a1_ddf5acad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-05T13:38:12Z",
+      "side": 1,
+      "message": "perfmon is also erroring for the same reason, but I can\u0027t for the life of me figure out why its failing on one linux machine and not another. AFAICT, it\u0027s the same compiler, same dependencies.",
+      "parentUuid": "ed8e102d_378f64e4",
+      "revId": "90789ea1f8f6aad42238dde3d75d39d8e07d0d60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
