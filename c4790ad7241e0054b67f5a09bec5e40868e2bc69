@@ -33,6 +33,24 @@
       "message": "I\u0027m at a loss. Failing on Windows with --adapter-vendor-id\u003d0x1AE0 (SwiftShader). Can\u0027t repro locally.",
       "revId": "c4790ad7241e0054b67f5a09bec5e40868e2bc69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e37d91aa_b910a4eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-05T18:45:58Z",
+      "side": 1,
+      "message": "here\u0027s what I think is happening.\n\nthe test suite first searches through the adapter list to check if an integrated GPU is available.\n\nthen it does RequestAdapter(LowPower). If it gets an adapter back, it should be an integrated GPU.\n\nHowever, what\u0027s happening is that\n\n 1. The test suite finds that yes, and integrated GPU is available. This one:\n    \"Microsoft Basic Render Driver\" - \"D3D11 driver version 10.0.19041.546\"\n      type: Integrated GPU, backend: D3D11\n      vendorId: 0x1414, deviceId: 0x008C\n    (although that\u0027s actually CPU, not an integrated gpu)\n\n 2. it does RequestAdapter(LowPower) which FAILS to find the the adapter in (1) because it\u0027s listed as Compatibility feature level and RequestAdapter defaults to Core. Instead, requestAdapter finds SwiftShader (CPU) adapter. \n \n \nSo there are two disjoint problems:\n 1. Microsoft Basic Render Driver is incorrectly classified as \"integrated gpu\" instead of CPU\n 2. The test needs to either update it\u0027s notion of \"is an integrated gpu available\" to actually be \"is a discrete gpu available\" OR it needs to change its requests to ask for the lowest feature level - so that it always finds whatever is available.",
+      "parentUuid": "cb8e383e_db8e3d15",
+      "revId": "c4790ad7241e0054b67f5a09bec5e40868e2bc69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
