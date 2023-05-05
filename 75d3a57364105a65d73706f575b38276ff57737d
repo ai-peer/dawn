@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd6e12cd_206d88a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-05T07:56:05Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "75d3a57364105a65d73706f575b38276ff57737d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97cc1dd4_b63906e5",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-05T07:56:05Z",
+      "side": 1,
+      "message": "nit: we tend to use enum classes and not have the k prefix.",
+      "range": {
+        "startLine": 36,
+        "startChar": 20,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "75d3a57364105a65d73706f575b38276ff57737d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
