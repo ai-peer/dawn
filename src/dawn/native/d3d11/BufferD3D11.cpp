@@ -323,6 +323,7 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Buffer::CreateD3D11ShaderResourc
     desc.BufferEx.FirstElement = firstElement;
     desc.BufferEx.NumElements = numElements;
     desc.BufferEx.Flags = D3D11_BUFFEREX_SRV_FLAG_RAW;
+
     ComPtr<ID3D11ShaderResourceView> srv;
     DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
                               ->GetD3D11Device()

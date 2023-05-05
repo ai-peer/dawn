@@ -420,7 +420,7 @@ std::unique_ptr<d3d::ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
 }
 
 bool Device::MayRequireDuplicationOfIndirectParameters() const {
-    return true;
+    return false;
 }
 
 uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
