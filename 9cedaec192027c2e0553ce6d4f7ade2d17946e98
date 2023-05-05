@@ -16,6 +16,24 @@
       "message": "There\u0027s a `U32Operand` helper for this that should be preferred for consistency with other parts of the code.",
       "revId": "9cedaec192027c2e0553ce6d4f7ade2d17946e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e66e4cec_8c038f4b",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-05T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9384c735_5d92e2a1",
+      "revId": "9cedaec192027c2e0553ce6d4f7ade2d17946e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
