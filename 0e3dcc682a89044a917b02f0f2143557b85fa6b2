@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f05e743_f292fb0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-06T00:07:10Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "0e3dcc682a89044a917b02f0f2143557b85fa6b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126d7669_2606c9bb",
+        "filename": "docs/building.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-06T00:07:10Z",
+      "side": 1,
+      "message": "maybe also say that it\u0027ll generate the .sln in the build folder (I think)",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 76
+      },
+      "revId": "0e3dcc682a89044a917b02f0f2143557b85fa6b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
