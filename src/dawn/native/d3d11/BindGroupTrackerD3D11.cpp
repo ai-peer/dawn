@@ -132,7 +132,6 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
         switch (bindingInfo.bindingType) {
             case BindingInfoType::Buffer: {
                 BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
-                ID3D11Buffer* d3d11Buffer = ToBackend(binding.buffer)->GetD3D11Buffer();
                 auto offset = binding.offset;
                 if (bindingInfo.buffer.hasDynamicOffset) {
                     // Dynamic buffers are packed at the front of BindingIndices.
@@ -141,6 +140,9 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
 
                 switch (bindingInfo.buffer.type) {
                     case wgpu::BufferBindingType::Uniform: {
+                        ToBackend(binding.buffer)->UpdateConstantBuffer(mCommandContext);
+                        ID3D11Buffer* d3d11Buffer =
+                            ToBackend(binding.buffer)->GetD3D11ConstantBuffer();
                         // https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-vssetconstantbuffers1
                         // Offset and size are measured in shader constants, which are 16 bytes
                         // (4*32-bit components). And the offsets and counts must be multiples
@@ -170,11 +172,11 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                     case wgpu::BufferBindingType::Storage:
                     case kInternalStorageBufferBinding: {
                         ASSERT(IsSubset(bindingInfo.visibility, wgpu::ShaderStage::Compute));
-                        ComPtr<ID3D11UnorderedAccessView> d3d11UAV;
-                        DAWN_TRY_ASSIGN(
-                            d3d11UAV, ToBackend(binding.buffer)
-                                          ->CreateD3D11UnorderedAccessView1(offset, binding.size));
                         if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
+                            ComPtr<ID3D11UnorderedAccessView> d3d11UAV;
+                            DAWN_TRY_ASSIGN(d3d11UAV, ToBackend(binding.buffer)
+                                                          ->CreateD3D11UnorderedAccessView1(
+                                                              offset, binding.size));
                             deviceContext1->CSSetUnorderedAccessViews(
                                 bindingSlot, 1, d3d11UAV.GetAddressOf(), nullptr);
                         }
@@ -237,7 +239,15 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
             }
 
             case BindingInfoType::StorageTexture: {
-                return DAWN_UNIMPLEMENTED_ERROR("Storage textures are not supported");
+                ASSERT(bindingInfo.storageTexture.access == wgpu::StorageTextureAccess::WriteOnly);
+                if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
+                    TextureView* view = ToBackend(group->GetBindingAsTextureView(bindingIndex));
+                    ComPtr<ID3D11UnorderedAccessView> d3d11UAV;
+                    DAWN_TRY_ASSIGN(d3d11UAV, view->CreateD3D11UnorderedAccessView());
+                    deviceContext1->CSSetUnorderedAccessViews(bindingSlot, 1,
+                                                              d3d11UAV.GetAddressOf(), nullptr);
+                }
+                break;
             }
 
             case BindingInfoType::ExternalTexture: {
@@ -335,8 +345,11 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
             }
 
             case BindingInfoType::StorageTexture: {
-                // TODO(dawn:1798): Support storage textures.
-                UNREACHABLE();
+                ASSERT(bindingInfo.storageTexture.access == wgpu::StorageTextureAccess::WriteOnly);
+                if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
+                    ID3D11UnorderedAccessView* nullUAV = nullptr;
+                    deviceContext1->CSSetUnorderedAccessViews(bindingSlot, 1, &nullUAV, nullptr);
+                }
                 break;
             }
 
