@@ -253,6 +253,15 @@ MaybeError ValidateExternalTextureBinding(
     return {};
 }
 
+template <typename F>
+void ForEachUnverifiedBufferBindingIndexImpl(const BindGroupLayoutBase* bgl, F&& f) {
+    for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBufferCount(); ++bindingIndex) {
+        if (bgl->GetBindingInfo(bindingIndex).buffer.minBindingSize == 0) {
+            f(bindingIndex);
+        }
+    }
+}
+
 }  // anonymous namespace
 
 MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
@@ -351,7 +360,7 @@ MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
     ASSERT(bindingsSet.count() == descriptor->layout->GetUnexpandedBindingCount());
 
     return {};
-}  // anonymous namespace
+}
 
 // BindGroup
 
@@ -444,14 +453,10 @@ BindGroupBase::BindGroupBase(DeviceBase* device,
     }
 
     uint32_t packedIdx = 0;
-    for (BindingIndex bindingIndex{0}; bindingIndex < descriptor->layout->GetBufferCount();
-         ++bindingIndex) {
-        if (descriptor->layout->GetBindingInfo(bindingIndex).buffer.minBindingSize == 0) {
-            mBindingData.unverifiedBufferSizes[packedIdx] =
-                mBindingData.bufferData[bindingIndex].size;
-            ++packedIdx;
-        }
-    }
+    ForEachUnverifiedBufferBindingIndexImpl(mLayout.Get(), [&](BindingIndex bindingIndex) {
+        mBindingData.unverifiedBufferSizes[packedIdx++] =
+            mBindingData.bufferData[bindingIndex].size;
+    });
 
     GetObjectTrackingList()->Track(this);
 }
@@ -528,6 +533,11 @@ TextureViewBase* BindGroupBase::GetBindingAsTextureView(BindingIndex bindingInde
 
 const std::vector<Ref<ExternalTextureBase>>& BindGroupBase::GetBoundExternalTextures() const {
     return mBoundExternalTextures;
+}
+
+void BindGroupBase::ForEachUnverifiedBufferBindingIndex(
+    std::function<void(BindingIndex)> fn) const {
+    ForEachUnverifiedBufferBindingIndexImpl(mLayout.Get(), fn);
 }
 
 }  // namespace dawn::native
