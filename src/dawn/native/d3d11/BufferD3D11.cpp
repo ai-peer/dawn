@@ -33,19 +33,8 @@
 namespace dawn::native::d3d11 {
 namespace {
 
-MaybeError ValidationUsage(wgpu::BufferUsage usage) {
-    // https://learn.microsoft.com/en-us/windows/win32/api/d3d11/ne-d3d11-d3d11_bind_flag
-    // D3D11 doesn't support constants buffers with other accelerated GPU usages.
-    // TODO(dawn:1755): find a way to workaround this D3D11 limitation.
-    constexpr wgpu::BufferUsage kAllowedUniformBufferUsages =
-        wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
-
-    DAWN_INVALID_IF(
-        usage & wgpu::BufferUsage::Uniform && !IsSubset(usage, kAllowedUniformBufferUsages),
-        "Buffer usage can't be both uniform and other accelerated usages with D3D11");
-
-    return {};
-}
+constexpr wgpu::BufferUsage kD3D11AllowedUniformBufferUsages =
+    wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
 
 // Resource usage    Default    Dynamic   Immutable   Staging
 // ------------------------------------------------------------
@@ -74,19 +63,19 @@ UINT D3D11BufferBindFlags(wgpu::BufferUsage usage) {
     UINT bindFlags = 0;
 
     if (usage & (wgpu::BufferUsage::Vertex)) {
-        bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
+        bindFlags |= D3D11_BIND_VERTEX_BUFFER;
     }
     if (usage & wgpu::BufferUsage::Index) {
-        bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
+        bindFlags |= D3D11_BIND_INDEX_BUFFER;
     }
     if (usage & (wgpu::BufferUsage::Uniform)) {
-        bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
+        bindFlags |= D3D11_BIND_CONSTANT_BUFFER;
     }
     if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
-        bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_UNORDERED_ACCESS;
+        bindFlags |= D3D11_BIND_UNORDERED_ACCESS;
     }
     if (usage & kReadOnlyStorageBuffer) {
-        bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE;
+        bindFlags |= D3D11_BIND_SHADER_RESOURCE;
     }
 
     constexpr wgpu::BufferUsage kCopyUsages =
@@ -96,7 +85,7 @@ UINT D3D11BufferBindFlags(wgpu::BufferUsage usage) {
     // to copy data between buffer and texture. So the buffer needs to be bound as unordered access
     // view.
     if (IsSubset(usage, kCopyUsages)) {
-        bindFlags |= D3D11_BIND_FLAG::D3D11_BIND_UNORDERED_ACCESS;
+        bindFlags |= D3D11_BIND_UNORDERED_ACCESS;
     }
 
     return bindFlags;
@@ -112,8 +101,7 @@ UINT D3D11CpuAccessFlags(wgpu::BufferUsage usage) {
         //  - For texture to buffer copy, we may need copy texture to a staging (mappable)
         //    texture, and then memcpy the data from the staging texture to the staging buffer. So
         //    D3D11_CPU_ACCESS_WRITE is needed to MapRead usage.
-        cpuAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_READ |
-                         D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
+        cpuAccessFlags = D3D11_CPU_ACCESS_READ | D3D11_CPU_ACCESS_WRITE;
     }
     return cpuAccessFlags;
 }
@@ -155,7 +143,7 @@ ResultOrError<Ref<Buffer>> Buffer::Create(Device* device, const BufferDescriptor
 
 MaybeError Buffer::Initialize(bool mappedAtCreation) {
     // TODO(dawn:1705): handle mappedAtCreation for NonzeroClearResourcesOnCreationForTesting
-    DAWN_TRY(ValidationUsage(GetUsage()));
+    // DAWN_TRY(ValidationUsage(GetUsage()));
 
     // Allocate at least 4 bytes so clamped accesses are always in bounds.
     uint64_t size = std::max(GetSize(), uint64_t(4u));
@@ -167,19 +155,46 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     }
     mAllocatedSize = Align(size, alignment);
 
-    // Create mD3d11Buffer
-    D3D11_BUFFER_DESC bufferDescriptor;
-    bufferDescriptor.ByteWidth = mAllocatedSize;
-    bufferDescriptor.Usage = D3D11BufferUsage(GetUsage());
-    bufferDescriptor.BindFlags = D3D11BufferBindFlags(GetUsage());
-    bufferDescriptor.CPUAccessFlags = D3D11CpuAccessFlags(GetUsage());
-    bufferDescriptor.MiscFlags = D3D11BufferMiscFlags(GetUsage());
-    bufferDescriptor.StructureByteStride = 0;
+    bool needsConstantBuffer = GetUsage() & wgpu::BufferUsage::Uniform;
+    bool onlyNeedsConstantBuffer =
+        needsConstantBuffer && IsSubset(GetUsage(), kD3D11AllowedUniformBufferUsages);
 
-    DAWN_TRY(CheckOutOfMemoryHRESULT(ToBackend(GetDevice())
-                                         ->GetD3D11Device()
-                                         ->CreateBuffer(&bufferDescriptor, nullptr, &mD3d11Buffer),
-                                     "ID3D11Device::CreateBuffer"));
+    if (!onlyNeedsConstantBuffer) {
+        // Create mD3d11Buffer
+        wgpu::BufferUsage nonUniformUsage = GetUsage() & ~wgpu::BufferUsage::Uniform;
+        D3D11_BUFFER_DESC bufferDescriptor;
+        bufferDescriptor.ByteWidth = mAllocatedSize;
+        bufferDescriptor.Usage = D3D11BufferUsage(nonUniformUsage);
+        bufferDescriptor.BindFlags = D3D11BufferBindFlags(nonUniformUsage);
+        bufferDescriptor.CPUAccessFlags = D3D11CpuAccessFlags(nonUniformUsage);
+        bufferDescriptor.MiscFlags = D3D11BufferMiscFlags(nonUniformUsage);
+        bufferDescriptor.StructureByteStride = 0;
+
+        DAWN_TRY(
+            CheckOutOfMemoryHRESULT(ToBackend(GetDevice())
+                                        ->GetD3D11Device()
+                                        ->CreateBuffer(&bufferDescriptor, nullptr, &mD3d11Buffer),
+                                    "ID3D11Device::CreateBuffer"));
+    }
+
+    if (needsConstantBuffer) {
+        // Create mD3d11ConstantBuffer
+        D3D11_BUFFER_DESC bufferDescriptor;
+        bufferDescriptor.ByteWidth = mAllocatedSize;
+        bufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+        bufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        bufferDescriptor.CPUAccessFlags = 0;
+        bufferDescriptor.MiscFlags = 0;
+        bufferDescriptor.StructureByteStride = 0;
+
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            ToBackend(GetDevice())
+                ->GetD3D11Device()
+                ->CreateBuffer(&bufferDescriptor, nullptr, &mD3d11ConstantBuffer),
+            "ID3D11Device::CreateBuffer"));
+    }
+
+    ASSERT(mD3d11Buffer || mD3d11ConstantBuffer);
 
     SetLabelImpl();
     return {};
@@ -257,6 +272,7 @@ void Buffer::DestroyImpl() {
 
 void Buffer::SetLabelImpl() {
     SetDebugName(ToBackend(GetDevice()), mD3d11Buffer.Get(), "Dawn_Buffer", GetLabel());
+    SetDebugName(ToBackend(GetDevice()), mD3d11ConstantBuffer.Get(), "Dawn_Buffer", GetLabel());
 }
 
 MaybeError Buffer::EnsureDataInitialized(CommandRecordingContext* commandContext) {
@@ -309,6 +325,18 @@ MaybeError Buffer::InitializeToZero(CommandRecordingContext* commandContext) {
     return {};
 }
 
+void Buffer::UpdateConstantBuffer(CommandRecordingContext* commandContext) {
+    if (!mD3d11ConstantBufferNeedsUpdate) {
+        return;
+    }
+
+    DAWN_ASSERT(mD3d11Buffer);
+    DAWN_ASSERT(mD3d11ConstantBuffer);
+    commandContext->GetD3D11DeviceContext1()->CopyResource(mD3d11ConstantBuffer.Get(),
+                                                           mD3d11Buffer.Get());
+    mD3d11ConstantBufferNeedsUpdate = false;
+}
+
 ResultOrError<ComPtr<ID3D11ShaderResourceView>> Buffer::CreateD3D11ShaderResourceView(
     uint64_t offset,
     uint64_t size) const {
@@ -334,7 +362,7 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Buffer::CreateD3D11ShaderResourc
 
 ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> Buffer::CreateD3D11UnorderedAccessView1(
     uint64_t offset,
-    uint64_t size) const {
+    uint64_t size) {
     DAWN_ASSERT(IsAligned(offset, 4u));
     DAWN_ASSERT(IsAligned(size, 4u));
 
@@ -353,6 +381,10 @@ ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> Buffer::CreateD3D11UnorderedAc
                               ->GetD3D11Device5()
                               ->CreateUnorderedAccessView1(mD3d11Buffer.Get(), &desc, &uav),
                           "UnorderedAccessView creation"));
+
+    // UAV is created, we assume the mD3d11Buffer content will be modified, we need to copy the data
+    // to the mD3d11ConstantBuffer if it exists.
+    mD3d11ConstantBufferNeedsUpdate = true;
 
     return uav;
 }
@@ -388,6 +420,8 @@ MaybeError Buffer::ClearInternal(CommandRecordingContext* commandContext,
 
     if (mMappedData) {
         memset(mMappedData + offset, clearValue, size);
+        // The WebGPU uniform buffer is not mappable.
+        ASSERT(!mD3d11ConstantBuffer);
         return {};
     }
 
@@ -428,6 +462,8 @@ MaybeError Buffer::WriteInternal(CommandRecordingContext* commandContext,
 
     if (scopedMap.GetMappedData()) {
         memcpy(scopedMap.GetMappedData() + offset, data, size);
+        // The WebGPU uniform buffer is not mappable.
+        ASSERT(!mD3d11ConstantBuffer);
         return {};
     }
 
@@ -435,66 +471,49 @@ MaybeError Buffer::WriteInternal(CommandRecordingContext* commandContext,
     DAWN_ASSERT(!IsMappable(GetUsage()));
 
     ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
-
-    // For updating the full buffer, just pass nullptr as the pDstBox.
-    if (offset == 0 && size == GetAllocatedSize()) {
-        d3d11DeviceContext1->UpdateSubresource(GetD3D11Buffer(), /*DstSubresource=*/0,
-                                               /*pDstBox=*/nullptr, data,
+    if (mD3d11Buffer) {
+        D3D11_BOX box;
+        box.left = offset;
+        box.right = offset + size;
+        box.top = 0;
+        box.bottom = 1;
+        box.front = 0;
+        box.back = 1;
+        d3d11DeviceContext1->UpdateSubresource(mD3d11Buffer.Get(), /*DstSubresource=*/0, &box, data,
                                                /*SrcRowPitch=*/0,
                                                /*SrcDepthPitch*/ 0);
+        if (!mD3d11ConstantBuffer) {
+            return {};
+        }
+
+        // if mD3d11ConstantBufferNeedsUpdate is true, the content of mD3d11ConstantBuffer  will be
+        // updated by UpdateConstantBuffer() later.
+        if (mD3d11ConstantBufferNeedsUpdate) {
+            return {};
+        }
+
+        d3d11DeviceContext1->CopySubresourceRegion(
+            mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0, /*DstX=*/offset,
+            /*DstY=*/0,
+            /*DstZ=*/0, mD3d11Buffer.Get(), /*SrcSubresource=*/0, &box);
         return {};
     }
 
-    D3D11_BOX box;
-    box.left = offset;
-    box.right = offset + size;
-    box.top = 0;
-    box.bottom = 1;
-    box.front = 0;
-    box.back = 1;
+    ASSERT(mD3d11ConstantBuffer);
 
-    if ((GetUsage() & wgpu::BufferUsage::Uniform)) {
-        if (!IsAligned(box.left, 16) || !IsAligned(box.right, 16)) {
-            // Create a temp staging buffer to workaround the alignment issue.
-            BufferDescriptor descriptor;
-            descriptor.size = box.right - box.left;
-            DAWN_ASSERT(IsAligned(descriptor.size, 4));
-            descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-            descriptor.mappedAtCreation = false;
-            descriptor.label = "temp staging buffer";
-            Ref<BufferBase> stagingBufferBase;
-            DAWN_TRY_ASSIGN(stagingBufferBase, GetDevice()->CreateBuffer(&descriptor));
-            Ref<Buffer> stagingBuffer;
-            stagingBuffer = ToBackend(std::move(stagingBufferBase));
-            {
-                ScopedMap scopedMap;
-                DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(stagingBuffer.Get()));
-                uint8_t* mappedData = scopedMap.GetMappedData();
-                DAWN_ASSERT(mappedData);
-                memcpy(mappedData, data, size);
-            }
-            box.left = 0;
-            box.right = descriptor.size;
-            commandContext->GetD3D11DeviceContext()->CopySubresourceRegion(
-                GetD3D11Buffer(), /*DstSubresource=*/0, /*DstX=*/offset,
-                /*DstY=*/0,
-                /*DstZ=*/0, stagingBuffer->GetD3D11Buffer(), /*SrcSubresource=*/0, &box);
-            stagingBuffer = nullptr;
+    BufferDescriptor descriptor;
+    descriptor.size = size;
+    DAWN_ASSERT(IsAligned(descriptor.size, 4));
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+    descriptor.mappedAtCreation = false;
+    descriptor.label = "DawnWriteStagingBuffer";
+    Ref<BufferBase> stagingBuffer;
+    DAWN_TRY_ASSIGN(stagingBuffer, GetDevice()->CreateBuffer(&descriptor));
 
-        } else {
-            // TODO(dawn:1739): check whether driver supports partial update of uniform buffer.
-            d3d11DeviceContext1->UpdateSubresource1(GetD3D11Buffer(), /*DstSubresource=*/0, &box,
-                                                    data,
-                                                    /*SrcRowPitch=*/0,
-                                                    /*SrcDepthPitch*/ 0, D3D11_COPY_NO_OVERWRITE);
-        }
-    } else {
-        d3d11DeviceContext1->UpdateSubresource(GetD3D11Buffer(), /*DstSubresource=*/0, &box, data,
-                                               /*SrcRowPitch=*/0,
-                                               /*SrcDepthPitch*/ 0);
-    }
+    DAWN_TRY(ToBackend(stagingBuffer)->WriteInternal(commandContext, 0, data, size));
 
-    return {};
+    return Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()), /*sourceOffset=*/0,
+                                /*size=*/size, this, offset);
 }
 
 // static
@@ -509,7 +528,16 @@ MaybeError Buffer::Copy(CommandRecordingContext* commandContext,
     DAWN_TRY(source->EnsureDataInitialized(commandContext));
     DAWN_TRY(
         destination->EnsureDataInitializedAsDestination(commandContext, destinationOffset, size));
+    return CopyInternal(commandContext, source, sourceOffset, size, destination, destinationOffset);
+}
 
+// static
+MaybeError Buffer::CopyInternal(CommandRecordingContext* commandContext,
+                                Buffer* source,
+                                uint64_t sourceOffset,
+                                size_t size,
+                                Buffer* destination,
+                                uint64_t destinationOffset) {
     D3D11_BOX srcBox;
     srcBox.left = sourceOffset;
     srcBox.right = sourceOffset + size;
@@ -517,10 +545,30 @@ MaybeError Buffer::Copy(CommandRecordingContext* commandContext,
     srcBox.bottom = 1;
     srcBox.front = 0;
     srcBox.back = 1;
-    commandContext->GetD3D11DeviceContext()->CopySubresourceRegion(
-        destination->mD3d11Buffer.Get(), /*DstSubresource=*/0, /*DstX=*/destinationOffset,
-        /*DstY=*/0,
-        /*DstZ=*/0, source->mD3d11Buffer.Get(), /*SrcSubresource=*/0, &srcBox);
+    ID3D11Buffer* d3d11SourceBuffer =
+        source->mD3d11Buffer ? source->mD3d11Buffer.Get() : source->mD3d11ConstantBuffer.Get();
+    ASSERT(d3d11SourceBuffer);
+
+    if (destination->mD3d11Buffer) {
+        commandContext->GetD3D11DeviceContext()->CopySubresourceRegion(
+            destination->mD3d11Buffer.Get(), /*DstSubresource=*/0, /*DstX=*/destinationOffset,
+            /*DstY=*/0,
+            /*DstZ=*/0, d3d11SourceBuffer, /*SrcSubresource=*/0, &srcBox);
+    }
+
+    // if mD3d11ConstantBufferNeedsUpdate is true, the content of mD3d11ConstantBuffer  will be
+    // updated by UpdateConstantBuffer() later.
+    if (destination->mD3d11ConstantBufferNeedsUpdate) {
+        return {};
+    }
+
+    if (destination->mD3d11ConstantBuffer) {
+        commandContext->GetD3D11DeviceContext()->CopySubresourceRegion(
+            destination->mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
+            /*DstX=*/destinationOffset,
+            /*DstY=*/0,
+            /*DstZ=*/0, d3d11SourceBuffer, /*SrcSubresource=*/0, &srcBox);
+    }
 
     return {};
 }
