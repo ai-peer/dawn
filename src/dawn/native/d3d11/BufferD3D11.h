@@ -41,13 +41,15 @@ class Buffer final : public BufferBase {
     void SetLabelImpl() override;
 
     ID3D11Buffer* GetD3D11Buffer() const { return mD3d11Buffer.Get(); }
+    ID3D11Buffer* GetD3D11ConstantBuffer() const { return mD3d11ConstantBuffer.Get(); }
+    // Update content of the mD3d11ConstantBuffer from mD3d11Buffer if needed.
+    void UpdateConstantBuffer(CommandRecordingContext* commandContext);
     ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceView(
         uint64_t offset,
         uint64_t size) const;
     ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> CreateD3D11UnorderedAccessView1(
         uint64_t offset,
-        uint64_t size) const;
-
+        uint64_t size);
     MaybeError Clear(CommandRecordingContext* commandContext,
                      uint8_t clearValue,
                      uint64_t offset,
@@ -116,9 +118,17 @@ class Buffer final : public BufferBase {
                              uint64_t bufferOffset,
                              const void* data,
                              size_t size);
-
-    // The buffer object can be used as vertex, index, uniform, storage, or indirect buffer.
+    // Copy the buffer without checking if the buffer is initialized.
+    static MaybeError CopyInternal(CommandRecordingContext* commandContext,
+                                   Buffer* source,
+                                   uint64_t sourceOffset,
+                                   size_t size,
+                                   Buffer* destination,
+                                   uint64_t destinationOffset);
+    // The buffer object can be used as vertex, index, storage, or indirect buffer.
     ComPtr<ID3D11Buffer> mD3d11Buffer;
+    ComPtr<ID3D11Buffer> mD3d11ConstantBuffer;
+    bool mD3d11ConstantBufferNeedsUpdate = false;
     uint8_t* mMappedData = nullptr;
 };
 
