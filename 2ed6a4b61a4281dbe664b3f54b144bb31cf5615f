@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "291047a2_387707b7",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-06T05:09:04Z",
+      "side": 1,
+      "message": "nit. DAWN_UNUSED?",
+      "range": {
+        "startLine": 367,
+        "startChar": 5,
+        "endLine": 367,
+        "endChar": 9
+      },
+      "revId": "2ed6a4b61a4281dbe664b3f54b144bb31cf5615f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
