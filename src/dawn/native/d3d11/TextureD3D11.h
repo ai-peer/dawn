@@ -46,7 +46,6 @@ class Texture final : public TextureBase {
     D3D11_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor(const SubresourceRange& range,
                                                    bool depthReadOnly,
                                                    bool stencilReadOnly) const;
-
     MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                    const SubresourceRange& range);
 
