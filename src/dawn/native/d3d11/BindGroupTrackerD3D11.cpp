@@ -141,6 +141,9 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
 
                 switch (bindingInfo.buffer.type) {
                     case wgpu::BufferBindingType::Uniform: {
+                        ToBackend(binding.buffer)->EnsureConstantBufferIsUpdated(mCommandContext);
+                        ID3D11Buffer* d3d11Buffer =
+                            ToBackend(binding.buffer)->GetD3D11ConstantBuffer();
                         // https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-vssetconstantbuffers1
                         // Offset and size are measured in shader constants, which are 16 bytes
                         // (4*32-bit components). And the offsets and counts must be multiples
