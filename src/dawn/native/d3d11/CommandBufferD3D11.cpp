@@ -592,6 +592,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 ID3D11DeviceContext* d3d11DeviceContext = commandContext->GetD3D11DeviceContext();
                 d3d11DeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 
+                ASSERT(renderPass->depthStencilAttachment.depthStoreOp != wgpu::StoreOp::Undefined);
+                ASSERT(renderPass->depthStencilAttachment.stencilStoreOp !=
+                       wgpu::StoreOp::Undefined);
+
                 if (renderPass->attachmentState->GetSampleCount() <= 1) {
                     return {};
                 }
@@ -600,6 +604,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 for (ColorAttachmentIndex i :
                      IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                     const auto& attachment = renderPass->colorAttachments[i];
+                    if (attachment.storeOp != wgpu::StoreOp::Store) {
+                        continue;
+                    }
                     if (!attachment.resolveTarget.Get()) {
                         continue;
                     }
