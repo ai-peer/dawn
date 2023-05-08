@@ -627,6 +627,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
         switch (type) {
             case Command::EndRenderPass: {
                 mCommands.NextCommand<EndRenderPassCmd>();
+                commandContext->GetD3D11DeviceContext()->OMSetRenderTargets(0, nullptr, nullptr);
                 // TODO(dawn:1705): resolve MSAA
                 return {};
             }
