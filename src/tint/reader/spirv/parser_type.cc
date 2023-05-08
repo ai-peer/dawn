@@ -14,10 +14,12 @@
 
 #include "src/tint/reader/spirv/parser_type.h"
 
+#include <cstdlib>
 #include <string>
 #include <unordered_map>
 #include <utility>
 
+#include "src/tint/builtin/builtin.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/switch.h"
 #include "src/tint/type/texture_dimension.h"
@@ -203,7 +205,13 @@ Vector::Vector(const Type* t, uint32_t s) : type(t), size(s) {}
 Vector::Vector(const Vector&) = default;
 
 ast::Type Vector::Build(ProgramBuilder& b) const {
-    return b.ty.vec(type->Build(b), size);
+    auto prefix = "vec" + std::to_string(size);
+    return Switch(
+        type,  //
+        [&](const I32*) { return b.ty(prefix + "i"); },
+        [&](const U32*) { return b.ty(prefix + "u"); },
+        [&](const F32*) { return b.ty(prefix + "f"); },
+        [&](Default) { return b.ty.vec(type->Build(b), size); });
 }
 
 Matrix::Matrix(const Type* t, uint32_t c, uint32_t r) : type(t), columns(c), rows(r) {}
