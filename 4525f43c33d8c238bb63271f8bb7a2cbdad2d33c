@@ -56,6 +56,30 @@
       },
       "revId": "4525f43c33d8c238bb63271f8bb7a2cbdad2d33c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1aaf90_15326413",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-08T14:10:23Z",
+      "side": 1,
+      "message": "Thanks, your concern is valid.\n\nOne point to mention, `D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL` here makes it only affect UAV. The RTVs and DSVs previously set [here](https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/d3d11/CommandBufferD3D11.cpp;l\u003d416) are not affected.\n\nI also checked the generated HLSL, and found that the buffer was bound to u0. However slot 0 should be taken by the RTV of color attachment already in this test suite. I was also confused by that \"For pixel shaders, UAVStartSlot should be equal to the number of render-target views being bound.\" statement in the [API doc](https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews). Maybe it\u0027s only true in case of non-D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, otherwise this CL shouldn\u0027t be passing.\n\nLet\u0027s see how this will work with other fragment storage buffer cases.",
+      "parentUuid": "f2e8ee8e_64d05372",
+      "range": {
+        "startLine": 179,
+        "startChar": 43,
+        "endLine": 179,
+        "endChar": 85
+      },
+      "revId": "4525f43c33d8c238bb63271f8bb7a2cbdad2d33c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
