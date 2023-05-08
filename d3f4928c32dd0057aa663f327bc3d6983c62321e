@@ -563,6 +563,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efca42af_ad5ba23f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0aca7bd7_d13ec213",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 261,
+        "endChar": 5
+      },
+      "revId": "d3f4928c32dd0057aa663f327bc3d6983c62321e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44085bde_dd2034bf",

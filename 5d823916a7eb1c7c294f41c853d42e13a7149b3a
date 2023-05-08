@@ -16,6 +16,155 @@
       "message": "Hi Corentin and Austin, friendly ping. Thanks",
       "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b56f2e2_c75d3b62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "overall LGTM",
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "212d21bc_3e903c2b",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "we can handle closing mFenceHandle in d3d::Device::~Device instead of in d3d11/d3d12 now",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 34
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ebcb772_22197591",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "before this, we should convert IUnknown to the right type, and change the downstream signatures to be typed",
+      "range": {
+        "startLine": 473,
+        "startChar": 59,
+        "endLine": 473,
+        "endChar": 81
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2a0187e_28634960",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "this name shouldn\u0027t need to be ImplImpl. We can rename CreateExternalImageDXGIImpl to CreateExternalImageDXGI ?",
+      "range": {
+        "startLine": 83,
+        "startChar": 63,
+        "endLine": 83,
+        "endChar": 94
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac8cab6_7d85aed9",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "nit: d3d11Resource",
+      "range": {
+        "startLine": 67,
+        "startChar": 55,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f651a0_8dcd88d7",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "this needs to ensure any pending commands are submitted first.\n\nSomething like: ForceEventualFlushOfCommands(); ExecutePendingCommandContext();\n\nthough it appears ForceEventualFlushOfCommands isn\u0027t implemented on d3d11 yet",
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0b7e79_6b04a800",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T23:42:42Z",
+      "side": 1,
+      "message": "nit: d3d11Resource",
+      "range": {
+        "startLine": 40,
+        "startChar": 55,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
