@@ -22,6 +22,30 @@
       },
       "revId": "2ed6a4b61a4281dbe664b3f54b144bb31cf5615f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1efeae6_9484cf35",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T17:22:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291047a2_387707b7",
+      "range": {
+        "startLine": 367,
+        "startChar": 5,
+        "endLine": 367,
+        "endChar": 9
+      },
+      "revId": "2ed6a4b61a4281dbe664b3f54b144bb31cf5615f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
