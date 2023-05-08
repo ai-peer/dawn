@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59464329_f31a4572",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T22:28:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4618a6a_a2c6e193",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 45
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "533a0e38_f87e5044",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-08T21:56:07Z",
       "side": 1,
       "message": "could this be something like:\n\n```\nif (needsConstantBuffer \u0026\u0026 onlyNeedsConstantBuffer) {\n  mD3d11Buffer \u003d ...-\u003eCreateBuffer(GetUsage());\n  mD3D11ConstantBuffer \u003d mD3D11Buffer;\n} else {\n  mD3d11Buffer \u003d ...-\u003eCreateBuffer(GetUsage() \u0026 ~Uniform);\n  if (needsConstantBuffer) {\n    mD3D11ConstantBuffer \u003d ...-\u003eCreateBuffer(Uniform | CopyDst);\n  }\n}\n```\n\nthat way, mD3D11Buffer always points to the buffer; it\u0027s never null\nand mD3D11ConstantBuffer always points to the constant buffer if one is needed\n\nThen mD3D11Buffer is the one that receives all the mutations, and with the other comments, mD3D11ConstantBuffer gets updated when it needs to at the start of a SyncScope",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 5
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb01f35c_618c7834",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T22:28:53Z",
+      "side": 1,
+      "message": "With your suggestion, we will always copy whole buffer to the mD3d11ConstBuffer. However if user only modify some bytes of the buffer, copy whole range will be kind of waste. To avoiding tracking modified ranges, and make code simpler, so I just copy the modified part of the buffer to constant buffer in Buffer::Write() and Buffer::Copy() immediately.  And only do whole buffer copy, if the buffer is accessed as UAV.\n\nBTW, I think using a buffer with both uniform and other usages is not a common use case. And updating a buffer multiple times, and then using it for uniform, it should be very rare case. So I think it is not worth to the complexity to optimize the performance for this case.",
+      "parentUuid": "533a0e38_f87e5044",
       "range": {
         "startLine": 158,
         "startChar": 4,
