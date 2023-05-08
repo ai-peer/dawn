@@ -80,6 +80,30 @@
       },
       "revId": "4525f43c33d8c238bb63271f8bb7a2cbdad2d33c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bdecafb_c5fd5972",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:26:57Z",
+      "side": 1,
+      "message": "could this be the reason for this issue: https://crbug.com/dawn/1805 ?",
+      "parentUuid": "0f1aaf90_15326413",
+      "range": {
+        "startLine": 179,
+        "startChar": 43,
+        "endLine": 179,
+        "endChar": 85
+      },
+      "revId": "4525f43c33d8c238bb63271f8bb7a2cbdad2d33c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
