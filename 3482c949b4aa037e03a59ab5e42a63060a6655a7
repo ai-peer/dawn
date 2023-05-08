@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c98f43e_d6cec49a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T17:21:06Z",
+      "side": 1,
+      "message": "I haven\u0027t done it yet - but I\u0027m thinking for these less trivial error messages - we should probably add some small tests to verify we produce the message in the way we want. though we\u0027ll need to be discerning about it so we don\u0027t have a lot of change-detecting tests that make renames or refactors very annoying",
+      "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
