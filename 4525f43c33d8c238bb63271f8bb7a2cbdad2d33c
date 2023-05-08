@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f86738dc_403512b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-08T13:46:05Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4525f43c33d8c238bb63271f8bb7a2cbdad2d33c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f2e8ee8e_64d05372",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 1
