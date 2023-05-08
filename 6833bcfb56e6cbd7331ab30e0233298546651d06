@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d8ba94_bc862234",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T18:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b9bba08_193e0306",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 25
+      },
+      "revId": "6833bcfb56e6cbd7331ab30e0233298546651d06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70659267_5981d068",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a5b995f_7704c092",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T18:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70659267_5981d068",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 22
+      },
+      "revId": "6833bcfb56e6cbd7331ab30e0233298546651d06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46358a7e_f81ab7bd",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-08T17:36:16Z",
       "side": 1,
       "message": "separable change?",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 17
+      },
+      "revId": "6833bcfb56e6cbd7331ab30e0233298546651d06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39db7fe8_a8cefd97",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T18:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46358a7e_f81ab7bd",
       "range": {
         "startLine": 348,
         "startChar": 0,
@@ -201,6 +273,30 @@
       "side": 1,
       "message": "All those small changes are needed for enabling tests which related to Uniform buffer with other usages. I have to enable those tests in a separate CL.",
       "parentUuid": "1df22c0f_b9d19942",
+      "range": {
+        "startLine": 788,
+        "startChar": 11,
+        "endLine": 790,
+        "endChar": 18
+      },
+      "revId": "6833bcfb56e6cbd7331ab30e0233298546651d06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a4f74f_aecf9c4e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T18:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "231f0a2a_0751ff98",
       "range": {
         "startLine": 788,
         "startChar": 11,
