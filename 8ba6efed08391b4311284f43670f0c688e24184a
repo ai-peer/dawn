@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a64c9a33_b7f5cd6f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T23:57:08Z",
+      "side": 1,
+      "message": "User can switch pipelines and bind groups in one render pass or compute pass. A buffer can be modified and read in the same pass with two draw or dispatch calls. So we cannot do the copy at beginning of a render pass or compute pass.\n\nIf we mD3d11Buffer is always non-null, we have to check mD3d11Buffer \u003d\u003d mD3d11ConstantBuffer to see if they are same, and then decide if copy is needed. I feel it is little bit weird. I changed the mD3d11Buffer to mD3d11NonConstantBuffer and add more comment to make the code more readable.",
+      "parentUuid": "9d7ad2c1_bd967d3e",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 5
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8ae577c_d7550af5",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 4
