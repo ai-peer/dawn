@@ -15,6 +15,7 @@
 #include "src/tint/reader/spirv/parser_type.h"
 
 #include <cstdlib>
+#include <sstream>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -218,6 +219,11 @@ Matrix::Matrix(const Type* t, uint32_t c, uint32_t r) : type(t), columns(c), row
 Matrix::Matrix(const Matrix&) = default;
 
 ast::Type Matrix::Build(ProgramBuilder& b) const {
+    if (type->Is<F32>()) {
+        std::ostringstream ss;
+        ss << "mat" << columns << "x" << rows << "f";
+        return b.ty(ss.str());
+    }
     return b.ty.mat(type->Build(b), columns, rows);
 }
 
