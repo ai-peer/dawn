@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "4525f43c33d8c238bb63271f8bb7a2cbdad2d33c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2e8ee8e_64d05372",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-08T13:34:22Z",
+      "side": 1,
+      "message": "Render targets and UAV share the same resource slot, I guess we will need to handle conflict of them. :( \n\nJust a comment, not action needed.",
+      "range": {
+        "startLine": 179,
+        "startChar": 43,
+        "endLine": 179,
+        "endChar": 85
+      },
+      "revId": "4525f43c33d8c238bb63271f8bb7a2cbdad2d33c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
