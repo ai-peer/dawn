@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71245a69_481bb2dd",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4079,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-08T16:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edc212d6_a020665d",
+      "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e641a7d_ed91e22d",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd3f634_0f9a93b4",
+        "filename": "src/tint/reader/spirv/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-08T16:30:23Z",
+      "side": 1,
+      "message": "Added `OpSpecConstantOp`. The scalars others are already handled correctly AFAICT.",
+      "parentUuid": "0e641a7d_ed91e22d",
+      "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1ba73da_6c6d6fc6",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-03T23:35:13Z",
       "side": 1,
       "message": "I\u0027m fine not having a unit test for this, since it\u0027s unsupported for now, and there is a tracking bug.",
+      "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd9841bb_e42dc2b1",
+        "filename": "src/tint/reader/spirv/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1955,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-08T16:30:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c1ba73da_6c6d6fc6",
       "revId": "b382f8d4dfdd5b781d777ce23965723fcf7248ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
