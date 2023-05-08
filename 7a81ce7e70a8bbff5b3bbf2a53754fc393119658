@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d290625_31018262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 58
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7225fabe_e72ea542",
+        "filename": "generator/dawn_lpm_helpers.py",
+        "patchSetId": 58
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "can it be _stack since access to it is \"private\" ?",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7851439_df905325",
+        "filename": "generator/dawn_lpm_helpers.py",
+        "patchSetId": 58
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "nit: ditto _stack and _index",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 88,
+        "endChar": 26
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0311366e_18100dc5",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 58
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "does there need to be an else case to pass something invalid?\n\nit could be assigning 0 which is preferred over implicitly assuming that leaving it unset will be 0.",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 5
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e426a4b_23b2d1bf",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 58
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "will this eventually populate the contents from `state`? (leave a TODO)\nditto for the others",
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9dae092_e94623bf",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.cpp",
+        "patchSetId": 58
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "call this something that\u0027s not \"Get\" since it\u0027s not a pure lookup\n\nalso, in the usages of it, maybe we shouldn\u0027t `(static_cast\u003cObjectId\u003e(...))` and instead use a plain uint32_t or a new typedef. That way, it\u0027s clear we\u0027re mapping from SomeProbablyRandomNumber -\u003e SomeLikelyValidObjectId. The current semantic of ObjectId-\u003eObjectId is a little confusing",
+      "range": {
+        "startLine": 77,
+        "startChar": 29,
+        "endLine": 77,
+        "endChar": 32
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db4def6_0059199e",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 58
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "nit: casing as `Size`",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

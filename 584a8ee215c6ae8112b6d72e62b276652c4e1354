@@ -294,6 +294,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e028149_2c9f56ab",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "86c56f92_dbb22f39",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e873e2fb_0112d432",
@@ -519,6 +537,24 @@
       "writtenOn": "2023-04-11T12:04:46Z",
       "side": 1,
       "message": "nit: This is the same as `PerObjectType\u003cDawnLPMObjectStore\u003e`",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8326e8f1_7417fe4c",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:19:16Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "28472b40_1c8fe3ba",
       "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
