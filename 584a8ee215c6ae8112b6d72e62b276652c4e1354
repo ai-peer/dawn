@@ -278,6 +278,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86c56f92_dbb22f39",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-08T16:59:16Z",
+      "side": 1,
+      "message": "Moved all the protobuf generation into CmdState which has an internal stack of (member, access) pairs",
+      "parentUuid": "b26fdecb_a5f1fae3",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e873e2fb_0112d432",
         "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
         "patchSetId": 49
@@ -313,6 +331,30 @@
       "side": 1,
       "message": "I\u0027m currently doing this because arbitrary strings don\u0027t lead to any new coverage in Dawn (currently), but having a valid entrypoint for compute pipeline execution leads to a lot of coverage.\n\nIn a future CL I will add \"entrypoint\" to the list of overrides and statically set it to \"main\". Once that is finished I\u0027ll change this to return the string passed from lib-protobuf-mutator.\n\nAdded a comment and a todo!",
       "parentUuid": "e873e2fb_0112d432",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 10
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5bb3861_9868eaf8",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-08T16:59:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "211785a2_0ab10c6f",
       "range": {
         "startLine": 92,
         "startChar": 4,
@@ -516,6 +558,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e213efc2_fe9f3cbc",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-08T16:59:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8896ede_0d82b154",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2ed2be8_d3c98c60",
@@ -553,6 +613,30 @@
       "side": 1,
       "message": "I think the comment added in DawnLPMObjectStore.cpp explains why this is probably not possible. This ObjectStore is made specifically for efficient fuzzing and effective libfuzzer minimization.",
       "parentUuid": "d2ed2be8_d3c98c60",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48415d44_b9b0e3eb",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-08T16:59:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79e073f1_e5e03efc",
       "range": {
         "startLine": 24,
         "startChar": 6,
