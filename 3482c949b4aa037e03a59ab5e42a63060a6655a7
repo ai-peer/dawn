@@ -16,6 +16,57 @@
       "message": "I haven\u0027t done it yet - but I\u0027m thinking for these less trivial error messages - we should probably add some small tests to verify we produce the message in the way we want. though we\u0027ll need to be discerning about it so we don\u0027t have a lot of change-detecting tests that make renames or refactors very annoying",
       "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5cfd453_c2a63f0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-08T18:15:16Z",
+      "side": 1,
+      "message": "LGTM with a couple of nits. Thanks for addressing this, my attempt in the past got hung up on being reluctant to store a packed index-\u003ebinding index lookup. Re-computing it at the point of the error is a good tradeoff.",
+      "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ec1044_a7cc7c33",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-08T18:15:16Z",
+      "side": 1,
+      "message": "nit: I\u0027m mildly concerned about the fact that the logic for determining the packed index is being replicated in two places. It\u0027s not complex logic, but if it ever changed this would be an easy thing to miss. Could ForEachUnverifiedBufferBindingIndex calculate the packed index internally and pass it the the callback instead?",
+      "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42347c03_5c98d4a3",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-08T18:15:16Z",
+      "side": 1,
+      "message": "This string needs a space at the beginning.",
+      "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
