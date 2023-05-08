@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7906a633_9830369e",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T19:40:35Z",
+      "side": 1,
+      "message": "Great idea! - done",
+      "parentUuid": "55ec1044_a7cc7c33",
+      "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42347c03_5c98d4a3",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-05-08T18:15:16Z",
       "side": 1,
       "message": "This string needs a space at the beginning.",
+      "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd68d6e_4dad65c3",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T19:40:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42347c03_5c98d4a3",
       "revId": "3482c949b4aa037e03a59ab5e42a63060a6655a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
