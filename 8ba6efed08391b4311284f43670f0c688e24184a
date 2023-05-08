@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d7ad2c1_bd967d3e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T22:46:26Z",
+      "side": 1,
+      "message": "ok it\u0027s fine to do Write and Copy immediately then, but I\u0027d still like to do the SyncScope-related changes for Storage+Uniform usage. it will be better to perform the copies at the beginning of the render pass instead of in the middle.\n\nI also think it\u0027s still preferable to have mD3D11Buffer be never-null, and then additional;y have mD3d11ConstantBuffer updated when necessary when it is non-null.",
+      "parentUuid": "eb01f35c_618c7834",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 5
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8ae577c_d7550af5",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 4
