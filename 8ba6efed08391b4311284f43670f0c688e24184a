@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4618a6a_a2c6e193",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T21:56:07Z",
+      "side": 1,
+      "message": "nit: delete this and the ValidationUsage function",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 45
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533a0e38_f87e5044",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T21:56:07Z",
+      "side": 1,
+      "message": "could this be something like:\n\n```\nif (needsConstantBuffer \u0026\u0026 onlyNeedsConstantBuffer) {\n  mD3d11Buffer \u003d ...-\u003eCreateBuffer(GetUsage());\n  mD3D11ConstantBuffer \u003d mD3D11Buffer;\n} else {\n  mD3d11Buffer \u003d ...-\u003eCreateBuffer(GetUsage() \u0026 ~Uniform);\n  if (needsConstantBuffer) {\n    mD3D11ConstantBuffer \u003d ...-\u003eCreateBuffer(Uniform | CopyDst);\n  }\n}\n```\n\nthat way, mD3D11Buffer always points to the buffer; it\u0027s never null\nand mD3D11ConstantBuffer always points to the constant buffer if one is needed\n\nThen mD3D11Buffer is the one that receives all the mutations, and with the other comments, mD3D11ConstantBuffer gets updated when it needs to at the start of a SyncScope",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 5
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ae577c_d7550af5",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-08T21:56:07Z",
+      "side": 1,
+      "message": "instead of mutable access here when creating the view, I suggest an alternative:\n\nIn CommandBufferD3D11,\n\nlook at the current compute dispatch or render pass\n\nGetResourceUsages().computePasses[computePassIndex].dispatchUsages[dispatchIndex]\nGetResourceUsages().renderPasses[renderPassIndex]\n\nYou can iterate through the buffers and see which ones are used with a mutable resource usage. Then you can mark it like buffer-\u003eWasMutated(commandContext) or something. Same thing for CopyXtoBuffer commands. This increments a serial internal to the buffer - perhaps called MutationSerial.\nThe same loop iteration checks buffers that are used with Uniform usage and does buffer-\u003eEnsureConstantBufferUpdated(commandContext);\n\nThis way, we batch all the mutation and copies at the start of render passes and tie it to the existing SyncScope concept.",
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
