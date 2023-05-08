@@ -184,6 +184,10 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                                 bindingSlot, 1, d3d11UAV.GetAddressOf(), nullptr);
                         }
                         if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
+                            ComPtr<ID3D11UnorderedAccessView> d3d11UAV;
+                            DAWN_TRY_ASSIGN(d3d11UAV, ToBackend(binding.buffer)
+                                                          ->CreateD3D11UnorderedAccessView1(
+                                                              offset, binding.size));
                             deviceContext1->CSSetUnorderedAccessViews(
                                 bindingSlot, 1, d3d11UAV.GetAddressOf(), nullptr);
                         }
@@ -246,7 +250,15 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
             }
 
             case BindingInfoType::StorageTexture: {
-                return DAWN_UNIMPLEMENTED_ERROR("Storage textures are not supported");
+                ASSERT(bindingInfo.storageTexture.access == wgpu::StorageTextureAccess::WriteOnly);
+                if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
+                    TextureView* view = ToBackend(group->GetBindingAsTextureView(bindingIndex));
+                    ComPtr<ID3D11UnorderedAccessView> d3d11UAV;
+                    DAWN_TRY_ASSIGN(d3d11UAV, view->CreateD3D11UnorderedAccessView());
+                    deviceContext1->CSSetUnorderedAccessViews(bindingSlot, 1,
+                                                              d3d11UAV.GetAddressOf(), nullptr);
+                }
+                break;
             }
 
             case BindingInfoType::ExternalTexture: {
@@ -350,8 +362,11 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
             }
 
             case BindingInfoType::StorageTexture: {
-                // TODO(dawn:1798): Support storage textures.
-                UNREACHABLE();
+                ASSERT(bindingInfo.storageTexture.access == wgpu::StorageTextureAccess::WriteOnly);
+                if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
+                    ID3D11UnorderedAccessView* nullUAV = nullptr;
+                    deviceContext1->CSSetUnorderedAccessViews(bindingSlot, 1, &nullUAV, nullptr);
+                }
                 break;
             }
 
