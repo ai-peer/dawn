@@ -206,6 +206,24 @@
       "message": "instead of mutable access here when creating the view, I suggest an alternative:\n\nIn CommandBufferD3D11,\n\nlook at the current compute dispatch or render pass\n\nGetResourceUsages().computePasses[computePassIndex].dispatchUsages[dispatchIndex]\nGetResourceUsages().renderPasses[renderPassIndex]\n\nYou can iterate through the buffers and see which ones are used with a mutable resource usage. Then you can mark it like buffer-\u003eWasMutated(commandContext) or something. Same thing for CopyXtoBuffer commands. This increments a serial internal to the buffer - perhaps called MutationSerial.\nThe same loop iteration checks buffers that are used with Uniform usage and does buffer-\u003eEnsureConstantBufferUpdated(commandContext);\n\nThis way, we batch all the mutation and copies at the start of render passes and tie it to the existing SyncScope concept.",
       "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c343b2ed_91355803",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-09T00:30:13Z",
+      "side": 1,
+      "message": "can you mark the state dirty in another function then? it\u0027s not right to perform a state mutation like this in a getter",
+      "parentUuid": "c8ae577c_d7550af5",
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
