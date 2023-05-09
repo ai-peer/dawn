@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24cd31b9_c49a205e",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2023-05-09T15:59:08Z",
+      "side": 1,
+      "message": "Nit: \"so it should use it\" -\u003e \"we should not use it\" or \"it should not be used\"?",
+      "revId": "872ac52035f0b2517f2f05f904577120137179d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae96739_4495dbf7",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2023-05-09T15:59:08Z",
+      "side": 1,
+      "message": "uNit: actually now this could be\n\ncoord0 +\u003d vec2u(1, 0);\n\nsince coord0 isn\u0027t used below. But maybe that\u0027s a style thing; up to you.",
+      "revId": "872ac52035f0b2517f2f05f904577120137179d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
