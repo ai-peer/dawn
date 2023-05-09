@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf925af_b8354d8a",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-09T18:51:54Z",
+      "side": 1,
+      "message": "This should probably be done at the IR and resolver level so that constant pointers are deduplicated. Filed crbug.com/tint/1935.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 6
+      },
+      "revId": "e84f229f85316ec9667a8b09a0107470e1b9d7fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
