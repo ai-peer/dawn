@@ -1417,7 +1417,7 @@ void DeviceBase::SetWGSLExtensionAllowList() {
     if (mEnabledFeatures.IsEnabled(Feature::ShaderF16)) {
         mWGSLExtensionAllowList.insert("f16");
     }
-    if (AllowUnsafeAPIs()) {
+    if (IsToggleEnabled(Toggle::AllowUnsafeAPIs)) {
         mWGSLExtensionAllowList.insert("chromium_disable_uniformity_analysis");
     }
 }
@@ -1432,11 +1432,6 @@ bool DeviceBase::IsValidationEnabled() const {
 
 bool DeviceBase::IsRobustnessEnabled() const {
     return !IsToggleEnabled(Toggle::DisableRobustness);
-}
-
-bool DeviceBase::AllowUnsafeAPIs() const {
-    // TODO(dawn:1685) Currently allows if either toggle are set accordingly.
-    return IsToggleEnabled(Toggle::AllowUnsafeAPIs) || !IsToggleEnabled(Toggle::DisallowUnsafeAPIs);
 }
 
 size_t DeviceBase::GetLazyClearCountForTesting() {
