@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c043c82e_9020e0ad",
+        "filename": "src/tint/utils/string.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-09T11:56:42Z",
+      "side": 1,
+      "message": "👍 Done, and also updated `HasPrefix()` to match.",
+      "parentUuid": "7d83e366_6c67f140",
+      "range": {
+        "startLine": 71,
+        "startChar": 11,
+        "endLine": 71,
+        "endChar": 82
+      },
+      "revId": "a576abdd5609aef6c7b4ec7512e22b1501be961c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0f77c76_b1c941f0",
