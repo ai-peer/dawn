@@ -25,8 +25,8 @@ using IR_InstructionTest = TestHelper;
 TEST_F(IR_InstructionTest, CreateAnd) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.And(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i),
-                                     b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.And(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kAnd);
@@ -46,8 +46,8 @@ TEST_F(IR_InstructionTest, CreateAnd) {
 TEST_F(IR_InstructionTest, CreateOr) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Or(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i),
-                                    b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Or(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kOr);
@@ -66,8 +66,8 @@ TEST_F(IR_InstructionTest, CreateOr) {
 TEST_F(IR_InstructionTest, CreateXor) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Xor(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i),
-                                     b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Xor(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kXor);
@@ -86,8 +86,8 @@ TEST_F(IR_InstructionTest, CreateXor) {
 TEST_F(IR_InstructionTest, CreateEqual) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Equal(b.builder.ir.types.Get<type::Bool>(),
-                                       b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Equal(b.builder.Bool(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kEqual);
@@ -106,8 +106,8 @@ TEST_F(IR_InstructionTest, CreateEqual) {
 TEST_F(IR_InstructionTest, CreateNotEqual) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.NotEqual(b.builder.ir.types.Get<type::Bool>(),
-                                          b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.NotEqual(b.builder.Bool(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kNotEqual);
@@ -126,8 +126,8 @@ TEST_F(IR_InstructionTest, CreateNotEqual) {
 TEST_F(IR_InstructionTest, CreateLessThan) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.LessThan(b.builder.ir.types.Get<type::Bool>(),
-                                          b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.LessThan(b.builder.Bool(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kLessThan);
@@ -146,8 +146,8 @@ TEST_F(IR_InstructionTest, CreateLessThan) {
 TEST_F(IR_InstructionTest, CreateGreaterThan) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.GreaterThan(b.builder.ir.types.Get<type::Bool>(),
-                                             b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.GreaterThan(b.builder.Bool(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kGreaterThan);
@@ -166,8 +166,8 @@ TEST_F(IR_InstructionTest, CreateGreaterThan) {
 TEST_F(IR_InstructionTest, CreateLessThanEqual) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.LessThanEqual(b.builder.ir.types.Get<type::Bool>(),
-                                               b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.LessThanEqual(b.builder.Bool(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kLessThanEqual);
@@ -186,8 +186,8 @@ TEST_F(IR_InstructionTest, CreateLessThanEqual) {
 TEST_F(IR_InstructionTest, CreateGreaterThanEqual) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.GreaterThanEqual(b.builder.ir.types.Get<type::Bool>(),
-                                                  b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst = b.builder.GreaterThanEqual(b.builder.Bool(), b.builder.Constant(4_i),
+                                                  b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kGreaterThanEqual);
@@ -205,8 +205,7 @@ TEST_F(IR_InstructionTest, CreateGreaterThanEqual) {
 
 TEST_F(IR_InstructionTest, CreateNot) {
     auto& b = CreateEmptyBuilder();
-    const auto* inst =
-        b.builder.Not(b.builder.ir.types.Get<type::Bool>(), b.builder.Constant(true));
+    const auto* inst = b.builder.Not(b.builder.Bool(), b.builder.Constant(true));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kEqual);
@@ -225,8 +224,8 @@ TEST_F(IR_InstructionTest, CreateNot) {
 TEST_F(IR_InstructionTest, CreateShiftLeft) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.ShiftLeft(b.builder.ir.types.Get<type::I32>(),
-                                           b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.ShiftLeft(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kShiftLeft);
@@ -245,8 +244,8 @@ TEST_F(IR_InstructionTest, CreateShiftLeft) {
 TEST_F(IR_InstructionTest, CreateShiftRight) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.ShiftRight(b.builder.ir.types.Get<type::I32>(),
-                                            b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.ShiftRight(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kShiftRight);
@@ -265,8 +264,8 @@ TEST_F(IR_InstructionTest, CreateShiftRight) {
 TEST_F(IR_InstructionTest, CreateAdd) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Add(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i),
-                                     b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Add(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kAdd);
@@ -285,8 +284,8 @@ TEST_F(IR_InstructionTest, CreateAdd) {
 TEST_F(IR_InstructionTest, CreateSubtract) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Subtract(b.builder.ir.types.Get<type::I32>(),
-                                          b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Subtract(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kSubtract);
@@ -305,8 +304,8 @@ TEST_F(IR_InstructionTest, CreateSubtract) {
 TEST_F(IR_InstructionTest, CreateMultiply) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Multiply(b.builder.ir.types.Get<type::I32>(),
-                                          b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Multiply(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kMultiply);
@@ -325,8 +324,8 @@ TEST_F(IR_InstructionTest, CreateMultiply) {
 TEST_F(IR_InstructionTest, CreateDivide) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Divide(b.builder.ir.types.Get<type::I32>(),
-                                        b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Divide(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kDivide);
@@ -345,8 +344,8 @@ TEST_F(IR_InstructionTest, CreateDivide) {
 TEST_F(IR_InstructionTest, CreateModulo) {
     auto& b = CreateEmptyBuilder();
 
-    const auto* inst = b.builder.Modulo(b.builder.ir.types.Get<type::I32>(),
-                                        b.builder.Constant(4_i), b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.Modulo(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     ASSERT_TRUE(inst->Is<Binary>());
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kModulo);
@@ -364,8 +363,8 @@ TEST_F(IR_InstructionTest, CreateModulo) {
 
 TEST_F(IR_InstructionTest, Binary_Usage) {
     auto& b = CreateEmptyBuilder();
-    const auto* inst = b.builder.And(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i),
-                                     b.builder.Constant(2_i));
+    const auto* inst =
+        b.builder.And(b.builder.I32(), b.builder.Constant(4_i), b.builder.Constant(2_i));
 
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kAnd);
 
@@ -381,7 +380,7 @@ TEST_F(IR_InstructionTest, Binary_Usage) {
 TEST_F(IR_InstructionTest, Binary_Usage_DuplicateValue) {
     auto& b = CreateEmptyBuilder();
     auto val = b.builder.Constant(4_i);
-    const auto* inst = b.builder.And(b.builder.ir.types.Get<type::I32>(), val, val);
+    const auto* inst = b.builder.And(b.builder.I32(), val, val);
 
     EXPECT_EQ(inst->GetKind(), Binary::Kind::kAnd);
     ASSERT_EQ(inst->LHS(), inst->RHS());

@@ -113,37 +113,27 @@ class Builder {
     /// Creates a ir::Constant for an i32 Scalar
     /// @param v the value
     /// @returns the new constant
-    ir::Constant* Constant(i32 v) {
-        return Constant(create<constant::Scalar<i32>>(ir.types.Get<type::I32>(), v));
-    }
+    ir::Constant* Constant(i32 v) { return Constant(create<constant::Scalar<i32>>(I32(), v)); }
 
     /// Creates a ir::Constant for a u32 Scalar
     /// @param v the value
     /// @returns the new constant
-    ir::Constant* Constant(u32 v) {
-        return Constant(create<constant::Scalar<u32>>(ir.types.Get<type::U32>(), v));
-    }
+    ir::Constant* Constant(u32 v) { return Constant(create<constant::Scalar<u32>>(U32(), v)); }
 
     /// Creates a ir::Constant for a f32 Scalar
     /// @param v the value
     /// @returns the new constant
-    ir::Constant* Constant(f32 v) {
-        return Constant(create<constant::Scalar<f32>>(ir.types.Get<type::F32>(), v));
-    }
+    ir::Constant* Constant(f32 v) { return Constant(create<constant::Scalar<f32>>(F32(), v)); }
 
     /// Creates a ir::Constant for a f16 Scalar
     /// @param v the value
     /// @returns the new constant
-    ir::Constant* Constant(f16 v) {
-        return Constant(create<constant::Scalar<f16>>(ir.types.Get<type::F16>(), v));
-    }
+    ir::Constant* Constant(f16 v) { return Constant(create<constant::Scalar<f16>>(F16(), v)); }
 
     /// Creates a ir::Constant for a bool Scalar
     /// @param v the value
     /// @returns the new constant
-    ir::Constant* Constant(bool v) {
-        return Constant(create<constant::Scalar<bool>>(ir.types.Get<type::Bool>(), v));
-    }
+    ir::Constant* Constant(bool v) { return Constant(create<constant::Scalar<bool>>(Bool(), v)); }
 
     /// Creates an op for `lhs kind rhs`
     /// @param kind the kind of operation
@@ -361,6 +351,24 @@ class Builder {
     /// Retrieves the root block for the module, creating if necessary
     /// @returns the root block
     ir::Block* CreateRootBlockIfNeeded();
+
+    /// @returns a void type
+    const type::Type* Void() { return ir.types.Get<type::Void>(); }
+
+    /// @returns a bool type
+    const type::Type* Bool() { return ir.types.Get<type::Bool>(); }
+
+    /// @returns an i32 type
+    const type::Type* I32() { return ir.types.Get<type::I32>(); }
+
+    /// @returns a u32 type
+    const type::Type* U32() { return ir.types.Get<type::U32>(); }
+
+    /// @returns an f32 type
+    const type::Type* F32() { return ir.types.Get<type::F32>(); }
+
+    /// @returns an f16 type
+    const type::Type* F16() { return ir.types.Get<type::F16>(); }
 
     /// The IR module.
     Module ir;
