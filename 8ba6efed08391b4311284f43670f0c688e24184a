@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2d0cc8c_e56d5e1e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-09T00:03:20Z",
+      "side": 1,
+      "message": "you would do it with the sync scope which is per-dispatch in a compute pass.\n\nin webgpu, it\u0027s not valid to use a buffer as both storage usage and uniform usage in a single render pass. That\u0027s a read/write usage conflict.\nsee https://gpuweb.github.io/gpuweb/#ref-for-usage-scope-validation",
+      "parentUuid": "a64c9a33_b7f5cd6f",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 5
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8ae577c_d7550af5",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 4
