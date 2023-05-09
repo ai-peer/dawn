@@ -16,6 +16,7 @@
 
 #include <math.h>
 #include <cstring>
+#include <string>
 #include <utility>
 
 #include "dawn/common/Constants.h"
@@ -93,6 +94,15 @@ void RenderEncoderBase::APIDraw(uint32_t vertexCount,
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
+                if (vertexCount == 0) {
+                    GetDevice()->EmitWarningOnce(absl::StrFormat(
+                        "Calling %s.Draw with a vertex count of 0 is unusual.", this));
+                }
+                if (instanceCount == 0) {
+                    GetDevice()->EmitWarningOnce(absl::StrFormat(
+                        "Calling %s.Draw with an instance count of 0 is unusual.", this));
+                }
+
                 DAWN_TRY(mCommandBufferState.ValidateCanDraw());
 
                 DAWN_INVALID_IF(mDisableBaseInstance && firstInstance != 0,
@@ -127,6 +137,17 @@ void RenderEncoderBase::APIDrawIndexed(uint32_t indexCount,
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
+                if (indexCount == 0) {
+                    const std::string message = absl::StrFormat(
+                        "Calling %s.Draw with an index count of 0 is unusual.", this);
+                    GetDevice()->EmitLog(WGPULoggingType_Warning, message.c_str());
+                }
+                if (instanceCount == 0) {
+                    const std::string message = absl::StrFormat(
+                        "Calling %s.Draw with an instance count of 0 is unusual.", this);
+                    GetDevice()->EmitLog(WGPULoggingType_Warning, message.c_str());
+                }
+
                 DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
 
                 DAWN_INVALID_IF(mDisableBaseInstance && firstInstance != 0,
