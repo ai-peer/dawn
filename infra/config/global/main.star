@@ -363,6 +363,7 @@ def chromium_dawn_tryjob(os):
     Args:
       os: string for the OS, should be one or linux|mac|win
     """
+
     # We use the DEPS version for branches because ToT builders do not make
     # sense on branches and the DEPS versions already exist.
     luci.cq_tryjob_verifier(
@@ -370,10 +371,10 @@ def chromium_dawn_tryjob(os):
         builder = "chromium:try/" + os + "-dawn-rel",
     )
     for milestone, details in ACTIVE_MILESTONES.items():
-      luci.cq_tryjob_verifier(
-        cq_group = "Dawn-CQ-" + milestone,
-        builder = details.project + ":try/dawn-" + _os_to_branch_config[os] + "-deps-rel"
-      )
+        luci.cq_tryjob_verifier(
+            cq_group = "Dawn-CQ-" + milestone,
+            builder = details.project + ":try/dawn-" + _os_to_branch_config[os] + "-deps-rel",
+        )
 
 luci.gitiles_poller(
     name = "primary-poller",
@@ -467,7 +468,7 @@ luci.cq_group(
         refs_exclude = [
             details.dawn_ref
             for details in ACTIVE_MILESTONES.values()
-        ]
+        ],
     ),
     acls = [
         acl.entry(
@@ -501,7 +502,7 @@ def _create_branch_groups():
             watch = cq.refset(
                 "https://dawn.googlesource.com/dawn",
                 refs = [
-                    details.dawn_ref
+                    details.dawn_ref,
                 ],
             ),
             acls = [
