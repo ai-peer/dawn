@@ -25,7 +25,7 @@
 
 namespace {
 std::unique_ptr<dawn::native::Instance> nativeInstance = nullptr;
-WGPUAdapter nullBackendAdapter = nullptr;
+wgpu::Adapter nullBackendAdapter = nullptr;
 }  // namespace
 
 void SetupNullBackend(const benchmark::State& state) {
@@ -51,15 +51,14 @@ wgpu::Device CreateNullDevice(const wgpu::DeviceDescriptor& desc) {
 
     wgpu::Device device;
 
-    wgpu::Adapter(nullBackendAdapter)
-        .RequestDevice(
-            &desc,
-            [](WGPURequestDeviceStatus status, WGPUDevice cDevice, char const* message,
-               void* userdata) {
-                ASSERT(status == WGPURequestDeviceStatus_Success);
-                *reinterpret_cast<wgpu::Device*>(userdata) = wgpu::Device::Acquire(cDevice);
-            },
-            &device);
+    nullBackendAdapter.RequestDevice(
+        &desc,
+        [](WGPURequestDeviceStatus status, WGPUDevice cDevice, char const* message,
+           void* userdata) {
+            ASSERT(status == WGPURequestDeviceStatus_Success);
+            *reinterpret_cast<wgpu::Device*>(userdata) = wgpu::Device::Acquire(cDevice);
+        },
+        &device);
     while (!device) {
         wgpuInstanceProcessEvents(nativeInstance->Get());
     }
