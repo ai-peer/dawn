@@ -239,6 +239,7 @@ class StructureType(Record, Type):
         Type.__init__(self, name, dict(json_data, **json_data_override))
         self.chained = json_data.get('chained', None)
         self.extensible = json_data.get('extensible', None)
+        self.handwritten = json_data.get('handwritten', False)
         if self.chained:
             assert self.chained == 'in' or self.chained == 'out'
             assert 'chain roots' in json_data
@@ -353,7 +354,9 @@ def link_object(obj, types):
 
 
 def link_structure(struct, types):
-    struct.members = linked_record_members(struct.json_data['members'], types)
+    if not struct.handwritten:
+        struct.members = linked_record_members(struct.json_data['members'],
+                                               types)
     struct.chain_roots = [types[root] for root in struct.json_data.get('chain roots', [])]
     assert all((root.category == 'structure' for root in struct.chain_roots))
 

@@ -25,6 +25,10 @@
 #include "dawn/EnumClassBitmasks.h"
 #include <cmath>
 
+namespace dawn::platform {
+class Platform;
+}  // namespace dawn::platform
+
 namespace {{metadata.namespace}} {
 
     namespace detail {
@@ -223,6 +227,9 @@ namespace {{metadata.namespace}} {
     };
 
     {% for type in by_category["structure"] %}
+        {% if type.handwritten %}
+            {% continue %}
+        {% endif %}
         {% set Out = "Out" if type.output else "" %}
         {% set const = "const" if not type.output else "" %}
         {% if type.chained %}
@@ -253,6 +260,17 @@ namespace {{metadata.namespace}} {
         };
 
     {% endfor %}
+
+    // Can be chained in InstanceDescriptor
+    struct DawnInstanceDescriptor : ChainedStruct {
+        DawnInstanceDescriptor() {
+            sType = SType::DawnInstanceDescriptor;
+        }
+        static constexpr size_t kFirstMemberAlignment = detail::ConstexprMax(alignof(ChainedStruct), alignof(uint32_t));
+        alignas(kFirstMemberAlignment) uint32_t additionalRuntimeSearchPathsCount = 0;
+        const char* const * additionalRuntimeSearchPaths;
+        dawn::platform::Platform* platform;
+    };
 
     // The operators of EnumClassBitmmasks in the dawn:: namespace need to be imported
     // in the {{metadata.namespace}} namespace for Argument Dependent Lookup.

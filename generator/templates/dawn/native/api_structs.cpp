@@ -54,7 +54,9 @@ namespace {{native_namespace}} {
             static_assert(offsetof({{CppType}}, {{memberName}}) == offsetof({{CType}}, {{memberName}}),
                     "offsetof mismatch for {{CppType}}::{{memberName}}");
         {% endfor %}
-
+        {% if type.handwritten %}
+            {% continue %}
+        {% endif %}
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
             return {% if type.extensible or type.chained -%}
                 (nextInChain == rhs.nextInChain) &&
@@ -72,4 +74,16 @@ namespace {{native_namespace}} {
         }
 
     {% endfor %}
+
+    bool DawnInstanceDescriptor::operator==(const DawnInstanceDescriptor& rhs) const {
+        return (nextInChain == rhs.nextInChain) && std::tie(
+            additionalRuntimeSearchPathsCount,
+            additionalRuntimeSearchPaths,
+            platform
+        ) == std::tie(
+            rhs.additionalRuntimeSearchPathsCount,
+            rhs.additionalRuntimeSearchPaths,
+            rhs.platform
+        );
+    }
 } // namespace {{native_namespace}}

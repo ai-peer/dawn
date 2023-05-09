@@ -23,6 +23,7 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/Texture.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "dawn/webgpu_cpp.h"
 #include "tint/tint.h"
 
 // Contains the entry-points into dawn_native
