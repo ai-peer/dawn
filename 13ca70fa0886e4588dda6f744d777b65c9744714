@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce7a54a_390d36f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-05-09T15:06:57Z",
+      "side": 1,
+      "message": "From Kokoro log (MSVC):\n\u003e T:\\tmp\\dawn-temp\\dawn-src\\src\\tint\\writer\\spirv\\generator_impl_ir.cc(158) : error C2220: the following warning is treated as an error\n\u003e T:\\tmp\\dawn-temp\\dawn-src\\src\\tint\\writer\\spirv\\generator_impl_ir.cc(158) : warning C4701: potentially uninitialized local variable \u0027stage\u0027 used",
+      "revId": "13ca70fa0886e4588dda6f744d777b65c9744714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
