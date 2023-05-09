@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31ab80b_5304c731",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 55
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-09T13:51:03Z",
+      "side": 1,
+      "message": "Can we have a tiny comment that these are the hardcoded IDs for various Dawn object types so that the fuzzer can do a better job at reusing them?",
+      "revId": "1bb4aacf50ec6a261167144e494f93062dc2b5b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f0f37b_1dbc18ff",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 55
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-09T13:51:03Z",
+      "side": 1,
+      "message": "nit: these two macros don\u0027t use the count.",
+      "revId": "1bb4aacf50ec6a261167144e494f93062dc2b5b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
