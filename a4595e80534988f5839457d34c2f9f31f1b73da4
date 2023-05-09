@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da508f96_7b2bcb2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-09T23:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "562003ed_31fefd24",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0138d6eb_5cbcf67d",
@@ -411,6 +429,24 @@
       "side": 1,
       "message": "seems it only fails for angle on win (including angle_swiftshader. angle and angle_swift shader passed on linux locally). Only skipping for `angle \u0026\u0026 win` seems to make bots happy.\n\nI\u0027m trying to reproduce the bug: https://chromium-review.googlesource.com/c/angle/angle/+/4509710 using dumped glsl.\nIt now runs fine now on windows locally. Need further effort to try to reproduce.",
       "parentUuid": "7431903a_a696070f",
+      "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1d298c1_bb79b860",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-09T23:15:59Z",
+      "side": 1,
+      "message": "Skip for win angle, tracked at dawn:1291",
+      "parentUuid": "df63b28d_5410973f",
       "revId": "a4595e80534988f5839457d34c2f9f31f1b73da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

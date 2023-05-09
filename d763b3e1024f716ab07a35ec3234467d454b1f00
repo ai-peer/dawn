@@ -71,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c224ff7_c2d80056",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-09T23:15:59Z",
+      "side": 1,
+      "message": "Added `copySize.z \u003e 1` tests and related logic here.",
+      "parentUuid": "2e459b60_db28c22a",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 78
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f62e7b03_940c847a",
@@ -131,6 +155,30 @@
       "writtenOn": "2023-05-05T20:34:16Z",
       "side": 1,
       "message": "in the else case, I think we need to read from dst_buf so we preserve the original contents there. I believe the current implementation will clear those higher bits in the buffer to 0. We want to do something like `buffer[offset] \u003d (buffer[offset] \u0026 0xFFFF0000) + r0;`\n\ncan add a test for it if we don\u0027t have one.\nYou\u0027ll want to fill the buffer with some other contents, do the copy, and then check that the buffer contents just past the right edge of the odd-sized copy region are still the same. and the texels on the right edge of the copy region are copied correctly\n\nNow that I\u0027m thinking about it though, in the case where the width of the copy region is odd, I think it could be be more efficient to do the copy in two passes. One which copies the even-sized subregion. And then a second pass which copies the last column:\n```\n____________________________\n|                         | |\n|                         | |\n|                         | |\n|                         | |\n|                         | |\n|_________________________|_|\n```\n\nThat\u0027s because copying the last column needs to both read+write from the destination buffer, whereas copying the rest of the region is only writes.\n\nWe want the threads in the shader to be performing the same type of workload.\n\nI think that we can keep the shader and pipelines identical, to avoid duplicating them. But issue two copies with two different sets of params.\nFeel free to look into this as an optimization later since it needs some testing and verification to determine whether it would actually be faster.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 56
+      },
+      "revId": "d763b3e1024f716ab07a35ec3234467d454b1f00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb313f5_d67ba2e8",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-09T23:15:59Z",
+      "side": 1,
+      "message": "Add preserveBufferContent tests and related logic here.",
+      "parentUuid": "7ccfbd76_751d20bc",
       "range": {
         "startLine": 122,
         "startChar": 0,

@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c90e9a68_209f27ce",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-09T23:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24cd31b9_c49a205e",
+      "revId": "872ac52035f0b2517f2f05f904577120137179d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ae96739_4495dbf7",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-09T15:59:08Z",
       "side": 1,
       "message": "uNit: actually now this could be\n\ncoord0 +\u003d vec2u(1, 0);\n\nsince coord0 isn\u0027t used below. But maybe that\u0027s a style thing; up to you.",
+      "revId": "872ac52035f0b2517f2f05f904577120137179d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c7686fe_2440d0e1",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-09T23:15:59Z",
+      "side": 1,
+      "message": "Hmm I prefer having coord0, coord1 to be clearer that we are reading two values.",
+      "parentUuid": "2ae96739_4495dbf7",
       "revId": "872ac52035f0b2517f2f05f904577120137179d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
