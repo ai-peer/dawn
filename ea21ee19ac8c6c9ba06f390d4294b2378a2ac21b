@@ -22,6 +22,30 @@
       },
       "revId": "ea21ee19ac8c6c9ba06f390d4294b2378a2ac21b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7aaedfe_f352d429",
+        "filename": "src/tint/reader/spirv/namer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-09T16:39:39Z",
+      "side": 1,
+      "message": "Discussed offline - there\u0027s other dynamic additions to the map so `std::string` is necessary.",
+      "parentUuid": "56b15017_17a6b770",
+      "range": {
+        "startLine": 180,
+        "startChar": 20,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "ea21ee19ac8c6c9ba06f390d4294b2378a2ac21b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
