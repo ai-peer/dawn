@@ -16,6 +16,24 @@
       "message": "Do we have focused test coverage for both code paths in WriteBufferTests? Same focused test question for the various code paths that may require updates, or may skip updates.",
       "revId": "48aa6f45897a50611ef605829adbf1fe3aa98bbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c8199d_522f0102",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T16:51:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3151a8d_a90d5d68",
+      "revId": "48aa6f45897a50611ef605829adbf1fe3aa98bbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
