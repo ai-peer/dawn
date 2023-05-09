@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "665e4cce_7ea468d4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T00:11:44Z",
+      "side": 1,
+      "message": "See ComputeStorageBufferBarrierTests.UniformToStorageAddPingPongInOnePass [1],\nit just has one pass, and switches bind groups for each DispatchWorkgroups() calls. Right now. we update constant buffer, just before bind constant buffer to slot. It much easier. We just need to iterator resources once in BindGroupTracker::ApplyGroup(). It is not necessary to iterator resource twice for each draw calls or dispatch calls.\n\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/ComputeStorageBufferBarrierTests.cpp;l\u003d331?q\u003dUniformToStorageAddPingPongInOnePass\u0026ss\u003dchromium",
+      "parentUuid": "c2d0cc8c_e56d5e1e",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 5
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8ae577c_d7550af5",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 4
