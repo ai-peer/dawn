@@ -26,17 +26,11 @@ class FeatureTests : public testing::Test {
         : testing::Test(),
           mInstanceBase(dawn::native::InstanceBase::Create()),
           mPhysicalDevice(mInstanceBase.Get()),
-          mUnsafePhysicalDeviceDisallow(
-              mInstanceBase.Get(),
-              dawn::native::TogglesState(dawn::native::ToggleStage::Adapter)
-                  .SetForTesting(dawn::native::Toggle::DisallowUnsafeAPIs, false, false)),
           mUnsafePhysicalDevice(
               mInstanceBase.Get(),
               dawn::native::TogglesState(dawn::native::ToggleStage::Adapter)
                   .SetForTesting(dawn::native::Toggle::AllowUnsafeAPIs, true, true)),
           mAdapterBase(&mPhysicalDevice, dawn::native::FeatureLevel::Core),
-          mUnsafeAdapterBaseDisallow(&mUnsafePhysicalDeviceDisallow,
-                                     dawn::native::FeatureLevel::Core),
           mUnsafeAdapterBase(&mUnsafePhysicalDevice, dawn::native::FeatureLevel::Core) {}
 
     std::vector<wgpu::FeatureName> GetAllFeatureNames() {
@@ -54,14 +48,10 @@ class FeatureTests : public testing::Test {
     // By default DisallowUnsafeAPIs is enabled in this instance.
     Ref<dawn::native::InstanceBase> mInstanceBase;
     dawn::native::null::PhysicalDevice mPhysicalDevice;
-    // TODO(dawn:1685) Remove duplicated unsafe objects once DisallowUnsafeAPIs is removed.
-    dawn::native::null::PhysicalDevice mUnsafePhysicalDeviceDisallow;
     dawn::native::null::PhysicalDevice mUnsafePhysicalDevice;
     // The adapter that inherit toggles states from the instance, also have DisallowUnsafeAPIs
     // enabled.
     dawn::native::AdapterBase mAdapterBase;
-    // TODO(dawn:1685) Remove duplicated unsafe objects once DisallowUnsafeAPIs is removed.
-    dawn::native::AdapterBase mUnsafeAdapterBaseDisallow;
     dawn::native::AdapterBase mUnsafeAdapterBase;
 };
 
@@ -79,22 +69,6 @@ TEST_F(FeatureTests, AdapterWithRequiredFeatureDisabled) {
         {
             mPhysicalDevice.SetSupportedFeaturesForTesting(featureNamesWithoutOne);
             dawn::native::Adapter adapterWithoutFeature(&mAdapterBase);
-
-            wgpu::DeviceDescriptor deviceDescriptor;
-            wgpu::FeatureName featureName = FeatureEnumToAPIFeature(notSupportedFeature);
-            deviceDescriptor.requiredFeatures = &featureName;
-            deviceDescriptor.requiredFeaturesCount = 1;
-
-            WGPUDevice deviceWithFeature = adapterWithoutFeature.CreateDevice(
-                reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor));
-            ASSERT_EQ(nullptr, deviceWithFeature);
-        }
-
-        // Test that an adapter with DisallowUnsafeApis disabled validates features as expected.
-        // TODO(dawn:1685) Remove this block once DisallowUnsafeAPIs is removed.
-        {
-            mUnsafePhysicalDeviceDisallow.SetSupportedFeaturesForTesting(featureNamesWithoutOne);
-            dawn::native::Adapter adapterWithoutFeature(&mUnsafeAdapterBaseDisallow);
 
             wgpu::DeviceDescriptor deviceDescriptor;
             wgpu::FeatureName featureName = FeatureEnumToAPIFeature(notSupportedFeature);
@@ -128,7 +102,6 @@ TEST_F(FeatureTests, AdapterWithRequiredFeatureDisabled) {
 // of the enabled features correctly.
 TEST_F(FeatureTests, RequireAndGetEnabledFeatures) {
     dawn::native::Adapter adapter(&mAdapterBase);
-    dawn::native::Adapter unsafeAdapterDisallow(&mUnsafeAdapterBaseDisallow);
     dawn::native::Adapter unsafeAdapterAllow(&mUnsafeAdapterBase);
     dawn::native::FeaturesInfo featuresInfo;
 
@@ -159,22 +132,6 @@ TEST_F(FeatureTests, RequireAndGetEnabledFeatures) {
                 EXPECT_EQ(enabledFeature, featureName);
                 deviceBase->APIRelease();
             }
-        }
-
-        // Test with the adapter with DisallowUnsafeApis toggles disabled, creating device should
-        // always succeed.
-        // TODO(dawn:1685) Remove this block once DisallowUnsafeAPIs is removed.
-        {
-            dawn::native::DeviceBase* deviceBase =
-                dawn::native::FromAPI(unsafeAdapterDisallow.CreateDevice(
-                    reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor)));
-
-            ASSERT_NE(nullptr, deviceBase);
-            ASSERT_EQ(1u, deviceBase->APIEnumerateFeatures(nullptr));
-            wgpu::FeatureName enabledFeature;
-            deviceBase->APIEnumerateFeatures(&enabledFeature);
-            EXPECT_EQ(enabledFeature, featureName);
-            deviceBase->APIRelease();
         }
 
         // Test with the adapter with AllowUnsafeApis toggles enabled, creating device should always
