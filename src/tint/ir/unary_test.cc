@@ -26,11 +26,10 @@ TEST_F(IR_InstructionTest, CreateAddressOf) {
     auto& b = CreateEmptyBuilder();
 
     // TODO(dsinclair): This would be better as an identifier, but works for now.
-    const auto* inst =
-        b.builder.AddressOf(b.builder.ir.types.Get<type::Pointer>(
-                                b.builder.ir.types.Get<type::I32>(),
-                                builtin::AddressSpace::kPrivate, builtin::Access::kReadWrite),
-                            b.builder.Constant(4_i));
+    const auto* inst = b.builder.AddressOf(
+        b.builder.ir.types.Get<type::Pointer>(
+            b.builder.ir.types.i32(), builtin::AddressSpace::kPrivate, builtin::Access::kReadWrite),
+        b.builder.Constant(4_i));
 
     ASSERT_TRUE(inst->Is<Unary>());
     EXPECT_EQ(inst->GetKind(), Unary::Kind::kAddressOf);
@@ -45,8 +44,7 @@ TEST_F(IR_InstructionTest, CreateAddressOf) {
 
 TEST_F(IR_InstructionTest, CreateComplement) {
     auto& b = CreateEmptyBuilder();
-    const auto* inst =
-        b.builder.Complement(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i));
+    const auto* inst = b.builder.Complement(b.builder.ir.types.i32(), b.builder.Constant(4_i));
 
     ASSERT_TRUE(inst->Is<Unary>());
     EXPECT_EQ(inst->GetKind(), Unary::Kind::kComplement);
@@ -61,8 +59,7 @@ TEST_F(IR_InstructionTest, CreateIndirection) {
     auto& b = CreateEmptyBuilder();
 
     // TODO(dsinclair): This would be better as an identifier, but works for now.
-    const auto* inst =
-        b.builder.Indirection(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i));
+    const auto* inst = b.builder.Indirection(b.builder.ir.types.i32(), b.builder.Constant(4_i));
 
     ASSERT_TRUE(inst->Is<Unary>());
     EXPECT_EQ(inst->GetKind(), Unary::Kind::kIndirection);
@@ -75,8 +72,7 @@ TEST_F(IR_InstructionTest, CreateIndirection) {
 
 TEST_F(IR_InstructionTest, CreateNegation) {
     auto& b = CreateEmptyBuilder();
-    const auto* inst =
-        b.builder.Negation(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i));
+    const auto* inst = b.builder.Negation(b.builder.ir.types.i32(), b.builder.Constant(4_i));
 
     ASSERT_TRUE(inst->Is<Unary>());
     EXPECT_EQ(inst->GetKind(), Unary::Kind::kNegation);
@@ -89,8 +85,7 @@ TEST_F(IR_InstructionTest, CreateNegation) {
 
 TEST_F(IR_InstructionTest, Unary_Usage) {
     auto& b = CreateEmptyBuilder();
-    const auto* inst =
-        b.builder.Negation(b.builder.ir.types.Get<type::I32>(), b.builder.Constant(4_i));
+    const auto* inst = b.builder.Negation(b.builder.ir.types.i32(), b.builder.Constant(4_i));
 
     EXPECT_EQ(inst->GetKind(), Unary::Kind::kNegation);
 

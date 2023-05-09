@@ -863,7 +863,7 @@ utils::Result<Value*> BuilderImpl::EmitShortCircuit(const ast::BinaryExpression*
     }
 
     // Generate a variable to store the short-circut into
-    auto* ty = builder.ir.types.Get<type::Bool>();
+    auto* ty = builder.ir.types.bool_();
     auto* result_var =
         builder.Declare(ty, builtin::AddressSpace::kFunction, builtin::Access::kReadWrite);
     current_flow_block->instructions.Push(result_var);

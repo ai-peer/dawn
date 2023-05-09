@@ -22,11 +22,11 @@ namespace {
 TEST_F(SpvGeneratorImplTest, Binary_Add_I32) {
     auto* func = CreateFunction();
     func->name = ir.symbols.Register("foo");
-    func->return_type = ir.types.Get<type::Void>();
+    func->return_type = ir.types.void_();
     func->start_target->branch.target = func->end_target;
 
-    func->start_target->instructions.Push(CreateBinary(
-        ir::Binary::Kind::kAdd, ir.types.Get<type::I32>(), Constant(1_i), Constant(2_i)));
+    func->start_target->instructions.Push(
+        CreateBinary(ir::Binary::Kind::kAdd, ir.types.i32(), Constant(1_i), Constant(2_i)));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -46,11 +46,11 @@ OpFunctionEnd
 TEST_F(SpvGeneratorImplTest, Binary_Add_U32) {
     auto* func = CreateFunction();
     func->name = ir.symbols.Register("foo");
-    func->return_type = ir.types.Get<type::Void>();
+    func->return_type = ir.types.void_();
     func->start_target->branch.target = func->end_target;
 
-    func->start_target->instructions.Push(CreateBinary(
-        ir::Binary::Kind::kAdd, ir.types.Get<type::U32>(), Constant(1_u), Constant(2_u)));
+    func->start_target->instructions.Push(
+        CreateBinary(ir::Binary::Kind::kAdd, ir.types.u32(), Constant(1_u), Constant(2_u)));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -70,11 +70,11 @@ OpFunctionEnd
 TEST_F(SpvGeneratorImplTest, Binary_Add_F32) {
     auto* func = CreateFunction();
     func->name = ir.symbols.Register("foo");
-    func->return_type = ir.types.Get<type::Void>();
+    func->return_type = ir.types.void_();
     func->start_target->branch.target = func->end_target;
 
-    func->start_target->instructions.Push(CreateBinary(
-        ir::Binary::Kind::kAdd, ir.types.Get<type::F32>(), Constant(1_f), Constant(2_f)));
+    func->start_target->instructions.Push(
+        CreateBinary(ir::Binary::Kind::kAdd, ir.types.f32(), Constant(1_f), Constant(2_f)));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -94,14 +94,13 @@ OpFunctionEnd
 TEST_F(SpvGeneratorImplTest, Binary_Add_Chain) {
     auto* func = CreateFunction();
     func->name = ir.symbols.Register("foo");
-    func->return_type = ir.types.Get<type::Void>();
+    func->return_type = ir.types.void_();
     func->start_target->branch.target = func->end_target;
 
-    auto* a = CreateBinary(ir::Binary::Kind::kAdd, ir.types.Get<type::I32>(), Constant(1_i),
-                           Constant(2_i));
+    auto* a = CreateBinary(ir::Binary::Kind::kAdd, ir.types.i32(), Constant(1_i), Constant(2_i));
     func->start_target->instructions.Push(a);
     func->start_target->instructions.Push(
-        CreateBinary(ir::Binary::Kind::kAdd, ir.types.Get<type::I32>(), a, a));
+        CreateBinary(ir::Binary::Kind::kAdd, ir.types.i32(), a, a));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"

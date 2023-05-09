@@ -114,35 +114,35 @@ class Builder {
     /// @param v the value
     /// @returns the new constant
     ir::Constant* Constant(i32 v) {
-        return Constant(create<constant::Scalar<i32>>(ir.types.Get<type::I32>(), v));
+        return Constant(create<constant::Scalar<i32>>(ir.types.i32(), v));
     }
 
     /// Creates a ir::Constant for a u32 Scalar
     /// @param v the value
     /// @returns the new constant
     ir::Constant* Constant(u32 v) {
-        return Constant(create<constant::Scalar<u32>>(ir.types.Get<type::U32>(), v));
+        return Constant(create<constant::Scalar<u32>>(ir.types.u32(), v));
     }
 
     /// Creates a ir::Constant for a f32 Scalar
     /// @param v the value
     /// @returns the new constant
     ir::Constant* Constant(f32 v) {
-        return Constant(create<constant::Scalar<f32>>(ir.types.Get<type::F32>(), v));
+        return Constant(create<constant::Scalar<f32>>(ir.types.f32(), v));
     }
 
     /// Creates a ir::Constant for a f16 Scalar
     /// @param v the value
     /// @returns the new constant
     ir::Constant* Constant(f16 v) {
-        return Constant(create<constant::Scalar<f16>>(ir.types.Get<type::F16>(), v));
+        return Constant(create<constant::Scalar<f16>>(ir.types.f16(), v));
     }
 
     /// Creates a ir::Constant for a bool Scalar
     /// @param v the value
     /// @returns the new constant
     ir::Constant* Constant(bool v) {
-        return Constant(create<constant::Scalar<bool>>(ir.types.Get<type::Bool>(), v));
+        return Constant(create<constant::Scalar<bool>>(ir.types.bool_(), v));
     }
 
     /// Creates an op for `lhs kind rhs`
