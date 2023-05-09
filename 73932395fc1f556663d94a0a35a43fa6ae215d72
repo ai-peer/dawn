@@ -22,6 +22,30 @@
       },
       "revId": "73932395fc1f556663d94a0a35a43fa6ae215d72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b2627b7_96ef9322",
+        "filename": "src/tint/ir/binary_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-09T20:31:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the extra indirection buys us? Other than perhaps some separation, given that there\u0027s a quite a lot of methods in `ProgramBuilder::TypesBuilder` and we\u0027ll probably want most of them in IR land too.\n\nAlternatively, why shouldn\u0027t these just live in `type::Manager`? Then they\u0027re also accessible to non-IR testing code too. `ir.types.Get\u003ctype::I32\u003e()` would become `ir.types.I32()`.",
+      "parentUuid": "f539f62f_f5b8e1e3",
+      "range": {
+        "startLine": 29,
+        "startChar": 24,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "73932395fc1f556663d94a0a35a43fa6ae215d72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
