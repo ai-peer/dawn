@@ -108,6 +108,7 @@ typedef struct {{c_prefix}}ChainedStructOut {
     } {{as_cType(type.name)}};
 
 {% endfor %}
+
 {% for typeDef in by_category["typedef"] %}
     // {{as_cType(typeDef.name)}} is deprecated.
     // Use {{as_cType(typeDef.type.name)}} instead.

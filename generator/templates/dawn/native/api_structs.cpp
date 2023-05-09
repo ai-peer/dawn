@@ -54,7 +54,6 @@ namespace {{native_namespace}} {
             static_assert(offsetof({{CppType}}, {{memberName}}) == offsetof({{CType}}, {{memberName}}),
                     "offsetof mismatch for {{CppType}}::{{memberName}}");
         {% endfor %}
-
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
             return {% if type.extensible or type.chained -%}
                 (nextInChain == rhs.nextInChain) &&
