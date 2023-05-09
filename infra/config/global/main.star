@@ -8,6 +8,8 @@
 main.star: lucicfg configuration for Dawn's standalone builers.
 """
 
+load("//project.star", "ACTIVE_MILESTONES")
+
 # Use LUCI Scheduler BBv2 names and add Scheduler realms configs.
 lucicfg.enable_experiment("crbug.com/1182002")
 
@@ -349,16 +351,30 @@ def dawn_standalone_builder(name, clang, debug, cpu, fuzzer = False):
             builder = "dawn:try/" + name,
         )
 
+_os_to_branch_config = {
+    "linux": "linux-x64",
+    "mac": "mac-x64",
+    "win": "win10-x64",
+}
+
 def chromium_dawn_tryjob(os):
     """Adds a tryjob that tests against Chromium
 
     Args:
       os: string for the OS, should be one or linux|mac|win
     """
+
+    # We use the DEPS version for branches because ToT builders do not make
+    # sense on branches and the DEPS versions already exist.
     luci.cq_tryjob_verifier(
         cq_group = "Dawn-CQ",
         builder = "chromium:try/" + os + "-dawn-rel",
     )
+    for milestone, details in ACTIVE_MILESTONES.items():
+        luci.cq_tryjob_verifier(
+            cq_group = "Dawn-CQ-" + milestone,
+            builder = details.project + ":try/dawn-" + _os_to_branch_config[os] + "-deps-rel",
+        )
 
 luci.gitiles_poller(
     name = "primary-poller",
@@ -449,6 +465,10 @@ luci.cq_group(
     watch = cq.refset(
         "https://dawn.googlesource.com/dawn",
         refs = ["refs/heads/.+"],
+        refs_exclude = [
+            details.dawn_ref
+            for details in ACTIVE_MILESTONES.values()
+        ],
     ),
     acls = [
         acl.entry(
@@ -474,3 +494,40 @@ luci.cq_group(
         timeout_weight = 2,
     ),
 )
+
+def _create_branch_groups():
+    for milestone, details in ACTIVE_MILESTONES.items():
+        luci.cq_group(
+            name = "Dawn-CQ-" + milestone,
+            watch = cq.refset(
+                "https://dawn.googlesource.com/dawn",
+                refs = [
+                    details.dawn_ref,
+                ],
+            ),
+            acls = [
+                acl.entry(
+                    acl.CQ_COMMITTER,
+                    groups = "project-dawn-committers",
+                ),
+                acl.entry(
+                    acl.CQ_DRY_RUNNER,
+                    groups = "project-dawn-tryjob-access",
+                ),
+            ],
+            verifiers = [
+                luci.cq_tryjob_verifier(
+                    builder = "dawn:try/presubmit",
+                    disable_reuse = True,
+                ),
+            ],
+            retry_config = cq.retry_config(
+                single_quota = 1,
+                global_quota = 2,
+                failure_weight = 1,
+                transient_failure_weight = 1,
+                timeout_weight = 2,
+            ),
+        )
+
+_create_branch_groups()
