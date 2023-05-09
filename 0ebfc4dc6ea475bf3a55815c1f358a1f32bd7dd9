@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d18175_9b3d46e4",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-09T13:53:41Z",
+      "side": 1,
+      "message": "nit: this could be:\n\n`GetDevice()-\u003eEmitLog(WGPULoggingType_Warning, absl::StrFormat(\"stuff %s\", this))`.\n\nAlso WDYT of putting this only in the validation block since developers disabling validation won\u0027t care about the warning? And what about checking if any of the workgroupCount is 0 (since that will cause an empty dispatch?)",
+      "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a9c5b8d_2fe1185a",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-09T13:53:41Z",
+      "side": 1,
+      "message": "ditto. InstanceCount \u003d 0 will also cause an empty draw. Also we could do the same for APIDrawIndexed.",
+      "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
