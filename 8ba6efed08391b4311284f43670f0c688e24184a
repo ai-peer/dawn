@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7b4f47f_2bc57e31",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-09T00:42:52Z",
+      "side": 1,
+      "message": "sorry I replied in the wrong thread.\n\n\u003e can you mark the state dirty in another function then? it\u0027s not right to perform a state mutation like this in a getter",
+      "parentUuid": "665e4cce_7ea468d4",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 5
+      },
+      "revId": "8ba6efed08391b4311284f43670f0c688e24184a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8ae577c_d7550af5",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 4
