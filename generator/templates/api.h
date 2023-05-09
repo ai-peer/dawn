@@ -108,6 +108,15 @@ typedef struct {{c_prefix}}ChainedStructOut {
     } {{as_cType(type.name)}};
 
 {% endfor %}
+
+// Can be chained in WGPUInstanceDescriptor
+typedef struct WGPUDawnInstanceDescriptor {
+    WGPUChainedStruct chain;
+    uint32_t additionalRuntimeSearchPathsCount;
+    const char* const * additionalRuntimeSearchPaths;
+    void* platform;
+} WGPUDawnInstanceDescriptor;
+
 {% for typeDef in by_category["typedef"] %}
     // {{as_cType(typeDef.name)}} is deprecated.
     // Use {{as_cType(typeDef.type.name)}} instead.

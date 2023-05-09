@@ -54,7 +54,6 @@ namespace {{native_namespace}} {
             static_assert(offsetof({{CppType}}, {{memberName}}) == offsetof({{CType}}, {{memberName}}),
                     "offsetof mismatch for {{CppType}}::{{memberName}}");
         {% endfor %}
-
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
             return {% if type.extensible or type.chained -%}
                 (nextInChain == rhs.nextInChain) &&
@@ -72,4 +71,26 @@ namespace {{native_namespace}} {
         }
 
     {% endfor %}
+
+    static_assert(sizeof(DawnInstanceDescriptor) == sizeof(WGPUDawnInstanceDescriptor), "sizeof mismatch for DawnInstanceDescriptor");
+    static_assert(alignof(DawnInstanceDescriptor) == alignof(WGPUDawnInstanceDescriptor), "alignof mismatch for DawnInstanceDescriptor");
+
+    static_assert(offsetof(DawnInstanceDescriptor, additionalRuntimeSearchPathsCount) == offsetof(WGPUDawnInstanceDescriptor, additionalRuntimeSearchPathsCount),
+            "offsetof mismatch for DawnInstanceDescriptor::additionalRuntimeSearchPathsCount");
+    static_assert(offsetof(DawnInstanceDescriptor, additionalRuntimeSearchPaths) == offsetof(WGPUDawnInstanceDescriptor, additionalRuntimeSearchPaths),
+            "offsetof mismatch for DawnInstanceDescriptor::additionalRuntimeSearchPaths");
+    static_assert(offsetof(DawnInstanceDescriptor, platform) == offsetof(WGPUDawnInstanceDescriptor, platform),
+            "offsetof mismatch for DawnInstanceDescriptor::platform");
+
+    bool DawnInstanceDescriptor::operator==(const DawnInstanceDescriptor& rhs) const {
+        return (nextInChain == rhs.nextInChain) && std::tie(
+            additionalRuntimeSearchPathsCount,
+            additionalRuntimeSearchPaths,
+            platform
+        ) == std::tie(
+            rhs.additionalRuntimeSearchPathsCount,
+            rhs.additionalRuntimeSearchPaths,
+            rhs.platform
+        );
+    }
 } // namespace {{native_namespace}}
