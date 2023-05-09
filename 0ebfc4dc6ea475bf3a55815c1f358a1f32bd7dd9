@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fc4d185_3e960cba",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-09T15:29:37Z",
+      "side": 1,
+      "message": "should check if any of X or Y or Z are zero as well",
+      "range": {
+        "startLine": 182,
+        "startChar": 56,
+        "endLine": 183,
+        "endChar": 71
+      },
+      "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34d18175_9b3d46e4",
         "filename": "src/dawn/native/ComputePassEncoder.cpp",
         "patchSetId": 2
