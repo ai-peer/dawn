@@ -16,6 +16,7 @@
 
 #include <math.h>
 #include <cstring>
+#include <memory>
 #include <utility>
 
 #include "dawn/common/Constants.h"
@@ -89,6 +90,11 @@ void RenderEncoderBase::APIDraw(uint32_t vertexCount,
                                 uint32_t instanceCount,
                                 uint32_t firstVertex,
                                 uint32_t firstInstance) {
+    if (vertexCount == 0) {
+        std::unique_ptr<ErrorData> error =
+            DAWN_VALIDATION_ERROR("Calling %s.Draw with vertext count of 0 is unusual.", this);
+        GetDevice()->EmitLog(WGPULoggingType_Warning, error->GetFormattedMessage().c_str());
+    }
     mEncodingContext->TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {

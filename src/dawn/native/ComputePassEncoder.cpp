@@ -14,6 +14,8 @@
 
 #include "dawn/native/ComputePassEncoder.h"
 
+#include <memory>
+
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Buffer.h"
@@ -179,6 +181,11 @@ void ComputePassEncoder::APIEnd() {
 void ComputePassEncoder::APIDispatchWorkgroups(uint32_t workgroupCountX,
                                                uint32_t workgroupCountY,
                                                uint32_t workgroupCountZ) {
+    if (workgroupCountX == 0) {
+        std::unique_ptr<ErrorData> error = DAWN_VALIDATION_ERROR(
+            "Calling %s.DispatchWorkgroups with workgroup count X of 0 is unusual.", this);
+        GetDevice()->EmitLog(WGPULoggingType_Warning, error->GetFormattedMessage().c_str());
+    }
     mEncodingContext->TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
