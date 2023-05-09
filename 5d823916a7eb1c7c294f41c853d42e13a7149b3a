@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "418c988c_babdf413",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T12:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "212d21bc_3e903c2b",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 34
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ebcb772_22197591",
@@ -88,6 +112,30 @@
       "writtenOn": "2023-05-08T23:42:42Z",
       "side": 1,
       "message": "before this, we should convert IUnknown to the right type, and change the downstream signatures to be typed",
+      "range": {
+        "startLine": 473,
+        "startChar": 59,
+        "endLine": 473,
+        "endChar": 81
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c87024d_ea5e3c50",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T12:26:07Z",
+      "side": 1,
+      "message": "I convert IUknown to Id3D11Resource in `Texture::CreateExternalImage()` because it may generate Error. If we convert it  here, we will need one extra `ConsumedError()` call to handle the error from converting. I feel it is slight better in this way. right? If you feel the other way is better, I will change it.",
+      "parentUuid": "1ebcb772_22197591",
       "range": {
         "startLine": 473,
         "startChar": 59,
@@ -123,6 +171,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3a1174b_0fd779cf",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T12:26:07Z",
+      "side": 1,
+      "message": "There are `ExternalImageDXGI` \u0026 `ExternalImageDXGIImpl` two classes. The method is for creating `ExternalImageDXGIImpl`, so using name `CreateExternalImageDXGI` is confusing.\n\n```\nAnd because d3d::Device has two related methods:\n    std::unique_ptr\u003cExternalImageDXGIImpl\u003e CreateExternalImageDXGIImpl(\n        const ExternalImageDescriptorDXGISharedHandle* descriptor);\n\n    virtual ResultOrError\u003cstd::unique_ptr\u003cExternalImageDXGIImpl\u003e\u003e CreateExternalImageDXGIImplImpl(\n        const ExternalImageDescriptorDXGISharedHandle* descriptor) \u003d 0;\n```\nSo to avoid conflict, I have to name it `CreateExternalImageDXGIImplImpl`.\n\nDo you have other naming idea?",
+      "parentUuid": "f2a0187e_28634960",
+      "range": {
+        "startLine": 83,
+        "startChar": 63,
+        "endLine": 83,
+        "endChar": 94
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eac8cab6_7d85aed9",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 8
@@ -134,6 +206,30 @@
       "writtenOn": "2023-05-08T23:42:42Z",
       "side": 1,
       "message": "nit: d3d11Resource",
+      "range": {
+        "startLine": 67,
+        "startChar": 55,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7382a505_3c10af4a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T12:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eac8cab6_7d85aed9",
       "range": {
         "startLine": 67,
         "startChar": 55,
@@ -161,6 +257,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8202bebe_caf23a68",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T12:26:07Z",
+      "side": 1,
+      "message": "D3D11 backend uses immediate device context right not. all comments are submitted to GPU immediately.\n\nAdded a TODO for submit pending commands if we switch to use deferred device context.",
+      "parentUuid": "27f651a0_8dcd88d7",
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e0b7e79_6b04a800",
@@ -174,6 +288,30 @@
       "writtenOn": "2023-05-08T23:42:42Z",
       "side": 1,
       "message": "nit: d3d11Resource",
+      "range": {
+        "startLine": 40,
+        "startChar": 55,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "5d823916a7eb1c7c294f41c853d42e13a7149b3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c16a690_0daaf4f0",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-09T12:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e0b7e79_6b04a800",
       "range": {
         "startLine": 40,
         "startChar": 55,
