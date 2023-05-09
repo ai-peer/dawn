@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f539f62f_f5b8e1e3",
+        "filename": "src/tint/ir/binary_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-09T18:58:44Z",
+      "side": 1,
+      "message": "What do you think about following the pattern of `ProgramBuilder::TypesBuilder`? This would then be `b.builder.ty.i32()` (once I figure out why we have builders in builders, `b.ty.i32()`)",
+      "range": {
+        "startLine": 29,
+        "startChar": 24,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "73932395fc1f556663d94a0a35a43fa6ae215d72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
