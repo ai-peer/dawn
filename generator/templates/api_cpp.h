@@ -22,16 +22,11 @@
 #define {{API}}_CPP_H_
 
 #include "dawn/{{api}}.h"
+#include "dawn/{{api}}_cpp_chained_struct.h"
 #include "dawn/EnumClassBitmasks.h"
 #include <cmath>
 
 namespace {{metadata.namespace}} {
-
-    namespace detail {
-        constexpr size_t ConstexprMax(size_t a, size_t b) {
-            return a > b ? a : b;
-        }
-    }  // namespace detail
 
     {% set c_prefix = metadata.c_prefix %}
     {% for constant in by_category["constant"] %}
@@ -41,6 +36,9 @@ namespace {{metadata.namespace}} {
     {% endfor %}
 
     {% for type in by_category["enum"] %}
+        {% if type.name.get() == "s type" %}
+            {% continue %}
+        {% endif %}
         enum class {{as_cppType(type.name)}} : uint32_t {
             {% for value in type.values %}
                 {{as_cppEnum(value.name)}} = 0x{{format(value.value, "08X")}},
@@ -217,16 +215,6 @@ namespace {{metadata.namespace}} {
             {%- endfor -%}
         );
     {% endfor %}
-
-    struct ChainedStruct {
-        ChainedStruct const * nextInChain = nullptr;
-        SType sType = SType::Invalid;
-    };
-
-    struct ChainedStructOut {
-        ChainedStruct * nextInChain = nullptr;
-        SType sType = SType::Invalid;
-    };
 
     {% for type in by_category["structure"] %}
         {% set Out = "Out" if type.output else "" %}
