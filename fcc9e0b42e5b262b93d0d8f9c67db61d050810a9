@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b8406c_e8313a6a",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T23:33:12Z",
+      "side": 1,
+      "message": "I thought about doing the rename in this CL, but not going to because there are public usages of it. Will instead try to simply deprecate it entirely later and then remove it.",
+      "parentUuid": "efdf1a42_a1dd2e2c",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 52
+      },
+      "revId": "fcc9e0b42e5b262b93d0d8f9c67db61d050810a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bdd4eff_363c71ee",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "for these I did it this way since they\u0027re the direct implementations of the Adapter APIs which the PhysicalDevice implements. Adapter forwards directly to these. But you\u0027re right; maybe it\u0027s not worth having the API prefix",
       "parentUuid": "7bdd4eff_363c71ee",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 67
+      },
+      "revId": "fcc9e0b42e5b262b93d0d8f9c67db61d050810a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92457e0_a74d683e",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T23:33:12Z",
+      "side": 1,
+      "message": "removed the API prefix",
+      "parentUuid": "9d6f6b92_3a084632",
       "range": {
         "startLine": 45,
         "startChar": 4,
