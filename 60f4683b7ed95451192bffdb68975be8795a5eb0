@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d50dab_7c539249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "Thanks for all the remarks! I\u0027ve taken them into account and will push (once I figure out how not to create a new change each time I push ^^\u0027)",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a0bc69e_95853762",
@@ -69,6 +86,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbbd2d14_ea1f05d6",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "Agreed!",
+      "parentUuid": "5ffe979d_d5761220",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "813b5611_64f5b6c1",
@@ -82,6 +117,24 @@
       "writtenOn": "2023-05-10T15:05:02Z",
       "side": 1,
       "message": "could the recurse-deps be listed with the full path to make things more clear? Like so: `third_party/vulkan-deps/spirv-headers/src`, or alternatively with nested dictionaries.",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "060c3a85_b840724e",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "813b5611_64f5b6c1",
       "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +156,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a8ab9e_1682fac4",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "It is assumed to be defined by the content of DEPS, will add a comment.",
+      "parentUuid": "fb924fcc_71d0aa97",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34a0f008_f6c513bc",
@@ -116,6 +187,24 @@
       "writtenOn": "2023-05-10T15:05:02Z",
       "side": 1,
       "message": "That\u0027s what gclient does! https://source.chromium.org/chromium/chromium/src/+/main:third_party/depot_tools/gclient.py;drc\u003df2da906faf4fcda8e675ace669064eb050bb647f;l\u003d1576",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d9b345c_9f877e14",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "34a0f008_f6c513bc",
       "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +226,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1e8bd90_70537228",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c348c5d_f9fcce1c",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f602184e_34ffb1ae",
@@ -150,6 +257,24 @@
       "writtenOn": "2023-05-10T15:05:02Z",
       "side": 1,
       "message": "Shouldn\u0027t this try to see if the reference exists, and otherwise fetch + checkout? That\u0027d use rev-parse AFAIK.",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32af8435_da87bb29",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f602184e_34ffb1ae",
       "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +296,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b2bb8d_fb146b6c",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "I agree, that was a bit quick and dirty style.",
+      "parentUuid": "1f2b6914_9b03e820",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfe4554b_a511be3a",
@@ -184,6 +327,24 @@
       "writtenOn": "2023-05-10T15:05:02Z",
       "side": 1,
       "message": "I\u0027m surprised that the url starts with a @, how does this work?",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9b6e42_0164a205",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-10T22:43:40Z",
+      "side": 1,
+      "message": "the result of `\u0027@\u0027.join(...)` does not start with an `@`! The url have the form `something@tag`, and `something` may contain `@` itself like `user@host:...`. The format(**vars) could be applied before the `@` split I guess though, would be clearer indeed. And I could also more simply use `rsplit()`",
+      "parentUuid": "bfe4554b_a511be3a",
       "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
