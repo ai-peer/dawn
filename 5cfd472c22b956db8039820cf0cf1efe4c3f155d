@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97c1b088_c29b81fa",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T17:41:29Z",
+      "side": 1,
+      "message": "I don\u0027t think we intended to run any of these builders on branch CLs? The builders that use `dawn_standalone_builder` are:\n\n```\nlinux-clang-dbg-x64\nlinux-clang-dbg-x86\nlinux-clang-rel-x64\nlinux-clang-rel-x86\nmac-dbg\nmac-rel\nwin-clang-dbg-x64\nwin-clang-dbg-x86\nwin-clang-rel-x64\nwin-clang-rel-x86\nwin-msvc-dbg-x64\nwin-msvc-rel-x64\ncron-linux-clang-rel-x64\n```",
+      "parentUuid": "ae0c499a_758f43af",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 9
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f57816cc_1e0b36ff",
         "filename": "infra/config/global/main.star",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-10T16:13:14Z",
       "side": 1,
       "message": "If string name are going to be built programatically, then this map seems unnecessarily complicated, this can just be `details.project + \":try/dawn-\" + os + \"-x64-deps-rel\"`",
+      "range": {
+        "startLine": 376,
+        "startChar": 22,
+        "endLine": 376,
+        "endChar": 93
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf04e8d_9e9fa061",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T17:41:29Z",
+      "side": 1,
+      "message": "It will still be necessary for Windows since the given OS is `win`, but the builder name uses `win10`. If preferable, we could leave only Windows in there for now and do `_os_to_branch_config.get(os, os)`",
+      "parentUuid": "f57816cc_1e0b36ff",
       "range": {
         "startLine": 376,
         "startChar": 22,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40df8ab9_3ef1a6bc",
+        "filename": "infra/config/global/milestones.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T17:41:29Z",
+      "side": 1,
+      "message": "My thinking was that by keeping it the Chromium ref, we can re-use `milestones.py` without special casing Dawn https://source.chromium.org/chromium/chromium/src/+/main:infra/config/scripts/milestones.py\n\nWould that be reasonable, or are we going to have a Dawn version of the script anyways?",
+      "parentUuid": "22e07a03_d1cdf1ec",
+      "range": {
+        "startLine": 5,
+        "startChar": 15,
+        "endLine": 5,
+        "endChar": 39
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd4bd6a4_3d2cf181",
         "filename": "infra/config/global/project.star",
         "patchSetId": 1
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1abd3199_fe4ea4ba",
+        "filename": "infra/config/global/project.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T17:41:29Z",
+      "side": 1,
+      "message": "Made the change in the Starlark files, but holding off on changing the JSON until you reply about reusing `milestones.py`.",
+      "parentUuid": "bd4bd6a4_3d2cf181",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4562013_5d63e03f",
         "filename": "infra/config/global/project.star",
         "patchSetId": 1
@@ -106,6 +202,30 @@
       "writtenOn": "2023-05-10T16:13:14Z",
       "side": 1,
       "message": "chromium/XXXX is a branch name, the actual ref is refs/heads/chromium/XXXX and that\u0027s what needs to go into the CQ group configuration.",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d078b44a_e261c137",
+        "filename": "infra/config/global/project.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T17:41:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4562013_5d63e03f",
       "range": {
         "startLine": 20,
         "startChar": 18,
