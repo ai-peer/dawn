@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8a180b_80ad06fc",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T21:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc57d7f8_8bb2f89d",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 9
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f57816cc_1e0b36ff",
@@ -167,6 +191,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc93b662_2ef2c2ae",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T21:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e90b5857_15b29a1a",
+      "range": {
+        "startLine": 376,
+        "startChar": 22,
+        "endLine": 376,
+        "endChar": 93
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22e07a03_d1cdf1ec",
@@ -238,6 +286,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c142da9b_ff476641",
+        "filename": "infra/config/global/milestones.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T21:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73f98dab_fc47ef5c",
+      "range": {
+        "startLine": 5,
+        "startChar": 15,
+        "endLine": 5,
+        "endChar": 39
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd4bd6a4_3d2cf181",
@@ -275,6 +347,30 @@
       "side": 1,
       "message": "Made the change in the Starlark files, but holding off on changing the JSON until you reply about reusing `milestones.py`.",
       "parentUuid": "bd4bd6a4_3d2cf181",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48bfa0be_5b48d78c",
+        "filename": "infra/config/global/project.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T21:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1abd3199_fe4ea4ba",
       "range": {
         "startLine": 7,
         "startChar": 26,
