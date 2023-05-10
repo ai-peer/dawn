@@ -46,14 +46,18 @@ class PipelineLayout final : public PipelineLayoutBase {
         ityp::array<BindGroupIndex, ityp::vector<BindingIndex, uint32_t>, kMaxBindGroups>;
     const BindingIndexInfo& GetBindingIndexInfo() const;
 
+    unsigned int GetUnusedUAVBindingCount() const { return mUnusedUAVBindingCount; }
+
   private:
     using PipelineLayoutBase::PipelineLayoutBase;
 
     ~PipelineLayout() override = default;
 
-    MaybeError Initialize();
+    MaybeError Initialize(Device* device);
 
     BindingIndexInfo mIndexInfo;
+
+    unsigned int mUnusedUAVBindingCount = 0u;
 };
 
 }  // namespace dawn::native::d3d11
