@@ -16,6 +16,24 @@
       "message": "the issue comments say you agreed on \"MoveToCHandle\" - which should it be?",
       "revId": "97597a0e33ab1596830fbc13a668b71f25982096",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e88cea_bc8dba4b",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-10T20:12:09Z",
+      "side": 1,
+      "message": "Ah... I just slapped it together too quickly and forgot the exact wording! Sorry about that and thanks for catching it!",
+      "parentUuid": "98b1c258_31f2fc51",
+      "revId": "97597a0e33ab1596830fbc13a668b71f25982096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
