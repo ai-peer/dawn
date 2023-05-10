@@ -953,13 +953,13 @@ int main(int argc, const char** argv) {
     std::vector<TransformFactory> transforms = {
         {"first_index_offset",
          [](tint::inspector::Inspector&, tint::transform::Manager& m, tint::transform::DataMap& i) {
-             i.Add<tint::transform::FirstIndexOffset::BindingPoint>(0, 0);
-             m.Add<tint::transform::FirstIndexOffset>();
+             i.Add<tint::ast::transform::FirstIndexOffset::BindingPoint>(0, 0);
+             m.Add<tint::ast::transform::FirstIndexOffset>();
              return true;
          }},
         {"renamer",
          [](tint::inspector::Inspector&, tint::transform::Manager& m, tint::transform::DataMap&) {
-             m.Add<tint::transform::Renamer>();
+             m.Add<tint::ast::transform::Renamer>();
              return true;
          }},
         {"robustness",
@@ -998,8 +998,8 @@ int main(int argc, const char** argv) {
 
              cfg.map = std::move(values);
 
-             i.Add<tint::transform::SubstituteOverride::Config>(cfg);
-             m.Add<tint::transform::SubstituteOverride>();
+             i.Add<tint::ast::transform::SubstituteOverride::Config>(cfg);
+             m.Add<tint::ast::transform::SubstituteOverride>();
              return true;
          }},
     };
@@ -1102,37 +1102,37 @@ int main(int argc, const char** argv) {
     switch (options.format) {
         case Format::kMsl: {
 #if TINT_BUILD_MSL_WRITER
-            transform_inputs.Add<tint::transform::Renamer::Config>(
+            transform_inputs.Add<tint::ast::transform::Renamer::Config>(
                 options.rename_all ? tint::transform::Renamer::Target::kAll
                                    : tint::transform::Renamer::Target::kMslKeywords,
                 /* preserve_unicode */ false);
-            transform_manager.Add<tint::transform::Renamer>();
+            transform_manager.Add<tint::ast::transform::Renamer>();
 #endif  // TINT_BUILD_MSL_WRITER
             break;
         }
 #if TINT_BUILD_GLSL_WRITER
         case Format::kGlsl: {
-            transform_inputs.Add<tint::transform::Renamer::Config>(
+            transform_inputs.Add<tint::ast::transform::Renamer::Config>(
                 options.rename_all ? tint::transform::Renamer::Target::kAll
                                    : tint::transform::Renamer::Target::kGlslKeywords,
                 /* preserve_unicode */ false);
-            transform_manager.Add<tint::transform::Renamer>();
+            transform_manager.Add<tint::ast::transform::Renamer>();
             break;
         }
 #endif  // TINT_BUILD_GLSL_WRITER
         case Format::kHlsl: {
 #if TINT_BUILD_HLSL_WRITER
-            transform_inputs.Add<tint::transform::Renamer::Config>(
+            transform_inputs.Add<tint::ast::transform::Renamer::Config>(
                 options.rename_all ? tint::transform::Renamer::Target::kAll
                                    : tint::transform::Renamer::Target::kHlslKeywords,
                 /* preserve_unicode */ false);
-            transform_manager.Add<tint::transform::Renamer>();
+            transform_manager.Add<tint::ast::transform::Renamer>();
 #endif  // TINT_BUILD_HLSL_WRITER
             break;
         }
         default: {
             if (options.rename_all) {
-                transform_manager.Add<tint::transform::Renamer>();
+                transform_manager.Add<tint::ast::transform::Renamer>();
             }
             break;
         }
@@ -1168,7 +1168,7 @@ int main(int argc, const char** argv) {
 
     if (options.emit_single_entry_point) {
         transform_manager.append(std::make_unique<tint::transform::SingleEntryPoint>());
-        transform_inputs.Add<tint::transform::SingleEntryPoint::Config>(options.ep_name);
+        transform_inputs.Add<tint::ast::transform::SingleEntryPoint::Config>(options.ep_name);
     }
 
     auto out = transform_manager.Run(program.get(), std::move(transform_inputs));
