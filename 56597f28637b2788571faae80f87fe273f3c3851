@@ -51,6 +51,24 @@
       "parentUuid": "a9e5ab34_690501f1",
       "revId": "56597f28637b2788571faae80f87fe273f3c3851",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abae8064_d7338d86",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T18:10:24Z",
+      "side": 1,
+      "message": "Ah right I hadn\u0027t realized that. LGTM then",
+      "parentUuid": "ac24f11a_6f6fe182",
+      "revId": "56597f28637b2788571faae80f87fe273f3c3851",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
