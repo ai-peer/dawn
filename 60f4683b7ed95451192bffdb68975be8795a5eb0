@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca4ad07_cb24861a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "Thank you for putting this up! It look like a great start!",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a0bc69e_95853762",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "Very-slight preference for a command line argument with the root DEPS and use of argparse in the Python file. We are bound to add more options over time.",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ffe979d_d5761220",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "It is standard for Chromium :) WDYT of this wording?\n\nHelper script to download Dawn\u0027s source dependencies without the need to install depot_tools by manually implementing a subset of `gclient sync`.\n\nThis helps embedders, for example through CMake, get all the sources with a single add_subdirectory call (or FetchContent) instead of more complex setups.",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813b5611_64f5b6c1",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "could the recurse-deps be listed with the full path to make things more clear? Like so: `third_party/vulkan-deps/spirv-headers/src`, or alternatively with nested dictionaries.",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb924fcc_71d0aa97",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34a0f008_f6c513bc",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "That\u0027s what gclient does! https://source.chromium.org/chromium/chromium/src/+/main:third_party/depot_tools/gclient.py;drc\u003df2da906faf4fcda8e675ace669064eb050bb647f;l\u003d1576",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c348c5d_f9fcce1c",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "[1] nit: That\u0027s probably an error in this case?",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f602184e_34ffb1ae",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this try to see if the reference exists, and otherwise fetch + checkout? That\u0027d use rev-parse AFAIK.",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2b6914_9b03e820",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "Slight preference for handling recurse_deps explicitly instead of invoking the script recursively like this. That explains [1] though.\n\nmain() would be split into a function that takes a path for the DEPS and after checking out all the repos, would look at recurse_deps and do the recursive calls.",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe4554b_a511be3a",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T15:05:02Z",
+      "side": 1,
+      "message": "I\u0027m surprised that the url starts with a @, how does this work?",
+      "revId": "60f4683b7ed95451192bffdb68975be8795a5eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
