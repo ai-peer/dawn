@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03f1e2d1_72b37006",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T13:37:55Z",
+      "side": 1,
+      "message": "+1, we could add a note of this in PipelineLayoutD3D11.h which is where we describe the mapping of WebGPU\u0027s binding model to D3D11\u0027s. This change would avoid any other change to Tint or the BindGroupTracker.",
+      "parentUuid": "8efd2f2a_550f21c4",
+      "range": {
+        "startLine": 125,
+        "startChar": 16,
+        "endLine": 125,
+        "endChar": 89
+      },
+      "revId": "18e99c04a6ae53c3313bcf317b80d67fa60fa81a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ef98897_39c995e6",
         "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
         "patchSetId": 1
@@ -60,6 +84,23 @@
         "endLine": 150,
         "endChar": 67
       },
+      "revId": "18e99c04a6ae53c3313bcf317b80d67fa60fa81a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37827b35_099d89cc",
+        "filename": "src/tint/writer/hlsl/generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T13:37:55Z",
+      "side": 1,
+      "message": "u-nit: missing the third /",
       "revId": "18e99c04a6ae53c3313bcf317b80d67fa60fa81a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
