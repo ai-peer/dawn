@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b1c258_31f2fc51",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T14:45:03Z",
+      "side": 1,
+      "message": "the issue comments say you agreed on \"MoveToCHandle\" - which should it be?",
+      "revId": "97597a0e33ab1596830fbc13a668b71f25982096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
