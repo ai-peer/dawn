@@ -32,6 +32,7 @@
 #include "dawn/native/d3d11/ComputePipelineD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/Forward.h"
+#include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/native/d3d11/RenderPipelineD3D11.h"
 #include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/native/d3d11/UtilsD3D11.h"
@@ -415,6 +416,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     ityp::array<ColorAttachmentIndex, ID3D11RenderTargetView*, kMaxColorAttachments>
         d3d11RenderTargetViewPtrs = {};
     ColorAttachmentIndex attachmentCount(uint8_t(0));
+    // TODO(dawn:1815): Shrink the sparse attachments to accommodate more UAVs.
     for (ColorAttachmentIndex i :
          IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
         TextureView* colorTextureView = ToBackend(renderPass->colorAttachments[i].view.Get());
@@ -486,6 +488,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     auto DoRenderBundleCommand = [&](CommandIterator* iter, Command type) -> MaybeError {
         switch (type) {
             case Command::Draw: {
+                DAWN_ASSERT(static_cast<uint8_t>(attachmentCount) <=
+                            ToBackend(lastPipeline->GetLayout())->GetUnusedUAVBindingCount());
                 DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply());
@@ -499,6 +503,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             }
 
             case Command::DrawIndexed: {
+                DAWN_ASSERT(static_cast<uint8_t>(attachmentCount) <=
+                            ToBackend(lastPipeline->GetLayout())->GetUnusedUAVBindingCount());
                 DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
                 DAWN_TRY(bindGroupTracker.Apply());
@@ -513,6 +519,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             }
 
             case Command::DrawIndirect: {
+                DAWN_ASSERT(static_cast<uint8_t>(attachmentCount) <=
+                            ToBackend(lastPipeline->GetLayout())->GetUnusedUAVBindingCount());
                 DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
@@ -539,6 +547,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             }
 
             case Command::DrawIndexedIndirect: {
+                DAWN_ASSERT(static_cast<uint8_t>(attachmentCount) <=
+                            ToBackend(lastPipeline->GetLayout())->GetUnusedUAVBindingCount());
                 DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
                 Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
