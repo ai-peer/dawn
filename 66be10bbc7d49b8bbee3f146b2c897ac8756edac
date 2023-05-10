@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31c76ae_fae1f50c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-10T14:16:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31f3f567_25200759",
+      "revId": "66be10bbc7d49b8bbee3f146b2c897ac8756edac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b83de70e_05dc6561",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-05-10T14:07:02Z",
       "side": 1,
       "message": "nit: mD3d11NonConstantBuffer?, and nit: double space later on that line.",
+      "range": {
+        "startLine": 510,
+        "startChar": 14,
+        "endLine": 510,
+        "endChar": 26
+      },
+      "revId": "66be10bbc7d49b8bbee3f146b2c897ac8756edac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "239195c9_c719acc3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-10T14:16:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b83de70e_05dc6561",
       "range": {
         "startLine": 510,
         "startChar": 14,
