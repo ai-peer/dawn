@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36e8ee7_0ec9ee18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-10T20:30:22Z",
+      "side": 1,
+      "message": "Nice! IIUC also, this means for testing in the future, we would only need to add a MockPhysicalDevice and wrap it to test stuff?",
+      "revId": "fcc9e0b42e5b262b93d0d8f9c67db61d050810a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d865fe08_f25d5b70",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-10T20:30:22Z",
+      "side": 1,
+      "message": "Is this naming a temporary part of the refactoring (i.e. this will return `AdapterBases` later on)? Or is `DiscoverAdapters` always going to return `PhysicalDevices` in the future? If it\u0027s the latter, maybe we should consider renaming this to `DiscoverPhysicalDevices`?\n\nEDIT: Upon looking at the changes more, it does feel like `DiscoverPhysicalDevices` might be more appropriate?",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 52
+      },
+      "revId": "fcc9e0b42e5b262b93d0d8f9c67db61d050810a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdd4eff_363c71ee",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-10T20:30:22Z",
+      "side": 1,
+      "message": "IIUC, the PhysicalDevice is just a Dawn internal implementation thing, so maybe we should rename these without the `API` prefix since they aren\u0027t actually a part of the WebGPU API?",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 67
+      },
+      "revId": "fcc9e0b42e5b262b93d0d8f9c67db61d050810a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
