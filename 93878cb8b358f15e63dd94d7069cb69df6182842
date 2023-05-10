@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d054c6_a8069957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T23:23:33Z",
+      "side": 1,
+      "message": "LGTM!\n\nI checked the previous Kokoro run and it appears to be already broken; so adding Kokoro+1",
+      "revId": "93878cb8b358f15e63dd94d7069cb69df6182842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

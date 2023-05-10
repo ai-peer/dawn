@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cda5245_1c635b5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T23:23:33Z",
+      "side": 1,
+      "message": "put chromium:1432491 here",
+      "parentUuid": "1f2fd453_abbf0fe0",
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f09f78fd_95e4caf0",
@@ -213,6 +231,30 @@
       "side": 1,
       "message": "Yes, but manually updating it should hopefully only be necessary for the next branch. Once it\u0027s up and confirmed working correctly, the branching infrastructure will be updated so that this will get updated when new chromium branch projects are created.",
       "parentUuid": "8992cfe6_7662adde",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "896c0ec1_af8388ea",
+        "filename": "infra/config/global/milestones.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T23:23:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c03d0c8b_d4f0ed30",
       "range": {
         "startLine": 1,
         "startChar": 0,
