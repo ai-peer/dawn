@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68191a50_c7831db9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T13:39:50Z",
+      "side": 1,
+      "message": "LGTM, I was hoping for something a bit less synthetic but thinking about it, it would be very hard to write a non-synthetic test.",
+      "revId": "c929cab4462a7b330a0535de9e9ae932145834ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
