@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "765d826c_ae292cbb",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T23:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb4b79d1_f8367273",
+      "range": {
+        "startLine": 440,
+        "startChar": 15,
+        "endLine": 440,
+        "endChar": 50
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "891b7138_13c560ab",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89a5c955_f31883cf",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T23:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "891b7138_13c560ab",
+      "range": {
+        "startLine": 480,
+        "startChar": 4,
+        "endLine": 502,
+        "endChar": 6
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a27dbb97_8dd338c7",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-05-10T22:32:07Z",
       "side": 1,
       "message": "can we factor this part to be common with [1] ?",
+      "range": {
+        "startLine": 515,
+        "startChar": 12,
+        "endLine": 537,
+        "endChar": 14
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e48e4484_c648661a",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-10T23:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a27dbb97_8dd338c7",
       "range": {
         "startLine": 515,
         "startChar": 12,
