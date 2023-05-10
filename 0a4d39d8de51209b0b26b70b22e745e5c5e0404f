@@ -16,6 +16,98 @@
       "message": "+enga as an actual owner",
       "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb4b79d1_f8367273",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T22:32:07Z",
+      "side": 1,
+      "message": "this one the naming doesn\u0027t match exactly because it\u0027s includable_only \u003d true on Dawn CQ. But it should map to dawn-win10-x86-deps-rel",
+      "range": {
+        "startLine": 440,
+        "startChar": 15,
+        "endLine": 440,
+        "endChar": 50
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891b7138_13c560ab",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T22:32:07Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 480,
+        "startChar": 4,
+        "endLine": 502,
+        "endChar": 6
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27dbb97_8dd338c7",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T22:32:07Z",
+      "side": 1,
+      "message": "can we factor this part to be common with [1] ?",
+      "range": {
+        "startLine": 515,
+        "startChar": 12,
+        "endLine": 537,
+        "endChar": 14
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8992cfe6_7662adde",
+        "filename": "infra/config/global/milestones.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T22:32:07Z",
+      "side": 1,
+      "message": "q: do we need to update this for every branch?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "0a4d39d8de51209b0b26b70b22e745e5c5e0404f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
