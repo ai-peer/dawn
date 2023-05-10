@@ -186,10 +186,9 @@ void ComputePassEncoder::APIDispatchWorkgroups(uint32_t workgroupCountX,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 if (workgroupCountX == 0 || workgroupCountY == 0 || workgroupCountZ == 0) {
-                    const std::string message = absl::StrFormat(
+                    GetDevice()->EmitWarningOnce(absl::StrFormat(
                         "Calling %s.DispatchWorkgroups with a workgroup count of 0 is unusual.",
-                        this);
-                    GetDevice()->EmitLog(WGPULoggingType_Warning, message.c_str());
+                        this));
                 }
 
                 DAWN_TRY(mCommandBufferState.ValidateCanDispatch());

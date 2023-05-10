@@ -1431,6 +1431,12 @@ void DeviceBase::EmitDeprecationWarning(const std::string& message) {
     }
 }
 
+void DeviceBase::EmitWarningOnce(const std::string& message) {
+    if (mWarnings.insert(message).second) {
+        this->EmitLog(WGPULoggingType_Warning, message.c_str());
+    }
+}
+
 void DeviceBase::EmitLog(const char* message) {
     this->EmitLog(WGPULoggingType_Info, message);
 }

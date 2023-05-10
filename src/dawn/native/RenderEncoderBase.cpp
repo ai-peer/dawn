@@ -95,14 +95,12 @@ void RenderEncoderBase::APIDraw(uint32_t vertexCount,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 if (vertexCount == 0) {
-                    const std::string message = absl::StrFormat(
-                        "Calling %s.Draw with a vertex count of 0 is unusual.", this);
-                    GetDevice()->EmitLog(WGPULoggingType_Warning, message.c_str());
+                    GetDevice()->EmitWarningOnce(absl::StrFormat(
+                        "Calling %s.Draw with a vertex count of 0 is unusual.", this));
                 }
                 if (instanceCount == 0) {
-                    const std::string message = absl::StrFormat(
-                        "Calling %s.Draw with an instance count of 0 is unusual.", this);
-                    GetDevice()->EmitLog(WGPULoggingType_Warning, message.c_str());
+                    GetDevice()->EmitWarningOnce(absl::StrFormat(
+                        "Calling %s.Draw with an instance count of 0 is unusual.", this));
                 }
 
                 DAWN_TRY(mCommandBufferState.ValidateCanDraw());
