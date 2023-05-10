@@ -80,6 +80,13 @@ struct Options {
     /// Set to `true` to generate polyfill for `reflect` builtin for vec2<f32>
     bool polyfill_reflect_vec2_f32 = false;
 
+    /// For d3d11 pixel shaders, the render targets and unordered-access views share the same
+    /// resource slots when being written out. To address this limitation, we assign slots for them
+    /// in opposite order.
+    // if reverse_uav_max_slot is not 0, UAV slots are assigned decreasingly from this value.
+    /// https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews
+    uint32_t reverse_uav_max_slot = 0u;
+
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(disable_robustness,
                  root_constant_binding_point,

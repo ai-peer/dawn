@@ -3094,9 +3094,14 @@ bool GeneratorImpl::EmitStorageVariable(const ast::Var* var, const sem::Variable
     }
 
     auto* global_sem = sem->As<sem::GlobalVariable>();
-    out << RegisterAndSpace(sem->Access() == builtin::Access::kRead ? 't' : 'u',
-                            *global_sem->BindingPoint())
-        << ";";
+    if (reverse_uav_max_slot && sem->Access() == builtin::Access::kReadWrite) {
+        out << " : register(u" << reverse_uav_max_slot - global_sem->BindingPoint()->binding
+            << ");";
+    } else {
+        out << RegisterAndSpace(sem->Access() == builtin::Access::kRead ? 't' : 'u',
+                                *global_sem->BindingPoint())
+            << ";";
+    }
 
     return true;
 }

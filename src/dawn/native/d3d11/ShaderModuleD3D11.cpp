@@ -146,6 +146,10 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     req.hlsl.numWorkgroupsRegisterSpace = 0;
     req.hlsl.numWorkgroupsShaderRegister = PipelineLayout::kNumWorkgroupsConstantBufferSlot;
 
+    if (stage == SingleShaderStage::Fragment) {
+        req.hlsl.reverseUAVMaxSlot = D3D11_PS_CS_UAV_REGISTER_COUNT - 1;
+    }
+
     req.hlsl.bindingRemapper = std::move(bindingRemapper);
 
     req.hlsl.externalTextureOptions = BuildExternalTextureTransformBindings(layout);

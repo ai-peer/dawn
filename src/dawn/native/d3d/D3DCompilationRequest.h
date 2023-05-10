@@ -60,6 +60,7 @@ enum class Compiler { FXC, DXC };
     X(bool, usesNumWorkgroups)                                                              \
     X(uint32_t, numWorkgroupsShaderRegister)                                                \
     X(uint32_t, numWorkgroupsRegisterSpace)                                                 \
+    X(uint32_t, reverseUAVMaxSlot)                                                          \
     X(tint::writer::ExternalTextureOptions, externalTextureOptions)                         \
     X(tint::writer::ArrayLengthFromUniformOptions, arrayLengthFromUniform)                  \
     X(tint::writer::BindingRemapperOptions, bindingRemapper)                                \

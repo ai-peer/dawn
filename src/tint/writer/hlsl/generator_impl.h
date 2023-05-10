@@ -519,6 +519,9 @@ class GeneratorImpl : public TextGenerator {
     std::string interpolation_to_modifiers(builtin::InterpolationType type,
                                            builtin::InterpolationSampling sampling) const;
 
+    /// Assign UAV slots reversely starting from this value if not 0.
+    uint32_t reverse_uav_max_slot = 0u;
+
   private:
     enum class VarType { kIn, kOut };
 

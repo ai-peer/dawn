@@ -94,6 +94,10 @@ BindGroupTracker::~BindGroupTracker() {
     ASSERT(CheckAllSlotsAreEmpty(mCommandContext));
 }
 
+void BindGroupTracker::SetColorAttachmentCount(uint8_t count) {
+    mColorAttachmentCount = count;
+}
+
 MaybeError BindGroupTracker::Apply() {
     BeforeApply();
 
@@ -176,9 +180,16 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                             d3d11UAV, ToBackend(binding.buffer)
                                           ->CreateD3D11UnorderedAccessView1(offset, binding.size));
                         if (bindingInfo.visibility & wgpu::ShaderStage::Fragment) {
+                            // Bind the buffer to slot in reverse order, as d3d11 pixel shader
+                            // render targets and unordered-access views share the same resource
+                            // slots.
+                            DAWN_ASSERT(bindingSlot < D3D11_PS_CS_UAV_REGISTER_COUNT);
+                            uint32_t reverseBindingSlot =
+                                D3D11_PS_CS_UAV_REGISTER_COUNT - 1 - bindingSlot;
+                            DAWN_ASSERT(reverseBindingSlot >= mColorAttachmentCount);
                             deviceContext1->OMSetRenderTargetsAndUnorderedAccessViews(
                                 D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr,
-                                bindingSlot, 1, d3d11UAV.GetAddressOf(), nullptr);
+                                reverseBindingSlot, 1, d3d11UAV.GetAddressOf(), nullptr);
                         }
                         if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
                             deviceContext1->CSSetUnorderedAccessViews(
@@ -289,9 +300,11 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
                                         wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute));
                         ID3D11UnorderedAccessView* nullUAV = nullptr;
                         if (bindingInfo.visibility & wgpu::ShaderStage::Fragment) {
+                            DAWN_ASSERT(bindingSlot < D3D11_PS_CS_UAV_REGISTER_COUNT);
                             deviceContext1->OMSetRenderTargetsAndUnorderedAccessViews(
                                 D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr,
-                                bindingSlot, 1, &nullUAV, nullptr);
+                                D3D11_PS_CS_UAV_REGISTER_COUNT - 1 - bindingSlot, 1, &nullUAV,
+                                nullptr);
                         }
                         if (bindingInfo.visibility & wgpu::ShaderStage::Compute) {
                             deviceContext1->CSSetUnorderedAccessViews(bindingSlot, 1, &nullUAV,

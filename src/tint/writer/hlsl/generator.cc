@@ -44,6 +44,7 @@ Result Generate(const Program* program, const Options& options) {
 
     // Generate the HLSL code.
     auto impl = std::make_unique<GeneratorImpl>(&sanitized_result.program);
+    impl->reverse_uav_max_slot = options.reverse_uav_max_slot;
     result.success = impl->Generate();
     result.error = impl->Diagnostics().str();
     result.hlsl = impl->result();

@@ -220,6 +220,8 @@ ResultOrError<std::string> TranslateToHLSL(
         options.root_constant_binding_point =
             tint::writer::BindingPoint{r.numWorkgroupsRegisterSpace, r.numWorkgroupsShaderRegister};
     }
+    options.reverse_uav_max_slot = r.reverseUAVMaxSlot;
+
     // TODO(dawn:549): HLSL generation outputs the indices into the
     // array_length_from_uniform buffer that were actually used. When the blob cache can
     // store more than compiled shaders, we should reflect these used indices and store

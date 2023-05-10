@@ -29,12 +29,16 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/fa
     explicit BindGroupTracker(CommandRecordingContext* commandContext);
     ~BindGroupTracker();
     MaybeError Apply();
+    // The count of color attachments being used in the current renderpass.
+    void SetColorAttachmentCount(uint8_t count);
 
   private:
     MaybeError ApplyBindGroup(BindGroupIndex index);
     void UnApplyBindGroup(BindGroupIndex index);
 
     CommandRecordingContext* const mCommandContext;
+
+    uint8_t mColorAttachmentCount = 0u;
 };
 
 }  // namespace dawn::native::d3d11
