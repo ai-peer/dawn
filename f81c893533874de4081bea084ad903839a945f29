@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d3dab2_54b1255e",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T20:50:21Z",
+      "side": 1,
+      "message": "is it necessary to make the size larger?\n\nI think we need to also test the case where the copy touches the last byte in the buffer. This could be a problem because it effectively means the buffer size internally needs to be padded to be padded AND we need to be able to read/write to the padding. Consider the case where you have a 3x3 copy region, so the last texel is inside the buffer, but because we read/write a u32, half of the u32 is actually outside the buffer.",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 686,
+        "endChar": 80
+      },
+      "revId": "f81c893533874de4081bea084ad903839a945f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
