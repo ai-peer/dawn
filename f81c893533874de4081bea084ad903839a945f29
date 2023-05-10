@@ -46,6 +46,30 @@
       },
       "revId": "f81c893533874de4081bea084ad903839a945f29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ae3122_3d276d15",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-10T23:41:38Z",
+      "side": 1,
+      "message": "Turns out `tintOptions.disable_robustness \u003d true;` for ShaderModuleGL.\n\nWe discussed 2 workaround for the `buffer size needs to be padded` issue offline:\n\n1. make an intermediate buffer that\u0027s aligned for 4-bytes for the corner case, do a buffer to buffer copy afterwards. (Later I realize as it requires copyBufferToBuffer, still the size needs to be multiple of 4 so this won\u0027t work)\n\n2. Make the mAllocationSize for BufferGL to align by 4 bytes. This needs to bindgroup to use the mAllocationSize instead and other changes (I cannot recall completely, can you add some pointers here?\n\n~~But the current tests seem to work fine after the alignment without other changes. I saw mAllocationSize aligns for 4 byte only for vulkan backend for now but don\u0027t see many places referencing it.~~)",
+      "parentUuid": "d2e0f547_e16eddb1",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 686,
+        "endChar": 80
+      },
+      "revId": "f81c893533874de4081bea084ad903839a945f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
