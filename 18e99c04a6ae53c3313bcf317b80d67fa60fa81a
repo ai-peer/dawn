@@ -16,6 +16,52 @@
       "message": "PTAL",
       "revId": "18e99c04a6ae53c3313bcf317b80d67fa60fa81a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8efd2f2a_550f21c4",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-10T11:12:01Z",
+      "side": 1,
+      "message": "instead of adding the `reverse_uav_max_slot` option, we can control the dst bind point here.",
+      "range": {
+        "startLine": 125,
+        "startChar": 16,
+        "endLine": 125,
+        "endChar": 89
+      },
+      "revId": "18e99c04a6ae53c3313bcf317b80d67fa60fa81a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef98897_39c995e6",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-10T11:12:01Z",
+      "side": 1,
+      "message": "For D3D11 11.1, UAV slots count is D3D11_1_UAV_SLOT_COUNT(64) instead of D3D11_PS_CS_UAV_REGISTER_COUNT(32).\n\n\nBTW, max render targets is 8, instead of assigning UAV slots in reversed order, we can just reserve the first 8 UAV slots in pixel shader for render targets. And at [1], we need to adjust device limits as well.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp;l\u003d148?q\u003dphysicalDeviced3d11\u0026ss\u003dchromium",
+      "range": {
+        "startLine": 150,
+        "startChar": 37,
+        "endLine": 150,
+        "endChar": 67
+      },
+      "revId": "18e99c04a6ae53c3313bcf317b80d67fa60fa81a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
