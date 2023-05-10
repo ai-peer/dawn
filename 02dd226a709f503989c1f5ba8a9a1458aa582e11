@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2adb93a1_50347bd3",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-10T20:35:35Z",
+      "side": 1,
+      "message": "In principle I want to deprecate this but I\u0027m concerned it\u0027ll cause roll failures into other projects. If it does then we should remove the deprecation so we can gradually fix the dependent projects (chromium and skia) without having to try to update them all at once.",
+      "revId": "02dd226a709f503989c1f5ba8a9a1458aa582e11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
