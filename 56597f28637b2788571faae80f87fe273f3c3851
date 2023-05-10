@@ -16,6 +16,23 @@
       "message": "If this works, I\u0027ll remove the other hacks we did in IsGPUCounterSupported.",
       "revId": "56597f28637b2788571faae80f87fe273f3c3851",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9e5ab34_690501f1",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T07:58:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a Toggle? LGTM otherwise.",
+      "revId": "56597f28637b2788571faae80f87fe273f3c3851",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
