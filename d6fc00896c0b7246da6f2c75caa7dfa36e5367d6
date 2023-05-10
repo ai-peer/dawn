@@ -50,6 +50,24 @@
       "message": "Are they not supported on the fragment stage?",
       "revId": "d6fc00896c0b7246da6f2c75caa7dfa36e5367d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87ff07f0_41405757",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-10T18:06:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5bfc426_4e594907",
+      "revId": "d6fc00896c0b7246da6f2c75caa7dfa36e5367d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
