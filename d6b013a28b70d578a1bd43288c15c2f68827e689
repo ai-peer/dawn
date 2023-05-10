@@ -16,6 +16,24 @@
       "message": "hm, I think we can still do it in a way where we don\u0027t need to manually put \"DawnInstanceDescriptor\" inside the generator or add additional dawn.json concepts like \"handwritten: true\"\n\nthe stuff that breaks is the FindInChain utilities, but these can be rewritten so that the generator builds a mapping from known structs to sTypes:\n\n```\ntemplate \u003ctypename T\u003e\n    struct STypeForImpl;\n\n    {% for value in types[\"s type\"].values %}\n        {% if value.valid and value.name.get() in types %}\n            template \u003c\u003e\n            struct STypeForImpl\u003c{{namespace}}::{{as_cppEnum(value.name)}}\u003e {\n                static constexpr {{namespace}}::SType value \u003d {{namespace}}::SType::{{as_cppEnum(value.name)}};\n            };\n\n\n            template \u003c\u003e\n            struct STypeForImpl\u003c{{native_namespace}}::{{as_cppEnum(value.name)}}\u003e {\n                static constexpr {{namespace}}::SType value \u003d {{namespace}}::SType::{{as_cppEnum(value.name)}};\n            };\n        {% endif %}\n    {% endfor %}\n\n    template \u003ctypename T\u003e\n    constexpr {{namespace}}::SType STypeFor \u003d STypeForImpl\u003cT\u003e::value;\n```\n\nThen for our own struct DawnInstanceDescriptor we only need to specialize `STypeForImpl\u003cDawnInstanceDescriptor\u003e`\n\nFindInChain can be rewritten to using STypeFor helper.\n\n```\n    template \u003ctypename T\u003e\n    void FindInChain(const ChainedStruct* chain, const T** out) {\n        for (; chain; chain \u003d chain-\u003enextInChain) {\n            if (chain-\u003esType \u003d\u003d STypeFor\u003cT\u003e) {\n                *out \u003d static_cast\u003cconst T*\u003e(chain);\n                break;\n            }\n        }\n    }\n\n    template \u003ctypename T\u003e\n    void FindInChain(ChainedStructOut* chain, T** out) {\n        for (; chain; chain \u003d chain-\u003enextInChain) {\n            if (chain-\u003esType \u003d\u003d STypeFor\u003cT\u003e) {\n                *out \u003d static_cast\u003cT*\u003e(chain);\n                break;\n            }\n        }\n    }\n```",
       "revId": "d6b013a28b70d578a1bd43288c15c2f68827e689",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a40e81_a15058df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-10T23:46:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8e18ae_55b07413",
+      "revId": "d6b013a28b70d578a1bd43288c15c2f68827e689",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
