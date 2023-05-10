@@ -99,7 +99,7 @@ async function setupWebsocket(port) {
 
 async function runCtsTestViaSocket(event) {
   let input = JSON.parse(event.data);
-  runCtsTest(input['q'], input['w']);
+  runCtsTest(input['q'], input['w'], 10);
 }
 
 dataCache.setStore({
@@ -130,6 +130,17 @@ function wrapPromiseWithHeartbeat(prototype, key) {
   }
 }
 
+// Returns an 32 bit unsigned integer hash of the given string.
+function hashString(str) {
+  let h = 236887699;
+  for(let i = 0, ch; i < str.length; i++) {
+    const c = str.charCodeAt(i) * 104395303;
+    h = Math.imul(h ^ c, 472882049);
+  }
+  h = h ^ Math.imul(h ^ (h >>> 3), 2246822507);
+  return h & 0xffffffff;
+};
+
 wrapPromiseWithHeartbeat(GPU.prototype, 'requestAdapter');
 wrapPromiseWithHeartbeat(GPUAdapter.prototype, 'requestAdapterInfo');
 wrapPromiseWithHeartbeat(GPUAdapter.prototype, 'requestDevice');
@@ -151,7 +162,7 @@ if (navigator.userAgent.indexOf("Windows") !== -1) {
   globalTestConfig.unrollConstEvalLoops = true;
 }
 
-async function runCtsTest(query, use_worker) {
+async function runCtsTest(query, use_worker, sparseRunPercent) {
   const workerEnabled = use_worker;
   const worker = workerEnabled ? new TestWorker(false) : undefined;
 
@@ -165,6 +176,13 @@ async function runCtsTest(query, use_worker) {
 
   for (const testcase of testcases) {
     const name = testcase.query.toString();
+
+    if (sparseRunPercent !== undefined) {
+      const hash = hashString(name);
+      if (100 * (hash / 0xffffffff) > sparseRunPercent) {
+        continue; // Skip test
+      }
+    }
 
     const wpt_fn = async () => {
       sendMessageTestStarted();
