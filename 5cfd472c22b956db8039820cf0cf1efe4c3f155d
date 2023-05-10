@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e90b5857_15b29a1a",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-05-10T19:21:03Z",
+      "side": 1,
+      "message": "+1 for having full builder names here.\nI often grep the sources for these.",
+      "parentUuid": "78449b81_729c55aa",
+      "range": {
+        "startLine": 376,
+        "startChar": 22,
+        "endLine": 376,
+        "endChar": 93
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22e07a03_d1cdf1ec",
         "filename": "infra/config/global/milestones.json",
         "patchSetId": 1
