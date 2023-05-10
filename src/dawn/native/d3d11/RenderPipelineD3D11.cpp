@@ -183,6 +183,12 @@ MaybeError RenderPipeline::Initialize() {
     DAWN_TRY(InitializeShaders());
     DAWN_TRY(InitializeDepthStencilState());
 
+    // RTVs and UAVs share the same resoure slots. Make sure here we are not going to run out of
+    // slots.
+    DAWN_INVALID_IF(static_cast<uint8_t>(GetHighestBitIndexPlusOne(GetColorAttachmentsMask())) >
+                        ToBackend(GetLayout())->GetUnusedUAVBindingCount(),
+                    "Running out of uav slots.");
+
     SetLabelImpl();
     return {};
 }
