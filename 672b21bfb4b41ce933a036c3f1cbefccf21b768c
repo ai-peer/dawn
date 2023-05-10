@@ -16,6 +16,80 @@
       "message": "PTAL. Thank you!",
       "revId": "672b21bfb4b41ce933a036c3f1cbefccf21b768c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "508c41db_b9ad2885",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T13:27:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "672b21bfb4b41ce933a036c3f1cbefccf21b768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1777441e_ed4231ba",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T13:27:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "672b21bfb4b41ce933a036c3f1cbefccf21b768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "411c9764_abfe1d41",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T13:27:02Z",
+      "side": 1,
+      "message": "This will crash when validation is disabled and buffer is nullptr.",
+      "revId": "672b21bfb4b41ce933a036c3f1cbefccf21b768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a6b466_46998d7c",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-10T13:27:02Z",
+      "side": 1,
+      "message": "u-nit: This could be UnsetVertexBuffer because we no longer care about the size.\n\nAlso nit: the conversion of the slot could be done once at the beginning of the method and the typed version of kMaxVertexBuffers could be used at [1].",
+      "range": {
+        "startLine": 405,
+        "startChar": 36,
+        "endLine": 405,
+        "endChar": 51
+      },
+      "revId": "672b21bfb4b41ce933a036c3f1cbefccf21b768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
