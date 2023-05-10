@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd004453_7262a9f4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T14:53:36Z",
+      "side": 1,
+      "message": "nit: if both are non-null - they should have different names. like Dawn_Buffer and Dawn_ConstantBuffer",
+      "range": {
+        "startLine": 275,
+        "startChar": 41,
+        "endLine": 276,
+        "endChar": 96
+      },
+      "revId": "2b5d2fedb53465e256882020025b2df9a359e7a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
