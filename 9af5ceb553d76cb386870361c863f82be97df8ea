@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e84609_25e952de",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-10T23:46:22Z",
+      "side": 0,
+      "message": "Hmm slightly concerned about whether removing this and directly implementing the type could be an issue for stuff like emscripten? Should I wrap the generated implementation with an if?",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
