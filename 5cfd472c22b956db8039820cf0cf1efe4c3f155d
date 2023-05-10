@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc57d7f8_8bb2f89d",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T18:02:39Z",
+      "side": 1,
+      "message": "Well, the current behavior is that all refs run all of the same builders. IIUC the only problematic builders on the branches are the builders in the chromium project, so I would expect that the dawn builders should continue to be run on the branches.",
+      "parentUuid": "97c1b088_c29b81fa",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 9
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f57816cc_1e0b36ff",
         "filename": "infra/config/global/main.star",
         "patchSetId": 1
@@ -97,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78449b81_729c55aa",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T18:02:39Z",
+      "side": 1,
+      "message": "Ah, I missed that difference.\n\nI generally recommend against building up names because it makes it harder for someone to search for where a piece of configuration comes from. Since there needs to be a map anyways, my recommendation is put the entire name in the map instead:\n```\n_os_to_branch_builder \u003d {\n  \"linux\": \"dawn-linux-x64-deps-rel\",\n  \"mac\": \"dawn-mac-x64-deps-rel\",\n  \"win\": \"dawn-win10-x64-deps-rel\",\n}\n```\n\n```\nbuilder \u003d details.project + \":try/\" + _os_to_branch_builder[os]\n```\n\nor my preference since it makes the actual format of the string easier to see in my opinion:\n```\nbuilder \u003d \"{}:try/{}\".format(details.project, _os_to_branch_builder[os])\n```",
+      "parentUuid": "7bf04e8d_9e9fa061",
+      "range": {
+        "startLine": 376,
+        "startChar": 22,
+        "endLine": 376,
+        "endChar": 93
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22e07a03_d1cdf1ec",
         "filename": "infra/config/global/milestones.json",
         "patchSetId": 1
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "My thinking was that by keeping it the Chromium ref, we can re-use `milestones.py` without special casing Dawn https://source.chromium.org/chromium/chromium/src/+/main:infra/config/scripts/milestones.py\n\nWould that be reasonable, or are we going to have a Dawn version of the script anyways?",
       "parentUuid": "22e07a03_d1cdf1ec",
+      "range": {
+        "startLine": 5,
+        "startChar": 15,
+        "endLine": 5,
+        "endChar": 39
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f98dab_fc47ef5c",
+        "filename": "infra/config/global/milestones.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T18:02:39Z",
+      "side": 1,
+      "message": "No, there should be some script in the dawn repo that can manipulate this. There\u0027s no reason that the format of this milestones.json should be coupled to the format of milestones.json in chromium/src.",
+      "parentUuid": "40df8ab9_3ef1a6bc",
       "range": {
         "startLine": 5,
         "startChar": 15,
