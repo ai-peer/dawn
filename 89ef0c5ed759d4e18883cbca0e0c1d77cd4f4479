@@ -16,6 +16,24 @@
       "message": "I think the initializer should come last since it\u0027s optional. Reads better for me personally, but also will probably help parsing.",
       "revId": "89ef0c5ed759d4e18883cbca0e0c1d77cd4f4479",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4039e524_c90bc4ef",
+        "filename": "src/tint/ir/builder_impl_var_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-10T08:06:39Z",
+      "side": 1,
+      "message": "Ack. Will do as a followup.",
+      "parentUuid": "267bed68_d67f2432",
+      "revId": "89ef0c5ed759d4e18883cbca0e0c1d77cd4f4479",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
