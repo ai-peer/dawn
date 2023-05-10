@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "677f5539_2ff29226",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-05-10T08:26:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fc4d185_3e960cba",
+      "range": {
+        "startLine": 182,
+        "startChar": 56,
+        "endLine": 183,
+        "endChar": 71
+      },
+      "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34d18175_9b3d46e4",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1766422e_a35154b9",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-05-10T08:26:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34d18175_9b3d46e4",
+      "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a9c5b8d_2fe1185a",
@@ -71,6 +113,24 @@
       "writtenOn": "2023-05-09T13:53:41Z",
       "side": 1,
       "message": "ditto. InstanceCount \u003d 0 will also cause an empty draw. Also we could do the same for APIDrawIndexed.",
+      "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7a5046_d3f25d5e",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-05-10T08:26:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a9c5b8d_2fe1185a",
       "revId": "0ebfc4dc6ea475bf3a55815c1f358a1f32bd7dd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
