@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc86cee_87bdab84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T15:11:50Z",
+      "side": 1,
+      "message": "sorry didn\u0027t notice the first time I reviewed.\n\nI\u0027m worried that this will result in some log spam.\n\nWe should probably have some LogOnce facility that avoids sending a message more than once (see EmitDeprecationWarning) as an example.\n\nif this becomes too much space in the hash map, we can improve it by deduping based on the message template \"Calling %s.DispatchWorkgroups with a ...\" instead of the full string. That way you get just one of that type of message.\n\nAnd, if that\u0027s still too much space in the hash map, we could have a mapping of enum -\u003e message template and set the enum\u0027s position in a bitset to indicate we logged already.",
+      "revId": "a25133012333911ba697255e10890fdced628d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
