@@ -69,6 +69,24 @@
       "parentUuid": "ac24f11a_6f6fe182",
       "revId": "56597f28637b2788571faae80f87fe273f3c3851",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f6d0b0_144ac0e0",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-10T18:19:18Z",
+      "side": 1,
+      "message": "I\u0027m going to look into surfacing a diagnostic toggle - after moving the toggles around to the adapter.",
+      "parentUuid": "abae8064_d7338d86",
+      "revId": "56597f28637b2788571faae80f87fe273f3c3851",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
