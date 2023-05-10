@@ -22,6 +22,30 @@
       },
       "revId": "f81c893533874de4081bea084ad903839a945f29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2e0f547_e16eddb1",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-10T22:03:36Z",
+      "side": 1,
+      "message": "Modified the extra size \u003d {0, 4}.\n\nThe `buffer size needs to padded` problem basically needs us to create buffer size that is multiple of 2 byte but not multiple of 4 byte. There\u0027s a lot of restrictions keeping us of getting there.\n- size when mappedAtCreation\u003dtrue (or writeBuffer) for initializing content\n- size for mapAsync (or copyBufferToBuffer) for checking content\n\nWithout checking result, for test case width \u003d 3, height \u003d 1, buffer.size \u003d 6. (we cannot have width\u003d1, height\u003d1, buffer.size\u003d2 as there\u0027s min storage buffer size restrictions) It seems to run fine. Because opengl don\u0027t check buffer bounds?",
+      "parentUuid": "a2d3dab2_54b1255e",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 686,
+        "endChar": 80
+      },
+      "revId": "f81c893533874de4081bea084ad903839a945f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
