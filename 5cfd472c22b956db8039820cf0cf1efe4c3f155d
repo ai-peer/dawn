@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0c499a_758f43af",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T16:13:14Z",
+      "side": 1,
+      "message": "A tryjob verifier needs to be added for the branch CQ groups in order to have these builders run on the branch CLs",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 9
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57816cc_1e0b36ff",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T16:13:14Z",
+      "side": 1,
+      "message": "If string name are going to be built programatically, then this map seems unnecessarily complicated, this can just be `details.project + \":try/dawn-\" + os + \"-x64-deps-rel\"`",
+      "range": {
+        "startLine": 376,
+        "startChar": 22,
+        "endLine": 376,
+        "endChar": 93
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e07a03_d1cdf1ec",
+        "filename": "infra/config/global/milestones.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T16:13:14Z",
+      "side": 1,
+      "message": "There\u0027s no need to populate this with the chromium ref, it would make sense to just populate this with the dawn ref.",
+      "range": {
+        "startLine": 5,
+        "startChar": 15,
+        "endLine": 5,
+        "endChar": 39
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4bd6a4_3d2cf181",
+        "filename": "infra/config/global/project.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T16:13:14Z",
+      "side": 1,
+      "message": "I recommend making this chromium_project in here and the json.",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4562013_5d63e03f",
+        "filename": "infra/config/global/project.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003631
+      },
+      "writtenOn": "2023-05-10T16:13:14Z",
+      "side": 1,
+      "message": "chromium/XXXX is a branch name, the actual ref is refs/heads/chromium/XXXX and that\u0027s what needs to go into the CQ group configuration.",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "5cfd472c22b956db8039820cf0cf1efe4c3f155d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
