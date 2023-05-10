@@ -136,7 +136,13 @@ namespace {{metadata.namespace}} {
         CType Get() const {
             return mHandle;
         }
+        [[deprecated("Renamed to MoveIntoCHandle.")]]
         CType Release() {
+            CType result = mHandle;
+            mHandle = 0;
+            return result;
+        }
+        CType MoveIntoCHandle() {
             CType result = mHandle;
             mHandle = 0;
             return result;

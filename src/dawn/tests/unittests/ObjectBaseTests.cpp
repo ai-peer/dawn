@@ -65,14 +65,14 @@ TEST(ObjectBase, Get) {
     ASSERT_EQ(1, refcount);
 }
 
-// Test that Release consumes the C++ object into a C object and doesn't release
-TEST(ObjectBase, Release) {
+// Test that MoveIntoCHandle consumes the C++ object into a C object and doesn't release
+TEST(ObjectBase, MoveIntoCHandle) {
     int refcount = 1;
     {
         Object obj(&refcount);
         ASSERT_EQ(2, refcount);
 
-        ASSERT_EQ(&refcount, obj.Release());
+        ASSERT_EQ(&refcount, obj.MoveIntoCHandle());
         ASSERT_EQ(nullptr, obj.Get());
         ASSERT_EQ(2, refcount);
     }
