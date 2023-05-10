@@ -99,7 +99,7 @@ class TransformBuilder {
     struct AddTransformImpl<transform::Robustness> {
         /// Add instance of transform::Robustness to TransformBuilder
         /// @param tb - TransformBuilder to add transform to
-        static void impl(TransformBuilder* tb) { tb->manager()->Add<transform::Robustness>(); }
+        static void impl(TransformBuilder* tb) { tb->manager()->Add<ast::transform::Robustness>(); }
     };
 
     /// Implementation of AddTransform for transform::FirstIndexOffset
@@ -115,9 +115,9 @@ class TransformBuilder {
 
             Config config = tb->builder()->build<Config>();
 
-            tb->data_map()->Add<tint::transform::FirstIndexOffset::BindingPoint>(config.binding,
-                                                                                 config.group);
-            tb->manager()->Add<transform::FirstIndexOffset>();
+            tb->data_map()->Add<tint::ast::transform::FirstIndexOffset::BindingPoint>(
+                config.binding, config.group);
+            tb->manager()->Add<ast::transform::FirstIndexOffset>();
         }
     };
 
@@ -144,9 +144,9 @@ class TransformBuilder {
                 accesses[{config.old_binding, config.old_group}] = config.new_access;
             }
 
-            tb->data_map()->Add<transform::BindingRemapper::Remappings>(
+            tb->data_map()->Add<ast::transform::BindingRemapper::Remappings>(
                 binding_points, accesses, tb->builder()->build<bool>());
-            tb->manager()->Add<transform::BindingRemapper>();
+            tb->manager()->Add<ast::transform::BindingRemapper>();
         }
     };
 
@@ -155,7 +155,7 @@ class TransformBuilder {
     struct AddTransformImpl<transform::Renamer> {
         /// Add instance of transform::Renamer to TransformBuilder
         /// @param tb - TransformBuilder to add transform to
-        static void impl(TransformBuilder* tb) { tb->manager()->Add<transform::Renamer>(); }
+        static void impl(TransformBuilder* tb) { tb->manager()->Add<ast::transform::Renamer>(); }
     };
 
     /// Implementation of AddTransform for transform::SingleEntryPoint
@@ -167,8 +167,8 @@ class TransformBuilder {
             auto input = tb->builder()->build<std::string>();
             transform::SingleEntryPoint::Config cfg(input);
 
-            tb->data_map()->Add<transform::SingleEntryPoint::Config>(cfg);
-            tb->manager()->Add<transform::SingleEntryPoint>();
+            tb->data_map()->Add<ast::transform::SingleEntryPoint::Config>(cfg);
+            tb->manager()->Add<ast::transform::SingleEntryPoint>();
         }
     };  // struct AddTransformImpl<transform::SingleEntryPoint>
 
@@ -183,8 +183,8 @@ class TransformBuilder {
                 GenerateVertexBufferLayoutDescriptor);
             cfg.pulling_group = tb->builder()->build<uint32_t>();
 
-            tb->data_map()->Add<transform::VertexPulling::Config>(cfg);
-            tb->manager()->Add<transform::VertexPulling>();
+            tb->data_map()->Add<ast::transform::VertexPulling::Config>(cfg);
+            tb->manager()->Add<ast::transform::VertexPulling>();
         }
 
       private:

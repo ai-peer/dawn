@@ -249,7 +249,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
 
         if (!cfg.map.empty()) {
             transform::DataMap override_data;
-            override_data.Add<transform::SubstituteOverride::Config>(cfg);
+            override_data.Add<ast::transform::SubstituteOverride::Config>(cfg);
 
             transform::Manager mgr;
             mgr.append(std::make_unique<transform::SubstituteOverride>());
