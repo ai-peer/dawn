@@ -359,10 +359,7 @@ libtint_source_set("libtint_transform_src") {
     "transform/transform.cc",
     "transform/transform.h",
   ]
-  deps = [
-    ":libtint_program_src",
-    ":libtint_utils_src",
-  ]
+  deps = [ ":libtint_utils_src" ]
 }
 
 libtint_source_set("libtint_ast_transform_base_src") {
@@ -380,6 +377,15 @@ libtint_source_set("libtint_ast_transform_base_src") {
   ]
 }
 
+libtint_source_set("libtint_ir_transform_base_src") {
+  sources = [
+    "ir/transform/transform.cc",
+    "ir/transform/transform.h",
+  ]
+  public_deps = [ ":libtint_transform_src" ]
+  deps = [ ":libtint_utils_src" ]
+}
+
 libtint_source_set("libtint_transform_manager_src") {
   sources = [
     "transform/manager.cc",
@@ -387,6 +393,9 @@ libtint_source_set("libtint_transform_manager_src") {
   ]
   deps = [
     ":libtint_ast_transform_base_src",
+    ":libtint_ir_builder_src",
+    ":libtint_ir_src",
+    ":libtint_ir_transform_base_src",
     ":libtint_program_src",
   ]
 }
@@ -2181,12 +2190,23 @@ if (tint_build_unittests) {
       "clone_context_test.cc",
       "program_builder_test.cc",
       "program_test.cc",
+      "transform/manager_test.cc",
     ]
 
     deps = [
+      ":libtint_ast_transform_base_src",
+      ":libtint_program_src",
+      ":libtint_transform_manager_src",
       ":libtint_unittests_ast_helper",
       ":tint_unittests_ast_src",
     ]
+
+    if (tint_build_ir) {
+      deps += [
+        ":libtint_ir_builder_src",
+        ":libtint_ir_transform_base_src",
+      ]
+    }
   }
 
   tint_unittests_source_set("tint_unittests_ir_src") {
