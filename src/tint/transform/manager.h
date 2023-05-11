@@ -21,6 +21,11 @@
 
 #include "src/tint/transform/transform.h"
 
+// Forward declarations
+namespace tint::ir {
+class Module;
+}  // namespace tint::ir
+
 namespace tint::transform {
 
 /// A collection of Transforms that act as a single Transform.
@@ -53,6 +58,12 @@ class Manager {
     /// @param outputs optional extra transform-specific output data
     /// @returns the transformed program
     Program Run(const Program* program, const DataMap& inputs, DataMap& outputs) const;
+
+    /// Runs the transforms on @p module
+    /// @param module the module to transform
+    /// @param inputs optional extra transform-specific input data
+    /// @param outputs optional extra transform-specific output data
+    void Run(ir::Module* module, const DataMap& inputs, DataMap& outputs) const;
 
   private:
     std::vector<std::unique_ptr<Transform>> transforms_;

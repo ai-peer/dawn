@@ -15,6 +15,7 @@
 #include "src/tint/transform/manager.h"
 
 #include "src/tint/ast/transform/transform.h"
+#include "src/tint/ir/transform/transform.h"
 #include "src/tint/program_builder.h"
 
 /// If set to 1 then the transform::Manager will dump the WGSL of the program
@@ -89,6 +90,17 @@ Program Manager::Run(const Program* program,
     }
 
     return std::move(output.value());
+}
+
+void Manager::Run(ir::Module* module, const DataMap& inputs, DataMap& outputs) const {
+    for (const auto& transform : transforms_) {
+        if (auto* ir_transform = transform->As<ir::transform::Transform>()) {
+            ir_transform->Run(module, inputs, outputs);
+        } else {
+            // TODO: return diagnostics to the caller
+            TINT_ASSERT(Transform, false && "unhandled transform type");
+        }
+    }
 }
 
 }  // namespace tint::transform

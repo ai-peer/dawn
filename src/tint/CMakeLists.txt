@@ -766,6 +766,10 @@ if(${TINT_BUILD_IR})
     ir/value.h
     ir/var.cc
     ir/var.h
+    ir/transform/add_empty_entry_point.cc
+    ir/transform/add_empty_entry_point.h
+    ir/transform/transform.cc
+    ir/transform/transform.h
   )
 endif()
 
@@ -1463,6 +1467,8 @@ if(TINT_BUILD_TESTS)
       ir/store_test.cc
       ir/test_helper.h
       ir/unary_test.cc
+      ir/transform/add_empty_entry_point_test.cc
+      ir/transform/test_helper.h
     )
   endif()
 
