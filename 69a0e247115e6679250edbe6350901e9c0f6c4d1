@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94e25321_b68bb6bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-11T08:37:27Z",
+      "side": 1,
+      "message": "Looks amazing! I don\u0027t know git plumbing so well but the code makes sense to me.\n\nArthur WDYT? Anybody up for doing the second review?",
+      "revId": "69a0e247115e6679250edbe6350901e9c0f6c4d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28034bad_c2a36f62",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-11T08:37:27Z",
+      "side": 1,
+      "message": "nit: indentation.",
+      "revId": "69a0e247115e6679250edbe6350901e9c0f6c4d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
