@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b4cb97_c0355058",
+        "filename": "generator/dawn_lpm_helpers.py",
+        "patchSetId": 58
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-11T00:04:54Z",
+      "side": 1,
+      "message": "Done. No longer relevant.",
+      "parentUuid": "7225fabe_e72ea542",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7851439_df905325",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-05-08T22:19:16Z",
       "side": 1,
       "message": "nit: ditto _stack and _index",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 88,
+        "endChar": 26
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4962a21a_4ab28d76",
+        "filename": "generator/dawn_lpm_helpers.py",
+        "patchSetId": 58
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-11T00:04:54Z",
+      "side": 1,
+      "message": "Done. No longer relevant.",
+      "parentUuid": "c7851439_df905325",
       "range": {
         "startLine": 87,
         "startChar": 12,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "920707bb_f423e461",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 58
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-11T00:04:54Z",
+      "side": 1,
+      "message": "Done, with the new structure initializing members is very important as we no longer memset to 0.",
+      "parentUuid": "0311366e_18100dc5",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 5
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e426a4b_23b2d1bf",
@@ -104,6 +176,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e7872f_dc8260c0",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 58
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-11T00:04:54Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "5e426a4b_23b2d1bf",
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7561274d_4570ddb0",
@@ -117,6 +207,24 @@
       "writtenOn": "2023-05-09T13:51:03Z",
       "side": 1,
       "message": "nit: std::make_unique\u003cT[]\u003e should work I believe, ditto for varlength\n\nBut also two concerns: why hardcode the length right now? And what if this is called in a loop? Won\u0027t it deallocate the array immediately? DawnWire\u0027s serialization uses a linear allocator that makes sure allocations are valid until the end of the command recording.\n\nI don\u0027t know about the exact structure of protobuf but couldn\u0027t we alleviate some of the complexity of the state etc, by doing recursive calls like done for the WireCmd serialization?",
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d03b760_17e52bbb",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 58
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-11T00:04:54Z",
+      "side": 1,
+      "message": "After multiple conversations offline we decided on a new structure for this to simplify things while also mirroring WireCmd.cpp generation as closely as possible.\n\nWe now implement recursive calls like WireCmd serialization to convert from `.proto` to ApiProc Cmd using a SerializeBuffer.",
+      "parentUuid": "7561274d_4570ddb0",
       "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -144,6 +252,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ced2b13_f4382879",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.cpp",
+        "patchSetId": 58
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-11T00:04:54Z",
+      "side": 1,
+      "message": "Changed it to Lookup and also changed `id`\u0027s type to uint32_t.",
+      "parentUuid": "c9dae092_e94623bf",
+      "range": {
+        "startLine": 77,
+        "startChar": 29,
+        "endLine": 77,
+        "endChar": 32
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9db4def6_0059199e",
@@ -157,6 +289,30 @@
       "writtenOn": "2023-05-08T22:19:16Z",
       "side": 1,
       "message": "nit: casing as `Size`",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "revId": "7a81ce7e70a8bbff5b3bbf2a53754fc393119658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d910e15_8522cce8",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 58
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-11T00:04:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9db4def6_0059199e",
       "range": {
         "startLine": 32,
         "startChar": 11,
