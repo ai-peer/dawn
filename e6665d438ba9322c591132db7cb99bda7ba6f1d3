@@ -154,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14a0c5f0_717aa33e",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-05-11T07:07:31Z",
+      "side": 1,
+      "message": "It is not true right now. I removed all `offset` and `size` in the tests I added, with one exception which is testing the parameter of `offset` and `size`.\n\nWhat changed in the past couple of month? Previously, it looked like the default values of `offset` and `size` in dawn.json don\u0027t work.",
+      "parentUuid": "82df41dc_37b781ff",
+      "range": {
+        "startLine": 133,
+        "startChar": 36,
+        "endLine": 133,
+        "endChar": 40
+      },
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e888d2fc_87acdda2",
         "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
         "patchSetId": 1
