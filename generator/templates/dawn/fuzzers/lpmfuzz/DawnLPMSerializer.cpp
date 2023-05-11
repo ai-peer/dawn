@@ -16,6 +16,7 @@
 #include "dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.h"
+#include "dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/BufferConsumer_impl.h"
 #include "dawn/wire/ObjectHandle.h"
@@ -256,6 +257,7 @@ WireResult SerializedData(const fuzzing::Program& program, dawn::wire::ChunkedCo
             }
             {% endfor %}
             default: {
+                GetCustomSerializedData(command, serializer, objectStores, provider);
                 break;
             }
         }
