@@ -26,6 +26,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c62c7262_13e2262e",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T23:58:59Z",
+      "side": 1,
+      "message": "I think this might also require transforming the shaders to remap fragment out locations to the packed range. It sounds doable though.",
+      "parentUuid": "61324dd9_5102eb71",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 26
+      },
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48704652_b7e5fed5",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T23:58:59Z",
+      "side": 1,
+      "message": "instead of these ASSERTs, isn\u0027t it better to validate on creation of d3d11::RenderPipeline when we know the pipeline layout - that the max color attachment index is less than the number of unused UAVs ? IIUC you can write a test case that actually hit these asserts",
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2773b61_5e2ca9fd",
         "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
         "patchSetId": 2
