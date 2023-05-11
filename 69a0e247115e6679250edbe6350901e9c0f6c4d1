@@ -36,6 +36,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a8e7986_0b4cf3dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-11T20:03:10Z",
+      "side": 1,
+      "message": "Minor fix of the one comment line that had wrong indentation",
+      "revId": "69a0e247115e6679250edbe6350901e9c0f6c4d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28034bad_c2a36f62",
@@ -49,6 +66,24 @@
       "writtenOn": "2023-05-11T08:37:27Z",
       "side": 1,
       "message": "nit: indentation.",
+      "revId": "69a0e247115e6679250edbe6350901e9c0f6c4d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46f94369_896f0ee2",
+        "filename": "tools/fetch_dawn_dependencies.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2023-05-11T20:03:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "28034bad_c2a36f62",
       "revId": "69a0e247115e6679250edbe6350901e9c0f6c4d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
