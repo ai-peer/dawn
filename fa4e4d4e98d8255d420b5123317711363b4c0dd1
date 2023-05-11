@@ -16,6 +16,24 @@
       "message": "Seems like I\u0027ll need another Kokoro override.",
       "revId": "fa4e4d4e98d8255d420b5123317711363b4c0dd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b48d17_1fca95bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T17:57:05Z",
+      "side": 1,
+      "message": "next time - try rebasing. Kokoro builds on top of the parent, not top-of-tree. so if the underlying problem was fixed, you might not get it without rebasing.",
+      "parentUuid": "b8ecaaef_e1f043a2",
+      "revId": "fa4e4d4e98d8255d420b5123317711363b4c0dd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
