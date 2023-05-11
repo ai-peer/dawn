@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8516b136_8fd2cea9",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T16:12:23Z",
+      "side": 1,
+      "message": "I tried this at first but it didn\u0027t work well because the adapter toggles are supposed to inherit from the instance toggles. so I ended up needing to hardcode things when I explicitly passed the toggles which matched assumptions about what the instance toggles are",
+      "parentUuid": "3bf02dd1_e35108de",
+      "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c39bd68_a867e7dc",
         "filename": "src/dawn/native/BackendConnection.h",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-11T16:09:10Z",
       "side": 1,
       "message": "Not new to this patch, but I wonder if we should rename this function to DiscoverDefaultPhysicalDevices(). If so, log a bug? (Would likely require a multi-sided patch.) If we plan on migrating all callers away from the discovery paths, ignore this comment.",
+      "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f71ae38_9c9504b7",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T16:12:23Z",
+      "side": 1,
+      "message": "yep I\u0027m going to try to delete this function entirely, so not worth the multisided rename IMO",
+      "parentUuid": "9c39bd68_a867e7dc",
       "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-11T16:09:10Z",
       "side": 1,
       "message": "Same here: DiscoverAdapters() -\u003e DiscoverPhysicalDevices()?",
+      "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47ccd1c_5db6ec85",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T16:12:23Z",
+      "side": 1,
+      "message": "same",
+      "parentUuid": "7d33f403_04704b15",
       "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
