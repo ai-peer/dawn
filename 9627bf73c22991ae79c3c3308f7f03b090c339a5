@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad2064b_4f91e9ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T17:25:07Z",
+      "side": 1,
+      "message": "IIRC, Vulkan requires you to Reset the query before rewriting it. ResetQueryPool may be called inside a compute pass, but not inside a render pass.\n\nSo, it\u0027s necessary to validate you don\u0027t rewrite render pass queries - but it\u0027s OK in the backend to rewrite compute pass queries.\n\nDoes the spec say we must not rewrite for both?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "9627bf73c22991ae79c3c3308f7f03b090c339a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fabde2ab_02466337",
