@@ -70,6 +70,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067bcfa2_b714f1ee",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T23:28:11Z",
+      "side": 0,
+      "message": "I think it\u0027ll work; curious to get Kai\u0027s opinion.\n\nThe context is that:\n - we want DawnInstanceDescriptor to have a dawn::platform::Platform* member\n - we don\u0027t want to do void* so there\u0027s more type safety - making it a C++ only concept\n - So instead of putting it in the .json we put it in DawnNative.h since you need that for defining your own dawn::platform::Platform* anyway.\n - ChainedStruct is split out to its own header so you can include it by itself and some implementation (like us) can add their own chained structs without pulling in the rest of the c++ header (which may not be safe to use all the time because it assumes a global proc table - and you might not have that set).",
+      "parentUuid": "40581974_f936036b",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

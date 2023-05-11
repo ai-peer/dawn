@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e3136f_e25578d1",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T23:28:11Z",
+      "side": 1,
+      "message": "nit: I think we can have a TODO to remove it after renaming things in Chrome.\n\nI believe it should work if everything uses the struct as dawn::native::DawnInstanceDescriptor",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
