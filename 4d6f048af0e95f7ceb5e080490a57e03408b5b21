@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9e2af1_75900053",
+        "filename": "src/tint/ast/transform/builtin_polyfill.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-11T18:44:19Z",
+      "side": 0,
+      "message": "Ohh, that was broken. Good catch!\nFiled crbug.com/tint/1939",
+      "range": {
+        "startLine": 92,
+        "startChar": 49,
+        "endLine": 92,
+        "endChar": 70
+      },
+      "revId": "4d6f048af0e95f7ceb5e080490a57e03408b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
