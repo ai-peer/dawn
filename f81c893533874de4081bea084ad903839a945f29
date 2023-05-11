@@ -70,6 +70,30 @@
       },
       "revId": "f81c893533874de4081bea084ad903839a945f29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5feae22f_aea5b9f4",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T17:21:04Z",
+      "side": 1,
+      "message": "option (2) would maybe need to somehow use the larger internal size in `ValidateBufferBinding` as well as store the larger internal size in the [buffer binding data](https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/BindGroup.cpp;l\u003d397;drc\u003d68d2af39d3897338e231b24fb358dce0246c3ff5;bpv\u003d1;bpt\u003d1).\n\nseems a lot harder than option (1) because there\u0027s a lot of places we would need to surface the \"internal size\".\n\noption (1) copyBufferToBuffer requires 4-byte alignment, but I was thinking we could perform a single targeted glCopyBufferSubData which hopefully won\u0027t have the same 4-byte restriction. And, if it does, we can still pad out mAllocationSize and use the larger size in this internal copy.",
+      "parentUuid": "e9ae3122_3d276d15",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 686,
+        "endChar": 80
+      },
+      "revId": "f81c893533874de4081bea084ad903839a945f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
