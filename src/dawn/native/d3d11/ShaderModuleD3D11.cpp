@@ -103,30 +103,6 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
             break;
     }
 
-    tint::writer::BindingRemapperOptions bindingRemapper;
-    // D3D11 registers like `t3` and `c3` have the same bindingOffset number in
-    // the remapping but should not be considered a collision because they have
-    // different types.
-    bindingRemapper.allow_collisions = true;
-
-    const BindingInfoArray& moduleBindingInfo = entryPoint.bindings;
-
-    for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-        const BindGroupLayout* groupLayout = ToBackend(layout->GetBindGroupLayout(group));
-        const auto& indices = layout->GetBindingIndexInfo()[group];
-        const auto& groupBindingInfo = moduleBindingInfo[group];
-
-        for (const auto& [binding, bindingInfo] : groupBindingInfo) {
-            BindingIndex bindingIndex = groupLayout->GetBindingIndex(binding);
-            tint::writer::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
-                                                       static_cast<uint32_t>(binding)};
-            tint::writer::BindingPoint dstBindingPoint{0u, indices[bindingIndex]};
-            if (srcBindingPoint != dstBindingPoint) {
-                bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
-            }
-        }
-    }
-
     std::optional<tint::ast::transform::SubstituteOverride::Config> substituteOverrideConfig;
     if (!programmableStage.metadata->overrides.empty()) {
         substituteOverrideConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
@@ -146,7 +122,11 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     req.hlsl.numWorkgroupsRegisterSpace = 0;
     req.hlsl.numWorkgroupsShaderRegister = PipelineLayout::kNumWorkgroupsConstantBufferSlot;
 
-    req.hlsl.bindingRemapper = std::move(bindingRemapper);
+    // D3D11 registers like `t3` and `c3` have the same bindingOffset number in
+    // the remapping but should not be considered a collision because they have
+    // different types.
+    req.hlsl.bindingRemapper.allow_collisions = true;
+    req.hlsl.bindingRemapper.binding_points = layout->GetBindingRemapper();
 
     req.hlsl.externalTextureOptions = BuildExternalTextureTransformBindings(layout);
     req.hlsl.substituteOverrideConfig = std::move(substituteOverrideConfig);
