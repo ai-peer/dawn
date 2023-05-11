@@ -22,6 +22,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06691051_8e9ebe7d",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T17:08:53Z",
+      "side": 0,
+      "message": "I thought we would put the descriptor in DawnNative.h so it wouldn\u0027t be in webgpu.h ? \n\nand with Emscripten you wouldn\u0027t have DawnNative.h available, so it could be ok?",
+      "parentUuid": "e7e84609_25e952de",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
