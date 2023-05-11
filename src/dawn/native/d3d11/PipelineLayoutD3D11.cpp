@@ -37,22 +37,26 @@ MaybeError PipelineLayout::Initialize() {
 
     for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
         const BindGroupLayoutBase* bgl = GetBindGroupLayout(group);
-        mIndexInfo[group].resize(bgl->GetBindingCount());
-
         for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {
             const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
+            tint::writer::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                                       static_cast<uint32_t>(bindingInfo.binding)};
+            tint::writer::BindingPoint dstBindingPoint{0u, 0u};
             switch (bindingInfo.bindingType) {
                 case BindingInfoType::Buffer:
                     switch (bindingInfo.buffer.type) {
                         case wgpu::BufferBindingType::Uniform:
-                            mIndexInfo[group][bindingIndex] = constantBufferIndex++;
+                            dstBindingPoint.binding = constantBufferIndex;
+                            ++constantBufferIndex;
                             break;
                         case wgpu::BufferBindingType::Storage:
                         case kInternalStorageBufferBinding:
-                            mIndexInfo[group][bindingIndex] = unorderedAccessViewIndex++;
+                            dstBindingPoint.binding = unorderedAccessViewIndex;
+                            ++unorderedAccessViewIndex;
                             break;
                         case wgpu::BufferBindingType::ReadOnlyStorage:
-                            mIndexInfo[group][bindingIndex] = shaderResourceViewIndex++;
+                            dstBindingPoint.binding = shaderResourceViewIndex;
+                            ++shaderResourceViewIndex;
                             break;
                         case wgpu::BufferBindingType::Undefined:
                             UNREACHABLE();
@@ -60,26 +64,28 @@ MaybeError PipelineLayout::Initialize() {
                     break;
 
                 case BindingInfoType::Sampler:
-                    mIndexInfo[group][bindingIndex] = samplerIndex++;
+                    dstBindingPoint.binding = samplerIndex;
+                    ++samplerIndex;
                     break;
 
                 case BindingInfoType::Texture:
                 case BindingInfoType::ExternalTexture:
-                    mIndexInfo[group][bindingIndex] = shaderResourceViewIndex++;
+                    dstBindingPoint.binding = shaderResourceViewIndex;
+                    ++shaderResourceViewIndex;
                     break;
 
                 case BindingInfoType::StorageTexture:
-                    mIndexInfo[group][bindingIndex] = unorderedAccessViewIndex++;
+                    dstBindingPoint.binding = unorderedAccessViewIndex;
+                    ++unorderedAccessViewIndex;
                     break;
+            }
+            if (srcBindingPoint != dstBindingPoint) {
+                mBindingRemapper.emplace(srcBindingPoint, dstBindingPoint);
             }
         }
     }
 
     return {};
-}
-
-const PipelineLayout::BindingIndexInfo& PipelineLayout::GetBindingIndexInfo() const {
-    return mIndexInfo;
 }
 
 }  // namespace dawn::native::d3d11
