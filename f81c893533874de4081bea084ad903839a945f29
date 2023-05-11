@@ -94,6 +94,30 @@
       },
       "revId": "f81c893533874de4081bea084ad903839a945f29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa41819_874eb4dd",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-11T22:10:31Z",
+      "side": 1,
+      "message": "Done. PTAL.",
+      "parentUuid": "5feae22f_aea5b9f4",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 686,
+        "endChar": 80
+      },
+      "revId": "f81c893533874de4081bea084ad903839a945f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
