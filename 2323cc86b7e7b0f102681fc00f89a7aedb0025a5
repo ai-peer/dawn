@@ -321,6 +321,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15cdc16a_18ba0a24",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T03:33:27Z",
+      "side": 1,
+      "message": "FYI, after https://dawn-review.googlesource.com/c/dawn/+/132267 lands, things should be in a good shape to implement adapter toggles",
+      "parentUuid": "4849b5ec_665b81f5",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
