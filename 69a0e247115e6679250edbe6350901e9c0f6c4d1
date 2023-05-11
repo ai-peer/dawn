@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ca5a7b_6a53e32b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-11T19:03:24Z",
+      "side": 1,
+      "message": "Git logic LGTM. +2.",
+      "parentUuid": "94e25321_b68bb6bd",
+      "revId": "69a0e247115e6679250edbe6350901e9c0f6c4d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28034bad_c2a36f62",
