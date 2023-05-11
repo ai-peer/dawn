@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "61af77ff_697ddf22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-11T20:47:44Z",
+      "side": 1,
+      "message": "Thanks for the explanation as to why this wasn\u0027t there before, Austin. It was driving me crazy wondering why we were going out of our way to validate it in one case but clearly expected it to not be validated in the other.\n\nI think having this validation be consistent between pass types, regardless of technical limitations, is a plus.",
+      "parentUuid": "e8871aa0_75a7f6a5",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "9627bf73c22991ae79c3c3308f7f03b090c339a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fabde2ab_02466337",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
