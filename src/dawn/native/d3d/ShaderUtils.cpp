@@ -18,6 +18,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <iostream>
 
 #include "dawn/native/d3d/BlobD3D.h"
 #include "dawn/native/d3d/D3DCompilationRequest.h"
@@ -127,10 +128,13 @@ ResultOrError<ComPtr<ID3DBlob>> CompileShaderFXC(const d3d::D3DBytecodeCompilati
     ComPtr<ID3DBlob> compiledShader;
     ComPtr<ID3DBlob> errors;
 
-    DAWN_INVALID_IF(FAILED(r.d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
+    if (FAILED(r.d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
                                         nullptr, entryPointName.c_str(), r.fxcShaderProfile.data(),
-                                        r.compileFlags, 0, &compiledShader, &errors)),
-                    "D3D compile failed with: %s", static_cast<char*>(errors->GetBufferPointer()));
+                                        r.compileFlags, 0, &compiledShader, &errors))) {
+        std::cerr << hlslSource << std::endl;
+        DAWN_INVALID_IF(true,
+                        "D3D compile failed with: %s", static_cast<char*>(errors->GetBufferPointer()));
+    }
 
     return std::move(compiledShader);
 }
