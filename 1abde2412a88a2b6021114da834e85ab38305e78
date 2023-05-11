@@ -16,6 +16,23 @@
       "message": "Thanks for your review, Corentin. Please take another look.",
       "revId": "1abde2412a88a2b6021114da834e85ab38305e78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "880cdbae_fe98e3ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-05-11T19:25:02Z",
+      "side": 1,
+      "message": "Thanks for your review, Kai and Corentin!",
+      "revId": "1abde2412a88a2b6021114da834e85ab38305e78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

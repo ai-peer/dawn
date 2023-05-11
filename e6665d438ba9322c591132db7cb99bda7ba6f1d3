@@ -200,6 +200,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df40369a_cd4f7212",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-05-11T19:25:02Z",
+      "side": 1,
+      "message": "Yeah. It could be.",
+      "parentUuid": "482b090f_2551eb05",
+      "range": {
+        "startLine": 133,
+        "startChar": 36,
+        "endLine": 133,
+        "endChar": 40
+      },
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e888d2fc_87acdda2",
