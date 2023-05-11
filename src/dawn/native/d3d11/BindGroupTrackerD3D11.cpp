@@ -122,12 +122,16 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
     ID3D11DeviceContext1* deviceContext1 = mCommandContext->GetD3D11DeviceContext1();
     BindGroupBase* group = mBindGroups[index];
     const ityp::vector<BindingIndex, uint64_t>& dynamicOffsets = mDynamicOffsets[index];
-    const auto& indices = ToBackend(mPipelineLayout)->GetBindingIndexInfo()[index];
+    const auto& bindingRemapper = ToBackend(mPipelineLayout)->GetBindingRemapper();
 
     for (BindingIndex bindingIndex{0}; bindingIndex < group->GetLayout()->GetBindingCount();
          ++bindingIndex) {
         const BindingInfo& bindingInfo = group->GetLayout()->GetBindingInfo(bindingIndex);
-        const uint32_t bindingSlot = indices[bindingIndex];
+        auto it = bindingRemapper.find(
+            {static_cast<uint32_t>(index), static_cast<uint32_t>(bindingInfo.binding)});
+        const uint32_t bindingSlot = it != bindingRemapper.end()
+                                         ? it->second.binding
+                                         : static_cast<uint32_t>(bindingInfo.binding);
 
         switch (bindingInfo.bindingType) {
             case BindingInfoType::Buffer: {
@@ -273,13 +277,15 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
 void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
     ID3D11DeviceContext1* deviceContext1 = mCommandContext->GetD3D11DeviceContext1();
     BindGroupLayoutBase* groupLayout = mLastAppliedPipelineLayout->GetBindGroupLayout(index);
-    const auto& indices = ToBackend(mLastAppliedPipelineLayout)->GetBindingIndexInfo()[index];
-
+    const auto& bindingRemapper = ToBackend(mLastAppliedPipelineLayout)->GetBindingRemapper();
     for (BindingIndex bindingIndex{0}; bindingIndex < groupLayout->GetBindingCount();
          ++bindingIndex) {
         const BindingInfo& bindingInfo = groupLayout->GetBindingInfo(bindingIndex);
-        const uint32_t bindingSlot = indices[bindingIndex];
-
+        auto it = bindingRemapper.find(
+            {static_cast<uint32_t>(index), static_cast<uint32_t>(bindingInfo.binding)});
+        const uint32_t bindingSlot = it != bindingRemapper.end()
+                                         ? it->second.binding
+                                         : static_cast<uint32_t>(bindingInfo.binding);
         switch (bindingInfo.bindingType) {
             case BindingInfoType::Buffer: {
                 switch (bindingInfo.buffer.type) {
