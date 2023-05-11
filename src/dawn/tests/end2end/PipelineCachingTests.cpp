@@ -602,6 +602,10 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
         if (IsMetal() || IsVulkan()) {
             EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule + counts.pipeline),
                                Add(counts.shaderModule), device.CreateRenderPipeline(&desc));
+        } else if (IsD3D11()) {
+            // TODO(dawn:1817): make sure the pipeline is cached on D3D11.
+            EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule * 2 + counts.pipeline),
+                               device.CreateRenderPipeline(&desc));
         } else {
             EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule),
                                Add(counts.shaderModule + counts.pipeline),

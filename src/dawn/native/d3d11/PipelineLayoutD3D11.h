@@ -22,6 +22,8 @@
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
+#include "tint/tint.h"
+
 namespace dawn::native::d3d11 {
 
 class Device;
@@ -42,9 +44,9 @@ class PipelineLayout final : public PipelineLayoutBase {
     static ResultOrError<Ref<PipelineLayout>> Create(Device* device,
                                                      const PipelineLayoutDescriptor* descriptor);
 
-    using BindingIndexInfo =
-        ityp::array<BindGroupIndex, ityp::vector<BindingIndex, uint32_t>, kMaxBindGroups>;
-    const BindingIndexInfo& GetBindingIndexInfo() const;
+    const tint::writer::BindingRemapperOptions::BindingPoints& GetBindingRemapper() const {
+        return mBindingRemapper;
+    }
 
   private:
     using PipelineLayoutBase::PipelineLayoutBase;
@@ -53,7 +55,7 @@ class PipelineLayout final : public PipelineLayoutBase {
 
     MaybeError Initialize();
 
-    BindingIndexInfo mIndexInfo;
+    tint::writer::BindingRemapperOptions::BindingPoints mBindingRemapper;
 };
 
 }  // namespace dawn::native::d3d11
