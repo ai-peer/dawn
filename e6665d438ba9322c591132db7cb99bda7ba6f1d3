@@ -176,6 +176,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "482b090f_2551eb05",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-11T18:16:26Z",
+      "side": 1,
+      "message": "I thought it was just that in the first revision of your CL, size\u003dWHOLE_SIZE (the default) wasn\u0027t being allowed with unset. Regardless, seems fixed now.",
+      "parentUuid": "14a0c5f0_717aa33e",
+      "range": {
+        "startLine": 133,
+        "startChar": 36,
+        "endLine": 133,
+        "endChar": 40
+      },
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e888d2fc_87acdda2",
@@ -213,6 +237,30 @@
       "side": 1,
       "message": "Sounds good.",
       "parentUuid": "e888d2fc_87acdda2",
+      "range": {
+        "startLine": 374,
+        "startChar": 3,
+        "endLine": 374,
+        "endChar": 65
+      },
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7381ee5_2de43840",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-11T18:16:26Z",
+      "side": 1,
+      "message": "Agree it should be valid.",
+      "parentUuid": "188b35dd_a9bfd1ec",
       "range": {
         "startLine": 374,
         "startChar": 3,

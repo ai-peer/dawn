@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e9f3941_94797b2e",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-11T18:16:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1777441e_ed4231ba",
+      "revId": "672b21bfb4b41ce933a036c3f1cbefccf21b768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "411c9764_abfe1d41",
@@ -124,6 +142,30 @@
       "side": 1,
       "message": "Done.\n\nI guess you were saying that we can do the conversion of the slot one time only in order to remove duplicated conversions. But the conversion can be put right before this code block, so we do not need a typed version of kMaxVertexBuffers at [1].",
       "parentUuid": "f1a6b466_46998d7c",
+      "range": {
+        "startLine": 405,
+        "startChar": 36,
+        "endLine": 405,
+        "endChar": 51
+      },
+      "revId": "672b21bfb4b41ce933a036c3f1cbefccf21b768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25699cf2_e86dd157",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-11T18:16:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c282fc08_04ce0478",
       "range": {
         "startLine": 405,
         "startChar": 36,
