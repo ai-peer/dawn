@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8871aa0_75a7f6a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-11T18:25:05Z",
+      "side": 1,
+      "message": "The spec says you can\u0027t write the begin and end timestamps into the same place (https://gpuweb.github.io/gpuweb/#abstract-opdef-validate-timestampwrites called from both begin-pass methods). Those two things are semantically clearly ordered but it\u0027s still a declarative API and you can write the keys out of order if you want, so it\u0027s a little subtle if one of them \"takes precedent\" over the other.\n\nAnyway, if a user wants only the end timestamp, they should simply not request the beginning timestamp.",
+      "parentUuid": "2ad2064b_4f91e9ab",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "9627bf73c22991ae79c3c3308f7f03b090c339a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fabde2ab_02466337",
