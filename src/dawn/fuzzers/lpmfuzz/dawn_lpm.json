@@ -18,6 +18,8 @@
     "_doc": "See docs/dawn/codegen.md",
 
     "custom_cmds": [
+        "device create render pipeline",
+        "device create render pipeline async",
         "device create shader module",
         "destroy object"
     ],
