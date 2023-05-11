@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4c8b910_cdd04421",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-11T16:09:10Z",
+      "side": 1,
+      "message": "LGTM! Great stuff!",
+      "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bf02dd1_e35108de",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-11T16:09:10Z",
+      "side": 1,
+      "message": "Out of curisosity, how much ugly would be made if we eliminated the two-param constructor (and toggles were always mandatory)?",
+      "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c39bd68_a867e7dc",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-11T16:09:10Z",
+      "side": 1,
+      "message": "Not new to this patch, but I wonder if we should rename this function to DiscoverDefaultPhysicalDevices(). If so, log a bug? (Would likely require a multi-sided patch.) If we plan on migrating all callers away from the discovery paths, ignore this comment.",
+      "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d33f403_04704b15",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-11T16:09:10Z",
+      "side": 1,
+      "message": "Same here: DiscoverAdapters() -\u003e DiscoverPhysicalDevices()?",
+      "revId": "7fc10b25c18a73dd32252b545cfacd870fc312dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
