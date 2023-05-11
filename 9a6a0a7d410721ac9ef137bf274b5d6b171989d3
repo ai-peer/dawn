@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1a7ef0_28b4f1fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-11T21:19:32Z",
+      "side": 1,
+      "message": "looks like the presubmit script wants you to run `git cl format --python`",
+      "revId": "9a6a0a7d410721ac9ef137bf274b5d6b171989d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
