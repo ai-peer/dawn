@@ -339,6 +339,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12da4502_2e039292",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-05-12T02:29:12Z",
+      "side": 1,
+      "message": "Thanks! By the way, I noticed that you mentioned that you are planning to delete the whole discover adapter/physicalDevice stuff. A large part of complexity of adapter toggles comes from that discovering part as Dawn/Chrome holds a vector of all kinds of discovered adapter and reuse them from time to time. Are you going to change that logic?",
+      "parentUuid": "15cdc16a_18ba0a24",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
