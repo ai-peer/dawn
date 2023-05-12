@@ -190,6 +190,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17de42fa_0a771ebe",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T21:06:12Z",
+      "side": 0,
+      "message": "separately, I\u0027m realizing C++ extensibility is going to be interesting. how do you add additional methods onto existing objects? it would require changing the class definition.. 🤔",
+      "parentUuid": "d023e51e_2dec54de",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
