@@ -22,6 +22,30 @@
       },
       "revId": "63406401cbe1b88c00626cf6954f62fd5b7b5fab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960cdd51_45e87e5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-12T20:49:37Z",
+      "side": 1,
+      "message": "You are right, we can get external texture bindings related info in ShaderModule::Compile(). I created a new CL for this problem.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/132740",
+      "parentUuid": "bbeb8d8e_94c424f0",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "63406401cbe1b88c00626cf6954f62fd5b7b5fab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
