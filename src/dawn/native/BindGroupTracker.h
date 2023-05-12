@@ -60,7 +60,10 @@ class BindGroupTrackerBase {
                   mDynamicOffsets[index].begin());
     }
 
-    void OnSetPipeline(PipelineBase* pipeline) { mPipelineLayout = pipeline->GetLayout(); }
+    void OnSetPipeline(PipelineBase* pipeline) {
+        mPipelineLayout = pipeline->GetLayout();
+        mPipeline = pipeline;
+    }
 
   protected:
     // The Derived class should call this before it applies bind groups.
@@ -115,6 +118,9 @@ class BindGroupTrackerBase {
     // to the bind group bindings.
     PipelineLayoutBase* mPipelineLayout = nullptr;
     PipelineLayoutBase* mLastAppliedPipelineLayout = nullptr;
+
+    // The current pipeline.
+    PipelineBase* mPipeline = nullptr;
 };
 
 }  // namespace dawn::native

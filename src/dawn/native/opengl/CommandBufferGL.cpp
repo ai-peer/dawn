@@ -220,12 +220,12 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
   public:
     void OnSetPipeline(RenderPipeline* pipeline) {
         BindGroupTrackerBase::OnSetPipeline(pipeline);
-        mPipeline = pipeline;
+        mPipelineGL = pipeline;
     }
 
     void OnSetPipeline(ComputePipeline* pipeline) {
         BindGroupTrackerBase::OnSetPipeline(pipeline);
-        mPipeline = pipeline;
+        mPipelineGL = pipeline;
     }
 
     void Apply(const OpenGLFunctions& gl) {
@@ -292,7 +292,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                     GLuint samplerIndex = indices[bindingIndex];
 
                     for (PipelineGL::SamplerUnit unit :
-                         mPipeline->GetTextureUnitsForSampler(samplerIndex)) {
+                         mPipelineGL->GetTextureUnitsForSampler(samplerIndex)) {
                         // Only use filtering for certain texture units, because int
                         // and uint texture are only complete without filtering
                         if (unit.shouldUseFiltering) {
@@ -310,7 +310,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                     GLenum target = view->GetGLTarget();
                     GLuint viewIndex = indices[bindingIndex];
 
-                    for (auto unit : mPipeline->GetTextureUnitsForTextureView(viewIndex)) {
+                    for (auto unit : mPipelineGL->GetTextureUnitsForTextureView(viewIndex)) {
                         gl.ActiveTexture(GL_TEXTURE0 + unit);
                         gl.BindTexture(target, handle);
                         if (ToBackend(view->GetTexture())->GetGLFormat().format ==
@@ -378,7 +378,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
         }
     }
 
-    PipelineGL* mPipeline = nullptr;
+    PipelineGL* mPipelineGL = nullptr;
 };
 
 void ResolveMultisampledRenderTargets(const OpenGLFunctions& gl,
