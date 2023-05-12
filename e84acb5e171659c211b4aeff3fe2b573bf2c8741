@@ -62,6 +62,52 @@
       },
       "revId": "e84acb5e171659c211b4aeff3fe2b573bf2c8741",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84314960_5e165a4d",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T00:12:34Z",
+      "side": 1,
+      "message": "```suggestion\n#if DAWN_PLATFORM_IS(WINDOWS)\n    constexpr bool kIsWindows \u003d true;\n#else\n    constexpr bool kIsWindows \u003d false;\n#endif\n```",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 6
+      },
+      "revId": "e84acb5e171659c211b4aeff3fe2b573bf2c8741",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b355aef_511d4883",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T00:12:34Z",
+      "side": 1,
+      "message": "nit: I think you can compute mIsAngle as a local variable here instead of saving it as a member. It\u0027s not used elsewhere",
+      "range": {
+        "startLine": 231,
+        "startChar": 42,
+        "endLine": 231,
+        "endChar": 50
+      },
+      "revId": "e84acb5e171659c211b4aeff3fe2b573bf2c8741",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
