@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbeb8d8e_94c424f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T19:57:33Z",
+      "side": 1,
+      "message": "isn\u0027t this what `BuildExternalTextureTransformBindings` is intended to do?\n\nthe pipeline layout is available in ShaderModule::Compile. I\u0027m not understanding why we can\u0027t remap everything correctly there",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "63406401cbe1b88c00626cf6954f62fd5b7b5fab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
