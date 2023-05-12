@@ -118,6 +118,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e697e5_0db869a8",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T02:05:45Z",
+      "side": 0,
+      "message": "the idea was to not have WGPUDawnPlatform at all because it seemed like not a WGPU thing.\n\nbut yes I suppose we could do that, but it would feel kinda wonky in the generator. like:\n\n```\n\"dawn platform\": {\n  \"category\": \"external\",\n  \"c type\": \"struct DawnPlatformImpl*\",\n  \"cpp type\": \"class ::dawn::platform::Platform*\",\n}\n```\n\nor something?\n\nfelt odd to have it in the generator to me, because the \"c type\" and \"cpp type\" are effectively \"please paste this string in\" - so it started to make more sense for them to be externally defined.\n\nit starts to get wonky if you don\u0027t want void* in other places - like the surface descriptors - like\nfor SurfaceDescriptorFromWindowsHWND, where do I get the definition of HWND for?\nit might make more sense to me if sTypes are declared in the main webgpu.h, but then some descriptors are provided by other headers. then they can do their own #includes for dependent types like:\n\n```\n// webgpu_cpp_surface_descriptor_from_windows_hwnd.h\n\n#include \u003cmicrosoft.ui.xaml.window.h\u003e\n#include \u003cwebgpu/webgpu_cpp_chained_struct.h\u003e\n\nstruct SurfaceDescriptorFromWindowsHWND : ChainedStruct {\n        SurfaceDescriptorFromWindowsHWND() {\n            sType \u003d SType::SurfaceDescriptorFromWindowsHWND;\n        }\n        static constexpr size_t kFirstMemberAlignment \u003d detail::ConstexprMax(alignof(ChainedStruct), alignof(void * ));\n        alignas(kFirstMemberAlignment) void * hinstance;\n        HWND hwnd;\n};\n```",
+      "parentUuid": "807f8f7a_f13ad6fd",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
