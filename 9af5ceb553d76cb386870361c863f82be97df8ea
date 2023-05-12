@@ -166,6 +166,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d023e51e_2dec54de",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T20:56:10Z",
+      "side": 0,
+      "message": "for this CL we have for DawnInstanceDescriptor handwritten in DawnNative.h (already a c++ header). I was thinking we don\u0027t need a C version for it.\n\nI was also thinking sTypes would be reserved in webgpu.h so that we can have a place to track new ones added and avoid conflicts. So some implementation can add sTypes to webgpu.h, but the structs would live in their own headers somewhere. IIRC it\u0027s similar to how spirv op codes get reserved",
+      "parentUuid": "c0dfb794_70396dee",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
