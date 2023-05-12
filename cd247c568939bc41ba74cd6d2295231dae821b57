@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a217b1bb_0c99ce71",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T00:50:01Z",
+      "side": 1,
+      "message": "nit: default case is not needed; we enumerate all of them.\nthe compiler will error if we add a new enum and don\u0027t handle it here (which is what we want to happen)",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 26
+      },
+      "revId": "cd247c568939bc41ba74cd6d2295231dae821b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
