@@ -357,6 +357,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38f152d4_39ed03d2",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T02:31:37Z",
+      "side": 1,
+      "message": "the Toggles live on the Adapter. Adapter no longer is stored in that vector - only PhysicalDevice is.\n\nNow, when you call Instance::GetAdapters() we make new Adapters (and toggles) for every physical device. Same for Instance::RequestAdapter. So, I think this simplifies it already - what do you think?",
+      "parentUuid": "12da4502_2e039292",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
