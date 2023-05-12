@@ -123,6 +123,10 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
 
     DAWN_TRY(PreparePendingCommandContext());
 
+    mUAVSlotCount = mD3d11Device->GetFeatureLevel() == D3D_FEATURE_LEVEL_11_1
+                        ? D3D11_1_UAV_SLOT_COUNT
+                        : D3D11_PS_CS_UAV_REGISTER_COUNT;
+
     SetLabelImpl();
 
     return {};
@@ -466,6 +470,10 @@ Ref<TextureBase> Device::CreateD3DExternalTexture(const TextureDescriptor* descr
         return nullptr;
     }
     return {dawnTexture};
+}
+
+uint32_t Device::GetUAVSlotCount() const {
+    return mUAVSlotCount;
 }
 
 }  // namespace dawn::native::d3d11
