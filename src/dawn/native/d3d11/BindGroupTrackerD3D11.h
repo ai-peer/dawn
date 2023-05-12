@@ -26,7 +26,7 @@ class CommandRecordingContext;
 // cannot inherit BindGroupTrackerGroups.
 class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/false, uint64_t> {
   public:
-    explicit BindGroupTracker(CommandRecordingContext* commandContext);
+    explicit BindGroupTracker(CommandRecordingContext* commandContext, bool isRenderPass);
     ~BindGroupTracker();
     MaybeError Apply();
 
@@ -34,7 +34,17 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/fa
     MaybeError ApplyBindGroup(BindGroupIndex index);
     void UnApplyBindGroup(BindGroupIndex index);
 
+    bool IsRenderPass() const;
+    bool IsComputePass() const;
+
     CommandRecordingContext* const mCommandContext;
+    bool mIsRenderPass = false;
+
+    // Sort UAVs by slot to bind them all together at the same time.
+    // https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews
+    // Note  RTVs, DSV, and UAVs cannot be set independently; they all need to be set at the same
+    // time.
+    std::map<uint32_t, ComPtr<ID3D11UnorderedAccessView>> mSortedUAVs;
 };
 
 }  // namespace dawn::native::d3d11
