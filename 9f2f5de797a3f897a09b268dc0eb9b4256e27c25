@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23f28f36_aafa21a1",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-12T20:17:36Z",
+      "side": 1,
+      "message": "Ahh sorry I totally missed that. That existing code you copied looks wrong. The C header has it correct (condition is uninverted):\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/templates/api.h;l\u003d27;drc\u003dabfa45baa428609e8edd155232571bae005b3f5f\nWe might not have noticed this if we haven\u0027t rolled this into Emscripten since adding this (or we just manually removed it in the roll).",
+      "parentUuid": "b28e01b5_5c8d10c6",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e8cb4c6_9a61ef65",
         "filename": "generator/templates/api_cpp_chained_struct.h",
         "patchSetId": 4
