@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2bb7a05_982f563d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T20:12:51Z",
+      "side": 1,
+      "message": "oh that\u0027s nice - LGTM\n\n+kai - did we know this in Vulkan when evaluating required feature support? (i.e. depthClipEnable appears not to be required now)",
+      "revId": "7d6d8a0e40b3fa27433382819f2d740a2765ac95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
