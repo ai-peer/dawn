@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73ffa5c2_2bf63742",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T02:42:00Z",
+      "side": 1,
+      "message": "That\u0027s true, but the attachment state of the render pass must be exactly equal to that of the render pipeline!\n\nSee validation:\nhttps://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/RenderEncoderBase.cpp;l\u003d272;drc\u003db18d59d36ac77ddf968b6e3452109e67471ee38f;bpv\u003d0;bpt\u003d1",
+      "parentUuid": "39151f4e_6b1e54f7",
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2773b61_5e2ca9fd",
         "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
         "patchSetId": 2
