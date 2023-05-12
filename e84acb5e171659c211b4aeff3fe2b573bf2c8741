@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2655384b_dc09dbf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T00:07:50Z",
+      "side": 1,
+      "message": "LGTM - great work handling these tricky edge cases Shrek",
+      "revId": "e84acb5e171659c211b4aeff3fe2b573bf2c8741",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e086f5d_a339eef6",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T00:07:50Z",
+      "side": 1,
+      "message": "nit: why do we need Internal here? it would be nice to use normal Storage usage if possible so we don\u0027t need the Internal usage handling in CreateBuffer",
+      "range": {
+        "startLine": 260,
+        "startChar": 55,
+        "endLine": 262,
+        "endChar": 89
+      },
+      "revId": "e84acb5e171659c211b4aeff3fe2b573bf2c8741",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed5f5ba_72438fe7",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T00:07:50Z",
+      "side": 1,
+      "message": "nit: make this an enum instead",
+      "range": {
+        "startLine": 179,
+        "startChar": 40,
+        "endLine": 179,
+        "endChar": 70
+      },
+      "revId": "e84acb5e171659c211b4aeff3fe2b573bf2c8741",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
