@@ -375,6 +375,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82b49b8b_7b726dac",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-05-12T02:37:48Z",
+      "side": 1,
+      "message": "Yes if we create adapter (from cached physicalDevice) every time things are much more simpler. Sorry I don\u0027t closely follow the code change recently, but I remember Chrome used to store a vector of adapter, and hook the requireAdapter logic to use that vector, is that the public use of discovering adapter APIs you mentioned?",
+      "parentUuid": "38f152d4_39ed03d2",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
