@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_BINDGROUPTRACKERD3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_BINDGROUPTRACKERD3D11_H_
 
+#include <vector>
+
 #include "dawn/native/BindGroupTracker.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
@@ -24,9 +26,9 @@ class CommandRecordingContext;
 
 // We need convert WebGPU bind slot to d3d11 bind slot according a map in PipelineLayout, so we
 // cannot inherit BindGroupTrackerGroups.
-class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/false, uint64_t> {
+class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/true, uint64_t> {
   public:
-    explicit BindGroupTracker(CommandRecordingContext* commandContext);
+    BindGroupTracker(CommandRecordingContext* commandContext, bool isRenderPass);
     ~BindGroupTracker();
     MaybeError Apply();
 
@@ -35,6 +37,14 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/fa
     void UnApplyBindGroup(BindGroupIndex index);
 
     CommandRecordingContext* const mCommandContext;
+    const bool mIsRenderPass;
+    const wgpu::ShaderStage mVisibleStages;
+
+    // Record all required UAVs to bind them together at the same time.
+    // https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews
+    // Note  RTVs, DSV, and UAVs cannot be set independently; they all need to be set at the same
+    // time.
+    std::vector<ComPtr<ID3D11UnorderedAccessView>> mUAVs;
 };
 
 }  // namespace dawn::native::d3d11
