@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79df4b85_020948f5",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-12T06:31:02Z",
+      "side": 1,
+      "message": "That\u0027s better. Thanks for clarification!\nFor the test case, is there a way to ensure d3d future level 11.0? Otherwise it would be little meaningful.",
+      "parentUuid": "73ffa5c2_2bf63742",
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2773b61_5e2ca9fd",
         "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
         "patchSetId": 2
