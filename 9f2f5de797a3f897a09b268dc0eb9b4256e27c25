@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b28e01b5_5c8d10c6",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-12T19:11:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure how the Emscripten side works, but the ifdef was already included in `webgpu_cpp.h`, I just copied it to the `webgpu_cpp_chained_struct.h`. If it was working before, I suspect it should still work?",
+      "parentUuid": "07749f8d_b3f08ed3",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e8cb4c6_9a61ef65",
         "filename": "generator/templates/api_cpp_chained_struct.h",
         "patchSetId": 4
