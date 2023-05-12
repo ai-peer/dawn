@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a51050_ee5707f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T15:40:34Z",
+      "side": 1,
+      "message": "swapping reviewers. forgot rharrison is OOO on Fridays",
+      "revId": "444775a4a033d73e6476e439ed59fdcf6263db9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
