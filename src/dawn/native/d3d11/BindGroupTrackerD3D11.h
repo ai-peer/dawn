@@ -34,6 +34,9 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/fa
     MaybeError ApplyBindGroup(BindGroupIndex index);
     void UnApplyBindGroup(BindGroupIndex index);
 
+    bool IsRenderPass() const;
+    bool IsComputePass() const;
+
     CommandRecordingContext* const mCommandContext;
 };
 
