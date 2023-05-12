@@ -125,11 +125,37 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
                 bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
             }
         }
+
+        for (const auto& [_, expansion] : groupLayout->GetExternalTextureBindingExpansionMap()) {
+            uint32_t plane1Slot = indices[groupLayout->GetBindingIndex(expansion.plane1)];
+            uint32_t paramsSlot = indices[groupLayout->GetBindingIndex(expansion.params)];
+            bindingRemapper.binding_points.emplace(
+                tint::writer::BindingPoint{static_cast<uint32_t>(group),
+                                           static_cast<uint32_t>(expansion.plane1)},
+                tint::writer::BindingPoint{0u, plane1Slot});
+            bindingRemapper.binding_points.emplace(
+                tint::writer::BindingPoint{static_cast<uint32_t>(group),
+                                           static_cast<uint32_t>(expansion.params)},
+                tint::writer::BindingPoint{0u, paramsSlot});
+        }
     }
 
     std::optional<tint::ast::transform::SubstituteOverride::Config> substituteOverrideConfig;
     if (!programmableStage.metadata->overrides.empty()) {
         substituteOverrideConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
+    }
+
+    tint::writer::ExternalTextureOptions externalTextureOptions;
+    for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+        const BindGroupLayoutBase* groupLayout = layout->GetBindGroupLayout(group);
+        const auto& indices = layout->GetBindingIndexInfo()[group];
+        for (const auto& [_, expansion] : groupLayout->GetExternalTextureBindingExpansionMap()) {
+            uint32_t plane1Slot = indices[groupLayout->GetBindingIndex(expansion.plane1)];
+            uint32_t paramsSlot = indices[groupLayout->GetBindingIndex(expansion.params)];
+            externalTextureOptions.bindings_map[{static_cast<uint32_t>(group),
+                                                 static_cast<uint32_t>(expansion.plane0)}] = {
+                {static_cast<uint32_t>(0), plane1Slot}, {static_cast<uint32_t>(0), paramsSlot}};
+        }
     }
 
     req.hlsl.inputProgram = GetTintProgram();
@@ -148,6 +174,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
 
     req.hlsl.bindingRemapper = std::move(bindingRemapper);
 
+    // req.hlsl.externalTextureOptions = std::move(externalTextureOptions);
     req.hlsl.externalTextureOptions = BuildExternalTextureTransformBindings(layout);
     req.hlsl.substituteOverrideConfig = std::move(substituteOverrideConfig);
 
