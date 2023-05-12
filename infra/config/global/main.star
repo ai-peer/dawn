@@ -371,24 +371,32 @@ def _add_branch_verifiers(builder_name, os, includable_only = False):
 
 # We use the DEPS version for branches because ToT builders do not make sense on
 # branches and the DEPS versions already exist.
-_os_to_branch_builder = {
+_os_arch_to_branch_builder = {
     "linux": "dawn-linux-x64-deps-rel",
     "mac": "dawn-mac-x64-deps-rel",
     "win": "dawn-win10-x64-deps-rel",
+    "android-arm": "dawn-android-arm-deps-rel",
 }
 
-def chromium_dawn_tryjob(os):
+def chromium_dawn_tryjob(os, arch=None):
     """Adds a tryjob that tests against Chromium
 
     Args:
       os: string for the OS, should be one or linux|mac|win
     """
 
-    luci.cq_tryjob_verifier(
-        cq_group = "Dawn-CQ",
-        builder = "chromium:try/" + os + "-dawn-rel",
-    )
-    _add_branch_verifiers(_os_to_branch_builder[os], os)
+    if arch:
+        luci.cq_tryjob_verifier(
+            cq_group = "Dawn-CQ",
+            builder = "chromium:try/" + os + "-dawn-" + arch + "-rel",
+        )
+        _add_branch_verifiers(_os_arch_to_branch_builder[os + '-' + arch], os)
+    else:
+        luci.cq_tryjob_verifier(
+            cq_group = "Dawn-CQ",
+            builder = "chromium:try/" + os + "-dawn-rel",
+        )
+        _add_branch_verifiers(_os_arch_to_branch_builder[os], os)
 
 luci.gitiles_poller(
     name = "primary-poller",
@@ -441,6 +449,7 @@ dawn_standalone_builder("cron-linux-clang-rel-x64", True, False, "x64", True)
 chromium_dawn_tryjob("linux")
 chromium_dawn_tryjob("mac")
 chromium_dawn_tryjob("win")
+chromium_dawn_tryjob("android", "arm")
 
 luci.cq_tryjob_verifier(
     cq_group = "Dawn-CQ",
