@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe563616_798f396f",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-12T06:38:26Z",
+      "side": 1,
+      "message": "It\u0027s included via the other header though? Shouldn\u0027t that still be fine?",
+      "parentUuid": "927c736b_923d6524",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e8cb4c6_9a61ef65",
         "filename": "generator/templates/api_cpp_chained_struct.h",
         "patchSetId": 4
