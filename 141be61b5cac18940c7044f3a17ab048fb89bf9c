@@ -169,6 +169,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "341fa599_d4d41a1b",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T17:18:48Z",
+      "side": 1,
+      "message": "We could have an adapter-level toggle for it, but that\u0027s not set up yet so this is fine for now. +cc zhaoming.\nCould you add a TODO and file a bug though about testing d3d11 on both FL11_0 and FL11_1 ?\n\nOverall though, we need to understand what specific requirements there are for Compat +cc senorblanco.\nIn the webgpu compat requirements doc, I don\u0027t see anything about this d3d11 limitation, but there could be multiple options:\n - fragment stores are disallowed (slot overlap is no longer a problem)\n - there\u0027s a new compat-only limit for the combined number of color attachments and storage slots\n - something else\n \nWe should probably figure ^this out before going through the effort of compacting the color attachments to free up space.",
+      "parentUuid": "79df4b85_020948f5",
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2773b61_5e2ca9fd",
         "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
         "patchSetId": 2

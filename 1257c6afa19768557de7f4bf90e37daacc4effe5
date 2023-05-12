@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b639376_72703746",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T17:18:48Z",
+      "side": 1,
+      "message": "nit: can you make the message more descriptive?\n\n\"%s uses up to color attachment %u, but there are only %u remaining slots because the pipeline uses %u UAVs\"",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 47
+      },
+      "revId": "1257c6afa19768557de7f4bf90e37daacc4effe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4bd3e9_4a372f0f",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T17:18:48Z",
+      "side": 1,
+      "message": "eventually, if this is a compat restriction, it\u0027ll be validation that happens in the frontend.\n\nCan you add a TODO about that referencing crbug.com/dawn/1814 ?",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "1257c6afa19768557de7f4bf90e37daacc4effe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
