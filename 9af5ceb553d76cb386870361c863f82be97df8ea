@@ -142,6 +142,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0dfb794_70396dee",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-12T19:02:41Z",
+      "side": 0,
+      "message": "Eventually we\u0027re going to want just one vanilla webgpu.h regardless of which project you\u0027re using it with, and dawn extensions in another file. Certainly there will be some `SType`s (in both the C and C++ headers) that are going to be dawn specific, I don\u0027t know exactly how we should split them out but I think we should (as `static const` or `#define`).\n\nHonestly, I think `void*` would be fine for the platform and the HWND/etc., because they represent a pretty minimal amount of user code. The types are nice though, so I also like the idea of splitting them into other headers. Those headers can be dependent on other things (like OS headers, or C++). I\u0027d probably define both the SType and the struct in the extension header.\n\nUnfortunately generating extension headers is probably a bit of a pain. I would just say handwrite them, but I assume we also need to generate wire/validation code. Maybe we can do that in the future and for now just gate some things in webgpu.h behind `#ifdef __cplusplus`?",
+      "parentUuid": "97e697e5_0db869a8",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

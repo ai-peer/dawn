@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07749f8d_b3f08ed3",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-12T19:02:41Z",
+      "side": 1,
+      "message": "Oh, I see. Doesn\u0027t it still make it impossible to use `webgpu_cpp.h` in Emscripten though because it will hit the `#error`? (We copy these generated files directly into Emscripten as part of its libraries)",
+      "parentUuid": "fe563616_798f396f",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e8cb4c6_9a61ef65",
         "filename": "generator/templates/api_cpp_chained_struct.h",
         "patchSetId": 4
