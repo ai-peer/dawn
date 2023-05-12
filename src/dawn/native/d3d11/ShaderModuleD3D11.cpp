@@ -125,6 +125,21 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
                 bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
             }
         }
+
+        // Tint will add two bindings (plane1, params) for one external texture binding.
+        // We need to remap the binding points for the two bindings.
+        for (const auto& [_, expansion] : groupLayout->GetExternalTextureBindingExpansionMap()) {
+            uint32_t plane1Slot = indices[groupLayout->GetBindingIndex(expansion.plane1)];
+            uint32_t paramsSlot = indices[groupLayout->GetBindingIndex(expansion.params)];
+            bindingRemapper.binding_points.emplace(
+                tint::writer::BindingPoint{static_cast<uint32_t>(group),
+                                           static_cast<uint32_t>(expansion.plane1)},
+                tint::writer::BindingPoint{0u, plane1Slot});
+            bindingRemapper.binding_points.emplace(
+                tint::writer::BindingPoint{static_cast<uint32_t>(group),
+                                           static_cast<uint32_t>(expansion.params)},
+                tint::writer::BindingPoint{0u, paramsSlot});
+        }
     }
 
     std::optional<tint::ast::transform::SubstituteOverride::Config> substituteOverrideConfig;
@@ -148,6 +163,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
 
     req.hlsl.bindingRemapper = std::move(bindingRemapper);
 
+    // req.hlsl.externalTextureOptions = std::move(externalTextureOptions);
     req.hlsl.externalTextureOptions = BuildExternalTextureTransformBindings(layout);
     req.hlsl.substituteOverrideConfig = std::move(substituteOverrideConfig);
 
