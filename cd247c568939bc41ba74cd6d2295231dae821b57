@@ -22,6 +22,23 @@
       },
       "revId": "cd247c568939bc41ba74cd6d2295231dae821b57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6b74f2c_2928f0d9",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-12T15:30:45Z",
+      "side": 1,
+      "message": "Nit: could you put this all into the #if, something like:\n\n#if DAWN_PLATFORM_IS(WINDOWS)\nconstexpr bool kIsAngleOnWindows \u003d mName.find(...);\n#else\nconstexpr bool kIsAngleOnWindows \u003d false;\n#endif",
+      "revId": "cd247c568939bc41ba74cd6d2295231dae821b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
