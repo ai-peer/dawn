@@ -17,7 +17,7 @@
 namespace tint::writer::spirv {
 namespace {
 
-TEST_F(SpvGeneratorImplTest, Type_Bool) {
+TEST_F(SpvGeneratorImplTest, Constant_Bool) {
     generator_.Constant(Constant(true));
     generator_.Constant(Constant(false));
     EXPECT_EQ(DumpTypes(), R"(%2 = OpTypeBool
@@ -59,6 +59,90 @@ TEST_F(SpvGeneratorImplTest, Constant_F16) {
     EXPECT_EQ(DumpTypes(), R"(%2 = OpTypeFloat 16
 %1 = OpConstant %2 0x1.5p+5
 %3 = OpConstant %2 -0x1p+0
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, Constant_Vec4Bool) {
+    auto* b = ir.types.Get<type::Bool>();
+    auto* t = Constant(true);
+    auto* f = Constant(false);
+    auto* v = ir.constants.Create<constant::Composite>(
+        ir.types.Get<type::Vector>(b, 4u), utils::Vector{t->value, f->value, f->value, t->value},
+        false, true);
+    generator_.Constant(Constant(v));
+    EXPECT_EQ(DumpTypes(), R"(%3 = OpTypeBool
+%2 = OpTypeVector %3 4
+%4 = OpConstantTrue %3
+%5 = OpConstantFalse %3
+%1 = OpConstantComposite %2 %4 %5 %5 %4
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, Constant_Vec2i) {
+    auto* i = ir.types.Get<type::I32>();
+    auto* i_42 = Constant(i32(42));
+    auto* i_n1 = Constant(i32(-1));
+    auto* v = ir.constants.Create<constant::Composite>(
+        ir.types.Get<type::Vector>(i, 2u), utils::Vector{i_42->value, i_n1->value}, false, false);
+    generator_.Constant(Constant(v));
+    EXPECT_EQ(DumpTypes(), R"(%3 = OpTypeInt 32 1
+%2 = OpTypeVector %3 2
+%4 = OpConstant %3 42
+%5 = OpConstant %3 -1
+%1 = OpConstantComposite %2 %4 %5
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, Constant_Vec3u) {
+    auto* u = ir.types.Get<type::U32>();
+    auto* u_42 = Constant(u32(42));
+    auto* u_0 = Constant(u32(0));
+    auto* u_4b = Constant(u32(4000000000));
+    auto* v = ir.constants.Create<constant::Composite>(
+        ir.types.Get<type::Vector>(u, 3u), utils::Vector{u_42->value, u_0->value, u_4b->value},
+        false, true);
+    generator_.Constant(Constant(v));
+    EXPECT_EQ(DumpTypes(), R"(%3 = OpTypeInt 32 0
+%2 = OpTypeVector %3 3
+%4 = OpConstant %3 42
+%5 = OpConstant %3 0
+%6 = OpConstant %3 4000000000
+%1 = OpConstantComposite %2 %4 %5 %6
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, Constant_Vec4f) {
+    auto* f = ir.types.Get<type::F32>();
+    auto* f_42 = Constant(f32(42));
+    auto* f_0 = Constant(f32(0));
+    auto* f_q = Constant(f32(0.25));
+    auto* f_n1 = Constant(f32(-1));
+    auto* v = ir.constants.Create<constant::Composite>(
+        ir.types.Get<type::Vector>(f, 4u),
+        utils::Vector{f_42->value, f_0->value, f_q->value, f_n1->value}, false, true);
+    generator_.Constant(Constant(v));
+    EXPECT_EQ(DumpTypes(), R"(%3 = OpTypeFloat 32
+%2 = OpTypeVector %3 4
+%4 = OpConstant %3 42
+%5 = OpConstant %3 0
+%6 = OpConstant %3 0.25
+%7 = OpConstant %3 -1
+%1 = OpConstantComposite %2 %4 %5 %6 %7
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, Constant_Vec2h) {
+    auto* h = ir.types.Get<type::F16>();
+    auto* h_42 = Constant(f16(42));
+    auto* h_q = Constant(f16(0.25));
+    auto* v = ir.constants.Create<constant::Composite>(
+        ir.types.Get<type::Vector>(h, 2u), utils::Vector{h_42->value, h_q->value}, false, false);
+    generator_.Constant(Constant(v));
+    EXPECT_EQ(DumpTypes(), R"(%3 = OpTypeFloat 16
+%2 = OpTypeVector %3 2
+%4 = OpConstant %3 0x1.5p+5
+%5 = OpConstant %3 0x1p-2
+%1 = OpConstantComposite %2 %4 %5
 )");
 }
 
