@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_BINDGROUPTRACKERD3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_BINDGROUPTRACKERD3D11_H_
 
+#include <list>
+
 #include "dawn/native/BindGroupTracker.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
@@ -26,7 +28,7 @@ class CommandRecordingContext;
 // cannot inherit BindGroupTrackerGroups.
 class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/false, uint64_t> {
   public:
-    explicit BindGroupTracker(CommandRecordingContext* commandContext);
+    explicit BindGroupTracker(CommandRecordingContext* commandContext, bool isRenderPass);
     ~BindGroupTracker();
     MaybeError Apply();
 
@@ -34,7 +36,17 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/fa
     MaybeError ApplyBindGroup(BindGroupIndex index);
     void UnApplyBindGroup(BindGroupIndex index);
 
+    bool IsRenderPass() const;
+    bool IsComputePass() const;
+
     CommandRecordingContext* const mCommandContext;
+    const bool mIsRenderPass;
+
+    // Record all required UAVs to bind them together at the same time.
+    // https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews
+    // Note  RTVs, DSV, and UAVs cannot be set independently; they all need to be set at the same
+    // time.
+    std::list<ComPtr<ID3D11UnorderedAccessView>> mUAVs;
 };
 
 }  // namespace dawn::native::d3d11
