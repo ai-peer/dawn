@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "927c736b_923d6524",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-12T01:55:16Z",
+      "side": 1,
+      "message": "This entirely removes SType from the C++ header, even for all of the standard STypes.",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8cb4c6_9a61ef65",
+        "filename": "generator/templates/api_cpp_chained_struct.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-12T01:55:16Z",
+      "side": 1,
+      "message": "In the long term I think we want to get rid of the tags system so that all of the files that are common to multiple projects don\u0027t have multiple flavors. It wouldn\u0027t have to have an `#ifdef __EMSCRIPTEN__` in this file even in the Dawn version, so I\u0027d make it unconditional.\n\nThat said I\u0027m not exactly clear on how this file is meant to be used.",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9e3136f_e25578d1",
         "filename": "include/dawn/native/DawnNative.h",
         "patchSetId": 4

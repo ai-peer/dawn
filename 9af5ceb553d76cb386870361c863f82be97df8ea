@@ -94,6 +94,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807f8f7a_f13ad6fd",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-12T01:55:16Z",
+      "side": 0,
+      "message": "Not sure I quite understand the proposal. SType and ChainedStruct are still needed in the standard non-dawn header for a bunch of things like window system integration and optional features.\n\nThere might be a solution like this that works, but why not just make an opaque C pointer type for `dawn::platform::Platform*`? In this case I think users only need to go from the C++ type to the C type so you could have a dawn::Platform::Platform::Get() that returns `reinterpret_cast\u003cWGPUDawnPlatform*\u003e(this)` (and then inside dawn reinterpret_cast back to C++).",
+      "parentUuid": "067bcfa2_b714f1ee",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
