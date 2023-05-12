@@ -22,6 +22,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b68f450_c1c7e7f0",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-12T22:32:47Z",
+      "side": 1,
+      "message": "I think this map is for unpacking one external texture into two texture_2d bindings for two possible planes and one params bindings, and tint also adds some shader code for sampling from them.\n\nAnd then bindingRemapper will map two unpacked texture_2d bindings and params binding to d3d11 slots.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/writer/msl/generator_impl.cc;l\u003d215?q\u003dexternal_texture_options\u0026ss\u003dchromium\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/ast/transform/multiplanar_external_texture.cc;l\u003d502",
+      "parentUuid": "e9b3cb1b_471679e2",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
