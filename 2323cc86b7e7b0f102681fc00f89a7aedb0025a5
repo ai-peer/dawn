@@ -393,6 +393,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54ef3eae_4a36313c",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-12T02:39:42Z",
+      "side": 1,
+      "message": "Removed storing that vector in https://chromium-review.googlesource.com/c/chromium/src/+/4517517 :)",
+      "parentUuid": "82b49b8b_7b726dac",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
