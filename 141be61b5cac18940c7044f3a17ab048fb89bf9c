@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56b3b516_36fef18a",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-12T02:36:20Z",
+      "side": 1,
+      "message": "Good point. Sounds doable too, but not sure how hard it would be. Let\u0027s just leave a TODO here for now, as it should be a rare case in my view.",
+      "parentUuid": "c62c7262_13e2262e",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 26
+      },
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48704652_b7e5fed5",
         "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
         "patchSetId": 2
@@ -67,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39151f4e_6b1e54f7",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-12T02:36:20Z",
+      "side": 1,
+      "message": "Color attachments belong to RenderPass, and Pipeline can be bound to a RenderPass. So the pipeline can only be aware of color attachments when being bound rather than on creation. Correct me if any misunderstandings!",
+      "parentUuid": "48704652_b7e5fed5",
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2773b61_5e2ca9fd",
         "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
         "patchSetId": 2
@@ -78,6 +120,30 @@
       "writtenOn": "2023-05-11T12:23:57Z",
       "side": 1,
       "message": "nit: Please update this to describe how do we convert WGSL to HLSL slot for UAV and render targets related info.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 42
+      },
+      "revId": "141be61b5cac18940c7044f3a17ab048fb89bf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744507e7_4464b33d",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-12T02:36:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2773b61_5e2ca9fd",
       "range": {
         "startLine": 29,
         "startChar": 0,
