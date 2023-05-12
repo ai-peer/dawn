@@ -16,6 +16,98 @@
       "message": "PTAL",
       "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a6abb1_c5be94c4",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-12T15:00:16Z",
+      "side": 1,
+      "message": "Maybe `return !IswComputePass()` or check Vertex stage instead? Looks like a pipeline can without fragment stage. See[1]\n\nBTW, is it really necessary to check it with Pipeline? We can pass a `bool isRenderPass` into ctor of BindGrpupTracker, or using a template param `IsRenderPass`.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/RenderPipeline.cpp;l\u003d558;drc\u003db18d59d36ac77ddf968b6e3452109e67471ee38f;bpv\u003d1;bpt\u003d1",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 60
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b8239d_36901b25",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-12T15:00:16Z",
+      "side": 1,
+      "message": "If there UAVs in multiple bind groups, the code will not work. Not sure if we have a test for it.",
+      "range": {
+        "startLine": 142,
+        "startChar": 47,
+        "endLine": 142,
+        "endChar": 60
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa5080e6_a64ec0f0",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-12T15:00:16Z",
+      "side": 1,
+      "message": "nit: ASSERT(IsRenderPass);",
+      "range": {
+        "startLine": 292,
+        "startChar": 5,
+        "endLine": 292,
+        "endChar": 8
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aab0e40_6fc987f0",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-12T15:00:16Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 223,
+        "startChar": 7,
+        "endLine": 223,
+        "endChar": 31
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
