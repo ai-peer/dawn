@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d006ea9e_d6b1f5cb",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-12T14:13:03Z",
+      "side": 0,
+      "message": "We shouldn\u0027t bind them both in such [case](https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/tests/end2end/DynamicBufferOffsetTests.cpp;drc\u003d34d52ffa4c3a4767b1f3ef38cb9c1f5a7a0bdfb7;l\u003d68).",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 25
+      },
+      "revId": "1257c6afa19768557de7f4bf90e37daacc4effe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
