@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "551021e1_8446b7c0",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-12T00:12:40Z",
+      "side": 1,
+      "message": "The bindgroup uses UsageValidationMode::Internal. So buffer needs to have internal storage instead of regular storage to pass the bind group binding validation. Unfortunately Buffer internal storage usage and regular storage usage are two different enums for now. This should be refactored like that of texture. Tracked at https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1485.",
+      "parentUuid": "3e086f5d_a339eef6",
+      "range": {
+        "startLine": 260,
+        "startChar": 55,
+        "endLine": 262,
+        "endChar": 89
+      },
+      "revId": "e84acb5e171659c211b4aeff3fe2b573bf2c8741",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ed5f5ba_72438fe7",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 20
