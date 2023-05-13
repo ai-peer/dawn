@@ -133,7 +133,7 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                     continue;
                 }
 #endif
-                if (IsWARP()) {
+                if (IsWARP() || IsD3D11()) {
                     maxBufferBindingSize =
                         std::min(maxBufferBindingSize, uint64_t(512) * 1024 * 1024);
                 }
@@ -705,6 +705,7 @@ TEST_P(MaxLimitTests, MaxBufferSizes) {
 }
 
 DAWN_INSTANTIATE_TEST(MaxLimitTests,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
