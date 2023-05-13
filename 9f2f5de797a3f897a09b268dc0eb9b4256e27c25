@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc10ce54_7d431417",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-13T00:34:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f28f36_aafa21a1",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e8cb4c6_9a61ef65",
@@ -107,6 +125,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e4688a_9bbd226a",
+        "filename": "generator/templates/api_cpp_chained_struct.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-13T00:34:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2e8cb4c6_9a61ef65",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9e3136f_e25578d1",
@@ -120,6 +156,24 @@
       "writtenOn": "2023-05-11T23:28:11Z",
       "side": 1,
       "message": "nit: I think we can have a TODO to remove it after renaming things in Chrome.\n\nI believe it should work if everything uses the struct as dawn::native::DawnInstanceDescriptor",
+      "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "459c95bb_f57450b3",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-13T00:34:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9e3136f_e25578d1",
       "revId": "9f2f5de797a3f897a09b268dc0eb9b4256e27c25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
