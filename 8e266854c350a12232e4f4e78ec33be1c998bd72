@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5abbadc6_1362e415",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "nit: I think it should be\n```((mDirtyBindGroups | ~mPipelineLayout-\u003eGetBindGroupLayoutsMask()) \u0026\n  mLastAppliedPipelineLayout-\u003eGetBindGroupLayoutsMask())```, and then [1] will be not necessary, right?",
+      "range": {
+        "startLine": 117,
+        "startChar": 50,
+        "endLine": 117,
+        "endChar": 81
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c598a68c_0e4f97bd",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "For a pipeline layout, all UAVs are assigned with connected d3d11 slots, and the order is by WGSL bindings(sorted by group \u0026 binding) but reversed. So I thinking it is not necessary to use an extra `std::map`, one `std::vector` should be sufficient. We can store UAVs into the vector directly.",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb40dfc_158cae8c",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "For a pipeline layout, we always assign slots from the last slot number. And we need to bind all UAVs together, so the `lastSlot` must be `(UAVSlotCount - 1)`, and the `firstSlot` must be `(UAVSlotCount - mSortedUAVs.size())`, right?\n\nIf we switch to use one `std::vector`, we don\u0027t need to record slot numbers for UAVs.",
+      "range": {
+        "startLine": 136,
+        "startChar": 17,
+        "endLine": 136,
+        "endChar": 25
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1b9a9e_479181b7",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 5
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d701f49_940fcb89",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "We need to ubind all UAVs at once, right? What about the mLastAppliedPipelineLayout has two bind groups which have UAVs. but one bind group is replaced for the new draw. In this case, we will inherit the unchanged group, only rebind UAVs in the changed group. It will not work, right? Could you please add a test for this case?",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 46
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be7283c_273d93dd",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "nit: `const bool`",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 8
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b39d7d_2927d87e",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "nit: `/*isRenderPass\u003d*/false`.",
+      "range": {
+        "startLine": 325,
+        "startChar": 54,
+        "endLine": 325,
+        "endChar": 59
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56ef005e_5d8dcf08",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-13T12:52:46Z",
+      "side": 1,
+      "message": "nit: same here",
+      "range": {
+        "startLine": 483,
+        "startChar": 54,
+        "endLine": 483,
+        "endChar": 58
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
