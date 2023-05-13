@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2da5c9_bc2ffe24",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-13T07:58:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b639376_72703746",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 47
+      },
+      "revId": "1257c6afa19768557de7f4bf90e37daacc4effe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f4bd3e9_4a372f0f",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-12T17:18:48Z",
       "side": 1,
       "message": "eventually, if this is a compat restriction, it\u0027ll be validation that happens in the frontend.\n\nCan you add a TODO about that referencing crbug.com/dawn/1814 ?",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "1257c6afa19768557de7f4bf90e37daacc4effe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0734181d_4cf4c98d",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-13T07:58:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f4bd3e9_4a372f0f",
       "range": {
         "startLine": 188,
         "startChar": 4,
