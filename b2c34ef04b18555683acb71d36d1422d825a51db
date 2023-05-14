@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c25ed6_25fb1428",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87a6abb1_c5be94c4",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 60
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36b8239d_36901b25",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-05-12T15:00:16Z",
       "side": 1,
       "message": "If there UAVs in multiple bind groups, the code will not work. Not sure if we have a test for it.",
+      "range": {
+        "startLine": 142,
+        "startChar": 47,
+        "endLine": 142,
+        "endChar": 60
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0158576e_9bbc7ebf",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "Thanks for catching it. I was not aware of that it\u0027s within one single Bindgroup. Fixed it by caching the assignments in the tracker.",
+      "parentUuid": "36b8239d_36901b25",
       "range": {
         "startLine": 142,
         "startChar": 47,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "077f7cc7_fbe594d3",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa5080e6_a64ec0f0",
+      "range": {
+        "startLine": 292,
+        "startChar": 5,
+        "endLine": 292,
+        "endChar": 8
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aab0e40_6fc987f0",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-05-12T15:00:16Z",
       "side": 1,
       "message": "Why?",
+      "range": {
+        "startLine": 223,
+        "startChar": 7,
+        "endLine": 223,
+        "endChar": 31
+      },
+      "revId": "b2c34ef04b18555683acb71d36d1422d825a51db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f1f968_1ce869ea",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "Ignored it in the new PS.",
+      "parentUuid": "6aab0e40_6fc987f0",
       "range": {
         "startLine": 223,
         "startChar": 7,

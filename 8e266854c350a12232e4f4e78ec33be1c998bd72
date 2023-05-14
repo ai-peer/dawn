@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8558e1cb_f350be4e",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "You are right. More simply we only need to un-apply `unusedGroups`, as we regard the `BindGroupTracker` as [CanInheritBindGroups \u003d\u003d false](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/BindGroupTrackerD3D11.h;drc\u003d283b3a042fc3e85a57b0b1a844e3f1b10d6f61c4;l\u003d27), right?",
+      "parentUuid": "5abbadc6_1362e415",
+      "range": {
+        "startLine": 117,
+        "startChar": 50,
+        "endLine": 117,
+        "endChar": 81
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c598a68c_0e4f97bd",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 4
@@ -49,6 +73,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f810c8a2_914be4b8",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "I was not sure that the order is ensured. Maybe we should clearly state that in the header for [1]. Otherwise it would be liable to break your assumption when someone make some changes inadvertently.\nBeside that, we also assume that [2] always only contains all bind groups of the current pipeline.\nDo you think a bit more robustness here is meaningful?",
+      "parentUuid": "c598a68c_0e4f97bd",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a1c2b03_cd3e3876",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 125,
+        "startChar": 46,
+        "endLine": 125,
+        "endChar": 86
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcb40dfc_158cae8c",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 4
@@ -65,6 +136,53 @@
         "startChar": 17,
         "endLine": 136,
         "endChar": 25
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b3abb9_265cd633",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "You are right. Just for a bit of robustness.",
+      "parentUuid": "dcb40dfc_158cae8c",
+      "range": {
+        "startLine": 136,
+        "startChar": 17,
+        "endLine": 136,
+        "endChar": 25
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a7982e_9201a328",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 157,
+        "startChar": 54,
+        "endLine": 157,
+        "endChar": 73
       },
       "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -106,6 +224,30 @@
       "writtenOn": "2023-05-13T12:52:46Z",
       "side": 1,
       "message": "We need to ubind all UAVs at once, right? What about the mLastAppliedPipelineLayout has two bind groups which have UAVs. but one bind group is replaced for the new draw. In this case, we will inherit the unchanged group, only rebind UAVs in the changed group. It will not work, right? Could you please add a test for this case?",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 46
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf63889a_a53b20b4",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T10:24:32Z",
+      "side": 1,
+      "message": "The line \"Note  RTVs, DSV, and UAVs cannot be set independently; they all need to be set at the same time.\" is annoyingly vague. Anyway it largely means that the slot bindings in previous calls to \"OMSetRenderTargetsAndUnorderedAccessViews\" don\u0027t take effect. Hence we are required to bind them all at the same time. Such being the case, my understanding is that we don\u0027t need to care the UAV unbindings of `mLastAppliedPipelineLayout` as they don\u0027t count. I could insert some code lines to internally check that, but not sure if I can develop it to an e2d test.",
+      "parentUuid": "1d701f49_940fcb89",
       "range": {
         "startLine": 412,
         "startChar": 0,
