@@ -20,6 +20,7 @@
 #include "dawn/common/Constants.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/UtilsD3D.h"
 #include "dawn/native/d3d11/BackendD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
@@ -78,28 +79,65 @@ const DeviceInfo& PhysicalDevice::GetDeviceInfo() const {
     return mDeviceInfo;
 }
 
-ResultOrError<ComPtr<ID3D11Device>> PhysicalDevice::CreateD3D11Device() {
+ResultOrError<ComPtr<ID3D11Device>> PhysicalDevice::CreateD3D11Device(bool useFeatureLevel10) {
     ComPtr<ID3D11Device> device = std::move(mD3d11Device);
-    if (!device) {
-        const PlatformFunctions* functions = static_cast<Backend*>(GetBackend())->GetFunctions();
-        const D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0};
 
-        UINT flags = 0;
-        if (GetInstance()->IsBackendValidationEnabled()) {
-            flags |= D3D11_CREATE_DEVICE_DEBUG;
-        }
-
-        DAWN_TRY(CheckHRESULT(functions->d3d11CreateDevice(
-                                  GetHardwareAdapter(), D3D_DRIVER_TYPE_UNKNOWN,
-                                  /*Software=*/nullptr, flags, featureLevels,
-                                  std::size(featureLevels), D3D11_SDK_VERSION, &device,
-                                  /*pFeatureLevel=*/nullptr, /*[out] ppImmediateContext=*/nullptr),
-                              "D3D11CreateDevice failed"));
-
-        if (GetInstance()->IsBackendValidationEnabled()) {
-            DAWN_TRY(InitializeDebugLayerFilters(device));
+    if (device) {
+        if (device->GetFeatureLevel() != D3D_FEATURE_LEVEL_10_0 && !useFeatureLevel10) {
+            return device;
         }
     }
+
+    const PlatformFunctions* functions = static_cast<Backend*>(GetBackend())->GetFunctions();
+
+    UINT flags = 0;
+    if (GetInstance()->IsBackendValidationEnabled()) {
+        flags |= D3D11_CREATE_DEVICE_DEBUG;
+    }
+
+    if (!useFeatureLevel10) {
+        // clang-format off
+        const D3D_FEATURE_LEVEL featureLevels[] = {
+            D3D_FEATURE_LEVEL_11_1,
+            D3D_FEATURE_LEVEL_11_0,
+            D3D_FEATURE_LEVEL_10_1,
+            D3D_FEATURE_LEVEL_10_0,
+        };
+        // clang-format on
+
+        D3D_FEATURE_LEVEL featureLevel;
+        DAWN_TRY(CheckHRESULT(
+            functions->d3d11CreateDevice(GetHardwareAdapter(), D3D_DRIVER_TYPE_UNKNOWN,
+                                         /*Software=*/nullptr, flags, featureLevels,
+                                         std::size(featureLevels), D3D11_SDK_VERSION, &device,
+                                         &featureLevel, /*[out] ppImmediateContext=*/nullptr),
+            "D3D11CreateDevice failed"));
+
+        // TODO(dawn:1820): support feature levels 10.1 and 10.0.
+        if (featureLevel < D3D_FEATURE_LEVEL_11_0) {
+            return DAWN_FORMAT_INTERNAL_ERROR("D3D11 device feature level too low: %s",
+                                              d3d::D3DFeatureLevelToString(featureLevel));
+        }
+    } else {
+        // clang-format off
+        const D3D_FEATURE_LEVEL featureLevels[] = {
+            D3D_FEATURE_LEVEL_10_0,
+        };
+        // clang-format on
+
+        D3D_FEATURE_LEVEL featureLevel;
+        DAWN_TRY(CheckHRESULT(
+            functions->d3d11CreateDevice(GetHardwareAdapter(), D3D_DRIVER_TYPE_UNKNOWN,
+                                         /*Software=*/nullptr, flags, featureLevels,
+                                         std::size(featureLevels), D3D11_SDK_VERSION, &device,
+                                         &featureLevel, /*[out] ppImmediateContext=*/nullptr),
+            "D3D11CreateDevice failed"));
+    }
+
+    if (GetInstance()->IsBackendValidationEnabled()) {
+        DAWN_TRY(InitializeDebugLayerFilters(device));
+    }
+
     return device;
 }
 
@@ -108,7 +146,7 @@ MaybeError PhysicalDevice::InitializeImpl() {
     // D3D11 cannot check for feature support without a device.
     // Create the device to populate the adapter properties then reuse it when needed for actual
     // rendering.
-    DAWN_TRY_ASSIGN(mD3d11Device, CreateD3D11Device());
+    DAWN_TRY_ASSIGN(mD3d11Device, CreateD3D11Device(/*bool useFeatureLevel10=*/false));
 
     mFeatureLevel = mD3d11Device->GetFeatureLevel();
     DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(mD3d11Device));

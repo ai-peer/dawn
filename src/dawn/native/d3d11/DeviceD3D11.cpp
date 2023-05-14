@@ -101,7 +101,9 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
-    DAWN_TRY_ASSIGN(mD3d11Device, ToBackend(GetPhysicalDevice())->CreateD3D11Device());
+    bool useFeatureLevel10 = IsToggleEnabled(Toggle::D3D11UseFeatureLevel10);
+    DAWN_TRY_ASSIGN(mD3d11Device,
+                    ToBackend(GetPhysicalDevice())->CreateD3D11Device(useFeatureLevel10));
     ASSERT(mD3d11Device != nullptr);
 
     DAWN_TRY(DeviceBase::Initialize(Queue::Create(this, &descriptor->defaultQueue)));

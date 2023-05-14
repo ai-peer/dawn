@@ -34,6 +34,8 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format);
 
 DXGI_FORMAT DXGIVertexFormat(wgpu::VertexFormat format);
 
+const char* D3DFeatureLevelToString(D3D_FEATURE_LEVEL featureLevel);
+
 }  // namespace dawn::native::d3d
 
 #endif  // SRC_DAWN_NATIVE_D3D_UTILSD3D_H_

@@ -35,7 +35,7 @@ class PhysicalDevice : public d3d::PhysicalDevice {
     bool SupportsFeatureLevel(FeatureLevel featureLevel) const override;
 
     const DeviceInfo& GetDeviceInfo() const;
-    ResultOrError<ComPtr<ID3D11Device>> CreateD3D11Device();
+    ResultOrError<ComPtr<ID3D11Device>> CreateD3D11Device(bool useFeatureLevel10);
 
   private:
     using Base = d3d::PhysicalDevice;
