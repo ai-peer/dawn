@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7f29071_63767e23",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-14T11:23:15Z",
+      "side": 1,
+      "message": "I feel we could use `CanInheritBindGroups \u003d true`, if some groups are not changed cross pipelines.\nonly un-applying `unusedGroups` is not sufficient. For example:\nlastPipelineLayout has groups 0, 1, 2, new pipelineLayout has 0. In this case, we just unbind group 1, 2. If last pipeline group 0 bind three slots of UAV, but new group 0 only bind one UAV slot. In this case, we will just replace one UAV slot. the other two are still bound.",
+      "parentUuid": "8558e1cb_f350be4e",
+      "range": {
+        "startLine": 117,
+        "startChar": 50,
+        "endLine": 117,
+        "endChar": 81
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c598a68c_0e4f97bd",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 4
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I was not sure that the order is ensured. Maybe we should clearly state that in the header for [1]. Otherwise it would be liable to break your assumption when someone make some changes inadvertently.\nBeside that, we also assume that [2] always only contains all bind groups of the current pipeline.\nDo you think a bit more robustness here is meaningful?",
       "parentUuid": "c598a68c_0e4f97bd",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e2e1c0_bc99f460",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-14T11:23:15Z",
+      "side": 1,
+      "message": "The order is ensued by code at [1]. I don\u0027t think it will be changed. We can add some ASSERT() in ApplyGroup() or elsewhere to ensure the assumption will never be changed.\n\nSorry, I don\u0027t understand your concern about [2]? Could you please explain it?\n\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/PipelineLayoutD3D11.cpp;l\u003d38?q\u003dPipelineLayoutD3D11\u0026ss\u003dchromium",
+      "parentUuid": "f810c8a2_914be4b8",
       "range": {
         "startLine": 122,
         "startChar": 4,
@@ -155,6 +203,30 @@
       "side": 1,
       "message": "You are right. Just for a bit of robustness.",
       "parentUuid": "dcb40dfc_158cae8c",
+      "range": {
+        "startLine": 136,
+        "startChar": 17,
+        "endLine": 136,
+        "endChar": 25
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a16472_bd0547ec",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-14T11:23:15Z",
+      "side": 1,
+      "message": "We can use `ASSERT()s` for this purpose.",
+      "parentUuid": "d9b3abb9_265cd633",
       "range": {
         "startLine": 136,
         "startChar": 17,
@@ -248,6 +320,30 @@
       "side": 1,
       "message": "The line \"Note  RTVs, DSV, and UAVs cannot be set independently; they all need to be set at the same time.\" is annoyingly vague. Anyway it largely means that the slot bindings in previous calls to \"OMSetRenderTargetsAndUnorderedAccessViews\" don\u0027t take effect. Hence we are required to bind them all at the same time. Such being the case, my understanding is that we don\u0027t need to care the UAV unbindings of `mLastAppliedPipelineLayout` as they don\u0027t count. I could insert some code lines to internally check that, but not sure if I can develop it to an e2d test.",
       "parentUuid": "1d701f49_940fcb89",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 46
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65eee54_26023a73",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-14T11:23:15Z",
+      "side": 1,
+      "message": "I think you can use `OMGetRenderTargetsAndUnorderedAccessViews()` in a demo program to verify if `OMSetRenderTargetsAndUnorderedAccessViews()` will unbind all slots automatically.\nIf it does, probable we just need to Call `OMSetRenderTargetsAndUnorderedAccessViews(0, nullptr, nullptr, 0, 0, nullptr, nullptr)` to unbound all UAVs at once before calling ApplyGroup()\n\nBTW, we need to unbind UAVs from last pipeline first, otherwise bind the same resource to device context as shader input resources(SRV, etc) will fail. D3D11 doesn\u0027t allow a resource being bound to UAV slot and other slot at same time. That why `UnApplyGroup()` is added. see comment at line 110",
+      "parentUuid": "bf63889a_a53b20b4",
       "range": {
         "startLine": 412,
         "startChar": 0,
