@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6cbe54b_33dc0d0c",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-14T11:58:10Z",
+      "side": 1,
+      "message": "If the tracker supported `CanInheritBindGroups`, the unchanged bind group would not re-apply its UAV bindings. So we would not set all required UAV slots at the same time.",
+      "parentUuid": "b8e2e1c0_bc99f460",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a1c2b03_cd3e3876",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 4
