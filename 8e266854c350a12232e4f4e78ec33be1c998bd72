@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6823f0cd_74a12986",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-14T13:04:54Z",
+      "side": 1,
+      "message": "Yes. If we use `CanInheritBindGroups\u003dtrue`, can we mark groups which contain UAVs dirty, so those groups will be re-apply. And there is no UAVs, we can avoid rebinding unchanged groups.",
+      "parentUuid": "e6cbe54b_33dc0d0c",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a1c2b03_cd3e3876",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 4
