@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "518c5975_3ebd66da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-15T15:56:19Z",
+      "side": 1,
+      "message": "Reviving this long-dormant PR. Rebased, ensured it\u0027s passing all the tests, and did some sanity checks to make sure the code was still reasonable. I\u0027d like to land this so that I can build on top of it to get Chrome aligned with the spec regarding lost devices at creation time.",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
