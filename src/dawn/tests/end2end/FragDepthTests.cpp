@@ -25,7 +25,7 @@ TEST_P(FragDepthTests, FragDepthIsClampedToViewport) {
     // TODO(dawn:1125): Add the shader transform to clamp the frag depth to the GL backend.
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vs() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.5, 1.0);
         }
@@ -36,7 +36,7 @@ TEST_P(FragDepthTests, FragDepthIsClampedToViewport) {
     )");
 
     // Create the pipeline that uses frag_depth to output the depth.
-    utils::ComboRenderPipelineDescriptor pDesc;
+    dawn::utils::ComboRenderPipelineDescriptor pDesc;
     pDesc.vertex.module = module;
     pDesc.vertex.entryPoint = "vs";
     pDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -56,7 +56,7 @@ TEST_P(FragDepthTests, FragDepthIsClampedToViewport) {
     depthDesc.format = kDepthFormat;
     wgpu::Texture depthTexture = device.CreateTexture(&depthDesc);
 
-    utils::ComboRenderPassDescriptor renderPassDesc({}, depthTexture.CreateView());
+    dawn::utils::ComboRenderPassDescriptor renderPassDesc({}, depthTexture.CreateView());
     renderPassDesc.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
     renderPassDesc.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -83,7 +83,7 @@ TEST_P(FragDepthTests, ChangingPipelineLayoutDoesntInvalidateViewport) {
     // TODO(dawn:1805): Load ByteAddressBuffer in Pixel Shader doesn't work with NVIDIA on D3D11
     DAWN_SUPPRESS_TEST_IF(IsD3D11() && IsNvidia());
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vs() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.5, 1.0);
         }
@@ -100,7 +100,7 @@ TEST_P(FragDepthTests, ChangingPipelineLayoutDoesntInvalidateViewport) {
     )");
 
     // Create the pipeline and bindgroup for the pipeline layout with a uniform buffer.
-    utils::ComboRenderPipelineDescriptor upDesc;
+    dawn::utils::ComboRenderPipelineDescriptor upDesc;
     upDesc.vertex.module = module;
     upDesc.vertex.entryPoint = "vs";
     upDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -114,12 +114,12 @@ TEST_P(FragDepthTests, ChangingPipelineLayoutDoesntInvalidateViewport) {
     wgpu::RenderPipeline uniformPipeline = device.CreateRenderPipeline(&upDesc);
 
     wgpu::Buffer uniformBuffer =
-        utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Uniform, {0.0});
-    wgpu::BindGroup uniformBG =
-        utils::MakeBindGroup(device, uniformPipeline.GetBindGroupLayout(0), {{0, uniformBuffer}});
+        dawn::utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Uniform, {0.0});
+    wgpu::BindGroup uniformBG = dawn::utils::MakeBindGroup(
+        device, uniformPipeline.GetBindGroupLayout(0), {{0, uniformBuffer}});
 
     // Create the pipeline and bindgroup for the pipeline layout with a uniform buffer.
-    utils::ComboRenderPipelineDescriptor spDesc;
+    dawn::utils::ComboRenderPipelineDescriptor spDesc;
     spDesc.vertex.module = module;
     spDesc.vertex.entryPoint = "vs";
     spDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -133,9 +133,9 @@ TEST_P(FragDepthTests, ChangingPipelineLayoutDoesntInvalidateViewport) {
     wgpu::RenderPipeline storagePipeline = device.CreateRenderPipeline(&spDesc);
 
     wgpu::Buffer storageBuffer =
-        utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Storage, {1.0});
-    wgpu::BindGroup storageBG =
-        utils::MakeBindGroup(device, storagePipeline.GetBindGroupLayout(0), {{0, storageBuffer}});
+        dawn::utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Storage, {1.0});
+    wgpu::BindGroup storageBG = dawn::utils::MakeBindGroup(
+        device, storagePipeline.GetBindGroupLayout(0), {{0, storageBuffer}});
 
     // Create a depth-only render pass.
     wgpu::TextureDescriptor depthDesc;
@@ -144,7 +144,7 @@ TEST_P(FragDepthTests, ChangingPipelineLayoutDoesntInvalidateViewport) {
     depthDesc.format = kDepthFormat;
     wgpu::Texture depthTexture = device.CreateTexture(&depthDesc);
 
-    utils::ComboRenderPassDescriptor renderPassDesc({}, depthTexture.CreateView());
+    dawn::utils::ComboRenderPassDescriptor renderPassDesc({}, depthTexture.CreateView());
     renderPassDesc.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
     renderPassDesc.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -176,7 +176,7 @@ TEST_P(FragDepthTests, RasterizationClipBeforeFS) {
     // TODO(dawn:1616): Metal too needs to clamping of @builtin(frag_depth) to the viewport.
     DAWN_SUPPRESS_TEST_IF(IsMetal());
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vs() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 5.0, 1.0);
         }
@@ -187,7 +187,7 @@ TEST_P(FragDepthTests, RasterizationClipBeforeFS) {
     )");
 
     // Create the pipeline and bindgroup for the pipeline layout with a uniform buffer.
-    utils::ComboRenderPipelineDescriptor pDesc;
+    dawn::utils::ComboRenderPipelineDescriptor pDesc;
     pDesc.vertex.module = module;
     pDesc.vertex.entryPoint = "vs";
     pDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -207,7 +207,7 @@ TEST_P(FragDepthTests, RasterizationClipBeforeFS) {
     depthDesc.format = kDepthFormat;
     wgpu::Texture depthTexture = device.CreateTexture(&depthDesc);
 
-    utils::ComboRenderPassDescriptor renderPassDesc({}, depthTexture.CreateView());
+    dawn::utils::ComboRenderPassDescriptor renderPassDesc({}, depthTexture.CreateView());
     renderPassDesc.cDepthStencilAttachmentInfo.depthClearValue = 0.0f;
     renderPassDesc.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
     renderPassDesc.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;

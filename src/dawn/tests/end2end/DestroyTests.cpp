@@ -28,20 +28,20 @@ class DestroyTest : public DawnTest {
         DawnTest::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
               @vertex
               fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                   return pos;
               })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
               @fragment fn main() -> @location(0) vec4f {
                   return vec4f(0.0, 1.0, 0.0, 1.0);
               })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -53,7 +53,7 @@ class DestroyTest : public DawnTest {
 
         pipeline = device.CreateRenderPipeline(&descriptor);
 
-        vertexBuffer = utils::CreateBufferFromData<float>(
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex,
             {// The bottom left triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f});
@@ -64,7 +64,7 @@ class DestroyTest : public DawnTest {
         queue.Submit(1, &commands);
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline pipeline;
     wgpu::Buffer vertexBuffer;
 
@@ -84,7 +84,7 @@ class DestroyTest : public DawnTest {
 
 // Destroy before submit will result in error, and nothing drawn
 TEST_P(DestroyTest, BufferDestroyBeforeSubmit) {
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
     vertexBuffer.Destroy();
@@ -95,7 +95,7 @@ TEST_P(DestroyTest, BufferDestroyBeforeSubmit) {
 
 // Destroy after submit will draw successfully
 TEST_P(DestroyTest, BufferDestroyAfterSubmit) {
-    utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
 
     wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
     queue.Submit(1, &commands);
@@ -107,7 +107,7 @@ TEST_P(DestroyTest, BufferDestroyAfterSubmit) {
 // First submit succeeds, draws triangle, second submit fails
 // after destroy is called on the buffer, pixel does not change
 TEST_P(DestroyTest, BufferSubmitDestroySubmit) {
-    utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
 
     wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
     queue.Submit(1, &commands);
@@ -131,7 +131,7 @@ TEST_P(DestroyTest, TextureDestroyBeforeSubmit) {
 
 // Destroy after submit will draw successfully
 TEST_P(DestroyTest, TextureDestroyAfterSubmit) {
-    utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
 
     wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
     queue.Submit(1, &commands);
@@ -143,7 +143,7 @@ TEST_P(DestroyTest, TextureDestroyAfterSubmit) {
 // First submit succeeds, draws triangle, second submit fails
 // after destroy is called on the texture
 TEST_P(DestroyTest, TextureSubmitDestroySubmit) {
-    utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
 
     wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
     queue.Submit(1, &commands);
@@ -191,9 +191,9 @@ TEST_P(DestroyTest, DestroyDeviceBeforeSubmit) {
 TEST_P(DestroyTest, DestroyDeviceLingeringBGL) {
     // Create and hold the layout reference so that its destructor gets called after the device has
     // been destroyed via device.Destroy().
-    wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout layout = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::SamplerBindingType::Filtering}});
-    utils::MakeBindGroup(device, layout, {{0, device.CreateSampler()}});
+    dawn::utils::MakeBindGroup(device, layout, {{0, device.CreateSampler()}});
 
     DestroyDevice();
 }

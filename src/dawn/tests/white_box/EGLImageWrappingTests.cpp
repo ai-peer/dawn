@@ -59,7 +59,7 @@ class EGLFunctions {
     PFNEGLGETCURRENTDISPLAYPROC GetCurrentDisplay;
 
   private:
-    DynamicLib mlibEGL;
+    dawn::DynamicLib mlibEGL;
 };
 
 class ScopedEGLImage {
@@ -321,7 +321,7 @@ class EGLImageUsageTests : public EGLImageTestBase {
 
         wgpu::TextureView eglImageView = eglImageTexture.CreateView();
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({eglImageView}, {});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({eglImageView}, {});
         renderPassDescriptor.cColorAttachments[0].clearValue = {1 / 255.0f, 2 / 255.0f, 3 / 255.0f,
                                                                 4 / 255.0f};
 

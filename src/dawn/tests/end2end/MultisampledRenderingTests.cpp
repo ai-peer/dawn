@@ -134,10 +134,10 @@ class MultisampledRenderingTest : public DawnTest {
                                  const wgpu::RenderPipeline& pipeline,
                                  const float* uniformData,
                                  uint32_t uniformDataSize) {
-        wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer uniformBuffer = dawn::utils::CreateBufferFromData(
             device, uniformData, uniformDataSize, wgpu::BufferUsage::Uniform);
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, uniformBuffer, 0, uniformDataSize}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, uniformBuffer, 0, uniformDataSize}});
 
         wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
         renderPassEncoder.SetPipeline(pipeline);
@@ -156,7 +156,7 @@ class MultisampledRenderingTest : public DawnTest {
                                 sizeof(float) * 4);
     }
 
-    utils::ComboRenderPassDescriptor CreateComboRenderPassDescriptorForTest(
+    dawn::utils::ComboRenderPassDescriptor CreateComboRenderPassDescriptorForTest(
         std::initializer_list<wgpu::TextureView> colorViews,
         std::initializer_list<wgpu::TextureView> resolveTargetViews,
         wgpu::LoadOp colorLoadOp,
@@ -167,7 +167,7 @@ class MultisampledRenderingTest : public DawnTest {
         constexpr wgpu::Color kClearColor = {0.0f, 0.0f, 0.0f, 0.0f};
         constexpr float kClearDepth = 1.0f;
 
-        utils::ComboRenderPassDescriptor renderPass(colorViews);
+        dawn::utils::ComboRenderPassDescriptor renderPass(colorViews);
         uint32_t i = 0;
         for (const wgpu::TextureView& resolveTargetView : resolveTargetViews) {
             renderPass.cColorAttachments[i].loadOp = colorLoadOp;
@@ -196,10 +196,10 @@ class MultisampledRenderingTest : public DawnTest {
         constexpr uint32_t kMiddleX = (kWidth - 1) / 2;
         constexpr uint32_t kMiddleY = (kHeight - 1) / 2;
 
-        utils::RGBA8 expectedColor = ExpectedMSAAColor(inputColor, msaaCoverage);
+        dawn::utils::RGBA8 expectedColor = ExpectedMSAAColor(inputColor, msaaCoverage);
         EXPECT_TEXTURE_EQ(&expectedColor, resolveTexture, {kMiddleX, kMiddleY, arrayLayer}, {1, 1},
                           mipmapLevel, wgpu::TextureAspect::All, /* bytesPerRow */ 0,
-                          /* tolerance */ utils::RGBA8(1, 1, 1, 1));
+                          /* tolerance */ dawn::utils::RGBA8(1, 1, 1, 1));
     }
 
     constexpr static uint32_t kWidth = 3;
@@ -227,7 +227,7 @@ class MultisampledRenderingTest : public DawnTest {
                                                      uint32_t sampleMask = 0xFFFFFFFF,
                                                      bool alphaToCoverageEnabled = false,
                                                      bool flipTriangle = false) {
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         // Draw a bottom-right triangle. In standard 4xMSAA pattern, for the pixels on diagonal,
         // only two of the samples will be touched.
@@ -255,12 +255,12 @@ class MultisampledRenderingTest : public DawnTest {
             })";
 
         if (flipTriangle) {
-            pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, vsFlipped);
+            pipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, vsFlipped);
         } else {
-            pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, vs);
+            pipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, vs);
         }
 
-        pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, fs);
+        pipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, fs);
 
         if (hasDepthStencilAttachment) {
             wgpu::DepthStencilState* depthStencil =
@@ -282,8 +282,8 @@ class MultisampledRenderingTest : public DawnTest {
         return pipeline;
     }
 
-    utils::RGBA8 ExpectedMSAAColor(const wgpu::Color color, const double msaaCoverage) {
-        utils::RGBA8 result;
+    dawn::utils::RGBA8 ExpectedMSAAColor(const wgpu::Color color, const double msaaCoverage) {
+        dawn::utils::RGBA8 result;
         result.r = static_cast<uint8_t>(std::min(255.0, 256 * color.r * msaaCoverage));
         result.g = static_cast<uint8_t>(std::min(255.0, 256 * color.g * msaaCoverage));
         result.b = static_cast<uint8_t>(std::min(255.0, 256 * color.b * msaaCoverage));
@@ -305,9 +305,10 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTexture) {
 
         // Draw a green triangle.
         {
-            utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
-                {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
-                kTestDepth);
+            dawn::utils::ComboRenderPassDescriptor renderPass =
+                CreateComboRenderPassDescriptorForTest({mMultisampledColorView}, {mResolveView},
+                                                       wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+                                                       kTestDepth);
             renderPass.cColorAttachments[0].storeOp = storeOp;
             std::array<float, 4> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a};
             constexpr uint32_t kSize = sizeof(kUniformData);
@@ -333,7 +334,7 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTest) {
 
     // In first render pass we draw a green triangle with depth value == 0.2f.
     {
-        utils::ComboRenderPassDescriptor renderPass =
+        dawn::utils::ComboRenderPassDescriptor renderPass =
             CreateComboRenderPassDescriptorForTest({mMultisampledColorView}, {mResolveView},
                                                    wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, true);
         std::array<float, 8> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a,  // Color
@@ -346,7 +347,7 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTest) {
     // This red triangle should not be displayed because it is behind the green one that is drawn in
     // the last render pass.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Load, wgpu::LoadOp::Load,
             kTestDepth);
 
@@ -378,7 +379,7 @@ TEST_P(MultisampledRenderingTest, ResolveInAnotherRenderPass) {
 
     // In first render pass we draw a green triangle and do not set the resolve target.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {nullptr}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
             kTestDepth);
 
@@ -387,7 +388,7 @@ TEST_P(MultisampledRenderingTest, ResolveInAnotherRenderPass) {
 
     // In second render pass we ony do MSAA resolve with no draw call.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Load, wgpu::LoadOp::Load,
             kTestDepth);
 
@@ -424,7 +425,7 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargets) {
     // Draw a red triangle to the first color attachment, and a blue triangle to the second color
     // attachment, and do MSAA resolve on two render targets in one render pass.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView, multisampledColorView2}, {mResolveView, resolveView2},
             wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, kTestDepth);
 
@@ -460,7 +461,7 @@ TEST_P(MultisampledRenderingTest, ResolveOneMultisampledTextureTwice) {
 
     // In first render pass we draw a green triangle and specify mResolveView as the resolve target.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
             kTestDepth);
 
@@ -470,7 +471,7 @@ TEST_P(MultisampledRenderingTest, ResolveOneMultisampledTextureTwice) {
     // In second render pass we do MSAA resolve into resolveTexture2.
     {
         wgpu::TextureView resolveView2 = resolveTexture2.CreateView();
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {resolveView2}, wgpu::LoadOp::Load, wgpu::LoadOp::Load,
             kTestDepth);
 
@@ -510,7 +511,7 @@ TEST_P(MultisampledRenderingTest, ResolveIntoOneMipmapLevelOf2DTexture) {
 
     // Draw a green triangle and do MSAA resolve.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {resolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
             kTestDepth);
         wgpu::RenderPipeline pipeline = CreateRenderPipelineWithOneOutputForTest(kTestDepth);
@@ -571,7 +572,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
     // Draw a red triangle to the first color attachment, and a green triangle to the second color
     // attachment, and do MSAA resolve on two render targets in one render pass.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView, multisampledColorView2}, {resolveView1, resolveView2},
             wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, kTestDepth);
 
@@ -604,7 +605,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMask) {
 
     // Draw a green triangle.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
             kTestDepth);
 
@@ -633,7 +634,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) 
 
     // Draw a green triangle.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
             kTestDepth);
 
@@ -672,7 +673,7 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMas
     // Draw a red triangle to the first color attachment, and a blue triangle to the second color
     // attachment, and do MSAA resolve on two render targets in one render pass.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView, multisampledColorView2}, {mResolveView, resolveView2},
             wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, kTestDepth);
 
@@ -720,7 +721,7 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMas
     // In first render pass we draw a green triangle with depth value == 0.2f.
     // We will only write to the second sample.
     {
-        utils::ComboRenderPassDescriptor renderPass =
+        dawn::utils::ComboRenderPassDescriptor renderPass =
             CreateComboRenderPassDescriptorForTest({mMultisampledColorView}, {mResolveView},
                                                    wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, true);
         std::array<float, 8> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a,  // Color
@@ -734,7 +735,7 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMas
     // We will only write to the first sample, since the second one is red with a smaller depth
     // value.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Load, wgpu::LoadOp::Load,
             kTestDepth);
 
@@ -797,7 +798,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOut
 
     // Draw a green triangle.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
             kTestDepth);
 
@@ -807,7 +808,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOut
     wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
     queue.Submit(1, &commandBuffer);
 
-    utils::RGBA8 expectedColor = ExpectedMSAAColor(kGreen, kMSAACoverage);
+    dawn::utils::RGBA8 expectedColor = ExpectedMSAAColor(kGreen, kMSAACoverage);
     EXPECT_TEXTURE_EQ(&expectedColor, mResolveTexture, {1, 0}, {1, 1});
 }
 
@@ -859,7 +860,7 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithShaderOut
     // Draw a red triangle to the first color attachment, and a blue triangle to the second color
     // attachment, and do MSAA resolve on two render targets in one render pass.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView, multisampledColorView2}, {mResolveView, resolveView2},
             wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, kTestDepth);
 
@@ -903,9 +904,10 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverage) {
 
         // Draw a green triangle.
         {
-            utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
-                {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
-                kTestDepth);
+            dawn::utils::ComboRenderPassDescriptor renderPass =
+                CreateComboRenderPassDescriptorForTest({mMultisampledColorView}, {mResolveView},
+                                                       wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+                                                       kTestDepth);
 
             EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kGreen);
         }
@@ -922,7 +924,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverage) {
             msaaCoverage = 1.0f;
         }
 
-        utils::RGBA8 expectedColor = ExpectedMSAAColor(kGreen, msaaCoverage);
+        dawn::utils::RGBA8 expectedColor = ExpectedMSAAColor(kGreen, msaaCoverage);
         EXPECT_TEXTURE_EQ(&expectedColor, mResolveTexture, {1, 0}, {1, 1});
     }
 }
@@ -958,9 +960,10 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithAlphaToCo
         // Draw a red triangle to the first color attachment, and a blue triangle to the second
         // color attachment, and do MSAA resolve on two render targets in one render pass.
         {
-            utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
-                {mMultisampledColorView, multisampledColorView2}, {mResolveView, resolveView2},
-                wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, kTestDepth);
+            dawn::utils::ComboRenderPassDescriptor renderPass =
+                CreateComboRenderPassDescriptorForTest(
+                    {mMultisampledColorView, multisampledColorView2}, {mResolveView, resolveView2},
+                    wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, kTestDepth);
 
             std::array<float, 8> kUniformData = {
                 static_cast<float>(kRed.r),   static_cast<float>(kRed.g),
@@ -977,14 +980,14 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithAlphaToCo
 
         // Alpha to coverage affects both the color outputs, but the mask is computed
         // using only the first one.
-        utils::RGBA8 expectedRed = ExpectedMSAAColor(kRed, kMSAACoverage);
-        utils::RGBA8 expectedGreen = ExpectedMSAAColor(kGreen, kMSAACoverage);
+        dawn::utils::RGBA8 expectedRed = ExpectedMSAAColor(kRed, kMSAACoverage);
+        dawn::utils::RGBA8 expectedGreen = ExpectedMSAAColor(kGreen, kMSAACoverage);
         EXPECT_TEXTURE_EQ(&expectedRed, mResolveTexture, {1, 0}, {1, 1},
                           /* level */ 0, wgpu::TextureAspect::All, /* bytesPerRow */ 0,
-                          /* tolerance */ utils::RGBA8(1, 1, 1, 1));
+                          /* tolerance */ dawn::utils::RGBA8(1, 1, 1, 1));
         EXPECT_TEXTURE_EQ(&expectedGreen, resolveTexture2, {1, 0}, {1, 1},
                           /* level */ 0, wgpu::TextureAspect::All, /* bytesPerRow */ 0,
-                          /* tolerance */ utils::RGBA8(1, 1, 1, 1));
+                          /* tolerance */ dawn::utils::RGBA8(1, 1, 1, 1));
     }
 }
 
@@ -1012,7 +1015,7 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndAlphaToCo
     // We will only write to half the samples since the alphaToCoverage mode
     // is enabled for that render pass.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
             kTestDepth);
         std::array<float, 8> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a,  // Color
@@ -1026,7 +1029,7 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndAlphaToCo
     // We will write to all the samples since the alphaToCoverageMode is diabled for
     // that render pass.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Load, wgpu::LoadOp::Load,
             kTestDepth);
 
@@ -1043,11 +1046,11 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndAlphaToCo
     constexpr wgpu::Color kHalfGreenHalfRed = {(kGreen.r + kRed.r) / 2.0, (kGreen.g + kRed.g) / 2.0,
                                                (kGreen.b + kRed.b) / 2.0,
                                                (kGreen.a + kRed.a) / 2.0};
-    utils::RGBA8 expectedColor = ExpectedMSAAColor(kHalfGreenHalfRed, 1.0f);
+    dawn::utils::RGBA8 expectedColor = ExpectedMSAAColor(kHalfGreenHalfRed, 1.0f);
 
     EXPECT_TEXTURE_EQ(&expectedColor, mResolveTexture, {1, 0}, {1, 1},
                       /* level */ 0, wgpu::TextureAspect::All, /* bytesPerRow */ 0,
-                      /* tolerance */ utils::RGBA8(1, 1, 1, 1));
+                      /* tolerance */ dawn::utils::RGBA8(1, 1, 1, 1));
 }
 
 // Test using one multisampled color attachment with resolve target can render correctly
@@ -1079,9 +1082,10 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndSamp
 
         // Draw a green triangle.
         {
-            utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
-                {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
-                kTestDepth);
+            dawn::utils::ComboRenderPassDescriptor renderPass =
+                CreateComboRenderPassDescriptorForTest({mMultisampledColorView}, {mResolveView},
+                                                       wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+                                                       kTestDepth);
 
             EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kGreen);
         }
@@ -1089,10 +1093,10 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndSamp
         wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
         queue.Submit(1, &commandBuffer);
 
-        utils::RGBA8 expectedColor = ExpectedMSAAColor(kGreen, kMSAACoverage * alpha);
+        dawn::utils::RGBA8 expectedColor = ExpectedMSAAColor(kGreen, kMSAACoverage * alpha);
         EXPECT_TEXTURE_EQ(&expectedColor, mResolveTexture, {1, 0}, {1, 1},
                           /* level */ 0, wgpu::TextureAspect::All, /* bytesPerRow */ 0,
-                          /* tolerance */ utils::RGBA8(1, 1, 1, 1));
+                          /* tolerance */ dawn::utils::RGBA8(1, 1, 1, 1));
     }
 }
 
@@ -1122,9 +1126,10 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndRast
 
         // Draw a green triangle.
         {
-            utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
-                {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
-                kTestDepth);
+            dawn::utils::ComboRenderPassDescriptor renderPass =
+                CreateComboRenderPassDescriptorForTest({mMultisampledColorView}, {mResolveView},
+                                                       wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+                                                       kTestDepth);
 
             EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kGreen);
         }
@@ -1170,7 +1175,7 @@ TEST_P(MultisampledRenderingWithTransientAttachmentTest, ResolveTransientAttachm
 
     // Draw a green triangle.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {transientMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear,
             wgpu::LoadOp::Clear, kTestDepth);
 

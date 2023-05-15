@@ -19,6 +19,8 @@
 #include "dawn/common/Log.h"
 #include "dawn/common/Platform.h"
 
+namespace dawn {
+
 #if DAWN_COMPILER_IS(CLANG) || DAWN_COMPILER_IS(GCC)
 void BreakPoint() {
 #if DAWN_PLATFORM_IS(X86)
@@ -64,3 +66,5 @@ void HandleAssertionFailure(const char* file,
     BreakPoint();
 #endif
 }
+
+}  // namespace dawn

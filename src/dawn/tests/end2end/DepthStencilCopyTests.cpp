@@ -48,7 +48,7 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
         DAWN_TEST_UNSUPPORTED_IF(!mIsFormatSupported);
 
         // Draw a square in the bottom left quarter of the screen.
-        mVertexModule = utils::CreateShaderModule(device, R"(
+        mVertexModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -135,26 +135,27 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
                                              uint32_t arrayLayer = 0) {
         wgpu::TextureFormat format = GetParam().mTextureFormat;
         // Create the render pass used for the initialization.
-        utils::ComboRenderPipelineDescriptor renderPipelineDesc;
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDesc;
         renderPipelineDesc.vertex.module = mVertexModule;
         renderPipelineDesc.cFragment.targetCount = 0;
 
         wgpu::DepthStencilState* depthStencil = renderPipelineDesc.EnableDepthStencil(format);
 
-        if (utils::IsStencilOnlyFormat(format)) {
+        if (dawn::utils::IsStencilOnlyFormat(format)) {
             depthStencil->depthCompare = wgpu::CompareFunction::Always;
-            renderPipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+            renderPipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
                 @fragment fn main() {}
             )");
         } else {
             depthStencil->depthWriteEnabled = true;
-            renderPipelineDesc.cFragment.module = utils::CreateShaderModule(device, std::string(R"(
+            renderPipelineDesc.cFragment.module =
+                dawn::utils::CreateShaderModule(device, std::string(R"(
                 @fragment fn main() -> @builtin(frag_depth) f32 {
                     return )" + std::to_string(regionDepth) + R"(;
                 })")
-                                                                                        .c_str());
+                                                            .c_str());
         }
-        if (!utils::IsDepthOnlyFormat(format)) {
+        if (!dawn::utils::IsDepthOnlyFormat(format)) {
             depthStencil->stencilFront.passOp = wgpu::StencilOperation::Replace;
         }
 
@@ -167,7 +168,7 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
         viewDesc.baseArrayLayer = arrayLayer;
         viewDesc.arrayLayerCount = 1;
 
-        utils::ComboRenderPassDescriptor renderPassDesc({}, texture.CreateView(&viewDesc));
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc({}, texture.CreateView(&viewDesc));
         renderPassDesc.UnsetDepthStencilLoadStoreOpsForFormat(format);
         renderPassDesc.cDepthStencilAttachmentInfo.depthClearValue = clearDepth;
         renderPassDesc.cDepthStencilAttachmentInfo.stencilClearValue = clearStencil;
@@ -206,9 +207,9 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
         {
             wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
             wgpu::ImageCopyTexture srcView =
-                utils::CreateImageCopyTexture(src, mipLevel, {0, 0, 0});
+                dawn::utils::CreateImageCopyTexture(src, mipLevel, {0, 0, 0});
             wgpu::ImageCopyTexture dstView =
-                utils::CreateImageCopyTexture(dst, mipLevel, {0, 0, 0});
+                dawn::utils::CreateImageCopyTexture(dst, mipLevel, {0, 0, 0});
             wgpu::Extent3D copySize = {width >> mipLevel, height >> mipLevel, 1};
             commandEncoder.CopyTextureToTexture(&srcView, &dstView, &copySize);
 
@@ -246,11 +247,11 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
                 break;
             }
             default:
-                bytesPerPixel = utils::GetTexelBlockSizeInBytes(format);
+                bytesPerPixel = dawn::utils::GetTexelBlockSizeInBytes(format);
                 break;
         }
 
-        uint32_t bytesPerRow = Align(width * bytesPerPixel, kTextureBytesPerRowAlignment);
+        uint32_t bytesPerRow = dawn::Align(width * bytesPerPixel, kTextureBytesPerRowAlignment);
         return (bytesPerRow * (height - 1) + width * bytesPerPixel) * depth;
     }
 
@@ -477,16 +478,16 @@ class DepthCopyTests : public DepthStencilCopyTests {
         wgpu::Buffer destinationBuffer = device.CreateBuffer(&bufferDescriptor);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             texture, testLevel, {0, 0, 0}, wgpu::TextureAspect::DepthOnly);
-        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
             destinationBuffer, bufferCopyOffset, kBytesPerRow, copyHeight);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);
         wgpu::CommandBuffer commandBuffer = encoder.Finish();
         queue.Submit(1, &commandBuffer);
 
         if (GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm) {
-            uint16_t expected = FloatToUnorm<uint16_t>(initDepth);
+            uint16_t expected = dawn::FloatToUnorm<uint16_t>(initDepth);
             std::vector<uint16_t> expectedData = {
                 0,        0,        0, 0,  //
                 0,        0,        0, 0,  //
@@ -576,8 +577,8 @@ class DepthCopyFromBufferTests : public DepthStencilCopyTests {
 
         constexpr uint32_t kBytesPerRow = kTextureBytesPerRowAlignment;
         wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(srcBuffer, bufferCopyOffset, kBytesPerRow, kHeight);
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+            dawn::utils::CreateImageCopyBuffer(srcBuffer, bufferCopyOffset, kBytesPerRow, kHeight);
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             destTexture, 0, {0, 0, 0}, wgpu::TextureAspect::DepthOnly);
         wgpu::Extent3D extent = {kWidth, kHeight, 1};
 
@@ -585,7 +586,7 @@ class DepthCopyFromBufferTests : public DepthStencilCopyTests {
 
         // This expectation is the test as it performs the CopyTextureToBuffer.
         if (GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm) {
-            uint16_t expected = FloatToUnorm<uint16_t>(kInitDepth);
+            uint16_t expected = dawn::FloatToUnorm<uint16_t>(kInitDepth);
             std::vector<uint16_t> expectedData = {
                 0, 0, expected, expected, 0, 0, expected, expected,
             };
@@ -690,9 +691,9 @@ class StencilCopyTests : public DepthStencilCopyTests {
         wgpu::Buffer destinationBuffer = device.CreateBuffer(&bufferDescriptor);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             depthStencilTexture, testLevel, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
-        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
             destinationBuffer, bufferCopyOffset, kBytesPerRow, copyHeight);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);
         wgpu::CommandBuffer commandBuffer = encoder.Finish();
@@ -715,7 +716,7 @@ class StencilCopyTests : public DepthStencilCopyTests {
         // Create a stencil texture
         constexpr uint32_t kWidth = 4;
         constexpr uint32_t kHeight = 4;
-        const bool hasDepth = !utils::IsStencilOnlyFormat(GetParam().mTextureFormat);
+        const bool hasDepth = !dawn::utils::IsStencilOnlyFormat(GetParam().mTextureFormat);
 
         wgpu::Texture depthStencilTexture = CreateDepthStencilTexture(
             kWidth, kHeight,
@@ -726,7 +727,8 @@ class StencilCopyTests : public DepthStencilCopyTests {
             wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
 
             // Clear depth to 0.7, so we can check that the stencil copy doesn't mutate the depth.
-            utils::ComboRenderPassDescriptor passDescriptor({}, depthStencilTexture.CreateView());
+            dawn::utils::ComboRenderPassDescriptor passDescriptor({},
+                                                                  depthStencilTexture.CreateView());
             passDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(GetParam().mTextureFormat);
             passDescriptor.cDepthStencilAttachmentInfo.depthClearValue = 0.7;
 
@@ -770,9 +772,9 @@ class StencilCopyTests : public DepthStencilCopyTests {
             srcBuffer.Unmap();
 
             wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
-            wgpu::ImageCopyBuffer imageCopyBuffer =
-                utils::CreateImageCopyBuffer(srcBuffer, bufferCopyOffset, kBytesPerRow, kHeight);
-            wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+            wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
+                srcBuffer, bufferCopyOffset, kBytesPerRow, kHeight);
+            wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
                 depthStencilTexture, 0, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
             wgpu::Extent3D copySize = {kWidth, kHeight, 1};
             commandEncoder.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &copySize);
@@ -786,9 +788,9 @@ class StencilCopyTests : public DepthStencilCopyTests {
             wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
             // Create a render pipline which decrements the stencil value for passing fragments.
             // A quad is drawn in the bottom left.
-            utils::ComboRenderPipelineDescriptor renderPipelineDesc;
+            dawn::utils::ComboRenderPipelineDescriptor renderPipelineDesc;
             renderPipelineDesc.vertex.module = mVertexModule;
-            renderPipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+            renderPipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() {
             })");
             renderPipelineDesc.cFragment.targetCount = 0;
@@ -804,7 +806,8 @@ class StencilCopyTests : public DepthStencilCopyTests {
 
             // Create a render pass which loads the stencil. We want to load the values we
             // copied in. Also load the canary depth values so they're not lost.
-            utils::ComboRenderPassDescriptor passDescriptor({}, depthStencilTexture.CreateView());
+            dawn::utils::ComboRenderPassDescriptor passDescriptor({},
+                                                                  depthStencilTexture.CreateView());
             passDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
             passDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
             passDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(GetParam().mTextureFormat);
@@ -907,7 +910,7 @@ TEST_P(StencilCopyTests, CopyNonzeroMipThenReadWithStencilTest) {
         wgpu::TextureDataLayout dataLayout = {};
         dataLayout.bytesPerRow = kWidth >> kMipLevel;
 
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             depthStencilTexture, 1, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
         wgpu::Extent3D copySize = {kWidth >> kMipLevel, kHeight >> kMipLevel, 1};
 
@@ -967,10 +970,10 @@ TEST_P(DepthStencilCopyTests_RegressionDawn1083, Run) {
                     // Perform a T2T copy
                     {
                         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
-                        wgpu::ImageCopyTexture srcView =
-                            utils::CreateImageCopyTexture(src, mipLevel, {0, 0, srcArrayLayer});
-                        wgpu::ImageCopyTexture dstView =
-                            utils::CreateImageCopyTexture(dst, mipLevel, {0, 0, dstArrayLayer});
+                        wgpu::ImageCopyTexture srcView = dawn::utils::CreateImageCopyTexture(
+                            src, mipLevel, {0, 0, srcArrayLayer});
+                        wgpu::ImageCopyTexture dstView = dawn::utils::CreateImageCopyTexture(
+                            dst, mipLevel, {0, 0, dstArrayLayer});
                         wgpu::Extent3D copySize = {mipWidth, mipHeight, layerCount};
                         commandEncoder.CopyTextureToTexture(&srcView, &dstView, &copySize);
 
@@ -1020,7 +1023,7 @@ TEST_P(DepthStencilCopyTests_RegressionDawn1083, Run) {
                             << "\ndstArrayLayer: " << dstArrayLayer + z;
 
                         // Check the stencil
-                        if (!utils::IsDepthOnlyFormat(GetParam().mTextureFormat)) {
+                        if (!dawn::utils::IsDepthOnlyFormat(GetParam().mTextureFormat)) {
                             ExpectAttachmentStencilTestData(dst, GetParam().mTextureFormat,
                                                             mipWidth, mipHeight, dstArrayLayer + z,
                                                             mipLevel, stencilValue)
@@ -1047,8 +1050,8 @@ DAWN_INSTANTIATE_TEST_P(
      OpenGLBackend(), OpenGLESBackend(),
      // Test with the vulkan_use_s8 toggle forced on and off.
      VulkanBackend({"vulkan_use_s8"}, {}), VulkanBackend({}, {"vulkan_use_s8"})},
-    std::vector<wgpu::TextureFormat>(utils::kDepthAndStencilFormats.begin(),
-                                     utils::kDepthAndStencilFormats.end()));
+    std::vector<wgpu::TextureFormat>(dawn::utils::kDepthAndStencilFormats.begin(),
+                                     dawn::utils::kDepthAndStencilFormats.end()));
 
 DAWN_INSTANTIATE_TEST_P(
     DepthCopyTests,
@@ -1083,7 +1086,8 @@ DAWN_INSTANTIATE_TEST_P(
      OpenGLESBackend(),
      // Test with the vulkan_use_s8 toggle forced on and off.
      VulkanBackend({"vulkan_use_s8"}, {}), VulkanBackend({}, {"vulkan_use_s8"})},
-    std::vector<wgpu::TextureFormat>(utils::kStencilFormats.begin(), utils::kStencilFormats.end()));
+    std::vector<wgpu::TextureFormat>(dawn::utils::kStencilFormats.begin(),
+                                     dawn::utils::kStencilFormats.end()));
 
 DAWN_INSTANTIATE_TEST_P(
     DepthStencilCopyTests_RegressionDawn1083,

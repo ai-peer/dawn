@@ -245,7 +245,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
                       wgpu::TextureFormat format,
                       void* data,
                       size_t dataSize,
-                      utils::RGBA8 expectedColor) {
+                      dawn::utils::RGBA8 expectedColor) {
         // Write the data to the IOSurface
         IOSurfaceLock(ioSurface, 0, nullptr);
         memcpy(IOSurfaceGetBaseAddress(ioSurface), data, dataSize);
@@ -254,7 +254,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
         // The simplest texture sampling pipeline.
         wgpu::RenderPipeline pipeline;
         {
-            wgpu::ShaderModule vs = utils::CreateShaderModule(device, R"(
+            wgpu::ShaderModule vs = dawn::utils::CreateShaderModule(device, R"(
                 struct VertexOut {
                     @location(0) texCoord : vec2f,
                     @builtin(position) position : vec4f,
@@ -284,7 +284,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
                     return output;
                 }
             )");
-            wgpu::ShaderModule fs = utils::CreateShaderModule(device, R"(
+            wgpu::ShaderModule fs = dawn::utils::CreateShaderModule(device, R"(
                 @group(0) @binding(0) var sampler0 : sampler;
                 @group(0) @binding(1) var texture0 : texture_2d<f32>;
 
@@ -294,7 +294,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
                 }
             )");
 
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vs;
             descriptor.cFragment.module = fs;
             descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -318,12 +318,12 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
 
             wgpu::Sampler sampler = device.CreateSampler();
 
-            bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                             {{0, sampler}, {1, textureView}});
+            bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                   {{0, sampler}, {1, textureView}});
         }
 
         // Submit commands samping from the ioSurface and writing the result to renderPass.color
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -356,7 +356,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
 
         wgpu::TextureView ioSurfaceView = ioSurfaceTexture.CreateView();
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({ioSurfaceView}, {});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({ioSurfaceView}, {});
         renderPassDescriptor.cColorAttachments[0].clearValue = {1 / 255.0f, 2 / 255.0f, 3 / 255.0f,
                                                                 4 / 255.0f};
 
@@ -386,7 +386,7 @@ TEST_P(IOSurfaceUsageTests, SampleFromR8IOSurface) {
 
     uint8_t data = 0x01;
     DoSampleTest(ioSurface.get(), wgpu::TextureFormat::R8Unorm, &data, sizeof(data),
-                 utils::RGBA8(1, 0, 0, 255));
+                 dawn::utils::RGBA8(1, 0, 0, 255));
 }
 
 // Test clearing a R8 IOSurface
@@ -407,7 +407,7 @@ TEST_P(IOSurfaceUsageTests, SampleFromRG8IOSurface) {
 
     uint16_t data = 0x0102;  // Stored as (G, R)
     DoSampleTest(ioSurface.get(), wgpu::TextureFormat::RG8Unorm, &data, sizeof(data),
-                 utils::RGBA8(2, 1, 0, 255));
+                 dawn::utils::RGBA8(2, 1, 0, 255));
 }
 
 // Test clearing a RG8 IOSurface
@@ -427,7 +427,7 @@ TEST_P(IOSurfaceUsageTests, SampleFromBGRA8IOSurface) {
 
     uint32_t data = 0x01020304;  // Stored as (A, R, G, B)
     DoSampleTest(ioSurface.get(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data),
-                 utils::RGBA8(2, 3, 4, 1));
+                 dawn::utils::RGBA8(2, 3, 4, 1));
 }
 
 // Test clearing a BGRA8 IOSurface
@@ -446,7 +446,7 @@ TEST_P(IOSurfaceUsageTests, SampleFromRGBA8IOSurface) {
 
     uint32_t data = 0x01020304;  // Stored as (A, B, G, R)
     DoSampleTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data),
-                 utils::RGBA8(4, 3, 2, 1));
+                 dawn::utils::RGBA8(4, 3, 2, 1));
 }
 
 // Test clearing an RGBA8 IOSurface
@@ -479,7 +479,7 @@ TEST_P(IOSurfaceUsageTests, UninitializedTextureIsCleared) {
 
     // wrap ioSurface and ensure color is not visible when isInitialized set to false
     wgpu::Texture ioSurfaceTexture = WrapIOSurface(&textureDescriptor, ioSurface.get(), false);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), ioSurfaceTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 0, 0, 0), ioSurfaceTexture, 0, 0);
 
     dawn::native::metal::ExternalImageIOSurfaceEndAccessDescriptor endAccessDesc;
     dawn::native::metal::IOSurfaceEndAccess(ioSurfaceTexture.Get(), &endAccessDesc);
@@ -510,7 +510,7 @@ TEST_P(IOSurfaceUsageTests, UninitializedOnEndAccess) {
     wgpu::Texture ioSurfaceTexture = WrapIOSurface(&textureDescriptor, ioSurface.get(), true);
 
     // Uninitialize the teuxture with a render pass.
-    utils::ComboRenderPassDescriptor renderPassDescriptor({ioSurfaceTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({ioSurfaceTexture.CreateView()});
     renderPassDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     encoder.BeginRenderPass(&renderPassDescriptor).End();
@@ -559,7 +559,7 @@ TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWrite) {
 
     // Clear the texture to green.
     {
-        utils::ComboRenderPassDescriptor renderPassDescriptor({writeTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({writeTexture.CreateView()});
         renderPassDescriptor.cColorAttachments[0].clearValue = {0.0, 1.0, 0.0, 1.0};
         wgpu::CommandEncoder encoder = writeDevice.CreateCommandEncoder();
         encoder.BeginRenderPass(&renderPassDescriptor).End();
@@ -586,8 +586,8 @@ TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWrite) {
         wgpu::Texture::Acquire(dawn::native::metal::WrapIOSurface(readDevice2.Get(), &externDesc));
 
     // Expect the texture to be green
-    EXPECT_TEXTURE_EQ(readDevice1, utils::RGBA8(0, 255, 0, 255), readTexture1, {0, 0});
-    EXPECT_TEXTURE_EQ(readDevice2, utils::RGBA8(0, 255, 0, 255), readTexture2, {0, 0});
+    EXPECT_TEXTURE_EQ(readDevice1, dawn::utils::RGBA8(0, 255, 0, 255), readTexture1, {0, 0});
+    EXPECT_TEXTURE_EQ(readDevice2, dawn::utils::RGBA8(0, 255, 0, 255), readTexture2, {0, 0});
 
     // End access on both read textures.
     dawn::native::metal::ExternalImageIOSurfaceEndAccessDescriptor endReadAccessDesc1;
@@ -606,7 +606,7 @@ TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWrite) {
 
     // Clear the texture to blue.
     {
-        utils::ComboRenderPassDescriptor renderPassDescriptor({writeTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({writeTexture.CreateView()});
         renderPassDescriptor.cColorAttachments[0].clearValue = {0.0, 0.0, 1.0, 1.0};
         wgpu::CommandEncoder encoder = writeDevice.CreateCommandEncoder();
         encoder.BeginRenderPass(&renderPassDescriptor).End();
@@ -614,7 +614,7 @@ TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWrite) {
         writeDevice.GetQueue().Submit(1, &commandBuffer);
     }
     // Finally, expect the contents to be blue now.
-    EXPECT_TEXTURE_EQ(writeDevice, utils::RGBA8(0, 0, 255, 255), writeTexture, {0, 0});
+    EXPECT_TEXTURE_EQ(writeDevice, dawn::utils::RGBA8(0, 0, 255, 255), writeTexture, {0, 0});
     dawn::native::metal::IOSurfaceEndAccess(writeTexture.Get(), &endWriteAccessDesc);
     EXPECT_TRUE(endWriteAccessDesc.isInitialized);
 }
@@ -640,7 +640,7 @@ class IOSurfaceMultithreadTests : public IOSurfaceUsageTests {
 // Test that texture with color is cleared when isInitialized = false. There shoudn't be any data
 // race if multiple of them are created on multiple threads.
 TEST_P(IOSurfaceMultithreadTests, UninitializedTexturesAreCleared_OnMultipleThreads) {
-    utils::RunInParallel(10, [this](uint32_t) {
+    dawn::utils::RunInParallel(10, [this](uint32_t) {
         ScopedIOSurfaceRef ioSurface =
             CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32RGBA, 4);
         uint32_t data = 0x04030201;
@@ -660,7 +660,7 @@ TEST_P(IOSurfaceMultithreadTests, UninitializedTexturesAreCleared_OnMultipleThre
 
         // wrap ioSurface and ensure color is not visible when isInitialized set to false
         wgpu::Texture ioSurfaceTexture = WrapIOSurface(&textureDescriptor, ioSurface.get(), false);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), ioSurfaceTexture, 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 0, 0, 0), ioSurfaceTexture, 0, 0);
 
         dawn::native::metal::ExternalImageIOSurfaceEndAccessDescriptor endAccessDesc;
         dawn::native::metal::IOSurfaceEndAccess(ioSurfaceTexture.Get(), &endAccessDesc);
@@ -670,7 +670,7 @@ TEST_P(IOSurfaceMultithreadTests, UninitializedTexturesAreCleared_OnMultipleThre
 
 // Test that wrapping multiple IOSurface and clear them on multiple threads work.
 TEST_P(IOSurfaceMultithreadTests, WrapAndClear_OnMultipleThreads) {
-    utils::RunInParallel(10, [this](uint32_t) {
+    dawn::utils::RunInParallel(10, [this](uint32_t) {
         ScopedIOSurfaceRef ioSurface =
             CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32BGRA, 4);
 

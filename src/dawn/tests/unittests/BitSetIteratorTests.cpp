@@ -38,7 +38,7 @@ TEST_F(BitSetIteratorTest, Iterator) {
     }
 
     std::set<uint32_t> readValues;
-    for (uint32_t bit : IterateBitSet(mStateBits)) {
+    for (uint32_t bit : dawn::IterateBitSet(mStateBits)) {
         EXPECT_EQ(1u, originalValues.count(bit));
         EXPECT_EQ(0u, readValues.count(bit));
         readValues.insert(bit);
@@ -52,7 +52,7 @@ TEST_F(BitSetIteratorTest, EmptySet) {
     // We don't use the FAIL gtest macro here since it returns immediately,
     // causing an unreachable code warning in MSVC
     bool sawBit = false;
-    for (uint32_t bit : IterateBitSet(mStateBits)) {
+    for (uint32_t bit : dawn::IterateBitSet(mStateBits)) {
         DAWN_UNUSED(bit);
         sawBit = true;
     }
@@ -75,7 +75,7 @@ TEST_F(BitSetIteratorTest, NonLValueBitset) {
 
     std::set<uint32_t> seenBits;
 
-    for (uint32_t bit : IterateBitSet(mStateBits & otherBits)) {
+    for (uint32_t bit : dawn::IterateBitSet(mStateBits & otherBits)) {
         EXPECT_EQ(0u, seenBits.count(bit));
         seenBits.insert(bit);
         EXPECT_TRUE(mStateBits[bit]);
@@ -90,7 +90,7 @@ class EnumBitSetIteratorTest : public testing::Test {
     enum class TestEnum { A, B, C, D, E, F, G, H, I, J, EnumCount };
 
     static constexpr size_t kEnumCount = static_cast<size_t>(TestEnum::EnumCount);
-    ityp::bitset<TestEnum, kEnumCount> mStateBits;
+    dawn::ityp::bitset<TestEnum, kEnumCount> mStateBits;
 };
 
 // Simple iterator test.
@@ -129,7 +129,7 @@ TEST_F(EnumBitSetIteratorTest, EmptySet) {
 
 // Test iterating a result of combining two bitsets.
 TEST_F(EnumBitSetIteratorTest, NonLValueBitset) {
-    ityp::bitset<TestEnum, kEnumCount> otherBits;
+    dawn::ityp::bitset<TestEnum, kEnumCount> otherBits;
 
     mStateBits.set(TestEnum::B);
     mStateBits.set(TestEnum::C);
@@ -155,8 +155,8 @@ TEST_F(EnumBitSetIteratorTest, NonLValueBitset) {
 
 class ITypBitsetIteratorTest : public testing::Test {
   protected:
-    using IntegerT = TypedInteger<struct Foo, uint32_t>;
-    ityp::bitset<IntegerT, 40> mStateBits;
+    using IntegerT = dawn::TypedInteger<struct Foo, uint32_t>;
+    dawn::ityp::bitset<IntegerT, 40> mStateBits;
 };
 
 // Simple iterator test.
@@ -195,7 +195,7 @@ TEST_F(ITypBitsetIteratorTest, EmptySet) {
 
 // Test iterating a result of combining two bitsets.
 TEST_F(ITypBitsetIteratorTest, NonLValueBitset) {
-    ityp::bitset<IntegerT, 40> otherBits;
+    dawn::ityp::bitset<IntegerT, 40> otherBits;
 
     mStateBits.set(IntegerT(1));
     mStateBits.set(IntegerT(2));

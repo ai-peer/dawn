@@ -43,16 +43,17 @@ class ExternalTextureTest : public ValidationTest {
     void SubmitExternalTextureInDefaultRenderPass(wgpu::ExternalTexture externalTexture,
                                                   bool success) {
         // Create a bind group that contains the external texture.
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-            device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+            device,
+            {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
 
         // Create another texture to use as a color attachment.
         wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor();
         wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
         wgpu::TextureView renderView = renderTexture.CreateView();
 
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         pass.SetBindGroup(0, bindGroup);
@@ -69,9 +70,10 @@ class ExternalTextureTest : public ValidationTest {
     void SubmitExternalTextureInDefaultComputePass(wgpu::ExternalTexture externalTexture,
                                                    bool success) {
         // Create a bind group that contains the external texture.
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-            device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+            device,
+            {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
 
         wgpu::ComputePassDescriptor computePass;
 
@@ -423,16 +425,16 @@ TEST_F(ExternalTextureTest, SubmitDereferencedExternalTextureInRenderPass) {
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
 
     // Create a bind group that contains the external texture.
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
 
     // Create another texture to use as a color attachment.
     wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor();
     wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
     wgpu::TextureView renderView = renderTexture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
 
     // Control case should succeed.
     {
@@ -474,25 +476,26 @@ TEST_F(ExternalTextureTest, BindGroupDoesNotMatchLayout) {
 
     // Control case should succeed.
     {
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-            device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
-        utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+            device,
+            {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
+        dawn::utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
     }
 
     // Bind group creation should fail when an external texture is not present in the
     // corresponding slot of the bind group layout.
     {
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
-        ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, externalTexture}}));
+        ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bgl, {{0, externalTexture}}));
     }
 }
 
 // Regression test for crbug.com/1343099 where BindGroup validation let other binding types be used
 // for external texture bindings.
 TEST_F(ExternalTextureTest, TextureViewBindingDoesntMatch) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
 
     wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
     wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
@@ -501,7 +504,7 @@ TEST_F(ExternalTextureTest, TextureViewBindingDoesntMatch) {
     // dereference. It passed validation because the number of bindings matched (1 == 1) and that
     // the validation didn't check that an external texture binding was required, fell back to
     // checking for the binding type of entry 0 that had been decayed to be a sampled texture view.
-    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, texture.CreateView()}}));
+    ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bgl, {{0, texture.CreateView()}}));
 }
 
 // Ensure that bind group validation catches error external textures.
@@ -514,17 +517,19 @@ TEST_F(ExternalTextureTest, UseErrorExternalTextureInBindGroup) {
         wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
         externalDesc.plane0 = texture.CreateView();
         wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-            device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
-        utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+            device,
+            {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
+        dawn::utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
     }
 
     // Bind group creation should fail when an error external texture is present.
     {
         wgpu::ExternalTexture errorExternalTexture = device.CreateErrorExternalTexture();
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-            device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
-        ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, errorExternalTexture}}));
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+            device,
+            {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
+        ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bgl, {{0, errorExternalTexture}}));
     }
 }
 
@@ -601,16 +606,16 @@ TEST_F(ExternalTextureTest, SubmitExternalTextureWithDestroyedPlane) {
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
 
     // Create a bind group that contains the external texture.
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, &dawn::utils::kExternalTextureBindingLayout}});
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
 
     // Create another texture to use as a color attachment.
     wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor();
     wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
     wgpu::TextureView renderView = renderTexture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
 
     // Control case should succeed.
     {

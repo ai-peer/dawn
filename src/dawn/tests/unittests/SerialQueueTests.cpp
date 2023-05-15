@@ -19,7 +19,7 @@
 #include "dawn/common/TypedInteger.h"
 #include "gtest/gtest.h"
 
-using TestSerialQueue = SerialQueue<uint64_t, int>;
+using TestSerialQueue = dawn::SerialQueue<uint64_t, int>;
 
 // A number of basic tests for SerialQueue that are difficult to split from one another
 TEST(SerialQueue, BasicTest) {
@@ -160,8 +160,8 @@ TEST(SerialQueue, LastSerial) {
 
 // Test basic functionality with type integers
 TEST(SerialQueue, TypedInteger) {
-    using MySerial = TypedInteger<struct MySerialT, uint64_t>;
-    using MySerialQueue = SerialQueue<MySerial, int>;
+    using MySerial = dawn::TypedInteger<struct MySerialT, uint64_t>;
+    using MySerialQueue = dawn::SerialQueue<MySerial, int>;
 
     MySerialQueue queue;
     queue.Enqueue(1, MySerial(0));

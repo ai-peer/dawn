@@ -207,34 +207,35 @@ class NonzeroTextureCreationTests : public DawnTestWithParams<Params> {
             case wgpu::TextureFormat::BC1RGBAUnorm: {
                 // Set buffer with dirty data so we know it is cleared by the lazy cleared
                 // texture copy
-                uint32_t blockWidth = utils::GetTextureFormatBlockWidth(GetParam().mFormat);
-                uint32_t blockHeight = utils::GetTextureFormatBlockHeight(GetParam().mFormat);
-                wgpu::Extent3D copySize = {Align(mipSize, blockWidth), Align(mipSize, blockHeight),
-                                           depthOrArrayLayers};
+                uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(GetParam().mFormat);
+                uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(GetParam().mFormat);
+                wgpu::Extent3D copySize = {dawn::Align(mipSize, blockWidth),
+                                           dawn::Align(mipSize, blockHeight), depthOrArrayLayers};
 
                 uint32_t bytesPerRow =
-                    utils::GetMinimumBytesPerRow(GetParam().mFormat, copySize.width);
+                    dawn::utils::GetMinimumBytesPerRow(GetParam().mFormat, copySize.width);
                 uint32_t rowsPerImage = copySize.height / blockHeight;
 
-                uint64_t bufferSize = utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage,
-                                                                 copySize, GetParam().mFormat);
+                uint64_t bufferSize = dawn::utils::RequiredBytesInCopy(
+                    bytesPerRow, rowsPerImage, copySize, GetParam().mFormat);
 
                 std::vector<uint8_t> data(bufferSize, 100);
-                wgpu::Buffer bufferDst = utils::CreateBufferFromData(
+                wgpu::Buffer bufferDst = dawn::utils::CreateBufferFromData(
                     device, data.data(), bufferSize, wgpu::BufferUsage::CopySrc);
 
                 wgpu::ImageCopyBuffer imageCopyBuffer =
-                    utils::CreateImageCopyBuffer(bufferDst, 0, bytesPerRow, rowsPerImage);
+                    dawn::utils::CreateImageCopyBuffer(bufferDst, 0, bytesPerRow, rowsPerImage);
                 wgpu::ImageCopyTexture imageCopyTexture =
-                    utils::CreateImageCopyTexture(texture, mip, {0, 0, 0});
+                    dawn::utils::CreateImageCopyTexture(texture, mip, {0, 0, 0});
 
                 wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
                 encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);
                 wgpu::CommandBuffer commands = encoder.Finish();
                 queue.Submit(1, &commands);
 
-                uint32_t copiedWidthInBytes = utils::GetTexelBlockSizeInBytes(GetParam().mFormat) *
-                                              copySize.width / blockWidth;
+                uint32_t copiedWidthInBytes =
+                    dawn::utils::GetTexelBlockSizeInBytes(GetParam().mFormat) * copySize.width /
+                    blockWidth;
                 uint8_t* d = data.data();
                 for (uint32_t z = 0; z < depthOrArrayLayers; ++z) {
                     for (uint32_t row = 0; row < copySize.height / blockHeight; ++row) {

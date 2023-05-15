@@ -69,9 +69,9 @@ class DepthBiasTests : public DawnTest {
                 break;
         }
 
-        wgpu::ShaderModule vertexModule = utils::CreateShaderModule(device, vertexSource);
+        wgpu::ShaderModule vertexModule = dawn::utils::CreateShaderModule(device, vertexSource);
 
-        wgpu::ShaderModule fragmentModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fragmentModule = dawn::utils::CreateShaderModule(device, R"(
     @fragment fn main() -> @location(0) vec4f {
         return vec4f(1.0, 0.0, 0.0, 1.0);
     })");
@@ -93,13 +93,13 @@ class DepthBiasTests : public DawnTest {
         }
 
         // Create a render pass which clears depth to depthClear
-        utils::ComboRenderPassDescriptor renderPassDesc({mRenderTarget.CreateView()},
-                                                        mDepthTexture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc({mRenderTarget.CreateView()},
+                                                              mDepthTexture.CreateView());
         renderPassDesc.UnsetDepthStencilLoadStoreOpsForFormat(depthFormat);
         renderPassDesc.cDepthStencilAttachmentInfo.depthClearValue = depthClear;
 
         // Create a render pipeline to render the quad
-        utils::ComboRenderPipelineDescriptor renderPipelineDesc;
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDesc;
 
         renderPipelineDesc.vertex.module = vertexModule;
         renderPipelineDesc.cFragment.module = fragmentModule;
@@ -345,9 +345,9 @@ TEST_P(DepthBiasTests, PositiveBiasOn24bit) {
 
     // Only the bottom left quad has colors. 0.5 quad > 0.4 clear.
     // TODO(crbug.com/dawn/820): Switch to depth sampling once feature has been enabled.
-    std::vector<utils::RGBA8> expected = {
-        utils::RGBA8::kRed, utils::RGBA8::kRed,  //
-        utils::RGBA8::kRed, utils::RGBA8::kRed,  //
+    std::vector<dawn::utils::RGBA8> expected = {
+        dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed,  //
+        dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed,  //
     };
 
     EXPECT_TEXTURE_EQ(expected.data(), mRenderTarget, {0, 0}, {kRTSize, kRTSize});
@@ -366,9 +366,9 @@ TEST_P(DepthBiasTests, PositiveBiasOn24bitWithClamp) {
     // Since we cleared with a depth of 0.4 and clamped bias at 0.4, the depth test will fail. 0.25
     // + 0.125 < 0.4 clear.
     // TODO(crbug.com/dawn/820): Switch to depth sampling once feature has been enabled.
-    std::vector<utils::RGBA8> zero = {
-        utils::RGBA8::kZero, utils::RGBA8::kZero,  //
-        utils::RGBA8::kZero, utils::RGBA8::kZero,  //
+    std::vector<dawn::utils::RGBA8> zero = {
+        dawn::utils::RGBA8::kZero, dawn::utils::RGBA8::kZero,  //
+        dawn::utils::RGBA8::kZero, dawn::utils::RGBA8::kZero,  //
     };
 
     EXPECT_TEXTURE_EQ(zero.data(), mRenderTarget, {0, 0}, {kRTSize, kRTSize});
@@ -381,9 +381,9 @@ TEST_P(DepthBiasTests, PositiveSlopeBiasOn24bit) {
 
     // Only the top half of the quad has a depth > 0.4 clear
     // TODO(crbug.com/dawn/820): Switch to depth sampling once feature has been enabled.
-    std::vector<utils::RGBA8> expected = {
-        utils::RGBA8::kRed, utils::RGBA8::kRed,    //
-        utils::RGBA8::kZero, utils::RGBA8::kZero,  //
+    std::vector<dawn::utils::RGBA8> expected = {
+        dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed,    //
+        dawn::utils::RGBA8::kZero, dawn::utils::RGBA8::kZero,  //
     };
 
     EXPECT_TEXTURE_EQ(expected.data(), mRenderTarget, {0, 0}, {kRTSize, kRTSize});

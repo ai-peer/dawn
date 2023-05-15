@@ -28,7 +28,7 @@ class RenderPassTest : public DawnTest {
         DawnTest::SetUp();
 
         // Shaders to draw a bottom-left triangle in blue.
-        mVSModule = utils::CreateShaderModule(device, R"(
+        mVSModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -39,12 +39,12 @@ class RenderPassTest : public DawnTest {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 0.0, 1.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = mVSModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -85,7 +85,7 @@ TEST_P(RenderPassTest, TwoRenderPassesInOneCommandBuffer) {
     {
         // In the first render pass we clear renderTarget1 to red and draw a blue triangle in the
         // bottom left of renderTarget1.
-        utils::ComboRenderPassDescriptor renderPass({renderTarget1.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTarget1.CreateView()});
         renderPass.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -97,7 +97,7 @@ TEST_P(RenderPassTest, TwoRenderPassesInOneCommandBuffer) {
     {
         // In the second render pass we clear renderTarget2 to green and draw a blue triangle in the
         // bottom left of renderTarget2.
-        utils::ComboRenderPassDescriptor renderPass({renderTarget2.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTarget2.CreateView()});
         renderPass.cColorAttachments[0].clearValue = {0.0f, 1.0f, 0.0f, 1.0f};
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -109,11 +109,11 @@ TEST_P(RenderPassTest, TwoRenderPassesInOneCommandBuffer) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlue, renderTarget1, 1, kRTSize - 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderTarget1, kRTSize - 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlue, renderTarget1, 1, kRTSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderTarget1, kRTSize - 1, 1);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlue, renderTarget2, 1, kRTSize - 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderTarget2, kRTSize - 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlue, renderTarget2, 1, kRTSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderTarget2, kRTSize - 1, 1);
 }
 
 // Verify that the content in the color attachment will not be changed if there is no corresponding
@@ -125,7 +125,7 @@ TEST_P(RenderPassTest, NoCorrespondingFragmentShaderOutputs) {
 
     wgpu::TextureView renderTargetView = renderTarget.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass({renderTargetView});
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView});
     renderPass.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
     renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
     renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
@@ -139,10 +139,10 @@ TEST_P(RenderPassTest, NoCorrespondingFragmentShaderOutputs) {
 
     {
         // Next we use a pipeline whose fragment shader has no outputs.
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() {
             })");
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = mVSModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -161,8 +161,8 @@ TEST_P(RenderPassTest, NoCorrespondingFragmentShaderOutputs) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlue, renderTarget, 1, kRTSize - 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderTarget, kRTSize - 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlue, renderTarget, 1, kRTSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderTarget, kRTSize - 1, 1);
 }
 
 DAWN_INSTANTIATE_TEST(RenderPassTest,
@@ -200,7 +200,7 @@ TEST_P(RenderPassTest_RegressionDawn1071, ClearLowestMipOfR8Unorm) {
         wgpu::TextureViewDescriptor viewDesc;
         viewDesc.baseMipLevel = kLastMipLevel;
 
-        utils::ComboRenderPassDescriptor renderPass({tex.CreateView(&viewDesc)});
+        dawn::utils::ComboRenderPassDescriptor renderPass({tex.CreateView(&viewDesc)});
         renderPass.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
         renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
         renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
@@ -211,8 +211,8 @@ TEST_P(RenderPassTest_RegressionDawn1071, ClearLowestMipOfR8Unorm) {
     // Copy the texture in the buffer.
     {
         wgpu::Extent3D copySize = {1, 1};
-        wgpu::ImageCopyTexture src = utils::CreateImageCopyTexture(tex, kLastMipLevel);
-        wgpu::ImageCopyBuffer dst = utils::CreateImageCopyBuffer(buf);
+        wgpu::ImageCopyTexture src = dawn::utils::CreateImageCopyTexture(tex, kLastMipLevel);
+        wgpu::ImageCopyBuffer dst = dawn::utils::CreateImageCopyBuffer(buf);
 
         encoder.CopyTextureToBuffer(&src, &dst, &copySize);
     }
@@ -272,7 +272,7 @@ TEST_P(RenderPassTest_RegressionDawn1389, ClearMultisubresourceAfterWriteDepth16
             for (uint32_t level = 0; level < mipLevelCount; ++level) {
                 for (uint32_t layer = 0; layer < arrayLayerCount; ++layer) {
                     wgpu::ImageCopyTexture imageCopyTexture =
-                        utils::CreateImageCopyTexture(tex, level, {0, 0, layer});
+                        dawn::utils::CreateImageCopyTexture(tex, level, {0, 0, layer});
                     wgpu::Extent3D copySize = {width >> level, height >> level, 1};
 
                     wgpu::TextureDataLayout textureDataLayout;
@@ -307,7 +307,7 @@ TEST_P(RenderPassTest_RegressionDawn1389, ClearMultisubresourceAfterWriteDepth16
                                 viewDesc.baseMipLevel = level;
                                 viewDesc.baseArrayLayer = layer;
 
-                                utils::ComboRenderPassDescriptor renderPass(
+                                dawn::utils::ComboRenderPassDescriptor renderPass(
                                     {}, tex.CreateView(&viewDesc));
                                 renderPass.UnsetDepthStencilLoadStoreOpsForFormat(texDesc.format);
                                 renderPass.cDepthStencilAttachmentInfo.depthClearValue = 0.8;

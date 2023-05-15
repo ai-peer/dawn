@@ -19,7 +19,7 @@
 #include "dawn/common/TypedInteger.h"
 #include "gtest/gtest.h"
 
-using TestSerialMap = SerialMap<uint64_t, int>;
+using TestSerialMap = dawn::SerialMap<uint64_t, int>;
 
 // A number of basic tests for SerialMap that are difficult to split from one another
 TEST(SerialMap, BasicTest) {
@@ -168,8 +168,8 @@ TEST(SerialMap, FirstSerial) {
 
 // Test basic functionality with type integers
 TEST(SerialMap, TypedInteger) {
-    using MySerial = TypedInteger<struct MySerialT, uint64_t>;
-    using MySerialMap = SerialMap<MySerial, int>;
+    using MySerial = dawn::TypedInteger<struct MySerialT, uint64_t>;
+    using MySerialMap = dawn::SerialMap<MySerial, int>;
 
     MySerialMap map;
     map.Enqueue(1, MySerial(0));

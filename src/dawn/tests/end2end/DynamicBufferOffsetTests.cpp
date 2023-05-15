@@ -39,17 +39,17 @@ class DynamicBufferOffsetTests : public DawnTest {
         uniformData[0] = 1;
         uniformData[1] = 2;
 
-        mUniformBuffers[0] = utils::CreateBufferFromData(device, uniformData.data(),
-                                                         sizeof(uint32_t) * uniformData.size(),
-                                                         wgpu::BufferUsage::Uniform);
+        mUniformBuffers[0] = dawn::utils::CreateBufferFromData(
+            device, uniformData.data(), sizeof(uint32_t) * uniformData.size(),
+            wgpu::BufferUsage::Uniform);
 
         uniformData[uniformData.size() - 2] = 5;
         uniformData[uniformData.size() - 1] = 6;
 
         // Dynamic uniform buffer
-        mUniformBuffers[1] = utils::CreateBufferFromData(device, uniformData.data(),
-                                                         sizeof(uint32_t) * uniformData.size(),
-                                                         wgpu::BufferUsage::Uniform);
+        mUniformBuffers[1] = dawn::utils::CreateBufferFromData(
+            device, uniformData.data(), sizeof(uint32_t) * uniformData.size(),
+            wgpu::BufferUsage::Uniform);
 
         wgpu::BufferDescriptor storageBufferDescriptor;
         storageBufferDescriptor.size = sizeof(uint32_t) * uniformData.size();
@@ -62,7 +62,7 @@ class DynamicBufferOffsetTests : public DawnTest {
         mStorageBuffers[1] = device.CreateBuffer(&storageBufferDescriptor);
 
         // Default bind group layout
-        mBindGroupLayouts[0] = utils::MakeBindGroupLayout(
+        mBindGroupLayouts[0] = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
                       wgpu::BufferBindingType::Uniform},
                      {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
@@ -73,25 +73,25 @@ class DynamicBufferOffsetTests : public DawnTest {
                       wgpu::BufferBindingType::Storage, true}});
 
         // Default bind group
-        mBindGroups[0] = utils::MakeBindGroup(device, mBindGroupLayouts[0],
-                                              {{0, mUniformBuffers[0], 0, kBindingSize},
-                                               {1, mStorageBuffers[0], 0, kBindingSize},
-                                               {3, mUniformBuffers[1], 0, kBindingSize},
-                                               {4, mStorageBuffers[1], 0, kBindingSize}});
+        mBindGroups[0] = dawn::utils::MakeBindGroup(device, mBindGroupLayouts[0],
+                                                    {{0, mUniformBuffers[0], 0, kBindingSize},
+                                                     {1, mStorageBuffers[0], 0, kBindingSize},
+                                                     {3, mUniformBuffers[1], 0, kBindingSize},
+                                                     {4, mStorageBuffers[1], 0, kBindingSize}});
 
         // Extra uniform buffer for inheriting test
-        mUniformBuffers[2] = utils::CreateBufferFromData(device, uniformData.data(),
-                                                         sizeof(uint32_t) * uniformData.size(),
-                                                         wgpu::BufferUsage::Uniform);
+        mUniformBuffers[2] = dawn::utils::CreateBufferFromData(
+            device, uniformData.data(), sizeof(uint32_t) * uniformData.size(),
+            wgpu::BufferUsage::Uniform);
 
         // Bind group layout for inheriting test
-        mBindGroupLayouts[1] = utils::MakeBindGroupLayout(
+        mBindGroupLayouts[1] = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
                       wgpu::BufferBindingType::Uniform}});
 
         // Bind group for inheriting test
-        mBindGroups[1] = utils::MakeBindGroup(device, mBindGroupLayouts[1],
-                                              {{0, mUniformBuffers[2], 0, kBindingSize}});
+        mBindGroups[1] = dawn::utils::MakeBindGroup(device, mBindGroupLayouts[1],
+                                                    {{0, mUniformBuffers[2], 0, kBindingSize}});
     }
     // Create objects to use as resources inside test bind groups.
 
@@ -103,7 +103,7 @@ class DynamicBufferOffsetTests : public DawnTest {
     wgpu::Texture mColorAttachment;
 
     wgpu::RenderPipeline CreateRenderPipeline(bool isInheritedPipeline = false) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -143,9 +143,9 @@ class DynamicBufferOffsetTests : public DawnTest {
             }
         )";
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fs.str().c_str());
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fs.str().c_str());
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -191,7 +191,7 @@ class DynamicBufferOffsetTests : public DawnTest {
             }
         )";
 
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, cs.str().c_str());
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, cs.str().c_str());
 
         wgpu::ComputePipelineDescriptor csDesc;
         csDesc.compute.module = csModule;
@@ -213,7 +213,8 @@ class DynamicBufferOffsetTests : public DawnTest {
 // Dynamic offsets are all zero and no effect to result.
 TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     std::array<uint32_t, 2> offsets = {0, 0};
@@ -227,14 +228,15 @@ TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
     queue.Submit(1, &commands);
 
     std::vector<uint32_t> expectedData = {2, 4};
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 255, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 255, 255), renderPass.color, 0, 0);
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0, expectedData.size());
 }
 
 // Have non-zero dynamic offsets.
 TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsRenderPipeline) {
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     std::array<uint32_t, 2> offsets = {mMinUniformBufferOffsetAlignment,
@@ -249,7 +251,7 @@ TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsRenderPipeline) {
     queue.Submit(1, &commands);
 
     std::vector<uint32_t> expectedData = {6, 8};
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(5, 6, 255, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(5, 6, 255, 255), renderPass.color, 0, 0);
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1],
                                mMinUniformBufferOffsetAlignment, expectedData.size());
 }
@@ -300,7 +302,8 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsRenderPipeline) {
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     wgpu::RenderPipeline testPipeline = CreateRenderPipeline(true);
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     std::array<uint32_t, 2> offsets = {mMinUniformBufferOffsetAlignment,
@@ -318,7 +321,7 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsRenderPipeline) {
     queue.Submit(1, &commands);
 
     std::vector<uint32_t> expectedData = {12, 16};
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(5, 6, 255, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(5, 6, 255, 255), renderPass.color, 0, 0);
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1],
                                mMinUniformBufferOffsetAlignment, expectedData.size());
 }
@@ -357,7 +360,8 @@ TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesRenderPipeline
     // Using default pipeline and setting dynamic offsets
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     std::array<uint32_t, 2> offsets = {mMinUniformBufferOffsetAlignment,
@@ -376,7 +380,7 @@ TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesRenderPipeline
     queue.Submit(1, &commands);
 
     std::vector<uint32_t> expectedData = {2, 4};
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 255, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 255, 255), renderPass.color, 0, 0);
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0, expectedData.size());
 }
 
@@ -432,10 +436,10 @@ TEST_P(ClampedOOBDynamicBufferOffsetTests, CheckOOBAccess) {
         default:
             UNREACHABLE();
     }
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute, sourceBindingType, true},
                  {1, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage, true}});
-    wgpu::PipelineLayout layout = utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout layout = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
 
     wgpu::ComputePipeline pipeline;
     {
@@ -488,7 +492,7 @@ TEST_P(ClampedOOBDynamicBufferOffsetTests, CheckOOBAccess) {
         )";
         wgpu::ComputePipelineDescriptor pipelineDesc;
         pipelineDesc.layout = layout;
-        pipelineDesc.compute.module = utils::CreateShaderModule(device, shader.str().c_str());
+        pipelineDesc.compute.module = dawn::utils::CreateShaderModule(device, shader.str().c_str());
         pipelineDesc.compute.entryPoint = "main";
         pipeline = device.CreateComputePipeline(&pipelineDesc);
     }
@@ -500,8 +504,8 @@ TEST_P(ClampedOOBDynamicBufferOffsetTests, CheckOOBAccess) {
 
     uint32_t arrayByteLength = kArrayLength * 4 * sizeof(uint32_t);
 
-    uint32_t uniformBufferOffset = Align(arrayByteLength, minUniformBufferOffsetAlignment);
-    uint32_t storageBufferOffset = Align(arrayByteLength, minStorageBufferOffsetAlignment);
+    uint32_t uniformBufferOffset = dawn::Align(arrayByteLength, minUniformBufferOffsetAlignment);
+    uint32_t storageBufferOffset = dawn::Align(arrayByteLength, minStorageBufferOffsetAlignment);
 
     // Enough space to bind at a dynamic offset.
     uint32_t uniformBufferSize = uniformBufferOffset + arrayByteLength;
@@ -532,14 +536,14 @@ TEST_P(ClampedOOBDynamicBufferOffsetTests, CheckOOBAccess) {
 
     // Fill the src buffer with 0, 1, 2, ...
     std::iota(srcData.begin(), srcData.end(), 0);
-    wgpu::Buffer src = utils::CreateBufferFromData(device, &srcData[0], srcBufferSize,
-                                                   GetParam().mReadBufferUsage);
+    wgpu::Buffer src = dawn::utils::CreateBufferFromData(device, &srcData[0], srcBufferSize,
+                                                         GetParam().mReadBufferUsage);
 
     // Fill the dst buffer with 0xFF.
     memset(expectedDst.data(), 0xFF, dstBufferSize);
     wgpu::Buffer dst =
-        utils::CreateBufferFromData(device, &expectedDst[0], dstBufferSize,
-                                    wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
+        dawn::utils::CreateBufferFromData(device, &expectedDst[0], dstBufferSize,
+                                          wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
     // Produce expected data assuming the implementation performs clamping.
     for (uint32_t i = 0; i < kArrayLength; ++i) {
@@ -554,11 +558,11 @@ TEST_P(ClampedOOBDynamicBufferOffsetTests, CheckOOBAccess) {
 
     std::array<uint32_t, 2> dynamicOffsets = {srcBufferByteOffset, dstBufferByteOffset};
 
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl,
-                                                     {
-                                                         {0, src, 0, arrayByteLength},
-                                                         {1, dst, 0, arrayByteLength},
-                                                     });
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl,
+                                                           {
+                                                               {0, src, 0, arrayByteLength},
+                                                               {1, dst, 0, arrayByteLength},
+                                                           });
 
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
