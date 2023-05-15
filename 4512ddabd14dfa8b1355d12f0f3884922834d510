@@ -142,6 +142,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b56125c_e4d1a909",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T18:30:12Z",
+      "side": 1,
+      "message": "what didn\u0027t work / what conflicts did you see?\n\nIf `indices` from `layout-\u003eGetBindingIndexInfo()[group];` specifies the final destinations, and those don\u0027t overlap, then I don\u0027t think there should be conflicts in the output.\n\nit could be helpful to use toggle dump_shaders to see what the final HLSL is and if it is/isn\u0027t what we expect",
+      "parentUuid": "9753b33a_4bf91339",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
