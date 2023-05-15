@@ -39,6 +39,30 @@
       },
       "revId": "14367cfa13cc249bdeb290da8da14e97ffc8793e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f94ebf0_a79a174e",
+        "filename": "src/dawn/samples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-15T15:36:49Z",
+      "side": 1,
+      "message": "Without this CL, it prints FPS every 60 frames. However the FPS is calculate by (total frames / total time). It is the average FPS for all frames.\n\nWith this change, it still prints FPS every 60 frames. The FPS is calculated by (60 frames / time_of_6_frames). \n\nThe new FPS is more useful I think",
+      "parentUuid": "f0a727c6_adfcfa15",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 194,
+        "endChar": 27
+      },
+      "revId": "14367cfa13cc249bdeb290da8da14e97ffc8793e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
