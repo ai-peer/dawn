@@ -16,6 +16,23 @@
       "message": "builder.Branch(ep-\u003estart_target, ep-\u003eend_target);",
       "revId": "1f8be6eaef816e5c83ca6b63d22e9a793d6847ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6138764e_78bed9b1",
+        "filename": "src/tint/ir/transform/add_empty_entry_point.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-15T20:45:16Z",
+      "side": 1,
+      "message": "With the CLs out for review, this becomes:\n\n```\nir::Builder b(*ir);\nauto* ep \u003d b.CreateFunction(\n    ir-\u003esymbols.New(\"unused_entry_point\"),\n    ir-\u003etypes.Get\u003ctype::Void\u003e(),\n    Function::PipelineStage::kCompute,\n    {{1u, 1u, 1u}});\nb.Branch(ep-\u003estart_target, ep-\u003eend_target);\nir-\u003efunctions.push(ep);\n```",
+      "revId": "1f8be6eaef816e5c83ca6b63d22e9a793d6847ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
