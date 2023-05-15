@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef0adf5_bb7a7b4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 62
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T21:27:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d197f5108f99adf453c72f4c06d9d39d914c1eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d2f857e_e0775999",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T21:27:55Z",
+      "side": 1,
+      "message": "why do we need this? couldn\u0027t we just hvae `objectStores` and pass it into ProtoConvert?",
+      "range": {
+        "startLine": 234,
+        "startChar": 38,
+        "endLine": 234,
+        "endChar": 83
+      },
+      "revId": "d197f5108f99adf453c72f4c06d9d39d914c1eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
