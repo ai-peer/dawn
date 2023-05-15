@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0fdc6d82_7285c594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T15:48:55Z",
+      "side": 1,
+      "message": "Adapter toggles are still WIP by zhaoming. how urgently do we need this CL / can it wait until we can implement it more correctly?",
+      "parentUuid": "d83dd8c2_e597e353",
+      "revId": "618b6ca1c1e64c5570406dac5821b10d061fd807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d765237_e557a59f",
         "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
         "patchSetId": 1
