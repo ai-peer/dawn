@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52656507_3905ada3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T23:33:56Z",
+      "side": 0,
+      "message": "this expectation is why the roller couldn\u0027t add the Failure expectations for Mac AMD. If I remove it, it works - but it seems like we may get a lot of timeouts cropping up.\n\nBen, could there be a way we could have Slow not involved in conflict detection?",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 72
+      },
+      "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
