@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1c51b60_bd818e44",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T08:40:50Z",
+      "side": 1,
+      "message": "You are right. That would be a problem if we enabled `CanInheritBindGroups \u003d true`. For now it should work correctly.",
+      "parentUuid": "a7f29071_63767e23",
+      "range": {
+        "startLine": 117,
+        "startChar": 50,
+        "endLine": 117,
+        "endChar": 81
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c598a68c_0e4f97bd",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 4
@@ -193,6 +217,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "272aec81_ff4219ff",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T08:40:50Z",
+      "side": 1,
+      "message": "As vector has no \"push_front()\", I have to use a list instead here.",
+      "parentUuid": "6823f0cd_74a12986",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a1c2b03_cd3e3876",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 4
@@ -275,6 +323,30 @@
       "side": 1,
       "message": "We can use `ASSERT()s` for this purpose.",
       "parentUuid": "d9b3abb9_265cd633",
+      "range": {
+        "startLine": 136,
+        "startChar": 17,
+        "endLine": 136,
+        "endChar": 25
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cc22c46_a3de0879",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T08:40:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "01a16472_bd0547ec",
       "range": {
         "startLine": 136,
         "startChar": 17,
@@ -404,6 +476,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57f9e4e8_bb18696b",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T08:40:50Z",
+      "side": 1,
+      "message": "[3] shows UAV slots can be successfully unset while switching the pipelines in the same render pass.\n`\n[ RUN      ] DynamicBufferOffsetTests.InheritDynamicOffsetsRenderPipeline/D3D11_Intel_R_UHD_Graphics_770\nDump all used UAV slots ...\nDump done.\nDump all used UAV slots ...\nDump done.\n[       OK ] DynamicBufferOffsetTests.InheritDynamicOffsetsRenderPipeline/D3D11_Intel_R_UHD_Graphics_770 (63 ms)\n`",
+      "parentUuid": "b65eee54_26023a73",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 46
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7be7283c_273d93dd",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
         "patchSetId": 4
@@ -415,6 +511,30 @@
       "writtenOn": "2023-05-13T12:52:46Z",
       "side": 1,
       "message": "nit: `const bool`",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 8
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f906bec_c2a7c4bf",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T08:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7be7283c_273d93dd",
       "range": {
         "startLine": 43,
         "startChar": 4,
@@ -448,6 +568,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6330a139_eee3473e",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T08:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9b39d7d_2927d87e",
+      "range": {
+        "startLine": 325,
+        "startChar": 54,
+        "endLine": 325,
+        "endChar": 59
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56ef005e_5d8dcf08",
@@ -461,6 +605,30 @@
       "writtenOn": "2023-05-13T12:52:46Z",
       "side": 1,
       "message": "nit: same here",
+      "range": {
+        "startLine": 483,
+        "startChar": 54,
+        "endLine": 483,
+        "endChar": 58
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cf50755_1a19a901",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T08:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56ef005e_5d8dcf08",
       "range": {
         "startLine": 483,
         "startChar": 54,
