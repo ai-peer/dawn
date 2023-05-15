@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2bb87d_debba051",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:16:17Z",
+      "side": 1,
+      "message": "Good catch! Done",
+      "parentUuid": "1deb369e_62c6a626",
+      "range": {
+        "startLine": 90,
+        "startChar": 33,
+        "endLine": 90,
+        "endChar": 51
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d86b17e_ff3ebbf6",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-05-15T12:56:18Z",
       "side": 1,
       "message": "b?",
+      "range": {
+        "startLine": 126,
+        "startChar": 69,
+        "endLine": 126,
+        "endChar": 71
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b04a7a5_64ed3c88",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:16:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6d86b17e_ff3ebbf6",
       "range": {
         "startLine": 126,
         "startChar": 69,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd496bdf_dc791a8e",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:16:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "da2d3874_a3824ee1",
+      "range": {
+        "startLine": 132,
+        "startChar": 36,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33737ede_d28ca724",
@@ -100,6 +172,24 @@
       "writtenOn": "2023-05-15T12:56:18Z",
       "side": 1,
       "message": "So at the moment creating shadermodules won\u0027t work?",
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d0a4a8_6d9f57b4",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:16:17Z",
+      "side": 1,
+      "message": "As of this CL, no. In the next CL we create two \"custom\" handlers for wgpuCreateShaderModule and wgpuDestroyObject. wgpuCreateShaderModule just creates a hardcoded shader currently, but this actually opens up a lot of coverage related to object lifetimes and binding types.. In a follow-up CL we will improve on that and create a proto -\u003e WGSL converter similar to the (unfinished) proto -\u003e GLSL converter [1] nedwill@ was building.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/tests/lpm/gl_lpm_fuzzer.proto;l\u003d1;drc\u003d05dfbc82b07e06f610b8f2fecaa4d272430cc451",
+      "parentUuid": "33737ede_d28ca724",
       "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -127,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85dcf4ef_ff39f88c",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:16:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "aed04ce2_f67d1534",
+      "range": {
+        "startLine": 159,
+        "startChar": 38,
+        "endLine": 159,
+        "endChar": 46
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b437add0_75bd260a",
@@ -140,6 +254,24 @@
       "writtenOn": "2023-05-15T12:56:18Z",
       "side": 1,
       "message": "nit: commands should be updated, it still says \"first\"",
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f3ac72_4062442b",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:16:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b437add0_75bd260a",
       "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
