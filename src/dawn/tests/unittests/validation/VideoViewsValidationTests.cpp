@@ -17,11 +17,12 @@
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 class VideoViewsValidation : public ValidationTest {
   protected:
-    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter) override {
         wgpu::DeviceDescriptor descriptor;
         wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DawnMultiPlanarFormats};
         descriptor.requiredFeatures = requiredFeatures;
@@ -338,3 +339,4 @@ TEST_F(VideoViewsValidation, WriteTexturePlaneAspectsFails) {
 }
 
 }  // anonymous namespace
+}  // namespace dawn
