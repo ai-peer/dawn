@@ -40,7 +40,7 @@ class ExternalTextureTests : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var positions = array(
                     vec4f(-1.0, 1.0, 0.0, 1.0),
@@ -53,7 +53,7 @@ class ExternalTextureTests : public DawnTest {
                 return positions[VertexIndex];
             })");
 
-        fsSampleExternalTextureModule = utils::CreateShaderModule(device, R"(
+        fsSampleExternalTextureModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var s : sampler;
             @group(0) @binding(1) var t : texture_external;
 
@@ -75,7 +75,7 @@ class ExternalTextureTests : public DawnTest {
 
     void RenderToSourceTexture(wgpu::ShaderModule fragmentShader, wgpu::Texture texture) {
         {
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vsModule;
             descriptor.cFragment.module = fragmentShader;
             descriptor.cTargets[0].format = texture.GetFormat();
@@ -85,7 +85,7 @@ class ExternalTextureTests : public DawnTest {
 
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             wgpu::TextureView renderView = texture.CreateView();
-            utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+            dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
             {
                 pass.SetPipeline(pipeline1);
@@ -101,8 +101,8 @@ class ExternalTextureTests : public DawnTest {
     static constexpr uint32_t kHeight = 4;
     static constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
     static constexpr wgpu::TextureUsage kSampledUsage = wgpu::TextureUsage::TextureBinding;
-    utils::ColorSpaceConversionInfo yuvBT709ToRGBSRGB =
-        utils::GetYUVBT709ToRGBSRGBColorSpaceConversionInfo();
+    dawn::utils::ColorSpaceConversionInfo yuvBT709ToRGBSRGB =
+        dawn::utils::GetYUVBT709ToRGBSRGBColorSpaceConversionInfo();
 
     wgpu::ShaderModule vsModule;
     wgpu::ShaderModule fsSampleExternalTextureModule;
@@ -144,7 +144,7 @@ TEST_P(ExternalTextureTests, SampleExternalTexture) {
 
     // Initialize texture with green to ensure it is sampled from later.
     {
-        utils::ComboRenderPassDescriptor renderPass({externalView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({externalView}, nullptr);
         renderPass.cColorAttachments[0].clearValue = {0.0f, 1.0f, 0.0f, 1.0f};
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -155,7 +155,7 @@ TEST_P(ExternalTextureTests, SampleExternalTexture) {
     }
 
     // Pipeline Creation
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsSampleExternalTextureModule;
     descriptor.cTargets[0].format = kFormat;
@@ -173,13 +173,13 @@ TEST_P(ExternalTextureTests, SampleExternalTexture) {
     // Create a sampler and bind group
     wgpu::Sampler sampler = device.CreateSampler();
 
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {{0, sampler}, {1, externalTexture}});
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {{0, sampler}, {1, externalTexture}});
 
     // Run the shader, which should sample from the external texture and draw a triangle into the
     // upper left corner of the render texture.
     wgpu::TextureView renderView = renderTexture.CreateView();
-    utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
     {
@@ -192,7 +192,7 @@ TEST_P(ExternalTextureTests, SampleExternalTexture) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderTexture, 0, 0);
 }
 
 TEST_P(ExternalTextureTests, SampleMultiplanarExternalTexture) {
@@ -219,15 +219,15 @@ TEST_P(ExternalTextureTests, SampleMultiplanarExternalTexture) {
         double y;
         double u;
         double v;
-        utils::RGBA8 rgba;
+        dawn::utils::RGBA8 rgba;
     };
 
     // Conversion expectations for BT.709 YUV source and sRGB destination.
     std::array<ConversionExpectation, 7> expectations = {
-        {{0.0, .5, .5, utils::RGBA8::kBlack},
-         {0.2126, 0.4172, 1.0, utils::RGBA8::kRed},
-         {0.7152, 0.1402, 0.0175, utils::RGBA8::kGreen},
-         {0.0722, 1.0, 0.4937, utils::RGBA8::kBlue},
+        {{0.0, .5, .5, dawn::utils::RGBA8::kBlack},
+         {0.2126, 0.4172, 1.0, dawn::utils::RGBA8::kRed},
+         {0.7152, 0.1402, 0.0175, dawn::utils::RGBA8::kGreen},
+         {0.0722, 1.0, 0.4937, dawn::utils::RGBA8::kBlue},
          {0.6382, 0.3232, 0.6644, {246, 169, 90, 255}},
          {0.5423, 0.5323, 0.4222, {120, 162, 169, 255}},
          {0.2345, 0.4383, 0.6342, {126, 53, 33, 255}}}};
@@ -235,8 +235,8 @@ TEST_P(ExternalTextureTests, SampleMultiplanarExternalTexture) {
     for (const ConversionExpectation& expectation : expectations) {
         // Initialize the texture planes with YUV data
         {
-            utils::ComboRenderPassDescriptor renderPass({externalViewPlane0, externalViewPlane1},
-                                                        nullptr);
+            dawn::utils::ComboRenderPassDescriptor renderPass(
+                {externalViewPlane0, externalViewPlane1}, nullptr);
             renderPass.cColorAttachments[0].clearValue = {expectation.y, 0.0f, 0.0f, 0.0f};
             renderPass.cColorAttachments[1].clearValue = {expectation.u, expectation.v, 0.0f, 0.0f};
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -248,8 +248,8 @@ TEST_P(ExternalTextureTests, SampleMultiplanarExternalTexture) {
         }
 
         // Pipeline Creation
-        utils::ComboRenderPipelineDescriptor descriptor;
-        // descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
+        // descriptor.layout = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsSampleExternalTextureModule;
         descriptor.cTargets[0].format = kFormat;
@@ -268,13 +268,13 @@ TEST_P(ExternalTextureTests, SampleMultiplanarExternalTexture) {
         // Create a sampler and bind group
         wgpu::Sampler sampler = device.CreateSampler();
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampler}, {1, externalTexture}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampler}, {1, externalTexture}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
         wgpu::TextureView renderView = renderTexture.CreateView();
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         {
@@ -299,7 +299,7 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipSinglePlane) {
     // OpenGL/OpenGLES.
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
 
-    const wgpu::ShaderModule sourceTextureFsModule = utils::CreateShaderModule(device, R"(
+    const wgpu::ShaderModule sourceTextureFsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@builtin(position) FragCoord : vec4f)
                                  -> @location(0) vec4f {
             if(FragCoord.y < 2.0 && FragCoord.x < 2.0) {
@@ -330,7 +330,7 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipSinglePlane) {
     // Control case to verify flipY and rotation defaults
     {
         // Pipeline Creation
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsSampleExternalTextureModule;
         descriptor.cTargets[0].format = kFormat;
@@ -348,13 +348,13 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipSinglePlane) {
         // Create a sampler and bind group
         wgpu::Sampler sampler = device.CreateSampler();
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampler}, {1, externalTexture}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampler}, {1, externalTexture}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
         wgpu::TextureView renderView = renderTexture.CreateView();
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         {
@@ -367,42 +367,42 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipSinglePlane) {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderTexture, 0, 0);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlack, renderTexture, 3, 0);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderTexture, 0, 3);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlue, renderTexture, 3, 3);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderTexture, 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlack, renderTexture, 3, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderTexture, 0, 3);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlue, renderTexture, 3, 3);
     }
 
     struct RotationExpectation {
         wgpu::ExternalTextureRotation rotation;
         bool flipY;
-        utils::RGBA8 upperLeftColor;
-        utils::RGBA8 upperRightColor;
-        utils::RGBA8 lowerLeftColor;
-        utils::RGBA8 lowerRightColor;
+        dawn::utils::RGBA8 upperLeftColor;
+        dawn::utils::RGBA8 upperRightColor;
+        dawn::utils::RGBA8 lowerLeftColor;
+        dawn::utils::RGBA8 lowerRightColor;
     };
 
     std::array<RotationExpectation, 8> expectations = {
-        {{wgpu::ExternalTextureRotation::Rotate0Degrees, false, utils::RGBA8::kGreen,
-          utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kBlue},
-         {wgpu::ExternalTextureRotation::Rotate90Degrees, false, utils::RGBA8::kBlack,
-          utils::RGBA8::kBlue, utils::RGBA8::kGreen, utils::RGBA8::kRed},
-         {wgpu::ExternalTextureRotation::Rotate180Degrees, false, utils::RGBA8::kBlue,
-          utils::RGBA8::kRed, utils::RGBA8::kBlack, utils::RGBA8::kGreen},
-         {wgpu::ExternalTextureRotation::Rotate270Degrees, false, utils::RGBA8::kRed,
-          utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlack},
-         {wgpu::ExternalTextureRotation::Rotate0Degrees, true, utils::RGBA8::kRed,
-          utils::RGBA8::kBlue, utils::RGBA8::kGreen, utils::RGBA8::kBlack},
-         {wgpu::ExternalTextureRotation::Rotate90Degrees, true, utils::RGBA8::kGreen,
-          utils::RGBA8::kRed, utils::RGBA8::kBlack, utils::RGBA8::kBlue},
-         {wgpu::ExternalTextureRotation::Rotate180Degrees, true, utils::RGBA8::kBlack,
-          utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kRed},
-         {wgpu::ExternalTextureRotation::Rotate270Degrees, true, utils::RGBA8::kBlue,
-          utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kGreen}}};
+        {{wgpu::ExternalTextureRotation::Rotate0Degrees, false, dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kBlue},
+         {wgpu::ExternalTextureRotation::Rotate90Degrees, false, dawn::utils::RGBA8::kBlack,
+          dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kRed},
+         {wgpu::ExternalTextureRotation::Rotate180Degrees, false, dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kGreen},
+         {wgpu::ExternalTextureRotation::Rotate270Degrees, false, dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlack},
+         {wgpu::ExternalTextureRotation::Rotate0Degrees, true, dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlack},
+         {wgpu::ExternalTextureRotation::Rotate90Degrees, true, dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlue},
+         {wgpu::ExternalTextureRotation::Rotate180Degrees, true, dawn::utils::RGBA8::kBlack,
+          dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kRed},
+         {wgpu::ExternalTextureRotation::Rotate270Degrees, true, dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kGreen}}};
 
     for (const RotationExpectation& exp : expectations) {
         // Pipeline Creation
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsSampleExternalTextureModule;
         descriptor.cTargets[0].format = kFormat;
@@ -422,13 +422,13 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipSinglePlane) {
         // Create a sampler and bind group
         wgpu::Sampler sampler = device.CreateSampler();
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampler}, {1, externalTexture}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampler}, {1, externalTexture}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
         wgpu::TextureView renderView = renderTexture.CreateView();
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         {
@@ -460,7 +460,8 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipMultiplanar) {
     // OpenGL/OpenGLES.
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
 
-    const wgpu::ShaderModule sourceTexturePlane0FsModule = utils::CreateShaderModule(device, R"(
+    const wgpu::ShaderModule sourceTexturePlane0FsModule =
+        dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@builtin(position) FragCoord : vec4f)
                                  -> @location(0) vec4f {
 
@@ -479,7 +480,8 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipMultiplanar) {
             return vec4f(0.2126, 0.0, 0.0, 0.0);
         })");
 
-    const wgpu::ShaderModule sourceTexturePlane1FsModule = utils::CreateShaderModule(device, R"(
+    const wgpu::ShaderModule sourceTexturePlane1FsModule =
+        dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@builtin(position) FragCoord : vec4f)
                                  -> @location(0) vec4f {
 
@@ -515,7 +517,7 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipMultiplanar) {
     // Control case to verify flipY and rotation defaults
     {
         // Pipeline Creation
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsSampleExternalTextureModule;
         descriptor.cTargets[0].format = kFormat;
@@ -534,13 +536,13 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipMultiplanar) {
         // Create a sampler and bind group
         wgpu::Sampler sampler = device.CreateSampler();
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampler}, {1, externalTexture}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampler}, {1, externalTexture}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
         wgpu::TextureView renderView = renderTexture.CreateView();
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         {
@@ -553,42 +555,42 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipMultiplanar) {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderTexture, 0, 0);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlack, renderTexture, 3, 0);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderTexture, 0, 3);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlue, renderTexture, 3, 3);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderTexture, 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlack, renderTexture, 3, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderTexture, 0, 3);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlue, renderTexture, 3, 3);
     }
 
     struct RotationExpectation {
         wgpu::ExternalTextureRotation rotation;
         bool flipY;
-        utils::RGBA8 upperLeftColor;
-        utils::RGBA8 upperRightColor;
-        utils::RGBA8 lowerLeftColor;
-        utils::RGBA8 lowerRightColor;
+        dawn::utils::RGBA8 upperLeftColor;
+        dawn::utils::RGBA8 upperRightColor;
+        dawn::utils::RGBA8 lowerLeftColor;
+        dawn::utils::RGBA8 lowerRightColor;
     };
 
     std::array<RotationExpectation, 8> expectations = {
-        {{wgpu::ExternalTextureRotation::Rotate0Degrees, false, utils::RGBA8::kGreen,
-          utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kBlue},
-         {wgpu::ExternalTextureRotation::Rotate90Degrees, false, utils::RGBA8::kBlack,
-          utils::RGBA8::kBlue, utils::RGBA8::kGreen, utils::RGBA8::kRed},
-         {wgpu::ExternalTextureRotation::Rotate180Degrees, false, utils::RGBA8::kBlue,
-          utils::RGBA8::kRed, utils::RGBA8::kBlack, utils::RGBA8::kGreen},
-         {wgpu::ExternalTextureRotation::Rotate270Degrees, false, utils::RGBA8::kRed,
-          utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlack},
-         {wgpu::ExternalTextureRotation::Rotate0Degrees, true, utils::RGBA8::kRed,
-          utils::RGBA8::kBlue, utils::RGBA8::kGreen, utils::RGBA8::kBlack},
-         {wgpu::ExternalTextureRotation::Rotate90Degrees, true, utils::RGBA8::kGreen,
-          utils::RGBA8::kRed, utils::RGBA8::kBlack, utils::RGBA8::kBlue},
-         {wgpu::ExternalTextureRotation::Rotate180Degrees, true, utils::RGBA8::kBlack,
-          utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kRed},
-         {wgpu::ExternalTextureRotation::Rotate270Degrees, true, utils::RGBA8::kBlue,
-          utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kGreen}}};
+        {{wgpu::ExternalTextureRotation::Rotate0Degrees, false, dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kBlue},
+         {wgpu::ExternalTextureRotation::Rotate90Degrees, false, dawn::utils::RGBA8::kBlack,
+          dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kRed},
+         {wgpu::ExternalTextureRotation::Rotate180Degrees, false, dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kGreen},
+         {wgpu::ExternalTextureRotation::Rotate270Degrees, false, dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlack},
+         {wgpu::ExternalTextureRotation::Rotate0Degrees, true, dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlack},
+         {wgpu::ExternalTextureRotation::Rotate90Degrees, true, dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlue},
+         {wgpu::ExternalTextureRotation::Rotate180Degrees, true, dawn::utils::RGBA8::kBlack,
+          dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kRed},
+         {wgpu::ExternalTextureRotation::Rotate270Degrees, true, dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kGreen}}};
 
     for (const RotationExpectation& exp : expectations) {
         // Pipeline Creation
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsSampleExternalTextureModule;
         descriptor.cTargets[0].format = kFormat;
@@ -609,13 +611,13 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipMultiplanar) {
         // Create a sampler and bind group
         wgpu::Sampler sampler = device.CreateSampler();
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampler}, {1, externalTexture}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampler}, {1, externalTexture}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
         wgpu::TextureView renderView = renderTexture.CreateView();
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         {
@@ -646,7 +648,7 @@ TEST_P(ExternalTextureTests, CropSinglePlane) {
     // OpenGL/OpenGLES.
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
 
-    const wgpu::ShaderModule sourceTextureFsModule = utils::CreateShaderModule(device, R"(
+    const wgpu::ShaderModule sourceTextureFsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@builtin(position) FragCoord : vec4f)
                                  -> @location(0) vec4f {
             if(FragCoord.x >= 1.0 && FragCoord.x < 3.0 && FragCoord.y >= 1.0 && FragCoord.y < 3.0) {
@@ -684,81 +686,81 @@ TEST_P(ExternalTextureTests, CropSinglePlane) {
         wgpu::Origin2D visibleOrigin;
         wgpu::Extent2D visibleSize;
         wgpu::ExternalTextureRotation rotation;
-        utils::RGBA8 upperLeftColor;
-        utils::RGBA8 upperRightColor;
-        utils::RGBA8 lowerLeftColor;
-        utils::RGBA8 lowerRightColor;
+        dawn::utils::RGBA8 upperLeftColor;
+        dawn::utils::RGBA8 upperRightColor;
+        dawn::utils::RGBA8 lowerLeftColor;
+        dawn::utils::RGBA8 lowerRightColor;
     };
 
     std::array<CropExpectation, 9> expectations = {{
         {{0, 0},
          {kWidth, kHeight},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
-         utils::RGBA8::kBlack,
-         utils::RGBA8::kBlack,
-         utils::RGBA8::kBlack,
-         utils::RGBA8::kBlack},
+         dawn::utils::RGBA8::kBlack,
+         dawn::utils::RGBA8::kBlack,
+         dawn::utils::RGBA8::kBlack,
+         dawn::utils::RGBA8::kBlack},
         {{kWidth / 4, kHeight / 4},
          {kWidth / 4, kHeight / 4},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
-         utils::RGBA8::kGreen,
-         utils::RGBA8::kGreen,
-         utils::RGBA8::kGreen,
-         utils::RGBA8::kGreen},
+         dawn::utils::RGBA8::kGreen,
+         dawn::utils::RGBA8::kGreen,
+         dawn::utils::RGBA8::kGreen,
+         dawn::utils::RGBA8::kGreen},
         {{kWidth / 2, kHeight / 4},
          {kWidth / 4, kHeight / 4},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
-         utils::RGBA8::kWhite,
-         utils::RGBA8::kWhite,
-         utils::RGBA8::kWhite,
-         utils::RGBA8::kWhite},
+         dawn::utils::RGBA8::kWhite,
+         dawn::utils::RGBA8::kWhite,
+         dawn::utils::RGBA8::kWhite,
+         dawn::utils::RGBA8::kWhite},
         {{kWidth / 4, kHeight / 2},
          {kWidth / 4, kHeight / 4},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
-         utils::RGBA8::kRed,
-         utils::RGBA8::kRed,
-         utils::RGBA8::kRed,
-         utils::RGBA8::kRed},
+         dawn::utils::RGBA8::kRed,
+         dawn::utils::RGBA8::kRed,
+         dawn::utils::RGBA8::kRed,
+         dawn::utils::RGBA8::kRed},
         {{kWidth / 2, kHeight / 2},
          {kWidth / 4, kHeight / 4},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
-         utils::RGBA8::kBlue,
-         utils::RGBA8::kBlue,
-         utils::RGBA8::kBlue,
-         utils::RGBA8::kBlue},
+         dawn::utils::RGBA8::kBlue,
+         dawn::utils::RGBA8::kBlue,
+         dawn::utils::RGBA8::kBlue,
+         dawn::utils::RGBA8::kBlue},
         {{kWidth / 4, kHeight / 4},
          {kWidth / 2, kHeight / 2},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
-         utils::RGBA8::kGreen,
-         utils::RGBA8::kWhite,
-         utils::RGBA8::kRed,
-         utils::RGBA8::kBlue},
+         dawn::utils::RGBA8::kGreen,
+         dawn::utils::RGBA8::kWhite,
+         dawn::utils::RGBA8::kRed,
+         dawn::utils::RGBA8::kBlue},
         {{kWidth / 4, kHeight / 4},
          {kWidth / 2, kHeight / 2},
          wgpu::ExternalTextureRotation::Rotate90Degrees,
-         utils::RGBA8::kWhite,
-         utils::RGBA8::kBlue,
-         utils::RGBA8::kGreen,
-         utils::RGBA8::kRed},
+         dawn::utils::RGBA8::kWhite,
+         dawn::utils::RGBA8::kBlue,
+         dawn::utils::RGBA8::kGreen,
+         dawn::utils::RGBA8::kRed},
         {{kWidth / 4, kHeight / 4},
          {kWidth / 2, kHeight / 2},
          wgpu::ExternalTextureRotation::Rotate180Degrees,
-         utils::RGBA8::kBlue,
-         utils::RGBA8::kRed,
-         utils::RGBA8::kWhite,
-         utils::RGBA8::kGreen},
+         dawn::utils::RGBA8::kBlue,
+         dawn::utils::RGBA8::kRed,
+         dawn::utils::RGBA8::kWhite,
+         dawn::utils::RGBA8::kGreen},
         {{kWidth / 4, kHeight / 4},
          {kWidth / 2, kHeight / 2},
          wgpu::ExternalTextureRotation::Rotate270Degrees,
-         utils::RGBA8::kRed,
-         utils::RGBA8::kGreen,
-         utils::RGBA8::kBlue,
-         utils::RGBA8::kWhite},
+         dawn::utils::RGBA8::kRed,
+         dawn::utils::RGBA8::kGreen,
+         dawn::utils::RGBA8::kBlue,
+         dawn::utils::RGBA8::kWhite},
     }};
 
     for (const CropExpectation& exp : expectations) {
         // Pipeline Creation
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsSampleExternalTextureModule;
         descriptor.cTargets[0].format = kFormat;
@@ -777,13 +779,13 @@ TEST_P(ExternalTextureTests, CropSinglePlane) {
         // Create a sampler and bind group
         wgpu::Sampler sampler = device.CreateSampler();
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampler}, {1, externalTexture}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampler}, {1, externalTexture}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
         wgpu::TextureView renderView = renderTexture.CreateView();
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         {
@@ -810,7 +812,8 @@ TEST_P(ExternalTextureTests, CropMultiplanar) {
     // OpenGL/OpenGLES.
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
 
-    const wgpu::ShaderModule sourceTexturePlane0FsModule = utils::CreateShaderModule(device, R"(
+    const wgpu::ShaderModule sourceTexturePlane0FsModule =
+        dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@builtin(position) FragCoord : vec4f)
                                  -> @location(0) vec4f {
             if(FragCoord.x >= 1.0 && FragCoord.x < 3.0 && FragCoord.y >= 1.0 && FragCoord.y < 3.0) {
@@ -834,7 +837,8 @@ TEST_P(ExternalTextureTests, CropMultiplanar) {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         })");
 
-    const wgpu::ShaderModule sourceTexturePlane1FsModule = utils::CreateShaderModule(device, R"(
+    const wgpu::ShaderModule sourceTexturePlane1FsModule =
+        dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@builtin(position) FragCoord : vec4f)
                                  -> @location(0) vec4f {
             if(FragCoord.x >= 1.0 && FragCoord.x < 3.0 && FragCoord.y >= 1.0 && FragCoord.y < 3.0) {
@@ -876,80 +880,80 @@ TEST_P(ExternalTextureTests, CropMultiplanar) {
         wgpu::Origin2D visibleOrigin;
         wgpu::Extent2D visibleSize;
         wgpu::ExternalTextureRotation rotation;
-        utils::RGBA8 upperLeftColor;
-        utils::RGBA8 upperRightColor;
-        utils::RGBA8 lowerLeftColor;
-        utils::RGBA8 lowerRightColor;
+        dawn::utils::RGBA8 upperLeftColor;
+        dawn::utils::RGBA8 upperRightColor;
+        dawn::utils::RGBA8 lowerLeftColor;
+        dawn::utils::RGBA8 lowerRightColor;
     };
 
     std::array<CropExpectation, 9> expectations = {
         {{{0, 0},
           {kWidth, kHeight},
           wgpu::ExternalTextureRotation::Rotate0Degrees,
-          utils::RGBA8::kBlack,
-          utils::RGBA8::kBlack,
-          utils::RGBA8::kBlack,
-          utils::RGBA8::kBlack},
+          dawn::utils::RGBA8::kBlack,
+          dawn::utils::RGBA8::kBlack,
+          dawn::utils::RGBA8::kBlack,
+          dawn::utils::RGBA8::kBlack},
          {{kWidth / 4, kHeight / 4},
           {kWidth / 4, kHeight / 4},
           wgpu::ExternalTextureRotation::Rotate0Degrees,
-          utils::RGBA8::kGreen,
-          utils::RGBA8::kGreen,
-          utils::RGBA8::kGreen,
-          utils::RGBA8::kGreen},
+          dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kGreen},
          {{kWidth / 2, kHeight / 4},
           {kWidth / 4, kHeight / 4},
           wgpu::ExternalTextureRotation::Rotate0Degrees,
-          utils::RGBA8::kWhite,
-          utils::RGBA8::kWhite,
-          utils::RGBA8::kWhite,
-          utils::RGBA8::kWhite},
+          dawn::utils::RGBA8::kWhite,
+          dawn::utils::RGBA8::kWhite,
+          dawn::utils::RGBA8::kWhite,
+          dawn::utils::RGBA8::kWhite},
          {{kWidth / 4, kHeight / 2},
           {kWidth / 4, kHeight / 4},
           wgpu::ExternalTextureRotation::Rotate0Degrees,
-          utils::RGBA8::kRed,
-          utils::RGBA8::kRed,
-          utils::RGBA8::kRed,
-          utils::RGBA8::kRed},
+          dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kRed},
          {{kWidth / 2, kHeight / 2},
           {kWidth / 4, kHeight / 4},
           wgpu::ExternalTextureRotation::Rotate0Degrees,
-          utils::RGBA8::kBlue,
-          utils::RGBA8::kBlue,
-          utils::RGBA8::kBlue,
-          utils::RGBA8::kBlue},
+          dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kBlue},
          {{kWidth / 4, kHeight / 4},
           {kWidth / 2, kHeight / 2},
           wgpu::ExternalTextureRotation::Rotate0Degrees,
-          utils::RGBA8::kGreen,
-          utils::RGBA8::kWhite,
-          utils::RGBA8::kRed,
-          utils::RGBA8::kBlue},
+          dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kWhite,
+          dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kBlue},
          {{kWidth / 4, kHeight / 4},
           {kWidth / 2, kHeight / 2},
           wgpu::ExternalTextureRotation::Rotate90Degrees,
-          utils::RGBA8::kWhite,
-          utils::RGBA8::kBlue,
-          utils::RGBA8::kGreen,
-          utils::RGBA8::kRed},
+          dawn::utils::RGBA8::kWhite,
+          dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kRed},
          {{kWidth / 4, kHeight / 4},
           {kWidth / 2, kHeight / 2},
           wgpu::ExternalTextureRotation::Rotate180Degrees,
-          utils::RGBA8::kBlue,
-          utils::RGBA8::kRed,
-          utils::RGBA8::kWhite,
-          utils::RGBA8::kGreen},
+          dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kWhite,
+          dawn::utils::RGBA8::kGreen},
          {{kWidth / 4, kHeight / 4},
           {kWidth / 2, kHeight / 2},
           wgpu::ExternalTextureRotation::Rotate270Degrees,
-          utils::RGBA8::kRed,
-          utils::RGBA8::kGreen,
-          utils::RGBA8::kBlue,
-          utils::RGBA8::kWhite}}};
+          dawn::utils::RGBA8::kRed,
+          dawn::utils::RGBA8::kGreen,
+          dawn::utils::RGBA8::kBlue,
+          dawn::utils::RGBA8::kWhite}}};
 
     for (const CropExpectation& exp : expectations) {
         // Pipeline Creation
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsSampleExternalTextureModule;
         descriptor.cTargets[0].format = kFormat;
@@ -969,13 +973,13 @@ TEST_P(ExternalTextureTests, CropMultiplanar) {
         // Create a sampler and bind group
         wgpu::Sampler sampler = device.CreateSampler();
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampler}, {1, externalTexture}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampler}, {1, externalTexture}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
         wgpu::TextureView renderView = renderTexture.CreateView();
-        utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         {

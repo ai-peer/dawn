@@ -156,13 +156,14 @@ struct FragInputs {
 )" + fragmentBody.str() + R"(
 })";
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     constexpr uint32_t kComponentsPerVertex = 4;
 
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
-    pipelineDesc.vertex.module = utils::CreateShaderModule(device, vertexShader.c_str());
-    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, fragmentShader.c_str());
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
+    pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, fragmentShader.c_str());
     pipelineDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
     pipelineDesc.vertex.bufferCount = 1;
     pipelineDesc.cBuffers[0].arrayStride = kComponentsPerVertex * sizeof(float);
@@ -176,18 +177,18 @@ struct FragInputs {
     std::vector<float> vertexData(firstVertex * kComponentsPerVertex);
     vertexData.insert(vertexData.end(), {0, 0, 0, 1});
     vertexData.insert(vertexData.end(), {0, 0, 0, 1});
-    wgpu::Buffer vertices = utils::CreateBufferFromData(
+    wgpu::Buffer vertices = dawn::utils::CreateBufferFromData(
         device, vertexData.data(), vertexData.size() * sizeof(float), wgpu::BufferUsage::Vertex);
     wgpu::Buffer indices =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0});
 
     const uint32_t bufferInitialVertex =
         checkIndex & CheckIndex::Vertex ? std::numeric_limits<uint32_t>::max() : 0;
     const uint32_t bufferInitialInstance =
         checkIndex & CheckIndex::Instance ? std::numeric_limits<uint32_t>::max() : 0;
-    wgpu::Buffer buffer =
-        utils::CreateBufferFromData(device, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::Storage,
-                                    {bufferInitialVertex, bufferInitialInstance});
+    wgpu::Buffer buffer = dawn::utils::CreateBufferFromData(
+        device, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::Storage,
+        {bufferInitialVertex, bufferInitialInstance});
 
     wgpu::Buffer indirectBuffer;
     switch (mode) {
@@ -195,11 +196,11 @@ struct FragInputs {
         case DrawMode::Indexed:
             break;
         case DrawMode::NonIndexedIndirect:
-            indirectBuffer = utils::CreateBufferFromData<uint32_t>(
+            indirectBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
                 device, wgpu::BufferUsage::Indirect, {1, 1, firstVertex, firstInstance});
             break;
         case DrawMode::IndexedIndirect:
-            indirectBuffer = utils::CreateBufferFromData<uint32_t>(
+            indirectBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
                 device, wgpu::BufferUsage::Indirect, {1, 1, 0, firstVertex, firstInstance});
             break;
         default:
@@ -207,7 +208,7 @@ struct FragInputs {
     }
 
     wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);

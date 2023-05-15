@@ -43,7 +43,7 @@ class UnsafeAPIValidationTest : public ValidationTest {
 
 // Check chromium_disable_uniformity_analysis is an unsafe API.
 TEST_F(UnsafeAPIValidationTest, chromium_disable_uniformity_analysis) {
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         enable chromium_disable_uniformity_analysis;
 
         @compute @workgroup_size(8) fn uniformity_error(

@@ -20,12 +20,12 @@
 class CullingTest : public DawnTest {
   protected:
     wgpu::RenderPipeline CreatePipelineForTest(wgpu::FrontFace frontFace, wgpu::CullMode cullMode) {
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         // Draw two triangles with different winding orders:
         // 1. The top-left one is counterclockwise (CCW)
         // 2. The bottom-right one is clockwise (CW)
-        pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        pipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -41,7 +41,7 @@ class CullingTest : public DawnTest {
         // FragCoord of pixel(x, y) in framebuffer coordinate is (x + 0.5, y + 0.5). And we use
         // RGBA8 format for the back buffer. So (FragCoord.xy - vec2(0.5)) / 255 in shader code
         // will make the pixel's R and G channels exactly equal to the pixel's x and y coordinates.
-        pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        pipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @fragment
             fn main(@builtin(position) FragCoord : vec4f) -> @location(0) vec4f {
                 return vec4f(
@@ -74,7 +74,7 @@ class CullingTest : public DawnTest {
                 bool isCWTriangleCulled) {
         wgpu::Texture colorTexture = Create2DTextureForTest(wgpu::TextureFormat::RGBA8Unorm);
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         renderPassDescriptor.cColorAttachments[0].clearValue = {0.0, 0.0, 1.0, 1.0};
         renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
 
@@ -86,15 +86,15 @@ class CullingTest : public DawnTest {
         wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
         queue.Submit(1, &commandBuffer);
 
-        const utils::RGBA8 kBackgroundColor = utils::RGBA8::kBlue;
-        const utils::RGBA8 kTopLeftColor = utils::RGBA8::kBlack;
-        constexpr utils::RGBA8 kBottomRightColor = utils::RGBA8(3, 3, 0, 255);
+        const dawn::utils::RGBA8 kBackgroundColor = dawn::utils::RGBA8::kBlue;
+        const dawn::utils::RGBA8 kTopLeftColor = dawn::utils::RGBA8::kBlack;
+        constexpr dawn::utils::RGBA8 kBottomRightColor = dawn::utils::RGBA8(3, 3, 0, 255);
 
-        utils::RGBA8 kCCWTriangleTopLeftColor =
+        dawn::utils::RGBA8 kCCWTriangleTopLeftColor =
             isCCWTriangleCulled ? kBackgroundColor : kTopLeftColor;
         EXPECT_PIXEL_RGBA8_EQ(kCCWTriangleTopLeftColor, colorTexture, 0, 0);
 
-        utils::RGBA8 kCWTriangleBottomRightColor =
+        dawn::utils::RGBA8 kCWTriangleBottomRightColor =
             isCWTriangleCulled ? kBackgroundColor : kBottomRightColor;
         EXPECT_PIXEL_RGBA8_EQ(kCWTriangleBottomRightColor, colorTexture, kSize - 1, kSize - 1);
     }

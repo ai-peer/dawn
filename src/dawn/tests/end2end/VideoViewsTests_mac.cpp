@@ -38,14 +38,14 @@ class PlatformTextureIOSurface : public VideoViewsTestBackend::PlatformTexture {
   public:
     PlatformTextureIOSurface(wgpu::Texture&& texture, IOSurfaceRef iosurface)
         : PlatformTexture(std::move(texture)) {
-        mIOSurface = AcquireCFRef<IOSurfaceRef>(iosurface);
+        mIOSurface = dawn::AcquireCFRef<IOSurfaceRef>(iosurface);
     }
     ~PlatformTextureIOSurface() override { mIOSurface = nullptr; }
 
     bool CanWrapAsWGPUTexture() override { return true; }
 
   private:
-    CFRef<IOSurfaceRef> mIOSurface = nullptr;
+    dawn::CFRef<IOSurfaceRef> mIOSurface = nullptr;
 };
 
 class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {

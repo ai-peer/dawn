@@ -26,11 +26,11 @@ class VertexBufferValidationTest : public ValidationTest {
         ValidationTest::SetUp();
 
         // Placeholder vertex shader module
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 0.0);
             })");
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
@@ -68,12 +68,12 @@ class VertexBufferValidationTest : public ValidationTest {
 
         vs << "}\n";
 
-        return utils::CreateShaderModule(device, vs.str().c_str());
+        return dawn::utils::CreateShaderModule(device, vs.str().c_str());
     }
 
     wgpu::RenderPipeline MakeRenderPipeline(const wgpu::ShaderModule& vsModule,
-                                            const utils::ComboVertexState& state) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+                                            const dawn::utils::ComboVertexState& state) {
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
@@ -85,7 +85,7 @@ class VertexBufferValidationTest : public ValidationTest {
 
     wgpu::RenderPipeline MakeRenderPipeline(const wgpu::ShaderModule& vsModule,
                                             unsigned int bufferCount) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
@@ -136,7 +136,7 @@ TEST_F(VertexBufferValidationTest, UnsetVertexBuffer) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     // Control case: set the vertex buffer needed by a pipeline in render bundle encoder is valid.
@@ -338,7 +338,7 @@ TEST_F(VertexBufferValidationTest, VertexBufferSlotValidation) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -422,7 +422,7 @@ TEST_F(VertexBufferValidationTest, VertexBufferOffsetOOBValidation) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -507,7 +507,7 @@ TEST_F(VertexBufferValidationTest, UnsetVertexBufferWithInvalidOffsetAndSize) {
 TEST_F(VertexBufferValidationTest, InvalidUsage) {
     wgpu::Buffer vertexBuffer = MakeVertexBuffer();
     wgpu::Buffer indexBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 0, 0});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 0, 0});
 
     PlaceholderRenderPass renderPass(device);
     // Control case: using the vertex buffer is valid.
@@ -527,7 +527,7 @@ TEST_F(VertexBufferValidationTest, InvalidUsage) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     // Control case: using the vertex buffer is valid.
@@ -584,7 +584,7 @@ TEST_F(VertexBufferValidationTest, DrawStrideLimitsVertex) {
     // Vertex attribute offset is 0
     wgpu::RenderPipeline pipeline1;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 8;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Vertex;
@@ -597,7 +597,7 @@ TEST_F(VertexBufferValidationTest, DrawStrideLimitsVertex) {
     // Vertex attribute offset is 4
     wgpu::RenderPipeline pipeline2;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 8;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Vertex;
@@ -715,7 +715,7 @@ TEST_F(VertexBufferValidationTest, DrawStrideLimitsInstance) {
     // Vertex attribute offset is 0
     wgpu::RenderPipeline pipeline1;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 8;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Instance;
@@ -728,7 +728,7 @@ TEST_F(VertexBufferValidationTest, DrawStrideLimitsInstance) {
     // Vertex attribute offset is 4
     wgpu::RenderPipeline pipeline2;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 8;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Instance;
@@ -844,12 +844,12 @@ TEST_F(VertexBufferValidationTest, DrawIndexedStrideLimitsInstance) {
     wgpu::Buffer vertexBuffer = device.CreateBuffer(&descriptor);
 
     wgpu::Buffer indexBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
 
     // Vertex attribute offset is 0
     wgpu::RenderPipeline pipeline1;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 8;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Instance;
@@ -862,7 +862,7 @@ TEST_F(VertexBufferValidationTest, DrawIndexedStrideLimitsInstance) {
     // Vertex attribute offset is 4
     wgpu::RenderPipeline pipeline2;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 8;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Instance;
@@ -986,7 +986,7 @@ TEST_F(VertexBufferValidationTest, DrawStrideLimitsVertexMultipleAttributes) {
     // lastStride = attribute[1].offset + sizeof(attribute[1].format) = 8
     wgpu::RenderPipeline pipeline1;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 12;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Vertex;
@@ -1004,7 +1004,7 @@ TEST_F(VertexBufferValidationTest, DrawStrideLimitsVertexMultipleAttributes) {
     // lastStride = attribute[1].offset + sizeof(attribute[1].format) = 12
     wgpu::RenderPipeline pipeline2;
     {
-        utils::ComboVertexState state;
+        dawn::utils::ComboVertexState state;
         state.vertexBufferCount = 1;
         state.cVertexBuffers[0].arrayStride = 12;
         state.cVertexBuffers[0].stepMode = wgpu::VertexStepMode::Vertex;

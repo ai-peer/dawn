@@ -179,7 +179,7 @@ DawnPerfTestBase::DawnPerfTestBase(DawnTestBase* test,
     : mTest(test),
       mIterationsPerStep(iterationsPerStep),
       mMaxStepsInFlight(maxStepsInFlight),
-      mTimer(utils::CreateTimer()) {}
+      mTimer(dawn::utils::CreateTimer()) {}
 
 DawnPerfTestBase::~DawnPerfTestBase() = default;
 

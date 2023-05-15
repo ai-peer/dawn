@@ -14,7 +14,7 @@
 
 namespace {
 
-class Placeholder : public RefCounted {
+class Placeholder : public dawn::RefCounted {
   public:
     explicit Placeholder(int* alive) : mAlive(alive) { ++*mAlive; }
 
@@ -28,7 +28,7 @@ class Placeholder : public RefCounted {
 
 TEST(StackContainer, Vector) {
     const int stack_size = 3;
-    StackVector<int, stack_size> vect;
+    dawn::StackVector<int, stack_size> vect;
     const int* stack_buffer = &vect.stack_data().stack_buffer()[0];
 
     // The initial |stack_size| elements should appear in the stack buffer.
@@ -62,7 +62,7 @@ TEST(StackContainer, Vector) {
     // Copying the small vector to another should use the same allocator and use
     // the now-unused stack buffer. GENERALLY CALLERS SHOULD NOT DO THIS since
     // they have to get the template types just right and it can cause errors.
-    std::vector<int, StackAllocator<int, stack_size>> other(vect.container());
+    std::vector<int, dawn::StackAllocator<int, stack_size>> other(vect.container());
     EXPECT_EQ(stack_buffer, &other.front());
     EXPECT_TRUE(vect.stack_data().used_stack_buffer_);
     for (int i = 0; i < stack_size; i++) {
@@ -72,11 +72,11 @@ TEST(StackContainer, Vector) {
 
 TEST(StackContainer, VectorDoubleDelete) {
     // Regression testing for double-delete.
-    typedef StackVector<Ref<Placeholder>, 2> Vector;
+    typedef dawn::StackVector<dawn::Ref<Placeholder>, 2> Vector;
     Vector vect;
 
     int alive = 0;
-    Ref<Placeholder> placeholder = AcquireRef(new Placeholder(&alive));
+    dawn::Ref<Placeholder> placeholder = AcquireRef(new Placeholder(&alive));
     EXPECT_EQ(alive, 1);
 
     vect->push_back(placeholder);
@@ -111,15 +111,15 @@ class AlignedData {
 #define EXPECT_ALIGNED(ptr, align) EXPECT_EQ(0u, reinterpret_cast<uintptr_t>(ptr) & (align - 1))
 
 TEST(StackContainer, BufferAlignment) {
-    StackVector<wchar_t, 16> text;
+    dawn::StackVector<wchar_t, 16> text;
     text->push_back(L'A');
     EXPECT_ALIGNED(&text[0], alignof(wchar_t));
 
-    StackVector<double, 1> doubles;
+    dawn::StackVector<double, 1> doubles;
     doubles->push_back(0.0);
     EXPECT_ALIGNED(&doubles[0], alignof(double));
 
-    StackVector<AlignedData<16>, 1> aligned16;
+    dawn::StackVector<AlignedData<16>, 1> aligned16;
     aligned16->push_back(AlignedData<16>());
     EXPECT_ALIGNED(&aligned16[0], 16);
 
@@ -127,17 +127,18 @@ TEST(StackContainer, BufferAlignment) {
     // It seems that non-X86 gcc doesn't respect greater than 16 byte alignment.
     // See http://gcc.gnu.org/bugzilla/show_bug.cgi?id=33721 for details.
     // TODO(sbc): Re-enable this if GCC starts respecting higher alignments.
-    StackVector<AlignedData<256>, 1> aligned256;
+    dawn::StackVector<AlignedData<256>, 1> aligned256;
     aligned256->push_back(AlignedData<256>());
     EXPECT_ALIGNED(&aligned256[0], 256);
 #endif
 }
 
-template class StackVector<int, 2>;
-template class StackVector<Ref<Placeholder>, 2>;
+template class dawn::StackVector<int, 2>;
+template class dawn::StackVector<dawn::Ref<Placeholder>, 2>;
 
 template <typename T, size_t size>
-void CheckStackVectorElements(const StackVector<T, size>& vec, std::initializer_list<T> expected) {
+void CheckStackVectorElements(const dawn::StackVector<T, size>& vec,
+                              std::initializer_list<T> expected) {
     auto expected_it = expected.begin();
     EXPECT_EQ(vec->size(), expected.size());
     for (T t : vec) {
@@ -149,7 +150,7 @@ void CheckStackVectorElements(const StackVector<T, size>& vec, std::initializer_
 }
 
 TEST(StackContainer, Iteration) {
-    StackVector<int, 3> vect;
+    dawn::StackVector<int, 3> vect;
     vect->push_back(7);
     vect->push_back(11);
 

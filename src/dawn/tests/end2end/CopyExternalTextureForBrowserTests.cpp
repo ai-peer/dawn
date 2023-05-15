@@ -40,45 +40,53 @@ wgpu::Texture Create2DTexture(wgpu::Device device,
 static constexpr uint32_t kWidth = 4;
 static constexpr uint32_t kHeight = 4;
 
-std::array<std::array<utils::RGBA8, 4>, 4> kDefaultExpectedRGBA = {
-    std::array<utils::RGBA8, 4>(
-        {utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kRed}),
-    std::array<utils::RGBA8, 4>(
-        {utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kRed}),
-    std::array<utils::RGBA8, 4>(
-        {utils::RGBA8::kGreen, utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlue}),
-    std::array<utils::RGBA8, 4>(
-        {utils::RGBA8::kGreen, utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlue})};
+std::array<std::array<dawn::utils::RGBA8, 4>, 4> kDefaultExpectedRGBA = {
+    std::array<dawn::utils::RGBA8, 4>({dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed}),
+    std::array<dawn::utils::RGBA8, 4>({dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed}),
+    std::array<dawn::utils::RGBA8, 4>({dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue}),
+    std::array<dawn::utils::RGBA8, 4>({dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue})};
 
-std::array<std::array<utils::RGBA8, 2>, 2> kDownScaledExpectedRGBA = {
-    std::array<utils::RGBA8, 2>({utils::RGBA8::kBlack, utils::RGBA8::kRed}),
-    std::array<utils::RGBA8, 2>({utils::RGBA8::kGreen, utils::RGBA8::kBlue})};
+std::array<std::array<dawn::utils::RGBA8, 2>, 2> kDownScaledExpectedRGBA = {
+    std::array<dawn::utils::RGBA8, 2>({dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kRed}),
+    std::array<dawn::utils::RGBA8, 2>({dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlue})};
 
-std::array<std::array<utils::RGBA8, 8>, 8> kUpScaledExpectedRGBA = {
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,
-                                 utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kRed,
-                                 utils::RGBA8::kRed, utils::RGBA8::kRed}),
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,
-                                 utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kRed,
-                                 utils::RGBA8::kRed, utils::RGBA8::kRed}),
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,
-                                 utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kRed,
-                                 utils::RGBA8::kRed, utils::RGBA8::kRed}),
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,
-                                 utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kRed,
-                                 utils::RGBA8::kRed, utils::RGBA8::kRed}),
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kGreen, utils::RGBA8::kGreen, utils::RGBA8::kGreen,
-                                 utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlue,
-                                 utils::RGBA8::kBlue, utils::RGBA8::kBlue}),
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kGreen, utils::RGBA8::kGreen, utils::RGBA8::kGreen,
-                                 utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlue,
-                                 utils::RGBA8::kBlue, utils::RGBA8::kBlue}),
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kGreen, utils::RGBA8::kGreen, utils::RGBA8::kGreen,
-                                 utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlue,
-                                 utils::RGBA8::kBlue, utils::RGBA8::kBlue}),
-    std::array<utils::RGBA8, 8>({utils::RGBA8::kGreen, utils::RGBA8::kGreen, utils::RGBA8::kGreen,
-                                 utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlue,
-                                 utils::RGBA8::kBlue, utils::RGBA8::kBlue})};
+std::array<std::array<dawn::utils::RGBA8, 8>, 8> kUpScaledExpectedRGBA = {
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed}),
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed}),
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed}),
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed,
+                                       dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kRed}),
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue}),
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue}),
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue}),
+    std::array<dawn::utils::RGBA8, 8>({dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kGreen,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue,
+                                       dawn::utils::RGBA8::kBlue, dawn::utils::RGBA8::kBlue})};
 
 template <typename Parent>
 class CopyExternalTextureForBrowserTests : public Parent {
@@ -95,10 +103,10 @@ class CopyExternalTextureForBrowserTests : public Parent {
             this->device.CreateTexture(&externalTexturePlane0Desc);
 
         // The value Ref to ExternalTextureTest.cpp:
-        //  {0.0, .5, .5, utils::RGBA8::kBlack, 0.0f},
-        //  {0.2126, 0.4172, 1.0, utils::RGBA8::kRed, 1.0f},
-        //  {0.7152, 0.1402, 0.0175, utils::RGBA8::kGreen, 0.0f},
-        //  {0.0722, 1.0, 0.4937, utils::RGBA8::kBlue, 0.0f},
+        //  {0.0, .5, .5, dawn::utils::RGBA8::kBlack, 0.0f},
+        //  {0.2126, 0.4172, 1.0, dawn::utils::RGBA8::kRed, 1.0f},
+        //  {0.7152, 0.1402, 0.0175, dawn::utils::RGBA8::kGreen, 0.0f},
+        //  {0.0722, 1.0, 0.4937, dawn::utils::RGBA8::kBlue, 0.0f},
         wgpu::ImageCopyTexture plane0 = {};
         plane0.texture = externalTexturePlane0;
         std::array<uint8_t, 16> yPlaneData = {0,   0,   54, 54, 0,   0,   54, 54,
@@ -136,8 +144,8 @@ class CopyExternalTextureForBrowserTests : public Parent {
 
         // Create an ExternalTextureDescriptor from the texture views
         wgpu::ExternalTextureDescriptor externalDesc;
-        utils::ColorSpaceConversionInfo info =
-            utils::GetYUVBT709ToRGBSRGBColorSpaceConversionInfo();
+        dawn::utils::ColorSpaceConversionInfo info =
+            dawn::utils::GetYUVBT709ToRGBSRGBColorSpaceConversionInfo();
         externalDesc.yuvToRgbConversionMatrix = info.yuvToRgbConversionMatrix.data();
         externalDesc.gamutConversionMatrix = info.gamutConversionMatrix.data();
         externalDesc.srcTransferFunctionParameters = info.srcTransferFunctionParameters.data();
@@ -153,11 +161,11 @@ class CopyExternalTextureForBrowserTests : public Parent {
         return this->device.CreateExternalTexture(&externalDesc);
     }
 
-    std::vector<utils::RGBA8> GetExpectedData(bool flipY,
-                                              wgpu::Origin3D srcOrigin,
-                                              wgpu::Extent3D rect,
-                                              wgpu::Extent2D naturalSize) {
-        std::vector<utils::RGBA8> expected;
+    std::vector<dawn::utils::RGBA8> GetExpectedData(bool flipY,
+                                                    wgpu::Origin3D srcOrigin,
+                                                    wgpu::Extent3D rect,
+                                                    wgpu::Extent2D naturalSize) {
+        std::vector<dawn::utils::RGBA8> expected;
         for (uint32_t rowInRect = 0; rowInRect < rect.height; ++rowInRect) {
             for (uint32_t colInRect = 0; colInRect < rect.width; ++colInRect) {
                 uint32_t row = rowInRect + srcOrigin.y;
@@ -264,12 +272,12 @@ class CopyExternalTextureForBrowserTests_Basic
             wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc |
                 wgpu::TextureUsage::CopyDst);
         wgpu::ImageCopyTexture dstImageCopyTexture =
-            utils::CreateImageCopyTexture(dstTexture, 0, dstOrigin);
+            dawn::utils::CreateImageCopyTexture(dstTexture, 0, dstOrigin);
 
         queue.CopyExternalTextureForBrowser(&srcImageCopyExternalTexture, &dstImageCopyTexture,
                                             &copySize, &options);
 
-        std::vector<utils::RGBA8> expected = GetExpectedData(
+        std::vector<dawn::utils::RGBA8> expected = GetExpectedData(
             options.flipY, srcImageCopyExternalTexture.origin, copySize, naturalSize);
 
         EXPECT_TEXTURE_EQ(expected.data(), dstTexture, dstOrigin, copySize);

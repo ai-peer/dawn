@@ -19,7 +19,7 @@
 #include "dawn/utils/WGPUHelpers.h"
 
 constexpr uint32_t kRTSize = 4;
-const utils::RGBA8 kColors[2] = {utils::RGBA8::kGreen, utils::RGBA8::kBlue};
+const dawn::utils::RGBA8 kColors[2] = {dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlue};
 
 // RenderBundleTest tests simple usage of RenderBundles to draw. The implementaiton
 // of RenderBundle is shared significantly with render pass execution which is
@@ -29,15 +29,15 @@ class RenderBundleTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             struct Ubo {
                 color : vec4f
             }
@@ -47,7 +47,7 @@ class RenderBundleTest : public DawnTest {
                 return fragmentUniformBuffer.color;
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -64,17 +64,17 @@ class RenderBundleTest : public DawnTest {
         float colors1[] = {kColors[1].r / 255.f, kColors[1].g / 255.f, kColors[1].b / 255.f,
                            kColors[1].a / 255.f};
 
-        wgpu::Buffer buffer0 = utils::CreateBufferFromData(device, colors0, 4 * sizeof(float),
-                                                           wgpu::BufferUsage::Uniform);
-        wgpu::Buffer buffer1 = utils::CreateBufferFromData(device, colors1, 4 * sizeof(float),
-                                                           wgpu::BufferUsage::Uniform);
+        wgpu::Buffer buffer0 = dawn::utils::CreateBufferFromData(device, colors0, 4 * sizeof(float),
+                                                                 wgpu::BufferUsage::Uniform);
+        wgpu::Buffer buffer1 = dawn::utils::CreateBufferFromData(device, colors1, 4 * sizeof(float),
+                                                                 wgpu::BufferUsage::Uniform);
 
-        bindGroups[0] = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                             {{0, buffer0, 0, 4 * sizeof(float)}});
-        bindGroups[1] = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                             {{0, buffer1, 0, 4 * sizeof(float)}});
+        bindGroups[0] = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                   {{0, buffer0, 0, 4 * sizeof(float)}});
+        bindGroups[1] = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                   {{0, buffer1, 0, 4 * sizeof(float)}});
 
-        vertexBuffer = utils::CreateBufferFromData<float>(
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex,
             {// The bottom left triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f,
@@ -83,7 +83,7 @@ class RenderBundleTest : public DawnTest {
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f});
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline pipeline;
     wgpu::Buffer vertexBuffer;
     wgpu::BindGroup bindGroups[2];
@@ -91,7 +91,7 @@ class RenderBundleTest : public DawnTest {
 
 // Basic test of RenderBundle.
 TEST_P(RenderBundleTest, Basic) {
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.colorFormat;
 
@@ -119,7 +119,7 @@ TEST_P(RenderBundleTest, Basic) {
 
 // Test execution of multiple render bundles
 TEST_P(RenderBundleTest, MultipleBundles) {
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.colorFormat;
 
@@ -160,7 +160,7 @@ TEST_P(RenderBundleTest, MultipleBundles) {
 
 // Test execution of a bundle along with render pass commands.
 TEST_P(RenderBundleTest, BundleAndRenderPassCommands) {
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.colorFormat;
 

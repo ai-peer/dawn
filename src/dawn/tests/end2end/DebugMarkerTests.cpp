@@ -20,7 +20,7 @@ class DebugMarkerTests : public DawnTest {};
 
 // Make sure that calling a marker API without a debugging tool attached doesn't cause a failure.
 TEST_P(DebugMarkerTests, NoFailureWithoutDebugToolAttached) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 4, 4);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 4, 4);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     encoder.PushDebugGroup("Event Start");

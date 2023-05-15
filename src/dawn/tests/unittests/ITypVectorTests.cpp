@@ -20,10 +20,10 @@
 
 class ITypVectorTest : public testing::Test {
   protected:
-    using Key = TypedInteger<struct KeyT, uint32_t>;
-    using Val = TypedInteger<struct ValT, uint32_t>;
+    using Key = dawn::TypedInteger<struct KeyT, uint32_t>;
+    using Val = dawn::TypedInteger<struct ValT, uint32_t>;
 
-    using Vector = ityp::vector<Key, Val>;
+    using Vector = dawn::ityp::vector<Key, Val>;
 };
 
 // Test creation and initialization of the vector.

@@ -290,7 +290,7 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
         wgpu::TextureView wrappedView = wrappedTexture.CreateView();
 
         // Submit a clear operation
-        utils::ComboRenderPassDescriptor renderPassDescriptor({wrappedView}, {});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({wrappedView}, {});
         renderPassDescriptor.cColorAttachments[0].clearValue = clearColor;
         renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
 
@@ -309,8 +309,9 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
                                     wgpu::Queue dawnQueue,
                                     wgpu::Texture source,
                                     wgpu::Texture destination) {
-        wgpu::ImageCopyTexture copySrc = utils::CreateImageCopyTexture(source, 0, {0, 0, 0});
-        wgpu::ImageCopyTexture copyDst = utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
+        wgpu::ImageCopyTexture copySrc = dawn::utils::CreateImageCopyTexture(source, 0, {0, 0, 0});
+        wgpu::ImageCopyTexture copyDst =
+            dawn::utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
 
         wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -342,7 +343,7 @@ TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
         exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
     // Verify |device| sees the changes from |secondDevice|
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
 
     IgnoreSignalSemaphore(nextWrappedTexture);
 }
@@ -367,7 +368,7 @@ TEST_P(VulkanImageWrappingUsageTests, UninitializedTextureIsCleared) {
         exportInfo.releasedOldLayout, exportInfo.releasedNewLayout, false);
 
     // Verify |device| doesn't see the changes from |secondDevice|
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), nextWrappedTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 0, 0, 0), nextWrappedTexture, 0, 0);
 
     IgnoreSignalSemaphore(nextWrappedTexture);
 }
@@ -400,7 +401,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureSrcSync) {
     SimpleCopyTextureToTexture(device, queue, deviceWrappedTexture, copyDstTexture);
 
     // Verify |copyDstTexture| sees changes from |secondDevice|
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), copyDstTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 3, 4), copyDstTexture, 0, 0);
 
     IgnoreSignalSemaphore(deviceWrappedTexture);
 }
@@ -449,7 +450,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
         secondExportInfo.releasedOldLayout, secondExportInfo.releasedNewLayout);
 
     // Verify |nextWrappedTexture| contains the color from our copy
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
 
     IgnoreSignalSemaphore(nextWrappedTexture);
 }
@@ -483,8 +484,8 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToBufferSrcSync) {
 
     // Copy |deviceWrappedTexture| into |copyDstBuffer|
     wgpu::ImageCopyTexture copySrc =
-        utils::CreateImageCopyTexture(deviceWrappedTexture, 0, {0, 0, 0});
-    wgpu::ImageCopyBuffer copyDst = utils::CreateImageCopyBuffer(copyDstBuffer, 0, 256);
+        dawn::utils::CreateImageCopyTexture(deviceWrappedTexture, 0, {0, 0, 0});
+    wgpu::ImageCopyBuffer copyDst = dawn::utils::CreateImageCopyBuffer(copyDstBuffer, 0, 256);
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -530,12 +531,12 @@ TEST_P(VulkanImageWrappingUsageTests, CopyBufferToTextureDstSync) {
 
     // Create a buffer on |secondDevice|
     wgpu::Buffer copySrcBuffer =
-        utils::CreateBufferFromData(secondDevice, wgpu::BufferUsage::CopySrc, {0x04030201});
+        dawn::utils::CreateBufferFromData(secondDevice, wgpu::BufferUsage::CopySrc, {0x04030201});
 
     // Copy |copySrcBuffer| into |secondDeviceWrappedTexture|
-    wgpu::ImageCopyBuffer copySrc = utils::CreateImageCopyBuffer(copySrcBuffer, 0, 256);
+    wgpu::ImageCopyBuffer copySrc = dawn::utils::CreateImageCopyBuffer(copySrcBuffer, 0, 256);
     wgpu::ImageCopyTexture copyDst =
-        utils::CreateImageCopyTexture(secondDeviceWrappedTexture, 0, {0, 0, 0});
+        dawn::utils::CreateImageCopyTexture(secondDeviceWrappedTexture, 0, {0, 0, 0});
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -553,7 +554,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyBufferToTextureDstSync) {
         secondExportInfo.releasedOldLayout, secondExportInfo.releasedNewLayout);
 
     // Verify |nextWrappedTexture| contains the color from our copy
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
 
     IgnoreSignalSemaphore(nextWrappedTexture);
 }
@@ -593,10 +594,10 @@ TEST_P(VulkanImageWrappingUsageTests, DoubleTextureUsage) {
     SimpleCopyTextureToTexture(device, queue, deviceWrappedTexture, secondCopyDstTexture);
 
     // Verify |copyDstTexture| sees changes from |secondDevice|
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), copyDstTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 3, 4), copyDstTexture, 0, 0);
 
     // Verify |secondCopyDstTexture| sees changes from |secondDevice|
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), secondCopyDstTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 3, 4), secondCopyDstTexture, 0, 0);
 
     IgnoreSignalSemaphore(deviceWrappedTexture);
 }
@@ -679,7 +680,7 @@ TEST_P(VulkanImageWrappingUsageTests, ChainTextureCopy) {
     SimpleCopyTextureToTexture(device, queue, wrappedTexCDevice1, texD);
 
     // Verify D matches clear color
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), texD, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(1, 2, 3, 4), texD, 0, 0);
 
     IgnoreSignalSemaphore(wrappedTexCDevice1);
 }
@@ -715,7 +716,7 @@ TEST_P(VulkanImageWrappingUsageTests, LargerImage) {
 
     // Draw a non-trivial picture
     uint32_t width = 640, height = 480, pixelSize = 4;
-    uint32_t bytesPerRow = Align(width * pixelSize, kTextureBytesPerRowAlignment);
+    uint32_t bytesPerRow = dawn::Align(width * pixelSize, kTextureBytesPerRowAlignment);
     std::vector<unsigned char> data(bytesPerRow * (height - 1) + width * pixelSize);
 
     for (uint32_t row = 0; row < height; row++) {
@@ -733,11 +734,12 @@ TEST_P(VulkanImageWrappingUsageTests, LargerImage) {
 
     // Write the picture
     {
-        wgpu::Buffer copySrcBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer copySrcBuffer = dawn::utils::CreateBufferFromData(
             secondDevice, data.data(), data.size(), wgpu::BufferUsage::CopySrc);
-        wgpu::ImageCopyBuffer copySrc = utils::CreateImageCopyBuffer(copySrcBuffer, 0, bytesPerRow);
+        wgpu::ImageCopyBuffer copySrc =
+            dawn::utils::CreateImageCopyBuffer(copySrcBuffer, 0, bytesPerRow);
         wgpu::ImageCopyTexture copyDst =
-            utils::CreateImageCopyTexture(wrappedTexture, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(wrappedTexture, 0, {0, 0, 0});
         wgpu::Extent3D copySize = {width, height, 1};
 
         wgpu::CommandEncoder encoder = secondDevice.CreateCommandEncoder();
@@ -760,8 +762,9 @@ TEST_P(VulkanImageWrappingUsageTests, LargerImage) {
     wgpu::Buffer copyDstBuffer = device.CreateBuffer(&copyDesc);
     {
         wgpu::ImageCopyTexture copySrc =
-            utils::CreateImageCopyTexture(nextWrappedTexture, 0, {0, 0, 0});
-        wgpu::ImageCopyBuffer copyDst = utils::CreateImageCopyBuffer(copyDstBuffer, 0, bytesPerRow);
+            dawn::utils::CreateImageCopyTexture(nextWrappedTexture, 0, {0, 0, 0});
+        wgpu::ImageCopyBuffer copyDst =
+            dawn::utils::CreateImageCopyBuffer(copyDstBuffer, 0, bytesPerRow);
 
         wgpu::Extent3D copySize = {width, height, 1};
 
@@ -802,23 +805,24 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
 
     wgpu::ImageCopyTexture dst = {};
     dst.texture = texture;
-    std::array<utils::RGBA8, 4> rgbaTextureData = {
-        utils::RGBA8(180, 0, 0, 255),
-        utils::RGBA8(0, 84, 0, 127),
-        utils::RGBA8(0, 0, 62, 100),
-        utils::RGBA8(62, 180, 84, 90),
+    std::array<dawn::utils::RGBA8, 4> rgbaTextureData = {
+        dawn::utils::RGBA8(180, 0, 0, 255),
+        dawn::utils::RGBA8(0, 84, 0, 127),
+        dawn::utils::RGBA8(0, 0, 62, 100),
+        dawn::utils::RGBA8(62, 180, 84, 90),
     };
 
     wgpu::TextureDataLayout dataLayout = {};
-    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(utils::RGBA8);
+    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(dawn::utils::RGBA8);
 
-    queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(utils::RGBA8),
-                       &dataLayout, &textureDesc.size);
+    queue.WriteTexture(&dst, rgbaTextureData.data(),
+                       rgbaTextureData.size() * sizeof(dawn::utils::RGBA8), &dataLayout,
+                       &textureDesc.size);
 
     wgpu::TextureView textureView = texture.CreateView(&viewDesc);
 
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
-    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -831,7 +835,7 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             }
         )");
-    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+    pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var texture : texture_2d<f32>;
 
             @fragment
@@ -840,7 +844,7 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
             }
         )");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
         device, textureDesc.size.width, textureDesc.size.height, wgpu::TextureFormat::RGBA8Unorm);
     pipelineDesc.cTargets[0].format = renderPass.colorFormat;
 
@@ -849,7 +853,7 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, textureView}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, textureView}});
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
@@ -861,18 +865,18 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_BETWEEN(        //
-        utils::RGBA8(116, 0, 0, 255),  //
-        utils::RGBA8(117, 0, 0, 255), renderPass.color, 0, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 23, 0, 127),  //
-        utils::RGBA8(0, 24, 0, 127), renderPass.color, 1, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 0, 12, 100),  //
-        utils::RGBA8(0, 0, 13, 100), renderPass.color, 0, 1);
-    EXPECT_PIXEL_RGBA8_BETWEEN(         //
-        utils::RGBA8(12, 116, 23, 90),  //
-        utils::RGBA8(13, 117, 24, 90), renderPass.color, 1, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(              //
+        dawn::utils::RGBA8(116, 0, 0, 255),  //
+        dawn::utils::RGBA8(117, 0, 0, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 23, 0, 127),  //
+        dawn::utils::RGBA8(0, 24, 0, 127), renderPass.color, 1, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 0, 12, 100),  //
+        dawn::utils::RGBA8(0, 0, 13, 100), renderPass.color, 0, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(               //
+        dawn::utils::RGBA8(12, 116, 23, 90),  //
+        dawn::utils::RGBA8(13, 117, 24, 90), renderPass.color, 1, 1);
 
     IgnoreSignalSemaphore(texture);
 }

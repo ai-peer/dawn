@@ -31,7 +31,7 @@ void ComputeFlowControlTests::RunTest(const char* shader,
                                       const std::vector<uint32_t>& inputs,
                                       const std::vector<uint32_t>& expected) {
     // Set up shader and pipeline
-    auto module = utils::CreateShaderModule(device, shader);
+    auto module = dawn::utils::CreateShaderModule(device, shader);
 
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.compute.module = module;
@@ -40,7 +40,7 @@ void ComputeFlowControlTests::RunTest(const char* shader,
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
 
     // Set up src storage buffer
-    wgpu::Buffer src = utils::CreateBufferFromData(
+    wgpu::Buffer src = dawn::utils::CreateBufferFromData(
         device, inputs.data(), inputs.size() * sizeof(uint32_t),
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
 
@@ -48,16 +48,16 @@ void ComputeFlowControlTests::RunTest(const char* shader,
     std::vector<uint32_t> dst_init_values(expected.size(), 0xDEADBEEF);
     dst_init_values[0] = 0;  // initial count
 
-    wgpu::Buffer dst = utils::CreateBufferFromData(
+    wgpu::Buffer dst = dawn::utils::CreateBufferFromData(
         device, dst_init_values.data(), dst_init_values.size() * sizeof(uint32_t),
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
 
     // Set up bind group and issue dispatch
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {
-                                                         {0, src},
-                                                         {1, dst},
-                                                     });
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {
+                                                               {0, src},
+                                                               {1, dst},
+                                                           });
 
     wgpu::CommandBuffer commands;
     {

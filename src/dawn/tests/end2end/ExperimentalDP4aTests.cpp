@@ -94,11 +94,11 @@ TEST_P(ExperimentalDP4aTests, BasicDP4aFeaturesTest) {
     EXPECT_EQ(deviceSupportDP4AFeature, shouldDP4AFeatureSupportedByDevice);
 
     if (!deviceSupportDP4AFeature) {
-        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader));
+        ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, computeShader));
         return;
     }
 
-    utils::CreateShaderModule(device, computeShader);
+    dawn::utils::CreateShaderModule(device, computeShader);
 
     wgpu::BufferDescriptor bufferDesc;
     bufferDesc.size = 4 * sizeof(uint32_t);
@@ -106,14 +106,14 @@ TEST_P(ExperimentalDP4aTests, BasicDP4aFeaturesTest) {
     wgpu::Buffer bufferOut = device.CreateBuffer(&bufferDesc);
 
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, computeShader);
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, computeShader);
     csDesc.compute.entryPoint = "main";
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
 
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {
-                                                         {0, bufferOut},
-                                                     });
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {
+                                                               {0, bufferOut},
+                                                           });
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();

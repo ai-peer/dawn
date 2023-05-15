@@ -23,7 +23,7 @@ class EntryPointTests : public DawnTest {};
 TEST_P(EntryPointTests, FragAndVertexSameModule) {
     // TODO(crbug.com/dawn/658): Crashes on bots
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vertex_main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         }
@@ -34,7 +34,7 @@ TEST_P(EntryPointTests, FragAndVertexSameModule) {
     )");
 
     // Create a point pipeline from the module.
-    utils::ComboRenderPipelineDescriptor desc;
+    dawn::utils::ComboRenderPipelineDescriptor desc;
     desc.vertex.module = module;
     desc.vertex.entryPoint = "vertex_main";
     desc.cFragment.module = module;
@@ -44,7 +44,7 @@ TEST_P(EntryPointTests, FragAndVertexSameModule) {
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&desc);
 
     // Render the point and check that it was rendered.
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -55,7 +55,7 @@ TEST_P(EntryPointTests, FragAndVertexSameModule) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderPass.color, 0, 0);
 }
 
 // Test creating two compute pipelines from the same module.
@@ -77,7 +77,7 @@ TEST_P(EntryPointTests, TwoComputeInModule) {
 
     wgpu::PipelineLayout pipelineLayout = device.CreatePipelineLayout(&pipelineLayoutDesc);
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Data {
             data : u32
         }
@@ -111,7 +111,7 @@ TEST_P(EntryPointTests, TwoComputeInModule) {
     bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDesc);
 
-    wgpu::BindGroup group = utils::MakeBindGroup(device, bindGroupLayout, {{0, buffer}});
+    wgpu::BindGroup group = dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, buffer}});
 
     // Use the first pipeline and check it wrote 1.
     {
