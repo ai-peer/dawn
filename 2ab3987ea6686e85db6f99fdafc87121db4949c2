@@ -46,6 +46,30 @@
       },
       "revId": "2ab3987ea6686e85db6f99fdafc87121db4949c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c840220e_36570ddb",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-15T11:29:56Z",
+      "side": 1,
+      "message": "Don\u0027t forget to remove it. and the DumpAllUsedUAVSlots method",
+      "parentUuid": "ef23f2b3_67ee4eca",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 138,
+        "endChar": 40
+      },
+      "revId": "2ab3987ea6686e85db6f99fdafc87121db4949c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
