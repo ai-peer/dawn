@@ -166,6 +166,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f792d4f9_417721ec",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-15T19:19:55Z",
+      "side": 1,
+      "message": "For example.\n\nWGSL bindings:\n```\n@group(0) @binding(0) var s : sampler;\n@group(0) @binding(1) var t : texture_external;\n```\n\nIt should be converted to HLSL\n```\nTexture2D\u003cfloat4\u003e ext_tex_plane_1 : register(t0);\ncbuffer cbuffer_ext_tex_params : register(b0) {\n  uint4 ext_tex_params[13];\n};\nSamplerState s : register(s0);\nTexture2D\u003cfloat4\u003e t : register(t1);\n```\n\nSo in externalTextureOptions, I need to assign plane1 to `group(0) binding(0)`, and params to `@group(0) @binding(0)`, and then convert to `t0`and `b0`.\n\nHowever, there could be mapping from group(0) binding(0) for other bindings in bindingRemapper, so external texture relateding bindings will be converted to wrong slot.",
+      "parentUuid": "1b56125c_e4d1a909",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
