@@ -214,6 +214,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9739e881_4dae2fbf",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-15T19:41:21Z",
+      "side": 1,
+      "message": "Ah, I forgot that bindings can alias in the HLSL backend, as the type of binding acts as separate namespaces. \nIn this case, you might be right in that you have to do this in two remappings. I don\u0027t think the external texture transform will let you alias the bindings - `tint::ast::transform::BindingRemapper::Remappings::allow_collisions` is special voodoo for the HLSL backend.",
+      "parentUuid": "e4e03ed0_13a7f512",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
