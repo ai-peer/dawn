@@ -118,6 +118,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9753b33a_4bf91339",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-15T14:48:53Z",
+      "side": 1,
+      "message": "BTW, I tired creating externalTextureOptions as below, The final binding points are {0, plane1Slot} and {0, paramsLot}.\n```\n    tint::writer::ExternalTextureOptions externalTextureOptions;\n    for (BindGroupIndex group : IterateBitSet(layout-\u003eGetBindGroupLayoutsMask())) {\n        const BindGroupLayoutBase* groupLayout \u003d layout-\u003eGetBindGroupLayout(group);\n        const auto\u0026 indices \u003d layout-\u003eGetBindingIndexInfo()[group];\n        for (const auto\u0026 [_, expansion] : groupLayout-\u003eGetExternalTextureBindingExpansionMap()) {\n            uint32_t plane1Slot \u003d indices[groupLayout-\u003eGetBindingIndex(expansion.plane1)];\n            uint32_t paramsSlot \u003d indices[groupLayout-\u003eGetBindingIndex(expansion.params)];\n            externalTextureOptions.bindings_map[{static_cast\u003cuint32_t\u003e(group),\n                                  static_cast\u003cuint32_t\u003e(expansion.plane0)}] \u003d {\n                {0u, plane1Slot},\n                {0u, paramsSlot}};\n        }\n    }\n```",
+      "parentUuid": "843dc216_62bc243e",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
