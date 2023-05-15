@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e17c8ec_1fac5846",
+        "filename": "dawn_wire.json",
+        "patchSetId": 49
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:21:16Z",
+      "side": 1,
+      "message": "Created an issue here https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1821",
+      "parentUuid": "071b52d4_a6cee969",
+      "revId": "584a8ee215c6ae8112b6d72e62b276652c4e1354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b2f0d31_8e92c703",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 49
