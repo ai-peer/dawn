@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a7a7888_67c6cb78",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T15:25:35Z",
+      "side": 1,
+      "message": "Mmmmh I should `CanInheritBindGroups` should be possible to be `true`. The binding model is very similar to Metal which has it to `true`. Peng do you remember why we are not doing it?\n\nIf we could do inheritance, then we would only need to unset the bindgroups that aren\u0027t inherited (and are present). This is because inherited bindgroups are either valid (ok) or dirty and will be implicitly unset when they are overwritten.\n\nAlso for UAVs we could almost have a static array with the max number of UAVs supported by D3D11, then in the pipeline layout compute for each BGL which index its UAVs start at, such that we can directly set them in the correct place in the array and don\u0027t need to touch other, non-dirty bindgroups.",
+      "parentUuid": "d9b1bae6_9f5358af",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "Got it, thanks!\nMaybe we can simply force all UAV groups dirty.",
       "parentUuid": "1f57d728_84580330",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d65575e_83ce434b",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T15:25:35Z",
+      "side": 1,
+      "message": "That\u0027d work but be doing more work than necessary. If you\u0027d like to take this approach we could use a TODO to optimize things afterwards.",
+      "parentUuid": "0335bd52_b1bc7792",
       "revId": "6969942bd94aaa90aef6401ef983609633150873",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
