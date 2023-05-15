@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45b471ac_0ad0ae04",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T13:18:35Z",
+      "side": 1,
+      "message": "It\u0027s because that `mDirtyBindGroups` may have groups that are not in the `mLastAppliedPipelineLayout`. That may cause `UnApplyBindGroup` to run into Assert.",
+      "parentUuid": "8ba4e786_54ab99a8",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-15T12:45:10Z",
       "side": 1,
       "message": "I think that this will not work as is. What if we have BG0 and BG1A and BG1B all with a UAV and do:\n\n```\nSetBindGroup(0, BG0)\nSetBindGroup(0, BG1A)\nDraw()\nSetBindGroup(0, BG1B)\nDraw()\n```\n\nThen in the second `Draw()` the call to apply will only iterate over `BG1A` and `mUAVs` will only contain a single UAV, when it should contain two.\n\nInstead, I think we could pre-compute in the pipeline layout the mask of BGLs that have a fragment/vertex UAV, then here do:\n\n```\nwgpu::BindGroupLayoutMask renderUAVMask \u003d pipeline-\u003eGet...();\nif (renderUAVMask !\u003d 0) {\n  stack_vector\u003cComPtr\u003cUAV\u003e, 4?\u003e uavs;\n  for (group in IterateBitSet(renderUAVMask)) {\n    Iterate the UAVs of the group and add them to the vector\n  }\n  \n  Call OMSetRenderTargetsAndUnorderedAccessViews\n}\n```\n\nCould we also have a test that would have caught this?",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb579235_c40f5ce3",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T13:18:35Z",
+      "side": 1,
+      "message": "\u003e  when it should contain two.\nSorry, could you please explain this? If I understand the example correctly, `BG0` shouldn\u0027t in fact count.",
+      "parentUuid": "e75dffd1_e6a6db4a",
       "revId": "6969942bd94aaa90aef6401ef983609633150873",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
