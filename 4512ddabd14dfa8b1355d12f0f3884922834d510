@@ -94,6 +94,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "843dc216_62bc243e",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-15T14:34:31Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I tried putting the final slot numbers in externalTextureOptions, but it doesn\u0027t work. Looks like externalTextureOptions is used for placing external texture related shader code. It happens before converting WGSL to HLSL. So if I put final slot numbers in the externalTextureOptions, it is very likely the slot number will conflict with other bindings. It causes problem. right?",
+      "parentUuid": "e6e4de90_e541c2d0",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
