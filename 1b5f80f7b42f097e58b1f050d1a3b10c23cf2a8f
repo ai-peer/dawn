@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4954e073_8d4c0a50",
+        "filename": "src/tint/ir/transform/transform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-15T18:42:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae49a587_58a51ee1",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "1b5f80f7b42f097e58b1f050d1a3b10c23cf2a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7380fd9_f3bf2a7c",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-05-15T17:48:20Z",
       "side": 1,
       "message": "There are a bunch of missing #if TINT_BUILD_IR checks in here I think.",
+      "revId": "1b5f80f7b42f097e58b1f050d1a3b10c23cf2a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a2b4c61_600f33e6",
+        "filename": "src/tint/transform/manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-15T18:42:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7380fd9_f3bf2a7c",
       "revId": "1b5f80f7b42f097e58b1f050d1a3b10c23cf2a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
