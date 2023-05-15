@@ -22,6 +22,30 @@
       },
       "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e3ee7d_d40fa963",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-15T23:56:08Z",
+      "side": 0,
+      "message": "Are you confident a collision like this works correctly with the infra?\nIIRC this sort of overlap does not work as you might expect, and some expectations are silently overridden.\nI could tag yet another bodge onto the roller, but it\u0027s reaching a point where it might be worth rebuilding it from the ground up. I\u0027m losing track of the workarounds for the flakes, timeouts, nondeterministic tags, etc.\nThat or we just go back to manual editing of the expectations...",
+      "parentUuid": "52656507_3905ada3",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 72
+      },
+      "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
