@@ -46,6 +46,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce06f634_6b9fa3af",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T08:45:14Z",
+      "side": 1,
+      "message": "This is what it does, and the backends all use the externalTextureOptions to tell Tint how to remap these bindings instead of the binding remapper. Is there a reason we use the binding remapper instead of BuildExternalTextureTransformBindings? (maybe I didn\u0027t understand your comment above)",
+      "parentUuid": "6b68f450_c1c7e7f0",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
