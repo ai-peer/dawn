@@ -214,6 +214,30 @@
       },
       "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db73491_59c5a220",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-15T21:33:02Z",
+      "side": 0,
+      "message": "Adding methods to existing C++ classes shouldn\u0027t cause compatibility issues. It might break the ABI in some cases, but I don\u0027t think we are going for C++ ABI stability.",
+      "parentUuid": "17de42fa_0a771ebe",
+      "range": {
+        "startLine": 1535,
+        "startChar": 8,
+        "endLine": 1535,
+        "endChar": 35
+      },
+      "revId": "9af5ceb553d76cb386870361c863f82be97df8ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
