@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d83dd8c2_e597e353",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-15T15:32:53Z",
+      "side": 1,
+      "message": "You are right. However this toggle is for testing only. For real cases, we will never have different feature level devices on the same GPU. Probably I should use adapter toggle instead of device toggle? Is there an example for it?",
+      "parentUuid": "5f31b384_14fad594",
+      "revId": "618b6ca1c1e64c5570406dac5821b10d061fd807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d765237_e557a59f",
         "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
         "patchSetId": 1
