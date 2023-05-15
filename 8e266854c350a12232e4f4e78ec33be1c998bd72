@@ -263,6 +263,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71b52c3b_6218425c",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T12:29:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3a22d88_4200ae17",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a1c2b03_cd3e3876",
@@ -584,6 +608,30 @@
       "side": 1,
       "message": "Yeah. Right now, `CanInheritBindGroups` is false, `BindGroupTracker::BeforeApply()` will mark all groups are dirty, so `UnApplyGroup()` will be called for all groups in last pipeline.",
       "parentUuid": "57f9e4e8_bb18696b",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 46
+      },
+      "revId": "8e266854c350a12232e4f4e78ec33be1c998bd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed6e7982_5494e25b",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T12:29:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c509c082_eb19d0ae",
       "range": {
         "startLine": 412,
         "startChar": 0,

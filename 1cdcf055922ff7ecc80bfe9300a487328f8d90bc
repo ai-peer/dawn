@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee4b590b_e25d98e4",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T12:29:30Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "ae608df0_3adb6d17",
+      "range": {
+        "startLine": 29,
+        "startChar": 78,
+        "endLine": 29,
+        "endChar": 83
+      },
+      "revId": "1cdcf055922ff7ecc80bfe9300a487328f8d90bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cbf824d_233e07b0",
@@ -72,6 +96,30 @@
       "writtenOn": "2023-05-15T11:29:56Z",
       "side": 1,
       "message": "nit: remove it as there are two args.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "1cdcf055922ff7ecc80bfe9300a487328f8d90bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2807cde_ce176952",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T12:29:30Z",
+      "side": 1,
+      "message": "Nice catch.",
+      "parentUuid": "0cbf824d_233e07b0",
       "range": {
         "startLine": 31,
         "startChar": 4,
