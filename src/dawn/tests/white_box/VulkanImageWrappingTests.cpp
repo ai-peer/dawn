@@ -23,6 +23,7 @@
 #include "dawn/utils/WGPUHelpers.h"
 
 namespace dawn::native::vulkan {
+namespace {
 
 using ExternalTexture = VulkanImageWrappingTestBackend::ExternalTexture;
 using ExternalSemaphore = VulkanImageWrappingTestBackend::ExternalSemaphore;
@@ -35,8 +36,6 @@ void VulkanImageWrappingTestBackend::SetParam(
 const VulkanImageWrappingTestBackend::TestParams& VulkanImageWrappingTestBackend::GetParam() const {
     return mParams;
 }
-
-namespace {
 
 using UseDedicatedAllocation = bool;
 using DetectDedicatedAllocation = bool;
@@ -144,8 +143,6 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
     wgpu::TextureDescriptor defaultDescriptor;
     std::unique_ptr<ExternalTexture> defaultTexture;
 };
-
-}  // namespace
 
 using VulkanImageWrappingValidationTests = VulkanImageWrappingTestBase;
 
@@ -265,25 +262,24 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
         }
 
         // Create another device based on the original
-        adapterBase = dawn::native::FromAPI(device.Get())->GetAdapter();
+        adapterBase = native::FromAPI(device.Get())->GetAdapter();
         deviceDescriptor.nextInChain = &deviceTogglesDesc;
         deviceTogglesDesc.enabledToggles = GetParam().forceEnabledWorkarounds.data();
         deviceTogglesDesc.enabledTogglesCount = GetParam().forceEnabledWorkarounds.size();
         deviceTogglesDesc.disabledToggles = GetParam().forceDisabledWorkarounds.data();
         deviceTogglesDesc.disabledTogglesCount = GetParam().forceDisabledWorkarounds.size();
 
-        secondDeviceVk =
-            dawn::native::vulkan::ToBackend(adapterBase->APICreateDevice(&deviceDescriptor));
-        secondDevice = wgpu::Device::Acquire(dawn::native::ToAPI(secondDeviceVk));
+        secondDeviceVk = native::vulkan::ToBackend(adapterBase->APICreateDevice(&deviceDescriptor));
+        secondDevice = wgpu::Device::Acquire(native::ToAPI(secondDeviceVk));
     }
 
   protected:
-    dawn::native::AdapterBase* adapterBase;
-    dawn::native::DeviceDescriptor deviceDescriptor;
-    dawn::native::DawnTogglesDescriptor deviceTogglesDesc;
+    native::AdapterBase* adapterBase;
+    native::DeviceDescriptor deviceDescriptor;
+    native::DawnTogglesDescriptor deviceTogglesDesc;
 
     wgpu::Device secondDevice;
-    dawn::native::vulkan::Device* secondDeviceVk;
+    native::vulkan::Device* secondDeviceVk;
 
     // Clear a texture on a given device
     void ClearImage(wgpu::Device dawnDevice, wgpu::Texture wrappedTexture, wgpu::Color clearColor) {
@@ -613,9 +609,9 @@ TEST_P(VulkanImageWrappingUsageTests, ChainTextureCopy) {
     // device 1 = |device|
     // device 2 = |secondDevice|
     // Create device 3
-    dawn::native::vulkan::Device* thirdDeviceVk =
-        dawn::native::vulkan::ToBackend(adapterBase->APICreateDevice(&deviceDescriptor));
-    wgpu::Device thirdDevice = wgpu::Device::Acquire(dawn::native::ToAPI(thirdDeviceVk));
+    native::vulkan::Device* thirdDeviceVk =
+        native::vulkan::ToBackend(adapterBase->APICreateDevice(&deviceDescriptor));
+    wgpu::Device thirdDevice = wgpu::Device::Acquire(native::ToAPI(thirdDeviceVk));
 
     // Make queue for device 2 and 3
     wgpu::Queue secondDeviceQueue = secondDevice.GetQueue();
@@ -888,4 +884,5 @@ DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingUsageTests,
                         {true, false}   // DetectDedicatedAllocation
 );
 
+}  // anonymous namespace
 }  // namespace dawn::native::vulkan

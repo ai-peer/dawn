@@ -20,7 +20,7 @@
 class GPUTimestampCalibrationTestsD3D12 : public GPUTimestampCalibrationTestBackend {
   public:
     explicit GPUTimestampCalibrationTestsD3D12(const wgpu::Device& device) {
-        mBackendDevice = dawn::native::d3d12::ToBackend(dawn::native::FromAPI(device.Get()));
+        mBackendDevice = native::d3d12::ToBackend(native::FromAPI(device.Get()));
     }
 
     bool IsSupported() const override { return true; }
@@ -32,7 +32,7 @@ class GPUTimestampCalibrationTestsD3D12 : public GPUTimestampCalibrationTestBack
     float GetTimestampPeriod() const override { return mBackendDevice->GetTimestampPeriodInNS(); }
 
   private:
-    dawn::native::d3d12::Device* mBackendDevice;
+    native::d3d12::Device* mBackendDevice;
 };
 
 // static
