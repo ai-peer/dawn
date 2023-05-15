@@ -197,7 +197,7 @@ ResultType BuilderImpl::Build() {
         return utils::Failure;
     }
 
-    return ResultType{std::move(builder.ir)};
+    return ResultType{std::move(mod)};
 }
 
 void BuilderImpl::EmitFunction(const ast::Function* ast_func) {
