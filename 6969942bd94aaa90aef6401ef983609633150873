@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9b1bae6_9f5358af",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T14:47:54Z",
+      "side": 1,
+      "message": "Would `inheritedGroups` be always null here? Since we are not allowing [CanInheritBindGroups](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/BindGroupTrackerD3D11.h;drc\u003d283b3a042fc3e85a57b0b1a844e3f1b10d6f61c4;l\u003d27).\nBesides, we also need to UnApply the unused groups in the `mLastAppliedPipelineLayout`.\n\nThe purpose here is to unbind the groups in the previous pipeline. There are 3 types of them:\n  1) Unused: not in the current pipeline.\n  2) Inherited: in both pipelines and clean for re-use.\n  3) Dirty: in both pipelines but can\u0027t be re-used because they are dirty.\n What we should unbind are 1) and 3). But for UAVs in render passes, we should also unbind 2) because we will rebind them in the current pipeline even they are clean. As we are not allowing inheritance, 2) should be always empty. So that\u0027s fine still.",
+      "parentUuid": "4c65d95d_971c4be0",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Whoops sorry my example was mistyped:\n\n```\nSetBindGroup(0, BG0)\nSetBindGroup(1, BG1A) // Changed to 1\nDraw()\nSetBindGroup(1, BG1B) // Changed to 1\nDraw()\n```\n\nIn the second draw `mUAVs` should be `[BG0, BG1B]` but it will only be `[BG1B]`.",
       "parentUuid": "fb579235_c40f5ce3",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0335bd52_b1bc7792",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T14:47:54Z",
+      "side": 1,
+      "message": "Got it, thanks!\nMaybe we can simply force all UAV groups dirty.",
+      "parentUuid": "1f57d728_84580330",
       "revId": "6969942bd94aaa90aef6401ef983609633150873",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
