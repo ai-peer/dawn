@@ -24,20 +24,20 @@ class DrawIndexedTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleStrip;
@@ -50,7 +50,7 @@ class DrawIndexedTest : public DawnTest {
 
         pipeline = device.CreateRenderPipeline(&descriptor);
 
-        vertexBuffer = utils::CreateBufferFromData<float>(
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex,
             {// First quad: the first 3 vertices represent the bottom left triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f,
@@ -59,16 +59,16 @@ class DrawIndexedTest : public DawnTest {
              // Second quad: the first 3 vertices represent the top right triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, -1.0f, -1.0f,
              0.0f, 1.0f});
-        indexBuffer = utils::CreateBufferFromData<uint32_t>(
+        indexBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
             device, wgpu::BufferUsage::Index,
             {0, 1, 2, 0, 3, 1,
              // The indices below are added to test negatve baseVertex
              0 + 4, 1 + 4, 2 + 4, 0 + 4, 3 + 4, 1 + 4});
         zeroSizedIndexBuffer =
-            utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {});
+            dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {});
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline pipeline;
     wgpu::Buffer vertexBuffer;
     wgpu::Buffer indexBuffer;
@@ -80,8 +80,8 @@ class DrawIndexedTest : public DawnTest {
               int32_t baseVertex,
               uint32_t firstInstance,
               uint64_t bufferOffset,
-              utils::RGBA8 bottomLeftExpected,
-              utils::RGBA8 topRightExpected) {
+              dawn::utils::RGBA8 bottomLeftExpected,
+              dawn::utils::RGBA8 topRightExpected) {
         // Regular draw with a reasonable index buffer
         TestImplementation(indexCount, instanceCount, firstIndex, baseVertex, firstInstance,
                            bufferOffset, indexBuffer, bottomLeftExpected, topRightExpected);
@@ -89,8 +89,8 @@ class DrawIndexedTest : public DawnTest {
 
     void TestZeroSizedIndexBufferDraw(uint32_t indexCount,
                                       uint32_t firstIndex,
-                                      utils::RGBA8 bottomLeftExpected,
-                                      utils::RGBA8 topRightExpected) {
+                                      dawn::utils::RGBA8 bottomLeftExpected,
+                                      dawn::utils::RGBA8 topRightExpected) {
         TestImplementation(indexCount, 1, firstIndex, 0, 0, 0, zeroSizedIndexBuffer,
                            bottomLeftExpected, topRightExpected);
     }
@@ -102,8 +102,8 @@ class DrawIndexedTest : public DawnTest {
                             uint32_t firstInstance,
                             uint64_t bufferOffset,
                             const wgpu::Buffer& curIndexBuffer,
-                            utils::RGBA8 bottomLeftExpected,
-                            utils::RGBA8 topRightExpected) {
+                            dawn::utils::RGBA8 bottomLeftExpected,
+                            dawn::utils::RGBA8 topRightExpected) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -124,8 +124,8 @@ class DrawIndexedTest : public DawnTest {
 
 // The most basic DrawIndexed triangle draw.
 TEST_P(DrawIndexedTest, Uint32) {
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with no indices.
     Test(0, 0, 0, 0, 0, 0, notFilled, notFilled);
@@ -140,8 +140,8 @@ TEST_P(DrawIndexedTest, Uint32) {
 // Test the parameter 'baseVertex' of DrawIndexed() works.
 TEST_P(DrawIndexedTest, BaseVertex) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_base_vertex"));
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with only the first 3 indices of the second quad (top right triangle)
     Test(3, 1, 0, 4, 0, 0, notFilled, filled);

@@ -18,7 +18,7 @@
 #include "dawn/common/RefCounted.h"
 #include "gtest/gtest.h"
 
-class RCTest : public RefCounted {
+class RCTest : public dawn::RefCounted {
   public:
     RCTest() : RefCounted() {}
 
@@ -101,7 +101,7 @@ TEST(RefCounted, RaceOnReferenceRelease) {
 TEST(Ref, EndOfScopeRemovesRef) {
     bool deleted = false;
     {
-        Ref<RCTest> test(new RCTest(&deleted));
+        dawn::Ref<RCTest> test(new RCTest(&deleted));
         test->Release();
     }
     EXPECT_TRUE(deleted);
@@ -110,7 +110,7 @@ TEST(Ref, EndOfScopeRemovesRef) {
 // Test getting pointer out of the Ref
 TEST(Ref, Gets) {
     RCTest* original = new RCTest;
-    Ref<RCTest> test(original);
+    dawn::Ref<RCTest> test(original);
     test->Release();
 
     EXPECT_EQ(test.Get(), original);
@@ -119,7 +119,7 @@ TEST(Ref, Gets) {
 
 // Test Refs default to null
 TEST(Ref, DefaultsToNull) {
-    Ref<RCTest> test;
+    dawn::Ref<RCTest> test;
 
     EXPECT_EQ(test.Get(), nullptr);
     // Can't check GetThis() returns nullptr, as it would be undefined behavior.
@@ -130,10 +130,10 @@ TEST(Ref, CopyConstructor) {
     bool deleted = false;
     RCTest* original = new RCTest(&deleted);
 
-    Ref<RCTest> source(original);
+    dawn::Ref<RCTest> source(original);
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
-    Ref<RCTest> destination(source);
+    dawn::Ref<RCTest> destination(source);
     EXPECT_EQ(original->GetRefCountForTesting(), 3u);
 
     original->Release();
@@ -155,10 +155,10 @@ TEST(Ref, CopyAssignment) {
     bool deleted = false;
     RCTest* original = new RCTest(&deleted);
 
-    Ref<RCTest> source(original);
+    dawn::Ref<RCTest> source(original);
     original->Release();
 
-    Ref<RCTest> destination;
+    dawn::Ref<RCTest> destination;
     destination = source;
 
     EXPECT_EQ(source.Get(), original);
@@ -177,10 +177,10 @@ TEST(Ref, MoveConstructor) {
     bool deleted = false;
     RCTest* original = new RCTest(&deleted);
 
-    Ref<RCTest> source(original);
+    dawn::Ref<RCTest> source(original);
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
-    Ref<RCTest> destination(std::move(source));
+    dawn::Ref<RCTest> destination(std::move(source));
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
     original->Release();
@@ -198,13 +198,13 @@ TEST(Ref, MoveAssignment) {
     bool deleted = false;
     RCTest* original = new RCTest(&deleted);
 
-    Ref<RCTest> source(original);
+    dawn::Ref<RCTest> source(original);
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
     original->Release();
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
 
-    Ref<RCTest> destination;
+    dawn::Ref<RCTest> destination;
     destination = std::move(source);
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
 
@@ -221,13 +221,13 @@ TEST(Ref, MoveAssignmentSameObject) {
     bool deleted = false;
     RCTest* original = new RCTest(&deleted);
 
-    Ref<RCTest> source(original);
+    dawn::Ref<RCTest> source(original);
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
     original->Release();
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
 
-    Ref<RCTest>& referenceToSource = source;
+    dawn::Ref<RCTest>& referenceToSource = source;
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
 
     referenceToSource = std::move(source);
@@ -272,7 +272,7 @@ TEST(Ref, Detach) {
     bool deleted = false;
     RCTest* original = new RCTest(&deleted);
 
-    Ref<RCTest> test(original);
+    dawn::Ref<RCTest> test(original);
     original->Release();
 
     RCTest* detached = test.Detach();
@@ -288,7 +288,7 @@ TEST(Ref, Detach) {
 TEST(Ref, DerivedPointerConstructor) {
     bool deleted = false;
     {
-        Ref<RCTest> test(new RCTestDerived(&deleted));
+        dawn::Ref<RCTest> test(new RCTestDerived(&deleted));
         test->Release();
     }
     EXPECT_TRUE(deleted);
@@ -297,11 +297,11 @@ TEST(Ref, DerivedPointerConstructor) {
 // Test copy constructor of derived class
 TEST(Ref, DerivedCopyConstructor) {
     bool deleted = false;
-    Ref<RCTestDerived> testDerived(new RCTestDerived(&deleted));
+    dawn::Ref<RCTestDerived> testDerived(new RCTestDerived(&deleted));
     testDerived->Release();
 
     {
-        Ref<RCTest> testBase(testDerived);
+        dawn::Ref<RCTest> testBase(testDerived);
         EXPECT_EQ(testBase->GetRefCountForTesting(), 2u);
         EXPECT_EQ(testDerived->GetRefCountForTesting(), 2u);
     }
@@ -311,7 +311,7 @@ TEST(Ref, DerivedCopyConstructor) {
 
 // Test Ref constructed with nullptr
 TEST(Ref, ConstructedWithNullptr) {
-    Ref<RCTest> test(nullptr);
+    dawn::Ref<RCTest> test(nullptr);
     EXPECT_EQ(test.Get(), nullptr);
 }
 
@@ -320,11 +320,11 @@ TEST(Ref, CopyAssignmentDerived) {
     bool deleted = false;
 
     RCTestDerived* original = new RCTestDerived(&deleted);
-    Ref<RCTestDerived> source(original);
+    dawn::Ref<RCTestDerived> source(original);
     original->Release();
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
 
-    Ref<RCTest> destination;
+    dawn::Ref<RCTest> destination;
     destination = source;
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
@@ -344,10 +344,10 @@ TEST(Ref, MoveConstructorDerived) {
     bool deleted = false;
     RCTestDerived* original = new RCTestDerived(&deleted);
 
-    Ref<RCTestDerived> source(original);
+    dawn::Ref<RCTestDerived> source(original);
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
-    Ref<RCTest> destination(std::move(source));
+    dawn::Ref<RCTest> destination(std::move(source));
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
     original->Release();
@@ -365,13 +365,13 @@ TEST(Ref, MoveAssignmentDerived) {
     bool deleted = false;
     RCTestDerived* original = new RCTestDerived(&deleted);
 
-    Ref<RCTestDerived> source(original);
+    dawn::Ref<RCTestDerived> source(original);
     EXPECT_EQ(original->GetRefCountForTesting(), 2u);
 
     original->Release();
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
 
-    Ref<RCTest> destination;
+    dawn::Ref<RCTest> destination;
     destination = std::move(source);
 
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
@@ -389,7 +389,7 @@ TEST(Ref, InitializeInto) {
     RCTest* original = new RCTest(&deleted);
 
     // InitializeInto acquires the ref.
-    Ref<RCTest> ref;
+    dawn::Ref<RCTest> ref;
     *ref.InitializeInto() = original;
     EXPECT_EQ(original->GetRefCountForTesting(), 1u);
 

@@ -127,7 +127,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineNoCache) {
     {
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(0), device.CreateComputePipeline(&desc));
     }
@@ -136,7 +136,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineNoCache) {
     {
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(0), device.CreateComputePipeline(&desc));
     }
@@ -145,7 +145,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineNoCache) {
 // Tests that pipeline creation on the same device uses frontend cache when possible.
 TEST_P(SinglePipelineCachingTests, ComputePipelineFrontedCache) {
     wgpu::ComputePipelineDescriptor desc;
-    desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+    desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
     desc.compute.entryPoint = "main";
 
     // First creation should create a cache entry.
@@ -170,7 +170,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCache) {
     {
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
                            device.CreateComputePipeline(&desc));
@@ -180,7 +180,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCache) {
     {
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule + counts.pipeline), Add(0),
                            device.CreateComputePipeline(&desc));
@@ -194,7 +194,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheExplictLayout) {
     {
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
                            device.CreateComputePipeline(&desc));
@@ -204,9 +204,9 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheExplictLayout) {
     {
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
-        desc.layout = utils::MakeBasicPipelineLayout(device, {});
+        desc.layout = dawn::utils::MakeBasicPipelineLayout(device, {});
         EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule + counts.pipeline), Add(0),
                            device.CreateComputePipeline(&desc));
     }
@@ -218,7 +218,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheShaderNegativeCases) 
     {
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
                            device.CreateComputePipeline(&desc));
@@ -229,7 +229,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheShaderNegativeCases) 
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
         desc.compute.module =
-            utils::CreateShaderModule(device, kComputeShaderMultipleEntryPoints.data());
+            dawn::utils::CreateShaderModule(device, kComputeShaderMultipleEntryPoints.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
                            device.CreateComputePipeline(&desc));
@@ -240,7 +240,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheShaderNegativeCases) 
         wgpu::Device device = CreateDevice();
         wgpu::ComputePipelineDescriptor desc;
         desc.compute.module =
-            utils::CreateShaderModule(device, kComputeShaderMultipleEntryPoints.data());
+            dawn::utils::CreateShaderModule(device, kComputeShaderMultipleEntryPoints.data());
         desc.compute.entryPoint = "main2";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
                            device.CreateComputePipeline(&desc));
@@ -254,7 +254,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheIsolationKey) {
     {
         wgpu::Device device = CreateDevice("isolation key 1");
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
                            device.CreateComputePipeline(&desc));
@@ -264,7 +264,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheIsolationKey) {
     {
         wgpu::Device device = CreateDevice("isolation key 2");
         wgpu::ComputePipelineDescriptor desc;
-        desc.compute.module = utils::CreateShaderModule(device, kComputeShaderDefault.data());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, kComputeShaderDefault.data());
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
                            device.CreateComputePipeline(&desc));
@@ -281,10 +281,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineNoCache) {
     // cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(0), device.CreateRenderPipeline(&desc));
     }
@@ -292,10 +293,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineNoCache) {
     // Second time should create fine with no cache hits since cache is disabled.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(0), device.CreateRenderPipeline(&desc));
     }
@@ -303,10 +305,10 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineNoCache) {
 
 // Tests that pipeline creation on the same device uses frontend cache when possible.
 TEST_P(SinglePipelineCachingTests, RenderPipelineFrontedCache) {
-    utils::ComboRenderPipelineDescriptor desc;
-    desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+    dawn::utils::ComboRenderPipelineDescriptor desc;
+    desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
     desc.vertex.entryPoint = "main";
-    desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+    desc.cFragment.module = dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
     desc.cFragment.entryPoint = "main";
 
     // First creation should create a cache entry.
@@ -330,10 +332,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCache) {
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(2 * counts.shaderModule + counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -342,10 +345,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCache) {
     // Second time should create using the cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule + counts.pipeline), Add(0),
                            device.CreateRenderPipeline(&desc));
@@ -358,10 +362,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheExplictLayout) {
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(2 * counts.shaderModule + counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -370,12 +375,13 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheExplictLayout) {
     // Cache should hit: use the same pipeline but with explicit pipeline layout.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
-        desc.layout = utils::MakeBasicPipelineLayout(device, {});
+        desc.layout = dawn::utils::MakeBasicPipelineLayout(device, {});
         EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule + counts.pipeline), Add(0),
                            device.CreateRenderPipeline(&desc));
     }
@@ -387,10 +393,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheDescriptorNegativeCase
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(2 * counts.shaderModule + counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -399,11 +406,12 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheDescriptorNegativeCase
     // Cache should hit for shaders, but not pipeline: different pipeline descriptor state.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.EnableDepthStencil();
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -416,10 +424,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheShaderNegativeCases) {
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(2 * counts.shaderModule + counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -429,11 +438,12 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheShaderNegativeCases) {
     // Cache should still hit for the same fragment shader module.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module =
-            utils::CreateShaderModule(device, kVertexShaderMultipleEntryPoints.data());
+            dawn::utils::CreateShaderModule(device, kVertexShaderMultipleEntryPoints.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule),
                            Add(counts.shaderModule + counts.pipeline),
@@ -444,11 +454,12 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheShaderNegativeCases) {
     // Cache should still hit for the same shader module.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module =
-            utils::CreateShaderModule(device, kVertexShaderMultipleEntryPoints.data());
+            dawn::utils::CreateShaderModule(device, kVertexShaderMultipleEntryPoints.data());
         desc.vertex.entryPoint = "main2";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule),
                            Add(counts.shaderModule + counts.pipeline),
@@ -462,15 +473,15 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheNegativeCasesFragmentC
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.cFragment.targetCount = 2;
         desc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
         desc.cTargets[1].writeMask = wgpu::ColorWriteMask::None;
         desc.cTargets[1].format = wgpu::TextureFormat::RGBA8Unorm;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module =
-            utils::CreateShaderModule(device, kFragmentShaderMultipleOutput.data());
+            dawn::utils::CreateShaderModule(device, kFragmentShaderMultipleOutput.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(2 * counts.shaderModule + counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -479,15 +490,15 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheNegativeCasesFragmentC
     // Cache should not hit for the pipeline: different fragment color target state (sparse).
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.cFragment.targetCount = 2;
         desc.cTargets[0].format = wgpu::TextureFormat::Undefined;
         desc.cTargets[1].writeMask = wgpu::ColorWriteMask::None;
         desc.cTargets[1].format = wgpu::TextureFormat::RGBA8Unorm;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module =
-            utils::CreateShaderModule(device, kFragmentShaderMultipleOutput.data());
+            dawn::utils::CreateShaderModule(device, kFragmentShaderMultipleOutput.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -496,15 +507,15 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheNegativeCasesFragmentC
     // Cache should not hit: different fragment color target state (trailing empty).
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.cFragment.targetCount = 2;
         desc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
         desc.cTargets[1].writeMask = wgpu::ColorWriteMask::None;
         desc.cTargets[1].format = wgpu::TextureFormat::Undefined;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module =
-            utils::CreateShaderModule(device, kFragmentShaderMultipleOutput.data());
+            dawn::utils::CreateShaderModule(device, kFragmentShaderMultipleOutput.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -519,15 +530,15 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module =
-            utils::CreateShaderModule(device, kFragmentShaderBindGroup00Uniform.data());
+            dawn::utils::CreateShaderModule(device, kFragmentShaderBindGroup00Uniform.data());
         desc.cFragment.entryPoint = "main";
-        desc.layout = utils::MakePipelineLayout(
+        desc.layout = dawn::utils::MakePipelineLayout(
             device, {
-                        utils::MakeBindGroupLayout(
+                        dawn::utils::MakeBindGroupLayout(
                             device,
                             {
                                 {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
@@ -540,15 +551,15 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
     // Cache should hit for the shaders, but not for the pipeline: different layout.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module =
-            utils::CreateShaderModule(device, kFragmentShaderBindGroup00Uniform.data());
+            dawn::utils::CreateShaderModule(device, kFragmentShaderBindGroup00Uniform.data());
         desc.cFragment.entryPoint = "main";
-        desc.layout = utils::MakePipelineLayout(
+        desc.layout = dawn::utils::MakePipelineLayout(
             device, {
-                        utils::MakeBindGroupLayout(
+                        dawn::utils::MakeBindGroupLayout(
                             device,
                             {
                                 {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
@@ -562,20 +573,21 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
     // Cache should hit for the shaders, but not for the pipeline: different layout (dynamic).
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module =
-            utils::CreateShaderModule(device, kFragmentShaderBindGroup00Uniform.data());
+            dawn::utils::CreateShaderModule(device, kFragmentShaderBindGroup00Uniform.data());
         desc.cFragment.entryPoint = "main";
-        desc.layout = utils::MakePipelineLayout(
-            device, {
-                        utils::MakeBindGroupLayout(device,
-                                                   {
-                                                       {0, wgpu::ShaderStage::Fragment,
-                                                        wgpu::BufferBindingType::Uniform, true},
-                                                   }),
-                    });
+        desc.layout = dawn::utils::MakePipelineLayout(
+            device,
+            {
+                dawn::utils::MakeBindGroupLayout(
+                    device,
+                    {
+                        {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, true},
+                    }),
+            });
         EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
                            device.CreateRenderPipeline(&desc));
     }
@@ -585,15 +597,15 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
     // remapping. On other backends, the compiled shader is different and so is the pipeline.
     {
         wgpu::Device device = CreateDevice();
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module =
-            utils::CreateShaderModule(device, kFragmentShaderBindGroup01Uniform.data());
+            dawn::utils::CreateShaderModule(device, kFragmentShaderBindGroup01Uniform.data());
         desc.cFragment.entryPoint = "main";
-        desc.layout = utils::MakePipelineLayout(
+        desc.layout = dawn::utils::MakePipelineLayout(
             device, {
-                        utils::MakeBindGroupLayout(
+                        dawn::utils::MakeBindGroupLayout(
                             device,
                             {
                                 {1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
@@ -616,10 +628,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheIsolationKey) {
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice("isolation key 1");
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(2 * counts.shaderModule + counts.pipeline),
                            device.CreateRenderPipeline(&desc));
@@ -628,10 +641,11 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheIsolationKey) {
     // Second time should also create and write out to the cache.
     {
         wgpu::Device device = CreateDevice("isolation key 2");
-        utils::ComboRenderPipelineDescriptor desc;
-        desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
+        dawn::utils::ComboRenderPipelineDescriptor desc;
+        desc.vertex.module = dawn::utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
-        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
+        desc.cFragment.module =
+            dawn::utils::CreateShaderModule(device, kFragmentShaderDefault.data());
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(2 * counts.shaderModule + counts.pipeline),
                            device.CreateRenderPipeline(&desc));

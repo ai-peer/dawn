@@ -32,7 +32,7 @@ class PerThreadProcTests : public testing::Test {
     ~PerThreadProcTests() override = default;
 
   protected:
-    Ref<dawn::native::InstanceBase> mNativeInstance;
+    dawn::Ref<dawn::native::InstanceBase> mNativeInstance;
     dawn::native::AdapterBase mAdapterBase;
 };
 

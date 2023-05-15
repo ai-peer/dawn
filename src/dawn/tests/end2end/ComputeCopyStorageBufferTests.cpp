@@ -29,7 +29,7 @@ class ComputeCopyStorageBufferTests : public DawnTest {
 
 void ComputeCopyStorageBufferTests::BasicTest(const char* shader) {
     // Set up shader and pipeline
-    auto module = utils::CreateShaderModule(device, shader);
+    auto module = dawn::utils::CreateShaderModule(device, shader);
 
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.compute.module = module;
@@ -62,11 +62,12 @@ void ComputeCopyStorageBufferTests::BasicTest(const char* shader) {
     queue.WriteBuffer(dst, 0, zero.data(), sizeof(zero));
 
     // Set up bind group and issue dispatch
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {
-                                                         {0, src, 0, kNumUints * sizeof(uint32_t)},
-                                                         {1, dst, 0, kNumUints * sizeof(uint32_t)},
-                                                     });
+    wgpu::BindGroup bindGroup =
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                   {
+                                       {0, src, 0, kNumUints * sizeof(uint32_t)},
+                                       {1, dst, 0, kNumUints * sizeof(uint32_t)},
+                                   });
 
     wgpu::CommandBuffer commands;
     {

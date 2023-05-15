@@ -80,9 +80,9 @@ class DrawVertexAndIndexBufferOOBValidationTests : public ValidationTest {
     void SetUp() override {
         ValidationTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
@@ -123,14 +123,14 @@ class DrawVertexAndIndexBufferOOBValidationTests : public ValidationTest {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })";
 
-        return utils::CreateShaderModule(device, shaderStringStream.str().c_str());
+        return dawn::utils::CreateShaderModule(device, shaderStringStream.str().c_str());
     }
 
     // Create a render pipeline with given buffer layout description, using a vertex shader
     // module automatically generated from the buffer description.
     wgpu::RenderPipeline CreateRenderPipelineWithBufferDesc(
         std::vector<PipelineVertexBufferDesc> bufferDescList) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
 
         descriptor.vertex.module = CreateVertexShaderModuleWithBuffer(bufferDescList);
         descriptor.cFragment.module = fsModule;
@@ -341,7 +341,7 @@ class DrawVertexAndIndexBufferOOBValidationTests : public ValidationTest {
 
   private:
     wgpu::ShaderModule fsModule;
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
 };
 
 // Control case for Draw

@@ -27,16 +27,16 @@ class VertexOnlyRenderPipelineTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        vertexBuffer =
-            utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Vertex,
-                                               {// The middle back line
-                                                -0.5f, 0.0f, 0.0f, 1.0f, 0.5f, 0.0f, 0.0f, 1.0f,
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
+            device, wgpu::BufferUsage::Vertex,
+            {// The middle back line
+             -0.5f, 0.0f, 0.0f, 1.0f, 0.5f, 0.0f, 0.0f, 1.0f,
 
-                                                // The right front line
-                                                0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+             // The right front line
+             0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
 
-                                                // The whole in-between line
-                                                -1.0f, 0.0f, 0.5f, 1.0f, 1.0f, 0.0f, 0.5f, 1.0f});
+             // The whole in-between line
+             -1.0f, 0.0f, 0.5f, 1.0f, 1.0f, 0.0f, 0.5f, 1.0f});
 
         // Create a color texture as render target
         {
@@ -60,13 +60,13 @@ class VertexOnlyRenderPipelineTest : public DawnTest {
         }
 
         // The vertex-only render pass to modify the depth and stencil
-        renderPassDescNoColor = utils::ComboRenderPassDescriptor({}, depthStencilView);
+        renderPassDescNoColor = dawn::utils::ComboRenderPassDescriptor({}, depthStencilView);
         renderPassDescNoColor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
         renderPassDescNoColor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
 
         // The complete render pass to read the depth and stencil and draw to color attachment
-        renderPassDescWithColor =
-            utils::ComboRenderPassDescriptor({renderTargetColor.CreateView()}, depthStencilView);
+        renderPassDescWithColor = dawn::utils::ComboRenderPassDescriptor(
+            {renderTargetColor.CreateView()}, depthStencilView);
         renderPassDescWithColor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
         renderPassDescWithColor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
 
@@ -101,18 +101,18 @@ class VertexOnlyRenderPipelineTest : public DawnTest {
         wgpu::CompareFunction depthCompare = wgpu::CompareFunction::Always,
         bool writeDepth = false,
         bool useFragment = true) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::LineList;
 
         descriptor.vertex.module = vsModule;
@@ -141,8 +141,8 @@ class VertexOnlyRenderPipelineTest : public DawnTest {
     }
 
     void ClearAttachment(const wgpu::CommandEncoder& encoder) {
-        utils::ComboRenderPassDescriptor clearPass =
-            utils::ComboRenderPassDescriptor({renderTargetColor.CreateView()}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor clearPass = dawn::utils::ComboRenderPassDescriptor(
+            {renderTargetColor.CreateView()}, depthStencilView);
         clearPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
         clearPass.cDepthStencilAttachmentInfo.depthClearValue = 0.0f;
         clearPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
@@ -163,11 +163,11 @@ class VertexOnlyRenderPipelineTest : public DawnTest {
     wgpu::TextureView depthStencilView;
     wgpu::Texture renderTargetColor;
     // Render result
-    const utils::RGBA8 filled = utils::RGBA8(0, 255, 0, 255);
-    const utils::RGBA8 notFilled = utils::RGBA8(0, 0, 0, 0);
+    const dawn::utils::RGBA8 filled = dawn::utils::RGBA8(0, 255, 0, 255);
+    const dawn::utils::RGBA8 notFilled = dawn::utils::RGBA8(0, 0, 0, 0);
     // Render pass
-    utils::ComboRenderPassDescriptor renderPassDescNoColor{};
-    utils::ComboRenderPassDescriptor renderPassDescWithColor{};
+    dawn::utils::ComboRenderPassDescriptor renderPassDescNoColor{};
+    dawn::utils::ComboRenderPassDescriptor renderPassDescWithColor{};
     // Render pipeline
     wgpu::RenderPipeline stencilPipelineNoFragment;
     wgpu::RenderPipeline stencilPipelineWithFragment;
@@ -181,7 +181,7 @@ class VertexOnlyRenderPipelineTest : public DawnTest {
 TEST_P(VertexOnlyRenderPipelineTest, Stencil) {
     auto doStencilTest = [&](const wgpu::RenderPassDescriptor* renderPass,
                              const wgpu::RenderPipeline& pipeline,
-                             const utils::RGBA8& colorExpect) -> void {
+                             const dawn::utils::RGBA8& colorExpect) -> void {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         ClearAttachment(encoder);
@@ -218,7 +218,7 @@ TEST_P(VertexOnlyRenderPipelineTest, Stencil) {
 TEST_P(VertexOnlyRenderPipelineTest, Depth) {
     auto doStencilTest = [&](const wgpu::RenderPassDescriptor* renderPass,
                              const wgpu::RenderPipeline& pipeline,
-                             const utils::RGBA8& colorExpect) -> void {
+                             const dawn::utils::RGBA8& colorExpect) -> void {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         ClearAttachment(encoder);

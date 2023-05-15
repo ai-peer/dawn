@@ -20,12 +20,12 @@
 class ClipSpaceTest : public DawnTest {
   protected:
     wgpu::RenderPipeline CreatePipelineForTest() {
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         // Draw two triangles:
         // 1. The depth value of the top-left one is >= 0.5
         // 2. The depth value of the bottom-right one is <= 0.5
-        pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        pipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -38,7 +38,7 @@ class ClipSpaceTest : public DawnTest {
                 return vec4f(pos[VertexIndex], 1.0);
             })");
 
-        pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        pipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                return vec4f(1.0, 0.0, 0.0, 1.0);
             })");
@@ -70,8 +70,8 @@ TEST_P(ClipSpaceTest, ClipSpace) {
     wgpu::Texture depthStencilTexture =
         Create2DTextureForTest(wgpu::TextureFormat::Depth24PlusStencil8);
 
-    utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()},
-                                                          depthStencilTexture.CreateView());
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()},
+                                                                depthStencilTexture.CreateView());
     renderPassDescriptor.cColorAttachments[0].clearValue = {0.0, 1.0, 0.0, 1.0};
     renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
 
@@ -88,8 +88,8 @@ TEST_P(ClipSpaceTest, ClipSpace) {
     wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
     queue.Submit(1, &commandBuffer);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, colorTexture, kSize - 1, kSize - 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, colorTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, colorTexture, kSize - 1, kSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, colorTexture, 0, 0);
 }
 
 DAWN_INSTANTIATE_TEST(ClipSpaceTest,

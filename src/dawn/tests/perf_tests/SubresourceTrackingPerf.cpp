@@ -66,13 +66,13 @@ class SubresourceTrackingPerf : public DawnPerfTestWithParams<SubresourceTrackin
         uploadTexDesc.usage = wgpu::TextureUsage::CopySrc;
         mUploadTexture = device.CreateTexture(&uploadTexDesc);
 
-        utils::ComboRenderPipelineDescriptor pipelineDesc;
-        pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+        pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(1.0, 0.0, 0.0, 1.0);
             }
         )");
-        pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+        pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var materials : texture_2d<f32>;
             @fragment fn main() -> @location(0) vec4f {
                 _ = materials;
@@ -119,10 +119,10 @@ class SubresourceTrackingPerf : public DawnPerfTestWithParams<SubresourceTrackin
             sampleViewDesc.baseMipLevel = level - 1;
             wgpu::TextureView sampleView = mMaterials.CreateView(&sampleViewDesc);
 
-            wgpu::BindGroup bindgroup =
-                utils::MakeBindGroup(device, mPipeline.GetBindGroupLayout(0), {{0, sampleView}});
+            wgpu::BindGroup bindgroup = dawn::utils::MakeBindGroup(
+                device, mPipeline.GetBindGroupLayout(0), {{0, sampleView}});
 
-            utils::ComboRenderPassDescriptor renderPass({rtView});
+            dawn::utils::ComboRenderPassDescriptor renderPass({rtView});
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
             pass.SetPipeline(mPipeline);
             pass.SetBindGroup(0, bindgroup);

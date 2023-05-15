@@ -38,7 +38,7 @@ class GpuMemorySyncTests : public DawnTest {
 
     std::tuple<wgpu::ComputePipeline, wgpu::BindGroup> CreatePipelineAndBindGroupForCompute(
         const wgpu::Buffer& buffer) {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
             struct Data {
                 a : i32
             }
@@ -53,19 +53,19 @@ class GpuMemorySyncTests : public DawnTest {
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&cpDesc);
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
         return std::make_tuple(pipeline, bindGroup);
     }
 
     std::tuple<wgpu::RenderPipeline, wgpu::BindGroup> CreatePipelineAndBindGroupForRender(
         const wgpu::Buffer& buffer,
         wgpu::TextureFormat colorFormat) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             struct Data {
                 i : i32
             }
@@ -75,7 +75,7 @@ class GpuMemorySyncTests : public DawnTest {
                 return vec4f(f32(data.i) / 255.0, 0.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor rpDesc;
+        dawn::utils::ComboRenderPipelineDescriptor rpDesc;
         rpDesc.vertex.module = vsModule;
         rpDesc.cFragment.module = fsModule;
         rpDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -84,7 +84,7 @@ class GpuMemorySyncTests : public DawnTest {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
         return std::make_tuple(pipeline, bindGroup);
     }
 };
@@ -126,7 +126,7 @@ TEST_P(GpuMemorySyncTests, ComputePass) {
 TEST_P(GpuMemorySyncTests, RenderPass) {
     // Create pipeline, bind group, and buffer for render pass.
     wgpu::Buffer buffer = CreateBuffer();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
     auto [render, bindGroup] = CreatePipelineAndBindGroupForRender(buffer, renderPass.colorFormat);
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
@@ -144,7 +144,7 @@ TEST_P(GpuMemorySyncTests, RenderPass) {
     queue.Submit(1, &commands);
 
     // Verify the result.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(iteration, 0, 0, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(iteration, 0, 0, 255), renderPass.color, 0, 0);
 }
 
 // Write into a storage buffer in a render pass. Then read that data in a compute
@@ -152,7 +152,7 @@ TEST_P(GpuMemorySyncTests, RenderPass) {
 TEST_P(GpuMemorySyncTests, RenderPassToComputePass) {
     // Create pipeline, bind group, and buffer for render pass and compute pass.
     wgpu::Buffer buffer = CreateBuffer();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
 
     auto [render, bindGroup0] = CreatePipelineAndBindGroupForRender(buffer, renderPass.colorFormat);
     auto [compute, bindGroup1] = CreatePipelineAndBindGroupForCompute(buffer);
@@ -187,7 +187,7 @@ TEST_P(GpuMemorySyncTests, ComputePassToRenderPass) {
     wgpu::Buffer buffer = CreateBuffer();
     auto [compute, bindGroup1] = CreatePipelineAndBindGroupForCompute(buffer);
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
     auto [render, bindGroup0] = CreatePipelineAndBindGroupForRender(buffer, renderPass.colorFormat);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -210,7 +210,7 @@ TEST_P(GpuMemorySyncTests, ComputePassToRenderPass) {
     queue.Submit(1, &commands);
 
     // Verify the result.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(2, 0, 0, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(2, 0, 0, 255), renderPass.color, 0, 0);
 }
 
 DAWN_INSTANTIATE_TEST(GpuMemorySyncTests,
@@ -230,7 +230,7 @@ class StorageToUniformSyncTests : public DawnTest {
     }
 
     std::tuple<wgpu::ComputePipeline, wgpu::BindGroup> CreatePipelineAndBindGroupForCompute() {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
             struct Data {
                 a : f32
             }
@@ -245,18 +245,18 @@ class StorageToUniformSyncTests : public DawnTest {
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&cpDesc);
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, mBuffer}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, mBuffer}});
         return std::make_tuple(pipeline, bindGroup);
     }
 
     std::tuple<wgpu::RenderPipeline, wgpu::BindGroup> CreatePipelineAndBindGroupForRender(
         wgpu::TextureFormat colorFormat) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             struct Contents {
                 color : f32
             }
@@ -266,7 +266,7 @@ class StorageToUniformSyncTests : public DawnTest {
                 return vec4f(contents.color, 0.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor rpDesc;
+        dawn::utils::ComboRenderPipelineDescriptor rpDesc;
         rpDesc.vertex.module = vsModule;
         rpDesc.cFragment.module = fsModule;
         rpDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -275,7 +275,7 @@ class StorageToUniformSyncTests : public DawnTest {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, mBuffer}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, mBuffer}});
         return std::make_tuple(pipeline, bindGroup);
     }
 
@@ -287,7 +287,7 @@ class StorageToUniformSyncTests : public DawnTest {
 TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithSameCommandBuffer) {
     // Create pipeline, bind group, and buffer for compute pass and render pass.
     CreateBuffer();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
     auto [compute, computeBindGroup] = CreatePipelineAndBindGroupForCompute();
     auto [render, renderBindGroup] = CreatePipelineAndBindGroupForRender(renderPass.colorFormat);
 
@@ -310,7 +310,7 @@ TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithSameCommandBuffer) {
     queue.Submit(1, &commands);
 
     // Verify the rendering result.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderPass.color, 0, 0);
 }
 
 // Write into a storage buffer in compute pass in a command buffer. Then read that data in a render
@@ -319,7 +319,7 @@ TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithSameCommandBuffer) {
 TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithDifferentCommandBuffers) {
     // Create pipeline, bind group, and buffer for compute pass and render pass.
     CreateBuffer();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
     auto [compute, computeBindGroup] = CreatePipelineAndBindGroupForCompute();
     auto [render, renderBindGroup] = CreatePipelineAndBindGroupForRender(renderPass.colorFormat);
 
@@ -345,7 +345,7 @@ TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithDifferentCommandBuffers) {
     queue.Submit(2, cb);
 
     // Verify the rendering result.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderPass.color, 0, 0);
 }
 
 // Write into a storage buffer in compute pass in a command buffer. Then read that data in a render
@@ -354,7 +354,7 @@ TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithDifferentCommandBuffers) {
 TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithDifferentQueueSubmits) {
     // Create pipeline, bind group, and buffer for compute pass and render pass.
     CreateBuffer();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
     auto [compute, computeBindGroup] = CreatePipelineAndBindGroupForCompute();
     auto [render, renderBindGroup] = CreatePipelineAndBindGroupForRender(renderPass.colorFormat);
 
@@ -381,7 +381,7 @@ TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithDifferentQueueSubmits) {
     queue.Submit(1, &cb[1]);
 
     // Verify the rendering result.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderPass.color, 0, 0);
 }
 
 DAWN_INSTANTIATE_TEST(StorageToUniformSyncTests,
@@ -415,7 +415,7 @@ class MultipleWriteThenMultipleReadTests : public DawnTest {
 // operation in compute pass.
 TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
     // Create pipeline, bind group, and different buffers for compute pass.
-    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
         struct VBContents {
             pos : array<vec4f, 4>
         }
@@ -460,7 +460,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
     wgpu::Buffer storageBuffer =
         CreateZeroedBuffer(sizeof(float), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst);
 
-    wgpu::BindGroup bindGroup0 = utils::MakeBindGroup(
+    wgpu::BindGroup bindGroup0 = dawn::utils::MakeBindGroup(
         device, cp.GetBindGroupLayout(0),
         {{0, vertexBuffer}, {1, indexBuffer}, {2, uniformBuffer}, {3, storageBuffer}});
     // Write data into storage buffers in compute pass.
@@ -472,13 +472,13 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
     pass0.End();
 
     // Create pipeline, bind group, and reuse buffers in render pass.
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
             return pos;
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             color : f32
         }
@@ -490,9 +490,10 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
             return vec4f(uniformBuffer.color, storageBuffer.color, 0.0, 1.0);
         })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -504,8 +505,8 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
 
     wgpu::RenderPipeline rp = device.CreateRenderPipeline(&rpDesc);
 
-    wgpu::BindGroup bindGroup1 = utils::MakeBindGroup(device, rp.GetBindGroupLayout(0),
-                                                      {{0, uniformBuffer}, {1, storageBuffer}});
+    wgpu::BindGroup bindGroup1 = dawn::utils::MakeBindGroup(
+        device, rp.GetBindGroupLayout(0), {{0, uniformBuffer}, {1, storageBuffer}});
 
     // Read data in buffers in render pass.
     wgpu::RenderPassEncoder pass1 = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -521,10 +522,10 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
 
     // Verify the rendering result.
     uint32_t min = 1, max = kRTSize - 3;
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, min, min);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, max, min);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, min, max);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, max, max);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, min, min);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, max, min);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, min, max);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, max, max);
 }
 
 // Write into a storage buffer in compute pass. Then read that data in buffer in a render pass. The
@@ -537,7 +538,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
 
     // Create pipeline, bind group, and a complex buffer for compute pass.
-    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
         struct Contents {
             @align(256) pos : array<vec4f, 4>,
             @align(256) indices : array<vec4i, 2>,
@@ -578,7 +579,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
                           wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage |
                           wgpu::BufferUsage::CopyDst);
     wgpu::BindGroup bindGroup0 =
-        utils::MakeBindGroup(device, cp.GetBindGroupLayout(0), {{0, buffer}});
+        dawn::utils::MakeBindGroup(device, cp.GetBindGroupLayout(0), {{0, buffer}});
 
     // Write various data (vertices, indices, and uniforms) into the buffer in compute pass.
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -589,13 +590,13 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
     pass0.End();
 
     // Create pipeline, bind group, and reuse the buffer in render pass.
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
             return pos;
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             color : f32
         }
@@ -606,9 +607,10 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
             return vec4f(uniformBuffer.color, storageBuffer.color, 0.0, 1.0);
         })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -621,9 +623,9 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
     wgpu::RenderPipeline rp = device.CreateRenderPipeline(&rpDesc);
 
     wgpu::BindGroup bindGroup1 =
-        utils::MakeBindGroup(device, rp.GetBindGroupLayout(0),
-                             {{0, buffer, offsetof(Data, color0), sizeof(float)},
-                              {1, buffer, offsetof(Data, color1), sizeof(float)}});
+        dawn::utils::MakeBindGroup(device, rp.GetBindGroupLayout(0),
+                                   {{0, buffer, offsetof(Data, color0), sizeof(float)},
+                                    {1, buffer, offsetof(Data, color1), sizeof(float)}});
 
     // Read various data in the buffer in render pass.
     wgpu::RenderPassEncoder pass1 = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -639,10 +641,10 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
 
     // Verify the rendering result.
     uint32_t min = 1, max = kRTSize - 3;
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, min, min);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, max, min);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, min, max);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, max, max);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, min, min);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, max, min);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, min, max);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kYellow, renderPass.color, max, max);
 }
 
 DAWN_INSTANTIATE_TEST(MultipleWriteThenMultipleReadTests,

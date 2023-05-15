@@ -31,15 +31,15 @@ class ColorStateTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bindGroupLayout = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
-        pipelineLayout = utils::MakePipelineLayout(device, {bindGroupLayout});
+        pipelineLayout = dawn::utils::MakePipelineLayout(device, {bindGroupLayout});
 
         // TODO(crbug.com/dawn/489): D3D12_Microsoft_Basic_Render_Driver_CPU
         // produces invalid results for these tests.
         DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWARP());
 
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
                 @vertex
                 fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                     var pos = array(
@@ -50,18 +50,18 @@ class ColorStateTest : public DawnTest {
                 }
             )");
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     }
 
     struct TriangleSpec {
-        utils::RGBA8 color;
+        dawn::utils::RGBA8 color;
         std::array<float, 4> blendFactor = {};
     };
 
     // Set up basePipeline and testPipeline. testPipeline has the given blend state on the first
     // attachment. basePipeline has no blending
     void SetupSingleSourcePipelines(wgpu::ColorTargetState colorTargetState) {
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
                 struct MyBlock {
                     color : vec4f
                 }
@@ -73,7 +73,7 @@ class ColorStateTest : public DawnTest {
                 }
             )");
 
-        utils::ComboRenderPipelineDescriptor baseDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor baseDescriptor;
         baseDescriptor.layout = pipelineLayout;
         baseDescriptor.vertex.module = vsModule;
         baseDescriptor.cFragment.module = fsModule;
@@ -81,7 +81,7 @@ class ColorStateTest : public DawnTest {
 
         basePipeline = device.CreateRenderPipeline(&baseDescriptor);
 
-        utils::ComboRenderPipelineDescriptor testDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor testDescriptor;
         testDescriptor.layout = pipelineLayout;
         testDescriptor.vertex.module = vsModule;
         testDescriptor.cFragment.module = fsModule;
@@ -93,7 +93,7 @@ class ColorStateTest : public DawnTest {
 
     // Create a bind group to set the colors as a uniform buffer
     template <size_t N>
-    wgpu::BindGroup MakeBindGroupForColors(std::array<utils::RGBA8, N> colors) {
+    wgpu::BindGroup MakeBindGroupForColors(std::array<dawn::utils::RGBA8, N> colors) {
         std::array<float, 4 * N> data;
         for (unsigned int i = 0; i < N; ++i) {
             data[4 * i + 0] = static_cast<float>(colors[i].r) / 255.f;
@@ -104,17 +104,17 @@ class ColorStateTest : public DawnTest {
 
         uint32_t bufferSize = static_cast<uint32_t>(4 * N * sizeof(float));
 
-        wgpu::Buffer buffer =
-            utils::CreateBufferFromData(device, &data, bufferSize, wgpu::BufferUsage::Uniform);
-        return utils::MakeBindGroup(device, testPipeline.GetBindGroupLayout(0),
-                                    {{0, buffer, 0, bufferSize}});
+        wgpu::Buffer buffer = dawn::utils::CreateBufferFromData(device, &data, bufferSize,
+                                                                wgpu::BufferUsage::Uniform);
+        return dawn::utils::MakeBindGroup(device, testPipeline.GetBindGroupLayout(0),
+                                          {{0, buffer, 0, bufferSize}});
     }
 
     // Test that after drawing a triangle with the base color, and then the given triangle spec, the
     // color is as expected
-    void DoSingleSourceTest(utils::RGBA8 base,
+    void DoSingleSourceTest(dawn::utils::RGBA8 base,
                             const TriangleSpec& triangle,
-                            const utils::RGBA8& expected) {
+                            const dawn::utils::RGBA8& expected) {
         wgpu::Color blendConstant{triangle.blendFactor[0], triangle.blendFactor[1],
                                   triangle.blendFactor[2], triangle.blendFactor[3]};
 
@@ -123,13 +123,14 @@ class ColorStateTest : public DawnTest {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             // First use the base pipeline to draw a triangle with no blending
             pass.SetPipeline(basePipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>({{base}})));
+            pass.SetBindGroup(0,
+                              MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>({{base}})));
             pass.Draw(3);
 
             // Then use the test pipeline to draw the test triangle with blending
             pass.SetPipeline(testPipeline);
             pass.SetBindGroup(
-                0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>({{triangle.color}})));
+                0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>({{triangle.color}})));
             pass.SetBlendConstant(&blendConstant);
             pass.Draw(3);
             pass.End();
@@ -143,9 +144,9 @@ class ColorStateTest : public DawnTest {
 
     // Given a vector of tests where each element is <testColor, expectedColor>, check that all
     // expectations are true for the given blend operation
-    void CheckBlendOperation(utils::RGBA8 base,
+    void CheckBlendOperation(dawn::utils::RGBA8 base,
                              wgpu::BlendOperation operation,
-                             std::vector<std::pair<utils::RGBA8, utils::RGBA8>> tests) {
+                             std::vector<std::pair<dawn::utils::RGBA8, dawn::utils::RGBA8>> tests) {
         wgpu::BlendComponent blendComponent;
         blendComponent.operation = operation;
         blendComponent.srcFactor = wgpu::BlendFactor::One;
@@ -168,12 +169,12 @@ class ColorStateTest : public DawnTest {
 
     // Given a vector of tests where each element is <testSpec, expectedColor>, check that all
     // expectations are true for the given blend factors
-    void CheckBlendFactor(utils::RGBA8 base,
+    void CheckBlendFactor(dawn::utils::RGBA8 base,
                           wgpu::BlendFactor colorSrcFactor,
                           wgpu::BlendFactor colorDstFactor,
                           wgpu::BlendFactor alphaSrcFactor,
                           wgpu::BlendFactor alphaDstFactor,
-                          std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests) {
+                          std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests) {
         wgpu::BlendComponent colorBlend;
         colorBlend.operation = wgpu::BlendOperation::Add;
         colorBlend.srcFactor = colorSrcFactor;
@@ -199,24 +200,24 @@ class ColorStateTest : public DawnTest {
         }
     }
 
-    void CheckSrcBlendFactor(utils::RGBA8 base,
+    void CheckSrcBlendFactor(dawn::utils::RGBA8 base,
                              wgpu::BlendFactor colorFactor,
                              wgpu::BlendFactor alphaFactor,
-                             std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests) {
+                             std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests) {
         CheckBlendFactor(base, colorFactor, wgpu::BlendFactor::One, alphaFactor,
                          wgpu::BlendFactor::One, tests);
     }
 
-    void CheckDstBlendFactor(utils::RGBA8 base,
+    void CheckDstBlendFactor(dawn::utils::RGBA8 base,
                              wgpu::BlendFactor colorFactor,
                              wgpu::BlendFactor alphaFactor,
-                             std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests) {
+                             std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests) {
         CheckBlendFactor(base, wgpu::BlendFactor::One, colorFactor, wgpu::BlendFactor::One,
                          alphaFactor, tests);
     }
 
     wgpu::PipelineLayout pipelineLayout;
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline basePipeline;
     wgpu::RenderPipeline testPipeline;
     wgpu::ShaderModule vsModule;
@@ -224,7 +225,8 @@ class ColorStateTest : public DawnTest {
 
 namespace {
 // Add two colors and clamp
-constexpr utils::RGBA8 operator+(const utils::RGBA8& col1, const utils::RGBA8& col2) {
+constexpr dawn::utils::RGBA8 operator+(const dawn::utils::RGBA8& col1,
+                                       const dawn::utils::RGBA8& col2) {
     int r = static_cast<int>(col1.r) + static_cast<int>(col2.r);
     int g = static_cast<int>(col1.g) + static_cast<int>(col2.g);
     int b = static_cast<int>(col1.b) + static_cast<int>(col2.b);
@@ -234,12 +236,13 @@ constexpr utils::RGBA8 operator+(const utils::RGBA8& col1, const utils::RGBA8& c
     b = (b > 255 ? 255 : (b < 0 ? 0 : b));
     a = (a > 255 ? 255 : (a < 0 ? 0 : a));
 
-    return utils::RGBA8(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b),
-                        static_cast<uint8_t>(a));
+    return dawn::utils::RGBA8(static_cast<uint8_t>(r), static_cast<uint8_t>(g),
+                              static_cast<uint8_t>(b), static_cast<uint8_t>(a));
 }
 
 // Subtract two colors and clamp
-constexpr utils::RGBA8 operator-(const utils::RGBA8& col1, const utils::RGBA8& col2) {
+constexpr dawn::utils::RGBA8 operator-(const dawn::utils::RGBA8& col1,
+                                       const dawn::utils::RGBA8& col2) {
     int r = static_cast<int>(col1.r) - static_cast<int>(col2.r);
     int g = static_cast<int>(col1.g) - static_cast<int>(col2.g);
     int b = static_cast<int>(col1.b) - static_cast<int>(col2.b);
@@ -249,35 +252,40 @@ constexpr utils::RGBA8 operator-(const utils::RGBA8& col1, const utils::RGBA8& c
     b = (b > 255 ? 255 : (b < 0 ? 0 : b));
     a = (a > 255 ? 255 : (a < 0 ? 0 : a));
 
-    return utils::RGBA8(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b),
-                        static_cast<uint8_t>(a));
+    return dawn::utils::RGBA8(static_cast<uint8_t>(r), static_cast<uint8_t>(g),
+                              static_cast<uint8_t>(b), static_cast<uint8_t>(a));
 }
 
 // Get the component-wise minimum of two colors
-utils::RGBA8 min(const utils::RGBA8& col1, const utils::RGBA8& col2) {
-    return utils::RGBA8(std::min(col1.r, col2.r), std::min(col1.g, col2.g),
-                        std::min(col1.b, col2.b), std::min(col1.a, col2.a));
+dawn::utils::RGBA8 min(const dawn::utils::RGBA8& col1, const dawn::utils::RGBA8& col2) {
+    return dawn::utils::RGBA8(std::min(col1.r, col2.r), std::min(col1.g, col2.g),
+                              std::min(col1.b, col2.b), std::min(col1.a, col2.a));
 }
 
 // Get the component-wise maximum of two colors
-utils::RGBA8 max(const utils::RGBA8& col1, const utils::RGBA8& col2) {
-    return utils::RGBA8(std::max(col1.r, col2.r), std::max(col1.g, col2.g),
-                        std::max(col1.b, col2.b), std::max(col1.a, col2.a));
+dawn::utils::RGBA8 max(const dawn::utils::RGBA8& col1, const dawn::utils::RGBA8& col2) {
+    return dawn::utils::RGBA8(std::max(col1.r, col2.r), std::max(col1.g, col2.g),
+                              std::max(col1.b, col2.b), std::max(col1.a, col2.a));
 }
 
 // Blend two RGBA8 color values parameterized by the provided factors in the range [0.f, 1.f]
-utils::RGBA8 mix(const utils::RGBA8& col1, const utils::RGBA8& col2, std::array<float, 4> fac) {
+dawn::utils::RGBA8 mix(const dawn::utils::RGBA8& col1,
+                       const dawn::utils::RGBA8& col2,
+                       std::array<float, 4> fac) {
     float r = static_cast<float>(col1.r) * (1.f - fac[0]) + static_cast<float>(col2.r) * fac[0];
     float g = static_cast<float>(col1.g) * (1.f - fac[1]) + static_cast<float>(col2.g) * fac[1];
     float b = static_cast<float>(col1.b) * (1.f - fac[2]) + static_cast<float>(col2.b) * fac[2];
     float a = static_cast<float>(col1.a) * (1.f - fac[3]) + static_cast<float>(col2.a) * fac[3];
 
-    return utils::RGBA8({static_cast<uint8_t>(std::round(r)), static_cast<uint8_t>(std::round(g)),
-                         static_cast<uint8_t>(std::round(b)), static_cast<uint8_t>(std::round(a))});
+    return dawn::utils::RGBA8(
+        {static_cast<uint8_t>(std::round(r)), static_cast<uint8_t>(std::round(g)),
+         static_cast<uint8_t>(std::round(b)), static_cast<uint8_t>(std::round(a))});
 }
 
 // Blend two RGBA8 color values parameterized by the provided RGBA8 factor
-utils::RGBA8 mix(const utils::RGBA8& col1, const utils::RGBA8& col2, const utils::RGBA8& fac) {
+dawn::utils::RGBA8 mix(const dawn::utils::RGBA8& col1,
+                       const dawn::utils::RGBA8& col2,
+                       const dawn::utils::RGBA8& fac) {
     std::array<float, 4> f = {{
         static_cast<float>(fac.r) / 255.f,
         static_cast<float>(fac.g) / 255.f,
@@ -287,18 +295,18 @@ utils::RGBA8 mix(const utils::RGBA8& col1, const utils::RGBA8& col2, const utils
     return mix(col1, col2, f);
 }
 
-constexpr std::array<utils::RGBA8, 8> kColors = {{
+constexpr std::array<dawn::utils::RGBA8, 8> kColors = {{
     // check operations over multiple channels
-    utils::RGBA8(64, 0, 0, 0),
-    utils::RGBA8(0, 64, 0, 0),
-    utils::RGBA8(64, 0, 32, 0),
-    utils::RGBA8(0, 64, 32, 0),
-    utils::RGBA8(128, 0, 128, 128),
-    utils::RGBA8(0, 128, 128, 128),
+    dawn::utils::RGBA8(64, 0, 0, 0),
+    dawn::utils::RGBA8(0, 64, 0, 0),
+    dawn::utils::RGBA8(64, 0, 32, 0),
+    dawn::utils::RGBA8(0, 64, 32, 0),
+    dawn::utils::RGBA8(128, 0, 128, 128),
+    dawn::utils::RGBA8(0, 128, 128, 128),
 
     // check cases that may cause overflow
-    utils::RGBA8(0, 0, 0, 0),
-    utils::RGBA8(255, 255, 255, 255),
+    dawn::utils::RGBA8(0, 0, 0, 0),
+    dawn::utils::RGBA8(255, 255, 255, 255),
 }};
 }  // namespace
 
@@ -319,119 +327,127 @@ TEST_P(ColorStateTest, Basic) {
 
     SetupSingleSourcePipelines(descriptor);
 
-    DoSingleSourceTest(utils::RGBA8(0, 0, 0, 0), {utils::RGBA8(255, 0, 0, 0)},
-                       utils::RGBA8(255, 0, 0, 0));
+    DoSingleSourceTest(dawn::utils::RGBA8(0, 0, 0, 0), {dawn::utils::RGBA8(255, 0, 0, 0)},
+                       dawn::utils::RGBA8(255, 0, 0, 0));
 }
 
 // The following tests check test that the blend operation works
 TEST_P(ColorStateTest, BlendOperationAdd) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<utils::RGBA8, utils::RGBA8>> tests;
-    std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) { return std::make_pair(color, base + color); });
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<dawn::utils::RGBA8, dawn::utils::RGBA8>> tests;
+    std::transform(
+        kColors.begin(), kColors.end(), std::back_inserter(tests),
+        [&](const dawn::utils::RGBA8& color) { return std::make_pair(color, base + color); });
     CheckBlendOperation(base, wgpu::BlendOperation::Add, tests);
 }
 
 TEST_P(ColorStateTest, BlendOperationSubtract) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<utils::RGBA8, utils::RGBA8>> tests;
-    std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) { return std::make_pair(color, color - base); });
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<dawn::utils::RGBA8, dawn::utils::RGBA8>> tests;
+    std::transform(
+        kColors.begin(), kColors.end(), std::back_inserter(tests),
+        [&](const dawn::utils::RGBA8& color) { return std::make_pair(color, color - base); });
     CheckBlendOperation(base, wgpu::BlendOperation::Subtract, tests);
 }
 
 TEST_P(ColorStateTest, BlendOperationReverseSubtract) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<utils::RGBA8, utils::RGBA8>> tests;
-    std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) { return std::make_pair(color, base - color); });
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<dawn::utils::RGBA8, dawn::utils::RGBA8>> tests;
+    std::transform(
+        kColors.begin(), kColors.end(), std::back_inserter(tests),
+        [&](const dawn::utils::RGBA8& color) { return std::make_pair(color, base - color); });
     CheckBlendOperation(base, wgpu::BlendOperation::ReverseSubtract, tests);
 }
 
 TEST_P(ColorStateTest, BlendOperationMin) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<utils::RGBA8, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<dawn::utils::RGBA8, dawn::utils::RGBA8>> tests;
     std::transform(
         kColors.begin(), kColors.end(), std::back_inserter(tests),
-        [&](const utils::RGBA8& color) { return std::make_pair(color, min(base, color)); });
+        [&](const dawn::utils::RGBA8& color) { return std::make_pair(color, min(base, color)); });
     CheckBlendOperation(base, wgpu::BlendOperation::Min, tests);
 }
 
 TEST_P(ColorStateTest, BlendOperationMax) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<utils::RGBA8, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<dawn::utils::RGBA8, dawn::utils::RGBA8>> tests;
     std::transform(
         kColors.begin(), kColors.end(), std::back_inserter(tests),
-        [&](const utils::RGBA8& color) { return std::make_pair(color, max(base, color)); });
+        [&](const dawn::utils::RGBA8& color) { return std::make_pair(color, max(base, color)); });
     CheckBlendOperation(base, wgpu::BlendOperation::Max, tests);
 }
 
 // The following tests check that the Source blend factor works
 TEST_P(ColorStateTest, SrcBlendFactorZero) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
-    std::transform(
-        kColors.begin(), kColors.end(), std::back_inserter(tests),
-        [&](const utils::RGBA8& color) { return std::make_pair(TriangleSpec({{color}}), base); });
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
+    std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
+                   [&](const dawn::utils::RGBA8& color) {
+                       return std::make_pair(TriangleSpec({{color}}), base);
+                   });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::Zero, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorOne) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        return std::make_pair(TriangleSpec({{color}}), base + color);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::One, wgpu::BlendFactor::One, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorSrc) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = color;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = color;
                        fac.a = 0;
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::Src, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorOneMinusSrc) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = utils::RGBA8(255, 255, 255, 255) - color;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) - color;
                        fac.a = 0;
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::OneMinusSrc, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorSrcAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac(color.a, color.a, color.a, color.a);
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac(color.a, color.a, color.a, color.a);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::SrcAlpha, wgpu::BlendFactor::SrcAlpha, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorOneMinusSrcAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(
-        kColors.begin(), kColors.end(), std::back_inserter(tests), [&](const utils::RGBA8& color) {
-            utils::RGBA8 fac =
-                utils::RGBA8(255, 255, 255, 255) - utils::RGBA8(color.a, color.a, color.a, color.a);
-            utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+        kColors.begin(), kColors.end(), std::back_inserter(tests),
+        [&](const dawn::utils::RGBA8& color) {
+            dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) -
+                                     dawn::utils::RGBA8(color.a, color.a, color.a, color.a);
+            dawn::utils::RGBA8 expected = base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
             return std::make_pair(TriangleSpec({{color}}), expected);
         });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::OneMinusSrcAlpha,
@@ -439,65 +455,70 @@ TEST_P(ColorStateTest, SrcBlendFactorOneMinusSrcAlpha) {
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorDst) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = base;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = base;
                        fac.a = 0;
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::Dst, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorOneMinusDst) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = utils::RGBA8(255, 255, 255, 255) - base;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) - base;
                        fac.a = 0;
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::OneMinusDst, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorDstAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac(base.a, base.a, base.a, base.a);
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac(base.a, base.a, base.a, base.a);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::DstAlpha, wgpu::BlendFactor::DstAlpha, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorOneMinusDstAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
-    std::transform(
-        kColors.begin(), kColors.end(), std::back_inserter(tests), [&](const utils::RGBA8& color) {
-            utils::RGBA8 fac =
-                utils::RGBA8(255, 255, 255, 255) - utils::RGBA8(base.a, base.a, base.a, base.a);
-            utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
-            return std::make_pair(TriangleSpec({{color}}), expected);
-        });
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
+    std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) -
+                                                dawn::utils::RGBA8(base.a, base.a, base.a, base.a);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
+                       return std::make_pair(TriangleSpec({{color}}), expected);
+                   });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::OneMinusDstAlpha,
                         wgpu::BlendFactor::OneMinusDstAlpha, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorSrcAlphaSaturated) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        uint8_t f = std::min(color.a, static_cast<uint8_t>(255 - base.a));
-                       utils::RGBA8 fac(f, f, f, 255);
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                       dawn::utils::RGBA8 fac(f, f, f, 255);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::SrcAlphaSaturated,
@@ -505,26 +526,27 @@ TEST_P(ColorStateTest, SrcBlendFactorSrcAlphaSaturated) {
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorConstant) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        auto triangleSpec = TriangleSpec({{color}, {{0.2f, 0.4f, 0.6f, 0.8f}}});
-                       utils::RGBA8 expected =
-                           base + mix(utils::RGBA8(0, 0, 0, 0), color, triangleSpec.blendFactor);
+                       dawn::utils::RGBA8 expected = base + mix(dawn::utils::RGBA8(0, 0, 0, 0),
+                                                                color, triangleSpec.blendFactor);
                        return std::make_pair(triangleSpec, expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::Constant, wgpu::BlendFactor::Constant, tests);
 }
 
 TEST_P(ColorStateTest, SrcBlendFactorOneMinusConstant) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        auto triangleSpec = TriangleSpec({{color}, {{0.2f, 0.4f, 0.6f, 0.8f}}});
                        std::array<float, 4> f = {{0.8f, 0.6f, 0.4f, 0.2f}};
-                       utils::RGBA8 expected = base + mix(utils::RGBA8(0, 0, 0, 0), color, f);
+                       dawn::utils::RGBA8 expected =
+                           base + mix(dawn::utils::RGBA8(0, 0, 0, 0), color, f);
                        return std::make_pair(triangleSpec, expected);
                    });
     CheckSrcBlendFactor(base, wgpu::BlendFactor::OneMinusConstant,
@@ -533,70 +555,75 @@ TEST_P(ColorStateTest, SrcBlendFactorOneMinusConstant) {
 
 // The following tests check that the Destination blend factor works
 TEST_P(ColorStateTest, DstBlendFactorZero) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
-    std::transform(
-        kColors.begin(), kColors.end(), std::back_inserter(tests),
-        [&](const utils::RGBA8& color) { return std::make_pair(TriangleSpec({{color}}), color); });
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
+    std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
+                   [&](const dawn::utils::RGBA8& color) {
+                       return std::make_pair(TriangleSpec({{color}}), color);
+                   });
     CheckDstBlendFactor(base, wgpu::BlendFactor::Zero, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorOne) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        return std::make_pair(TriangleSpec({{color}}), base + color);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::One, wgpu::BlendFactor::One, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorSrc) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = color;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = color;
                        fac.a = 0;
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::Src, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorOneMinusSrc) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = utils::RGBA8(255, 255, 255, 255) - color;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) - color;
                        fac.a = 0;
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::OneMinusSrc, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorSrcAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac(color.a, color.a, color.a, color.a);
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac(color.a, color.a, color.a, color.a);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::SrcAlpha, wgpu::BlendFactor::SrcAlpha, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorOneMinusSrcAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(
-        kColors.begin(), kColors.end(), std::back_inserter(tests), [&](const utils::RGBA8& color) {
-            utils::RGBA8 fac =
-                utils::RGBA8(255, 255, 255, 255) - utils::RGBA8(color.a, color.a, color.a, color.a);
-            utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+        kColors.begin(), kColors.end(), std::back_inserter(tests),
+        [&](const dawn::utils::RGBA8& color) {
+            dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) -
+                                     dawn::utils::RGBA8(color.a, color.a, color.a, color.a);
+            dawn::utils::RGBA8 expected = color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
             return std::make_pair(TriangleSpec({{color}}), expected);
         });
     CheckDstBlendFactor(base, wgpu::BlendFactor::OneMinusSrcAlpha,
@@ -604,65 +631,70 @@ TEST_P(ColorStateTest, DstBlendFactorOneMinusSrcAlpha) {
 }
 
 TEST_P(ColorStateTest, DstBlendFactorDst) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = base;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = base;
                        fac.a = 0;
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::Dst, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorOneMinusDst) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac = utils::RGBA8(255, 255, 255, 255) - base;
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) - base;
                        fac.a = 0;
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::OneMinusDst, wgpu::BlendFactor::Zero, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorDstAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac(base.a, base.a, base.a, base.a);
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac(base.a, base.a, base.a, base.a);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::DstAlpha, wgpu::BlendFactor::DstAlpha, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorOneMinusDstAlpha) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
-    std::transform(
-        kColors.begin(), kColors.end(), std::back_inserter(tests), [&](const utils::RGBA8& color) {
-            utils::RGBA8 fac =
-                utils::RGBA8(255, 255, 255, 255) - utils::RGBA8(base.a, base.a, base.a, base.a);
-            utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
-            return std::make_pair(TriangleSpec({{color}}), expected);
-        });
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
+    std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac = dawn::utils::RGBA8(255, 255, 255, 255) -
+                                                dawn::utils::RGBA8(base.a, base.a, base.a, base.a);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
+                       return std::make_pair(TriangleSpec({{color}}), expected);
+                   });
     CheckDstBlendFactor(base, wgpu::BlendFactor::OneMinusDstAlpha,
                         wgpu::BlendFactor::OneMinusDstAlpha, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorSrcAlphaSaturated) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        uint8_t f = std::min(color.a, static_cast<uint8_t>(255 - base.a));
-                       utils::RGBA8 fac(f, f, f, 255);
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, fac);
+                       dawn::utils::RGBA8 fac(f, f, f, 255);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::SrcAlphaSaturated,
@@ -670,26 +702,27 @@ TEST_P(ColorStateTest, DstBlendFactorSrcAlphaSaturated) {
 }
 
 TEST_P(ColorStateTest, DstBlendFactorConstant) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        auto triangleSpec = TriangleSpec({{color}, {{0.2f, 0.4f, 0.6f, 0.8f}}});
-                       utils::RGBA8 expected =
-                           color + mix(utils::RGBA8(0, 0, 0, 0), base, triangleSpec.blendFactor);
+                       dawn::utils::RGBA8 expected = color + mix(dawn::utils::RGBA8(0, 0, 0, 0),
+                                                                 base, triangleSpec.blendFactor);
                        return std::make_pair(triangleSpec, expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::Constant, wgpu::BlendFactor::Constant, tests);
 }
 
 TEST_P(ColorStateTest, DstBlendFactorOneMinusConstant) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
+                   [&](const dawn::utils::RGBA8& color) {
                        auto triangleSpec = TriangleSpec({{color}, {{0.2f, 0.4f, 0.6f, 0.8f}}});
                        std::array<float, 4> f = {{0.8f, 0.6f, 0.4f, 0.2f}};
-                       utils::RGBA8 expected = color + mix(utils::RGBA8(0, 0, 0, 0), base, f);
+                       dawn::utils::RGBA8 expected =
+                           color + mix(dawn::utils::RGBA8(0, 0, 0, 0), base, f);
                        return std::make_pair(triangleSpec, expected);
                    });
     CheckDstBlendFactor(base, wgpu::BlendFactor::OneMinusConstant,
@@ -714,9 +747,9 @@ TEST_P(ColorStateTest, ColorWriteMask) {
         descriptor.writeMask = wgpu::ColorWriteMask::Red;
         SetupSingleSourcePipelines(descriptor);
 
-        utils::RGBA8 base(32, 64, 128, 192);
+        dawn::utils::RGBA8 base(32, 64, 128, 192);
         for (auto& color : kColors) {
-            utils::RGBA8 expected = base + utils::RGBA8(color.r, 0, 0, 0);
+            dawn::utils::RGBA8 expected = base + dawn::utils::RGBA8(color.r, 0, 0, 0);
             DoSingleSourceTest(base, {color}, expected);
         }
     }
@@ -726,9 +759,9 @@ TEST_P(ColorStateTest, ColorWriteMask) {
         descriptor.writeMask = wgpu::ColorWriteMask::Green | wgpu::ColorWriteMask::Alpha;
         SetupSingleSourcePipelines(descriptor);
 
-        utils::RGBA8 base(32, 64, 128, 192);
+        dawn::utils::RGBA8 base(32, 64, 128, 192);
         for (auto& color : kColors) {
-            utils::RGBA8 expected = base + utils::RGBA8(0, color.g, 0, color.a);
+            dawn::utils::RGBA8 expected = base + dawn::utils::RGBA8(0, color.g, 0, color.a);
             DoSingleSourceTest(base, {color}, expected);
         }
     }
@@ -738,7 +771,7 @@ TEST_P(ColorStateTest, ColorWriteMask) {
         descriptor.writeMask = wgpu::ColorWriteMask::None;
         SetupSingleSourcePipelines(descriptor);
 
-        utils::RGBA8 base(32, 64, 128, 192);
+        dawn::utils::RGBA8 base(32, 64, 128, 192);
         for (auto& color : kColors) {
             DoSingleSourceTest(base, {color}, base);
         }
@@ -762,14 +795,15 @@ TEST_P(ColorStateTest, ColorWriteMaskBlendingDisabled) {
         descriptor.writeMask = wgpu::ColorWriteMask::Red;
         SetupSingleSourcePipelines(descriptor);
 
-        utils::RGBA8 base(32, 64, 128, 192);
-        utils::RGBA8 expected(32, 0, 0, 0);
+        dawn::utils::RGBA8 base(32, 64, 128, 192);
+        dawn::utils::RGBA8 expected(32, 0, 0, 0);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(testPipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>({{base}})));
+            pass.SetBindGroup(0,
+                              MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>({{base}})));
             pass.Draw(3);
             pass.End();
         }
@@ -802,10 +836,10 @@ TEST_P(ColorStateTest, IndependentColorState) {
         renderTargetViews[i] = renderTargets[i].CreateView();
     }
 
-    utils::ComboRenderPassDescriptor renderPass(
+    dawn::utils::ComboRenderPassDescriptor renderPass(
         {renderTargetViews[0], renderTargetViews[1], renderTargetViews[2], renderTargetViews[3]});
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct MyBlock {
             color0 : vec4f,
             color1 : vec4f,
@@ -832,7 +866,7 @@ TEST_P(ColorStateTest, IndependentColorState) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor baseDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor baseDescriptor;
     baseDescriptor.layout = pipelineLayout;
     baseDescriptor.vertex.module = vsModule;
     baseDescriptor.cFragment.module = fsModule;
@@ -840,7 +874,7 @@ TEST_P(ColorStateTest, IndependentColorState) {
 
     basePipeline = device.CreateRenderPipeline(&baseDescriptor);
 
-    utils::ComboRenderPipelineDescriptor testDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor testDescriptor;
     testDescriptor.layout = pipelineLayout;
     testDescriptor.vertex.module = vsModule;
     testDescriptor.cFragment.module = fsModule;
@@ -883,27 +917,27 @@ TEST_P(ColorStateTest, IndependentColorState) {
     testPipeline = device.CreateRenderPipeline(&testDescriptor);
 
     for (unsigned int c = 0; c < kColors.size(); ++c) {
-        utils::RGBA8 base = kColors[((c + 31) * 29) % kColors.size()];
-        utils::RGBA8 color0 = kColors[((c + 19) * 13) % kColors.size()];
-        utils::RGBA8 color1 = kColors[((c + 11) * 43) % kColors.size()];
-        utils::RGBA8 color2 = kColors[((c + 7) * 3) % kColors.size()];
-        utils::RGBA8 color3 = kColors[((c + 13) * 71) % kColors.size()];
+        dawn::utils::RGBA8 base = kColors[((c + 31) * 29) % kColors.size()];
+        dawn::utils::RGBA8 color0 = kColors[((c + 19) * 13) % kColors.size()];
+        dawn::utils::RGBA8 color1 = kColors[((c + 11) * 43) % kColors.size()];
+        dawn::utils::RGBA8 color2 = kColors[((c + 7) * 3) % kColors.size()];
+        dawn::utils::RGBA8 color3 = kColors[((c + 13) * 71) % kColors.size()];
 
-        utils::RGBA8 expected0 = color0 + base;
-        utils::RGBA8 expected1 = color1 - base;
-        utils::RGBA8 expected2 = color2;
-        utils::RGBA8 expected3 = min(color3, base);
+        dawn::utils::RGBA8 expected0 = color0 + base;
+        dawn::utils::RGBA8 expected1 = color1 - base;
+        dawn::utils::RGBA8 expected2 = color2;
+        dawn::utils::RGBA8 expected3 = min(color3, base);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
             pass.SetPipeline(basePipeline);
-            pass.SetBindGroup(
-                0, MakeBindGroupForColors(std::array<utils::RGBA8, 4>({{base, base, base, base}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 4>(
+                                     {{base, base, base, base}})));
             pass.Draw(3);
 
             pass.SetPipeline(testPipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 4>(
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 4>(
                                      {{color0, color1, color2, color3}})));
             pass.Draw(3);
             pass.End();
@@ -929,7 +963,7 @@ TEST_P(ColorStateTest, IndependentColorState) {
 
 // Test that the default blend color is correctly set at the beginning of every subpass
 TEST_P(ColorStateTest, DefaultBlendColor) {
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct MyBlock {
             color : vec4f
         }
@@ -941,7 +975,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor baseDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor baseDescriptor;
     baseDescriptor.layout = pipelineLayout;
     baseDescriptor.vertex.module = vsModule;
     baseDescriptor.cFragment.module = fsModule;
@@ -949,7 +983,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
 
     basePipeline = device.CreateRenderPipeline(&baseDescriptor);
 
-    utils::ComboRenderPipelineDescriptor testDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor testDescriptor;
     testDescriptor.layout = pipelineLayout;
     testDescriptor.vertex.module = vsModule;
     testDescriptor.cFragment.module = fsModule;
@@ -975,12 +1009,12 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(
-                                     std::array<utils::RGBA8, 1>({{utils::RGBA8(0, 0, 0, 0)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(0, 0, 0, 0)}})));
             pass.Draw(3);
             pass.SetPipeline(testPipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>(
-                                     {{utils::RGBA8(255, 255, 255, 255)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(255, 255, 255, 255)}})));
             pass.Draw(3);
             pass.End();
         }
@@ -988,7 +1022,8 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), renderPass.color, kRTSize / 2, kRTSize / 2);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 0, 0, 0), renderPass.color, kRTSize / 2,
+                              kRTSize / 2);
     }
 
     // Check that setting the blend color works
@@ -997,13 +1032,13 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(
-                                     std::array<utils::RGBA8, 1>({{utils::RGBA8(0, 0, 0, 0)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(0, 0, 0, 0)}})));
             pass.Draw(3);
             pass.SetPipeline(testPipeline);
             pass.SetBlendConstant(&kWhite);
-            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>(
-                                     {{utils::RGBA8(255, 255, 255, 255)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(255, 255, 255, 255)}})));
             pass.Draw(3);
             pass.End();
         }
@@ -1011,7 +1046,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(255, 255, 255, 255), renderPass.color, kRTSize / 2,
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(255, 255, 255, 255), renderPass.color, kRTSize / 2,
                               kRTSize / 2);
     }
 
@@ -1021,25 +1056,25 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(
-                                     std::array<utils::RGBA8, 1>({{utils::RGBA8(0, 0, 0, 0)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(0, 0, 0, 0)}})));
             pass.Draw(3);
             pass.SetPipeline(testPipeline);
             pass.SetBlendConstant(&kWhite);
-            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>(
-                                     {{utils::RGBA8(255, 255, 255, 255)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(255, 255, 255, 255)}})));
             pass.Draw(3);
             pass.End();
         }
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(
-                                     std::array<utils::RGBA8, 1>({{utils::RGBA8(0, 0, 0, 0)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(0, 0, 0, 0)}})));
             pass.Draw(3);
             pass.SetPipeline(testPipeline);
-            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>(
-                                     {{utils::RGBA8(255, 255, 255, 255)}})));
+            pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>(
+                                     {{dawn::utils::RGBA8(255, 255, 255, 255)}})));
             pass.Draw(3);
             pass.End();
         }
@@ -1047,7 +1082,8 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), renderPass.color, kRTSize / 2, kRTSize / 2);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 0, 0, 0), renderPass.color, kRTSize / 2,
+                              kRTSize / 2);
     }
 }
 
@@ -1055,7 +1091,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
 // persisted and prevented a render pass loadOp from fully clearing the output
 // attachment.
 TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct MyBlock {
             color : vec4f
         }
@@ -1067,7 +1103,7 @@ TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor baseDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor baseDescriptor;
     baseDescriptor.layout = pipelineLayout;
     baseDescriptor.vertex.module = vsModule;
     baseDescriptor.cFragment.module = fsModule;
@@ -1075,7 +1111,7 @@ TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
 
     basePipeline = device.CreateRenderPipeline(&baseDescriptor);
 
-    utils::ComboRenderPipelineDescriptor testDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor testDescriptor;
     testDescriptor.layout = pipelineLayout;
     testDescriptor.vertex.module = vsModule;
     testDescriptor.cFragment.module = fsModule;
@@ -1084,15 +1120,15 @@ TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
 
     testPipeline = device.CreateRenderPipeline(&testDescriptor);
 
-    utils::RGBA8 base(32, 64, 128, 192);
-    utils::RGBA8 expected(0, 0, 0, 0);
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    dawn::utils::RGBA8 expected(0, 0, 0, 0);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         // Clear the render attachment to |base|
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(basePipeline);
-        pass.SetBindGroup(0, MakeBindGroupForColors(std::array<utils::RGBA8, 1>({{base}})));
+        pass.SetBindGroup(0, MakeBindGroupForColors(std::array<dawn::utils::RGBA8, 1>({{base}})));
         pass.Draw(3);
 
         // Set a pipeline that will dirty the color write mask
@@ -1113,7 +1149,7 @@ TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
 TEST_P(ColorStateTest, SparseAttachmentsDifferentColorMask) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_indexed_draw_buffers"));
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct Outputs {
             @location(1) o1 : vec4f,
             @location(3) o3 : vec4f,
@@ -1124,7 +1160,7 @@ TEST_P(ColorStateTest, SparseAttachmentsDifferentColorMask) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.vertex.module = vsModule;
     pipelineDesc.cFragment.module = fsModule;
     pipelineDesc.cFragment.targetCount = 4;
@@ -1169,19 +1205,20 @@ TEST_P(ColorStateTest, SparseAttachmentsDifferentColorMask) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kWhite, attachment1, 0, 0);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, attachment3, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kWhite, attachment1, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, attachment3, 0, 0);
 }
 
 // This is a regression test against an Intel driver issue about using DstAlpha as
 // SrcBlendFactor for both color and alpha blend factors.
 TEST_P(ColorStateTest, SrcBlendFactorDstAlphaDstBlendFactorZero) {
-    utils::RGBA8 base(32, 64, 128, 192);
-    std::vector<std::pair<TriangleSpec, utils::RGBA8>> tests;
+    dawn::utils::RGBA8 base(32, 64, 128, 192);
+    std::vector<std::pair<TriangleSpec, dawn::utils::RGBA8>> tests;
     std::transform(kColors.begin(), kColors.end(), std::back_inserter(tests),
-                   [&](const utils::RGBA8& color) {
-                       utils::RGBA8 fac(base.a, base.a, base.a, base.a);
-                       utils::RGBA8 expected = mix(utils::RGBA8(0, 0, 0, 0), color, fac);
+                   [&](const dawn::utils::RGBA8& color) {
+                       dawn::utils::RGBA8 fac(base.a, base.a, base.a, base.a);
+                       dawn::utils::RGBA8 expected =
+                           mix(dawn::utils::RGBA8(0, 0, 0, 0), color, fac);
                        return std::make_pair(TriangleSpec({{color}}), expected);
                    });
     CheckBlendFactor(base, wgpu::BlendFactor::DstAlpha, wgpu::BlendFactor::Zero,
