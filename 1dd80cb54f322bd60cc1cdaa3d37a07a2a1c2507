@@ -16,6 +16,23 @@
       "message": "I\u0027m open to landing either options!",
       "revId": "1dd80cb54f322bd60cc1cdaa3d37a07a2a1c2507",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a558c18_da3db5f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-15T23:52:50Z",
+      "side": 1,
+      "message": "LGTM but I think I prefer the other one because it moves DawnInstanceDescriptor out of webgpu.h, which is ultimately good.",
+      "revId": "1dd80cb54f322bd60cc1cdaa3d37a07a2a1c2507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
