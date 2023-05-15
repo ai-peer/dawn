@@ -190,6 +190,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e03ed0_13a7f512",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-15T19:31:05Z",
+      "side": 1,
+      "message": "Basically, tint will translate external texture bindings twice, once by `externalTextureOptions` and then by bindingMapper. So it is very likely, the final slots specified in `externalTextureOptions` will be conflict with existing bindings , so they will be incorrectly translated by `bindingMapper` again.",
+      "parentUuid": "f792d4f9_417721ec",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
