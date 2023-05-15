@@ -34,20 +34,20 @@ class DrawIndexedIndirectTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleStrip;
@@ -60,7 +60,7 @@ class DrawIndexedIndirectTest : public DawnTest {
 
         pipeline = device.CreateRenderPipeline(&descriptor);
 
-        vertexBuffer = utils::CreateBufferFromData<float>(
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex,
             {// First quad: the first 3 vertices represent the bottom left triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f,
@@ -71,17 +71,18 @@ class DrawIndexedIndirectTest : public DawnTest {
              0.0f, 1.0f});
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline pipeline;
     wgpu::Buffer vertexBuffer;
 
     wgpu::Buffer CreateIndirectBuffer(std::initializer_list<uint32_t> indirectParamList) {
-        return utils::CreateBufferFromData<uint32_t>(
+        return dawn::utils::CreateBufferFromData<uint32_t>(
             device, wgpu::BufferUsage::Indirect | wgpu::BufferUsage::Storage, indirectParamList);
     }
 
     wgpu::Buffer CreateIndexBuffer(std::initializer_list<uint32_t> indexList) {
-        return utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, indexList);
+        return dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index,
+                                                           indexList);
     }
 
     wgpu::CommandBuffer EncodeDrawCommands(std::initializer_list<uint32_t> bufferList,
@@ -104,8 +105,8 @@ class DrawIndexedIndirectTest : public DawnTest {
     }
 
     void TestDraw(wgpu::CommandBuffer commands,
-                  utils::RGBA8 bottomLeftExpected,
-                  utils::RGBA8 topRightExpected) {
+                  dawn::utils::RGBA8 bottomLeftExpected,
+                  dawn::utils::RGBA8 topRightExpected) {
         queue.Submit(1, &commands);
 
         EXPECT_PIXEL_RGBA8_EQ(bottomLeftExpected, renderPass.color, 1, 3);
@@ -115,8 +116,8 @@ class DrawIndexedIndirectTest : public DawnTest {
     void Test(std::initializer_list<uint32_t> bufferList,
               uint64_t indexOffset,
               uint64_t indirectOffset,
-              utils::RGBA8 bottomLeftExpected,
-              utils::RGBA8 topRightExpected) {
+              dawn::utils::RGBA8 bottomLeftExpected,
+              dawn::utils::RGBA8 topRightExpected) {
         wgpu::Buffer indexBuffer =
             CreateIndexBuffer({0, 1, 2, 0, 3, 1,
                                // The indices below are added to test negatve baseVertex
@@ -135,8 +136,8 @@ TEST_P(DrawIndexedIndirectTest, Uint32) {
     // the offsets that Tint/GLSL produces.
     DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with no indices.
     Test({0, 0, 0, 0, 0}, 0, 0, notFilled, notFilled);
@@ -162,8 +163,8 @@ TEST_P(DrawIndexedIndirectTest, BaseVertex) {
     // the offsets that Tint/GLSL produces.
     DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with only the first 3 indices of the second quad (top right triangle)
     Test({3, 1, 0, 4, 0}, 0, 0, notFilled, filled);
@@ -191,8 +192,8 @@ TEST_P(DrawIndexedIndirectTest, IndirectOffset) {
     // the offsets that Tint/GLSL produces.
     DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test an offset draw call, with indirect buffer containing 2 calls:
     // 1) first 3 indices of the second quad (top right triangle)
@@ -216,8 +217,8 @@ TEST_P(DrawIndexedIndirectTest, BasicValidation) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1});
 
@@ -243,8 +244,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithOffsets) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1, 0, 1, 2});
 
@@ -275,8 +276,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateMultiplePasses) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1, 0, 1, 2});
 
@@ -306,8 +307,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateMultipleDraws) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Validate multiple draw calls using the same index and indirect buffers as input, but with
     // different indirect offsets.
@@ -406,8 +407,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateEncodeMultipleThenSubmitInOrder) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1, 0, 1, 2});
 
@@ -444,8 +445,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateEncodeMultipleThenSubmitAtOnce) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1, 0, 1, 2});
 
@@ -472,8 +473,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateEncodeMultipleThenSubmitOutOfOrder) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1, 0, 1, 2});
 
@@ -506,8 +507,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithBundlesInSamePass) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indirectBuffer =
         CreateIndirectBuffer({3, 1, 3, 0, 0, 10, 1, 0, 0, 0, 3, 1, 6, 0, 0});
@@ -515,7 +516,7 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithBundlesInSamePass) {
 
     std::vector<wgpu::RenderBundle> bundles;
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
         wgpu::RenderBundleEncoder bundleEncoder = device.CreateRenderBundleEncoder(&desc);
@@ -526,7 +527,7 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithBundlesInSamePass) {
         bundles.push_back(bundleEncoder.Finish());
     }
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
         wgpu::RenderBundleEncoder bundleEncoder = device.CreateRenderBundleEncoder(&desc);
@@ -561,8 +562,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithBundlesInDifferentPasses) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indirectBuffer =
         CreateIndirectBuffer({3, 1, 3, 0, 0, 10, 1, 0, 0, 0, 3, 1, 6, 0, 0});
@@ -571,7 +572,7 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithBundlesInDifferentPasses) {
     wgpu::CommandBuffer commands[2];
     {
         wgpu::RenderBundle bundle;
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
         wgpu::RenderBundleEncoder bundleEncoder = device.CreateRenderBundleEncoder(&desc);
@@ -592,7 +593,7 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithBundlesInDifferentPasses) {
 
     {
         wgpu::RenderBundle bundle;
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
         wgpu::RenderBundleEncoder bundleEncoder = device.CreateRenderBundleEncoder(&desc);
@@ -633,15 +634,15 @@ TEST_P(DrawIndexedIndirectTest, ValidateReusedBundleWithChangingParams) {
     // It doesn't make sense to test invalid inputs when validation is disabled.
     DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    // utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    // dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     wgpu::Buffer indirectBuffer = CreateIndirectBuffer({0, 0, 0, 0, 0});
     wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1});
 
     // Encode a single bundle that always uses indirectBuffer offset 0 for its params.
     wgpu::RenderBundle bundle;
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     wgpu::RenderBundleEncoder bundleEncoder = device.CreateRenderBundleEncoder(&desc);
@@ -651,8 +652,8 @@ TEST_P(DrawIndexedIndirectTest, ValidateReusedBundleWithChangingParams) {
     bundleEncoder.DrawIndexedIndirect(indirectBuffer, 0);
     bundle = bundleEncoder.Finish();
 
-    wgpu::ShaderModule paramWriterModule = utils::CreateShaderModule(device,
-                                                                     R"(
+    wgpu::ShaderModule paramWriterModule = dawn::utils::CreateShaderModule(device,
+                                                                           R"(
             struct Input { firstIndex: u32 }
             struct Params {
                 indexCount: u32,
@@ -676,9 +677,9 @@ TEST_P(DrawIndexedIndirectTest, ValidateReusedBundleWithChangingParams) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
     auto encodeComputePassToUpdateFirstIndex = [&](uint32_t newFirstIndex) {
-        wgpu::Buffer input = utils::CreateBufferFromData<uint32_t>(
+        wgpu::Buffer input = dawn::utils::CreateBufferFromData<uint32_t>(
             device, wgpu::BufferUsage::Uniform, {newFirstIndex});
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, computePipeline.GetBindGroupLayout(0),
             {{0, input, 0, sizeof(uint32_t)}, {1, indirectBuffer, 0, 5 * sizeof(uint32_t)}});
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();

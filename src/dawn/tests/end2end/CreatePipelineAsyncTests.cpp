@@ -45,11 +45,11 @@ class CreatePipelineAsyncTest : public DawnTest {
             }
             ASSERT_TRUE(currentTask->message.empty());
             ASSERT_NE(nullptr, currentTask->computePipeline.Get());
-            wgpu::BindGroup bindGroup =
-                utils::MakeBindGroup(device, currentTask->computePipeline.GetBindGroupLayout(0),
-                                     {
-                                         {0, ssbo, 0, sizeof(uint32_t)},
-                                     });
+            wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+                device, currentTask->computePipeline.GetBindGroupLayout(0),
+                {
+                    {0, ssbo, 0, sizeof(uint32_t)},
+                });
             pass.SetBindGroup(0, bindGroup);
             pass.SetPipeline(currentTask->computePipeline);
 
@@ -77,7 +77,7 @@ class CreatePipelineAsyncTest : public DawnTest {
             wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
         wgpu::Texture outputTexture = device.CreateTexture(&textureDescriptor);
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
         renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
         renderPassDescriptor.cColorAttachments[0].clearValue = {1.f, 0.f, 0.f, 1.f};
 
@@ -101,13 +101,13 @@ class CreatePipelineAsyncTest : public DawnTest {
 
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 255, 0, 255), outputTexture, 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 255, 0, 255), outputTexture, 0, 0);
     }
 
     void ValidateCreateRenderPipelineAsync() { ValidateCreateRenderPipelineAsync(&task); }
 
     void DoCreateRenderPipelineAsync(
-        const utils::ComboRenderPipelineDescriptor& renderPipelineDescriptor) {
+        const dawn::utils::ComboRenderPipelineDescriptor& renderPipelineDescriptor) {
         device.CreateRenderPipelineAsync(
             &renderPipelineDescriptor,
             [](WGPUCreatePipelineAsyncStatus status, WGPURenderPipeline returnPipeline,
@@ -129,7 +129,7 @@ class CreatePipelineAsyncTest : public DawnTest {
 // Verify the basic use of CreateComputePipelineAsync works on all backends.
 TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateComputePipelineAsync) {
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct SSBO {
             value : u32
         }
@@ -159,7 +159,7 @@ TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateComputePipelineAsync) {
 // This is a regression test for a bug on the member "entryPoint" of FlatComputePipelineDescriptor.
 TEST_P(CreatePipelineAsyncTest, ReleaseEntryPointAfterCreatComputePipelineAsync) {
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct SSBO {
             value : u32
         }
@@ -198,7 +198,7 @@ TEST_P(CreatePipelineAsyncTest, CreateComputePipelineFailed) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct SSBO {
             value : u32
         }
@@ -235,12 +235,12 @@ TEST_P(CreatePipelineAsyncTest, CreateComputePipelineFailed) {
 TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateRenderPipelineAsync) {
     constexpr wgpu::TextureFormat kRenderAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -259,12 +259,12 @@ TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateRenderPipelineAsync) {
 TEST_P(CreatePipelineAsyncTest, ReleaseEntryPointsAfterCreateRenderPipelineAsync) {
     constexpr wgpu::TextureFormat kRenderAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -289,7 +289,7 @@ TEST_P(CreatePipelineAsyncTest, ReleaseEntryPointsAfterCreateRenderPipelineAsync
     textureDescriptor.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
     wgpu::Texture outputTexture = device.CreateTexture(&textureDescriptor);
 
-    utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
     renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
     renderPassDescriptor.cColorAttachments[0].clearValue = {1.f, 0.f, 0.f, 1.f};
 
@@ -312,7 +312,7 @@ TEST_P(CreatePipelineAsyncTest, ReleaseEntryPointsAfterCreateRenderPipelineAsync
 
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 255, 0, 255), outputTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 255, 0, 255), outputTexture, 0, 0);
 }
 
 // Verify CreateRenderPipelineAsync() works as expected when there is any error that happens during
@@ -324,12 +324,12 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineFailed) {
 
     constexpr wgpu::TextureFormat kRenderAttachmentFormat = wgpu::TextureFormat::Depth32Float;
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -364,7 +364,7 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineFailed) {
 // CreateComputePipelineAsync() is called.
 TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipelineAsync) {
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         @compute @workgroup_size(1) fn main() {
         })");
     csDesc.compute.entryPoint = "main";
@@ -387,12 +387,12 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipeli
 // Verify there is no error when the device is released before the callback of
 // CreateRenderPipelineAsync() is called.
 TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateRenderPipelineAsync) {
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -420,7 +420,7 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateRenderPipelin
 // CreateComputePipelineAsync() is called.
 TEST_P(CreatePipelineAsyncTest, DestroyDeviceBeforeCallbackOfCreateComputePipelineAsync) {
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         @compute @workgroup_size(1) fn main() {
         })");
     csDesc.compute.entryPoint = "main";
@@ -444,12 +444,12 @@ TEST_P(CreatePipelineAsyncTest, DestroyDeviceBeforeCallbackOfCreateComputePipeli
 // Verify there is no error when the device is destroyed before the callback of
 // CreateRenderPipelineAsync() is called.
 TEST_P(CreatePipelineAsyncTest, DestroyDeviceBeforeCallbackOfCreateRenderPipelineAsync) {
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -478,7 +478,7 @@ TEST_P(CreatePipelineAsyncTest, DestroyDeviceBeforeCallbackOfCreateRenderPipelin
 // object from cache works correctly.
 TEST_P(CreatePipelineAsyncTest, CreateSameComputePipelineTwice) {
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct SSBO {
             value : u32
         }
@@ -537,7 +537,7 @@ TEST_P(CreatePipelineAsyncTest, CreateSameComputePipelineTwiceAtSameTime) {
 
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.layout = pipelineLayout;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct SSBO {
             value : u32
         }
@@ -578,12 +578,12 @@ TEST_P(CreatePipelineAsyncTest, CreateSameComputePipelineTwiceAtSameTime) {
 TEST_P(CreatePipelineAsyncTest, CreateSameRenderPipelineTwiceAtSameTime) {
     constexpr wgpu::TextureFormat kRenderAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -627,10 +627,10 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithVertexBufferLayouts
     wgpu::Texture renderTarget = device.CreateTexture(&textureDescriptor);
     wgpu::TextureView renderTargetView = renderTarget.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass({renderTargetView});
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView});
     {
-        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-        renderPipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         struct VertexInput {
             @location(0) input0: u32,
             @location(1) input1: u32,
@@ -652,7 +652,7 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithVertexBufferLayouts
             }
             return vertexOutput;
         })");
-        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @fragment
         fn main(@location(0) fragColorIn : vec4f) -> @location(0) vec4f {
             return fragColorIn;
@@ -677,9 +677,9 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithVertexBufferLayouts
         DoCreateRenderPipelineAsync(renderPipelineDescriptor);
     }
 
-    wgpu::Buffer vertexBuffer1 = utils::CreateBufferFromData(
+    wgpu::Buffer vertexBuffer1 = dawn::utils::CreateBufferFromData(
         device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Vertex, {1u});
-    wgpu::Buffer vertexBuffer2 = utils::CreateBufferFromData(
+    wgpu::Buffer vertexBuffer2 = dawn::utils::CreateBufferFromData(
         device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Vertex, {2u});
 
     // Do the draw call with the render pipeline
@@ -705,7 +705,7 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithVertexBufferLayouts
 
     // The color attachment will have the expected color when the vertex attribute values are
     // fetched correctly.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 255, 0, 255), renderTarget, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 255, 0, 255), renderTarget, 0, 0);
 }
 
 // Verify calling CreateRenderPipelineAsync() with valid depthStencilState works on all backends.
@@ -723,7 +723,7 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithDepthStencilState) 
 
     // Clear the color attachment to green and the stencil aspect of the depth stencil attachment
     // to 0.
-    utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthStencilView);
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthStencilView);
     renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
     renderPass.cColorAttachments[0].clearValue = {0.0, 1.0, 0.0, 1.0};
     renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
@@ -731,13 +731,13 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithDepthStencilState) 
 
     wgpu::RenderPipeline pipeline;
     {
-        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-        renderPipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @fragment
         fn main() -> @location(0) vec4f {
             return vec4f(1.0, 0.0, 0.0, 1.0);
@@ -778,7 +778,7 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithDepthStencilState) 
 
     // The color in the color attachment should not be changed after the draw call as no pixel can
     // pass the stencil test.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 255, 0, 255), renderTarget, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 255, 0, 255), renderTarget, 0, 0);
 }
 
 // Verify calling CreateRenderPipelineAsync() with multisample.Count > 1 works on all backends.
@@ -796,20 +796,20 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineWithMultisampleState) {
 
     // Set the multi-sampled render target, its resolve target to render pass and clear color to
     // (1, 0, 0, 1).
-    utils::ComboRenderPassDescriptor renderPass({renderTargetView});
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView});
     renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
     renderPass.cColorAttachments[0].clearValue = {1.0, 0.0, 0.0, 1.0};
     renderPass.cColorAttachments[0].resolveTarget = resolveTargetView;
 
     wgpu::RenderPipeline pipeline;
     {
-        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-        renderPipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @fragment
         fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
@@ -844,7 +844,7 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineWithMultisampleState) {
     queue.Submit(1, &commands);
 
     // The color in resolveTarget should be the expected color (0, 1, 0, 1).
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 255, 0, 255), resolveTarget, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 255, 0, 255), resolveTarget, 0, 0);
 }
 
 // Verify calling CreateRenderPipelineAsync() with valid BlendState works on all backends.
@@ -868,20 +868,20 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithBlendState) {
     }
 
     // Prepare two color attachments
-    utils::ComboRenderPassDescriptor renderPass({renderTargetViews[0], renderTargetViews[1]});
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetViews[0], renderTargetViews[1]});
     renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
     renderPass.cColorAttachments[0].clearValue = {0.2, 0.0, 0.0, 0.2};
     renderPass.cColorAttachments[1].loadOp = wgpu::LoadOp::Clear;
     renderPass.cColorAttachments[1].clearValue = {0.0, 0.2, 0.0, 0.2};
 
     {
-        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-        renderPipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
          struct FragmentOut {
             @location(0) fragColor0 : vec4f,
             @location(1) fragColor1 : vec4f,
@@ -948,8 +948,8 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithBlendState) {
     // When the blend states are all set correctly, the color of renderTargets[0] should be
     // (0.6, 0, 0, 0.6) = colorAttachment0.clearValue + (0.4, 0.0, 0.0, 0.4), and the color of
     // renderTargets[1] should be (0.8, 0, 0, 0.8) = (1, 0, 0, 1) - colorAttachment1.clearValue.
-    utils::RGBA8 expected0 = {153, 0, 0, 153};
-    utils::RGBA8 expected1 = {0, 204, 0, 204};
+    dawn::utils::RGBA8 expected0 = {153, 0, 0, 153};
+    dawn::utils::RGBA8 expected1 = {0, 204, 0, 204};
     EXPECT_PIXEL_RGBA8_EQ(expected0, renderTargets[0], 0, 0);
     EXPECT_PIXEL_RGBA8_EQ(expected1, renderTargets[1], 0, 0);
 }

@@ -10,7 +10,7 @@
 #include "dawn/common/LinkedList.h"
 #include "gtest/gtest.h"
 
-class Node : public LinkNode<Node> {
+class Node : public dawn::LinkNode<Node> {
   public:
     explicit Node(int id) : id_(id) {}
 
@@ -29,12 +29,12 @@ class MultipleInheritanceNodeBase {
 };
 
 class MultipleInheritanceNode : public MultipleInheritanceNodeBase,
-                                public LinkNode<MultipleInheritanceNode> {
+                                public dawn::LinkNode<MultipleInheritanceNode> {
   public:
     MultipleInheritanceNode() = default;
 };
 
-class MovableNode : public LinkNode<MovableNode> {
+class MovableNode : public dawn::LinkNode<MovableNode> {
   public:
     explicit MovableNode(int id) : id_(id) {}
 
@@ -49,13 +49,13 @@ class MovableNode : public LinkNode<MovableNode> {
 // Checks that when iterating |list| (either from head to tail, or from
 // tail to head, as determined by |forward|), we get back |node_ids|,
 // which is an array of size |num_nodes|.
-void ExpectListContentsForDirection(const LinkedList<Node>& list,
+void ExpectListContentsForDirection(const dawn::LinkedList<Node>& list,
                                     int num_nodes,
                                     const int* node_ids,
                                     bool forward) {
     int i = 0;
-    for (const LinkNode<Node>* node = (forward ? list.head() : list.tail()); node != list.end();
-         node = (forward ? node->next() : node->previous())) {
+    for (const dawn::LinkNode<Node>* node = (forward ? list.head() : list.tail());
+         node != list.end(); node = (forward ? node->next() : node->previous())) {
         ASSERT_LT(i, num_nodes);
         int index_of_id = forward ? i : num_nodes - i - 1;
         EXPECT_EQ(node_ids[index_of_id], node->value()->id());
@@ -64,7 +64,7 @@ void ExpectListContentsForDirection(const LinkedList<Node>& list,
     EXPECT_EQ(num_nodes, i);
 }
 
-void ExpectListContents(const LinkedList<Node>& list, int num_nodes, const int* node_ids) {
+void ExpectListContents(const dawn::LinkedList<Node>& list, int num_nodes, const int* node_ids) {
     {
         SCOPED_TRACE("Iterating forward (from head to tail)");
         ExpectListContentsForDirection(list, num_nodes, node_ids, true);
@@ -76,14 +76,14 @@ void ExpectListContents(const LinkedList<Node>& list, int num_nodes, const int* 
 }
 
 TEST(LinkedList, Empty) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
     EXPECT_EQ(list.end(), list.head());
     EXPECT_EQ(list.end(), list.tail());
     ExpectListContents(list, 0, nullptr);
 }
 
 TEST(LinkedList, Append) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
     ExpectListContents(list, 0, nullptr);
 
     Node n1(1);
@@ -118,7 +118,7 @@ TEST(LinkedList, Append) {
 }
 
 TEST(LinkedList, Prepend) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
     ExpectListContents(list, 0, nullptr);
 
     Node n1(1);
@@ -153,7 +153,7 @@ TEST(LinkedList, Prepend) {
 }
 
 TEST(LinkedList, RemoveFromList) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n1(1);
     Node n2(2);
@@ -228,7 +228,7 @@ TEST(LinkedList, RemoveFromList) {
 }
 
 TEST(LinkedList, InsertBefore) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n1(1);
     Node n2(2);
@@ -265,7 +265,7 @@ TEST(LinkedList, InsertBefore) {
 }
 
 TEST(LinkedList, InsertAfter) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n1(1);
     Node n2(2);
@@ -307,12 +307,12 @@ TEST(LinkedList, MultipleInheritanceNode) {
 }
 
 TEST(LinkedList, EmptyListIsEmpty) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
     EXPECT_TRUE(list.empty());
 }
 
 TEST(LinkedList, NonEmptyListIsNotEmpty) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n(1);
     list.Append(&n);
@@ -321,7 +321,7 @@ TEST(LinkedList, NonEmptyListIsNotEmpty) {
 }
 
 TEST(LinkedList, EmptiedListIsEmptyAgain) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n(1);
     list.Append(&n);
@@ -331,8 +331,8 @@ TEST(LinkedList, EmptiedListIsEmptyAgain) {
 }
 
 TEST(LinkedList, NodesCanBeReused) {
-    LinkedList<Node> list1;
-    LinkedList<Node> list2;
+    dawn::LinkedList<Node> list1;
+    dawn::LinkedList<Node> list2;
 
     Node n(1);
     list1.Append(&n);
@@ -343,7 +343,7 @@ TEST(LinkedList, NodesCanBeReused) {
 }
 
 TEST(LinkedList, RemovedNodeHasNullNextPrevious) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n(1);
     list.Append(&n);
@@ -354,7 +354,7 @@ TEST(LinkedList, RemovedNodeHasNullNextPrevious) {
 }
 
 TEST(LinkedList, NodeMoveConstructor) {
-    LinkedList<MovableNode> list;
+    dawn::LinkedList<MovableNode> list;
 
     MovableNode n1(1);
     MovableNode n2(2);
@@ -380,7 +380,7 @@ TEST(LinkedList, NodeMoveConstructor) {
 }
 
 TEST(LinkedList, IsInList) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n(1);
 
@@ -393,8 +393,8 @@ TEST(LinkedList, IsInList) {
 }
 
 TEST(LinkedList, MoveInto) {
-    LinkedList<Node> l1;
-    LinkedList<Node> l2;
+    dawn::LinkedList<Node> l1;
+    dawn::LinkedList<Node> l2;
 
     Node n1(1);
     Node n2(2);
@@ -408,8 +408,8 @@ TEST(LinkedList, MoveInto) {
 }
 
 TEST(LinkedList, MoveEmptyListInto) {
-    LinkedList<Node> l1;
-    LinkedList<Node> l2;
+    dawn::LinkedList<Node> l1;
+    dawn::LinkedList<Node> l2;
 
     Node n1(1);
     Node n2(2);
@@ -423,8 +423,8 @@ TEST(LinkedList, MoveEmptyListInto) {
 }
 
 TEST(LinkedList, MoveIntoEmpty) {
-    LinkedList<Node> l1;
-    LinkedList<Node> l2;
+    dawn::LinkedList<Node> l1;
+    dawn::LinkedList<Node> l2;
 
     Node n1(1);
     Node n2(2);
@@ -438,14 +438,14 @@ TEST(LinkedList, MoveIntoEmpty) {
 }
 
 TEST(LinkedList, RangeBasedModify) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
 
     Node n1(1);
     Node n2(2);
     list.Append(&n1);
     list.Append(&n2);
 
-    for (LinkNode<Node>* node : list) {
+    for (dawn::LinkNode<Node>* node : list) {
         node->value()->set_id(node->value()->id() + 1);
     }
     const int expected[] = {2, 3};
@@ -453,6 +453,6 @@ TEST(LinkedList, RangeBasedModify) {
 }
 
 TEST(LinkedList, RangeBasedEndIsEnd) {
-    LinkedList<Node> list;
+    dawn::LinkedList<Node> list;
     EXPECT_EQ(list.end(), *end(list));
 }

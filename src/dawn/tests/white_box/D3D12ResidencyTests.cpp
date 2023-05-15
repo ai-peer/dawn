@@ -48,8 +48,8 @@ class D3D12ResidencyTestBase : public DawnTest {
         // Initialize a source buffer on the GPU to serve as a source to quickly copy data to other
         // buffers.
         constexpr uint32_t one = 1;
-        mSourceBuffer =
-            utils::CreateBufferFromData(device, &one, sizeof(one), wgpu::BufferUsage::CopySrc);
+        mSourceBuffer = dawn::utils::CreateBufferFromData(device, &one, sizeof(one),
+                                                          wgpu::BufferUsage::CopySrc);
     }
 
     std::vector<wgpu::Buffer> AllocateBuffers(uint32_t bufferSize,
@@ -339,11 +339,11 @@ TEST_P(D3D12DescriptorResidencyTests, SwitchedViewHeapResidency) {
     // unknown file: error: SEH exception with code 0x87d thrown in the test body.
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWARP() && IsBackendValidationEnabled());
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
 
     // Fill in a view heap with "view only" bindgroups (1x view per group) by creating a
     // view bindgroup each draw. After HEAP_SIZE + 1 draws, the heaps must switch over.
-    renderPipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+    renderPipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main(
                 @builtin(vertex_index) VertexIndex : u32
             ) -> @builtin(position) vec4f {
@@ -355,7 +355,7 @@ TEST_P(D3D12DescriptorResidencyTests, SwitchedViewHeapResidency) {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             })");
 
-    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+    renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             struct U {
                 color : vec4f
             }
@@ -367,7 +367,8 @@ TEST_P(D3D12DescriptorResidencyTests, SwitchedViewHeapResidency) {
 
     wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
     constexpr uint32_t kSize = 512;
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kSize, kSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kSize, kSize);
 
     wgpu::Sampler sampler = device.CreateSampler();
 
@@ -388,12 +389,13 @@ TEST_P(D3D12DescriptorResidencyTests, SwitchedViewHeapResidency) {
         pass.SetPipeline(renderPipeline);
 
         std::array<float, 4> redColor = {1, 0, 0, 1};
-        wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer uniformBuffer = dawn::utils::CreateBufferFromData(
             device, &redColor, sizeof(redColor), wgpu::BufferUsage::Uniform);
 
         for (uint32_t i = 0; i < heapSize + 1; ++i) {
-            pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
-                                                      {{0, uniformBuffer, 0, sizeof(redColor)}}));
+            pass.SetBindGroup(
+                0, dawn::utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                              {{0, uniformBuffer, 0, sizeof(redColor)}}));
             pass.Draw(3);
         }
 

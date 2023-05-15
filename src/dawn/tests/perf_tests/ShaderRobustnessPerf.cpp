@@ -413,14 +413,14 @@ void ShaderRobustnessPerf::SetUp() {
     std::vector<float> dataA(dataASize);
     uint64_t byteASize = sizeof(float) * dataA.size();
     // It's ok to use all zeros to do the matrix multiplication for performance test.
-    wgpu::Buffer bufA =
-        utils::CreateBufferFromData(device, dataA.data(), byteASize, wgpu::BufferUsage::Storage);
+    wgpu::Buffer bufA = dawn::utils::CreateBufferFromData(device, dataA.data(), byteASize,
+                                                          wgpu::BufferUsage::Storage);
 
     const size_t dataBSize = mDimInner * mDimBOuter;
     std::vector<float> dataB(dataBSize);
     uint64_t byteBSize = sizeof(float) * dataB.size();
-    wgpu::Buffer bufB =
-        utils::CreateBufferFromData(device, dataB.data(), byteBSize, wgpu::BufferUsage::Storage);
+    wgpu::Buffer bufB = dawn::utils::CreateBufferFromData(device, dataB.data(), byteBSize,
+                                                          wgpu::BufferUsage::Storage);
 
     uint64_t byteDstSize = sizeof(float) * mDimAOuter * mDimBOuter;
     wgpu::BufferDescriptor desc = {};
@@ -429,32 +429,32 @@ void ShaderRobustnessPerf::SetUp() {
     wgpu::Buffer dst = device.CreateBuffer(&desc);
 
     uint32_t uniformData[] = {mDimAOuter, mDimInner, mDimBOuter};
-    wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+    wgpu::Buffer uniformBuffer = dawn::utils::CreateBufferFromData(
         device, uniformData, sizeof(uniformData), wgpu::BufferUsage::Uniform);
 
     wgpu::ShaderModule module;
     switch (GetParam().mMatMulMethod) {
         case MatMulMethod::MatMulFloatOneDimSharedArray: {
-            module =
-                utils::CreateShaderModule(device, kMatMulFloatOneDimensionalSharedArray.c_str());
+            module = dawn::utils::CreateShaderModule(device,
+                                                     kMatMulFloatOneDimensionalSharedArray.c_str());
             break;
         }
 
         case MatMulMethod::MatMulFloatTwoDimSharedArray: {
-            module =
-                utils::CreateShaderModule(device, kMatMulFloatTwoDimensionalSharedArray.c_str());
+            module = dawn::utils::CreateShaderModule(device,
+                                                     kMatMulFloatTwoDimensionalSharedArray.c_str());
             break;
         }
 
         case MatMulMethod::MatMulVec4OneDimSharedArray: {
-            module =
-                utils::CreateShaderModule(device, kMatMulVec4OneDimensionalSharedArray.c_str());
+            module = dawn::utils::CreateShaderModule(device,
+                                                     kMatMulVec4OneDimensionalSharedArray.c_str());
             break;
         }
 
         case MatMulMethod::MatMulVec4TwoDimSharedArray: {
-            module =
-                utils::CreateShaderModule(device, kMatMulVec4TwoDimensionalSharedArray.c_str());
+            module = dawn::utils::CreateShaderModule(device,
+                                                     kMatMulVec4TwoDimensionalSharedArray.c_str());
             break;
         }
     }
@@ -464,13 +464,13 @@ void ShaderRobustnessPerf::SetUp() {
     csDesc.compute.entryPoint = "main";
     mPipeline = device.CreateComputePipeline(&csDesc);
 
-    mBindGroup = utils::MakeBindGroup(device, mPipeline.GetBindGroupLayout(0),
-                                      {
-                                          {0, bufA, 0, byteASize},
-                                          {1, bufB, 0, byteBSize},
-                                          {2, dst, 0, byteDstSize},
-                                          {3, uniformBuffer, 0, sizeof(uniformData)},
-                                      });
+    mBindGroup = dawn::utils::MakeBindGroup(device, mPipeline.GetBindGroupLayout(0),
+                                            {
+                                                {0, bufA, 0, byteASize},
+                                                {1, bufB, 0, byteBSize},
+                                                {2, dst, 0, byteDstSize},
+                                                {3, uniformBuffer, 0, sizeof(uniformData)},
+                                            });
 }
 
 void ShaderRobustnessPerf::Step() {

@@ -18,34 +18,34 @@
 
 TEST(WindowsUtilsTests, WCharToUTF8) {
     // Test the empty string
-    ASSERT_EQ("", WCharToUTF8(L""));
+    ASSERT_EQ("", dawn::WCharToUTF8(L""));
 
     // Test ASCII characters
-    ASSERT_EQ("abc", WCharToUTF8(L"abc"));
+    ASSERT_EQ("abc", dawn::WCharToUTF8(L"abc"));
 
     // Test ASCII characters
-    ASSERT_EQ("abc", WCharToUTF8(L"abc"));
+    ASSERT_EQ("abc", dawn::WCharToUTF8(L"abc"));
 
     // Test two-byte utf8 character
-    ASSERT_EQ("\xd1\x90", WCharToUTF8(L"\x450"));
+    ASSERT_EQ("\xd1\x90", dawn::WCharToUTF8(L"\x450"));
 
     // Test three-byte utf8 codepoint
-    ASSERT_EQ("\xe1\x81\x90", WCharToUTF8(L"\x1050"));
+    ASSERT_EQ("\xe1\x81\x90", dawn::WCharToUTF8(L"\x1050"));
 }
 
 TEST(WindowsUtilsTests, UTF8ToWStr) {
     // Test the empty string
-    ASSERT_EQ(L"", UTF8ToWStr(""));
+    ASSERT_EQ(L"", dawn::UTF8ToWStr(""));
 
     // Test ASCII characters
-    ASSERT_EQ(L"abc", UTF8ToWStr("abc"));
+    ASSERT_EQ(L"abc", dawn::UTF8ToWStr("abc"));
 
     // Test ASCII characters
-    ASSERT_EQ(L"abc", UTF8ToWStr("abc"));
+    ASSERT_EQ(L"abc", dawn::UTF8ToWStr("abc"));
 
     // Test two-byte utf8 character
-    ASSERT_EQ(L"\x450", UTF8ToWStr("\xd1\x90"));
+    ASSERT_EQ(L"\x450", dawn::UTF8ToWStr("\xd1\x90"));
 
     // Test three-byte utf8 codepoint
-    ASSERT_EQ(L"\x1050", UTF8ToWStr("\xe1\x81\x90"));
+    ASSERT_EQ(L"\x1050", dawn::UTF8ToWStr("\xe1\x81\x90"));
 }

@@ -69,7 +69,7 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
             }
 
             case DawnFlavor::Wire: {
-                mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
+                mC2sBuf = std::make_unique<dawn::utils::TerribleCommandBuffer>();
 
                 dawn::wire::WireClientDescriptor clientDesc = {};
                 clientDesc.serializer = mC2sBuf.get();
@@ -94,10 +94,10 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
     }
 
   protected:
-    Ref<dawn::native::InstanceBase> mNativeInstance;
+    dawn::Ref<dawn::native::InstanceBase> mNativeInstance;
     dawn::native::AdapterBase mAdapterBase;
 
-    std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
+    std::unique_ptr<dawn::utils::TerribleCommandBuffer> mC2sBuf;
     std::unique_ptr<dawn::wire::WireClient> mWireClient;
 
     wgpu::Device mDevice;

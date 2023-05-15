@@ -166,13 +166,13 @@ class CopyTextureForBrowserTests : public Parent {
     };
 
     // Source texture contains red pixels and dst texture contains green pixels at start.
-    static std::vector<utils::RGBA8> GetTextureData(
-        const utils::TextureDataCopyLayout& layout,
+    static std::vector<dawn::utils::RGBA8> GetTextureData(
+        const dawn::utils::TextureDataCopyLayout& layout,
         TextureCopyRole textureRole,
         wgpu::AlphaMode srcAlphaMode = wgpu::AlphaMode::Premultiplied,
         wgpu::AlphaMode dstAlphaMode = wgpu::AlphaMode::Unpremultiplied) {
         std::array<uint8_t, 4> alpha = {0, 102, 153, 255};  // 0.0, 0.4, 0.6, 1.0
-        std::vector<utils::RGBA8> textureData(layout.texelBlockCount);
+        std::vector<dawn::utils::RGBA8> textureData(layout.texelBlockCount);
         for (uint32_t layer = 0; layer < layout.mipSize.depthOrArrayLayers; ++layer) {
             const uint32_t sliceOffset = layout.texelBlocksPerImage * layer;
             for (uint32_t y = 0; y < layout.mipSize.height; ++y) {
@@ -185,7 +185,7 @@ class CopyTextureForBrowserTests : public Parent {
                             dstAlphaMode == wgpu::AlphaMode::Premultiplied) {
                             // We expect each channel in dst
                             // texture will equal to the alpha channel value.
-                            textureData[sliceOffset + rowOffset + x] = utils::RGBA8(
+                            textureData[sliceOffset + rowOffset + x] = dawn::utils::RGBA8(
                                 static_cast<uint8_t>(255), static_cast<uint8_t>(255),
                                 static_cast<uint8_t>(255), static_cast<uint8_t>(alpha[x % 4]));
                         } else if (srcAlphaMode == wgpu::AlphaMode::Premultiplied &&
@@ -193,12 +193,12 @@ class CopyTextureForBrowserTests : public Parent {
                             // We expect each channel in dst
                             // texture will equal to 1.0.
                             textureData[sliceOffset + rowOffset + x] =
-                                utils::RGBA8(static_cast<uint8_t>(alpha[x % 4]),
-                                             static_cast<uint8_t>(alpha[x % 4]),
-                                             static_cast<uint8_t>(alpha[x % 4]),
-                                             static_cast<uint8_t>(alpha[x % 4]));
+                                dawn::utils::RGBA8(static_cast<uint8_t>(alpha[x % 4]),
+                                                   static_cast<uint8_t>(alpha[x % 4]),
+                                                   static_cast<uint8_t>(alpha[x % 4]),
+                                                   static_cast<uint8_t>(alpha[x % 4]));
                         } else {
-                            textureData[sliceOffset + rowOffset + x] = utils::RGBA8(
+                            textureData[sliceOffset + rowOffset + x] = dawn::utils::RGBA8(
                                 static_cast<uint8_t>((x + layer * x) % 256),
                                 static_cast<uint8_t>((y + layer * y) % 256),
                                 static_cast<uint8_t>(x % 256), static_cast<uint8_t>(x % 256));
@@ -206,8 +206,8 @@ class CopyTextureForBrowserTests : public Parent {
                     } else {  // Dst textures will have be init as `green` to ensure subrect
                               // copy not cross bound.
                         textureData[sliceOffset + rowOffset + x] =
-                            utils::RGBA8(static_cast<uint8_t>(0), static_cast<uint8_t>(255),
-                                         static_cast<uint8_t>(0), static_cast<uint8_t>(255));
+                            dawn::utils::RGBA8(static_cast<uint8_t>(0), static_cast<uint8_t>(255),
+                                               static_cast<uint8_t>(0), static_cast<uint8_t>(255));
                     }
                 }
             }
@@ -243,7 +243,7 @@ class CopyTextureForBrowserTests : public Parent {
     // shader) instead of CPU after executing CopyTextureForBrowser() to avoid the errors caused by
     // comparing a value generated on CPU to the one generated on GPU.
     wgpu::ComputePipeline MakeTestPipeline() {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(this->device, R"(
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(this->device, R"(
             struct Uniforms {
                 dstTextureFlipY : u32,
                 channelCount    : u32,
@@ -388,13 +388,13 @@ class CopyTextureForBrowserTests : public Parent {
 
     wgpu::Texture CreateAndInitTexture(const TextureSpec& spec,
                                        wgpu::TextureUsage usage,
-                                       utils::TextureDataCopyLayout copyLayout,
+                                       dawn::utils::TextureDataCopyLayout copyLayout,
                                        void const* init,
                                        uint32_t initBytes) {
         wgpu::Texture texture = CreateTexture(spec, usage);
 
         wgpu::ImageCopyTexture imageTextureInit =
-            utils::CreateImageCopyTexture(texture, spec.level, {0, 0});
+            dawn::utils::CreateImageCopyTexture(texture, spec.level, {0, 0});
 
         wgpu::TextureDataLayout textureDataLayout;
         textureDataLayout.offset = 0;
@@ -413,9 +413,9 @@ class CopyTextureForBrowserTests : public Parent {
                                        const wgpu::Extent3D& copySize,
                                        const wgpu::CopyTextureForBrowserOptions options) {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcTexture, srcSpec.level, srcSpec.copyOrigin);
+            dawn::utils::CreateImageCopyTexture(srcTexture, srcSpec.level, srcSpec.copyOrigin);
         wgpu::ImageCopyTexture dstImageCopyTexture =
-            utils::CreateImageCopyTexture(dstTexture, dstSpec.level, dstSpec.copyOrigin);
+            dawn::utils::CreateImageCopyTexture(dstTexture, dstSpec.level, dstSpec.copyOrigin);
         this->device.GetQueue().CopyTextureForBrowser(&srcImageCopyTexture, &dstImageCopyTexture,
                                                       &copySize, &options);
     }
@@ -459,7 +459,7 @@ class CopyTextureForBrowserTests : public Parent {
         wgpu::TextureView dstTextureView = dstTexture.CreateView(&dstTextureViewDesc);
 
         // Create bind group based on the config.
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             this->device, pipeline.GetBindGroupLayout(0),
             {{0, srcTextureView}, {1, dstTextureView}, {2, outputBuffer}, {3, uniformBuffer}});
 
@@ -491,21 +491,21 @@ class CopyTextureForBrowserTests : public Parent {
                 const wgpu::Extent3D& copySize = {kDefaultTextureWidth, kDefaultTextureHeight},
                 const wgpu::CopyTextureForBrowserOptions options = {}) {
         // Create and initialize src texture.
-        const utils::TextureDataCopyLayout srcCopyLayout =
-            utils::GetTextureDataCopyLayoutForTextureAtLevel(
+        const dawn::utils::TextureDataCopyLayout srcCopyLayout =
+            dawn::utils::GetTextureDataCopyLayoutForTextureAtLevel(
                 kTextureFormat,
                 {srcSpec.textureSize.width, srcSpec.textureSize.height,
                  copySize.depthOrArrayLayers},
                 srcSpec.level);
 
-        std::vector<utils::RGBA8> srcTextureArrayCopyData = GetTextureData(
+        std::vector<dawn::utils::RGBA8> srcTextureArrayCopyData = GetTextureData(
             srcCopyLayout, TextureCopyRole::SOURCE, options.srcAlphaMode, options.dstAlphaMode);
 
         wgpu::TextureUsage srcUsage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
                                       wgpu::TextureUsage::TextureBinding;
         wgpu::Texture srcTexture =
             CreateAndInitTexture(srcSpec, srcUsage, srcCopyLayout, srcTextureArrayCopyData.data(),
-                                 srcTextureArrayCopyData.size() * sizeof(utils::RGBA8));
+                                 srcTextureArrayCopyData.size() * sizeof(dawn::utils::RGBA8));
 
         bool testSubRectCopy = srcSpec.copyOrigin.x > 0 || srcSpec.copyOrigin.y > 0 ||
                                dstSpec.copyOrigin.x > 0 || dstSpec.copyOrigin.y > 0 ||
@@ -522,18 +522,18 @@ class CopyTextureForBrowserTests : public Parent {
 
         if (testSubRectCopy) {
             // For subrect copy tests, dst texture use kTextureFormat always.
-            const utils::TextureDataCopyLayout dstCopyLayout =
-                utils::GetTextureDataCopyLayoutForTextureAtLevel(
+            const dawn::utils::TextureDataCopyLayout dstCopyLayout =
+                dawn::utils::GetTextureDataCopyLayoutForTextureAtLevel(
                     kTextureFormat,
                     {dstSpec.textureSize.width, dstSpec.textureSize.height,
                      copySize.depthOrArrayLayers},
                     dstSpec.level);
 
-            const std::vector<utils::RGBA8> dstTextureArrayCopyData =
+            const std::vector<dawn::utils::RGBA8> dstTextureArrayCopyData =
                 GetTextureData(dstCopyLayout, TextureCopyRole::DEST);
             dstTexture = CreateAndInitTexture(
                 dstSpec, dstUsage, dstCopyLayout, dstTextureArrayCopyData.data(),
-                dstTextureArrayCopyData.size() * sizeof(utils::RGBA8));
+                dstTextureArrayCopyData.size() * sizeof(dawn::utils::RGBA8));
         } else {
             dstTexture = CreateTexture(dstSpec, dstUsage);
         }
@@ -583,82 +583,82 @@ class CopyTextureForBrowser_Formats
     wgpu::Texture CreateAndInitSourceTextureForColorFormatConversion(
         const TextureSpec& srcSpec,
         wgpu::TextureUsage srcUsage,
-        utils::TextureDataCopyLayout srcCopyLayout) {
+        dawn::utils::TextureDataCopyLayout srcCopyLayout) {
         // Create and init source texture.
         // This fixed source texture data is for color conversion tests.
         // The source data can fill a texture in default width and height.
-        std::vector<utils::RGBA8> srcRGBA8UnormTextureArrayCopyData{
+        std::vector<dawn::utils::RGBA8> srcRGBA8UnormTextureArrayCopyData{
             // Take RGBA8Unorm as example:
             // R channel has different values
-            utils::RGBA8(0, 255, 255, 255),    // r = 0.0
-            utils::RGBA8(102, 255, 255, 255),  // r = 0.4
-            utils::RGBA8(153, 255, 255, 255),  // r = 0.6
+            dawn::utils::RGBA8(0, 255, 255, 255),    // r = 0.0
+            dawn::utils::RGBA8(102, 255, 255, 255),  // r = 0.4
+            dawn::utils::RGBA8(153, 255, 255, 255),  // r = 0.6
 
             // G channel has different values
-            utils::RGBA8(255, 0, 255, 255),    // g = 0.0
-            utils::RGBA8(255, 102, 255, 255),  // g = 0.4
-            utils::RGBA8(255, 153, 255, 255),  // g = 0.6
+            dawn::utils::RGBA8(255, 0, 255, 255),    // g = 0.0
+            dawn::utils::RGBA8(255, 102, 255, 255),  // g = 0.4
+            dawn::utils::RGBA8(255, 153, 255, 255),  // g = 0.6
 
             // B channel has different values
-            utils::RGBA8(255, 255, 0, 255),    // b = 0.0
-            utils::RGBA8(255, 255, 102, 255),  // b = 0.4
-            utils::RGBA8(255, 255, 153, 255),  // b = 0.6
+            dawn::utils::RGBA8(255, 255, 0, 255),    // b = 0.0
+            dawn::utils::RGBA8(255, 255, 102, 255),  // b = 0.4
+            dawn::utils::RGBA8(255, 255, 153, 255),  // b = 0.6
 
             // A channel set to 0
-            utils::RGBA8(255, 255, 255, 0)  // a = 0
+            dawn::utils::RGBA8(255, 255, 255, 0)  // a = 0
         };
 
         std::vector<uint16_t> srcRGBA16FloatTextureArrayCopyData{
             // R channel has different values
             // r = 0.0
-            Float32ToFloat16(0.0), Float32ToFloat16(1.0), Float32ToFloat16(1.0),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(0.0), dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0),
 
             // r = 0.4
-            Float32ToFloat16(0.4), Float32ToFloat16(1.0), Float32ToFloat16(1.0),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(0.4), dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0),
 
             // r = 0.6
-            Float32ToFloat16(0.6), Float32ToFloat16(1.0), Float32ToFloat16(1.0),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(0.6), dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0),
 
             // G channel has different values
             // g = 0.0
-            Float32ToFloat16(1.0), Float32ToFloat16(0.0), Float32ToFloat16(1.0),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(0.0), dawn::Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0),
 
             // g = 0.4
-            Float32ToFloat16(1.0), Float32ToFloat16(0.4), Float32ToFloat16(1.0),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(0.4), dawn::Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0),
 
             // g = 0.6
-            Float32ToFloat16(1.0), Float32ToFloat16(0.6), Float32ToFloat16(1.0),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(0.6), dawn::Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0),
 
             // B channel has different values
             // b = 0.0
-            Float32ToFloat16(1.0), Float32ToFloat16(1.0), Float32ToFloat16(0.0),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(0.0),
+            dawn::Float32ToFloat16(1.0),
 
             // b = 0.4
-            Float32ToFloat16(1.0), Float32ToFloat16(1.0), Float32ToFloat16(0.4),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(0.4),
+            dawn::Float32ToFloat16(1.0),
 
             // b = 0.6
-            Float32ToFloat16(1.0), Float32ToFloat16(1.0), Float32ToFloat16(0.6),
-            Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(0.6),
+            dawn::Float32ToFloat16(1.0),
 
             // A channel set to 0
             // a = 0
-            Float32ToFloat16(1.0), Float32ToFloat16(1.0), Float32ToFloat16(1.0),
-            Float32ToFloat16(0.0)};
+            dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0), dawn::Float32ToFloat16(1.0),
+            dawn::Float32ToFloat16(0.0)};
 
         switch (srcSpec.format) {
             case wgpu::TextureFormat::RGBA8Unorm:
             case wgpu::TextureFormat::BGRA8Unorm:
                 return CreateAndInitTexture(
                     srcSpec, srcUsage, srcCopyLayout, srcRGBA8UnormTextureArrayCopyData.data(),
-                    srcRGBA8UnormTextureArrayCopyData.size() * sizeof(utils::RGBA8));
+                    srcRGBA8UnormTextureArrayCopyData.size() * sizeof(dawn::utils::RGBA8));
             case wgpu::TextureFormat::RGBA16Float:
                 return CreateAndInitTexture(
                     srcSpec, srcUsage, srcCopyLayout, srcRGBA16FloatTextureArrayCopyData.data(),
@@ -678,8 +678,8 @@ class CopyTextureForBrowser_Formats
         wgpu::Extent3D copySize = {kDefaultTextureWidth, kDefaultTextureHeight};
         wgpu::CopyTextureForBrowserOptions options = {};
 
-        const utils::TextureDataCopyLayout srcCopyLayout =
-            utils::GetTextureDataCopyLayoutForTextureAtLevel(
+        const dawn::utils::TextureDataCopyLayout srcCopyLayout =
+            dawn::utils::GetTextureDataCopyLayoutForTextureAtLevel(
                 srcTextureSpec.format,
                 {srcTextureSpec.textureSize.width, srcTextureSpec.textureSize.height,
                  copySize.depthOrArrayLayers},
@@ -717,9 +717,9 @@ class CopyTextureForBrowser_Formats
 
             // Perform the texture to texture copy
             wgpu::ImageCopyTexture dstImageCopyTexture =
-                utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0});
+                dawn::utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0});
             wgpu::ImageCopyTexture intermediateImageCopyTexture =
-                utils::CreateImageCopyTexture(intermediateTexture, 0, {0, 0, 0});
+                dawn::utils::CreateImageCopyTexture(intermediateTexture, 0, {0, 0, 0});
 
             encoder.CopyTextureToTexture(&dstImageCopyTexture, &intermediateImageCopyTexture,
                                          &(dstTextureSpec.textureSize));
@@ -795,7 +795,7 @@ class CopyTextureForBrowser_ColorSpace
         // Fuse the transform matrix. The color space transformation equation is:
         // Pixels = fromXYZD50 * toXYZD50 * Pixels.
         // Calculate fromXYZD50 * toXYZD50 to simplify
-        // Add a padding in each row for Mat3x3 in wgsl uniform(mat3x3, Align(16), Size(48)).
+        // Add a padding in each row for Mat3x3 in wgsl uniform(mat3x3, dawn::Align(16), Size(48)).
         std::array<float, 9> fuseMatrix = {};
 
         // Mat3x3 * Mat3x3
@@ -812,45 +812,45 @@ class CopyTextureForBrowser_ColorSpace
     }
 
     // TODO(crbug.com/dawn/1140): Generate source data automatically.
-    std::vector<utils::RGBA8> GetSourceData(wgpu::AlphaMode srcTextureAlphaMode) {
+    std::vector<dawn::utils::RGBA8> GetSourceData(wgpu::AlphaMode srcTextureAlphaMode) {
         if (srcTextureAlphaMode == wgpu::AlphaMode::Premultiplied) {
-            return std::vector<utils::RGBA8>{
-                utils::RGBA8(0, 102, 102, 102),  // a = 0.4
-                utils::RGBA8(102, 0, 0, 102),    // a = 0.4
-                utils::RGBA8(153, 0, 0, 153),    // a = 0.6
-                utils::RGBA8(255, 0, 0, 255),    // a = 1.0
+            return std::vector<dawn::utils::RGBA8>{
+                dawn::utils::RGBA8(0, 102, 102, 102),  // a = 0.4
+                dawn::utils::RGBA8(102, 0, 0, 102),    // a = 0.4
+                dawn::utils::RGBA8(153, 0, 0, 153),    // a = 0.6
+                dawn::utils::RGBA8(255, 0, 0, 255),    // a = 1.0
 
-                utils::RGBA8(153, 0, 153, 153),  // a = 0.6
-                utils::RGBA8(0, 102, 0, 102),    // a = 0.4
-                utils::RGBA8(0, 153, 0, 153),    // a = 0.6
-                utils::RGBA8(0, 255, 0, 255),    // a = 1.0
+                dawn::utils::RGBA8(153, 0, 153, 153),  // a = 0.6
+                dawn::utils::RGBA8(0, 102, 0, 102),    // a = 0.4
+                dawn::utils::RGBA8(0, 153, 0, 153),    // a = 0.6
+                dawn::utils::RGBA8(0, 255, 0, 255),    // a = 1.0
 
-                utils::RGBA8(255, 255, 0, 255),  // a = 1.0
-                utils::RGBA8(0, 0, 102, 102),    // a = 0.4
-                utils::RGBA8(0, 0, 153, 153),    // a = 0.6
-                utils::RGBA8(0, 0, 255, 255),    // a = 1.0
+                dawn::utils::RGBA8(255, 255, 0, 255),  // a = 1.0
+                dawn::utils::RGBA8(0, 0, 102, 102),    // a = 0.4
+                dawn::utils::RGBA8(0, 0, 153, 153),    // a = 0.6
+                dawn::utils::RGBA8(0, 0, 255, 255),    // a = 1.0
             };
         }
 
-        return std::vector<utils::RGBA8>{
+        return std::vector<dawn::utils::RGBA8>{
             // Take RGBA8Unorm as example:
             // R channel has different values
-            utils::RGBA8(0, 255, 255, 255),  // r = 0.0
-            utils::RGBA8(102, 0, 0, 255),    // r = 0.4
-            utils::RGBA8(153, 0, 0, 255),    // r = 0.6
-            utils::RGBA8(255, 0, 0, 255),    // r = 1.0
+            dawn::utils::RGBA8(0, 255, 255, 255),  // r = 0.0
+            dawn::utils::RGBA8(102, 0, 0, 255),    // r = 0.4
+            dawn::utils::RGBA8(153, 0, 0, 255),    // r = 0.6
+            dawn::utils::RGBA8(255, 0, 0, 255),    // r = 1.0
 
             // G channel has different values
-            utils::RGBA8(255, 0, 255, 255),  // g = 0.0
-            utils::RGBA8(0, 102, 0, 255),    // g = 0.4
-            utils::RGBA8(0, 153, 0, 255),    // g = 0.6
-            utils::RGBA8(0, 255, 0, 255),    // g = 1.0
+            dawn::utils::RGBA8(255, 0, 255, 255),  // g = 0.0
+            dawn::utils::RGBA8(0, 102, 0, 255),    // g = 0.4
+            dawn::utils::RGBA8(0, 153, 0, 255),    // g = 0.6
+            dawn::utils::RGBA8(0, 255, 0, 255),    // g = 1.0
 
             // B channel has different values
-            utils::RGBA8(255, 255, 0, 255),  // b = 0.0
-            utils::RGBA8(0, 0, 102, 255),    // b = 0.4
-            utils::RGBA8(0, 0, 153, 255),    // b = 0.6
-            utils::RGBA8(0, 0, 255, 255),    // b = 1.0
+            dawn::utils::RGBA8(255, 255, 0, 255),  // b = 0.0
+            dawn::utils::RGBA8(0, 0, 102, 255),    // b = 0.4
+            dawn::utils::RGBA8(0, 0, 153, 255),    // b = 0.6
+            dawn::utils::RGBA8(0, 0, 255, 255),    // b = 1.0
         };
     }
 
@@ -1020,11 +1020,11 @@ class CopyTextureForBrowser_ColorSpace
         options.dstTransferFunctionParameters = dstColorSpaceInfo.gammaEncodingParams.data();
         options.dstAlphaMode = GetParam().mDstAlphaMode;
 
-        std::vector<utils::RGBA8> sourceTextureData = GetSourceData(options.srcAlphaMode);
+        std::vector<dawn::utils::RGBA8> sourceTextureData = GetSourceData(options.srcAlphaMode);
         const wgpu::Extent3D& copySize = {kWidth, kHeight};
 
-        const utils::TextureDataCopyLayout srcCopyLayout =
-            utils::GetTextureDataCopyLayoutForTextureAtLevel(
+        const dawn::utils::TextureDataCopyLayout srcCopyLayout =
+            dawn::utils::GetTextureDataCopyLayoutForTextureAtLevel(
                 kTextureFormat,
                 {srcTextureSpec.textureSize.width, srcTextureSpec.textureSize.height},
                 srcTextureSpec.level);
@@ -1033,7 +1033,7 @@ class CopyTextureForBrowser_ColorSpace
                                       wgpu::TextureUsage::TextureBinding;
         wgpu::Texture srcTexture = this->CreateAndInitTexture(
             srcTextureSpec, srcUsage, srcCopyLayout, sourceTextureData.data(),
-            sourceTextureData.size() * sizeof(utils::RGBA8));
+            sourceTextureData.size() * sizeof(dawn::utils::RGBA8));
 
         // Create dst texture.
         wgpu::Texture dstTexture = this->CreateTexture(

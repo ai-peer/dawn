@@ -31,12 +31,12 @@ class RenderPipelineAndPassCompatibilityTests : public ValidationTest {
                                         bool enableDepthWrite,
                                         bool enableStencilWrite) {
         // Create a NoOp pipeline
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
-        pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        pipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
                 @vertex fn main() -> @builtin(position) vec4f {
                     return vec4f();
                 })");
-        pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        pipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
                 @fragment fn main() {
                 })");
         pipelineDescriptor.cFragment.targets = nullptr;
@@ -53,16 +53,16 @@ class RenderPipelineAndPassCompatibilityTests : public ValidationTest {
         return device.CreateRenderPipeline(&pipelineDescriptor);
     }
 
-    utils::ComboRenderPassDescriptor CreateRenderPassDescriptor(wgpu::TextureFormat format,
-                                                                bool depthReadOnly,
-                                                                bool stencilReadOnly) {
+    dawn::utils::ComboRenderPassDescriptor CreateRenderPassDescriptor(wgpu::TextureFormat format,
+                                                                      bool depthReadOnly,
+                                                                      bool stencilReadOnly) {
         wgpu::TextureDescriptor textureDescriptor = {};
         textureDescriptor.size = {kSize, kSize, 1};
         textureDescriptor.format = format;
         textureDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
         wgpu::Texture depthStencilTexture = device.CreateTexture(&textureDescriptor);
 
-        utils::ComboRenderPassDescriptor passDescriptor({}, depthStencilTexture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor passDescriptor({}, depthStencilTexture.CreateView());
         if (depthReadOnly) {
             passDescriptor.cDepthStencilAttachmentInfo.depthReadOnly = true;
             passDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
@@ -86,7 +86,7 @@ TEST_F(RenderPipelineAndPassCompatibilityTests, WriteAndReadOnlyConflictForDepth
         for (bool depthWriteInPipeline : {true, false}) {
             for (bool stencilWriteInPipeline : {true, false}) {
                 wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-                utils::ComboRenderPassDescriptor passDescriptor = CreateRenderPassDescriptor(
+                dawn::utils::ComboRenderPassDescriptor passDescriptor = CreateRenderPassDescriptor(
                     kFormat, depthStencilReadOnlyInPass, depthStencilReadOnlyInPass);
                 wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDescriptor);
                 wgpu::RenderPipeline pipeline =
@@ -110,7 +110,7 @@ TEST_F(RenderPipelineAndPassCompatibilityTests, WriteAndReadOnlyConflictForDepth
 TEST_F(RenderPipelineAndPassCompatibilityTests,
        WriteAndReadOnlyConflictForDepthStencilBetweenPipelineAndBundle) {
     for (bool depthStencilReadOnlyInBundle : {true, false}) {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.depthStencilFormat = kFormat;
         desc.depthReadOnly = depthStencilReadOnlyInBundle;
         desc.stencilReadOnly = depthStencilReadOnlyInBundle;
@@ -142,7 +142,7 @@ TEST_F(RenderPipelineAndPassCompatibilityTests,
         for (bool depthStencilReadOnlyInBundle : {true, false}) {
             for (bool emptyBundle : {true, false}) {
                 // Create render bundle, with or without a pipeline
-                utils::ComboRenderBundleEncoderDescriptor desc = {};
+                dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
                 desc.depthStencilFormat = kFormat;
                 desc.depthReadOnly = depthStencilReadOnlyInBundle;
                 desc.stencilReadOnly = depthStencilReadOnlyInBundle;
@@ -158,7 +158,7 @@ TEST_F(RenderPipelineAndPassCompatibilityTests,
 
                 // Create render pass and call ExecuteBundles()
                 wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-                utils::ComboRenderPassDescriptor passDescriptor = CreateRenderPassDescriptor(
+                dawn::utils::ComboRenderPassDescriptor passDescriptor = CreateRenderPassDescriptor(
                     kFormat, depthStencilReadOnlyInPass, depthStencilReadOnlyInPass);
                 wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDescriptor);
                 pass.ExecuteBundles(1, &bundle);

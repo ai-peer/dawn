@@ -22,17 +22,17 @@ class IndexBufferValidationTest : public ValidationTest {
   protected:
     wgpu::RenderPipeline MakeTestPipeline(wgpu::IndexFormat format,
                                           wgpu::PrimitiveTopology primitiveTopology) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = primitiveTopology;
@@ -115,7 +115,7 @@ TEST_F(IndexBufferValidationTest, IndexBufferOffsetOOBValidation) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -159,9 +159,9 @@ TEST_F(IndexBufferValidationTest, IndexBufferFormatMatchesPipelineStripFormat) {
         MakeTestPipeline(wgpu::IndexFormat::Undefined, wgpu::PrimitiveTopology::LineStrip);
 
     wgpu::Buffer indexBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
 
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -228,9 +228,9 @@ TEST_F(IndexBufferValidationTest, IndexBufferFormatMatchesPipelineStripFormat) {
 // Check that the index buffer must have the Index usage.
 TEST_F(IndexBufferValidationTest, InvalidUsage) {
     wgpu::Buffer indexBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
     wgpu::Buffer copyBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::CopySrc, {0, 1, 2});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::CopySrc, {0, 1, 2});
 
     PlaceholderRenderPass renderPass(device);
     // Control case: using the index buffer is valid.
@@ -250,7 +250,7 @@ TEST_F(IndexBufferValidationTest, InvalidUsage) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     // Control case: using the index buffer is valid.
@@ -270,7 +270,7 @@ TEST_F(IndexBufferValidationTest, InvalidUsage) {
 // Check the alignment constraint on the index buffer offset.
 TEST_F(IndexBufferValidationTest, OffsetAlignment) {
     wgpu::Buffer indexBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
 
     PlaceholderRenderPass renderPass(device);
     // Control cases: index buffer offset is a multiple of the index format size

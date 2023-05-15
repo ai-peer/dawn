@@ -24,20 +24,20 @@ class DrawTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -49,7 +49,7 @@ class DrawTest : public DawnTest {
 
         pipeline = device.CreateRenderPipeline(&descriptor);
 
-        vertexBuffer = utils::CreateBufferFromData<float>(
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex,
             {// The bottom left triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f,
@@ -58,7 +58,7 @@ class DrawTest : public DawnTest {
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f});
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline pipeline;
     wgpu::Buffer vertexBuffer;
 
@@ -66,8 +66,8 @@ class DrawTest : public DawnTest {
               uint32_t instanceCount,
               uint32_t firstIndex,
               uint32_t firstInstance,
-              utils::RGBA8 bottomLeftExpected,
-              utils::RGBA8 topRightExpected) {
+              dawn::utils::RGBA8 bottomLeftExpected,
+              dawn::utils::RGBA8 topRightExpected) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -87,8 +87,8 @@ class DrawTest : public DawnTest {
 
 // The basic triangle draw.
 TEST_P(DrawTest, Uint32) {
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with no indices.
     Test(0, 0, 0, 0, notFilled, notFilled);

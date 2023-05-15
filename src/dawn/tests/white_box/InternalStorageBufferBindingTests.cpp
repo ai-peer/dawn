@@ -31,7 +31,7 @@ class InternalStorageBufferBindingTests : public DawnTest {
     }
 
     wgpu::ComputePipeline CreateComputePipelineWithInternalStorage() {
-        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
             struct Buf {
                 data : array<u32, 4>
             }
@@ -56,7 +56,7 @@ class InternalStorageBufferBindingTests : public DawnTest {
 
         dawn::native::DeviceBase* nativeDevice = dawn::native::FromAPI(device.Get());
 
-        Ref<dawn::native::BindGroupLayoutBase> bglRef =
+        dawn::Ref<dawn::native::BindGroupLayoutBase> bglRef =
             nativeDevice->CreateBindGroupLayout(&bglDesc, true).AcquireSuccess();
 
         wgpu::BindGroupLayout bgl =
@@ -84,14 +84,14 @@ TEST_P(InternalStorageBufferBindingTests, QueryResolveBufferBoundAsInternalStora
     std::vector<uint32_t> expected(kNumValues, 0x1234u * kIterations);
 
     uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
-    wgpu::Buffer buffer =
-        utils::CreateBufferFromData(device, data.data(), bufferSize,
-                                    wgpu::BufferUsage::QueryResolve | wgpu::BufferUsage::CopySrc);
+    wgpu::Buffer buffer = dawn::utils::CreateBufferFromData(
+        device, data.data(), bufferSize,
+        wgpu::BufferUsage::QueryResolve | wgpu::BufferUsage::CopySrc);
 
     wgpu::ComputePipeline pipeline = CreateComputePipelineWithInternalStorage();
 
-    wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer, 0, bufferSize}});
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {{0, buffer, 0, bufferSize}});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();

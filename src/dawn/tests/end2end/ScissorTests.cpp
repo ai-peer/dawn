@@ -20,7 +20,7 @@
 class ScissorTest : public DawnTest {
   protected:
     wgpu::RenderPipeline CreateQuadPipeline(wgpu::TextureFormat format) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -33,12 +33,12 @@ class ScissorTest : public DawnTest {
                 return vec4f(pos[VertexIndex], 0.5, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].format = format;
@@ -49,7 +49,7 @@ class ScissorTest : public DawnTest {
 
 // Test that by default the scissor test is disabled and the whole attachment can be drawn to.
 TEST_P(ScissorTest, DefaultsToWholeRenderTarget) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 100, 100);
     wgpu::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -63,15 +63,15 @@ TEST_P(ScissorTest, DefaultsToWholeRenderTarget) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 0, 0);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 0, 99);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 99, 0);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 99, 99);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 0, 99);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 99, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 99, 99);
 }
 
 // Test setting a partial scissor (not empty, not full attachment)
 TEST_P(ScissorTest, PartialRect) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 100, 100);
     wgpu::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     constexpr uint32_t kX = 3;
@@ -92,16 +92,16 @@ TEST_P(ScissorTest, PartialRect) {
     queue.Submit(1, &commands);
 
     // Test the two opposite corners of the scissor box. With one pixel inside and on outside
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, kX - 1, kY - 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, kX, kY);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, kX - 1, kY - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, kX, kY);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, kX + kW, kY + kH);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, kX + kW - 1, kY + kH - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, kX + kW, kY + kH);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, kX + kW - 1, kY + kH - 1);
 }
 
 // Test setting an empty scissor
 TEST_P(ScissorTest, EmptyRect) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 2, 2);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 2, 2);
     wgpu::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -117,14 +117,14 @@ TEST_P(ScissorTest, EmptyRect) {
     queue.Submit(1, &commands);
 
     // Test that no pixel was written.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, 0, 0);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, 0, 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, 1, 0);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, 0, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, 1, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, 1, 1);
 }
 // Test that the scissor setting doesn't get inherited between renderpasses
 TEST_P(ScissorTest, NoInheritanceBetweenRenderPass) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 100, 100);
     wgpu::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -145,10 +145,10 @@ TEST_P(ScissorTest, NoInheritanceBetweenRenderPass) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 0, 0);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 0, 99);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 99, 0);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 99, 99);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 0, 99);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 99, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 99, 99);
 }
 
 DAWN_INSTANTIATE_TEST(ScissorTest,

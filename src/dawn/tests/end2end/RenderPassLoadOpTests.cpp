@@ -30,14 +30,14 @@ class DrawQuad {
   public:
     DrawQuad() {}
     DrawQuad(wgpu::Device device, const char* vsSource, const char* fsSource) : device(device) {
-        vsModule = utils::CreateShaderModule(device, vsSource);
-        fsModule = utils::CreateShaderModule(device, fsSource);
+        vsModule = dawn::utils::CreateShaderModule(device, vsSource);
+        fsModule = dawn::utils::CreateShaderModule(device, fsSource);
 
-        pipelineLayout = utils::MakeBasicPipelineLayout(device, nullptr);
+        pipelineLayout = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
     }
 
     void Draw(wgpu::RenderPassEncoder* pass) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.layout = pipelineLayout;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
@@ -73,11 +73,11 @@ class RenderPassLoadOpTests : public DawnTest {
 
         renderTargetView = renderTarget.CreateView();
 
-        std::fill(expectZero.begin(), expectZero.end(), utils::RGBA8::kZero);
+        std::fill(expectZero.begin(), expectZero.end(), dawn::utils::RGBA8::kZero);
 
-        std::fill(expectGreen.begin(), expectGreen.end(), utils::RGBA8::kGreen);
+        std::fill(expectGreen.begin(), expectGreen.end(), dawn::utils::RGBA8::kGreen);
 
-        std::fill(expectBlue.begin(), expectBlue.end(), utils::RGBA8::kBlue);
+        std::fill(expectBlue.begin(), expectBlue.end(), dawn::utils::RGBA8::kBlue);
 
         // draws a blue quad on the right half of the screen
         const char* vsSource = R"(
@@ -115,7 +115,7 @@ class RenderPassLoadOpTests : public DawnTest {
         textureDescriptor.format = format;
         wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView()});
         renderPassDescriptor.cColorAttachments[0].clearValue = clearColor;
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -128,9 +128,9 @@ class RenderPassLoadOpTests : public DawnTest {
         wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
         wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(buffer, 0, kTextureBytesPerRowAlignment);
+            dawn::utils::CreateImageCopyBuffer(buffer, 0, kTextureBytesPerRowAlignment);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &kTextureSize);
 
         wgpu::CommandBuffer commandBuffer = encoder.Finish();
@@ -143,9 +143,9 @@ class RenderPassLoadOpTests : public DawnTest {
     wgpu::Texture renderTarget;
     wgpu::TextureView renderTargetView;
 
-    std::array<utils::RGBA8, kRTSize * kRTSize> expectZero;
-    std::array<utils::RGBA8, kRTSize * kRTSize> expectGreen;
-    std::array<utils::RGBA8, kRTSize * kRTSize> expectBlue;
+    std::array<dawn::utils::RGBA8, kRTSize * kRTSize> expectZero;
+    std::array<dawn::utils::RGBA8, kRTSize * kRTSize> expectGreen;
+    std::array<dawn::utils::RGBA8, kRTSize * kRTSize> expectBlue;
 
     DrawQuad blueQuad = {};
 };
@@ -153,13 +153,13 @@ class RenderPassLoadOpTests : public DawnTest {
 // Tests clearing, loading, and drawing into color attachments
 TEST_P(RenderPassLoadOpTests, ColorClearThenLoadAndDraw) {
     // Part 1: clear once, check to make sure it's cleared
-    utils::ComboRenderPassDescriptor renderPassClearZero({renderTargetView});
+    dawn::utils::ComboRenderPassDescriptor renderPassClearZero({renderTargetView});
     auto commandsClearZeroEncoder = device.CreateCommandEncoder();
     auto clearZeroPass = commandsClearZeroEncoder.BeginRenderPass(&renderPassClearZero);
     clearZeroPass.End();
     auto commandsClearZero = commandsClearZeroEncoder.Finish();
 
-    utils::ComboRenderPassDescriptor renderPassClearGreen({renderTargetView});
+    dawn::utils::ComboRenderPassDescriptor renderPassClearGreen({renderTargetView});
     renderPassClearGreen.cColorAttachments[0].clearValue = {0.0f, 1.0f, 0.0f, 1.0f};
     auto commandsClearGreenEncoder = device.CreateCommandEncoder();
     auto clearGreenPass = commandsClearGreenEncoder.BeginRenderPass(&renderPassClearGreen);
@@ -173,7 +173,7 @@ TEST_P(RenderPassLoadOpTests, ColorClearThenLoadAndDraw) {
     EXPECT_TEXTURE_EQ(expectGreen.data(), renderTarget, {0, 0}, {kRTSize, kRTSize});
 
     // Part 2: draw a blue quad into the right half of the render target, and check result
-    utils::ComboRenderPassDescriptor renderPassLoad({renderTargetView});
+    dawn::utils::ComboRenderPassDescriptor renderPassLoad({renderTargetView});
     renderPassLoad.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
     wgpu::CommandBuffer commandsLoad;
     {
@@ -628,9 +628,9 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearWithBig32BitIntegralValuesOnMultipleCol
 
         for (uint32_t i = 0; i < testCase.size(); ++i) {
             wgpu::ImageCopyTexture imageCopyTexture =
-                utils::CreateImageCopyTexture(textures[i], 0, {0, 0, 0});
-            wgpu::ImageCopyBuffer imageCopyBuffer =
-                utils::CreateImageCopyBuffer(outputBuffers[i], 0, kTextureBytesPerRowAlignment);
+                dawn::utils::CreateImageCopyTexture(textures[i], 0, {0, 0, 0});
+            wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
+                outputBuffers[i], 0, kTextureBytesPerRowAlignment);
             encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer,
                                         &textureDescriptor.size);
         }
@@ -662,7 +662,7 @@ TEST_P(RenderPassLoadOpTests, MixedUseOfLoadOpLoadAndLoadOpClearWithBigIntegerVa
     // Initialize textureForLoad with pixel value 2u.
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassForInit({textureForLoad.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassForInit({textureForLoad.CreateView()});
         renderPassForInit.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
         renderPassForInit.cColorAttachments[0].clearValue = {kExpectedLoadValue, 0, 0, 0};
         wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassForInit);
@@ -677,7 +677,7 @@ TEST_P(RenderPassLoadOpTests, MixedUseOfLoadOpLoadAndLoadOpClearWithBigIntegerVa
     wgpu::Buffer outputBuffer;
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassForClear(
+        dawn::utils::ComboRenderPassDescriptor renderPassForClear(
             {textureForLoad.CreateView(), textureForClear.CreateView()});
         renderPassForClear.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
         renderPassForClear.cColorAttachments[0].clearValue = {kExpectedClearValue, 0, 0, 0};
@@ -692,15 +692,15 @@ TEST_P(RenderPassLoadOpTests, MixedUseOfLoadOpLoadAndLoadOpClearWithBigIntegerVa
         outputBuffer = device.CreateBuffer(&bufferDescriptor);
 
         wgpu::ImageCopyTexture imageCopyTextureForLoad =
-            utils::CreateImageCopyTexture(textureForLoad, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(textureForLoad, 0, {0, 0, 0});
         wgpu::ImageCopyBuffer imageCopyBufferForLoad =
-            utils::CreateImageCopyBuffer(outputBuffer, 0, kTextureBytesPerRowAlignment);
+            dawn::utils::CreateImageCopyBuffer(outputBuffer, 0, kTextureBytesPerRowAlignment);
         encoder.CopyTextureToBuffer(&imageCopyTextureForLoad, &imageCopyBufferForLoad,
                                     &textureDescriptor.size);
 
         wgpu::ImageCopyTexture imageCopyTextureForClear =
-            utils::CreateImageCopyTexture(textureForClear, 0, {0, 0, 0});
-        wgpu::ImageCopyBuffer imageCopyBufferForClear = utils::CreateImageCopyBuffer(
+            dawn::utils::CreateImageCopyTexture(textureForClear, 0, {0, 0, 0});
+        wgpu::ImageCopyBuffer imageCopyBufferForClear = dawn::utils::CreateImageCopyBuffer(
             outputBuffer, sizeof(uint32_t), kTextureBytesPerRowAlignment);
         encoder.CopyTextureToBuffer(&imageCopyTextureForClear, &imageCopyBufferForClear,
                                     &textureDescriptor.size);
