@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae49a587_58a51ee1",
+        "filename": "src/tint/ir/transform/transform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-15T16:12:53Z",
+      "side": 1,
+      "message": "Yeah, can be pushed to base class.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "1b5f80f7b42f097e58b1f050d1a3b10c23cf2a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
