@@ -212,6 +212,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "423034b0_8d815363",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T17:21:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52655617_cdf69250",
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aed04ce2_f67d1534",
