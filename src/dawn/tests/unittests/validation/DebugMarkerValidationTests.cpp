@@ -73,7 +73,7 @@ TEST_F(DebugMarkerValidationTest, RenderUnbalancedPop) {
 
 // Correct usage of debug markers should succeed in render bundle.
 TEST_F(DebugMarkerValidationTest, RenderBundleSuccess) {
-    utils::ComboRenderBundleEncoderDescriptor desc;
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc;
     desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     desc.colorFormatsCount = 1;
 
@@ -89,7 +89,7 @@ TEST_F(DebugMarkerValidationTest, RenderBundleSuccess) {
 
 // A PushDebugGroup call without a following PopDebugGroup produces an error in render bundle.
 TEST_F(DebugMarkerValidationTest, RenderBundleUnbalancedPush) {
-    utils::ComboRenderBundleEncoderDescriptor desc;
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc;
     desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     desc.colorFormatsCount = 1;
 
@@ -104,7 +104,7 @@ TEST_F(DebugMarkerValidationTest, RenderBundleUnbalancedPush) {
 
 // A PopDebugGroup call without a preceding PushDebugGroup produces an error in render bundle.
 TEST_F(DebugMarkerValidationTest, RenderBundleUnbalancedPop) {
-    utils::ComboRenderBundleEncoderDescriptor desc;
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc;
     desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     desc.colorFormatsCount = 1;
 

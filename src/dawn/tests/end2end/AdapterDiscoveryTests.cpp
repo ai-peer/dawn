@@ -72,7 +72,7 @@ TEST(AdapterDiscoveryTests, OnlySwiftShader) {
 
         EXPECT_EQ(properties.backendType, wgpu::BackendType::Vulkan);
         EXPECT_EQ(properties.adapterType, wgpu::AdapterType::CPU);
-        EXPECT_TRUE(gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID));
+        EXPECT_TRUE(dawn::gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID));
     }
 }
 
@@ -264,7 +264,7 @@ class AdapterCreationTest : public ::testing::Test {
                     continue;
                 }
                 swiftShaderAvailable |=
-                    gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID);
+                    dawn::gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID);
                 discreteGPUAvailable |= properties.adapterType == wgpu::AdapterType::DiscreteGPU;
                 integratedGPUAvailable |=
                     properties.adapterType == wgpu::AdapterType::IntegratedGPU;
@@ -342,7 +342,7 @@ TEST_F(AdapterCreationTest, FallbackAdapter) {
         adapter.GetProperties(&properties);
 
         EXPECT_EQ(properties.adapterType, wgpu::AdapterType::CPU);
-        EXPECT_TRUE(gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID));
+        EXPECT_TRUE(dawn::gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID));
     }
 }
 

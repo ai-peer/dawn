@@ -27,7 +27,8 @@ class SetViewportTest : public ValidationTest {
                           float height,
                           float minDepth,
                           float maxDepth) {
-        utils::BasicRenderPass rp = utils::CreateBasicRenderPass(device, kWidth, kHeight);
+        dawn::utils::BasicRenderPass rp =
+            dawn::utils::CreateBasicRenderPass(device, kWidth, kHeight);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp.renderPassInfo);
@@ -136,7 +137,8 @@ TEST_F(SetViewportTest, MinDepthEqualOrGreaterThanMaxDepth) {
 class SetScissorTest : public ValidationTest {
   protected:
     void TestScissorCall(bool success, uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
-        utils::BasicRenderPass rp = utils::CreateBasicRenderPass(device, kWidth, kHeight);
+        dawn::utils::BasicRenderPass rp =
+            dawn::utils::CreateBasicRenderPass(device, kWidth, kHeight);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp.renderPassInfo);

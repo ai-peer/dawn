@@ -21,9 +21,9 @@
 
 class ITypSpanTest : public testing::Test {
   protected:
-    using Key = TypedInteger<struct KeyT, size_t>;
-    using Val = TypedInteger<struct ValT, uint32_t>;
-    using Span = ityp::span<Key, Val>;
+    using Key = dawn::TypedInteger<struct KeyT, size_t>;
+    using Val = dawn::TypedInteger<struct ValT, uint32_t>;
+    using Span = dawn::ityp::span<Key, Val>;
 };
 
 // Test that values can be set at an index and retrieved from the same index.

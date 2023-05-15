@@ -343,8 +343,9 @@ class D3DSharedHandleUsageTests : public D3DResourceTestBase {
   protected:
     // Submits a 1x1x1 copy from source to destination
     void SimpleCopyTextureToTexture(wgpu::Texture source, wgpu::Texture destination) {
-        wgpu::ImageCopyTexture copySrc = utils::CreateImageCopyTexture(source, 0, {0, 0, 0});
-        wgpu::ImageCopyTexture copyDst = utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
+        wgpu::ImageCopyTexture copySrc = dawn::utils::CreateImageCopyTexture(source, 0, {0, 0, 0});
+        wgpu::ImageCopyTexture copyDst =
+            dawn::utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
 
         wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -362,7 +363,7 @@ class D3DSharedHandleUsageTests : public D3DResourceTestBase {
         wgpu::TextureView wrappedView = wrappedTexture.CreateView();
 
         // Submit a clear operation
-        utils::ComboRenderPassDescriptor renderPassDescriptor({wrappedView}, {});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({wrappedView}, {});
         renderPassDescriptor.cColorAttachments[0].clearValue = clearColor;
 
         wgpu::CommandEncoder encoder = wgpuDevice.CreateCommandEncoder();
@@ -588,8 +589,8 @@ TEST_P(D3DSharedHandleUsageTests, ClearInD3D11CopyAndReadbackInD3D) {
 
     // Readback the destination texture and ensure it contains the colors we used
     // to clear the source texture on the D3D device.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(clearColor.r * 255u, clearColor.g * 255u,
-                                       clearColor.b * 255u, clearColor.a * 255u),
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(clearColor.r * 255u, clearColor.g * 255u,
+                                             clearColor.b * 255u, clearColor.a * 255u),
                           dawnCopyDestTexture, 0, 0);
 }
 
@@ -608,8 +609,8 @@ TEST_P(D3DSharedHandleUsageTests, ClearInD3D11ReadbackInD3D) {
 
     // Readback the destination texture and ensure it contains the colors we used
     // to clear the source texture on the D3D device.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(clearColor.r * 255, clearColor.g * 255, clearColor.b * 255,
-                                       clearColor.a * 255),
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(clearColor.r * 255, clearColor.g * 255,
+                                             clearColor.b * 255, clearColor.a * 255),
                           dawnTexture, 0, 0);
 
     dawn::native::d3d::ExternalImageDXGIFenceDescriptor signalFence;
@@ -699,7 +700,7 @@ TEST_P(D3DSharedHandleUsageTests, UninitializedTextureIsCleared) {
 
     // Readback the destination texture and ensure it contains the colors we used
     // to clear the source texture on the D3D device.
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), dawnTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 0, 0, 0), dawnTexture, 0, 0);
 
     dawn::native::d3d::ExternalImageDXGIFenceDescriptor signalFence;
     externalImage->EndAccess(dawnTexture.Get(), &signalFence);
@@ -723,7 +724,7 @@ TEST_P(D3DSharedHandleUsageTests, ReuseExternalImage) {
         ASSERT_NE(texture.Get(), nullptr);
         ClearImage(texture.Get(), solidRed, device);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0xFF, 0, 0, 0xFF), texture.Get(), 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0xFF, 0, 0, 0xFF), texture.Get(), 0, 0);
     }
 
     // Once finished with the first texture, destroy it so we may re-acquire the external image
@@ -741,7 +742,7 @@ TEST_P(D3DSharedHandleUsageTests, ReuseExternalImage) {
     texture = wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc));
 
     // Check again that the new texture is still red
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0xFF, 0, 0, 0xFF), texture.Get(), 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0xFF, 0, 0, 0xFF), texture.Get(), 0, 0);
 
     // Clear the new texture to blue
     {
@@ -749,7 +750,7 @@ TEST_P(D3DSharedHandleUsageTests, ReuseExternalImage) {
         ASSERT_NE(texture.Get(), nullptr);
         ClearImage(texture.Get(), solidBlue, device);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0xFF, 0xFF), texture.Get(), 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 0, 0xFF, 0xFF), texture.Get(), 0, 0);
     }
 
     externalImage->EndAccess(texture.Get(), &signalFence);
@@ -822,7 +823,7 @@ TEST_P(D3DSharedHandleUsageTests, ConcurrentExternalImageReadAccess) {
         EXPECT_NE(texture3, nullptr);
 
         // Check again that the new textures are also red.
-        const utils::RGBA8 solidRed(0xFF, 0, 0, 0xFF);
+        const dawn::utils::RGBA8 solidRed(0xFF, 0, 0, 0xFF);
         EXPECT_TEXTURE_EQ(device2, solidRed, texture2.Get(), {0, 0});
         EXPECT_TEXTURE_EQ(device3, solidRed, texture3.Get(), {0, 0});
 
@@ -843,7 +844,7 @@ TEST_P(D3DSharedHandleUsageTests, ConcurrentExternalImageReadAccess) {
             wgpu::Texture::Acquire(externalImage4->BeginAccess(&externalAccessDesc));
         EXPECT_NE(texture4, nullptr);
 
-        const utils::RGBA8 solidRed(0xFF, 0, 0, 0xFF);
+        const dawn::utils::RGBA8 solidRed(0xFF, 0, 0, 0xFF);
         EXPECT_TEXTURE_EQ(device4, solidRed, texture4.Get(), {0, 0});
 
         // Clear to blue.
@@ -888,7 +889,7 @@ TEST_P(D3DSharedHandleUsageTests, ConcurrentExternalImageReadAccess) {
         EXPECT_NE(texture3, nullptr);
 
         // Check again that the new textures are now blue.
-        const utils::RGBA8 solidBlue(0, 0, 0xFF, 0xFF);
+        const dawn::utils::RGBA8 solidBlue(0, 0, 0xFF, 0xFF);
         EXPECT_TEXTURE_EQ(device, solidBlue, texture.Get(), {0, 0});
         EXPECT_TEXTURE_EQ(device, solidBlue, texture1.Get(), {0, 0});
         EXPECT_TEXTURE_EQ(device2, solidBlue, texture2.Get(), {0, 0});
@@ -994,10 +995,10 @@ TEST_P(D3DSharedHandleUsageTests, CallWriteBufferBeforeDestroyingExternalImage) 
     WrapSharedHandle(&baseDawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture,
                      &externalImage);
 
-    // In utils::CreateBufferFromData() we will call queue.WriteBuffer(), which will make a
+    // In dawn::utils::CreateBufferFromData() we will call queue.WriteBuffer(), which will make a
     // recording context pending.
     constexpr uint32_t kExpected = 1u;
-    wgpu::Buffer buffer = utils::CreateBufferFromData(
+    wgpu::Buffer buffer = dawn::utils::CreateBufferFromData(
         device, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst, {kExpected});
 
     dawn::native::d3d::ExternalImageDXGIFenceDescriptor signalFence;
@@ -1033,7 +1034,8 @@ TEST_P(D3DSharedHandleUsageTests, SRGBReinterpretation) {
 
     // Submit a clear operation to sRGB value rgb(234, 51, 35).
     {
-        utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView(&viewDesc)}, {});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView(&viewDesc)},
+                                                                    {});
         renderPassDescriptor.cColorAttachments[0].clearValue = {234.0 / 255.0, 51.0 / 255.0,
                                                                 35.0 / 255.0, 1.0};
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -1044,9 +1046,9 @@ TEST_P(D3DSharedHandleUsageTests, SRGBReinterpretation) {
     }
 
     // Expect the contents to be approximately rgb(246 124 104)
-    EXPECT_PIXEL_RGBA8_BETWEEN(            //
-        utils::RGBA8(245, 123, 103, 255),  //
-        utils::RGBA8(247, 125, 105, 255), texture, 0, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(                  //
+        dawn::utils::RGBA8(245, 123, 103, 255),  //
+        dawn::utils::RGBA8(247, 125, 105, 255), texture, 0, 0);
 }
 
 class D3DSharedHandleMultithreadTests : public D3DSharedHandleUsageTests {
@@ -1144,8 +1146,8 @@ TEST_P(D3DSharedHandleMultithreadTests, ClearInD3D12ReadbackInD3D11_TwoThreads) 
 
         ASSERT_NE(dawnTexture.Get(), nullptr);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(d3d11ClearColor.r * 255, d3d11ClearColor.g * 255,
-                                           d3d11ClearColor.b * 255, d3d11ClearColor.a * 255),
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(d3d11ClearColor.r * 255, d3d11ClearColor.g * 255,
+                                                 d3d11ClearColor.b * 255, d3d11ClearColor.a * 255),
                               dawnTexture, 0, 0);
 
         ClearImage(dawnTexture, d3dClearColor, device);

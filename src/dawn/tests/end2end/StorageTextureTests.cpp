@@ -132,26 +132,26 @@ class StorageTextureTests : public DawnTest {
 
             case wgpu::TextureFormat::RGBA16Float: {
                 uint16_t* valuePtr = static_cast<uint16_t*>(pixelValuePtr);
-                valuePtr[0] = Float32ToFloat16(static_cast<float_t>(pixelValue));
-                valuePtr[1] = Float32ToFloat16(-static_cast<float_t>(pixelValue));
-                valuePtr[2] = Float32ToFloat16(static_cast<float_t>(pixelValue * 2));
-                valuePtr[3] = Float32ToFloat16(-static_cast<float_t>(pixelValue * 2));
+                valuePtr[0] = dawn::Float32ToFloat16(static_cast<float_t>(pixelValue));
+                valuePtr[1] = dawn::Float32ToFloat16(-static_cast<float_t>(pixelValue));
+                valuePtr[2] = dawn::Float32ToFloat16(static_cast<float_t>(pixelValue * 2));
+                valuePtr[3] = dawn::Float32ToFloat16(-static_cast<float_t>(pixelValue * 2));
                 break;
             }
 
             // 8-bit (normalized/non-normalized signed/unsigned integer) 4-component formats
             case wgpu::TextureFormat::RGBA8Unorm:
             case wgpu::TextureFormat::RGBA8Uint: {
-                utils::RGBA8* valuePtr = static_cast<utils::RGBA8*>(pixelValuePtr);
+                dawn::utils::RGBA8* valuePtr = static_cast<dawn::utils::RGBA8*>(pixelValuePtr);
                 *valuePtr =
-                    utils::RGBA8(pixelValue, pixelValue * 2, pixelValue * 3, pixelValue * 4);
+                    dawn::utils::RGBA8(pixelValue, pixelValue * 2, pixelValue * 3, pixelValue * 4);
                 break;
             }
 
             case wgpu::TextureFormat::BGRA8Unorm: {
-                utils::RGBA8* valuePtr = static_cast<utils::RGBA8*>(pixelValuePtr);
+                dawn::utils::RGBA8* valuePtr = static_cast<dawn::utils::RGBA8*>(pixelValuePtr);
                 *valuePtr =
-                    utils::RGBA8(pixelValue * 3, pixelValue * 2, pixelValue, pixelValue * 4);
+                    dawn::utils::RGBA8(pixelValue * 3, pixelValue * 2, pixelValue, pixelValue * 4);
                 break;
             }
 
@@ -195,7 +195,7 @@ class StorageTextureTests : public DawnTest {
                 UNREACHABLE();
                 break;
         }
-        ostream << "<" << utils::GetWGSLImageFormatQualifier(format) << ", ";
+        ostream << "<" << dawn::utils::GetWGSLImageFormatQualifier(format) << ", ";
         ostream << accessQualifier << ">;";
         return ostream.str();
     }
@@ -314,7 +314,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         const char* stage,
         wgpu::TextureFormat format,
         wgpu::TextureViewDimension dimension = wgpu::TextureViewDimension::e2D) {
-        std::string componentFmt = utils::GetWGSLColorTextureComponentType(format);
+        std::string componentFmt = dawn::utils::GetWGSLColorTextureComponentType(format);
         auto texelType = "vec4<" + componentFmt + ">";
         std::string sliceCount;
         std::string textureStore;
@@ -374,7 +374,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
 
     static std::vector<uint8_t> GetExpectedData(wgpu::TextureFormat format,
                                                 uint32_t sliceCount = 1) {
-        const uint32_t texelSizeInBytes = utils::GetTexelBlockSizeInBytes(format);
+        const uint32_t texelSizeInBytes = dawn::utils::GetTexelBlockSizeInBytes(format);
 
         std::vector<uint8_t> outputData(texelSizeInBytes * kWidth * kHeight * sliceCount);
 
@@ -405,7 +405,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         const std::vector<uint8_t>& initialTextureData,
         wgpu::TextureFormat format,
         wgpu::TextureViewDimension dimension = wgpu::TextureViewDimension::e2D) {
-        uint32_t texelSize = utils::GetTexelBlockSizeInBytes(format);
+        uint32_t texelSize = dawn::utils::GetTexelBlockSizeInBytes(format);
         ASSERT(kWidth * texelSize <= kTextureBytesPerRowAlignment);
 
         const uint32_t bytesPerTextureRow = texelSize * kWidth;
@@ -427,19 +427,19 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
                 }
             }
         }
-        wgpu::Buffer uploadBuffer =
-            utils::CreateBufferFromData(device, uploadBufferData.data(), uploadBufferSize,
-                                        wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
+        wgpu::Buffer uploadBuffer = dawn::utils::CreateBufferFromData(
+            device, uploadBufferData.data(), uploadBufferSize,
+            wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
 
         wgpu::Texture outputTexture = CreateTexture(
             format, wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::CopyDst,
-            {kWidth, kHeight, sliceCount}, utils::ViewDimensionToTextureDimension(dimension));
+            {kWidth, kHeight, sliceCount}, dawn::utils::ViewDimensionToTextureDimension(dimension));
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         const wgpu::Extent3D copyExtent = {kWidth, kHeight, sliceCount};
-        wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(uploadBuffer, 0, kTextureBytesPerRowAlignment, kHeight);
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
+            uploadBuffer, 0, kTextureBytesPerRowAlignment, kHeight);
         wgpu::ImageCopyTexture imageCopyTexture;
         imageCopyTexture.texture = outputTexture;
         encoder.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &copyExtent);
@@ -451,7 +451,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
     }
 
     wgpu::ComputePipeline CreateComputePipeline(const char* computeShader) {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, computeShader);
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, computeShader);
         wgpu::ComputePipelineDescriptor computeDescriptor;
         computeDescriptor.layout = nullptr;
         computeDescriptor.compute.module = csModule;
@@ -461,10 +461,10 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
 
     wgpu::RenderPipeline CreateRenderPipeline(const char* vertexShader,
                                               const char* fragmentShader) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader);
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader);
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader);
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragmentShader);
 
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = vsModule;
         desc.cFragment.module = fsModule;
         desc.cTargets[0].format = kRenderAttachmentFormat;
@@ -476,14 +476,14 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
                          const char* fragmentShader,
                          wgpu::Texture readonlyStorageTexture) {
         wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, pipeline.GetBindGroupLayout(0), {{0, readonlyStorageTexture.CreateView()}});
 
         // Clear the render attachment to red at the beginning of the render pass.
         wgpu::Texture outputTexture = CreateTexture(
             kRenderAttachmentFormat,
             wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, {1, 1});
-        utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
         renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
         renderPassDescriptor.cColorAttachments[0].clearValue = {1.f, 0.f, 0.f, 1.f};
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -497,7 +497,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         queue.Submit(1, &commandBuffer);
 
         // Check if the contents in the output texture are all as expected (green).
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, outputTexture, 0, 0)
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, outputTexture, 0, 0)
             << "\nVertex Shader:\n"
             << vertexShader << "\n\nFragment Shader:\n"
             << fragmentShader;
@@ -511,12 +511,12 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
 
         // Clear the content of the result buffer into 0.
         constexpr uint32_t kInitialValue = 0;
-        wgpu::Buffer resultBuffer =
-            utils::CreateBufferFromData(device, &kInitialValue, sizeof(kInitialValue),
-                                        wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
+        wgpu::Buffer resultBuffer = dawn::utils::CreateBufferFromData(
+            device, &kInitialValue, sizeof(kInitialValue),
+            wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
         wgpu::TextureViewDescriptor descriptor;
         descriptor.dimension = dimension;
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, pipeline.GetBindGroupLayout(0),
             {{0, readonlyStorageTexture.CreateView(&descriptor)}, {1, resultBuffer}});
 
@@ -541,7 +541,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         // Create a render pipeline that writes the expected pixel values into the storage texture
         // without fragment shader outputs.
         wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, pipeline.GetBindGroupLayout(0), {{0, writeonlyStorageTexture.CreateView()}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -549,7 +549,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         wgpu::Texture placeholderOutputTexture = CreateTexture(
             kRenderAttachmentFormat,
             wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, {1, 1});
-        utils::ComboRenderPassDescriptor renderPassDescriptor(
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
             {placeholderOutputTexture.CreateView()});
         wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPassEncoder.SetBindGroup(0, bindGroup);
@@ -569,8 +569,8 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         descriptor.dimension = dimension;
         wgpu::ComputePipeline pipeline = CreateComputePipeline(computeShader);
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {{0, writeonlyStorageTexture.CreateView(&descriptor)}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {{0, writeonlyStorageTexture.CreateView(&descriptor)}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder computePassEncoder = encoder.BeginComputePass();
@@ -592,9 +592,9 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         descriptor.dimension = dimension;
         wgpu::ComputePipeline pipeline = CreateComputePipeline(computeShader);
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {{0, writeonlyStorageTexture.CreateView(&descriptor)},
-                                  {1, readonlyStorageTexture.CreateView(&descriptor)}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {{0, writeonlyStorageTexture.CreateView(&descriptor)},
+                                        {1, readonlyStorageTexture.CreateView(&descriptor)}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder computePassEncoder = encoder.BeginComputePass();
@@ -619,16 +619,16 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
                                    const std::vector<uint8_t>& expectedData) {
         // Copy the content from the write-only storage texture to the result buffer.
         wgpu::BufferDescriptor descriptor;
-        descriptor.size =
-            utils::RequiredBytesInCopy(kTextureBytesPerRowAlignment, size.height, size, format);
+        descriptor.size = dawn::utils::RequiredBytesInCopy(kTextureBytesPerRowAlignment,
+                                                           size.height, size, format);
         descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
         wgpu::Buffer resultBuffer = device.CreateBuffer(&descriptor);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::ImageCopyTexture imageCopyTexture =
-                utils::CreateImageCopyTexture(writeonlyStorageTexture, 0, {0, 0, 0});
-            wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+                dawn::utils::CreateImageCopyTexture(writeonlyStorageTexture, 0, {0, 0, 0});
+            wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
                 resultBuffer, 0, kTextureBytesPerRowAlignment, size.height);
             encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &size);
         }
@@ -636,7 +636,7 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
         queue.Submit(1, &commandBuffer);
 
         // Check if the contents in the result buffer are what we expect.
-        uint32_t texelSize = utils::GetTexelBlockSizeInBytes(format);
+        uint32_t texelSize = dawn::utils::GetTexelBlockSizeInBytes(format);
         ASSERT(size.width * texelSize <= kTextureBytesPerRowAlignment);
 
         for (size_t z = 0; z < size.depthOrArrayLayers; ++z) {
@@ -666,8 +666,8 @@ fn IsEqualTo(pixel : vec4f, expected : vec4f) -> bool {
 
 // Test that write-only storage textures are supported in compute shader.
 TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
-    for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
-        if (!utils::TextureFormatSupportsStorageTexture(format)) {
+    for (wgpu::TextureFormat format : dawn::utils::kAllTextureFormats) {
+        if (!dawn::utils::TextureFormatSupportsStorageTexture(format)) {
             continue;
         }
         if (IsOpenGLES() && !OpenGLESSupportsStorageTexture(format)) {
@@ -705,8 +705,8 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
     // NVidia OpenGLES drivers.
     DAWN_SUPPRESS_TEST_IF(IsNvidia() && IsLinux() && IsOpenGLES());
 
-    for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
-        if (!utils::TextureFormatSupportsStorageTexture(format)) {
+    for (wgpu::TextureFormat format : dawn::utils::kAllTextureFormats) {
+        if (!dawn::utils::TextureFormatSupportsStorageTexture(format)) {
             continue;
         }
         if (IsOpenGLES() && !OpenGLESSupportsStorageTexture(format)) {
@@ -757,7 +757,8 @@ TEST_P(StorageTextureTests, Writeonly2DArrayOr3DStorageTexture) {
     for (wgpu::TextureViewDimension dimension : dimensions) {
         wgpu::Texture writeonlyStorageTexture = CreateTexture(
             kTextureFormat, wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::CopySrc,
-            {kWidth, kHeight, kSliceCount}, utils::ViewDimensionToTextureDimension(dimension));
+            {kWidth, kHeight, kSliceCount},
+            dawn::utils::ViewDimensionToTextureDimension(dimension));
 
         // Write the expected pixel values into the write-only storage texture.
         const std::string computeShader =
@@ -802,7 +803,7 @@ TEST_P(StorageTextureTests, SampledAndWriteonlyStorageTexturePingPong) {
     wgpu::Texture storageTexture2 = CreateTexture(
         kTextureFormat, wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::StorageBinding,
         {1u, 1u});
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
 @group(0) @binding(0) var Src : texture_2d<u32>;
 @group(0) @binding(1) var Dst : texture_storage_2d<r32uint, write>;
 @compute @workgroup_size(1) fn main() {
@@ -819,19 +820,19 @@ TEST_P(StorageTextureTests, SampledAndWriteonlyStorageTexturePingPong) {
 
     // In bindGroupA storageTexture1 is bound as read-only storage texture and storageTexture2 is
     // bound as write-only storage texture.
-    wgpu::BindGroup bindGroupA = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, storageTexture1.CreateView()},
-                                                          {1, storageTexture2.CreateView()},
-                                                      });
+    wgpu::BindGroup bindGroupA = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, storageTexture1.CreateView()},
+                                                                {1, storageTexture2.CreateView()},
+                                                            });
 
     // In bindGroupA storageTexture2 is bound as read-only storage texture and storageTexture1 is
     // bound as write-only storage texture.
-    wgpu::BindGroup bindGroupB = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, storageTexture2.CreateView()},
-                                                          {1, storageTexture1.CreateView()},
-                                                      });
+    wgpu::BindGroup bindGroupB = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, storageTexture2.CreateView()},
+                                                                {1, storageTexture1.CreateView()},
+                                                            });
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
@@ -855,7 +856,8 @@ TEST_P(StorageTextureTests, SampledAndWriteonlyStorageTexturePingPong) {
     wgpu::ImageCopyTexture imageCopyTexture;
     imageCopyTexture.texture = storageTexture1;
 
-    wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(resultBuffer, 0, 256, 1);
+    wgpu::ImageCopyBuffer imageCopyBuffer =
+        dawn::utils::CreateImageCopyBuffer(resultBuffer, 0, 256, 1);
     wgpu::Extent3D extent3D = {1, 1, 1};
     encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &extent3D);
 
@@ -942,7 +944,7 @@ class StorageTextureZeroInitTests : public StorageTextureTests {
     static std::vector<uint8_t> GetExpectedData() {
         constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::R32Uint;
 
-        const uint32_t texelSizeInBytes = utils::GetTexelBlockSizeInBytes(kTextureFormat);
+        const uint32_t texelSizeInBytes = dawn::utils::GetTexelBlockSizeInBytes(kTextureFormat);
         const size_t kDataCount = texelSizeInBytes * kWidth * kHeight;
         std::vector<uint8_t> outputData(kDataCount, 0);
 

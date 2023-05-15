@@ -53,7 +53,7 @@ TEST_F(ShaderModuleValidationTest, CreationSuccess) {
                    OpReturn
                    OpFunctionEnd)";
 
-    utils::CreateShaderModuleFromASM(device, shader);
+    dawn::utils::CreateShaderModuleFromASM(device, shader);
 }
 
 // Test that it is not allowed to use combined texture and sampler.
@@ -94,7 +94,7 @@ TEST_F(ShaderModuleValidationTest, CombinedTextureAndSampler) {
                OpFunctionEnd
         )";
 
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromASM(device, shader));
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModuleFromASM(device, shader));
 }
 
 // Test that it is not allowed to declare a multisampled-array interface texture.
@@ -135,7 +135,7 @@ TEST_F(ShaderModuleValidationTest, MultisampledArrayTexture) {
                OpFunctionEnd
         )";
 
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromASM(device, shader));
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModuleFromASM(device, shader));
 }
 
 const char* kShaderWithNonUniformDerivative = R"(
@@ -167,7 +167,8 @@ const char* kShaderWithNonUniformDerivative = R"(
 // Test that creating a module with a SPIR-V shader that has a uniformity violation fails when no
 // SPIR-V options descriptor is used.
 TEST_F(ShaderModuleValidationTest, NonUniformDerivatives_NoOptions) {
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromASM(device, kShaderWithNonUniformDerivative));
+    ASSERT_DEVICE_ERROR(
+        dawn::utils::CreateShaderModuleFromASM(device, kShaderWithNonUniformDerivative));
 }
 
 // Test that creating a module with a SPIR-V shader that has a uniformity violation fails when
@@ -175,8 +176,8 @@ TEST_F(ShaderModuleValidationTest, NonUniformDerivatives_NoOptions) {
 TEST_F(ShaderModuleValidationTest, NonUniformDerivatives_FlagSetToFalse) {
     wgpu::DawnShaderModuleSPIRVOptionsDescriptor spirv_options_desc = {};
     spirv_options_desc.allowNonUniformDerivatives = false;
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromASM(device, kShaderWithNonUniformDerivative,
-                                                         &spirv_options_desc));
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModuleFromASM(
+        device, kShaderWithNonUniformDerivative, &spirv_options_desc));
 }
 
 // Test that creating a module with a SPIR-V shader that has a uniformity violation succeeds when
@@ -184,7 +185,8 @@ TEST_F(ShaderModuleValidationTest, NonUniformDerivatives_FlagSetToFalse) {
 TEST_F(ShaderModuleValidationTest, NonUniformDerivatives_FlagSetToTrue) {
     wgpu::DawnShaderModuleSPIRVOptionsDescriptor spirv_options_desc = {};
     spirv_options_desc.allowNonUniformDerivatives = true;
-    utils::CreateShaderModuleFromASM(device, kShaderWithNonUniformDerivative, &spirv_options_desc);
+    dawn::utils::CreateShaderModuleFromASM(device, kShaderWithNonUniformDerivative,
+                                           &spirv_options_desc);
 }
 
 #endif  // TINT_BUILD_SPV_READER
@@ -243,7 +245,7 @@ TEST_F(ShaderModuleValidationTest, GetCompilationMessages) {
     // is not the case on the wire.
     DAWN_SKIP_TEST_IF(UsesWire());
 
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -315,7 +317,7 @@ TEST_F(ShaderModuleValidationTest, MaximumShaderIOLocations) {
         // Build the test pipeline. Note that it's not possible with just ASSERT_DEVICE_ERROR
         // whether it is the vertex or fragment shader that fails. So instead we will look for the
         // string "failingVertex" or "failingFragment" in the error message.
-        utils::ComboRenderPipelineDescriptor pDesc;
+        dawn::utils::ComboRenderPipelineDescriptor pDesc;
         pDesc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
 
         const char* errorMatcher = nullptr;
@@ -323,15 +325,15 @@ TEST_F(ShaderModuleValidationTest, MaximumShaderIOLocations) {
             case wgpu::ShaderStage::Vertex: {
                 errorMatcher = "failingVertex";
                 pDesc.vertex.entryPoint = "failingVertex";
-                pDesc.vertex.module = utils::CreateShaderModule(device, (ioStruct + R"(
+                pDesc.vertex.module = dawn::utils::CreateShaderModule(device, (ioStruct + R"(
                     @vertex fn failingVertex() -> ShaderIO {
                         var shaderIO : ShaderIO;
                         shaderIO.pos = vec4f(0.0, 0.0, 0.0, 1.0);
                         return shaderIO;
                      }
                 )")
-                                                                            .c_str());
-                pDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+                                                                                  .c_str());
+                pDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
                     @fragment fn main() -> @location(0) vec4f {
                         return vec4f(0.0);
                     }
@@ -342,13 +344,13 @@ TEST_F(ShaderModuleValidationTest, MaximumShaderIOLocations) {
             case wgpu::ShaderStage::Fragment: {
                 errorMatcher = "failingFragment";
                 pDesc.cFragment.entryPoint = "failingFragment";
-                pDesc.cFragment.module = utils::CreateShaderModule(device, (ioStruct + R"(
+                pDesc.cFragment.module = dawn::utils::CreateShaderModule(device, (ioStruct + R"(
                     @fragment fn failingFragment(io : ShaderIO) -> @location(0) vec4f {
                         return vec4f(0.0);
                      }
                 )")
-                                                                               .c_str());
-                pDesc.vertex.module = utils::CreateShaderModule(device, R"(
+                                                                                     .c_str());
+                pDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
                     @vertex fn main() -> @builtin(position) vec4f {
                         return vec4f(0.0);
                     }
@@ -431,7 +433,7 @@ TEST_F(ShaderModuleValidationTest, MaximumInterStageShaderComponents) {
         // Build the test pipeline. Note that it's not possible with just ASSERT_DEVICE_ERROR
         // whether it is the vertex or fragment shader that fails. So instead we will look for the
         // string "failingVertex" or "failingFragment" in the error message.
-        utils::ComboRenderPipelineDescriptor pDesc;
+        dawn::utils::ComboRenderPipelineDescriptor pDesc;
         pDesc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
         if (usePointListAsPrimitiveType) {
             pDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -448,15 +450,15 @@ TEST_F(ShaderModuleValidationTest, MaximumInterStageShaderComponents) {
                     errorMatcher = "failingVertex";
                 }
                 pDesc.vertex.entryPoint = "failingVertex";
-                pDesc.vertex.module = utils::CreateShaderModule(device, (ioStruct + R"(
+                pDesc.vertex.module = dawn::utils::CreateShaderModule(device, (ioStruct + R"(
                     @vertex fn failingVertex() -> ShaderIO {
                         var shaderIO : ShaderIO;
                         shaderIO.pos = vec4f(0.0, 0.0, 0.0, 1.0);
                         return shaderIO;
                      }
                 )")
-                                                                            .c_str());
-                pDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+                                                                                  .c_str());
+                pDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
                     @fragment fn main() -> @location(0) vec4f {
                         return vec4f(0.0);
                     }
@@ -467,13 +469,13 @@ TEST_F(ShaderModuleValidationTest, MaximumInterStageShaderComponents) {
             case wgpu::ShaderStage::Fragment: {
                 errorMatcher = "failingFragment";
                 pDesc.cFragment.entryPoint = "failingFragment";
-                pDesc.cFragment.module = utils::CreateShaderModule(device, (ioStruct + R"(
+                pDesc.cFragment.module = dawn::utils::CreateShaderModule(device, (ioStruct + R"(
                     @fragment fn failingFragment(io : ShaderIO) -> @location(0) vec4f {
                         return vec4f(0.0);
                      }
                 )")
-                                                                               .c_str());
-                pDesc.vertex.module = utils::CreateShaderModule(device, R"(
+                                                                                     .c_str());
+                pDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
                     @vertex fn main() -> @builtin(position) vec4f {
                         return vec4f(0.0);
                     }
@@ -558,7 +560,7 @@ TEST_F(ShaderModuleValidationTest, MaximumInterStageShaderComponents) {
 
 // Test that numeric ID must be unique
 TEST_F(ShaderModuleValidationTest, OverridableConstantsNumericIDConflicts) {
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
 @id(1234) override c0: u32;
 @id(1234) override c1: u32;
 
@@ -583,7 +585,7 @@ TEST_F(ShaderModuleValidationTest, MaxBindingNumber) {
     desc.compute.entryPoint = "main";
 
     // kMaxBindingsPerBindGroup-1 is valid.
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(999) var s : sampler;
         @compute @workgroup_size(1) fn main() {
             _ = s;
@@ -592,7 +594,7 @@ TEST_F(ShaderModuleValidationTest, MaxBindingNumber) {
     device.CreateComputePipeline(&desc);
 
     // kMaxBindingsPerBindGroup is an error
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(1000) var s : sampler;
         @compute @workgroup_size(1) fn main() {
             _ = s;
@@ -604,19 +606,19 @@ TEST_F(ShaderModuleValidationTest, MaxBindingNumber) {
 // Test that missing decorations on shader IO or bindings causes a validation error.
 TEST_F(ShaderModuleValidationTest, MissingDecorations) {
     // Vertex input.
-    utils::CreateShaderModule(device, R"(
+    dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main(@location(0) a : vec4f) -> @builtin(position) vec4f {
             return vec4(1.0);
         }
     )");
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main(a : vec4f) -> @builtin(position) vec4f {
             return vec4(1.0);
         }
     )"));
 
     // Vertex output
-    utils::CreateShaderModule(device, R"(
+    dawn::utils::CreateShaderModule(device, R"(
         struct Output {
             @builtin(position) pos : vec4f,
             @location(0) a : f32,
@@ -626,7 +628,7 @@ TEST_F(ShaderModuleValidationTest, MissingDecorations) {
             return output;
         }
     )");
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         struct Output {
             @builtin(position) pos : vec4f,
             a : f32,
@@ -638,45 +640,45 @@ TEST_F(ShaderModuleValidationTest, MissingDecorations) {
     )"));
 
     // Fragment input
-    utils::CreateShaderModule(device, R"(
+    dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@location(0) a : vec4f) -> @location(0) f32 {
             return 1.0;
         }
     )");
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(a : vec4f) -> @location(0) f32 {
             return 1.0;
         }
     )"));
 
     // Fragment input
-    utils::CreateShaderModule(device, R"(
+    dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) f32 {
             return 1.0;
         }
     )");
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> f32 {
             return 1.0;
         }
     )"));
 
     // Binding decorations
-    utils::CreateShaderModule(device, R"(
+    dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var s : sampler;
         @fragment fn main() -> @location(0) f32 {
             _ = s;
             return 1.0;
         }
     )");
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         @binding(0) var s : sampler;
         @fragment fn main() -> @location(0) f32 {
             _ = s;
             return 1.0;
         }
     )"));
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         @group(0) var s : sampler;
         @fragment fn main() -> @location(0) f32 {
             _ = s;
@@ -687,7 +689,7 @@ TEST_F(ShaderModuleValidationTest, MissingDecorations) {
 
 // Test that WGSL extension used by enable directives must be allowed by WebGPU.
 TEST_F(ShaderModuleValidationTest, ExtensionMustBeAllowed) {
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
 enable f16;
 
 @compute @workgroup_size(1) fn main() {})"));

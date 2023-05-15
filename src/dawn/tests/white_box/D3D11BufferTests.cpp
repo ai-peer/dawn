@@ -217,7 +217,7 @@ TEST_P(D3D11BufferTests, WriteUniformBufferWithComputeShader) {
 
     // Fill the buffer with 0x11223344 with a compute shader
     {
-        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
             struct Buf {
                 data : array<vec4u, 25>
             }
@@ -236,10 +236,11 @@ TEST_P(D3D11BufferTests, WriteUniformBufferWithComputeShader) {
         pipelineDesc.compute.entryPoint = "main";
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
-        wgpu::BindGroup bindGroupA = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                          {
-                                                              {0, buffer, 0, bufferSize},
-                                                          });
+        wgpu::BindGroup bindGroupA =
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {
+                                           {0, buffer, 0, bufferSize},
+                                       });
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
@@ -263,7 +264,7 @@ TEST_P(D3D11BufferTests, WriteUniformBufferWithComputeShader) {
     {
         wgpu::Buffer newBuffer =
             CreateBuffer(bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
-        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
             struct Buf {
                 data : array<vec4u, 25>
             }
@@ -282,11 +283,12 @@ TEST_P(D3D11BufferTests, WriteUniformBufferWithComputeShader) {
         pipelineDesc.compute.entryPoint = "main";
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
-        wgpu::BindGroup bindGroupA = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                          {
-                                                              {0, buffer, 0, bufferSize},
-                                                              {1, newBuffer, 0, bufferSize},
-                                                          });
+        wgpu::BindGroup bindGroupA =
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {
+                                           {0, buffer, 0, bufferSize},
+                                           {1, newBuffer, 0, bufferSize},
+                                       });
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();

@@ -152,21 +152,21 @@ class PrimitiveTopologyTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        vertexBuffer = utils::CreateBufferFromData(device, kVertices, sizeof(kVertices),
-                                                   wgpu::BufferUsage::Vertex);
+        vertexBuffer = dawn::utils::CreateBufferFromData(device, kVertices, sizeof(kVertices),
+                                                         wgpu::BufferUsage::Vertex);
     }
 
     struct LocationSpec {
@@ -184,7 +184,7 @@ class PrimitiveTopologyTest : public DawnTest {
     // locations
     void DoTest(wgpu::PrimitiveTopology primitiveTopology,
                 const std::vector<LocationSpec>& locationSpecs) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
@@ -218,8 +218,8 @@ class PrimitiveTopologyTest : public DawnTest {
             for (size_t i = 0; i < locationSpec.count; ++i) {
                 // If this pixel is included, check that it is green. Otherwise, check that it is
                 // black
-                utils::RGBA8 color =
-                    locationSpec.include ? utils::RGBA8::kGreen : utils::RGBA8::kZero;
+                dawn::utils::RGBA8 color =
+                    locationSpec.include ? dawn::utils::RGBA8::kGreen : dawn::utils::RGBA8::kZero;
                 EXPECT_PIXEL_RGBA8_EQ(color, renderPass.color, locationSpec.locations[i].x,
                                       locationSpec.locations[i].y)
                     << "Expected (" << locationSpec.locations[i].x << ", "
@@ -228,7 +228,7 @@ class PrimitiveTopologyTest : public DawnTest {
         }
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::ShaderModule vsModule;
     wgpu::ShaderModule fsModule;
     wgpu::Buffer vertexBuffer;

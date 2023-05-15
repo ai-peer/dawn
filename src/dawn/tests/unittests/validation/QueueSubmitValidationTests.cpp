@@ -174,17 +174,17 @@ TEST_F(QueueSubmitValidationTest, SubmitInCreateRenderPipelineAsyncCallback) {
         queue.Submit(0, nullptr);
     };
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     device.CreateRenderPipelineAsync(&descriptor, callback, &callbackData);
@@ -210,7 +210,7 @@ TEST_F(QueueSubmitValidationTest, SubmitInCreateComputePipelineAsyncCallback) {
     };
 
     wgpu::ComputePipelineDescriptor descriptor;
-    descriptor.compute.module = utils::CreateShaderModule(device, R"(
+    descriptor.compute.module = dawn::utils::CreateShaderModule(device, R"(
             @compute @workgroup_size(1) fn main() {
             })");
     descriptor.compute.entryPoint = "main";
@@ -224,19 +224,19 @@ TEST_F(QueueSubmitValidationTest, SubmitInCreateComputePipelineAsyncCallback) {
 TEST_F(QueueSubmitValidationTest, SubmitWithUnusedComputeBuffer) {
     wgpu::Queue queue = device.GetQueue();
 
-    wgpu::BindGroupLayout emptyBGL = utils::MakeBindGroupLayout(device, {});
-    wgpu::BindGroup emptyBG = utils::MakeBindGroup(device, emptyBGL, {});
+    wgpu::BindGroupLayout emptyBGL = dawn::utils::MakeBindGroupLayout(device, {});
+    wgpu::BindGroup emptyBG = dawn::utils::MakeBindGroup(device, emptyBGL, {});
 
-    wgpu::BindGroupLayout testBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout testBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
 
     // In this test we check that BindGroup 1 is checked, the texture test will check
     // BindGroup 2. This is to provide coverage of for loops in validation code.
     wgpu::ComputePipelineDescriptor cpDesc;
-    cpDesc.layout = utils::MakePipelineLayout(device, {emptyBGL, testBGL});
+    cpDesc.layout = dawn::utils::MakePipelineLayout(device, {emptyBGL, testBGL});
     cpDesc.compute.entryPoint = "main";
     cpDesc.compute.module =
-        utils::CreateShaderModule(device, "@compute @workgroup_size(1) fn main() {}");
+        dawn::utils::CreateShaderModule(device, "@compute @workgroup_size(1) fn main() {}");
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&cpDesc);
 
     wgpu::BufferDescriptor bufDesc;
@@ -246,7 +246,7 @@ TEST_F(QueueSubmitValidationTest, SubmitWithUnusedComputeBuffer) {
     // Test that completely unused bindgroups still have their buffers checked.
     for (bool destroy : {true, false}) {
         wgpu::Buffer unusedBuffer = device.CreateBuffer(&bufDesc);
-        wgpu::BindGroup unusedBG = utils::MakeBindGroup(device, testBGL, {{0, unusedBuffer}});
+        wgpu::BindGroup unusedBG = dawn::utils::MakeBindGroup(device, testBGL, {{0, unusedBuffer}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
@@ -265,10 +265,10 @@ TEST_F(QueueSubmitValidationTest, SubmitWithUnusedComputeBuffer) {
     // Test that unused bindgroups because they were replaced still have their buffers checked.
     for (bool destroy : {true, false}) {
         wgpu::Buffer unusedBuffer = device.CreateBuffer(&bufDesc);
-        wgpu::BindGroup unusedBG = utils::MakeBindGroup(device, testBGL, {{0, unusedBuffer}});
+        wgpu::BindGroup unusedBG = dawn::utils::MakeBindGroup(device, testBGL, {{0, unusedBuffer}});
 
         wgpu::Buffer usedBuffer = device.CreateBuffer(&bufDesc);
-        wgpu::BindGroup usedBG = utils::MakeBindGroup(device, testBGL, {{0, unusedBuffer}});
+        wgpu::BindGroup usedBG = dawn::utils::MakeBindGroup(device, testBGL, {{0, unusedBuffer}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
@@ -294,17 +294,17 @@ TEST_F(QueueSubmitValidationTest, SubmitWithUnusedComputeBuffer) {
 TEST_F(QueueSubmitValidationTest, SubmitWithUnusedComputeTextures) {
     wgpu::Queue queue = device.GetQueue();
 
-    wgpu::BindGroupLayout emptyBGL = utils::MakeBindGroupLayout(device, {});
-    wgpu::BindGroup emptyBG = utils::MakeBindGroup(device, emptyBGL, {});
+    wgpu::BindGroupLayout emptyBGL = dawn::utils::MakeBindGroupLayout(device, {});
+    wgpu::BindGroup emptyBG = dawn::utils::MakeBindGroup(device, emptyBGL, {});
 
-    wgpu::BindGroupLayout testBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout testBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
 
     wgpu::ComputePipelineDescriptor cpDesc;
-    cpDesc.layout = utils::MakePipelineLayout(device, {emptyBGL, emptyBGL, testBGL});
+    cpDesc.layout = dawn::utils::MakePipelineLayout(device, {emptyBGL, emptyBGL, testBGL});
     cpDesc.compute.entryPoint = "main";
     cpDesc.compute.module =
-        utils::CreateShaderModule(device, "@compute @workgroup_size(1) fn main() {}");
+        dawn::utils::CreateShaderModule(device, "@compute @workgroup_size(1) fn main() {}");
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&cpDesc);
 
     wgpu::TextureDescriptor texDesc;
@@ -316,7 +316,7 @@ TEST_F(QueueSubmitValidationTest, SubmitWithUnusedComputeTextures) {
     for (bool destroy : {true, false}) {
         wgpu::Texture unusedTexture = device.CreateTexture(&texDesc);
         wgpu::BindGroup unusedBG =
-            utils::MakeBindGroup(device, testBGL, {{0, unusedTexture.CreateView()}});
+            dawn::utils::MakeBindGroup(device, testBGL, {{0, unusedTexture.CreateView()}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
@@ -336,11 +336,11 @@ TEST_F(QueueSubmitValidationTest, SubmitWithUnusedComputeTextures) {
     for (bool destroy : {true, false}) {
         wgpu::Texture unusedTexture = device.CreateTexture(&texDesc);
         wgpu::BindGroup unusedBG =
-            utils::MakeBindGroup(device, testBGL, {{0, unusedTexture.CreateView()}});
+            dawn::utils::MakeBindGroup(device, testBGL, {{0, unusedTexture.CreateView()}});
 
         wgpu::Texture usedTexture = device.CreateTexture(&texDesc);
         wgpu::BindGroup usedBG =
-            utils::MakeBindGroup(device, testBGL, {{0, unusedTexture.CreateView()}});
+            dawn::utils::MakeBindGroup(device, testBGL, {{0, unusedTexture.CreateView()}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();

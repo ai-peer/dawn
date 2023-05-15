@@ -24,20 +24,20 @@ class DrawIndirectTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleStrip;
@@ -50,7 +50,7 @@ class DrawIndirectTest : public DawnTest {
 
         pipeline = device.CreateRenderPipeline(&descriptor);
 
-        vertexBuffer = utils::CreateBufferFromData<float>(
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex,
             {// The bottom left triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f,
@@ -59,16 +59,16 @@ class DrawIndirectTest : public DawnTest {
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f});
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline pipeline;
     wgpu::Buffer vertexBuffer;
 
     void Test(std::initializer_list<uint32_t> bufferList,
               uint64_t indirectOffset,
-              utils::RGBA8 bottomLeftExpected,
-              utils::RGBA8 topRightExpected) {
-        wgpu::Buffer indirectBuffer =
-            utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect, bufferList);
+              dawn::utils::RGBA8 bottomLeftExpected,
+              dawn::utils::RGBA8 topRightExpected) {
+        wgpu::Buffer indirectBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
+            device, wgpu::BufferUsage::Indirect, bufferList);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
@@ -93,8 +93,8 @@ TEST_P(DrawIndirectTest, Uint32) {
     // the offsets that Tint/GLSL produces.
     DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with no indices.
     Test({0, 0, 0, 0}, 0, notFilled, notFilled);
@@ -114,8 +114,8 @@ TEST_P(DrawIndirectTest, IndirectOffset) {
     // the offsets that Tint/GLSL produces.
     DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
     // Test an offset draw call, with indirect buffer containing 2 calls:
     // 1) only the first 3 indices (bottom left triangle)

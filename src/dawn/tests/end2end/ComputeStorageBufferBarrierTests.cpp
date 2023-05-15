@@ -29,10 +29,10 @@ TEST_P(ComputeStorageBufferBarrierTests, AddIncrement) {
     std::vector<uint32_t> expected(kNumValues, 0x1234 * kIterations);
 
     uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
-    wgpu::Buffer buffer = utils::CreateBufferFromData(
+    wgpu::Buffer buffer = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             data : array<u32, 100>
         }
@@ -50,8 +50,8 @@ TEST_P(ComputeStorageBufferBarrierTests, AddIncrement) {
     pipelineDesc.compute.entryPoint = "main";
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
-    wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer, 0, bufferSize}});
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {{0, buffer, 0, bufferSize}});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
@@ -76,13 +76,13 @@ TEST_P(ComputeStorageBufferBarrierTests, AddPingPong) {
 
     uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
 
-    wgpu::Buffer bufferA = utils::CreateBufferFromData(
+    wgpu::Buffer bufferA = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
-    wgpu::Buffer bufferB = utils::CreateBufferFromData(
+    wgpu::Buffer bufferB = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             data : array<u32, 100>
         }
@@ -101,17 +101,17 @@ TEST_P(ComputeStorageBufferBarrierTests, AddPingPong) {
     pipelineDesc.compute.entryPoint = "main";
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
-    wgpu::BindGroup bindGroupA = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferA, 0, bufferSize},
-                                                          {1, bufferB, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupA = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferA, 0, bufferSize},
+                                                                {1, bufferB, 0, bufferSize},
+                                                            });
 
-    wgpu::BindGroup bindGroupB = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferB, 0, bufferSize},
-                                                          {1, bufferA, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupB = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferB, 0, bufferSize},
+                                                                {1, bufferA, 0, bufferSize},
+                                                            });
 
     wgpu::BindGroup bindGroups[2] = {bindGroupA, bindGroupB};
 
@@ -142,13 +142,13 @@ TEST_P(ComputeStorageBufferBarrierTests, StorageAndReadonlyStoragePingPongInOneP
 
     uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
 
-    wgpu::Buffer bufferA = utils::CreateBufferFromData(
+    wgpu::Buffer bufferA = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
-    wgpu::Buffer bufferB = utils::CreateBufferFromData(
+    wgpu::Buffer bufferB = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             data : array<u32, 100>
         }
@@ -167,17 +167,17 @@ TEST_P(ComputeStorageBufferBarrierTests, StorageAndReadonlyStoragePingPongInOneP
     pipelineDesc.compute.entryPoint = "main";
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
-    wgpu::BindGroup bindGroupA = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferA, 0, bufferSize},
-                                                          {1, bufferB, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupA = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferA, 0, bufferSize},
+                                                                {1, bufferB, 0, bufferSize},
+                                                            });
 
-    wgpu::BindGroup bindGroupB = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferB, 0, bufferSize},
-                                                          {1, bufferA, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupB = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferB, 0, bufferSize},
+                                                                {1, bufferA, 0, bufferSize},
+                                                            });
 
     wgpu::BindGroup bindGroups[2] = {bindGroupA, bindGroupB};
 
@@ -208,15 +208,15 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPong) {
 
     uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
 
-    wgpu::Buffer bufferA = utils::CreateBufferFromData(
+    wgpu::Buffer bufferA = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize,
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopySrc);
 
-    wgpu::Buffer bufferB = utils::CreateBufferFromData(
+    wgpu::Buffer bufferB = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize,
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             data : array<vec4u, 25>
         }
@@ -236,17 +236,17 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPong) {
     pipelineDesc.compute.entryPoint = "main";
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
-    wgpu::BindGroup bindGroupA = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferA, 0, bufferSize},
-                                                          {1, bufferB, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupA = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferA, 0, bufferSize},
+                                                                {1, bufferB, 0, bufferSize},
+                                                            });
 
-    wgpu::BindGroup bindGroupB = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferB, 0, bufferSize},
-                                                          {1, bufferA, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupB = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferB, 0, bufferSize},
+                                                                {1, bufferA, 0, bufferSize},
+                                                            });
 
     wgpu::BindGroup bindGroups[2] = {bindGroupA, bindGroupB};
 
@@ -276,15 +276,15 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPongInOnePass) {
 
     uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
 
-    wgpu::Buffer bufferA = utils::CreateBufferFromData(
+    wgpu::Buffer bufferA = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize,
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopySrc);
 
-    wgpu::Buffer bufferB = utils::CreateBufferFromData(
+    wgpu::Buffer bufferB = dawn::utils::CreateBufferFromData(
         device, data.data(), bufferSize,
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             data : array<vec4u, 25>
         }
@@ -304,17 +304,17 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPongInOnePass) {
     pipelineDesc.compute.entryPoint = "main";
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
-    wgpu::BindGroup bindGroupA = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferA, 0, bufferSize},
-                                                          {1, bufferB, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupA = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferA, 0, bufferSize},
+                                                                {1, bufferB, 0, bufferSize},
+                                                            });
 
-    wgpu::BindGroup bindGroupB = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                      {
-                                                          {0, bufferB, 0, bufferSize},
-                                                          {1, bufferA, 0, bufferSize},
-                                                      });
+    wgpu::BindGroup bindGroupB = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                            {
+                                                                {0, bufferB, 0, bufferSize},
+                                                                {1, bufferA, 0, bufferSize},
+                                                            });
 
     wgpu::BindGroup bindGroups[2] = {bindGroupA, bindGroupB};
 
@@ -342,7 +342,7 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPongInOnePass) {
 TEST_P(ComputeStorageBufferBarrierTests, IndirectBufferCorrectBarrier) {
     wgpu::ComputePipelineDescriptor step2PipelineDesc;
     step2PipelineDesc.compute.entryPoint = "main";
-    step2PipelineDesc.compute.module = utils::CreateShaderModule(device, R"(
+    step2PipelineDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             data : array<u32, 3>
         }
@@ -356,7 +356,7 @@ TEST_P(ComputeStorageBufferBarrierTests, IndirectBufferCorrectBarrier) {
 
     wgpu::ComputePipelineDescriptor step3PipelineDesc;
     step3PipelineDesc.compute.entryPoint = "main";
-    step3PipelineDesc.compute.module = utils::CreateShaderModule(device, R"(
+    step3PipelineDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct Buf {
             data : array<u32, 3>
         }
@@ -377,7 +377,7 @@ TEST_P(ComputeStorageBufferBarrierTests, IndirectBufferCorrectBarrier) {
     wgpu::ComputePipeline step3Pipeline = device.CreateComputePipeline(&step3PipelineDesc);
 
     //  1 - Initializing an indirect buffer with zeros.
-    wgpu::Buffer buf = utils::CreateBufferFromData<uint32_t>(
+    wgpu::Buffer buf = dawn::utils::CreateBufferFromData<uint32_t>(
         device, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Indirect, {0u, 0u, 0u});
 
     //  2 - Write ones into it with a compute shader.
@@ -385,17 +385,17 @@ TEST_P(ComputeStorageBufferBarrierTests, IndirectBufferCorrectBarrier) {
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
 
     wgpu::BindGroup step2Group =
-        utils::MakeBindGroup(device, step2Pipeline.GetBindGroupLayout(0), {{0, buf}});
+        dawn::utils::MakeBindGroup(device, step2Pipeline.GetBindGroupLayout(0), {{0, buf}});
 
     pass.SetPipeline(step2Pipeline);
     pass.SetBindGroup(0, step2Group);
     pass.DispatchWorkgroups(1);
 
     //  3 - Use the indirect buffer in a Dispatch while also reading its data.
-    wgpu::Buffer resultBuffer = utils::CreateBufferFromData<uint32_t>(
+    wgpu::Buffer resultBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
         device, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc, {0u});
-    wgpu::BindGroup step3Group = utils::MakeBindGroup(device, step3Pipeline.GetBindGroupLayout(0),
-                                                      {{0, buf}, {1, resultBuffer}});
+    wgpu::BindGroup step3Group = dawn::utils::MakeBindGroup(
+        device, step3Pipeline.GetBindGroupLayout(0), {{0, buf}, {1, resultBuffer}});
 
     pass.SetPipeline(step3Pipeline);
     pass.SetBindGroup(0, step3Group);

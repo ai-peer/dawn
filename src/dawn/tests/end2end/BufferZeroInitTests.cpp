@@ -106,7 +106,7 @@ class BufferZeroInitTest : public DawnTest {
             viewDescriptor.baseArrayLayer = arrayLayer;
             viewDescriptor.arrayLayerCount = 1u;
 
-            utils::ComboRenderPassDescriptor renderPassDescriptor(
+            dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
                 {texture.CreateView(&viewDescriptor)});
             renderPassDescriptor.cColorAttachments[0].clearValue = color;
             wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -121,7 +121,7 @@ class BufferZeroInitTest : public DawnTest {
 
     void TestBufferZeroInitInCopyTextureToBuffer(const BufferZeroInitInCopyT2BSpec& spec) {
         constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::R32Float;
-        ASSERT(utils::GetTexelBlockSizeInBytes(kTextureFormat) * spec.textureSize.width %
+        ASSERT(dawn::utils::GetTexelBlockSizeInBytes(kTextureFormat) * spec.textureSize.width %
                    kTextureBytesPerRowAlignment ==
                0);
 
@@ -130,14 +130,15 @@ class BufferZeroInitTest : public DawnTest {
             CreateAndInitializeTexture(spec.textureSize, kTextureFormat, kClearColor);
 
         const wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
 
-        const uint64_t bufferSize = spec.bufferOffset + spec.extraBytes +
-                                    utils::RequiredBytesInCopy(spec.bytesPerRow, spec.rowsPerImage,
-                                                               spec.textureSize, kTextureFormat);
+        const uint64_t bufferSize =
+            spec.bufferOffset + spec.extraBytes +
+            dawn::utils::RequiredBytesInCopy(spec.bytesPerRow, spec.rowsPerImage, spec.textureSize,
+                                             kTextureFormat);
         wgpu::Buffer buffer =
             CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
-        const wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+        const wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
             buffer, spec.bufferOffset, spec.bytesPerRow, spec.rowsPerImage);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -182,7 +183,7 @@ class BufferZeroInitTest : public DawnTest {
         wgpu::Texture outputTexture =
             CreateAndInitializeTexture({1u, 1u, 1u}, wgpu::TextureFormat::RGBA8Unorm);
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, pipeline.GetBindGroupLayout(0),
             {{0, buffer, bufferOffset, boundBufferSize}, {1u, outputTexture.CreateView()}});
 
@@ -199,7 +200,7 @@ class BufferZeroInitTest : public DawnTest {
         EXPECT_LAZY_CLEAR(0u, EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
                                                          expectedBufferData.size()));
 
-        constexpr utils::RGBA8 kExpectedColor = {0, 255, 0, 255};
+        constexpr dawn::utils::RGBA8 kExpectedColor = {0, 255, 0, 255};
         EXPECT_PIXEL_RGBA8_EQ(kExpectedColor, outputTexture, 0u, 0u);
     }
 
@@ -209,21 +210,22 @@ class BufferZeroInitTest : public DawnTest {
         wgpu::VertexFormat vertexFormat = wgpu::VertexFormat::Float32x4) {
         constexpr wgpu::TextureFormat kColorAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader);
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader);
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment
             fn main(@location(0) i_color : vec4f) -> @location(0) vec4f {
                 return i_color;
             })");
 
         ASSERT(vertexBufferCount <= 1u);
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
         descriptor.vertex.bufferCount = vertexBufferCount;
-        descriptor.cBuffers[0].arrayStride = Align(utils::VertexFormatSize(vertexFormat), 4);
+        descriptor.cBuffers[0].arrayStride =
+            dawn::Align(dawn::utils::VertexFormatSize(vertexFormat), 4);
         descriptor.cBuffers[0].attributeCount = 1;
         descriptor.cAttributes[0].format = vertexFormat;
         descriptor.cTargets[0].format = kColorAttachmentFormat;
@@ -243,7 +245,7 @@ class BufferZeroInitTest : public DawnTest {
         EXPECT_LAZY_CLEAR(0u, EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
                                                          expectedBufferData.size()));
 
-        const utils::RGBA8 kExpectedPixelValue = {0, 255, 0, 255};
+        const dawn::utils::RGBA8 kExpectedPixelValue = {0, 255, 0, 255};
         EXPECT_PIXEL_RGBA8_EQ(kExpectedPixelValue, colorAttachment, 0, 0);
     }
 
@@ -274,7 +276,7 @@ class BufferZeroInitTest : public DawnTest {
                                                wgpu::BufferUsage::CopyDst);
         wgpu::Texture colorAttachment =
             CreateAndInitializeTexture({1, 1, 1}, kColorAttachmentFormat);
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -321,7 +323,7 @@ class BufferZeroInitTest : public DawnTest {
 
         wgpu::Texture colorAttachment =
             CreateAndInitializeTexture({1, 1, 1}, kColorAttachmentFormat);
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -361,7 +363,7 @@ class BufferZeroInitTest : public DawnTest {
         // Clear the color attachment to green.
         wgpu::Texture colorAttachment =
             CreateAndInitializeTexture({1, 1, 1}, kColorAttachmentFormat, kClearColorGreen);
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
         renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
 
         const uint64_t bufferSize = kDrawIndirectSize + indirectBufferOffset;
@@ -399,12 +401,12 @@ class BufferZeroInitTest : public DawnTest {
             })",
                                         0 /* vertexBufferCount */);
         wgpu::Buffer indexBuffer =
-            utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0});
+            dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0});
 
         // Clear the color attachment to green.
         wgpu::Texture colorAttachment =
             CreateAndInitializeTexture({1, 1, 1}, kColorAttachmentFormat, kClearColorGreen);
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
         renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
 
         const uint64_t bufferSize = kDrawIndexedIndirectSize + indirectBufferOffset;
@@ -438,15 +440,15 @@ class BufferZeroInitTest : public DawnTest {
 
         wgpu::ComputePipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.layout = nullptr;
-        pipelineDescriptor.compute.module = utils::CreateShaderModule(device, computeShader);
+        pipelineDescriptor.compute.module = dawn::utils::CreateShaderModule(device, computeShader);
         pipelineDescriptor.compute.entryPoint = "main";
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDescriptor);
 
         // Clear the color of outputTexture to green.
         wgpu::Texture outputTexture =
             CreateAndInitializeTexture({1u, 1u, 1u}, kColorAttachmentFormat, kClearColorGreen);
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, outputTexture.CreateView()}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, outputTexture.CreateView()}});
 
         const uint64_t bufferSize = kDispatchIndirectSize + indirectBufferOffset;
         wgpu::Buffer indirectBuffer =
@@ -529,7 +531,7 @@ TEST_P(BufferZeroInitTest, CopyBufferToBufferSource) {
         {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}};
 
     wgpu::Buffer dstBuffer =
-        utils::CreateBufferFromData(device, kInitialData.data(), kBufferSize, kBufferUsage);
+        dawn::utils::CreateBufferFromData(device, kInitialData.data(), kBufferSize, kBufferUsage);
 
     constexpr std::array<uint32_t, kBufferSize / sizeof(uint32_t)> kExpectedData = {{0, 0, 0, 0}};
 
@@ -609,7 +611,7 @@ TEST_P(BufferZeroInitTest, CopyBufferToBufferDestination) {
     const std::array<uint8_t, kBufferSize> kInitialData = {
         {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}};
     wgpu::Buffer srcBuffer =
-        utils::CreateBufferFromData(device, kInitialData.data(), kBufferSize, kBufferUsage);
+        dawn::utils::CreateBufferFromData(device, kInitialData.data(), kBufferSize, kBufferUsage);
 
     // Full copy from the source buffer doesn't need lazy initialization at all.
     {
@@ -819,7 +821,7 @@ TEST_P(BufferZeroInitTest, MappedAtCreation) {
         buffer.Unmap();
 
         // Update data from the GPU side.
-        wgpu::Buffer uploadBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer uploadBuffer = dawn::utils::CreateBufferFromData(
             device, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst,
             {kExpectedFinalData[0], kExpectedFinalData[1]});
 
@@ -876,10 +878,10 @@ TEST_P(BufferZeroInitTest, CopyBufferToTexture) {
 
     wgpu::Texture texture = CreateAndInitializeTexture(kTextureSize, kTextureFormat);
     const wgpu::ImageCopyTexture imageCopyTexture =
-        utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+        dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
 
     const uint32_t rowsPerImage = kTextureSize.height;
-    const uint32_t requiredBufferSizeForCopy = utils::RequiredBytesInCopy(
+    const uint32_t requiredBufferSizeForCopy = dawn::utils::RequiredBytesInCopy(
         kTextureBytesPerRowAlignment, rowsPerImage, kTextureSize, kTextureFormat);
 
     constexpr wgpu::BufferUsage kBufferUsage =
@@ -890,7 +892,7 @@ TEST_P(BufferZeroInitTest, CopyBufferToTexture) {
         constexpr uint64_t kOffset = 0;
         const uint32_t totalBufferSize = requiredBufferSizeForCopy + kOffset;
         wgpu::Buffer buffer = CreateBuffer(totalBufferSize, kBufferUsage);
-        const wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+        const wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
             buffer, kOffset, kTextureBytesPerRowAlignment, kTextureSize.height);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -908,7 +910,7 @@ TEST_P(BufferZeroInitTest, CopyBufferToTexture) {
         constexpr uint64_t kOffset = 8u;
         const uint32_t totalBufferSize = requiredBufferSizeForCopy + kOffset;
         wgpu::Buffer buffer = CreateBuffer(totalBufferSize, kBufferUsage);
-        const wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+        const wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
             buffer, kOffset, kTextureBytesPerRowAlignment, kTextureSize.height);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -994,7 +996,7 @@ TEST_P(BufferZeroInitTest, BoundAsUniformBuffer) {
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsBackendValidationEnabled());
 
     constexpr uint32_t kBoundBufferSize = 16u;
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct UBO {
             value : vec4u
         }
@@ -1033,7 +1035,7 @@ TEST_P(BufferZeroInitTest, BoundAsReadonlyStorageBuffer) {
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsBackendValidationEnabled());
 
     constexpr uint32_t kBoundBufferSize = 16u;
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct SSBO {
             value : vec4u
         }
@@ -1072,7 +1074,7 @@ TEST_P(BufferZeroInitTest, BoundAsStorageBuffer) {
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsBackendValidationEnabled());
 
     constexpr uint32_t kBoundBufferSize = 32u;
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct SSBO {
             value : array<vec4u, 2>
         }
@@ -1166,20 +1168,20 @@ TEST_P(BufferZeroInitTest, PaddingInitialized) {
 
         // Create an index buffer the indexes off the end of the vertex buffer.
         wgpu::Buffer indexBuffer =
-            utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {1});
+            dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {1});
 
-        const uint32_t vertexFormatSize = utils::VertexFormatSize(vertexFormat);
+        const uint32_t vertexFormatSize = dawn::utils::VertexFormatSize(vertexFormat);
 
         // Create an 8-bit texture to use to initialize buffer contents.
         wgpu::TextureDescriptor initTextureDesc = {};
         initTextureDesc.size = {vertexFormatSize + 4, 1, 1};
         initTextureDesc.format = wgpu::TextureFormat::R8Unorm;
         initTextureDesc.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
-        wgpu::ImageCopyTexture zeroTextureSrc =
-            utils::CreateImageCopyTexture(device.CreateTexture(&initTextureDesc), 0, {0, 0, 0});
+        wgpu::ImageCopyTexture zeroTextureSrc = dawn::utils::CreateImageCopyTexture(
+            device.CreateTexture(&initTextureDesc), 0, {0, 0, 0});
         {
             wgpu::TextureDataLayout layout =
-                utils::CreateTextureDataLayout(0, wgpu::kCopyStrideUndefined);
+                dawn::utils::CreateTextureDataLayout(0, wgpu::kCopyStrideUndefined);
             std::vector<uint8_t> data(initTextureDesc.size.width);
             queue.WriteTexture(&zeroTextureSrc, data.data(), data.size(), &layout,
                                &initTextureDesc.size);
@@ -1202,8 +1204,8 @@ TEST_P(BufferZeroInitTest, PaddingInitialized) {
                 // it does not require 4-byte alignment.
                 {
                     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-                    wgpu::ImageCopyBuffer dst =
-                        utils::CreateImageCopyBuffer(vertexBuffer, 0, wgpu::kCopyStrideUndefined);
+                    wgpu::ImageCopyBuffer dst = dawn::utils::CreateImageCopyBuffer(
+                        vertexBuffer, 0, wgpu::kCopyStrideUndefined);
                     wgpu::Extent3D extent = {vertexBufferSize, 1, 1};
                     encoder.CopyTextureToBuffer(&zeroTextureSrc, &dst, &extent);
 
@@ -1215,7 +1217,7 @@ TEST_P(BufferZeroInitTest, PaddingInitialized) {
 
                 wgpu::Texture colorAttachment =
                     CreateAndInitializeTexture({1, 1, 1}, kColorAttachmentFormat);
-                utils::ComboRenderPassDescriptor renderPassDescriptor(
+                dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
                     {colorAttachment.CreateView()});
 
                 wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -1231,7 +1233,7 @@ TEST_P(BufferZeroInitTest, PaddingInitialized) {
 
                 EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
 
-                constexpr utils::RGBA8 kExpectedPixelValue = {0, 255, 0, 255};
+                constexpr dawn::utils::RGBA8 kExpectedPixelValue = {0, 255, 0, 255};
                 EXPECT_PIXEL_RGBA8_EQ(kExpectedPixelValue, colorAttachment, 0, 0);
             }
         }
