@@ -46,6 +46,30 @@
       },
       "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a677498_396d2b98",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T23:59:42Z",
+      "side": 0,
+      "message": "maybe we should have a separate slow_tests.txt? then we don\u0027t store it as a Result at all and don\u0027t need to deal with conflicts\n\nthen we manually parse the list in the python harness and apply whatever timeout scalar we\u0027d like",
+      "parentUuid": "30e3ee7d_d40fa963",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 72
+      },
+      "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
