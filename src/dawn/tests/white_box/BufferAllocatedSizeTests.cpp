@@ -54,7 +54,7 @@ TEST_P(BufferAllocatedSizeTests, UniformUsage) {
         const uint32_t bufferSize = kMinBufferSize;
         wgpu::Buffer buffer = CreateBuffer(wgpu::BufferUsage::Uniform, bufferSize);
         EXPECT_EQ(dawn::native::GetAllocatedSizeForTesting(buffer.Get()),
-                  Align(bufferSize, requiredBufferAlignment));
+                  dawn::Align(bufferSize, requiredBufferAlignment));
     }
 
     // Test uniform usage and with size just above requiredBufferAlignment allocates to the next
@@ -64,7 +64,7 @@ TEST_P(BufferAllocatedSizeTests, UniformUsage) {
         wgpu::Buffer buffer =
             CreateBuffer(wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage, bufferSize);
         EXPECT_EQ(dawn::native::GetAllocatedSizeForTesting(buffer.Get()),
-                  Align(bufferSize, requiredBufferAlignment));
+                  dawn::Align(bufferSize, requiredBufferAlignment));
     }
 
     // Test uniform usage and another usage
@@ -73,7 +73,7 @@ TEST_P(BufferAllocatedSizeTests, UniformUsage) {
         wgpu::Buffer buffer =
             CreateBuffer(wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage, bufferSize);
         EXPECT_EQ(dawn::native::GetAllocatedSizeForTesting(buffer.Get()),
-                  Align(bufferSize, requiredBufferAlignment));
+                  dawn::Align(bufferSize, requiredBufferAlignment));
     }
 }
 

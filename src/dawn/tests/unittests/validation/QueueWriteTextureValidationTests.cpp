@@ -65,7 +65,7 @@ class QueueWriteTextureValidationTest : public ValidationTest {
         textureDataLayout.rowsPerImage = dataRowsPerImage;
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, texLevel, texOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(texture, texLevel, texOrigin, aspect);
 
         queue.WriteTexture(&imageCopyTexture, data.data(), dataSize, &textureDataLayout, &size);
     }
@@ -78,7 +78,7 @@ class QueueWriteTextureValidationTest : public ValidationTest {
                                        wgpu::Extent3D extent3D) {
         // Check the minimal valid dataSize.
         uint64_t dataSize =
-            utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, extent3D, textureFormat);
+            dawn::utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, extent3D, textureFormat);
         TestWriteTexture(dataSize, 0, bytesPerRow, rowsPerImage, texture, 0, origin, extent3D);
 
         // Check dataSize was indeed minimal.
@@ -93,7 +93,7 @@ class QueueWriteTextureValidationTest : public ValidationTest {
 // Test the success case for WriteTexture
 TEST_F(QueueWriteTextureValidationTest, Success) {
     const uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination = Create2DTexture({16, 16, 4}, 5, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
 
@@ -154,7 +154,7 @@ TEST_F(QueueWriteTextureValidationTest, Success) {
 // Test OOB conditions on the data
 TEST_F(QueueWriteTextureValidationTest, OutOfBoundsOnData) {
     const uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination = Create2DTexture({16, 16, 1}, 5, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
 
@@ -166,15 +166,15 @@ TEST_F(QueueWriteTextureValidationTest, OutOfBoundsOnData) {
     ASSERT_DEVICE_ERROR(
         TestWriteTexture(dataSize, 4, 256, 4, destination, 0, {0, 0, 0}, {4, 4, 1}));
 
-    // OOB on the data because utils::RequiredBytesInCopy overflows
+    // OOB on the data because dawn::utils::RequiredBytesInCopy overflows
     ASSERT_DEVICE_ERROR(
         TestWriteTexture(dataSize, 0, 512, 3, destination, 0, {0, 0, 0}, {4, 3, 1}));
 
     // Not OOB on the data although bytes per row * height overflows
-    // but utils::RequiredBytesInCopy * depth does not overflow
+    // but dawn::utils::RequiredBytesInCopy * depth does not overflow
     {
         uint32_t sourceDataSize =
-            utils::RequiredBytesInCopy(256, 0, {7, 3, 1}, wgpu::TextureFormat::RGBA8Unorm);
+            dawn::utils::RequiredBytesInCopy(256, 0, {7, 3, 1}, wgpu::TextureFormat::RGBA8Unorm);
         ASSERT_TRUE(256 * 3 > sourceDataSize) << "bytes per row * height should overflow data";
 
         TestWriteTexture(sourceDataSize, 0, 256, 3, destination, 0, {0, 0, 0}, {7, 3, 1});
@@ -184,7 +184,7 @@ TEST_F(QueueWriteTextureValidationTest, OutOfBoundsOnData) {
 // Test OOB conditions on the texture
 TEST_F(QueueWriteTextureValidationTest, OutOfBoundsOnTexture) {
     const uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination = Create2DTexture({16, 16, 2}, 5, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
 
@@ -210,7 +210,7 @@ TEST_F(QueueWriteTextureValidationTest, OutOfBoundsOnTexture) {
 // Test that we force Depth=1 on writes to 2D textures
 TEST_F(QueueWriteTextureValidationTest, DepthConstraintFor2DTextures) {
     const uint64_t dataSize =
-        utils::RequiredBytesInCopy(0, 0, {0, 0, 2}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(0, 0, {0, 0, 2}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination = Create2DTexture({16, 16, 1}, 5, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
 
@@ -221,7 +221,7 @@ TEST_F(QueueWriteTextureValidationTest, DepthConstraintFor2DTextures) {
 // Test WriteTexture with incorrect texture usage
 TEST_F(QueueWriteTextureValidationTest, IncorrectUsage) {
     const uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture sampled = Create2DTexture({16, 16, 1}, 5, wgpu::TextureFormat::RGBA8Unorm,
                                             wgpu::TextureUsage::TextureBinding);
 
@@ -280,7 +280,7 @@ TEST_F(QueueWriteTextureValidationTest, BytesPerRowConstraints) {
 // Test that if rowsPerImage is greater than 0, it must be at least copy height.
 TEST_F(QueueWriteTextureValidationTest, RowsPerImageConstraints) {
     uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 5, {4, 4, 2}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 5, {4, 4, 2}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination = Create2DTexture({16, 16, 2}, 1, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
 
@@ -305,7 +305,7 @@ TEST_F(QueueWriteTextureValidationTest, RowsPerImageConstraints) {
 // Test WriteTexture with data offset
 TEST_F(QueueWriteTextureValidationTest, DataOffset) {
     uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination = Create2DTexture({16, 16, 1}, 5, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
 
@@ -321,7 +321,7 @@ TEST_F(QueueWriteTextureValidationTest, DataOffset) {
 // Test multisampled textures can be used in WriteTexture.
 TEST_F(QueueWriteTextureValidationTest, WriteToMultisampledTexture) {
     uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 0, {2, 2, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 0, {2, 2, 1}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination =
         Create2DTexture({2, 2, 1}, 1, wgpu::TextureFormat::RGBA8Unorm,
                         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment, 4);
@@ -333,7 +333,7 @@ TEST_F(QueueWriteTextureValidationTest, WriteToMultisampledTexture) {
 // Test that WriteTexture cannot be run with a destroyed texture.
 TEST_F(QueueWriteTextureValidationTest, DestroyedTexture) {
     const uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 4, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 4, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::Texture destination = Create2DTexture({16, 16, 4}, 5, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
     destination.Destroy();
@@ -348,13 +348,13 @@ TEST_F(QueueWriteTextureValidationTest, TextureInErrorState) {
     errorTextureDescriptor.size.depthOrArrayLayers = 0;
     ASSERT_DEVICE_ERROR(wgpu::Texture errorTexture = device.CreateTexture(&errorTextureDescriptor));
     wgpu::ImageCopyTexture errorImageCopyTexture =
-        utils::CreateImageCopyTexture(errorTexture, 0, {0, 0, 0});
+        dawn::utils::CreateImageCopyTexture(errorTexture, 0, {0, 0, 0});
 
     wgpu::Extent3D extent3D = {0, 0, 0};
 
     {
         std::vector<uint8_t> data(4);
-        wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(0, 0, 0);
+        wgpu::TextureDataLayout textureDataLayout = dawn::utils::CreateTextureDataLayout(0, 0, 0);
 
         ASSERT_DEVICE_ERROR(queue.WriteTexture(&errorImageCopyTexture, data.data(), 4,
                                                &textureDataLayout, &extent3D));
@@ -398,7 +398,7 @@ TEST_F(QueueWriteTextureValidationTest, TextureWriteDataSizeLastRowComputation) 
     {
         for (wgpu::TextureFormat format : kFormats) {
             uint32_t validDataSize =
-                utils::RequiredBytesInCopy(kBytesPerRow, 0, {kWidth, kHeight, 1}, format);
+                dawn::utils::RequiredBytesInCopy(kBytesPerRow, 0, {kWidth, kHeight, 1}, format);
             wgpu::Texture destination =
                 Create2DTexture({kWidth, kHeight, 1}, 1, format, wgpu::TextureUsage::CopyDst);
 
@@ -422,7 +422,7 @@ TEST_F(QueueWriteTextureValidationTest, TextureWriteDataSizeLastRowComputation) 
 // Test write from data to mip map of non square texture
 TEST_F(QueueWriteTextureValidationTest, WriteToMipmapOfNonSquareTexture) {
     uint64_t dataSize =
-        utils::RequiredBytesInCopy(256, 0, {4, 2, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        dawn::utils::RequiredBytesInCopy(256, 0, {4, 2, 1}, wgpu::TextureFormat::RGBA8Unorm);
     uint32_t maxMipmapLevel = 3;
     wgpu::Texture destination = Create2DTexture(
         {4, 2, 1}, maxMipmapLevel, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
@@ -472,8 +472,8 @@ TEST_F(QueueWriteTextureValidationTest, WriteToMultipleArrayLayers) {
 // Test it is invalid to write into a depth texture.
 TEST_F(QueueWriteTextureValidationTest, WriteToDepthAspect) {
     uint32_t bytesPerRow = sizeof(float) * 4;
-    const uint64_t dataSize =
-        utils::RequiredBytesInCopy(bytesPerRow, 0, {4, 4, 1}, wgpu::TextureFormat::Depth32Float);
+    const uint64_t dataSize = dawn::utils::RequiredBytesInCopy(bytesPerRow, 0, {4, 4, 1},
+                                                               wgpu::TextureFormat::Depth32Float);
 
     // Invalid to write into depth32float
     {
@@ -504,7 +504,7 @@ TEST_F(QueueWriteTextureValidationTest, WriteToDepthAspect) {
 TEST_F(QueueWriteTextureValidationTest, WriteToStencilAspect) {
     uint32_t bytesPerRow = 4;
     const uint64_t dataSize =
-        utils::RequiredBytesInCopy(bytesPerRow, 0, {4, 4, 1}, wgpu::TextureFormat::R8Uint);
+        dawn::utils::RequiredBytesInCopy(bytesPerRow, 0, {4, 4, 1}, wgpu::TextureFormat::R8Uint);
 
     // It is valid to write into the stencil aspect of depth24plus-stencil8
     {
@@ -575,21 +575,21 @@ class WriteTextureTest_CompressedTextureFormats : public QueueWriteTextureValida
 
 // Tests to verify that data offset may not be a multiple of the compressed texture block size
 TEST_F(WriteTextureTest_CompressedTextureFormats, DataOffset) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::Texture texture = Create2DTexture(format);
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
 
         // Valid if aligned.
         {
-            uint32_t kAlignedOffset = utils::GetTexelBlockSizeInBytes(format);
+            uint32_t kAlignedOffset = dawn::utils::GetTexelBlockSizeInBytes(format);
             TestWriteTexture(1024, kAlignedOffset, 256, 4, texture, 0, {0, 0, 0},
                              {blockWidth, blockHeight, 1});
         }
 
         // Still valid if not aligned.
         {
-            uint32_t kUnalignedOffset = utils::GetTexelBlockSizeInBytes(format) - 1;
+            uint32_t kUnalignedOffset = dawn::utils::GetTexelBlockSizeInBytes(format) - 1;
             TestWriteTexture(1024, kUnalignedOffset, 256, 4, texture, 0, {0, 0, 0},
                              {blockWidth, blockHeight, 1});
         }
@@ -603,10 +603,10 @@ TEST_F(WriteTextureTest_CompressedTextureFormats, BytesPerRow) {
     // Used to compute test width and height.
     constexpr uint32_t kTestBytesPerRow = 320;
 
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
-        uint32_t blockByteSize = utils::GetTexelBlockSizeInBytes(format);
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockByteSize = dawn::utils::GetTexelBlockSizeInBytes(format);
         uint32_t testWidth = kTestBytesPerRow * blockWidth / blockByteSize;
         uint32_t testHeight = kTestBytesPerRow * blockHeight / blockByteSize;
         wgpu::Texture texture = Create2DTexture(format, 1, testWidth, testHeight);
@@ -641,10 +641,10 @@ TEST_F(WriteTextureTest_CompressedTextureFormats, BytesPerRow) {
 
 // rowsPerImage must be >= heightInBlocks.
 TEST_F(WriteTextureTest_CompressedTextureFormats, RowsPerImage) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::Texture texture = Create2DTexture(format);
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
 
         // Valid usages of rowsPerImage in WriteTexture with compressed texture formats.
         {
@@ -670,11 +670,11 @@ TEST_F(WriteTextureTest_CompressedTextureFormats, RowsPerImage) {
 // Tests to verify that ImageOffset.x must be a multiple of the compressed texture block width
 // and ImageOffset.y must be a multiple of the compressed texture block height
 TEST_F(WriteTextureTest_CompressedTextureFormats, ImageOffset) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::Texture texture = Create2DTexture(format);
         wgpu::Texture texture2 = Create2DTexture(format);
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
 
         wgpu::Origin3D smallestValidOrigin3D = {blockWidth, blockHeight, 0};
 
@@ -712,9 +712,9 @@ TEST_F(WriteTextureTest_CompressedTextureFormats, ImageExtent) {
     // the edges of the mipmaps.
     constexpr uint32_t kBlockPerDim = 13;
 
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
         uint32_t testWidth = blockWidth * kBlockPerDim;
         uint32_t testHeight = blockHeight * kBlockPerDim;
         wgpu::Texture texture = Create2DTexture(format, kMipmapLevels, testWidth, testHeight);
@@ -759,9 +759,9 @@ TEST_F(WriteTextureTest_CompressedTextureFormats, ImageExtent) {
 TEST_F(WriteTextureTest_CompressedTextureFormats, WriteToMultipleArrayLayers) {
     constexpr uint32_t kWidthMultiplier = 3;
     constexpr uint32_t kHeightMultiplier = 4;
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
         uint32_t testWidth = kWidthMultiplier * blockWidth;
         uint32_t testHeight = kHeightMultiplier * blockHeight;
         wgpu::Texture texture = QueueWriteTextureValidationTest::Create2DTexture(

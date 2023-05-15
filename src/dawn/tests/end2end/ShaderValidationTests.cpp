@@ -27,7 +27,7 @@
 class WorkgroupSizeValidationTest : public DawnTest {
   public:
     wgpu::ShaderModule SetUpShaderWithValidDefaultValueConstants() {
-        return utils::CreateShaderModule(device, R"(
+        return dawn::utils::CreateShaderModule(device, R"(
 override x: u32 = 1u;
 override y: u32 = 1u;
 override z: u32 = 1u;
@@ -38,7 +38,7 @@ override z: u32 = 1u;
     }
 
     wgpu::ShaderModule SetUpShaderWithOutOfLimitsDefaultValueConstants() {
-        return utils::CreateShaderModule(device, R"(
+        return dawn::utils::CreateShaderModule(device, R"(
 override x: u32 = 1u;
 override y: u32 = 1u;
 override z: u32 = 9999u;
@@ -49,7 +49,7 @@ override z: u32 = 9999u;
     }
 
     wgpu::ShaderModule SetUpShaderWithUninitializedConstants() {
-        return utils::CreateShaderModule(device, R"(
+        return dawn::utils::CreateShaderModule(device, R"(
 override x: u32;
 override y: u32;
 override z: u32;
@@ -60,7 +60,7 @@ override z: u32;
     }
 
     wgpu::ShaderModule SetUpShaderWithPartialConstants() {
-        return utils::CreateShaderModule(device, R"(
+        return dawn::utils::CreateShaderModule(device, R"(
 override x: u32;
 
 @compute @workgroup_size(x, 1, 1) fn main() {
@@ -124,7 +124,7 @@ TEST_P(WorkgroupSizeValidationTest, WithFixedValues) {
 
         wgpu::ComputePipelineDescriptor desc;
         desc.compute.entryPoint = "main";
-        desc.compute.module = utils::CreateShaderModule(device, ss.str().c_str());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, ss.str().c_str());
 
         if (success) {
             device.CreateComputePipeline(&desc);
@@ -180,7 +180,7 @@ TEST_P(WorkgroupSizeValidationTest, WithFixedValuesStorageSizeLimits) {
 
         wgpu::ComputePipelineDescriptor desc;
         desc.compute.entryPoint = "main";
-        desc.compute.module = utils::CreateShaderModule(device, ss.str().c_str());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, ss.str().c_str());
 
         if (success) {
             device.CreateComputePipeline(&desc);
@@ -359,7 +359,7 @@ TEST_P(WorkgroupSizeValidationTest, ValidationAfterOverrideStorageSize) {
 
         wgpu::ComputePipelineDescriptor desc;
         desc.compute.entryPoint = "main";
-        desc.compute.module = utils::CreateShaderModule(device, ss.str().c_str());
+        desc.compute.module = dawn::utils::CreateShaderModule(device, ss.str().c_str());
         desc.compute.constants = constants.data();
         desc.compute.constantCount = constants.size();
 

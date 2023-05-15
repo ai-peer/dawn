@@ -97,7 +97,7 @@ struct RefTrackerTraits {
 
 constexpr RefTracker RefTrackerTraits::kNullValue;
 
-using Ref = RefBase<RefTracker, RefTrackerTraits>;
+using Ref = dawn::RefBase<RefTracker, RefTrackerTraits>;
 }  // namespace
 
 TEST(RefBase, Acquire) {

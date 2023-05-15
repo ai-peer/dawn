@@ -25,15 +25,16 @@ class ShaderTests : public DawnTest {
     wgpu::Buffer CreateBuffer(const uint32_t count) {
         std::vector<uint32_t> data(count, 0);
         uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
-        return utils::CreateBufferFromData(device, data.data(), bufferSize,
-                                           wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
+        return dawn::utils::CreateBufferFromData(
+            device, data.data(), bufferSize,
+            wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
     }
     wgpu::ComputePipeline CreateComputePipeline(
         const std::string& shader,
         const char* entryPoint,
         const std::vector<wgpu::ConstantEntry>* constants = nullptr) {
         wgpu::ComputePipelineDescriptor csDesc;
-        csDesc.compute.module = utils::CreateShaderModule(device, shader.c_str());
+        csDesc.compute.module = dawn::utils::CreateShaderModule(device, shader.c_str());
         csDesc.compute.entryPoint = entryPoint;
         if (constants) {
             csDesc.compute.constants = constants->data();
@@ -43,7 +44,7 @@ class ShaderTests : public DawnTest {
     }
 };
 
-// Test that log2 is being properly calculated, base on crbug.com/1046622
+// Test that dawn::Log2 is being properly calculated, base on crbug.com/1046622
 TEST_P(ShaderTests, ComputeLog2) {
     uint32_t const kSteps = 19;
     std::vector<uint32_t> expected{0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 32};
@@ -59,31 +60,31 @@ struct Buf {
 @compute @workgroup_size(1) fn main() {
     let factor : f32 = 1.0001;
 
-    buf.data[0] = u32(log2(1.0 * factor));
-    buf.data[1] = u32(log2(2.0 * factor));
-    buf.data[2] = u32(log2(3.0 * factor));
-    buf.data[3] = u32(log2(4.0 * factor));
-    buf.data[4] = u32(log2(7.0 * factor));
-    buf.data[5] = u32(log2(8.0 * factor));
-    buf.data[6] = u32(log2(15.0 * factor));
-    buf.data[7] = u32(log2(16.0 * factor));
-    buf.data[8] = u32(log2(31.0 * factor));
-    buf.data[9] = u32(log2(32.0 * factor));
-    buf.data[10] = u32(log2(63.0 * factor));
-    buf.data[11] = u32(log2(64.0 * factor));
-    buf.data[12] = u32(log2(127.0 * factor));
-    buf.data[13] = u32(log2(128.0 * factor));
-    buf.data[14] = u32(log2(255.0 * factor));
-    buf.data[15] = u32(log2(256.0 * factor));
-    buf.data[16] = u32(log2(511.0 * factor));
-    buf.data[17] = u32(log2(512.0 * factor));
-    buf.data[18] = u32(log2(4294967295.0 * factor));
+    buf.data[0] = u32(dawn::Log2(1.0 * factor));
+    buf.data[1] = u32(dawn::Log2(2.0 * factor));
+    buf.data[2] = u32(dawn::Log2(3.0 * factor));
+    buf.data[3] = u32(dawn::Log2(4.0 * factor));
+    buf.data[4] = u32(dawn::Log2(7.0 * factor));
+    buf.data[5] = u32(dawn::Log2(8.0 * factor));
+    buf.data[6] = u32(dawn::Log2(15.0 * factor));
+    buf.data[7] = u32(dawn::Log2(16.0 * factor));
+    buf.data[8] = u32(dawn::Log2(31.0 * factor));
+    buf.data[9] = u32(dawn::Log2(32.0 * factor));
+    buf.data[10] = u32(dawn::Log2(63.0 * factor));
+    buf.data[11] = u32(dawn::Log2(64.0 * factor));
+    buf.data[12] = u32(dawn::Log2(127.0 * factor));
+    buf.data[13] = u32(dawn::Log2(128.0 * factor));
+    buf.data[14] = u32(dawn::Log2(255.0 * factor));
+    buf.data[15] = u32(dawn::Log2(256.0 * factor));
+    buf.data[16] = u32(dawn::Log2(511.0 * factor));
+    buf.data[17] = u32(dawn::Log2(512.0 * factor));
+    buf.data[18] = u32(dawn::Log2(4294967295.0 * factor));
 })";
 
     wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main");
 
     wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
 
     wgpu::CommandBuffer commands;
     {
@@ -108,7 +109,7 @@ TEST_P(ShaderTests, BadWGSL) {
     std::string shader = R"(
 I am an invalid shader and should never pass validation!
 })";
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader.c_str()));
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, shader.c_str()));
 }
 
 // Tests that shaders using non-struct function parameters and return values for shader stage I/O
@@ -123,16 +124,16 @@ fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
         vec2f( 0.0, -1.0));
     return vec4f(pos[VertexIndex], 0.0, 1.0);
 })";
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
     std::string fragmentShader = R"(
 @fragment
 fn main(@builtin(position) fragCoord : vec4f) -> @location(0) vec4f {
     return vec4f(fragCoord.xy, 0.0, 1.0);
 })";
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
@@ -159,16 +160,16 @@ fn main(input : VertexIn) -> VertexOut {
     output.color = input.color;
     return output;
 })";
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
     std::string fragmentShader = R"(
 @fragment
 fn main(@location(0) color : vec4f) -> @location(0) vec4f {
     return color;
 })";
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.vertex.bufferCount = 1;
@@ -202,7 +203,7 @@ fn main(input : VertexIn) -> VertexOut {
     output.color = input.color;
     return output;
 })";
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
     std::string fragmentShader = R"(
 struct FragmentIn {
@@ -214,9 +215,9 @@ struct FragmentIn {
 fn main(input : FragmentIn) -> @location(0) vec4f {
     return input.color * input.fragCoord;
 })";
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.vertex.bufferCount = 1;
@@ -249,7 +250,7 @@ fn main(input : VertexIn) -> VertexOut {
     output.color = input.color;
     return output;
 })";
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
     std::string fragmentShader = R"(
 struct FragmentIn {
@@ -261,9 +262,9 @@ struct FragmentIn {
 fn main(input : FragmentIn) -> @location(0) vec4f {
     return input.color * input.fragCoord;
 })";
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.vertex.bufferCount = 1;
@@ -301,9 +302,9 @@ fn vertexMain(input : VertexIn) -> VertexOut {
 fn fragmentMain(input : VertexOut) -> @location(0) vec4f {
     return input.color;
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -342,9 +343,9 @@ fn vertexMain() -> ShaderIO {
 fn fragmentMain(input : ShaderIO) -> @location(0) vec4f {
     return input.attribute1;
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -386,9 +387,9 @@ fn fragmentMain(input : FragmentIn) -> @location(0) vec4f {
     _ = input.position.x;
     return input.attribute3;
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -426,9 +427,9 @@ fn fragmentMain(input : FragmentIn) -> @location(0) vec4f {
     _ = input.position.x;
     return vec4f(input.attribute1, 0.0, 0.0, 1.0);
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -466,9 +467,9 @@ fn fragmentMain(input : FragmentIn) -> @location(0) vec4f {
     _ = input.position.x;
     return input.attribute3;
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -505,9 +506,9 @@ fn vertexMain() -> VertexOut {
 fn fragmentMain(input : FragmentIn) -> @location(0) vec4f {
     return vec4f(0.0, 0.0, 0.0, 1.0);
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -539,9 +540,9 @@ fn vertexMain() -> VertexOut {
 fn fragmentMain() -> @location(0) vec4f {
     return vec4f(0.0, 0.0, 0.0, 1.0);
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -575,9 +576,9 @@ fn vertexMain() -> VertexOut {
 fn fragmentMain(@builtin(position) position : vec4<f32>) -> @location(0) vec4f {
     return vec4f(0.0, 0.0, 0.0, 1.0);
 })";
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
@@ -614,9 +615,9 @@ struct S1 { data : array<vec4u, 20> }
   return vec4f();
 }
     )";
-    auto module = utils::CreateShaderModule(device, shader);
+    auto module = dawn::utils::CreateShaderModule(device, shader);
 
-    utils::ComboRenderPipelineDescriptor rpDesc;
+    dawn::utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = module;
     rpDesc.vertex.entryPoint = "vsMain";
     rpDesc.cFragment.module = module;
@@ -635,19 +636,19 @@ TEST_P(ShaderTests, SampleIndex) {
     // supported on some platforms.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_sample_variables"));
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
 @vertex
 fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
     return pos;
 })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
 @fragment fn main(@builtin(sample_index) sampleIndex : u32)
     -> @location(0) vec4f {
     return vec4f(f32(sampleIndex), 1.0, 0.0, 1.0);
 })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -716,7 +717,7 @@ struct Buf {
     wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main", &constants);
 
     wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
 
     wgpu::CommandBuffer commands;
     {
@@ -764,9 +765,9 @@ struct Buf {
     wgpu::ComputePipeline pipeline2 = CreateComputePipeline(shader, "main", &constants2);
 
     wgpu::BindGroup bindGroup1 =
-        utils::MakeBindGroup(device, pipeline1.GetBindGroupLayout(0), {{0, buffer1}});
+        dawn::utils::MakeBindGroup(device, pipeline1.GetBindGroupLayout(0), {{0, buffer1}});
     wgpu::BindGroup bindGroup2 =
-        utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0), {{0, buffer2}});
+        dawn::utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0), {{0, buffer2}});
 
     wgpu::CommandBuffer commands;
     {
@@ -825,9 +826,9 @@ struct Buf {
     wgpu::ComputePipeline pipeline2 = CreateComputePipeline(shader, "main", &constants2);
 
     wgpu::BindGroup bindGroup1 =
-        utils::MakeBindGroup(device, pipeline1.GetBindGroupLayout(0), {{0, buffer1}});
+        dawn::utils::MakeBindGroup(device, pipeline1.GetBindGroupLayout(0), {{0, buffer1}});
     wgpu::BindGroup bindGroup2 =
-        utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0), {{0, buffer2}});
+        dawn::utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0), {{0, buffer2}});
 
     wgpu::CommandBuffer commands;
     {
@@ -884,7 +885,7 @@ struct Buf {
     wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main", &constants);
 
     wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
 
     wgpu::CommandBuffer commands;
     {
@@ -933,7 +934,7 @@ struct Buf {
     wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main", &constants);
 
     wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
 
     wgpu::CommandBuffer commands;
     {
@@ -994,7 +995,7 @@ struct Buf {
     std::vector<wgpu::ConstantEntry> constants3;
     constants3.push_back({nullptr, "1003", 1});
 
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
     wgpu::ComputePipelineDescriptor csDesc1;
     csDesc1.compute.module = shaderModule;
@@ -1018,11 +1019,11 @@ struct Buf {
     wgpu::ComputePipeline pipeline3 = device.CreateComputePipeline(&csDesc3);
 
     wgpu::BindGroup bindGroup1 =
-        utils::MakeBindGroup(device, pipeline1.GetBindGroupLayout(0), {{0, buffer1}});
+        dawn::utils::MakeBindGroup(device, pipeline1.GetBindGroupLayout(0), {{0, buffer1}});
     wgpu::BindGroup bindGroup2 =
-        utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0), {{0, buffer2}});
+        dawn::utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0), {{0, buffer2}});
     wgpu::BindGroup bindGroup3 =
-        utils::MakeBindGroup(device, pipeline3.GetBindGroupLayout(0), {{0, buffer3}});
+        dawn::utils::MakeBindGroup(device, pipeline3.GetBindGroupLayout(0), {{0, buffer3}});
 
     wgpu::CommandBuffer commands;
     {
@@ -1056,7 +1057,7 @@ struct Buf {
 // Draw a triangle covering the render target, with vertex position and color values from
 // overridable constants
 TEST_P(ShaderTests, OverridableConstantsRenderPipeline) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
 @id(1111) override xright: f32;
 @id(2222) override ytop: f32;
 @vertex
@@ -1070,16 +1071,16 @@ fn main(@builtin(vertex_index) VertexIndex : u32)
   return vec4f(pos[VertexIndex], 0.0, 1.0);
 })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
 @id(1000) override intensity: f32 = 0.0;
 @fragment fn main()
     -> @location(0) vec4f {
     return vec4f(intensity, intensity, intensity, 1.0);
 })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -1105,14 +1106,14 @@ fn main(@builtin(vertex_index) VertexIndex : u32)
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(255, 255, 255, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(255, 255, 255, 255), renderPass.color, 0, 0);
 }
 
 // This is a regression test for crbug.com/dawn:1363 where the BindingRemapper transform was run
 // before the SingleEntryPoint transform, causing one of the other entry points to have conflicting
 // bindings.
 TEST_P(ShaderTests, ConflictingBindingsDueToTransformOrder) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var<uniform> b0 : u32;
         @group(0) @binding(1) var<uniform> b1 : u32;
 
@@ -1128,7 +1129,7 @@ TEST_P(ShaderTests, ConflictingBindingsDueToTransformOrder) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor desc;
+    dawn::utils::ComboRenderPipelineDescriptor desc;
     desc.vertex.module = module;
     desc.vertex.entryPoint = "vertex";
     desc.cFragment.module = module;
@@ -1141,7 +1142,7 @@ TEST_P(ShaderTests, ConflictingBindingsDueToTransformOrder) {
 // but DawnTests allow all unsafe APIs by default.
 // TODO(crbug.com/tint/1728): Enable again when uniformity failures are errors again
 TEST_P(ShaderTests, DISABLED_CheckUsageOf_chromium_disable_uniformity_analysis) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         enable chromium_disable_uniformity_analysis;
 
         @compute @workgroup_size(8) fn uniformity_error(
@@ -1152,7 +1153,7 @@ TEST_P(ShaderTests, DISABLED_CheckUsageOf_chromium_disable_uniformity_analysis) 
             }
         }
     )");
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         @compute @workgroup_size(8) fn uniformity_error(
             @builtin(local_invocation_id) local_invocation_id : vec3u
         ) {
@@ -1171,7 +1172,7 @@ TEST_P(ShaderTests, ShaderOverridingRobustnessBuiltins) {
 
     // Make the test compute pipeline.
     wgpu::ComputePipelineDescriptor cDesc;
-    cDesc.compute.module = utils::CreateShaderModule(device, R"(
+    cDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         // A fake min() function that always returns 0.
         fn min(a : u32, b : u32) -> u32 {
             return 0;
@@ -1199,7 +1200,8 @@ TEST_P(ShaderTests, ShaderOverridingRobustnessBuiltins) {
     bufDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
     wgpu::Buffer buf = device.CreateBuffer(&bufDesc);
 
-    wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buf}});
+    wgpu::BindGroup bg =
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buf}});
 
     // Run the compute pipeline.
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -1222,7 +1224,7 @@ TEST_P(ShaderTests, FragmentInputIsSubsetOfVertexOutput) {
     // TODO(dawn:1610): Fails on Adreno (Pixel 4)
     DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm() && IsVulkan());
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
 struct ShaderIO {
     @location(1) var1: f32,
     @location(3) @interpolate(flat) var3: u32,
@@ -1250,7 +1252,7 @@ struct ShaderIO {
   return shaderIO;
 })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
 struct ShaderIO {
     @location(3) @interpolate(flat) var3: u32,
     @location(7) var7: f32,
@@ -1261,9 +1263,9 @@ struct ShaderIO {
     return vec4f(f32(io.var3), io.var7, 1.0, 1.0);
 })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -1279,7 +1281,7 @@ struct ShaderIO {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(255, 255, 255, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(255, 255, 255, 255), renderPass.color, 0, 0);
 }
 
 // Test that when fragment input is a subset of the vertex output and the order of them is
@@ -1288,12 +1290,12 @@ TEST_P(ShaderTests, FragmentInputIsSubsetOfVertexOutputWithDifferentOrder) {
     // TODO(dawn:1610): Fails on Adreno (Pixel 4)
     DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm() && IsVulkan());
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
 struct ShaderIO {
-    @location(5) @align(16) var5: f32,
+    @location(5) @dawn::Align(16) var5: f32,
     @location(1) var1: f32,
     @location(2) var2: f32,
-    @location(3) @align(8) var3: f32,
+    @location(3) @dawn::Align(8) var3: f32,
     @location(4) var4: vec4f,
     @builtin(position) pos: vec4f,
 }
@@ -1316,11 +1318,11 @@ struct ShaderIO {
   return shaderIO;
 })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
 struct ShaderIO {
     @location(4) var4: vec4f,
     @location(1) var1: f32,
-    @location(5) @align(16) var5: f32,
+    @location(5) @dawn::Align(16) var5: f32,
 }
 
 @fragment fn main(io: ShaderIO)
@@ -1328,9 +1330,9 @@ struct ShaderIO {
     return vec4f(io.var1, io.var5, io.var4.x, 1.0);
 })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -1346,13 +1348,13 @@ struct ShaderIO {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 255, 102, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 255, 102, 255), renderPass.color, 0, 0);
 }
 
 // Test that when fragment input is a subset of the vertex output and that when the builtin
 // interstage variables may mess up with the order, the render pipeline should be valid.
 TEST_P(ShaderTests, FragmentInputIsSubsetOfVertexOutputBuiltinOrder) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
 struct ShaderIO {
     @location(1) var1: f32,
     @builtin(position) pos: vec4f,
@@ -1376,7 +1378,7 @@ struct ShaderIO {
   return shaderIO;
 })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
 struct ShaderIO {
     @builtin(position) pos: vec4f,
     @location(7) var7: f32,
@@ -1387,9 +1389,9 @@ struct ShaderIO {
     return vec4f(0.0, io.var7, 0.4, 1.0);
 })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -1405,13 +1407,13 @@ struct ShaderIO {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 255, 102, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(0, 255, 102, 255), renderPass.color, 0, 0);
 }
 
 // Test that the derivative_uniformity diagnostic filter is handled correctly through the full
 // shader compilation flow.
 TEST_P(ShaderTests, DerivativeUniformityDiagnosticFilter) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
 struct VertexOut {
   @builtin(position) pos : vec4f,
   @location(0) value : f32,
@@ -1427,7 +1429,7 @@ fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOut {
   return VertexOut(vec4(pos[VertexIndex], 0.0, 1.0), 0.5);
 })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
 diagnostic(off, derivative_uniformity);
 
 @fragment
@@ -1439,9 +1441,9 @@ fn main(@location(0) value : f32) -> @location(0) vec4f {
   return vec4(1.0);
 })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -1456,7 +1458,7 @@ fn main(@location(0) value : f32) -> @location(0) vec4f {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(255, 255, 255, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8(255, 255, 255, 255), renderPass.color, 0, 0);
 }
 
 DAWN_INSTANTIATE_TEST(ShaderTests,

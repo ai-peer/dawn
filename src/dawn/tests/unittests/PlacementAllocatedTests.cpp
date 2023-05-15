@@ -41,7 +41,7 @@ class PlacementAllocatedTests : public testing::Test {
     void TearDown() override { mockDestructor = nullptr; }
 };
 
-struct Foo : PlacementAllocated {
+struct Foo : dawn::PlacementAllocated {
     virtual ~Foo() { mockDestructor->Call(this, DestructedClass::Foo); }
 };
 

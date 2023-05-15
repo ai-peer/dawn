@@ -19,9 +19,9 @@
 
 class ITypArrayTest : public testing::Test {
   protected:
-    using Key = TypedInteger<struct KeyT, uint32_t>;
-    using Val = TypedInteger<struct ValT, uint32_t>;
-    using Array = ityp::array<Key, Val, 10>;
+    using Key = dawn::TypedInteger<struct KeyT, uint32_t>;
+    using Val = dawn::TypedInteger<struct ValT, uint32_t>;
+    using Array = dawn::ityp::array<Key, Val, 10>;
 
     // Test that the expected array methods can be constexpr
     struct ConstexprTest {

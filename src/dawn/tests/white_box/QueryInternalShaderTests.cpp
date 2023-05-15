@@ -162,14 +162,14 @@ class QueryInternalShaderTests : public DawnTest {
         queue.WriteBuffer(timestampsBuffer, 0, timestampValues.data(), size);
 
         // The buffer indicating which values are available timestamps
-        wgpu::Buffer availabilityBuffer =
-            utils::CreateBufferFromData(device, availabilities.data(),
-                                        kQueryCount * sizeof(uint32_t), wgpu::BufferUsage::Storage);
+        wgpu::Buffer availabilityBuffer = dawn::utils::CreateBufferFromData(
+            device, availabilities.data(), kQueryCount * sizeof(uint32_t),
+            wgpu::BufferUsage::Storage);
 
         // The params uniform buffer
         dawn::native::TimestampParams params(firstQuery, queryCount, destinationOffset, period);
-        wgpu::Buffer paramsBuffer = utils::CreateBufferFromData(device, &params, sizeof(params),
-                                                                wgpu::BufferUsage::Uniform);
+        wgpu::Buffer paramsBuffer = dawn::utils::CreateBufferFromData(
+            device, &params, sizeof(params), wgpu::BufferUsage::Uniform);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         EncodeConvertTimestampsToNanoseconds(encoder, timestampsBuffer, availabilityBuffer,

@@ -184,7 +184,7 @@ class MemoryDataBuilder {
                     break;
                 }
                 case OperationType::Align: {
-                    size_t targetSize = Align(buffer.size(), operation.mOperand);
+                    size_t targetSize = dawn::Align(buffer.size(), operation.mOperand);
                     size_t paddingSize = targetSize - buffer.size();
                     for (size_t i = 0; i < paddingSize; i++) {
                         buffer.push_back(NextPaddingByte());
@@ -280,7 +280,7 @@ class Field {
     // Returns this Field so calls can be chained.
     Field& AlignAttribute(size_t value) {
         ASSERT(value >= mAlign);
-        ASSERT(IsPowerOfTwo(value));
+        ASSERT(dawn::IsPowerOfTwo(value));
         mAlign = value;
         mHasAlignAttribute = true;
         return *this;
@@ -405,7 +405,7 @@ class Field {
 };
 
 std::ostream& operator<<(std::ostream& o, Field field) {
-    o << "@align(" << field.GetAlign() << ") @size(" << field.GetPaddedSize() << ") "
+    o << "@dawn::Align(" << field.GetAlign() << ") @size(" << field.GetPaddedSize() << ") "
       << field.GetWGSLType();
     return o;
 }
@@ -436,7 +436,7 @@ void RunComputeShaderWithBuffers(const wgpu::Device& device,
                                  const std::string& shader,
                                  std::initializer_list<wgpu::Buffer> bufferList) {
     // Set up shader and pipeline
-    auto module = utils::CreateShaderModule(device, shader.c_str());
+    auto module = dawn::utils::CreateShaderModule(device, shader.c_str());
 
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.compute.module = module;
@@ -520,7 +520,7 @@ class ComputeLayoutMemoryBufferTests
 
 // Align returns the WGSL decoration for an explicit structure field alignment
 std::string AlignDeco(uint32_t value) {
-    return "@align(" + std::to_string(value) + ") ";
+    return "@dawn::Align(" + std::to_string(value) + ") ";
 }
 
 // Test different types used as a struct member
@@ -555,7 +555,7 @@ TEST_P(ComputeLayoutMemoryBufferTests, StructMember) {
                          R"(
 struct Data {
     header : u32,
-    @align({field_align}) @size({field_size}) field : {field_type},
+    @dawn::Align({field_align}) @size({field_size}) field : {field_type},
     footer : u32,
 }
 
@@ -594,9 +594,9 @@ fn main() {
 })";
 
     // https://www.w3.org/TR/WGSL/#alignment-and-size
-    // Structure size: roundUp(AlignOf(S), OffsetOf(S, L) + SizeOf(S, L))
+    // Structure size: dawn::RoundUp(AlignOf(S), OffsetOf(S, L) + SizeOf(S, L))
     // https://www.w3.org/TR/WGSL/#storage-class-constraints
-    // RequiredAlignOf(S, uniform): roundUp(16, max(AlignOf(T0), ..., AlignOf(TN)))
+    // RequiredAlignOf(S, uniform): dawn::RoundUp(16, max(AlignOf(T0), ..., AlignOf(TN)))
     uint32_t dataAlign = isUniform ? std::max(size_t(16u), field.GetAlign()) : field.GetAlign();
 
     // https://www.w3.org/TR/WGSL/#structure-layout-rules
@@ -660,13 +660,13 @@ fn main() {
         dataKeyForDstInit, paddingKeyForDstInitAndExpectation);
 
     // Set up input storage buffer
-    wgpu::Buffer inputBuf = utils::CreateBufferFromData(
+    wgpu::Buffer inputBuf = dawn::utils::CreateBufferFromData(
         device, inputData.data(), inputData.size(),
         wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst |
             (isUniform ? wgpu::BufferUsage::Uniform : wgpu::BufferUsage::Storage));
 
     // Set up output storage buffer
-    wgpu::Buffer outputBuf = utils::CreateBufferFromData(
+    wgpu::Buffer outputBuf = dawn::utils::CreateBufferFromData(
         device, initData.data(), initData.size(),
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
 
@@ -750,14 +750,14 @@ fn main() {
         dataKeyForDstInit, paddingKeyForDstInitAndExpectation);
 
     // Set up input storage buffer
-    wgpu::Buffer inputBuf = utils::CreateBufferFromData(
+    wgpu::Buffer inputBuf = dawn::utils::CreateBufferFromData(
         device, inputData.data(), inputData.size(),
         wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst |
             (isUniform ? wgpu::BufferUsage::Uniform : wgpu::BufferUsage::Storage));
     EXPECT_BUFFER_U8_RANGE_EQ(inputData.data(), inputBuf, 0, inputData.size());
 
     // Set up output storage buffer
-    wgpu::Buffer outputBuf = utils::CreateBufferFromData(
+    wgpu::Buffer outputBuf = dawn::utils::CreateBufferFromData(
         device, initData.data(), initData.size(),
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
     EXPECT_BUFFER_U8_RANGE_EQ(initData.data(), outputBuf, 0, initData.size());

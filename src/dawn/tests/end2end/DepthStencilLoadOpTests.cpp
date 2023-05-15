@@ -86,7 +86,7 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
             textureViewDesc.baseMipLevel = mipLevel;
             textureViews[mipLevel] = texture.CreateView(&textureViewDesc);
 
-            utils::ComboRenderPassDescriptor renderPassDescriptor({}, textureViews[mipLevel]);
+            dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({}, textureViews[mipLevel]);
             renderPassDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(GetParam().mFormat);
             renderPassDescriptor.cDepthStencilAttachmentInfo.depthClearValue =
                 kDepthValues[mipLevel];
@@ -115,7 +115,7 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
 
         switch (GetParam().mCheck) {
             case Check::SampleDepth: {
-                DAWN_TEST_UNSUPPORTED_IF(utils::IsStencilOnlyFormat(GetParam().mFormat));
+                DAWN_TEST_UNSUPPORTED_IF(dawn::utils::IsStencilOnlyFormat(GetParam().mFormat));
 
                 std::vector<float> expectedDepth(mipSize * mipSize, kDepthValues[mipLevel]);
                 ExpectSampledDepthData(
@@ -126,7 +126,7 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
             }
 
             case Check::CopyDepth: {
-                DAWN_TEST_UNSUPPORTED_IF(utils::IsStencilOnlyFormat(GetParam().mFormat));
+                DAWN_TEST_UNSUPPORTED_IF(dawn::utils::IsStencilOnlyFormat(GetParam().mFormat));
 
                 if (GetParam().mFormat == wgpu::TextureFormat::Depth16Unorm) {
                     std::vector<uint16_t> expectedDepth(mipSize * mipSize,
@@ -154,7 +154,7 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
             }
 
             case Check::DepthTest: {
-                DAWN_TEST_UNSUPPORTED_IF(utils::IsStencilOnlyFormat(GetParam().mFormat));
+                DAWN_TEST_UNSUPPORTED_IF(dawn::utils::IsStencilOnlyFormat(GetParam().mFormat));
 
                 std::vector<float> expectedDepth(mipSize * mipSize, kDepthValues[mipLevel]);
                 ExpectAttachmentDepthTestData(texture, GetParam().mFormat, mipSize, mipSize, 0,
@@ -175,7 +175,7 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
     wgpu::Texture texture;
     std::array<wgpu::TextureView, kMipLevelCount> textureViews;
     // Vector instead of array because there is no default constructor.
-    std::vector<utils::ComboRenderPassDescriptor> renderPassDescriptors;
+    std::vector<dawn::utils::ComboRenderPassDescriptor> renderPassDescriptors;
 
   private:
     bool mIsFormatSupported = false;
@@ -327,7 +327,7 @@ class DepthTextureClearTwiceTest : public DawnTestWithParams<DepthTextureClearTw
         depthStencilAttachment.depthLoadOp = wgpu::LoadOp::Clear;
         depthStencilAttachment.depthStoreOp = wgpu::StoreOp::Store;
 
-        if (!utils::IsDepthOnlyFormat(GetParam().mFormat)) {
+        if (!dawn::utils::IsDepthOnlyFormat(GetParam().mFormat)) {
             depthStencilAttachment.stencilLoadOp = wgpu::LoadOp::Load;
             depthStencilAttachment.stencilStoreOp = wgpu::StoreOp::Store;
         }

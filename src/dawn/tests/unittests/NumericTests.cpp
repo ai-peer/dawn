@@ -15,45 +15,45 @@
 #include "dawn/common/Numeric.h"
 #include "gtest/gtest.h"
 
-// Tests for RangesOverlap
-TEST(Numeric, RangesOverlap) {
+// Tests for dawn::RangesOverlap
+TEST(Numeric, angesOverlap) {
     // Range contains only one number
-    ASSERT_EQ(true, RangesOverlap(0, 0, 0, 0));
-    ASSERT_EQ(false, RangesOverlap(0, 0, 1, 1));
+    ASSERT_EQ(true, dawn::RangesOverlap(0, 0, 0, 0));
+    ASSERT_EQ(false, dawn::RangesOverlap(0, 0, 1, 1));
 
     // [  ]
     //      [  ]
-    ASSERT_EQ(false, RangesOverlap(0, 8, 9, 16));
+    ASSERT_EQ(false, dawn::RangesOverlap(0, 8, 9, 16));
 
     //      [  ]
     // [  ]
-    ASSERT_EQ(false, RangesOverlap(9, 16, 0, 8));
+    ASSERT_EQ(false, dawn::RangesOverlap(9, 16, 0, 8));
 
     //      [  ]
     // [             ]
-    ASSERT_EQ(true, RangesOverlap(2, 3, 0, 8));
+    ASSERT_EQ(true, dawn::RangesOverlap(2, 3, 0, 8));
 
     // [             ]
     //      [  ]
-    ASSERT_EQ(true, RangesOverlap(0, 8, 2, 3));
+    ASSERT_EQ(true, dawn::RangesOverlap(0, 8, 2, 3));
 
     // [   ]
     //   [   ]
-    ASSERT_EQ(true, RangesOverlap(0, 8, 4, 12));
+    ASSERT_EQ(true, dawn::RangesOverlap(0, 8, 4, 12));
 
     //   [   ]
     // [   ]
-    ASSERT_EQ(true, RangesOverlap(4, 12, 0, 8));
+    ASSERT_EQ(true, dawn::RangesOverlap(4, 12, 0, 8));
 
     // [   ]
     //     [   ]
-    ASSERT_EQ(true, RangesOverlap(0, 8, 8, 12));
+    ASSERT_EQ(true, dawn::RangesOverlap(0, 8, 8, 12));
 
     //     [   ]
     // [   ]
-    ASSERT_EQ(true, RangesOverlap(8, 12, 0, 8));
+    ASSERT_EQ(true, dawn::RangesOverlap(8, 12, 0, 8));
 
     // Negative numbers
-    ASSERT_EQ(true, RangesOverlap(-9, 12, 4, 16));
-    ASSERT_EQ(false, RangesOverlap(-9, -3, -2, 0));
+    ASSERT_EQ(true, dawn::RangesOverlap(-9, 12, 4, 16));
+    ASSERT_EQ(false, dawn::RangesOverlap(-9, -3, -2, 0));
 }

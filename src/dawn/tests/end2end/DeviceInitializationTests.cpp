@@ -29,10 +29,10 @@ class DeviceInitializationTest : public testing::Test {
 
     // Test that the device can still be used by testing a buffer copy.
     void ExpectDeviceUsable(wgpu::Device device) {
-        wgpu::Buffer src =
-            utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::CopySrc, {1, 2, 3, 4});
+        wgpu::Buffer src = dawn::utils::CreateBufferFromData<uint32_t>(
+            device, wgpu::BufferUsage::CopySrc, {1, 2, 3, 4});
 
-        wgpu::Buffer dst = utils::CreateBufferFromData<uint32_t>(
+        wgpu::Buffer dst = dawn::utils::CreateBufferFromData<uint32_t>(
             device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead, {0, 0, 0, 0});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -55,7 +55,7 @@ class DeviceInitializationTest : public testing::Test {
         // without crashing.
         while (!done) {
             device.Tick();
-            utils::USleep(100);
+            dawn::utils::USleep(100);
         }
 
         const uint32_t* mapping = static_cast<const uint32_t*>(dst.GetConstMappedRange());

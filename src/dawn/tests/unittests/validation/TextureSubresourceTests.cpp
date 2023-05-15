@@ -51,14 +51,14 @@ class TextureSubresourceTest : public ValidationTest {
 
     void TestRenderPass(const wgpu::TextureView& renderView, const wgpu::TextureView& samplerView) {
         // Create bind group
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Vertex, wgpu::TextureSampleType::Float}});
 
-        utils::ComboRenderPassDescriptor renderPassDesc({renderView});
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc({renderView});
 
         // It is valid to read from and write into different subresources of the same texture
         {
-            wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, samplerView}});
+            wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl, {{0, samplerView}});
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
             pass.SetBindGroup(0, bindGroup);
@@ -71,7 +71,7 @@ class TextureSubresourceTest : public ValidationTest {
 
         // It is invalid to read and write into the same subresources
         {
-            wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, renderView}});
+            wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl, {{0, renderView}});
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
             pass.SetBindGroup(0, bindGroup);
@@ -82,12 +82,13 @@ class TextureSubresourceTest : public ValidationTest {
         // It is valid to write into and then read from the same level of a texture in different
         // render passes
         {
-            wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, samplerView}});
+            wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, bgl, {{0, samplerView}});
 
-            wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+            wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
                 device,
                 {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-            wgpu::BindGroup bindGroup1 = utils::MakeBindGroup(device, bgl1, {{0, samplerView}});
+            wgpu::BindGroup bindGroup1 =
+                dawn::utils::MakeBindGroup(device, bgl1, {{0, samplerView}});
 
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             wgpu::RenderPassEncoder pass1 = encoder.BeginRenderPass(&renderPassDesc);

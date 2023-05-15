@@ -27,7 +27,7 @@ class ComputeDispatchTests : public DawnTest {
 
         // Write workgroup number into the output buffer if we saw the biggest dispatch
         // To make sure the dispatch was not called, write maximum u32 value for 0 dispatches
-        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var<storage, read_write> output : vec3u;
 
             @compute @workgroup_size(1, 1, 1)
@@ -49,7 +49,7 @@ class ComputeDispatchTests : public DawnTest {
         pipeline = device.CreateComputePipeline(&csDesc);
 
         // Test the use of the compute pipelines without using @num_workgroups
-        wgpu::ShaderModule moduleWithoutNumWorkgroups = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule moduleWithoutNumWorkgroups = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var<uniform> input : vec3u;
             @group(0) @binding(1) var<storage, read_write> output : vec3u;
 
@@ -72,16 +72,17 @@ class ComputeDispatchTests : public DawnTest {
 
     void DirectTest(uint32_t x, uint32_t y, uint32_t z) {
         // Set up dst storage buffer to contain dispatch x, y, z
-        wgpu::Buffer dst = utils::CreateBufferFromData<uint32_t>(
+        wgpu::Buffer dst = dawn::utils::CreateBufferFromData<uint32_t>(
             device,
             wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst,
             kSentinelData);
 
         // Set up bind group and issue dispatch
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {
-                                                             {0, dst, 0, 3 * sizeof(uint32_t)},
-                                                         });
+        wgpu::BindGroup bindGroup =
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {
+                                           {0, dst, 0, 3 * sizeof(uint32_t)},
+                                       });
 
         wgpu::CommandBuffer commands;
         {
@@ -108,12 +109,12 @@ class ComputeDispatchTests : public DawnTest {
                       uint64_t indirectOffset,
                       bool useNumWorkgroups = true) {
         // Set up dst storage buffer to contain dispatch x, y, z
-        wgpu::Buffer dst = utils::CreateBufferFromData<uint32_t>(
+        wgpu::Buffer dst = dawn::utils::CreateBufferFromData<uint32_t>(
             device,
             wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst,
             kSentinelData);
 
-        wgpu::Buffer indirectBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer indirectBuffer = dawn::utils::CreateBufferFromData(
             device, &indirectBufferData[0], indirectBufferData.size() * sizeof(uint32_t),
             wgpu::BufferUsage::Indirect | wgpu::BufferUsage::CopySrc);
 
@@ -125,21 +126,21 @@ class ComputeDispatchTests : public DawnTest {
 
         if (useNumWorkgroups) {
             computePipelineForTest = pipeline;
-            bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                             {
-                                                 {0, dst, 0, 3 * sizeof(uint32_t)},
-                                             });
+            bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                   {
+                                                       {0, dst, 0, 3 * sizeof(uint32_t)},
+                                                   });
         } else {
             computePipelineForTest = pipelineWithoutNumWorkgroups;
             wgpu::Buffer expectedBuffer =
-                utils::CreateBufferFromData(device, &indirectBufferData[indirectStart],
-                                            3 * sizeof(uint32_t), wgpu::BufferUsage::Uniform);
-            bindGroup =
-                utils::MakeBindGroup(device, pipelineWithoutNumWorkgroups.GetBindGroupLayout(0),
-                                     {
-                                         {0, expectedBuffer, 0, 3 * sizeof(uint32_t)},
-                                         {1, dst, 0, 3 * sizeof(uint32_t)},
-                                     });
+                dawn::utils::CreateBufferFromData(device, &indirectBufferData[indirectStart],
+                                                  3 * sizeof(uint32_t), wgpu::BufferUsage::Uniform);
+            bindGroup = dawn::utils::MakeBindGroup(
+                device, pipelineWithoutNumWorkgroups.GetBindGroupLayout(0),
+                {
+                    {0, expectedBuffer, 0, 3 * sizeof(uint32_t)},
+                    {1, dst, 0, 3 * sizeof(uint32_t)},
+                });
         }
 
         wgpu::CommandBuffer commands;

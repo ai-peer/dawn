@@ -49,7 +49,7 @@ class TextureSubresourceTest : public DawnTest {
     }
 
     void DrawTriangle(const wgpu::TextureView& view) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -60,12 +60,12 @@ class TextureSubresourceTest : public DawnTest {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(1.0, 0.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -75,7 +75,7 @@ class TextureSubresourceTest : public DawnTest {
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
-        utils::ComboRenderPassDescriptor renderPassDesc({view});
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc({view});
         renderPassDesc.cColorAttachments[0].clearValue = {0.0f, 0.0f, 0.0f, 1.0f};
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
         pass.SetPipeline(rp);
@@ -86,7 +86,7 @@ class TextureSubresourceTest : public DawnTest {
     }
 
     void SampleAndDraw(const wgpu::TextureView& samplerView, const wgpu::TextureView& renderView) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -100,7 +100,7 @@ class TextureSubresourceTest : public DawnTest {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var samp : sampler;
             @group(0) @binding(1) var tex : texture_2d<f32>;
 
@@ -109,7 +109,7 @@ class TextureSubresourceTest : public DawnTest {
                 return textureSample(tex, samp, FragCoord.xy / vec2f(4.0, 4.0));
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -120,11 +120,11 @@ class TextureSubresourceTest : public DawnTest {
         wgpu::RenderPipeline rp = device.CreateRenderPipeline(&descriptor);
         wgpu::BindGroupLayout bgl = rp.GetBindGroupLayout(0);
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, bgl, {{0, sampler}, {1, samplerView}});
+            dawn::utils::MakeBindGroup(device, bgl, {{0, sampler}, {1, samplerView}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
-        utils::ComboRenderPassDescriptor renderPassDesc({renderView});
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc({renderView});
         renderPassDesc.cColorAttachments[0].clearValue = {0.0f, 0.0f, 0.0f, 1.0f};
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
         pass.SetPipeline(rp);
@@ -156,8 +156,8 @@ TEST_P(TextureSubresourceTest, MipmapLevelsTest) {
 
     // Verify that pixel at bottom-left corner is red, while pixel at top-right corner is background
     // black in render view (mip level 1).
-    utils::RGBA8 topRight = utils::RGBA8::kBlack;
-    utils::RGBA8 bottomLeft = utils::RGBA8::kRed;
+    dawn::utils::RGBA8 topRight = dawn::utils::RGBA8::kBlack;
+    dawn::utils::RGBA8 bottomLeft = dawn::utils::RGBA8::kRed;
     EXPECT_TEXTURE_EQ(&topRight, texture, {kSize / 2 - 1, 0}, {1, 1}, 1);
     EXPECT_TEXTURE_EQ(&bottomLeft, texture, {0, kSize / 2 - 1}, {1, 1}, 1);
 }
@@ -182,8 +182,8 @@ TEST_P(TextureSubresourceTest, ArrayLayersTest) {
 
     // Verify that pixel at bottom-left corner is red, while pixel at top-right corner is background
     // black in render view (array layer 1).
-    utils::RGBA8 topRight = utils::RGBA8::kBlack;
-    utils::RGBA8 bottomLeft = utils::RGBA8::kRed;
+    dawn::utils::RGBA8 topRight = dawn::utils::RGBA8::kBlack;
+    dawn::utils::RGBA8 bottomLeft = dawn::utils::RGBA8::kRed;
     EXPECT_TEXTURE_EQ(&topRight, texture, {kSize - 1, 0, 1}, {1, 1});
     EXPECT_TEXTURE_EQ(&bottomLeft, texture, {0, kSize - 1, 1}, {1, 1});
 }

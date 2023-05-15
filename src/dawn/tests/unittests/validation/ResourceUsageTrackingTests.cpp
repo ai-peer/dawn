@@ -49,28 +49,28 @@ class ResourceUsageTrackingTest : public ValidationTest {
     // in the caller, so it is always correct for binding validation between bind groups and
     // pipeline. But those bind groups in caller can be used for validation for other purposes.
     wgpu::RenderPipeline CreateNoOpRenderPipeline() {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
                 @vertex fn main() -> @builtin(position) vec4f {
                     return vec4f();
                 })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
                 @fragment fn main() {
                 })");
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
-        pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, nullptr);
+        pipelineDescriptor.layout = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
         return device.CreateRenderPipeline(&pipelineDescriptor);
     }
 
     wgpu::ComputePipeline CreateNoOpComputePipeline(std::vector<wgpu::BindGroupLayout> bgls) {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
                 @compute @workgroup_size(1) fn main() {
                 })");
         wgpu::ComputePipelineDescriptor pipelineDescriptor;
-        pipelineDescriptor.layout = utils::MakePipelineLayout(device, std::move(bgls));
+        pipelineDescriptor.layout = dawn::utils::MakePipelineLayout(device, std::move(bgls));
         pipelineDescriptor.compute.module = csModule;
         pipelineDescriptor.compute.entryPoint = "main";
         return device.CreateComputePipeline(&pipelineDescriptor);
@@ -101,10 +101,10 @@ TEST_F(ResourceUsageTrackingTest, BufferWithMultipleReadUsage) {
         wgpu::Buffer buffer =
             CreateBuffer(4, wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage);
 
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
                      {1, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
 
         // Use the buffer as both uniform and readonly storage buffer in compute pass.
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -124,9 +124,9 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsage) {
         wgpu::Buffer buffer =
             CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Index);
 
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}});
 
         // It is invalid to use the buffer as both index and storage in render pass
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -143,11 +143,11 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsage) {
         // Create buffer and bind group
         wgpu::Buffer buffer = CreateBuffer(512, wgpu::BufferUsage::Storage);
 
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
                      {1, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
         wgpu::BindGroup bg =
-            utils::MakeBindGroup(device, bgl, {{0, buffer, 0, 4}, {1, buffer, 256, 4}});
+            dawn::utils::MakeBindGroup(device, bgl, {{0, buffer, 0, 4}, {1, buffer, 256, 4}});
 
         // Create a no-op compute pipeline
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -182,13 +182,13 @@ TEST_F(ResourceUsageTrackingTest, BufferUsedAsStorageMultipleTimes) {
     // Create buffer and bind group
     wgpu::Buffer buffer = CreateBuffer(512, wgpu::BufferUsage::Storage);
 
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute,
                   wgpu::BufferBindingType::Storage},
                  {1, wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute,
                   wgpu::BufferBindingType::Storage}});
     wgpu::BindGroup bg =
-        utils::MakeBindGroup(device, bgl, {{0, buffer, 0, 4}, {1, buffer, 256, 4}});
+        dawn::utils::MakeBindGroup(device, bgl, {{0, buffer, 0, 4}, {1, buffer, 256, 4}});
 
     // test render pass
     {
@@ -227,10 +227,10 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsageInDifferentPasses) 
             CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Index);
 
         // Create bind groups to use the buffer as storage
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, buffer0}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, buffer1}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer0}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer1}});
 
         // Use these two buffers as both index and storage in different render passes
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -255,12 +255,12 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsageInDifferentPasses) 
         wgpu::Buffer buffer =
             CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform);
 
-        wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl0 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, buffer}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1, {{0, buffer}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl0, {{0, buffer}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl1, {{0, buffer}});
 
         // Use the buffer as both storage and uniform in different compute passes
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -281,12 +281,12 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsageInDifferentPasses) 
         // Create buffer and bind groups that will be used as storage and uniform bindings
         wgpu::Buffer buffer = CreateBuffer(4, wgpu::BufferUsage::Storage);
 
-        wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl0 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, buffer}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1, {{0, buffer}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl0, {{0, buffer}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl1, {{0, buffer}});
 
         // Use the buffer as storage and uniform in render pass and compute pass respectively
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -313,9 +313,9 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsageInDifferentDrawsOrD
         // Create a buffer and a bind group
         wgpu::Buffer buffer =
             CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Index);
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}});
 
         // Create a no-op render pipeline.
         wgpu::RenderPipeline rp = CreateNoOpRenderPipeline();
@@ -342,12 +342,12 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsageInDifferentDrawsOrD
         // Create a buffer and bind groups
         wgpu::Buffer buffer = CreateBuffer(4, wgpu::BufferUsage::Storage);
 
-        wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl0 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, buffer}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1, {{0, buffer}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl0, {{0, buffer}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl1, {{0, buffer}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp0 = CreateNoOpComputePipeline({bgl0});
@@ -379,9 +379,9 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsageInSingleDrawOrDispa
         // Create a buffer and a bind group
         wgpu::Buffer buffer =
             CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Index);
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, buffer}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, buffer}});
 
         // Create a no-op render pipeline.
         wgpu::RenderPipeline rp = CreateNoOpRenderPipeline();
@@ -406,12 +406,12 @@ TEST_F(ResourceUsageTrackingTest, BufferWithReadAndWriteUsageInSingleDrawOrDispa
         // Create a buffer and bind groups
         wgpu::Buffer buffer = CreateBuffer(4, wgpu::BufferUsage::Storage);
 
-        wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup readBG = utils::MakeBindGroup(device, readBGL, {{0, buffer}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, buffer}});
+        wgpu::BindGroup readBG = dawn::utils::MakeBindGroup(device, readBGL, {{0, buffer}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, buffer}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({readBGL, writeBGL});
@@ -440,12 +440,12 @@ TEST_F(ResourceUsageTrackingTest, BufferCopyAndBufferUsageInPass) {
         CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst);
 
     // Create the bind group to use the buffer as storage
-    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl0 = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-    wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, bufferSrc}});
-    wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+    wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl0, {{0, bufferSrc}});
+    wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
-    wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1, {{0, bufferDst}});
+    wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl1, {{0, bufferDst}});
 
     // Use the buffer as both copy src and storage in render pass
     {
@@ -483,9 +483,9 @@ TEST_F(ResourceUsageTrackingTest, BufferWithMultipleSetIndexOrVertexBuffer) {
         4, wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Index | wgpu::BufferUsage::Storage);
     wgpu::Buffer buffer1 = CreateBuffer(4, wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Index);
 
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-    wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer0}});
+    wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer0}});
 
     PlaceholderRenderPass PlaceholderRenderPass(device);
 
@@ -552,10 +552,10 @@ TEST_F(ResourceUsageTrackingTest, BufferWithMultipleSetBindGroupsOnSameIndex) {
             CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Index);
 
         // Create the bind group to use the buffer as storage
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, buffer0}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, buffer1}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer0}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer1}});
 
         PlaceholderRenderPass PlaceholderRenderPass(device);
 
@@ -592,13 +592,15 @@ TEST_F(ResourceUsageTrackingTest, BufferWithMultipleSetBindGroupsOnSameIndex) {
         wgpu::Buffer buffer1 = CreateBuffer(4, wgpu::BufferUsage::Storage);
 
         // Create the bind group to use the buffer as storage
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroup writeBG0 = utils::MakeBindGroup(device, writeBGL, {{0, buffer0, 0, 4}});
-        wgpu::BindGroup readBG0 = utils::MakeBindGroup(device, readBGL, {{0, buffer0, 256, 4}});
-        wgpu::BindGroup readBG1 = utils::MakeBindGroup(device, readBGL, {{0, buffer1, 0, 4}});
+        wgpu::BindGroup writeBG0 =
+            dawn::utils::MakeBindGroup(device, writeBGL, {{0, buffer0, 0, 4}});
+        wgpu::BindGroup readBG0 =
+            dawn::utils::MakeBindGroup(device, readBGL, {{0, buffer0, 256, 4}});
+        wgpu::BindGroup readBG1 = dawn::utils::MakeBindGroup(device, readBGL, {{0, buffer1, 0, 4}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({writeBGL, readBGL});
@@ -643,10 +645,10 @@ TEST_F(ResourceUsageTrackingTest, BufferUsageConflictBetweenInvisibleStagesInBin
     // doesn't reside in render related stages at all
     {
         // Create a bind group whose bindings are not visible in render pass
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
                      {1, wgpu::ShaderStage::None, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
 
         // These two bindings are invisible in render pass. But we still track these bindings.
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -661,10 +663,10 @@ TEST_F(ResourceUsageTrackingTest, BufferUsageConflictBetweenInvisibleStagesInBin
     // doesn't reside in compute related stage at all
     {
         // Create a bind group whose bindings are not visible in compute pass
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::ReadOnlyStorage},
                      {1, wgpu::ShaderStage::None, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -689,9 +691,9 @@ TEST_F(ResourceUsageTrackingTest, BufferUsageConflictWithInvisibleStageInBindGro
     {
         wgpu::Buffer buffer =
             CreateBuffer(4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::Index);
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}});
 
         // Buffer usage in compute stage in bind group conflicts with index buffer. And binding
         // for compute stage is not visible in render pass. But we still track this binding.
@@ -709,10 +711,10 @@ TEST_F(ResourceUsageTrackingTest, BufferUsageConflictWithInvisibleStageInBindGro
     // not visible in the dispatch.
     {
         wgpu::Buffer buffer = CreateBuffer(4, wgpu::BufferUsage::Storage);
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::ReadOnlyStorage},
                      {1, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -740,31 +742,31 @@ TEST_F(ResourceUsageTrackingTest, BufferUsageConflictWithUnusedPipelineBindings)
     // used because its bind group layout is not designated in pipeline layout.
     {
         // Create bind groups. The bindings are visible for render pass.
-        wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl0 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, buffer}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1, {{0, buffer}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl0, {{0, buffer}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl1, {{0, buffer}});
 
         // Create a passthrough render pipeline with a readonly buffer
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
                 @vertex fn main() -> @builtin(position) vec4f {
                     return vec4f();
                 })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
                 struct RBuffer {
                     value : f32
                 }
                 @group(0) @binding(0) var<storage, read> rBuffer : RBuffer;
                 @fragment fn main() {
                 })");
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
-        pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl0);
+        pipelineDescriptor.layout = dawn::utils::MakeBasicPipelineLayout(device, &bgl0);
         wgpu::RenderPipeline rp = device.CreateRenderPipeline(&pipelineDescriptor);
 
         // Resource in bg1 conflicts with resources used in bg0. However, bindings in bg1 is
@@ -784,12 +786,12 @@ TEST_F(ResourceUsageTrackingTest, BufferUsageConflictWithUnusedPipelineBindings)
     // compute passes.
     {
         // Create bind groups. The bindings are visible for compute pass.
-        wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl0 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
-        wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, buffer}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1, {{0, buffer}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl0, {{0, buffer}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl1, {{0, buffer}});
 
         // Create a compute pipeline with only one of the two BGLs.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl0});
@@ -818,12 +820,12 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsage) {
         wgpu::TextureView view = texture.CreateView();
 
         // Create a bind group to use the texture as sampled binding
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Vertex, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}});
 
         // Create a render pass to use the texture as a render target
-        utils::ComboRenderPassDescriptor renderPass({view});
+        dawn::utils::ComboRenderPassDescriptor renderPass({view});
 
         // It is invalid to use the texture as both sampled and render target in the same pass
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -841,11 +843,11 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsage) {
         wgpu::TextureView view = texture.CreateView();
 
         // Create a bind group to use the texture as sampled and writeonly bindings
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float},
              {1, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
 
         // Create a no-op compute pipeline
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -886,12 +888,12 @@ TEST_F(ResourceUsageTrackingTest, TextureWithSamplingAndDepthStencilAttachment) 
     wgpu::TextureView view = texture.CreateView();
 
     // Create a bind group to use the texture as sampled binding
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Depth}});
-    wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}});
+    wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}});
 
     // Create a render pass to use the texture as a render target
-    utils::ComboRenderPassDescriptor passDescriptor({}, view);
+    dawn::utils::ComboRenderPassDescriptor passDescriptor({}, view);
     passDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
     passDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
     passDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
@@ -932,15 +934,15 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
         wgpu::TextureView view = texture.CreateView();
 
         // Create a bind group to use the texture as writeonly storage binding
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}});
 
         // It is invalid to use the texture as both writeonly storage and render target in
         // the same pass
         {
-            utils::ComboRenderPassDescriptor renderPass({view});
+            dawn::utils::ComboRenderPassDescriptor renderPass({view});
 
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -952,7 +954,7 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
         // It is valid to use multiple writeonly storage usages on the same texture in render
         // pass
         {
-            wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, view}});
+            wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl, {{0, view}});
 
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             PlaceholderRenderPass PlaceholderRenderPass(device);
@@ -971,13 +973,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
         wgpu::TextureView view = texture.CreateView();
 
         // Create a bind group to use the texture as sampled and writeonly bindings
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
         // Create 2 bind groups with same texture subresources and dispatch twice to avoid
         // storage texture binding aliasing
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, view}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, view}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl, {{0, view}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl, {{0, view}});
 
         // Create a no-op compute pipeline
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -1019,7 +1021,7 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleRenderAttachmentUsage) {
     // Control: It is valid to use layer0 as a render target for one attachment, and
     // layer1 as the second attachment in the same pass
     {
-        utils::ComboRenderPassDescriptor renderPass({viewLayer0, viewLayer1});
+        dawn::utils::ComboRenderPassDescriptor renderPass({viewLayer0, viewLayer1});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -1029,7 +1031,7 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleRenderAttachmentUsage) {
 
     // Control: It is valid to use layer0 as a render target in separate passes.
     {
-        utils::ComboRenderPassDescriptor renderPass({viewLayer0});
+        dawn::utils::ComboRenderPassDescriptor renderPass({viewLayer0});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass0 = encoder.BeginRenderPass(&renderPass);
@@ -1041,7 +1043,7 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleRenderAttachmentUsage) {
 
     // It is invalid to use layer0 as a render target for both attachments in the same pass
     {
-        utils::ComboRenderPassDescriptor renderPass({viewLayer0, viewLayer0});
+        dawn::utils::ComboRenderPassDescriptor renderPass({viewLayer0, viewLayer0});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -1051,7 +1053,7 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleRenderAttachmentUsage) {
 
     // It is invalid to use layer1 as a render target for both attachments in the same pass
     {
-        utils::ComboRenderPassDescriptor renderPass({viewLayer1, viewLayer1});
+        dawn::utils::ComboRenderPassDescriptor renderPass({viewLayer1, viewLayer1});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -1074,14 +1076,14 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsageInDifferentPasses)
         wgpu::TextureView v1 = t1.CreateView();
 
         // Create bind groups to use the texture as sampled
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Vertex, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, v0}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, v1}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl, {{0, v0}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl, {{0, v1}});
 
         // Create render passes that will use the textures as render attachments
-        utils::ComboRenderPassDescriptor renderPass0({v1});
-        utils::ComboRenderPassDescriptor renderPass1({v0});
+        dawn::utils::ComboRenderPassDescriptor renderPass0({v1});
+        dawn::utils::ComboRenderPassDescriptor renderPass1({v0});
 
         // Use the textures as both sampled and render attachments in different passes
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -1105,13 +1107,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsageInDifferentPasses)
         wgpu::TextureView view = texture.CreateView();
 
         // Create bind groups to use the texture as sampled and writeonly bindings
-        wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup readBG = utils::MakeBindGroup(device, readBGL, {{0, view}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, view}});
+        wgpu::BindGroup readBG = dawn::utils::MakeBindGroup(device, readBGL, {{0, view}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view}});
 
         // Use the textures as both sampled and writeonly storages in different passes
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -1135,13 +1137,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsageInDifferentPasses)
         wgpu::TextureView view = texture.CreateView();
 
         // Create bind groups to use the texture as sampled and writeonly bindings
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, view}});
-        wgpu::BindGroup readBG = utils::MakeBindGroup(device, readBGL, {{0, view}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view}});
+        wgpu::BindGroup readBG = dawn::utils::MakeBindGroup(device, readBGL, {{0, view}});
 
         // Use the texture as writeonly and sampled storage in compute pass and render
         // pass respectively
@@ -1172,13 +1174,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsageOnDifferentDrawsOr
     // Test render pass
     {
         // Create bind groups to use the texture as sampled and writeonly storage bindings
-        wgpu::BindGroupLayout sampledBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout sampledBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup sampledBG = utils::MakeBindGroup(device, sampledBGL, {{0, view}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, view}});
+        wgpu::BindGroup sampledBG = dawn::utils::MakeBindGroup(device, sampledBGL, {{0, view}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view}});
 
         // Create a no-op render pipeline.
         wgpu::RenderPipeline rp = CreateNoOpRenderPipeline();
@@ -1203,13 +1205,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsageOnDifferentDrawsOr
     // Test compute pass
     {
         // Create bind groups to use the texture as sampled and writeonly storage bindings
-        wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup readBG = utils::MakeBindGroup(device, readBGL, {{0, view}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, view}});
+        wgpu::BindGroup readBG = dawn::utils::MakeBindGroup(device, readBGL, {{0, view}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline readCp = CreateNoOpComputePipeline({readBGL});
@@ -1244,13 +1246,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsageInSingleDrawOrDisp
     // Test render pass
     {
         // Create the bind group to use the texture as sampled and writeonly storage bindings
-        wgpu::BindGroupLayout sampledBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout sampledBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup sampledBG = utils::MakeBindGroup(device, sampledBGL, {{0, view}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, view}});
+        wgpu::BindGroup sampledBG = dawn::utils::MakeBindGroup(device, sampledBGL, {{0, view}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view}});
 
         // Create a no-op render pipeline.
         wgpu::RenderPipeline rp = CreateNoOpRenderPipeline();
@@ -1273,13 +1275,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithReadAndWriteUsageInSingleDrawOrDisp
     // Test compute pass
     {
         // Create the bind group to use the texture as sampled and writeonly storage bindings
-        wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup readBG = utils::MakeBindGroup(device, readBGL, {{0, view}});
-        wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, view}});
+        wgpu::BindGroup readBG = dawn::utils::MakeBindGroup(device, readBGL, {{0, view}});
+        wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({readBGL, writeBGL});
@@ -1310,15 +1312,15 @@ TEST_F(ResourceUsageTrackingTest, TextureCopyAndTextureUsageInPass) {
     wgpu::TextureView view0 = texture0.CreateView();
     wgpu::TextureView view1 = texture1.CreateView();
 
-    wgpu::ImageCopyTexture srcView = utils::CreateImageCopyTexture(texture0, 0, {0, 0, 0});
-    wgpu::ImageCopyTexture dstView = utils::CreateImageCopyTexture(texture1, 0, {0, 0, 0});
+    wgpu::ImageCopyTexture srcView = dawn::utils::CreateImageCopyTexture(texture0, 0, {0, 0, 0});
+    wgpu::ImageCopyTexture dstView = dawn::utils::CreateImageCopyTexture(texture1, 0, {0, 0, 0});
     wgpu::Extent3D copySize = {1, 1, 1};
 
     // Use the texture as both copy dst and render attachment in render pass
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyTextureToTexture(&srcView, &dstView, &copySize);
-        utils::ComboRenderPassDescriptor renderPass({view1});
+        dawn::utils::ComboRenderPassDescriptor renderPass({view1});
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         pass.End();
         encoder.Finish();
@@ -1327,9 +1329,9 @@ TEST_F(ResourceUsageTrackingTest, TextureCopyAndTextureUsageInPass) {
     // Use the texture as both copy dst and readable usage in compute pass
     {
         // Create the bind group to use the texture as sampled
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view1}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view1}});
 
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
 
@@ -1358,13 +1360,13 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleSetBindGroupsOnSameIndex) {
         wgpu::TextureView view1 = texture1.CreateView();
 
         // Create the bind group to use the texture as sampled
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Vertex, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, view0}});
-        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, view1}});
+        wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl, {{0, view0}});
+        wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl, {{0, view1}});
 
         // Create the render pass that will use the texture as an render attachment
-        utils::ComboRenderPassDescriptor renderPass({view0});
+        dawn::utils::ComboRenderPassDescriptor renderPass({view0});
 
         // Set bind group on the same index twice. The second one overwrites the first one.
         // No texture is used as both sampled and render attachment in the same pass. But the
@@ -1400,16 +1402,16 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleSetBindGroupsOnSameIndex) {
         wgpu::TextureView view1 = texture1.CreateView();
 
         // Create the bind group to use the texture as sampled and writeonly bindings
-        wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
 
-        wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
 
-        wgpu::BindGroup writeBG0 = utils::MakeBindGroup(device, writeBGL, {{0, view0}});
-        wgpu::BindGroup readBG0 = utils::MakeBindGroup(device, readBGL, {{0, view0}});
-        wgpu::BindGroup readBG1 = utils::MakeBindGroup(device, readBGL, {{0, view1}});
+        wgpu::BindGroup writeBG0 = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view0}});
+        wgpu::BindGroup readBG0 = dawn::utils::MakeBindGroup(device, readBGL, {{0, view0}});
+        wgpu::BindGroup readBG1 = dawn::utils::MakeBindGroup(device, readBGL, {{0, view1}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({writeBGL, readBGL});
@@ -1458,10 +1460,10 @@ TEST_F(ResourceUsageTrackingTest, TextureUsageConflictBetweenInvisibleStagesInBi
     // usage doesn't reside in render related stages at all
     {
         // Create a bind group whose bindings are not visible in render pass
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float},
                      {1, wgpu::ShaderStage::None, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
 
         // These two bindings are invisible in render pass. But we still track these bindings.
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -1476,10 +1478,10 @@ TEST_F(ResourceUsageTrackingTest, TextureUsageConflictBetweenInvisibleStagesInBi
     // usage doesn't reside in compute related stage at all
     {
         // Create a bind group whose bindings are not visible in compute pass
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float},
                      {1, wgpu::ShaderStage::None, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -1507,12 +1509,12 @@ TEST_F(ResourceUsageTrackingTest, TextureUsageConflictWithInvisibleStageInBindGr
     // Test render pass
     {
         // Create the render pass that will use the texture as an render attachment
-        utils::ComboRenderPassDescriptor renderPass({view});
+        dawn::utils::ComboRenderPassDescriptor renderPass({view});
 
         // Create a bind group which use the texture as sampled storage in compute stage
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}});
 
         // Texture usage in compute stage in bind group conflicts with render target. And
         // binding for compute stage is not visible in render pass. But we still track this
@@ -1527,11 +1529,11 @@ TEST_F(ResourceUsageTrackingTest, TextureUsageConflictWithInvisibleStageInBindGr
     // Test compute pass
     {
         // Create a bind group which contains both fragment and compute stages
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float},
              {1, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
+        wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
 
         // Create a no-op compute pipeline.
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -1558,32 +1560,32 @@ TEST_F(ResourceUsageTrackingTest, TextureUsageConflictWithUnusedPipelineBindings
     wgpu::TextureView view = texture.CreateView();
 
     // Create bind groups.
-    wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute,
                   wgpu::TextureSampleType::Float}});
-    wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute,
                   wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-    wgpu::BindGroup readBG = utils::MakeBindGroup(device, readBGL, {{0, view}});
-    wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, view}});
+    wgpu::BindGroup readBG = dawn::utils::MakeBindGroup(device, readBGL, {{0, view}});
+    wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, view}});
 
     // Test render pass
     {
         // Create a passthrough render pipeline with a sampled storage texture
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
                 @vertex fn main() -> @builtin(position) vec4f {
                     return vec4f();
                 })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
                 @group(0) @binding(0) var tex : texture_2d<f32>;
                 @fragment fn main() {
                 })");
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
-        pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, &readBGL);
+        pipelineDescriptor.layout = dawn::utils::MakeBasicPipelineLayout(device, &readBGL);
         wgpu::RenderPipeline rp = device.CreateRenderPipeline(&pipelineDescriptor);
 
         // Texture binding in readBG conflicts with texture binding in writeBG. The binding
@@ -1622,13 +1624,13 @@ TEST_F(ResourceUsageTrackingTest, IndirectBufferWithReadOrWriteStorage) {
     wgpu::Buffer buffer =
         CreateBuffer(20, wgpu::BufferUsage::Indirect | wgpu::BufferUsage::Storage);
 
-    wgpu::BindGroupLayout readBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout readBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage}});
-    wgpu::BindGroupLayout writeBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout writeBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage}});
 
-    wgpu::BindGroup readBG = utils::MakeBindGroup(device, readBGL, {{0, buffer}});
-    wgpu::BindGroup writeBG = utils::MakeBindGroup(device, writeBGL, {{0, buffer}});
+    wgpu::BindGroup readBG = dawn::utils::MakeBindGroup(device, readBGL, {{0, buffer}});
+    wgpu::BindGroup writeBG = dawn::utils::MakeBindGroup(device, writeBGL, {{0, buffer}});
 
     // Test pipelines
     wgpu::RenderPipeline rp = CreateNoOpRenderPipeline();

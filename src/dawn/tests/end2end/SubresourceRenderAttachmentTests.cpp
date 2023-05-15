@@ -39,14 +39,14 @@ class SubresourceRenderAttachmentTest : public DawnTest {
         renderTargetViewDesc.mipLevelCount = 1;
         wgpu::TextureView renderTargetView = renderTarget.CreateView(&renderTargetViewDesc);
 
-        utils::RGBA8 expectedColor(0, 255, 0, 255);
+        dawn::utils::RGBA8 expectedColor(0, 255, 0, 255);
         float expectedDepth = 0.3f;
         uint8_t expectedStencil = 7;
 
-        utils::ComboRenderPassDescriptor renderPass = [&]() {
+        dawn::utils::ComboRenderPassDescriptor renderPass = [&]() {
             switch (type) {
                 case Type::Color: {
-                    utils::ComboRenderPassDescriptor renderPass({renderTargetView});
+                    dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView});
                     renderPass.cColorAttachments[0].clearValue = {
                         static_cast<float>(expectedColor.r) / 255.f,
                         static_cast<float>(expectedColor.g) / 255.f,
@@ -56,13 +56,13 @@ class SubresourceRenderAttachmentTest : public DawnTest {
                     return renderPass;
                 }
                 case Type::Depth: {
-                    utils::ComboRenderPassDescriptor renderPass({}, renderTargetView);
+                    dawn::utils::ComboRenderPassDescriptor renderPass({}, renderTargetView);
                     renderPass.UnsetDepthStencilLoadStoreOpsForFormat(format);
                     renderPass.cDepthStencilAttachmentInfo.depthClearValue = expectedDepth;
                     return renderPass;
                 }
                 case Type::Stencil: {
-                    utils::ComboRenderPassDescriptor renderPass({}, renderTargetView);
+                    dawn::utils::ComboRenderPassDescriptor renderPass({}, renderTargetView);
                     renderPass.UnsetDepthStencilLoadStoreOpsForFormat(format);
                     renderPass.cDepthStencilAttachmentInfo.stencilClearValue = expectedStencil;
                     return renderPass;
@@ -81,8 +81,8 @@ class SubresourceRenderAttachmentTest : public DawnTest {
         const uint32_t renderTargetSize = textureSize >> baseMipLevel;
         switch (type) {
             case Type::Color: {
-                std::vector<utils::RGBA8> expected(renderTargetSize * renderTargetSize,
-                                                   expectedColor);
+                std::vector<dawn::utils::RGBA8> expected(renderTargetSize * renderTargetSize,
+                                                         expectedColor);
                 EXPECT_TEXTURE_EQ(expected.data(), renderTarget, {0, 0, baseArrayLayer},
                                   {renderTargetSize, renderTargetSize}, baseMipLevel);
                 break;
