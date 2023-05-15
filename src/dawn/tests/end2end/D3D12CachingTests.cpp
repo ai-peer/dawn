@@ -44,7 +44,7 @@ class D3D12CachingTests : public DawnTest {
 TEST_P(D3D12CachingTests, SameShaderNoCache) {
     mMockCache.Disable();
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vertex_main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         }
@@ -56,7 +56,7 @@ TEST_P(D3D12CachingTests, SameShaderNoCache) {
 
     // Store the WGSL shader into the cache.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -67,7 +67,7 @@ TEST_P(D3D12CachingTests, SameShaderNoCache) {
 
     // Load the same WGSL shader from the cache.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -81,7 +81,7 @@ TEST_P(D3D12CachingTests, SameShaderNoCache) {
 // of HLSL shaders. WGSL shader should result into caching 2 HLSL shaders (stage x
 // entrypoints)
 TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vertex_main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         }
@@ -93,7 +93,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
 
     // Store the WGSL shader into the cache.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -104,7 +104,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
 
     // Load the same WGSL shader from the cache.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -114,7 +114,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
     EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 
     // Modify the WGSL shader functions and make sure it doesn't hit.
-    wgpu::ShaderModule newModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule newModule = dawn::utils::CreateShaderModule(device, R"(
       @vertex fn vertex_main() -> @builtin(position) vec4f {
           return vec4f(1.0, 1.0, 1.0, 1.0);
       }
@@ -125,7 +125,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
   )");
 
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = newModule;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = newModule;
@@ -138,7 +138,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
 // Test creating a WGSL shader with two entrypoints in the same stage will cache the correct number
 // of HLSL shaders. WGSL shader should result into caching 1 HLSL shader (stage x entrypoints)
 TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPoints) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Data {
             data : u32
         }

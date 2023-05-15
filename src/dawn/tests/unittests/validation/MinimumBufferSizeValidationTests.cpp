@@ -163,7 +163,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
     // Creates compute pipeline given a layout and shader
     wgpu::ComputePipeline CreateComputePipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                                 const std::string& shader) {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, shader.c_str());
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
         wgpu::ComputePipelineDescriptor csDesc;
         csDesc.layout = nullptr;
@@ -188,11 +188,11 @@ class MinBufferSizeTestsBase : public ValidationTest {
     wgpu::RenderPipeline CreateRenderPipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                               const std::string& vertexShader,
                                               const std::string& fragShader) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragShader.c_str());
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragShader.c_str());
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
@@ -412,7 +412,7 @@ TEST_F(MinBufferSizeBindGroupCreationTests, LayoutEquality) {
     DAWN_SKIP_TEST_IF(UsesWire());
 
     auto MakeLayout = [&](uint64_t size) {
-        return utils::MakeBindGroupLayout(
+        return dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform, false, size}});
     };
@@ -573,7 +573,7 @@ TEST_F(MinBufferSizeDefaultLayoutTests, MultipleBindGroups) {
 TEST_F(MinBufferSizeDefaultLayoutTests, NonDefaultLayout) {
     CheckShaderBindingSizeReflection(
         {{{0, 0, "@size(256) a : u32, b : u32,", "u32", "a", 260},
-          {0, 1, "c : u32, @align(16) d : u32,", "u32", "c", 32},
+          {0, 1, "c : u32, @dawn::Align(16) d : u32,", "u32", "c", 32},
           {0, 2, "d : array<array<u32, 10>, 3>,", "u32", "d[0][0]", 120},
           {0, 3, "e : array<array<u32, 10>>,", "u32", "e[0][0]", 40}}});
 }
@@ -611,7 +611,7 @@ TEST_F(MinBufferSizePipelineCreationTests, NonStructVec3) {
     std::string vertexShader = CreateVertexShaderWithBindings({});
 
     CheckSizeBounds({12}, [&](const std::vector<uint64_t>& sizes, bool expectation) {
-        wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout layout = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
                       wgpu::BufferBindingType::Storage, false, sizes[0]}});
         if (expectation) {

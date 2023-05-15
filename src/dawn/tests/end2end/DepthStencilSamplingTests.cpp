@@ -140,12 +140,12 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
     wgpu::RenderPipeline CreateSamplingRenderPipeline(
         std::vector<TestAspectAndSamplerType> aspectAndSamplerTypes,
         std::vector<uint32_t> components) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         std::ostringstream shaderSource;
         std::ostringstream shaderOutputStruct;
@@ -156,7 +156,8 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
         shaderSource << "@fragment fn main() -> @location(0) vec4f {\n";
         shaderSource << shaderBody.str() << "return vec4f();\n }";
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, shaderSource.str().c_str());
+        wgpu::ShaderModule fsModule =
+            dawn::utils::CreateShaderModule(device, shaderSource.str().c_str());
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -174,7 +175,8 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
 
         shaderSource << "@compute @workgroup_size(1) fn main() { " << shaderBody.str() << "\n}";
 
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, shaderSource.str().c_str());
+        wgpu::ShaderModule csModule =
+            dawn::utils::CreateShaderModule(device, shaderSource.str().c_str());
 
         wgpu::ComputePipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.compute.module = csModule;
@@ -198,12 +200,12 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
     }
 
     wgpu::RenderPipeline CreateComparisonRenderPipeline() {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var samp : sampler_comparison;
             @group(0) @binding(1) var tex : texture_depth_2d;
             struct Uniforms {
@@ -215,7 +217,7 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                 return textureSampleCompare(tex, samp, vec2f(0.5, 0.5), uniforms.compareRef);
             })");
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -225,7 +227,7 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
     }
 
     wgpu::ComputePipeline CreateComparisonComputePipeline() {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var samp : sampler_comparison;
             @group(0) @binding(1) var tex : texture_depth_2d;
             struct Uniforms {
@@ -278,7 +280,7 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                           wgpu::Texture texture,
                           wgpu::TextureFormat format,
                           float depthValue) {
-        utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView());
         passDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(format);
         passDescriptor.cDepthStencilAttachmentInfo.depthClearValue = depthValue;
 
@@ -290,7 +292,7 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                             wgpu::Texture texture,
                             wgpu::TextureFormat format,
                             uint8_t stencilValue) {
-        utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView());
         passDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(format);
         passDescriptor.cDepthStencilAttachmentInfo.stencilClearValue = stencilValue;
 
@@ -319,9 +321,9 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
 
         wgpu::Buffer outputBuffer = CreateOutputBuffer(componentCount);
 
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {{0, inputTexture.CreateView(&inputViewDesc)}, {1, outputBuffer}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0),
+            {{0, inputTexture.CreateView(&inputViewDesc)}, {1, outputBuffer}});
 
         for (size_t i = 0; i < textureValues.size(); ++i) {
             // Set the input depth texture to the provided texture value
@@ -338,8 +340,8 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
 
             // Render into the output texture
             {
-                utils::BasicRenderPass renderPass =
-                    utils::CreateBasicRenderPass(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
+                dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
+                    device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
                 wgpu::RenderPassEncoder pass =
                     commandEncoder.BeginRenderPass(&renderPass.renderPassInfo);
                 pass.SetPipeline(pipeline);
@@ -376,9 +378,9 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
 
         wgpu::Buffer outputBuffer = CreateOutputBuffer(componentCount);
 
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {{0, inputTexture.CreateView(&inputViewDesc)}, {1, outputBuffer}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0),
+            {{0, inputTexture.CreateView(&inputViewDesc)}, {1, outputBuffer}});
 
         for (size_t i = 0; i < textureValues.size(); ++i) {
             // Set the input depth texture to the provided texture value
@@ -532,12 +534,12 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
         inputViewDesc.aspect = wgpu::TextureAspect::DepthOnly;
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {
-                                     {0, sampler},
-                                     {1, inputTexture.CreateView(&inputViewDesc)},
-                                     {2, mUniformBuffer},
-                                 });
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {
+                                           {0, sampler},
+                                           {1, inputTexture.CreateView(&inputViewDesc)},
+                                           {2, mUniformBuffer},
+                                       });
 
         wgpu::Texture outputTexture = CreateOutputTexture(wgpu::TextureFormat::R32Float);
         for (float textureValue : textureValues) {
@@ -547,7 +549,7 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
 
             // Render into the output texture
             {
-                utils::ComboRenderPassDescriptor passDescriptor({outputTexture.CreateView()});
+                dawn::utils::ComboRenderPassDescriptor passDescriptor({outputTexture.CreateView()});
                 wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&passDescriptor);
                 pass.SetPipeline(pipeline);
                 pass.SetBindGroup(0, bindGroup);
@@ -581,11 +583,11 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
         wgpu::Buffer outputBuffer = CreateOutputBuffer();
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {{0, sampler},
-                                  {1, inputTexture.CreateView(&inputViewDesc)},
-                                  {2, mUniformBuffer},
-                                  {3, outputBuffer}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {{0, sampler},
+                                        {1, inputTexture.CreateView(&inputViewDesc)},
+                                        {2, mUniformBuffer},
+                                        {3, outputBuffer}});
 
         for (float textureValue : textureValues) {
             // Set the input depth texture to the provided texture value
@@ -624,7 +626,7 @@ TEST_P(DepthStencilSamplingTest, CheckDepthTextureRange) {
     DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
 
     constexpr uint32_t kWidth = 16;
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         const kWidth = 16.0;
 
         // Write a point per texel of a height = 0 texture with depths varying between 0 and 1.
@@ -658,7 +660,7 @@ TEST_P(DepthStencilSamplingTest, CheckDepthTextureRange) {
     )");
 
     // The first pipeline will write to the depth texture.
-    utils::ComboRenderPipelineDescriptor pDesc1;
+    dawn::utils::ComboRenderPipelineDescriptor pDesc1;
     pDesc1.vertex.module = module;
     pDesc1.vertex.entryPoint = "vs";
     pDesc1.cFragment.module = module;
@@ -670,7 +672,7 @@ TEST_P(DepthStencilSamplingTest, CheckDepthTextureRange) {
     wgpu::RenderPipeline pipeline1 = device.CreateRenderPipeline(&pDesc1);
 
     // The second pipeline checks the depth texture and outputs 1 to a texel on success.
-    utils::ComboRenderPipelineDescriptor pDesc2;
+    dawn::utils::ComboRenderPipelineDescriptor pDesc2;
     pDesc2.vertex.module = module;
     pDesc2.vertex.entryPoint = "vs";
     pDesc2.cFragment.module = module;
@@ -693,8 +695,8 @@ TEST_P(DepthStencilSamplingTest, CheckDepthTextureRange) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
     // Render the depth texture with varied depth values.
-    utils::ComboRenderPassDescriptor passDesc1({colorTexture.CreateView()},
-                                               depthTexture.CreateView());
+    dawn::utils::ComboRenderPassDescriptor passDesc1({colorTexture.CreateView()},
+                                                     depthTexture.CreateView());
     wgpu::RenderPassEncoder pass1 = encoder.BeginRenderPass(&passDesc1);
     pass1.SetPipeline(pipeline1);
     pass1.Draw(kWidth);
@@ -703,13 +705,13 @@ TEST_P(DepthStencilSamplingTest, CheckDepthTextureRange) {
     // Check the depth values and output the result in a "boolean" encoded in an f32
     wgpu::TextureViewDescriptor viewDesc;
     viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
-    wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0),
-                                              {
-                                                  {0, depthTexture.CreateView(&viewDesc)},
-                                                  {1, device.CreateSampler()},
-                                              });
+    wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, pipeline2.GetBindGroupLayout(0),
+                                                    {
+                                                        {0, depthTexture.CreateView(&viewDesc)},
+                                                        {1, device.CreateSampler()},
+                                                    });
 
-    utils::ComboRenderPassDescriptor passDesc2({colorTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor passDesc2({colorTexture.CreateView()});
     wgpu::RenderPassEncoder pass2 = encoder.BeginRenderPass(&passDesc2);
     pass2.SetPipeline(pipeline2);
     pass2.SetBindGroup(0, bg);
@@ -764,18 +766,18 @@ TEST_P(DepthStencilSamplingTest, SampleDepthAndStencilRender) {
         wgpu::Buffer stencilOutput = CreateOutputBuffer();
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {
-                                     {0, inputTexture.CreateView(&depthViewDesc)},
-                                     {1, depthOutput},
-                                     {2, inputTexture.CreateView(&stencilViewDesc)},
-                                     {3, stencilOutput},
-                                 });
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {
+                                           {0, inputTexture.CreateView(&depthViewDesc)},
+                                           {1, depthOutput},
+                                           {2, inputTexture.CreateView(&stencilViewDesc)},
+                                           {3, stencilOutput},
+                                       });
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
 
         // Initialize both depth and stencil aspects.
-        utils::ComboRenderPassDescriptor passDescriptor({}, inputTexture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor passDescriptor({}, inputTexture.CreateView());
         passDescriptor.cDepthStencilAttachmentInfo.depthClearValue = 0.43f;
         passDescriptor.cDepthStencilAttachmentInfo.stencilClearValue = 31;
 
@@ -784,8 +786,8 @@ TEST_P(DepthStencilSamplingTest, SampleDepthAndStencilRender) {
 
         // Render into the output textures
         {
-            utils::BasicRenderPass renderPass =
-                utils::CreateBasicRenderPass(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
+            dawn::utils::BasicRenderPass renderPass =
+                dawn::utils::CreateBasicRenderPass(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
             wgpu::RenderPassEncoder pass =
                 commandEncoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(pipeline);
@@ -817,15 +819,15 @@ TEST_P(DepthStencilSamplingTest, SampleDepthAndStencilRender) {
         wgpu::Buffer stencilOutput = CreateOutputBuffer();
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {{0, inputTexture.CreateView(&depthViewDesc)},
-                                  {1, depthOutput},
-                                  {2, inputTexture.CreateView(&stencilViewDesc)},
-                                  {3, stencilOutput}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                       {{0, inputTexture.CreateView(&depthViewDesc)},
+                                        {1, depthOutput},
+                                        {2, inputTexture.CreateView(&stencilViewDesc)},
+                                        {3, stencilOutput}});
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         // Initialize both depth and stencil aspects.
-        utils::ComboRenderPassDescriptor passDescriptor({}, inputTexture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor passDescriptor({}, inputTexture.CreateView());
         passDescriptor.cDepthStencilAttachmentInfo.depthClearValue = 0.43f;
         passDescriptor.cDepthStencilAttachmentInfo.stencilClearValue = 31;
 
@@ -920,21 +922,21 @@ TEST_P(StencilSamplingTest, SampleStencilOnly) {
                    format, kStencilValues);
 }
 
-DAWN_INSTANTIATE_TEST_P(DepthStencilSamplingTest,
-                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-                         VulkanBackend()},
-                        std::vector<wgpu::TextureFormat>(utils::kDepthAndStencilFormats.begin(),
-                                                         utils::kDepthAndStencilFormats.end()));
+DAWN_INSTANTIATE_TEST_P(
+    DepthStencilSamplingTest,
+    {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    std::vector<wgpu::TextureFormat>(dawn::utils::kDepthAndStencilFormats.begin(),
+                                     dawn::utils::kDepthAndStencilFormats.end()));
 
 DAWN_INSTANTIATE_TEST_P(DepthSamplingTest,
                         {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
                          VulkanBackend()},
-                        std::vector<wgpu::TextureFormat>(utils::kDepthFormats.begin(),
-                                                         utils::kDepthFormats.end()));
+                        std::vector<wgpu::TextureFormat>(dawn::utils::kDepthFormats.begin(),
+                                                         dawn::utils::kDepthFormats.end()));
 
 DAWN_INSTANTIATE_TEST_P(StencilSamplingTest,
                         {D3D12Backend(), MetalBackend(),
                          MetalBackend({"metal_use_combined_depth_stencil_format_for_stencil8"}),
                          OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
-                        std::vector<wgpu::TextureFormat>(utils::kStencilFormats.begin(),
-                                                         utils::kStencilFormats.end()));
+                        std::vector<wgpu::TextureFormat>(dawn::utils::kStencilFormats.begin(),
+                                                         dawn::utils::kStencilFormats.end()));

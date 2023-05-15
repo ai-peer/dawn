@@ -19,11 +19,11 @@ class CommandEncoderTests : public DawnTest {};
 
 // Tests WriteBuffer commands on CommandEncoder.
 TEST_P(CommandEncoderTests, WriteBuffer) {
-    wgpu::Buffer bufferA = utils::CreateBufferFromData(
+    wgpu::Buffer bufferA = dawn::utils::CreateBufferFromData(
         device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc, {0, 0, 0, 0});
-    wgpu::Buffer bufferB = utils::CreateBufferFromData(
+    wgpu::Buffer bufferB = dawn::utils::CreateBufferFromData(
         device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc, {0, 0, 0, 0});
-    wgpu::Buffer bufferC = utils::CreateBufferFromData(
+    wgpu::Buffer bufferC = dawn::utils::CreateBufferFromData(
         device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc, {0, 0, 0, 0});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();

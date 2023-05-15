@@ -27,7 +27,7 @@ class ComputeSharedMemoryTests : public DawnTest {
 
 void ComputeSharedMemoryTests::BasicTest(const char* shader) {
     // Set up shader and pipeline
-    auto module = utils::CreateShaderModule(device, shader);
+    auto module = dawn::utils::CreateShaderModule(device, shader);
 
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.compute.module = module;
@@ -45,10 +45,10 @@ void ComputeSharedMemoryTests::BasicTest(const char* shader) {
     queue.WriteBuffer(dst, 0, &zero, sizeof(zero));
 
     // Set up bind group and issue dispatch
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {
-                                                         {0, dst, 0, sizeof(uint32_t)},
-                                                     });
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {
+                                                               {0, dst, 0, sizeof(uint32_t)},
+                                                           });
 
     wgpu::CommandBuffer commands;
     {
@@ -105,7 +105,7 @@ TEST_P(ComputeSharedMemoryTests, Basic) {
 // writing a matrix in workgroup memory works.
 TEST_P(ComputeSharedMemoryTests, AssortedTypes) {
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         struct StructValues {
             m: mat2x2<f32>
         }
@@ -167,10 +167,10 @@ TEST_P(ComputeSharedMemoryTests, AssortedTypes) {
     wgpu::Buffer dst = device.CreateBuffer(&dstDesc);
 
     // Set up bind group and issue dispatch
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {
-                                                         {0, dst},
-                                                     });
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {
+                                                               {0, dst},
+                                                           });
 
     wgpu::CommandBuffer commands;
     {

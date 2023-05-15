@@ -24,12 +24,12 @@ class ComputeValidationTest : public ValidationTest {
     void SetUp() override {
         ValidationTest::SetUp();
 
-        wgpu::ShaderModule computeModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule computeModule = dawn::utils::CreateShaderModule(device, R"(
             @compute @workgroup_size(1) fn main() {
             })");
 
         // Set up compute pipeline
-        wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, nullptr);
+        wgpu::PipelineLayout pl = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
 
         wgpu::ComputePipelineDescriptor csDesc;
         csDesc.layout = pl;

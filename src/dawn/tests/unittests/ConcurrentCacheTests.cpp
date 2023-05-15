@@ -52,7 +52,7 @@ class ConcurrentCacheTest : public testing::Test {
     dawn::platform::Platform mPlatform;
     std::unique_ptr<dawn::platform::WorkerTaskPool> mPool;
     dawn::native::AsyncTaskManager mTaskManager;
-    ConcurrentCache<SimpleCachedObject> mCache;
+    dawn::ConcurrentCache<SimpleCachedObject> mCache;
 };
 
 // Test inserting two objects that are equal to each other into the concurrent cache works as
@@ -64,7 +64,7 @@ TEST_F(ConcurrentCacheTest, InsertAtSameTime) {
     std::pair<SimpleCachedObject*, bool> insertOutput = {};
     std::pair<SimpleCachedObject*, bool> anotherInsertOutput = {};
 
-    ConcurrentCache<SimpleCachedObject>* cachePtr = &mCache;
+    dawn::ConcurrentCache<SimpleCachedObject>* cachePtr = &mCache;
     dawn::native::AsyncTask asyncTask1([&insertOutput, cachePtr, &cachedObject] {
         insertOutput = cachePtr->Insert(&cachedObject);
     });
@@ -86,7 +86,7 @@ TEST_F(ConcurrentCacheTest, EraseAfterInsertion) {
     SimpleCachedObject cachedObject(1);
 
     std::pair<SimpleCachedObject*, bool> insertOutput = {};
-    ConcurrentCache<SimpleCachedObject>* cachePtr = &mCache;
+    dawn::ConcurrentCache<SimpleCachedObject>* cachePtr = &mCache;
     dawn::native::AsyncTask insertTask([&insertOutput, cachePtr, &cachedObject] {
         insertOutput = cachePtr->Insert(&cachedObject);
     });
@@ -94,7 +94,7 @@ TEST_F(ConcurrentCacheTest, EraseAfterInsertion) {
     size_t erasedObjectCount = 0;
     dawn::native::AsyncTask eraseTask([&erasedObjectCount, cachePtr, &cachedObject] {
         while (cachePtr->Find(&cachedObject) == nullptr) {
-            utils::USleep(100);
+            dawn::utils::USleep(100);
         }
         erasedObjectCount = cachePtr->Erase(&cachedObject);
     });

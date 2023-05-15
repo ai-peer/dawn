@@ -115,7 +115,7 @@ TEST_P(MultithreadTests, Device_DroppedOnAnotherThread) {
     std::atomic<uint32_t> numAliveDevices = static_cast<uint32_t>(devices.size());
 
     // Create threads
-    utils::RunInParallel(
+    dawn::utils::RunInParallel(
         numAliveDevices.load(),
         [&devices, &numAliveDevices](uint32_t index) {
             EXPECT_NE(devices[index].Get(), nullptr);
@@ -148,7 +148,8 @@ TEST_P(MultithreadTests, Device_DroppedInCallback_OnAnotherThread) {
     }
 
     // Create threads
-    utils::RunInParallel(static_cast<uint32_t>(devices.size()), [&devices, this](uint32_t index) {
+    dawn::utils::RunInParallel(static_cast<uint32_t>(devices.size()), [&devices,
+                                                                       this](uint32_t index) {
         auto additionalDevice = std::move(devices[index]);
         struct UserData {
             wgpu::Device device2ndRef;
@@ -188,7 +189,7 @@ TEST_P(MultithreadTests, Buffers_MapInParallel) {
 
     constexpr uint32_t kSize = static_cast<uint32_t>(kDataSize * sizeof(uint32_t));
 
-    utils::RunInParallel(10, [=, &myData = std::as_const(myData)](uint32_t) {
+    dawn::utils::RunInParallel(10, [=, &myData = std::as_const(myData)](uint32_t) {
         wgpu::Buffer buffer;
         std::atomic<bool> mapCompleted(false);
 
@@ -247,9 +248,10 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
     }
 
     // Create pipelines in parallel
-    utils::RunInParallel(static_cast<uint32_t>(pipelines.size()), [&](uint32_t index) {
+    dawn::utils::RunInParallel(static_cast<uint32_t>(pipelines.size()), [&](uint32_t index) {
         wgpu::ComputePipelineDescriptor csDesc;
-        csDesc.compute.module = utils::CreateShaderModule(device, shaderSources[index].c_str());
+        csDesc.compute.module =
+            dawn::utils::CreateShaderModule(device, shaderSources[index].c_str());
         csDesc.compute.entryPoint = "main";
 
         struct Task {
@@ -288,10 +290,10 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
 
             ASSERT_NE(nullptr, pipelines[i].Get());
             wgpu::BindGroup bindGroup =
-                utils::MakeBindGroup(device, pipelines[i].GetBindGroupLayout(0),
-                                     {
-                                         {0, ssbo, 0, sizeof(uint32_t)},
-                                     });
+                dawn::utils::MakeBindGroup(device, pipelines[i].GetBindGroupLayout(0),
+                                           {
+                                               {0, ssbo, 0, sizeof(uint32_t)},
+                                           });
             pass.SetBindGroup(0, bindGroup);
             pass.SetPipeline(pipelines[i]);
 
@@ -318,17 +320,17 @@ TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
 
     std::vector<wgpu::RenderPipeline> pipelines(kNumThreads);
     std::vector<std::string> fragmentShaderSources(kNumThreads);
-    std::vector<utils::RGBA8> minExpectedValues(kNumThreads);
-    std::vector<utils::RGBA8> maxExpectedValues(kNumThreads);
+    std::vector<dawn::utils::RGBA8> minExpectedValues(kNumThreads);
+    std::vector<dawn::utils::RGBA8> maxExpectedValues(kNumThreads);
 
     for (uint32_t i = 0; i < kNumThreads; ++i) {
         // Due to floating point precision, we need to use min & max values to compare the
         // expectations.
         auto expectedGreen = kColorStep * i;
         minExpectedValues[i] =
-            utils::RGBA8(0, expectedGreen == 0 ? 0 : (expectedGreen - 2), 0, 255);
+            dawn::utils::RGBA8(0, expectedGreen == 0 ? 0 : (expectedGreen - 2), 0, 255);
         maxExpectedValues[i] =
-            utils::RGBA8(0, expectedGreen == 255 ? 255 : (expectedGreen + 2), 0, 255);
+            dawn::utils::RGBA8(0, expectedGreen == 255 ? 255 : (expectedGreen + 2), 0, 255);
 
         std::ostringstream ss;
         ss << R"(
@@ -342,14 +344,14 @@ TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
     }
 
     // Create pipelines in parallel
-    utils::RunInParallel(kNumThreads, [&](uint32_t index) {
-        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::RunInParallel(kNumThreads, [&](uint32_t index) {
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
         wgpu::ShaderModule fsModule =
-            utils::CreateShaderModule(device, fragmentShaderSources[index].c_str());
+            dawn::utils::CreateShaderModule(device, fragmentShaderSources[index].c_str());
         renderPipelineDescriptor.vertex.module = vsModule;
         renderPipelineDescriptor.cFragment.module = fsModule;
         renderPipelineDescriptor.cTargets[0].format = kRenderAttachmentFormat;
@@ -385,7 +387,7 @@ TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
             CreateTexture(1, 1, kRenderAttachmentFormat,
                           wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc);
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
         renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
         renderPassDescriptor.cColorAttachments[0].clearValue = {1.f, 0.f, 0.f, 1.f};
 
@@ -412,7 +414,7 @@ TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
 class MultithreadCachingTests : public MultithreadTests {
   protected:
     wgpu::ShaderModule CreateComputeShaderModule() const {
-        return utils::CreateShaderModule(device, R"(
+        return dawn::utils::CreateShaderModule(device, R"(
             struct SSBO {
                 value : u32
             }
@@ -424,7 +426,7 @@ class MultithreadCachingTests : public MultithreadTests {
     }
 
     wgpu::BindGroupLayout CreateComputeBindGroupLayout() const {
-        return utils::MakeBindGroupLayout(
+        return dawn::utils::MakeBindGroupLayout(
             device, {
                         {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
                     });
@@ -434,7 +436,7 @@ class MultithreadCachingTests : public MultithreadTests {
 // Test that creating a same shader module (which will return the cached shader module) and release
 // it on multiple threads won't race.
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedShaderModulesInParallel) {
-    utils::RunInParallel(100, [this](uint32_t) {
+    dawn::utils::RunInParallel(100, [this](uint32_t) {
         wgpu::ShaderModule csModule = CreateComputeShaderModule();
         EXPECT_NE(nullptr, csModule.Get());
     });
@@ -445,14 +447,14 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedShaderModulesInParallel) {
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedComputePipelinesInParallel) {
     wgpu::ShaderModule csModule = CreateComputeShaderModule();
     wgpu::BindGroupLayout bglayout = CreateComputeBindGroupLayout();
-    wgpu::PipelineLayout pipelineLayout = utils::MakePipelineLayout(device, {bglayout});
+    wgpu::PipelineLayout pipelineLayout = dawn::utils::MakePipelineLayout(device, {bglayout});
 
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.compute.module = csModule;
     csDesc.compute.entryPoint = "main";
     csDesc.layout = pipelineLayout;
 
-    utils::RunInParallel(100, [&, this](uint32_t) {
+    dawn::utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
         EXPECT_NE(nullptr, pipeline.Get());
     });
@@ -461,7 +463,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedComputePipelinesInParallel) {
 // Test that creating a same bind group layout (which will return the cached layout) and
 // release it on multiple threads won't race.
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedBindGroupLayoutsInParallel) {
-    utils::RunInParallel(100, [&, this](uint32_t) {
+    dawn::utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::BindGroupLayout layout = CreateComputeBindGroupLayout();
         EXPECT_NE(nullptr, layout.Get());
     });
@@ -472,8 +474,8 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedBindGroupLayoutsInParallel) {
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedPipelineLayoutsInParallel) {
     wgpu::BindGroupLayout bglayout = CreateComputeBindGroupLayout();
 
-    utils::RunInParallel(100, [&, this](uint32_t) {
-        wgpu::PipelineLayout pipelineLayout = utils::MakePipelineLayout(device, {bglayout});
+    dawn::utils::RunInParallel(100, [&, this](uint32_t) {
+        wgpu::PipelineLayout pipelineLayout = dawn::utils::MakePipelineLayout(device, {bglayout});
         EXPECT_NE(nullptr, pipelineLayout.Get());
     });
 }
@@ -481,12 +483,12 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedPipelineLayoutsInParallel) {
 // Test that creating a same render pipeline (which will return the cached pipeline) and release it
 // on multiple threads won't race.
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedRenderPipelinesInParallel) {
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
@@ -495,7 +497,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedRenderPipelinesInParallel) {
     renderPipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
     renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
 
-    utils::RunInParallel(100, [&, this](uint32_t) {
+    dawn::utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
         EXPECT_NE(nullptr, pipeline.Get());
     });
@@ -505,7 +507,7 @@ TEST_P(MultithreadCachingTests, RefAndReleaseCachedRenderPipelinesInParallel) {
 // on multiple threads won't race.
 TEST_P(MultithreadCachingTests, RefAndReleaseCachedSamplersInParallel) {
     wgpu::SamplerDescriptor desc = {};
-    utils::RunInParallel(100, [&, this](uint32_t) {
+    dawn::utils::RunInParallel(100, [&, this](uint32_t) {
         wgpu::Sampler sampler = device.CreateSampler(&desc);
         EXPECT_NE(nullptr, sampler.Get());
     });
@@ -531,11 +533,11 @@ TEST_P(MultithreadEncodingTests, RenderPassEncodersInParallel) {
 
     std::vector<wgpu::CommandBuffer> commandBuffers(kNumThreads);
 
-    utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
+    dawn::utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         // Clear the renderTarget to red.
-        utils::ComboRenderPassDescriptor renderPass({msaaRenderTargetView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({msaaRenderTargetView});
         renderPass.cColorAttachments[0].resolveTarget = resolveTargetView;
         renderPass.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
 
@@ -549,8 +551,8 @@ TEST_P(MultithreadEncodingTests, RenderPassEncodersInParallel) {
     for (auto& commandBuffer : commandBuffers) {
         queue.Submit(1, &commandBuffer);
 
-        EXPECT_TEXTURE_EQ(utils::RGBA8::kRed, resolveTarget, {0, 0});
-        EXPECT_TEXTURE_EQ(utils::RGBA8::kRed, resolveTarget, {kRTSize - 1, kRTSize - 1});
+        EXPECT_TEXTURE_EQ(dawn::utils::RGBA8::kRed, resolveTarget, {0, 0});
+        EXPECT_TEXTURE_EQ(dawn::utils::RGBA8::kRed, resolveTarget, {kRTSize - 1, kRTSize - 1});
     }
 }
 
@@ -581,11 +583,11 @@ TEST_P(MultithreadEncodingTests, RenderPassEncoders_ResolveToMipLevelOne_InParal
 
     std::vector<wgpu::CommandBuffer> commandBuffers(kNumThreads);
 
-    utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
+    dawn::utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         // Clear the renderTarget to red.
-        utils::ComboRenderPassDescriptor renderPass({msaaRenderTargetView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({msaaRenderTargetView});
         renderPass.cColorAttachments[0].resolveTarget = resolveTargetView;
         renderPass.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
 
@@ -599,8 +601,8 @@ TEST_P(MultithreadEncodingTests, RenderPassEncoders_ResolveToMipLevelOne_InParal
     for (auto& commandBuffer : commandBuffers) {
         queue.Submit(1, &commandBuffer);
 
-        EXPECT_TEXTURE_EQ(utils::RGBA8::kRed, resolveTarget, {0, 0}, 1);
-        EXPECT_TEXTURE_EQ(utils::RGBA8::kRed, resolveTarget, {kRTSize - 1, kRTSize - 1}, 1);
+        EXPECT_TEXTURE_EQ(dawn::utils::RGBA8::kRed, resolveTarget, {0, 0}, 1);
+        EXPECT_TEXTURE_EQ(dawn::utils::RGBA8::kRed, resolveTarget, {kRTSize - 1, kRTSize - 1}, 1);
     }
 }
 
@@ -609,7 +611,7 @@ TEST_P(MultithreadEncodingTests, ComputePassEncodersInParallel) {
     constexpr uint32_t kNumThreads = 10;
     constexpr uint32_t kExpected = 0xFFFFFFFFu;
 
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var<storage, read_write> output : u32;
 
             @compute @workgroup_size(1, 1, 1)
@@ -624,14 +626,14 @@ TEST_P(MultithreadEncodingTests, ComputePassEncodersInParallel) {
     wgpu::Buffer dstBuffer =
         CreateBuffer(sizeof(uint32_t), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc |
                                            wgpu::BufferUsage::CopyDst);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {
-                                                         {0, dstBuffer, 0, sizeof(uint32_t)},
-                                                     });
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {
+                                                               {0, dstBuffer, 0, sizeof(uint32_t)},
+                                                           });
 
     std::vector<wgpu::CommandBuffer> commandBuffers(kNumThreads);
 
-    utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
+    dawn::utils::RunInParallel(kNumThreads, [=, &commandBuffers](uint32_t index) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
         pass.SetPipeline(pipeline);
@@ -673,9 +675,9 @@ class MultithreadTextureCopyTests : public MultithreadTests {
         wgpu::Extent3D textureSize = {width, height, 1};
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0}, wgpu::TextureAspect::All);
+            dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0}, wgpu::TextureAspect::All);
         wgpu::TextureDataLayout textureDataLayout =
-            utils::CreateTextureDataLayout(0, dataSize / height);
+            dawn::utils::CreateTextureDataLayout(0, dataSize / height);
 
         queue.WriteTexture(&imageCopyTexture, data, dataSize, &textureDataLayout, &textureSize);
 
@@ -683,8 +685,8 @@ class MultithreadTextureCopyTests : public MultithreadTests {
     }
 
     uint32_t BufferSizeForTextureCopy(uint32_t width, uint32_t height, wgpu::TextureFormat format) {
-        uint32_t bytesPerRow = utils::GetMinimumBytesPerRow(format, width);
-        return utils::RequiredBytesInCopy(bytesPerRow, height, {width, height, 1}, format);
+        uint32_t bytesPerRow = dawn::utils::GetMinimumBytesPerRow(format, width);
+        return dawn::utils::RequiredBytesInCopy(bytesPerRow, height, {width, height, 1}, format);
     }
 
     void CopyTextureToTextureHelper(
@@ -694,7 +696,7 @@ class MultithreadTextureCopyTests : public MultithreadTests {
         const wgpu::CommandEncoder& encoder,
         const wgpu::CopyTextureForBrowserOptions* copyForBrowerOptions = nullptr) {
         wgpu::ImageCopyTexture srcView =
-            utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::All);
+            dawn::utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::All);
 
         if (copyForBrowerOptions == nullptr) {
             encoder.CopyTextureToTexture(&srcView, &dst, &dstSize);
@@ -714,7 +716,7 @@ class MultithreadTextureCopyTests : public MultithreadTests {
                                    const wgpu::Extent3D& dstSize,
                                    const wgpu::CommandEncoder& encoder) {
         wgpu::ImageCopyBuffer srcView =
-            utils::CreateImageCopyBuffer(srcBuffer, 0, srcBytesPerRow, dstSize.height);
+            dawn::utils::CreateImageCopyBuffer(srcBuffer, 0, srcBytesPerRow, dstSize.height);
 
         encoder.CopyBufferToTexture(&srcView, &dst, &dstSize);
 
@@ -776,7 +778,7 @@ TEST_P(MultithreadTextureCopyTests, CopyDepthToDepthNoRace) {
 
         // Copy from depthTexture to destTexture.
         const wgpu::Extent3D dstSize = {kWidth, kHeight, 1};
-        wgpu::ImageCopyTexture dest = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture dest = dawn::utils::CreateImageCopyTexture(
             destTexture, /*dstMipLevel=*/1, {0, 0, 0}, wgpu::TextureAspect::All);
         auto encoder = device.CreateCommandEncoder();
         lockStep.Wait(Step::WriteTexture);
@@ -844,7 +846,7 @@ TEST_P(MultithreadTextureCopyTests, CopyBufferToDepthNoRace) {
 
         auto encoder = device.CreateCommandEncoder();
 
-        wgpu::ImageCopyTexture dest = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture dest = dawn::utils::CreateImageCopyTexture(
             destTexture, /*dstMipLevel=*/0, {0, 0, 0}, wgpu::TextureAspect::All);
 
         // Wait until src buffer is written.
@@ -910,7 +912,7 @@ TEST_P(MultithreadTextureCopyTests, CopyStencilToStencilNoRace) {
 
         // Copy from stencilTexture to destTexture.
         const wgpu::Extent3D dstSize = {kWidth, kHeight, 1};
-        wgpu::ImageCopyTexture dest = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture dest = dawn::utils::CreateImageCopyTexture(
             destTexture, /*dstMipLevel=*/1, {0, 0, 0}, wgpu::TextureAspect::All);
         auto encoder = device.CreateCommandEncoder();
         lockStep.Wait(Step::WriteTexture);
@@ -969,7 +971,7 @@ TEST_P(MultithreadTextureCopyTests, CopyBufferToStencilNoRace) {
 
         auto encoder = device.CreateCommandEncoder();
 
-        wgpu::ImageCopyTexture dest = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture dest = dawn::utils::CreateImageCopyTexture(
             destTexture, /*dstMipLevel=*/0, {0, 0, 0}, wgpu::TextureAspect::All);
 
         // Wait until src buffer is written.
@@ -1002,18 +1004,26 @@ TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserNoRace) {
     constexpr uint32_t kWidth = 4;
     constexpr uint32_t kHeight = 4;
 
-    const std::vector<utils::RGBA8> kExpectedData = {
-        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kGreen, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kRed,   utils::RGBA8::kRed,   utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kRed,   utils::RGBA8::kBlue,  utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+    const std::vector<dawn::utils::RGBA8> kExpectedData = {
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+        dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kRed,   dawn::utils::RGBA8::kRed,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kRed,   dawn::utils::RGBA8::kBlue,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
     };
 
-    const std::vector<utils::RGBA8> kExpectedFlippedData = {
-        utils::RGBA8::kRed,   utils::RGBA8::kBlue,  utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kRed,   utils::RGBA8::kRed,   utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kGreen, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+    const std::vector<dawn::utils::RGBA8> kExpectedFlippedData = {
+        dawn::utils::RGBA8::kRed,   dawn::utils::RGBA8::kBlue,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kRed,   dawn::utils::RGBA8::kRed,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+        dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
     };
 
     const size_t kExpectedDataSize = kExpectedData.size() * sizeof(kExpectedData[0]);
@@ -1041,7 +1051,7 @@ TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserNoRace) {
 
         // Copy from srcTexture to destTexture.
         const wgpu::Extent3D dstSize = {kWidth, kHeight, 1};
-        wgpu::ImageCopyTexture dest = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture dest = dawn::utils::CreateImageCopyTexture(
             destTexture, /*dstMipLevel=*/0, {0, 0, 0}, wgpu::TextureAspect::All);
         wgpu::CopyTextureForBrowserOptions options;
         options.flipY = true;
@@ -1073,11 +1083,15 @@ TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserErrorNoDeadLock) {
     constexpr uint32_t kWidth = 4;
     constexpr uint32_t kHeight = 4;
 
-    const std::vector<utils::RGBA8> kExpectedData = {
-        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kGreen, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kRed,   utils::RGBA8::kRed,   utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
-        utils::RGBA8::kRed,   utils::RGBA8::kBlue,  utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+    const std::vector<dawn::utils::RGBA8> kExpectedData = {
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,
+        dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kRed,   dawn::utils::RGBA8::kRed,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
+        dawn::utils::RGBA8::kRed,   dawn::utils::RGBA8::kBlue,
+        dawn::utils::RGBA8::kBlack, dawn::utils::RGBA8::kBlack,  //
     };
 
     const size_t kExpectedDataSize = kExpectedData.size() * sizeof(kExpectedData[0]);
@@ -1108,7 +1122,7 @@ TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserErrorNoDeadLock) {
 
         // Copy from srcTexture to destTexture.
         const wgpu::Extent3D dstSize = {kWidth, kHeight, 1};
-        wgpu::ImageCopyTexture dest = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture dest = dawn::utils::CreateImageCopyTexture(
             destTexture, /*dstMipLevel=*/0, {0, 0, 0}, wgpu::TextureAspect::All);
         wgpu::CopyTextureForBrowserOptions options = {};
 
@@ -1145,18 +1159,18 @@ class MultithreadDrawIndexedIndirectTests : public MultithreadTests {
     void SetUp() override {
         MultithreadTests::SetUp();
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@location(0) pos : vec4f) -> @builtin(position) vec4f {
                 return pos;
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleStrip;
@@ -1165,11 +1179,11 @@ class MultithreadDrawIndexedIndirectTests : public MultithreadTests {
         descriptor.cBuffers[0].arrayStride = 4 * sizeof(float);
         descriptor.cBuffers[0].attributeCount = 1;
         descriptor.cAttributes[0].format = wgpu::VertexFormat::Float32x4;
-        descriptor.cTargets[0].format = utils::BasicRenderPass::kDefaultColorFormat;
+        descriptor.cTargets[0].format = dawn::utils::BasicRenderPass::kDefaultColorFormat;
 
         pipeline = device.CreateRenderPipeline(&descriptor);
 
-        vertexBuffer = utils::CreateBufferFromData<float>(
+        vertexBuffer = dawn::utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex,
             {// First quad: the first 3 vertices represent the bottom left triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f,
@@ -1183,10 +1197,10 @@ class MultithreadDrawIndexedIndirectTests : public MultithreadTests {
     void Test(std::initializer_list<uint32_t> bufferList,
               uint64_t indexOffset,
               uint64_t indirectOffset,
-              utils::RGBA8 bottomLeftExpected,
-              utils::RGBA8 topRightExpected) {
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
-            device, kRTSize, kRTSize, utils::BasicRenderPass::kDefaultColorFormat);
+              dawn::utils::RGBA8 bottomLeftExpected,
+              dawn::utils::RGBA8 topRightExpected) {
+        dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
+            device, kRTSize, kRTSize, dawn::utils::BasicRenderPass::kDefaultColorFormat);
         wgpu::Buffer indexBuffer =
             CreateIndexBuffer({0, 1, 2, 0, 3, 1,
                                // The indices below are added to test negatve baseVertex
@@ -1198,19 +1212,20 @@ class MultithreadDrawIndexedIndirectTests : public MultithreadTests {
 
   private:
     wgpu::Buffer CreateIndirectBuffer(std::initializer_list<uint32_t> indirectParamList) {
-        return utils::CreateBufferFromData<uint32_t>(
+        return dawn::utils::CreateBufferFromData<uint32_t>(
             device, wgpu::BufferUsage::Indirect | wgpu::BufferUsage::Storage, indirectParamList);
     }
 
     wgpu::Buffer CreateIndexBuffer(std::initializer_list<uint32_t> indexList) {
-        return utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, indexList);
+        return dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index,
+                                                           indexList);
     }
 
     wgpu::CommandBuffer EncodeDrawCommands(std::initializer_list<uint32_t> bufferList,
                                            wgpu::Buffer indexBuffer,
                                            uint64_t indexOffset,
                                            uint64_t indirectOffset,
-                                           const utils::BasicRenderPass& renderPass) {
+                                           const dawn::utils::BasicRenderPass& renderPass) {
         wgpu::Buffer indirectBuffer = CreateIndirectBuffer(bufferList);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -1226,9 +1241,9 @@ class MultithreadDrawIndexedIndirectTests : public MultithreadTests {
         return encoder.Finish();
     }
 
-    void TestDraw(const utils::BasicRenderPass& renderPass,
-                  utils::RGBA8 bottomLeftExpected,
-                  utils::RGBA8 topRightExpected,
+    void TestDraw(const dawn::utils::BasicRenderPass& renderPass,
+                  dawn::utils::RGBA8 bottomLeftExpected,
+                  dawn::utils::RGBA8 topRightExpected,
                   wgpu::CommandBuffer commands) {
         queue.Submit(1, &commands);
 
@@ -1250,10 +1265,10 @@ TEST_P(MultithreadDrawIndexedIndirectTests, IndirectOffsetInParallel) {
     // the offsets that Tint/GLSL produces.
     DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
 
-    utils::RGBA8 filled(0, 255, 0, 255);
-    utils::RGBA8 notFilled(0, 0, 0, 0);
+    dawn::utils::RGBA8 filled(0, 255, 0, 255);
+    dawn::utils::RGBA8 notFilled(0, 0, 0, 0);
 
-    utils::RunInParallel(10, [=](uint32_t) {
+    dawn::utils::RunInParallel(10, [=](uint32_t) {
         // Test an offset draw call, with indirect buffer containing 2 calls:
         // 1) first 3 indices of the second quad (top right triangle)
         // 2) last 3 indices of the second quad
@@ -1329,7 +1344,7 @@ TEST_P(MultithreadTimestampQueryTests, ResolveQuerySets_InParallel) {
         destinations[i] = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
     }
 
-    utils::RunInParallel(kNumThreads, [&](uint32_t index) {
+    dawn::utils::RunInParallel(kNumThreads, [&](uint32_t index) {
         const auto& querySet = querySets[index];
         const auto& destination = destinations[index];
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();

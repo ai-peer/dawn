@@ -44,7 +44,7 @@ class ComputePipelineOverridableConstantsValidationTest : public ValidationTest 
     }
 
     void SetUpShadersWithDefaultValueConstants() {
-        computeModule = utils::CreateShaderModule(device, R"(
+        computeModule = dawn::utils::CreateShaderModule(device, R"(
 enable f16;
 
 override c0: bool = true;            // type: bool
@@ -82,7 +82,7 @@ override c12: f16 = 0.0h;            // default override
     }
 
     void SetUpShadersWithUninitializedConstants() {
-        computeModule = utils::CreateShaderModule(device, R"(
+        computeModule = dawn::utils::CreateShaderModule(device, R"(
 enable f16;
 
 override c0: bool;                   // type: bool

@@ -34,7 +34,7 @@ struct SimpleTaskResult {
 };
 
 // A thread-safe queue that stores the task results.
-class ConcurrentTaskResultQueue : public NonCopyable {
+class ConcurrentTaskResultQueue : public dawn::NonCopyable {
   public:
     void AddResult(std::unique_ptr<SimpleTaskResult> result) {
         std::lock_guard<std::mutex> lock(mMutex);

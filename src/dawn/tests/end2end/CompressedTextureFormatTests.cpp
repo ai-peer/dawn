@@ -43,17 +43,17 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
         const wgpu::TextureFormat format = GetParam().mTextureFormat;
-        if (utils::IsBCTextureFormat(format) &&
+        if (dawn::utils::IsBCTextureFormat(format) &&
             SupportsFeatures({wgpu::FeatureName::TextureCompressionBC})) {
             mIsFormatSupported = true;
             return {wgpu::FeatureName::TextureCompressionBC};
         }
-        if (utils::IsETC2TextureFormat(format) &&
+        if (dawn::utils::IsETC2TextureFormat(format) &&
             SupportsFeatures({wgpu::FeatureName::TextureCompressionETC2})) {
             mIsFormatSupported = true;
             return {wgpu::FeatureName::TextureCompressionETC2};
         }
-        if (utils::IsASTCTextureFormat(format) &&
+        if (dawn::utils::IsASTCTextureFormat(format) &&
             SupportsFeatures({wgpu::FeatureName::TextureCompressionASTC})) {
             mIsFormatSupported = true;
             return {wgpu::FeatureName::TextureCompressionASTC};
@@ -65,11 +65,11 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
 
     uint32_t BlockWidthInTexels() const {
         ASSERT(IsFormatSupported());
-        return utils::GetTextureFormatBlockWidth(GetParam().mTextureFormat);
+        return dawn::utils::GetTextureFormatBlockWidth(GetParam().mTextureFormat);
     }
     uint32_t BlockHeightInTexels() const {
         ASSERT(IsFormatSupported());
-        return utils::GetTextureFormatBlockHeight(GetParam().mTextureFormat);
+        return dawn::utils::GetTextureFormatBlockHeight(GetParam().mTextureFormat);
     }
 
     // Compute the upload data for the copyConfig.
@@ -80,8 +80,8 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
         if (copyConfig.bytesPerRowAlignment != 0) {
             copyBytesPerRow = copyConfig.bytesPerRowAlignment;
         } else {
-            copyBytesPerRow = copyWidthInBlock *
-                              utils::GetTexelBlockSizeInBytes(copyConfig.textureDescriptor.format);
+            copyBytesPerRow = copyWidthInBlock * dawn::utils::GetTexelBlockSizeInBytes(
+                                                     copyConfig.textureDescriptor.format);
         }
         uint32_t copyRowsPerImage = copyConfig.rowsPerImage;
         if (copyRowsPerImage == wgpu::kCopyStrideUndefined) {
@@ -118,13 +118,13 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
         std::vector<uint8_t> data = UploadData(copyConfig);
 
         // Copy texture data from a staging buffer to the destination texture.
-        wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(device, data.data(), data.size(),
-                                                                 wgpu::BufferUsage::CopySrc);
-        wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(stagingBuffer, copyConfig.bufferOffset,
-                                         copyConfig.bytesPerRowAlignment, copyConfig.rowsPerImage);
+        wgpu::Buffer stagingBuffer = dawn::utils::CreateBufferFromData(
+            device, data.data(), data.size(), wgpu::BufferUsage::CopySrc);
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
+            stagingBuffer, copyConfig.bufferOffset, copyConfig.bytesPerRowAlignment,
+            copyConfig.rowsPerImage);
 
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             compressedTexture, copyConfig.viewMipmapLevel, copyConfig.copyOrigin3D);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -154,15 +154,16 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
         textureViewDescriptor.mipLevelCount = 1;
         wgpu::TextureView textureView = compressedTexture.CreateView(&textureViewDescriptor);
 
-        return utils::MakeBindGroup(device, bindGroupLayout, {{0, sampler}, {1, textureView}});
+        return dawn::utils::MakeBindGroup(device, bindGroupLayout,
+                                          {{0, sampler}, {1, textureView}});
     }
 
     // Create a render pipeline for sampling from a texture and rendering into the render target.
     wgpu::RenderPipeline CreateRenderPipelineForTest() {
         ASSERT(IsFormatSupported());
 
-        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             struct VertexOut {
                 @location(0) texCoord : vec2 <f32>,
                 @builtin(position) position : vec4f,
@@ -180,7 +181,7 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
                 output.texCoord = vec2f(output.position.x / 2.0, -output.position.y / 2.0) + vec2f(0.5, 0.5);
                 return output;
             })");
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var sampler0 : sampler;
             @group(0) @binding(1) var texture0 : texture_2d<f32>;
 
@@ -190,7 +191,8 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
             })");
         renderPipelineDescriptor.vertex.module = vsModule;
         renderPipelineDescriptor.cFragment.module = fsModule;
-        renderPipelineDescriptor.cTargets[0].format = utils::BasicRenderPass::kDefaultColorFormat;
+        renderPipelineDescriptor.cTargets[0].format =
+            dawn::utils::BasicRenderPass::kDefaultColorFormat;
 
         return device.CreateRenderPipeline(&renderPipelineDescriptor);
     }
@@ -201,11 +203,11 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
                                             const wgpu::Extent3D& renderTargetSize,
                                             const wgpu::Origin3D& expectedOrigin,
                                             const wgpu::Extent3D& expectedExtent,
-                                            const std::vector<utils::RGBA8>& expected) {
+                                            const std::vector<dawn::utils::RGBA8>& expected) {
         ASSERT(IsFormatSupported());
 
-        utils::BasicRenderPass renderPass =
-            utils::CreateBasicRenderPass(device, renderTargetSize.width, renderTargetSize.height);
+        dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
+            device, renderTargetSize.width, renderTargetSize.height);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
@@ -225,7 +227,7 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
         EXPECT_TEXTURE_EQ(expected.data(), renderPass.color, {expectedOrigin.x, expectedOrigin.y},
                           {expectedExtent.width, expectedExtent.height},
                           /* level */ 0, /* aspect */ wgpu::TextureAspect::All,
-                          /* bytesPerRow */ 0, /* Tolerance */ utils::RGBA8(1, 1, 1, 1));
+                          /* bytesPerRow */ 0, /* Tolerance */ dawn::utils::RGBA8(1, 1, 1, 1));
     }
 
     // Run the tests that copies pre-prepared format data into a texture and verifies if we can
@@ -255,7 +257,7 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
         }
         noPaddingExtent3D.depthOrArrayLayers = 1u;
 
-        std::vector<utils::RGBA8> expectedData = GetExpectedData(noPaddingExtent3D);
+        std::vector<dawn::utils::RGBA8> expectedData = GetExpectedData(noPaddingExtent3D);
 
         wgpu::Origin3D firstLayerCopyOrigin = {config.copyOrigin3D.x, config.copyOrigin3D.y, 0};
         for (uint32_t layer = config.copyOrigin3D.z;
@@ -282,9 +284,9 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
                                     wgpu::Texture dstTexture,
                                     CopyConfig srcConfig,
                                     CopyConfig dstConfig) {
-        wgpu::ImageCopyTexture imageCopyTextureSrc = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture imageCopyTextureSrc = dawn::utils::CreateImageCopyTexture(
             srcTexture, srcConfig.viewMipmapLevel, srcConfig.copyOrigin3D);
-        wgpu::ImageCopyTexture imageCopyTextureDst = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture imageCopyTextureDst = dawn::utils::CreateImageCopyTexture(
             dstTexture, dstConfig.viewMipmapLevel, dstConfig.copyOrigin3D);
         encoder.CopyTextureToTexture(&imageCopyTextureSrc, &imageCopyTextureDst,
                                      &dstConfig.copyExtent3D);
@@ -452,24 +454,24 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
     // Return the texture data that is decoded from the result of GetOneBlockFormatTextureData
     // in RGBA8 formats. Since some compression methods may be lossy, we may use different colors
     // to test different formats.
-    std::vector<utils::RGBA8> GetExpectedData(const wgpu::Extent3D& testRegion) {
+    std::vector<dawn::utils::RGBA8> GetExpectedData(const wgpu::Extent3D& testRegion) {
         constexpr uint8_t kLeftAlpha = 0x88;
         constexpr uint8_t kRightAlpha = 0xFF;
 
-        constexpr utils::RGBA8 kBCDarkRed(198, 0, 0, 255);
-        constexpr utils::RGBA8 kBCDarkGreen(0, 207, 0, 255);
-        constexpr utils::RGBA8 kBCDarkRedSRGB(144, 0, 0, 255);
-        constexpr utils::RGBA8 kBCDarkGreenSRGB(0, 159, 0, 255);
+        constexpr dawn::utils::RGBA8 kBCDarkRed(198, 0, 0, 255);
+        constexpr dawn::utils::RGBA8 kBCDarkGreen(0, 207, 0, 255);
+        constexpr dawn::utils::RGBA8 kBCDarkRedSRGB(144, 0, 0, 255);
+        constexpr dawn::utils::RGBA8 kBCDarkGreenSRGB(0, 159, 0, 255);
 
-        constexpr utils::RGBA8 kETC2DarkRed(204, 0, 0, 255);
-        constexpr utils::RGBA8 kETC2DarkGreen(0, 204, 0, 255);
-        constexpr utils::RGBA8 kETC2DarkRedSRGB(154, 0, 0, 255);
-        constexpr utils::RGBA8 kETC2DarkGreenSRGB(0, 154, 0, 255);
+        constexpr dawn::utils::RGBA8 kETC2DarkRed(204, 0, 0, 255);
+        constexpr dawn::utils::RGBA8 kETC2DarkGreen(0, 204, 0, 255);
+        constexpr dawn::utils::RGBA8 kETC2DarkRedSRGB(154, 0, 0, 255);
+        constexpr dawn::utils::RGBA8 kETC2DarkGreenSRGB(0, 154, 0, 255);
 
-        constexpr utils::RGBA8 kASTCDarkRed(244, 0, 0, 128);
-        constexpr utils::RGBA8 kASTCDarkGreen(0, 244, 0, 255);
-        constexpr utils::RGBA8 kASTCDarkRedSRGB(231, 0, 0, 128);
-        constexpr utils::RGBA8 kASTCDarkGreenSRGB(0, 231, 0, 255);
+        constexpr dawn::utils::RGBA8 kASTCDarkRed(244, 0, 0, 128);
+        constexpr dawn::utils::RGBA8 kASTCDarkGreen(0, 244, 0, 255);
+        constexpr dawn::utils::RGBA8 kASTCDarkRedSRGB(231, 0, 0, 128);
+        constexpr dawn::utils::RGBA8 kASTCDarkGreenSRGB(0, 231, 0, 255);
 
         switch (GetParam().mTextureFormat) {
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -478,9 +480,10 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
 
             case wgpu::TextureFormat::BC2RGBAUnorm:
             case wgpu::TextureFormat::BC3RGBAUnorm: {
-                constexpr utils::RGBA8 kLeftColor = utils::RGBA8(kBCDarkRed.r, 0, 0, kLeftAlpha);
-                constexpr utils::RGBA8 kRightColor =
-                    utils::RGBA8(0, kBCDarkGreen.g, 0, kRightAlpha);
+                constexpr dawn::utils::RGBA8 kLeftColor =
+                    dawn::utils::RGBA8(kBCDarkRed.r, 0, 0, kLeftAlpha);
+                constexpr dawn::utils::RGBA8 kRightColor =
+                    dawn::utils::RGBA8(0, kBCDarkGreen.g, 0, kRightAlpha);
                 return FillExpectedData(testRegion, kLeftColor, kRightColor);
             }
 
@@ -490,22 +493,24 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
 
             case wgpu::TextureFormat::BC2RGBAUnormSrgb:
             case wgpu::TextureFormat::BC3RGBAUnormSrgb: {
-                constexpr utils::RGBA8 kLeftColor =
-                    utils::RGBA8(kBCDarkRedSRGB.r, 0, 0, kLeftAlpha);
-                constexpr utils::RGBA8 kRightColor =
-                    utils::RGBA8(0, kBCDarkGreenSRGB.g, 0, kRightAlpha);
+                constexpr dawn::utils::RGBA8 kLeftColor =
+                    dawn::utils::RGBA8(kBCDarkRedSRGB.r, 0, 0, kLeftAlpha);
+                constexpr dawn::utils::RGBA8 kRightColor =
+                    dawn::utils::RGBA8(0, kBCDarkGreenSRGB.g, 0, kRightAlpha);
                 return FillExpectedData(testRegion, kLeftColor, kRightColor);
             }
 
             case wgpu::TextureFormat::BC4RSnorm:
             case wgpu::TextureFormat::BC4RUnorm:
-                return FillExpectedData(testRegion, utils::RGBA8::kRed, utils::RGBA8::kBlack);
+                return FillExpectedData(testRegion, dawn::utils::RGBA8::kRed,
+                                        dawn::utils::RGBA8::kBlack);
 
             case wgpu::TextureFormat::BC5RGSnorm:
             case wgpu::TextureFormat::BC5RGUnorm:
             case wgpu::TextureFormat::BC6HRGBFloat:
             case wgpu::TextureFormat::BC6HRGBUfloat:
-                return FillExpectedData(testRegion, utils::RGBA8::kRed, utils::RGBA8::kGreen);
+                return FillExpectedData(testRegion, dawn::utils::RGBA8::kRed,
+                                        dawn::utils::RGBA8::kGreen);
 
             case wgpu::TextureFormat::ETC2RGB8Unorm:
             case wgpu::TextureFormat::ETC2RGB8A1Unorm:
@@ -516,27 +521,30 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
                 return FillExpectedData(testRegion, kETC2DarkRedSRGB, kETC2DarkGreenSRGB);
 
             case wgpu::TextureFormat::ETC2RGBA8Unorm: {
-                constexpr utils::RGBA8 kLeftColor = utils::RGBA8(kETC2DarkRed.r, 0, 0, kLeftAlpha);
-                constexpr utils::RGBA8 kRightColor =
-                    utils::RGBA8(0, kETC2DarkGreen.g, 0, kRightAlpha);
+                constexpr dawn::utils::RGBA8 kLeftColor =
+                    dawn::utils::RGBA8(kETC2DarkRed.r, 0, 0, kLeftAlpha);
+                constexpr dawn::utils::RGBA8 kRightColor =
+                    dawn::utils::RGBA8(0, kETC2DarkGreen.g, 0, kRightAlpha);
                 return FillExpectedData(testRegion, kLeftColor, kRightColor);
             }
 
             case wgpu::TextureFormat::ETC2RGBA8UnormSrgb: {
-                constexpr utils::RGBA8 kLeftColor =
-                    utils::RGBA8(kETC2DarkRedSRGB.r, 0, 0, kLeftAlpha);
-                constexpr utils::RGBA8 kRightColor =
-                    utils::RGBA8(0, kETC2DarkGreenSRGB.g, 0, kRightAlpha);
+                constexpr dawn::utils::RGBA8 kLeftColor =
+                    dawn::utils::RGBA8(kETC2DarkRedSRGB.r, 0, 0, kLeftAlpha);
+                constexpr dawn::utils::RGBA8 kRightColor =
+                    dawn::utils::RGBA8(0, kETC2DarkGreenSRGB.g, 0, kRightAlpha);
                 return FillExpectedData(testRegion, kLeftColor, kRightColor);
             }
 
             case wgpu::TextureFormat::EACR11Unorm:
             case wgpu::TextureFormat::EACR11Snorm:
-                return FillExpectedData(testRegion, utils::RGBA8::kRed, utils::RGBA8::kBlack);
+                return FillExpectedData(testRegion, dawn::utils::RGBA8::kRed,
+                                        dawn::utils::RGBA8::kBlack);
 
             case wgpu::TextureFormat::EACRG11Unorm:
             case wgpu::TextureFormat::EACRG11Snorm:
-                return FillExpectedData(testRegion, utils::RGBA8::kRed, utils::RGBA8::kGreen);
+                return FillExpectedData(testRegion, dawn::utils::RGBA8::kRed,
+                                        dawn::utils::RGBA8::kGreen);
 
             case wgpu::TextureFormat::ASTC4x4Unorm:
             case wgpu::TextureFormat::ASTC5x4Unorm:
@@ -576,13 +584,13 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
         }
     }
 
-    std::vector<utils::RGBA8> FillExpectedData(const wgpu::Extent3D& testRegion,
-                                               utils::RGBA8 leftColorInBlock,
-                                               utils::RGBA8 rightColorInBlock) {
+    std::vector<dawn::utils::RGBA8> FillExpectedData(const wgpu::Extent3D& testRegion,
+                                                     dawn::utils::RGBA8 leftColorInBlock,
+                                                     dawn::utils::RGBA8 rightColorInBlock) {
         ASSERT(testRegion.depthOrArrayLayers == 1);
 
-        std::vector<utils::RGBA8> expectedData(testRegion.width * testRegion.height,
-                                               leftColorInBlock);
+        std::vector<dawn::utils::RGBA8> expectedData(testRegion.width * testRegion.height,
+                                                     leftColorInBlock);
         for (uint32_t y = 0; y < testRegion.height; ++y) {
             for (uint32_t x = 0; x < testRegion.width; ++x) {
                 if (x % BlockWidthInTexels() >= BlockWidthInTexels() / 2) {
@@ -689,7 +697,7 @@ TEST_P(CompressedTextureFormatTest, CopyIntoSubRegion) {
     DAWN_TEST_UNSUPPORTED_IF(!IsFormatSupported());
 
     // TODO(dawn:1802): Clear BC formats.
-    DAWN_SUPPRESS_TEST_IF(IsD3D11() && utils::IsBCTextureFormat(GetParam().mTextureFormat));
+    DAWN_SUPPRESS_TEST_IF(IsD3D11() && dawn::utils::IsBCTextureFormat(GetParam().mTextureFormat));
 
     CopyConfig config = GetDefaultSmallConfig();
     config.copyOrigin3D = {BlockWidthInTexels(), BlockHeightInTexels(), 0};
@@ -763,7 +771,7 @@ TEST_P(CompressedTextureFormatTest, CopyWholeTextureSubResourceIntoNonZeroMipmap
         CreateBindGroupForTest(renderPipeline.GetBindGroupLayout(0), textureDst,
                                config.copyOrigin3D.z, config.viewMipmapLevel);
 
-    std::vector<utils::RGBA8> expectedData = GetExpectedData(kVirtualSize);
+    std::vector<dawn::utils::RGBA8> expectedData = GetExpectedData(kVirtualSize);
     VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kVirtualSize, config.copyOrigin3D,
                                        kVirtualSize, expectedData);
 }
@@ -791,7 +799,7 @@ TEST_P(CompressedTextureFormatTest, CopyIntoSubresourceWithPhysicalSizeNotEqualT
     // Create textureSrc as the source texture and initialize it with pre-prepared compressed
     // data.
     wgpu::Texture textureSrc = CreateTextureWithCompressedData(srcConfig);
-    wgpu::ImageCopyTexture imageCopyTextureSrc = utils::CreateImageCopyTexture(
+    wgpu::ImageCopyTexture imageCopyTextureSrc = dawn::utils::CreateImageCopyTexture(
         textureSrc, srcConfig.viewMipmapLevel, srcConfig.copyOrigin3D);
 
     // Create textureDst and copy from the content in textureSrc into it.
@@ -803,7 +811,7 @@ TEST_P(CompressedTextureFormatTest, CopyIntoSubresourceWithPhysicalSizeNotEqualT
         CreateBindGroupForTest(renderPipeline.GetBindGroupLayout(0), textureDst,
                                dstConfig.copyOrigin3D.z, dstConfig.viewMipmapLevel);
 
-    std::vector<utils::RGBA8> expectedData = GetExpectedData(kDstVirtualSize);
+    std::vector<dawn::utils::RGBA8> expectedData = GetExpectedData(kDstVirtualSize);
     VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kDstVirtualSize,
                                        dstConfig.copyOrigin3D, kDstVirtualSize, expectedData);
 }
@@ -844,7 +852,7 @@ TEST_P(CompressedTextureFormatTest, CopyFromSubresourceWithPhysicalSizeNotEqualT
         CreateBindGroupForTest(renderPipeline.GetBindGroupLayout(0), textureDst,
                                dstConfig.copyOrigin3D.z, dstConfig.viewMipmapLevel);
 
-    std::vector<utils::RGBA8> expectedData = GetExpectedData(kDstVirtualSize);
+    std::vector<dawn::utils::RGBA8> expectedData = GetExpectedData(kDstVirtualSize);
     VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kDstVirtualSize,
                                        dstConfig.copyOrigin3D, kDstVirtualSize, expectedData);
 }
@@ -903,7 +911,7 @@ TEST_P(CompressedTextureFormatTest, MultipleCopiesWithPhysicalSizeNotEqualToVirt
             CreateBindGroupForTest(renderPipeline.GetBindGroupLayout(0), dstTextures[i],
                                    dstConfigs[i].copyOrigin3D.z, dstConfigs[i].viewMipmapLevel);
 
-        std::vector<utils::RGBA8> expectedData = GetExpectedData(dstVirtualSizes[i]);
+        std::vector<dawn::utils::RGBA8> expectedData = GetExpectedData(dstVirtualSizes[i]);
         VerifyCompressedTexturePixelValues(renderPipeline, bindGroup0, dstVirtualSizes[i],
                                            dstConfigs[i].copyOrigin3D, dstVirtualSizes[i],
                                            expectedData);
@@ -939,9 +947,10 @@ TEST_P(CompressedTextureFormatTest, CopyWithMultipleLayerAndPhysicalSizeNotEqual
 
     const wgpu::TextureFormat format = GetParam().mTextureFormat;
     srcConfig.textureDescriptor.format = dstConfig.textureDescriptor.format = format;
-    srcConfig.bytesPerRowAlignment = Align(srcConfig.copyExtent3D.width / BlockWidthInTexels() *
-                                               utils::GetTexelBlockSizeInBytes(format),
-                                           kTextureBytesPerRowAlignment);
+    srcConfig.bytesPerRowAlignment =
+        dawn::Align(srcConfig.copyExtent3D.width / BlockWidthInTexels() *
+                        dawn::utils::GetTexelBlockSizeInBytes(format),
+                    kTextureBytesPerRowAlignment);
     dstConfig.textureDescriptor.usage = kDefaultFormatTextureUsage;
 
     // Create textureSrc as the source texture and initialize it with pre-prepared compressed
@@ -957,7 +966,8 @@ TEST_P(CompressedTextureFormatTest, CopyWithMultipleLayerAndPhysicalSizeNotEqual
 
     const wgpu::Extent3D kExpectedDataRegionPerLayer = {kDstVirtualSize.width,
                                                         kDstVirtualSize.height, 1u};
-    std::vector<utils::RGBA8> kExpectedDataPerLayer = GetExpectedData(kExpectedDataRegionPerLayer);
+    std::vector<dawn::utils::RGBA8> kExpectedDataPerLayer =
+        GetExpectedData(kExpectedDataRegionPerLayer);
     const wgpu::Origin3D kCopyOriginPerLayer = {dstConfig.copyOrigin3D.x, dstConfig.copyOrigin3D.y,
                                                 0};
     for (uint32_t copyLayer = 0; copyLayer < kArrayLayerCount; ++copyLayer) {
@@ -981,7 +991,7 @@ TEST_P(CompressedTextureFormatTest, BufferOffsetAndExtentFitRowPitch) {
 
     const wgpu::TextureFormat format = GetParam().mTextureFormat;
     const uint32_t blockCountPerRow = config.textureDescriptor.size.width / BlockWidthInTexels();
-    const uint32_t blockSizeInBytes = utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t blockSizeInBytes = dawn::utils::GetTexelBlockSizeInBytes(format);
     const uint32_t blockCountPerRowPitch = config.bytesPerRowAlignment / blockSizeInBytes;
     config.bufferOffset = (blockCountPerRowPitch - blockCountPerRow) * blockSizeInBytes;
 
@@ -1003,7 +1013,7 @@ TEST_P(CompressedTextureFormatTest, BufferOffsetExceedsSlicePitch) {
     const uint32_t blockCountPerRow = textureSizeLevel.width / BlockWidthInTexels();
     const uint32_t slicePitchInBytes =
         config.bytesPerRowAlignment * (textureSizeLevel.height / BlockHeightInTexels());
-    const uint32_t blockSizeInBytes = utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t blockSizeInBytes = dawn::utils::GetTexelBlockSizeInBytes(format);
     const uint32_t blockCountPerRowPitch = config.bytesPerRowAlignment / blockSizeInBytes;
     config.bufferOffset = (blockCountPerRowPitch - blockCountPerRow) * blockSizeInBytes +
                           config.bytesPerRowAlignment + slicePitchInBytes;
@@ -1023,7 +1033,7 @@ TEST_P(CompressedTextureFormatTest, CopyWithBufferOffsetAndExtentExceedRowPitch)
 
     const wgpu::TextureFormat format = GetParam().mTextureFormat;
     const uint32_t blockCountPerRow = config.textureDescriptor.size.width / BlockWidthInTexels();
-    const uint32_t blockSizeInBytes = utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t blockSizeInBytes = dawn::utils::GetTexelBlockSizeInBytes(format);
     const uint32_t blockCountPerRowPitch = config.bytesPerRowAlignment / blockSizeInBytes;
     config.bufferOffset =
         (blockCountPerRowPitch - blockCountPerRow + kExceedRowBlockCount) * blockSizeInBytes;
@@ -1044,7 +1054,7 @@ TEST_P(CompressedTextureFormatTest, RowPitchEqualToSlicePitch) {
     const wgpu::TextureFormat format = GetParam().mTextureFormat;
     const uint32_t blockCountPerRow = config.textureDescriptor.size.width / BlockWidthInTexels();
     const uint32_t slicePitchInBytes = config.bytesPerRowAlignment;
-    const uint32_t blockSizeInBytes = utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t blockSizeInBytes = dawn::utils::GetTexelBlockSizeInBytes(format);
     const uint32_t blockCountPerRowPitch = config.bytesPerRowAlignment / blockSizeInBytes;
     config.bufferOffset =
         (blockCountPerRowPitch - blockCountPerRow) * blockSizeInBytes + slicePitchInBytes;
@@ -1127,8 +1137,8 @@ DAWN_INSTANTIATE_TEST_P(CompressedTextureFormatTest,
                         {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
                          OpenGLESBackend(), VulkanBackend(),
                          VulkanBackend({"use_temporary_buffer_in_texture_to_texture_copy"})},
-                        std::vector<wgpu::TextureFormat>(utils::kCompressedFormats.begin(),
-                                                         utils::kCompressedFormats.end()));
+                        std::vector<wgpu::TextureFormat>(dawn::utils::kCompressedFormats.begin(),
+                                                         dawn::utils::kCompressedFormats.end()));
 
 // Suite of regression tests that target specific compression types.
 class CompressedTextureFormatSpecificTest : public DawnTest {
@@ -1159,7 +1169,7 @@ TEST_P(CompressedTextureFormatSpecificTest, BC1RGBAUnorm_UnalignedDynamicUploade
     // TODO(dawn:1802): Clear BC formats.
     DAWN_SUPPRESS_TEST_IF(IsD3D11());
 
-    utils::UnalignDynamicUploader(device);
+    dawn::utils::UnalignDynamicUploader(device);
 
     wgpu::TextureDescriptor textureDescriptor = {};
     textureDescriptor.size = {4, 4, 1};
@@ -1172,8 +1182,9 @@ TEST_P(CompressedTextureFormatSpecificTest, BC1RGBAUnorm_UnalignedDynamicUploade
     bufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
-    wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
-    wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(buffer, 0, 256);
+    wgpu::ImageCopyTexture imageCopyTexture =
+        dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+    wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(buffer, 0, 256);
     wgpu::Extent3D copyExtent = {4, 4, 1};
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -1205,10 +1216,10 @@ class CompressedTextureWriteTextureTest : public CompressedTextureFormatTest {
 
         std::vector<uint8_t> data = UploadData(copyConfig);
 
-        wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(
+        wgpu::TextureDataLayout textureDataLayout = dawn::utils::CreateTextureDataLayout(
             copyConfig.bufferOffset, copyConfig.bytesPerRowAlignment, copyConfig.rowsPerImage);
 
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             compressedTexture, copyConfig.viewMipmapLevel, copyConfig.copyOrigin3D);
 
         queue.WriteTexture(&imageCopyTexture, data.data(), data.size(), &textureDataLayout,
@@ -1233,7 +1244,7 @@ TEST_P(CompressedTextureWriteTextureTest, Basic) {
     DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
 
     // TODO(dawn:1802): Clear BC formats.
-    DAWN_SUPPRESS_TEST_IF(IsD3D11() && utils::IsBCTextureFormat(GetParam().mTextureFormat));
+    DAWN_SUPPRESS_TEST_IF(IsD3D11() && dawn::utils::IsBCTextureFormat(GetParam().mTextureFormat));
 
     constexpr uint32_t kSizeWidthMultiplier = 5;
     constexpr uint32_t kSizeHeightMultiplier = 6;
@@ -1266,7 +1277,7 @@ TEST_P(CompressedTextureWriteTextureTest, WriteMultiple2DArrayLayers) {
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
 
     // TODO(dawn:1802): Clear BC formats.
-    DAWN_SUPPRESS_TEST_IF(IsD3D11() && utils::IsBCTextureFormat(GetParam().mTextureFormat));
+    DAWN_SUPPRESS_TEST_IF(IsD3D11() && dawn::utils::IsBCTextureFormat(GetParam().mTextureFormat));
 
     // TODO(b/198674734): Width multiplier set to 7 because 5 results in square size for ASTC6x5.
     constexpr uint32_t kSizeWidthMultiplier = 7;
@@ -1302,7 +1313,7 @@ TEST_P(CompressedTextureWriteTextureTest,
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
 
     // TODO(dawn:1802): Clear BC formats.
-    DAWN_SUPPRESS_TEST_IF(IsD3D11() && utils::IsBCTextureFormat(GetParam().mTextureFormat));
+    DAWN_SUPPRESS_TEST_IF(IsD3D11() && dawn::utils::IsBCTextureFormat(GetParam().mTextureFormat));
 
     CopyConfig config = GetDefaultFullConfig();
 
@@ -1322,5 +1333,5 @@ TEST_P(CompressedTextureWriteTextureTest,
 DAWN_INSTANTIATE_TEST_P(CompressedTextureWriteTextureTest,
                         {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
                          OpenGLESBackend(), VulkanBackend()},
-                        std::vector<wgpu::TextureFormat>(utils::kCompressedFormats.begin(),
-                                                         utils::kCompressedFormats.end()));
+                        std::vector<wgpu::TextureFormat>(dawn::utils::kCompressedFormats.begin(),
+                                                         dawn::utils::kCompressedFormats.end()));

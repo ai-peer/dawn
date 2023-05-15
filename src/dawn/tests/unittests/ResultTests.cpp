@@ -23,7 +23,7 @@
 namespace {
 
 template <typename T, typename E>
-void TestError(Result<T, E>* result, E expectedError) {
+void TestError(dawn::Result<T, E>* result, E expectedError) {
     EXPECT_TRUE(result->IsError());
     EXPECT_FALSE(result->IsSuccess());
 
@@ -32,7 +32,7 @@ void TestError(Result<T, E>* result, E expectedError) {
 }
 
 template <typename T, typename E>
-void TestSuccess(Result<T, E>* result, T expectedSuccess) {
+void TestSuccess(dawn::Result<T, E>* result, T expectedSuccess) {
     EXPECT_FALSE(result->IsError());
     EXPECT_TRUE(result->IsSuccess());
 
@@ -49,7 +49,7 @@ static int placeholderError = 0xbeef;
 static float placeholderSuccess = 42.0f;
 static const float placeholderConstSuccess = 42.0f;
 
-class AClass : public RefCounted {
+class AClass : public dawn::RefCounted {
   public:
     int a = 0;
 };
@@ -59,7 +59,7 @@ class AClass : public RefCounted {
 // ensure any local Ref objects made along the way continue
 // to point to placeholderSuccessObj.
 template <typename T, typename E>
-void TestSuccess(Result<Ref<T>, E>* result, T* expectedSuccess) {
+void TestSuccess(dawn::Result<dawn::Ref<T>, E>* result, T* expectedSuccess) {
     EXPECT_FALSE(result->IsError());
     EXPECT_TRUE(result->IsSuccess());
 
@@ -68,7 +68,7 @@ void TestSuccess(Result<Ref<T>, E>* result, T* expectedSuccess) {
     // hold the only other reference to the object.
     EXPECT_EQ(expectedSuccess->GetRefCountForTesting(), 2u);
 
-    const Ref<T> storedSuccess = result->AcquireSuccess();
+    const dawn::Ref<T> storedSuccess = result->AcquireSuccess();
     EXPECT_EQ(storedSuccess.Get(), expectedSuccess);
 
     // Once the success is acquired, result has an empty
@@ -82,102 +82,102 @@ void TestSuccess(Result<Ref<T>, E>* result, T* expectedSuccess) {
     EXPECT_EQ(storedSuccess->GetRefCountForTesting(), 2u);
 }
 
-// Result<void, E*>
+// dawn::Result<void, E*>
 
-// Test constructing an error Result<void, E>
+// Test constructing an error dawn::Result<void, E>
 TEST(ResultOnlyPointerError, ConstructingError) {
-    Result<void, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<void, int> result(std::make_unique<int>(placeholderError));
     TestError(&result, placeholderError);
 }
 
-// Test moving an error Result<void, E>
+// Test moving an error dawn::Result<void, E>
 TEST(ResultOnlyPointerError, MovingError) {
-    Result<void, int> result(std::make_unique<int>(placeholderError));
-    Result<void, int> movedResult(std::move(result));
+    dawn::Result<void, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<void, int> movedResult(std::move(result));
     TestError(&movedResult, placeholderError);
 }
 
-// Test returning an error Result<void, E>
+// Test returning an error dawn::Result<void, E>
 TEST(ResultOnlyPointerError, ReturningError) {
-    auto CreateError = []() -> Result<void, int> {
+    auto CreateError = []() -> dawn::Result<void, int> {
         return {std::make_unique<int>(placeholderError)};
     };
 
-    Result<void, int> result = CreateError();
+    dawn::Result<void, int> result = CreateError();
     TestError(&result, placeholderError);
 }
 
-// Test constructing a success Result<void, E>
+// Test constructing a success dawn::Result<void, E>
 TEST(ResultOnlyPointerError, ConstructingSuccess) {
-    Result<void, int> result;
+    dawn::Result<void, int> result;
     EXPECT_TRUE(result.IsSuccess());
     EXPECT_FALSE(result.IsError());
 }
 
-// Test moving a success Result<void, E>
+// Test moving a success dawn::Result<void, E>
 TEST(ResultOnlyPointerError, MovingSuccess) {
-    Result<void, int> result;
-    Result<void, int> movedResult(std::move(result));
+    dawn::Result<void, int> result;
+    dawn::Result<void, int> movedResult(std::move(result));
     EXPECT_TRUE(movedResult.IsSuccess());
     EXPECT_FALSE(movedResult.IsError());
 }
 
-// Test returning a success Result<void, E>
+// Test returning a success dawn::Result<void, E>
 TEST(ResultOnlyPointerError, ReturningSuccess) {
-    auto CreateError = []() -> Result<void, int> { return {}; };
+    auto CreateError = []() -> dawn::Result<void, int> { return {}; };
 
-    Result<void, int> result = CreateError();
+    dawn::Result<void, int> result = CreateError();
     EXPECT_TRUE(result.IsSuccess());
     EXPECT_FALSE(result.IsError());
 }
 
-// Result<T*, E*>
+// dawn::Result<T*, E*>
 
-// Test constructing an error Result<T*, E>
+// Test constructing an error dawn::Result<T*, E>
 TEST(ResultBothPointer, ConstructingError) {
-    Result<float*, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<float*, int> result(std::make_unique<int>(placeholderError));
     TestError(&result, placeholderError);
 }
 
-// Test moving an error Result<T*, E>
+// Test moving an error dawn::Result<T*, E>
 TEST(ResultBothPointer, MovingError) {
-    Result<float*, int> result(std::make_unique<int>(placeholderError));
-    Result<float*, int> movedResult(std::move(result));
+    dawn::Result<float*, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<float*, int> movedResult(std::move(result));
     TestError(&movedResult, placeholderError);
 }
 
-// Test returning an error Result<T*, E>
+// Test returning an error dawn::Result<T*, E>
 TEST(ResultBothPointer, ReturningError) {
-    auto CreateError = []() -> Result<float*, int> {
+    auto CreateError = []() -> dawn::Result<float*, int> {
         return {std::make_unique<int>(placeholderError)};
     };
 
-    Result<float*, int> result = CreateError();
+    dawn::Result<float*, int> result = CreateError();
     TestError(&result, placeholderError);
 }
 
-// Test constructing a success Result<T*, E>
+// Test constructing a success dawn::Result<T*, E>
 TEST(ResultBothPointer, ConstructingSuccess) {
-    Result<float*, int> result(&placeholderSuccess);
+    dawn::Result<float*, int> result(&placeholderSuccess);
     TestSuccess(&result, &placeholderSuccess);
 }
 
-// Test moving a success Result<T*, E>
+// Test moving a success dawn::Result<T*, E>
 TEST(ResultBothPointer, MovingSuccess) {
-    Result<float*, int> result(&placeholderSuccess);
-    Result<float*, int> movedResult(std::move(result));
+    dawn::Result<float*, int> result(&placeholderSuccess);
+    dawn::Result<float*, int> movedResult(std::move(result));
     TestSuccess(&movedResult, &placeholderSuccess);
 }
 
-// Test returning a success Result<T*, E>
+// Test returning a success dawn::Result<T*, E>
 TEST(ResultBothPointer, ReturningSuccess) {
-    auto CreateSuccess = []() -> Result<float*, int*> { return {&placeholderSuccess}; };
+    auto CreateSuccess = []() -> dawn::Result<float*, int*> { return {&placeholderSuccess}; };
 
-    Result<float*, int*> result = CreateSuccess();
+    dawn::Result<float*, int*> result = CreateSuccess();
     TestSuccess(&result, &placeholderSuccess);
 }
 
-// Tests converting from a Result<TChild*, E>
+// Tests converting from a dawn::Result<TChild*, E>
 TEST(ResultBothPointer, ConversionFromChildClass) {
     struct T {
         int a;
@@ -187,117 +187,121 @@ TEST(ResultBothPointer, ConversionFromChildClass) {
     TChild child;
     T* childAsT = &child;
     {
-        Result<T*, int> result(&child);
+        dawn::Result<T*, int> result(&child);
         TestSuccess(&result, childAsT);
     }
     {
-        Result<TChild*, int> resultChild(&child);
-        Result<T*, int> result(std::move(resultChild));
+        dawn::Result<TChild*, int> resultChild(&child);
+        dawn::Result<T*, int> result(std::move(resultChild));
         TestSuccess(&result, childAsT);
     }
     {
-        Result<TChild*, int> resultChild(&child);
-        Result<T*, int> result = std::move(resultChild);
+        dawn::Result<TChild*, int> resultChild(&child);
+        dawn::Result<T*, int> result = std::move(resultChild);
         TestSuccess(&result, childAsT);
     }
 }
 
-// Result<const T*, E>
+// dawn::Result<const T*, E>
 
-// Test constructing an error Result<const T*, E>
+// Test constructing an error dawn::Result<const T*, E>
 TEST(ResultBothPointerWithConstResult, ConstructingError) {
-    Result<const float*, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<const float*, int> result(std::make_unique<int>(placeholderError));
     TestError(&result, placeholderError);
 }
 
-// Test moving an error Result<const T*, E>
+// Test moving an error dawn::Result<const T*, E>
 TEST(ResultBothPointerWithConstResult, MovingError) {
-    Result<const float*, int> result(std::make_unique<int>(placeholderError));
-    Result<const float*, int> movedResult(std::move(result));
+    dawn::Result<const float*, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<const float*, int> movedResult(std::move(result));
     TestError(&movedResult, placeholderError);
 }
 
-// Test returning an error Result<const T*, E*>
+// Test returning an error dawn::Result<const T*, E*>
 TEST(ResultBothPointerWithConstResult, ReturningError) {
-    auto CreateError = []() -> Result<const float*, int> {
+    auto CreateError = []() -> dawn::Result<const float*, int> {
         return {std::make_unique<int>(placeholderError)};
     };
 
-    Result<const float*, int> result = CreateError();
+    dawn::Result<const float*, int> result = CreateError();
     TestError(&result, placeholderError);
 }
 
-// Test constructing a success Result<const T*, E*>
+// Test constructing a success dawn::Result<const T*, E*>
 TEST(ResultBothPointerWithConstResult, ConstructingSuccess) {
-    Result<const float*, int> result(&placeholderConstSuccess);
+    dawn::Result<const float*, int> result(&placeholderConstSuccess);
     TestSuccess(&result, &placeholderConstSuccess);
 }
 
-// Test moving a success Result<const T*, E*>
+// Test moving a success dawn::Result<const T*, E*>
 TEST(ResultBothPointerWithConstResult, MovingSuccess) {
-    Result<const float*, int> result(&placeholderConstSuccess);
-    Result<const float*, int> movedResult(std::move(result));
+    dawn::Result<const float*, int> result(&placeholderConstSuccess);
+    dawn::Result<const float*, int> movedResult(std::move(result));
     TestSuccess(&movedResult, &placeholderConstSuccess);
 }
 
-// Test returning a success Result<const T*, E*>
+// Test returning a success dawn::Result<const T*, E*>
 TEST(ResultBothPointerWithConstResult, ReturningSuccess) {
-    auto CreateSuccess = []() -> Result<const float*, int> { return {&placeholderConstSuccess}; };
+    auto CreateSuccess = []() -> dawn::Result<const float*, int> {
+        return {&placeholderConstSuccess};
+    };
 
-    Result<const float*, int> result = CreateSuccess();
+    dawn::Result<const float*, int> result = CreateSuccess();
     TestSuccess(&result, &placeholderConstSuccess);
 }
 
-// Result<Ref<T>, E>
+// dawn::Result<dawn::Ref<T>, E>
 
-// Test constructing an error Result<Ref<T>, E>
+// Test constructing an error dawn::Result<dawn::Ref<T>, E>
 TEST(ResultRefT, ConstructingError) {
-    Result<Ref<AClass>, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<dawn::Ref<AClass>, int> result(std::make_unique<int>(placeholderError));
     TestError(&result, placeholderError);
 }
 
-// Test moving an error Result<Ref<T>, E>
+// Test moving an error dawn::Result<dawn::Ref<T>, E>
 TEST(ResultRefT, MovingError) {
-    Result<Ref<AClass>, int> result(std::make_unique<int>(placeholderError));
-    Result<Ref<AClass>, int> movedResult(std::move(result));
+    dawn::Result<dawn::Ref<AClass>, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<dawn::Ref<AClass>, int> movedResult(std::move(result));
     TestError(&movedResult, placeholderError);
 }
 
-// Test returning an error Result<Ref<T>, E>
+// Test returning an error dawn::Result<dawn::Ref<T>, E>
 TEST(ResultRefT, ReturningError) {
-    auto CreateError = []() -> Result<Ref<AClass>, int> {
+    auto CreateError = []() -> dawn::Result<dawn::Ref<AClass>, int> {
         return {std::make_unique<int>(placeholderError)};
     };
 
-    Result<Ref<AClass>, int> result = CreateError();
+    dawn::Result<dawn::Ref<AClass>, int> result = CreateError();
     TestError(&result, placeholderError);
 }
 
-// Test constructing a success Result<Ref<T>, E>
+// Test constructing a success dawn::Result<dawn::Ref<T>, E>
 TEST(ResultRefT, ConstructingSuccess) {
     AClass success;
 
-    Ref<AClass> refObj(&success);
-    Result<Ref<AClass>, int> result(std::move(refObj));
+    dawn::Ref<AClass> refObj(&success);
+    dawn::Result<dawn::Ref<AClass>, int> result(std::move(refObj));
     TestSuccess(&result, &success);
 }
 
-// Test moving a success Result<Ref<T>, E>
+// Test moving a success dawn::Result<dawn::Ref<T>, E>
 TEST(ResultRefT, MovingSuccess) {
     AClass success;
 
-    Ref<AClass> refObj(&success);
-    Result<Ref<AClass>, int> result(std::move(refObj));
-    Result<Ref<AClass>, int> movedResult(std::move(result));
+    dawn::Ref<AClass> refObj(&success);
+    dawn::Result<dawn::Ref<AClass>, int> result(std::move(refObj));
+    dawn::Result<dawn::Ref<AClass>, int> movedResult(std::move(result));
     TestSuccess(&movedResult, &success);
 }
 
-// Test returning a success Result<Ref<T>, E>
+// Test returning a success dawn::Result<dawn::Ref<T>, E>
 TEST(ResultRefT, ReturningSuccess) {
     AClass success;
-    auto CreateSuccess = [&success]() -> Result<Ref<AClass>, int> { return Ref<AClass>(&success); };
+    auto CreateSuccess = [&success]() -> dawn::Result<dawn::Ref<AClass>, int> {
+        return dawn::Ref<AClass>(&success);
+    };
 
-    Result<Ref<AClass>, int> result = CreateSuccess();
+    dawn::Result<dawn::Ref<AClass>, int> result = CreateSuccess();
     TestSuccess(&result, &success);
 }
 
@@ -305,81 +309,81 @@ class OtherClass {
   public:
     int a = 0;
 };
-class Base : public RefCounted {};
+class Base : public dawn::RefCounted {};
 class Child : public OtherClass, public Base {};
 
-// Test constructing a Result<Ref<TChild>, E>
+// Test constructing a dawn::Result<dawn::Ref<TChild>, E>
 TEST(ResultRefT, ConversionFromChildConstructor) {
     Child child;
-    Ref<Child> refChild(&child);
+    dawn::Ref<Child> refChild(&child);
 
-    Result<Ref<Base>, int> result(std::move(refChild));
+    dawn::Result<dawn::Ref<Base>, int> result(std::move(refChild));
     TestSuccess<Base>(&result, &child);
 }
 
-// Test copy constructing Result<Ref<TChild>, E>
+// Test copy constructing dawn::Result<dawn::Ref<TChild>, E>
 TEST(ResultRefT, ConversionFromChildCopyConstructor) {
     Child child;
-    Ref<Child> refChild(&child);
+    dawn::Ref<Child> refChild(&child);
 
-    Result<Ref<Child>, int> resultChild(std::move(refChild));
-    Result<Ref<Base>, int> result(std::move(resultChild));
+    dawn::Result<dawn::Ref<Child>, int> resultChild(std::move(refChild));
+    dawn::Result<dawn::Ref<Base>, int> result(std::move(resultChild));
     TestSuccess<Base>(&result, &child);
 }
 
-// Test assignment operator for Result<Ref<TChild>, E>
+// Test assignment operator for dawn::Result<dawn::Ref<TChild>, E>
 TEST(ResultRefT, ConversionFromChildAssignmentOperator) {
     Child child;
-    Ref<Child> refChild(&child);
+    dawn::Ref<Child> refChild(&child);
 
-    Result<Ref<Child>, int> resultChild(std::move(refChild));
-    Result<Ref<Base>, int> result = std::move(resultChild);
+    dawn::Result<dawn::Ref<Child>, int> resultChild(std::move(refChild));
+    dawn::Result<dawn::Ref<Base>, int> result = std::move(resultChild);
     TestSuccess<Base>(&result, &child);
 }
 
-// Result<T, E>
+// dawn::Result<T, E>
 
-// Test constructing an error Result<T, E>
+// Test constructing an error dawn::Result<T, E>
 TEST(ResultGeneric, ConstructingError) {
-    Result<std::vector<float>, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<std::vector<float>, int> result(std::make_unique<int>(placeholderError));
     TestError(&result, placeholderError);
 }
 
-// Test moving an error Result<T, E>
+// Test moving an error dawn::Result<T, E>
 TEST(ResultGeneric, MovingError) {
-    Result<std::vector<float>, int> result(std::make_unique<int>(placeholderError));
-    Result<std::vector<float>, int> movedResult(std::move(result));
+    dawn::Result<std::vector<float>, int> result(std::make_unique<int>(placeholderError));
+    dawn::Result<std::vector<float>, int> movedResult(std::move(result));
     TestError(&movedResult, placeholderError);
 }
 
-// Test returning an error Result<T, E>
+// Test returning an error dawn::Result<T, E>
 TEST(ResultGeneric, ReturningError) {
-    auto CreateError = []() -> Result<std::vector<float>, int> {
+    auto CreateError = []() -> dawn::Result<std::vector<float>, int> {
         return {std::make_unique<int>(placeholderError)};
     };
 
-    Result<std::vector<float>, int> result = CreateError();
+    dawn::Result<std::vector<float>, int> result = CreateError();
     TestError(&result, placeholderError);
 }
 
-// Test constructing a success Result<T, E>
+// Test constructing a success dawn::Result<T, E>
 TEST(ResultGeneric, ConstructingSuccess) {
-    Result<std::vector<float>, int> result({1.0f});
+    dawn::Result<std::vector<float>, int> result({1.0f});
     TestSuccess(&result, {1.0f});
 }
 
-// Test moving a success Result<T, E>
+// Test moving a success dawn::Result<T, E>
 TEST(ResultGeneric, MovingSuccess) {
-    Result<std::vector<float>, int> result({1.0f});
-    Result<std::vector<float>, int> movedResult(std::move(result));
+    dawn::Result<std::vector<float>, int> result({1.0f});
+    dawn::Result<std::vector<float>, int> movedResult(std::move(result));
     TestSuccess(&movedResult, {1.0f});
 }
 
-// Test returning a success Result<T, E>
+// Test returning a success dawn::Result<T, E>
 TEST(ResultGeneric, ReturningSuccess) {
-    auto CreateSuccess = []() -> Result<std::vector<float>, int> { return {{1.0f}}; };
+    auto CreateSuccess = []() -> dawn::Result<std::vector<float>, int> { return {{1.0f}}; };
 
-    Result<std::vector<float>, int> result = CreateSuccess();
+    dawn::Result<std::vector<float>, int> result = CreateSuccess();
     TestSuccess(&result, {1.0f});
 }
 

@@ -332,7 +332,7 @@ TEST_P(DeviceLifetimeTests, DroppedWhileWriteBufferAndSubmit) {
 // Test that the device can be dropped while createPipelineAsync is in flight
 TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsync) {
     wgpu::ComputePipelineDescriptor desc;
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
     @compute @workgroup_size(1) fn main() {
     })");
     desc.compute.entryPoint = "main";
@@ -352,7 +352,7 @@ TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsync) {
 // Test that the device can be dropped inside a createPipelineAsync callback
 TEST_P(DeviceLifetimeTests, DroppedInsideCreatePipelineAsync) {
     wgpu::ComputePipelineDescriptor desc;
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
     @compute @workgroup_size(1) fn main() {
     })");
     desc.compute.entryPoint = "main";
@@ -389,7 +389,7 @@ TEST_P(DeviceLifetimeTests, DroppedInsideCreatePipelineAsync) {
 // is in flight
 TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsyncAlreadyCached) {
     wgpu::ComputePipelineDescriptor desc;
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
     @compute @workgroup_size(1) fn main() {
     })");
     desc.compute.entryPoint = "main";
@@ -418,7 +418,7 @@ TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsyncAlreadyCached) {
 // frontend cache
 TEST_P(DeviceLifetimeTests, DroppedInsideCreatePipelineAsyncAlreadyCached) {
     wgpu::ComputePipelineDescriptor desc;
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
     @compute @workgroup_size(1) fn main() {
     })");
     desc.compute.entryPoint = "main";
@@ -459,7 +459,7 @@ TEST_P(DeviceLifetimeTests, DroppedInsideCreatePipelineAsyncAlreadyCached) {
 // to add the same pipeline to the frontend cache
 TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsyncRaceCache) {
     wgpu::ComputePipelineDescriptor desc;
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
     @compute @workgroup_size(1) fn main() {
     })");
     desc.compute.entryPoint = "main";
@@ -483,7 +483,7 @@ TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsyncRaceCache) {
 // with a compilation to add the same pipeline to the frontend cache
 TEST_P(DeviceLifetimeTests, DroppedInsideCreatePipelineAsyncRaceCache) {
     wgpu::ComputePipelineDescriptor desc;
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
     @compute @workgroup_size(1) fn main() {
     })");
     desc.compute.entryPoint = "main";

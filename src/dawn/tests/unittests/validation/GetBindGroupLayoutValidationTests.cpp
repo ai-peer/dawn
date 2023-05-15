@@ -20,14 +20,14 @@
 class GetBindGroupLayoutTests : public ValidationTest {
   protected:
     wgpu::RenderPipeline RenderPipelineFromFragmentShader(const char* shader) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
                 @vertex fn main() -> @builtin(position) vec4f {
                     return vec4f();
                 })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, shader);
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, shader);
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.layout = nullptr;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
@@ -45,7 +45,7 @@ TEST_F(GetBindGroupLayoutTests, SameObject) {
     // Native.
     DAWN_SKIP_TEST_IF(UsesWire());
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : vec4f
         }
@@ -58,7 +58,7 @@ TEST_F(GetBindGroupLayoutTests, SameObject) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct S2 {
             pos : vec4f
         }
@@ -74,7 +74,7 @@ TEST_F(GetBindGroupLayoutTests, SameObject) {
             var pos_s : mat4x4<f32> = storage3.pos;
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -107,7 +107,7 @@ TEST_F(GetBindGroupLayoutTests, DefaultBindGroupLayoutPipelineCompatibility) {
             var pos : vec4f = uniforms.pos;
         })");
 
-    ASSERT_DEVICE_ERROR(utils::MakePipelineLayout(device, {pipeline.GetBindGroupLayout(0)}));
+    ASSERT_DEVICE_ERROR(dawn::utils::MakePipelineLayout(device, {pipeline.GetBindGroupLayout(0)}));
 }
 
 // Test that getBindGroupLayout defaults are correct
@@ -163,19 +163,19 @@ TEST_F(GetBindGroupLayoutTests, DefaultTextureSampleType) {
     // Native.
     DAWN_SKIP_TEST_IF(UsesWire());
 
-    wgpu::BindGroupLayout filteringBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout filteringBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment,
                   wgpu::TextureSampleType::Float},
                  {1, wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment,
                   wgpu::SamplerBindingType::Filtering}});
 
-    wgpu::BindGroupLayout nonFilteringBGL = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout nonFilteringBGL = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment,
                   wgpu::TextureSampleType::UnfilterableFloat},
                  {1, wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment,
                   wgpu::SamplerBindingType::Filtering}});
 
-    wgpu::ShaderModule emptyVertexModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule emptyVertexModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
         @group(0) @binding(1) var mySampler : sampler;
         @vertex fn main() -> @builtin(position) vec4f {
@@ -184,7 +184,7 @@ TEST_F(GetBindGroupLayoutTests, DefaultTextureSampleType) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule textureLoadVertexModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule textureLoadVertexModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
         @group(0) @binding(1) var mySampler : sampler;
         @vertex fn main() -> @builtin(position) vec4f {
@@ -193,7 +193,7 @@ TEST_F(GetBindGroupLayoutTests, DefaultTextureSampleType) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule textureSampleVertexModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule textureSampleVertexModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
         @group(0) @binding(1) var mySampler : sampler;
         @vertex fn main() -> @builtin(position) vec4f {
@@ -201,7 +201,7 @@ TEST_F(GetBindGroupLayoutTests, DefaultTextureSampleType) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule unusedTextureFragmentModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule unusedTextureFragmentModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
         @group(0) @binding(1) var mySampler : sampler;
         @fragment fn main() {
@@ -209,7 +209,7 @@ TEST_F(GetBindGroupLayoutTests, DefaultTextureSampleType) {
             _ = mySampler;
         })");
 
-    wgpu::ShaderModule textureLoadFragmentModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule textureLoadFragmentModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
         @group(0) @binding(1) var mySampler : sampler;
         @fragment fn main() {
@@ -217,7 +217,7 @@ TEST_F(GetBindGroupLayoutTests, DefaultTextureSampleType) {
             _ = mySampler;
         })");
 
-    wgpu::ShaderModule textureSampleFragmentModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule textureSampleFragmentModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
         @group(0) @binding(1) var mySampler : sampler;
         @fragment fn main() {
@@ -226,7 +226,7 @@ TEST_F(GetBindGroupLayoutTests, DefaultTextureSampleType) {
 
     auto BGLFromModules = [this](wgpu::ShaderModule vertexModule,
                                  wgpu::ShaderModule fragmentModule) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vertexModule;
         descriptor.cFragment.module = fragmentModule;
         descriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
@@ -289,7 +289,7 @@ TEST_F(GetBindGroupLayoutTests, ComputePipeline) {
     // Native.
     DAWN_SKIP_TEST_IF(UsesWire());
 
-    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : vec4f
         }
@@ -440,7 +440,7 @@ TEST_F(GetBindGroupLayoutTests, ExternalTextureBindingType) {
     desc.entryCount = 1;
     desc.entries = &binding;
 
-    binding.nextInChain = &utils::kExternalTextureBindingLayout;
+    binding.nextInChain = &dawn::utils::kExternalTextureBindingLayout;
     wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             @group(0) @binding(0) var myExternalTexture: texture_external;
 
@@ -657,7 +657,7 @@ TEST_F(GetBindGroupLayoutTests, BindingIndices) {
 
 // Test it is valid to have duplicate bindings in the shaders.
 TEST_F(GetBindGroupLayoutTests, DuplicateBinding) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : vec4f
         }
@@ -670,7 +670,7 @@ TEST_F(GetBindGroupLayoutTests, DuplicateBinding) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : vec4f
         }
@@ -680,7 +680,7 @@ TEST_F(GetBindGroupLayoutTests, DuplicateBinding) {
             var pos : vec4f = uniforms.pos;
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -696,7 +696,7 @@ TEST_F(GetBindGroupLayoutTests, MinBufferSize) {
     // Native.
     DAWN_SKIP_TEST_IF(UsesWire());
 
-    wgpu::ShaderModule vsModule4 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule4 = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : f32
         }
@@ -707,7 +707,7 @@ TEST_F(GetBindGroupLayoutTests, MinBufferSize) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule vsModule64 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule64 = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : mat4x4<f32>
         }
@@ -718,7 +718,7 @@ TEST_F(GetBindGroupLayoutTests, MinBufferSize) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule4 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule4 = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : f32
         }
@@ -728,7 +728,7 @@ TEST_F(GetBindGroupLayoutTests, MinBufferSize) {
             var pos : f32 = uniforms.pos;
         })");
 
-    wgpu::ShaderModule fsModule64 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule64 = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : mat4x4<f32>
         }
@@ -753,7 +753,7 @@ TEST_F(GetBindGroupLayoutTests, MinBufferSize) {
     binding.buffer.minBindingSize = 64;
     wgpu::BindGroupLayout bgl64 = device.CreateBindGroupLayout(&desc);
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
 
@@ -792,23 +792,23 @@ TEST_F(GetBindGroupLayoutTests, StageAggregation) {
     // Native.
     DAWN_SKIP_TEST_IF(UsesWire());
 
-    wgpu::ShaderModule vsModuleNoSampler = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModuleNoSampler = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f();
         })");
 
-    wgpu::ShaderModule vsModuleSampler = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModuleSampler = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var mySampler: sampler;
         @vertex fn main() -> @builtin(position) vec4f {
             _ = mySampler;
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModuleNoSampler = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleNoSampler = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() {
         })");
 
-    wgpu::ShaderModule fsModuleSampler = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleSampler = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var mySampler: sampler;
         @fragment fn main() {
             _ = mySampler;
@@ -823,7 +823,7 @@ TEST_F(GetBindGroupLayoutTests, StageAggregation) {
     desc.entryCount = 1;
     desc.entries = &binding;
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
 
@@ -863,7 +863,7 @@ TEST_F(GetBindGroupLayoutTests, StageAggregation) {
 
 // Test it is invalid to have conflicting binding types in the shaders.
 TEST_F(GetBindGroupLayoutTests, ConflictingBindingType) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : vec4f
         }
@@ -874,7 +874,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingType) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : vec4f
         }
@@ -884,7 +884,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingType) {
             var pos : vec4f = ssbo.pos;
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -894,7 +894,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingType) {
 
 // Test it is invalid to have conflicting binding texture multisampling in the shaders.
 TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureMultisampling) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
         @vertex fn main() -> @builtin(position) vec4f {
@@ -902,14 +902,14 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureMultisampling) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_multisampled_2d<f32>;
 
         @fragment fn main() {
             _ = textureDimensions(myTexture);
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -919,7 +919,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureMultisampling) {
 
 // Test it is invalid to have conflicting binding texture dimension in the shaders.
 TEST_F(GetBindGroupLayoutTests, ConflictingBindingViewDimension) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
         @vertex fn main() -> @builtin(position) vec4f {
@@ -927,14 +927,14 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingViewDimension) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_3d<f32>;
 
         @fragment fn main() {
             _ = textureDimensions(myTexture);
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -944,7 +944,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingViewDimension) {
 
 // Test it is invalid to have conflicting binding texture component type in the shaders.
 TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureComponentType) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
         @vertex fn main() -> @builtin(position) vec4f {
@@ -952,14 +952,14 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureComponentType) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var myTexture : texture_2d<i32>;
 
         @fragment fn main() {
             _ = textureDimensions(myTexture);
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -1040,7 +1040,7 @@ TEST_F(GetBindGroupLayoutTests, Reflection) {
 
     wgpu::PipelineLayout pipelineLayout = device.CreatePipelineLayout(&pipelineLayoutDesc);
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         struct S {
             pos : vec4f
         }
@@ -1051,11 +1051,11 @@ TEST_F(GetBindGroupLayoutTests, Reflection) {
             return vec4f();
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() {
         })");
 
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.layout = pipelineLayout;
     pipelineDesc.vertex.module = vsModule;
     pipelineDesc.cFragment.module = fsModule;
@@ -1068,7 +1068,7 @@ TEST_F(GetBindGroupLayoutTests, Reflection) {
 
 // Test that fragment output validation is for the correct entryPoint
 TEST_F(GetBindGroupLayoutTests, FromCorrectEntryPoint) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Data {
             data : f32
         }
@@ -1103,12 +1103,12 @@ TEST_F(GetBindGroupLayoutTests, FromCorrectEntryPoint) {
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDesc);
 
     // Success case, the BGL matches the descriptor for the bindgroup.
-    utils::MakeBindGroup(device, bgl0, {{0, buffer}});
-    utils::MakeBindGroup(device, bgl1, {{1, buffer}});
+    dawn::utils::MakeBindGroup(device, bgl0, {{0, buffer}});
+    dawn::utils::MakeBindGroup(device, bgl1, {{1, buffer}});
 
     // Error case, the BGL doesn't match the descriptor for the bindgroup.
-    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl0, {{1, buffer}}));
-    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl1, {{0, buffer}}));
+    ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bgl0, {{1, buffer}}));
+    ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bgl1, {{0, buffer}}));
 }
 
 // Test that a pipeline full of explicitly empty BGLs correctly reflects them.
@@ -1118,14 +1118,14 @@ TEST_F(GetBindGroupLayoutTests, FullOfEmptyBGLs) {
     // Native.
     DAWN_SKIP_TEST_IF(UsesWire());
 
-    wgpu::BindGroupLayout emptyBGL = utils::MakeBindGroupLayout(device, {});
+    wgpu::BindGroupLayout emptyBGL = dawn::utils::MakeBindGroupLayout(device, {});
     wgpu::PipelineLayout pl =
-        utils::MakePipelineLayout(device, {emptyBGL, emptyBGL, emptyBGL, emptyBGL});
+        dawn::utils::MakePipelineLayout(device, {emptyBGL, emptyBGL, emptyBGL, emptyBGL});
 
     wgpu::ComputePipelineDescriptor pipelineDesc;
     pipelineDesc.layout = pl;
     pipelineDesc.compute.entryPoint = "main";
-    pipelineDesc.compute.module = utils::CreateShaderModule(device, R"(
+    pipelineDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
         @compute @workgroup_size(1) fn main() {
         }
     )");

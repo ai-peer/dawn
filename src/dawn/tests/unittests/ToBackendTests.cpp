@@ -69,20 +69,20 @@ TEST(ToBackend, Pointers) {
 TEST(ToBackend, Ref) {
     {
         MyObject* myObject = new MyObject;
-        const Ref<MyObjectBase> base(myObject);
+        const dawn::Ref<MyObjectBase> base(myObject);
 
         const auto& backendAdapter = ToBackend(base);
-        static_assert(std::is_same<decltype(ToBackend(base)), const Ref<MyObject>&>::value);
+        static_assert(std::is_same<decltype(ToBackend(base)), const dawn::Ref<MyObject>&>::value);
         ASSERT_EQ(myObject, backendAdapter.Get());
 
         myObject->Release();
     }
     {
         MyObject* myObject = new MyObject;
-        Ref<MyObjectBase> base(myObject);
+        dawn::Ref<MyObjectBase> base(myObject);
 
         auto backendAdapter = ToBackend(base);
-        static_assert(std::is_same<decltype(ToBackend(base)), Ref<MyObject>&>::value);
+        static_assert(std::is_same<decltype(ToBackend(base)), dawn::Ref<MyObject>&>::value);
         ASSERT_EQ(myObject, backendAdapter.Get());
 
         myObject->Release();

@@ -97,9 +97,9 @@ class RequiredBufferSizeInCopyTests
         wgpu::Texture texture = device.CreateTexture(&texDesc);
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
         wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(buffer, kOffset, kBytesPerRow, rowsPerImage);
+            dawn::utils::CreateImageCopyBuffer(buffer, kOffset, kBytesPerRow, rowsPerImage);
 
         // Initialize copied data and set expected data for buffer and texture.
         ASSERT(sizeof(uint32_t) == kBytesPerBlock);
@@ -122,7 +122,7 @@ class RequiredBufferSizeInCopyTests
         switch (GetParam().mType) {
             case Type::T2BCopy: {
                 wgpu::TextureDataLayout textureDataLayout =
-                    utils::CreateTextureDataLayout(kOffset, kBytesPerRow, rowsPerImage);
+                    dawn::utils::CreateTextureDataLayout(kOffset, kBytesPerRow, rowsPerImage);
 
                 queue.WriteTexture(&imageCopyTexture, data.data(), bufferSize, &textureDataLayout,
                                    &copySize);
@@ -193,7 +193,7 @@ TEST_P(RequiredBufferSizeInCopyTests, MinimumBufferSize) {
     const uint64_t rowsPerImage = extraRowsPerImage + copySize.height;
 
     uint64_t size =
-        kOffset + utils::RequiredBytesInCopy(kBytesPerRow, rowsPerImage, copySize, kFormat);
+        kOffset + dawn::utils::RequiredBytesInCopy(kBytesPerRow, rowsPerImage, copySize, kFormat);
     DoTest(size, copySize, rowsPerImage);
 }
 

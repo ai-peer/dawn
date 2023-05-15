@@ -228,7 +228,7 @@ TEST(ErrorTests, TRY_RESULT_ConversionToError) {
 }
 
 // Check a ResultOrError can be DAWN_TRY_ASSIGNED in a function that returns an Error
-// Version without Result<E*, T*>
+// Version without dawn::Result<E*, T*>
 TEST(ErrorTests, TRY_RESULT_ConversionToErrorNonPointer) {
     auto ReturnError = []() -> ResultOrError<int> {
         return DAWN_VALIDATION_ERROR(placeholderErrorMessage);
@@ -341,7 +341,7 @@ TEST(ErrorTests, TRY_ConversionToErrorOrResult) {
 }
 
 // Check a MaybeError can be DAWN_TRIED in a function that returns an ResultOrError
-// Check DAWN_TRY handles errors correctly. Version without Result<E*, T*>
+// Check DAWN_TRY handles errors correctly. Version without dawn::Result<E*, T*>
 TEST(ErrorTests, TRY_ConversionToErrorOrResultNonPointer) {
     auto ReturnError = []() -> MaybeError {
         return DAWN_VALIDATION_ERROR(placeholderErrorMessage);

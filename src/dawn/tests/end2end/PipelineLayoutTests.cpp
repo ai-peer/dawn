@@ -73,7 +73,7 @@ TEST_P(PipelineLayoutTests, DynamicBuffersOverflow) {
 // where the two pipelines have the same pipeline layout.
 TEST_P(PipelineLayoutTests, ComputeAndRenderSamePipelineLayout) {
     wgpu::TextureFormat format = wgpu::TextureFormat::RGBA8Unorm;
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, R"(
         @compute @workgroup_size(8, 8)
         fn computeMain() {}
 
@@ -86,10 +86,10 @@ TEST_P(PipelineLayoutTests, ComputeAndRenderSamePipelineLayout) {
         }
     )");
 
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform}});
 
-    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout pl = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
     wgpu::ComputePipeline computePipeline;
     {
         wgpu::ComputePipelineDescriptor desc = {};
@@ -118,9 +118,10 @@ TEST_P(PipelineLayoutTests, ComputeAndRenderSamePipelineLayout) {
         renderPipeline = device.CreateRenderPipeline(&desc);
     }
 
-    wgpu::Buffer buffer = utils::CreateBufferFromData(device, wgpu::BufferUsage::Uniform, {1});
-    wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, buffer}});
-    wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, buffer}});
+    wgpu::Buffer buffer =
+        dawn::utils::CreateBufferFromData(device, wgpu::BufferUsage::Uniform, {1});
+    wgpu::BindGroup bg0 = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}});
+    wgpu::BindGroup bg1 = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer}});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
@@ -131,7 +132,8 @@ TEST_P(PipelineLayoutTests, ComputeAndRenderSamePipelineLayout) {
         pass.End();
     }
     {
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 4, 4, format);
+        dawn::utils::BasicRenderPass renderPass =
+            dawn::utils::CreateBasicRenderPass(device, 4, 4, format);
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(renderPipeline);
         pass.SetBindGroup(0, bg1);

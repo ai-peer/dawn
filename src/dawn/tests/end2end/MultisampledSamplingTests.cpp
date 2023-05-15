@@ -52,15 +52,15 @@ class MultisampledSamplingTest : public DawnTest {
         DawnTest::SetUp();
 
         {
-            utils::ComboRenderPipelineDescriptor desc;
+            dawn::utils::ComboRenderPipelineDescriptor desc;
 
-            desc.vertex.module = utils::CreateShaderModule(device, R"(
+            desc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
                 @vertex
                 fn main(@location(0) pos : vec2f) -> @builtin(position) vec4f {
                     return vec4f(pos, 0.0, 1.0);
                 })");
 
-            desc.cFragment.module = utils::CreateShaderModule(device, R"(
+            desc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
                 struct FragmentOut {
                     @location(0) color : f32,
                     @builtin(frag_depth) depth : f32,
@@ -93,7 +93,7 @@ class MultisampledSamplingTest : public DawnTest {
         {
             wgpu::ComputePipelineDescriptor desc = {};
             desc.compute.entryPoint = "main";
-            desc.compute.module = utils::CreateShaderModule(device, R"(
+            desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
                 @group(0) @binding(0) var texture0 : texture_multisampled_2d<f32>;
                 @group(0) @binding(1) var texture1 : texture_depth_multisampled_2d;
 
@@ -173,7 +173,7 @@ TEST_P(MultisampledSamplingTest, SamplePositions) {
         // clang-format on
     }
 
-    wgpu::Buffer vBuffer = utils::CreateBufferFromData(
+    wgpu::Buffer vBuffer = dawn::utils::CreateBufferFromData(
         device, vBufferData.data(), static_cast<uint32_t>(vBufferData.size() * sizeof(float)),
         wgpu::BufferUsage::Vertex);
 
@@ -183,7 +183,7 @@ TEST_P(MultisampledSamplingTest, SamplePositions) {
     wgpu::TextureView depthView = depthTexture.CreateView();
 
     static constexpr uint64_t kResultSize = 4 * sizeof(float) + 4 * sizeof(float);
-    uint64_t alignedResultSize = Align(kResultSize, 256);
+    uint64_t alignedResultSize = dawn::Align(kResultSize, 256);
 
     wgpu::BufferDescriptor outputBufferDesc = {};
     outputBufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
@@ -195,7 +195,7 @@ TEST_P(MultisampledSamplingTest, SamplePositions) {
         for (uint32_t sample = 0; sample < kSampleCount; ++sample) {
             uint32_t sampleOffset = (iter * kSampleCount + sample);
 
-            utils::ComboRenderPassDescriptor renderPass({colorView}, depthView);
+            dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthView);
             renderPass.cDepthStencilAttachmentInfo.depthClearValue = 0.f;
             renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
             renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
@@ -210,7 +210,7 @@ TEST_P(MultisampledSamplingTest, SamplePositions) {
             wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
             computePassEncoder.SetPipeline(checkSamplePipeline);
             computePassEncoder.SetBindGroup(
-                0, utils::MakeBindGroup(
+                0, dawn::utils::MakeBindGroup(
                        device, checkSamplePipeline.GetBindGroupLayout(0),
                        {{0, colorView},
                         {1, depthView},

@@ -106,7 +106,7 @@ TEST_P(DeviceLostTest, CreateBindGroupLayoutFails) {
 
 // Test that GetBindGroupLayout fails when device is lost
 TEST_P(DeviceLostTest, GetBindGroupLayoutFails) {
-    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
         struct UniformBuffer {
             pos : vec4f
         }
@@ -178,7 +178,7 @@ TEST_P(DeviceLostTest, CreateComputePipelineFails) {
 TEST_P(DeviceLostTest, CreateRenderPipelineFails) {
     LoseDeviceForTesting();
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
 
@@ -193,7 +193,7 @@ TEST_P(DeviceLostTest, CreateSamplerFails) {
 TEST_P(DeviceLostTest, CreateShaderModuleFails) {
     LoseDeviceForTesting();
 
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+    ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
         @fragment
         fn main(@location(0) color : vec4f) -> @location(0) vec4f {
             return color;
@@ -436,7 +436,7 @@ TEST_P(DeviceLostTest, DeviceLostDoesntCallUncapturedError) {
 // Test that WGPUCreatePipelineAsyncStatus_DeviceLost can be correctly returned when device is lost
 // before the callback of Create*PipelineAsync() is called.
 TEST_P(DeviceLostTest, DeviceLostBeforeCreatePipelineAsyncCallback) {
-    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
         @compute @workgroup_size(1) fn main() {
         })");
 
@@ -457,7 +457,7 @@ TEST_P(DeviceLostTest, DeviceLostBeforeCreatePipelineAsyncCallback) {
 // references to bind group layouts such that the cache was non-empty at the end
 // of shut down.
 TEST_P(DeviceLostTest, FreeBindGroupAfterDeviceLossWithPendingCommands) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
 
     wgpu::BufferDescriptor bufferDesc;
@@ -465,7 +465,7 @@ TEST_P(DeviceLostTest, FreeBindGroupAfterDeviceLossWithPendingCommands) {
     bufferDesc.usage = wgpu::BufferUsage::Storage;
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDesc);
 
-    wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, buffer, 0, sizeof(float)}});
+    wgpu::BindGroup bg = dawn::utils::MakeBindGroup(device, bgl, {{0, buffer, 0, sizeof(float)}});
 
     // Advance the pending command serial. We only a need a couple of these to repro the bug,
     // but include extra so this does not become a change-detecting test if the specific serial
@@ -492,9 +492,9 @@ TEST_P(DeviceLostTest, FreeBindGroupAfterDeviceLossWithPendingCommands) {
 // This is a regression test for crbug.com/1365011 where ending a render pass with an indirect draw
 // in it after the device is lost would cause render commands to be leaked.
 TEST_P(DeviceLostTest, DeviceLostInRenderPassWithDrawIndirect) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 4u, 4u);
-    utils::ComboRenderPipelineDescriptor desc;
-    desc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 4u, 4u);
+    dawn::utils::ComboRenderPipelineDescriptor desc;
+    desc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main(@builtin(vertex_index) i : u32) -> @builtin(position) vec4f {
             var pos = array(
                 vec2f(-1.0, -1.0),
@@ -503,14 +503,14 @@ TEST_P(DeviceLostTest, DeviceLostInRenderPassWithDrawIndirect) {
             return vec4f(pos[i], 0.0, 1.0);
         }
     )");
-    desc.cFragment.module = utils::CreateShaderModule(device, R"(
+    desc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         }
     )");
     desc.cTargets[0].format = renderPass.colorFormat;
-    wgpu::Buffer indirectBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect, {3, 1, 0, 0});
+    wgpu::Buffer indirectBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
+        device, wgpu::BufferUsage::Indirect, {3, 1, 0, 0});
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&desc);
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
