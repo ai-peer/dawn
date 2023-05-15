@@ -16,6 +16,24 @@
       "message": "Not sure if this is OK?",
       "revId": "281828c2fc6503ff1eb855fa2c9dd9dbaaaa3f17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "657ad70a_4813fdc6",
+        "filename": "src/tint/ast/transform/transform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-15T16:12:22Z",
+      "side": 1,
+      "message": "Yup, fine. You could also put it on `tint::transform::Transform` if they\u0027re going to be useful for IR transforms as well.",
+      "parentUuid": "87d1ce82_13053638",
+      "revId": "281828c2fc6503ff1eb855fa2c9dd9dbaaaa3f17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
