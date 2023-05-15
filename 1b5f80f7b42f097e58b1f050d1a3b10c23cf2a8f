@@ -22,6 +22,23 @@
       },
       "revId": "1b5f80f7b42f097e58b1f050d1a3b10c23cf2a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7380fd9_f3bf2a7c",
+        "filename": "src/tint/transform/manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-15T17:48:20Z",
+      "side": 1,
+      "message": "There are a bunch of missing #if TINT_BUILD_IR checks in here I think.",
+      "revId": "1b5f80f7b42f097e58b1f050d1a3b10c23cf2a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
