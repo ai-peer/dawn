@@ -70,6 +70,30 @@
       },
       "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e4de90_e541c2d0",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-15T11:46:30Z",
+      "side": 1,
+      "message": "Everything said so far appears correct. Tint\u0027s design is that Dawn tells Tint where to place things, so the external texture transform is told what the separate plane bindings are. This allows Dawn to calculate all the binding locations ahead of time, without any need for querying. The binding remapper transform is a simple `A -\u003e B` binding translation.\n\nBased on this, I don\u0027t believe you need to remap the external texture bindings with the binding remapper transform, assuming you know where the final bindings will be at the time you configure the external texture transform.",
+      "parentUuid": "ce06f634_6b9fa3af",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 84
+      },
+      "revId": "4512ddabd14dfa8b1355d12f0f3884922834d510",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
