@@ -16,6 +16,7 @@
 
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 
+namespace dawn {
 namespace {
 
 class TextureViewValidationTest : public ValidationTest {};
@@ -961,3 +962,4 @@ TEST_F(D32S8TextureViewValidationTests, TextureViewFormatCompatibility) {
 }
 
 }  // anonymous namespace
+}  // namespace dawn

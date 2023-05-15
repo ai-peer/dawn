@@ -22,9 +22,11 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 constexpr static unsigned int kRTSize = 64;
 
-namespace {
 struct AddressModeTestCase {
     wgpu::AddressMode mMode;
     uint8_t mExpected2;
@@ -47,13 +49,12 @@ AddressModeTestCase addressModes[] = {
         255,
     },
 };
-}  // namespace
 
 class SamplerTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
-        mRenderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        mRenderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
         wgpu::TextureDescriptor descriptor;
         descriptor.dimension = wgpu::TextureDimension::e2D;
@@ -67,17 +68,18 @@ class SamplerTest : public DawnTest {
         wgpu::Texture texture = device.CreateTexture(&descriptor);
 
         // Create a 2x2 checkerboard texture, with black in the top left and bottom right corners.
-        const uint32_t rowPixels = kTextureBytesPerRowAlignment / sizeof(utils::RGBA8);
-        std::array<utils::RGBA8, rowPixels * 2> pixels;
-        pixels[0] = pixels[rowPixels + 1] = utils::RGBA8::kBlack;
-        pixels[1] = pixels[rowPixels] = utils::RGBA8::kWhite;
+        const uint32_t rowPixels = kTextureBytesPerRowAlignment / sizeof(dawn::utils::RGBA8);
+        std::array<dawn::utils::RGBA8, rowPixels * 2> pixels;
+        pixels[0] = pixels[rowPixels + 1] = dawn::utils::RGBA8::kBlack;
+        pixels[1] = pixels[rowPixels] = dawn::utils::RGBA8::kWhite;
 
-        wgpu::Buffer stagingBuffer =
-            utils::CreateBufferFromData(device, pixels.data(), pixels.size() * sizeof(utils::RGBA8),
-                                        wgpu::BufferUsage::CopySrc);
-        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(stagingBuffer, 0, 256);
+        wgpu::Buffer stagingBuffer = dawn::utils::CreateBufferFromData(
+            device, pixels.data(), pixels.size() * sizeof(dawn::utils::RGBA8),
+            wgpu::BufferUsage::CopySrc);
+        wgpu::ImageCopyBuffer imageCopyBuffer =
+            dawn::utils::CreateImageCopyBuffer(stagingBuffer, 0, 256);
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
         wgpu::Extent3D copySize = {2, 2, 1};
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -90,7 +92,7 @@ class SamplerTest : public DawnTest {
     }
 
     void InitShaders(const char* frag_shader) {
-        auto vsModule = utils::CreateShaderModule(device, R"(
+        auto vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -103,9 +105,9 @@ class SamplerTest : public DawnTest {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             }
         )");
-        auto fsModule = utils::CreateShaderModule(device, frag_shader);
+        auto fsModule = dawn::utils::CreateShaderModule(device, frag_shader);
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].format = mRenderPass.colorFormat;
@@ -128,7 +130,7 @@ class SamplerTest : public DawnTest {
         }
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, mBindGroupLayout, {{0, sampler}, {1, mTextureView}});
+            dawn::utils::MakeBindGroup(device, mBindGroupLayout, {{0, sampler}, {1, mTextureView}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
@@ -142,21 +144,21 @@ class SamplerTest : public DawnTest {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        utils::RGBA8 expectedU2(u.mExpected2, u.mExpected2, u.mExpected2, 255);
-        utils::RGBA8 expectedU3(u.mExpected3, u.mExpected3, u.mExpected3, 255);
-        utils::RGBA8 expectedV2(v.mExpected2, v.mExpected2, v.mExpected2, 255);
-        utils::RGBA8 expectedV3(v.mExpected3, v.mExpected3, v.mExpected3, 255);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlack, mRenderPass.color, 0, 0);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kWhite, mRenderPass.color, 0, 1);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kWhite, mRenderPass.color, 1, 0);
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlack, mRenderPass.color, 1, 1);
+        dawn::utils::RGBA8 expectedU2(u.mExpected2, u.mExpected2, u.mExpected2, 255);
+        dawn::utils::RGBA8 expectedU3(u.mExpected3, u.mExpected3, u.mExpected3, 255);
+        dawn::utils::RGBA8 expectedV2(v.mExpected2, v.mExpected2, v.mExpected2, 255);
+        dawn::utils::RGBA8 expectedV3(v.mExpected3, v.mExpected3, v.mExpected3, 255);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlack, mRenderPass.color, 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kWhite, mRenderPass.color, 0, 1);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kWhite, mRenderPass.color, 1, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlack, mRenderPass.color, 1, 1);
         EXPECT_PIXEL_RGBA8_EQ(expectedU2, mRenderPass.color, 2, 0);
         EXPECT_PIXEL_RGBA8_EQ(expectedU3, mRenderPass.color, 3, 0);
         EXPECT_PIXEL_RGBA8_EQ(expectedV2, mRenderPass.color, 0, 2);
         EXPECT_PIXEL_RGBA8_EQ(expectedV3, mRenderPass.color, 0, 3);
     }
 
-    utils::BasicRenderPass mRenderPass;
+    dawn::utils::BasicRenderPass mRenderPass;
     wgpu::BindGroupLayout mBindGroupLayout;
     wgpu::RenderPipeline mPipeline;
     wgpu::TextureView mTextureView;
@@ -211,3 +213,6 @@ DAWN_INSTANTIATE_TEST(SamplerTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

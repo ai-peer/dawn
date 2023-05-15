@@ -24,6 +24,9 @@
 #include "dawn/common/Assert.h"
 #include "dawn/native/VulkanBackend.h"
 
+namespace dawn {
+namespace {
+
 // "linux-chromeos-rel"'s gbm.h is too old to compile, missing this change at least:
 // https://chromium-review.googlesource.com/c/chromiumos/platform/minigbm/+/1963001/10/gbm.h#244
 #ifndef MINIGBM
@@ -218,6 +221,8 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
     gbm_device* mGbmDevice = nullptr;
 };
 
+}  // anonymous namespace
+
 // static
 BackendTestConfig VideoViewsTestBackend::Backend() {
     return VulkanBackend();
@@ -227,3 +232,5 @@ BackendTestConfig VideoViewsTestBackend::Backend() {
 std::unique_ptr<VideoViewsTestBackend> VideoViewsTestBackend::Create() {
     return std::make_unique<VideoViewsTestBackendGbm>();
 }
+
+}  // namespace dawn

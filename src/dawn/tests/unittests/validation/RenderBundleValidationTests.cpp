@@ -20,6 +20,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 class RenderBundleValidationTest : public ValidationTest {
@@ -27,7 +28,7 @@ class RenderBundleValidationTest : public ValidationTest {
     void SetUp() override {
         ValidationTest::SetUp();
 
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
                 struct S {
                     transform : mat2x2<f32>
                 }
@@ -37,7 +38,7 @@ class RenderBundleValidationTest : public ValidationTest {
                     return vec4f();
                 })");
 
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule = dawn::utils::CreateShaderModule(device, R"(
                 struct Uniforms {
                     color : vec4f
                 }
@@ -52,9 +53,9 @@ class RenderBundleValidationTest : public ValidationTest {
                 })");
 
         wgpu::BindGroupLayout bgls[] = {
-            utils::MakeBindGroupLayout(
+            dawn::utils::MakeBindGroupLayout(
                 device, {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}}),
-            utils::MakeBindGroupLayout(
+            dawn::utils::MakeBindGroupLayout(
                 device, {
                             {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
                             {1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage},
@@ -66,39 +67,40 @@ class RenderBundleValidationTest : public ValidationTest {
 
         pipelineLayout = device.CreatePipelineLayout(&pipelineLayoutDesc);
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         InitializeRenderPipelineDescriptor(&descriptor);
         pipeline = device.CreateRenderPipeline(&descriptor);
 
         float data[8];
-        wgpu::Buffer buffer = utils::CreateBufferFromData(device, data, 8 * sizeof(float),
-                                                          wgpu::BufferUsage::Uniform);
+        wgpu::Buffer buffer = dawn::utils::CreateBufferFromData(device, data, 8 * sizeof(float),
+                                                                wgpu::BufferUsage::Uniform);
 
         constexpr static float kVertices[] = {-1.f, 1.f, 1.f, -1.f, -1.f, 1.f};
 
-        vertexBuffer = utils::CreateBufferFromData(device, kVertices, sizeof(kVertices),
-                                                   wgpu::BufferUsage::Vertex);
+        vertexBuffer = dawn::utils::CreateBufferFromData(device, kVertices, sizeof(kVertices),
+                                                         wgpu::BufferUsage::Vertex);
 
         // Placeholder storage buffer.
-        wgpu::Buffer storageBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer storageBuffer = dawn::utils::CreateBufferFromData(
             device, kVertices, sizeof(kVertices), wgpu::BufferUsage::Storage);
 
         // Vertex buffer with storage usage for testing read+write error usage.
-        vertexStorageBuffer =
-            utils::CreateBufferFromData(device, kVertices, sizeof(kVertices),
-                                        wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Storage);
+        vertexStorageBuffer = dawn::utils::CreateBufferFromData(
+            device, kVertices, sizeof(kVertices),
+            wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Storage);
 
-        bg0 = utils::MakeBindGroup(device, bgls[0], {{0, buffer, 0, 8 * sizeof(float)}});
-        bg1 = utils::MakeBindGroup(
+        bg0 = dawn::utils::MakeBindGroup(device, bgls[0], {{0, buffer, 0, 8 * sizeof(float)}});
+        bg1 = dawn::utils::MakeBindGroup(
             device, bgls[1],
             {{0, buffer, 0, 4 * sizeof(float)}, {1, storageBuffer, 0, sizeof(kVertices)}});
 
-        bg1Vertex = utils::MakeBindGroup(
+        bg1Vertex = dawn::utils::MakeBindGroup(
             device, bgls[1],
             {{0, buffer, 0, 8 * sizeof(float)}, {1, vertexStorageBuffer, 0, sizeof(kVertices)}});
     }
 
-    void InitializeRenderPipelineDescriptor(utils::ComboRenderPipelineDescriptor* descriptor) {
+    void InitializeRenderPipelineDescriptor(
+        dawn::utils::ComboRenderPipelineDescriptor* descriptor) {
         descriptor->layout = pipelineLayout;
         descriptor->vertex.module = vsModule;
         descriptor->cFragment.module = fsModule;
@@ -121,13 +123,11 @@ class RenderBundleValidationTest : public ValidationTest {
     wgpu::BindGroup bg1Vertex;
 };
 
-}  // anonymous namespace
-
 // Test creating and encoding an empty render bundle.
 TEST_F(RenderBundleValidationTest, Empty) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -147,7 +147,7 @@ TEST_F(RenderBundleValidationTest, Empty) {
 TEST_F(RenderBundleValidationTest, EmptyErrorEncoderProducesErrorBundle) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     // Having 0 attachments is invalid!
     desc.colorFormatsCount = 0;
 
@@ -178,7 +178,7 @@ TEST_F(RenderBundleValidationTest, ZeroBundles) {
 TEST_F(RenderBundleValidationTest, SimpleSuccess) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -201,7 +201,7 @@ TEST_F(RenderBundleValidationTest, SimpleSuccess) {
 TEST_F(RenderBundleValidationTest, DebugGroups) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -260,7 +260,7 @@ TEST_F(RenderBundleValidationTest, DebugGroups) {
 TEST_F(RenderBundleValidationTest, StateInheritance) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -345,7 +345,7 @@ TEST_F(RenderBundleValidationTest, StateInheritance) {
 TEST_F(RenderBundleValidationTest, StatePersistence) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -430,7 +430,7 @@ TEST_F(RenderBundleValidationTest, StatePersistence) {
 TEST_F(RenderBundleValidationTest, ClearsState) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -522,7 +522,7 @@ TEST_F(RenderBundleValidationTest, ClearsState) {
 TEST_F(RenderBundleValidationTest, MultipleBundles) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -555,7 +555,7 @@ TEST_F(RenderBundleValidationTest, MultipleBundles) {
 TEST_F(RenderBundleValidationTest, ExecuteMultipleTimes) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -578,7 +578,7 @@ TEST_F(RenderBundleValidationTest, ExecuteMultipleTimes) {
 
 // Test that it is an error to call Finish() on a render bundle encoder twice.
 TEST_F(RenderBundleValidationTest, FinishTwice) {
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Uint;
 
@@ -591,13 +591,13 @@ TEST_F(RenderBundleValidationTest, FinishTwice) {
 TEST_F(RenderBundleValidationTest, RequiresAtLeastOneTextureFormat) {
     // Test failure case.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
     }
 
     // Test success with one color format.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Uint;
         device.CreateRenderBundleEncoder(&desc);
@@ -605,7 +605,7 @@ TEST_F(RenderBundleValidationTest, RequiresAtLeastOneTextureFormat) {
 
     // Test success with a depth stencil format.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.depthStencilFormat = wgpu::TextureFormat::Depth24PlusStencil8;
         device.CreateRenderBundleEncoder(&desc);
     }
@@ -639,7 +639,7 @@ TEST_F(RenderBundleValidationTest, ColorFormatsCountOutOfBounds) {
 TEST_F(RenderBundleValidationTest, SparseColorFormats) {
     // Sparse color formats is valid.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 2;
         desc.cColorFormats[0] = wgpu::TextureFormat::Undefined;
         desc.cColorFormats[1] = wgpu::TextureFormat::RGBA8Unorm;
@@ -648,7 +648,7 @@ TEST_F(RenderBundleValidationTest, SparseColorFormats) {
 
     // When all color formats are undefined, depth stencil format must not be undefined.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::Undefined;
         desc.depthStencilFormat = wgpu::TextureFormat::Undefined;
@@ -658,7 +658,7 @@ TEST_F(RenderBundleValidationTest, SparseColorFormats) {
                 "No color or depthStencil attachments specified. At least one is required."));
     }
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::Undefined;
         desc.depthStencilFormat = wgpu::TextureFormat::Depth24PlusStencil8;
@@ -668,7 +668,7 @@ TEST_F(RenderBundleValidationTest, SparseColorFormats) {
 
 // Test that the render bundle depth stencil format cannot be set to undefined.
 TEST_F(RenderBundleValidationTest, DepthStencilFormatUndefined) {
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.depthStencilFormat = wgpu::TextureFormat::Undefined;
     ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
 }
@@ -680,7 +680,7 @@ TEST_F(RenderBundleValidationTest, DepthStencilReadOnly) {
          {wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureFormat::Depth32Float}) {
         for (bool depthReadOnly : {true, false}) {
             for (bool stencilReadOnly : {true, false}) {
-                utils::ComboRenderBundleEncoderDescriptor desc = {};
+                dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
                 desc.depthStencilFormat = format;
                 desc.depthReadOnly = depthReadOnly;
                 desc.stencilReadOnly = stencilReadOnly;
@@ -698,7 +698,7 @@ TEST_F(RenderBundleValidationTest, DepthStencilReadOnly) {
 TEST_F(RenderBundleValidationTest, UsageTracking) {
     PlaceholderRenderPass renderPass(device);
 
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
     desc.colorFormatsCount = 1;
     desc.cColorFormats[0] = renderPass.attachmentFormat;
 
@@ -792,13 +792,13 @@ TEST_F(RenderBundleValidationTest, UsageTracking) {
 
 // Test that encoding SetPipline with an incompatible color format produces an error.
 TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 3;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     renderBundleDesc.cColorFormats[1] = wgpu::TextureFormat::RG16Float;
     renderBundleDesc.cColorFormats[2] = wgpu::TextureFormat::R16Sint;
 
-    auto SetupRenderPipelineDescForTest = [this](utils::ComboRenderPipelineDescriptor* desc) {
+    auto SetupRenderPipelineDescForTest = [this](dawn::utils::ComboRenderPipelineDescriptor* desc) {
         InitializeRenderPipelineDescriptor(desc);
         desc->cFragment.targetCount = 3;
         desc->cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -811,7 +811,7 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
 
     // Test the success case.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
 
         wgpu::RenderBundleEncoder renderBundleEncoder =
@@ -823,7 +823,7 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
 
     // Test the failure case for mismatched format types.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.cTargets[1].format = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -836,7 +836,7 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
 
     // Test the failure case for missing format
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.cFragment.targetCount = 2;
 
@@ -850,12 +850,12 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
 
 // Test that encoding SetPipline with an incompatible depth stencil format produces an error.
 TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     renderBundleDesc.depthStencilFormat = wgpu::TextureFormat::Depth24PlusStencil8;
 
-    auto SetupRenderPipelineDescForTest = [this](utils::ComboRenderPipelineDescriptor* desc) {
+    auto SetupRenderPipelineDescForTest = [this](dawn::utils::ComboRenderPipelineDescriptor* desc) {
         InitializeRenderPipelineDescriptor(desc);
         desc->cFragment.targetCount = 1;
         desc->cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -863,7 +863,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
 
     // Test the success case.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.EnableDepthStencil(wgpu::TextureFormat::Depth24PlusStencil8);
 
@@ -876,7 +876,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
 
     // Test the failure case for mismatched format.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.EnableDepthStencil(wgpu::TextureFormat::Depth24Plus);
 
@@ -889,7 +889,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
 
     // Test the failure case for missing format.
     {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.depthStencil = nullptr;
 
@@ -903,12 +903,12 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
 
 // Test that encoding SetPipline with an incompatible sample count produces an error.
 TEST_F(RenderBundleValidationTest, PipelineSampleCountMismatch) {
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     renderBundleDesc.sampleCount = 4;
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDesc;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDesc;
     InitializeRenderPipelineDescriptor(&renderPipelineDesc);
     renderPipelineDesc.cFragment.targetCount = 1;
     renderPipelineDesc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -937,7 +937,7 @@ TEST_F(RenderBundleValidationTest, PipelineSampleCountMismatch) {
 
 // Test that encoding ExecuteBundles with an incompatible color format produces an error.
 TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 3;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     renderBundleDesc.cColorFormats[1] = wgpu::TextureFormat::RG16Float;
@@ -962,7 +962,7 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
 
     // Test the success case
     {
-        utils::ComboRenderPassDescriptor renderPass({
+        dawn::utils::ComboRenderPassDescriptor renderPass({
             tex0.CreateView(),
             tex1.CreateView(),
             tex2.CreateView(),
@@ -977,7 +977,7 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
 
     // Test the failure case for mismatched format
     {
-        utils::ComboRenderPassDescriptor renderPass({
+        dawn::utils::ComboRenderPassDescriptor renderPass({
             tex0.CreateView(),
             tex1.CreateView(),
             tex0.CreateView(),
@@ -992,7 +992,7 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
 
     // Test the failure case for missing format
     {
-        utils::ComboRenderPassDescriptor renderPass({
+        dawn::utils::ComboRenderPassDescriptor renderPass({
             tex0.CreateView(),
             tex1.CreateView(),
         });
@@ -1008,7 +1008,7 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
 // Test that encoding ExecuteBundles with an incompatible depth stencil format produces an
 // error.
 TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     renderBundleDesc.depthStencilFormat = wgpu::TextureFormat::Depth24Plus;
@@ -1032,7 +1032,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
 
     // Test the success case
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex1.CreateView());
+        dawn::utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex1.CreateView());
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1045,7 +1045,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
 
     // Test the failure case for mismatched format
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex2.CreateView());
+        dawn::utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex2.CreateView());
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1058,7 +1058,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
 
     // Test the failure case for missing format
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()});
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -1070,7 +1070,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
 
 // Test that encoding ExecuteBundles with an incompatible sample count produces an error.
 TEST_F(RenderBundleValidationTest, RenderPassSampleCountMismatch) {
-    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -1090,7 +1090,7 @@ TEST_F(RenderBundleValidationTest, RenderPassSampleCountMismatch) {
 
     // Test the success case
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()});
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -1101,7 +1101,7 @@ TEST_F(RenderBundleValidationTest, RenderPassSampleCountMismatch) {
 
     // Test the failure case
     {
-        utils::ComboRenderPassDescriptor renderPass({tex1.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({tex1.CreateView()});
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -1116,7 +1116,7 @@ TEST_F(RenderBundleValidationTest, RenderPassSampleCountMismatch) {
 TEST_F(RenderBundleValidationTest, TextureFormats) {
     // Test that color formats are validated as color.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::Depth24PlusStencil8;
         ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
@@ -1124,7 +1124,7 @@ TEST_F(RenderBundleValidationTest, TextureFormats) {
 
     // Test that color formats are validated as renderable.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.colorFormatsCount = 1;
         desc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Snorm;
         ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
@@ -1132,7 +1132,7 @@ TEST_F(RenderBundleValidationTest, TextureFormats) {
 
     // Test that depth/stencil formats are validated as depth/stencil.
     {
-        utils::ComboRenderBundleEncoderDescriptor desc = {};
+        dawn::utils::ComboRenderBundleEncoderDescriptor desc = {};
         desc.depthStencilFormat = wgpu::TextureFormat::RGBA8Unorm;
         ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
     }
@@ -1192,7 +1192,7 @@ TEST_F(RenderBundleValidationTest, RenderBundleColorFormatsBytesPerSample) {
     };
 
     for (const TestCase& testCase : kTestCases) {
-        utils::ComboRenderBundleEncoderDescriptor descriptor;
+        dawn::utils::ComboRenderBundleEncoderDescriptor descriptor;
         descriptor.colorFormatsCount = testCase.formats.size();
         for (size_t i = 0; i < testCase.formats.size(); i++) {
             descriptor.cColorFormats[i] = testCase.formats.at(i);
@@ -1204,3 +1204,6 @@ TEST_F(RenderBundleValidationTest, RenderBundleColorFormatsBytesPerSample) {
         }
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

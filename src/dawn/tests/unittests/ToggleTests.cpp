@@ -27,6 +27,7 @@
 #include "dawn/utils/WGPUHelpers.h"
 #include "gtest/gtest.h"
 
+namespace dawn {
 namespace {
 
 using testing::Contains;
@@ -173,7 +174,7 @@ TEST_F(InstanceToggleTest, InstanceTogglesInheritToAdapterAndDevice) {
         instance->DiscoverDefaultAdapters();
 
         // Get the adapter created by instance with default toggles.
-        Ref<dawn::native::AdapterBase> nullAdapter;
+        dawn::Ref<dawn::native::AdapterBase> nullAdapter;
         for (auto& adapter : instance->GetAdapters()) {
             if (adapter->GetPhysicalDevice()->GetBackendType() == wgpu::BackendType::Null) {
                 nullAdapter = adapter;
@@ -275,4 +276,6 @@ TEST_F(InstanceToggleTest, InstanceTogglesInheritToAdapterAndDevice) {
         validateInstanceTogglesInheritedToAdapter(instance.get());
     }
 }
+
 }  // anonymous namespace
+}  // namespace dawn

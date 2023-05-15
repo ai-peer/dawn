@@ -24,11 +24,13 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 constexpr static unsigned int kRTSize = 64;
 constexpr wgpu::TextureFormat kDefaultFormat = wgpu::TextureFormat::RGBA8Unorm;
 constexpr uint32_t kBytesPerTexel = 4;
 
-namespace {
 wgpu::Texture Create2DTexture(wgpu::Device device,
                               uint32_t width,
                               uint32_t height,
@@ -62,7 +64,7 @@ wgpu::Texture Create3DTexture(wgpu::Device device,
 }
 
 wgpu::ShaderModule CreateDefaultVertexShaderModule(wgpu::Device device) {
-    return utils::CreateShaderModule(device, R"(
+    return dawn::utils::CreateShaderModule(device, R"(
             struct VertexOut {
                 @location(0) texCoord : vec2f,
                 @builtin(position) position : vec4f,
@@ -91,7 +93,6 @@ wgpu::ShaderModule CreateDefaultVertexShaderModule(wgpu::Device device) {
             }
         )");
 }
-}  // anonymous namespace
 
 class TextureViewSamplingTest : public DawnTest {
   protected:
@@ -104,7 +105,7 @@ class TextureViewSamplingTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        mRenderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        mRenderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
         wgpu::FilterMode kFilterMode = wgpu::FilterMode::Nearest;
         wgpu::MipmapFilterMode kMipmapFilterMode = wgpu::MipmapFilterMode::Nearest;
@@ -141,9 +142,10 @@ class TextureViewSamplingTest : public DawnTest {
 
         // Create a texture with pixel = (0, 0, 0, level * 10 + layer + 1) at level `level` and
         // layer `layer`.
-        static_assert((kTextureBytesPerRowAlignment % sizeof(utils::RGBA8)) == 0,
+        static_assert((kTextureBytesPerRowAlignment % sizeof(dawn::utils::RGBA8)) == 0,
                       "Texture bytes per row alignment must be a multiple of sizeof(RGBA8).");
-        constexpr uint32_t kPixelsPerRowPitch = kTextureBytesPerRowAlignment / sizeof(utils::RGBA8);
+        constexpr uint32_t kPixelsPerRowPitch =
+            kTextureBytesPerRowAlignment / sizeof(dawn::utils::RGBA8);
         ASSERT_LE(textureWidthLevel0, kPixelsPerRowPitch);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -155,15 +157,15 @@ class TextureViewSamplingTest : public DawnTest {
                 const int pixelValue = GenerateTestPixelValue(layer, level);
 
                 constexpr uint32_t kPaddedTexWidth = kPixelsPerRowPitch;
-                std::vector<utils::RGBA8> data(kPaddedTexWidth * texHeight,
-                                               utils::RGBA8(0, 0, 0, pixelValue));
-                wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(
-                    device, data.data(), data.size() * sizeof(utils::RGBA8),
+                std::vector<dawn::utils::RGBA8> data(kPaddedTexWidth * texHeight,
+                                                     dawn::utils::RGBA8(0, 0, 0, pixelValue));
+                wgpu::Buffer stagingBuffer = dawn::utils::CreateBufferFromData(
+                    device, data.data(), data.size() * sizeof(dawn::utils::RGBA8),
                     wgpu::BufferUsage::CopySrc);
-                wgpu::ImageCopyBuffer imageCopyBuffer =
-                    utils::CreateImageCopyBuffer(stagingBuffer, 0, kTextureBytesPerRowAlignment);
+                wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
+                    stagingBuffer, 0, kTextureBytesPerRowAlignment);
                 wgpu::ImageCopyTexture imageCopyTexture =
-                    utils::CreateImageCopyTexture(mTexture, level, {0, 0, layer});
+                    dawn::utils::CreateImageCopyTexture(mTexture, level, {0, 0, layer});
                 wgpu::Extent3D copySize = {texWidth, texHeight, 1};
                 encoder.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &copySize);
             }
@@ -173,17 +175,17 @@ class TextureViewSamplingTest : public DawnTest {
     }
 
     void Verify(const wgpu::TextureView& textureView, const char* fragmentShader, int expected) {
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader);
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragmentShader);
 
-        utils::ComboRenderPipelineDescriptor textureDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor textureDescriptor;
         textureDescriptor.vertex.module = mVSModule;
         textureDescriptor.cFragment.module = fsModule;
         textureDescriptor.cTargets[0].format = mRenderPass.colorFormat;
 
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&textureDescriptor);
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, mSampler}, {1, textureView}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, mSampler}, {1, textureView}});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
@@ -197,7 +199,7 @@ class TextureViewSamplingTest : public DawnTest {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        utils::RGBA8 expectedPixel(0, 0, 0, expected);
+        dawn::utils::RGBA8 expectedPixel(0, 0, 0, expected);
         EXPECT_PIXEL_RGBA8_EQ(expectedPixel, mRenderPass.color, 0, 0);
         EXPECT_PIXEL_RGBA8_EQ(expectedPixel, mRenderPass.color, mRenderPass.width - 1,
                               mRenderPass.height - 1);
@@ -350,7 +352,7 @@ class TextureViewSamplingTest : public DawnTest {
     wgpu::Texture mTexture;
     wgpu::TextureViewDescriptor mDefaultTextureViewDescriptor;
     wgpu::ShaderModule mVSModule;
-    utils::BasicRenderPass mRenderPass;
+    dawn::utils::BasicRenderPass mRenderPass;
 };
 
 // Test drawing a rect with a 2D array texture.
@@ -457,23 +459,24 @@ TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
 
     wgpu::ImageCopyTexture dst = {};
     dst.texture = texture;
-    std::array<utils::RGBA8, 4> rgbaTextureData = {
-        utils::RGBA8(180, 0, 0, 255),
-        utils::RGBA8(0, 84, 0, 127),
-        utils::RGBA8(0, 0, 62, 100),
-        utils::RGBA8(62, 180, 84, 90),
+    std::array<dawn::utils::RGBA8, 4> rgbaTextureData = {
+        dawn::utils::RGBA8(180, 0, 0, 255),
+        dawn::utils::RGBA8(0, 84, 0, 127),
+        dawn::utils::RGBA8(0, 0, 62, 100),
+        dawn::utils::RGBA8(62, 180, 84, 90),
     };
 
     wgpu::TextureDataLayout dataLayout = {};
-    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(utils::RGBA8);
+    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(dawn::utils::RGBA8);
 
-    queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(utils::RGBA8),
-                       &dataLayout, &textureDesc.size);
+    queue.WriteTexture(&dst, rgbaTextureData.data(),
+                       rgbaTextureData.size() * sizeof(dawn::utils::RGBA8), &dataLayout,
+                       &textureDesc.size);
 
     wgpu::TextureView textureView = texture.CreateView(&viewDesc);
 
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
-    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
             var pos = array(
@@ -486,7 +489,7 @@ TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
             return vec4f(pos[VertexIndex], 0.0, 1.0);
         }
     )");
-    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+    pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var texture : texture_2d<f32>;
 
         @fragment
@@ -495,7 +498,7 @@ TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
         }
     )");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
         device, textureDesc.size.width, textureDesc.size.height, wgpu::TextureFormat::RGBA8Unorm);
     pipelineDesc.cTargets[0].format = renderPass.colorFormat;
 
@@ -504,7 +507,7 @@ TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, textureView}});
+            dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, textureView}});
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
@@ -516,18 +519,18 @@ TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_BETWEEN(        //
-        utils::RGBA8(116, 0, 0, 255),  //
-        utils::RGBA8(117, 0, 0, 255), renderPass.color, 0, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 23, 0, 127),  //
-        utils::RGBA8(0, 24, 0, 127), renderPass.color, 1, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 0, 12, 100),  //
-        utils::RGBA8(0, 0, 13, 100), renderPass.color, 0, 1);
-    EXPECT_PIXEL_RGBA8_BETWEEN(         //
-        utils::RGBA8(12, 116, 23, 90),  //
-        utils::RGBA8(13, 117, 24, 90), renderPass.color, 1, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(              //
+        dawn::utils::RGBA8(116, 0, 0, 255),  //
+        dawn::utils::RGBA8(117, 0, 0, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 23, 0, 127),  //
+        dawn::utils::RGBA8(0, 24, 0, 127), renderPass.color, 1, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 0, 12, 100),  //
+        dawn::utils::RGBA8(0, 0, 13, 100), renderPass.color, 0, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(               //
+        dawn::utils::RGBA8(12, 116, 23, 90),  //
+        dawn::utils::RGBA8(13, 117, 24, 90), renderPass.color, 1, 1);
 }
 
 // Test sampling from a cube map texture view that covers a whole 2D array texture.
@@ -606,7 +609,7 @@ class TextureViewRenderingTest : public DawnTest {
         wgpu::ShaderModule vsModule = CreateDefaultVertexShaderModule(device);
 
         // Clear textureView with Red(255, 0, 0, 255) and render Green(0, 255, 0, 255) into it
-        utils::ComboRenderPassDescriptor renderPassInfo({textureView});
+        dawn::utils::ComboRenderPassDescriptor renderPassInfo({textureView});
         renderPassInfo.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
 
         const char* oneColorFragmentShader = R"(
@@ -616,9 +619,9 @@ class TextureViewRenderingTest : public DawnTest {
             }
         )";
         wgpu::ShaderModule oneColorFsModule =
-            utils::CreateShaderModule(device, oneColorFragmentShader);
+            dawn::utils::CreateShaderModule(device, oneColorFragmentShader);
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = oneColorFsModule;
         pipelineDescriptor.cTargets[0].format = kDefaultFormat;
@@ -640,11 +643,11 @@ class TextureViewRenderingTest : public DawnTest {
         uint32_t textureViewWidth = std::max(1u, textureWidthLevel0 >> textureViewBaseLevel);
         uint32_t textureViewHeight = std::max(1u, textureHeightLevel0 >> textureViewBaseLevel);
         uint32_t bytesPerRow =
-            Align(kBytesPerTexel * textureWidthLevel0, kTextureBytesPerRowAlignment);
+            dawn::Align(kBytesPerTexel * textureWidthLevel0, kTextureBytesPerRowAlignment);
         uint32_t expectedDataSize =
             bytesPerRow / kBytesPerTexel * (textureWidthLevel0 - 1) + textureHeightLevel0;
-        constexpr utils::RGBA8 kExpectedPixel(0, 255, 0, 255);
-        std::vector<utils::RGBA8> expected(expectedDataSize, kExpectedPixel);
+        constexpr dawn::utils::RGBA8 kExpectedPixel(0, 255, 0, 255);
+        std::vector<dawn::utils::RGBA8> expected(expectedDataSize, kExpectedPixel);
         EXPECT_TEXTURE_EQ(expected.data(), texture, {0, 0, textureViewBaseLayer},
                           {textureViewWidth, textureViewHeight}, textureViewBaseLevel);
     }
@@ -796,11 +799,11 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
     wgpu::Texture sampledTexture = device.CreateTexture(&textureDesc);
 
     // Initial non-SRGB data to upload to |sampledTexture|.
-    std::array<utils::RGBA8, 4> rgbaTextureData = {
-        utils::RGBA8(117, 0, 0, 255),
-        utils::RGBA8(0, 23, 0, 127),
-        utils::RGBA8(0, 0, 12, 100),
-        utils::RGBA8(13, 117, 24, 90),
+    std::array<dawn::utils::RGBA8, 4> rgbaTextureData = {
+        dawn::utils::RGBA8(117, 0, 0, 255),
+        dawn::utils::RGBA8(0, 23, 0, 127),
+        dawn::utils::RGBA8(0, 0, 12, 100),
+        dawn::utils::RGBA8(13, 117, 24, 90),
     };
 
     wgpu::ImageCopyTexture dst = {};
@@ -808,16 +811,17 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
 
     // Upload |rgbaTextureData| into |sampledTexture|.
     dst.texture = sampledTexture;
-    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(utils::RGBA8);
-    queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(utils::RGBA8),
-                       &dataLayout, &textureDesc.size);
+    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(dawn::utils::RGBA8);
+    queue.WriteTexture(&dst, rgbaTextureData.data(),
+                       rgbaTextureData.size() * sizeof(dawn::utils::RGBA8), &dataLayout,
+                       &textureDesc.size);
 
     // View both the attachment as SRGB.
     wgpu::TextureView textureView = texture.CreateView(&viewDesc);
 
     // Create a render pipeline to blit |sampledTexture| into |textureView|.
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
-    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
             var pos = array(
@@ -830,7 +834,7 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
             return vec4f(pos[VertexIndex], 0.0, 1.0);
         }
     )");
-    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+    pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var texture : texture_2d<f32>;
 
         @fragment
@@ -845,10 +849,10 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
     {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampledTexture.CreateView()}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampledTexture.CreateView()}});
 
-        utils::ComboRenderPassDescriptor renderPassInfo({textureView});
+        dawn::utils::ComboRenderPassDescriptor renderPassInfo({textureView});
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassInfo);
         pass.SetPipeline(pipeline);
@@ -862,18 +866,18 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
 
     // Check the results. This is the sRGB encoding for the same non-SRGB colors
     // represented by |initialData|.
-    EXPECT_PIXEL_RGBA8_BETWEEN(        //
-        utils::RGBA8(180, 0, 0, 255),  //
-        utils::RGBA8(181, 0, 0, 255), texture, 0, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 85, 0, 127),  //
-        utils::RGBA8(0, 86, 0, 127), texture, 1, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 0, 61, 100),  //
-        utils::RGBA8(0, 0, 62, 100), texture, 0, 1);
-    EXPECT_PIXEL_RGBA8_BETWEEN(         //
-        utils::RGBA8(64, 180, 86, 90),  //
-        utils::RGBA8(15, 181, 87, 90), texture, 1, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(              //
+        dawn::utils::RGBA8(180, 0, 0, 255),  //
+        dawn::utils::RGBA8(181, 0, 0, 255), texture, 0, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 85, 0, 127),  //
+        dawn::utils::RGBA8(0, 86, 0, 127), texture, 1, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 0, 61, 100),  //
+        dawn::utils::RGBA8(0, 0, 62, 100), texture, 0, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(               //
+        dawn::utils::RGBA8(64, 180, 86, 90),  //
+        dawn::utils::RGBA8(15, 181, 87, 90), texture, 1, 1);
 }
 
 // Test that an RGBA8 texture may be interpreted as RGBA8UnormSrgb and resolved to.
@@ -912,11 +916,11 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
     wgpu::Texture sampledTexture = device.CreateTexture(&textureDesc);
 
     // Initial non-SRGB data to upload to |sampledTexture|.
-    std::array<utils::RGBA8, 4> rgbaTextureData = {
-        utils::RGBA8(117, 0, 0, 255),
-        utils::RGBA8(0, 23, 0, 127),
-        utils::RGBA8(0, 0, 12, 100),
-        utils::RGBA8(13, 117, 24, 90),
+    std::array<dawn::utils::RGBA8, 4> rgbaTextureData = {
+        dawn::utils::RGBA8(117, 0, 0, 255),
+        dawn::utils::RGBA8(0, 23, 0, 127),
+        dawn::utils::RGBA8(0, 0, 12, 100),
+        dawn::utils::RGBA8(13, 117, 24, 90),
     };
 
     wgpu::ImageCopyTexture dst = {};
@@ -924,17 +928,18 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
 
     // Upload |rgbaTextureData| into |sampledTexture|.
     dst.texture = sampledTexture;
-    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(utils::RGBA8);
-    queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(utils::RGBA8),
-                       &dataLayout, &textureDesc.size);
+    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(dawn::utils::RGBA8);
+    queue.WriteTexture(&dst, rgbaTextureData.data(),
+                       rgbaTextureData.size() * sizeof(dawn::utils::RGBA8), &dataLayout,
+                       &textureDesc.size);
 
     // View both the multisampled texture and the resolve texture as SRGB.
     wgpu::TextureView resolveView = resolveTexture.CreateView(&viewDesc);
     wgpu::TextureView multisampledTextureView = multisampledTexture.CreateView(&viewDesc);
 
     // Create a render pipeline to blit |sampledTexture| into |multisampledTextureView|.
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
-    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
             var pos = array(
@@ -947,7 +952,7 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
             return vec4f(pos[VertexIndex], 0.0, 1.0);
         }
     )");
-    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+    pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @group(0) @binding(0) var texture : texture_2d<f32>;
 
         @fragment
@@ -963,10 +968,10 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
     {
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampledTexture.CreateView()}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampledTexture.CreateView()}});
 
-        utils::ComboRenderPassDescriptor renderPassInfo({multisampledTextureView});
+        dawn::utils::ComboRenderPassDescriptor renderPassInfo({multisampledTextureView});
         renderPassInfo.cColorAttachments[0].resolveTarget = resolveView;
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassInfo);
@@ -981,18 +986,18 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
 
     // Check the results. This is the sRGB encoding for the same non-SRGB colors
     // represented by |initialData|.
-    EXPECT_PIXEL_RGBA8_BETWEEN(        //
-        utils::RGBA8(180, 0, 0, 255),  //
-        utils::RGBA8(181, 0, 0, 255), resolveTexture, 0, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 85, 0, 127),  //
-        utils::RGBA8(0, 86, 0, 127), resolveTexture, 1, 0);
-    EXPECT_PIXEL_RGBA8_BETWEEN(       //
-        utils::RGBA8(0, 0, 61, 100),  //
-        utils::RGBA8(0, 0, 62, 100), resolveTexture, 0, 1);
-    EXPECT_PIXEL_RGBA8_BETWEEN(         //
-        utils::RGBA8(64, 180, 86, 90),  //
-        utils::RGBA8(15, 181, 87, 90), resolveTexture, 1, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(              //
+        dawn::utils::RGBA8(180, 0, 0, 255),  //
+        dawn::utils::RGBA8(181, 0, 0, 255), resolveTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 85, 0, 127),  //
+        dawn::utils::RGBA8(0, 86, 0, 127), resolveTexture, 1, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(             //
+        dawn::utils::RGBA8(0, 0, 61, 100),  //
+        dawn::utils::RGBA8(0, 0, 62, 100), resolveTexture, 0, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(               //
+        dawn::utils::RGBA8(64, 180, 86, 90),  //
+        dawn::utils::RGBA8(15, 181, 87, 90), resolveTexture, 1, 1);
 }
 
 DAWN_INSTANTIATE_TEST(TextureViewSamplingTest,
@@ -1081,14 +1086,16 @@ TEST_P(TextureView1DTest, Sampling) {
     texDesc.size = {4, 1, 1};
     wgpu::Texture tex = device.CreateTexture(&texDesc);
 
-    std::array<utils::RGBA8, 4> data = {utils::RGBA8::kGreen, utils::RGBA8::kRed,
-                                        utils::RGBA8::kBlue, utils::RGBA8::kWhite};
-    wgpu::ImageCopyTexture target = utils::CreateImageCopyTexture(tex, 0, {});
-    wgpu::TextureDataLayout layout = utils::CreateTextureDataLayout(0, wgpu::kCopyStrideUndefined);
+    std::array<dawn::utils::RGBA8, 4> data = {dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kRed,
+                                              dawn::utils::RGBA8::kBlue,
+                                              dawn::utils::RGBA8::kWhite};
+    wgpu::ImageCopyTexture target = dawn::utils::CreateImageCopyTexture(tex, 0, {});
+    wgpu::TextureDataLayout layout =
+        dawn::utils::CreateTextureDataLayout(0, wgpu::kCopyStrideUndefined);
     queue.WriteTexture(&target, &data, sizeof(data), &layout, &texDesc.size);
 
     // Create a pipeline that will sample from the 1D texture and output to an attachment.
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn vs(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
             var pos = array(
@@ -1105,7 +1112,7 @@ TEST_P(TextureView1DTest, Sampling) {
             return textureSample(tex, samp, pos.x / 4.0);
         }
     )");
-    utils::ComboRenderPipelineDescriptor pDesc;
+    dawn::utils::ComboRenderPipelineDescriptor pDesc;
     pDesc.vertex.module = module;
     pDesc.vertex.entryPoint = "vs";
     pDesc.cFragment.module = module;
@@ -1114,12 +1121,13 @@ TEST_P(TextureView1DTest, Sampling) {
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pDesc);
 
     // Do the sample + rendering.
-    wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                              {{0, tex.CreateView()}, {1, device.CreateSampler()}});
+    wgpu::BindGroup bg =
+        dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                   {{0, tex.CreateView()}, {1, device.CreateSampler()}});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
-    utils::BasicRenderPass rp = utils::CreateBasicRenderPass(device, 4, 1);
+    dawn::utils::BasicRenderPass rp = dawn::utils::CreateBasicRenderPass(device, 4, 1);
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp.renderPassInfo);
     pass.SetPipeline(pipeline);
     pass.SetBindGroup(0, bg);
@@ -1143,3 +1151,6 @@ DAWN_INSTANTIATE_TEST(TextureView1DTest,
                       VulkanBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

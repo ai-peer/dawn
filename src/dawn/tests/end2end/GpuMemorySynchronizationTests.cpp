@@ -22,6 +22,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class GpuMemorySyncTests : public DawnTest {
   protected:
     wgpu::Buffer CreateBuffer() {
@@ -651,3 +654,6 @@ DAWN_INSTANTIATE_TEST(MultipleWriteThenMultipleReadTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

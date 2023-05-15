@@ -18,10 +18,13 @@
 #include "dawn/common/UnderlyingType.h"
 #include "gtest/gtest.h"
 
+namespace dawn {
+namespace {
+
 class TypedIntegerTest : public testing::Test {
   protected:
-    using Unsigned = TypedInteger<struct UnsignedT, uint32_t>;
-    using Signed = TypedInteger<struct SignedT, int32_t>;
+    using Unsigned = dawn::TypedInteger<struct UnsignedT, uint32_t>;
+    using Signed = dawn::TypedInteger<struct SignedT, int32_t>;
 };
 
 // Test that typed integers can be created and cast and the internal values are identical
@@ -147,8 +150,8 @@ TEST_F(TypedIntegerTest, NumericLimits) {
 }
 
 TEST_F(TypedIntegerTest, UnderlyingType) {
-    static_assert(std::is_same<UnderlyingType<Unsigned>, uint32_t>::value);
-    static_assert(std::is_same<UnderlyingType<Signed>, int32_t>::value);
+    static_assert(std::is_same<dawn::UnderlyingType<Unsigned>, uint32_t>::value);
+    static_assert(std::is_same<dawn::UnderlyingType<Signed>, int32_t>::value);
 }
 
 // Tests for bounds assertions on arithmetic overflow and underflow.
@@ -233,3 +236,6 @@ TEST_F(TypedIntegerTest, NegationOverflow) {
 }
 
 #endif  // defined(DAWN_ENABLE_ASSERTS)
+
+}  // anonymous namespace
+}  // namespace dawn

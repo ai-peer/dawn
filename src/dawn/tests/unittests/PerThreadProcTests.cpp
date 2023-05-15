@@ -23,6 +23,9 @@
 #include "dawn/native/null/DeviceNull.h"
 #include "dawn/webgpu_cpp.h"
 
+namespace dawn {
+namespace {
+
 class PerThreadProcTests : public testing::Test {
   public:
     PerThreadProcTests()
@@ -32,7 +35,7 @@ class PerThreadProcTests : public testing::Test {
     ~PerThreadProcTests() override = default;
 
   protected:
-    Ref<dawn::native::InstanceBase> mNativeInstance;
+    dawn::Ref<dawn::native::InstanceBase> mNativeInstance;
     dawn::native::AdapterBase mAdapterBase;
 };
 
@@ -117,3 +120,6 @@ TEST_F(PerThreadProcTests, DispatchesPerThread) {
 
     dawnProcSetProcs(nullptr);
 }
+
+}  // anonymous namespace
+}  // namespace dawn

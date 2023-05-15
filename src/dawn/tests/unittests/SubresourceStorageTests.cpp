@@ -133,7 +133,7 @@ void FakeStorage<T>::CheckSameAs(const SubresourceStorage<T>& real) {
     RangeTracker tracker(real);
     real.Iterate([&](const SubresourceRange& range, const T& data) {
         // Check that the range is sensical.
-        EXPECT_TRUE(IsSubset(range.aspects, mAspects));
+        EXPECT_TRUE(dawn::IsSubset(range.aspects, mAspects));
 
         EXPECT_LT(range.baseArrayLayer, mArrayLayerCount);
         EXPECT_LE(range.baseArrayLayer + range.layerCount, mArrayLayerCount);

@@ -20,12 +20,14 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 // 2D array textures with particular dimensions may corrupt on some devices. This test creates some
 // 2d-array textures with different dimensions, and test them one by one. For each sub-test, the
 // tested texture is written via different methods, then read back from the texture and verify the
 // data.
 
-namespace {
 enum class WriteType {
     ClearTexture,
     WriteTexture,    // Write the tested texture via writeTexture API
@@ -85,8 +87,6 @@ DAWN_TEST_PARAM_STRUCT(TextureCorruptionTestsParams,
                        SampleCount,
                        WriteType);
 
-}  // namespace
-
 class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsParams> {
   protected:
     virtual std::ostringstream& DoSingleTest(wgpu::Texture texture,
@@ -101,8 +101,8 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
             levelSize.width = std::max(textureSize.width >> mipLevel, 1u);
             levelSize.height = std::max(textureSize.height >> mipLevel, 1u);
         }
-        uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(format);
-        uint32_t bytesPerRow = Align(levelSize.width * bytesPerTexel, 256);
+        uint32_t bytesPerTexel = dawn::utils::GetTexelBlockSizeInBytes(format);
+        uint32_t bytesPerRow = dawn::Align(levelSize.width * bytesPerTexel, 256);
         uint64_t bufferSize = bytesPerRow * levelSize.height;
         wgpu::BufferDescriptor descriptor;
         descriptor.size = bufferSize;
@@ -111,11 +111,11 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
         wgpu::Buffer resultBuffer = device.CreateBuffer(&descriptor);
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, mipLevel, {0, 0, depthOrArrayLayer});
+            dawn::utils::CreateImageCopyTexture(texture, mipLevel, {0, 0, depthOrArrayLayer});
         wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(buffer, 0, bytesPerRow);
+            dawn::utils::CreateImageCopyBuffer(buffer, 0, bytesPerRow);
         wgpu::ImageCopyBuffer imageCopyResult =
-            utils::CreateImageCopyBuffer(resultBuffer, 0, bytesPerRow);
+            dawn::utils::CreateImageCopyBuffer(resultBuffer, 0, bytesPerRow);
 
         WriteType type = GetParam().mWriteType;
 
@@ -164,7 +164,7 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
             }
             case WriteType::WriteTexture: {
                 wgpu::TextureDataLayout textureDataLayout =
-                    utils::CreateTextureDataLayout(0, bytesPerRow);
+                    dawn::utils::CreateTextureDataLayout(0, bytesPerRow);
                 queue.WriteTexture(&imageCopyTexture, data.data(), bufferSize, &textureDataLayout,
                                    &copySize);
                 break;
@@ -178,9 +178,9 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
                 if (type != WriteType::RenderConstant) {
                     wgpu::Texture tempTexture = Create2DTexture(copySize, format, 1, 1);
                     wgpu::ImageCopyTexture imageCopyTempTexture =
-                        utils::CreateImageCopyTexture(tempTexture, 0, {0, 0, 0});
+                        dawn::utils::CreateImageCopyTexture(tempTexture, 0, {0, 0, 0});
                     wgpu::TextureDataLayout textureDataLayout =
-                        utils::CreateTextureDataLayout(0, bytesPerRow);
+                        dawn::utils::CreateTextureDataLayout(0, bytesPerRow);
                     queue.WriteTexture(&imageCopyTempTexture, data.data(), bufferSize,
                                        &textureDataLayout, &copySize);
                     tempView = tempTexture.CreateView();
@@ -214,11 +214,11 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
                                  wgpu::CommandEncoder encoder,
                                  WriteType type,
                                  wgpu::TextureFormat format) {
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.cTargets[0].format = format;
 
         // Draw the whole texture (a rectangle) via two triangles
-        pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        pipelineDescriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -232,13 +232,13 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
             })");
 
         if (type == WriteType::RenderConstant) {
-            pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            pipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @fragment
             fn main(@builtin(position) FragCoord : vec4f) -> @location(0) vec4f {
                 return vec4f(1.0, 1.0, 1.0, 1.0);
             })");
         } else if (type == WriteType::RenderFromTextureSample) {
-            pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            pipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var samp : sampler;
             @group(0) @binding(1) var tex : texture_2d<f32>;
 
@@ -247,7 +247,7 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
                 return textureSample(tex, samp, FragCoord.xy);
             })");
         } else {
-            pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            pipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var tex : texture_2d<f32>;
 
             @fragment
@@ -258,17 +258,18 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
 
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({renderView});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({renderView});
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDescriptor);
         pass.SetPipeline(pipeline);
         if (type != WriteType::RenderConstant) {
             wgpu::BindGroup bindGroup;
             if (type == WriteType::RenderFromTextureLoad) {
-                bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                 {{0, samplerView}});
+                bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                       {{0, samplerView}});
             } else {
-                bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                 {{0, device.CreateSampler()}, {1, samplerView}});
+                bindGroup =
+                    dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                               {{0, device.CreateSampler()}, {1, samplerView}});
             }
             pass.SetBindGroup(0, bindGroup);
         }
@@ -422,7 +423,7 @@ class TextureCorruptionTests_Multisample : public TextureCorruptionTests {
                                      wgpu::TextureFormat format) override {
         ASSERT(depthOrArrayLayer == 0);
         ASSERT(mipLevel == 0);
-        uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(format);
+        uint32_t bytesPerTexel = dawn::utils::GetTexelBlockSizeInBytes(format);
 
         return ExpectMultisampledFloatData(texture, textureSize.width, textureSize.height,
                                            bytesPerTexel, sampleCount, 0, mipLevel,
@@ -461,3 +462,6 @@ DAWN_INSTANTIATE_TEST_P(TextureCorruptionTests_WriteType,
                         {WriteType::ClearTexture, WriteType::WriteTexture, WriteType::B2TCopy,
                          WriteType::RenderConstant, WriteType::RenderFromTextureSample,
                          WriteType::RenderFromTextureLoad});
+
+}  // anonymous namespace
+}  // namespace dawn

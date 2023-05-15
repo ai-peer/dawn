@@ -21,6 +21,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 using FeatureName = wgpu::FeatureName;
@@ -82,8 +83,6 @@ class ExpectBetweenTimestamps : public ::detail::Expectation {
     float mErrorToleranceRatio;
 };
 
-}  // anonymous namespace
-
 class GPUTimestampCalibrationTests : public DawnTestWithParams<GPUTimestampCalibrationTestParams> {
   protected:
     void SetUp() override {
@@ -117,7 +116,7 @@ class GPUTimestampCalibrationTests : public DawnTestWithParams<GPUTimestampCalib
     }
 
     wgpu::ComputePipeline CreateComputePipeline() {
-        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
             @compute @workgroup_size(1)
             fn main() {
             })");
@@ -130,8 +129,8 @@ class GPUTimestampCalibrationTests : public DawnTestWithParams<GPUTimestampCalib
     }
 
     wgpu::RenderPipeline CreateRenderPipeline() {
-        utils::ComboRenderPipelineDescriptor descriptor;
-        descriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
                 @vertex
                 fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                     var pos = array(
@@ -140,7 +139,7 @@ class GPUTimestampCalibrationTests : public DawnTestWithParams<GPUTimestampCalib
                         vec2f( 1.0, -1.0));
                     return vec4f(pos[VertexIndex], 0.0, 1.0);
                 })");
-        descriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        descriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
                 @fragment fn main() -> @location(0) vec4f {
                     return vec4f(0.0, 1.0, 0.0, 1.0);
                 })");
@@ -184,7 +183,8 @@ class GPUTimestampCalibrationTests : public DawnTestWithParams<GPUTimestampCalib
     void EncodeTimestampQueryOnRenderPass(const wgpu::CommandEncoder& encoder,
                                           const wgpu::QuerySet& querySet) {
         constexpr static unsigned int kRTSize = 4;
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        dawn::utils::BasicRenderPass renderPass =
+            dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
         switch (GetParam().mFeatureName) {
             case wgpu::FeatureName::TimestampQuery: {
@@ -305,3 +305,6 @@ DAWN_INSTANTIATE_TEST_P(
      MetalBackend({}, {"disable_timestamp_query_conversion"})},
     {wgpu::FeatureName::TimestampQuery, wgpu::FeatureName::TimestampQueryInsidePasses},
     {EncoderType::NonPass, EncoderType::ComputePass, EncoderType::RenderPass});
+
+}  // anonymous namespace
+}  // namespace dawn

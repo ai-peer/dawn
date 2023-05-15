@@ -21,6 +21,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 class RenderPassDescriptorValidationTest : public ValidationTest {
@@ -76,7 +77,7 @@ wgpu::TextureView Create2DAttachment(wgpu::Device& device,
 
 // Using BeginRenderPass with no attachments isn't valid
 TEST_F(RenderPassDescriptorValidationTest, Empty) {
-    utils::ComboRenderPassDescriptor renderPass({}, nullptr);
+    dawn::utils::ComboRenderPassDescriptor renderPass({}, nullptr);
     AssertBeginRenderPassError(&renderPass);
 }
 
@@ -85,7 +86,7 @@ TEST_F(RenderPassDescriptorValidationTest, OneAttachment) {
     // One color attachment
     {
         wgpu::TextureView color = Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
-        utils::ComboRenderPassDescriptor renderPass({color});
+        dawn::utils::ComboRenderPassDescriptor renderPass({color});
 
         AssertBeginRenderPassSuccess(&renderPass);
     }
@@ -93,7 +94,7 @@ TEST_F(RenderPassDescriptorValidationTest, OneAttachment) {
     {
         wgpu::TextureView depthStencil =
             Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8);
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencil);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencil);
 
         AssertBeginRenderPassSuccess(&renderPass);
     }
@@ -191,7 +192,7 @@ TEST_F(RenderPassDescriptorValidationTest, ColorAttachmentInvalidUsage) {
     {
         wgpu::TextureView renderView =
             Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
-        utils::ComboRenderPassDescriptor renderPass({renderView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderView});
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -203,7 +204,7 @@ TEST_F(RenderPassDescriptorValidationTest, ColorAttachmentInvalidUsage) {
         texDesc.format = wgpu::TextureFormat::RGBA8Unorm;
         wgpu::Texture sampledTex = device.CreateTexture(&texDesc);
 
-        utils::ComboRenderPassDescriptor renderPass({sampledTex.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({sampledTex.CreateView()});
         AssertBeginRenderPassError(&renderPass);
     }
 }
@@ -221,19 +222,19 @@ TEST_F(RenderPassDescriptorValidationTest, SizeMustMatch) {
 
     // Control case: all the same size (1x1)
     {
-        utils::ComboRenderPassDescriptor renderPass({color1x1A, color1x1B}, depthStencil1x1);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color1x1A, color1x1B}, depthStencil1x1);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // One of the color attachments has a different size
     {
-        utils::ComboRenderPassDescriptor renderPass({color1x1A, color2x2});
+        dawn::utils::ComboRenderPassDescriptor renderPass({color1x1A, color2x2});
         AssertBeginRenderPassError(&renderPass);
     }
 
     // The depth stencil attachment has a different size
     {
-        utils::ComboRenderPassDescriptor renderPass({color1x1A, color1x1B}, depthStencil2x2);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color1x1A, color1x1B}, depthStencil2x2);
         AssertBeginRenderPassError(&renderPass);
     }
 }
@@ -246,13 +247,13 @@ TEST_F(RenderPassDescriptorValidationTest, FormatMismatch) {
 
     // Using depth-stencil for color
     {
-        utils::ComboRenderPassDescriptor renderPass({depthStencil});
+        dawn::utils::ComboRenderPassDescriptor renderPass({depthStencil});
         AssertBeginRenderPassError(&renderPass);
     }
 
     // Using color for depth-stencil
     {
-        utils::ComboRenderPassDescriptor renderPass({}, color);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, color);
         AssertBeginRenderPassError(&renderPass);
     }
 }
@@ -282,7 +283,7 @@ TEST_F(RenderPassDescriptorValidationTest, DepthStencilStoreOpMismatch) {
 
     // Base case: StoreOps match so render pass is a success
     {
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
         AssertBeginRenderPassSuccess(&renderPass);
@@ -290,7 +291,7 @@ TEST_F(RenderPassDescriptorValidationTest, DepthStencilStoreOpMismatch) {
 
     // Base case: StoreOps match so render pass is a success
     {
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Discard;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Discard;
         AssertBeginRenderPassSuccess(&renderPass);
@@ -298,7 +299,7 @@ TEST_F(RenderPassDescriptorValidationTest, DepthStencilStoreOpMismatch) {
 
     // StoreOps mismatch still is a success
     {
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Discard;
         AssertBeginRenderPassSuccess(&renderPass);
@@ -335,7 +336,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         descriptor.arrayLayerCount = 5;
 
         wgpu::TextureView colorTextureView = colorTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({colorTextureView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorTextureView});
         AssertBeginRenderPassError(&renderPass);
     }
 
@@ -346,7 +347,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         descriptor.arrayLayerCount = 5;
 
         wgpu::TextureView depthStencilView = depthStencilTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         AssertBeginRenderPassError(&renderPass);
     }
 
@@ -358,7 +359,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         descriptor.arrayLayerCount = 1;
 
         wgpu::TextureView colorTextureView = colorTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({colorTextureView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorTextureView});
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -370,7 +371,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         descriptor.arrayLayerCount = 1;
 
         wgpu::TextureView depthStencilView = depthStencilTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -382,7 +383,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         descriptor.arrayLayerCount = 1;
 
         wgpu::TextureView colorTextureView = colorTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({colorTextureView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorTextureView});
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -394,7 +395,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         descriptor.arrayLayerCount = 1;
 
         wgpu::TextureView depthStencilView = depthStencilTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 }
@@ -405,7 +406,7 @@ TEST_F(RenderPassDescriptorValidationTest, DepthAttachmentInvalidUsage) {
     {
         wgpu::TextureView renderView =
             Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth32Float);
-        utils::ComboRenderPassDescriptor renderPass({}, renderView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, renderView);
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -421,7 +422,7 @@ TEST_F(RenderPassDescriptorValidationTest, DepthAttachmentInvalidUsage) {
         wgpu::Texture sampledTex = device.CreateTexture(&texDesc);
         wgpu::TextureView sampledView = sampledTex.CreateView();
 
-        utils::ComboRenderPassDescriptor renderPass({}, sampledView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, sampledView);
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -458,7 +459,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         descriptor.mipLevelCount = 2;
 
         wgpu::TextureView colorTextureView = colorTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({colorTextureView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorTextureView});
         AssertBeginRenderPassError(&renderPass);
     }
 
@@ -469,7 +470,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         descriptor.mipLevelCount = 2;
 
         wgpu::TextureView depthStencilView = depthStencilTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         AssertBeginRenderPassError(&renderPass);
     }
 
@@ -481,7 +482,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         descriptor.mipLevelCount = 1;
 
         wgpu::TextureView colorTextureView = colorTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({colorTextureView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorTextureView});
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -493,7 +494,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         descriptor.mipLevelCount = 1;
 
         wgpu::TextureView depthStencilView = depthStencilTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -505,7 +506,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         descriptor.mipLevelCount = 1;
 
         wgpu::TextureView colorTextureView = colorTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({colorTextureView});
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorTextureView});
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -517,7 +518,7 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         descriptor.mipLevelCount = 1;
 
         wgpu::TextureView depthStencilView = depthStencilTexture.CreateView(&descriptor);
-        utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, depthStencilView);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 }
@@ -539,7 +540,7 @@ TEST_F(RenderPassDescriptorValidationTest, NonMultisampledColorWithResolveTarget
     wgpu::TextureView colorTextureView = colorTexture.CreateView();
     wgpu::TextureView resolveTargetTextureView = resolveTargetTexture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass({colorTextureView});
+    dawn::utils::ComboRenderPassDescriptor renderPass({colorTextureView});
     renderPass.cColorAttachments[0].resolveTarget = resolveTargetTextureView;
     AssertBeginRenderPassError(&renderPass);
 }
@@ -549,17 +550,17 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
     constexpr wgpu::TextureFormat kColorFormat = wgpu::TextureFormat::RGBA8Unorm;
     constexpr uint64_t kMaxDrawCount = 16;
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
 
-    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.cFragment.module = fsModule;
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
@@ -570,16 +571,16 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
     colorTextureDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
     wgpu::Texture colorTexture = device.CreateTexture(&colorTextureDescriptor);
 
-    utils::ComboRenderBundleEncoderDescriptor bundleEncoderDescriptor;
+    dawn::utils::ComboRenderBundleEncoderDescriptor bundleEncoderDescriptor;
     bundleEncoderDescriptor.colorFormatsCount = 1;
     bundleEncoderDescriptor.cColorFormats[0] = kColorFormat;
 
     wgpu::Buffer indexBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
-    wgpu::Buffer indirectBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect, {3, 1, 0, 0});
-    wgpu::Buffer indexedIndirectBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect, {3, 1, 0, 0, 0});
+        dawn::utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0, 1, 2});
+    wgpu::Buffer indirectBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
+        device, wgpu::BufferUsage::Indirect, {3, 1, 0, 0});
+    wgpu::Buffer indexedIndirectBuffer = dawn::utils::CreateBufferFromData<uint32_t>(
+        device, wgpu::BufferUsage::Indirect, {3, 1, 0, 0, 0});
 
     wgpu::RenderPassDescriptorMaxDrawCount maxDrawCount;
     maxDrawCount.maxDrawCount = kMaxDrawCount;
@@ -588,7 +589,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
 
@@ -602,7 +603,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
         renderPass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32);
@@ -617,7 +618,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
 
@@ -631,7 +632,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
         renderPass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32);
@@ -656,7 +657,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
         wgpu::RenderBundle renderBundle = renderBundleEncoder.Finish();
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.ExecuteBundles(1, &renderBundle);
         renderPass.End();
@@ -668,7 +669,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         renderPassDescriptor.nextInChain = &maxDrawCount;
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
@@ -683,7 +684,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         renderPassDescriptor.nextInChain = &maxDrawCount;
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
@@ -699,7 +700,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         renderPassDescriptor.nextInChain = &maxDrawCount;
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
@@ -714,7 +715,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         renderPassDescriptor.nextInChain = &maxDrawCount;
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(pipeline);
@@ -740,7 +741,7 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
         wgpu::RenderBundle renderBundle = renderBundleEncoder.Finish();
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
         renderPassDescriptor.nextInChain = &maxDrawCount;
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.ExecuteBundles(1, &renderBundle);
@@ -751,8 +752,8 @@ TEST_F(RenderPassDescriptorValidationTest, MaxDrawCount) {
 
 class MultisampledRenderPassDescriptorValidationTest : public RenderPassDescriptorValidationTest {
   public:
-    utils::ComboRenderPassDescriptor CreateMultisampledRenderPass() {
-        return utils::ComboRenderPassDescriptor({CreateMultisampledColorTextureView()});
+    dawn::utils::ComboRenderPassDescriptor CreateMultisampledRenderPass() {
+        return dawn::utils::ComboRenderPassDescriptor({CreateMultisampledColorTextureView()});
     }
 
     wgpu::TextureView CreateMultisampledColorTextureView() {
@@ -785,13 +786,13 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, MultisampledColorAttachme
 
     // It is allowed to use a multisampled color attachment without setting resolve target.
     {
-        utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // It is not allowed to use multiple color attachments with different sample counts.
     {
-        utils::ComboRenderPassDescriptor renderPass(
+        dawn::utils::ComboRenderPassDescriptor renderPass(
             {multisampledColorTextureView, colorTextureView});
         AssertBeginRenderPassError(&renderPass);
     }
@@ -801,7 +802,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, MultisampledColorAttachme
 TEST_F(MultisampledRenderPassDescriptorValidationTest, MultisampledResolveTarget) {
     wgpu::TextureView multisampledResolveTargetView = CreateMultisampledColorTextureView();
 
-    utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+    dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
     renderPass.cColorAttachments[0].resolveTarget = multisampledResolveTargetView;
     AssertBeginRenderPassError(&renderPass);
 }
@@ -815,7 +816,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetArrayLayerMo
     viewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
     wgpu::TextureView resolveTextureView = resolveTexture.CreateView(&viewDesc);
 
-    utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+    dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
     renderPass.cColorAttachments[0].resolveTarget = resolveTextureView;
     AssertBeginRenderPassError(&renderPass);
 }
@@ -827,7 +828,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetMipmapLevelM
                                                  kSize, kSize, kArrayLayers, kLevelCount2);
     wgpu::TextureView resolveTextureView = resolveTexture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+    dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
     renderPass.cColorAttachments[0].resolveTarget = resolveTextureView;
     AssertBeginRenderPassError(&renderPass);
 }
@@ -841,7 +842,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetUsageNoRende
                       kLevelCount, 1, kUsage);
     wgpu::TextureView nonColorUsageResolveTextureView = nonColorUsageResolveTexture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+    dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
     renderPass.cColorAttachments[0].resolveTarget = nonColorUsageResolveTextureView;
     AssertBeginRenderPassError(&renderPass);
 }
@@ -857,7 +858,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetInErrorState
     ASSERT_DEVICE_ERROR(wgpu::TextureView errorResolveTarget =
                             resolveTexture.CreateView(&errorTextureView));
 
-    utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+    dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
     renderPass.cColorAttachments[0].resolveTarget = errorResolveTarget;
     AssertBeginRenderPassError(&renderPass);
 }
@@ -866,7 +867,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetInErrorState
 TEST_F(MultisampledRenderPassDescriptorValidationTest, MultisampledColorWithResolveTarget) {
     wgpu::TextureView resolveTargetTextureView = CreateNonMultisampledColorTextureView();
 
-    utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+    dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
     renderPass.cColorAttachments[0].resolveTarget = resolveTargetTextureView;
     AssertBeginRenderPassSuccess(&renderPass);
 }
@@ -878,7 +879,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetDifferentFor
                                                  kSize, kSize, kArrayLayers, kLevelCount);
     wgpu::TextureView resolveTextureView = resolveTexture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+    dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
     renderPass.cColorAttachments[0].resolveTarget = resolveTextureView;
     AssertBeginRenderPassError(&renderPass);
 }
@@ -904,7 +905,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest,
 
         wgpu::TextureView resolveTextureView = resolveTexture.CreateView(&firstMipLevelDescriptor);
 
-        utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
         renderPass.cColorAttachments[0].resolveTarget = resolveTextureView;
         AssertBeginRenderPassError(&renderPass);
     }
@@ -915,7 +916,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest,
 
         wgpu::TextureView resolveTextureView = resolveTexture.CreateView(&secondMipLevelDescriptor);
 
-        utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
+        dawn::utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
         renderPass.cColorAttachments[0].resolveTarget = resolveTextureView;
         AssertBeginRenderPassSuccess(&renderPass);
     }
@@ -923,9 +924,9 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest,
 
 // Tests the texture format of the resolve target must support being used as resolve target.
 TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetFormat) {
-    for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
-        if (!utils::TextureFormatSupportsMultisampling(format) ||
-            utils::IsDepthOrStencilFormat(format)) {
+    for (wgpu::TextureFormat format : dawn::utils::kAllTextureFormats) {
+        if (!dawn::utils::TextureFormatSupportsMultisampling(format) ||
+            dawn::utils::IsDepthOrStencilFormat(format)) {
             continue;
         }
 
@@ -935,9 +936,9 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetFormat) {
         wgpu::Texture resolveTarget = CreateTexture(device, wgpu::TextureDimension::e2D, format,
                                                     kSize, kSize, kArrayLayers, kLevelCount, 1);
 
-        utils::ComboRenderPassDescriptor renderPass({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorTexture.CreateView()});
         renderPass.cColorAttachments[0].resolveTarget = resolveTarget.CreateView();
-        if (utils::TextureFormatSupportsResolveTarget(format)) {
+        if (dawn::utils::TextureFormatSupportsResolveTarget(format)) {
             AssertBeginRenderPassSuccess(&renderPass);
         } else {
             AssertBeginRenderPassError(&renderPass);
@@ -962,29 +963,29 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, DepthStencilAttachmentSam
                           kArrayLayers, kLevelCount);
         wgpu::TextureView depthStencilTextureView = depthStencilTexture.CreateView();
 
-        utils::ComboRenderPassDescriptor renderPass({CreateMultisampledColorTextureView()},
-                                                    depthStencilTextureView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({CreateMultisampledColorTextureView()},
+                                                          depthStencilTextureView);
         AssertBeginRenderPassError(&renderPass);
     }
 
     {
-        utils::ComboRenderPassDescriptor renderPass({CreateNonMultisampledColorTextureView()},
-                                                    multisampledDepthStencilTextureView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({CreateNonMultisampledColorTextureView()},
+                                                          multisampledDepthStencilTextureView);
         AssertBeginRenderPassError(&renderPass);
     }
 
     // It is allowed to use a multisampled depth stencil attachment whose sample count is equal
     // to the one of the color attachment.
     {
-        utils::ComboRenderPassDescriptor renderPass({CreateMultisampledColorTextureView()},
-                                                    multisampledDepthStencilTextureView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({CreateMultisampledColorTextureView()},
+                                                          multisampledDepthStencilTextureView);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // It is allowed to use a multisampled depth stencil attachment while there is no color
     // attachment.
     {
-        utils::ComboRenderPassDescriptor renderPass({}, multisampledDepthStencilTextureView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, multisampledDepthStencilTextureView);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 }
@@ -996,50 +997,50 @@ TEST_F(RenderPassDescriptorValidationTest, UseNaNOrINFINITYAsColorOrDepthClearVa
 
     // Tests that NaN cannot be used in clearColor.
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.r = NAN;
         AssertBeginRenderPassError(&renderPass);
     }
 
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.g = NAN;
         AssertBeginRenderPassError(&renderPass);
     }
 
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.b = NAN;
         AssertBeginRenderPassError(&renderPass);
     }
 
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.a = NAN;
         AssertBeginRenderPassError(&renderPass);
     }
 
     // Tests that INFINITY can be used in clearColor.
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.r = INFINITY;
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.g = INFINITY;
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.b = INFINITY;
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
     {
-        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
         renderPass.cColorAttachments[0].clearValue.a = INFINITY;
         AssertBeginRenderPassSuccess(&renderPass);
     }
@@ -1048,7 +1049,7 @@ TEST_F(RenderPassDescriptorValidationTest, UseNaNOrINFINITYAsColorOrDepthClearVa
     {
         wgpu::TextureView depth =
             Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24Plus);
-        utils::ComboRenderPassDescriptor renderPass({color}, depth);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, depth);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
@@ -1060,7 +1061,7 @@ TEST_F(RenderPassDescriptorValidationTest, UseNaNOrINFINITYAsColorOrDepthClearVa
     {
         wgpu::TextureView depth =
             Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24Plus);
-        utils::ComboRenderPassDescriptor renderPass({color}, depth);
+        dawn::utils::ComboRenderPassDescriptor renderPass({color}, depth);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
@@ -1076,7 +1077,7 @@ TEST_F(RenderPassDescriptorValidationTest, UseNaNOrINFINITYAsColorOrDepthClearVa
 TEST_F(RenderPassDescriptorValidationTest, ValidateDepthClearValueRange) {
     wgpu::TextureView depth = Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24Plus);
 
-    utils::ComboRenderPassDescriptor renderPass({}, depth);
+    dawn::utils::ComboRenderPassDescriptor renderPass({}, depth);
     renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
     renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1173,7 +1174,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
 
     // Tests that a read-only pass with depthReadOnly set to true succeeds.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1186,7 +1187,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     // Tests that a pass with mismatched depthReadOnly and stencilReadOnly values passes when
     // there is no stencil component in the format (deprecated).
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1199,7 +1200,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     // Tests that a pass with mismatched depthReadOnly and stencilReadOnly values fails when
     // there there is no stencil component in the format and stencil loadOp/storeOp are passed.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1222,7 +1223,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     // when there is only depth component in the format. We actually enable readonly
     // depth/stencil attachment in this case.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1236,7 +1237,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     // when there is only depth component in the format. We actually don't enable readonly
     // depth/stencil attachment in this case.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = false;
@@ -1252,7 +1253,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     // Tests that a pass with mismatched depthReadOnly and stencilReadOnly values fails when
     // both depth and stencil components exist.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1264,7 +1265,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
 
     // Tests that a pass with loadOp set to clear and readOnly set to true fails.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1276,7 +1277,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
 
     // Tests that a pass with storeOp set to discard and readOnly set to true fails.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Discard;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1289,7 +1290,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     // Tests that a pass with loadOp set to load, storeOp set to store, and readOnly set to true
     // fails.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1301,7 +1302,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
 
     // Tests that a pass with only depthLoadOp set to load and readOnly set to true fails.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1313,7 +1314,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
 
     // Tests that a pass with only depthStoreOp set to store and readOnly set to true fails.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1325,7 +1326,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
 
     // Tests that a pass with only stencilLoadOp set to load and readOnly set to true fails.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1337,7 +1338,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
 
     // Tests that a pass with only stencilStoreOp set to store and readOnly set to true fails.
     {
-        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
@@ -1367,7 +1368,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilAllAspects) {
         viewDesc.aspect = wgpu::TextureAspect::All;
 
         wgpu::TextureView view = device.CreateTexture(&texDesc).CreateView(&viewDesc);
-        utils::ComboRenderPassDescriptor renderPass({}, view);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, view);
         AssertBeginRenderPassSuccess(&renderPass);
     }
 
@@ -1379,7 +1380,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilAllAspects) {
         viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
 
         wgpu::TextureView view = device.CreateTexture(&texDesc).CreateView(&viewDesc);
-        utils::ComboRenderPassDescriptor renderPass({}, view);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, view);
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1393,7 +1394,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilAllAspects) {
         viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
 
         wgpu::TextureView view = device.CreateTexture(&texDesc).CreateView(&viewDesc);
-        utils::ComboRenderPassDescriptor renderPass({}, view);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, view);
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1408,7 +1409,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilAllAspects) {
         viewDesc.aspect = wgpu::TextureAspect::StencilOnly;
 
         wgpu::TextureView view = device.CreateTexture(&texDesc).CreateView(&viewDesc);
-        utils::ComboRenderPassDescriptor renderPass({}, view);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, view);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1422,7 +1423,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilAllAspects) {
         viewDesc.aspect = wgpu::TextureAspect::StencilOnly;
 
         wgpu::TextureView view = device.CreateTexture(&texDesc).CreateView(&viewDesc);
-        utils::ComboRenderPassDescriptor renderPass({}, view);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, view);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1436,7 +1437,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilAllAspects) {
         viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
 
         wgpu::TextureView view = device.CreateTexture(&texDesc).CreateView(&viewDesc);
-        utils::ComboRenderPassDescriptor renderPass({}, view);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, view);
         renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1450,7 +1451,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilAllAspects) {
         viewDesc.aspect = wgpu::TextureAspect::StencilOnly;
 
         wgpu::TextureView view = device.CreateTexture(&texDesc).CreateView(&viewDesc);
-        utils::ComboRenderPassDescriptor renderPass({}, view);
+        dawn::utils::ComboRenderPassDescriptor renderPass({}, view);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
         renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
 
@@ -1514,7 +1515,7 @@ TEST_F(RenderPassDescriptorValidationTest, RenderPassColorAttachmentBytesPerSamp
         for (size_t i = 0; i < testCase.formats.size(); i++) {
             colorAttachmentInfo.push_back(Create2DAttachment(device, 1, 1, testCase.formats.at(i)));
         }
-        utils::ComboRenderPassDescriptor descriptor(colorAttachmentInfo);
+        dawn::utils::ComboRenderPassDescriptor descriptor(colorAttachmentInfo);
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&descriptor);
         renderPassEncoder.End();
@@ -1529,3 +1530,4 @@ TEST_F(RenderPassDescriptorValidationTest, RenderPassColorAttachmentBytesPerSamp
 // TODO(cwallez@chromium.org): Constraints on attachment aliasing?
 
 }  // anonymous namespace
+}  // namespace dawn

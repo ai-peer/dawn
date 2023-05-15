@@ -27,6 +27,7 @@
 #include "dawn/platform/DawnPlatform.h"
 #include "gtest/gtest.h"
 
+namespace dawn {
 namespace {
 
 struct SimpleTaskResult {
@@ -34,7 +35,7 @@ struct SimpleTaskResult {
 };
 
 // A thread-safe queue that stores the task results.
-class ConcurrentTaskResultQueue : public NonCopyable {
+class ConcurrentTaskResultQueue : public dawn::NonCopyable {
   public:
     void AddResult(std::unique_ptr<SimpleTaskResult> result) {
         std::lock_guard<std::mutex> lock(mMutex);
@@ -60,8 +61,6 @@ void DoTask(ConcurrentTaskResultQueue* resultQueue, uint32_t id) {
     result->id = id;
     resultQueue->AddResult(std::move(result));
 }
-
-}  // anonymous namespace
 
 class AsyncTaskTest : public testing::Test {};
 
@@ -90,3 +89,6 @@ TEST_F(AsyncTaskTest, Basic) {
     }
     ASSERT_TRUE(idset.empty());
 }
+
+}  // anonymous namespace
+}  // namespace dawn

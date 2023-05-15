@@ -24,6 +24,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 class EGLFunctions {
@@ -59,7 +60,7 @@ class EGLFunctions {
     PFNEGLGETCURRENTDISPLAYPROC GetCurrentDisplay;
 
   private:
-    DynamicLib mlibEGL;
+    dawn::DynamicLib mlibEGL;
 };
 
 class ScopedEGLImage {
@@ -109,8 +110,6 @@ class ScopedEGLImage {
     EGLImage mImage = nullptr;
     GLuint mTexture = 0;
 };
-
-}  // anonymous namespace
 
 class EGLImageTestBase : public DawnTest {
   protected:
@@ -321,7 +320,7 @@ class EGLImageUsageTests : public EGLImageTestBase {
 
         wgpu::TextureView eglImageView = eglImageTexture.CreateView();
 
-        utils::ComboRenderPassDescriptor renderPassDescriptor({eglImageView}, {});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({eglImageView}, {});
         renderPassDescriptor.cColorAttachments[0].clearValue = {1 / 255.0f, 2 / 255.0f, 3 / 255.0f,
                                                                 4 / 255.0f};
 
@@ -379,3 +378,6 @@ TEST_P(EGLImageUsageTests, ClearRGBA8EGLImage) {
 
 DAWN_INSTANTIATE_TEST(EGLImageValidationTests, OpenGLESBackend());
 DAWN_INSTANTIATE_TEST(EGLImageUsageTests, OpenGLESBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

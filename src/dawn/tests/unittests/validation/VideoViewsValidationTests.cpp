@@ -17,6 +17,7 @@
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 class VideoViewsValidation : public ValidationTest {
@@ -125,9 +126,9 @@ TEST_F(VideoViewsValidation, T2TCopyAllAspectsFails) {
     wgpu::Texture dstTexture = CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
                                                          wgpu::TextureUsage::TextureBinding);
 
-    wgpu::ImageCopyTexture copySrc = utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0});
+    wgpu::ImageCopyTexture copySrc = dawn::utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0});
 
-    wgpu::ImageCopyTexture copyDst = utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0});
+    wgpu::ImageCopyTexture copyDst = dawn::utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0});
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -144,11 +145,11 @@ TEST_F(VideoViewsValidation, T2TCopyPlaneAspectFails) {
     wgpu::Texture dstTexture = CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
                                                          wgpu::TextureUsage::TextureBinding);
 
-    wgpu::ImageCopyTexture copySrc =
-        utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
+    wgpu::ImageCopyTexture copySrc = dawn::utils::CreateImageCopyTexture(
+        srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
 
-    wgpu::ImageCopyTexture copyDst =
-        utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane1Only);
+    wgpu::ImageCopyTexture copyDst = dawn::utils::CreateImageCopyTexture(
+        dstTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane1Only);
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -158,8 +159,8 @@ TEST_F(VideoViewsValidation, T2TCopyPlaneAspectFails) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    copySrc =
-        utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane1Only);
+    copySrc = dawn::utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0},
+                                                  wgpu::TextureAspect::Plane1Only);
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -178,9 +179,9 @@ TEST_F(VideoViewsValidation, T2BCopyAllAspectsFails) {
     bufferDescriptor.usage = wgpu::BufferUsage::CopyDst;
     wgpu::Buffer dstBuffer = device.CreateBuffer(&bufferDescriptor);
 
-    wgpu::ImageCopyTexture copySrc = utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0});
+    wgpu::ImageCopyTexture copySrc = dawn::utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0});
 
-    wgpu::ImageCopyBuffer copyDst = utils::CreateImageCopyBuffer(dstBuffer, 0, 4);
+    wgpu::ImageCopyBuffer copyDst = dawn::utils::CreateImageCopyBuffer(dstBuffer, 0, 4);
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -199,10 +200,10 @@ TEST_F(VideoViewsValidation, T2BCopyPlaneAspectsFails) {
     bufferDescriptor.usage = wgpu::BufferUsage::CopyDst;
     wgpu::Buffer dstBuffer = device.CreateBuffer(&bufferDescriptor);
 
-    wgpu::ImageCopyTexture copySrc =
-        utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
+    wgpu::ImageCopyTexture copySrc = dawn::utils::CreateImageCopyTexture(
+        srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
 
-    wgpu::ImageCopyBuffer copyDst = utils::CreateImageCopyBuffer(dstBuffer, 0, 4);
+    wgpu::ImageCopyBuffer copyDst = dawn::utils::CreateImageCopyBuffer(dstBuffer, 0, 4);
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -212,8 +213,8 @@ TEST_F(VideoViewsValidation, T2BCopyPlaneAspectsFails) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    copySrc =
-        utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane1Only);
+    copySrc = dawn::utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0},
+                                                  wgpu::TextureAspect::Plane1Only);
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -226,15 +227,15 @@ TEST_F(VideoViewsValidation, T2BCopyPlaneAspectsFails) {
 TEST_F(VideoViewsValidation, B2TCopyAllAspectsFails) {
     std::vector<uint8_t> placeholderData(4, 0);
 
-    wgpu::Buffer srcBuffer = utils::CreateBufferFromData(
+    wgpu::Buffer srcBuffer = dawn::utils::CreateBufferFromData(
         device, placeholderData.data(), placeholderData.size(), wgpu::BufferUsage::CopySrc);
 
     wgpu::Texture dstTexture = CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
                                                          wgpu::TextureUsage::TextureBinding);
 
-    wgpu::ImageCopyBuffer copySrc = utils::CreateImageCopyBuffer(srcBuffer, 0, 12, 4);
+    wgpu::ImageCopyBuffer copySrc = dawn::utils::CreateImageCopyBuffer(srcBuffer, 0, 12, 4);
 
-    wgpu::ImageCopyTexture copyDst = utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0});
+    wgpu::ImageCopyTexture copyDst = dawn::utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0});
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -247,16 +248,16 @@ TEST_F(VideoViewsValidation, B2TCopyAllAspectsFails) {
 TEST_F(VideoViewsValidation, B2TCopyPlaneAspectsFails) {
     std::vector<uint8_t> placeholderData(4, 0);
 
-    wgpu::Buffer srcBuffer = utils::CreateBufferFromData(
+    wgpu::Buffer srcBuffer = dawn::utils::CreateBufferFromData(
         device, placeholderData.data(), placeholderData.size(), wgpu::BufferUsage::CopySrc);
 
     wgpu::Texture dstTexture = CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
                                                          wgpu::TextureUsage::TextureBinding);
 
-    wgpu::ImageCopyBuffer copySrc = utils::CreateImageCopyBuffer(srcBuffer, 0, 12, 4);
+    wgpu::ImageCopyBuffer copySrc = dawn::utils::CreateImageCopyBuffer(srcBuffer, 0, 12, 4);
 
-    wgpu::ImageCopyTexture copyDst =
-        utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
+    wgpu::ImageCopyTexture copyDst = dawn::utils::CreateImageCopyTexture(
+        dstTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
 
     wgpu::Extent3D copySize = {1, 1, 1};
 
@@ -266,8 +267,8 @@ TEST_F(VideoViewsValidation, B2TCopyPlaneAspectsFails) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    copyDst =
-        utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane1Only);
+    copyDst = dawn::utils::CreateImageCopyTexture(dstTexture, 0, {0, 0, 0},
+                                                  wgpu::TextureAspect::Plane1Only);
 
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -278,7 +279,7 @@ TEST_F(VideoViewsValidation, B2TCopyPlaneAspectsFails) {
 
 // Tests which multi-planar formats are allowed to be sampled.
 TEST_F(VideoViewsValidation, SamplingMultiPlanarTexture) {
-    wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout layout = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
 
     // R8BG8Biplanar420Unorm is allowed to be sampled, if plane 0 or plane 1 is selected.
@@ -288,10 +289,10 @@ TEST_F(VideoViewsValidation, SamplingMultiPlanarTexture) {
     wgpu::TextureViewDescriptor desc = {};
 
     desc.aspect = wgpu::TextureAspect::Plane0Only;
-    utils::MakeBindGroup(device, layout, {{0, texture.CreateView(&desc)}});
+    dawn::utils::MakeBindGroup(device, layout, {{0, texture.CreateView(&desc)}});
 
     desc.aspect = wgpu::TextureAspect::Plane1Only;
-    utils::MakeBindGroup(device, layout, {{0, texture.CreateView(&desc)}});
+    dawn::utils::MakeBindGroup(device, layout, {{0, texture.CreateView(&desc)}});
 }
 
 // Tests creating a texture with a multi-plane format.
@@ -306,9 +307,10 @@ TEST_F(VideoViewsValidation, WriteTextureAllAspectsFails) {
     wgpu::Texture texture = CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
                                                       wgpu::TextureUsage::TextureBinding);
 
-    wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(0, 4, 4);
+    wgpu::TextureDataLayout textureDataLayout = dawn::utils::CreateTextureDataLayout(0, 4, 4);
 
-    wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+    wgpu::ImageCopyTexture imageCopyTexture =
+        dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
 
     std::vector<uint8_t> placeholderData(4, 0);
     wgpu::Extent3D writeSize = {1, 1, 1};
@@ -324,9 +326,9 @@ TEST_F(VideoViewsValidation, WriteTexturePlaneAspectsFails) {
     wgpu::Texture texture = CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
                                                       wgpu::TextureUsage::TextureBinding);
 
-    wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(0, 12, 4);
+    wgpu::TextureDataLayout textureDataLayout = dawn::utils::CreateTextureDataLayout(0, 12, 4);
     wgpu::ImageCopyTexture imageCopyTexture =
-        utils::CreateImageCopyTexture(texture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
+        dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
 
     std::vector<uint8_t> placeholderData(4, 0);
     wgpu::Extent3D writeSize = {1, 1, 1};
@@ -338,3 +340,4 @@ TEST_F(VideoViewsValidation, WriteTexturePlaneAspectsFails) {
 }
 
 }  // anonymous namespace
+}  // namespace dawn

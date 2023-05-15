@@ -19,6 +19,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 constexpr static unsigned int kRTSize = 1;
 
 class DepthClippingTest : public DawnTest {
@@ -45,7 +48,7 @@ class DepthClippingTest : public DawnTest {
 
         depthTextureView = depthTexture.CreateView();
 
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
             struct UBO {
                 color : vec3f,
                 depth : f32,
@@ -56,7 +59,7 @@ class DepthClippingTest : public DawnTest {
                 return vec4f(0.0, 0.0, ubo.depth, 1.0);
             })");
 
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule = dawn::utils::CreateShaderModule(device, R"(
             struct UBO {
                 color : vec3f,
                 depth : f32,
@@ -78,14 +81,14 @@ class DepthClippingTest : public DawnTest {
 
     struct TestSpec {
         wgpu::PrimitiveDepthClipControl* depthClipControl;
-        utils::RGBA8 color;
+        dawn::utils::RGBA8 color;
         float depth;
     };
 
     // Each test param represents a pair of triangles with a color, depth, stencil value, and
     // depthStencil state, one frontfacing, one backfacing Draw the triangles in order and check the
     // expected colors for the frontfaces and backfaces
-    void DoTest(const std::vector<TestSpec>& testParams, const utils::RGBA8& expected) {
+    void DoTest(const std::vector<TestSpec>& testParams, const dawn::utils::RGBA8& expected) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         struct TriangleData {
@@ -93,7 +96,7 @@ class DepthClippingTest : public DawnTest {
             float depth;
         };
 
-        utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
 
         for (size_t i = 0; i < testParams.size(); ++i) {
@@ -105,11 +108,11 @@ class DepthClippingTest : public DawnTest {
                 test.depth,
             };
             // Upload a buffer for each triangle's depth and color data
-            wgpu::Buffer buffer = utils::CreateBufferFromData(device, &data, sizeof(TriangleData),
-                                                              wgpu::BufferUsage::Uniform);
+            wgpu::Buffer buffer = dawn::utils::CreateBufferFromData(
+                device, &data, sizeof(TriangleData), wgpu::BufferUsage::Uniform);
 
             // Create a pipeline for the triangles with the test spec's params.
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.primitive.nextInChain = test.depthClipControl;
             descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
             descriptor.vertex.module = vsModule;
@@ -122,7 +125,7 @@ class DepthClippingTest : public DawnTest {
 
             // Create a bind group for the data
             wgpu::BindGroup bindGroup =
-                utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+                dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
 
             pass.SetPipeline(pipeline);
             pass.SetBindGroup(0, bindGroup);
@@ -153,20 +156,20 @@ TEST_P(DepthClippingTest, UnclippedBeyondFarPlane) {
         {
             // Draw a red triangle at depth 1.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(255, 0, 0, 255), /* color */
-                1.f,                          /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(255, 0, 0, 255), /* color */
+                1.f,                                /* depth */
             },
             // Draw a green triangle at depth 2 which should not be clipped.
             {
-                &depthClipControl,            /* depthClipControl */
-                utils::RGBA8(0, 255, 0, 255), /* color */
-                2.f,                          /* depth */
+                &depthClipControl,                  /* depthClipControl */
+                dawn::utils::RGBA8(0, 255, 0, 255), /* color */
+                2.f,                                /* depth */
             },
         },
         // The resulting fragment should be green even though the green triangle is
         // outside the clip volume.
-        utils::RGBA8(0, 255, 0, 255));
+        dawn::utils::RGBA8(0, 255, 0, 255));
 }
 
 // Test that fragments beyond the far plane are clipped if unclippedDepth is false
@@ -178,20 +181,20 @@ TEST_P(DepthClippingTest, ClippedBeyondFarPlane) {
         {
             // Draw a red triangle at depth 1.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(255, 0, 0, 255), /* color */
-                1.f,                          /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(255, 0, 0, 255), /* color */
+                1.f,                                /* depth */
             },
             // Draw a green triangle at depth 2 which should be clipped.
             {
-                &depthClipControl,            /* depthClipControl */
-                utils::RGBA8(0, 255, 0, 255), /* color */
-                2.f,                          /* depth */
+                &depthClipControl,                  /* depthClipControl */
+                dawn::utils::RGBA8(0, 255, 0, 255), /* color */
+                2.f,                                /* depth */
             },
         },
         // The resulting fragment should be red since the green triangle is
         // outside the clip volume.
-        utils::RGBA8(255, 0, 0, 255));
+        dawn::utils::RGBA8(255, 0, 0, 255));
 }
 
 // Test that fragments beyond the far plane are clipped if unclippedDepth is not specified
@@ -200,20 +203,20 @@ TEST_P(DepthClippingTest, ClippedBeyondFarPlaneFeatureUnused) {
         {
             // Draw a red triangle at depth 1.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(255, 0, 0, 255), /* color */
-                1.f,                          /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(255, 0, 0, 255), /* color */
+                1.f,                                /* depth */
             },
             // Draw a green triangle at depth 2 which should be clipped.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(0, 255, 0, 255), /* color */
-                2.f,                          /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(0, 255, 0, 255), /* color */
+                2.f,                                /* depth */
             },
         },
         // The resulting fragment should be red since the green triangle is
         // outside the clip volume.
-        utils::RGBA8(255, 0, 0, 255));
+        dawn::utils::RGBA8(255, 0, 0, 255));
 }
 
 // Test that fragments beyond the near plane are not clipped if unclippedDepth is true
@@ -225,20 +228,20 @@ TEST_P(DepthClippingTest, UnclippedBeyondNearPlane) {
         {
             // Draw a red triangle at depth 0.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(255, 0, 0, 255), /* color */
-                0.f,                          /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(255, 0, 0, 255), /* color */
+                0.f,                                /* depth */
             },
             // Draw a green triangle at depth -1 which should not be clipped.
             {
-                &depthClipControl,            /* depthClipControl */
-                utils::RGBA8(0, 255, 0, 255), /* color */
-                -1.f,                         /* depth */
+                &depthClipControl,                  /* depthClipControl */
+                dawn::utils::RGBA8(0, 255, 0, 255), /* color */
+                -1.f,                               /* depth */
             },
         },
         // The resulting fragment should be green even though the green triangle is
         // outside the clip volume.
-        utils::RGBA8(0, 255, 0, 255));
+        dawn::utils::RGBA8(0, 255, 0, 255));
 }
 
 // Test that fragments beyond the near plane are clipped if unclippedDepth is false
@@ -250,20 +253,20 @@ TEST_P(DepthClippingTest, ClippedBeyondNearPlane) {
         {
             // Draw a red triangle at depth 0.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(255, 0, 0, 255), /* color */
-                0.f,                          /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(255, 0, 0, 255), /* color */
+                0.f,                                /* depth */
             },
             // Draw a green triangle at depth -1 which should be clipped.
             {
-                &depthClipControl,            /* depthClipControl */
-                utils::RGBA8(0, 255, 0, 255), /* color */
-                -1.f,                         /* depth */
+                &depthClipControl,                  /* depthClipControl */
+                dawn::utils::RGBA8(0, 255, 0, 255), /* color */
+                -1.f,                               /* depth */
             },
         },
         // The resulting fragment should be red because the green triangle is
         // outside the clip volume.
-        utils::RGBA8(255, 0, 0, 255));
+        dawn::utils::RGBA8(255, 0, 0, 255));
 }
 
 // Test that fragments beyond the near plane are clipped if unclippedDepth is not specified
@@ -272,20 +275,20 @@ TEST_P(DepthClippingTest, ClippedBeyondNearPlaneFeatureUnused) {
         {
             // Draw a red triangle at depth 0.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(255, 0, 0, 255), /* color */
-                0.f,                          /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(255, 0, 0, 255), /* color */
+                0.f,                                /* depth */
             },
             // Draw a green triangle at depth -1 which should be clipped.
             {
-                nullptr,                      /* depthClipControl */
-                utils::RGBA8(0, 255, 0, 255), /* color */
-                -1.f,                         /* depth */
+                nullptr,                            /* depthClipControl */
+                dawn::utils::RGBA8(0, 255, 0, 255), /* color */
+                -1.f,                               /* depth */
             },
         },
         // The resulting fragment should be red because the green triangle is
         // outside the clip volume.
-        utils::RGBA8(255, 0, 0, 255));
+        dawn::utils::RGBA8(255, 0, 0, 255));
 }
 
 // Test that fragments are properly clipped or clamped if multiple render pipelines are used
@@ -301,16 +304,16 @@ TEST_P(DepthClippingTest, MultipleRenderPipelines) {
         {
             // Draw green with no clipping
             {
-                &depthClipControl1, utils::RGBA8(0, 255, 0, 255), /* color */
-                2.f,                                              /* depth */
+                &depthClipControl1, dawn::utils::RGBA8(0, 255, 0, 255), /* color */
+                2.f,                                                    /* depth */
             },
             // Draw red with clipping
             {
-                &depthClipControl2, utils::RGBA8(255, 0, 0, 255), /* color */
-                2.f,                                              /* depth */
+                &depthClipControl2, dawn::utils::RGBA8(255, 0, 0, 255), /* color */
+                2.f,                                                    /* depth */
             },
         },
-        utils::RGBA8(0, 255, 0, 255));  // Result should be green
+        dawn::utils::RGBA8(0, 255, 0, 255));  // Result should be green
 }
 
 // Test that fragments are not clipped if unclippedDepth is true and that their
@@ -321,17 +324,17 @@ TEST_P(DepthClippingTest, UnclippedNotClamped) {
     depthClipControl.unclippedDepth = true;
 
     // Create a pipeline to render a point.
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.primitive.nextInChain = &depthClipControl;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
     // Draw the point at (0, 0) with depth 2.0.
-    descriptor.vertex.module = utils::CreateShaderModule(device, R"(
+    descriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 2.0, 1.0);
         })");
     // Write frag_pos.z / 4.0 which should be about 0.5 to the red channel.
     // This is the depth output from the vertex shader which is not clamped to the viewport.
-    descriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+    descriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main(@builtin(position) frag_pos: vec4f) -> @location(0) vec4f {
             return vec4f(frag_pos.z / 4.0, 0.0, 0.0, 1.0);
         })");
@@ -343,7 +346,7 @@ TEST_P(DepthClippingTest, UnclippedNotClamped) {
 
     // Draw the point.
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
     pass.SetPipeline(pipeline);
     pass.Draw(1);
@@ -351,8 +354,8 @@ TEST_P(DepthClippingTest, UnclippedNotClamped) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_BETWEEN(utils::RGBA8(127, 0, 0, 255), utils::RGBA8(128, 0, 0, 255),
-                               renderTarget, 0, 0)
+    EXPECT_PIXEL_RGBA8_BETWEEN(dawn::utils::RGBA8(127, 0, 0, 255),
+                               dawn::utils::RGBA8(128, 0, 0, 255), renderTarget, 0, 0)
         << "Pixel check failed";
 }
 
@@ -363,3 +366,6 @@ DAWN_INSTANTIATE_TEST(DepthClippingTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

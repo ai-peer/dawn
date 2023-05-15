@@ -40,6 +40,9 @@
 
 #include "GLFW/glfw3native.h"
 
+namespace dawn {
+namespace {
+
 // Test for wgpu::Surface creation that only need an instance (no devices) and don't need all the
 // complexity of DawnTest.
 class WindowSurfaceInstanceTests : public testing::Test {
@@ -228,7 +231,7 @@ TEST_F(WindowSurfaceInstanceTests, InvalidMetalLayer) {
     wgpu::SurfaceDescriptorFromMetalLayer chainedDescriptor;
     // The CALayer is autoreleased. Releasing it causes a test failure when the Chromium GTest
     // autoreleasepool is emptied.
-    chainedDescriptor.layer = utils::CreatePlaceholderCALayer();
+    chainedDescriptor.layer = dawn::utils::CreatePlaceholderCALayer();
 
     wgpu::SurfaceDescriptor descriptor;
     descriptor.nextInChain = &chainedDescriptor;
@@ -248,3 +251,6 @@ TEST_F(WindowSurfaceInstanceTests, MetalSurfacesAreInvalid) {
 }
 
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
+
+}  // anonymous namespace
+}  // namespace dawn

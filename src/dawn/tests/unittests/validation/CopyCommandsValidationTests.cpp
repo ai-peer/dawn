@@ -22,6 +22,9 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class CopyCommandTest : public ValidationTest {
   protected:
     wgpu::Buffer CreateBuffer(uint64_t size, wgpu::BufferUsage usage) {
@@ -75,20 +78,20 @@ class CopyCommandTest : public ValidationTest {
         uint32_t height,
         uint32_t depth,
         wgpu::TextureFormat format = wgpu::TextureFormat::RGBA8Unorm) {
-        uint32_t bytesPerPixel = utils::GetTexelBlockSizeInBytes(format);
-        uint32_t bytesPerRow = Align(width * bytesPerPixel, kTextureBytesPerRowAlignment);
+        uint32_t bytesPerPixel = dawn::utils::GetTexelBlockSizeInBytes(format);
+        uint32_t bytesPerRow = dawn::Align(width * bytesPerPixel, kTextureBytesPerRowAlignment);
         return (bytesPerRow * (height - 1) + width * bytesPerPixel) * depth;
     }
 
-    void ValidateExpectation(wgpu::CommandEncoder encoder, utils::Expectation expectation) {
-        if (expectation == utils::Expectation::Success) {
+    void ValidateExpectation(wgpu::CommandEncoder encoder, dawn::utils::Expectation expectation) {
+        if (expectation == dawn::utils::Expectation::Success) {
             encoder.Finish();
         } else {
             ASSERT_DEVICE_ERROR(encoder.Finish());
         }
     }
 
-    void TestB2TCopy(utils::Expectation expectation,
+    void TestB2TCopy(dawn::utils::Expectation expectation,
                      wgpu::Buffer srcBuffer,
                      uint64_t srcOffset,
                      uint32_t srcBytesPerRow,
@@ -98,10 +101,10 @@ class CopyCommandTest : public ValidationTest {
                      wgpu::Origin3D destOrigin,
                      wgpu::Extent3D extent3D,
                      wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
-        wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(srcBuffer, srcOffset, srcBytesPerRow, srcRowsPerImage);
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
+            srcBuffer, srcOffset, srcBytesPerRow, srcRowsPerImage);
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(destTexture, destLevel, destOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(destTexture, destLevel, destOrigin, aspect);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &extent3D);
@@ -109,7 +112,7 @@ class CopyCommandTest : public ValidationTest {
         ValidateExpectation(encoder, expectation);
     }
 
-    void TestT2BCopy(utils::Expectation expectation,
+    void TestT2BCopy(dawn::utils::Expectation expectation,
                      wgpu::Texture srcTexture,
                      uint32_t srcLevel,
                      wgpu::Origin3D srcOrigin,
@@ -119,10 +122,10 @@ class CopyCommandTest : public ValidationTest {
                      uint32_t destRowsPerImage,
                      wgpu::Extent3D extent3D,
                      wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
-        wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(destBuffer, destOffset, destBytesPerRow, destRowsPerImage);
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
+            destBuffer, destOffset, destBytesPerRow, destRowsPerImage);
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &extent3D);
@@ -130,7 +133,7 @@ class CopyCommandTest : public ValidationTest {
         ValidateExpectation(encoder, expectation);
     }
 
-    void TestT2TCopy(utils::Expectation expectation,
+    void TestT2TCopy(dawn::utils::Expectation expectation,
                      wgpu::Texture srcTexture,
                      uint32_t srcLevel,
                      wgpu::Origin3D srcOrigin,
@@ -140,9 +143,9 @@ class CopyCommandTest : public ValidationTest {
                      wgpu::Extent3D extent3D,
                      wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
         wgpu::ImageCopyTexture dstImageCopyTexture =
-            utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyTextureToTexture(&srcImageCopyTexture, &dstImageCopyTexture, &extent3D);
@@ -150,7 +153,7 @@ class CopyCommandTest : public ValidationTest {
         ValidateExpectation(encoder, expectation);
     }
 
-    void TestBothTBCopies(utils::Expectation expectation,
+    void TestBothTBCopies(dawn::utils::Expectation expectation,
                           wgpu::Buffer buffer,
                           uint64_t bufferOffset,
                           uint32_t bufferBytesPerRow,
@@ -165,7 +168,7 @@ class CopyCommandTest : public ValidationTest {
                     rowsPerImage, extent3D);
     }
 
-    void TestBothT2TCopies(utils::Expectation expectation,
+    void TestBothT2TCopies(dawn::utils::Expectation expectation,
                            wgpu::Texture texture1,
                            uint32_t level1,
                            wgpu::Origin3D origin1,
@@ -184,18 +187,18 @@ class CopyCommandTest : public ValidationTest {
                                          wgpu::Origin3D origin,
                                          wgpu::Extent3D extent3D) {
         // Check the minimal valid bufferSize.
-        uint64_t bufferSize =
-            utils::RequiredBytesInCopy(bufferBytesPerRow, rowsPerImage, extent3D, textureFormat);
+        uint64_t bufferSize = dawn::utils::RequiredBytesInCopy(bufferBytesPerRow, rowsPerImage,
+                                                               extent3D, textureFormat);
         wgpu::Buffer source =
             CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
-        TestBothTBCopies(utils::Expectation::Success, source, 0, bufferBytesPerRow, rowsPerImage,
-                         texture, 0, origin, extent3D);
+        TestBothTBCopies(dawn::utils::Expectation::Success, source, 0, bufferBytesPerRow,
+                         rowsPerImage, texture, 0, origin, extent3D);
 
         // Check bufferSize was indeed minimal.
         uint64_t invalidSize = bufferSize - 1;
         wgpu::Buffer invalidSource =
             CreateBuffer(invalidSize, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
-        TestBothTBCopies(utils::Expectation::Failure, invalidSource, 0, bufferBytesPerRow,
+        TestBothTBCopies(dawn::utils::Expectation::Failure, invalidSource, 0, bufferBytesPerRow,
                          rowsPerImage, texture, 0, origin, extent3D);
     }
 };
@@ -439,75 +442,75 @@ TEST_F(CopyCommandTest_B2T, Success) {
     // Different copies, including some that touch the OOB condition
     {
         // Copy 4x4 block in corner of first mip.
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
                     {4, 4, 1});
         // Copy 4x4 block in opposite corner of first mip.
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 4, destination, 0, {12, 12, 0},
-                    {4, 4, 1});
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 4, destination, 0,
+                    {12, 12, 0}, {4, 4, 1});
         // Copy 4x4 block in the 4x4 mip.
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 4, destination, 2, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 4, destination, 2, {0, 0, 0},
                     {4, 4, 1});
         // Copy with a buffer offset
-        TestB2TCopy(utils::Expectation::Success, source, bufferSize - 4, 256, 1, destination, 0,
-                    {0, 0, 0}, {1, 1, 1});
-        TestB2TCopy(utils::Expectation::Success, source, bufferSize - 4, 256,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, bufferSize - 4, 256, 1, destination,
+                    0, {0, 0, 0}, {1, 1, 1});
+        TestB2TCopy(dawn::utils::Expectation::Success, source, bufferSize - 4, 256,
                     wgpu::kCopyStrideUndefined, destination, 0, {0, 0, 0}, {1, 1, 1});
     }
 
     // Copies with a 256-byte aligned bytes per row but unaligned texture region
     {
         // Unaligned region
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
                     {3, 4, 1});
         // Unaligned region with texture offset
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 3, destination, 0, {5, 7, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 3, destination, 0, {5, 7, 0},
                     {2, 3, 1});
         // Unaligned region, with buffer offset
-        TestB2TCopy(utils::Expectation::Success, source, 31 * 4, 256, 3, destination, 0, {0, 0, 0},
-                    {3, 3, 1});
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 31 * 4, 256, 3, destination, 0,
+                    {0, 0, 0}, {3, 3, 1});
     }
 
     // bytesPerRow is undefined
     {
-        TestB2TCopy(utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 2,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 2,
                     destination, 0, {0, 0, 0}, {1, 1, 1});
-        TestB2TCopy(utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 2,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 2,
                     destination, 0, {0, 0, 0}, {3, 1, 1});
         // Fail because height or depth is greater than 1:
-        TestB2TCopy(utils::Expectation::Failure, source, 0, wgpu::kCopyStrideUndefined, 2,
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, wgpu::kCopyStrideUndefined, 2,
                     destination, 0, {0, 0, 0}, {1, 2, 1});
-        TestB2TCopy(utils::Expectation::Failure, source, 0, wgpu::kCopyStrideUndefined, 2,
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, wgpu::kCopyStrideUndefined, 2,
                     destination, 0, {0, 0, 0}, {1, 1, 2});
     }
 
     // Empty copies are valid
     {
         // An empty copy
-        TestB2TCopy(utils::Expectation::Success, source, 0, 0, 0, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 0, 0, destination, 0, {0, 0, 0},
                     {0, 0, 1});
-        TestB2TCopy(utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 0,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 0,
                     destination, 0, {0, 0, 0}, {0, 0, 1});
         // An empty copy with depth = 0
-        TestB2TCopy(utils::Expectation::Success, source, 0, 0, 0, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 0, 0, destination, 0, {0, 0, 0},
                     {0, 0, 0});
-        TestB2TCopy(utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 0,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 0,
                     destination, 0, {0, 0, 0}, {0, 0, 0});
         // An empty copy touching the end of the buffer
-        TestB2TCopy(utils::Expectation::Success, source, bufferSize, 0, 0, destination, 0,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, bufferSize, 0, 0, destination, 0,
                     {0, 0, 0}, {0, 0, 1});
-        TestB2TCopy(utils::Expectation::Success, source, bufferSize, wgpu::kCopyStrideUndefined, 0,
-                    destination, 0, {0, 0, 0}, {0, 0, 1});
+        TestB2TCopy(dawn::utils::Expectation::Success, source, bufferSize,
+                    wgpu::kCopyStrideUndefined, 0, destination, 0, {0, 0, 0}, {0, 0, 1});
         // An empty copy touching the side of the texture
-        TestB2TCopy(utils::Expectation::Success, source, 0, 0, 0, destination, 0, {16, 16, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 0, 0, destination, 0, {16, 16, 0},
                     {0, 0, 1});
-        TestB2TCopy(utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 0,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, wgpu::kCopyStrideUndefined, 0,
                     destination, 0, {16, 16, 0}, {0, 0, 1});
 
         // An empty copy with depth = 1 and bytesPerRow > 0
-        TestB2TCopy(utils::Expectation::Success, source, 0, kTextureBytesPerRowAlignment, 0,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, kTextureBytesPerRowAlignment, 0,
                     destination, 0, {0, 0, 0}, {0, 0, 1});
         // An empty copy with height > 0, depth = 0, bytesPerRow > 0 and rowsPerImage > 0
-        TestB2TCopy(utils::Expectation::Success, source, 0, kTextureBytesPerRowAlignment, 3,
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, kTextureBytesPerRowAlignment, 3,
                     destination, 0, {0, 0, 0}, {0, 1, 0});
     }
 }
@@ -520,16 +523,16 @@ TEST_F(CopyCommandTest_B2T, OutOfBoundsOnBuffer) {
         Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // OOB on the buffer because we copy too many pixels
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 5, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 5, destination, 0, {0, 0, 0},
                 {4, 5, 1});
 
     // OOB on the buffer because of the offset
-    TestB2TCopy(utils::Expectation::Failure, source, 4, 256, 4, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 4, 256, 4, destination, 0, {0, 0, 0},
                 {4, 4, 1});
 
     // OOB on the buffer because (bytes per row * (height - 1) + width * bytesPerPixel) * depth
     // overflows
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 512, 3, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 512, 3, destination, 0, {0, 0, 0},
                 {4, 3, 1});
 
     // Not OOB on the buffer although bytes per row * height overflows
@@ -539,7 +542,7 @@ TEST_F(CopyCommandTest_B2T, OutOfBoundsOnBuffer) {
         ASSERT_TRUE(256 * 3 > sourceBufferSize) << "bytes per row * height should overflow buffer";
         wgpu::Buffer sourceBuffer = CreateBuffer(sourceBufferSize, wgpu::BufferUsage::CopySrc);
 
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 3, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 3, destination, 0, {0, 0, 0},
                     {7, 3, 1});
     }
 }
@@ -552,22 +555,24 @@ TEST_F(CopyCommandTest_B2T, OutOfBoundsOnTexture) {
         Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // OOB on the texture because x + width overflows
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 4, destination, 0, {13, 12, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 4, destination, 0, {13, 12, 0},
                 {4, 4, 1});
 
     // OOB on the texture because y + width overflows
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 4, destination, 0, {12, 13, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 4, destination, 0, {12, 13, 0},
                 {4, 4, 1});
 
     // OOB on the texture because we overflow a non-zero mip
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 4, destination, 2, {1, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 4, destination, 2, {1, 0, 0},
                 {4, 4, 1});
 
     // OOB on the texture even on an empty copy when we copy to a non-existent mip.
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 0, destination, 5, {0, 0, 0}, {0, 0, 1});
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 0, 0, destination, 5, {0, 0, 0},
+                {0, 0, 1});
 
     // OOB on the texture because slice overflows
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 0, destination, 0, {0, 0, 2}, {0, 0, 1});
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 0, 0, destination, 0, {0, 0, 2},
+                {0, 0, 1});
 }
 
 // Test that we force Depth=1 on copies to 2D textures
@@ -577,7 +582,8 @@ TEST_F(CopyCommandTest_B2T, DepthConstraintFor2DTextures) {
         Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // Depth > 1 on an empty copy still errors
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 0, destination, 0, {0, 0, 0}, {0, 0, 2});
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 0, 0, destination, 0, {0, 0, 0},
+                {0, 0, 2});
 }
 
 // Test B2T copies with incorrect buffer usage
@@ -590,11 +596,12 @@ TEST_F(CopyCommandTest_B2T, IncorrectUsage) {
                                             wgpu::TextureUsage::TextureBinding);
 
     // Incorrect source usage
-    TestB2TCopy(utils::Expectation::Failure, vertex, 0, 256, 4, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, vertex, 0, 256, 4, destination, 0, {0, 0, 0},
                 {4, 4, 1});
 
     // Incorrect destination usage
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 4, sampled, 0, {0, 0, 0}, {4, 4, 1});
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 4, sampled, 0, {0, 0, 0},
+                {4, 4, 1});
 }
 
 TEST_F(CopyCommandTest_B2T, BytesPerRowConstraints) {
@@ -606,51 +613,51 @@ TEST_F(CopyCommandTest_B2T, BytesPerRowConstraints) {
     // bytes per row is 0
     {
         // copyHeight > 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 4, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 0, 4, destination, 0, {0, 0, 0},
                     {64, 4, 1});
-        TestB2TCopy(utils::Expectation::Success, source, 0, 0, 4, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 0, 4, destination, 0, {0, 0, 0},
                     {0, 4, 1});
 
         // copyDepth > 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 1, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 0, 1, destination, 0, {0, 0, 0},
                     {64, 1, 4});
-        TestB2TCopy(utils::Expectation::Success, source, 0, 0, 1, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 0, 1, destination, 0, {0, 0, 0},
                     {0, 1, 4});
 
         // copyHeight = 1 and copyDepth = 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 1, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 0, 1, destination, 0, {0, 0, 0},
                     {64, 1, 1});
     }
 
     // bytes per row is not 256-byte aligned
     {
         // copyHeight > 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 128, 4, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 128, 4, destination, 0, {0, 0, 0},
                     {4, 4, 1});
 
         // copyHeight = 1 and copyDepth = 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 128, 1, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 128, 1, destination, 0, {0, 0, 0},
                     {4, 1, 1});
     }
 
     // bytes per row is less than width * bytesPerPixel
     {
         // copyHeight > 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 2, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 2, destination, 0, {0, 0, 0},
                     {65, 2, 1});
         // copyHeight == 0
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
                     {65, 0, 1});
 
         // copyDepth > 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
                     {65, 1, 2});
         // copyDepth == 0
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
                     {65, 1, 0});
 
         // copyHeight = 1 and copyDepth = 1
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
                     {65, 1, 1});
     }
 }
@@ -662,32 +669,32 @@ TEST_F(CopyCommandTest_B2T, RowsPerImageConstraints) {
         Create2DTexture(16, 16, 1, 5, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // rowsPerImage is zero
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
                 {1, 1, 1});
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
                 {4, 4, 1});
 
     // rowsPerImage is undefined
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, wgpu::kCopyStrideUndefined,
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, wgpu::kCopyStrideUndefined,
                 destination, 0, {0, 0, 0}, {4, 4, 1});
     // Fail because depth > 1:
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, wgpu::kCopyStrideUndefined,
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, wgpu::kCopyStrideUndefined,
                 destination, 0, {0, 0, 0}, {4, 4, 2});
 
     // rowsPerImage is equal to copy height (Valid)
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
                 {4, 4, 1});
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
                 {4, 4, 2});
 
     // rowsPerImage is larger than copy height (Valid)
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 5, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 5, destination, 0, {0, 0, 0},
                 {4, 4, 1});
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 5, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 5, destination, 0, {0, 0, 0},
                 {4, 4, 2});
 
     // rowsPerImage is less than copy height (Invalid)
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 3, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 3, destination, 0, {0, 0, 0},
                 {4, 4, 1});
 }
 
@@ -699,17 +706,17 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForColorTexture) {
         Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // Correct usage
-    TestB2TCopy(utils::Expectation::Success, source, bufferSize - 4, 256, 1, destination, 0,
+    TestB2TCopy(dawn::utils::Expectation::Success, source, bufferSize - 4, 256, 1, destination, 0,
                 {0, 0, 0}, {1, 1, 1});
 
     // Incorrect usages
     {
-        TestB2TCopy(utils::Expectation::Failure, source, bufferSize - 5, 256, 1, destination, 0,
-                    {0, 0, 0}, {1, 1, 1});
-        TestB2TCopy(utils::Expectation::Failure, source, bufferSize - 6, 256, 1, destination, 0,
-                    {0, 0, 0}, {1, 1, 1});
-        TestB2TCopy(utils::Expectation::Failure, source, bufferSize - 7, 256, 1, destination, 0,
-                    {0, 0, 0}, {1, 1, 1});
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, bufferSize - 5, 256, 1, destination,
+                    0, {0, 0, 0}, {1, 1, 1});
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, bufferSize - 6, 256, 1, destination,
+                    0, {0, 0, 0}, {1, 1, 1});
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, bufferSize - 7, 256, 1, destination,
+                    0, {0, 0, 0}, {1, 1, 1});
     }
 }
 
@@ -736,8 +743,9 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForDepthStencilTexture) {
             Create2DTexture(16, 16, 5, 1, textureFormat, wgpu::TextureUsage::CopyDst);
 
         for (uint64_t srcOffset = 0; srcOffset < 8; srcOffset++) {
-            utils::Expectation expectation =
-                (srcOffset % 4 == 0) ? utils::Expectation::Success : utils::Expectation::Failure;
+            dawn::utils::Expectation expectation = (srcOffset % 4 == 0)
+                                                       ? dawn::utils::Expectation::Success
+                                                       : dawn::utils::Expectation::Failure;
             TestB2TCopy(expectation, source, srcOffset, 256, 16, destination, 0, {0, 0, 0},
                         {16, 16, 1}, textureAspect);
         }
@@ -752,7 +760,7 @@ TEST_F(CopyCommandTest_B2T, CopyToMultisampledTexture) {
         Create2DTexture(2, 2, 1, 1, wgpu::TextureFormat::RGBA8Unorm,
                         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment, 4);
 
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 2, destination, 0, {0, 0, 0},
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 2, destination, 0, {0, 0, 0},
                 {2, 2, 1});
 }
 
@@ -767,9 +775,10 @@ TEST_F(CopyCommandTest_B2T, BufferOrTextureInErrorState) {
     errorTextureDescriptor.size.depthOrArrayLayers = 0;
     ASSERT_DEVICE_ERROR(wgpu::Texture errorTexture = device.CreateTexture(&errorTextureDescriptor));
 
-    wgpu::ImageCopyBuffer errorImageCopyBuffer = utils::CreateImageCopyBuffer(errorBuffer, 0, 0, 0);
+    wgpu::ImageCopyBuffer errorImageCopyBuffer =
+        dawn::utils::CreateImageCopyBuffer(errorBuffer, 0, 0, 0);
     wgpu::ImageCopyTexture errorImageCopyTexture =
-        utils::CreateImageCopyTexture(errorTexture, 0, {0, 0, 0});
+        dawn::utils::CreateImageCopyTexture(errorTexture, 0, {0, 0, 0});
 
     wgpu::Extent3D extent3D = {0, 0, 0};
 
@@ -777,7 +786,7 @@ TEST_F(CopyCommandTest_B2T, BufferOrTextureInErrorState) {
         wgpu::Texture destination = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm,
                                                     wgpu::TextureUsage::CopyDst);
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyBufferToTexture(&errorImageCopyBuffer, &imageCopyTexture, &extent3D);
@@ -788,7 +797,7 @@ TEST_F(CopyCommandTest_B2T, BufferOrTextureInErrorState) {
         uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
         wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
 
-        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(source, 0, 0, 0);
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(source, 0, 0, 0);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyBufferToTexture(&imageCopyBuffer, &errorImageCopyTexture, &extent3D);
@@ -814,8 +823,8 @@ TEST_F(CopyCommandTest_B2T, TextureCopyBufferSizeLastRowComputation) {
             wgpu::Buffer source = CreateBuffer(kInvalidBufferSize, wgpu::BufferUsage::CopySrc);
             wgpu::Texture destination =
                 Create2DTexture(kWidth, kHeight, 1, 1, format, wgpu::TextureUsage::CopyDst);
-            TestB2TCopy(utils::Expectation::Failure, source, 0, kBytesPerRow, kHeight, destination,
-                        0, {0, 0, 0}, {kWidth, kHeight, 1});
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, kBytesPerRow, kHeight,
+                        destination, 0, {0, 0, 0}, {kWidth, kHeight, 1});
         }
     }
 
@@ -830,13 +839,13 @@ TEST_F(CopyCommandTest_B2T, TextureCopyBufferSizeLastRowComputation) {
             {
                 uint32_t invalidBuffferSize = validBufferSize - 1;
                 wgpu::Buffer source = CreateBuffer(invalidBuffferSize, wgpu::BufferUsage::CopySrc);
-                TestB2TCopy(utils::Expectation::Failure, source, 0, kBytesPerRow, kHeight,
+                TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, kBytesPerRow, kHeight,
                             destination, 0, {0, 0, 0}, {kWidth, kHeight, 1});
             }
 
             {
                 wgpu::Buffer source = CreateBuffer(validBufferSize, wgpu::BufferUsage::CopySrc);
-                TestB2TCopy(utils::Expectation::Success, source, 0, kBytesPerRow, kHeight,
+                TestB2TCopy(dawn::utils::Expectation::Success, source, 0, kBytesPerRow, kHeight,
                             destination, 0, {0, 0, 0}, {kWidth, kHeight, 1});
             }
         }
@@ -852,20 +861,20 @@ TEST_F(CopyCommandTest_B2T, CopyToMipmapOfNonSquareTexture) {
         4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // Copy to top level mip map
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 1, destination, maxMipmapLevel - 1,
-                {0, 0, 0}, {1, 1, 1});
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 1, destination,
+                maxMipmapLevel - 1, {0, 0, 0}, {1, 1, 1});
     // Copy to high level mip map
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 1, destination, maxMipmapLevel - 2,
-                {0, 0, 0}, {2, 1, 1});
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 1, destination,
+                maxMipmapLevel - 2, {0, 0, 0}, {2, 1, 1});
     // Mip level out of range
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, maxMipmapLevel,
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination, maxMipmapLevel,
                 {0, 0, 0}, {1, 1, 1});
     // Copy origin out of range
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, maxMipmapLevel - 2,
-                {1, 0, 0}, {2, 1, 1});
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination,
+                maxMipmapLevel - 2, {1, 0, 0}, {2, 1, 1});
     // Copy size out of range
-    TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 2, destination, maxMipmapLevel - 2,
-                {0, 0, 0}, {2, 2, 1});
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 2, destination,
+                maxMipmapLevel - 2, {0, 0, 0}, {2, 2, 1});
 }
 
 // Test whether or not it is valid to copy to a depth texture
@@ -881,12 +890,12 @@ TEST_F(CopyCommandTest_B2T, CopyToDepthAspect) {
             Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
         // Test it is valid to copy this format from a buffer into a depth texture
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
-        if (utils::IsDepthOnlyFormat(format)) {
+        TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 16, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        if (dawn::utils::IsDepthOnlyFormat(format)) {
             // Test "all" of a depth texture which is only the depth aspect.
-            TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                        {16, 16, 1}, wgpu::TextureAspect::All);
+            TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 16, destination, 0,
+                        {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All);
         }
     }
 
@@ -902,13 +911,13 @@ TEST_F(CopyCommandTest_B2T, CopyToDepthAspect) {
             Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
         // Test it is invalid to copy from a buffer into a depth texture
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 16, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
 
-        if (utils::IsDepthOnlyFormat(format)) {
+        if (dawn::utils::IsDepthOnlyFormat(format)) {
             // Test "all" of a depth texture which is only the depth aspect.
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                        {16, 16, 1}, wgpu::TextureAspect::All);
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 16, destination, 0,
+                        {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All);
         }
     }
 }
@@ -918,7 +927,7 @@ TEST_F(CopyCommandTest_B2T, CopyToStencilAspect) {
     uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1, wgpu::TextureFormat::R8Uint);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
 
-    for (wgpu::TextureFormat format : utils::kStencilFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kStencilFormats) {
         // Test it is valid to copy from a buffer into the stencil aspect of a depth/stencil texture
         {
             wgpu::Texture destination =
@@ -926,12 +935,12 @@ TEST_F(CopyCommandTest_B2T, CopyToStencilAspect) {
 
             // TODO(dawn:666): Test "all" of Stencil8 format when it's implemented.
 
-            TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                        {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 16, destination, 0,
+                        {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
 
             // And that it fails if the buffer is one byte too small
             wgpu::Buffer sourceSmall = CreateBuffer(bufferSize - 1, wgpu::BufferUsage::CopySrc);
-            TestB2TCopy(utils::Expectation::Failure, sourceSmall, 0, 256, 16, destination, 0,
+            TestB2TCopy(dawn::utils::Expectation::Failure, sourceSmall, 0, 256, 16, destination, 0,
                         {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
         }
 
@@ -941,11 +950,11 @@ TEST_F(CopyCommandTest_B2T, CopyToStencilAspect) {
                 Create2DTexture(16, 16, 1, 1, format,
                                 wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
 
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 15, destination, 0, {0, 0, 0},
-                        {15, 15, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 15, destination, 0,
+                        {0, 0, 0}, {15, 15, 1}, wgpu::TextureAspect::StencilOnly);
 
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
-                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination, 0,
+                        {0, 0, 0}, {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
         }
 
         // Non-zero mip: A copy fails when using a depth/stencil texture, and the entire subresource
@@ -959,15 +968,15 @@ TEST_F(CopyCommandTest_B2T, CopyToStencilAspect) {
                                 wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
 
             // Whole mip is success
-            TestB2TCopy(utils::Expectation::Success, source, 0, 256, 8, destination, 1, {0, 0, 0},
-                        {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 8, destination, 1,
+                        {0, 0, 0}, {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
 
             // Partial mip fails
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 7, destination, 1, {0, 0, 0},
-                        {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 7, destination, 1,
+                        {0, 0, 0}, {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
 
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, 1, {0, 0, 0},
-                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination, 1,
+                        {0, 0, 0}, {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
         }
 
         // Non-zero mip, non-pow-2: A copy fails when using a depth/stencil texture, and the entire
@@ -981,15 +990,15 @@ TEST_F(CopyCommandTest_B2T, CopyToStencilAspect) {
                                 wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
 
             // Whole mip is success
-            TestB2TCopy(utils::Expectation::Success, source, 0, 256, 8, destination, 1, {0, 0, 0},
-                        {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Success, source, 0, 256, 8, destination, 1,
+                        {0, 0, 0}, {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
 
             // Partial mip fails
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 7, destination, 1, {0, 0, 0},
-                        {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 7, destination, 1,
+                        {0, 0, 0}, {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
 
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, 1, {0, 0, 0},
-                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+            TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 1, destination, 1,
+                        {0, 0, 0}, {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
         }
     }
 
@@ -998,8 +1007,8 @@ TEST_F(CopyCommandTest_B2T, CopyToStencilAspect) {
         wgpu::Texture destination = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::Depth24Plus,
                                                     wgpu::TextureUsage::CopyDst);
 
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 16, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
     }
 
     // Test it is invalid to copy from a buffer into the stencil aspect of a color texture
@@ -1007,8 +1016,8 @@ TEST_F(CopyCommandTest_B2T, CopyToStencilAspect) {
         wgpu::Texture destination = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Uint,
                                                     wgpu::TextureUsage::CopyDst);
 
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, 256, 16, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
     }
 }
 
@@ -1019,10 +1028,10 @@ TEST_F(CopyCommandTest_B2T, RequiredBytesInCopyOverflow) {
         Create2DTexture(1, 1, 1, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // Success
-    TestB2TCopy(utils::Expectation::Success, source, 0, (1 << 31), (1 << 31), destination, 0,
+    TestB2TCopy(dawn::utils::Expectation::Success, source, 0, (1 << 31), (1 << 31), destination, 0,
                 {0, 0, 0}, {1, 1, 1});
     // Failure because bytesPerImage * (depth - 1) overflows
-    TestB2TCopy(utils::Expectation::Failure, source, 0, (1 << 31), (1 << 31), destination, 0,
+    TestB2TCopy(dawn::utils::Expectation::Failure, source, 0, (1 << 31), (1 << 31), destination, 0,
                 {0, 0, 0}, {1, 1, 16});
 }
 
@@ -1047,75 +1056,75 @@ TEST_F(CopyCommandTest_T2B, Success) {
     // Different copies, including some that touch the OOB condition
     {
         // Copy from 4x4 block in corner of first mip.
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
                     {4, 4, 1});
         // Copy from 4x4 block in opposite corner of first mip.
-        TestT2BCopy(utils::Expectation::Success, source, 0, {12, 12, 0}, destination, 0, 256, 4,
-                    {4, 4, 1});
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {12, 12, 0}, destination, 0, 256,
+                    4, {4, 4, 1});
         // Copy from 4x4 block in the 4x4 mip.
-        TestT2BCopy(utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 0, 256, 4,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 0, 256, 4,
                     {4, 4, 1});
         // Copy with a buffer offset
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, bufferSize - 4,
-                    256, 1, {1, 1, 1});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, bufferSize - 4,
-                    256, wgpu::kCopyStrideUndefined, {1, 1, 1});
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination,
+                    bufferSize - 4, 256, 1, {1, 1, 1});
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination,
+                    bufferSize - 4, 256, wgpu::kCopyStrideUndefined, {1, 1, 1});
     }
 
     // Copies with a 256-byte aligned bytes per row but unaligned texture region
     {
         // Unaligned region
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
                     {3, 4, 1});
         // Unaligned region with texture offset
-        TestT2BCopy(utils::Expectation::Success, source, 0, {5, 7, 0}, destination, 0, 256, 3,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {5, 7, 0}, destination, 0, 256, 3,
                     {2, 3, 1});
         // Unaligned region, with buffer offset
-        TestT2BCopy(utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 31 * 4, 256, 3,
-                    {3, 3, 1});
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 31 * 4,
+                    256, 3, {3, 3, 1});
     }
 
     // bytesPerRow is undefined
     {
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                     wgpu::kCopyStrideUndefined, 2, {1, 1, 1});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                     wgpu::kCopyStrideUndefined, 2, {3, 1, 1});
         // Fail because height or depth is greater than 1:
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
                     wgpu::kCopyStrideUndefined, 2, {1, 2, 1});
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
                     wgpu::kCopyStrideUndefined, 2, {1, 1, 2});
     }
 
     // Empty copies are valid
     {
         // An empty copy
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 0,
                     {0, 0, 1});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                     wgpu::kCopyStrideUndefined, 0, {0, 0, 1});
         // An empty copy with depth = 0
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 0,
                     {0, 0, 0});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                     wgpu::kCopyStrideUndefined, 0, {0, 0, 0});
         // An empty copy touching the end of the buffer
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, bufferSize, 0,
-                    0, {0, 0, 1});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, bufferSize,
-                    wgpu::kCopyStrideUndefined, 0, {0, 0, 1});
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination,
+                    bufferSize, 0, 0, {0, 0, 1});
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination,
+                    bufferSize, wgpu::kCopyStrideUndefined, 0, {0, 0, 1});
         // An empty copy touching the side of the texture
-        TestT2BCopy(utils::Expectation::Success, source, 0, {16, 16, 0}, destination, 0, 0, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {16, 16, 0}, destination, 0, 0, 0,
                     {0, 0, 1});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {16, 16, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {16, 16, 0}, destination, 0,
                     wgpu::kCopyStrideUndefined, 0, {0, 0, 1});
 
         // An empty copy with depth = 1 and bytesPerRow > 0
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                     kTextureBytesPerRowAlignment, 0, {0, 0, 1});
         // An empty copy with height > 0, depth = 0, bytesPerRow > 0 and rowsPerImage > 0
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                     kTextureBytesPerRowAlignment, 3, {0, 1, 0});
     }
 }
@@ -1125,26 +1134,26 @@ TEST_F(CopyCommandTest_T2B, Empty) {
     wgpu::Texture source =
         Create2DTexture(16, 16, 1, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
 
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
                 CreateBuffer(0, wgpu::BufferUsage::CopyDst), 0, 256, 4, {0, 0, 0});
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
                 CreateBuffer(0, wgpu::BufferUsage::CopyDst), 0, 256, 4, {4, 0, 0});
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
                 CreateBuffer(0, wgpu::BufferUsage::CopyDst), 0, 256, 4, {4, 4, 0});
 
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
                 CreateBuffer(1024, wgpu::BufferUsage::CopyDst), 0, 256, 4, {4, 0, 2});
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
                 CreateBuffer(1023, wgpu::BufferUsage::CopyDst), 0, 256, 4, {4, 0, 2});
 
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
                 CreateBuffer(1792, wgpu::BufferUsage::CopyDst), 0, 256, 4, {0, 4, 2});
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
                 CreateBuffer(1791, wgpu::BufferUsage::CopyDst), 0, 256, 4, {0, 4, 2});
 
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
                 CreateBuffer(1024, wgpu::BufferUsage::CopyDst), 0, 256, 4, {0, 0, 2});
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0},
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
                 CreateBuffer(1023, wgpu::BufferUsage::CopyDst), 0, 256, 4, {0, 0, 2});
 }
 
@@ -1156,19 +1165,20 @@ TEST_F(CopyCommandTest_T2B, OutOfBoundsOnTexture) {
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // OOB on the texture because x + width overflows
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {13, 12, 0}, destination, 0, 256, 4,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {13, 12, 0}, destination, 0, 256, 4,
                 {4, 4, 1});
 
     // OOB on the texture because y + width overflows
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {12, 13, 0}, destination, 0, 256, 4,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {12, 13, 0}, destination, 0, 256, 4,
                 {4, 4, 1});
 
     // OOB on the texture because we overflow a non-zero mip
-    TestT2BCopy(utils::Expectation::Failure, source, 2, {1, 0, 0}, destination, 0, 256, 4,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 2, {1, 0, 0}, destination, 0, 256, 4,
                 {4, 4, 1});
 
     // OOB on the texture even on an empty copy when we copy from a non-existent mip.
-    TestT2BCopy(utils::Expectation::Failure, source, 5, {0, 0, 0}, destination, 0, 0, 4, {0, 0, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 5, {0, 0, 0}, destination, 0, 0, 4,
+                {0, 0, 1});
 }
 
 // Test OOB conditions on the buffer
@@ -1179,16 +1189,16 @@ TEST_F(CopyCommandTest_T2B, OutOfBoundsOnBuffer) {
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // OOB on the buffer because we copy too many pixels
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 5,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 5,
                 {4, 5, 1});
 
     // OOB on the buffer because of the offset
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 4, 256, 4,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 4, 256, 4,
                 {4, 4, 1});
 
     // OOB on the buffer because (bytes per row * (height - 1) + width * bytesPerPixel) * depth
     // overflows
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 512, 3,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 512, 3,
                 {4, 3, 1});
 
     // Not OOB on the buffer although bytes per row * height overflows
@@ -1199,8 +1209,8 @@ TEST_F(CopyCommandTest_T2B, OutOfBoundsOnBuffer) {
             << "bytes per row * height should overflow buffer";
         wgpu::Buffer destinationBuffer =
             CreateBuffer(destinationBufferSize, wgpu::BufferUsage::CopyDst);
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destinationBuffer, 0, 256, 3,
-                    {7, 3, 1});
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destinationBuffer, 0,
+                    256, 3, {7, 3, 1});
     }
 }
 
@@ -1212,7 +1222,8 @@ TEST_F(CopyCommandTest_T2B, DepthConstraintFor2DTextures) {
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // Depth > 1 on an empty copy still errors
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 0, {0, 0, 2});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 0,
+                {0, 0, 2});
 }
 
 // Test T2B copies with incorrect buffer usage
@@ -1226,11 +1237,12 @@ TEST_F(CopyCommandTest_T2B, IncorrectUsage) {
     wgpu::Buffer vertex = CreateBuffer(bufferSize, wgpu::BufferUsage::Vertex);
 
     // Incorrect source usage
-    TestT2BCopy(utils::Expectation::Failure, sampled, 0, {0, 0, 0}, destination, 0, 256, 4,
+    TestT2BCopy(dawn::utils::Expectation::Failure, sampled, 0, {0, 0, 0}, destination, 0, 256, 4,
                 {4, 4, 1});
 
     // Incorrect destination usage
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, vertex, 0, 256, 4, {4, 4, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, vertex, 0, 256, 4,
+                {4, 4, 1});
 }
 
 TEST_F(CopyCommandTest_T2B, BytesPerRowConstraints) {
@@ -1242,51 +1254,51 @@ TEST_F(CopyCommandTest_T2B, BytesPerRowConstraints) {
     // bytes per row is 0
     {
         // copyHeight > 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 4,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 4,
                     {64, 4, 1});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 4,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 4,
                     {0, 4, 1});
 
         // copyDepth > 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 1,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 1,
                     {64, 1, 4});
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 1,
+        TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 1,
                     {0, 1, 4});
 
         // copyHeight = 1 and copyDepth = 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 1,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 1,
                     {64, 1, 1});
     }
 
     // bytes per row is not 256-byte aligned
     {
         // copyHeight > 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 128, 4,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 128, 4,
                     {4, 4, 1});
 
         // copyHeight = 1 and copyDepth = 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 128, 1,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 128, 1,
                     {4, 1, 1});
     }
 
     // bytes per row is less than width * bytesPerPixel
     {
         // copyHeight > 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 2,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 2,
                     {65, 2, 1});
         // copyHeight == 0
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
                     {65, 0, 1});
 
         // copyDepth > 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
                     {65, 1, 2});
         // copyDepth == 0
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
                     {65, 1, 0});
 
         // copyHeight = 1 and copyDepth = 1
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
                     {65, 1, 1});
     }
 }
@@ -1298,32 +1310,32 @@ TEST_F(CopyCommandTest_T2B, RowsPerImageConstraints) {
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // rowsPerImage is zero (Valid)
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
                 {1, 1, 1});
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
                 {4, 4, 1});
 
     // rowsPerImage is undefined
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256,
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256,
                 wgpu::kCopyStrideUndefined, {4, 4, 1});
     // Fail because depth > 1:
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256,
                 wgpu::kCopyStrideUndefined, {4, 4, 2});
 
     // rowsPerImage is equal to copy height (Valid)
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
                 {4, 4, 1});
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
                 {4, 4, 2});
 
     // rowsPerImage exceeds copy height (Valid)
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 5,
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 5,
                 {4, 4, 1});
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 5,
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 5,
                 {4, 4, 2});
 
     // rowsPerImage is less than copy height (Invalid)
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 3,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 3,
                 {4, 4, 1});
 }
 
@@ -1335,16 +1347,16 @@ TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForColorTexture) {
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // Correct usage
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, bufferSize - 4, 256,
-                1, {1, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination,
+                bufferSize - 4, 256, 1, {1, 1, 1});
 
     // Incorrect usages
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, bufferSize - 5, 256,
-                1, {1, 1, 1});
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, bufferSize - 6, 256,
-                1, {1, 1, 1});
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, bufferSize - 7, 256,
-                1, {1, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination,
+                bufferSize - 5, 256, 1, {1, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination,
+                bufferSize - 6, 256, 1, {1, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination,
+                bufferSize - 7, 256, 1, {1, 1, 1});
 }
 
 // Test T2B copies with incorrect buffer offset usage for depth-stencil texture
@@ -1373,8 +1385,9 @@ TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForDepthStencilTexture) {
             Create2DTexture(16, 16, 5, 1, textureFormat, wgpu::TextureUsage::CopySrc);
 
         for (uint64_t dstOffset = 0; dstOffset < 8; dstOffset++) {
-            utils::Expectation expectation =
-                (dstOffset % 4 == 0) ? utils::Expectation::Success : utils::Expectation::Failure;
+            dawn::utils::Expectation expectation = (dstOffset % 4 == 0)
+                                                       ? dawn::utils::Expectation::Success
+                                                       : dawn::utils::Expectation::Failure;
             TestT2BCopy(expectation, source, 0, {0, 0, 0}, destination, dstOffset, 256, 16,
                         {16, 16, 1}, textureAspect);
         }
@@ -1389,7 +1402,7 @@ TEST_F(CopyCommandTest_T2B, CopyFromMultisampledTexture) {
     uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 2,
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 2,
                 {2, 2, 1});
 }
 
@@ -1404,9 +1417,10 @@ TEST_F(CopyCommandTest_T2B, BufferOrTextureInErrorState) {
     errorTextureDescriptor.size.depthOrArrayLayers = 0;
     ASSERT_DEVICE_ERROR(wgpu::Texture errorTexture = device.CreateTexture(&errorTextureDescriptor));
 
-    wgpu::ImageCopyBuffer errorImageCopyBuffer = utils::CreateImageCopyBuffer(errorBuffer, 0, 0, 0);
+    wgpu::ImageCopyBuffer errorImageCopyBuffer =
+        dawn::utils::CreateImageCopyBuffer(errorBuffer, 0, 0, 0);
     wgpu::ImageCopyTexture errorImageCopyTexture =
-        utils::CreateImageCopyTexture(errorTexture, 0, {0, 0, 0});
+        dawn::utils::CreateImageCopyTexture(errorTexture, 0, {0, 0, 0});
 
     wgpu::Extent3D extent3D = {0, 0, 0};
 
@@ -1414,7 +1428,7 @@ TEST_F(CopyCommandTest_T2B, BufferOrTextureInErrorState) {
         uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
         wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
 
-        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(source, 0, 0, 0);
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(source, 0, 0, 0);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyTextureToBuffer(&errorImageCopyTexture, &imageCopyBuffer, &extent3D);
@@ -1425,7 +1439,7 @@ TEST_F(CopyCommandTest_T2B, BufferOrTextureInErrorState) {
         wgpu::Texture destination = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm,
                                                     wgpu::TextureUsage::CopyDst);
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(destination, 0, {0, 0, 0});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyTextureToBuffer(&imageCopyTexture, &errorImageCopyBuffer, &extent3D);
@@ -1452,7 +1466,7 @@ TEST_F(CopyCommandTest_T2B, TextureCopyBufferSizeLastRowComputation) {
                 Create2DTexture(kWidth, kHeight, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
             wgpu::Buffer destination = CreateBuffer(kInvalidBufferSize, wgpu::BufferUsage::CopyDst);
-            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
                         kBytesPerRow, kHeight, {kWidth, kHeight, 1});
         }
     }
@@ -1469,14 +1483,14 @@ TEST_F(CopyCommandTest_T2B, TextureCopyBufferSizeLastRowComputation) {
                 uint32_t invalidBufferSize = validBufferSize - 1;
                 wgpu::Buffer destination =
                     CreateBuffer(invalidBufferSize, wgpu::BufferUsage::CopyDst);
-                TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
                             kBytesPerRow, kHeight, {kWidth, kHeight, 1});
             }
 
             {
                 wgpu::Buffer destination =
                     CreateBuffer(validBufferSize, wgpu::BufferUsage::CopyDst);
-                TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                             kBytesPerRow, kHeight, {kWidth, kHeight, 1});
             }
         }
@@ -1492,20 +1506,20 @@ TEST_F(CopyCommandTest_T2B, CopyFromMipmapOfNonSquareTexture) {
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // Copy from top level mip map
-    TestT2BCopy(utils::Expectation::Success, source, maxMipmapLevel - 1, {0, 0, 0}, destination, 0,
-                256, 1, {1, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Success, source, maxMipmapLevel - 1, {0, 0, 0},
+                destination, 0, 256, 1, {1, 1, 1});
     // Copy from high level mip map
-    TestT2BCopy(utils::Expectation::Success, source, maxMipmapLevel - 2, {0, 0, 0}, destination, 0,
-                256, 1, {2, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Success, source, maxMipmapLevel - 2, {0, 0, 0},
+                destination, 0, 256, 1, {2, 1, 1});
     // Mip level out of range
-    TestT2BCopy(utils::Expectation::Failure, source, maxMipmapLevel, {0, 0, 0}, destination, 0, 256,
-                1, {2, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, maxMipmapLevel, {0, 0, 0}, destination,
+                0, 256, 1, {2, 1, 1});
     // Copy origin out of range
-    TestT2BCopy(utils::Expectation::Failure, source, maxMipmapLevel - 2, {2, 0, 0}, destination, 0,
-                256, 1, {2, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, maxMipmapLevel - 2, {2, 0, 0},
+                destination, 0, 256, 1, {2, 1, 1});
     // Copy size out of range
-    TestT2BCopy(utils::Expectation::Failure, source, maxMipmapLevel - 2, {1, 0, 0}, destination, 0,
-                256, 1, {2, 1, 1});
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, maxMipmapLevel - 2, {1, 0, 0},
+                destination, 0, 256, 1, {2, 1, 1});
 }
 
 // Test copy from only the depth aspect of a texture
@@ -1522,13 +1536,13 @@ TEST_F(CopyCommandTest_T2B, CopyFromDepthAspect) {
                 Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
             // Test it is valid to copy the depth aspect of these depth/stencil texture
-            TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                        {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+            TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                        256, 16, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
 
-            if (utils::IsDepthOnlyFormat(format)) {
+            if (dawn::utils::IsDepthOnlyFormat(format)) {
                 // Test "all" of a depth texture which is only the depth aspect.
-                TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256,
-                            16, {16, 16, 1}, wgpu::TextureAspect::All);
+                TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            256, 16, {16, 16, 1}, wgpu::TextureAspect::All);
             }
         }
     }
@@ -1543,8 +1557,8 @@ TEST_F(CopyCommandTest_T2B, CopyFromDepthAspect) {
                 Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
             // Test it is invalid to copy from the depth aspect of these depth/stencil texture
-            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                        {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        256, 16, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
         }
     }
 
@@ -1553,8 +1567,8 @@ TEST_F(CopyCommandTest_T2B, CopyFromDepthAspect) {
                                                wgpu::TextureUsage::CopySrc);
 
         // Test it is invalid to copy from the depth aspect of a color texture
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256,
+                    16, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
     }
 }
 
@@ -1563,7 +1577,7 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
     uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1, wgpu::TextureFormat::R8Uint);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
-    for (wgpu::TextureFormat format : utils::kStencilFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kStencilFormats) {
         {
             wgpu::Texture source =
                 Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
@@ -1571,14 +1585,14 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
             // TODO(dawn:666): Test "all" of Stencil8 format when it's implemented
 
             // Test it is valid to copy from the stencil aspect of a depth/stencil texture
-            TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                        {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                        256, 16, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
 
             // Test it is invalid if the buffer is too small
             wgpu::Buffer destinationSmall =
                 CreateBuffer(bufferSize - 1, wgpu::BufferUsage::CopyDst);
-            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destinationSmall, 0, 256,
-                        16, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destinationSmall,
+                        0, 256, 16, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
         }
 
         // A copy fails when using a depth/stencil texture, and the entire subresource isn't
@@ -1587,11 +1601,11 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
             wgpu::Texture source =
                 Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
-            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 15,
-                        {15, 15, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        256, 15, {15, 15, 1}, wgpu::TextureAspect::StencilOnly);
 
-            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
-                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        256, 1, {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
         }
 
         // Non-zero mip: A copy fails when using a depth/stencil texture, and the entire
@@ -1601,15 +1615,15 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
                 Create2DTexture(16, 16, 2, 1, format, wgpu::TextureUsage::CopySrc);
 
             // Whole mip is success
-            TestT2BCopy(utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0, 256, 8,
-                        {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0,
+                        256, 8, {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
 
             // Partial mip fails
-            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 7,
-                        {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0,
+                        256, 7, {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
 
-            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 1,
-                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0,
+                        256, 1, {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
         }
 
         // Non-zero mip, non-pow-2: A copy fails when using a depth/stencil texture, and the
@@ -1619,15 +1633,15 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
                 Create2DTexture(17, 17, 2, 1, format, wgpu::TextureUsage::CopySrc);
 
             // Whole mip is success
-            TestT2BCopy(utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0, 256, 8,
-                        {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0,
+                        256, 8, {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
 
             // Partial mip fails
-            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 7,
-                        {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0,
+                        256, 7, {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
 
-            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 1,
-                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+            TestT2BCopy(dawn::utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0,
+                        256, 1, {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
         }
     }
 
@@ -1636,16 +1650,16 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
             Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::R8Uint, wgpu::TextureUsage::CopySrc);
 
         // Test it is invalid to copy from the stencil aspect of a color texture
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256,
+                    16, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
     }
     {
         wgpu::Texture source = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::Depth24Plus,
                                                wgpu::TextureUsage::CopySrc);
 
         // Test it is invalid to copy from the stencil aspect of a depth-only texture
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256,
+                    16, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
     }
 }
 
@@ -1656,10 +1670,10 @@ TEST_F(CopyCommandTest_T2B, RequiredBytesInCopyOverflow) {
         Create2DTexture(1, 1, 1, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
 
     // Success
-    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, (1 << 31),
+    TestT2BCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, (1 << 31),
                 (1 << 31), {1, 1, 1});
     // Failure because bytesPerImage * (depth - 1) overflows
-    TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, (1 << 31),
+    TestT2BCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, (1 << 31),
                 (1 << 31), {1, 1, 16});
 }
 
@@ -1698,57 +1712,57 @@ TEST_F(CopyCommandTest_T2T, Success) {
     // Different copies, including some that touch the OOB condition
     {
         // Copy a region along top left boundary
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {4, 4, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {4, 4, 1});
 
         // Copy entire texture
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1});
 
         // Copy a region along bottom right boundary
-        TestT2TCopy(utils::Expectation::Success, source, 0, {8, 8, 0}, destination, 0, {8, 8, 0},
-                    {8, 8, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {8, 8, 0}, destination, 0,
+                    {8, 8, 0}, {8, 8, 1});
 
         // Copy region into mip
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 2, {0, 0, 0},
-                    {4, 4, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 2,
+                    {0, 0, 0}, {4, 4, 1});
 
         // Copy mip into region
-        TestT2TCopy(utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {4, 4, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {4, 4, 1});
 
         // Copy between slices
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0, {0, 0, 1},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+                    {0, 0, 1}, {16, 16, 1});
 
         // Copy multiple slices (srcImageCopyTexture.arrayLayer + copySize.depthOrArrayLayers ==
         // srcImageCopyTexture.texture.arrayLayerCount)
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0, {0, 0, 0},
-                    {16, 16, 2});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0,
+                    {0, 0, 0}, {16, 16, 2});
 
         // Copy multiple slices (dstImageCopyTexture.arrayLayer + copySize.depthOrArrayLayers ==
         // dstImageCopyTexture.texture.arrayLayerCount)
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 2},
-                    {16, 16, 2});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 2}, {16, 16, 2});
     }
 
     // Empty copies are valid
     {
         // An empty copy
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {0, 0, 1});
 
         // An empty copy with depth = 0
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {0, 0, 0});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {0, 0, 0});
 
         // An empty copy touching the side of the source texture
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {16, 16, 0},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {16, 16, 0}, {0, 0, 1});
 
         // An empty copy touching the side of the destination texture
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {16, 16, 0},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {16, 16, 0}, {0, 0, 1});
     }
 }
 
@@ -1759,11 +1773,11 @@ TEST_F(CopyCommandTest_T2T, IncorrectUsage) {
         Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // Incorrect source usage causes failure
-    TestT2TCopy(utils::Expectation::Failure, destination, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                {16, 16, 1});
+    TestT2TCopy(dawn::utils::Expectation::Failure, destination, 0, {0, 0, 0}, destination, 0,
+                {0, 0, 0}, {16, 16, 1});
 
     // Incorrect destination usage causes failure
-    TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, source, 0, {0, 0, 0},
+    TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, source, 0, {0, 0, 0},
                 {16, 16, 1});
 }
 
@@ -1776,80 +1790,80 @@ TEST_F(CopyCommandTest_T2T, OutOfBounds) {
     // OOB on source
     {
         // x + width overflows
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {1, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {1, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1});
 
         // y + height overflows
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 1, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 1, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1});
 
         // non-zero mip overflows
-        TestT2TCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {9, 9, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {9, 9, 1});
 
         // arrayLayer + depth OOB
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 3}, destination, 0, {0, 0, 0},
-                    {16, 16, 2});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 3}, destination, 0,
+                    {0, 0, 0}, {16, 16, 2});
 
         // empty copy on non-existent mip fails
-        TestT2TCopy(utils::Expectation::Failure, source, 6, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 6, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {0, 0, 1});
 
         // empty copy from non-existent slice fails
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 4}, destination, 0, {0, 0, 0},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 4}, destination, 0,
+                    {0, 0, 0}, {0, 0, 1});
     }
 
     // OOB on destination
     {
         // x + width overflows
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {1, 0, 0},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {1, 0, 0}, {16, 16, 1});
 
         // y + height overflows
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 1, 0},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 1, 0}, {16, 16, 1});
 
         // non-zero mip overflows
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 1, {0, 0, 0},
-                    {9, 9, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 1,
+                    {0, 0, 0}, {9, 9, 1});
 
         // arrayLayer + depth OOB
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 3},
-                    {16, 16, 2});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 3}, {16, 16, 2});
 
         // empty copy on non-existent mip fails
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 6, {0, 0, 0},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 6,
+                    {0, 0, 0}, {0, 0, 1});
 
         // empty copy on non-existent slice fails
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 4},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 4}, {0, 0, 1});
     }
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureDepthStencil) {
-    for (wgpu::TextureFormat format : utils::kDepthAndStencilFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kDepthAndStencilFormats) {
         wgpu::Texture source = Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
         wgpu::Texture destination =
             Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
         // Success when entire depth stencil subresource is copied
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1});
 
         // Failure when depth stencil subresource is partially copied
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {15, 15, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {15, 15, 1});
 
         // Failure when selecting the depth aspect (not all)
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
 
         // Failure when selecting the stencil aspect (not all)
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
     }
 }
 
@@ -1864,25 +1878,25 @@ TEST_F(CopyCommandTest_T2T, 2DTextureDepthOnly) {
             Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
         // Success when entire subresource is copied
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1});
 
         // Failure when depth subresource is partially copied
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {15, 15, 1});
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {15, 15, 1});
 
         // Success when selecting the depth aspect (not all)
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
 
         // Failure when selecting the stencil aspect (not all)
-        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
     }
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureArrayDepthStencil) {
-    for (wgpu::TextureFormat format : utils::kDepthAndStencilFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kDepthAndStencilFormats) {
         {
             wgpu::Texture source =
                 Create2DTexture(16, 16, 1, 3, format, wgpu::TextureUsage::CopySrc);
@@ -1890,7 +1904,7 @@ TEST_F(CopyCommandTest_T2T, 2DTextureArrayDepthStencil) {
                 Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
             // Success when entire depth stencil subresource (layer) is the copy source
-            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+            TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
                         {0, 0, 0}, {16, 16, 1});
         }
 
@@ -1901,7 +1915,7 @@ TEST_F(CopyCommandTest_T2T, 2DTextureArrayDepthStencil) {
                 Create2DTexture(16, 16, 1, 3, format, wgpu::TextureUsage::CopyDst);
 
             // Success when entire depth stencil subresource (layer) is the copy destination
-            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+            TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                         {0, 0, 1}, {16, 16, 1});
         }
 
@@ -1912,11 +1926,11 @@ TEST_F(CopyCommandTest_T2T, 2DTextureArrayDepthStencil) {
                 Create2DTexture(16, 16, 1, 3, format, wgpu::TextureUsage::CopyDst);
 
             // Success when src and dst are an entire depth stencil subresource (layer)
-            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0,
+            TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0,
                         {0, 0, 1}, {16, 16, 1});
 
             // Success when src and dst are an array of entire depth stencil subresources
-            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+            TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
                         {0, 0, 0}, {16, 16, 2});
         }
     }
@@ -1929,7 +1943,7 @@ TEST_F(CopyCommandTest_T2T, FormatsMismatch) {
         Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // Failure when formats don't match
-    TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+    TestT2TCopy(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
                 {0, 0, 1});
 }
 
@@ -1945,8 +1959,8 @@ TEST_F(CopyCommandTest_T2T, SrgbFormatsCompatibility) {
             Create2DTexture(16, 16, 5, 2, dstTextureFormat, wgpu::TextureUsage::CopyDst);
 
         // Failure when formats don't match
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                    {0, 0, 1});
+        TestT2TCopy(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                    {0, 0, 0}, {0, 0, 1});
     }
 }
 
@@ -1962,18 +1976,18 @@ TEST_F(CopyCommandTest_T2T, MultisampledCopies) {
 
     // Success when entire multisampled subresource is copied
     {
-        TestT2TCopy(utils::Expectation::Success, sourceMultiSampled4x, 0, {0, 0, 0},
+        TestT2TCopy(dawn::utils::Expectation::Success, sourceMultiSampled4x, 0, {0, 0, 0},
                     destinationMultiSampled4x, 0, {0, 0, 0}, {16, 16, 1});
     }
 
     // Failures
     {
         // An empty copy with mismatched samples fails
-        TestT2TCopy(utils::Expectation::Failure, sourceMultiSampled1x, 0, {0, 0, 0},
+        TestT2TCopy(dawn::utils::Expectation::Failure, sourceMultiSampled1x, 0, {0, 0, 0},
                     destinationMultiSampled4x, 0, {0, 0, 0}, {0, 0, 1});
 
         // A copy fails when samples are greater than 1, and entire subresource isn't copied
-        TestT2TCopy(utils::Expectation::Failure, sourceMultiSampled4x, 0, {0, 0, 0},
+        TestT2TCopy(dawn::utils::Expectation::Failure, sourceMultiSampled4x, 0, {0, 0, 0},
                     destinationMultiSampled4x, 0, {0, 0, 0}, {15, 15, 1});
     }
 }
@@ -1986,20 +2000,20 @@ TEST_F(CopyCommandTest_T2T, CopyToMipmapOfNonSquareTexture) {
     wgpu::Texture destination = Create2DTexture(
         4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
     // Copy to top level mip map
-    TestT2TCopy(utils::Expectation::Success, source, maxMipmapLevel - 1, {0, 0, 0}, destination,
-                maxMipmapLevel - 1, {0, 0, 0}, {1, 1, 1});
+    TestT2TCopy(dawn::utils::Expectation::Success, source, maxMipmapLevel - 1, {0, 0, 0},
+                destination, maxMipmapLevel - 1, {0, 0, 0}, {1, 1, 1});
     // Copy to high level mip map
-    TestT2TCopy(utils::Expectation::Success, source, maxMipmapLevel - 2, {0, 0, 0}, destination,
-                maxMipmapLevel - 2, {0, 0, 0}, {2, 1, 1});
+    TestT2TCopy(dawn::utils::Expectation::Success, source, maxMipmapLevel - 2, {0, 0, 0},
+                destination, maxMipmapLevel - 2, {0, 0, 0}, {2, 1, 1});
     // Mip level out of range
-    TestT2TCopy(utils::Expectation::Failure, source, maxMipmapLevel, {0, 0, 0}, destination,
+    TestT2TCopy(dawn::utils::Expectation::Failure, source, maxMipmapLevel, {0, 0, 0}, destination,
                 maxMipmapLevel, {0, 0, 0}, {2, 1, 1});
     // Copy origin out of range
-    TestT2TCopy(utils::Expectation::Failure, source, maxMipmapLevel - 2, {2, 0, 0}, destination,
-                maxMipmapLevel - 2, {2, 0, 0}, {2, 1, 1});
+    TestT2TCopy(dawn::utils::Expectation::Failure, source, maxMipmapLevel - 2, {2, 0, 0},
+                destination, maxMipmapLevel - 2, {2, 0, 0}, {2, 1, 1});
     // Copy size out of range
-    TestT2TCopy(utils::Expectation::Failure, source, maxMipmapLevel - 2, {1, 0, 0}, destination,
-                maxMipmapLevel - 2, {0, 0, 0}, {2, 1, 1});
+    TestT2TCopy(dawn::utils::Expectation::Failure, source, maxMipmapLevel - 2, {1, 0, 0},
+                destination, maxMipmapLevel - 2, {0, 0, 0}, {2, 1, 1});
 }
 
 // Test copy within the same texture
@@ -2016,15 +2030,15 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
         // copyExtent.z == 1
         {
             constexpr uint32_t kCopyArrayLayerCount = 1;
-            TestT2TCopy(utils::Expectation::Failure, texture, 0, {0, 0, kBaseArrayLayer}, texture,
-                        0, {2, 2, kBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
+            TestT2TCopy(dawn::utils::Expectation::Failure, texture, 0, {0, 0, kBaseArrayLayer},
+                        texture, 0, {2, 2, kBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
         }
 
         // copyExtent.z > 1
         {
             constexpr uint32_t kCopyArrayLayerCount = 2;
-            TestT2TCopy(utils::Expectation::Failure, texture, 0, {0, 0, kBaseArrayLayer}, texture,
-                        0, {2, 2, kBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
+            TestT2TCopy(dawn::utils::Expectation::Failure, texture, 0, {0, 0, kBaseArrayLayer},
+                        texture, 0, {2, 2, kBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
         }
     }
 
@@ -2038,7 +2052,7 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
             constexpr uint32_t kSrcBaseArrayLayer = 0;
             constexpr uint32_t kDstBaseArrayLayer = kSrcBaseArrayLayer + kCopyArrayLayerCount;
 
-            TestT2TCopy(utils::Expectation::Success, texture, 0, {0, 0, kSrcBaseArrayLayer},
+            TestT2TCopy(dawn::utils::Expectation::Success, texture, 0, {0, 0, kSrcBaseArrayLayer},
                         texture, 0, {0, 0, kDstBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
         }
 
@@ -2046,7 +2060,7 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
         {
             constexpr uint32_t kSrcBaseArrayLayer = 2;
             constexpr uint32_t kDstBaseArrayLayer = kSrcBaseArrayLayer - kCopyArrayLayerCount;
-            TestT2TCopy(utils::Expectation::Success, texture, 0, {0, 0, kSrcBaseArrayLayer},
+            TestT2TCopy(dawn::utils::Expectation::Success, texture, 0, {0, 0, kSrcBaseArrayLayer},
                         texture, 0, {0, 0, kDstBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
         }
     }
@@ -2059,8 +2073,8 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
         // Copy one slice
         {
             constexpr uint32_t kCopyArrayLayerCount = 1;
-            TestT2TCopy(utils::Expectation::Success, texture, kSrcMipLevel, {0, 0, 0}, texture,
-                        kDstMipLevel, {1, 1, 0}, {1, 1, kCopyArrayLayerCount});
+            TestT2TCopy(dawn::utils::Expectation::Success, texture, kSrcMipLevel, {0, 0, 0},
+                        texture, kDstMipLevel, {1, 1, 0}, {1, 1, kCopyArrayLayerCount});
         }
 
         // The base array layer of the copy source is equal to that of the copy destination.
@@ -2068,8 +2082,8 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
             constexpr uint32_t kCopyArrayLayerCount = 2;
             constexpr uint32_t kBaseArrayLayer = 0;
 
-            TestT2TCopy(utils::Expectation::Success, texture, kSrcMipLevel, {0, 0, kBaseArrayLayer},
-                        texture, kDstMipLevel, {1, 1, kBaseArrayLayer},
+            TestT2TCopy(dawn::utils::Expectation::Success, texture, kSrcMipLevel,
+                        {0, 0, kBaseArrayLayer}, texture, kDstMipLevel, {1, 1, kBaseArrayLayer},
                         {1, 1, kCopyArrayLayerCount});
         }
 
@@ -2084,7 +2098,7 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
 
             constexpr wgpu::Extent3D kCopyExtent = {1, 1, kCopyArrayLayerCount};
 
-            TestT2TCopy(utils::Expectation::Success, texture, kSrcMipLevel,
+            TestT2TCopy(dawn::utils::Expectation::Success, texture, kSrcMipLevel,
                         {0, 0, kSrcBaseArrayLayer}, texture, kDstMipLevel,
                         {0, 0, kDstBaseArrayLayer}, kCopyExtent);
         }
@@ -2103,12 +2117,12 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
 
         const wgpu::Origin3D srcOrigin = {0, 0, kMinBaseArrayLayer};
         const wgpu::Origin3D dstOrigin = {4, 4, kMaxBaseArrayLayer};
-        TestT2TCopy(utils::Expectation::Failure, texture, kMipmapLevel, srcOrigin, texture,
+        TestT2TCopy(dawn::utils::Expectation::Failure, texture, kMipmapLevel, srcOrigin, texture,
                     kMipmapLevel, dstOrigin, kCopyExtent);
     }
 
     // Copy between different mipmap levels and array slices is allowed.
-    TestT2TCopy(utils::Expectation::Success, texture, 0, {0, 0, 1}, texture, 1, {1, 1, 0},
+    TestT2TCopy(dawn::utils::Expectation::Success, texture, 0, {0, 0, 1}, texture, 1, {1, 1, 0},
                 {1, 1, 1});
 
     // Copy between 3D texture of both overlapping depth ranges is not allowed.
@@ -2122,8 +2136,8 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
         constexpr wgpu::Origin3D kDstOrigin = {0, 0, 1};
         constexpr wgpu::Extent3D kCopyExtent = {4, 4, 2};
 
-        TestT2TCopy(utils::Expectation::Failure, texture3D, kMipmapLevel, kSrcOrigin, texture3D,
-                    kMipmapLevel, kDstOrigin, kCopyExtent);
+        TestT2TCopy(dawn::utils::Expectation::Failure, texture3D, kMipmapLevel, kSrcOrigin,
+                    texture3D, kMipmapLevel, kDstOrigin, kCopyExtent);
     }
 
     // Copy between 3D texture of both non-overlapping depth ranges is not allowed.
@@ -2137,8 +2151,8 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
         constexpr wgpu::Origin3D kDstOrigin = {0, 0, 2};
         constexpr wgpu::Extent3D kCopyExtent = {4, 4, 1};
 
-        TestT2TCopy(utils::Expectation::Failure, texture3D, kMipmapLevel, kSrcOrigin, texture3D,
-                    kMipmapLevel, kDstOrigin, kCopyExtent);
+        TestT2TCopy(dawn::utils::Expectation::Failure, texture3D, kMipmapLevel, kSrcOrigin,
+                    texture3D, kMipmapLevel, kDstOrigin, kCopyExtent);
     }
 }
 
@@ -2168,8 +2182,8 @@ class CopyCommandTest_CompressedTextureFormats : public CopyCommandTest {
 
     // By default, we use a 4x4 tiling of the format block size.
     wgpu::Texture Create2DTexture(wgpu::TextureFormat format) {
-        uint32_t width = utils::GetTextureFormatBlockWidth(format) * 4;
-        uint32_t height = utils::GetTextureFormatBlockHeight(format) * 4;
+        uint32_t width = dawn::utils::GetTextureFormatBlockWidth(format) * 4;
+        uint32_t height = dawn::utils::GetTextureFormatBlockHeight(format) * 4;
         return Create2DTexture(format, 1, width, height);
     }
 
@@ -2271,23 +2285,23 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, BufferOffset) {
     wgpu::Buffer buffer =
         CreateBuffer(512, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
 
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::Texture texture = Create2DTexture(format);
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
 
         // Valid usages of BufferOffset in B2T and T2B copies with compressed texture formats.
         {
-            uint32_t validBufferOffset = utils::GetTexelBlockSizeInBytes(format);
-            TestBothTBCopies(utils::Expectation::Success, buffer, validBufferOffset, 256, 4,
+            uint32_t validBufferOffset = dawn::utils::GetTexelBlockSizeInBytes(format);
+            TestBothTBCopies(dawn::utils::Expectation::Success, buffer, validBufferOffset, 256, 4,
                              texture, 0, {0, 0, 0}, {blockWidth, blockHeight, 1});
         }
 
         // Failures on invalid bufferOffset.
         {
-            uint32_t kInvalidBufferOffset = utils::GetTexelBlockSizeInBytes(format) / 2;
-            TestBothTBCopies(utils::Expectation::Failure, buffer, kInvalidBufferOffset, 256, 4,
-                             texture, 0, {0, 0, 0}, {blockWidth, blockHeight, 1});
+            uint32_t kInvalidBufferOffset = dawn::utils::GetTexelBlockSizeInBytes(format) / 2;
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, kInvalidBufferOffset, 256,
+                             4, texture, 0, {0, 0, 0}, {blockWidth, blockHeight, 1});
         }
     }
 }
@@ -2303,12 +2317,12 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, BytesPerRow) {
     // hence will need to be aligned.
     constexpr uint32_t kInvalidBytesPerRow = 320;
 
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         // Compute the test width and height such that the smallest BytesPerRow is always equal to
         // 320. We choose 320 because it isn't divisible by 256 and hence needs to be aligned.
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
-        uint32_t blockByteSize = utils::GetTexelBlockSizeInBytes(format);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockByteSize = dawn::utils::GetTexelBlockSizeInBytes(format);
         uint32_t testWidth = kInvalidBytesPerRow * blockWidth / blockByteSize;
         uint32_t testHeight = kInvalidBytesPerRow * blockHeight / blockByteSize;
         wgpu::Texture texture = Create2DTexture(format, 1, testWidth, testHeight);
@@ -2316,21 +2330,21 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, BytesPerRow) {
         // Failures on the BytesPerRow that is not large enough.
         {
             constexpr uint32_t kSmallBytesPerRow = 256;
-            TestBothTBCopies(utils::Expectation::Failure, buffer, 0, kSmallBytesPerRow, 4, texture,
-                             0, {0, 0, 0}, {testWidth, blockHeight, 1});
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, 0, kSmallBytesPerRow, 4,
+                             texture, 0, {0, 0, 0}, {testWidth, blockHeight, 1});
         }
 
         // Test it is not valid to use a BytesPerRow that is not a multiple of 256.
         {
-            TestBothTBCopies(utils::Expectation::Failure, buffer, 0, kInvalidBytesPerRow, 4,
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, 0, kInvalidBytesPerRow, 4,
                              texture, 0, {0, 0, 0}, {testWidth, blockHeight, 1});
         }
 
         // Test the smallest valid BytesPerRow should work.
         {
-            uint32_t smallestValidBytesPerRow = Align(kInvalidBytesPerRow, 256);
-            TestBothTBCopies(utils::Expectation::Success, buffer, 0, smallestValidBytesPerRow, 4,
-                             texture, 0, {0, 0, 0}, {testWidth, blockHeight, 1});
+            uint32_t smallestValidBytesPerRow = dawn::Align(kInvalidBytesPerRow, 256);
+            TestBothTBCopies(dawn::utils::Expectation::Success, buffer, 0, smallestValidBytesPerRow,
+                             4, texture, 0, {0, 0, 0}, {testWidth, blockHeight, 1});
         }
     }
 }
@@ -2340,28 +2354,29 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, RowsPerImage) {
     wgpu::Buffer buffer =
         CreateBuffer(1024, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
 
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::Texture texture = Create2DTexture(format);
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
 
         // Valid usages of rowsPerImage in B2T and T2B copies with compressed texture formats.
         {
             constexpr uint32_t kValidRowsPerImage = 5;
-            TestBothTBCopies(utils::Expectation::Success, buffer, 0, 256, kValidRowsPerImage,
+            TestBothTBCopies(dawn::utils::Expectation::Success, buffer, 0, 256, kValidRowsPerImage,
                              texture, 0, {0, 0, 0}, {blockWidth, blockHeight * 4, 1});
         }
         {
             constexpr uint32_t kValidRowsPerImage = 4;
-            TestBothTBCopies(utils::Expectation::Success, buffer, 0, 256, kValidRowsPerImage,
+            TestBothTBCopies(dawn::utils::Expectation::Success, buffer, 0, 256, kValidRowsPerImage,
                              texture, 0, {0, 0, 0}, {blockWidth, blockHeight * 4, 1});
         }
 
         // rowsPerImage is smaller than height.
         {
             constexpr uint32_t kInvalidRowsPerImage = 3;
-            TestBothTBCopies(utils::Expectation::Failure, buffer, 0, 256, kInvalidRowsPerImage,
-                             texture, 0, {0, 0, 0}, {blockWidth, blockHeight * 5, 1});
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, 0, 256,
+                             kInvalidRowsPerImage, texture, 0, {0, 0, 0},
+                             {blockWidth, blockHeight * 5, 1});
         }
     }
 }
@@ -2373,19 +2388,19 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageOffset) {
     wgpu::Buffer buffer =
         CreateBuffer(512, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
 
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::Texture texture = Create2DTexture(format);
         wgpu::Texture texture2 = Create2DTexture(format);
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
 
         wgpu::Origin3D smallestValidOrigin3D = {blockWidth, blockHeight, 0};
 
         // Valid usages of ImageOffset in B2T, T2B and T2T copies with compressed texture formats.
         {
-            TestBothTBCopies(utils::Expectation::Success, buffer, 0, 256, 4, texture, 0,
+            TestBothTBCopies(dawn::utils::Expectation::Success, buffer, 0, 256, 4, texture, 0,
                              smallestValidOrigin3D, {blockWidth, blockHeight, 1});
-            TestBothT2TCopies(utils::Expectation::Success, texture, 0, {0, 0, 0}, texture2, 0,
+            TestBothT2TCopies(dawn::utils::Expectation::Success, texture, 0, {0, 0, 0}, texture2, 0,
                               smallestValidOrigin3D, {blockWidth, blockHeight, 1});
         }
 
@@ -2393,20 +2408,20 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageOffset) {
         {
             wgpu::Origin3D invalidOrigin3D = {smallestValidOrigin3D.x - 1, smallestValidOrigin3D.y,
                                               0};
-            TestBothTBCopies(utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0,
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0,
                              invalidOrigin3D, {blockWidth, blockHeight, 1});
-            TestBothT2TCopies(utils::Expectation::Failure, texture, 0, invalidOrigin3D, texture2, 0,
-                              {0, 0, 0}, {blockWidth, blockHeight, 1});
+            TestBothT2TCopies(dawn::utils::Expectation::Failure, texture, 0, invalidOrigin3D,
+                              texture2, 0, {0, 0, 0}, {blockWidth, blockHeight, 1});
         }
 
         // Failures on invalid ImageOffset.y.
         {
             wgpu::Origin3D invalidOrigin3D = {smallestValidOrigin3D.x, smallestValidOrigin3D.y - 1,
                                               0};
-            TestBothTBCopies(utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0,
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0,
                              invalidOrigin3D, {blockWidth, blockHeight, 1});
-            TestBothT2TCopies(utils::Expectation::Failure, texture, 0, invalidOrigin3D, texture2, 0,
-                              {0, 0, 0}, {blockWidth, blockHeight, 1});
+            TestBothT2TCopies(dawn::utils::Expectation::Failure, texture, 0, invalidOrigin3D,
+                              texture2, 0, {0, 0, 0}, {blockWidth, blockHeight, 1});
         }
     }
 }
@@ -2425,9 +2440,9 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageExtent) {
     // the mipmaps.
     constexpr uint32_t kBlockPerDim = 13;
 
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
         uint32_t testWidth = blockWidth * kBlockPerDim;
         uint32_t testHeight = blockHeight * kBlockPerDim;
         wgpu::Texture texture = Create2DTexture(format, kMipmapLevels, testWidth, testHeight);
@@ -2437,9 +2452,9 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageExtent) {
 
         // Valid usages of ImageExtent in B2T, T2B and T2T copies with compressed texture formats.
         {
-            TestBothTBCopies(utils::Expectation::Success, buffer, 0, 256, 4, texture, 0, {0, 0, 0},
-                             smallestValidExtent3D);
-            TestBothT2TCopies(utils::Expectation::Success, texture, 0, {0, 0, 0}, texture2, 0,
+            TestBothTBCopies(dawn::utils::Expectation::Success, buffer, 0, 256, 4, texture, 0,
+                             {0, 0, 0}, smallestValidExtent3D);
+            TestBothT2TCopies(dawn::utils::Expectation::Success, texture, 0, {0, 0, 0}, texture2, 0,
                               {0, 0, 0}, smallestValidExtent3D);
         }
 
@@ -2450,19 +2465,19 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageExtent) {
             wgpu::Origin3D testOrigin = {
                 ((testWidth >> kTestMipmapLevel) / blockWidth) * blockWidth,
                 ((testHeight >> kTestMipmapLevel) / blockHeight) * blockHeight, 0};
-            TestBothTBCopies(utils::Expectation::Success, buffer, 0, 256, 4, texture,
+            TestBothTBCopies(dawn::utils::Expectation::Success, buffer, 0, 256, 4, texture,
                              kTestMipmapLevel, testOrigin, smallestValidExtent3D);
-            TestBothT2TCopies(utils::Expectation::Success, texture, kTestMipmapLevel, testOrigin,
-                              texture2, 0, {0, 0, 0}, smallestValidExtent3D);
+            TestBothT2TCopies(dawn::utils::Expectation::Success, texture, kTestMipmapLevel,
+                              testOrigin, texture2, 0, {0, 0, 0}, smallestValidExtent3D);
         }
 
         // Failures on invalid ImageExtent.x.
         {
             wgpu::Extent3D inValidExtent3D = {smallestValidExtent3D.width - 1,
                                               smallestValidExtent3D.height, 1};
-            TestBothTBCopies(utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0, {0, 0, 0},
-                             inValidExtent3D);
-            TestBothT2TCopies(utils::Expectation::Failure, texture, 0, {0, 0, 0}, texture2, 0,
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0,
+                             {0, 0, 0}, inValidExtent3D);
+            TestBothT2TCopies(dawn::utils::Expectation::Failure, texture, 0, {0, 0, 0}, texture2, 0,
                               {0, 0, 0}, inValidExtent3D);
         }
 
@@ -2470,9 +2485,9 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageExtent) {
         {
             wgpu::Extent3D inValidExtent3D = {smallestValidExtent3D.width,
                                               smallestValidExtent3D.height - 1, 1};
-            TestBothTBCopies(utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0, {0, 0, 0},
-                             inValidExtent3D);
-            TestBothT2TCopies(utils::Expectation::Failure, texture, 0, {0, 0, 0}, texture2, 0,
+            TestBothTBCopies(dawn::utils::Expectation::Failure, buffer, 0, 256, 4, texture, 0,
+                             {0, 0, 0}, inValidExtent3D);
+            TestBothT2TCopies(dawn::utils::Expectation::Failure, texture, 0, {0, 0, 0}, texture2, 0,
                               {0, 0, 0}, inValidExtent3D);
         }
     }
@@ -2482,9 +2497,9 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageExtent) {
 TEST_F(CopyCommandTest_CompressedTextureFormats, CopyToMultipleArrayLayers) {
     constexpr uint32_t kWidthMultiplier = 3;
     constexpr uint32_t kHeightMultiplier = 4;
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
         uint32_t testWidth = kWidthMultiplier * blockWidth;
         uint32_t testHeight = kHeightMultiplier * blockHeight;
         wgpu::Texture texture = CopyCommandTest::Create2DTexture(
@@ -2537,8 +2552,8 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, SrgbFormatCompatibility) {
     constexpr uint32_t kBlockPerDim = 2;
     constexpr uint32_t kMipmapLevels = 1;
     for (wgpu::TextureFormat srcFormat : srcFormats) {
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(srcFormat);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(srcFormat);
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(srcFormat);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(srcFormat);
         uint32_t testWidth = blockWidth * kBlockPerDim;
         uint32_t testHeight = blockHeight * kBlockPerDim;
         wgpu::Texture texture = Create2DTexture(srcFormat, kMipmapLevels, testWidth, testHeight);
@@ -2546,7 +2561,7 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, SrgbFormatCompatibility) {
                                                  testWidth, testHeight);
         wgpu::Extent3D extent3D = {testWidth, testHeight, 1};
 
-        TestBothT2TCopies(utils::Expectation::Success, texture, 0, {0, 0, 0}, texture2, 0,
+        TestBothT2TCopies(dawn::utils::Expectation::Success, texture, 0, {0, 0, 0}, texture2, 0,
                           {0, 0, 0}, extent3D);
     }
 }
@@ -2652,3 +2667,6 @@ TEST_F(CopyCommandTest_ClearBuffer, BuffersInErrorState) {
     encoder.ClearBuffer(errorBuffer, 0, 4);
     ASSERT_DEVICE_ERROR(encoder.Finish());
 }
+
+}  // anonymous namespace
+}  // namespace dawn

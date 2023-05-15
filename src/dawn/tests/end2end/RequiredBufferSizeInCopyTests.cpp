@@ -19,13 +19,15 @@
 #include "dawn/utils/TestUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 constexpr static wgpu::Extent3D kCopySize = {1, 1};
 constexpr static uint64_t kOffset = 0;
 constexpr static uint64_t kBytesPerRow = 256;
 constexpr static wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
 constexpr static uint32_t kBytesPerBlock = 4;
 
-namespace {
 enum class Type { B2TCopy, T2BCopy };
 
 std::ostream& operator<<(std::ostream& o, Type copyType) {
@@ -48,7 +50,6 @@ DAWN_TEST_PARAM_STRUCT(RequiredBufferSizeInCopyTestsParams,
                        TextureDimension,
                        CopyDepth,
                        ExtraRowsPerImage);
-}  // namespace
 
 // Tests in this file are used to expose an error on D3D12 about required minimum buffer size.
 // See detailed bug reports at crbug.com/dawn/1278, 1288, 1289.
@@ -97,9 +98,9 @@ class RequiredBufferSizeInCopyTests
         wgpu::Texture texture = device.CreateTexture(&texDesc);
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
         wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(buffer, kOffset, kBytesPerRow, rowsPerImage);
+            dawn::utils::CreateImageCopyBuffer(buffer, kOffset, kBytesPerRow, rowsPerImage);
 
         // Initialize copied data and set expected data for buffer and texture.
         ASSERT(sizeof(uint32_t) == kBytesPerBlock);
@@ -122,7 +123,7 @@ class RequiredBufferSizeInCopyTests
         switch (GetParam().mType) {
             case Type::T2BCopy: {
                 wgpu::TextureDataLayout textureDataLayout =
-                    utils::CreateTextureDataLayout(kOffset, kBytesPerRow, rowsPerImage);
+                    dawn::utils::CreateTextureDataLayout(kOffset, kBytesPerRow, rowsPerImage);
 
                 queue.WriteTexture(&imageCopyTexture, data.data(), bufferSize, &textureDataLayout,
                                    &copySize);
@@ -193,7 +194,7 @@ TEST_P(RequiredBufferSizeInCopyTests, MinimumBufferSize) {
     const uint64_t rowsPerImage = extraRowsPerImage + copySize.height;
 
     uint64_t size =
-        kOffset + utils::RequiredBytesInCopy(kBytesPerRow, rowsPerImage, copySize, kFormat);
+        kOffset + dawn::utils::RequiredBytesInCopy(kBytesPerRow, rowsPerImage, copySize, kFormat);
     DoTest(size, copySize, rowsPerImage);
 }
 
@@ -205,3 +206,6 @@ DAWN_INSTANTIATE_TEST_P(
     {wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D},
     {2u, 1u},
     {1u, 0u});
+
+}  // anonymous namespace
+}  // namespace dawn

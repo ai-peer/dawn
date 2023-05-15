@@ -22,6 +22,9 @@
 
 #include "GLFW/glfw3.h"
 
+namespace dawn {
+namespace {
+
 class SwapChainValidationTests : public DawnTest {
   public:
     void SetUp() override {
@@ -79,7 +82,7 @@ class SwapChainValidationTests : public DawnTest {
 
   private:
     void CheckTextureView(wgpu::TextureView view, bool errorAtFinish, bool errorAtSubmit) {
-        utils::ComboRenderPassDescriptor renderPassDesc({view});
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc({view});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
@@ -216,12 +219,12 @@ TEST_P(SwapChainValidationTests, ViewDestroyedAfterPresent) {
 
 // Check that returned view is of the current format / usage / dimension / size / sample count
 TEST_P(SwapChainValidationTests, ReturnedViewCharacteristics) {
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
-    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
-    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+    pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         struct FragmentOut {
             @location(0) target0 : vec4f,
             @location(1) target1 : f32,
@@ -256,7 +259,7 @@ TEST_P(SwapChainValidationTests, ReturnedViewCharacteristics) {
 
     // Validation will also check the dimension of the view is 2D, and it's usage contains
     // RenderAttachment
-    utils::ComboRenderPassDescriptor renderPassDesc({view, secondTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDesc({view, secondTexture.CreateView()});
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
     pass.End();
@@ -266,9 +269,9 @@ TEST_P(SwapChainValidationTests, ReturnedViewCharacteristics) {
 
     // Check that view doesn't have extra formats like Sampled.
     // TODO(cwallez@chromium.org): also check for [Readonly]Storage once that's implemented.
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, view}}));
+    ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bgl, {{0, view}}));
 }
 
 // Check that failing to create a new swapchain doesn't replace the previous one.
@@ -338,3 +341,6 @@ TEST_P(SwapChainValidationTests, CreateSwapChainFailsAfterDevLost) {
 }
 
 DAWN_INSTANTIATE_TEST(SwapChainValidationTests, MetalBackend(), NullBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

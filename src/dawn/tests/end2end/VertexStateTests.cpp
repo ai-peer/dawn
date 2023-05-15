@@ -20,6 +20,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 using wgpu::VertexFormat;
 using wgpu::VertexStepMode;
 
@@ -41,7 +44,7 @@ class VertexStateTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     }
 
     bool ShouldComponentBeDefault(VertexFormat format, int component) {
@@ -67,7 +70,7 @@ class VertexStateTest : public DawnTest {
         VertexFormat format;
         VertexStepMode step;
     };
-    wgpu::RenderPipeline MakeTestPipeline(const utils::ComboVertexState& vertexState,
+    wgpu::RenderPipeline MakeTestPipeline(const dawn::utils::ComboVertexState& vertexState,
                                           int multiplier,
                                           const std::vector<ShaderTestSpec>& testSpec) {
         std::ostringstream vs;
@@ -136,15 +139,15 @@ class VertexStateTest : public DawnTest {
             return output;
         })";
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vs.str().c_str());
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vs.str().c_str());
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment
             fn main(@location(0) color : vec4f) -> @location(0) vec4f {
                 return color;
             }
         )");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.vertex.bufferCount = vertexState.vertexBufferCount;
@@ -166,7 +169,7 @@ class VertexStateTest : public DawnTest {
     };
 
     void MakeVertexState(const std::vector<VertexBufferSpec>& buffers,
-                         utils::ComboVertexState* vertexState) {
+                         dawn::utils::ComboVertexState* vertexState) {
         uint32_t vertexBufferCount = 0;
         uint32_t totalNumAttributes = 0;
         for (const VertexBufferSpec& buffer : buffers) {
@@ -193,9 +196,9 @@ class VertexStateTest : public DawnTest {
 
     template <typename T>
     wgpu::Buffer MakeVertexBuffer(std::vector<T> data) {
-        return utils::CreateBufferFromData(device, data.data(),
-                                           static_cast<uint32_t>(data.size() * sizeof(T)),
-                                           wgpu::BufferUsage::Vertex);
+        return dawn::utils::CreateBufferFromData(device, data.data(),
+                                                 static_cast<uint32_t>(data.size() * sizeof(T)),
+                                                 wgpu::BufferUsage::Vertex);
     }
 
     struct DrawVertexBuffer {
@@ -235,20 +238,20 @@ class VertexStateTest : public DawnTest {
                 unsigned int x = kRTCellOffset + kRTCellSize * triangle;
                 unsigned int y = kRTCellOffset + kRTCellSize * instance;
                 if (triangle < triangles && instance < instances) {
-                    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, x, y);
+                    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, x, y);
                 } else {
-                    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, x, y);
+                    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, x, y);
                 }
             }
         }
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
 };
 
 // Test compilation and usage of the fixture :)
 TEST_P(VertexStateTest, Basic) {
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState(
         {{4 * sizeof(float), VertexStepMode::Vertex, {{0, 0, VertexFormat::Float32x4}}}},
         &vertexState);
@@ -270,7 +273,7 @@ TEST_P(VertexStateTest, ZeroStride) {
     // This test was failing only on AMD but the OpenGL backend doesn't gather PCI info yet.
     DAWN_SUPPRESS_TEST_IF(IsLinux() && IsOpenGL());
 
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState({{0, VertexStepMode::Vertex, {{0, 0, VertexFormat::Float32x4}}}}, &vertexState);
     wgpu::RenderPipeline pipeline =
         MakeTestPipeline(vertexState, 0, {{0, VertexFormat::Float32x4, VertexStepMode::Vertex}});
@@ -291,7 +294,7 @@ TEST_P(VertexStateTest, AttributeExpanding) {
 
     // R32F case
     {
-        utils::ComboVertexState vertexState;
+        dawn::utils::ComboVertexState vertexState;
         MakeVertexState({{0, VertexStepMode::Vertex, {{0, 0, VertexFormat::Float32}}}},
                         &vertexState);
         wgpu::RenderPipeline pipeline =
@@ -302,7 +305,7 @@ TEST_P(VertexStateTest, AttributeExpanding) {
     }
     // RG32F case
     {
-        utils::ComboVertexState vertexState;
+        dawn::utils::ComboVertexState vertexState;
         MakeVertexState({{0, VertexStepMode::Vertex, {{0, 0, VertexFormat::Float32x2}}}},
                         &vertexState);
         wgpu::RenderPipeline pipeline = MakeTestPipeline(
@@ -313,7 +316,7 @@ TEST_P(VertexStateTest, AttributeExpanding) {
     }
     // RGB32F case
     {
-        utils::ComboVertexState vertexState;
+        dawn::utils::ComboVertexState vertexState;
         MakeVertexState({{0, VertexStepMode::Vertex, {{0, 0, VertexFormat::Float32x3}}}},
                         &vertexState);
         wgpu::RenderPipeline pipeline = MakeTestPipeline(
@@ -329,7 +332,7 @@ TEST_P(VertexStateTest, StrideLargerThanAttributes) {
     // This test was failing only on AMD but the OpenGL backend doesn't gather PCI info yet.
     DAWN_SUPPRESS_TEST_IF(IsLinux() && IsOpenGL());
 
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState(
         {{8 * sizeof(float), VertexStepMode::Vertex, {{0, 0, VertexFormat::Float32x4}}}},
         &vertexState);
@@ -348,7 +351,7 @@ TEST_P(VertexStateTest, StrideLargerThanAttributes) {
 
 // Test two attributes at an offset, vertex version
 TEST_P(VertexStateTest, TwoAttributesAtAnOffsetVertex) {
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState(
         {{8 * sizeof(float),
           VertexStepMode::Vertex,
@@ -369,7 +372,7 @@ TEST_P(VertexStateTest, TwoAttributesAtAnOffsetVertex) {
 
 // Test two attributes at an offset, instance version
 TEST_P(VertexStateTest, TwoAttributesAtAnOffsetInstance) {
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState(
         {{8 * sizeof(float),
           VertexStepMode::Instance,
@@ -390,7 +393,7 @@ TEST_P(VertexStateTest, TwoAttributesAtAnOffsetInstance) {
 
 // Test a pure-instance input state
 TEST_P(VertexStateTest, PureInstance) {
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState(
         {{4 * sizeof(float), VertexStepMode::Instance, {{0, 0, VertexFormat::Float32x4}}}},
         &vertexState);
@@ -411,7 +414,7 @@ TEST_P(VertexStateTest, PureInstance) {
 // Test with mixed everything, vertex vs. instance, different stride and offsets
 // different attribute types
 TEST_P(VertexStateTest, MixedEverything) {
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState(
         {{12 * sizeof(float),
           VertexStepMode::Vertex,
@@ -447,7 +450,7 @@ TEST_P(VertexStateTest, MixedEverything) {
 // Test input state is unaffected by unused vertex slot
 TEST_P(VertexStateTest, UnusedVertexSlot) {
     // Instance input state, using slot 1
-    utils::ComboVertexState instanceVertexState;
+    dawn::utils::ComboVertexState instanceVertexState;
     MakeVertexState(
         {{0, VertexStepMode::Vertex, {}},
          {4 * sizeof(float), VertexStepMode::Instance, {{0, 0, VertexFormat::Float32x4}}}},
@@ -488,7 +491,7 @@ TEST_P(VertexStateTest, UnusedVertexSlot) {
 // SetVertexBuffer should be reapplied when the input state changes.
 TEST_P(VertexStateTest, MultiplePipelinesMixedVertexState) {
     // Basic input state, using slot 0
-    utils::ComboVertexState vertexVertexState;
+    dawn::utils::ComboVertexState vertexVertexState;
     MakeVertexState(
         {{4 * sizeof(float), VertexStepMode::Vertex, {{0, 0, VertexFormat::Float32x4}}}},
         &vertexVertexState);
@@ -496,7 +499,7 @@ TEST_P(VertexStateTest, MultiplePipelinesMixedVertexState) {
         vertexVertexState, 1, {{0, VertexFormat::Float32x4, VertexStepMode::Vertex}});
 
     // Instance input state, using slot 1
-    utils::ComboVertexState instanceVertexState;
+    dawn::utils::ComboVertexState instanceVertexState;
     MakeVertexState(
         {{0, VertexStepMode::Instance, {}},
          {4 * sizeof(float), VertexStepMode::Instance, {{0, 0, VertexFormat::Float32x4}}}},
@@ -538,7 +541,7 @@ TEST_P(VertexStateTest, MultiplePipelinesMixedVertexState) {
 TEST_P(VertexStateTest, LastAllowedVertexBuffer) {
     constexpr uint32_t kBufferIndex = kMaxVertexBuffers - 1;
 
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     // All the other vertex buffers default to no attributes
     vertexState.vertexBufferCount = kMaxVertexBuffers;
     vertexState.cVertexBuffers[kBufferIndex].arrayStride = 4 * sizeof(float);
@@ -562,9 +565,9 @@ TEST_P(VertexStateTest, LastAllowedVertexBuffer) {
 
 // Test that overlapping vertex attributes are permitted and load data correctly
 TEST_P(VertexStateTest, OverlappingVertexAttributes) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 3, 3);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 3, 3);
 
-    utils::ComboVertexState vertexState;
+    dawn::utils::ComboVertexState vertexState;
     MakeVertexState({{16,
                       VertexStepMode::Vertex,
                       {
@@ -582,13 +585,13 @@ TEST_P(VertexStateTest, OverlappingVertexAttributes) {
         uint16_t halfs[2];
     };
     static_assert(sizeof(Data) == 16);
-    Data data{1.f, {2u, 3u}, {Float32ToFloat16(4.f), Float32ToFloat16(5.f)}};
+    Data data{1.f, {2u, 3u}, {dawn::Float32ToFloat16(4.f), dawn::Float32ToFloat16(5.f)}};
 
     wgpu::Buffer vertexBuffer =
-        utils::CreateBufferFromData(device, &data, sizeof(data), wgpu::BufferUsage::Vertex);
+        dawn::utils::CreateBufferFromData(device, &data, sizeof(data), wgpu::BufferUsage::Vertex);
 
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
-    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         struct VertexIn {
             @location(0) attr0 : vec4f,
             @location(1) attr1 : vec2u,
@@ -620,7 +623,7 @@ TEST_P(VertexStateTest, OverlappingVertexAttributes) {
             }
             return output;
         })");
-    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+    pipelineDesc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @fragment
         fn main(@location(0) color : vec4f) -> @location(0) vec4f {
             return color;
@@ -641,7 +644,7 @@ TEST_P(VertexStateTest, OverlappingVertexAttributes) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 1, 1);
 }
 
 DAWN_INSTANTIATE_TEST(VertexStateTest,
@@ -656,19 +659,19 @@ class OptionalVertexStateTest : public DawnTest {};
 
 // Test that vertex input is not required in render pipeline descriptor.
 TEST_P(OptionalVertexStateTest, Basic) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 3, 3);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 3, 3);
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -688,7 +691,7 @@ TEST_P(OptionalVertexStateTest, Basic) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 1, 1);
 }
 
 DAWN_INSTANTIATE_TEST(OptionalVertexStateTest,
@@ -698,3 +701,6 @@ DAWN_INSTANTIATE_TEST(OptionalVertexStateTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

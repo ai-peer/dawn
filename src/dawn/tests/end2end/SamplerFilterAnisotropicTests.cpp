@@ -21,24 +21,25 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 constexpr static unsigned int kRTSize = 16;
 
-namespace {
 // MipLevel colors, ordering from base level to high level
 // each mipmap of the texture is having a different color
 // so we can check if the sampler anisotropic filtering is fetching
 // from the correct miplevel
-const std::array<utils::RGBA8, 3> colors = {utils::RGBA8::kRed, utils::RGBA8::kGreen,
-                                            utils::RGBA8::kBlue};
-}  // namespace
+const std::array<dawn::utils::RGBA8, 3> colors = {
+    dawn::utils::RGBA8::kRed, dawn::utils::RGBA8::kGreen, dawn::utils::RGBA8::kBlue};
 
 class SamplerFilterAnisotropicTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
-        mRenderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        mRenderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             struct Uniforms {
                 matrix : mat4x4<f32>
             }
@@ -63,7 +64,7 @@ class SamplerFilterAnisotropicTest : public DawnTest {
                 return output;
             }
         )");
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var sampler0 : sampler;
             @group(0) @binding(1) var texture0 : texture_2d<f32>;
 
@@ -77,7 +78,7 @@ class SamplerFilterAnisotropicTest : public DawnTest {
                 return textureSample(texture0, sampler0, input.uv);
             })");
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cBuffers[0].attributeCount = 2;
@@ -112,7 +113,7 @@ class SamplerFilterAnisotropicTest : public DawnTest {
         descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;
         wgpu::Texture texture = device.CreateTexture(&descriptor);
 
-        const uint32_t rowPixels = kTextureBytesPerRowAlignment / sizeof(utils::RGBA8);
+        const uint32_t rowPixels = kTextureBytesPerRowAlignment / sizeof(dawn::utils::RGBA8);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
@@ -121,16 +122,16 @@ class SamplerFilterAnisotropicTest : public DawnTest {
             const uint32_t texWidth = textureWidthLevel0 >> level;
             const uint32_t texHeight = textureHeightLevel0 >> level;
 
-            const utils::RGBA8 color = colors[level];
+            const dawn::utils::RGBA8 color = colors[level];
 
-            std::vector<utils::RGBA8> data(rowPixels * texHeight, color);
-            wgpu::Buffer stagingBuffer =
-                utils::CreateBufferFromData(device, data.data(), data.size() * sizeof(utils::RGBA8),
-                                            wgpu::BufferUsage::CopySrc);
+            std::vector<dawn::utils::RGBA8> data(rowPixels * texHeight, color);
+            wgpu::Buffer stagingBuffer = dawn::utils::CreateBufferFromData(
+                device, data.data(), data.size() * sizeof(dawn::utils::RGBA8),
+                wgpu::BufferUsage::CopySrc);
             wgpu::ImageCopyBuffer imageCopyBuffer =
-                utils::CreateImageCopyBuffer(stagingBuffer, 0, kTextureBytesPerRowAlignment);
+                dawn::utils::CreateImageCopyBuffer(stagingBuffer, 0, kTextureBytesPerRowAlignment);
             wgpu::ImageCopyTexture imageCopyTexture =
-                utils::CreateImageCopyTexture(texture, level, {0, 0, 0});
+                dawn::utils::CreateImageCopyTexture(texture, level, {0, 0, 0});
             wgpu::Extent3D copySize = {texWidth, texHeight, 1};
             encoder.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &copySize);
         }
@@ -171,10 +172,10 @@ class SamplerFilterAnisotropicTest : public DawnTest {
                                            21.693578720092773,
                                            21.789791107177734,
                                            21.86800193786621};
-        wgpu::Buffer transformBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer transformBuffer = dawn::utils::CreateBufferFromData(
             device, transform.data(), sizeof(transform), wgpu::BufferUsage::Uniform);
 
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, mBindGroupLayout,
             {{0, sampler}, {1, mTextureView}, {2, transformBuffer, 0, sizeof(transform)}});
 
@@ -186,7 +187,7 @@ class SamplerFilterAnisotropicTest : public DawnTest {
             -0.5, 0.5, -0.5, 1, 0, 0,  0.5, 0.5, -0.5, 1, 1, 0, -0.5, 0.5, 0.5, 1, 0, 50,
             -0.5, 0.5, 0.5,  1, 0, 50, 0.5, 0.5, -0.5, 1, 1, 0, 0.5,  0.5, 0.5, 1, 1, 50,
         };
-        wgpu::Buffer vertexBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer vertexBuffer = dawn::utils::CreateBufferFromData(
             device, vertexData, sizeof(vertexData), wgpu::BufferUsage::Vertex);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -270,7 +271,7 @@ class SamplerFilterAnisotropicTest : public DawnTest {
         }
     }
 
-    utils::BasicRenderPass mRenderPass;
+    dawn::utils::BasicRenderPass mRenderPass;
     wgpu::BindGroupLayout mBindGroupLayout;
     wgpu::RenderPipeline mPipeline;
     wgpu::TextureView mTextureView;
@@ -293,3 +294,6 @@ DAWN_INSTANTIATE_TEST(SamplerFilterAnisotropicTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

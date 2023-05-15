@@ -20,6 +20,9 @@
 #include "dawn/native/null/DeviceNull.h"
 #include "gtest/gtest.h"
 
+namespace dawn {
+namespace {
+
 class FeatureTests : public testing::Test {
   public:
     FeatureTests()
@@ -53,7 +56,7 @@ class FeatureTests : public testing::Test {
 
   protected:
     // By default DisallowUnsafeAPIs is enabled in this instance.
-    Ref<dawn::native::InstanceBase> mInstanceBase;
+    dawn::Ref<dawn::native::InstanceBase> mInstanceBase;
     dawn::native::null::PhysicalDevice mPhysicalDevice;
     // TODO(dawn:1685) Remove duplicated unsafe objects once DisallowUnsafeAPIs is removed.
     dawn::native::null::PhysicalDevice mUnsafePhysicalDeviceDisallow;
@@ -194,3 +197,6 @@ TEST_F(FeatureTests, RequireAndGetEnabledFeatures) {
         }
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

@@ -22,8 +22,10 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
-using BindingDescriptorGroups = std::vector<std::vector<utils::BindingInitializationHelper>>;
+
+using BindingDescriptorGroups = std::vector<std::vector<dawn::utils::BindingInitializationHelper>>;
 
 struct TestSet {
     bool valid;
@@ -97,8 +99,6 @@ const char* kVertexShader = R"(
 }
 )";
 
-}  // namespace
-
 class WritableTextureBindingAliasingValidationTests : public ValidationTest {
   public:
     wgpu::Texture CreateTexture(wgpu::TextureUsage usage,
@@ -119,7 +119,7 @@ class WritableTextureBindingAliasingValidationTests : public ValidationTest {
     // Creates compute pipeline given a layout and shader
     wgpu::ComputePipeline CreateComputePipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                                 const std::string& shader) {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, shader.c_str());
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
         wgpu::ComputePipelineDescriptor csDesc;
         wgpu::PipelineLayoutDescriptor descriptor;
@@ -136,11 +136,11 @@ class WritableTextureBindingAliasingValidationTests : public ValidationTest {
     wgpu::RenderPipeline CreateRenderPipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                               const std::string& vertexShader,
                                               const std::string& fragShader) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragShader.c_str());
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragShader.c_str());
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
@@ -157,11 +157,11 @@ class WritableTextureBindingAliasingValidationTests : public ValidationTest {
 
     // Creates bind group layout with given minimum sizes for each binding
     wgpu::BindGroupLayout CreateBindGroupLayout(
-        const std::vector<utils::BindingInitializationHelper>& bindings) {
+        const std::vector<dawn::utils::BindingInitializationHelper>& bindings) {
         std::vector<wgpu::BindGroupLayoutEntry> entries;
 
         for (size_t i = 0; i < bindings.size(); ++i) {
-            const utils::BindingInitializationHelper& b = bindings[i];
+            const dawn::utils::BindingInitializationHelper& b = bindings[i];
             wgpu::BindGroupLayoutEntry e = {};
             e.binding = b.binding;
             e.visibility = wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment;
@@ -359,7 +359,7 @@ TEST_F(WritableTextureBindingAliasingValidationTests, BasicTest) {
 
     for (const auto& test : testSet) {
         std::vector<wgpu::BindGroupLayout> layouts;
-        for (const std::vector<utils::BindingInitializationHelper>& bindings :
+        for (const std::vector<dawn::utils::BindingInitializationHelper>& bindings :
              test.bindingEntries) {
             layouts.push_back(CreateBindGroupLayout(bindings));
         }
@@ -392,12 +392,12 @@ TEST_F(WritableTextureBindingAliasingValidationTests, SetBindGroupLazyAspect) {
     wgpu::TextureView view3 = textureStorage.CreateView(&viewDescriptor3);
 
     // subresources don't intersect, create valid bindGroups
-    std::vector<utils::BindingInitializationHelper> bindingDescriptor0 = {{
+    std::vector<dawn::utils::BindingInitializationHelper> bindingDescriptor0 = {{
         {0, view0},
         {1, view1},
     }};
     // subresources intersect, create invalid bindGroups
-    std::vector<utils::BindingInitializationHelper> bindingDescriptor1 = {{
+    std::vector<dawn::utils::BindingInitializationHelper> bindingDescriptor1 = {{
         {0, view2},
         {1, view3},
     }};
@@ -530,3 +530,6 @@ TEST_F(WritableTextureBindingAliasingValidationTests, SetBindGroupLazyAspect) {
         commandEncoder.Finish();
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

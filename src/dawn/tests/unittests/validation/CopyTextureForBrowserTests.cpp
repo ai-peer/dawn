@@ -20,7 +20,9 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
+
 wgpu::Texture Create2DTexture(
     wgpu::Device device,
     uint32_t width,
@@ -55,7 +57,8 @@ wgpu::ExternalTexture CreateExternalTexture(wgpu::Device device, uint32_t width,
 
     // Create an ExternalTextureDescriptor from the texture view
     wgpu::ExternalTextureDescriptor externalDesc;
-    utils::ColorSpaceConversionInfo info = utils::GetYUVBT709ToRGBSRGBColorSpaceConversionInfo();
+    dawn::utils::ColorSpaceConversionInfo info =
+        dawn::utils::GetYUVBT709ToRGBSRGBColorSpaceConversionInfo();
     externalDesc.yuvToRgbConversionMatrix = info.yuvToRgbConversionMatrix.data();
     externalDesc.gamutConversionMatrix = info.gamutConversionMatrix.data();
     externalDesc.srcTransferFunctionParameters = info.srcTransferFunctionParameters.data();
@@ -70,11 +73,9 @@ wgpu::ExternalTexture CreateExternalTexture(wgpu::Device device, uint32_t width,
     return device.CreateExternalTexture(&externalDesc);
 }
 
-}  // namespace
-
 class CopyTextureForBrowserTest : public ValidationTest {
   protected:
-    void TestCopyTextureForBrowser(utils::Expectation expectation,
+    void TestCopyTextureForBrowser(dawn::utils::Expectation expectation,
                                    wgpu::Texture srcTexture,
                                    uint32_t srcLevel,
                                    wgpu::Origin3D srcOrigin,
@@ -85,11 +86,11 @@ class CopyTextureForBrowserTest : public ValidationTest {
                                    wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
                                    wgpu::CopyTextureForBrowserOptions options = {}) {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
         wgpu::ImageCopyTexture dstImageCopyTexture =
-            utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
 
-        if (expectation == utils::Expectation::Success) {
+        if (expectation == dawn::utils::Expectation::Success) {
             device.GetQueue().CopyTextureForBrowser(&srcImageCopyTexture, &dstImageCopyTexture,
                                                     &extent3D, &options);
         } else {
@@ -112,7 +113,7 @@ class CopyTextureForBrowserInternalUsageTest : public CopyTextureForBrowserTest 
 
 class CopyExternalTextureForBrowserTest : public ValidationTest {
   protected:
-    void TestCopyExternalTextureForBrowser(utils::Expectation expectation,
+    void TestCopyExternalTextureForBrowser(dawn::utils::Expectation expectation,
                                            wgpu::ExternalTexture srcExternalTexture,
                                            wgpu::Origin3D srcOrigin,
                                            wgpu::Extent2D srcNaturalSize,
@@ -128,9 +129,9 @@ class CopyExternalTextureForBrowserTest : public ValidationTest {
         srcImageCopyExternalTexture.naturalSize = srcNaturalSize;
 
         wgpu::ImageCopyTexture dstImageCopyTexture =
-            utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
+            dawn::utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
 
-        if (expectation == utils::Expectation::Success) {
+        if (expectation == dawn::utils::Expectation::Success) {
             device.GetQueue().CopyExternalTextureForBrowser(
                 &srcImageCopyExternalTexture, &dstImageCopyTexture, &extent3D, &options);
         } else {
@@ -163,47 +164,47 @@ TEST_F(CopyTextureForBrowserTest, Success) {
     // Different copies, including some that touch the OOB condition
     {
         // Copy a region along top left boundary
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1});
 
         // Copy entire texture
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {16, 16, 1});
 
         // Copy a region along bottom right boundary
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {8, 8, 0}, destination, 0,
-                                  {8, 8, 0}, {8, 8, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {8, 8, 0},
+                                  destination, 0, {8, 8, 0}, {8, 8, 1});
 
         // Copy region into mip
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 2,
-                                  {0, 0, 0}, {4, 4, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 2, {0, 0, 0}, {4, 4, 1});
 
         // Copy mip into region
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 2, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1});
 
         // Copy between slices
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 1}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 1}, {16, 16, 1});
     }
 
     // Empty copies are valid
     {
         // An empty copy
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {0, 0, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {0, 0, 1});
 
         // An empty copy with depth = 0
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {0, 0, 0});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {0, 0, 0});
 
         // An empty copy touching the side of the source texture
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {16, 16, 0}, {0, 0, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {16, 16, 0}, {0, 0, 1});
 
         // An empty copy touching the side of the destination texture
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {16, 16, 0}, {0, 0, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {16, 16, 0}, {0, 0, 1});
     }
 }
 
@@ -226,19 +227,19 @@ TEST_F(CopyTextureForBrowserTest, IncorrectUsage) {
                         wgpu::TextureUsage::RenderAttachment);
 
     // Incorrect source usage causes failure : lack |Sampled| usage
-    TestCopyTextureForBrowser(utils::Expectation::Failure, noSampledUsageSource, 0, {0, 0, 0},
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, noSampledUsageSource, 0, {0, 0, 0},
                               validDestination, 0, {0, 0, 0}, {16, 16, 1});
 
     // Incorrect destination usage causes failure: lack |RenderAttachement| usage.
-    TestCopyTextureForBrowser(utils::Expectation::Failure, validSource, 0, {0, 0, 0},
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, validSource, 0, {0, 0, 0},
                               noRenderAttachmentUsageDestination, 0, {0, 0, 0}, {16, 16, 1});
 
     // Incorrect source usage causes failure : lack |CopySrc| usage
-    TestCopyTextureForBrowser(utils::Expectation::Failure, noCopySrcUsageSource, 0, {0, 0, 0},
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, noCopySrcUsageSource, 0, {0, 0, 0},
                               validDestination, 0, {0, 0, 0}, {16, 16, 1});
 
     // Incorrect destination usage causes failure: lack |CopyDst| usage.
-    TestCopyTextureForBrowser(utils::Expectation::Failure, validSource, 0, {0, 0, 0},
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, validSource, 0, {0, 0, 0},
                               noCopyDstUsageSource, 0, {0, 0, 0}, {16, 16, 1});
 }
 
@@ -254,12 +255,14 @@ TEST_F(CopyTextureForBrowserTest, DestroyedTexture) {
         wgpu::Texture destination =
             Create2DTexture(device, 16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
                             wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  options);
 
         // Check noop copy
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {0, 0, 0}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {0, 0, 0}, wgpu::TextureAspect::All,
+                                  options);
     }
 
     // Destroyed src texture.
@@ -271,12 +274,14 @@ TEST_F(CopyTextureForBrowserTest, DestroyedTexture) {
             Create2DTexture(device, 16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
                             wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
         source.Destroy();
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  options);
 
         // Check noop copy
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {0, 0, 0}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {0, 0, 0}, wgpu::TextureAspect::All,
+                                  options);
     }
 
     // Destroyed dst texture.
@@ -289,12 +294,14 @@ TEST_F(CopyTextureForBrowserTest, DestroyedTexture) {
                             wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
 
         destination.Destroy();
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  options);
 
         // Check noop copy
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {0, 0, 0}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {0, 0, 0}, wgpu::TextureAspect::All,
+                                  options);
     }
 }
 
@@ -310,51 +317,51 @@ TEST_F(CopyTextureForBrowserTest, OutOfBounds) {
     // OOB on source
     {
         // x + width overflows
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {1, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {1, 0, 0},
+                                  destination, 0, {0, 0, 0}, {16, 16, 1});
 
         // y + height overflows
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 1, 0}, destination, 0,
-                                  {0, 0, 0}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 1, 0},
+                                  destination, 0, {0, 0, 0}, {16, 16, 1});
 
         // non-zero mip overflows
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {9, 9, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 1, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {9, 9, 1});
 
         // copy to multiple slices
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 2}, {16, 16, 2});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 2}, {16, 16, 2});
 
         // copy origin z value is non-zero.
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 1}, destination, 0,
-                                  {0, 0, 2}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 1},
+                                  destination, 0, {0, 0, 2}, {16, 16, 1});
     }
 
     // OOB on destination
     {
         // x + width overflows
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {1, 0, 0}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {1, 0, 0}, {16, 16, 1});
 
         // y + height overflows
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 1, 0}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 1, 0}, {16, 16, 1});
 
         // non-zero mip overflows
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 1,
-                                  {0, 0, 0}, {9, 9, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 1, {0, 0, 0}, {9, 9, 1});
 
         // arrayLayer + depth OOB
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 4}, {16, 16, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 4}, {16, 16, 1});
 
         // empty copy on non-existent mip fails
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 6,
-                                  {0, 0, 0}, {0, 0, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 6, {0, 0, 0}, {0, 0, 1});
 
         // empty copy on non-existent slice fails
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 4}, {0, 0, 1});
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 4}, {0, 0, 1});
     }
 }
 
@@ -368,8 +375,8 @@ TEST_F(CopyTextureForBrowserTest, InvalidDstFormat) {
                         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
 
     // Not supported dst texture format.
-    TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                              {0, 0, 0}, {0, 0, 1});
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination,
+                              0, {0, 0, 0}, {0, 0, 1});
 }
 
 // Test source or destination texture are multisampled.
@@ -390,11 +397,11 @@ TEST_F(CopyTextureForBrowserTest, InvalidSampleCount) {
                         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment, 4);
 
     // An empty copy with dst texture sample count > 1 failure.
-    TestCopyTextureForBrowser(utils::Expectation::Failure, sourceMultiSampled1x, 0, {0, 0, 0},
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, sourceMultiSampled1x, 0, {0, 0, 0},
                               destinationMultiSampled4x, 0, {0, 0, 0}, {0, 0, 1});
 
     // A empty copy with source texture sample count > 1 failure
-    TestCopyTextureForBrowser(utils::Expectation::Failure, sourceMultiSampled4x, 0, {0, 0, 0},
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, sourceMultiSampled4x, 0, {0, 0, 0},
                               destinationMultiSampled1x, 0, {0, 0, 0}, {0, 0, 1});
 }
 
@@ -419,14 +426,15 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         validOptions.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
         validOptions.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
         validOptions.conversionMatrix = conversionMatrix.data();
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, validOptions);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  validOptions);
 
         // if no color space conversion, no need to validate related attributes
         wgpu::CopyTextureForBrowserOptions noColorSpaceConversion = options;
         noColorSpaceConversion.needsColorSpaceConversion = false;
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
                                   noColorSpaceConversion);
     }
 
@@ -439,13 +447,15 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         std::array<float, 9> conversionMatrix = {};
         invalidOptions.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
         invalidOptions.conversionMatrix = conversionMatrix.data();
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, invalidOptions);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  invalidOptions);
 
         // set to nullptr
         invalidOptions.srcTransferFunctionParameters = nullptr;
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, invalidOptions);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  invalidOptions);
     }
 
     {
@@ -455,13 +465,15 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         std::array<float, 9> conversionMatrix = {};
         invalidOptions.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
         invalidOptions.conversionMatrix = conversionMatrix.data();
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, invalidOptions);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  invalidOptions);
 
         // set to nullptr
         invalidOptions.dstTransferFunctionParameters = nullptr;
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, invalidOptions);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  invalidOptions);
     }
 
     {
@@ -471,13 +483,15 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         std::array<float, 7> dstTransferFunctionParameters = {};
         invalidOptions.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
         invalidOptions.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, invalidOptions);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  invalidOptions);
 
         // set to nullptr
         invalidOptions.conversionMatrix = nullptr;
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, invalidOptions);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  invalidOptions);
     }
 }
 
@@ -497,26 +511,30 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_TextureAlphaState) {
         options.srcAlphaMode = wgpu::AlphaMode::Premultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Premultiplied;
 
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  options);
 
         options.srcAlphaMode = wgpu::AlphaMode::Premultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Unpremultiplied;
 
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  options);
 
         options.srcAlphaMode = wgpu::AlphaMode::Unpremultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Premultiplied;
 
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  options);
 
         options.srcAlphaMode = wgpu::AlphaMode::Unpremultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Unpremultiplied;
 
-        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+        TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0},
+                                  destination, 0, {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
+                                  options);
     }
 }
 
@@ -530,43 +548,43 @@ TEST_F(CopyExternalTextureForBrowserTest, Success) {
     // Different copies, including some that touch the OOB condition
     {
         // Copy a region along top left boundary
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1});
 
         // Copy entire texture
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {16, 16, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {16, 16, 1});
 
         // Copy a region along bottom right boundary
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {8, 8, 0}, {16, 16},
-                                          destination, 0, {8, 8, 0}, {8, 8, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {8, 8, 0},
+                                          {16, 16}, destination, 0, {8, 8, 0}, {8, 8, 1});
 
         // Copy region into mip
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 2, {0, 0, 0}, {4, 4, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 2, {0, 0, 0}, {4, 4, 1});
 
         // Copy between slices
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 1}, {16, 16, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 1}, {16, 16, 1});
     }
 
     // Empty copies are valid
     {
         // An empty copy
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {0, 0, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {0, 0, 1});
 
         // An empty copy with depth = 0
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {0, 0, 0});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {0, 0, 0});
 
         // An empty copy touching the side of the source texture
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {16, 16, 0}, {0, 0, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {16, 16, 0}, {0, 0, 1});
 
         // An empty copy touching the side of the destination texture
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {16, 16, 0}, {0, 0, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {16, 16, 0}, {0, 0, 1});
     }
 }
 
@@ -584,13 +602,13 @@ TEST_F(CopyExternalTextureForBrowserTest, IncorrectUsage) {
                         wgpu::TextureUsage::RenderAttachment);
 
     // Incorrect destination usage causes failure: lack |RenderAttachement| usage.
-    TestCopyExternalTextureForBrowser(utils::Expectation::Failure, validSource, {0, 0, 0}, {16, 16},
-                                      noRenderAttachmentUsageDestination, 0, {0, 0, 0},
+    TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, validSource, {0, 0, 0},
+                                      {16, 16}, noRenderAttachmentUsageDestination, 0, {0, 0, 0},
                                       {16, 16, 1});
 
     // Incorrect destination usage causes failure: lack |CopyDst| usage.
-    TestCopyExternalTextureForBrowser(utils::Expectation::Failure, validSource, {0, 0, 0}, {16, 16},
-                                      noCopyDstUsageSource, 0, {0, 0, 0}, {16, 16, 1});
+    TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, validSource, {0, 0, 0},
+                                      {16, 16}, noCopyDstUsageSource, 0, {0, 0, 0}, {16, 16, 1});
 }
 
 // Test source or destination texture is destroyed.
@@ -603,13 +621,13 @@ TEST_F(CopyExternalTextureForBrowserTest, DestroyedTexture) {
         wgpu::Texture destination =
             Create2DTexture(device, 16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
                             wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, options);
 
         // Check noop copy
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {0, 0, 0},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {0, 0, 0},
                                           wgpu::TextureAspect::All, options);
     }
 
@@ -620,13 +638,13 @@ TEST_F(CopyExternalTextureForBrowserTest, DestroyedTexture) {
             Create2DTexture(device, 16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
                             wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
         source.Destroy();
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, options);
 
         // Check noop copy
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {0, 0, 0},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {0, 0, 0},
                                           wgpu::TextureAspect::All, options);
     }
 
@@ -638,13 +656,13 @@ TEST_F(CopyExternalTextureForBrowserTest, DestroyedTexture) {
                             wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
 
         destination.Destroy();
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, options);
 
         // Check noop copy
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {0, 0, 0},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {0, 0, 0},
                                           wgpu::TextureAspect::All, options);
     }
 }
@@ -659,47 +677,47 @@ TEST_F(CopyExternalTextureForBrowserTest, OutOfBounds) {
     // OOB on source
     {
         // x + width overflows
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {1, 0, 0}, {4, 4},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {1, 0, 0},
+                                          {4, 4}, destination, 0, {0, 0, 0}, {4, 4, 1});
 
         // y + height overflows
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 1, 0}, {4, 4},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 1, 0},
+                                          {4, 4}, destination, 0, {0, 0, 0}, {4, 4, 1});
 
         // copy to multiple slices
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {4, 4},
-                                          destination, 0, {0, 0, 2}, {4, 4, 2});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {4, 4}, destination, 0, {0, 0, 2}, {4, 4, 2});
 
         // copy origin z value is non-zero.
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 1}, {4, 4},
-                                          destination, 0, {0, 0, 2}, {4, 4, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 1},
+                                          {4, 4}, destination, 0, {0, 0, 2}, {4, 4, 1});
     }
 
     // OOB on destination
     {
         // x + width overflows
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {1, 0, 0}, {16, 16, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {1, 0, 0}, {16, 16, 1});
 
         // y + height overflows
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 1, 0}, {16, 16, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 1, 0}, {16, 16, 1});
 
         // non-zero mip overflows
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 1, {0, 0, 0}, {9, 9, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 1, {0, 0, 0}, {9, 9, 1});
 
         // arrayLayer + depth OOB
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 4}, {16, 16, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 4}, {16, 16, 1});
 
         // empty copy on non-existent mip fails
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 6, {0, 0, 0}, {0, 0, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 6, {0, 0, 0}, {0, 0, 1});
 
         // empty copy on non-existent slice fails
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 4}, {0, 0, 1});
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 4}, {0, 0, 1});
     }
 }
 
@@ -711,8 +729,8 @@ TEST_F(CopyExternalTextureForBrowserTest, InvalidDstFormat) {
                         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
 
     // Not supported dst texture format.
-    TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                      destination, 0, {0, 0, 0}, {0, 0, 1});
+    TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                      {16, 16}, destination, 0, {0, 0, 0}, {0, 0, 1});
 }
 
 // Test destination texture are multisampled.
@@ -723,8 +741,8 @@ TEST_F(CopyExternalTextureForBrowserTest, InvalidSampleCount) {
                         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment, 4);
 
     // An empty copy with dst texture sample count > 1 failure.
-    TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                      destinationMultiSampled4x, 0, {0, 0, 0}, {0, 0, 1});
+    TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                      {16, 16}, destinationMultiSampled4x, 0, {0, 0, 0}, {0, 0, 1});
 }
 
 // Test color space conversion related attributes in CopyTextureForBrowserOptions.
@@ -746,15 +764,15 @@ TEST_F(CopyExternalTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         validOptions.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
         validOptions.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
         validOptions.conversionMatrix = conversionMatrix.data();
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, validOptions);
 
         // if no color space conversion, no need to validate related attributes
         wgpu::CopyTextureForBrowserOptions noColorSpaceConversion = options;
         noColorSpaceConversion.needsColorSpaceConversion = false;
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, noColorSpaceConversion);
     }
 
@@ -767,14 +785,14 @@ TEST_F(CopyExternalTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         std::array<float, 9> conversionMatrix = {};
         invalidOptions.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
         invalidOptions.conversionMatrix = conversionMatrix.data();
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, invalidOptions);
 
         // set to nullptr
         invalidOptions.srcTransferFunctionParameters = nullptr;
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, invalidOptions);
     }
 
@@ -785,14 +803,14 @@ TEST_F(CopyExternalTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         std::array<float, 9> conversionMatrix = {};
         invalidOptions.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
         invalidOptions.conversionMatrix = conversionMatrix.data();
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, invalidOptions);
 
         // set to nullptr
         invalidOptions.dstTransferFunctionParameters = nullptr;
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, invalidOptions);
     }
 
@@ -803,14 +821,14 @@ TEST_F(CopyExternalTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         std::array<float, 7> dstTransferFunctionParameters = {};
         invalidOptions.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
         invalidOptions.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, invalidOptions);
 
         // set to nullptr
         invalidOptions.conversionMatrix = nullptr;
-        TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, invalidOptions);
     }
 }
@@ -829,29 +847,29 @@ TEST_F(CopyExternalTextureForBrowserTest, ColorSpaceConversion_TextureAlphaState
         options.srcAlphaMode = wgpu::AlphaMode::Premultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Premultiplied;
 
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, options);
 
         options.srcAlphaMode = wgpu::AlphaMode::Premultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Unpremultiplied;
 
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, options);
 
         options.srcAlphaMode = wgpu::AlphaMode::Unpremultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Premultiplied;
 
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, options);
 
         options.srcAlphaMode = wgpu::AlphaMode::Unpremultiplied;
         options.dstAlphaMode = wgpu::AlphaMode::Unpremultiplied;
 
-        TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                          destination, 0, {0, 0, 0}, {4, 4, 1},
+        TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                          {16, 16}, destination, 0, {0, 0, 0}, {4, 4, 1},
                                           wgpu::TextureAspect::All, options);
     }
 }
@@ -878,8 +896,8 @@ TEST_F(CopyTextureForBrowserTest, InternalUsage) {
     // usage option is on
     wgpu::CopyTextureForBrowserOptions options = {};
     options.internalUsage = true;
-    TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                              {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All, options);
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination,
+                              0, {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All, options);
 }
 
 // Test that the internal usages are taken into account when interalUsage = true
@@ -898,14 +916,14 @@ TEST_F(CopyTextureForBrowserInternalUsageTest, InternalUsage) {
                         wgpu::TextureUsage::CopyDst, 1, &internalDesc2);
 
     // Without internal usage option should fail usage validation
-    TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                              {0, 0, 0}, {16, 16, 1});
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Failure, source, 0, {0, 0, 0}, destination,
+                              0, {0, 0, 0}, {16, 16, 1});
 
     // With internal usage option should pass usage validation
     wgpu::CopyTextureForBrowserOptions options = {};
     options.internalUsage = true;
-    TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
-                              {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All, options);
+    TestCopyTextureForBrowser(dawn::utils::Expectation::Success, source, 0, {0, 0, 0}, destination,
+                              0, {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All, options);
 }
 
 // Test that the internal usage can only be set to true when the device internal usage feature is
@@ -928,8 +946,8 @@ TEST_F(CopyExternalTextureForBrowserTest, InternalUsage) {
     // usage option is on
     wgpu::CopyTextureForBrowserOptions options = {};
     options.internalUsage = true;
-    TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                      destination, 0, {0, 0, 0}, {16, 16, 1},
+    TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                      {16, 16}, destination, 0, {0, 0, 0}, {16, 16, 1},
                                       wgpu::TextureAspect::All, options);
 }
 
@@ -944,13 +962,16 @@ TEST_F(CopyExternalTextureForBrowserInternalUsageTest, InternalUsage) {
                         wgpu::TextureUsage::CopyDst, 1, &internalDesc);
 
     // Without internal usage option should fail usage validation
-    TestCopyExternalTextureForBrowser(utils::Expectation::Failure, source, {0, 0, 0}, {16, 16},
-                                      destination, 0, {0, 0, 0}, {16, 16, 1});
+    TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Failure, source, {0, 0, 0},
+                                      {16, 16}, destination, 0, {0, 0, 0}, {16, 16, 1});
 
     // With internal usage option should pass usage validation
     wgpu::CopyTextureForBrowserOptions options = {};
     options.internalUsage = true;
-    TestCopyExternalTextureForBrowser(utils::Expectation::Success, source, {0, 0, 0}, {16, 16},
-                                      destination, 0, {0, 0, 0}, {16, 16, 1},
+    TestCopyExternalTextureForBrowser(dawn::utils::Expectation::Success, source, {0, 0, 0},
+                                      {16, 16}, destination, 0, {0, 0, 0}, {16, 16, 1},
                                       wgpu::TextureAspect::All, options);
 }
+
+}  // anonymous namespace
+}  // namespace dawn

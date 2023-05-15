@@ -25,27 +25,27 @@
 #include "dawn/common/CoreFoundationRef.h"
 #include "dawn/native/MetalBackend.h"
 
+namespace dawn {
 namespace {
+
 void AddIntegerValue(CFMutableDictionaryRef dictionary, const CFStringRef key, int32_t value) {
     CFNumberRef number(CFNumberCreate(nullptr, kCFNumberSInt32Type, &value));
     CFDictionaryAddValue(dictionary, key, number);
     CFRelease(number);
 }
 
-}  // anonymous namespace
-
 class PlatformTextureIOSurface : public VideoViewsTestBackend::PlatformTexture {
   public:
     PlatformTextureIOSurface(wgpu::Texture&& texture, IOSurfaceRef iosurface)
         : PlatformTexture(std::move(texture)) {
-        mIOSurface = AcquireCFRef<IOSurfaceRef>(iosurface);
+        mIOSurface = dawn::AcquireCFRef<IOSurfaceRef>(iosurface);
     }
     ~PlatformTextureIOSurface() override { mIOSurface = nullptr; }
 
     bool CanWrapAsWGPUTexture() override { return true; }
 
   private:
-    CFRef<IOSurfaceRef> mIOSurface = nullptr;
+    dawn::CFRef<IOSurfaceRef> mIOSurface = nullptr;
 };
 
 class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
@@ -175,6 +175,8 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
     WGPUDevice mWGPUDevice = nullptr;
 };
 
+}  // anonymous namespace
+
 // static
 BackendTestConfig VideoViewsTestBackend::Backend() {
     return MetalBackend();
@@ -184,3 +186,5 @@ BackendTestConfig VideoViewsTestBackend::Backend() {
 std::unique_ptr<VideoViewsTestBackend> VideoViewsTestBackend::Create() {
     return std::make_unique<VideoViewsTestBackendIOSurface>();
 }
+
+}  // namespace dawn

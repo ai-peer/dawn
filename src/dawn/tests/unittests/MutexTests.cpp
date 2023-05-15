@@ -15,13 +15,14 @@
 #include "dawn/common/Mutex.h"
 #include "gtest/gtest.h"
 
+namespace dawn {
 namespace {
+
 #if defined(DAWN_ENABLE_ASSERTS)
 constexpr bool kAssertEnabled = true;
 #else
 constexpr bool kAssertEnabled = false;
 #endif
-}  // namespace
 
 class MutexTest : public ::testing::Test {
   protected:
@@ -95,3 +96,6 @@ TEST_F(MutexDeathTest, AutoLockThenLock) {
     EXPECT_TRUE(mMutex.IsLockedByCurrentThread());
     ASSERT_DEATH({ mMutex.Lock(); }, "");
 }
+
+}  // anonymous namespace
+}  // namespace dawn

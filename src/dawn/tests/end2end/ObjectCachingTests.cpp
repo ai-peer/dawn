@@ -19,15 +19,18 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class ObjectCachingTest : public DawnTest {};
 
 // Test that BindGroupLayouts are correctly deduplicated.
 TEST_P(ObjectCachingTest, BindGroupLayoutDeduplication) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
-    wgpu::BindGroupLayout sameBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout sameBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
-    wgpu::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout otherBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}});
 
     EXPECT_NE(bgl.Get(), otherBgl.Get());
@@ -36,11 +39,11 @@ TEST_P(ObjectCachingTest, BindGroupLayoutDeduplication) {
 
 // Test that two similar bind group layouts won't refer to the same one if they differ by dynamic.
 TEST_P(ObjectCachingTest, BindGroupLayoutDynamic) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, true}});
-    wgpu::BindGroupLayout sameBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout sameBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, true}});
-    wgpu::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout otherBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, false}});
 
     EXPECT_NE(bgl.Get(), otherBgl.Get());
@@ -50,11 +53,11 @@ TEST_P(ObjectCachingTest, BindGroupLayoutDynamic) {
 // Test that two similar bind group layouts won't refer to the same one if they differ by
 // textureComponentType
 TEST_P(ObjectCachingTest, BindGroupLayoutTextureComponentType) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-    wgpu::BindGroupLayout sameBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout sameBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-    wgpu::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout otherBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Uint}});
 
     EXPECT_NE(bgl.Get(), otherBgl.Get());
@@ -64,11 +67,11 @@ TEST_P(ObjectCachingTest, BindGroupLayoutTextureComponentType) {
 // Test that two similar bind group layouts won't refer to the same one if they differ by
 // viewDimension
 TEST_P(ObjectCachingTest, BindGroupLayoutViewDimension) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-    wgpu::BindGroupLayout sameBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout sameBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-    wgpu::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout otherBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float,
                   wgpu::TextureViewDimension::e2DArray}});
 
@@ -81,22 +84,22 @@ TEST_P(ObjectCachingTest, ErrorObjectDoesntUncache) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
     ASSERT_DEVICE_ERROR(
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
                      {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}}));
 }
 
 // Test that PipelineLayouts are correctly deduplicated.
 TEST_P(ObjectCachingTest, PipelineLayoutDeduplication) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
-    wgpu::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout otherBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}});
 
-    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
-    wgpu::PipelineLayout samePl = utils::MakeBasicPipelineLayout(device, &bgl);
-    wgpu::PipelineLayout otherPl1 = utils::MakeBasicPipelineLayout(device, nullptr);
-    wgpu::PipelineLayout otherPl2 = utils::MakeBasicPipelineLayout(device, &otherBgl);
+    wgpu::PipelineLayout pl = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout samePl = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout otherPl1 = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
+    wgpu::PipelineLayout otherPl2 = dawn::utils::MakeBasicPipelineLayout(device, &otherBgl);
 
     EXPECT_NE(pl.Get(), otherPl1.Get());
     EXPECT_NE(pl.Get(), otherPl2.Get());
@@ -105,15 +108,15 @@ TEST_P(ObjectCachingTest, PipelineLayoutDeduplication) {
 
 // Test that ShaderModules are correctly deduplicated.
 TEST_P(ObjectCachingTest, ShaderModuleDeduplication) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule sameModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule sameModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 1.0, 0.0, 1.0);
         })");
-    wgpu::ShaderModule otherModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule otherModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         })");
@@ -124,24 +127,24 @@ TEST_P(ObjectCachingTest, ShaderModuleDeduplication) {
 
 // Test that ComputePipeline are correctly deduplicated wrt. their ShaderModule
 TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnShaderModule) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         var<workgroup> i : u32;
         @compute @workgroup_size(1) fn main() {
             i = 0u;
         })");
-    wgpu::ShaderModule sameModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule sameModule = dawn::utils::CreateShaderModule(device, R"(
         var<workgroup> i : u32;
         @compute @workgroup_size(1) fn main() {
             i = 0u;
         })");
-    wgpu::ShaderModule otherModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule otherModule = dawn::utils::CreateShaderModule(device, R"(
         @compute @workgroup_size(1) fn main() {
         })");
 
     EXPECT_NE(module.Get(), otherModule.Get());
     EXPECT_EQ(module.Get() == sameModule.Get(), !UsesWire());
 
-    wgpu::PipelineLayout layout = utils::MakeBasicPipelineLayout(device, nullptr);
+    wgpu::PipelineLayout layout = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
 
     wgpu::ComputePipelineDescriptor desc;
     desc.compute.entryPoint = "main";
@@ -162,14 +165,14 @@ TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnShaderModule) {
 
 // Test that ComputePipeline are correctly deduplicated wrt. their constants override values
 TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnOverrides) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         override x: u32 = 1u;
         var<workgroup> i : u32;
         @compute @workgroup_size(x) fn main() {
             i = 0u;
         })");
 
-    wgpu::PipelineLayout layout = utils::MakeBasicPipelineLayout(device, nullptr);
+    wgpu::PipelineLayout layout = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
 
     wgpu::ComputePipelineDescriptor desc;
     desc.compute.entryPoint = "main";
@@ -202,21 +205,21 @@ TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnOverrides) {
 
 // Test that ComputePipeline are correctly deduplicated wrt. their layout
 TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnLayout) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
-    wgpu::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout otherBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}});
 
-    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
-    wgpu::PipelineLayout samePl = utils::MakeBasicPipelineLayout(device, &bgl);
-    wgpu::PipelineLayout otherPl = utils::MakeBasicPipelineLayout(device, nullptr);
+    wgpu::PipelineLayout pl = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout samePl = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout otherPl = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
 
     EXPECT_NE(pl.Get(), otherPl.Get());
     EXPECT_EQ(pl.Get() == samePl.Get(), !UsesWire());
 
     wgpu::ComputePipelineDescriptor desc;
     desc.compute.entryPoint = "main";
-    desc.compute.module = utils::CreateShaderModule(device, R"(
+    desc.compute.module = dawn::utils::CreateShaderModule(device, R"(
             var<workgroup> i : u32;
             @compute @workgroup_size(1) fn main() {
                 i = 0u;
@@ -237,25 +240,25 @@ TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnLayout) {
 
 // Test that RenderPipelines are correctly deduplicated wrt. their layout
 TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnLayout) {
-    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
-    wgpu::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout otherBgl = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}});
 
-    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
-    wgpu::PipelineLayout samePl = utils::MakeBasicPipelineLayout(device, &bgl);
-    wgpu::PipelineLayout otherPl = utils::MakeBasicPipelineLayout(device, nullptr);
+    wgpu::PipelineLayout pl = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout samePl = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
+    wgpu::PipelineLayout otherPl = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
 
     EXPECT_NE(pl.Get(), otherPl.Get());
     EXPECT_EQ(pl.Get() == samePl.Get(), !UsesWire());
 
-    utils::ComboRenderPipelineDescriptor desc;
+    dawn::utils::ComboRenderPipelineDescriptor desc;
     desc.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
-    desc.vertex.module = utils::CreateShaderModule(device, R"(
+    desc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         })");
-    desc.cFragment.module = utils::CreateShaderModule(device, R"(
+    desc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() {
         })");
 
@@ -274,15 +277,15 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnLayout) {
 
 // Test that RenderPipelines are correctly deduplicated wrt. their vertex module
 TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnVertexModule) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         })");
-    wgpu::ShaderModule sameModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule sameModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         })");
-    wgpu::ShaderModule otherModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule otherModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(1.0, 1.0, 1.0, 1.0);
         })");
@@ -290,9 +293,9 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnVertexModule) {
     EXPECT_NE(module.Get(), otherModule.Get());
     EXPECT_EQ(module.Get() == sameModule.Get(), !UsesWire());
 
-    utils::ComboRenderPipelineDescriptor desc;
+    dawn::utils::ComboRenderPipelineDescriptor desc;
     desc.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
-    desc.cFragment.module = utils::CreateShaderModule(device, R"(
+    desc.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() {
             })");
 
@@ -311,13 +314,13 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnVertexModule) {
 
 // Test that RenderPipelines are correctly deduplicated wrt. their fragment module
 TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnFragmentModule) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() {
         })");
-    wgpu::ShaderModule sameModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule sameModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() {
         })");
-    wgpu::ShaderModule otherModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule otherModule = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         })");
@@ -325,8 +328,8 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnFragmentModule) {
     EXPECT_NE(module.Get(), otherModule.Get());
     EXPECT_EQ(module.Get() == sameModule.Get(), !UsesWire());
 
-    utils::ComboRenderPipelineDescriptor desc;
-    desc.vertex.module = utils::CreateShaderModule(device, R"(
+    dawn::utils::ComboRenderPipelineDescriptor desc;
+    desc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         })");
@@ -347,7 +350,7 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnFragmentModule) {
 
 // Test that Renderpipelines are correctly deduplicated wrt. their constants override values
 TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnOverrides) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         override a: f32 = 1.0;
         @vertex fn vertexMain() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
@@ -356,7 +359,7 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnOverrides) {
             return vec4f(0.0, 0.0, 0.0, a);
         })");
 
-    utils::ComboRenderPipelineDescriptor desc;
+    dawn::utils::ComboRenderPipelineDescriptor desc;
     desc.vertex.module = module;
     desc.vertex.entryPoint = "vertexMain";
     desc.cFragment.module = module;
@@ -451,3 +454,6 @@ DAWN_INSTANTIATE_TEST(ObjectCachingTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

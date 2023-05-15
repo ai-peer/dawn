@@ -17,6 +17,9 @@
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class QuerySetValidationTest : public ValidationTest {
   protected:
     wgpu::QuerySet CreateQuerySet(
@@ -905,3 +908,6 @@ TEST_F(ResolveQuerySetValidationTest, ResolveToInvalidBufferAndOffset) {
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

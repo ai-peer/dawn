@@ -18,16 +18,18 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+
 VideoViewsTestBackend::PlatformTexture::PlatformTexture(wgpu::Texture&& texture)
     : wgpuTexture(texture) {}
 VideoViewsTestBackend::PlatformTexture::~PlatformTexture() = default;
 
 VideoViewsTestBackend::~VideoViewsTestBackend() = default;
 
-constexpr std::array<utils::RGBA8, 2> VideoViewsTests::kYellowYUVColor;
-constexpr std::array<utils::RGBA8, 2> VideoViewsTests::kWhiteYUVColor;
-constexpr std::array<utils::RGBA8, 2> VideoViewsTests::kBlueYUVColor;
-constexpr std::array<utils::RGBA8, 2> VideoViewsTests::kRedYUVColor;
+constexpr std::array<dawn::utils::RGBA8, 2> VideoViewsTests::kYellowYUVColor;
+constexpr std::array<dawn::utils::RGBA8, 2> VideoViewsTests::kWhiteYUVColor;
+constexpr std::array<dawn::utils::RGBA8, 2> VideoViewsTests::kBlueYUVColor;
+constexpr std::array<dawn::utils::RGBA8, 2> VideoViewsTests::kRedYUVColor;
 
 void VideoViewsTests::SetUp() {
     DawnTest::SetUp();
@@ -184,7 +186,7 @@ std::vector<uint8_t> VideoViewsTests::GetTestTextureDataWithPlaneIndex(size_t pl
 
 // Vertex shader used to render a sampled texture into a quad.
 wgpu::ShaderModule VideoViewsTests::GetTestVertexShaderModule() const {
-    return utils::CreateShaderModule(device, R"(
+    return dawn::utils::CreateShaderModule(device, R"(
                 struct VertexOut {
                     @location(0) texCoord : vec2 <f32>,
                     @builtin(position) position : vec4f,
@@ -218,6 +220,8 @@ TEST_P(VideoViewsTests, CreateVideoTextureWithoutInitializedData) {
     mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
 }
 
+namespace {
+
 // Samples the luminance (Y) plane from an imported NV12 texture into a single channel of an RGBA
 // output attachment and checks for the expected pixel value in the rendered quad.
 TEST_P(VideoViewsTests, NV12SampleYtoR) {
@@ -236,10 +240,10 @@ TEST_P(VideoViewsTests, NV12SampleYtoR) {
     viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView textureView = platformTexture->wgpuTexture.CreateView(&viewDesc);
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
 
-    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+    renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var sampler0 : sampler;
             @group(0) @binding(1) var texture : texture_2d<f32>;
 
@@ -249,7 +253,7 @@ TEST_P(VideoViewsTests, NV12SampleYtoR) {
                return vec4f(y, 0.0, 0.0, 1.0);
             })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
         device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels);
     renderPipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
     renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -262,8 +266,9 @@ TEST_P(VideoViewsTests, NV12SampleYtoR) {
     {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(renderPipeline);
-        pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
-                                                  {{0, sampler}, {1, textureView}}));
+        pass.SetBindGroup(0,
+                          dawn::utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                     {{0, sampler}, {1, textureView}}));
         pass.Draw(6);
         pass.End();
     }
@@ -295,10 +300,10 @@ TEST_P(VideoViewsTests, NV12SampleUVtoRG) {
     viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView textureView = platformTexture->wgpuTexture.CreateView(&viewDesc);
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
 
-    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+    renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var sampler0 : sampler;
             @group(0) @binding(1) var texture : texture_2d<f32>;
 
@@ -309,7 +314,7 @@ TEST_P(VideoViewsTests, NV12SampleUVtoRG) {
                return vec4f(u, v, 0.0, 1.0);
             })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
         device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels);
     renderPipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
     renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -322,8 +327,9 @@ TEST_P(VideoViewsTests, NV12SampleUVtoRG) {
     {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(renderPipeline);
-        pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
-                                                  {{0, sampler}, {1, textureView}}));
+        pass.SetBindGroup(0,
+                          dawn::utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                     {{0, sampler}, {1, textureView}}));
         pass.Draw(6);
         pass.End();
     }
@@ -360,10 +366,10 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGB) {
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
 
-    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+    renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var sampler0 : sampler;
             @group(0) @binding(1) var lumaTexture : texture_2d<f32>;
             @group(0) @binding(2) var chromaTexture : texture_2d<f32>;
@@ -376,7 +382,7 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGB) {
                return vec4f(y, u, v, 1.0);
             })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
         device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels);
     renderPipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
 
@@ -388,9 +394,9 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGB) {
     {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(renderPipeline);
-        pass.SetBindGroup(
-            0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
-                                    {{0, sampler}, {1, lumaTextureView}, {2, chromaTextureView}}));
+        pass.SetBindGroup(0, dawn::utils::MakeBindGroup(
+                                 device, renderPipeline.GetBindGroupLayout(0),
+                                 {{0, sampler}, {1, lumaTextureView}, {2, chromaTextureView}}));
         pass.Draw(6);
         pass.End();
     }
@@ -399,7 +405,7 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGB) {
     queue.Submit(1, &commands);
 
     std::vector<uint8_t> expectedData = GetTestTextureData(wgpu::TextureFormat::RGBA8Unorm, true);
-    std::vector<utils::RGBA8> expectedRGBA;
+    std::vector<dawn::utils::RGBA8> expectedRGBA;
     for (uint8_t i = 0; i < expectedData.size(); i += 3) {
         expectedRGBA.push_back({expectedData[i], expectedData[i + 1], expectedData[i + 2], 0xFF});
     }
@@ -433,10 +439,10 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGBMultipleSamplers) {
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
 
-    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+    renderPipelineDescriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var sampler0 : sampler;
             @group(0) @binding(1) var sampler1 : sampler;
             @group(0) @binding(2) var lumaTexture : texture_2d<f32>;
@@ -450,7 +456,7 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGBMultipleSamplers) {
                return vec4f(y, u, v, 1.0);
             })");
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(
         device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels);
     renderPipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
 
@@ -464,7 +470,7 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGBMultipleSamplers) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(renderPipeline);
         pass.SetBindGroup(
-            0, utils::MakeBindGroup(
+            0, dawn::utils::MakeBindGroup(
                    device, renderPipeline.GetBindGroupLayout(0),
                    {{0, sampler0}, {1, sampler1}, {2, lumaTextureView}, {3, chromaTextureView}}));
         pass.Draw(6);
@@ -475,7 +481,7 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGBMultipleSamplers) {
     queue.Submit(1, &commands);
 
     std::vector<uint8_t> expectedData = GetTestTextureData(wgpu::TextureFormat::RGBA8Unorm, true);
-    std::vector<utils::RGBA8> expectedRGBA;
+    std::vector<dawn::utils::RGBA8> expectedRGBA;
     for (uint8_t i = 0; i < expectedData.size(); i += 3) {
         expectedRGBA.push_back({expectedData[i], expectedData[i + 1], expectedData[i + 2], 0xFF});
     }
@@ -486,3 +492,6 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGBMultipleSamplers) {
 }
 
 DAWN_INSTANTIATE_TEST(VideoViewsTests, VideoViewsTestBackend::Backend());
+
+}  // anonymous namespace
+}  // namespace dawn

@@ -20,6 +20,7 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 constexpr wgpu::TextureFormat kNonRenderableColorFormats[] = {
@@ -144,9 +145,9 @@ TEST_F(TextureValidationTest, SampleCount) {
         wgpu::TextureDescriptor descriptor = defaultDescriptor;
         descriptor.sampleCount = 4;
 
-        for (wgpu::TextureFormat format : utils::kFormatsInCoreSpec) {
+        for (wgpu::TextureFormat format : dawn::utils::kFormatsInCoreSpec) {
             descriptor.format = format;
-            if (utils::TextureFormatSupportsMultisampling(format)) {
+            if (dawn::utils::TextureFormatSupportsMultisampling(format)) {
                 device.CreateTexture(&descriptor);
             } else {
                 ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
@@ -308,7 +309,7 @@ TEST_F(TextureValidationTest, MipLevelCount) {
         wgpu::TextureDescriptor descriptor = defaultDescriptor;
         descriptor.size.width = maxTextureDimension2D;
         descriptor.size.height = maxTextureDimension2D;
-        descriptor.mipLevelCount = Log2(maxTextureDimension2D) + 1u;
+        descriptor.mipLevelCount = dawn::Log2(maxTextureDimension2D) + 1u;
 
         device.CreateTexture(&descriptor);
     }
@@ -319,7 +320,7 @@ TEST_F(TextureValidationTest, MipLevelCount) {
         wgpu::TextureDescriptor descriptor = defaultDescriptor;
         descriptor.size.width = maxTextureDimension2D;
         descriptor.size.height = maxTextureDimension2D;
-        descriptor.mipLevelCount = Log2(maxTextureDimension2D) + 2u;
+        descriptor.mipLevelCount = dawn::Log2(maxTextureDimension2D) + 2u;
 
         ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
     }
@@ -559,7 +560,7 @@ TEST_F(TextureValidationTest, DestroyEncodeSubmit) {
     wgpu::Texture texture = device.CreateTexture(&descriptor);
     wgpu::TextureView textureView = texture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass({textureView});
+    dawn::utils::ComboRenderPassDescriptor renderPass({textureView});
 
     // Destroy the texture
     texture.Destroy();
@@ -582,7 +583,7 @@ TEST_F(TextureValidationTest, EncodeDestroySubmit) {
     wgpu::Texture texture = device.CreateTexture(&descriptor);
     wgpu::TextureView textureView = texture.CreateView();
 
-    utils::ComboRenderPassDescriptor renderPass({textureView});
+    dawn::utils::ComboRenderPassDescriptor renderPass({textureView});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
@@ -622,9 +623,9 @@ TEST_F(TextureValidationTest, TextureFormatNotSupportTextureUsageStorage) {
     descriptor.size = {1, 1, 1};
     descriptor.usage = wgpu::TextureUsage::StorageBinding;
 
-    for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kAllTextureFormats) {
         descriptor.format = format;
-        if (utils::TextureFormatSupportsStorageTexture(format)) {
+        if (dawn::utils::TextureFormatSupportsStorageTexture(format)) {
             device.CreateTexture(&descriptor);
         } else {
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
@@ -670,7 +671,7 @@ TEST_F(TextureValidationTest, UseD32S8FormatWithoutEnablingFeature) {
 // Test that the creation of a texture with BC format will fail when the feature
 // textureCompressionBC is not enabled.
 TEST_F(TextureValidationTest, UseBCFormatWithoutEnablingFeature) {
-    for (wgpu::TextureFormat format : utils::kBCFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kBCFormats) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
         descriptor.format = format;
         ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
@@ -680,7 +681,7 @@ TEST_F(TextureValidationTest, UseBCFormatWithoutEnablingFeature) {
 // Test that the creation of a texture with ETC2 format will fail when the feature
 // textureCompressionETC2 is not enabled.
 TEST_F(TextureValidationTest, UseETC2FormatWithoutEnablingFeature) {
-    for (wgpu::TextureFormat format : utils::kETC2Formats) {
+    for (wgpu::TextureFormat format : dawn::utils::kETC2Formats) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
         descriptor.format = format;
         ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
@@ -690,7 +691,7 @@ TEST_F(TextureValidationTest, UseETC2FormatWithoutEnablingFeature) {
 // Test that the creation of a texture with ASTC format will fail when the feature
 // textureCompressionASTC is not enabled.
 TEST_F(TextureValidationTest, UseASTCFormatWithoutEnablingFeature) {
-    for (wgpu::TextureFormat format : utils::kASTCFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kASTCFormats) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
         descriptor.format = format;
         ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
@@ -756,7 +757,7 @@ TEST_F(CompressedTextureFormatsValidationTests, TextureUsage) {
         wgpu::TextureUsage::StorageBinding,
         wgpu::TextureUsage::Present,
     };
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         for (wgpu::TextureUsage usage : invalidUsages) {
             wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
             descriptor.format = format;
@@ -768,7 +769,7 @@ TEST_F(CompressedTextureFormatsValidationTests, TextureUsage) {
 
 // Test that using various MipLevelCount is allowed for compressed formats.
 TEST_F(CompressedTextureFormatsValidationTests, MipLevelCount) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         for (uint32_t mipLevels : {1, 3, 6}) {
             wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
             descriptor.format = format;
@@ -780,7 +781,7 @@ TEST_F(CompressedTextureFormatsValidationTests, MipLevelCount) {
 
 // Test that it is invalid to specify SampleCount>1 in compressed formats.
 TEST_F(CompressedTextureFormatsValidationTests, SampleCount) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
         descriptor.format = format;
         descriptor.sampleCount = 4;
@@ -790,7 +791,7 @@ TEST_F(CompressedTextureFormatsValidationTests, SampleCount) {
 
 // Test that it is allowed to create a 2D texture with depth>1 in compressed formats.
 TEST_F(CompressedTextureFormatsValidationTests, 2DArrayTexture) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
         descriptor.format = format;
         descriptor.size.depthOrArrayLayers = 6;
@@ -800,7 +801,7 @@ TEST_F(CompressedTextureFormatsValidationTests, 2DArrayTexture) {
 
 // Test that it is not allowed to create a 1D texture in compressed formats.
 TEST_F(CompressedTextureFormatsValidationTests, 1DTexture) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
         descriptor.format = format;
         // Unfortunately we can't use the block height here otherwise validation for the max
@@ -818,7 +819,7 @@ TEST_F(CompressedTextureFormatsValidationTests, 1DTexture) {
 
 // Test that it is not allowed to create a 3D texture in compressed formats.
 TEST_F(CompressedTextureFormatsValidationTests, 3DTexture) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
         descriptor.format = format;
         descriptor.size.depthOrArrayLayers = 4;
@@ -830,9 +831,9 @@ TEST_F(CompressedTextureFormatsValidationTests, 3DTexture) {
 // Test that it is invalid to use numbers for a texture's width/height that are not multiples
 // of the compressed block sizes.
 TEST_F(CompressedTextureFormatsValidationTests, TextureSize) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
-        uint32_t blockWidth = utils::GetTextureFormatBlockWidth(format);
-        uint32_t blockHeight = utils::GetTextureFormatBlockHeight(format);
+    for (wgpu::TextureFormat format : dawn::utils::kCompressedFormats) {
+        uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+        uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(format);
 
         // Test that the default size (120 x 120) is valid for all formats.
         {
@@ -1081,4 +1082,5 @@ TEST_F(TransientAttachmentValidationTest, FlagsBeyondRenderAttachment) {
     ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
 }
 
-}  // namespace
+}  // anonymous namespace
+}  // namespace dawn

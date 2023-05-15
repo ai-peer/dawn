@@ -26,6 +26,9 @@
 #include "dawn/common/Assert.h"
 #include "dawn/native/D3D12Backend.h"
 
+namespace dawn {
+namespace {
+
 using Microsoft::WRL::ComPtr;
 
 class PlatformTextureWin : public VideoViewsTestBackend::PlatformTexture {
@@ -196,6 +199,8 @@ class VideoViewsTestBackendWin : public VideoViewsTestBackend {
     ComPtr<ID3D11Device> mD3d11Device;
 };
 
+}  // anonymous namespace
+
 // static
 BackendTestConfig VideoViewsTestBackend::Backend() {
     return D3D12Backend();
@@ -204,3 +209,5 @@ BackendTestConfig VideoViewsTestBackend::Backend() {
 std::unique_ptr<VideoViewsTestBackend> VideoViewsTestBackend::Create() {
     return std::make_unique<VideoViewsTestBackendWin>();
 }
+
+}  // namespace dawn

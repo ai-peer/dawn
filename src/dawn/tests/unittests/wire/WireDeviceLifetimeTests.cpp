@@ -20,13 +20,16 @@
 #include "dawn/webgpu.h"
 #include "gtest/gtest.h"
 
+namespace dawn {
+namespace {
+
 static WGPUDevice lastBackendDevice = nullptr;
 
 class WireDeviceLifetimeTests : public testing::Test {
   public:
     WireDeviceLifetimeTests()
         : nativeProcs(BuildProcs()),
-          wireHelper(utils::CreateWireHelper(nativeProcs, /* useWire */ true)) {
+          wireHelper(dawn::utils::CreateWireHelper(nativeProcs, /* useWire */ true)) {
         WGPUInstanceDescriptor instanceDesc = {};
         nativeInstance = std::make_unique<dawn::native::Instance>(&instanceDesc);
         instance = wireHelper->RegisterInstance(nativeInstance->Get());
@@ -48,7 +51,7 @@ class WireDeviceLifetimeTests : public testing::Test {
     }
 
     const DawnProcTable nativeProcs;
-    std::unique_ptr<utils::WireHelper> wireHelper;
+    std::unique_ptr<dawn::utils::WireHelper> wireHelper;
 
     std::unique_ptr<dawn::native::Instance> nativeInstance;
     wgpu::Instance instance;
@@ -213,3 +216,6 @@ TEST_F(WireDeviceLifetimeTests, DeviceDroppedFromWireThenLostCallback) {
     // callbacks.
     nativeProcs.deviceRelease(oldDevice);
 }
+
+}  // anonymous namespace
+}  // namespace dawn

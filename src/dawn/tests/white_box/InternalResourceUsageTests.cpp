@@ -16,6 +16,9 @@
 
 #include "dawn/native/dawn_platform.h"
 
+namespace dawn {
+namespace {
+
 class InternalResourceUsageTests : public DawnTest {
   protected:
     wgpu::Buffer CreateBuffer(wgpu::BufferUsage usage) {
@@ -58,3 +61,6 @@ TEST_P(InternalBindingTypeTests, InternalStorageBufferBindingType) {
 }
 
 DAWN_INSTANTIATE_TEST(InternalBindingTypeTests, NullBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

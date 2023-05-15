@@ -21,7 +21,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
+
 // Helper for describing bindings throughout the tests
 struct BindingDescriptor {
     uint32_t group;
@@ -146,7 +148,6 @@ std::vector<BindingDescriptor> CombineBindings(
     }
     return result;
 }
-}  // namespace
 
 class MinBufferSizeTestsBase : public ValidationTest {
   public:
@@ -163,7 +164,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
     // Creates compute pipeline given a layout and shader
     wgpu::ComputePipeline CreateComputePipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                                 const std::string& shader) {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, shader.c_str());
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
         wgpu::ComputePipelineDescriptor csDesc;
         csDesc.layout = nullptr;
@@ -188,11 +189,11 @@ class MinBufferSizeTestsBase : public ValidationTest {
     wgpu::RenderPipeline CreateRenderPipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                               const std::string& vertexShader,
                                               const std::string& fragShader) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragShader.c_str());
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragShader.c_str());
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
@@ -412,7 +413,7 @@ TEST_F(MinBufferSizeBindGroupCreationTests, LayoutEquality) {
     DAWN_SKIP_TEST_IF(UsesWire());
 
     auto MakeLayout = [&](uint64_t size) {
-        return utils::MakeBindGroupLayout(
+        return dawn::utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform, false, size}});
     };
@@ -611,7 +612,7 @@ TEST_F(MinBufferSizePipelineCreationTests, NonStructVec3) {
     std::string vertexShader = CreateVertexShaderWithBindings({});
 
     CheckSizeBounds({12}, [&](const std::vector<uint64_t>& sizes, bool expectation) {
-        wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout layout = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
                       wgpu::BufferBindingType::Storage, false, sizes[0]}});
         if (expectation) {
@@ -623,3 +624,6 @@ TEST_F(MinBufferSizePipelineCreationTests, NonStructVec3) {
         }
     });
 }
+
+}  // anonymous namespace
+}  // namespace dawn

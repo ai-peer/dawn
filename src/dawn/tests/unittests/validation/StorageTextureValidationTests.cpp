@@ -20,16 +20,19 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class StorageTextureValidationTests : public ValidationTest {
   protected:
     void SetUp() override {
         ValidationTest::SetUp();
 
-        mDefaultVSModule = utils::CreateShaderModule(device, R"(
+        mDefaultVSModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
-        mDefaultFSModule = utils::CreateShaderModule(device, R"(
+        mDefaultFSModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(1.0, 0.0, 0.0, 1.0);
             })");
@@ -62,7 +65,7 @@ class StorageTextureValidationTests : public ValidationTest {
         wgpu::TextureFormat textureFormat,
         wgpu::TextureViewDimension textureViewDimension = wgpu::TextureViewDimension::e2D) {
         return CreateComputeShaderWithStorageTexture(
-            storageTextureBindingType, utils::GetWGSLImageFormatQualifier(textureFormat),
+            storageTextureBindingType, dawn::utils::GetWGSLImageFormatQualifier(textureFormat),
             GetFloatImageTypeDeclaration(textureViewDimension));
     }
 
@@ -118,7 +121,7 @@ class StorageTextureValidationTests : public ValidationTest {
 TEST_F(StorageTextureValidationTests, RenderPipeline) {
     // Write-only storage textures cannot be declared in a vertex shader.
     {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var image0 : texture_storage_2d<rgba8unorm, write>;
             @vertex
             fn main(@builtin(vertex_index) vertex_index : u32) -> @builtin(position) vec4f {
@@ -126,7 +129,7 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
                 return vec4f(0.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.layout = nullptr;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = mDefaultFSModule;
@@ -135,13 +138,13 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
 
     // Write-only storage textures can be declared in a fragment shader.
     {
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var image0 : texture_storage_2d<rgba8unorm, write>;
             @fragment fn main(@builtin(position) position : vec4f) {
                 textureStore(image0, vec2i(position.xy), vec4f(1.0, 0.0, 0.0, 1.0));
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.layout = nullptr;
         descriptor.vertex.module = mDefaultVSModule;
         descriptor.cFragment.module = fsModule;
@@ -155,7 +158,7 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
 TEST_F(StorageTextureValidationTests, ComputePipeline) {
     // Write-only storage textures can be declared in a compute shader.
     {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var image0 : texture_storage_2d<rgba8unorm, write>;
 
             @compute @workgroup_size(1) fn main(@builtin(local_invocation_id) LocalInvocationID : vec3u) {
@@ -175,7 +178,7 @@ TEST_F(StorageTextureValidationTests, ComputePipeline) {
 TEST_F(StorageTextureValidationTests, ReadWriteStorageTexture) {
     // Read-write storage textures cannot be declared in a vertex shader by default.
     {
-        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+        ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var image0 : texture_storage_2d<rgba8unorm, read_write>;
             @vertex fn main() {
                 _ = textureDimensions(image0);
@@ -184,7 +187,7 @@ TEST_F(StorageTextureValidationTests, ReadWriteStorageTexture) {
 
     // Read-write storage textures cannot be declared in a fragment shader by default.
     {
-        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+        ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var image0 : texture_storage_2d<rgba8unorm, read_write>;
             @fragment fn main() {
                 _ = textureDimensions(image0);
@@ -193,7 +196,7 @@ TEST_F(StorageTextureValidationTests, ReadWriteStorageTexture) {
 
     // Read-write storage textures cannot be declared in a compute shader by default.
     {
-        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+        ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, R"(
             @group(0) @binding(0) var image0 : texture_storage_2d<rgba8unorm, read_write>;
             @compute @workgroup_size(1) fn main() {
                 _ = textureDimensions(image0);
@@ -215,7 +218,7 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutWithStorageTextureBindingTy
          {wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, true}}};
 
     for (const auto& testSpec : kTestSpecs) {
-        wgpu::BindGroupLayoutEntry entry = utils::BindingLayoutEntryInitializationHelper(
+        wgpu::BindGroupLayoutEntry entry = dawn::utils::BindingLayoutEntryInitializationHelper(
             0, testSpec.stage, testSpec.type, wgpu::TextureFormat::R32Uint);
 
         wgpu::BindGroupLayoutDescriptor descriptor;
@@ -258,10 +261,10 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInShaders) {
         for (wgpu::TextureFormat format : kWGPUTextureFormatSupportedAsSPIRVImageFormats) {
             std::string computeShader =
                 CreateComputeShaderWithStorageTexture(storageTextureBindingType, format);
-            if (utils::TextureFormatSupportsStorageTexture(format)) {
-                utils::CreateShaderModule(device, computeShader.c_str());
+            if (dawn::utils::TextureFormatSupportsStorageTexture(format)) {
+                dawn::utils::CreateShaderModule(device, computeShader.c_str());
             } else {
-                ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader.c_str()));
+                ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, computeShader.c_str()));
             }
         }
     }
@@ -283,7 +286,7 @@ TEST_F(BGRA8UnormStorageTextureInShaderValidationTests, BGRA8UnormAsStorageInSha
     for (wgpu::StorageTextureAccess storageTextureBindingType : kSupportedStorageTextureAccess) {
         std::string computeShader = CreateComputeShaderWithStorageTexture(
             storageTextureBindingType, wgpu::TextureFormat::BGRA8Unorm);
-        utils::CreateShaderModule(device, computeShader.c_str());
+        dawn::utils::CreateShaderModule(device, computeShader.c_str());
     }
 }
 
@@ -304,7 +307,7 @@ TEST_F(StorageTextureValidationTests, UnsupportedWGSLStorageTextureFormat) {
     for (wgpu::StorageTextureAccess bindingType : kSupportedStorageTextureAccess) {
         for (wgpu::TextureFormat format : kUnsupportedTextureFormats) {
             std::string computeShader = CreateComputeShaderWithStorageTexture(bindingType, format);
-            ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader.c_str()));
+            ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, computeShader.c_str()));
         }
     }
 }
@@ -321,7 +324,7 @@ TEST_F(StorageTextureValidationTests, UnsupportedTextureViewDimensionInShader) {
         for (wgpu::TextureViewDimension dimension : kUnsupportedTextureViewDimensions) {
             std::string computeShader =
                 CreateComputeShaderWithStorageTexture(bindingType, kFormat, dimension);
-            ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader.c_str()));
+            ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, computeShader.c_str()));
         }
     }
 }
@@ -336,7 +339,7 @@ TEST_F(StorageTextureValidationTests, UnsupportedTextureViewDimensionInBindGroup
 
     for (wgpu::StorageTextureAccess bindingType : kSupportedStorageTextureAccess) {
         for (wgpu::TextureViewDimension dimension : kUnsupportedTextureViewDimensions) {
-            ASSERT_DEVICE_ERROR(utils::MakeBindGroupLayout(
+            ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroupLayout(
                 device, {{0, wgpu::ShaderStage::Compute, bindingType, kFormat, dimension}}));
         }
     }
@@ -348,36 +351,38 @@ TEST_F(StorageTextureValidationTests, UnsupportedTextureViewDimensionInBindGroup
 TEST_F(StorageTextureValidationTests, BindGroupLayoutEntryTypeMatchesShaderDeclaration) {
     constexpr wgpu::TextureFormat kStorageTextureFormat = wgpu::TextureFormat::R32Float;
 
-    std::initializer_list<utils::BindingLayoutEntryInitializationHelper> kSupportedBindingTypes = {
-        {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
-        {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
-        {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage},
-        {0, wgpu::ShaderStage::Compute, wgpu::SamplerBindingType::Filtering},
-        {0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float},
-        {0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly,
-         kStorageTextureFormat}};
+    std::initializer_list<dawn::utils::BindingLayoutEntryInitializationHelper>
+        kSupportedBindingTypes = {
+            {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
+            {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
+            {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage},
+            {0, wgpu::ShaderStage::Compute, wgpu::SamplerBindingType::Filtering},
+            {0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float},
+            {0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly,
+             kStorageTextureFormat}};
 
     for (wgpu::StorageTextureAccess bindingTypeInShader : kSupportedStorageTextureAccess) {
         // Create the compute shader with the given binding type.
         std::string computeShader =
             CreateComputeShaderWithStorageTexture(bindingTypeInShader, kStorageTextureFormat);
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, computeShader.c_str());
+        wgpu::ShaderModule csModule =
+            dawn::utils::CreateShaderModule(device, computeShader.c_str());
 
         // Set common fields of compute pipeline descriptor.
         wgpu::ComputePipelineDescriptor defaultComputePipelineDescriptor;
         defaultComputePipelineDescriptor.compute.module = csModule;
         defaultComputePipelineDescriptor.compute.entryPoint = "main";
 
-        for (utils::BindingLayoutEntryInitializationHelper bindingLayoutEntry :
+        for (dawn::utils::BindingLayoutEntryInitializationHelper bindingLayoutEntry :
              kSupportedBindingTypes) {
             wgpu::ComputePipelineDescriptor computePipelineDescriptor =
                 defaultComputePipelineDescriptor;
 
             // Create bind group layout with different binding types.
             wgpu::BindGroupLayout bindGroupLayout =
-                utils::MakeBindGroupLayout(device, {bindingLayoutEntry});
+                dawn::utils::MakeBindGroupLayout(device, {bindingLayoutEntry});
             computePipelineDescriptor.layout =
-                utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
+                dawn::utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
 
             // The binding type in the bind group layout must the same as the related image object
             // declared in shader.
@@ -400,7 +405,7 @@ TEST_F(StorageTextureValidationTests, UndefinedStorageTextureFormatInBindGroupLa
 
     for (wgpu::StorageTextureAccess bindingType : kSupportedStorageTextureAccess) {
         errorBindGroupLayoutEntry.storageTexture.access = bindingType;
-        ASSERT_DEVICE_ERROR(utils::MakeBindGroupLayout(device, {errorBindGroupLayoutEntry}));
+        ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroupLayout(device, {errorBindGroupLayoutEntry}));
     }
 }
 
@@ -412,14 +417,15 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInBindGroupLayout) {
     defaultBindGroupLayoutEntry.visibility = wgpu::ShaderStage::Compute;
 
     for (wgpu::StorageTextureAccess bindingType : kSupportedStorageTextureAccess) {
-        for (wgpu::TextureFormat textureFormat : utils::kAllTextureFormats) {
+        for (wgpu::TextureFormat textureFormat : dawn::utils::kAllTextureFormats) {
             wgpu::BindGroupLayoutEntry bindGroupLayoutBinding = defaultBindGroupLayoutEntry;
             bindGroupLayoutBinding.storageTexture.access = bindingType;
             bindGroupLayoutBinding.storageTexture.format = textureFormat;
-            if (utils::TextureFormatSupportsStorageTexture(textureFormat)) {
-                utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+            if (dawn::utils::TextureFormatSupportsStorageTexture(textureFormat)) {
+                dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
             } else {
-                ASSERT_DEVICE_ERROR(utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding}));
+                ASSERT_DEVICE_ERROR(
+                    dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding}));
             }
         }
     }
@@ -447,15 +453,15 @@ TEST_F(BGRA8UnormStorageBindGroupLayoutTest, BGRA8UnormAsStorage) {
 
     for (wgpu::StorageTextureAccess bindingType : kSupportedStorageTextureAccess) {
         bindGroupLayoutBinding.storageTexture.access = bindingType;
-        utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+        dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
     }
 }
 
 // Verify the storage texture format in the bind group layout must match the declaration in shader.
 TEST_F(StorageTextureValidationTests, BindGroupLayoutStorageTextureFormatMatchesShaderDeclaration) {
     for (wgpu::StorageTextureAccess bindingType : kSupportedStorageTextureAccess) {
-        for (wgpu::TextureFormat storageTextureFormatInShader : utils::kAllTextureFormats) {
-            if (!utils::TextureFormatSupportsStorageTexture(storageTextureFormatInShader)) {
+        for (wgpu::TextureFormat storageTextureFormatInShader : dawn::utils::kAllTextureFormats) {
+            if (!dawn::utils::TextureFormatSupportsStorageTexture(storageTextureFormatInShader)) {
                 continue;
             }
 
@@ -463,7 +469,8 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutStorageTextureFormatMatches
             // format.
             std::string computeShader =
                 CreateComputeShaderWithStorageTexture(bindingType, storageTextureFormatInShader);
-            wgpu::ShaderModule csModule = utils::CreateShaderModule(device, computeShader.c_str());
+            wgpu::ShaderModule csModule =
+                dawn::utils::CreateShaderModule(device, computeShader.c_str());
 
             // Set common fields of compute pipeline descriptor.
             wgpu::ComputePipelineDescriptor defaultComputePipelineDescriptor;
@@ -471,12 +478,12 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutStorageTextureFormatMatches
             defaultComputePipelineDescriptor.compute.entryPoint = "main";
 
             // Set common fileds of bind group layout binding.
-            utils::BindingLayoutEntryInitializationHelper defaultBindGroupLayoutEntry = {
-                0, wgpu::ShaderStage::Compute, bindingType, utils::kAllTextureFormats[0]};
+            dawn::utils::BindingLayoutEntryInitializationHelper defaultBindGroupLayoutEntry = {
+                0, wgpu::ShaderStage::Compute, bindingType, dawn::utils::kAllTextureFormats[0]};
 
             for (wgpu::TextureFormat storageTextureFormatInBindGroupLayout :
-                 utils::kAllTextureFormats) {
-                if (!utils::TextureFormatSupportsStorageTexture(
+                 dawn::utils::kAllTextureFormats) {
+                if (!dawn::utils::TextureFormatSupportsStorageTexture(
                         storageTextureFormatInBindGroupLayout)) {
                     continue;
                 }
@@ -486,13 +493,13 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutStorageTextureFormatMatches
                 bindGroupLayoutBinding.storageTexture.format =
                     storageTextureFormatInBindGroupLayout;
                 wgpu::BindGroupLayout bindGroupLayout =
-                    utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+                    dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
 
                 // Create the compute pipeline with the bind group layout.
                 wgpu::ComputePipelineDescriptor computePipelineDescriptor =
                     defaultComputePipelineDescriptor;
                 computePipelineDescriptor.layout =
-                    utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
+                    dawn::utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
 
                 // The storage texture format in the bind group layout must be the same as the one
                 // declared in the shader.
@@ -519,7 +526,8 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutViewDimensionMatchesShaderD
             // Create the compute shader with the given texture view dimension.
             std::string computeShader = CreateComputeShaderWithStorageTexture(
                 bindingType, kStorageTextureFormat, dimensionInShader);
-            wgpu::ShaderModule csModule = utils::CreateShaderModule(device, computeShader.c_str());
+            wgpu::ShaderModule csModule =
+                dawn::utils::CreateShaderModule(device, computeShader.c_str());
 
             // Set common fields of compute pipeline descriptor.
             wgpu::ComputePipelineDescriptor defaultComputePipelineDescriptor;
@@ -527,7 +535,7 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutViewDimensionMatchesShaderD
             defaultComputePipelineDescriptor.compute.entryPoint = "main";
 
             // Set common fields of bind group layout binding.
-            utils::BindingLayoutEntryInitializationHelper defaultBindGroupLayoutEntry = {
+            dawn::utils::BindingLayoutEntryInitializationHelper defaultBindGroupLayoutEntry = {
                 0, wgpu::ShaderStage::Compute, bindingType, kStorageTextureFormat};
 
             for (wgpu::TextureViewDimension dimensionInBindGroupLayout : kSupportedDimensions) {
@@ -535,13 +543,13 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutViewDimensionMatchesShaderD
                 wgpu::BindGroupLayoutEntry bindGroupLayoutBinding = defaultBindGroupLayoutEntry;
                 bindGroupLayoutBinding.storageTexture.viewDimension = dimensionInBindGroupLayout;
                 wgpu::BindGroupLayout bindGroupLayout =
-                    utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+                    dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
 
                 // Create the compute pipeline with the bind group layout.
                 wgpu::ComputePipelineDescriptor computePipelineDescriptor =
                     defaultComputePipelineDescriptor;
                 computePipelineDescriptor.layout =
-                    utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
+                    dawn::utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
 
                 // The texture dimension in the bind group layout must be the same as the one
                 // declared in the shader.
@@ -567,7 +575,7 @@ TEST_F(StorageTextureValidationTests, StorageTextureBindingTypeInBindGroup) {
         bindGroupLayoutBinding.storageTexture.access = storageBindingType;
         bindGroupLayoutBinding.storageTexture.format = kStorageTextureFormat;
         wgpu::BindGroupLayout bindGroupLayout =
-            utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+            dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
 
         // Buffers are not allowed to be used as storage textures in a bind group.
         {
@@ -575,13 +583,14 @@ TEST_F(StorageTextureValidationTests, StorageTextureBindingTypeInBindGroup) {
             descriptor.size = 1024;
             descriptor.usage = wgpu::BufferUsage::Uniform;
             wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
-            ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bindGroupLayout, {{0, buffer}}));
+            ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, buffer}}));
         }
 
         // Samplers are not allowed to be used as storage textures in a bind group.
         {
             wgpu::Sampler sampler = device.CreateSampler();
-            ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bindGroupLayout, {{0, sampler}}));
+            ASSERT_DEVICE_ERROR(
+                dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, sampler}}));
         }
 
         // Texture views are allowed to be used as storage textures in a bind group.
@@ -589,7 +598,7 @@ TEST_F(StorageTextureValidationTests, StorageTextureBindingTypeInBindGroup) {
             wgpu::TextureView textureView =
                 CreateTexture(wgpu::TextureUsage::StorageBinding, kStorageTextureFormat)
                     .CreateView();
-            utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}});
+            dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}});
         }
     }
 }
@@ -611,7 +620,7 @@ TEST_F(StorageTextureValidationTests, StorageTextureUsageInBindGroup) {
         bindGroupLayoutBinding.storageTexture.access = storageBindingType;
         bindGroupLayoutBinding.storageTexture.format = wgpu::TextureFormat::R32Float;
         wgpu::BindGroupLayout bindGroupLayout =
-            utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+            dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
 
         for (wgpu::TextureUsage usage : kTextureUsages) {
             // Create texture views with different texture usages
@@ -621,10 +630,10 @@ TEST_F(StorageTextureValidationTests, StorageTextureUsageInBindGroup) {
             // Verify that the texture used as storage texture must be created with the texture
             // usage wgpu::TextureUsage::StorageBinding.
             if (usage & wgpu::TextureUsage::StorageBinding) {
-                utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}});
+                dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}});
             } else {
                 ASSERT_DEVICE_ERROR(
-                    utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}}));
+                    dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}}));
             }
         }
     }
@@ -639,8 +648,8 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInBindGroup) {
         defaultBindGroupLayoutEntry.visibility = wgpu::ShaderStage::Compute;
         defaultBindGroupLayoutEntry.storageTexture.access = storageBindingType;
 
-        for (wgpu::TextureFormat formatInBindGroupLayout : utils::kAllTextureFormats) {
-            if (!utils::TextureFormatSupportsStorageTexture(formatInBindGroupLayout)) {
+        for (wgpu::TextureFormat formatInBindGroupLayout : dawn::utils::kAllTextureFormats) {
+            if (!dawn::utils::TextureFormatSupportsStorageTexture(formatInBindGroupLayout)) {
                 continue;
             }
 
@@ -648,10 +657,10 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInBindGroup) {
             wgpu::BindGroupLayoutEntry bindGroupLayoutBinding = defaultBindGroupLayoutEntry;
             bindGroupLayoutBinding.storageTexture.format = formatInBindGroupLayout;
             wgpu::BindGroupLayout bindGroupLayout =
-                utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+                dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
 
-            for (wgpu::TextureFormat textureViewFormat : utils::kAllTextureFormats) {
-                if (!utils::TextureFormatSupportsStorageTexture(textureViewFormat)) {
+            for (wgpu::TextureFormat textureViewFormat : dawn::utils::kAllTextureFormats) {
+                if (!dawn::utils::TextureFormatSupportsStorageTexture(textureViewFormat)) {
                     continue;
                 }
 
@@ -663,10 +672,10 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInBindGroup) {
                 // Verify that the format of the texture view used as storage texture in a bind
                 // group must match the storage texture format declaration in the bind group layout.
                 if (textureViewFormat == formatInBindGroupLayout) {
-                    utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTextureView}});
+                    dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTextureView}});
                 } else {
-                    ASSERT_DEVICE_ERROR(
-                        utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTextureView}}));
+                    ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bindGroupLayout,
+                                                                   {{0, storageTextureView}}));
                 }
             }
         }
@@ -704,14 +713,14 @@ TEST_F(StorageTextureValidationTests, StorageTextureViewDimensionInBindGroup) {
             wgpu::BindGroupLayoutEntry bindGroupLayoutBinding = defaultBindGroupLayoutEntry;
             bindGroupLayoutBinding.storageTexture.viewDimension = dimensionInBindGroupLayout;
             wgpu::BindGroupLayout bindGroupLayout =
-                utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
+                dawn::utils::MakeBindGroupLayout(device, {bindGroupLayoutBinding});
 
             for (wgpu::TextureViewDimension dimensionOfTextureView : kSupportedDimensions) {
                 // Create a texture view with given texture view dimension.
-                wgpu::Texture texture =
-                    CreateTexture(wgpu::TextureUsage::StorageBinding, kStorageTextureFormat, 1,
-                                  kDepthOrArrayLayers,
-                                  utils::ViewDimensionToTextureDimension(dimensionOfTextureView));
+                wgpu::Texture texture = CreateTexture(
+                    wgpu::TextureUsage::StorageBinding, kStorageTextureFormat, 1,
+                    kDepthOrArrayLayers,
+                    dawn::utils::ViewDimensionToTextureDimension(dimensionOfTextureView));
 
                 wgpu::TextureViewDescriptor textureViewDescriptor = kDefaultTextureViewDescriptor;
                 textureViewDescriptor.dimension = dimensionOfTextureView;
@@ -720,10 +729,10 @@ TEST_F(StorageTextureValidationTests, StorageTextureViewDimensionInBindGroup) {
                 // Verify that the dimension of the texture view used as storage texture in a bind
                 // group must match the texture view dimension declaration in the bind group layout.
                 if (dimensionInBindGroupLayout == dimensionOfTextureView) {
-                    utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTextureView}});
+                    dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTextureView}});
                 } else {
-                    ASSERT_DEVICE_ERROR(
-                        utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTextureView}}));
+                    ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, bindGroupLayout,
+                                                                   {{0, storageTextureView}}));
                 }
             }
         }
@@ -735,7 +744,7 @@ TEST_F(StorageTextureValidationTests, MultisampledStorageTexture) {
     for (wgpu::StorageTextureAccess bindingType : kSupportedStorageTextureAccess) {
         std::string computeShader =
             CreateComputeShaderWithStorageTexture(bindingType, "", "image2DMS");
-        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader.c_str()));
+        ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, computeShader.c_str()));
     }
 }
 
@@ -746,15 +755,15 @@ TEST_F(StorageTextureValidationTests, StorageTextureInRenderPass) {
     wgpu::Texture storageTexture = CreateTexture(wgpu::TextureUsage::StorageBinding, kFormat);
 
     wgpu::Texture outputAttachment = CreateTexture(wgpu::TextureUsage::RenderAttachment, kFormat);
-    utils::ComboRenderPassDescriptor renderPassDescriptor({outputAttachment.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({outputAttachment.CreateView()});
 
     for (wgpu::StorageTextureAccess storageTextureType : kSupportedStorageTextureAccess) {
         // Create a bind group that contains a storage texture.
-        wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bindGroupLayout = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, storageTextureType, kFormat}});
 
         wgpu::BindGroup bindGroupWithStorageTexture =
-            utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTexture.CreateView()}});
+            dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTexture.CreateView()}});
 
         // It is valid to use a texture as read-only or write-only storage texture in the render
         // pass.
@@ -775,16 +784,16 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneRender
         wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding, kFormat);
 
     wgpu::Texture outputAttachment = CreateTexture(wgpu::TextureUsage::RenderAttachment, kFormat);
-    utils::ComboRenderPassDescriptor renderPassDescriptor({outputAttachment.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({outputAttachment.CreateView()});
 
     // Create a bind group that contains a storage texture and a sampled texture.
     for (wgpu::StorageTextureAccess storageTextureType : kSupportedStorageTextureAccess) {
         // Create a bind group that binds the same texture as both storage texture and sampled
         // texture.
-        wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bindGroupLayout = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, storageTextureType, kFormat},
                      {1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, bindGroupLayout,
             {{0, storageTexture.CreateView()}, {1, storageTexture.CreateView()}});
 
@@ -812,14 +821,14 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndRenderAttachmentInOneRend
     constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
     wgpu::Texture storageTexture = CreateTexture(
         wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::RenderAttachment, kFormat);
-    utils::ComboRenderPassDescriptor renderPassDescriptor({storageTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({storageTexture.CreateView()});
 
     for (wgpu::StorageTextureAccess storageTextureType : kSupportedStorageTextureAccess) {
         // Create a bind group that contains a storage texture.
-        wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bindGroupLayout = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, storageTextureType, kFormat}});
         wgpu::BindGroup bindGroupWithStorageTexture =
-            utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTexture.CreateView()}});
+            dawn::utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTexture.CreateView()}});
 
         // It is invalid to use a texture as both storage texture and render attachment in one
         // render pass.
@@ -841,10 +850,10 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneComput
     for (wgpu::StorageTextureAccess storageTextureType : kSupportedStorageTextureAccess) {
         // Create a bind group that binds the same texture as both storage texture and sampled
         // texture.
-        wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        wgpu::BindGroupLayout bindGroupLayout = dawn::utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Compute, storageTextureType, kFormat},
                      {1, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}});
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
             device, bindGroupLayout,
             {{0, storageTexture.CreateView()}, {1, storageTexture.CreateView()}});
 
@@ -857,3 +866,6 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneComput
         encoder.Finish();
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

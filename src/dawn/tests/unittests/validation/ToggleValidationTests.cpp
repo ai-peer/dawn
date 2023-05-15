@@ -16,6 +16,7 @@
 
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 
+namespace dawn {
 namespace {
 
 class ToggleValidationTest : public ValidationTest {
@@ -109,4 +110,6 @@ TEST_F(ToggleValidationTest, TurnOffVsyncWithToggle) {
     }
     ASSERT_EQ(validToggleExists, true);
 }
+
 }  // anonymous namespace
+}  // namespace dawn

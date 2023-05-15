@@ -22,6 +22,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 constexpr unsigned int kNumDraws = 2000;
@@ -195,8 +196,6 @@ std::ostream& operator<<(std::ostream& ostream, const DrawCallParamForTest& test
     return ostream;
 }
 
-}  // anonymous namespace
-
 // DrawCallPerf is an uber-benchmark with supports many parameterizations.
 // The specific parameterizations we care about are explicitly instantiated at the bottom
 // of this test file.
@@ -259,8 +258,8 @@ void DrawCallPerf::SetUp() {
 
     // Compute aligned uniform / vertex data sizes.
     mAlignedUniformSize =
-        Align(kUniformSize, GetSupportedLimits().limits.minUniformBufferOffsetAlignment);
-    mAlignedVertexDataSize = Align(sizeof(kVertexData), 4);
+        dawn::Align(kUniformSize, GetSupportedLimits().limits.minUniformBufferOffsetAlignment);
+    mAlignedVertexDataSize = dawn::Align(sizeof(kVertexData), 4);
 
     // Initialize uniform buffer data.
     mNumUniformFloats = mAlignedUniformSize / sizeof(float);
@@ -285,13 +284,13 @@ void DrawCallPerf::SetUp() {
     // Create vertex buffer(s)
     switch (GetParam().vertexBufferType) {
         case VertexBuffer::NoChange:
-            mVertexBuffers[0] = utils::CreateBufferFromData(
+            mVertexBuffers[0] = dawn::utils::CreateBufferFromData(
                 device, kVertexData, sizeof(kVertexData), wgpu::BufferUsage::Vertex);
             break;
 
         case VertexBuffer::Multiple: {
             for (uint32_t i = 0; i < kNumDraws; ++i) {
-                mVertexBuffers[i] = utils::CreateBufferFromData(
+                mVertexBuffers[i] = dawn::utils::CreateBufferFromData(
                     device, kVertexData, sizeof(kVertexData), wgpu::BufferUsage::Vertex);
             }
             break;
@@ -303,8 +302,8 @@ void DrawCallPerf::SetUp() {
                 memcpy(data.data() + mAlignedVertexDataSize * i, kVertexData, sizeof(kVertexData));
             }
 
-            mVertexBuffers[0] = utils::CreateBufferFromData(device, data.data(), data.size(),
-                                                            wgpu::BufferUsage::Vertex);
+            mVertexBuffers[0] = dawn::utils::CreateBufferFromData(device, data.data(), data.size(),
+                                                                  wgpu::BufferUsage::Vertex);
             break;
         }
     }
@@ -315,7 +314,7 @@ void DrawCallPerf::SetUp() {
         case BindGroup::Redundant:
         case BindGroup::NoReuse:
         case BindGroup::Multiple:
-            mUniformBindGroupLayout = utils::MakeBindGroupLayout(
+            mUniformBindGroupLayout = dawn::utils::MakeBindGroupLayout(
                 device,
                 {
                     {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, false},
@@ -323,7 +322,7 @@ void DrawCallPerf::SetUp() {
             break;
 
         case BindGroup::Dynamic:
-            mUniformBindGroupLayout = utils::MakeBindGroupLayout(
+            mUniformBindGroupLayout = dawn::utils::MakeBindGroupLayout(
                 device,
                 {
                     {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, true},
@@ -336,7 +335,7 @@ void DrawCallPerf::SetUp() {
     }
 
     // Setup the base render pipeline descriptor.
-    utils::ComboRenderPipelineDescriptor renderPipelineDesc;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDesc;
     renderPipelineDesc.vertex.bufferCount = 1;
     renderPipelineDesc.cBuffers[0].arrayStride = 4 * sizeof(float);
     renderPipelineDesc.cBuffers[0].attributeCount = 1;
@@ -351,8 +350,8 @@ void DrawCallPerf::SetUp() {
     wgpu::PipelineLayout pipelineLayout = device.CreatePipelineLayout(&pipelineLayoutDesc);
 
     // Create the shaders for the first pipeline.
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, kVertexShader);
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, kFragmentShaderA);
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, kVertexShader);
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, kFragmentShaderA);
 
     // Create the first pipeline.
     renderPipelineDesc.layout = pipelineLayout;
@@ -364,7 +363,7 @@ void DrawCallPerf::SetUp() {
     if (GetParam().pipelineType == Pipeline::Dynamic) {
         // Create another bind group layout. The data for this binding point will be the same for
         // all draws.
-        mConstantBindGroupLayout = utils::MakeBindGroupLayout(
+        mConstantBindGroupLayout = dawn::utils::MakeBindGroupLayout(
             device, {
                         {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, false},
                     });
@@ -380,7 +379,7 @@ void DrawCallPerf::SetUp() {
 
         // Create the fragment shader module. This shader matches the pipeline layout described
         // above.
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, kFragmentShaderB);
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, kFragmentShaderB);
 
         // Create the pipeline.
         renderPipelineDesc.layout = pipelineLayout;
@@ -389,26 +388,26 @@ void DrawCallPerf::SetUp() {
 
         // Create the buffer and bind group to bind to the constant bind group layout slot.
         constexpr float kConstantData[] = {0.01, 0.02, 0.03};
-        wgpu::Buffer constantBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer constantBuffer = dawn::utils::CreateBufferFromData(
             device, kConstantData, sizeof(kConstantData), wgpu::BufferUsage::Uniform);
-        mConstantBindGroup = utils::MakeBindGroup(device, mConstantBindGroupLayout,
-                                                  {{0, constantBuffer, 0, sizeof(kConstantData)}});
+        mConstantBindGroup = dawn::utils::MakeBindGroup(
+            device, mConstantBindGroupLayout, {{0, constantBuffer, 0, sizeof(kConstantData)}});
     }
 
     // Create the buffers and bind groups for the per-draw uniform data.
     switch (GetParam().bindGroupType) {
         case BindGroup::NoChange:
         case BindGroup::Redundant:
-            mUniformBuffers[0] = utils::CreateBufferFromData(
+            mUniformBuffers[0] = dawn::utils::CreateBufferFromData(
                 device, mUniformBufferData.data(), 3 * sizeof(float), wgpu::BufferUsage::Uniform);
 
-            mUniformBindGroups[0] = utils::MakeBindGroup(
+            mUniformBindGroups[0] = dawn::utils::MakeBindGroup(
                 device, mUniformBindGroupLayout, {{0, mUniformBuffers[0], 0, kUniformSize}});
             break;
 
         case BindGroup::NoReuse:
             for (uint32_t i = 0; i < kNumDraws; ++i) {
-                mUniformBuffers[i] = utils::CreateBufferFromData(
+                mUniformBuffers[i] = dawn::utils::CreateBufferFromData(
                     device, mUniformBufferData.data() + i * mNumUniformFloats, 3 * sizeof(float),
                     wgpu::BufferUsage::Uniform);
             }
@@ -417,21 +416,21 @@ void DrawCallPerf::SetUp() {
 
         case BindGroup::Multiple:
             for (uint32_t i = 0; i < kNumDraws; ++i) {
-                mUniformBuffers[i] = utils::CreateBufferFromData(
+                mUniformBuffers[i] = dawn::utils::CreateBufferFromData(
                     device, mUniformBufferData.data() + i * mNumUniformFloats, 3 * sizeof(float),
                     wgpu::BufferUsage::Uniform);
 
-                mUniformBindGroups[i] = utils::MakeBindGroup(
+                mUniformBindGroups[i] = dawn::utils::MakeBindGroup(
                     device, mUniformBindGroupLayout, {{0, mUniformBuffers[i], 0, kUniformSize}});
             }
             break;
 
         case BindGroup::Dynamic:
-            mUniformBuffers[0] = utils::CreateBufferFromData(
+            mUniformBuffers[0] = dawn::utils::CreateBufferFromData(
                 device, mUniformBufferData.data(), mUniformBufferData.size() * sizeof(float),
                 wgpu::BufferUsage::Uniform);
 
-            mUniformBindGroups[0] = utils::MakeBindGroup(
+            mUniformBindGroups[0] = dawn::utils::MakeBindGroup(
                 device, mUniformBindGroupLayout, {{0, mUniformBuffers[0], 0, kUniformSize}});
             break;
         default:
@@ -519,7 +518,7 @@ void DrawCallPerf::RecordRenderCommands(Encoder pass) {
                 break;
 
             case BindGroup::NoReuse: {
-                wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+                wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
                     device, mUniformBindGroupLayout, {{0, mUniformBuffers[i], 0, kUniformSize}});
                 pass.SetBindGroup(uniformBindGroupIndex, bindGroup);
                 break;
@@ -571,7 +570,7 @@ void DrawCallPerf::Step() {
     }
 
     wgpu::CommandEncoder commands = device.CreateCommandEncoder();
-    utils::ComboRenderPassDescriptor renderPass({mColorAttachment}, mDepthStencilAttachment);
+    dawn::utils::ComboRenderPassDescriptor renderPass({mColorAttachment}, mDepthStencilAttachment);
     wgpu::RenderPassEncoder pass = commands.BeginRenderPass(&renderPass);
 
     switch (GetParam().withRenderBundle) {
@@ -650,3 +649,6 @@ DAWN_INSTANTIATE_TEST_P(
         MakeParam(BindGroup::Dynamic,
                   UniformData::Dynamic),  // Update per-draw data: Dynamic bind groups
     });
+
+}  // anonymous namespace
+}  // namespace dawn

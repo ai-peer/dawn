@@ -20,6 +20,9 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class QueueTests : public DawnTest {};
 
 // Test that GetQueue always returns the same object.
@@ -174,7 +177,7 @@ TEST_P(QueueWriteBufferTests, SuperLargeWriteBuffer) {
 // Test a special code path: writing when dynamic uploader already contatins some unaligned
 // data, it might be necessary to use a ring buffer with properly aligned offset.
 TEST_P(QueueWriteBufferTests, UnalignedDynamicUploader) {
-    utils::UnalignDynamicUploader(device);
+    dawn::utils::UnalignDynamicUploader(device);
 
     wgpu::BufferDescriptor descriptor;
     descriptor.size = 4;
@@ -218,7 +221,8 @@ class QueueWriteTextureTests : public DawnTest {
     static DataSpec MinimumDataSpec(wgpu::Extent3D writeSize,
                                     uint32_t overrideBytesPerRow = kStrideComputeDefault,
                                     uint32_t overrideRowsPerImage = kStrideComputeDefault) {
-        uint32_t bytesPerRow = writeSize.width * utils::GetTexelBlockSizeInBytes(kTextureFormat);
+        uint32_t bytesPerRow =
+            writeSize.width * dawn::utils::GetTexelBlockSizeInBytes(kTextureFormat);
         if (overrideBytesPerRow != kStrideComputeDefault) {
             bytesPerRow = overrideBytesPerRow;
         }
@@ -228,7 +232,7 @@ class QueueWriteTextureTests : public DawnTest {
         }
 
         uint32_t totalDataSize =
-            utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, writeSize, kTextureFormat);
+            dawn::utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, writeSize, kTextureFormat);
         return {totalDataSize, 0, bytesPerRow, rowsPerImage};
     }
 
@@ -236,7 +240,7 @@ class QueueWriteTextureTests : public DawnTest {
                                 uint32_t width,
                                 uint32_t height,
                                 uint32_t srcBytesPerRow,
-                                utils::RGBA8* dstData,
+                                dawn::utils::RGBA8* dstData,
                                 uint32_t dstTexelPerRow,
                                 uint32_t texelBlockSize) {
         for (uint64_t y = 0; y < height; ++y) {
@@ -271,16 +275,16 @@ class QueueWriteTextureTests : public DawnTest {
         descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc;
         wgpu::Texture texture = device.CreateTexture(&descriptor);
 
-        wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(
+        wgpu::TextureDataLayout textureDataLayout = dawn::utils::CreateTextureDataLayout(
             dataSpec.offset, dataSpec.bytesPerRow, dataSpec.rowsPerImage);
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, textureSpec.level, textureSpec.copyOrigin);
+            dawn::utils::CreateImageCopyTexture(texture, textureSpec.level, textureSpec.copyOrigin);
 
         queue.WriteTexture(&imageCopyTexture, data.data(), dataSpec.size, &textureDataLayout,
                            &copySize);
 
-        const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(kTextureFormat);
+        const uint32_t bytesPerTexel = dawn::utils::GetTexelBlockSizeInBytes(kTextureFormat);
         wgpu::Extent3D mipSize = {textureSpec.textureSize.width >> textureSpec.level,
                                   textureSpec.textureSize.height >> textureSpec.level,
                                   textureSpec.textureSize.depthOrArrayLayers};
@@ -288,7 +292,7 @@ class QueueWriteTextureTests : public DawnTest {
         if (bytesPerRow == wgpu::kCopyStrideUndefined) {
             bytesPerRow = mipSize.width * bytesPerTexel;
         }
-        uint32_t alignedBytesPerRow = Align(bytesPerRow, bytesPerTexel);
+        uint32_t alignedBytesPerRow = dawn::Align(bytesPerRow, bytesPerTexel);
         uint32_t appliedRowsPerImage =
             dataSpec.rowsPerImage > 0 ? dataSpec.rowsPerImage : mipSize.height;
         uint32_t bytesPerImage = bytesPerRow * appliedRowsPerImage;
@@ -301,7 +305,7 @@ class QueueWriteTextureTests : public DawnTest {
         for (uint32_t slice = textureSpec.copyOrigin.z; slice < maxArrayLayer; ++slice) {
             // Pack the data in the specified copy region to have the same
             // format as the expected texture data.
-            std::vector<utils::RGBA8> expected(texelCountLastLayer);
+            std::vector<dawn::utils::RGBA8> expected(texelCountLastLayer);
             PackTextureData(data.data() + dataOffset, copySize.width, copySize.height,
                             dataSpec.bytesPerRow, expected.data(), copySize.width, bytesPerTexel);
 
@@ -336,9 +340,9 @@ class QueueWriteTextureTests : public DawnTest {
         wgpu::Texture texture = device.CreateTexture(&descriptor);
 
         wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+            dawn::utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
         wgpu::TextureDataLayout textureDataLayout =
-            utils::CreateTextureDataLayout(0, width * kPixelSize);
+            dawn::utils::CreateTextureDataLayout(0, width * kPixelSize);
         wgpu::Extent3D copyExtent = {width, height, 1};
         device.GetQueue().WriteTexture(&imageCopyTexture, data.data(), width * height * kPixelSize,
                                        &textureDataLayout, &copyExtent);
@@ -519,7 +523,7 @@ TEST_P(QueueWriteTextureTests, VaryingBytesPerRow) {
 
     for (unsigned int b : {1, 2, 3, 4}) {
         uint32_t bytesPerRow =
-            copyExtent.width * utils::GetTexelBlockSizeInBytes(kTextureFormat) + b;
+            copyExtent.width * dawn::utils::GetTexelBlockSizeInBytes(kTextureFormat) + b;
         DoTest(textureSpec, MinimumDataSpec(copyExtent, bytesPerRow), copyExtent);
     }
 }
@@ -561,7 +565,7 @@ TEST_P(QueueWriteTextureTests, VaryingArrayBytesPerRow) {
     // Test with bytesPerRow divisible by blockWidth
     for (unsigned int b : {1, 2, 3, 65, 300}) {
         uint32_t bytesPerRow =
-            (copyExtent.width + b) * utils::GetTexelBlockSizeInBytes(kTextureFormat);
+            (copyExtent.width + b) * dawn::utils::GetTexelBlockSizeInBytes(kTextureFormat);
         uint32_t rowsPerImage = 23;
         DoTest(textureSpec, MinimumDataSpec(copyExtent, bytesPerRow, rowsPerImage), copyExtent);
     }
@@ -569,7 +573,7 @@ TEST_P(QueueWriteTextureTests, VaryingArrayBytesPerRow) {
     // Test with bytesPerRow not divisible by blockWidth
     for (unsigned int b : {1, 2, 3, 19, 301}) {
         uint32_t bytesPerRow =
-            copyExtent.width * utils::GetTexelBlockSizeInBytes(kTextureFormat) + b;
+            copyExtent.width * dawn::utils::GetTexelBlockSizeInBytes(kTextureFormat) + b;
         uint32_t rowsPerImage = 23;
         DoTest(textureSpec, MinimumDataSpec(copyExtent, bytesPerRow, rowsPerImage), copyExtent);
     }
@@ -610,7 +614,7 @@ TEST_P(QueueWriteTextureTests, StrideSpecialCases) {
 // Testing a special code path: writing when dynamic uploader already contatins some unaligned
 // data, it might be necessary to use a ring buffer with properly aligned offset.
 TEST_P(QueueWriteTextureTests, UnalignedDynamicUploader) {
-    utils::UnalignDynamicUploader(device);
+    dawn::utils::UnalignDynamicUploader(device);
 
     constexpr wgpu::Extent3D size = {10, 10, 1};
 
@@ -668,14 +672,14 @@ TEST_P(QueueWriteTextureTests, WriteStencilAspectWithSourceOffsetUnalignedTo4) {
     {
         constexpr uint32_t kDataOffset1 = 0u;
         wgpu::TextureDataLayout textureDataLayout =
-            utils::CreateTextureDataLayout(kDataOffset1, kBytesPerRowForWriteTexture);
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+            dawn::utils::CreateTextureDataLayout(kDataOffset1, kBytesPerRowForWriteTexture);
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             dstTexture1, 0, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
         queue.WriteTexture(&imageCopyTexture, kData, sizeof(kData), &textureDataLayout,
                            &kWriteSize);
 
         constexpr uint32_t kOutputBufferOffset1 = 0u;
-        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
             outputBuffer, kOutputBufferOffset1, kTextureBytesPerRowAlignment);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &kWriteSize);
 
@@ -689,14 +693,14 @@ TEST_P(QueueWriteTextureTests, WriteStencilAspectWithSourceOffsetUnalignedTo4) {
     {
         constexpr uint32_t kDataOffset2 = 1u;
         wgpu::TextureDataLayout textureDataLayout =
-            utils::CreateTextureDataLayout(kDataOffset2, kBytesPerRowForWriteTexture);
-        wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+            dawn::utils::CreateTextureDataLayout(kDataOffset2, kBytesPerRowForWriteTexture);
+        wgpu::ImageCopyTexture imageCopyTexture = dawn::utils::CreateImageCopyTexture(
             dstTexture2, 0, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
         queue.WriteTexture(&imageCopyTexture, kData, sizeof(kData), &textureDataLayout,
                            &kWriteSize);
 
         constexpr uint32_t kOutputBufferOffset2 = 4u;
-        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+        wgpu::ImageCopyBuffer imageCopyBuffer = dawn::utils::CreateImageCopyBuffer(
             outputBuffer, kOutputBufferOffset2, kTextureBytesPerRowAlignment);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &kWriteSize);
 
@@ -724,14 +728,14 @@ TEST_P(QueueWriteTextureTests, WriteDepthAspectAfterOtherQueueWriteTextureCalls)
     wgpu::Texture depthTexture2 = device.CreateTexture(&textureDescriptor);
 
     constexpr uint16_t kExpectedData1 = (204 << 8) | 205;
-    wgpu::ImageCopyTexture imageCopyTexture1 = utils::CreateImageCopyTexture(depthTexture1);
+    wgpu::ImageCopyTexture imageCopyTexture1 = dawn::utils::CreateImageCopyTexture(depthTexture1);
     wgpu::TextureDataLayout textureDataLayout =
-        utils::CreateTextureDataLayout(0, sizeof(kExpectedData1));
+        dawn::utils::CreateTextureDataLayout(0, sizeof(kExpectedData1));
     queue.WriteTexture(&imageCopyTexture1, &kExpectedData1, sizeof(kExpectedData1),
                        &textureDataLayout, &textureDescriptor.size);
 
     constexpr uint16_t kExpectedData2 = (206 << 8) | 207;
-    wgpu::ImageCopyTexture imageCopyTexture2 = utils::CreateImageCopyTexture(depthTexture2);
+    wgpu::ImageCopyTexture imageCopyTexture2 = dawn::utils::CreateImageCopyTexture(depthTexture2);
     queue.WriteTexture(&imageCopyTexture2, &kExpectedData2, sizeof(kExpectedData2),
                        &textureDataLayout, &textureDescriptor.size);
 
@@ -759,15 +763,15 @@ TEST_P(QueueWriteTextureTests, WriteStencilAspectAfterOtherQueueWriteTextureCall
     wgpu::Texture depthStencilTexture2 = device.CreateTexture(&textureDescriptor);
 
     constexpr uint8_t kExpectedData1 = 204u;
-    wgpu::ImageCopyTexture imageCopyTexture1 = utils::CreateImageCopyTexture(
+    wgpu::ImageCopyTexture imageCopyTexture1 = dawn::utils::CreateImageCopyTexture(
         depthStencilTexture1, 0, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
     wgpu::TextureDataLayout textureDataLayout =
-        utils::CreateTextureDataLayout(0, sizeof(kExpectedData1));
+        dawn::utils::CreateTextureDataLayout(0, sizeof(kExpectedData1));
     queue.WriteTexture(&imageCopyTexture1, &kExpectedData1, sizeof(kExpectedData1),
                        &textureDataLayout, &textureDescriptor.size);
 
     constexpr uint8_t kExpectedData2 = 205;
-    wgpu::ImageCopyTexture imageCopyTexture2 = utils::CreateImageCopyTexture(
+    wgpu::ImageCopyTexture imageCopyTexture2 = dawn::utils::CreateImageCopyTexture(
         depthStencilTexture2, 0, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
     queue.WriteTexture(&imageCopyTexture2, &kExpectedData2, sizeof(kExpectedData2),
                        &textureDataLayout, &textureDescriptor.size);
@@ -789,3 +793,6 @@ DAWN_INSTANTIATE_TEST(QueueWriteTextureTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

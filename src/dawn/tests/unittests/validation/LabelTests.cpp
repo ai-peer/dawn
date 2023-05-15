@@ -18,6 +18,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class LabelTest : public ValidationTest {
     void SetUp() override {
         ValidationTest::SetUp();
@@ -27,7 +30,7 @@ class LabelTest : public ValidationTest {
 
 TEST_F(LabelTest, BindGroup) {
     std::string label = "test";
-    wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(device, {});
+    wgpu::BindGroupLayout layout = dawn::utils::MakeBindGroupLayout(device, {});
 
     wgpu::BindGroupDescriptor descriptor;
     descriptor.layout = layout;
@@ -260,7 +263,7 @@ TEST_F(LabelTest, ExternalTexture) {
 
 TEST_F(LabelTest, PipelineLayout) {
     std::string label = "test";
-    wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(device, {});
+    wgpu::BindGroupLayout layout = dawn::utils::MakeBindGroupLayout(device, {});
 
     wgpu::PipelineLayoutDescriptor descriptor;
     descriptor.bindGroupLayoutCount = 1;
@@ -360,7 +363,7 @@ TEST_F(LabelTest, Queue) {
 TEST_F(LabelTest, RenderBundleEncoder) {
     std::string label = "test";
 
-    utils::ComboRenderBundleEncoderDescriptor descriptor = {};
+    dawn::utils::ComboRenderBundleEncoderDescriptor descriptor = {};
     descriptor.colorFormatsCount = 1;
     descriptor.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -398,7 +401,7 @@ TEST_F(LabelTest, RenderPassEncoder) {
     textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment;
     wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
 
-    utils::ComboRenderPassDescriptor descriptor({texture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor descriptor({texture.CreateView()});
 
     // The label should be empty if one was not set.
     {
@@ -533,17 +536,17 @@ TEST_F(LabelTest, TextureView) {
 TEST_F(LabelTest, RenderPipeline) {
     std::string label = "test";
 
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
 
@@ -574,10 +577,10 @@ TEST_F(LabelTest, RenderPipeline) {
 TEST_F(LabelTest, ComputePipeline) {
     std::string label = "test";
 
-    wgpu::ShaderModule computeModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule computeModule = dawn::utils::CreateShaderModule(device, R"(
     @compute @workgroup_size(1) fn main() {
     })");
-    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, nullptr);
+    wgpu::PipelineLayout pl = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
     wgpu::ComputePipelineDescriptor descriptor;
     descriptor.layout = pl;
     descriptor.compute.module = computeModule;
@@ -642,3 +645,6 @@ TEST_F(LabelTest, ShaderModule) {
         ASSERT_EQ(label, readbackLabel);
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

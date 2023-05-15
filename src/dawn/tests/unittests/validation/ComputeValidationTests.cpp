@@ -16,6 +16,9 @@
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 // TODO(cwallez@chromium.org): Add a regression test for Disptach validation trying to acces the
 // input state.
 
@@ -24,12 +27,12 @@ class ComputeValidationTest : public ValidationTest {
     void SetUp() override {
         ValidationTest::SetUp();
 
-        wgpu::ShaderModule computeModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule computeModule = dawn::utils::CreateShaderModule(device, R"(
             @compute @workgroup_size(1) fn main() {
             })");
 
         // Set up compute pipeline
-        wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, nullptr);
+        wgpu::PipelineLayout pl = dawn::utils::MakeBasicPipelineLayout(device, nullptr);
 
         wgpu::ComputePipelineDescriptor csDesc;
         csDesc.layout = pl;
@@ -84,3 +87,6 @@ TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_InvalidAll) {
     const uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
     ASSERT_DEVICE_ERROR(TestDispatch(max + 1, max + 1, max + 1));
 }
+
+}  // anonymous namespace
+}  // namespace dawn

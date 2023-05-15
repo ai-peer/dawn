@@ -24,6 +24,7 @@
 #include "dawn/utils/TerribleCommandBuffer.h"
 #include "dawn/wire/WireClient.h"
 
+namespace dawn {
 namespace {
 
 // dawn_wire and dawn_native contain duplicated code for the handling of GetProcAddress
@@ -69,7 +70,7 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
             }
 
             case DawnFlavor::Wire: {
-                mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
+                mC2sBuf = std::make_unique<dawn::utils::TerribleCommandBuffer>();
 
                 dawn::wire::WireClientDescriptor clientDesc = {};
                 clientDesc.serializer = mC2sBuf.get();
@@ -94,10 +95,10 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
     }
 
   protected:
-    Ref<dawn::native::InstanceBase> mNativeInstance;
+    dawn::Ref<dawn::native::InstanceBase> mNativeInstance;
     dawn::native::AdapterBase mAdapterBase;
 
-    std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
+    std::unique_ptr<dawn::utils::TerribleCommandBuffer> mC2sBuf;
     std::unique_ptr<dawn::wire::WireClient> mWireClient;
 
     wgpu::Device mDevice;
@@ -171,4 +172,6 @@ TEST(GetProcAddressInternalTests, CheckDawnWireClientProcMapOrder) {
         ASSERT_LT(std::string(names[i - 1]), std::string(names[i]));
     }
 }
+
 }  // anonymous namespace
+}  // namespace dawn

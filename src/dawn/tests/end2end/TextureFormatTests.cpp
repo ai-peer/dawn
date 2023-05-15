@@ -25,6 +25,7 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 enum class TextureComponentType {
@@ -32,8 +33,6 @@ enum class TextureComponentType {
     Sint,
     Uint,
 };
-
-}
 
 // An expectation for float buffer content that can correctly compare different NaN values and
 // supports a basic tolerance for comparison of finite values.
@@ -111,8 +110,8 @@ class ExpectFloat16 : public detail::Expectation {
 
   private:
     bool Floats16Match(float expected, float actual) {
-        if (IsFloat16NaN(expected)) {
-            return IsFloat16NaN(actual);
+        if (dawn::IsFloat16NaN(expected)) {
+            return dawn::IsFloat16NaN(actual);
         }
 
         return expected == actual;
@@ -227,9 +226,9 @@ class TextureFormatTest : public DawnTest {
     // bindgroup and output its decompressed values to the render target.
     wgpu::RenderPipeline CreateSamplePipeline(FormatTestInfo sampleFormatInfo,
                                               FormatTestInfo renderFormatInfo) {
-        utils::ComboRenderPipelineDescriptor desc;
+        dawn::utils::ComboRenderPipelineDescriptor desc;
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -241,7 +240,7 @@ class TextureFormatTest : public DawnTest {
             })");
 
         // Compute the WGSL type of the texture's data.
-        const char* type = utils::GetWGSLColorTextureComponentType(sampleFormatInfo.format);
+        const char* type = dawn::utils::GetWGSLColorTextureComponentType(sampleFormatInfo.format);
 
         std::ostringstream fsSource;
         fsSource << "@group(0) @binding(0) var myTexture : texture_2d<" << type << ">;\n";
@@ -255,7 +254,8 @@ class TextureFormatTest : public DawnTest {
                 return output;
             })";
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fsSource.str().c_str());
+        wgpu::ShaderModule fsModule =
+            dawn::utils::CreateShaderModule(device, fsSource.str().c_str());
 
         desc.vertex.module = vsModule;
         desc.cFragment.module = fsModule;
@@ -290,8 +290,8 @@ class TextureFormatTest : public DawnTest {
         sampleTextureDesc.format = sampleFormatInfo.format;
         wgpu::Texture sampleTexture = device.CreateTexture(&sampleTextureDesc);
 
-        wgpu::Buffer uploadBuffer = utils::CreateBufferFromData(device, sampleData, sampleDataSize,
-                                                                wgpu::BufferUsage::CopySrc);
+        wgpu::Buffer uploadBuffer = dawn::utils::CreateBufferFromData(
+            device, sampleData, sampleDataSize, wgpu::BufferUsage::CopySrc);
 
         // Create the texture that we will render results to
         ASSERT(expectedRenderDataSize == width * renderFormatInfo.texelByteSize);
@@ -311,22 +311,23 @@ class TextureFormatTest : public DawnTest {
 
         // Prepare objects needed to sample from texture in the renderpass
         wgpu::RenderPipeline pipeline = CreateSamplePipeline(sampleFormatInfo, renderFormatInfo);
-        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                         {{0, sampleTexture.CreateView()}});
+        wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, sampleTexture.CreateView()}});
 
         // Encode commands for the test that fill texture, sample it to render to renderTarget then
         // copy renderTarget in a buffer so we can read it easily.
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
         {
-            wgpu::ImageCopyBuffer bufferView = utils::CreateImageCopyBuffer(uploadBuffer, 0, 256);
+            wgpu::ImageCopyBuffer bufferView =
+                dawn::utils::CreateImageCopyBuffer(uploadBuffer, 0, 256);
             wgpu::ImageCopyTexture textureView =
-                utils::CreateImageCopyTexture(sampleTexture, 0, {0, 0, 0});
+                dawn::utils::CreateImageCopyTexture(sampleTexture, 0, {0, 0, 0});
             wgpu::Extent3D extent{width, 1, 1};
             encoder.CopyBufferToTexture(&bufferView, &textureView, &extent);
         }
 
-        utils::ComboRenderPassDescriptor renderPassDesc({renderTarget.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc({renderTarget.CreateView()});
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDesc);
         renderPass.SetPipeline(pipeline);
         renderPass.SetBindGroup(0, bindGroup);
@@ -334,9 +335,10 @@ class TextureFormatTest : public DawnTest {
         renderPass.End();
 
         {
-            wgpu::ImageCopyBuffer bufferView = utils::CreateImageCopyBuffer(readbackBuffer, 0, 256);
+            wgpu::ImageCopyBuffer bufferView =
+                dawn::utils::CreateImageCopyBuffer(readbackBuffer, 0, 256);
             wgpu::ImageCopyTexture textureView =
-                utils::CreateImageCopyTexture(renderTarget, 0, {0, 0, 0});
+                dawn::utils::CreateImageCopyTexture(renderTarget, 0, {0, 0, 0});
             wgpu::Extent3D extent{width, 1, 1};
             encoder.CopyTextureToBuffer(&textureView, &bufferView, &extent);
         }
@@ -514,7 +516,7 @@ class TextureFormatTest : public DawnTest {
                                                1.0e4f, NAN,   INFINITY, -INFINITY};
         std::vector<uint16_t> textureData;
         for (float value : uncompressedData) {
-            textureData.push_back(Float32ToFloat16(value));
+            textureData.push_back(dawn::Float32ToFloat16(value));
         }
 
         DoFloatFormatSamplingTest(formatInfo, textureData, uncompressedData, 1.0e-5f);
@@ -727,9 +729,12 @@ TEST_P(TextureFormatTest, RGBA8UnormSrgb) {
 
     std::vector<float> uncompressedData;
     for (size_t i = 0; i < textureData.size(); i += 4) {
-        uncompressedData.push_back(SRGBToLinear(textureData[i + 0] / static_cast<float>(maxValue)));
-        uncompressedData.push_back(SRGBToLinear(textureData[i + 1] / static_cast<float>(maxValue)));
-        uncompressedData.push_back(SRGBToLinear(textureData[i + 2] / static_cast<float>(maxValue)));
+        uncompressedData.push_back(
+            dawn::SRGBToLinear(textureData[i + 0] / static_cast<float>(maxValue)));
+        uncompressedData.push_back(
+            dawn::SRGBToLinear(textureData[i + 1] / static_cast<float>(maxValue)));
+        uncompressedData.push_back(
+            dawn::SRGBToLinear(textureData[i + 2] / static_cast<float>(maxValue)));
         // Alpha is linear for sRGB formats
         uncompressedData.push_back(textureData[i + 3] / static_cast<float>(maxValue));
     }
@@ -753,9 +758,12 @@ TEST_P(TextureFormatTest, BGRA8UnormSrgb) {
     std::vector<float> uncompressedData;
     for (size_t i = 0; i < textureData.size(); i += 4) {
         // Note that R and B are swapped
-        uncompressedData.push_back(SRGBToLinear(textureData[i + 2] / static_cast<float>(maxValue)));
-        uncompressedData.push_back(SRGBToLinear(textureData[i + 1] / static_cast<float>(maxValue)));
-        uncompressedData.push_back(SRGBToLinear(textureData[i + 0] / static_cast<float>(maxValue)));
+        uncompressedData.push_back(
+            dawn::SRGBToLinear(textureData[i + 2] / static_cast<float>(maxValue)));
+        uncompressedData.push_back(
+            dawn::SRGBToLinear(textureData[i + 1] / static_cast<float>(maxValue)));
+        uncompressedData.push_back(
+            dawn::SRGBToLinear(textureData[i + 0] / static_cast<float>(maxValue)));
         // Alpha is linear for sRGB formats
         uncompressedData.push_back(textureData[i + 3] / static_cast<float>(maxValue));
     }
@@ -907,3 +915,6 @@ DAWN_INSTANTIATE_TEST(TextureFormatTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

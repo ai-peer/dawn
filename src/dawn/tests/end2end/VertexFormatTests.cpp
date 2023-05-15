@@ -22,6 +22,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 // Vertex format tests all work the same way: the test will render a triangle.
 // Each test will set up a vertex buffer, and the vertex shader will check that
 // the vertex content is the same as what we expected. On success it outputs green,
@@ -33,7 +36,7 @@ constexpr uint32_t kVertexNum = 3;
 std::vector<uint16_t> Float32ToFloat16(std::vector<float> data) {
     std::vector<uint16_t> expectedData;
     for (auto& element : data) {
-        expectedData.push_back(Float32ToFloat16(element));
+        expectedData.push_back(dawn::Float32ToFloat16(element));
     }
     return expectedData;
 }
@@ -51,10 +54,10 @@ class VertexFormatTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     }
 
-    utils::BasicRenderPass renderPass;
+    dawn::utils::BasicRenderPass renderPass;
 
     bool IsNormalizedFormat(wgpu::VertexFormat format) {
         switch (format) {
@@ -360,8 +363,8 @@ class VertexFormatTest : public DawnTest {
             return output;
         })";
 
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vs.str().c_str());
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vs.str().c_str());
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
                 @fragment
                 fn main(@location(0) color : vec4f) -> @location(0) vec4f {
                     return color;
@@ -374,7 +377,7 @@ class VertexFormatTest : public DawnTest {
             strideBytes += (4 - strideBytes % 4);
         }
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.vertex.bufferCount = 1;
@@ -391,7 +394,7 @@ class VertexFormatTest : public DawnTest {
                             std::vector<VertexType> vertex,
                             std::vector<ExpectedType> expectedData) {
         wgpu::RenderPipeline pipeline = MakeTestPipeline(format, expectedData);
-        wgpu::Buffer vertexBuffer = utils::CreateBufferFromData(
+        wgpu::Buffer vertexBuffer = dawn::utils::CreateBufferFromData(
             device, vertex.data(), vertex.size() * sizeof(VertexType), wgpu::BufferUsage::Vertex);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
@@ -405,7 +408,7 @@ class VertexFormatTest : public DawnTest {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kGreen, renderPass.color, 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kGreen, renderPass.color, 0, 0);
     }
 };
 
@@ -835,3 +838,6 @@ DAWN_INSTANTIATE_TEST(VertexFormatTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

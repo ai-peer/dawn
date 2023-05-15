@@ -69,7 +69,7 @@ void ValidateFootprints(const TextureSpec& textureSpec,
             uint32_t heightInBlocks = textureSpec.height / textureSpec.blockHeight;
             uint64_t minimumRequiredBufferSize =
                 bufferSpec.offset +
-                utils::RequiredBytesInCopy(
+                dawn::utils::RequiredBytesInCopy(
                     bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, widthInBlocks, heightInBlocks,
                     textureSpec.depthOrArrayLayers, textureSpec.texelBlockSizeInBytes);
 
@@ -90,10 +90,10 @@ void ValidateFootprints(const TextureSpec& textureSpec,
 
             uint64_t bufferSizeForFootprint =
                 copy.alignedOffset +
-                utils::RequiredBytesInCopy(bufferSpec.bytesPerRow, copy.bufferSize.height,
-                                           footprintWidthInBlocks, footprintHeightInBlocks,
-                                           copy.bufferSize.depthOrArrayLayers,
-                                           textureSpec.texelBlockSizeInBytes);
+                dawn::utils::RequiredBytesInCopy(bufferSpec.bytesPerRow, copy.bufferSize.height,
+                                                 footprintWidthInBlocks, footprintHeightInBlocks,
+                                                 copy.bufferSize.depthOrArrayLayers,
+                                                 textureSpec.texelBlockSizeInBytes);
 
             // The buffer footprint of each copy region should not exceed the minimum
             // required buffer size. Otherwise, pixels accessed by copy may be OOB.
@@ -105,9 +105,9 @@ void ValidateFootprints(const TextureSpec& textureSpec,
 // Check that the offset is aligned
 void ValidateOffset(const TextureCopySubresource& copySplit) {
     for (uint32_t i = 0; i < copySplit.count; ++i) {
-        ASSERT_TRUE(
-            Align(copySplit.copies[i].alignedOffset, D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT) ==
-            copySplit.copies[i].alignedOffset);
+        ASSERT_TRUE(dawn::Align(copySplit.copies[i].alignedOffset,
+                                D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT) ==
+                    copySplit.copies[i].alignedOffset);
     }
 }
 
@@ -320,8 +320,8 @@ constexpr TextureSpec kBaseTextureSpecs[] = {
 // Define base buffer sizes to work with: some offsets aligned, some unaligned. bytesPerRow
 // is the minimum required
 std::array<BufferSpec, 15> BaseBufferSpecs(const TextureSpec& textureSpec) {
-    uint32_t bytesPerRow =
-        Align(textureSpec.texelBlockSizeInBytes * textureSpec.width, kTextureBytesPerRowAlignment);
+    uint32_t bytesPerRow = dawn::Align(textureSpec.texelBlockSizeInBytes * textureSpec.width,
+                                       kTextureBytesPerRowAlignment);
 
     auto alignNonPow2 = [](uint32_t value, uint32_t size) -> uint32_t {
         return value == 0 ? 0 : ((value - 1) / size + 1) * size;
@@ -368,8 +368,6 @@ constexpr uint32_t kCheckValues[] = {1,  2,  3,  4,   5,   6,   7,    8,     // 
                                      16, 32, 64, 128, 256, 512, 1024, 2048,  // powers of 2
                                      15, 31, 63, 127, 257, 511, 1023, 2047,  // misalignments
                                      17, 33, 65, 129, 257, 513, 1025, 2049};
-
-}  // namespace
 
 class CopySplitTest : public testing::TestWithParam<wgpu::TextureDimension> {
   protected:
@@ -526,4 +524,5 @@ INSTANTIATE_TEST_SUITE_P(,
                          CopySplitTest,
                          testing::Values(wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D));
 
+}  // anonymous namespace
 }  // namespace dawn::native::d3d12

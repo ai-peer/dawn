@@ -15,6 +15,9 @@
 #include "dawn/native/ShaderModule.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 
+namespace dawn {
+namespace {
+
 class CountUTF16CodeUnitsFromUTF8StringTest : public ValidationTest {};
 
 TEST_F(CountUTF16CodeUnitsFromUTF8StringTest, ValidUnicodeString) {
@@ -71,3 +74,6 @@ TEST_F(CountUTF16CodeUnitsFromUTF8StringTest, InvalidUnicodeString) {
         std::ignore = resultOrError.AcquireError();
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

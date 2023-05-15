@@ -22,6 +22,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class RenderPipelineValidationTest : public ValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
@@ -36,17 +39,17 @@ class RenderPipelineValidationTest : public ValidationTest {
     void SetUp() override {
         ValidationTest::SetUp();
 
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
 
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        fsModuleUint = utils::CreateShaderModule(device, R"(
+        fsModuleUint = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4u {
                 return vec4u(0u, 255u, 0u, 255u);
             })");
@@ -57,19 +60,17 @@ class RenderPipelineValidationTest : public ValidationTest {
     wgpu::ShaderModule fsModuleUint;
 };
 
-namespace {
 bool BlendFactorContainsSrcAlpha(const wgpu::BlendFactor& blendFactor) {
     return blendFactor == wgpu::BlendFactor::SrcAlpha ||
            blendFactor == wgpu::BlendFactor::OneMinusSrcAlpha ||
            blendFactor == wgpu::BlendFactor::SrcAlphaSaturated;
 }
-}  // namespace
 
 // Test cases where creation should succeed
 TEST_F(RenderPipelineValidationTest, CreationSuccess) {
     {
         // New format
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
@@ -81,7 +82,7 @@ TEST_F(RenderPipelineValidationTest, CreationSuccess) {
 TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
     // Control case, depth bias parameters in ComboRenderPipeline default to 0 which is finite
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.EnableDepthStencil();
@@ -90,7 +91,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
 
     // Infinite depth bias clamp is valid
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
@@ -99,7 +100,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
     }
     // NAN depth bias clamp is invalid
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
@@ -109,7 +110,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
 
     // Infinite depth bias slope is valid
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
@@ -118,7 +119,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
     }
     // NAN depth bias slope is invalid
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
@@ -131,7 +132,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
 TEST_F(RenderPipelineValidationTest, DepthStencilAspectRequirement) {
     // Control case, stencil aspect is required if stencil test or stencil write is enabled
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil =
@@ -144,7 +145,7 @@ TEST_F(RenderPipelineValidationTest, DepthStencilAspectRequirement) {
     // It is invalid if the texture format doesn't have stencil aspect while stencil test is
     // enabled (depthStencilState.stencilFront are not default values).
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil =
@@ -156,7 +157,7 @@ TEST_F(RenderPipelineValidationTest, DepthStencilAspectRequirement) {
     // It is invalid if the texture format doesn't have stencil aspect while stencil write is
     // enabled (depthStencilState.stencilBack are not default values).
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil =
@@ -167,7 +168,7 @@ TEST_F(RenderPipelineValidationTest, DepthStencilAspectRequirement) {
 
     // Control case, depth aspect is required if depth test or depth write is enabled
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil =
@@ -183,7 +184,7 @@ TEST_F(RenderPipelineValidationTest, DepthStencilAspectRequirement) {
 
 // Tests that depth attachment is required when frag_depth is written in fragment stage.
 TEST_F(RenderPipelineValidationTest, DepthAttachmentRequiredWhenFragDepthIsWritten) {
-    wgpu::ShaderModule fsModuleFragDepthOutput = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleFragDepthOutput = dawn::utils::CreateShaderModule(device, R"(
         struct Output {
             @builtin(frag_depth) depth_out: f32,
             @location(0) color : vec4f,
@@ -199,7 +200,7 @@ TEST_F(RenderPipelineValidationTest, DepthAttachmentRequiredWhenFragDepthIsWritt
 
     {
         // Succeeds because there is depth stencil state.
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModuleFragDepthOutput;
         descriptor.EnableDepthStencil(wgpu::TextureFormat::Depth24PlusStencil8);
@@ -209,7 +210,7 @@ TEST_F(RenderPipelineValidationTest, DepthAttachmentRequiredWhenFragDepthIsWritt
 
     {
         // Fails because there is no depth stencil state.
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModuleFragDepthOutput;
 
@@ -218,7 +219,7 @@ TEST_F(RenderPipelineValidationTest, DepthAttachmentRequiredWhenFragDepthIsWritt
 
     {
         // Fails because there is depth stencil state but no depth aspect.
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModuleFragDepthOutput;
         descriptor.EnableDepthStencil(wgpu::TextureFormat::Stencil8);
@@ -231,7 +232,7 @@ TEST_F(RenderPipelineValidationTest, DepthAttachmentRequiredWhenFragDepthIsWritt
 TEST_F(RenderPipelineValidationTest, ColorTargetStateRequired) {
     {
         // This one succeeds because attachment 0 is the color attachment
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cFragment.targetCount = 1;
@@ -240,7 +241,7 @@ TEST_F(RenderPipelineValidationTest, ColorTargetStateRequired) {
     }
 
     {  // Fail because lack of color target states (and depth/stencil state)
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cFragment.targetCount = 0;
@@ -253,7 +254,7 @@ TEST_F(RenderPipelineValidationTest, ColorTargetStateRequired) {
 TEST_F(RenderPipelineValidationTest, UndefinedColorStateFormatWithBlend) {
     {
         // Control case: Valid undefined format target.
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cFragment.targetCount = 1;
@@ -263,7 +264,7 @@ TEST_F(RenderPipelineValidationTest, UndefinedColorStateFormatWithBlend) {
     }
     {
         // Error case: undefined format target with blend state set.
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cFragment.targetCount = 1;
@@ -280,7 +281,7 @@ TEST_F(RenderPipelineValidationTest, UndefinedColorStateFormatWithBlend) {
 // Tests that a color target that's present in the pipeline descriptor but not in the shader must
 // have its writeMask set to 0.
 TEST_F(RenderPipelineValidationTest, WriteMaskMustBeZeroForColorTargetWithNoShaderOutput) {
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.cFragment.targetCount = 2;
@@ -300,7 +301,7 @@ TEST_F(RenderPipelineValidationTest, WriteMaskMustBeZeroForColorTargetWithNoShad
 TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
     {
         // Succeeds because RGBA8Unorm is renderable
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -310,7 +311,7 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
 
     {
         // Fails because RG11B10Ufloat is non-renderable
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].format = wgpu::TextureFormat::RG11B10Ufloat;
@@ -325,7 +326,7 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
 TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
     {
         // Succeeds because RGBA8Unorm is blendable
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].blend = &descriptor.cBlends[0];
@@ -336,7 +337,7 @@ TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
 
     {
         // Fails because RGBA32Float is not blendable
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].blend = &descriptor.cBlends[0];
@@ -347,7 +348,7 @@ TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
 
     {
         // Succeeds because RGBA32Float is not blendable but blending is disabled
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].blend = nullptr;
@@ -358,7 +359,7 @@ TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
 
     {
         // Fails because RGBA8Uint is not blendable
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModuleUint;
         descriptor.cTargets[0].blend = &descriptor.cBlends[0];
@@ -369,7 +370,7 @@ TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
 
     {
         // Succeeds because RGBA8Uint is not blendable but blending is disabled
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModuleUint;
         descriptor.cTargets[0].blend = nullptr;
@@ -401,7 +402,7 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
 
     for (size_t i = 0; i < kScalarTypeLists.size(); ++i) {
         for (const std::string& scalarType : kScalarTypeLists[i]) {
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vsModule;
             std::ostringstream stream;
 
@@ -417,7 +418,8 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
                 return result;
             })";
 
-            descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
+            descriptor.cFragment.module =
+                dawn::utils::CreateShaderModule(device, stream.str().c_str());
 
             for (size_t j = 0; j < kColorFormatLists.size(); ++j) {
                 for (wgpu::TextureFormat textureFormat : kColorFormatLists[j]) {
@@ -450,7 +452,7 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputComponentCountCompatibility) 
                                                       wgpu::BlendFactor::Dst};
 
     for (size_t componentCount = 1; componentCount <= 4; ++componentCount) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         std::ostringstream stream;
@@ -480,13 +482,14 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputComponentCountCompatibility) 
             default:
                 UNREACHABLE();
         }
-        descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
+        descriptor.cFragment.module = dawn::utils::CreateShaderModule(device, stream.str().c_str());
 
         for (auto colorFormat : kColorFormats) {
             descriptor.cTargets[0].format = colorFormat;
 
             descriptor.cTargets[0].blend = nullptr;
-            if (componentCount >= utils::GetWGSLRenderableColorTextureComponentCount(colorFormat)) {
+            if (componentCount >=
+                dawn::utils::GetWGSLRenderableColorTextureComponentCount(colorFormat)) {
                 device.CreateRenderPipeline(&descriptor);
             } else {
                 ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
@@ -505,7 +508,8 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputComponentCountCompatibility) 
 
                             bool valid = true;
                             if (componentCount >=
-                                utils::GetWGSLRenderableColorTextureComponentCount(colorFormat)) {
+                                dawn::utils::GetWGSLRenderableColorTextureComponentCount(
+                                    colorFormat)) {
                                 if (BlendFactorContainsSrcAlpha(
                                         descriptor.cTargets[0].blend->color.srcFactor) ||
                                     BlendFactorContainsSrcAlpha(
@@ -547,7 +551,7 @@ TEST_F(RenderPipelineValidationTest, BlendOperationAndBlendFactors) {
     for (wgpu::BlendOperation blendOperationMinOrMax : kBlendOperationsForTest) {
         for (wgpu::BlendFactor srcFactor : kBlendFactors) {
             for (wgpu::BlendFactor dstFactor : kBlendFactors) {
-                utils::ComboRenderPipelineDescriptor descriptor;
+                dawn::utils::ComboRenderPipelineDescriptor descriptor;
                 descriptor.vertex.module = vsModule;
                 descriptor.cFragment.module = fsModule;
                 descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -580,7 +584,7 @@ TEST_F(RenderPipelineValidationTest, BlendOperationAndBlendFactors) {
 /// Tests that the sample count of the render pipeline must be valid.
 TEST_F(RenderPipelineValidationTest, SampleCount) {
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.multisample.count = 4;
@@ -589,7 +593,7 @@ TEST_F(RenderPipelineValidationTest, SampleCount) {
     }
 
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.multisample.count = 3;
@@ -613,7 +617,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
     baseTextureDescriptor.dimension = wgpu::TextureDimension::e2D;
     baseTextureDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
 
-    utils::ComboRenderPipelineDescriptor nonMultisampledPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor nonMultisampledPipelineDescriptor;
     nonMultisampledPipelineDescriptor.multisample.count = 1;
     nonMultisampledPipelineDescriptor.vertex.module = vsModule;
     nonMultisampledPipelineDescriptor.cFragment.module = fsModule;
@@ -625,7 +629,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
     wgpu::RenderPipeline nonMultisampledPipelineWithDepthStencilOnly =
         device.CreateRenderPipeline(&nonMultisampledPipelineDescriptor);
 
-    utils::ComboRenderPipelineDescriptor multisampledPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor multisampledPipelineDescriptor;
     multisampledPipelineDescriptor.multisample.count = kMultisampledCount;
     multisampledPipelineDescriptor.vertex.module = vsModule;
     multisampledPipelineDescriptor.cFragment.module = fsModule;
@@ -643,7 +647,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         textureDescriptor.format = kColorFormat;
         textureDescriptor.sampleCount = kMultisampledCount;
         wgpu::Texture multisampledColorTexture = device.CreateTexture(&textureDescriptor);
-        utils::ComboRenderPassDescriptor renderPassDescriptor(
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
             {multisampledColorTexture.CreateView()});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -659,7 +663,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         textureDescriptor.sampleCount = kMultisampledCount;
         textureDescriptor.format = kDepthStencilFormat;
         wgpu::Texture multisampledDepthStencilTexture = device.CreateTexture(&textureDescriptor);
-        utils::ComboRenderPassDescriptor renderPassDescriptor(
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
             {}, multisampledDepthStencilTexture.CreateView());
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -676,7 +680,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         textureDescriptor.format = kColorFormat;
         textureDescriptor.sampleCount = kMultisampledCount;
         wgpu::Texture multisampledColorTexture = device.CreateTexture(&textureDescriptor);
-        utils::ComboRenderPassDescriptor renderPassDescriptor(
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
             {multisampledColorTexture.CreateView()});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -692,7 +696,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         textureDescriptor.sampleCount = kMultisampledCount;
         textureDescriptor.format = kDepthStencilFormat;
         wgpu::Texture multisampledDepthStencilTexture = device.CreateTexture(&textureDescriptor);
-        utils::ComboRenderPassDescriptor renderPassDescriptor(
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
             {}, multisampledDepthStencilTexture.CreateView());
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -709,7 +713,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         textureDescriptor.format = kColorFormat;
         textureDescriptor.sampleCount = 1;
         wgpu::Texture nonMultisampledColorTexture = device.CreateTexture(&textureDescriptor);
-        utils::ComboRenderPassDescriptor nonMultisampledRenderPassDescriptor(
+        dawn::utils::ComboRenderPassDescriptor nonMultisampledRenderPassDescriptor(
             {nonMultisampledColorTexture.CreateView()});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -726,7 +730,7 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         textureDescriptor.sampleCount = 1;
         textureDescriptor.format = kDepthStencilFormat;
         wgpu::Texture nonMultisampledDepthStencilTexture = device.CreateTexture(&textureDescriptor);
-        utils::ComboRenderPassDescriptor renderPassDescriptor(
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
             {}, nonMultisampledDepthStencilTexture.CreateView());
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -758,9 +762,10 @@ TEST_F(RenderPipelineValidationTest, VertexOnlyPipelineRequireDepthStencilAttach
     depthStencilTextureDescriptor.sampleCount = 1;
     depthStencilTextureDescriptor.format = kDepthStencilFormat;
     wgpu::Texture depthStencilTexture = device.CreateTexture(&depthStencilTextureDescriptor);
-    utils::ComboRenderPassDescriptor renderPassDescriptor({}, depthStencilTexture.CreateView());
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({},
+                                                                depthStencilTexture.CreateView());
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.multisample.count = 1;
     renderPipelineDescriptor.vertex.module = vsModule;
 
@@ -773,7 +778,8 @@ TEST_F(RenderPipelineValidationTest, VertexOnlyPipelineRequireDepthStencilAttach
 
     // Vertex-only render pipeline can work with depth stencil attachment and no color target
     {
-        utils::ComboRenderPassDescriptor renderPassDescriptor({}, depthStencilTexture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
+            {}, depthStencilTexture.CreateView());
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -785,7 +791,7 @@ TEST_F(RenderPipelineValidationTest, VertexOnlyPipelineRequireDepthStencilAttach
 
     // Vertex-only render pipeline must have a depth stencil attachment
     {
-        utils::ComboRenderPassDescriptor renderPassDescriptor;
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor;
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -797,8 +803,8 @@ TEST_F(RenderPipelineValidationTest, VertexOnlyPipelineRequireDepthStencilAttach
 
     // Vertex-only render pipeline can not work with color target
     {
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()},
-                                                              depthStencilTexture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor(
+            {colorTexture.CreateView()}, depthStencilTexture.CreateView());
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -811,7 +817,7 @@ TEST_F(RenderPipelineValidationTest, VertexOnlyPipelineRequireDepthStencilAttach
     // Vertex-only render pipeline can not work with color target, and must have a depth stencil
     // attachment
     {
-        utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()});
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -826,7 +832,7 @@ TEST_F(RenderPipelineValidationTest, VertexOnlyPipelineRequireDepthStencilAttach
 // when the alphaToCoverage mode is enabled.
 TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.multisample.count = 4;
@@ -836,7 +842,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
     }
 
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.multisample.count = 1;
@@ -849,7 +855,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
 // Tests if the sample_mask builtin is a pipeline output of fragment shader,
 // then alphaToCoverageEnabled must be false.
 TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleMaskOutput) {
-    wgpu::ShaderModule fsModuleSampleMaskOutput = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleSampleMaskOutput = dawn::utils::CreateShaderModule(device, R"(
         struct Output {
             @builtin(sample_mask) mask_out: u32,
             @location(0) color : vec4f,
@@ -864,7 +870,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleMaskOutput) {
     )");
 
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModuleSampleMaskOutput;
         descriptor.multisample.count = 4;
@@ -874,7 +880,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleMaskOutput) {
     }
 
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModuleSampleMaskOutput;
         descriptor.multisample.count = 4;
@@ -886,7 +892,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleMaskOutput) {
     {
         // Control cases: when fragment has no sample_mask output, it's good to have
         // alphaToCoverageEnabled enabled
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.multisample.count = 4;
@@ -900,7 +906,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleMaskOutput) {
 TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndColorTargetAlpha) {
     {
         // Control case
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -912,7 +918,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndColorTargetAlpha) {
 
     {
         // Fragment state must exist
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.fragment = nullptr;
         descriptor.multisample.count = 4;
@@ -923,7 +929,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndColorTargetAlpha) {
 
     {
         // Fragment targets[0] must exist
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cFragment.targetCount = 0;
@@ -937,7 +943,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndColorTargetAlpha) {
 
     {
         // Fragment targets[0].format must have alpha channel (only 1 target)
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].format = wgpu::TextureFormat::R8Unorm;
@@ -947,7 +953,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndColorTargetAlpha) {
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
-    wgpu::ShaderModule fsModule2 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule2 = dawn::utils::CreateShaderModule(device, R"(
         struct FragmentOut {
             @location(0) target0 : vec4f,
             @location(1) target1 : vec4f,
@@ -961,7 +967,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndColorTargetAlpha) {
 
     {
         // Fragment targets[0].format must have alpha channel (2 targets)
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule2;
         descriptor.cFragment.targetCount = 2;
@@ -986,7 +992,7 @@ TEST_F(RenderPipelineValidationTest, TextureComponentTypeCompatibility) {
 
     for (size_t i = 0; i < kNumTextureComponentType; ++i) {
         for (size_t j = 0; j < kNumTextureComponentType; ++j) {
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vsModule;
 
             std::ostringstream stream;
@@ -997,12 +1003,13 @@ TEST_F(RenderPipelineValidationTest, TextureComponentTypeCompatibility) {
                 @fragment fn main() {
                     _ = textureDimensions(myTexture);
                 })";
-            descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
+            descriptor.cFragment.module =
+                dawn::utils::CreateShaderModule(device, stream.str().c_str());
             descriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
 
-            wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+            wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
                 device, {{0, wgpu::ShaderStage::Fragment, kTextureComponentTypes[j]}});
-            descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
+            descriptor.layout = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
 
             if (i == j) {
                 device.CreateRenderPipeline(&descriptor);
@@ -1036,7 +1043,7 @@ TEST_F(RenderPipelineValidationTest, TextureViewDimensionCompatibility) {
 
     for (size_t i = 0; i < kNumTextureViewDimensions; ++i) {
         for (size_t j = 0; j < kNumTextureViewDimensions; ++j) {
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vsModule;
 
             std::ostringstream stream;
@@ -1046,13 +1053,14 @@ TEST_F(RenderPipelineValidationTest, TextureViewDimensionCompatibility) {
                 @fragment fn main() {
                     _ = textureDimensions(myTexture);
                 })";
-            descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
+            descriptor.cFragment.module =
+                dawn::utils::CreateShaderModule(device, stream.str().c_str());
             descriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
 
-            wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+            wgpu::BindGroupLayout bgl = dawn::utils::MakeBindGroupLayout(
                 device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float,
                           kTextureViewDimensions[j]}});
-            descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
+            descriptor.layout = dawn::utils::MakeBasicPipelineLayout(device, &bgl);
 
             if (i == j) {
                 device.CreateRenderPipeline(&descriptor);
@@ -1066,7 +1074,7 @@ TEST_F(RenderPipelineValidationTest, TextureViewDimensionCompatibility) {
 // Test that declaring a storage buffer in the vertex shader without setting pipeline layout won't
 // cause crash.
 TEST_F(RenderPipelineValidationTest, StorageBufferInVertexShaderNoLayout) {
-    wgpu::ShaderModule vsModuleWithStorageBuffer = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModuleWithStorageBuffer = dawn::utils::CreateShaderModule(device, R"(
         struct Dst {
             data : array<u32, 100>
         }
@@ -1076,7 +1084,7 @@ TEST_F(RenderPipelineValidationTest, StorageBufferInVertexShaderNoLayout) {
             return vec4f();
         })");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModuleWithStorageBuffer;
     descriptor.cFragment.module = fsModule;
@@ -1101,7 +1109,7 @@ TEST_F(RenderPipelineValidationTest, StripIndexFormatAllowed) {
 
     for (wgpu::PrimitiveTopology primitiveTopology : kStripTopologyTypes) {
         for (wgpu::IndexFormat indexFormat : kIndexFormatTypes) {
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vsModule;
             descriptor.cFragment.module = fsModule;
             descriptor.primitive.topology = primitiveTopology;
@@ -1114,7 +1122,7 @@ TEST_F(RenderPipelineValidationTest, StripIndexFormatAllowed) {
 
     for (wgpu::PrimitiveTopology primitiveTopology : kListTopologyTypes) {
         for (wgpu::IndexFormat indexFormat : kIndexFormatTypes) {
-            utils::ComboRenderPipelineDescriptor descriptor;
+            dawn::utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vsModule;
             descriptor.cFragment.module = fsModule;
             descriptor.primitive.topology = primitiveTopology;
@@ -1134,7 +1142,7 @@ TEST_F(RenderPipelineValidationTest, StripIndexFormatAllowed) {
 // Test that specifying a unclippedDepth value is an error if the feature is not enabled.
 TEST_F(RenderPipelineValidationTest, UnclippedDepthWithoutFeature) {
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::PrimitiveDepthClipControl depthClipControl;
@@ -1144,7 +1152,7 @@ TEST_F(RenderPipelineValidationTest, UnclippedDepthWithoutFeature) {
                             testing::HasSubstr("not supported"));
     }
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::PrimitiveDepthClipControl depthClipControl;
@@ -1158,7 +1166,7 @@ TEST_F(RenderPipelineValidationTest, UnclippedDepthWithoutFeature) {
 // Test that specifying an unclippedDepth value is an error if the feature is not enabled.
 TEST_F(RenderPipelineValidationTest, DepthClipControlWithoutFeature) {
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::PrimitiveDepthClipControl depthClipControl;
@@ -1168,7 +1176,7 @@ TEST_F(RenderPipelineValidationTest, DepthClipControlWithoutFeature) {
                             testing::HasSubstr("not supported"));
     }
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::PrimitiveDepthClipControl depthClipControl;
@@ -1181,7 +1189,7 @@ TEST_F(RenderPipelineValidationTest, DepthClipControlWithoutFeature) {
 
 // Test that depthStencil.depthCompare must not be undefiend.
 TEST_F(RenderPipelineValidationTest, DepthCompareUndefinedIsError) {
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.EnableDepthStencil(wgpu::TextureFormat::Depth32Float);
@@ -1197,7 +1205,7 @@ TEST_F(RenderPipelineValidationTest, DepthCompareUndefinedIsError) {
 
 // Test that the entryPoint names must be present for the correct stage in the shader module.
 TEST_F(RenderPipelineValidationTest, EntryPointNameValidation) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vertex_main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         }
@@ -1207,7 +1215,7 @@ TEST_F(RenderPipelineValidationTest, EntryPointNameValidation) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = module;
     descriptor.vertex.entryPoint = "vertex_main";
     descriptor.cFragment.module = module;
@@ -1243,7 +1251,7 @@ TEST_F(RenderPipelineValidationTest, EntryPointNameValidation) {
 
 // Test that vertex attrib validation is for the correct entryPoint
 TEST_F(RenderPipelineValidationTest, VertexAttribCorrectEntryPoint) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn vertex0(@location(0) attrib0 : vec4f)
                                     -> @builtin(position) vec4f {
             return attrib0;
@@ -1254,7 +1262,7 @@ TEST_F(RenderPipelineValidationTest, VertexAttribCorrectEntryPoint) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = module;
     descriptor.cFragment.module = fsModule;
 
@@ -1285,7 +1293,7 @@ TEST_F(RenderPipelineValidationTest, VertexAttribCorrectEntryPoint) {
 
 // Test that fragment output validation is for the correct entryPoint
 TEST_F(RenderPipelineValidationTest, FragmentOutputCorrectEntryPoint) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn fragmentFloat() -> @location(0) vec4f {
             return vec4f(0.0, 0.0, 0.0, 0.0);
         }
@@ -1294,7 +1302,7 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputCorrectEntryPoint) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = module;
 
@@ -1319,29 +1327,29 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputCorrectEntryPoint) {
 
 // Test that unwritten fragment outputs must have a write mask of 0.
 TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f();
         }
     )");
 
-    wgpu::ShaderModule fsModuleWriteNone = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleWriteNone = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() {}
     )");
 
-    wgpu::ShaderModule fsModuleWrite0 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleWrite0 = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(0) vec4f {
             return vec4f();
         }
     )");
 
-    wgpu::ShaderModule fsModuleWrite1 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleWrite1 = dawn::utils::CreateShaderModule(device, R"(
         @fragment fn main() -> @location(1) vec4f {
             return vec4f();
         }
     )");
 
-    wgpu::ShaderModule fsModuleWriteBoth = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModuleWriteBoth = dawn::utils::CreateShaderModule(device, R"(
         struct FragmentOut {
             @location(0) target0 : vec4f,
             @location(1) target1 : vec4f,
@@ -1354,7 +1362,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
 
     // Control case: write to target 0
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 1;
@@ -1364,7 +1372,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
 
     // Control case: write to target 0 and target 1
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 2;
@@ -1375,7 +1383,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
     // Write only target 1 (not in pipeline fragment state).
     // Errors because target 0 does not have a write mask of 0.
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 1;
@@ -1387,7 +1395,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
     // Write only target 1 (not in pipeline fragment state).
     // OK because target 0 has a write mask of 0.
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 1;
@@ -1399,7 +1407,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
     // Write only target 0 with two color targets.
     // Errors because target 1 does not have a write mask of 0.
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 2;
@@ -1412,7 +1420,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
     // Write only target 0 with two color targets.
     // OK because target 1 has a write mask of 0.
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 2;
@@ -1425,7 +1433,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
     // Write nothing with two color targets.
     // Errors because both target 0 and 1 have nonzero write masks.
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 2;
@@ -1438,7 +1446,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
     // Write nothing with two color targets.
     // OK because target 0 and 1 have write masks of 0.
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
 
         descriptor.cFragment.targetCount = 2;
@@ -1451,7 +1459,7 @@ TEST_F(RenderPipelineValidationTest, UnwrittenFragmentOutputsMask0) {
 
 // Test that fragment output validation is for the correct entryPoint
 TEST_F(RenderPipelineValidationTest, BindingsFromCorrectEntryPoint) {
-    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Uniforms {
             data : vec4f
         }
@@ -1466,15 +1474,15 @@ TEST_F(RenderPipelineValidationTest, BindingsFromCorrectEntryPoint) {
         }
     )");
 
-    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl0 = dawn::utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}});
-    wgpu::PipelineLayout layout0 = utils::MakeBasicPipelineLayout(device, &bgl0);
+    wgpu::PipelineLayout layout0 = dawn::utils::MakeBasicPipelineLayout(device, &bgl0);
 
-    wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl1 = dawn::utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}});
-    wgpu::PipelineLayout layout1 = utils::MakeBasicPipelineLayout(device, &bgl1);
+    wgpu::PipelineLayout layout1 = dawn::utils::MakeBasicPipelineLayout(device, &bgl1);
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = module;
     descriptor.cFragment.module = fsModule;
 
@@ -1510,7 +1518,8 @@ TEST_F(RenderPipelineValidationTest, RenderPipelineColorAttachmentBytesPerSample
         for (size_t i = 0; i < kMaxColorAttachments; i++) {
             if (i < formats.size()) {
                 std::ostringstream type;
-                type << "vec4<" << utils::GetWGSLColorTextureComponentType(formats.at(i)) << ">";
+                type << "vec4<" << dawn::utils::GetWGSLColorTextureComponentType(formats.at(i))
+                     << ">";
                 bindings << "@location(" << i << ") o" << i << " : " << type.str() << ", ";
                 outputs << type.str() << "(1), ";
             } else {
@@ -1524,7 +1533,7 @@ TEST_F(RenderPipelineValidationTest, RenderPipelineColorAttachmentBytesPerSample
         fsShader << "@fragment fn main() -> Outputs {\n";
         fsShader << "    return Outputs(" << outputs.str() << ");\n";
         fsShader << "}";
-        return utils::CreateShaderModule(device, fsShader.str().c_str());
+        return dawn::utils::CreateShaderModule(device, fsShader.str().c_str());
     };
 
     struct TestCase {
@@ -1576,7 +1585,7 @@ TEST_F(RenderPipelineValidationTest, RenderPipelineColorAttachmentBytesPerSample
     };
 
     for (const TestCase& testCase : kTestCases) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.vertex.entryPoint = "main";
         descriptor.cFragment.module = CreateShader(testCase.formats);
@@ -1607,7 +1616,7 @@ class DepthClipControlValidationTest : public RenderPipelineValidationTest {
 // Tests that specifying a unclippedDepth value succeeds if the feature is enabled.
 TEST_F(DepthClipControlValidationTest, Success) {
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::PrimitiveDepthClipControl depthClipControl;
@@ -1616,7 +1625,7 @@ TEST_F(DepthClipControlValidationTest, Success) {
         device.CreateRenderPipeline(&descriptor);
     }
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         wgpu::PrimitiveDepthClipControl depthClipControl;
@@ -1631,7 +1640,7 @@ class InterStageVariableMatchingValidationTest : public RenderPipelineValidation
     void CheckCreatingRenderPipeline(wgpu::ShaderModule vertexModule,
                                      wgpu::ShaderModule fragmentModule,
                                      bool shouldSucceed) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vertexModule;
         descriptor.cFragment.module = fragmentModule;
         if (shouldSucceed) {
@@ -1645,7 +1654,7 @@ class InterStageVariableMatchingValidationTest : public RenderPipelineValidation
 // Tests that creating render pipeline should fail when there is a fragment input that
 // doesn't have its corresponding vertex output at the same location.
 TEST_F(InterStageVariableMatchingValidationTest, MissingDeclarationAtSameLocation) {
-    wgpu::ShaderModule vertexModuleOutputAtLocation0 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vertexModuleOutputAtLocation0 = dawn::utils::CreateShaderModule(device, R"(
             struct A {
                 @location(0) vout: f32,
                 @builtin(position) pos: vec4f,
@@ -1655,21 +1664,21 @@ TEST_F(InterStageVariableMatchingValidationTest, MissingDeclarationAtSameLocatio
                 vertexOut.pos = vec4f(0.0, 0.0, 0.0, 1.0);
                 return vertexOut;
             })");
-    wgpu::ShaderModule fragmentModuleAtLocation0 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fragmentModuleAtLocation0 = dawn::utils::CreateShaderModule(device, R"(
             struct B {
                 @location(0) fin: f32
             }
             @fragment fn main(fragmentIn: B) -> @location(0) vec4f  {
                 return vec4f(fragmentIn.fin, 0.0, 0.0, 1.0);
             })");
-    wgpu::ShaderModule fragmentModuleInputAtLocation1 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fragmentModuleInputAtLocation1 = dawn::utils::CreateShaderModule(device, R"(
             struct A {
                 @location(1) vout: f32
             }
             @fragment fn main(vertexOut: A) -> @location(0) vec4f  {
                 return vec4f(vertexOut.vout, 0.0, 0.0, 1.0);
             })");
-    wgpu::ShaderModule vertexModuleOutputAtLocation1 = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vertexModuleOutputAtLocation1 = dawn::utils::CreateShaderModule(device, R"(
             struct B {
                 @location(1) fin: f32,
                 @builtin(position) pos: vec4f,
@@ -1729,7 +1738,7 @@ TEST_F(InterStageVariableMatchingValidationTest, DifferentTypeAtSameLocation) {
                     vertexOut.pos = vec4f(0.0, 0.0, 0.0, 1.0);
                     return vertexOut;
                 })";
-            vertexModules[i] = utils::CreateShaderModule(device, vertexStream.str().c_str());
+            vertexModules[i] = dawn::utils::CreateShaderModule(device, vertexStream.str().c_str());
         }
         {
             std::ostringstream fragmentStream;
@@ -1738,7 +1747,8 @@ TEST_F(InterStageVariableMatchingValidationTest, DifferentTypeAtSameLocation) {
                 @fragment fn main(fragmentIn: A) -> @location(0) vec4f {
                     return vec4f(0.0, 0.0, 0.0, 1.0);
                 })";
-            fragmentModules[i] = utils::CreateShaderModule(device, fragmentStream.str().c_str());
+            fragmentModules[i] =
+                dawn::utils::CreateShaderModule(device, fragmentStream.str().c_str());
         }
     }
 
@@ -1827,7 +1837,7 @@ TEST_F(InterStageVariableMatchingValidationTest, DifferentInterpolationAttribute
                     vertexOut.pos = vec4f(0.0, 0.0, 0.0, 1.0);
                     return vertexOut;
                 })";
-            vertexModules[i] = utils::CreateShaderModule(device, vertexStream.str().c_str());
+            vertexModules[i] = dawn::utils::CreateShaderModule(device, vertexStream.str().c_str());
         }
         {
             std::ostringstream fragmentStream;
@@ -1836,7 +1846,8 @@ TEST_F(InterStageVariableMatchingValidationTest, DifferentInterpolationAttribute
                 @fragment fn main(fragmentIn: A) -> @location(0) vec4f {
                     return fragmentIn.a;
                 })";
-            fragmentModules[i] = utils::CreateShaderModule(device, fragmentStream.str().c_str());
+            fragmentModules[i] =
+                dawn::utils::CreateShaderModule(device, fragmentStream.str().c_str());
         }
     }
 
@@ -1916,7 +1927,7 @@ TEST_F(RenderPipelineTransientAttachmentValidationTest, CreationSuccess) {
     textureDescriptor.size.height = 4;
 
     wgpu::Texture transientTexture = device.CreateTexture(&textureDescriptor);
-    utils::ComboRenderPassDescriptor renderPassDescriptor({transientTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({transientTexture.CreateView()});
 
     // Set load and store ops to supported values with transient attachments.
     renderPassDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
@@ -1925,7 +1936,7 @@ TEST_F(RenderPipelineTransientAttachmentValidationTest, CreationSuccess) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
 
-    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.cFragment.module = fsModule;
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
@@ -1949,7 +1960,7 @@ TEST_F(RenderPipelineTransientAttachmentValidationTest, StoreCausesError) {
     textureDescriptor.size.height = 4;
 
     wgpu::Texture transientTexture = device.CreateTexture(&textureDescriptor);
-    utils::ComboRenderPassDescriptor renderPassDescriptor({transientTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({transientTexture.CreateView()});
 
     renderPassDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
     renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
@@ -1957,7 +1968,7 @@ TEST_F(RenderPipelineTransientAttachmentValidationTest, StoreCausesError) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
 
-    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.cFragment.module = fsModule;
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
@@ -1981,7 +1992,7 @@ TEST_F(RenderPipelineTransientAttachmentValidationTest, LoadCausesError) {
     textureDescriptor.size.height = 4;
 
     wgpu::Texture transientTexture = device.CreateTexture(&textureDescriptor);
-    utils::ComboRenderPassDescriptor renderPassDescriptor({transientTexture.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPassDescriptor({transientTexture.CreateView()});
 
     renderPassDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
     renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
@@ -1989,7 +2000,7 @@ TEST_F(RenderPipelineTransientAttachmentValidationTest, LoadCausesError) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
 
-    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.cFragment.module = fsModule;
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
@@ -1999,3 +2010,6 @@ TEST_F(RenderPipelineTransientAttachmentValidationTest, LoadCausesError) {
 
     ASSERT_DEVICE_ERROR(encoder.Finish());
 }
+
+}  // anonymous namespace
+}  // namespace dawn

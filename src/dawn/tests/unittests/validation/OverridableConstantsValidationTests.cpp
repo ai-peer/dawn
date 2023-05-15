@@ -19,6 +19,9 @@
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class ComputePipelineOverridableConstantsValidationTest : public ValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
@@ -44,7 +47,7 @@ class ComputePipelineOverridableConstantsValidationTest : public ValidationTest 
     }
 
     void SetUpShadersWithDefaultValueConstants() {
-        computeModule = utils::CreateShaderModule(device, R"(
+        computeModule = dawn::utils::CreateShaderModule(device, R"(
 enable f16;
 
 override c0: bool = true;            // type: bool
@@ -82,7 +85,7 @@ override c12: f16 = 0.0h;            // default override
     }
 
     void SetUpShadersWithUninitializedConstants() {
-        computeModule = utils::CreateShaderModule(device, R"(
+        computeModule = dawn::utils::CreateShaderModule(device, R"(
 enable f16;
 
 override c0: bool;                   // type: bool
@@ -385,3 +388,6 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, OutofRangeValue) {
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

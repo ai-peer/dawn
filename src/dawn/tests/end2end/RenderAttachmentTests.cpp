@@ -17,18 +17,21 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class RenderAttachmentTest : public DawnTest {};
 
 // Test that it is ok to have more fragment outputs than color attachments.
 // There should be no backend validation errors or indexing out-of-bounds.
 TEST_P(RenderAttachmentTest, MoreFragmentOutputsThanAttachments) {
-    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         @vertex
         fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
         })");
 
-    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+    wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, R"(
         struct Output {
             @location(0) color0 : vec4f,
             @location(1) color1 : vec4f,
@@ -47,7 +50,7 @@ TEST_P(RenderAttachmentTest, MoreFragmentOutputsThanAttachments) {
         })");
 
     // Fragment outputs 1, 2, 3 are written in the shader, but unused by the pipeline.
-    utils::ComboRenderPipelineDescriptor pipelineDesc;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.vertex.module = vsModule;
     pipelineDesc.cFragment.module = fsModule;
     pipelineDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -64,7 +67,7 @@ TEST_P(RenderAttachmentTest, MoreFragmentOutputsThanAttachments) {
     textureDesc.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
 
     wgpu::Texture renderTarget = device.CreateTexture(&textureDesc);
-    utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
+    dawn::utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
     pass.SetPipeline(pipeline);
     pass.Draw(1);
@@ -72,7 +75,7 @@ TEST_P(RenderAttachmentTest, MoreFragmentOutputsThanAttachments) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderTarget, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderTarget, 0, 0);
 }
 
 DAWN_INSTANTIATE_TEST(RenderAttachmentTest,
@@ -83,3 +86,6 @@ DAWN_INSTANTIATE_TEST(RenderAttachmentTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

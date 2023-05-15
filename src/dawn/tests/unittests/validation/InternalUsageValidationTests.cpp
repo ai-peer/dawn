@@ -16,6 +16,9 @@
 
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class InternalUsageValidationDisabledTest : public ValidationTest {};
 
 // Test that using DawnTextureInternalUsageDescriptor is an error if DawnInternalUsages is not
@@ -159,8 +162,10 @@ TEST_F(TextureInternalUsageValidationTest, DeprecatedCommandValidation) {
 
     // Control: src -> dst
     {
-        wgpu::ImageCopyTexture srcImageCopyTexture = utils::CreateImageCopyTexture(src, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+        wgpu::ImageCopyTexture srcImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(src, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -171,8 +176,9 @@ TEST_F(TextureInternalUsageValidationTest, DeprecatedCommandValidation) {
     // Invalid: src internal -> dst
     {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+            dawn::utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -182,8 +188,10 @@ TEST_F(TextureInternalUsageValidationTest, DeprecatedCommandValidation) {
 
     // Control with internal copy: src -> dst
     {
-        wgpu::ImageCopyTexture srcImageCopyTexture = utils::CreateImageCopyTexture(src, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+        wgpu::ImageCopyTexture srcImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(src, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -194,8 +202,9 @@ TEST_F(TextureInternalUsageValidationTest, DeprecatedCommandValidation) {
     // Valid with internal copy: src internal -> dst
     {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+            dawn::utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -242,8 +251,10 @@ TEST_F(TextureInternalUsageValidationTest, CommandValidation) {
 
     // Control: src -> dst
     {
-        wgpu::ImageCopyTexture srcImageCopyTexture = utils::CreateImageCopyTexture(src, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+        wgpu::ImageCopyTexture srcImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(src, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -254,8 +265,9 @@ TEST_F(TextureInternalUsageValidationTest, CommandValidation) {
     // Invalid: src internal -> dst
     {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+            dawn::utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -266,8 +278,9 @@ TEST_F(TextureInternalUsageValidationTest, CommandValidation) {
     // Invalid: src internal -> dst, with internal descriptor, but useInternalUsages set to false.
     {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+            dawn::utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoderDescriptor encoderDesc = {};
@@ -282,8 +295,10 @@ TEST_F(TextureInternalUsageValidationTest, CommandValidation) {
 
     // Control with internal copy: src -> dst
     {
-        wgpu::ImageCopyTexture srcImageCopyTexture = utils::CreateImageCopyTexture(src, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+        wgpu::ImageCopyTexture srcImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(src, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoderDescriptor encoderDesc = {};
@@ -299,8 +314,9 @@ TEST_F(TextureInternalUsageValidationTest, CommandValidation) {
     // Valid with internal copy: src internal -> dst
     {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
-        wgpu::ImageCopyTexture dstImageCopyTexture = utils::CreateImageCopyTexture(dst, 0, {0, 0});
+            dawn::utils::CreateImageCopyTexture(srcInternal, 0, {0, 0});
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            dawn::utils::CreateImageCopyTexture(dst, 0, {0, 0});
         wgpu::Extent3D extent3D = {1, 1};
 
         wgpu::CommandEncoderDescriptor encoderDesc = {};
@@ -313,3 +329,6 @@ TEST_F(TextureInternalUsageValidationTest, CommandValidation) {
         encoder.Finish();
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

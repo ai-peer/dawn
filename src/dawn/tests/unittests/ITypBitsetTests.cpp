@@ -19,11 +19,14 @@
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/ityp_bitset.h"
 
+namespace dawn {
+namespace {
+
 class ITypBitsetTest : public testing::Test {
   protected:
-    using Key = TypedInteger<struct KeyT, size_t>;
-    using Bitset = ityp::bitset<Key, 9>;
-    using Bitset40 = ityp::bitset<Key, 40>;
+    using Key = dawn::TypedInteger<struct KeyT, size_t>;
+    using Bitset = dawn::ityp::bitset<Key, 9>;
+    using Bitset40 = dawn::ityp::bitset<Key, 40>;
 
     // Test that the expected bitset methods can be constexpr
     struct ConstexprTest {
@@ -181,29 +184,32 @@ TEST_F(ITypBitsetTest, Xor) {
 // Testing the GetHighestBitIndexPlusOne function
 TEST_F(ITypBitsetTest, GetHighestBitIndexPlusOne) {
     // <= 32 bit
-    EXPECT_EQ(0u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset(0b00))));
-    EXPECT_EQ(1u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset(0b01))));
-    EXPECT_EQ(2u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset(0b10))));
-    EXPECT_EQ(2u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset(0b11))));
+    EXPECT_EQ(0u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset(0b00))));
+    EXPECT_EQ(1u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset(0b01))));
+    EXPECT_EQ(2u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset(0b10))));
+    EXPECT_EQ(2u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset(0b11))));
 
-    EXPECT_EQ(3u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset{1 << 2})));
-    EXPECT_EQ(9u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset{1 << 8})));
-    EXPECT_EQ(9u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset{1 << 8 | 1 << 2})));
+    EXPECT_EQ(3u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset{1 << 2})));
+    EXPECT_EQ(9u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset{1 << 8})));
+    EXPECT_EQ(9u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset{1 << 8 | 1 << 2})));
 
     // > 32 bit
-    EXPECT_EQ(0u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0b00))));
-    EXPECT_EQ(1u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0b01))));
-    EXPECT_EQ(2u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0b10))));
-    EXPECT_EQ(2u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0b11))));
+    EXPECT_EQ(0u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0b00))));
+    EXPECT_EQ(1u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0b01))));
+    EXPECT_EQ(2u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0b10))));
+    EXPECT_EQ(2u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0b11))));
 
-    EXPECT_EQ(5u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0x10))));
-    EXPECT_EQ(5u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0x1F))));
-    EXPECT_EQ(16u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xF000))));
-    EXPECT_EQ(16u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xFFFF))));
-    EXPECT_EQ(32u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xF0000000))));
-    EXPECT_EQ(32u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xFFFFFFFF))));
-    EXPECT_EQ(36u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xF00000000))));
-    EXPECT_EQ(36u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xFFFFFFFFF))));
-    EXPECT_EQ(40u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xF000000000))));
-    EXPECT_EQ(40u, static_cast<size_t>(GetHighestBitIndexPlusOne(Bitset40(0xFFFFFFFFFF))));
+    EXPECT_EQ(5u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0x10))));
+    EXPECT_EQ(5u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0x1F))));
+    EXPECT_EQ(16u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xF000))));
+    EXPECT_EQ(16u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xFFFF))));
+    EXPECT_EQ(32u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xF0000000))));
+    EXPECT_EQ(32u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xFFFFFFFF))));
+    EXPECT_EQ(36u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xF00000000))));
+    EXPECT_EQ(36u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xFFFFFFFFF))));
+    EXPECT_EQ(40u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xF000000000))));
+    EXPECT_EQ(40u, static_cast<size_t>(dawn::GetHighestBitIndexPlusOne(Bitset40(0xFFFFFFFFFF))));
 }
+
+}  // anonymous namespace
+}  // namespace dawn

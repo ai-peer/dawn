@@ -18,6 +18,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 constexpr uint32_t kRTSize = 16;
@@ -25,8 +26,6 @@ constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
 
 using RequireShaderF16Feature = bool;
 DAWN_TEST_PARAM_STRUCT(ShaderF16TestsParams, RequireShaderF16Feature);
-
-}  // anonymous namespace
 
 class ShaderF16Tests : public DawnTestWithParams<ShaderF16TestsParams> {
   public:
@@ -106,7 +105,7 @@ TEST_P(ShaderF16Tests, BasicShaderF16FeaturesTest) {
     EXPECT_EQ(deviceSupportShaderF16Feature, shouldShaderF16FeatureSupportedByDevice);
 
     if (!deviceSupportShaderF16Feature) {
-        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader));
+        ASSERT_DEVICE_ERROR(dawn::utils::CreateShaderModule(device, computeShader));
         return;
     }
 
@@ -116,14 +115,14 @@ TEST_P(ShaderF16Tests, BasicShaderF16FeaturesTest) {
     wgpu::Buffer bufferOut = device.CreateBuffer(&bufferDesc);
 
     wgpu::ComputePipelineDescriptor csDesc;
-    csDesc.compute.module = utils::CreateShaderModule(device, computeShader);
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, computeShader);
     csDesc.compute.entryPoint = "CSMain";
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
 
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                                     {
-                                                         {0, bufferOut},
-                                                     });
+    wgpu::BindGroup bindGroup = dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                           {
+                                                               {0, bufferOut},
+                                                           });
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
@@ -162,12 +161,12 @@ fn FSMain() -> @location(0) vec4<f16> {
     return vec4<f16>(0.0, 0.0, 1.0, 1.0);
 })";
 
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader);
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader);
 
     // Create render pipeline.
     wgpu::RenderPipeline pipeline;
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
 
         descriptor.vertex.module = shaderModule;
         descriptor.vertex.entryPoint = "VSMain";
@@ -187,7 +186,7 @@ fn FSMain() -> @location(0) vec4<f16> {
     {
         // In the render pass we clear renderTarget to red and draw a blue triangle in the
         // bottom left of renderTarget1.
-        utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
         renderPass.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -200,8 +199,8 @@ fn FSMain() -> @location(0) vec4<f16> {
     queue.Submit(1, &commands);
 
     // Validate that bottom left of render target is drawed to blue while upper right is still red
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlue, renderTarget, 1, kRTSize - 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderTarget, kRTSize - 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlue, renderTarget, 1, kRTSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderTarget, kRTSize - 1, 1);
 }
 
 // Test using f16 types as vertex shader (user-defined) output and fragment shader
@@ -248,12 +247,12 @@ fn FSMain(fsInput: FSInput) -> @location(0) vec4f {
     return vec4f(fsInput.color_fsin);
 })";
 
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader);
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader);
 
     // Create render pipeline.
     wgpu::RenderPipeline pipeline;
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
 
         descriptor.vertex.module = shaderModule;
         descriptor.vertex.entryPoint = "VSMain";
@@ -273,7 +272,7 @@ fn FSMain(fsInput: FSInput) -> @location(0) vec4f {
     {
         // In the first render pass we clear renderTarget1 to red and draw a blue triangle in the
         // bottom left of renderTarget1.
-        utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
         renderPass.cColorAttachments[0].clearValue = {1.0f, 0.0f, 0.0f, 1.0f};
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -286,8 +285,8 @@ fn FSMain(fsInput: FSInput) -> @location(0) vec4f {
     queue.Submit(1, &commands);
 
     // Validate that bottom left of render target is drawed to blue while upper right is still red
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kBlue, renderTarget, 1, kRTSize - 1);
-    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kRed, renderTarget, kRTSize - 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kBlue, renderTarget, 1, kRTSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kRed, renderTarget, kRTSize - 1, 1);
 }
 
 // Test using f16 types as vertex shader user-defined input (vertex attributes), draw points of
@@ -321,7 +320,7 @@ fn FSMain(@location(0) color : vec4f) -> @location(0) vec4f {
     return color;
 })";
 
-    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader);
+    wgpu::ShaderModule shaderModule = dawn::utils::CreateShaderModule(device, shader);
 
     constexpr uint32_t kPointCount = 8;
 
@@ -337,7 +336,7 @@ fn FSMain(@location(0) color : vec4f) -> @location(0) vec4f {
     }
 
     // Expected color for each point
-    using RGBA8 = utils::RGBA8;
+    using RGBA8 = dawn::utils::RGBA8;
     std::vector<RGBA8> colors = {
         RGBA8::kBlack,
         RGBA8::kRed,
@@ -362,16 +361,16 @@ fn FSMain(@location(0) color : vec4f) -> @location(0) vec4f {
     // Store the data as float32x2 and float32x4 in vertex buffer, which should be convert to
     // corresponding WGSL type vec2<f16> and vec4<f16> by driver.
     // Buffer for pos_half
-    wgpu::Buffer vertexBufferPos = utils::CreateBufferFromData(
+    wgpu::Buffer vertexBufferPos = dawn::utils::CreateBufferFromData(
         device, positionData.data(), 2 * kPointCount * sizeof(float), wgpu::BufferUsage::Vertex);
     // Buffer for color_quarter
-    wgpu::Buffer vertexBufferColor = utils::CreateBufferFromData(
+    wgpu::Buffer vertexBufferColor = dawn::utils::CreateBufferFromData(
         device, colorData.data(), 4 * kPointCount * sizeof(float), wgpu::BufferUsage::Vertex);
 
     // Create render pipeline.
     wgpu::RenderPipeline pipeline;
     {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
 
         descriptor.vertex.module = shaderModule;
         descriptor.vertex.entryPoint = "VSMain";
@@ -420,7 +419,7 @@ fn FSMain(@location(0) color : vec4f) -> @location(0) vec4f {
 
     {
         // Clear renderTarget to zero and draw points.
-        utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTarget.CreateView()});
         renderPass.cColorAttachments[0].clearValue = {0.0f, 0.0f, 0.0f, 0.0f};
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -451,3 +450,6 @@ DAWN_INSTANTIATE_TEST_P(ShaderF16Tests,
                             OpenGLESBackend(),
                         },
                         {true, false});
+
+}  // anonymous namespace
+}  // namespace dawn

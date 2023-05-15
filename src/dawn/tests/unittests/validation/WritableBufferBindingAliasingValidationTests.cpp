@@ -22,10 +22,12 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
+
 // Helper for describing bindings throughout the tests
 struct BindingDescriptor {
-    utils::BindingInitializationHelper binding;
+    dawn::utils::BindingInitializationHelper binding;
     wgpu::BufferBindingType type = wgpu::BufferBindingType::Storage;
 
     bool hasDynamicOffset = false;
@@ -108,8 +110,6 @@ std::string CreateFragmentShaderWithBindings(const BindingDescriptorGroups& bind
            GenerateReferenceString(bindingsGroups, wgpu::ShaderStage::Fragment) + "}";
 }
 
-}  // namespace
-
 class WritableBufferBindingAliasingValidationTests : public ValidationTest {
   public:
     wgpu::Buffer CreateBuffer(uint64_t bufferSize, wgpu::BufferUsage usage) {
@@ -123,7 +123,7 @@ class WritableBufferBindingAliasingValidationTests : public ValidationTest {
     // Creates compute pipeline given a layout and shader
     wgpu::ComputePipeline CreateComputePipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                                 const std::string& shader) {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, shader.c_str());
+        wgpu::ShaderModule csModule = dawn::utils::CreateShaderModule(device, shader.c_str());
 
         wgpu::ComputePipelineDescriptor csDesc;
         wgpu::PipelineLayoutDescriptor descriptor;
@@ -140,11 +140,11 @@ class WritableBufferBindingAliasingValidationTests : public ValidationTest {
     wgpu::RenderPipeline CreateRenderPipeline(const std::vector<wgpu::BindGroupLayout>& layouts,
                                               const std::string& vertexShader,
                                               const std::string& fragShader) {
-        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, vertexShader.c_str());
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragShader.c_str());
+        wgpu::ShaderModule fsModule = dawn::utils::CreateShaderModule(device, fragShader.c_str());
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
@@ -197,7 +197,7 @@ class WritableBufferBindingAliasingValidationTests : public ValidationTest {
 
             wgpu::BindGroupDescriptor descriptor;
             descriptor.layout = layouts[groupIdx];
-            descriptor.entryCount = checked_cast<uint32_t>(entries.size());
+            descriptor.entryCount = dawn::checked_cast<uint32_t>(entries.size());
             descriptor.entries = entries.data();
 
             bindGroups.push_back(device.CreateBindGroup(&descriptor));
@@ -635,3 +635,6 @@ TEST_F(WritableBufferBindingAliasingValidationTests, SetBindGroupLazyAspectDynam
         commandEncoder.Finish();
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

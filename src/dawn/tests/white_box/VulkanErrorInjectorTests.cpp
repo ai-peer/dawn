@@ -22,8 +22,8 @@
 #include "dawn/native/vulkan/VulkanError.h"
 
 namespace dawn::native::vulkan {
-
 namespace {
+
 class VulkanErrorInjectorTests : public DawnTest {
   public:
     void SetUp() override {
@@ -36,7 +36,6 @@ class VulkanErrorInjectorTests : public DawnTest {
   protected:
     dawn::native::vulkan::Device* mDeviceVk;
 };
-}  // anonymous namespace
 
 TEST_P(VulkanErrorInjectorTests, InjectErrorOnCreateBuffer) {
     VkBufferCreateInfo createInfo = {};
@@ -123,4 +122,5 @@ TEST_P(VulkanErrorInjectorTests, InjectErrorOnCreateBuffer) {
 
 DAWN_INSTANTIATE_TEST(VulkanErrorInjectorTests, VulkanBackend());
 
+}  // anonymous namespace
 }  // namespace dawn::native::vulkan

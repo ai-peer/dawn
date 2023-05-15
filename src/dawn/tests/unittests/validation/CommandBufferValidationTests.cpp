@@ -20,6 +20,9 @@
 
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 using ::testing::HasSubstr;
 
 class CommandBufferValidationTest : public ValidationTest {};
@@ -423,3 +426,6 @@ TEST_F(CommandBufferValidationTest, EncodeAfterDeviceDestroyed) {
         ASSERT_DEVICE_ERROR(encoder.Finish(), HasSubstr("[Invalid CommandEncoder] is invalid."));
     }
 }
+
+}  // anonymous namespace
+}  // namespace dawn

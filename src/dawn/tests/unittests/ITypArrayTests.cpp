@@ -17,11 +17,14 @@
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/ityp_array.h"
 
+namespace dawn {
+namespace {
+
 class ITypArrayTest : public testing::Test {
   protected:
-    using Key = TypedInteger<struct KeyT, uint32_t>;
-    using Val = TypedInteger<struct ValT, uint32_t>;
-    using Array = ityp::array<Key, Val, 10>;
+    using Key = dawn::TypedInteger<struct KeyT, uint32_t>;
+    using Val = dawn::TypedInteger<struct ValT, uint32_t>;
+    using Array = dawn::ityp::array<Key, Val, 10>;
 
     // Test that the expected array methods can be constexpr
     struct ConstexprTest {
@@ -89,3 +92,6 @@ TEST_F(ITypArrayTest, BeginEndFrontBackData) {
     ASSERT_EQ(&constArr.back(), &constArr[Key(9)]);
     ASSERT_EQ(constArr.data(), &constArr[Key(0)]);
 }
+
+}  // anonymous namespace
+}  // namespace dawn

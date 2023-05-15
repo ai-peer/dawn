@@ -18,10 +18,11 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
+namespace dawn {
+namespace {
+
 using testing::InSequence;
 using testing::StrictMock;
-
-namespace {
 
 enum class DestructedClass {
     Foo,
@@ -41,14 +42,13 @@ class PlacementAllocatedTests : public testing::Test {
     void TearDown() override { mockDestructor = nullptr; }
 };
 
-struct Foo : PlacementAllocated {
+struct Foo : dawn::PlacementAllocated {
     virtual ~Foo() { mockDestructor->Call(this, DestructedClass::Foo); }
 };
 
 struct Bar : Foo {
     ~Bar() override { mockDestructor->Call(this, DestructedClass::Bar); }
 };
-}  // namespace
 
 // Test that deletion calls the destructor and does not free memory.
 TEST_F(PlacementAllocatedTests, DeletionDoesNotFreeMemory) {
@@ -107,3 +107,6 @@ TEST_F(PlacementAllocatedTests, DeletingBaseClassCallsDerivedDestructor) {
 
     free(ptr);
 }
+
+}  // anonymous namespace
+}  // namespace dawn

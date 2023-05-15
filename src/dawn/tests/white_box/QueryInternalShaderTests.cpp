@@ -20,6 +20,7 @@
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
 namespace {
 
 void EncodeConvertTimestampsToNanoseconds(wgpu::CommandEncoder encoder,
@@ -32,7 +33,7 @@ void EncodeConvertTimestampsToNanoseconds(wgpu::CommandEncoder encoder,
                     .IsSuccess());
 }
 
-class InternalShaderExpectation : public detail::Expectation {
+class InternalShaderExpectation : public ::detail::Expectation {
   public:
     ~InternalShaderExpectation() override = default;
 
@@ -77,8 +78,6 @@ class InternalShaderExpectation : public detail::Expectation {
   private:
     std::vector<uint64_t> mExpected;
 };
-
-}  // anonymous namespace
 
 constexpr static uint64_t kSentinelValue = ~uint64_t(0u);
 
@@ -162,14 +161,14 @@ class QueryInternalShaderTests : public DawnTest {
         queue.WriteBuffer(timestampsBuffer, 0, timestampValues.data(), size);
 
         // The buffer indicating which values are available timestamps
-        wgpu::Buffer availabilityBuffer =
-            utils::CreateBufferFromData(device, availabilities.data(),
-                                        kQueryCount * sizeof(uint32_t), wgpu::BufferUsage::Storage);
+        wgpu::Buffer availabilityBuffer = dawn::utils::CreateBufferFromData(
+            device, availabilities.data(), kQueryCount * sizeof(uint32_t),
+            wgpu::BufferUsage::Storage);
 
         // The params uniform buffer
         dawn::native::TimestampParams params(firstQuery, queryCount, destinationOffset, period);
-        wgpu::Buffer paramsBuffer = utils::CreateBufferFromData(device, &params, sizeof(params),
-                                                                wgpu::BufferUsage::Uniform);
+        wgpu::Buffer paramsBuffer = dawn::utils::CreateBufferFromData(
+            device, &params, sizeof(params), wgpu::BufferUsage::Uniform);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         EncodeConvertTimestampsToNanoseconds(encoder, timestampsBuffer, availabilityBuffer,
@@ -231,3 +230,6 @@ TEST_P(QueryInternalShaderTests, TimestampComputeShader) {
 }
 
 DAWN_INSTANTIATE_TEST(QueryInternalShaderTests, D3D12Backend(), MetalBackend(), VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

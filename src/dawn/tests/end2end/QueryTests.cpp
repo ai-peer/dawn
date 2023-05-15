@@ -18,6 +18,9 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 // Clear the content of the result buffer into 0xFFFFFFFF.
 constexpr static uint64_t kSentinelValue = ~uint64_t(0u);
 constexpr static uint64_t kZero = 0u;
@@ -87,7 +90,7 @@ class OcclusionQueryTests : public QueryTests {
         DawnTest::SetUp();
 
         // Create basic render pipeline
-        vsModule = utils::CreateShaderModule(device, R"(
+        vsModule = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -97,12 +100,12 @@ class OcclusionQueryTests : public QueryTests {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             })");
 
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
@@ -128,7 +131,7 @@ class OcclusionQueryTests : public QueryTests {
                                                 OcclusionExpectation::Result expected) {
         constexpr uint32_t kQueryCount = 1;
 
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
@@ -155,7 +158,7 @@ class OcclusionQueryTests : public QueryTests {
         // occlusion testing
         queue.WriteBuffer(destination, 0, &kSentinelValue, sizeof(kSentinelValue));
 
-        utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
         renderPass.occlusionQuerySet = querySet;
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -184,7 +187,8 @@ class OcclusionQueryTests : public QueryTests {
         // occlusion testing
         queue.WriteBuffer(destination, 0, &kSentinelValue, sizeof(kSentinelValue));
 
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        dawn::utils::BasicRenderPass renderPass =
+            dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
         renderPass.renderPassInfo.occlusionQuerySet = querySet;
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -263,7 +267,8 @@ TEST_P(OcclusionQueryTests, Rewrite) {
     // occlusion testing
     queue.WriteBuffer(destination, 0, &kSentinelValue, sizeof(kSentinelValue));
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     renderPass.renderPassInfo.occlusionQuerySet = querySet;
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -302,7 +307,8 @@ TEST_P(OcclusionQueryTests, ResolveSparseQueries) {
     std::vector<uint64_t> sentinelValues(kQueryCount, kSentinelValue);
     queue.WriteBuffer(destination, 0, sentinelValues.data(), kQueryCount * sizeof(uint64_t));
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     renderPass.renderPassInfo.occlusionQuerySet = querySet;
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -374,7 +380,8 @@ TEST_P(OcclusionQueryTests, RewriteNoDrawToZero) {
     // occlusion testing
     queue.WriteBuffer(destination, 0, &kSentinelValue, sizeof(kSentinelValue));
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     renderPass.renderPassInfo.occlusionQuerySet = querySet;
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -412,7 +419,8 @@ TEST_P(OcclusionQueryTests, RewriteNoDrawToZeroSeparateSubmit) {
     // occlusion testing
     queue.WriteBuffer(destination, 0, &kSentinelValue, sizeof(kSentinelValue));
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     renderPass.renderPassInfo.occlusionQuerySet = querySet;
 
     // Do an occlusion query with a draw call
@@ -446,7 +454,7 @@ TEST_P(OcclusionQueryTests, RewriteNoDrawToZeroSeparateSubmit) {
 TEST_P(OcclusionQueryTests, RewriteToZeroWithDraw) {
     constexpr uint32_t kQueryCount = 1;
 
-    utils::ComboRenderPipelineDescriptor descriptor;
+    dawn::utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
 
@@ -472,7 +480,8 @@ TEST_P(OcclusionQueryTests, RewriteToZeroWithDraw) {
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        dawn::utils::BasicRenderPass renderPass =
+            dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
         renderPass.renderPassInfo.occlusionQuerySet = querySet;
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -483,7 +492,7 @@ TEST_P(OcclusionQueryTests, RewriteToZeroWithDraw) {
         pass.End();
     }
     {
-        utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
+        dawn::utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
         renderPass.occlusionQuerySet = querySet;
 
         wgpu::RenderPassEncoder rewritePass = encoder.BeginRenderPass(&renderPass);
@@ -507,7 +516,8 @@ TEST_P(OcclusionQueryTests, ResolveToBufferWithOffset) {
 
     wgpu::QuerySet querySet = CreateOcclusionQuerySet(kQueryCount);
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    dawn::utils::BasicRenderPass renderPass =
+        dawn::utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     renderPass.renderPassInfo.occlusionQuerySet = querySet;
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -630,7 +640,7 @@ class TimestampQueryTests : public QueryTests {
         DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::TimestampQuery}));
 
         // Create basic compute pipeline
-        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
             @compute @workgroup_size(1)
             fn main() {
             })");
@@ -657,9 +667,9 @@ class TimestampQueryTests : public QueryTests {
     }
 
     wgpu::RenderPipeline CreateRenderPipeline(bool hasFragmentStage = true) {
-        utils::ComboRenderPipelineDescriptor descriptor;
+        dawn::utils::ComboRenderPipelineDescriptor descriptor;
 
-        descriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        descriptor.vertex.module = dawn::utils::CreateShaderModule(device, R"(
                 @vertex
                 fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                     var pos = array(
@@ -670,7 +680,7 @@ class TimestampQueryTests : public QueryTests {
                 })");
 
         if (hasFragmentStage) {
-            descriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            descriptor.cFragment.module = dawn::utils::CreateShaderModule(device, R"(
                 @fragment fn main() -> @location(0) vec4f {
                     return vec4f(0.0, 1.0, 0.0, 1.0);
                 })");
@@ -704,11 +714,11 @@ class TimestampQueryTests : public QueryTests {
         bool hasPipeline = true,
         bool hasFragmentStage = true) {
         wgpu::Texture depthTexture = CreateRenderTexture(kDepthStencilFormat);
-        utils::ComboRenderPassDescriptor renderPassDesc =
-            hasFragmentStage
-                ? utils::ComboRenderPassDescriptor({CreateRenderTexture(kColorFormat).CreateView()})
-                : utils::ComboRenderPassDescriptor(
-                      {}, CreateRenderTexture(kDepthStencilFormat).CreateView());
+        dawn::utils::ComboRenderPassDescriptor renderPassDesc =
+            hasFragmentStage ? dawn::utils::ComboRenderPassDescriptor(
+                                   {CreateRenderTexture(kColorFormat).CreateView()})
+                             : dawn::utils::ComboRenderPassDescriptor(
+                                   {}, CreateRenderTexture(kDepthStencilFormat).CreateView());
         renderPassDesc.timestampWriteCount = timestampWrites.size();
         renderPassDesc.timestampWrites = timestampWrites.data();
 
@@ -1162,7 +1172,7 @@ TEST_P(TimestampQueryInsidePassesTests, FromOnRenderPass) {
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.WriteTimestamp(querySet, 0);
         pass.WriteTimestamp(querySet, 1);
@@ -1184,7 +1194,7 @@ TEST_P(TimestampQueryInsidePassesTests, FromOnRenderPass) {
         encoder.WriteTimestamp(querySet, 0);
         encoder.WriteTimestamp(querySet, 1);
 
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.WriteTimestamp(querySet, 0);
         pass.WriteTimestamp(querySet, 1);
@@ -1283,3 +1293,6 @@ DAWN_INSTANTIATE_TEST(TimestampQueryInsidePassesTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

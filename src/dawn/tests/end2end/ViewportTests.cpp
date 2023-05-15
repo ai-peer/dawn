@@ -18,12 +18,15 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+namespace dawn {
+namespace {
+
 class ViewportTest : public DawnTest {
   private:
     void SetUp() override {
         DawnTest::SetUp();
 
-        mQuadVS = utils::CreateShaderModule(device, R"(
+        mQuadVS = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var pos = array(
@@ -36,7 +39,7 @@ class ViewportTest : public DawnTest {
                 return vec4f(pos[VertexIndex], 0.0, 1.0);
             })");
 
-        mQuadFS = utils::CreateShaderModule(device, R"(
+        mQuadFS = dawn::utils::CreateShaderModule(device, R"(
             @fragment fn main() -> @location(0) vec4f {
                 return vec4f(1.0, 1.0, 1.0, 1.0);
             })");
@@ -57,14 +60,15 @@ class ViewportTest : public DawnTest {
                           uint32_t height,
                           bool doViewportCall = true) {
         // Create a pipeline that will draw a white quad.
-        utils::ComboRenderPipelineDescriptor pipelineDesc;
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
         pipelineDesc.vertex.module = mQuadVS;
         pipelineDesc.cFragment.module = mQuadFS;
         pipelineDesc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
 
         // Render the quad with the viewport call.
-        utils::BasicRenderPass rp = utils::CreateBasicRenderPass(device, kWidth, kHeight);
+        dawn::utils::BasicRenderPass rp =
+            dawn::utils::CreateBasicRenderPass(device, kWidth, kHeight);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp.renderPassInfo);
         pass.SetPipeline(pipeline);
@@ -81,9 +85,9 @@ class ViewportTest : public DawnTest {
         for (uint32_t checkX = 0; checkX < kWidth; checkX++) {
             for (uint32_t checkY = 0; checkY < kHeight; checkY++) {
                 if (checkX >= x && checkX < x + width && checkY >= y && checkY < y + height) {
-                    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kWhite, rp.color, checkX, checkY);
+                    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kWhite, rp.color, checkX, checkY);
                 } else {
-                    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, rp.color, checkX, checkY);
+                    EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, rp.color, checkX, checkY);
                 }
             }
         }
@@ -91,8 +95,8 @@ class ViewportTest : public DawnTest {
 
     void TestViewportDepth(float minDepth, float maxDepth, bool doViewportCall = true) {
         // Create a pipeline drawing 3 points at depth 1.0, 0.5 and 0.0.
-        utils::ComboRenderPipelineDescriptor pipelineDesc;
-        pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+        dawn::utils::ComboRenderPipelineDescriptor pipelineDesc;
+        pipelineDesc.vertex.module = dawn::utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
                 var points : array<vec3f, 3> = array(
@@ -117,7 +121,7 @@ class ViewportTest : public DawnTest {
         wgpu::Texture depthTexture = device.CreateTexture(&depthDesc);
 
         // Render the three points with the viewport call.
-        utils::ComboRenderPassDescriptor rpDesc({}, depthTexture.CreateView());
+        dawn::utils::ComboRenderPassDescriptor rpDesc({}, depthTexture.CreateView());
         rpDesc.cDepthStencilAttachmentInfo.depthClearValue = 0.0f;
         rpDesc.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
         rpDesc.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
@@ -191,13 +195,13 @@ TEST_P(ViewportTest, ViewportDepth) {
 
 // Test that a draw with an empty viewport doesn't draw anything.
 TEST_P(ViewportTest, EmptyViewport) {
-    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+    dawn::utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
     pipelineDescriptor.vertex.module = mQuadVS;
     pipelineDescriptor.cFragment.module = mQuadFS;
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    dawn::utils::BasicRenderPass renderPass = dawn::utils::CreateBasicRenderPass(device, 1, 1);
 
     auto DoEmptyViewportTest = [&](uint32_t width, uint32_t height) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -210,7 +214,7 @@ TEST_P(ViewportTest, EmptyViewport) {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kZero, renderPass.color, 0, 0);
+        EXPECT_PIXEL_RGBA8_EQ(dawn::utils::RGBA8::kZero, renderPass.color, 0, 0);
     };
 
     // Test with a 0x0, 0xN and nx0 viewport.
@@ -226,3 +230,6 @@ DAWN_INSTANTIATE_TEST(ViewportTest,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn
