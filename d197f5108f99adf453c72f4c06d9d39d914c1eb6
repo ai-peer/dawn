@@ -39,6 +39,30 @@
       },
       "revId": "d197f5108f99adf453c72f4c06d9d39d914c1eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3a09e2_26696cc1",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-15T22:20:33Z",
+      "side": 1,
+      "message": "I think we need to pass by pointer or reference here because `objectStores` is stack allocated. Or maybe there is some magic going on in ityp::array?",
+      "parentUuid": "1d2f857e_e0775999",
+      "range": {
+        "startLine": 234,
+        "startChar": 38,
+        "endLine": 234,
+        "endChar": 83
+      },
+      "revId": "d197f5108f99adf453c72f4c06d9d39d914c1eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
