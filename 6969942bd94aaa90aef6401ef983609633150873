@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c65d95d_971c4be0",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T13:48:36Z",
+      "side": 1,
+      "message": "Then maybe this could use InheritedGroupsMask: https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/PipelineLayout.h;drc\u003d7857c62e3a2131ef6558ec984fb99a6d3ff35d79;l\u003d73\n\n```\n// Unset currently bound bindgroups that aren\u0027t inherited from the layout.\nBindGroupLayoutMask inheritedGroups \u003d mPipelineLayout-\u003eInheritedGroupMask(mLastAppliedPipelineLayout);\nfor (BindGroupIndex index : IterateBitSet(mDirtyBindGroups \u0026 ~inheritedGroupsMask))\n```\n\nOr maybe I\u0027m missing something. (this would both make the semantic of the code more understandable, and would UnApply less bindgroups overall).",
+      "parentUuid": "45b471ac_0ad0ae04",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "\u003e  when it should contain two.\nSorry, could you please explain this? If I understand the example correctly, `BG0` shouldn\u0027t in fact count.",
       "parentUuid": "e75dffd1_e6a6db4a",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f57d728_84580330",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T13:48:36Z",
+      "side": 1,
+      "message": "Whoops sorry my example was mistyped:\n\n```\nSetBindGroup(0, BG0)\nSetBindGroup(1, BG1A) // Changed to 1\nDraw()\nSetBindGroup(1, BG1B) // Changed to 1\nDraw()\n```\n\nIn the second draw `mUAVs` should be `[BG0, BG1B]` but it will only be `[BG1B]`.",
+      "parentUuid": "fb579235_c40f5ce3",
       "revId": "6969942bd94aaa90aef6401ef983609633150873",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
