@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d1ce82_13053638",
+        "filename": "src/tint/ast/transform/transform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-15T15:58:44Z",
+      "side": 1,
+      "message": "Not sure if this is OK?",
+      "revId": "281828c2fc6503ff1eb855fa2c9dd9dbaaaa3f17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
