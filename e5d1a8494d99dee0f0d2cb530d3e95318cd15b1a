@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4e9a56_988572ab",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:06:44Z",
+      "side": 1,
+      "message": "Does this mean that we no longer need to manually clamp the frag depth to the viewport bounds manually with injected push constants? See https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/vulkan/RenderPipelineVk.cpp;drc\u003d7857c62e3a2131ef6558ec984fb99a6d3ff35d79;l\u003d375 and https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/ast/transform/clamp_frag_depth.h;drc\u003db4acbb8bb096551f251cfa8533f21808527ce459;l\u003d30",
+      "revId": "e5d1a8494d99dee0f0d2cb530d3e95318cd15b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
