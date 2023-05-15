@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f394093_3282ba59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 61
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:56:18Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1deb369e_62c6a626",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:56:18Z",
+      "side": 1,
+      "message": "There seems to be an hardcoded object type here, when it should depend on member.",
+      "range": {
+        "startLine": 90,
+        "startChar": 33,
+        "endLine": 90,
+        "endChar": 51
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d86b17e_ff3ebbf6",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:56:18Z",
+      "side": 1,
+      "message": "b?",
+      "range": {
+        "startLine": 126,
+        "startChar": 69,
+        "endLine": 126,
+        "endChar": 71
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da2d3874_a3824ee1",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:56:18Z",
+      "side": 1,
+      "message": "nit: Structure?",
+      "range": {
+        "startLine": 132,
+        "startChar": 36,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33737ede_d28ca724",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:56:18Z",
+      "side": 1,
+      "message": "So at the moment creating shadermodules won\u0027t work?",
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed04ce2_f67d1534",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:56:18Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 159,
+        "startChar": 38,
+        "endLine": 159,
+        "endChar": 46
+      },
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b437add0_75bd260a",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:56:18Z",
+      "side": 1,
+      "message": "nit: commands should be updated, it still says \"first\"",
+      "revId": "1bc810ebc6bc5e34ac90937ceadd81a3c180dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
