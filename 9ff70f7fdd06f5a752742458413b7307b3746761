@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34cf4b82_0717e08a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T01:38:00Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "85e0cd9e_d1d76347",
+      "revId": "9ff70f7fdd06f5a752742458413b7307b3746761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcd517e7_62a9e3dd",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e841378f_88474238",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T01:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcd517e7_62a9e3dd",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 16
+      },
+      "revId": "9ff70f7fdd06f5a752742458413b7307b3746761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f776d745_44246f36",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-05-13T12:16:55Z",
       "side": 1,
       "message": "nit: `uint32_t`? since `unit32_t` is used elsewhere.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 44
+      },
+      "revId": "9ff70f7fdd06f5a752742458413b7307b3746761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b070435_54eb6b71",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-15T01:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f776d745_44246f36",
       "range": {
         "startLine": 63,
         "startChar": 0,
