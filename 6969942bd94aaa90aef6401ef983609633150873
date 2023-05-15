@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba4e786_54ab99a8",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:45:10Z",
+      "side": 1,
+      "message": "We probably only need to do this unbinding on compute passes which would be nice because the Apply() on render passes is hot code.\n\nAlso can you explain why this change was needed?",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e75dffd1_e6a6db4a",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:45:10Z",
+      "side": 1,
+      "message": "I think that this will not work as is. What if we have BG0 and BG1A and BG1B all with a UAV and do:\n\n```\nSetBindGroup(0, BG0)\nSetBindGroup(0, BG1A)\nDraw()\nSetBindGroup(0, BG1B)\nDraw()\n```\n\nThen in the second `Draw()` the call to apply will only iterate over `BG1A` and `mUAVs` will only contain a single UAV, when it should contain two.\n\nInstead, I think we could pre-compute in the pipeline layout the mask of BGLs that have a fragment/vertex UAV, then here do:\n\n```\nwgpu::BindGroupLayoutMask renderUAVMask \u003d pipeline-\u003eGet...();\nif (renderUAVMask !\u003d 0) {\n  stack_vector\u003cComPtr\u003cUAV\u003e, 4?\u003e uavs;\n  for (group in IterateBitSet(renderUAVMask)) {\n    Iterate the UAVs of the group and add them to the vector\n  }\n  \n  Call OMSetRenderTargetsAndUnorderedAccessViews\n}\n```\n\nCould we also have a test that would have caught this?",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6adf0e52_55872224",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:45:10Z",
+      "side": 1,
+      "message": "nit: ASSERT",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 19
+      },
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9104c5_5b62b0da",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:45:10Z",
+      "side": 1,
+      "message": "We should probably pre-compute this value somewhere, for example on the device, and reuse it. It would avoid some indirections and a branch.",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ca299f_5a805e9d",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:45:10Z",
+      "side": 1,
+      "message": "nit: this could be an std::move() to avoid an extra ref-deref cycle for the ComPtr. Ditto in other places.",
+      "range": {
+        "startLine": 211,
+        "startChar": 56,
+        "endLine": 211,
+        "endChar": 64
+      },
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

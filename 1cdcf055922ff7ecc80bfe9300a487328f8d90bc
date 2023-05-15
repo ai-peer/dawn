@@ -36,6 +36,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1acb6289_85a4c708",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-15T12:45:10Z",
+      "side": 1,
+      "message": "Instead of checking in every single branch if we are in a render or compute pass, we could store the `mVisibleStages` in the constructor (FS | VS or CS), then do:\n\n```\nwgpu::ShaderStage bindingVisibility \u003d mVisibleStages \u0026 bindingInfo.visiblity;\n```\n\nThen change all the uses of `bindingInfo.visibility` to `bindingVisibility`. This helps reduce the amount of code and (marginally) the amount of branches in this hot path.",
+      "revId": "1cdcf055922ff7ecc80bfe9300a487328f8d90bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ae608df0_3adb6d17",
