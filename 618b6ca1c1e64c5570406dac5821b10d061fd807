@@ -16,6 +16,46 @@
       "message": "Hi Corentin or Austin, PTAL. Thanks",
       "revId": "618b6ca1c1e64c5570406dac5821b10d061fd807",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f31b384_14fad594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T15:23:37Z",
+      "side": 1,
+      "message": "I think the better approach will be to create two physical devices instead of having the physical device vend new device(s). That\u0027s because the physical device is what surfaces the capabilities - places like [1] should use different values based on whether the physical device is FL11_0 or FL11_1. So IMO this should wait until Zhaoming has adapter toggles, so we can choose the physical device based on the adapter toggle(s).",
+      "revId": "618b6ca1c1e64c5570406dac5821b10d061fd807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d765237_e557a59f",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-15T15:23:37Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 183,
+        "startChar": 4,
+        "endLine": 185,
+        "endChar": 69
+      },
+      "revId": "618b6ca1c1e64c5570406dac5821b10d061fd807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
