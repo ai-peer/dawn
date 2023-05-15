@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca218b31_9c6828c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-15T23:50:04Z",
+      "side": 1,
+      "message": "I\u0027m open to landing either options!",
+      "revId": "1dd80cb54f322bd60cc1cdaa3d37a07a2a1c2507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
