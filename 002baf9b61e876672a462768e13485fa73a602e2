@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d84729b_126e4bfe",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-16T00:52:39Z",
+      "side": 1,
+      "message": "I decided to add it to the template file directly so that the documentation is closer to it!",
+      "parentUuid": "dbabd7fa_b462d0f8",
+      "revId": "002baf9b61e876672a462768e13485fa73a602e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "705dde58_b823617a",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77623f5_c8516c6e",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-16T00:52:39Z",
+      "side": 1,
+      "message": "Originally needed it because I moved the generation of the enum into the struct header. Changed it to forward declare it and assume that 0 \u003d\u003d invalid so we can avoid the skip.",
+      "parentUuid": "705dde58_b823617a",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "002baf9b61e876672a462768e13485fa73a602e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ed13f2a_8b0eaf10",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-05-16T00:21:03Z",
       "side": 1,
       "message": "unit: put this part in a detail:: namespace",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 44,
+        "endChar": 6
+      },
+      "revId": "002baf9b61e876672a462768e13485fa73a602e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae44e432_4fb57276",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-16T00:52:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ed13f2a_8b0eaf10",
       "range": {
         "startLine": 30,
         "startChar": 5,
