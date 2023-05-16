@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41f60775_c79ea46e",
+        "filename": "src/tint/writer/spirv/generator_impl_type_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T10:56:02Z",
+      "side": 1,
+      "message": "Note: this was a fix for two conflicting changes being merged. `main` was broken.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "4f98880271a9ae91d817fad249513cbd6d6bdd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
