@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bbd4aed_840209ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-16T16:49:23Z",
+      "side": 1,
+      "message": "(Sorry, didn\u0027t realize you were blocked on me.)\n\nLGTM; nits are just grammar so at your discretion",
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fba0d7fa_0a52931f",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-16T16:49:23Z",
+      "side": 1,
+      "message": "nit: odd number of width -\u003e odd width",
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf333e4_eeca9136",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-16T16:49:23Z",
+      "side": 1,
+      "message": "nit: inevitablly -\u003e inevitably",
+      "range": {
+        "startLine": 250,
+        "startChar": 71,
+        "endLine": 250,
+        "endChar": 82
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be48fde_ba4d57e0",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-16T16:49:23Z",
+      "side": 1,
+      "message": "nit: out of bounds location -\u003e an out of bounds location",
+      "range": {
+        "startLine": 251,
+        "startChar": 11,
+        "endLine": 251,
+        "endChar": 14
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a5b7f6_14880b31",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-16T16:49:23Z",
+      "side": 1,
+      "message": "nit: size of storage buffer -\u003e size of the storage buffer",
+      "range": {
+        "startLine": 253,
+        "startChar": 44,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce780e4_df57082a",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-16T16:49:23Z",
+      "side": 1,
+      "message": "nit: aligned with 4-byte -\u003e aligned to 4 bytes",
+      "range": {
+        "startLine": 254,
+        "startChar": 47,
+        "endLine": 254,
+        "endChar": 51
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e582a49_6843ecf6",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-16T16:49:23Z",
+      "side": 1,
+      "message": "nit: bytes -\u003e byte",
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
