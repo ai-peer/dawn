@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2be40b2_93cdab8f",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T00:56:35Z",
+      "side": 1,
+      "message": "uuunit: it STypeFor could probably not be in the detail namespace,\nso\n```suggestion\n}  // namespace detail\n\n    template \u003ctypename T\u003e\n    constexpr {{namespace}}::SType STypeFor \u003d detail::STypeForImpl\u003cT\u003e::value;\n```",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "e2fedd70047cfeedd745413ff497fa336516a3ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
