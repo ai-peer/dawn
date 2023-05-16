@@ -16,6 +16,24 @@
       "message": "Looking at the AddSingleEntryPoint transform, would this be useful to keep, as it changes the iteration of all functions to just checking if this list is empty?",
       "revId": "c9092894bc256d272d67d332af63e37fb7d91be9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e8b7a3_824213f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T14:50:50Z",
+      "side": 1,
+      "message": "Maybe? It\u0027s slightly simpler, but I don\u0027t it\u0027ll be a big performance hit (and AddEmptyEntryPoint is always a no-op in Dawn\u0027s flow anyway). Removing the need to track additional state and keep it in sync with the function list still seems like a slight win for me, but I don\u0027t mind too much either way.",
+      "parentUuid": "1ac08b03_31d73de1",
+      "revId": "c9092894bc256d272d67d332af63e37fb7d91be9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
