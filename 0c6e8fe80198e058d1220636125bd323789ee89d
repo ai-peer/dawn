@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "120d34e6_70a6b8b1",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-16T18:56:06Z",
+      "side": 1,
+      "message": "For example, \n```\n  SetPipeline(pipeline);\n  SetBindGroup(0, BG_Uniform_1);\n  SetBindGroup(1, BG_UAV);\n  Draw();\n  SetBindGroup(0, BG_Uniform_2);\n  Draw();\n``` \nor \n```\n  SetPipeline(pipeline1);\n  SetBindGroup(0, BG_Uniform_1);\n  SetBindGroup(1, BG_UAV);\n  Draw();\n  SetPipeline(pipeline2);\n  Draw();\n```\n\nIn those cases, we don\u0027t need to un-apply and re-apply `BG_UAV` for the second draw.",
+      "parentUuid": "e8f8b0d6_b21cabc2",
+      "range": {
+        "startLine": 105,
+        "startChar": 16,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "0c6e8fe80198e058d1220636125bd323789ee89d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a11b674_0c865793",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 13
