@@ -142,6 +142,30 @@
       },
       "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b893a5_4cd0daae",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T18:07:39Z",
+      "side": 0,
+      "message": "Acknowledged. +2\u0027ing this CL in case you want to land it.",
+      "parentUuid": "8aff37b5_48275730",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 72
+      },
+      "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
