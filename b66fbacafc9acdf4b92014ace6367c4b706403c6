@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe83312_4ec496a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T22:28:27Z",
+      "side": 1,
+      "message": "LGTM, though will need to be updated to add load instructions when support for them lands.",
+      "revId": "b66fbacafc9acdf4b92014ace6367c4b706403c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d40407ee_1e1f434e",
