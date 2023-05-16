@@ -33,6 +33,52 @@
       "message": "[1] here maybe?",
       "revId": "002baf9b61e876672a462768e13485fa73a602e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "705dde58_b823617a",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T00:21:03Z",
+      "side": 1,
+      "message": "why do we skip s type here?",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "002baf9b61e876672a462768e13485fa73a602e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed13f2a_8b0eaf10",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T00:21:03Z",
+      "side": 1,
+      "message": "unit: put this part in a detail:: namespace",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 44,
+        "endChar": 6
+      },
+      "revId": "002baf9b61e876672a462768e13485fa73a602e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
