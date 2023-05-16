@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66f28d16_4641874a",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T22:24:15Z",
+      "side": 1,
+      "message": "There was a comment to this effect above but I\u0027ve tried to make it clearer.",
+      "parentUuid": "31e6761b_f53bb298",
+      "revId": "1aa59a86a8b055b21fcbccb67e51bfd0155cc94c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52db4c4b_ff31cad5",
         "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-15T18:45:24Z",
       "side": 1,
       "message": "Does SPIR-V require an if-merge? Otherwise, it\u0027s possible this doens\u0027t need to be emitted. (If both true and false return, nothing goes to the merge).\n\nThe builder_impl has an `IsConnected` call which determines if a block (and parent blocks) are branched into. If they aren\u0027t, then it isn\u0027t connected and can be dropped. Maybe we should move that up to `FlowNode` and use it here as well?",
+      "revId": "1aa59a86a8b055b21fcbccb67e51bfd0155cc94c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8bd0348_20b60d4e",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T22:24:15Z",
+      "side": 1,
+      "message": "Yes, I believe `OpSelectionMerge` is always required before `OpBranchConditional`, so I think we always need to emit the merge block.",
+      "parentUuid": "52db4c4b_ff31cad5",
       "revId": "1aa59a86a8b055b21fcbccb67e51bfd0155cc94c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
