@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50cbfc3d_1a4c045b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T14:39:02Z",
+      "side": 1,
+      "message": "Kokoro failure was a flake.",
+      "revId": "41ee8c624e3bea98e1f2ac14ab3c88c8c6b26fc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
