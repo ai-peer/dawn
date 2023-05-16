@@ -16,6 +16,40 @@
       "message": "Thoughts?",
       "revId": "34ae369a6c7df84910592689cded33999d0a7a1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a7120e_ae72afb2",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T16:46:53Z",
+      "side": 1,
+      "message": "Maybe `(return)` should be a comment at the end of the line? It\u0027s not something that needs to be parsed, right?",
+      "revId": "34ae369a6c7df84910592689cded33999d0a7a1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe51ff91_6ffc3982",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T16:46:53Z",
+      "side": 1,
+      "message": "Likewise here",
+      "revId": "34ae369a6c7df84910592689cded33999d0a7a1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
