@@ -70,6 +70,30 @@
       },
       "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d91380b_ade9f562",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T10:33:21Z",
+      "side": 0,
+      "message": "That would be preferable to overlaying expectations.\n\nI\u0027m disappointed that this is still an issue with https://github.com/gpuweb/cts/pull/2614. I can\u0027t help shift the feeling we\u0027re endlessly trying to paper over a fundamental issue we haven\u0027t figured out yet. These timeouts are across all platforms / multiple GPUs?",
+      "parentUuid": "6a677498_396d2b98",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 72
+      },
+      "revId": "8e42cfa7ea098568aa57eba3e43c3031d07c86da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
