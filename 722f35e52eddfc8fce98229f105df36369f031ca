@@ -34,6 +34,24 @@
       "parentUuid": "f22734e6_3ed23ab1",
       "revId": "722f35e52eddfc8fce98229f105df36369f031ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ceec14_7f5bec2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-16T17:06:43Z",
+      "side": 1,
+      "message": "I was thinking maybe wrapping them in:\n\n```\nnamespace dawn {\nnamespace {\n\n...rest\n\n}  // namespace\n}  // dawn\n```",
+      "parentUuid": "dbd8e905_d54bf52f",
+      "revId": "722f35e52eddfc8fce98229f105df36369f031ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
