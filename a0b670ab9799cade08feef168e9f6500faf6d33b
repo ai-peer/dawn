@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb5b617_752245f6",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-16T00:55:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cdb28c3_45bb9b1a",
+      "range": {
+        "startLine": 85,
+        "startChar": 90,
+        "endLine": 85,
+        "endChar": 94
+      },
+      "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61649f33_b311177a",
@@ -78,6 +102,30 @@
       "writtenOn": "2023-04-07T21:31:16Z",
       "side": 1,
       "message": "should it be UNREACHABLE() ?",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 18
+      },
+      "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a97e553f_04b2ec13",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-16T00:55:42Z",
+      "side": 1,
+      "message": "Surprisingly, libfuzzer will generate empty commands, these have a command_case() of 0 `commands{}`.\n\nAnd the recommended way to handle that is in the default case. I feel as if adding a CHECK(command.command_case() \u003d\u003d 0) would cause some unnecessary fuzzing overhead.",
+      "parentUuid": "61649f33_b311177a",
       "range": {
         "startLine": 99,
         "startChar": 12,
@@ -111,6 +159,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae689e00_c3b6d180",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-16T00:55:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "58c81899_4174a92e",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0387c9c_ed0f65c0",
@@ -124,6 +196,24 @@
       "writtenOn": "2023-04-11T12:08:07Z",
       "side": 1,
       "message": "ditto as the other CL, this can be `PerObjectType\u003cdawn::wire::DawnLPMObjectStore\u003e`",
+      "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af320a6f_0436797b",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-16T00:55:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e0387c9c_ed0f65c0",
       "revId": "a0b670ab9799cade08feef168e9f6500faf6d33b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
