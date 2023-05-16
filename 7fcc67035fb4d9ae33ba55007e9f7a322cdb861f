@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c086667d_ab04235b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:52:02Z",
+      "side": 1,
+      "message": "Doesn\u0027t this make it more verbose to create types given there is more typing? Or is this to unify program builder and ir builder?",
+      "revId": "7fcc67035fb4d9ae33ba55007e9f7a322cdb861f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
