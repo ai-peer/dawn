@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f22734e6_3ed23ab1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-16T16:14:03Z",
+      "side": 1,
+      "message": "Since we are fixing namespacing stuff, WDYT about putting all the tests under `dawn::` and under an anonymous namespace also? (As per https://g3doc.corp.google.com/company/readability/home/acquiring-readability/c-readability-advice.md?cl\u003dhead#anonymous-namespaces-in-tests).",
+      "revId": "722f35e52eddfc8fce98229f105df36369f031ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
