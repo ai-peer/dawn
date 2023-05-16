@@ -46,6 +46,30 @@
       },
       "revId": "8370ddddc58a6fdc5a3e9f688da909352164351b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e2d35b_5418557d",
+        "filename": "src/tint/writer/spirv/generator_impl_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T12:10:31Z",
+      "side": 1,
+      "message": "ah, the old builder vs generator. 😊 I think we should just be consistent with `builder`, but I\u0027ll stop nitpicking. Thanks for the quick reply.",
+      "parentUuid": "28b7fa14_2adcc74b",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "8370ddddc58a6fdc5a3e9f688da909352164351b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
