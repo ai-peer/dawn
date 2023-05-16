@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c248fcd_dcb73a10",
+        "filename": "src/tint/ir/instruction.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T11:11:23Z",
+      "side": 1,
+      "message": "Extracted out to a change that landed.",
+      "parentUuid": "873a524c_f5f13bea",
+      "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf7657a8_44483a66",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0ae7bd_44a4c60b",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T11:11:23Z",
+      "side": 1,
+      "message": "Extracted out to a change that landed.",
+      "parentUuid": "cf7657a8_44483a66",
+      "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d8be6fa_46d45cb8",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-04T11:59:20Z",
       "side": 1,
       "message": "nit: We should either initialize this one, or not initialize type_ and then either skip both initializtions in the empty constructor or keep it initializing both.",
+      "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8dad1d0_5b4f262e",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T11:11:23Z",
+      "side": 1,
+      "message": "Extracted out to a change that landed.",
+      "parentUuid": "7d8be6fa_46d45cb8",
       "revId": "ddd496f605e2510094ed1beffad470052a29cba7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
