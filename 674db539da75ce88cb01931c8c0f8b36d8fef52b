@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cd27946_9b7210ac",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-16T17:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fba0d7fa_0a52931f",
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aaf333e4_eeca9136",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-05-16T16:49:23Z",
       "side": 1,
       "message": "nit: inevitablly -\u003e inevitably",
+      "range": {
+        "startLine": 250,
+        "startChar": 71,
+        "endLine": 250,
+        "endChar": 82
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86dd09b8_b89d13de",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-16T17:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaf333e4_eeca9136",
       "range": {
         "startLine": 250,
         "startChar": 71,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0504db3_1c26946b",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-16T17:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7be48fde_ba4d57e0",
+      "range": {
+        "startLine": 251,
+        "startChar": 11,
+        "endLine": 251,
+        "endChar": 14
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05a5b7f6_14880b31",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-05-16T16:49:23Z",
       "side": 1,
       "message": "nit: size of storage buffer -\u003e size of the storage buffer",
+      "range": {
+        "startLine": 253,
+        "startChar": 44,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e321c92_3ae94ad5",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-16T17:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05a5b7f6_14880b31",
       "range": {
         "startLine": 253,
         "startChar": 44,
@@ -127,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd3939d9_1d4f8eaa",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-16T17:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cce780e4_df57082a",
+      "range": {
+        "startLine": 254,
+        "startChar": 47,
+        "endLine": 254,
+        "endChar": 51
+      },
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e582a49_6843ecf6",
@@ -140,6 +254,24 @@
       "writtenOn": "2023-05-16T16:49:23Z",
       "side": 1,
       "message": "nit: bytes -\u003e byte",
+      "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff8778a_352c3bdd",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-16T17:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e582a49_6843ecf6",
       "revId": "674db539da75ce88cb01931c8c0f8b36d8fef52b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

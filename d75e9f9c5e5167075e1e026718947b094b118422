@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a958dd3_93025b9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-16T17:57:30Z",
+      "side": 1,
+      "message": "NVM I was able to move on and rebase.\nThanks for the thorough reviewing guys!",
+      "revId": "d75e9f9c5e5167075e1e026718947b094b118422",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
