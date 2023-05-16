@@ -22,6 +22,30 @@
       },
       "revId": "8370ddddc58a6fdc5a3e9f688da909352164351b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28b7fa14_2adcc74b",
+        "filename": "src/tint/writer/spirv/generator_impl_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T11:02:32Z",
+      "side": 1,
+      "message": "I haven\u0027t been adding the `_ir` suffix to these test file names, but maybe that was a mistake.\n\nThere were no such test files for the old writer, because that uses `builder_test_*`.",
+      "parentUuid": "efad90dd_3b5bb690",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "8370ddddc58a6fdc5a3e9f688da909352164351b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
