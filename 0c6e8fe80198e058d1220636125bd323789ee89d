@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8f8b0d6_b21cabc2",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T14:49:25Z",
+      "side": 1,
+      "message": "My understanding here is that we will force to re-apply all UAV bind groups in current pipeline just as dirty bind groups. For those UAV groups which are also in last pipeline, we will un-apply them first.",
+      "parentUuid": "23985da3_160aa78f",
+      "range": {
+        "startLine": 105,
+        "startChar": 16,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "0c6e8fe80198e058d1220636125bd323789ee89d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a11b674_0c865793",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 13

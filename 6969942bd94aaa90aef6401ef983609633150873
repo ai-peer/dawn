@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6ed18e0_cbb32ef1",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T14:49:25Z",
+      "side": 1,
+      "message": "I kind of got your point. It\u0027s about dirty groups, right?\nThe current assumption is that we should unbind the dirty groups first, and then bind the new ones. That\u0027s to say we should always bind their slots to null first, and then bind to new one. The question here is that can we just skip setting to null, and bind the new one directly? It seems okay regarding the current implementation of `UnApplyBindGroup`. However semantically it looks less smooth. I would slightly feel like that constructors and destructors don\u0027t come in pairs. Anyway I am okay either way.",
+      "parentUuid": "2f3f907c_6f2ed6fc",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
