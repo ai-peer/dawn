@@ -19,7 +19,7 @@
 
 #include "gtest/gtest.h"
 #include "src/tint/ir/builder.h"
-#include "src/tint/writer/spirv/generator_impl_ir.h"
+#include "src/tint/writer/spirv/ir/generator_impl_ir.h"
 #include "src/tint/writer/spirv/spv_dump.h"
 
 namespace tint::writer::spirv {
