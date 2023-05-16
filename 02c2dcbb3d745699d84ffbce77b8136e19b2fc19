@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37fc68a_6041d392",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T15:26:21Z",
+      "side": 1,
+      "message": "Ack. As I haven\u0027t tackled return yet, will do as a followup.",
+      "parentUuid": "a9a605af_0c058f4c",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "294ae8ee_b886d6d7",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-16T14:16:41Z",
       "side": 1,
       "message": "nit: `unhandled case in FlowNodeGraph` might be more useful then `Switch()`",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99334615_a8c672b2",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T15:26:21Z",
+      "side": 1,
+      "message": "It has the file and line number in the message. It\u0027s consistent through all the `Switch()` cases in the file as I hate nit-picking over diagnostic messages.",
+      "parentUuid": "294ae8ee_b886d6d7",
       "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7106a0a_19f19bcb",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T15:26:21Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s in part why I\u0027ve started adding file markers. If it gets out of hand, I can just move out the bits that make sense. I didn\u0027t want to try guessing what each of the file names should be, just yet.",
+      "parentUuid": "04707450_b9702eaf",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2b3fa82_59cd00c3",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-05-16T14:16:41Z",
       "side": 1,
       "message": "Add a \n\n```\nif (cond) {\n  return;\n}\n```\n\ntest",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0143fdb1_8e2342f3",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T15:26:21Z",
+      "side": 1,
+      "message": "Will do. I haven\u0027t implemented return yet, so will do as a followup.",
+      "parentUuid": "c2b3fa82_59cd00c3",
       "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
