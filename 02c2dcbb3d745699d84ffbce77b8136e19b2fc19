@@ -139,6 +139,24 @@
       "parentUuid": "c2b3fa82_59cd00c3",
       "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a365377_60e82895",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T15:29:13Z",
+      "side": 1,
+      "message": "(Actually this needs to be `if(cond) {return; } else { return; }` to make it not hit the merge block)",
+      "parentUuid": "0143fdb1_8e2342f3",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
