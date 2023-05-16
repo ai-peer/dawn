@@ -137,7 +137,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Unary_Indirection) {
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)]
   %fn3 = block
   %v3:ptr<private, i32, read_write> = addr_of %v1:ref<private, i32, read_write>
-  %v2:i32 = indirection %v3:ptr<private, i32, read_write>
+  %3:i32 = indirection %v3:ptr<private, i32, read_write>
+  %v2:i32 = load %3:i32
   ret
 func_end
 

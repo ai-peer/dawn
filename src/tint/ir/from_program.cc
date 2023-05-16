@@ -71,6 +71,7 @@
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/function.h"
+#include "src/tint/sem/load.h"
 #include "src/tint/sem/materialize.h"
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/switch_statement.h"
@@ -409,38 +410,44 @@ class Impl {
         if (!rhs) {
             return;
         }
-        auto* ty = lhs.Get()->Type();
+
+        auto* ty = lhs.Get()->Type()->As<type::Reference>()->StoreType();
+
+        // Load from the LHS.
+        auto* lhs_value = builder_.Load(ty, lhs.Get());
+        current_flow_block_->instructions.Push(lhs_value);
+
         Binary* inst = nullptr;
         switch (stmt->op) {
             case ast::BinaryOp::kAnd:
-                inst = builder_.And(ty, lhs.Get(), rhs.Get());
+                inst = builder_.And(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kOr:
-                inst = builder_.Or(ty, lhs.Get(), rhs.Get());
+                inst = builder_.Or(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kXor:
-                inst = builder_.Xor(ty, lhs.Get(), rhs.Get());
+                inst = builder_.Xor(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kShiftLeft:
-                inst = builder_.ShiftLeft(ty, lhs.Get(), rhs.Get());
+                inst = builder_.ShiftLeft(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kShiftRight:
-                inst = builder_.ShiftRight(ty, lhs.Get(), rhs.Get());
+                inst = builder_.ShiftRight(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kAdd:
-                inst = builder_.Add(ty, lhs.Get(), rhs.Get());
+                inst = builder_.Add(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kSubtract:
-                inst = builder_.Subtract(ty, lhs.Get(), rhs.Get());
+                inst = builder_.Subtract(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kMultiply:
-                inst = builder_.Multiply(ty, lhs.Get(), rhs.Get());
+                inst = builder_.Multiply(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kDivide:
-                inst = builder_.Divide(ty, lhs.Get(), rhs.Get());
+                inst = builder_.Divide(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kModulo:
-                inst = builder_.Modulo(ty, lhs.Get(), rhs.Get());
+                inst = builder_.Modulo(ty, lhs_value, rhs.Get());
                 break;
             case ast::BinaryOp::kLessThanEqual:
             case ast::BinaryOp::kGreaterThanEqual:
@@ -770,7 +777,8 @@ class Impl {
 
     utils::Result<Value*> EmitExpression(const ast::Expression* expr) {
         // If this is a value that has been const-eval'd return the result.
-        if (auto* sem = program_->Sem().Get(expr)->As<sem::ValueExpression>()) {
+        auto* sem = program_->Sem().GetVal(expr);
+        if (sem) {
             if (auto* v = sem->ConstantValue()) {
                 if (auto* cv = v->Clone(clone_ctx_)) {
                     return builder_.Constant(cv);
@@ -778,7 +786,7 @@ class Impl {
             }
         }
 
-        return tint::Switch(
+        auto result = tint::Switch(
             expr,
             // [&](const ast::IndexAccessorExpression* a) {
             // TODO(dsinclair): Implement
@@ -808,6 +816,15 @@ class Impl {
                           "unknown expression type: " + std::string(expr->TypeInfo().name));
                 return utils::Failure;
             });
+
+        // If this expression maps to sem::Load, insert a load instruction to get the result.
+        if (result && sem->Is<sem::Load>()) {
+            auto* load = builder_.Load(sem->Type()->Clone(clone_ctx_.type_ctx), result.Get());
+            current_flow_block_->instructions.Push(load);
+            return load;
+        }
+
+        return result;
     }
 
     void EmitVariable(const ast::Variable* var) {

@@ -235,6 +235,10 @@ ir::Builtin* Builder::Builtin(const type::Type* type,
     return ir.instructions.Create<ir::Builtin>(type, func, args);
 }
 
+ir::Load* Builder::Load(const type::Type* type, Value* from) {
+    return ir.instructions.Create<ir::Load>(type, from);
+}
+
 ir::Store* Builder::Store(Value* to, Value* from) {
     return ir.instructions.Create<ir::Store>(to, from);
 }
