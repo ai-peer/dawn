@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t this make it more verbose to create types given there is more typing? Or is this to unify program builder and ir builder?",
       "revId": "7fcc67035fb4d9ae33ba55007e9f7a322cdb861f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32e901a0_bdc1a03d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T13:57:34Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like more typing to me? It looks like slightly less typing. Though the wins for tests aren\u0027t as big as the original version of this CL, which is why I haven\u0027t submitted it.\n\nBut yes, I think the main value here is probably avoiding duplicating logic between ProgramBuilder and IR builder. For scalars it\u0027s minimal, but we\u0027ll likely want the same functions that have for vectors and arrays etc as well.",
+      "parentUuid": "c086667d_ab04235b",
+      "revId": "7fcc67035fb4d9ae33ba55007e9f7a322cdb861f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
