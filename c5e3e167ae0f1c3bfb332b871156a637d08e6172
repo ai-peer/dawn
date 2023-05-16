@@ -37,6 +37,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1600c417_73becebb",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T15:16:06Z",
+      "side": 1,
+      "message": "IIUC, these forward decls are for the function pointer typedefs below - but those also declare the arg as `struct Foo const * argname`. \n\nI think we only need the `struct` bit in one place, not both.\n\nmore concise to remove these forward decls?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 12
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef146398_9ce1bd3f",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T15:16:06Z",
+      "side": 1,
+      "message": "IIUC, extern c gives the function C linkage so the name isn\u0027t mangled and you can link to it. But - these are typedefs and not function declarations, so they don\u0027t need linkage.\n\nis extern \"C\" needed for something else?",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 0
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98517a33_33ddebf2",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T15:16:06Z",
+      "side": 1,
+      "message": "nit: this may need to be atomic or TSAN may become grumpy with you; there are some tests that run multithreaded",
+      "range": {
+        "startLine": 977,
+        "startChar": 0,
+        "endLine": 977,
+        "endChar": 58
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abc64c3b_b1bde9d6",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T15:16:06Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a36d409_34125dbd",
         "filename": "src/dawn/tests/DawnTest.cpp",
         "patchSetId": 5
@@ -48,6 +134,70 @@
       "writtenOn": "2023-05-16T12:11:44Z",
       "side": 1,
       "message": "nit: leftover comment here and below? We should remove all handling of mDeviceLostCallback here.",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed4d91b6_642b2adf",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T15:16:06Z",
+      "side": 1,
+      "message": "instead of removing this, why isn\u0027t it moved to the device desc at [1] ?",
+      "parentUuid": "2a36d409_34125dbd",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f465a070_1de2db6d",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T15:16:06Z",
+      "side": 1,
+      "message": "nit, casing:\n```suggestion\n    void* GetUniqueUserdata();\n```",
+      "range": {
+        "startLine": 582,
+        "startChar": 10,
+        "endLine": 582,
+        "endChar": 27
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b29d1373_8e97ba6b",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-16T15:16:06Z",
+      "side": 1,
+      "message": "if you add an arg to the device constructor, you should be able to pass the callback into Make\u003cDevice\u003e instead\n\n```suggestion\n    Device* device \u003d client-\u003eMake\u003cDevice\u003e(descriptor-\u003edeviceLostCallback);\n```",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 78,
+        "endChar": 5
+      },
       "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
