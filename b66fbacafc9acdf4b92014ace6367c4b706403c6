@@ -33,6 +33,24 @@
       "message": "This feels like there is a better way to do it, but I don\u0027t know what it is. I avoided `1_a` as there are no abstracts in the IR currently, but I need a constant of the same type as `ty`.",
       "revId": "b66fbacafc9acdf4b92014ace6367c4b706403c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89b69246_748d82a0",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T21:21:28Z",
+      "side": 1,
+      "message": "Yeah, I don\u0027t think we have anything better to hand right now.",
+      "parentUuid": "d40407ee_1e1f434e",
+      "revId": "b66fbacafc9acdf4b92014ace6367c4b706403c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
