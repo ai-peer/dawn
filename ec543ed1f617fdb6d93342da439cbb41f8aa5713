@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c0f40b4_9d459ab2",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "Ack. There\u0027s already a TODO. Will implement in a later change.",
+      "parentUuid": "cd54cc71_b14bb9ab",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b310d3a7_c05f8f1c",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a506d6_667a1bcc",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b310d3a7_c05f8f1c",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b7455f5_39207d7e",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-05-16T13:29:48Z",
       "side": 1,
       "message": "Do we want to be propagating user functions through or should this be a `NameOf` to generate the name?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d6984c_8e874964",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "Yeah, I have a TODO on my whiteboard to replace this symbol with an `ir::Function` pointer. Will do in a later change.",
+      "parentUuid": "3b7455f5_39207d7e",
       "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +140,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df558ae5_2cf0790d",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "It\u0027s a good question. As we\u0027re piggy-backing off the existing `type::Type` classes, the user-declared types have a symbol which makes sense for us to use.\nIf we want to rename these, then we\u0027ll have to figure out the best place to do that. Given the current setup, I don\u0027t think this is the right place to do that.",
+      "parentUuid": "8585bd71_18bca26a",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7698a4d7_291d6ebb",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "`type::Type` is a reference to a type, which is referred to by symbol. We will need a stage to actually emit the user type declarations. Baby steps.",
+      "parentUuid": "5e224ad2_d09a1472",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "704e5c40_e7140e88",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-05-16T13:29:48Z",
       "side": 1,
       "message": "This seems like it should return a result as the translation can fail? `Result\u003cProgram, String\u003e` and pull out the diagnostics error on failure?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f6c537_d7b5da98",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "Program holds diagnostics which will contain any conversion errors. Added a note on the prototype\u0027s doxygen.",
+      "parentUuid": "704e5c40_e7140e88",
       "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07ddf0c6_5eef8ccf",
+        "filename": "src/tint/ir/to_program.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "439def80_1ca5f725",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11fa1abc_7c090afe",
@@ -137,6 +263,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "346874ba_f6161549",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11fa1abc_7c090afe",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dacc811f_0867eb3f",
@@ -150,6 +294,24 @@
       "writtenOn": "2023-05-16T13:29:48Z",
       "side": 1,
       "message": "Hm, I though the `var` did a `NameOf` so, wouldn\u0027t this come out as `v1`? Why is it `i`?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58bdc8ce_16715574",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T13:59:29Z",
+      "side": 1,
+      "message": "We keep metadata for the variable names, so we can reconstruct something readable.",
+      "parentUuid": "dacc811f_0867eb3f",
       "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
