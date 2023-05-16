@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee370e41_b9b257dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T18:57:50Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "4fad892fbadd10f4079cb9b1b3a7e7f2b2423d0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669bcd67_b2e824a1",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T18:57:50Z",
+      "side": 1,
+      "message": "Why no `return` here, isn\u0027t it pushed unconditionally?",
+      "revId": "4fad892fbadd10f4079cb9b1b3a7e7f2b2423d0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
