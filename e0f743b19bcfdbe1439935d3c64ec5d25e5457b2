@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ad101d1_1b7ed529",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T12:38:59Z",
+      "side": 1,
+      "message": "+2. You\u0027ll need to rebase to pick up the merge conflict fix in https://dawn-review.googlesource.com/c/dawn/+/132321/10/src/tint/writer/spirv/generator_impl_type_test.cc#107",
+      "revId": "e0f743b19bcfdbe1439935d3c64ec5d25e5457b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
