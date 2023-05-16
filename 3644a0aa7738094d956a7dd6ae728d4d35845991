@@ -16,6 +16,24 @@
       "message": "Don\u0027t appear to be testing vectors? Just one test will do.",
       "revId": "3644a0aa7738094d956a7dd6ae728d4d35845991",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fc63ac0_737793db",
+        "filename": "src/tint/writer/spirv/generator_impl_binary_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-16T22:22:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfbd7a7b_6f32efe1",
+      "revId": "3644a0aa7738094d956a7dd6ae728d4d35845991",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
