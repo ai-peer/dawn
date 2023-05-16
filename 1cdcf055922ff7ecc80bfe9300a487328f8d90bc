@@ -55,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "115ca1f2_b36431ea",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T12:29:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1acb6289_85a4c708",
+      "revId": "1cdcf055922ff7ecc80bfe9300a487328f8d90bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ae608df0_3adb6d17",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
         "patchSetId": 8

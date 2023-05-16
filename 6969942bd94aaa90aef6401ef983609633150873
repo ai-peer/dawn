@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6745d0cb_5182eab5",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T12:29:00Z",
+      "side": 1,
+      "message": "`CanInheritBindGroups` is enabled. It seems to work fine.",
+      "parentUuid": "1ff30081_c545750f",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
@@ -199,6 +217,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2badc19f_0dd17d4a",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T12:29:00Z",
+      "side": 1,
+      "message": "Added a new test case to cover this.\n\nAlso added TODO for this further optimization:\n\n\u003e `  for (group in IterateBitSet(renderUAVMask)) {\n    Iterate the UAVs of the group and add them to the vector\n  }`\n \n\nLikely this would be basically similar to `ApplyBindGroup`. Maybe we could add a parameter like `bool uavOnly` to have it only handle UAVs.",
+      "parentUuid": "1d65575e_83ce434b",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6adf0e52_55872224",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
@@ -210,6 +246,30 @@
       "writtenOn": "2023-05-15T12:45:10Z",
       "side": 1,
       "message": "nit: ASSERT",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 19
+      },
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26442d15_aa447bcb",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T12:29:00Z",
+      "side": 1,
+      "message": "Done.\n\nBTW, I am still not aware of the guideline of using `DAWN_ASSERT` or `ASSERT`. Could you clarify that for me a little bit, thanks!",
+      "parentUuid": "6adf0e52_55872224",
       "range": {
         "startLine": 128,
         "startChar": 8,
@@ -237,6 +297,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b36868ee_82eeaeb3",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T12:29:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d9104c5_5b62b0da",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58ca299f_5a805e9d",
@@ -250,6 +328,30 @@
       "writtenOn": "2023-05-15T12:45:10Z",
       "side": 1,
       "message": "nit: this could be an std::move() to avoid an extra ref-deref cycle for the ComPtr. Ditto in other places.",
+      "range": {
+        "startLine": 211,
+        "startChar": 56,
+        "endLine": 211,
+        "endChar": 64
+      },
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1641aa4e_12617228",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-16T12:29:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58ca299f_5a805e9d",
       "range": {
         "startLine": 211,
         "startChar": 56,
