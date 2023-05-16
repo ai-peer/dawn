@@ -16,6 +16,40 @@
       "message": "Reviving this long-dormant PR. Rebased, ensured it\u0027s passing all the tests, and did some sanity checks to make sure the code was still reasonable. I\u0027d like to land this so that I can build on top of it to get Chrome aligned with the spec regarding lost devices at creation time.",
       "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87580fc0_0b08026c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-16T12:11:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a36d409_34125dbd",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-16T12:11:44Z",
+      "side": 1,
+      "message": "nit: leftover comment here and below? We should remove all handling of mDeviceLostCallback here.",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
