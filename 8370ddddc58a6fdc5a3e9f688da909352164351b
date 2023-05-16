@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efad90dd_3b5bb690",
+        "filename": "src/tint/writer/spirv/generator_impl_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-16T10:51:31Z",
+      "side": 1,
+      "message": "I\u0027m confused - shouldn\u0027t this all exist in a `src/tint/writer/spirv/generator_impl_ir_type_test.cc` file or something?\n\nHow is this compiling when `TINT_BUILD_IR` is off?\n\nI\u0027m starting to wonder if we should fork the `src/tint/writer/spirv/` directory, as this is already getting intertwined.",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "8370ddddc58a6fdc5a3e9f688da909352164351b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
