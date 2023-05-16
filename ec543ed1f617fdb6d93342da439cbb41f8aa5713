@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd54cc71_b14bb9ab",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "Note: `fn-\u003ereturn_type`, `fn-\u003ereturn_attributes`, `fn-\u003epipeline_stage` and `fn-\u003eworkgroup_size` exist currently. The missing bit is parameters.",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b310d3a7_c05f8f1c",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "nit: formatting weirdness",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b7455f5_39207d7e",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "Do we want to be propagating user functions through or should this be a `NameOf` to generate the name?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e224ad2_d09a1472",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "Doesn\u0027t this need to copy the struct members and attributes and thigns?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8585bd71_18bca26a",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "Do we want to propagate the struct names, or should this do a `NameOf`?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "704e5c40_e7140e88",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "This seems like it should return a result as the translation can fail? `Result\u003cProgram, String\u003e` and pull out the diagnostics error on failure?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "439def80_1ca5f725",
+        "filename": "src/tint/ir/to_program.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "nit: docs? I\u0027m surprised kokoro didn\u0027t complain",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11fa1abc_7c090afe",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "nit: can you add blank lines after the `ASSERTs` this block is hard to read.",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dacc811f_0867eb3f",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T13:29:48Z",
+      "side": 1,
+      "message": "Hm, I though the `var` did a `NameOf` so, wouldn\u0027t this come out as `v1`? Why is it `i`?",
+      "revId": "ec543ed1f617fdb6d93342da439cbb41f8aa5713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
