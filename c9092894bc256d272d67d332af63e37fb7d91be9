@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ac08b03_31d73de1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T14:03:03Z",
+      "side": 1,
+      "message": "Looking at the AddSingleEntryPoint transform, would this be useful to keep, as it changes the iteration of all functions to just checking if this list is empty?",
+      "revId": "c9092894bc256d272d67d332af63e37fb7d91be9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
