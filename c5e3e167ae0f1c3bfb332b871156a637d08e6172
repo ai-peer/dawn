@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f05261c_6f762a34",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "Without the forward decls I get errors like this:\n\nerror: declaration of \u0027struct WGPUCompilationInfo\u0027 will not be visible outside of this function [-Werror,-Wvisibility]\ntypedef void (*WGPUCompilationInfoCallback)(WGPUCompilationInfoRequestStatus status, struct WGPUCompilationInfo const * compilationInfo, void * userdata);",
+      "parentUuid": "1600c417_73becebb",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 12
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef146398_9ce1bd3f",
         "filename": "generator/templates/api.h",
         "patchSetId": 5
@@ -71,6 +95,30 @@
       "writtenOn": "2023-05-16T15:16:06Z",
       "side": 1,
       "message": "IIUC, extern c gives the function C linkage so the name isn\u0027t mangled and you can link to it. But - these are typedefs and not function declarations, so they don\u0027t need linkage.\n\nis extern \"C\" needed for something else?",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 0
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd5646e1_0ded9b7e",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "Hm... it\u0027s been long enough now that I don\u0027t remember? I don\u0027t think I would have added them unless a specific build failure prompted it, but I\u0027m not getting anything when I remove them.\n\nI\u0027ll take them out and see what the build bots say.",
+      "parentUuid": "ef146398_9ce1bd3f",
       "range": {
         "startLine": 86,
         "startChar": 0,
@@ -104,6 +152,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef999eef_8d759555",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98517a33_33ddebf2",
+      "range": {
+        "startLine": 977,
+        "startChar": 0,
+        "endLine": 977,
+        "endChar": 58
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f76b5db_44160d07",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abc64c3b_b1bde9d6",
@@ -117,6 +206,24 @@
       "writtenOn": "2023-05-16T15:16:06Z",
       "side": 1,
       "message": "[1]",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f66865a1_4b9a62fa",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "abc64c3b_b1bde9d6",
       "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +263,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e89bd40_471cb024",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "This was moved to [2], actually. It was done there because the device descriptor wasn\u0027t being plumbed all the way through. But that feels a bit silly for a case like this, so I\u0027ve updated the latest patch to accept the callbacks here and then relay that all the way through to the actual device creation.",
+      "parentUuid": "ed4d91b6_642b2adf",
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f465a070_1de2db6d",
@@ -179,6 +304,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8f7205_9a272fcb",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f465a070_1de2db6d",
+      "range": {
+        "startLine": 582,
+        "startChar": 10,
+        "endLine": 582,
+        "endChar": 27
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b29d1373_8e97ba6b",
@@ -192,6 +341,30 @@
       "writtenOn": "2023-05-16T15:16:06Z",
       "side": 1,
       "message": "if you add an arg to the device constructor, you should be able to pass the callback into Make\u003cDevice\u003e instead\n\n```suggestion\n    Device* device \u003d client-\u003eMake\u003cDevice\u003e(descriptor-\u003edeviceLostCallback);\n```",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 78,
+        "endChar": 5
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7589f214_28532c9e",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-16T21:55:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b29d1373_8e97ba6b",
       "range": {
         "startLine": 74,
         "startChar": 41,
