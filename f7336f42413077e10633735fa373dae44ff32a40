@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "f7336f42413077e10633735fa373dae44ff32a40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d0dd8f_6ef64c58",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-16T16:06:38Z",
+      "side": 1,
+      "message": "nit: `TINT_UNLIKELY(!v)`",
+      "range": {
+        "startLine": 791,
+        "startChar": 19,
+        "endLine": 791,
+        "endChar": 23
+      },
+      "revId": "f7336f42413077e10633735fa373dae44ff32a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
