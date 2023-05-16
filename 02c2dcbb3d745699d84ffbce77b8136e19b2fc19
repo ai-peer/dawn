@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a605af_0c058f4c",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T14:16:41Z",
+      "side": 1,
+      "message": "We possibly want to deal with the merge being disconnected here (nothign branches into it). This is for things like `if (a) { return; } else { return; }` where both sides exit. Maybe just a todo to handle disconnected nodes?",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294ae8ee_b886d6d7",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T14:16:41Z",
+      "side": 1,
+      "message": "nit: `unhandled case in FlowNodeGraph` might be more useful then `Switch()`",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04707450_b9702eaf",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T14:16:41Z",
+      "side": 1,
+      "message": "This feels like it\u0027s going to get big, worth breaking apart now to save the effort later? `to_program_roundtrip_var_test`, `to_program_roundtrip_if_test`, etc?",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b3fa82_59cd00c3",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-16T14:16:41Z",
+      "side": 1,
+      "message": "Add a \n\n```\nif (cond) {\n  return;\n}\n```\n\ntest",
+      "revId": "02c2dcbb3d745699d84ffbce77b8136e19b2fc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
