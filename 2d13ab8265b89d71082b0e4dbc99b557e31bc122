@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac3a6223_8cf54e0b",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T22:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b122ae86_9c885093",
+      "range": {
+        "startLine": 399,
+        "startChar": 22,
+        "endLine": 399,
+        "endChar": 69
+      },
+      "revId": "2d13ab8265b89d71082b0e4dbc99b557e31bc122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c519b61d_db73111d",
