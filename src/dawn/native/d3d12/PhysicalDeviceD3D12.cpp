@@ -534,6 +534,18 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
         }
     }
 
+    // Intel D3D driver on Gen12 GPUs has a bug about resolving overlapping queries to a same
+    // buffer. This workaround is needed on the driver version >= 30.0.101.3413.
+    // See http://crbug.com/dawn/1546 for more information.
+    if (gpu_info::IsIntelGen12LP(vendorId, deviceId) ||
+        gpu_info::IsIntelGen12HP(vendorId, deviceId)) {
+        const gpu_info::DriverVersion kDriverVersion = {30, 0, 101, 3413};
+        if (gpu_info::CompareWindowsDriverVersion(vendorId, GetDriverVersion(), kDriverVersion) !=
+            -1) {
+            deviceToggles->Default(Toggle::ClearBufferBeforeResolveQueries, true);
+        }
+    }
+
     // Currently these workarounds are only needed on Intel Gen9.5 and Gen11 GPUs.
     // See http://crbug.com/1237175 and http://crbug.com/dawn/1628 for more information.
     if ((gpu_info::IsIntelGen9(vendorId, deviceId) && !gpu_info::IsSkylake(deviceId)) ||
