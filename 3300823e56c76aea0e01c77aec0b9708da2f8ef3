@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cf7e34f_53538b0b",
+        "filename": "src/tint/ir/function_param.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T19:12:16Z",
+      "side": 1,
+      "message": "We could leave it to `value_to_id_` strictly (it\u0027s in there already). The `Function` has a `name` field, so it seemed like it made sense here as well?",
+      "parentUuid": "2729bc24_60e4300b",
+      "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8af88f4e_52a6b1b5",
         "filename": "src/tint/ir/function_param.h",
         "patchSetId": 2
