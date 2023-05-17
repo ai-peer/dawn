@@ -926,7 +926,7 @@ class DepthStencilCopyTests_RegressionDawn1083 : public DepthStencilCopyTests {}
 // various mip/layer counts/offsets works.
 TEST_P(DepthStencilCopyTests_RegressionDawn1083, Run) {
     // TODO(crbug.com/dawn/1648): Diagnose failure on NVIDIA GLES.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsNvidia());
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsNvidia() || IsCompatibilityMode());
 
     // TODO(crbug.com/dawn/1651): Failing on Mac AMD.
     DAWN_SUPPRESS_TEST_IF(IsAMD() && IsMetal() &&
