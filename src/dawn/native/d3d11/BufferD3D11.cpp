@@ -196,6 +196,13 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     ASSERT(mD3d11NonConstantBuffer || mD3d11ConstantBuffer);
 
     SetLabelImpl();
+
+    if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
+        // Avoid initializing the builtin uniform buffer in CommandRecordingContext recursively.
+        GetLabel() != CommandRecordingContext::kBuiltinUniformBufferLabel) {
+        DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 1u));
+    }
+
     return {};
 }
 

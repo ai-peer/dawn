@@ -54,7 +54,7 @@ MaybeError CommandRecordingContext::Open(Device* device) {
         descriptor.size = sizeof(uint32_t) * kMaxNumBuiltinElements;
         descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
         descriptor.mappedAtCreation = false;
-        descriptor.label = "builtin uniform buffer";
+        descriptor.label = kBuiltinUniformBufferLabel;
         Ref<BufferBase> uniformBuffer;
         DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&descriptor));
 

@@ -43,6 +43,8 @@ class CommandRecordingContext {
     Buffer* GetUniformBuffer() const;
     Device* GetDevice() const;
 
+    static constexpr char kBuiltinUniformBufferLabel[] = "builtin uniform buffer";
+
   private:
     bool mIsOpen = false;
     bool mNeedsSubmit = false;
