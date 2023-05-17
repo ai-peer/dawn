@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cbc4743_6116b288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T15:50:52Z",
+      "side": 1,
+      "message": "Kokoro failures were infra flakes.",
+      "revId": "d82fbae591d7fe1aaf09625623c2ba19ee12b4b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
