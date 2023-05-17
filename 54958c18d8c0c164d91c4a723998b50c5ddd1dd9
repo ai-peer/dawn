@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4bb2ee1_f2d1eb6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T20:41:37Z",
+      "side": 1,
+      "message": "oh, here\u0027s a flake in mac-dawn-rel attempt #3\n\nhttps://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/22479/test-results?q\u003dExactID%3Aninja%3A%2F%2Fchrome%2Ftest%3Atelemetry_gpu_integration_test%2Fgpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu%3Aapi%2Cvalidation%2Crender_pipeline%2Cvertex_state%3Avertex_attribute_offset_alignment%3Aformat%3D%22float16x2%22%3BarrayStride%3D256%3Boffset%3D250+VHash%3Aed3791a85ef81ed8",
+      "revId": "54958c18d8c0c164d91c4a723998b50c5ddd1dd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
