@@ -151,6 +151,10 @@ void ValidationTest::SetUp() {
     // RequestAdapter is overriden to ignore RequestAdapterOptions and always select the null
     // adapter.
     wgpu::RequestAdapterOptions options = {};
+
+    // Allow sub class to update options.
+    SetRequestAdapterOptions(&options);
+
     mInstance.RequestAdapter(
         &options,
         [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {
@@ -303,6 +307,10 @@ WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter) {
     deviceTogglesDesc.disabledTogglesCount = disabledToggles.size();
 
     return dawnAdapter.CreateDevice(&deviceDescriptor);
+}
+
+void ValidationTest::SetRequestAdapterOptions(wgpu::RequestAdapterOptions*) {
+    // Do nothing in the default case.
 }
 
 // static
