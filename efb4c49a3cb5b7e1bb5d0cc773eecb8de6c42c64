@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15562947_601b10da",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T11:07:29Z",
+      "side": 1,
+      "message": "Whoops. Thanks for the catching!",
+      "parentUuid": "0b27becd_69f49760",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 56
+      },
+      "revId": "efb4c49a3cb5b7e1bb5d0cc773eecb8de6c42c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccecc44c_8d65cddc",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa0f18b_ff1ec34c",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T11:07:29Z",
+      "side": 1,
+      "message": "Good point, that would be more precise.",
+      "parentUuid": "ccecc44c_8d65cddc",
+      "range": {
+        "startLine": 136,
+        "startChar": 28,
+        "endLine": 136,
+        "endChar": 44
+      },
+      "revId": "efb4c49a3cb5b7e1bb5d0cc773eecb8de6c42c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b9df170_24a30134",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-17T10:27:14Z",
       "side": 1,
       "message": "why not clear it just after `OMSetRenderTargetsAndUnorderedAccessViews()` call?",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 18
+      },
+      "revId": "efb4c49a3cb5b7e1bb5d0cc773eecb8de6c42c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0992c1b0_bf10318d",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T11:07:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b9df170_24a30134",
       "range": {
         "startLine": 144,
         "startChar": 4,
