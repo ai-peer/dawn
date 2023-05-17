@@ -16,6 +16,23 @@
       "message": "Thanks for the feeback!",
       "revId": "a1423c773bffb37f4681987c3f23923ddb3dfbbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb82f4a_d3f6cad0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T00:25:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a1423c773bffb37f4681987c3f23923ddb3dfbbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

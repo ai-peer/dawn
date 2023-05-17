@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c819b8f8_5b10c6ad",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T00:25:14Z",
+      "side": 1,
+      "message": "Ok. perhaps in a follow-up we can make the generator only emit the structs that are needed for the function pointer typedefs",
+      "parentUuid": "0f05261c_6f762a34",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 12
+      },
+      "revId": "c5e3e167ae0f1c3bfb332b871156a637d08e6172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef146398_9ce1bd3f",
         "filename": "generator/templates/api.h",
         "patchSetId": 5
