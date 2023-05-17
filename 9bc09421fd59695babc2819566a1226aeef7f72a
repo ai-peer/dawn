@@ -39,6 +39,30 @@
       },
       "revId": "9bc09421fd59695babc2819566a1226aeef7f72a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efbf5378_3f109d4c",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T11:56:07Z",
+      "side": 1,
+      "message": "We\u0027re going to need something like this here so we only create unique `ir::Constant` values regardless of the `constant::` values, no? So, this at least moves the logic out of the generators and into here so any new generator which requires unique constants doesn\u0027t have to worry about it.\n\nWe can build the constant::Value deduplication later as this code would just change the hasher to use the constant::Value as the lookup key.",
+      "parentUuid": "ba84e2a4_f55eacf1",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 117,
+        "endChar": 37
+      },
+      "revId": "9bc09421fd59695babc2819566a1226aeef7f72a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
