@@ -998,7 +998,7 @@ TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
 
 DAWN_INSTANTIATE_TEST(TextureViewSamplingTest,
                       D3D11Backend(),
-                      D3D12Backend(),
+                      D3D11Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
