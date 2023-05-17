@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "46899191e7ef524a1cd91027ee116ad98c48f448",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "392ada0c_955a704f",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-17T10:06:39Z",
+      "side": 1,
+      "message": "If IR is used as a public transform, we might need something to prevent stripping of unused values. It\u0027s unlikely required once we reach a backend, but mid-level transforms could drop these, changing the referenced binding points.\n\nNot asking for logical changes right now, but something to bear in mind. A comment might be good.",
+      "range": {
+        "startLine": 391,
+        "startChar": 12,
+        "endLine": 391,
+        "endChar": 18
+      },
+      "revId": "46899191e7ef524a1cd91027ee116ad98c48f448",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
