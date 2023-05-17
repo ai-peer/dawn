@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e91229a_5f8ba258",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T23:03:51Z",
+      "side": 1,
+      "message": "when the branch happens, milestones.py script is supposed to be called by the branching process to deactivate the old branch, and activate the new branch. there\u0027s ~3 branches at a time I think. right now they are 112, 113, 114\n\nI\u0027m not 100% sure either though. this script and process are new",
+      "parentUuid": "0392a0b9_07e5ea25",
+      "revId": "21c3cc0fdf32ad79d9e5b9a508ca0cbd428276c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "527a9991_5cb40b46",
