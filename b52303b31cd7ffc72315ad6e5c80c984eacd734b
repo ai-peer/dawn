@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e9ded1_312282be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T20:27:38Z",
+      "side": 1,
+      "message": "remove these",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 12
+      },
+      "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9483a047_0996c0eb",
@@ -67,6 +90,41 @@
       "side": 1,
       "message": "I think it\u0027s because the revert was created with `No-Try: true`",
       "parentUuid": "10f5a610_fef01fe7",
+      "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fba259b4_20252116",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T20:27:38Z",
+      "side": 1,
+      "message": "LGTM assuming bots are happy",
+      "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d748710d_88d107e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T20:27:38Z",
+      "side": 1,
+      "message": "I removed dawn-mac-x64-deps-rel. That\u0027s a chromium bot since it has \"deps\" in the name, not a Dawn bot; so it shouldn\u0027t be used on Dawn CQ.",
+      "parentUuid": "49b27407_ff6cdb12",
       "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
