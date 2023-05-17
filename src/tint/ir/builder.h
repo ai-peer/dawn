@@ -114,7 +114,7 @@ class Builder {
     /// @param val the constant value
     /// @returns the new constant
     ir::Constant* Constant(const constant::Value* val) {
-        return ir.values.Create<ir::Constant>(val);
+        return constants_.GetOrCreate(val, [&]() { return ir.values.Create<ir::Constant>(val); });
     }
 
     /// Creates a ir::Constant for an i32 Scalar
@@ -372,6 +372,30 @@ class Builder {
 
     /// The IR module.
     Module& ir;
+
+  private:
+    /// ConstantHasher provides a hash function for a constant::Value pointer, hashing the value
+    /// instead of the pointer itself.
+    struct ConstantHasher {
+        /// @param c the constant pointer to create a hash for
+        /// @return the hash value
+        inline std::size_t operator()(const constant::Value* c) const { return c->Hash(); }
+    };
+
+    /// ConstantEquals provides an equality function for two constant::Value pointers, comparing
+    /// their values instead of the pointers.
+    struct ConstantEquals {
+        /// @param a the first constant pointer to compare
+        /// @param b the second constant pointer to compare
+        /// @return the hash value
+        inline bool operator()(const constant::Value* a, const constant::Value* b) const {
+            return a->Equal(b);
+        }
+    };
+
+    /// The map of constant::Value to their ir::Constant.
+    utils::Hashmap<const constant::Value*, ir::Constant*, 16, ConstantHasher, ConstantEquals>
+        constants_;
 };
 
 }  // namespace tint::ir
