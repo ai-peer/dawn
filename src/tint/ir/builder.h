@@ -20,12 +20,14 @@
 #include "src/tint/constant/scalar.h"
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/bitcast.h"
+#include "src/tint/ir/block_param.h"
 #include "src/tint/ir/builtin.h"
 #include "src/tint/ir/constant.h"
 #include "src/tint/ir/construct.h"
 #include "src/tint/ir/convert.h"
 #include "src/tint/ir/discard.h"
 #include "src/tint/ir/function.h"
+#include "src/tint/ir/function_param.h"
 #include "src/tint/ir/function_terminator.h"
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/loop.h"
@@ -365,6 +367,12 @@ class Builder {
     /// @param type the parameter type
     /// @returns the value
     ir::BlockParam* BlockParam(const type::Type* type);
+
+    /// Creates a new `FunctionParam`
+    /// @param name the parameter name
+    /// @param type the parameter type
+    /// @returns the value
+    ir::FunctionParam* FunctionParam(Symbol name, const type::Type* type);
 
     /// Retrieves the root block for the module, creating if necessary
     /// @returns the root block
