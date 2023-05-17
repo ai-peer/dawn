@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47371aab_6b625eb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T23:30:31Z",
+      "side": 1,
+      "message": "fixes the Dawn-\u003eChromium roll\n\nfailure:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4545316",
+      "revId": "4f5d64379a28adbbc63c6efd16c6b1d27a316db3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
