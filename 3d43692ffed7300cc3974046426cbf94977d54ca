@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75cac1d1_1f8b3805",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:30:21Z",
+      "side": 1,
+      "message": "`b.Branch()` takes a block as it\u0027s first parameter, whereas `i-\u003etrue_` and `i-\u003efalse_` are branches on the if flow node, not blocks.",
+      "parentUuid": "e26f54a1_aed472b2",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12aa0388_3a1c9734",
         "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-17T00:33:48Z",
       "side": 1,
       "message": "You can drop the `utils::Empty` as it has a default value in the signature.",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2023b0d_14c44c02",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:30:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12aa0388_3a1c9734",
       "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8effb2e_ff9daeb0",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:30:21Z",
+      "side": 1,
+      "message": "As above, I can\u0027t actually use `b.Branch` here.",
+      "parentUuid": "02d94777_8b0b9a61",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a68c082_8a264056",
         "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
         "patchSetId": 2
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be69cd67_770f2e8b",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:30:21Z",
+      "side": 1,
+      "message": "A merge block is still required by SPIR-V, even if it is unreachable. Our existing AST-based SPIR-V writer generates the same code.\n\nThat said, I was constructing the wrong IR, and the merge block would actually be a dead-end block in this case. I\u0027ve changed things to emit `OpUnreachable` at the end of a dead-end block instead.",
+      "parentUuid": "4a68c082_8a264056",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd897ab5_ad6fb485",
         "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
         "patchSetId": 2
@@ -82,6 +154,24 @@
       "writtenOn": "2023-05-17T00:33:48Z",
       "side": 1,
       "message": "Probably need to check `IsDead` on the block here. If the block is dead then the branch `target` will be a nullptr (which I\u0027m guessing will cause issues on 265 when you try to label it)",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6c738d_00c68cd2",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:30:21Z",
+      "side": 1,
+      "message": "See other comment: we still need to emit this block (it may be a merge block), but it\u0027ll end with `OpUnreachable` if there\u0027s no branch target.",
+      "parentUuid": "bd897ab5_ad6fb485",
       "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

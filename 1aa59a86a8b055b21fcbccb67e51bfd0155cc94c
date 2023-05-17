@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ffdb7b_862f49a4",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:30:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f28d16_4641874a",
+      "revId": "1aa59a86a8b055b21fcbccb67e51bfd0155cc94c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52db4c4b_ff31cad5",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yes, I believe `OpSelectionMerge` is always required before `OpBranchConditional`, so I think we always need to emit the merge block.",
       "parentUuid": "52db4c4b_ff31cad5",
+      "revId": "1aa59a86a8b055b21fcbccb67e51bfd0155cc94c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d6db251_6d80af61",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:30:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8bd0348_20b60d4e",
       "revId": "1aa59a86a8b055b21fcbccb67e51bfd0155cc94c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
