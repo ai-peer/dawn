@@ -52,6 +52,23 @@
       "parentUuid": "44e332f5_482299d0",
       "revId": "8e0ba7649ecfc735ae472caf99af89e85b0c0834",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d7a3aa_9a572656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T09:09:33Z",
+      "side": 1,
+      "message": "Good catch! LGTM % missing semicolon",
+      "revId": "8e0ba7649ecfc735ae472caf99af89e85b0c0834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
