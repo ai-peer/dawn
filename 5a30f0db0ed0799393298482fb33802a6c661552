@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6f7911_c0597b1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-05-17T14:48:58Z",
+      "side": 1,
+      "message": "Austin, PTAL.\nI think this would take care of most of occurrences.",
+      "revId": "5a30f0db0ed0799393298482fb33802a6c661552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
