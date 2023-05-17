@@ -51,6 +51,24 @@
       "parentUuid": "7f339c88_bf060257",
       "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b27407_ff6cdb12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T20:26:07Z",
+      "side": 1,
+      "message": "I think it\u0027s because the revert was created with `No-Try: true`",
+      "parentUuid": "10f5a610_fef01fe7",
+      "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
