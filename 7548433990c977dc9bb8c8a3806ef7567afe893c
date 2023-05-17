@@ -16,6 +16,24 @@
       "message": "I think this should move into the Module. The builder is transient, but a transform pipeline will likely create several builders for the same module and we need to maintain constant uniqueness across all of them.\n\nAlso generators may need to create constants on the fly for their own reasons (e.g. SPIR-V instructions that require additional constant operands).",
       "revId": "7548433990c977dc9bb8c8a3806ef7567afe893c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb74d62f_5dbfe336",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T20:36:15Z",
+      "side": 1,
+      "message": "K, I\u0027ve moved the `constants` hash to module. This has the unfortunate side effect of having to rename the arena in module, I went with `constants_arena` which works but ... isn\u0027t great. Suggestions welcome.",
+      "parentUuid": "45bd538b_517c26e5",
+      "revId": "7548433990c977dc9bb8c8a3806ef7567afe893c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
