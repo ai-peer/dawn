@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da61dde_69e7ef75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T09:08:12Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b587fb35790babd2638374a1234e95d7f2ea7357",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3231a512_21235ba3",
+        "filename": "src/dawn/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T09:08:12Z",
+      "side": 1,
+      "message": "I wonder if we should test harness files like this one as well inside dawn::",
+      "revId": "b587fb35790babd2638374a1234e95d7f2ea7357",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
