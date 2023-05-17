@@ -43,7 +43,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Bitcast) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:f32 = call my_func
-    %tint_symbol:f32 = bitcast %1:f32
+    %tint_symbol:f32 = bitcast %1
   } -> %func_end # return
 } %func_end
 
@@ -106,7 +106,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Convert) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %tint_symbol:f32 = convert i32, %i:ref<private, i32, read_write>
+    %tint_symbol:f32 = convert i32, %i
   } -> %func_end # return
 } %func_end
 
@@ -143,7 +143,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Construct) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %tint_symbol:vec3<f32> = construct 2.0f, 3.0f, %i:ref<private, f32, read_write>
+    %tint_symbol:vec3<f32> = construct 2.0f, 3.0f, %i
   } -> %func_end # return
 } %func_end
 

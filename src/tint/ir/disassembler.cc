@@ -324,6 +324,13 @@ std::string Disassembler::Disassemble() {
     return out_.str();
 }
 
+void Disassembler::EmitValueWithType(const Value* val) {
+    EmitValue(val);
+    if (auto* i = val->As<ir::Instruction>(); i->Type() != nullptr) {
+        out_ << ":" << i->Type()->FriendlyName();
+    }
+}
+
 void Disassembler::EmitValue(const Value* val) {
     tint::Switch(
         val,
@@ -368,12 +375,7 @@ void Disassembler::EmitValue(const Value* val) {
             };
             emit(constant->value);
         },
-        [&](const ir::Instruction* i) {
-            out_ << "%" << IdOf(i);
-            if (i->Type() != nullptr) {
-                out_ << ":" << i->Type()->FriendlyName();
-            }
-        });
+        [&](const ir::Instruction* i) { out_ << "%" << IdOf(i); });
 }
 
 void Disassembler::EmitInstruction(const Instruction* inst) {
@@ -381,23 +383,23 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
         inst,  //
         [&](const ir::Binary* b) { EmitBinary(b); }, [&](const ir::Unary* u) { EmitUnary(u); },
         [&](const ir::Bitcast* b) {
-            EmitValue(b);
+            EmitValueWithType(b);
             out_ << " = bitcast ";
             EmitArgs(b);
         },
         [&](const ir::Discard*) { out_ << "discard"; },
         [&](const ir::Builtin* b) {
-            EmitValue(b);
+            EmitValueWithType(b);
             out_ << " = " << builtin::str(b->Func()) << " ";
             EmitArgs(b);
         },
         [&](const ir::Construct* c) {
-            EmitValue(c);
+            EmitValueWithType(c);
             out_ << " = construct ";
             EmitArgs(c);
         },
         [&](const ir::Convert* c) {
-            EmitValue(c);
+            EmitValueWithType(c);
             out_ << " = convert " << c->FromType()->FriendlyName() << ", ";
             EmitArgs(c);
         },
@@ -408,7 +410,7 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
             EmitValue(s->from);
         },
         [&](const ir::UserCall* uc) {
-            EmitValue(uc);
+            EmitValueWithType(uc);
             out_ << " = call " << uc->name.Name();
             if (uc->args.Length() > 0) {
                 out_ << ", ";
@@ -416,7 +418,7 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
             EmitArgs(uc);
         },
         [&](const ir::Var* v) {
-            EmitValue(v);
+            EmitValueWithType(v);
             out_ << " = var " << v->address_space << ", " << v->access;
             if (v->initializer) {
                 out_ << ", ";
@@ -437,7 +439,7 @@ void Disassembler::EmitArgs(const Call* call) {
 }
 
 void Disassembler::EmitBinary(const Binary* b) {
-    EmitValue(b);
+    EmitValueWithType(b);
     out_ << " = ";
     switch (b->kind) {
         case Binary::Kind::kAdd:
@@ -496,7 +498,7 @@ void Disassembler::EmitBinary(const Binary* b) {
 }
 
 void Disassembler::EmitUnary(const Unary* u) {
-    EmitValue(u);
+    EmitValueWithType(u);
     out_ << " = ";
     switch (u->kind) {
         case Unary::Kind::kAddressOf:
