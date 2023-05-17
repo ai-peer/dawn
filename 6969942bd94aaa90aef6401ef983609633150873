@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0934e9de_9c757023",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-17T15:01:46Z",
+      "side": 1,
+      "message": "FYI, we can not set all SRVs and UAVs with one D3D11 function call. So sometimes, `SetShaderResources()` and `SetUAVs()` will fail, if a resources is still bound for last `Draw` call, even if the old binding will be replaced soon.\nfor example:\n```\nSetShaderResource(0, resoureA);\nSetUAV(0, resourceB);\nDraw();\nSetShaderResource(0, resourceB);  // this call will fail because resourceB is still bound to UAV slot 0.\nSetSUAV(0, resourceA); \nDraw();\n\n```\n\nor\n```\nSetShaderResource(0, resoureA);\nSetUAV(0, resourceB);\nDraw();\nSetUAV(0, resourceA); // this call will fail, because resourceA is still bound to SRV 0.\nSetShaderResource(0, resourceB);\nDraw();\n\n```",
+      "parentUuid": "6b3aae29_f29d1f3d",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
