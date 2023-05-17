@@ -104,6 +104,24 @@
       "parentUuid": "bb3e267f_e4e94f65",
       "revId": "dd60d72d2425f167ae7b562003dfd3700b12b2f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "067b77bf_03667d80",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T15:51:39Z",
+      "side": 1,
+      "message": "Looks like in the curent usage it already handles both Failure and nullptr, so seems ok, don\u0027t have a better solution at the moment.",
+      "parentUuid": "3d978233_4e087d0f",
+      "revId": "dd60d72d2425f167ae7b562003dfd3700b12b2f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
