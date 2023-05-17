@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a964832_ba0da8bc",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T03:17:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a2a7f22_75063bd1",
+      "revId": "032bc8e2523245d332f02f7feccdf0e4665a88ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "842d07b9_080b294c",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-05-16T13:51:26Z",
       "side": 1,
       "message": "nit: mVisibleStages",
+      "range": {
+        "startLine": 41,
+        "startChar": 28,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "032bc8e2523245d332f02f7feccdf0e4665a88ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c3cfd73_ef027e25",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T03:17:55Z",
+      "side": 1,
+      "message": "Whoops.",
+      "parentUuid": "842d07b9_080b294c",
       "range": {
         "startLine": 41,
         "startChar": 28,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8fc6da_924e40f9",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T03:17:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "71cd9b54_328b4b30",
+      "revId": "032bc8e2523245d332f02f7feccdf0e4665a88ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "130469cf_bcb99e85",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-05-16T13:51:26Z",
       "side": 1,
       "message": "The idea with the pipeline layout is that we can precompute this during initialization and then use the mask directly!\n\nThis could be done by adding mUavBglMask.set(group) at [1] in this file and other UAV-related bindings.",
+      "revId": "032bc8e2523245d332f02f7feccdf0e4665a88ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e448d48_11cc5cdc",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T03:17:55Z",
+      "side": 1,
+      "message": "Good point, thanks!\nDone.",
+      "parentUuid": "130469cf_bcb99e85",
       "revId": "032bc8e2523245d332f02f7feccdf0e4665a88ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

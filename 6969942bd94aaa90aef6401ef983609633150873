@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67606e03_f908588f",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-17T03:17:55Z",
+      "side": 1,
+      "message": "Forget my previous comment. That was incorrect. Let me try to get this straight.\n\n\n\n\u003ewe want to unset only bindgroups that are in the previous pipeline layout and not in the current pipeline layout. All others are ok: either they are inherited, or they will be overwritten as dirty.\n\nIt\u0027s not exactly true. For common dirty groups in both previous and current pipelines, we also need to unbind them with regards to the previous pipeline, and then bind them according to current pipeline, as the actual slot bindings can be different between the pipelines.\n`SetPipeline(pipeline1);\n SetBindGroup(0, BG_Uniform_1);\n SetBindGroup(1, BG_UAV_1);\n Draw();\n SetPipeline(pipeline2);\n SetBindGroup(1, BG_UAV_2);\n Draw();\n`\nIn this example, bind group 1 is the common dirty group. `BG_UAV_1` may have 1 SRV and 1 UAV, and `BG_UAV_2` may have 2 UAVs. We can\u0027t skip un-setting `BG_UAV_1`, otherwise its SRV would remain active.",
+      "parentUuid": "a6ed18e0_cbb32ef1",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
