@@ -26,6 +26,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1fe9297_ff5fbe42",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-17T21:39:42Z",
+      "side": 1,
+      "message": "Something feels funny to me about calling API functions from with Dawn. The other way to do this would be adapter-\u003eGetFeatureLevel() \u003d\u003d FeatureLevel::Compatibility, but I defer to Austin here.",
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d85d38b3_8e012a7f",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 3
