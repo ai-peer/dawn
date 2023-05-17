@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0c4b45_ea668211",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:34:50Z",
+      "side": 1,
+      "message": "nit: you could add `const Device*` as the first arg so we don\u0027t need to get it again. several validation fns take device as the first arg.",
+      "range": {
+        "startLine": 182,
+        "startChar": 53,
+        "endLine": 182,
+        "endChar": 58
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85d38b3_8e012a7f",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:34:50Z",
+      "side": 1,
+      "message": "nit: prefer to do `adapter-\u003eGetFeatureLevel() \u003d\u003d FeatureLevel::Compatibility`\n\ncan also add a device-\u003eGetFeatureLevel() for convenience since I imagine we\u0027ll be asking the question often. (or even device-\u003eIsCompat() ? )",
+      "range": {
+        "startLine": 185,
+        "startChar": 39,
+        "endLine": 186,
+        "endChar": 66
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "657eb23e_75052159",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:34:50Z",
+      "side": 1,
+      "message": "nit: wrap everything after the #includes in\n\n```\nnamespace dawn {\nnamespace {\n\nclass CompatValidationTest : public ValidationTest {\n  ...\n};\n\nTEST_F(...) {\n  ...\n}\n\n\n}  // anonymous namespace\n}  // namespace dawn\n\n```\n\neventually ValidationTest is going to move to be dawn::ValidationTest",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 11
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2f58252_324d08dd",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:34:50Z",
+      "side": 1,
+      "message": "it\u0027s failing tests because the options get dropped on the floor. We should probably pass null at [1] so it\u0027s less confusing.\n\nthe easy thing to do to make it work might be to query a virtual gCurrentTest-\u003eUseCompatMode() inside here.\n\nThe better thing is probably to make an options struct to specify backend type.\n\nlike\n\n```\n// Can be chained on WGPURequestAdapterOptions\ntypedef struct WGPURequestAdapterOptionsBackendType {\n  WGPUChainedStruct chain;\n  WGPUBackendType backendType;\n} WGPURequestAdapterOptionsBackendType;\n```\n\nyou\u0027ll do that by editing dawn.json to specify the new extension struct.\n\nprobably bikeshedding to do on how we specify this. like maybe the struct should be a list of backend types that you\u0027d like to request. that way you can do [Null], or [D3D11, D3D12], etc.\n\nthat said, gCurrentTest-\u003eUseCompatMode() is probably best for now so that we don\u0027t go off and implement WGPURequestAdapterOptionsBackendType before agreeing in webgpu.h what it should look like.",
+      "range": {
+        "startLine": 92,
+        "startChar": 61,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df2f397f_2b1fbb8c",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:34:50Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 17
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
