@@ -16,6 +16,24 @@
       "message": "this CL broke compile on Mac arm64\n\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Mac%20arm64%20Release%20(Apple%20M2)/40/blamelist\n\nthird_party/dawn/src/tint/ir/transform/test_helper.h:45:21: error: cannot initialize a parameter of type \u0027const Program *\u0027 with an rvalue of type \u0027ir::Module *\u0027\nmanager.Run(\u0026mod, data, outputs);",
       "revId": "7ac28d3c6e5159c70525ebe4609459a141630f72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9185eb76_c614717c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T18:44:21Z",
+      "side": 1,
+      "message": "Fix should be this: https://dawn-review.googlesource.com/c/dawn/+/133402",
+      "parentUuid": "90af1a53_2079fc90",
+      "revId": "7ac28d3c6e5159c70525ebe4609459a141630f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
