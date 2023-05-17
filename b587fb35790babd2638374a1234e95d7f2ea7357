@@ -33,6 +33,24 @@
       "message": "I wonder if we should test harness files like this one as well inside dawn::",
       "revId": "b587fb35790babd2638374a1234e95d7f2ea7357",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a29bd0d_bd113ef0",
+        "filename": "src/dawn/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T14:53:51Z",
+      "side": 1,
+      "message": "can I do it in another CL so merge conflicts don\u0027t add up?\n\nI\u0027d like to as well but the file structure didn\u0027t match my script.",
+      "parentUuid": "3231a512_21235ba3",
+      "revId": "b587fb35790babd2638374a1234e95d7f2ea7357",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
