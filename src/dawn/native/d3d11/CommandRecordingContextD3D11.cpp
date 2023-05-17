@@ -31,6 +31,7 @@ MaybeError CommandRecordingContext::Open(Device* device) {
     ASSERT(!IsOpen());
     ASSERT(device);
     mDevice = device;
+    mNeedsSubmit = false;
 
     if (!mD3D11DeviceContext4) {
         ID3D11Device* d3d11Device = device->GetD3D11Device();
@@ -47,6 +48,10 @@ MaybeError CommandRecordingContext::Open(Device* device) {
             d3d11DeviceContext4.As(&mD3D11UserDefinedAnnotation),
             "D3D11 querying immediate context for ID3DUserDefinedAnnotation interface"));
 
+        mD3D11Device = d3d11Device;
+        mD3D11DeviceContext4 = std::move(d3d11DeviceContext4);
+        mIsOpen = true;
+
         // Create a uniform buffer for built in variables.
         BufferDescriptor descriptor;
         // The maximum number of builtin elements is 4 (vec4). It must be multiple of 4.
@@ -55,11 +60,10 @@ MaybeError CommandRecordingContext::Open(Device* device) {
         descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
         descriptor.mappedAtCreation = false;
         descriptor.label = "builtin uniform buffer";
+
         Ref<BufferBase> uniformBuffer;
         DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&descriptor));
 
-        mD3D11Device = d3d11Device;
-        mD3D11DeviceContext4 = std::move(d3d11DeviceContext4);
         mUniformBuffer = ToBackend(std::move(uniformBuffer));
 
         // Always bind the uniform buffer to the reserved slot for all pipelines.
@@ -72,7 +76,6 @@ MaybeError CommandRecordingContext::Open(Device* device) {
     }
 
     mIsOpen = true;
-    mNeedsSubmit = false;
 
     return {};
 }
