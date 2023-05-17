@@ -196,6 +196,27 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     ASSERT(mD3d11NonConstantBuffer || mD3d11ConstantBuffer);
 
     SetLabelImpl();
+
+    if (!mappedAtCreation &&
+        // If this is the builtin uniform buffer in CommandRecordingContext, we skip the clearing as
+        // the CommandRecordingContext is not ready yet.
+        GetLabel() != CommandRecordingContext::kBuiltinUniformBufferLabel) {
+        if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+            DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 1u));
+        }
+
+        // Initialize the padding bytes to zero.
+        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+            if (paddingBytes > 0) {
+                uint32_t clearSize = paddingBytes;
+                uint64_t clearOffset = GetSize();
+                DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 0,
+                                       clearOffset, clearSize));
+            }
+        }
+    }
+
     return {};
 }
 
