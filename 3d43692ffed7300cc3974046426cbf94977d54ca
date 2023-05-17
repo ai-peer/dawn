@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e26f54a1_aed472b2",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:33:48Z",
+      "side": 1,
+      "message": "`b.Branch` ? (and below)",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12aa0388_3a1c9734",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:33:48Z",
+      "side": 1,
+      "message": "You can drop the `utils::Empty` as it has a default value in the signature.",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d94777_8b0b9a61",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:33:48Z",
+      "side": 1,
+      "message": "`b.Branch` does this for you. (The if never branches into the merge, the false block does)",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a68c082_8a264056",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:33:48Z",
+      "side": 1,
+      "message": "Hm, is this right? The if doesn\u0027t merge at %5 as it doesn\u0027t merge.",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd897ab5_ad6fb485",
+        "filename": "src/tint/writer/spirv/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:33:48Z",
+      "side": 1,
+      "message": "Probably need to check `IsDead` on the block here. If the block is dead then the branch `target` will be a nullptr (which I\u0027m guessing will cause issues on 265 when you try to label it)",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
