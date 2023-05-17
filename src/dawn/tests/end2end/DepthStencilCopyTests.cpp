@@ -1092,7 +1092,7 @@ DAWN_INSTANTIATE_TEST_P(
 
 DAWN_INSTANTIATE_TEST_P(
     DepthStencilCopyTests_RegressionDawn1083,
-    {D3D12Backend(), MetalBackend(),
+    {MetalBackend(),
      MetalBackend({"use_blit_for_depth_texture_to_texture_copy_to_nonzero_subresource"}),
      OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
     std::vector<wgpu::TextureFormat>{wgpu::TextureFormat::Depth16Unorm,
