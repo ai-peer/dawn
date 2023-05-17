@@ -92,6 +92,10 @@ bool Adapter::GetLimits(WGPUSupportedLimits* limits) const {
     return mImpl->APIGetLimits(FromAPI(limits));
 }
 
+bool Adapter::IsCompat() const {
+    return mImpl->GetFeatureLevel() == dawn::native::FeatureLevel::Compatibility;
+}
+
 void Adapter::SetUseTieredLimits(bool useTieredLimits) {
     mImpl->SetUseTieredLimits(useTieredLimits);
 }
