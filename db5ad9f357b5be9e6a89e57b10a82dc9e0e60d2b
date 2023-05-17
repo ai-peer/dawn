@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6baca78f_f753d400",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T15:36:13Z",
+      "side": 0,
+      "message": "Should this mark `Reference` as an error instead of falling through into unhandled?",
+      "revId": "db5ad9f357b5be9e6a89e57b10a82dc9e0e60d2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
