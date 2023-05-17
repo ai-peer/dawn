@@ -34,6 +34,24 @@
       "parentUuid": "6baca78f_f753d400",
       "revId": "db5ad9f357b5be9e6a89e57b10a82dc9e0e60d2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaeca72c_21830649",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T15:49:10Z",
+      "side": 0,
+      "message": "Mostly in the error messaging. My first inclination for a `unhandled case` would be to handle it. But, we explicitly don\u0027t want to handle Reference and return an error. Just seems we oculd be more explicit and have the ICE be something like \"Reference should never appear in IR\". Then we know it wasn\u0027t just missed but is wrong.",
+      "parentUuid": "517bfd33_43aecccb",
+      "revId": "db5ad9f357b5be9e6a89e57b10a82dc9e0e60d2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
