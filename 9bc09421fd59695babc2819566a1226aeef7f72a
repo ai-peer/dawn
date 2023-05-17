@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "9bc09421fd59695babc2819566a1226aeef7f72a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba84e2a4_f55eacf1",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-17T10:15:09Z",
+      "side": 1,
+      "message": "`constant::Value` node are not currently deduplicated by the resolver.\n\nFor this task, I was assuming we\u0027d create a `constant::Manager` that internally uses (or is just an alias to) `utils::UniqueAllocator\u003cconstant::Node\u003e`, and use that in the resolver. That would guarantee that constants from the resolver would be unique, and then the IR would just mirror what it does for types.",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 117,
+        "endChar": 37
+      },
+      "revId": "9bc09421fd59695babc2819566a1226aeef7f72a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
