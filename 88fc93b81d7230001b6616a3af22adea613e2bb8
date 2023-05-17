@@ -16,6 +16,23 @@
       "message": "Adding suppressions for 114 only based on the reported failures.",
       "revId": "88fc93b81d7230001b6616a3af22adea613e2bb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee597086_519c477d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T22:55:39Z",
+      "side": 1,
+      "message": "a lot of these are flakes or look like they hop around so I think we may need larger globs\n\non Linux Intel, Mac AMD, Mac Intel, I think we need all of \nwebgpu:shader,execution,expression,binary,f32_arithmetic:*\n \non Mac\nwebgpu:api,validation,render_pipeline,fragment_state:*\nwebgpu:api,validation,render_pipeline,vertex_state:vertex_attribute_offset_alignment:*",
+      "revId": "88fc93b81d7230001b6616a3af22adea613e2bb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
