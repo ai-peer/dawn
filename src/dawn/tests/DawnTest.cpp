@@ -684,6 +684,7 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
 
                 const auto& param = gCurrentTest->mParam;
                 return (param.adapterProperties.selected &&
+                        properties.compatibilityMode == param.adapterProperties.compatibilityMode &&
                         properties.deviceID == param.adapterProperties.deviceID &&
                         properties.vendorID == param.adapterProperties.vendorID &&
                         properties.adapterType == param.adapterProperties.adapterType &&
