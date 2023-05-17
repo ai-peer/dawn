@@ -16,6 +16,24 @@
       "message": "No need for the default values as the constructor requires them.",
       "revId": "ec065c050d906df113c41b6f148a40d2284d1a4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b64c336c_5864bb95",
+        "filename": "src/tint/ir/load.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T15:32:15Z",
+      "side": 1,
+      "message": "I did this for consistency, since all of the other instruction classes use default values. Maybe we should remove them all at once if we don\u0027t want them?",
+      "parentUuid": "5d5eca71_395dec9f",
+      "revId": "ec065c050d906df113c41b6f148a40d2284d1a4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

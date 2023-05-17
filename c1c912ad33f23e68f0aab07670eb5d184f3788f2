@@ -34,6 +34,24 @@
       "parentUuid": "bd38d5fc_baf92eb2",
       "revId": "c1c912ad33f23e68f0aab07670eb5d184f3788f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c5594c_385e72b8",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T15:32:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f75fcfcd_1b21a4a7",
+      "revId": "c1c912ad33f23e68f0aab07670eb5d184f3788f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
