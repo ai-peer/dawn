@@ -20,6 +20,7 @@
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
+#include "dawn/native/Adapter.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/EnumMaskIterator.h"
@@ -180,6 +181,10 @@ MaybeError ValidateSampleCount(const TextureDescriptor* descriptor,
 
 MaybeError ValidateTextureViewDimensionCompatibility(const TextureBase* texture,
                                                      const TextureViewDescriptor* descriptor) {
+    AdapterProperties properties;
+    texture->GetDevice()->GetAdapter()->APIGetProperties(&properties);
+    const bool isCompatibilityMode = properties.compatibilityMode;
+
     DAWN_INVALID_IF(!IsArrayLayerValidForTextureViewDimension(descriptor->dimension,
                                                               descriptor->arrayLayerCount),
                     "The dimension (%s) of the texture view is not compatible with the layer count "
@@ -207,8 +212,12 @@ MaybeError ValidateTextureViewDimensionCompatibility(const TextureBase* texture,
                 "(%u) and height (%u) are not equal.",
                 descriptor->dimension, texture, texture->GetSize().width,
                 texture->GetSize().height);
+            DAWN_INVALID_IF(
+                descriptor->dimension == wgpu::TextureViewDimension::CubeArray &&
+                    isCompatibilityMode,
+                "A %s texture view for texture %s is not supported in compatibility mode",
+                descriptor->dimension, texture);
             break;
-
         case wgpu::TextureViewDimension::e1D:
         case wgpu::TextureViewDimension::e2D:
         case wgpu::TextureViewDimension::e2DArray:
