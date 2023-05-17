@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f97d41eb_c70d7069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T11:32:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52833870_e79a13ff",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T11:32:20Z",
+      "side": 1,
+      "message": "nit: Force. Also the Toggle name doesn\u0027t seem like it requires the name Force: ClearBufferBeforeQueryResolve is just as understandable.",
+      "range": {
+        "startLine": 256,
+        "startChar": 7,
+        "endLine": 256,
+        "endChar": 12
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ece091_2398fb8e",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T11:32:20Z",
+      "side": 1,
+      "message": "ditto, why TODO?",
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ded39974_6ecb8f14",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T11:32:20Z",
+      "side": 1,
+      "message": "nit: Why a TODO? This is done so we don\u0027t need to mark it TODO.",
+      "range": {
+        "startLine": 770,
+        "startChar": 19,
+        "endLine": 770,
+        "endChar": 35
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3160a52_8dbf8798",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T11:32:20Z",
+      "side": 1,
+      "message": "nit: the sentence seemed more grammatically correct previously (though I\u0027m not a native speaker either)",
+      "range": {
+        "startLine": 462,
+        "startChar": 51,
+        "endLine": 462,
+        "endChar": 56
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5477c1b_a00a0951",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T11:32:20Z",
+      "side": 1,
+      "message": "nit: where?",
+      "range": {
+        "startLine": 472,
+        "startChar": 50,
+        "endLine": 472,
+        "endChar": 55
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
