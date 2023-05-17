@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67354659_d992645e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-17T18:23:21Z",
+      "side": 1,
+      "message": "Ah.. I assume we need the `KEEP`s atm because the new bots aren\u0027t running yet and any rolls in between would remove these? Once we have the bots running we should remove the `KEEP`s so that when the issues are fixed we can rely on automation to update.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 6
+      },
+      "revId": "0646f45be4fe28ea6ce4536781535158de172adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
