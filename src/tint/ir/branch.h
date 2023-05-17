@@ -21,9 +21,10 @@
 namespace tint::ir {
 
 /// A information on a branch to another block
+template <typename TARGET>
 struct Branch {
-    /// The block being branched too.
-    FlowNode* target = nullptr;
+    /// The node being branched too.
+    TARGET* target = nullptr;
 
     /// The arguments provided for that branch. These arguments could be the
     /// return value in the case of a branch to the function terminator, or they could

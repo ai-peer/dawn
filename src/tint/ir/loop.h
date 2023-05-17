@@ -29,13 +29,13 @@ class Loop : public utils::Castable<Loop, FlowNode> {
     ~Loop() override;
 
     /// The start block is the first block in a loop.
-    Branch start = {};
+    Branch<FlowNode> start = {};
     /// The continue target of the block.
-    Branch continuing = {};
+    Branch<FlowNode> continuing = {};
     /// The loop merge target. If the `loop` does a `return` then this block may not actually
     /// end up in the control flow. We need it if the loop does a `break` we know where to break
     /// too.
-    Branch merge = {};
+    Branch<FlowNode> merge = {};
 };
 
 }  // namespace tint::ir

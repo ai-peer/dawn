@@ -115,15 +115,14 @@ class State {
                       decltype(ast::BlockStatement::statements)::static_length>
             stmts;
 
-        ir::Branch root_branch{start_node, {}};
-        const ir::Branch* branch = &root_branch;
+        ir::Branch<ir::FlowNode> branch{start_node, {}};
 
         // TODO(crbug.com/tint/1902): Handle block arguments.
 
-        while (branch->target != stop_at) {
+        while (branch.target != stop_at) {
             enum Status { kContinue, kStop, kError };
             Status status = tint::Switch(
-                branch->target,
+                branch.target,
 
                 [&](const ir::Block* block) {
                     for (auto* inst : block->instructions) {
@@ -135,7 +134,7 @@ class State {
                             stmts.Push(s);
                         }
                     }
-                    branch = &block->branch;
+                    branch = block->branch;
                     return kContinue;
                 },
 
@@ -145,8 +144,8 @@ class State {
                         return kError;
                     }
                     stmts.Push(stmt);
-                    branch = &if_->merge;
-                    return branch->target->inbound_branches.IsEmpty() ? kStop : kContinue;
+                    branch = if_->merge;
+                    return branch.target->inbound_branches.IsEmpty() ? kStop : kContinue;
                 },
 
                 [&](const ir::Switch* switch_) {
@@ -155,8 +154,8 @@ class State {
                         return kError;
                     }
                     stmts.Push(stmt);
-                    branch = &switch_->merge;
-                    return branch->target->inbound_branches.IsEmpty() ? kStop : kContinue;
+                    branch = switch_->merge;
+                    return branch.target->inbound_branches.IsEmpty() ? kStop : kContinue;
                 },
 
                 [&](const ir::FunctionTerminator*) {
@@ -171,7 +170,7 @@ class State {
                 },
 
                 [&](Default) {
-                    UNHANDLED_CASE(branch->target);
+                    UNHANDLED_CASE(branch.target);
                     return kError;
                 });
 
@@ -260,8 +259,9 @@ class State {
         return b.Switch(cond, std::move(cases));
     }
 
-    utils::Result<const ast::ReturnStatement*> FunctionTerminator(const ir::Branch* branch) {
-        if (branch->args.IsEmpty()) {
+    utils::Result<const ast::ReturnStatement*> FunctionTerminator(
+        const ir::Branch<FlowNode>& branch) {
+        if (branch.args.IsEmpty()) {
             // Branch to function terminator has no arguments.
             // If this block is nested withing some control flow, then we must emit a
             // 'return' statement, otherwise we've just naturally reached the end of the
@@ -273,14 +273,14 @@ class State {
         }
 
         // Branch to function terminator has arguments - this is the return value.
-        if (branch->args.Length() != 1) {
+        if (branch.args.Length() != 1) {
             TINT_ICE(IR, b.Diagnostics())
                 << "expected 1 value for function terminator (return value), got "
-                << branch->args.Length();
+                << branch.args.Length();
             return utils::Failure;
         }
 
-        auto* val = Expr(branch->args.Front());
+        auto* val = Expr(branch.args.Front());
         if (TINT_UNLIKELY(!val)) {
             return utils::Failure;
         }

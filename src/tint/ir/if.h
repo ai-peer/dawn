@@ -35,12 +35,12 @@ class If : public utils::Castable<If, FlowNode> {
     ~If() override;
 
     /// The true branch block
-    Branch true_ = {};
+    Branch<FlowNode> true_ = {};
     /// The false branch block
-    Branch false_ = {};
+    Branch<FlowNode> false_ = {};
     /// An block to converge the true/false branches. The block always exists, but there maybe no
     /// branches into it. (e.g. if both branches `return`)
-    Branch merge = {};
+    Branch<FlowNode> merge = {};
     /// Value holding the condition result
     const Value* condition = nullptr;
 };

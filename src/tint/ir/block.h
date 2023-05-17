@@ -37,7 +37,7 @@ class Block : public utils::Castable<Block, FlowNode> {
     bool IsDead() const override { return branch.target == nullptr; }
 
     /// The node this block branches too.
-    Branch branch = {};
+    Branch<FlowNode> branch = {};
 
     /// The instructions in the block
     utils::Vector<const Instruction*, 16> instructions;

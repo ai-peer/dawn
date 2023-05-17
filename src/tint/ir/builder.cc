@@ -101,7 +101,7 @@ Switch* Builder::CreateSwitch(Value* condition) {
 Block* Builder::CreateCase(Switch* s, utils::VectorRef<Switch::CaseSelector> selectors) {
     s->cases.Push(Switch::Case{selectors, {CreateBlock(), utils::Empty}});
 
-    Block* b = s->cases.Back().start.target->As<Block>();
+    Block* b = s->cases.Back().start.target;
     // Switch branches into the case block
     b->inbound_branches.Push(s);
     return b;

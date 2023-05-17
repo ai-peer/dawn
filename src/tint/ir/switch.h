@@ -40,7 +40,7 @@ class Switch : public utils::Castable<Switch, FlowNode> {
         /// The case selector for this node
         utils::Vector<CaseSelector, 4> selectors;
         /// The start block for the case block.
-        Branch start = {};
+        Branch<Block> start = {};
     };
 
     /// Constructor
@@ -49,7 +49,7 @@ class Switch : public utils::Castable<Switch, FlowNode> {
     ~Switch() override;
 
     /// The switch merge target
-    Branch merge = {};
+    Branch<FlowNode> merge = {};
 
     /// The switch case statements
     utils::Vector<Case, 4> cases;
