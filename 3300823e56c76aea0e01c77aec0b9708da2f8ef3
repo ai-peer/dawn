@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b937c57a_0ff52a87",
+        "filename": "src/tint/ir/function_param.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T20:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7388d15_8ee1b419",
+      "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2729bc24_60e4300b",
@@ -70,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "828612cc_bf2eebd4",
+        "filename": "src/tint/ir/function_param.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T20:48:20Z",
+      "side": 1,
+      "message": "I\u0027ve removed it, we can always add it back if we need it later.",
+      "parentUuid": "6cf7e34f_53538b0b",
+      "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8af88f4e_52a6b1b5",
@@ -83,6 +119,24 @@
       "writtenOn": "2023-05-17T18:07:17Z",
       "side": 1,
       "message": "Nit: \"the type of the parameter\"",
+      "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3765eb9_2d526614",
+        "filename": "src/tint/ir/function_param.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T20:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8af88f4e_52a6b1b5",
       "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
