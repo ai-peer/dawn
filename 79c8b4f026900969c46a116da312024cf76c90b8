@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "535ea8e4_26925d8b",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:03:07Z",
+      "side": 1,
+      "message": "I agree that \"Force\" is probably not needed in part of the name.\n\nIn another example, we have Toggle::NonzeroClearResourcesOnCreationForTesting which always inserts a nonzero clear even though it is not necessary for anything. There ,it isn\u0027t called \"ForceNonzeroClear...\". just \"NonzeroClear...\"",
+      "parentUuid": "001b7774_4b17dd6c",
+      "range": {
+        "startLine": 256,
+        "startChar": 7,
+        "endLine": 256,
+        "endChar": 12
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1ece091_2398fb8e",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -102,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86eb2a72_a3c897b1",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:03:07Z",
+      "side": 1,
+      "message": "yes, that\u0027s probably the better place",
+      "parentUuid": "a9a57010_88a1ba89",
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ded39974_6ecb8f14",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 3
@@ -113,6 +155,30 @@
       "writtenOn": "2023-05-17T11:32:20Z",
       "side": 1,
       "message": "nit: Why a TODO? This is done so we don\u0027t need to mark it TODO.",
+      "range": {
+        "startLine": 770,
+        "startChar": 19,
+        "endLine": 770,
+        "endChar": 35
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c706f317_b908ff10",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T21:03:07Z",
+      "side": 1,
+      "message": "also move this TODO to the place where it is enabled",
+      "parentUuid": "ded39974_6ecb8f14",
       "range": {
         "startLine": 770,
         "startChar": 19,
