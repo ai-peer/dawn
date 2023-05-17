@@ -28,7 +28,8 @@ namespace {
 
 class ErrorSwapChain final : public SwapChainBase {
   public:
-    explicit ErrorSwapChain(DeviceBase* device) : SwapChainBase(device, ObjectBase::kError) {}
+    explicit ErrorSwapChain(DeviceBase* device, const SwapChainDescriptor* desc)
+        : SwapChainBase(device, desc, ObjectBase::kError) {}
 
   private:
     ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() override { UNREACHABLE(); }
@@ -120,12 +121,19 @@ SwapChainBase::~SwapChainBase() {
     ASSERT(!mAttached);
 }
 
-SwapChainBase::SwapChainBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag) {}
+SwapChainBase::SwapChainBase(DeviceBase* device,
+                             const SwapChainDescriptor* descriptor,
+                             ObjectBase::ErrorTag tag)
+    : ApiObjectBase(device, tag),
+      mWidth(descriptor->width),
+      mHeight(descriptor->height),
+      mFormat(descriptor->format),
+      mUsage(descriptor->usage),
+      mPresentMode(descriptor->presentMode) {}
 
 // static
-SwapChainBase* SwapChainBase::MakeError(DeviceBase* device) {
-    return new ErrorSwapChain(device);
+SwapChainBase* SwapChainBase::MakeError(DeviceBase* device, const SwapChainDescriptor* desc) {
+    return new ErrorSwapChain(device, desc);
 }
 
 void SwapChainBase::DestroyImpl() {}
@@ -152,6 +160,16 @@ void SwapChainBase::APIConfigure(wgpu::TextureFormat format,
                                  uint32_t height) {
     GetDevice()->HandleError(
         DAWN_VALIDATION_ERROR("Configure is invalid for surface-based swapchains."));
+}
+
+TextureBase* SwapChainBase::APIGetCurrentTexture() {
+    Ref<TextureBase> result;
+    if (GetDevice()->ConsumedError(GetCurrentTexture(), &result, "calling %s.GetCurrentTexture()",
+                                   this)) {
+        TextureDescriptor desc = GetSwapChainBaseTextureDescriptor(this);
+        return TextureBase::MakeError(GetDevice(), &desc);
+    }
+    return result.Detach();
 }
 
 TextureViewBase* SwapChainBase::APIGetCurrentTextureView() {
