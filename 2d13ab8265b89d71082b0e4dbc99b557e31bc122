@@ -69,6 +69,30 @@
       },
       "revId": "2d13ab8265b89d71082b0e4dbc99b557e31bc122",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9efc7800_f4bdd9cc",
+        "filename": "infra/config/global/milestones.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-05-17T22:12:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "339b3001_f5662648",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "revId": "2d13ab8265b89d71082b0e4dbc99b557e31bc122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
