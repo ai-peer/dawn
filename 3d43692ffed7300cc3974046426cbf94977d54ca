@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "513abf6d_1d4e749a",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91672ca_c747c4da",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12aa0388_3a1c9734",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "As above, I can\u0027t actually use `b.Branch` here.",
       "parentUuid": "02d94777_8b0b9a61",
+      "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57a2b54_a46c1b3d",
+        "filename": "src/tint/writer/spirv/generator_impl_if_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8effb2e_ff9daeb0",
       "revId": "3d43692ffed7300cc3974046426cbf94977d54ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
