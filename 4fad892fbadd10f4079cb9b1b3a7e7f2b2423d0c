@@ -51,6 +51,24 @@
       "parentUuid": "669bcd67_b2e824a1",
       "revId": "4fad892fbadd10f4079cb9b1b3a7e7f2b2423d0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde9fb52_ff21122e",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:22:59Z",
+      "side": 1,
+      "message": "Isn\u0027t that unconditional?\n\n```\n                [\u0026](const ir::FunctionTerminator*) {\n                    stmts.Push(b.Return());\n                    return kStop;\n                },\n```\n\nThat\u0027s the only place return is pushed isnt\u0027 it? (The next Cl does have the logic and comment in it though ...)",
+      "parentUuid": "c809ef72_5289e0e8",
+      "revId": "4fad892fbadd10f4079cb9b1b3a7e7f2b2423d0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
