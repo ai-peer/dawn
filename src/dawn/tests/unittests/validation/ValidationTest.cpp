@@ -89,7 +89,8 @@ ValidationTest::ValidationTest() {
     // Override procs to provide harness-specific behavior to always select the null adapter, with
     // adapter toggles inherited from instance toggles state. WGPURequestAdapterOptions is ignored
     // here.
-    procs.instanceRequestAdapter = [](WGPUInstance instance, const WGPURequestAdapterOptions*,
+    procs.instanceRequestAdapter = [](WGPUInstance instance,
+                                      const WGPURequestAdapterOptions* options,
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
 
@@ -99,10 +100,12 @@ ValidationTest::ValidationTest() {
             wgpu::AdapterProperties adapterProperties;
             adapter.GetProperties(&adapterProperties);
 
-            if (adapterProperties.backendType == wgpu::BackendType::Null) {
+            if (adapterProperties.backendType == wgpu::BackendType::Null &&
+                adapterProperties.compatibilityMode == gCurrentTest->UseCompatMode()) {
                 gCurrentTest->mBackendAdapter = adapter;
                 WGPUAdapter cAdapter = adapter.Get();
                 ASSERT(cAdapter);
+
                 dawn::native::GetProcs().adapterReference(cAdapter);
                 callback(WGPURequestAdapterStatus_Success, cAdapter, nullptr, userdata);
                 return;
@@ -153,9 +156,8 @@ void ValidationTest::SetUp() {
 
     // RequestAdapter is overriden to ignore RequestAdapterOptions and always select the null
     // adapter.
-    wgpu::RequestAdapterOptions options = {};
     mInstance.RequestAdapter(
-        &options,
+        nullptr,
         [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {
             *static_cast<wgpu::Adapter*>(userdata) = wgpu::Adapter::Acquire(cAdapter);
         },
@@ -309,6 +311,10 @@ WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter,
     deviceTogglesDesc.disabledTogglesCount = disabledToggles.size();
 
     return dawnAdapter.CreateDevice(&deviceDescriptor);
+}
+
+bool ValidationTest::UseCompatMode() {
+    return false;
 }
 
 // static

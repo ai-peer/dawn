@@ -140,6 +140,8 @@ class ValidationTest : public testing::Test {
 
     wgpu::Device RequestDeviceSync(const wgpu::DeviceDescriptor& deviceDesc);
 
+    virtual bool UseCompatMode();
+
     wgpu::Device device;
     wgpu::Adapter adapter;
     WGPUDevice backendDevice;
