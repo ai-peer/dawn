@@ -16,6 +16,24 @@
       "message": "LGTM; testing will be in the CTS?\n\ncan we have a small test in UnsafeAPIValidationTests.cpp to check you can\u0027t use the feature since it\u0027s experimental?",
       "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d002f5_1506eef8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-17T21:55:12Z",
+      "side": 1,
+      "message": "Yea, the actual functionality will be tested in the CTS, only simple validation is checked here.\n\nAs for the feature test, I\u0027m pretty sure https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/tests/unittests/FeatureTests.cpp should already cover the case.",
+      "parentUuid": "5a195674_2884df0a",
+      "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
