@@ -52,6 +52,24 @@
       "parentUuid": "517bfd33_43aecccb",
       "revId": "db5ad9f357b5be9e6a89e57b10a82dc9e0e60d2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e59665d_22672307",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T15:55:11Z",
+      "side": 0,
+      "message": "That\u0027s fair, done.",
+      "parentUuid": "eaeca72c_21830649",
+      "revId": "db5ad9f357b5be9e6a89e57b10a82dc9e0e60d2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
