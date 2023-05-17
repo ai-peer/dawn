@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "938a0d53_956353ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:10:52Z",
+      "side": 1,
+      "message": "Since, in theory, we want to have this be the only generator, should we move the other one to an `ast/` folder instead and leave this at `spirv/`? Then, when IR spirv writer is done we just delete the `ast/` folder instead of deleting files, then moving `ir/` folder?",
+      "revId": "09d7ba3756a62dcb72acbdac0812f85635168a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
