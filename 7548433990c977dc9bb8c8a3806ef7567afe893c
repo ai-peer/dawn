@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45bd538b_517c26e5",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T16:09:21Z",
+      "side": 1,
+      "message": "I think this should move into the Module. The builder is transient, but a transform pipeline will likely create several builders for the same module and we need to maintain constant uniqueness across all of them.\n\nAlso generators may need to create constants on the fly for their own reasons (e.g. SPIR-V instructions that require additional constant operands).",
+      "revId": "7548433990c977dc9bb8c8a3806ef7567afe893c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
