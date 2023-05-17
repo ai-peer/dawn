@@ -33,6 +33,24 @@
       "message": "hm, you didn\u0027t run any bots; I\u0027ll manually add some",
       "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f5a610_fef01fe7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003641
+      },
+      "writtenOn": "2023-05-17T20:25:29Z",
+      "side": 1,
+      "message": "thanks. i thought relevant bots will be auto added when i run CQ.\nI re-added bunch of more. we can submit this CL if all of those pass.",
+      "parentUuid": "7f339c88_bf060257",
+      "revId": "b52303b31cd7ffc72315ad6e5c80c984eacd734b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
