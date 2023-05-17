@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0392a0b9_07e5ea25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-17T22:58:22Z",
+      "side": 1,
+      "message": "LGTM to me! Just for my understanding, are the branch try bots selected and ran forever? Or do we have to manually remove them at some point? (Not familiar with any of this setup stuff...)",
+      "revId": "21c3cc0fdf32ad79d9e5b9a508ca0cbd428276c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527a9991_5cb40b46",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-17T22:58:22Z",
+      "side": 1,
+      "message": "nit. Unfinished comment?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 41
+      },
+      "revId": "21c3cc0fdf32ad79d9e5b9a508ca0cbd428276c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
