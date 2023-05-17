@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "001b7774_4b17dd6c",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-17T16:19:20Z",
+      "side": 1,
+      "message": "\u0027Force\u0027 here means we did a clear that wasn\u0027t needed because of the driver bug. We also cleared the buffer for unavailable queries before resolving that I think is necessary.",
+      "parentUuid": "52833870_e79a13ff",
+      "range": {
+        "startLine": 256,
+        "startChar": 7,
+        "endLine": 256,
+        "endChar": 12
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1ece091_2398fb8e",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -54,6 +78,24 @@
       "writtenOn": "2023-05-17T11:32:20Z",
       "side": 1,
       "message": "ditto, why TODO?",
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a57010_88a1ba89",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-17T16:19:20Z",
+      "side": 1,
+      "message": "Left the TODO to remove the workaround once the driver issue get fixed. Maybe I should left the TODO in PhysicalDeviceD3D12.cpp where this toggle is enabled.",
+      "parentUuid": "e1ece091_2398fb8e",
       "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
