@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c95766_98504202",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:05:36Z",
+      "side": 1,
+      "message": "Will we ever have ir without transforms? Is it simpler to stick this in the ir src?",
+      "revId": "0d89d1ce45ff7105162a994ec1650ec540d52a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc4593a6_ca2f05cd",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 2330,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:05:36Z",
+      "side": 1,
+      "message": "```suggestion\n      deps +\u003d [\n          \":tint_unittests_ir_src\",\n          \":tint_unittests_ir_transform_src\",\n      ]\n```",
+      "range": {
+        "startLine": 2329,
+        "startChar": 0,
+        "endLine": 2330,
+        "endChar": 52
+      },
+      "revId": "0d89d1ce45ff7105162a994ec1650ec540d52a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
