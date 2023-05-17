@@ -34,6 +34,24 @@
       "parentUuid": "5d5eca71_395dec9f",
       "revId": "ec065c050d906df113c41b6f148a40d2284d1a4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efadf39_d88f00f8",
+        "filename": "src/tint/ir/load.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T15:40:39Z",
+      "side": 1,
+      "message": "Fair. Leave for now, I\u0027ll do a pass to remove the redundant ones.",
+      "parentUuid": "b64c336c_5864bb95",
+      "revId": "ec065c050d906df113c41b6f148a40d2284d1a4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8d2799_25b086fa",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T15:40:39Z",
+      "side": 1,
+      "message": "Ref is removed now with the prior CL, so is this comment still relevant?",
+      "revId": "dd60d72d2425f167ae7b562003dfd3700b12b2f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43f3162_f5f91ae5",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T15:40:39Z",
+      "side": 1,
+      "message": "Should this be `UnwrapPtr` now?",
+      "revId": "dd60d72d2425f167ae7b562003dfd3700b12b2f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3e267f_e4e94f65",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T15:40:39Z",
+      "side": 1,
+      "message": "Should this be `nullptr`? That seems like a tripping hazard in the future?",
+      "revId": "dd60d72d2425f167ae7b562003dfd3700b12b2f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
