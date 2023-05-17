@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6da3754b_dfbea4ee",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-17T12:02:11Z",
+      "side": 1,
+      "message": "This is all becoming way more complicated than it feels should be necessary. First off the WebGPU API guarantees that resources are not used both as UAV and SRV in the same render pass. So we shouldn\u0027t need to unset bindgroups inside render passes. Second compute passes don\u0027t need the mUAVs handling either, so we can structure code as:\n\n```\nif (compute) {\n  [compute pass specific code]\n} else {\n  // Render pass\n  [render pass specific code]\n}\n\n// Common code\nfor (BindGroupIndex index : IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {\n    DAWN_TRY(ApplyBindGroup(index));\n}\n```\n\nIn the compute pass, to prevent the UAV / SRV conflict we need to unset the bindgroups that are present in the previous layout that aren\u0027t inherited. The other bindgroups either stay bound, or will be overwritten anyway. So `[compute pass specific code]` becomes something like:\n\n```\n// To avoid a branch we can set mLastAppliedPipelineLayout to the empty pipeline\n// layout on creation. That layout could be added to the DeviceBase similarly to\n// the EmptyBindGroupLayout.\nBindGroupLayoutMask inheritedGroups \u003d mPipelineLayout-\u003eInheritedGroupMask(mLastAppliedPipelineLayout);\nBindGroupLayoutMask previousGroups \u003d mLastAppliedPipelineLayout-\u003eGetBindGroupLayoutsMask();\n\n// To avoid UAV / SRV conflicts with bindings in previously bind groups, we\n// unset the bind groups that aren\u0027t reused by the current pipeline.\nBindGroupLayoutMask groupsToUnset \u003d previousGroups \u0026 ~inheritedGroups;\nfor (BindGroupIndex index : IterateBitSet(groupsToUnset)) {\n    UnApplyBindGroup(index);\n}\n```\n\nThe render pass handling can start by rebuilding a vector of UAV every time for now and apply it, so `[render pass specific code]` would look like:\n\n```\nBindGroupLayoutMask uavGroups \u003d ToBackend(mPipelineLayout)-\u003eGetUAVBindGroupLayoutsMask();\nif (uavGroups.any()) {\n    // Could be a stackvector with 4 slots.\n    std::vector\u003cComPtr\u003cID3D11UnorderedAccessView\u003e\u003e uavs;\n    for (BindGroupIndex index : IterateBitSet(uavGroups)) {\n        append uav bindings to the vector.\n        (of course handling of mUAVs is removed from the rest of the code)\n    }\n    mCommandContext-\u003eGetD3D11DeviceContext1()-\u003eOMSetRenderTargetsAndUnorderedAccessViews(\n        D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr,\n        uavSlotCount - uavs.size(), uavs.size(), nullptr, nullptr);\n}\n```",
+      "parentUuid": "67606e03_f908588f",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
