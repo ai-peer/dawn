@@ -183,7 +183,8 @@ T Texture::GetD3D11TextureDesc() const {
     }
 
     desc.MipLevels = static_cast<UINT16>(GetNumMipLevels());
-    desc.Format = GetD3D11Format();
+    // Use typeless format for the texture, so it can be reinterpreted as compatible types.
+    desc.Format = d3d::DXGITypelessTextureFormat(GetFormat().format);
     desc.Usage = mIsStaging ? D3D11_USAGE_STAGING : D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11TextureBindFlags(GetInternalUsage(), GetFormat());
     constexpr UINT kCPUReadWriteFlags = D3D11_CPU_ACCESS_READ | D3D11_CPU_ACCESS_WRITE;
