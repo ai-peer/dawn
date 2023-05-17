@@ -1056,7 +1056,11 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 auto startIt = querySet->GetQueryAvailability().begin() + firstQuery;
                 auto endIt = querySet->GetQueryAvailability().begin() + firstQuery + queryCount;
                 bool hasUnavailableQueries = std::find(startIt, endIt, false) != endIt;
-                if (hasUnavailableQueries) {
+                // TODO(dawn:1546): Workaround for resolving overlapping queries to a same buffer on
+                // Intel Gen12 GPUs due to D3D12 driver issue.
+                bool forceClearNeeded =
+                    device->IsToggleEnabled(Toggle::ForceClearBufferBeforeResolveQueries);
+                if (hasUnavailableQueries || forceClearNeeded) {
                     DAWN_TRY(device->ClearBufferToZero(commandContext, destination,
                                                        destinationOffset,
                                                        queryCount * sizeof(uint64_t)));

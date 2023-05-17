@@ -459,11 +459,23 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
                 Toggle::DisableSubAllocationFor2DTextureWithCopyDstOrRenderAttachment, true);
         }
 
-        // chromium:1361662: Mesa driver has a bug clearing R8 mip-leveled textures on Intel Gen12
-        // GPUs. Work around it by clearing the whole texture as soon as they are created.
+        // chromium:1361662: Mesa driver has a bug about clearing R8 mip-leveled textures on Intel
+        // Gen12 GPUs. Work around it by clearing the whole texture as soon as they are created.
         const gpu_info::DriverVersion kFixedDriverVersion = {23, 1, 0, 0};
         if (gpu_info::CompareIntelMesaDriverVersion(GetDriverVersion(), kFixedDriverVersion) < 0) {
             deviceToggles->Default(Toggle::VulkanClearGen12TextureWithCCSAmbiguateOnCreation, true);
+        }
+    }
+
+    if (IsIntelMesa() && (gpu_info::IsIntelGen12LP(GetVendorId(), GetDeviceId()) ||
+                          gpu_info::IsIntelGen12HP(GetVendorId(), GetDeviceId()))) {
+        // dawn:1823: Intel Mesa driver has a bug about vkCmdCopyQueryPoolResults fails to write
+        // overlapping queries to a same buffer after the buffer is accessed by a compute shader
+        // with correct resource barriers, which may caused by flush and memory coherency issue on
+        // Intel Gen12 GPUs. Workaround for it to clear the buffer before vkCmdCopyQueryPoolResults.
+        const gpu_info::DriverVersion kBuggyDriverVersion = {21, 2, 0, 0};
+        if (gpu_info::CompareIntelMesaDriverVersion(GetDriverVersion(), kBuggyDriverVersion) >= 0) {
+            deviceToggles->Default(Toggle::ForceClearBufferBeforeResolveQueries, true);
         }
     }
 
