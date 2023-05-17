@@ -55,3 +55,14 @@ TEST_F(UnsafeAPIValidationTest, chromium_disable_uniformity_analysis) {
         }
     )"));
 }
+
+// Check that float32-filterable is an unsafe API.
+TEST_F(UnsafeAPIValidationTest, float32_filterable) {
+    wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+    const char* toggle = "allow_unsafe_apis";
+    deviceTogglesDesc.disabledToggles = &toggle;
+    deviceTogglesDesc.disabledTogglesCount = 1;
+
+    wgpu::DeviceDescriptor deviceDesc;
+    deviceDesc.nextInChain = &deviceTogglesDesc;
+}
