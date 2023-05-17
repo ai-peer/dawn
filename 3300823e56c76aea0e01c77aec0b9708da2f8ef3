@@ -16,6 +16,57 @@
       "message": "PTAL.",
       "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7388d15_8ee1b419",
+        "filename": "src/tint/ir/function_param.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T18:07:17Z",
+      "side": 1,
+      "message": "Nit: it\u0027s not an instruction",
+      "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2729bc24_60e4300b",
+        "filename": "src/tint/ir/function_param.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T18:07:17Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the name be handled by the module\u0027s `value_to_id_` stuff instead?",
+      "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8af88f4e_52a6b1b5",
+        "filename": "src/tint/ir/function_param.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T18:07:17Z",
+      "side": 1,
+      "message": "Nit: \"the type of the parameter\"",
+      "revId": "3300823e56c76aea0e01c77aec0b9708da2f8ef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
