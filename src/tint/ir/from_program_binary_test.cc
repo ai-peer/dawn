@@ -42,7 +42,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Add) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = add %1:u32, 4u
+    %tint_symbol:u32 = add %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -64,8 +64,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Increment) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = add %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = add %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -87,8 +87,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundAdd) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = add %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = add %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -111,7 +111,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Subtract) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = sub %1:u32, 4u
+    %tint_symbol:u32 = sub %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -133,8 +133,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Decrement) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, i32, read_write> = sub %v1:ref<private, i32, read_write>, 1i
-    store %v1:ref<private, i32, read_write>, %2:ref<private, i32, read_write>
+    %2:ref<private, i32, read_write> = sub %v1, 1i
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -156,8 +156,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundSubtract) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = sub %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = sub %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -180,7 +180,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Multiply) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = mul %1:u32, 4u
+    %tint_symbol:u32 = mul %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -202,8 +202,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundMultiply) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = mul %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = mul %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -226,7 +226,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Div) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = div %1:u32, 4u
+    %tint_symbol:u32 = div %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -248,8 +248,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundDiv) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = div %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = div %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -272,7 +272,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Modulo) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = mod %1:u32, 4u
+    %tint_symbol:u32 = mod %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -294,8 +294,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundModulo) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = mod %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = mod %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -318,7 +318,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_And) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = and %1:u32, 4u
+    %tint_symbol:u32 = and %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -340,8 +340,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundAnd) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, bool, read_write> = and %v1:ref<private, bool, read_write>, false
-    store %v1:ref<private, bool, read_write>, %2:ref<private, bool, read_write>
+    %2:ref<private, bool, read_write> = and %v1, false
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -364,7 +364,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Or) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = or %1:u32, 4u
+    %tint_symbol:u32 = or %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -386,8 +386,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundOr) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, bool, read_write> = or %v1:ref<private, bool, read_write>, false
-    store %v1:ref<private, bool, read_write>, %2:ref<private, bool, read_write>
+    %2:ref<private, bool, read_write> = or %v1, false
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -410,7 +410,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Xor) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = xor %1:u32, 4u
+    %tint_symbol:u32 = xor %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -432,8 +432,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundXor) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = xor %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = xor %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -458,14 +458,14 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalAnd) {
     %1:bool = call my_func
   } -> %fn5 # branch
 
-  %fn5 = if %1:bool [t: %fn6, f: %fn7, m: %fn8]
+  %fn5 = if %1 [t: %fn6, f: %fn7, m: %fn8]
     # true branch
     %fn6 = block {
     } -> %fn8 false # branch
 
     # false branch
     %fn7 = block {
-    } -> %fn8 %1:bool # branch
+    } -> %fn8 %1 # branch
 
   # if merge
   %fn8 = block (%2:bool) {
@@ -506,10 +506,10 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalOr) {
     %1:bool = call my_func
   } -> %fn5 # branch
 
-  %fn5 = if %1:bool [t: %fn6, f: %fn7, m: %fn8]
+  %fn5 = if %1 [t: %fn6, f: %fn7, m: %fn8]
     # true branch
     %fn6 = block {
-    } -> %fn8 %1:bool # branch
+    } -> %fn8 %1 # branch
 
     # false branch
     %fn7 = block {
@@ -552,7 +552,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Equal) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:bool = eq %1:u32, 4u
+    %tint_symbol:bool = eq %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -575,7 +575,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_NotEqual) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:bool = neq %1:u32, 4u
+    %tint_symbol:bool = neq %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -598,7 +598,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LessThan) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:bool = lt %1:u32, 4u
+    %tint_symbol:bool = lt %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -621,7 +621,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_GreaterThan) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:bool = gt %1:u32, 4u
+    %tint_symbol:bool = gt %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -644,7 +644,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LessThanEqual) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:bool = lte %1:u32, 4u
+    %tint_symbol:bool = lte %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -667,7 +667,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_GreaterThanEqual) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:bool = gte %1:u32, 4u
+    %tint_symbol:bool = gte %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -690,7 +690,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_ShiftLeft) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = shiftl %1:u32, 4u
+    %tint_symbol:u32 = shiftl %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -712,8 +712,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundShiftLeft) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = shiftl %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = shiftl %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -736,7 +736,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_ShiftRight) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = shiftr %1:u32, 4u
+    %tint_symbol:u32 = shiftr %1, 4u
   } -> %func_end # return
 } %func_end
 
@@ -758,8 +758,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_CompoundShiftRight) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %2:ref<private, u32, read_write> = shiftr %v1:ref<private, u32, read_write>, 1u
-    store %v1:ref<private, u32, read_write>, %2:ref<private, u32, read_write>
+    %2:ref<private, u32, read_write> = shiftr %v1, 1u
+    store %v1, %2
   } -> %func_end # return
 } %func_end
 
@@ -784,22 +784,22 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:f32 = call my_func
-    %2:bool = lt %1:f32, 2.0f
+    %2:bool = lt %1, 2.0f
   } -> %fn5 # branch
 
-  %fn5 = if %2:bool [t: %fn6, f: %fn7, m: %fn8]
+  %fn5 = if %2 [t: %fn6, f: %fn7, m: %fn8]
     # true branch
     %fn6 = block {
       %3:f32 = call my_func
       %4:f32 = call my_func
-      %5:f32 = mul 2.29999995231628417969f, %4:f32
-      %6:f32 = div %3:f32, %5:f32
-      %7:bool = gt 2.5f, %6:f32
-    } -> %fn8 %7:bool # branch
+      %5:f32 = mul 2.29999995231628417969f, %4
+      %6:f32 = div %3, %5
+      %7:bool = gt 2.5f, %6
+    } -> %fn8 %7 # branch
 
     # false branch
     %fn7 = block {
-    } -> %fn8 %2:bool # branch
+    } -> %fn8 %2 # branch
 
   # if merge
   %fn8 = block (%tint_symbol:bool) {

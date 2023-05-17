@@ -42,7 +42,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Unary_Not) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:bool = call my_func
-    %tint_symbol:bool = eq %1:bool, false
+    %tint_symbol:bool = eq %1, false
   } -> %func_end # return
 } %func_end
 
@@ -65,7 +65,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Unary_Complement) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:u32 = call my_func
-    %tint_symbol:u32 = complement %1:u32
+    %tint_symbol:u32 = complement %1
   } -> %func_end # return
 } %func_end
 
@@ -88,7 +88,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Unary_Negation) {
 %fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn4 = block {
     %1:i32 = call my_func
-    %tint_symbol:i32 = negation %1:i32
+    %tint_symbol:i32 = negation %1
   } -> %func_end # return
 } %func_end
 
@@ -111,7 +111,7 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Unary_AddressOf) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %v2:ptr<private, i32, read_write> = addr_of %v1:ref<private, i32, read_write>
+    %v2:ptr<private, i32, read_write> = addr_of %v1
   } -> %func_end # return
 } %func_end
 
@@ -136,8 +136,8 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Unary_Indirection) {
 
 %fn2 = func test_function():void [@compute @workgroup_size(1, 1, 1)] {
   %fn3 = block {
-    %v3:ptr<private, i32, read_write> = addr_of %v1:ref<private, i32, read_write>
-    %v2:i32 = indirection %v3:ptr<private, i32, read_write>
+    %v3:ptr<private, i32, read_write> = addr_of %v1
+    %v2:i32 = indirection %v3
   } -> %func_end # return
 } %func_end
 
