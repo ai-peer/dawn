@@ -63,6 +63,30 @@
       },
       "revId": "9bc09421fd59695babc2819566a1226aeef7f72a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b63d04f1_40a4197c",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-17T13:02:58Z",
+      "side": 1,
+      "message": "But you\u0027ve changed the behaviour of the SPIR-V writer, in that it no longer deduplicates identical constant values. There is now less constant deduplication than we previously had.",
+      "parentUuid": "efbf5378_3f109d4c",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 117,
+        "endChar": 37
+      },
+      "revId": "9bc09421fd59695babc2819566a1226aeef7f72a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
