@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e725e225_8683e231",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:07:07Z",
+      "side": 1,
+      "message": "Could we just stick this in the ir src? Is there a benefit to splitting it out?",
+      "revId": "605ef3428d3eb39bc24d643856c5fbafb02d9869",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1ab6d6_b65430b3",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-17T00:07:07Z",
+      "side": 1,
+      "message": "I\u0027ve been avoiding public_deps where ever possible and making the explicit everywhere with deps",
+      "revId": "605ef3428d3eb39bc24d643856c5fbafb02d9869",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
