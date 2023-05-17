@@ -21,6 +21,7 @@
 #include <regex>
 #include <set>
 #include <sstream>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -437,7 +438,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
         }
     }
 
-    std::set<std::pair<wgpu::BackendType, std::string>> adapterNameSet;
+    std::set<std::tuple<wgpu::BackendType, std::string, bool>> adapterNameSet;
     for (const dawn::native::Adapter& adapter : instance->GetAdapters()) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
@@ -479,8 +480,8 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
         // In Windows Remote Desktop sessions we may be able to discover multiple adapters that
         // have the same name and backend type. We will just choose one adapter from them in our
         // tests.
-        const auto adapterTypeAndName =
-            std::make_pair(properties.backendType, std::string(properties.name));
+        const auto adapterTypeAndName = std::tuple(
+            properties.backendType, std::string(properties.name), properties.compatibilityMode);
         if (adapterNameSet.find(adapterTypeAndName) == adapterNameSet.end()) {
             adapterNameSet.insert(adapterTypeAndName);
             mAdapterProperties.emplace_back(properties, selected);
@@ -488,15 +489,28 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
     }
 }
 
+namespace {
+bool BackendTestConfigHasToggleEnabled(const BackendTestConfig& config, const char* toggle) {
+    const auto& toggles = config.forceEnabledWorkarounds;
+    return std::find_if(toggles.begin(), toggles.end(), [toggle](const char* name) {
+               return strcmp(toggle, name) == 0;
+           }) != toggles.end();
+}
+}  // namespace
+
 std::vector<AdapterTestParam> DawnTestEnvironment::GetAvailableAdapterTestParamsForBackends(
     const BackendTestConfig* params,
     size_t numParams) {
     std::vector<AdapterTestParam> testParams;
     for (size_t i = 0; i < numParams; ++i) {
+        const auto& backendTestParams = params[i];
+        const bool needsCompatibility =
+            BackendTestConfigHasToggleEnabled(backendTestParams, "use_compatibility_mode");
         for (const auto& adapterProperties : mAdapterProperties) {
-            if (params[i].backendType == adapterProperties.backendType &&
+            if (backendTestParams.backendType == adapterProperties.backendType &&
+                adapterProperties.compatibilityMode == needsCompatibility &&
                 adapterProperties.selected) {
-                testParams.push_back(AdapterTestParam(params[i], adapterProperties));
+                testParams.push_back(AdapterTestParam(backendTestParams, adapterProperties));
             }
         }
     }
@@ -590,7 +604,8 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo(
             << properties.adapterName << "\" - \"" << properties.driverDescription
             << (properties.selected ? " [Selected]" : "") << "\"\n"
             << "   type: " << properties.AdapterTypeName()
-            << ", backend: " << properties.ParamName() << "\n"
+            << ", backend: " << properties.ParamName()
+            << ", compatibilityMode: " << (properties.compatibilityMode ? "true" : "false") << "\n"
             << "   vendorId: 0x" << vendorId.str() << ", deviceId: 0x" << deviceId.str() << "\n";
 
         if (strlen(properties.vendorName) || strlen(properties.architecture)) {
@@ -684,6 +699,7 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
 
                 const auto& param = gCurrentTest->mParam;
                 return (param.adapterProperties.selected &&
+                        properties.compatibilityMode == param.adapterProperties.compatibilityMode &&
                         properties.deviceID == param.adapterProperties.deviceID &&
                         properties.vendorID == param.adapterProperties.vendorID &&
                         properties.adapterType == param.adapterProperties.adapterType &&
@@ -875,6 +891,10 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
 
 bool DawnTestBase::IsFullBackendValidationEnabled() const {
     return gTestEnv->GetBackendValidationLevel() == dawn::native::BackendValidationLevel::Full;
+}
+
+bool DawnTestBase::IsCompatibilityMode() const {
+    return mParam.adapterProperties.compatibilityMode;
 }
 
 bool DawnTestBase::RunSuppressedTests() const {
