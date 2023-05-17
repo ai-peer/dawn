@@ -16,6 +16,24 @@
       "message": "Should this mark `Reference` as an error instead of falling through into unhandled?",
       "revId": "db5ad9f357b5be9e6a89e57b10a82dc9e0e60d2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "517bfd33_43aecccb",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T15:42:05Z",
+      "side": 0,
+      "message": "What\u0027s the difference? The unhandled case raises an ICE and returns an invalid AST node. I\u0027m not sure what else we should do.",
+      "parentUuid": "6baca78f_f753d400",
+      "revId": "db5ad9f357b5be9e6a89e57b10a82dc9e0e60d2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
