@@ -52,6 +52,23 @@
       "parentUuid": "c6d002f5_1506eef8",
       "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "074b91ec_3f8aacf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-17T22:03:37Z",
+      "side": 1,
+      "message": "corentin is OOO the rest of the week, so adding bajones",
+      "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
