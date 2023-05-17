@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1102048d_adde97df",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T14:06:38Z",
+      "side": 1,
+      "message": "I can imagine wanting IR without /all/ of the transforms (e.g. keeping a WASM build that does SPIRV-\u003eWGSL conversion as small as possible).\n\nI can also imagine wanting to use the transform manager from within a transform (to run dependent transforms or sub-transforms). We do this in AST land today for some things. Since the transform manager sources depend on the IR sources, we couldn\u0027t have IR transforms in the main IR source set in this scenario, as it\u0027d be a cyclic dependency.",
+      "parentUuid": "26c95766_98504202",
+      "revId": "0d89d1ce45ff7105162a994ec1650ec540d52a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc4593a6_ca2f05cd",
         "filename": "src/tint/BUILD.gn",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-17T00:05:36Z",
       "side": 1,
       "message": "```suggestion\n      deps +\u003d [\n          \":tint_unittests_ir_src\",\n          \":tint_unittests_ir_transform_src\",\n      ]\n```",
+      "range": {
+        "startLine": 2329,
+        "startChar": 0,
+        "endLine": 2330,
+        "endChar": 52
+      },
+      "revId": "0d89d1ce45ff7105162a994ec1650ec540d52a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4630945_39e0b459",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 2330,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-17T14:06:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc4593a6_ca2f05cd",
       "range": {
         "startLine": 2329,
         "startChar": 0,
