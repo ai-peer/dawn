@@ -16,6 +16,29 @@
       "message": "Re-enabling DepthCopyFromBufferTests failing on windows is the remaining Windows Angle problem. I should try finding the culprit to get rid of this pain point",
       "revId": "02381266e32a576e23b0749e1f0040c472af7669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b199b4d_4efe4a79",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T21:50:26Z",
+      "side": 1,
+      "message": "why do we need the format check? what about Depth24PlusStencil8 ?",
+      "range": {
+        "startLine": 1366,
+        "startChar": 20,
+        "endLine": 1366,
+        "endChar": 66
+      },
+      "revId": "02381266e32a576e23b0749e1f0040c472af7669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
