@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea40353_50a3bfe1",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-18T15:33:01Z",
+      "side": 1,
+      "message": "Just noticed this: does this test pass on OpenGLES now, or is further work needed here?",
+      "revId": "e1219315635a0aa2a92c56c525154d1b6e962af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
