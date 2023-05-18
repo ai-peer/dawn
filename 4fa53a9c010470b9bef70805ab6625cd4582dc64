@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08b64327_43af8d1b",
+        "filename": "src/tint/ir/binary.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-18T21:34:04Z",
+      "side": 1,
+      "message": "Tell that to my compiler, heh. It gets grumpy because `Binary` has a `Kind` method and it complained ...",
+      "parentUuid": "20bcc86a_dc5c74e2",
+      "range": {
+        "startLine": 22,
+        "startChar": 15,
+        "endLine": 22,
+        "endChar": 19
+      },
+      "revId": "4fa53a9c010470b9bef70805ab6625cd4582dc64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83f568a9_5a5f27d4",
         "filename": "src/tint/ir/constant.h",
         "patchSetId": 1
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "793c289c_dcc15b1a",
+        "filename": "src/tint/ir/constant.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-18T21:34:04Z",
+      "side": 1,
+      "message": "K, half the files were with and half without. Picked a direction. Will remove in a followup.",
+      "parentUuid": "83f568a9_5a5f27d4",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "4fa53a9c010470b9bef70805ab6625cd4582dc64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7f85e7c_2d635f1c",
         "filename": "src/tint/ir/switch.h",
         "patchSetId": 1
@@ -77,6 +125,30 @@
       "writtenOn": "2023-05-18T20:32:58Z",
       "side": 1,
       "message": "Is this meant to be private now?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "4fa53a9c010470b9bef70805ab6625cd4582dc64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a0d366_3ad99812",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-18T21:34:04Z",
+      "side": 1,
+      "message": "I left `struct`s as they usually aren\u0027t? Can move in a followup if we want to go that way. I added the accessor just so you can be consistent when calling if desired.",
+      "parentUuid": "f7f85e7c_2d635f1c",
       "range": {
         "startLine": 43,
         "startChar": 0,
