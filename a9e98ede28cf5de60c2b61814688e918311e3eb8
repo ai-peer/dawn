@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f84bd19_cb332aaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-18T18:49:21Z",
+      "side": 1,
+      "message": "Hmm, is it worth to plumb this via gn args and do an ifdef instead? (Not sure how much overhead reading and checking the env var takes and whether we should be leaving it in?)",
+      "revId": "a9e98ede28cf5de60c2b61814688e918311e3eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
