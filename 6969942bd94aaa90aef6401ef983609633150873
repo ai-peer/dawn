@@ -272,6 +272,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4374ab99_5c96c942",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-18T10:54:06Z",
+      "side": 1,
+      "message": "Right, in render passes we should probably remove all bindings at the end of the render pass then. Alternatively we can remember the layout of each currently applied bindgroup.",
+      "parentUuid": "d045b3ca_c155ac25",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
