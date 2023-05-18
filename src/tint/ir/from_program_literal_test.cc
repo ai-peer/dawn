@@ -25,17 +25,19 @@
 namespace tint::ir {
 namespace {
 
-Value* GlobalVarInitializer(const Module& m) {
-    if (m.root_block->instructions.Length() == 0u) {
+const Value* GlobalVarInitializer(const Module& m) {
+    const auto instr = m.root_block->Instructions();
+
+    if (instr.Length() == 0u) {
         ADD_FAILURE() << "m.root_block has no instruction";
         return nullptr;
     }
-    auto* var = m.root_block->instructions[0]->As<ir::Var>();
+    auto* var = instr[0]->As<ir::Var>();
     if (!var) {
         ADD_FAILURE() << "m.root_block.instructions[0] was not a var";
         return nullptr;
     }
-    return var->initializer;
+    return var->Initializer();
 }
 
 using namespace tint::number_suffixes;  // NOLINT
@@ -51,7 +53,7 @@ TEST_F(IR_BuilderImplTest, EmitLiteral_Bool_True) {
 
     auto* init = GlobalVarInitializer(m.Get());
     ASSERT_TRUE(Is<Constant>(init));
-    auto* val = init->As<Constant>()->value;
+    auto* val = init->As<Constant>()->Value();
     EXPECT_TRUE(val->Is<constant::Scalar<bool>>());
     EXPECT_TRUE(val->As<constant::Scalar<bool>>()->ValueAs<bool>());
 }
@@ -65,7 +67,7 @@ TEST_F(IR_BuilderImplTest, EmitLiteral_Bool_False) {
 
     auto* init = GlobalVarInitializer(m.Get());
     ASSERT_TRUE(Is<Constant>(init));
-    auto* val = init->As<Constant>()->value;
+    auto* val = init->As<Constant>()->Value();
     EXPECT_TRUE(val->Is<constant::Scalar<bool>>());
     EXPECT_FALSE(val->As<constant::Scalar<bool>>()->ValueAs<bool>());
 }
@@ -79,7 +81,7 @@ TEST_F(IR_BuilderImplTest, EmitLiteral_F32) {
 
     auto* init = GlobalVarInitializer(m.Get());
     ASSERT_TRUE(Is<Constant>(init));
-    auto* val = init->As<Constant>()->value;
+    auto* val = init->As<Constant>()->Value();
     EXPECT_TRUE(val->Is<constant::Scalar<f32>>());
     EXPECT_EQ(1.2_f, val->As<constant::Scalar<f32>>()->ValueAs<f32>());
 }
@@ -94,7 +96,7 @@ TEST_F(IR_BuilderImplTest, EmitLiteral_F16) {
 
     auto* init = GlobalVarInitializer(m.Get());
     ASSERT_TRUE(Is<Constant>(init));
-    auto* val = init->As<Constant>()->value;
+    auto* val = init->As<Constant>()->Value();
     EXPECT_TRUE(val->Is<constant::Scalar<f16>>());
     EXPECT_EQ(1.2_h, val->As<constant::Scalar<f16>>()->ValueAs<f32>());
 }
@@ -108,7 +110,7 @@ TEST_F(IR_BuilderImplTest, EmitLiteral_I32) {
 
     auto* init = GlobalVarInitializer(m.Get());
     ASSERT_TRUE(Is<Constant>(init));
-    auto* val = init->As<Constant>()->value;
+    auto* val = init->As<Constant>()->Value();
     EXPECT_TRUE(val->Is<constant::Scalar<i32>>());
     EXPECT_EQ(-2_i, val->As<constant::Scalar<i32>>()->ValueAs<f32>());
 }
@@ -122,7 +124,7 @@ TEST_F(IR_BuilderImplTest, EmitLiteral_U32) {
 
     auto* init = GlobalVarInitializer(m.Get());
     ASSERT_TRUE(Is<Constant>(init));
-    auto* val = init->As<Constant>()->value;
+    auto* val = init->As<Constant>()->Value();
     EXPECT_TRUE(val->Is<constant::Scalar<u32>>());
     EXPECT_EQ(2_u, val->As<constant::Scalar<u32>>()->ValueAs<f32>());
 }
