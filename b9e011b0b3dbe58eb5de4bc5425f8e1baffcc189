@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc7614a_4e244092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T23:26:29Z",
+      "side": 1,
+      "message": "Chromium will read this file in https://chromium-review.googlesource.com/c/chromium/src/+/4546421\n\nthen, I\u0027ll remove the current [ Slow ] expectations from expectations.txt and update validate.go to check they aren\u0027t used there.",
+      "revId": "b9e011b0b3dbe58eb5de4bc5425f8e1baffcc189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
