@@ -63,6 +63,30 @@
       },
       "revId": "02381266e32a576e23b0749e1f0040c472af7669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ff62b7_15ecf563",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T21:59:49Z",
+      "side": 1,
+      "message": "I think we may just do it for all stencil with no format check; there isn\u0027t a fundamental reason it shouldn\u0027t work for other formats as well, right?",
+      "parentUuid": "ef0f0539_d7e3e91b",
+      "range": {
+        "startLine": 1366,
+        "startChar": 20,
+        "endLine": 1366,
+        "endChar": 66
+      },
+      "revId": "02381266e32a576e23b0749e1f0040c472af7669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
