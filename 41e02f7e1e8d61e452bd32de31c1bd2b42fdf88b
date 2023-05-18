@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6c16b3a_cc4e8b39",
+        "filename": "tools/src/cmd/auto-submit/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-18T08:47:11Z",
+      "side": 1,
+      "message": "Got a bit paranoid about submitting other people\u0027s changes, so added this for now.",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 19
+      },
+      "revId": "41e02f7e1e8d61e452bd32de31c1bd2b42fdf88b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
