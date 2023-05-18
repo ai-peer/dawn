@@ -16,6 +16,24 @@
       "message": "Does this need to handle the `0u` return? Or is it ok to add it as an instruction?",
       "revId": "5a0cba84503c5f8e31d4ac365fd101b289eb2dbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f2596d_aacabce5",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-18T01:48:16Z",
+      "side": 1,
+      "message": "I think it\u0027s OK to add to the map. Nothing should ever try to use a store instruction as an operand, and if it does then spirv-val will catch it as 0 is never a valid SPIR-V ID.",
+      "parentUuid": "3706b1fd_0425b055",
+      "revId": "5a0cba84503c5f8e31d4ac365fd101b289eb2dbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
