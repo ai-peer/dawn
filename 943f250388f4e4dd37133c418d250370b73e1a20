@@ -344,6 +344,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad605fa_f6983ae6",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-18T03:37:54Z",
+      "side": 1,
+      "message": "right, I did that. What I don\u0027t get is where I tell it to make an adapter that uses compat. Here, all I\u0027m doing is filtering existing adapters, no where have I told it \"hey, make an adapter that uses compat.\" ... but, I guess it must already be doing that since it works so 🤷‍♂️ 😅",
+      "parentUuid": "b0fd5738_3dfc221b",
+      "range": {
+        "startLine": 92,
+        "startChar": 61,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df2f397f_2b1fbb8c",
