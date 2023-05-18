@@ -177,6 +177,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67aaa0b3_01849a8f",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T02:29:24Z",
+      "side": 1,
+      "message": "yup, started this process in https://dawn-review.googlesource.com/c/dawn/+/132841 but perhaps I missed some",
+      "parentUuid": "a1f11cdd_81fc795f",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 11
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2f58252_324d08dd",
@@ -286,6 +310,30 @@
       "side": 1,
       "message": "I don\u0027t think I understand what you\u0027re asking me to do. Adding `UseCompatMode` ok. Where do I call this? How do I use it in instanceRequestAdapter. If I understand correctly, if I add a compat mode adapter, lots of other tests will wrongly pick up that adapter since they aren\u0027t rejecting compat mode adapaters",
       "parentUuid": "a302d1df_0873f015",
+      "range": {
+        "startLine": 92,
+        "startChar": 61,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "943f250388f4e4dd37133c418d250370b73e1a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0fd5738_3dfc221b",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T02:29:24Z",
+      "side": 1,
+      "message": "have `virtual bool ValidationTest::UseCompatMode() const` return false\nhave `bool CompatValidationTest::UseCompatMode() const override` return true\n\nprocs.instanceRequestAdapter is currently a function which looks through all the adapters and finds the null backend.\nYou can change it to ALSO find an adapter that matches whatever gCurrentTest-\u003eUseCompatMode() says. This way, only tests running under CompatValidationTest will use the compat adapter",
+      "parentUuid": "abab67b9_d05abe79",
       "range": {
         "startLine": 92,
         "startChar": 61,
