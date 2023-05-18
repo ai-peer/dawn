@@ -22,6 +22,30 @@
       },
       "revId": "1160e5041e009837219f45914643de46422a8528",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24dac1a9_2647f2fb",
+        "filename": "src/tint/ir/module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-18T02:09:50Z",
+      "side": 1,
+      "message": "Not sure what you mean. This is the `constant::Value` arena where the `constant::` constants are allocated from. The hash below is a map of `constant::Value` -\u003e `ir::Constant` which is what we use to return a unique `ir::Constant` based on the `constant::Value`.",
+      "parentUuid": "da6f2f74_22990ef0",
+      "range": {
+        "startLine": 71,
+        "startChar": 11,
+        "endLine": 71,
+        "endChar": 25
+      },
+      "revId": "1160e5041e009837219f45914643de46422a8528",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
