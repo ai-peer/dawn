@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dff14e78_8e37751c",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-18T05:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f9fb3b5_f8d2a98e",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 26
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb887ac7_06a14690",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-18T04:02:04Z",
       "side": 1,
       "message": "nit: just \"%s\" instead of \"texture %s\"\n\nthe printing of the texture will print [Texture] or [Texture \"myLabel\"]\n\nalso nit: end the message with a period\n\nsee third_party/dawn/docs/dawn/errors.md",
+      "range": {
+        "startLine": 215,
+        "startChar": 39,
+        "endLine": 215,
+        "endChar": 49
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a773b2e8_689b7245",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-18T05:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb887ac7_06a14690",
       "range": {
         "startLine": 215,
         "startChar": 39,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c0a345b_1c0f17f7",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-18T05:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebea540c_1362cb61",
+      "range": {
+        "startLine": 103,
+        "startChar": 38,
+        "endLine": 103,
+        "endChar": 67
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40f71608_01aaeb7d",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-05-18T04:02:04Z",
       "side": 1,
       "message": "unit: const",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 33
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cc4bf55_9a37c178",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-18T05:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40f71608_01aaeb7d",
       "range": {
         "startLine": 143,
         "startChar": 0,
