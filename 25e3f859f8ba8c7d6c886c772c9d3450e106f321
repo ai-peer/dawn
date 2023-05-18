@@ -33,6 +33,24 @@
       "message": "d3d12 backend conditionally uses typeless formats since using them could prevent some driver optimizations.\n\nwhen do we need to use typeless in d3d11?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/TextureD3D12.cpp;l\u003d254?q\u003dneedsTypeless%20f:dawn\u0026sq\u003d",
       "revId": "25e3f859f8ba8c7d6c886c772c9d3450e106f321",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aeadd22_777c4d8f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-18T10:21:51Z",
+      "side": 1,
+      "message": "I see. Changed to only use typless when it is necessary.",
+      "parentUuid": "5020bbd4_d22b223a",
+      "revId": "25e3f859f8ba8c7d6c886c772c9d3450e106f321",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
