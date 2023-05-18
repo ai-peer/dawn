@@ -34,6 +34,24 @@
       "parentUuid": "bea40353_50a3bfe1",
       "revId": "e1219315635a0aa2a92c56c525154d1b6e962af0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3d71ec_ee651805",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-18T17:53:49Z",
+      "side": 1,
+      "message": "Oh blit buffer to depth path is for workaround on intel so unrelated.\n\nI removed this DAWN_TEST_UNSUPPORTED_IF and a `ASSERT(dst.aspect \u003d\u003d Aspect::Color);` in CommandBufferGL.cpp. Tests work fine locally on linux.\n(Added in https://dawn-review.googlesource.com/c/dawn/+/133364 together with .source -\u003e .code rename to get rid of warnings)",
+      "parentUuid": "6429bfe6_069e1022",
+      "revId": "e1219315635a0aa2a92c56c525154d1b6e962af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
