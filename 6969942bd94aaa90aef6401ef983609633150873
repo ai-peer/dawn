@@ -254,6 +254,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d045b3ca_c155ac25",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-18T00:57:22Z",
+      "side": 1,
+      "message": "I am still confused about why we shouldn\u0027t need to call `UnApplyBindGroup` in render passes. Even without UAV like the sample below:\n\n```\n// pipeline1 has 2 bind groups\nSetPipeline(pipeline1);\nSetBindGroup(0, BG_Uniform_A1);\nSetBindGroup(1, BG_Uniform_B);\nDraw();\n\n// pipeline2 has 1 group only\nSetPipeline(pipeline2);\nSetBindGroup(0, BG_Uniform_A2);\nDraw();\n\n// pipeline3 has also 1 group only\nSetPipeline(pipeline3);\nSetBindGroup(0, BG_Uniform_A3);\nDraw();\n```\n\nThe resource bindings in`BG_Uniform_B` will be still active after the pass is done. We would run into the [ASSERT(CheckAllSlotsAreEmpty(mCommandContext));](https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp;drc\u003d91fd9d97a29963f5765820913344a6bcd8156acd;l\u003d94), right?",
+      "parentUuid": "0934e9de_9c757023",
+      "revId": "6969942bd94aaa90aef6401ef983609633150873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e75dffd1_e6a6db4a",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 9
