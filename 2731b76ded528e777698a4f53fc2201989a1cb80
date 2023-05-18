@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a346d691_b7e9c55d",
+        "filename": "src/dawn/common/DynamicLib.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000226
+      },
+      "writtenOn": "2023-05-18T23:53:03Z",
+      "side": 1,
+      "message": "This is illegal, unfortunately. I\u0027m not sure why it is working on Windows in general, but it is breaking on ARM64 Windows.\n\nSpecifically, you can\u0027t #include windows.h from inside the dawn namespace. That causes all of Microsoft\u0027s functions to be in dawn\u0027s namespace, and that is incorrect.\n\nI suspect that similar considerations apply to dlfcn.h, since that also doesn\u0027t belong to dawn.",
+      "revId": "2731b76ded528e777698a4f53fc2201989a1cb80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
