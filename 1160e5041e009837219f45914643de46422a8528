@@ -94,6 +94,30 @@
       },
       "revId": "1160e5041e009837219f45914643de46422a8528",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d2bf4a_188b3c8f",
+        "filename": "src/tint/ir/module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-18T14:11:09Z",
+      "side": 1,
+      "message": "I think I\u0027m still missing something.\n\nThe result of calling `constants.Get` will give me an `ir::Constant`. If I change this to use the hasher and equals, I\u0027ll get a `constant::Value` back, which isn\u0027t want I want, I need `ir::Constant` values.\n\nSo, this allocator provides the `constant::Value` and the hashset below maps that `constant::Value` to an `ir::Constant` (which is allocated out of the `values` arena).",
+      "parentUuid": "7ee8de94_4148e054",
+      "range": {
+        "startLine": 71,
+        "startChar": 11,
+        "endLine": 71,
+        "endChar": 25
+      },
+      "revId": "1160e5041e009837219f45914643de46422a8528",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
