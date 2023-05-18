@@ -34,6 +34,24 @@
       "parentUuid": "816233cd_12e1cb40",
       "revId": "25e7d22c8a8c258be01c82b507fb880db6760226",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369678fb_8cdc2f2c",
+        "filename": "tools/src/cmd/auto-submit/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-18T08:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e66cb23e_5b00c3dd",
+      "revId": "25e7d22c8a8c258be01c82b507fb880db6760226",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
