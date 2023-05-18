@@ -35,9 +35,9 @@ class Store : public utils::Castable<Store, Instruction> {
     Store& operator=(Store&& inst) = delete;
 
     /// the value being stored to
-    Value* to = nullptr;
+    Value* to;
     /// the value being stored
-    Value* from = nullptr;
+    Value* from;
 };
 
 }  // namespace tint::ir

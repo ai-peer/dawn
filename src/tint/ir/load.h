@@ -38,10 +38,10 @@ class Load : public utils::Castable<Load, Instruction> {
     const type::Type* Type() const override { return result_type; }
 
     /// the result type of the instruction
-    const type::Type* result_type = nullptr;
+    const type::Type* result_type;
 
     /// the value being loaded
-    Value* from = nullptr;
+    Value* from;
 };
 
 }  // namespace tint::ir

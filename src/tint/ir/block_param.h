@@ -37,7 +37,7 @@ class BlockParam : public utils::Castable<BlockParam, Value> {
     const type::Type* Type() const override { return type; }
 
     /// the result type of the instruction
-    const type::Type* type = nullptr;
+    const type::Type* type;
 };
 
 }  // namespace tint::ir

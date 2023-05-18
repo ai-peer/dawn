@@ -19,12 +19,12 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Binary);
 
 namespace tint::ir {
 
-Binary::Binary(Kind k, const type::Type* res_ty, Value* lhs, Value* rhs)
-    : kind(k), result_type(res_ty), lhs_(lhs), rhs_(rhs) {
+Binary::Binary(Kind k, const type::Type* res_ty, Value* l, Value* r)
+    : kind(k), result_type(res_ty), lhs(l), rhs(r) {
     TINT_ASSERT(IR, lhs);
     TINT_ASSERT(IR, rhs);
-    lhs_->AddUsage(this);
-    rhs_->AddUsage(this);
+    lhs->AddUsage(this);
+    rhs->AddUsage(this);
 }
 
 Binary::~Binary() = default;

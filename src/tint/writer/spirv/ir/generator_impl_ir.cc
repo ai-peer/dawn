@@ -360,8 +360,8 @@ uint32_t GeneratorImplIr::EmitBinary(const ir::Binary* binary) {
     }
 
     // Emit the instruction.
-    current_function_.push_inst(
-        op, {Type(binary->Type()), id, Value(binary->LHS()), Value(binary->RHS())});
+    current_function_.push_inst(op,
+                                {Type(binary->Type()), id, Value(binary->lhs), Value(binary->rhs)});
 
     return id;
 }

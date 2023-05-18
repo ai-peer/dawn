@@ -82,7 +82,7 @@ class Function : public utils::Castable<Function, FlowNode> {
     std::optional<std::array<uint32_t, 3>> workgroup_size;
 
     /// The function return type
-    const type::Type* return_type = nullptr;
+    const type::Type* return_type;
     /// The function return attributes if any
     utils::Vector<ReturnAttribute, 1> return_attributes;
     /// If the return attribute is `kLocation` this stores the location value.

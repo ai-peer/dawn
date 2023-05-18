@@ -36,11 +36,8 @@ class Builtin : public utils::Castable<Builtin, Call> {
     Builtin& operator=(const Builtin& inst) = delete;
     Builtin& operator=(Builtin&& inst) = delete;
 
-    /// @returns the builtin function
-    builtin::Function Func() const { return func_; }
-
-  private:
-    const builtin::Function func_;
+    /// The builtin function
+    const builtin::Function func;
 };
 
 }  // namespace tint::ir

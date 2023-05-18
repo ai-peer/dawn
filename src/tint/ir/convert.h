@@ -44,7 +44,7 @@ class Convert : public utils::Castable<Convert, Call> {
     const type::Type* ToType() const { return Type(); }
 
   private:
-    const type::Type* from_type_ = nullptr;
+    const type::Type* from_type_;
 };
 
 }  // namespace tint::ir

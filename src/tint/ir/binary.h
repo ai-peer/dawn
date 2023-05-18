@@ -62,21 +62,16 @@ class Binary : public utils::Castable<Binary, Instruction> {
     /// @returns the type of the value
     const type::Type* Type() const override { return result_type; }
 
-    /// @returns the left-hand-side value for the instruction
-    const Value* LHS() const { return lhs_; }
-
-    /// @returns the right-hand-side value for the instruction
-    const Value* RHS() const { return rhs_; }
-
     /// the kind of binary instruction
-    Kind kind = Kind::kAdd;
+    Kind kind;
 
     /// the result type of the instruction
-    const type::Type* result_type = nullptr;
+    const type::Type* result_type;
 
-  private:
-    Value* lhs_ = nullptr;
-    Value* rhs_ = nullptr;
+    /// The left-hand-side value for the instruction
+    Value* lhs;
+    /// The right-hand-side value for the instruction
+    Value* rhs;
 };
 
 }  // namespace tint::ir

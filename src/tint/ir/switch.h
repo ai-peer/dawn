@@ -55,7 +55,7 @@ class Switch : public utils::Castable<Switch, FlowNode> {
     utils::Vector<Case, 4> cases;
 
     /// Value holding the condition result
-    const Value* condition = nullptr;
+    const Value* condition;
 };
 
 }  // namespace tint::ir

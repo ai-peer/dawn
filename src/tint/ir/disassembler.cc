@@ -422,7 +422,7 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
         [&](const ir::Discard*) { out_ << "discard"; },
         [&](const ir::Builtin* b) {
             EmitValueWithType(b);
-            out_ << " = " << builtin::str(b->Func()) << " ";
+            out_ << " = " << builtin::str(b->func) << " ";
             EmitArgs(b);
         },
         [&](const ir::Construct* c) {
@@ -529,9 +529,9 @@ void Disassembler::EmitBinary(const Binary* b) {
             break;
     }
     out_ << " ";
-    EmitValue(b->LHS());
+    EmitValue(b->lhs);
     out_ << ", ";
-    EmitValue(b->RHS());
+    EmitValue(b->rhs);
 }
 
 void Disassembler::EmitUnary(const Unary* u) {
@@ -546,7 +546,7 @@ void Disassembler::EmitUnary(const Unary* u) {
             break;
     }
     out_ << " ";
-    EmitValue(u->Val());
+    EmitValue(u->val);
 }
 
 }  // namespace tint::ir

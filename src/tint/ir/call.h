@@ -34,7 +34,7 @@ class Call : public utils::Castable<Call, Instruction> {
     const type::Type* Type() const override { return result_type; }
 
     /// The instruction type
-    const type::Type* result_type = nullptr;
+    const type::Type* result_type;
 
     /// The constructor arguments
     utils::Vector<Value*, 1> args;

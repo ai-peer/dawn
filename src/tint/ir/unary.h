@@ -44,17 +44,14 @@ class Unary : public utils::Castable<Unary, Instruction> {
     /// @returns the type of the value
     const type::Type* Type() const override { return result_type; }
 
-    /// @returns the value for the instruction
-    const Value* Val() const { return val_; }
-
     /// the kind of unary instruction
-    Kind kind = Kind::kNegation;
+    Kind kind;
 
     /// the result type of the instruction
-    const type::Type* result_type = nullptr;
+    const type::Type* result_type;
 
-  private:
-    Value* val_ = nullptr;
+    /// The value for the instruction
+    Value* val;
 };
 
 }  // namespace tint::ir

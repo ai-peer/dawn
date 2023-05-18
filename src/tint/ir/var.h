@@ -39,7 +39,7 @@ class Var : public utils::Castable<Var, Instruction> {
     const type::Type* Type() const override { return type; }
 
     /// the result type of the instruction
-    const type::Type* type = nullptr;
+    const type::Type* type;
 
     /// The optional initializer
     Value* initializer = nullptr;

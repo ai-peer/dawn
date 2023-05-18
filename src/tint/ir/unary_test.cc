@@ -31,8 +31,8 @@ TEST_F(IR_InstructionTest, CreateComplement) {
     ASSERT_TRUE(inst->Is<Unary>());
     EXPECT_EQ(inst->kind, Unary::Kind::kComplement);
 
-    ASSERT_TRUE(inst->Val()->Is<Constant>());
-    auto lhs = inst->Val()->As<Constant>()->value;
+    ASSERT_TRUE(inst->val->Is<Constant>());
+    auto lhs = inst->val->As<Constant>()->value;
     ASSERT_TRUE(lhs->Is<constant::Scalar<i32>>());
     EXPECT_EQ(4_i, lhs->As<constant::Scalar<i32>>()->ValueAs<i32>());
 }
@@ -45,8 +45,8 @@ TEST_F(IR_InstructionTest, CreateNegation) {
     ASSERT_TRUE(inst->Is<Unary>());
     EXPECT_EQ(inst->kind, Unary::Kind::kNegation);
 
-    ASSERT_TRUE(inst->Val()->Is<Constant>());
-    auto lhs = inst->Val()->As<Constant>()->value;
+    ASSERT_TRUE(inst->val->Is<Constant>());
+    auto lhs = inst->val->As<Constant>()->value;
     ASSERT_TRUE(lhs->Is<constant::Scalar<i32>>());
     EXPECT_EQ(4_i, lhs->As<constant::Scalar<i32>>()->ValueAs<i32>());
 }
@@ -58,9 +58,9 @@ TEST_F(IR_InstructionTest, Unary_Usage) {
 
     EXPECT_EQ(inst->kind, Unary::Kind::kNegation);
 
-    ASSERT_NE(inst->Val(), nullptr);
-    ASSERT_EQ(inst->Val()->Usage().Length(), 1u);
-    EXPECT_EQ(inst->Val()->Usage()[0], inst);
+    ASSERT_NE(inst->val, nullptr);
+    ASSERT_EQ(inst->val->Usage().Length(), 1u);
+    EXPECT_EQ(inst->val->Usage()[0], inst);
 }
 
 }  // namespace

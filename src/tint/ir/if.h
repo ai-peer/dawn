@@ -42,7 +42,7 @@ class If : public utils::Castable<If, FlowNode> {
     /// branches into it. (e.g. if both branches `return`)
     Branch merge = {};
     /// Value holding the condition result
-    const Value* condition = nullptr;
+    const Value* condition;
 };
 
 }  // namespace tint::ir
