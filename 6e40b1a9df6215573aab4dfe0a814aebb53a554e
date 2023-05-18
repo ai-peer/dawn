@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "606ed5ff_0c471811",
+        "filename": "src/tint/ir/binary.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-18T08:55:51Z",
+      "side": 0,
+      "message": "We\u0027re likely to require these getters, as we\u0027ll want setters to ensure that the `Value::uses_` is automatically kept in sync",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "6e40b1a9df6215573aab4dfe0a814aebb53a554e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5513f253_9bd7e774",
+        "filename": "src/tint/ir/call.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-18T08:55:51Z",
+      "side": 0,
+      "message": "I\u0027d prefer to keep the initializers on POD types, even if all the constructors assign to the fields. It\u0027s all too easy to introduce a new constructor that forgets to assign to the field, and you now have data flapping in the wind. The compiler will simply remove the redundant assignment, so there\u0027s no harm in having it.",
+      "range": {
+        "startLine": 37,
+        "startChar": 33,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "6e40b1a9df6215573aab4dfe0a814aebb53a554e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
