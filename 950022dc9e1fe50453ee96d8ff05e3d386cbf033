@@ -16,6 +16,24 @@
       "message": "So I think the issue is that none of the other tests and/or infra are filtering for \"not compat\" so they go through the adapters and find one that matches but it happens to be compat and then things fail?",
       "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "691c4bb0_efa279cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T21:05:20Z",
+      "side": 1,
+      "message": "seems like a preexisting issue that wasn\u0027t noticed until now\n\nIn dawn.json, \"request adapter options\" is marked as optional:\n`{\"name\": \"options\", \"type\": \"request adapter options\", \"annotation\": \"const*\", \"optional\": true, \"no_default\": true}`\n\nbut in dawn_wire.json, it\u0027s not optional.\n\n`{ \"name\": \"options\", \"type\": \"request adapter options\", \"annotation\": \"const*\" }`\n\nthat\u0027s why it\u0027s crashing in `dawn_unittests --use-wire`. Can be fixed by adding \"optional: true\" in dawn_wire.json",
+      "parentUuid": "0048e718_5534ec1b",
+      "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
