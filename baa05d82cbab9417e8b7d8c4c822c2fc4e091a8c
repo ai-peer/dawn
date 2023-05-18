@@ -103,6 +103,24 @@
       "message": "Silly nit: This is only for 32 bit float formats, not things like RGBA32Uint. Maybe rename to sampleTypeFor32BitFloatFormats?",
       "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7b041d_22ff01cf",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-18T04:40:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac5ba26e_a2ed2fcd",
+      "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
