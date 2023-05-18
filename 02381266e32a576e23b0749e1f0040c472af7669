@@ -39,6 +39,30 @@
       },
       "revId": "02381266e32a576e23b0749e1f0040c472af7669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0f0539_d7e3e91b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-18T21:55:23Z",
+      "side": 1,
+      "message": "You are right. Missing bits. Should fix it.",
+      "parentUuid": "7b199b4d_4efe4a79",
+      "range": {
+        "startLine": 1366,
+        "startChar": 20,
+        "endLine": 1366,
+        "endChar": 66
+      },
+      "revId": "02381266e32a576e23b0749e1f0040c472af7669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
