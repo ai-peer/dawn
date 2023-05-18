@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3706b1fd_0425b055",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-18T01:33:28Z",
+      "side": 1,
+      "message": "Does this need to handle the `0u` return? Or is it ok to add it as an instruction?",
+      "revId": "5a0cba84503c5f8e31d4ac365fd101b289eb2dbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
