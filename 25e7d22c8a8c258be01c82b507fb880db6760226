@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "816233cd_12e1cb40",
+        "filename": "tools/src/cmd/auto-submit/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-18T01:42:28Z",
+      "side": 1,
+      "message": "Why do you check for CQ+1? You can still apply CQ+2 on top, just means it will submit when done instead of having to do a second run of the tool.",
+      "revId": "25e7d22c8a8c258be01c82b507fb880db6760226",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
