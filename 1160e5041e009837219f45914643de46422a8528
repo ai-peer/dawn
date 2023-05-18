@@ -46,6 +46,30 @@
       },
       "revId": "1160e5041e009837219f45914643de46422a8528",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d994a41a_a551111a",
+        "filename": "src/tint/ir/module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-18T08:57:40Z",
+      "side": 1,
+      "message": "argh, I\u0027m getting myself in a muddle. Ignore me.",
+      "parentUuid": "24dac1a9_2647f2fb",
+      "range": {
+        "startLine": 71,
+        "startChar": 11,
+        "endLine": 71,
+        "endChar": 25
+      },
+      "revId": "1160e5041e009837219f45914643de46422a8528",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
