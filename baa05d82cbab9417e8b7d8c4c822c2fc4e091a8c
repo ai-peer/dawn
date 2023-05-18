@@ -69,6 +69,40 @@
       "message": "corentin is OOO the rest of the week, so adding bajones",
       "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c56e8a_97592af2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2023-05-18T00:26:16Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5ba26e_a2ed2fcd",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2023-05-18T00:26:16Z",
+      "side": 1,
+      "message": "Silly nit: This is only for 32 bit float formats, not things like RGBA32Uint. Maybe rename to sampleTypeFor32BitFloatFormats?",
+      "revId": "baa05d82cbab9417e8b7d8c4c822c2fc4e091a8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
