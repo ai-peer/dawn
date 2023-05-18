@@ -1,0 +1,14 @@
+# This file is a manually maintained list of slow tests. It has the same format as
+# `expectations.txt`, but the only result tag that should be used is [ Slow ]
+
+################################################################################
+# Large and slow tests on intel-gen-9 win10
+################################################################################
+crbug.com/1406064 [ intel-gen-9 win10 ] webgpu:api,validation,error_scope:current_scope:errorFilter="out-of-memory";stackDepth=100000 [ Slow ]
+crbug.com/1406064 [ intel-gen-9 win10 ] webgpu:api,validation,error_scope:current_scope:errorFilter="validation";stackDepth=100000 [ Slow ]
+
+################################################################################
+# These tests are slow enough that they fail often on a lot of configurations,
+# especially code-coverage builders.
+################################################################################
+crbug.com/dawn/1783 webgpu:shader,execution,expression,binary,* [ Slow ]
