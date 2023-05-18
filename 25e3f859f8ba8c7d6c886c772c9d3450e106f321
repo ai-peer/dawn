@@ -16,6 +16,23 @@
       "message": "Hi Corentin \u0026 Austin, PTAL. Thanks.",
       "revId": "25e3f859f8ba8c7d6c886c772c9d3450e106f321",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5020bbd4_d22b223a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T00:16:42Z",
+      "side": 1,
+      "message": "d3d12 backend conditionally uses typeless formats since using them could prevent some driver optimizations.\n\nwhen do we need to use typeless in d3d11?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/TextureD3D12.cpp;l\u003d254?q\u003dneedsTypeless%20f:dawn\u0026sq\u003d",
+      "revId": "25e3f859f8ba8c7d6c886c772c9d3450e106f321",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
