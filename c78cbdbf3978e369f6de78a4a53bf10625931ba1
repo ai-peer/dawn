@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4db2cb8_ad8d5ce4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-18T16:17:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c78cbdbf3978e369f6de78a4a53bf10625931ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23873ba3_5c3bfbbf",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-18T16:17:32Z",
+      "side": 1,
+      "message": "nit/bikeshed: \"Compat\" is kind of colloquial, prefer we use \"Compatibility\" in code. IsCompatibilityMode()?",
+      "revId": "c78cbdbf3978e369f6de78a4a53bf10625931ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b354e1c6_1927620e",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-18T16:17:32Z",
+      "side": 1,
+      "message": "Nit: same here. UseCompatibilityMode()?",
+      "revId": "c78cbdbf3978e369f6de78a4a53bf10625931ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
