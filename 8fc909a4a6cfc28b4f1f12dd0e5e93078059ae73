@@ -16,6 +16,41 @@
       "message": "Is there some docs I should be reading to understand the relationships between these different layers of APIs?",
       "revId": "8fc909a4a6cfc28b4f1f12dd0e5e93078059ae73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc59a286_5fd3be1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T04:02:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8fc909a4a6cfc28b4f1f12dd0e5e93078059ae73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2370af00_7b06bdf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T04:02:04Z",
+      "side": 1,
+      "message": "not really :-/\n\nCode generators generate all the C functions wgpuDeviceCreateXYZ and the definitions which forward to reinterpret_cast\u003cDeviceBase*\u003e(cDevice)-\u003eAPICreateXYZ(...).\n\nSo anything prefixed with API is the implementation of the public methods.\n\n\nStuff in include/dawn/native/DawnNative.h is for when you want to call Dawn-internal stuff on a wgpu::Adapter/Instance. You go from wgpu::Instance -\u003e dawn::native::Instance. Then you can call things like SetPlatformForTesting.",
+      "parentUuid": "37a36b0b_40f9e890",
+      "revId": "8fc909a4a6cfc28b4f1f12dd0e5e93078059ae73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

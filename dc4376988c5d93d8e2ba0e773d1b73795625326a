@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f9fb3b5_f8d2a98e",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T04:02:04Z",
+      "side": 1,
+      "message": "stuff in include/dawn/native is public Dawn-native-only stuff; I think we probably don\u0027t need to have a convenience method here. It\u0027s useful internally, but more annoying for public APIs since people might start depending on them.\n\nEventually, it\u0027d be nice if we can eliminate or make classes like dawn::native::Adapter as small as possible - and people should use wgpu::Adapter instead",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 26
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb887ac7_06a14690",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T04:02:04Z",
+      "side": 1,
+      "message": "nit: just \"%s\" instead of \"texture %s\"\n\nthe printing of the texture will print [Texture] or [Texture \"myLabel\"]\n\nalso nit: end the message with a period\n\nsee third_party/dawn/docs/dawn/errors.md",
+      "range": {
+        "startLine": 215,
+        "startChar": 39,
+        "endLine": 215,
+        "endChar": 49
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebea540c_1362cb61",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T04:02:04Z",
+      "side": 1,
+      "message": "and.. I\u0027m silly. I just realized you could have referenced the options after all.\n\n```suggestion\n                adapter.IsCompat() \u003d\u003d options-\u003ecompatibilityMode) {\n```",
+      "range": {
+        "startLine": 103,
+        "startChar": 38,
+        "endLine": 103,
+        "endChar": 67
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f71608_01aaeb7d",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-18T04:02:04Z",
+      "side": 1,
+      "message": "unit: const",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 33
+      },
+      "revId": "dc4376988c5d93d8e2ba0e773d1b73795625326a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
