@@ -33,6 +33,24 @@
       "message": "nonblocking: Eventually I think we will want to use vanilla webgpu.h in Dawn, which would mean this needs to be in a chained struct.\nThough personally, I would be fine with proposing compatibility mode to upstream webgpu.h though.",
       "revId": "4647b37b234a666ff70303c1586bda7273640e3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1a2524_f6ceb0ac",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-18T10:50:06Z",
+      "side": 1,
+      "message": "Acknowledged\n\nLet\u0027s propose compatibility, or a feature level enum upstream.",
+      "parentUuid": "df085489_481df8bf",
+      "revId": "4647b37b234a666ff70303c1586bda7273640e3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
