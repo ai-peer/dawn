@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "034d7c4c_73216b98",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-18T01:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "535ea8e4_26925d8b",
+      "range": {
+        "startLine": 256,
+        "startChar": 7,
+        "endLine": 256,
+        "endChar": 12
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1ece091_2398fb8e",
@@ -142,6 +166,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fde9bf8_9c88eae2",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-18T01:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86eb2a72_a3c897b1",
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ded39974_6ecb8f14",
@@ -189,6 +231,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdfef60f_7beba4c8",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-18T01:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c706f317_b908ff10",
+      "range": {
+        "startLine": 770,
+        "startChar": 19,
+        "endLine": 770,
+        "endChar": 35
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3160a52_8dbf8798",
@@ -212,6 +278,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bfacf38_031cad4b",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-18T01:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3160a52_8dbf8798",
+      "range": {
+        "startLine": 462,
+        "startChar": 51,
+        "endLine": 462,
+        "endChar": 56
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5477c1b_a00a0951",
@@ -225,6 +315,30 @@
       "writtenOn": "2023-05-17T11:32:20Z",
       "side": 1,
       "message": "nit: where?",
+      "range": {
+        "startLine": 472,
+        "startChar": 50,
+        "endLine": 472,
+        "endChar": 55
+      },
+      "revId": "79c8b4f026900969c46a116da312024cf76c90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a2eb4a_4cf8386a",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-18T01:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5477c1b_a00a0951",
       "range": {
         "startLine": 472,
         "startChar": 50,
