@@ -52,6 +52,24 @@
       "parentUuid": "bf8fb489_d36f4122",
       "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f7af6f_54dc229c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-05-19T03:16:06Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t know if that would work for copies though (aside: blit vs copy is a bit confusing in Metal since you do copies using the blit encoder). I\u0027ll try that tomorrow or early next week.\n\nBased on local testing, it doesn\u0027t seem to apply to copies (seems like it has no effect) and it also triggers a Metal validation error when used with render target usage - it seems swizzle is not supported for render target usage. In short, it\u0027s not a valid option.",
+      "parentUuid": "a37940d9_367c54f3",
+      "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
