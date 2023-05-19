@@ -16,6 +16,24 @@
       "message": "will the data be incorrectly swizzled if you copy the texture to another texture or to a buffer?\n\nI think it will be wrong since now you can have an \"rgba\" texture which is internally actually bgra. when you copy to another rgba texture, the data would either be swizzled, or Metal may not let you do it at all because of the internal format mismatch. same for buffer copies - the byte order would not be what you expect.",
       "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf8fb489_d36f4122",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-19T01:10:32Z",
+      "side": 1,
+      "message": "we could:\n - workaround swizzle copies by doing blits instead. probably not ideal since the performance would be less predictable\n - only allow this type of reinterpretation on WrapIOSurface if you don\u0027t have copy usages. that could work but feels fragile since we may internally copy around\n - provide an optional feature which lets you make an rgba8unorm texture on metal and CreateView with bgra8unorm. would this work for graphite?",
+      "parentUuid": "389f7614_1554102a",
+      "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
