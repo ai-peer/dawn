@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7623de_6f760ede",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000226
+      },
+      "writtenOn": "2023-05-19T01:08:31Z",
+      "side": 1,
+      "message": "Thanks for fixing this. This broke our ARM64 Windows builds.",
+      "revId": "904684d9fe450f80422f28264a8c432b5dd29ceb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
