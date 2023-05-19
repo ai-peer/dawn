@@ -331,7 +331,7 @@ MTLPixelFormat MetalPixelFormat(const DeviceBase* device, wgpu::TextureFormat fo
             if (@available(macOS 10.12, iOS 13.0, *)) {
                 return MTLPixelFormatDepth16Unorm;
             }
-            UNREACHABLE();
+            return MTLPixelFormatInvalid;
         case wgpu::TextureFormat::Stencil8:
             if (device->IsToggleEnabled(Toggle::MetalUseCombinedDepthStencilFormatForStencil8)) {
                 return MTLPixelFormatDepth32Float_Stencil8;
@@ -388,239 +388,239 @@ MTLPixelFormat MetalPixelFormat(const DeviceBase* device, wgpu::TextureFormat fo
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatETC2_RGB8;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ETC2RGB8UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatETC2_RGB8_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ETC2RGB8A1Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatETC2_RGB8A1;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ETC2RGB8A1UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatETC2_RGB8A1_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ETC2RGBA8Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatEAC_RGBA8;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ETC2RGBA8UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatEAC_RGBA8_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::EACR11Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatEAC_R11Unorm;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::EACR11Snorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatEAC_R11Snorm;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::EACRG11Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatEAC_RG11Unorm;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::EACRG11Snorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatEAC_RG11Snorm;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
 
         case wgpu::TextureFormat::ASTC4x4Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_4x4_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC4x4UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_4x4_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC5x4Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_5x4_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC5x4UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_5x4_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC5x5Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_5x5_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC5x5UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_5x5_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC6x5Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_6x5_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC6x5UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_6x5_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC6x6Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_6x6_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC6x6UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_6x6_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC8x5Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_8x5_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC8x5UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_8x5_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC8x6Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_8x6_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC8x6UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_8x6_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC8x8Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_8x8_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC8x8UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_8x8_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x5Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x5_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x5UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x5_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x6Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x6_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x6UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x6_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x8Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x8_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x8UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x8_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x10Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x10_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC10x10UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_10x10_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC12x10Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_12x10_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC12x10UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_12x10_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC12x12Unorm:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_12x12_LDR;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
         case wgpu::TextureFormat::ASTC12x12UnormSrgb:
             if (@available(macOS 11.0, iOS 8.0, *)) {
                 return MTLPixelFormatASTC_12x12_sRGB;
             } else {
-                UNREACHABLE();
+                return MTLPixelFormatInvalid;
             }
 
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
         case wgpu::TextureFormat::Undefined:
-            UNREACHABLE();
+            return MTLPixelFormatInvalid;
     }
 }
 
-MaybeError ValidateIOSurfaceCanBeWrapped(const DeviceBase*,
+MaybeError ValidateIOSurfaceCanBeWrapped(const DeviceBase* device,
                                          const TextureDescriptor* descriptor,
                                          IOSurfaceRef ioSurface) {
     DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
@@ -648,9 +648,12 @@ MaybeError ValidateIOSurfaceCanBeWrapped(const DeviceBase*,
     wgpu::TextureFormat ioSurfaceFormat;
     DAWN_TRY_ASSIGN(ioSurfaceFormat,
                     GetFormatEquivalentToIOSurfaceFormat(IOSurfaceGetPixelFormat(ioSurface)));
-    DAWN_INVALID_IF(descriptor->format != ioSurfaceFormat,
-                    "IOSurface format (%s) doesn't match the descriptor format (%s).",
-                    ioSurfaceFormat, descriptor->format);
+    DAWN_INVALID_IF(
+        descriptor->format != ioSurfaceFormat &&
+            !AllowFormatReinterpretationWithoutFlag(MetalPixelFormat(device, ioSurfaceFormat),
+                                                    MetalPixelFormat(device, descriptor->format)),
+        "IOSurface format (%s) doesn't match or cannot be reinterpreted as descriptor format (%s).",
+        ioSurfaceFormat, descriptor->format);
 
     return {};
 }
@@ -804,6 +807,12 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
 
         NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
         [*mtlDesc setStorageMode:kIOSurfaceStorageMode];
+        // Use the original IOSurface pixel format instead of the one passed in the descriptor since
+        // they can be different e.g. BGRA8 IOSurface being reinterpreted as RGBA8.
+        wgpu::TextureFormat ioSurfaceFormat;
+        DAWN_TRY_ASSIGN(ioSurfaceFormat,
+                        GetFormatEquivalentToIOSurfaceFormat(IOSurfaceGetPixelFormat(ioSurface)));
+        [*mtlDesc setPixelFormat:MetalPixelFormat(device, ioSurfaceFormat)];
 
         mMtlUsage = [*mtlDesc usage];
         mMtlTexture = AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()

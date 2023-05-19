@@ -438,23 +438,42 @@ TEST_P(IOSurfaceUsageTests, ClearBGRA8IOSurface) {
     DoClearTest(ioSurface.get(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data));
 }
 
-// Test sampling from an RGBA8 IOSurface
-TEST_P(IOSurfaceUsageTests, SampleFromRGBA8IOSurface) {
+// Test sampling from a BGRA8 IOSurface as RGBA8
+TEST_P(IOSurfaceUsageTests, SampleFromBGRA8IOSurfaceAsRGBA8) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32BGRA, 4);
+
+    uint32_t data = 0x01020304;  // Stored as (A, R, G, B)
+    DoSampleTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data),
+                 utils::RGBA8(2, 3, 4, 1));
+}
+
+// Test clearing a BGRA8 IOSurface as RGBA8
+TEST_P(IOSurfaceUsageTests, ClearBGRA8IOSurfaceAsRGBA8) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32BGRA, 4);
+
+    uint32_t data = 0x04010203;
+    DoClearTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data));
+}
+
+// Test sampling from an RGBA8 IOSurface as BGRA8
+TEST_P(IOSurfaceUsageTests, SampleFromRGBA8IOSurfaceAsBGRA8) {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32RGBA, 4);
 
     uint32_t data = 0x01020304;  // Stored as (A, B, G, R)
-    DoSampleTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data),
+    DoSampleTest(ioSurface.get(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data),
                  utils::RGBA8(4, 3, 2, 1));
 }
 
-// Test clearing an RGBA8 IOSurface
-TEST_P(IOSurfaceUsageTests, ClearRGBA8IOSurface) {
+// Test clearing an RGBA8 IOSurface as BGRA8
+TEST_P(IOSurfaceUsageTests, ClearRGBA8IOSurfaceAsBGRA8) {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32RGBA, 4);
 
     uint32_t data = 0x04030201;
-    DoClearTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data));
+    DoClearTest(ioSurface.get(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data));
 }
 
 // Test that texture with color is cleared when isInitialized = false
