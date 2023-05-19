@@ -34,6 +34,24 @@
       "parentUuid": "389f7614_1554102a",
       "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a37940d9_367c54f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-05-19T01:30:59Z",
+      "side": 1,
+      "message": "There\u0027s also a swizzle field on MTLTextureDescriptor supposedly added in macos 10.15:\nhttps://metalbyexample.com/new-in-metal-3/\nhttps://developer.apple.com/documentation/metal/mtltexturedescriptor/3114305-swizzle?language\u003dobjc\n\nI don\u0027t know if that would work for copies though (aside: blit vs copy is a bit confusing in Metal since you do copies using the blit encoder). I\u0027ll try that tomorrow or early next week.\n\n\u003e workaround swizzle copies by doing blits instead. probably not ideal since the performance would be less predictable\n\nIs there any other case where we do this i.e. do a copy using a shader instead of the \"blit\" encoder?\n\n\u003e only allow this type of reinterpretation on WrapIOSurface if you don\u0027t have copy usages. that could work but feels fragile since we may internally copy around\n\nI don\u0027t think this is feasible since IOSurfaces are used for almost everything on Mac, and we have code paths which do pixel readbacks, Graphite internally likely has texture to texture copies which would also be prohibited?\n\n\u003e provide an optional feature which lets you make an rgba8unorm texture on metal and CreateView with bgra8unorm. would this work for graphite?\n\nThere are code paths in Graphite which deduce the format from the \"backend texture\" which for the Dawn backend is the WGPUTexture (on the GPU main thread) so it won\u0027t work if the WGPUTexture has a format that doesn\u0027t match what we told Graphite earlier (on the compositor thread).\n\nThe main issue is that only some types of shared images (the IOSurface ones) need this workaround on Mac and the compositor thread doesn\u0027t have enough information to detect that. So we tell Skia, hey it\u0027s a RGBA8 format (skgpu::graphite::TextureInfo) texture being accessed as RGBA8 (SkColorType) when creating the recording on the compositor thread and it needs to know this to compile the correct shader/pipeline.",
+      "parentUuid": "bf8fb489_d36f4122",
+      "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
