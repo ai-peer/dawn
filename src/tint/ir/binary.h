@@ -61,10 +61,10 @@ class Binary : public utils::Castable<Binary, Instruction> {
     const type::Type* Type() const override { return result_type_; }
 
     /// @returns the left-hand-side value for the instruction
-    const Value* LHS() const { return lhs_; }
+    Value* LHS() { return lhs_; }
 
     /// @returns the right-hand-side value for the instruction
-    const Value* RHS() const { return rhs_; }
+    Value* RHS() { return rhs_; }
 
   private:
     enum Kind kind_;
