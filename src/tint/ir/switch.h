@@ -18,13 +18,12 @@
 #include "src/tint/ir/block.h"
 #include "src/tint/ir/branch.h"
 #include "src/tint/ir/constant.h"
-#include "src/tint/ir/flow_node.h"
 #include "src/tint/ir/value.h"
 
 namespace tint::ir {
 
 /// Flow node representing a switch statement
-class Switch : public utils::Castable<Switch, FlowNode> {
+class Switch : public utils::Castable<Switch, Branch> {
   public:
     /// A case selector
     struct CaseSelector {
@@ -40,23 +39,22 @@ class Switch : public utils::Castable<Switch, FlowNode> {
         /// The case selector for this node
         utils::Vector<CaseSelector, 4> selectors;
         /// The start block for the case block.
-        Branch start = {};
+        Block* start = nullptr;
 
         /// @returns the case start target
-        const Branch& Start() const { return start; }
+        const Block* Start() const { return start; }
         /// @returns the case start target
-        Branch& Start() { return start; }
+        Block* Start() { return start; }
     };
 
     /// Constructor
     /// @param cond the condition
-    explicit Switch(Value* cond);
+    /// @param m the merge block
+    explicit Switch(Value* cond, Block* m);
     ~Switch() override;
 
     /// @returns the switch merge branch
-    const Branch& Merge() const { return merge_; }
-    /// @returns the switch merge branch
-    Branch& Merge() { return merge_; }
+    Block* Merge() { return merge_; }
 
     /// @returns the switch cases
     utils::VectorRef<Case> Cases() const { return cases_; }
@@ -64,12 +62,12 @@ class Switch : public utils::Castable<Switch, FlowNode> {
     utils::Vector<Case, 4>& Cases() { return cases_; }
 
     /// @returns the condition
-    const Value* Condition() const { return condition_; }
+    Value* Condition() { return condition_; }
 
   private:
-    Branch merge_ = {};
-    utils::Vector<Case, 4> cases_;
     Value* condition_;
+    Block* merge_;
+    utils::Vector<Case, 4> cases_;
 };
 
 }  // namespace tint::ir

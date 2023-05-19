@@ -96,16 +96,16 @@ class GeneratorImplIr {
 
     /// Emit a block.
     /// @param block the block to emit
-    void EmitBlock(const ir::Block* block);
+    void EmitBlock(ir::Block* block);
 
     /// Emit an `if` flow node.
     /// @param i the if node to emit
-    void EmitIf(const ir::If* i);
+    void EmitIf(ir::If* i);
 
     /// Emit a binary instruction.
     /// @param binary the binary instruction to emit
     /// @returns the result ID of the instruction
-    uint32_t EmitBinary(const ir::Binary* binary);
+    uint32_t EmitBinary(ir::Binary* binary);
 
     /// Emit a load instruction.
     /// @param load the load instruction to emit
@@ -119,7 +119,7 @@ class GeneratorImplIr {
     /// Emit a var instruction.
     /// @param var the var instruction to emit
     /// @returns the result ID of the instruction
-    uint32_t EmitVar(const ir::Var* var);
+    uint32_t EmitVar(ir::Var* var);
 
   private:
     /// Get the result ID of the constant `constant`, emitting its instruction if necessary.
