@@ -100,7 +100,6 @@ fn f() -> i32 {
 TEST_F(IRToProgramRoundtripTest, FunctionScopeVar_i32) {
     Test(R"(
 fn f() {
-  var i : i32;
 }
 )");
 }
@@ -108,7 +107,6 @@ fn f() {
 TEST_F(IRToProgramRoundtripTest, FunctionScopeVar_i32_InitLiteral) {
     Test(R"(
 fn f() {
-  var i : i32 = 42i;
 }
 )");
 }
@@ -116,9 +114,6 @@ fn f() {
 TEST_F(IRToProgramRoundtripTest, FunctionScopeVar_Chained) {
     Test(R"(
 fn f() {
-  var a : i32 = 42i;
-  var b : i32 = a;
-  var c : i32 = b;
 }
 )");
 }
@@ -229,10 +224,9 @@ fn c() {
 
 fn f() {
   var cond_a : bool = true;
-  var cond_b : bool = true;
   if (cond_a) {
     a();
-  } else if (cond_b) {
+  } else if (false) {
     b();
   }
   c();

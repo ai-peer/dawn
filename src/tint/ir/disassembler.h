@@ -15,12 +15,16 @@
 #ifndef SRC_TINT_IR_DISASSEMBLER_H_
 #define SRC_TINT_IR_DISASSEMBLER_H_
 
+#include <deque>
 #include <string>
 
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/call.h"
 #include "src/tint/ir/flow_node.h"
+#include "src/tint/ir/if.h"
+#include "src/tint/ir/loop.h"
 #include "src/tint/ir/module.h"
+#include "src/tint/ir/switch.h"
 #include "src/tint/ir/unary.h"
 #include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/hashset.h"
@@ -42,7 +46,7 @@ class Disassembler {
 
     /// Writes the block instructions to the stream
     /// @param b the block containing the instructions
-    void EmitBlockInstructions(const Block* b);
+    void EmitBlockInstructions(Block* b);
 
     /// @returns the string representation
     std::string AsString() const { return out_.str(); }
@@ -53,18 +57,21 @@ class Disassembler {
     size_t IdOf(const FlowNode* node);
     std::string_view IdOf(const Value* node);
 
-    void Walk(const FlowNode* node);
-    void EmitInstruction(const Instruction* inst);
-    void EmitValueWithType(const Value* val);
-    void EmitValue(const Value* val);
+    void Walk();
+    void EmitInstruction(Instruction* inst);
+    void EmitValueWithType(Value* val);
+    void EmitValue(Value* val);
     void EmitArgs(const Call* call);
-    void EmitBinary(const Binary* b);
-    void EmitUnary(const Unary* b);
+    void EmitBinary(Binary* b);
+    void EmitUnary(Unary* b);
+    void EmitBranch(Branch* b);
+    void EmitSwitch(Switch* s);
+    void EmitLoop(Loop* l);
+    void EmitIf(If* i);
 
     const Module& mod_;
     utils::StringStream out_;
-    utils::Hashset<const FlowNode*, 32> visited_;
-    utils::Hashset<const FlowNode*, 32> stop_nodes_;
+    std::deque<FlowNode*> walk_list_;
     utils::Hashmap<const FlowNode*, size_t, 32> flow_node_ids_;
     utils::Hashmap<const Value*, std::string, 32> value_ids_;
     uint32_t indent_size_ = 0;

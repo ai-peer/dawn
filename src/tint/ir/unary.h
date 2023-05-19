@@ -40,7 +40,7 @@ class Unary : public utils::Castable<Unary, Instruction> {
     const type::Type* Type() const override { return result_type_; }
 
     /// @returns the value for the instruction
-    const Value* Val() const { return val_; }
+    Value* Val() { return val_; }
 
     /// @returns the kind of unary instruction
     enum Kind Kind() const { return kind_; }
