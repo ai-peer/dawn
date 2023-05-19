@@ -103,8 +103,10 @@ MaybeError BindGroupTracker::Apply() {
     if (mLastAppliedPipelineLayout) {
         BindGroupLayoutMask unusedGroups = mLastAppliedPipelineLayout->GetBindGroupLayoutsMask() &
                                            ~mPipelineLayout->GetBindGroupLayoutsMask();
+        BindGroupLayoutMask unApplyGroups = (mDirtyBindGroups | unusedGroups) &
+                                            mLastAppliedPipelineLayout->GetBindGroupLayoutsMask();
         // Unset bind groups which are not used by the new pipeline and are not inherited.
-        for (BindGroupIndex index : IterateBitSet(mDirtyBindGroups | unusedGroups)) {
+        for (BindGroupIndex index : IterateBitSet(unApplyGroups)) {
             UnApplyBindGroup(index);
         }
     }
