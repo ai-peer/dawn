@@ -34,6 +34,24 @@
       "parentUuid": "a063e049_7658d4a6",
       "revId": "f137944517bba13d5b2c926d04c182dc99f0cff3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb0085ee_9da4b10b",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-19T20:42:02Z",
+      "side": 1,
+      "message": "sounds good - would be great if you could later figure out what\u0027s going wrong here; it\u0027s been an issue that we haven\u0027t been able to understand for a while now, but if it  consistently repros with this test - that\u0027s great!",
+      "parentUuid": "95dfeff6_51f9b794",
+      "revId": "f137944517bba13d5b2c926d04c182dc99f0cff3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
