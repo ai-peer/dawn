@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4780ba50_e4d09ddc",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-19T20:11:12Z",
+      "side": 1,
+      "message": "nit. maybe move this back under the banner below also?",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 228
+      },
+      "revId": "990b7512f163ce4d362197da406ecaf47245f17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
