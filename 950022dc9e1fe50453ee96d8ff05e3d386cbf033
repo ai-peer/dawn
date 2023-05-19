@@ -52,6 +52,24 @@
       "parentUuid": "691c4bb0_efa279cc",
       "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c37214b_96607a59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-19T03:56:52Z",
+      "side": 1,
+      "message": "oh okay, now I see the original issue you described. looks like you\u0027ll need to have DawnTest.cpp also select only for non-compat adapters as well. it\u0027s probably worth searching for other places where iteration over adapters occurs as well",
+      "parentUuid": "deb804d2_cdca25e7",
+      "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
