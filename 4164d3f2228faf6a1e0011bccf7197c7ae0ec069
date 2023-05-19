@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "302b90fc_07ceab83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-19T21:49:34Z",
+      "side": 1,
+      "message": "Actually jie\u0027s CL https://dawn-review.googlesource.com/c/dawn/+/132600 which enables DynamicBufferOffsetTests and fix this issue too. That test will trigger this crash.\n\nHowever I am working on integrating chrome graphite dawn. It will case this assert() crash as well. So I would like to fix it first to unblock me.",
+      "parentUuid": "542f277e_31b5fd58",
+      "revId": "4164d3f2228faf6a1e0011bccf7197c7ae0ec069",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "bdeadee4_16862a18",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-19T20:37:18Z",
       "side": 1,
       "message": "it\u0027s getting hard to reason about this\n\nright now you have:\n```\nlastMask \u003d mLastAppliedPipelineLayout-\u003eGetBindGroupLayoutsMask()\ncurrentMask \u003d mPipelineLayout-\u003eGetBindGroupLayoutsMask()\nunusedMask \u003d lastMask \u0026 ~currentMask\n\nunapply \u003d (dirtyMask | unusedMask) \u0026 lastMask\n        \u003d (dirtyMask | (lastMask \u0026 ~currentMask)) \u0026 lastMask\n```\nmaybe easier to say\n```\nunapply \u003d (dirtyMask | ~currentMask) \u0026 lastMask ?\n```\n\n\nso it is (dirty groups or groups not currently used) that were also used in the last pipeline layout",
+      "revId": "4164d3f2228faf6a1e0011bccf7197c7ae0ec069",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d249aff_e403610b",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-19T21:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55c47b20_1c2cc43d",
       "revId": "4164d3f2228faf6a1e0011bccf7197c7ae0ec069",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
