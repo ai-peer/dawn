@@ -106,6 +106,24 @@
       "parentUuid": "06fcf0ee_537df512",
       "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93028fd_f2506df7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-19T12:12:37Z",
+      "side": 1,
+      "message": "Argh, sorry for the mess. I don\u0027t think we should double the testing load, since compat mode won\u0027t make a difference in 95% of tests. If we have to filter, perhaps end2endtests should try non-compat first, then only select compat if it\u0027s the only option (e.g., GLES and D3D11).",
+      "parentUuid": "d825005f_6da72b54",
+      "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
