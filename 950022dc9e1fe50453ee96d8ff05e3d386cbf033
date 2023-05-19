@@ -70,6 +70,24 @@
       "parentUuid": "deb804d2_cdca25e7",
       "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06fcf0ee_537df512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-19T05:47:33Z",
+      "side": 1,
+      "message": "I thought I added that to dawn test but it\u0027s still failing. As one example \n\n```\n ./out/Debug/dawn_end2end_tests --gtest_filter\u003dTextureViewSamplingTest.TextureCubeMapArrayOnWholeTexture/Metal_Apple_M1_Max\n```\n\nfails which seems to be based on DawnTest and I added \n\n```\nproperties.compatibilityMode \u003d\u003d param.adapterProperties.compatibilityMode \u0026\u0026\n```\n\nin DawnTest  `procs.instanceRequestAdapter`\n\nStepping through the code it looks like `DawnTestEnvironment::SelectPreferredAdapterProperties` is where it\u0027s wrongly selecting an adapter with compatibilityMode true. It\u0027s not clear to me how to access the test at this point to filter out adapters or if it even makes sense to filter there.",
+      "parentUuid": "8c37214b_96607a59",
+      "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
