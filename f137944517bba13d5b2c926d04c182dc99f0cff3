@@ -16,6 +16,24 @@
       "message": "array layer count \u003d 2 fails D3D12 backend\n\n\u003e D3D12 ERROR: ID3D12CommandQueue::ExecuteCommandLists: Using ResourceBarrier on Command List (0x000001BAE82BFE10:\u0027Unnamed ID3D12GraphicsCommandList Object\u0027): Before state (0x10: D3D12_RESOURCE_STATE_DEPTH_WRITE) of resource (0x000001BAEDB00910:\u0027Dawn_InternalTexture\u0027) (subresource: 0) specified by transition barrier does not match with the state (0x0: D3D12_RESOURCE_STATE_[COMMON|PRESENT]) specified in the previous call to ResourceBarrier [ RESOURCE_MANIPULATION ERROR #527: RESOURCE_BARRIER_BEFORE_AFTER_MISMATCH]\n\nhttps://chromium-swarm.appspot.com/task?id\u003d6249f11bbf906a10\n\nIs it D3D12 disallow stencil texture layer \u003e 1, or a bug in dawn D3D12 backend implementation?",
       "revId": "f137944517bba13d5b2c926d04c182dc99f0cff3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95dfeff6_51f9b794",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-19T20:28:43Z",
+      "side": 1,
+      "message": "\u003e D3D12 ERROR: ID3D12CommandQueue::ExecuteCommandLists: Using ResourceBarrier on Command List (0x0000025C5768BB80:\u0027Unnamed ID3D12GraphicsCommandList Object\u0027): Before state (0x10: D3D12_RESOURCE_STATE_DEPTH_WRITE) of resource (0x0000025C575243C0:\u0027Dawn_InternalTexture\u0027) (subresource: 0) specified by transition barrier does not match with the state (0x0: D3D12_RESOURCE_STATE_[COMMON|PRESENT]) specified in the previous call to ResourceBarrier [ RESOURCE_MANIPULATION ERROR #527: RESOURCE_BARRIER_BEFORE_AFTER_MISMATCH]\n\nD3D12 ERROR: ID3D12CommandQueue::ExecuteCommandLists: Using ResourceBarrier on Command List (0x0000025C5768BB80:\u0027Unnamed ID3D12GraphicsCommandList Object\u0027): Before state (0x10: D3D12_RESOURCE_STATE_DEPTH_WRITE) of resource (0x0000025C575243C0:\u0027Dawn_InternalTexture\u0027) (subresource: 1) specified by transition barrier does not match with the state (0x0: D3D12_RESOURCE_STATE_[COMMON|PRESENT]) specified in the previous call to ResourceBarrier [ RESOURCE_MANIPULATION ERROR #527: RESOURCE_BARRIER_BEFORE_AFTER_MISMATCH]\n\n\nSeems like some kind of subresource hardcoded issue in D3D12 backend similar to this: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d462#c7\n\nWill skip this case for D3D12 and link the bug here",
+      "parentUuid": "a063e049_7658d4a6",
+      "revId": "f137944517bba13d5b2c926d04c182dc99f0cff3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
