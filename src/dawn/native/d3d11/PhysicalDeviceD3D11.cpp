@@ -123,6 +123,7 @@ MaybeError PhysicalDevice::InitializeImpl() {
 }
 
 void PhysicalDevice::InitializeSupportedFeaturesImpl() {
+    EnableFeature(Feature::DepthClipControl);
     EnableFeature(Feature::TextureCompressionBC);
     EnableFeature(Feature::SurfaceCapabilities);
 }
