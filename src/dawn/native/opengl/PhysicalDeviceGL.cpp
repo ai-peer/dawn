@@ -148,7 +148,21 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
 }
 
 MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
+    const OpenGLFunctions& gl = mFunctions;
     GetDefaultLimits(&limits->v1);
+
+    GLint maxTextureSize, maxShaderStorageBlockSize, maxComputeSharedMemorySize;
+    gl.GetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
+    gl.GetIntegerv(GL_MAX_SHADER_STORAGE_BLOCK_SIZE, &maxShaderStorageBlockSize);
+    gl.GetIntegerv(GL_MAX_COMPUTE_SHARED_MEMORY_SIZE, &maxComputeSharedMemorySize);
+
+    limits->v1.maxTextureDimension1D = maxTextureSize;
+    limits->v1.maxTextureDimension2D = maxTextureSize;
+    limits->v1.maxTextureDimension3D = maxTextureSize;
+    limits->v1.maxBufferSize = kAssumedMaxBufferSize;
+    limits->v1.maxStorageBufferBindingSize =
+        1024 * 1024 * 1024;  // maxShaderStorageBlockSize; FIXME
+    limits->v1.maxComputeWorkgroupStorageSize = maxComputeSharedMemorySize;
     return {};
 }
 
