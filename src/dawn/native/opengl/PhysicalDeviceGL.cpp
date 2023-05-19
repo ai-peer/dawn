@@ -14,6 +14,7 @@
 
 #include "dawn/native/opengl/PhysicalDeviceGL.h"
 
+#include <algorithm>
 #include <memory>
 #include <string>
 #include <utility>
@@ -148,7 +149,96 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
 }
 
 MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
+    const OpenGLFunctions& gl = mFunctions;
     GetDefaultLimits(&limits->v1);
+    CombinedLimits baseLimits = *limits;
+
+    void glGetIntegeri_v(GLenum target, GLuint index, GLint * data);
+
+#define CHECK_AND_SET_V1_LIMIT_IMPL(glName, webgpuName, compareOp, msgSegment)     \
+    do {                                                                           \
+        GLint value;                                                               \
+        gl.GetIntegerv(glName, &value);                                            \
+        uint32_t uValue = value;                                                   \
+        if (uValue compareOp baseLimits.v1.webgpuName) {                           \
+            return DAWN_INTERNAL_ERROR("Insufficient GL limits for " #webgpuName   \
+                                       "."                                         \
+                                       " " #glName " must be at " msgSegment " " + \
+                                       std::to_string(baseLimits.v1.webgpuName));  \
+        }                                                                          \
+        limits->v1.webgpuName = value;                                             \
+    } while (false)
+
+#define CHECK_AND_SET_INDEXED_V1_LIMIT_IMPL(glName, index, webgpuName, compareOp, msgSegment) \
+    do {                                                                                      \
+        GLint value;                                                                          \
+        gl.GetIntegeri_v(glName, index, &value);                                              \
+        uint32_t uValue = value;                                                              \
+        if (uValue compareOp baseLimits.v1.webgpuName) {                                      \
+            return DAWN_INTERNAL_ERROR("Insufficient GL limits for " #webgpuName              \
+                                       "."                                                    \
+                                       " " #glName " must be at " msgSegment " " +            \
+                                       std::to_string(baseLimits.v1.webgpuName));             \
+        }                                                                                     \
+        limits->v1.webgpuName = value;                                                        \
+    } while (false)
+
+#define CHECK_AND_SET_V1_MAX_LIMIT(glName, webgpuName) \
+    CHECK_AND_SET_V1_LIMIT_IMPL(glName, webgpuName, <, "least")
+
+#define CHECK_AND_SET_INDEXED_V1_MAX_LIMIT(glName, index, webgpuName) \
+    CHECK_AND_SET_INDEXED_V1_LIMIT_IMPL(glName, index, webgpuName, <, "least")
+
+    GLint maxTextureSize, maxShaderStorageBlockSize, maxComputeSharedMemorySize;
+    GLint maxColorAttachments, maxArrayTextureLayers;
+
+    gl.GetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
+    gl.GetIntegerv(GL_MAX_SHADER_STORAGE_BLOCK_SIZE, &maxShaderStorageBlockSize);
+    gl.GetIntegerv(GL_MAX_COMPUTE_SHARED_MEMORY_SIZE, &maxComputeSharedMemorySize);
+    gl.GetIntegerv(GL_MAX_ARRAY_TEXTURE_LAYERS, &maxArrayTextureLayers);
+    gl.GetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
+
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_TEXTURE_SIZE, maxTextureDimension1D);
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_TEXTURE_SIZE, maxTextureDimension2D);
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_TEXTURE_SIZE, maxTextureDimension3D);
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_ARRAY_TEXTURE_LAYERS, maxTextureArrayLayers);
+
+    // Since we flatten bindings, leave maxBindGroups at the default.
+    //    limits->v1.maxBindGroups = ??
+    //    limits->v1.maxBindingsPerBindGroup = ??
+
+    //    limits->v1.maxDynamicUniformBuffersPerPipelineLayout = WGPU_LIMIT_U32_UNDEFINED;
+    //    limits->v1.maxDynamicStorageBuffersPerPipelineLayout = WGPU_LIMIT_U32_UNDEFINED;
+    //    limits->v1.maxSampledTexturesPerShaderStage = WGPU_LIMIT_U32_UNDEFINED;
+    //    limits->v1.maxSamplersPerShaderStage = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxStorageBuffersPerShaderStage = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxStorageTexturesPerShaderStage = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxUniformBuffersPerShaderStage = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxUniformBufferBindingSize = WGPU_LIMIT_U64_UNDEFINED;
+    limits->v1.maxStorageBufferBindingSize = kAssumedMaxBufferSize;
+    limits->v1.minUniformBufferOffsetAlignment = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.minStorageBufferOffsetAlignment = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxVertexBuffers = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxBufferSize = kAssumedMaxBufferSize;
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_VERTEX_ATTRIBS, maxVertexAttributes);
+    limits->v1.maxVertexBufferArrayStride = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxInterStageShaderComponents = WGPU_LIMIT_U32_UNDEFINED;
+    limits->v1.maxInterStageShaderVariables = WGPU_LIMIT_U32_UNDEFINED;
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_COLOR_ATTACHMENTS, maxColorAttachments);
+    limits->v1.maxColorAttachmentBytesPerSample = WGPU_LIMIT_U32_UNDEFINED;
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_COMPUTE_SHARED_MEMORY_SIZE, maxComputeWorkgroupStorageSize);
+    CHECK_AND_SET_V1_MAX_LIMIT(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS,
+                               maxComputeInvocationsPerWorkgroup);
+    CHECK_AND_SET_INDEXED_V1_MAX_LIMIT(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 0, maxComputeWorkgroupSizeX);
+    CHECK_AND_SET_INDEXED_V1_MAX_LIMIT(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 1, maxComputeWorkgroupSizeY);
+    CHECK_AND_SET_INDEXED_V1_MAX_LIMIT(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 2, maxComputeWorkgroupSizeZ);
+    CHECK_AND_SET_INDEXED_V1_MAX_LIMIT(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 0,
+                                       maxComputeWorkgroupsPerDimension);
+    int v[3];
+    gl.GetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 0, &v[0]);
+    gl.GetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 1, &v[1]);
+    gl.GetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 2, &v[2]);
+    limits->v1.maxComputeWorkgroupsPerDimension = std::min(v[0], std::min(v[1], v[2]));
     return {};
 }
 
