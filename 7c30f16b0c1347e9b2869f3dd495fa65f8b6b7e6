@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a209152_5ff0ac98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-19T20:28:54Z",
+      "side": 1,
+      "message": "note: it\u0027s tested in DepthClippingTests which are already enabled on d3d11\n\nhttps://luci-milo.appspot.com/ui/inv/task-chromium-swarm.appspot.com-624dbc0c0c5e4211/test-results?sortby\u003d\u0026groupby\u003d\u0026q\u003dID%3ADepthClippingTest+ID%3AD3D11_Intel",
+      "revId": "7c30f16b0c1347e9b2869f3dd495fa65f8b6b7e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
