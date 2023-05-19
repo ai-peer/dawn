@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1578d7d_c4ab1a4d",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-19T01:53:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23873ba3_5c3bfbbf",
+      "revId": "c78cbdbf3978e369f6de78a4a53bf10625931ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b354e1c6_1927620e",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-18T16:17:32Z",
       "side": 1,
       "message": "Nit: same here. UseCompatibilityMode()?",
+      "revId": "c78cbdbf3978e369f6de78a4a53bf10625931ba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53aed820_1633b40c",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-19T01:53:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b354e1c6_1927620e",
       "revId": "c78cbdbf3978e369f6de78a4a53bf10625931ba1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
