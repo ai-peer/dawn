@@ -88,6 +88,24 @@
       "parentUuid": "8c37214b_96607a59",
       "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d825005f_6da72b54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-19T07:30:00Z",
+      "side": 1,
+      "message": "In `TextureViewSamplingTest.TextureCubeMapArrayOnWholeTexture`, when the code test to `procs.instanceRequestAdapter` it calls `const auto\u0026 param \u003d gCurrentTest-\u003emParam;` and that `param` has `compatibitlyMode \u003d true` so in trying to trace what\u0027s setting that to true is where I got to `DawnTestEnvironment::SelectPreferredAdapterProperties` which is called in response to passing a bunch of backends to `DAWN_INSTANTIATE_TEST`.\n\nIt kind of seems like there\u0027s not enough info here? In `src/dawn/tests/end2end/TextureViewTests.cpp` at the end of the file is \n\n```\nDAWN_INSTANTIATE_TEST(TextureView1DTest,\n                      D3D11Backend(),\n                      D3D12Backend(),\n                      MetalBackend(),\n                      VulkanBackend(),\n                      OpenGLBackend(),\n                      OpenGLESBackend());\n```\n\nAnd as is it\u0027s selecting the first adapter for each backend that fits the criteria.\nShould I make this code reject compatibilityMode\u003dtrue adapters? Should add some parameter to XXXBackend so you can add \"compatibility\u003dtrue\".\n\nIt feels like we want all of these tests run on compat except for a few which we should hand mark to not run on compat or update test to somehow check \"if compat then skip\"\n\nAt the end it has some note about selecting one adapter from with the same name on Windows 10 but that same code is filtering out the second adapter \n\nI changed it so it doesn\u0027t filter out compat vs non-compat and hacked some stuff so tests params with compat end in _compat. Then added a few checks. It works but it doubles all the tests.\n\nMaybe I should add `MetalBackendCompat` and `D3D11BackendCompat` etc? I don\u0027t really know what the right thing to do heres. I assume we\u0027d really prefer all test to be run in compat and non-compat so maybe doubling the tests is the correct solution?\n\nAnyway, you can look at the code and see what you think. Happy to make any changes and/or discard anything I\u0027ve done so far as I have no clue what I\u0027m doing 😅",
+      "parentUuid": "06fcf0ee_537df512",
+      "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
