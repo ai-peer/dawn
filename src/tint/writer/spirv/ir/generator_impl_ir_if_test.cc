@@ -20,7 +20,7 @@ namespace tint::writer::spirv {
 namespace {
 
 TEST_F(SpvGeneratorImplTest, If_TrueEmpty_FalseEmpty) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.CreateFunction("foo", mod.types.Get<type::Void>());
 
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{b.Branch(i->Merge())});
@@ -50,7 +50,7 @@ OpFunctionEnd
 }
 
 TEST_F(SpvGeneratorImplTest, If_FalseEmpty) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.CreateFunction("foo", mod.types.Get<type::Void>());
 
     auto* i = b.CreateIf(b.Constant(true));
     i->False()->SetInstructions(utils::Vector{b.Branch(i->Merge())});
@@ -86,7 +86,7 @@ OpFunctionEnd
 }
 
 TEST_F(SpvGeneratorImplTest, If_TrueEmpty) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.CreateFunction("foo", mod.types.Get<type::Void>());
 
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{b.Branch(i->Merge())});
@@ -122,7 +122,7 @@ OpFunctionEnd
 }
 
 TEST_F(SpvGeneratorImplTest, If_BothBranchesReturn) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.CreateFunction("foo", mod.types.Get<type::Void>());
 
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{b.Branch(func->EndTarget())});
