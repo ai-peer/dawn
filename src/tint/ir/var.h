@@ -37,7 +37,7 @@ class Var : public utils::Castable<Var, Instruction> {
     /// @param initializer the initializer
     void SetInitializer(Value* initializer);
     /// @returns the initializer
-    const Value* Initializer() const { return initializer_; }
+    Value* Initializer() { return initializer_; }
 
   private:
     const type::Type* type_;
