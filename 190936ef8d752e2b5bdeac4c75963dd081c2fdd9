@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bac1bed_2bab9e7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-22T09:36:38Z",
+      "side": 1,
+      "message": "LGTM, there can be future improvements, but this is a good place to land a CL at.",
+      "revId": "190936ef8d752e2b5bdeac4c75963dd081c2fdd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ebc27f9_2c796250",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-22T09:36:38Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure that the handling of dynamic offset here is wrong (and the same for uniform / compute pass) but we can see about that in a follow-up. The index in the dynamic offset array is not the binding index, but the index of the binding in the set of all dynamic bindings of the bind group. (so we need to start from 0 and do ++ each dynamic binding). Because of the way we reorder bindings in the BGL things happen to mostly work out, but will break if there\u0027s a dynamic uniform buffer before the dynamic storage buffers I believe.",
+      "revId": "190936ef8d752e2b5bdeac4c75963dd081c2fdd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
