@@ -54,5 +54,34 @@ TEST_F(CompatValidationTest, CanNotCreateCubeArrayTextureView) {
     cubeTexture.Destroy();
 }
 
+TEST_F(CompatValidationTest, CanNotUseFragmentShaderWithSampleMask) {
+    wgpu::ShaderModule moduleSampleMaskOutput = utils::CreateShaderModule(device, R"(
+        @vertex fn vs() -> @builtin(position) vec4f {
+            return vec4f(1);
+        }
+        struct Output {
+            @builtin(sample_mask) mask_out: u32,
+            @location(0) color : vec4f,
+        }
+        @fragment fn fs() -> Output {
+            var o: Output;
+            // We need to make sure this sample_mask isn't optimized out even its value equals "no op".
+            o.mask_out = 0xFFFFFFFFu;
+            o.color = vec4f(1.0, 1.0, 1.0, 1.0);
+            return o;
+        }
+    )");
+
+    {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = moduleSampleMaskOutput;
+        descriptor.cFragment.module = moduleSampleMaskOutput;
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = false;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
+
 }  // anonymous namespace
 }  // namespace dawn
