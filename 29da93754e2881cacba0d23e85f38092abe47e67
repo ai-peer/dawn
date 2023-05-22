@@ -1686,6 +1686,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4f8ac151_39169964",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-22T20:44:44Z",
+      "side": 0,
+      "message": "Thanks! Appreciate it! Separately though, I just noticed that at [1] and [2], we have Retries instead of Failures?... Is that expected that those are flaky instead of just not working? Seems odd?",
+      "parentUuid": "0707efa7_19577b67",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "29da93754e2881cacba0d23e85f38092abe47e67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e2e2c7e7_87be5bbc",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 3
