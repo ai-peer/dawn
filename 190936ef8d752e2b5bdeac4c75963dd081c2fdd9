@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89aeedc7_59722d8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-22T11:28:58Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "parentUuid": "7bac1bed_2bab9e7a",
+      "revId": "190936ef8d752e2b5bdeac4c75963dd081c2fdd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ebc27f9_2c796250",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-22T09:36:38Z",
       "side": 1,
       "message": "I\u0027m pretty sure that the handling of dynamic offset here is wrong (and the same for uniform / compute pass) but we can see about that in a follow-up. The index in the dynamic offset array is not the binding index, but the index of the binding in the set of all dynamic bindings of the bind group. (so we need to start from 0 and do ++ each dynamic binding). Because of the way we reorder bindings in the BGL things happen to mostly work out, but will break if there\u0027s a dynamic uniform buffer before the dynamic storage buffers I believe.",
+      "revId": "190936ef8d752e2b5bdeac4c75963dd081c2fdd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82cceb4_b90c60db",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-22T11:28:58Z",
+      "side": 1,
+      "message": "Not exactly sure about this. It seems right to me as `mBindGroups` and `mDynamicOffsets` always use the same the `index`. Anyway we should add a test case to cover it in a follow-up.",
+      "parentUuid": "0ebc27f9_2c796250",
       "revId": "190936ef8d752e2b5bdeac4c75963dd081c2fdd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
