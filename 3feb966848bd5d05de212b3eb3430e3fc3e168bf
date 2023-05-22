@@ -16,6 +16,24 @@
       "message": "I think I\u0027m a little confused about how toggles are supposed to work. I see enums so what I\u0027d expect is some class I can call that will return a vector of enums from an vector of strings (or code gen with bools for each enum) and then I\u0027d use enums everywhere in the code and never error prone strings that I might end up with a typo. But, I most code I see is using strings, not enums.\n\nShould I be doing something else?",
       "revId": "3feb966848bd5d05de212b3eb3430e3fc3e168bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "170a3953_dc48ba2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-22T19:29:06Z",
+      "side": 1,
+      "message": "The strings are the public way to specify toggles. The enum is the internal representation. There\u0027s been discussion about making the public version use enums but no concrete plan yet.",
+      "parentUuid": "8daa0880_52b20bcd",
+      "revId": "3feb966848bd5d05de212b3eb3430e3fc3e168bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

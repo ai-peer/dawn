@@ -142,6 +142,24 @@
       "parentUuid": "f93028fd_f2506df7",
       "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9aa957c_0a0d08f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-22T19:29:06Z",
+      "side": 1,
+      "message": "right now for dawn_end2end_tests, I don\u0027t think we need to test compatibility mode on d3d12/metal/vulkan/gl backends. We only care about end2end testing of compat mode on d3d11/opengles which are only compat.\n\nso, I think my preferred solution for now would be to filter out compat mode adapters on d3d12/metal/vulkan/gl based on the assumption that those backends will have both a non-compat and a compat adapter. Then, we don\u0027t need a way for the test to express whether it wants to be instantiated on compat/non-compat.\nI think you\u0027d filter them out both in SelectPreferredAdapterProperties and in procs.instanceRequestAdapter\n\nThe toggle is probably the right longer-term solution here, but the concept of adapter-level toggles isn\u0027t fully implemented now, so it\u0027s better to not depend on it yet.",
+      "parentUuid": "e1ad9df6_4a1e667c",
+      "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
