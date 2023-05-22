@@ -24,6 +24,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7245efcc_50164b35",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-22T18:01:57Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "b38b56a3_4d27bc87",
+      "range": {
+        "startLine": 345,
+        "startChar": 42,
+        "endLine": 345,
+        "endChar": 47
+      },
+      "revId": "35b8c22fe0d53c9f06c9f22f299c49d86284dd9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd33f33_5979bda2",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-22T18:01:57Z",
+      "side": 0,
+      "message": "Note this one is intentional. Using a `var` in the `else if` means the block contains a `load` and a `branch`. The load has to go somewhere so it can\u0027t `else if` the block. This changed to `false` to make sure the `else if ` was still produced.",
+      "revId": "35b8c22fe0d53c9f06c9f22f299c49d86284dd9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b13bed71_9eab1fa9",
@@ -47,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c1094ee_ae11bf4c",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-22T18:01:57Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "b13bed71_9eab1fa9",
+      "range": {
+        "startLine": 305,
+        "startChar": 16,
+        "endLine": 305,
+        "endChar": 21
+      },
+      "revId": "35b8c22fe0d53c9f06c9f22f299c49d86284dd9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ea6e5bf_79b93865",
@@ -60,6 +125,30 @@
       "writtenOn": "2023-05-22T15:28:33Z",
       "side": 0,
       "message": "Intentional?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "35b8c22fe0d53c9f06c9f22f299c49d86284dd9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ff92c79_b8d2ab91",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_var_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-22T18:01:57Z",
+      "side": 0,
+      "message": "Good catch, that\u0027s definately wrong. Spir-V requires the terminating instruction.",
+      "parentUuid": "1ea6e5bf_79b93865",
       "range": {
         "startLine": 40,
         "startChar": 0,
