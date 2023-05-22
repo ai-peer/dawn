@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb7b4af_a4d93797",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:38:18Z",
+      "side": 1,
+      "message": "I was worried here that evaluation order of `utils::Vector{}` was undefined, like it is for function parameters, but after some googling, it seems it is. Phew.",
+      "range": {
+        "startLine": 68,
+        "startChar": 22,
+        "endLine": 68,
+        "endChar": 78
+      },
+      "revId": "db98dedad439e5b1ad892cf2b569809440864c60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
