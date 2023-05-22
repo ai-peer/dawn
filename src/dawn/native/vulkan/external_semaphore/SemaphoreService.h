@@ -29,6 +29,11 @@ struct VulkanFunctions;
 namespace dawn::native::vulkan::external_semaphore {
 class ServiceImplementation;
 
+bool CheckSupport(const VulkanDeviceInfo& deviceInfo,
+                  VkPhysicalDevice physicalDevice,
+                  const VulkanFunctions& fn,
+                  VkExternalSemaphoreHandleTypeFlagBits handleType);
+
 class Service {
   public:
     explicit Service(Device* device);
