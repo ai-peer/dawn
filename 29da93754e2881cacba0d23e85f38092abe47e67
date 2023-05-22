@@ -1565,6 +1565,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9bb8f1_44206053",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-22T20:09:44Z",
+      "side": 0,
+      "message": "I\u0027m surprised it removed this comment block, is that expected even though I still see depth_clip_clamp suppressions?",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "29da93754e2881cacba0d23e85f38092abe47e67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e2e2c7e7_87be5bbc",
