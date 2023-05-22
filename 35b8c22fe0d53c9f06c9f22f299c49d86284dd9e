@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38b56a3_4d27bc87",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 0,
+      "message": "Why?",
+      "range": {
+        "startLine": 345,
+        "startChar": 42,
+        "endLine": 345,
+        "endChar": 47
+      },
+      "revId": "35b8c22fe0d53c9f06c9f22f299c49d86284dd9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b13bed71_9eab1fa9",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 0,
+      "message": "why?",
+      "range": {
+        "startLine": 305,
+        "startChar": 16,
+        "endLine": 305,
+        "endChar": 21
+      },
+      "revId": "35b8c22fe0d53c9f06c9f22f299c49d86284dd9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea6e5bf_79b93865",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_var_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 0,
+      "message": "Intentional?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "35b8c22fe0d53c9f06c9f22f299c49d86284dd9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

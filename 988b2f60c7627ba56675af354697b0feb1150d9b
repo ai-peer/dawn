@@ -1,0 +1,320 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99434507_3d39e311",
+        "filename": "src/tint/ir/block.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "to",
+      "range": {
+        "startLine": 42,
+        "startChar": 45,
+        "endLine": 42,
+        "endChar": 48
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc76b87d_0de707ab",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "`std::move(selectors)`",
+      "range": {
+        "startLine": 75,
+        "startChar": 33,
+        "endLine": 75,
+        "endChar": 42
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c996eed8_d2c23b16",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "jump?",
+      "range": {
+        "startLine": 361,
+        "startChar": 18,
+        "endLine": 361,
+        "endChar": 24
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "728ce080_db0bb6b9",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "Seems slightly odd that this is a `FlowNode` - we don\u0027t ever branch / jump to one, right?",
+      "range": {
+        "startLine": 120,
+        "startChar": 22,
+        "endLine": 120,
+        "endChar": 34
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e547f861_9924a590",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "use `//` to keep on separate lines.",
+      "range": {
+        "startLine": 262,
+        "startChar": 45,
+        "endLine": 262,
+        "endChar": 46
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3904ce25_c7243d72",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "`branch itself incoming` - what does this mean?",
+      "range": {
+        "startLine": 101,
+        "startChar": 39,
+        "endLine": 101,
+        "endChar": 61
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef7e95e_4cc0c49b",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "`than`",
+      "range": {
+        "startLine": 101,
+        "startChar": 79,
+        "endLine": 101,
+        "endChar": 83
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ace7ec_0a7b5e74",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "Where\u0027s this defined?",
+      "range": {
+        "startLine": 320,
+        "startChar": 5,
+        "endLine": 320,
+        "endChar": 9
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6fdeefa_f621723b",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "These blocks can _only_ be entered from the `if` instruction.\nFor this reason, I think it would make sense for them to be printed, indented, immediately after the `if` instruction.",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 515,
+        "endChar": 1
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c857aae1_846835a1",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "I\u0027m not quite convinced by the `br` vs `jmp` split. \n\nI believe that `jmp` was added to address a complexity we talked about last week, where emitters need to do some smarts to know whether you should continue to emit instructions in the target block (as part of the block traversal), or stop traversal and depend on some bespoke logic to handle the branch.\n\nBased on the CL description:\n* `jmp` - a \"walk continue branch\".\n* `br` - a \"walk terminating branch\"\n\n`jmp` appears to only be used on branches to the function return and continuing block, the rest continue to be `br`.\n\nI\u0027m not sure that `jmp` is necessarily correct for the continuing block. You could have multiple `continue` statements in the loop body, and you might (depending on backend) want to emit the continuing block just once instead of inlining the continuing.\n\nThe other use of `jmp` is to the `func_terminator`, which is trivial to detect.\n\n\nI don\u0027t want to be a broken record here, but if we\u0027re going down the path of simplifying the flow node edges, I still believe having `return`, `break` and `continue` style terminating instructions would be preferable. Very much happy to investigate this path as a followup, but I\u0027m not entirely sold on `jmp` as a compelling middle ground.",
+      "range": {
+        "startLine": 562,
+        "startChar": 2,
+        "endLine": 562,
+        "endChar": 9
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d2cd211_dbc5606c",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "Now I\u0027m confused. Why is one `br` and the other `jmp` ?",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 20
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8781e793_32291bd1",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "Why drop the `const` here, and with cases below?",
+      "range": {
+        "startLine": 293,
+        "startChar": 14,
+        "endLine": 293,
+        "endChar": 16
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa2bd52_851f3352",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "Revert?",
+      "range": {
+        "startLine": 472,
+        "startChar": 16,
+        "endLine": 473,
+        "endChar": 81
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63823f6e_af7c26b5",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-22T15:28:33Z",
+      "side": 1,
+      "message": "bunch of changes here that look wrong",
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
