@@ -15,33 +15,41 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
 #define SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
 
+#include "dawn/common/ityp_array.h"
 #include "dawn/common/vulkan_platform.h"
 
 namespace dawn::native::vulkan {
 
+using ExternalSemaphoreHandle = int;
+constexpr ityp::
+    array<wgpu::DawnVkSemaphoreType, ExternalSemaphoreHandle, kEnumCount<wgpu::DawnVkSemaphoreType>>
+        kInvalidExternalSemaphoreHandle = {
+            /* fd */ -1,
+            /* fd */ -1,
+            /* ZX_HANDLE_INVALID */ 0,
+};
+#if DAWN_PLATFORM_IS(FUCHSIA)
+static_assert(ZX_HANDLE_INVALID == 0);
+#endif
+
+// Static assert the handle types because we've hard coded the invalid handle values based on what
+// the type is.
+static_assert(static_cast<uint32_t>(wgpu::DawnVkSemaphoreType::OpaqueFD) == 0u);
+static_assert(static_cast<uint32_t>(wgpu::DawnVkSemaphoreType::SyncFD) == 1u);
+static_assert(static_cast<uint32_t>(wgpu::DawnVkSemaphoreType::ZirconHandle) == 2u);
+
 #if DAWN_PLATFORM_IS(ANDROID)
 // AHardwareBuffer
 using ExternalMemoryHandle = struct AHardwareBuffer*;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
 #elif DAWN_PLATFORM_IS(LINUX)
 // File descriptor
 using ExternalMemoryHandle = int;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
 #elif DAWN_PLATFORM_IS(FUCHSIA)
 // Really a Zircon vmo handle.
 using ExternalMemoryHandle = zx_handle_t;
-// Really a Zircon event handle.
-using ExternalSemaphoreHandle = zx_handle_t;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = ZX_HANDLE_INVALID;
 #else
 // Generic types so that the Null service can compile, not used for real handles
 using ExternalMemoryHandle = void*;
-using ExternalSemaphoreHandle = void*;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = nullptr;
 #endif
 
 }  // namespace dawn::native::vulkan

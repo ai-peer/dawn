@@ -34,32 +34,6 @@ class ServiceImplementationZirconHandle : public ServiceImplementation {
 
     ~ServiceImplementationZirconHandle() override = default;
 
-    static bool CheckSupport(
-        const VulkanDeviceInfo& deviceInfo,
-        VkPhysicalDevice vkPhysicalDevice,
-        const VulkanFunctions& fn) static void CloseHandle(ExternalSemaphoreHandle handle) {
-        if (!deviceInfo.HasExt(DeviceExt::ExternalSemaphoreZirconHandle)) {
-            return false;
-        }
-
-        VkPhysicalDeviceExternalSemaphoreInfoKHR semaphoreInfo;
-        semaphoreInfo.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
-        semaphoreInfo.pNext = nullptr;
-        semaphoreInfo.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA;
-
-        VkExternalSemaphorePropertiesKHR semaphoreProperties;
-        semaphoreProperties.sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR;
-        semaphoreProperties.pNext = nullptr;
-
-        fn.GetPhysicalDeviceExternalSemaphoreProperties(vkPhysicalDevice, &semaphoreInfo,
-                                                        &semaphoreProperties);
-
-        VkFlags requiredFlags = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR |
-                                VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR;
-
-        return IsSubset(requiredFlags, semaphoreProperties.externalSemaphoreFeatures);
-    }
-
     // True if the device reports it supports this feature
     bool Supported() override { return mSupported; }
 
@@ -158,11 +132,6 @@ class ServiceImplementationZirconHandle : public ServiceImplementation {
 
 std::unique_ptr<ServiceImplementation> CreateZirconHandleService(Device* device) {
     return td::make_unique<ServiceImplementationZirconHandle>(device);
-}
-bool CheckZirconHandleSupport(const VulkanDeviceInfo& deviceInfo,
-                              VkPhysicalDevice vkPhysicalDevice,
-                              const VulkanFunctions& fn) {
-    return ServiceImplementationZirconHandle::CheckSupport(deviceInfo, vkPhysicalDevice, fn);
 }
 
 }  // namespace dawn::native::vulkan::external_semaphore

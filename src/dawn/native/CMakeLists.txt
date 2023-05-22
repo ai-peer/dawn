@@ -627,7 +627,9 @@ if (DAWN_ENABLE_VULKAN)
         "vulkan/external_semaphore/SemaphoreService.cpp"
         "vulkan/external_semaphore/SemaphoreService.h"
         "vulkan/external_semaphore/SemaphoreServiceImplementation.cpp"
-        "vulkan/external_semaphore/SemaphoreServiceImplementation.h"
+        "vulkan/external_semaphore/SemaphoreServiceImplementation.h",
+        "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
+        "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
     )
 
     target_link_libraries(dawn_native PUBLIC Vulkan-Headers)
@@ -637,8 +639,6 @@ if (DAWN_ENABLE_VULKAN)
         target_sources(dawn_native PRIVATE
             "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.cpp"
             "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.h"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
         )
     elseif (UNIX AND NOT APPLE)
         target_sources(dawn_native PRIVATE
@@ -646,8 +646,6 @@ if (DAWN_ENABLE_VULKAN)
             "vulkan/external_memory/MemoryServiceImplementationDmaBuf.h"
             "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.cpp"
             "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.h"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
         )
     endif()
 endif()

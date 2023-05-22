@@ -40,12 +40,37 @@ using ExternalSemaphore = VulkanImageWrappingTestBackend::ExternalSemaphore;
 
 using UseDedicatedAllocation = bool;
 using DetectDedicatedAllocation = bool;
-DAWN_TEST_PARAM_STRUCT(ImageWrappingParams, UseDedicatedAllocation, DetectDedicatedAllocation);
+using SemaphoreType = wgpu::DawnVkSemaphoreType;
+DAWN_TEST_PARAM_STRUCT(ImageWrappingParams,
+                       UseDedicatedAllocation,
+                       DetectDedicatedAllocation,
+                       SemaphoreType);
 
 class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParams> {
+  private:
+    std::vector<wgpu::FeatureName> GetRequiredFeaturesInternal() {
+        std::vector<wgpu::FeatureName> features{wgpu::FeatureName::DawnInternalUsages};
+        switch (GetParam().mSemaphoreType) {
+            case wgpu::DawnVkSemaphoreType::OpaqueFD:
+                features.push_back(wgpu::FeatureName::DawnSyncVkSemaphoreOpaqueFD);
+                break;
+            case wgpu::DawnVkSemaphoreType::SyncFD:
+                features.push_back(wgpu::FeatureName::DawnSyncVkSemaphoreSyncFD);
+                break;
+            case wgpu::DawnVkSemaphoreType::ZirconHandle:
+                features.push_back(wgpu::FeatureName::DawnSyncVkSemaphoreZirconHandle);
+                break;
+        }
+        return features;
+    }
+
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        return {wgpu::FeatureName::DawnInternalUsages};
+        auto features = GetRequiredFeaturesInternal();
+        if (SupportsFeatures(features)) {
+            return features;
+        }
+        return {};
     }
 
   public:
@@ -57,6 +82,8 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
         // dedicated allocation.
         DAWN_SUPPRESS_TEST_IF(IsLinux() && IsNvidia() && GetParam().mUseDedicatedAllocation &&
                               GetParam().mDetectDedicatedAllocation);
+
+        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures(GetRequiredFeaturesInternal()));
 
         mBackend = VulkanImageWrappingTestBackend::Create(device);
 
@@ -115,6 +142,7 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
         descriptor.isInitialized = isInitialized;
         descriptor.releasedOldLayout = releasedOldLayout;
         descriptor.releasedNewLayout = releasedNewLayout;
+        descriptor.semaphoreType = static_cast<WGPUDawnVkSemaphoreType>(GetParam().mSemaphoreType);
 
         wgpu::Texture texture =
             mBackend->WrapImage(dawnDevice, externalTexture, descriptor, std::move(semaphores));
@@ -166,6 +194,19 @@ TEST_P(VulkanImageWrappingValidationTests, SuccessfulImportWithInternalUsageDesc
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(), {}, true, true);
     EXPECT_NE(texture.Get(), nullptr);
     IgnoreSignalSemaphore(texture);
+}
+
+// Test an error occurs if the import uses an unsupported semaphroe type
+TEST_P(VulkanImageWrappingValidationTests, UnsupportedSemaphoreType) {
+    ExternalImageDescriptorVkForTesting descriptor;
+    descriptor.cTextureDescriptor =
+        reinterpret_cast<const WGPUTextureDescriptor*>(&defaultDescriptor);
+    descriptor.isInitialized = false;
+    descriptor.semaphoreType = WGPUDawnVkSemaphoreType_ZirconHandle;
+
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
+                            mBackend->WrapImage(device, defaultTexture.get(), descriptor, {}));
+    EXPECT_EQ(texture.Get(), nullptr);
 }
 
 // Test an error occurs if an invalid sType is the nextInChain
@@ -264,6 +305,11 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
 
         // Create another device based on the original
         adapterBase = native::FromAPI(device.Get())->GetAdapter();
+
+        requiredFeatures = GetRequiredFeatures();
+        deviceDescriptor.requiredFeatures = requiredFeatures.data();
+        deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
+
         deviceDescriptor.nextInChain = &deviceTogglesDesc;
         deviceTogglesDesc.enabledToggles = GetParam().forceEnabledWorkarounds.data();
         deviceTogglesDesc.enabledTogglesCount = GetParam().forceEnabledWorkarounds.size();
@@ -276,6 +322,7 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
 
   protected:
     native::AdapterBase* adapterBase;
+    std::vector<wgpu::FeatureName> requiredFeatures;
     native::DeviceDescriptor deviceDescriptor;
     native::DawnTogglesDescriptor deviceTogglesDesc;
 
@@ -877,13 +924,13 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
 DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingValidationTests,
                         {VulkanBackend()},
                         {true, false},  // UseDedicatedAllocation
-                        {true, false}   // DetectDedicatedAllocation
-);
+                        {true, false},  // DetectDedicatedAllocation
+                        {wgpu::DawnVkSemaphoreType::SyncFD, wgpu::DawnVkSemaphoreType::OpaqueFD});
 DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingUsageTests,
                         {VulkanBackend()},
                         {true, false},  // UseDedicatedAllocation
-                        {true, false}   // DetectDedicatedAllocation
-);
+                        {true, false},  // DetectDedicatedAllocation
+                        {wgpu::DawnVkSemaphoreType::SyncFD, wgpu::DawnVkSemaphoreType::OpaqueFD});
 
 }  // anonymous namespace
 }  // namespace dawn::native::vulkan

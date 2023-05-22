@@ -50,6 +50,11 @@ enum class Feature {
     SurfaceCapabilities,
     TransientAttachments,
 
+    // Dawn-specific external image sync
+    SyncVkSemaphoreOpaqueFD,
+    SyncVkSemaphoreSyncFD,
+    SyncVkSemaphoreZirconHandle,
+
     EnumCount,
     InvalidEnum = EnumCount,
     FeatureMin = TextureCompressionBC,

@@ -26,9 +26,6 @@ struct VulkanFunctions;
 namespace dawn::native::vulkan::external_semaphore {
 class ServiceImplementation;
 
-bool CheckZirconHandleSupport(const VulkanDeviceInfo& deviceInfo,
-                              VkPhysicalDevice physicalDevice,
-                              const VulkanFunctions& fn);
 std::unique_ptr<ServiceImplementation> CreateZirconHandleService(Device* device);
 
 }  // namespace dawn::native::vulkan::external_semaphore

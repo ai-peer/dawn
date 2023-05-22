@@ -21,6 +21,7 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/native/VulkanBackend.h"
 #include "dawn/native/vulkan/BufferVk.h"
 #include "dawn/native/vulkan/CommandRecordingContext.h"
@@ -598,7 +599,7 @@ VkSampleCountFlagBits VulkanSampleCount(uint32_t sampleCount) {
     UNREACHABLE();
 }
 
-MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase*, const TextureDescriptor* descriptor) {
+static MaybeError ValidateVulkanImageCanBeWrapped(const TextureDescriptor* descriptor) {
     DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
                     "Texture dimension (%s) is not %s.", descriptor->dimension,
                     wgpu::TextureDimension::e2D);
@@ -612,6 +613,21 @@ MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase*, const TextureDescr
     DAWN_INVALID_IF(descriptor->sampleCount != 1, "Sample count (%u) is not 1.",
                     descriptor->sampleCount);
 
+    return {};
+}
+
+MaybeError ValidateCreateTextureWrappingVulkanImage(const DeviceBase* device,
+                                                    const ExternalImageDescriptorVk* descriptor) {
+    const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
+    DAWN_TRY(device->ValidateIsAlive());
+    DAWN_TRY_CONTEXT(ValidateTextureDescriptor(device, textureDescriptor), "validating %s",
+                     textureDescriptor);
+    DAWN_TRY_CONTEXT(ValidateVulkanImageCanBeWrapped(textureDescriptor),
+                     "validating that a Vulkan image can be wrapped with %s", textureDescriptor);
+
+    auto semaphoreType = FromAPI(descriptor->semaphoreType);
+    DAWN_TRY(ValidateDawnVkSemaphoreType(semaphoreType));
+    DAWN_TRY(ToBackend(device)->GetExternalSemaphoreService()->ValidateSupportsType(semaphoreType));
     return {};
 }
 
@@ -870,7 +886,9 @@ MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descript
 
     // Success, acquire all the external objects.
     mExternalAllocation = externalMemoryAllocation;
+    mSemaphoreType = FromAPI(descriptor->semaphoreType);
     mWaitRequirements = std::move(waitSemaphores);
+    mExternalSemaphoreHandle = kInvalidExternalSemaphoreHandle[mSemaphoreType];
     return {};
 }
 
@@ -952,23 +970,24 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     // We have to manually trigger a transition if the texture hasn't been actually used or if we
     // need a layout transition.
     // TODO(dawn:1509): Avoid the empty submit.
-    if (mExternalSemaphoreHandle == kNullExternalSemaphoreHandle || targetLayout != currentLayout) {
+    if (mExternalSemaphoreHandle == kInvalidExternalSemaphoreHandle[mSemaphoreType] ||
+        targetLayout != currentLayout) {
         mDesiredExportLayout = targetLayout;
 
         Device* device = ToBackend(GetDevice());
         CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-        recordingContext->externalTexturesForEagerTransition.insert(this);
+        recordingContext->externalTexturesForEagerTransition[mSemaphoreType].insert(this);
         DAWN_TRY(device->SubmitPendingCommands());
 
         currentLayout = targetLayout;
     }
-    ASSERT(mExternalSemaphoreHandle != kNullExternalSemaphoreHandle);
+    ASSERT(mExternalSemaphoreHandle != kInvalidExternalSemaphoreHandle[mSemaphoreType]);
 
     // Write out the layouts and signal semaphore
     *releasedOldLayout = currentLayout;
     *releasedNewLayout = targetLayout;
     *handle = mExternalSemaphoreHandle;
-    mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
+    mExternalSemaphoreHandle = kInvalidExternalSemaphoreHandle[mSemaphoreType];
 
     // Destroy the texture so it can't be used again
     Destroy();
@@ -976,12 +995,12 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
 }
 
 Texture::~Texture() {
-    if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
+    if (mExternalSemaphoreHandle != kInvalidExternalSemaphoreHandle[mSemaphoreType]) {
         ToBackend(GetDevice())
             ->GetExternalSemaphoreService()
-            ->CloseHandle(mExternalSemaphoreHandle);
+            ->CloseHandle(mSemaphoreType, mExternalSemaphoreHandle);
     }
-    mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
+    mExternalSemaphoreHandle = kInvalidExternalSemaphoreHandle[mSemaphoreType];
 }
 
 void Texture::SetLabelHelper(const char* prefix) {
@@ -1032,7 +1051,7 @@ void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recording
 
     if (mExternalState == ExternalState::PendingAcquire ||
         mExternalState == ExternalState::EagerlyTransitioned) {
-        recordingContext->externalTexturesForEagerTransition.insert(this);
+        recordingContext->externalTexturesForEagerTransition[mSemaphoreType].insert(this);
         if (barriers->size() == transitionBarrierStart) {
             barriers->push_back(BuildMemoryBarrier(
                 this, wgpu::TextureUsage::None, wgpu::TextureUsage::None,
@@ -1389,11 +1408,13 @@ MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext*
     return {};
 }
 
-void Texture::UpdateExternalSemaphoreHandle(ExternalSemaphoreHandle handle) {
-    if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
+void Texture::UpdateExternalSemaphoreHandle(wgpu::DawnVkSemaphoreType type,
+                                            ExternalSemaphoreHandle handle) {
+    ASSERT(type == mSemaphoreType);
+    if (mExternalSemaphoreHandle != kInvalidExternalSemaphoreHandle[mSemaphoreType]) {
         ToBackend(GetDevice())
             ->GetExternalSemaphoreService()
-            ->CloseHandle(mExternalSemaphoreHandle);
+            ->CloseHandle(mSemaphoreType, mExternalSemaphoreHandle);
     }
     mExternalSemaphoreHandle = handle;
 }
