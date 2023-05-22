@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4999e57e_32a366fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-05-22T14:51:46Z",
+      "side": 1,
+      "message": "PTAL, I\u0027ve switched non-experimental Mac Intel to 13.3.1 and turned off the experimental bot.",
+      "revId": "b88039af3766386196d9536912b167e2ee6dae06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
