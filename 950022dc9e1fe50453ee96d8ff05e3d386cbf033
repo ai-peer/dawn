@@ -124,6 +124,24 @@
       "parentUuid": "d825005f_6da72b54",
       "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ad9df6_4a1e667c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-22T04:48:43Z",
+      "side": 1,
+      "message": "I am not sure how you guys want me to re-structure this code. AFAIK, based on the code I\u0027m reading, instanceRequestAdapter expects to always succeed so I can\u0027t filter there. \n\nDawnTestEnvironment::SelectPreferredAdapterProperties is the code that finds all the available adapters. It currently throws away adapters that have the same name so compat needs to be named differently since it\u0027s a different adapter. \n\nIt sounds like I need to modify the backend list passed to `DAWN_INSTANTIATE_TEST` so it\u0027s either another toggle like \"compatibility_mode\" as in\n\n```\nDAWN_INSTANTIATE_TEST(BasicTests,\n                      D3D11Backend(),\n                      D3D11Backend(\"use_compatibility_mode\"),\n                      D3D12Backend(),\n                      D3D12Backend(\"use_compatibility_mode\"),\n                      MetalBackend(),\n                      MetalBackend(\"use_compatibility_mode\"),\n                      OpenGLBackend(),\n                      OpenGLBackend(\"use_compatibility_mode\"),\n                      OpenGLESBackend(),\n                      OpenGLESBackend(\"use_compatibility_mode\"),\n                      VulkanBackend()\n                      VulkanBackend(\"use_compatibility_mode\"));\n```\n\nor I need to make new backend types\n\n```\nDAWN_INSTANTIATE_TEST(BasicTests,\n                      D3D11Backend(),\n                      D3D11CompatibilityModeBackend(),\n                      D3D12Backend(),\n                      D3D12CompatibilityModeBackend(),\n                      MetalBackend(),\n                      MetalCompatibilityModeBackend(),\n                      OpenGLBackend(),\n                      OpenGLCompatibilityModeBackend(),\n                      OpenGLESBackend(),\n                      OpenGLESCompatibilityModeBackend(),\n                      VulkanBackend(),\n                      VulkanCompatibilityModeBackend());\n```\n\nI guess I\u0027ll try the first one",
+      "parentUuid": "f93028fd_f2506df7",
+      "revId": "950022dc9e1fe50453ee96d8ff05e3d386cbf033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
