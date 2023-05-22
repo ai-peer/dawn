@@ -1636,6 +1636,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4649042_a0dce281",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-22T20:20:09Z",
+      "side": 0,
+      "message": "hm ok - I can update the description in the header of the previous section at the very least to help with understanding that",
+      "parentUuid": "b6127cba_0c32f7ec",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "29da93754e2881cacba0d23e85f38092abe47e67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e2e2c7e7_87be5bbc",
