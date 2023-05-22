@@ -87,6 +87,24 @@
       "message": "LGTM",
       "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23bcbf9f_45d742c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-22T17:12:11Z",
+      "side": 1,
+      "message": "\u003e Is there any other case where we do this i.e. do a copy using a shader instead of the \"blit\" encoder?\n\nfor depth/stencil to/from a buffer as a workaround on some platforms. And we have CopyTextureForBrowser which is a texture-to-texture shader blit that handles mismatching formats, premultiplication, color space conversion, etc.\n\n\u003e on Mac and the compositor thread doesn\u0027t have enough information to detect that\n\nwhy not? TBH it feels better to teach Chrome to know when a texture is bgra8 or rgba8 instead of trying to make it look like rgba8unorm always works :-/",
+      "parentUuid": "70f7af6f_54dc229c",
+      "revId": "078bf6e395a5889c55a0b3cf8bbc2f66fb3484fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
