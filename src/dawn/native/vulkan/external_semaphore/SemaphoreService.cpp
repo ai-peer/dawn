@@ -27,14 +27,58 @@
 #endif  // DAWN_PLATFORM_IS(LINUX)
 
 namespace dawn::native::vulkan::external_semaphore {
+
+bool CheckSupport(const VulkanDeviceInfo& deviceInfo,
+                  VkPhysicalDevice physicalDevice,
+                  const VulkanFunctions& fn,
+                  VkExternalSemaphoreHandleTypeFlagBits handleType) {
+    switch (handleType) {
+        case VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT:
+        case VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT:
+            if (!deviceInfo.HasExt(DeviceExt::ExternalSemaphoreFD)) {
+                return false;
+            }
+            break;
+        case VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA:
+            if (!deviceInfo.HasExt(DeviceExt::ExternalSemaphoreZirconHandle)) {
+                return false;
+            }
+            break;
+        default:
+            return false;
+    }
+
+    VkPhysicalDeviceExternalSemaphoreInfoKHR semaphoreInfo;
+    semaphoreInfo.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
+    semaphoreInfo.pNext = nullptr;
+    semaphoreInfo.handleType = handleType;
+
+    VkExternalSemaphorePropertiesKHR semaphoreProperties;
+    semaphoreProperties.sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR;
+    semaphoreProperties.pNext = nullptr;
+
+    fn.GetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, &semaphoreInfo,
+                                                    &semaphoreProperties);
+
+    VkFlags requiredFlags = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR |
+                            VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR;
+
+    return IsSubset(requiredFlags, semaphoreProperties.externalSemaphoreFeatures);
+}
+
 // static
 bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
                            VkPhysicalDevice physicalDevice,
                            const VulkanFunctions& fn) {
 #if DAWN_PLATFORM_IS(FUCHSIA)
-    return CheckZirconHandleSupport(deviceInfo, physicalDevice, fn);
-#elif DAWN_PLATFORM_IS(LINUX)  // Android, ChromeOS and Linux
-    return CheckFDSupport(deviceInfo, physicalDevice, fn);
+    return ::dawn::native::vulkan::external_semaphore::CheckSupport(
+        deviceInfo, physicalDevice, fn, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA);
+#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)  // Android, ChromeOS
+    return ::dawn::native::vulkan::external_semaphore::CheckSupport(
+        deviceInfo, physicalDevice, fn, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT);
+#elif DAWN_PLATFORM_IS(LINUX)                                  // Linux
+    return ::dawn::native::vulkan::external_semaphore::CheckSupport(
+        deviceInfo, physicalDevice, fn, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR);
 #else
     return false;
 #endif
@@ -43,8 +87,10 @@ bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
 Service::Service(Device* device) {
 #if DAWN_PLATFORM_IS(FUCHSIA)  // Fuchsia
     mServiceImpl = CreateZirconHandleService(device);
-#elif DAWN_PLATFORM_IS(LINUX) || DAWN_PLATFORM_IS(CHROMEOS)  // Android, ChromeOS and Linux
-    mServiceImpl = CreateFDService(device);
+#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)  // Android, ChromeOS
+    mServiceImpl = CreateFDService(device, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT);
+#elif DAWN_PLATFORM_IS(LINUX)                                  // Linux
+    mServiceImpl = CreateFDService(device, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR);
 #endif
 }
 

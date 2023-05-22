@@ -159,10 +159,5 @@ class ServiceImplementationZirconHandle : public ServiceImplementation {
 std::unique_ptr<ServiceImplementation> CreateZirconHandleService(Device* device) {
     return td::make_unique<ServiceImplementationZirconHandle>(device);
 }
-bool CheckZirconHandleSupport(const VulkanDeviceInfo& deviceInfo,
-                              VkPhysicalDevice vkPhysicalDevice,
-                              const VulkanFunctions& fn) {
-    return ServiceImplementationZirconHandle::CheckSupport(deviceInfo, vkPhysicalDevice, fn);
-}
 
 }  // namespace dawn::native::vulkan::external_semaphore
