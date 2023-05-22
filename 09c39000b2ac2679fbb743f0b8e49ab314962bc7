@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b87d7a_37f014c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-22T07:11:52Z",
+      "side": 1,
+      "message": "Once the upstream CL gets approved, this looked pretty straight forward. The data was already there (yay!)",
+      "revId": "09c39000b2ac2679fbb743f0b8e49ab314962bc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
