@@ -388,16 +388,76 @@ MaybeError ValidateFragmentState(DeviceBase* device,
                         depthStencil->format, descriptor->module, descriptor->entryPoint);
     }
 
+    uint8_t firstColorTargetIndex;
+    const ColorTargetState* firstColorTargetState = nullptr;
     ColorAttachmentFormats colorAttachmentFormats;
+
     for (ColorAttachmentIndex i(uint8_t(0));
          i < ColorAttachmentIndex(static_cast<uint8_t>(descriptor->targetCount)); ++i) {
         const ColorTargetState* target = &descriptor->targets[static_cast<uint8_t>(i)];
+
         if (target->format != wgpu::TextureFormat::Undefined) {
             DAWN_TRY_CONTEXT(
                 ValidateColorTargetState(device, target, fragmentMetadata.fragmentOutputsWritten[i],
                                          fragmentMetadata.fragmentOutputVariables[i]),
                 "validating targets[%u].", static_cast<uint8_t>(i));
             colorAttachmentFormats->push_back(&device->GetValidInternalFormat(target->format));
+            if (device->IsCompatibilityMode()) {
+                if (!firstColorTargetState) {
+                    firstColorTargetState = target;
+                    firstColorTargetIndex = static_cast<uint8_t>(i);
+                } else {
+                    DAWN_INVALID_IF(firstColorTargetState->writeMask != target->writeMask,
+                                    "in compatibility mode writeMask must match. targets %d and %d "
+                                    "do not match",
+                                    firstColorTargetIndex, static_cast<uint8_t>(i));
+                    if (!firstColorTargetState->blend) {
+                        DAWN_INVALID_IF(target->blend,
+                                        "in compatibility mode blend states much match, target %d "
+                                        "has a blend state but target %d does not",
+                                        static_cast<uint8_t>(i), firstColorTargetIndex);
+                    } else {
+                        DAWN_INVALID_IF(!target->blend,
+                                        "in compatibility mode blend status must match, target %d "
+                                        "has a blend state but target %d does not",
+                                        firstColorTargetIndex, static_cast<uint8_t>(i));
+
+                        const BlendState& currBlendState = *target->blend;
+                        const BlendState& firstBlendState = *firstColorTargetState->blend;
+
+                        DAWN_INVALID_IF(
+                            firstBlendState.color.operation != currBlendState.color.operation,
+                            "in compatibility mode color.operation must match. targets %d and %d "
+                            "do not match",
+                            firstColorTargetIndex, static_cast<uint8_t>(i));
+                        DAWN_INVALID_IF(
+                            firstBlendState.color.srcFactor != currBlendState.color.srcFactor,
+                            "in compatibility mode color.srcFactor must match. targets %d and %d "
+                            "do not match",
+                            firstColorTargetIndex, static_cast<uint8_t>(i));
+                        DAWN_INVALID_IF(
+                            firstBlendState.color.dstFactor != currBlendState.color.dstFactor,
+                            "in compatibility mode color.dstFactor must match. targets %d and %d "
+                            "do not match",
+                            firstColorTargetIndex, static_cast<uint8_t>(i));
+                        DAWN_INVALID_IF(
+                            firstBlendState.alpha.operation != currBlendState.alpha.operation,
+                            "in compatibility mode alpha.operation must match. targets %d and %d "
+                            "do not match",
+                            firstColorTargetIndex, static_cast<uint8_t>(i));
+                        DAWN_INVALID_IF(
+                            firstBlendState.alpha.srcFactor != currBlendState.alpha.srcFactor,
+                            "in compatibility mode alpha.srcFactor must match. targets %d and %d "
+                            "do not match",
+                            firstColorTargetIndex, static_cast<uint8_t>(i));
+                        DAWN_INVALID_IF(
+                            firstBlendState.alpha.dstFactor != currBlendState.alpha.dstFactor,
+                            "in compatibility mode alpha.dstFactor must match. targets %d and %d "
+                            "do not match",
+                            firstColorTargetIndex, static_cast<uint8_t>(i));
+                    }
+                }
+            }
         } else {
             DAWN_INVALID_IF(target->blend,
                             "Color target[%u] blend state is set when the format is undefined.",
