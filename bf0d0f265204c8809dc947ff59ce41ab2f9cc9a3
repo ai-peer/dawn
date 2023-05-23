@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb613879_45ea10b2",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-23T06:46:34Z",
+      "side": 1,
+      "message": "Wasn\u0027t sure if you require an enum here or you want each of these to be an individual test. Happy to change to either.",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
