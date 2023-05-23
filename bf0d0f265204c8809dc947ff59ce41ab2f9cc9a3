@@ -18,6 +18,199 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc91c35_68d8df06",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "Perhaps we should put the contents of this if into its own ValidateCompatibilityColorTargetState() or something?",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd406dac_7cb58bd2",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "Nit: do this cast once, instead of repeatedly.",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ace4a0c_da9ccde6",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "Write these as hex? 0x%1x (I think)",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1cc7795_124f75d6",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "Nit: comma splice. Either make these two sentences (and capitalize the Target) or use a semicolon.",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8279be75_58b15ee8",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "ibid",
+      "range": {
+        "startLine": 421,
+        "startChar": 63,
+        "endLine": 421,
+        "endChar": 68
+      },
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d4ac56_0bed71ea",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "ibid.\n\nI don\u0027t know how we usually print enums in validation. Do we try to print them as identifiers? If precedence is int, though, it\u0027s fine as is.",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8c5a2cd_b3edc632",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "ibid",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c97654b_71ec3097",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "ibid",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5297683b_436ef04c",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "ibid",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5bfd5f_6dcd7371",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "ibid",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd7f79a_3dada6dd",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T14:24:06Z",
+      "side": 1,
+      "message": "ibid",
+      "revId": "bf0d0f265204c8809dc947ff59ce41ab2f9cc9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fb613879_45ea10b2",
