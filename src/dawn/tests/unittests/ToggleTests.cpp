@@ -171,7 +171,7 @@ TEST_F(InstanceToggleTest, InstanceTogglesInheritToAdapterAndDevice) {
         const native::TogglesState& instanceTogglesState = instance->GetTogglesState();
 
         // Discover adapters with default toggles.
-        instance->DiscoverDefaultAdapters();
+        instance->DiscoverDefaultPhysicalDevices();
 
         // Get the adapter created by instance with default toggles.
         Ref<native::AdapterBase> nullAdapter;

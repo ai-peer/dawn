@@ -132,7 +132,7 @@ void Adapter::ResetInternalDeviceForTesting() {
 
 // AdapterDiscoverOptionsBase
 
-AdapterDiscoveryOptionsBase::AdapterDiscoveryOptionsBase(WGPUBackendType type)
+PhysicalDeviceDiscoveryOptionsBase::PhysicalDeviceDiscoveryOptionsBase(WGPUBackendType type)
     : backendType(type) {}
 
 // DawnInstanceDescriptor
@@ -162,12 +162,12 @@ Instance::~Instance() {
     }
 }
 
-void Instance::DiscoverDefaultAdapters() {
-    mImpl->DiscoverDefaultAdapters();
+void Instance::DiscoverDefaultPhysicalDevices() {
+    mImpl->DiscoverDefaultPhysicalDevices();
 }
 
-bool Instance::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) {
-    return mImpl->DiscoverAdapters(options);
+bool Instance::DiscoverPhysicalDevices(const PhysicalDeviceDiscoveryOptionsBase* options) {
+    return mImpl->DiscoverPhysicalDevices(options);
 }
 
 std::vector<Adapter> Instance::GetAdapters() const {
