@@ -92,14 +92,33 @@ BindGroupLayout::BindGroupLayout(Device* device,
                 ? mSamplerDescriptorCount++
                 : mCbvUavSrvDescriptorCount++;
 
-        D3D12_DESCRIPTOR_RANGE range;
+        D3D12_DESCRIPTOR_RANGE1 range;
         range.RangeType = descriptorRangeType;
         range.NumDescriptors = 1;
         range.BaseShaderRegister = GetShaderRegister(bindingIndex);
         range.RegisterSpace = kRegisterSpacePlaceholder;
         range.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
-
-        std::vector<D3D12_DESCRIPTOR_RANGE>& descriptorRanges =
+        switch (bindingInfo.bindingType) {
+            case BindingInfoType::Sampler:
+                range.Flags = D3D12_DESCRIPTOR_RANGE_FLAG_NONE;
+                break;
+            case BindingInfoType::Buffer:
+                range.Flags =
+                    D3D12_DESCRIPTOR_RANGE_FLAG_DESCRIPTORS_STATIC_KEEPING_BUFFER_BOUNDS_CHECKS |
+                    D3D12_DESCRIPTOR_RANGE_FLAG_DATA_VOLATILE;
+                break;
+            case BindingInfoType::Texture:
+            case BindingInfoType::StorageTexture:
+                range.Flags = D3D12_DESCRIPTOR_RANGE_FLAG_DATA_VOLATILE;
+                break;
+            case BindingInfoType::ExternalTexture:
+                range.Flags = D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC;
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+        std::vector<D3D12_DESCRIPTOR_RANGE1>& descriptorRanges =
             descriptorRangeType == D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER ? mSamplerDescriptorRanges
                                                                        : mCbvUavSrvDescriptorRanges;
 
@@ -107,7 +126,7 @@ BindGroupLayout::BindGroupLayout(Device* device,
         // of the previous. This is possible because the binding infos in the base type are
         // sorted.
         if (descriptorRanges.size() >= 2) {
-            D3D12_DESCRIPTOR_RANGE& previous = descriptorRanges.back();
+            D3D12_DESCRIPTOR_RANGE1& previous = descriptorRanges.back();
             if (previous.RangeType == range.RangeType &&
                 previous.BaseShaderRegister + previous.NumDescriptors == range.BaseShaderRegister) {
                 previous.NumDescriptors += range.NumDescriptors;
@@ -170,11 +189,11 @@ uint32_t BindGroupLayout::GetSamplerDescriptorCount() const {
     return mSamplerDescriptorCount;
 }
 
-const std::vector<D3D12_DESCRIPTOR_RANGE>& BindGroupLayout::GetCbvUavSrvDescriptorRanges() const {
+const std::vector<D3D12_DESCRIPTOR_RANGE1>& BindGroupLayout::GetCbvUavSrvDescriptorRanges() const {
     return mCbvUavSrvDescriptorRanges;
 }
 
-const std::vector<D3D12_DESCRIPTOR_RANGE>& BindGroupLayout::GetSamplerDescriptorRanges() const {
+const std::vector<D3D12_DESCRIPTOR_RANGE1>& BindGroupLayout::GetSamplerDescriptorRanges() const {
     return mSamplerDescriptorRanges;
 }
 
