@@ -189,6 +189,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90f31dd_83e4c73d",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a489c806_79910400",
+      "range": {
+        "startLine": 120,
+        "startChar": 22,
+        "endLine": 120,
+        "endChar": 34
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e547f861_9924a590",
@@ -330,6 +354,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b147ef9_68a6e57f",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "Yup, thanks",
+      "parentUuid": "f45c576d_5c160bd8",
+      "range": {
+        "startLine": 101,
+        "startChar": 39,
+        "endLine": 101,
+        "endChar": 61
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50ace7ec_0a7b5e74",
@@ -367,6 +415,30 @@
       "side": 1,
       "message": "It\u0027s the RootTerminator block, I skipped emission and just used the `root_end` comment but I can emit similar to the `%fn5 \u003d func_terminator` below if desired?",
       "parentUuid": "50ace7ec_0a7b5e74",
+      "range": {
+        "startLine": 320,
+        "startChar": 5,
+        "endLine": 320,
+        "endChar": 9
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4a70863_f7ceb85f",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "Yeah, I\u0027d much prefer it if all `%id` symbols actually resolved to _something_ defined.",
+      "parentUuid": "fe3085b9_898f4a4f",
       "range": {
         "startLine": 320,
         "startChar": 5,
@@ -471,6 +543,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39b16af7_ba8da50c",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "Okay. Happy to continue this discussion after landing to make progress.",
+      "parentUuid": "467a08e9_582aaccc",
+      "range": {
+        "startLine": 562,
+        "startChar": 2,
+        "endLine": 562,
+        "endChar": 9
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d2cd211_dbc5606c",
@@ -508,6 +604,30 @@
       "side": 1,
       "message": "Because this is the merge and it just goes immediately to the next block, the terminator. %fn4 is the false branch which is doing a return.",
       "parentUuid": "8d2cd211_dbc5606c",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 20
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "875c2692_dc3ac49f",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "Still confused.\nIf we still have to handle both forms, doesn\u0027t that invalidate (some / all) the benefits of splitting `br` and `jmp`?",
+      "parentUuid": "a3f54a75_0508acfc",
       "range": {
         "startLine": 251,
         "startChar": 0,

@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f9cd488_73abaf6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "+1. James for +2.",
+      "revId": "eea2f63d0f727b5e08cdcb874f6189567fb663a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a7cdbd_8b2f8458",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "please assign with `nullptr`. Chasing uninitialized pointer bugs fills me with dread.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 18
+      },
+      "revId": "eea2f63d0f727b5e08cdcb874f6189567fb663a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ebd8cd_2213944d",
+        "filename": "src/tint/ir/jump.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "Is explicit needed here?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "eea2f63d0f727b5e08cdcb874f6189567fb663a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "048cc1f2_69859acf",
+        "filename": "src/tint/ir/loop.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "`\u003d nullptr`",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 18
+      },
+      "revId": "eea2f63d0f727b5e08cdcb874f6189567fb663a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643ec562_33ebd7dd",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "`\u003d nullptr`",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 18
+      },
+      "revId": "eea2f63d0f727b5e08cdcb874f6189567fb663a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "323ed2d3_303e2fa3",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-23T11:43:54Z",
+      "side": 1,
+      "message": "Nit: I\u0027d suggest moving this to a `EmitBranch` to keep the `Switch` size down.",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 23
+      },
+      "revId": "eea2f63d0f727b5e08cdcb874f6189567fb663a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
