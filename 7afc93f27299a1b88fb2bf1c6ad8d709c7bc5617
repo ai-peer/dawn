@@ -50,6 +50,24 @@
       "message": "shouldn\u0027t you switch on `featureLevel` such that if its compat, return true, and core, return `mFeatureLevel \u003e\u003d D3D_FEATURE_LEVEL_11_1` ?",
       "revId": "7afc93f27299a1b88fb2bf1c6ad8d709c7bc5617",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494a2c0f_e049348a",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-23T20:48:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e25b1d03_58e0ca45",
+      "revId": "7afc93f27299a1b88fb2bf1c6ad8d709c7bc5617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
