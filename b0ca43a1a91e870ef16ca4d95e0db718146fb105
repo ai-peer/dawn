@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ce4f6c_c60cfdf6",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-23T18:22:44Z",
+      "side": 1,
+      "message": "I think you need to drop the `IsEmpty()` here and below (and also in the comment above). A block always contains at least one instruction now. This should address the unexpected change to the unit tests that have empty true/false blocks.",
+      "revId": "b0ca43a1a91e870ef16ca4d95e0db718146fb105",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2bcc70_28df4eda",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_if_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-23T18:22:44Z",
+      "side": 1,
+      "message": "I think this should go away again if you tweak the logic for eliding these blocks.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 11
+      },
+      "revId": "b0ca43a1a91e870ef16ca4d95e0db718146fb105",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
