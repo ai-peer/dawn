@@ -435,15 +435,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
     MaybeError InitializeImpl() override { return {}; }
 
     void InitializeSupportedFeaturesImpl() override {
-        // Check texture formats with deprecated MTLFeatureSet way.
+        // Check compressed texture format with deprecated MTLFeatureSet way.
 #if DAWN_PLATFORM_IS(MACOS)
         if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
             EnableFeature(Feature::TextureCompressionBC);
-        }
-        if (@available(macOS 10.14, *)) {
-            if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1]) {
-                EnableFeature(Feature::Float32Filterable);
-            }
         }
 #endif
 #if DAWN_PLATFORM_IS(IOS)
@@ -455,13 +450,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
         }
 #endif
 
-        // Check texture formats with MTLGPUFamily
+        // Check compressed texture format with MTLGPUFamily
         if (@available(macOS 10.15, iOS 13.0, *)) {
             if ([*mDevice supportsFamily:MTLGPUFamilyMac1]) {
                 EnableFeature(Feature::TextureCompressionBC);
-            }
-            if ([*mDevice supportsFamily:MTLGPUFamilyMac2]) {
-                EnableFeature(Feature::Float32Filterable);
             }
             if ([*mDevice supportsFamily:MTLGPUFamilyApple2]) {
                 EnableFeature(Feature::TextureCompressionETC2);
@@ -481,9 +473,6 @@ class PhysicalDevice : public PhysicalDeviceBase {
                 uint32_t vendorId = GetVendorId();
                 uint32_t deviceId = GetDeviceId();
                 if (gpu_info::IsIntelGen7(vendorId, deviceId)) {
-                    return true;
-                }
-                if (gpu_info::IsIntelGen11(vendorId, deviceId)) {
                     return true;
                 }
                 if (gpu_info::IsIntel(vendorId) && !IsMacOSVersionAtLeast(11)) {
@@ -633,7 +622,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
             }
         }
 
-#if DAWN_PLATFORM_IS(MACOS)
+#if TARGET_OS_OSX
         if (@available(macOS 10.14, *)) {
             if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1]) {
                 return MTLGPUFamily::Mac2;
@@ -642,7 +631,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
         if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
             return MTLGPUFamily::Mac1;
         }
-#elif DAWN_PLATFORM_IS(IOS)
+#elif TARGET_OS_IOS
         if (@available(iOS 10.11, *)) {
             if ([*mDevice supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily4_v1]) {
                 return MTLGPUFamily::Apple4;
@@ -819,9 +808,9 @@ Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::Bac
 
 Backend::~Backend() = default;
 
-std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverDefaultAdapters() {
-    AdapterDiscoveryOptions options;
-    auto result = DiscoverAdapters(&options);
+std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverDefaultPhysicalDevices() {
+    PhysicalDeviceDiscoveryOptions options;
+    auto result = DiscoverPhysicalDevices(&options);
     if (result.IsError()) {
         GetInstance()->ConsumedError(result.AcquireError());
         return {};
@@ -829,8 +818,8 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverDefaultAdapters() {
     return result.AcquireSuccess();
 }
 
-ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverAdapters(
-    const AdapterDiscoveryOptionsBase* optionsBase) {
+ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverPhysicalDevices(
+    const PhysicalDeviceDiscoveryOptionsBase* optionsBase) {
     ASSERT(optionsBase->backendType == WGPUBackendType_Metal);
 
     std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
