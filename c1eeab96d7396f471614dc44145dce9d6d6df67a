@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a6688a68_e1a3f445",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-23T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d501602d_87c96a4c",
+      "revId": "c1eeab96d7396f471614dc44145dce9d6d6df67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4de27b3c_3fcc6135",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-23T18:56:28Z",
       "side": 1,
       "message": "LGTM; thanks!\n\nI added you to the list of people who can dry run - so you should be able to do that in the future",
+      "revId": "c1eeab96d7396f471614dc44145dce9d6d6df67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a826175e_8796c028",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-23T19:15:16Z",
+      "side": 1,
+      "message": "Thanks for adding me for the dry runs.",
+      "parentUuid": "4de27b3c_3fcc6135",
       "revId": "c1eeab96d7396f471614dc44145dce9d6d6df67a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
