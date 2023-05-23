@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1de1ca_5807f108",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-23T19:26:16Z",
+      "side": 1,
+      "message": "Changed to `Instructions().Length() \u003e 1` as we still need to emit if there are instructions, not just if it goes somwhere other then merge.",
+      "parentUuid": "e9ce4f6c_c60cfdf6",
+      "revId": "b0ca43a1a91e870ef16ca4d95e0db718146fb105",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2f2bcc70_28df4eda",

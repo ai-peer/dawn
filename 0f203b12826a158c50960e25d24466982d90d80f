@@ -16,6 +16,24 @@
       "message": "ubernit: Looks like you no longer need to include `\"utils/hashset.h\"`",
       "revId": "0f203b12826a158c50960e25d24466982d90d80f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84710a23_94b69e84",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-23T19:26:16Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "96125b22_4565ea4e",
+      "revId": "0f203b12826a158c50960e25d24466982d90d80f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
