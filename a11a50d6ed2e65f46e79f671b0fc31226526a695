@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "977e7f50_27088334",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-23T13:10:52Z",
+      "side": 1,
+      "message": "We\u0027ll probably have to disable the CubaArray tests on D3D11, since they fail validation now.",
+      "revId": "a11a50d6ed2e65f46e79f671b0fc31226526a695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
