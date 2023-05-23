@@ -412,7 +412,7 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
     }
 #endif  // DAWN_ENABLE_BACKEND_OPENGLES
 
-    instance->DiscoverDefaultAdapters();
+    instance->DiscoverDefaultPhysicalDevices();
 
     return instance;
 }

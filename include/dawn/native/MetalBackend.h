@@ -35,8 +35,9 @@ typedef __IOSurface* IOSurfaceRef;
 
 namespace dawn::native::metal {
 
-struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
-    AdapterDiscoveryOptions();
+struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptions
+    : public PhysicalDeviceDiscoveryOptionsBase {
+    PhysicalDeviceDiscoveryOptions();
 };
 
 struct DAWN_NATIVE_EXPORT ExternalImageMTLSharedEventDescriptor {
