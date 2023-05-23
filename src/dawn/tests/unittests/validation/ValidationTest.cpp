@@ -143,7 +143,7 @@ void ValidationTest::SetUp() {
 
     mDawnInstance = std::make_unique<dawn::native::Instance>(&instanceDesc);
 
-    mDawnInstance->DiscoverDefaultAdapters();
+    mDawnInstance->DiscoverDefaultPhysicalDevices();
     mInstance = mWireHelper->RegisterInstance(mDawnInstance->Get());
 
     std::string traceName =
