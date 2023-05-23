@@ -16,6 +16,24 @@
       "message": "the limit for maxStorageBufferBindingSize should be changed in d3d12::PhysicalDevice::InitializeSupportedLimitsImpl and d3d11::PhysicalDevice::InitializeSupportedLimitsImpl then\n\nThe d3d12 backend should probably use D3D12_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP and the d3d11 backend use D3D11_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP. They\u0027re actually the same value, but more clear for readability",
       "revId": "78409e6221fdc5e060eb2307093507ac5a68d394",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7102ad77_fa07325a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-23T16:45:28Z",
+      "side": 1,
+      "message": "Hi, Austin, thanks for your comment. I\u0027ve moved it into PhysicalDevices as you said. I\u0027ll check again if it fixed my problem on Arm device. Thanks a lot,\n-Min",
+      "parentUuid": "20b5d6da_f4d5ef95",
+      "revId": "78409e6221fdc5e060eb2307093507ac5a68d394",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
