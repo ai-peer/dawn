@@ -1597,6 +1597,7 @@ TEST_P(BindGroupTests, CreateWithDestroyedResource) {
 DAWN_INSTANTIATE_TEST(BindGroupTests,
                       D3D11Backend(),
                       D3D12Backend(),
+                      D3D12Backend({}, {"d3d12_use_root_signature_version_1_1"}),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
