@@ -61,9 +61,9 @@ class AdapterDiscoveryTests : public ::testing::Test {};
 TEST(AdapterDiscoveryTests, OnlySwiftShader) {
     native::Instance instance;
 
-    native::vulkan::AdapterDiscoveryOptions options;
+    native::vulkan::PhysicalDeviceDiscoveryOptions options;
     options.forceSwiftShader = true;
-    instance.DiscoverAdapters(&options);
+    instance.DiscoverPhysicalDevices(&options);
 
     const auto& adapters = instance.GetAdapters();
     EXPECT_LE(adapters.size(), 2u);  // 0 or 2 SwiftShader adapters.
@@ -81,8 +81,8 @@ TEST(AdapterDiscoveryTests, OnlySwiftShader) {
 TEST(AdapterDiscoveryTests, OnlyVulkan) {
     native::Instance instance;
 
-    native::vulkan::AdapterDiscoveryOptions options;
-    instance.DiscoverAdapters(&options);
+    native::vulkan::PhysicalDeviceDiscoveryOptions options;
+    instance.DiscoverPhysicalDevices(&options);
 
     const auto& adapters = instance.GetAdapters();
     for (const auto& adapter : adapters) {
@@ -99,8 +99,8 @@ TEST(AdapterDiscoveryTests, OnlyVulkan) {
 TEST(AdapterDiscoveryTests, OnlyD3D11) {
     native::Instance instance;
 
-    native::d3d11::AdapterDiscoveryOptions options;
-    instance.DiscoverAdapters(&options);
+    native::d3d11::PhysicalDeviceDiscoveryOptions options;
+    instance.DiscoverPhysicalDevices(&options);
 
     const auto& adapters = instance.GetAdapters();
     for (const auto& adapter : adapters) {
@@ -127,9 +127,9 @@ TEST(AdapterDiscoveryTests, MatchingDXGIAdapterD3D11) {
 
         native::Instance instance;
 
-        native::d3d11::AdapterDiscoveryOptions options;
+        native::d3d11::PhysicalDeviceDiscoveryOptions options;
         options.dxgiAdapter = std::move(dxgiAdapter);
-        instance.DiscoverAdapters(&options);
+        instance.DiscoverPhysicalDevices(&options);
 
         const auto& adapters = instance.GetAdapters();
         for (const auto& adapter : adapters) {
@@ -147,8 +147,8 @@ TEST(AdapterDiscoveryTests, MatchingDXGIAdapterD3D11) {
 TEST(AdapterDiscoveryTests, OnlyD3D12) {
     native::Instance instance;
 
-    native::d3d12::AdapterDiscoveryOptions options;
-    instance.DiscoverAdapters(&options);
+    native::d3d12::PhysicalDeviceDiscoveryOptions options;
+    instance.DiscoverPhysicalDevices(&options);
 
     const auto& adapters = instance.GetAdapters();
     for (const auto& adapter : adapters) {
@@ -175,9 +175,9 @@ TEST(AdapterDiscoveryTests, MatchingDXGIAdapterD3D12) {
 
         native::Instance instance;
 
-        native::d3d12::AdapterDiscoveryOptions options;
+        native::d3d12::PhysicalDeviceDiscoveryOptions options;
         options.dxgiAdapter = std::move(dxgiAdapter);
-        instance.DiscoverAdapters(&options);
+        instance.DiscoverPhysicalDevices(&options);
 
         const auto& adapters = instance.GetAdapters();
         for (const auto& adapter : adapters) {
@@ -195,8 +195,8 @@ TEST(AdapterDiscoveryTests, MatchingDXGIAdapterD3D12) {
 TEST(AdapterDiscoveryTests, OnlyMetal) {
     native::Instance instance;
 
-    native::metal::AdapterDiscoveryOptions options;
-    instance.DiscoverAdapters(&options);
+    native::metal::PhysicalDeviceDiscoveryOptions options;
+    instance.DiscoverPhysicalDevices(&options);
 
     const auto& adapters = instance.GetAdapters();
     for (const auto& adapter : adapters) {
@@ -215,8 +215,8 @@ TEST(AdapterDiscoveryTests, OneBackendThenTheOther) {
     native::Instance instance;
     uint32_t metalAdapterCount = 0;
     {
-        native::metal::AdapterDiscoveryOptions options;
-        instance.DiscoverAdapters(&options);
+        native::metal::PhysicalDeviceDiscoveryOptions options;
+        instance.DiscoverPhysicalDevices(&options);
 
         const auto& adapters = instance.GetAdapters();
         metalAdapterCount = adapters.size();
@@ -228,8 +228,8 @@ TEST(AdapterDiscoveryTests, OneBackendThenTheOther) {
         }
     }
     {
-        native::vulkan::AdapterDiscoveryOptions options;
-        instance.DiscoverAdapters(&options);
+        native::vulkan::PhysicalDeviceDiscoveryOptions options;
+        instance.DiscoverPhysicalDevices(&options);
 
         uint32_t metalAdapterCount2 = 0;
         const auto& adapters = instance.GetAdapters();
@@ -255,7 +255,7 @@ class AdapterCreationTest : public ::testing::Test {
 
         {
             auto nativeInstance = std::make_unique<dawn_native::Instance>();
-            nativeInstance->DiscoverDefaultAdapters();
+            nativeInstance->DiscoverDefaultPhysicalDevices();
             for (dawn_native::Adapter& nativeAdapter : nativeInstance->GetAdapters()) {
                 anyAdapterAvailable = true;
 

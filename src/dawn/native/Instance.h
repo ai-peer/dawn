@@ -58,8 +58,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
                            WGPURequestAdapterCallback callback,
                            void* userdata);
 
-    void DiscoverDefaultAdapters();
-    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
+    void DiscoverDefaultPhysicalDevices();
+    bool DiscoverPhysicalDevices(const PhysicalDeviceDiscoveryOptionsBase* options);
 
     std::vector<Ref<AdapterBase>> GetAdapters() const;
 
@@ -134,7 +134,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Lazily creates connections to all backends that have been compiled.
     void EnsureBackendConnection(wgpu::BackendType backendType);
 
-    MaybeError DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options);
+    MaybeError DiscoverAdaptersInternal(const PhysicalDeviceDiscoveryOptionsBase* options);
 
     ResultOrError<Ref<AdapterBase>> RequestAdapterInternal(const RequestAdapterOptions* options);
 

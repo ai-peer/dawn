@@ -118,13 +118,22 @@ class DAWN_NATIVE_EXPORT Adapter {
     AdapterBase* mImpl = nullptr;
 };
 
-// Base class for options passed to Instance::DiscoverAdapters.
+// Base class for options passed to Instance::DiscoverPhysicalDevices.
+/*
 struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptionsBase {
   public:
     const WGPUBackendType backendType;
 
   protected:
     explicit AdapterDiscoveryOptionsBase(WGPUBackendType type);
+};
+*/
+struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptionsBase {
+  public:
+    const WGPUBackendType backendType;
+
+  protected:
+    explicit PhysicalDeviceDiscoveryOptionsBase(WGPUBackendType type);
 };
 
 enum BackendValidationLevel { Full, Partial, Disabled };
@@ -158,11 +167,11 @@ class DAWN_NATIVE_EXPORT Instance {
 
     // Gather all adapters in the system that can be accessed with no special options. These
     // adapters will later be returned by GetAdapters.
-    void DiscoverDefaultAdapters();
+    void DiscoverDefaultPhysicalDevices();
 
     // Adds adapters that can be discovered with the options provided (like a getProcAddress).
     // The backend is chosen based on the type of the options used. Returns true on success.
-    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
+    bool DiscoverPhysicalDevices(const PhysicalDeviceDiscoveryOptionsBase* options);
 
     // Returns all the adapters that the instance knows about.
     std::vector<Adapter> GetAdapters() const;
