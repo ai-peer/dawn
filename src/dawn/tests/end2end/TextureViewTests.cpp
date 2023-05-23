@@ -576,6 +576,78 @@ TEST_P(TextureViewSamplingTest, TextureCubeMapArrayViewSingleCubeMap) {
     TextureCubeMapTest(20, 7, 6, true);
 }
 
+// Test sampling from two 2D texture views of different mips from the same texture.
+TEST_P(TextureViewSamplingTest, DifferentMipsSameTexture) {
+    InitTexture(1, 2);
+
+    // Create a pipeline that will sample from2 2D textures and output to an attachment.
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        @vertex
+        fn vs(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
+            var pos = array(
+                vec4f(-1,  3, 0, 1),
+                vec4f( 3, -1, 0, 1),
+                vec4f(-1, -1, 0, 1));
+            return pos[VertexIndex];
+        }
+
+        @group(0) @binding(0) var tex0 : texture_2d<f32>;
+        @group(0) @binding(1) var tex1 : texture_2d<f32>;
+        @group(0) @binding(2) var samp : sampler;
+        @fragment
+        fn fs(@builtin(position) pos: vec4f) -> @location(0) vec4f {
+            let c0 = textureSample(tex0, samp, vec2f(0.5));
+            let c1 = textureSample(tex1, samp, vec2f(0.5));
+            return select(c0, c1, i32(pos.x) % 2 == 1);
+        }
+    )");
+    utils::ComboRenderPipelineDescriptor pDesc;
+    pDesc.vertex.module = module;
+    pDesc.vertex.entryPoint = "vs";
+    pDesc.cFragment.module = module;
+    pDesc.cFragment.entryPoint = "fs";
+    pDesc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pDesc);
+
+    wgpu::TextureViewDescriptor mip0ViewDesc;
+    mip0ViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    mip0ViewDesc.baseMipLevel = 0;
+    mip0ViewDesc.mipLevelCount = 1;
+
+    wgpu::TextureViewDescriptor mip1ViewDesc;
+    mip1ViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    mip1ViewDesc.baseMipLevel = 1;
+    mip1ViewDesc.mipLevelCount = 1;
+
+    // Do the sample + rendering.
+    wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                              {{0, mTexture.CreateView(&mip0ViewDesc)},
+                                               {1, mTexture.CreateView(&mip1ViewDesc)},
+                                               {2, device.CreateSampler()}});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    utils::BasicRenderPass rp = utils::CreateBasicRenderPass(device, 4, 1);
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp.renderPassInfo);
+    pass.SetPipeline(pipeline);
+    pass.SetBindGroup(0, bg);
+    pass.Draw(3);
+    pass.End();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    const auto expectMip0PixelValue = utils::RGBA8(0, 0, 0, GenerateTestPixelValue(0, 0));
+    const auto expectMip1PixelValue = utils::RGBA8(0, 0, 0, GenerateTestPixelValue(0, 1));
+    ASSERT_NE(expectMip0PixelValue, expectMip1PixelValue);
+
+    // Check texels got sampled correctly.
+    EXPECT_PIXEL_RGBA8_EQ(expectMip0PixelValue, rp.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(expectMip1PixelValue, rp.color, 1, 0);
+    EXPECT_PIXEL_RGBA8_EQ(expectMip0PixelValue, rp.color, 2, 0);
+    EXPECT_PIXEL_RGBA8_EQ(expectMip1PixelValue, rp.color, 3, 0);
+}
+
 class TextureViewRenderingTest : public DawnTest {
   protected:
     void TextureLayerAsColorAttachmentTest(wgpu::TextureViewDimension dimension,
