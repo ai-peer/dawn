@@ -449,6 +449,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a07d46_2c6da9bf",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-23T14:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4a70863_f7ceb85f",
+      "range": {
+        "startLine": 320,
+        "startChar": 5,
+        "endLine": 320,
+        "endChar": 9
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6fdeefa_f621723b",
@@ -640,6 +664,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "228292ea_a4d44bfb",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-23T14:02:49Z",
+      "side": 1,
+      "message": "No? The `jmp` and `br` help you walk through the tree, so, yes you have to handle both, but they still give pointers on how to walk the tree? Not sure what benefit you see being invalidated?\n\nIf you don\u0027t want to handle `Jump`, then just implement `Branch` as it\u0027s a subclass.",
+      "parentUuid": "875c2692_dc3ac49f",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 20
+      },
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8781e793_32291bd1",
         "filename": "src/tint/ir/to_program.cc",
         "patchSetId": 4
@@ -763,6 +811,24 @@
       "side": 1,
       "message": "Interesting, I wonder if that was `fix-tests` when I had broken output, so it also changed the input by accident since the input is the output? Otherwise, i did something really weird, heh. Fixed.",
       "parentUuid": "63823f6e_af7c26b5",
+      "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f3d4b6d_3e83c0b3",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-23T14:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdaa7f4c_eaf94188",
       "revId": "988b2f60c7627ba56675af354697b0feb1150d9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
