@@ -16,6 +16,40 @@
       "message": "Hi Austin or Corentin, PTAL. Thanks",
       "revId": "7afc93f27299a1b88fb2bf1c6ad8d709c7bc5617",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d7722e_44055592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-23T20:16:54Z",
+      "side": 1,
+      "message": "seems fine to do this while you evaluate what limits are missing - but I won\u0027t be surprised if we can\u0027t fully support core webgpu",
+      "revId": "7afc93f27299a1b88fb2bf1c6ad8d709c7bc5617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25b1d03_58e0ca45",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-23T20:16:54Z",
+      "side": 1,
+      "message": "shouldn\u0027t you switch on `featureLevel` such that if its compat, return true, and core, return `mFeatureLevel \u003e\u003d D3D_FEATURE_LEVEL_11_1` ?",
+      "revId": "7afc93f27299a1b88fb2bf1c6ad8d709c7bc5617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
