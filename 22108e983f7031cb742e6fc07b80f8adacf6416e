@@ -33,6 +33,24 @@
       "message": "see https://dawn-review.googlesource.com/c/dawn/+/133961\n\nthe right fix is to change the max binding size exposed by the backend instead of skipping the test",
       "revId": "22108e983f7031cb742e6fc07b80f8adacf6416e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf785447_f13b57d8",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-23T05:14:26Z",
+      "side": 1,
+      "message": "Good to know that, thanks!\nWill rebase on that.",
+      "parentUuid": "30ffa1c9_c3aae72e",
+      "revId": "22108e983f7031cb742e6fc07b80f8adacf6416e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
