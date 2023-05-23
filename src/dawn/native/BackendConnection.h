@@ -36,11 +36,11 @@ class BackendConnection {
 
     // Returns all the adapters for the system that can be created by the backend, without extra
     // options (such as debug adapters, custom driver libraries, etc.)
-    virtual std::vector<Ref<PhysicalDeviceBase>> DiscoverDefaultAdapters() = 0;
+    virtual std::vector<Ref<PhysicalDeviceBase>> DiscoverDefaultPhysicalDevices() = 0;
 
     // Returns new adapters created with the backend-specific options.
-    virtual ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> DiscoverAdapters(
-        const AdapterDiscoveryOptionsBase* options);
+    virtual ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> DiscoverPhysicalDevices(
+        const PhysicalDeviceDiscoveryOptionsBase* options);
 
   private:
     InstanceBase* mInstance = nullptr;
