@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks!\nAlso rename the `InstanceBase::DiscoverPhysicalDevicesInternal`, which is missed in previous patchset.",
       "revId": "2519dd0280f00c21f2a5dbdb7a3b2affc980b1fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc17841_f991e8bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T13:32:49Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "2519dd0280f00c21f2a5dbdb7a3b2affc980b1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
