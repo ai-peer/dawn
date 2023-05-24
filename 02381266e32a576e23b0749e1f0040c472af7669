@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9ad455_28613768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-24T18:34:45Z",
+      "side": 1,
+      "message": "Able to repro. Filed at https://bugs.chromium.org/p/angleproject/issues/detail?id\u003d8171",
+      "parentUuid": "ddd00ae1_b925f422",
+      "revId": "02381266e32a576e23b0749e1f0040c472af7669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b199b4d_4efe4a79",

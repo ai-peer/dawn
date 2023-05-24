@@ -52,6 +52,24 @@
       "parentUuid": "95dfeff6_51f9b794",
       "revId": "f137944517bba13d5b2c926d04c182dc99f0cff3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e0e5d4_c1e90594",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-24T18:34:45Z",
+      "side": 1,
+      "message": "Done. Filed at crbug.com/dawn/1835",
+      "parentUuid": "fb0085ee_9da4b10b",
+      "revId": "f137944517bba13d5b2c926d04c182dc99f0cff3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
