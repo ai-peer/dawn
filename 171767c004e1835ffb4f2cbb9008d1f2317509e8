@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e48eb2e_dd687721",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T13:54:39Z",
+      "side": 1,
+      "message": "Ok that explains the issue. The code in CommandRecordingContext::Open is roughly:\n\n```\nOpen() {\n  if (!initialized) {\n    create the device context\n    create the params buffer // Recursively calls ASSERT(IsOpen)!!!\n  }\n  \n  mIsOpen \u003d true\n}\n```\n\nWe could restructure as:\n\n```\nOpen() {\n  if (!initialized) {\n    create the device context\n  }\n  \n  mIsOpen \u003d true\n  \n  create the params buffer // Recursively calls ASSERT(IsOpen)!!!\n}\n```\n\nor even better\n\n```\nInitialize() {\n  if (!initialized) {\n    create the device context\n  }\n  \n  mIsOpen \u003d true\n  \n  create the params buffer // Recursively calls ASSERT(IsOpen)!!!\n}\n\nOpen() {\n  mIsOpen \u003d true\n  mNeedsSubmit \u003d true\n}\n```\n\nTo make things more clear.",
+      "parentUuid": "fe27abcf_9c5dbc08",
+      "range": {
+        "startLine": 201,
+        "startChar": 84,
+        "endLine": 201,
+        "endChar": 95
+      },
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36853b7d_9c51d22d",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "NonZero clearing is only for test purpose, and intentionally transparent to `SetIsDataInitialized`.",
       "parentUuid": "36853b7d_9c51d22d",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d36e6d2_e9b7d157",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T13:54:39Z",
+      "side": 1,
+      "message": "Whoops you\u0027re right.",
+      "parentUuid": "813b58d1_3fb2ba75",
       "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -131,6 +173,24 @@
       "side": 1,
       "message": "This is only effective in test mode. No need to worry about that too much.",
       "parentUuid": "35ab2c2c_e11e3b5b",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7949f5f_756e1c3d",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T13:54:39Z",
+      "side": 1,
+      "message": "Still this is a pretty unfortunate precedent to set. I\u0027m confident there is a different, better solution that we can find.",
+      "parentUuid": "88e9ef00_d32b2d4e",
       "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
