@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2475bc5e_90f7fa7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T11:45:59Z",
+      "side": 1,
+      "message": "u-nit: split",
+      "range": {
+        "startLine": 14,
+        "startChar": 51,
+        "endLine": 14,
+        "endChar": 58
+      },
+      "revId": "1f9c54e2b35448b89af163452b9f8f6628e9cdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9c0e81b9_eba9f77b",
@@ -14,6 +37,57 @@
       "writtenOn": "2023-05-24T09:24:53Z",
       "side": 1,
       "message": "Please take a look, thanks!",
+      "revId": "1f9c54e2b35448b89af163452b9f8f6628e9cdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f4a988_946336d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T11:45:59Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "1f9c54e2b35448b89af163452b9f8f6628e9cdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95196eb1_7b65993d",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T11:45:59Z",
+      "side": 1,
+      "message": "nit: \"a vector of adapters, one for each physical device the instance knows about.\"",
+      "revId": "1f9c54e2b35448b89af163452b9f8f6628e9cdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48aef2fe_92b19e02",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T11:45:59Z",
+      "side": 1,
+      "message": "This file seems to have unrelated changes, probably a rebasing issue?",
       "revId": "1f9c54e2b35448b89af163452b9f8f6628e9cdaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
