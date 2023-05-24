@@ -56,7 +56,8 @@ class Disassembler {
     size_t IdOf(const FlowNode* node);
     std::string_view IdOf(const Value* node);
 
-    void Walk();
+    void Walk(const Block* blk);
+    void EmitFunction(const Function* func);
     void EmitInstruction(const Instruction* inst);
     void EmitValueWithType(const Value* val);
     void EmitValue(const Value* val);
@@ -70,7 +71,7 @@ class Disassembler {
 
     const Module& mod_;
     utils::StringStream out_;
-    std::deque<const FlowNode*> walk_list_;
+    utils::Hashset<const Block*, 32> visited_;
     utils::Hashmap<const FlowNode*, size_t, 32> flow_node_ids_;
     utils::Hashmap<const Value*, std::string, 32> value_ids_;
     uint32_t indent_size_ = 0;
