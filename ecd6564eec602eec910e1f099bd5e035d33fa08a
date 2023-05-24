@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "ecd6564eec602eec910e1f099bd5e035d33fa08a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef29a4d_9594230c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-24T21:04:31Z",
+      "side": 1,
+      "message": "LGTM.\n\nI sort-of expected to see the disassembly output stop using the `%fn` prefix along with this change (since `fn` no longer stands for a concept that we use). Fine for that to be a follow-up if that\u0027s already planned.",
+      "revId": "ecd6564eec602eec910e1f099bd5e035d33fa08a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
