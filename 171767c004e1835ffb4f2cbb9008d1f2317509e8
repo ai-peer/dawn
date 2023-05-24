@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb67483e_851bf30f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-24T05:41:31Z",
+      "side": 1,
+      "message": "In my impression, we haven\u0027t enabled webgpu_cts_tests on dawn_d3d11, right?\nIf so, this CL should be irrelevant to the failed cases.",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
