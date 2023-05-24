@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdc47f5_cb11fc9d",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T02:34:53Z",
+      "side": 1,
+      "message": "nit: capitialize the first letter of the message.\nsee third_party/dawn/docs/dawn/errors.md that bajones@ wrote about error formatting style.\n\nSo for these, I\u0027d probably write something like:\n\n\"Color blend operation (%s) of target[%u] does not match color blend operation (%s) of target[%u].\", op1, target1, op2, target2",
+      "range": {
+        "startLine": 361,
+        "startChar": 21,
+        "endLine": 361,
+        "endChar": 23
+      },
+      "revId": "2ef18783b640096bd6d3b4f110eb2a7956fde5be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c0d456_7eadb99a",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T02:34:53Z",
+      "side": 1,
+      "message": "nit: maybe we could hoist out the \"in compatibility mode\" bit from your other messages and say \"validating targets[%u] in compatibility mode\"",
+      "range": {
+        "startLine": 472,
+        "startChar": 38,
+        "endLine": 472,
+        "endChar": 61
+      },
+      "revId": "2ef18783b640096bd6d3b4f110eb2a7956fde5be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
