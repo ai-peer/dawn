@@ -18,7 +18,7 @@ namespace tint::writer::spirv {
 namespace {
 
 TEST_F(SpvGeneratorImplTest, Function_Empty) {
-    auto* func = b.CreateFunction("foo", mod.types.void_());
+    auto* func = b.CreateFunction("foo", mod.Types().void_());
     func->StartTarget()->SetInstructions(utils::Vector{b.Branch(func->EndTarget())});
 
     generator_.EmitFunction(func);
@@ -34,7 +34,7 @@ OpFunctionEnd
 
 // Test that we do not emit the same function type more than once.
 TEST_F(SpvGeneratorImplTest, Function_DeduplicateType) {
-    auto* func = b.CreateFunction("foo", mod.types.void_());
+    auto* func = b.CreateFunction("foo", mod.Types().void_());
     func->StartTarget()->SetInstructions(utils::Vector{b.Branch(func->EndTarget())});
 
     generator_.EmitFunction(func);
@@ -46,8 +46,8 @@ TEST_F(SpvGeneratorImplTest, Function_DeduplicateType) {
 }
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Compute) {
-    auto* func = b.CreateFunction("main", mod.types.void_(), ir::Function::PipelineStage::kCompute,
-                                  {{32, 4, 1}});
+    auto* func = b.CreateFunction("main", mod.Types().void_(),
+                                  ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
     func->StartTarget()->SetInstructions(utils::Vector{b.Branch(func->EndTarget())});
 
     generator_.EmitFunction(func);
@@ -65,7 +65,7 @@ OpFunctionEnd
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Fragment) {
     auto* func =
-        b.CreateFunction("main", mod.types.void_(), ir::Function::PipelineStage::kFragment);
+        b.CreateFunction("main", mod.Types().void_(), ir::Function::PipelineStage::kFragment);
     func->StartTarget()->SetInstructions(utils::Vector{b.Branch(func->EndTarget())});
 
     generator_.EmitFunction(func);
@@ -82,7 +82,8 @@ OpFunctionEnd
 }
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Vertex) {
-    auto* func = b.CreateFunction("main", mod.types.void_(), ir::Function::PipelineStage::kVertex);
+    auto* func =
+        b.CreateFunction("main", mod.Types().void_(), ir::Function::PipelineStage::kVertex);
     func->StartTarget()->SetInstructions(utils::Vector{b.Branch(func->EndTarget())});
 
     generator_.EmitFunction(func);
@@ -98,15 +99,16 @@ OpFunctionEnd
 }
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Multiple) {
-    auto* f1 = b.CreateFunction("main1", mod.types.void_(), ir::Function::PipelineStage::kCompute,
+    auto* f1 = b.CreateFunction("main1", mod.Types().void_(), ir::Function::PipelineStage::kCompute,
                                 {{32, 4, 1}});
     f1->StartTarget()->SetInstructions(utils::Vector{b.Branch(f1->EndTarget())});
 
-    auto* f2 = b.CreateFunction("main2", mod.types.void_(), ir::Function::PipelineStage::kCompute,
+    auto* f2 = b.CreateFunction("main2", mod.Types().void_(), ir::Function::PipelineStage::kCompute,
                                 {{8, 2, 16}});
     f2->StartTarget()->SetInstructions(utils::Vector{b.Branch(f2->EndTarget())});
 
-    auto* f3 = b.CreateFunction("main3", mod.types.void_(), ir::Function::PipelineStage::kFragment);
+    auto* f3 =
+        b.CreateFunction("main3", mod.Types().void_(), ir::Function::PipelineStage::kFragment);
     f3->StartTarget()->SetInstructions(utils::Vector{b.Branch(f3->EndTarget())});
 
     generator_.EmitFunction(f1);
@@ -139,7 +141,7 @@ OpFunctionEnd
 }
 
 TEST_F(SpvGeneratorImplTest, Function_ReturnValue) {
-    auto* func = b.CreateFunction("foo", mod.types.i32());
+    auto* func = b.CreateFunction("foo", mod.Types().i32());
     func->StartTarget()->SetInstructions(
         utils::Vector{b.Branch(func->EndTarget(), utils::Vector{b.Constant(i32(42))})});
 
@@ -156,7 +158,7 @@ OpFunctionEnd
 }
 
 TEST_F(SpvGeneratorImplTest, Function_Parameters) {
-    auto* i32 = mod.types.i32();
+    auto* i32 = mod.Types().i32();
     auto* x = b.FunctionParam(i32);
     auto* y = b.FunctionParam(i32);
     auto* result = b.Add(i32, x, y);
