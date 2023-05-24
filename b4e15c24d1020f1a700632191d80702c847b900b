@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210eec27_abb9d4e0",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T02:18:06Z",
+      "side": 1,
+      "message": "nit:\n\n```suggestion\n                                (properties.compatibilityMode ? \"_compat\" : \"\");\n```\n\nright now the full test name looks like \"TextureViewSamplingTest.TextureCubeMapArrayOnWholeTexture/D3D11_Intel_R_UHD_Graphics_630compat\"\n\nwhich looks like it\u0027s missing an underscore",
+      "range": {
+        "startLine": 138,
+        "startChar": 65,
+        "endLine": 138,
+        "endChar": 71
+      },
+      "revId": "b4e15c24d1020f1a700632191d80702c847b900b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

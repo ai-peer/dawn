@@ -52,6 +52,24 @@
       "parentUuid": "0a9ec282_336c5f14",
       "revId": "a11a50d6ed2e65f46e79f671b0fc31226526a695",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3537be32_1d94de55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T02:18:06Z",
+      "side": 1,
+      "message": "it was working before\n\nhttps://luci-milo.appspot.com/ui/inv/task-chromium-swarm.appspot.com-62640a91b1738311/test-results?sortby\u003d\u0026groupby\u003d\u0026q\u003dID%3ATextureViewSampling+ID%3Ad3d11_Intel\n\nit\u0027s not working now that we have validation.\n\nit was working because the internals of d3d11 are quite a bit more capable than what WebGPU compat is (due to GLES being less capable than d3d11).\n\nSo really, d3d11 has a feature level somewhere between core and compat.",
+      "parentUuid": "dbf30046_305d1497",
+      "revId": "a11a50d6ed2e65f46e79f671b0fc31226526a695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
