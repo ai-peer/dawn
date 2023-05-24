@@ -330,7 +330,6 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
 void GeneratorImplIr::EmitBranch(const ir::Branch* b) {
     Switch(
         b->To(),
-        [&](const ir::Block* blk) { current_function_.push_inst(spv::Op::OpBranch, {Label(blk)}); },
         [&](const ir::FunctionTerminator*) {
             // TODO(jrprice): Handle the return value, which will be a branch argument.
             if (!b->Args().IsEmpty()) {
@@ -338,6 +337,7 @@ void GeneratorImplIr::EmitBranch(const ir::Branch* b) {
             }
             current_function_.push_inst(spv::Op::OpReturn, {});
         },
+        [&](const ir::Block* blk) { current_function_.push_inst(spv::Op::OpBranch, {Label(blk)}); },
         [&](Default) {
             // A block may not have an outward branch (e.g. an unreachable merge
             // block).
