@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03a05779_49a0d5c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T12:19:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db410ec_8cda7ae3",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T12:19:58Z",
+      "side": 1,
+      "message": "u-nit: promoting",
+      "range": {
+        "startLine": 422,
+        "startChar": 64,
+        "endLine": 422,
+        "endChar": 74
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9af9c5e_b9bc0fb3",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T12:19:58Z",
+      "side": 1,
+      "message": "nit: I think this should be just _VOLATILE? We do set DATA_VOLATILE because we transition the textures and buffers.",
+      "range": {
+        "startLine": 106,
+        "startChar": 29,
+        "endLine": 106,
+        "endChar": 42
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8605672e_2e12ed36",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T12:19:58Z",
+      "side": 1,
+      "message": "ExternalTexture bindings are decayed in the frontend and backends shouldn\u0027t need to handle them.",
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a0fcf95_2e64d209",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T12:19:58Z",
+      "side": 1,
+      "message": "nit: we could even go as far as:\n\n```\nD3D12_VERSIONED_ROOT_SIGNATURE_DESC desc \u003d {};\n        desc.Version \u003d D3D_ROOT_SIGNATURE_VERSION_1_1;\n        desc.Desc_1_1.NumParameters \u003d rootParameters.size();\n        desc.Desc_1_1.pParameters \u003d rootParameters.data();\n        desc.Desc_1_1.NumStaticSamplers \u003d 0;\n        desc.Desc_1_1.pStaticSamplers \u003d nullptr;\n        desc.Desc_1_1.Flags \u003d\n\n   ComPtr\u003cID3DBlob\u003e error;\n    HRESULT hr;\n   \n   if (use 1_1) {\n     hr \u003d ...\n   } else {\n     Serialize1_0RootSignature(device, desc, ...);\n   }\n```\n\nThen all the complexity of the 1.0 root signature is in one function and we don\u0027t need to move vectors around.",
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
