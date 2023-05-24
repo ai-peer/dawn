@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14180bd1_f4e16783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-24T23:08:59Z",
+      "side": 1,
+      "message": "+2, but I\u0027m afraid you\u0027ll need to rebase.",
+      "revId": "107979ae1c8cad52303077519655bccf6ba2f88b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
