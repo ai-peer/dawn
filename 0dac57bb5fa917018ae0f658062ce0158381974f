@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959c2b84_e6bc64fc",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-24T21:16:02Z",
+      "side": 1,
+      "message": "Nit: This is kinda weird now, since `SetName()` takes a `string_view` and then registers a symbol, but we already had a symbol! Should we just have the `string_view` overload of `CreateFunction`? Or maybe this is fine as is?",
+      "revId": "0dac57bb5fa917018ae0f658062ce0158381974f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
