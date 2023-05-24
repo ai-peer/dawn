@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f1453e_93adb502",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-24T19:08:36Z",
+      "side": 1,
+      "message": "LGTM. Great work!",
+      "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1231fb59_0809ad48",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-24T19:08:36Z",
+      "side": 1,
+      "message": "Nit: \"within texture boundary\" -\u003e \"within texture bounds\"",
+      "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e56ff34_23d2bea6",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-24T19:08:36Z",
+      "side": 1,
+      "message": "Nit: \"not multiply of 4\" -\u003e \"not a multiple of 4\"",
+      "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff07ca18_73c63cb5",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-24T19:08:36Z",
+      "side": 1,
+      "message": "Tanentially: should we need to optimize later, other options would be to use predication, essentially multiplying by the results of the relational to avoid the branch, or to unroll this loop into 4 flavours depending on the modulus. I have no idea if shader compilers do those things internally these days.",
+      "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
