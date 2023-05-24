@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c503a293_27e6c1bd",
+        "filename": "src/tint/ast/transform/renamer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-24T21:54:34Z",
+      "side": 1,
+      "message": "No action required (FYI):\n\nWe have `tint::utils::HasPrefix()` now which is a little easier to read.\n\nUnfortunately we don\u0027t have a `tint::utils::Contains()` (yet).",
+      "range": {
+        "startLine": 1353,
+        "startChar": 23,
+        "endLine": 1353,
+        "endChar": 54
+      },
+      "revId": "71eef4fea8a2cbac65f208bacf2f67fb6cd89f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
