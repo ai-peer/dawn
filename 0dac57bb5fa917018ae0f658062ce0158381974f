@@ -16,6 +16,24 @@
       "message": "Nit: This is kinda weird now, since `SetName()` takes a `string_view` and then registers a symbol, but we already had a symbol! Should we just have the `string_view` overload of `CreateFunction`? Or maybe this is fine as is?",
       "revId": "0dac57bb5fa917018ae0f658062ce0158381974f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cac7c91f_2a543e4d",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-24T22:45:40Z",
+      "side": 1,
+      "message": "Might be worth removing. Will investigate as a followup, the jump through Symbol was to originally make sure the name got copied into the new symbol table. That maybe redundant now.",
+      "parentUuid": "959c2b84_e6bc64fc",
+      "revId": "0dac57bb5fa917018ae0f658062ce0158381974f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
