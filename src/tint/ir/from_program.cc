@@ -255,6 +255,8 @@ class Impl {
         current_function_ = ir_func;
         builder_.ir.functions.Push(ir_func);
 
+        scopes_.Set(ast_func->name->symbol, ir_func);
+
         if (ast_func->IsEntryPoint()) {
             switch (ast_func->PipelineStage()) {
                 case ast::PipelineStage::kVertex:
@@ -1136,8 +1138,9 @@ class Impl {
             return utils::Failure;
         } else {
             // Not a builtin and not a templated call, so this is a user function.
-            auto name = CloneSymbol(expr->target->identifier->symbol);
-            inst = builder_.UserCall(ty, name, std::move(args));
+            inst = builder_.UserCall(
+                ty, scopes_.Get(expr->target->identifier->symbol)->As<ir::Function>(),
+                std::move(args));
         }
         if (inst == nullptr) {
             return utils::Failure;

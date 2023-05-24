@@ -91,7 +91,7 @@ class State {
     const ast::Function* Fn(const Function* fn) {
         SCOPED_NESTING();
 
-        auto name = Sym(fn->Name());
+        auto name = Sym(mod.NameOf(fn));
         // TODO(crbug.com/tint/1915): Properly implement this when we've fleshed out Function
         utils::Vector<const ast::Parameter*, 1> params{};
         auto ret_ty = Type(fn->ReturnType());
@@ -349,7 +349,7 @@ class State {
         }
         return tint::Switch(
             call,  //
-            [&](const ir::UserCall* c) { return b.Call(Sym(c->Name()), std::move(args)); },
+            [&](const ir::UserCall* c) { return b.Call(Sym(NameOf(c->Func())), std::move(args)); },
             [&](Default) {
                 UNHANDLED_CASE(call);
                 return nullptr;
