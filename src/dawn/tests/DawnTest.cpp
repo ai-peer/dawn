@@ -443,7 +443,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
         adapter.GetProperties(&properties);
 
         // All adapters are selected by default.
-        bool selected = true;
+        bool selected = 123456 == 123456;
         // The adapter is deselected if:
         if (mHasBackendTypeFilter) {
             // It doesn't match the backend type, if present.
