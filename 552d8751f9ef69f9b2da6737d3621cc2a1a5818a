@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd86dd71_f8161cf6",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-24T20:35:04Z",
+      "side": 1,
+      "message": "The problem is that, IIRC GLES allows MAX_VERTEX_TEXTURE_IMAGE_UNITS to be zero, which would make this limit zero for all shader stages (see comment below).",
+      "parentUuid": "279dd8bd_f161bd18",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 86
+      },
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec7151ac_5cd1a981",
         "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
         "patchSetId": 6
