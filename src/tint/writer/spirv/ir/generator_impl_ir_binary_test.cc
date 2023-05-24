@@ -14,10 +14,100 @@
 
 #include "src/tint/writer/spirv/ir/test_helper_ir.h"
 
+#include "gmock/gmock.h"
+#include "src/tint/ir/binary.h"
+
 using namespace tint::number_suffixes;  // NOLINT
 
 namespace tint::writer::spirv {
 namespace {
+
+/// The element type of a test.
+enum Type {
+    kBool,
+    kI32,
+    kU32,
+    kF32,
+    kF16,
+};
+
+/// A parameterized test case.
+struct BinaryTestCase {
+    /// The element type to test.
+    Type type;
+    /// The binary operation.
+    enum ir::Binary::Kind kind;
+    /// The expected SPIR-V instruction.
+    std::string spirv_inst;
+};
+
+/// A helper class for parameterized binary instruction tests.
+class BinaryInstructionTest : public SpvGeneratorImplTestWithParam<BinaryTestCase> {
+  protected:
+    /// Helper to make a scalar type corresponding to the element type `ty`.
+    /// @param ty the element type
+    /// @returns the scalar type
+    const type::Type* MakeScalarType(Type ty) {
+        switch (ty) {
+            case kBool:
+                return mod.types.bool_();
+            case kI32:
+                return mod.types.i32();
+            case kU32:
+                return mod.types.u32();
+            case kF32:
+                return mod.types.f32();
+            case kF16:
+                return mod.types.f16();
+        }
+    }
+
+    /// Helper to make a vector type corresponding to the element type `ty`.
+    /// @param ty the element type
+    /// @returns the vector type
+    const type::Type* MakeVectorType(Type ty) { return mod.types.vec2(MakeScalarType(ty)); }
+
+    /// Helper to make a scalar value with the scalar type `ty`.
+    /// @param ty the element type
+    /// @returns the scalar value
+    ir::Value* MakeScalarValue(Type ty) {
+        switch (ty) {
+            case kBool:
+                return b.Constant(true);
+            case kI32:
+                return b.Constant(1_i);
+            case kU32:
+                return b.Constant(1_u);
+            case kF32:
+                return b.Constant(1_f);
+            case kF16:
+                return b.Constant(1_h);
+        }
+    }
+
+    /// Helper to make a vector value with an element type of `ty`.
+    /// @param ty the element type
+    /// @returns the vector value
+    ir::Value* MakeVectorValue(Type ty) {
+        switch (ty) {
+            case kBool:
+                return b.Constant(b.create<constant::Composite>(
+                    MakeVectorType(ty), utils::Vector{b.Bool(true), b.Bool(false)}, false, true));
+            case kI32:
+                return b.Constant(b.create<constant::Composite>(
+                    MakeVectorType(ty), utils::Vector{b.I32(42), b.I32(-10)}, false, false));
+            case kU32:
+                return b.Constant(b.create<constant::Composite>(
+                    MakeVectorType(ty), utils::Vector{b.U32(42), b.U32(10)}, false, false));
+            case kF32:
+                return b.Constant(b.create<constant::Composite>(
+                    MakeVectorType(ty), utils::Vector{b.F32(42), b.F32(-0.5)}, false, false));
+            case kF16:
+                return b.Constant(b.create<constant::Composite>(
+                    MakeVectorType(ty), utils::Vector{b.F16(42), b.F16(-0.5)}, false, false));
+        }
+    }
+};
 
 TEST_F(SpvGeneratorImplTest, Binary_Add_I32) {
     auto* func = b.CreateFunction("foo", mod.types.void_());
@@ -207,6 +297,78 @@ OpReturn
 OpFunctionEnd
 )");
 }
+
+using Comparison = BinaryInstructionTest;
+TEST_P(Comparison, Scalar) {
+    auto params = GetParam();
+
+    auto* func = b.CreateFunction("foo", mod.types.void_());
+    func->StartTarget()->SetInstructions(
+        utils::Vector{b.CreateBinary(params.kind, mod.types.bool_(), MakeScalarValue(params.type),
+                                     MakeScalarValue(params.type)),
+                      b.Branch(func->EndTarget())});
+
+    generator_.EmitFunction(func);
+    EXPECT_THAT(DumpModule(generator_.Module()), ::testing::HasSubstr(params.spirv_inst));
+}
+TEST_P(Comparison, Vector) {
+    auto params = GetParam();
+
+    auto* func = b.CreateFunction("foo", mod.types.void_());
+    func->StartTarget()->SetInstructions(
+        utils::Vector{b.CreateBinary(params.kind, mod.types.vec2(mod.types.bool_()),
+                                     MakeVectorValue(params.type), MakeVectorValue(params.type)),
+
+                      b.Branch(func->EndTarget())});
+
+    generator_.EmitFunction(func);
+    EXPECT_THAT(DumpModule(generator_.Module()), ::testing::HasSubstr(params.spirv_inst));
+}
+INSTANTIATE_TEST_SUITE_P(
+    SpvGeneratorImplTest_Binary_I32,
+    Comparison,
+    testing::Values(BinaryTestCase{kI32, ir::Binary::Kind::kEqual, "OpIEqual"},
+                    BinaryTestCase{kI32, ir::Binary::Kind::kNotEqual, "OpINotEqual"},
+                    BinaryTestCase{kI32, ir::Binary::Kind::kGreaterThan, "OpSGreaterThan"},
+                    BinaryTestCase{kI32, ir::Binary::Kind::kGreaterThanEqual,
+                                   "OpSGreaterThanEqual"},
+                    BinaryTestCase{kI32, ir::Binary::Kind::kLessThan, "OpSLessThan"},
+                    BinaryTestCase{kI32, ir::Binary::Kind::kLessThanEqual, "OpSLessThanEqual"}));
+INSTANTIATE_TEST_SUITE_P(
+    SpvGeneratorImplTest_Binary_U32,
+    Comparison,
+    testing::Values(BinaryTestCase{kU32, ir::Binary::Kind::kEqual, "OpIEqual"},
+                    BinaryTestCase{kU32, ir::Binary::Kind::kNotEqual, "OpINotEqual"},
+                    BinaryTestCase{kU32, ir::Binary::Kind::kGreaterThan, "OpUGreaterThan"},
+                    BinaryTestCase{kU32, ir::Binary::Kind::kGreaterThanEqual,
+                                   "OpUGreaterThanEqual"},
+                    BinaryTestCase{kU32, ir::Binary::Kind::kLessThan, "OpULessThan"},
+                    BinaryTestCase{kU32, ir::Binary::Kind::kLessThanEqual, "OpULessThanEqual"}));
+INSTANTIATE_TEST_SUITE_P(
+    SpvGeneratorImplTest_Binary_F32,
+    Comparison,
+    testing::Values(BinaryTestCase{kF32, ir::Binary::Kind::kEqual, "OpFOrdEqual"},
+                    BinaryTestCase{kF32, ir::Binary::Kind::kNotEqual, "OpFOrdNotEqual"},
+                    BinaryTestCase{kF32, ir::Binary::Kind::kGreaterThan, "OpFOrdGreaterThan"},
+                    BinaryTestCase{kF32, ir::Binary::Kind::kGreaterThanEqual,
+                                   "OpFOrdGreaterThanEqual"},
+                    BinaryTestCase{kF32, ir::Binary::Kind::kLessThan, "OpFOrdLessThan"},
+                    BinaryTestCase{kF32, ir::Binary::Kind::kLessThanEqual, "OpFOrdLessThanEqual"}));
+INSTANTIATE_TEST_SUITE_P(
+    SpvGeneratorImplTest_Binary_F16,
+    Comparison,
+    testing::Values(BinaryTestCase{kF16, ir::Binary::Kind::kEqual, "OpFOrdEqual"},
+                    BinaryTestCase{kF16, ir::Binary::Kind::kNotEqual, "OpFOrdNotEqual"},
+                    BinaryTestCase{kF16, ir::Binary::Kind::kGreaterThan, "OpFOrdGreaterThan"},
+                    BinaryTestCase{kF16, ir::Binary::Kind::kGreaterThanEqual,
+                                   "OpFOrdGreaterThanEqual"},
+                    BinaryTestCase{kF16, ir::Binary::Kind::kLessThan, "OpFOrdLessThan"},
+                    BinaryTestCase{kF16, ir::Binary::Kind::kLessThanEqual, "OpFOrdLessThanEqual"}));
+INSTANTIATE_TEST_SUITE_P(
+    SpvGeneratorImplTest_Binary_Bool,
+    Comparison,
+    testing::Values(BinaryTestCase{kBool, ir::Binary::Kind::kEqual, "OpLogicalEqual"},
+                    BinaryTestCase{kBool, ir::Binary::Kind::kNotEqual, "OpLogicalNotEqual"}));
 
 TEST_F(SpvGeneratorImplTest, Binary_Chain) {
     auto* func = b.CreateFunction("foo", mod.types.void_());
