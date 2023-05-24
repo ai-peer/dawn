@@ -96,6 +96,23 @@
       "message": "nit: we could even go as far as:\n\n```\nD3D12_VERSIONED_ROOT_SIGNATURE_DESC desc \u003d {};\n        desc.Version \u003d D3D_ROOT_SIGNATURE_VERSION_1_1;\n        desc.Desc_1_1.NumParameters \u003d rootParameters.size();\n        desc.Desc_1_1.pParameters \u003d rootParameters.data();\n        desc.Desc_1_1.NumStaticSamplers \u003d 0;\n        desc.Desc_1_1.pStaticSamplers \u003d nullptr;\n        desc.Desc_1_1.Flags \u003d\n\n   ComPtr\u003cID3DBlob\u003e error;\n    HRESULT hr;\n   \n   if (use 1_1) {\n     hr \u003d ...\n   } else {\n     Serialize1_0RootSignature(device, desc, ...);\n   }\n```\n\nThen all the complexity of the 1.0 root signature is in one function and we don\u0027t need to move vectors around.",
       "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9709e728_e680c17f",
+        "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T21:16:41Z",
+      "side": 1,
+      "message": "we should probably test the 1.0 on more tests.\nmaybe additionally:\nExternalTextureTests\nDynamicBufferOffsetTests\nPipelineLayoutTests",
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
