@@ -39,6 +39,30 @@
       },
       "revId": "629cec40db1c3f29c5f53f3ceab31f972bcf2d90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e81cba_e62bbf40",
+        "filename": "src/tint/ir/block.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-24T18:51:21Z",
+      "side": 1,
+      "message": "Hm, yup, comment doesn\u0027t make sense, but also, I don\u0027t think this function makes sense any more in general. I\u0027m going to leave the comment for now, and will remove the function completely in a followup rather then try to clarify what it should be doing.",
+      "parentUuid": "37702af5_70fa3fac",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 58
+      },
+      "revId": "629cec40db1c3f29c5f53f3ceab31f972bcf2d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
