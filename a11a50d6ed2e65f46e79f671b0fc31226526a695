@@ -34,6 +34,24 @@
       "parentUuid": "977e7f50_27088334",
       "revId": "a11a50d6ed2e65f46e79f671b0fc31226526a695",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbf30046_305d1497",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-24T00:43:39Z",
+      "side": 1,
+      "message": "Confused... Are the end2end tests supposed to run with D3D11? How was this working before. Is there non-compat D3D11 backend? Was it that D3D11, which is included in the test parameters, was never the less not getting tested and now, via the changes to which adapters get included it\u0027s now getting included? \n\nGiven the test includes D3D11\n\n```\nDAWN_INSTANTIATE_TEST(TextureViewSamplingTest,\n                      D3D11Backend(),   // \u003c--------------------\n                      D3D12Backend(),\n                      MetalBackend(),\n                      OpenGLBackend(),\n                      OpenGLESBackend(),\n                      VulkanBackend());\n```\n\nhow was this ever working before?",
+      "parentUuid": "0a9ec282_336c5f14",
+      "revId": "a11a50d6ed2e65f46e79f671b0fc31226526a695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
