@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f15dd66_5cd5a3a1",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-24T03:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cdc47f5_cb11fc9d",
+      "range": {
+        "startLine": 361,
+        "startChar": 21,
+        "endLine": 361,
+        "endChar": 23
+      },
+      "revId": "2ef18783b640096bd6d3b4f110eb2a7956fde5be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5c0d456_7eadb99a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-24T02:34:53Z",
       "side": 1,
       "message": "nit: maybe we could hoist out the \"in compatibility mode\" bit from your other messages and say \"validating targets[%u] in compatibility mode\"",
+      "range": {
+        "startLine": 472,
+        "startChar": 38,
+        "endLine": 472,
+        "endChar": 61
+      },
+      "revId": "2ef18783b640096bd6d3b4f110eb2a7956fde5be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7555da9_546276e0",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-24T03:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5c0d456_7eadb99a",
       "range": {
         "startLine": 472,
         "startChar": 38,
