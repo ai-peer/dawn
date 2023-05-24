@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "be4474b464bddee864d1e3631c1d983aa33b3e59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec63e1da_f8f730e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-24T22:19:06Z",
+      "side": 1,
+      "message": "I realized one issue, the nullability qualifier needs to be after the `*`.\nhttps://clang.llvm.org/docs/AttributeReference.html#nullable\n\nOtherwise LGTM",
+      "revId": "be4474b464bddee864d1e3631c1d983aa33b3e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
