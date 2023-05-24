@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "998412a3_f00fc468",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-05-24T20:48:58Z",
+      "side": 1,
+      "message": "Renaming clang_format/scripts path as announced here:\nhttps://groups.google.com/u/0/a/chromium.org/g/chromium-dev/c/RkYsIcfww2A",
+      "revId": "d7ba63ab239a0a5185747095b27bffaeec4a0ffc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
