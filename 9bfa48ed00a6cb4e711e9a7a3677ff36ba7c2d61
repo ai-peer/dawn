@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce873580_2edc91a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-24T12:33:40Z",
+      "side": 1,
+      "message": "changed to just not do any compat mode end2end tests as apparently there are lots of issues. Can be fixed later since I\u0027m only using compat in unit tests?",
+      "revId": "9bfa48ed00a6cb4e711e9a7a3677ff36ba7c2d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
