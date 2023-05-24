@@ -33,6 +33,24 @@
       "message": "LGTM.\n\nI sort-of expected to see the disassembly output stop using the `%fn` prefix along with this change (since `fn` no longer stands for a concept that we use). Fine for that to be a follow-up if that\u0027s already planned.",
       "revId": "ecd6564eec602eec910e1f099bd5e035d33fa08a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ef503f3_ecdde016",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-24T22:47:25Z",
+      "side": 1,
+      "message": "I\u0027ll remove in a followup, I didn\u0027t actually think about it, heh. After staring at it for so long I don\u0027t even think about `fn` as being short for flow node, just, this is a thingy that\u0027s different from the other type of thingy.",
+      "parentUuid": "4ef29a4d_9594230c",
+      "revId": "ecd6564eec602eec910e1f099bd5e035d33fa08a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
