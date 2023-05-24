@@ -63,9 +63,22 @@
 #if !defined({{API}}_FUNCTION_ATTRIBUTE)
 #define {{API}}_FUNCTION_ATTRIBUTE
 #endif
+
 #if !defined({{API}}_NULLABLE)
 #define {{API}}_NULLABLE
 #endif
+#if !defined({{API}}_NONNULL)
+#define {{API}}_NONNULL
+#endif
+{% macro nullability_attribute(member) %}
+    {% if member.type.category == "object" or member.annotation != "value" %}
+        {% if member.optional -%}
+            {{API}}_NULLABLE{{" "}}
+        {%- else -%}
+            {{API}}_NONNULL{{" "}}
+        {%- endif %}
+    {% endif %}
+{% endmacro %}
 
 #include <stdint.h>
 #include <stddef.h>
@@ -112,12 +125,12 @@ typedef uint32_t {{API}}Flags;
 {% endfor %}
 
 typedef struct {{API}}ChainedStruct {
-    struct {{API}}ChainedStruct const * next;
+    {{API}}_NULLABLE struct {{API}}ChainedStruct const * next;
     {{API}}SType sType;
 } {{API}}ChainedStruct {{API}}_STRUCTURE_ATTRIBUTE;
 
 typedef struct {{API}}ChainedStructOut {
-    struct {{API}}ChainedStructOut * next;
+    {{API}}_NULLABLE struct {{API}}ChainedStructOut * next;
     {{API}}SType sType;
 } {{API}}ChainedStructOut {{API}}_STRUCTURE_ATTRIBUTE;
 
@@ -129,17 +142,13 @@ typedef struct {{API}}ChainedStructOut {
         {% set Out = "Out" if type.output else "" %}
         {% set const = "const " if not type.output else "" %}
         {% if type.extensible %}
-            {{API}}ChainedStruct{{Out}} {{const}}* nextInChain;
+            {{API}}_NULLABLE {{API}}ChainedStruct{{Out}} {{const}}* nextInChain;
         {% endif %}
         {% if type.chained %}
             {{API}}ChainedStruct{{Out}} chain;
         {% endif %}
         {% for member in type.members %}
-            {% if member.optional %}
-                {{API}}_NULLABLE {{as_annotated_cType(member)}};
-            {% else %}
-                {{as_annotated_cType(member)}};
-            {% endif-%}
+            {{nullability_attribute(member)}}{{as_annotated_cType(member)}};
         {% endfor %}
     } {{as_cType(type.name)}} {{API}}_STRUCTURE_ATTRIBUTE;
 
@@ -170,9 +179,7 @@ extern "C" {
         typedef {{as_cType(method.return_type.name)}} (*{{as_cProc(type.name, method.name)}})(
             {{-as_cType(type.name)}} {{as_varName(type.name)}}
             {%- for arg in method.arguments -%}
-                ,{{" "}}
-                {%- if arg.optional %}{{API}}_NULLABLE {% endif -%}
-                {{as_annotated_cType(arg)}}
+                , {{nullability_attribute(arg)}}{{as_annotated_cType(arg)}}
             {%- endfor -%}
         ) {{API}}_FUNCTION_ATTRIBUTE;
     {% endfor %}
@@ -196,9 +203,7 @@ extern "C" {
         {{API}}_EXPORT {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(
             {{-as_cType(type.name)}} {{as_varName(type.name)}}
             {%- for arg in method.arguments -%}
-                ,{{" "}}
-                {%- if arg.optional %}{{API}}_NULLABLE {% endif -%}
-                {{as_annotated_cType(arg)}}
+                , {{nullability_attribute(arg)}}{{as_annotated_cType(arg)}}
             {%- endfor -%}
         ) {{API}}_FUNCTION_ATTRIBUTE;
     {% endfor %}
