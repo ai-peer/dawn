@@ -16,6 +16,23 @@
       "message": "LGTM2",
       "revId": "2472351d4d21524d2f75ae66974634e45edce278",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2814f151_c4aab4fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-24T18:22:40Z",
+      "side": 1,
+      "message": "BTW, it turns out there\u0027s a doc for writing validation (ICYMI): https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/docs/dawn/errors.md",
+      "revId": "2472351d4d21524d2f75ae66974634e45edce278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
