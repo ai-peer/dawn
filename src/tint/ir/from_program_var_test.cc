@@ -38,7 +38,6 @@ TEST_F(IR_BuilderImplTest, Emit_GlobalVar_NoInit) {
 }
 
 %fn2 = root_terminator
-
 )");
 }
 
@@ -55,7 +54,6 @@ TEST_F(IR_BuilderImplTest, Emit_GlobalVar_Init) {
 }
 
 %fn2 = root_terminator
-
 )");
 }
 
@@ -67,13 +65,13 @@ TEST_F(IR_BuilderImplTest, Emit_Var_NoInit) {
     ASSERT_TRUE(m) << (!m ? m.Failure() : "");
 
     EXPECT_EQ(Disassemble(m.Get()),
-              R"(%fn1 = func test_function():void [@compute @workgroup_size(1, 1, 1)] -> %fn2
-%fn2 = block {
-  %a:ptr<function, u32, read_write> = var
-  br %fn3  # return
+              R"(%fn1 = func test_function():void [@compute @workgroup_size(1, 1, 1)] -> %fn2 {
+  %fn2 = block {
+    %a:ptr<function, u32, read_write> = var
+    br %fn3  # return
+  }
+  %fn3 = func_terminator
 }
-%fn3 = func_terminator
-
 )");
 }
 
@@ -86,13 +84,13 @@ TEST_F(IR_BuilderImplTest, Emit_Var_Init) {
     ASSERT_TRUE(m) << (!m ? m.Failure() : "");
 
     EXPECT_EQ(Disassemble(m.Get()),
-              R"(%fn1 = func test_function():void [@compute @workgroup_size(1, 1, 1)] -> %fn2
-%fn2 = block {
-  %a:ptr<function, u32, read_write> = var, 2u
-  br %fn3  # return
+              R"(%fn1 = func test_function():void [@compute @workgroup_size(1, 1, 1)] -> %fn2 {
+  %fn2 = block {
+    %a:ptr<function, u32, read_write> = var, 2u
+    br %fn3  # return
+  }
+  %fn3 = func_terminator
 }
-%fn3 = func_terminator
-
 )");
 }
 }  // namespace

@@ -41,14 +41,13 @@ TEST_F(IR_BuilderImplTest, EmitStatement_Assign) {
 }
 
 %fn2 = root_terminator
-
-%fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] -> %fn4
-%fn4 = block {
-  store %a, 4u
-  br %fn5  # return
+%fn3 = func test_function():void [@compute @workgroup_size(1, 1, 1)] -> %fn4 {
+  %fn4 = block {
+    store %a, 4u
+    br %fn5  # return
+  }
+  %fn5 = func_terminator
 }
-%fn5 = func_terminator
-
 )");
 }
 
