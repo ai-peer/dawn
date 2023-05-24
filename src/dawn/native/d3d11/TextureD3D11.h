@@ -128,7 +128,8 @@ class TextureView final : public TextureViewBase {
     static Ref<TextureView> Create(TextureBase* texture, const TextureViewDescriptor* descriptor);
 
     ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceView() const;
-    ResultOrError<ComPtr<ID3D11RenderTargetView>> CreateD3D11RenderTargetView() const;
+    ResultOrError<ComPtr<ID3D11RenderTargetView>> CreateD3D11RenderTargetView(
+        uint32_t mipLevel = 0u) const;
     ResultOrError<ComPtr<ID3D11DepthStencilView>> CreateD3D11DepthStencilView(
         bool depthReadOnly,
         bool stencilReadOnly) const;

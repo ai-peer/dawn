@@ -289,16 +289,18 @@ ID3D11Resource* Texture::GetD3D11Resource() const {
     return mD3d11Resource.Get();
 }
 
-D3D11_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(const Format& format,
-                                                        const SubresourceRange& range) const {
+D3D11_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(
+    const Format& format,
+    const SubresourceRange& singleLevelRange) const {
+    ASSERT(singleLevelRange.levelCount == 1);
     D3D11_RENDER_TARGET_VIEW_DESC rtvDesc;
     rtvDesc.Format = d3d::DXGITextureFormat(format.format);
     if (IsMultisampledTexture()) {
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
         ASSERT(GetNumMipLevels() == 1);
-        ASSERT(range.baseMipLevel == 0);
-        ASSERT(range.baseArrayLayer == 0);
-        ASSERT(range.layerCount == 1);
+        ASSERT(singleLevelRange.baseMipLevel == 0);
+        ASSERT(singleLevelRange.baseArrayLayer == 0);
+        ASSERT(singleLevelRange.layerCount == 1);
         rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2DMS;
         return rtvDesc;
     }
@@ -311,15 +313,15 @@ D3D11_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(const Format& format,
             // https://docs.microsoft.com/en-us/windows/desktop/api/d3d11/ns-d3d11-d3d11_tex2d_array
             // _rtv
             rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2DARRAY;
-            rtvDesc.Texture2DArray.MipSlice = range.baseMipLevel;
-            rtvDesc.Texture2DArray.FirstArraySlice = range.baseArrayLayer;
-            rtvDesc.Texture2DArray.ArraySize = range.layerCount;
+            rtvDesc.Texture2DArray.MipSlice = singleLevelRange.baseMipLevel;
+            rtvDesc.Texture2DArray.FirstArraySlice = singleLevelRange.baseArrayLayer;
+            rtvDesc.Texture2DArray.ArraySize = singleLevelRange.layerCount;
             break;
         case wgpu::TextureDimension::e3D:
             rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE3D;
-            rtvDesc.Texture3D.MipSlice = range.baseMipLevel;
-            rtvDesc.Texture3D.FirstWSlice = range.baseArrayLayer;
-            rtvDesc.Texture3D.WSize = range.layerCount;
+            rtvDesc.Texture3D.MipSlice = singleLevelRange.baseMipLevel;
+            rtvDesc.Texture3D.FirstWSlice = singleLevelRange.baseArrayLayer;
+            rtvDesc.Texture3D.WSize = singleLevelRange.layerCount;
             break;
         case wgpu::TextureDimension::e1D:
             UNREACHABLE();
@@ -410,11 +412,14 @@ MaybeError Texture::Clear(CommandRecordingContext* commandContext,
         static constexpr std::array<float, 4> kZero = {0.0f, 0.0f, 0.0f, 0.0f};
         static constexpr std::array<float, 4> kNonZero = {1.0f, 1.0f, 1.0f, 1.0f};
 
-        ComPtr<ID3D11RenderTargetView> d3d11RTV;
-        DAWN_TRY_ASSIGN(d3d11RTV, view->CreateD3D11RenderTargetView());
-        d3d11DeviceContext->ClearRenderTargetView(
-            d3d11RTV.Get(),
-            clearValue == TextureBase::ClearValue::Zero ? kZero.data() : kNonZero.data());
+        for (uint32_t mipLevel = view->GetBaseMipLevel(); mipLevel < view->GetLevelCount();
+             ++mipLevel) {
+            ComPtr<ID3D11RenderTargetView> d3d11RTV;
+            DAWN_TRY_ASSIGN(d3d11RTV, view->CreateD3D11RenderTargetView(mipLevel));
+            d3d11DeviceContext->ClearRenderTargetView(
+                d3d11RTV.Get(),
+                clearValue == TextureBase::ClearValue::Zero ? kZero.data() : kNonZero.data());
+        }
     }
 
     if (clearValue == TextureBase::ClearValue::Zero) {
@@ -834,9 +839,14 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> TextureView::CreateD3D11ShaderRe
     return srv;
 }
 
-ResultOrError<ComPtr<ID3D11RenderTargetView>> TextureView::CreateD3D11RenderTargetView() const {
+ResultOrError<ComPtr<ID3D11RenderTargetView>> TextureView::CreateD3D11RenderTargetView(
+    uint32_t mipLevel) const {
+    auto range = GetSubresourceRange();
+    ASSERT(mipLevel >= range.baseMipLevel && mipLevel < range.baseMipLevel + range.levelCount);
+    range.baseMipLevel = mipLevel;
+    range.levelCount = 1u;
     D3D11_RENDER_TARGET_VIEW_DESC rtvDesc =
-        ToBackend(GetTexture())->GetRTVDescriptor(GetFormat(), GetSubresourceRange());
+        ToBackend(GetTexture())->GetRTVDescriptor(GetFormat(), range);
     ComPtr<ID3D11RenderTargetView> rtv;
     DAWN_TRY(CheckHRESULT(
         ToBackend(GetDevice())
