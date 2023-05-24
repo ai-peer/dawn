@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "dec483ebdecc924f990729a8bf1c1171d26553d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20ccc38b_7e4b3831",
+        "filename": "src/tint/ir/transform/add_empty_entry_point.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-24T13:36:12Z",
+      "side": 1,
+      "message": "I don\u0027t think these are equivalent. This path will use `Register()` instead of `New()`, which won\u0027t uniquify the name if it\u0027s already in use. So if a program already has a non-entry-point function called `unused_entry_point` we\u0027d end up with a conflict.",
+      "revId": "dec483ebdecc924f990729a8bf1c1171d26553d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
