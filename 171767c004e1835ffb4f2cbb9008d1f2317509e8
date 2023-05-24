@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe27abcf_9c5dbc08",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-24T12:51:15Z",
+      "side": 1,
+      "message": "It runs into the `IsOpen` ASSERT:\n\n```\nCommandRecordingContext* Device::GetPendingCommandContext(Device::SubmitMode submitMode) {\n    // Callers of GetPendingCommandList do so to record commands. Only reserve a command\n    // allocator when it is needed so we don\u0027t submit empty command lists\n    DAWN_ASSERT(mPendingCommands.IsOpen());\n\n    if (submitMode \u003d\u003d SubmitMode::Normal) {\n        mPendingCommands.SetNeedsSubmit();\n    }\n    return \u0026mPendingCommands;\n}\n```\n\nThe stack is:\n\n```\n\u003e\tdawn_end2end_tests.exe!dawn::native::d3d11::Device::GetPendingCommandContext(dawn::native::DeviceBase::SubmitMode submitMode) Line 144\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Buffer::Initialize(bool mappedAtCreation) Line 204\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Buffer::Create(dawn::native::d3d11::Device * device, const dawn::native::BufferDescriptor * descriptor) Line 140\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Device::CreateBufferImpl(const dawn::native::BufferDescriptor * descriptor) Line 243\tC++\n \tdawn_end2end_tests.exe!dawn::native::DeviceBase::CreateBuffer(const dawn::native::BufferDescriptor * descriptor) Line 1552\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::CommandRecordingContext::Open(dawn::native::d3d11::Device * device) Line 59\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Device::PreparePendingCommandContext() Line 154\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Device::Initialize(const dawn::native::DeviceDescriptor * descriptor) Line 124\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Device::Create(dawn::native::AdapterBase * adapter, const dawn::native::DeviceDescriptor * descriptor, const dawn::native::TogglesState \u0026 deviceToggles) Line 99\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::PhysicalDevice::CreateDeviceImpl(dawn::native::AdapterBase * adapter, const dawn::native::DeviceDescriptor * descriptor, const dawn::native::TogglesState \u0026 deviceToggles) Line 218\tC++\n \tdawn_end2end_tests.exe!dawn::native::PhysicalDeviceBase::CreateDevice(dawn::native::AdapterBase * adapter, const dawn::native::DeviceDescriptor * descriptor, const dawn::native::TogglesState \u0026 deviceToggles) Line 65\tC++\n \tdawn_end2end_tests.exe!dawn::native::AdapterBase::CreateDevice(const dawn::native::DeviceDescriptor * descriptor) Line 163\tC++\n \tdawn_end2end_tests.exe!dawn::native::AdapterBase::APICreateDevice(const dawn::native::DeviceDescriptor * descriptor) Line 115\tC++\n \tdawn_end2end_tests.exe!dawn::native::Adapter::CreateDevice(const WGPUDeviceDescriptor * deviceDescriptor) Line 112\tC++\n \tdawn_end2end_tests.exe!dawn::native::Adapter::CreateDevice(const wgpu::DeviceDescriptor * deviceDescriptor) Line 108\tC++\n         \n```\n\nIt seems my comment is not accurate enough.",
+      "parentUuid": "3a5bb1c9_25350641",
+      "range": {
+        "startLine": 201,
+        "startChar": 84,
+        "endLine": 201,
+        "endChar": 95
+      },
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36853b7d_9c51d22d",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "813b58d1_3fb2ba75",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-24T12:51:15Z",
+      "side": 1,
+      "message": "NonZero clearing is only for test purpose, and intentionally transparent to `SetIsDataInitialized`.",
+      "parentUuid": "36853b7d_9c51d22d",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "35ab2c2c_e11e3b5b",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 2
@@ -71,6 +113,24 @@
       "writtenOn": "2023-05-24T12:28:04Z",
       "side": 1,
       "message": "We should definitely not be using the label to identify special buffers used in the implementation because the labels can be set by users of the API from JS.",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88e9ef00_d32b2d4e",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-24T12:51:15Z",
+      "side": 1,
+      "message": "This is only effective in test mode. No need to worry about that too much.",
+      "parentUuid": "35ab2c2c_e11e3b5b",
       "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
