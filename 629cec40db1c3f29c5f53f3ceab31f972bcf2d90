@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "629cec40db1c3f29c5f53f3ceab31f972bcf2d90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37702af5_70fa3fac",
+        "filename": "src/tint/ir/block.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-24T18:48:03Z",
+      "side": 1,
+      "message": "Seems to be a mismatch between the comment and the code here. Comment mentions inbound branches but that doesn\u0027t seems to be part of the code.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 58
+      },
+      "revId": "629cec40db1c3f29c5f53f3ceab31f972bcf2d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
