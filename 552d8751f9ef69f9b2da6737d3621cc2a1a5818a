@@ -16,6 +16,109 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81736386_52ca5402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T19:59:04Z",
+      "side": 1,
+      "message": "I think we lost testing of compat. some of these limits are tested in MaxLimitTests.cpp\n\ncould you rebase on https://dawn-review.googlesource.com/c/dawn/+/134340?",
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6735f252_81e8ecb7",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T19:59:04Z",
+      "side": 1,
+      "message": "probably can use GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS and GL_MAX_UNIFORM_BUFFER_BINDINGS\n\nDynamic buffers are just normal buffers in the GL backend",
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279dd8bd_f161bd18",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T19:59:04Z",
+      "side": 1,
+      "message": "docs say that GL_MAX_TEXTURE_IMAGE_UNITS is for the fragment stage\n\nthis one might need to be min of GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS and GL_MAX_TEXTURE_IMAGE_UNITS?\n\nor `min(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS / 2, GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GL_MAX_TEXTURE_IMAGE_UNITS)` ?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 86
+      },
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec7151ac_5cd1a981",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T19:59:04Z",
+      "side": 1,
+      "message": "GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT\n\ndidn\u0027t find one for storage :-/",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 80
+      },
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9baae96_998977e0",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T19:59:04Z",
+      "side": 1,
+      "message": "maybe needs to be the min of this and GL_MAX_DRAW_BUFFERS ?",
+      "range": {
+        "startLine": 199,
+        "startChar": 45,
+        "endLine": 199,
+        "endChar": 69
+      },
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
