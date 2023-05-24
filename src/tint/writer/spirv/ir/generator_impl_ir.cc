@@ -214,7 +214,7 @@ void GeneratorImplIr::EmitFunction(const ir::Function* func) {
     auto id = module_.NextId();
 
     // Emit the function name.
-    module_.PushDebug(spv::Op::OpName, {id, Operand(func->Name().Name())});
+    module_.PushDebug(spv::Op::OpName, {id, Operand(ir_->NameOf(func).Name())});
 
     // Emit OpEntryPoint and OpExecutionMode declarations if needed.
     if (func->Stage() != ir::Function::PipelineStage::kUndefined) {
@@ -282,7 +282,8 @@ void GeneratorImplIr::EmitEntryPoint(const ir::Function* func, uint32_t id) {
     }
 
     // TODO(jrprice): Add the interface list of all referenced global variables.
-    module_.PushEntryPoint(spv::Op::OpEntryPoint, {U32Operand(stage), id, func->Name().Name()});
+    module_.PushEntryPoint(spv::Op::OpEntryPoint,
+                           {U32Operand(stage), id, ir_->NameOf(func).Name()});
 }
 
 void GeneratorImplIr::EmitBlock(const ir::Block* block) {
