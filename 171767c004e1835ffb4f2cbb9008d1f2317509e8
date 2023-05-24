@@ -16,6 +16,29 @@
       "message": "In my impression, we haven\u0027t enabled webgpu_cts_tests on dawn_d3d11, right?\nIf so, this CL should be irrelevant to the failed cases.",
       "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5bb1c9_25350641",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-24T10:54:07Z",
+      "side": 1,
+      "message": "why the builtin uniform buffer will be initialized recursively?",
+      "range": {
+        "startLine": 201,
+        "startChar": 84,
+        "endLine": 201,
+        "endChar": 95
+      },
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
