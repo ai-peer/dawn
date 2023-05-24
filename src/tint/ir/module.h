@@ -18,8 +18,8 @@
 #include <string>
 
 #include "src/tint/constant/value.h"
+#include "src/tint/ir/block.h"
 #include "src/tint/ir/constant.h"
-#include "src/tint/ir/flow_node.h"
 #include "src/tint/ir/function.h"
 #include "src/tint/ir/instruction.h"
 #include "src/tint/ir/value.h"
@@ -66,8 +66,8 @@ class Module {
     /// @return the unique symbol of the given value.
     Symbol SetName(const Value* value, std::string_view name);
 
-    /// The flow node allocator
-    utils::BlockAllocator<FlowNode> flow_nodes;
+    /// The block allocator
+    utils::BlockAllocator<Block> blocks;
     /// The constant allocator
     utils::BlockAllocator<constant::Value> constants_arena;
     /// The value allocator
