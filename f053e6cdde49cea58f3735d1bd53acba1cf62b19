@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26d9ab3_cf2b0653",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-24T19:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1231fb59_0809ad48",
+      "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e56ff34_23d2bea6",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f79090b_b8bd2fdd",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-24T19:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e56ff34_23d2bea6",
+      "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff07ca18_73c63cb5",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-24T19:08:36Z",
       "side": 1,
       "message": "Tanentially: should we need to optimize later, other options would be to use predication, essentially multiplying by the results of the relational to avoid the branch, or to unroll this loop into 4 flavours depending on the modulus. I have no idea if shader compilers do those things internally these days.",
+      "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0583a3d_041b5f68",
+        "filename": "src/dawn/native/BlitDepthStencilToBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-24T19:25:45Z",
+      "side": 1,
+      "message": "Yeah. And we can test against local perf tests to see which one actually runs fast. Actually this while else branch can probably be a separate compute dispatch for the edge case.\nWill try to optimize later",
+      "parentUuid": "ff07ca18_73c63cb5",
       "revId": "f053e6cdde49cea58f3735d1bd53acba1cf62b19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
