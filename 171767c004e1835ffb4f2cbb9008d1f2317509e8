@@ -39,6 +39,40 @@
       },
       "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36853b7d_9c51d22d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T12:28:04Z",
+      "side": 1,
+      "message": "Why do we need to handle this buffer specially? We could also just tell the buffer \"you are initialized\" with `SetIsDataInitialized` right after we create it if we want to avoid lazy init.",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35ab2c2c_e11e3b5b",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-24T12:28:04Z",
+      "side": 1,
+      "message": "We should definitely not be using the label to identify special buffers used in the implementation because the labels can be set by users of the API from JS.",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
