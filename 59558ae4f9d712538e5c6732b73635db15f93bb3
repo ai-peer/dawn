@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cce399a_fd7bcfec",
+        "filename": "src/tint/ir/from_program_binary_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-24T21:43:22Z",
+      "side": 1,
+      "message": "bit weird that the block gets the `fn` prefix but the actual function doesn\u0027t.",
+      "range": {
+        "startLine": 44,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 6
+      },
+      "revId": "59558ae4f9d712538e5c6732b73635db15f93bb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
