@@ -16,6 +16,24 @@
       "message": "We\u0027ll probably have to disable the CubaArray tests on D3D11, since they fail validation now.",
       "revId": "a11a50d6ed2e65f46e79f671b0fc31226526a695",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a9ec282_336c5f14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-24T00:26:09Z",
+      "side": 1,
+      "message": "If D3D11 only works in compat mode then it seems like it should be impossible to request it to be created in non-compat mode. Is that a bug that needs to be fixed or is there some reason you\u0027re allowed to create non-compat D3D11 adapter or am I mis-understanding the issue (I see the test is running and failing in D3D11)",
+      "parentUuid": "977e7f50_27088334",
+      "revId": "a11a50d6ed2e65f46e79f671b0fc31226526a695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
