@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "29bb246c9cff110600a2678103cb4708a29d0103",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ae84d3c_ea07d97a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T18:19:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "29bb246c9cff110600a2678103cb4708a29d0103",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a470ea_b9d9d8e2",
+        "filename": "src/dawn/wire/client/SwapChain.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-24T18:19:25Z",
+      "side": 1,
+      "message": "nit: perhaps forward the label from the swap chain desc? (or call it like \"[Texture] for\" + descriptor-\u003elabel)\n\nlabel forwarding could also be done in `GetSwapChainBaseTextureDescriptor`",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 28
+      },
+      "revId": "29bb246c9cff110600a2678103cb4708a29d0103",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
