@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af1ed4f_65eddaa6",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-25T21:22:58Z",
+      "side": 0,
+      "message": "Wasn\u0027t this supposed to be testing that the `return` doesn\u0027t get removed when it\u0027s nested inside control flow? Same below.",
+      "revId": "32b6746cd95220659040b890e7507bb61509e411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

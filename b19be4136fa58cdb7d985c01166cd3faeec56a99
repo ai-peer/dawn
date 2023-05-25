@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "b19be4136fa58cdb7d985c01166cd3faeec56a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e455f8_9197cf0b",
+        "filename": "src/tint/ir/return.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-25T21:22:58Z",
+      "side": 1,
+      "message": "Is the `return` really a \"user\" of the function? This feels slightly weird to me, but maybe it\u0027s fine.",
+      "revId": "b19be4136fa58cdb7d985c01166cd3faeec56a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
