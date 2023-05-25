@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdb22f79_b6e5ce8c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-25T07:11:46Z",
+      "side": 1,
+      "message": "Thanks for the clarification, done!\nIt seems we no longer need `Open()`.",
+      "parentUuid": "304e03b7_f48df362",
+      "range": {
+        "startLine": 201,
+        "startChar": 84,
+        "endLine": 201,
+        "endChar": 95
+      },
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36853b7d_9c51d22d",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
