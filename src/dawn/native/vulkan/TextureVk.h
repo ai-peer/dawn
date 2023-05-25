@@ -37,8 +37,8 @@ VkImageUsageFlags VulkanImageUsage(wgpu::TextureUsage usage, const Format& forma
 VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage);
 VkSampleCountFlagBits VulkanSampleCount(uint32_t sampleCount);
 
-MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase* device,
-                                           const TextureDescriptor* descriptor);
+MaybeError ValidateCreateTextureWrappingVulkanImage(const DeviceBase* device,
+                                                    const ExternalImageDescriptorVk* descriptor);
 
 bool IsSampleCountSupported(const dawn::native::vulkan::Device* device,
                             const VkImageCreateInfo& imageCreateInfo);
@@ -95,7 +95,8 @@ class Texture final : public TextureBase {
                                   VkDeviceMemory externalMemoryAllocation,
                                   std::vector<VkSemaphore> waitSemaphores);
     // Update the 'ExternalSemaphoreHandle' to be used for export with the newly submitted one.
-    void UpdateExternalSemaphoreHandle(ExternalSemaphoreHandle handle);
+    void UpdateExternalSemaphoreHandle(wgpu::DawnVkSemaphoreType type,
+                                       ExternalSemaphoreHandle handle);
     MaybeError ExportExternalTexture(VkImageLayout desiredLayout,
                                      ExternalSemaphoreHandle* handle,
                                      VkImageLayout* releasedOldLayout,
@@ -168,9 +169,10 @@ class Texture final : public TextureBase {
 
     VkImageLayout mDesiredExportLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
-    ExternalSemaphoreHandle mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
-
+    wgpu::DawnVkSemaphoreType mSemaphoreType = wgpu::DawnVkSemaphoreType::OpaqueFD;
     std::vector<VkSemaphore> mWaitRequirements;
+    ExternalSemaphoreHandle mExternalSemaphoreHandle =
+        kInvalidExternalSemaphoreHandle[mSemaphoreType];
 
     // Sometimes the WebGPU aspects don't directly map to Vulkan aspects:
     //

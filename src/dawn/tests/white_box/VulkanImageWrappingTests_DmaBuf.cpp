@@ -85,7 +85,7 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
         mDeviceVk = native::vulkan::ToBackend(native::FromAPI(device.Get()));
     }
 
-    ~VulkanImageWrappingTestBackendDmaBuf() {
+    ~VulkanImageWrappingTestBackendDmaBuf() override {
         if (mGbmDevice != nullptr) {
             gbm_device_destroy(mGbmDevice);
             mGbmDevice = nullptr;

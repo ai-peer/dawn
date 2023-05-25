@@ -37,32 +37,6 @@ class ServiceImplementationFD : public ServiceImplementation {
 
     ~ServiceImplementationFD() override = default;
 
-    static bool CheckSupport(const VulkanDeviceInfo& deviceInfo,
-                             VkPhysicalDevice physicalDevice,
-                             const VulkanFunctions& fn,
-                             VkExternalSemaphoreHandleTypeFlagBits handleType) {
-        if (!deviceInfo.HasExt(DeviceExt::ExternalSemaphoreFD)) {
-            return false;
-        }
-
-        VkPhysicalDeviceExternalSemaphoreInfoKHR semaphoreInfo;
-        semaphoreInfo.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
-        semaphoreInfo.pNext = nullptr;
-        semaphoreInfo.handleType = handleType;
-
-        VkExternalSemaphorePropertiesKHR semaphoreProperties;
-        semaphoreProperties.sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR;
-        semaphoreProperties.pNext = nullptr;
-
-        fn.GetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, &semaphoreInfo,
-                                                        &semaphoreProperties);
-
-        VkFlags requiredFlags = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR |
-                                VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR;
-
-        return IsSubset(requiredFlags, semaphoreProperties.externalSemaphoreFeatures);
-    }
-
     // True if the device reports it supports this feature
     bool Supported() override { return mSupported; }
 
@@ -84,7 +58,9 @@ class ServiceImplementationFD : public ServiceImplementation {
         importSemaphoreFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
         importSemaphoreFdInfo.pNext = nullptr;
         importSemaphoreFdInfo.semaphore = semaphore;
-        importSemaphoreFdInfo.flags = 0;
+        importSemaphoreFdInfo.flags = mHandleType == VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT
+                                          ? VK_SEMAPHORE_IMPORT_TEMPORARY_BIT
+                                          : 0;
         importSemaphoreFdInfo.handleType = mHandleType;
         importSemaphoreFdInfo.fd = handle;
 

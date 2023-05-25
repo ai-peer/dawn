@@ -26,6 +26,9 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_DawnShaderFloat16:  // Deprecated
         case WGPUFeatureName_ImplicitDeviceSynchronization:
         case WGPUFeatureName_SurfaceCapabilities:
+        case WGPUFeatureName_DawnSyncVkSemaphoreZirconHandle:
+        case WGPUFeatureName_DawnSyncVkSemaphoreSyncFD:
+        case WGPUFeatureName_DawnSyncVkSemaphoreOpaqueFD:
             return false;
         case WGPUFeatureName_Depth32FloatStencil8:
         case WGPUFeatureName_TimestampQuery:

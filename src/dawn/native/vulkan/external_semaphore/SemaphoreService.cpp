@@ -13,18 +13,16 @@
 // limitations under the License.
 
 #include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
+
+#include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/VulkanFunctions.h"
 #include "dawn/native/vulkan/VulkanInfo.h"
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementation.h"
+#include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
 
 #if DAWN_PLATFORM_IS(FUCHSIA)
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.h"
 #endif  // DAWN_PLATFORM_IS(FUCHSIA)
-
-// Android, ChromeOS and Linux
-#if DAWN_PLATFORM_IS(LINUX)
-#include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
-#endif  // DAWN_PLATFORM_IS(LINUX)
 
 namespace dawn::native::vulkan::external_semaphore {
 
@@ -66,6 +64,28 @@ bool CheckSupport(const VulkanDeviceInfo& deviceInfo,
     return IsSubset(requiredFlags, semaphoreProperties.externalSemaphoreFeatures);
 }
 
+Feature FeatureForSemaphoreType(wgpu::DawnVkSemaphoreType semaphoreType) {
+    switch (semaphoreType) {
+        case wgpu::DawnVkSemaphoreType::OpaqueFD:
+            return Feature::SyncVkSemaphoreOpaqueFD;
+        case wgpu::DawnVkSemaphoreType::SyncFD:
+            return Feature::SyncVkSemaphoreSyncFD;
+        case wgpu::DawnVkSemaphoreType::ZirconHandle:
+            return Feature::SyncVkSemaphoreZirconHandle;
+    }
+}
+
+// Use a default for the deprecated path where Chromium doesn't enable semaphore features.
+// TODO(dawn:1838): Remove this when Chromium explicitly enables features.
+static constexpr wgpu::DawnVkSemaphoreType kDefaultType =
+#if DAWN_PLATFORM_IS(FUCHSIA)  // Fuchsia
+    wgpu::DawnVkSemaphoreType::ZirconHandle;
+#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)  // Android, ChromeOS
+    wgpu::DawnVkSemaphoreType::SyncFD;
+#elif DAWN_PLATFORM_IS(LINUX)                                  // Linux
+    wgpu::DawnVkSemaphoreType::OpaqueFD;
+#endif
+
 // static
 bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
                            VkPhysicalDevice physicalDevice,
@@ -85,48 +105,68 @@ bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
 }
 
 Service::Service(Device* device) {
-#if DAWN_PLATFORM_IS(FUCHSIA)  // Fuchsia
-    mServiceImpl = CreateZirconHandleService(device);
-#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)  // Android, ChromeOS
-    mServiceImpl = CreateFDService(device, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT);
-#elif DAWN_PLATFORM_IS(LINUX)                                  // Linux
-    mServiceImpl = CreateFDService(device, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR);
+    // TODO(dawn:1838): Removing initialization based on kDefaultType when Chromium enables
+    // features explicitly.
+#if DAWN_PLATFORM_IS(FUCHSIA)
+    if (device->HasFeature(FeatureForSemaphoreType(wgpu::DawnVkSemaphoreType::ZirconHandle)) ||
+        kDefaultType == wgpu::DawnVkSemaphoreType::ZirconHandle) {
+        mServiceImpls[wgpu::DawnVkSemaphoreType::ZirconHandle] = CreateZirconHandleService(device);
+    }
 #endif
+
+    if (device->HasFeature(FeatureForSemaphoreType(wgpu::DawnVkSemaphoreType::SyncFD)) ||
+        kDefaultType == wgpu::DawnVkSemaphoreType::SyncFD) {
+        mServiceImpls[wgpu::DawnVkSemaphoreType::SyncFD] =
+            CreateFDService(device, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT);
+    }
+
+    if (device->HasFeature(FeatureForSemaphoreType(wgpu::DawnVkSemaphoreType::OpaqueFD)) ||
+        kDefaultType == wgpu::DawnVkSemaphoreType::OpaqueFD) {
+        mServiceImpls[wgpu::DawnVkSemaphoreType::OpaqueFD] =
+            CreateFDService(device, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR);
+    }
 }
 
 Service::~Service() = default;
 
 bool Service::Supported() {
-    if (!mServiceImpl) {
-        return false;
+    return mServiceImpls[kDefaultType] && mServiceImpls[kDefaultType]->Supported();
+}
+
+MaybeError Service::ValidateSupportsType(wgpu::DawnVkSemaphoreType type) const {
+    if (mServiceImpls[type] && mServiceImpls[type]->Supported()) {
+        return {};
     }
-
-    return mServiceImpl->Supported();
+    return DAWN_VALIDATION_ERROR("%s is not supported. %s is required.", type,
+                                 FeatureEnumToAPIFeature(FeatureForSemaphoreType(type)));
 }
 
-void Service::CloseHandle(ExternalSemaphoreHandle handle) {
-    ASSERT(mServiceImpl);
-    mServiceImpl->CloseHandle(handle);
+void Service::CloseHandle(wgpu::DawnVkSemaphoreType type, ExternalSemaphoreHandle handle) {
+    ASSERT(mServiceImpls[type]);
+    mServiceImpls[type]->CloseHandle(handle);
 }
 
-ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle handle) {
-    ASSERT(mServiceImpl);
-    return mServiceImpl->ImportSemaphore(handle);
+ResultOrError<VkSemaphore> Service::ImportSemaphore(wgpu::DawnVkSemaphoreType type,
+                                                    ExternalSemaphoreHandle handle) {
+    ASSERT(mServiceImpls[type]);
+    return mServiceImpls[type]->ImportSemaphore(handle);
 }
 
-ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
-    ASSERT(mServiceImpl);
-    return mServiceImpl->CreateExportableSemaphore();
+ResultOrError<VkSemaphore> Service::CreateExportableSemaphore(wgpu::DawnVkSemaphoreType type) {
+    ASSERT(mServiceImpls[type]);
+    return mServiceImpls[type]->CreateExportableSemaphore();
 }
 
-ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore semaphore) {
-    ASSERT(mServiceImpl);
-    return mServiceImpl->ExportSemaphore(semaphore);
+ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(wgpu::DawnVkSemaphoreType type,
+                                                                VkSemaphore semaphore) {
+    ASSERT(mServiceImpls[type]);
+    return mServiceImpls[type]->ExportSemaphore(semaphore);
 }
 
-ExternalSemaphoreHandle Service::DuplicateHandle(ExternalSemaphoreHandle handle) {
-    ASSERT(mServiceImpl);
-    return mServiceImpl->DuplicateHandle(handle);
+ExternalSemaphoreHandle Service::DuplicateHandle(wgpu::DawnVkSemaphoreType type,
+                                                 ExternalSemaphoreHandle handle) {
+    ASSERT(mServiceImpls[type]);
+    return mServiceImpls[type]->DuplicateHandle(handle);
 }
 
 }  // namespace dawn::native::vulkan::external_semaphore

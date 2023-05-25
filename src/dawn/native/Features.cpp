@@ -31,93 +31,121 @@ struct FeatureEnumAndInfo {
 using FeatureEnumAndInfoList =
     std::array<FeatureEnumAndInfo, static_cast<size_t>(Feature::EnumCount)>;
 
-static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
-    {Feature::TextureCompressionBC,
-     {"texture-compression-bc", "Support Block Compressed (BC) texture formats",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=42", FeatureInfo::FeatureState::Stable}},
-    {Feature::TextureCompressionETC2,
-     {"texture-compression-etc2",
-      "Support Ericsson Texture Compressed (ETC2/EAC) texture "
-      "formats",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=955", FeatureInfo::FeatureState::Stable}},
-    {Feature::TextureCompressionASTC,
-     {"texture-compression-astc",
-      "Support Adaptable Scalable Texture Compressed (ASTC) "
-      "texture formats",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=955", FeatureInfo::FeatureState::Stable}},
-    {Feature::PipelineStatisticsQuery,
-     {"pipeline-statistics-query", "Support Pipeline Statistics Query",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
-      FeatureInfo::FeatureState::Experimental}},
-    {Feature::TimestampQuery,
-     {"timestamp-query", "Support Timestamp Query",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
-      FeatureInfo::FeatureState::Experimental}},
-    {Feature::TimestampQueryInsidePasses,
-     {"timestamp-query-inside-passes", "Support Timestamp Query inside render/compute pass",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
-      FeatureInfo::FeatureState::Experimental}},
-    {Feature::DepthClipControl,
-     {"depth-clip-control", "Disable depth clipping of primitives to the clip volume",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1178", FeatureInfo::FeatureState::Stable}},
-    {Feature::Depth32FloatStencil8,
-     {"depth32float-stencil8", "Support depth32float-stencil8 texture format",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=690", FeatureInfo::FeatureState::Stable}},
-    {Feature::ChromiumExperimentalDp4a,
-     {"chromium-experimental-dp4a", "Support experimental DP4a instructions in WGSL",
-      "https://bugs.chromium.org/p/tint/issues/detail?id=1497",
-      FeatureInfo::FeatureState::Experimental}},
-    {Feature::IndirectFirstInstance,
-     {"indirect-first-instance", "Support non-zero first instance values on indirect draw calls",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1197", FeatureInfo::FeatureState::Stable}},
-    {Feature::ShaderF16,
-     {"shader-f16", "Supports the \"enable f16;\" directive in WGSL",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1510",
-      FeatureInfo::FeatureState::Experimental}},
-    {Feature::RG11B10UfloatRenderable,
-     {"rg11b10ufloat-renderable",
-      "Allows the RENDER_ATTACHMENT usage on textures with format \"rg11b10ufloat\", and also "
-      "allows textures of that format to be multisampled.",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1518", FeatureInfo::FeatureState::Stable}},
-    {Feature::BGRA8UnormStorage,
-     {"bgra8unorm-storage", "Allows the STORAGE usage on textures with format \"bgra8unorm\".",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1591", FeatureInfo::FeatureState::Stable}},
-    {Feature::Float32Filterable,
-     {"float32-filterable",
-      "Allows textures with formats \"r32float\" \"rg32float\" and \"rgba32float\" to be filtered.",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1664",
-      FeatureInfo::FeatureState::Experimental}},
-    {Feature::DawnInternalUsages,
-     {"dawn-internal-usages",
-      "Add internal usages to resources to affect how the texture is allocated, but not "
-      "frontend validation. Other internal commands may access this usage.",
-      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
-      "dawn_internal_usages.md",
-      FeatureInfo::FeatureState::Stable}},
-    {Feature::MultiPlanarFormats,
-     {"multiplanar-formats", "Import and use multi-planar texture formats with per plane views",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=551", FeatureInfo::FeatureState::Stable}},
-    {Feature::DawnNative,
-     {"dawn-native", "WebGPU is running on top of dawn_native.",
-      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
-      "dawn_native.md",
-      FeatureInfo::FeatureState::Stable}},
-    {Feature::ImplicitDeviceSynchronization,
-     {"implicit-device-sync",
-      "Public API methods (except encoding) will have implicit device synchronization. So they "
-      "will be safe to be used on multiple threads.",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1662", FeatureInfo::FeatureState::Stable}},
-    {Feature::SurfaceCapabilities,
-     {"surface-capabilities",
-      "Support querying Surface's capabilities such as supported usage flags. This feature also "
-      "enables swap chain to be created with usage other than RenderAttachment.",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1760", FeatureInfo::FeatureState::Stable}},
-    {Feature::TransientAttachments,
-     {"transient-attachments",
-      "Support transient attachments that allow render pass operations to stay in tile memory, "
-      "avoiding VRAM traffic and potentially avoiding VRAM allocation for the textures.",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=1695", FeatureInfo::FeatureState::Stable}},
-}};
+static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {
+    {{Feature::TextureCompressionBC,
+      {"texture-compression-bc", "Support Block Compressed (BC) texture formats",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=42", FeatureInfo::FeatureState::Stable}},
+     {Feature::TextureCompressionETC2,
+      {"texture-compression-etc2",
+       "Support Ericsson Texture Compressed (ETC2/EAC) texture "
+       "formats",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=955", FeatureInfo::FeatureState::Stable}},
+     {Feature::TextureCompressionASTC,
+      {"texture-compression-astc",
+       "Support Adaptable Scalable Texture Compressed (ASTC) "
+       "texture formats",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=955", FeatureInfo::FeatureState::Stable}},
+     {Feature::PipelineStatisticsQuery,
+      {"pipeline-statistics-query", "Support Pipeline Statistics Query",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
+       FeatureInfo::FeatureState::Experimental}},
+     {Feature::TimestampQuery,
+      {"timestamp-query", "Support Timestamp Query",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
+       FeatureInfo::FeatureState::Experimental}},
+     {Feature::TimestampQueryInsidePasses,
+      {"timestamp-query-inside-passes", "Support Timestamp Query inside render/compute pass",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
+       FeatureInfo::FeatureState::Experimental}},
+     {Feature::DepthClipControl,
+      {"depth-clip-control", "Disable depth clipping of primitives to the clip volume",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1178",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::Depth32FloatStencil8,
+      {"depth32float-stencil8", "Support depth32float-stencil8 texture format",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=690", FeatureInfo::FeatureState::Stable}},
+     {Feature::ChromiumExperimentalDp4a,
+      {"chromium-experimental-dp4a", "Support experimental DP4a instructions in WGSL",
+       "https://bugs.chromium.org/p/tint/issues/detail?id=1497",
+       FeatureInfo::FeatureState::Experimental}},
+     {Feature::IndirectFirstInstance,
+      {"indirect-first-instance", "Support non-zero first instance values on indirect draw calls",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1197",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::ShaderF16,
+      {"shader-f16", "Supports the \"enable f16;\" directive in WGSL",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1510",
+       FeatureInfo::FeatureState::Experimental}},
+     {Feature::RG11B10UfloatRenderable,
+      {"rg11b10ufloat-renderable",
+       "Allows the RENDER_ATTACHMENT usage on textures with format \"rg11b10ufloat\", and also "
+       "allows textures of that format to be multisampled.",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1518",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::BGRA8UnormStorage,
+      {"bgra8unorm-storage", "Allows the STORAGE usage on textures with format \"bgra8unorm\".",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1591",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::Float32Filterable,
+      {"float32-filterable",
+       "Allows textures with formats \"r32float\" \"rg32float\" and \"rgba32float\" to be "
+       "filtered.",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1664",
+       FeatureInfo::FeatureState::Experimental}},
+     {Feature::DawnInternalUsages,
+      {"dawn-internal-usages",
+       "Add internal usages to resources to affect how the texture is allocated, but not "
+       "frontend validation. Other internal commands may access this usage.",
+       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+       "dawn_internal_usages.md",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::MultiPlanarFormats,
+      {"multiplanar-formats", "Import and use multi-planar texture formats with per plane views",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=551", FeatureInfo::FeatureState::Stable}},
+     {Feature::DawnNative,
+      {"dawn-native", "WebGPU is running on top of dawn_native.",
+       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+       "dawn_native.md",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::ImplicitDeviceSynchronization,
+      {"implicit-device-sync",
+       "Public API methods (except encoding) will have implicit device synchronization. So they "
+       "will be safe to be used on multiple threads.",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1662",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::SurfaceCapabilities,
+      {"surface-capabilities",
+       "Support querying Surface's capabilities such as supported usage flags. This feature also "
+       "enables swap chain to be created with usage other than RenderAttachment.",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1760",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::TransientAttachments,
+      {"transient-attachments",
+       "Support transient attachments that allow render pass operations to stay in tile memory, "
+       "avoiding VRAM traffic and potentially avoiding VRAM allocation for the textures.",
+       "https://bugs.chromium.org/p/dawn/issues/detail?id=1695",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::SyncVkSemaphoreOpaqueFD,
+      {"sync-vk-semaphore-opaque-fd",
+       "Support importing Vulkan external sempahores with handle type "
+       "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT.",
+       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+       "external_gpu_synchronization.md#vulkan",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::SyncVkSemaphoreSyncFD,
+      {"sync-vk-semaphore-sync-fd",
+       "Support importing Vulkan external sempahores with handle type "
+       "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT.",
+       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+       "external_gpu_synchronization.md#vulkan",
+       FeatureInfo::FeatureState::Stable}},
+     {Feature::SyncVkSemaphoreZirconHandle,
+      {"sync-vk-semaphore-zircon-handle",
+       "Support importing Vulkan external sempahores with handle type "
+       "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA.",
+       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+       "external_gpu_synchronization.md#vulkan",
+       FeatureInfo::FeatureState::Stable}}}};
 
 Feature FromAPIFeature(wgpu::FeatureName feature) {
     switch (feature) {
@@ -167,6 +195,12 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::TransientAttachments;
         case wgpu::FeatureName::Float32Filterable:
             return Feature::Float32Filterable;
+        case wgpu::FeatureName::DawnSyncVkSemaphoreOpaqueFD:
+            return Feature::SyncVkSemaphoreOpaqueFD;
+        case wgpu::FeatureName::DawnSyncVkSemaphoreSyncFD:
+            return Feature::SyncVkSemaphoreSyncFD;
+        case wgpu::FeatureName::DawnSyncVkSemaphoreZirconHandle:
+            return Feature::SyncVkSemaphoreZirconHandle;
     }
     return Feature::InvalidEnum;
 }
@@ -213,6 +247,13 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::TransientAttachments;
         case Feature::Float32Filterable:
             return wgpu::FeatureName::Float32Filterable;
+
+        case Feature::SyncVkSemaphoreOpaqueFD:
+            return wgpu::FeatureName::DawnSyncVkSemaphoreOpaqueFD;
+        case Feature::SyncVkSemaphoreSyncFD:
+            return wgpu::FeatureName::DawnSyncVkSemaphoreSyncFD;
+        case Feature::SyncVkSemaphoreZirconHandle:
+            return wgpu::FeatureName::DawnSyncVkSemaphoreZirconHandle;
 
         case Feature::EnumCount:
             break;

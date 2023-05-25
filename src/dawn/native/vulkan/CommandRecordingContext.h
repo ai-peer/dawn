@@ -47,7 +47,9 @@ struct CommandRecordingContext {
 
     // External textures that will be eagerly transitioned just before VkSubmit. The textures are
     // kept alive by the CommandBuffer so they don't need to be Ref-ed.
-    std::set<Texture*> externalTexturesForEagerTransition;
+    ityp::
+        array<wgpu::DawnVkSemaphoreType, std::set<Texture*>, kEnumCount<wgpu::DawnVkSemaphoreType>>
+            externalTexturesForEagerTransition;
 
     // Mappable buffers which will be eagerly transitioned to usage MapRead or MapWrite after
     // VkSubmit.
