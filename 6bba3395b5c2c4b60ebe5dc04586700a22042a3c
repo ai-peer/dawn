@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d21f907e_fe1cea67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-25T21:15:57Z",
+      "side": 1,
+      "message": "Will add tests if you think the thin abstraction needs them.",
+      "revId": "6bba3395b5c2c4b60ebe5dc04586700a22042a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
