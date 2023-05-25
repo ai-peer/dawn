@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "304e03b7_f48df362",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-25T04:14:22Z",
+      "side": 1,
+      "message": "I think Corentin\u0027s idea is to split Initialize into a different method.\n\nThat way, the one-time initialization that can fail is separated completely from the state management that Open() does.\n\nwe would call DAWN_TRY(mPendingCommandContext.Initialize()); exactly once in d3d11::Device::Initialize instead of PreparePendingCommandContext (we probably don\u0027t need PreparePendingCommandContext).",
+      "parentUuid": "f972f0cb_2a630576",
+      "range": {
+        "startLine": 201,
+        "startChar": 84,
+        "endLine": 201,
+        "endChar": 95
+      },
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36853b7d_9c51d22d",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
