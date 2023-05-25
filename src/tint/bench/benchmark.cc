@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "src/tint/utils/string_stream.h"
+#include "src/tint/utils/string.h"
 
 namespace tint::bench {
 namespace {
