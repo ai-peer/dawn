@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f972f0cb_2a630576",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-25T02:48:06Z",
+      "side": 1,
+      "message": "Thanks for the idea, done!",
+      "parentUuid": "5e48eb2e_dd687721",
+      "range": {
+        "startLine": 201,
+        "startChar": 84,
+        "endLine": 201,
+        "endChar": 95
+      },
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36853b7d_9c51d22d",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
@@ -191,6 +215,24 @@
       "side": 1,
       "message": "Still this is a pretty unfortunate precedent to set. I\u0027m confident there is a different, better solution that we can find.",
       "parentUuid": "88e9ef00_d32b2d4e",
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66dae51e_e6fd2339",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-25T02:48:06Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "a7949f5f_756e1c3d",
       "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
