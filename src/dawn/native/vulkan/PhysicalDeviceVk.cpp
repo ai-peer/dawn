@@ -273,6 +273,25 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         EnableFeature(Feature::Float32Filterable);
     }
 
+    if (external_semaphore::CheckSupport(mDeviceInfo, mVkPhysicalDevice,
+                                         mVulkanInstance->GetFunctions(),
+                                         VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT)) {
+        EnableFeature(Feature::SyncVkSemaphoreSyncFD);
+    }
+    if (external_semaphore::CheckSupport(mDeviceInfo, mVkPhysicalDevice,
+                                         mVulkanInstance->GetFunctions(),
+                                         VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR)) {
+        EnableFeature(Feature::SyncVkSemaphoreOpaqueFD);
+    }
+
+#if DAWN_PLATFORM_IS(FUCHSIA)
+    if (external_semaphore::CheckSupport(
+            mDeviceInfo, mVkPhysicalDevice, mVulkanInstance->GetFunctions(),
+            VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA)) {
+        EnableFeature(Feature::SyncVkSemaphoreZirconHandle);
+    }
+#endif
+
 #if DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
     // TODO(chromium:1258986): Precisely enable the feature by querying the device's format
     // features.

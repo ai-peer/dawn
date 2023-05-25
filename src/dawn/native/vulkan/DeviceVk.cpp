@@ -49,9 +49,18 @@ namespace dawn::native::vulkan {
 
 namespace {
 
+constexpr std::array<wgpu::DawnVkSemaphoreType, kEnumCount<wgpu::DawnVkSemaphoreType>>
+    kSemaphoreTypes = {
+        wgpu::DawnVkSemaphoreType::OpaqueFD,
+        wgpu::DawnVkSemaphoreType::SyncFD,
+        wgpu::DawnVkSemaphoreType::ZirconHandle,
+};
+
 // Destroy the semaphore when out of scope.
-class ScopedSignalSemaphore : public NonMovable {
+class ScopedSignalSemaphore : public NonCopyable {
   public:
+    ScopedSignalSemaphore() = default;
+
     ScopedSignalSemaphore(Device* device, VkSemaphore semaphore)
         : mDevice(device), mSemaphore(semaphore) {}
     ~ScopedSignalSemaphore() {
@@ -59,6 +68,9 @@ class ScopedSignalSemaphore : public NonMovable {
             mDevice->GetFencedDeleter()->DeleteWhenUnused(mSemaphore);
         }
     }
+
+    ScopedSignalSemaphore(ScopedSignalSemaphore&&) = default;
+    ScopedSignalSemaphore& operator=(ScopedSignalSemaphore&&) = default;
 
     VkSemaphore Get() { return mSemaphore; }
     VkSemaphore* InitializeInto() { return &mSemaphore; }
@@ -314,20 +326,28 @@ MaybeError Device::SubmitPendingCommands() {
             fn, &mRecordingContext, mRecordingContext.mappableBuffersForEagerTransition);
     }
 
-    ScopedSignalSemaphore externalTextureSemaphore(this, VK_NULL_HANDLE);
-    if (mRecordingContext.externalTexturesForEagerTransition.size() > 0) {
-        // Create an external semaphore for all external textures that have been used in the pending
-        // submit.
-        DAWN_TRY_ASSIGN(*externalTextureSemaphore.InitializeInto(),
-                        mExternalSemaphoreService->CreateExportableSemaphore());
+    // Create an external semaphore for all external textures that have been used in the pending
+    // submit.
+    ityp::array<wgpu::DawnVkSemaphoreType, ScopedSignalSemaphore,
+                kEnumCount<wgpu::DawnVkSemaphoreType>>
+        externalTextureSemaphores;
+    for (const auto& type : kSemaphoreTypes) {
+        if (mRecordingContext.externalTexturesForEagerTransition[type].size() > 0) {
+            DAWN_TRY_ASSIGN(*externalTextureSemaphores[type].InitializeInto(),
+                            mExternalSemaphoreService->CreateExportableSemaphore(type));
+            mRecordingContext.signalSemaphores.push_back(externalTextureSemaphores[type].Get());
+        }
     }
 
     // Transition eagerly all used external textures for export.
-    for (auto* texture : mRecordingContext.externalTexturesForEagerTransition) {
-        texture->TransitionEagerlyForExport(&mRecordingContext);
-        std::vector<VkSemaphore> waitRequirements = texture->AcquireWaitRequirements();
-        mRecordingContext.waitSemaphores.insert(mRecordingContext.waitSemaphores.end(),
-                                                waitRequirements.begin(), waitRequirements.end());
+    for (const auto& set : mRecordingContext.externalTexturesForEagerTransition) {
+        for (auto* texture : set) {
+            texture->TransitionEagerlyForExport(&mRecordingContext);
+            std::vector<VkSemaphore> waitRequirements = texture->AcquireWaitRequirements();
+            mRecordingContext.waitSemaphores.insert(mRecordingContext.waitSemaphores.end(),
+                                                    waitRequirements.begin(),
+                                                    waitRequirements.end());
+        }
     }
 
     DAWN_TRY(
@@ -335,10 +355,6 @@ MaybeError Device::SubmitPendingCommands() {
 
     std::vector<VkPipelineStageFlags> dstStageMasks(mRecordingContext.waitSemaphores.size(),
                                                     VK_PIPELINE_STAGE_ALL_COMMANDS_BIT);
-
-    if (externalTextureSemaphore.Get() != VK_NULL_HANDLE) {
-        mRecordingContext.signalSemaphores.push_back(externalTextureSemaphore.Get());
-    }
 
     VkSubmitInfo submitInfo;
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
@@ -376,21 +392,24 @@ MaybeError Device::SubmitPendingCommands() {
         mCommandsInFlight.Enqueue(submittedCommands, lastSubmittedSerial);
     }
 
-    if (mRecordingContext.externalTexturesForEagerTransition.size() > 0) {
-        // Export the signal semaphore.
-        ExternalSemaphoreHandle semaphoreHandle;
-        DAWN_TRY_ASSIGN(semaphoreHandle,
-                        mExternalSemaphoreService->ExportSemaphore(externalTextureSemaphore.Get()));
+    for (const auto& type : kSemaphoreTypes) {
+        const auto& set = mRecordingContext.externalTexturesForEagerTransition[type];
+        if (set.size() > 0) {
+            // Export the signal semaphore.
+            ExternalSemaphoreHandle semaphoreHandle;
+            DAWN_TRY_ASSIGN(semaphoreHandle, mExternalSemaphoreService->ExportSemaphore(
+                                                 type, externalTextureSemaphores[type].Get()));
 
-        // Update all external textures, eagerly transitioned in the submit, with the exported
-        // handle, and the duplicated handles.
-        bool first = true;
-        for (auto* texture : mRecordingContext.externalTexturesForEagerTransition) {
-            ExternalSemaphoreHandle handle =
-                (first ? semaphoreHandle
-                       : mExternalSemaphoreService->DuplicateHandle(semaphoreHandle));
-            first = false;
-            texture->UpdateExternalSemaphoreHandle(handle);
+            // Update all external textures, eagerly transitioned in the submit, with the exported
+            // handle, and the duplicated handles.
+            bool first = true;
+            for (auto* texture : set) {
+                ExternalSemaphoreHandle handle =
+                    (first ? semaphoreHandle
+                           : mExternalSemaphoreService->DuplicateHandle(type, semaphoreHandle));
+                first = false;
+                texture->UpdateExternalSemaphoreHandle(type, handle);
+            }
         }
     }
 
@@ -869,7 +888,8 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
     // Import semaphores we have to wait on before using the texture
     for (const ExternalSemaphoreHandle& handle : waitHandles) {
         VkSemaphore semaphore = VK_NULL_HANDLE;
-        DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
+        DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(
+                                       FromAPI(descriptor->semaphoreType), handle));
         outWaitSemaphores->push_back(semaphore);
     }
 
@@ -906,16 +926,8 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
     const std::vector<ExternalSemaphoreHandle>& waitHandles) {
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
-    // Initial validation
-    if (ConsumedError(ValidateIsAlive())) {
-        return nullptr;
-    }
-    if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor))) {
-        return nullptr;
-    }
-    if (ConsumedError(ValidateVulkanImageCanBeWrapped(this, textureDescriptor),
-                      "validating that a Vulkan image can be wrapped with %s.",
-                      textureDescriptor)) {
+    if (ConsumedError(ValidateCreateTextureWrappingVulkanImage(this, descriptor),
+                      "calling %s.CreateTextureWrappingVulkanImage", this)) {
         return nullptr;
     }
 

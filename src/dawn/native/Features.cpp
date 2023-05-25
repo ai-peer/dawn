@@ -167,6 +167,12 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::TransientAttachments;
         case wgpu::FeatureName::Float32Filterable:
             return Feature::Float32Filterable;
+        case wgpu::FeatureName::DawnSyncVkSemaphoreOpaqueFD:
+            return Feature::SyncVkSemaphoreOpaqueFD;
+        case wgpu::FeatureName::DawnSyncVkSemaphoreSyncFD:
+            return Feature::SyncVkSemaphoreSyncFD;
+        case wgpu::FeatureName::DawnSyncVkSemaphoreZirconHandle:
+            return Feature::SyncVkSemaphoreZirconHandle;
     }
     return Feature::InvalidEnum;
 }
@@ -213,6 +219,13 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::TransientAttachments;
         case Feature::Float32Filterable:
             return wgpu::FeatureName::Float32Filterable;
+
+        case Feature::SyncVkSemaphoreOpaqueFD:
+            return wgpu::FeatureName::DawnSyncVkSemaphoreOpaqueFD;
+        case Feature::SyncVkSemaphoreSyncFD:
+            return wgpu::FeatureName::DawnSyncVkSemaphoreSyncFD;
+        case Feature::SyncVkSemaphoreZirconHandle:
+            return wgpu::FeatureName::DawnSyncVkSemaphoreZirconHandle;
 
         case Feature::EnumCount:
             break;

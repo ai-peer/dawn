@@ -17,6 +17,7 @@
 
 #include <memory>
 
+#include "dawn/common/ityp_array.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/vulkan/ExternalHandle.h"
 
@@ -42,26 +43,34 @@ class Service {
     static bool CheckSupport(const VulkanDeviceInfo& deviceInfo,
                              VkPhysicalDevice physicalDevice,
                              const VulkanFunctions& fn);
-    void CloseHandle(ExternalSemaphoreHandle handle);
+    void CloseHandle(wgpu::DawnVkSemaphoreType type, ExternalSemaphoreHandle handle);
 
     // True if the device reports it supports this feature
     bool Supported();
 
+    // Check if the service supports semaphores of type `type`.
+    bool SupportsType(wgpu::DawnVkSemaphoreType type) const;
+
     // Given an external handle, import it into a VkSemaphore
-    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle);
+    ResultOrError<VkSemaphore> ImportSemaphore(wgpu::DawnVkSemaphoreType type,
+                                               ExternalSemaphoreHandle handle);
 
     // Create a VkSemaphore that is exportable into an external handle later
-    ResultOrError<VkSemaphore> CreateExportableSemaphore();
+    ResultOrError<VkSemaphore> CreateExportableSemaphore(wgpu::DawnVkSemaphoreType type);
 
     // Export a VkSemaphore into an external handle
-    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore);
+    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(wgpu::DawnVkSemaphoreType type,
+                                                           VkSemaphore semaphore);
 
     // Duplicate a new external handle from the given one.
-    ExternalSemaphoreHandle DuplicateHandle(ExternalSemaphoreHandle handle);
+    ExternalSemaphoreHandle DuplicateHandle(wgpu::DawnVkSemaphoreType type,
+                                            ExternalSemaphoreHandle handle);
 
   private:
-    // Linux, ChromeOS and Android use FD semaphore and Fuchia uses ZirconHandle.
-    std::unique_ptr<ServiceImplementation> mServiceImpl;
+    ityp::array<wgpu::DawnVkSemaphoreType,
+                std::unique_ptr<ServiceImplementation>,
+                kEnumCount<wgpu::DawnVkSemaphoreType>>
+        mServiceImpls;
 };
 
 }  // namespace dawn::native::vulkan::external_semaphore

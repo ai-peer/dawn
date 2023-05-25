@@ -60,6 +60,12 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorVk : ExternalImageDescriptor {
     // allocation.
     NeedsDedicatedAllocation dedicatedAllocation = NeedsDedicatedAllocation::Detect;
 
+    // The underlying type of the `waitFDs`. All must be the same type.
+    // TODO(dawn:1838): Remove the default when Chromium passes it explicitly.
+    WGPUDawnVkSemaphoreType semaphoreType = static_cast<WGPUDawnVkSemaphoreType>(-1);
+    // Semaphore handles which will be waited on before access.
+    std::vector<int> waitFDs;
+
   protected:
     using ExternalImageDescriptor::ExternalImageDescriptor;
 };
@@ -84,8 +90,7 @@ struct ExternalImageExportInfoVk : ExternalImageExportInfo {
 // caller can assume the FD is always consumed.
 struct DAWN_NATIVE_EXPORT ExternalImageDescriptorFD : ExternalImageDescriptorVk {
   public:
-    int memoryFD;              // A file descriptor from an export of the memory of the image
-    std::vector<int> waitFDs;  // File descriptors of semaphores which will be waited on
+    int memoryFD;  // A file descriptor from an export of the memory of the image
 
   protected:
     using ExternalImageDescriptorVk::ExternalImageDescriptorVk;
@@ -140,7 +145,6 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorAHardwareBuffer : ExternalImage
     ExternalImageDescriptorAHardwareBuffer();
 
     struct AHardwareBuffer* handle;  // The AHardwareBuffer which contains the memory of the image
-    std::vector<int> waitFDs;        // File descriptors of semaphores which will be waited on
 
   protected:
     using ExternalImageDescriptorVk::ExternalImageDescriptorVk;

@@ -756,26 +756,22 @@ source_set("sources") {
       "vulkan/external_semaphore/SemaphoreService.h",
       "vulkan/external_semaphore/SemaphoreServiceImplementation.cpp",
       "vulkan/external_semaphore/SemaphoreServiceImplementation.h",
+      "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+      "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h",
     ]
 
-    if (is_android || is_linux || is_chromeos) {
+    if (is_android) {
       sources += [
-        "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
-        "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h",
+        "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.cpp",
+        "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.h",
       ]
-      if (is_android) {
-        sources += [
-          "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.cpp",
-          "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.h",
-        ]
-      } else if (is_linux || is_chromeos) {
-        sources += [
-          "vulkan/external_memory/MemoryServiceImplementationDmaBuf.cpp",
-          "vulkan/external_memory/MemoryServiceImplementationDmaBuf.h",
-          "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.cpp",
-          "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.h",
-        ]
-      }
+    } else if (is_linux || is_chromeos) {
+      sources += [
+        "vulkan/external_memory/MemoryServiceImplementationDmaBuf.cpp",
+        "vulkan/external_memory/MemoryServiceImplementationDmaBuf.h",
+        "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.cpp",
+        "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.h",
+      ]
     } else if (is_fuchsia) {
       sources += [
         "vulkan/external_memory/MemoryServiceImplementationZicronHandle.cpp",
