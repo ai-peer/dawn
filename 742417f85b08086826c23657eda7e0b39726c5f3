@@ -16,6 +16,57 @@
       "message": "PTAL",
       "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec5a91a_6eabeccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-25T13:42:12Z",
+      "side": 1,
+      "message": "I think we need to handle array layers in addition to the mip level.",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc9312ad_8f184fbc",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-25T13:42:12Z",
+      "side": 1,
+      "message": "What about the layerCount? Ditto for RTV. I wonder if we should have a SubresourceIndex abstraction eventually. (but for multi-view maybe we\u0027ll need to support arrayLayerCount !\u003d 1 for RTV?)",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c322b2d_49857d5f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-25T13:42:12Z",
+      "side": 1,
+      "message": "What if these resources have multiple array layers?",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
