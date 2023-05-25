@@ -52,6 +52,24 @@
       "parentUuid": "959c2b84_e6bc64fc",
       "revId": "0dac57bb5fa917018ae0f658062ce0158381974f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "711311c9_26256b5a",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T12:01:57Z",
+      "side": 1,
+      "message": "Done, although this has the side effect that `unused_entry_point` could get a suffix.",
+      "parentUuid": "db126be9_943a7b4b",
+      "revId": "0dac57bb5fa917018ae0f658062ce0158381974f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
