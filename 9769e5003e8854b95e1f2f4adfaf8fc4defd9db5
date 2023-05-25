@@ -33,6 +33,24 @@
       "message": "why was this wrong?\noriginal was also \"clang_format\"\nhttps://dawn-review.googlesource.com/c/dawn/+/134320",
       "revId": "9769e5003e8854b95e1f2f4adfaf8fc4defd9db5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57d7006_e6f29b22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-25T21:47:31Z",
+      "side": 1,
+      "message": "The new search path uses \"clang-format\":\nhttps://source.chromium.org/chromium/chromium/tools/depot_tools/+/main:clang_format.py;l\u003d56?q\u003dFindClangFormatScriptInChromiumTree\u0026ss\u003dchromium%2Fchromium%2Ftools%2Fdepot_tools\n\nThat\u0027s also the path documented in go/clang-format-with-submodules",
+      "parentUuid": "60d77323_91eaacce",
+      "revId": "9769e5003e8854b95e1f2f4adfaf8fc4defd9db5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
