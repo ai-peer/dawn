@@ -109,13 +109,13 @@ struct Options {
     std::optional<tint::sem::BindingPoint> hlsl_root_constant_binding_point;
 
 #if TINT_BUILD_IR
-    bool dump_ir = false;
-    bool dump_ir_graph = false;
+    bool emit_ir = false;
+    bool emit_ir_graph = false;
     bool use_ir = false;
 #endif  // TINT_BUILD_IR
 
 #if TINT_BUILD_SYNTAX_TREE_WRITER
-    bool dump_syntax_tree = false;
+    bool emit_syntax_tree = false;
 #endif  // TINB_BUILD_SYNTAX_TREE_WRITER
 };
 
@@ -141,7 +141,7 @@ ${transforms} --parse-only              -- Stop after parsing the input
                                inserting a module-scope directive to suppress any uniformity
                                violations that may be produced.
   --disable-workgroup-init  -- Disable workgroup memory zero initialization.
-  --dump-inspector-bindings -- Dump reflection data about bindins to stdout.
+  --emit-inspector-bindings -- Dump reflection data about bindins to stdout.
   -h                        -- This help text
   --hlsl-root-constant-binding-point <group>,<binding>  -- Binding point for root constant.
                                Specify the binding point for generated uniform buffer
@@ -335,7 +335,7 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
 #endif
         } else if (arg == "--disable-workgroup-init") {
             opts->disable_workgroup_init = true;
-        } else if (arg == "--dump-inspector-bindings") {
+        } else if (arg == "--emit-inspector-bindings") {
             opts->dump_inspector_bindings = true;
         } else if (arg == "--validate") {
             opts->validate = true;
@@ -372,16 +372,16 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
             }
             opts->dxc_path = args[i];
 #if TINT_BUILD_IR
-        } else if (arg == "--dump-ir") {
-            opts->dump_ir = true;
-        } else if (arg == "--dump-ir-graph") {
-            opts->dump_ir_graph = true;
+        } else if (arg == "--emit-ir") {
+            opts->emit_ir = true;
+        } else if (arg == "--emit-ir-graph") {
+            opts->emit_ir_graph = true;
         } else if (arg == "--use-ir") {
             opts->use_ir = true;
 #endif  // TINT_BUILD_IR
 #if TINT_BUILD_SYNTAX_TREE_WRITER
-        } else if (arg == "--dump-ast") {
-            opts->dump_syntax_tree = true;
+        } else if (arg == "--emit-ast") {
+            opts->emit_syntax_tree = true;
 #endif  // TINT_BUILD_SYNTAX_TREE_WRITER
         } else if (arg == "--xcrun") {
             ++i;
@@ -1015,12 +1015,12 @@ int main(int argc, const char** argv) {
         std::string usage = tint::utils::ReplaceAll(kUsage, "${transforms}", transform_names());
 #if TINT_BUILD_IR
         usage +=
-            "  --dump-ir                 -- Writes the IR to stdout\n"
-            "  --dump-ir-graph           -- Writes the IR graph to 'tint.dot' as a dot graph\n"
+            "  --emit-ir                 -- Writes the IR to stdout\n"
+            "  --emit-ir-graph           -- Writes the IR graph to 'tint.dot' as a dot graph\n"
             "  --use-ir                  -- Use the IR for writers and transforms when possible\n";
 #endif  // TINT_BUILD_IR
 #if TINT_BUILD_SYNTAX_TREE_WRITER
-        usage += "  --dump-ast                -- Writes the AST to stdout\n";
+        usage += "  --emit-ast                -- Writes the AST to stdout\n";
 #endif  // TINT_BUILD_SYNTAX_TREE_WRITER
 
         std::cout << usage << std::endl;
@@ -1060,7 +1060,7 @@ int main(int argc, const char** argv) {
     }
 
 #if TINT_BUILD_SYNTAX_TREE_WRITER
-    if (options.dump_syntax_tree) {
+    if (options.emit_syntax_tree) {
         tint::writer::syntax_tree::Options gen_options;
         auto result = tint::writer::syntax_tree::Generate(program.get(), gen_options);
         if (!result.success) {
@@ -1072,17 +1072,17 @@ int main(int argc, const char** argv) {
 #endif  // TINT_BUILD_SYNTAX_TREE_WRITER
 
 #if TINT_BUILD_IR
-    if (options.dump_ir || options.dump_ir_graph) {
+    if (options.emit_ir || options.emit_ir_graph) {
         auto result = tint::ir::FromProgram(program.get());
         if (!result) {
             std::cerr << "Failed to build IR from program: " << result.Failure() << std::endl;
         } else {
             auto mod = result.Move();
-            if (options.dump_ir) {
+            if (options.emit_ir) {
                 tint::ir::Disassembler d(mod);
                 std::cout << d.Disassemble() << std::endl;
             }
-            if (options.dump_ir_graph) {
+            if (options.emit_ir_graph) {
                 auto graph = tint::ir::Debug::AsDotGraph(&mod);
                 WriteFile("tint.dot", "w", graph);
             }
