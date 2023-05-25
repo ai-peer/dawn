@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b53dda53_d4529a99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-25T17:42:56Z",
+      "side": 1,
+      "message": "PTAL! This is the last piece needed to allow Chrome to fully match the WebGPU spec when it comes to requestDevice behavior.",
+      "revId": "f6368d9765a0994ea409ec88449787d9b82370aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
