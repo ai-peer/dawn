@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5edcb1d_8a01f0ad",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-25T09:59:49Z",
+      "side": 1,
+      "message": "We might introduce it back for the CommandRecordingContextBase work, but that seems fine for now.",
+      "parentUuid": "fdb22f79_b6e5ce8c",
+      "range": {
+        "startLine": 201,
+        "startChar": 84,
+        "endLine": 201,
+        "endChar": 95
+      },
+      "revId": "171767c004e1835ffb4f2cbb9008d1f2317509e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36853b7d_9c51d22d",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
