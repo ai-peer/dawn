@@ -145,7 +145,6 @@ TEST_F(IRToProgramRoundtripTest, If_Return) {
 fn f() {
   var cond : bool = true;
   if (cond) {
-    return;
   }
 }
 )");
@@ -351,7 +350,6 @@ fn f() {
         case 0i: {
         }
         case 1i, default: {
-          return;
         }
       }
     }
