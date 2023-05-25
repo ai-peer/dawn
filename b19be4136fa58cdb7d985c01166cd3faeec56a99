@@ -50,6 +50,24 @@
       "message": "Is the `return` really a \"user\" of the function? This feels slightly weird to me, but maybe it\u0027s fine.",
       "revId": "b19be4136fa58cdb7d985c01166cd3faeec56a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d9c3d9_2944dfeb",
+        "filename": "src/tint/ir/return.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:51:58Z",
+      "side": 1,
+      "message": "Possibly not? Seemed like an easy way to find all returns. The usages of a func will be either UserCall or Return.",
+      "parentUuid": "c9e455f8_9197cf0b",
+      "revId": "b19be4136fa58cdb7d985c01166cd3faeec56a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
