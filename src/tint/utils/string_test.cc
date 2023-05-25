@@ -14,7 +14,7 @@
 
 #include "src/tint/utils/string.h"
 
-#include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "src/tint/utils/string_stream.h"
 
 namespace tint::utils {
@@ -151,6 +151,21 @@ TEST(StringTest, TrimSpace) {
     EXPECT_EQ(TrimSpace(" \t hello world\v\f"), "hello world");
     EXPECT_EQ(TrimSpace("hello \t world"), "hello \t world");
     EXPECT_EQ(TrimSpace(""), "");
+}
+
+TEST(StringTest, Split) {
+    EXPECT_THAT(Split("", ","), testing::ElementsAre(""));
+    EXPECT_THAT(Split("cat", ","), testing::ElementsAre("cat"));
+    EXPECT_THAT(Split("cat,", ","), testing::ElementsAre("cat", ""));
+    EXPECT_THAT(Split(",cat", ","), testing::ElementsAre("", "cat"));
+    EXPECT_THAT(Split("cat,dog,fish", ","), testing::ElementsAre("cat", "dog", "fish"));
+    EXPECT_THAT(Split("catdogfish", "dog"), testing::ElementsAre("cat", "fish"));
+}
+
+TEST(StringTest, Join) {
+    EXPECT_EQ(Join(utils::Vector<int, 1>{}, ","), "");
+    EXPECT_EQ(Join(utils::Vector{"cat"}, ","), "cat");
+    EXPECT_EQ(Join(utils::Vector{"cat", "dog"}, ","), "cat,dog");
 }
 
 }  // namespace

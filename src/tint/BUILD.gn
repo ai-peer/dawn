@@ -237,6 +237,8 @@ libtint_source_set("libtint_utils_src") {
     "utils/bump_allocator.h",
     "utils/castable.cc",
     "utils/castable.h",
+    "utils/cli.cc",
+    "utils/cli.h",
     "utils/compiler_macros.h",
     "utils/concat.h",
     "utils/crc32.h",
@@ -251,6 +253,8 @@ libtint_source_set("libtint_utils_src") {
     "utils/hashset.h",
     "utils/map.h",
     "utils/math.h",
+    "utils/parse_num.cc",
+    "utils/parse_num.h",
     "utils/predicates.h",
     "utils/scoped_assignment.h",
     "utils/slice.h",
@@ -273,6 +277,8 @@ libtint_source_set("libtint_utils_src") {
   } else {
     sources += [ "diagnostic/printer_other.cc" ]
   }
+
+  deps = [ ":abseil" ]
 }
 
 libtint_source_set("libtint_clone_context_hdrs") {
@@ -1064,7 +1070,6 @@ libtint_source_set("libtint_wgsl_reader_src") {
   ]
 
   deps = [
-    ":abseil",
     ":libtint_ast_src",
     ":libtint_builtins_src",
     ":libtint_program_src",
@@ -1809,6 +1814,7 @@ if (tint_build_unittests) {
       "utils/block_allocator_test.cc",
       "utils/bump_allocator_test.cc",
       "utils/castable_test.cc",
+      "utils/cli_test.cc",
       "utils/crc32_test.cc",
       "utils/defer_test.cc",
       "utils/enum_set_test.cc",
@@ -1833,7 +1839,7 @@ if (tint_build_unittests) {
       "utils/unique_vector_test.cc",
       "utils/vector_test.cc",
     ]
-    deps = [ ":libtint_utils_src" ]
+    deps = [ ":libtint_utils_src", ]
   }
 
   tint_unittests_source_set("tint_unittests_writer_src") {
