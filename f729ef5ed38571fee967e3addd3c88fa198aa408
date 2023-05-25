@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afbb7349_ac6fc971",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T13:58:58Z",
+      "side": 1,
+      "message": "Kokoro emailed it was succesfull, but never updated the CL.",
+      "revId": "f729ef5ed38571fee967e3addd3c88fa198aa408",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
