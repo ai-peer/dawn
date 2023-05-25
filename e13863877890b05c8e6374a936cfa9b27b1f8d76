@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27bafd08_89bb8709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:58:59Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae4b35c8_6606f076",
@@ -35,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49861ad5_5cd07292",
+        "filename": "src/tint/utils/parse_num.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:58:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ae4b35c8_6606f076",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2ecf113_ba62c541",
@@ -48,6 +83,24 @@
       "writtenOn": "2023-05-25T23:37:29Z",
       "side": 1,
       "message": "Why have all these when we only need ParseDouble?",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c040778_da92810b",
+        "filename": "src/tint/utils/parse_num.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:58:59Z",
+      "side": 1,
+      "message": "Discussed offline, used in the args parsing CL.",
+      "parentUuid": "f2ecf113_ba62c541",
       "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
