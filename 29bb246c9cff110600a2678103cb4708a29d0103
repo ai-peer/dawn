@@ -56,6 +56,30 @@
       },
       "revId": "29bb246c9cff110600a2678103cb4708a29d0103",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae94eea9_83274f80",
+        "filename": "src/dawn/wire/client/SwapChain.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-25T15:20:42Z",
+      "side": 1,
+      "message": "Done, went with a SetChildLabel method to avoid lifetime problems. PTAL again!",
+      "parentUuid": "09a470ea_b9d9d8e2",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 28
+      },
+      "revId": "29bb246c9cff110600a2678103cb4708a29d0103",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
