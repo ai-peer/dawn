@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e88a5fa_2afcbf0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-05-25T02:40:15Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am submitting this CL.",
+      "revId": "2519dd0280f00c21f2a5dbdb7a3b2affc980b1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45a4507d_09587da3",
@@ -48,6 +65,30 @@
       "writtenOn": "2023-05-24T19:03:20Z",
       "side": 1,
       "message": "I think we can actually annotated it as deprecated.\n\n```suggestion\nusing AdapterDiscoveryOptions [[deprecated(\"Use PhysicalDeviceDiscoveryOptions instead\")]] \u003d PhysicalDeviceDiscoveryOptions;\n```\n\nalthough, we may need to add that annotation after updating Chromium to avoid breaking the roll of Dawn-\u003eChromium.\n\nditto for the other backends",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "2519dd0280f00c21f2a5dbdb7a3b2affc980b1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61900e11_ef90aef6",
+        "filename": "include/dawn/native/D3D11Backend.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-05-25T02:40:15Z",
+      "side": 1,
+      "message": "Get it, left this comment as unresolved and will add the annotation after updating Chromium.",
+      "parentUuid": "45a4507d_09587da3",
       "range": {
         "startLine": 35,
         "startChar": 0,
