@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f3c5cc_f6615b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-25T15:57:52Z",
+      "side": 1,
+      "message": "Skipping Kokoro for trivial change.",
+      "revId": "3f51c16d50452649b16d9d72767c1333cc2ebd1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
