@@ -465,7 +465,8 @@ MaybeError Texture::Write(CommandRecordingContext* commandContext,
                           uint32_t rowsPerImage) {
     ASSERT(size.width != 0 && size.height != 0 && size.depthOrArrayLayers != 0);
 
-    if (GetFormat().HasDepth() && GetFormat().HasStencil()) {
+    if (d3d::IsDepthStencil(d3d::DXGITextureFormat(GetFormat().format))) {
+        // TODO(dawn:1848): support depth-stencil texture write
         return DAWN_UNIMPLEMENTED_ERROR("Write combined depth/stencil textures");
     }
 
@@ -523,6 +524,22 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
 
     ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
     const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(subresources.aspects).block;
+    bool hasStencil = GetFormat().HasStencil();
+    uint32_t depthOrStencilOffset = 0u;
+    uint32_t depthOrStencilStride = 0u;
+    switch (GetFormat().format) {
+        case wgpu::TextureFormat::Stencil8:
+            depthOrStencilOffset = 3u;
+            depthOrStencilStride = 4u;
+            break;
+        case wgpu::TextureFormat::Depth24PlusStencil8:
+        case wgpu::TextureFormat::Depth32FloatStencil8:
+            depthOrStencilStride = 8u;
+            depthOrStencilOffset = subresources.aspects == Aspect::Stencil ? 4u : 0u;
+            break;
+        default:;
+    }
+    uint32_t bytesPerRow = blockInfo.byteSize * size.width;
 
     if (GetDimension() == wgpu::TextureDimension::e2D) {
         for (uint32_t layer = 0; layer < subresources.layerCount; ++layer) {
@@ -535,7 +552,6 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
                                   "D3D11 map staging texture"));
 
             uint8_t* pSrcData = static_cast<uint8_t*>(mappedResource.pData);
-            uint32_t bytesPerRow = blockInfo.byteSize * size.width;
             uint64_t dstOffset = dstBytesPerRow * dstRowsPerImage * layer;
             if (dstBytesPerRow == bytesPerRow && mappedResource.RowPitch == bytesPerRow) {
                 // If there is no padding in the rows, we can upload the whole image
@@ -544,7 +560,25 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
             } else {
                 // Otherwise, we need to read each row separately.
                 for (uint32_t y = 0; y < size.height; ++y) {
-                    DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow));
+                    uint8_t* srcRow = pSrcData;
+                    // Filter the depth/stencil data out.
+                    std::vector<uint8_t> depthOrStencilData(bytesPerRow);
+                    if (hasStencil) {
+                        uint8_t* src = srcRow;
+                        uint8_t* dst = depthOrStencilData.data();
+                        // Filtered data to callback
+                        srcRow = dst;
+
+                        src += depthOrStencilOffset;
+                        for (uint32_t w = 0; w < size.width;
+                             ++w, src += (depthOrStencilStride - blockInfo.byteSize)) {
+                            for (uint32_t byte = 0; byte < blockInfo.byteSize;
+                                 ++byte, ++dst, ++src) {
+                                *dst = *src;
+                            }
+                        }
+                    }
+                    DAWN_TRY(callback(srcRow, dstOffset, bytesPerRow));
                     dstOffset += dstBytesPerRow;
                     pSrcData += mappedResource.RowPitch;
                 }
@@ -563,7 +597,6 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
         d3d11DeviceContext1->Map(GetD3D11Resource(), 0, D3D11_MAP_READ, 0, &mappedResource),
         "D3D11 map staging texture"));
 
-    uint32_t bytesPerRow = blockInfo.byteSize * size.width;
     for (uint32_t z = 0; z < size.depthOrArrayLayers; ++z) {
         uint64_t dstOffset = dstBytesPerRow * dstRowsPerImage * z;
         uint8_t* pSrcData =
