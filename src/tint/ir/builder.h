@@ -299,10 +299,10 @@ class Builder {
 
     /// Creates a user function call instruction
     /// @param type the return type of the call
-    /// @param name the name of the function being called
+    /// @param func the function being called
     /// @param args the call arguments
     /// @returns the instruction
-    ir::UserCall* UserCall(const type::Type* type, Symbol name, utils::VectorRef<Value*> args);
+    ir::UserCall* UserCall(const type::Type* type, Function* func, utils::VectorRef<Value*> args);
 
     /// Creates a value conversion instruction
     /// @param to the type converted to
