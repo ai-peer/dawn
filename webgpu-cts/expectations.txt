@@ -66,7 +66,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-05-22 06:18:35PM
+# Last rolled: 2023-05-25 12:46:46AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -456,7 +456,7 @@ crbug.com/1421045 [ nvidia-0x2184 ubuntu ] webgpu:api,validation,capability_chec
 # Flaky multisampled sample_mask tests on Mac AMD
 # KEEP
 ################################################################################
-crbug.com/dawn/1843 [ mac amd-0x67ef ] webgpu:api,operation,render_pipeline,sample_mask:fragment_output_mask:interpolated=true;sampleCount=4;* [ RetryOnFailure ]
+crbug.com/dawn/1843 [ amd-0x67ef mac ] webgpu:api,operation,render_pipeline,sample_mask:fragment_output_mask:interpolated=true;sampleCount=4;* [ RetryOnFailure ]
 
 ################################################################################
 # GPUDeviceLostReason test needs to be updated for spec change
