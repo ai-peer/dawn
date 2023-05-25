@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50eda183_902590fd",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-25T21:41:19Z",
+      "side": 1,
+      "message": "nit: `cond` ?",
+      "range": {
+        "startLine": 781,
+        "startChar": 13,
+        "endLine": 781,
+        "endChar": 16
+      },
+      "revId": "338ecf11e59a36dc8d28c2cb0da0bf69b40b5d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
