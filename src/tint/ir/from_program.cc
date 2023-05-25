@@ -590,7 +590,9 @@ class Impl {
                     EmitBlock(stmt->continuing);
                 }
                 // Branch back to the start node if the continue target didn't branch out already
-                BranchToIfNeeded(loop_inst->Start());
+                if (NeedBranch()) {
+                    SetBranch(builder_.NextIteration(loop_inst));
+                }
             }
         }
 
@@ -608,7 +610,8 @@ class Impl {
         current_flow_block_->Instructions().Push(loop_inst);
 
         // Continue is always empty, just go back to the start
-        loop_inst->Continuing()->Instructions().Push(builder_.Branch(loop_inst->Start()));
+        current_flow_block_ = loop_inst->Continuing();
+        SetBranch(builder_.NextIteration(loop_inst));
 
         {
             ControlStackScope scope(this, loop_inst);
@@ -681,7 +684,7 @@ class Impl {
             if (stmt->continuing) {
                 current_flow_block_ = loop_inst->Continuing();
                 EmitStatement(stmt->continuing);
-                loop_inst->Continuing()->Instructions().Push(builder_.Branch(loop_inst->Start()));
+                SetBranch(builder_.NextIteration(loop_inst));
             }
         }
 
@@ -796,7 +799,7 @@ class Impl {
 
         // The `break-if` has to be the last item in the continuing block. The false branch of
         // the `break-if` will always take us back to the start of the loop.
-        BranchTo(loop->Start());
+        SetBranch(builder_.NextIteration(loop));
     }
 
     utils::Result<Value*> EmitExpression(const ast::Expression* expr) {

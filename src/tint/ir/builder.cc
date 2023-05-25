@@ -213,6 +213,10 @@ ir::Return* Builder::Return(Function* func, utils::VectorRef<Value*> args) {
     return ir.values.Create<ir::Return>(func, args);
 }
 
+ir::NextIteration* Builder::NextIteration(Loop* loop) {
+    return ir.values.Create<ir::NextIteration>(loop);
+}
+
 ir::Continue* Builder::Continue(Loop* loop) {
     return ir.values.Create<ir::Continue>(loop);
 }

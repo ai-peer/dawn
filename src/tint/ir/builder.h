@@ -33,6 +33,7 @@
 #include "src/tint/ir/load.h"
 #include "src/tint/ir/loop.h"
 #include "src/tint/ir/module.h"
+#include "src/tint/ir/next_iteration.h"
 #include "src/tint/ir/return.h"
 #include "src/tint/ir/root_terminator.h"
 #include "src/tint/ir/store.h"
@@ -336,6 +337,11 @@ class Builder {
     /// @param args the return arguments
     /// @returns the instruction
     ir::Return* Return(Function* func, utils::VectorRef<Value*> args = {});
+
+    /// Creates a next iteration instruction
+    /// @param loop the loop being iterated
+    /// @returns the instruction
+    ir::NextIteration* NextIteration(Loop* loop);
 
     /// Creates a continue instruction
     /// @param loop the loop being continued

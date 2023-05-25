@@ -758,6 +758,8 @@ if(${TINT_BUILD_IR})
     ir/loop.h
     ir/module.cc
     ir/module.h
+    ir/next_iteration.cc
+    ir/next_iteration.h
     ir/return.cc
     ir/return.h
     ir/root_terminator.cc

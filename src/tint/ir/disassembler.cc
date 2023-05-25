@@ -29,6 +29,7 @@
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/load.h"
 #include "src/tint/ir/loop.h"
+#include "src/tint/ir/next_iteration.h"
 #include "src/tint/ir/return.h"
 #include "src/tint/ir/root_terminator.h"
 #include "src/tint/ir/store.h"
@@ -414,6 +415,8 @@ void Disassembler::EmitBranch(const Branch* b) {
         out_ << "ret";
     } else if (auto* cont = b->As<ir::Continue>()) {
         out_ << "continue %b" << IdOf(cont->Loop()->Continuing());
+    } else if (auto* ni = b->As<ir::NextIteration>()) {
+        out_ << "next_iteration %b" << IdOf(ni->Loop()->Start());
     } else {
         out_ << "br %b" << IdOf(b->To());
         if (b->To()->Is<RootTerminator>()) {

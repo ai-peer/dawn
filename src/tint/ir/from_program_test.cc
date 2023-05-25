@@ -416,7 +416,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithContinue) {
 
       # Continuing block
       %b3 = block {
-        br %b2
+        next_iteration %b2
       }
 
     # Merge block
@@ -474,7 +474,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithContinuing_BreakIf) {
 
         # Merge block
         %b7 = block {
-          br %b2
+          next_iteration %b2
         }
 
 
@@ -524,7 +524,7 @@ TEST_F(IR_BuilderImplTest, Loop_Continuing_Body_Scope) {
 
         # Merge block
         %b7 = block {
-          br %b2
+          next_iteration %b2
         }
 
 
@@ -587,7 +587,7 @@ TEST_F(IR_BuilderImplTest, Loop_WithReturn) {
 
       # Continuing block
       %b3 = block {
-        br %b2
+        next_iteration %b2
       }
 
 
@@ -805,7 +805,7 @@ TEST_F(IR_BuilderImplTest, Loop_Nested) {
 
                   # Merge block
                   %b21 = block {
-                    br %b16
+                    next_iteration %b16
                   }
 
 
@@ -813,7 +813,7 @@ TEST_F(IR_BuilderImplTest, Loop_Nested) {
 
               # Merge block
               %b18 = block {
-                br %b5
+                next_iteration %b5
               }
 
 
@@ -848,7 +848,7 @@ TEST_F(IR_BuilderImplTest, Loop_Nested) {
 
       # Continuing block
       %b3 = block {
-        br %b2
+        next_iteration %b2
       }
 
     # Merge block
@@ -911,7 +911,7 @@ TEST_F(IR_BuilderImplTest, While) {
 
       # Continuing block
       %b3 = block {
-        br %b2
+        next_iteration %b2
       }
 
     # Merge block
@@ -973,7 +973,7 @@ TEST_F(IR_BuilderImplTest, While_Return) {
 
       # Continuing block
       %b3 = block {
-        br %b2
+        next_iteration %b2
       }
 
     # Merge block
