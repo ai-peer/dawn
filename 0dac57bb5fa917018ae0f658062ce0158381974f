@@ -34,6 +34,24 @@
       "parentUuid": "959c2b84_e6bc64fc",
       "revId": "0dac57bb5fa917018ae0f658062ce0158381974f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db126be9_943a7b4b",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-25T09:55:10Z",
+      "side": 1,
+      "message": "Agreed. It\u0027s not immediately obvious that the `Symbol name` is expected to the same namespace (`ProgramID`) as the ir module\u0027s `ProgramID`.\n\nPassing in a `Symbol` also gives the suggestion that it is **the symbol** that will be used (i.e. no collision renaming), but this isn\u0027t necessarily true.\n\nI\u0027d recommend either actually using the symbol as-is, or changing this method to take a `std::string_view`",
+      "parentUuid": "959c2b84_e6bc64fc",
+      "revId": "0dac57bb5fa917018ae0f658062ce0158381974f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
