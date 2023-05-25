@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84e92907_a91074af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:37:29Z",
+      "side": 1,
+      "message": "Having the wrapper makes sense, I\u0027m not sure I see why we need all the other overloads (given none of them are tested in any way?)",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae4b35c8_6606f076",
+        "filename": "src/tint/utils/parse_num.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:37:29Z",
+      "side": 1,
+      "message": "Having this which is never used and never tested seems like it\u0027s going to fall out of sync?",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2ecf113_ba62c541",
+        "filename": "src/tint/utils/parse_num.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:37:29Z",
+      "side": 1,
+      "message": "Why have all these when we only need ParseDouble?",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70cc7b1_efda6da9",
+        "filename": "src/tint/utils/parse_num.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-25T23:37:29Z",
+      "side": 1,
+      "message": "nit: uint32_t... or delete it as it\u0027s the same as uint32_t for us",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
