@@ -104,8 +104,8 @@ TEST_F(TransformManagerTest, IR_MutateInPlace) {
     manager.Run(&ir, {}, outputs);
 
     ASSERT_EQ(ir.functions.Length(), 2u);
-    EXPECT_EQ(ir.functions[0]->Name().Name(), "main");
-    EXPECT_EQ(ir.functions[1]->Name().Name(), "ir_func");
+    EXPECT_EQ(ir.NameOf(ir.functions[0]).Name(), "main");
+    EXPECT_EQ(ir.NameOf(ir.functions[1]).Name(), "ir_func");
 }
 
 TEST_F(TransformManagerTest, AST_MixedTransforms_AST_Before_IR) {
@@ -150,9 +150,9 @@ TEST_F(TransformManagerTest, IR_MixedTransforms_AST_Before_IR) {
 
     manager.Run(&ir, {}, outputs);
     ASSERT_EQ(ir.functions.Length(), 3u);
-    EXPECT_EQ(ir.functions[0]->Name().Name(), "ast_func");
-    EXPECT_EQ(ir.functions[1]->Name().Name(), "main");
-    EXPECT_EQ(ir.functions[2]->Name().Name(), "ir_func");
+    EXPECT_EQ(ir.NameOf(ir.functions[0]).Name(), "ast_func");
+    EXPECT_EQ(ir.NameOf(ir.functions[1]).Name(), "main");
+    EXPECT_EQ(ir.NameOf(ir.functions[2]).Name(), "ir_func");
 }
 
 TEST_F(TransformManagerTest, IR_MixedTransforms_IR_Before_AST) {
@@ -165,9 +165,9 @@ TEST_F(TransformManagerTest, IR_MixedTransforms_IR_Before_AST) {
 
     manager.Run(&ir, {}, outputs);
     ASSERT_EQ(ir.functions.Length(), 3u);
-    EXPECT_EQ(ir.functions[0]->Name().Name(), "ast_func");
-    EXPECT_EQ(ir.functions[1]->Name().Name(), "main");
-    EXPECT_EQ(ir.functions[2]->Name().Name(), "ir_func");
+    EXPECT_EQ(ir.NameOf(ir.functions[0]).Name(), "ast_func");
+    EXPECT_EQ(ir.NameOf(ir.functions[1]).Name(), "main");
+    EXPECT_EQ(ir.NameOf(ir.functions[2]).Name(), "ir_func");
 }
 #endif  // TINT_BUILD_IR
 
