@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0b12cf5_a9e12612",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-26T15:55:25Z",
+      "side": 1,
+      "message": "[Why don\u0027t we have both?](https://imageresizer.static9.net.au/DS5njXm8-6tdUIY0-3EjtcDRQeI\u003d/320x0/https%3A%2F%2Fprod.static9.net.au%2Ffs%2Fcd0a8684-9099-41c5-8b7a-5a03f9e01566)\n\nAdded support for aliases and added `--emit-*` aliases for the `--dump-*` flags.",
+      "parentUuid": "f3ca24f1_dc48144c",
+      "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a97e3061_0d8036d9",
         "filename": "src/tint/utils/cli.h",
         "patchSetId": 6
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-26T15:40:28Z",
       "side": 1,
       "message": "Nit: s/ShortName/Default/",
+      "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58fc14e2_4a805cd0",
+        "filename": "src/tint/utils/cli.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-26T15:55:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a97e3061_0d8036d9",
       "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
