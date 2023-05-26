@@ -22,4 +22,55 @@ FunctionParam::FunctionParam(const type::Type* ty) : type(ty) {}
 
 FunctionParam::~FunctionParam() = default;
 
+utils::StringStream& operator<<(utils::StringStream& out, FunctionParam::Attribute value) {
+    switch (value) {
+        case FunctionParam::Attribute::kInterpolate:
+            out << "interpolate";
+            break;
+        case FunctionParam::Attribute::kInvariant:
+            out << "invariant";
+            break;
+        case FunctionParam::Attribute::kLocation:
+            out << "location";
+            break;
+        case FunctionParam::Attribute::kBindingPoint:
+            out << "binding_point";
+            break;
+        case FunctionParam::Attribute::kVertexIndex:
+            out << "vertex_index";
+            break;
+        case FunctionParam::Attribute::kInstanceIndex:
+            out << "instance_index";
+            break;
+        case FunctionParam::Attribute::kPosition:
+            out << "position";
+            break;
+        case FunctionParam::Attribute::kFrontFacing:
+            out << "front_facing";
+            break;
+        case FunctionParam::Attribute::kLocalInvocationId:
+            out << "local_invocation_id";
+            break;
+        case FunctionParam::Attribute::kLocalInvocationIndex:
+            out << "local_invocation_index";
+            break;
+        case FunctionParam::Attribute::kGlobalInvocationId:
+            out << "global_invocation_id";
+            break;
+        case FunctionParam::Attribute::kWorkgroupId:
+            out << "workgroup_id";
+            break;
+        case FunctionParam::Attribute::kNumWorkgroups:
+            out << "num_workgroups";
+            break;
+        case FunctionParam::Attribute::kSampleIndex:
+            out << "sample_index";
+            break;
+        case FunctionParam::Attribute::kSampleMask:
+            out << "sample_mask";
+            break;
+    }
+    return out;
+}
+
 }  // namespace tint::ir

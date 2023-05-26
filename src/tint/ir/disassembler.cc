@@ -120,6 +120,26 @@ void Disassembler::Walk(const FlowNode* node) {
                     out_ << ", ";
                 }
                 out_ << "%" << IdOf(p) << ":" << p->type->FriendlyName();
+
+                if (!p->attributes.IsEmpty()) {
+                    out_ << " [";
+                }
+                for (auto attr : p->attributes) {
+                    if (attr != p->attributes.Front()) {
+                        out_ << ", ";
+                    }
+
+                    out_ << "@" << attr;
+                    if (attr == FunctionParam::Attribute::kLocation) {
+                        out_ << "(" << p->location.value() << ")";
+                    } else if (attr == FunctionParam::Attribute::kBindingPoint) {
+                        out_ << "(g: " << p->binding_point->group
+                             << " b: " << p->binding_point->binding << ")";
+                    }
+                }
+                if (!p->attributes.IsEmpty()) {
+                    out_ << "]";
+                }
             }
             out_ << "):" << f->return_type->FriendlyName();
 

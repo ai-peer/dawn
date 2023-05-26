@@ -23,6 +23,48 @@ namespace tint::ir {
 /// A function parameter in the IR.
 class FunctionParam : public utils::Castable<FunctionParam, Value> {
   public:
+    /// Attributes attached to parameters
+    enum class Attribute {
+        /// Interpolate attribute
+        kInterpolate,
+        /// Invariant attribute
+        kInvariant,
+        /// Location attribute
+        kLocation,
+        /// Group and binding attributes
+        kBindingPoint,
+        /// Builtin Vertex index
+        kVertexIndex,
+        /// Builtin Instance index
+        kInstanceIndex,
+        /// Builtin Position
+        kPosition,
+        /// Builtin FrontFacing
+        kFrontFacing,
+        /// Builtin Local invocation id
+        kLocalInvocationId,
+        /// Builtin Local invocation index
+        kLocalInvocationIndex,
+        /// Builtin Global invocation id
+        kGlobalInvocationId,
+        /// Builtin Workgroup id
+        kWorkgroupId,
+        /// Builtin Num workgroups
+        kNumWorkgroups,
+        /// Builtin Sample index
+        kSampleIndex,
+        /// Builtin Sample mask
+        kSampleMask,
+    };
+
+    /// Binding information
+    struct BindingPoint {
+        /// The `@group` part of the binding point
+        uint32_t group = 0;
+        /// The `@binding` part of the binding point
+        uint32_t binding = 0;
+    };
+
     /// Constructor
     /// @param type the type of the var
     explicit FunctionParam(const type::Type* type);
@@ -38,7 +80,18 @@ class FunctionParam : public utils::Castable<FunctionParam, Value> {
 
     /// The type of the parameter
     const type::Type* type;
+
+    /// The paramter attributes if any
+    utils::Vector<Attribute, 1> attributes;
+
+    /// If the attributes contain `kLocation` this stores the location value.
+    std::optional<uint32_t> location;
+
+    /// If the attributes contains `kBindingPoint` this stores the group and binding information
+    std::optional<BindingPoint> binding_point;
 };
+
+utils::StringStream& operator<<(utils::StringStream& out, FunctionParam::Attribute value);
 
 }  // namespace tint::ir
 

@@ -48,8 +48,6 @@ class Function : public utils::Castable<Function, FlowNode> {
 
     /// Attributes attached to return types
     enum class ReturnAttribute {
-        /// No return attribute
-        kNone,
         /// Location attribute
         kLocation,
         /// Builtin Position attribute
@@ -86,7 +84,7 @@ class Function : public utils::Castable<Function, FlowNode> {
     const type::Type* return_type = nullptr;
     /// The function return attributes if any
     utils::Vector<ReturnAttribute, 1> return_attributes;
-    /// If the return attribute is `kLocation` this stores the location value.
+    /// If the return attributes contain `kLocation` this stores the location value.
     std::optional<uint32_t> return_location;
 
     /// The parameters to the function

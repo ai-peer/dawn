@@ -43,6 +43,7 @@
 #include "src/tint/ast/if_statement.h"
 #include "src/tint/ast/increment_decrement_statement.h"
 #include "src/tint/ast/int_literal_expression.h"
+#include "src/tint/ast/interpolate_attribute.h"
 #include "src/tint/ast/invariant_attribute.h"
 #include "src/tint/ast/let.h"
 #include "src/tint/ast/literal_expression.h"
@@ -340,9 +341,85 @@ class Impl {
 
         utils::Vector<FunctionParam*, 1> params;
         for (auto* p : ast_func->params) {
-            const auto* param_sem = program_->Sem().Get(p);
+            const auto* param_sem = program_->Sem().Get(p)->As<sem::Parameter>();
             auto* ty = param_sem->Type()->Clone(clone_ctx_.type_ctx);
             auto* param = builder_.FunctionParam(ty);
+            for (auto* attr : p->attributes) {
+                tint::Switch(
+                    attr,  //
+                    [&](const ast::InterpolateAttribute*) {
+                        param->attributes.Push(FunctionParam::Attribute::kInterpolate);
+                    },
+                    [&](const ast::InvariantAttribute*) {
+                        param->attributes.Push(FunctionParam::Attribute::kInvariant);
+                    },
+                    [&](const ast::LocationAttribute*) {
+                        param->attributes.Push(FunctionParam::Attribute::kLocation);
+                    },
+                    [&](const ast::BuiltinAttribute* b) {
+                        if (auto* ident_sem =
+                                program_->Sem()
+                                    .Get(b)
+                                    ->As<sem::BuiltinEnumExpression<builtin::BuiltinValue>>()) {
+                            switch (ident_sem->Value()) {
+                                case builtin::BuiltinValue::kVertexIndex:
+                                    param->attributes.Push(FunctionParam::Attribute::kVertexIndex);
+                                    break;
+                                case builtin::BuiltinValue::kInstanceIndex:
+                                    param->attributes.Push(
+                                        FunctionParam::Attribute::kInstanceIndex);
+                                    break;
+                                case builtin::BuiltinValue::kPosition:
+                                    param->attributes.Push(FunctionParam::Attribute::kPosition);
+                                    break;
+                                case builtin::BuiltinValue::kFrontFacing:
+                                    param->attributes.Push(FunctionParam::Attribute::kFrontFacing);
+                                    break;
+                                case builtin::BuiltinValue::kLocalInvocationId:
+                                    param->attributes.Push(
+                                        FunctionParam::Attribute::kLocalInvocationId);
+                                    break;
+                                case builtin::BuiltinValue::kLocalInvocationIndex:
+                                    param->attributes.Push(
+                                        FunctionParam::Attribute::kLocalInvocationIndex);
+                                    break;
+                                case builtin::BuiltinValue::kGlobalInvocationId:
+                                    param->attributes.Push(
+                                        FunctionParam::Attribute::kGlobalInvocationId);
+                                    break;
+                                case builtin::BuiltinValue::kWorkgroupId:
+                                    param->attributes.Push(FunctionParam::Attribute::kWorkgroupId);
+                                    break;
+                                case builtin::BuiltinValue::kNumWorkgroups:
+                                    param->attributes.Push(
+                                        FunctionParam::Attribute::kNumWorkgroups);
+                                    break;
+                                case builtin::BuiltinValue::kSampleIndex:
+                                    param->attributes.Push(FunctionParam::Attribute::kSampleIndex);
+                                    break;
+                                case builtin::BuiltinValue::kSampleMask:
+                                    param->attributes.Push(FunctionParam::Attribute::kSampleMask);
+                                    break;
+                                default:
+                                    TINT_ICE(IR, diagnostics_)
+                                        << "Unknown builtin value in parameter attributes "
+                                        << ident_sem->Value();
+                                    return;
+                            }
+                        } else {
+                            TINT_ICE(IR, diagnostics_) << "Builtin attribute sem invalid";
+                            return;
+                        }
+                    });
+
+                param->location = param_sem->Location();
+                if (param_sem->BindingPoint().has_value()) {
+                    param->binding_point = FunctionParam::BindingPoint{
+                        param_sem->BindingPoint()->group,
+                        param_sem->BindingPoint()->binding,
+                    };
+                }
+            }
 
             scopes_.Set(p->name->symbol, param);
             builder_.ir.SetName(param, p->name->symbol.NameView());

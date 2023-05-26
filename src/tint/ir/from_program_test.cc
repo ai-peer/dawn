@@ -104,6 +104,58 @@ TEST_F(IR_BuilderImplTest, Func_WithParam) {
 )");
 }
 
+TEST_F(IR_BuilderImplTest, Func_WithParam_WithAttribute_Invariant) {
+    Func(
+        "f",
+        utils::Vector{Param("a", ty.vec4<f32>(),
+                            utils::Vector{Invariant(), Builtin(builtin::BuiltinValue::kPosition)})},
+        ty.vec4<f32>(), utils::Vector{Return("a")},
+        utils::Vector{Stage(ast::PipelineStage::kFragment)}, utils::Vector{Location(1_i)});
+    auto m = Build();
+    ASSERT_TRUE(m) << (!m ? m.Failure() : "");
+
+    EXPECT_EQ(Disassemble(m.Get()),
+              R"(%fn1 = func f(%a:u32 [@invariant, @position]):u32 [@location(1)] {
+  %fn2 = block {
+  } -> %func_end %a # return
+} %func_end
+
+)");
+}
+
+TEST_F(IR_BuilderImplTest, Func_WithParam_WithAttribute_Location) {
+    Func("f", utils::Vector{Param("a", ty.f32(), utils::Vector{Location(2_i)})}, ty.f32(),
+         utils::Vector{Return("a")}, utils::Vector{Stage(ast::PipelineStage::kFragment)},
+         utils::Vector{Location(1_i)});
+
+    auto m = Build();
+    ASSERT_TRUE(m) << (!m ? m.Failure() : "");
+
+    EXPECT_EQ(Disassemble(m.Get()),
+              R"(%fn1 = func f(%a:f32 [@location(2)]):f32 [@fragment ra: @location(1)] {
+  %fn2 = block {
+  } -> %func_end %a # return
+} %func_end
+
+)");
+}
+
+TEST_F(IR_BuilderImplTest, Func_WithParam_WithAttribute_Binding) {
+    Func("f", utils::Vector{Param("a", ty.f32(), utils::Vector{Group(2_i), Binding(3_i)})},
+         ty.f32(), utils::Vector{Return("a")}, utils::Vector{Stage(ast::PipelineStage::kFragment)},
+         utils::Vector{Location(1_i)});
+
+    auto m = Build();
+    ASSERT_TRUE(m) << (!m ? m.Failure() : "");
+
+    EXPECT_EQ(Disassemble(m.Get()), R"(%fn1 = func f(%a:u32 [@binding_point(g: 2, b: 3)]):u32 {
+  %fn2 = block {
+  } -> %func_end %a # return
+} %func_end
+
+)");
+}
+
 TEST_F(IR_BuilderImplTest, Func_WithMultipleParam) {
     Func("f", utils::Vector{Param("a", ty.u32()), Param("b", ty.i32()), Param("c", ty.bool_())},
          ty.void_(), utils::Empty);
