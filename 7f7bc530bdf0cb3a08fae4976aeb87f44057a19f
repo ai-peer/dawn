@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd54ffe2_609ae4b2",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-05-26T18:15:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b43cadc8_95b8bb1d",
+      "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a97e3061_0d8036d9",
