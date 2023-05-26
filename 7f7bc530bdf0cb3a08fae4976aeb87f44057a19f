@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05e83a3b_addd1f9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-26T15:40:28Z",
+      "side": 1,
+      "message": "LGTM, Antonio for +2",
+      "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ca24f1_dc48144c",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-26T15:40:28Z",
+      "side": 1,
+      "message": "Depends on whether we choose to land this earlier change.",
+      "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a97e3061_0d8036d9",
+        "filename": "src/tint/utils/cli.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-26T15:40:28Z",
+      "side": 1,
+      "message": "Nit: s/ShortName/Default/",
+      "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
