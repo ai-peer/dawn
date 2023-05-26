@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16819b3_37bf7bf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-26T15:07:30Z",
+      "side": 1,
+      "message": "I\u0027m wondering how we should get the client into the CreateInstance call. WDYT of adding a DawnInstanceClientDescriptor for this that you need to pass in the CreateInsance? To avoid sending it through the wire, we might require that it be the first linked in the chain, so it\u0027s easy for the wire to remove it from the change. (just copy the InstanceDescriptor and change nextInChain)",
+      "revId": "4330184d33bf7a276574b7f840805b1f6dd6abd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
