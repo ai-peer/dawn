@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a6cc5a1_fca9c282",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T03:38:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "11577ec68c0c25ee122dc354d539616c7b5b33f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "916d45c9_ab04e34c",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T03:38:54Z",
+      "side": 1,
+      "message": "Nit: \"in fragment stage\" -\u003e \"in the fragment stage\".",
+      "revId": "11577ec68c0c25ee122dc354d539616c7b5b33f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
