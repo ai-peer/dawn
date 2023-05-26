@@ -110,6 +110,17 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     // TODO(dawn:1741): Handle the case where ID3D11Device5 is not available.
     DAWN_TRY(CheckHRESULT(mD3d11Device.As(&mD3d11Device5), "D3D11: getting ID3D11Device5"));
 
+    // Set up the info queue to ignore some warnings that are false positives for Dawn.
+    ComPtr<ID3D11InfoQueue> infoQueue;
+    if (SUCCEEDED(mD3d11Device.As(&infoQueue))) {
+        auto denyList =
+            std::array<D3D11_MESSAGE_ID, 1>{D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS};
+        D3D11_INFO_QUEUE_FILTER filter = {};
+        filter.DenyList.NumIDs = denyList.size();
+        filter.DenyList.pIDList = denyList.data();
+        infoQueue->AddStorageFilterEntries(&filter);
+    }
+
     // Create the fence.
     DAWN_TRY(
         CheckHRESULT(mD3d11Device5->CreateFence(0, D3D11_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mFence)),
