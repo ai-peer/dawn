@@ -456,6 +456,12 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
 
         // All adapters are selected by default.
         bool selected = true;
+
+        if (properties.backendType == wgpu::BackendType::D3D11 &&
+            dawn::gpu_info::IsNvidia(properties.vendorID)) {
+            selected = false;
+        }
+
         // The adapter is deselected if:
         if (mHasBackendTypeFilter) {
             // It doesn't match the backend type, if present.
