@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b79749b_544feb60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-05-26T23:04:42Z",
+      "side": 1,
+      "message": "Triggered by apps:mirthdemo_ios_build_test in g3 (gerrit is warning pasting internal link here)\n\n```\nthird_party/dawn/src/dawn/native/metal/BackendMTL.mm:489:53: error: use of undeclared identifier \u0027IsMacOSVersionAtLeast\u0027\n                if (gpu_info::IsIntel(vendorId) \u0026\u0026 !IsMacOSVersionAtLeast(11)) {\n                                                    ^\n1 error generated.\n```",
+      "revId": "2edd59c977808571334d03de74a1725d4cef37c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
