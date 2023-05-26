@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4039afd5_adfd82ce",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-26T17:54:40Z",
+      "side": 1,
+      "message": "Maybe I\u0027m being dense but I can\u0027t see the bit where the `dump` aliases are added? I can only see the `emit` versions.",
+      "parentUuid": "b0b12cf5_a9e12612",
+      "revId": "7f7bc530bdf0cb3a08fae4976aeb87f44057a19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a97e3061_0d8036d9",
         "filename": "src/tint/utils/cli.h",
         "patchSetId": 6
