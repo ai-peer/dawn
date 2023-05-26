@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1a48f398_3595f631",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-26T00:32:23Z",
+      "side": 1,
+      "message": "Removed the `https` part.",
+      "parentUuid": "043a7309_a35661a9",
+      "revId": "458efaf8d21c3a668055ea24defbf1925df228c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8e215d6c_3741bff0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
