@@ -168,6 +168,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "16b6abfc_ebb72daa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-05-26T16:58:09Z",
+      "side": 1,
+      "message": "See https://learn.microsoft.com/en-us/windows/win32/direct3d12/root-signature-version-1-1 and https://microsoft.github.io/DirectX-Specs/d3d/ResourceBinding.html for more information.",
+      "parentUuid": "44aa33f6_3c15047f",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
