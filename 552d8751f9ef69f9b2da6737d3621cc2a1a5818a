@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4afdcef2_3d02257d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T15:35:34Z",
+      "side": 1,
+      "message": "Thanks for your review!",
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6735f252_81e8ecb7",
@@ -48,6 +65,24 @@
       "writtenOn": "2023-05-24T19:59:04Z",
       "side": 1,
       "message": "probably can use GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS and GL_MAX_UNIFORM_BUFFER_BINDINGS\n\nDynamic buffers are just normal buffers in the GL backend",
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9c080f_a9ea1d9a",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T15:35:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6735f252_81e8ecb7",
       "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -123,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ce822e0_1990de01",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T15:35:34Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "bc7ba55a_957558db",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 86
+      },
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec7151ac_5cd1a981",
@@ -146,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9594d9c5_995b6660",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T15:35:34Z",
+      "side": 1,
+      "message": "Looks like it\u0027s GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGMENT.\n\nDone.",
+      "parentUuid": "ec7151ac_5cd1a981",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 80
+      },
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9baae96_998977e0",
@@ -159,6 +242,30 @@
       "writtenOn": "2023-05-24T19:59:04Z",
       "side": 1,
       "message": "maybe needs to be the min of this and GL_MAX_DRAW_BUFFERS ?",
+      "range": {
+        "startLine": 199,
+        "startChar": 45,
+        "endLine": 199,
+        "endChar": 69
+      },
+      "revId": "552d8751f9ef69f9b2da6737d3621cc2a1a5818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52935b74_fb4f4488",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T15:35:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9baae96_998977e0",
       "range": {
         "startLine": 199,
         "startChar": 45,
