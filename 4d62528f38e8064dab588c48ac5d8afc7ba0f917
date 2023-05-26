@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0933463_326cf501",
+        "filename": "src/tint/utils/string.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-26T17:51:22Z",
+      "side": 1,
+      "message": "Why is this being done via a stringstream?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "4d62528f38e8064dab588c48ac5d8afc7ba0f917",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
