@@ -16,6 +16,98 @@
       "message": "PTAL!",
       "revId": "7d645fa00a97ae18bdca879302e02b5731798c6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4158dcb2_01bbc0d3",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-26T21:03:30Z",
+      "side": 1,
+      "message": "nit. stale comment",
+      "range": {
+        "startLine": 105,
+        "startChar": 15,
+        "endLine": 105,
+        "endChar": 22
+      },
+      "revId": "7d645fa00a97ae18bdca879302e02b5731798c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b68d2293_59ef67a2",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-26T21:03:30Z",
+      "side": 1,
+      "message": "I feel like having to check that a `Known\u003cT\u003e.data !\u003d nullptr` kind of defeats the purpose of it being `Known`? Also given this is an internal helper I think we can ensure the invariants above. In conjunction with my suggestion to make the operators on `Known` have a `[D]CHECK` on them in the previous CL, I think it would make the semantics of `Known`\u0027s clearer.",
+      "range": {
+        "startLine": 250,
+        "startChar": 12,
+        "endLine": 250,
+        "endChar": 34
+      },
+      "revId": "7d645fa00a97ae18bdca879302e02b5731798c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4768a002_da430351",
+        "filename": "src/dawn/wire/server/ServerDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-26T21:03:30Z",
+      "side": 1,
+      "message": "Again, this check should probably happen in `FillReservation` to make `Known`\u0027s semantic a bit more obvious.",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 44
+      },
+      "revId": "7d645fa00a97ae18bdca879302e02b5731798c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b9e343_47796f7b",
+        "filename": "src/dawn/wire/server/ServerInstance.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-05-26T21:03:30Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 40
+      },
+      "revId": "7d645fa00a97ae18bdca879302e02b5731798c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
