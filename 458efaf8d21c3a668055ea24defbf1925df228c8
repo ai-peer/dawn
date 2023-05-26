@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043a7309_a35661a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-26T00:09:22Z",
+      "side": 1,
+      "message": "The gerrit `commit-msg` hook seems to have interpreted this `https:` as metadata and reformatted it.",
+      "revId": "458efaf8d21c3a668055ea24defbf1925df228c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e215d6c_3741bff0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-05-26T00:09:22Z",
+      "side": 1,
+      "message": "LGTM, the build failure looks like incorrect code in Blink (annoying).\n\nI initially thought this would be done in dawn.json maybe with `\"category\": \"native\"`, but looking at it, not sure how that would actually be possible, and this looks good.",
+      "revId": "458efaf8d21c3a668055ea24defbf1925df228c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
