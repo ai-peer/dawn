@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac900ae5_2b2f3878",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-05-26T01:01:40Z",
+      "side": 1,
+      "message": "If you use Root Signature v1.1, then you must specify DESCRIPTORS_STATIC_KEEPING_BUFFER_BOUNDS_CHECKS on static descriptors to prevent them from being optimized to root descriptors by the driver.\n\nIf you\u0027re just using Root Signature v1.0, all of the descriptors are considered volatile so no promotion happens behind your back.",
+      "parentUuid": "42328491_f37b1f14",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
