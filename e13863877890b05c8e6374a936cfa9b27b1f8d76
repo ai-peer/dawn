@@ -120,6 +120,24 @@
       "message": "nit: uint32_t... or delete it as it\u0027s the same as uint32_t for us",
       "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f25f5d3c_225aaf6b",
+        "filename": "src/tint/utils/parse_num.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-26T15:03:10Z",
+      "side": 1,
+      "message": "It\u0027s not (always) the same datatype. It might be the same bit width, but is distinct types by most compilers.",
+      "parentUuid": "c70cc7b1_efda6da9",
+      "revId": "e13863877890b05c8e6374a936cfa9b27b1f8d76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
