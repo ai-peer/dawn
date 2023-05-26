@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf279e4_a296a739",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-05-26T02:25:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9db410ec_8cda7ae3",
+      "range": {
+        "startLine": 422,
+        "startChar": 64,
+        "endLine": 422,
+        "endChar": 74
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9af9c5e_b9bc0fb3",
@@ -125,6 +149,30 @@
       "writtenOn": "2023-05-24T12:19:58Z",
       "side": 1,
       "message": "nit: I think this should be just _VOLATILE? We do set DATA_VOLATILE because we transition the textures and buffers.",
+      "range": {
+        "startLine": 106,
+        "startChar": 29,
+        "endLine": 106,
+        "endChar": 42
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba744a50_def75ae7",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-05-26T02:25:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9af9c5e_b9bc0fb3",
       "range": {
         "startLine": 106,
         "startChar": 29,
@@ -152,6 +200,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "043ae854_5ea43d8a",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-05-26T02:25:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8605672e_2e12ed36",
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a0fcf95_2e64d209",
@@ -169,6 +235,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "158888ad_beaacafa",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-05-26T02:25:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a0fcf95_2e64d209",
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9709e728_e680c17f",
@@ -182,6 +266,24 @@
       "writtenOn": "2023-05-24T21:16:41Z",
       "side": 1,
       "message": "we should probably test the 1.0 on more tests.\nmaybe additionally:\nExternalTextureTests\nDynamicBufferOffsetTests\nPipelineLayoutTests",
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a1ede80_7263a63e",
+        "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-05-26T02:25:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9709e728_e680c17f",
       "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
