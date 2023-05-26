@@ -133,6 +133,7 @@ class Device final : public d3d::Device {
 
     ComPtr<ID3D11Device> mD3d11Device;
     ComPtr<ID3D11Device5> mD3d11Device5;
+    ComPtr<ID3D11InfoQueue> mInfoQueue;
     CommandRecordingContext mPendingCommands;
     SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
 };

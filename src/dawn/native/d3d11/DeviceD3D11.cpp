@@ -110,6 +110,19 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     // TODO(dawn:1741): Handle the case where ID3D11Device5 is not available.
     DAWN_TRY(CheckHRESULT(mD3d11Device.As(&mD3d11Device5), "D3D11: getting ID3D11Device5"));
 
+    // Set up the info queue to ignore some warnings that are false positives for Dawn.
+    {
+        DAWN_TRY(CheckHRESULT(mD3d11Device.As(&mInfoQueue),
+                              "D3D11 QueryInterface ID3D11Device to ID3D11InfoQueue"));
+
+        auto denyList =
+            std::array<D3D11_MESSAGE_ID, 1>{D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS};
+        D3D11_INFO_QUEUE_FILTER filter = {};
+        filter.DenyList.NumIDs = denyList.size();
+        filter.DenyList.pIDList = denyList.data();
+        mInfoQueue->AddStorageFilterEntries(&filter);
+    }
+
     // Create the fence.
     DAWN_TRY(
         CheckHRESULT(mD3d11Device5->CreateFence(0, D3D11_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mFence)),
@@ -335,10 +348,7 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
         return {};
     }
 
-    ComPtr<ID3D11InfoQueue> infoQueue;
-    DAWN_TRY(CheckHRESULT(mD3d11Device.As(&infoQueue),
-                          "D3D11 QueryInterface ID3D11Device to ID3D11InfoQueue"));
-    uint64_t totalErrors = infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
+    uint64_t totalErrors = mInfoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
 
     // Check if any errors have occurred otherwise we would be creating an empty error. Note
     // that we use GetNumStoredMessagesAllowedByRetrievalFilter instead of GetNumStoredMessages
@@ -349,7 +359,7 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
 
     auto error = DAWN_INTERNAL_ERROR("The D3D11 debug layer reported uncaught errors.");
 
-    AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error.get());
+    AppendDebugLayerMessagesToError(mInfoQueue.Get(), totalErrors, error.get());
 
     return error;
 }
@@ -359,17 +369,13 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
         return;
     }
 
-    ComPtr<ID3D11InfoQueue> infoQueue;
-    if (FAILED(mD3d11Device.As(&infoQueue))) {
-        return;
-    }
-    uint64_t totalErrors = infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
+    uint64_t totalErrors = mInfoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
 
     if (totalErrors == 0) {
         return;
     }
 
-    AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error);
+    AppendDebugLayerMessagesToError(mInfoQueue.Get(), totalErrors, error);
 }
 
 void Device::DestroyImpl() {
