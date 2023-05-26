@@ -144,6 +144,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "44aa33f6_3c15047f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-05-26T16:46:18Z",
+      "side": 1,
+      "message": "@Ben, not quite. :-)\n\nIf you\u0027re using Root Signature v1.0, the STATIC_KEEPING_BUFFER_BOUNDS_CHECKS enum is not valid because all descriptors are assumed to be volatile. The driver is not allowed to promote them to be root descriptors and, thus, lose bounds checking. You can remove Tint robustness on buffers with v1.0 Root Signatures.    \n\nIf you\u0027re using Root Signature v1.1, you can tell D3D which descriptors you promise not to change the descriptor and/or data it points to. The driver can choose to remove levels of indirection. In v1.1, you need to use STATIC_KEEPING_BUFFER_BOUNDS_CHECKS to prevent drivers promoting descriptors to root descriptors, thus, removing bounds checking.\n\n\nRegardless of the Root Signature version you decide to use, no bounds checking will ever be done on descriptors where you give the API just an address. An example is the following: \n\n\u003e void SetGraphicsRootUnorderedAccessView(\n  [in] UINT                      RootParameterIndex,\n  [in] D3D12_GPU_VIRTUAL_ADDRESS BufferLocation\n);\n\nYou can provide a `BufferLocation` that\u0027s in the middle of a buffer if you\u0027d like. D3D will not lookup or try to guess the size. Many APIs for newer D3D features tend to take just buffer locations with no size. \n\nRegardless of the Root Signature, no bounds checking will be done on arrays that are defined directly in a shader. I\u0027m not a Tint expert but hopefully, we can tell the difference between things we can avoid doing bounds checking for and things we can\u0027t.",
+      "parentUuid": "0935f9ca_6ae03ea5",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
