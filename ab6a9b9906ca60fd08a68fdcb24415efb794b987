@@ -16,6 +16,24 @@
       "message": "jie, peng FYI\n\nthis CL has made our Win NVIDIA CI tests green again.\nsee: \nhttps://ci.chromium.org/p/chromium/builders/ci/Dawn%20Win10%20x64%20Release%20%28NVIDIA%29\n\nsee the linked bugs for more information. I think we can try re-enabling on Win NVIDIA after fixing all the errors from the D3D11 debug layers.\n\nfor some reason this failure only occured on CI and not on CQ runs which is why we didn\u0027t notice any tests failing. I\u0027m working on making those configurations identical so we don\u0027t run into a situation like this again.",
       "revId": "ab6a9b9906ca60fd08a68fdcb24415efb794b987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "354d3c20_960cf38d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-26T07:17:26Z",
+      "side": 1,
+      "message": "Great job. Really appreciate nailing it down so quickly.",
+      "parentUuid": "eaa85b81_cb299338",
+      "revId": "ab6a9b9906ca60fd08a68fdcb24415efb794b987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
