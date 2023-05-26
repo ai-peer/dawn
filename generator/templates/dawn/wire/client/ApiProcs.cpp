@@ -107,8 +107,17 @@ namespace dawn::wire::client {
 
     namespace {
         WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {
-            UNREACHABLE();
-            return nullptr;
+            // TODO how to get the client???
+            Client* client = nullptr;
+
+            Instance* instance = client->Make<Instance>();
+
+            CreateInstanceCmd cmd;
+            cmd.descriptor = descriptor;
+            cmd.result = instance->GetWireHandle();
+            client->SerializeCommand(cmd);
+
+            return ToAPI(instance);
         }
 
         struct ProcEntry {

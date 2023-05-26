@@ -20,6 +20,19 @@
 
 namespace dawn::wire::server {
 
+WireResult Server::DoCreateInstance(const WGPUInstanceDescriptor* descriptor,
+                                    ObjectHandle instanceHandle) {
+    Known<WGPUInstance> instance;
+    WIRE_TRY(InstanceObjects().Allocate(&instance, instanceHandle));
+
+    instance->handle = mProcs.createInstance(descriptor);
+
+    if (instance->handle == nullptr) {
+        return WireResult::FatalError;
+    }
+    return WireResult::Success;
+}
+
 WireResult Server::DoInstanceRequestAdapter(Known<WGPUInstance> instance,
                                             uint64_t requestSerial,
                                             ObjectHandle adapterHandle,

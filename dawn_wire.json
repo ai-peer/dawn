@@ -96,6 +96,10 @@
             { "name": "request serial", "type": "uint64_t" },
             { "name": "device object handle", "type": "ObjectHandle", "handle_type": "device"},
             { "name": "descriptor", "type": "device descriptor", "annotation": "const*" }
+        ],
+        "create instance": [
+            { "name": "descriptor", "type": "instance descriptor", "annotation": "const*" },
+            { "name": "result", "type": "ObjectHandle", "handle_type": "instance" }
         ]
     },
     "return commands": {
