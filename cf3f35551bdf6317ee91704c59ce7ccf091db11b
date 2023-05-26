@@ -96,6 +96,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1347d91_a86cad98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-26T09:19:17Z",
+      "side": 1,
+      "message": "It might be worth taking this CL in just for the optimizations, but otherwise it seems Rafael just confirmed that root signature 1.0 always has DESCRIPTORS_STATIC_KEEPING_BUFFER_BOUNDS_CHECKS",
+      "parentUuid": "637e9035_499d630c",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
