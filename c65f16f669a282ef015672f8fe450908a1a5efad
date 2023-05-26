@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14b8eb4d_ca4effd3",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-26T00:39:25Z",
+      "side": 1,
+      "message": "Nit: Can `HasBranchTarget()` ever be false for a true/false block?\n\nIf not, could remove that check. If it can, then you could also just do `Is\u003cir::ExitIf\u003e(true_block-\u003eBranch())` which does the `nullptr` check for you.",
+      "range": {
+        "startLine": 392,
+        "startChar": 8,
+        "endLine": 392,
+        "endChar": 82
+      },
+      "revId": "c65f16f669a282ef015672f8fe450908a1a5efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
