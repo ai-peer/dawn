@@ -16,6 +16,57 @@
       "message": "Questions:\n\n* Should make some kind of compare function or compare operator for \n `TextureViewBase` and/or `SubresourceRange`?\n \n* Should I use `std::array` instead of `std::vector` or some other class\n\n* Do I need to add more tests and/or parameterize the tests for every type of texture?\n\n  Maybe we can leave that to the CTS since it\u0027s setup better for that?\n  \n* Is it okay to leave this unoptimized (mvp)? \n\n  One optimization mentioned in an email thread. Have each texture track the number of different views. Have the device track the number of textures with different views. If there are zero textures with different views then the validation can be skipped. I\u0027m not sure how intrusive are difficult that would be. It would make every view creation, at least in compat, need to check if it\u0027s different than other views already created for that texture. Also I guess they\u0027d need to be weak refs to views? \n\n  It might be good to prefer a big app in compat vs non-compat and see how much perf is being lost before spending time optimizing",
       "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72aca500_3dfc7a00",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T16:46:47Z",
+      "side": 1,
+      "message": "Bikeshed: TextureViewsMatch()?",
+      "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c666807_064ef8a8",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T16:46:47Z",
+      "side": 1,
+      "message": "Bikeshed: TextureViewsAllMatch()?",
+      "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828e181d_15f9f4da",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-26T16:46:47Z",
+      "side": 1,
+      "message": "Nit: in a single draw command?",
+      "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
