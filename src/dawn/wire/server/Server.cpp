@@ -50,12 +50,13 @@ bool Server::InjectTexture(WGPUTexture texture,
                            uint32_t deviceGeneration) {
     ASSERT(texture != nullptr);
     Known<WGPUDevice> device;
-    if (!DeviceObjects().Get(deviceId, &device) || device->generation != deviceGeneration) {
+    if (DeviceObjects().Get(deviceId, &device) != WireResult::Success ||
+        device->generation != deviceGeneration) {
         return false;
     }
 
     Known<WGPUTexture> data;
-    if (!TextureObjects().Allocate(&data, ObjectHandle{id, generation})) {
+    if (TextureObjects().Allocate(&data, ObjectHandle{id, generation}) != WireResult::Success) {
         return false;
     }
 
@@ -77,12 +78,13 @@ bool Server::InjectSwapChain(WGPUSwapChain swapchain,
                              uint32_t deviceGeneration) {
     ASSERT(swapchain != nullptr);
     Known<WGPUDevice> device;
-    if (!DeviceObjects().Get(deviceId, &device) || device->generation != deviceGeneration) {
+    if (DeviceObjects().Get(deviceId, &device) != WireResult::Success ||
+        device->generation != deviceGeneration) {
         return false;
     }
 
     Known<WGPUSwapChain> data;
-    if (!SwapChainObjects().Allocate(&data, ObjectHandle{id, generation})) {
+    if (SwapChainObjects().Allocate(&data, ObjectHandle{id, generation}) != WireResult::Success) {
         return false;
     }
 
@@ -100,7 +102,7 @@ bool Server::InjectSwapChain(WGPUSwapChain swapchain,
 bool Server::InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation) {
     ASSERT(device != nullptr);
     Known<WGPUDevice> data;
-    if (!DeviceObjects().Allocate(&data, ObjectHandle{id, generation})) {
+    if (DeviceObjects().Allocate(&data, ObjectHandle{id, generation}) != WireResult::Success) {
         return false;
     }
 
@@ -122,7 +124,7 @@ bool Server::InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation) {
 bool Server::InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generation) {
     ASSERT(instance != nullptr);
     Known<WGPUInstance> data;
-    if (!InstanceObjects().Allocate(&data, ObjectHandle{id, generation})) {
+    if (InstanceObjects().Allocate(&data, ObjectHandle{id, generation}) != WireResult::Success) {
         return false;
     }
 
@@ -139,7 +141,8 @@ bool Server::InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generat
 
 WGPUDevice Server::GetDevice(uint32_t id, uint32_t generation) {
     Known<WGPUDevice> device;
-    if (!DeviceObjects().Get(id, &device) || device->generation != generation) {
+    if (DeviceObjects().Get(id, &device) != WireResult::Success ||
+        device->generation != generation) {
         return nullptr;
     }
     return device->handle;
