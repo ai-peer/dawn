@@ -68,6 +68,24 @@
       "parentUuid": "c9e455f8_9197cf0b",
       "revId": "b19be4136fa58cdb7d985c01166cd3faeec56a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "965774d0_9846cafe",
+        "filename": "src/tint/ir/return.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-26T00:40:04Z",
+      "side": 1,
+      "message": "That seems like a reasonable use case, let\u0027s leave as is then.",
+      "parentUuid": "d3d9c3d9_2944dfeb",
+      "revId": "b19be4136fa58cdb7d985c01166cd3faeec56a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
