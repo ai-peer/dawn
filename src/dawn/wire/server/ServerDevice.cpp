@@ -24,8 +24,9 @@ void HandleCreatePipelineAsyncCallback(KnownObjects<Pipeline>* knownObjects,
                                        Pipeline pipeline,
                                        CreatePipelineAsyncUserData* data) {
     if (status == WGPUCreatePipelineAsyncStatus_Success) {
-        auto* pipelineObject = knownObjects->FillReservation(data->pipelineObjectID, pipeline);
-        ASSERT(pipelineObject != nullptr);
+        Known<Pipeline> reservation =
+            knownObjects->FillReservation(data->pipelineObjectID, pipeline);
+        ASSERT(reservation.data != nullptr);
     } else {
         // Otherwise, free the ObjectId which will make it unusable.
         knownObjects->Free(data->pipelineObjectID);
@@ -88,16 +89,16 @@ bool Server::DoDeviceCreateComputePipelineAsync(Known<WGPUDevice> device,
                                                 uint64_t requestSerial,
                                                 ObjectHandle pipelineObjectHandle,
                                                 const WGPUComputePipelineDescriptor* descriptor) {
-    auto* pipeline =
-        ComputePipelineObjects().Allocate(pipelineObjectHandle, AllocationState::Reserved);
-    if (pipeline == nullptr) {
+    Known<WGPUComputePipeline> pipeline;
+    if (!ComputePipelineObjects().Allocate(&pipeline, pipelineObjectHandle,
+                                           AllocationState::Reserved)) {
         return false;
     }
 
     auto userdata = MakeUserdata<CreatePipelineAsyncUserData>();
     userdata->device = device.AsHandle();
     userdata->requestSerial = requestSerial;
-    userdata->pipelineObjectID = pipelineObjectHandle.id;
+    userdata->pipelineObjectID = pipeline.id;
 
     mProcs.deviceCreateComputePipelineAsync(
         device->handle, descriptor, ForwardToServer<&Server::OnCreateComputePipelineAsyncCallback>,
@@ -125,16 +126,16 @@ bool Server::DoDeviceCreateRenderPipelineAsync(Known<WGPUDevice> device,
                                                uint64_t requestSerial,
                                                ObjectHandle pipelineObjectHandle,
                                                const WGPURenderPipelineDescriptor* descriptor) {
-    auto* pipeline =
-        RenderPipelineObjects().Allocate(pipelineObjectHandle, AllocationState::Reserved);
-    if (pipeline == nullptr) {
+    Known<WGPURenderPipeline> pipeline;
+    if (!RenderPipelineObjects().Allocate(&pipeline, pipelineObjectHandle,
+                                          AllocationState::Reserved)) {
         return false;
     }
 
     auto userdata = MakeUserdata<CreatePipelineAsyncUserData>();
     userdata->device = device.AsHandle();
     userdata->requestSerial = requestSerial;
-    userdata->pipelineObjectID = pipelineObjectHandle.id;
+    userdata->pipelineObjectID = pipeline.id;
 
     mProcs.deviceCreateRenderPipelineAsync(
         device->handle, descriptor, ForwardToServer<&Server::OnCreateRenderPipelineAsyncCallback>,
