@@ -120,6 +120,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0935f9ca_6ae03ea5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-26T13:34:24Z",
+      "side": 1,
+      "message": "My information was second hand. Rafael actually knows what he\u0027s talking about.\n\nSo with this change `D3D12_DESCRIPTOR_RANGE_FLAG_DESCRIPTORS_STATIC_KEEPING_BUFFER_BOUNDS_CHECKS` is required to ensure OOBs are safe when Tint\u0027s robustness is disabled.\n\nFor now we\u0027re still using Tint\u0027s robustness, right?",
+      "parentUuid": "c1347d91_a86cad98",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
