@@ -54,6 +54,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2392fff2_0cb8da8d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-26T00:42:31Z",
+      "side": 1,
+      "message": "d3d11 RTV/DST can support array layers. It doesn\u0027t seem to be much of a problem.",
+      "parentUuid": "dc9312ad_8f184fbc",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8957e9e4_9709a9c7",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-26T00:42:31Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 356,
+        "startChar": 1,
+        "endLine": 357,
+        "endChar": 71
+      },
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c322b2d_49857d5f",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -65,6 +106,47 @@
       "writtenOn": "2023-05-25T13:42:12Z",
       "side": 1,
       "message": "What if these resources have multiple array layers?",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c374e293_1843d168",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-26T00:42:31Z",
+      "side": 1,
+      "message": "https://learn.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-subresources\n\n\u003eA mip slice (represented by the white rectangle) includes one mipmap level for every texture in an array, as shown in the following illustration.\n\n\nThe `d3d11DSV` created below includes all texture in the array. [1]\nThe test also has the cases to cover multiple array layers. [2]",
+      "parentUuid": "3c322b2d_49857d5f",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7733a2b_f16749c8",
+        "filename": "src/dawn/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-26T00:42:31Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 398,
+        "startChar": 29,
+        "endLine": 398,
+        "endChar": 31
+      },
       "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
