@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc20a07_da732f14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-26T09:16:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc9312ad_8f184fbc",
@@ -70,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "791d0956_199055f5",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-26T09:16:51Z",
+      "side": 1,
+      "message": "But WebGPU doesn\u0027t at the moment because we don\u0027t have multiview. But either way is probably fine ok.",
+      "parentUuid": "2392fff2_0cb8da8d",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8957e9e4_9709a9c7",
@@ -83,6 +118,30 @@
       "writtenOn": "2023-05-26T00:42:31Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 356,
+        "startChar": 1,
+        "endLine": 357,
+        "endChar": 71
+      },
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "949f0209_b61b75c1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-26T09:16:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8957e9e4_9709a9c7",
       "range": {
         "startLine": 356,
         "startChar": 1,
@@ -124,6 +183,41 @@
       "side": 1,
       "message": "https://learn.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-subresources\n\n\u003eA mip slice (represented by the white rectangle) includes one mipmap level for every texture in an array, as shown in the following illustration.\n\n\nThe `d3d11DSV` created below includes all texture in the array. [1]\nThe test also has the cases to cover multiple array layers. [2]",
       "parentUuid": "3c322b2d_49857d5f",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f92dc8_899fd887",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-26T09:16:51Z",
+      "side": 1,
+      "message": "Wait so the ClearDSV call clears all layers at a specific mip level? That\u0027s unintuitive coming from the WebGPU API that doesn\u0027t support multi-layer RTV/DSVs. Can we have a comment about this?",
+      "parentUuid": "c374e293_1843d168",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a054997b_fe09d3b5",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-26T09:16:51Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
