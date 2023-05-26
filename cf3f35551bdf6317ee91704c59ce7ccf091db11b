@@ -192,6 +192,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "626dad4a_81618933",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-26T17:07:38Z",
+      "side": 1,
+      "message": "Thanks Rafael.\n\nSo if I understand you correctly, OOB access become a security risk when all the following are true:\n* Using Root Signature v1.1\n* The descriptor is [considered \u0027static\u0027](https://microsoft.github.io/DirectX-Specs/d3d/ResourceBinding.html#optimization-opportunity)\n* The `D3D12_DESCRIPTOR_RANGE_FLAG_DESCRIPTORS_STATIC_KEEPING_BUFFER_BOUNDS_CHECKS` or `D3D12_DESCRIPTOR_RANGE_FLAG_DATA_VOLATILE` flag was **not specified**.\n\nIs that correct?\n\n\u003e Regardless of the Root Signature, no bounds checking will be done on arrays that are defined directly in a shader.\n\nPlease can you elaborate on what you mean by `arrays that are defined directly in a shader`? Do you mean fixed-size arrays vs runtime-sized arrays? If so, which has the bounds checking?\n\n---\n\nWe\u0027re still depending on Tint robustness, so this change LGTM.",
+      "parentUuid": "44aa33f6_3c15047f",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
