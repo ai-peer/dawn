@@ -205,6 +205,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0dfd3d9_b161cf3c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-27T03:12:53Z",
+      "side": 1,
+      "message": "Right, I think so.\nDone",
+      "parentUuid": "60f92dc8_899fd887",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a054997b_fe09d3b5",
@@ -218,6 +236,24 @@
       "writtenOn": "2023-05-26T09:16:51Z",
       "side": 1,
       "message": "ditto",
+      "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f207bf6_93071960",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-27T03:12:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a054997b_fe09d3b5",
       "revId": "742417f85b08086826c23657eda7e0b39726c5f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
