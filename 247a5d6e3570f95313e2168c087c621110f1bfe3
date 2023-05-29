@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a6575e_cfb6a860",
+        "filename": "src/tint/ir/location.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-29T20:02:07Z",
+      "side": 1,
+      "message": "This should be more than just a bool. Interpolation has a type and sampling mode.",
+      "revId": "247a5d6e3570f95313e2168c087c621110f1bfe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
