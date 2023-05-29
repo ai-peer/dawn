@@ -33,6 +33,24 @@
       "message": "I\u0027m tempted to drop the `kLocation` and `kBindingGroup` attributes and just let the existance of values below signify the existance. Thoughts?",
       "revId": "2778f0b5feb40d51d1465517fd4db1e65848a061",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f97dba7f_a8ce2a9a",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-29T13:43:45Z",
+      "side": 1,
+      "message": "Seems reasonable, and consistent with how you did `workgroup_size`.\n\nIf that happens, the only other attributes are builtins right? And there can only be one of those, so then that could just a single enum value rather than a list of attributes? Not having to iterate over a list to find the builtin would be nice (this is annoying in our AST transforms).\n\nI guess there\u0027s also invariant and interpolate. Maybe those could become just a `bool` and a `std::optional` as well? The interpolation could arguably be folded into a struct with the location too.",
+      "parentUuid": "749be0d1_1723655c",
+      "revId": "2778f0b5feb40d51d1465517fd4db1e65848a061",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
