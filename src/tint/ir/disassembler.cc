@@ -161,7 +161,7 @@ void Disassembler::EmitFunction(const Function* func) {
             if (attr == FunctionParam::Attribute::kLocation) {
                 out_ << "(" << p->Location().value() << ")";
             } else if (attr == FunctionParam::Attribute::kBindingPoint) {
-                out_ << "(g: " << p->BindingPoint()->group << " b: " << p->BindingPoint()->binding
+                out_ << "(g: " << p->BindingPoint()->group << ", b: " << p->BindingPoint()->binding
                      << ")";
             }
         }
@@ -322,6 +322,11 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
                 out_ << ", ";
                 EmitValue(v->Initializer());
             }
+            if (v->BindingPoint().has_value()) {
+                out_ << " [g: " << v->BindingPoint()->group << ", b: " << v->BindingPoint()->binding
+                     << "]";
+            }
+
             out_ << std::endl;
         },
         [&](const ir::Branch* b) { EmitBranch(b); },
