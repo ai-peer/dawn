@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e9bc9360_bae75244",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-29T14:19:22Z",
+      "side": 1,
+      "message": "Just FYI the SPIR-V entry point IO transform generates global variables with builtin, location, and interpolate attributes, so we might need those in the future too.\n\nI\u0027m still thinking about whether we can/should do IO different for SPIR-V this time round, so we should land this as is and add the other stuff later if we need it.",
+      "revId": "6d57c2f84fb218a1d516ff6f13f23c97c566115a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "47e1f37b_cb28c4c9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -14,6 +31,40 @@
       "writtenOn": "2023-05-29T11:58:51Z",
       "side": 1,
       "message": "PTAL.",
+      "revId": "6d57c2f84fb218a1d516ff6f13f23c97c566115a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0765561_054750dc",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-29T14:19:22Z",
+      "side": 1,
+      "message": "Nit: I\u0027m not sure why the `gv \u003d ...` decl is inside the parentheses here, since it\u0027s not used as part of the condition. Should there be a `gv \u0026\u0026 ...` in the condition?",
+      "revId": "6d57c2f84fb218a1d516ff6f13f23c97c566115a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "677ea914_cad89442",
+        "filename": "src/tint/ir/from_program_var_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-29T14:19:22Z",
+      "side": 1,
+      "message": "Nit: It\u0027s not intuitive what the `g` and `b` mean here. Should this use `@binding_point()` like you did for parameters?",
       "revId": "6d57c2f84fb218a1d516ff6f13f23c97c566115a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
