@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fee5e23_d921f87a",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-29T19:04:31Z",
+      "side": 1,
+      "message": "I added the `gv \u0026\u0026` although, if this has a binding point it has to be a  global variable as far as I understand.",
+      "parentUuid": "b0765561_054750dc",
+      "revId": "6d57c2f84fb218a1d516ff6f13f23c97c566115a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "677ea914_cad89442",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-05-29T14:19:22Z",
       "side": 1,
       "message": "Nit: It\u0027s not intuitive what the `g` and `b` mean here. Should this use `@binding_point()` like you did for parameters?",
+      "revId": "6d57c2f84fb218a1d516ff6f13f23c97c566115a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c51844e_18bc7ba1",
+        "filename": "src/tint/ir/from_program_var_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-29T19:04:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "677ea914_cad89442",
       "revId": "6d57c2f84fb218a1d516ff6f13f23c97c566115a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
