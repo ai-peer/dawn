@@ -198,18 +198,24 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     SetLabelImpl();
 
     if (!mappedAtCreation) {
-        if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 1u));
-        }
+        // Skip if this is the builtin uniform. The extra clearings are only needed for external
+        // buffers accessible to clients.
+        if (ToBackend(GetDevice())
+                ->GetPendingCommandContext(Device::SubmitMode::Passive)
+                ->GetUniformBuffer()) {
+            if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 1u));
+            }
 
-        // Initialize the padding bytes to zero.
-        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
-            if (paddingBytes > 0) {
-                uint32_t clearSize = paddingBytes;
-                uint64_t clearOffset = GetSize();
-                DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 0,
-                                       clearOffset, clearSize));
+            // Initialize the padding bytes to zero.
+            if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+                uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+                if (paddingBytes > 0) {
+                    uint32_t clearSize = paddingBytes;
+                    uint64_t clearOffset = GetSize();
+                    DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 0,
+                                           clearOffset, clearSize));
+                }
             }
         }
     }
