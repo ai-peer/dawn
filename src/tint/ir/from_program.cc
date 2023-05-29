@@ -266,16 +266,15 @@ class Impl {
                 }
             }
 
-            utils::Vector<Function::ReturnAttribute, 1> return_attributes;
             for (auto* attr : ast_func->return_type_attributes) {
                 tint::Switch(
                     attr,  //
                     [&](const ast::LocationAttribute*) {
-                        return_attributes.Push(Function::ReturnAttribute::kLocation);
+                        if (sem->ReturnLocation().has_value()) {
+                            ir_func->SetReturnLocation(sem->ReturnLocation().value());
+                        }
                     },
-                    [&](const ast::InvariantAttribute*) {
-                        return_attributes.Push(Function::ReturnAttribute::kInvariant);
-                    },
+                    [&](const ast::InvariantAttribute*) { ir_func->SetReturnInvariant(true); },
                     [&](const ast::BuiltinAttribute* b) {
                         if (auto* ident_sem =
                                 program_->Sem()
@@ -283,13 +282,13 @@ class Impl {
                                     ->As<sem::BuiltinEnumExpression<builtin::BuiltinValue>>()) {
                             switch (ident_sem->Value()) {
                                 case builtin::BuiltinValue::kPosition:
-                                    return_attributes.Push(Function::ReturnAttribute::kPosition);
+                                    ir_func->SetReturnBuiltin(Function::ReturnBuiltin::kPosition);
                                     break;
                                 case builtin::BuiltinValue::kFragDepth:
-                                    return_attributes.Push(Function::ReturnAttribute::kFragDepth);
+                                    ir_func->SetReturnBuiltin(Function::ReturnBuiltin::kFragDepth);
                                     break;
                                 case builtin::BuiltinValue::kSampleMask:
-                                    return_attributes.Push(Function::ReturnAttribute::kSampleMask);
+                                    ir_func->SetReturnBuiltin(Function::ReturnBuiltin::kSampleMask);
                                     break;
                                 default:
                                     TINT_ICE(IR, diagnostics_)
@@ -303,9 +302,7 @@ class Impl {
                         }
                     });
             }
-            ir_func->SetReturnAttributes(return_attributes);
         }
-        ir_func->SetReturnLocation(sem->ReturnLocation());
 
         scopes_.Push();
         TINT_DEFER(scopes_.Pop());
@@ -322,6 +319,11 @@ class Impl {
             for (auto* attr : p->attributes) {
                 tint::Switch(
                     attr,  //
+                    [&](const ast::LocationAttribute*) {
+                        if (param_sem->Location().has_value()) {
+                            param->SetLocation(param_sem->Location().value(), interpolated);
+                        }
+                    },
                     [&](const ast::InterpolateAttribute*) { interpolated = true; },
                     [&](const ast::InvariantAttribute*) { param->SetInvariant(true); },
                     [&](const ast::BuiltinAttribute* b) {
@@ -376,9 +378,6 @@ class Impl {
                         }
                     });
 
-                if (param_sem->Location().has_value()) {
-                    param->SetLocation(param_sem->Location().value(), interpolated);
-                }
                 if (param_sem->BindingPoint().has_value()) {
                     param->SetBindingPoint(param_sem->BindingPoint()->group,
                                            param_sem->BindingPoint()->binding);
