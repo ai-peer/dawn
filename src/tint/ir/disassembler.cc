@@ -148,6 +148,26 @@ void Disassembler::EmitFunction(const Function* func) {
             out_ << ", ";
         }
         out_ << "%" << IdOf(p) << ":" << p->Type()->FriendlyName();
+
+        if (!p->Attributes().IsEmpty()) {
+            out_ << " [";
+        }
+        for (auto attr : p->Attributes()) {
+            if (attr != p->Attributes().Front()) {
+                out_ << ", ";
+            }
+
+            out_ << "@" << attr;
+            if (attr == FunctionParam::Attribute::kLocation) {
+                out_ << "(" << p->Location().value() << ")";
+            } else if (attr == FunctionParam::Attribute::kBindingPoint) {
+                out_ << "(g: " << p->BindingPoint()->group << " b: " << p->BindingPoint()->binding
+                     << ")";
+            }
+        }
+        if (!p->Attributes().IsEmpty()) {
+            out_ << "]";
+        }
     }
     out_ << "):" << func->ReturnType()->FriendlyName();
 

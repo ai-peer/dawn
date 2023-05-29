@@ -15,6 +15,8 @@
 #ifndef SRC_TINT_IR_FUNCTION_PARAM_H_
 #define SRC_TINT_IR_FUNCTION_PARAM_H_
 
+#include <utility>
+
 #include "src/tint/ir/value.h"
 #include "src/tint/utils/castable.h"
 
@@ -23,6 +25,48 @@ namespace tint::ir {
 /// A function parameter in the IR.
 class FunctionParam : public utils::Castable<FunctionParam, Value> {
   public:
+    /// Attributes attached to parameters
+    enum class Attribute {
+        /// Interpolate attribute
+        kInterpolate,
+        /// Invariant attribute
+        kInvariant,
+        /// Location attribute
+        kLocation,
+        /// Group and binding attributes
+        kBindingPoint,
+        /// Builtin Vertex index
+        kVertexIndex,
+        /// Builtin Instance index
+        kInstanceIndex,
+        /// Builtin Position
+        kPosition,
+        /// Builtin FrontFacing
+        kFrontFacing,
+        /// Builtin Local invocation id
+        kLocalInvocationId,
+        /// Builtin Local invocation index
+        kLocalInvocationIndex,
+        /// Builtin Global invocation id
+        kGlobalInvocationId,
+        /// Builtin Workgroup id
+        kWorkgroupId,
+        /// Builtin Num workgroups
+        kNumWorkgroups,
+        /// Builtin Sample index
+        kSampleIndex,
+        /// Builtin Sample mask
+        kSampleMask,
+    };
+
+    /// Binding information
+    struct BindingPoint {
+        /// The `@group` part of the binding point
+        uint32_t group = 0;
+        /// The `@binding` part of the binding point
+        uint32_t binding = 0;
+    };
+
     /// Constructor
     /// @param type the type of the var
     explicit FunctionParam(const type::Type* type);
@@ -31,10 +75,33 @@ class FunctionParam : public utils::Castable<FunctionParam, Value> {
     /// @returns the type of the var
     const type::Type* Type() const override { return type_; }
 
+    /// Sets the parameter attributes
+    /// @param attrs the attributes to set
+    void SetAttributes(utils::VectorRef<Attribute> attrs) { attributes_ = std::move(attrs); }
+    /// @returns the paramter attributes if any
+    utils::VectorRef<Attribute> Attributes() const { return attributes_; }
+
+    /// Sets the location
+    /// @param loc the location
+    void SetLocation(std::optional<uint32_t> loc) { location_ = loc; }
+    /// @returns the location if `Attributes` contains `kLocation`
+    std::optional<uint32_t> Location() const { return location_; }
+
+    /// Sets the binding point
+    /// @param group the group
+    /// @param binding the binding
+    void SetBindingPoint(uint32_t group, uint32_t binding) { binding_point_ = {group, binding}; }
+    /// @returns the binding points if `Attributes` contains `kBindingPoint`
+    std::optional<struct BindingPoint> BindingPoint() const { return binding_point_; }
+
   private:
-    /// The type of the parameter
-    const type::Type* type_;
+    const type::Type* type_ = nullptr;
+    utils::Vector<Attribute, 1> attributes_;
+    std::optional<uint32_t> location_;
+    std::optional<struct BindingPoint> binding_point_;
 };
+
+utils::StringStream& operator<<(utils::StringStream& out, FunctionParam::Attribute value);
 
 }  // namespace tint::ir
 
