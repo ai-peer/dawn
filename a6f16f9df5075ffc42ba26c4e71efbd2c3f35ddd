@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a02db59_87d6b13e",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-29T20:14:04Z",
+      "side": 1,
+      "message": "Can we replace with `.Emplace(Format::kSpirv, \"spirv\")`?",
+      "range": {
+        "startLine": 195,
+        "startChar": 37,
+        "endLine": 195,
+        "endChar": 76
+      },
+      "revId": "a6f16f9df5075ffc42ba26c4e71efbd2c3f35ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e58b7494_35eede30",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-29T20:14:04Z",
+      "side": 1,
+      "message": "We can\u0027t use `const auto\u0026 [name, value]` anymore?\n\nIf not, why not `const auto\u0026 override`, here and for `name` and `value` below?",
+      "range": {
+        "startLine": 955,
+        "startChar": 18,
+        "endLine": 955,
+        "endChar": 31
+      },
+      "revId": "a6f16f9df5075ffc42ba26c4e71efbd2c3f35ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a84565_61b1df90",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-29T20:14:04Z",
+      "side": 1,
+      "message": "Why do we need this cast?",
+      "range": {
+        "startLine": 967,
+        "startChar": 51,
+        "endLine": 967,
+        "endChar": 62
+      },
+      "revId": "a6f16f9df5075ffc42ba26c4e71efbd2c3f35ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608b8596_ede1d786",
+        "filename": "src/tint/utils/cli.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-29T20:14:04Z",
+      "side": 1,
+      "message": "Why do we need to slice here?",
+      "range": {
+        "startLine": 170,
+        "startChar": 50,
+        "endLine": 170,
+        "endChar": 57
+      },
+      "revId": "a6f16f9df5075ffc42ba26c4e71efbd2c3f35ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed54a3a4_0557ba63",
+        "filename": "src/tint/utils/cli.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-29T20:14:04Z",
+      "side": 1,
+      "message": "Using runtime polymorphism works, of course, but it does require heap allocation, which I know you manage with a BlockAllocator so that it\u0027s not too costly. But I think a worthy alternative implementation would be to use a variant of the different option types, since it\u0027s a closed set of types. No base class, no BlockAllocator (replaced with a vector of variant), etc. But I won\u0027t push too hard having suffered the compile-time costs of std::visit.",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 12
+      },
+      "revId": "a6f16f9df5075ffc42ba26c4e71efbd2c3f35ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
