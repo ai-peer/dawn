@@ -16,6 +16,24 @@
       "message": "Hi all,\n\nThis change has caused regressions in our workload as it prevents us from creating the buffers larger than 1\u003c\u003c27, while our workloads work well on Win11 x64 on both Nvidia and Intel GPUs with previous versions of Chromium (e.g. chrome stable 113). Can we only apply this restriction on ARM devices?",
       "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "647e1b51_e2e7f4de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-05-29T09:13:58Z",
+      "side": 1,
+      "message": "Our workloads require using some large storage buffer, but with this CL all D3D adapters can only support 128MB storage buffer binding size now (previously we can go to 2GB-4), and that cause regression.\nBy the way, the D3D spec say this limitation `D3D11_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP` is \"Number of texels (independent of struct size) in a buffer\". I am not sure how to understand this description, does a texel only take 1 byte? (Because the limit `maxStorageBufferBindingSize` here is in bytes)",
+      "parentUuid": "a1538aae_ec3a6007",
+      "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
