@@ -16,6 +16,75 @@
       "message": "PTAL",
       "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a3810d_3cf7274e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-29T13:58:30Z",
+      "side": 1,
+      "message": "nit: `GetFormat().HasDepth() \u0026\u0026 GetFormat().HasStencil()`?",
+      "range": {
+        "startLine": 470,
+        "startChar": 8,
+        "endLine": 470,
+        "endChar": 71
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb9796f1_c8ea95ee",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-29T13:58:30Z",
+      "side": 1,
+      "message": "What do offset and stride mean? Could you please add a comment in code?\n\nShould offset be 3, stride be 4 for Depth24PlusStencil8, right? Could you please add comment to describe each format layout, etc?",
+      "range": {
+        "startLine": 537,
+        "startChar": 34,
+        "endLine": 537,
+        "endChar": 53
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0d6a6f_c1d06746",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-29T13:58:30Z",
+      "side": 1,
+      "message": "Move it out of the loop to avoid heap allocation for each row, and only allocate if hasStencil is true",
+      "range": {
+        "startLine": 567,
+        "startChar": 20,
+        "endLine": 567,
+        "endChar": 73
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
