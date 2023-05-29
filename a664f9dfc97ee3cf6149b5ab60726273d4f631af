@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c507a845_92d4542c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-05-29T06:15:35Z",
+      "side": 1,
+      "message": "Hi Rafael,\n\nI\u0027ve updated the Toggle description and commit message. PTAL, thanks!",
+      "revId": "a664f9dfc97ee3cf6149b5ab60726273d4f631af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
