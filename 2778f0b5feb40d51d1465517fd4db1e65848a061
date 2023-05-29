@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d82de8_0e806c05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-29T11:58:19Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "2778f0b5feb40d51d1465517fd4db1e65848a061",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749be0d1_1723655c",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-29T11:58:19Z",
+      "side": 1,
+      "message": "I\u0027m tempted to drop the `kLocation` and `kBindingGroup` attributes and just let the existance of values below signify the existance. Thoughts?",
+      "revId": "2778f0b5feb40d51d1465517fd4db1e65848a061",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
