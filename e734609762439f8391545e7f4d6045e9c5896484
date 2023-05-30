@@ -16,6 +16,52 @@
       "message": "Hi Austin or Corentin, PTAL. Thanks",
       "revId": "e734609762439f8391545e7f4d6045e9c5896484",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5d1f49_fc55d340",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T20:43:22Z",
+      "side": 1,
+      "message": "I think we ought to pass `CompiledShader` in by pointer instead of assigning to `.hlslSource` and passing in `.usesVertexIndex` and `.usesInstanceIndex` separately by pointer",
+      "range": {
+        "startLine": 318,
+        "startChar": 8,
+        "endLine": 319,
+        "endChar": 23
+      },
+      "revId": "e734609762439f8391545e7f4d6045e9c5896484",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14564b83_9abfad53",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T20:43:22Z",
+      "side": 1,
+      "message": "existing nit: \"GetUses\" is a bit verbose. Can we name it \"UsesVertexIndex\" instead?",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "e734609762439f8391545e7f4d6045e9c5896484",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
