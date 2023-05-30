@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b765dd8_12ae9364",
+        "filename": "src/tint/ir/from_program_accessor_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-30T21:07:38Z",
+      "side": 1,
+      "message": "Outer is an inner, and vice-versa.",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 54
+      },
+      "revId": "3b2997655619d7bda5539cd4f826ce42677293cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "782dff19_92459f79",
+        "filename": "src/tint/ir/from_program_accessor_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-30T21:07:38Z",
+      "side": 1,
+      "message": "`yx` ?",
+      "range": {
+        "startLine": 327,
+        "startChar": 37,
+        "endLine": 327,
+        "endChar": 39
+      },
+      "revId": "3b2997655619d7bda5539cd4f826ce42677293cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
