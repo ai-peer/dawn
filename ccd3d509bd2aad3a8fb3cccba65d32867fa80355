@@ -33,6 +33,24 @@
       "message": "Would be great to also have tests for:\n- Multiple values\n- An empty true/false block (to test the extra condition you added for this)\n- Loops (to test the necessary forward references)\n\nYou might not be able to hit any of these from WGSL yet, but I think they\u0027re all testable via the IR builder.",
       "revId": "ccd3d509bd2aad3a8fb3cccba65d32867fa80355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a7cc53_458ebea2",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_if_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-30T20:50:04Z",
+      "side": 1,
+      "message": "Working on the first and last. Empty true/false I\u0027m going to say is illegal, as you don\u0027t know what the phi values should be.",
+      "parentUuid": "82a19dda_45249a99",
+      "revId": "ccd3d509bd2aad3a8fb3cccba65d32867fa80355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
