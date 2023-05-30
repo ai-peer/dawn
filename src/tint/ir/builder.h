@@ -18,6 +18,7 @@
 #include <utility>
 
 #include "src/tint/constant/scalar.h"
+#include "src/tint/ir/access.h"
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/bitcast.h"
 #include "src/tint/ir/block_param.h"
@@ -379,6 +380,12 @@ class Builder {
     /// @param type the parameter type
     /// @returns the value
     ir::FunctionParam* FunctionParam(const type::Type* type);
+
+    /// Creates a new `Access`
+    /// @param type the return type
+    /// @param source the source value
+    /// @param indices the access indices
+    ir::Access* Access(const type::Type* type, Value* source, utils::VectorRef<uint32_t> indices);
 
     /// Retrieves the root block for the module, creating if necessary
     /// @returns the root block
