@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb9a1c1_b5754414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-30T11:30:34Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "0a0c9d687da6590847ecc6c9c46d34d5689574c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcad317_909e6846",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-30T11:30:34Z",
+      "side": 1,
+      "message": "Without this fix, the case fails as `ToMockQueueWorkDone` would fire at serial 1, while `ToMockMapCallback` at serial 0.\n```\nTEST_P(QueueTimelineTests, OnWorkDone_MapRead) {\n    InSequence sequence;\n    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_Success, this)).Times(1);\n    EXPECT_CALL(*mockMapCallback, Call(WGPUBufferMapAsyncStatus_Success, this)).Times(1);\n\n    queue.OnSubmittedWorkDone(0u, ToMockQueueWorkDone, this);\n\n    mMapReadBuffer.MapAsync(wgpu::MapMode::Read, 0, wgpu::kWholeMapSize, ToMockMapCallback, this);\n\n    WaitForAllOperations();\n    mMapReadBuffer.Unmap();\n}\n```",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 39
+      },
+      "revId": "0a0c9d687da6590847ecc6c9c46d34d5689574c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
