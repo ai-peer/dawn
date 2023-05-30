@@ -206,6 +206,15 @@ class GeneratorImplIr {
     /// The current function that is being emitted.
     Function current_function_;
 
+    /// The merge block for the current if statement
+    uint32_t if_merge_label_ = 0;
+
+    /// The merge block for the current loop statement
+    uint32_t loop_merge_label_ = 0;
+
+    /// The merge block for the current switch statement
+    uint32_t switch_merge_label_ = 0;
+
     bool zero_init_workgroup_memory_ = false;
 };
 
