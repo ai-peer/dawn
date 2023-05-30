@@ -124,6 +124,24 @@
       "parentUuid": "ac013995_1991d557",
       "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a659782_36834b8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T20:54:52Z",
+      "side": 1,
+      "message": "ok - if it\u0027s a driver bug, can we apply the smaller limit only on ARM GPUs then? we can further reduce it based on driver version, if possible\n\nwe still should limit the storage buffer binding size if it is problematic on ARM GPUs.",
+      "parentUuid": "13bc1682_3f30dbe1",
+      "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
