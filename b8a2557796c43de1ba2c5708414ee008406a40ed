@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74853348_d2af0767",
+        "filename": "src/tint/ir/location.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-30T18:01:32Z",
+      "side": 1,
+      "message": "I was imagining the interpolation being non-optional in the IR to avoid the extra `if (interpolation)` check, and to make things always explicit. But also this is fine and we should land it to make forward progress.",
+      "revId": "b8a2557796c43de1ba2c5708414ee008406a40ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
