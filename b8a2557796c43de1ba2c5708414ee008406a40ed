@@ -16,6 +16,24 @@
       "message": "I was imagining the interpolation being non-optional in the IR to avoid the extra `if (interpolation)` check, and to make things always explicit. But also this is fine and we should land it to make forward progress.",
       "revId": "b8a2557796c43de1ba2c5708414ee008406a40ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ddaee80_065ddca7",
+        "filename": "src/tint/ir/location.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-30T18:12:20Z",
+      "side": 1,
+      "message": "I thought of that, but wasn\u0027t sure what to set the default interpolation value too. It\u0027s different for i32 and f32, so we could add logic to detect the right one and use that.\n\nWe can always do that as a followup.",
+      "parentUuid": "74853348_d2af0767",
+      "revId": "b8a2557796c43de1ba2c5708414ee008406a40ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
