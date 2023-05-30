@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3da00a_62d1f1ba",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-30T13:55:15Z",
+      "side": 1,
+      "message": "I believe this was a pre-existing bug. Are we not validating the output?",
+      "revId": "43f4abe63b55fa2474c07d7322f53d8659d2c799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
