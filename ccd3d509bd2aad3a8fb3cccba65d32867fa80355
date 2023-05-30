@@ -51,6 +51,24 @@
       "parentUuid": "82a19dda_45249a99",
       "revId": "ccd3d509bd2aad3a8fb3cccba65d32867fa80355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df4ccd33_a5123ee0",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_if_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-30T20:53:49Z",
+      "side": 1,
+      "message": "By \"empty\" I just mean it only contains a branch to the merge block, which is what you specifically added a condition for in the generator. You can still pass a value as a block argument in this case.",
+      "parentUuid": "25a7cc53_458ebea2",
+      "revId": "ccd3d509bd2aad3a8fb3cccba65d32867fa80355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
