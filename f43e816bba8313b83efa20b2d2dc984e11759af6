@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9bd095d_5daec05a",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T21:08:41Z",
+      "side": 1,
+      "message": "would it work to set the maxStorageBufferBindingSize to `1 \u003c\u003c D3D12_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP` based on \n`gpu_info::IsQualcomm(mVendorId)` ?\n\nAssuming this is a driver bug, we want to avoid it in all situations, not just MaxLimitTests",
+      "revId": "f43e816bba8313b83efa20b2d2dc984e11759af6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
