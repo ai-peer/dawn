@@ -52,6 +52,24 @@
       "parentUuid": "006211fa_183aab48",
       "revId": "3368ddd7ae13045df77ed9bf6d794afdc0c3290e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb08bd71_861380bd",
+        "filename": "src/tint/ir/block.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-30T22:20:39Z",
+      "side": 1,
+      "message": "Thanks, I think that makes the call sites a lot easier to understand.",
+      "parentUuid": "8d045889_f4c08c2f",
+      "revId": "3368ddd7ae13045df77ed9bf6d794afdc0c3290e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
