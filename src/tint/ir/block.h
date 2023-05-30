@@ -65,23 +65,9 @@ class Block : public utils::Castable<Block> {
     /// @returns the params to the block
     utils::Vector<const BlockParam*, 0>& Params() { return params_; }
 
-    /// @returns the inbound branch list for the block
-    utils::VectorRef<ir::Branch*> InboundBranches() const { return inbound_branches_; }
-
-    /// Adds the given node to the inbound branches
-    /// @param node the node to add
-    void AddInboundBranch(ir::Branch* node) { inbound_branches_.Push(node); }
-
   private:
     utils::Vector<const Instruction*, 16> instructions_;
     utils::Vector<const BlockParam*, 0> params_;
-
-    /// The list of branches into this node. This list maybe empty for several
-    /// reasons:
-    ///   - Node is a start node
-    ///   - Node is a merge target outside control flow (e.g. an if that returns in both branches)
-    ///   - Node is a continue target outside control flow (e.g. a loop that returns)
-    utils::Vector<ir::Branch*, 2> inbound_branches_;
 };
 
 }  // namespace tint::ir

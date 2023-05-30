@@ -23,7 +23,6 @@ namespace tint::ir {
 ExitSwitch::ExitSwitch(ir::Switch* sw) : Base(utils::Empty), switch_(sw) {
     TINT_ASSERT(IR, switch_);
     switch_->AddUsage(this);
-    switch_->Merge()->AddInboundBranch(this);
 }
 
 ExitSwitch::~ExitSwitch() = default;

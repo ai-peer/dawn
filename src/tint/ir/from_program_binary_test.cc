@@ -466,37 +466,24 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalAnd) {
 %test_function = func():void [@compute @workgroup_size(1, 1, 1)] -> %b2 {
   %b2 = block {
     %3:bool = call %my_func
-    if %3 [t: %b3, f: %b4, m: %b5]
+    %4:bool = if %3 [t: %b3, f: %b4]
       # True block
       %b3 = block {
-        exit_if %b5 false
+        exit_if false
       }
 
       # False block
       %b4 = block {
-        exit_if %b5 %3
+        exit_if %3
       }
 
-    # Merge block
-    %b5 = block (%4:bool) {
-      if %4:bool [t: %b6, f: %b7, m: %b8]
-        # True block
-        %b6 = block {
-          exit_if %b8
-        }
-
-        # False block
-        %b7 = block {
-          exit_if %b8
-        }
-
-      # Merge block
-      %b8 = block {
-        ret
+    if %4 [t: %b5]
+      # True block
+      %b5 = block {
+        exit_if
       }
 
-    }
-
+    ret
   }
 }
 )");
@@ -518,37 +505,24 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_LogicalOr) {
 %test_function = func():void [@compute @workgroup_size(1, 1, 1)] -> %b2 {
   %b2 = block {
     %3:bool = call %my_func
-    if %3 [t: %b3, f: %b4, m: %b5]
+    %4:bool = if %3 [t: %b3, f: %b4]
       # True block
       %b3 = block {
-        exit_if %b5 %3
+        exit_if %3
       }
 
       # False block
       %b4 = block {
-        exit_if %b5 true
+        exit_if true
       }
 
-    # Merge block
-    %b5 = block (%4:bool) {
-      if %4:bool [t: %b6, f: %b7, m: %b8]
-        # True block
-        %b6 = block {
-          exit_if %b8
-        }
-
-        # False block
-        %b7 = block {
-          exit_if %b8
-        }
-
-      # Merge block
-      %b8 = block {
-        ret
+    if %4 [t: %b5]
+      # True block
+      %b5 = block {
+        exit_if
       }
 
-    }
-
+    ret
   }
 }
 )");
@@ -805,27 +779,23 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Binary_Compound) {
   %b2 = block {
     %3:f32 = call %my_func
     %4:bool = lt %3, 2.0f
-    if %4 [t: %b3, f: %b4, m: %b5]
+    %tint_symbol:bool = if %4 [t: %b3, f: %b4]
       # True block
       %b3 = block {
-        %5:f32 = call %my_func
         %6:f32 = call %my_func
-        %7:f32 = mul 2.29999995231628417969f, %6
-        %8:f32 = div %5, %7
-        %9:bool = gt 2.5f, %8
-        exit_if %b5 %9
+        %7:f32 = call %my_func
+        %8:f32 = mul 2.29999995231628417969f, %7
+        %9:f32 = div %6, %8
+        %10:bool = gt 2.5f, %9
+        exit_if %10
       }
 
       # False block
       %b4 = block {
-        exit_if %b5 %4
+        exit_if %4
       }
 
-    # Merge block
-    %b5 = block (%tint_symbol:bool) {
-      ret
-    }
-
+    ret
   }
 }
 )");
