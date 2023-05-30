@@ -52,6 +52,24 @@
       "parentUuid": "647e1b51_e2e7f4de",
       "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e28d8f5_d70dd206",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-30T05:52:34Z",
+      "side": 1,
+      "message": "Hello, Jiawei and Zhaoming, thanks for let me know that.\nI\u0027ll rework this patch to apply the limit to ARM devices or the limit test, today. Sorry for the trouble. We need move the change from the D3D backend to the test.",
+      "parentUuid": "4227d40f_a7603112",
+      "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
