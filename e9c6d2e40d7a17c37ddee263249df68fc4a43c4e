@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "665ad021_dcfac256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T18:35:51Z",
+      "side": 1,
+      "message": "do we need the same validation as well for dispatch and dispatchIndirect in a compute pass?",
+      "revId": "e9c6d2e40d7a17c37ddee263249df68fc4a43c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20130369_49403070",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T18:35:51Z",
+      "side": 1,
+      "message": "nit: generally reference the bug like `TODO(dawn:1845): some comment`\n\nwould be useful to provide context that this may perform better because we can make fewer allocations.\n\nfine with me to land in this form. you can write a test in \nsrc/dawn/tests/benchmarks/ to make a microbenchmark to evaluate how fast or slow this validation is. `dawn_bencharks` is compiled on CQ but not run anywhere yet automatically. Local perf testing is good enough for now though until we have it automated.",
+      "range": {
+        "startLine": 335,
+        "startChar": 7,
+        "endLine": 335,
+        "endChar": 10
+      },
+      "revId": "e9c6d2e40d7a17c37ddee263249df68fc4a43c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57714408_7791f56b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T18:35:51Z",
+      "side": 1,
+      "message": "I added a [span version for absl formatting](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/webgpu_absl_format.h;l\u003d145?q\u003dAbslFormatConvert%20ityp::span%20f:dawn). Perhaps we can use it here (or add a vector version) so that we print out the list of views that are used!",
+      "revId": "e9c6d2e40d7a17c37ddee263249df68fc4a43c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "794df62c_9202d37a",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T18:35:51Z",
+      "side": 1,
+      "message": "nit: here and the rest - is the usage of sampling necessary? or can we just say `_ \u003d \u0026tex0;` ?",
+      "range": {
+        "startLine": 164,
+        "startChar": 10,
+        "endLine": 166,
+        "endChar": 55
+      },
+      "revId": "e9c6d2e40d7a17c37ddee263249df68fc4a43c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f138a95a_39d464a6",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T18:35:51Z",
+      "side": 1,
+      "message": "generally, provide a comment above the test to more fully describe what it\u0027s testing. This way in the future, someone can more easily check if we have all the coverage we want. I can\u0027t understand exactly what the test is covering from the title, without reading the code as well",
+      "revId": "e9c6d2e40d7a17c37ddee263249df68fc4a43c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e49aba7_0f7db4cc",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T18:35:51Z",
+      "side": 1,
+      "message": "what about two write-only storage texture views?\n\nspec says\n\u003e NOTE: race condition of multiple writable storage buffer/texture usages in a single usage scope is allowed.",
+      "range": {
+        "startLine": 353,
+        "startChar": 29,
+        "endLine": 353,
+        "endChar": 55
+      },
+      "revId": "e9c6d2e40d7a17c37ddee263249df68fc4a43c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
