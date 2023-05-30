@@ -133,6 +133,15 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                     continue;
                 }
 #endif
+                if (IsD3D12() && IsQualcomm()) {
+                    // limit of number of texels in a buffer == (1 << 27)
+                    // D3D11_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP
+                    // This limit doesn't apply to a raw buffer, but only applies to
+                    // typed, or structured buffer. so this could be a driver bug.
+                    maxBufferBindingSize =
+                        std::min(maxBufferBindingSize, uint64_t(1) << 27);
+                }
+
                 if (IsWARP()) {
                     maxBufferBindingSize =
                         std::min(maxBufferBindingSize, uint64_t(512) * 1024 * 1024);
