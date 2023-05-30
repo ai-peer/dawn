@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b16a6e7_12ebdaee",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-30T11:34:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7d954153_bfea8541",
+      "range": {
+        "startLine": 470,
+        "startChar": 8,
+        "endLine": 470,
+        "endChar": 71
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb9796f1_c8ea95ee",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Fair enough. Better to comment a little bit more here.\n\nFor Depth24PlusStencil8, it should be same as Depth32FloatStencil8.\n\n```\n        case wgpu::TextureFormat::Stencil8:\n            return DXGI_FORMAT_D24_UNORM_S8_UINT;\n        case wgpu::TextureFormat::Depth24PlusStencil8:\n        case wgpu::TextureFormat::Depth32FloatStencil8:\n            return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;\n```",
       "parentUuid": "fb9796f1_c8ea95ee",
+      "range": {
+        "startLine": 537,
+        "startChar": 34,
+        "endLine": 537,
+        "endChar": 53
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73437fe_6c9f4376",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-30T11:34:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "81f4d039_54216462",
       "range": {
         "startLine": 537,
         "startChar": 34,
