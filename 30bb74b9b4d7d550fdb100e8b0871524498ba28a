@@ -33,6 +33,24 @@
       "message": "This is wrong for function params. Has to be set after the iteration due to ordering of location and interpolated.",
       "revId": "30bb74b9b4d7d550fdb100e8b0871524498ba28a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1f1105_86d1ad24",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-30T18:11:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "234821d3_cf3cc85b",
+      "revId": "30bb74b9b4d7d550fdb100e8b0871524498ba28a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
