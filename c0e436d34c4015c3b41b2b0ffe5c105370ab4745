@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f2af603_fa485a3f",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T18:41:41Z",
+      "side": 1,
+      "message": "why a TODO? isn\u0027t this toggle the thing that makes the stencil write work?\nor do you have a plan to not use the blit ?",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 60
+      },
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e479df59_2bc6599e",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
