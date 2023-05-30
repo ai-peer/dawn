@@ -172,7 +172,7 @@ class Impl {
         TINT_ASSERT(IR, current_block_);
         TINT_ASSERT(IR, !current_block_->HasBranchTarget());
 
-        current_block_->Instructions().Push(br);
+        current_block_->AddInstruction(br);
         current_block_ = nullptr;
     }
 
@@ -396,7 +396,7 @@ class Impl {
             return;
         }
         auto store = builder_.Store(lhs.Get(), rhs.Get());
-        current_block_->Instructions().Push(store);
+        current_block_->AddInstruction(store);
     }
 
     void EmitIncrementDecrement(const ast::IncrementDecrementStatement* stmt) {
@@ -407,7 +407,7 @@ class Impl {
 
         // Load from the LHS.
         auto* lhs_value = builder_.Load(lhs.Get());
-        current_block_->Instructions().Push(lhs_value);
+        current_block_->AddInstruction(lhs_value);
 
         auto* ty = lhs_value->Type();
 
@@ -420,10 +420,10 @@ class Impl {
         } else {
             inst = builder_.Subtract(ty, lhs_value, rhs);
         }
-        current_block_->Instructions().Push(inst);
+        current_block_->AddInstruction(inst);
 
         auto store = builder_.Store(lhs.Get(), inst);
-        current_block_->Instructions().Push(store);
+        current_block_->AddInstruction(store);
     }
 
     void EmitCompoundAssignment(const ast::CompoundAssignmentStatement* stmt) {
@@ -439,7 +439,7 @@ class Impl {
 
         // Load from the LHS.
         auto* lhs_value = builder_.Load(lhs.Get());
-        current_block_->Instructions().Push(lhs_value);
+        current_block_->AddInstruction(lhs_value);
 
         auto* ty = lhs_value->Type();
 
@@ -489,10 +489,10 @@ class Impl {
                 TINT_ICE(IR, diagnostics_) << "missing binary operand type";
                 return;
         }
-        current_block_->Instructions().Push(inst);
+        current_block_->AddInstruction(inst);
 
         auto store = builder_.Store(lhs.Get(), inst);
-        current_block_->Instructions().Push(store);
+        current_block_->AddInstruction(store);
     }
 
     void EmitBlock(const ast::BlockStatement* block) {
@@ -512,7 +512,7 @@ class Impl {
             return;
         }
         auto* if_inst = builder_.CreateIf(reg.Get());
-        current_block_->Instructions().Push(if_inst);
+        current_block_->AddInstruction(if_inst);
 
         {
             ControlStackScope scope(this, if_inst);
@@ -547,7 +547,7 @@ class Impl {
 
     void EmitLoop(const ast::LoopStatement* stmt) {
         auto* loop_inst = builder_.CreateLoop();
-        current_block_->Instructions().Push(loop_inst);
+        current_block_->AddInstruction(loop_inst);
 
         {
             ControlStackScope scope(this, loop_inst);
@@ -591,7 +591,7 @@ class Impl {
 
     void EmitWhile(const ast::WhileStatement* stmt) {
         auto* loop_inst = builder_.CreateLoop();
-        current_block_->Instructions().Push(loop_inst);
+        current_block_->AddInstruction(loop_inst);
 
         // Continue is always empty, just go back to the start
         current_block_ = loop_inst->Continuing();
@@ -610,7 +610,7 @@ class Impl {
 
             // Create an `if (cond) {} else {break;}` control flow
             auto* if_inst = builder_.CreateIf(reg.Get());
-            current_block_->Instructions().Push(if_inst);
+            current_block_->AddInstruction(if_inst);
 
             current_block_ = if_inst->True();
             SetBranch(builder_.ExitIf(if_inst));
@@ -632,7 +632,7 @@ class Impl {
 
     void EmitForLoop(const ast::ForLoopStatement* stmt) {
         auto* loop_inst = builder_.CreateLoop();
-        current_block_->Instructions().Push(loop_inst);
+        current_block_->AddInstruction(loop_inst);
 
         // Make sure the initializer ends up in a contained scope
         scopes_.Push();
@@ -657,7 +657,7 @@ class Impl {
 
                 // Create an `if (cond) {} else {break;}` control flow
                 auto* if_inst = builder_.CreateIf(reg.Get());
-                current_block_->Instructions().Push(if_inst);
+                current_block_->AddInstruction(if_inst);
 
                 current_block_ = if_inst->True();
                 SetBranch(builder_.ExitIf(if_inst));
@@ -692,7 +692,7 @@ class Impl {
             return;
         }
         auto* switch_inst = builder_.CreateSwitch(reg.Get());
-        current_block_->Instructions().Push(switch_inst);
+        current_block_->AddInstruction(switch_inst);
 
         {
             ControlStackScope scope(this, switch_inst);
@@ -765,7 +765,7 @@ class Impl {
     // figuring out the multi-level exit that is triggered.
     void EmitDiscard(const ast::DiscardStatement*) {
         auto* inst = builder_.Discard();
-        current_block_->Instructions().Push(inst);
+        current_block_->AddInstruction(inst);
     }
 
     void EmitBreakIf(const ast::BreakIfStatement* stmt) {
@@ -823,7 +823,7 @@ class Impl {
         // If this expression maps to sem::Load, insert a load instruction to get the result.
         if (result && sem->Is<sem::Load>()) {
             auto* load = builder_.Load(result.Get());
-            current_block_->Instructions().Push(load);
+            current_block_->AddInstruction(load);
             return load;
         }
 
@@ -849,7 +849,7 @@ class Impl {
                     }
                     val->SetInitializer(init.Get());
                 }
-                current_block_->Instructions().Push(val);
+                current_block_->AddInstruction(val);
 
                 // Store the declaration so we can get the instruction to store too
                 scopes_.Set(v->name->symbol, val);
@@ -916,7 +916,7 @@ class Impl {
                 break;
         }
 
-        current_block_->Instructions().Push(inst);
+        current_block_->AddInstruction(inst);
         return inst;
     }
 
@@ -940,7 +940,7 @@ class Impl {
         }
 
         auto* if_inst = builder_.CreateIf(lhs.Get());
-        current_block_->Instructions().Push(if_inst);
+        current_block_->AddInstruction(if_inst);
 
         auto* result = builder_.BlockParam(builder_.ir.Types().bool_());
         if_inst->Merge()->SetParams(utils::Vector{result});
@@ -1061,7 +1061,7 @@ class Impl {
                 return utils::Failure;
         }
 
-        current_block_->Instructions().Push(inst);
+        current_block_->AddInstruction(inst);
         return inst;
     }
 
@@ -1075,7 +1075,7 @@ class Impl {
         auto* ty = sem->Type()->Clone(clone_ctx_.type_ctx);
         auto* inst = builder_.Bitcast(ty, val.Get());
 
-        current_block_->Instructions().Push(inst);
+        current_block_->AddInstruction(inst);
         return inst;
     }
 
@@ -1139,7 +1139,7 @@ class Impl {
         if (inst == nullptr) {
             return utils::Failure;
         }
-        current_block_->Instructions().Push(inst);
+        current_block_->AddInstruction(inst);
         return inst;
     }
 
