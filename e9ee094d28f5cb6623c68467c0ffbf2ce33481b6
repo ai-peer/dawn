@@ -88,6 +88,24 @@
       "parentUuid": "2e28d8f5_d70dd206",
       "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac013995_1991d557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T15:51:31Z",
+      "side": 1,
+      "message": "sorry for my misunderstanding here. So this is not a real limit then but a bug in the ARM driver?\n\nIs there something else we can query to determine the actual maxStorageBufferBindingSize?",
+      "parentUuid": "97ee2b5f_90416d1a",
+      "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
