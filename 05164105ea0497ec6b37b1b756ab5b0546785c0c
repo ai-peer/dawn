@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc8921bb_9e503c56",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-30T19:39:20Z",
+      "side": 1,
+      "message": "Does this mean if we have phi nodes coming from switch and loop we\u0027ll need to duplicate this code into each emitter instead of just having a single emission in EmitBlock?",
+      "revId": "05164105ea0497ec6b37b1b756ab5b0546785c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
