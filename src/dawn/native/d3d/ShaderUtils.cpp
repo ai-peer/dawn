@@ -139,7 +139,7 @@ ResultOrError<std::string> TranslateToHLSL(
     d3d::HlslCompilationRequest r,
     CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*> tracePlatform,
     std::string* remappedEntryPointName,
-    bool* usesVertexOrInstanceIndex) {
+    CompiledShader* compiledShader) {
     std::ostringstream errorStream;
     errorStream << "Tint HLSL failure:" << std::endl;
 
@@ -204,7 +204,8 @@ ResultOrError<std::string> TranslateToHLSL(
 
     if (r.stage == SingleShaderStage::Vertex) {
         if (auto* data = transformOutputs.Get<tint::ast::transform::FirstIndexOffset::Data>()) {
-            *usesVertexOrInstanceIndex = data->has_vertex_or_instance_index;
+            compiledShader->usesVertexIndex = data->has_vertex_index;
+            compiledShader->usesInstanceIndex = data->has_instance_index;
         } else {
             return DAWN_VALIDATION_ERROR("Transform output missing first index offset data.");
         }
@@ -312,9 +313,9 @@ ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r) {
     CompiledShader compiledShader;
     // Compile the source shader to HLSL.
     std::string remappedEntryPoint;
-    DAWN_TRY_ASSIGN(compiledShader.hlslSource,
-                    TranslateToHLSL(std::move(r.hlsl), r.tracePlatform, &remappedEntryPoint,
-                                    &compiledShader.usesVertexOrInstanceIndex));
+    DAWN_TRY_ASSIGN(
+        compiledShader.hlslSource,
+        TranslateToHLSL(std::move(r.hlsl), r.tracePlatform, &remappedEntryPoint, &compiledShader));
 
     switch (r.bytecode.compiler) {
         case d3d::Compiler::DXC: {
