@@ -39,6 +39,30 @@
       },
       "revId": "0a0c9d687da6590847ecc6c9c46d34d5689574c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f51cf526_0ce0a7e4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T12:59:33Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the correct fix: first here we are only checking if any uniform buffer exists, so this will only work if there has never been any work, which is the case only in this test.\n\nWe wanted to preserver the ordering of callbacks in Dawn, but the group decided to remove that constraint in the API, so I think we could remove this test. Or at least remove the \"InSequence\"",
+      "parentUuid": "dbcad317_909e6846",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 39
+      },
+      "revId": "0a0c9d687da6590847ecc6c9c46d34d5689574c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
