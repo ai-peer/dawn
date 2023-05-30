@@ -106,6 +106,24 @@
       "parentUuid": "97ee2b5f_90416d1a",
       "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bc1682_3f30dbe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-30T20:53:22Z",
+      "side": 1,
+      "message": "What I was told is, that this limit depends on the type of buffer. It doesn\u0027t apply to raw buffer. It only applies to typed buffer, or structured buffer. So, we are using a raw buffer here, yes it would be driver bug. In any case, I think we need move it to the test. I\u0027m not sure if we can query and determine the actual size,\nThanks,",
+      "parentUuid": "ac013995_1991d557",
+      "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
