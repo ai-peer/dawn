@@ -24,6 +24,7 @@
 
 namespace tint::utils::cli {
 
+
 Option::~Option() = default;
 
 void OptionSet::ShowHelp(std::ostream& s_out) {
@@ -120,9 +121,10 @@ void OptionSet::ShowHelp(std::ostream& s_out) {
 
 Result<OptionSet::Unconsumed> OptionSet::Parse(std::ostream& s_err,
                                                utils::VectorRef<std::string_view> arguments_raw) {
-    // Build a map of name to option
+    // Build a map of name to option, and set defaults
     utils::Hashmap<std::string, Option*, 32> options_by_name;
     for (auto* opt : options.Objects()) {
+        opt->SetDefault();
         for (auto name : {opt->Name(), opt->Alias(), opt->ShortName()}) {
             if (!name.empty() && !options_by_name.Add(name, opt)) {
                 s_err << "multiple options with name '" << name << "'" << std::endl;
@@ -143,6 +145,8 @@ Result<OptionSet::Unconsumed> OptionSet::Parse(std::ostream& s_err,
         }
         arguments.push_back(arg);
     }
+
+    utils::Hashset<Option*, 8> options_parsed;
 
     Unconsumed unconsumed;
     while (!arguments.empty()) {

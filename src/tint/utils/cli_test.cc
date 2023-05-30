@@ -284,5 +284,16 @@ TEST_F(CLITest, ParseUsingEquals) {
     EXPECT_EQ(opt.value, 123);
 }
 
+TEST_F(CLITest, SetValueToDefault) {
+    OptionSet opts;
+    auto& opt = opts.Add<BoolOption>("my_option", "a boolean value", Default{true});
+
+    std::stringstream err;
+    auto res = opts.Parse(err, utils::Empty);
+    ASSERT_TRUE(res) << err.str();
+    EXPECT_TRUE(err.str().empty());
+    EXPECT_EQ(opt.value, true);
+}
+
 }  // namespace
 }  // namespace tint::utils::cli

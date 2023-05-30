@@ -114,6 +114,9 @@ class Option {
     /// @return the default value of the option, or an empty string if there is no default value.
     virtual std::string DefaultValue() const = 0;
 
+    /// Sets the option value to the default (called before arguments are parsed)
+    virtual void SetDefault() = 0;
+
     /// Parses the option's arguments from the list of command line arguments, removing the consumed
     /// arguments before returning. @p arguments will have already had the option's name consumed
     /// before calling.
@@ -231,6 +234,8 @@ class ValueOption : public Option {
     std::string DefaultValue() const override {
         return default_value.has_value() ? ToString(*default_value) : "";
     }
+
+    void SetDefault() override { value = default_value; }
 
     Error Parse(std::deque<std::string_view>& arguments) override {
         TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
@@ -368,6 +373,8 @@ class EnumOption : public Option {
         }
         return "";
     }
+
+    void SetDefault() override { value = default_value; }
 
     Error Parse(std::deque<std::string_view>& arguments) override {
         if (arguments.empty()) {
