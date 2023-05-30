@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d954153_bfea8541",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-30T02:09:34Z",
+      "side": 1,
+      "message": "Not exactly same. Take wgpu::TextureFormat::Stencil8 for example, `GetFormat().HasDepth()` is false. However, its backend format `DXGI_FORMAT_D24_UNORM_S8_UINT` is an unsupported depth-stencil format.",
+      "parentUuid": "f6a3810d_3cf7274e",
+      "range": {
+        "startLine": 470,
+        "startChar": 8,
+        "endLine": 470,
+        "endChar": 71
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb9796f1_c8ea95ee",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 4
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81f4d039_54216462",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-30T02:09:34Z",
+      "side": 1,
+      "message": "Fair enough. Better to comment a little bit more here.\n\nFor Depth24PlusStencil8, it should be same as Depth32FloatStencil8.\n\n```\n        case wgpu::TextureFormat::Stencil8:\n            return DXGI_FORMAT_D24_UNORM_S8_UINT;\n        case wgpu::TextureFormat::Depth24PlusStencil8:\n        case wgpu::TextureFormat::Depth32FloatStencil8:\n            return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;\n```",
+      "parentUuid": "fb9796f1_c8ea95ee",
+      "range": {
+        "startLine": 537,
+        "startChar": 34,
+        "endLine": 537,
+        "endChar": 53
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be0d6a6f_c1d06746",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 4
@@ -77,6 +125,30 @@
       "writtenOn": "2023-05-29T13:58:30Z",
       "side": 1,
       "message": "Move it out of the loop to avoid heap allocation for each row, and only allocate if hasStencil is true",
+      "range": {
+        "startLine": 567,
+        "startChar": 20,
+        "endLine": 567,
+        "endChar": 73
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2efb052a_5204b3da",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-30T02:09:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be0d6a6f_c1d06746",
       "range": {
         "startLine": 567,
         "startChar": 20,
