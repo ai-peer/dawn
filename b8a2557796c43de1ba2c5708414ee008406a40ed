@@ -34,6 +34,24 @@
       "parentUuid": "74853348_d2af0767",
       "revId": "b8a2557796c43de1ba2c5708414ee008406a40ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf9af475_f7429452",
+        "filename": "src/tint/ir/location.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-30T18:14:40Z",
+      "side": 1,
+      "message": "`i32` requires a flat interpolation attribute in WGSL, so the defaulting would only happen for floats.\n\nBut yes, happy for this to be a follow-up, and it doesn\u0027t have to be soon. I\u0027ll open a bug to consider it.",
+      "parentUuid": "5ddaee80_065ddca7",
+      "revId": "b8a2557796c43de1ba2c5708414ee008406a40ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
