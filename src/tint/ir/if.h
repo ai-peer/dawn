@@ -16,7 +16,7 @@
 #define SRC_TINT_IR_IF_H_
 
 #include "src/tint/ir/block.h"
-#include "src/tint/ir/branch.h"
+#include "src/tint/ir/instruction.h"
 #include "src/tint/ir/value.h"
 
 // Forward declarations
@@ -27,14 +27,13 @@ class Block;
 namespace tint::ir {
 
 /// An if instruction
-class If : public utils::Castable<If, Branch> {
+class If : public utils::Castable<If, Instruction> {
   public:
     /// Constructor
     /// @param cond the if condition
     /// @param t the true block
     /// @param f the false block
-    /// @param m the merge block
-    explicit If(Value* cond, ir::Block* t, ir::Block* f, ir::Block* m);
+    explicit If(Value* cond, ir::Block* t, ir::Block* f);
     ~If() override;
 
     /// @returns the if condition
@@ -52,16 +51,18 @@ class If : public utils::Castable<If, Branch> {
     /// @returns the false branch block
     ir::Block* False() { return false_; }
 
-    /// @returns the merge branch block
-    const ir::Block* Merge() const { return merge_; }
-    /// @returns the merge branch block
-    ir::Block* Merge() { return merge_; }
+    /// @returns the result type of the if
+    const type::Type* Type() const override { return result_type_; }
+
+    /// Sets the result type of the if
+    /// @param type the new result type of the if
+    void SetType(const type::Type* type) { result_type_ = type; }
 
   private:
     Value* condition_ = nullptr;
     ir::Block* true_ = nullptr;
     ir::Block* false_ = nullptr;
-    ir::Block* merge_ = nullptr;
+    const type::Type* result_type_ = nullptr;
 };
 
 }  // namespace tint::ir

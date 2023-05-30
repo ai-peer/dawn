@@ -16,18 +16,17 @@
 #define SRC_TINT_IR_LOOP_H_
 
 #include "src/tint/ir/block.h"
-#include "src/tint/ir/branch.h"
+#include "src/tint/ir/instruction.h"
 
 namespace tint::ir {
 
 /// Flow node describing a loop.
-class Loop : public utils::Castable<Loop, Branch> {
+class Loop : public utils::Castable<Loop, Instruction> {
   public:
     /// Constructor
     /// @param s the start block
     /// @param c the continuing block
-    /// @param m the merge block
-    Loop(ir::Block* s, ir::Block* c, ir::Block* m);
+    Loop(ir::Block* s, ir::Block* c);
     ~Loop() override;
 
     /// @returns the switch start branch
@@ -40,15 +39,9 @@ class Loop : public utils::Castable<Loop, Branch> {
     /// @returns the switch continuing branch
     ir::Block* Continuing() { return continuing_; }
 
-    /// @returns the switch merge branch
-    const ir::Block* Merge() const { return merge_; }
-    /// @returns the switch merge branch
-    ir::Block* Merge() { return merge_; }
-
   private:
     ir::Block* start_ = nullptr;
     ir::Block* continuing_ = nullptr;
-    ir::Block* merge_ = nullptr;
 };
 
 }  // namespace tint::ir

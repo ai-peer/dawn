@@ -23,7 +23,6 @@ namespace tint::ir {
 ExitLoop::ExitLoop(ir::Loop* loop) : Base(utils::Empty), loop_(loop) {
     TINT_ASSERT(IR, loop_);
     loop_->AddUsage(this);
-    loop_->Merge()->AddInboundBranch(this);
 }
 
 ExitLoop::~ExitLoop() = default;

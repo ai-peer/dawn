@@ -21,6 +21,7 @@
 #include "src/tint/type/f32.h"
 #include "src/tint/type/i32.h"
 #include "src/tint/type/matrix.h"
+#include "src/tint/type/tuple.h"
 #include "src/tint/type/type.h"
 #include "src/tint/type/u32.h"
 #include "src/tint/type/vector.h"
@@ -123,4 +124,9 @@ const type::Matrix* Manager::mat4x3(const type::Type* inner) {
 const type::Matrix* Manager::mat4x4(const type::Type* inner) {
     return mat(inner, 4, 4);
 }
+
+const type::Tuple* Manager::tuple(utils::VectorRef<const type::Type*> types) {
+    return Get<type::Tuple>(std::move(types));
+}
+
 }  // namespace tint::type
