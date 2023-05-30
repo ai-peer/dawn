@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9438f929_1f81302b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T17:34:58Z",
+      "side": 1,
+      "message": "would love to unify WIRE_TRY with MaybeError one day, or at least Result\u003c\u003e",
+      "revId": "906d7e97741352e3efed4da31ed38e15799b1c1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71183f32_fd49b6d9",
+        "filename": "src/dawn/wire/server/Server.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T17:34:58Z",
+      "side": 1,
+      "message": "could these WIRE_TRY? then have WireServer::InjectSwapChain handle conversion of the result to bool",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "906d7e97741352e3efed4da31ed38e15799b1c1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
