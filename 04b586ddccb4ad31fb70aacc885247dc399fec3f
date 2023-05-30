@@ -33,6 +33,52 @@
       "message": "LGTM!",
       "revId": "04b586ddccb4ad31fb70aacc885247dc399fec3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b66e08_2b50f4f6",
+        "filename": "src/dawn/native/d3d/PlatformFunctions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T15:35:48Z",
+      "side": 1,
+      "message": "uunit: could be constexpr",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 163,
+        "endChar": 17
+      },
+      "revId": "04b586ddccb4ad31fb70aacc885247dc399fec3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35d8266_61251eb3",
+        "filename": "src/dawn/native/d3d/PlatformFunctions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T15:35:48Z",
+      "side": 1,
+      "message": "existing nit: \"k\" is probably not the right prefix since it\u0027s not actually constant. we append to `baseWindowsSDKPath`",
+      "range": {
+        "startLine": 164,
+        "startChar": 37,
+        "endLine": 164,
+        "endChar": 38
+      },
+      "revId": "04b586ddccb4ad31fb70aacc885247dc399fec3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
