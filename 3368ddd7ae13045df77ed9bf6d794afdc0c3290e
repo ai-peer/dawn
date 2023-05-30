@@ -16,6 +16,24 @@
       "message": "Should this be `AddInstruction` to better match `SetInstruction` ? Would also make the usage sites easier to understand.\n\n`blk-\u003eAddInstruction(if)` vs `blk-\u003eAdd(if)`.\n\nIt\u0027s slightly longer, but I think it\u0027s clearer?",
       "revId": "3368ddd7ae13045df77ed9bf6d794afdc0c3290e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "006211fa_183aab48",
+        "filename": "src/tint/ir/block.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-30T20:52:00Z",
+      "side": 1,
+      "message": "Given that the caller is passing the instruction as the argument to a block, I felt `Add` was unlikely to confuse. I personally prefer the lack of verbosity, especially in high-density code.",
+      "parentUuid": "24ad5d15_8012091f",
+      "revId": "3368ddd7ae13045df77ed9bf6d794afdc0c3290e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
