@@ -51,23 +51,21 @@ Function* Builder::CreateFunction(std::string_view name,
 
 If* Builder::CreateIf(Value* condition) {
     TINT_ASSERT(IR, condition);
-    return ir.values.Create<If>(condition, CreateBlock(), CreateBlock(), CreateBlock());
+    return ir.values.Create<If>(condition, CreateBlock(), CreateBlock());
 }
 
 Loop* Builder::CreateLoop() {
-    return ir.values.Create<Loop>(CreateBlock(), CreateBlock(), CreateBlock());
+    return ir.values.Create<Loop>(CreateBlock(), CreateBlock());
 }
 
 Switch* Builder::CreateSwitch(Value* condition) {
-    return ir.values.Create<Switch>(condition, CreateBlock());
+    return ir.values.Create<Switch>(condition);
 }
 
 Block* Builder::CreateCase(Switch* s, utils::VectorRef<Switch::CaseSelector> selectors) {
     s->Cases().Push(Switch::Case{std::move(selectors), CreateBlock()});
 
-    Block* b = s->Cases().Back().Start();
-    b->AddInboundBranch(s);
-    return b;
+    return s->Cases().Back().Block();
 }
 
 Binary* Builder::CreateBinary(enum Binary::Kind kind,

@@ -25,9 +25,11 @@ TEST_F(SpvGeneratorImplTest, If_TrueEmpty_FalseEmpty) {
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{b.ExitIf(i)});
     i->False()->SetInstructions(utils::Vector{b.ExitIf(i)});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func)});
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -50,13 +52,15 @@ TEST_F(SpvGeneratorImplTest, If_FalseEmpty) {
 
     auto* i = b.CreateIf(b.Constant(true));
     i->False()->SetInstructions(utils::Vector{b.ExitIf(i)});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func)});
 
     auto* true_block = i->True();
     true_block->SetInstructions(
         utils::Vector{b.Add(mod.Types().i32(), b.Constant(1_i), b.Constant(1_i)), b.ExitIf(i)});
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -84,13 +88,17 @@ TEST_F(SpvGeneratorImplTest, If_TrueEmpty) {
 
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{b.ExitIf(i)});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func)});
 
     auto* false_block = i->False();
-    false_block->SetInstructions(
-        utils::Vector{b.Add(mod.Types().i32(), b.Constant(1_i), b.Constant(1_i)), b.ExitIf(i)});
+    false_block->SetInstructions(utils::Vector{
+        b.Add(mod.Types().i32(), b.Constant(1_i), b.Constant(1_i)),
+        b.ExitIf(i),
+    });
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"

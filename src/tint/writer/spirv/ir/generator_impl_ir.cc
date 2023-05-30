@@ -49,6 +49,7 @@
 #include "src/tint/type/u32.h"
 #include "src/tint/type/vector.h"
 #include "src/tint/type/void.h"
+#include "src/tint/utils/scoped_assignment.h"
 #include "src/tint/writer/spirv/generator.h"
 #include "src/tint/writer/spirv/module.h"
 
@@ -327,13 +328,6 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
         current_function_.push_inst(spv::Op::OpLabel, {Label(block)});
     }
 
-    // If there are no instructions in the block, it's a dead end, so we shouldn't be able to get
-    // here to begin with.
-    if (block->Instructions().IsEmpty()) {
-        current_function_.push_inst(spv::Op::OpUnreachable, {});
-        return;
-    }
-
     // Emit the instructions.
     for (auto* inst : block->Instructions()) {
         auto result = Switch(
@@ -370,6 +364,11 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
             });
         values_.Add(inst, result);
     }
+
+    if (block->Instructions().IsEmpty() || !block->Instructions().Back()->Is<ir::Branch>()) {
+        // If the last emitted instruction is not a branch, then this should be unreachable.
+        current_function_.push_inst(spv::Op::OpUnreachable, {});
+    }
 }
 
 void GeneratorImplIr::EmitBranch(const ir::Branch* b) {
@@ -390,21 +389,21 @@ void GeneratorImplIr::EmitBranch(const ir::Branch* b) {
             current_function_.push_inst(spv::Op::OpBranchConditional,
                                         {
                                             Value(breakif->Condition()),
-                                            Label(breakif->Loop()->Merge()),
+                                            loop_merge_label_,
                                             Label(breakif->Loop()->Start()),
                                         });
         },
         [&](const ir::Continue* cont) {
             current_function_.push_inst(spv::Op::OpBranch, {Label(cont->Loop()->Continuing())});
         },
-        [&](const ir::ExitIf* if_) {
-            current_function_.push_inst(spv::Op::OpBranch, {Label(if_->If()->Merge())});
+        [&](const ir::ExitIf*) {
+            current_function_.push_inst(spv::Op::OpBranch, {if_merge_label_});
         },
-        [&](const ir::ExitLoop* loop) {
-            current_function_.push_inst(spv::Op::OpBranch, {Label(loop->Loop()->Merge())});
+        [&](const ir::ExitLoop*) {
+            current_function_.push_inst(spv::Op::OpBranch, {loop_merge_label_});
         },
-        [&](const ir::ExitSwitch* swtch) {
-            current_function_.push_inst(spv::Op::OpBranch, {Label(swtch->Switch()->Merge())});
+        [&](const ir::ExitSwitch*) {
+            current_function_.push_inst(spv::Op::OpBranch, {switch_merge_label_});
         },
         [&](const ir::NextIteration* loop) {
             current_function_.push_inst(spv::Op::OpBranch, {Label(loop->Loop()->Start())});
@@ -415,7 +414,6 @@ void GeneratorImplIr::EmitBranch(const ir::Branch* b) {
 }
 
 void GeneratorImplIr::EmitIf(const ir::If* i) {
-    auto* merge_block = i->Merge();
     auto* true_block = i->True();
     auto* false_block = i->False();
 
@@ -423,7 +421,9 @@ void GeneratorImplIr::EmitIf(const ir::If* i) {
     // 1. contains instructions other then the branch, or
     // 2. branches somewhere other then the Merge().
     // Otherwise we skip them and branch straight to the merge block.
-    uint32_t merge_label = Label(merge_block);
+    uint32_t merge_label = module_.NextId();
+    TINT_SCOPED_ASSIGNMENT(if_merge_label_, merge_label);
+
     uint32_t true_label = merge_label;
     uint32_t false_label = merge_label;
     if (true_block->Instructions().Length() > 1 ||
@@ -449,8 +449,7 @@ void GeneratorImplIr::EmitIf(const ir::If* i) {
         EmitBlock(false_block);
     }
 
-    // Emit the merge block.
-    EmitBlock(merge_block);
+    current_function_.push_inst(spv::Op::OpLabel, {merge_label});
 }
 
 uint32_t GeneratorImplIr::EmitBinary(const ir::Binary* binary) {
@@ -633,7 +632,9 @@ void GeneratorImplIr::EmitLoop(const ir::Loop* loop) {
     auto header_label = module_.NextId();
     auto body_label = Label(loop->Start());
     auto continuing_label = Label(loop->Continuing());
-    auto merge_label = Label(loop->Merge());
+
+    uint32_t merge_label = module_.NextId();
+    TINT_SCOPED_ASSIGNMENT(loop_merge_label_, merge_label);
 
     // Branch to and emit the loop header, which contains OpLoopMerge and OpBranch instructions.
     current_function_.push_inst(spv::Op::OpBranch, {header_label});
@@ -657,7 +658,7 @@ void GeneratorImplIr::EmitLoop(const ir::Loop* loop) {
     }
 
     // Emit the loop merge block.
-    EmitBlock(loop->Merge());
+    current_function_.push_inst(spv::Op::OpLabel, {merge_label});
 }
 
 void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
@@ -666,7 +667,7 @@ void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
     for (auto& c : swtch->Cases()) {
         for (auto& sel : c.selectors) {
             if (sel.IsDefault()) {
-                default_label = Label(c.Start());
+                default_label = Label(c.Block());
             }
         }
     }
@@ -675,7 +676,7 @@ void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
     // Build the operands to the OpSwitch instruction.
     OperandList switch_operands = {Value(swtch->Condition()), default_label};
     for (auto& c : swtch->Cases()) {
-        auto label = Label(c.Start());
+        auto label = Label(c.Block());
         for (auto& sel : c.selectors) {
             if (sel.IsDefault()) {
                 continue;
@@ -685,18 +686,21 @@ void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
         }
     }
 
+    uint32_t merge_label = module_.NextId();
+    TINT_SCOPED_ASSIGNMENT(switch_merge_label_, merge_label);
+
     // Emit the OpSelectionMerge and OpSwitch instructions.
     current_function_.push_inst(spv::Op::OpSelectionMerge,
-                                {Label(swtch->Merge()), U32Operand(SpvSelectionControlMaskNone)});
+                                {merge_label, U32Operand(SpvSelectionControlMaskNone)});
     current_function_.push_inst(spv::Op::OpSwitch, switch_operands);
 
     // Emit the cases.
     for (auto& c : swtch->Cases()) {
-        EmitBlock(c.Start());
+        EmitBlock(c.Block());
     }
 
     // Emit the switch merge block.
-    EmitBlock(swtch->Merge());
+    current_function_.push_inst(spv::Op::OpLabel, {merge_label});
 }
 
 void GeneratorImplIr::EmitStore(const ir::Store* store) {
