@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e479df59_2bc6599e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T13:11:17Z",
+      "side": 1,
+      "message": "This code could be moved inside the block of code that handles depth-stencil textures.",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bb0e76_20d44d3c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T13:11:17Z",
+      "side": 1,
+      "message": "nit: slight preference for separating the stencil case from the more normal case for clarity,\n\n```\nif (packed) {\n   one copy\n} else if (depthstencil) {\n   copy per texel\n} else {\n   copy per row\n}\n```",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85a69645_4bacb95d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T13:11:17Z",
+      "side": 1,
+      "message": "nit: x instead of w, so that it\u0027s clear that (x, y) is the texel.",
+      "range": {
+        "startLine": 580,
+        "startChar": 31,
+        "endLine": 580,
+        "endChar": 32
+      },
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fe308b_99eb426b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T13:11:17Z",
+      "side": 1,
+      "message": "That could be a single memcpy for more clarity, then we can do src +\u003d depthOrStencilStride above instead of a more complicated computation.",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a7bf2fe_c1cc1f4d",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2599,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T13:11:17Z",
+      "side": 1,
+      "message": "nit: on D3D11 :)",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

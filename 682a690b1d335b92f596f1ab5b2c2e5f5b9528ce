@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad760e59_b47c178b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T13:11:17Z",
+      "side": 1,
+      "message": "nit: We could use GetFormat().HasDepthOrStencil() since this is only temporary while we implement the D3D11 backend completely.",
+      "parentUuid": "7d954153_bfea8541",
+      "range": {
+        "startLine": 470,
+        "startChar": 8,
+        "endLine": 470,
+        "endChar": 71
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb9796f1_c8ea95ee",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 4
@@ -149,6 +173,30 @@
       "writtenOn": "2023-05-30T11:34:24Z",
       "side": 1,
       "message": "Acknowledged",
+      "parentUuid": "81f4d039_54216462",
+      "range": {
+        "startLine": 537,
+        "startChar": 34,
+        "endLine": 537,
+        "endChar": 53
+      },
+      "revId": "682a690b1d335b92f596f1ab5b2c2e5f5b9528ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c6945da_cecc192b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-30T13:11:17Z",
+      "side": 1,
+      "message": "Maybe it could be worth switching on the D3D format directly instead of the WebGPU format? This way we\u0027d be more robust to the format changing in the future (for example we could choose to implement Depth24PlusStencil8 with DXGI_FORMAT_D24_UNORM_S8_UINT)",
       "parentUuid": "81f4d039_54216462",
       "range": {
         "startLine": 537,
