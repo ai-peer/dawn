@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab9e3eb_8d8372e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-30T20:09:29Z",
+      "side": 1,
+      "message": "LGTM but would love more test coverage.",
+      "revId": "ccd3d509bd2aad3a8fb3cccba65d32867fa80355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a19dda_45249a99",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_if_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-30T20:09:29Z",
+      "side": 1,
+      "message": "Would be great to also have tests for:\n- Multiple values\n- An empty true/false block (to test the extra condition you added for this)\n- Loops (to test the necessary forward references)\n\nYou might not be able to hit any of these from WGSL yet, but I think they\u0027re all testable via the IR builder.",
+      "revId": "ccd3d509bd2aad3a8fb3cccba65d32867fa80355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
