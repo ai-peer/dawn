@@ -142,5 +142,41 @@ OpFunctionEnd
 )");
 }
 
+TEST_F(SpvGeneratorImplTest, If_Phi_SingleValue) {
+    auto* func = b.CreateFunction("foo", mod.Types().void_());
+
+    auto* merge_arg = b.BlockParam(b.ir.Types().i32());
+
+    auto* i = b.CreateIf(b.Constant(true));
+    i->True()->SetInstructions(utils::Vector{b.ExitIf(i, utils::Vector{b.Constant(10_i)})});
+    i->False()->SetInstructions(utils::Vector{b.ExitIf(i, utils::Vector{b.Constant(20_i)})});
+    i->Merge()->SetParams(utils::Vector{merge_arg});
+    i->Merge()->SetInstructions(utils::Vector{b.Return(func, utils::Vector{merge_arg})});
+
+    func->StartTarget()->SetInstructions(utils::Vector{i});
+
+    generator_.EmitFunction(func);
+    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
+%2 = OpTypeVoid
+%3 = OpTypeFunction %2
+%9 = OpTypeBool
+%8 = OpConstantTrue %9
+%11 = OpTypeInt 32 1
+%12 = OpConstant %11 10
+%13 = OpConstant %11 20
+%1 = OpFunction %2 None %3
+%4 = OpLabel
+OpSelectionMerge %5 None
+OpBranchConditional %8 %6 %7
+%6 = OpLabel
+OpBranch %5
+%7 = OpLabel
+OpBranch %5
+%5 = OpLabel
+%10 = OpPhi %11 %12 %6 %13 %7
+OpReturnValue %10
+OpFunctionEnd
+)");
+}
 }  // namespace
 }  // namespace tint::writer::spirv
