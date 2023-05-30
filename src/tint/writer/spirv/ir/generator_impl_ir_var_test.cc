@@ -102,9 +102,11 @@ TEST_F(SpvGeneratorImplTest, FunctionVar_DeclInsideBlock) {
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{v, b.ExitIf(i)});
     i->False()->SetInstructions(utils::Vector{b.Return(func)});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func)});
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"

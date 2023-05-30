@@ -23,7 +23,6 @@ namespace tint::ir {
 Continue::Continue(ir::Loop* loop) : Base(utils::Empty), loop_(loop) {
     TINT_ASSERT(IR, loop_);
     loop_->AddUsage(this);
-    loop_->Continuing()->AddInboundBranch(this);
 }
 
 Continue::~Continue() = default;

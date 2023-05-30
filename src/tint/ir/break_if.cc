@@ -26,8 +26,6 @@ BreakIf::BreakIf(Value* condition, ir::Loop* loop)
     TINT_ASSERT(IR, loop_);
     condition_->AddUsage(this);
     loop_->AddUsage(this);
-    loop_->Start()->AddInboundBranch(this);
-    loop_->Merge()->AddInboundBranch(this);
 }
 
 BreakIf::~BreakIf() = default;

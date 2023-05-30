@@ -26,9 +26,9 @@ TEST_F(SpvGeneratorImplTest, Loop_BreakIf) {
 
     loop->Start()->Add(b.Continue(loop));
     loop->Continuing()->Add(b.BreakIf(b.Constant(true), loop));
-    loop->Merge()->Add(b.Return(func));
 
     func->StartTarget()->Add(loop);
+    func->StartTarget()->Add(b.Return(func));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -59,9 +59,9 @@ TEST_F(SpvGeneratorImplTest, Loop_UnconditionalBreakInBody) {
     auto* loop = b.CreateLoop();
 
     loop->Start()->Add(b.ExitLoop(loop));
-    loop->Merge()->Add(b.Return(func));
 
     func->StartTarget()->Add(loop);
+    func->StartTarget()->Add(b.Return(func));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -91,13 +91,13 @@ TEST_F(SpvGeneratorImplTest, Loop_ConditionalBreakInBody) {
     auto* cond_break = b.CreateIf(b.Constant(true));
     cond_break->True()->Add(b.ExitLoop(loop));
     cond_break->False()->Add(b.ExitIf(cond_break));
-    cond_break->Merge()->Add(b.Continue(loop));
 
     loop->Start()->Add(cond_break);
+    loop->Start()->Add(b.Continue(loop));
     loop->Continuing()->Add(b.NextIteration(loop));
-    loop->Merge()->Add(b.Return(func));
 
     func->StartTarget()->Add(loop);
+    func->StartTarget()->Add(b.Return(func));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -134,13 +134,13 @@ TEST_F(SpvGeneratorImplTest, Loop_ConditionalContinueInBody) {
     auto* cond_break = b.CreateIf(b.Constant(true));
     cond_break->True()->Add(b.Continue(loop));
     cond_break->False()->Add(b.ExitIf(cond_break));
-    cond_break->Merge()->Add(b.ExitLoop(loop));
 
     loop->Start()->Add(cond_break);
+    loop->Start()->Add(b.ExitLoop(loop));
     loop->Continuing()->Add(b.NextIteration(loop));
-    loop->Merge()->Add(b.Return(func));
 
     func->StartTarget()->Add(loop);
+    func->StartTarget()->Add(b.Return(func));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -209,9 +209,9 @@ TEST_F(SpvGeneratorImplTest, Loop_UseResultFromBodyInContinuing) {
 
     loop->Start()->Add(result);
     loop->Continuing()->Add(b.BreakIf(result, loop));
-    loop->Merge()->Add(b.Return(func));
 
     func->StartTarget()->Add(loop);
+    func->StartTarget()->Add(b.Return(func));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -228,6 +228,7 @@ OpLoopMerge %8 %7 None
 OpBranch %6
 %6 = OpLabel
 %9 = OpIEqual %10 %11 %12
+OpUnreachable
 %7 = OpLabel
 OpBranchConditional %9 %8 %5
 %8 = OpLabel
@@ -244,13 +245,13 @@ TEST_F(SpvGeneratorImplTest, Loop_NestedLoopInBody) {
 
     inner_loop->Start()->Add(b.ExitLoop(inner_loop));
     inner_loop->Continuing()->Add(b.NextIteration(inner_loop));
-    inner_loop->Merge()->Add(b.Continue(outer_loop));
 
     outer_loop->Start()->Add(inner_loop);
+    outer_loop->Start()->Add(b.Continue(outer_loop));
     outer_loop->Continuing()->Add(b.BreakIf(b.Constant(true), outer_loop));
-    outer_loop->Merge()->Add(b.Return(func));
 
     func->StartTarget()->Add(outer_loop);
+    func->StartTarget()->Add(b.Return(func));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -291,13 +292,13 @@ TEST_F(SpvGeneratorImplTest, Loop_NestedLoopInContinuing) {
 
     inner_loop->Start()->Add(b.Continue(inner_loop));
     inner_loop->Continuing()->Add(b.BreakIf(b.Constant(true), inner_loop));
-    inner_loop->Merge()->Add(b.BreakIf(b.Constant(true), outer_loop));
 
     outer_loop->Start()->Add(b.Continue(outer_loop));
     outer_loop->Continuing()->Add(inner_loop);
-    outer_loop->Merge()->Add(b.Return(func));
+    outer_loop->Continuing()->Add(b.BreakIf(b.Constant(true), outer_loop));
 
     func->StartTarget()->Add(outer_loop);
+    func->StartTarget()->Add(b.Return(func));
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"

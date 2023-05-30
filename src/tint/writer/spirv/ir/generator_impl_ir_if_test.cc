@@ -25,9 +25,11 @@ TEST_F(SpvGeneratorImplTest, If_TrueEmpty_FalseEmpty) {
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{b.ExitIf(i)});
     i->False()->SetInstructions(utils::Vector{b.ExitIf(i)});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func)});
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -50,13 +52,15 @@ TEST_F(SpvGeneratorImplTest, If_FalseEmpty) {
 
     auto* i = b.CreateIf(b.Constant(true));
     i->False()->SetInstructions(utils::Vector{b.ExitIf(i)});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func)});
 
     auto* true_block = i->True();
     true_block->SetInstructions(
         utils::Vector{b.Add(mod.Types().i32(), b.Constant(1_i), b.Constant(1_i)), b.ExitIf(i)});
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -84,13 +88,17 @@ TEST_F(SpvGeneratorImplTest, If_TrueEmpty) {
 
     auto* i = b.CreateIf(b.Constant(true));
     i->True()->SetInstructions(utils::Vector{b.ExitIf(i)});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func)});
 
     auto* false_block = i->False();
-    false_block->SetInstructions(
-        utils::Vector{b.Add(mod.Types().i32(), b.Constant(1_i), b.Constant(1_i)), b.ExitIf(i)});
+    false_block->SetInstructions(utils::Vector{
+        b.Add(mod.Types().i32(), b.Constant(1_i), b.Constant(1_i)),
+        b.ExitIf(i),
+    });
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -145,15 +153,15 @@ OpFunctionEnd
 TEST_F(SpvGeneratorImplTest, If_Phi_SingleValue) {
     auto* func = b.CreateFunction("foo", mod.Types().void_());
 
-    auto* merge_arg = b.BlockParam(b.ir.Types().i32());
-
     auto* i = b.CreateIf(b.Constant(true));
+    i->SetType(b.ir.Types().bool_());
     i->True()->SetInstructions(utils::Vector{b.ExitIf(i, utils::Vector{b.Constant(10_i)})});
     i->False()->SetInstructions(utils::Vector{b.ExitIf(i, utils::Vector{b.Constant(20_i)})});
-    i->Merge()->SetParams(utils::Vector{merge_arg});
-    i->Merge()->SetInstructions(utils::Vector{b.Return(func, utils::Vector{merge_arg})});
 
-    func->StartTarget()->SetInstructions(utils::Vector{i});
+    func->StartTarget()->SetInstructions(utils::Vector{
+        i,
+        b.Return(func, utils::Vector{i}),
+    });
 
     generator_.EmitFunction(func);
     EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
@@ -161,9 +169,9 @@ TEST_F(SpvGeneratorImplTest, If_Phi_SingleValue) {
 %3 = OpTypeFunction %2
 %9 = OpTypeBool
 %8 = OpConstantTrue %9
-%11 = OpTypeInt 32 1
-%12 = OpConstant %11 10
-%13 = OpConstant %11 20
+%12 = OpTypeInt 32 1
+%11 = OpConstant %12 10
+%13 = OpConstant %12 20
 %1 = OpFunction %2 None %3
 %4 = OpLabel
 OpSelectionMerge %5 None
@@ -173,7 +181,7 @@ OpBranch %5
 %7 = OpLabel
 OpBranch %5
 %5 = OpLabel
-%10 = OpPhi %11 %12 %6 %13 %7
+%10 = OpPhi %9 %11 %6 %13 %7
 OpReturnValue %10
 OpFunctionEnd
 )");
