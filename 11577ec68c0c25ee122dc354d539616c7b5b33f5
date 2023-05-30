@@ -80,6 +80,30 @@
       },
       "revId": "11577ec68c0c25ee122dc354d539616c7b5b33f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80e0c59_7d54f09a",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T16:10:23Z",
+      "side": 1,
+      "message": "no, but maybe we should have a command line flag for the test harness to InfoLog the messages like you\u0027re doing",
+      "parentUuid": "73f27319_56d89eac",
+      "range": {
+        "startLine": 151,
+        "startChar": 7,
+        "endLine": 159,
+        "endChar": 10
+      },
+      "revId": "11577ec68c0c25ee122dc354d539616c7b5b33f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
