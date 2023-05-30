@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01700c5c_2dd185c7",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-30T16:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72aca500_3dfc7a00",
+      "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c666807_064ef8a8",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de9e1d95_c55204f9",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-30T16:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c666807_064ef8a8",
+      "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "828e181d_15f9f4da",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-26T16:46:47Z",
       "side": 1,
       "message": "Nit: in a single draw command?",
+      "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e0e743b_8a824c6d",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-30T16:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "828e181d_15f9f4da",
       "revId": "9089fd1199cc8d11da3457d9e8558b339f4da4e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
