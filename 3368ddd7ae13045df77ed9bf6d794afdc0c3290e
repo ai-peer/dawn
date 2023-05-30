@@ -34,6 +34,24 @@
       "parentUuid": "24ad5d15_8012091f",
       "revId": "3368ddd7ae13045df77ed9bf6d794afdc0c3290e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d045889_f4c08c2f",
+        "filename": "src/tint/ir/block.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-30T21:35:14Z",
+      "side": 1,
+      "message": "Much preferred the shorter name, but changed to make progress.",
+      "parentUuid": "006211fa_183aab48",
+      "revId": "3368ddd7ae13045df77ed9bf6d794afdc0c3290e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
