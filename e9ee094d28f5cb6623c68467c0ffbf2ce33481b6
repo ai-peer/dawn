@@ -34,6 +34,24 @@
       "parentUuid": "a1538aae_ec3a6007",
       "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4227d40f_a7603112",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-05-30T05:30:27Z",
+      "side": 1,
+      "message": "I found the following note in D3D11 spec [1],\n\u003e [D3D11] Noted that the Buffer element limit of 2²⁷ texels continues to apply to the view of Structured Buffers (new in D3D11), but not to Raw Buffer Views (also new in D3D11). In the latter case, addressing is at 32-bit granularity and the entire contents of the Raw Buffer view is available, at most 2048 MB as mentioned above.\n\nWould this help? I thought we use raw buffer view in Dawn.\n\n[1]: https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm#UAVs:~:text\u003d%5BD3D11%5D%20Noted%20that,as%20mentioned%20above.",
+      "parentUuid": "647e1b51_e2e7f4de",
+      "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
