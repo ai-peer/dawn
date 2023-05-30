@@ -524,7 +524,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DAWN_TRY(bindGroupTracker.Apply());
                 vertexBufferTracker.Apply(lastPipeline);
 
-                if (lastPipeline->GetUsesVertexOrInstanceIndex()) {
+                if (lastPipeline->GetUsesVertexIndex() || lastPipeline->GetUsesInstanceIndex()) {
                     // Copy StartVertexLocation and StartInstanceLocation into the uniform buffer
                     // for built-in variables.
                     uint64_t offset =
@@ -550,7 +550,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DAWN_TRY(bindGroupTracker.Apply());
                 vertexBufferTracker.Apply(lastPipeline);
 
-                if (lastPipeline->GetUsesVertexOrInstanceIndex()) {
+                if (lastPipeline->GetUsesVertexIndex() || lastPipeline->GetUsesInstanceIndex()) {
                     // Copy StartVertexLocation and StartInstanceLocation into the uniform buffer
                     // for built-in variables.
                     uint64_t offset =
@@ -771,7 +771,7 @@ MaybeError CommandBuffer::RecordFirstIndexOffset(RenderPipeline* renderPipeline,
                                                  CommandRecordingContext* commandContext,
                                                  uint32_t firstVertex,
                                                  uint32_t firstInstance) {
-    if (!renderPipeline->GetUsesVertexOrInstanceIndex()) {
+    if (!(renderPipeline->GetUsesVertexIndex() || renderPipeline->GetUsesInstanceIndex())) {
         // Vertex and instance index are not used in shader, so we don't need to update the uniform
         // buffer. The original value in the uniform buffer will not be used, so we don't need to
         // clear it.
