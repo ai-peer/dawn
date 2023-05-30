@@ -56,6 +56,30 @@
       },
       "revId": "11577ec68c0c25ee122dc354d539616c7b5b33f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73f27319_56d89eac",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-05-30T16:07:28Z",
+      "side": 1,
+      "message": "You\u0027re right. I added the hasSubstr check. I\u0027ve been manually adding a `dawn::InfoLog() \u003c\u003c message \u003c\u003c \"\\n\";` to `ValidationTest::OnDeviceError` to check my error messages. Is there some other way to actually see them?",
+      "parentUuid": "78931034_4a534f1f",
+      "range": {
+        "startLine": 151,
+        "startChar": 7,
+        "endLine": 159,
+        "endChar": 10
+      },
+      "revId": "11577ec68c0c25ee122dc354d539616c7b5b33f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
