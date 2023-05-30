@@ -362,6 +362,16 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
 
             out_ << std::endl;
         },
+        [&](const ir::Access* a) {
+            EmitValueWithType(a);
+            out_ << " = access %" << IdOf(a->Source()) << " ";
+            for (size_t i = 0; i < a->Indices().Length(); ++I) {
+                if (i > 0) {
+                    out_ << ", ";
+                }
+                out_ << a->Indices()[i];
+            }
+        },
         [&](const ir::Branch* b) { EmitBranch(b); },
         [&](Default) { out_ << "Unknown instruction: " << inst->TypeInfo().name; });
 }

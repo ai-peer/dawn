@@ -1207,6 +1207,8 @@ if (tint_build_ir) {
 
   libtint_source_set("libtint_ir_src") {
     sources = [
+      "ir/access.cc",
+      "ir/access.h",
       "ir/binary.cc",
       "ir/binary.h",
       "ir/binding_point.h",
@@ -2279,6 +2281,7 @@ if (tint_build_unittests) {
         "ir/bitcast_test.cc",
         "ir/constant_test.cc",
         "ir/discard_test.cc",
+        "ir/from_program_accessor_test.cc",
         "ir/from_program_binary_test.cc",
         "ir/from_program_builtin_test.cc",
         "ir/from_program_call_test.cc",
