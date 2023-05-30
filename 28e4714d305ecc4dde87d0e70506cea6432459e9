@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8504cf71_42795112",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-30T23:28:46Z",
+      "side": 1,
+      "message": "you don\u0027t need hlslSource here now; we can assign it inside TranslateToHLSL?\n\nthen this can be DAWN_TRY instead of DAWN_TRY_ASSIGN.\n\nIf you want to use DAWN_TRY_ASSIGN, you could try returning ResultOrError\u003cCompiledShader\u003e but it may not implement move semantics.",
+      "range": {
+        "startLine": 316,
+        "startChar": 4,
+        "endLine": 317,
+        "endChar": 33
+      },
+      "revId": "28e4714d305ecc4dde87d0e70506cea6432459e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
