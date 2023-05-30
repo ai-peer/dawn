@@ -16,6 +16,24 @@
       "message": "would it work to set the maxStorageBufferBindingSize to `1 \u003c\u003c D3D12_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP` based on \n`gpu_info::IsQualcomm(mVendorId)` ?\n\nAssuming this is a driver bug, we want to avoid it in all situations, not just MaxLimitTests",
       "revId": "f43e816bba8313b83efa20b2d2dc984e11759af6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed1af4e_66241f28",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-30T21:43:05Z",
+      "side": 1,
+      "message": "Hi, Austin,\nSure, this time I used gpu_info::IsQualcomm(mVendorId) to limit the change to only Qualcomm devices. Uploaded change.",
+      "parentUuid": "f9bd095d_5daec05a",
+      "revId": "f43e816bba8313b83efa20b2d2dc984e11759af6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
