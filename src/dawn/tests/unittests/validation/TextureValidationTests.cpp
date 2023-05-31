@@ -1036,6 +1036,18 @@ TEST_F(TextureValidationTest, TransientAttachmentOnUnsupportedDevice) {
     ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
 }
 
+// Test that including MSAARenderToSingleSampledAttachment usage without enabling
+// MSAARenderToSingleSampled feature will result in error.
+TEST_F(TextureValidationTest, MSAARenderToSingleSampledAttachmentOnUnsupportedDevice) {
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.size = {1, 1, 1};
+    desc.usage = wgpu::TextureUsage::RenderAttachment |
+                 wgpu::TextureUsage::MSAARenderToSingleSampledAttachment;
+
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
+}
+
 class TransientAttachmentValidationTest : public TextureValidationTest {
   protected:
     WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
@@ -1079,6 +1091,31 @@ TEST_F(TransientAttachmentValidationTest, FlagsBeyondRenderAttachment) {
                  wgpu::TextureUsage::CopySrc;
 
     ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
+}
+
+class MSAARenderToSingleSampledTextureValidationTest : public TextureValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::MSAARenderToSingleSampled};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeaturesCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// When a texture has MSAARenderToSingleSampledAttachment usage, it must be single sampled.
+TEST_F(MSAARenderToSingleSampledTextureValidationTest, TextureMustBeSingleSampled) {
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.size = {1, 1, 1};
+    desc.sampleCount = 4;
+    desc.usage = wgpu::TextureUsage::RenderAttachment |
+                 wgpu::TextureUsage::MSAARenderToSingleSampledAttachment |
+                 wgpu::TextureUsage::CopySrc;
+
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&desc),
+                        testing::HasSubstr("sampleCount (4) is not 1"));
 }
 
 }  // anonymous namespace
