@@ -324,7 +324,8 @@ D3D11_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(
             rtvDesc.Texture3D.WSize = singleLevelRange.layerCount;
             break;
         case wgpu::TextureDimension::e1D:
-            UNREACHABLE();
+            rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE1D;
+            rtvDesc.Texture1D.MipSlice = singleLevelRange.baseMipLevel;
             break;
     }
     return rtvDesc;
@@ -664,6 +665,7 @@ MaybeError Texture::Copy(CommandRecordingContext* commandContext, CopyTextureToT
     srcBox.top = src.origin.y;
     srcBox.bottom = src.origin.y + copy->copySize.height;
     switch (src.texture->GetDimension()) {
+        case wgpu::TextureDimension::e1D:
         case wgpu::TextureDimension::e2D:
             srcBox.front = 0;
             srcBox.back = 1;
@@ -673,7 +675,6 @@ MaybeError Texture::Copy(CommandRecordingContext* commandContext, CopyTextureToT
             srcBox.back = src.origin.z + copy->copySize.depthOrArrayLayers;
             break;
         default:
-            // TODO(dawn:1705): support 1d texture.
             UNREACHABLE();
     }
 

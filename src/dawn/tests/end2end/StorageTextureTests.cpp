@@ -33,6 +33,11 @@ bool OpenGLESSupportsStorageTexture(wgpu::TextureFormat format) {
            format != wgpu::TextureFormat::RG32Uint;
 }
 
+bool D3D11SupportsStorageTexture(wgpu::TextureFormat format) {
+    // TODO(dawn:1802): Support clearing non-renderable textures on D3D11.
+    return format != wgpu::TextureFormat::RGBA8Snorm;
+}
+
 class StorageTextureTests : public DawnTest {
   public:
     static void FillExpectedData(void* pixelValuePtr,
@@ -674,6 +679,9 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
         if (IsOpenGLES() && !OpenGLESSupportsStorageTexture(format)) {
             continue;
         }
+        if (IsD3D11() && !D3D11SupportsStorageTexture(format)) {
+            continue;
+        }
 
         if (format == wgpu::TextureFormat::RGBA8Snorm && HasToggleEnabled("disable_snorm_read")) {
             continue;
@@ -711,6 +719,9 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
             continue;
         }
         if (IsOpenGLES() && !OpenGLESSupportsStorageTexture(format)) {
+            continue;
+        }
+        if (IsD3D11() && !D3D11SupportsStorageTexture(format)) {
             continue;
         }
 
@@ -868,6 +879,7 @@ TEST_P(StorageTextureTests, SampledAndWriteonlyStorageTexturePingPong) {
 }
 
 DAWN_INSTANTIATE_TEST(StorageTextureTests,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -932,6 +944,7 @@ TEST_P(BGRA8UnormStorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
 }
 
 DAWN_INSTANTIATE_TEST(BGRA8UnormStorageTextureTests,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -1010,6 +1023,7 @@ TEST_P(StorageTextureZeroInitTests, WriteonlyStorageTextureClearsToZeroInCompute
 }
 
 DAWN_INSTANTIATE_TEST(StorageTextureZeroInitTests,
+                      D3D11Backend({"nonzero_clear_resources_on_creation_for_testing"}),
                       D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
                       OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
                       OpenGLESBackend({"nonzero_clear_resources_on_creation_for_testing"}),
