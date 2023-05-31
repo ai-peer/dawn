@@ -33,6 +33,24 @@
       "message": "LGTM but this won\u0027t actually enable any tests, will it?\n\nshaderf16 is not supported on d3d11\n\nThey are all skipped except the test that says it\u0027s not supported\n\nhttps://luci-milo.appspot.com/ui/inv/task-chromium-swarm.appspot.com-62857341a3a43111/test-results?sortby\u003d\u0026groupby\u003d\u0026q\u003dID%3AShaderF16Tests+ID%3A%2Fd3d11",
       "revId": "64fa8bea610ad7c6ab7525eadd4c301c597a8a53",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "304441b3_4702a08d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T01:07:32Z",
+      "side": 1,
+      "message": "Right, they are actually skipped.",
+      "parentUuid": "9437fa4f_796779f8",
+      "revId": "64fa8bea610ad7c6ab7525eadd4c301c597a8a53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
