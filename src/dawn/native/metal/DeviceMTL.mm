@@ -248,6 +248,10 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     wgpu::TextureUsage usages = wgpu::TextureUsage::RenderAttachment |
                                 wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc |
                                 wgpu::TextureUsage::CopyDst;
+
+    if (HasFeature(Feature::MSAARenderToSingleSampled)) {
+        usages |= wgpu::TextureUsage::MSAARenderToSingleSampledAttachment;
+    }
     return usages;
 }
 
@@ -501,6 +505,10 @@ uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
 
 float Device::GetTimestampPeriodInNS() const {
     return mTimestampPeriod;
+}
+
+bool Device::IsResolveTextureBlitWithDrawSupported() const {
+    return true;
 }
 
 bool Device::UseCounterSamplingAtCommandBoundary() const {

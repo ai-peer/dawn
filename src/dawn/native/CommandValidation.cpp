@@ -59,7 +59,8 @@ MaybeError ValidateSyncScopeResourceUsage(const SyncScopeResourceUsage& scope) {
             [&](const SubresourceRange&, const wgpu::TextureUsage& usage) -> MaybeError {
                 bool readOnly = IsSubset(usage, kReadOnlyTextureUsages);
                 bool singleUse = wgpu::HasZeroOrOneBits(usage);
-                if (!readOnly && !singleUse) {
+                bool isLoadedResolveTexture = usage == kResolveTextureLoadingUsages;
+                if (!readOnly && !singleUse && !isLoadedResolveTexture) {
                     return DAWN_VALIDATION_ERROR(
                         "%s usage (%s) includes writable usage and another usage in the same "
                         "synchronization scope.",
