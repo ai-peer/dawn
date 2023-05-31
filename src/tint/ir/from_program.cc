@@ -17,7 +17,9 @@
 #include <iostream>
 #include <unordered_map>
 #include <utility>
+#include <vector>
 
+#include "src/tint/ast/accessor_expression.h"
 #include "src/tint/ast/alias.h"
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/binary_expression.h"
@@ -42,12 +44,14 @@
 #include "src/tint/ast/identifier_expression.h"
 #include "src/tint/ast/if_statement.h"
 #include "src/tint/ast/increment_decrement_statement.h"
+#include "src/tint/ast/index_accessor_expression.h"
 #include "src/tint/ast/int_literal_expression.h"
 #include "src/tint/ast/interpolate_attribute.h"
 #include "src/tint/ast/invariant_attribute.h"
 #include "src/tint/ast/let.h"
 #include "src/tint/ast/literal_expression.h"
 #include "src/tint/ast/loop_statement.h"
+#include "src/tint/ast/member_accessor_expression.h"
 #include "src/tint/ast/override.h"
 #include "src/tint/ast/phony_expression.h"
 #include "src/tint/ast/return_statement.h"
@@ -870,6 +874,70 @@ class Impl {
         SetBranch(builder_.BreakIf(cond.Get(), current_control->As<ir::Loop>()));
     }
 
+    struct AccessorInfo {
+        Value* source = nullptr;
+        const type::Type* source_type = nullptr;
+        std::vector<uint32_t> indices;
+    };
+
+    utils::Result<Value*> EmitAccess(const ast::AccessorExpression* expr) {
+        std::vector<const ast::Expression*> accessors;
+        const ast::Expression* source = expr->object;
+        while (true) {
+            if (auto* array = source->As<ast::IndexAccessorExpression>()) {
+                accessors.push_back(source);
+                source = array->object;
+            } else if (auto* member = source->As<ast::MemberAccessorExpression>()) {
+                accessors.push_back(source);
+                source = member->object;
+            } else {
+                break;
+            }
+
+            // Stop traversing if we've hit a constant source expression.
+            if (program_->Sem().GetVal(source)->ConstantValue()) {
+                break;
+            }
+        }
+
+        // The AST chain is `inside-out` compared to what we need, which means the list it generates
+        // is backwards. We need to operate on the list in reverse order to have the correct access
+        // chain.
+        std::reverse(accessors.begin(), accessors.end());
+
+        //        AccessorInfo info;
+        {
+            auto res = EmitExpression(source);
+            if (!res) {
+                return utils::Failure;
+            }
+            //           info.source = res.Get();
+        }
+
+        // Note: Dynamic index on array and matrix values (lets) should have been
+        // promoted to storage with the VarForDynamicIndex transform.
+
+        for (auto* accessor : accessors) {
+            bool ok = tint::Switch(
+                accessor,
+                [&](const ast::IndexAccessorExpression* /*array*/) {
+                    return false;  // GenerateIndexAccessor(array, &info);
+                },
+                [&](const ast::MemberAccessorExpression* /*member*/) {
+                    return false;  // GenerateMemberAccessor(member, &info);
+                },
+                [&](Default) {
+                    TINT_ICE(Writer, diagnostics_)
+                        << "invalid accessor in list: " + std::string(accessor->TypeInfo().name);
+                    return false;
+                });
+            if (!ok) {
+                return utils::Failure;
+            }
+        }
+        return utils::Failure;
+    }
+
     utils::Result<Value*> EmitExpression(const ast::Expression* expr) {
         // If this is a value that has been const-eval'd return the result.
         auto* sem = program_->Sem().GetVal(expr);
@@ -882,10 +950,8 @@ class Impl {
         }
 
         auto result = tint::Switch(
-            expr,
-            // [&](const ast::IndexAccessorExpression* a) {
-            // TODO(dsinclair): Implement
-            // },
+            expr,  //
+            [&](const ast::AccessorExpression* a) { return EmitAccess(a); },
             [&](const ast::BinaryExpression* b) { return EmitBinary(b); },
             [&](const ast::BitcastExpression* b) { return EmitBitcast(b); },
             [&](const ast::CallExpression* c) { return EmitCall(c); },
@@ -899,9 +965,6 @@ class Impl {
                 return {v};
             },
             [&](const ast::LiteralExpression* l) { return EmitLiteral(l); },
-            // [&](const ast::MemberAccessorExpression* m) {
-            // TODO(dsinclair): Implement
-            // },
             [&](const ast::UnaryOpExpression* u) { return EmitUnary(u); },
             // Note, ast::PhonyExpression is explicitly not handled here as it should never get
             // into this method. The assignment statement should have filtered it out already.

@@ -18,6 +18,7 @@
 #include "src/tint/constant/composite.h"
 #include "src/tint/constant/scalar.h"
 #include "src/tint/constant/splat.h"
+#include "src/tint/ir/access.h"
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/bitcast.h"
 #include "src/tint/ir/block.h"
@@ -388,6 +389,16 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
             }
 
             out_ << std::endl;
+        },
+        [&](const ir::Access* a) {
+            EmitValueWithType(a);
+            out_ << " = access %" << IdOf(a->Source()) << " ";
+            for (size_t i = 0; i < a->Indices().Length(); ++i) {
+                if (i > 0) {
+                    out_ << ", ";
+                }
+                out_ << a->Indices()[i];
+            }
         },
         [&](const ir::Branch* b) { EmitBranch(b); },
         [&](Default) { out_ << "Unknown instruction: " << inst->TypeInfo().name; });
