@@ -65,6 +65,16 @@ class RenderEncoderBase : public ProgrammableEncoder {
     uint64_t GetDrawCount() const;
     Ref<AttachmentState> AcquireAttachmentState();
 
+    // More general version of APISetBindGroup which additional parameter:
+    // - readTextureUsageOverride allows caller to override the usage flag for the readonly textures
+    // in the bind group.
+    void SetBindGroup(
+        uint32_t groupIndex,
+        BindGroupBase* group,
+        uint32_t dynamicOffsetCount = 0,
+        const uint32_t* dynamicOffsets = nullptr,
+        wgpu::TextureUsage readTextureUsageOverride = wgpu::TextureUsage::TextureBinding);
+
   protected:
     // Construct an "error" render encoder base.
     RenderEncoderBase(DeviceBase* device,
