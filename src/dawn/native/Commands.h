@@ -104,6 +104,7 @@ struct RenderPassColorAttachmentInfo {
     wgpu::LoadOp loadOp;
     wgpu::StoreOp storeOp;
     dawn::native::Color clearColor;
+    bool loadFromResolve;
 };
 
 struct RenderPassDepthStencilAttachmentInfo {

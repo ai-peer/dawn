@@ -51,6 +51,9 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     wgpu::TextureUsage usages = wgpu::TextureUsage::RenderAttachment |
                                 wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc |
                                 wgpu::TextureUsage::CopyDst;
+    if (HasFeature(Feature::MSAARenderToSingleSampled)) {
+        usages |= wgpu::TextureUsage::MSAARenderToSingleSampledAttachment;
+    }
     return usages;
 }
 
