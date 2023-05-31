@@ -68,6 +68,8 @@ struct DeviceBase::Caches {
     ContentLessObjectCache<RenderPipelineBase> renderPipelines;
     ContentLessObjectCache<SamplerBase> samplers;
     ContentLessObjectCache<ShaderModuleBase> shaderModules;
+    ContentLessObjectCache<CachedMultisampleAttachment, CachedMultisampleAttachmentBlueprint>
+        multisampleAttachments;
 };
 
 // Tries to find the blueprint in the cache, creating and inserting into the cache if not found.
@@ -1066,6 +1068,28 @@ void DeviceBase::UncacheAttachmentState(AttachmentState* obj) {
     mCaches->attachmentStates.Erase(obj);
 }
 
+ResultOrError<Ref<CachedMultisampleAttachment>> DeviceBase::GetOrCreateMultisampleAttachment(
+    wgpu::TextureFormat format,
+    uint32_t width,
+    uint32_t height,
+    uint32_t sampleCount) {
+    CachedMultisampleAttachmentBlueprint blueprint(format, width, height, sampleCount);
+
+    return GetOrCreate(mCaches->multisampleAttachments, &blueprint,
+                       [&]() -> ResultOrError<Ref<CachedMultisampleAttachment>> {
+                           auto result =
+                               AcquireRef(new CachedMultisampleAttachment(this, blueprint));
+                           DAWN_TRY(result->Initialize());
+                           result->SetContentHash(result->ComputeContentHash());
+                           return std::move(result);
+                       });
+}
+
+void DeviceBase::UncacheMultisampleAttachment(CachedMultisampleAttachment* obj) {
+    ASSERT(obj->IsCachedReference());
+    mCaches->multisampleAttachments.Erase(obj);
+}
+
 Ref<PipelineCacheBase> DeviceBase::GetOrCreatePipelineCache(const CacheKey& key) {
     return GetOrCreatePipelineCacheImpl(key);
 }
@@ -1964,6 +1988,10 @@ bool DeviceBase::MayRequireDuplicationOfIndirectParameters() const {
 
 bool DeviceBase::ShouldDuplicateParametersForDrawIndirect(
     const RenderPipelineBase* renderPipelineBase) const {
+    return false;
+}
+
+bool DeviceBase::IsResolveTextureBlitWithDrawSupported() const {
     return false;
 }
 

@@ -24,6 +24,7 @@
 #include "dawn/common/ContentLessObjectCache.h"
 #include "dawn/common/Mutex.h"
 #include "dawn/native/CacheKey.h"
+#include "dawn/native/CachedMultisampleAttachment.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ComputePipeline.h"
 #include "dawn/native/Error.h"
@@ -226,6 +227,13 @@ class DeviceBase : public RefCountedWithExternalCount {
     Ref<AttachmentState> GetOrCreateAttachmentState(const RenderPassDescriptor* descriptor);
     void UncacheAttachmentState(AttachmentState* obj);
 
+    ResultOrError<Ref<CachedMultisampleAttachment>> GetOrCreateMultisampleAttachment(
+        wgpu::TextureFormat format,
+        uint32_t width,
+        uint32_t height,
+        uint32_t sampleCount);
+    void UncacheMultisampleAttachment(CachedMultisampleAttachment* obj);
+
     Ref<PipelineCacheBase> GetOrCreatePipelineCache(const CacheKey& key);
 
     // Object creation methods that be used in a reentrant manner.
@@ -394,6 +402,10 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     virtual bool ShouldDuplicateParametersForDrawIndirect(
         const RenderPipelineBase* renderPipelineBase) const;
+
+    // Whether the backend supports blitting the resolve texture with draw calls in the same render
+    // pass that it will be resolved into.
+    virtual bool IsResolveTextureBlitWithDrawSupported() const;
 
     bool HasFeature(Feature feature) const;
 
