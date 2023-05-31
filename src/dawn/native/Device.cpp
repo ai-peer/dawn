@@ -1967,6 +1967,10 @@ bool DeviceBase::ShouldDuplicateParametersForDrawIndirect(
     return false;
 }
 
+bool DeviceBase::IsResolveTextureBlitWithDrawSupported() const {
+    return false;
+}
+
 uint64_t DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil() const {
     // For depth-stencil texture, buffer offset must be a multiple of 4, which is required
     // by WebGPU and Vulkan SPEC.
