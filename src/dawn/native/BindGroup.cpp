@@ -140,19 +140,26 @@ MaybeError ValidateTextureBinding(DeviceBase* device,
         case BindingInfoType::Texture: {
             SampleTypeBit supportedTypes =
                 texture->GetFormat().GetAspectInfo(aspect).supportedSampleTypes;
-            SampleTypeBit requiredType = SampleTypeToSampleTypeBit(bindingInfo.texture.sampleType);
-
             DAWN_TRY(ValidateCanUseAs(texture, wgpu::TextureUsage::TextureBinding, mode));
 
             DAWN_INVALID_IF(texture->IsMultisampledTexture() != bindingInfo.texture.multisampled,
                             "Sample count (%u) of %s doesn't match expectation (multisampled: %d).",
                             texture->GetSampleCount(), texture, bindingInfo.texture.multisampled);
 
+            SampleTypeBit requiredTypes;
+            if (bindingInfo.texture.sampleType == kInternalResolveAttachmentSampleType) {
+                // If the layout's texture's sample type is kInternalResolveAttachmentSampleType,
+                // then the shader's compatible sample types must contain float.
+                requiredTypes = SampleTypeBit::Float | SampleTypeBit::UnfilterableFloat;
+            } else {
+                requiredTypes = SampleTypeToSampleTypeBit(bindingInfo.texture.sampleType);
+            }
+
             DAWN_INVALID_IF(
-                !(supportedTypes & requiredType),
+                !(supportedTypes & requiredTypes),
                 "None of the supported sample types (%s) of %s match the expected sample "
                 "types (%s).",
-                supportedTypes, texture, requiredType);
+                supportedTypes, texture, requiredTypes);
 
             DAWN_INVALID_IF(entry.textureView->GetDimension() != bindingInfo.texture.viewDimension,
                             "Dimension (%s) of %s doesn't match the expected dimension (%s).",
