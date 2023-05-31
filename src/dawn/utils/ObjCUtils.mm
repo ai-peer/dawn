@@ -19,7 +19,9 @@
 namespace dawn::utils {
 
 void* CreatePlaceholderCALayer() {
-    return [CALayer layer];
+    @autoreleasepool {
+        return [[CALayer layer] retain];
+    }
 }
 
 }  // namespace dawn::utils
