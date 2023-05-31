@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de46baff_0aff04b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-31T00:20:39Z",
+      "side": 1,
+      "message": "LGTM\n\nRafael - do you have qualcomm contacts we could CC on a bug about this issue?\n\nlooks like D3D11 needs a suppression because it\u0027s OOM-ing due to crbug.com/dawn/1705 not fixed yet.",
+      "revId": "863761d139a9fe16ba533c35cd673586f2ced690",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
