@@ -491,9 +491,17 @@ float Device::GetTimestampPeriodInNS() const {
     return 1.0f;
 }
 
+bool Device::IsResolveTextureBlitWithDrawSupported() const {
+    return true;
+}
+
 void Device::ForceEventualFlushOfCommands() {}
 
 Texture::Texture(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state)
-    : TextureBase(device, descriptor, state) {}
+    : TextureBase(device, descriptor, state) {
+    if (descriptor->usage & wgpu::TextureUsage::MSAARenderToSingleSampledAttachment) {
+        AddInternalUsage(wgpu::TextureUsage::TextureBinding);
+    }
+}
 
 }  // namespace dawn::native::null
