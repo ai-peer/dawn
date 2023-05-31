@@ -58,6 +58,7 @@ RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
                                      Ref<AttachmentState> attachmentState,
                                      uint32_t renderTargetWidth,
                                      uint32_t renderTargetHeight,
+                                     uint32_t implicitSampleCount,
                                      bool depthReadOnly,
                                      bool stencilReadOnly,
                                      std::function<void()> endCallback)
@@ -71,7 +72,8 @@ RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
       mRenderTargetWidth(renderTargetWidth),
       mRenderTargetHeight(renderTargetHeight),
       mOcclusionQuerySet(descriptor->occlusionQuerySet),
-      mEndCallback(std::move(endCallback)) {
+      mEndCallback(std::move(endCallback)),
+      mImplicitSampleCount(implicitSampleCount) {
     mUsageTracker = std::move(usageTracker);
     const RenderPassDescriptorMaxDrawCount* maxDrawCountInfo = nullptr;
     FindInChain(descriptor->nextInChain, &maxDrawCountInfo);
@@ -90,13 +92,14 @@ Ref<RenderPassEncoder> RenderPassEncoder::Create(DeviceBase* device,
                                                  Ref<AttachmentState> attachmentState,
                                                  uint32_t renderTargetWidth,
                                                  uint32_t renderTargetHeight,
+                                                 uint32_t implicitSampleCount,
                                                  bool depthReadOnly,
                                                  bool stencilReadOnly,
                                                  std::function<void()> endCallback) {
-    return AcquireRef(new RenderPassEncoder(device, descriptor, commandEncoder, encodingContext,
-                                            std::move(usageTracker), std::move(attachmentState),
-                                            renderTargetWidth, renderTargetHeight, depthReadOnly,
-                                            stencilReadOnly, std::move(endCallback)));
+    return AcquireRef(new RenderPassEncoder(
+        device, descriptor, commandEncoder, encodingContext, std::move(usageTracker),
+        std::move(attachmentState), renderTargetWidth, renderTargetHeight, implicitSampleCount,
+        depthReadOnly, stencilReadOnly, std::move(endCallback)));
 }
 
 RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
@@ -125,6 +128,10 @@ void RenderPassEncoder::DestroyImpl() {
 
 ObjectType RenderPassEncoder::GetType() const {
     return ObjectType::RenderPassEncoder;
+}
+
+uint32_t RenderPassEncoder::GetImplicitSampleCount() const {
+    return mImplicitSampleCount;
 }
 
 void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex) {

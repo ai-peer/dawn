@@ -582,6 +582,11 @@ VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage
             UNREACHABLE();
             break;
 
+        case wgpu::TextureUsage::MSAARenderToSingleSampledAttachment:
+            // TODO(dawn:1710): Implement MSAA render to single sampled in Vulkan.
+            UNREACHABLE();
+            break;
+
         case wgpu::TextureUsage::None:
             break;
     }

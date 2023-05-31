@@ -35,6 +35,7 @@ class RenderPassEncoder final : public RenderEncoderBase {
                                          Ref<AttachmentState> attachmentState,
                                          uint32_t renderTargetWidth,
                                          uint32_t renderTargetHeight,
+                                         uint32_t implicitSampleCount,
                                          bool depthReadOnly,
                                          bool stencilReadOnly,
                                          std::function<void()> endCallback = nullptr);
@@ -44,6 +45,8 @@ class RenderPassEncoder final : public RenderEncoderBase {
                                             const char* label);
 
     ObjectType GetType() const override;
+
+    uint32_t GetImplicitSampleCount() const;
 
     // NOTE: this will lock the device internally. To avoid deadlock when the device is already
     // locked, use End() instead.
@@ -78,6 +81,7 @@ class RenderPassEncoder final : public RenderEncoderBase {
                       Ref<AttachmentState> attachmentState,
                       uint32_t renderTargetWidth,
                       uint32_t renderTargetHeight,
+                      uint32_t implicitSampleCount,
                       bool depthReadOnly,
                       bool stencilReadOnly,
                       std::function<void()> endCallback = nullptr);
@@ -108,6 +112,8 @@ class RenderPassEncoder final : public RenderEncoderBase {
     uint64_t mMaxDrawCount = 50000000;
 
     std::function<void()> mEndCallback;
+
+    uint32_t mImplicitSampleCount = 0;
 };
 
 }  // namespace dawn::native
