@@ -44,19 +44,21 @@ bool CommandRecordingContext::WasUsed() const {
 }
 
 MaybeError CommandRecordingContext::PrepareNextCommandBuffer(id<MTLCommandQueue> queue) {
-    ASSERT(mCommands == nil);
-    ASSERT(!mNeedsSubmit);
-    ASSERT(!mUsed);
+    @autoreleasepool {
+        ASSERT(mCommands == nil);
+        ASSERT(!mNeedsSubmit);
+        ASSERT(!mUsed);
 
-    // The MTLCommandBuffer will be autoreleased by default.
-    // The autorelease pool may drain before the command buffer is submitted. Retain so it stays
-    // alive.
-    mCommands = AcquireNSPRef([[queue commandBuffer] retain]);
-    if (mCommands == nil) {
-        return DAWN_INTERNAL_ERROR("Failed to allocate an MTLCommandBuffer");
+        // The MTLCommandBuffer will be autoreleased by default.
+        // The autorelease pool may drain before the command buffer is submitted. Retain so it stays
+        // alive.
+        mCommands = AcquireNSPRef([[queue commandBuffer] retain]);
+        if (mCommands == nil) {
+            return DAWN_INTERNAL_ERROR("Failed to allocate an MTLCommandBuffer");
+        }
+
+        return {};
     }
-
-    return {};
 }
 
 NSPRef<id<MTLCommandBuffer>> CommandRecordingContext::AcquireCommands() {
@@ -73,28 +75,32 @@ NSPRef<id<MTLCommandBuffer>> CommandRecordingContext::AcquireCommands() {
 
 id<MTLBlitCommandEncoder> CommandRecordingContext::BeginBlit(MTLBlitPassDescriptor* descriptor)
     API_AVAILABLE(macos(11.0), ios(14.0)) {
-    ASSERT(descriptor);
-    ASSERT(mCommands != nullptr);
-    ASSERT(mBlit == nullptr);
-    ASSERT(!mInEncoder);
+    @autoreleasepool {
+        ASSERT(descriptor);
+        ASSERT(mCommands != nullptr);
+        ASSERT(mBlit == nullptr);
+        ASSERT(!mInEncoder);
 
-    mInEncoder = true;
-    // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
-    // draining from under us.
-    mBlit.Acquire([[*mCommands blitCommandEncoderWithDescriptor:descriptor] retain]);
-    return mBlit.Get();
+        mInEncoder = true;
+        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+        // draining from under us.
+        mBlit.Acquire([[*mCommands blitCommandEncoderWithDescriptor:descriptor] retain]);
+        return mBlit.Get();
+    }
 }
 
 id<MTLBlitCommandEncoder> CommandRecordingContext::EnsureBlit() {
     ASSERT(mCommands != nullptr);
 
     if (mBlit == nullptr) {
-        ASSERT(!mInEncoder);
-        mInEncoder = true;
+        @autoreleasepool {
+            ASSERT(!mInEncoder);
+            mInEncoder = true;
 
-        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
-        // draining from under us.
-        mBlit.Acquire([[*mCommands blitCommandEncoder] retain]);
+            // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+            // draining from under us.
+            mBlit.Acquire([[*mCommands blitCommandEncoder] retain]);
+        }
     }
     return mBlit.Get();
 }
@@ -110,29 +116,33 @@ void CommandRecordingContext::EndBlit() {
 }
 
 id<MTLComputeCommandEncoder> CommandRecordingContext::BeginCompute() {
-    ASSERT(mCommands != nullptr);
-    ASSERT(mCompute == nullptr);
-    ASSERT(!mInEncoder);
+    @autoreleasepool {
+        ASSERT(mCommands != nullptr);
+        ASSERT(mCompute == nullptr);
+        ASSERT(!mInEncoder);
 
-    mInEncoder = true;
-    // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
-    // draining from under us.
-    mCompute.Acquire([[*mCommands computeCommandEncoder] retain]);
-    return mCompute.Get();
+        mInEncoder = true;
+        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+        // draining from under us.
+        mCompute.Acquire([[*mCommands computeCommandEncoder] retain]);
+        return mCompute.Get();
+    }
 }
 
 id<MTLComputeCommandEncoder> CommandRecordingContext::BeginCompute(
     MTLComputePassDescriptor* descriptor) API_AVAILABLE(macos(11.0), ios(14.0)) {
-    ASSERT(descriptor);
-    ASSERT(mCommands != nullptr);
-    ASSERT(mCompute == nullptr);
-    ASSERT(!mInEncoder);
+    @autoreleasepool {
+        ASSERT(descriptor);
+        ASSERT(mCommands != nullptr);
+        ASSERT(mCompute == nullptr);
+        ASSERT(!mInEncoder);
 
-    mInEncoder = true;
-    // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
-    // draining from under us.
-    mCompute.Acquire([[*mCommands computeCommandEncoderWithDescriptor:descriptor] retain]);
-    return mCompute.Get();
+        mInEncoder = true;
+        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+        // draining from under us.
+        mCompute.Acquire([[*mCommands computeCommandEncoderWithDescriptor:descriptor] retain]);
+        return mCompute.Get();
+    }
 }
 
 void CommandRecordingContext::EndCompute() {
@@ -146,15 +156,17 @@ void CommandRecordingContext::EndCompute() {
 
 id<MTLRenderCommandEncoder> CommandRecordingContext::BeginRender(
     MTLRenderPassDescriptor* descriptor) {
-    ASSERT(mCommands != nullptr);
-    ASSERT(mRender == nullptr);
-    ASSERT(!mInEncoder);
+    @autoreleasepool {
+        ASSERT(mCommands != nullptr);
+        ASSERT(mRender == nullptr);
+        ASSERT(!mInEncoder);
 
-    mInEncoder = true;
-    // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
-    // draining from under us.
-    mRender.Acquire([[*mCommands renderCommandEncoderWithDescriptor:descriptor] retain]);
-    return mRender.Get();
+        mInEncoder = true;
+        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+        // draining from under us.
+        mRender.Acquire([[*mCommands renderCommandEncoderWithDescriptor:descriptor] retain]);
+        return mRender.Get();
+    }
 }
 
 void CommandRecordingContext::EndRender() {
