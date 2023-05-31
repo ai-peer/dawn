@@ -15,10 +15,12 @@
 #ifndef SRC_DAWN_NATIVE_TEXTURE_H_
 #define SRC_DAWN_NATIVE_TEXTURE_H_
 
+#include <map>
 #include <vector>
 
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
+#include "dawn/native/CachedMultisampleAttachment.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/Forward.h"
@@ -28,6 +30,8 @@
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
+
+class CachedMultisampleAttachment;
 
 enum class AllowMultiPlanarTextureFormat {
     No,
@@ -49,6 +53,11 @@ bool IsValidSampleCount(uint32_t sampleCount);
 
 static constexpr wgpu::TextureUsage kReadOnlyTextureUsages =
     wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment;
+
+// Valid texture usages for a resolve texture that are loaded from at the beginning of a render
+// pass.
+static constexpr wgpu::TextureUsage kResolveTextureLoadAndStoreUsages =
+    kResolveAttachmentLoadingUsage | wgpu::TextureUsage::RenderAttachment;
 
 class TextureBase : public ApiObjectBase {
   public:
@@ -105,6 +114,9 @@ class TextureBase : public ApiObjectBase {
         const TextureViewDescriptor* descriptor = nullptr);
     ApiObjectList* GetViewTrackingList();
 
+    bool IsImplicitMSAARenderTextureViewSupported() const;
+    ResultOrError<TextureViewBase*> GetImplicitMSAARenderTextureView(uint32_t sampleCount);
+
     // Dawn API
     TextureViewBase* APICreateView(const TextureViewDescriptor* descriptor = nullptr);
     void APIDestroy();
@@ -144,6 +156,10 @@ class TextureBase : public ApiObjectBase {
 
     // TODO(crbug.com/dawn/845): Use a more optimized data structure to save space
     std::vector<bool> mIsSubresourceContentInitializedAtIndex;
+
+    // Implicit MSAA texture to be used as attachment during MSAA render to single sampled.
+    // NOTE: we currently only support one case when sample count = 4.
+    Ref<CachedMultisampleAttachment> mCachedImplicitMSAttachment;
 };
 
 class TextureViewBase : public ApiObjectBase {

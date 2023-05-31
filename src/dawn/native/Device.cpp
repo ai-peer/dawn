@@ -84,6 +84,7 @@ struct DeviceBase::Caches {
     ContentLessObjectCache<RenderPipelineBase> renderPipelines;
     ContentLessObjectCache<SamplerBase> samplers;
     ContentLessObjectCache<ShaderModuleBase> shaderModules;
+    ContentLessObjectCache<CachedMultisampleAttachmentBlueprint> multisampleAttachments;
 };
 
 struct DeviceBase::DeprecationWarnings {
@@ -1088,6 +1089,33 @@ void DeviceBase::UncacheAttachmentState(AttachmentState* obj) {
     ASSERT(removedCount == 1);
 }
 
+ResultOrError<Ref<CachedMultisampleAttachment>> DeviceBase::GetOrCreateMultisampleAttachment(
+    wgpu::TextureFormat format,
+    uint32_t width,
+    uint32_t height,
+    uint32_t sampleCount) {
+    CachedMultisampleAttachmentBlueprint blueprint(format, width, height, sampleCount);
+
+    Ref<CachedMultisampleAttachment> result;
+    auto iter = mCaches->multisampleAttachments.find(&blueprint);
+    if (iter != mCaches->multisampleAttachments.end()) {
+        result = static_cast<CachedMultisampleAttachment*>(*iter);
+    } else {
+        result = AcquireRef(new CachedMultisampleAttachment(this, blueprint));
+        DAWN_TRY(result->Initialize());
+        result->SetIsCachedReference();
+        result->SetContentHash(result->ComputeContentHash());
+        mCaches->multisampleAttachments.insert(result.Get());
+    }
+    return std::move(result);
+}
+
+void DeviceBase::UncacheMultisampleAttachment(CachedMultisampleAttachment* obj) {
+    ASSERT(obj->IsCachedReference());
+    size_t removedCount = mCaches->multisampleAttachments.erase(obj);
+    ASSERT(removedCount == 1);
+}
+
 Ref<PipelineCacheBase> DeviceBase::GetOrCreatePipelineCache(const CacheKey& key) {
     return GetOrCreatePipelineCacheImpl(key);
 }
@@ -2036,6 +2064,10 @@ bool DeviceBase::MayRequireDuplicationOfIndirectParameters() const {
 
 bool DeviceBase::ShouldDuplicateParametersForDrawIndirect(
     const RenderPipelineBase* renderPipelineBase) const {
+    return false;
+}
+
+bool DeviceBase::IsResolveTextureBlitWithDrawSupported() const {
     return false;
 }
 
