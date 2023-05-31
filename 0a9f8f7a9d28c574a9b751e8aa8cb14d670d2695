@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8056f980_beabf17a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-05-31T21:51:03Z",
+      "side": 1,
+      "message": "PTAL! This should address the concern brought up in the bug (though I don\u0027t think the callback would have ever been called when Dawn was using the wire client?) and prevent any similar situations from coming up in the future.",
+      "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
