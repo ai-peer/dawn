@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "406c22f5_b149ecb9",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T02:31:05Z",
+      "side": 1,
+      "message": "This toggle can work for CopyBufferToTexture and CopyTextureToTexture, but not for     WriteTexture.",
+      "parentUuid": "0f2af603_fa485a3f",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 60
+      },
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e479df59_2bc6599e",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -37,6 +61,24 @@
       "writtenOn": "2023-05-30T13:11:17Z",
       "side": 1,
       "message": "This code could be moved inside the block of code that handles depth-stencil textures.",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb230d9_9aed1d3b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T02:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e479df59_2bc6599e",
       "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +96,24 @@
       "writtenOn": "2023-05-30T13:11:17Z",
       "side": 1,
       "message": "nit: slight preference for separating the stencil case from the more normal case for clarity,\n\n```\nif (packed) {\n   one copy\n} else if (depthstencil) {\n   copy per texel\n} else {\n   copy per row\n}\n```",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8382649_2eea0de5",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T02:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1bb0e76_20d44d3c",
       "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -81,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6204dd01_43280080",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T02:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85a69645_4bacb95d",
+      "range": {
+        "startLine": 580,
+        "startChar": 31,
+        "endLine": 580,
+        "endChar": 32
+      },
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50fe308b_99eb426b",
@@ -98,6 +182,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e76da5c2_94bc14d4",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T02:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50fe308b_99eb426b",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a7bf2fe_c1cc1f4d",
@@ -111,6 +213,24 @@
       "writtenOn": "2023-05-30T13:11:17Z",
       "side": 1,
       "message": "nit: on D3D11 :)",
+      "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e84563_0d9ff76d",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2599,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T02:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a7bf2fe_c1cc1f4d",
       "revId": "c0e436d34c4015c3b41b2b0ffe5c105370ab4745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
