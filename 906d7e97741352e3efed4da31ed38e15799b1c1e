@@ -56,6 +56,30 @@
       },
       "revId": "906d7e97741352e3efed4da31ed38e15799b1c1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0cab972_8ea2e9c7",
+        "filename": "src/dawn/wire/server/Server.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T15:01:54Z",
+      "side": 1,
+      "message": "Good idea, did it for Inject* methods however I chose to keep GetDevice return a nullable WGPUDevice.",
+      "parentUuid": "71183f32_fd49b6d9",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "906d7e97741352e3efed4da31ed38e15799b1c1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
