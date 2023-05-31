@@ -51,6 +51,42 @@
       "message": "LGTM too",
       "revId": "863761d139a9fe16ba533c35cd673586f2ced690",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d924e99_7de86f87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-31T16:07:58Z",
+      "side": 1,
+      "message": "Thanks, Austin, I will email Ajay at Qualcomm to know about this issue, and I\u0027ll also take a look. Tried cc\u0027ing his email here but Gerrit didn\u0027t allow it.",
+      "parentUuid": "7a5d252f_31064687",
+      "revId": "863761d139a9fe16ba533c35cd673586f2ced690",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "733ad218_33c75e85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-05-31T16:07:58Z",
+      "side": 1,
+      "message": "Thanks a lot,",
+      "parentUuid": "e35ff5d4_b67eefc5",
+      "revId": "863761d139a9fe16ba533c35cd673586f2ced690",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
