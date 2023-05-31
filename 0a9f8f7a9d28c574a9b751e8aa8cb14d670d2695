@@ -16,6 +16,46 @@
       "message": "PTAL! This should address the concern brought up in the bug (though I don\u0027t think the callback would have ever been called when Dawn was using the wire client?) and prevent any similar situations from coming up in the future.",
       "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b5edaf6_47cf882d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-31T23:40:32Z",
+      "side": 1,
+      "message": "LGTM - we should be able to have a death test to check that the assert gets hit\n\n[example](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp;l\u003d834?q\u003dASSERT_DEATH%20f:dawn\u0026ss\u003dchromium%2Fchromium%2Fsrc)\n\nprobably would go in dawn/tests/unittests/wire/WireAdapterTests.cpp",
+      "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17adf12_bb5be864",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-05-31T23:40:32Z",
+      "side": 1,
+      "message": "uunit: \"over the wire\" or \"cannot be serialized\" is probably the better terminology. you could use dawn::wire in a non-multi-process way.",
+      "range": {
+        "startLine": 72,
+        "startChar": 47,
+        "endLine": 72,
+        "endChar": 65
+      },
+      "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
