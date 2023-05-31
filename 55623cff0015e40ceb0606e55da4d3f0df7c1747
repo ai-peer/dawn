@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc8b7640_66de0788",
+        "filename": "src/tint/ir/block.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-31T20:44:31Z",
+      "side": 1,
+      "message": "The `TINT_ASSERT` triggers an ICE which does a `FAIL` on the test, it desn\u0027t cause death. So, I don\u0027t think I can actually test these changes as the test always fails unless I replace the ice handler.\n\nI added the `TINT_ASSERT` calls and then added `if` checks to early out in each case.",
+      "parentUuid": "2b3708a9_2e693a75",
+      "revId": "55623cff0015e40ceb0606e55da4d3f0df7c1747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01d95016_5c944d4b",
         "filename": "src/tint/ir/instruction.h",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-31T19:37:53Z",
       "side": 1,
       "message": "`previous`",
+      "revId": "55623cff0015e40ceb0606e55da4d3f0df7c1747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f8f15b_6859bd21",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-31T20:44:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01d95016_5c944d4b",
       "revId": "55623cff0015e40ceb0606e55da4d3f0df7c1747",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
