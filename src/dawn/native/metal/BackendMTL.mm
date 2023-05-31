@@ -532,6 +532,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
         EnableFeature(Feature::RG11B10UfloatRenderable);
         EnableFeature(Feature::BGRA8UnormStorage);
         EnableFeature(Feature::SurfaceCapabilities);
+        EnableFeature(Feature::MSAARenderToSingleSampled);
     }
 
     void InitializeVendorArchitectureImpl() override {

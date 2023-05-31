@@ -59,7 +59,13 @@ MaybeError ValidateSyncScopeResourceUsage(const SyncScopeResourceUsage& scope) {
             [&](const SubresourceRange&, const wgpu::TextureUsage& usage) -> MaybeError {
                 bool readOnly = IsSubset(usage, kReadOnlyTextureUsages);
                 bool singleUse = wgpu::HasZeroOrOneBits(usage);
-                if (!readOnly && !singleUse) {
+                // kResolveTextureLoadAndStoreUsages are kResolveAttachmentLoadingUsage &
+                // RenderAttachment usage used in the same pass.
+                // This is accepted because kResolveAttachmentLoadingUsage is an internal loading
+                // operation for blitting a resolve target to an MSAA attachment. And there won't be
+                // and read-after-write hazard.
+                bool isLoadedResolveTexture = usage == kResolveTextureLoadAndStoreUsages;
+                if (!readOnly && !singleUse && !isLoadedResolveTexture) {
                     return DAWN_VALIDATION_ERROR(
                         "%s usage (%s) includes writable usage and another usage in the same "
                         "synchronization scope.",
