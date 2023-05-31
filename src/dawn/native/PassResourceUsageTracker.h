@@ -48,7 +48,9 @@ class SyncScopeUsageTracker {
                                      const TextureSubresourceUsage& textureUsage);
 
     // Walks the bind groups and tracks all its resources.
-    void AddBindGroup(BindGroupBase* group);
+    void AddBindGroup(
+        BindGroupBase* group,
+        wgpu::TextureUsage readTextureUsageOverride = wgpu::TextureUsage::TextureBinding);
 
     // Returns the per-pass usage for use by backends for APIs with explicit barriers.
     SyncScopeResourceUsage AcquireSyncScopeUsage();

@@ -458,6 +458,15 @@ void RenderEncoderBase::APISetBindGroup(uint32_t groupIndexIn,
                                         BindGroupBase* group,
                                         uint32_t dynamicOffsetCount,
                                         const uint32_t* dynamicOffsets) {
+    SetBindGroup(groupIndexIn, group, dynamicOffsetCount, dynamicOffsets,
+                 /*readTextureUsageOverride=*/wgpu::TextureUsage::TextureBinding);
+}
+
+void RenderEncoderBase::SetBindGroup(uint32_t groupIndexIn,
+                                     BindGroupBase* group,
+                                     uint32_t dynamicOffsetCount,
+                                     const uint32_t* dynamicOffsets,
+                                     wgpu::TextureUsage readTextureUsageOverride) {
     mEncodingContext->TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
@@ -475,7 +484,7 @@ void RenderEncoderBase::APISetBindGroup(uint32_t groupIndexIn,
                                    dynamicOffsets);
                 mCommandBufferState.SetBindGroup(groupIndex, group, dynamicOffsetCount,
                                                  dynamicOffsets);
-                mUsageTracker.AddBindGroup(group);
+                mUsageTracker.AddBindGroup(group, readTextureUsageOverride);
             }
 
             return {};

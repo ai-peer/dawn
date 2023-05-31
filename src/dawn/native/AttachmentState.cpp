@@ -15,6 +15,7 @@
 #include "dawn/native/AttachmentState.h"
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/Texture.h"
@@ -33,10 +34,18 @@ AttachmentStateBlueprint::AttachmentStateBlueprint(const RenderBundleEncoderDesc
         }
     }
     mDepthStencilFormat = descriptor->depthStencilFormat;
+
+    // TODO(dawn:1710): support MSAA render to single sampled in render bundle.
 }
 
 AttachmentStateBlueprint::AttachmentStateBlueprint(const RenderPipelineDescriptor* descriptor)
     : mSampleCount(descriptor->multisample.count) {
+    const DawnMultisampleStateRenderToSingleSampled* msaaRenderToSingleSampledDesc = nullptr;
+    FindInChain(descriptor->multisample.nextInChain, &msaaRenderToSingleSampledDesc);
+    if (msaaRenderToSingleSampledDesc != nullptr) {
+        mIsMSAARenderToSingleSampledEnabled = msaaRenderToSingleSampledDesc->enabled;
+    }
+
     if (descriptor->fragment != nullptr) {
         ASSERT(descriptor->fragment->targetCount <= kMaxColorAttachments);
         for (ColorAttachmentIndex i(uint8_t(0));
@@ -56,6 +65,15 @@ AttachmentStateBlueprint::AttachmentStateBlueprint(const RenderPipelineDescripto
 }
 
 AttachmentStateBlueprint::AttachmentStateBlueprint(const RenderPassDescriptor* descriptor) {
+    const DawnRenderPassDescriptorRenderToSingleSampled* msaaRenderToSingleSampledDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &msaaRenderToSingleSampledDesc);
+    uint32_t implicitSampleCount = 0;
+    if (msaaRenderToSingleSampledDesc != nullptr &&
+        msaaRenderToSingleSampledDesc->implicitSampleCount > 0) {
+        implicitSampleCount = msaaRenderToSingleSampledDesc->implicitSampleCount;
+        mIsMSAARenderToSingleSampledEnabled = true;
+    }
+
     for (ColorAttachmentIndex i(uint8_t(0));
          i < ColorAttachmentIndex(static_cast<uint8_t>(descriptor->colorAttachmentCount)); ++i) {
         TextureViewBase* attachment = descriptor->colorAttachments[static_cast<uint8_t>(i)].view;
@@ -64,10 +82,14 @@ AttachmentStateBlueprint::AttachmentStateBlueprint(const RenderPassDescriptor* d
         }
         mColorAttachmentsSet.set(i);
         mColorFormats[i] = attachment->GetFormat().format;
+
+        uint32_t attachmentSampleCount = mIsMSAARenderToSingleSampledEnabled
+                                             ? implicitSampleCount
+                                             : attachment->GetTexture()->GetSampleCount();
         if (mSampleCount == 0) {
-            mSampleCount = attachment->GetTexture()->GetSampleCount();
+            mSampleCount = attachmentSampleCount;
         } else {
-            ASSERT(mSampleCount == attachment->GetTexture()->GetSampleCount());
+            ASSERT(mSampleCount == attachmentSampleCount);
         }
     }
     if (descriptor->depthStencilAttachment != nullptr) {
@@ -127,6 +149,11 @@ bool AttachmentStateBlueprint::EqualityFunc::operator()(const AttachmentStateBlu
         return false;
     }
 
+    // Both attachment state must either enable MSSA render to single sampled or disable it.
+    if (a->mIsMSAARenderToSingleSampledEnabled != b->mIsMSAARenderToSingleSampledEnabled) {
+        return false;
+    }
+
     return true;
 }
 
@@ -163,6 +190,10 @@ wgpu::TextureFormat AttachmentState::GetDepthStencilFormat() const {
 
 uint32_t AttachmentState::GetSampleCount() const {
     return mSampleCount;
+}
+
+bool AttachmentState::IsMSAARenderToSingleSampledEnabled() const {
+    return mIsMSAARenderToSingleSampledEnabled;
 }
 
 }  // namespace dawn::native
