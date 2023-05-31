@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93374d84_b8ec0411",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-31T18:32:57Z",
+      "side": 1,
+      "message": "Although I find the recursive version a little easier to reason about, this is a very good refactoring to doing it procedurally.",
+      "revId": "ad287fcff94e9e82791fc3ab98cfaa756ff28903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a281703a_7c6180d1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-31T18:32:57Z",
+      "side": 1,
+      "message": "Might be nice to add a PopMany(size_t) so that this all becomes:\n```\nauto elements \u003d values_stack.PopMany(build-\u003ecount);\n```",
+      "range": {
+        "startLine": 382,
+        "startChar": 30,
+        "endLine": 382,
+        "endChar": 47
+      },
+      "revId": "ad287fcff94e9e82791fc3ab98cfaa756ff28903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
