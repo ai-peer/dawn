@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2a32a86_f39a4b5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T08:14:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f3424571aca392a2a13ed369b853ebc000fefedc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a2f221_798d9a9c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T08:14:30Z",
+      "side": 1,
+      "message": "nit: this could be just width * bytesSize.",
+      "range": {
+        "startLine": 550,
+        "startChar": 56,
+        "endLine": 550,
+        "endChar": 67
+      },
+      "revId": "f3424571aca392a2a13ed369b853ebc000fefedc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d08aab5e_a7d87f74",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T08:14:30Z",
+      "side": 1,
+      "message": "This line seems extraneous and should be removed?",
+      "revId": "f3424571aca392a2a13ed369b853ebc000fefedc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07b03f98_7f44e20e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T08:14:30Z",
+      "side": 1,
+      "message": "u-u-nit: slight preference for separating the src and dst increments at the end of the loop for readability.",
+      "revId": "f3424571aca392a2a13ed369b853ebc000fefedc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
