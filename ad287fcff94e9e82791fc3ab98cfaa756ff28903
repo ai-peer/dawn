@@ -63,6 +63,30 @@
       },
       "revId": "ad287fcff94e9e82791fc3ab98cfaa756ff28903",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef09be6f_945f9305",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-05-31T18:38:36Z",
+      "side": 1,
+      "message": "Fair enough.",
+      "parentUuid": "0a673ee2_d99471c4",
+      "range": {
+        "startLine": 382,
+        "startChar": 30,
+        "endLine": 382,
+        "endChar": 47
+      },
+      "revId": "ad287fcff94e9e82791fc3ab98cfaa756ff28903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
