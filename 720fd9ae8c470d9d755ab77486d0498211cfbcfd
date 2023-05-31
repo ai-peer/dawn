@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "720fd9ae8c470d9d755ab77486d0498211cfbcfd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36df9943_0109e05a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T08:06:30Z",
+      "side": 1,
+      "message": "Can you explain why the message needs to be ASCII? It seems that Tint could produce non-ASCII error messages, for example if the shader uses non-ASCII identifiers.",
+      "revId": "720fd9ae8c470d9d755ab77486d0498211cfbcfd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3128e66a_7e73707a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T08:06:30Z",
+      "side": 1,
+      "message": "u-nit: no need for DAWN_LIKELY given that this is cold code.",
+      "revId": "720fd9ae8c470d9d755ab77486d0498211cfbcfd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
