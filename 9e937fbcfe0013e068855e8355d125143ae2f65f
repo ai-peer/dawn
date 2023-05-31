@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07274013_ece8f3b2",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-05-31T16:11:57Z",
+      "side": 1,
+      "message": "note:  enga@ the namespace code-health changes missed these, when this is enabled by default we won\u0027t have to worry about stuff like this breaking the fuzzer\n\nhttps://source.chromium.org/chromium/_/dawn/dawn.git/+/2731b76ded528e777698a4f53fc2201989a1cb80",
+      "revId": "9e937fbcfe0013e068855e8355d125143ae2f65f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
