@@ -16,6 +16,24 @@
       "message": "LGTM\n\nRafael - do you have qualcomm contacts we could CC on a bug about this issue?\n\nlooks like D3D11 needs a suppression because it\u0027s OOM-ing due to crbug.com/dawn/1705 not fixed yet.",
       "revId": "863761d139a9fe16ba533c35cd673586f2ced690",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5d252f_31064687",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-05-31T01:31:45Z",
+      "side": 1,
+      "message": "\u003e Rafael - do you have qualcomm contacts we could CC on a bug about this issue?\n\nMin knows people.",
+      "parentUuid": "de46baff_0aff04b1",
+      "revId": "863761d139a9fe16ba533c35cd673586f2ced690",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
