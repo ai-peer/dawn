@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d094733_42e51621",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T13:32:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c7a3d31_bc38d758",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T13:32:37Z",
+      "side": 1,
+      "message": "Could we check for the adapter\u0027s compatibility mode and have list of the storage texture formats for the compatibility mode? +CC Stephen for this.",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
