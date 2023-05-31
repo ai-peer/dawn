@@ -86,7 +86,8 @@ void SyncScopeUsageTracker::AddRenderBundleTextureUsage(
                             });
 }
 
-void SyncScopeUsageTracker::AddBindGroup(BindGroupBase* group) {
+void SyncScopeUsageTracker::AddBindGroup(BindGroupBase* group,
+                                         wgpu::TextureUsage readTextureUsageOverride) {
     for (BindingIndex bindingIndex{0}; bindingIndex < group->GetLayout()->GetBindingCount();
          ++bindingIndex) {
         const BindingInfo& bindingInfo = group->GetLayout()->GetBindingInfo(bindingIndex);
@@ -115,7 +116,7 @@ void SyncScopeUsageTracker::AddBindGroup(BindGroupBase* group) {
 
             case BindingInfoType::Texture: {
                 TextureViewBase* view = group->GetBindingAsTextureView(bindingIndex);
-                TextureViewUsedAs(view, wgpu::TextureUsage::TextureBinding);
+                TextureViewUsedAs(view, readTextureUsageOverride);
                 break;
             }
 
