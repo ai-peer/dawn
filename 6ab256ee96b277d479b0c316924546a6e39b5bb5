@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure if it matters or not, but previously all instructions would appear in the map, even if they went to ID 0. Now, any instruction which does not allocate wil not appear in the map.",
       "revId": "6ab256ee96b277d479b0c316924546a6e39b5bb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f813627_e3eea837",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-31T13:40:51Z",
+      "side": 0,
+      "message": "I think that\u0027s fine. The map is only needed for getting IDs.\n\nArguably we could rename `values_` and `Value()` to `result_ids_` and `ResultId()` to make this clearer, but it\u0027s not that important.",
+      "parentUuid": "d53eefbb_04656e2e",
+      "revId": "6ab256ee96b277d479b0c316924546a6e39b5bb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

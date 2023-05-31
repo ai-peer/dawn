@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f288d4_7f42fd67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-31T13:40:51Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ve been thinking about making this exact change!",
+      "revId": "49ae73596599cbe17aa3c31035064c5cf760f525",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
