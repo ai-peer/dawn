@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a723778_36716794",
+        "filename": "src/tint/ir/block.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-31T21:06:40Z",
+      "side": 1,
+      "message": "Sorry, I meant `EXPECT_FATAL_FAILURE`",
+      "parentUuid": "dc8b7640_66de0788",
+      "revId": "55623cff0015e40ceb0606e55da4d3f0df7c1747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01d95016_5c944d4b",
         "filename": "src/tint/ir/instruction.h",
         "patchSetId": 1
