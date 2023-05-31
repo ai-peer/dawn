@@ -237,6 +237,10 @@ ResultOrError<wgpu::TextureUsage> SwapChain::GetSupportedSurfaceUsage(const Devi
         supportedUsages |= wgpu::TextureUsage::TextureBinding;
     }
 
+    if (device->HasFeature(Feature::MSAARenderToSingleSampled)) {
+        supportedUsages |= wgpu::TextureUsage::MSAARenderToSingleSampledAttachment;
+    }
+
     fn.DestroySurfaceKHR(instanceVk, surfaceVk, nullptr);
 
     return supportedUsages;
