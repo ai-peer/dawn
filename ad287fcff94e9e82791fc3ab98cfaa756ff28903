@@ -39,6 +39,30 @@
       },
       "revId": "ad287fcff94e9e82791fc3ab98cfaa756ff28903",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a673ee2_d99471c4",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-31T18:36:52Z",
+      "side": 1,
+      "message": "I\u0027d expect a multi-pop to return them in sequential order, but I actually need them reversed here.",
+      "parentUuid": "a281703a_7c6180d1",
+      "range": {
+        "startLine": 382,
+        "startChar": 30,
+        "endLine": 382,
+        "endChar": 47
+      },
+      "revId": "ad287fcff94e9e82791fc3ab98cfaa756ff28903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
