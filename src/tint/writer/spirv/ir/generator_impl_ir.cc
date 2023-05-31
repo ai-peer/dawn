@@ -216,6 +216,14 @@ uint32_t GeneratorImplIr::Value(const ir::Value* value) {
     return Switch(
         value,  //
         [&](const ir::Constant* constant) { return Constant(constant); },
+        [&](const ir::BlockParam* param) {
+            auto id = phi_ids_.Find(param);
+            if (TINT_UNLIKELY(!id)) {
+                TINT_ICE(Writer, diagnostics_) << "missing phi ID for value";
+                return 0u;
+            }
+            return *id;
+        },
         [&](const ir::Value*) {
             auto id = values_.Find(value);
             if (TINT_UNLIKELY(!id)) {
@@ -458,6 +466,11 @@ void GeneratorImplIr::EmitIf(const ir::If* i) {
     current_function_.push_inst(spv::Op::OpBranchConditional,
                                 {Value(i->Condition()), true_label, false_label});
 
+    // Reserve phi IDs for the merge block
+    for (auto* param : merge_block->Params()) {
+        phi_ids_.Add(param, module_.NextId());
+    }
+
     // Emit the `true` and `false` blocks, if they're not being skipped.
     if (true_label != merge_label) {
         EmitBlock(true_block);
@@ -659,6 +672,14 @@ void GeneratorImplIr::EmitLoop(const ir::Loop* loop) {
         spv::Op::OpLoopMerge, {merge_label, continuing_label, U32Operand(SpvLoopControlMaskNone)});
     current_function_.push_inst(spv::Op::OpBranch, {body_label});
 
+    // Reserve phi IDs for the loop body and continuing
+    for (auto* param : loop->Body()->Params()) {
+        phi_ids_.Add(param, module_.NextId());
+    }
+    for (auto* param : loop->Continuing()->Params()) {
+        phi_ids_.Add(param, module_.NextId());
+    }
+
     // Emit the loop body.
     EmitBlock(loop->Body());
 
@@ -700,6 +721,11 @@ void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
             switch_operands.push_back(sel.val->Value()->ValueAs<uint32_t>());
             switch_operands.push_back(label);
         }
+    }
+
+    // Reserve phi IDs for the merge block
+    for (auto* param : swtch->Merge()->Params()) {
+        phi_ids_.Add(param, module_.NextId());
     }
 
     // Emit the OpSelectionMerge and OpSwitch instructions.

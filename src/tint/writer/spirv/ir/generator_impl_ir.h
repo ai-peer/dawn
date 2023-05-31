@@ -31,6 +31,7 @@
 namespace tint::ir {
 class Binary;
 class Block;
+class BlockParam;
 class Branch;
 class Builtin;
 class If;
@@ -196,6 +197,9 @@ class GeneratorImplIr {
 
     /// The map of non-constant values to their result IDs.
     utils::Hashmap<const ir::Value*, uint32_t, 8> values_;
+
+    /// The map of block parameters to their phi IDs.
+    utils::Hashmap<const ir::BlockParam*, uint32_t, 8> phi_ids_;
 
     /// The map of blocks to the IDs of their label instructions.
     utils::Hashmap<const ir::Block*, uint32_t, 8> block_labels_;
