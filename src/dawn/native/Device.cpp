@@ -56,6 +56,8 @@
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
+#include "tint/tint.h"
+
 namespace dawn::native {
 
 // DeviceBase sub-structures
@@ -1254,7 +1256,15 @@ ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescr
         ShaderModuleBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     std::unique_ptr<OwnedCompilationMessages> compilationMessages(
         std::make_unique<OwnedCompilationMessages>());
-    compilationMessages->AddMessage(errorMessage, wgpu::CompilationMessageType::Error);
+
+    // In Chromium APICreateErrorShaderModule() is only called internally, so we can make sure in
+    // most cases errorMessage is a valid ASCII string.
+    if (tint::utils::utf8::IsASCII(errorMessage)) {
+        compilationMessages->AddMessage(errorMessage, wgpu::CompilationMessageType::Error);
+    } else {
+        compilationMessages->AddMessage("Invalid error message with non-ASCII characters",
+                                        wgpu::CompilationMessageType::Error);
+    }
     result->InjectCompilationMessages(std::move(compilationMessages));
 
     std::unique_ptr<ErrorData> errorData =
