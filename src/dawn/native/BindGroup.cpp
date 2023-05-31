@@ -148,8 +148,18 @@ MaybeError ValidateTextureBinding(DeviceBase* device,
                             "Sample count (%u) of %s doesn't match expectation (multisampled: %d).",
                             texture->GetSampleCount(), texture, bindingInfo.texture.multisampled);
 
+            bool validType;
+            if (bindingInfo.texture.sampleType == kInternalResolveAttachmentSampleType) {
+                // If the binding's sample type is kInternalResolveAttachmentSampleType,
+                // then the supported types must contain float.
+                validType = (supportedTypes &
+                             (SampleTypeBit::Float | SampleTypeBit::UnfilterableFloat)) != 0;
+            } else {
+                validType = (supportedTypes & requiredType) != 0;
+            }
+
             DAWN_INVALID_IF(
-                !(supportedTypes & requiredType),
+                !validType,
                 "None of the supported sample types (%s) of %s match the expected sample "
                 "types (%s).",
                 supportedTypes, texture, requiredType);
