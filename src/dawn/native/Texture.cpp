@@ -362,7 +362,8 @@ MaybeError ValidateTextureDescriptor(const DeviceBase* device,
 
     DAWN_INVALID_IF(
         internalUsageDesc != nullptr && !device->HasFeature(Feature::DawnInternalUsages),
-        "The internalUsageDesc is not empty while the dawn-internal-usages feature is not enabled");
+        "The internalUsageDesc is not empty while the dawn-internal-usages feature is not "
+        "enabled");
 
     const Format* format;
     DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->format));
@@ -577,8 +578,9 @@ TextureBase::TextureBase(DeviceBase* device,
     }
     GetObjectTrackingList()->Track(this);
 
-    // dawn:1569: If a texture with multiple array layers or mip levels is specified as a texture
-    // attachment when this toggle is active, it needs to be given CopyDst usage internally.
+    // dawn:1569: If a texture with multiple array layers or mip levels is specified as a
+    // texture attachment when this toggle is active, it needs to be given CopyDst usage
+    // internally.
     bool applyAlwaysResolveIntoZeroLevelAndLayerToggle =
         device->IsToggleEnabled(Toggle::AlwaysResolveIntoZeroLevelAndLayer) &&
         (GetArrayLayers() > 1 || GetNumMipLevels() > 1) &&
@@ -862,6 +864,34 @@ TextureViewBase* TextureBase::APICreateView(const TextureViewDescriptor* descrip
         return TextureViewBase::MakeError(device, descriptor ? descriptor->label : nullptr);
     }
     return result.Detach();
+}
+
+bool TextureBase::IsImplicitMSAARenderTextureViewSupported() const {
+    return (GetUsage() & wgpu::TextureUsage::TextureBinding) != 0;
+}
+
+ResultOrError<Ref<TextureViewBase>> TextureBase::CreateImplicitMSAARenderTextureView(
+    uint32_t sampleCount) {
+    ASSERT(GetDevice()->IsLockedByCurrentThreadIfNeeded());
+
+    TextureDescriptor desc = {};
+    desc.dimension = wgpu::TextureDimension::e2D;
+    desc.format = GetFormat().format;
+    desc.size = {GetWidth(), GetHeight(), 1};
+    desc.sampleCount = sampleCount;
+    desc.usage = wgpu::TextureUsage::RenderAttachment;
+    if (GetDevice()->HasFeature(Feature::TransientAttachments)) {
+        desc.usage = desc.usage | wgpu::TextureUsage::TransientAttachment;
+    }
+
+    Ref<TextureBase> msaaTexture;
+    Ref<TextureViewBase> msaaTextureView;
+
+    DAWN_TRY_ASSIGN(msaaTexture, GetDevice()->CreateTexture(&desc));
+
+    DAWN_TRY_ASSIGN(msaaTextureView, msaaTexture->CreateView());
+
+    return std::move(msaaTextureView);
 }
 
 void TextureBase::APIDestroy() {

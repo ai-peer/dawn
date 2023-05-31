@@ -395,6 +395,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     virtual bool ShouldDuplicateParametersForDrawIndirect(
         const RenderPipelineBase* renderPipelineBase) const;
 
+    // Whether the backend supports blitting the resolve texture with draw calls in the same render
+    // pass that it will be resolved into.
+    virtual bool IsResolveTextureBlitWithDrawSupported() const;
+
     bool HasFeature(Feature feature) const;
 
     const CombinedLimits& GetLimits() const;
