@@ -329,13 +329,13 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
 
     // If there are no instructions in the block, it's a dead end, so we shouldn't be able to get
     // here to begin with.
-    if (block->Instructions().IsEmpty()) {
+    if (block->IsEmpty()) {
         current_function_.push_inst(spv::Op::OpUnreachable, {});
         return;
     }
 
     // Emit the instructions.
-    for (auto* inst : block->Instructions()) {
+    for (auto* inst : *block) {
         auto result = Switch(
             inst,  //
             [&](const ir::Binary* b) { return EmitBinary(b); },
@@ -426,11 +426,11 @@ void GeneratorImplIr::EmitIf(const ir::If* i) {
     uint32_t merge_label = Label(merge_block);
     uint32_t true_label = merge_label;
     uint32_t false_label = merge_label;
-    if (true_block->Instructions().Length() > 1 ||
+    if (true_block->Length() > 1 ||
         (true_block->HasBranchTarget() && !true_block->Branch()->Is<ir::ExitIf>())) {
         true_label = Label(true_block);
     }
-    if (false_block->Instructions().Length() > 1 ||
+    if (false_block->Length() > 1 ||
         (false_block->HasBranchTarget() && !false_block->Branch()->Is<ir::ExitIf>())) {
         false_label = Label(false_block);
     }

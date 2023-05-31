@@ -22,16 +22,165 @@ Block::Block() : Base() {}
 
 Block::~Block() = default;
 
-void Block::AddInstruction(Instruction* inst) {
-    instructions_.Push(inst);
+void Block::Prepend(Instruction* inst) {
+    TINT_ASSERT(IR, inst);
+    TINT_ASSERT(IR, inst->Block() == nullptr);
+
+    if (!inst || inst->Block() != nullptr) {
+        return;
+    }
+
     inst->SetBlock(this);
+    instructions_.count += 1;
+
+    if (instructions_.first == nullptr) {
+        instructions_.first = inst;
+        instructions_.last = inst;
+    } else {
+        inst->next = instructions_.first;
+        instructions_.first->prev = inst;
+        instructions_.first = inst;
+    }
+}
+
+void Block::Append(Instruction* inst) {
+    TINT_ASSERT(IR, inst);
+    TINT_ASSERT(IR, inst->Block() == nullptr);
+
+    if (!inst || inst->Block() != nullptr) {
+        return;
+    }
+
+    inst->SetBlock(this);
+    instructions_.count += 1;
+
+    if (instructions_.first == nullptr) {
+        instructions_.first = inst;
+        instructions_.last = inst;
+    } else {
+        inst->prev = instructions_.last;
+        instructions_.last->next = inst;
+        instructions_.last = inst;
+    }
+}
+
+void Block::InsertBefore(Instruction* before, Instruction* inst) {
+    TINT_ASSERT(IR, before);
+    TINT_ASSERT(IR, inst);
+    TINT_ASSERT(IR, before->Block() == this);
+    TINT_ASSERT(IR, inst->Block() == nullptr);
+
+    if (!before || !inst || before->Block() != this || inst->Block() != nullptr) {
+        return;
+    }
+
+    inst->SetBlock(this);
+    instructions_.count += 1;
+
+    inst->next = before;
+    inst->prev = before->prev;
+    before->prev = inst;
+
+    if (inst->prev) {
+        inst->prev->next = inst;
+    }
+
+    if (before == instructions_.first) {
+        instructions_.first = inst;
+    }
+}
+
+void Block::InsertAfter(Instruction* after, Instruction* inst) {
+    TINT_ASSERT(IR, after);
+    TINT_ASSERT(IR, inst);
+    TINT_ASSERT(IR, after->Block() == this);
+    TINT_ASSERT(IR, inst->Block() == nullptr);
+
+    if (!after || !inst || after->Block() != this || inst->Block() != nullptr) {
+        return;
+    }
+
+    inst->SetBlock(this);
+    instructions_.count += 1;
+
+    inst->prev = after;
+    inst->next = after->next;
+    after->next = inst;
+
+    if (inst->next) {
+        inst->next->prev = inst;
+    }
+    if (after == instructions_.last) {
+        instructions_.last = inst;
+    }
+}
+
+void Block::Replace(Instruction* target, Instruction* inst) {
+    TINT_ASSERT(IR, target);
+    TINT_ASSERT(IR, inst);
+    TINT_ASSERT(IR, target->Block() == this);
+    TINT_ASSERT(IR, inst->Block() == nullptr);
+
+    if (!target || !inst || target->Block() != this || inst->Block() != nullptr) {
+        return;
+    }
+
+    inst->SetBlock(this);
+    target->SetBlock(nullptr);
+
+    inst->next = target->next;
+    inst->prev = target->prev;
+
+    target->next = nullptr;
+    target->prev = nullptr;
+
+    if (inst->next) {
+        inst->next->prev = inst;
+    }
+    if (inst->prev) {
+        inst->prev->next = inst;
+    }
+
+    if (target == instructions_.first) {
+        instructions_.first = inst;
+    }
+    if (target == instructions_.last) {
+        instructions_.last = inst;
+    }
+}
+
+void Block::Remove(Instruction* inst) {
+    TINT_ASSERT(IR, inst);
+    TINT_ASSERT(IR, inst->Block() == this);
+
+    if (!inst || inst->Block() != this) {
+        return;
+    }
+
+    inst->SetBlock(nullptr);
+    instructions_.count -= 1;
+
+    if (inst->prev) {
+        inst->prev->next = inst->next;
+    }
+    if (inst->next) {
+        inst->next->prev = inst->prev;
+    }
+    if (inst == instructions_.first) {
+        instructions_.first = inst->next;
+    }
+    if (inst == instructions_.last) {
+        instructions_.last = inst->prev;
+    }
+
+    inst->prev = nullptr;
+    inst->next = nullptr;
 }
 
 void Block::SetInstructions(utils::VectorRef<Instruction*> instructions) {
     for (auto* i : instructions) {
-        i->SetBlock(this);
+        Append(i);
     }
-    instructions_ = std::move(instructions);
 }
 
 }  // namespace tint::ir
