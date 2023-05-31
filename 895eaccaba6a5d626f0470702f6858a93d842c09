@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82069ace_f3228424",
+        "filename": "src/tint/ir/break_if.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-05-31T13:17:28Z",
+      "side": 1,
+      "message": "This is an interesting one. `BreakIf` has two possible branch targets. It\u0027s either the loop body or the loop merge, depending on the condition. How does the arg passing work here?",
+      "revId": "895eaccaba6a5d626f0470702f6858a93d842c09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
