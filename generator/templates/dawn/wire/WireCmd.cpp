@@ -68,6 +68,10 @@
         //* trusted boundary.
         {%- set Provider = ", provider" if member.type.may_have_dawn_object else "" -%}
         WIRE_TRY({{as_cType(member.type.name)}}Serialize({{in}}, &{{out}}, buffer{{Provider}}));
+    {%- elif member.type.category == "function pointer" -%}
+        //* Function pointers cannot be passed between processes.
+        ASSERT({{in}} == nullptr);
+        {{out}} = nullptr;
     {%- else -%}
         {{out}} = {{in}};
     {%- endif -%}
@@ -89,6 +93,10 @@
                 {%- endif -%}
             ));
         {%- endif -%}
+    {%- elif member.type.category == "function pointer" -%}
+        //* Function pointers cannot be passed between processes.
+        ASSERT({{in}} == nullptr);
+        {{out}} = nullptr;
     {%- else -%}
         static_assert(sizeof({{out}}) >= sizeof({{in}}), "Deserialize assignment may not narrow.");
         {{out}} = {{in}};
