@@ -16,6 +16,46 @@
       "message": "Now ready for review",
       "revId": "96eec1198ff2a2f43629f74ebcabb04728367037",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bf0350b_39a89d39",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-31T13:11:10Z",
+      "side": 1,
+      "message": "```suggestion\n    l-\u003eBody()-\u003eSetInstructions(utils::Vector{inc, b.Continue(l, utils::Vector{inc})});\n```\n\nThe `Block` has a `SetInstructions` which can be given a utils::Vector of instructions",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 65
+      },
+      "revId": "96eec1198ff2a2f43629f74ebcabb04728367037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bc5a6db_eac98c89",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-05-31T13:11:10Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "96eec1198ff2a2f43629f74ebcabb04728367037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
