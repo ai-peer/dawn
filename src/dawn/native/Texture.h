@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_TEXTURE_H_
 #define SRC_DAWN_NATIVE_TEXTURE_H_
 
+#include <map>
 #include <vector>
 
 #include "dawn/common/ityp_array.h"
@@ -28,6 +29,8 @@
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
+
+class CachedMultisampleAttachment;
 
 enum class AllowMultiPlanarTextureFormat {
     No,
@@ -49,6 +52,11 @@ bool IsValidSampleCount(uint32_t sampleCount);
 
 static constexpr wgpu::TextureUsage kReadOnlyTextureUsages =
     wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment;
+
+// Valid texture usages for a resolve texture that are loaded from at the beginning of a render
+// pass.
+static constexpr wgpu::TextureUsage kResolveTextureLoadAndStoreUsages =
+    kResolveAttachmentLoadingUsage | wgpu::TextureUsage::RenderAttachment;
 
 class TextureBase : public ApiObjectBase {
   public:
@@ -104,6 +112,8 @@ class TextureBase : public ApiObjectBase {
     ResultOrError<Ref<TextureViewBase>> CreateView(
         const TextureViewDescriptor* descriptor = nullptr);
     ApiObjectList* GetViewTrackingList();
+
+    bool IsImplicitMSAARenderTextureViewSupported() const;
 
     // Dawn API
     TextureViewBase* APICreateView(const TextureViewDescriptor* descriptor = nullptr);
