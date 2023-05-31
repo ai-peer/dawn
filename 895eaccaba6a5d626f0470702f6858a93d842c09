@@ -34,6 +34,24 @@
       "parentUuid": "82069ace_f3228424",
       "revId": "895eaccaba6a5d626f0470702f6858a93d842c09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3e245c_b8a92212",
+        "filename": "src/tint/ir/break_if.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-31T19:28:11Z",
+      "side": 1,
+      "message": "`BreakIf` - yeah, that\u0027s an interesting one. Not necessarily a problem - you can send more values than you care about, but agree it\u0027s not great.\n\n`If` - I don\u0027t think this is an issue as we don\u0027t need inbound arguments from the `If` to the `true` or `false` blocks, they already have full visibility of the outer scope.",
+      "parentUuid": "39775cda_6ecff9e7",
+      "revId": "895eaccaba6a5d626f0470702f6858a93d842c09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
