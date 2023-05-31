@@ -419,8 +419,21 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
                 layoutInfo.texture.multisampled, shaderInfo.texture.multisampled);
 
             // TODO(dawn:563): Provide info about the sample types.
-            DAWN_INVALID_IF(!(SampleTypeToSampleTypeBit(layoutInfo.texture.sampleType) &
-                              shaderInfo.texture.compatibleSampleTypes),
+            bool validSampleTypeConversion;
+
+            if (layoutInfo.texture.sampleType == kInternalResolveAttachmentSampleType) {
+                // If the layout's texture's sample type is kInternalResolveAttachmentSampleType,
+                // then the shader's compatible sample types must contain float.
+                validSampleTypeConversion =
+                    (shaderInfo.texture.compatibleSampleTypes &
+                     (SampleTypeBit::Float | SampleTypeBit::UnfilterableFloat)) != 0;
+            } else {
+                validSampleTypeConversion =
+                    (SampleTypeToSampleTypeBit(layoutInfo.texture.sampleType) &
+                     shaderInfo.texture.compatibleSampleTypes) != 0;
+            }
+
+            DAWN_INVALID_IF(!validSampleTypeConversion,
                             "The sample type in the shader is not compatible with the "
                             "sample type of the layout.");
 
