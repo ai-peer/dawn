@@ -16,6 +16,40 @@
       "message": "LGTM",
       "revId": "e1bca71687e6256c203b01e40933b747bde66913",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aea7753_00d685ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-31T18:01:04Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "e1bca71687e6256c203b01e40933b747bde66913",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98dc3ce4_553a5a19",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-05-31T18:01:04Z",
+      "side": 1,
+      "message": "Nit: Don\u0027t these always match? Assert if so?",
+      "revId": "e1bca71687e6256c203b01e40933b747bde66913",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
