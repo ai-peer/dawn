@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138fb92e_4c29095a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-05-31T03:07:17Z",
+      "side": 1,
+      "message": "Hi Loko,\n\nWith this patch I get below errors when building Dawn with \"ninja -C out/Debug\":\n\nlld-link: error: undefined symbol: enum WGPUBufferUsage __cdecl dawn::native::NativeBufferGetUsage(struct WGPUBufferImpl *)\n\u003e\u003e\u003e referenced by .\\gen\\src\\dawn\\native\\webgpu_dawn_native_proc.cpp:324\n\u003e\u003e\u003e               obj/src/dawn/native/webgpu_dawn_shared/webgpu_dawn_native_proc.obj:(wgpuBufferGetUsage)\n\nlld-link: error: undefined symbol: enum WGPUTextureUsage __cdecl dawn::native::NativeDeviceGetSupportedSurfaceUsage(struct WGPUDeviceImpl *, struct WGPUSurfaceImpl *)\n\u003e\u003e\u003e referenced by .\\gen\\src\\dawn\\native\\webgpu_dawn_native_proc.cpp:604\n\u003e\u003e\u003e               obj/src/dawn/native/webgpu_dawn_shared/webgpu_dawn_native_proc.obj:(wgpuDeviceGetSupportedSurfaceUsage)\n\nlld-link: error: undefined symbol: enum WGPUTextureUsage __cdecl dawn::native::NativeTextureGetUsage(struct WGPUTextureImpl *)\n\u003e\u003e\u003e referenced by .\\gen\\src\\dawn\\native\\webgpu_dawn_native_proc.cpp:1040\n\u003e\u003e\u003e               obj/src/dawn/native/webgpu_dawn_shared/webgpu_dawn_native_proc.obj:(wgpuTextureGetUsage)\nninja: build stopped: subcommand failed.\n\nCould you take a look?",
+      "revId": "195cb637732ebe84ba08d09ba8834fa532912dc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
