@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce992ec9_9d95e7bd",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-05-31T11:58:16Z",
+      "side": 1,
+      "message": "Got it, but looking at https://dawn-review.googlesource.com/c/dawn/+/115640 I don\u0027t understand why we had to add that ASSERT.",
+      "parentUuid": "99329422_89345757",
+      "revId": "720fd9ae8c470d9d755ab77486d0498211cfbcfd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3128e66a_7e73707a",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 2
