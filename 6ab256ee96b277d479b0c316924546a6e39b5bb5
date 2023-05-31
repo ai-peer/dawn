@@ -34,6 +34,24 @@
       "parentUuid": "d53eefbb_04656e2e",
       "revId": "6ab256ee96b277d479b0c316924546a6e39b5bb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04362960_81feca74",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-31T22:30:12Z",
+      "side": 0,
+      "message": "I\u0027ll land this and you can rename however you like.",
+      "parentUuid": "1f813627_e3eea837",
+      "revId": "6ab256ee96b277d479b0c316924546a6e39b5bb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
