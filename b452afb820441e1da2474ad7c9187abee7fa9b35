@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84a935c0_1de77e24",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-31T10:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a5486b0_655358c4",
+      "range": {
+        "startLine": 777,
+        "startChar": 43,
+        "endLine": 777,
+        "endChar": 55
+      },
+      "revId": "b452afb820441e1da2474ad7c9187abee7fa9b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a48a9337_5b89620a",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11855f69_0efd2ce8",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-31T10:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a48a9337_5b89620a",
+      "range": {
+        "startLine": 47,
+        "startChar": 28,
+        "endLine": 47,
+        "endChar": 34
+      },
+      "revId": "b452afb820441e1da2474ad7c9187abee7fa9b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a0d1e58_10717868",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-05-31T00:26:13Z",
       "side": 1,
       "message": "nit: prefer to name it Flush over Sync. Sync sounds like it\u0027s a two way operation or a wait",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "b452afb820441e1da2474ad7c9187abee7fa9b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f849ab5d_873f2032",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-05-31T10:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a0d1e58_10717868",
       "range": {
         "startLine": 48,
         "startChar": 15,
