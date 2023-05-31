@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29cdce6b_aaabf780",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-31T13:13:23Z",
+      "side": 1,
+      "message": "I know, but I find this is more readable. It also allows new values to be created and interleaved between the `AddInstruction` calls.",
+      "parentUuid": "6bf0350b_39a89d39",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 65
+      },
+      "revId": "96eec1198ff2a2f43629f74ebcabb04728367037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bc5a6db_eac98c89",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-05-31T13:11:10Z",
       "side": 1,
       "message": "ditto",
+      "revId": "96eec1198ff2a2f43629f74ebcabb04728367037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba4de1a_bddbf4b6",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-05-31T13:13:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7bc5a6db_eac98c89",
       "revId": "96eec1198ff2a2f43629f74ebcabb04728367037",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
