@@ -57,6 +57,10 @@ static constexpr wgpu::TextureUsage kReadOnlyRenderAttachment =
 static constexpr wgpu::TextureUsage kAgainAsRenderAttachment =
     static_cast<wgpu::TextureUsage>(0x80000001);
 
+// Add an extra texture usage (load resolve texture to MSAA) for render pass resource tracking
+static constexpr wgpu::TextureUsage kResolveAttachmentLoading =
+    static_cast<wgpu::TextureUsage>(0x70000000);
+
 static constexpr wgpu::BufferBindingType kInternalStorageBufferBinding =
     static_cast<wgpu::BufferBindingType>(0xFFFFFFFF);
 }  // namespace dawn::native

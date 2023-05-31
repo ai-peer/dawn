@@ -17,6 +17,7 @@
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
 #include "dawn/common/Platform.h"
+#include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/metal/BufferMTL.h"
@@ -841,7 +842,13 @@ void Texture::IOSurfaceEndAccess(ExternalImageIOSurfaceEndAccessDescriptor* desc
 }
 
 Texture::Texture(DeviceBase* dev, const TextureDescriptor* desc, TextureState st)
-    : TextureBase(dev, desc, st) {}
+    : TextureBase(dev, desc, st) {
+    if ((desc->usage & wgpu::TextureUsage::MSAARenderToSingleSampledAttachment) != 0) {
+        // For MSAA render to single sampled feature, we need the texture to be able to be bound as
+        // input as well.
+        AddInternalUsage(wgpu::TextureUsage::TextureBinding);
+    }
+}
 
 Texture::~Texture() {}
 
