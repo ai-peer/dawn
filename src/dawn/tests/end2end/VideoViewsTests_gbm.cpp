@@ -184,7 +184,7 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
         native::vulkan::ExternalImageDescriptorDmaBuf descriptor = {};
         descriptor.cTextureDescriptor =
             reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
-        descriptor.isInitialized = true;
+        descriptor.isInitialized = initialized;
 
         descriptor.memoryFD = gbm_bo_get_fd(gbmBo);
         for (int plane = 0; plane < gbm_bo_get_plane_count(gbmBo); ++plane) {
@@ -204,6 +204,9 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
 
     void DestroyVideoTextureForTest(
         std::unique_ptr<VideoViewsTestBackend::PlatformTexture>&& platformTexture) override {
+        if (!platformTexture) {
+            return;
+        }
         // Exports the signal and ignores it.
         native::vulkan::ExternalImageExportInfoDmaBuf exportInfo;
         native::vulkan::ExportVulkanImage(platformTexture->wgpuTexture.Get(),
