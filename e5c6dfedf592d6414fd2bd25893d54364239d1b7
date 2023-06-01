@@ -16,6 +16,23 @@
       "message": "LGTM. Leaving +2 for Ben because I wasn\u0027t sure if we\u0027d all agreed that this is what we wanted.",
       "revId": "e5c6dfedf592d6414fd2bd25893d54364239d1b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fceb9f49_8a08cce0",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-01T15:47:14Z",
+      "side": 1,
+      "message": "This one is the potentially confusing one.\n\nMaybe flip the order and rename to `ReplaceWith()`?\n\n`old_inst-\u003eReplaceWith(new_inst);`",
+      "revId": "e5c6dfedf592d6414fd2bd25893d54364239d1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
