@@ -69,6 +69,24 @@
       "parentUuid": "7c473d68_582ae831",
       "revId": "fc9fbd39aa3e0a28690c75537e84f75127860380",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9042ef4_259af25e",
+        "filename": "src/tint/writer/spirv/builder_ident_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-01T12:56:53Z",
+      "side": 1,
+      "message": "Yeah you\u0027re right, in the real flow we\u0027d never call `GenerateIdentifierExpression()` on the identifier of a constant, we\u0027d just emit the constant. I think this test just could probably just be removed.",
+      "parentUuid": "cc2aeec2_c2de9cf5",
+      "revId": "fc9fbd39aa3e0a28690c75537e84f75127860380",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
