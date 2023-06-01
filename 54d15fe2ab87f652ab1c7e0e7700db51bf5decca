@@ -16,6 +16,24 @@
       "message": "Can you add a test in here from the fuzz issue? I\u0027m not sure I understand why this makes parsing faster, is it the cost of the string comparisons on `try_punctuation` that\u0027s the issue?\n\nThe keyword list is currently taken directly from the list in the WGSL spec, this seems to change the meaning from keywords to keywords and tokens?",
       "revId": "54d15fe2ab87f652ab1c7e0e7700db51bf5decca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87b16ec_f000cad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-01T12:44:01Z",
+      "side": 1,
+      "message": "A test would be meaningless. It parses, it\u0027s just slow to do so.\n\n\u003e I\u0027m not sure I understand why this makes parsing faster\n\nPreviously it would scan all the way to the end of the identifier to reject it. The character would then be rejected, and the whole parsing loop is retried. Hence the O(N²) complexity.\n\n\u003e The keyword list is currently taken directly from the list in the WGSL spec, this seems to change the meaning from keywords to keywords and tokens?\n\nI\u0027m not too concerned trying to perfectly match the WGSL spec here. `try_ident()` has already processed a `_`, and is already scanning a list of strings to match a token. It\u0027s a waste of performance to reject it and force another `try_` stage to parse the single underscore.",
+      "parentUuid": "06dac5ed_39c39d13",
+      "revId": "54d15fe2ab87f652ab1c7e0e7700db51bf5decca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
