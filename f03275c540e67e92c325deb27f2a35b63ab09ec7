@@ -63,6 +63,30 @@
       },
       "revId": "f03275c540e67e92c325deb27f2a35b63ab09ec7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "914925c2_55ff74ee",
+        "filename": "src/tint/constant/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-01T13:49:53Z",
+      "side": 1,
+      "message": "Right, can it be used by Structs? In any case, it\u0027s fine.",
+      "parentUuid": "6d6b6d6c_1c8146eb",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "f03275c540e67e92c325deb27f2a35b63ab09ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
