@@ -37,6 +37,9 @@ class If : public utils::Castable<If, Branch> {
     explicit If(Value* cond, ir::Block* t, ir::Block* f, ir::Block* m);
     ~If() override;
 
+    /// @returns the branch arguments
+    utils::Slice<Value*> Args() const override { return utils::Slice<Value*>{}; }
+
     /// @returns the if condition
     const Value* Condition() const { return condition_; }
     /// @returns the if condition

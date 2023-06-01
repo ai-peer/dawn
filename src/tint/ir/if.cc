@@ -19,11 +19,12 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::If);
 namespace tint::ir {
 
 If::If(Value* cond, ir::Block* t, ir::Block* f, ir::Block* m)
-    : Base(utils::Empty), condition_(cond), true_(t), false_(f), merge_(m) {
+    : condition_(cond), true_(t), false_(f), merge_(m) {
     TINT_ASSERT(IR, true_);
     TINT_ASSERT(IR, false_);
     TINT_ASSERT(IR, merge_);
 
+    operands_.Push(condition_);
     condition_->AddUsage(this);
     true_->AddInboundBranch(this);
     false_->AddInboundBranch(this);

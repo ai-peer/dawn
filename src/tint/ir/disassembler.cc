@@ -123,7 +123,7 @@ void Disassembler::WalkInternal(const Block* blk) {
     Indent() << "%b" << IdOf(blk) << " = block";
     if (!blk->Params().IsEmpty()) {
         out_ << " (";
-        EmitValueList(blk->Params());
+        EmitValueList(blk->Params().Slice().Reinterpret<const Value*>());
         out_ << ")";
     }
 
@@ -458,7 +458,7 @@ void Disassembler::EmitLoop(const Loop* l) {
 
     if (!l->Args().IsEmpty()) {
         out_ << " ";
-        EmitValueList(l->Args());
+        EmitValueList(l->Args().Reinterpret<const Value*>());
     }
 
     out_ << std::endl;
@@ -544,12 +544,12 @@ void Disassembler::EmitBranch(const Branch* b) {
 
     if (!b->Args().IsEmpty()) {
         out_ << " ";
-        EmitValueList(b->Args());
+        EmitValueList(b->Args().Reinterpret<const Value*>());
     }
     out_ << std::endl;
 }
 
-void Disassembler::EmitValueList(tint::utils::VectorRef<const tint::ir::Value*> values) {
+void Disassembler::EmitValueList(tint::utils::Slice<const tint::ir::Value*> values) {
     for (auto* v : values) {
         if (v != values.Front()) {
             out_ << ", ";
@@ -559,7 +559,7 @@ void Disassembler::EmitValueList(tint::utils::VectorRef<const tint::ir::Value*> 
 }
 
 void Disassembler::EmitArgs(const Call* call) {
-    EmitValueList(call->Args());
+    EmitValueList(call->Args().Reinterpret<const Value*>());
 }
 
 void Disassembler::EmitBinary(const Binary* b) {
