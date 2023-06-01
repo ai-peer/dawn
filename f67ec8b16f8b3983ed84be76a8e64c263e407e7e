@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "f67ec8b16f8b3983ed84be76a8e64c263e407e7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf25286_f419c5a4",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-01T14:36:29Z",
+      "side": 1,
+      "message": "Instead making usage of VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT conditional on the workgroup size being small enough, WDYT of lowering the maxWorkGroupInvocations when computing the limits in AdapterVk? This would make the behavior consistent between all the pipelines created on the same device.",
+      "revId": "f67ec8b16f8b3983ed84be76a8e64c263e407e7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
