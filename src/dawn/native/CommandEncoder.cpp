@@ -84,6 +84,16 @@ MaybeError ValidateLinearTextureCopyOffset(const TextureDataLayout& layout,
     return {};
 }
 
+MaybeError ValidateTextureFormatForTextureToBufferCopyInCompatibilityMode(
+    const TextureBase* texture,
+    const BufferBase* buffer) {
+    DAWN_INVALID_IF(
+        texture->GetFormat().isCompressed,
+        "Can not copy from compressed texture (%s) to buffer (%s) in compatibility mode.", texture,
+        buffer);
+    return {};
+}
+
 MaybeError ValidateTextureDepthStencilToBufferCopyRestrictions(const ImageCopyTexture& src) {
     Aspect aspectUsed;
     DAWN_TRY_ASSIGN(aspectUsed, SingleAspectUsedByImageCopyTexture(src));
@@ -1319,6 +1329,11 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
                 // copyExtent.height by blockHeight while the divisibility conditions are
                 // checked in validating texture copy range.
                 DAWN_TRY(ValidateTextureCopyRange(GetDevice(), *source, *copySize));
+
+                if (GetDevice()->IsCompatibilityMode()) {
+                    DAWN_TRY(ValidateTextureFormatForTextureToBufferCopyInCompatibilityMode(
+                        source->texture, destination->buffer));
+                }
             }
             const TexelBlockInfo& blockInfo =
                 source->texture->GetFormat().GetAspectInfo(source->aspect).block;
