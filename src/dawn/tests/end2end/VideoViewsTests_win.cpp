@@ -180,7 +180,7 @@ class VideoViewsTestBackendWin : public VideoViewsTestBackend {
         fenceDesc.fenceValue = 1;
 
         native::d3d::ExternalImageDXGIBeginAccessDescriptor externalAccessDesc;
-        externalAccessDesc.isInitialized = true;
+        externalAccessDesc.isInitialized = initialized;
         externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(textureDesc.usage);
         externalAccessDesc.waitFences = {};
 
