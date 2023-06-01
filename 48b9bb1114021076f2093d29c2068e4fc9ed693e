@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26848ef7_72c4d2b9",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-01T22:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c5f1142_315bddd9",
+      "range": {
+        "startLine": 1335,
+        "startChar": 41,
+        "endLine": 1335,
+        "endChar": 60
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e5202c6_58e8078e",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28a64b9_7aae7533",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1415,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-01T22:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e5202c6_58e8078e",
+      "range": {
+        "startLine": 1415,
+        "startChar": 9,
+        "endLine": 1415,
+        "endChar": 54
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c984ef16_36214936",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-01T22:24:15Z",
       "side": 1,
       "message": "nit: this could be a static member of the class so it\u0027s not exposed more widely",
+      "range": {
+        "startLine": 885,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 5
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "344f9fc3_eb6f36ca",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-01T22:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c984ef16_36214936",
       "range": {
         "startLine": 885,
         "startChar": 0,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35624e7c_059b0081",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-01T22:36:30Z",
+      "side": 1,
+      "message": "This is just skipping one format, not the entire test. So okay as is?",
+      "parentUuid": "255647d0_59eb6f0e",
+      "range": {
+        "startLine": 923,
+        "startChar": 8,
+        "endLine": 925,
+        "endChar": 9
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fe7252d_1d8c298e",
         "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
         "patchSetId": 1
@@ -106,6 +202,30 @@
       "writtenOn": "2023-06-01T22:24:15Z",
       "side": 1,
       "message": "nit: explicit destroys generally not needed in native because refcounting takes care of it",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 947,
+        "endChar": 25
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0838e0_198a9a30",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-01T22:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe7252d_1d8c298e",
       "range": {
         "startLine": 945,
         "startChar": 0,
