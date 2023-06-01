@@ -16,6 +16,24 @@
       "message": "I tried to use OBJC_DEBUG_MISSING_POOLS, but couldn\u0027t find a way for it to actually be helpful. Any ideas are welcome.\nSee https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1175#c14",
       "revId": "9639926ea4bf86501da4e0cc88f63982d5b3c52f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6abffd9a_2c0bee76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T21:16:37Z",
+      "side": 1,
+      "message": "I wish it would work though because otherwise it\u0027s hard to avoid leaks.\n\nFor context, I did this by searching for things that looked like [someObj someMethod with `\\[\\S+\\s+\\S+` and went around checking everything was in an autorelease pool.\n\nAn alternative would be to wrap every API method in @autoreleasepool but that felt unnecessarily heavy - and it would need to be done in the frontend making it useless no-op code for other backends.\n\nhttps://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmRules.html tells you when things get autoreleased and thus need a pool and for us, to be explicitly retained.\n\n\u003e You own any object you create\nYou create an object using a method whose name begins with “alloc”, “new”, “copy”, or “mutableCopy” (for example, alloc, newObject, or mutableCopy).\n\nall other objects you get are autoreleased",
+      "parentUuid": "426df7bb_f5782932",
+      "revId": "9639926ea4bf86501da4e0cc88f63982d5b3c52f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
