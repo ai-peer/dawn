@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab55853_5df566cc",
+        "filename": "src/tint/ir/block.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T01:24:49Z",
+      "side": 1,
+      "message": "Done, never seen `EXPECT_FATAL_FAILURE` before, it\u0027s a little weird in that I had to make the locals `static` but seems to be working.",
+      "parentUuid": "6a723778_36716794",
+      "revId": "55623cff0015e40ceb0606e55da4d3f0df7c1747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01d95016_5c944d4b",
