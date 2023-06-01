@@ -336,6 +336,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "30231011_2f2455f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-01T01:33:36Z",
+      "side": 1,
+      "message": "According to this patch,\n\n- The buffers with dynamic buffer offset will be bound as root descriptor (bound with Set(Graphics|Compute)RootShaderResourceView)\n- The buffers without dynamic buffer offset will be bound to root descriptor table (with CreateShaderResourceView).\n\nSo I think we can disable index clamping for all the buffers without dynamic buffer offset in Tint. What do you think?",
+      "parentUuid": "16781884_61480d0f",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
