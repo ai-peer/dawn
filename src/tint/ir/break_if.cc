@@ -25,13 +25,18 @@ namespace tint::ir {
 BreakIf::BreakIf(Value* condition,
                  ir::Loop* loop,
                  utils::VectorRef<Value*> args /* = utils::Empty */)
-    : Base(std::move(args)), condition_(condition), loop_(loop) {
+    : condition_(condition), loop_(loop) {
     TINT_ASSERT(IR, condition_);
     TINT_ASSERT(IR, loop_);
-    condition_->AddUsage(this);
-    loop_->AddUsage(this);
     loop_->Body()->AddInboundBranch(this);
     loop_->Merge()->AddInboundBranch(this);
+
+    operands_.Push(condition);
+    condition_->AddUsage(this);
+    for (auto* arg : args) {
+        operands_.Push(arg);
+        arg->AddUsage(this);
+    }
 }
 
 BreakIf::~BreakIf() = default;

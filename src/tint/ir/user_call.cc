@@ -23,8 +23,13 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::UserCall);
 namespace tint::ir {
 
 UserCall::UserCall(const type::Type* ty, Function* func, utils::VectorRef<Value*> arguments)
-    : Base(ty, std::move(arguments)), func_(func) {
+    : Base(ty) {
+    operands_.Push(func);
     func->AddUsage(this);
+    for (auto* arg : arguments) {
+        operands_.Push(arg);
+        arg->AddUsage(this);
+    }
 }
 
 UserCall::~UserCall() = default;

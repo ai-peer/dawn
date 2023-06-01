@@ -24,8 +24,8 @@ Var::Var(const type::Type* ty) : type_(ty) {}
 Var::~Var() = default;
 
 void Var::SetInitializer(Value* initializer) {
-    initializer_ = initializer;
-    initializer_->AddUsage(this);
+    operands_.Push(initializer);
+    initializer->AddUsage(this);
     // TODO(dsinclair): Probably should do a RemoveUsage on an existing initializer if set
 }
 

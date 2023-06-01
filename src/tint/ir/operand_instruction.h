@@ -12,23 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/convert.h"
-#include "src/tint/debug.h"
+#ifndef SRC_TINT_IR_OPERAND_INSTRUCTION_H_
+#define SRC_TINT_IR_OPERAND_INSTRUCTION_H_
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Convert);
+#include "src/tint/ir/instruction.h"
 
 namespace tint::ir {
 
-Convert::Convert(const type::Type* to_type,
-                 const type::Type* from_type,
-                 utils::VectorRef<Value*> arguments)
-    : Base(to_type), from_type_(from_type) {
-    for (auto* arg : arguments) {
-        operands_.Push(arg);
-        arg->AddUsage(this);
-    }
-}
+/// An instruction in the IR that expects one or more operands.
+template <unsigned N>
+class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruction> {
+  public:
+    /// Destructor
+    ~OperandInstruction() override = default;
 
-Convert::~Convert() = default;
+  protected:
+    /// The operands to this instruction.
+    utils::Vector<ir::Value*, N> operands_;
+};
 
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_OPERAND_INSTRUCTION_H_
