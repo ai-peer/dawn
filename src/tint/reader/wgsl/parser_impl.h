@@ -827,6 +827,12 @@ class ParserImpl {
     /// Used to ensure that all attributes are consumed.
     bool expect_attributes_consumed(utils::VectorRef<const ast::Attribute*> list);
 
+    /// Raises an error if the next token is a template start.
+    bool expect_not_template_start(const Source& lhs_source);
+
+    /// Raises an error if the parsed expression is a template
+    bool expect_not_template(const ast::Expression* expr);
+
     /// Parses the given enum, providing sensible error messages if the next token does not match
     /// any of the enum values.
     /// @param name the name of the enumerator

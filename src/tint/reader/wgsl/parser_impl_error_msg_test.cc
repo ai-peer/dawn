@@ -164,6 +164,30 @@ fn f() { x = f(1.; }
 )");
 }
 
+TEST_F(ParserImplErrorTest, CallStmtArgsTreatedAsTemplateLHS) {
+    EXPECT("fn f() { f( a, b.x < c, d > e ); }",
+           R"(test.wgsl:1:16 error: parsed as template list
+fn f() { f( a, b.x < c, d > e ); }
+               ^^^^^^^^^^^^
+
+test.wgsl:1:16 note: wrap in parentheses to treat as less-than expression
+fn f() { f( a, b.x < c, d > e ); }
+               ^^^^^^^
+)");
+}
+
+TEST_F(ParserImplErrorTest, CallStmtArgsTreatedAsTemplateRHS) {
+    EXPECT("fn f() { f( a, b < c, d > e ); }",
+           R"(test.wgsl:1:16 error: parsed as template list
+fn f() { f( a, b < c, d > e ); }
+               ^^^^^^^^^^
+
+test.wgsl:1:23 note: wrap in parentheses to treat as greater-than expression
+fn f() { f( a, b < c, d > e ); }
+                      ^^^^^
+)");
+}
+
 TEST_F(ParserImplErrorTest, CallStmtMissingRParen) {
     EXPECT("fn f() { f(1.; }",
            R"(test.wgsl:1:14 error: expected ',' for function call
