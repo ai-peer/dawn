@@ -19,10 +19,10 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Unary);
 
 namespace tint::ir {
 
-Unary::Unary(enum Kind k, const type::Type* res_ty, Value* val)
-    : kind_(k), result_type_(res_ty), val_(val) {
-    TINT_ASSERT(IR, val_);
-    val_->AddUsage(this);
+Unary::Unary(enum Kind k, const type::Type* res_ty, Value* val) : kind_(k), result_type_(res_ty) {
+    TINT_ASSERT(IR, val);
+    val->AddUsage(this);
+    operands_.Push(val);
 }
 
 Unary::~Unary() = default;

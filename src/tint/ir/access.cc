@@ -24,8 +24,13 @@ namespace tint::ir {
 
 //! @cond Doxygen_Suppress
 Access::Access(const type::Type* ty, Value* object, utils::VectorRef<Value*> indices)
-    : result_type_(ty), object_(object), indices_(std::move(indices)) {
-    object_->AddUsage(this);
+    : result_type_(ty) {
+    operands_.Push(object);
+    object->AddUsage(this);
+    for (auto* idx : indices) {
+        operands_.Push(idx);
+        idx->AddUsage(this);
+    }
 }
 
 Access::~Access() = default;

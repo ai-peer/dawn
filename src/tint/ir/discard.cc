@@ -19,7 +19,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Discard);
 
 namespace tint::ir {
 
-Discard::Discard() : Base(nullptr, utils::Empty) {}
+Discard::Discard() : Base(nullptr) {}
 
 Discard::~Discard() = default;
 

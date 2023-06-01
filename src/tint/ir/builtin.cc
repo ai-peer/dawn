@@ -24,7 +24,12 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Builtin);
 namespace tint::ir {
 
 Builtin::Builtin(const type::Type* ty, builtin::Function func, utils::VectorRef<Value*> arguments)
-    : Base(ty, std::move(arguments)), func_(func) {}
+    : Base(ty), func_(func) {
+    for (auto* arg : arguments) {
+        operands_.Push(arg);
+        arg->AddUsage(this);
+    }
+}
 
 Builtin::~Builtin() = default;
 
