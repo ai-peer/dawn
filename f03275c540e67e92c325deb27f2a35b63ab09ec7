@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ebe2076_931a5c5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-01T13:40:44Z",
+      "side": 1,
+      "message": "Looks good, one minor comment.",
+      "revId": "f03275c540e67e92c325deb27f2a35b63ab09ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3fe83bb_01d0d6a5",
+        "filename": "src/tint/constant/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-01T13:40:44Z",
+      "side": 1,
+      "message": "We already know whether \u0027this\u0027 is a Vector or not when calling into this lambda. Maybe pass in `a_is_splat` as argument, and only call with `vec-\u003eIs\u003cSplat\u003e` for the vector case?",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "f03275c540e67e92c325deb27f2a35b63ab09ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
