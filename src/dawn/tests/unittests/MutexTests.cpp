@@ -69,6 +69,7 @@ TEST_F(MutexTest, AutoLockAndHoldRef) {
 
 using MutexDeathTest = MutexTest;
 
+#if defined(DAWN_ENABLE_ASSERTS)
 // Test that Unlock() call on unlocked mutex will cause assertion failure.
 TEST_F(MutexDeathTest, UnlockWhenNotLocked) {
     ASSERT_DEATH({ mMutex.Unlock(); }, "");
@@ -96,6 +97,7 @@ TEST_F(MutexDeathTest, AutoLockThenLock) {
     EXPECT_TRUE(mMutex.IsLockedByCurrentThread());
     ASSERT_DEATH({ mMutex.Lock(); }, "");
 }
+#endif  // defined(DAWN_ENABLE_ASSERTS)
 
 }  // anonymous namespace
 }  // namespace dawn
