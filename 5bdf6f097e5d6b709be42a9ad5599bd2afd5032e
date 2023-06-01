@@ -16,6 +16,24 @@
       "message": "I\u0027m wondering if this could be something we do in the frontend. But at the same time doing the optimization in the frontend wouldn\u0027t help the render bundle case.",
       "revId": "5bdf6f097e5d6b709be42a9ad5599bd2afd5032e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024d25ad_d5251b2d",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-01T15:58:31Z",
+      "side": 1,
+      "message": "Meaning you want to filter out commands right? The user does \n\n```\npass.setBindGroup(0, bg0);\npass.setBindGroup(0, bg0);\n```\n\nAnd the commend encoder doesn\u0027t encode the 2nd command.\n\nYes, that would also be a good thing I think\n\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d1861",
+      "parentUuid": "e65f5c1d_15a54a43",
+      "revId": "5bdf6f097e5d6b709be42a9ad5599bd2afd5032e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
