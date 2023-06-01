@@ -13,19 +13,47 @@
 // limitations under the License.
 
 #include "gtest/gtest-spi.h"
-#include "gtest/gtest.h"
 #include "src/tint/ir/block.h"
 #include "src/tint/ir/builder.h"
 #include "src/tint/ir/module.h"
 
 namespace tint::ir {
+
+// CRASHES as b is not initialized
+//
+// template <typename BASE>
+// class TestHelperBase : public BASE {
+//  public:
+//    TestHelperBase() = default;
+//    ~TestHelperBase() override = default;
+//
+//    Module mod;
+//    Builder b{mod};
+//};
+//
+// using TestHelper = TestHelperBase<testing::Test>;
+//
+// END CRASH CHUNK
+
 namespace {
 
-class IR_InstructionTest : public ::testing::Test {
+// WORKS
+//
+template <typename BASE>
+class TestHelperBase : public BASE {
   public:
+    TestHelperBase() = default;
+    ~TestHelperBase() override = default;
+
     Module mod;
     Builder b{mod};
 };
+
+using TestHelper = TestHelperBase<testing::Test>;
+//
+// END WORKS CHUNK
+
+using IR_InstructionTest = TestHelper;
 
 TEST_F(IR_InstructionTest, InsertBefore) {
     auto* inst1 = b.CreateLoop();

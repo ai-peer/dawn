@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/ir/module.h"
-#include "src/tint/ir/test_helper.h"
+#include "src/tint/ir/program_test_helper.h"
 #include "src/tint/ir/var.h"
 
 namespace tint::ir {

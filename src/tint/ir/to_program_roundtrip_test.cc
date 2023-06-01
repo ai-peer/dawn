@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/ir/from_program.h"
-#include "src/tint/ir/test_helper.h"
+#include "src/tint/ir/program_test_helper.h"
 #include "src/tint/ir/to_program.h"
 #include "src/tint/reader/wgsl/parser.h"
 #include "src/tint/utils/string.h"
