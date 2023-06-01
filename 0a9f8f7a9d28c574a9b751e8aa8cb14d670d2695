@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5086ac0_6e53dec6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-01T09:59:20Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c17adf12_bb5be864",
@@ -54,6 +71,23 @@
         "endLine": 72,
         "endChar": 65
       },
+      "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bdf4873_38289ce4",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-01T09:59:20Z",
+      "side": 1,
+      "message": "Could we instead validate that these pointers are nullptr (and the same for void*)? It would avoid silently forgetting to zero-out these pointers in the client, while keeping the server robust to these kinds of pointers.",
       "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
