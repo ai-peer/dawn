@@ -75,10 +75,18 @@ MaybeError ComputePipeline::Initialize() {
     uint32_t computeSubgroupSize = device->GetComputeSubgroupSize();
     if (computeSubgroupSize != 0u) {
         ASSERT(device->GetDeviceInfo().HasExt(DeviceExt::SubgroupSizeControl));
-        subgroupSizeInfo.requiredSubgroupSize = computeSubgroupSize;
-        stageExtChain.Add(
-            &subgroupSizeInfo,
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT);
+
+        uint64_t numInvocations = module->GetEntryPoint(computeStage.entryPoint).numInvocations;
+        uint64_t maxComputeWorkgroupSubgroups =
+            device->GetDeviceInfo().subgroupSizeControlProperties.maxComputeWorkgroupSubgroups;
+        // According to VK_EXT_subgroup_size_control, for compute shaders we must ensure:
+        // numInvocations <= SubgroupSize x maxComputeWorkgroupSubgroups
+        if (numInvocations <= computeSubgroupSize * maxComputeWorkgroupSubgroups) {
+            subgroupSizeInfo.requiredSubgroupSize = computeSubgroupSize;
+            stageExtChain.Add(
+                &subgroupSizeInfo,
+                VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT);
+        }
     }
 
     // Record cache key information now since the createInfo is not stored.

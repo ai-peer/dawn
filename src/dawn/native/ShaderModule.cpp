@@ -558,6 +558,10 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
 
     if (metadata->stage == SingleShaderStage::Compute) {
         metadata->usesNumWorkgroups = entryPoint.num_workgroups_used;
+        DAWN_ASSERT(entryPoint.workgroup_size.has_value());
+        metadata->numInvocations = static_cast<uint64_t>(entryPoint.workgroup_size.value().x) *
+                                   entryPoint.workgroup_size.value().y *
+                                   entryPoint.workgroup_size.value().z;
     }
 
     const CombinedLimits& limits = device->GetLimits();

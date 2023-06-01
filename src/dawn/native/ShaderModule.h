@@ -251,6 +251,8 @@ struct EntryPointMetadata {
     bool usesFragDepth = false;
     // Used at render pipeline validation.
     bool usesSampleMaskOutput = false;
+
+    uint64_t numInvocations = 0;
 };
 
 class ShaderModuleBase : public ApiObjectBase, public CachedObject {
