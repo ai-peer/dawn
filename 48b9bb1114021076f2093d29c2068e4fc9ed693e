@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5f1142_315bddd9",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T22:24:15Z",
+      "side": 1,
+      "message": "we have the source and dst printed at [1], so I don\u0027t think we need the buffer passed in here for the purpose of having it in the message. Probably sufficient to say\n\n`DAWN_INVALID_IF(source-\u003etexture-\u003eGetFormat().isCompressed, \"%s with format %s cannot be used as the source in a texture to buffer copy in compatibility mode.\")`",
+      "range": {
+        "startLine": 1335,
+        "startChar": 41,
+        "endLine": 1335,
+        "endChar": 60
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e5202c6_58e8078e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1415,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T22:24:15Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1415,
+        "startChar": 9,
+        "endLine": 1415,
+        "endChar": 54
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c984ef16_36214936",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T22:24:15Z",
+      "side": 1,
+      "message": "nit: this could be a static member of the class so it\u0027s not exposed more widely",
+      "range": {
+        "startLine": 885,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 5
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "255647d0_59eb6f0e",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T22:24:15Z",
+      "side": 1,
+      "message": "```suggestion\n        DAWN_SKIP_TEST_IF(!device.HasFeature(textureInfo.feature));\n```",
+      "range": {
+        "startLine": 923,
+        "startChar": 8,
+        "endLine": 925,
+        "endChar": 9
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe7252d_1d8c298e",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T22:24:15Z",
+      "side": 1,
+      "message": "nit: explicit destroys generally not needed in native because refcounting takes care of it",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 947,
+        "endChar": 25
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
