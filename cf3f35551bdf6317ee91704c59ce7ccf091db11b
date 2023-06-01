@@ -360,6 +360,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5825e32a_2557d0fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-01T13:16:18Z",
+      "side": 1,
+      "message": "We discussed this with Ben. Given all the discussion above and the data provided by Rafael, we should be able to trust (aside from driver bugs), when using Root signature 1.0, or the Root signature 1.1 as in this CL, that:\n\n - Non-dynamic storage and uniform buffers can rely on D3D\u0027s robustness and won\u0027t get promoted by drivers.\n - Dynamic storage and uniform buffers can\u0027t.\n\nThis means that we can augment Tint\u0027s robustness transform to get a \"exemption list\" of buffers that will contain the non-dynamic ones on D3D12 (exemption, such that if we forget to add some buffers WebGPU is still secure).\n\nFor Vulkan we could also ask the robustness transform to not add clamping to uniform and storage buffers since we can rely on Vulkan\u0027s robustness (up to driver bugs).\n\nWe should also check that the CTS covers all the cases we care about. I wrote https://github.com/gpuweb/cts/blob/main/src/webgpu/shader/execution/robust_access.spec.ts for this which could cover all the cases, but we should check.",
+      "parentUuid": "30231011_2f2455f4",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
