@@ -14,14 +14,14 @@
 
 #include "src/tint/ir/builder.h"
 #include "src/tint/ir/instruction.h"
-#include "src/tint/ir/test_helper.h"
+#include "src/tint/ir/program_test_helper.h"
 
 namespace tint::ir {
 namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
 
-using IR_UnaryTest = TestHelper;
+using IR_UnaryTest = ProgramTestHelper;
 
 TEST_F(IR_UnaryTest, CreateComplement) {
     Module mod;
