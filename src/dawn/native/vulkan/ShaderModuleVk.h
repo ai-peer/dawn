@@ -55,6 +55,7 @@ class ShaderModule final : public ShaderModuleBase {
         const uint32_t* spirv;
         size_t wordCount;
         const char* remappedEntryPoint;
+        uint64_t numInvocations;
     };
 
     static ResultOrError<Ref<ShaderModule>> Create(Device* device,
