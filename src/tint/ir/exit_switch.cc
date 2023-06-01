@@ -23,12 +23,20 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::ExitSwitch);
 namespace tint::ir {
 
 ExitSwitch::ExitSwitch(ir::Switch* sw, utils::VectorRef<Value*> args /* = utils::Empty */)
-    : Base(std::move(args)), switch_(sw) {
+    : switch_(sw) {
     TINT_ASSERT(IR, switch_);
 
     if (switch_) {
         switch_->AddUsage(this);
         switch_->Merge()->AddInboundBranch(this);
+    }
+
+    operands_ = std::move(args);
+    for (auto* arg : args) {
+        TINT_ASSERT(IR, arg);
+        if (arg) {
+            arg->AddUsage(this);
+        }
     }
 }
 

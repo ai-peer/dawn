@@ -12,34 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/user_call.h"
+#ifndef SRC_TINT_IR_OPERAND_INSTRUCTION_H_
+#define SRC_TINT_IR_OPERAND_INSTRUCTION_H_
 
-#include <utility>
-
-#include "src/tint/debug.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::ir::UserCall);
+#include "src/tint/ir/instruction.h"
 
 namespace tint::ir {
 
-UserCall::UserCall(const type::Type* ty, Function* func, utils::VectorRef<Value*> arguments)
-    : Base(ty) {
-    TINT_ASSERT(IR, func);
+/// An instruction in the IR that expects one or more operands.
+template <unsigned N>
+class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruction> {
+  public:
+    /// Destructor
+    ~OperandInstruction() override = default;
 
-    operands_.Push(func);
-    if (func) {
-        func->AddUsage(this);
-    }
-
-    for (auto* arg : arguments) {
-        TINT_ASSERT(IR, arg);
-        operands_.Push(arg);
-        if (arg) {
-            arg->AddUsage(this);
-        }
-    }
-}
-
-UserCall::~UserCall() = default;
+  protected:
+    /// The operands to this instruction.
+    utils::Vector<ir::Value*, N> operands_;
+};
 
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_OPERAND_INSTRUCTION_H_

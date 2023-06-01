@@ -23,12 +23,20 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::NextIteration);
 namespace tint::ir {
 
 NextIteration::NextIteration(ir::Loop* loop, utils::VectorRef<Value*> args /* = utils::Empty */)
-    : Base(std::move(args)), loop_(loop) {
+    : loop_(loop) {
     TINT_ASSERT(IR, loop_);
 
     if (loop_) {
         loop_->AddUsage(this);
         loop_->Body()->AddInboundBranch(this);
+    }
+
+    operands_ = std::move(args);
+    for (auto* arg : args) {
+        TINT_ASSERT(IR, arg);
+        if (arg) {
+            arg->AddUsage(this);
+        }
     }
 }
 

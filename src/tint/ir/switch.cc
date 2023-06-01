@@ -18,10 +18,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Switch);
 
 namespace tint::ir {
 
-Switch::Switch(Value* cond, ir::Block* m) : Base(utils::Empty), condition_(cond), merge_(m) {
+Switch::Switch(Value* cond, ir::Block* m) : condition_(cond), merge_(m) {
     TINT_ASSERT(IR, condition_);
     TINT_ASSERT(IR, merge_);
 
+    operands_.Push(condition_);
     if (condition_) {
         condition_->AddUsage(this);
     }

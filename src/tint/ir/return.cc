@@ -14,17 +14,27 @@
 
 #include "src/tint/ir/return.h"
 
+#include <utility>
+
 #include "src/tint/ir/function.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Return);
 
 namespace tint::ir {
 
-Return::Return(Function* func, utils::VectorRef<Value*> args) : Base(args), func_(func) {
+Return::Return(Function* func, utils::VectorRef<Value*> args) : func_(func) {
     TINT_ASSERT(IR, func_);
 
     if (func_) {
         func_->AddUsage(this);
+    }
+
+    operands_ = std::move(args);
+    for (auto* arg : args) {
+        TINT_ASSERT(IR, arg);
+        if (arg) {
+            arg->AddUsage(this);
+        }
     }
 }
 

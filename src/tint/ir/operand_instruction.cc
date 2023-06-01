@@ -12,34 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/user_call.h"
+#include "src/tint/ir/operand_instruction.h"
 
-#include <utility>
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<1>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<2>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<3>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<4>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<8>);
 
-#include "src/tint/debug.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::ir::UserCall);
-
-namespace tint::ir {
-
-UserCall::UserCall(const type::Type* ty, Function* func, utils::VectorRef<Value*> arguments)
-    : Base(ty) {
-    TINT_ASSERT(IR, func);
-
-    operands_.Push(func);
-    if (func) {
-        func->AddUsage(this);
-    }
-
-    for (auto* arg : arguments) {
-        TINT_ASSERT(IR, arg);
-        operands_.Push(arg);
-        if (arg) {
-            arg->AddUsage(this);
-        }
-    }
-}
-
-UserCall::~UserCall() = default;
-
-}  // namespace tint::ir
+namespace tint::ir {}  // namespace tint::ir
