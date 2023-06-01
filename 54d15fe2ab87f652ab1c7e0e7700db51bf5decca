@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06dac5ed_39c39d13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T12:23:43Z",
+      "side": 1,
+      "message": "Can you add a test in here from the fuzz issue? I\u0027m not sure I understand why this makes parsing faster, is it the cost of the string comparisons on `try_punctuation` that\u0027s the issue?\n\nThe keyword list is currently taken directly from the list in the WGSL spec, this seems to change the meaning from keywords to keywords and tokens?",
+      "revId": "54d15fe2ab87f652ab1c7e0e7700db51bf5decca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
