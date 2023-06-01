@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/ir/builder.h"
-#include "src/tint/ir/test_helper.h"
+#include "src/tint/ir/program_test_helper.h"
 #include "src/tint/ir/value.h"
 
 namespace tint::ir {
@@ -21,7 +21,7 @@ namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
 
-using IR_ConstantTest = TestHelper;
+using IR_ConstantTest = ProgramTestHelper;
 
 TEST_F(IR_ConstantTest, f32) {
     Module mod;

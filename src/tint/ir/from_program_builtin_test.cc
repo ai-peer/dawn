@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/test_helper.h"
+#include "src/tint/ir/program_test_helper.h"
 
 #include "gmock/gmock.h"
 #include "src/tint/ast/case_selector.h"
@@ -24,7 +24,7 @@ namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
 
-using IR_FromProgramBuiltinTest = TestHelper;
+using IR_FromProgramBuiltinTest = ProgramTestHelper;
 
 TEST_F(IR_FromProgramBuiltinTest, EmitExpression_Builtin) {
     auto i = GlobalVar("i", builtin::AddressSpace::kPrivate, Expr(1_f));
