@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a76c28_9011381b",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T21:18:07Z",
+      "side": 1,
+      "message": "Because `builtin::Access` exists and doxygen isn\u0027t very good at it\u0027s job.",
+      "parentUuid": "720d12b5_88927dcf",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 26
+      },
+      "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfc84679_c096cf17",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-01T21:01:22Z",
       "side": 1,
       "message": "Bit overloaded. How about `Object()`?",
+      "range": {
+        "startLine": 37,
+        "startChar": 11,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "011362d9_ee8f9c41",
+        "filename": "src/tint/ir/access.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T21:18:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfc84679_c096cf17",
       "range": {
         "startLine": 37,
         "startChar": 11,
@@ -110,6 +158,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7db6424_9020ed21",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T21:18:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8192533_0ab52a25",
+      "range": {
+        "startLine": 885,
+        "startChar": 44,
+        "endLine": 885,
+        "endChar": 67
+      },
+      "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ed3aeb_36218182",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T21:18:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1952acf_ade48952",
+      "range": {
+        "startLine": 885,
+        "startChar": 31,
+        "endLine": 885,
+        "endChar": 37
+      },
+      "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83cd341a_c5076463",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-06-01T21:01:22Z",
       "side": 1,
       "message": "I don\u0027t understand why we need this. If the underlying object has a constant value, then the access chain should also resolve to a constant value - so why didn\u0027t we just emit that to start with?",
+      "range": {
+        "startLine": 897,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 13
+      },
+      "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce8d871f_df0e2899",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T21:18:07Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "83cd341a_c5076463",
       "range": {
         "startLine": 897,
         "startChar": 0,
@@ -174,6 +294,54 @@
         "startChar": 8,
         "endLine": 917,
         "endChar": 42
+      },
+      "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85753be7_4a69ed26",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T21:18:07Z",
+      "side": 1,
+      "message": "Maybe? I modeled this after what the spir-v builder is doing.\n\nI\u0027d like to get multi-element swizzles in before attempting to switch to single pass. Those will involve breaking the current iteration, shoving out an instruction, and then creating the swizzle. Going in reverse order means you don\u0027t have the right bits yet, I think.",
+      "parentUuid": "c632de10_f94d3289",
+      "range": {
+        "startLine": 917,
+        "startChar": 8,
+        "endLine": 917,
+        "endChar": 42
+      },
+      "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cba0205_83e147da",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T21:18:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79041064_a6e772ff",
+      "range": {
+        "startLine": 917,
+        "startChar": 30,
+        "endLine": 917,
+        "endChar": 39
       },
       "revId": "4ff72b60fdc93021ee7d6256ec8bd237deb36dcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
