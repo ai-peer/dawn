@@ -228,6 +228,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ba74a75_64c4d3d2",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T18:14:43Z",
+      "side": 1,
+      "message": "no - I suppose this idea is not immediately applicable. We\u0027d need to add a separate internal concept to do that. It\u0027s OK to not do this then",
+      "parentUuid": "aac0cd7f_e7fb0e51",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 5
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84607cd0_3083890e",
         "filename": "src/dawn/native/CachedMultisampleAttachment.h",
         "patchSetId": 4
