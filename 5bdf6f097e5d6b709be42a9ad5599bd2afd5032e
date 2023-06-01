@@ -34,6 +34,24 @@
       "parentUuid": "e65f5c1d_15a54a43",
       "revId": "5bdf6f097e5d6b709be42a9ad5599bd2afd5032e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b86622_e1d0c996",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T16:54:11Z",
+      "side": 1,
+      "message": "\u003e  But at the same time doing the optimization in the frontend wouldn\u0027t help the render bundle case.\n\nI think this refers to the fact that if the setBindGroup commands are in different render bundles, then we still need the optimization in the backend to prevent the redundant state setting - which opens the question of whether it\u0027s worth doing in the frontend at all.\n\nRedundant bind groups in render bundles could be common because they all might, for example, setBindGroup to the same global uniform buffer or something.",
+      "parentUuid": "024d25ad_d5251b2d",
+      "revId": "5bdf6f097e5d6b709be42a9ad5599bd2afd5032e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
