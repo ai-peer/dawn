@@ -34,6 +34,24 @@
       "parentUuid": "06dac5ed_39c39d13",
       "revId": "54d15fe2ab87f652ab1c7e0e7700db51bf5decca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d673642_af1661c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T13:00:18Z",
+      "side": 1,
+      "message": "I see, there is a non-`_` hidden in the middle of the giant single line of the error which is where it breaks.",
+      "parentUuid": "e87b16ec_f000cad4",
+      "revId": "54d15fe2ab87f652ab1c7e0e7700db51bf5decca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
