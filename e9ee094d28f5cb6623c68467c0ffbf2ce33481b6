@@ -194,6 +194,23 @@
       "parentUuid": "6a659782_36834b8e",
       "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f783a85_2258230d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-01T07:32:25Z",
+      "side": 1,
+      "message": "Reverting this since the follow-up fix in https://dawn-review.googlesource.com/c/dawn/+/135060 is taking some iterations to land, and a lot of people are running into issues with the smaller limit.",
+      "revId": "e9ee094d28f5cb6623c68467c0ffbf2ce33481b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
