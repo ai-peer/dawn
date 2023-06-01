@@ -51,6 +51,24 @@
       "parentUuid": "1c386e46_f5c45524",
       "revId": "fc9fbd39aa3e0a28690c75537e84f75127860380",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc2aeec2_c2de9cf5",
+        "filename": "src/tint/writer/spirv/builder_ident_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T12:43:33Z",
+      "side": 1,
+      "message": "My guess is we only emit the constant when it\u0027s used in some kind of expression, and since there are really no usages of it, that single access of \"c\" doesn\u0027t find a value?",
+      "parentUuid": "7c473d68_582ae831",
+      "revId": "fc9fbd39aa3e0a28690c75537e84f75127860380",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
