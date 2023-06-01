@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/ir/module.h"
-#include "src/tint/ir/test_helper.h"
+#include "src/tint/ir/program_test_helper.h"
 #include "src/tint/ir/var.h"
 
 namespace tint::ir {
@@ -21,7 +21,7 @@ namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
 
-using IR_ModuleTest = TestHelper;
+using IR_ModuleTest = ProgramTestHelper;
 
 TEST_F(IR_ModuleTest, NameOfUnnamed) {
     Module mod;
