@@ -312,6 +312,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "16781884_61480d0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-06-01T01:28:47Z",
+      "side": 1,
+      "message": "@Ben, it depends how things are bound on D3D12 side.\n\nIf you bind the \"array\" using `Set(Graphics|Compute)RootShaderResourceView` these are NOT bounds checked. Since these functions just accept a D3D12_GPU_VIRTUAL_ADDRESS, there\u0027s no way for D3D12 to know the size of the buffer you\u0027re setting. It\u0027s valid to pass an address in the middle of a buffer.\n\nOn the other hand, if you create a non-root descriptor using `CreateShaderResourceView` (with the KEEPING_BUFFER_BOUNDS_CHECK enum for Root Signature v1.1) bounds checking happens because that function is passed all of the sizing information needed to do so.\n\n@Austin, are WebGPU runtime-sized arrays mapped to the former or the latter?",
+      "parentUuid": "1017477e_7b14fe2c",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "cf3f35551bdf6317ee91704c59ce7ccf091db11b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03a05779_49a0d5c3",
