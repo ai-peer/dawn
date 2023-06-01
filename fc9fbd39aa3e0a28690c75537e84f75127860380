@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de87104_0e44a69c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T04:15:38Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "fc9fbd39aa3e0a28690c75537e84f75127860380",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c386e46_f5c45524",
+        "filename": "src/tint/writer/spirv/builder_ident_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T04:15:38Z",
+      "side": 1,
+      "message": "This one appears to just have benefited from the disabled reporter as it actually ICEs",
+      "revId": "fc9fbd39aa3e0a28690c75537e84f75127860380",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
