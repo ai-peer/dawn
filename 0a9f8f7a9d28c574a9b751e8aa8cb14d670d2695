@@ -168,6 +168,24 @@
       "parentUuid": "5dde54aa_8f97efad",
       "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5c679a_efcaa0bb",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-06-01T17:53:26Z",
+      "side": 1,
+      "message": "Ah, thanks! Done.",
+      "parentUuid": "4ddf0bcc_ca29a493",
+      "revId": "0a9f8f7a9d28c574a9b751e8aa8cb14d670d2695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
