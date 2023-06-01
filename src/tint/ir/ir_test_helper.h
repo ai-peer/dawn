@@ -12,22 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SRC_TINT_IR_IR_TEST_HELPER_H_
+#define SRC_TINT_IR_IR_TEST_HELPER_H_
+
+#include "gtest/gtest.h"
 #include "src/tint/ir/builder.h"
-#include "src/tint/ir/instruction.h"
-#include "src/tint/ir/program_test_helper.h"
+#include "src/tint/ir/module.h"
 
 namespace tint::ir {
-namespace {
 
-using IR_DiscardTest = TestHelper;
+/// Helper class for testing
+template <typename BASE>
+class TestHelperBase : public BASE {
+  public:
+    TestHelperBase() = default;
+    ~TestHelperBase() override = default;
 
-TEST_F(IR_DiscardTest, Discard) {
     Module mod;
     Builder b{mod};
+};
 
-    const auto* inst = b.Discard();
-    ASSERT_TRUE(inst->Is<ir::Discard>());
-}
+using TestHelper = TestHelperBase<testing::Test>;
 
-}  // namespace
+template <typename T>
+using TestParamHelper = TestHelperBase<testing::TestWithParam<T>>;
+
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_IR_TEST_HELPER_H_
