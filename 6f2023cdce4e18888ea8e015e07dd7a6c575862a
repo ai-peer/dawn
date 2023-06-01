@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "6f2023cdce4e18888ea8e015e07dd7a6c575862a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed6bbaa2_16b2da7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003636
+      },
+      "writtenOn": "2023-06-01T15:34:39Z",
+      "side": 1,
+      "message": "Thanks for doing this. Yes, let\u0027s just revert it.",
+      "revId": "6f2023cdce4e18888ea8e015e07dd7a6c575862a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
