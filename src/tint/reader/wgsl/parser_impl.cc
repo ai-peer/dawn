@@ -2496,7 +2496,13 @@ Expect<ParserImpl::ExpressionList> ParserImpl::expect_expression_list(std::strin
         if (peek_is(terminator)) {
             break;
         }
-        if (!expect(use, Token::Type::kComma)) {
+        if (!expect_not_template_start(expr->source)) {
+            return Failure::kErrored;
+        }
+        if (!match(Token::Type::kComma)) {
+            if (expect_not_template(expr.value)) {
+                expect(use, Token::Type::kComma);
+            }
             return Failure::kErrored;
         }
         if (peek_is(terminator)) {
@@ -3079,6 +3085,50 @@ bool ParserImpl::expect_attributes_consumed(utils::VectorRef<const ast::Attribut
         return true;
     }
     add_error(in[0]->source, "unexpected attributes");
+    return false;
+}
+
+bool ParserImpl::expect_not_template_start(const Source& lhs_source) {
+    Source end;
+    if (!match(Token::Type::kTemplateArgsLeft, &end)) {
+        return true;
+    }
+
+    // Try to find end of template
+    for (size_t i = 0; i < 32; i++) {
+        if (auto& t = peek(i); t.type() == Token::Type::kTemplateArgsRight) {
+            end = t.source();
+        }
+    }
+    Source template_source = lhs_source;
+    template_source.range.end = end.range.end;
+    add_error(template_source, "parsed as template list");
+
+    if (auto rhs = expression(); rhs.matched) {
+        Source lt_source = lhs_source;
+        lt_source.range.end = rhs->source.range.end;
+        add_note(lt_source, "wrap in parentheses to treat as less-than expression");
+    }
+    return false;
+}
+
+bool ParserImpl::expect_not_template(const ast::Expression* expr) {
+    auto* ident_expr = expr->As<ast::IdentifierExpression>();
+    if (!ident_expr) {
+        return true;
+    }
+    auto* ident = ident_expr->identifier->As<ast::TemplatedIdentifier>();
+    if (!ident) {
+        return true;
+    }
+
+    add_error(ident->source, "parsed as template list");
+
+    if (auto rhs = expression(); rhs.matched) {
+        Source gt_source = ident->arguments.Back()->source;
+        gt_source.range.end = rhs->source.range.end;
+        add_note(gt_source, "wrap in parentheses to treat as greater-than expression");
+    }
     return false;
 }
 
