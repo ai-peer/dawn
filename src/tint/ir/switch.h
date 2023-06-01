@@ -63,6 +63,9 @@ class Switch : public utils::Castable<Switch, Branch> {
     /// @returns the switch cases
     utils::Vector<Case, 4>& Cases() { return cases_; }
 
+    /// @returns the branch arguments
+    utils::Slice<Value*> Args() const override { return utils::Slice<Value*>{}; }
+
     /// @returns the condition
     const Value* Condition() const { return condition_; }
     /// @returns the condition

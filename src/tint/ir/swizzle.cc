@@ -23,8 +23,9 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Swizzle);
 namespace tint::ir {
 
 Swizzle::Swizzle(const type::Type* ty, Value* object, utils::VectorRef<uint32_t> indices)
-    : result_type_(ty), object_(object), indices_(std::move(indices)) {
-    object_->AddUsage(this);
+    : result_type_(ty), indices_(std::move(indices)) {
+    operands_.Push(object);
+    object->AddUsage(this);
 }
 
 Swizzle::~Swizzle() = default;

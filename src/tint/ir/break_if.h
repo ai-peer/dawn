@@ -36,6 +36,12 @@ class BreakIf : public utils::Castable<BreakIf, Branch> {
     BreakIf(Value* condition, ir::Loop* loop, utils::VectorRef<Value*> args = utils::Empty);
     ~BreakIf() override;
 
+    /// @returns the branch arguments
+    utils::Slice<Value*> Args() const override {
+        const auto& slice = operands_.Slice();
+        return utils::Slice<Value*>(slice.data + 1, slice.len - 1, slice.cap - 1);
+    }
+
     /// @returns the break condition
     const Value* Condition() const { return condition_; }
 

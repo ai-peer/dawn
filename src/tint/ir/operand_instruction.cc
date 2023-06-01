@@ -12,23 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/convert.h"
-#include "src/tint/debug.h"
+#include "src/tint/ir/operand_instruction.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Convert);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<1>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<2>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<3>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<4>);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::OperandInstruction<8>);
 
-namespace tint::ir {
-
-Convert::Convert(const type::Type* to_type,
-                 const type::Type* from_type,
-                 utils::VectorRef<Value*> arguments)
-    : Base(to_type), from_type_(from_type) {
-    for (auto* arg : arguments) {
-        operands_.Push(arg);
-        arg->AddUsage(this);
-    }
-}
-
-Convert::~Convert() = default;
-
-}  // namespace tint::ir
+namespace tint::ir {}  // namespace tint::ir
