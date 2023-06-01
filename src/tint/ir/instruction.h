@@ -37,9 +37,20 @@ class Instruction : public utils::Castable<Instruction, Value> {
 
     /// @returns the block that owns this instruction
     ir::Block* Block() { return block_; }
-
     /// @returns the block that owns this instruction
     const ir::Block* Block() const { return block_; }
+
+    /// Adds the new instruction before the given instruction in the owning block
+    /// @param before the instruction to insert before
+    void InsertBefore(Instruction* before);
+    /// Adds the new instruction after the given instruction in the owning block
+    /// @param after the instruction to insert after
+    void InsertAfter(Instruction* after);
+    /// Replaces the target instruction with this instruction in the owning block
+    /// @param target the instruction to replace
+    void Replace(Instruction* target);
+    /// Removes this instruction from the owning block
+    void Remove();
 
     /// Pointer to the next instruction in the list
     Instruction* next = nullptr;
