@@ -116,6 +116,12 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
     }
 
     ASSERT(mBackendDevice != nullptr);
+    if (mBackendDevice->GetValidInternalFormat(mFormat).IsMultiPlanar() &&
+        !descriptor->isInitialized) {
+        mBackendDevice->ConsumedError(DAWN_VALIDATION_ERROR(
+            "External textures with multiplanar formats must be initialized."));
+        return nullptr;
+    }
 
     TextureDescriptor textureDescriptor = {};
     textureDescriptor.usage = static_cast<wgpu::TextureUsage>(descriptor->usage);
