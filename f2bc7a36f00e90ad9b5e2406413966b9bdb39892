@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e96414c_a1be725f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T00:50:15Z",
+      "side": 1,
+      "message": "mention that it was fixed in crrev.com/c/4569766 (I think)",
+      "revId": "f2bc7a36f00e90ad9b5e2406413966b9bdb39892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
