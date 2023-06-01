@@ -14,6 +14,9 @@
 
 #include "src/tint/ir/instruction.h"
 
+#include "src/tint/debug.h"
+#include "src/tint/ir/block.h"
+
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Instruction);
 
 namespace tint::ir {
@@ -21,5 +24,28 @@ namespace tint::ir {
 Instruction::Instruction() = default;
 
 Instruction::~Instruction() = default;
+
+void Instruction::InsertBefore(Instruction* before) {
+    TINT_ASSERT_OR_RETURN(IR, before);
+    TINT_ASSERT_OR_RETURN(IR, before->Block() != nullptr);
+    before->Block()->InsertBefore(before, this);
+}
+
+void Instruction::InsertAfter(Instruction* after) {
+    TINT_ASSERT_OR_RETURN(IR, after);
+    TINT_ASSERT_OR_RETURN(IR, after->Block() != nullptr);
+    after->Block()->InsertAfter(after, this);
+}
+
+void Instruction::Replace(Instruction* target) {
+    TINT_ASSERT_OR_RETURN(IR, target);
+    TINT_ASSERT_OR_RETURN(IR, target->Block() != nullptr);
+    target->Block()->Replace(target, this);
+}
+
+void Instruction::Remove() {
+    TINT_ASSERT_OR_RETURN(IR, Block() != nullptr);
+    Block()->Remove(this);
+}
 
 }  // namespace tint::ir
