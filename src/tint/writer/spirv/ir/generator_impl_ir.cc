@@ -333,8 +333,13 @@ void GeneratorImplIr::EmitEntryPoint(const ir::Function* func, uint32_t id) {
 }
 
 void GeneratorImplIr::EmitRootBlock(const ir::Block* root_block) {
+<<<<<<< PATCH SET (a5c602 [ir] Convert block instructions to a list.)
+    for (auto* inst : *root_block) {
+        auto result = Switch(
+=======
     for (auto* inst : root_block->Instructions()) {
         Switch(
+>>>>>>> BASE      (e387e8 dawn::wire::server: Use WireResult consistently for error ha)
             inst,  //
             [&](const ir::Var* v) { return EmitVar(v); },
             [&](Default) {
@@ -353,7 +358,7 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
 
     // If there are no instructions in the block, it's a dead end, so we shouldn't be able to get
     // here to begin with.
-    if (block->Instructions().IsEmpty()) {
+    if (block->IsEmpty()) {
         current_function_.push_inst(spv::Op::OpUnreachable, {});
         return;
     }
@@ -373,6 +378,36 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
     }
 
     // Emit the instructions.
+<<<<<<< PATCH SET (a5c602 [ir] Convert block instructions to a list.)
+    for (auto* inst : *block) {
+        auto result = Switch(
+            inst,  //
+            [&](const ir::Binary* b) { return EmitBinary(b); },
+            [&](const ir::Builtin* b) { return EmitBuiltin(b); },
+            [&](const ir::Load* l) { return EmitLoad(l); },
+            [&](const ir::Loop* l) {
+                EmitLoop(l);
+                return 0u;
+            },
+            [&](const ir::Switch* sw) {
+                EmitSwitch(sw);
+                return 0u;
+            },
+            [&](const ir::Store* s) {
+                EmitStore(s);
+                return 0u;
+            },
+            [&](const ir::UserCall* c) { return EmitUserCall(c); },
+            [&](const ir::Var* v) { return EmitVar(v); },
+            [&](const ir::If* i) {
+                EmitIf(i);
+                return 0u;
+            },
+            [&](const ir::Branch* b) {
+                EmitBranch(b);
+                return 0u;
+            },
+=======
     for (auto* inst : block->Instructions()) {
         Switch(
             inst,                                             //
@@ -386,6 +421,7 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
             [&](const ir::Var* v) { EmitVar(v); },            //
             [&](const ir::If* i) { EmitIf(i); },              //
             [&](const ir::Branch* b) { EmitBranch(b); },      //
+>>>>>>> BASE      (e387e8 dawn::wire::server: Use WireResult consistently for error ha)
             [&](Default) {
                 TINT_ICE(Writer, diagnostics_)
                     << "unimplemented instruction: " << inst->TypeInfo().name;
@@ -448,11 +484,11 @@ void GeneratorImplIr::EmitIf(const ir::If* i) {
     uint32_t merge_label = Label(merge_block);
     uint32_t true_label = merge_label;
     uint32_t false_label = merge_label;
-    if (true_block->Instructions().Length() > 1 || !merge_block->Params().IsEmpty() ||
+    if (true_block->Length() > 1 || !merge_block->Params().IsEmpty() ||
         (true_block->HasBranchTarget() && !true_block->Branch()->Is<ir::ExitIf>())) {
         true_label = Label(true_block);
     }
-    if (false_block->Instructions().Length() > 1 || !merge_block->Params().IsEmpty() ||
+    if (false_block->Length() > 1 || !merge_block->Params().IsEmpty() ||
         (false_block->HasBranchTarget() && !false_block->Branch()->Is<ir::ExitIf>())) {
         false_label = Label(false_block);
     }
