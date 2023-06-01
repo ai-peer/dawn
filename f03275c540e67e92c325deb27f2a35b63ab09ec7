@@ -39,6 +39,30 @@
       },
       "revId": "f03275c540e67e92c325deb27f2a35b63ab09ec7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d6b6d6c_1c8146eb",
+        "filename": "src/tint/constant/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-01T13:45:59Z",
+      "side": 1,
+      "message": "Splat can also be used by any of the types below. It doesn\u0027t care about the actual type, only that all the elements are identical in value and type.",
+      "parentUuid": "a3fe83bb_01d0d6a5",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "f03275c540e67e92c325deb27f2a35b63ab09ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
