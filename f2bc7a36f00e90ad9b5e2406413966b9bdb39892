@@ -16,6 +16,24 @@
       "message": "mention that it was fixed in crrev.com/c/4569766 (I think)",
       "revId": "f2bc7a36f00e90ad9b5e2406413966b9bdb39892",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed5fd4a_f8a3ead0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-01T01:26:10Z",
+      "side": 1,
+      "message": "Oh, no that was something else. I thought I took you guys off the review list cause it was still WIP. Sorry about that. It\u0027s ready now though!",
+      "parentUuid": "6e96414c_a1be725f",
+      "revId": "f2bc7a36f00e90ad9b5e2406413966b9bdb39892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
