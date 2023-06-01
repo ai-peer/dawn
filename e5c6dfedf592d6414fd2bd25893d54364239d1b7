@@ -51,6 +51,24 @@
       "parentUuid": "fceb9f49_8a08cce0",
       "revId": "e5c6dfedf592d6414fd2bd25893d54364239d1b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b5505ca_14d5f484",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-01T17:06:02Z",
+      "side": 1,
+      "message": "That seems like it would be more error prone? All the other ones operate with `new-\u003eThing(old)`. Flipping this one to be `old-\u003eThing(new)` seems like it would cause more potential confusion.\n\nWould something like `Replacing` be a better name `new-\u003eReplacing(old)` ? `new-\u003eReplaces(old)` ?",
+      "parentUuid": "7cda3ee9_866023c8",
+      "revId": "e5c6dfedf592d6414fd2bd25893d54364239d1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
