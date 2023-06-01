@@ -33,6 +33,23 @@
       "message": "Thanks for doing this. Yes, let\u0027s just revert it.",
       "revId": "6f2023cdce4e18888ea8e015e07dd7a6c575862a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f55d6096_c49cb1e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T15:41:19Z",
+      "side": 1,
+      "message": "fwiw, the fix for both this an Min\u0027s CL is the same; need to suppress a test that was since then enabled on D3D11.",
+      "revId": "6f2023cdce4e18888ea8e015e07dd7a6c575862a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
