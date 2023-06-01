@@ -189,6 +189,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb3d0383_a8d2a017",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-01T22:45:19Z",
+      "side": 1,
+      "message": "oh, yea it\u0027s fine then",
+      "parentUuid": "35624e7c_059b0081",
+      "range": {
+        "startLine": 923,
+        "startChar": 8,
+        "endLine": 925,
+        "endChar": 9
+      },
+      "revId": "48b9bb1114021076f2093d29c2068e4fc9ed693e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fe7252d_1d8c298e",
