@@ -36,6 +36,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65138467_caafbfed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-02T21:30:59Z",
+      "side": 1,
+      "message": "LGTM with the offline review session! Thanks!",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34249803_123f3c0b",
