@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45b63c29_10d30a48",
+        "filename": "src/tint/ir/binary_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T13:25:28Z",
+      "side": 1,
+      "message": "Hah good catch. I just ported it over from what it was before. Will clean it all up, thanks.",
+      "parentUuid": "cd571128_82b4595f",
+      "range": {
+        "startLine": 24,
+        "startChar": 22,
+        "endLine": 24,
+        "endChar": 39
+      },
+      "revId": "66c8e59d0cfdbe2c15bc6a04c45e7ef39eadd9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbf46844_41d65428",
         "filename": "src/tint/ir/bitcast_test.cc",
         "patchSetId": 7
