@@ -16,6 +16,98 @@
       "message": "PTAL.",
       "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bbe814c_0f79fdb6",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:52:48Z",
+      "side": 1,
+      "message": "I think you can use `sem::Expression::UnwrapLoad()` to simplify things here.",
+      "range": {
+        "startLine": 910,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 9
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e250a05d_c4c0614c",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:52:48Z",
+      "side": 1,
+      "message": "`info` doesn\u0027t appear to be modified by this function. Pass as `const AccessorInfo\u0026`?",
+      "range": {
+        "startLine": 945,
+        "startChar": 32,
+        "endLine": 945,
+        "endChar": 50
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af98532b_6121fa81",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:52:48Z",
+      "side": 1,
+      "message": "Security team have advised using references for non-nullability.",
+      "range": {
+        "startLine": 961,
+        "startChar": 73,
+        "endLine": 961,
+        "endChar": 91
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2faf6435_8eb03dbe",
+        "filename": "src/tint/ir/from_program_accessor_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:52:48Z",
+      "side": 1,
+      "message": "Should operands be comma separated?",
+      "range": {
+        "startLine": 265,
+        "startChar": 55,
+        "endLine": 265,
+        "endChar": 56
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
