@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c183eb_9a66d4f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T00:22:11Z",
+      "side": 1,
+      "message": "PTAL. The output format for splat and composite isn\u0027t ... great, but that\u0027s a separate issue from enabling `let` support in accessors.",
+      "revId": "829001a0bf6f71bd84bb277eeb06c1a610630e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
