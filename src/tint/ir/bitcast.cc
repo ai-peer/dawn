@@ -21,7 +21,7 @@ namespace tint::ir {
 
 Bitcast::Bitcast(const type::Type* ty, Value* val) : Base(ty) {
     operands_.Push(val);
-    val->AddUsage(this);
+    val->AddUsage({this, 0u});
 }
 
 Bitcast::~Bitcast() = default;

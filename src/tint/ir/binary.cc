@@ -25,8 +25,8 @@ Binary::Binary(enum Kind kind, const type::Type* res_ty, Value* lhs, Value* rhs)
     TINT_ASSERT(IR, rhs);
     operands_.Push(lhs);
     operands_.Push(rhs);
-    lhs->AddUsage(this);
-    rhs->AddUsage(this);
+    lhs->AddUsage({this, 0u});
+    rhs->AddUsage({this, 1u});
 }
 
 Binary::~Binary() = default;

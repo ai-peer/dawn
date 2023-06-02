@@ -21,7 +21,7 @@ namespace tint::ir {
 
 Unary::Unary(enum Kind k, const type::Type* res_ty, Value* val) : kind_(k), result_type_(res_ty) {
     TINT_ASSERT(IR, val);
-    val->AddUsage(this);
+    val->AddUsage({this, 0u});
     operands_.Push(val);
 }
 

@@ -26,7 +26,7 @@ Return::Return(Function* func, utils::VectorRef<Value*> args) : func_(func) {
     TINT_ASSERT(IR, func_);
     operands_ = std::move(args);
     for (auto* arg : args) {
-        arg->AddUsage(this);
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
     }
 }
 
