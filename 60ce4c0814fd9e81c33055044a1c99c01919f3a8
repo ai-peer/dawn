@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d36d71b_b44e7c80",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T19:25:27Z",
+      "side": 1,
+      "message": "You need the `Clone` otherwise you have a type from the Program and are putting it into the Module.",
+      "revId": "60ce4c0814fd9e81c33055044a1c99c01919f3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
