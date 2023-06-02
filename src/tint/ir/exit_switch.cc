@@ -29,7 +29,7 @@ ExitSwitch::ExitSwitch(ir::Switch* sw, utils::VectorRef<Value*> args /* = utils:
 
     operands_ = std::move(args);
     for (auto* arg : args) {
-        arg->AddUsage(this);
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
     }
 }
 

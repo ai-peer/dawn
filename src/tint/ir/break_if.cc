@@ -32,10 +32,10 @@ BreakIf::BreakIf(Value* condition,
     loop_->Merge()->AddInboundBranch(this);
 
     operands_.Push(condition);
-    condition_->AddUsage(this);
+    condition_->AddUsage({this, 0u});
     for (auto* arg : args) {
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         operands_.Push(arg);
-        arg->AddUsage(this);
     }
 }
 

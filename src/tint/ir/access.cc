@@ -26,10 +26,10 @@ namespace tint::ir {
 Access::Access(const type::Type* ty, Value* object, utils::VectorRef<Value*> indices)
     : result_type_(ty) {
     operands_.Push(object);
-    object->AddUsage(this);
+    object->AddUsage({this, 0u});
     for (auto* idx : indices) {
+        idx->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         operands_.Push(idx);
-        idx->AddUsage(this);
     }
 }
 
