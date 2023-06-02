@@ -521,6 +521,8 @@ if (tint_build_ir) {
     sources = [
       "ir/transform/add_empty_entry_point.cc",
       "ir/transform/add_empty_entry_point.h",
+      "ir/transform/block_decorated_structs.cc",
+      "ir/transform/block_decorated_structs.h",
     ]
     deps = [
       ":libtint_builtins_src",
@@ -1810,6 +1812,7 @@ if (tint_build_unittests) {
     tint_unittests_source_set("tint_unittests_ir_transform_src") {
       sources = [
         "ir/transform/add_empty_entry_point_test.cc",
+        "ir/transform/block_decorated_structs_test.cc",
         "ir/transform/test_helper.h",
       ]
 
@@ -2308,7 +2311,6 @@ if (tint_build_unittests) {
         "ir/program_test_helper.h",
         "ir/store_test.cc",
         "ir/to_program_roundtrip_test.cc",
-        "ir/transform/add_empty_entry_point_test.cc",
         "ir/unary_test.cc",
         "ir/var_test.cc",
       ]

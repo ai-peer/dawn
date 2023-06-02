@@ -796,6 +796,8 @@ if(${TINT_BUILD_IR})
     ir/var.h
     ir/transform/add_empty_entry_point.cc
     ir/transform/add_empty_entry_point.h
+    ir/transform/block_decorated_structs.cc
+    ir/transform/block_decorated_structs.h
     ir/transform/transform.cc
     ir/transform/transform.h
   )
@@ -1511,6 +1513,7 @@ if(TINT_BUILD_TESTS)
       ir/program_test_helper.h
       ir/store_test.cc
       ir/transform/add_empty_entry_point_test.cc
+      ir/transform/block_decorated_structs_test.cc
       ir/unary_test.cc
       ir/var_test.cc
     )
