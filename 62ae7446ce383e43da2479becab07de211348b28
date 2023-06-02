@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f66364_fb402db4",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T04:30:27Z",
+      "side": 1,
+      "message": "This could use a comment above it as the logic is a bit hard to follow.\n\n```\nThe expression list can have, what appear to be, templates inside it. There are a few ways this can go wrong:\n * The expression itself looks like a template start\n * The current token isn\u0027t a comma, but is a template\n```\n \nOr... something?",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86fa525e_5ed11a31",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T04:30:27Z",
+      "side": 1,
+      "message": "This hurts my brain, can we create a `expect_template_start` which does the double negative internally to make this easier to read?",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c844a730_120a4d35",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3110,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T04:30:27Z",
+      "side": 1,
+      "message": "Maybe `if this should be a less-than expression wrap in parentheses to disambiguate` (although I don\u0027t really like disambiguate)\n\nJust, some words to make it sound less like we know what this means, to we don\u0027t know what this means (the `if this should be`) and need a hint.",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f045c7c1_b4a2d852",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T04:30:27Z",
+      "side": 1,
+      "message": "Similar word changes.",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d27eb36_7baa5eaa",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T04:30:27Z",
+      "side": 1,
+      "message": "So, returns true if the next token is not a template start?",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffafcf9c_088a64ee",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T04:30:27Z",
+      "side": 1,
+      "message": "So, returns true if the token is not a template?",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
