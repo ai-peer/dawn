@@ -39,6 +39,7 @@
 #include "src/tint/ir/store.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
+#include "src/tint/ir/transform/block_decorated_structs.h"
 #include "src/tint/ir/user_call.h"
 #include "src/tint/ir/var.h"
 #include "src/tint/switch.h"
@@ -670,7 +671,11 @@ void Disassembler::EmitUnary(const Unary* u) {
 }
 
 void Disassembler::EmitStructDecl(const type::Struct* str) {
-    out_ << str->Name().Name() << " = struct @align(" << str->Align() << ") {" << std::endl;
+    out_ << str->Name().Name() << " = struct @align(" << str->Align() << ")";
+    if (str->Is<transform::BlockDecoratedStructs::BlockStruct>()) {
+        out_ << ", @block";
+    }
+    out_ << " {" << std::endl;
     for (auto* member : str->Members()) {
         out_ << "  " << member->Name().Name() << ":" << member->Type()->FriendlyName();
         out_ << " @offset(" << member->Offset() << ")";
