@@ -33,6 +33,24 @@
       "message": "nit: we could compute once on initialization and then reuse the result for both the limit and in DeviceVk.",
       "revId": "5c28a0d241cc7646d44edac895d1414d07508842",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee774fb4_459ffab9",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-02T08:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ee35cc6_cf32695e",
+      "revId": "5c28a0d241cc7646d44edac895d1414d07508842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
