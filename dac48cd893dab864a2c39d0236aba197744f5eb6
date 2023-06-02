@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "856859f0_dfbec348",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T17:43:27Z",
+      "side": 1,
+      "message": "PTAL. I need to add a couple more tests for the current validations but I think the skeleton is good. Let me know if you think anything in here needs a change of direction.",
+      "revId": "dac48cd893dab864a2c39d0236aba197744f5eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
