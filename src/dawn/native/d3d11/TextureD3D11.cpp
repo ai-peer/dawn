@@ -360,9 +360,9 @@ D3D11_DEPTH_STENCIL_VIEW_DESC Texture::GetDSVDescriptor(const SubresourceRange& 
     return dsvDesc;
 }
 
-MaybeError Texture::Clear(CommandRecordingContext* commandContext,
-                          const SubresourceRange& range,
-                          TextureBase::ClearValue clearValue) {
+MaybeError Texture::ClearInternal(CommandRecordingContext* commandContext,
+                                  const SubresourceRange& range,
+                                  TextureBase::ClearValue clearValue) {
     bool isRenderable = GetInternalUsage() & wgpu::TextureUsage::RenderAttachment;
 
     if (!isRenderable) {
@@ -418,8 +418,8 @@ MaybeError Texture::Clear(CommandRecordingContext* commandContext,
         static constexpr std::array<float, 4> kZero = {0.0f, 0.0f, 0.0f, 0.0f};
         static constexpr std::array<float, 4> kNonZero = {1.0f, 1.0f, 1.0f, 1.0f};
 
-        for (uint32_t mipLevel = view->GetBaseMipLevel(); mipLevel < view->GetLevelCount();
-             ++mipLevel) {
+        for (uint32_t mipLevel = view->GetBaseMipLevel();
+             mipLevel < view->GetBaseMipLevel() + view->GetLevelCount(); ++mipLevel) {
             ComPtr<ID3D11RenderTargetView> d3d11RTV;
             DAWN_TRY_ASSIGN(d3d11RTV, view->CreateD3D11RenderTargetView(mipLevel));
             // Clear all layers for each 'mipLevel'.
@@ -429,6 +429,13 @@ MaybeError Texture::Clear(CommandRecordingContext* commandContext,
         }
     }
 
+    return {};
+}
+
+MaybeError Texture::Clear(CommandRecordingContext* commandContext,
+                          const SubresourceRange& range,
+                          TextureBase::ClearValue clearValue) {
+    DAWN_TRY(ClearInternal(commandContext, range, clearValue));
     if (clearValue == TextureBase::ClearValue::Zero) {
         SetIsSubresourceContentInitialized(true, range);
         GetDevice()->IncrementLazyClearCountForTesting();
@@ -453,7 +460,24 @@ MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext*
     if (!IsSubresourceContentInitialized(range)) {
         // If subresource has not been initialized, clear it to black as it could contain
         // dirty bits from recycled memory
-        DAWN_TRY(Clear(commandContext, range, TextureBase::ClearValue::Zero));
+        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            for (uint32_t arrayLayer = range.baseArrayLayer;
+                 arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = range.baseMipLevel;
+                     mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
+                    uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
+                    ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
+                    if (!mIsSubresourceContentInitializedAtIndex[subresourceIndex]) {
+                        DAWN_TRY(ClearInternal(
+                            commandContext,
+                            SubresourceRange::MakeSingle(aspect, arrayLayer, mipLevel),
+                            TextureBase::ClearValue::Zero));
+                        mIsSubresourceContentInitializedAtIndex[subresourceIndex] = true;
+                    }
+                }
+            }
+        }
+        GetDevice()->IncrementLazyClearCountForTesting();
     }
     return {};
 }

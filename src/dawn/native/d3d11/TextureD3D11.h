@@ -111,6 +111,10 @@ class Texture final : public d3d::Texture {
     MaybeError Clear(CommandRecordingContext* commandContext,
                      const SubresourceRange& range,
                      TextureBase::ClearValue clearValue);
+    // Clear the texture without bookkeeping if the texture is initialized.
+    MaybeError ClearInternal(CommandRecordingContext* commandContext,
+                             const SubresourceRange& range,
+                             TextureBase::ClearValue clearValue);
     MaybeError ReadStaging(CommandRecordingContext* commandContext,
                            const SubresourceRange& subresources,
                            const Origin3D& origin,
