@@ -878,6 +878,8 @@ class Impl {
 
     struct AccessorInfo {
         Value* object = nullptr;
+        Instruction* result = nullptr;
+        const type::Type* result_type = nullptr;
         utils::Vector<Value*, 1> indices;
     };
 
@@ -905,6 +907,13 @@ class Impl {
             info.object = res.Get();
         }
 
+        if (auto* sem = program_->Sem().Get(expr)->As<sem::Load>()) {
+            auto* ref = sem->ReferenceType();
+            info.result_type = ref->StoreType()->Clone(clone_ctx_.type_ctx);
+        } else {
+            info.result_type = program_->Sem().Get(expr)->Type()->Clone(clone_ctx_.type_ctx);
+        }
+
         // The AST chain is `inside-out` compared to what we need, which means the list it generates
         // is backwards. We need to operate on the list in reverse order to have the correct access
         // chain.
@@ -927,18 +936,26 @@ class Impl {
             }
         }
 
+        if (!info.indices.IsEmpty()) {
+            info.result = GenerateAccess(&info);
+        }
+        return info.result;
+    }
+
+    Instruction* GenerateAccess(AccessorInfo* info) {
+        // The access result type should match the source result type. If the source is a pointer,
+        // we generate a pointer.
         const type::Type* ty = nullptr;
-        if (auto* sem = program_->Sem().Get(expr)->As<sem::Load>()) {
-            auto* ref = sem->ReferenceType();
-            ty = builder_.ir.Types().pointer(ref->StoreType()->Clone(clone_ctx_.type_ctx),
-                                             ref->AddressSpace(), ref->Access());
+        if (info->object->Type()->Is<type::Pointer>() && !info->result_type->Is<type::Pointer>()) {
+            auto* ptr = info->object->Type()->As<type::Pointer>();
+            ty = builder_.ir.Types().pointer(info->result_type, ptr->AddressSpace(), ptr->Access());
         } else {
-            ty = program_->Sem().Get(expr)->UnwrapLoad()->Type()->Clone(clone_ctx_.type_ctx);
+            ty = info->result_type;
         }
 
-        auto* access = builder_.Access(ty, info.object, info.indices);
-        current_block_->Append(access);
-        return access;
+        auto* a = builder_.Access(ty, info->object, info->indices);
+        current_block_->Append(a);
+        return a;
     }
 
     bool GenerateIndexAccessor(const ast::IndexAccessorExpression* expr, AccessorInfo* info) {
@@ -963,13 +980,41 @@ class Impl {
             },
             [&](const sem::Swizzle* swizzle) {
                 auto& indices = swizzle->Indices();
+
+                // A single element swizzle is just treated as an accessor.
                 if (indices.Length() == 1) {
                     info->indices.Push(builder_.Constant(u32(indices[0])));
                     return true;
                 }
 
-                TINT_ICE(IR, diagnostics_) << "unhandled multi index swizzle";
-                return false;
+                // Store the result type away, this will be the result of the swizzle, but the
+                // intermediate steps need different result types.
+                auto* result_type = info->result_type;
+
+                // Emit any preceeding member/index accessors
+                if (!info->indices.IsEmpty()) {
+                    // The access chain is being split, the initial part of than will have a
+                    // resulting type that matches the object being swizzled.
+                    info->result_type = swizzle->Object()->Type()->Clone(clone_ctx_.type_ctx);
+                    info->object = GenerateAccess(info);
+                    info->indices.Clear();
+
+                    // If the sub-accessor generated a pointer result, make sure a load is emitted
+                    if (auto* ptr = info->object->Type()->As<type::Pointer>()) {
+                        auto* load = builder_.Load(info->object);
+                        info->result_type = ptr->StoreType();
+                        info->object = load;
+                        current_block_->Append(load);
+                    }
+                }
+
+                info->result = builder_.Swizzle(swizzle->Type()->Clone(clone_ctx_.type_ctx),
+                                                info->object, std::move(indices));
+                current_block_->Append(info->result);
+
+                info->object = info->result;
+                info->result_type = result_type;
+                return true;
             },
             [&](Default) {
                 TINT_ICE(IR, diagnostics_)
