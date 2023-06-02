@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946f827a_18f4d3f7",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T18:59:12Z",
+      "side": 1,
+      "message": "What about textures \u0026 samplers?",
+      "range": {
+        "startLine": 68,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 13
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52292d12_2ef4f56d",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T18:59:12Z",
+      "side": 1,
+      "message": "nice!",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 22
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed99b11_9281915d",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T18:59:12Z",
+      "side": 1,
+      "message": "Why do you need the `Is` here?",
+      "range": {
+        "startLine": 84,
+        "startChar": 27,
+        "endLine": 84,
+        "endChar": 79
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5bea9dd_9c808413",
+        "filename": "src/tint/ir/validate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T18:59:12Z",
+      "side": 1,
+      "message": "nit: What does it mean if this returns `false` and not an error?\nI think we should have a `struct Success{};` or something.",
+      "range": {
+        "startLine": 28,
+        "startChar": 14,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
