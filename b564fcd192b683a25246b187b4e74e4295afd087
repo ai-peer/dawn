@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b481201f_cc43830d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-02T07:34:48Z",
+      "side": 1,
+      "message": "Note failures should be resolved once https://chromium-review.googlesource.com/c/chromium/src/+/4582133 lands.",
+      "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
