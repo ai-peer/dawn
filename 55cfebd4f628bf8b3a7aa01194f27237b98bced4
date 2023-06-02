@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b627b6_d323aedc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-02T19:38:14Z",
+      "side": 1,
+      "message": "High level LGTM.",
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655f876a_fb5ff74a",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-02T19:38:14Z",
+      "side": 1,
+      "message": "Nit: `AddError`? (I know the `diag::List` method is `snake_case`, but this is new code).",
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "946f827a_18f4d3f7",
@@ -154,6 +188,23 @@
         "endLine": 28,
         "endChar": 18
       },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a4c44c_42ecd996",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-02T19:38:14Z",
+      "side": 1,
+      "message": "Can we just use `IRTestHelperBase` here now?",
       "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
