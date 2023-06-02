@@ -121,6 +121,24 @@
       "parentUuid": "dd1c3117_8cf85f7f",
       "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14633f9d_115c8a29",
+        "filename": "src/dawn/utils/ObjCUtils.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-02T22:26:02Z",
+      "side": 1,
+      "message": "I made it return a ScopedCALayer class so that it\u0027s automatically managed",
+      "parentUuid": "955d4d8b_7eb7e629",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
