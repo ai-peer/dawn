@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc138023_52e170a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-02T20:12:29Z",
+      "side": 1,
+      "message": "no so much right now :-/ did you see this thread https://dawn-review.googlesource.com/c/dawn/+/135301/comments/426df7bb_f5782932 ?",
+      "parentUuid": "84418f55_ee029bbd",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34249803_123f3c0b",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ade29bb8_e9fe6f07",
+        "filename": "src/dawn/native/metal/SwapChainMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-02T20:12:29Z",
+      "side": 1,
+      "message": "`[*mCurrentDrawable texture]` is autoreleased.\n\nI wanted to make it clear that we are adding a new owned reference and transferring it into Texture::CreateWrapping",
+      "parentUuid": "34249803_123f3c0b",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd1c3117_8cf85f7f",
         "filename": "src/dawn/utils/ObjCUtils.mm",
         "patchSetId": 4
@@ -48,6 +84,24 @@
       "writtenOn": "2023-06-02T11:37:08Z",
       "side": 1,
       "message": "Why the autoreleaspool + retain instead of nothing?",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "955d4d8b_7eb7e629",
+        "filename": "src/dawn/utils/ObjCUtils.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-02T20:12:29Z",
+      "side": 1,
+      "message": "`[CALayer layer]` returns an autoreleased layer which is not nice to work with in C++. So for composability, CreateFoo should return an owned reference to the object. We autorelease and keep another reference so that the returned reference is owned.\n\nBut what I should do is have the caller explicitly release this layer. I think it\u0027s leaked right now.",
+      "parentUuid": "dd1c3117_8cf85f7f",
       "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -46,6 +46,30 @@
       },
       "revId": "6267256dfea32d65c6c0a73ac1a5d91bb23560f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb0a8ce_7a6388bd",
+        "filename": "src/dawn/glfw/utils_metal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-02T20:12:29Z",
+      "side": 1,
+      "message": "[view layer] makes an autoreleased layer\n\n\nso the way this code is now, it could end up having 0 refs by the time you pass it into Dawn.\n\nin practice that might not really be the case - actually must not be the case since the tests are not crashing. It must be getting kept alive by internal references perhaps held by the NSWindow or NSView. We\u0027re currently relying on the fact that something else holds it alive - which does match your statement that we \"ask for other window types that the object outlives the wgpu::Surface.\"",
+      "parentUuid": "e00e546b_f8691dc7",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "6267256dfea32d65c6c0a73ac1a5d91bb23560f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
