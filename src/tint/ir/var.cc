@@ -19,14 +19,21 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Var);
 
 namespace tint::ir {
 
-Var::Var(const type::Type* ty) : type_(ty) {}
+Var::Var(const type::Type* ty) : type_(ty) {
+    // Default to no initializer.
+    operands_.Push(nullptr);
+}
 
 Var::~Var() = default;
 
 void Var::SetInitializer(Value* initializer) {
-    operands_.Push(initializer);
-    initializer->AddUsage({this, 0u});
-    // TODO(dsinclair): Probably should do a RemoveUsage on an existing initializer if set
+    if (operands_[0]) {
+        operands_[0]->RemoveUsage({this, 0u});
+    }
+    operands_[0] = initializer;
+    if (initializer) {
+        initializer->AddUsage({this, 0u});
+    }
 }
 
 }  // namespace tint::ir

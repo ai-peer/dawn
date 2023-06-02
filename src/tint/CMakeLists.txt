@@ -1509,6 +1509,7 @@ if(TINT_BUILD_TESTS)
       ir/test_helper.h
       ir/transform/add_empty_entry_point_test.cc
       ir/unary_test.cc
+      ir/var_test.cc
     )
   endif()
 

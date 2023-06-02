@@ -2307,6 +2307,7 @@ if (tint_build_unittests) {
         "ir/to_program_roundtrip_test.cc",
         "ir/transform/add_empty_entry_point_test.cc",
         "ir/unary_test.cc",
+        "ir/var_test.cc",
       ]
 
       deps = [
