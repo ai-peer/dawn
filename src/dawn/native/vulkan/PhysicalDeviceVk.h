@@ -45,6 +45,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
     bool IsAndroidQualcomm() const;
     bool IsIntelMesa() const;
 
+    uint32_t FindDefaultComputeSubgroupSize() const;
+
   private:
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
