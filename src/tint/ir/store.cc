@@ -22,8 +22,8 @@ namespace tint::ir {
 Store::Store(Value* to, Value* from) {
     TINT_ASSERT(IR, to);
     TINT_ASSERT(IR, from);
-    to->AddUsage(this);
-    from->AddUsage(this);
+    to->AddUsage({this, 0u});
+    from->AddUsage({this, 1u});
     operands_.Push(to);
     operands_.Push(from);
 }

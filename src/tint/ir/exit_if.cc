@@ -28,7 +28,7 @@ ExitIf::ExitIf(ir::If* i, utils::VectorRef<Value*> args /* = utils::Empty */) : 
 
     operands_ = std::move(args);
     for (auto* arg : args) {
-        arg->AddUsage(this);
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
     }
 }
 

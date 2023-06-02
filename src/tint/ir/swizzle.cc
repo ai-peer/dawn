@@ -25,7 +25,7 @@ namespace tint::ir {
 Swizzle::Swizzle(const type::Type* ty, Value* object, utils::VectorRef<uint32_t> indices)
     : result_type_(ty), indices_(std::move(indices)) {
     operands_.Push(object);
-    object->AddUsage(this);
+    object->AddUsage({this, 0u});
 }
 
 Swizzle::~Swizzle() = default;

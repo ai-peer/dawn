@@ -25,10 +25,10 @@ namespace tint::ir {
 UserCall::UserCall(const type::Type* ty, Function* func, utils::VectorRef<Value*> arguments)
     : Base(ty) {
     operands_.Push(func);
-    func->AddUsage(this);
+    func->AddUsage({this, 0u});
     for (auto* arg : arguments) {
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         operands_.Push(arg);
-        arg->AddUsage(this);
     }
 }
 

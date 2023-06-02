@@ -25,7 +25,7 @@ namespace tint::ir {
 Construct::Construct(const type::Type* ty, utils::VectorRef<Value*> arguments) : Base(ty) {
     for (auto* arg : arguments) {
         operands_.Push(arg);
-        arg->AddUsage(this);
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
     }
 }
 

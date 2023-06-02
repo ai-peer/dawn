@@ -25,7 +25,7 @@ Convert::Convert(const type::Type* to_type,
     : Base(to_type), from_type_(from_type) {
     for (auto* arg : arguments) {
         operands_.Push(arg);
-        arg->AddUsage(this);
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
     }
 }
 
