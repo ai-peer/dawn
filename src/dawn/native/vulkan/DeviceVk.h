@@ -163,8 +163,6 @@ class Device final : public DeviceBase {
     ResultOrError<VulkanDeviceKnobs> CreateDevice(VkPhysicalDevice vkPhysicalDevice);
     void GatherQueueFromDevice();
 
-    uint32_t FindComputeSubgroupSize() const;
-
     MaybeError CheckDebugLayerAndGenerateErrors();
     void AppendDebugLayerMessages(ErrorData* error) override;
     void CheckDebugMessagesAfterDestruction() const;

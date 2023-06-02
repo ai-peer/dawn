@@ -446,7 +446,10 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
         usedKnobs.subgroupSizeControlFeatures = mDeviceInfo.subgroupSizeControlFeatures;
         featuresChain.Add(&usedKnobs.subgroupSizeControlFeatures);
 
-        mComputeSubgroupSize = FindComputeSubgroupSize();
+        // Note that in the future when mComputeSubgroupSize becomes configurable, we may also need
+        // to update limits->v1.maxComputeInvocationsPerWorkgroup as Vulkan SPEC requires
+        // computeInvocationsPerWorkgroup <= maxComputeWorkgroupSubgroups x computeSubgroupSize.
+        mComputeSubgroupSize = ToBackend(GetPhysicalDevice())->FindDefaultComputeSubgroupSize();
     }
 
     if (mDeviceInfo.HasExt(DeviceExt::ZeroInitializeWorkgroupMemory)) {
@@ -587,32 +590,6 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
                             "vkCreateDevice"));
 
     return usedKnobs;
-}
-
-uint32_t Device::FindComputeSubgroupSize() const {
-    if (!mDeviceInfo.HasExt(DeviceExt::SubgroupSizeControl)) {
-        return 0;
-    }
-
-    const VkPhysicalDeviceSubgroupSizeControlPropertiesEXT& ext =
-        mDeviceInfo.subgroupSizeControlProperties;
-
-    if (ext.minSubgroupSize == ext.maxSubgroupSize) {
-        return 0;
-    }
-
-    // At the moment, only Intel devices support varying subgroup sizes and 16, which is the
-    // next value after the minimum of 8, is the sweet spot according to [1]. Hence the
-    // following heuristics, which may need to be adjusted in the future for other
-    // architectures, or if a specific API is added to let client code select the size..
-    //
-    // [1] https://bugs.freedesktop.org/show_bug.cgi?id=108875
-    uint32_t subgroupSize = ext.minSubgroupSize * 2;
-    if (subgroupSize <= ext.maxSubgroupSize) {
-        return subgroupSize;
-    } else {
-        return ext.minSubgroupSize;
-    }
 }
 
 void Device::GatherQueueFromDevice() {
