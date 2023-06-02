@@ -116,6 +116,9 @@ class TextureBase : public ApiObjectBase {
     void DestroyImpl() override;
     void AddInternalUsage(wgpu::TextureUsage usage);
 
+    // TODO(crbug.com/dawn/845): Use a more optimized data structure to save space
+    std::vector<bool> mIsSubresourceContentInitializedAtIndex;
+
   private:
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, ObjectBase::ErrorTag tag);
 
@@ -133,9 +136,6 @@ class TextureBase : public ApiObjectBase {
     // Textures track texture views created from them so that they can be destroyed when the texture
     // is destroyed.
     ApiObjectList mTextureViews;
-
-    // TODO(crbug.com/dawn/845): Use a more optimized data structure to save space
-    std::vector<bool> mIsSubresourceContentInitializedAtIndex;
 };
 
 class TextureViewBase : public ApiObjectBase {

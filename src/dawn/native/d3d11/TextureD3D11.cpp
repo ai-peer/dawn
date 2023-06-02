@@ -453,7 +453,22 @@ MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext*
     if (!IsSubresourceContentInitialized(range)) {
         // If subresource has not been initialized, clear it to black as it could contain
         // dirty bits from recycled memory
-        DAWN_TRY(Clear(commandContext, range, TextureBase::ClearValue::Zero));
+        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            for (uint32_t arrayLayer = range.baseArrayLayer;
+                 arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = range.baseMipLevel;
+                     mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
+                    uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
+                    ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
+                    if (!mIsSubresourceContentInitializedAtIndex[subresourceIndex]) {
+                        DAWN_TRY(Clear(commandContext,
+                                       SubresourceRange::MakeSingle(aspect, arrayLayer, mipLevel),
+                                       TextureBase::ClearValue::Zero));
+                        mIsSubresourceContentInitializedAtIndex[subresourceIndex] = true;
+                    }
+                }
+            }
+        }
     }
     return {};
 }
