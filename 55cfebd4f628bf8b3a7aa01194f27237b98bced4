@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "646a617d_291767d9",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T19:07:10Z",
+      "side": 1,
+      "message": "Yup, will need to be added I\u0027m guessing. This is just the very basics to get the the validator in place.",
+      "parentUuid": "946f827a_18f4d3f7",
+      "range": {
+        "startLine": 68,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 13
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "52292d12_2ef4f56d",
@@ -100,6 +124,30 @@
       "writtenOn": "2023-06-02T18:59:12Z",
       "side": 1,
       "message": "nit: What does it mean if this returns `false` and not an error?\nI think we should have a `struct Success{};` or something.",
+      "range": {
+        "startLine": 28,
+        "startChar": 14,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f22e90_0582a97b",
+        "filename": "src/tint/ir/validate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T19:07:10Z",
+      "side": 1,
+      "message": "That could work, the returning `false` I wasn\u0027t sure how to get around but using an empty struct seems like a good way to do it.",
+      "parentUuid": "a5bea9dd_9c808413",
       "range": {
         "startLine": 28,
         "startChar": 14,
