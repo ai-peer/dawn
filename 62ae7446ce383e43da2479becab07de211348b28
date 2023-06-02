@@ -35,6 +35,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3243bea_a518c4c6",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:11:43Z",
+      "side": 1,
+      "message": "Added more comments.",
+      "parentUuid": "12f66364_fb402db4",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d64c567_ada873f5",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:11:43Z",
+      "side": 1,
+      "message": "Used `Expect\u003cVoid\u003e` as the return type. More explicit that we\u0027re now checking an `error` member.",
+      "parentUuid": "86fa525e_5ed11a31",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c844a730_120a4d35",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-06-02T04:30:27Z",
       "side": 1,
       "message": "Maybe `if this should be a less-than expression wrap in parentheses to disambiguate` (although I don\u0027t really like disambiguate)\n\nJust, some words to make it sound less like we know what this means, to we don\u0027t know what this means (the `if this should be`) and need a hint.",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adcad330_30ced12d",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:11:43Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "c844a730_120a4d35",
       "revId": "62ae7446ce383e43da2479becab07de211348b28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14930097_041a70a7",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3130,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:11:43Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "f045c7c1_b4a2d852",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d27eb36_7baa5eaa",
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad9ac7a_17c3f4fd",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:11:43Z",
+      "side": 1,
+      "message": "Updated comment, return type and docs.",
+      "parentUuid": "1d27eb36_7baa5eaa",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffafcf9c_088a64ee",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-06-02T04:30:27Z",
       "side": 1,
       "message": "So, returns true if the token is not a template?",
+      "revId": "62ae7446ce383e43da2479becab07de211348b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d51f3a_6cc76312",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T13:11:43Z",
+      "side": 1,
+      "message": "Updated comment, return type and docs.",
+      "parentUuid": "ffafcf9c_088a64ee",
       "revId": "62ae7446ce383e43da2479becab07de211348b28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
