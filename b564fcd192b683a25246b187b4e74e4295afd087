@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bfd8df9_96399db7",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-02T22:16:54Z",
+      "side": 1,
+      "message": "I just modified the wire transparency for now since it was pretty easy to do.",
+      "parentUuid": "92f08a82_89e832e4",
+      "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cb0709a_cee65975",
@@ -66,6 +84,24 @@
       "writtenOn": "2023-06-02T19:37:29Z",
       "side": 1,
       "message": "shaderLocation is a vertex attribute index, not a vertex buffer index, so it\u0027s odd to use kMaxVertexBuffers here. It\u0027s OK because maxVertexBuffers is less than maxVertexAttributes, but can it just be 0?",
+      "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cfd2c91_90cc9f20",
+        "filename": "src/dawn/tests/unittests/validation/VertexStateValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-02T22:16:54Z",
+      "side": 1,
+      "message": "Done. I initially used `kMaxVertexBuffers` because it follows from the `for-loop` above, and the next index would\u0027ve been `kMaxVertexBuffers`. Updated to 0 now though since it really doesn\u0027t matter.",
+      "parentUuid": "9cb0709a_cee65975",
       "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
