@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2e807f9_4f8c4eda",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T17:28:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9ea234d5_317d5155",
+      "range": {
+        "startLine": 910,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 9
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e250a05d_c4c0614c",
@@ -196,6 +220,30 @@
       "side": 1,
       "message": "For `access`, possibly? But, that\u0027s a separate change as it\u0027s existing behaviour. I\u0027ll change in a followup.",
       "parentUuid": "2faf6435_8eb03dbe",
+      "range": {
+        "startLine": 265,
+        "startChar": 55,
+        "endLine": 265,
+        "endChar": 56
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dca94f9_b806ccfc",
+        "filename": "src/tint/ir/from_program_accessor_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-02T17:28:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8c30ab89_36075322",
       "range": {
         "startLine": 265,
         "startChar": 55,
