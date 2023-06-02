@@ -33,7 +33,7 @@ Loop::Loop(ir::Block* b,
 
     operands_ = std::move(args);
     for (auto* arg : args) {
-        arg->AddUsage(this);
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
     }
 }
 

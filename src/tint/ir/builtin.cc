@@ -27,7 +27,7 @@ Builtin::Builtin(const type::Type* ty, builtin::Function func, utils::VectorRef<
     : Base(ty), func_(func) {
     for (auto* arg : arguments) {
         operands_.Push(arg);
-        arg->AddUsage(this);
+        arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
     }
 }
 

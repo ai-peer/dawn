@@ -23,7 +23,7 @@ Switch::Switch(Value* cond, ir::Block* m) : condition_(cond), merge_(m) {
     TINT_ASSERT(IR, merge_);
 
     operands_.Push(condition_);
-    condition_->AddUsage(this);
+    condition_->AddUsage({this, 0u});
 }
 
 Switch::~Switch() = default;

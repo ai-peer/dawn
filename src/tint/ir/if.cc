@@ -25,7 +25,7 @@ If::If(Value* cond, ir::Block* t, ir::Block* f, ir::Block* m)
     TINT_ASSERT(IR, merge_);
 
     operands_.Push(condition_);
-    condition_->AddUsage(this);
+    condition_->AddUsage({this, 0u});
     true_->AddInboundBranch(this);
     false_->AddInboundBranch(this);
 }

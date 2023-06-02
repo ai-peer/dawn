@@ -25,7 +25,7 @@ Var::~Var() = default;
 
 void Var::SetInitializer(Value* initializer) {
     operands_.Push(initializer);
-    initializer->AddUsage(this);
+    initializer->AddUsage({this, 0u});
     // TODO(dsinclair): Probably should do a RemoveUsage on an existing initializer if set
 }
 
