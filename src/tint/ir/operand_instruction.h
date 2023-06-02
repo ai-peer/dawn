@@ -26,6 +26,19 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
     /// Destructor
     ~OperandInstruction() override = default;
 
+    /// @copydoc Instruction::SetOperand
+    void SetOperand(uint32_t index, ir::Value* value) override {
+        TINT_ASSERT(IR, index < operands_.Length());
+        if (operands_[index]) {
+            operands_[index]->RemoveUsage({this, index});
+        }
+        operands_[index] = value;
+        if (value) {
+            value->AddUsage({this, index});
+        }
+        return;
+    }
+
   protected:
     /// The operands to this instruction.
     utils::Vector<ir::Value*, N> operands_;
