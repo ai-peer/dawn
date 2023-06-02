@@ -24,7 +24,7 @@ Switch::Switch(Value* cond, ir::Block* m) : condition_(cond), merge_(m) {
 
     operands_.Push(condition_);
     if (condition_) {
-        condition_->AddUsage(this);
+        condition_->AddUsage({this, 0u});
     }
 }
 

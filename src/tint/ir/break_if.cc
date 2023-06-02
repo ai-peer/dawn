@@ -31,19 +31,18 @@ BreakIf::BreakIf(Value* condition,
 
     operands_.Push(condition);
     if (condition) {
-        condition->AddUsage(this);
+        condition->AddUsage({this, 0u});
     }
     if (loop_) {
-        loop_->AddUsage(this);
         loop_->Body()->AddInboundBranch(this);
         loop_->Merge()->AddInboundBranch(this);
     }
     for (auto* arg : args) {
         TINT_ASSERT(IR, arg);
-        operands_.Push(arg);
         if (arg) {
-            arg->AddUsage(this);
+            arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         }
+        operands_.Push(arg);
     }
 }
 

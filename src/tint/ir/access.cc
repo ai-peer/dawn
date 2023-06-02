@@ -31,14 +31,14 @@ Access::Access(const type::Type* ty, Value* object, utils::VectorRef<Value*> ind
 
     operands_.Push(object);
     if (object) {
-        object->AddUsage(this);
+        object->AddUsage({this, 0u});
     }
     for (auto* idx : indices) {
         TINT_ASSERT(IR, idx);
-        operands_.Push(idx);
         if (idx) {
-            idx->AddUsage(this);
+            idx->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         }
+        operands_.Push(idx);
     }
 }
 

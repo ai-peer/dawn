@@ -28,10 +28,10 @@ Binary::Binary(enum Kind kind, const type::Type* res_ty, Value* lhs, Value* rhs)
     operands_.Push(lhs);
     operands_.Push(rhs);
     if (lhs) {
-        lhs->AddUsage(this);
+        lhs->AddUsage({this, 0u});
     }
     if (rhs) {
-        rhs->AddUsage(this);
+        rhs->AddUsage({this, 1u});
     }
 }
 

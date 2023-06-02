@@ -22,14 +22,13 @@ namespace tint::ir {
 Store::Store(Value* to, Value* from) {
     TINT_ASSERT(IR, to);
     TINT_ASSERT(IR, from);
-
     operands_.Push(to);
     operands_.Push(from);
     if (to) {
-        to->AddUsage(this);
+        to->AddUsage({this, 0u});
     }
     if (from) {
-        from->AddUsage(this);
+        from->AddUsage({this, 1u});
     }
 }
 

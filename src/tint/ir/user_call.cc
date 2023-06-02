@@ -28,15 +28,15 @@ UserCall::UserCall(const type::Type* ty, Function* func, utils::VectorRef<Value*
 
     operands_.Push(func);
     if (func) {
-        func->AddUsage(this);
+        func->AddUsage({this, 0u});
     }
 
     for (auto* arg : arguments) {
         TINT_ASSERT(IR, arg);
-        operands_.Push(arg);
         if (arg) {
-            arg->AddUsage(this);
+            arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         }
+        operands_.Push(arg);
     }
 }
 

@@ -27,16 +27,15 @@ ExitLoop::ExitLoop(ir::Loop* loop, utils::VectorRef<Value*> args /* = utils::Emp
     TINT_ASSERT(IR, loop_);
 
     if (loop_) {
-        loop_->AddUsage(this);
         loop_->Merge()->AddInboundBranch(this);
     }
 
-    operands_ = std::move(args);
     for (auto* arg : args) {
         TINT_ASSERT(IR, arg);
         if (arg) {
-            arg->AddUsage(this);
+            arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         }
+        operands_.Push(arg);
     }
 }
 

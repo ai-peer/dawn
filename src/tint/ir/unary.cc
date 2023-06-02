@@ -25,7 +25,7 @@ Unary::Unary(enum Kind k, const type::Type* res_ty, Value* val) : kind_(k), resu
 
     operands_.Push(val);
     if (val) {
-        val->AddUsage(this);
+        val->AddUsage({this, 0u});
     }
 }
 

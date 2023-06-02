@@ -27,7 +27,7 @@ If::If(Value* cond, ir::Block* t, ir::Block* f, ir::Block* m)
 
     operands_.Push(condition_);
     if (condition_) {
-        condition_->AddUsage(this);
+        condition_->AddUsage({this, 0u});
     }
     if (true_) {
         true_->AddInboundBranch(this);

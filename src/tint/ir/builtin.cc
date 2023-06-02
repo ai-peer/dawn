@@ -29,10 +29,10 @@ Builtin::Builtin(const type::Type* ty, builtin::Function func, utils::VectorRef<
     TINT_ASSERT(IR, func != builtin::Function::kTintMaterialize);
     for (auto* arg : arguments) {
         TINT_ASSERT(IR, arg);
-        operands_.Push(arg);
         if (arg) {
-            arg->AddUsage(this);
+            arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         }
+        operands_.Push(arg);
     }
 }
 

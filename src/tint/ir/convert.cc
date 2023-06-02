@@ -27,10 +27,10 @@ Convert::Convert(const type::Type* to_type,
     TINT_ASSERT(IR, !arguments.IsEmpty());
     for (auto* arg : arguments) {
         TINT_ASSERT(IR, arg);
-        operands_.Push(arg);
         if (arg) {
-            arg->AddUsage(this);
+            arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         }
+        operands_.Push(arg);
     }
 }
 

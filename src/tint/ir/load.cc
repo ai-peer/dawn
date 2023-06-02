@@ -22,10 +22,9 @@ namespace tint::ir {
 Load::Load(const type::Type* type, Value* f) : Base(), result_type_(type) {
     TINT_ASSERT(IR, result_type_);
     TINT_ASSERT(IR, f);
-
     operands_.Push(f);
     if (f) {
-        f->AddUsage(this);
+        f->AddUsage({this, 0u});
     }
 }
 

@@ -31,7 +31,7 @@ Swizzle::Swizzle(const type::Type* ty, Value* object, utils::VectorRef<uint32_t>
 
     operands_.Push(object);
     if (object) {
-        object->AddUsage(this);
+        object->AddUsage({this, 0u});
     }
 
     for (auto idx : indices) {

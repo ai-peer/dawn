@@ -23,7 +23,7 @@ Bitcast::Bitcast(const type::Type* ty, Value* val) : Base(ty) {
     TINT_ASSERT(IR, val);
     operands_.Push(val);
     if (val) {
-        val->AddUsage(this);
+        val->AddUsage({this, 0u});
     }
 }
 

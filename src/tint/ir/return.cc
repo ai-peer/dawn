@@ -26,15 +26,15 @@ Return::Return(Function* func, utils::VectorRef<Value*> args) : func_(func) {
     TINT_ASSERT(IR, func_);
 
     if (func_) {
-        func_->AddUsage(this);
+        func_->AddUsage({this, 0u});
     }
 
-    operands_ = std::move(args);
     for (auto* arg : args) {
         TINT_ASSERT(IR, arg);
         if (arg) {
-            arg->AddUsage(this);
+            arg->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
         }
+        operands_.Push(arg);
     }
 }
 
