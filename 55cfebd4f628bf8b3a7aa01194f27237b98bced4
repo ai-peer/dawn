@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56d9c83_ff22e6b3",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T22:11:30Z",
+      "side": 1,
+      "message": "Done. This new fangled camel case ...",
+      "parentUuid": "655f876a_fb5ff74a",
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "946f827a_18f4d3f7",
@@ -145,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e40ca270_1693ed5f",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T22:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ed99b11_9281915d",
+      "range": {
+        "startLine": 84,
+        "startChar": 27,
+        "endLine": 84,
+        "endChar": 79
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5bea9dd_9c808413",
@@ -192,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0bda4ce_0da4e78c",
+        "filename": "src/tint/ir/validate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T22:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19f22e90_0582a97b",
+      "range": {
+        "startLine": 28,
+        "startChar": 14,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83a4c44c_42ecd996",
@@ -205,6 +271,24 @@
       "writtenOn": "2023-06-02T19:38:14Z",
       "side": 1,
       "message": "Can we just use `IRTestHelperBase` here now?",
+      "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a2d4fd_d7ffe45a",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T22:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83a4c44c_42ecd996",
       "revId": "55cfebd4f628bf8b3a7aa01194f27237b98bced4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
