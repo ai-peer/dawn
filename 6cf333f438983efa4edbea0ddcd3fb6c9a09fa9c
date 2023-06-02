@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84418f55_ee029bbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-02T11:37:08Z",
+      "side": 1,
+      "message": "LGTM. Any insights in how we can debug leaks?",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34249803_123f3c0b",
+        "filename": "src/dawn/native/metal/SwapChainMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-02T11:37:08Z",
+      "side": 1,
+      "message": "Why did this constructor need to be added explicitly?",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1c3117_8cf85f7f",
+        "filename": "src/dawn/utils/ObjCUtils.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-02T11:37:08Z",
+      "side": 1,
+      "message": "Why the autoreleaspool + retain instead of nothing?",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
