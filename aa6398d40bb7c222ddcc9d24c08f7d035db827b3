@@ -63,6 +63,30 @@
       },
       "revId": "aa6398d40bb7c222ddcc9d24c08f7d035db827b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a939eb_177faedf",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-02T23:36:10Z",
+      "side": 1,
+      "message": "hm, I don\u0027t think it\u0027s OK - that means the size of the serialized DeviceDescriptor could be different on the client and server.\n\nWe really shouldn\u0027t be attempting to send function pointers at all.\n\nThis is a preexisting issue so OK not to fix it in this CL, but I think we should soon after.\n\nI think ideally we should find a way so that deviceLostCallback and deviceLostUserdata aren\u0027t even included in the transfer struct at all.\n\nwe might do that by detecting the types of these non-serializable types so that they aren\u0027t declared in the transfer struct (WGPUDeviceDescriptorTransfer) - and then have WGPUDeviceDescriptorSerialize validate they are null and not try to assign into the transfer struct (since they don\u0027t exist there). It looks like it validates deviceLostCallback right now, but not deviceLostUserdata.",
+      "parentUuid": "386bd0b3_236f34b7",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 38
+      },
+      "revId": "aa6398d40bb7c222ddcc9d24c08f7d035db827b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
