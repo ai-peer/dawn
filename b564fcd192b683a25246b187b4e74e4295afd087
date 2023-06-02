@@ -33,6 +33,41 @@
       "message": "I think we need to modify the definition of wire transparency for NativeType then. Maybe the wire transparency could be defined explicitly in the dawn.json instead of assumed to true for all native types? https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/dawn_json_generator.py;drc\u003dcd1629420e1554a88c37c2811cbf93d64ed9f22a;l\u003d161",
       "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f08a82_89e832e4",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-02T19:37:29Z",
+      "side": 1,
+      "message": "How strongly do we care for the wire format to be platform-independent? Could we just use size_t instead of storing as uint64_t?\n\nStrictly speaking, isn\u0027t it also OK if we do an unguarded cast here? I think the validation of this size happens after this.",
+      "parentUuid": "2a3b60f3_d9f09dda",
+      "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb0709a_cee65975",
+        "filename": "src/dawn/tests/unittests/validation/VertexStateValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-02T19:37:29Z",
+      "side": 1,
+      "message": "shaderLocation is a vertex attribute index, not a vertex buffer index, so it\u0027s odd to use kMaxVertexBuffers here. It\u0027s OK because maxVertexBuffers is less than maxVertexAttributes, but can it just be 0?",
+      "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
