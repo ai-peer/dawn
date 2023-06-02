@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b848e0_245d2268",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-02T08:14:26Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "5c28a0d241cc7646d44edac895d1414d07508842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee35cc6_cf32695e",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-02T08:14:26Z",
+      "side": 1,
+      "message": "nit: we could compute once on initialization and then reuse the result for both the limit and in DeviceVk.",
+      "revId": "5c28a0d241cc7646d44edac895d1414d07508842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
