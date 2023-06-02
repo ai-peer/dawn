@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e7c232f0_168aa1c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T13:24:06Z",
+      "side": 1,
+      "message": "It was built that way originally as we didn\u0027t need it yet. After this lands I\u0027ll probably add some kind of `constant` instruction which creates the constants now that they\u0027re deduplicated.",
+      "parentUuid": "39d438e7_0f40b261",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 18
+      },
+      "revId": "594079e1115612c14aaf073878e330870b44ad98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e42f02f4_cc5f968c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -61,6 +85,24 @@
       "writtenOn": "2023-06-02T08:56:18Z",
       "side": 1,
       "message": "I\u0027m clearly not understanding something. Why do we want to inline SSA values into other instructions? Seems counter to SSA.",
+      "revId": "594079e1115612c14aaf073878e330870b44ad98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802110cc_23a3a5b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T13:24:06Z",
+      "side": 1,
+      "message": "Because it was easy, I hadn\u0027t gotten there and constants were not deduplicated. We dedupe constants now, and it\u0027s become a problem so I\u0027m planning on changing it in a followup.\n\nWanted to land this first because the cleanup is unrelated to let swizzles, it\u0027s just how constants are currently emitted.",
+      "parentUuid": "e42f02f4_cc5f968c",
       "revId": "594079e1115612c14aaf073878e330870b44ad98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -78,6 +120,30 @@
       "writtenOn": "2023-06-02T08:56:18Z",
       "side": 1,
       "message": "This is *much* harder to read than before.",
+      "range": {
+        "startLine": 399,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 118
+      },
+      "revId": "594079e1115612c14aaf073878e330870b44ad98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd21854_83af189c",
+        "filename": "src/tint/ir/from_program_accessor_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T13:24:06Z",
+      "side": 1,
+      "message": "Yup, new output is not good, but it\u0027s the existing format for `let` data. Will do a followup to make it nicer.",
+      "parentUuid": "f335adbf_a8463586",
       "range": {
         "startLine": 399,
         "startChar": 0,
