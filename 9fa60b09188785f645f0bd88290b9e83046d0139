@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ea234d5_317d5155",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T17:02:28Z",
+      "side": 1,
+      "message": "Using that, in the case of the Load instruction I end up with the `ref` type, not the `StoreType`:\n\n```\n-    %3:ptr\u003cfunction, ref\u003cfunction, f32, read_write\u003e, read_write\u003e \u003d access %a 1u\n-    %b:ref\u003cfunction, f32, read_write\u003e \u003d load %3\n+    %3:ptr\u003cfunction, f32, read_write\u003e \u003d access %a 1u\n+    %b:f32 \u003d load %3\n```",
+      "parentUuid": "6bbe814c_0f79fdb6",
+      "range": {
+        "startLine": 910,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 9
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e250a05d_c4c0614c",
         "filename": "src/tint/ir/from_program.cc",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-02T13:52:48Z",
       "side": 1,
       "message": "`info` doesn\u0027t appear to be modified by this function. Pass as `const AccessorInfo\u0026`?",
+      "range": {
+        "startLine": 945,
+        "startChar": 32,
+        "endLine": 945,
+        "endChar": 50
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaac923d_2364541c",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T17:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e250a05d_c4c0614c",
       "range": {
         "startLine": 945,
         "startChar": 32,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09269684_8a00186c",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T17:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af98532b_6121fa81",
+      "range": {
+        "startLine": 961,
+        "startChar": 73,
+        "endLine": 961,
+        "endChar": 91
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2faf6435_8eb03dbe",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-06-02T13:52:48Z",
       "side": 1,
       "message": "Should operands be comma separated?",
+      "range": {
+        "startLine": 265,
+        "startChar": 55,
+        "endLine": 265,
+        "endChar": 56
+      },
+      "revId": "9fa60b09188785f645f0bd88290b9e83046d0139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c30ab89_36075322",
+        "filename": "src/tint/ir/from_program_accessor_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-02T17:02:28Z",
+      "side": 1,
+      "message": "For `access`, possibly? But, that\u0027s a separate change as it\u0027s existing behaviour. I\u0027ll change in a followup.",
+      "parentUuid": "2faf6435_8eb03dbe",
       "range": {
         "startLine": 265,
         "startChar": 55,
