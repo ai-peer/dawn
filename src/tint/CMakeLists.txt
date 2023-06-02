@@ -1512,6 +1512,7 @@ if(TINT_BUILD_TESTS)
       ir/store_test.cc
       ir/transform/add_empty_entry_point_test.cc
       ir/unary_test.cc
+      ir/var_test.cc
     )
   endif()
 
