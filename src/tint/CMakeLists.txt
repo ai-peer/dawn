@@ -786,6 +786,8 @@ if(${TINT_BUILD_IR})
     ir/unary.h
     ir/user_call.cc
     ir/user_call.h
+    ir/validate.cc
+    ir/validate.h
     ir/value.cc
     ir/value.h
     ir/var.cc
@@ -1507,6 +1509,7 @@ if(TINT_BUILD_TESTS)
       ir/test_helper.h
       ir/transform/add_empty_entry_point_test.cc
       ir/unary_test.cc
+      ir/validate_test.cc
     )
   endif()
 
