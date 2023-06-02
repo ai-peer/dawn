@@ -16,6 +16,23 @@
       "message": "Note failures should be resolved once https://chromium-review.googlesource.com/c/chromium/src/+/4582133 lands.",
       "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3b60f3_d9f09dda",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-02T08:19:28Z",
+      "side": 1,
+      "message": "I think we need to modify the definition of wire transparency for NativeType then. Maybe the wire transparency could be defined explicitly in the dawn.json instead of assumed to true for all native types? https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/dawn_json_generator.py;drc\u003dcd1629420e1554a88c37c2811cbf93d64ed9f22a;l\u003d161",
+      "revId": "b564fcd192b683a25246b187b4e74e4295afd087",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
