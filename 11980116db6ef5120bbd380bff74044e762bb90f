@@ -50,6 +50,41 @@
       "message": "Could we check for the adapter\u0027s compatibility mode and have list of the storage texture formats for the compatibility mode? +CC Stephen for this.",
       "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689cd683_47e73047",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-04T07:40:16Z",
+      "side": 1,
+      "message": "Probably we could pass the adapter\u0027s compatibility mode to `TextureFormatSupportsStorageTexture` at [1]. Beforehand we need to decide which formats we are going t support texture storage in the compatibility mode.\n```\n if (!utils::TextureFormatSupportsStorageTexture(format, adpaterMode)) {\n            continue;\n }\n```",
+      "parentUuid": "9c7a3d31_bc38d758",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60286ea8_13b48b2c",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-04T07:40:16Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
