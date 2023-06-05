@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "a838ad3f3b467179b2ca69561e3b289ea9bc7d79",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd8fb42_74e46c03",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2580,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-05T17:03:57Z",
+      "side": 1,
+      "message": "I thought we had agreement upstream for this\n\nhttps://github.com/webgpu-native/webgpu-headers/issues/89",
+      "revId": "a838ad3f3b467179b2ca69561e3b289ea9bc7d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
