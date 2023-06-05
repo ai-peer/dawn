@@ -105,6 +105,24 @@
       "parentUuid": "429eedb4_3644a210",
       "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92637ab2_6ff5dffd",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-05T17:36:19Z",
+      "side": 1,
+      "message": "Done: crbug.com/tint/1953",
+      "parentUuid": "a04b6a24_8d6dce3f",
+      "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
