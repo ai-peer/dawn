@@ -146,6 +146,30 @@
       },
       "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d2132c_b46c11b4",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-05T13:51:25Z",
+      "side": 1,
+      "message": "Okay. So when the setters are added to these classes, we\u0027ll use them in the constructors and remove these asserts here? If so, SGTM",
+      "parentUuid": "8e605558_08bd5e6d",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
