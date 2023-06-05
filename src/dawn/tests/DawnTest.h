@@ -728,6 +728,16 @@ DawnTestWithParams<Params>::DawnTestWithParams() : DawnTestBase(this->GetParam()
 using DawnTest = DawnTestWithParams<>;
 
 // Instantiate the test once for each backend provided after the first argument. Use it like this:
+//     DAWN_INSTANTIATE_TESTV(MyTestFixture, std::vector<BackendTestConfig>({{MetalBackend},
+//     {OpenGLBackend}})
+#define DAWN_INSTANTIATE_TEST_V(testName, testParams)                                              \
+    INSTANTIATE_TEST_SUITE_P(, testName,                                                           \
+                             testing::ValuesIn(::detail::GetAvailableAdapterTestParamsForBackends( \
+                                 testParams.data(), testParams.size())),                           \
+                             DawnTestBase::PrintToStringParamName(#testName));                     \
+    GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(testName)
+
+// Instantiate the test once for each backend provided after the first argument. Use it like this:
 //     DAWN_INSTANTIATE_TEST(MyTestFixture, MetalBackend, OpenGLBackend)
 #define DAWN_INSTANTIATE_TEST(testName, ...)                                            \
     const decltype(DAWN_PP_GET_HEAD(__VA_ARGS__)) testName##params[] = {__VA_ARGS__};   \
