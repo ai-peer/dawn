@@ -33,6 +33,24 @@
       "message": "Given that this is the validator that should catch All The Bad Things, we should probably check for nullptrs before each of the `Switch()`s, or in the `Default` cases, before dereferencing for `TypeInfo()`.",
       "revId": "1eb765de9a57e172fbcce1ed5a5a3360b7c90a09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2724d2c_7e2eb4f0",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T18:50:52Z",
+      "side": 1,
+      "message": "Yea, those will probably be needed in each of these methods. Holding off for now so we can add tests with the checks. This is specifically just getting the bits in place so we can start calling into the validator without hitting the default unhandled cases at the moment.",
+      "parentUuid": "49f63cc8_2a1659b4",
+      "revId": "1eb765de9a57e172fbcce1ed5a5a3360b7c90a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
