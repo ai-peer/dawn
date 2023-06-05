@@ -34,6 +34,47 @@
       "parentUuid": "bcd6036f_28155ea8",
       "revId": "7222228d3c1f4256e589332ee2dbcd92747dd1aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ebd189_26922af1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-05T01:55:14Z",
+      "side": 1,
+      "message": "It\u0027s breaking `VideoViewsTests.CreateVideoTextureWithoutInitializedData`. It seems to be caused by [1]. If this is expected, maybe we can just remove this case.",
+      "parentUuid": "638668a3_2ba0031b",
+      "revId": "7222228d3c1f4256e589332ee2dbcd92747dd1aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a15391_240accc3",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-05T01:55:14Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 923,
+        "startChar": 7,
+        "endLine": 923,
+        "endChar": 34
+      },
+      "revId": "7222228d3c1f4256e589332ee2dbcd92747dd1aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
