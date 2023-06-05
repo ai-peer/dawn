@@ -87,6 +87,24 @@
       "parentUuid": "6cac51f6_9a8369af",
       "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a04b6a24_8d6dce3f",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T15:42:00Z",
+      "side": 1,
+      "message": "Validating in the validator is fine, can you file a bug for adding this validation so we don\u0027t lose track?",
+      "parentUuid": "429eedb4_3644a210",
+      "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
