@@ -122,6 +122,30 @@
       },
       "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e605558_08bd5e6d",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T13:30:56Z",
+      "side": 1,
+      "message": "The setters do check for nullability and I\u0027m planning on taking a pass at any one that allows mutating the vector directly to use setters if possible, so we can keep the nullability requirements.",
+      "parentUuid": "d2cfd966_57488f17",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
