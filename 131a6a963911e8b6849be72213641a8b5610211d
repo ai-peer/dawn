@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f701a2c4_72e1183b",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:13:04Z",
+      "side": 1,
+      "message": "Should also be able to check `access-\u003eType()` as it should be the same pointer/non-pointer as the `Object()-\u003eType()`",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8af6be10_60834ba6",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:13:04Z",
+      "side": 1,
+      "message": "return and remove the `else` ?",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68b74662_b0ca0701",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:13:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand this, why does this have to be a vector if the index is not constant? Couldn\u0027t it be an array or a matrix?",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
