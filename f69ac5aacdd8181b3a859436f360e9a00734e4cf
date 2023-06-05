@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32f4b508_0a11eb53",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-05T14:40:15Z",
+      "side": 1,
+      "message": "Without it, we cannot import external textures with those formats, we can still create those texture in those formats, right?",
+      "parentUuid": "61eb0d39_8e7175fd",
+      "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcf76347_0e0a564d",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.h",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-05T14:29:24Z",
       "side": 1,
       "message": "Instead of introducing a new macro, maybe this could be `bool IsBackendSupported(backend)` and we\u0027d skip manually in VideoViewTests.cpp. Not sure if something else would prevent doing this approach.",
+      "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4653064f_7508f5fd",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-05T14:40:15Z",
+      "side": 1,
+      "message": "The problem the VideoViewsTestBackend implementations only compile on some platforms with certain configuration. And the implementations are different in each configuration. All are controlled in the BUILD.gn file. So to do your suggestion, we need to have a default implementation with `IsBackendSupported` return false, and only compile it when other implementations are not compiled. I think it involve too much changes, and it is not sure the result will be better.",
+      "parentUuid": "bcf76347_0e0a564d",
       "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
