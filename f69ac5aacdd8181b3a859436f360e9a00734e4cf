@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "372b0c79_dfdd2727",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-05T15:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8423fb1b_52e502a4",
+      "range": {
+        "startLine": 7,
+        "startChar": 38,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6197392c_f4c65403",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -90,6 +114,24 @@
       "side": 1,
       "message": "Unfortunately we can\u0027t, see https://dawn-review.googlesource.com/c/dawn/+/135660",
       "parentUuid": "32f4b508_0a11eb53",
+      "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b19d384_d28cd9df",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-05T15:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "380946d2_57777b33",
       "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
