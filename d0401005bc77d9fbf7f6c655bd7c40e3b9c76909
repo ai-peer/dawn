@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea381a65_b5ad40e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T12:00:37Z",
+      "side": 1,
+      "message": "Things are still mutable. If we decide we need to be able to pass a `nullptr` in here we can loosen the restrictions, currently everything has a value.",
+      "parentUuid": "b34d6965_6efba2bd",
+      "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6482b9e8_b3711484",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-06-05T09:50:04Z",
       "side": 1,
       "message": "Using your `TINT_ASSERT_OR_RETURN` would avoid the need to check for null pointers here.\n\nThere\u0027s also the wider question about whether we should be asserting. If one of the goals of the IR is that most things are mutable, then are we expecting for these fields to be reassignable after construction? If so, why couldn\u0027t the pointers be null? That would allow for a constructor to be called with incomplete arguments.\n\nIf we are going for a mutable design, then maybe we should just forward the arguments to setters, which can deal with nullptr.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "706cde2c_fdddbefe",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T12:00:37Z",
+      "side": 1,
+      "message": "I didn\u0027t use the `OR_RETURN` so that if the indices are include it would also emit an ICE for those.\n\nI\u0027d rather be as defensive as possible and we can loosen up later if needed. Currently everything that is created knows it\u0027s creation value. If we get to the point where we don\u0027t then we can loosen the restrictions.",
+      "parentUuid": "6482b9e8_b3711484",
       "range": {
         "startLine": 32,
         "startChar": 4,
