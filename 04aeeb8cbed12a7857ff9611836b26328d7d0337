@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f1b4f7_5f720fb8",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:56:24Z",
+      "side": 1,
+      "message": "In the case of `!wrapped`, would this be simpler if we could just do something like:\n\n```\nif (!wrapped) {\n  var-\u003eSetType(ir-\u003eTypes().pointer(block_struct, ptr-\u003eAddressSpace(), ptr-\u003eAccess());\n  return;\n}\n```\n\nThen, we just need to create a replacement var in the case of a wrapped struct?\n\n(Even then, we could replace the type and just update usages instead of creating a new declaration?)",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc98a22d_4172deb2",
+        "filename": "src/tint/ir/transform/block_decorated_structs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:56:24Z",
+      "side": 1,
+      "message": "What does this do?",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
