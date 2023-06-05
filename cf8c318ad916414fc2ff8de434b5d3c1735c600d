@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2b8caaa_8c08928d",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T11:24:55Z",
+      "side": 1,
+      "message": "nit: It\u0027d be nice to have to opt-in to this instead of opt-out, so that we don\u0027t inadvertently mark something wire transparent which isn\u0027t. (also we could update codegen.md).\n\nCould be a follow-up though",
+      "revId": "cf8c318ad916414fc2ff8de434b5d3c1735c600d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
