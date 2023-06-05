@@ -69,6 +69,24 @@
       "parentUuid": "d9a25b46_77d48daf",
       "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "429eedb4_3644a210",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-05T14:19:13Z",
+      "side": 1,
+      "message": "If you feel that this doesn\u0027t belong in the IR validator, then I can guard here, but the more we can put into the validator, the less validation we have to duplicate across the various backends.",
+      "parentUuid": "6cac51f6_9a8369af",
+      "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
