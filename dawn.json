@@ -319,7 +319,6 @@
         "category": "structure",
         "chained": "in",
         "chain roots": ["bind group entry"],
-        "tags": ["dawn"],
         "members": [
             {"name": "external texture", "type": "external texture"}
         ]
@@ -329,7 +328,6 @@
         "category": "structure",
         "chained": "in",
         "chain roots": ["bind group layout entry"],
-        "tags": ["dawn"],
         "members": []
     },
 
@@ -1035,7 +1033,6 @@
             {
                 "name": "create external texture",
                 "returns": "external texture",
-                "tags": ["dawn"],
                 "args": [
                     {"name": "external texture descriptor", "type": "external texture descriptor", "annotation": "const*"}
                 ]
@@ -1363,7 +1360,6 @@
     },
     "extent 2D": {
         "category": "structure",
-        "tags": ["dawn"],
         "_TODO": "crbug.com/1316671: Remove default value of 'width' after chromium side chagnes landed",
         "members": [
             {"name": "width", "type": "uint32_t", "default": 0},
@@ -1380,7 +1376,6 @@
     },
     "external texture": {
         "category": "object",
-        "tags": ["dawn"],
         "methods": [
             {
                 "name": "set label",
@@ -1405,7 +1400,6 @@
     },
     "external texture rotation":{
         "category": "enum",
-        "tags": ["dawn"],
         "values": [
             {"value": 0, "name": "rotate 0 degrees"},
             {"value": 1, "name": "rotate 90 degrees"},
@@ -1416,7 +1410,6 @@
     "external texture descriptor": {
         "category": "structure",
         "extensible": "in",
-        "tags": ["dawn"],
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "plane 0", "type": "texture view"},
@@ -1613,7 +1606,6 @@
     },
     "origin 2D": {
         "category": "structure",
-        "tags": ["dawn"],
         "members": [
             {"name": "x", "type": "uint32_t", "default": "0"},
             {"name": "y", "type": "uint32_t", "default": "0"}
@@ -2609,8 +2601,8 @@
             {"value": 9, "name": "surface descriptor from android native window", "tags": ["native"]},
             {"value": 10, "name": "surface descriptor from xcb window", "tags": ["upstream"]},
             {"value": 11, "name": "surface descriptor from windows core window", "tags": ["dawn"]},
-            {"value": 12, "name": "external texture binding entry", "tags": ["dawn"]},
-            {"value": 13, "name": "external texture binding layout", "tags": ["dawn"]},
+            {"value": 12, "name": "external texture binding entry" },
+            {"value": 13, "name": "external texture binding layout" },
             {"value": 14, "name": "surface descriptor from windows swap chain panel", "tags": ["dawn"]},
             {"value": 15, "name": "render pass descriptor max draw count"},
             {"value": 1000, "name": "dawn texture internal usage descriptor", "tags": ["dawn"]},
