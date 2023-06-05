@@ -34,6 +34,24 @@
       "parentUuid": "e2b8caaa_8c08928d",
       "revId": "cf8c318ad916414fc2ff8de434b5d3c1735c600d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e452714e_35b6ac74",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-05T20:17:30Z",
+      "side": 1,
+      "message": "Actually, I just rolled the codegen.md changes into this one. Will submit with those changes for now because I think that opt-out makes more sense for native types for now, and I will be removing the field for function pointers in follow up.",
+      "parentUuid": "612a935a_1b84f675",
+      "revId": "cf8c318ad916414fc2ff8de434b5d3c1735c600d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
