@@ -76,7 +76,6 @@
         if ({{in}} != nullptr) {
             return WireResult::FatalError;
         }
-        {{out}} = nullptr;
     {%- else -%}
         {{out}} = {{in}};
     {%- endif -%}
@@ -100,9 +99,6 @@
         {%- endif -%}
     {%- elif member.type.category == "function pointer" -%}
         //* Function pointers cannot be deserialized.
-        if ({{in}} != nullptr) {
-            return WireResult::FatalError;
-        }
         {{out}} = nullptr;
     {%- elif member.type.name.get() == "size_t" -%}
         // Deserializing into size_t requires check that the uint64_t used on the wire won't narrow.
@@ -141,7 +137,7 @@
         {% endif %}
 
         //* Value types are directly in the command, objects being replaced with their IDs.
-        {% for member in members if member.annotation == "value" %}
+        {% for member in members if member.annotation == "value" and member.type.category != "function pointer" %}
             {{member_transfer_type(member)}} {{as_varName(member.name)}};
         {% endfor %}
 
@@ -246,6 +242,17 @@
             {{serialize_member(member, "record." + memberName, "transfer->" + memberName)}}
         {% endfor %}
 
+        //* Validations for members that should "skip_serialize".
+        {%- for member in members if member.skip_serialize %}
+            {% set memberName = as_varName(member.name) %}
+            {% if member.annotation == "*" %}
+                //* Pointer types that should be skipped must be nullptr.
+                if (record.{{memberName}} != nullptr) {
+                    return WireResult::FatalError;
+                }
+            {%- endif -%}
+        {% endfor %}
+
         {% if record.extensible %}
             if (record.nextInChain != nullptr) {
                 transfer->hasNextInChain = true;
@@ -341,6 +348,15 @@
             {{deserialize_member(member, "transfer->" + memberName, "record->" + memberName)}}
         {% endfor %}
 
+        //* Default values for deserialization of "skip_serialize" members.
+        {%- for member in members if member.skip_serialize %}
+            {% set memberName = as_varName(member.name) %}
+            {% if member.annotation == "*" %}
+                //* Pointer types should just default as nullptr.
+                record->{{memberName}} = nullptr;
+            {%- endif -%}
+        {% endfor %}
+
         {% if record.extensible %}
             record->nextInChain = nullptr;
             if (transfer->hasNextInChain) {
@@ -390,7 +406,7 @@
         {% endfor %}
 
         //* Get extra buffer data, and copy pointed to values in extra allocated space.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" %}
+        {% for member in members if member.annotation != "value" and member.length != "strlen" and not member.skip_serialize %}
             {{ assert(member.annotation != "const*const*") }}
             {% set memberName = as_varName(member.name) %}
 
