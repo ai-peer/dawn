@@ -33,6 +33,24 @@
       "message": "This will cause ASAN issues if `ptr` is a `nullptr`.",
       "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a25b46_77d48daf",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-05T14:08:47Z",
+      "side": 1,
+      "message": "Why would it be nullptr? Validation should catch this.",
+      "parentUuid": "cf97b651_970a63d9",
+      "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
