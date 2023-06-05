@@ -70,6 +70,30 @@
       },
       "revId": "6267256dfea32d65c6c0a73ac1a5d91bb23560f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "107b9ae3_aea94b39",
+        "filename": "src/dawn/glfw/utils_metal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T08:18:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3eb0a8ce_7a6388bd",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "6267256dfea32d65c6c0a73ac1a5d91bb23560f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

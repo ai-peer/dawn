@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc447e4_5afecf1b",
+        "filename": "src/dawn/native/metal/SwapChainMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T08:18:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ade29bb8_e9fe6f07",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd1c3117_8cf85f7f",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "I made it return a ScopedCALayer class so that it\u0027s automatically managed",
       "parentUuid": "955d4d8b_7eb7e629",
+      "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b652e70f_0bc27035",
+        "filename": "src/dawn/utils/ObjCUtils.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T08:18:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "14633f9d_115c8a29",
       "revId": "6cf333f438983efa4edbea0ddcd3fb6c9a09fa9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

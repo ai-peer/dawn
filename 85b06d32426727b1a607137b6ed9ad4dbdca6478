@@ -16,6 +16,23 @@
       "message": "I\u0027ll let Corentin look again since the autorelease semantics are rather annoying",
       "revId": "85b06d32426727b1a607137b6ed9ad4dbdca6478",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d707636_e08c169f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T08:18:19Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "85b06d32426727b1a607137b6ed9ad4dbdca6478",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
