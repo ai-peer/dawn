@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8423fb1b_52e502a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T15:12:53Z",
+      "side": 1,
+      "message": "nit: enable",
+      "range": {
+        "startLine": 7,
+        "startChar": 38,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6197392c_f4c65403",
@@ -55,6 +78,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "380946d2_57777b33",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T15:12:53Z",
+      "side": 1,
+      "message": "Unfortunately we can\u0027t, see https://dawn-review.googlesource.com/c/dawn/+/135660",
+      "parentUuid": "32f4b508_0a11eb53",
+      "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcf76347_0e0a564d",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.h",
         "patchSetId": 2
@@ -84,6 +125,24 @@
       "side": 1,
       "message": "The problem the VideoViewsTestBackend implementations only compile on some platforms with certain configuration. And the implementations are different in each configuration. All are controlled in the BUILD.gn file. So to do your suggestion, we need to have a default implementation with `IsBackendSupported` return false, and only compile it when other implementations are not compiled. I think it involve too much changes, and it is not sure the result will be better.",
       "parentUuid": "bcf76347_0e0a564d",
+      "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba41cd16_58c7c998",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T15:12:53Z",
+      "side": 1,
+      "message": "Got it, thank you for the explanation.",
+      "parentUuid": "4653064f_7508f5fd",
       "revId": "f69ac5aacdd8181b3a859436f360e9a00734e4cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
