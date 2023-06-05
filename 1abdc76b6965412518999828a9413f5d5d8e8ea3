@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aff4918_4a25b385",
+        "filename": "src/tint/ir/branch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:35:13Z",
+      "side": 1,
+      "message": "Why `4` here? it seems like no operand branches would be more common?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69a520c4_7e1bf4a0",
+        "filename": "src/tint/ir/break_if.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:35:13Z",
+      "side": 1,
+      "message": "Could `Branch` have a `SetArgs` call which does this `for` loop so we don\u0027t have to repeate it in each constructor?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198a7fbd_4bd597ff",
+        "filename": "src/tint/ir/builtin.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:35:13Z",
+      "side": 1,
+      "message": "Ditto `SetArgs` method on `Call`?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9204ca3d_226a6d30",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:35:13Z",
+      "side": 1,
+      "message": "Is there something we can do it make these not require a `Slice().Reinterpret\u003cconst Value*\u003e()` when passing the value list?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0769334c_128c2b9b",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:35:13Z",
+      "side": 1,
+      "message": "nit: `tint::ir::` shouldn\u0027t be needed I don\u0027t think",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2edd629d_9bc072c1",
+        "filename": "src/tint/ir/swizzle.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:35:13Z",
+      "side": 1,
+      "message": "This is a use after move, need to keep the `_`.",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe4a5ee_edd5e24e",
+        "filename": "src/tint/ir/var.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T22:35:13Z",
+      "side": 1,
+      "message": "We always push an `operand_` so is the length check needed?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
