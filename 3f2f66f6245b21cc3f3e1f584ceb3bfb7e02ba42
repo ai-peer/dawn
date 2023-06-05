@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "3f2f66f6245b21cc3f3e1f584ceb3bfb7e02ba42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8051af62_1167b171",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-05T12:13:55Z",
+      "side": 1,
+      "message": "Could we structure this similarly to other backends which don\u0027t require direct access to mIsSubresourceContentInitializedAtIndex?\n\nFrom TextureVk:\n\n```\nEnsureSubresourceContentInitialized {\n  // Exactly what it was before this CL.\n}\n\n\nMaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,\n                                 const SubresourceRange\u0026 range,\n                                 TextureBase::ClearValue clearValue) {\n\n  for (subresource) {\n  \n     if (clearValue \u003d\u003d TextureBase::ClearValue::Zero \u0026\u0026\n          IsSubresourceContentInitialized(\n       SubresourceRange::SingleMipAndLayer(level, layer, range.aspects))) {\n       // Skip lazy clears if already initialized.\n       continue;\n     }\n     // Clear\n  }\n\n\n  if (clearValue \u003d\u003d TextureBase::ClearValue::Zero) {\n    SetIsSubresourceContentInitialized(true, range);\n    device-\u003eIncrementLazyClearCountForTesting();\n  }\n  return {};\n}\n```",
+      "revId": "3f2f66f6245b21cc3f3e1f584ceb3bfb7e02ba42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
