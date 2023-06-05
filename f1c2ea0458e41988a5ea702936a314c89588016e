@@ -123,6 +123,24 @@
       "parentUuid": "a04b6a24_8d6dce3f",
       "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae0ff918_157c1ea2",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-05T18:45:40Z",
+      "side": 1,
+      "message": "From the bug, the var can be a texture, sampler or pointer. Do we need another check somewhere such that we never get in here with texture or sampler vars? Or some other check in the validator that what calls into this can never have those types?",
+      "parentUuid": "92637ab2_6ff5dffd",
+      "revId": "f1c2ea0458e41988a5ea702936a314c89588016e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
