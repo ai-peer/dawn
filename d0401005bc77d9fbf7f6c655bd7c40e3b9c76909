@@ -98,6 +98,30 @@
       },
       "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2cfd966_57488f17",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-05T13:24:22Z",
+      "side": 1,
+      "message": "\u003e I\u0027d rather be as defensive as possible and we can loosen up later if needed\n\nThe concern I have with this is that it closely follows the pattern of the AST, and it\u0027s giving the reader a strong suggestion that the pointers are going to be non-null, but nothing prevents the next statement after the constructor from nulling the field.\n\nIf the member were `const`, then I\u0027d agree that asserting here makes sense. But as far as I\u0027m aware, they\u0027re not, and the assertion is pretty much useless in terms of nullability guarantees.\n\nIf the constructor called a sequence of setters `SetObject(object)`, `SetResultType(ty)`, then we could put the assertions into the setters and guarantee that the member pointers are never null.\n\nIf we decide that we want to support null members, then there\u0027s a single place to update.",
+      "parentUuid": "706cde2c_fdddbefe",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
