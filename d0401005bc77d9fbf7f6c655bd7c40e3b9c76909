@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b34d6965_6efba2bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-05T09:50:04Z",
+      "side": 1,
+      "message": "The bulk looks good, but the new assert in the constructors make me unsure about the mutability design we\u0027re going with.",
+      "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6482b9e8_b3711484",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-05T09:50:04Z",
+      "side": 1,
+      "message": "Using your `TINT_ASSERT_OR_RETURN` would avoid the need to check for null pointers here.\n\nThere\u0027s also the wider question about whether we should be asserting. If one of the goals of the IR is that most things are mutable, then are we expecting for these fields to be reassignable after construction? If so, why couldn\u0027t the pointers be null? That would allow for a constructor to be called with incomplete arguments.\n\nIf we are going for a mutable design, then maybe we should just forward the arguments to setters, which can deal with nullptr.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "d0401005bc77d9fbf7f6c655bd7c40e3b9c76909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
