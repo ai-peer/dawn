@@ -25,6 +25,7 @@
 #include "src/tint/ir/construct.h"
 #include "src/tint/ir/continue.h"
 #include "src/tint/ir/convert.h"
+#include "src/tint/ir/disassembler.h"
 #include "src/tint/ir/discard.h"
 #include "src/tint/ir/exit_if.h"
 #include "src/tint/ir/exit_loop.h"
@@ -49,7 +50,7 @@ namespace {
 
 class Validator {
   public:
-    explicit Validator(const Module& mod) : mod_(mod) {}
+    explicit Validator(Module& mod) : mod_(mod) {}
 
     ~Validator() {}
 
@@ -60,16 +61,55 @@ class Validator {
             CheckFunction(func);
         }
 
-        if (diagnostics_.contains_errors()) {
+        if (diagnostics_.contains_errors() || !instruction_srcs_needed_.IsEmpty() ||
+            !operand_srcs_needed_.IsEmpty()) {
+            Disassembler d(mod_, &instruction_srcs_needed_, &operand_srcs_needed_);
+            auto dis = d.Disassemble();
+
+            mod_.disassembly_file = std::make_shared<Source::File>("", dis);
+            {
+                auto keys = instruction_diagnostics_.Keys();
+                auto values = instruction_diagnostics_.Values();
+                for (uint32_t i = 0; i < keys.Length(); i++) {
+                    auto src = d.InstructionSource(keys[i]);
+                    src.file = mod_.disassembly_file.get();
+                    AddError(values[i], src);
+                }
+            }
+            {
+                auto keys = operand_diagnostics_.Keys();
+                auto values = operand_diagnostics_.Values();
+                for (uint32_t i = 0; i < keys.Length(); i++) {
+                    auto src = d.OperandSource(keys[i]);
+                    src.file = mod_.disassembly_file.get();
+                    AddError(values[i], src);
+                }
+            }
+
+            diagnostics_.add_note(tint::diag::System::IR, dis, {});
+
             return std::move(diagnostics_);
         }
         return Success{};
     }
 
   private:
-    const Module& mod_;
+    Module& mod_;
     diag::List diagnostics_;
 
+    // TODO(dsinclair): Need another hashset for blocks
+    utils::Hashset<const Instruction*, 1> instruction_srcs_needed_;
+    utils::Hashset<Usage, 1, Usage::Hasher> operand_srcs_needed_;
+
+    // TODO(dsinclair): These two hashmaps, instruction_diagnostics_ and operand_diagnostics_ need
+    // to be a single vector so teh diagnostics can be emitted in the correct order. Otherwise,
+    // we'll end up with all instruction errors at the top then operand errors below.
+    utils::Hashmap<const Instruction*, std::string, 1> instruction_diagnostics_;
+    utils::Hashmap<Usage, std::string, 1, Usage::Hasher> operand_diagnostics_;
+
+    void AddError(const std::string& err, Source src) {
+        diagnostics_.add_error(tint::diag::System::IR, err, src);
+    }
     void AddError(const std::string& err) { diagnostics_.add_error(tint::diag::System::IR, err); }
 
     std::string Name(const Value* v) { return mod_.NameOf(v).Name(); }
@@ -82,12 +122,19 @@ class Validator {
         for (const auto* inst : *blk) {
             auto* var = inst->As<ir::Var>();
             if (!var) {
-                AddError(std::string("root block: invalid instruction: ") + inst->TypeInfo().name);
+                instruction_srcs_needed_.Add(inst);
+                instruction_diagnostics_.Add(
+                    inst, std::string("root block: invalid instruction: ") + inst->TypeInfo().name);
+
+                // TODO(dsinclair): AddNote root_block
                 continue;
             }
             if (!var->Type()->Is<type::Pointer>()) {
-                AddError(std::string("root block: 'var' ") + Name(var) +
-                         "type is not a pointer: " + var->Type()->TypeInfo().name);
+                instruction_srcs_needed_.Add(inst);
+                instruction_diagnostics_.Add(
+                    inst, std::string("root block: 'var' ") + Name(var) +
+                              "type is not a pointer: " + var->Type()->TypeInfo().name);
+                // TODO(dsinclair): AddNote root_block
             }
         }
     }
@@ -96,12 +143,17 @@ class Validator {
 
     void CheckBlock(const Block* blk) {
         if (!blk->HasBranchTarget()) {
+            // TODO(dsinclair): Make this a block error
             AddError("block: does not end in a branch");
         }
 
         for (const auto* inst : *blk) {
             if (inst->Is<ir::Branch>() && inst != blk->Branch()) {
-                AddError("block: branch which isn't the final instruction");
+                instruction_srcs_needed_.Add(inst);
+                instruction_diagnostics_.Add(inst,
+                                             "block: branch which isn't the final instruction");
+
+                // TODO(dsinclair): AddNote block
                 continue;
             }
 
@@ -165,7 +217,7 @@ class Validator {
 
 }  // namespace
 
-utils::Result<Success, diag::List> Validate(const Module& mod) {
+utils::Result<Success, diag::List> Validate(Module& mod) {
     Validator v(mod);
     return v.IsValid();
 }

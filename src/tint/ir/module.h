@@ -89,6 +89,9 @@ class Module {
 
     /// The map of constant::Value to their ir::Constant.
     utils::Hashmap<const constant::Value*, ir::Constant*, 16> constants;
+
+    /// If the module generated a validation error, will store the file for the disassembly.
+    std::shared_ptr<Source::File> disassembly_file;
 };
 
 }  // namespace tint::ir

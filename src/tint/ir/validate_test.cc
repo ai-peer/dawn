@@ -39,7 +39,17 @@ TEST_F(IR_ValidateTest, RootBlock_NonVar) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), "error: root block: invalid instruction: tint::ir::Loop");
+    EXPECT_EQ(res.Failure().str(), R"(:3:3 error: root block: invalid instruction: tint::ir::Loop
+  loop [s: %b2]
+  ^^^^^^^^^^^^^
+
+note: # Root block
+%b1 = block {
+  loop [s: %b2]
+
+}
+
+)");
 }
 
 TEST_F(IR_ValidateTest, RootBlock_VarBadType) {
@@ -48,7 +58,16 @@ TEST_F(IR_ValidateTest, RootBlock_VarBadType) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              "error: root block: 'var' type is not a pointer: tint::type::I32");
+              R"(:3:12 error: root block: 'var' type is not a pointer: tint::type::I32
+  %1:i32 = var
+           ^^^
+
+note: # Root block
+%b1 = block {
+  %1:i32 = var
+}
+
+)");
 }
 
 TEST_F(IR_ValidateTest, Function) {
@@ -68,7 +87,10 @@ TEST_F(IR_ValidateTest, Block_NoBranchAtEnd) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), "error: block: does not end in a branch");
+    EXPECT_EQ(res.Failure().str(), R"(error: block: does not end in a branch
+note: %my_func = func():void -> %b1 {
+}
+)");
 }
 
 TEST_F(IR_ValidateTest, Block_BranchInMiddle) {
@@ -78,7 +100,17 @@ TEST_F(IR_ValidateTest, Block_BranchInMiddle) {
     f->StartTarget()->SetInstructions(utils::Vector{b.Return(f), b.Return(f)});
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), "error: block: branch which isn't the final instruction");
+    EXPECT_EQ(res.Failure().str(), R"(:3:5 error: block: branch which isn't the final instruction
+    ret
+    ^^^
+
+note: %my_func = func():void -> %b1 {
+  %b1 = block {
+    ret
+    ret
+  }
+}
+)");
 }
 
 }  // namespace
