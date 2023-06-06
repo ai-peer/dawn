@@ -16,7 +16,6 @@
 #define SRC_TINT_IR_IF_H_
 
 #include "src/tint/ir/flow_control_instruction.h"
-#include "src/tint/ir/merge_block.h"
 #include "src/tint/ir/value.h"
 
 namespace tint::ir {
@@ -28,12 +27,8 @@ class If : public utils::Castable<If, FlowControlInstruction> {
     /// @param cond the if condition
     /// @param t the true block
     /// @param f the false block
-    /// @param m the merge block
-    If(Value* cond, ir::Block* t, ir::Block* f, ir::MergeBlock* m);
+    If(Value* cond, ir::Block* t, ir::Block* f);
     ~If() override;
-
-    /// @returns the branch arguments
-    utils::Slice<Value const* const> Args() const override { return utils::Slice<Value*>{}; }
 
     /// @returns the if condition
     const Value* Condition() const { return operands_[0]; }
@@ -50,15 +45,9 @@ class If : public utils::Castable<If, FlowControlInstruction> {
     /// @returns the false branch block
     ir::Block* False() { return false_; }
 
-    /// @returns the merge branch block
-    const ir::MergeBlock* Merge() const { return merge_; }
-    /// @returns the merge branch block
-    ir::MergeBlock* Merge() { return merge_; }
-
   private:
     ir::Block* true_ = nullptr;
     ir::Block* false_ = nullptr;
-    ir::MergeBlock* merge_ = nullptr;
 };
 
 }  // namespace tint::ir
