@@ -34,8 +34,12 @@ class Block;
 class BlockParam;
 class Branch;
 class Builtin;
-class If;
+class ExitIf;
+class ExitLoop;
+class ExitSwitch;
+class FlowControlInstruction;
 class Function;
+class If;
 class Load;
 class Loop;
 class Module;
@@ -112,9 +116,13 @@ class GeneratorImplIr {
     /// @param id the result ID of the function declaration
     void EmitEntryPoint(const ir::Function* func, uint32_t id);
 
-    /// Emit a block.
+    /// Emit a block, including the initial OpLabel.
     /// @param block the block to emit
     void EmitBlock(const ir::Block* block);
+
+    /// Emit a block, excluding the initial OpLabel.
+    /// @param block the block to emit
+    void EmitBlockWithoutLabel(const ir::Block* block);
 
     /// Emit the root block.
     /// @param root_block the root block to emit
@@ -159,6 +167,10 @@ class GeneratorImplIr {
     /// Emit a branch instruction.
     /// @param b the branch instruction to emit
     void EmitBranch(const ir::Branch* b);
+
+    /// Emit the OpPhis for the given flow control instruction.
+    /// @param inst the flow control instruction
+    void EmitExitPhis(const ir::FlowControlInstruction* inst);
 
   private:
     /// Get the result ID of the constant `constant`, emitting its instruction if necessary.
@@ -219,6 +231,18 @@ class GeneratorImplIr {
 
     /// The current function that is being emitted.
     Function current_function_;
+
+    /// Instructions that should not be emitted.
+    utils::Hashset<const ir::Instruction*, 8> nops_;
+
+    /// The merge block for the current if statement
+    uint32_t if_merge_label_ = 0;
+
+    /// The merge block for the current loop statement
+    uint32_t loop_merge_label_ = 0;
+
+    /// The merge block for the current switch statement
+    uint32_t switch_merge_label_ = 0;
 
     bool zero_init_workgroup_memory_ = false;
 };

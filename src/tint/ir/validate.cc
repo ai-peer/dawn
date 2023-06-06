@@ -148,15 +148,12 @@ class Validator {
             [&](const ir::ExitIf*) {},         //
             [&](const ir::ExitLoop*) {},       //
             [&](const ir::ExitSwitch*) {},     //
-            [&](const ir::If*) {},             //
-            [&](const ir::Loop*) {},           //
             [&](const ir::NextIteration*) {},  //
             [&](const ir::Return* ret) {
                 if (ret->Func() == nullptr) {
                     AddError("return: null function");
                 }
-            },                          //
-            [&](const ir::Switch*) {},  //
+            },
             [&](Default) {
                 AddError(std::string("missing validation of branch: ") + b->TypeInfo().name);
             });
