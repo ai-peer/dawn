@@ -16,7 +16,7 @@
 #define SRC_TINT_IR_LOOP_H_
 
 #include "src/tint/ir/block.h"
-#include "src/tint/ir/branch.h"
+#include "src/tint/ir/flow_control_instruction.h"
 
 // Forward declarations
 namespace tint::ir {
@@ -56,7 +56,7 @@ namespace tint::ir {
 ///             └─────────────────────────┘
 ///
 /// ```
-class Loop : public utils::Castable<Loop, Branch> {
+class Loop : public utils::Castable<Loop, FlowControlInstruction> {
   public:
     /// Constructor
     /// @param i the initializer block

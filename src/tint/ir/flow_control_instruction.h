@@ -1,4 +1,4 @@
-// Copyright 2022 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,24 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/if.h"
+#ifndef SRC_TINT_IR_FLOW_CONTROL_INSTRUCTION_H_
+#define SRC_TINT_IR_FLOW_CONTROL_INSTRUCTION_H_
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::If);
+#include "src/tint/ir/branch.h"
 
 namespace tint::ir {
 
-If::If(Value* cond, ir::Block* t, ir::Block* f, ir::MergeBlock* m)
-    : condition_(cond), true_(t), false_(f), merge_(m) {
-    TINT_ASSERT(IR, condition_);
-    TINT_ASSERT(IR, true_);
-    TINT_ASSERT(IR, false_);
-    TINT_ASSERT(IR, merge_);
+/// Base class of instructions that perform flow control.
+class FlowControlInstruction : public utils::Castable<FlowControlInstruction, Branch> {
+  public:
+    /// Destructor
+    ~FlowControlInstruction() override;
 
-    if (condition_) {
-        condition_->AddUsage(this);
-    }
-}
-
-If::~If() = default;
+  protected:
+    /// Constructor
+    FlowControlInstruction();
+};
 
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_FLOW_CONTROL_INSTRUCTION_H_
