@@ -22,6 +22,7 @@
 #include "src/tint/ir/access.h"
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/block.h"
+#include "src/tint/ir/block_param.h"
 #include "src/tint/ir/break_if.h"
 #include "src/tint/ir/builtin.h"
 #include "src/tint/ir/continue.h"
@@ -420,18 +421,20 @@ void GeneratorImplIr::EmitBlockWithoutLabel(const ir::Block* block) {
         return;
     }
 
-    // Emit Phi nodes for all the incoming block parameters
-    for (size_t param_idx = 0; param_idx < block->Params().Length(); param_idx++) {
-        auto* param = block->Params()[param_idx];
-        OperandList ops{Type(param->Type()), Value(param)};
+    if (auto* merge = block->As<ir::MergeBlock>()) {
+        // Emit Phi nodes for all the incoming block parameters
+        for (size_t param_idx = 0; param_idx < merge->Params().Length(); param_idx++) {
+            auto* param = merge->Params()[param_idx];
+            OperandList ops{Type(param->Type()), Value(param)};
 
-        for (auto* incoming : block->InboundBranches()) {
-            auto* arg = incoming->Args()[param_idx];
-            ops.push_back(Value(arg));
-            ops.push_back(Label(incoming->Block()));
+            for (auto* incoming : merge->InboundBranches()) {
+                auto* arg = incoming->Args()[param_idx];
+                ops.push_back(Value(arg));
+                ops.push_back(Label(incoming->Block()));
+            }
+
+            current_function_.push_inst(spv::Op::OpPhi, std::move(ops));
         }
-
-        current_function_.push_inst(spv::Op::OpPhi, std::move(ops));
     }
 
     // Emit the instructions.
@@ -811,7 +814,7 @@ void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
     for (auto& c : swtch->Cases()) {
         for (auto& sel : c.selectors) {
             if (sel.IsDefault()) {
-                default_label = Label(c.Start());
+                default_label = Label(c.Block());
             }
         }
     }
@@ -820,7 +823,7 @@ void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
     // Build the operands to the OpSwitch instruction.
     OperandList switch_operands = {Value(swtch->Condition()), default_label};
     for (auto& c : swtch->Cases()) {
-        auto label = Label(c.Start());
+        auto label = Label(c.Block());
         for (auto& sel : c.selectors) {
             if (sel.IsDefault()) {
                 continue;
@@ -837,7 +840,7 @@ void GeneratorImplIr::EmitSwitch(const ir::Switch* swtch) {
 
     // Emit the cases.
     for (auto& c : swtch->Cases()) {
-        EmitBlock(c.Start());
+        EmitBlock(c.Block());
     }
 
     // Emit the switch merge block.

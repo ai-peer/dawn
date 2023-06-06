@@ -27,7 +27,7 @@ TEST_F(IR_LoopTest, Fail_NullInitializerBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop(nullptr, b.CreateBlock(), b.CreateBlock(), b.CreateBlock());
+            Loop loop(nullptr, b.CreateMergeBlock(), b.CreateMergeBlock(), b.CreateMergeBlock());
         },
         "");
 }
@@ -37,7 +37,7 @@ TEST_F(IR_LoopTest, Fail_NullBodyBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop(b.CreateBlock(), nullptr, b.CreateBlock(), b.CreateBlock());
+            Loop loop(b.CreateBlock(), nullptr, b.CreateMergeBlock(), b.CreateMergeBlock());
         },
         "");
 }
@@ -47,7 +47,7 @@ TEST_F(IR_LoopTest, Fail_NullContinuingBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop(b.CreateBlock(), b.CreateBlock(), nullptr, b.CreateBlock());
+            Loop loop(b.CreateBlock(), b.CreateMergeBlock(), nullptr, b.CreateMergeBlock());
         },
         "");
 }
@@ -57,7 +57,7 @@ TEST_F(IR_LoopTest, Fail_NullMergeBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop(b.CreateBlock(), b.CreateBlock(), b.CreateBlock(), nullptr);
+            Loop loop(b.CreateBlock(), b.CreateMergeBlock(), b.CreateMergeBlock(), nullptr);
         },
         "");
 }

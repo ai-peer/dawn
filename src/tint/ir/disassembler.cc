@@ -22,6 +22,7 @@
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/bitcast.h"
 #include "src/tint/ir/block.h"
+#include "src/tint/ir/block_param.h"
 #include "src/tint/ir/break_if.h"
 #include "src/tint/ir/builtin.h"
 #include "src/tint/ir/construct.h"
@@ -34,6 +35,7 @@
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/load.h"
 #include "src/tint/ir/loop.h"
+#include "src/tint/ir/merge_block.h"
 #include "src/tint/ir/next_iteration.h"
 #include "src/tint/ir/return.h"
 #include "src/tint/ir/store.h"
@@ -123,10 +125,12 @@ void Disassembler::Walk(const Block* blk) {
 
 void Disassembler::WalkInternal(const Block* blk) {
     Indent() << "%b" << IdOf(blk) << " = block";
-    if (!blk->Params().IsEmpty()) {
-        out_ << " (";
-        EmitValueList(blk->Params());
-        out_ << ")";
+    if (auto* merge = blk->As<MergeBlock>()) {
+        if (!merge->Params().IsEmpty()) {
+            out_ << " (";
+            EmitValueList(merge->Params());
+            out_ << ")";
+        }
     }
 
     out_ << " {" << std::endl;
@@ -533,7 +537,7 @@ void Disassembler::EmitSwitch(const Switch* s) {
                 EmitValue(selector.val);
             }
         }
-        out_ << ", %b" << IdOf(c.Start()) << ")";
+        out_ << ", %b" << IdOf(c.Block()) << ")";
     }
     if (s->Merge()->HasBranchTarget()) {
         out_ << ", m: %b" << IdOf(s->Merge());
@@ -543,7 +547,7 @@ void Disassembler::EmitSwitch(const Switch* s) {
     for (auto& c : s->Cases()) {
         ScopedIndent si(indent_size_);
         Indent() << "# Case block" << std::endl;
-        Walk(c.Start());
+        Walk(c.Block());
         out_ << std::endl;
     }
     if (s->Merge()->HasBranchTarget()) {

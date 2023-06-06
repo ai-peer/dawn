@@ -12,34 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/break_if.h"
-
-#include <utility>
-
-#include "src/tint/ir/loop.h"
 #include "src/tint/ir/merge_block.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::BreakIf);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::MergeBlock);
 
 namespace tint::ir {
 
-BreakIf::BreakIf(Value* condition,
-                 ir::Loop* loop,
-                 utils::VectorRef<Value*> args /* = utils::Empty */)
-    : Base(std::move(args)), condition_(condition), loop_(loop) {
-    TINT_ASSERT(IR, condition_);
-    TINT_ASSERT(IR, loop_);
+MergeBlock::MergeBlock() : Base() {}
 
-    if (condition_) {
-        condition_->AddUsage(this);
-    }
-    if (loop_) {
-        loop_->AddUsage(this);
-        loop_->Body()->AddInboundBranch(this);
-        loop_->Merge()->AddInboundBranch(this);
+MergeBlock::~MergeBlock() = default;
+
+void MergeBlock::SetParams(utils::VectorRef<const BlockParam*> params) {
+    params_ = std::move(params);
+
+    for (auto* param : params_) {
+        TINT_ASSERT(IR, param != nullptr);
     }
 }
 
-BreakIf::~BreakIf() = default;
+void MergeBlock::AddInboundBranch(ir::Branch* node) {
+    TINT_ASSERT(IR, node != nullptr);
+
+    if (node) {
+        inbound_branches_.Push(node);
+    }
+}
 
 }  // namespace tint::ir
