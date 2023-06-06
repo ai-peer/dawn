@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17d07817_4a6cfa48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T17:09:23Z",
+      "side": 1,
+      "message": "lgtm w/ nit",
+      "revId": "9b0e8a935128e829f6d8cf8e056a44ceac0688df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc15845_513ca40c",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T17:09:23Z",
+      "side": 1,
+      "message": "Should this move down more towards 106 as I believe that\u0027s the part that needs to be fixed now?",
+      "revId": "9b0e8a935128e829f6d8cf8e056a44ceac0688df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
