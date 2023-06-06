@@ -19,6 +19,7 @@
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
+#include "dawn/utils/ComboRenderBundleEncoderDescriptor.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
@@ -1887,7 +1888,6 @@ TEST_F(SetBindGroupValidationTest, Basic) {
     std::array<uint32_t, 3> offsets = {512, 256, 0};
 
     TestRenderPassBindGroup(bindGroup, offsets.data(), 3, true);
-
     TestComputePassBindGroup(bindGroup, offsets.data(), 3, true);
 }
 
@@ -2177,6 +2177,98 @@ TEST_F(SetBindGroupValidationTest, ErrorBindGroup) {
     TestRenderPassBindGroup(bindGroup, nullptr, 0, false);
 
     TestComputePassBindGroup(bindGroup, nullptr, 0, false);
+}
+
+TEST_F(SetBindGroupValidationTest, BindGroupSlotBoundary) {
+    wgpu::BindGroupLayout emptyBGL = utils::MakeBindGroupLayout(device, {});
+    wgpu::BindGroup emptyBindGroup = utils::MakeBindGroup(device, emptyBGL, {});
+    wgpu::BindGroup nullBindGroup;
+
+    PlaceholderRenderPass renderPass(device);
+
+    auto TestIndex = [=](wgpu::BindGroup bg, uint32_t i, bool valid) {
+        {
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+            cp.SetBindGroup(i, bg);
+            cp.End();
+            if (valid) {
+                encoder.Finish();
+            } else {
+                ASSERT_DEVICE_ERROR(encoder.Finish());
+            }
+        }
+
+        {
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&renderPass);
+            rp.SetBindGroup(i, bg);
+            rp.End();
+            if (valid) {
+                encoder.Finish();
+            } else {
+                ASSERT_DEVICE_ERROR(encoder.Finish());
+            }
+        }
+
+        {
+            utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+            renderBundleDesc.colorFormatsCount = 1;
+            renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
+            wgpu::RenderBundleEncoder rb = device.CreateRenderBundleEncoder(&renderBundleDesc);
+            rb.SetBindGroup(i, bg);
+            if (valid) {
+                rb.Finish();
+            } else {
+                ASSERT_DEVICE_ERROR(rb.Finish());
+            }
+        }
+    };
+
+    // Base
+    TestIndex(emptyBindGroup, 0, true);
+    // Set the last bind group slot is valid
+    TestIndex(emptyBindGroup, kMaxBindGroups - 1, true);
+    // Set pass the last bind group slot is invalid
+    TestIndex(emptyBindGroup, kMaxBindGroups, false);
+
+    // Unset the slot which is not set before is valid
+    TestIndex(nullBindGroup, 0, true);
+    // Unset the last bind group slot is valid
+    TestIndex(nullBindGroup, kMaxBindGroups - 1, true);
+    // Unset pass the last bind group slot is invalid
+    TestIndex(nullBindGroup, kMaxBindGroups, false);
+}
+
+TEST_F(SetBindGroupValidationTest, UnsetWithDynamicOffsetIsInvalid) {
+    wgpu::BindGroup nullBindGroup;
+    uint32_t offset = 0;
+
+    PlaceholderRenderPass renderPass(device);
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+        cp.SetBindGroup(0, nullBindGroup, 1, &offset);
+        cp.End();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&renderPass);
+        rp.SetBindGroup(0, nullBindGroup, 1, &offset);
+        rp.End();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    {
+        utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+        renderBundleDesc.colorFormatsCount = 1;
+        renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
+        wgpu::RenderBundleEncoder rb = device.CreateRenderBundleEncoder(&renderBundleDesc);
+        rb.SetBindGroup(0, nullBindGroup, 1, &offset);
+        ASSERT_DEVICE_ERROR(rb.Finish());
+    }
 }
 
 // Test that a pipeline with empty bindgroups layouts requires empty bindgroups to be set.
