@@ -50,7 +50,59 @@ class Disassembler {
     /// @returns the string representation
     std::string AsString() const { return out_.str(); }
 
+    /// @param inst the instruction to retrieve
+    /// @returns the source for the instruction
+    Source InstructionSource(const Instruction* inst) {
+        return instruction_to_src_.Get(inst).value_or(Source{});
+    }
+
+    /// @param usage the usage to retrieve
+    /// @returns the source for the usage
+    Source OperandSource(Usage usage) { return operand_to_src_.Get(usage).value_or(Source{}); }
+
+    /// @param blk teh block to retrieve
+    /// @returns the source for the block
+    Source BlockSource(const Block* blk) { return block_to_src_.Get(blk).value_or(Source{}); }
+
+    /// Stores the given @p src location for @p inst instruction
+    /// @param inst the instruction to store
+    /// @param src the source location
+    void SetSource(const Instruction* inst, Source src) { instruction_to_src_.Add(inst, src); }
+
+    /// Stores the given @p src location for @p blk block
+    /// @param blk the block to store
+    /// @param src the source location
+    void SetSource(const Block* blk, Source src) { block_to_src_.Add(blk, src); }
+
+    /// Stores the given @p src location for @p op operand
+    /// @param op the operand to store
+    /// @param src the source location
+    void SetSource(Usage op, Source src) { operand_to_src_.Add(op, src); }
+
+    /// @returns the source location for the current emission location
+    Source::Location MakeCurrentLocation();
+
   private:
+    class SourceMarker {
+      public:
+        explicit SourceMarker(Disassembler* d) : dis_(d), begin_(dis_->MakeCurrentLocation()) {}
+        ~SourceMarker() = default;
+
+        void Store(const Instruction* inst) { dis_->SetSource(inst, MakeSource()); }
+
+        void Store(const Block* blk) { dis_->SetSource(blk, MakeSource()); }
+
+        void Store(Usage usage) { dis_->SetSource(usage, MakeSource()); }
+
+        Source MakeSource() const {
+            return Source(Source::Range(begin_, dis_->MakeCurrentLocation()));
+        }
+
+      private:
+        Disassembler* dis_ = nullptr;
+        Source::Location begin_;
+    };
+
     utils::StringStream& Indent();
 
     size_t IdOf(const Block* blk);
@@ -74,6 +126,7 @@ class Disassembler {
     void EmitSwitch(const Switch* s);
     void EmitLoop(const Loop* l);
     void EmitIf(const If* i);
+    void EmitLine();
 
     const Module& mod_;
     utils::StringStream out_;
@@ -82,6 +135,13 @@ class Disassembler {
     utils::Hashmap<const Value*, std::string, 32> value_ids_;
     uint32_t indent_size_ = 0;
     bool in_function_ = false;
+
+    uint32_t current_output_line_ = 1;
+    uint32_t current_output_start_pos_ = 0;
+
+    utils::Hashmap<const Block*, Source, 8> block_to_src_;
+    utils::Hashmap<const Instruction*, Source, 8> instruction_to_src_;
+    utils::Hashmap<Usage, Source, 8, Usage::Hasher> operand_to_src_;
 };
 
 }  // namespace tint::ir

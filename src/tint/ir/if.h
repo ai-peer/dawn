@@ -41,9 +41,9 @@ class If : public utils::Castable<If, Branch> {
     utils::Slice<Value*> Args() const override { return utils::Slice<Value*>{}; }
 
     /// @returns the if condition
-    const Value* Condition() const { return condition_; }
+    Value const* const& Condition() const { return operands_[0]; }
     /// @returns the if condition
-    Value* Condition() { return condition_; }
+    Value* Condition() { return operands_[0]; }
 
     /// @returns the true branch block
     const ir::Block* True() const { return true_; }

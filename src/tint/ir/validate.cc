@@ -14,6 +14,7 @@
 
 #include "src/tint/ir/validate.h"
 
+#include <memory>
 #include <string>
 #include <utility>
 
@@ -25,6 +26,7 @@
 #include "src/tint/ir/construct.h"
 #include "src/tint/ir/continue.h"
 #include "src/tint/ir/convert.h"
+#include "src/tint/ir/disassembler.h"
 #include "src/tint/ir/discard.h"
 #include "src/tint/ir/exit_if.h"
 #include "src/tint/ir/exit_loop.h"
@@ -49,7 +51,7 @@ namespace {
 
 class Validator {
   public:
-    explicit Validator(const Module& mod) : mod_(mod) {}
+    explicit Validator(Module& mod) : mod_(mod) {}
 
     ~Validator() {}
 
@@ -61,16 +63,57 @@ class Validator {
         }
 
         if (diagnostics_.contains_errors()) {
+            // If a diassembly file was generated then one of the diagnostics referenced the
+            // disasembly. Emit the entire disassembly file at the end of the messages.
+            if (mod_.disassembly_file) {
+                diagnostics_.add_note(tint::diag::System::IR,
+                                      "# Disassembly\n" + mod_.disassembly_file->content.data, {});
+            }
             return std::move(diagnostics_);
         }
         return Success{};
     }
 
   private:
-    const Module& mod_;
+    Module& mod_;
     diag::List diagnostics_;
+    Disassembler dis_{mod_};
 
-    void AddError(const std::string& err) { diagnostics_.add_error(tint::diag::System::IR, err); }
+    void DisassembleIfNeeded() {
+        if (mod_.disassembly_file) {
+            return;
+        }
+        mod_.disassembly_file = std::make_unique<Source::File>("", dis_.Disassemble());
+    }
+
+    void AddError(const Instruction* inst, const std::string& err) {
+        DisassembleIfNeeded();
+        auto src = dis_.InstructionSource(inst);
+        src.file = mod_.disassembly_file.get();
+        AddError(err, src);
+    }
+
+    void AddError(const Block* blk, const std::string& err) {
+        DisassembleIfNeeded();
+        auto src = dis_.BlockSource(blk);
+        src.file = mod_.disassembly_file.get();
+        AddError(err, src);
+    }
+
+    void AddNote(const Block* blk, const std::string& err) {
+        DisassembleIfNeeded();
+        auto src = dis_.BlockSource(blk);
+        src.file = mod_.disassembly_file.get();
+        AddNote(err, src);
+    }
+
+    void AddError(const std::string& err, Source src = {}) {
+        diagnostics_.add_error(tint::diag::System::IR, err, src);
+    }
+
+    void AddNote(const std::string& note, Source src = {}) {
+        diagnostics_.add_note(tint::diag::System::IR, note, src);
+    }
 
     std::string Name(const Value* v) { return mod_.NameOf(v).Name(); }
 
@@ -82,12 +125,15 @@ class Validator {
         for (const auto* inst : *blk) {
             auto* var = inst->As<ir::Var>();
             if (!var) {
-                AddError(std::string("root block: invalid instruction: ") + inst->TypeInfo().name);
+                AddError(inst,
+                         std::string("root block: invalid instruction: ") + inst->TypeInfo().name);
+                AddNote(blk, "In block");
                 continue;
             }
             if (!var->Type()->Is<type::Pointer>()) {
-                AddError(std::string("root block: 'var' ") + Name(var) +
-                         "type is not a pointer: " + var->Type()->TypeInfo().name);
+                AddError(inst, std::string("root block: 'var' ") + Name(var) +
+                                   "type is not a pointer: " + var->Type()->TypeInfo().name);
+                AddNote(blk, "In block");
             }
         }
     }
@@ -96,12 +142,13 @@ class Validator {
 
     void CheckBlock(const Block* blk) {
         if (!blk->HasBranchTarget()) {
-            AddError("block: does not end in a branch");
+            AddError(blk, "block: does not end in a branch");
         }
 
         for (const auto* inst : *blk) {
             if (inst->Is<ir::Branch>() && inst != blk->Branch()) {
-                AddError("block: branch which isn't the final instruction");
+                AddError(inst, "block: branch which isn't the final instruction");
+                AddNote(blk, "In block");
                 continue;
             }
 
@@ -165,7 +212,7 @@ class Validator {
 
 }  // namespace
 
-utils::Result<Success, diag::List> Validate(const Module& mod) {
+utils::Result<Success, diag::List> Validate(Module& mod) {
     Validator v(mod);
     return v.IsValid();
 }
