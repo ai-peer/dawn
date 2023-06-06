@@ -29,11 +29,10 @@ TEST_F(IR_ExitIfTest, Usage) {
     auto* e = b.ExitIf(if_, utils::Vector{arg1, arg2});
     ASSERT_EQ(1u, arg1->Usage().Length());
     ASSERT_EQ(1u, arg2->Usage().Length());
-    ASSERT_EQ(1u, if_->Usage().Length());
+    EXPECT_EQ(0u, if_->Usage().Length());
 
     EXPECT_EQ(e, arg1->Usage()[0]);
     EXPECT_EQ(e, arg2->Usage()[0]);
-    EXPECT_EQ(e, if_->Usage()[0]);
 }
 
 TEST_F(IR_ExitIfTest, Fail_NullIf) {

@@ -15,7 +15,6 @@
 #ifndef SRC_TINT_IR_LOOP_H_
 #define SRC_TINT_IR_LOOP_H_
 
-#include "src/tint/ir/block.h"
 #include "src/tint/ir/flow_control_instruction.h"
 
 // Forward declarations
@@ -51,9 +50,7 @@ namespace tint::ir {
 ///          ┃              ┃ BreakIf(true)
 ///          ┗━━━━━━━━━━━━━▶┃
 ///                         ▼
-///             ┌─────────────────────────┐
-///             │      loop->Merge()      │
-///             └─────────────────────────┘
+///                        out
 ///
 /// ```
 class Loop : public utils::Castable<Loop, FlowControlInstruction> {
@@ -62,8 +59,7 @@ class Loop : public utils::Castable<Loop, FlowControlInstruction> {
     /// @param i the initializer block
     /// @param b the body block
     /// @param c the continuing block
-    /// @param m the merge block
-    Loop(ir::Block* i, ir::MergeBlock* b, ir::MergeBlock* c, ir::MergeBlock* m);
+    Loop(ir::Block* i, ir::MergeBlock* b, ir::MergeBlock* c);
     ~Loop() override;
 
     /// @returns the switch initializer block
@@ -73,7 +69,7 @@ class Loop : public utils::Castable<Loop, FlowControlInstruction> {
 
     /// @returns true if the loop uses an initializer block. If true, then the Loop first branches
     /// to the initializer block, otherwise it first branches to the body block.
-    bool HasInitializer() const { return initializer_->HasBranchTarget(); }
+    bool HasInitializer() const;
 
     /// @returns the switch start block
     const ir::MergeBlock* Body() const { return body_; }
@@ -85,16 +81,10 @@ class Loop : public utils::Castable<Loop, FlowControlInstruction> {
     /// @returns the switch continuing block
     ir::MergeBlock* Continuing() { return continuing_; }
 
-    /// @returns the switch merge branch
-    const ir::MergeBlock* Merge() const { return merge_; }
-    /// @returns the switch merge branch
-    ir::MergeBlock* Merge() { return merge_; }
-
   private:
     ir::Block* initializer_ = nullptr;
     ir::MergeBlock* body_ = nullptr;
     ir::MergeBlock* continuing_ = nullptr;
-    ir::MergeBlock* merge_ = nullptr;
 };
 
 }  // namespace tint::ir

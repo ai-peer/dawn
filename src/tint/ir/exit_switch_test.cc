@@ -29,11 +29,10 @@ TEST_F(IR_ExitSwitchTest, Usage) {
     auto* e = b.ExitSwitch(switch_, utils::Vector{arg1, arg2});
     ASSERT_EQ(1u, arg1->Usage().Length());
     ASSERT_EQ(1u, arg2->Usage().Length());
-    ASSERT_EQ(1u, switch_->Usage().Length());
+    EXPECT_EQ(0u, switch_->Usage().Length());
 
     EXPECT_EQ(e, arg1->Usage()[0]);
     EXPECT_EQ(e, arg2->Usage()[0]);
-    EXPECT_EQ(e, switch_->Usage()[0]);
 }
 
 TEST_F(IR_ExitSwitchTest, Fail_NullSwitch) {
