@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70ef8f59_793ac40c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-06T10:50:26Z",
+      "side": 1,
+      "message": "nit: could you please give more detail of this CL? what does the CL fix? how does it fix the problem?, etc thanks.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "453fc1c8cf8664409a00cba4127f5e9ed64d9adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c3744f_ecaf0cdf",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-06T10:50:26Z",
+      "side": 1,
+      "message": "why we need to clear layer by layer, level by level? could you please add some comment here?",
+      "range": {
+        "startLine": 390,
+        "startChar": 4,
+        "endLine": 390,
+        "endChar": 30
+      },
+      "revId": "453fc1c8cf8664409a00cba4127f5e9ed64d9adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f53087_c869b3a0",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-06T10:50:26Z",
+      "side": 1,
+      "message": "nit: is it still true?",
+      "range": {
+        "startLine": 418,
+        "startChar": 19,
+        "endLine": 418,
+        "endChar": 35
+      },
+      "revId": "453fc1c8cf8664409a00cba4127f5e9ed64d9adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e13f2a9c_1563e7f3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-06T10:50:26Z",
+      "side": 1,
+      "message": "nit: same here.",
+      "range": {
+        "startLine": 429,
+        "startChar": 19,
+        "endLine": 429,
+        "endChar": 35
+      },
+      "revId": "453fc1c8cf8664409a00cba4127f5e9ed64d9adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
