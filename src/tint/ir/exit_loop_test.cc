@@ -29,11 +29,10 @@ TEST_F(IR_ExitLoopTest, Usage) {
     auto* e = b.ExitLoop(loop, utils::Vector{arg1, arg2});
     ASSERT_EQ(1u, arg1->Usage().Length());
     ASSERT_EQ(1u, arg2->Usage().Length());
-    ASSERT_EQ(1u, loop->Usage().Length());
+    EXPECT_EQ(0u, loop->Usage().Length());
 
     EXPECT_EQ(e, arg1->Usage()[0]);
     EXPECT_EQ(e, arg2->Usage()[0]);
-    EXPECT_EQ(e, loop->Usage()[0]);
 }
 
 TEST_F(IR_ExitLoopTest, Fail_NullLoop) {

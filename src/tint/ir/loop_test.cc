@@ -22,12 +22,22 @@ namespace {
 using namespace tint::number_suffixes;  // NOLINT
 using IR_LoopTest = IRTestHelper;
 
+TEST_F(IR_LoopTest, Fail_NullInitializerBlock) {
+    EXPECT_FATAL_FAILURE(
+        {
+            Module mod;
+            Builder b{mod};
+            Loop loop_(nullptr, b.CreateMergeBlock(), b.CreateMergeBlock());
+        },
+        "");
+}
+
 TEST_F(IR_LoopTest, Fail_NullBodyBlock) {
     EXPECT_FATAL_FAILURE(
         {
             Module mod;
             Builder b{mod};
-            Loop loop_(nullptr, b.CreateBlock(), b.CreateBlock());
+            Loop loop_(b.CreateBlock(), nullptr, b.CreateMergeBlock());
         },
         "");
 }
@@ -37,27 +47,7 @@ TEST_F(IR_LoopTest, Fail_NullContinuingBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop_(b.CreateBlock(), nullptr, b.CreateBlock());
-        },
-        "");
-}
-
-TEST_F(IR_LoopTest, Fail_NullMergeBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            Loop merge_(b.CreateBlock(), b.CreateBlock(), nullptr);
-        },
-        "");
-}
-
-TEST_F(IR_LoopTest, Fail_NullValue) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            b.CreateLoop(utils::Vector<Value*, 1>{nullptr});
+            Loop merge_(b.CreateBlock(), b.CreateMergeBlock(), nullptr);
         },
         "");
 }

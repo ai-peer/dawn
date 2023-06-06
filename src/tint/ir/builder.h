@@ -37,6 +37,7 @@
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/load.h"
 #include "src/tint/ir/loop.h"
+#include "src/tint/ir/merge_block.h"
 #include "src/tint/ir/module.h"
 #include "src/tint/ir/next_iteration.h"
 #include "src/tint/ir/return.h"
@@ -67,8 +68,11 @@ class Builder {
     /// Destructor
     ~Builder();
 
-    /// @returns a new block flow node
+    /// @returns a new block
     Block* CreateBlock();
+
+    /// @returns a new merge block
+    MergeBlock* CreateMergeBlock();
 
     /// Creates a function flow node
     /// @param name the function name
@@ -87,9 +91,8 @@ class Builder {
     If* CreateIf(Value* condition);
 
     /// Creates a loop flow node
-    /// @param args the branch arguments
     /// @returns the flow node
-    Loop* CreateLoop(utils::VectorRef<Value*> args = utils::Empty);
+    Loop* CreateLoop();
 
     /// Creates a switch flow node
     /// @param condition the switch condition

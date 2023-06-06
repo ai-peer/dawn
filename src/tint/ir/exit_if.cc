@@ -27,8 +27,7 @@ ExitIf::ExitIf(ir::If* i, utils::VectorRef<Value*> args /* = utils::Empty */)
     TINT_ASSERT(IR, if_);
 
     if (if_) {
-        if_->AddUsage(this);
-        if_->Merge()->AddInboundBranch(this);
+        if_->AddExit(this);
     }
 }
 
