@@ -44,7 +44,7 @@ TEST_F(IR_IfTest, Fail_NullTrueBlock) {
         {
             Module mod;
             Builder b{mod};
-            If if_(b.Constant(false), nullptr, b.CreateBlock(), b.CreateMergeBlock());
+            If if_(b.Constant(false), nullptr, b.CreateBlock());
         },
         "");
 }
@@ -54,17 +54,7 @@ TEST_F(IR_IfTest, Fail_NullFalseBlock) {
         {
             Module mod;
             Builder b{mod};
-            If if_(b.Constant(false), b.CreateBlock(), nullptr, b.CreateMergeBlock());
-        },
-        "");
-}
-
-TEST_F(IR_IfTest, Fail_NullMergeBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            If if_(b.Constant(false), b.CreateBlock(), b.CreateBlock(), nullptr);
+            If if_(b.Constant(false), b.CreateBlock(), nullptr);
         },
         "");
 }

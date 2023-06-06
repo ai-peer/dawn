@@ -27,8 +27,7 @@ ExitSwitch::ExitSwitch(ir::Switch* sw, utils::VectorRef<Value*> args /* = utils:
     TINT_ASSERT(IR, switch_);
 
     if (switch_) {
-        switch_->AddUsage(this);
-        switch_->Merge()->AddInboundBranch(this);
+        switch_->AddExit(this);
     }
 }
 

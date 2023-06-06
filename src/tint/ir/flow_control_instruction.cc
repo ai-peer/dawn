@@ -18,8 +18,6 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::FlowControlInstruction);
 
 namespace tint::ir {
 
-FlowControlInstruction::FlowControlInstruction() : Base(utils::Empty) {}
-
 FlowControlInstruction::~FlowControlInstruction() = default;
 
 }  // namespace tint::ir
