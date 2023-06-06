@@ -408,7 +408,10 @@ void GeneratorImplIr::EmitBlock(const ir::Block* block) {
     if (!current_function_.instructions().empty()) {
         current_function_.push_inst(spv::Op::OpLabel, {Label(block)});
     }
+    EmitBlockWithoutLabel(block);
+}
 
+void GeneratorImplIr::EmitBlockWithoutLabel(const ir::Block* block) {
     // If there are no instructions in the block, it's a dead end, so we shouldn't be able to get
     // here to begin with.
     if (block->IsEmpty()) {
@@ -709,30 +712,33 @@ void GeneratorImplIr::EmitLoad(const ir::Load* load) {
 }
 
 void GeneratorImplIr::EmitLoop(const ir::Loop* loop) {
-    auto header_label = module_.NextId();
+    auto init_label = loop->Initializer()->HasBranchTarget() ? Label(loop->Initializer()) : 0;
     auto body_label = Label(loop->Body());
     auto continuing_label = Label(loop->Continuing());
     auto merge_label = Label(loop->Merge());
 
-    // Branch to and emit the loop header, which contains OpLoopMerge and OpBranch instructions.
-    current_function_.push_inst(spv::Op::OpBranch, {header_label});
-    current_function_.push_inst(spv::Op::OpLabel, {header_label});
+    if (init_label != 0) {
+        // Emit the loop initializer.
+        current_function_.push_inst(spv::Op::OpBranch, {init_label});
+        EmitBlock(loop->Initializer());
+    } else {
+        // No initializer. Branch to body.
+        current_function_.push_inst(spv::Op::OpBranch, {body_label});
+    }
+
+    // Emit the loop body, which starts with the OpLoopMerge.
+    current_function_.push_inst(spv::Op::OpLabel, {body_label});
     current_function_.push_inst(
         spv::Op::OpLoopMerge, {merge_label, continuing_label, U32Operand(SpvLoopControlMaskNone)});
-    current_function_.push_inst(spv::Op::OpBranch, {body_label});
-
-    // Emit the loop body.
-    EmitBlock(loop->Body());
+    EmitBlockWithoutLabel(loop->Body());
 
     // Emit the loop continuing block.
-    // The back-edge needs to go to the loop header, so update the label for the start block.
-    block_labels_.Replace(loop->Body(), header_label);
     if (loop->Continuing()->HasBranchTarget()) {
         EmitBlock(loop->Continuing());
     } else {
         // We still need to emit a continuing block with a back-edge, even if it is unreachable.
         current_function_.push_inst(spv::Op::OpLabel, {continuing_label});
-        current_function_.push_inst(spv::Op::OpBranch, {header_label});
+        current_function_.push_inst(spv::Op::OpBranch, {body_label});
     }
 
     // Emit the loop merge block.
