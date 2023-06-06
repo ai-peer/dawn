@@ -18,6 +18,7 @@
 #include "src/tint/type/f16.h"
 #include "src/tint/type/reference.h"
 #include "src/tint/type/test_helper.h"
+#include "src/tint/type/tuple.h"
 
 namespace tint::type {
 namespace {
@@ -150,6 +151,7 @@ struct TypeTest : public TestHelper {
         /* size */ 5u * 4u,
         /* stride */ 5u * 4u,
         /* implicit_stride */ 5u * 4u);
+    const Tuple* tup_i32_f32_u32 = create<Tuple>(utils::Vector{i32, f32, u32});
 
     TypeTest() { str_af->SetConcreteTypes(utils::Vector{str_f32, str_f16}); }
 };
@@ -173,6 +175,7 @@ TEST_F(TypeTest, ConversionRank) {
     EXPECT_EQ(Type::ConversionRank(mat4x3_af, mat4x3_af), 0u);
     EXPECT_EQ(Type::ConversionRank(arr_mat4x3_af, arr_mat4x3_af), 0u);
     EXPECT_EQ(Type::ConversionRank(ref_u32, u32), 0u);
+    EXPECT_EQ(Type::ConversionRank(tup_i32_f32_u32, tup_i32_f32_u32), 0u);
 
     EXPECT_EQ(Type::ConversionRank(af, f32), 1u);
     EXPECT_EQ(Type::ConversionRank(vec3_af, vec3_f32), 1u);
@@ -218,6 +221,7 @@ TEST_F(TypeTest, ConversionRank) {
     EXPECT_EQ(Type::ConversionRank(str_f16, str_f32), Type::kNoConversion);
     EXPECT_EQ(Type::ConversionRank(str_f32, str_af), Type::kNoConversion);
     EXPECT_EQ(Type::ConversionRank(str_f16, str_af), Type::kNoConversion);
+    EXPECT_EQ(Type::ConversionRank(tup_i32_f32_u32, i32), Type::kNoConversion);
 }
 
 TEST_F(TypeTest, Elements) {
@@ -239,6 +243,7 @@ TEST_F(TypeTest, Elements) {
     EXPECT_EQ(arr_mat4x3_f16->Elements(), (TypeAndCount{mat4x3_f16, 5u}));
     EXPECT_EQ(arr_mat4x3_af->Elements(), (TypeAndCount{mat4x3_af, 5u}));
     EXPECT_EQ(arr_str_f16->Elements(), (TypeAndCount{str_f16, 5u}));
+    EXPECT_EQ(tup_i32_f32_u32->Elements(), (TypeAndCount{nullptr, 3u}));
 }
 
 TEST_F(TypeTest, ElementsWithCustomInvalid) {
@@ -260,6 +265,7 @@ TEST_F(TypeTest, ElementsWithCustomInvalid) {
     EXPECT_EQ(arr_mat4x3_f16->Elements(arr_mat4x3_f16, 42), (TypeAndCount{mat4x3_f16, 5u}));
     EXPECT_EQ(arr_mat4x3_af->Elements(arr_mat4x3_af, 42), (TypeAndCount{mat4x3_af, 5u}));
     EXPECT_EQ(arr_str_f16->Elements(arr_str_f16, 42), (TypeAndCount{str_f16, 5u}));
+    EXPECT_EQ(tup_i32_f32_u32->Elements(tup_i32_f32_u32, 42), (TypeAndCount{tup_i32_f32_u32, 3u}));
 }
 
 TEST_F(TypeTest, Element) {
@@ -297,6 +303,10 @@ TEST_F(TypeTest, Element) {
     EXPECT_TYPE(arr_str_f16->Element(0), str_f16);
     EXPECT_TYPE(arr_str_f16->Element(1), str_f16);
     EXPECT_TYPE(arr_str_f16->Element(10), nullptr);
+    EXPECT_EQ(tup_i32_f32_u32->Element(0), i32);
+    EXPECT_EQ(tup_i32_f32_u32->Element(1), f32);
+    EXPECT_EQ(tup_i32_f32_u32->Element(2), u32);
+    EXPECT_EQ(tup_i32_f32_u32->Element(3), nullptr);
 }
 
 TEST_F(TypeTest, DeepestElement) {
@@ -318,6 +328,7 @@ TEST_F(TypeTest, DeepestElement) {
     EXPECT_TYPE(arr_mat4x3_f16->DeepestElement(), f16);
     EXPECT_TYPE(arr_mat4x3_af->DeepestElement(), af);
     EXPECT_TYPE(arr_str_f16->DeepestElement(), str_f16);
+    EXPECT_TYPE(tup_i32_f32_u32->DeepestElement(), tup_i32_f32_u32);
 }
 
 TEST_F(TypeTest, Common2) {
