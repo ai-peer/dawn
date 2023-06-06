@@ -130,6 +130,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cf5d7eb_0f2fda91",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-06T10:38:30Z",
+      "side": 1,
+      "message": "This should do the trick:\n\n```\n    /// Copy constructor with covariance / const conversion\n    /// @param other the slice to copy\n    /// @see CanReinterpretSlice for rules about conversion\n    template \u003ctypename U,\n              typename \u003d std::enable_if_t\u003cCanReinterpretSlice\u003cReinterpretMode::kSafe, T, U\u003e\u003e\u003e\n    Slice(const Slice\u003cU\u003e\u0026 other) {  // NOLINT(runtime/explicit)\n        *this \u003d other.template Reinterpret\u003cT, ReinterpretMode::kSafe\u003e();\n    }\n\n```",
+      "parentUuid": "873b1192_7c5b6b7b",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0769334c_128c2b9b",
         "filename": "src/tint/ir/disassembler.cc",
         "patchSetId": 5
