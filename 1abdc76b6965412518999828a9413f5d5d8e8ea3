@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "058810b4_d37dee99",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "I added the `AddOperand` helper (to `OperandInstruction`), but I didn\u0027t push the `TINT_ASSERT` calls into it since it\u0027s the sub-classes that know whether or not an operand can be `nullptr`.",
+      "parentUuid": "d154dacf_e2b42407",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9aff4918_4a25b385",
         "filename": "src/tint/ir/branch.h",
         "patchSetId": 5
@@ -37,6 +61,24 @@
       "writtenOn": "2023-06-05T22:35:13Z",
       "side": 1,
       "message": "Why `4` here? it seems like no operand branches would be more common?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e495e05_d1cd0428",
+        "filename": "src/tint/ir/branch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Changed to `1` for now.\n\nWe have `breakif`, `if`, and `switch` which have a condition operand, and `return` will often have an operand too. The others will sometimes have block arguments to pass.",
+      "parentUuid": "9aff4918_4a25b385",
       "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -78,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cae00f35_424f7336",
+        "filename": "src/tint/ir/break_if.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Added `OperandInstruction::AddOperands()`. There\u0027s some asymmetry here with `AddOperand` as I put the `TINT_ASSERT` in `AddOperands()` but not in `AddOperand()` (see comment in the other thread).",
+      "parentUuid": "d329fdb1_b8884468",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "198a7fbd_4bd597ff",
         "filename": "src/tint/ir/builtin.cc",
         "patchSetId": 5
@@ -89,6 +149,24 @@
       "writtenOn": "2023-06-05T22:35:13Z",
       "side": 1,
       "message": "Ditto `SetArgs` method on `Call`?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "140b0091_d6834e62",
+        "filename": "src/tint/ir/builtin.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Did this with `AddOperands()`.",
+      "parentUuid": "198a7fbd_4bd597ff",
       "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -164,6 +242,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba1a807_14b8ccc1",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19a2ff1a_32299a28",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0769334c_128c2b9b",
@@ -177,6 +273,24 @@
       "writtenOn": "2023-06-05T22:35:13Z",
       "side": 1,
       "message": "nit: `tint::ir::` shouldn\u0027t be needed I don\u0027t think",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf3295f_e4ed71d6",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0769334c_128c2b9b",
       "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -198,6 +312,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "956a5eb4_e2e21cbc",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3624ad78_e33b06c1",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dbe154d_f0992b2d",
@@ -211,6 +343,24 @@
       "writtenOn": "2023-06-06T01:25:46Z",
       "side": 1,
       "message": "Remove?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9839370_e35e584e",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dbe154d_f0992b2d",
       "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -232,6 +382,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b641cf4_eb99fd2a",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b34c64a_774d5603",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96c4ca71_b916b439",
@@ -245,6 +413,24 @@
       "writtenOn": "2023-06-06T01:25:46Z",
       "side": 1,
       "message": "Remove?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4f3602_e7cd5889",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96c4ca71_b916b439",
       "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -286,6 +472,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "da9ce754_9393b110",
+        "filename": "src/tint/ir/swizzle.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d2201be_14cddf6f",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "81490592_0fdbf559",
         "filename": "src/tint/ir/user_call.h",
         "patchSetId": 5
@@ -320,6 +524,24 @@
       "writtenOn": "2023-06-05T22:35:13Z",
       "side": 1,
       "message": "We always push an `operand_` so is the length check needed?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf61ed37_da9577ce",
+        "filename": "src/tint/ir/var.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T18:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffe4a5ee_edd5e24e",
       "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
