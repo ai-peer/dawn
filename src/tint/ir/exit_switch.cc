@@ -30,7 +30,7 @@ ExitSwitch::ExitSwitch(ir::Switch* sw, utils::VectorRef<Value*> args /* = utils:
     AddOperands(ExitSwitch::kArgsOperandOffset, std::move(args));
 
     if (switch_) {
-        switch_->Merge()->AddInboundSiblingBranch(this);
+        switch_->AddExit(this);
     }
 }
 

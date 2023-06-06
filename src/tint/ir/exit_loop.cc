@@ -31,7 +31,7 @@ ExitLoop::ExitLoop(ir::Loop* loop, utils::VectorRef<Value*> args /* = utils::Emp
     AddOperands(ExitLoop::kArgsOperandOffset, std::move(args));
 
     if (loop_) {
-        loop_->Merge()->AddInboundSiblingBranch(this);
+        loop_->AddExit(this);
     }
 }
 
