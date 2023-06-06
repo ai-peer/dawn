@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0feee1af_d7cf0317",
+        "filename": "src/tint/ir/to_program_roundtrip_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T17:17:38Z",
+      "side": 1,
+      "message": "Do you want to add tests for the compound assignments and for the ++, -- operators?\n\nIn the IR they all collapse down into BinaryOps, which means you\u0027re in/out will differ.",
+      "revId": "0e2739d0f6cf8e0b89a4788243fa473105d759e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
