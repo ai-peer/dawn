@@ -69,6 +69,24 @@
       "parentUuid": "7a29bd0d_bd113ef0",
       "revId": "b587fb35790babd2638374a1234e95d7f2ea7357",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0136499_a0b03064",
+        "filename": "src/dawn/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-06T22:18:43Z",
+      "side": 1,
+      "message": "in https://dawn-review.googlesource.com/c/dawn/+/136300",
+      "parentUuid": "89450d0c_b55d626a",
+      "revId": "b587fb35790babd2638374a1234e95d7f2ea7357",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
