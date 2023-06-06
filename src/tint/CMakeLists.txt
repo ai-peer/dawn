@@ -513,6 +513,8 @@ list(APPEND TINT_LIB_SRCS
   type/texture.h
   type/texture_dimension.cc
   type/texture_dimension.h
+  type/tuple.cc
+  type/tuple.h
   type/type.cc
   type/type.h
   type/u32.cc
@@ -1064,6 +1066,7 @@ if(TINT_BUILD_TESTS)
     type/storage_texture_test.cc
     type/struct_test.cc
     type/texture_test.cc
+    type/tuple_test.cc
     type/type_test.cc
     type/u32_test.cc
     type/vector_test.cc
