@@ -16,6 +16,23 @@
       "message": "PTAL, happy to take suggestions for tweaks to the format.",
       "revId": "d3356c27119fd59c47efd4da309783880ca5d1dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66c0bf44_d3700f89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T23:05:09Z",
+      "side": 1,
+      "message": "LGTM as an initial step.\nI think it would be sensible to ID types similarly to values, not necessarily with a `%`, but with some this-is-an-id prefix.\n\nDan for +2",
+      "revId": "d3356c27119fd59c47efd4da309783880ca5d1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
