@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e67765e9_a42a6ef4",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T12:12:32Z",
+      "side": 1,
+      "message": "No strong opinons.",
+      "parentUuid": "51949c5e_3e66429b",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8419bb12_6241b91f",
         "filename": "src/tint/ir/disassembler.cc",
         "patchSetId": 1
@@ -116,6 +134,24 @@
       "writtenOn": "2023-06-06T03:45:30Z",
       "side": 1,
       "message": "Non-const\u0027d so we can attach the disassembly file.",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f4fa2c_f13a2999",
+        "filename": "src/tint/ir/validate.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T12:12:32Z",
+      "side": 1,
+      "message": "Ack - although what if the disassembly_file already exists?",
+      "parentUuid": "e3389c01_84ef2c9a",
       "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
