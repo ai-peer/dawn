@@ -16,7 +16,7 @@
 
 #include <utility>
 
-#include "src/tint/ir/block.h"
+#include "src/tint/ir/merge_block.h"
 #include "src/tint/ir/switch.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::ExitSwitch);

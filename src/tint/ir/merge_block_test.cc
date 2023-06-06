@@ -12,52 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/loop.h"
+#include "src/tint/ir/merge_block.h"
 #include "gtest/gtest-spi.h"
+#include "src/tint/ir/block_param.h"
 #include "src/tint/ir/ir_test_helper.h"
 
 namespace tint::ir {
 namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
-using IR_LoopTest = IRTestHelper;
+using IR_MergeBlockTest = IRTestHelper;
 
-TEST_F(IR_LoopTest, Fail_NullInitializerBlock) {
+TEST_F(IR_MergeBlockTest, Fail_NullBlockParam) {
     EXPECT_FATAL_FAILURE(
         {
             Module mod;
             Builder b{mod};
-            Loop loop(nullptr, b.CreateMergeBlock(), b.CreateMergeBlock(), b.CreateMergeBlock());
+
+            auto* blk = b.CreateMergeBlock();
+            blk->SetParams(utils::Vector<const BlockParam*, 1>{nullptr});
         },
         "");
 }
 
-TEST_F(IR_LoopTest, Fail_NullBodyBlock) {
+TEST_F(IR_MergeBlockTest, Fail_NullInboundBranch) {
     EXPECT_FATAL_FAILURE(
         {
             Module mod;
             Builder b{mod};
-            Loop loop(b.CreateBlock(), nullptr, b.CreateMergeBlock(), b.CreateMergeBlock());
-        },
-        "");
-}
 
-TEST_F(IR_LoopTest, Fail_NullContinuingBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            Loop loop(b.CreateBlock(), b.CreateMergeBlock(), nullptr, b.CreateMergeBlock());
-        },
-        "");
-}
-
-TEST_F(IR_LoopTest, Fail_NullMergeBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            Loop loop(b.CreateBlock(), b.CreateMergeBlock(), b.CreateMergeBlock(), nullptr);
+            auto* blk = b.CreateMergeBlock();
+            blk->AddInboundBranch(nullptr);
         },
         "");
 }
