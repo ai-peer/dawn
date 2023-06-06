@@ -18,9 +18,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Switch);
 
 namespace tint::ir {
 
-Switch::Switch(Value* cond, ir::MergeBlock* m) : condition_(cond), merge_(m) {
+Switch::Switch(Value* cond) : condition_(cond) {
     TINT_ASSERT(IR, condition_);
-    TINT_ASSERT(IR, merge_);
 
     if (condition_) {
         condition_->AddUsage(this);
