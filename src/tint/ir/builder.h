@@ -123,8 +123,8 @@ class Builder {
     /// @returns the flow node
     template <typename T>
     ir::If* If(T&& condition) {
-        return Append(ir.instructions.Create<ir::If>(Value(std::forward<T>(condition)), Block(),
-                                                     Block(), MultiInBlock()));
+        return Append(
+            ir.instructions.Create<ir::If>(Value(std::forward<T>(condition)), Block(), Block()));
     }
 
     /// Creates a loop flow node
@@ -136,8 +136,7 @@ class Builder {
     /// @returns the flow node
     template <typename T>
     ir::Switch* Switch(T&& condition) {
-        return Append(
-            ir.instructions.Create<ir::Switch>(Value(std::forward<T>(condition)), MultiInBlock()));
+        return Append(ir.instructions.Create<ir::Switch>(Value(std::forward<T>(condition))));
     }
 
     /// Creates a case flow node for the given case branch.

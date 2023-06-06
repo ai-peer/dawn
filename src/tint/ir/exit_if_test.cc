@@ -32,6 +32,7 @@ TEST_F(IR_ExitIfTest, Usage) {
 
     EXPECT_THAT(arg1->Usages(), testing::UnorderedElementsAre(Usage{e, 0u}));
     EXPECT_THAT(arg2->Usages(), testing::UnorderedElementsAre(Usage{e, 1u}));
+    EXPECT_EQ(if_->Result(), nullptr);
 }
 
 TEST_F(IR_ExitIfTest, Result) {
