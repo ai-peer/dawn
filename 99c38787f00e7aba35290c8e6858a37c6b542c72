@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d86c675_31f96de5",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T18:33:52Z",
+      "side": 1,
+      "message": "nit: It\u0027s probably cheaper to use `b` in this lambda (and the equivalent in others). Using `inst` will require an extra lambda capture, which is the same pointer as `b`.",
+      "range": {
+        "startLine": 366,
+        "startChar": 21,
+        "endLine": 366,
+        "endChar": 25
+      },
+      "revId": "99c38787f00e7aba35290c8e6858a37c6b542c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3896b43f_ee56634a",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T18:33:52Z",
+      "side": 1,
+      "message": "No request for change on this CL, but this is now a common pattern. \n\nPerhaps add and use a `EmitInstruction(std::string_view name, const Instruction* inst)`, that consolidates these three lines",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 27
+      },
+      "revId": "99c38787f00e7aba35290c8e6858a37c6b542c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b042bd5d_625def85",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T18:33:52Z",
+      "side": 1,
+      "message": "Need to be public?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 43
+      },
+      "revId": "99c38787f00e7aba35290c8e6858a37c6b542c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b08522_60b1803c",
+        "filename": "src/tint/ir/module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T18:33:52Z",
+      "side": 1,
+      "message": "`disassembly text`",
+      "range": {
+        "startLine": 94,
+        "startChar": 67,
+        "endLine": 94,
+        "endChar": 91
+      },
+      "revId": "99c38787f00e7aba35290c8e6858a37c6b542c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1b5d27_5f9a19c9",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T18:33:52Z",
+      "side": 1,
+      "message": "nice!",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 19
+      },
+      "revId": "99c38787f00e7aba35290c8e6858a37c6b542c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
