@@ -34,7 +34,6 @@ TEST_F(IR_IfTest, Parent) {
     auto* if_ = b.CreateIf(cond);
     EXPECT_EQ(if_->True()->Parent(), if_);
     EXPECT_EQ(if_->False()->Parent(), if_);
-    EXPECT_EQ(if_->Merge()->Parent(), if_);
 }
 
 TEST_F(IR_IfTest, Fail_NullCondition) {
@@ -52,7 +51,7 @@ TEST_F(IR_IfTest, Fail_NullTrueBlock) {
         {
             Module mod;
             Builder b{mod};
-            If if_(b.Constant(false), nullptr, b.CreateBlock(), b.CreateMultiInBlock());
+            If if_(b.Constant(false), nullptr, b.CreateBlock());
         },
         "");
 }
@@ -62,17 +61,7 @@ TEST_F(IR_IfTest, Fail_NullFalseBlock) {
         {
             Module mod;
             Builder b{mod};
-            If if_(b.Constant(false), b.CreateBlock(), nullptr, b.CreateMultiInBlock());
-        },
-        "");
-}
-
-TEST_F(IR_IfTest, Fail_NullMultiInBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            If if_(b.Constant(false), b.CreateBlock(), b.CreateBlock(), nullptr);
+            If if_(b.Constant(false), b.CreateBlock(), nullptr);
         },
         "");
 }
