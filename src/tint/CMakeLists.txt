@@ -757,6 +757,8 @@ if(${TINT_BUILD_IR})
     ir/exit_loop.h
     ir/exit_switch.cc
     ir/exit_switch.h
+    ir/flow_control_instruction.cc
+    ir/flow_control_instruction.h
     ir/from_program.cc
     ir/from_program.h
     ir/function.cc
@@ -772,6 +774,8 @@ if(${TINT_BUILD_IR})
     ir/location.h
     ir/loop.cc
     ir/loop.h
+    ir/merge_block.cc
+    ir/merge_block.h
     ir/module.cc
     ir/module.h
     ir/next_iteration.cc
@@ -1525,6 +1529,7 @@ if(TINT_BUILD_TESTS)
       ir/ir_test_helper.h
       ir/load_test.cc
       ir/loop_test.cc
+      ir/merge_block_test.cc
       ir/module_test.cc
       ir/next_iteration_test.cc
       ir/program_test_helper.h

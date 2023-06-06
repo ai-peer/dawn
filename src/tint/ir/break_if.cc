@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "src/tint/ir/loop.h"
+#include "src/tint/ir/merge_block.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::BreakIf);
 
@@ -35,7 +36,6 @@ BreakIf::BreakIf(Value* condition,
     if (loop_) {
         loop_->AddUsage(this);
         loop_->Body()->AddInboundBranch(this);
-        loop_->Merge()->AddInboundBranch(this);
     }
 }
 
