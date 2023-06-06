@@ -17,6 +17,11 @@
 
 #include "src/tint/ir/control_instruction.h"
 
+// Forward declarations
+namespace tint::ir {
+class MergeBlock;
+}  // namespace tint::ir
+
 namespace tint::ir {
 
 /// Loop instruction.
@@ -62,7 +67,7 @@ class Loop : public utils::Castable<Loop, ControlInstruction> {
     /// @param b the body block
     /// @param c the continuing block
     /// @param m the merge block
-    Loop(ir::Block* i, ir::Block* b, ir::Block* c, ir::Block* m);
+    Loop(ir::Block* i, ir::MergeBlock* b, ir::MergeBlock* c, ir::MergeBlock* m);
     ~Loop() override;
 
     /// @returns the switch initializer block
@@ -75,25 +80,25 @@ class Loop : public utils::Castable<Loop, ControlInstruction> {
     bool HasInitializer() const;
 
     /// @returns the switch start block
-    const ir::Block* Body() const { return body_; }
+    const ir::MergeBlock* Body() const { return body_; }
     /// @returns the switch start block
-    ir::Block* Body() { return body_; }
+    ir::MergeBlock* Body() { return body_; }
 
     /// @returns the switch continuing block
-    const ir::Block* Continuing() const { return continuing_; }
+    const ir::MergeBlock* Continuing() const { return continuing_; }
     /// @returns the switch continuing block
-    ir::Block* Continuing() { return continuing_; }
+    ir::MergeBlock* Continuing() { return continuing_; }
 
     /// @returns the switch merge branch
-    const ir::Block* Merge() const { return merge_; }
+    const ir::MergeBlock* Merge() const { return merge_; }
     /// @returns the switch merge branch
-    ir::Block* Merge() { return merge_; }
+    ir::MergeBlock* Merge() { return merge_; }
 
   private:
     ir::Block* initializer_ = nullptr;
-    ir::Block* body_ = nullptr;
-    ir::Block* continuing_ = nullptr;
-    ir::Block* merge_ = nullptr;
+    ir::MergeBlock* body_ = nullptr;
+    ir::MergeBlock* continuing_ = nullptr;
+    ir::MergeBlock* merge_ = nullptr;
 };
 
 }  // namespace tint::ir
