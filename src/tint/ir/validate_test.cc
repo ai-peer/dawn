@@ -562,6 +562,7 @@ TEST_F(IR_ValidateTest, If_ConditionIsBool) {
     if_->False()->Append(b.Return(f));
 
     f->StartTarget()->Append(if_);
+    f->StartTarget()->Append(b.Return(f));
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
@@ -594,6 +595,8 @@ TEST_F(IR_ValidateTest, If_ConditionIsBool) {
 ^^^^^^^
 
 
+    ret
+^^^^^^^
   }
 ^^^
 
@@ -611,6 +614,7 @@ note: # Disassembly
         ret
       }
 
+    ret
   }
 }
 )");
