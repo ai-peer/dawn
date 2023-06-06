@@ -88,6 +88,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3624ad78_e33b06c1",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T01:25:46Z",
+      "side": 1,
+      "message": "Should this be `operands[0]` ?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dbe154d_f0992b2d",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T01:25:46Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b34c64a_774d5603",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T01:25:46Z",
+      "side": 1,
+      "message": "operands_[0]?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c4ca71_b916b439",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T01:25:46Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "1abdc76b6965412518999828a9413f5d5d8e8ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2edd629d_9bc072c1",
         "filename": "src/tint/ir/swizzle.cc",
         "patchSetId": 5
