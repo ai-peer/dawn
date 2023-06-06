@@ -82,13 +82,6 @@ void Disassembler::EmitLine() {
     current_output_start_pos_ = out_.tellp();
 }
 
-void Disassembler::EmitBlockInstructions(Block* b) {
-    for (auto* inst : *b) {
-        Indent();
-        EmitInstruction(inst);
-    }
-}
-
 size_t Disassembler::IdOf(Block* node) {
     TINT_ASSERT(IR, node);
     return block_ids_.GetOrCreate(node, [&] { return block_ids_.Count(); });
@@ -118,7 +111,7 @@ std::string Disassembler::Disassemble() {
     if (mod_.root_block) {
         Indent() << "# Root block";
         EmitLine();
-        WalkInternal(mod_.root_block);
+        EmitBlock(mod_.root_block);
         EmitLine();
     }
 
@@ -128,15 +121,7 @@ std::string Disassembler::Disassemble() {
     return out_.str();
 }
 
-void Disassembler::Walk(Block* blk) {
-    if (visited_.Contains(blk)) {
-        return;
-    }
-    visited_.Add(blk);
-    WalkInternal(blk);
-}
-
-void Disassembler::WalkInternal(Block* blk) {
+void Disassembler::EmitBlock(Block* blk) {
     Indent();
 
     SourceMarker sm(this);
@@ -154,7 +139,10 @@ void Disassembler::WalkInternal(Block* blk) {
     EmitLine();
     {
         ScopedIndent si(indent_size_);
-        EmitBlockInstructions(blk);
+        for (auto* inst : *blk) {
+            Indent();
+            EmitInstruction(inst);
+        }
     }
     Indent() << "}";
 
@@ -279,7 +267,7 @@ void Disassembler::EmitFunction(Function* func) {
 
     {
         ScopedIndent si(indent_size_);
-        Walk(func->StartTarget());
+        EmitBlock(func->StartTarget());
     }
     Indent() << "}";
     EmitLine();
@@ -494,6 +482,10 @@ void Disassembler::EmitOperandList(Instruction* inst,
 
 void Disassembler::EmitIf(If* i) {
     SourceMarker sm(this);
+    if (i->Type()) {
+        EmitValueWithType(i);
+        out_ << " = ";
+    }
     out_ << "if ";
     EmitOperand(i, i->Condition(), If::kConditionOperandOffset);
 
@@ -510,9 +502,6 @@ void Disassembler::EmitIf(If* i) {
         }
         out_ << "f: %b" << IdOf(i->False());
     }
-    if (i->Merge()->HasBranchTarget()) {
-        out_ << ", m: %b" << IdOf(i->Merge());
-    }
     out_ << "]";
     sm.Store(i);
 
@@ -523,7 +512,7 @@ void Disassembler::EmitIf(If* i) {
         Indent() << "# True block";
         EmitLine();
 
-        Walk(i->True());
+        EmitBlock(i->True());
         EmitLine();
     }
     if (has_false) {
@@ -531,19 +520,13 @@ void Disassembler::EmitIf(If* i) {
         Indent() << "# False block";
         EmitLine();
 
-        Walk(i->False());
-        EmitLine();
-    }
-    if (i->Merge()->HasBranchTarget()) {
-        Indent() << "# Merge block";
-        EmitLine();
-        Walk(i->Merge());
+        EmitBlock(i->False());
         EmitLine();
     }
 }
 
 void Disassembler::EmitLoop(Loop* l) {
-    utils::Vector<std::string, 4> parts;
+    utils::Vector<std::string, 3> parts;
     if (l->Initializer()->HasBranchTarget()) {
         parts.Push("i: %b" + std::to_string(IdOf(l->Initializer())));
     }
@@ -554,19 +537,17 @@ void Disassembler::EmitLoop(Loop* l) {
     if (l->Continuing()->HasBranchTarget()) {
         parts.Push("c: %b" + std::to_string(IdOf(l->Continuing())));
     }
-    if (l->Merge()->HasBranchTarget()) {
-        parts.Push("m: %b" + std::to_string(IdOf(l->Merge())));
-    }
     SourceMarker sm(this);
     out_ << "loop [" << utils::Join(parts, ", ") << "]";
     sm.Store(l);
+
     EmitLine();
 
     if (l->Initializer()->HasBranchTarget()) {
         ScopedIndent si(indent_size_);
         Indent() << "# Initializer block";
         EmitLine();
-        Walk(l->Initializer());
+        EmitBlock(l->Initializer());
         EmitLine();
     }
 
@@ -574,7 +555,7 @@ void Disassembler::EmitLoop(Loop* l) {
         ScopedIndent si(indent_size_);
         Indent() << "# Body block";
         EmitLine();
-        Walk(l->Body());
+        EmitBlock(l->Body());
         EmitLine();
     }
 
@@ -582,14 +563,7 @@ void Disassembler::EmitLoop(Loop* l) {
         ScopedIndent si(indent_size_);
         Indent() << "# Continuing block";
         EmitLine();
-        Walk(l->Continuing());
-        EmitLine();
-    }
-    if (l->Merge()->HasBranchTarget()) {
-        Indent() << "# Merge block";
-        EmitLine();
-
-        Walk(l->Merge());
+        EmitBlock(l->Continuing());
         EmitLine();
     }
 }
@@ -616,9 +590,6 @@ void Disassembler::EmitSwitch(Switch* s) {
         }
         out_ << ", %b" << IdOf(c.Start()) << ")";
     }
-    if (s->Merge()->HasBranchTarget()) {
-        out_ << ", m: %b" << IdOf(s->Merge());
-    }
     out_ << "]";
     EmitLine();
 
@@ -627,14 +598,7 @@ void Disassembler::EmitSwitch(Switch* s) {
         Indent() << "# Case block";
         EmitLine();
 
-        Walk(c.Start());
-        EmitLine();
-    }
-    if (s->Merge()->HasBranchTarget()) {
-        Indent() << "# Merge block";
-        EmitLine();
-
-        Walk(s->Merge());
+        EmitBlock(c.Start());
         EmitLine();
     }
 }
@@ -642,14 +606,14 @@ void Disassembler::EmitSwitch(Switch* s) {
 void Disassembler::EmitBranch(Branch* b) {
     SourceMarker sm(this);
     tint::Switch(
-        b,  //
-        [&](Return*) { out_ << "ret"; },
-        [&](Continue* cont) { out_ << "continue %b" << IdOf(cont->Loop()->Continuing()); },
-        [&](ExitIf* ei) { out_ << "exit_if %b" << IdOf(ei->If()->Merge()); },
-        [&](ExitSwitch* es) { out_ << "exit_switch %b" << IdOf(es->Switch()->Merge()); },
-        [&](ExitLoop* el) { out_ << "exit_loop %b" << IdOf(el->Loop()->Merge()); },
-        [&](NextIteration* ni) { out_ << "next_iteration %b" << IdOf(ni->Loop()->Body()); },
-        [&](BreakIf* bi) {
+        b,                                                                                        //
+        [&](ir::Return*) { out_ << "ret"; },                                                      //
+        [&](ir::Continue* cont) { out_ << "continue %b" << IdOf(cont->Loop()->Continuing()); },   //
+        [&](ir::ExitIf*) { out_ << "exit_if"; },                                                  //
+        [&](ir::ExitSwitch*) { out_ << "exit_switch"; },                                          //
+        [&](ir::ExitLoop*) { out_ << "exit_loop"; },                                              //
+        [&](ir::NextIteration* ni) { out_ << "next_iteration %b" << IdOf(ni->Loop()->Body()); },  //
+        [&](ir::BreakIf* bi) {
             out_ << "break_if ";
             EmitValue(bi->Condition());
             out_ << " %b" << IdOf(bi->Loop()->Body());
