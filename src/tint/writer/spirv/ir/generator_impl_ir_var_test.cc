@@ -105,9 +105,11 @@ TEST_F(SpvGeneratorImplTest, FunctionVar_DeclInsideBlock) {
     auto* i = b.If(true);
     i->True()->SetInstructions({v, b.ExitIf(i)});
     i->False()->SetInstructions({b.Return(func)});
-    i->Merge()->SetInstructions({b.Return(func)});
 
-    func->StartTarget()->SetInstructions({i});
+    func->StartTarget()->SetInstructions({
+        i,
+        b.Return(func),
+    });
 
     ASSERT_TRUE(IRIsValid()) << Error();
 
