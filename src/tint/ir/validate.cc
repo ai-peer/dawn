@@ -186,8 +186,11 @@ class Validator {
             [&](const ir::Binary*) {},                     //
             [&](const ir::Branch* b) { CheckBranch(b); },  //
             [&](const ir::Call* c) { CheckCall(c); },      //
+            [&](const ir::If* if_) { CheckIf(if_); },      //
             [&](const ir::Load*) {},                       //
+            [&](const ir::Loop*) {},                       //
             [&](const ir::Store*) {},                      //
+            [&](const ir::Switch*) {},                     //
             [&](const ir::Swizzle*) {},                    //
             [&](const ir::Unary*) {},                      //
             [&](const ir::Var*) {},                        //
@@ -277,21 +280,18 @@ class Validator {
 
     void CheckBranch(const ir::Branch* b) {
         tint::Switch(
-            b,                                         //
-            [&](const ir::BreakIf*) {},                //
-            [&](const ir::Continue*) {},               //
-            [&](const ir::ExitIf*) {},                 //
-            [&](const ir::ExitLoop*) {},               //
-            [&](const ir::ExitSwitch*) {},             //
-            [&](const ir::If* if_) { CheckIf(if_); },  //
-            [&](const ir::Loop*) {},                   //
-            [&](const ir::NextIteration*) {},          //
+            b,                                 //
+            [&](const ir::BreakIf*) {},        //
+            [&](const ir::Continue*) {},       //
+            [&](const ir::ExitIf*) {},         //
+            [&](const ir::ExitLoop*) {},       //
+            [&](const ir::ExitSwitch*) {},     //
+            [&](const ir::NextIteration*) {},  //
             [&](const ir::Return* ret) {
                 if (ret->Func() == nullptr) {
                     AddError("return: null function");
                 }
-            },                          //
-            [&](const ir::Switch*) {},  //
+            },
             [&](Default) {
                 AddError(std::string("missing validation of branch: ") + b->TypeInfo().name);
             });
