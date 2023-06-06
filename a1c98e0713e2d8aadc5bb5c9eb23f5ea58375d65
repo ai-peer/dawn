@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e41cef4c_cfaf1c45",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-06T04:55:09Z",
+      "side": 1,
+      "message": "So to be clear, `skip_serialize` already exists (see https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/dawn_wire.json;l\u003d40). I\u0027m just extending it for this. I\u0027m hesitant to add another concept of serializable on top of that because then it becomes a really overloaded term.\n\nMaybe it will work for the `Serialize` function to do something like that, but IIUC, just cause something is `skip_serialize` it does NOT mean it skips being `Deserialize`d. I think maybe a better way is to define the two cases more explicitly? WDYT?",
+      "parentUuid": "f07eaaa8_eb1dc0d1",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 0
+      },
+      "revId": "a1c98e0713e2d8aadc5bb5c9eb23f5ea58375d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2eb331e4_be761ec3",
         "filename": "generator/templates/dawn/wire/WireCmd.cpp",
         "patchSetId": 2
