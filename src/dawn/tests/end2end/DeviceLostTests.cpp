@@ -449,7 +449,9 @@ TEST_P(DeviceLostTest, DeviceLostBeforeCreatePipelineAsyncCallback) {
 
     auto callback = [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
                        const char* message, void* userdata) {
-        EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_DeviceLost, status);
+        EXPECT_EQ(WGPUCreatePipelineAsyncStatus_Success, status);
+        EXPECT_NE(returnPipeline, nullptr);
+        wgpu::ComputePipeline::Acquire(returnPipeline);
     };
 
     device.CreateComputePipelineAsync(&descriptor, callback, nullptr);
