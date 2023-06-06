@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d321c4b_7998b901",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T09:19:00Z",
+      "side": 1,
+      "message": "No action required, more musing:\n\nYou _could_ address my ramblings in https://dawn-review.googlesource.com/c/dawn/+/135760/comment/81490592_0fdbf559/ by adding:\n\n```\nvoid UserCall::SetOperand(uint32_t index, ir::Value* value) {\n  if (index \u003d\u003d 0 \u0026\u0026 value) {\n     TINT_ASSERT(value-\u003eIs\u003cFunction\u003e());\n  }\n  Instruction::SetOperand(index, value);\n}\n```\n\nAnd then you can probably safely change:\n\n```\nconst Function* Func() const { return operands_.Front()-\u003eAs\u003cir::Function\u003e(); }\n```\n\nto\n\n```\nconst Function* Func() const { return static_cast\u003cir::Function*\u003e(operands_.Front()); }\n```\n\nAgain though, if this is an approach we want to go with, then we could probably push all this complexity into a tuple variant of `OperandInstruction`.",
+      "range": {
+        "startLine": 58,
+        "startChar": 17,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "revId": "1fac6583bd9c1b984ed6956a372da8fbee2b0130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
