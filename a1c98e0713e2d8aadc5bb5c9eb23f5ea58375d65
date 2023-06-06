@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07eaaa8_eb1dc0d1",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-06T02:36:51Z",
+      "side": 1,
+      "message": "hm, I feel like we must be able to do this without adding skip_serialize.\n\nWe can have a function which says whether a member is serializable or not. I think that the following things are not serializable:\n - function pointers\n - non-value types that are void with `member.length \u003d\u003d \"constant\"`\n \n \nThen we could do something like:\n\n```\n{% set serializable_members \u003d [] %}\n{%- for member in members %}\n  {% if is_serializable(member) %}\n     {{ serializable_members.append(member) }}\n  {% endif %}\n{% endfor %}\n```\n\nat the very top of write_record_serialization_helpers, and then mostly use `serializable_members` throughout. That\u0027ll help us keep the transfer struct / serialize / deserialize all in sync with the same set of members.\n\nI also think we would need the code at [1] which skips over already-initialized-to-nullptr members",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 0
+      },
+      "revId": "a1c98e0713e2d8aadc5bb5c9eb23f5ea58375d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb331e4_be761ec3",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-06T02:36:51Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 411,
+        "startChar": 95,
+        "endLine": 411,
+        "endChar": 144
+      },
+      "revId": "a1c98e0713e2d8aadc5bb5c9eb23f5ea58375d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
