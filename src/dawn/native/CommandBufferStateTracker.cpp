@@ -728,6 +728,9 @@ void CommandBufferStateTracker::SetRenderPipeline(RenderPipelineBase* pipeline) 
     SetPipelineCommon(pipeline);
 }
 
+void CommandBufferStateTracker::UnsetBindGroup(BindGroupIndex index) {
+    mBindgroups[index] = nullptr;
+}
 void CommandBufferStateTracker::SetBindGroup(BindGroupIndex index,
                                              BindGroupBase* bindgroup,
                                              uint32_t dynamicOffsetCount,

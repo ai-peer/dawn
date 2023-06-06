@@ -110,72 +110,77 @@ MaybeError ProgrammableEncoder::ValidateSetBindGroup(BindGroupIndex index,
                                                      BindGroupBase* group,
                                                      uint32_t dynamicOffsetCountIn,
                                                      const uint32_t* dynamicOffsetsIn) const {
-    DAWN_TRY(GetDevice()->ValidateObject(group));
-
     DAWN_INVALID_IF(index >= kMaxBindGroupsTyped, "Bind group index (%u) exceeds the maximum (%u).",
                     static_cast<uint32_t>(index), kMaxBindGroups);
 
     ityp::span<BindingIndex, const uint32_t> dynamicOffsets(dynamicOffsetsIn,
                                                             BindingIndex(dynamicOffsetCountIn));
 
-    // Dynamic offsets count must match the number required by the layout perfectly.
-    const BindGroupLayoutBase* layout = group->GetLayout();
-    DAWN_INVALID_IF(
-        layout->GetDynamicBufferCount() != dynamicOffsets.size(),
-        "The number of dynamic offsets (%u) does not match the number of dynamic buffers (%u) "
-        "in %s.",
-        static_cast<uint32_t>(dynamicOffsets.size()),
-        static_cast<uint32_t>(layout->GetDynamicBufferCount()), layout);
+    if (group == nullptr) {
+        uint32_t size = static_cast<uint32_t>(dynamicOffsets.size());
+        DAWN_INVALID_IF(size != 0, "The number of dynamic offsets (%u) is not zero", size);
+    } else {
+        DAWN_TRY(GetDevice()->ValidateObject(group));
 
-    for (BindingIndex i{0}; i < dynamicOffsets.size(); ++i) {
-        const BindingInfo& bindingInfo = layout->GetBindingInfo(i);
+        // Dynamic offsets count must match the number required by the layout perfectly.
+        const BindGroupLayoutBase* layout = group->GetLayout();
+        DAWN_INVALID_IF(
+            layout->GetDynamicBufferCount() != dynamicOffsets.size(),
+            "The number of dynamic offsets (%u) does not match the number of dynamic buffers (%u) "
+            "in %s.",
+            static_cast<uint32_t>(dynamicOffsets.size()),
+            static_cast<uint32_t>(layout->GetDynamicBufferCount()), layout);
 
-        // BGL creation sorts bindings such that the dynamic buffer bindings are first.
-        // ASSERT that this true.
-        ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
-        ASSERT(bindingInfo.buffer.hasDynamicOffset);
+        for (BindingIndex i{0}; i < dynamicOffsets.size(); ++i) {
+            const BindingInfo& bindingInfo = layout->GetBindingInfo(i);
 
-        uint64_t requiredAlignment;
-        switch (bindingInfo.buffer.type) {
-            case wgpu::BufferBindingType::Uniform:
-                requiredAlignment = GetDevice()->GetLimits().v1.minUniformBufferOffsetAlignment;
-                break;
-            case wgpu::BufferBindingType::Storage:
-            case wgpu::BufferBindingType::ReadOnlyStorage:
-            case kInternalStorageBufferBinding:
-                requiredAlignment = GetDevice()->GetLimits().v1.minStorageBufferOffsetAlignment;
-                break;
-            case wgpu::BufferBindingType::Undefined:
-                UNREACHABLE();
-        }
+            // BGL creation sorts bindings such that the dynamic buffer bindings are first.
+            // ASSERT that this true.
+            ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
+            ASSERT(bindingInfo.buffer.hasDynamicOffset);
 
-        DAWN_INVALID_IF(!IsAligned(dynamicOffsets[i], requiredAlignment),
-                        "Dynamic Offset[%u] (%u) is not %u byte aligned.", static_cast<uint32_t>(i),
-                        dynamicOffsets[i], requiredAlignment);
+            uint64_t requiredAlignment;
+            switch (bindingInfo.buffer.type) {
+                case wgpu::BufferBindingType::Uniform:
+                    requiredAlignment = GetDevice()->GetLimits().v1.minUniformBufferOffsetAlignment;
+                    break;
+                case wgpu::BufferBindingType::Storage:
+                case wgpu::BufferBindingType::ReadOnlyStorage:
+                case kInternalStorageBufferBinding:
+                    requiredAlignment = GetDevice()->GetLimits().v1.minStorageBufferOffsetAlignment;
+                    break;
+                case wgpu::BufferBindingType::Undefined:
+                    UNREACHABLE();
+            }
 
-        BufferBinding bufferBinding = group->GetBindingAsBufferBinding(i);
+            DAWN_INVALID_IF(!IsAligned(dynamicOffsets[i], requiredAlignment),
+                            "Dynamic Offset[%u] (%u) is not %u byte aligned.",
+                            static_cast<uint32_t>(i), dynamicOffsets[i], requiredAlignment);
 
-        // During BindGroup creation, validation ensures binding offset + binding size
-        // <= buffer size.
-        ASSERT(bufferBinding.buffer->GetSize() >= bufferBinding.size);
-        ASSERT(bufferBinding.buffer->GetSize() - bufferBinding.size >= bufferBinding.offset);
+            BufferBinding bufferBinding = group->GetBindingAsBufferBinding(i);
 
-        if ((dynamicOffsets[i] >
-             bufferBinding.buffer->GetSize() - bufferBinding.offset - bufferBinding.size)) {
-            DAWN_INVALID_IF(
-                (bufferBinding.buffer->GetSize() - bufferBinding.offset) == bufferBinding.size,
-                "Dynamic Offset[%u] (%u) is out of bounds of %s with a size of %u and a bound "
-                "range of (offset: %u, size: %u). The binding goes to the end of the buffer "
-                "even with a dynamic offset of 0. Did you forget to specify "
-                "the binding's size?",
-                static_cast<uint32_t>(i), dynamicOffsets[i], bufferBinding.buffer,
-                bufferBinding.buffer->GetSize(), bufferBinding.offset, bufferBinding.size);
+            // During BindGroup creation, validation ensures binding offset + binding size
+            // <= buffer size.
+            ASSERT(bufferBinding.buffer->GetSize() >= bufferBinding.size);
+            ASSERT(bufferBinding.buffer->GetSize() - bufferBinding.size >= bufferBinding.offset);
 
-            return DAWN_VALIDATION_ERROR(
-                "Dynamic Offset[%u] (%u) is out of bounds of "
-                "%s with a size of %u and a bound range of (offset: %u, size: %u).",
-                static_cast<uint32_t>(i), dynamicOffsets[i], bufferBinding.buffer,
-                bufferBinding.buffer->GetSize(), bufferBinding.offset, bufferBinding.size);
+            if ((dynamicOffsets[i] >
+                 bufferBinding.buffer->GetSize() - bufferBinding.offset - bufferBinding.size)) {
+                DAWN_INVALID_IF(
+                    (bufferBinding.buffer->GetSize() - bufferBinding.offset) == bufferBinding.size,
+                    "Dynamic Offset[%u] (%u) is out of bounds of %s with a size of %u and a bound "
+                    "range of (offset: %u, size: %u). The binding goes to the end of the buffer "
+                    "even with a dynamic offset of 0. Did you forget to specify "
+                    "the binding's size?",
+                    static_cast<uint32_t>(i), dynamicOffsets[i], bufferBinding.buffer,
+                    bufferBinding.buffer->GetSize(), bufferBinding.offset, bufferBinding.size);
+
+                return DAWN_VALIDATION_ERROR(
+                    "Dynamic Offset[%u] (%u) is out of bounds of "
+                    "%s with a size of %u and a bound range of (offset: %u, size: %u).",
+                    static_cast<uint32_t>(i), dynamicOffsets[i], bufferBinding.buffer,
+                    bufferBinding.buffer->GetSize(), bufferBinding.offset, bufferBinding.size);
+            }
         }
     }
 
