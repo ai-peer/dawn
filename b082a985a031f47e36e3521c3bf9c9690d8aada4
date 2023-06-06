@@ -33,6 +33,24 @@
       "message": "I had KEEP here because I assumed that if we didn\u0027t have flake expectations here, the roller wasn\u0027t catching them reliably. Maybe we should keep it?",
       "revId": "b082a985a031f47e36e3521c3bf9c9690d8aada4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3b4090_7e696647",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-06T18:08:25Z",
+      "side": 1,
+      "message": "the roller has been changed to automatically preserve RetryOnFailure now, so it\u0027s a bit better to not use KEEP. That way it can still merge expectations without removing them.",
+      "parentUuid": "a8075546_1c5c4d7b",
+      "revId": "b082a985a031f47e36e3521c3bf9c9690d8aada4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
