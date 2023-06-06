@@ -52,16 +52,15 @@ Function* Builder::CreateFunction(std::string_view name,
 }
 
 If* Builder::CreateIf(Value* condition) {
-    return ir.values.Create<If>(condition, CreateBlock(), CreateBlock(), CreateMultiInBlock());
+    return ir.values.Create<If>(condition, CreateBlock(), CreateBlock());
 }
 
 Loop* Builder::CreateLoop() {
-    return ir.values.Create<Loop>(CreateBlock(), CreateMultiInBlock(), CreateMultiInBlock(),
-                                  CreateMultiInBlock());
+    return ir.values.Create<Loop>(CreateBlock(), CreateMultiInBlock(), CreateMultiInBlock());
 }
 
 Switch* Builder::CreateSwitch(Value* condition) {
-    return ir.values.Create<Switch>(condition, CreateMultiInBlock());
+    return ir.values.Create<Switch>(condition);
 }
 
 Block* Builder::CreateCase(Switch* s, utils::VectorRef<Switch::CaseSelector> selectors) {
