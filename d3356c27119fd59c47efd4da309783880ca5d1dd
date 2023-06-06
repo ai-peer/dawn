@@ -50,6 +50,24 @@
       "message": "I think using the struct name here is fine as it means we can keep using the FriendlyName from the type and don\u0027t have to do anything special for structs when emitting as a type.",
       "revId": "d3356c27119fd59c47efd4da309783880ca5d1dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "027d070e_9fccde7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T23:44:38Z",
+      "side": 1,
+      "message": "My concern is when we come to implement parsing. Raw identifiers might be hard to support without lookahead.",
+      "parentUuid": "ee56f63d_09111d89",
+      "revId": "d3356c27119fd59c47efd4da309783880ca5d1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
