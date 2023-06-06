@@ -19,6 +19,7 @@
 #include "src/tint/type/f16.h"
 #include "src/tint/type/f32.h"
 #include "src/tint/type/i32.h"
+#include "src/tint/type/tuple.h"
 #include "src/tint/type/u32.h"
 
 namespace tint::type {
@@ -86,6 +87,10 @@ TEST_F(ManagerTest, CppToType) {
     const Type* h1 = tm.Get<f16>();
     const Type* h2 = tm.Get<F16>();
     ASSERT_EQ(h1, h2);
+
+    const Type* t1 = tm.tuple<i32, u32>();  // NOLINT: Mistaken for std::tuple
+    const Type* t2 = tm.Get<Tuple>(utils::Vector{tm.i32(), tm.u32()});
+    ASSERT_EQ(t1, t2);
 }
 
 TEST_F(ManagerTest, Find) {
