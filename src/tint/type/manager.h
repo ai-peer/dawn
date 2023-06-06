@@ -19,6 +19,7 @@
 
 #include "src/tint/builtin/access.h"
 #include "src/tint/builtin/address_space.h"
+#include "src/tint/number.h"
 #include "src/tint/type/type.h"
 #include "src/tint/type/unique_node.h"
 #include "src/tint/utils/hash.h"
@@ -35,12 +36,16 @@ class F32;
 class I32;
 class Matrix;
 class Pointer;
+class Tuple;
 class U32;
 class Vector;
 class Void;
 }  // namespace tint::type
 
 namespace tint::type {
+
+template <typename T>
+struct CppToType;
 
 /// The type manager holds all the pointers to the known types.
 class Manager final {
@@ -83,13 +88,14 @@ class Manager final {
     ///         If NODE derives from UniqueNode and an existing instance of `T` has been
     ///         constructed, then the same pointer is returned.
     template <typename NODE, typename... ARGS>
-    NODE* Get(ARGS&&... args) {
-        if constexpr (utils::traits::IsTypeOrDerived<NODE, Type>) {
-            return types_.Get<NODE>(std::forward<ARGS>(args)...);
-        } else if constexpr (utils::traits::IsTypeOrDerived<NODE, UniqueNode>) {
-            return unique_nodes_.Get<NODE>(std::forward<ARGS>(args)...);
+    auto* Get(ARGS&&... args) {
+        using T = ToType<NODE>;
+        if constexpr (utils::traits::IsTypeOrDerived<T, Type>) {
+            return types_.Get<T>(std::forward<ARGS>(args)...);
+        } else if constexpr (utils::traits::IsTypeOrDerived<T, UniqueNode>) {
+            return unique_nodes_.Get<T>(std::forward<ARGS>(args)...);
         } else {
-            return nodes_.Create<NODE>(std::forward<ARGS>(args)...);
+            return nodes_.Create<T>(std::forward<ARGS>(args)...);
         }
     }
 
@@ -99,8 +105,8 @@ class Manager final {
     template <typename TYPE,
               typename _ = std::enable_if<utils::traits::IsTypeOrDerived<TYPE, Type>>,
               typename... ARGS>
-    TYPE* Find(ARGS&&... args) const {
-        return types_.Find<TYPE>(std::forward<ARGS>(args)...);
+    auto* Find(ARGS&&... args) const {
+        return types_.Find<ToType<TYPE>>(std::forward<ARGS>(args)...);
     }
 
     /// @returns a void type
@@ -205,12 +211,32 @@ class Manager final {
                                  builtin::AddressSpace address_space,
                                  builtin::Access access);
 
+    /// @param types the tuple types
+    /// @returns the tuple type
+    const type::Tuple* tuple(utils::VectorRef<const type::Type*> types);
+
+    /// @returns the tuple type
+    template <typename... TYPES>
+    const type::Tuple* tuple() {
+        return tuple(utils::Vector{Get<TYPES>()...});
+    }
+
     /// @returns an iterator to the beginning of the types
     TypeIterator begin() const { return types_.begin(); }
     /// @returns an iterator to the end of the types
     TypeIterator end() const { return types_.end(); }
 
   private:
+    /// ToType<T> is specialized for various `T` types and each specialization contains a single
+    /// `type` alias to the corresponding type deriving from `type::Type`.
+    template <typename T>
+    struct ToTypeImpl {
+        using type = T;
+    };
+
+    template <typename T>
+    using ToType = typename ToTypeImpl<T>::type;
+
     /// Unique types owned by the manager
     utils::UniqueAllocator<Type> types_;
     /// Unique nodes (excluding types) owned by the manager
@@ -218,6 +244,46 @@ class Manager final {
     /// Non-unique nodes owned by the manager
     utils::BlockAllocator<Node> nodes_;
 };
+
+//! @cond Doxygen_Suppress
+// Various template specializations for Manager::ToTypeImpl.
+template <>
+struct Manager::ToTypeImpl<AInt> {
+    using type = type::AbstractInt;
+};
+template <>
+struct Manager::ToTypeImpl<AFloat> {
+    using type = type::AbstractFloat;
+};
+template <>
+struct Manager::ToTypeImpl<i32> {
+    using type = type::I32;
+};
+template <>
+struct Manager::ToTypeImpl<u32> {
+    using type = type::U32;
+};
+template <>
+struct Manager::ToTypeImpl<f32> {
+    using type = type::F32;
+};
+template <>
+struct Manager::ToTypeImpl<f16> {
+    using type = type::F16;
+};
+template <>
+struct Manager::ToTypeImpl<bool> {
+    using type = type::Bool;
+};
+template <typename T>
+struct Manager::ToTypeImpl<const T> {
+    using type = const Manager::ToType<T>;
+};
+template <typename T>
+struct Manager::ToTypeImpl<T*> {
+    using type = Manager::ToType<T>*;
+};
+//! @endcond
 
 }  // namespace tint::type
 
