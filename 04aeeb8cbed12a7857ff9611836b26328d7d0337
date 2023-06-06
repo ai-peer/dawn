@@ -61,6 +61,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b81bd46c_f1889a18",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T23:39:27Z",
+      "side": 1,
+      "message": "The IR is mutable, so it seems like making the simplest changes we can to it is better? We\u0027ll have some validation, but also some TINT_ASSERT code as we go.\n\nI\u0027d argue that `SetType` should do something like:\n\n```\nTINT_ASSERT(IR, type !\u003d nullptr);\nTINT_ASSERT(IR, type-\u003eIs\u003cPointer\u003e || type-\u003eIs\u003cSampler\u003e || type-\u003eIs\u003cTexture\u003e);\n```\n\nso we catch the error as early as possible when we can.",
+      "parentUuid": "2257fd5d_9d247e45",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc98a22d_4172deb2",
         "filename": "src/tint/ir/transform/block_decorated_structs.h",
         "patchSetId": 5
@@ -90,6 +108,24 @@
       "side": 1,
       "message": "[It is inheriting](https://en.cppreference.com/w/cpp/language/using_declaration#Inheriting_constructors) the `Base` (`type::Struct`) constructor.",
       "parentUuid": "cc98a22d_4172deb2",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdef935_50b36c69",
+        "filename": "src/tint/ir/transform/block_decorated_structs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T23:39:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "21f46e20_416241ba",
       "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
