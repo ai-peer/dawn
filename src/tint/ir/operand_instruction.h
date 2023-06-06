@@ -40,7 +40,6 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N, R>, Inst
         if (value) {
             value->AddUsage({this, index});
         }
-        return;
     }
 
     /// @returns true if the instruction has result values
@@ -56,6 +55,8 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N, R>, Inst
         }
         return results_[0];
     }
+
+    using Instruction::Result;
 
     /// @returns the result values for this instruction
     utils::VectorRef<Value*> Results() override { return results_; }
