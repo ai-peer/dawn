@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88bc24ce_4a36b5a3",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:47:25Z",
+      "side": 1,
+      "message": "I misread the Body as Initializer. So, this seems fine.",
+      "parentUuid": "9c65336d_fe4e04b8",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7e0b33d_7a9fbd44",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-06T19:43:35Z",
       "side": 1,
       "message": "ditto need a branch",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe89fde9_83cb8b32",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:47:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e7e0b33d_7a9fbd44",
       "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
