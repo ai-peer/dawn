@@ -186,8 +186,11 @@ class Validator {
             [&](Binary*) {},                     //
             [&](Branch* b) { CheckBranch(b); },  //
             [&](Call* c) { CheckCall(c); },      //
+            [&](If* if_) { CheckIf(if_); },      //
             [&](Load*) {},                       //
+            [&](Loop*) {},                       //
             [&](Store*) {},                      //
+            [&](Switch*) {},                     //
             [&](Swizzle*) {},                    //
             [&](Unary*) {},                      //
             [&](Var*) {},                        //
@@ -280,21 +283,18 @@ class Validator {
 
     void CheckBranch(ir::Branch* b) {
         tint::Switch(
-            b,                               //
-            [&](BreakIf*) {},                //
-            [&](Continue*) {},               //
-            [&](ExitIf*) {},                 //
-            [&](ExitLoop*) {},               //
-            [&](ExitSwitch*) {},             //
-            [&](If* if_) { CheckIf(if_); },  //
-            [&](Loop*) {},                   //
-            [&](NextIteration*) {},          //
-            [&](Return* ret) {
+            b,                           //
+            [&](ir::BreakIf*) {},        //
+            [&](ir::Continue*) {},       //
+            [&](ir::ExitIf*) {},         //
+            [&](ir::ExitLoop*) {},       //
+            [&](ir::ExitSwitch*) {},     //
+            [&](ir::NextIteration*) {},  //
+            [&](ir::Return* ret) {
                 if (ret->Func() == nullptr) {
                     AddError("return: null function");
                 }
-            },                //
-            [&](Switch*) {},  //
+            },
             [&](Default) {
                 AddError(std::string("missing validation of branch: ") + b->TypeInfo().name);
             });
