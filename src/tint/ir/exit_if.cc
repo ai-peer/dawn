@@ -29,7 +29,7 @@ ExitIf::ExitIf(ir::If* i, utils::VectorRef<Value*> args) : if_(i) {
     AddOperands(ExitIf::kArgsOperandOffset, std::move(args));
 
     if (if_) {
-        if_->Merge()->AddInboundSiblingBranch(this);
+        if_->AddExit(this);
     }
 }
 
