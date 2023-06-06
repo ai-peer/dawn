@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78ebcb0d_30e30cf2",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-06T21:50:58Z",
+      "side": 1,
+      "message": "Argh, you\u0027re right. The SPIR-V loop rules are so random.\nFixed.",
+      "parentUuid": "df7dc3fc_d5d46b69",
+      "revId": "c97d94babf806bfb1fcb39d03a5714f77d087e66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b6205cf_4e1cbe03",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-06-06T20:55:30Z",
       "side": 1,
       "message": "This is invalid SPIR-V (see earlier comment).\n\nYes, we should really get unit tests outputs running through spirv-val.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "c97d94babf806bfb1fcb39d03a5714f77d087e66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccc5c4d7_5cc2a291",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-06T21:50:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b6205cf_4e1cbe03",
       "range": {
         "startLine": 114,
         "startChar": 0,

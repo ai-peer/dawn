@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83111703_483be37f",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-06T21:50:58Z",
+      "side": 1,
+      "message": "The initializer is optional. If omitted, it\u0027s not used.",
+      "parentUuid": "2b3c74b8_12add4ed",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f9b0524_85a3baed",
@@ -124,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b82a7db_e33fc42c",
+        "filename": "src/tint/ir/loop.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-06T21:50:58Z",
+      "side": 1,
+      "message": "We have conditional blocks for if-false, right?\nI\u0027d prefer to omit the blocks if they\u0027re not used, if just to keep the IR disassembly noise down.\n\nIf you feel that they should always be emitted, can we please followup with a change to make all blocks non-optional (including `if` ?)",
+      "parentUuid": "2f9b0524_85a3baed",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cdbc0e4_a7c611c8",
         "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
         "patchSetId": 1
@@ -135,6 +171,24 @@
       "writtenOn": "2023-06-06T19:43:35Z",
       "side": 1,
       "message": "maybe add a `loop-\u003eHasInitializer()` ?",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a0d639b_79efd3a6",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-06T21:50:58Z",
+      "side": 1,
+      "message": "Good idea. Done",
+      "parentUuid": "5cdbc0e4_a7c611c8",
       "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
