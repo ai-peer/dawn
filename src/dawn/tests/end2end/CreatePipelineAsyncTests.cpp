@@ -375,8 +375,8 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipeli
         &csDesc,
         [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
            const char* message, void* userdata) {
-            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_DeviceDestroyed,
-                      status);
+            EXPECT_EQ(WGPUCreatePipelineAsyncStatus_Success, status);
+            EXPECT_NE(returnPipeline, nullptr);
 
             CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
             task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
@@ -407,8 +407,8 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateRenderPipelin
         &renderPipelineDescriptor,
         [](WGPUCreatePipelineAsyncStatus status, WGPURenderPipeline returnPipeline,
            const char* message, void* userdata) {
-            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_DeviceDestroyed,
-                      status);
+            EXPECT_EQ(WGPUCreatePipelineAsyncStatus_Success, status);
+            EXPECT_NE(returnPipeline, nullptr);
 
             CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
             task->renderPipeline = wgpu::RenderPipeline::Acquire(returnPipeline);
@@ -431,8 +431,8 @@ TEST_P(CreatePipelineAsyncTest, DestroyDeviceBeforeCallbackOfCreateComputePipeli
         &csDesc,
         [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
            const char* message, void* userdata) {
-            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_DeviceDestroyed,
-                      status);
+            EXPECT_EQ(WGPUCreatePipelineAsyncStatus_Success, status);
+            EXPECT_NE(returnPipeline, nullptr);
 
             CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
             task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
@@ -464,8 +464,8 @@ TEST_P(CreatePipelineAsyncTest, DestroyDeviceBeforeCallbackOfCreateRenderPipelin
         &renderPipelineDescriptor,
         [](WGPUCreatePipelineAsyncStatus status, WGPURenderPipeline returnPipeline,
            const char* message, void* userdata) {
-            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_DeviceDestroyed,
-                      status);
+            EXPECT_EQ(WGPUCreatePipelineAsyncStatus_Success, status);
+            EXPECT_NE(returnPipeline, nullptr);
 
             CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
             task->renderPipeline = wgpu::RenderPipeline::Acquire(returnPipeline);
