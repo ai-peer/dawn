@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3355364d_beb209da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-06T16:12:29Z",
+      "side": 1,
+      "message": "Yea, sorry, so in the original CL, Austin mentioned that it would be best to clean up and make sure that function pointers and userdata members are not serialized on the wire (https://dawn-review.googlesource.com/c/dawn/+/135623/comment/128d3bf1_67360714/). More specifically, I think the goal is to remove those as members in the `Transfer` struct entirely which is the goal of this CL. (I will update the description with the next fix.)",
+      "parentUuid": "807340e3_58ab19a2",
+      "revId": "a1c98e0713e2d8aadc5bb5c9eb23f5ea58375d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f07eaaa8_eb1dc0d1",
