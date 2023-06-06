@@ -51,12 +51,6 @@ namespace tint::ir {
 ///          ┃           ┃ BreakIf(true)
 ///          ┗━━━━━━━━━━▶┃
 ///                      ▼
-///             ┌────────────────┐
-///             │     Merge      │
-///             │  (optional)    │
-///             └────────────────┘
-///                      ┃
-///                      ▼
 ///                     out
 ///
 /// ```
@@ -66,8 +60,7 @@ class Loop : public utils::Castable<Loop, ControlInstruction> {
     /// @param i the initializer block
     /// @param b the body block
     /// @param c the continuing block
-    /// @param m the merge block
-    Loop(ir::Block* i, ir::MultiInBlock* b, ir::MultiInBlock* c, ir::MultiInBlock* m);
+    Loop(ir::Block* i, ir::MultiInBlock* b, ir::MultiInBlock* c);
     ~Loop() override;
 
     /// @returns the switch initializer block
@@ -89,16 +82,10 @@ class Loop : public utils::Castable<Loop, ControlInstruction> {
     /// @returns the switch continuing block
     ir::MultiInBlock* Continuing() { return continuing_; }
 
-    /// @returns the switch merge branch
-    const ir::MultiInBlock* Merge() const { return merge_; }
-    /// @returns the switch merge branch
-    ir::MultiInBlock* Merge() { return merge_; }
-
   private:
     ir::Block* initializer_ = nullptr;
     ir::MultiInBlock* body_ = nullptr;
     ir::MultiInBlock* continuing_ = nullptr;
-    ir::MultiInBlock* merge_ = nullptr;
 };
 
 }  // namespace tint::ir

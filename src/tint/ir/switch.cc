@@ -16,19 +16,12 @@
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Switch);
 
-#include "src/tint/ir/multi_in_block.h"
-
 namespace tint::ir {
 
-Switch::Switch(Value* cond, ir::MultiInBlock* m) : merge_(m) {
+Switch::Switch(Value* cond) {
     TINT_ASSERT(IR, cond);
-    TINT_ASSERT(IR, merge_);
 
     AddOperand(cond);
-
-    if (merge_) {
-        merge_->SetParent(this);
-    }
 }
 
 Switch::~Switch() = default;

@@ -27,7 +27,6 @@ TEST_F(IR_LoopTest, Parent) {
     EXPECT_EQ(loop->Initializer()->Parent(), loop);
     EXPECT_EQ(loop->Body()->Parent(), loop);
     EXPECT_EQ(loop->Continuing()->Parent(), loop);
-    EXPECT_EQ(loop->Merge()->Parent(), loop);
 }
 
 TEST_F(IR_LoopTest, Fail_NullInitializerBlock) {
@@ -35,8 +34,7 @@ TEST_F(IR_LoopTest, Fail_NullInitializerBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop(nullptr, b.CreateMultiInBlock(), b.CreateMultiInBlock(),
-                      b.CreateMultiInBlock());
+            Loop loop(nullptr, b.CreateMultiInBlock(), b.CreateMultiInBlock());
         },
         "");
 }
@@ -46,7 +44,7 @@ TEST_F(IR_LoopTest, Fail_NullBodyBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop(b.CreateBlock(), nullptr, b.CreateMultiInBlock(), b.CreateMultiInBlock());
+            Loop loop(b.CreateBlock(), nullptr, b.CreateMultiInBlock());
         },
         "");
 }
@@ -56,17 +54,7 @@ TEST_F(IR_LoopTest, Fail_NullContinuingBlock) {
         {
             Module mod;
             Builder b{mod};
-            Loop loop(b.CreateBlock(), b.CreateMultiInBlock(), nullptr, b.CreateMultiInBlock());
-        },
-        "");
-}
-
-TEST_F(IR_LoopTest, Fail_NullMultiInBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            Loop loop(b.CreateBlock(), b.CreateMultiInBlock(), b.CreateMultiInBlock(), nullptr);
+            Loop loop(b.CreateBlock(), b.CreateMultiInBlock(), nullptr);
         },
         "");
 }
