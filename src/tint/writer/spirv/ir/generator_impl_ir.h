@@ -39,6 +39,7 @@ class If;
 class Function;
 class Load;
 class Loop;
+class MergeBlock;
 class Module;
 class Store;
 class Switch;
@@ -119,7 +120,7 @@ class GeneratorImplIr {
 
     /// Emit all OpPhi nodes for incoming branches to @p block.
     /// @param block the block to emit the OpPhis for
-    void EmitIncomingPhis(const ir::Block* block);
+    void EmitIncomingPhis(const ir::MergeBlock* block);
 
     /// Emit all instructions of @p block.
     /// @param block the block's instructions to emit

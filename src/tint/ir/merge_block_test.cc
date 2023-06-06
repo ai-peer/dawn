@@ -12,59 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/if.h"
+#include "src/tint/ir/merge_block.h"
 #include "gtest/gtest-spi.h"
+#include "src/tint/ir/block_param.h"
 #include "src/tint/ir/ir_test_helper.h"
 
 namespace tint::ir {
 namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
-using IR_IfTest = IRTestHelper;
+using IR_MergeBlockTest = IRTestHelper;
 
-TEST_F(IR_IfTest, Usage) {
-    auto* cond = b.Constant(true);
-    auto* if_ = b.CreateIf(cond);
-    ASSERT_EQ(1u, cond->Usage().Length());
-    EXPECT_EQ(if_, cond->Usage()[0]);
-}
-
-TEST_F(IR_IfTest, Fail_NullCondition) {
+TEST_F(IR_MergeBlockTest, Fail_NullBlockParam) {
     EXPECT_FATAL_FAILURE(
         {
             Module mod;
             Builder b{mod};
-            b.CreateIf(nullptr);
+
+            auto* blk = b.CreateMergeBlock();
+            blk->SetParams(utils::Vector<const BlockParam*, 1>{nullptr});
         },
         "");
 }
 
-TEST_F(IR_IfTest, Fail_NullTrueBlock) {
+TEST_F(IR_MergeBlockTest, Fail_NullInboundBranch) {
     EXPECT_FATAL_FAILURE(
         {
             Module mod;
             Builder b{mod};
-            If if_(b.Constant(false), nullptr, b.CreateBlock(), b.CreateMergeBlock());
-        },
-        "");
-}
 
-TEST_F(IR_IfTest, Fail_NullFalseBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            If if_(b.Constant(false), b.CreateBlock(), nullptr, b.CreateMergeBlock());
-        },
-        "");
-}
-
-TEST_F(IR_IfTest, Fail_NullMergeBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            If if_(b.Constant(false), b.CreateBlock(), b.CreateBlock(), nullptr);
+            auto* blk = b.CreateMergeBlock();
+            blk->AddInboundBranch(nullptr);
         },
         "");
 }
