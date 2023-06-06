@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c58e5d0c_96957648",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T09:34:25Z",
+      "side": 1,
+      "message": "Not asking for changes with this CL.\n\nI\u0027ve seen this a pattern a bunch.\n\nPerhaps we should split `ir::Var` into two (or derive two classes off `ir::Var`), one for handle types (textures / samplers) and another for non-handle-types. \n\nThe latter can declare `type::Pointer* Type() override`, avoiding these casts everywhere.",
+      "range": {
+        "startLine": 49,
+        "startChar": 20,
+        "endLine": 49,
+        "endChar": 52
+      },
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04f1b4f7_5f720fb8",
@@ -31,6 +54,47 @@
       "writtenOn": "2023-06-05T22:56:24Z",
       "side": 1,
       "message": "What does this do?",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21f46e20_416241ba",
+        "filename": "src/tint/ir/transform/block_decorated_structs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T09:34:25Z",
+      "side": 1,
+      "message": "[It is inheriting](https://en.cppreference.com/w/cpp/language/using_declaration#Inheriting_constructors) the `Base` (`type::Struct`) constructor.",
+      "parentUuid": "cc98a22d_4172deb2",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba472f8c_6dbf8f37",
+        "filename": "src/tint/ir/transform/block_decorated_structs_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T09:34:25Z",
+      "side": 1,
+      "message": "Bit of an issue we can\u0027t actually see the type here. Given that the transform is building a new type, we\u0027re not properly testing the expected value.\n\nI\u0027d like to have the structure emitted so we can confirm the test is doing the right thing.",
+      "range": {
+        "startLine": 64,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 31
+      },
       "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
