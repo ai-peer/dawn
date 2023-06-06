@@ -52,6 +52,24 @@
       "parentUuid": "612a935a_1b84f675",
       "revId": "cf8c318ad916414fc2ff8de434b5d3c1735c600d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17becdb_297ba851",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-06T00:45:41Z",
+      "side": 1,
+      "message": "I don\u0027t really expect us to be adding more types that have a different size based on architecture, but I do think it\u0027s a bit better as opt-in because it would be safer that way - we don\u0027t accidentally introduce bugs when adding new types. Fine as a follow-up though.",
+      "parentUuid": "e452714e_35b6ac74",
+      "revId": "cf8c318ad916414fc2ff8de434b5d3c1735c600d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
