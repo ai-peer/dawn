@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf7cbe73_e0c15efb",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "196277cb_039e2cef",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 45
+      },
+      "revId": "aa9dc6f5adfcd2a6c3571d63e368201f1d9bf42d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6868c5ab_a8aaac36",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8bb5e63_6747d1f2",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6868c5ab_a8aaac36",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 24
+      },
+      "revId": "aa9dc6f5adfcd2a6c3571d63e368201f1d9bf42d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6512d645_afcd8121",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-06T12:12:32Z",
       "side": 1,
       "message": "nit: `0` is horrible for heap reallocations for vectors that are likely to grow large. These containers are also either all empty or used, so maybe put these in a struct that can be allocated with a `std::unique_ptr` ?",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 2
+      },
+      "revId": "aa9dc6f5adfcd2a6c3571d63e368201f1d9bf42d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1f12ca_91969bbc",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T16:56:42Z",
+      "side": 1,
+      "message": "Switching to them always being used, so making the initial size bigger.",
+      "parentUuid": "6512d645_afcd8121",
       "range": {
         "startLine": 113,
         "startChar": 0,
