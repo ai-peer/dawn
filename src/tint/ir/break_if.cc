@@ -34,7 +34,6 @@ BreakIf::BreakIf(Value* condition,
     AddOperand(condition);
     if (loop_) {
         loop_->Body()->AddInboundSiblingBranch(this);
-        loop_->Merge()->AddInboundSiblingBranch(this);
     }
     AddOperands(std::move(args));
 }
