@@ -1,4 +1,4 @@
-// Copyright 2022 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/switch.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Switch);
-
 #include "src/tint/ir/merge_block.h"
+
+TINT_INSTANTIATE_TYPEINFO(tint::ir::MergeBlock);
 
 namespace tint::ir {
 
-Switch::Switch(Value* cond, ir::MergeBlock* m) : merge_(m) {
-    TINT_ASSERT(IR, cond);
-    TINT_ASSERT(IR, merge_);
+MergeBlock::MergeBlock() : Base() {}
 
-    AddOperand(cond);
+MergeBlock::~MergeBlock() = default;
 
-    if (merge_) {
-        merge_->SetParent(this);
+void MergeBlock::SetParams(utils::VectorRef<const BlockParam*> params) {
+    params_ = std::move(params);
+
+    for (auto* param : params_) {
+        TINT_ASSERT(IR, param != nullptr);
     }
 }
 
-Switch::~Switch() = default;
+void MergeBlock::AddInboundBranch(ir::Branch* node) {
+    TINT_ASSERT(IR, node != nullptr);
+
+    if (node) {
+        inbound_branches_.Push(node);
+    }
+}
 
 }  // namespace tint::ir

@@ -20,6 +20,7 @@
 // Forward declarations
 namespace tint::ir {
 class Constant;
+class MergeBlock;
 }  // namespace tint::ir
 
 namespace tint::ir {
@@ -69,13 +70,13 @@ class Switch : public utils::Castable<Switch, ControlInstruction> {
     /// Constructor
     /// @param cond the condition
     /// @param m the merge block
-    explicit Switch(Value* cond, ir::Block* m);
+    explicit Switch(Value* cond, ir::MergeBlock* m);
     ~Switch() override;
 
     /// @returns the switch merge branch
-    const ir::Block* Merge() const { return merge_; }
+    const ir::MergeBlock* Merge() const { return merge_; }
     /// @returns the switch merge branch
-    ir::Block* Merge() { return merge_; }
+    ir::MergeBlock* Merge() { return merge_; }
 
     /// @returns the switch cases
     utils::VectorRef<Case> Cases() const { return cases_; }
@@ -91,7 +92,7 @@ class Switch : public utils::Castable<Switch, ControlInstruction> {
     Value* Condition() { return operands_[0]; }
 
   private:
-    ir::Block* merge_ = nullptr;
+    ir::MergeBlock* merge_ = nullptr;
     utils::Vector<Case, 4> cases_;
 };
 
