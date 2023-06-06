@@ -22,6 +22,30 @@
       },
       "revId": "8d6d52aa94a1b93ba52ca9c4dc0c147938008c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9130610_a918be79",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T23:27:15Z",
+      "side": 1,
+      "message": "Yeah, this is a bit gross.\nMaybe we should just have an `utils::EnumSet\u003cStructFlags\u003e Flags()` on `type::Struct`, and `BlockDecoration` can be part of `enum class StructFlags`.",
+      "parentUuid": "c482b1e8_65c65498",
+      "range": {
+        "startLine": 675,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 5
+      },
+      "revId": "8d6d52aa94a1b93ba52ca9c4dc0c147938008c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
