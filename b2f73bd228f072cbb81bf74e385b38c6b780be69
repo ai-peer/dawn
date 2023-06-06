@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c3b0c3_5de6de3f",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T03:45:30Z",
+      "side": 1,
+      "message": "This return, and the switch return, are wrong. They should internally be adding the instruction as they may also need to add operand information so they should edit the instruction_to_src and operand_to_src directly.",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51949c5e_3e66429b",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T03:45:30Z",
+      "side": 1,
+      "message": "Should the instruction cover itself and and it\u0027s args, or just the name?\n\n```\nbitcast(a, b, c)\n^^^^^^^^^^^^^^^^\n```\n\nor \n\n```\nbitcast(a, b, c)\n^^^^^^^\n```",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8419bb12_6241b91f",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T03:45:30Z",
+      "side": 1,
+      "message": "For branches, the instruction covers the header, essentially.",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e98aed9_4bc2cf6c",
+        "filename": "src/tint/ir/module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T03:45:30Z",
+      "side": 1,
+      "message": "We need somewhere to store the disassembly file we create as the `Source` needs a `File*`. I\u0027m stuffing it into the module as it\u0027s the only thing which lives long enough to contain it.",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fab3d15_0357011c",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T03:45:30Z",
+      "side": 1,
+      "message": "Emit the fully disassembly as a note at the end, otherwise you only get fragments.",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b77f4f3_274c8d8d",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T03:45:30Z",
+      "side": 1,
+      "message": "Will move to a helper ....",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3389c01_84ef2c9a",
+        "filename": "src/tint/ir/validate.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T03:45:30Z",
+      "side": 1,
+      "message": "Non-const\u0027d so we can attach the disassembly file.",
+      "revId": "b2f73bd228f072cbb81bf74e385b38c6b780be69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
