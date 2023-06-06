@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b610710_093ebef0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T23:42:58Z",
+      "side": 1,
+      "message": "One issue with this is, given a block, you don\u0027t know the incoming branch without walking the entire control flow graph to find the branch. So, it maybe implicit, but it\u0027s hard to figure out without a full walk.",
+      "revId": "2e82bf9833891d4d959b2f0fa2749dac110e4636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
