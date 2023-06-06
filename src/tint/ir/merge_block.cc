@@ -12,26 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/exit_if.h"
-
-#include <utility>
-
 #include "src/tint/ir/merge_block.h"
-#include "src/tint/ir/if.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::ExitIf);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::MergeBlock);
 
 namespace tint::ir {
 
-ExitIf::ExitIf(ir::If* i, utils::VectorRef<Value*> args /* = utils::Empty */) : if_(i) {
-    TINT_ASSERT(IR, if_);
+MergeBlock::MergeBlock() : Base() {}
 
-    if (if_) {
-        if_->Merge()->AddInboundBranch(this);
+MergeBlock::~MergeBlock() = default;
+
+void MergeBlock::SetParams(utils::VectorRef<const BlockParam*> params) {
+    params_ = std::move(params);
+
+    for (auto* param : params_) {
+        TINT_ASSERT(IR, param != nullptr);
     }
-    AddOperands(std::move(args));
 }
 
-ExitIf::~ExitIf() = default;
+void MergeBlock::AddInboundBranch(ir::Branch* node) {
+    TINT_ASSERT(IR, node != nullptr);
+
+    if (node) {
+        inbound_branches_.Push(node);
+    }
+}
 
 }  // namespace tint::ir
