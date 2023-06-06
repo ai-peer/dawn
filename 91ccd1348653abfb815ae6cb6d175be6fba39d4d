@@ -158,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e834aaa9_226ec783",
+        "filename": "src/tint/ir/loop.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T23:50:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1b82a7db_e33fc42c",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cdbc0e4_a7c611c8",
