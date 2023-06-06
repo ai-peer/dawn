@@ -203,7 +203,8 @@ TEST_F(IR_ValidateTest, Access_OOB_Index_Ptr) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), R"(:3:55 error: access: index out of bounds for type ptr<vec2<f32>>
+    EXPECT_EQ(res.Failure().str(),
+              R"(:3:55 error: access: index out of bounds for type ptr<vec2<f32>>
     %3:ptr<private, f32, read_write> = access %2, 1u, 3u
                                                       ^^
 
@@ -507,6 +508,7 @@ TEST_F(IR_ValidateTest, If_ConditionIsBool) {
     if_->False()->Append(b.Return(f));
 
     f->StartTarget()->Append(if_);
+    f->StartTarget()->Append(b.Return(f));
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
@@ -532,6 +534,7 @@ note: # Disassembly
         ret
       }
 
+    ret
   }
 }
 )");

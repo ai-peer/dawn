@@ -35,11 +35,8 @@ namespace tint::ir {
 ///    │  True      │      │  False     │
 ///    | (optional) |      | (optional) |
 ///    └────────────┘      └────────────┘
-///  ExitIf ┃     ┌──────────┐     ┃ ExitIf
-///         ┗━━━━▶│  Merge   │◀━━━━┛
-///               │(optional)│
-///               └──────────┘
-///                    ┃
+///  ExitIf ┃                     ┃ ExitIf
+///         ┗━━━━━━━━━━┳━━━━━━━━━━┛
 ///                    ▼
 ///                   out
 /// ```
@@ -52,12 +49,8 @@ class If : public utils::Castable<If, ControlInstruction> {
     /// @param cond the if condition
     /// @param t the true block
     /// @param f the false block
-    /// @param m the merge block
-    If(Value* cond, ir::Block* t, ir::Block* f, ir::MultiInBlock* m);
+    If(Value* cond, ir::Block* t, ir::Block* f);
     ~If() override;
-
-    /// @returns the branch arguments
-    utils::Slice<Value* const> Args() override { return utils::Slice<Value*>{}; }
 
     /// @returns the if condition
     Value* Condition() { return operands_[kConditionOperandIndex]; }
@@ -68,13 +61,9 @@ class If : public utils::Castable<If, ControlInstruction> {
     /// @returns the false branch block
     ir::Block* False() { return false_; }
 
-    /// @returns the merge branch block
-    ir::MultiInBlock* Merge() { return merge_; }
-
   private:
     ir::Block* true_ = nullptr;
     ir::Block* false_ = nullptr;
-    ir::MultiInBlock* merge_ = nullptr;
 };
 
 }  // namespace tint::ir

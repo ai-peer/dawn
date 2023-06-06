@@ -183,14 +183,17 @@ class Validator {
         tint::Switch(
             inst,                                    //
             [&](ir::Access* a) { CheckAccess(a); },  //
-            [&](Binary*) {},                         //
-            [&](Branch* b) { CheckBranch(b); },      //
-            [&](Call* c) { CheckCall(c); },          //
-            [&](Load*) {},                           //
-            [&](Store*) {},                          //
-            [&](Swizzle*) {},                        //
-            [&](Unary*) {},                          //
-            [&](Var*) {},                            //
+            [&](ir::Binary*) {},                     //
+            [&](ir::Branch* b) { CheckBranch(b); },  //
+            [&](ir::Call* c) { CheckCall(c); },      //
+            [&](ir::If* if_) { CheckIf(if_); },      //
+            [&](ir::Load*) {},                       //
+            [&](ir::Loop*) {},                       //
+            [&](ir::Store*) {},                      //
+            [&](ir::Switch*) {},                     //
+            [&](ir::Swizzle*) {},                    //
+            [&](ir::Unary*) {},                      //
+            [&](ir::Var*) {},                        //
             [&](Default) {
                 AddError(std::string("missing validation of: ") + inst->TypeInfo().name);
             });
@@ -280,21 +283,18 @@ class Validator {
 
     void CheckBranch(ir::Branch* b) {
         tint::Switch(
-            b,                               //
-            [&](BreakIf*) {},                //
-            [&](Continue*) {},               //
-            [&](ExitIf*) {},                 //
-            [&](ExitLoop*) {},               //
-            [&](ExitSwitch*) {},             //
-            [&](If* if_) { CheckIf(if_); },  //
-            [&](Loop*) {},                   //
-            [&](NextIteration*) {},          //
-            [&](Return* ret) {
+            b,                           //
+            [&](ir::BreakIf*) {},        //
+            [&](ir::Continue*) {},       //
+            [&](ir::ExitIf*) {},         //
+            [&](ir::ExitLoop*) {},       //
+            [&](ir::ExitSwitch*) {},     //
+            [&](ir::NextIteration*) {},  //
+            [&](ir::Return* ret) {
                 if (ret->Func() == nullptr) {
                     AddError("return: null function");
                 }
-            },                //
-            [&](Switch*) {},  //
+            },
             [&](Default) {
                 AddError(std::string("missing validation of branch: ") + b->TypeInfo().name);
             });

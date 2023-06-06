@@ -494,6 +494,10 @@ void Disassembler::EmitOperandList(Instruction* inst,
 
 void Disassembler::EmitIf(If* i) {
     SourceMarker sm(this);
+    if (i->Type()) {
+        EmitValueWithType(i);
+        out_ << " = ";
+    }
     out_ << "if ";
     EmitOperand(i, i->Condition(), If::kConditionOperandIndex);
 
@@ -509,9 +513,6 @@ void Disassembler::EmitIf(If* i) {
             out_ << ", ";
         }
         out_ << "f: %b" << IdOf(i->False());
-    }
-    if (i->Merge()->HasBranchTarget()) {
-        out_ << ", m: %b" << IdOf(i->Merge());
     }
     out_ << "]";
     sm.Store(i);
@@ -534,16 +535,10 @@ void Disassembler::EmitIf(If* i) {
         Walk(i->False());
         EmitLine();
     }
-    if (i->Merge()->HasBranchTarget()) {
-        Indent() << "# Merge block";
-        EmitLine();
-        Walk(i->Merge());
-        EmitLine();
-    }
 }
 
 void Disassembler::EmitLoop(Loop* l) {
-    utils::Vector<std::string, 4> parts;
+    utils::Vector<std::string, 3> parts;
     if (l->Initializer()->HasBranchTarget()) {
         parts.Push("i: %b" + std::to_string(IdOf(l->Initializer())));
     }
@@ -554,12 +549,10 @@ void Disassembler::EmitLoop(Loop* l) {
     if (l->Continuing()->HasBranchTarget()) {
         parts.Push("c: %b" + std::to_string(IdOf(l->Continuing())));
     }
-    if (l->Merge()->HasBranchTarget()) {
-        parts.Push("m: %b" + std::to_string(IdOf(l->Merge())));
-    }
     SourceMarker sm(this);
     out_ << "loop [" << utils::Join(parts, ", ") << "]";
     sm.Store(l);
+
     EmitLine();
 
     if (l->Initializer()->HasBranchTarget()) {
@@ -583,13 +576,6 @@ void Disassembler::EmitLoop(Loop* l) {
         Indent() << "# Continuing block";
         EmitLine();
         Walk(l->Continuing());
-        EmitLine();
-    }
-    if (l->Merge()->HasBranchTarget()) {
-        Indent() << "# Merge block";
-        EmitLine();
-
-        Walk(l->Merge());
         EmitLine();
     }
 }
@@ -616,9 +602,6 @@ void Disassembler::EmitSwitch(Switch* s) {
         }
         out_ << ", %b" << IdOf(c.Start()) << ")";
     }
-    if (s->Merge()->HasBranchTarget()) {
-        out_ << ", m: %b" << IdOf(s->Merge());
-    }
     out_ << "]";
     EmitLine();
 
@@ -630,26 +613,19 @@ void Disassembler::EmitSwitch(Switch* s) {
         Walk(c.Start());
         EmitLine();
     }
-    if (s->Merge()->HasBranchTarget()) {
-        Indent() << "# Merge block";
-        EmitLine();
-
-        Walk(s->Merge());
-        EmitLine();
-    }
 }
 
 void Disassembler::EmitBranch(Branch* b) {
     SourceMarker sm(this);
     tint::Switch(
-        b,  //
-        [&](Return*) { out_ << "ret"; },
-        [&](Continue* cont) { out_ << "continue %b" << IdOf(cont->Loop()->Continuing()); },
-        [&](ExitIf* ei) { out_ << "exit_if %b" << IdOf(ei->If()->Merge()); },
-        [&](ExitSwitch* es) { out_ << "exit_switch %b" << IdOf(es->Switch()->Merge()); },
-        [&](ExitLoop* el) { out_ << "exit_loop %b" << IdOf(el->Loop()->Merge()); },
-        [&](NextIteration* ni) { out_ << "next_iteration %b" << IdOf(ni->Loop()->Body()); },
-        [&](BreakIf* bi) {
+        b,                                                                                        //
+        [&](ir::Return*) { out_ << "ret"; },                                                      //
+        [&](ir::Continue* cont) { out_ << "continue %b" << IdOf(cont->Loop()->Continuing()); },   //
+        [&](ir::ExitIf*) { out_ << "exit_if"; },                                                  //
+        [&](ir::ExitSwitch*) { out_ << "exit_switch"; },                                          //
+        [&](ir::ExitLoop*) { out_ << "exit_loop"; },                                              //
+        [&](ir::NextIteration* ni) { out_ << "next_iteration %b" << IdOf(ni->Loop()->Body()); },  //
+        [&](ir::BreakIf* bi) {
             out_ << "break_if ";
             EmitValue(bi->Condition());
             out_ << " %b" << IdOf(bi->Loop()->Body());
