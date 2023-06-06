@@ -16,6 +16,8 @@
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::If);
 
+#include "src/tint/ir/block.h"
+
 namespace tint::ir {
 
 If::If(Value* cond, ir::Block* t, ir::Block* f, ir::Block* m) : true_(t), false_(f), merge_(m) {
