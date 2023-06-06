@@ -35,10 +35,8 @@ namespace tint::ir {
 ///        │ Case A │     │ Case B │     │ Case C │
 ///        └────────┘     └────────┘     └────────┘
 ///  ExitSwitch ┃   ExitSwitch ┃   ExitSwitch ┃
-///             ┃              ▼              ┃
-///             ┃          ┌───────┐          ┃
-///     ╌╌╌╌╌╌╌╌┺━━━━━━━━━▶│ Merge │◀━━━━━━━━━┹╌╌╌╌╌╌╌╌
-///                        └───────┘
+///             ┃              ┃              ┃
+///     ╌╌╌╌╌╌╌╌┺━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┹╌╌╌╌╌╌╌╌
 ///                            ┃
 ///                            ▼
 ///                           out
@@ -69,22 +67,13 @@ class Switch : public utils::Castable<Switch, ControlInstruction> {
 
     /// Constructor
     /// @param cond the condition
-    /// @param m the merge block
-    explicit Switch(Value* cond, ir::MergeBlock* m);
+    explicit Switch(Value* cond);
     ~Switch() override;
-
-    /// @returns the switch merge branch
-    const ir::MergeBlock* Merge() const { return merge_; }
-    /// @returns the switch merge branch
-    ir::MergeBlock* Merge() { return merge_; }
 
     /// @returns the switch cases
     utils::VectorRef<Case> Cases() const { return cases_; }
     /// @returns the switch cases
     utils::Vector<Case, 4>& Cases() { return cases_; }
-
-    /// @returns the branch arguments
-    utils::Slice<Value const* const> Args() const override { return {}; }
 
     /// @returns the condition
     const Value* Condition() const { return operands_[0]; }
@@ -92,7 +81,6 @@ class Switch : public utils::Castable<Switch, ControlInstruction> {
     Value* Condition() { return operands_[0]; }
 
   private:
-    ir::MergeBlock* merge_ = nullptr;
     utils::Vector<Case, 4> cases_;
 };
 
