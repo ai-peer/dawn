@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ccb0e4a_8ca66442",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T15:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f701a2c4_72e1183b",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8af6be10_60834ba6",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2e4cb6_ed6de715",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T15:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8af6be10_60834ba6",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d11e9b87_bf46353d",
@@ -65,6 +101,30 @@
       "writtenOn": "2023-06-06T08:37:48Z",
       "side": 1,
       "message": "Should be done by validation. crbug.com/tint/1954",
+      "range": {
+        "startLine": 564,
+        "startChar": 24,
+        "endLine": 564,
+        "endChar": 73
+      },
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fca15fcc_c75c4106",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T15:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d11e9b87_bf46353d",
       "range": {
         "startLine": 564,
         "startChar": 24,
@@ -106,6 +166,24 @@
       "side": 1,
       "message": "I believe the comment assumes we\u0027ve run the [`VarForDynamicIndex`](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/ast/transform/var_for_dynamic_index.h) transform (or IR equivalent).\n\nProbably worth updating the comment to state this.",
       "parentUuid": "68b74662_b0ca0701",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22fa76f_738bc8db",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T15:20:16Z",
+      "side": 1,
+      "message": "Updated the comment.",
+      "parentUuid": "d3f37082_12962af0",
       "revId": "131a6a963911e8b6849be72213641a8b5610211d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
