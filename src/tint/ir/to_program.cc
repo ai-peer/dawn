@@ -222,7 +222,7 @@ class State {
             s->Cases(),  //
             [&](const ir::Switch::Case c) -> const tint::ast::CaseStatement* {
                 SCOPED_NESTING();
-                auto* body = BlockGraph(c.start);
+                auto* body = BlockGraph(c.Block());
                 if (!body) {
                     return nullptr;
                 }

@@ -12,27 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/continue.h"
-
-#include <utility>
-
-#include "src/tint/ir/loop.h"
 #include "src/tint/ir/merge_block.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Continue);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::MergeBlock);
 
 namespace tint::ir {
 
-Continue::Continue(ir::Loop* loop, utils::VectorRef<Value*> args /* = utils::Empty */)
-    : loop_(loop) {
-    TINT_ASSERT(IR, loop_);
+MergeBlock::MergeBlock() : Base() {}
 
-    if (loop_) {
-        loop_->Continuing()->AddInboundBranch(this);
+MergeBlock::~MergeBlock() = default;
+
+void MergeBlock::SetParams(utils::VectorRef<const BlockParam*> params) {
+    params_ = std::move(params);
+
+    for (auto* param : params_) {
+        TINT_ASSERT(IR, param != nullptr);
     }
-    AddOperands(std::move(args));
 }
 
-Continue::~Continue() = default;
+void MergeBlock::AddInboundBranch(ir::Branch* node) {
+    TINT_ASSERT(IR, node != nullptr);
+
+    if (node) {
+        inbound_branches_.Push(node);
+    }
+}
 
 }  // namespace tint::ir

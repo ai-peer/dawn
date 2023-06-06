@@ -16,11 +16,13 @@
 
 #include <utility>
 
+#include "src/tint/ir/merge_block.h"
+
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Loop);
 
 namespace tint::ir {
 
-Loop::Loop(ir::Block* i, ir::Block* b, ir::Block* c, ir::Block* m)
+Loop::Loop(ir::Block* i, ir::MergeBlock* b, ir::MergeBlock* c, ir::MergeBlock* m)
     : initializer_(i), body_(b), continuing_(c), merge_(m) {
     TINT_ASSERT(IR, initializer_);
     TINT_ASSERT(IR, body_);

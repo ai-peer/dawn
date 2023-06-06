@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "src/tint/ir/loop.h"
+#include "src/tint/ir/merge_block.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::BreakIf);
 
