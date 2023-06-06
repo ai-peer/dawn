@@ -40,15 +40,5 @@ TEST_F(IR_SwitchTest, Fail_NullCondition) {
         "");
 }
 
-TEST_F(IR_SwitchTest, Fail_NullMergeBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            Switch switch_(b.Constant(false), nullptr);
-        },
-        "");
-}
-
 }  // namespace
 }  // namespace tint::ir
