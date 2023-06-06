@@ -68,6 +68,24 @@
       "parentUuid": "ee56f63d_09111d89",
       "revId": "d3356c27119fd59c47efd4da309783880ca5d1dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77131cb7_9ed91d21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-06-06T23:46:50Z",
+      "side": 1,
+      "message": "I think it\u0027s ok here, because they\u0027re outside a block. If you\u0027re outside a block, and not looking at a %b or %\u003cfunction_name\u003e then it\u0027s a struct identifier (at least currently).\n\nEverything else is either in the root block or a function.\n\nAnd, even with lookahead, it\u0027s always next token (is it an \u003d)",
+      "parentUuid": "027d070e_9fccde7f",
+      "revId": "d3356c27119fd59c47efd4da309783880ca5d1dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
