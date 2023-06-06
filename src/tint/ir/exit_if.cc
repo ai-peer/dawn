@@ -16,8 +16,8 @@
 
 #include <utility>
 
-#include "src/tint/ir/block.h"
 #include "src/tint/ir/if.h"
+#include "src/tint/ir/multi_in_block.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::ExitIf);
 
