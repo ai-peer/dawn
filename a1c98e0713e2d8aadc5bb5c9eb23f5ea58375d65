@@ -133,6 +133,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c0fbcf6_60b5a913",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-06T16:31:22Z",
+      "side": 1,
+      "message": "Ah damn I forgot that we added void* directly as a hack for getMappedRange. Maybe we could undo that? Not sure.",
+      "parentUuid": "175a0709_db4d274b",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 0
+      },
+      "revId": "a1c98e0713e2d8aadc5bb5c9eb23f5ea58375d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2eb331e4_be761ec3",
         "filename": "generator/templates/dawn/wire/WireCmd.cpp",
         "patchSetId": 2
