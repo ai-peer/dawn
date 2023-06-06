@@ -15,26 +15,19 @@
 #ifndef SRC_TINT_IR_IF_H_
 #define SRC_TINT_IR_IF_H_
 
-#include "src/tint/ir/block.h"
-#include "src/tint/ir/branch.h"
+#include "src/tint/ir/flow_control_instruction.h"
 #include "src/tint/ir/value.h"
-
-// Forward declarations
-namespace tint::ir {
-class Block;
-}  // namespace tint::ir
 
 namespace tint::ir {
 
 /// An if instruction
-class If : public utils::Castable<If, Branch> {
+class If : public utils::Castable<If, FlowControlInstruction> {
   public:
     /// Constructor
     /// @param cond the if condition
     /// @param t the true block
     /// @param f the false block
-    /// @param m the merge block
-    explicit If(Value* cond, ir::Block* t, ir::Block* f, ir::Block* m);
+    If(Value* cond, ir::Block* t, ir::Block* f);
     ~If() override;
 
     /// @returns the if condition
@@ -52,16 +45,10 @@ class If : public utils::Castable<If, Branch> {
     /// @returns the false branch block
     ir::Block* False() { return false_; }
 
-    /// @returns the merge branch block
-    const ir::Block* Merge() const { return merge_; }
-    /// @returns the merge branch block
-    ir::Block* Merge() { return merge_; }
-
   private:
     Value* condition_ = nullptr;
     ir::Block* true_ = nullptr;
     ir::Block* false_ = nullptr;
-    ir::Block* merge_ = nullptr;
 };
 
 }  // namespace tint::ir
