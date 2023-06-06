@@ -22,12 +22,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Loop);
 
 namespace tint::ir {
 
-Loop::Loop(ir::Block* i, ir::MergeBlock* b, ir::MergeBlock* c, ir::MergeBlock* m)
-    : initializer_(i), body_(b), continuing_(c), merge_(m) {
+Loop::Loop(ir::Block* i, ir::MergeBlock* b, ir::MergeBlock* c)
+    : initializer_(i), body_(b), continuing_(c) {
     TINT_ASSERT(IR, initializer_);
     TINT_ASSERT(IR, body_);
     TINT_ASSERT(IR, continuing_);
-    TINT_ASSERT(IR, merge_);
 
     if (initializer_) {
         initializer_->SetParent(this);
@@ -37,9 +36,6 @@ Loop::Loop(ir::Block* i, ir::MergeBlock* b, ir::MergeBlock* c, ir::MergeBlock* m
     }
     if (continuing_) {
         continuing_->SetParent(this);
-    }
-    if (merge_) {
-        merge_->SetParent(this);
     }
 }
 
