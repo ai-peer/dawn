@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2257fd5d_9d247e45",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T20:21:34Z",
+      "side": 1,
+      "message": "This may be simpler, but I\u0027m not sure how I feel about directly mutating the types of values. Maybe it\u0027s OK because we\u0027re going to be validating all this stuff?",
+      "parentUuid": "04f1b4f7_5f720fb8",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc98a22d_4172deb2",
         "filename": "src/tint/ir/transform/block_decorated_structs.h",
         "patchSetId": 5
@@ -89,6 +107,30 @@
       "writtenOn": "2023-06-06T09:34:25Z",
       "side": 1,
       "message": "Bit of an issue we can\u0027t actually see the type here. Given that the transform is building a new type, we\u0027re not properly testing the expected value.\n\nI\u0027d like to have the structure emitted so we can confirm the test is doing the right thing.",
+      "range": {
+        "startLine": 64,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 31
+      },
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f404c609_416970af",
+        "filename": "src/tint/ir/transform/block_decorated_structs_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T20:21:34Z",
+      "side": 1,
+      "message": "Structures added to the disassembly in the parent change.",
+      "parentUuid": "ba472f8c_6dbf8f37",
       "range": {
         "startLine": 64,
         "startChar": 18,

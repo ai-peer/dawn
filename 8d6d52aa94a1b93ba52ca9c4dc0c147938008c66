@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c482b1e8_65c65498",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-06T20:21:34Z",
+      "side": 1,
+      "message": "Not sure how folks feel about this, but I can\u0027t think of another way to include stuff from custom types in the disassembly since we don\u0027t have generic attribute lists on on `type::Type`s.",
+      "range": {
+        "startLine": 675,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 5
+      },
+      "revId": "8d6d52aa94a1b93ba52ca9c4dc0c147938008c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
