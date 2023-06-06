@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f593b16_6e4edc85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:43:35Z",
+      "side": 1,
+      "message": "lgtm overall but the need to maintain the InboundBranches on the Initializer seems, off? Like, if the loop is always an inbound branch it should get addded in the builder I think.\n\nWe should decide if we want to always have it go into the Initializer and then just NextIteration to the Body in all cases, tehn your check in the spirv just becomes if the Initializer()-\u003eLength() \u003e 1 or something similar.",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c65336d_fe4e04b8",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:43:35Z",
+      "side": 1,
+      "message": "There is no branch here? How does control flow move from the initializer to the body block?\n\nDoes this need to push a NextIteration branch?",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e0b33d_7a9fbd44",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:43:35Z",
+      "side": 1,
+      "message": "ditto need a branch",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b3c74b8_12add4ed",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:43:35Z",
+      "side": 1,
+      "message": "need a branch",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f9b0524_85a3baed",
+        "filename": "src/tint/ir/loop.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:43:35Z",
+      "side": 1,
+      "message": "Make non-optional and always NextIteration?",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cdbc0e4_a7c611c8",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-06T19:43:35Z",
+      "side": 1,
+      "message": "maybe add a `loop-\u003eHasInitializer()` ?",
+      "revId": "91ccd1348653abfb815ae6cb6d175be6fba39d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
