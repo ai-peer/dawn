@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2dd43e9_f000051f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T08:37:48Z",
+      "side": 1,
+      "message": "Dan for +2",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f701a2c4_72e1183b",
@@ -37,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d11e9b87_bf46353d",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T08:37:48Z",
+      "side": 1,
+      "message": "Should be done by validation. crbug.com/tint/1954",
+      "range": {
+        "startLine": 564,
+        "startChar": 24,
+        "endLine": 564,
+        "endChar": 73
+      },
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68b74662_b0ca0701",
         "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
         "patchSetId": 1
@@ -48,6 +88,24 @@
       "writtenOn": "2023-06-05T22:13:04Z",
       "side": 1,
       "message": "I\u0027m not sure I understand this, why does this have to be a vector if the index is not constant? Couldn\u0027t it be an array or a matrix?",
+      "revId": "131a6a963911e8b6849be72213641a8b5610211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3f37082_12962af0",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-06T08:37:48Z",
+      "side": 1,
+      "message": "I believe the comment assumes we\u0027ve run the [`VarForDynamicIndex`](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/ast/transform/var_for_dynamic_index.h) transform (or IR equivalent).\n\nProbably worth updating the comment to state this.",
+      "parentUuid": "68b74662_b0ca0701",
       "revId": "131a6a963911e8b6849be72213641a8b5610211d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
