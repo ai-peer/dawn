@@ -36,6 +36,7 @@ class F32;
 class I32;
 class Matrix;
 class Pointer;
+class Tuple;
 class U32;
 class Vector;
 class Void;
@@ -336,6 +337,16 @@ class Manager final {
               builtin::Access ACCESS = builtin::Access::kReadWrite>
     const type::Pointer* ptr() {
         return pointer(Get<T>(), SPACE, ACCESS);
+    }
+
+    /// @param types the tuple types
+    /// @returns the tuple type
+    const type::Tuple* tuple(utils::VectorRef<const type::Type*> types);
+
+    /// @returns the tuple type
+    template <typename... TYPES>
+    const type::Tuple* tuple() {
+        return tuple(utils::Vector{Get<TYPES>()...});
     }
 
     /// @returns an iterator to the beginning of the types
