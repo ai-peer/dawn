@@ -157,6 +157,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d1965ef_0f18b501",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-06T16:52:57Z",
+      "side": 1,
+      "message": "\u003e I\u0027m hesitant to add another concept of serializable on top of that because then it becomes a really overloaded term ..... I think maybe a better way is to define the two cases more explicitly? WDYT?\n\nagree we don\u0027t want to have too many overlapping concepts\n\nmotivation for not using skip_serialize in the .json is that this information is sort of redundant. the generator should know if something can/cannot be serialized, so don\u0027t want to add additional tags about it.\n\nyou\u0027re right that skip_serialize does NOT mean it skips being Deserialized. It\u0027s more like a custom serialization mechanism that gets used with the `SerializeCommand(..., CommandExtension` serialization variant. So perhaps what we can do is name is change that to a `manual_serialize` concept?",
+      "parentUuid": "3c0fbcf6_60b5a913",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 0
+      },
+      "revId": "a1c98e0713e2d8aadc5bb5c9eb23f5ea58375d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2eb331e4_be761ec3",
         "filename": "generator/templates/dawn/wire/WireCmd.cpp",
         "patchSetId": 2
