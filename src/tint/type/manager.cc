@@ -23,6 +23,7 @@
 #include "src/tint/type/i32.h"
 #include "src/tint/type/matrix.h"
 #include "src/tint/type/pointer.h"
+#include "src/tint/type/tuple.h"
 #include "src/tint/type/type.h"
 #include "src/tint/type/u32.h"
 #include "src/tint/type/vector.h"
@@ -160,6 +161,10 @@ const type::Pointer* Manager::ptr(builtin::AddressSpace address_space,
                                   const type::Type* subtype,
                                   builtin::Access access /* = builtin::Access::kReadWrite */) {
     return Get<type::Pointer>(address_space, subtype, access);
+}
+
+const type::Tuple* Manager::tuple(utils::VectorRef<const type::Type*> types) {
+    return Get<type::Tuple>(std::move(types));
 }
 
 }  // namespace tint::type
