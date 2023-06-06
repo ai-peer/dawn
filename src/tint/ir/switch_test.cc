@@ -33,7 +33,6 @@ TEST_F(IR_SwitchTest, Usage) {
 TEST_F(IR_SwitchTest, Parent) {
     auto* switch_ = b.Switch(b.Constant(1_i));
     b.Case(switch_, utils::Vector{Switch::CaseSelector{nullptr}});
-    EXPECT_THAT(switch_->Merge()->Parent(), switch_);
     EXPECT_THAT(switch_->Cases().Front().Start()->Parent(), switch_);
 }
 
@@ -43,16 +42,6 @@ TEST_F(IR_SwitchTest, Fail_NullCondition) {
             Module mod;
             Builder b{mod};
             b.Switch(nullptr);
-        },
-        "");
-}
-
-TEST_F(IR_SwitchTest, Fail_NullMultiInBlock) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            Switch switch_(b.Constant(false), nullptr);
         },
         "");
 }

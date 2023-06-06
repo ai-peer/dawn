@@ -52,15 +52,15 @@ Function* Builder::Function(std::string_view name,
 }
 
 If* Builder::If(ir::Value* condition) {
-    return ir.values.Create<ir::If>(condition, Block(), Block(), MultiInBlock());
+    return ir.values.Create<ir::If>(condition, Block(), Block());
 }
 
 ir::Loop* Builder::Loop() {
-    return ir.values.Create<ir::Loop>(Block(), MultiInBlock(), MultiInBlock(), MultiInBlock());
+    return ir.values.Create<ir::Loop>(Block(), MultiInBlock(), MultiInBlock());
 }
 
 Switch* Builder::Switch(ir::Value* condition) {
-    return ir.values.Create<ir::Switch>(condition, MultiInBlock());
+    return ir.values.Create<ir::Switch>(condition);
 }
 
 Block* Builder::Case(ir::Switch* s, utils::VectorRef<Switch::CaseSelector> selectors) {
