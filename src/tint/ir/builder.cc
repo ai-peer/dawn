@@ -37,6 +37,10 @@ Block* Builder::CreateBlock() {
     return ir.blocks.Create<Block>();
 }
 
+MergeBlock* Builder::CreateMergeBlock() {
+    return ir.blocks.Create<MergeBlock>();
+}
+
 Function* Builder::CreateFunction(std::string_view name,
                                   const type::Type* return_type,
                                   Function::PipelineStage stage,
@@ -48,24 +52,23 @@ Function* Builder::CreateFunction(std::string_view name,
 }
 
 If* Builder::CreateIf(Value* condition) {
-    return ir.values.Create<If>(condition, CreateBlock(), CreateBlock(), CreateBlock());
+    return ir.values.Create<If>(condition, CreateBlock(), CreateBlock(), CreateMergeBlock());
 }
 
 Loop* Builder::CreateLoop() {
-    return ir.values.Create<Loop>(CreateBlock(), CreateBlock(), CreateBlock(), CreateBlock());
+    return ir.values.Create<Loop>(CreateBlock(), CreateMergeBlock(), CreateMergeBlock(),
+                                  CreateMergeBlock());
 }
 
 Switch* Builder::CreateSwitch(Value* condition) {
-    return ir.values.Create<Switch>(condition, CreateBlock());
+    return ir.values.Create<Switch>(condition, CreateMergeBlock());
 }
 
 Block* Builder::CreateCase(Switch* s, utils::VectorRef<Switch::CaseSelector> selectors) {
-    s->Cases().Push(Switch::Case{std::move(selectors), CreateBlock()});
-
-    Block* b = s->Cases().Back().Start();
-    b->AddInboundBranch(s);
-    b->SetParent(s);
-    return b;
+    auto* block = CreateBlock();
+    s->Cases().Push(Switch::Case{std::move(selectors), block});
+    block->SetParent(s);
+    return block;
 }
 
 Binary* Builder::CreateBinary(enum Binary::Kind kind,
