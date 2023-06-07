@@ -66,7 +66,7 @@ Switch* Builder::CreateSwitch(Value* condition) {
 Block* Builder::CreateCase(Switch* s, utils::VectorRef<Switch::CaseSelector> selectors) {
     s->Cases().Push(Switch::Case{std::move(selectors), CreateBlock()});
 
-    return s->Cases().Back().Start();
+    return s->Cases().Back().Block();
 }
 
 Binary* Builder::CreateBinary(enum Binary::Kind kind,
