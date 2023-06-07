@@ -532,14 +532,14 @@ void Disassembler::EmitSwitch(const Switch* s) {
                 EmitValue(selector.val);
             }
         }
-        out_ << ", %b" << IdOf(c.Start()) << ")";
+        out_ << ", %b" << IdOf(c.Block()) << ")";
     }
     out_ << "]" << std::endl;
 
     for (auto& c : s->Cases()) {
         ScopedIndent si(indent_size_);
         Indent() << "# Case block" << std::endl;
-        Walk(c.Start());
+        Walk(c.Block());
         out_ << std::endl;
     }
 }
