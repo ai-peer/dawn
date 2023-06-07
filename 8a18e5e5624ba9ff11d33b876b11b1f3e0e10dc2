@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a434dba8_7062b039",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:25:24Z",
+      "side": 0,
+      "message": "So, how do we get a branch into the Body or hte Initializer from the loop?",
+      "parentUuid": "674e546d_994864d1",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef4b73d4_bffb88c2",
         "filename": "src/tint/ir/from_program.cc",
         "patchSetId": 11
