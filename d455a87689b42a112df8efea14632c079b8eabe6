@@ -16,6 +16,24 @@
       "message": "Could still test loading from some other non-ptr value?",
       "revId": "d455a87689b42a112df8efea14632c079b8eabe6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a75c63d3_647c26db",
+        "filename": "src/tint/ir/load_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T22:44:39Z",
+      "side": 0,
+      "message": "Good shout. Done.",
+      "parentUuid": "f6b9b881_e66a0f3e",
+      "revId": "d455a87689b42a112df8efea14632c079b8eabe6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
