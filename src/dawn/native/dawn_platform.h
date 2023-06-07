@@ -59,6 +59,7 @@ static constexpr wgpu::TextureUsage kAgainAsRenderAttachment =
 
 static constexpr wgpu::BufferBindingType kInternalStorageBufferBinding =
     static_cast<wgpu::BufferBindingType>(0xFFFFFFFF);
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_DAWN_PLATFORM_H_

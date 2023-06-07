@@ -799,8 +799,7 @@ MaybeError ValidateWGSLProgramExtension(const DeviceBase* device,
         if (outMessages != nullptr) {
             DAWN_TRY(outMessages->AddMessages(messages));
         }
-        return DAWN_MAKE_ERROR(InternalErrorType::Validation,
-                               "Shader module uses extension(s) not enabled for its device.");
+        return DAWN_VALIDATION_ERROR("Shader module uses extension(s) not enabled for its device.");
     }
 
     return {};

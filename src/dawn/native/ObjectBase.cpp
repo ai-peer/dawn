@@ -40,6 +40,10 @@ DeviceBase* ObjectBase::GetDevice() const {
     return mDevice.Get();
 }
 
+platform::Platform* ObjectBase::GetPlatform() const {
+    return mDevice->GetPlatform();
+}
+
 void ApiObjectList::Track(ApiObjectBase* object) {
     if (mMarkedDestroyed) {
         object->DestroyImpl();

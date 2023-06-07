@@ -1521,7 +1521,18 @@ void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
         return;
     }
 
-    HandleError(DAWN_MAKE_ERROR(FromWGPUErrorType(type), message), InternalErrorType::OutOfMemory);
+    switch (type) {
+        case wgpu::ErrorType::Validation:
+            HandleError(DAWN_VALIDATION_ERROR("%s", message));
+            return;
+        case wgpu::ErrorType::OutOfMemory:
+            HandleError(DAWN_OUT_OF_MEMORY_ERROR(message), InternalErrorType::OutOfMemory);
+            return;
+        default:
+            HandleError(
+                DAWN_VALIDATION_ERROR("Invalid injected error, must be Validation or OutOfMemory"));
+            return;
+    }
 }
 
 void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* desc) {
