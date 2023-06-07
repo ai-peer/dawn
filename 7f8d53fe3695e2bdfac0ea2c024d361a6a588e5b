@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88447d5f_4873cc0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-07T23:35:47Z",
+      "side": 1,
+      "message": "Including a link to a diff of the generated file for reference: https://www.diffchecker.com/s2BWta2p/",
+      "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
