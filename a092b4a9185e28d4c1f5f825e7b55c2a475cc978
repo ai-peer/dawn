@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b839779d_66fbf775",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T14:14:42Z",
+      "side": 1,
+      "message": "```suggestion\n        // The object type that corresponds to the source of the first dynamic index.\n```",
+      "range": {
+        "startLine": 48,
+        "startChar": 27,
+        "endLine": 48,
+        "endChar": 30
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60e28a58_2e53289b",
         "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
         "patchSetId": 1
@@ -175,6 +198,40 @@
         "endLine": 126,
         "endChar": 13
       },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731f5908_a853c598",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T14:14:42Z",
+      "side": 1,
+      "message": "`access-\u003eIndices` is a `utils::Slice`. Can we just slice that into `partial_acess.indices` instead of iterating and assigning?",
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74dc3b9d_f59b5c99",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T14:14:42Z",
+      "side": 1,
+      "message": "slice?",
       "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
