@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb61be8f_9cc88dee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T20:00:31Z",
+      "side": 1,
+      "message": "Ace, thanks!",
+      "revId": "5986cba8c198174322d18c9b9545104147b4d640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87c92357_2ed5d3c0",
@@ -32,6 +49,29 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "87c92357_2ed5d3c0",
+      "revId": "5986cba8c198174322d18c9b9545104147b4d640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d1f434_9b54a5bc",
+        "filename": "src/tint/type/struct.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T20:00:31Z",
+      "side": 1,
+      "message": "nit: Could just be `Flags()`.",
+      "range": {
+        "startLine": 106,
+        "startChar": 16,
+        "endLine": 106,
+        "endChar": 27
+      },
       "revId": "5986cba8c198174322d18c9b9545104147b4d640",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
