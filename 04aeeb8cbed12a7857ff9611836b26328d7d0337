@@ -103,6 +103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b922c882_125993c1",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T12:41:23Z",
+      "side": 1,
+      "message": "I\u0027m more worried about the fact that changing the type of an instruction potentially invalidates or even subtly changes the semantics of the places where it\u0027s used.\n\ne.g. you change the type of an instruction that is used as a function argument somewhere, and now you\u0027re calling a different overload of that function without realizing (and TINT_ASSERT and validation won\u0027t necessarily catch that).",
+      "parentUuid": "b81bd46c_f1889a18",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc98a22d_4172deb2",
         "filename": "src/tint/ir/transform/block_decorated_structs.h",
         "patchSetId": 5
