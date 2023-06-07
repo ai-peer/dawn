@@ -108,6 +108,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b79288e_f277e580",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-07T19:53:25Z",
+      "side": 0,
+      "message": "To other readers: We discussed this via IM.\nThe `ir::Block` has `Parent()` which returns the `ControlInstruction`, so there\u0027s a simple path from the block back to the `If`, `Loop` or `Switch` that we lose through making this a list of sibling-only branches.",
+      "parentUuid": "1317dde1_4f0b5159",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef4b73d4_bffb88c2",
@@ -121,6 +139,24 @@
       "writtenOn": "2023-06-07T18:08:07Z",
       "side": 0,
       "message": "ditto",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47fd123f_e3b54cc3",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-07T19:53:25Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "ef4b73d4_bffb88c2",
       "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -142,6 +178,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "307800fa_24baab3b",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-07T19:53:25Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "96a5603d_2d2d935a",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbbc6297_6ef84a5b",
@@ -159,6 +213,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e871c10_f671d18b",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-07T19:53:25Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "dbbc6297_6ef84a5b",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3d8a4f8_4ee3c7a5",
@@ -172,6 +244,24 @@
       "writtenOn": "2023-06-07T18:08:07Z",
       "side": 0,
       "message": "ditto",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "850552d2_62ba61da",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-07T19:53:25Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "b3d8a4f8_4ee3c7a5",
       "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
