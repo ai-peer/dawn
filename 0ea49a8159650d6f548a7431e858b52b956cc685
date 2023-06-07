@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b9b6e3_e3b32d1c",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:20:17Z",
+      "side": 1,
+      "message": "Nit: Commented code",
+      "revId": "0ea49a8159650d6f548a7431e858b52b956cc685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
