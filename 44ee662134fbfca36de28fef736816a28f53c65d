@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ca06df_1da3b4f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-06-07T14:50:44Z",
+      "side": 1,
+      "message": "I think this is ok. It means we can\u0027t do `block` -\u003e `block` jumps but this is a closer match to what NIR does in which blocks can\u0027t jump to each other.",
+      "revId": "44ee662134fbfca36de28fef736816a28f53c65d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b76c9bec_7c4afb1a",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-06-07T14:50:44Z",
+      "side": 1,
+      "message": "These are both `(optional)`",
+      "revId": "44ee662134fbfca36de28fef736816a28f53c65d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0086da0a_2133cbe8",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-06-07T14:50:44Z",
+      "side": 1,
+      "message": "also `(optional)`",
+      "revId": "44ee662134fbfca36de28fef736816a28f53c65d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "390a2722_fe29961c",
+        "filename": "src/tint/ir/loop.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-06-07T14:50:44Z",
+      "side": 1,
+      "message": "`(optional)` on the continuing",
+      "revId": "44ee662134fbfca36de28fef736816a28f53c65d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "387587c3_271efbb6",
+        "filename": "src/tint/ir/loop.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-06-07T14:50:44Z",
+      "side": 1,
+      "message": "`(optional)`",
+      "revId": "44ee662134fbfca36de28fef736816a28f53c65d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "add753a4_2d83b288",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-06-07T14:50:44Z",
+      "side": 1,
+      "message": "`(optional)`",
+      "revId": "44ee662134fbfca36de28fef736816a28f53c65d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
