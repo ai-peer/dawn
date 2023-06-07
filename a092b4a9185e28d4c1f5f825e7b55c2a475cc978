@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79f56f07_865e424f",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83be3e73_6af38955",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 10
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b839779d_66fbf775",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-07T14:14:42Z",
       "side": 1,
       "message": "```suggestion\n        // The object type that corresponds to the source of the first dynamic index.\n```",
+      "range": {
+        "startLine": 48,
+        "startChar": 27,
+        "endLine": 48,
+        "endChar": 30
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a9b6d3_43cb05a2",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b839779d_66fbf775",
       "range": {
         "startLine": 48,
         "startChar": 27,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86578f5c_a8213af3",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60e28a58_2e53289b",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 52
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dc5adea_e2b9d9e6",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de848f5b_79f69044",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dc5adea_e2b9d9e6",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31dc40b5_30fb2ade",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-06-07T12:21:49Z",
       "side": 1,
       "message": "nit: drop the `\u003d`. You\u0027re technically constructing a temporary and then constructing `to_replace` with the temporary. In this case, the compiler will optimize this away, but it\u0027s good habit to get in for the few cases where you lose performance.",
+      "range": {
+        "startLine": 85,
+        "startChar": 34,
+        "endLine": 85,
+        "endChar": 37
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5a34fc3_e97ed133",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31dc40b5_30fb2ade",
       "range": {
         "startLine": 85,
         "startChar": 34,
@@ -158,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cfd108c_ccd5fce9",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve been wondering about this. A helper to do determine the object type on the fly is non-trivial since you need to know the previous object type (and recursively looking this up for each index seems inefficient).\n\nI think Dan wanted to store each of the intermediate object types into the Access instruction when it is created, so maybe we should do that instead? It sort of assumes that they won\u0027t change if you change an operand, but that\u0027s probably safe to assume.",
+      "parentUuid": "738a5f03_efa2f4fb",
+      "range": {
+        "startLine": 104,
+        "startChar": 51,
+        "endLine": 112,
+        "endChar": 50
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a11c9347_61ce009d",
         "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
         "patchSetId": 1
@@ -169,6 +313,30 @@
       "writtenOn": "2023-06-07T12:21:49Z",
       "side": 1,
       "message": "There\u0027s quite a bit of state going on here - `to_replace` is being updated, but is only used if `has_dynamic_index` is true. To help with readability, reduce the size of this uber-function and reduce the chance of future bugs, I recommend putting the highlighted code into a method that returns a `std::optional\u003cAccessToReplace\u003e`.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 34
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2043f09_d419cb2f",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a11c9347_61ce009d",
       "range": {
         "startLine": 85,
         "startChar": 0,
@@ -202,6 +370,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb15441_d052e3fa",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61f4b719_3adaa9a5",
+      "range": {
+        "startLine": 126,
+        "startChar": 9,
+        "endLine": 126,
+        "endChar": 13
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "731f5908_a853c598",
@@ -215,6 +407,24 @@
       "writtenOn": "2023-06-07T14:14:42Z",
       "side": 1,
       "message": "`access-\u003eIndices` is a `utils::Slice`. Can we just slice that into `partial_acess.indices` instead of iterating and assigning?",
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b945761_3081dbff",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "731f5908_a853c598",
       "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +446,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed57428_eaea5924",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74dc3b9d_f59b5c99",
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8929805e_3d222469",
@@ -249,6 +477,30 @@
       "writtenOn": "2023-06-07T12:21:49Z",
       "side": 1,
       "message": "I think you can reduce the boilerplate in these tests by using a `i : i32` function parameter.",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 37
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "694b9c10_6f18e3c8",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Good shout, done.",
+      "parentUuid": "8929805e_3d222469",
       "range": {
         "startLine": 92,
         "startChar": 0,
@@ -282,6 +534,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "091a1ffb_bb532837",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Will do as a follow-up.",
+      "parentUuid": "7c2140ae_cb984a67",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 31
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b37729b5_68095eff",
@@ -295,6 +571,30 @@
       "writtenOn": "2023-06-07T12:21:49Z",
       "side": 1,
       "message": "Please can we have a test for interleaving of constant indices with dynamic indices? e.g. `[constant, dynamic, constant, dynamic]`.",
+      "range": {
+        "startLine": 282,
+        "startChar": 57,
+        "endLine": 282,
+        "endChar": 95
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a62c697_1793b236",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b37729b5_68095eff",
       "range": {
         "startLine": 282,
         "startChar": 57,
@@ -341,6 +641,24 @@
       "writtenOn": "2023-06-07T12:21:49Z",
       "side": 1,
       "message": "Please can we have a test for structures? Something that proves:\n\n\n```\nstruct AVeryLargeStruct {\n  big_fat_unrelated_array : array\u003ci32, 1024\u003e,\n  matrix : mat4x4f,\n  another_big_fat_unrelated_array : array\u003ci32, 1024\u003e,\n};\n\nfn f(s : AVeryLargeStruct, i : i32) -\u003e f32 {\n  return s.matrix[i][0]; // We only hoist s.matrix, not the entirety of s.\n}\n```",
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7478704f_291d7a51",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T21:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7be85a29_ec9d9e9a",
       "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
