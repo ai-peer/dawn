@@ -850,7 +850,7 @@ void GeneratorImplIr::EmitSwitch(ir::Switch* swtch) {
     for (auto& c : swtch->Cases()) {
         for (auto& sel : c.selectors) {
             if (sel.IsDefault()) {
-                default_label = Label(c.Start());
+                default_label = Label(c.Block());
             }
         }
     }
@@ -859,7 +859,7 @@ void GeneratorImplIr::EmitSwitch(ir::Switch* swtch) {
     // Build the operands to the OpSwitch instruction.
     OperandList switch_operands = {Value(swtch->Condition()), default_label};
     for (auto& c : swtch->Cases()) {
-        auto label = Label(c.Start());
+        auto label = Label(c.Block());
         for (auto& sel : c.selectors) {
             if (sel.IsDefault()) {
                 continue;
@@ -879,7 +879,7 @@ void GeneratorImplIr::EmitSwitch(ir::Switch* swtch) {
 
     // Emit the cases.
     for (auto& c : swtch->Cases()) {
-        EmitBlock(c.Start());
+        EmitBlock(c.Block());
     }
 
     // Emit the switch merge block.
