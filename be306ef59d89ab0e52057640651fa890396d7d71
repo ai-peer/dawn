@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb7d5533_9de6a4f1",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-07T12:25:59Z",
+      "side": 1,
+      "message": "We also need to unset the `VALIDATION_ASPECT_BIND_GROUPS`, the same bug was present for unsetting vertices and I put up a fix here https://dawn-review.googlesource.com/c/dawn/+/136380 Can you add a test that would have failed in the current patchset?",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24951cd4_9720bf1a",
         "filename": "src/dawn/native/ProgrammableEncoder.cpp",
         "patchSetId": 2
