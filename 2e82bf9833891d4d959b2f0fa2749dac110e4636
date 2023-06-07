@@ -16,6 +16,24 @@
       "message": "One issue with this is, given a block, you don\u0027t know the incoming branch without walking the entire control flow graph to find the branch. So, it maybe implicit, but it\u0027s hard to figure out without a full walk.",
       "revId": "2e82bf9833891d4d959b2f0fa2749dac110e4636",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "063c78b7_28dbaa71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-07T17:47:06Z",
+      "side": 1,
+      "message": "We now have `Block::Parent()`. When combined with `MultiInBlock::InboundBranches()`, you should be able to get all the info you need.",
+      "parentUuid": "7b610710_093ebef0",
+      "revId": "2e82bf9833891d4d959b2f0fa2749dac110e4636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
