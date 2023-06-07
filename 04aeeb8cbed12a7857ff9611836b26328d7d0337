@@ -139,6 +139,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bfbe73c_6057070e",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T19:49:08Z",
+      "side": 1,
+      "message": "Switched to an `EnumSet` and removed the `BlockDecoratedStruct` subclass. PTAL.",
+      "parentUuid": "b17ea7c0_5997147e",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc98a22d_4172deb2",
         "filename": "src/tint/ir/transform/block_decorated_structs.h",
         "patchSetId": 5
