@@ -121,6 +121,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b17ea7c0_5997147e",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T13:44:28Z",
+      "side": 1,
+      "message": "That\u0027s fair. So, does that imply a rule that `types` in the IR aren\u0027t mutable? You want a new type, you make a new thingy the type attaches too.\n\n(It also means the Value replacement code is going to have to check fro things like, replacing the var of an accessor, make sure the pointeryness matches the result)",
+      "parentUuid": "b922c882_125993c1",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc98a22d_4172deb2",
         "filename": "src/tint/ir/transform/block_decorated_structs.h",
         "patchSetId": 5
