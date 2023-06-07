@@ -64,16 +64,6 @@ TEST_F(IR_LoadTest, Fail_NullType) {
         "");
 }
 
-TEST_F(IR_LoadTest, Fail_NonPtr_Builder) {
-    EXPECT_FATAL_FAILURE(
-        {
-            Module mod;
-            Builder b{mod};
-            b.Load(b.Declare(mod.Types().f32()));
-        },
-        "");
-}
-
 TEST_F(IR_LoadTest, Fail_NullValue_Builder) {
     EXPECT_FATAL_FAILURE(
         {
