@@ -142,6 +142,30 @@
       },
       "revId": "8d6d52aa94a1b93ba52ca9c4dc0c147938008c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67f2cd8a_d30329f0",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T19:49:51Z",
+      "side": 1,
+      "message": "Switched to an EnumSet and removed the BlockDecoratedStruct subclass. PTAL.",
+      "parentUuid": "01e72a15_affbf9a2",
+      "range": {
+        "startLine": 675,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 5
+      },
+      "revId": "8d6d52aa94a1b93ba52ca9c4dc0c147938008c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
