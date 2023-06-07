@@ -74,6 +74,30 @@
       },
       "revId": "5986cba8c198174322d18c9b9545104147b4d640",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "917536ed_e64c37ea",
+        "filename": "src/tint/type/struct.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-07T20:02:58Z",
+      "side": 1,
+      "message": "That would shadow `Type::Flags()` in the parent class.",
+      "parentUuid": "75d1f434_9b54a5bc",
+      "range": {
+        "startLine": 106,
+        "startChar": 16,
+        "endLine": 106,
+        "endChar": 27
+      },
+      "revId": "5986cba8c198174322d18c9b9545104147b4d640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
