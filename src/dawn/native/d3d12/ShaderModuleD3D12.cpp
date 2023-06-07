@@ -131,13 +131,13 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     const BindingInfoArray& moduleBindingInfo = entryPoint.bindings;
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
-        const auto& groupBindingInfo = moduleBindingInfo[group];
+        const auto& moduleGroupBindingInfo = moduleBindingInfo[group];
 
         // d3d12::BindGroupLayout packs the bindings per HLSL register-space. We modify
         // the Tint AST to make the "bindings" decoration match the offset chosen by
         // d3d12::BindGroupLayout so that Tint produces HLSL with the correct registers
         // assigned to each interface variable.
-        for (const auto& [binding, bindingInfo] : groupBindingInfo) {
+        for (const auto& [binding, moduleBindingInfo] : moduleGroupBindingInfo) {
             BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
             BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
                                          static_cast<uint32_t>(binding)};
@@ -152,13 +152,19 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
             // buffer bindings to be treated as UAV instead of SRV. Internal storage
             // buffer is a storage buffer used in the internal pipeline.
             const bool forceStorageBufferAsUAV =
-                (bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
+                (moduleBindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
                  (bgl->GetBindingInfo(bindingIndex).buffer.type ==
                       wgpu::BufferBindingType::Storage ||
                   bgl->GetBindingInfo(bindingIndex).buffer.type == kInternalStorageBufferBinding));
             if (forceStorageBufferAsUAV) {
                 bindingRemapper.access_controls.emplace(srcBindingPoint,
                                                         tint::builtin::Access::kReadWrite);
+            }
+
+            if (moduleBindingInfo.bindingType == BindingInfoType::Buffer &&
+                !bgl->GetBindingInfo(bindingIndex).buffer.hasDynamicOffset) {
+                req.hlsl.bufferBindingPointsWithoutDynamicBufferOffset.emplace_back(
+                    static_cast<uint32_t>(group), static_cast<uint32_t>(binding));
             }
         }
 
