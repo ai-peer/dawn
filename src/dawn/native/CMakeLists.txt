@@ -114,6 +114,8 @@ target_sources(dawn_native PRIVATE
     "Features.h"
     "ExternalTexture.cpp"
     "ExternalTexture.h"
+    "ExecutionQueue.cpp"
+    "ExecutionQueue.h"
     "IndirectDrawMetadata.cpp"
     "IndirectDrawMetadata.h"
     "IndirectDrawValidationEncoder.cpp"
