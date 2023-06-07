@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d677f2_3f945420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-07T16:00:11Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nHappy to make these more fine-grained if you think that\u0027s worthwhile.",
+      "revId": "cfa9ef76b4940235d42ff182e888af9459b0266b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
