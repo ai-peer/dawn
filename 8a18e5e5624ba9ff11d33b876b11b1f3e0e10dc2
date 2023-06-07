@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "674e546d_994864d1",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T18:20:58Z",
+      "side": 0,
+      "message": "But you don\u0027t get values from the `ir::Loop`, so that isn\u0027t considered by the `InboundBranches`.\nReally this is for tracking the places you can get block input arguments.\n\nThe comment on `MultiInBlock` says:\n\n\u003e MultiInBlocks maintains a list of inbound branches from branch instructions **excluding `ir::If`, `ir::Switch` and `ir::Loop` which implicitly branch to the internal block**.",
+      "parentUuid": "fca187e5_c4233a05",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef4b73d4_bffb88c2",
         "filename": "src/tint/ir/from_program.cc",
         "patchSetId": 11
