@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afeb6a61_5692dc31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T00:22:40Z",
+      "side": 1,
+      "message": "PTAL. Ben, removed your +1 as I added an example of the operand code in here and wanted to make sure it was looked at.\n\nNot everything is marking sources in the disassembler but I think it\u0027s easier to fill it out as validation is filled out which needs the source information.",
+      "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a55eba_4d17b4b8",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T00:22:40Z",
+      "side": 1,
+      "message": "Duplicated because my instruction is `const` and `Usage` needs to be non-const. This seemed better then a cast to drop the const or un-consting the disassembler methods.",
+      "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbec9aee_0e83ac96",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T00:22:40Z",
+      "side": 1,
+      "message": "Thoughts? Seems better then coupling the 0 into disassembler and validator. If we like this pattern, will add more as I add validation and need them for disassembly.",
+      "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
