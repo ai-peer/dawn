@@ -118,6 +118,30 @@
       },
       "revId": "8d6d52aa94a1b93ba52ca9c4dc0c147938008c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01e72a15_affbf9a2",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T13:22:11Z",
+      "side": 1,
+      "message": "Either way you\u0027re sharing knowledge of the *this-struct-is-a-block* across different modules in the codebase. I\u0027m just suggesting that if we\u0027re going to do that, then we might as well just concede that the `BlockDecoration` flag is a property of the type and stop attempting to abstract it away.\n\nAlternatively, we could add type attributes, similarly to the AST. It\u0027ll take a bunch of code and tests to ensure that they\u0027re included in the type deduplication, that order doesn\u0027t matter, etc. That would address the ability to _print_ them, but you\u0027re going to face similar issues if we want to parse them.",
+      "parentUuid": "2516efcf_03389711",
+      "range": {
+        "startLine": 675,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 5
+      },
+      "revId": "8d6d52aa94a1b93ba52ca9c4dc0c147938008c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
