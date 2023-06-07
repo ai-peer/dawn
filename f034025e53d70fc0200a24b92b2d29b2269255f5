@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d303c64b_db892ad3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T21:07:41Z",
+      "side": 1,
+      "message": "Not sure how you folks feel about this.\nJust stood out in terms of wording around the various usages.",
+      "revId": "f034025e53d70fc0200a24b92b2d29b2269255f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
