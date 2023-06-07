@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dccfc9b_4ab4ff4a",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:52:35Z",
+      "side": 1,
+      "message": "Going to leave this to get it landed. Will cleanup when the const work happens.  (crbug.com/tint/1959)",
+      "parentUuid": "fad13d03_54660117",
+      "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbec9aee_0e83ac96",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "It\u0027s good, but why a method? Recommend:\n`static constexpr size_t kConditionOperandIndex \u003d 0;`",
       "parentUuid": "bbec9aee_0e83ac96",
+      "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1898cbb_c123af5c",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:52:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3549d299_6ade5073",
       "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
