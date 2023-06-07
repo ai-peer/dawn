@@ -80,6 +80,10 @@ struct Options {
     /// Set to `true` to generate polyfill for `reflect` builtin for vec2<f32>
     bool polyfill_reflect_vec2_f32 = false;
 
+    /// Buffer binding points without Dynamic Buffer Offset. We can disable index clamping on such
+    /// buffers.
+    std::vector<sem::BindingPoint> buffer_binding_points_without_dynamic_buffer_offset;
+
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(disable_robustness,
                  root_constant_binding_point,

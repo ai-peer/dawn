@@ -239,6 +239,9 @@ MaybeError TranslateToHLSL(d3d::HlslCompilationRequest r,
 
     options.polyfill_reflect_vec2_f32 = r.polyfillReflectVec2F32;
 
+    options.buffer_binding_points_without_dynamic_buffer_offset =
+        std::move(r.bufferBindingPointsWithoutDynamicBufferOffset);
+
     TRACE_EVENT0(tracePlatform.UnsafeGetValue(), General, "tint::writer::hlsl::Generate");
     auto result = tint::writer::hlsl::Generate(&transformedProgram, options);
     DAWN_INVALID_IF(!result.success, "An error occured while generating HLSL: %s", result.error);
