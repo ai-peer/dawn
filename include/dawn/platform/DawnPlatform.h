@@ -18,9 +18,10 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
+#include <string_view>
 
 #include "dawn/platform/dawn_platform_export.h"
-#include "dawn/webgpu.h"
+#include "dawn/webgpu_cpp.h"
 
 namespace dawn::platform {
 
@@ -98,6 +99,11 @@ class DAWN_PLATFORM_EXPORT Platform {
     virtual CachingInterface* GetCachingInterface();
 
     virtual std::unique_ptr<WorkerTaskPool> CreateWorkerTaskPool();
+
+    // Called when Dawn encounters errors outside of API validation.
+    // The embedder may define this to watch errors that occur and may log or save them for
+    // error/crash reporting.
+    virtual void ReportError(wgpu::ErrorType type, std::string_view message);
 
   private:
     Platform(const Platform&) = delete;

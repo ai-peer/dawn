@@ -16,6 +16,7 @@
 
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/dawn_platform.h"
+#include "dawn/platform/DawnPlatform.h"
 
 namespace dawn::native {
 
@@ -28,6 +29,12 @@ void IgnoreErrors(MaybeError maybeError) {
         ASSERT(errorData->GetType() == InternalErrorType::DeviceLost ||
                errorData->GetType() == InternalErrorType::Internal);
     }
+}
+
+void PlatformReportError(platform::Platform* platform,
+                         InternalErrorType type,
+                         std::string_view message) {
+    platform->ReportError(ToWGPUErrorType(type), message);
 }
 
 wgpu::ErrorType ToWGPUErrorType(InternalErrorType type) {
