@@ -142,6 +142,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0049caeb_152db40e",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T12:35:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0aef17aa_54c72613",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 43
+      },
+      "revId": "99c38787f00e7aba35290c8e6858a37c6b542c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4b08522_60b1803c",

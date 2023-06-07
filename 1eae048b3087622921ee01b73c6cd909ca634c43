@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fad13d03_54660117",
+        "filename": "src/tint/ir/disassembler.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T12:35:05Z",
+      "side": 1,
+      "message": "Let\u0027s discuss `const`. It\u0027s being problematic for all of us working on the IR. I\u0027m not sure it\u0027s worth the pain.",
+      "parentUuid": "98a55eba_4d17b4b8",
+      "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bbec9aee_0e83ac96",
         "filename": "src/tint/ir/if.h",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-07T00:22:40Z",
       "side": 1,
       "message": "Thoughts? Seems better then coupling the 0 into disassembler and validator. If we like this pattern, will add more as I add validation and need them for disassembly.",
+      "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3549d299_6ade5073",
+        "filename": "src/tint/ir/if.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T12:35:05Z",
+      "side": 1,
+      "message": "It\u0027s good, but why a method? Recommend:\n`static constexpr size_t kConditionOperandIndex \u003d 0;`",
+      "parentUuid": "bbec9aee_0e83ac96",
       "revId": "1eae048b3087622921ee01b73c6cd909ca634c43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
