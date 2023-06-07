@@ -56,13 +56,13 @@ class Switch : public utils::Castable<Switch, ControlInstruction> {
     struct Case {
         /// The case selector for this node
         utils::Vector<CaseSelector, 4> selectors;
-        /// The start block for the case block.
-        ir::Block* start = nullptr;
+        /// The case block.
+        ir::Block* block = nullptr;
 
-        /// @returns the case start target
-        const ir::Block* Start() const { return start; }
-        /// @returns the case start target
-        ir::Block* Start() { return start; }
+        /// @returns the case block
+        const ir::Block* Block() const { return block; }
+        /// @returns the case block
+        ir::Block* Block() { return block; }
     };
 
     /// Constructor
