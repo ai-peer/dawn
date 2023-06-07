@@ -16,6 +16,97 @@
       "message": "PTAL. Thanks!",
       "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24951cd4_9720bf1a",
+        "filename": "src/dawn/native/ProgrammableEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-07T05:24:20Z",
+      "side": 1,
+      "message": "nit: we can avoid indenting the rest of the code with an early `return {};`",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 91
+      },
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff994df_d0204c5c",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-07T05:24:20Z",
+      "side": 1,
+      "message": "nit: comment above the test",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19919948_f65f4ca5",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-07T05:24:20Z",
+      "side": 1,
+      "message": "nit: comment above the test",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3921da8e_268c8ce9",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-07T05:24:20Z",
+      "side": 1,
+      "message": "also test that passing 0 for dynamicOffsetsCount and non-null for dynamicOffsets is valid",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a46af5_3ffdee88",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-07T05:24:20Z",
+      "side": 1,
+      "message": "we also need tests that if you unset bind groups, then it is invalid to draw with a pipeline that requires them",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
