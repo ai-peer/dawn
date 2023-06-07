@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fca187e5_c4233a05",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:08:07Z",
+      "side": 0,
+      "message": "The loop body is still a multi-in isnt\u0027 it? So doesn\u0027t it have inbound?",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef4b73d4_bffb88c2",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:08:07Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a5603d_2d2d935a",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:08:07Z",
+      "side": 0,
+      "message": "ditto?",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbbc6297_6ef84a5b",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:08:07Z",
+      "side": 0,
+      "message": "This should still be inbound, no?",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d8a4f8_4ee3c7a5",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_loop_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T18:08:07Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "8a18e5e5624ba9ff11d33b876b11b1f3e0e10dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
