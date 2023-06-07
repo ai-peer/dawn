@@ -160,6 +160,12 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
                 bindingRemapper.access_controls.emplace(srcBindingPoint,
                                                         tint::builtin::Access::kReadWrite);
             }
+
+            if (bindingInfo.bindingType == BindingInfoType::Buffer &&
+                !bindingInfo.buffer.hasDynamicOffset) {
+                req.hlsl.bufferBindingPointsWithoutDynamicBufferOffset.emplace_back(
+                    static_cast<uint32_t>(group), static_cast<uint32_t>(binding));
+            }
         }
 
         // Add arrayLengthFromUniform options

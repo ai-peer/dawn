@@ -192,6 +192,10 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         // Robustness must come after PromoteSideEffectsToDecl
         // Robustness must come before BuiltinPolyfill and CanonicalizeEntryPointIO
         manager.Add<ast::transform::Robustness>();
+
+        ast::transform::Robustness::Config config = {};
+        config.bindings_ignored = options.buffer_binding_points_without_dynamic_buffer_offset;
+        data.Add<ast::transform::Robustness::Config>(config);
     }
 
     // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
