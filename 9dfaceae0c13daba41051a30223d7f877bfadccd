@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff281ee_f3e37e14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T22:03:57Z",
+      "side": 1,
+      "message": "Superb job, James. This looks fantastic.",
+      "revId": "9dfaceae0c13daba41051a30223d7f877bfadccd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b2f87d_8060a229",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T22:03:57Z",
+      "side": 1,
+      "message": "Lovely. _Much_ easier to read.",
+      "revId": "9dfaceae0c13daba41051a30223d7f877bfadccd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

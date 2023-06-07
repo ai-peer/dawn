@@ -300,6 +300,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b63497_92a8f521",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T22:03:57Z",
+      "side": 1,
+      "message": "I don\u0027t think there\u0027s need to store all the types, given that it\u0027s easily calculated. We could have a method that returns the list of types, by computing the types from the indices.\n\nAnyway, not important for now.",
+      "parentUuid": "6cfd108c_ccd5fce9",
+      "range": {
+        "startLine": 104,
+        "startChar": 51,
+        "endLine": 112,
+        "endChar": 50
+      },
+      "revId": "a092b4a9185e28d4c1f5f825e7b55c2a475cc978",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a11c9347_61ce009d",
