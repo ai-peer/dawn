@@ -591,7 +591,7 @@ void Disassembler::EmitSwitch(Switch* s) {
                 EmitValue(selector.val);
             }
         }
-        out_ << ", %b" << IdOf(c.Start()) << ")";
+        out_ << ", %b" << IdOf(c.Block()) << ")";
     }
     out_ << "]";
     EmitLine();
@@ -601,7 +601,7 @@ void Disassembler::EmitSwitch(Switch* s) {
         Indent() << "# Case block";
         EmitLine();
 
-        EmitBlock(c.Start());
+        EmitBlock(c.Block());
         EmitLine();
     }
 }
