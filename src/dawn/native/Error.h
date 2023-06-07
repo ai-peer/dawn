@@ -41,6 +41,21 @@ using MaybeError = Result<void, ErrorData>;
 template <typename T>
 using ResultOrError = Result<T, ErrorData>;
 
+namespace detail {
+struct PlatformUnavailable;
+}
+
+constexpr inline detail::PlatformUnavailable* GetPlatform() {
+    return static_cast<detail::PlatformUnavailable*>(nullptr);
+}
+
+template <typename... Args>
+inline void PlatformReportError(detail::PlatformUnavailable*, const Args&...) {}
+
+void PlatformReportError(platform::Platform* platform,
+                         InternalErrorType type,
+                         std::string_view message);
+
 // Returning a success is done like so:
 //   return {}; // for Error
 //   return SomethingOfTypeT; // for ResultOrError<T>
@@ -73,9 +88,18 @@ using ResultOrError = Result<T, ErrorData>;
 //
 //   - Unimplemented: same as Internal except it puts "unimplemented" in the error message for
 //     more clarity.
+//
+//  DAWN_DEVICE_LOST_ERROR, DAWN_INTERNAL_ERROR, DAWN_FORMAT_INTERNAL_ERROR,
+//  DAWN_UNIMPLEMENTED_ERROR, and DAWN_OUT_OF_MEMORY_ERROR make use of DAWN_MAKE_REPORTED_ERROR.
+//  These will report the error to the dawn::platform::Platform object if it is available and in
+//  scope via GetPlatform().
 
 #define DAWN_MAKE_ERROR(TYPE, MESSAGE) \
     ::dawn::native::ErrorData::Create(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
+
+#define DAWN_MAKE_REPORTED_ERROR(TYPE, MESSAGE)         \
+    (PlatformReportError(GetPlatform(), TYPE, MESSAGE), \
+     ::dawn::native::ErrorData::Create(TYPE, MESSAGE, __FILE__, __func__, __LINE__))
 
 #define DAWN_VALIDATION_ERROR(...) \
     DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__))
@@ -89,14 +113,15 @@ using ResultOrError = Result<T, ErrorData>;
 
 // DAWN_DEVICE_LOST_ERROR means that there was a real unrecoverable native device lost error.
 // We can't even do a graceful shutdown because the Device is gone.
-#define DAWN_DEVICE_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::DeviceLost, MESSAGE)
+#define DAWN_DEVICE_LOST_ERROR(MESSAGE) \
+    DAWN_MAKE_REPORTED_ERROR(InternalErrorType::DeviceLost, MESSAGE)
 
 // DAWN_INTERNAL_ERROR means Dawn hit an unexpected error in the backend and should try to
 // gracefully shut down.
-#define DAWN_INTERNAL_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::Internal, MESSAGE)
+#define DAWN_INTERNAL_ERROR(MESSAGE) DAWN_MAKE_REPORTED_ERROR(InternalErrorType::Internal, MESSAGE)
 
 #define DAWN_FORMAT_INTERNAL_ERROR(...) \
-    DAWN_MAKE_ERROR(InternalErrorType::Internal, absl::StrFormat(__VA_ARGS__))
+    DAWN_MAKE_REPORTED_ERROR(InternalErrorType::Internal, absl::StrFormat(__VA_ARGS__))
 
 #define DAWN_UNIMPLEMENTED_ERROR(MESSAGE) \
     DAWN_MAKE_ERROR(InternalErrorType::Internal, std::string("Unimplemented: ") + MESSAGE)
@@ -104,7 +129,8 @@ using ResultOrError = Result<T, ErrorData>;
 // DAWN_OUT_OF_MEMORY_ERROR means we ran out of memory. It may be used as a signal internally in
 // Dawn to free up unused resources. Or, it may bubble up to the application to signal an allocation
 // was too large or they should free some existing resources.
-#define DAWN_OUT_OF_MEMORY_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::OutOfMemory, MESSAGE)
+#define DAWN_OUT_OF_MEMORY_ERROR(MESSAGE) \
+    DAWN_MAKE_REPORTED_ERROR(InternalErrorType::OutOfMemory, MESSAGE)
 
 #define DAWN_CONCAT1(x, y) x##y
 #define DAWN_CONCAT2(x, y) DAWN_CONCAT1(x, y)

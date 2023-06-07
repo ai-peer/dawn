@@ -26,6 +26,10 @@ namespace absl {
 class FormatSink;
 }
 
+namespace dawn::platform {
+class Platform;
+}
+
 namespace dawn::native {
 
 class ApiObjectBase;
@@ -48,6 +52,7 @@ class ObjectBase : public ErrorMonad {
     ObjectBase(DeviceBase* device, ErrorTag tag);
 
     DeviceBase* GetDevice() const;
+    platform::Platform* GetPlatform() const;
 
   private:
     // Ref to owning device.
