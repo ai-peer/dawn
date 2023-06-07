@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65208e62_517d86b5",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T19:53:52Z",
+      "side": 1,
+      "message": "Can you file a bug so we don\u0027t lose track of this?",
+      "parentUuid": "d60275de_49f41bd1",
+      "range": {
+        "startLine": 49,
+        "startChar": 20,
+        "endLine": 49,
+        "endChar": 52
+      },
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04f1b4f7_5f720fb8",
@@ -169,6 +193,24 @@
       "side": 1,
       "message": "(ignore that, wrong thread)",
       "parentUuid": "7bfbe73c_6057070e",
+      "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e89bde4_cd7ed239",
+        "filename": "src/tint/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-07T19:53:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "961d5c26_6c7dcd0b",
       "revId": "04aeeb8cbed12a7857ff9611836b26328d7d0337",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
