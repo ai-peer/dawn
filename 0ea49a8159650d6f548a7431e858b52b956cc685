@@ -16,6 +16,24 @@
       "message": "Nit: Commented code",
       "revId": "0ea49a8159650d6f548a7431e858b52b956cc685",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06139502_404df9e9",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-07T22:43:47Z",
+      "side": 1,
+      "message": "Yeah, intentional because this is likely to be used in the very near future. Just removes a warning-as-error.",
+      "parentUuid": "e1b9b6e3_e3b32d1c",
+      "revId": "0ea49a8159650d6f548a7431e858b52b956cc685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
