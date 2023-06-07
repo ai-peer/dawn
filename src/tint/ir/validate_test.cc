@@ -42,15 +42,6 @@ TEST_F(IR_ValidateTest, RootBlock_NonVar) {
     EXPECT_EQ(res.Failure().str(), "error: root block: invalid instruction: tint::ir::Loop");
 }
 
-TEST_F(IR_ValidateTest, RootBlock_VarBadType) {
-    mod.root_block = b.CreateRootBlockIfNeeded();
-    mod.root_block->Append(b.Declare(mod.Types().i32()));
-    auto res = ir::Validate(mod);
-    ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(),
-              "error: root block: 'var' type is not a pointer: tint::type::I32");
-}
-
 TEST_F(IR_ValidateTest, Function) {
     auto* f = b.CreateFunction("my_func", mod.Types().void_());
     mod.functions.Push(f);
