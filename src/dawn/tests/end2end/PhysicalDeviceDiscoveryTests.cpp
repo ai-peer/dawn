@@ -45,19 +45,16 @@
 namespace dawn {
 namespace {
 
-class PhysicalDeviceDiscoveryTests : public ::testing::Test {};
+class AdapterEnumerationTests : public ::testing::Test {};
 
-#if defined(DAWN_ENABLE_BACKEND_VULKAN)
-// Test only discovering the SwiftShader physical devices
-TEST(PhysicalDeviceDiscoveryTests, OnlySwiftShader) {
+// Test only enumerating the fallback adapters
+TEST(AdapterEnumerationTests, OnlyFallback) {
     native::Instance instance;
 
-    native::vulkan::PhysicalDeviceDiscoveryOptions options;
-    options.forceSwiftShader = true;
-    instance.DiscoverPhysicalDevices(&options);
+    wgpu::RequestAdapterOptions adapterOptions = {};
+    adapterOptions.forceFallbackAdapter = true;
 
-    const auto& adapters = instance.GetAdapters();
-    EXPECT_LE(adapters.size(), 2u);  // 0 or 2 SwiftShader adapters.
+    const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
@@ -68,14 +65,17 @@ TEST(PhysicalDeviceDiscoveryTests, OnlySwiftShader) {
     }
 }
 
-// Test discovering only Vulkan physical devices
-TEST(PhysicalDeviceDiscoveryTests, OnlyVulkan) {
+// Test enumerating only Vulkan physical devices
+TEST(AdapterEnumerationTests, OnlyVulkan) {
     native::Instance instance;
 
-    native::vulkan::PhysicalDeviceDiscoveryOptions options;
-    instance.DiscoverPhysicalDevices(&options);
+    wgpu::RequestAdapterOptionsBackendType backendTypeOptions = {};
+    backendTypeOptions.backendType = wgpu::BackendType::Vulkan;
 
-    const auto& adapters = instance.GetAdapters();
+    wgpu::RequestAdapterOptions adapterOptions = {};
+    adapterOptions.nextInChain = &backendTypeOptions;
+
+    const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
@@ -83,17 +83,18 @@ TEST(PhysicalDeviceDiscoveryTests, OnlyVulkan) {
         EXPECT_EQ(properties.backendType, wgpu::BackendType::Vulkan);
     }
 }
-#endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
 
-#if defined(DAWN_ENABLE_BACKEND_D3D11)
-// Test discovering only D3D11 physical devices
-TEST(PhysicalDeviceDiscoveryTests, OnlyD3D11) {
+// Test enumerating only D3D11 physical devices
+TEST(AdapterEnumerationTests, OnlyD3D11) {
     native::Instance instance;
 
-    native::d3d11::PhysicalDeviceDiscoveryOptions options;
-    instance.DiscoverPhysicalDevices(&options);
+    wgpu::RequestAdapterOptionsBackendType backendTypeOptions = {};
+    backendTypeOptions.backendType = wgpu::BackendType::D3D11;
 
-    const auto& adapters = instance.GetAdapters();
+    wgpu::RequestAdapterOptions adapterOptions = {};
+    adapterOptions.nextInChain = &backendTypeOptions;
+
+    const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
@@ -102,8 +103,9 @@ TEST(PhysicalDeviceDiscoveryTests, OnlyD3D11) {
     }
 }
 
-// Test discovering a D3D11 physical device from a prexisting DXGI adapter
-TEST(PhysicalDeviceDiscoveryTests, MatchingDXGIAdapterD3D11) {
+#if defined(DAWN_ENABLE_BACKEND_D3D11)
+// Test enumerating a D3D11 physical device from a prexisting DXGI adapter
+TEST(AdapterEnumerationTests, MatchingDXGIAdapterD3D11) {
     using Microsoft::WRL::ComPtr;
 
     ComPtr<IDXGIFactory4> dxgiFactory;
@@ -118,30 +120,53 @@ TEST(PhysicalDeviceDiscoveryTests, MatchingDXGIAdapterD3D11) {
 
         native::Instance instance;
 
-        native::d3d11::PhysicalDeviceDiscoveryOptions options;
-        options.dxgiAdapter = std::move(dxgiAdapter);
-        instance.DiscoverPhysicalDevices(&options);
+        native::d3d::RequestAdapterOptionsIDXGIAdapter dxgiAdapterOptions = {};
+        dxgiAdapterOptions.dxgiAdapter = std::move(dxgiAdapter);
 
-        const auto& adapters = instance.GetAdapters();
-        for (const auto& adapter : adapters) {
-            wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+        wgpu::RequestAdapterOptionsBackendType backendTypeOptions = {};
+        backendTypeOptions.backendType = wgpu::BackendType::D3D11;
 
-            EXPECT_EQ(properties.backendType, wgpu::BackendType::D3D11);
-        }
+        wgpu::RequestAdapterOptions adapterOptions = {};
+        adapterOptions.nextInChain = &backendTypeOptions;
+        backendTypeOptions.nextInChain = &dxgiAdapterOptions;
+
+        const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
+        ASSERT_EQ(adapters.size(), 1u);
+
+        wgpu::AdapterProperties properties;
+        adapters[0].GetProperties(&properties);
+
+        // Test that enumeration again yields the same adapter device.
+        const auto& adaptersAgain = instance.EnumerateAdapters(&adapterOptions);
+        ASSERT_EQ(adaptersAgain.size(), 1u);
+
+        wgpu::AdapterProperties propertiesAgain;
+        adaptersAgain[0].GetProperties(&propertiesAgain);
+
+        EXPECT_EQ(properties.vendorID, propertiesAgain.vendorID);
+        EXPECT_EQ(properties.vendorName, propertiesAgain.vendorName);
+        EXPECT_EQ(properties.architecture, propertiesAgain.architecture);
+        EXPECT_EQ(properties.deviceID, propertiesAgain.deviceID);
+        EXPECT_EQ(properties.name, propertiesAgain.name);
+        EXPECT_EQ(properties.driverDescription, propertiesAgain.driverDescription);
+        EXPECT_EQ(properties.adapterType, propertiesAgain.adapterType);
+        EXPECT_EQ(properties.backendType, propertiesAgain.backendType);
+        EXPECT_EQ(properties.compatibilityMode, propertiesAgain.compatibilityMode);
     }
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D11)
 
-#if defined(DAWN_ENABLE_BACKEND_D3D12)
-// Test discovering only D3D12 physical devices
-TEST(PhysicalDeviceDiscoveryTests, OnlyD3D12) {
+// Test enumerating only D3D12 physical devices
+TEST(AdapterEnumerationTests, OnlyD3D12) {
     native::Instance instance;
 
-    native::d3d12::PhysicalDeviceDiscoveryOptions options;
-    instance.DiscoverPhysicalDevices(&options);
+    wgpu::RequestAdapterOptionsBackendType backendTypeOptions = {};
+    backendTypeOptions.backendType = wgpu::BackendType::D3D12;
 
-    const auto& adapters = instance.GetAdapters();
+    wgpu::RequestAdapterOptions adapterOptions = {};
+    adapterOptions.nextInChain = &backendTypeOptions;
+
+    const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
@@ -150,8 +175,9 @@ TEST(PhysicalDeviceDiscoveryTests, OnlyD3D12) {
     }
 }
 
-// Test discovering a D3D12 physical device from a prexisting DXGI adapter
-TEST(PhysicalDeviceDiscoveryTests, MatchingDXGIAdapterD3D12) {
+#if defined(DAWN_ENABLE_BACKEND_D3D12)
+// Test enumerating a D3D12 physical device from a prexisting DXGI adapter
+TEST(AdapterEnumerationTests, MatchingDXGIAdapterD3D12) {
     using Microsoft::WRL::ComPtr;
 
     ComPtr<IDXGIFactory4> dxgiFactory;
@@ -166,30 +192,54 @@ TEST(PhysicalDeviceDiscoveryTests, MatchingDXGIAdapterD3D12) {
 
         native::Instance instance;
 
-        native::d3d12::PhysicalDeviceDiscoveryOptions options;
-        options.dxgiAdapter = std::move(dxgiAdapter);
-        instance.DiscoverPhysicalDevices(&options);
+        native::d3d::RequestAdapterOptionsIDXGIAdapter dxgiAdapterOptions = {};
+        dxgiAdapterOptions.dxgiAdapter = std::move(dxgiAdapter);
 
-        const auto& adapters = instance.GetAdapters();
-        for (const auto& adapter : adapters) {
-            wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+        wgpu::RequestAdapterOptionsBackendType backendTypeOptions = {};
+        backendTypeOptions.backendType = wgpu::BackendType::D3D12;
 
-            EXPECT_EQ(properties.backendType, wgpu::BackendType::D3D12);
-        }
+        wgpu::RequestAdapterOptions adapterOptions = {};
+        adapterOptions.nextInChain = &backendTypeOptions;
+        backendTypeOptions.nextInChain = &dxgiAdapterOptions;
+
+        const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
+        ASSERT_EQ(adapters.size(), 1u);
+
+        wgpu::AdapterProperties properties;
+        adapters[0].GetProperties(&properties);
+        EXPECT_EQ(properties.backendType, wgpu::BackendType::D3D12);
+
+        // Test that enumeration again yields the same adapter device.
+        const auto& adaptersAgain = instance.EnumerateAdapters(&adapterOptions);
+        ASSERT_EQ(adaptersAgain.size(), 1u);
+
+        wgpu::AdapterProperties propertiesAgain;
+        adaptersAgain[0].GetProperties(&propertiesAgain);
+
+        EXPECT_EQ(properties.vendorID, propertiesAgain.vendorID);
+        EXPECT_EQ(properties.vendorName, propertiesAgain.vendorName);
+        EXPECT_EQ(properties.architecture, propertiesAgain.architecture);
+        EXPECT_EQ(properties.deviceID, propertiesAgain.deviceID);
+        EXPECT_EQ(properties.name, propertiesAgain.name);
+        EXPECT_EQ(properties.driverDescription, propertiesAgain.driverDescription);
+        EXPECT_EQ(properties.adapterType, propertiesAgain.adapterType);
+        EXPECT_EQ(properties.backendType, propertiesAgain.backendType);
+        EXPECT_EQ(properties.compatibilityMode, propertiesAgain.compatibilityMode);
     }
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D12)
 
-#if defined(DAWN_ENABLE_BACKEND_METAL)
-// Test discovering only Metal physical devices
-TEST(PhysicalDeviceDiscoveryTests, OnlyMetal) {
+// Test enumerating only Metal physical devices
+TEST(AdapterEnumerationTests, OnlyMetal) {
     native::Instance instance;
 
-    native::metal::PhysicalDeviceDiscoveryOptions options;
-    instance.DiscoverPhysicalDevices(&options);
+    wgpu::RequestAdapterOptionsBackendType backendTypeOptions = {};
+    backendTypeOptions.backendType = wgpu::BackendType::Metal;
 
-    const auto& adapters = instance.GetAdapters();
+    wgpu::RequestAdapterOptions adapterOptions = {};
+    adapterOptions.nextInChain = &backendTypeOptions;
+
+    const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
@@ -197,19 +247,22 @@ TEST(PhysicalDeviceDiscoveryTests, OnlyMetal) {
         EXPECT_EQ(properties.backendType, wgpu::BackendType::Metal);
     }
 }
-#endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
-#if defined(DAWN_ENABLE_BACKEND_METAL) && defined(DAWN_ENABLE_BACKEND_VULKAN)
-// Test discovering the Metal backend, then the Vulkan backend
+// Test enumerating the Metal backend, then the Vulkan backend
 // does not duplicate physical devices.
-TEST(PhysicalDeviceDiscoveryTests, OneBackendThenTheOther) {
+TEST(AdapterEnumerationTests, OneBackendThenTheOther) {
+    wgpu::RequestAdapterOptionsBackendType backendTypeOptions = {};
+    backendTypeOptions.backendType = wgpu::BackendType::Metal;
+
+    wgpu::RequestAdapterOptions adapterOptions = {};
+    adapterOptions.nextInChain = &backendTypeOptions;
+
     native::Instance instance;
+
+    // Enumerate metal adapters. We should only see metal adapters.
     uint32_t metalAdapterCount = 0;
     {
-        native::metal::PhysicalDeviceDiscoveryOptions options;
-        instance.DiscoverPhysicalDevices(&options);
-
-        const auto& adapters = instance.GetAdapters();
+        const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
         metalAdapterCount = adapters.size();
         for (const auto& adapter : adapters) {
             wgpu::AdapterProperties properties;
@@ -218,26 +271,34 @@ TEST(PhysicalDeviceDiscoveryTests, OneBackendThenTheOther) {
             ASSERT_EQ(properties.backendType, wgpu::BackendType::Metal);
         }
     }
+    // Enumerate vulkan adapters. We should only see vulkan adapters.
     {
-        native::vulkan::PhysicalDeviceDiscoveryOptions options;
-        instance.DiscoverPhysicalDevices(&options);
+        backendTypeOptions.backendType = wgpu::BackendType::Vulkan;
 
-        uint32_t metalAdapterCount2 = 0;
-        const auto& adapters = instance.GetAdapters();
+        const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
         for (const auto& adapter : adapters) {
             wgpu::AdapterProperties properties;
             adapter.GetProperties(&properties);
 
-            EXPECT_TRUE(properties.backendType == wgpu::BackendType::Metal ||
-                        properties.backendType == wgpu::BackendType::Vulkan);
-            if (properties.backendType == wgpu::BackendType::Metal) {
-                metalAdapterCount2++;
-            }
+            ASSERT_EQ(properties.backendType, wgpu::BackendType::Vulkan);
+        }
+    }
+
+    // Enumerate metal adapters. We should see the same number of metal adapters.
+    {
+        backendTypeOptions.backendType = wgpu::BackendType::Metal;
+
+        const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
+        uint32_t metalAdapterCount2 = adapters.size();
+        for (const auto& adapter : adapters) {
+            wgpu::AdapterProperties properties;
+            adapter.GetProperties(&properties);
+
+            ASSERT_EQ(properties.backendType, wgpu::BackendType::Metal);
         }
         EXPECT_EQ(metalAdapterCount, metalAdapterCount2);
     }
 }
-#endif  // defined(DAWN_ENABLE_BACKEND_VULKAN) && defined(DAWN_ENABLE_BACKEND_METAL)
 
 }  // anonymous namespace
 }  // namespace dawn
