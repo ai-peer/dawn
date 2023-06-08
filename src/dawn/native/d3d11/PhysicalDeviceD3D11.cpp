@@ -37,6 +37,9 @@ MaybeError InitializeDebugLayerFilters(ComPtr<ID3D11Device> d3d11Device) {
         D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET,
         // D3D11 Debug layer warns SetPrivateData() with same name more than once.
         D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS,
+        // D3D11 Debug layer warns Begin being invoked on a Query, where the previous results have
+        // not been obtained with GetData. It's unusual, however valid.
+        D3D11_MESSAGE_ID_QUERY_BEGIN_ABANDONING_PREVIOUS_RESULTS,
     };
 
     // Filter out info/message and only create errors from warnings or worse.
