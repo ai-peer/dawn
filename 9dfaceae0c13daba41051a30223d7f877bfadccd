@@ -33,6 +33,23 @@
       "message": "Lovely. _Much_ easier to read.",
       "revId": "9dfaceae0c13daba41051a30223d7f877bfadccd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f116cea_37518c19",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:08:00Z",
+      "side": 1,
+      "message": "Looking at this CL to educate myself on the IR, doesn\u0027t the check for pointer make sense to move into ShouldReplace? I don\u0027t really see what\u0027s different about it.",
+      "revId": "9dfaceae0c13daba41051a30223d7f877bfadccd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
