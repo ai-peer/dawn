@@ -37,8 +37,8 @@ TEST_F(IR_ReturnTest, Fail_NullValue) {
         {
             Module mod;
             Builder b{mod};
-            b.Return(b.CreateFunction("myfunc", mod.Types().void_()),
-                     utils::Vector<Value*, 1>{nullptr});
+            mod.values.Create<Return>(b.CreateFunction("myfunc", mod.Types().void_()),
+                                      utils::Vector<Value*, 1>{nullptr});
         },
         "");
 }
