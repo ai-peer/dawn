@@ -1,4 +1,4 @@
-// Copyright 2018 The Dawn Authors
+// Copyright 2023 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,20 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/native/BackendConnection.h"
-#include "dawn/native/Instance.h"
+#ifndef SRC_DAWN_NATIVE_CHAINUTILS_H_
+#define SRC_DAWN_NATIVE_CHAINUTILS_H_
+
+#include "dawn/native/ChainUtils_autogen.h"
 
 namespace dawn::native {
 
-BackendConnection::BackendConnection(InstanceBase* instance, wgpu::BackendType type)
-    : mInstance(instance), mType(type) {}
+struct DawnInstanceDescriptor;
 
-wgpu::BackendType BackendConnection::GetType() const {
-    return mType;
+namespace opengl {
+struct RequestAdapterOptionsGetGLProc;
 }
 
-InstanceBase* BackendConnection::GetInstance() const {
-    return mInstance;
-}
+template <>
+inline wgpu::SType STypeFor<DawnInstanceDescriptor> = wgpu::SType(WGPUSType_DawnInstanceDescriptor);
+
+template <>
+inline wgpu::SType STypeFor<opengl::RequestAdapterOptionsGetGLProc> =
+    wgpu::SType(WGPUSType_RequestAdapterOptionsGetGLProc);
 
 }  // namespace dawn::native
+
+#endif  // SRC_DAWN_NATIVE_CHAINUTILS_H_

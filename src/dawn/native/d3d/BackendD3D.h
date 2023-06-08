@@ -15,11 +15,14 @@
 #ifndef SRC_DAWN_NATIVE_D3D_BACKENDD3D_H_
 #define SRC_DAWN_NATIVE_D3D_BACKENDD3D_H_
 
+#include <map>
 #include <memory>
 #include <string>
+#include <utility>
 #include <variant>
 #include <vector>
 
+#include "dawn/common/TypedInteger.h"
 #include "dawn/native/BackendConnection.h"
 
 #include "dawn/native/d3d12/d3d12_platform.h"
@@ -43,13 +46,17 @@ struct DxcUnavailable {
     std::string ErrorMessage;
 };
 
+using LUID = TypedInteger<struct LUIDTag, uint64_t>;
+
+ResultOrError<LUID> GetAdapterLUID(IDXGIAdapter* dxgiAdapter);
+
 class Backend : public BackendConnection {
   public:
     Backend(InstanceBase* instance, wgpu::BackendType type);
 
     MaybeError Initialize(std::unique_ptr<PlatformFunctions> functions);
 
-    ComPtr<IDXGIFactory4> GetFactory() const;
+    IDXGIFactory4* GetFactory() const;
 
     MaybeError EnsureDxcLibrary();
     MaybeError EnsureDxcCompiler();
@@ -75,15 +82,20 @@ class Backend : public BackendConnection {
 
     const PlatformFunctions* GetFunctions() const;
 
-    std::vector<Ref<PhysicalDeviceBase>> DiscoverDefaultPhysicalDevices() override;
-    ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> DiscoverPhysicalDevices(
-        const PhysicalDeviceDiscoveryOptionsBase* optionsBase) override;
+    std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(
+        const RequestAdapterOptions* options) override;
+    void ClearPhysicalDevices() override;
+    size_t GetPhysicalDeviceCountForTesting() const override;
 
   protected:
     virtual ResultOrError<Ref<PhysicalDeviceBase>> CreatePhysicalDeviceFromIDXGIAdapter(
         ComPtr<IDXGIAdapter> dxgiAdapter) = 0;
 
   private:
+    ResultOrError<Ref<PhysicalDeviceBase>> GetOrCreatePhysicalDeviceFromLUID(LUID luid);
+    ResultOrError<Ref<PhysicalDeviceBase>> GetOrCreatePhysicalDeviceFromIDXGIAdapter(
+        ComPtr<IDXGIAdapter> dxgiAdapter);
+
     // Acquiring DXC version information and store the result in mDxcVersionInfo. This function
     // should be called only once, during startup in `Initialize`.
     void AcquireDxcVersionInformation();
@@ -105,6 +117,11 @@ class Backend : public BackendConnection {
     //   3. The DXC version information is acquired successfully and validated not lower than
     //      requested minimum, stored in DxcVersionInfo.
     std::variant<DxcUnavailable, DxcVersionInfo> mDxcVersionInfo;
+
+    // Map of LUID to physical device.
+    // The LUID is guaranteed to be uniquely identify an adapter on the local
+    // machine until restart.
+    std::map<LUID, Ref<PhysicalDeviceBase>> mPhysicalDevices;
 };
 
 }  // namespace dawn::native::d3d
