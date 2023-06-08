@@ -699,8 +699,19 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
 
-        // Find the adapter that exactly matches our adapter properties.
-        const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
+        // Use the required toggles of test case when creating adapter.
+        const auto& enabledToggles = gCurrentTest->mParam.forceEnabledWorkarounds;
+        const auto& disabledToggles = gCurrentTest->mParam.forceDisabledWorkarounds;
+        WGPUDawnTogglesDescriptor adapterToggles{};
+        adapterToggles.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+        adapterToggles.enabledTogglesCount = enabledToggles.size();
+        adapterToggles.enabledToggles = enabledToggles.data();
+        adapterToggles.disabledTogglesCount = disabledToggles.size();
+        adapterToggles.disabledToggles = disabledToggles.data();
+
+        // Create adapters with toggles and find the adapter that exactly matches our adapter
+        // properties.
+        const auto& adapters = gTestEnv->GetInstance()->GetAdapters(&adapterToggles);
         const auto& it =
             std::find_if(adapters.begin(), adapters.end(), [&](const native::Adapter& adapter) {
                 wgpu::AdapterProperties properties;
