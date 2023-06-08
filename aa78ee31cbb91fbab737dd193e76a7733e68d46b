@@ -34,6 +34,24 @@
       "parentUuid": "62d5fd0e_2c176014",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bde926_5bd6cdeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:26:57Z",
+      "side": 1,
+      "message": "Could you statically link to it? But also if it\u0027s just for deployment of your application and not the rest, then it may be sufficient to only install the few Dawn libraries you use and not all the headers.",
+      "parentUuid": "7e43db88_7e5dfbf0",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
