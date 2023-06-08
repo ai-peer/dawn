@@ -63,6 +63,30 @@
       },
       "revId": "04a2a335a6ee6dbf7843c3b35967a5494e01e523",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5344c24d_801a1986",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T13:11:55Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need to: as long as we only call SetVertexBuffers, and don\u0027t call SetPipeline (which invalidates that bit) the set of bound vertex buffers is only growing, so if it passed for a Draw, it would pass for subsequent ones. If we unset on the other hand, the set of bound vertex buffers could be reduced, and we need to revalidate.",
+      "parentUuid": "e35bcf41_97657876",
+      "range": {
+        "startLine": 749,
+        "startChar": 0,
+        "endLine": 749,
+        "endChar": 53
+      },
+      "revId": "04a2a335a6ee6dbf7843c3b35967a5494e01e523",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
