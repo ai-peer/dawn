@@ -29,10 +29,14 @@ struct SupportedLimits;
 
 class AdapterBase : public RefCounted {
   public:
+    // Create an adapter with empty required adapter toggles state. The result adapter toggles state
+    // is still inherited from instance and set the default/forced toggles.
     AdapterBase(Ref<PhysicalDeviceBase> physicalDevice, FeatureLevel featureLevel);
+    // The toggles state of constructed AdapterBase is given requiredAdapterToggles inheriting the
+    // instance toggles and set up default/forced toggles.
     AdapterBase(Ref<PhysicalDeviceBase> physicalDevice,
                 FeatureLevel featureLevel,
-                const TogglesState& adapterToggles);
+                const TogglesState& requiredAdapterToggles);
     ~AdapterBase() override;
 
     // WebGPU API
@@ -49,6 +53,8 @@ class AdapterBase : public RefCounted {
 
     void SetUseTieredLimits(bool useTieredLimits);
 
+    FeaturesSet GetSupportedFeatures() const;
+
     // Return the underlying PhysicalDevice.
     PhysicalDeviceBase* GetPhysicalDevice();
 
@@ -61,7 +67,7 @@ class AdapterBase : public RefCounted {
     Ref<PhysicalDeviceBase> mPhysicalDevice;
     FeatureLevel mFeatureLevel;
     bool mUseTieredLimits = false;
-    // Adapter toggles state, currently only inherited from instance toggles state.
+    // Adapter toggles state.
     TogglesState mTogglesState;
 };
 
