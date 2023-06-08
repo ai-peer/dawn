@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad85caeb_498dcde3",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-08T19:38:51Z",
+      "side": 1,
+      "message": "Or use `utils::Transform`, which does the resize for you.",
+      "parentUuid": "fe776e31_068f418e",
+      "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ac8c9a1_68710566",
         "filename": "src/tint/ir/access.cc",
         "patchSetId": 1
