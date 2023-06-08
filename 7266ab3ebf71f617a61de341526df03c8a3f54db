@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5134c921_c406ba39",
+        "filename": "src/tint/debug.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-08T15:23:55Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "6b831ec0_a1deb5ed",
+      "revId": "7266ab3ebf71f617a61de341526df03c8a3f54db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2dc72a4_e66dc180",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-08T15:17:30Z",
       "side": 1,
       "message": "```suggestion\n/// append a message to an existing tint::diag::List. As such, TINT_ASSERT_OR_RETURN_VALUE()\n```",
+      "revId": "7266ab3ebf71f617a61de341526df03c8a3f54db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baee84c2_e0844a2b",
+        "filename": "src/tint/debug.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-08T15:23:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2dc72a4_e66dc180",
       "revId": "7266ab3ebf71f617a61de341526df03c8a3f54db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
