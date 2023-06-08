@@ -30,6 +30,7 @@ class Platform;
 namespace wgpu {
 struct AdapterProperties;
 struct DeviceDescriptor;
+struct DawnTogglesDescriptor;
 }  // namespace wgpu
 
 namespace dawn::native {
@@ -174,7 +175,9 @@ class DAWN_NATIVE_EXPORT Instance {
     bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
 
     // Returns a vector of adapters, one for each physical device the instance knows about.
-    std::vector<Adapter> GetAdapters() const;
+    std::vector<Adapter> GetAdapters(
+        const wgpu::DawnTogglesDescriptor* requiredAdapterToggles = nullptr) const;
+    std::vector<Adapter> GetAdapters(const WGPUDawnTogglesDescriptor* requiredAdapterToggles) const;
 
     const ToggleInfo* GetToggleInfo(const char* toggleName);
     const FeatureInfo* GetFeatureInfo(WGPUFeatureName feature);
