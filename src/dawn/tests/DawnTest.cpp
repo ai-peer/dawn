@@ -188,7 +188,7 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
     // because the Vulkan validation layers use static global mutexes which behave badly when
     // Chromium's test launcher forks the test process. The instance will be recreated on test
     // environment setup.
-    std::unique_ptr<native::Instance> instance = CreateInstanceAndDiscoverPhysicalDevices();
+    std::unique_ptr<native::Instance> instance = CreateInstance();
     ASSERT(instance);
 
     if (!ValidateToggles(instance.get())) {
@@ -380,7 +380,7 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
     }
 }
 
-std::unique_ptr<native::Instance> DawnTestEnvironment::CreateInstanceAndDiscoverPhysicalDevices(
+std::unique_ptr<native::Instance> DawnTestEnvironment::CreateInstance(
     platform::Platform* platform) {
     // Create an instance with toggle AllowUnsafeAPIs enabled, which would be inherited to
     // adapter and device toggles and allow us to test unsafe apis (including experimental
@@ -419,8 +419,6 @@ std::unique_ptr<native::Instance> DawnTestEnvironment::CreateInstanceAndDiscover
     }
 #endif  // DAWN_ENABLE_BACKEND_OPENGLES
 
-    instance->DiscoverDefaultPhysicalDevices();
-
     return instance;
 }
 
@@ -429,7 +427,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const native::Instanc
     wgpu::AdapterType preferredDeviceType = static_cast<wgpu::AdapterType>(-1);
     bool hasDevicePreference = false;
     for (wgpu::AdapterType devicePreference : mDevicePreferences) {
-        for (const native::Adapter& adapter : instance->GetAdapters()) {
+        for (const native::Adapter& adapter : instance->EnumerateAdapters()) {
             wgpu::AdapterProperties properties;
             adapter.GetProperties(&properties);
 
@@ -445,7 +443,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const native::Instanc
     }
 
     std::set<std::tuple<wgpu::BackendType, std::string, bool>> adapterNameSet;
-    for (const native::Adapter& adapter : instance->GetAdapters()) {
+    for (const native::Adapter& adapter : instance->EnumerateAdapters()) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
 
@@ -625,7 +623,7 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo(native::Instance*
 }
 
 void DawnTestEnvironment::SetUp() {
-    mInstance = CreateInstanceAndDiscoverPhysicalDevices();
+    mInstance = CreateInstance();
     ASSERT(mInstance);
 }
 
@@ -699,8 +697,15 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
 
+        wgpu::RequestAdapterOptionsBackendType adapterBackendTypeOptions;
+        adapterBackendTypeOptions.backendType = gCurrentTest->mParam.adapterProperties.backendType;
+
+        wgpu::RequestAdapterOptions adapterOptions;
+        adapterOptions.nextInChain = &adapterBackendTypeOptions;
+        adapterOptions.compatibilityMode = gCurrentTest->mParam.adapterProperties.compatibilityMode;
+
         // Find the adapter that exactly matches our adapter properties.
-        const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
+        const auto& adapters = gTestEnv->GetInstance()->EnumerateAdapters(&adapterOptions);
         const auto& it =
             std::find_if(adapters.begin(), adapters.end(), [&](const native::Adapter& adapter) {
                 wgpu::AdapterProperties properties;
@@ -708,11 +713,9 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
 
                 const auto& param = gCurrentTest->mParam;
                 return (param.adapterProperties.selected &&
-                        properties.compatibilityMode == param.adapterProperties.compatibilityMode &&
                         properties.deviceID == param.adapterProperties.deviceID &&
                         properties.vendorID == param.adapterProperties.vendorID &&
                         properties.adapterType == param.adapterProperties.adapterType &&
-                        properties.backendType == param.adapterProperties.backendType &&
                         strcmp(properties.name, param.adapterProperties.adapterName.c_str()) == 0);
             });
         ASSERT(it != adapters.end());
@@ -1113,13 +1116,9 @@ void DawnTestBase::SetUp() {
         "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
     mWireHelper->BeginWireTrace(traceName.c_str());
 
-    // RequestAdapter is overriden to ignore RequestAdapterOptions, but dawn_wire requires a
-    // valid pointer, so give a empty option.
-    // TODO(dawn:1684): Replace empty RequestAdapterOptions with nullptr after Dawn wire support
-    // it.
-    wgpu::RequestAdapterOptions options = {};
+    // RequestAdapter is overriden to ignore RequestAdapterOptions, and select based on test params.
     mInstance.RequestAdapter(
-        &options,
+        nullptr,
         [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {
             *static_cast<wgpu::Adapter*>(userdata) = wgpu::Adapter::Acquire(cAdapter);
         },
