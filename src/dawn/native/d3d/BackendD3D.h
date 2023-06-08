@@ -17,6 +17,8 @@
 
 #include <memory>
 #include <string>
+#include <unordered_map>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -75,15 +77,19 @@ class Backend : public BackendConnection {
 
     const PlatformFunctions* GetFunctions() const;
 
-    std::vector<Ref<PhysicalDeviceBase>> DiscoverDefaultPhysicalDevices() override;
-    ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> DiscoverPhysicalDevices(
-        const PhysicalDeviceDiscoveryOptionsBase* optionsBase) override;
+    std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(
+        const RequestAdapterOptions* options) override;
+    void ClearPhysicalDevices() override;
+    size_t GetPhysicalDeviceCountForTesting() const override;
 
   protected:
     virtual ResultOrError<Ref<PhysicalDeviceBase>> CreatePhysicalDeviceFromIDXGIAdapter(
         ComPtr<IDXGIAdapter> dxgiAdapter) = 0;
 
   private:
+    ResultOrError<Ref<PhysicalDeviceBase>> GetOrCreatePhysicalDeviceFromIDXGIAdapter(
+        ComPtr<IDXGIAdapter> dxgiAdapter);
+
     // Acquiring DXC version information and store the result in mDxcVersionInfo. This function
     // should be called only once, during startup in `Initialize`.
     void AcquireDxcVersionInformation();
@@ -105,6 +111,9 @@ class Backend : public BackendConnection {
     //   3. The DXC version information is acquired successfully and validated not lower than
     //      requested minimum, stored in DxcVersionInfo.
     std::variant<DxcUnavailable, DxcVersionInfo> mDxcVersionInfo;
+
+    using LUIDParts = std::pair<ULONG, LONG>;
+    std::unordered_map<LUIDParts, Ref<PhysicalDeviceBase>> mPhysicalDevices;
 };
 
 }  // namespace dawn::native::d3d

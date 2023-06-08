@@ -29,6 +29,10 @@
 
 namespace dawn::native::d3d {
 
+RequestAdapterOptionsIDXGIAdapter::RequestAdapterOptionsIDXGIAdapter() {
+    sType = wgpu::SType::RequestAdapterOptionsIDXGIAdapter;
+}
+
 Microsoft::WRL::ComPtr<IDXGIAdapter> GetDXGIAdapter(WGPUAdapter adapter) {
     return ToBackend(FromAPI(adapter)->GetPhysicalDevice())->GetHardwareAdapter();
 }
