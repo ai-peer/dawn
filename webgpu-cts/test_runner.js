@@ -18,6 +18,8 @@ import { DefaultTestFileLoader } from '../third_party/webgpu-cts/src/common/inte
 import { prettyPrintLog } from '../third_party/webgpu-cts/src/common/internal/logging/log_message.js';
 import { Logger } from '../third_party/webgpu-cts/src/common/internal/logging/logger.js';
 import { parseQuery } from '../third_party/webgpu-cts/src/common/internal/query/parseQuery.js';
+import { parseSearchParamLikeWithCTSOptions } from '../third_party/webgpu-cts/src/common/runtime/helper/options.js';
+import { setDefaultRequestAdapterOptions } from '../third_party/webgpu-cts/src/common/util/navigator_gpu.js';
 
 import { TestWorker } from '../third_party/webgpu-cts/src/common/runtime/helper/test_worker.js';
 
@@ -151,13 +153,24 @@ if (navigator.userAgent.indexOf("Windows") !== -1) {
   globalTestConfig.unrollConstEvalLoops = true;
 }
 
-async function runCtsTest(query, use_worker) {
+// MAINTENANCE_TODO(gman): remove use_worker and use worker=1 instead
+async function runCtsTest(queryString, use_worker) {
   const workerEnabled = use_worker;
   const worker = workerEnabled ? new TestWorker(false) : undefined;
 
   const loader = new DefaultTestFileLoader();
-  const filterQuery = parseQuery(query);
+  const { queries, options: { compatibility, powerPreference }} = parseSearchParamLikeWithCTSOptions(queryString);
+  const filterQuery = parseQuery(queries[0]);
   const testcases = await loader.loadCases(filterQuery);
+
+  globalTestConfig.compatibility = compatibility;
+  if (powerPreference || compatibility) {
+    setDefaultRequestAdapterOptions({
+      ...(powerPreference && { powerPreference }),
+      // MAINTENANCE_TODO(gman): Change this to whatever the option ends up being
+      ...(compatibility && { compatibilityMode: true }),
+    });
+  }
 
   const expectations = [];
 
