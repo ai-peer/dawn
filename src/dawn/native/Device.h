@@ -21,6 +21,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/ContentLessObjectCache.h"
 #include "dawn/common/Mutex.h"
 #include "dawn/native/CacheKey.h"
 #include "dawn/native/Commands.h"
@@ -226,6 +227,44 @@ class DeviceBase : public RefCountedWithExternalCount {
     void UncacheAttachmentState(AttachmentState* obj);
 
     Ref<PipelineCacheBase> GetOrCreatePipelineCache(const CacheKey& key);
+
+    // Tries to find the blueprint in the cache, creating and inserting into the cache if not found.
+    template <typename RefCountedT, typename BlueprintT, typename CreateFn>
+    auto GetOrCreate(ContentLessObjectCache<RefCountedT, BlueprintT>& cache,
+                     BlueprintT* blueprint,
+                     CreateFn createFn) {
+        using ReturnType = decltype(createFn());
+
+        // If we find the blueprint in the cache we can just return it.
+        Ref<RefCountedT> result = cache.Find(blueprint);
+        if (result != nullptr) {
+            return ReturnType(result);
+        }
+
+        using UnwrappedReturnType = typename detail::UnwrapResultOrError<ReturnType>::type;
+        static_assert(
+            std::is_same_v<UnwrappedReturnType, Ref<RefCountedT>>,
+            "CreateFn should return an unwrapped type that is the same as Ref<RefCountedT>.");
+
+        // Create the result and try inserting it. Note that inserts can race because the critical
+        // sections here is disjoint, hence the checks to verify whether this thread inserted.
+        if constexpr (!detail::IsResultOrError<ReturnType>::value) {
+            result = createFn();
+        } else {
+            auto resultOrError = createFn();
+            if (DAWN_UNLIKELY(resultOrError.IsError())) {
+                return ReturnType(std::move(resultOrError.AcquireError()));
+            }
+            result = resultOrError.AcquireSuccess();
+        }
+        bool inserted = false;
+        std::tie(result, inserted) = cache.Insert(result.Get());
+        if (inserted) {
+            result->SetIsCachedReference();
+        }
+        ASSERT(result.Get() != nullptr);
+        return ReturnType(result);
+    }
 
     // Object creation methods that be used in a reentrant manner.
     ResultOrError<Ref<BindGroupBase>> CreateBindGroup(
