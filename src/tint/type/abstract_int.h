@@ -31,7 +31,6 @@ class AbstractInt final : public utils::Castable<AbstractInt, AbstractNumeric> {
     /// Destructor
     ~AbstractInt() override;
 
-
     /// @returns the name for this type when printed in diagnostics.
     std::string FriendlyName() const override;
 
