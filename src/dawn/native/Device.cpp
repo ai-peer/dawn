@@ -1411,8 +1411,9 @@ ExternalTextureBase* DeviceBase::APICreateExternalTexture(
 
 void DeviceBase::ApplyFeatures(const DeviceDescriptor* deviceDescriptor) {
     ASSERT(deviceDescriptor);
-    ASSERT(GetPhysicalDevice()->SupportsAllRequiredFeatures(
-        {deviceDescriptor->requiredFeatures, deviceDescriptor->requiredFeaturesCount}));
+    // Validate all required features with device toggles.
+    ASSERT(GetPhysicalDevice()->SupportsAllRequiredFeaturesWithToggles(
+        {deviceDescriptor->requiredFeatures, deviceDescriptor->requiredFeaturesCount}, mToggles));
 
     for (uint32_t i = 0; i < deviceDescriptor->requiredFeaturesCount; ++i) {
         mEnabledFeatures.EnableFeature(deviceDescriptor->requiredFeatures[i]);

@@ -46,6 +46,10 @@ void AdapterBase::SetUseTieredLimits(bool useTieredLimits) {
     mUseTieredLimits = useTieredLimits;
 }
 
+FeaturesSet AdapterBase::GetSupportedFeatures() const {
+    return mPhysicalDevice->GetSupportedFeaturesWithToggles(mTogglesState);
+}
+
 PhysicalDeviceBase* AdapterBase::GetPhysicalDevice() {
     return mPhysicalDevice.Get();
 }
@@ -98,11 +102,11 @@ void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
 }
 
 bool AdapterBase::APIHasFeature(wgpu::FeatureName feature) const {
-    return mPhysicalDevice->HasFeature(feature);
+    return mPhysicalDevice->HasFeatureWithToggles(feature, mTogglesState);
 }
 
 size_t AdapterBase::APIEnumerateFeatures(wgpu::FeatureName* features) const {
-    return mPhysicalDevice->EnumerateFeatures(features);
+    return mPhysicalDevice->EnumerateFeaturesWithToggles(features, mTogglesState);
 }
 
 DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
@@ -137,11 +141,9 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
     // Backend-specific forced and default device toggles
     mPhysicalDevice->SetupBackendDeviceToggles(&deviceToggles);
 
-    // Validate all required features are supported by the adapter and suitable under given toggles.
-    // Note that certain toggles in device toggles state may be overriden by user and different from
-    // the adapter toggles state.
-    // TODO(dawn:1495): After implementing adapter toggles, decide whether we should validate
-    // supported features using adapter toggles or device toggles.
+    // Validate all required features are supported by the adapter and suitable under device
+    // toggles. Note that certain toggles in device toggles state may be overriden by user and
+    // different from the adapter toggles state.
     for (uint32_t i = 0; i < descriptor->requiredFeaturesCount; ++i) {
         wgpu::FeatureName feature = descriptor->requiredFeatures[i];
         DAWN_TRY(mPhysicalDevice->ValidateFeatureSupportedWithToggles(feature, deviceToggles));

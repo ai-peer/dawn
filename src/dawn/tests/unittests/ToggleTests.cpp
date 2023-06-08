@@ -36,12 +36,14 @@ using testing::NotNull;
 using testing::SaveArg;
 using testing::StrEq;
 
-class InstanceToggleTest : public testing::Test {
+class ToggleTest : public testing::Test {
   protected:
     void SetUp() override { dawnProcSetProcs(&native::GetProcs()); }
 
     void TearDown() override { dawnProcSetProcs(nullptr); }
 };
+
+using InstanceToggleTest = ToggleTest;
 
 // Test that instance toggles are set by requirement or default as expected.
 TEST_F(InstanceToggleTest, InstanceTogglesSet) {
@@ -199,6 +201,107 @@ TEST_F(InstanceToggleTest, InstanceTogglesInheritToAdapterAndDevice) {
         // Create an instance with DisallowUnsafeApis explicitly enabled.
         instance = std::make_unique<native::Instance>(&instanceDesc);
         validateInstanceTogglesInheritedToAdapter(instance.get());
+    }
+}
+
+using AdapterToggleTest = ToggleTest;
+
+// Test that adapter toggles are set and/or overridden by requirement or default as expected.
+TEST_F(AdapterToggleTest, AdapterTogglesSet) {
+    auto validateAdapterToggles = [](const native::Adapter adapter,
+                                     std::initializer_list<const char*> enableToggles,
+                                     std::initializer_list<const char*> disableToggles) {
+        const native::AdapterBase* adapterBase = native::FromAPI(adapter.Get());
+        const native::TogglesState& adapterTogglesState = adapterBase->GetTogglesState();
+        std::vector<const char*> enabledToggles = adapterTogglesState.GetEnabledToggleNames();
+        std::vector<const char*> disabledToggles = adapterTogglesState.GetDisabledToggleNames();
+        EXPECT_EQ(disabledToggles.size(), disableToggles.size());
+        EXPECT_EQ(enabledToggles.size(), enableToggles.size());
+        for (auto* enableToggle : enableToggles) {
+            EXPECT_THAT(enabledToggles, Contains(StrEq(enableToggle)));
+        }
+        for (auto* disableToggle : disableToggles) {
+            EXPECT_THAT(disabledToggles, Contains(StrEq(disableToggle)));
+        }
+    };
+
+    // Create an instance with default toggles, where AllowUnsafeAPIs is disabled.
+    std::unique_ptr<native::Instance> instance;
+    instance = std::make_unique<native::Instance>();
+    // Discover physical devices.
+    instance->DiscoverDefaultPhysicalDevices();
+
+    auto createNullAdapterWithTogglesDescriptor =
+        [&instance](const WGPUDawnTogglesDescriptor* requiredAdapterToggles) {
+            // Get the null adapters created by instance with given toggles descriptor.
+            native::Adapter nullAdapter;
+            for (auto& adapter : instance->GetAdapters(requiredAdapterToggles)) {
+                if (native::FromAPI(adapter.Get())->GetPhysicalDevice()->GetBackendType() ==
+                    wgpu::BackendType::Null) {
+                    nullAdapter = adapter;
+                    break;
+                }
+            }
+            return nullAdapter;
+        };
+
+    const char* allowUnsafeApisToggle = "allow_unsafe_apis";
+    const char* useDXCToggle = "use_dxc";
+
+    // Create adapter with no toggles descriptor
+    {
+        native::Adapter nullAdapter = createNullAdapterWithTogglesDescriptor(nullptr);
+        ASSERT_NE(nullAdapter.Get(), nullptr);
+        validateAdapterToggles(nullAdapter, {}, {allowUnsafeApisToggle});
+    }
+
+    // Create adapter with empty toggles descriptor
+    {
+        WGPUDawnTogglesDescriptor adapterTogglesDesc = {};
+        adapterTogglesDesc.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+
+        native::Adapter nullAdapter = createNullAdapterWithTogglesDescriptor(&adapterTogglesDesc);
+        ASSERT_NE(nullAdapter.Get(), nullptr);
+        validateAdapterToggles(nullAdapter, {}, {allowUnsafeApisToggle});
+    }
+
+    // Create adapter with UseDXC enabled in toggles descriptor
+    {
+        std::vector<const char*> enableAdapterToggles = {useDXCToggle};
+        WGPUDawnTogglesDescriptor adapterTogglesDesc = {};
+        adapterTogglesDesc.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+        adapterTogglesDesc.enabledTogglesCount = enableAdapterToggles.size();
+        adapterTogglesDesc.enabledToggles = enableAdapterToggles.data();
+
+        native::Adapter nullAdapter = createNullAdapterWithTogglesDescriptor(&adapterTogglesDesc);
+        ASSERT_NE(nullAdapter.Get(), nullptr);
+        validateAdapterToggles(nullAdapter, {useDXCToggle}, {allowUnsafeApisToggle});
+    }
+
+    // Create adapter with explicitly overriding AllowUnsafeAPIs in toggles descriptor
+    {
+        WGPUDawnTogglesDescriptor adapterTogglesDesc = {};
+        adapterTogglesDesc.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+        adapterTogglesDesc.enabledTogglesCount = 1;
+        adapterTogglesDesc.enabledToggles = &allowUnsafeApisToggle;
+
+        native::Adapter nullAdapter = createNullAdapterWithTogglesDescriptor(&adapterTogglesDesc);
+        ASSERT_NE(nullAdapter.Get(), nullptr);
+        validateAdapterToggles(nullAdapter, {allowUnsafeApisToggle}, {});
+    }
+
+    // Create adapter with UseDXC enabled and explicitly overriding AllowUnsafeAPIs in toggles
+    // descriptor
+    {
+        std::vector<const char*> enableAdapterToggles = {useDXCToggle, allowUnsafeApisToggle};
+        WGPUDawnTogglesDescriptor adapterTogglesDesc = {};
+        adapterTogglesDesc.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+        adapterTogglesDesc.enabledTogglesCount = enableAdapterToggles.size();
+        adapterTogglesDesc.enabledToggles = enableAdapterToggles.data();
+
+        native::Adapter nullAdapter = createNullAdapterWithTogglesDescriptor(&adapterTogglesDesc);
+        ASSERT_NE(nullAdapter.Get(), nullptr);
+        validateAdapterToggles(nullAdapter, {useDXCToggle, allowUnsafeApisToggle}, {});
     }
 }
 
