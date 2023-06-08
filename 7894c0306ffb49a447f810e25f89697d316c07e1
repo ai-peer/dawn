@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ff63da0_5fb221bb",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-08T16:59:06Z",
+      "side": 1,
+      "message": "nit: I think you could pass `srcBindingPoint` here\n\n```suggestion\n                req.hlsl.bindingPointsIgnoredInRobustnessTransform.emplace_back(\n                    srcBindingPoint);\n```",
+      "range": {
+        "startLine": 191,
+        "startChar": 80,
+        "endLine": 192,
+        "endChar": 80
+      },
+      "revId": "7894c0306ffb49a447f810e25f89697d316c07e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7466a7a_752d3aee",
         "filename": "src/tint/ast/transform/robustness.cc",
         "patchSetId": 7
