@@ -17,9 +17,11 @@
 #include <utility>
 
 #include "dawn/common/Log.h"
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/D3DBackend.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/PhysicalDeviceD3D.h"
 #include "dawn/native/d3d/PlatformFunctions.h"
 #include "dawn/native/d3d/UtilsD3D.h"
 
@@ -238,48 +240,72 @@ const PlatformFunctions* Backend::GetFunctions() const {
     return mFunctions.get();
 }
 
-std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverDefaultPhysicalDevices() {
-    PhysicalDeviceDiscoveryOptions options(ToAPI(GetType()), nullptr);
-    std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
-    if (GetInstance()->ConsumedError(DiscoverPhysicalDevices(&options), &physicalDevices)) {
-        return {};
+ResultOrError<Ref<PhysicalDeviceBase>> Backend::GetOrCreatePhysicalDeviceFromIDXGIAdapter(
+    ComPtr<IDXGIAdapter> dxgiAdapter) {
+    DXGI_ADAPTER_DESC desc;
+    DAWN_TRY(CheckHRESULT(dxgiAdapter->GetDesc(&desc), "IDXGIAdapter::GetDesc"));
+
+    // The LUID is guaranteed to be uniquely identify an adapter on the local
+    // machine until restart.
+    LUIDParts luid = {desc.AdapterLuid.LowPart, desc.AdapterLuid.HighPart};
+
+    auto it = mPhysicalDevices.find(luid);
+    if (it != mPhysicalDevices.end()) {
+        // If we've already discovered this physical device, return it.
+        return it->second;
     }
-    return physicalDevices;
+
+    Ref<PhysicalDeviceBase> physicalDevice;
+    DAWN_TRY_ASSIGN(physicalDevice, CreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapter));
+    mPhysicalDevices.emplace(luid, physicalDevice);
+    return physicalDevice;
 }
 
-ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverPhysicalDevices(
-    const PhysicalDeviceDiscoveryOptionsBase* optionsBase) {
-    ASSERT(optionsBase->backendType == ToAPI(GetType()));
-    const PhysicalDeviceDiscoveryOptions* options =
-        static_cast<const PhysicalDeviceDiscoveryOptions*>(optionsBase);
+std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
+    const RequestAdapterOptions* options) {
+    if (options->forceFallbackAdapter) {
+        return {};
+    }
 
-    std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
-    if (options->dxgiAdapter != nullptr) {
-        // |dxgiAdapter| was provided. Discover just that adapter.
-        Ref<PhysicalDeviceBase> adapter;
-        DAWN_TRY_ASSIGN(adapter, CreatePhysicalDeviceFromIDXGIAdapter(options->dxgiAdapter));
-        physicalDevices.push_back(std::move(adapter));
-        return std::move(physicalDevices);
+    const RequestAdapterOptionsIDXGIAdapter* dxgiAdapterOptions = nullptr;
+    FindInChain(options->nextInChain, &dxgiAdapterOptions);
+
+    // Get or create just the physical device matching the dxgi adapter.
+    if (dxgiAdapterOptions && dxgiAdapterOptions->dxgiAdapter != nullptr) {
+        Ref<PhysicalDeviceBase> physicalDevice;
+        if (GetInstance()->ConsumedErrorAndWarnOnce(
+                GetOrCreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapterOptions->dxgiAdapter),
+                &physicalDevice)) {
+            return {};
+        }
+        return {std::move(physicalDevice)};
     }
 
     // Enumerate and discover all available physicalDevices.
+    std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
     for (uint32_t adapterIndex = 0;; ++adapterIndex) {
         ComPtr<IDXGIAdapter1> dxgiAdapter = nullptr;
         if (GetFactory()->EnumAdapters1(adapterIndex, &dxgiAdapter) == DXGI_ERROR_NOT_FOUND) {
             break;  // No more physicalDevices to enumerate.
         }
 
-        ASSERT(dxgiAdapter != nullptr);
-        Ref<PhysicalDeviceBase> adapter;
-        if (GetInstance()->ConsumedError(CreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapter),
-                                         &adapter)) {
+        Ref<PhysicalDeviceBase> physicalDevice;
+        if (GetInstance()->ConsumedErrorAndWarnOnce(
+                GetOrCreatePhysicalDeviceFromIDXGIAdapter(std::move(dxgiAdapter)),
+                &physicalDevice)) {
             continue;
         }
-
-        physicalDevices.push_back(std::move(adapter));
+        physicalDevices.push_back(std::move(physicalDevice));
     }
-
     return physicalDevices;
+}
+
+void Backend::ClearPhysicalDevices() {
+    mPhysicalDevices.clear();
+}
+
+size_t Backend::GetPhysicalDeviceCountForTesting() const {
+    return mPhysicalDevices.size();
 }
 
 }  // namespace dawn::native::d3d
