@@ -302,14 +302,16 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
         return Ref<AdapterBase>(nullptr);
     }
 
-    // Set up toggles state for default adapters, currently adapter don't have a toggles
-    // descriptor so just inherit from instance toggles.
-    // TODO(dawn:1495): Handle the adapter toggles descriptor after implemented.
-    TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
-    adapterToggles.InheritFrom(mToggles);
+    const DawnTogglesDescriptor* adapterTogglesDesc = nullptr;
+    FindInChain(options->nextInChain, &adapterTogglesDesc);
 
+    TogglesState requiredAdapterToggles =
+        TogglesState::CreateFromTogglesDescriptor(adapterTogglesDesc, ToggleStage::Adapter);
+
+    // Adapter toggles inheritance and default/forced toggles set up handled in AdapterBase
+    // constructor.
     return AcquireRef(
-        new AdapterBase(std::move(selectedPhysicalDevice), featureLevel, adapterToggles));
+        new AdapterBase(std::move(selectedPhysicalDevice), featureLevel, requiredAdapterToggles));
 }
 
 void InstanceBase::DiscoverDefaultPhysicalDevices() {
@@ -366,19 +368,20 @@ const FeatureInfo* InstanceBase::GetFeatureInfo(wgpu::FeatureName feature) {
     return mFeaturesInfo.GetFeatureInfo(feature);
 }
 
-std::vector<Ref<AdapterBase>> InstanceBase::GetAdapters() const {
-    // Set up toggles state for default adapters, currently adapter don't have a toggles
-    // descriptor so just inherit from instance toggles.
-    // TODO(dawn:1495): Handle the adapter toggles descriptor after implemented.
-    TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
-    adapterToggles.InheritFrom(mToggles);
+std::vector<Ref<AdapterBase>> InstanceBase::GetAdapters(
+    const DawnTogglesDescriptor* requiredAdapterTogglesDesc) const {
+    TogglesState requiredAdapterToggles =
+        TogglesState::CreateFromTogglesDescriptor(requiredAdapterTogglesDesc, ToggleStage::Adapter);
 
     std::vector<Ref<AdapterBase>> adapters;
+
     for (const auto& physicalDevice : mPhysicalDevices) {
         for (FeatureLevel featureLevel : {FeatureLevel::Compatibility, FeatureLevel::Core}) {
             if (physicalDevice->SupportsFeatureLevel(featureLevel)) {
-                adapters.push_back(
-                    AcquireRef(new AdapterBase(physicalDevice, featureLevel, adapterToggles)));
+                // Adapter toggles inheritance and default/forced toggles set up handled in
+                // AdapterBase constructor.
+                adapters.push_back(AcquireRef(
+                    new AdapterBase(physicalDevice, featureLevel, requiredAdapterToggles)));
             }
         }
     }

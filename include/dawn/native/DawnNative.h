@@ -174,7 +174,8 @@ class DAWN_NATIVE_EXPORT Instance {
     bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
 
     // Returns a vector of adapters, one for each physical device the instance knows about.
-    std::vector<Adapter> GetAdapters() const;
+    std::vector<Adapter> GetAdapters(
+        const WGPUDawnTogglesDescriptor* requiredAdapterToggles = nullptr) const;
 
     const ToggleInfo* GetToggleInfo(const char* toggleName);
     const FeatureInfo* GetFeatureInfo(WGPUFeatureName feature);
