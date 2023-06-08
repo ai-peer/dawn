@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccdcd56e_f1e69cab",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-08T21:15:35Z",
+      "side": 1,
+      "message": "Note: The disassembler doesn\u0027t appear to be hooking up operands just yet. This message should be pointing at the particular operand.",
+      "range": {
+        "startLine": 154,
+        "startChar": 39,
+        "endLine": 154,
+        "endChar": 93
+      },
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
