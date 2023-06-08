@@ -22,6 +22,29 @@
       },
       "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29317a1a_9ebbcd19",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-08T21:19:12Z",
+      "side": 1,
+      "message": "Might be sensible to limit the block span to just `%b1 \u003d block`. Multi-line highlights like this are hard to understand.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 3
+      },
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
