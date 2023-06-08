@@ -117,6 +117,30 @@
       },
       "revId": "366b65dc258316cc8d5dee329f37d12b01838b42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1254b2_6a8c4f9c",
+        "filename": "src/tint/type/struct.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-08T19:36:20Z",
+      "side": 1,
+      "message": "I see your point. I think what bothers me is the fact that we\u0027re passing in the `TypeAndCount` struct as the `invalid` arg, but this copy we pass in isn\u0027t what gets returned wholesale if part can\u0027t be determined. What if, instead, we pass in each thing as a separate argument? Like:\n\n```\nTypeAndCount Struct::Elements(const Type* type_if_invalid \u003d nullptr, size_t count_if_invalid \u003d 0) const;\n```\n\nAlmost the same, but at least the API makes clear that each part is separate.",
+      "parentUuid": "3916e0d7_8f987b80",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 66
+      },
+      "revId": "366b65dc258316cc8d5dee329f37d12b01838b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
