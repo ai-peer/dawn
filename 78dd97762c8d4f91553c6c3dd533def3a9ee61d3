@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f3f56b1_5d078154",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T21:38:13Z",
+      "side": 1,
+      "message": "What does it mean if this isn\u0027t signed integer scalar?",
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc54540_e43bb81f",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T21:38:13Z",
+      "side": 1,
+      "message": "It\u0027s a little weird the matrix is called `vec`?",
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42026e3c_033fa565",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T21:38:13Z",
+      "side": 1,
+      "message": "Why is this called `OOB` ? Both accesses `1` and `0` are in bounds?",
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccdcd56e_f1e69cab",
         "filename": "src/tint/ir/validate_test.cc",
         "patchSetId": 2
@@ -26,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a938168_1aedda1a",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T21:38:13Z",
+      "side": 1,
+      "message": "You need to add the operand stuff for `access`. I added it for `if-\u003eCondition` as that\u0027s the test taht existed. I didn\u0027t want to add them without something emitting them.\n\nAll the infra exists, you just need to add the storing (or i can do it after this lands)",
+      "parentUuid": "ccdcd56e_f1e69cab",
+      "range": {
+        "startLine": 154,
+        "startChar": 39,
+        "endLine": 154,
+        "endChar": 93
+      },
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29317a1a_9ebbcd19",
         "filename": "src/tint/ir/validate_test.cc",
         "patchSetId": 2
@@ -37,6 +112,30 @@
       "writtenOn": "2023-06-08T21:19:12Z",
       "side": 1,
       "message": "Might be sensible to limit the block span to just `%b1 \u003d block`. Multi-line highlights like this are hard to understand.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 3
+      },
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd774dce_515a3e05",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T21:38:13Z",
+      "side": 1,
+      "message": "Can you file a bug? Wasn\u0027t really sure what would be nice here",
+      "parentUuid": "29317a1a_9ebbcd19",
       "range": {
         "startLine": 155,
         "startChar": 0,
