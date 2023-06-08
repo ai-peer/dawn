@@ -119,6 +119,13 @@ class Validator {
         AddError(err, src);
     }
 
+    void AddNote(const Instruction* inst, uint32_t idx, const std::string& err) {
+        DisassembleIfNeeded();
+        auto src = dis_.OperandSource(Disassembler::Operand{inst, idx});
+        src.file = mod_.disassembly_file.get();
+        AddNote(err, src);
+    }
+
     void AddNote(const Block* blk, const std::string& err) {
         DisassembleIfNeeded();
         auto src = dis_.BlockSource(blk);
@@ -175,7 +182,7 @@ class Validator {
     void CheckInstruction(const Instruction* inst) {
         tint::Switch(
             inst,                                          //
-            [&](const ir::Access*) {},                     //
+            [&](const ir::Access* a) { CheckAccess(a); },  //
             [&](const ir::Binary*) {},                     //
             [&](const ir::Branch* b) { CheckBranch(b); },  //
             [&](const ir::Call* c) { CheckCall(c); },      //
@@ -201,6 +208,71 @@ class Validator {
             [&](Default) {
                 AddError(std::string("missing validation of call: ") + call->TypeInfo().name);
             });
+    }
+
+    void CheckAccess(const ir::Access* a) {
+        bool is_ptr = a->Object()->Type()->Is<type::Pointer>();
+        auto* ty = a->Object()->Type()->UnwrapPtr();
+
+        auto current = [&] {
+            return is_ptr ? "ptr<" + ty->FriendlyName() + ">" : ty->FriendlyName();
+        };
+
+        for (size_t i = 0; i < a->Indices().Length(); i++) {
+            auto* index = a->Indices()[i];
+            if (TINT_UNLIKELY(!index->Type()->is_integer_scalar())) {
+                AddError(a, static_cast<uint32_t>(i),
+                         "access: index must be integer, got " + index->Type()->FriendlyName());
+                return;
+            }
+            if (auto* const_index = index->As<ir::Constant>()) {
+                auto* value = const_index->Value();
+                if (value->Type()->is_signed_integer_scalar()) {
+                    auto idx = value->ValueAs<AInt>();
+                    if (TINT_UNLIKELY(idx < 0)) {
+                        AddError(
+                            a, static_cast<uint32_t>(i),
+                            "access: constant index must be positive, got " + std::to_string(idx));
+                        return;
+                    }
+                }
+
+                auto idx = value->ValueAs<uint32_t>();
+                auto* el = ty->Element(idx);
+                if (TINT_UNLIKELY(!el)) {
+                    // Is index in bounds?
+                    if (auto el_count = ty->Elements().count; el_count != 0 && idx >= el_count) {
+                        AddError(a, static_cast<uint32_t>(i),
+                                 "access: index out of bounds for type " + current());
+                        AddNote(a, static_cast<uint32_t>(i),
+                                "acceptable range: [0.." + std::to_string(el_count - 1) + "]");
+                        return;
+                    }
+                    AddError(a, static_cast<uint32_t>(i),
+                             "access: type " + current() + " cannot be indexed");
+                    return;
+                }
+                ty = el;
+            } else {
+                auto* el = ty->Elements().type;
+                if (TINT_UNLIKELY(!el)) {
+                    AddError(a, static_cast<uint32_t>(i),
+                             "access: type " + current() + " cannot be dynamically indexed");
+                    return;
+                }
+                ty = el;
+            }
+        }
+
+        auto* want_ty = a->Type()->UnwrapPtr();
+        bool want_ptr = a->Type()->Is<type::Pointer>();
+        if (TINT_UNLIKELY(ty != want_ty || is_ptr != want_ptr)) {
+            std::string want =
+                want_ptr ? "ptr<" + want_ty->FriendlyName() + ">" : want_ty->FriendlyName();
+            AddError(a, "access: result of access chain is type " + current() +
+                            " but instruction type is " + want);
+            return;
+        }
     }
 
     void CheckBranch(const ir::Branch* b) {
