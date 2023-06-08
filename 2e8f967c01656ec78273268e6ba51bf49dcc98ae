@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124c8d29_161b69ec",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T18:37:28Z",
+      "side": 0,
+      "message": "This was dropped becasue vector can never come in here?",
+      "revId": "2e8f967c01656ec78273268e6ba51bf49dcc98ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

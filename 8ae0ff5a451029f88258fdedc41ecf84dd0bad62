@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c25f7c09_3d91ec6f",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T18:37:28Z",
+      "side": 1,
+      "message": "This seems different? Why did this change? The source_type gets updated as we move through the tree, but the source object stays the same.",
+      "revId": "8ae0ff5a451029f88258fdedc41ecf84dd0bad62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
