@@ -34,6 +34,24 @@
       "parentUuid": "c25f7c09_3d91ec6f",
       "revId": "8ae0ff5a451029f88258fdedc41ecf84dd0bad62",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71fa95a8_2f881a80",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T18:48:31Z",
+      "side": 1,
+      "message": "ah, I\u0027d missed the assiging of source_object if first_dynamic_index \u003e 0.",
+      "parentUuid": "2b190173_87d9e4f9",
+      "revId": "8ae0ff5a451029f88258fdedc41ecf84dd0bad62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
