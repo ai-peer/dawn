@@ -238,28 +238,34 @@ const PlatformFunctions* Backend::GetFunctions() const {
     return mFunctions.get();
 }
 
-std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverDefaultPhysicalDevices() {
-    PhysicalDeviceDiscoveryOptions options(ToAPI(GetType()), nullptr);
-    std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
-    if (GetInstance()->ConsumedError(DiscoverPhysicalDevices(&options), &physicalDevices)) {
-        return {};
+ResultOrError<Ref<PhysicalDeviceBase>> Backend::GetOrCreatePhysicalDeviceFromIDXGIAdapter(
+    ComPtr<IDXGIAdapter> dxgiAdapter) {
+    DAWN_TRY(CheckHRESULT(dxgiAdapter.As(&dxgiAdapter3), "DXGIAdapter retrieval"));
+    bool alreadyCreated = false;
+    for (const auto& physicalDevice : mPhysicalDevices) {
+        // If we've already discovered this physical device, return it.
+        if (physicalDevice->GetHardwareAdapter() == dxgiAdapter3.Get()) {
+            return physicalDevice;
+        }
     }
-    return physicalDevices;
+    Ref<PhysicalDevice> physicalDevice;
+    DAWN_TRY_ASSIGN(physicalDevice, CreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapter));
+    mPhysicalDevices.push_back(physicalDevice);
+    return physicalDevice;
 }
 
-ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverPhysicalDevices(
-    const PhysicalDeviceDiscoveryOptionsBase* optionsBase) {
-    ASSERT(optionsBase->backendType == ToAPI(GetType()));
-    const PhysicalDeviceDiscoveryOptions* options =
-        static_cast<const PhysicalDeviceDiscoveryOptions*>(optionsBase);
-
-    std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
-    if (options->dxgiAdapter != nullptr) {
-        // |dxgiAdapter| was provided. Discover just that adapter.
-        Ref<PhysicalDeviceBase> adapter;
-        DAWN_TRY_ASSIGN(adapter, CreatePhysicalDeviceFromIDXGIAdapter(options->dxgiAdapter));
-        physicalDevices.push_back(std::move(adapter));
-        return std::move(physicalDevices);
+std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
+    const RequestAdapterOptions* options,
+    const opengl::RequestAdapterOptionsGetGLProc*,
+    const d3d::RequestAdapterOptionsIDXGIAdapter* dxgiAdapterOptions) {
+    // Get or create just the physical device matching the dxgi adapter.
+    if (dxgiAdapterOptions && dxgiAdapterOptions->dxgiAdapter != nullptr) {
+        auto result = GetOrCreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapterOptions->dxgiAdapter);
+        if (result.IsError()) {
+            GetInstance()->ConsumedErrorAndWarnOnce(result.AcquireError());
+            continue;
+        }
+        return {result.AcquireSuccess()};
     }
 
     // Enumerate and discover all available physicalDevices.
@@ -269,17 +275,17 @@ ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverPhysicalDev
             break;  // No more physicalDevices to enumerate.
         }
 
-        ASSERT(dxgiAdapter != nullptr);
-        Ref<PhysicalDeviceBase> adapter;
-        if (GetInstance()->ConsumedError(CreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapter),
-                                         &adapter)) {
+        auto result = GetOrCreatePhysicalDeviceFromIDXGIAdapter(std::move(dxgiAdapter));
+        if (result.IsError()) {
+            GetInstance()->ConsumedErrorAndWarnOnce(result.AcquireError());
             continue;
         }
-
-        physicalDevices.push_back(std::move(adapter));
+        result.AcquireSuccess();
     }
+}
 
-    return physicalDevices;
+void Backend::ClearPhysicalDevices() {
+    mPhysicalDevices.clear();
 }
 
 }  // namespace dawn::native::d3d

@@ -24,6 +24,14 @@
 
 namespace dawn::native {
 
+namespace opengl {
+struct RequestAdapterOptionsGetGLProc;
+}
+
+namespace d3d {
+struct RequestAdapterOptionsIDXGIAdapter;
+}
+
 // An common interface for all backends. Mostly used to create adapters for a particular
 // backend.
 class BackendConnection {
@@ -34,13 +42,14 @@ class BackendConnection {
     wgpu::BackendType GetType() const;
     InstanceBase* GetInstance() const;
 
-    // Returns all the physical devices for the system that can be created by the backend, without
-    // extra options (such as debug adapters, custom driver libraries, etc.)
-    virtual std::vector<Ref<PhysicalDeviceBase>> DiscoverDefaultPhysicalDevices() = 0;
-
-    // Returns new physical devices created with the backend-specific options.
-    virtual ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> DiscoverPhysicalDevices(
-        const PhysicalDeviceDiscoveryOptionsBase* options);
+    // Returns physical devices capable of supporting the `options`.
+    // Calling this multiple times in succession should return a vector with duplicate
+    // references to the same PhysicalDevices (i.e. the backend should cache them).
+    virtual std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(
+        const RequestAdapterOptions* options,
+        const opengl::RequestAdapterOptionsGetGLProc* glGetProcOptions,
+        const d3d::RequestAdapterOptionsIDXGIAdapter* dxgiAdapterOptions) = 0;
+    virtual void ClearPhysicalDevices() = 0;
 
   private:
     InstanceBase* mInstance = nullptr;
