@@ -64,6 +64,9 @@ class Vector : public utils::Castable<Vector, Type> {
     /// @returns the alignment in bytes of a vector of the given width.
     static uint32_t AlignOf(uint32_t width);
 
+    /// @copydoc Type::Elements
+    TypeAndCount Elements(TypeAndCount invalid = {}) const override;
+
     /// @param ctx the clone context
     /// @returns a clone of this type
     Vector* Clone(CloneContext& ctx) const override;

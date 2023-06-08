@@ -158,6 +158,9 @@ class Struct : public utils::Castable<Struct, Type> {
     /// @note only structures returned by builtins may be abstract (e.g. modf, frexp)
     utils::VectorRef<const Struct*> ConcreteTypes() const { return concrete_types_; }
 
+    /// @copydoc Type::Elements
+    TypeAndCount Elements(TypeAndCount invalid = {}) const override;
+
     /// @param ctx the clone context
     /// @returns a clone of this type
     Struct* Clone(CloneContext& ctx) const override;
