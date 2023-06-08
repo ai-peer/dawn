@@ -77,4 +77,9 @@ Vector* Vector::Clone(CloneContext& ctx) const {
     return ctx.dst.mgr->Get<Vector>(subtype, width_, packed_);
 }
 
+TypeAndCount Vector::Elements(const Type* /* invalid_type = nullptr */,
+                              uint32_t /* invalid_count = 0 */) const {
+    return {subtype_, width_};
+}
+
 }  // namespace tint::type

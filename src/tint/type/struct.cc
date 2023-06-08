@@ -160,6 +160,11 @@ std::string Struct::Layout() const {
     return ss.str();
 }
 
+TypeAndCount Struct::Elements(const Type* invalid_type /* = nullptr */,
+                              uint32_t /* invalid_count = 0 */) const {
+    return {invalid_type, static_cast<uint32_t>(members_.Length())};
+}
+
 Struct* Struct::Clone(CloneContext& ctx) const {
     auto sym = ctx.dst.st->Register(name_.Name());
 

@@ -105,6 +105,15 @@ uint32_t Array::Size() const {
     return size_;
 }
 
+TypeAndCount Array::Elements(const Type* /* invalid_type = nullptr */,
+                             uint32_t invalid_count /* = 0 */) const {
+    uint32_t n = invalid_count;
+    if (auto* const_count = count_->As<ConstantArrayCount>()) {
+        n = const_count->value;
+    }
+    return {element_, n};
+}
+
 Array* Array::Clone(CloneContext& ctx) const {
     auto* elem_ty = element_->Clone(ctx);
     auto* count = count_->Clone(ctx);
