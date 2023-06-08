@@ -62,7 +62,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     bool DiscoverPhysicalDevices(const PhysicalDeviceDiscoveryOptionsBase* options);
 
     // Return adapters created on every known physical device.
-    std::vector<Ref<AdapterBase>> GetAdapters() const;
+    std::vector<Ref<AdapterBase>> GetAdapters(
+        const DawnTogglesDescriptor* adapterTogglesDesc = nullptr) const;
 
     // Used to handle error that happen up to device creation.
     bool ConsumedError(MaybeError maybeError);
@@ -136,6 +137,13 @@ class InstanceBase final : public RefCountedWithExternalCount {
     void EnsureBackendConnection(wgpu::BackendType backendType);
 
     MaybeError DiscoverPhysicalDevicesInternal(const PhysicalDeviceDiscoveryOptionsBase* options);
+
+    // Helper function that create adapter on given physical device handling required adapter
+    // toggles descriptor. Called by RequestAdapterInternal and GetAdapters.
+    Ref<AdapterBase> CreateAdapterOnPhysicalDeviceWithToggles(
+        Ref<PhysicalDeviceBase> physicalDevice,
+        FeatureLevel featureLevel,
+        const DawnTogglesDescriptor* requiredAdapterToggles) const;
 
     ResultOrError<Ref<AdapterBase>> RequestAdapterInternal(const RequestAdapterOptions* options);
 
