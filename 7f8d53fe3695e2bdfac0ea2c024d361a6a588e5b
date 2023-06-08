@@ -50,6 +50,24 @@
       "message": "Uuuuh it\u0027s really hard to see what actually changed now.",
       "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d011a56_46c712b4",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-08T16:06:37Z",
+      "side": 1,
+      "message": "Loko, do you think it would be possible to separate things so we (1) first reloop the code, without any formatting changes, (2) then do the void * handling, (3) then fix up the formatting and whitespace?",
+      "parentUuid": "07f7150e_83222c34",
+      "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
