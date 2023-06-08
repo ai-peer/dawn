@@ -52,6 +52,24 @@
       "parentUuid": "7e43db88_7e5dfbf0",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd6bf71_a8c9d29a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-06-08T16:04:44Z",
+      "side": 1,
+      "message": "Hum, not sure I understand what you mean 😕? It is not for the deployment of the library I\u0027m working with. Dawn is a new dependency to this library that, for making life easier to developers, downloads all dependencies with a known working version/commit, builds them from source and install all dependencies in a target folder. I could make changes to code but, not sure what is the suggested way of consuming Dawm.",
+      "parentUuid": "72bde926_5bd6cdeb",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
