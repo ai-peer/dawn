@@ -84,7 +84,7 @@ WGPUAdapter Adapter::Get() const {
 }
 
 std::vector<const char*> Adapter::GetSupportedFeatures() const {
-    FeaturesSet supportedFeaturesSet = mImpl->GetPhysicalDevice()->GetSupportedFeatures();
+    FeaturesSet supportedFeaturesSet = mImpl->GetSupportedFeatures();
     return supportedFeaturesSet.GetEnabledFeatureNames();
 }
 
@@ -180,13 +180,19 @@ bool Instance::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) {
     return mImpl->DiscoverPhysicalDevices(options);
 }
 
-std::vector<Adapter> Instance::GetAdapters() const {
+std::vector<Adapter> Instance::GetAdapters(
+    const wgpu::DawnTogglesDescriptor* requiredAdapterToggles) const {
     // Adapters are owned by mImpl so it is safe to return non RAII pointers to them
     std::vector<Adapter> adapters;
-    for (const Ref<AdapterBase>& adapter : mImpl->GetAdapters()) {
+    for (const Ref<AdapterBase>& adapter : mImpl->GetAdapters(FromCppAPI(requiredAdapterToggles))) {
         adapters.push_back(Adapter(adapter.Get()));
     }
     return adapters;
+}
+
+std::vector<Adapter> Instance::GetAdapters(
+    const WGPUDawnTogglesDescriptor* requiredAdapterToggles) const {
+    return GetAdapters(ToCppAPI(FromAPI(requiredAdapterToggles)));
 }
 
 const ToggleInfo* Instance::GetToggleInfo(const char* toggleName) {
