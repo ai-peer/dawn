@@ -91,12 +91,17 @@ class Backend : public BackendConnection {
 
     MaybeError Initialize();
 
-    std::vector<Ref<PhysicalDeviceBase>> DiscoverDefaultPhysicalDevices() override;
-    ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> DiscoverPhysicalDevices(
-        const PhysicalDeviceDiscoveryOptionsBase* optionsBase) override;
+    std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(
+        const RequestAdapterOptions* options,
+        const opengl::RequestAdapterOptionsGetGLProc*,
+        const d3d::RequestAdapterOptionsIDXGIAdapter*) override;
+    void ClearPhysicalDevices() override;
+    size_t GetPhysicalDeviceCountForTesting() const override;
 
   private:
+    ityp::bitset<ICD, 2> mVulkanInstancesCreated = {};
     ityp::array<ICD, Ref<VulkanInstance>, 2> mVulkanInstances = {};
+    ityp::array<ICD, std::vector<Ref<PhysicalDevice>>, 2> mPhysicalDevices = {};
 };
 
 }  // namespace dawn::native::vulkan

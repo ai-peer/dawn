@@ -80,7 +80,8 @@ int Run(const fuzzing::Program& program, bool (*AdapterSupported)(const dawn::na
     procs.instanceRequestAdapter = [](WGPUInstance cInstance,
                                       const WGPURequestAdapterOptions* options,
                                       WGPURequestAdapterCallback callback, void* userdata) {
-        std::vector<dawn::native::Adapter> adapters = sInstance->GetAdapters();
+        // TODO(dawn:xxxx): replace enumerate with adapter options
+        std::vector<dawn::native::Adapter> adapters = sInstance->EnumerateAdapters();
         for (dawn::native::Adapter adapter : adapters) {
             if (sAdapterSupported(adapter)) {
                 WGPUAdapter cAdapter = adapter.Get();

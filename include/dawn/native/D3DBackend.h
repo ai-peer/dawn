@@ -23,12 +23,20 @@
 #include <vector>
 
 #include "dawn/native/DawnNative.h"
+#include "dawn/webgpu_cpp_chained_struct.h"
 
 namespace dawn::native::d3d {
 
 class ExternalImageDXGIImpl;
 
 DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<IDXGIAdapter> GetDXGIAdapter(WGPUAdapter adapter);
+
+// Can be chained in WGPURequestAdapterOptions
+struct DAWN_NATIVE_EXPORT RequestAdapterOptionsIDXGIAdapter : wgpu::ChainedStruct {
+    RequestAdapterOptionsIDXGIAdapter();
+
+    Microsoft::WRL::ComPtr<IDXGIAdapter> dxgiAdapter;
+};
 
 struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptions
     : public PhysicalDeviceDiscoveryOptionsBase {
@@ -97,5 +105,17 @@ class DAWN_NATIVE_EXPORT ExternalImageDXGI {
 };
 
 }  // namespace dawn::native::d3d
+
+namespace dawn::native::detail {
+
+template <typename T>
+struct STypeForImpl;
+
+template <>
+struct STypeForImpl<d3d::RequestAdapterOptionsIDXGIAdapter> {
+    static constexpr wgpu::SType value = wgpu::SType(WGPUSType_RequestAdapterOptionsIDXGIAdapter);
+};
+
+}  // namespace dawn::native::detail
 
 #endif  // INCLUDE_DAWN_NATIVE_D3DBACKEND_H_

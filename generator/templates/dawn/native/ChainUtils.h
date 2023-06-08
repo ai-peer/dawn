@@ -39,10 +39,6 @@ namespace detail {
             };
         {% endif %}
     {% endfor %}
-    template <>
-    struct STypeForImpl<DawnInstanceDescriptor> {
-        static constexpr {{namespace}}::SType value = {{namespace}}::SType::DawnInstanceDescriptor;
-    };
 }  // namespace detail
 
     template <typename T>
