@@ -33,78 +33,97 @@ namespace dawn::native::opengl {
 Backend::Backend(InstanceBase* instance, wgpu::BackendType backendType)
     : BackendConnection(instance, backendType) {}
 
-std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverDefaultPhysicalDevices() {
-    std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
+std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
+    const RequestAdapterOptions* options,
+    const opengl::RequestAdapterOptionsGetGLProc* glGetProcOptions,
+    const d3d::RequestAdapterOptionsIDXGIAdapter* dxgiAdapterOptions) {
+    if (options->forceFallbackAdapter) {
+        return {};
+    }
+    if (!options->compatibilityMode) {
+        // Return an empty vector since GL physical devices can only support compatibility mode.
+        return std::vector<Ref<PhysicalDeviceBase>>{};
+    }
+
+    if (glGetProcOptions == nullptr || glGetProcOptions->getProc == nullptr) {
+        // getProc not passed. Try to load it from libEGL.
+
+        opengl::RequestAdapterOptionsGetGLProc eglGetProcOptions;
 #if DAWN_PLATFORM_IS(WINDOWS)
-    const char* eglLib = "libEGL.dll";
+        const char* eglLib = "libEGL.dll";
 #elif DAWN_PLATFORM_IS(MACOS)
-    const char* eglLib = "libEGL.dylib";
+        const char* eglLib = "libEGL.dylib";
 #else
-    const char* eglLib = "libEGL.so";
+        const char* eglLib = "libEGL.so";
 #endif
-    if (!mLibEGL.Valid() && !mLibEGL.Open(eglLib)) {
+        if (!mLibEGL.Valid() && !mLibEGL.Open(eglLib)) {
+            GetInstance()->ConsumedErrorAndWarnOnce(
+                DAWN_VALIDATION_ERROR("Failed to load %s", eglLib));
+            return {};
+        }
+
+        eglGetProcOptions.getProc =
+            reinterpret_cast<void* (*)(const char*)>(mLibEGL.GetProc("eglGetProcAddress"));
+        if (!eglGetProcOptions.getProc) {
+            GetInstance()->ConsumedErrorAndWarnOnce(
+                DAWN_VALIDATION_ERROR("eglGetProcAddress return nullptr"));
+            return {};
+        }
+
+        EGLFunctions egl;
+        egl.Init(eglGetProcOptions.getProc);
+
+        EGLenum api = GetType() == wgpu::BackendType::OpenGLES ? EGL_OPENGL_ES_API : EGL_OPENGL_API;
+        std::unique_ptr<ContextEGL> context;
+        if (GetInstance()->ConsumedErrorAndWarnOnce(ContextEGL::Create(egl, api), &context)) {
+            return {};
+        }
+
+        EGLDisplay prevDisplay = egl.GetCurrentDisplay();
+        EGLContext prevDrawSurface = egl.GetCurrentSurface(EGL_DRAW);
+        EGLContext prevReadSurface = egl.GetCurrentSurface(EGL_READ);
+        EGLContext prevContext = egl.GetCurrentContext();
+
+        context->MakeCurrent();
+        auto physicalDevices =
+            DiscoverPhysicalDevices(options, &eglGetProcOptions, dxgiAdapterOptions);
+        egl.MakeCurrent(prevDisplay, prevDrawSurface, prevReadSurface, prevContext);
+        return physicalDevices;
+    }
+
+    if (glGetProcOptions == nullptr || glGetProcOptions->getProc == nullptr) {
+        GetInstance()->ConsumedErrorAndWarnOnce(
+            DAWN_VALIDATION_ERROR("RequestAdapterOptionsGetGLProc::getProc must be set"));
         return {};
     }
 
-    PhysicalDeviceDiscoveryOptions options(ToAPI(GetType()));
-    options.getProc =
-        reinterpret_cast<void* (*)(const char*)>(mLibEGL.GetProc("eglGetProcAddress"));
-    if (!options.getProc) {
-        return {};
-    }
-
-    EGLFunctions egl;
-    egl.Init(options.getProc);
-
-    EGLenum api = GetType() == wgpu::BackendType::OpenGLES ? EGL_OPENGL_ES_API : EGL_OPENGL_API;
-    std::unique_ptr<ContextEGL> context;
-    if (GetInstance()->ConsumedError(ContextEGL::Create(egl, api), &context)) {
-        return {};
-    }
-
-    EGLDisplay prevDisplay = egl.GetCurrentDisplay();
-    EGLContext prevDrawSurface = egl.GetCurrentSurface(EGL_DRAW);
-    EGLContext prevReadSurface = egl.GetCurrentSurface(EGL_READ);
-    EGLContext prevContext = egl.GetCurrentContext();
-
-    context->MakeCurrent();
-
-    auto result = DiscoverPhysicalDevices(&options);
-
-    if (result.IsError()) {
-        GetInstance()->ConsumedError(result.AcquireError());
-    } else {
-        auto value = result.AcquireSuccess();
-        physicalDevices.insert(physicalDevices.end(), value.begin(), value.end());
-    }
-
-    egl.MakeCurrent(prevDisplay, prevDrawSurface, prevReadSurface, prevContext);
-
-    return physicalDevices;
-}
-
-ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverPhysicalDevices(
-    const PhysicalDeviceDiscoveryOptionsBase* optionsBase) {
     // TODO(cwallez@chromium.org): For now only create a single OpenGL physicalDevice because don't
     // know how to handle MakeCurrent.
-    DAWN_INVALID_IF(mCreatedPhysicalDevice,
-                    "The OpenGL backend can only create a single physicalDevice.");
+    if (mPhysicalDevice != nullptr && mGetProc != glGetProcOptions->getProc) {
+        GetInstance()->ConsumedErrorAndWarnOnce(
+            DAWN_VALIDATION_ERROR("The OpenGL backend can only create a single physicalDevice."));
+        return {};
+    }
+    if (mPhysicalDevice == nullptr) {
+        mPhysicalDevice = AcquireRef(new PhysicalDevice(GetInstance(), GetType()));
+        if (GetInstance()->ConsumedErrorAndWarnOnce(
+                mPhysicalDevice->InitializeGLFunctions(glGetProcOptions->getProc))) {
+            return {};
+        }
+        if (GetInstance()->ConsumedErrorAndWarnOnce(mPhysicalDevice->Initialize())) {
+            return {};
+        }
+        mGetProc = glGetProcOptions->getProc;
+    }
+    return std::vector<Ref<PhysicalDeviceBase>>{mPhysicalDevice};
+}
 
-    ASSERT(static_cast<wgpu::BackendType>(optionsBase->backendType) == GetType());
-    const PhysicalDeviceDiscoveryOptions* options =
-        static_cast<const PhysicalDeviceDiscoveryOptions*>(optionsBase);
+void Backend::ClearPhysicalDevices() {
+    mPhysicalDevice = nullptr;
+}
 
-    DAWN_INVALID_IF(options->getProc == nullptr,
-                    "PhysicalDeviceDiscoveryOptions::getProc must be set");
-
-    Ref<PhysicalDevice> physicalDevice = AcquireRef(new PhysicalDevice(
-        GetInstance(), static_cast<wgpu::BackendType>(optionsBase->backendType)));
-    DAWN_TRY(physicalDevice->InitializeGLFunctions(options->getProc));
-    DAWN_TRY(physicalDevice->Initialize());
-
-    mCreatedPhysicalDevice = true;
-    std::vector<Ref<PhysicalDeviceBase>> adapters{std::move(physicalDevice)};
-    return std::move(adapters);
+size_t Backend::GetPhysicalDeviceCountForTesting() const {
+    return mPhysicalDevice != nullptr ? 1 : 0;
 }
 
 BackendConnection* Connect(InstanceBase* instance, wgpu::BackendType backendType) {
