@@ -1,4 +1,4 @@
-// Copyright 2022 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,27 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/type/abstract_float.h"
+#include "src/tint/type/scalar.h"
 
-#include "src/tint/type/manager.h"
-#include "src/tint/utils/hash.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::type::AbstractFloat);
+TINT_INSTANTIATE_TYPEINFO(tint::type::Scalar);
 
 namespace tint::type {
 
-AbstractFloat::AbstractFloat()
-    : Base(utils::Hash(utils::TypeInfo::Of<AbstractFloat>().full_hashcode)) {}
+Scalar::Scalar(size_t hash, type::Flags flags) : Base(hash, flags) {}
 
-AbstractFloat::~AbstractFloat() = default;
+Scalar::~Scalar() = default;
 
-
-std::string AbstractFloat::FriendlyName() const {
-    return "abstract-float";
-}
-
-AbstractFloat* AbstractFloat::Clone(CloneContext& ctx) const {
-    return ctx.dst.mgr->Get<AbstractFloat>();
+bool Scalar::Equals(const UniqueNode& other) const {
+    return &other.TypeInfo() == &TypeInfo();
 }
 
 }  // namespace tint::type
