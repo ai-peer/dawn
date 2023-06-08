@@ -34,6 +34,24 @@
       "parentUuid": "c037af35_b295ec21",
       "revId": "fd2d24b01b6780994dae9231d4ddac97a64c0bcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de62248_f462e13b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-08T15:53:52Z",
+      "side": 1,
+      "message": "yes it was successfull - I couldn\u0027t immediately see what the issue was, but there are a lot of D3D11 debug validation layers errors. I\u0027d suggest looking at those since maybe it\u0027s causing instability.",
+      "parentUuid": "bc93d040_78167c40",
+      "revId": "fd2d24b01b6780994dae9231d4ddac97a64c0bcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
