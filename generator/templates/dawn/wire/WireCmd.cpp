@@ -140,18 +140,19 @@
             WGPUChainedStructTransfer chain;
         {% endif %}
 
-        //* Value types are directly in the command, objects being replaced with their IDs.
-        {% for member in members if member.annotation == "value" %}
-            {{member_transfer_type(member)}} {{as_varName(member.name)}};
-        {% endfor %}
-
-        //* const char* have their length embedded directly in the command.
-        {% for member in members if member.length == "strlen" %}
-            uint64_t {{as_varName(member.name)}}Strlen;
-        {% endfor %}
-
-        {% for member in members if member.optional and member.annotation != "value" and member.type.category != "object" %}
-            bool has_{{as_varName(member.name)}};
+        {% for member in members %}
+            //* Value types are directly in the command, objects being replaced with their IDs.
+            {% if member.annotation == "value" %}
+                {{member_transfer_type(member)}} {{as_varName(member.name)}};
+            {% endif %}
+            //* Members of type "const char *" have their length embedded directly in the command.
+            {% if member.length == "strlen" %}
+                uint64_t {{as_varName(member.name)}}Strlen;
+            {% endif %}
+            //* Optional members additionally come with a boolean to indicate whether they were set.
+            {% if member.optional and member.annotation != "value" and member.type.category != "object" %}
+                bool has_{{as_varName(member.name)}};
+            {% endif %}
         {% endfor %}
     };
 
@@ -176,47 +177,51 @@
                 result += GetChainedStructExtraRequiredSize(record.nextInChain);
             }
         {% endif %}
-
-        //* Special handling of const char* that have their length embedded directly in the command
-        {% for member in members if member.length == "strlen" %}
-            {% set memberName = as_varName(member.name) %}
-
-            {% if member.optional %}
-                bool has_{{memberName}} = record.{{memberName}} != nullptr;
-                if (has_{{memberName}})
-            {% else %}
-                ASSERT(record.{{memberName}} != nullptr);
+        //* Gather space needed for pointer members.
+        {% for member in members %}
+            {%- set memberName = as_varName(member.name) -%}
+            //* Skip size computation if we are skipping serialization.
+            {% if member.skip_serialize %}
+                {% continue %}
             {% endif %}
-            {
-            result += Align(std::strlen(record.{{memberName}}), kWireBufferAlignment);
-            }
-        {% endfor %}
-
-        //* Gather how much space will be needed for pointer members.
-        {% for member in members if member.length != "strlen" and not member.skip_serialize %}
-            {% if member.type.category != "object" and member.optional %}
-                if (record.{{as_varName(member.name)}} != nullptr)
-            {% endif %}
-            {
-                {% if member.annotation != "value" %}
-                    {{ assert(member.annotation != "const*const*") }}
-                    auto memberLength = {{member_length(member, "record.")}};
-                    auto size = WireAlignSizeofN<{{member_transfer_type(member)}}>(memberLength);
-                    ASSERT(size);
-                    result += *size;
-                    //* Structures might contain more pointers so we need to add their extra size as well.
-                    {% if member.type.category == "structure" %}
-                        for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                            {{assert(member.annotation == "const*")}}
-                            result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}}[i]);
-                        }
-                    {% endif %}
-                {% elif member.type.category == "structure" %}
-                    result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}});
+            //* Special handling of const char* that have their length embedded directly in the command.
+            {% if member.length == "strlen" %}
+                {% if member.optional %}
+                    if (record.{{memberName}} != nullptr) {
+                        result += Align(std::strlen(record.{{memberName}}), kWireBufferAlignment);
+                    }
+                {% else %}
+                    ASSERT(record.{{memberName}} != nullptr);
+                    result += Align(std::strlen(record.{{memberName}}), kWireBufferAlignment);
                 {% endif %}
-            }
+                {% continue %}
+            {% endif %}
+            //* Normal handling for pointer members and structs.
+            {% if member.annotation != "value" or member.type.category == "structure" %}
+                {% if member.type.category != "object" and member.optional %}
+                    if (record.{{as_varName(member.name)}} != nullptr) {
+                {% else %}
+                    {
+                {% endif %}
+                {% if member.annotation != "value" %}
+                        {% do assert(member.annotation != "const*const*") %}
+                        auto memberLength = {{member_length(member, "record.")}};
+                        auto size = WireAlignSizeofN<{{member_transfer_type(member)}}>(memberLength);
+                        ASSERT(size);
+                        result += *size;
+                        //* Structures might contain more pointers so we need to add their extra size as well.
+                        {% if member.type.category == "structure" %}
+                            for (decltype(memberLength) i = 0; i < memberLength; ++i) {
+                                {% do assert(member.annotation == "const*") %}
+                                result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}}[i]);
+                            }
+                        {% endif %}
+                    {% elif member.type.category == "structure" %}
+                        result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}});
+                    {% endif %}
+                }
+            {% endif %}
         {% endfor %}
-
         return result;
     }
     // GetExtraRequiredSize isn't used for structures that are value members of other structures
@@ -261,54 +266,69 @@
             ASSERT(transfer->chain.hasNext == (record.chain.next != nullptr));
         {% endif %}
 
-        //* Special handling of const char* that have their length embedded directly in the command
-        {% for member in members if member.length == "strlen" %}
+        //* Iterate members, sorted in reverse on "attribute" so that "value" types are serialized first.
+        //* Note this is important because some array pointer members rely on another "value" for their
+        //* "length", but order is not always given.
+        {% for member in members | sort(reverse=true, attribute="annotation") %}
             {% set memberName = as_varName(member.name) %}
-
-            {% if member.optional %}
-                bool has_{{memberName}} = record.{{memberName}} != nullptr;
-                transfer->has_{{memberName}} = has_{{memberName}};
-                if (has_{{memberName}})
+            //* Skip serialization for custom serialized members.
+            {% if member.skip_serialize %}
+                {% continue %}
             {% endif %}
-            {
-                transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
-
-                char* stringInBuffer;
-                WIRE_TRY(buffer->NextN(transfer->{{memberName}}Strlen, &stringInBuffer));
-                memcpy(stringInBuffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
-            }
-        {% endfor %}
-
-        //* Allocate space and write the non-value arguments in it.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" and not member.skip_serialize %}
-            {{ assert(member.annotation != "const*const*") }}
-            {% set memberName = as_varName(member.name) %}
-
-            {% if member.type.category != "object" and member.optional %}
-                bool has_{{memberName}} = record.{{memberName}} != nullptr;
-                transfer->has_{{memberName}} = has_{{memberName}};
-                if (has_{{memberName}})
+            //* Value types are directly in the transfer record, objects being replaced with their IDs.
+            {% if member.annotation == "value" %}
+                {{serialize_member(member, "record." + memberName, "transfer->" + memberName)}}
+                {% continue %}
             {% endif %}
-            {
-                auto memberLength = {{member_length(member, "record.")}};
-
-                {{member_transfer_type(member)}}* memberBuffer;
-                WIRE_TRY(buffer->NextN(memberLength, &memberBuffer));
-
-                {% if member.type.is_wire_transparent %}
-                    memcpy(
-                        memberBuffer, record.{{memberName}},
-                        {{member_transfer_sizeof(member)}} * memberLength);
+            //* Special handling of const char* that have their length embedded directly in the command.
+            {% if member.length == "strlen" %}
+                {% if member.optional %}
+                    bool has_{{memberName}} = record.{{memberName}} != nullptr;
+                    transfer->has_{{memberName}} = has_{{memberName}};
+                    if (has_{{memberName}}) {
                 {% else %}
-                    //* This loop cannot overflow because it iterates up to |memberLength|. Even if
-                    //* memberLength were the maximum integer value, |i| would become equal to it
-                    //* just before exiting the loop, but not increment past or wrap around.
-                    for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                        {{serialize_member(member, "record." + memberName + "[i]", "memberBuffer[i]" )}}
-                    }
+                    {
                 {% endif %}
-            }
+                    transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
+
+                    char* stringInBuffer;
+                    WIRE_TRY(buffer->NextN(transfer->{{memberName}}Strlen, &stringInBuffer));
+                    memcpy(stringInBuffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
+                }
+                {% continue %}
+            {% endif %}
+            //* Allocate space and write the non-value arguments in it.
+            {% if member.annotation != "value" %}
+                {% do assert(member.annotation != "const*const*") %}
+                {% if member.type.category != "object" and member.optional %}
+                    bool has_{{memberName}} = record.{{memberName}} != nullptr;
+                    transfer->has_{{memberName}} = has_{{memberName}};
+                    if (has_{{memberName}}) {
+                {% else %}
+                    {
+                {% endif %}
+                    auto memberLength = {{member_length(member, "record.")}};
+
+                    {{member_transfer_type(member)}}* memberBuffer;
+                    WIRE_TRY(buffer->NextN(memberLength, &memberBuffer));
+
+                    {% if member.type.is_wire_transparent %}
+                        memcpy(
+                            memberBuffer, record.{{memberName}},
+                            {{member_transfer_sizeof(member)}} * memberLength);
+                    {% else %}
+                        //* This loop cannot overflow because it iterates up to |memberLength|. Even if
+                        //* memberLength were the maximum integer value, |i| would become equal to it
+                        //* just before exiting the loop, but not increment past or wrap around.
+                        for (decltype(memberLength) i = 0; i < memberLength; ++i) {
+                            {{serialize_member(member, "record." + memberName + "[i]", "memberBuffer[i]" )}}
+                        }
+                    {% endif %}
+                }
+                {% continue %}
+            {% endif %}
         {% endfor %}
+
         return WireResult::Success;
     }
     DAWN_UNUSED_FUNC({{Return}}{{name}}Serialize);
@@ -335,19 +355,12 @@
             record->selfId = transfer->self;
         {% endif %}
 
-        //* Value types are directly in the transfer record, objects being replaced with their IDs.
-        {% for member in members if member.annotation == "value" %}
-            {% set memberName = as_varName(member.name) %}
-            {{deserialize_member(member, "transfer->" + memberName, "record->" + memberName)}}
-        {% endfor %}
-
         {% if record.extensible %}
             record->nextInChain = nullptr;
             if (transfer->hasNextInChain) {
                 WIRE_TRY(DeserializeChainedStruct(&record->nextInChain, deserializeBuffer, allocator, resolver));
             }
         {% endif %}
-
         {% if record.chained %}
             //* Should be set by the root descriptor's call to DeserializeChainedStruct.
             //* Don't check |record->chain.next| matches because it is not set until the
@@ -356,93 +369,106 @@
             ASSERT(record->chain.next == nullptr);
         {% endif %}
 
-        //* Special handling of const char* that have their length embedded directly in the command
-        {% for member in members if member.length == "strlen" %}
+        //* Iterate members, sorted in reverse on "attribute" so that "value" types are serialized first.
+        //* Note this is important because some array pointer members rely on another "value" for their
+        //* "length", but order is not always given.
+        {% for member in members | sort(reverse=true, attribute="annotation") %}
             {% set memberName = as_varName(member.name) %}
-
-            {% if member.optional %}
-                bool has_{{memberName}} = transfer->has_{{memberName}};
-                record->{{memberName}} = nullptr;
-                if (has_{{memberName}})
+            //* Value types are directly in the transfer record, objects being replaced with their IDs.
+            {% if member.annotation == "value" %}
+                {{deserialize_member(member, "transfer->" + memberName, "record->" + memberName)}}
+                {% continue %}
             {% endif %}
-            {
-                uint64_t stringLength64 = transfer->{{memberName}}Strlen;
-                if (stringLength64 >= std::numeric_limits<size_t>::max()) {
-                    //* Cannot allocate space for the string. It can be at most
-                    //* size_t::max() - 1. We need 1 byte for the null-terminator.
-                    return WireResult::FatalError;
-                }
-                size_t stringLength = static_cast<size_t>(stringLength64);
-
-                const volatile char* stringInBuffer;
-                WIRE_TRY(deserializeBuffer->ReadN(stringLength, &stringInBuffer));
-
-                char* copiedString;
-                WIRE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
-                //* We can cast away the volatile qualifier because DeserializeBuffer::ReadN already
-                //* validated that the range [stringInBuffer, stringInBuffer + stringLength) is valid.
-                //* memcpy may have an unknown access pattern, but this is fine since the string is only
-                //* data and won't affect control flow of this function.
-                memcpy(copiedString, const_cast<const char*>(stringInBuffer), stringLength);
-                copiedString[stringLength] = '\0';
-                record->{{memberName}} = copiedString;
-            }
-        {% endfor %}
-
-        //* Get extra buffer data, and copy pointed to values in extra allocated space.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" %}
-            {{ assert(member.annotation != "const*const*") }}
-            {% set memberName = as_varName(member.name) %}
-
-            {% if member.type.category != "object" and member.optional %}
-                //* Non-constant length optional members use length=0 to denote they aren't present.
-                //* Otherwise we could have length=N and has_member=false, causing reads from an
-                //* uninitialized pointer.
-                {{ assert(member.length == "constant") }}
-                bool has_{{memberName}} = transfer->has_{{memberName}};
-                record->{{memberName}} = nullptr;
-                if (has_{{memberName}})
-            {% endif %}
-            {
-                auto memberLength = {{member_length(member, "record->")}};
-                const volatile {{member_transfer_type(member)}}* memberBuffer;
-                WIRE_TRY(deserializeBuffer->ReadN(memberLength, &memberBuffer));
-
-                //* For data-only members (e.g. "data" in WriteBuffer and WriteTexture), they are
-                //* not security sensitive so we can directly refer the data inside the transfer
-                //* buffer in dawn_native. For other members, as prevention of TOCTOU attacks is an
-                //* important feature of the wire, we must make sure every single value returned to
-                //* dawn_native must be a copy of what's in the wire.
-                {% if member.json_data["wire_is_data_only"] %}
-                    record->{{memberName}} =
-                        const_cast<const {{member_transfer_type(member)}}*>(memberBuffer);
-
+            //* Special handling of const char* that have their length embedded directly in the command.
+            {% if member.length == "strlen" %}
+                {% if member.optional %}
+                    bool has_{{memberName}} = transfer->has_{{memberName}};
+                    record->{{memberName}} = nullptr;
+                    if (has_{{memberName}}) {
                 {% else %}
-                    {{as_cType(member.type.name)}}* copiedMembers;
-                    WIRE_TRY(GetSpace(allocator, memberLength, &copiedMembers));
-                    record->{{memberName}} = copiedMembers;
-
-                    {% if member.type.is_wire_transparent %}
-                        //* memcpy is not allowed to copy from volatile objects. However, these
-                        //* arrays are just used as plain data, and don't impact control flow. So if
-                        //* the underlying data were changed while the copy was still executing, we
-                        //* would get different data - but it wouldn't cause unexpected downstream
-                        //* effects.
-                        memcpy(
-                            copiedMembers,
-                            const_cast<const {{member_transfer_type(member)}}*>(memberBuffer),
-                           {{member_transfer_sizeof(member)}} * memberLength);
-                    {% else %}
-                        //* This loop cannot overflow because it iterates up to |memberLength|. Even
-                        //* if memberLength were the maximum integer value, |i| would become equal
-                        //* to it just before exiting the loop, but not increment past or wrap
-                        //* around.
-                        for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                            {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]")}}
-                        }
-                    {% endif %}
+                    {
                 {% endif %}
-            }
+                    uint64_t stringLength64 = transfer->{{memberName}}Strlen;
+                    if (stringLength64 >= std::numeric_limits<size_t>::max()) {
+                        //* Cannot allocate space for the string. It can be at most
+                        //* size_t::max() - 1. We need 1 byte for the null-terminator.
+                        return WireResult::FatalError;
+                    }
+                    size_t stringLength = static_cast<size_t>(stringLength64);
+
+                    const volatile char* stringInBuffer;
+                    WIRE_TRY(deserializeBuffer->ReadN(stringLength, &stringInBuffer));
+
+                    char* copiedString;
+                    WIRE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
+                    //* We can cast away the volatile qualifier because DeserializeBuffer::ReadN already
+                    //* validated that the range [stringInBuffer, stringInBuffer + stringLength) is valid.
+                    //* memcpy may have an unknown access pattern, but this is fine since the string is only
+                    //* data and won't affect control flow of this function.
+                    memcpy(copiedString, const_cast<const char*>(stringInBuffer), stringLength);
+                    copiedString[stringLength] = '\0';
+                    record->{{memberName}} = copiedString;
+                }
+                {% continue %}
+            {% endif %}
+            //* Get extra buffer data, and copy pointed to values in extra allocated space. Note that
+            //* currently, there is an implicit restriction that "skip_serialize" members must not be be
+            //* a "value" type, and that they are the last non-"value" type specified in the list in
+            //* dawn_wire.json.
+            {% if member.annotation != "value" %}
+                {% do assert(member.annotation != "const*const*") %}
+                {% if member.type.category != "object" and member.optional %}
+                    //* Non-constant length optional members use length=0 to denote they aren't present.
+                    //* Otherwise we could have length=N and has_member=false, causing reads from an
+                    //* uninitialized pointer.
+                    {% do assert(member.length == "constant") %}
+                    bool has_{{memberName}} = transfer->has_{{memberName}};
+                    record->{{memberName}} = nullptr;
+                    if (has_{{memberName}}) {
+                {% else %}
+                    {
+                {% endif %}
+                    auto memberLength = {{member_length(member, "record->")}};
+                    const volatile {{member_transfer_type(member)}}* memberBuffer;
+                    WIRE_TRY(deserializeBuffer->ReadN(memberLength, &memberBuffer));
+
+                    //* For data-only members (e.g. "data" in WriteBuffer and WriteTexture), they are
+                    //* not security sensitive so we can directly refer the data inside the transfer
+                    //* buffer in dawn_native. For other members, as prevention of TOCTOU attacks is an
+                    //* important feature of the wire, we must make sure every single value returned to
+                    //* dawn_native must be a copy of what's in the wire.
+                    {% if member.json_data["wire_is_data_only"] %}
+                        record->{{memberName}} =
+                            const_cast<const {{member_transfer_type(member)}}*>(memberBuffer);
+
+                    {% else %}
+                        {{as_cType(member.type.name)}}* copiedMembers;
+                        WIRE_TRY(GetSpace(allocator, memberLength, &copiedMembers));
+                        record->{{memberName}} = copiedMembers;
+
+                        {% if member.type.is_wire_transparent %}
+                            //* memcpy is not allowed to copy from volatile objects. However, these
+                            //* arrays are just used as plain data, and don't impact control flow. So if
+                            //* the underlying data were changed while the copy was still executing, we
+                            //* would get different data - but it wouldn't cause unexpected downstream
+                            //* effects.
+                            memcpy(
+                                copiedMembers,
+                                const_cast<const {{member_transfer_type(member)}}*>(memberBuffer),
+                               {{member_transfer_sizeof(member)}} * memberLength);
+                        {% else %}
+                            //* This loop cannot overflow because it iterates up to |memberLength|. Even
+                            //* if memberLength were the maximum integer value, |i| would become equal
+                            //* to it just before exiting the loop, but not increment past or wrap
+                            //* around.
+                            for (decltype(memberLength) i = 0; i < memberLength; ++i) {
+                                {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]")}}
+                            }
+                        {% endif %}
+                    {% endif %}
+                }
+                {% continue %}
+            {% endif %}
         {% endfor %}
 
         return WireResult::Success;
@@ -521,16 +547,24 @@
 {% macro make_chained_struct_serialization_helpers(out=None) %}
         {% set ChainedStructPtr = "WGPUChainedStructOut*" if out else "const WGPUChainedStruct*" %}
         {% set ChainedStruct = "WGPUChainedStructOut" if out else "WGPUChainedStruct" %}
+        //* Generate the list of sTypes that we need to handle.
+        {% set sTypes = [] %}
+        {% for sType in types["s type"].values %}
+            {% if not sType.valid %}
+                {% continue %}
+            {% elif sType.name.CamelCase() in client_side_structures %}
+                {% continue %}
+            {% elif types[sType.name.get()].output != out %}
+                {% continue %}
+            {% endif %}
+            {% do sTypes.append(sType) %}
+        {% endfor %}
         size_t GetChainedStructExtraRequiredSize({{ChainedStructPtr}} chainedStruct) {
             ASSERT(chainedStruct != nullptr);
             size_t result = 0;
             while (chainedStruct != nullptr) {
                 switch (chainedStruct->sType) {
-                    {% for sType in types["s type"].values if (
-                            sType.valid and
-                            (sType.name.CamelCase() not in client_side_structures) and
-                            (types[sType.name.get()].output == out)
-                    ) %}
+                    {% for sType in sTypes %}
                         case {{as_cEnum(types["s type"].name, sType.name)}}: {
                             const auto& typedStruct = *reinterpret_cast<{{as_cType(sType.name)}} const *>(chainedStruct);
                             result += WireAlignSizeof<{{as_cType(sType.name)}}Transfer>();
@@ -558,11 +592,7 @@
             ASSERT(buffer != nullptr);
             do {
                 switch (chainedStruct->sType) {
-                    {% for sType in types["s type"].values if (
-                            sType.valid and
-                            (sType.name.CamelCase() not in client_side_structures) and
-                            (types[sType.name.get()].output == out)
-                    ) %}
+                    {% for sType in sTypes %}
                         {% set CType = as_cType(sType.name) %}
                         case {{as_cEnum(types["s type"].name, sType.name)}}: {
 
@@ -613,11 +643,7 @@
                 WIRE_TRY(deserializeBuffer->Peek(&header));
                 WGPUSType sType = header->sType;
                 switch (sType) {
-                    {% for sType in types["s type"].values if (
-                            sType.valid and
-                            (sType.name.CamelCase() not in client_side_structures) and
-                            (types[sType.name.get()].output == out)
-                    ) %}
+                    {% for sType in sTypes %}
                         {% set CType = as_cType(sType.name) %}
                         case {{as_cEnum(types["s type"].name, sType.name)}}: {
                             const volatile {{CType}}Transfer* transfer;
