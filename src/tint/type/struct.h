@@ -161,6 +161,9 @@ class Struct : public utils::Castable<Struct, Type> {
     /// @copydoc Type::Elements
     TypeAndCount Elements(TypeAndCount invalid = {}) const override;
 
+    /// @copydoc Type::Element
+    const Type* Element(uint32_t index) const override;
+
     /// @param ctx the clone context
     /// @returns a clone of this type
     Struct* Clone(CloneContext& ctx) const override;

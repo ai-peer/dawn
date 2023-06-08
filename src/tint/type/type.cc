@@ -245,6 +245,10 @@ TypeAndCount Type::Elements(TypeAndCount invalid /* = {} */) const {
     return invalid;
 }
 
+const Type* Type::Element(uint32_t /* index */) const {
+    return nullptr;
+}
+
 const Type* Type::DeepestElement() const {
     const Type* ty = this;
     while (true) {

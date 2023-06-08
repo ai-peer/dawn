@@ -81,4 +81,8 @@ TypeAndCount Vector::Elements(TypeAndCount /* invalid = {} */) const {
     return {subtype_, width_};
 }
 
+const Type* Vector::Element(uint32_t index) const {
+    return index < width_ ? subtype_ : nullptr;
+}
+
 }  // namespace tint::type
