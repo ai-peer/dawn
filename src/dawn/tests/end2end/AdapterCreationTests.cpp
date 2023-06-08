@@ -36,8 +36,7 @@ class AdapterCreationTest : public ::testing::Test {
 
         {
             auto nativeInstance = std::make_unique<native::Instance>();
-            nativeInstance->DiscoverDefaultPhysicalDevices();
-            for (native::Adapter& nativeAdapter : nativeInstance->GetAdapters()) {
+            for (native::Adapter& nativeAdapter : nativeInstance->EnumerateAdapters()) {
                 anyAdapterAvailable = true;
 
                 wgpu::AdapterProperties properties;
