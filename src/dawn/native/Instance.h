@@ -62,7 +62,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     bool DiscoverPhysicalDevices(const PhysicalDeviceDiscoveryOptionsBase* options);
 
     // Return adapters created on every known physical device.
-    std::vector<Ref<AdapterBase>> GetAdapters() const;
+    std::vector<Ref<AdapterBase>> GetAdapters(
+        const DawnTogglesDescriptor* requiredAdapterTogglesDesc = nullptr) const;
 
     // Used to handle error that happen up to device creation.
     bool ConsumedError(MaybeError maybeError);
