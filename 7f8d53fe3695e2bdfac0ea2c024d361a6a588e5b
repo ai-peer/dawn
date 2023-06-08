@@ -16,6 +16,40 @@
       "message": "Including a link to a diff of the generated file for reference: https://www.diffchecker.com/s2BWta2p/",
       "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "476c1890_c5a5e4d8",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:23:51Z",
+      "side": 1,
+      "message": "😮 I didn\u0027t realize this was a thing, can we add the debug extension as well? It would help when developing templates.",
+      "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f7150e_83222c34",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:23:51Z",
+      "side": 1,
+      "message": "Uuuuh it\u0027s really hard to see what actually changed now.",
+      "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
