@@ -56,6 +56,19 @@ void RefCount::Increment() {
     mRefCount.fetch_add(kRefCountIncrement, std::memory_order_relaxed);
 }
 
+bool RefCount::TryIncrement() {
+    uint64_t current = mRefCount.load(std::memory_order_acquire);
+    bool success = false;
+    do {
+        if (current == 0u) {
+            return false;
+        }
+        success = mRefCount.compare_exchange_weak(current, current + kRefCountIncrement,
+                                                  std::memory_order_release);
+    } while (!success);
+    return true;
+}
+
 bool RefCount::Decrement() {
     ASSERT((mRefCount & ~kPayloadMask) != 0);
 
