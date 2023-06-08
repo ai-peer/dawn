@@ -32,16 +32,16 @@
 //* Helper macros so that the main [de]serialization functions can be written in a generic manner.
 
 //* Outputs an rvalue that's the number of elements a pointer member points to.
-{% macro member_length(member, record_accessor) -%}
+{%- macro member_length(member, record_accessor) -%}
     {%- if member.length == "constant" -%}
         {{member.constant_length}}u
     {%- else -%}
         {{record_accessor}}{{as_varName(member.length.name)}}
     {%- endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 //* Outputs the type that will be used on the wire for the member
-{% macro member_transfer_type(member) -%}
+{%- macro member_transfer_type(member) -%}
     {%- if member.type.category == "object" -%}
         ObjectId
     {%- elif member.type.category == "structure" -%}
@@ -51,18 +51,18 @@
     {%- elif as_cType(member.type.name) == "size_t" -%}
         {{as_cType(types["uint64_t"].name)}}
     {%- else -%}
-        {{ assert(member.type.is_wire_transparent) }}
+        {%- do assert(member.type.is_wire_transparent) -%}
         {{as_cType(member.type.name)}}
     {%- endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 //* Outputs the size of one element of the type that will be used on the wire for the member
-{% macro member_transfer_sizeof(member) -%}
+{%- macro member_transfer_sizeof(member) -%}
     sizeof({{member_transfer_type(member)}})
-{%- endmacro %}
+{%- endmacro -%}
 
 //* Outputs the serialization code to put `in` in `out`
-{% macro serialize_member(member, in, out) %}
+{%- macro serialize_member(member, in, out) -%}
     {%- if member.type.category == "object" -%}
         {%- set Optional = "Optional" if member.optional else "" -%}
         WIRE_TRY(provider.Get{{Optional}}Id({{in}}, &{{out}}));
@@ -77,47 +77,45 @@
     {%- else -%}
         {{out}} = {{in}};
     {%- endif -%}
-{% endmacro %}
+{%- endmacro -%}
 
 //* Outputs the deserialization code to put `in` in `out`
-{% macro deserialize_member(member, in, out) %}
+{%- macro deserialize_member(member, in, out) -%}
     {%- if member.type.category == "object" -%}
         {%- set Optional = "Optional" if member.optional else "" -%}
         WIRE_TRY(resolver.Get{{Optional}}FromId({{in}}, &{{out}}));
-    {%- elif member.type.category == "structure" -%}
-        {%- if member.type.is_wire_transparent -%}
+    {%- elif member.type.category == "structure" %}
+        {% if member.type.is_wire_transparent %}
             static_assert(sizeof({{out}}) == sizeof({{in}}), "Deserialize memcpy size must match.");
                 memcpy(&{{out}}, const_cast<const {{member_transfer_type(member)}}*>(&{{in}}), {{member_transfer_sizeof(member)}});
-        {%- else -%}
+        {%- else %}
             WIRE_TRY({{as_cType(member.type.name)}}Deserialize(&{{out}}, &{{in}}, deserializeBuffer, allocator
                 {%- if member.type.may_have_dawn_object -%}
                     , resolver
                 {%- endif -%}
             ));
-        {%- endif -%}
-    {%- elif member.type.category == "function pointer" -%}
+        {%- endif %}
+    {%- elif member.type.category == "function pointer" %}
         //* Function pointers cannot be deserialized.
         {{out}} = nullptr;
     {%- elif member.type.name.get() == "size_t" -%}
-        // Deserializing into size_t requires check that the uint64_t used on the wire won't narrow.
-        if ({{in}} > std::numeric_limits<size_t>::max()) {
-            return WireResult::FatalError;
-        }
+        //* Deserializing into size_t requires check that the uint64_t used on the wire won't narrow.
+        if ({{in}} > std::numeric_limits<size_t>::max()) return WireResult::FatalError;
             {{out}} = checked_cast<size_t>({{in}});
     {%- else -%}
         static_assert(sizeof({{out}}) >= sizeof({{in}}), "Deserialize assignment may not narrow.");
             {{out}} = {{in}};
     {%- endif -%}
-{% endmacro %}
+{%- endmacro -%}
 
 //* The main [de]serialization macro
 //* Methods are very similar to structures that have one member corresponding to each arguments.
 //* This macro takes advantage of the similarity to output [de]serialization code for a record
 //* that is either a structure or a method, with some special cases for each.
-{% macro write_record_serialization_helpers(record, name, members, is_cmd=False, is_return_command=False) %}
-    {% set Return = "Return" if is_return_command else "" %}
-    {% set Cmd = "Cmd" if is_cmd else "" %}
-    {% set Inherits = " : CmdHeader" if is_cmd else "" %}
+{%- macro write_record_serialization_helpers(record, name, members, is_cmd=False, is_return_command=False) -%}
+    {%- set Return = "Return" if is_return_command else "" -%}
+    {%- set Cmd = "Cmd" if is_cmd else "" -%}
+    {%- set Inherits = " : CmdHeader" if is_cmd else "" %}
 
     //* Structure for the wire format of each of the records. Members that are values
     //* are embedded directly in the structure. Other members are assumed to be in the
@@ -161,7 +159,7 @@
     {% if is_cmd %}
         static_assert(offsetof({{Return}}{{name}}Transfer, commandSize) == 0);
         static_assert(offsetof({{Return}}{{name}}Transfer, commandId) == sizeof(CmdHeader));
-    {% endif %}
+    {% endif -%}
 
     {% if record.chained %}
         static_assert(offsetof({{Return}}{{name}}Transfer, chain) == 0);
@@ -170,7 +168,6 @@
     //* Returns the required transfer size for `record` in addition to the transfer structure.
     DAWN_DECLARE_UNUSED size_t {{Return}}{{name}}GetExtraRequiredSize(const {{Return}}{{name}}{{Cmd}}& record) {
         DAWN_UNUSED(record);
-
         size_t result = 0;
 
         //* Gather how much space will be needed for the extension chain.
@@ -206,7 +203,7 @@
                     {
                 {% endif %}
                 {% if member.annotation != "value" %}
-                    {{ assert(member.annotation != "const*const*") }}
+                        {% do assert(member.annotation != "const*const*") %}
                         auto memberLength = {{member_length(member, "record.")}};
                         auto size = WireAlignSizeofN<{{member_transfer_type(member)}}>(memberLength);
                         ASSERT(size);
@@ -214,7 +211,7 @@
                         //* Structures might contain more pointers so we need to add their extra size as well.
                         {% if member.type.category == "structure" %}
                             for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                            {{assert(member.annotation == "const*")}}
+                                {% do assert(member.annotation == "const*") %}
                                 result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}}[i]);
                             }
                         {% endif %}
@@ -241,7 +238,6 @@
         {%- endif -%}
     ) {
         DAWN_UNUSED(buffer);
-
         //* Handle special transfer members of methods.
         {% if is_cmd %}
             transfer->commandId = {{Return}}WireCmd::{{name}};
@@ -352,7 +348,6 @@
         {% if is_cmd %}
             ASSERT(transfer->commandId == {{Return}}WireCmd::{{name}});
         {% endif %}
-
         {% if record.derived_method %}
             record->selfId = transfer->self;
         {% endif %}
@@ -363,7 +358,6 @@
                 WIRE_TRY(DeserializeChainedStruct(&record->nextInChain, deserializeBuffer, allocator, resolver));
             }
         {% endif %}
-
         {% if record.chained %}
             //* Should be set by the root descriptor's call to DeserializeChainedStruct.
             //* Don't check |record->chain.next| matches because it is not set until the
@@ -482,13 +476,12 @@
         return WireResult::Success;
     }
     DAWN_UNUSED_FUNC({{Return}}{{name}}Deserialize);
-{% endmacro %}
+{%- endmacro -%}
 
-{% macro write_command_serialization_methods(command, is_return) %}
+{%- macro write_command_serialization_methods(command, is_return) -%}
     {% set Return = "Return" if is_return else "" %}
     {% set Name = Return + command.name.CamelCase() %}
     {% set Cmd = Name + "Cmd" %}
-
     size_t {{Cmd}}::GetRequiredSize() const {
         return WireAlignSizeof<{{Name}}Transfer>() + {{Name}}GetExtraRequiredSize(*this);
     }
@@ -497,8 +490,7 @@
         WireResult {{Cmd}}::Serialize(
             size_t commandSize,
             SerializeBuffer* serializeBuffer,
-            const ObjectIdProvider& provider
-        ) const {
+            const ObjectIdProvider& provider) const {
             {{Name}}Transfer* transfer;
             WIRE_TRY(serializeBuffer->Next(&transfer));
             transfer->commandSize = commandSize;
@@ -512,8 +504,7 @@
         WireResult {{Cmd}}::Deserialize(
             DeserializeBuffer* deserializeBuffer,
             DeserializeAllocator* allocator,
-            const ObjectIdResolver& resolver
-        ) {
+            const ObjectIdResolver& resolver) {
             const volatile {{Name}}Transfer* transfer;
             WIRE_TRY(deserializeBuffer->Read(&transfer));
             return {{Name}}Deserialize(this, transfer, deserializeBuffer, allocator, resolver);
@@ -532,8 +523,7 @@
         WireResult {{Cmd}}::Serialize(
             size_t commandSize,
             SerializeBuffer* serializeBuffer,
-            const ObjectIdProvider&
-        ) const {
+            const ObjectIdProvider&) const {
             return Serialize(commandSize, serializeBuffer);
         }
 
@@ -545,14 +535,13 @@
         WireResult {{Cmd}}::Deserialize(
             DeserializeBuffer* deserializeBuffer,
             DeserializeAllocator* allocator,
-            const ObjectIdResolver&
-        ) {
+            const ObjectIdResolver&) {
             return Deserialize(deserializeBuffer, allocator);
         }
     {% endif %}
-{% endmacro %}
+{%- endmacro -%}
 
-{% macro make_chained_struct_serialization_helpers(out=None) %}
+{%- macro make_chained_struct_serialization_helpers(out=None) %}
     {% set ChainedStructPtr = "WGPUChainedStructOut*" if out else "const WGPUChainedStruct*" %}
     {% set ChainedStruct = "WGPUChainedStructOut" if out else "WGPUChainedStruct" %}
     //* Generate the list of sTypes that we need to handle.
@@ -699,14 +688,14 @@
                 }
             }
         } while (hasNext);
-
         return WireResult::Success;
     }
 {% endmacro %}
 
-namespace dawn::wire {
 
+namespace dawn::wire {
 namespace {
+
 // Allocates enough space from allocator to countain T[count] and return it in out.
 // Return FatalError if the allocator couldn't allocate the memory.
 // Always writes to |out| on success.
@@ -761,25 +750,24 @@ WireResult DeserializeChainedStruct(WGPUChainedStructOut** outChainNext,
 
 //* Output structure [de]serialization first because it is used by commands.
 {% for type in by_category["structure"] %}
-            {% set name = as_cType(type.name) %}
-            {% if type.name.CamelCase() not in client_side_structures %}
+    {%- set name = as_cType(type.name) -%}
+    {% if type.name.CamelCase() not in client_side_structures -%}
         {{write_record_serialization_helpers(type, name, type.members, is_cmd=False)}}
     {% endif %}
 {% endfor %}
 
-
-        {{ make_chained_struct_serialization_helpers(out=False) }}
-        {{ make_chained_struct_serialization_helpers(out=True) }}
+{{make_chained_struct_serialization_helpers(out=False)}}
+{{make_chained_struct_serialization_helpers(out=True)}}
 
 //* Output [de]serialization helpers for commands
 {% for command in cmd_records["command"] %}
-            {% set name = command.name.CamelCase() %}
+    {%- set name = command.name.CamelCase() -%}
     {{write_record_serialization_helpers(command, name, command.members, is_cmd=True)}}
 {% endfor %}
 
 //* Output [de]serialization helpers for return commands
 {% for command in cmd_records["return command"] %}
-            {% set name = command.name.CamelCase() %}
+    {%- set name = command.name.CamelCase() -%}
     {{write_record_serialization_helpers(command, name, command.members,
                                          is_cmd=True, is_return_command=True)}}
 {% endfor %}
@@ -816,12 +804,12 @@ class ErrorObjectIdProvider final : public ObjectIdProvider {
 
 }  // anonymous namespace
 
-    {% for command in cmd_records["command"] %}
-        {{ write_command_serialization_methods(command, False) }}
+{% for command in cmd_records["command"] -%}
+    {{write_command_serialization_methods(command, False)}}
 {% endfor %}
 
-    {% for command in cmd_records["return command"] %}
-        {{ write_command_serialization_methods(command, True) }}
+{% for command in cmd_records["return command"] -%}
+    {{write_command_serialization_methods(command, True)}}
 {% endfor %}
 
 }  // namespace dawn::wire
