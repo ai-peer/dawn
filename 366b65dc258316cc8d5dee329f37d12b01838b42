@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8286a94_c6296aff",
+        "filename": "src/tint/type/array.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-08T19:47:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79fd9199_67d3306a",
+      "range": {
+        "startLine": 109,
+        "startChar": 13,
+        "endLine": 109,
+        "endChar": 31
+      },
+      "revId": "366b65dc258316cc8d5dee329f37d12b01838b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34e66206_83eb6891",
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "Ha. I just pushed that change. Mostly because MSVC sucks. 😊",
       "parentUuid": "5a1254b2_6a8c4f9c",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 66
+      },
+      "revId": "366b65dc258316cc8d5dee329f37d12b01838b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cacf477d_8e265c91",
+        "filename": "src/tint/type/struct.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-08T19:47:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "512ba74a_27fec9ea",
       "range": {
         "startLine": 164,
         "startChar": 12,
