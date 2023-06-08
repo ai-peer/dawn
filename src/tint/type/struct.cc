@@ -165,6 +165,10 @@ TypeAndCount Struct::Elements(const Type* invalid_type /* = nullptr */,
     return {invalid_type, static_cast<uint32_t>(members_.Length())};
 }
 
+const Type* Struct::Element(uint32_t index) const {
+    return index < members_.Length() ? members_[index]->Type() : nullptr;
+}
+
 Struct* Struct::Clone(CloneContext& ctx) const {
     auto sym = ctx.dst.st->Register(name_.Name());
 
