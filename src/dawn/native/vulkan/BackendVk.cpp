@@ -457,25 +457,11 @@ Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::Bac
 
 Backend::~Backend() = default;
 
-std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverDefaultPhysicalDevices() {
-    PhysicalDeviceDiscoveryOptions options;
-    auto result = DiscoverPhysicalDevices(&options);
-    if (result.IsError()) {
-        GetInstance()->ConsumedError(result.AcquireError());
-        return {};
-    }
-    return result.AcquireSuccess();
-}
-
-ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverPhysicalDevices(
-    const PhysicalDeviceDiscoveryOptionsBase* optionsBase) {
-    ASSERT(optionsBase->backendType == WGPUBackendType_Vulkan);
-
-    const PhysicalDeviceDiscoveryOptions* options =
-        static_cast<const PhysicalDeviceDiscoveryOptions*>(optionsBase);
-
+std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
+    const RequestAdapterOptions* options,
+    const opengl::RequestAdapterOptionsGetGLProc*,
+    const d3d::RequestAdapterOptionsIDXGIAdapter*) {
     std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
-
     InstanceBase* instance = GetInstance();
     for (ICD icd : kICDs) {
 #if DAWN_PLATFORM_IS(MACOS)
@@ -484,28 +470,40 @@ ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> Backend::DiscoverPhysicalDev
             continue;
         }
 #endif  // DAWN_PLATFORM_IS(MACOS)
-        if (options->forceSwiftShader && icd != ICD::SwiftShader) {
+        if (options->forceFallbackAdapter && icd != ICD::SwiftShader) {
             continue;
         }
-        if (mVulkanInstances[icd] == nullptr && instance->ConsumedError([&]() -> MaybeError {
-                DAWN_TRY_ASSIGN(mVulkanInstances[icd], VulkanInstance::Create(instance, icd));
-                return {};
-            }())) {
-            // Instance failed to initialize.
-            continue;
-        }
-        const std::vector<VkPhysicalDevice>& vkPhysicalDevices =
-            mVulkanInstances[icd]->GetVkPhysicalDevices();
-        for (uint32_t i = 0; i < vkPhysicalDevices.size(); ++i) {
-            Ref<PhysicalDevice> physicalDevice = AcquireRef(
-                new PhysicalDevice(instance, mVulkanInstances[icd].Get(), vkPhysicalDevices[i]));
-            if (instance->ConsumedError(physicalDevice->Initialize())) {
+        if (mPhysicalDevices[icd].empty()) {
+            if (mVulkanInstances[icd] == nullptr &&
+                instance->ConsumedErrorAndWarnOnce([&]() -> MaybeError {
+                    DAWN_TRY_ASSIGN(mVulkanInstances[icd], VulkanInstance::Create(instance, icd));
+                    return {};
+                }())) {
+                // Instance failed to initialize.
                 continue;
             }
-            physicalDevices.push_back(std::move(physicalDevice));
+
+            const std::vector<VkPhysicalDevice>& vkPhysicalDevices =
+                mVulkanInstances[icd]->GetVkPhysicalDevices();
+            for (VkPhysicalDevice vkPhysicalDevice : vkPhysicalDevices) {
+                Ref<PhysicalDevice> physicalDevice = AcquireRef(
+                    new PhysicalDevice(instance, mVulkanInstances[icd].Get(), vkPhysicalDevice));
+                if (instance->ConsumedErrorAndWarnOnce(physicalDevice->Initialize())) {
+                    continue;
+                }
+                mPhysicalDevices[icd].push_back(std::move(physicalDevice));
+            }
         }
+        physicalDevices.insert(physicalDevices.end(), mPhysicalDevices[icd].begin(),
+                               mPhysicalDevices[icd].end());
     }
-    return physicalDevices;
+    return std::vector<Ref<PhysicalDeviceBase>>{physicalDevices};
+}
+
+void Backend::ClearPhysicalDevices() {
+    for (ICD icd : kICDs) {
+        mPhysicalDevices[icd].clear();
+    }
 }
 
 BackendConnection* Connect(InstanceBase* instance) {
