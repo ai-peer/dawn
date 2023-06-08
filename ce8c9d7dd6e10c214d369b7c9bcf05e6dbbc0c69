@@ -16,6 +16,24 @@
       "message": "As a followup, should we make this `Value* from` a `Var* from`? You can only load from a var, right?\n\n(Same with `Store`, the `Value*to` could be `Var* to`?)",
       "revId": "ce8c9d7dd6e10c214d369b7c9bcf05e6dbbc0c69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "686fe87e_d9829a10",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-08T03:43:47Z",
+      "side": 1,
+      "message": "You can load/store from/to any pointer, which also includes function parameters and the result of `access` instructions.",
+      "parentUuid": "a2c5cf34_a01ed036",
+      "revId": "ce8c9d7dd6e10c214d369b7c9bcf05e6dbbc0c69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
