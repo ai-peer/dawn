@@ -16,6 +16,91 @@
       "message": "PTAL. Ben requested this helper function in code review and it does simplify the duplicated logic in the transform and SPIR-V writer, but it\u0027s slightly annoying that you have to pass it a `type::Manager` to create the pointer types.",
       "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe776e31_068f418e",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T19:03:27Z",
+      "side": 1,
+      "message": "Would it be worthwhile to do a `Resize(Indices().Length())`?",
+      "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ac8c9a1_68710566",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T19:03:27Z",
+      "side": 1,
+      "message": "Vector?",
+      "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aef688fa_570a6377",
+        "filename": "src/tint/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T19:03:27Z",
+      "side": 1,
+      "message": "It seems a little weird that this also _creates_ types in that it wraps things in a pointer. I don\u0027t think I\u0027d expect that behaviour?",
+      "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163d6d7c_5150821a",
+        "filename": "src/tint/ir/access_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T19:03:27Z",
+      "side": 1,
+      "message": "Add a Vector into the tests?",
+      "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ad561b_ddc1350e",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T19:03:27Z",
+      "side": 1,
+      "message": "nit `Is\u003cConstant\u003e` as we don\u0027t use the pointer?",
+      "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
