@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "04a2a335a6ee6dbf7843c3b35967a5494e01e523",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b33245a_f2809283",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-08T06:35:58Z",
+      "side": 1,
+      "message": "I am not familiar with the cache stuff, but I feel like that putting this line of code into SetVertexBuffer() makes more sense than putting it in UnsetVertexBuffer()? I suppose the functions like RecomputeLazeAspects() and CheckMissingAspects() work fine too in that way. \n\nIn addition, it is aligned with what we have already done in SetBindGroup(), in which we calls mAspects.reset(VALIDATION_ASPECT_BIND_GROUP).",
+      "range": {
+        "startLine": 749,
+        "startChar": 0,
+        "endLine": 749,
+        "endChar": 53
+      },
+      "revId": "04a2a335a6ee6dbf7843c3b35967a5494e01e523",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
