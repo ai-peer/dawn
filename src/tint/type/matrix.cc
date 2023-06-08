@@ -69,6 +69,10 @@ uint32_t Matrix::ColumnStride() const {
     return column_type_->Align();
 }
 
+TypeAndCount Matrix::Element(TypeAndCount /* invalid = {} */) const {
+    return {column_type_, columns_};
+}
+
 Matrix* Matrix::Clone(CloneContext& ctx) const {
     auto* col_ty = column_type_->Clone(ctx);
     return ctx.dst.mgr->Get<Matrix>(col_ty, columns_);
