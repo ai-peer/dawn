@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c53321a_77f36be5",
+        "filename": "src/tint/type/type.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-08T19:41:40Z",
+      "side": 1,
+      "message": "Small request: rename to `type_if_invalid`? Same for `invalid_count` to `count_if_invalid`.",
+      "range": {
+        "startLine": 195,
+        "startChar": 46,
+        "endLine": 195,
+        "endChar": 59
+      },
+      "revId": "2a687305b4f7aad1e69ae02b4f7bc3753d20e807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
