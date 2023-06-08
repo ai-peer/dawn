@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a813d9_e75063bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T02:14:44Z",
+      "side": 1,
+      "message": "lgtm w/ nit",
+      "revId": "9a15d45790b41721c3bf376d502e3829957956ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea5d12de_49473ece",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-08T02:14:44Z",
+      "side": 1,
+      "message": "Instead of `static` just move up 6 lines into the anonymous namespace?",
+      "revId": "9a15d45790b41721c3bf376d502e3829957956ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
