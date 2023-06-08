@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ab712c9_cc702a3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-08T18:45:46Z",
+      "side": 1,
+      "message": "PTAL. Ben requested this helper function in code review and it does simplify the duplicated logic in the transform and SPIR-V writer, but it\u0027s slightly annoying that you have to pass it a `type::Manager` to create the pointer types.",
+      "revId": "4eace839933f4aa2352cdd6dd252e9678a5f2f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
