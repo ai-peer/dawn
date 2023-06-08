@@ -16,6 +16,24 @@
       "message": "This seems different? Why did this change? The source_type gets updated as we move through the tree, but the source object stays the same.",
       "revId": "8ae0ff5a451029f88258fdedc41ecf84dd0bad62",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b190173_87d9e4f9",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-08T18:43:20Z",
+      "side": 1,
+      "message": "The source object is updated just above this, if the first dynamic index is not the first index. So this is exactly the same as before in practice.\n\nI think it\u0027s clearer like this. We\u0027re making a variable that we are going to copy `source_object` to (a few lines below), so use the type of that object to declare the pointer type of that variable.",
+      "parentUuid": "c25f7c09_3d91ec6f",
+      "revId": "8ae0ff5a451029f88258fdedc41ecf84dd0bad62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

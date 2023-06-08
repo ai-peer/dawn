@@ -16,6 +16,24 @@
       "message": "This was dropped becasue vector can never come in here?",
       "revId": "2e8f967c01656ec78273268e6ba51bf49dcc98ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f09c4fd_5f727bd0",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-08T18:43:20Z",
+      "side": 0,
+      "message": "Correct. This `Switch` is setting up the source type of the next iteration, and we\u0027ll never index into the element type of a vector so don\u0027t need to bother with that case.",
+      "parentUuid": "124c8d29_161b69ec",
+      "revId": "2e8f967c01656ec78273268e6ba51bf49dcc98ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
