@@ -22,16 +22,21 @@
 
 namespace dawn::native::opengl {
 
+class PhysicalDevice;
 class Backend : public BackendConnection {
   public:
     Backend(InstanceBase* instance, wgpu::BackendType backendType);
 
-    std::vector<Ref<PhysicalDeviceBase>> DiscoverDefaultPhysicalDevices() override;
-    ResultOrError<std::vector<Ref<PhysicalDeviceBase>>> DiscoverPhysicalDevices(
-        const PhysicalDeviceDiscoveryOptionsBase* option) override;
+    std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(
+        const RequestAdapterOptions* options,
+        const opengl::RequestAdapterOptionsGetGLProc* glGetProcOptions,
+        const d3d::RequestAdapterOptionsIDXGIAdapter* dxgiAdapterOptions) override;
+    void ClearPhysicalDevices() override;
+    size_t GetPhysicalDeviceCountForTesting() const override;
 
   private:
-    bool mCreatedPhysicalDevice = false;
+    Ref<PhysicalDevice> mPhysicalDevice = nullptr;
+    void* (*mGetProc)(const char*);
     DynamicLib mLibEGL;
 };
 
