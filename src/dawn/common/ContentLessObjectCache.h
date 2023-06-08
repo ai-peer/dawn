@@ -1,0 +1,92 @@
+// Copyright 2023 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef SRC_DAWN_COMMON_CONTENTLESSOBJECTCACHE_H_
+#define SRC_DAWN_COMMON_CONTENTLESSOBJECTCACHE_H_
+
+#include <mutex>
+#include <type_traits>
+#include <unordered_set>
+#include <utility>
+
+#include "dawn/common/RefCounted.h"
+
+namespace dawn {
+
+template <typename RefCountedT,
+          typename BlueprintT = RefCountedT,
+          typename = typename std::is_convertible<RefCountedT, BlueprintT>::type>
+class ContentLessObjectCache {
+  public:
+    // Inserts the object into the cache returning a pair where the first is a Ref to the inserted
+    // or existing object, and the second is a bool that is true if we inserted `object` and false
+    // otherwise.
+    std::pair<Ref<RefCountedT>, bool> Insert(RefCountedT* object) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        auto [it, inserted] = mCache.insert(object);
+        if (inserted) {
+            return {object, inserted};
+        } else {
+            // We need to check that the found instance isn't about to be destroyed. If it is, we
+            // actually want to remove the old instance from the cache and insert this one.
+            Ref<RefCountedT> result =
+                static_cast<RefCountedT*>(*it)->template GetRef<RefCountedT>();
+            if (result != nullptr) {
+                return {result, false};
+            } else {
+                mCache.erase(it);
+                mCache.insert(object);
+                return {object, true};
+            }
+        }
+    }
+
+    // Returns a valid Ref<T> if the underlying RefCounted object's refcount has not reached 0.
+    // Otherwise, returns nullptr.
+    Ref<RefCountedT> Find(BlueprintT* object) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        auto it = mCache.find(object);
+        if (it != mCache.end()) {
+            return static_cast<RefCountedT*>(*it)->template GetRef<RefCountedT>();
+        }
+        return nullptr;
+    }
+
+    // Erases the object from the cache if it exists and are pointer equal. Otherwise does not
+    // modify the cache.
+    void Erase(RefCountedT* object) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        auto it = mCache.find(object);
+        ASSERT(it != mCache.end());
+        if (*it == object) {
+            mCache.erase(it);
+        }
+    }
+
+    // Returns true iff the cache is empty.
+    bool Empty() {
+        std::lock_guard<std::mutex> lock(mMutex);
+        return mCache.empty();
+    }
+
+  private:
+    std::mutex mMutex;
+    std::
+        unordered_set<BlueprintT*, typename BlueprintT::HashFunc, typename BlueprintT::EqualityFunc>
+            mCache;
+};
+
+}  // namespace dawn
+
+#endif  // SRC_DAWN_COMMON_CONTENTLESSOBJECTCACHE_H_

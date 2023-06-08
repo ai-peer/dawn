@@ -21,6 +21,8 @@
 #endif
 #endif
 
+#include <utility>
+
 #include "dawn/common/Assert.h"
 
 namespace dawn {
@@ -45,15 +47,19 @@ uint64_t RefCount::GetPayload() const {
     return kPayloadMask & mRefCount.load(std::memory_order_relaxed);
 }
 
-void RefCount::Increment() {
+bool RefCount::Increment() {
     ASSERT((mRefCount & ~kPayloadMask) != 0);
 
-    // The relaxed ordering guarantees only the atomicity of the update, which is enough here
-    // because the reference we are copying from still exists and makes sure other threads
-    // don't delete `this`.
-    // See the explanation in the Boost documentation:
-    //     https://www.boost.org/doc/libs/1_55_0/doc/html/atomic/usage_examples.html
-    mRefCount.fetch_add(kRefCountIncrement, std::memory_order_relaxed);
+    uint64_t current = mRefCount.load(std::memory_order_acquire);
+    bool success = false;
+    do {
+        if (current == 0u) {
+            return false;
+        }
+        success = mRefCount.compare_exchange_weak(current, current + kRefCountIncrement,
+                                                  std::memory_order_release);
+    } while (!success);
+    return true;
 }
 
 bool RefCount::Decrement() {

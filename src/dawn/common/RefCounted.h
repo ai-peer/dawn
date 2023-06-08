@@ -22,6 +22,9 @@
 
 namespace dawn {
 
+template <typename RefCountedT, typename BlueprintT, typename>
+class ContentLessObjectCache;
+
 class RefCount {
   public:
     // Create a refcount with a payload. The refcount starts initially at one.
@@ -30,8 +33,8 @@ class RefCount {
     uint64_t GetValueForTesting() const;
     uint64_t GetPayload() const;
 
-    // Add a reference.
-    void Increment();
+    // Add a reference. Returns false if the ref count is already at 0.
+    bool Increment();
 
     // Remove a reference. Returns true if this was the last reference.
     bool Decrement();
@@ -39,6 +42,9 @@ class RefCount {
   private:
     std::atomic<uint64_t> mRefCount;
 };
+
+template <typename T>
+class Ref;
 
 class RefCounted {
   public:
@@ -68,6 +74,26 @@ class RefCounted {
     virtual void LockAndDeleteThis();
 
     RefCount mRefCount;
+
+  private:
+    template <typename RefCountedT, typename BlueprintT, typename>
+    friend class ContentLessObjectCache;
+
+    // Returns a valid Ref to this object if it's internal refcount is not already 0. If the
+    // internal refcount has already reached 0, returns nullptr instead. Note this is private and
+    // unsafe because it needs to down cast. Only usable by friend classes.
+    template <typename T>
+    Ref<T> GetRef() {
+        // Since this is called on the RefCounted class directly, and can race with destruction, we
+        // verify that we can safely increment the refcount first, create the Ref, then decrement
+        // the refcount in that order to ensure that the resultant Ref is a valid Ref.
+        if (!mRefCount.Increment()) {
+            return nullptr;
+        }
+        Ref<T> ref(static_cast<T*>(this));
+        mRefCount.Decrement();
+        return ref;
+    }
 };
 
 template <typename T>
