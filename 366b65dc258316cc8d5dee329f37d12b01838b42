@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b57fc3a_5942bbab",
+        "filename": "src/tint/type/array.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-08T18:52:02Z",
+      "side": 1,
+      "message": "This API is surprising to me because we\u0027re only using _part_ of the `invalid` input. So `invalid` isn\u0027t the value that gets returned if `Elements` cannot be computed, but rather, `invalid` contains _parts_ of things that will get returned if those parts cannot be computed. A bit weird.",
+      "range": {
+        "startLine": 109,
+        "startChar": 13,
+        "endLine": 109,
+        "endChar": 31
+      },
+      "revId": "366b65dc258316cc8d5dee329f37d12b01838b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e66206_83eb6891",
+        "filename": "src/tint/type/struct.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-08T18:52:02Z",
+      "side": 1,
+      "message": "Again this API seems weird to me as we only use `type` from `invalid`.\n\nI wonder if a better API would be to make TypeAndCount hold std::optionals for both the type and the count. Then we remove the `invalid` input, and at the call site, you use `result.type.value_or()` and `result.count.value_or()` in the cases where they may come back as unset. In cases where you expect them to always be valid, you just dereference the optional.\n\n```\nstruct TypeAndCount {\n    /// The type\n    std::optional\u003cconst Type*\u003e type{nullptr};\n    /// The count\n    std::optional\u003cuint32_t\u003e count{0};\n};\n\n...\n\nauto* ty \u003d a.Elements().type.value_or(MyType);\n\nauto c \u003d b.Elements().count.value_or(10);\n\n```",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 66
+      },
+      "revId": "366b65dc258316cc8d5dee329f37d12b01838b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
