@@ -572,30 +572,24 @@ void GeneratorImplIr::EmitAccess(const ir::Access* access) {
 
     // For non-pointer types, we assume that the indices are constants and use OpCompositeExtract.
     // If we hit a non-constant index into a vector type, use OpVectorExtractDynamic for it.
-    auto* ty = access->Object()->Type();
-    for (auto* idx : access->Indices()) {
+    const auto& indices = access->Indices();
+    auto source_types = access->SourceObjectTypes(ir_->Types());
+    for (uint32_t i = 0; i < indices.Length(); i++) {
+        auto* idx = indices[i];
         if (auto* constant = idx->As<ir::Constant>()) {
             // Push the index to the chain and update the current type.
-            auto i = constant->Value()->ValueAs<u32>();
-            operands.push_back(i);
-            ty = Switch(
-                ty,  //
-                [&](const type::Array* arr) { return arr->ElemType(); },
-                [&](const type::Matrix* mat) { return mat->ColumnType(); },
-                [&](const type::Struct* str) { return str->Members()[i]->Type(); },
-                [&](const type::Vector* vec) { return vec->type(); },
-                [&](Default) { return nullptr; });
+            operands.push_back(constant->Value()->ValueAs<u32>());
         } else {
             // The VarForDynamicIndex transform ensures that only value types that are vectors
             // will be dynamically indexed, as we can use OpVectorExtractDynamic for this case.
-            TINT_ASSERT(Writer, ty->Is<type::Vector>());
+            TINT_ASSERT(Writer, source_types[i]->Is<type::Vector>());
 
             // If this wasn't the first access in the chain then emit the chain so far as an
             // OpCompositeExtract, creating a new result ID for the resulting vector.
             auto vec_id = Value(access->Object());
             if (operands.size() > 3) {
                 vec_id = module_.NextId();
-                operands[0] = Type(ty);
+                operands[0] = Type(source_types[i]);
                 operands[1] = vec_id;
                 current_function_.push_inst(spv::Op::OpCompositeExtract, std::move(operands));
             }

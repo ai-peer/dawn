@@ -64,7 +64,7 @@ struct PartialAccess {
     }
 };
 
-std::optional<AccessToReplace> ShouldReplace(Access* access) {
+std::optional<AccessToReplace> ShouldReplace(Access* access, type::Manager& ty) {
     if (access->Type()->Is<type::Pointer>()) {
         // No need to modify accesses into pointer types.
         return {};
@@ -72,27 +72,17 @@ std::optional<AccessToReplace> ShouldReplace(Access* access) {
 
     // Find the first dynamic index, if any.
     const auto& indices = access->Indices();
-    auto* source_type = access->Object()->Type();
+    auto source_types = access->SourceObjectTypes(ty);
     for (uint32_t i = 0; i < indices.Length(); i++) {
-        if (source_type->Is<type::Vector>()) {
+        if (source_types[i]->Is<type::Vector>()) {
             // Stop if we hit a vector, as they can support dynamic accesses.
             return {};
         }
 
         // Check if the index is dynamic.
-        auto* const_idx = indices[i]->As<Constant>();
-        if (!const_idx) {
-            return AccessToReplace{access, i, source_type};
+        if (!indices[i]->As<Constant>()) {
+            return AccessToReplace{access, i, source_types[i]};
         }
-
-        // Update the current source object type.
-        source_type = tint::Switch(
-            source_type,  //
-            [&](const type::Array* arr) { return arr->ElemType(); },
-            [&](const type::Matrix* mat) { return mat->ColumnType(); },
-            [&](const type::Struct* str) {
-                return str->Members()[const_idx->Value()->ValueAs<u32>()]->Type();
-            });
     }
     // No dynamic indices were found.
     return {};
@@ -111,7 +101,7 @@ void VarForDynamicIndex::Run(ir::Module* ir, const DataMap&, DataMap&) const {
     utils::Vector<AccessToReplace, 4> worklist;
     for (auto* inst : ir->values.Objects()) {
         if (auto* access = inst->As<Access>()) {
-            if (auto to_replace = ShouldReplace(access)) {
+            if (auto to_replace = ShouldReplace(access, ir->Types())) {
                 worklist.Push(to_replace.value());
             }
         }

@@ -17,6 +17,10 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest-spi.h"
 #include "src/tint/ir/ir_test_helper.h"
+#include "src/tint/type/array.h"
+#include "src/tint/type/matrix.h"
+#include "src/tint/type/struct.h"
+#include "src/tint/type/vector.h"
 
 namespace tint::ir {
 namespace {
@@ -32,6 +36,48 @@ TEST_F(IR_AccessTest, SetsUsage) {
 
     EXPECT_THAT(var->Usages(), testing::UnorderedElementsAre(Usage{a, 0u}));
     EXPECT_THAT(idx->Usages(), testing::UnorderedElementsAre(Usage{a, 1u}));
+}
+
+TEST_F(IR_AccessTest, GetSourceObjectTypes_Value) {
+    auto* mat = ty.mat4x4(ty.f32());
+    auto* arr = ty.array(mat, 1024u);
+    auto* str = ty.Get<type::Struct>(
+        mod.symbols.Register("MyStruct"),
+        utils::Vector{
+            ty.Get<type::StructMember>(mod.symbols.Register("a"), ty.f32(), 0u, 0u, 4u, 4u,
+                                       type::StructMemberAttributes{}),
+            ty.Get<type::StructMember>(mod.symbols.Register("b"), arr, 1u, 256u, 16u, 256u,
+                                       type::StructMemberAttributes{}),
+        },
+        16u, 512u, 512u);
+    auto* val = b.FunctionParam(str);
+    auto* idx = b.Constant(u32(1));
+    auto* a = b.Access(ty.f32(), val, utils::Vector{idx, idx, idx, idx});
+
+    EXPECT_THAT(a->SourceObjectTypes(ty), testing::ElementsAre(str, arr, mat, mat->ColumnType()));
+}
+
+TEST_F(IR_AccessTest, GetSourceObjectTypes_Pointer) {
+    auto* mat = ty.mat4x4(ty.f32());
+    auto* arr = ty.array(mat, 1024u);
+    auto* str = ty.Get<type::Struct>(
+        mod.symbols.Register("MyStruct"),
+        utils::Vector{
+            ty.Get<type::StructMember>(mod.symbols.Register("a"), ty.f32(), 0u, 0u, 4u, 4u,
+                                       type::StructMemberAttributes{}),
+            ty.Get<type::StructMember>(mod.symbols.Register("b"), arr, 1u, 256u, 16u, 256u,
+                                       type::StructMemberAttributes{}),
+        },
+        16u, 512u, 512u);
+    auto ptr = [&](auto* el) {
+        return ty.pointer(el, builtin::AddressSpace::kFunction, builtin::Access::kReadWrite);
+    };
+    auto* var = b.Var(ptr(str));
+    auto* idx = b.Constant(u32(1));
+    auto* a = b.Access(ty.f32(), var, utils::Vector{idx, idx, idx, idx});
+
+    EXPECT_THAT(a->SourceObjectTypes(ty),
+                testing::ElementsAre(ptr(str), ptr(arr), ptr(mat), ptr(mat->ColumnType())));
 }
 
 TEST_F(IR_AccessTest, Fail_NullType) {

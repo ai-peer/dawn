@@ -17,6 +17,14 @@
 #include <utility>
 
 #include "src/tint/debug.h"
+#include "src/tint/ir/constant.h"
+#include "src/tint/switch.h"
+#include "src/tint/type/array.h"
+#include "src/tint/type/manager.h"
+#include "src/tint/type/matrix.h"
+#include "src/tint/type/pointer.h"
+#include "src/tint/type/struct.h"
+#include "src/tint/type/vector.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Access);
 
@@ -35,5 +43,26 @@ Access::Access(const type::Type* ty, Value* object, utils::VectorRef<Value*> ind
 
 Access::~Access() = default;
 //! @endcond
+
+utils::Vector<const type::Type*, 4> Access::SourceObjectTypes(type::Manager& ty) const {
+    utils::Vector<const type::Type*, 4> types;
+    auto* source_type = Object()->Type();
+    auto* base_ptr = source_type->As<type::Pointer>();
+    for (auto* idx : Indices()) {
+        types.Push(source_type);
+        source_type = tint::Switch(
+            source_type->UnwrapPtr(),  //
+            [&](const type::Array* arr) { return arr->ElemType(); },
+            [&](const type::Matrix* mat) { return mat->ColumnType(); },
+            [&](const type::Struct* str) {
+                auto i = idx->As<Constant>()->Value()->ValueAs<u32>();
+                return str->Members()[i]->Type();
+            });
+        if (base_ptr) {
+            source_type = ty.pointer(source_type, base_ptr->AddressSpace(), base_ptr->Access());
+        }
+    }
+    return types;
+}
 
 }  // namespace tint::ir

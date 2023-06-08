@@ -36,6 +36,10 @@ class Access : public utils::Castable<Access, OperandInstruction<3>> {
     /// @returns the object used for the access
     Value* Object() const { return operands_[0]; }
 
+    /// @param ty the type manager
+    /// @returns the list of source object types that correspond to each index
+    utils::Vector<const type::Type*, 4> SourceObjectTypes(type::Manager& ty) const;
+
     /// @returns the accessor indices
     utils::Slice<Value const* const> Indices() const {
         return operands_.Slice().Offset(1).Reinterpret<Value const* const>();
