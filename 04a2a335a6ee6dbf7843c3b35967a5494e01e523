@@ -39,6 +39,30 @@
       },
       "revId": "04a2a335a6ee6dbf7843c3b35967a5494e01e523",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e35bcf41_97657876",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-08T07:08:15Z",
+      "side": 1,
+      "message": "Never mind. It couldn\u0027t pass the new test when I moved it from Unset() to Set().\n\nBtw, do we need to add a `mAspects.reset(VALIDATION_ASPECT_VERTEX_BUFFERS)` in SetVertexBuffer() too?",
+      "parentUuid": "6b33245a_f2809283",
+      "range": {
+        "startLine": 749,
+        "startChar": 0,
+        "endLine": 749,
+        "endChar": 53
+      },
+      "revId": "04a2a335a6ee6dbf7843c3b35967a5494e01e523",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
