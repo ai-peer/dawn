@@ -73,10 +73,7 @@
         WIRE_TRY({{as_cType(member.type.name)}}Serialize({{in}}, &{{out}}, buffer{{Provider}}));
     {%- elif member.type.category == "function pointer" -%}
         //* Function pointers cannot be serialized.
-        if ({{in}} != nullptr) {
-            return WireResult::FatalError;
-        }
-        {{out}} = nullptr;
+        if ({{in}} != nullptr) return WireResult::FatalError;
     {%- else -%}
         {{out}} = {{in}};
     {%- endif -%}
@@ -100,9 +97,6 @@
         {%- endif -%}
     {%- elif member.type.category == "function pointer" -%}
         //* Function pointers cannot be deserialized.
-        if ({{in}} != nullptr) {
-            return WireResult::FatalError;
-        }
         {{out}} = nullptr;
     {%- elif member.type.name.get() == "size_t" -%}
         // Deserializing into size_t requires check that the uint64_t used on the wire won't narrow.
@@ -141,6 +135,14 @@
         {% endif %}
 
         {% for member in members %}
+            //* Function pointers do not get serialized.
+            {% if member.type.category == "function pointer" %}
+                {% continue %}
+            {% endif %}
+            //* Members of type "void *", i.e. userdata, do not get serialized.
+            {% if member.type.name.get() == "void *" %}
+                {% continue %}
+            {% endif %}
             //* Value types are directly in the command, objects being replaced with their IDs.
             {% if member.annotation == "value" %}
                 {{member_transfer_type(member)}} {{as_varName(member.name)}};
@@ -245,12 +247,6 @@
             transfer->commandId = {{Return}}WireCmd::{{name}};
         {% endif %}
 
-        //* Value types are directly in the transfer record, objects being replaced with their IDs.
-        {% for member in members if member.annotation == "value" %}
-            {% set memberName = as_varName(member.name) %}
-            {{serialize_member(member, "record." + memberName, "transfer->" + memberName)}}
-        {% endfor %}
-
         {% if record.extensible %}
             if (record.nextInChain != nullptr) {
                 transfer->hasNextInChain = true;
@@ -273,6 +269,13 @@
             {% set memberName = as_varName(member.name) %}
             //* Skip serialization for custom serialized members.
             {% if member.skip_serialize %}
+                {% continue %}
+            {% endif %}
+            //* Explicit "void *" types (i.e. userdata) are skipped and just validated.
+            {% if member.type.name.get() == "void *" %}
+                if (record.{{memberName}} != nullptr) {
+                    return WireResult::FatalError;
+                }
                 {% continue %}
             {% endif %}
             //* Value types are directly in the transfer record, objects being replaced with their IDs.
@@ -374,6 +377,11 @@
         //* "length", but order is not always given.
         {% for member in members | sort(reverse=true, attribute="annotation") %}
             {% set memberName = as_varName(member.name) %}
+            //* Explicit "void *" types (i.e. userdata) are initialized to nullptr.
+            {% if member.type.name.get() == "void *" %}
+                record->{{memberName}} = nullptr;
+                {% continue %}
+            {% endif %}
             //* Value types are directly in the transfer record, objects being replaced with their IDs.
             {% if member.annotation == "value" %}
                 {{deserialize_member(member, "transfer->" + memberName, "record->" + memberName)}}
