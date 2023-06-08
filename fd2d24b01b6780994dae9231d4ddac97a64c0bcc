@@ -16,6 +16,24 @@
       "message": "I think this is causing consistent test failures\nsee: https://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Win10%20x64%20Release%20(Intel)/4710/blamelist\n\nsorry, I will try a revert",
       "revId": "fd2d24b01b6780994dae9231d4ddac97a64c0bcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc93d040_78167c40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-08T12:12:49Z",
+      "side": 1,
+      "message": "Has the revert worked? I\u0027d like to confirm the test failures were caused by this CL, and then figure out what to do next.",
+      "parentUuid": "c037af35_b295ec21",
+      "revId": "fd2d24b01b6780994dae9231d4ddac97a64c0bcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
