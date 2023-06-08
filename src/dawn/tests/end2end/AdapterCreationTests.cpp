@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/common/Log.h"
 #include "dawn/dawn_proc.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/tests/MockCallback.h"
@@ -36,8 +37,7 @@ class AdapterCreationTest : public ::testing::Test {
 
         {
             auto nativeInstance = std::make_unique<native::Instance>();
-            nativeInstance->DiscoverDefaultPhysicalDevices();
-            for (native::Adapter& nativeAdapter : nativeInstance->GetAdapters()) {
+            for (native::Adapter& nativeAdapter : nativeInstance->EnumerateAdapters()) {
                 anyAdapterAvailable = true;
 
                 wgpu::AdapterProperties properties;
