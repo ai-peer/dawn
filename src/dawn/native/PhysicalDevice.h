@@ -42,8 +42,9 @@ class PhysicalDeviceBase : public RefCounted {
 
     MaybeError Initialize();
 
-    bool HasFeature(wgpu::FeatureName feature) const;
-    size_t EnumerateFeatures(wgpu::FeatureName* features) const;
+    bool HasFeatureWithToggles(wgpu::FeatureName feature, const TogglesState& toggles) const;
+    size_t EnumerateFeaturesWithToggles(wgpu::FeatureName* features,
+                                        const TogglesState& toggles) const;
 
     ResultOrError<Ref<DeviceBase>> CreateDevice(AdapterBase* adapter,
                                                 const DeviceDescriptor* descriptor,
@@ -65,9 +66,10 @@ class PhysicalDeviceBase : public RefCounted {
 
     void ResetInternalDeviceForTesting();
 
-    FeaturesSet GetSupportedFeatures() const;
-    bool SupportsAllRequiredFeatures(
-        const ityp::span<size_t, const wgpu::FeatureName>& features) const;
+    FeaturesSet GetSupportedFeaturesWithToggles(const TogglesState& toggles) const;
+    bool SupportsAllRequiredFeaturesWithToggles(
+        const ityp::span<size_t, const wgpu::FeatureName>& features,
+        const TogglesState& toggles) const;
 
     const CombinedLimits& GetLimits() const;
 
@@ -76,11 +78,11 @@ class PhysicalDeviceBase : public RefCounted {
     virtual bool SupportsFeatureLevel(FeatureLevel featureLevel) const = 0;
 
     // Backend-specific force-setting and defaulting device toggles
+    virtual void SetupBackendAdapterToggles(TogglesState* adapterToggles) const = 0;
+    // Backend-specific force-setting and defaulting device toggles
     virtual void SetupBackendDeviceToggles(TogglesState* deviceToggles) const = 0;
 
     // Check if a feature os supported by this adapter AND suitable with given toggles.
-    // TODO(dawn:1495): After implementing adapter toggles, remove this and use adapter toggles
-    // instead of device toggles to validate supported features.
     MaybeError ValidateFeatureSupportedWithToggles(wgpu::FeatureName feature,
                                                    const TogglesState& toggles) const;
 

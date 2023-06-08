@@ -49,6 +49,8 @@ class AdapterBase : public RefCounted {
 
     void SetUseTieredLimits(bool useTieredLimits);
 
+    FeaturesSet GetSupportedFeatures() const;
+
     // Return the underlying PhysicalDevice.
     PhysicalDeviceBase* GetPhysicalDevice();
 
