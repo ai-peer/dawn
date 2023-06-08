@@ -16,6 +16,91 @@
       "message": "PTAL",
       "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2609677_f28b5d33",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:21:00Z",
+      "side": 1,
+      "message": "nit: This is missing the CMake change.",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3c3d01_29cdbd31",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:21:00Z",
+      "side": 1,
+      "message": "We shouldn\u0027t depend like this because dawn::utils is for things that use Dawn like tests etc, not for Dawn itsefl. We can inline the USleep call instead of adding this circular dependency.",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53e6105c_c07f0b14",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:21:00Z",
+      "side": 1,
+      "message": "IMHO we should just suppress that warning, if it is just a warning. This simplifies code, allows inlining CreateD3D11OcclusionQuery in Initialize, and avoids the need to IgnoreErrors (which we should basically never do) here (because what if crearion fails? Then we\u0027d dereference a nullptr).\n\nI\u0027d also remove the need for mQueryState",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73db0827_7a37604d",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:21:00Z",
+      "side": 1,
+      "message": "WebGPU only supports non-precise queries by default, so they should return 0/1. What we can do is use predication on the query and a tiny compute shader to write 0 or 1 in a UAV that\u0027s the resolve buffer. WDYT?",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "606f8aec_df393b61",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-08T15:21:00Z",
+      "side": 1,
+      "message": "nit: We could have a cast in the caller first, so that this function takes a uint64_t. Also we could reuse i in [0, queryCount] then define `queryIndex \u003d i + firstQuery`.",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
