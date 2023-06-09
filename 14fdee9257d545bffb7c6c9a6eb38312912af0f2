@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a275a7e_7e1d75dd",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-09T02:58:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2609677_f28b5d33",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e3c3d01_29cdbd31",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-08T15:21:00Z",
       "side": 1,
       "message": "We shouldn\u0027t depend like this because dawn::utils is for things that use Dawn like tests etc, not for Dawn itsefl. We can inline the USleep call instead of adding this circular dependency.",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f6fecbe_b281b917",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-09T02:58:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e3c3d01_29cdbd31",
       "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e9937cb_45b8a481",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-09T02:58:59Z",
+      "side": 1,
+      "message": "Suppressing the warning sounds good, done!\n\nI still need to keep mQueryState so that I would be able to know if a query has ever begun and ended when resolving it.",
+      "parentUuid": "53e6105c_c07f0b14",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73db0827_7a37604d",
         "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
         "patchSetId": 3
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22d1bd8d_51a8346e",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-09T02:58:59Z",
+      "side": 1,
+      "message": "https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-setpredication\nIf I understand D3D11_QUERY_OCCLUSION_PREDICATE correctly, probably it\u0027s not the right answer here. Basically it requires that you should know in advance if there are going to be any stencil/depth samples passed. Otherwise you could block the subsequent rendering and resource manipulation commands forever. Another limitation is that only one predicate is allowed per context. It would be hard to support a set of queries simultaneously. Correct me if it\u0027s wrong.",
+      "parentUuid": "73db0827_7a37604d",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "606f8aec_df393b61",
         "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
         "patchSetId": 3
@@ -99,6 +171,24 @@
       "writtenOn": "2023-06-08T15:21:00Z",
       "side": 1,
       "message": "nit: We could have a cast in the caller first, so that this function takes a uint64_t. Also we could reuse i in [0, queryCount] then define `queryIndex \u003d i + firstQuery`.",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18e7edab_d30bf347",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-09T02:58:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "606f8aec_df393b61",
       "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
