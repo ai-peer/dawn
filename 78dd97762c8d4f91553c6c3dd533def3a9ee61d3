@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ec43e40_a020ee0f",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T11:02:52Z",
+      "side": 1,
+      "message": "L223 checks that the index is an integer scalar, so if it\u0027s not a signed integer scalar, it must be unsigned so the negative check is reduntant.",
+      "parentUuid": "3f3f56b1_5d078154",
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3dc54540_e43bb81f",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9b885f4_d3e8549c",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T11:02:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dc54540_e43bb81f",
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42026e3c_033fa565",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-06-08T21:38:13Z",
       "side": 1,
       "message": "Why is this called `OOB` ? Both accesses `1` and `0` are in bounds?",
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f7d8ad_53ae19d7",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T11:02:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42026e3c_033fa565",
       "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -89,6 +143,30 @@
       "side": 1,
       "message": "You need to add the operand stuff for `access`. I added it for `if-\u003eCondition` as that\u0027s the test taht existed. I didn\u0027t want to add them without something emitting them.\n\nAll the infra exists, you just need to add the storing (or i can do it after this lands)",
       "parentUuid": "ccdcd56e_f1e69cab",
+      "range": {
+        "startLine": 154,
+        "startChar": 39,
+        "endLine": 154,
+        "endChar": 93
+      },
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8899f34f_2666eed2",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T11:02:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a938168_1aedda1a",
       "range": {
         "startLine": 154,
         "startChar": 39,
