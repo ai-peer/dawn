@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8cd6353_94143d2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T11:50:00Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "520a2fabbbc2424a34b7c8515000fb25da437b55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c9e0f8_342363b1",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T11:50:00Z",
+      "side": 1,
+      "message": "nit: can you rename `kConditionOperandIndex` to `kConditionOperandOffset` to match the two added in this CL (I like the `Offset` better then `Index` as it works well for both single values and lists)",
+      "revId": "520a2fabbbc2424a34b7c8515000fb25da437b55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
