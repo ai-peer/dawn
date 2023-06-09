@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e4890ab_1a888670",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "also need it in CMakeLists.txt",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a61aecfc_334f91b7",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "could you add a microbenchmark to see how something like bind group layout or sampler creation performs when:\n 1. lots of cache lookups, additions, removals\n 2. lots of lookups\n\n?\n\nthe benchmark thing also lets you test a variety of thread counts.\nWe can see how well it scales with more threads, and also see how it performs relative to baseline (no locks at all) for the threads\u003d1 case",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277a7b4c_e9fe89d5",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "would be great to have unittests specifically for this class",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b068ea9_7ae06e5e",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "that means that Erase can no longer assert that the object-to-be-erased is in the cache. since it may be removed here instead",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 91
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3304b65e_f19a7e9b",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "to confirm: this can happen if two threads both fail to Find, then both create an object and both Insert ? if so, a comment would be helpful",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6cf9e9a_10b10a10",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "I think this ASSERT is now contradictory with the body of the function which checks if the refcount becomes 0.\n\nalso though, I don\u0027t think we want to pay for acquire/release semantics for normal ref increment operations.\n\nCould we have a version that is exclusively called by the cache so it is only more expensive on cache lookups?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 45
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e493e45_37d0a748",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "Cached objects will need an override of this (or just an override of DeleteThis) which acquires the cache\u0027s lock before actual deletion\n\nOtherwise, the deleting thread can make the ref go to zero, and then immediately go on to delete the object. Meanwhile, some other thread is attempting to do CopyRefIfCountNotZero on some deleted memory",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f43bbc_3880c11a",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "does it need to be private and do we need the friend class?\n\nI think it\u0027d be OK if it were public with some explicit name like CopyRefIfCountNotZero.\n\nAlso, the syntax `static_cast\u003cRefCountedT*\u003e(*it)-\u003etemplate GetRef\u003cRefCountedT\u003e();` is a bit clunky. I think we should be able to do something like `CopyRefIfCountNotZero(static_cast\u003cRefCountedT*\u003e(*it))`.\n\n```\nfriend Ref\u003cT\u003e CopyRefIfCountNotZero(T* obj) {\n  if (!mRefCount.IncrementIfNotZero()) {\n    return nullptr;\n  }\n  return AcquireRef(obj);\n}\n```",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f5ce30_3033146b",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "to save an extra ref+release, this should work:\n\n```suggestion\n        return AcquireRef(static_cast\u003cT*\u003e(this));\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 18
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492fa110_91a67778",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:05:55Z",
+      "side": 1,
+      "message": "here and the others - I think we\u0027re missing the case where two insertations race, and we only want to return the one that is inside the cache.\n\nSo I think this code should be:\n```suggestion\n    Ref\u003cBindGroupLayoutBase\u003e result \u003d mCaches-\u003ebindGroupLayouts.Find(\u0026blueprint);\n    if (result !\u003d nullptr) {\n        return std::move(result);\n    }\n    DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));\n    result-\u003eSetContentHash(blueprintHash);\n    bool inserted;\n    [result, inserted] \u003d mCaches-\u003ebindGroupLayouts.Insert(result.Get());\n    if (inserted) {\n        result-\u003eSetIsCachedReference();\n    }\n    return std::move(result);\n```",
+      "range": {
+        "startLine": 820,
+        "startChar": 0,
+        "endLine": 828,
+        "endChar": 29
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
