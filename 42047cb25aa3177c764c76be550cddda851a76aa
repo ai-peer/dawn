@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea5aa274_84d09730",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-09T18:31:42Z",
+      "side": 1,
+      "message": "The one for adapter options is to make the test code request compat because as it is there is no easy way to use the testing classes with shared devices with specific adapter options. There should maybe be a TODO to refactor that.\n\nThe `globalTestConfig.compatbility` is so a test can say `if (globalTestConfig.compatibility) { skipTest() }` because there\u0027s no way in the WebGPU API itself to check you\u0027re in compat mode. This is another area I think we\u0027d like to revisit.\n\nExample usage: See the last file on this PR \n\nhttps://github.com/gpuweb/cts/pull/2759/files#diff-8eaabff15533d807de7a6c605991e169a4091d666942c133fa7a440255d033a3",
+      "parentUuid": "dd11144c_e10787a2",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 49
+      },
+      "revId": "42047cb25aa3177c764c76be550cddda851a76aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa341102_f660f539",
         "filename": "webgpu-cts/test_runner.js",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-09T17:14:06Z",
       "side": 1,
       "message": "forget to import this from somewhere?",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 35
+      },
+      "revId": "42047cb25aa3177c764c76be550cddda851a76aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8eb43d4_b53ef190",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-09T18:31:42Z",
+      "side": 1,
+      "message": "fixed. Thanks for noticing 😮‍💨",
+      "parentUuid": "fa341102_f660f539",
       "range": {
         "startLine": 167,
         "startChar": 4,
