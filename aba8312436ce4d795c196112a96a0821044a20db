@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bda7df4_1f305a80",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T19:31:06Z",
+      "side": 1,
+      "message": "Yes, there are two overloads, one that takes an arg, and one that doesn\u0027t.\nI decided that\u0027s what we want, as the Return constructor asserted that the vector-packed args didn\u0027t contain a nullptr.",
+      "parentUuid": "1f918ffb_d1b2bb19",
+      "revId": "aba8312436ce4d795c196112a96a0821044a20db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "795feb7e_0230de22",
         "filename": "src/tint/ir/load.cc",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-09T18:58:44Z",
       "side": 1,
       "message": "Probably need a `TINT_ASSERT_OR_RETURN(IR, from-\u003eType())` before this line in case the `from` has a `nullptr` type",
+      "revId": "aba8312436ce4d795c196112a96a0821044a20db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c6dbc1_69231f84",
+        "filename": "src/tint/ir/load.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T19:31:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "795feb7e_0230de22",
       "revId": "aba8312436ce4d795c196112a96a0821044a20db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
