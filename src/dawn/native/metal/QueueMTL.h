@@ -47,19 +47,19 @@ class Queue final : public QueueBase {
     MaybeError WaitForIdleForDestruction() override;
 
     NSPRef<id<MTLCommandQueue>> mCommandQueue;
-
-    // The completed serial is updated in a Metal completion handler that can be fired on a
-    // different thread, so it needs to be atomic.
-    std::atomic<uint64_t> mCompletedSerial;
+    CommandRecordingContext mCommandContext;
 
     // mLastSubmittedCommands will be accessed in a Metal schedule handler that can be fired on
     // a different thread so we guard access to it with a mutex.
     std::mutex mLastSubmittedCommandsMutex;
     NSPRef<id<MTLCommandBuffer>> mLastSubmittedCommands;
 
-    CommandRecordingContext mCommandContext;
+    // The completed serial is updated in a Metal completion handler that can be fired on a
+    // different thread, so it needs to be atomic.
+    std::atomic<uint64_t> mCompletedSerial;
 
-    // MTLSharedEvent not available until macOS 10.14+ so use just `id`.
+    // A shared event that can be exported for synchronization with other users of Metal.
+    // MTLSharedEvent is not available until macOS 10.14+ so use just `id`.
     NSPRef<id> mMtlSharedEvent = nullptr;
 };
 
