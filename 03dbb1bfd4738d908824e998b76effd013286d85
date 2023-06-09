@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca76a35e_e07cf635",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T19:53:05Z",
+      "side": 1,
+      "message": "Oh! Good catch. I forgot that after I changed it to use \"void *\" type directly that it falls under `annotation \u003d\u003d \"value\"`. Done!",
+      "parentUuid": "bf1fb68d_074a58d9",
+      "revId": "03dbb1bfd4738d908824e998b76effd013286d85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fac6a59b_45f9e1ad",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-09T09:39:37Z",
       "side": 1,
       "message": "WDYT of explicitly handling function pointers and void* here as well?",
+      "revId": "03dbb1bfd4738d908824e998b76effd013286d85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "017426b6_e432ec13",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T19:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fac6a59b_45f9e1ad",
       "revId": "03dbb1bfd4738d908824e998b76effd013286d85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
