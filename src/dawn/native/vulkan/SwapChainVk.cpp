@@ -599,7 +599,7 @@ MaybeError SwapChain::PresentImpl() {
     mTexture = nullptr;
 
     VkResult result =
-        VkResult::WrapUnsafe(device->fn.QueuePresentKHR(device->GetQueue(), &presentInfo));
+        VkResult::WrapUnsafe(device->fn.QueuePresentKHR(device->GetVkQueue(), &presentInfo));
 
     switch (result) {
         case VK_SUCCESS:

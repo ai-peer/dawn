@@ -218,13 +218,8 @@ void Device::DestroyImpl() {
     ASSERT(mMemoryUsage == 0);
 }
 
-MaybeError Device::WaitForIdleForDestruction() {
+void Device::ForgetPendingOperations() {
     mPendingOperations.clear();
-    return {};
-}
-
-bool Device::HasPendingCommands() const {
-    return false;
 }
 
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
@@ -273,10 +268,6 @@ MaybeError Device::TickImpl() {
     return SubmitPendingOperations();
 }
 
-ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
-    return GetLastSubmittedCommandSerial();
-}
-
 void Device::AddPendingOperation(std::unique_ptr<PendingOperation> operation) {
     mPendingOperations.emplace_back(std::move(operation));
 }
@@ -287,8 +278,8 @@ MaybeError Device::SubmitPendingOperations() {
     }
     mPendingOperations.clear();
 
-    DAWN_TRY(CheckPassedSerials());
-    IncrementLastSubmittedCommandSerial();
+    DAWN_TRY(GetQueue()->CheckPassedSerials());
+    GetQueue()->IncrementLastSubmittedCommandSerial();
 
     return {};
 }
@@ -393,6 +384,21 @@ MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
                                   const void* data,
                                   size_t size) {
     ToBackend(buffer)->DoWriteBuffer(bufferOffset, data, size);
+    return {};
+}
+
+ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
+    return GetLastSubmittedCommandSerial();
+}
+
+void Queue::ForceEventualFlushOfCommands() {}
+
+bool Queue::HasPendingCommands() const {
+    return false;
+}
+
+MaybeError Queue::WaitForIdleForDestruction() {
+    ToBackend(GetDevice())->ForgetPendingOperations();
     return {};
 }
 
@@ -506,8 +512,6 @@ float Device::GetTimestampPeriodInNS() const {
 bool Device::IsResolveTextureBlitWithDrawSupported() const {
     return true;
 }
-
-void Device::ForceEventualFlushOfCommands() {}
 
 Texture::Texture(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state)
     : TextureBase(device, descriptor, state) {}
