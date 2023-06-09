@@ -675,10 +675,6 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
             continue;
         }
 
-        if (format == wgpu::TextureFormat::RGBA8Snorm && HasToggleEnabled("disable_snorm_read")) {
-            continue;
-        }
-
         // TODO(crbug.com/dawn/676): investigate why this test fails with RGBA8Snorm on Linux
         // Intel OpenGL and OpenGLES drivers.
         if (format == wgpu::TextureFormat::RGBA8Snorm && IsIntel() &&
@@ -711,10 +707,6 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
             continue;
         }
         if (IsOpenGLES() && !OpenGLESSupportsStorageTexture(format)) {
-            continue;
-        }
-
-        if (format == wgpu::TextureFormat::RGBA8Snorm && HasToggleEnabled("disable_snorm_read")) {
             continue;
         }
 
