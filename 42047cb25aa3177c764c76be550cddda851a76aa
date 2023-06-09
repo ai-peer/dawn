@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd11144c_e10787a2",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T17:14:06Z",
+      "side": 1,
+      "message": "why do we set both this one and the request adapter options?",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 49
+      },
+      "revId": "42047cb25aa3177c764c76be550cddda851a76aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa341102_f660f539",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T17:14:06Z",
+      "side": 1,
+      "message": "forget to import this from somewhere?",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 35
+      },
+      "revId": "42047cb25aa3177c764c76be550cddda851a76aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
