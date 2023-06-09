@@ -287,6 +287,9 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
 
     // For OpenGL ES, use compute shader blit to emulate stencil texture to buffer copies.
     deviceToggles->Default(Toggle::UseBlitForStencilTextureToBufferCopy, gl.GetVersion().IsES());
+
+    // For OpenGL ES, use compute shader blit to emulate snorm texture to buffer copies.
+    deviceToggles->Default(Toggle::UseBlitForSnormTextureToBufferCopy, gl.GetVersion().IsES());
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,
