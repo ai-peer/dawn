@@ -33,6 +33,7 @@
 #include "dawn/native/vulkan/PhysicalDeviceVk.h"
 #include "dawn/native/vulkan/PipelineLayoutVk.h"
 #include "dawn/native/vulkan/QuerySetVk.h"
+#include "dawn/native/vulkan/QueueVk.h"
 #include "dawn/native/vulkan/RenderPassCache.h"
 #include "dawn/native/vulkan/RenderPipelineVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
@@ -901,7 +902,10 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
                 mRenderPassDepthStencilAttachments.find(texture) !=
                     mRenderPassDepthStencilAttachments.end()) {
                 // Identified a potential crash case, split the command buffer.
-                DAWN_TRY(device->SplitRecordingContext(recordingContext));
+                // TODO(dawn:1413): Make the recording context itself know how to split internally
+                // instead of reaching out to a global object knowing that it will modify the
+                // currently local `recordingContext`.
+                DAWN_TRY(ToBackend(device->GetQueue())->SplitRecordingContext(recordingContext));
                 mRenderPassDepthStencilAttachments.clear();
                 break;
             }
