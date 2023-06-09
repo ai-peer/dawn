@@ -139,8 +139,8 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
                 const BufferSpec& bufferSpec,
                 const wgpu::Extent3D& copySize,
                 wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D) {
-        // TODO(crbug.com/dawn/818): support testing arbitrary formats
-        ASSERT_EQ(kDefaultFormat, textureSpec.format);
+        // // TODO(crbug.com/dawn/818): support testing arbitrary formats
+        // ASSERT_EQ(kDefaultFormat, textureSpec.format);
 
         const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
         // Create a texture that is `width` x `height` with (`level` + 1) mip levels.
@@ -160,7 +160,9 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
                 textureSpec.format, textureSpec.textureSize, textureSpec.copyLevel, dimension);
 
         // Initialize the source texture
-        std::vector<utils::RGBA8> textureArrayData = GetExpectedTextureDataRGBA8(copyLayout);
+        // TODO: extend format
+        // std::vector<utils::RGBA8> textureArrayData = GetExpectedTextureDataRGBA8(copyLayout);
+        std::vector<uint8_t> textureArrayData = GetExpectedTextureData(copyLayout);
         {
             wgpu::ImageCopyTexture imageCopyTexture =
                 utils::CreateImageCopyTexture(texture, textureSpec.copyLevel, {0, 0, 0});
@@ -203,14 +205,22 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
 
         const wgpu::Extent3D copySizePerLayer = {copySize.width, copySize.height, copyDepth};
         // Texels in single layer.
-        const uint32_t texelCountInCopyRegion = utils::GetTexelCountInCopyRegion(
-            bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, copySizePerLayer, textureSpec.format);
+        // const uint32_t texelCountInCopyRegion = utils::GetTexelCountInCopyRegion(
+        //     bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, copySizePerLayer,
+        //     textureSpec.format);
         const uint32_t maxArrayLayer = textureSpec.copyOrigin.z + copyLayer;
-        std::vector<utils::RGBA8> expected(texelCountInCopyRegion);
+        // printf("\n!!! %u\n", texelCountInCopyRegion);
+        // std::vector<utils::RGBA8> expected(texelCountInCopyRegion);
+
+        std::vector<uint8_t> expected(utils::RequiredBytesInCopy(
+            bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, copySizePerLayer, textureSpec.format));
+
         for (uint32_t layer = textureSpec.copyOrigin.z; layer < maxArrayLayer; ++layer) {
             // Copy the data used to create the upload buffer in the specified copy region to have
             // the same format as the expected buffer data.
-            std::fill(expected.begin(), expected.end(), utils::RGBA8());
+            // std::fill(expected.begin(), expected.end(), utils::RGBA8());
+            std::fill(expected.begin(), expected.end(), 0xff);  // ?
+
             const uint32_t texelIndexOffset = copyLayout.texelBlocksPerImage * layer;
             const uint32_t expectedTexelArrayDataStartIndex =
                 texelIndexOffset + (textureSpec.copyOrigin.x +
@@ -222,8 +232,27 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
                             copyLayout.rowsPerImage, expected.data(), bufferSpec.bytesPerRow,
                             bufferSpec.rowsPerImage);
 
-            EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<const uint32_t*>(expected.data()), buffer,
-                                       bufferOffset, static_cast<uint32_t>(expected.size()))
+            // constexpr size_t kd = 16;
+            // printf("\n\n");
+            // // for (size_t i = 0; i < textureArrayData.size(); i++) {
+            // for (size_t i = 0; i < kd; i++) {
+            //     printf("%02X ", textureArrayData[i]);
+            // }
+            // printf("\n\n");
+
+            // for (size_t i = 0; i < kd; i++) {
+            //     printf("%02X ", expected[i]);
+            // }
+            // printf("\n\n");
+
+            // printf("\n!!! %lu %lu %lu\n", textureArrayData.size(), expected.size(),
+            // bufferSpec.size);
+
+            // EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<const uint32_t*>(expected.data()),
+            // buffer,
+            //                            bufferOffset, static_cast<uint32_t>(expected.size()))
+            EXPECT_BUFFER_U8_RANGE_EQ(reinterpret_cast<const uint8_t*>(expected.data()), buffer,
+                                      bufferOffset, expected.size())
                 << "Texture to Buffer copy failed copying region [(" << textureSpec.copyOrigin.x
                 << ", " << textureSpec.copyOrigin.y << ", " << textureSpec.copyOrigin.z << "), ("
                 << textureSpec.copyOrigin.x + copySize.width << ", "
@@ -643,10 +672,21 @@ TEST_P(CopyTests_T2B, FullTextureAligned) {
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
 
+    // constexpr std::array<wgpu::TextureFormat, 2> kFormats = {
+    //     {wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::R8Snorm}};
+    constexpr wgpu::TextureFormat kFormats[] = {
+        wgpu::TextureFormat::R8Unorm,
+        wgpu::TextureFormat::RGBA8Unorm,
+        wgpu::TextureFormat::R8Snorm,
+    };
+
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, 1};
 
-    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, kHeight, 1});
+    for (wgpu::TextureFormat format : kFormats) {
+        textureSpec.format = format;
+        DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight, 1, format), {kWidth, kHeight, 1});
+    }
 }
 
 // Test noop copies
