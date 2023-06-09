@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0606e43a_78d2a625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T11:54:19Z",
+      "side": 1,
+      "message": "lgtm w/ test request",
+      "revId": "872178e6837c3f7e5adde3ab4dcb2a57eca7bf68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb329369_3b088d71",
+        "filename": "src/tint/ir/return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T11:54:19Z",
+      "side": 1,
+      "message": "Can we add a test that `b.Return(..., nullptr)` works and sets an empty list?",
+      "revId": "872178e6837c3f7e5adde3ab4dcb2a57eca7bf68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
