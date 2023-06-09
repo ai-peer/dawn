@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fc6ae8c_53a54ff3",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T19:49:38Z",
+      "side": 1,
+      "message": "I see. I thought we were going to have adapters expose `isCompatibility` or something like that\n\nregardless, seems fine for now",
+      "parentUuid": "ea5aa274_84d09730",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 49
+      },
+      "revId": "42047cb25aa3177c764c76be550cddda851a76aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa341102_f660f539",
         "filename": "webgpu-cts/test_runner.js",
         "patchSetId": 1

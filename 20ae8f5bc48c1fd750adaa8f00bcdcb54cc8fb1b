@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "235eeec3_1fdd5471",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T19:49:38Z",
+      "side": 1,
+      "message": "base this part off of the url params too then since you have a TODO about switching to use worker\u003d1 ?",
+      "range": {
+        "startLine": 158,
+        "startChar": 2,
+        "endLine": 159,
+        "endChar": 14
+      },
+      "revId": "20ae8f5bc48c1fd750adaa8f00bcdcb54cc8fb1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
