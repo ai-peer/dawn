@@ -1185,10 +1185,6 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 TEST_P(TextureZeroInitTest, NonRenderableTextureClear) {
-    // TODO(crbug.com/dawn/667): Work around the fact that some platforms do not support reading
-    // from Snorm textures.
-    DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_snorm_read"));
-
     wgpu::TextureDescriptor descriptor =
         CreateTextureDescriptor(1, 1, wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat);
     wgpu::Texture texture = device.CreateTexture(&descriptor);
@@ -1218,10 +1214,6 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClear) {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 TEST_P(TextureZeroInitTest, NonRenderableTextureClearUnalignedSize) {
-    // TODO(crbug.com/dawn/667): Work around the fact that some platforms do not support reading
-    // from Snorm textures.
-    DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_snorm_read"));
-
     wgpu::TextureDescriptor descriptor =
         CreateTextureDescriptor(1, 1, wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat);
     descriptor.size.width = kUnalignedSize;
@@ -1254,10 +1246,6 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClearUnalignedSize) {
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 // with more than 1 array layers
 TEST_P(TextureZeroInitTest, NonRenderableTextureClearWithMultiArrayLayers) {
-    // TODO(crbug.com/dawn/667): Work around the fact that some platforms do not support reading
-    // from Snorm textures.
-    DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_snorm_read"));
-
     wgpu::TextureDescriptor descriptor =
         CreateTextureDescriptor(1, 2, wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat);
     wgpu::Texture texture = device.CreateTexture(&descriptor);
@@ -1590,10 +1578,6 @@ TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
 // This is a regression test for crbug.com/dawn/451 where the lazy texture
 // init path on D3D12 had a divide-by-zero exception in the copy split logic.
 TEST_P(TextureZeroInitTest, CopyTextureToBufferNonRenderableUnaligned) {
-    // TODO(crbug.com/dawn/667): Work around the fact that some platforms do not support reading
-    // from Snorm textures.
-    DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_snorm_read"));
-
     wgpu::TextureDescriptor descriptor;
     descriptor.size.width = kUnalignedSize;
     descriptor.size.height = kUnalignedSize;

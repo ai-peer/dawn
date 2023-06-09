@@ -439,10 +439,6 @@ Extent3D ComputeTextureCopyExtent(const TextureCopy& textureCopy, const Extent3D
     return validTextureCopyExtent;
 }
 
-bool TextureFormatIsSnorm(wgpu::TextureFormat format) {
-    return format == wgpu::TextureFormat::RGBA8Snorm || format == wgpu::TextureFormat::RG8Snorm ||
-           format == wgpu::TextureFormat::R8Snorm;
-}
 }  // namespace
 
 CommandBuffer::CommandBuffer(CommandEncoder* encoder, const CommandBufferDescriptor* descriptor)
@@ -582,11 +578,11 @@ MaybeError CommandBuffer::Execute() {
                 const GLFormat& format = texture->GetGLFormat();
                 GLenum target = texture->GetGLTarget();
 
-                // TODO(crbug.com/dawn/667): Implement validation in WebGPU/Compat to
-                // avoid this codepath. OpenGL does not support readback from non-renderable
-                // texture formats.
+                // OpenGL does not support readback from non-renderable texture formats.
+                // Instead dawn translates CopyTextureToBuffer command to compute shader to
+                // emulation when texture format is SNORM so it is unreachable here.
                 if (formatInfo.isCompressed ||
-                    (TextureFormatIsSnorm(formatInfo.format) &&
+                    (formatInfo.IsSnorm() &&
                      GetDevice()->IsToggleEnabled(Toggle::DisableSnormRead))) {
                     UNREACHABLE();
                 }
