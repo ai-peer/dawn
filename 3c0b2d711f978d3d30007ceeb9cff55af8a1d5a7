@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cdc0469_9b3c57ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T11:52:06Z",
+      "side": 1,
+      "message": "I\u0027m almost inclined to do this before the merge target folding. Also, `Function-\u003eStartTarget` to `Function-\u003eBlock` for consistency? (I think those are the only two StartTargets?)",
+      "revId": "3c0b2d711f978d3d30007ceeb9cff55af8a1d5a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
