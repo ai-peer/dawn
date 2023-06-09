@@ -46,7 +46,6 @@ class ExecutionQueueBase {
     // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
     // make all commands look completed.
     void AssumeCommandsComplete();
-    void AssumeCommandsCompleteForTesting();
 
   protected:
     // Increment mLastSubmittedSerial when we submit the next serial
