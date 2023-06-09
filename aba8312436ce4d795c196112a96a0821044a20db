@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a46881b2_649ca265",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T18:58:44Z",
+      "side": 1,
+      "message": "lgtm w/ nits",
+      "revId": "aba8312436ce4d795c196112a96a0821044a20db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f918ffb_d1b2bb19",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T18:58:44Z",
+      "side": 1,
+      "message": "Did this remove the change James made which allowed `Return(nullptr)` to do the right thing?",
+      "revId": "aba8312436ce4d795c196112a96a0821044a20db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795feb7e_0230de22",
+        "filename": "src/tint/ir/load.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T18:58:44Z",
+      "side": 1,
+      "message": "Probably need a `TINT_ASSERT_OR_RETURN(IR, from-\u003eType())` before this line in case the `from` has a `nullptr` type",
+      "revId": "aba8312436ce4d795c196112a96a0821044a20db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
