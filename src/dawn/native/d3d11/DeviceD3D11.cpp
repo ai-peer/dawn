@@ -152,7 +152,7 @@ CommandRecordingContext* Device::GetPendingCommandContext(Device::SubmitMode sub
 
 MaybeError Device::TickImpl() {
     // Perform cleanup operations to free unused objects
-    [[maybe_unused]] ExecutionSerial completedSerial = GetCompletedCommandSerial();
+    [[maybe_unused]] ExecutionSerial completedSerial = GetQueue()->GetCompletedCommandSerial();
 
     if (mPendingCommands.IsOpen() && mPendingCommands.NeedsSubmit()) {
         DAWN_TRY(ExecutePendingCommandContext());
@@ -165,7 +165,7 @@ MaybeError Device::TickImpl() {
 }
 
 MaybeError Device::NextSerial() {
-    IncrementLastSubmittedCommandSerial();
+    GetQueue()->IncrementLastSubmittedCommandSerial();
 
     TRACE_EVENT1(GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
@@ -180,12 +180,12 @@ MaybeError Device::NextSerial() {
 }
 
 MaybeError Device::WaitForSerial(ExecutionSerial serial) {
-    DAWN_TRY(CheckPassedSerials());
-    if (GetCompletedCommandSerial() < serial) {
+    DAWN_TRY(GetQueue()->CheckPassedSerials());
+    if (GetQueue()->GetCompletedCommandSerial() < serial) {
         DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(uint64_t(serial), mFenceEvent),
                               "D3D11 set event on completion"));
         WaitForSingleObject(mFenceEvent, INFINITE);
-        DAWN_TRY(CheckPassedSerials());
+        DAWN_TRY(GetQueue()->CheckPassedSerials());
     }
     return {};
 }
@@ -201,7 +201,7 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
         return DAWN_DEVICE_LOST_ERROR("Device lost");
     }
 
-    if (completedSerial <= GetCompletedCommandSerial()) {
+    if (completedSerial <= GetQueue()->GetCompletedCommandSerial()) {
         return ExecutionSerial(0);
     }
 
