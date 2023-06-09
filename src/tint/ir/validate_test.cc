@@ -52,21 +52,7 @@ TEST_F(IR_ValidateTest, RootBlock_NonVar) {
 
 :2:1 note: In block
 %b1 = block {
-^^^^^^^^^^^^^
-  loop [b: %b2]
-^^^^^^^^^^^^^^^
-    # Body block
-^^^^^^^^^^^^^^^^
-    %b2 = block {
-^^^^^^^^^^^^^^^^^
-      continue %b3
-^^^^^^^^^^^^^^^^^^
-    }
-^^^^^
-
-
-}
-^
+^^^^^^^^^^^
 
 note: # Disassembly
 # Root block
@@ -98,11 +84,9 @@ TEST_F(IR_ValidateTest, Block_NoBranchAtEnd) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), R"(:2:1 error: block: does not end in a branch
+    EXPECT_EQ(res.Failure().str(), R"(:2:3 error: block: does not end in a branch
   %b1 = block {
-^^^^^^^^^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
@@ -157,15 +141,9 @@ TEST_F(IR_ValidateTest, Access_NegativeIndex) {
     %3:f32 = access %2, -1i
                         ^^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:f32 = access %2, -1i
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func(%2:vec3<f32>):void -> %b1 {
@@ -193,15 +171,9 @@ TEST_F(IR_ValidateTest, Access_OOB_Index_Value) {
     %3:f32 = access %2, 1u, 3u
                             ^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:f32 = access %2, 1u, 3u
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 :3:29 note: acceptable range: [0..1]
     %3:f32 = access %2, 1u, 3u
@@ -235,15 +207,9 @@ TEST_F(IR_ValidateTest, Access_OOB_Index_Ptr) {
     %3:ptr<private, f32, read_write> = access %2, 1u, 3u
                                                       ^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:ptr<private, f32, read_write> = access %2, 1u, 3u
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 :3:55 note: acceptable range: [0..1]
     %3:ptr<private, f32, read_write> = access %2, 1u, 3u
@@ -274,15 +240,9 @@ TEST_F(IR_ValidateTest, Access_StaticallyUnindexableType_Value) {
     %3:f32 = access %2, 1u
                         ^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:f32 = access %2, 1u
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func(%2:f32):void -> %b1 {
@@ -312,15 +272,9 @@ TEST_F(IR_ValidateTest, Access_StaticallyUnindexableType_Ptr) {
     %3:ptr<private, f32, read_write> = access %2, 1u
                                                   ^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:ptr<private, f32, read_write> = access %2, 1u
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func(%2:ptr<private, f32, read_write>):void -> %b1 {
@@ -357,15 +311,9 @@ TEST_F(IR_ValidateTest, Access_DynamicallyUnindexableType_Value) {
     %4:i32 = access %2, %3
                         ^^
 
-:7:1 note: In block
+:7:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %4:i32 = access %2, %3
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 tint_symbol_2 = struct @align(4) {
@@ -408,15 +356,9 @@ TEST_F(IR_ValidateTest, Access_DynamicallyUnindexableType_Ptr) {
     %4:i32 = access %2, %3
                         ^^
 
-:7:1 note: In block
+:7:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %4:i32 = access %2, %3
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 tint_symbol_2 = struct @align(4) {
@@ -450,15 +392,9 @@ TEST_F(IR_ValidateTest, Access_Incorrect_Type_Value_Value) {
     %3:i32 = access %2, 1u, 1u
              ^^^^^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:i32 = access %2, 1u, 1u
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func(%2:mat3x2<f32>):void -> %b1 {
@@ -490,15 +426,9 @@ TEST_F(IR_ValidateTest, Access_Incorrect_Type_Ptr_Ptr) {
     %3:ptr<private, i32, read_write> = access %2, 1u, 1u
                                        ^^^^^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:ptr<private, i32, read_write> = access %2, 1u, 1u
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func(%2:ptr<private, mat3x2<f32>, read_write>):void -> %b1 {
@@ -529,15 +459,9 @@ TEST_F(IR_ValidateTest, Access_Incorrect_Type_Ptr_Value) {
     %3:f32 = access %2, 1u, 1u
              ^^^^^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    %3:f32 = access %2, 1u, 1u
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func(%2:ptr<private, mat3x2<f32>, read_write>):void -> %b1 {
@@ -560,15 +484,9 @@ TEST_F(IR_ValidateTest, Block_BranchInMiddle) {
     ret
     ^^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    ret
-^^^^^^^
-    ret
-^^^^^^^
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
@@ -596,33 +514,9 @@ TEST_F(IR_ValidateTest, If_ConditionIsBool) {
     if 1i [t: %b2, f: %b3]
        ^^
 
-:2:1 note: In block
+:2:3 note: In block
   %b1 = block {
-^^^^^^^^^^^^^^^
-    if 1i [t: %b2, f: %b3]
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-      # True block
-^^^^^^^^^^^^^^^^^^
-      %b2 = block {
-^^^^^^^^^^^^^^^^^^^
-        ret
-^^^^^^^^^^^
-      }
-^^^^^^^
-
-
-      # False block
-^^^^^^^^^^^^^^^^^^^
-      %b3 = block {
-^^^^^^^^^^^^^^^^^^^
-        ret
-^^^^^^^^^^^
-      }
-^^^^^^^
-
-
-  }
-^^^
+  ^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
