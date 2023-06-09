@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7465e48c_25dcbed3",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T14:04:17Z",
+      "side": 0,
+      "message": "I know Dan was keen on having the lazy-create aspect in the method name, but it seems like we\u0027re moving to a model where we always create the block, but empty blocks are ignored.",
+      "range": {
+        "startLine": 412,
+        "startChar": 15,
+        "endLine": 412,
+        "endChar": 38
+      },
+      "revId": "63eed51dfc60a32cbbffcb62a2ff8b7f00f47735",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
