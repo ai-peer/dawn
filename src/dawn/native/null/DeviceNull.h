@@ -103,6 +103,7 @@ class Device final : public DeviceBase {
 
     void AddPendingOperation(std::unique_ptr<PendingOperation> operation);
     MaybeError SubmitPendingOperations();
+    void ForgetPendingOperations();
 
     MaybeError CopyFromStagingToBufferImpl(BufferBase* source,
                                            uint64_t sourceOffset,
@@ -121,8 +122,6 @@ class Device final : public DeviceBase {
     uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
     float GetTimestampPeriodInNS() const override;
-
-    void ForceEventualFlushOfCommands() override;
 
   private:
     using DeviceBase::DeviceBase;
@@ -158,11 +157,7 @@ class Device final : public DeviceBase {
     ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsageImpl(
         const Surface* surface) const override;
 
-    ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
-
     void DestroyImpl() override;
-    MaybeError WaitForIdleForDestruction() override;
-    bool HasPendingCommands() const override;
 
     std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
 
@@ -272,6 +267,10 @@ class Queue final : public QueueBase {
                                uint64_t bufferOffset,
                                const void* data,
                                size_t size) override;
+    ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
+    void ForceEventualFlushOfCommands() override;
+    bool HasPendingCommands() const override;
+    MaybeError WaitForIdleForDestruction() override;
 };
 
 class ComputePipeline final : public ComputePipelineBase {

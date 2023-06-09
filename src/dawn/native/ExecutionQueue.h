@@ -47,7 +47,6 @@ class ExecutionQueueBase {
     // make all commands look completed.
     void AssumeCommandsComplete();
 
-  protected:
     // Increment mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
 
