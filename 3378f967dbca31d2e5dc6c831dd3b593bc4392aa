@@ -16,6 +16,23 @@
       "message": "This is part of changes in the reverted https://dawn-review.googlesource.com/c/dawn/+/136227\nHowever it really should be fixed. Shall we have a try to land it? Hopefully it won\u0027t break the bots.",
       "revId": "3378f967dbca31d2e5dc6c831dd3b593bc4392aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05de202a_a9b2d1ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-09T18:24:28Z",
+      "side": 1,
+      "message": "I\u0027ll land this and watch the bots to check for stability",
+      "revId": "3378f967dbca31d2e5dc6c831dd3b593bc4392aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
