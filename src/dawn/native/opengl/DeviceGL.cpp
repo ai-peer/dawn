@@ -268,7 +268,7 @@ void Device::SubmitFenceSync() {
 
     const OpenGLFunctions& gl = GetGL();
     GLsync sync = gl.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
-    IncrementLastSubmittedCommandSerial();
+    GetQueue()->IncrementLastSubmittedCommandSerial();
     mFencesInFlight.emplace(sync, GetLastSubmittedCommandSerial());
 
     // Reset mHasPendingCommands after GetGL() which will set mHasPendingCommands to true.
@@ -363,7 +363,7 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
 
         mFencesInFlight.pop();
 
-        ASSERT(fenceSerial > GetCompletedCommandSerial());
+        ASSERT(fenceSerial > GetQueue()->GetCompletedCommandSerial());
     }
     return fenceSerial;
 }
@@ -390,7 +390,7 @@ void Device::DestroyImpl() {
 MaybeError Device::WaitForIdleForDestruction() {
     const OpenGLFunctions& gl = GetGL();
     gl.Finish();
-    DAWN_TRY(CheckPassedSerials());
+    DAWN_TRY(GetQueue()->CheckPassedSerials());
     ASSERT(mFencesInFlight.empty());
 
     return {};
