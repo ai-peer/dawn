@@ -16,6 +16,24 @@
       "message": "This is kinda broken (not a new issue with this change though, so no action needed here).\n\nThe function isn\u0027t currently stored as an operand on the return instruction. If we want return statements to be considered users of the function, then we should `AddOperand(func_)` to add it properly. Otherwise, we should remove this `AddUsage()`.",
       "revId": "ff0827c1a8991f6ce1f51aaf9af02b48a5f80674",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0426f781_139e68e1",
+        "filename": "src/tint/ir/return.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T15:51:09Z",
+      "side": 1,
+      "message": "Filed: https://bugs.chromium.org/p/tint/issues/detail?id\u003d1962",
+      "parentUuid": "e8ff351a_d8b421bf",
+      "revId": "ff0827c1a8991f6ce1f51aaf9af02b48a5f80674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
