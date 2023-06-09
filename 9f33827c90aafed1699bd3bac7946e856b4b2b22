@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "9f33827c90aafed1699bd3bac7946e856b4b2b22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02811d70_85716dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:25:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9f33827c90aafed1699bd3bac7946e856b4b2b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "def86082_bb3d167c",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:25:46Z",
+      "side": 1,
+      "message": "nit: we could avoid the need to use an std optional by doing:\n\n```\n    limits-\u003ev1.maxBufferSize \u003d kAssumedMaxBufferSize;\n    if (mDeviceInfo.HasExt(DeviceExt::Maintenance4)) {\n        limits-\u003ev1.maxBufferSize \u003d mDeviceInfo.propertiesMaintenance4.maxBufferSize;\n    } else if (mDeviceInfo.HasExt(DeviceExt::Maintenance3)) {\n        limits-\u003ev1.maxBufferSize \u003d mDeviceInfo.propertiesMaintenance3.maxMemoryAllocationSize;\n    }\n    \n    if (limits-\u003ev1.maxBufferSize \u003c baseLimits.v1.maxBufferSize) {\n        return DAWN_INTERNAL_ERROR(\"Insufficient Vulkan maxBufferSize limit\");\n    }\n```",
+      "revId": "9f33827c90aafed1699bd3bac7946e856b4b2b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
