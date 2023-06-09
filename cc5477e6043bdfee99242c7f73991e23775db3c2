@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d59ee2_32130076",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e4890ab_1a888670",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a61aecfc_334f91b7",
@@ -69,6 +87,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba5a35ba_526d5922",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a61aecfc_334f91b7",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d2876e_c0ed58ac",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Would it be alright to have in a follow up? Along with the microbenchmarks?",
+      "parentUuid": "277a7b4c_e9fe89d5",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b068ea9_7ae06e5e",
@@ -82,6 +136,30 @@
       "writtenOn": "2023-06-09T18:05:55Z",
       "side": 1,
       "message": "that means that Erase can no longer assert that the object-to-be-erased is in the cache. since it may be removed here instead",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 91
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1edbece1_67c83364",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Yup! That\u0027s why I removed the asserts in Device.cpp (and changed the type signature for `Erase`.",
+      "parentUuid": "9b068ea9_7ae06e5e",
       "range": {
         "startLine": 42,
         "startChar": 15,
@@ -115,6 +193,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76efe2b5_058064d1",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Updated the comment, but no, this case is to protect against racing destruction when the entry in the cache hit refcount\u003d0 but hasn\u0027t been removed from the cache yet. If two threads both fail to `Find`, only 1 of the two will see `inserted \u003d\u003d true` because we acquire the cache lock at the start of `Insert`.",
+      "parentUuid": "3304b65e_f19a7e9b",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6cf9e9a_10b10a10",
@@ -128,6 +230,30 @@
       "writtenOn": "2023-06-09T18:05:55Z",
       "side": 1,
       "message": "I think this ASSERT is now contradictory with the body of the function which checks if the refcount becomes 0.\n\nalso though, I don\u0027t think we want to pay for acquire/release semantics for normal ref increment operations.\n\nCould we have a version that is exclusively called by the cache so it is only more expensive on cache lookups?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 45
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3992d231_02255454",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6cf9e9a_10b10a10",
       "range": {
         "startLine": 49,
         "startChar": 0,
@@ -161,6 +287,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3789096_02b171a4",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "I think it\u0027s fine actually because all cached objects call `Device::Uncache*` (which calls the locked `ContentLessObjectCache::Erase`) in their `Destroy` function.",
+      "parentUuid": "6e493e45_37d0a748",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94f43bbc_3880c11a",
@@ -174,6 +324,30 @@
       "writtenOn": "2023-06-09T18:05:55Z",
       "side": 1,
       "message": "does it need to be private and do we need the friend class?\n\nI think it\u0027d be OK if it were public with some explicit name like CopyRefIfCountNotZero.\n\nAlso, the syntax `static_cast\u003cRefCountedT*\u003e(*it)-\u003etemplate GetRef\u003cRefCountedT\u003e();` is a bit clunky. I think we should be able to do something like `CopyRefIfCountNotZero(static_cast\u003cRefCountedT*\u003e(*it))`.\n\n```\nfriend Ref\u003cT\u003e CopyRefIfCountNotZero(T* obj) {\n  if (!mRefCount.IncrementIfNotZero()) {\n    return nullptr;\n  }\n  return AcquireRef(obj);\n}\n```",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89cd1740_b4c58e95",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94f43bbc_3880c11a",
       "range": {
         "startLine": 86,
         "startChar": 0,
@@ -207,6 +381,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e514a1bc_e10619ac",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f5ce30_3033146b",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 18
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "492fa110_91a67778",
@@ -220,6 +418,30 @@
       "writtenOn": "2023-06-09T18:05:55Z",
       "side": 1,
       "message": "here and the others - I think we\u0027re missing the case where two insertations race, and we only want to return the one that is inside the cache.\n\nSo I think this code should be:\n```suggestion\n    Ref\u003cBindGroupLayoutBase\u003e result \u003d mCaches-\u003ebindGroupLayouts.Find(\u0026blueprint);\n    if (result !\u003d nullptr) {\n        return std::move(result);\n    }\n    DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));\n    result-\u003eSetContentHash(blueprintHash);\n    bool inserted;\n    [result, inserted] \u003d mCaches-\u003ebindGroupLayouts.Insert(result.Get());\n    if (inserted) {\n        result-\u003eSetIsCachedReference();\n    }\n    return std::move(result);\n```",
+      "range": {
+        "startLine": 820,
+        "startChar": 0,
+        "endLine": 828,
+        "endChar": 29
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fbd5a4_ab7277b8",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T22:37:36Z",
+      "side": 1,
+      "message": "Added helper for this sort of thing. Thanks for the catch!",
+      "parentUuid": "492fa110_91a67778",
       "range": {
         "startLine": 820,
         "startChar": 0,
