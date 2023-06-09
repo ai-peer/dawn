@@ -14,6 +14,7 @@
 
 #include "dawn/native/BlitDepthStencilToBuffer.h"
 
+#include <string_view>
 #include <utility>
 
 #include "dawn/common/Assert.h"
@@ -34,14 +35,94 @@ namespace {
 constexpr uint32_t kWorkgroupSizeX = 8;
 constexpr uint32_t kWorkgroupSizeY = 8;
 
-constexpr char kBlitDepth32FloatToBufferShaders[] = R"(
+// Helper to join constexpr std::string_view
+template <std::string_view const&... Strs>
+struct join {
+    // Join all strings into a single std::array of chars
+    static constexpr auto impl() noexcept {
+        constexpr std::size_t len = (Strs.size() + ... + 0);
+        std::array<char, len + 1> a{};
+        auto append = [i = 0, &a](auto const& s) mutable {
+            for (auto c : s) {
+                a[i++] = c;
+            }
+        };
+        (append(Strs), ...);
+        a[len] = 0;
+        return a;
+    }
+    // Give the joined string static storage
+    static constexpr auto arr = impl();
+    // View as a std::string_view
+    static constexpr std::string_view value{arr.data(), arr.size() - 1};
+};
+// Helper to get the value out
+template <std::string_view const&... Strs>
+static constexpr auto join_v = join<Strs...>::value;
+
+constexpr std::string_view kSnormTexture = R"(
+// fn packResult(v: vec4f) -> u32 {
+//     return pack4x8snorm(v);
+// }
+fn textureLoadGeneral(src_tex: texture_2d_array<f32>, coords: vec3u, level: u32) -> vec4<f32> {
+    return textureLoad(src_tex, coords.xy, coords.z, level);
+}
+@group(0) @binding(0) var src_tex : texture_2d_array<f32>;
+@group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
+)";
+
+constexpr std::string_view kSnormTexture3D = R"(
+fn textureLoadGeneral(src_tex: texture_3d<f32>, coords: vec3u, level: u32) -> vec4<f32> {
+    return textureLoad(src_tex, coords, level);
+}
+@group(0) @binding(0) var src_tex : texture_3d<f32>;
+@group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
+)";
+
+// constexpr std::string_view kSnormVector = R"(
+// // Storing snorm8 texel values
+// // later called by pack4x8snorm to convert to u32.
+// var v: vec4<f32>;
+// )";
+
+constexpr std::string_view kStencilTexture = R"(
+// fn packResult(values: vec4u) -> u32 {
+//     let r = values & vec4u(0xff);
+//     return (r[0]) |
+//     (r[1] << 8) |
+//     (r[2] << 16) |
+//     (r[3] << 24);
+// }
+@group(0) @binding(0) var src_tex : texture_2d_array<u32>;
+@group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
+)";
+
+// constexpr std::string_view kStencilVector = R"(
+// // Storing stencil8 texel values
+// // later called by packResult to convert to u32.
+// var v: vec4<u32>;
+// )";
+
+constexpr std::string_view kDepthTexture = R"(
+// fn packResult(v: vec2f) -> u32 {
+//     return pack2x16unorm(v);
+// }
 @group(0) @binding(0) var src_tex : texture_depth_2d_array;
+@group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
+)";
+
+constexpr std::string_view kDepth23FloatTexture = R"(
+@group(0) @binding(0) var src_tex : texture_depth_2d_array;
+// Can directly use f32 for the buffer array data type
 @group(0) @binding(1) var<storage, read_write> dst_buf : array<f32>;
+)";
+
+constexpr std::string_view kCommon = R"(
 
 struct Params {
     // copyExtent
     srcOrigin: vec3u,
-    pad0: u32,
+    packTexelCount: u32,
     srcExtent: vec3u,
     pad1: u32,
 
@@ -56,18 +137,114 @@ struct Params {
 override workgroupSizeX: u32;
 override workgroupSizeY: u32;
 
-// Load the depth value and write to storage buffer.
-@compute @workgroup_size(workgroupSizeX, workgroupSizeY, 1) fn blit_depth_to_buffer(@builtin(global_invocation_id) id : vec3u) {
+// Load the snorm value and write to storage buffer.
+// Each thread is responsible for reading 1 byte and packing them into a 4-byte u32.
+@compute @workgroup_size(workgroupSizeX, workgroupSizeY, 1) fn main
+(@builtin(global_invocation_id) id : vec3u) {
     let srcBoundary = params.srcOrigin + params.srcExtent;
-    let coord = id + params.srcOrigin;
-    if (any(coord >= srcBoundary)) {
+
+    let coord0 = vec3u(id.x * params.packTexelCount, id.y, id.z) + params.srcOrigin;
+
+    if (any(coord0 >= srcBoundary)) {
         return;
     }
 
     let dstOffset = params.indicesOffset + id.x + id.y * params.indicesPerRow + id.z * params.indicesPerRow * params.rowsPerImage;
-    dst_buf[dstOffset] = textureLoad(src_tex, coord.xy, coord.z, 0);
-}
+)";
 
+constexpr std::string_view kCommonEnd = R"(
+    dst_buf[dstOffset] = result;
+}
+)";
+
+constexpr std::string_view kPackStencil8ToU32 = R"(
+    // Storing stencil8 texel values
+    var result: u32 = 0xff & textureLoad(src_tex, coord0.xy, coord0.z, 0).r;
+
+    let coord4 = coord0 + vec3u(4, 0, 0);
+    if (coord4.x <= srcBoundary.x) {
+        // All 4 texels for this thread are within texture bounds.
+        for (var i = 1u; i < 4u; i += 1u) {
+            let coordi = coord0 + vec3u(i, 0, 0);
+            let ri = 0xff & textureLoad(src_tex, coordi.xy, coordi.z, 0).r;
+            result |= ri << (i * 8u);
+        }
+    } else {
+        // Otherwise, srcExtent.x is not a multiply of 4 and this thread is at right edge of the texture
+        // To preserve the original buffer content, we need to read from the buffer and pack it together with other values.
+        let original: u32 = dst_buf[dstOffset];
+        result |= original & 0xffffff00;
+
+        for (var i = 1u; i < 4u; i += 1u) {
+            let coordi = coord0 + vec3u(i, 0, 0);
+            if (coordi.x >= srcBoundary.x) {
+                break;
+            }
+            let ri = 0xff & textureLoad(src_tex, coordi.xy, coordi.z, 0).r;
+            result |= ri << (i * 8u);
+        }
+    }
+)";
+
+constexpr std::string_view kPackR8UnormToU32 = R"(
+    // Result bits to store into dst_buf
+    var result: u32 = 0u;
+    // Storing snorm8 texel values
+    // later called by pack4x8snorm to convert to u32.
+    var v: vec4<f32>;
+    v[0] = textureLoadGeneral(src_tex, coord0, 0).r;
+
+    let coord4 = coord0 + vec3u(4, 0, 0);
+    if (coord4.x <= srcBoundary.x) {
+        // All 4 texels for this thread are within texture bounds.
+        for (var i = 1u; i < 4u; i += 1u) {
+            let coordi = coord0 + vec3u(i, 0, 0);
+            v[i] = textureLoadGeneral(src_tex, coordi, 0).r;
+        }
+        result = pack4x8snorm(v);
+    } else {
+        // Otherwise, srcExtent.x is not a multiply of 4 and this thread is at right edge of the texture
+        // To preserve the original buffer content, we need to read from the buffer and pack it together with other values.
+        let original: u32 = dst_buf[dstOffset];
+
+        var i = 1u;
+        for (; i < 4u; i += 1u) {
+            let coordi = coord0 + vec3u(i, 0, 0);
+            if (coordi.x >= srcBoundary.x) {
+                break;
+            }
+            v[i] = textureLoadGeneral(src_tex, coordi, 0).r;
+        }
+        let mask: u32 = 0xffffffffu << (i * 8u);
+
+        result = (original & mask) | (pack4x8snorm(v) & ~mask);
+    }
+)";
+
+constexpr std::string_view kPackRG8UnormToU32 = R"(
+    // Result bits to store into dst_buf
+    var result: u32 = 0u;
+    // Storing snorm8 texel values
+    // later called by pack4x8snorm to convert to u32.
+    var v: vec4<f32>;
+    let texel0 = textureLoadGeneral(src_tex, coord0, 0).rg;
+    v[0] = texel0.r;
+    v[1] = texel0.g;
+
+    let coord1 = coord0 + vec3u(1, 0, 0);
+    if (coord1.x < srcBoundary.x) {
+        // Make sure coord1 is still within the copy boundary.
+        let texel1 = textureLoadGeneral(src_tex, coord1, 0).rg;
+        v[2] = texel1.r;
+        v[3] = texel1.g;
+        result = pack4x8snorm(v);
+    } else {
+        // Otherwise, srcExtent.x is not a multiply of 2 and this thread is at right edge of the texture
+        // To preserve the original buffer content, we need to read from the buffer and pack it together with other values.
+        let original: u32 = dst_buf[dstOffset];
+        let mask = 0xffff0000u;
+        result = (original & mask) | (pack4x8snorm(v) & ~mask);
+    }
 )";
 
 // ShaderF16 extension is only enabled by GL_AMD_gpu_shader_half_float for GL
@@ -76,57 +253,19 @@ override workgroupSizeY: u32;
 // If we have 2-byte scalar type (f16, u16) it can be a bit easier when writing to the storage
 // buffer.
 
-constexpr char kBlitDepth16UnormToBufferShaders[] = R"(
-@group(0) @binding(0) var src_tex : texture_depth_2d_array;
-@group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
+constexpr std::string_view kPackDepth16UnormToU32 = R"(
+    // Result bits to store into dst_buf
+    var result: u32 = 0u;
+    // Storing depth16unorm texel values
+    // later called by pack2x16unorm to convert to u32.
+    var v: vec2<f32>;
+    v[0] = textureLoad(src_tex, coord0.xy, coord0.z, 0);
 
-struct Params {
-    // copyExtent
-    srcOrigin: vec3u,
-    pad0: u32,
-    srcExtent: vec3u,
-    pad1: u32,
-
-    // GPUImageDataLayout
-    indicesPerRow: u32,
-    rowsPerImage: u32,
-    indicesOffset: u32,
-};
-
-@group(0) @binding(2) var<uniform> params : Params;
-
-// Range of v is [0.0, 1.0]
-fn getUnorm16Bits(v: f32) -> u32 {
-    var bits: u32 = u32(v * 65535.0);
-    return bits;
-}
-
-override workgroupSizeX: u32;
-override workgroupSizeY: u32;
-
-// Load the depth value and write to storage buffer.
-// Each thread is responsible for reading 2 u16 values and packing them into 1 u32 value.
-@compute @workgroup_size(workgroupSizeX, workgroupSizeY, 1) fn blit_depth_to_buffer(@builtin(global_invocation_id) id : vec3u) {
-    let srcBoundary = params.srcOrigin + params.srcExtent;
-    let coord0 = vec3u(id.x * 2, id.y, id.z) + params.srcOrigin;
-
-    if (any(coord0 >= srcBoundary)) {
-        return;
-    }
-
-    let v0: f32 = textureLoad(src_tex, coord0.xy, coord0.z, 0);
-    let r0: u32 = getUnorm16Bits(v0);
-
-    let dstOffset = params.indicesOffset + id.x + id.y * params.indicesPerRow + id.z * params.indicesPerRow * params.rowsPerImage;
-
-    var result: u32 = r0;
     let coord1 = coord0 + vec3u(1, 0, 0);
     if (coord1.x < srcBoundary.x) {
-        // Make sure coord1 is still within the copy boundary
-        // then read and write this value.
-        let v1: f32 = textureLoad(src_tex, coord1.xy, coord1.z, 0);
-        let r1: u32 = getUnorm16Bits(v1);
-        result += (r1 << 16);
+        // Make sure coord1 is still within the copy boundary.
+        v[1] = textureLoad(src_tex, coord1.xy, coord1.z, 0);
+        result = pack2x16unorm(v);
     } else {
         // Otherwise, srcExtent.x is an odd number and this thread is at right edge of the texture
         // To preserve the original buffer content, we need to read from the buffer and pack it
@@ -134,112 +273,125 @@ override workgroupSizeY: u32;
         // TODO(dawn:1782): profiling against making a separate pass for this edge case
         // as it require reading from dst_buf.
         let original: u32 = dst_buf[dstOffset];
-        result += original & 0xffff0000;
+        let mask = 0xffff0000u;
+        result = (original & mask) | (pack2x16unorm(v) & ~mask);
     }
+)";
 
-    dst_buf[dstOffset] = result;
+constexpr std::string_view kPackRGBA8UnormToU32 = R"(
+    // Storing snorm8 texel values
+    // later called by pack4x8snorm to convert to u32.
+    var v: vec4<f32>;
+    let texel0 = textureLoadGeneral(src_tex, coord0, 0);
+    v[0] = texel0.r;
+    v[1] = texel0.g;
+    v[2] = texel0.b;
+    v[3] = texel0.a;
+
+    let result: u32 = pack4x8snorm(v);
+)";
+
+constexpr std::string_view kLoadDepth32Float = R"(
+    dst_buf[dstOffset] = textureLoad(src_tex, coord0.xy, coord0.z, 0);
 }
 )";
 
-constexpr char kBlitStencil8ToBufferShaders[] = R"(
-@group(0) @binding(0) var src_tex : texture_2d_array<u32>;
-@group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
+constexpr std::string_view kBlitR8Unorm =
+    join_v<kSnormTexture, kCommon, kPackR8UnormToU32, kCommonEnd>;
+constexpr std::string_view kBlitRG8Unorm =
+    join_v<kSnormTexture, kCommon, kPackRG8UnormToU32, kCommonEnd>;
+constexpr std::string_view kBlitRGBA8Unorm =
+    join_v<kSnormTexture, kCommon, kPackRGBA8UnormToU32, kCommonEnd>;
 
-struct Params {
-    // copyExtent
-    srcOrigin: vec3u,
-    pad0: u32,
-    srcExtent: vec3u,
-    pad1: u32,
+constexpr std::string_view kBlitR8Unorm3D =
+    join_v<kSnormTexture3D, kCommon, kPackR8UnormToU32, kCommonEnd>;
+constexpr std::string_view kBlitRG8Unorm3D =
+    join_v<kSnormTexture3D, kCommon, kPackRG8UnormToU32, kCommonEnd>;
+constexpr std::string_view kBlitRGBA8Unorm3D =
+    join_v<kSnormTexture3D, kCommon, kPackRGBA8UnormToU32, kCommonEnd>;
 
-    // GPUImageDataLayout
-    indicesPerRow: u32,
-    rowsPerImage: u32,
-    indicesOffset: u32,
-};
+constexpr std::string_view kBlitStencil8 =
+    join_v<kStencilTexture, kCommon, kPackStencil8ToU32, kCommonEnd>;
 
-@group(0) @binding(2) var<uniform> params : Params;
+constexpr std::string_view kBlitDepth16Unorm =
+    join_v<kDepthTexture, kCommon, kPackDepth16UnormToU32, kCommonEnd>;
+constexpr std::string_view kBlitDepth32Float =
+    join_v<kDepth23FloatTexture, kCommon, kLoadDepth32Float>;
 
-override workgroupSizeX: u32;
-override workgroupSizeY: u32;
+// constexpr std::string_view kBlitR8Unorm = join_v<kSnormTexture, kCommon, kSnormVector,
+// kPack4Into1, kCommonEnd>; constexpr std::string_view kBlitRG8Unorm = join_v<kSnormTexture,
+// kCommon, kSnormVector, kPack2Into1, kCommonEnd>; constexpr std::string_view kBlitRGBA8Unorm =
+// join_v<kSnormTexture, kCommon, kSnormVector, kPack1Into1, kCommonEnd>;
 
-// Load the stencil value and write to storage buffer.
-// Each thread is responsible for reading 4 u8 values and packing them into 1 u32 value.
-@compute @workgroup_size(workgroupSizeX, workgroupSizeY, 1) fn blit_stencil_to_buffer(@builtin(global_invocation_id) id : vec3u) {
-    let srcBoundary = params.srcOrigin + params.srcExtent;
+// constexpr std::string_view kBlitStencil8 = join_v<kStencilTexture, kCommon, kStencilVector,
+// kPack4Into1, kCommonEnd>;
 
-    let coord0 = vec3u(id.x * 4, id.y, id.z) + params.srcOrigin;
+ResultOrError<Ref<ComputePipelineBase>> GetOrCreateTextureToBufferPipeline(DeviceBase* device,
+                                                                           const TextureCopy& src) {
+    // InternalPipelineStore* store = device->GetInternalPipelineStore();
+    // auto iter = store->blitTextureToBufferComputePipelines.find(format.format);
+    // if (iter != store->blitTextureToBufferComputePipelines.end()) {
+    //     return iter->second;
+    // }
 
-    if (any(coord0 >= srcBoundary)) {
-        return;
-    }
-
-    let r0: u32 = 0x000000ff & textureLoad(src_tex, coord0.xy, coord0.z, 0).r;
-
-    let dstOffset = params.indicesOffset + id.x + id.y * params.indicesPerRow + id.z * params.indicesPerRow * params.rowsPerImage;
-
-    var result: u32 = r0;
-
-    let coord4 = coord0 + vec3u(4, 0, 0);
-    if (coord4.x <= srcBoundary.x) {
-        // All 4 texels for this thread are within texture bounds.
-        for (var i = 1u; i < 4u; i = i + 1u) {
-            let coordi = coord0 + vec3u(i, 0, 0);
-            let ri: u32 = 0x000000ff & textureLoad(src_tex, coordi.xy, coordi.z, 0).r;
-            result += ri << (i * 8u);
-        }
-    } else {
-        // Otherwise, srcExtent.x is not a multiply of 4 and this thread is at right edge of the texture
-        // To preserve the original buffer content, we need to read from the buffer and pack it together with other values.
-        let original: u32 = dst_buf[dstOffset];
-        result += original & 0xffffff00;
-
-        for (var i = 1u; i < 4u; i = i + 1u) {
-            let coordi = coord0 + vec3u(i, 0, 0);
-            if (coordi.x >= srcBoundary.x) {
-                break;
-            }
-            let ri: u32 = 0x000000ff & textureLoad(src_tex, coordi.xy, coordi.z, 0).r;
-            result += ri << (i * 8u);
-        }
-    }
-
-    dst_buf[dstOffset] = result;
-}
-)";
-
-ResultOrError<Ref<ComputePipelineBase>> CreateDepthBlitComputePipeline(DeviceBase* device,
-                                                                       InternalPipelineStore* store,
-                                                                       wgpu::TextureFormat format) {
     ShaderModuleWGSLDescriptor wgslDesc = {};
     ShaderModuleDescriptor shaderModuleDesc = {};
     shaderModuleDesc.nextInChain = &wgslDesc;
-    switch (format) {
+
+    const Format& format = src.texture->GetFormat();
+    wgpu::TextureDimension dimension = src.texture->GetDimension();
+    bool is3D = dimension == wgpu::TextureDimension::e3D;
+
+    wgpu::TextureSampleType textureSampleType;
+    switch (format.format) {
+        case wgpu::TextureFormat::R8Snorm:
+            wgslDesc.code = is3D ? kBlitR8Unorm3D.data() : kBlitR8Unorm.data();
+            textureSampleType = wgpu::TextureSampleType::Float;
+            break;
+        case wgpu::TextureFormat::RG8Snorm:
+            wgslDesc.code = is3D ? kBlitRG8Unorm3D.data() : kBlitRG8Unorm.data();
+            textureSampleType = wgpu::TextureSampleType::Float;
+            break;
+        case wgpu::TextureFormat::RGBA8Snorm:
+            wgslDesc.code = is3D ? kBlitRGBA8Unorm3D.data() : kBlitRGBA8Unorm.data();
+            textureSampleType = wgpu::TextureSampleType::Float;
+            break;
         case wgpu::TextureFormat::Depth16Unorm:
-            wgslDesc.code = kBlitDepth16UnormToBufferShaders;
+            DAWN_ASSERT(!is3D);
+            wgslDesc.code = kBlitDepth16Unorm.data();
+            textureSampleType = wgpu::TextureSampleType::Depth;
             break;
         case wgpu::TextureFormat::Depth32Float:
-            wgslDesc.code = kBlitDepth32FloatToBufferShaders;
+            DAWN_ASSERT(!is3D);
+            wgslDesc.code = kBlitDepth32Float.data();
+            textureSampleType = wgpu::TextureSampleType::Depth;
+            break;
+        case wgpu::TextureFormat::Stencil8:
+        case wgpu::TextureFormat::Depth24PlusStencil8:  // aspect refine format??
+            DAWN_ASSERT(!is3D);
+            wgslDesc.code = kBlitStencil8.data();
+            textureSampleType = wgpu::TextureSampleType::Uint;
             break;
         default:
             UNREACHABLE();
-            break;
     }
 
     Ref<ShaderModuleBase> shaderModule;
     DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&shaderModuleDesc));
 
     Ref<BindGroupLayoutBase> bindGroupLayout;
-    DAWN_TRY_ASSIGN(bindGroupLayout,
-                    utils::MakeBindGroupLayout(
-                        device,
-                        {
-                            {0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Depth,
-                             wgpu::TextureViewDimension::e2DArray},
-                            {1, wgpu::ShaderStage::Compute, kInternalStorageBufferBinding},
-                            {2, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
-                        },
-                        /* allowInternalBinding */ true));
+    DAWN_TRY_ASSIGN(
+        bindGroupLayout,
+        utils::MakeBindGroupLayout(
+            device,
+            {
+                {0, wgpu::ShaderStage::Compute, textureSampleType,
+                 is3D ? wgpu::TextureViewDimension::e3D : wgpu::TextureViewDimension::e2DArray},
+                //  wgpu::TextureViewDimension::e2DArray},
+                {1, wgpu::ShaderStage::Compute, kInternalStorageBufferBinding},
+                {2, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
+            },
+            /* allowInternalBinding */ true));
 
     Ref<PipelineLayoutBase> pipelineLayout;
     DAWN_TRY_ASSIGN(pipelineLayout, utils::MakeBasicPipelineLayout(device, bindGroupLayout));
@@ -247,7 +399,7 @@ ResultOrError<Ref<ComputePipelineBase>> CreateDepthBlitComputePipeline(DeviceBas
     ComputePipelineDescriptor computePipelineDescriptor = {};
     computePipelineDescriptor.layout = pipelineLayout.Get();
     computePipelineDescriptor.compute.module = shaderModule.Get();
-    computePipelineDescriptor.compute.entryPoint = "blit_depth_to_buffer";
+    computePipelineDescriptor.compute.entryPoint = "main";
 
     constexpr std::array<ConstantEntry, 2> constants = {{
         {nullptr, "workgroupSizeX", kWorkgroupSizeX},
@@ -258,232 +410,51 @@ ResultOrError<Ref<ComputePipelineBase>> CreateDepthBlitComputePipeline(DeviceBas
 
     Ref<ComputePipelineBase> pipeline;
     DAWN_TRY_ASSIGN(pipeline, device->CreateComputePipeline(&computePipelineDescriptor));
-
-    switch (format) {
-        case wgpu::TextureFormat::Depth16Unorm:
-            store->blitDepth16UnormToBufferComputePipeline = pipeline;
-            break;
-        case wgpu::TextureFormat::Depth32Float:
-            store->blitDepth32FloatToBufferComputePipeline = pipeline;
-            break;
-        default:
-            UNREACHABLE();
-            break;
-    }
-    return pipeline;
-}
-
-ResultOrError<Ref<ComputePipelineBase>> GetOrCreateDepth32FloatToBufferPipeline(
-    DeviceBase* device) {
-    InternalPipelineStore* store = device->GetInternalPipelineStore();
-    if (store->blitDepth32FloatToBufferComputePipeline != nullptr) {
-        return store->blitDepth32FloatToBufferComputePipeline;
-    }
-
-    Ref<ComputePipelineBase> pipeline;
-    DAWN_TRY_ASSIGN(
-        pipeline, CreateDepthBlitComputePipeline(device, store, wgpu::TextureFormat::Depth32Float));
-
-    return pipeline;
-}
-
-ResultOrError<Ref<ComputePipelineBase>> GetOrCreateDepth16UnormToBufferPipeline(
-    DeviceBase* device) {
-    InternalPipelineStore* store = device->GetInternalPipelineStore();
-    if (store->blitDepth16UnormToBufferComputePipeline != nullptr) {
-        return store->blitDepth16UnormToBufferComputePipeline;
-    }
-
-    Ref<ComputePipelineBase> pipeline;
-    DAWN_TRY_ASSIGN(
-        pipeline, CreateDepthBlitComputePipeline(device, store, wgpu::TextureFormat::Depth16Unorm));
-    return pipeline;
-}
-
-ResultOrError<Ref<ComputePipelineBase>> GetOrCreateStencil8ToBufferPipeline(DeviceBase* device) {
-    InternalPipelineStore* store = device->GetInternalPipelineStore();
-    if (store->blitStencil8ToBufferComputePipeline != nullptr) {
-        return store->blitStencil8ToBufferComputePipeline;
-    }
-
-    ShaderModuleWGSLDescriptor wgslDesc = {};
-    ShaderModuleDescriptor shaderModuleDesc = {};
-    shaderModuleDesc.nextInChain = &wgslDesc;
-    wgslDesc.code = kBlitStencil8ToBufferShaders;
-
-    Ref<ShaderModuleBase> shaderModule;
-    DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&shaderModuleDesc));
-
-    Ref<BindGroupLayoutBase> bindGroupLayout;
-    DAWN_TRY_ASSIGN(bindGroupLayout,
-                    utils::MakeBindGroupLayout(
-                        device,
-                        {
-                            {0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Uint,
-                             wgpu::TextureViewDimension::e2DArray},
-                            {1, wgpu::ShaderStage::Compute, kInternalStorageBufferBinding},
-                            {2, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
-                        },
-                        /* allowInternalBinding */ true));
-
-    Ref<PipelineLayoutBase> pipelineLayout;
-    DAWN_TRY_ASSIGN(pipelineLayout, utils::MakeBasicPipelineLayout(device, bindGroupLayout));
-
-    ComputePipelineDescriptor computePipelineDescriptor = {};
-    computePipelineDescriptor.layout = pipelineLayout.Get();
-    computePipelineDescriptor.compute.module = shaderModule.Get();
-    computePipelineDescriptor.compute.entryPoint = "blit_stencil_to_buffer";
-
-    constexpr std::array<ConstantEntry, 2> constants = {{
-        {nullptr, "workgroupSizeX", kWorkgroupSizeX},
-        {nullptr, "workgroupSizeY", kWorkgroupSizeY},
-    }};
-    computePipelineDescriptor.compute.constantCount = constants.size();
-    computePipelineDescriptor.compute.constants = constants.data();
-
-    Ref<ComputePipelineBase> pipeline;
-    DAWN_TRY_ASSIGN(pipeline, device->CreateComputePipeline(&computePipelineDescriptor));
-    store->blitStencil8ToBufferComputePipeline = pipeline;
+    // store->blitTextureToBufferComputePipelines.insert({format.format, pipeline});
     return pipeline;
 }
 
 }  // anonymous namespace
 
-MaybeError BlitDepthToBuffer(DeviceBase* device,
-                             CommandEncoder* commandEncoder,
-                             const TextureCopy& src,
-                             const BufferCopy& dst,
-                             const Extent3D& copyExtent) {
-    const Format& format = src.texture->GetFormat();
-
-    Ref<BufferBase> destinationBuffer = dst.buffer;
-    bool useIntermediateCopyBuffer = false;
-    if (format.format == wgpu::TextureFormat::Depth16Unorm && dst.buffer->GetSize() % 4 != 0 &&
-        copyExtent.width % 2 != 0) {
-        // This path is made for OpenGL/GLES depth16unorm bliting a texture with an odd width,
-        // to a compact buffer. When we copy the last texel, we inevitably need to access an
-        // out of bounds location given by dst.buffer.size as we use array<u32> in the shader for
-        // the storage buffer. Although the allocated size of dst.buffer is aligned to 4 bytes for
-        // OpenGL/GLES backend, the size of the storage buffer binding for the shader is not. Thus
-        // we make an intermediate buffer aligned to 4 bytes for the compute shader to safely
-        // access, and perform an additional buffer to buffer copy at the end. This path should be
-        // hit rarely.
-        useIntermediateCopyBuffer = true;
-        BufferDescriptor descriptor = {};
-        descriptor.size = Align(dst.buffer->GetSize(), 4);
-        // TODO(dawn:1485): adding CopyDst usage to add kInternalStorageBuffer usage internally.
-        descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
-        DAWN_TRY_ASSIGN(destinationBuffer, device->CreateBuffer(&descriptor));
-    }
-
-    Ref<ComputePipelineBase> pipeline;
-    uint32_t workgroupCountX = 1;
-    uint32_t workgroupCountY = 1;
-    uint32_t workgroupCountZ = copyExtent.depthOrArrayLayers;
-    switch (format.format) {
-        case wgpu::TextureFormat::Depth16Unorm:
-            // One thread is responsible for writing two texel values (x, y) and (x+1, y).
-            workgroupCountX = (copyExtent.width + 2 * kWorkgroupSizeX - 1) / (2 * kWorkgroupSizeX);
-            workgroupCountY = (copyExtent.height + kWorkgroupSizeY - 1) / kWorkgroupSizeY;
-            DAWN_TRY_ASSIGN(pipeline, GetOrCreateDepth16UnormToBufferPipeline(device));
-            break;
-        case wgpu::TextureFormat::Depth32Float:
-            workgroupCountX = (copyExtent.width + kWorkgroupSizeX - 1) / kWorkgroupSizeX;
-            workgroupCountY = (copyExtent.height + kWorkgroupSizeY - 1) / kWorkgroupSizeY;
-            DAWN_TRY_ASSIGN(pipeline, GetOrCreateDepth32FloatToBufferPipeline(device));
-            break;
-        default:
-            // Other formats (e.g. Depth32FloatStencil8) are not supported on OpenGL/OpenGLES where
-            // we enabled this workaround. They only support Depth24PlusStencil8.
-            UNREACHABLE();
-    }
-
-    // Allow internal usages since we need to use the source as a texture binding
-    // and buffer as a storage binding.
-    auto scope = commandEncoder->MakeInternalUsageScope();
-
-    Ref<BindGroupLayoutBase> bindGroupLayout;
-    DAWN_TRY_ASSIGN(bindGroupLayout, pipeline->GetBindGroupLayout(0));
-
-    Ref<BufferBase> uniformBuffer;
-    {
-        BufferDescriptor bufferDesc = {};
-        // Uniform buffer size needs to be multiple of 16 bytes
-        bufferDesc.size = sizeof(uint32_t) * 12;
-        bufferDesc.usage = wgpu::BufferUsage::Uniform;
-        bufferDesc.mappedAtCreation = true;
-        DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&bufferDesc));
-
-        uint32_t* params =
-            static_cast<uint32_t*>(uniformBuffer->GetMappedRange(0, bufferDesc.size));
-        // srcOrigin: vec3u
-        params[0] = src.origin.x;
-        params[1] = src.origin.y;
-        // src.origin.z is set at textureView.baseArrayLayer
-        params[2] = 0;
-        // srcExtent: vec3u
-        params[4] = copyExtent.width;
-        params[5] = copyExtent.height;
-        params[6] = copyExtent.depthOrArrayLayers;
-
-        // Turn bytesPerRow, (bytes)offset to use array index as unit
-        // We use array<u32> for depth16unorm copy and array<f32> for depth32float copy
-        // Both array element sizes are 4 bytes.
-        params[8] = dst.bytesPerRow / 4;
-        params[9] = dst.rowsPerImage;
-        params[10] = dst.offset / 4;
-
-        DAWN_TRY(uniformBuffer->Unmap());
-    }
-
-    TextureViewDescriptor viewDesc = {};
-    viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
-    viewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
-    viewDesc.baseMipLevel = src.mipLevel;
-    viewDesc.mipLevelCount = 1;
-    viewDesc.baseArrayLayer = src.origin.z;
-    viewDesc.arrayLayerCount = copyExtent.depthOrArrayLayers;
-
-    Ref<TextureViewBase> srcView;
-    DAWN_TRY_ASSIGN(srcView, src.texture->CreateView(&viewDesc));
-
-    Ref<BindGroupBase> bindGroup;
-    DAWN_TRY_ASSIGN(bindGroup, utils::MakeBindGroup(device, bindGroupLayout,
-                                                    {
-                                                        {0, srcView},
-                                                        {1, destinationBuffer},
-                                                        {2, uniformBuffer},
-                                                    },
-                                                    UsageValidationMode::Internal));
-
-    Ref<ComputePassEncoder> pass = commandEncoder->BeginComputePass();
-    pass->APISetPipeline(pipeline.Get());
-    pass->APISetBindGroup(0, bindGroup.Get());
-    pass->APIDispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ);
-
-    pass->APIEnd();
-
-    if (useIntermediateCopyBuffer) {
-        ASSERT(destinationBuffer->GetSize() <= dst.buffer->GetAllocatedSize());
-        commandEncoder->InternalCopyBufferToBufferWithAllocatedSize(
-            destinationBuffer.Get(), 0, dst.buffer.Get(), 0, destinationBuffer->GetSize());
-    }
-
-    return {};
-}
-
-MaybeError BlitStencilToBuffer(DeviceBase* device,
+MaybeError BlitTextureToBuffer(DeviceBase* device,
                                CommandEncoder* commandEncoder,
                                const TextureCopy& src,
                                const BufferCopy& dst,
                                const Extent3D& copyExtent) {
+    Ref<ComputePipelineBase> pipeline;
+    DAWN_TRY_ASSIGN(pipeline, GetOrCreateTextureToBufferPipeline(device, src));
+
     const Format& format = src.texture->GetFormat();
+    wgpu::TextureDimension dimension = src.texture->GetDimension();
+    DAWN_ASSERT(dimension != wgpu::TextureDimension::e1D);
+    bool is3D = dimension == wgpu::TextureDimension::e3D;
+
+    uint32_t texelFormatByteSize = format.GetAspectInfo(src.aspect).block.byteSize;
+    uint32_t workgroupCountX = 1;
+    uint32_t workgroupCountY = (copyExtent.height + kWorkgroupSizeY - 1) / kWorkgroupSizeY;
+    uint32_t workgroupCountZ = copyExtent.depthOrArrayLayers;
+    switch (texelFormatByteSize) {
+        case 1:
+            // One thread is responsible for writing four texel values (x, y) ~ (x+3, y).
+            workgroupCountX = (copyExtent.width + 4 * kWorkgroupSizeX - 1) / (4 * kWorkgroupSizeX);
+            break;
+        case 2:
+            // One thread is responsible for writing two texel values (x, y) and (x+1, y).
+            workgroupCountX = (copyExtent.width + 2 * kWorkgroupSizeX - 1) / (2 * kWorkgroupSizeX);
+            break;
+        case 4:
+            workgroupCountX = (copyExtent.width + kWorkgroupSizeX - 1) / kWorkgroupSizeX;
+            break;
+        default:
+            UNREACHABLE();
+    }
 
     Ref<BufferBase> destinationBuffer = dst.buffer;
     bool useIntermediateCopyBuffer = false;
-    if (dst.buffer->GetSize() % 4 != 0 && copyExtent.width % 4 != 0) {
-        // This path is made for OpenGL/GLES stencil8 bliting a texture with an width % 4 != 0,
-        // to a compact buffer. When we copy the last texel, we inevitably need to access an
+    if (texelFormatByteSize < 4 && dst.buffer->GetSize() % 4 != 0 &&
+        copyExtent.width % (4 / texelFormatByteSize) != 0) {
+        // This path is made for OpenGL/GLES bliting a texture with an width % (4 / texelByteSize)
+        // != 0, to a compact buffer. When we copy the last texel, we inevitably need to access an
         // out of bounds location given by dst.buffer.size as we use array<u32> in the shader for
         // the storage buffer. Although the allocated size of dst.buffer is aligned to 4 bytes for
         // OpenGL/GLES backend, the size of the storage buffer binding for the shader is not. Thus
@@ -497,16 +468,6 @@ MaybeError BlitStencilToBuffer(DeviceBase* device,
         descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
         DAWN_TRY_ASSIGN(destinationBuffer, device->CreateBuffer(&descriptor));
     }
-
-    // Supported format = {Stencil8, Depth24PlusStencil8}
-    // Depth32FloatStencil8 is not supported on OpenGL/OpenGLES where we enabled this workaround.
-    ASSERT(format.format == wgpu::TextureFormat::Stencil8 ||
-           format.format == wgpu::TextureFormat::Depth24PlusStencil8);
-    uint32_t workgroupCountX = (copyExtent.width + 4 * kWorkgroupSizeX - 1) / (4 * kWorkgroupSizeX);
-    uint32_t workgroupCountY = (copyExtent.height + kWorkgroupSizeY - 1) / kWorkgroupSizeY;
-    uint32_t workgroupCountZ = copyExtent.depthOrArrayLayers;
-    Ref<ComputePipelineBase> pipeline;
-    DAWN_TRY_ASSIGN(pipeline, GetOrCreateStencil8ToBufferPipeline(device));
 
     // Allow internal usages since we need to use the source as a texture binding
     // and buffer as a storage binding.
@@ -529,29 +490,60 @@ MaybeError BlitStencilToBuffer(DeviceBase* device,
         // srcOrigin: vec3u
         params[0] = src.origin.x;
         params[1] = src.origin.y;
-        // src.origin.z is set at textureView.baseArrayLayer
-        params[2] = 0;
+        if (is3D) {
+            params[2] = src.origin.z;
+        } else {
+            // src.origin.z is set at textureView.baseArrayLayer
+            params[2] = 0;
+        }
+
+        // packTexelCount: number of texel values (1, 2, or 4) one thread packs into the dst buffer
+        params[3] = 4 / texelFormatByteSize;
         // srcExtent: vec3u
         params[4] = copyExtent.width;
         params[5] = copyExtent.height;
         params[6] = copyExtent.depthOrArrayLayers;
 
+        params[7] = src.mipLevel;
+
         // Turn bytesPerRow, (bytes)offset to use array index as unit
-        // We use array<u32> for stencil8
+        // We pack values into array<u32> or array<f32>
         params[8] = dst.bytesPerRow / 4;
         params[9] = dst.rowsPerImage;
         params[10] = dst.offset / 4;
 
         DAWN_TRY(uniformBuffer->Unmap());
     }
+    // printf("\n\nsrc.origin %u %u\n", src.origin.x, src.origin.y);
+    // printf("\n\ncopyExtent %u %u\n", copyExtent.width, copyExtent.height);
+    // printf("\n\n\n!!!! %u %u\n\n", src.mipLevel, src.texture->GetNumMipLevels());
 
     TextureViewDescriptor viewDesc = {};
-    viewDesc.aspect = wgpu::TextureAspect::StencilOnly;
-    viewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+    switch (src.aspect) {
+        case Aspect::Color:
+            viewDesc.aspect = wgpu::TextureAspect::All;
+            break;
+        case Aspect::Depth:
+            viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
+            break;
+        case Aspect::Stencil:
+            viewDesc.aspect = wgpu::TextureAspect::StencilOnly;
+            break;
+        default:
+            UNREACHABLE();
+    }
+
+    viewDesc.dimension =
+        is3D ? wgpu::TextureViewDimension::e3D : wgpu::TextureViewDimension::e2DArray;
     viewDesc.baseMipLevel = src.mipLevel;
     viewDesc.mipLevelCount = 1;
-    viewDesc.baseArrayLayer = src.origin.z;
-    viewDesc.arrayLayerCount = copyExtent.depthOrArrayLayers;
+    if (is3D) {
+        viewDesc.baseArrayLayer = 0;
+        viewDesc.arrayLayerCount = 1;
+    } else {
+        viewDesc.baseArrayLayer = src.origin.z;
+        viewDesc.arrayLayerCount = copyExtent.depthOrArrayLayers;
+    }
 
     Ref<TextureViewBase> srcView;
     DAWN_TRY_ASSIGN(srcView, src.texture->CreateView(&viewDesc));

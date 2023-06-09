@@ -119,6 +119,8 @@ uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
         uint64_t lastImageBytes = bytesPerRow * (heightInBlocks - 1) + lastRowBytes;
         requiredBytesInCopy += lastImageBytes;
     }
+    // printf("\n\n %lu %lu %lu %lu\n\n", bytesPerRow, rowsPerImage, bytesPerImage,
+    // requiredBytesInCopy);
     return requiredBytesInCopy;
 }
 

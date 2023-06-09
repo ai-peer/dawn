@@ -60,9 +60,8 @@ struct InternalPipelineStore {
 
     Ref<RenderPipelineBase> blitRG8ToDepth16UnormPipeline;
 
-    Ref<ComputePipelineBase> blitDepth16UnormToBufferComputePipeline;
-    Ref<ComputePipelineBase> blitDepth32FloatToBufferComputePipeline;
-    Ref<ComputePipelineBase> blitStencil8ToBufferComputePipeline;
+    std::unordered_map<wgpu::TextureFormat, Ref<ComputePipelineBase>>
+        blitTextureToBufferComputePipelines;
 
     struct BlitR8ToStencilPipelines {
         Ref<RenderPipelineBase> clearPipeline;
