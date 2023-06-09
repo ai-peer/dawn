@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a2fb9e8_46c42177",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-09T10:22:41Z",
+      "side": 1,
+      "message": "Got it. Thanks for explaining it at length. Let me have a try.\nBTW, when GPU is running into the condition, is it possible that the query value is still not ready, so the GPU have to wait until that, and then resume the execution.",
+      "parentUuid": "5ae3c1da_198af990",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "606f8aec_df393b61",
         "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
         "patchSetId": 3
