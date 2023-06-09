@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cee2785_807bf6fb",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:49:16Z",
+      "side": 1,
+      "message": "u-nit: the queryDesc doesn\u0027t change between loop iterations so it could be hoisted out.",
+      "revId": "e4555c4a7d11a529f20b68bd7874a0d6ffc14c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69969f76_3f61d989",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:49:16Z",
+      "side": 1,
+      "message": "nit: this could use mQueryAvailability instead https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/QuerySet.h;drc\u003dd9095892389e9b1be3b9068feb1330d87f35c61e;l\u003d68 so we don\u0027t need to track the state manually here.",
+      "revId": "e4555c4a7d11a529f20b68bd7874a0d6ffc14c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

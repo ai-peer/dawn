@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ae3c1da_198af990",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:49:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure why it requires to know if there are depth-stencil passed. What I\u0027m suggesting is something like:\n\n```\nResolveQuerySet() {\n predicate \u003d device-\u003eGetResolveQueryPredicate() // returns D3D11_QUERY_OCCLUSION_PREDICATE and flags 0 predicate created on device init.\n\n Copy a bunch of zeroes in the resolve buffer\n for (each available query) {\n   SetPredicate(predicate, TRUE);\n   Copy 1 in the resolve buffer for that query\n   SetPredicate(nullptr, TRUE);\n }\n}\n```\n\nThe predicate is basically like an if() block in the GPU command stream with a condition that depends on the query value. If the query has any samples passed then the copy will be performed, otherwise it will be skipped. The command stream is not blocked, just conditionally skipped.",
+      "parentUuid": "22d1bd8d_51a8346e",
+      "revId": "14fdee9257d545bffb7c6c9a6eb38312912af0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "606f8aec_df393b61",
         "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
         "patchSetId": 3
