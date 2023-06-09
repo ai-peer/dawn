@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064b1e00_5976b188",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T11:43:44Z",
+      "side": 1,
+      "message": "What do we think about this one? The error is for the whole block but the disassembly only shows the header?",
+      "revId": "d640c7923c2db9701aee94276c5f2595526a6dd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a852cad_88e19d2f",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-09T11:43:44Z",
+      "side": 1,
+      "message": "These ones are a definate improvement, so maybe the shorter for the block messages is acceptable to cleanup the othes?",
+      "revId": "d640c7923c2db9701aee94276c5f2595526a6dd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
