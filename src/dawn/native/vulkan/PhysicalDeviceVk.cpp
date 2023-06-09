@@ -421,10 +421,15 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
         return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for framebufferDepthSampleCounts");
     }
 
-    if (mDeviceInfo.HasExt(DeviceExt::Maintenance3)) {
-        limits->v1.maxBufferSize = mDeviceInfo.propertiesMaintenance3.maxMemoryAllocationSize;
-        if (mDeviceInfo.propertiesMaintenance3.maxMemoryAllocationSize <
-            baseLimits.v1.maxBufferSize) {
+    std::optional<VkDeviceSize> maxBufferSize;
+    if (mDeviceInfo.HasExt(DeviceExt::Maintenance4)) {
+        maxBufferSize = mDeviceInfo.propertiesMaintenance4.maxBufferSize;
+    } else if (mDeviceInfo.HasExt(DeviceExt::Maintenance3)) {
+        maxBufferSize = mDeviceInfo.propertiesMaintenance3.maxMemoryAllocationSize;
+    }
+    if (maxBufferSize.has_value()) {
+        limits->v1.maxBufferSize = *maxBufferSize;
+        if (limits->v1.maxBufferSize < baseLimits.v1.maxBufferSize) {
             return DAWN_INTERNAL_ERROR("Insufficient Vulkan maxBufferSize limit");
         }
     } else {
