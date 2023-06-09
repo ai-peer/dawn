@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3092628_255f055a",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-09T05:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ff63da0_5fb221bb",
+      "range": {
+        "startLine": 191,
+        "startChar": 80,
+        "endLine": 192,
+        "endChar": 80
+      },
+      "revId": "7894c0306ffb49a447f810e25f89697d316c07e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7466a7a_752d3aee",
@@ -71,6 +95,24 @@
       "writtenOn": "2023-06-08T11:44:32Z",
       "side": 1,
       "message": "Please add a TODO that in order for this to work with unrestricted pointer paramters, then this depends on `transform::DirectVariableAccess` to have been run first.\n\nI\u0027m happy to see that this defaults to `false`, so `uniform` and `storage` pointer parameters will lean towards getting software robustness.",
+      "revId": "7894c0306ffb49a447f810e25f89697d316c07e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "707a690a_325342b2",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-09T05:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7466a7a_752d3aee",
       "revId": "7894c0306ffb49a447f810e25f89697d316c07e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec855e75_7aa55647",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-09T05:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d97572c_66fce44d",
+      "range": {
+        "startLine": 683,
+        "startChar": 31,
+        "endLine": 683,
+        "endChar": 67
+      },
+      "revId": "7894c0306ffb49a447f810e25f89697d316c07e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f3e9f76_fc75ea48",
@@ -111,6 +177,30 @@
       "writtenOn": "2023-06-08T11:44:32Z",
       "side": 1,
       "message": "use a `std::unordered_map` ?",
+      "range": {
+        "startLine": 691,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 70
+      },
+      "revId": "7894c0306ffb49a447f810e25f89697d316c07e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b59496e_7d010191",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-09T05:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f3e9f76_fc75ea48",
       "range": {
         "startLine": 691,
         "startChar": 8,
