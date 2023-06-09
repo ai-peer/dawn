@@ -31,7 +31,7 @@ TEST_F(IR_SwitchTest, Usage) {
 }
 
 TEST_F(IR_SwitchTest, Parent) {
-    auto* switch_ = b.Switch(b.Constant(1_i));
+    auto* switch_ = b.Switch(1_i);
     b.Case(switch_, utils::Vector{Switch::CaseSelector{nullptr}});
     EXPECT_THAT(switch_->Merge()->Parent(), switch_);
     EXPECT_THAT(switch_->Cases().Front().Start()->Parent(), switch_);
