@@ -222,6 +222,30 @@
       },
       "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3772e7f_8ee7732a",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-09T11:19:01Z",
+      "side": 1,
+      "message": "Just made the change instead: https://dawn-review.googlesource.com/c/dawn/+/136760",
+      "parentUuid": "fd774dce_515a3e05",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 3
+      },
+      "revId": "78dd97762c8d4f91553c6c3dd533def3a9ee61d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
