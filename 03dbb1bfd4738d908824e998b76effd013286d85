@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf18b77_370a42ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:39:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "03dbb1bfd4738d908824e998b76effd013286d85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1fb68d_074a58d9",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:39:37Z",
+      "side": 1,
+      "message": "Why isn\u0027t void* handling here, it\u0027s weird that the serializeation / deserialization special casing of void * and fnptr isn\u0027t in the same place.",
+      "revId": "03dbb1bfd4738d908824e998b76effd013286d85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac6a59b_45f9e1ad",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-09T09:39:37Z",
+      "side": 1,
+      "message": "WDYT of explicitly handling function pointers and void* here as well?",
+      "revId": "03dbb1bfd4738d908824e998b76effd013286d85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
