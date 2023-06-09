@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d15fd3a_9c784ed8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-09T07:58:12Z",
+      "side": 1,
+      "message": "This is part of changes in the reverted https://dawn-review.googlesource.com/c/dawn/+/136227\nHowever it really should be fixed. Shall we have a try to land it? Hopefully it won\u0027t break the bots.",
+      "revId": "3378f967dbca31d2e5dc6c831dd3b593bc4392aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
