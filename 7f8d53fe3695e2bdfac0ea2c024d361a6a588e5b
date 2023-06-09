@@ -68,6 +68,24 @@
       "parentUuid": "07f7150e_83222c34",
       "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86116702_d6b05d67",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-09T06:47:28Z",
+      "side": 1,
+      "message": "Yea, sorry about that. Split it into those now.",
+      "parentUuid": "6d011a56_46c712b4",
+      "revId": "7f8d53fe3695e2bdfac0ea2c024d361a6a588e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
