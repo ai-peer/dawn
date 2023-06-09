@@ -22,23 +22,7 @@ namespace dawn::native {
 struct TextureCopy;
 struct BufferCopy;
 
-// BlitDepthToBuffer works around OpenGL/GLES issues of copying depth textures to a buffer.
-// Supported depth texture format: depth16unorm, depth32float
-// It dispatches a compute shader textureLoad from the depth texture and writes to the buffer as a
-// storage buffer.
-
-MaybeError BlitDepthToBuffer(DeviceBase* device,
-                             CommandEncoder* commandEncoder,
-                             const TextureCopy& src,
-                             const BufferCopy& dst,
-                             const Extent3D& copyExtent);
-
-// BlitStencilToBuffer works around OpenGLES issues of copying stencil textures to a buffer.
-// Supported stencil texture format: *stencil8
-// It dispatches a compute shader textureLoad from the stencil texture and writes to the buffer as a
-// storage buffer.
-
-MaybeError BlitStencilToBuffer(DeviceBase* device,
+MaybeError BlitTextureToBuffer(DeviceBase* device,
                                CommandEncoder* commandEncoder,
                                const TextureCopy& src,
                                const BufferCopy& dst,
