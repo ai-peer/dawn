@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a4211ee_1a238314",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-10T00:36:29Z",
+      "side": 1,
+      "message": "benchmarks can be later, but tests should really come with the implementation so we can verify the implementation and find bugs sooner",
+      "parentUuid": "d3d2876e_c0ed58ac",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b068ea9_7ae06e5e",
         "filename": "src/dawn/common/ContentLessObjectCache.h",
         "patchSetId": 2
@@ -172,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71adf152_c35de7cb",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-10T00:36:29Z",
+      "side": 1,
+      "message": "Erase still has the following though:\n\n```\n        std::lock_guard\u003cstd::mutex\u003e lock(mMutex);\n        auto it \u003d mCache.find(object);\n        ASSERT(it !\u003d mCache.end());\n```\n\nI think the ASSERT could fail. And, thinking about it now I\u0027ve actually realized the code can also do something unexpected.\n\nConsider the following:\n```\n1. thread 1: obj.Release() // refcount goes to zero. will uncache soon\n2. thread 2: Insert(obj2)  // fails to insert because `obj` is already in the cache\n                           // TryGetRef returns nullptr b.c. refcount of obj is 0\n                           // erase(it) the old entry from the cache\n                           // insert obj2 into the cache\n3. thread 1: Uncache(obj)  // actually removes obj2 from the cache! uh-oh \n4. thread 2: obj2.Release()\n          -\u003e Uncache(obj2)\n          -\u003e Erase(obj2)   // ASSERT fails. It\u0027s not in the cache.\n                           \n```\n\nMaybe we can resolve this by having step (2) also do `obj-\u003eSetIsCachedReference(false)` ? That way step (3) will not wrongly remove obj2",
+      "parentUuid": "1edbece1_67c83364",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 91
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3304b65e_f19a7e9b",
         "filename": "src/dawn/common/ContentLessObjectCache.h",
         "patchSetId": 2
@@ -207,6 +249,30 @@
       "side": 1,
       "message": "Updated the comment, but no, this case is to protect against racing destruction when the entry in the cache hit refcount\u003d0 but hasn\u0027t been removed from the cache yet. If two threads both fail to `Find`, only 1 of the two will see `inserted \u003d\u003d true` because we acquire the cache lock at the start of `Insert`.",
       "parentUuid": "3304b65e_f19a7e9b",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91b92ca9_336cd2d8",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-10T00:36:29Z",
+      "side": 1,
+      "message": "I think double Insert is still something that happens here. See [a]",
+      "parentUuid": "76efe2b5_058064d1",
       "range": {
         "startLine": 44,
         "startChar": 12,

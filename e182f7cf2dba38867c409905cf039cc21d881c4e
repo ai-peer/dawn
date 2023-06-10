@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33af093b_f8cb2219",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-10T00:36:29Z",
+      "side": 1,
+      "message": "...that may be soon deleted. It\u0027s still an access violation if the pointer is already freed.",
+      "range": {
+        "startLine": 37,
+        "startChar": 71,
+        "endLine": 37,
+        "endChar": 73
+      },
+      "revId": "e182f7cf2dba38867c409905cf039cc21d881c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a4f7f6_640ee137",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-10T00:36:29Z",
+      "side": 1,
+      "message": "[a]\nI think SetIsCachedReference needs to happen AFTER Insert, not in CreateFn\n\nConsider the following:\n\nTwo threads are both doing GetOrCreate.\n\n```\n1. thread 1: Find(...) fails\n2. thread 2: Find(...) fails\n3. thread 1: CreateFn(...)  // SetIsCachedReference(true)!\n4. thread 2: CreateFn(...). // SetIsCachedReference(true)!\n5. thread 1: [result, _] \u003d Insert(obj1)    // actually inserts into the cache\n6. thread 2: [result, _] \u003d Insert(obj2)    // does not actually insert into cache,\n                                           // even though IsCachedReference\u003d\u003dtrue\n7. thread 2: drops obj2 on the floor since it wasn\u0027t inserted\n     -\u003e b.c. isCachedReference\u003d\u003dtrue, Uncache(obj2)\n     -\u003e equal to obj1, so obj1 gets removed from the cache\n8. thread 1: drops obj1 on the floor\n     -\u003e b.c. isCachedReference\u003d\u003dtrue, Uncache(obj1)\n     -\u003e ASSERT fails b.c. it\u0027s not actually in the cache\n```",
+      "range": {
+        "startLine": 825,
+        "startChar": 0,
+        "endLine": 825,
+        "endChar": 43
+      },
+      "revId": "e182f7cf2dba38867c409905cf039cc21d881c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71420a4b_4b6af050",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-10T00:36:29Z",
+      "side": 1,
+      "message": "\"CreateFn\"",
+      "range": {
+        "startLine": 247,
+        "startChar": 13,
+        "endLine": 247,
+        "endChar": 24
+      },
+      "revId": "e182f7cf2dba38867c409905cf039cc21d881c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
