@@ -33,6 +33,24 @@
       "message": "I\u0027ll land this and watch the bots to check for stability",
       "revId": "3378f967dbca31d2e5dc6c831dd3b593bc4392aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b1827f7_6b4ea162",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-10T06:20:45Z",
+      "side": 1,
+      "message": "Nice, thanks!",
+      "parentUuid": "05de202a_a9b2d1ec",
+      "revId": "3378f967dbca31d2e5dc6c831dd3b593bc4392aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
