@@ -68,6 +68,24 @@
       "parentUuid": "bee73ad9_c44257d1",
       "revId": "9bb1206c745524656742462fc49ed75308c64a9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c840b6b5_fdf56a6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-12T20:22:26Z",
+      "side": 1,
+      "message": "BTW, looks like partition_allocator uses it because it make our crash tool happier.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:base/allocator/partition_allocator/oom.cc;l\u003d54;drc\u003db35d0400e78c4216ea3e6941d91373147572953c;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "0488c3b1_83c2f3ad",
+      "revId": "9bb1206c745524656742462fc49ed75308c64a9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
