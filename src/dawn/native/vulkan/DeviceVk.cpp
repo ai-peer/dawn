@@ -457,7 +457,7 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
         // Note that the driver still won't initialize workgroup memory unless the workgroup
         // variable is explicitly initialized with OpConstantNull.
         usedKnobs.zeroInitializeWorkgroupMemoryFeatures.shaderZeroInitializeWorkgroupMemory =
-            VK_TRUE;
+            mDeviceInfo.zeroInitializeWorkgroupMemoryFeatures.shaderZeroInitializeWorkgroupMemory;
         featuresChain.Add(&usedKnobs.zeroInitializeWorkgroupMemoryFeatures);
     }
 
@@ -467,7 +467,8 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
         usedKnobs.shaderIntegerDotProductFeatures.sType =
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES;
 
-        usedKnobs.shaderIntegerDotProductFeatures.shaderIntegerDotProduct = VK_TRUE;
+        usedKnobs.shaderIntegerDotProductFeatures.shaderIntegerDotProduct =
+            mDeviceInfo.shaderIntegerDotProductFeatures.shaderIntegerDotProduct;
         featuresChain.Add(&usedKnobs.shaderIntegerDotProductFeatures);
     }
 
