@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de0572d2_5b71e1da",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-12T20:25:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33af093b_f8cb2219",
+      "range": {
+        "startLine": 37,
+        "startChar": 71,
+        "endLine": 37,
+        "endChar": 73
+      },
+      "revId": "e182f7cf2dba38867c409905cf039cc21d881c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54a4f7f6_640ee137",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11749eb3_3a5a69f9",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-12T20:25:34Z",
+      "side": 1,
+      "message": "Yes! Good point! I moved the `SetIsCachedReference` into `GetOrCreate` after verifying whether it was inserted.",
+      "parentUuid": "54a4f7f6_640ee137",
+      "range": {
+        "startLine": 825,
+        "startChar": 0,
+        "endLine": 825,
+        "endChar": 43
+      },
+      "revId": "e182f7cf2dba38867c409905cf039cc21d881c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71420a4b_4b6af050",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-10T00:36:29Z",
       "side": 1,
       "message": "\"CreateFn\"",
+      "range": {
+        "startLine": 247,
+        "startChar": 13,
+        "endLine": 247,
+        "endChar": 24
+      },
+      "revId": "e182f7cf2dba38867c409905cf039cc21d881c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8683fdab_c26fde2f",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-12T20:25:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71420a4b_4b6af050",
       "range": {
         "startLine": 247,
         "startChar": 13,

@@ -212,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa60639c_9e8fafac",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-12T20:25:34Z",
+      "side": 1,
+      "message": "Hmm, I think that the `ASSERT` shouldn\u0027t fail actually?\n\nSo in the example you gave, at (3), obj2 wouldn\u0027t be removed because the pointer equality condition that follows the `ASSERT` wouldn\u0027t pass. On the other hand, the `ASSERT` would be fine because hash equality would\u0027ve returned the `obj2` and not `end()`.\n\nWhen (4) comes around `obj2` is still in the cache so the `ASSERT` should pass because we find `obj2` and then the pointers are equal now so we actually `erase` it.",
+      "parentUuid": "71adf152_c35de7cb",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 91
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3304b65e_f19a7e9b",
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "I think double Insert is still something that happens here. See [a]",
       "parentUuid": "76efe2b5_058064d1",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1bc3833_dfbe8851",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-12T20:25:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "91b92ca9_336cd2d8",
       "range": {
         "startLine": 44,
         "startChar": 12,
