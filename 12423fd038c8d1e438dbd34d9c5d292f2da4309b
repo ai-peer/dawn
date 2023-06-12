@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7376cbf_af32b84e",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5921207_5986d124",
+      "range": {
+        "startLine": 2025,
+        "startChar": 22,
+        "endLine": 2025,
+        "endChar": 34
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09939754_e6ef97be",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "looking at this CL, I can\u0027t tell why we actually need this part.\n\nI\u0027m guess it\u0027s for Vulkan?\nlike you need to make the render pass with two subpasses, and therefore, that the same information needs to be present on the render pipeline for render pass compatibility?",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 230
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74612a2_77145234",
+        "filename": "docs/dawn/features/msaa_render_to_single_samples.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Yes, this is for the vulkan\u0027s implementation which makes use of subpasses. I prefer we plan the spec upfront to avoid drastic changes on client side in future.",
+      "parentUuid": "09939754_e6ef97be",
       "range": {
         "startLine": 8,
         "startChar": 3,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c38195f_2389c0ff",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "842835e2_cd7bc047",
+      "range": {
+        "startLine": 46,
+        "startChar": 80,
+        "endLine": 46,
+        "endChar": 89
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5db86c53_b4776a27",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "the only reason we have `RenderPassEncoder::GetImplicitSampleCount` and store the implicit sample count in the render encoder is for this handling here.\n\nI think I\u0027d prefer passing the implicit sample count information in through arguments or descriptor members to BlitColorToColorWithDraw instead of inspecting the encoder.\nWhile I appreciate the intent to make a general BlitColorToColor utility, we\u0027re only using it from within ApplyMSAARenderToSingleSampledLoadOp right now.\nSo, things could be simpler since we only need to handle the case where isMSAARenderToSingleSampledEnabled \u003d\u003d true.\nWhen we find the need to also have a general ColorToColor blit, then we can add that functionality in. But since the other path is not used right now, it also won\u0027t be tested and might bitrot.",
+      "range": {
+        "startLine": 190,
+        "startChar": 3,
+        "endLine": 198,
+        "endChar": 5
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9862110c_ea449001",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5db86c53_b4776a27",
       "range": {
         "startLine": 190,
         "startChar": 3,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c186b869_7353d4a6",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0ee0da_782666ef",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 95
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a8a6a8f_6d3c0351",
@@ -156,6 +276,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e0efc29_da39d7f8",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a8a6a8f_6d3c0351",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 6
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71381e30_d120544d",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "2023",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f76f80_96789e6b",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71381e30_d120544d",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -273,6 +441,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73acd928_e2d89e9e",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84607cd0_3083890e",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29567cfb_9d9d027a",
@@ -286,6 +478,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "I think the blueprint does not need to be CachedObject; only CachedMultisampleAttachment needs it",
+      "range": {
+        "startLine": 26,
+        "startChar": 45,
+        "endLine": 26,
+        "endChar": 64
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c36750e_718218c6",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29567cfb_9d9d027a",
       "range": {
         "startLine": 26,
         "startChar": 45,
@@ -319,6 +535,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc910492_a1ddec5e",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "399ceee1_6cfc936c",
+      "range": {
+        "startLine": 36,
+        "startChar": 49,
+        "endLine": 36,
+        "endChar": 56
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0ebf3d8_a260c60c",
@@ -332,6 +572,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "for consistency, we should make this match AttachmentState, I think.\n```suggestion\nclass CachedMultisampleAttachment final : public CachedMultisampleAttachmentBlueprint,\n                                          public ObjectBase,\n                                          public CachedObject {\n```\n\nwe also won\u0027t need mDevice member explicitly since ObjectBase provides it.",
+      "range": {
+        "startLine": 55,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 59
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec58197_a2311845",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0ebf3d8_a260c60c",
       "range": {
         "startLine": 55,
         "startChar": 42,
@@ -365,6 +629,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5a1f7f_e80ac857",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21b7eccb_472ebdbf",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 6
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad94d6f_fb7fea90",
@@ -378,6 +666,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "maybe \"implicit sample count (%u) for MSAA render to single sampled\"\n\n\"msaaRenderToSingleSampledDesc\" looks like something someone might name a variable in their code; so it could be confusing\n\nditto for other messages",
+      "range": {
+        "startLine": 154,
+        "startChar": 25,
+        "endLine": 154,
+        "endChar": 66
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad76bcae_c791670d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad94d6f_fb7fea90",
       "range": {
         "startLine": 154,
         "startChar": 25,
@@ -413,6 +725,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a245bfc_e0450aa5",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "For implicit sample count case, this `*sampleCount !\u003d attachmentSampleCount` condition won\u0027t happen because we assign  attachmentSampleCount \u003d implicitSampleCount above. And also assign `*sampleCount \u003d implicitSampleCount` for the 1st iteration. In other words, `attachmentSampleCount` should always be equal to `*sampleCount`.\n\nI have added a line to skip the check if `implicitSampleCount \u003e 1`.",
+      "parentUuid": "210b748b_4d16f383",
+      "range": {
+        "startLine": 176,
+        "startChar": 13,
+        "endLine": 176,
+        "endChar": 50
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de06ede3_85178b4c",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -430,6 +766,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a774f5a_86eb2115",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "I realized this enforcement is not needed. When we use a draw call to blit a view of the resolve target to the MSAA attachment, we currently only require that the view is 2D and has only 1 layer (for easier handling in the fragment shader, so we could treat the input texture as `texture_2d`).\n\nBut technically the view cannot be anything other than 2D. Because when the client creates a render pass, the validation layer already checks that the color attachment must be 2D (or called `renderable texture view` from WebGPU spec).",
+      "parentUuid": "de06ede3_85178b4c",
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d360f013_9ab9d363",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -441,6 +795,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "\"Cannot\" is not clear whether the behavior is disallowed or whether Dawn failed to perform an operation for some unknown reason.\n\nInstead perhaps say \"resolve target must not be specified...\"",
+      "range": {
+        "startLine": 287,
+        "startChar": 25,
+        "endLine": 287,
+        "endChar": 31
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af2a937_777ac572",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d360f013_9ab9d363",
       "range": {
         "startLine": 287,
         "startChar": 25,
@@ -474,6 +852,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "239c6321_18a76f14",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f963cc8_3e851db8",
+      "range": {
+        "startLine": 446,
+        "startChar": 25,
+        "endLine": 446,
+        "endChar": 54
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a717d5f8_e15e4952",
@@ -497,6 +899,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df15a3ce_dc21a863",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a717d5f8_e15e4952",
+      "range": {
+        "startLine": 713,
+        "startChar": 8,
+        "endLine": 713,
+        "endChar": 22
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c8d669c_6eab2ece",
@@ -510,6 +936,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "because we know that we replace the entire contents with a fullscreen draw, we can add an internal LoadOp::DontCare which has an equivalent enum on most backends. This will be even more optimal than performing a Clear or a Load",
+      "range": {
+        "startLine": 975,
+        "startChar": 0,
+        "endLine": 975,
+        "endChar": 78
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4926003_4b30e5b8",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Could this be done in a following up patch? This seems like it could modify many backends not directly related to this change.",
+      "parentUuid": "4c8d669c_6eab2ece",
       "range": {
         "startLine": 975,
         "startChar": 0,
@@ -568,6 +1018,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86a6fc9a_ec8be7d1",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done. Actually integer textures are not resolvable (per WebGPU spec), hence they cannot be used as resolve target either. Thus are not supported by this feature.\n\nAlready updated the feature doc.",
+      "parentUuid": "e0f2bd84_752593cf",
+      "range": {
+        "startLine": 1110,
+        "startChar": 8,
+        "endLine": 1112,
+        "endChar": 9
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3659686c_0d7284f8",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 4
@@ -612,6 +1086,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fbdbe9a_19b1934a",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done. Not used.",
+      "parentUuid": "58aba69a_7c3357a6",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 25
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f51bd57_68682b71",
@@ -625,6 +1123,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "so we\u0027re doing this so we can override with kResolveAttachmentLoading to make sync scope happy. I\u0027d like to not add a general way to hijack AddBindGroup\u0027s usage tracking since it makes it easy to add in incorrect synchronization\n\nWhat if instead at [2] we say the resolve target is used as kLoadToMSAAResolveAttachment if implicitSampleCount \u003e 1, and then at [1] allow TextureBinding and kLoadToMSAAResolveAttachment to be used together?\nThis way we keep the allowed behavior narrow to TextureBinding+Resolve",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 66
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09f28208_9d4e1a79",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "What happens if an user (not us) later binds the color attachment as an input texture in the same render pass?\n\nThat would pass the validation because TextureBinding+Resolve is allowed, wouldn\u0027t it?\n\nThis hijacking was used because I want that only the 1st texture binding is allowed, but not the subsequent texture bindings (made by users). Technically, the 1st texture binding is special and should not be treated as `TextureBinding` for the purpose of validation. It should also be enough for the backend to know what to do with the resource transitions in this special binding.",
+      "parentUuid": "7f51bd57_68682b71",
       "range": {
         "startLine": 119,
         "startChar": 0,
@@ -658,6 +1180,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86a32d18_795f4e62",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b7d5b7e_26d2d462",
+      "range": {
+        "startLine": 359,
+        "startChar": 21,
+        "endLine": 359,
+        "endChar": 58
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18eada02_10f62043",
@@ -671,6 +1217,30 @@
       "writtenOn": "2023-06-01T04:59:04Z",
       "side": 1,
       "message": "nit: a map is heavy when the only sample counts are 1 and 4.\n\nI think we only need one Ref for the 4 case, and we can expand it as needed later",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 154,
+        "endChar": 12
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0ac8d12_ba05e306",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-12T22:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18eada02_10f62043",
       "range": {
         "startLine": 154,
         "startChar": 4,
