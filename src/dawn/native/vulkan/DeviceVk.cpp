@@ -520,6 +520,13 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
                           VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES);
     }
 
+    if (mDeviceInfo.HasExt(DeviceExt::Robustness2)) {
+        ASSERT(usedKnobs.HasExt(DeviceExt::Robustness2));
+
+        usedKnobs.robustness2Features = mDeviceInfo.robustness2Features;
+        featuresChain.Add(&usedKnobs.robustness2Features);
+    }
+
     // Find a universal queue family
     {
         // Note that GRAPHICS and COMPUTE imply TRANSFER so we don't need to check for it.
