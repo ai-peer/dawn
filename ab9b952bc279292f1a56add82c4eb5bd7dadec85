@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8d4676c_4708f155",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-12T09:17:50Z",
+      "side": 1,
+      "message": "I am not sure, Chrome will also call `GetAdapters` in GPU process [1], I thought we should use WGPUDawnTogglesDescriptor there?\n\n[1]: https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/webgpu_decoder_impl.cc;drc\u003de87d40b29741f89838cfe485716bd6b4ba2b206c;l\u003d1559",
+      "parentUuid": "c8440b90_0bfd3255",
+      "range": {
+        "startLine": 178,
+        "startChar": 14,
+        "endLine": 178,
+        "endChar": 39
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92af987e_72ad1cd2",
         "filename": "src/dawn/native/Instance.cpp",
         "patchSetId": 4
@@ -71,6 +95,30 @@
       "writtenOn": "2023-06-09T22:18:18Z",
       "side": 1,
       "message": "could these things happen inside the constructor of AdapterBase?\n\nit seems like it\u0027s a crucial part of making an adapter - it shouldn\u0027t be possible to create an adapter without forcing toggles from its physical device.",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 223,
+        "endChar": 0
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33fd86af_8ec20232",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-12T09:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92af987e_72ad1cd2",
       "range": {
         "startLine": 218,
         "startChar": 4,
@@ -127,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9943de9e_b5017c18",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-12T09:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5eb133e_197eb55d",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 0
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f91f794b_3d625f9e",
@@ -140,6 +212,30 @@
       "writtenOn": "2023-06-09T22:18:18Z",
       "side": 1,
       "message": "nit: capitalization\n\n```suggestion\n    auto CreateNullAdapterWithTogglesDescriptor \u003d\n```",
+      "range": {
+        "startLine": 222,
+        "startChar": 9,
+        "endLine": 222,
+        "endChar": 47
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcffa1e8_17048c94",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-12T09:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f91f794b_3d625f9e",
       "range": {
         "startLine": 222,
         "startChar": 9,
@@ -173,6 +269,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3912453_51c4db2e",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-12T09:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42f27e33_829ec0ba",
+      "range": {
+        "startLine": 237,
+        "startChar": 9,
+        "endLine": 237,
+        "endChar": 31
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d5af2fa_80db5721",
@@ -196,6 +316,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c9e1877_b204a7ff",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-12T09:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d5af2fa_80db5721",
+      "range": {
+        "startLine": 254,
+        "startChar": 9,
+        "endLine": 254,
+        "endChar": 48
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1904f99c_66db85d1",
@@ -209,6 +353,30 @@
       "writtenOn": "2023-06-09T22:18:18Z",
       "side": 1,
       "message": "I think you can use refs here so you can avoid manual release\n\n```suggestion\n        Ref\u003cnative::DeviceBase\u003e device \u003d AcquireRef(adapter-\u003eAPICreateDevice());\n```",
+      "range": {
+        "startLine": 258,
+        "startChar": 8,
+        "endLine": 258,
+        "endChar": 27
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9b7efb_c8a5c720",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-12T09:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1904f99c_66db85d1",
       "range": {
         "startLine": 258,
         "startChar": 8,
