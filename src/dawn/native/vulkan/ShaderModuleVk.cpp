@@ -176,6 +176,7 @@ ShaderModule::~ShaderModule() = default;
     X(bool, disableSymbolRenaming)                                                               \
     X(bool, useZeroInitializeWorkgroupMemoryExtension)                                           \
     X(bool, clampFragDepth)                                                                      \
+    X(bool, useRobustness2Extension)                                                             \
     X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)
 
 DAWN_MAKE_CACHE_REQUEST(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);
@@ -262,6 +263,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     req.useZeroInitializeWorkgroupMemoryExtension =
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
     req.clampFragDepth = clampFragDepth;
+    req.useRobustness2Extension =
+        GetDevice()->IsToggleEnabled(Toggle::VulkanUseRobustness2Extension);
     req.tracePlatform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
 

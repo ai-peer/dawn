@@ -104,6 +104,7 @@ enum class DeviceExt {
     Swapchain,
     SubgroupSizeControl,
     QueueFamilyForeign,
+    Robustness2,
 
     // External* extensions
     ExternalMemoryAndroidHardwareBuffer,
