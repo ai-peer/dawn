@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "532023ea_962f05e7",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-12T16:46:46Z",
+      "side": 1,
+      "message": "you could have two overloads so either style descriptor could be used without casting",
+      "parentUuid": "a8d4676c_4708f155",
+      "range": {
+        "startLine": 178,
+        "startChar": 14,
+        "endLine": 178,
+        "endChar": 39
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92af987e_72ad1cd2",
         "filename": "src/dawn/native/Instance.cpp",
         "patchSetId": 4
