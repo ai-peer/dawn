@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b26cfd6_79561e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-12T19:18:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "606417749841bde7c3cc5e736b2d72bae9bc20c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "303b32d1_55113d48",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-12T19:18:14Z",
+      "side": 1,
+      "message": "I think that we need to zero out queries that aren\u0027t available in the buffer. I\u0027m surprised we don\u0027t have a test for this. So we should clear the whole range in the buffer, and then do predicated copies.",
+      "revId": "606417749841bde7c3cc5e736b2d72bae9bc20c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
