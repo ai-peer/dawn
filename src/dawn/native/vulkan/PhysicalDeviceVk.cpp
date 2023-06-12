@@ -547,6 +547,18 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // In particular, enable rasterizer discard if the depth-stencil stage is a no-op, and skip
     // insertion of the placeholder fragment shader.
     deviceToggles->Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline, true);
+
+    // The environment can only request to use VK_EXT_robustness2 when the extension is available.
+    // Override the decision if it is no applicable or either robustBufferAccess2 or
+    // robustImageAccess2 is false.
+    if (!GetDeviceInfo().HasExt(DeviceExt::Robustness2) ||
+        !GetDeviceInfo().robustness2Features.robustBufferAccess2 ||
+        !GetDeviceInfo().robustness2Features.robustImageAccess2) {
+        deviceToggles->ForceSet(Toggle::VulkanUseRobustness2Extension, false);
+    }
+    // By default try to skip robustness transform on buffers and textures according to the Vulkan
+    // extension VK_EXT_robustness2.
+    deviceToggles->Default(Toggle::VulkanUseRobustness2Extension, true);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,
