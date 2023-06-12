@@ -423,6 +423,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "a descriptor heap and the data pointed to by the descriptors so that the drivers can make "
       "better optimizations on them.",
       "https://crbug.com/tint/1890", ToggleStage::Device}},
+    {Toggle::VulkanUseRobustness2Extension,
+     {"vulkan_use_robustness2_extension",
+      "Disable Tint robustness transform on buffers and textures when VK_EXT_robustness2 is "
+      "supported.",
+      "https://crbug.com/tint/1890", ToggleStage::Device}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "
