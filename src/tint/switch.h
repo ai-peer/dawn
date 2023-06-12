@@ -166,8 +166,9 @@ template <typename RETURN_TYPE = utils::detail::Infer,
           typename T = utils::CastableBase,
           typename... CASES>
 inline auto Switch(T* object, CASES&&... cases) {
-    using ReturnType = detail::SwitchReturnType<RETURN_TYPE, utils::traits::ReturnType<CASES>...>;
-    static constexpr int kDefaultIndex = detail::IndexOfDefaultCase<std::tuple<CASES...>>();
+    using ReturnType =
+        tint::detail::SwitchReturnType<RETURN_TYPE, utils::traits::ReturnType<CASES>...>;
+    static constexpr int kDefaultIndex = tint::detail::IndexOfDefaultCase<std::tuple<CASES...>>();
     static constexpr bool kHasDefaultCase = kDefaultIndex >= 0;
     static constexpr bool kHasReturnType = !std::is_same_v<ReturnType, void>;
 
@@ -202,8 +203,8 @@ inline auto Switch(T* object, CASES&&... cases) {
     struct alignas(alignof(ReturnTypeOrU8)) ReturnStorage {
         uint8_t data[sizeof(ReturnTypeOrU8)];
     };
-    ReturnStorage storage;
-    auto* result = utils::Bitcast<ReturnTypeOrU8*>(&storage);
+    ReturnStorage return_storage;
+    auto* result = utils::Bitcast<ReturnTypeOrU8*>(&return_storage);
 
     const utils::TypeInfo& type_info = object->TypeInfo();
 
@@ -217,7 +218,7 @@ inline auto Switch(T* object, CASES&&... cases) {
     // `result` pointer.
     auto try_case = [&](auto&& case_fn) {
         using CaseFunc = std::decay_t<decltype(case_fn)>;
-        using CaseType = detail::SwitchCaseType<CaseFunc>;
+        using CaseType = tint::detail::SwitchCaseType<CaseFunc>;
         bool success = false;
         if constexpr (std::is_same_v<CaseType, Default>) {
             if constexpr (kHasReturnType) {
