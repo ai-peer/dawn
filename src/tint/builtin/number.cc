@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/number.h"
+#include "src/tint/builtin/number.h"
 
 #include <algorithm>
 #include <cmath>

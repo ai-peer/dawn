@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_NUMBER_H_
-#define SRC_TINT_NUMBER_H_
+#ifndef SRC_TINT_BUILTIN_NUMBER_H_
+#define SRC_TINT_BUILTIN_NUMBER_H_
 
 #include <stdint.h>
 #include <cmath>
@@ -681,4 +681,4 @@ class hash<tint::Number<T>> {
 
 }  // namespace std
 
-#endif  // SRC_TINT_NUMBER_H_
+#endif  // SRC_TINT_BUILTIN_NUMBER_H_
