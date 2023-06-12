@@ -60,6 +60,10 @@ struct Options {
     /// VK_KHR_zero_initialize_workgroup_memory is enabled.
     bool use_zero_initialize_workgroup_memory_extension = false;
 
+    /// Set to `true` to skip robustness transform on buffers and textures when VK_EXT_robustness
+    /// is enabled.
+    bool use_robustness2_extension = false;
+
 #if TINT_BUILD_IR
     /// Set to `true` to generate SPIR-V via the Tint IR instead of from the AST.
     bool use_tint_ir = false;
@@ -70,7 +74,8 @@ struct Options {
                  emit_vertex_point_size,
                  disable_workgroup_init,
                  external_texture_options,
-                 use_zero_initialize_workgroup_memory_extension);
+                 use_zero_initialize_workgroup_memory_extension,
+                 use_robustness2_extension);
 };
 
 /// The result produced when generating SPIR-V.
