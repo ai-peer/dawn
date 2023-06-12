@@ -202,8 +202,8 @@ inline auto Switch(T* object, CASES&&... cases) {
     struct alignas(alignof(ReturnTypeOrU8)) ReturnStorage {
         uint8_t data[sizeof(ReturnTypeOrU8)];
     };
-    ReturnStorage storage;
-    auto* result = utils::Bitcast<ReturnTypeOrU8*>(&storage);
+    ReturnStorage return_storage;
+    auto* result = utils::Bitcast<ReturnTypeOrU8*>(&return_storage);
 
     const utils::TypeInfo& type_info = object->TypeInfo();
 
