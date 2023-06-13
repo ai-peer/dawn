@@ -122,6 +122,9 @@ class Block : public utils::Castable<Block> {
     /// @param inst the instruction to remove
     void Remove(Instruction* inst);
 
+    /// Clear all instructions from the block.
+    void Clear();
+
     /// @returns true if the block contains no instructions
     bool IsEmpty() { return Length() == 0; }
 

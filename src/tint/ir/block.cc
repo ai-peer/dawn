@@ -157,4 +157,18 @@ void Block::Remove(Instruction* inst) {
     inst->next = nullptr;
 }
 
+void Block::Clear() {
+    auto* inst = instructions_.first;
+    while (inst) {
+        auto* next = inst->next;
+        inst->SetBlock(nullptr);
+        inst->prev = nullptr;
+        inst->next = nullptr;
+        inst = next;
+    }
+    instructions_.first = nullptr;
+    instructions_.last = nullptr;
+    instructions_.count = 0;
+}
+
 }  // namespace tint::ir

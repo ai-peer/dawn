@@ -422,6 +422,36 @@ TEST_F(IR_BlockTest, Remove_OnlyNode) {
     EXPECT_EQ(0u, blk->Length());
 }
 
+TEST_F(IR_BlockTest, Clear) {
+    auto* inst1 = b.Loop();
+    auto* inst2 = b.Loop();
+    auto* inst3 = b.Loop();
+
+    auto* blk = b.Block();
+    blk->Append(inst1);
+    blk->Append(inst2);
+    blk->Append(inst3);
+    EXPECT_FALSE(blk->IsEmpty());
+    EXPECT_TRUE(blk->HasBranchTarget());
+
+    blk->Clear();
+
+    EXPECT_TRUE(blk->IsEmpty());
+    EXPECT_FALSE(blk->HasBranchTarget());
+
+    EXPECT_EQ(inst1->Block(), nullptr);
+    EXPECT_EQ(inst2->Block(), nullptr);
+    EXPECT_EQ(inst3->Block(), nullptr);
+
+    EXPECT_EQ(inst1->next, nullptr);
+    EXPECT_EQ(inst2->next, nullptr);
+    EXPECT_EQ(inst3->next, nullptr);
+
+    EXPECT_EQ(inst1->prev, nullptr);
+    EXPECT_EQ(inst2->prev, nullptr);
+    EXPECT_EQ(inst3->prev, nullptr);
+}
+
 TEST_F(IR_BlockTest, Fail_PrependNullptr) {
     EXPECT_FATAL_FAILURE(
         {
