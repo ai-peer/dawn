@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2736a573_8b8d44e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-13T14:22:41Z",
+      "side": 1,
+      "message": "I think you can remove the `ApiObjectBase::APIRelease()` implementation (which contains a lock to work-around this racy issue in the past) to verify that this patch can work correctly with the existing multithreaded tests.",
+      "revId": "bad8d6282731a59c3cdfe699892c7af92e9a7f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38ed507_cdbf17e2",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-13T14:22:41Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be `if (current \u003c kRefCountIncrement)`? The initial ref count value could contain a payload value of 1 IIUC. Thus if the last decrement succeeds, the result ref count value could be 1.\n\nI\u0027m not sure what this payload is used for anyway.",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 25
+      },
+      "revId": "bad8d6282731a59c3cdfe699892c7af92e9a7f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f6d6a00_b2f974d0",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-13T14:22:41Z",
+      "side": 1,
+      "message": "I think it is safe to use `memory_order_relaxed` here.\n- If other thread\u0027s decrement happens before this increment, the increment should fail.\n- If other thread\u0027s decrement happens after this increment, the decrement shouldn\u0027t delete the object, because the ref count \u003e 0.\n\nFor reference, Boost library uses `relaxed` too. https://github.com/boostorg/smart_ptr/blob/develop/include/boost/smart_ptr/detail/sp_counted_base_std_atomic.hpp#L62",
+      "range": {
+        "startLine": 67,
+        "startChar": 55,
+        "endLine": 67,
+        "endChar": 75
+      },
+      "revId": "bad8d6282731a59c3cdfe699892c7af92e9a7f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
