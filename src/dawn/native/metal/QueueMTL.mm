@@ -41,9 +41,30 @@ Queue::~Queue() {}
 void Queue::Destroy() {
     // Forget all pending commands.
     mCommandContext.AcquireCommands();
+    UpdateWaitingEvents(kMaxExecutionSerial);
     mCommandQueue = nullptr;
     mLastSubmittedCommands = nullptr;
     mMtlSharedEvent = nullptr;
+}
+
+OSEventReceiver Queue::InsertWorkDoneEvent() {
+    ExecutionSerial serial = GetScheduledWorkDoneSerial();
+
+    OSEventPipe sender;
+    OSEventReceiver receiver;
+    std::tie(sender, receiver) = OSEventPipe::CreateEventPipe();
+
+    mWaitingEvents.Use([&](auto waitingEvents) {
+        // Check for device loss while the lock is held. Otherwise, we could enqueue the event
+        // after mWaitingEvents has been flushed for device loss, and it'll never get cleaned up.
+        if (GetDevice()->IsLost() || mCompletedSerial >= uint64_t(serial)) {
+            sender.Signal();
+        } else {
+            waitingEvents->Enqueue(std::move(sender), serial);
+        }
+    });
+
+    return receiver;
 }
 
 MaybeError Queue::Initialize() {
@@ -59,6 +80,16 @@ MaybeError Queue::Initialize() {
     }
 
     return mCommandContext.PrepareNextCommandBuffer(*mCommandQueue);
+}
+
+void Queue::UpdateWaitingEvents(ExecutionSerial completedSerial) {
+    ASSERT(mCompletedSerial >= uint64_t(completedSerial) || completedSerial == kMaxExecutionSerial);
+    mWaitingEvents.Use([&](auto waitingEvents) {
+        for (auto& waiting : waitingEvents->IterateUpTo(completedSerial)) {
+            waiting.Signal();
+        }
+        waitingEvents->ClearUpTo(completedSerial);
+    });
 }
 
 MaybeError Queue::WaitForIdleForDestruction() {
@@ -139,6 +170,8 @@ MaybeError Queue::SubmitPendingCommandBuffer() {
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+
+        this->UpdateWaitingEvents(pendingSerial);
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(platform, GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
