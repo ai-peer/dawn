@@ -18,6 +18,7 @@
 #include "dawn/webgpu_cpp.h"
 
 bool InitSample(int argc, const char** argv);
+void DoFlushCmdBufs();
 void DoFlush();
 bool ShouldQuit();
 
@@ -28,6 +29,7 @@ wgpu::Device CreateCppDawnDevice();
 wgpu::TextureFormat GetPreferredSwapChainTextureFormat();
 wgpu::SwapChain GetSwapChain();
 wgpu::TextureView CreateDefaultDepthStencilView(const wgpu::Device& device);
+wgpu::Instance& GetInstance();
 void ProcessEvents();
 
 #endif  // SRC_DAWN_SAMPLES_SAMPLEUTILS_H_

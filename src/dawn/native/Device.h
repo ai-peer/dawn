@@ -31,10 +31,12 @@
 #include "dawn/native/Format.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/Limits.h"
+#include "dawn/native/OSEvent.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/Toggles.h"
+#include "dawn/native/TrackedFuture.h"
 #include "dawn/native/UsageValidationMode.h"
 
 #include "dawn/native/DawnNative.h"
@@ -155,6 +157,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError ValidateObject(const ApiObjectBase* object) const;
 
+    InstanceBase* GetInstance() const;
     AdapterBase* GetAdapter() const;
     PhysicalDeviceBase* GetPhysicalDevice() const;
     virtual dawn::platform::Platform* GetPlatform() const;
@@ -174,7 +177,7 @@ class DeviceBase : public RefCountedWithExternalCount {
         CommandEncoder* encoder,
         const CommandBufferDescriptor* descriptor) = 0;
 
-    ExecutionSerial GetCompletedCommandSerial() const;
+    virtual ExecutionSerial GetCompletedCommandSerial() const;
     ExecutionSerial GetLastSubmittedCommandSerial() const;
     ExecutionSerial GetPendingCommandSerial() const;
 
@@ -449,6 +452,14 @@ class DeviceBase : public RefCountedWithExternalCount {
     bool HasScheduledCommands() const;
     // The serial by which time all currently submitted or pending operations will be completed.
     ExecutionSerial GetScheduledWorkDoneSerial() const;
+    // True if some future is now ready, false if not (it timed out).
+    virtual ResultOrError<bool> WaitAnyImpl(size_t count,
+                                            TrackedFuturePollInfo* futures,
+                                            Nanoseconds timeout);
+    virtual ResultOrError<OSEventReceiver> CreateWorkDoneEvent(ExecutionSerial) {
+        ASSERT(0);
+        return DAWN_INTERNAL_ERROR("FIXME make this pure virtual");
+    }
 
     // For the commands being internally recorded in backend, that were not urgent to submit, this
     // method makes them to be submitted as soon as possbile in next ticks.
