@@ -71,6 +71,9 @@ constexpr ExecutionSerial kMaxExecutionSerial = ExecutionSerial(~uint64_t(0));
 // other pipelines.
 using PipelineCompatibilityToken = TypedInteger<struct PipelineCompatibilityTokenT, uint64_t>;
 
+using PosixFd = TypedInteger<struct TypePosixFd, int>;
+using Milliseconds = TypedInteger<struct TypeMilliseconds, uint64_t>;
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_INTEGERTYPES_H_
