@@ -23,6 +23,7 @@
 #include "dawn/native/ExecutionQueue.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
+#include "dawn/native/OSEventReceiver.h"
 #include "dawn/native/ObjectBase.h"
 
 #include "dawn/native/DawnNative.h"
@@ -30,6 +31,8 @@
 #include "dawn/platform/DawnPlatform.h"
 
 namespace dawn::native {
+
+class WorkDoneEvent;
 
 // For the commands with async callback like 'MapAsync' and 'OnSubmittedWorkDone', we track the
 // execution serials of completion in the queue for them. This implements 'CallbackTask' so that the
@@ -59,6 +62,7 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     void APIOnSubmittedWorkDone(uint64_t signalValue,
                                 WGPUQueueWorkDoneCallback callback,
                                 void* userdata);
+    WGPUFuture APIOnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo);
     void APIWriteBuffer(BufferBase* buffer, uint64_t bufferOffset, const void* data, size_t size);
     void APIWriteTexture(const ImageCopyTexture* destination,
                          const void* data,
@@ -82,6 +86,11 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     void TrackTaskAfterEventualFlush(std::unique_ptr<TrackTaskCallback> task);
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
+
+    virtual OSEventReceiver InsertWorkDoneEvent() {
+        // TODO(crbug.com/dawn/1987): implement this in all backends and remove this default impl
+        CHECK(false);
+    }
 
   protected:
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
