@@ -78,6 +78,9 @@ parser.add_argument('-t',
     Fetch dependencies needed for testing
     """)
 
+parser.add_argument('--deps-to-skip', nargs='+', help="""
+    Names of dependencies to skip 
+""")
 
 def main(args):
     # The dependencies that we need to pull from the DEPS files.
@@ -94,6 +97,9 @@ def main(args):
         'third_party/jinja2',
         'third_party/markupsafe',
     ]
+
+    if args.deps_to_skip:
+        required_submodules = list(set(required_submodules) - set(args.deps_to_skip))
 
     if args.use_test_deps:
         required_submodules += [
