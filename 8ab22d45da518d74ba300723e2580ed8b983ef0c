@@ -16,6 +16,24 @@
       "message": "These seems unrelated to the cmake version number change?",
       "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3513d648_0a00ef80",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003701
+      },
+      "writtenOn": "2023-06-13T19:10:47Z",
+      "side": 0,
+      "message": "This changeset bumps the version and addresses the (straightforward?) items that were mentioned at the top of the root CMakeLists and depended on the newer version.\n\nI can split this up if preferred.",
+      "parentUuid": "7553e17f_bea55e76",
+      "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
