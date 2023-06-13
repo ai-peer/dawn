@@ -161,18 +161,18 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         formatsSet.set(index);
     };
 
-    auto AddColorFormat =
-        [&AddFormat](wgpu::TextureFormat format, bool renderable, bool supportsStorageUsage,
-                     bool supportsMultisample, bool supportsResolveTarget, uint32_t byteSize,
-                     SampleTypeBit sampleTypes, uint8_t componentCount,
-                     uint8_t renderTargetPixelByteCost = 0,
+    auto AddConditionalColorFormat =
+        [&AddFormat](wgpu::TextureFormat format, bool isSupported, bool renderable,
+                     bool supportsStorageUsage, bool supportsMultisample,
+                     bool supportsResolveTarget, uint32_t byteSize, SampleTypeBit sampleTypes,
+                     uint8_t componentCount, uint8_t renderTargetPixelByteCost = 0,
                      uint8_t renderTargetComponentAlignment = 0,
                      wgpu::TextureFormat baseFormat = wgpu::TextureFormat::Undefined) {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = renderable;
             internalFormat.isCompressed = false;
-            internalFormat.isSupported = true;
+            internalFormat.isSupported = isSupported;
             internalFormat.supportsStorageUsage = supportsStorageUsage;
 
             if (supportsMultisample) {
@@ -223,6 +223,19 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
             firstAspect->supportedSampleTypes = sampleTypes;
             firstAspect->format = format;
             AddFormat(internalFormat);
+        };
+
+    auto AddColorFormat =
+        [&AddConditionalColorFormat](
+            wgpu::TextureFormat format, bool renderable, bool supportsStorageUsage,
+            bool supportsMultisample, bool supportsResolveTarget, uint32_t byteSize,
+            SampleTypeBit sampleTypes, uint8_t componentCount,
+            uint8_t renderTargetPixelByteCost = 0, uint8_t renderTargetComponentAlignment = 0,
+            wgpu::TextureFormat baseFormat = wgpu::TextureFormat::Undefined) {
+            AddConditionalColorFormat(format, true, renderable, supportsStorageUsage,
+                                      supportsMultisample, supportsResolveTarget, byteSize,
+                                      sampleTypes, componentCount, renderTargetPixelByteCost,
+                                      renderTargetComponentAlignment, baseFormat);
         };
 
     auto AddDepthFormat = [&AddFormat](wgpu::TextureFormat format, uint32_t byteSize,
@@ -377,7 +390,7 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
 
         bool BGRA8UnormSupportsStorageUsage = device->HasFeature(Feature::BGRA8UnormStorage);
         AddColorFormat(wgpu::TextureFormat::BGRA8Unorm, true, BGRA8UnormSupportsStorageUsage, true, true, 4, kAnyFloat, 4, 8, 1);
-        AddColorFormat(wgpu::TextureFormat::BGRA8UnormSrgb, true, false, true, true, 4, kAnyFloat, 4, 8, 1, wgpu::TextureFormat::BGRA8Unorm);
+        AddConditionalColorFormat(wgpu::TextureFormat::BGRA8UnormSrgb, !device->IsCompatibilityMode(), true, false, true, true, 4, kAnyFloat, 4, 8, 1, wgpu::TextureFormat::BGRA8Unorm);
         AddColorFormat(wgpu::TextureFormat::RGB10A2Unorm, true, false, true, true, 4, kAnyFloat, 4, 8, 4);
 
         bool isRG11B10UfloatRenderable = device->HasFeature(Feature::RG11B10UfloatRenderable);
