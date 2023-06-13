@@ -20,9 +20,11 @@
 #include "dawn/common/SerialMap.h"
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/ExecutionQueue.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
+#include "dawn/native/OSEventReceiver.h"
 #include "dawn/native/ObjectBase.h"
 
 #include "dawn/native/DawnNative.h"
@@ -59,6 +61,7 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     void APIOnSubmittedWorkDone(uint64_t signalValue,
                                 WGPUQueueWorkDoneCallback callback,
                                 void* userdata);
+    WGPUFuture APIOnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo);
     void APIWriteBuffer(BufferBase* buffer, uint64_t bufferOffset, const void* data, size_t size);
     void APIWriteTexture(const ImageCopyTexture* destination,
                          const void* data,
@@ -86,9 +89,13 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
   protected:
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
     QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);
+
     void DestroyImpl() override;
+    virtual OSEventReceiver InsertWorkDoneEvent();
 
   private:
+    class WorkDoneEvent;
+
     MaybeError WriteTextureInternal(const ImageCopyTexture* destination,
                                     const void* data,
                                     size_t dataSize,
@@ -124,6 +131,29 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     MaybeError SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
     SerialMap<ExecutionSerial, std::unique_ptr<TrackTaskCallback>> mTasksInFlight;
+};
+
+class QueueBase::WorkDoneEvent final : public EventManager::TrackedEvent {
+  public:
+    static MaybeError Validate(QueueBase* queue, WGPUQueueWorkDoneStatus* earlyStatus);
+
+    // Create an event that's ready at creation (for errors, etc.)
+    WorkDoneEvent(DeviceBase* device,
+                  const WGPUQueueWorkDoneCallbackInfo& callbackInfo,
+                  WGPUQueueWorkDoneStatus earlyStatus);
+    // Create an event backed by the given OSEventReceiver.
+    WorkDoneEvent(DeviceBase* device,
+                  const WGPUQueueWorkDoneCallbackInfo& callbackInfo,
+                  OSEventReceiver&& receiver);
+    ~WorkDoneEvent() override = default;
+
+    DeviceBase* GetWaitDevice() const override;
+    void Complete() override;
+
+    Ref<DeviceBase> mDevice;
+    std::optional<WGPUQueueWorkDoneStatus> mEarlyStatus;
+    WGPUQueueWorkDoneCallback mCallback;
+    void* mUserdata;
 };
 
 }  // namespace dawn::native
