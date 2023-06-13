@@ -14,9 +14,14 @@
 
 #include "dawn/wire/client/Instance.h"
 
+#include <optional>
+#include <utility>
+
 #include "dawn/wire/client/Client.h"
 
 namespace dawn::wire::client {
+
+// Instance
 
 Instance::~Instance() {
     mRequestAdapterRequests.CloseAll([](RequestAdapterData* request) {
@@ -98,6 +103,19 @@ bool Instance::OnRequestAdapterCallback(uint64_t requestSerial,
 
     request.callback(status, ToAPI(adapter), message, request.userdata);
     return true;
+}
+
+void Instance::ProcessEvents() {
+    // TODO(crbug.com/dawn/1987): This should only process events for this Instance, not others
+    // on the same client. When EventManager is moved to Instance, this can be fixed.
+    GetClient()->GetEventManager().ProcessPollEvents();
+}
+
+WGPUWaitStatus Instance::WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS) {
+    // In principle the EventManager should be on the Instance, not the Client.
+    // But it's hard to get from an object to its Instance right now, so we can
+    // store it on the Client.
+    return GetClient()->GetEventManager().WaitAny(count, infos, timeoutNS);
 }
 
 }  // namespace dawn::wire::client
