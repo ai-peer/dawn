@@ -50,6 +50,24 @@
       "message": "It\u0027s a bit hard to read lines of booleans like these two arguments back to back. Maybe unset could be the last one and default to false? Not sure.",
       "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "621720f9_23ea8df1",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-13T23:39:25Z",
+      "side": 1,
+      "message": "Any comments / ideas on this, Austin?",
+      "parentUuid": "c4369d54_cddf4316",
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
