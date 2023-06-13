@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bd720be_c4187ea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-13T13:45:52Z",
+      "side": 1,
+      "message": "lgtm. Both comments can be done as followups.",
+      "revId": "0ae8ec42d4f449831c434c55d32d9b01776b9ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96135bb0_ea3fbeb5",
+        "filename": "src/tint/builtin/fluent_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-13T13:45:52Z",
+      "side": 1,
+      "message": "As a followup, Should these get generated from the intrinsic file along with the address_space and access enums?",
+      "revId": "0ae8ec42d4f449831c434c55d32d9b01776b9ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "404db112_5b5a3a03",
+        "filename": "src/tint/ir/load_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-13T13:45:52Z",
+      "side": 1,
+      "message": "This also doesn\u0027t use `mod`",
+      "revId": "0ae8ec42d4f449831c434c55d32d9b01776b9ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
