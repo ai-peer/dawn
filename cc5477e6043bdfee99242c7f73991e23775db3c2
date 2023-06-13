@@ -493,6 +493,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8121fae9_880c5077",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-13T21:33:53Z",
+      "side": 1,
+      "message": "I was talking with Corentin this morning about how we can make this more obviously correct.\n\nSummarizing - it\u0027s not obvious because there requires some coordination between the cache, refcounting, and destruction for things to work correctly. The cache assumes that objects are always removed from the cache strictly before they are deleted. It\u0027s because of this assumption that we can assume that performing TryGetRef while the cache mutex is acquired will never be a use-after-free.\n\nTaking a step back, this is not such a crazy assumption. If you start from the idea that the cache should not hold references to actually deleted things, then it follows that removal from the cache happens strictly before deletion. The tricky bit though is that there\u0027s a few steps between refcount going to 0, and actual deletion that need to be carefully considered, and problems could slip through in the future.\n\nThe way we discussed to really fix this would be to use real full on weak refs and put those inside the cache instead.\nThe interesting bit is how we might make it not unnecessarily heavy. One of the ways this is often done involves storing the refcount in a new, separate allocation - resulting in an extra indirection for every reference/release call. And, if we did this, that means we would need to fork the object hierarchy significantly since RefCounted is at the very, very bottom of it. We\u0027d need a RefCountedWithWeakRefSupport that cached objects ultimately inherit from instead. (or, we add this indirection to ALL RefCounted, so everything supports weakrefs).\n\nI think the other way we can do it is have the cached objects hold a WeakRef\u003cT\u003e back to themselves, and when you GetWeakRef they return that to you. WeakRef\u003cT\u003e holds a T* and has an Promote method to turn it into a Ref\u003cT\u003e. Promote needs to synchronize with deletion - the simple solution is to store a mutex in the WeakRef and acquire it on Promote and acquire it in DeleteThis of a cached object.\n\nIn practice, this is pretty similar to how the current implementation works, except there\u0027s a mutex per WeakRef as well as per cache, and the synchronization around promotion/deletion is more explicit.\n\nI think weakrefs are probably what we should do unless others have some better ideas. The semantics are for sure safer, though a little heavy. Weak refs let you store refs to deleted objects safely, but that\u0027s not *actually* what we\u0027re trying to do with the cache. We want something a bit less powerful; our cache might have soon-to-be-deleted and not reusable objects, but never actually contains deleted objects.",
+      "parentUuid": "c3789096_02b171a4",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94f43bbc_3880c11a",
         "filename": "src/dawn/common/RefCounted.h",
         "patchSetId": 2
