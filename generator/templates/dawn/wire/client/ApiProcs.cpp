@@ -138,13 +138,18 @@ namespace dawn::wire::client {
             return entry->proc;
         }
 
-        // Special case the two free-standing functions of the API.
+        // Special case the free-standing functions of the API.
         if (strcmp(procName, "wgpuGetProcAddress") == 0) {
             return reinterpret_cast<WGPUProc>(ClientGetProcAddress);
         }
-
         if (strcmp(procName, "wgpuCreateInstance") == 0) {
             return reinterpret_cast<WGPUProc>(ClientCreateInstance);
+        }
+        if (strcmp(procName, "wgpuFuturesWaitAny") == 0) {
+            return reinterpret_cast<WGPUProc>(ClientFuturesWaitAny);
+        }
+        if (strcmp(procName, "wgpuFuturesGetEarliestFds") == 0) {
+            return reinterpret_cast<WGPUProc>(ClientFuturesWaitAny);
         }
 
         return nullptr;

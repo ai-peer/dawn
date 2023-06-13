@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <poll.h>
+
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
@@ -149,6 +151,10 @@ int frameCount = 0;
 void frame() {
     wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
 
+    if (frameCount == 20) {
+        device.Destroy();
+    }
+
     for (auto& data : shaderData) {
         data.time = frameCount / 60.0f;
     }
@@ -171,6 +177,75 @@ void frame() {
 
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
+
+    static constexpr uint64_t kTimeout = 1000;
+    static constexpr bool kUseFd = true;
+    static constexpr bool kSubmitBetweenFutures = true;
+    static constexpr int kNumWaits = 2;
+    static constexpr int kNumFuturesPerWait = 2;
+    for (int i = 0; i < kNumWaits; ++i) {
+        wgpu::QueueWorkDoneDescriptorFd descFd{};
+        wgpu::QueueWorkDoneDescriptor desc{};
+        if (kUseFd) {
+            desc.nextInChain = &descFd;
+        }
+        std::vector<wgpu::QueueWorkDoneFuture> futures;
+        for (int j = 0; j < kNumFuturesPerWait; ++j) {
+            if (kSubmitBetweenFutures) {
+                wgpu::CommandBuffer cb = device.CreateCommandEncoder().Finish();
+                queue.Submit(1, &cb);
+            }
+            futures.push_back(queue.OnSubmittedWorkDone2(&desc));
+        }
+
+        bool done = false;
+        if (kUseFd) {
+            std::vector<int> fds(futures.size());
+            wgpu::FuturesGetEarliestFds(
+                futures.size(), reinterpret_cast<wgpu::Future*>(futures.data()), fds.data());
+
+            std::vector<struct pollfd> pfds;
+            for (int j = 0; j < kNumFuturesPerWait; ++j) {
+                if (fds[j] != -1) {
+                    pfds.push_back({fds[j], POLLIN, 0});
+                }
+            }
+            ASSERT(pfds.size() == 1);
+
+            while (pfds.size()) {
+                int status = poll(pfds.data(), pfds.size(), kTimeout);
+                ASSERT(status > 0);
+                std::erase_if(pfds, [](const auto& pfd) {
+                    if (pfd.revents & POLLIN) {
+                        return true;
+                    } else {
+                        ASSERT(pfd.revents == 0);
+                        return false;
+                    }
+                });
+            }
+            size_t count = futures.size();
+            auto waited =
+                wgpu::FuturesWaitAny(&count, reinterpret_cast<wgpu::Future*>(futures.data()), 0);
+            ASSERT(waited == wgpu::WaitStatus::SomeCompleted);
+            ASSERT(count == 0);
+            futures.resize(count);
+        } else {
+            futures[0].Then(
+                wgpu::CallbackMode::AllowReentrant,
+                [](WGPUQueueWorkDoneFuture, void* userdata) {
+                    *static_cast<bool*>(userdata) = true;
+                },
+                &done);
+            size_t count = futures.size();
+            auto waited = wgpu::FuturesWaitAny(
+                &count, reinterpret_cast<wgpu::Future*>(futures.data()), kTimeout);
+            ASSERT(waited == wgpu::WaitStatus::SomeCompleted);
+            ASSERT(count == 0);
+            futures.resize(count);
+        }
+    }
+
     swapchain.Present();
     DoFlush();
 }
