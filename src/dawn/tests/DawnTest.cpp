@@ -396,6 +396,7 @@ std::unique_ptr<native::Instance> DawnTestEnvironment::CreateInstance(
 
     wgpu::InstanceDescriptor instanceDesc;
     instanceDesc.nextInChain = &dawnInstanceDesc;
+    instanceDesc.timedWaitAnyEnable = true;
 
     auto instance = std::make_unique<native::Instance>(
         reinterpret_cast<const WGPUInstanceDescriptor*>(&instanceDesc));
