@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c3d3a67_5623b495",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-13T06:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb7d5533_9de6a4f1",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24951cd4_9720bf1a",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-06-07T05:24:20Z",
       "side": 1,
       "message": "nit: we can avoid indenting the rest of the code with an early `return {};`",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 91
+      },
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a180027a_48eeaea7",
+        "filename": "src/dawn/native/ProgrammableEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-13T06:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24951cd4_9720bf1a",
       "range": {
         "startLine": 121,
         "startChar": 0,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c582d8d8_dd6ce8ef",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2182,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-13T06:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ff994df_d0204c5c",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19919948_f65f4ca5",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-06-07T05:24:20Z",
       "side": 1,
       "message": "nit: comment above the test",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dd493d0_e33c973e",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-13T06:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19919948_f65f4ca5",
       "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "057a1339_602167d8",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-13T06:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3921da8e_268c8ce9",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0a46af5_3ffdee88",
@@ -122,6 +218,24 @@
       "writtenOn": "2023-06-07T05:24:20Z",
       "side": 1,
       "message": "we also need tests that if you unset bind groups, then it is invalid to draw with a pipeline that requires them",
+      "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03da6fb8_c96964ac",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-13T06:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0a46af5_3ffdee88",
       "revId": "be306ef59d89ab0e52057640651fa890396d7d71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
