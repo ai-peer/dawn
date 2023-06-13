@@ -26,6 +26,8 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/Subresource.h"
 
+#include "absl/strings/str_format.h"
+
 // About multi-planar formats.
 //
 // Dawn supports additional multi-planar formats when the multiplanar-formats extension is enabled.
@@ -72,6 +74,15 @@ enum class TextureComponentType {
     Uint,
 };
 
+struct RequiresFeature {
+    wgpu::FeatureName feature;
+};
+
+struct CompatibilityMode {};
+
+using UnsupportedReason =
+    std::variant</* is supported */ std::monostate, RequiresFeature, CompatibilityMode>;
+
 struct AspectInfo {
     TexelBlockInfo block;
     TextureComponentType baseType{};
@@ -92,11 +103,13 @@ using FormatTable = ityp::array<FormatIndex, Format, kKnownFormatCount>;
 struct Format {
     wgpu::TextureFormat format = wgpu::TextureFormat::Undefined;
 
+    static const UnsupportedReason supported;
+
     // TODO(crbug.com/dawn/1332): These members could be stored in a Format capability matrix.
     bool isRenderable = false;
     bool isCompressed = false;
     // A format can be known but not supported because it is part of a disabled extension.
-    bool isSupported = false;
+    UnsupportedReason unsupportedReason;
     bool supportsStorageUsage = false;
     bool supportsMultisample = false;
     bool supportsResolveTarget = false;
@@ -106,6 +119,7 @@ struct Format {
     uint8_t renderTargetPixelByteCost = 0;       // byte cost of pixel in render targets
     uint8_t renderTargetComponentAlignment = 0;  // byte alignment for components in render targets
 
+    bool IsSupported() const;
     bool IsColor() const;
     bool HasDepth() const;
     bool HasStencil() const;
@@ -163,6 +177,11 @@ class FormatSet : public ityp::bitset<FormatIndex, kKnownFormatCount> {
 FormatIndex ComputeFormatIndex(wgpu::TextureFormat format);
 // Builds the format table with the extensions enabled on the device.
 FormatTable BuildFormatTable(const DeviceBase* device);
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const UnsupportedReason& value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s);
 
 }  // namespace dawn::native
 
