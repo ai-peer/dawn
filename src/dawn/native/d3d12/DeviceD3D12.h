@@ -90,6 +90,8 @@ class Device final : public d3d::Device {
 
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
 
+    ResultOrError<OSEventReceiver> CreateWorkDoneEvent(ExecutionSerial) override;
+
     MaybeError ExecutePendingCommandContext();
 
     MaybeError CopyFromStagingToBufferImpl(BufferBase* source,

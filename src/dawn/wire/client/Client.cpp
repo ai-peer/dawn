@@ -38,7 +38,10 @@ class NoopCommandSerializer final : public CommandSerializer {
 }  // anonymous namespace
 
 Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
-    : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
+    : ClientBase(),
+      mSerializer(serializer),
+      mMemoryTransferService(memoryTransferService),
+      mEventManager(this) {
     if (mMemoryTransferService == nullptr) {
         // If a MemoryTransferService is not provided, fall back to inline memory.
         mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
