@@ -122,6 +122,12 @@ namespace dawn::wire::client {
     {% endfor %}
 
     namespace {
+        void ClientGetInstanceFeatures(WGPUInstanceFeatures* features) {
+            ASSERT(features->nextInChain == nullptr);
+            features->timedWaitAnyEnable = false;
+            features->timedWaitAnyMaxCount = kTimedWaitAnyMaxCountDefault;
+        }
+
         WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {
             UNREACHABLE();
             return nullptr;
