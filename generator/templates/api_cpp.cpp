@@ -167,8 +167,12 @@ namespace {{metadata.namespace}} {
                 {% if not loop.first %}, {% endif %}{{as_annotated_cppType(arg)}}
             {%- endfor -%}
         ) {
-            auto result = {{render_function_call(function)}};
-            return {{convert_cType_to_cppType(function.return_type, 'value', 'result')}};
+            {% if function.return_type.name.concatcase() == "void" %}
+                {{render_function_call(function)}};
+            {% else %}
+                auto result = {{render_function_call(function)}};
+                return {{convert_cType_to_cppType(function.return_type, 'value', 'result') | indent(8)}};
+            {% endif %}
         }
     {% endfor %}
 

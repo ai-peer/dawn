@@ -18,6 +18,7 @@
 #include <atomic>
 #include <memory>
 #include <mutex>
+#include <utility>
 #include <vector>
 
 #include "dawn/native/dawn_platform.h"
@@ -86,6 +87,11 @@ class Device final : public DeviceBase {
     id<MTLBuffer> GetMockBlitMtlBuffer();
 
     void ForceEventualFlushOfCommands() override;
+
+    ResultOrError<wgpu::WaitStatus> WaitForSerial(ExecutionSerial, Milliseconds timeout);
+
+    MaybeError InsertWaitingFuture(ExecutionSerial, FutureBase*);
+    void UpdateWaitingFutures(ExecutionSerial completedSerial);
 
   private:
     Device(AdapterBase* adapter,
@@ -169,6 +175,13 @@ class Device final : public DeviceBase {
     // vertex/fragement stage
     bool mCounterSamplingAtStageBoundary;
     NSPRef<id<MTLBuffer>> mMockBlitMtlBuffer;
+
+    // FIXME: replace all this with the resource deleter used in other backends?
+    std::mutex mWaitingFuturesMutex;
+    // This value is always <= the lowest ExecutionSerial in mWaitingFutures.
+    // This may be read atomically, but writes must be protected by mWaitingFuturesMutex.
+    std::atomic<uint64_t> mWaitingFuturesSerialLowerBound = UINT64_MAX;
+    std::vector<std::pair<ExecutionSerial, Ref<FutureBase>>> mWaitingFutures;  // FIXME optimize?
 };
 
 }  // namespace dawn::native::metal

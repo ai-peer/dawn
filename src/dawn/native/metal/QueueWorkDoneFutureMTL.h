@@ -1,0 +1,67 @@
+// Copyright 2023 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef SRC_DAWN_NATIVE_METAL_QUEUEWORKDONEFUTUREMTL_H_
+#define SRC_DAWN_NATIVE_METAL_QUEUEWORKDONEFUTUREMTL_H_
+
+#include "dawn/native/QueueWorkDoneFuture.h"
+
+#include "dawn/native/metal/QueueMTL.h"
+
+namespace dawn::native::metal {
+
+class Device;
+
+class EventPipe final {
+  public:
+    static ResultOrError<EventPipe> Create();
+
+    EventPipe() = default;
+    explicit EventPipe(EventPipe&&);
+    EventPipe& operator=(EventPipe&&);
+    ~EventPipe();
+
+    MaybeError Signal();
+    ResultOrError<bool> Ready(Milliseconds timeout) const;
+    PosixFd GetReceiverFd() const;
+
+  private:
+    explicit EventPipe(const int (&fds)[2]);
+
+    PosixFd mReceiver{-1};
+    PosixFd mSender{-1};
+};
+
+class QueueWorkDoneFuture final : public QueueWorkDoneFutureBase {
+  public:
+    static ResultOrError<QueueWorkDoneFuture*> Create(QueueBase*,
+                                                      ExecutionSerial,
+                                                      QueueWorkDoneDescriptor const*);
+
+    QueueWorkDoneFuture(QueueBase*, ExecutionSerial, bool requestedFd, EventPipe&&);
+
+    PosixFd GetFdInternal() const override;
+    MaybeError Signal() override;
+    ResultOrError<wgpu::WaitStatus> Wait(Milliseconds timeout) override;
+
+    // Dawn API
+    void APIGetResult(QueueWorkDoneResult*) const override;
+
+  private:
+    EventPipe mEventPipe;
+};
+
+}  // namespace dawn::native::metal
+
+#endif  // SRC_DAWN_NATIVE_METAL_QUEUEWORKDONEFUTUREMTL_H_

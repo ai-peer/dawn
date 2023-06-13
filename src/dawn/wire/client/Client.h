@@ -65,6 +65,8 @@ class Client : public ClientBase {
         return static_cast<T*>(mObjectStores[ObjectTypeToTypeEnum<T>].Get(id));
     }
 
+    void Flush() { mSerializer.Flush(); }
+
     // ChunkedCommandHandler implementation
     const volatile char* HandleCommandsImpl(const volatile char* commands, size_t size) override;
 

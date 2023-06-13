@@ -50,6 +50,32 @@ void Queue::OnSubmittedWorkDone(uint64_t signalValue,
     cmd.requestSerial = serial;
 
     client->SerializeCommand(cmd);
+    client->Flush();
+}
+
+WGPUQueueWorkDoneFuture Queue::OnSubmittedWorkDone2(WGPUQueueWorkDoneDescriptor const*) {
+    Client* client = GetClient();
+    if (client->IsDisconnected()) {
+        return nullptr;  // FIXME
+    }
+
+    QueueWorkDoneFuture* future = client->Make<QueueWorkDoneFuture>();
+
+    WGPUQueueWorkDoneCallback callback = [](WGPUQueueWorkDoneStatus status, void* userdata) {
+        auto* future = reinterpret_cast<QueueWorkDoneFuture*>(userdata);
+        future->MakeReady(status);
+    };
+    uint64_t serial = mOnWorkDoneRequests.Add({callback, future});
+
+    QueueOnSubmittedWorkDoneCmd cmd;
+    cmd.queueId = GetWireId();
+    cmd.signalValue = 0;
+    cmd.requestSerial = serial;
+
+    client->SerializeCommand(cmd);
+    client->Flush();
+
+    return reinterpret_cast<WGPUQueueWorkDoneFuture>(future);
 }
 
 void Queue::WriteBuffer(WGPUBuffer cBuffer, uint64_t bufferOffset, const void* data, size_t size) {

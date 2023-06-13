@@ -47,6 +47,38 @@
         ]
     },
 
+    "future": {
+        "category": "object"
+    },
+    "futures wait any": {
+        "category": "function",
+        "wire client flush": true,
+        "returns": "wait status",
+        "args": [
+            {"name": "future count", "type": "size_t", "annotation": "*"},
+            {"name": "futures", "type": "future", "annotation": "*", "length": "future count"},
+            {"name": "timeout", "type": "uint64_t", "default": "UINT64_MAX"}
+        ]
+    },
+    "futures get earliest fds": {
+        "category": "function",
+        "returns": "void",
+        "args": [
+            {"name": "count", "type": "size_t"},
+            {"name": "futures", "type": "future", "annotation": "const*", "length": "count"},
+            {"name": "fds", "type": "int", "annotation": "*"}
+        ]
+    },
+    "wait status": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "some completed"},
+            {"value": 1, "name": "partial progress"},
+            {"value": 2, "name": "none pending"},
+            {"value": 3, "name": "timed out"}
+        ]
+    },
+
     "request adapter options": {
         "category": "structure",
         "extensible": "in",
@@ -1129,7 +1161,9 @@
                 ]
             },
             {
-                "name": "destroy"
+                "name": "destroy",
+                "wire client flush": true,
+                "wire server flush": true
             },
             {
                 "name": "get limits",
@@ -1734,6 +1768,7 @@
         "methods": [
             {
                 "name": "submit",
+                "wire client flush": true,
                 "args": [
                     {"name": "command count", "type": "size_t"},
                     {"name": "commands", "type": "command buffer", "annotation": "const*", "length": "command count"}
@@ -1754,6 +1789,13 @@
                 "args": [
                     {"name": "callback", "type": "queue work done callback"},
                     {"name": "userdata", "type": "void *"}
+                ]
+            },
+            {
+                "name": "on submitted work done 2",
+                "returns": "queue work done future",
+                "args": [
+                    {"name": "descriptor", "type": "queue work done descriptor", "annotation": "const*"}
                 ]
             },
             {
@@ -1811,6 +1853,60 @@
         "extensible": "in",
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
+    },
+    "queue work done future": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "then",
+                "returns": "void",
+                "args": [
+                    {"name": "mode", "type": "callback mode"},
+                    {"name": "callback", "type": "queue work done future callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "get result",
+                "returns": "void",
+                "args": [
+                    {"name": "result", "type": "queue work done result", "annotation": "*"}
+                ]
+            }
+        ]
+    },
+    "queue work done descriptor": {
+        "category": "structure",
+        "extensible": "in",
+        "members": []
+    },
+    "queue work done descriptor fd": {
+        "category": "structure",
+        "tags": ["native"],
+        "chained": "in",
+        "chain roots": ["queue work done descriptor"],
+        "members": []
+    },
+    "queue work done result": {
+        "category": "structure",
+        "extensible": "out",
+        "members": [
+            {"name": "status", "type": "queue work done status"}
+        ]
+    },
+    "callback mode": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "poll"},
+            {"value": 1, "name": "allow reentrant"}
+        ]
+    },
+    "queue work done future callback": {
+        "category": "function pointer",
+        "args": [
+            {"name": "future", "type": "queue work done future"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
     "queue work done callback": {
@@ -2611,6 +2707,7 @@
             {"value": 13, "name": "external texture binding layout", "tags": ["dawn"]},
             {"value": 14, "name": "surface descriptor from windows swap chain panel", "tags": ["dawn"]},
             {"value": 15, "name": "render pass descriptor max draw count"},
+            {"value": 16, "name": "queue work done descriptor fd", "tags": ["native"]},
             {"value": 1000, "name": "dawn texture internal usage descriptor", "tags": ["dawn"]},
             {"value": 1003, "name": "dawn encoder internal usage descriptor", "tags": ["dawn"]},
             {"value": 1004, "name": "dawn instance descriptor", "tags": ["dawn", "native"]},
@@ -2968,6 +3065,9 @@
         "category": "native"
     },
     "void const *": {
+        "category": "native"
+    },
+    "int": {
         "category": "native"
     },
     "int32_t": {

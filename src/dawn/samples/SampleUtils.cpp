@@ -374,13 +374,17 @@ bool InitSample(int argc, const char** argv) {
     return true;
 }
 
-void DoFlush() {
+void DoFlushCmdBufs() {
     if (cmdBufType == CmdBufType::Terrible) {
         bool c2sSuccess = c2sBuf->Flush();
         bool s2cSuccess = s2cBuf->Flush();
-
-        ASSERT(c2sSuccess && s2cSuccess);
+        ASSERT(c2sSuccess);
+        ASSERT(s2cSuccess);
     }
+}
+
+void DoFlush() {
+    DoFlushCmdBufs();
     glfwPollEvents();
 }
 

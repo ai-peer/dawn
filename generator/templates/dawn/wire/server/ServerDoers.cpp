@@ -58,6 +58,9 @@ namespace dawn::wire::server {
                         //* object creation functions.
                         ASSERT(*{{as_varName(ret[0].name)}} != nullptr);
                     {% endif %}
+                    {% if is_method and method.json_data["wire server flush"] %}
+                        mSerializer.Flush();
+                    {% endif %}
                     return WireResult::Success;
                 }
             {% endif %}

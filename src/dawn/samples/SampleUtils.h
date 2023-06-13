@@ -18,6 +18,7 @@
 #include "dawn/webgpu_cpp.h"
 
 bool InitSample(int argc, const char** argv);
+void DoFlushCmdBufs();
 void DoFlush();
 bool ShouldQuit();
 

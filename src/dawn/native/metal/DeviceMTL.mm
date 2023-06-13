@@ -311,6 +311,54 @@ void Device::ForceEventualFlushOfCommands() {
     }
 }
 
+MaybeError Device::InsertWaitingFuture(ExecutionSerial serial, FutureBase* future) {
+    std::lock_guard guard{mWaitingFuturesMutex};
+
+    if (mCompletedSerial.load() >= uint64_t(serial)) {
+        // The requested serial has already completed (usually happens if OnSubmittedWorkDone
+        // is called after everything is already completed).
+        return future->Signal();
+    }
+
+    if (uint64_t(serial) < mWaitingFuturesSerialLowerBound.load()) {
+        mWaitingFuturesSerialLowerBound = uint64_t(serial);
+    }
+
+    if (mCompletedSerial.load() >= uint64_t(serial)) {
+        // mCompletedSerial advanced past GetPendingCommandSerial() while this function was
+        // executing. Just signal the future instead of storing it, so it won't have to wait until
+        // there's another command buffer completion (which may be never!). This will leave the
+        // lower bound lower than it needs to be, but that's fine. In this very rare case,
+        // UpdateWaitingFutures will take the lock unnecessarily.
+        return future->Signal();
+    }
+
+    mWaitingFutures.push_back(std::pair(serial, future));
+    return {};
+}
+
+void Device::UpdateWaitingFutures(ExecutionSerial completedSerial) {
+    ASSERT(mCompletedSerial.load() >= uint64_t(completedSerial));
+    if (completedSerial >= ExecutionSerial(mWaitingFuturesSerialLowerBound.load())) {
+        {
+            std::lock_guard guard{mWaitingFuturesMutex};
+
+            uint64_t newLowerBound = UINT64_MAX;
+            for (const auto& waiting : mWaitingFutures) {
+                if (waiting.first <= completedSerial) {
+                    DAWN_UNUSED(ConsumedError(waiting.second->Signal()));
+                } else if (uint64_t(waiting.first) < newLowerBound) {
+                    newLowerBound = uint64_t(waiting.first);
+                }
+            }
+            std::erase_if(mWaitingFutures,
+                          [=](const auto& waiting) { return waiting.first <= completedSerial; });
+
+            mWaitingFuturesSerialLowerBound.store(newLowerBound);
+        }
+    }
+}
+
 MaybeError Device::SubmitPendingCommandBuffer() {
     if (!mCommandContext.NeedsSubmit()) {
         return {};
@@ -349,6 +397,8 @@ MaybeError Device::SubmitPendingCommandBuffer() {
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+
+        this->UpdateWaitingFutures(pendingSerial);
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
