@@ -376,6 +376,24 @@ bool Device::HasPendingCommands() const {
     return mPendingCommands.NeedsSubmit();
 }
 
+ResultOrError<EventReceiver> Device::CreateWorkDoneEvent(ExecutionSerial serial) {
+    if (serial > GetLastSubmittedCommandSerial()) {
+        ForceEventualFlushOfCommands();
+    }
+
+    HANDLE event = CreateEvent(nullptr, FALSE, FALSE, nullptr);
+    if (IsLost()) {
+        bool succeeded = SetEvent(event);
+        if (!succeeded) {
+            return DAWN_INTERNAL_ERROR("SetEvent failed");
+        }
+    } else {
+        DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(uint64_t(serial), event),
+                              "SetEventOnCompletion failed"));
+    }
+    return EventReceiver{event};
+}
+
 void Device::ForceEventualFlushOfCommands() {
     if (mPendingCommands.IsOpen()) {
         mPendingCommands.SetNeedsSubmit();

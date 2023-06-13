@@ -31,8 +31,10 @@
 #include "dawn/native/BackendConnection.h"
 #include "dawn/native/BlobCache.h"
 #include "dawn/native/Features.h"
+#include "dawn/native/IntegerTypes.h"
 #include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/Toggles.h"
+#include "dawn/native/TrackedFuture.h"
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::platform {
@@ -143,9 +145,14 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Get backend-independent libraries that need to be loaded dynamically.
     const XlibXcbFunctions* GetOrCreateXlibXcbFunctions();
 
+    FutureID TrackFuture(TrackedFuture*);
+
     // Dawn API
     Surface* APICreateSurface(const SurfaceDescriptor* descriptor);
     bool APIProcessEvents();
+    [[nodiscard]] wgpu::WaitStatus APIWaitAny(size_t count,
+                                              FutureWaitInfo* futures,
+                                              uint64_t timeoutNS);
 
   private:
     explicit InstanceBase(const TogglesState& instanceToggles);
@@ -177,6 +184,10 @@ class InstanceBase final : public RefCountedWithExternalCount {
                                    wgpu::PowerPreference powerPreference) const;
 
     void ConsumeError(std::unique_ptr<ErrorData> error);
+
+    ResultOrError<wgpu::WaitStatus> WaitAnyImpl(size_t count,
+                                                FutureWaitInfo* infos,
+                                                Nanoseconds timeout);
 
     std::unordered_set<std::string> warningMessages;
 
@@ -210,6 +221,10 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     std::set<DeviceBase*> mDevicesList;
     mutable std::mutex mDevicesListMutex;
+
+    std::atomic<uint64_t> mNextFutureID = 1;
+    std::unordered_map</* FutureID */ uint64_t, Ref<TrackedFuture>> mTrackedFutures;
+    std::mutex mTrackedFuturesMutex;
 };
 
 }  // namespace dawn::native

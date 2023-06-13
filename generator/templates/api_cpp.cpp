@@ -40,7 +40,7 @@ namespace {{metadata.namespace}} {
 
     {% for type in by_category["bitmask"] %}
         {% set CppType = as_cppType(type.name) %}
-        {% set CType = as_cType(type.name) + "Flags" %}
+        {% set CType = as_cFlagsType(type) %}
 
         // {{CppType}}
 

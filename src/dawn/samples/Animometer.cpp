@@ -12,8 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <chrono>
+#include <thread>
 #include <vector>
 
 #include "dawn/samples/SampleUtils.h"
@@ -149,6 +152,11 @@ int frameCount = 0;
 void frame() {
     wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
 
+    if (frameCount == 20) {
+        // FIXME try destroying while some futures are active
+        device.Destroy();
+    }
+
     for (auto& data : shaderData) {
         data.time = frameCount / 60.0f;
     }
@@ -171,6 +179,49 @@ void frame() {
 
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
+
+    // Cannot use infinite timeout because of the wire
+    static constexpr uint64_t kTimeoutNS = 1'000'000'000;  // 1 second
+    static constexpr bool kSubmitBetweenFutures = false;
+    static constexpr int kNumWaits = 2;
+    static constexpr int kNumFuturesPerWait = 2;
+    for (int i = 0; i < kNumWaits; ++i) {
+        int workDoneCount = 0;
+        WGPUQueueWorkDoneCallback workDoneCallback = [](WGPUQueueWorkDoneStatus status,
+                                                        void* userdata) {
+            ASSERT(status == WGPUQueueWorkDoneStatus_Success ||
+                   status == WGPUQueueWorkDoneStatus_DeviceLost);
+            *static_cast<int*>(userdata) += 1;
+        };
+
+        std::vector<wgpu::FutureWaitInfo> futures;
+        for (int j = 0; j < kNumFuturesPerWait; ++j) {
+            if (kSubmitBetweenFutures) {
+                wgpu::CommandBuffer cb = device.CreateCommandEncoder().Finish();
+                queue.Submit(1, &cb);
+            }
+            wgpu::Future future = queue.OnSubmittedWorkDone2(wgpu::CallbackFlag::None,
+                                                             workDoneCallback, &workDoneCount);
+            futures.push_back(wgpu::FutureWaitInfo{future});
+        }
+
+        while (workDoneCount < kNumFuturesPerWait || kNumFuturesPerWait == 0) {
+            device.Tick();
+            DoFlushCmdBufs();
+            auto start = std::chrono::high_resolution_clock::now();
+            wgpu::WaitStatus waited =
+                GetInstance().WaitAny(futures.size(), futures.data(), kTimeoutNS);
+            auto end = std::chrono::high_resolution_clock::now();
+            printf("frame %d on wait %d of %d, for %d futures: waited %lldus\n", frameCount, i + 1,
+                   kNumWaits, kNumFuturesPerWait,
+                   std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+            if (waited == wgpu::WaitStatus::Success) {
+                break;
+            }
+            printf("WaitAny timed out...\n");
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+    }
     swapchain.Present();
     DoFlush();
 }

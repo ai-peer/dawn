@@ -18,12 +18,14 @@
 #include <atomic>
 #include <memory>
 #include <mutex>
+#include <utility>
 #include <vector>
 
 #include "dawn/native/dawn_platform.h"
 
 #include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/EventPipe.h"
 #include "dawn/native/metal/CommandRecordingContext.h"
 #include "dawn/native/metal/Forward.h"
 
@@ -89,6 +91,9 @@ class Device final : public DeviceBase {
 
     void ForceEventualFlushOfCommands() override;
 
+    ResultOrError<EventReceiver> CreateWorkDoneEvent(ExecutionSerial) override;
+    void UpdateWaitingEvents(ExecutionSerial completedSerial);
+
   private:
     Device(AdapterBase* adapter,
            NSPRef<id<MTLDevice>> mtlDevice,
@@ -139,6 +144,7 @@ class Device final : public DeviceBase {
     MaybeError WaitForIdleForDestruction() override;
     bool HasPendingCommands() const override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
+    ExecutionSerial GetCompletedCommandSerial() const override;
 
     NSPRef<id<MTLDevice>> mMtlDevice;
     NSPRef<id> mMtlSharedEvent = nil;  // MTLSharedEvent not available until macOS 10.14+.
@@ -171,6 +177,13 @@ class Device final : public DeviceBase {
     // vertex/fragement stage
     bool mCounterSamplingAtStageBoundary;
     NSPRef<id<MTLBuffer>> mMockBlitMtlBuffer;
+
+    // FIXME: replace all this with the resource deleter used in other backends?
+    std::mutex mWaitingEventsMutex;
+    // This value is always <= the lowest ExecutionSerial in mWaitingEvents.
+    // This may be read atomically, but writes must be protected by mWaitingEventsMutex.
+    std::atomic<uint64_t> mWaitingEventsSerialLowerBound = UINT64_MAX;
+    std::vector<std::pair<ExecutionSerial, EventPipeSender>> mWaitingEvents;  // FIXME optimize?
 };
 
 }  // namespace dawn::native::metal
