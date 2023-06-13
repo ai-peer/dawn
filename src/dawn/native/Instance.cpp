@@ -1,4 +1,4 @@
-// Copyright 2018 The Dawn Authors
+// Copyright 2018 The Dawn Aethors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
 
 #include "dawn/native/Instance.h"
 
+#include <algorithm>
+#include <limits>
 #include <utility>
 
 #include "dawn/common/Assert.h"
@@ -23,7 +25,10 @@
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/Error.h"
 #include "dawn/native/ErrorData.h"
+#include "dawn/native/IntegerTypes.h"
+#include "dawn/native/OSEvent.h"
 #include "dawn/native/Surface.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
@@ -47,8 +52,6 @@
 #if defined(DAWN_USE_X11)
 #include "dawn/native/XlibXcbFunctions.h"
 #endif  // defined(DAWN_USE_X11)
-
-#include <optional>
 
 namespace dawn::native {
 
@@ -93,6 +96,11 @@ dawn::platform::CachingInterface* GetCachingInterface(dawn::platform::Platform* 
     }
     return nullptr;
 }
+
+static constexpr size_t kTimedWaitAnyMaxCountDefault = 64;
+#if DAWN_PLATFORM_IS(WINDOWS)
+static_assert(kTimedWaitAnyMaxCountDefault == MAXIMUM_WAIT_OBJECTS);
+#endif
 
 }  // anonymous namespace
 
@@ -173,6 +181,12 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(dawnDesc != nullptr ? dawnDesc->platform : mDefaultPlatform.get());
+
+    if (descriptor->timedWaitAnyMaxCount > kTimedWaitAnyMaxCountDefault) {
+        return DAWN_VALIDATION_ERROR("Requested timedWaitAnyMaxCount is not supported");
+    }
+    mTimedWaitEnable = descriptor->timedWaitAnyEnable;
+    mTimedWaitMaxCount = kTimedWaitAnyMaxCountDefault;
 
     return {};
 }
@@ -542,6 +556,15 @@ void InstanceBase::RemoveDevice(DeviceBase* device) {
     mDevicesList.erase(device);
 }
 
+FutureID InstanceBase::TrackFuture(TrackedFuture* future) {
+    uint64_t id = mNextFutureID++;
+    {
+        std::lock_guard lock{mTrackedFuturesMutex};
+        mTrackedFutures.emplace(id, future);
+    }
+    return FutureID(id);
+}
+
 bool InstanceBase::APIProcessEvents() {
     std::vector<Ref<DeviceBase>> devices;
     {
@@ -559,6 +582,123 @@ bool InstanceBase::APIProcessEvents() {
     mCallbackTaskManager->Flush();
 
     return hasMoreEvents || !mCallbackTaskManager->IsEmpty();
+}
+
+wgpu::WaitStatus InstanceBase::APIWaitAny(size_t count,
+                                          FutureWaitInfo* futures,
+                                          uint64_t timeoutNS) {
+    wgpu::WaitStatus status;
+    if (ConsumedError(WaitAnyImpl(count, futures, Nanoseconds(timeoutNS)), &status)) {
+        return wgpu::WaitStatus::Unknown;
+    }
+    return status;
+}
+
+ResultOrError<wgpu::WaitStatus> InstanceBase::WaitAnyImpl(size_t count,
+                                                          FutureWaitInfo* infos,
+                                                          Nanoseconds timeout) {
+    if (count == 0) {
+        return wgpu::WaitStatus::Success;
+    }
+
+    // First look through the list of futures and find any that have already completed.
+    std::vector<TrackedFuturePollInfo> futures;
+    futures.reserve(count);
+    bool anyCompleted = false;
+    {
+        uint64_t firstInvalidFutureID = mNextFutureID.load();
+
+        std::lock_guard lock{mTrackedFuturesMutex};
+        for (size_t i = 0; i < count; ++i) {
+            uint64_t futureID = infos[i].future.id;
+            ASSERT(futureID < firstInvalidFutureID);
+
+            auto it = mTrackedFutures.find(futureID);
+            if (it == mTrackedFutures.end()) {
+                infos[i].completed = true;
+                anyCompleted = true;
+            } else {
+                infos[i].completed = false;
+                futures.push_back(TrackedFuturePollInfo{it->second, i, false});
+            }
+        }
+    }
+    if (anyCompleted) {
+        return wgpu::WaitStatus::Success;
+    }
+    ASSERT(futures.size() == count);
+
+    if (timeout > Nanoseconds(0)) {
+        if (!mTimedWaitEnable) {
+            return wgpu::WaitStatus::UnsupportedTimeout;
+        }
+        if (count > mTimedWaitMaxCount) {
+            return wgpu::WaitStatus::UnsupportedCount;
+        }
+    }
+
+    // Sort the futures by how they'll be waited (their GetWaitDevice).
+    // This lets us do each wait on a slice of the array.
+    std::ranges::sort(futures, std::ranges::less{}, [](const TrackedFuturePollInfo& future) {
+        return future.future->GetWaitDevice();
+    });
+
+    if (timeout > Nanoseconds(0) &&
+        futures.front().future->GetWaitDevice() != futures.back().future->GetWaitDevice()) {
+        return wgpu::WaitStatus::UnsupportedMixedSources;
+    }
+
+    // Actually do the poll or wait to find out if any of the futures became ready.
+    // Here, there's either only iteration, or timeout is 0, so we know the
+    // timeout won't get stacked multiple times.
+    bool anySuccess = false;
+    for (size_t sliceStart = 0; sliceStart < count;) {
+        DeviceBase* waitDevice = (futures[sliceStart].future->GetWaitDevice());
+        size_t sliceEnd = sliceStart + 1;
+        while (sliceEnd < count && (futures[sliceEnd].future->GetWaitDevice()) == waitDevice) {
+            sliceEnd++;
+        }
+        ASSERT(sliceEnd <= count);
+        size_t sliceLength = sliceEnd - sliceStart;
+
+        {
+            bool success;
+            if (waitDevice) {
+                DAWN_TRY_ASSIGN(
+                    success, waitDevice->WaitAnyImpl(sliceLength, &futures[sliceStart], timeout));
+            } else {
+                DAWN_TRY_ASSIGN(success,
+                                OSEventReceiver::Wait(sliceLength, &futures[sliceStart], timeout));
+            }
+            anySuccess |= success;
+        }
+
+        sliceStart = sliceEnd;
+    }
+    if (!anySuccess) {
+        return wgpu::WaitStatus::TimedOut;
+    }
+
+    // For any futures that we're about to complete, first ensure they're untracked.
+    // (It's OK if it actually wasn't tracked anymore because it completed elsewhere while waiting.)
+    {
+        std::lock_guard lock{mTrackedFuturesMutex};
+        for (const TrackedFuturePollInfo& future : futures) {
+            if (future.ready) {
+                mTrackedFutures.erase(uint64_t(future.future->GetID()));
+            }
+        }
+    }
+
+    // Finally, call callbacks and update return values.
+    for (const TrackedFuturePollInfo& future : futures) {
+        if (future.ready) {
+            future.future->EnsureComplete();
+            infos[future.indexInInfos].completed = true;
+        }
+    }
+
+    return wgpu::WaitStatus::Success;
 }
 
 const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {
