@@ -14,9 +14,16 @@
 
 #include "dawn/wire/client/Instance.h"
 
+#include <optional>
+#include <utility>
+
+#include "dawn/common/FutureUtils.h"
 #include "dawn/wire/client/Client.h"
+#include "dawn/wire/client/Device.h"
 
 namespace dawn::wire::client {
+
+// Instance
 
 Instance::~Instance() {
     mRequestAdapterRequests.CloseAll([](RequestAdapterData* request) {
@@ -98,6 +105,105 @@ bool Instance::OnRequestAdapterCallback(uint64_t requestSerial,
 
     request.callback(status, ToAPI(adapter), message, request.userdata);
     return true;
+}
+
+FutureID Instance::TrackEvent(WGPUCallbackMode mode,
+                              Device* deviceForQueueEventSource,
+                              std::function<void()>&& callback) {
+    std::lock_guard lock(mTrackedEventsMutex);
+
+    FutureID futureID = mNextFutureID++;
+    mTrackedEvents.emplace(futureID,
+                           TrackedEvent(mode, deviceForQueueEventSource, std::move(callback)));
+
+    return (mode & WGPUCallbackMode_Future) ? futureID : 0;
+}
+
+WGPUWaitStatus Instance::WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS) {
+    if (count == 0) {
+        return WGPUWaitStatus_Success;
+    }
+
+    std::lock_guard lock(mTrackedEventsMutex);
+
+    // Wire can always handle mixed event sources, but we still have to validate it.
+    Device* deviceForQueueEventSource = nullptr;
+    bool foundMixedSources = false;
+
+    bool anyCompleted = false;
+    for (size_t i = 0; i < count; ++i) {
+        auto it = mTrackedEvents.find(infos[i].future.id);
+        if (it == mTrackedEvents.end()) {
+            infos[i].completed = true;
+            anyCompleted = true;
+        } else {
+            TrackedEvent& event = it->second;
+            ASSERT(event.mMode & WGPUCallbackMode_Future);
+            infos[i].completed = false;
+
+            if (deviceForQueueEventSource) {
+                if (event.mDeviceForQueueEventSource != deviceForQueueEventSource) {
+                    foundMixedSources = true;
+                }
+            } else {
+                deviceForQueueEventSource = event.mDeviceForQueueEventSource.Get();
+            }
+        }
+    }
+    if (anyCompleted) {
+        return WGPUWaitStatus_Success;
+    }
+
+    // Validate for feature support.
+    // Note this is after .completed fields get set, so they'll be correct even if there's an error.
+    if (timeoutNS > 0) {
+        // Wire doesn't support timedWaitEnable (yet).
+        // TODO(crbug.com/dawn/1987): CreateInstance needs to validate that it wasn't requested.
+        return WGPUWaitStatus_UnsupportedTimeout;
+
+        // There's no UnsupportedCount validation here because that only applies to timed waits.
+    }
+    if (foundMixedSources) {
+        return WGPUWaitStatus_UnsupportedMixedSources;
+    }
+
+    for (size_t i = 0; i < count; ++i) {
+        FutureID futureID = infos[i].future.id;
+        // We know here that the future must be tracked, since anyCompleted is false.
+        TrackedEvent& event = mTrackedEvents[futureID];
+
+        // TODO(crbug.com/dawn/1987): Guarantee the event ordering from the JS spec.
+        bool ready = event.CheckReadyAndCompleteIfNeeded();
+        if (ready) {
+            infos[i].completed = true;
+            mTrackedEvents.erase(futureID);
+        }
+    }
+
+    return WGPUWaitStatus_Success;
+}
+
+// Instance::TrackedEvent
+
+Instance::TrackedEvent::TrackedEvent(WGPUCallbackModeFlags mode,
+                                     Device* deviceForQueueEventSource,
+                                     std::function<void()>&& callback)
+    : mMode(mode), mDeviceForQueueEventSource(deviceForQueueEventSource), mCallback(callback) {}
+
+void Instance::TrackedEvent::SetReady() {
+    mReady = true;
+    if ((mMode & WGPUCallbackMode_Spontaneous) && mCallback) {
+        mCallback();
+        mCallback = {};
+    }
+}
+
+bool Instance::TrackedEvent::CheckReadyAndCompleteIfNeeded() {
+    if (mReady && mCallback) {
+        mCallback();
+        mCallback = {};
+    }
+    return mReady;
 }
 
 }  // namespace dawn::wire::client

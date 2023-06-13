@@ -52,6 +52,10 @@ void Queue::OnSubmittedWorkDone(uint64_t signalValue,
     client->SerializeCommand(cmd);
 }
 
+WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo) {
+    abort();  // FIXME
+}
+
 void Queue::WriteBuffer(WGPUBuffer cBuffer, uint64_t bufferOffset, const void* data, size_t size) {
     Buffer* buffer = FromAPI(cBuffer);
 

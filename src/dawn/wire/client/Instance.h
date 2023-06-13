@@ -15,14 +15,21 @@
 #ifndef SRC_DAWN_WIRE_CLIENT_INSTANCE_H_
 #define SRC_DAWN_WIRE_CLIENT_INSTANCE_H_
 
-#include "dawn/webgpu.h"
+#include <atomic>
+#include <functional>
+#include <unordered_map>
 
+#include "dawn/common/FutureUtils.h"
+#include "dawn/common/Ref.h"
+#include "dawn/webgpu.h"
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireCmd_autogen.h"
 #include "dawn/wire/client/ObjectBase.h"
 #include "dawn/wire/client/RequestTracker.h"
 
 namespace dawn::wire::client {
+
+class Device;
 
 class Instance final : public ObjectBase {
   public:
@@ -42,6 +49,12 @@ class Instance final : public ObjectBase {
                                   uint32_t featuresCount,
                                   const WGPUFeatureName* features);
 
+    FutureID TrackEvent(WGPUCallbackMode mode,
+                        Device* deviceForQueueEventSource,
+                        std::function<void()>&& callback);
+    void CompleteFuture(FutureID futureID);
+    WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
+
   private:
     struct RequestAdapterData {
         WGPURequestAdapterCallback callback = nullptr;
@@ -49,6 +62,33 @@ class Instance final : public ObjectBase {
         void* userdata = nullptr;
     };
     RequestTracker<RequestAdapterData> mRequestAdapterRequests;
+
+    struct TrackedEvent {
+        TrackedEvent(WGPUCallbackModeFlags mode,
+                     Device* deviceForQueueEventSource,
+                     std::function<void()>&& callback);
+
+        TrackedEvent(TrackedEvent&&) = delete;
+        TrackedEvent& operator=(TrackedEvent&&) = delete;
+        TrackedEvent(TrackedEvent&) = delete;
+        TrackedEvent& operator=(TrackedEvent&) = delete;
+
+        void SetReady();
+        bool CheckReadyAndCompleteIfNeeded();
+
+        WGPUCallbackModeFlags mMode;
+        // Only used for validation.
+        Ref<Device> mDeviceForQueueEventSource;
+        // Callback. Falsey if already called.
+        std::function<void()> mCallback;
+        bool mReady = false;
+    };
+
+    // Must be held to use mTrackedEvents.
+    std::mutex mTrackedEventsMutex;
+    // Tracks all kinds of events (for both WaitAny and ProcessEvents).
+    std::unordered_map<FutureID, TrackedEvent> mTrackedEvents;
+    std::atomic<FutureID> mNextFutureID;
 };
 
 }  // namespace dawn::wire::client
