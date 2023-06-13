@@ -23,6 +23,7 @@
 #include "dawn/native/ExecutionQueue.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
+#include "dawn/native/OSEventReceiver.h"
 #include "dawn/native/ObjectBase.h"
 
 #include "dawn/native/DawnNative.h"
@@ -59,6 +60,7 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     void APIOnSubmittedWorkDone(uint64_t signalValue,
                                 WGPUQueueWorkDoneCallback callback,
                                 void* userdata);
+    WGPUFuture APIOnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo);
     void APIWriteBuffer(BufferBase* buffer, uint64_t bufferOffset, const void* data, size_t size);
     void APIWriteTexture(const ImageCopyTexture* destination,
                          const void* data,
@@ -86,7 +88,9 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
   protected:
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
     QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);
+
     void DestroyImpl() override;
+    virtual OSEventReceiver InsertWorkDoneEvent();
 
   private:
     MaybeError WriteTextureInternal(const ImageCopyTexture* destination,

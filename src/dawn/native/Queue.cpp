@@ -29,7 +29,10 @@
 #include "dawn/native/CopyTextureForBrowserHelper.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/ExternalTexture.h"
+#include "dawn/native/Instance.h"
+#include "dawn/native/OSEventReceiver.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/QuerySet.h"
 #include "dawn/native/RenderPassEncoder.h"
@@ -37,6 +40,7 @@
 #include "dawn/native/Texture.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+#include "webgpu-headers/webgpu.h"
 
 namespace dawn::native {
 
@@ -172,7 +176,50 @@ class ErrorQueue : public QueueBase {
     void ForceEventualFlushOfCommands() override { UNREACHABLE(); }
     MaybeError WaitForIdleForDestruction() override { UNREACHABLE(); }
 };
+
+struct WorkDoneEvent final : public EventManager::TrackedEvent {
+    Ref<DeviceBase> mDevice;
+    std::optional<WGPUQueueWorkDoneStatus> mEarlyStatus;
+    WGPUQueueWorkDoneCallback mCallback;
+    void* mUserdata;
+
+    // Create an event backed by the given OSEventReceiver.
+    WorkDoneEvent(DeviceBase* device,
+                  const WGPUQueueWorkDoneCallbackInfo& callbackInfo,
+                  OSEventReceiver&& receiver)
+        : TrackedEvent(device->GetInstance(), callbackInfo.mode, std::move(receiver)),
+          mDevice(device),
+          mCallback(callbackInfo.callback),
+          mUserdata(callbackInfo.userdata) {}
+
+    // Create an event that's ready at creation (for errors, etc.)
+    WorkDoneEvent(DeviceBase* device,
+                  const WGPUQueueWorkDoneCallbackInfo& callbackInfo,
+                  WGPUQueueWorkDoneStatus earlyStatus)
+        : WorkDoneEvent(device, callbackInfo, OSEventReceiver::CreateAlreadySignaled()) {
+        CompleteIfSpontaneous();
+    }
+
+    ~WorkDoneEvent() override = default;
+
+    // TODO(crbug.com/dawn/1987): When adding support for mixed sources, return nullptr here when
+    // the device has the mixed sources feature enabled, and so can expose the fence as an OS event.
+    DeviceBase* GetWaitDevice() const override { return mDevice.Get(); }
+
+    void Complete() override {
+        // WorkDoneEvent has no error cases other than the mEarlyStatus ones.
+        WGPUQueueWorkDoneStatus status = WGPUQueueWorkDoneStatus_Success;
+        if (mEarlyStatus) {
+            status = mEarlyStatus.value();
+        }
+
+        mCallback(status, mUserdata);
+    }
+};
+
 }  // namespace
+
+// TrackTaskCallback
 
 void TrackTaskCallback::SetFinishedSerial(ExecutionSerial serial) {
     mSerial = serial;
@@ -236,6 +283,39 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
                  uint64_t(GetDevice()->GetPendingCommandSerial()));
+}
+
+WGPUFuture QueueBase::APIOnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo) {
+    // TODO(crbug.com/dawn/1987): Once we always return a future, change this to log to the instance
+    // (note, not raise a validation error to the device) and return the null future.
+    ASSERT(callbackInfo.nextInChain == nullptr);
+
+    Ref<EventManager::TrackedEvent> event;
+
+    WGPUQueueWorkDoneStatus validationEarlyStatus;
+    if (GetDevice()->ConsumedError(ValidateOnSubmittedWorkDone(0, &validationEarlyStatus))) {
+        // TODO(crbug.com/dawn/1987): This is here to pretend that things succeed when the device is
+        // lost. When the old OnSubmittedWorkDone is removed then we can update
+        // ValidateOnSubmittedWorkDone to just return the correct thing here.
+        if (validationEarlyStatus == WGPUQueueWorkDoneStatus_DeviceLost) {
+            validationEarlyStatus = WGPUQueueWorkDoneStatus_Success;
+        }
+
+        // Note: if the callback is spontaneous, it'll get called in here.
+        event = AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, validationEarlyStatus));
+    } else {
+        event = AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, InsertWorkDoneEvent()));
+    }
+
+    FutureID futureID =
+        GetInstance()->GetEventManager()->TrackEvent(callbackInfo.mode, std::move(event));
+
+    return WGPUFuture{futureID};
+}
+
+OSEventReceiver QueueBase::InsertWorkDoneEvent() {
+    // TODO(crbug.com/dawn/1987): Implement this in all backends and remove this default impl
+    CHECK(false);
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSerial serial) {
