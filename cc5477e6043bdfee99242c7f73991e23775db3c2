@@ -141,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8c4441_e9e14471",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-13T05:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a4211ee_1a238314",
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b068ea9_7ae06e5e",
@@ -250,6 +268,30 @@
       "side": 1,
       "message": "oh yes, I see - and that\u0027s a different equality function than used for the set. Great thing to include in the tests so we don\u0027t regress the behavior!",
       "parentUuid": "fa60639c_9e8fafac",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 91
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab1815e5_7f04e1d2",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-13T05:12:45Z",
+      "side": 1,
+      "message": "Upon implementing the unit tests, I actually decided to remove the `ASSERT` and add a dtor `ASSERT` instead since it made more sense for the general data structure.",
+      "parentUuid": "95650cb5_a65817c7",
       "range": {
         "startLine": 42,
         "startChar": 15,
