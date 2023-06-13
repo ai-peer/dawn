@@ -748,6 +748,10 @@ ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) {
     return &mObjectLists[type];
 }
 
+InstanceBase* DeviceBase::GetInstance() const {
+    return mAdapter->APIGetInstance();
+}
+
 AdapterBase* DeviceBase::GetAdapter() const {
     return mAdapter.Get();
 }
@@ -2085,6 +2089,13 @@ void DeviceBase::AssumeCommandsCompleteForTesting() {
 // use 'GetLastSubmittedCommandSerial', which must be fired eventually.
 ExecutionSerial DeviceBase::GetScheduledWorkDoneSerial() const {
     return HasPendingCommands() ? GetPendingCommandSerial() : GetLastSubmittedCommandSerial();
+}
+
+ResultOrError<bool> DeviceBase::WaitAnyImpl(size_t count,
+                                            TrackedFutureWaitInfo* futures,
+                                            Nanoseconds timeout) {
+    // Default for backends which don't actually need to do anything special in this case.
+    return OSEventReceiver::Wait(count, futures, timeout);
 }
 
 MaybeError DeviceBase::CopyFromStagingToBuffer(BufferBase* source,

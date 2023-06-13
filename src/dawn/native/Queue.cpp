@@ -30,6 +30,7 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/ExternalTexture.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/QuerySet.h"
 #include "dawn/native/RenderPassEncoder.h"
@@ -232,6 +233,22 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
                  uint64_t(GetDevice()->GetPendingCommandSerial()));
+}
+
+WGPUFuture QueueBase::APIOnSubmittedWorkDoneF(wgpu::CallbackMode callbackMode,
+                                              WGPUQueueWorkDoneCallback callback,
+                                              void* userdata) {
+    FutureID futureID;
+    if (GetDevice()->ConsumedError(
+            WorkDoneFuture::Create(GetDevice(), callbackMode, callback, userdata), &futureID)) {
+        return WGPUFuture{0};
+    }
+
+    if (callbackMode & wgpu::CallbackMode::Future) {
+        return WGPUFuture{futureID};
+    } else {
+        return WGPUFuture{0};
+    }
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSerial serial) {
