@@ -16,6 +16,40 @@
       "message": "Thanks for your review, Corentin and Austin! Please take another look.",
       "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c232be_767c7f9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T07:07:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4369d54_cddf4316",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T07:07:00Z",
+      "side": 1,
+      "message": "It\u0027s a bit hard to read lines of booleans like these two arguments back to back. Maybe unset could be the last one and default to false? Not sure.",
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
