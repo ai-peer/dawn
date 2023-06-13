@@ -16,7 +16,6 @@
 #define SRC_DAWN_WIRE_CLIENT_INSTANCE_H_
 
 #include "dawn/webgpu.h"
-
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireCmd_autogen.h"
 #include "dawn/wire/client/ObjectBase.h"
@@ -41,6 +40,9 @@ class Instance final : public ObjectBase {
                                   const WGPUSupportedLimits* limits,
                                   uint32_t featuresCount,
                                   const WGPUFeatureName* features);
+
+    void ProcessEvents();
+    WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
   private:
     struct RequestAdapterData {
