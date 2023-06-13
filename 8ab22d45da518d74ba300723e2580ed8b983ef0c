@@ -34,6 +34,24 @@
       "parentUuid": "7553e17f_bea55e76",
       "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882c843f_6733e92f",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-13T19:29:16Z",
+      "side": 0,
+      "message": "The placeholder change is mentioned and makes sense, but I don\u0027t think the version of cmake changes how `set` works, does it?\n\nIf memory serves, we had to do this because the downstream cmake files were doing `set` calls and we couldn\u0027t force the override. Some of those have changed since, so some of these are probably safe to remove, but I\u0027m not sure if all of them are.\n\nSo, really, it\u0027s just the changes the to the `set` calls to remove the `CACHE` bit that seems unrelated to the cmake bump.",
+      "parentUuid": "3513d648_0a00ef80",
+      "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
