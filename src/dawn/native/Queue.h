@@ -58,6 +58,12 @@ class QueueBase : public ApiObjectBase {
     void APIOnSubmittedWorkDone(uint64_t signalValue,
                                 WGPUQueueWorkDoneCallback callback,
                                 void* userdata);
+    virtual WGPUFuture APIOnSubmittedWorkDone2(wgpu::CallbackFlag callbackFlags,
+                                               WGPUQueueWorkDoneCallback callback,
+                                               void* userdata) {
+        ASSERT(0);
+        return {};
+    }
     void APIWriteBuffer(BufferBase* buffer, uint64_t bufferOffset, const void* data, size_t size);
     void APIWriteTexture(const ImageCopyTexture* destination,
                          const void* data,

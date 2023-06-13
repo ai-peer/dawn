@@ -94,7 +94,7 @@ typedef uint32_t {{API}}Flags;
         {{as_cEnum(type.name, Name("force32"))}} = 0x7FFFFFFF
     } {{as_cType(type.name)}} {{API}}_ENUM_ATTRIBUTE;
     {% if type.category == "bitmask" %}
-        typedef {{API}}Flags {{as_cType(type.name)}}Flags {{API}}_ENUM_ATTRIBUTE;
+        typedef {{API}}Flags {{as_cFlagsType(type)}} {{API}}_ENUM_ATTRIBUTE;
     {% endif %}
 
 {% endfor -%}

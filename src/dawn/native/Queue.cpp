@@ -30,6 +30,7 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/ExternalTexture.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/QuerySet.h"
 #include "dawn/native/RenderPassEncoder.h"
