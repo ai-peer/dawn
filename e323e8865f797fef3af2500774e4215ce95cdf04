@@ -16,6 +16,91 @@
       "message": "Please take a look, thanks",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7df550_3cee6f47",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T12:40:44Z",
+      "side": 1,
+      "message": "IMHO the instance should set up the toggles before passing them to the Adapter. Here we have three things happening to the toggle state which don\u0027t really make sense to live in the adapter: inheritance, overrides for the adapter, and overrides from the backend.",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08941104_8e8d6178",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T12:40:44Z",
+      "side": 1,
+      "message": "[1] We could query the features only once on initialization and cache them on the AdapterBase. This would allow moving the implementation of APIHasFeature and APIEnumerateFeatures to the adapter.",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4234299_3d70cba0",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T12:40:44Z",
+      "side": 1,
+      "message": "With [1] we don\u0027t really need to have this validation anymore, and ValidateFeatureSupportedWithToggles becomes \"IsFeatureSupported\" or maybe even we only need PhysicalDevice::GetSupportedFeatures(Toggles) -\u003e FeatureSet",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d13f8d_cef3cb56",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T12:40:44Z",
+      "side": 1,
+      "message": "Where is this constructor used? Isn\u0027t it the same as passing a defaulted TogglesState?",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc987625_01ec5289",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T12:40:44Z",
+      "side": 1,
+      "message": "We should avoid using error handling for things that aren\u0027t errors. Here a boolean would be sufficient. Also see [1]",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
