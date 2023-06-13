@@ -1,4 +1,4 @@
-// Copyright 2018 The Dawn Authors
+// Copyright 2023 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_
-#define SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_
+#include "dawn/native/metal/QueueWorkDoneFutureMTL.h"
 
-#include "dawn/native/Queue.h"
+#include "dawn/native/ToBackend.h"
+#include "dawn/native/metal/DeviceMTL.h"
 
 namespace dawn::native::metal {
 
-class Device;
+QueueWorkDoneFuture::QueueWorkDoneFuture(QueueBase* queue, ExecutionSerial serial)
+    : QueueWorkDoneFutureBase(queue, serial) {}
 
-class Queue final : public QueueBase {
-  public:
-    Queue(Device* device, const QueueDescriptor* descriptor);
-    ~Queue() override;
-
-  private:
-    MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
-    QueueWorkDoneFutureBase* APIOnSubmittedWorkDone2() override;
-};
+ResultOrError<wgpu::WaitStatus> QueueWorkDoneFuture::Wait(Milliseconds timeout) {
+    Device* device = ToBackend(GetDevice());
+    DAWN_TRY(device->WaitKeventForSerial(mSerial, timeout));
+    ASSERT(uint64_t(timeout) == UINT64_MAX);
+    return wgpu::WaitStatus::SomeCompleted;
+}
 
 }  // namespace dawn::native::metal
-
-#endif  // SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_

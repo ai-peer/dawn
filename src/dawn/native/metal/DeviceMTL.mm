@@ -38,6 +38,7 @@
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
+#include <sys/event.h>
 #include <type_traits>
 
 namespace dawn::native::metal {
@@ -102,6 +103,15 @@ void API_AVAILABLE(macos(10.15), ios(14)) UpdateTimestampPeriod(id<MTLDevice> de
     }
 }
 
+struct kevent KeventForSerial(ExecutionSerial serial) {
+    static_assert(sizeof(uintptr_t) == sizeof(uint64_t));
+    struct kevent event;
+    // FIXME: should be ONESHOT instead of CLEAR?
+    EV_SET(&event, uintptr_t(uint64_t(serial)), EVFILT_USER, EV_ADD | EV_ENABLE | EV_CLEAR, 0, 0,
+           nullptr);
+    return event;
+}
+
 }  // namespace
 
 // static
@@ -123,7 +133,8 @@ Device::Device(AdapterBase* adapter,
                const TogglesState& deviceToggles)
     : DeviceBase(adapter, descriptor, deviceToggles),
       mMtlDevice(std::move(mtlDevice)),
-      mCompletedSerial(0) {
+      mCompletedSerial(0),
+      mKqueue(kqueue()) {
     // On macOS < 11.0, we only can check whether counter sampling is supported, and the counter
     // only can be sampled between command boundary using sampleCountersInBuffer API if it's
     // supported.
@@ -137,6 +148,10 @@ Device::Device(AdapterBase* adapter,
 
     mIsTimestampQueryEnabled =
         HasFeature(Feature::TimestampQuery) || HasFeature(Feature::TimestampQueryInsidePasses);
+
+    int kq = kqueue();
+    ASSERT(kq != -1);
+    mKqueue = PosixFd(kq);
 }
 
 Device::~Device() {
@@ -311,6 +326,15 @@ void Device::ForceEventualFlushOfCommands() {
     }
 }
 
+MaybeError Device::WaitKeventForSerial(ExecutionSerial serial, Milliseconds timeout) {
+    ASSERT(uint64_t(timeout) == UINT64_MAX);
+
+    struct kevent event = KeventForSerial(serial);
+    kevent(int(mKqueue), nullptr, 0, &event, 1, nullptr);
+
+    return {};
+}
+
 MaybeError Device::SubmitPendingCommandBuffer() {
     if (!mCommandContext.NeedsSubmit()) {
         return {};
@@ -343,12 +367,26 @@ MaybeError Device::SubmitPendingCommandBuffer() {
     // Update the completed serial once the completed handler is fired. Make a local copy of
     // mLastSubmittedSerial so it is captured by value.
     ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
+    {
+        // Create an event on the kqueue to trigger when completed
+        struct kevent event = KeventForSerial(pendingSerial);
+        kevent(int(mKqueue), &event, 1, nullptr, 0, nullptr);
+    }
+
     // this ObjC block runs on a different thread
     [*pendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
         TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+
+        {
+            // Trigger the event on the kqueue
+            struct kevent event;
+            EV_SET(&event, uintptr_t(uint64_t(pendingSerial)), EVFILT_USER, 0, NOTE_TRIGGER, 0,
+                   nullptr);
+            kevent(int(mKqueue), &event, 1, nullptr, 0, nullptr);
+        }
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",

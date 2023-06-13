@@ -87,6 +87,8 @@ class Device final : public DeviceBase {
 
     void ForceEventualFlushOfCommands() override;
 
+    MaybeError WaitKeventForSerial(ExecutionSerial, Milliseconds timeout);
+
   private:
     Device(AdapterBase* adapter,
            NSPRef<id<MTLDevice>> mtlDevice,
@@ -169,6 +171,8 @@ class Device final : public DeviceBase {
     // vertex/fragement stage
     bool mCounterSamplingAtStageBoundary;
     NSPRef<id<MTLBuffer>> mMockBlitMtlBuffer;
+
+    PosixFd mKqueue{};
 };
 
 }  // namespace dawn::native::metal

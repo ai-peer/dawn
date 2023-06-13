@@ -1,4 +1,4 @@
-// Copyright 2018 The Dawn Authors
+// Copyright 2023 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_
-#define SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_
+#ifndef SRC_DAWN_NATIVE_METAL_QUEUEWORKDONEFUTUREMTL_H_
+#define SRC_DAWN_NATIVE_METAL_QUEUEWORKDONEFUTUREMTL_H_
 
-#include "dawn/native/Queue.h"
+#include "dawn/native/QueueWorkDoneFuture.h"
+
+#include "dawn/native/metal/QueueMTL.h"
 
 namespace dawn::native::metal {
 
 class Device;
 
-class Queue final : public QueueBase {
+class QueueWorkDoneFuture final : public QueueWorkDoneFutureBase {
   public:
-    Queue(Device* device, const QueueDescriptor* descriptor);
-    ~Queue() override;
+    QueueWorkDoneFuture(QueueBase*, ExecutionSerial);
 
-  private:
-    MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
-    QueueWorkDoneFutureBase* APIOnSubmittedWorkDone2() override;
+    ResultOrError<wgpu::WaitStatus> Wait(Milliseconds timeout) override;
 };
 
 }  // namespace dawn::native::metal
 
-#endif  // SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_
+#endif  // SRC_DAWN_NATIVE_METAL_QUEUEWORKDONEFUTUREMTL_H_

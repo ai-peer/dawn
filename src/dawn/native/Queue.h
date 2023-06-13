@@ -21,6 +21,7 @@
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
+#include "dawn/native/Future.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/ObjectBase.h"
 
@@ -58,6 +59,9 @@ class QueueBase : public ApiObjectBase {
     void APIOnSubmittedWorkDone(uint64_t signalValue,
                                 WGPUQueueWorkDoneCallback callback,
                                 void* userdata);
+    virtual QueueWorkDoneFutureBase* APIOnSubmittedWorkDone2() {
+        return nullptr;
+    }  // FIXME: pure virtual
     void APIWriteBuffer(BufferBase* buffer, uint64_t bufferOffset, const void* data, size_t size);
     void APIWriteTexture(const ImageCopyTexture* destination,
                          const void* data,

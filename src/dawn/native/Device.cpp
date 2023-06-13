@@ -418,9 +418,8 @@ void DeviceBase::Destroy() {
     if (mState != State::BeingCreated) {
         // The device is being destroyed so it will be lost, call the application callback.
         if (mDeviceLostCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask(
-                std::bind(mDeviceLostCallback, WGPUDeviceLostReason_Destroyed,
-                          "Device was destroyed.", mDeviceLostUserdata));
+            mDeviceLostCallback(WGPUDeviceLostReason_Destroyed, "Device was destroyed.",
+                                mDeviceLostUserdata);
             mDeviceLostCallback = nullptr;
         }
 
@@ -550,11 +549,7 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         // Note: we don't invoke the callbacks directly here because it could cause re-entrances ->
         // possible deadlock.
         if (mDeviceLostCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mDeviceLostCallback, lost_reason,
-                                                   messageStr, userdata = mDeviceLostUserdata] {
-                callback(lost_reason, messageStr.c_str(), userdata);
-            });
-            mDeviceLostCallback = nullptr;
+            mDeviceLostCallback(lost_reason, messageStr.c_str(), mDeviceLostUserdata);
         }
 
         mQueue->HandleDeviceLoss();
@@ -571,12 +566,8 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         // handled by the lost callback.
         bool captured = mErrorScopeStack->HandleError(ToWGPUErrorType(type), messageStr.c_str());
         if (!captured && mUncapturedErrorCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mUncapturedErrorCallback, type,
-                                                   messageStr,
-                                                   userdata = mUncapturedErrorUserdata] {
-                callback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)), messageStr.c_str(),
-                         userdata);
-            });
+            mUncapturedErrorCallback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)),
+                                     messageStr.c_str(), mUncapturedErrorUserdata);
         }
     }
 }

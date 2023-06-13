@@ -149,6 +149,10 @@ int frameCount = 0;
 void frame() {
     wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
 
+    if (frameCount == 20) {
+        device.Destroy();
+    }
+
     for (auto& data : shaderData) {
         data.time = frameCount / 60.0f;
     }
@@ -172,7 +176,18 @@ void frame() {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
     swapchain.Present();
+
+    wgpu::QueueWorkDoneFuture future = queue.OnSubmittedWorkDone2();
+
+    bool done = false;
+    future.Then(
+        wgpu::CallbackMode::AllowReentrant,
+        [](WGPUQueueWorkDoneFuture, void* userdata) { *static_cast<bool*>(userdata) = true; },
+        &done);
+
     DoFlush();
+
+    wgpu::WaitAnyFutures(1, reinterpret_cast<wgpu::Future const*>(&future));
 }
 
 int main(int argc, const char* argv[]) {
