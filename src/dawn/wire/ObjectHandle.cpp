@@ -41,4 +41,13 @@ ObjectHandle& ObjectHandle::AssignFrom(const volatile ObjectHandle& rhs) {
     generation = rhs.generation;
     return *this;
 }
+
+bool ObjectHandle::IsValid() const {
+    return *this != ObjectHandle{};
+}
+
+bool ObjectHandle::operator==(ObjectHandle const& rhs) const {
+    return id == rhs.id && generation == rhs.generation;
+}
+
 }  // namespace dawn::wire
