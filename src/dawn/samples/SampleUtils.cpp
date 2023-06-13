@@ -96,6 +96,7 @@ static std::vector<std::string> disableToggles;
 
 static CmdBufType cmdBufType = CmdBufType::Terrible;
 static std::unique_ptr<dawn::native::Instance> instance;
+static wgpu::Instance apiInstance;
 static wgpu::SwapChain swapChain;
 
 static GLFWwindow* window = nullptr;
@@ -127,7 +128,11 @@ wgpu::Device CreateCppDawnDevice() {
         return wgpu::Device();
     }
 
-    instance = std::make_unique<dawn::native::Instance>();
+    WGPUInstanceDescriptor instanceDescriptor{
+        .timedWaitAnyEnable = true,
+    };
+    instance = std::make_unique<dawn::native::Instance>(&instanceDescriptor);
+    apiInstance = wgpu::Instance::Acquire(instance->Get());
 
     wgpu::RequestAdapterOptions options = {};
     options.backendType = backendType;
@@ -365,13 +370,17 @@ bool InitSample(int argc, const char** argv) {
     return true;
 }
 
-void DoFlush() {
+void DoFlushCmdBufs() {
     if (cmdBufType == CmdBufType::Terrible) {
         bool c2sSuccess = c2sBuf->Flush();
         bool s2cSuccess = s2cBuf->Flush();
-
-        ASSERT(c2sSuccess && s2cSuccess);
+        ASSERT(c2sSuccess);
+        ASSERT(s2cSuccess);
     }
+}
+
+void DoFlush() {
+    DoFlushCmdBufs();
     glfwPollEvents();
 }
 
@@ -383,6 +392,10 @@ GLFWwindow* GetGLFWWindow() {
     return window;
 }
 
+wgpu::Instance& GetInstance() {
+    return apiInstance;
+}
+
 void ProcessEvents() {
-    dawn::native::InstanceProcessEvents(instance->Get());
+    apiInstance.ProcessEvents();
 }

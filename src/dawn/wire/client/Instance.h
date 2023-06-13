@@ -15,14 +15,22 @@
 #ifndef SRC_DAWN_WIRE_CLIENT_INSTANCE_H_
 #define SRC_DAWN_WIRE_CLIENT_INSTANCE_H_
 
-#include "dawn/webgpu.h"
+#include <atomic>
+#include <functional>
+#include <unordered_map>
 
+#include "dawn/common/FutureUtils.h"
+#include "dawn/common/Ref.h"
+#include "dawn/webgpu.h"
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireCmd_autogen.h"
+#include "dawn/wire/client/EventManager.h"
 #include "dawn/wire/client/ObjectBase.h"
 #include "dawn/wire/client/RequestTracker.h"
 
 namespace dawn::wire::client {
+
+class Device;
 
 class Instance final : public ObjectBase {
   public:
@@ -41,6 +49,9 @@ class Instance final : public ObjectBase {
                                   const WGPUSupportedLimits* limits,
                                   uint32_t featuresCount,
                                   const WGPUFeatureName* features);
+
+    void ProcessEvents();
+    WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
   private:
     struct RequestAdapterData {
