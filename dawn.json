@@ -1536,6 +1536,15 @@
                 "name": "process events"
             },
             {
+                "name": "wait any",
+                "returns": "wait status",
+                "args": [
+                    {"name": "count", "type": "size_t"},
+                    {"name": "futures", "type": "future wait info", "annotation": "*", "length": "count"},
+                    {"name": "timeout NS", "type": "uint64_t"}
+                ]
+            },
+            {
                 "name": "request adapter",
                 "args": [
                     {"name": "options", "type": "request adapter options", "annotation": "const*", "optional": true, "no_default": true},
@@ -1543,6 +1552,37 @@
                     {"name": "userdata", "type": "void *"}
                 ]
             }
+        ]
+    },
+    "callback flag": {
+        "category": "bitmask",
+        "flags name": "callback flags",
+        "values": [
+            {"name": "none", "value": 0},
+            {"name": "process events", "value": 1},
+            {"name": "spontaneous", "value": 2}
+        ]
+    },
+    "future": {
+        "category": "structure",
+        "members": [
+            {"name": "id", "type": "uint64_t"}
+        ]
+    },
+    "wait status": {
+        "category": "enum",
+        "values": [
+            {"name": "success", "value": 0},
+            {"name": "timed out", "value": 1},
+            {"name": "unsupported timeout", "value": 2},
+            {"name": "unknown", "value": 3}
+        ]
+    },
+    "future wait info": {
+        "category": "structure",
+        "members": [
+            {"name": "future", "type": "future", "annotation": "const"},
+            {"name": "completed", "type": "bool", "default": "false"}
         ]
     },
     "instance descriptor": {
@@ -1757,6 +1797,15 @@
                 "name": "on submitted work done",
                 "tags": ["upstream"],
                 "args": [
+                    {"name": "callback", "type": "queue work done callback"},
+                    {"name": "userdata", "type": "void *"}
+                ]
+            },
+            {
+                "name": "on submitted work done 2",
+                "returns": "future",
+                "args": [
+                    {"name": "callback flags", "type": "callback flag"},
                     {"name": "callback", "type": "queue work done callback"},
                     {"name": "userdata", "type": "void *"}
                 ]
