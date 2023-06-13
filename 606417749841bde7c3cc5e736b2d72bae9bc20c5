@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "93c122f3_836f6e1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T06:51:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "606417749841bde7c3cc5e736b2d72bae9bc20c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3b161698_9aa7f0c2",
         "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
         "patchSetId": 7
@@ -72,6 +89,24 @@
       "side": 1,
       "message": "IIUC, it should be already done by [1],right?",
       "parentUuid": "303b32d1_55113d48",
+      "revId": "606417749841bde7c3cc5e736b2d72bae9bc20c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60287dd6_66961fb8",
+        "filename": "src/dawn/native/d3d11/QuerySetD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T06:51:04Z",
+      "side": 1,
+      "message": "Whoops, didn\u0027t see that sorry about it!",
+      "parentUuid": "86729e87_2df3b4ea",
       "revId": "606417749841bde7c3cc5e736b2d72bae9bc20c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
