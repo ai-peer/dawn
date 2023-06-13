@@ -15,7 +15,6 @@
 #include "dawn/wire/client/Queue.h"
 
 #include "dawn/wire/client/Client.h"
-#include "dawn/wire/client/Device.h"
 
 namespace dawn::wire::client {
 
@@ -50,6 +49,36 @@ void Queue::OnSubmittedWorkDone(uint64_t signalValue,
     cmd.requestSerial = serial;
 
     client->SerializeCommand(cmd);
+}
+
+WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo) {
+    Client* client = GetClient();
+    FutureID futureIDInternal = client->GetEventManager().TrackEvent(callbackInfo.mode, [=]() {
+        callbackInfo.callback(WGPUQueueWorkDoneStatus_Success, callbackInfo.userdata);
+    });
+
+    struct Lambda {
+        Client* client;
+        FutureID futureIDInternal;
+    };
+    Lambda* lambda = new Lambda{client, futureIDInternal};
+    uint64_t serial = mOnWorkDoneRequests.Add(
+        {[](WGPUQueueWorkDoneStatus /* ignored */, void* userdata) {
+             auto* lambda = reinterpret_cast<Lambda*>(userdata);
+             lambda->client->GetEventManager().SetFutureReady(lambda->futureIDInternal);
+             delete lambda;
+         },
+         lambda});
+
+    QueueOnSubmittedWorkDoneCmd cmd;
+    cmd.queueId = GetWireId();
+    cmd.signalValue = 0;
+    cmd.requestSerial = serial;
+
+    client->SerializeCommand(cmd);
+
+    FutureID futureID = (callbackInfo.mode & WGPUCallbackMode_Future) ? futureIDInternal : 0;
+    return {futureID};
 }
 
 void Queue::WriteBuffer(WGPUBuffer cBuffer, uint64_t bufferOffset, const void* data, size_t size) {
