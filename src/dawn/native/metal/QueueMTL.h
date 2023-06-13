@@ -16,6 +16,13 @@
 #define SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_
 
 #import <Metal/Metal.h>
+
+#include <atomic>
+
+#include "dawn/common/SerialQueue.h"
+#include "dawn/native/IntegerTypes.h"
+#include "dawn/native/OSEvent.h"
+#include "dawn/native/OSEventPipe.h"
 #include "dawn/native/Queue.h"
 #include "dawn/native/metal/CommandRecordingContext.h"
 
@@ -34,14 +41,18 @@ class Queue final : public QueueBase {
     void ExportLastSignaledEvent(ExternalImageMTLSharedEventDescriptor* desc);
     void Destroy();
 
+    ResultOrError<OSEventReceiver> InsertWorkDoneEvent() override;
+
   private:
     Queue(Device* device, const QueueDescriptor* descriptor);
     ~Queue() override;
 
     MaybeError Initialize();
+    void UpdateWaitingEvents(ExecutionSerial completedSerial);
 
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
     bool HasPendingCommands() const override;
+    ExecutionSerial GetBackendCompletedCommandSerial() const;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
@@ -61,6 +72,13 @@ class Queue final : public QueueBase {
     // A shared event that can be exported for synchronization with other users of Metal.
     // MTLSharedEvent is not available until macOS 10.14+ so use just `id`.
     NSPRef<id> mMtlSharedEvent = nullptr;
+
+    // This mutex must be held to access mWaitingEvents (which may happen in a Metal driver thread).
+    // TODO(kainino): if we atomically knew a conservative lower bound on the mWaitingEvents
+    // serials, we could avoid taking this lock sometimes. Optimize if needed. See old draft code:
+    // https://dawn-review.googlesource.com/c/dawn/+/137502/29
+    std::mutex mWaitingEventsMutex;
+    SerialQueue<ExecutionSerial, OSEventPipe> mWaitingEvents;
 };
 
 }  // namespace dawn::native::metal

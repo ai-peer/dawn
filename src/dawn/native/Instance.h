@@ -31,8 +31,11 @@
 #include "dawn/native/BackendConnection.h"
 #include "dawn/native/BlobCache.h"
 #include "dawn/native/Features.h"
+#include "dawn/native/IntegerTypes.h"
+#include "dawn/native/OSEvent.h"
 #include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/Toggles.h"
+#include "dawn/native/TrackedFuture.h"
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::platform {
@@ -143,9 +146,17 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Get backend-independent libraries that need to be loaded dynamically.
     const X11Functions* GetOrLoadX11Functions();
 
+    MaybeError ValidateCallbackModeDisallowFuture(WGPUCallbackModeFlags mode);
+    MaybeError ValidateCallbackModeAllowFuture(WGPUCallbackModeFlags mode);
+    // Track a TrackedFuture and give it a FutureID.
+    [[nodiscard]] FutureID TrackFuture(WGPUCallbackModeFlags mode, TrackedFuture*);
+
     // Dawn API
     Surface* APICreateSurface(const SurfaceDescriptor* descriptor);
     void APIProcessEvents();
+    [[nodiscard]] wgpu::WaitStatus APIWaitAny(size_t count,
+                                              FutureWaitInfo* futures,
+                                              uint64_t timeoutNS);
 
   private:
     explicit InstanceBase(const TogglesState& instanceToggles);
@@ -177,6 +188,17 @@ class InstanceBase final : public RefCountedWithExternalCount {
                                    wgpu::PowerPreference powerPreference) const;
 
     void ConsumeError(std::unique_ptr<ErrorData> error);
+
+    ResultOrError<wgpu::WaitStatus> WaitAnyImpl(size_t count,
+                                                FutureWaitInfo* infos,
+                                                Nanoseconds timeout);
+    ResultOrError<wgpu::WaitStatus> WaitAnyImplBackendWait(
+        DeviceBase* device,
+        std::vector<TrackedFutureWaitInfo> const& futures,
+        Nanoseconds timeout);
+    ResultOrError<wgpu::WaitStatus> WaitAnyImplOSWait(
+        std::vector<TrackedFutureWaitInfo> const& futures,
+        Nanoseconds timeout);
 
     std::unordered_set<std::string> warningMessages;
 
@@ -210,6 +232,14 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     std::set<DeviceBase*> mDevicesList;
     mutable std::mutex mDevicesListMutex;
+
+    bool mTimedWaitEnable;
+    size_t mTimedWaitMaxCount;
+
+    // Must be held to use mTrackedFutures (and in some cases mNextFutureID).
+    std::mutex mTrackedFuturesMutex;
+    std::unordered_map<FutureID, Ref<TrackedFuture>> mTrackedFutures;
+    std::atomic<FutureID> mNextFutureID = 1;
 };
 
 }  // namespace dawn::native

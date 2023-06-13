@@ -19,6 +19,7 @@
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/IntegerTypes.h"
 #include "dawn/native/MetalBackend.h"
 #include "dawn/native/metal/CommandBufferMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
@@ -41,9 +42,32 @@ Queue::~Queue() {}
 void Queue::Destroy() {
     // Forget all pending commands.
     mCommandContext.AcquireCommands();
+    UpdateWaitingEvents(kMaxExecutionSerial);
     mCommandQueue = nullptr;
     mLastSubmittedCommands = nullptr;
     mMtlSharedEvent = nullptr;
+}
+
+ResultOrError<OSEventReceiver> Queue::InsertWorkDoneEvent() {
+    ExecutionSerial serial = GetScheduledWorkDoneSerial();
+
+    OSEventPipe sender;
+    OSEventReceiver receiver;
+    DAWN_TRY_ASSIGN(std::tie(sender, receiver), OSEventPipe::CreateEventPipe());
+
+    {
+        std::lock_guard guard{mWaitingEventsMutex};
+
+        // Check for device loss while the lock is held. Otherwise, we could enqueue the event
+        // after mWaitingEvents has been flushed for device loss, and it'll never get cleaned up.
+        if (GetDevice()->IsLost() || mCompletedSerial >= uint64_t(serial)) {
+            DAWN_TRY(sender.Signal());
+        } else {
+            mWaitingEvents.Enqueue(std::move(sender), serial);
+        }
+    }
+
+    return receiver;
 }
 
 MaybeError Queue::Initialize() {
@@ -59,6 +83,17 @@ MaybeError Queue::Initialize() {
     }
 
     return mCommandContext.PrepareNextCommandBuffer(*mCommandQueue);
+}
+
+void Queue::UpdateWaitingEvents(ExecutionSerial completedSerial) {
+    ASSERT(mCompletedSerial >= uint64_t(completedSerial) || completedSerial == kMaxExecutionSerial);
+    {
+        std::lock_guard guard{mWaitingEventsMutex};
+        for (auto& waiting : mWaitingEvents.IterateUpTo(completedSerial)) {
+            DAWN_UNUSED(GetDevice()->ConsumedError(waiting.Signal()));
+        }
+        mWaitingEvents.ClearUpTo(completedSerial);
+    }
 }
 
 MaybeError Queue::WaitForIdleForDestruction() {
@@ -139,6 +174,8 @@ MaybeError Queue::SubmitPendingCommandBuffer() {
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+
+        this->UpdateWaitingEvents(pendingSerial);
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(platform, GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
@@ -186,6 +223,10 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
 bool Queue::HasPendingCommands() const {
     return mCommandContext.NeedsSubmit();
+}
+
+ExecutionSerial Queue::GetBackendCompletedCommandSerial() const {
+    return ExecutionSerial(mCompletedSerial.load());
 }
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {

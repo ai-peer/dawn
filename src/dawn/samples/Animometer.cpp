@@ -12,8 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <chrono>
 #include <cstdio>
 #include <cstdlib>
+#include <thread>
 #include <vector>
 
 #include "dawn/samples/SampleUtils.h"
@@ -147,7 +149,17 @@ void init() {
 
 int frameCount = 0;
 void frame() {
+    if (frameCount == 22) {
+        exit(0);
+    }
+
     wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
+
+    static constexpr bool kDestroyWhileActive = true;
+    if (!kDestroyWhileActive && frameCount == 20) {
+        printf("--ForceLoss--\n");
+        device.ForceLoss(wgpu::DeviceLostReason::Undefined, "lost for testing");
+    }
 
     for (auto& data : shaderData) {
         data.time = frameCount / 60.0f;
@@ -171,6 +183,66 @@ void frame() {
 
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
+
+    // Cannot use infinite timeout because of the wire
+    static constexpr uint64_t kTimeoutNS = 1'000'000'000;  // 1 second
+    static constexpr bool kSubmitBetweenFutures = false;
+    static constexpr int kNumCycles = 2;
+    static constexpr int kNumFuturesPerWait = 2;
+    for (int cycle = 0; cycle < kNumCycles; ++cycle) {
+        int workDoneCount = 0;
+        WGPUQueueWorkDoneCallback workDoneCallback = [](WGPUQueueWorkDoneStatus status,
+                                                        void* userdata) {
+            ASSERT(status == WGPUQueueWorkDoneStatus_Success ||
+                   status == WGPUQueueWorkDoneStatus_DeviceLost);
+            *static_cast<int*>(userdata) += 1;
+        };
+
+        std::vector<wgpu::FutureWaitInfo> futures;
+        for (int i = 0; i < kNumFuturesPerWait; ++i) {
+            if (kSubmitBetweenFutures) {
+                wgpu::CommandBuffer cb = device.CreateCommandEncoder().Finish();
+                queue.Submit(1, &cb);
+            }
+            wgpu::Future future = queue.OnSubmittedWorkDoneF(
+                {wgpu::CallbackMode::Future, workDoneCallback, &workDoneCount});
+            futures.push_back(wgpu::FutureWaitInfo{future, false});
+        }
+
+        if (kDestroyWhileActive && frameCount == 20 && cycle == 0) {
+            printf("--ForceLoss--\n");
+            device.ForceLoss(wgpu::DeviceLostReason::Undefined, "lost for testing");
+        }
+
+        while (true) {
+            device.Tick();
+            DoFlushCmdBufs();
+            auto start = std::chrono::high_resolution_clock::now();
+            wgpu::WaitStatus status =
+                GetInstance().WaitAny(futures.size(), futures.data(), kTimeoutNS);
+            auto end = std::chrono::high_resolution_clock::now();
+            printf(
+                "frame %d on cycle %d of %d, with %zu of %d futures remaining: waited %lldus "
+                "(status %d)\n",
+                frameCount, cycle + 1, kNumCycles, futures.size(), kNumFuturesPerWait,
+                std::chrono::duration_cast<std::chrono::microseconds>(end - start).count(),
+                static_cast<int>(status));
+            if (status == wgpu::WaitStatus::TimedOut) {
+                printf("WaitAny timed out...\n");
+                continue;
+            }
+            ASSERT(status == wgpu::WaitStatus::Success);
+
+            futures.erase(
+                std::remove_if(futures.begin(), futures.end(),
+                               [](const wgpu::FutureWaitInfo& info) { return info.completed; }),
+                futures.end());
+
+            if (futures.size() == 0) {
+                break;
+            }
+        }
+    }
     swapchain.Present();
     DoFlush();
 }
