@@ -748,6 +748,10 @@ ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) {
     return &mObjectLists[type];
 }
 
+InstanceBase* DeviceBase::GetInstance() const {
+    return mAdapter->APIGetInstance();
+}
+
 AdapterBase* DeviceBase::GetAdapter() const {
     return mAdapter.Get();
 }
