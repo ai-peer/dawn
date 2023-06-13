@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <poll.h>
+
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
@@ -149,6 +151,10 @@ int frameCount = 0;
 void frame() {
     wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
 
+    if (frameCount == 20) {
+        device.Destroy();
+    }
+
     for (auto& data : shaderData) {
         data.time = frameCount / 60.0f;
     }
@@ -172,7 +178,40 @@ void frame() {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
     swapchain.Present();
-    DoFlush();
+
+    static constexpr bool kUseFd = true;
+    static constexpr bool kNumWaits = 1;  // FIXME: sometimes hits timeouts if this is >1
+    for (int i = 0; i < kNumWaits; ++i) {
+        wgpu::QueueWorkDoneDescriptorFd descFd{};
+        wgpu::QueueWorkDoneDescriptor desc{};
+        if (kUseFd) {
+            desc.nextInChain = &descFd;
+        }
+        wgpu::QueueWorkDoneFuture future = queue.OnSubmittedWorkDone2(&desc);
+
+        bool done = false;
+        if (kUseFd) {
+            DoFlush();
+            struct pollfd pfd = {future.GetFd(), POLLIN, 0};
+            int pollTimeout = 1000;
+            int status = poll(&pfd, 1, pollTimeout);
+            ASSERT(status == 1);
+            auto waited =
+                wgpu::WaitAnyFutures(1, reinterpret_cast<wgpu::Future const*>(&future), 0);
+            ASSERT(waited == wgpu::WaitStatus::SomeCompleted);
+        } else {
+            future.Then(
+                wgpu::CallbackMode::AllowReentrant,
+                [](WGPUQueueWorkDoneFuture, void* userdata) {
+                    *static_cast<bool*>(userdata) = true;
+                },
+                &done);
+            DoFlush();
+            auto waited =
+                wgpu::WaitAnyFutures(1, reinterpret_cast<wgpu::Future const*>(&future), 1000);
+            ASSERT(waited == wgpu::WaitStatus::SomeCompleted);
+        }
+    }
 }
 
 int main(int argc, const char* argv[]) {
