@@ -347,6 +347,8 @@ source_set("sources") {
     "ToBackend.h",
     "Toggles.cpp",
     "Toggles.h",
+    "TrackedFuture.cpp",
+    "TrackedFuture.h",
     "UsageValidationMode.h",
     "VertexFormat.cpp",
     "VertexFormat.h",
