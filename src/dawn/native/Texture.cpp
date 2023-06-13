@@ -32,6 +32,15 @@
 namespace dawn::native {
 namespace {
 
+bool IsValidTextureFormatInCompatibilityMode(const wgpu::TextureFormat format) {
+    switch (format) {
+        case wgpu::TextureFormat::BGRA8UnormSrgb:
+            return false;
+        default:
+            return true;
+    }
+}
+
 MaybeError ValidateTextureViewFormatCompatibility(const DeviceBase* device,
                                                   const Format& format,
                                                   wgpu::TextureFormat viewFormatEnum) {
@@ -42,6 +51,10 @@ MaybeError ValidateTextureViewFormatCompatibility(const DeviceBase* device,
                     "The texture view format (%s) is not texture view format compatible "
                     "with the texture format (%s).",
                     viewFormatEnum, format.format);
+
+    DAWN_INVALID_IF(
+        device->IsCompatibilityMode() && !IsValidTextureFormatInCompatibilityMode(viewFormatEnum),
+        "The texture view format (%s) is not supported in compatibility mode.", viewFormatEnum);
     return {};
 }
 
@@ -398,6 +411,12 @@ MaybeError ValidateTextureDescriptor(const DeviceBase* device,
                     descriptor->dimension, format->format);
 
     DAWN_TRY(ValidateTextureSize(device, descriptor, format));
+
+    DAWN_INVALID_IF(device->IsCompatibilityMode() &&
+                        !IsValidTextureFormatInCompatibilityMode(descriptor->format),
+                    "The texture format (%s) is not supported in compatibility mode.",
+                    descriptor->format);
+
     return {};
 }
 
