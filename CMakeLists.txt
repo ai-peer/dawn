@@ -12,19 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.10.2)
+# As per https://github.com/google/oss-policies-info/blob/main/foundational-cxx-support-matrix.md
+cmake_minimum_required(VERSION 3.13)
 
-# When upgrading to CMake 3.11 we can remove DAWN_PLACEHOLDER_FILE because source-less add_library
-# becomes available.
-# When upgrading to CMake 3.12 we should add CONFIGURE_DEPENDS to DawnGenerator to rerun CMake in
+# Since we are past 3.12, CONFIGURE_DEPENDS can be added to DawnGenerator to rerun CMake in
 # case any of the generator files changes. We should also remove the CACHE "" FORCE stuff to
-# override options in third_party dependencies. We can also add the HOMEPAGE_URL
-# entry to the project `HOMEPAGE_URL "https://dawn.googlesource.com/dawn"`
+# override options in third_party dependencies.
 
 project(
     Dawn
     DESCRIPTION "Dawn, a WebGPU implementation"
     LANGUAGES C CXX
+    HOMEPAGE_URL "https://dawn.googlesource.com/dawn"
 )
 enable_testing()
 
