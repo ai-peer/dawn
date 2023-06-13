@@ -19,6 +19,7 @@
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/metal/CommandBufferMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -29,6 +30,17 @@ namespace dawn::native::metal {
 Queue::Queue(Device* device, const QueueDescriptor* descriptor) : QueueBase(device, descriptor) {}
 
 Queue::~Queue() = default;
+
+WGPUFuture Queue::APIOnSubmittedWorkDone2(wgpu::CallbackFlag callbackFlags,
+                                          WGPUQueueWorkDoneCallback callback,
+                                          void* userdata) {
+    Ref<WorkDoneFuture> future;
+    if (GetDevice()->ConsumedError(
+            WorkDoneFuture::Create(GetDevice(), callbackFlags, callback, userdata), &future)) {
+        return WGPUFuture{0};
+    }
+    return WGPUFuture{uint64_t(future->GetID())};
+}
 
 MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
     @autoreleasepool {
