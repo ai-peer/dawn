@@ -540,7 +540,8 @@ def compute_wire_params(api_params, wire_json):
             is_void = method.return_type.name.canonical_case() == 'void'
             if not (is_object or is_void):
                 assert command_suffix in (
-                    wire_json['special items']['client_handwritten_commands'])
+                    wire_json['special items']['client_handwritten_commands']
+                ), command_suffix
                 continue
 
             if command_suffix in (
@@ -705,11 +706,18 @@ def as_cType(c_prefix, name):
         return c_prefix + name.CamelCase()
 
 
-def as_cReturnType(c_prefix, typ):
-    if typ.category != 'bitmask':
-        return as_cType(c_prefix, typ.name)
+def as_cFlagsType(c_prefix, typ):
+    if 'flags name' in typ.json_data:
+        return as_cType(c_prefix, Name(typ.json_data['flags name']))
     else:
         return as_cType(c_prefix, typ.name) + 'Flags'
+
+
+def as_cReturnType(c_prefix, typ):
+    if typ.category == 'bitmask':
+        return as_cFlagsType(c_prefix, typ)
+    else:
+        return as_cType(c_prefix, typ.name)
 
 
 def as_cppType(name):
@@ -754,6 +762,8 @@ def convert_cType_to_cppType(typ, annotation, arg, indent=0):
 def decorate(name, typ, arg):
     if arg.annotation == 'value':
         return typ + ' ' + name
+    elif arg.annotation == 'const':
+        return typ + ' const ' + name
     elif arg.annotation == '*':
         return typ + ' * ' + name
     elif arg.annotation == 'const*':
@@ -846,7 +856,7 @@ def make_base_render_params(metadata):
 
     def as_cTypeEnumSpecialCase(typ):
         if typ.category == 'bitmask':
-            return as_cType(c_prefix, typ.name) + 'Flags'
+            return as_cFlagsType(c_prefix, typ)
         return as_cType(c_prefix, typ.name)
 
     def as_cEnum(type_name, value_name):
@@ -883,6 +893,7 @@ def make_base_render_params(metadata):
             'as_MethodSuffix': as_MethodSuffix,
             'as_cProc': as_cProc,
             'as_cType': lambda name: as_cType(c_prefix, name),
+            'as_cFlagsType': lambda typ: as_cFlagsType(c_prefix, typ),
             'as_cReturnType': lambda typ: as_cReturnType(c_prefix, typ),
             'as_cppType': as_cppType,
             'as_jsEnumValue': as_jsEnumValue,
