@@ -16,6 +16,13 @@
 #define SRC_DAWN_NATIVE_METAL_QUEUEMTL_H_
 
 #import <Metal/Metal.h>
+
+#include <atomic>
+
+#include "dawn/common/SerialQueue.h"
+#include "dawn/native/IntegerTypes.h"
+#include "dawn/native/OSEvent.h"
+#include "dawn/native/OSEventPipe.h"
 #include "dawn/native/Queue.h"
 #include "dawn/native/metal/CommandRecordingContext.h"
 
@@ -34,14 +41,18 @@ class Queue final : public QueueBase {
     void ExportLastSignaledEvent(ExternalImageMTLSharedEventDescriptor* desc);
     void Destroy();
 
+    ResultOrError<OSEventReceiver> CreateWorkDoneEvent(ExecutionSerial) override;
+
   private:
     Queue(Device* device, const QueueDescriptor* descriptor);
     ~Queue() override;
 
     MaybeError Initialize();
+    void UpdateWaitingEvents(ExecutionSerial completedSerial);
 
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
     bool HasPendingCommands() const override;
+    ExecutionSerial GetBackendCompletedCommandSerial() const;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
@@ -61,6 +72,13 @@ class Queue final : public QueueBase {
     // A shared event that can be exported for synchronization with other users of Metal.
     // MTLSharedEvent is not available until macOS 10.14+ so use just `id`.
     NSPRef<id> mMtlSharedEvent = nullptr;
+
+    // mWaitingEventsX will be accessed by a Metal addCompletedHandler on an driver-internal thread.
+    std::mutex mWaitingEventsMutex;
+    // This value is always <= the lowest ExecutionSerial in mWaitingEvents.
+    // This may be read atomically, but writes must be protected by mWaitingEventsMutex.
+    std::atomic<uint64_t> mWaitingEventsSerialLowerBound = UINT64_MAX;
+    SerialQueue<ExecutionSerial, OSEventPipe> mWaitingEvents;
 };
 
 }  // namespace dawn::native::metal

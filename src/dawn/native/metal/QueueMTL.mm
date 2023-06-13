@@ -19,6 +19,7 @@
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/IntegerTypes.h"
 #include "dawn/native/MetalBackend.h"
 #include "dawn/native/metal/CommandBufferMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
@@ -41,9 +42,48 @@ Queue::~Queue() {}
 void Queue::Destroy() {
     // Forget all pending commands.
     mCommandContext.AcquireCommands();
+    UpdateWaitingEvents(kMaxExecutionSerial);
     mCommandQueue = nullptr;
     mLastSubmittedCommands = nullptr;
     mMtlSharedEvent = nullptr;
+}
+
+ResultOrError<OSEventReceiver> Queue::CreateWorkDoneEvent(ExecutionSerial serial) {
+    OSEventPipe sender;
+    OSEventReceiver receiver;
+    DAWN_TRY_ASSIGN(std::tie(sender, receiver), OSEventPipe::CreateEventPipe());
+
+    {
+        std::lock_guard guard{mWaitingEventsMutex};
+
+        // FIXME: Why isn't Completed >= Scheduled when Lost?
+        if (GetDevice()->IsLost() || GetBackendCompletedCommandSerial() >= serial) {
+            // The requested serial has already completed (usually happens if OnSubmittedWorkDone
+            // is called after everything is already completed).
+            DAWN_TRY(sender.Signal());
+            return std::move(receiver);
+        }
+
+        // Writes to mWaitingEventsSerialLowerBound are always protected by
+        // mWaitingEventsMutex, so this won't two-step update won't race.
+        if (uint64_t(serial) < mWaitingEventsSerialLowerBound.load()) {
+            mWaitingEventsSerialLowerBound = uint64_t(serial);
+        }
+
+        if (GetBackendCompletedCommandSerial() >= serial) {
+            // mCompletedSerial advanced past GetScheduledWorkDoneSerial() while this function was
+            // executing. Just signal the OSEventPipe instead of storing it, so it won't have
+            // to wait until there's another command buffer completion (which may be never!).
+            // This will leave the lower bound lower than it needs to be, but that's fine.
+            // In this very rare case, UpdateWaitingEvents will take the lock unnecessarily.
+            DAWN_TRY(sender.Signal());
+            return std::move(receiver);
+        }
+
+        mWaitingEvents.Enqueue(std::move(sender), serial);
+    }
+
+    return std::move(receiver);
 }
 
 MaybeError Queue::Initialize() {
@@ -59,6 +99,23 @@ MaybeError Queue::Initialize() {
     }
 
     return mCommandContext.PrepareNextCommandBuffer(*mCommandQueue);
+}
+
+void Queue::UpdateWaitingEvents(ExecutionSerial completedSerial) {
+    ASSERT(mCompletedSerial.load() >= uint64_t(completedSerial) ||
+           completedSerial == kMaxExecutionSerial);
+    if (completedSerial >= ExecutionSerial(mWaitingEventsSerialLowerBound.load())) {
+        {
+            std::lock_guard guard{mWaitingEventsMutex};
+
+            for (auto& waiting : mWaitingEvents.IterateUpTo(completedSerial)) {
+                DAWN_UNUSED(GetDevice()->ConsumedError(waiting.Signal()));
+            }
+            mWaitingEvents.ClearUpTo(completedSerial);
+            mWaitingEventsSerialLowerBound =
+                mWaitingEvents.Empty() ? UINT64_MAX : uint64_t(mWaitingEvents.FirstSerial());
+        }
+    }
 }
 
 MaybeError Queue::WaitForIdleForDestruction() {
@@ -139,6 +196,8 @@ MaybeError Queue::SubmitPendingCommandBuffer() {
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+
+        this->UpdateWaitingEvents(pendingSerial);
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(platform, GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
@@ -186,6 +245,10 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
 bool Queue::HasPendingCommands() const {
     return mCommandContext.NeedsSubmit();
+}
+
+ExecutionSerial Queue::GetBackendCompletedCommandSerial() const {
+    return ExecutionSerial(mCompletedSerial.load());
 }
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {

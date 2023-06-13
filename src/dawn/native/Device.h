@@ -36,6 +36,7 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/Toggles.h"
+#include "dawn/native/TrackedFuture.h"
 #include "dawn/native/UsageValidationMode.h"
 
 #include "dawn/native/DawnNative.h"
@@ -157,6 +158,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError ValidateObject(const ApiObjectBase* object) const;
 
+    InstanceBase* GetInstance() const;
     AdapterBase* GetAdapter() const;
     PhysicalDeviceBase* GetPhysicalDevice() const;
     virtual dawn::platform::Platform* GetPlatform() const;
@@ -428,6 +430,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     void APIDestroy();
 
     virtual void AppendDebugLayerMessages(ErrorData* error) {}
+
+    virtual ResultOrError<bool> WaitAnyImpl(size_t count,
+                                            TrackedFutureWaitInfo* futures,
+                                            Nanoseconds timeout);
 
     // It is guaranteed that the wrapped mutex will outlive the Device (if the Device is deleted
     // before the AutoLockAndHoldRef).
