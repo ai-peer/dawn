@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <poll.h>
+#include <unistd.h>
+
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
@@ -149,6 +152,10 @@ int frameCount = 0;
 void frame() {
     wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
 
+    if (frameCount == 20) {
+        device.Destroy();
+    }
+
     for (auto& data : shaderData) {
         data.time = frameCount / 60.0f;
     }
@@ -171,6 +178,43 @@ void frame() {
 
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
+
+    // Cannot use infinite timeout because of the wire
+    static constexpr uint64_t kTimeout = 1'000'000'000;
+    static constexpr bool kSubmitBetweenFutures = true;
+    static constexpr int kNumWaits = 1;
+    static constexpr int kNumFuturesPerWait = 1;
+    for (int i = 0; i < kNumWaits; ++i) {
+        int workDoneCount = 0;
+        WGPUQueueWorkDoneCallback workDoneCallback = [](WGPUQueueWorkDoneStatus status,
+                                                        void* userdata) {
+            ASSERT(status == WGPUQueueWorkDoneStatus_Success);
+            *static_cast<int*>(userdata) += 1;
+        };
+
+        std::vector<wgpu::FutureWaitInfo> futures;
+        for (int j = 0; j < kNumFuturesPerWait; ++j) {
+            if (kSubmitBetweenFutures) {
+                wgpu::CommandBuffer cb = device.CreateCommandEncoder().Finish();
+                queue.Submit(1, &cb);
+            }
+            wgpu::Future future = queue.OnSubmittedWorkDone2(wgpu::CallbackFlag::None,
+                                                             workDoneCallback, &workDoneCount);
+            futures.push_back(wgpu::FutureWaitInfo{future});
+        }
+
+        while (workDoneCount < kNumFuturesPerWait) {
+            device.Tick();
+            DoFlushCmdBufs();
+            wgpu::WaitStatus waited =
+                GetInstance().WaitAny(futures.size(), futures.data(), kTimeout);
+            if (waited == wgpu::WaitStatus::Success) {
+                break;
+            }
+            printf("waiting...\n");
+            usleep(10'000);
+        }
+    }
     swapchain.Present();
     DoFlush();
 }

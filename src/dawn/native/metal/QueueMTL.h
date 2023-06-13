@@ -26,6 +26,10 @@ class Queue final : public QueueBase {
     Queue(Device* device, const QueueDescriptor* descriptor);
     ~Queue() override;
 
+    WGPUFuture APIOnSubmittedWorkDone2(wgpu::CallbackFlag callbackFlags,
+                                       WGPUQueueWorkDoneCallback callback,
+                                       void* userdata) override;
+
   private:
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
 };
