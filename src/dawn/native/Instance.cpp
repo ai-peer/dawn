@@ -14,6 +14,7 @@
 
 #include "dawn/native/Instance.h"
 
+#include <limits>
 #include <utility>
 
 #include "dawn/common/Assert.h"
@@ -24,6 +25,7 @@
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ErrorData.h"
+#include "dawn/native/EventPipe.h"
 #include "dawn/native/Surface.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
@@ -47,8 +49,6 @@
 #if defined(DAWN_USE_X11)
 #include "dawn/native/XlibXcbFunctions.h"
 #endif  // defined(DAWN_USE_X11)
-
-#include <optional>
 
 namespace dawn::native {
 
@@ -542,6 +542,15 @@ void InstanceBase::RemoveDevice(DeviceBase* device) {
     mDevicesList.erase(device);
 }
 
+FutureID InstanceBase::TrackFuture(TrackedFuture* future) {
+    uint64_t id = mNextFutureID++;
+    {
+        std::lock_guard lock{mTrackedFuturesMutex};
+        mTrackedFutures.emplace(id, future);
+    }
+    return FutureID(id);
+}
+
 bool InstanceBase::APIProcessEvents() {
     std::vector<Ref<DeviceBase>> devices;
     {
@@ -559,6 +568,81 @@ bool InstanceBase::APIProcessEvents() {
     mCallbackTaskManager->Flush();
 
     return hasMoreEvents || !mCallbackTaskManager->IsEmpty();
+}
+
+wgpu::WaitStatus InstanceBase::APIWaitAny(size_t count,
+                                          FutureWaitInfo* futures,
+                                          uint64_t timeoutNS) {
+    wgpu::WaitStatus status;
+    if (ConsumedError(WaitAnyImpl(count, futures, Nanoseconds(timeoutNS)), &status)) {
+        return wgpu::WaitStatus::Unknown;
+    }
+    return status;
+}
+
+ResultOrError<wgpu::WaitStatus> InstanceBase::WaitAnyImpl(size_t count,
+                                                          FutureWaitInfo* infos,
+                                                          Nanoseconds timeout) {
+    ASSERT(count < std::numeric_limits<int>::max());
+    if (count == 0) {
+        return wgpu::WaitStatus::Success;
+    }
+
+    bool anyCompleted = false;
+    std::vector<EventPollInfo> polls(count);
+    {
+        std::lock_guard lock{mTrackedFuturesMutex};
+        uint64_t nextFutureID = mNextFutureID.load();
+        for (size_t i = 0; i < count; ++i) {
+            uint64_t futureID = infos[i].future.id;
+            ASSERT(futureID < nextFutureID);
+            auto it = mTrackedFutures.find(futureID);
+            if (it != mTrackedFutures.end()) {
+                polls[i] = EventPollInfo{it->second->GetPrimitive(), false, false};
+                infos[i].completed = false;
+            } else {
+                anyCompleted = true;
+                infos[i].completed = true;
+            }
+        }
+    }
+
+    // If any were already completed, return without checking the rest.
+    if (anyCompleted) {
+        return wgpu::WaitStatus::Success;
+    }
+    // Otherwise, `polls` has been fully populated.
+
+    wgpu::WaitStatus innerStatus;
+    DAWN_TRY_ASSIGN(innerStatus, EventReceiver::Poll(&polls, timeout));
+
+    if (innerStatus == wgpu::WaitStatus::TimedOut) {
+        return innerStatus;
+    }
+    ASSERT(innerStatus == wgpu::WaitStatus::Success);
+
+    std::vector<Ref<TrackedFuture>> newlyCompleted;
+    {
+        std::lock_guard lock{mTrackedFuturesMutex};
+        for (size_t i = 0; i < count; ++i) {
+            bool ready = polls[i].ready;
+            if (ready) {
+                auto it = mTrackedFutures.find(infos[i].future.id);
+                // This won't always be true: a future could have completed elsewhere while waiting.
+                if (it != mTrackedFutures.end()) {
+                    newlyCompleted.push_back(std::move(it->second));
+                    mTrackedFutures.erase(it);
+                }
+                // Completed will be set before the callback runs. This is OK,
+                // because if it completed, it's already been removed from mTrackedFutures.
+                infos[i].completed = true;
+            }
+        }
+    }
+    for (Ref<TrackedFuture>& future : newlyCompleted) {
+        future->Complete();
+    }
+    return wgpu::WaitStatus::Success;
 }
 
 const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {
