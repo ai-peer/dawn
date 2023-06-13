@@ -2239,6 +2239,32 @@ TEST_F(ResolverConstEvalTest, ShortCircuit_Or_Error_MemberAccess) {
 }
 
 ////////////////////////////////////////////////
+// Short-Circuit 'const' Variable Access
+////////////////////////////////////////////////
+
+TEST_F(ResolverConstEvalTest, ShortCircuit_And_ViaConstDecl) {
+    // const FALSE = false;
+    // const result = FALSE && FALSE;
+    GlobalConst("FALSE", Expr(false));
+    auto* binary = LogicalAnd("FALSE", "FALSE");
+    GlobalConst("result", binary);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+    ValidateAnd(Sem(), binary);
+}
+
+TEST_F(ResolverConstEvalTest, ShortCircuit_Or_ViaConstDecl) {
+    // const TRUE = true;
+    // const result = TRUE || TRUE;
+    GlobalConst("TRUE", Expr(true));
+    auto* binary = LogicalOr("TRUE", "TRUE");
+    GlobalConst("result", binary);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+    ValidateOr(Sem(), binary);
+}
+
+////////////////////////////////////////////////
 // Short-Circuit Swizzle
 ////////////////////////////////////////////////
 

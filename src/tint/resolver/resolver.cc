@@ -3057,9 +3057,16 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
         return Switch(
             resolved_node,  //
             [&](sem::Variable* variable) -> sem::VariableUser* {
-                auto symbol = ident->symbol;
-                auto* user =
-                    builder_->create<sem::VariableUser>(expr, current_statement_, variable);
+                auto stage = variable->Stage();
+                const constant::Value* value = variable->ConstantValue();
+                if (skip_const_eval_.Contains(expr)) {
+                    // This expression is short-circuited by an ancestor expression.
+                    // Do not const-eval.
+                    stage = sem::EvaluationStage::kNotEvaluated;
+                    value = nullptr;
+                }
+                auto* user = builder_->create<sem::VariableUser>(expr, stage, current_statement_,
+                                                                 value, variable);
 
                 if (current_statement_) {
                     // If identifier is part of a loop continuing block, make sure it
@@ -3073,6 +3080,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                         if (loop_block->FirstContinue()) {
                             // If our identifier is in loop_block->decls, make sure its index is
                             // less than first_continue
+                            auto symbol = ident->symbol;
                             if (auto decl = loop_block->Decls().Find(symbol)) {
                                 if (decl->order >= loop_block->NumDeclsAtFirstContinue()) {
                                     AddError("continue statement bypasses declaration of '" +
@@ -3118,7 +3126,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                     // Note: The spec is currently vague around the rules here. See
                     // https://github.com/gpuweb/gpuweb/issues/3081. Remove this comment when
                     // resolved.
-                    std::string desc = "var '" + symbol.Name() + "' ";
+                    std::string desc = "var '" + ident->symbol.Name() + "' ";
                     AddError(desc + "cannot be referenced at module-scope", expr->source);
                     AddNote(desc + "declared here", variable->Declaration()->source);
                     return nullptr;
