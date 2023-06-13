@@ -21,6 +21,7 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/metal/CommandBufferMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
+#include "dawn/native/metal/QueueWorkDoneFutureMTL.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
@@ -46,6 +47,10 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
         return {};
     }
+}
+
+QueueWorkDoneFutureBase* Queue::APIOnSubmittedWorkDone2() {
+    return new QueueWorkDoneFuture(this, GetDevice()->GetScheduledWorkDoneSerial());
 }
 
 }  // namespace dawn::native::metal

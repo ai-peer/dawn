@@ -36,6 +36,27 @@ namespace dawn::native::metal {
 struct KalmanInfo;
 struct ExternalImageMTLSharedEventDescriptor;
 
+class EventPipe final {
+  public:
+    static ResultOrError<EventPipe> Create();
+
+    EventPipe() = default;
+    explicit EventPipe(EventPipe&&);
+    EventPipe& operator=(EventPipe&&);
+    ~EventPipe();
+
+    MaybeError Signal();
+    ResultOrError<bool> Ready(Milliseconds timeout);
+    MaybeError Reset();
+    PosixFd GetReceiverFd();
+
+  private:
+    explicit EventPipe(int (&fds)[2]);
+
+    PosixFd mReceiver{-1};
+    PosixFd mSender{-1};
+};
+
 class Device final : public DeviceBase {
   public:
     static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
@@ -87,11 +108,14 @@ class Device final : public DeviceBase {
 
     void ForceEventualFlushOfCommands() override;
 
+    ResultOrError<wgpu::WaitStatus> WaitForSerial(ExecutionSerial, Milliseconds timeout);
+
   private:
     Device(AdapterBase* adapter,
            NSPRef<id<MTLDevice>> mtlDevice,
            const DeviceDescriptor* descriptor,
-           const TogglesState& deviceToggles);
+           const TogglesState& deviceToggles,
+           EventPipe&& serialChangedEvent);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
@@ -169,6 +193,8 @@ class Device final : public DeviceBase {
     // vertex/fragement stage
     bool mCounterSamplingAtStageBoundary;
     NSPRef<id<MTLBuffer>> mMockBlitMtlBuffer;
+
+    EventPipe mSerialChangedEvent;
 };
 
 }  // namespace dawn::native::metal

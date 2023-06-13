@@ -38,6 +38,7 @@
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
+#include <poll.h>
 #include <type_traits>
 
 namespace dawn::native::metal {
@@ -102,16 +103,113 @@ void API_AVAILABLE(macos(10.15), ios(14)) UpdateTimestampPeriod(id<MTLDevice> de
     }
 }
 
+int ToPollTimeout(Milliseconds ms) {
+    if (uint64_t(ms) > std::numeric_limits<int>::max()) {
+        return -1;  // Round long timeout up to infinity
+    }
+    return int(uint64_t(ms));
+}
+
+ResultOrError<uint64_t> GetMonotonicTimeMs() {
+    struct timespec ts;
+    int status = clock_gettime(CLOCK_MONOTONIC, &ts);
+    if (DAWN_UNLIKELY(status < 0)) {
+        return DAWN_INTERNAL_ERROR("clock_gettime() failed");
+    }
+    return uint64_t(ts.tv_sec) * 1000 + ts.tv_nsec / 1'000'000;
+}
+
 }  // namespace
+
+// static
+ResultOrError<EventPipe> EventPipe::Create() {
+    int pipeFds[2];
+    int status = pipe(pipeFds);
+    if (status == -1) {
+        return DAWN_INTERNAL_ERROR("Failed to create POSIX pipe");
+    }
+    return EventPipe{pipeFds};
+}
+
+EventPipe::EventPipe(EventPipe&& other) : mReceiver(other.mReceiver), mSender(other.mSender) {
+    *this = std::move(other);
+}
+
+EventPipe& EventPipe::operator=(EventPipe&& other) {
+    mReceiver = other.mReceiver;
+    mSender = other.mSender;
+    other.mReceiver = other.mSender = PosixFd(-1);
+    return *this;
+}
+
+EventPipe::~EventPipe() {
+    if (int(mReceiver) >= 0) {
+        close(int(mReceiver));
+    }
+    if (int(mSender) >= 0) {
+        close(int(mSender));
+    }
+}
+
+EventPipe::EventPipe(int (&fds)[2]) : mReceiver(fds[0]), mSender(fds[1]) {
+    ASSERT(fds[0] >= 0);
+    ASSERT(fds[1] >= 0);
+}
+
+MaybeError EventPipe::Signal() {
+    // Send one byte to signal the receiver
+    char zero[1] = {};
+    int status = write(int(mSender), zero, 1);
+    if (DAWN_UNLIKELY(status < 0)) {
+        return DAWN_INTERNAL_ERROR("EventPipe::send() failed");
+    }
+    return {};
+}
+
+ResultOrError<bool> EventPipe::Ready(Milliseconds timeout) {
+    int pollTimeout = ToPollTimeout(timeout);
+    struct pollfd pfd = {int(mReceiver), POLLIN, 0};
+    int status = poll(&pfd, 1, pollTimeout);
+    if (DAWN_UNLIKELY(status < 0)) {
+        return DAWN_INTERNAL_ERROR("poll() failed");
+    }
+    return status > 0;
+}
+
+MaybeError EventPipe::Reset() {
+    // Loop until the pipe is flushed.
+    struct pollfd pfd = {int(mReceiver), POLLIN, 0};
+    while (true) {
+        int status = poll(&pfd, 1, 0);
+        if (DAWN_UNLIKELY(status < 0)) {
+            return DAWN_INTERNAL_ERROR("poll() failed");
+        }
+        if (status == 0) {
+            return {};
+        }
+
+        char recv[16];
+        int bytesRead = read(int(mReceiver), recv, 16);
+        if (DAWN_UNLIKELY(bytesRead < 0)) {
+            return DAWN_INTERNAL_ERROR("read() failed");
+        }
+    }
+}
+
+PosixFd EventPipe::GetReceiverFd() {
+    return mReceiver;
+}
 
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
                                           NSPRef<id<MTLDevice>> mtlDevice,
                                           const DeviceDescriptor* descriptor,
                                           const TogglesState& deviceToggles) {
+    EventPipe serialChangedEvent;
+    DAWN_TRY_ASSIGN(serialChangedEvent, EventPipe::Create());
     @autoreleasepool {
-        Ref<Device> device =
-            AcquireRef(new Device(adapter, std::move(mtlDevice), descriptor, deviceToggles));
+        Ref<Device> device = AcquireRef(new Device(adapter, std::move(mtlDevice), descriptor,
+                                                   deviceToggles, std::move(serialChangedEvent)));
         DAWN_TRY(device->Initialize(descriptor));
         return device;
     }
@@ -120,10 +218,12 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
 Device::Device(AdapterBase* adapter,
                NSPRef<id<MTLDevice>> mtlDevice,
                const DeviceDescriptor* descriptor,
-               const TogglesState& deviceToggles)
+               const TogglesState& deviceToggles,
+               EventPipe&& serialChangedEvent)
     : DeviceBase(adapter, descriptor, deviceToggles),
       mMtlDevice(std::move(mtlDevice)),
-      mCompletedSerial(0) {
+      mCompletedSerial(0),
+      mSerialChangedEvent(std::move(serialChangedEvent)) {
     // On macOS < 11.0, we only can check whether counter sampling is supported, and the counter
     // only can be sampled between command boundary using sampleCountersInBuffer API if it's
     // supported.
@@ -311,6 +411,50 @@ void Device::ForceEventualFlushOfCommands() {
     }
 }
 
+// FIXME: Possibly delete this. It can't actually be used to implement WaitAnyFutures
+// if not all of the futures are map/workdone futures on the same queue.
+ResultOrError<wgpu::WaitStatus> Device::WaitForSerial(ExecutionSerial serial,
+                                                      Milliseconds timeout) {
+    if (ExecutionSerial(mCompletedSerial.load()) >= serial) {
+        return wgpu::WaitStatus::NonePending;
+    }
+
+    // There's a small chance of a race where, at this point in this function,
+    // the callback runs, triggers another waiting WaitForSerial on another
+    // thread, that thread resets the event, then this function continues.
+    // Ready() won't fire appropriately, and will either fire late (fine) or
+    // never (timeout). To handle this, loop Ready() with a maximum timeout of
+    // 250ms until the requested timeout is reached.
+    // FIXME: Might make more sense to handle this by just knowing how many are waiting
+    // so the signaler knows how many bytes to send...?
+
+    uint64_t timeoutMs{timeout};
+    uint64_t iterationStartMs;
+    DAWN_TRY_ASSIGN(iterationStartMs, GetMonotonicTimeMs());
+    while (true) {
+        uint64_t incrementalTimeoutMs = std::min(timeoutMs, uint64_t(250));
+        bool ready;
+        DAWN_TRY_ASSIGN(ready, mSerialChangedEvent.Ready(Milliseconds(incrementalTimeoutMs)));
+        if (ready) {
+            DAWN_TRY(mSerialChangedEvent.Reset());
+            if (ExecutionSerial(mCompletedSerial.load()) >= serial) {
+                return wgpu::WaitStatus::SomeCompleted;
+            } else {
+                return wgpu::WaitStatus::PartialProgress;
+            }
+        }
+
+        uint64_t iterationEndMs;
+        DAWN_TRY_ASSIGN(iterationEndMs, GetMonotonicTimeMs());
+        uint64_t elapsedMs = iterationEndMs - iterationStartMs;
+        if (elapsedMs >= timeoutMs) {
+            return wgpu::WaitStatus::TimedOut;
+        }
+        timeoutMs -= elapsedMs;
+        iterationStartMs = iterationEndMs;
+    }
+}
+
 MaybeError Device::SubmitPendingCommandBuffer() {
     if (!mCommandContext.NeedsSubmit()) {
         return {};
@@ -349,6 +493,9 @@ MaybeError Device::SubmitPendingCommandBuffer() {
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+
+        MaybeError result = this->mSerialChangedEvent.Signal();
+        ASSERT(result.IsSuccess());  // FIXME
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
