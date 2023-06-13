@@ -24,6 +24,8 @@ namespace tint::ir {
 
 Builder::Builder(Module& mod) : ir(mod) {}
 
+Builder::Builder(Module& mod, ir::Block* block) : current_block_(block), ir(mod) {}
+
 Builder::~Builder() = default;
 
 ir::Block* Builder::RootBlock() {

@@ -73,12 +73,31 @@ class Builder {
     using DisableIfVectorLike = utils::traits::EnableIf<
         !utils::IsVectorLike<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
 
+    template <typename T, typename F>
+    T* AppendIfNeeded(F&& cb) {
+        T* val = cb();
+        if (current_block_) {
+            current_block_->Append(val);
+        }
+        return val;
+    }
+
+    /// If set, any created instruction will be auto-appended to the block.
+    ir::Block* current_block_ = nullptr;
+
   public:
     /// Constructor
     /// @param mod the ir::Module to wrap with this builder
     explicit Builder(Module& mod);
+    /// Constructor
+    /// @param mod the ir::Module to wrap with this builder
+    /// @param block the block to insert too
+    Builder(Module& mod, ir::Block* block);
     /// Destructor
     ~Builder();
+
+    /// Creates a new builder wrapping the given block
+    Builder With(Block* b) { return Builder(ir, b); }
 
     /// @returns a new block
     ir::Block* Block();
@@ -102,8 +121,10 @@ class Builder {
     /// @returns the flow node
     template <typename T>
     ir::If* If(T&& condition) {
-        return ir.values.Create<ir::If>(Value(std::forward<T>(condition)), Block(), Block(),
-                                        MultiInBlock());
+        return AppendIfNeeded<ir::If>([&] {
+            return ir.values.Create<ir::If>(Value(std::forward<T>(condition)), Block(), Block(),
+                                            MultiInBlock());
+        });
     }
 
     /// Creates a loop flow node
@@ -500,7 +521,9 @@ class Builder {
     /// Creates a return instruction
     /// @param func the function being returned
     /// @returns the instruction
-    ir::Return* Return(ir::Function* func) { return ir.values.Create<ir::Return>(func); }
+    ir::Return* Return(ir::Function* func) {
+        return AppendIfNeeded<ir::Return>([&] { return ir.values.Create<ir::Return>(func); });
+    }
 
     /// Creates a return instruction
     /// @param func the function being returned
@@ -584,7 +607,10 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::Access* Access(const type::Type* type, ir::Value* object, ARGS&&... indices) {
-        return ir.values.Create<ir::Access>(type, object, Values(std::forward<ARGS>(indices)...));
+        return AppendIfNeeded<ir::Access>([&] {
+            return ir.values.Create<ir::Access>(type, object,
+                                                Values(std::forward<ARGS>(indices)...));
+        });
     }
 
     /// Creates a new `Swizzle`
