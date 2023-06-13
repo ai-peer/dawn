@@ -69,6 +69,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "178590db_818c7fe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2023-06-13T15:20:54Z",
+      "side": 1,
+      "message": "The Vulkan robustness features aren\u0027t particularly useful unfortunately. As Ben alludes to SPIR-V says it is undefined behaviour to form an out of bounds logical pointer (the kind tint generates). The Vulkan feature is meant to solve binding too small of a buffer on the API compared to the shader.\n\nThe Vulkan robustness features could potentially help the case where the shader represents the majority the buffer as a runtime array and tint wants to elide calls to arrayLength for bounds checking, but I don\u0027t think it is sufficient to generally remove bounds checks. This would rely on Dawn validating the minBindingSize (which should be the case).",
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bae1787c_e02624e9",
