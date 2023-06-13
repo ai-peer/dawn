@@ -106,11 +106,13 @@ endif()
 # GLFW is not supported in UWP
 if ((WIN32 AND NOT WINDOWS_STORE) OR UNIX AND NOT ANDROID)
     set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING ON)
+else()
+    set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING OFF)
 endif()
 
-# Current examples are depend on GLFW
+# Current examples depend on GLFW
 if (DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
-    set(BUILD_SAMPLES ON)
+  set(BUILD_SAMPLES ON)
 endif()
 
 option_if_not_defined(DAWN_ENABLE_ASAN "Enable address sanitizer" OFF)
@@ -125,6 +127,8 @@ option_if_not_defined(DAWN_ENABLE_NULL "Enable compilation of the Null backend" 
 option_if_not_defined(DAWN_ENABLE_DESKTOP_GL "Enable compilation of the OpenGL backend" ${ENABLE_DESKTOP_GL})
 option_if_not_defined(DAWN_ENABLE_OPENGLES "Enable compilation of the OpenGL ES backend" ${ENABLE_OPENGLES})
 option_if_not_defined(DAWN_ENABLE_VULKAN "Enable compilation of the Vulkan backend" ${ENABLE_VULKAN})
+
+option_if_not_defined(DAWN_ENABLE_WINDOWING_GLFW "Enable compilation of the GLFW windowing utilities" ${DAWN_SUPPORTS_GLFW_FOR_WINDOWING})
 
 option_if_not_defined(DAWN_ALWAYS_ASSERT "Enable assertions on all build types" OFF)
 option_if_not_defined(DAWN_USE_WAYLAND "Enable support for Wayland surface" ${USE_WAYLAND})
@@ -149,6 +153,10 @@ endif()
 option_if_not_defined(TINT_BUILD_SAMPLES "Build samples" ${DAWN_BUILD_SAMPLES})
 option_if_not_defined(TINT_BUILD_DOCS "Build documentation" ON)
 option_if_not_defined(TINT_DOCS_WARN_AS_ERROR "When building documentation, treat warnings as errors" OFF)
+
+if (NOT DAWN_ENABLE_WINDOWING_GLFW AND (TINT_BUILD_SAMPLES OR DAWN_BUILD_SAMPLES))
+  message(SEND_ERROR "Compiling usage examples requires DAWN_ENABLE_WINDOWING_GLFW")
+endif()
 
 option_if_not_defined(TINT_BUILD_SPV_READER "Build the SPIR-V input reader" ${DAWN_ENABLE_VULKAN})
 option_if_not_defined(TINT_BUILD_WGSL_READER "Build the WGSL input reader" ON)
