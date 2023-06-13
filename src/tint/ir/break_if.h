@@ -29,6 +29,12 @@ namespace tint::ir {
 /// A break-if iteration instruction.
 class BreakIf : public utils::Castable<BreakIf, Branch> {
   public:
+    /// The base offset in Operands() for the condition
+    static constexpr size_t kConditionOperandOffset = 0;
+
+    /// The base offset in Operands() for the args
+    static constexpr size_t kArgsOperandOffset = 1;
+
     /// Constructor
     /// @param condition the break condition
     /// @param loop the loop containing the break-if

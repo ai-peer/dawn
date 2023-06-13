@@ -23,6 +23,9 @@ namespace tint::ir {
 /// A swizzle instruction in the IR.
 class Swizzle : public utils::Castable<Swizzle, OperandInstruction<1>> {
   public:
+    /// The base offset in Operands() for the object
+    static constexpr size_t kObjectOperandOffset = 0;
+
     /// Constructor
     /// @param result_type the result type
     /// @param object the object being swizzled

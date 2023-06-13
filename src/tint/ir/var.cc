@@ -23,13 +23,14 @@ Var::Var(const type::Pointer* ty) : type_(ty) {
     TINT_ASSERT(IR, type_ != nullptr);
 
     // Default to no initializer.
-    AddOperand(nullptr);
+    Resize(Var::kInitializerOperandOffset + 1);
+    SetOperand(Var::kInitializerOperandOffset, nullptr);
 }
 
 Var::~Var() = default;
 
 void Var::SetInitializer(Value* initializer) {
-    SetOperand(0, initializer);
+    SetOperand(Var::kInitializerOperandOffset, initializer);
 }
 
 }  // namespace tint::ir

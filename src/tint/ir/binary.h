@@ -23,6 +23,12 @@ namespace tint::ir {
 /// A binary instruction in the IR.
 class Binary : public utils::Castable<Binary, OperandInstruction<2>> {
   public:
+    /// The base offset in Operands() for the LHS
+    static constexpr size_t kLhsOperandOffset = 0;
+
+    /// The base offset in Operands() for the RHS
+    static constexpr size_t kRhsOperandOffset = 1;
+
     /// The kind of instruction.
     enum class Kind {
         kAdd,

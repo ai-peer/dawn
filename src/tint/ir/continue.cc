@@ -28,10 +28,11 @@ Continue::Continue(ir::Loop* loop, utils::VectorRef<Value*> args /* = utils::Emp
     : loop_(loop) {
     TINT_ASSERT(IR, loop_);
 
+    Resize(Continue::kArgsOperandOffset + args.Length());
+    SetOperands(Continue::kArgsOperandOffset, std::move(args));
     if (loop_) {
         loop_->Continuing()->AddInboundSiblingBranch(this);
     }
-    AddOperands(std::move(args));
 }
 
 Continue::~Continue() = default;

@@ -28,6 +28,9 @@ namespace tint::ir {
 /// A return instruction.
 class Return : public utils::Castable<Return, Branch> {
   public:
+    /// The base offset in Operands() for the value
+    static constexpr size_t kValueOperandOffset = 0;
+
     /// Constructor (no return value)
     /// @param func the function being returned
     explicit Return(Function* func);

@@ -31,6 +31,11 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
     /// @param value the value to use
     void SetOperand(uint32_t index, ir::Value* value) override {
         TINT_ASSERT(IR, index < operands_.Length());
+
+        if (!CheckOperand(index, value)) {
+            return;
+        }
+
         if (operands_[index]) {
             operands_[index]->RemoveUsage({this, index});
         }
@@ -41,23 +46,30 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
         return;
     }
 
-  protected:
-    /// Append a new operand to the operand list for this instruction.
-    /// @param value the operand value to append
-    void AddOperand(ir::Value* value) {
-        if (value) {
-            value->AddUsage({this, static_cast<uint32_t>(operands_.Length())});
+    /// Writes a list of operands to the operand list for this instruction starting at @p start_idx.
+    /// @param start_idx the index to write the first value into
+    /// @param values the operand values to append
+    void SetOperands(uint32_t start_idx, utils::VectorRef<ir::Value*> values) {
+        for (auto* val : values) {
+            SetOperand(start_idx, val);
+            start_idx += 1;
         }
-        operands_.Push(value);
     }
 
-    /// Append a list of non-null operands to the operand list for this instruction.
-    /// @param values the operand values to append
-    void AddOperands(utils::VectorRef<ir::Value*> values) {
-        for (auto* val : values) {
-            TINT_ASSERT(IR, val != nullptr);
-            AddOperand(val);
-        }
+  protected:
+    /// Resizes the operand list to @p size
+    /// @param size the size
+    void Resize(size_t size) { operands_.Resize(size); }
+
+    /// @param index the index of the operand
+    /// @param value the value to be set
+    /// @returns true if the @p value is acceptable for operand at @p index
+    virtual bool CheckOperand(uint32_t index, ir::Value* value) {
+        TINT_ASSERT_OR_RETURN_VALUE(IR, value != nullptr, false);
+        return true;
+
+        (void)index;
+        (void)value;
     }
 
     /// The operands to this instruction.

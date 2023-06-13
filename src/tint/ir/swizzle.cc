@@ -24,12 +24,12 @@ namespace tint::ir {
 
 Swizzle::Swizzle(const type::Type* ty, Value* object, utils::VectorRef<uint32_t> indices)
     : result_type_(ty), indices_(std::move(indices)) {
-    TINT_ASSERT(IR, object != nullptr);
     TINT_ASSERT(IR, result_type_ != nullptr);
     TINT_ASSERT(IR, !indices.IsEmpty());
     TINT_ASSERT(IR, indices.Length() <= 4);
 
-    AddOperand(object);
+    Resize(Swizzle::kObjectOperandOffset + 1);
+    SetOperand(Swizzle::kObjectOperandOffset, object);
 
     for (auto idx : indices_) {
         TINT_ASSERT(IR, idx < 4);

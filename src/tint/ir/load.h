@@ -23,6 +23,9 @@ namespace tint::ir {
 /// A load instruction in the IR.
 class Load : public utils::Castable<Load, OperandInstruction<1>> {
   public:
+    /// The base offset in Operands() for the from
+    static constexpr size_t kFromOperandOffset = 0;
+
     /// Constructor (infers type)
     /// @param from the value being loaded from
     explicit Load(Value* from);

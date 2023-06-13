@@ -24,6 +24,12 @@ namespace tint::ir {
 /// A user call instruction in the IR.
 class UserCall : public utils::Castable<UserCall, Call> {
   public:
+    /// The base offset in Operands() for the function
+    static constexpr size_t kFunctionOperandOffset = 0;
+
+    /// The base offset in Operands() for the args
+    static constexpr size_t kArgsOperandOffset = 1;
+
     /// Constructor
     /// @param type the result type
     /// @param func the function being called

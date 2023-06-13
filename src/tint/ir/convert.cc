@@ -23,9 +23,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Convert);
 namespace tint::ir {
 
 Convert::Convert(const type::Type* to_type, Value* value) : Base(to_type) {
-    TINT_ASSERT_OR_RETURN(IR, value);
-
-    AddOperand(value);
+    Resize(Convert::kValueOperandOffset + 1);
+    SetOperand(Convert::kValueOperandOffset, value);
 }
 
 Convert::~Convert() = default;

@@ -46,6 +46,9 @@ namespace tint::ir {
 /// ```
 class Switch : public utils::Castable<Switch, ControlInstruction> {
   public:
+    /// The base offset in Operands() for the condition
+    static constexpr size_t kConditionOperandOffset = 0;
+
     /// A case selector
     struct CaseSelector {
         /// @returns true if this is a default selector

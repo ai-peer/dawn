@@ -25,12 +25,12 @@ namespace tint::ir {
 //! @cond Doxygen_Suppress
 Access::Access(const type::Type* ty, Value* object, utils::VectorRef<Value*> indices)
     : result_type_(ty) {
-    TINT_ASSERT(IR, object);
     TINT_ASSERT(IR, result_type_);
     TINT_ASSERT(IR, !indices.IsEmpty());
 
-    AddOperand(object);
-    AddOperands(std::move(indices));
+    Resize(Access::kIndicesOperandOffset + indices.Length());
+    SetOperand(Access::kObjectOperandOffset, object);
+    SetOperands(Access::kIndicesOperandOffset, std::move(indices));
 }
 
 Access::~Access() = default;

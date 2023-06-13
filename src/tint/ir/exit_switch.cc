@@ -27,10 +27,11 @@ ExitSwitch::ExitSwitch(ir::Switch* sw, utils::VectorRef<Value*> args /* = utils:
     : switch_(sw) {
     TINT_ASSERT(IR, switch_);
 
+    Resize(ExitSwitch::kArgsOperandOffset + args.Length());
+    SetOperands(ExitSwitch::kArgsOperandOffset, std::move(args));
     if (switch_) {
         switch_->Merge()->AddInboundSiblingBranch(this);
     }
-    AddOperands(std::move(args));
 }
 
 ExitSwitch::~ExitSwitch() = default;

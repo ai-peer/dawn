@@ -23,6 +23,11 @@ namespace tint::ir {
 /// A store instruction in the IR.
 class Store : public utils::Castable<Store, OperandInstruction<2>> {
   public:
+    /// The base offset in Operands() for the to value
+    static constexpr size_t kToOperandOffset = 0;
+    /// The base offset in Operands() for the from value
+    static constexpr size_t kFromOperandOffset = 1;
+
     /// Constructor
     /// @param to the value to store too
     /// @param from the value being stored from

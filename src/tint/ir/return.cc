@@ -24,17 +24,15 @@ namespace tint::ir {
 
 Return::Return(Function* func) : func_(func) {
     TINT_ASSERT_OR_RETURN(IR, func_);
-
     func_->AddUsage({this, 0u});
 }
 
 Return::Return(Function* func, Value* arg) : func_(func) {
     TINT_ASSERT_OR_RETURN(IR, func_);
-    TINT_ASSERT_OR_RETURN(IR, arg);
 
     func_->AddUsage({this, 0u});
-
-    AddOperand(arg);
+    Resize(Return::kValueOperandOffset + 1);
+    SetOperand(Return::kValueOperandOffset, arg);
 }
 
 Return::~Return() = default;
