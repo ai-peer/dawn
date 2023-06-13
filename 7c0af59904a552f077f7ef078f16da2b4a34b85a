@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51e46c7b_8ee86700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T11:53:24Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae1787c_e02624e9",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T11:53:24Z",
+      "side": 1,
+      "message": "Would we be able to use just robustBufferAccess2 or just robustImageAccess2 if one is present and not the other?",
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f1ee990_21469468",
@@ -37,6 +71,40 @@
         "endLine": 65,
         "endChar": 34
       },
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465885ab_bdf46e59",
+        "filename": "src/tint/writer/spirv/generator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T11:53:24Z",
+      "side": 1,
+      "message": "nit: SPIR-V doesn\u0027t know about this extension. IMHO we could call it skip_image_robustness or something like that.",
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f90a67_f890a1da",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-13T11:53:24Z",
+      "side": 1,
+      "message": "The spec for https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRobustness2FeaturesEXT.html doesn\u0027t say what happens for out of bounds texture stores though. Can you double check that it is dropped in this case?",
       "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
