@@ -38,7 +38,10 @@ class NoopCommandSerializer final : public CommandSerializer {
 }  // anonymous namespace
 
 Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
-    : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
+    : ClientBase(),
+      mSerializer(serializer),
+      mMemoryTransferService(memoryTransferService),
+      mEventManager(this) {
     if (mMemoryTransferService == nullptr) {
         // If a MemoryTransferService is not provided, fall back to inline memory.
         mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
@@ -48,6 +51,7 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 
 Client::~Client() {
     DestroyAllObjects();
+    mEventManager.Shutdown();
 }
 
 void Client::DestroyAllObjects() {
@@ -160,6 +164,7 @@ void Client::Disconnect() {
             object->value()->CancelCallbacksForDisconnect();
         }
     }
+    mEventManager.Shutdown();
 }
 
 bool Client::IsDisconnected() const {
