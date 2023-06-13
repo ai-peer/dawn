@@ -16,6 +16,7 @@
 #define SRC_DAWN_WIRE_CLIENT_REQUESTTRACKER_H_
 
 #include <cstdint>
+#include <functional>
 #include <map>
 #include <utility>
 

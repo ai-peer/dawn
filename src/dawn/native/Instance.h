@@ -20,7 +20,6 @@
 #include <mutex>
 #include <set>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
@@ -30,6 +29,7 @@
 #include "dawn/native/Adapter.h"
 #include "dawn/native/BackendConnection.h"
 #include "dawn/native/BlobCache.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/Toggles.h"
@@ -139,6 +139,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     const std::vector<std::string>& GetRuntimeSearchPaths() const;
 
     const Ref<CallbackTaskManager>& GetCallbackTaskManager() const;
+    EventManager* GetEventManager();
 
     // Get backend-independent libraries that need to be loaded dynamically.
     const X11Functions* GetOrLoadX11Functions();
@@ -146,6 +147,9 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Dawn API
     Surface* APICreateSurface(const SurfaceDescriptor* descriptor);
     void APIProcessEvents();
+    [[nodiscard]] wgpu::WaitStatus APIWaitAny(size_t count,
+                                              FutureWaitInfo* futures,
+                                              uint64_t timeoutNS);
 
   private:
     explicit InstanceBase(const TogglesState& instanceToggles);
@@ -207,6 +211,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
 #endif  // defined(DAWN_USE_X11)
 
     Ref<CallbackTaskManager> mCallbackTaskManager;
+    EventManager mEventManager;
 
     std::set<DeviceBase*> mDevicesList;
     mutable std::mutex mDevicesListMutex;

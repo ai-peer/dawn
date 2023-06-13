@@ -48,8 +48,6 @@
 #include "dawn/native/X11Functions.h"
 #endif  // defined(DAWN_USE_X11)
 
-#include <optional>
-
 namespace dawn::native {
 
 // Forward definitions of each backend's "Connect" function that creates new BackendConnection.
@@ -173,6 +171,8 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(dawnDesc != nullptr ? dawnDesc->platform : mDefaultPlatform.get());
+
+    DAWN_TRY(mEventManager.Initialize(descriptor));
 
     return {};
 }
@@ -556,6 +556,13 @@ void InstanceBase::APIProcessEvents() {
     }
 
     mCallbackTaskManager->Flush();
+    mEventManager.ProcessPollEvents();
+}
+
+wgpu::WaitStatus InstanceBase::APIWaitAny(size_t count,
+                                          FutureWaitInfo* futures,
+                                          uint64_t timeoutNS) {
+    return mEventManager.WaitAny(count, futures, Nanoseconds(timeoutNS));
 }
 
 const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {
@@ -564,6 +571,10 @@ const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {
 
 const Ref<CallbackTaskManager>& InstanceBase::GetCallbackTaskManager() const {
     return mCallbackTaskManager;
+}
+
+EventManager* InstanceBase::GetEventManager() {
+    return &mEventManager;
 }
 
 void InstanceBase::ConsumeError(std::unique_ptr<ErrorData> error) {

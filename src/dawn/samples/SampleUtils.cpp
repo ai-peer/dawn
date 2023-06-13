@@ -127,7 +127,10 @@ wgpu::Device CreateCppDawnDevice() {
         return wgpu::Device();
     }
 
-    instance = std::make_unique<dawn::native::Instance>();
+    WGPUInstanceDescriptor instanceDescriptor{
+        .timedWaitAnyEnable = true,
+    };
+    instance = std::make_unique<dawn::native::Instance>(&instanceDescriptor);
 
     wgpu::RequestAdapterOptions options = {};
     options.backendType = backendType;
