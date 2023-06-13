@@ -72,6 +72,16 @@ enum class TextureComponentType {
     Uint,
 };
 
+enum class UnsupportedReason {
+    None,
+    Compatibility,
+    TextureBCNotEnabled,
+    TextureETC2NotEnabled,
+    TextureASTCNotEnabled,
+    MultiPlanarFormatsNotEnabled,
+    Depth32FloatStencil8NotEnabled,
+};
+
 struct AspectInfo {
     TexelBlockInfo block;
     TextureComponentType baseType{};
@@ -96,7 +106,7 @@ struct Format {
     bool isRenderable = false;
     bool isCompressed = false;
     // A format can be known but not supported because it is part of a disabled extension.
-    bool isSupported = false;
+    UnsupportedReason unsupportedReason = UnsupportedReason::None;
     bool supportsStorageUsage = false;
     bool supportsMultisample = false;
     bool supportsResolveTarget = false;
@@ -106,6 +116,7 @@ struct Format {
     uint8_t renderTargetPixelByteCost = 0;       // byte cost of pixel in render targets
     uint8_t renderTargetComponentAlignment = 0;  // byte alignment for components in render targets
 
+    bool IsSupported() const;
     bool IsColor() const;
     bool HasDepth() const;
     bool HasStencil() const;
