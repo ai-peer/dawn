@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7553e17f_bea55e76",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-13T19:03:51Z",
+      "side": 0,
+      "message": "These seems unrelated to the cmake version number change?",
+      "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
