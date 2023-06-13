@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8492c0f_67374d8c",
+        "filename": "src/tint/builtin/fluent_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-13T17:20:42Z",
+      "side": 1,
+      "message": "Ack. My concern was more that because the list changes slowly these will get missed. But, skipping it is also fine.",
+      "parentUuid": "2f2af50e_4690e249",
+      "revId": "0ae8ec42d4f449831c434c55d32d9b01776b9ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "404db112_5b5a3a03",
