@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2af50e_4690e249",
+        "filename": "src/tint/builtin/fluent_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-13T17:00:31Z",
+      "side": 1,
+      "message": "Not entirely sure it\u0027s worth it. `private_` requires special casing, and I doubt this list will change frequently.",
+      "parentUuid": "96135bb0_ea3fbeb5",
+      "revId": "0ae8ec42d4f449831c434c55d32d9b01776b9ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "404db112_5b5a3a03",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-13T13:45:52Z",
       "side": 1,
       "message": "This also doesn\u0027t use `mod`",
+      "revId": "0ae8ec42d4f449831c434c55d32d9b01776b9ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "440e7b19_dd9d1e7f",
+        "filename": "src/tint/ir/load_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-13T17:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "404db112_5b5a3a03",
       "revId": "0ae8ec42d4f449831c434c55d32d9b01776b9ccf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
