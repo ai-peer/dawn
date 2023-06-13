@@ -47,6 +47,28 @@
         ]
     },
 
+    "future": {
+        "category": "object"
+    },
+    "wait any futures": {
+        "category": "function",
+        "returns": "wait status",
+        "args": [
+            {"name": "future count", "type": "size_t"},
+            {"name": "futures", "type": "future", "annotation": "const*", "length": "future count"},
+            {"name": "timeout", "type": "uint64_t", "default": "UINT64_MAX"}
+        ]
+    },
+    "wait status": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "some completed"},
+            {"value": 1, "name": "partial progress"},
+            {"value": 2, "name": "none pending"},
+            {"value": 3, "name": "timed out"}
+        ]
+    },
+
     "request adapter options": {
         "category": "structure",
         "extensible": "in",
@@ -1757,6 +1779,10 @@
                 ]
             },
             {
+                "name": "on submitted work done 2",
+                "returns": "queue work done future"
+            },
+            {
                 "name": "write buffer",
                 "args": [
                     {"name": "buffer", "type": "buffer"},
@@ -1811,6 +1837,46 @@
         "extensible": "in",
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
+    },
+    "queue work done future": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "then",
+                "returns": "void",
+                "args": [
+                    {"name": "mode", "type": "callback mode"},
+                    {"name": "callback", "type": "queue work done future callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "get result",
+                "returns": "WGPUQueueWorkDoneResult const *"
+            }
+        ]
+    },
+    "queue work done result": {
+        "category": "structure",
+        "extensible": "in",
+        "members": []
+    },
+    "WGPUQueueWorkDoneResult const *": {
+        "category": "native"
+    },
+    "callback mode": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "poll"},
+            {"value": 1, "name": "allow reentrant"}
+        ]
+    },
+    "queue work done future callback": {
+        "category": "function pointer",
+        "args": [
+            {"name": "future", "type": "queue work done future"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
     "queue work done callback": {

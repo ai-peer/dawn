@@ -32,6 +32,7 @@
 #include "dawn/native/ExternalTexture.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/QuerySet.h"
+#include "dawn/native/QueueWorkDoneFuture.h"
 #include "dawn/native/RenderPassEncoder.h"
 #include "dawn/native/RenderPipeline.h"
 #include "dawn/native/Texture.h"
@@ -232,6 +233,10 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
                  uint64_t(GetDevice()->GetPendingCommandSerial()));
+}
+
+QueueWorkDoneFutureBase* QueueBase::APIOnSubmittedWorkDone2() {
+    return new QueueWorkDoneFutureBase(this);
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSerial serial) {
