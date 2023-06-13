@@ -35,6 +35,7 @@
 #include "dawn/native/RenderPassEncoder.h"
 #include "dawn/native/RenderPipeline.h"
 #include "dawn/native/Texture.h"
+#include "dawn/native/TrackedEvent.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
@@ -236,6 +237,10 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
                  uint64_t(GetDevice()->GetPendingCommandSerial()));
+}
+
+WGPUFuture QueueBase::APIOnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo) {
+    return WGPUFuture{WorkDoneEvent::Create(this, callbackInfo)};
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSerial serial) {
