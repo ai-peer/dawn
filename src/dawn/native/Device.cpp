@@ -463,7 +463,9 @@ void DeviceBase::Destroy() {
             // Alive is the only state which can have GPU work happening. Wait for all of it to
             // complete before proceeding with destruction.
             // Ignore errors so that we can continue with destruction
-            IgnoreErrors(WaitForIdleForDestruction());
+            if (false) {  // FIXME: this is done so we can test device loss while futures are open
+                IgnoreErrors(WaitForIdleForDestruction());
+            }
             AssumeCommandsComplete();
             break;
 
@@ -746,6 +748,10 @@ bool DeviceBase::IsLost() const {
 
 ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) {
     return &mObjectLists[type];
+}
+
+InstanceBase* DeviceBase::GetInstance() const {
+    return mAdapter->APIGetInstance();
 }
 
 AdapterBase* DeviceBase::GetAdapter() const {

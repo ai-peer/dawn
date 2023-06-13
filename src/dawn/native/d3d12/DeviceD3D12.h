@@ -89,6 +89,8 @@ class Device final : public d3d::Device {
 
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
 
+    ResultOrError<EventReceiver> CreateWorkDoneEvent(ExecutionSerial) override;
+
     void ForceEventualFlushOfCommands() override;
 
     MaybeError ExecutePendingCommandContext();

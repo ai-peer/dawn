@@ -42,6 +42,11 @@ class Instance final : public ObjectBase {
                                   uint32_t featuresCount,
                                   const WGPUFeatureName* features);
 
+    WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* futures, uint64_t timeoutNS) {
+        ASSERT(0);
+        return {};
+    }
+
   private:
     struct RequestAdapterData {
         WGPURequestAdapterCallback callback = nullptr;
