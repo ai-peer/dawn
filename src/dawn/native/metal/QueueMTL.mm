@@ -19,6 +19,7 @@
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/metal/CommandBufferMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
 #include "dawn/platform/DawnPlatform.h"

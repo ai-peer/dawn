@@ -51,6 +51,8 @@ struct KalmanInfo {
 
 namespace {
 
+static constexpr ExecutionSerial kEndOfTime{UINT64_MAX};
+
 // The time interval for each round of kalman filter
 static constexpr uint64_t kFilterIntervalInMs = static_cast<uint64_t>(NSEC_PER_SEC / 10);
 
@@ -267,6 +269,10 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
     return ExecutionSerial(mCompletedSerial.load());
 }
 
+ExecutionSerial Device::GetCompletedCommandSerial() const {
+    return ExecutionSerial(mCompletedSerial.load());
+}
+
 MaybeError Device::TickImpl() {
     if (mCommandContext.NeedsSubmit()) {
         DAWN_TRY(SubmitPendingCommandBuffer());
@@ -310,6 +316,67 @@ void Device::ForceEventualFlushOfCommands() {
     }
 }
 
+ResultOrError<EventReceiver> Device::CreateWorkDoneEvent(ExecutionSerial serial) {
+    EventPipeSender sender;
+    EventReceiver receiver;
+    DAWN_TRY_ASSIGN(std::tie(sender, receiver), EventPipeSender::CreateEventPipe());
+
+    {
+        std::lock_guard guard{mWaitingEventsMutex};
+
+        // FIXME: Why isn't Completed >= Scheduled when Lost?
+        if (IsLost() || GetCompletedCommandSerial() >= serial) {
+            // The requested serial has already completed (usually happens if OnSubmittedWorkDone
+            // is called after everything is already completed).
+            DAWN_TRY(sender.Signal());
+            return std::move(receiver);
+        }
+
+        // Writes to mWaitingEventsSerialLowerBound are always protected by
+        // mWaitingEventsMutex, so this won't two-step update won't race.
+        if (uint64_t(serial) < mWaitingEventsSerialLowerBound.load()) {
+            mWaitingEventsSerialLowerBound = uint64_t(serial);
+        }
+
+        if (GetCompletedCommandSerial() >= serial) {
+            ASSERT(false);  // FIXME: assert for debugging since this should be rare
+            // mCompletedSerial advanced past GetScheduledWorkDoneSerial() while this function was
+            // executing. Just signal the EventPipeSender instead of storing it, so it won't have
+            // to wait until there's another command buffer completion (which may be never!).
+            // This will leave the lower bound lower than it needs to be, but that's fine.
+            // In this very rare case, UpdateWaitingEvents will take the lock unnecessarily.
+            DAWN_TRY(sender.Signal());
+            return std::move(receiver);
+        }
+
+        mWaitingEvents.push_back(std::pair(serial, std::move(sender)));
+    }
+
+    return std::move(receiver);
+}
+
+void Device::UpdateWaitingEvents(ExecutionSerial completedSerial) {
+    ASSERT(mCompletedSerial.load() >= uint64_t(completedSerial) || completedSerial == kEndOfTime);
+    if (completedSerial >= ExecutionSerial(mWaitingEventsSerialLowerBound.load())) {
+        {
+            std::lock_guard guard{mWaitingEventsMutex};
+
+            uint64_t newLowerBound = UINT64_MAX;
+            for (auto& waiting : mWaitingEvents) {
+                if (waiting.first <= completedSerial) {
+                    DAWN_UNUSED(ConsumedError(waiting.second.Signal()));
+                } else if (uint64_t(waiting.first) < newLowerBound) {
+                    newLowerBound = uint64_t(waiting.first);
+                }
+            }
+            std::erase_if(mWaitingEvents,
+                          [=](const auto& waiting) { return waiting.first <= completedSerial; });
+
+            mWaitingEventsSerialLowerBound.store(newLowerBound);
+        }
+    }
+}
+
 MaybeError Device::SubmitPendingCommandBuffer() {
     if (!mCommandContext.NeedsSubmit()) {
         return {};
@@ -348,6 +415,8 @@ MaybeError Device::SubmitPendingCommandBuffer() {
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+
+        this->UpdateWaitingEvents(pendingSerial);
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
@@ -484,6 +553,8 @@ void Device::DestroyImpl() {
 
     // Forget all pending commands.
     mCommandContext.AcquireCommands();
+
+    UpdateWaitingEvents(kEndOfTime);
 
     mCommandQueue = nullptr;
     mMtlDevice = nullptr;
