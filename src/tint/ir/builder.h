@@ -46,9 +46,11 @@
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
 #include "src/tint/ir/unary.h"
+#include "src/tint/ir/undef_value.h"
 #include "src/tint/ir/user_call.h"
 #include "src/tint/ir/value.h"
 #include "src/tint/ir/var.h"
+#include "src/tint/switch.h"
 #include "src/tint/type/bool.h"
 #include "src/tint/type/f16.h"
 #include "src/tint/type/f32.h"
@@ -234,6 +236,11 @@ class Builder {
     auto Values(ARGS&&... args) {
         return utils::Vector{Value(std::forward<ARGS>(args))...};
     }
+
+    /// Creates an undefined value for a given type
+    /// @param type the type
+    /// @returns the undefined value for `type`
+    UndefValue* Undef(const type::Type* type) { return ir.values.Create<UndefValue>(type); }
 
     /// Creates an op for `lhs kind rhs`
     /// @param kind the kind of operation
@@ -613,6 +620,19 @@ class Builder {
     template <typename... ARGS>
     ir::ExitIf* ExitIf(ir::If* i, ARGS&&... args) {
         return Append(ir.instructions.Create<ir::ExitIf>(i, Values(std::forward<ARGS>(args)...)));
+    }
+
+    /// Creates an exit instruction for the given control instruction
+    /// @param inst the control instruction being exited
+    /// @param args the branch arguments
+    /// @returns the exit instruction, or nullptr if the control instruction is not supported.
+    template <typename... ARGS>
+    ir::Branch* Exit(ir::ControlInstruction* inst, ARGS&&... args) {
+        return tint::Switch(
+            inst,  //
+            [&](ir::If* i) { return ExitIf(i, std::forward<ARGS>(args)...); },
+            [&](ir::Loop* i) { return ExitLoop(i, std::forward<ARGS>(args)...); },
+            [&](ir::Switch* i) { return ExitSwitch(i, std::forward<ARGS>(args)...); });
     }
 
     /// Creates a new `BlockParam`
