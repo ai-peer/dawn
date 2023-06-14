@@ -30,6 +30,9 @@ namespace dawn::native::d3d11 {
 MaybeError CommandRecordingContext::Intialize(Device* device) {
     ASSERT(!IsOpen());
     ASSERT(device);
+    // Lock the device to protect the clearing of the built-in uniform buffer.
+    auto deviceLock(device->GetScopedLock());
+
     mDevice = device;
     mNeedsSubmit = false;
 
@@ -109,6 +112,7 @@ Device* CommandRecordingContext::GetDevice() const {
 }
 
 void CommandRecordingContext::Release() {
+    ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
     if (mIsOpen) {
         mIsOpen = false;
         mNeedsSubmit = false;
