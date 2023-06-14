@@ -266,8 +266,7 @@ fn f(a : i32, b : u32) -> i32 {
 // Short-circuiting binary ops
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO(crbug.com/tint/1902): Pattern detect this
-TEST_F(IRToProgramRoundtripTest, DISABLED_BinaryOp_LogicalAnd) {
+TEST_F(IRToProgramRoundtripTest, BinaryOp_LogicalAnd) {
     Test(R"(
 fn f(a : bool, b : bool) -> bool {
   return (a && b);
@@ -275,8 +274,7 @@ fn f(a : bool, b : bool) -> bool {
 )");
 }
 
-// TODO(crbug.com/tint/1902): Pattern detect this
-TEST_F(IRToProgramRoundtripTest, DISABLED_BinaryOp_LogicalOr) {
+TEST_F(IRToProgramRoundtripTest, BinaryOp_LogicalOr) {
     Test(R"(
 fn f(a : bool, b : bool) -> bool {
   return (a && b);
