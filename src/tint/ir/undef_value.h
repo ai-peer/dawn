@@ -1,4 +1,4 @@
-// Copyright 2022 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,24 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/switch.h"
+#ifndef SRC_TINT_IR_UNDEF_VALUE_H_
+#define SRC_TINT_IR_UNDEF_VALUE_H_
 
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Switch);
+#include "src/tint/ir/value.h"
 
 namespace tint::ir {
 
-Switch::Switch(Value* cond) {
-    TINT_ASSERT(IR, cond);
+/// An undefined value in the IR.
+class UndefValue final : public utils::Castable<UndefValue, Value> {
+  public:
+    /// Constructor
+    /// @param type the type of the undefined value
+    explicit UndefValue(const type::Type* type);
+    ~UndefValue() override;
 
-    AddOperand(Switch::kConditionOperandOffset, cond);
-}
+    /// @returns the type of the undefined value
+    const type::Type* Type() override { return type_; }
 
-Switch::~Switch() = default;
-
-void Switch::ForeachBlock(const std::function<void(ir::Block*)>& cb) {
-    for (auto& c : cases_) {
-        cb(c.Block());
-    }
-}
-
+  private:
+    const type::Type* type_ = nullptr;
+};
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_UNDEF_VALUE_H_
