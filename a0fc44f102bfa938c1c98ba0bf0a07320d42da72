@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "946d5ed6_771e8f6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T15:40:16Z",
+      "side": 1,
+      "message": "what do you think about instead marking Format::isSupported \u003d false when we `BuildFormatTable` for compat?\n\nFormat support is checked in a variety of places, and this would be a much more central place to do it.\n\nWe would lose a bit on the \"not supported in compatibility mode\" part of the message",
+      "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
