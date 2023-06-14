@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_library(dawn_utils STATIC ${DAWN_PLACEHOLDER_FILE})
+add_library(dawn_utils STATIC)
 common_compile_options(dawn_utils)
 target_sources(dawn_utils PRIVATE
     "ComboRenderBundleEncoderDescriptor.cpp"

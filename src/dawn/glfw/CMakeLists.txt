@@ -14,7 +14,7 @@
 
 if(DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
 
-add_library(dawn_glfw STATIC ${DAWN_PLACEHOLDER_FILE})
+add_library(dawn_glfw STATIC)
 common_compile_options(dawn_glfw)
 target_sources(dawn_glfw PRIVATE
     "utils.cpp"
