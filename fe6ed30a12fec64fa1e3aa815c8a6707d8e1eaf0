@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ab57e11_0a0277f6",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-14T06:17:51Z",
+      "side": 1,
+      "message": "To Austin, I agree with you that it is a little weird to call `TestRenderPassBindGroup` but in fact no bind groups are actually used at all in test `MissingBindGroup`. Maybe we can put the test code into that unittest directly. In addition, I can put bindgroup creation into a function, which is called again and again. This can be a refactor patch if needed.\n\nBut `if (bindgroup \u003d\u003d nullptr) { } else { }` is not good for my new test. I actually need to call SetBindGroup twice: set it at first and then unset it. So it is not a if-else statement. \n\nCorentin suggested using a default value but not sure. My understanding is that you folks don\u0027t like default values in Dawn project, in case users forget to set a correct value for the default values (or some other reasons). So adding default value for parameter is the last thing you want to do. For this one, the second bool (`bool unset`) is needed but it is only needed by one single function. So maybe we can just duplicate some code, just like what I did for another new test `UnsetInvalidatesBindGroupValidationCache`, in which we can actually reuse TestRenderPassBindGroup or TestComputePassBindGroup with some ifs, but only for that test. So, let\u0027s duplicate some code in both `UnsetInvalidatesBindGroupValidationCache` and `UnsetBindGroupWhenNeeded`. \n\nAgain, we can refactor this test file and these new tests by using a function to create bindgroup.",
+      "parentUuid": "e7512e61_0a9abef5",
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3038325a_f43a3408",
         "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 4

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36a3720_8c916d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-14T06:17:51Z",
+      "side": 1,
+      "message": "Thanks for the suggestions, Corentin and Austin. I feel like there are upsides and downsides for either solution. Maybe this one is slightly better and let\u0027s move on?",
+      "revId": "05dd537e17c998f77d05f56f2cb0161891243620",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
