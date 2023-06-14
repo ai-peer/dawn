@@ -212,6 +212,24 @@
       "parentUuid": "a4f90a67_f890a1da",
       "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f2870e0_afa49ffc",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T08:26:24Z",
+      "side": 1,
+      "message": "https://registry.khronos.org/vulkan/specs/1.3/html/vkspec.html#textures-output-coordinate-validation seems to say we don\u0027t even need robustness to make this safe.",
+      "parentUuid": "3c0de7b3_a9507467",
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
