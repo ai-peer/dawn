@@ -41,6 +41,18 @@ Loop::Loop(ir::Block* i, ir::MultiInBlock* b, ir::MultiInBlock* c)
 
 Loop::~Loop() = default;
 
+void Loop::ForeachBlock(const std::function<void(ir::Block*)>& cb) {
+    if (initializer_) {
+        cb(initializer_);
+    }
+    if (body_) {
+        cb(body_);
+    }
+    if (continuing_) {
+        cb(continuing_);
+    }
+}
+
 bool Loop::HasInitializer() {
     return initializer_->HasBranchTarget();
 }
