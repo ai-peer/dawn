@@ -176,6 +176,24 @@
       "message": "The spec for https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRobustness2FeaturesEXT.html doesn\u0027t say what happens for out of bounds texture stores though. Can you double check that it is dropped in this case?",
       "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0de7b3_a9507467",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-14T03:20:40Z",
+      "side": 1,
+      "message": "Yes you are right and I fail to find any robustness rules about OpImageWrite, so here I am wrong and we cannot skip textures.",
+      "parentUuid": "a4f90a67_f890a1da",
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
