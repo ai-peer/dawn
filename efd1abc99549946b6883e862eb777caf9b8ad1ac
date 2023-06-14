@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aab2e93_9c39f32f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-14T19:14:51Z",
+      "side": 1,
+      "message": "First pass",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdb601f_188dc76b",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-14T19:14:51Z",
+      "side": 1,
+      "message": "`func` and `returns` is only used by this function, so suggest passing by parameter to reduce state scope.\n\n`void Process(Function* func, utils::VectorRef\u003cReturn*\u003e returns) {`",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b76291_754fa742",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-14T19:14:51Z",
+      "side": 1,
+      "message": "You could name this to help with readability.\n\n`ir-\u003eSetName(flag, \"return_flag\");`\n\nor something",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 12
+      },
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5270e2_a477da98",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-14T19:14:51Z",
+      "side": 1,
+      "message": "Candidate for `ret-\u003eDestroy()`",
+      "range": {
+        "startLine": 125,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 9
+      },
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a214c30a_03eb8a41",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-14T19:14:51Z",
+      "side": 1,
+      "message": "Looks like we\u0027re using recursion? If you have a long sequential list of `If`, `Loop` or `Switch`, are we in danger of stack overflowing?",
+      "range": {
+        "startLine": 229,
+        "startChar": 16,
+        "endLine": 229,
+        "endChar": 28
+      },
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
