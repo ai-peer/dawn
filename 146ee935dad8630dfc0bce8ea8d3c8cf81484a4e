@@ -16,6 +16,24 @@
       "message": "This changed because previously `mat_var` was never added to the block, so `%9` doesn\u0027t actually exist.",
       "revId": "146ee935dad8630dfc0bce8ea8d3c8cf81484a4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a178b56_f9e1c691",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_access_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-14T10:18:32Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "22728c84_f3a249a6",
+      "revId": "146ee935dad8630dfc0bce8ea8d3c8cf81484a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
