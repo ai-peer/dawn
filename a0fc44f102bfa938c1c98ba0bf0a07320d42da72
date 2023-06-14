@@ -33,6 +33,24 @@
       "message": "what do you think about instead marking Format::isSupported \u003d false when we `BuildFormatTable` for compat?\n\nFormat support is checked in a variety of places, and this would be a much more central place to do it.\n\nWe would lose a bit on the \"not supported in compatibility mode\" part of the message",
       "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "362eb71c_8044d406",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-14T16:44:55Z",
+      "side": 1,
+      "message": "I think message is important. wdyt about adding metadata to the table so it can print the right message?",
+      "parentUuid": "946d5ed6_771e8f6a",
+      "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
