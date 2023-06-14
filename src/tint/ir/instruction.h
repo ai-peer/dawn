@@ -31,29 +31,17 @@ class Instruction : public utils::Castable<Instruction> {
     /// Destructor
     ~Instruction() override;
 
-    /// Sets the block that owns this instruction
-    /// @param block the new owner block
-    void SetBlock(ir::Block* block) { block_ = block; }
-
-    /// @returns the block that owns this instruction
-    ir::Block* Block() { return block_; }
-
-    /// Adds the new instruction before the given instruction in the owning block
-    /// @param before the instruction to insert before
-    void InsertBefore(Instruction* before);
-    /// Adds the new instruction after the given instruction in the owning block
-    /// @param after the instruction to insert after
-    void InsertAfter(Instruction* after);
-    /// Replaces this instruction with @p replacement in the owning block owning this instruction
-    /// @param replacement the instruction to replace with
-    void ReplaceWith(Instruction* replacement);
-    /// Removes this instruction from the owning block
-    void Remove();
+    /// Removes the instruction from the block, and destroys all the result values.
+    /// The result values must not be in use.
+    virtual void Destroy();
 
     /// Set an operand at a given index.
     /// @param index the operand index
     /// @param value the value to use
     virtual void SetOperand(size_t index, ir::Value* value) = 0;
+
+    /// @returns the operands of the instruction
+    virtual utils::VectorRef<ir::Value*> Operands() = 0;
 
     /// @returns true if the instruction has result values
     virtual bool HasResults() { return false; }
@@ -75,6 +63,28 @@ class Instruction : public utils::Castable<Instruction> {
         return idx < res.Length() ? res[idx] : nullptr;
     }
 
+    /// @returns true if the Instruction has not been destroyed with Destroy()
+    bool Alive() const { return alive_; }
+
+    /// Sets the block that owns this instruction
+    /// @param block the new owner block
+    void SetBlock(ir::Block* block) { block_ = block; }
+
+    /// @returns the block that owns this instruction
+    ir::Block* Block() { return block_; }
+
+    /// Adds the new instruction before the given instruction in the owning block
+    /// @param before the instruction to insert before
+    void InsertBefore(Instruction* before);
+    /// Adds the new instruction after the given instruction in the owning block
+    /// @param after the instruction to insert after
+    void InsertAfter(Instruction* after);
+    /// Replaces this instruction with @p replacement in the owning block owning this instruction
+    /// @param replacement the instruction to replace with
+    void ReplaceWith(Instruction* replacement);
+    /// Removes this instruction from the owning block
+    void Remove();
+
     /// Pointer to the next instruction in the list
     Instruction* next = nullptr;
     /// Pointer to the previous instruction in the list
@@ -86,6 +96,9 @@ class Instruction : public utils::Castable<Instruction> {
 
     /// The block that owns this instruction
     ir::Block* block_ = nullptr;
+
+  private:
+    bool alive_ = true;
 };
 
 }  // namespace tint::ir

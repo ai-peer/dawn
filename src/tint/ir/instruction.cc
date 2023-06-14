@@ -25,6 +25,17 @@ Instruction::Instruction() = default;
 
 Instruction::~Instruction() = default;
 
+void Instruction::Destroy() {
+    TINT_ASSERT(IR, Alive());
+    if (Block()) {
+        Remove();
+    }
+    for (auto* result : Results()) {
+        result->Destroy();
+    }
+    alive_ = false;
+}
+
 void Instruction::InsertBefore(Instruction* before) {
     TINT_ASSERT_OR_RETURN(IR, before);
     TINT_ASSERT_OR_RETURN(IR, before->Block() != nullptr);
