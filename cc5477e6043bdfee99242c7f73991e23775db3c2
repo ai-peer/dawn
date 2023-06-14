@@ -563,6 +563,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87e61f8_c4898902",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:38:19Z",
+      "side": 1,
+      "message": "Thank you Austin for describing very clearly the rough ideas that we had in the offline discussion! Landing this first then WeakRefs as a follow up LGTM.\n\nCan we add TODOs in relevant places though so we don\u0027t forget?",
+      "parentUuid": "5e9cadfe_7699442e",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94f43bbc_3880c11a",

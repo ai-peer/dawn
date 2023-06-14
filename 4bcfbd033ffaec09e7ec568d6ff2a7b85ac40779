@@ -26,6 +26,80 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "244362a3_7d28727c",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:38:19Z",
+      "side": 1,
+      "message": "nit: Maybe we should erase that entry if TryGetRef fails.",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6b38026_b805678d",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:38:19Z",
+      "side": 1,
+      "message": "Can we have short descriptions of why the relaxed memory orders are enough?",
+      "range": {
+        "startLine": 67,
+        "startChar": 55,
+        "endLine": 67,
+        "endChar": 75
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c839ef69_5d190531",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:38:19Z",
+      "side": 1,
+      "message": "optional nit: This assert could potentially be in ContentLessObjectCache\u0027s destructor.\n\nTurns out that\u0027s already the case so this can be removed!",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0143746e_87146587",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:38:19Z",
+      "side": 1,
+      "message": "In the future we could have a CachedContentLessObject class that all CocntentLessCaches expect and that holds the WeakRef. Then we could move result-\u003eSetContentHash into the ContentLessCache logic since it\u0027s always done.",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbd8ef93_1ac2bde2",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 8
