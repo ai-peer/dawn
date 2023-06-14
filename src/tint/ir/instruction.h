@@ -55,6 +55,9 @@ class Instruction : public utils::Castable<Instruction, Value> {
     /// @param value the value to use
     virtual void SetOperand(uint32_t index, ir::Value* value) = 0;
 
+    /// @returns the operands of the instruction
+    virtual utils::VectorRef<ir::Value*> Operands() = 0;
+
     /// Pointer to the next instruction in the list
     Instruction* next = nullptr;
     /// Pointer to the previous instruction in the list

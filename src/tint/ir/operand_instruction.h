@@ -41,6 +41,9 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
         return;
     }
 
+    /// @returns the operands of the instruction
+    utils::VectorRef<ir::Value*> Operands() override { return operands_; }
+
   protected:
     /// Append a new operand to the operand list for this instruction.
     /// @param value the operand value to append
