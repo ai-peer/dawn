@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c394eb6_325de71c",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-14T11:19:47Z",
+      "side": 1,
+      "message": "Would be great if this auto appended to the block parameter list",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 50
+      },
+      "revId": "2ef231183fbaf6e2315891257eb72b0a2071739e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
