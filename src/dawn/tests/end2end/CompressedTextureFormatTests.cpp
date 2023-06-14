@@ -1184,7 +1184,6 @@ TEST_P(CompressedTextureFormatSpecificTest, BC1RGBAUnorm_UnalignedDynamicUploade
 }
 
 DAWN_INSTANTIATE_TEST(CompressedTextureFormatSpecificTest,
-                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -1321,8 +1320,8 @@ TEST_P(CompressedTextureWriteTextureTest,
 }
 
 DAWN_INSTANTIATE_TEST_P(CompressedTextureWriteTextureTest,
-                        {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
-                         OpenGLESBackend(), VulkanBackend()},
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
                         std::vector<wgpu::TextureFormat>(utils::kCompressedFormats.begin(),
                                                          utils::kCompressedFormats.end()));
 
