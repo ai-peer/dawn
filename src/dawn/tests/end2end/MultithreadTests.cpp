@@ -876,6 +876,9 @@ TEST_P(MultithreadTextureCopyTests, CopyStencilToStencilNoRace) {
     // stencil.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
 
+    // TODO(dawn:1848): support depth-stencil texture write on D3D11.
+    DAWN_SUPPRESS_TEST_IF(IsD3D11());
+
     enum class Step {
         Begin,
         WriteTexture,
@@ -1346,6 +1349,7 @@ TEST_P(MultithreadTimestampQueryTests, ResolveQuerySets_InParallel) {
 }
 
 DAWN_INSTANTIATE_TEST(MultithreadTests,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -1353,6 +1357,7 @@ DAWN_INSTANTIATE_TEST(MultithreadTests,
                       VulkanBackend());
 
 DAWN_INSTANTIATE_TEST(MultithreadCachingTests,
+                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
