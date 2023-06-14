@@ -374,6 +374,8 @@ D3D11_DEPTH_STENCIL_VIEW_DESC Texture::GetDSVDescriptor(const SubresourceRange& 
 MaybeError Texture::Clear(CommandRecordingContext* commandContext,
                           const SubresourceRange& range,
                           TextureBase::ClearValue clearValue) {
+    ASSERT(commandContext->GetDevice()->IsLockedByCurrentThreadIfNeeded());
+
     bool isRenderable = GetInternalUsage() & wgpu::TextureUsage::RenderAttachment;
 
     if (!isRenderable) {

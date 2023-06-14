@@ -109,6 +109,7 @@ Device* CommandRecordingContext::GetDevice() const {
 }
 
 void CommandRecordingContext::Release() {
+    ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
     if (mIsOpen) {
         mIsOpen = false;
         mNeedsSubmit = false;
