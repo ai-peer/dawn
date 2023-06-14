@@ -209,6 +209,24 @@
       "parentUuid": "2062c87a_282ffe39",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5edb7c80_c7345f36",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-14T13:27:54Z",
+      "side": 1,
+      "message": "The \"feature guarded by AllowUnsafeAPIs\" message also generated here. Just replace them with a general \"xxx feature not supported\" or \"xxx feature not supported with given toggles\"?",
+      "parentUuid": "2e7f849c_83d85565",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
