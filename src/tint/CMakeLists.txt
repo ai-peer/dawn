@@ -796,6 +796,8 @@ if(${TINT_BUILD_IR})
     ir/to_program.h
     ir/unary.cc
     ir/unary.h
+    ir/undef_value.cc
+    ir/undef_value.h
     ir/user_call.cc
     ir/user_call.h
     ir/validate.cc
@@ -1548,6 +1550,7 @@ if(TINT_BUILD_TESTS)
       ir/transform/block_decorated_structs_test.cc
       ir/transform/var_for_dynamic_index_test.cc
       ir/unary_test.cc
+      ir/undef_value_test.cc
       ir/user_call_test.cc
       ir/validate_test.cc
       ir/var_test.cc
