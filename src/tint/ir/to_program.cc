@@ -15,8 +15,10 @@
 #include "src/tint/ir/to_program.h"
 
 #include <string>
+#include <tuple>
 #include <utility>
 
+#include "src/tint/ir/access.h"
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/block.h"
 #include "src/tint/ir/call.h"
@@ -165,6 +167,10 @@ class State {
     }
 
     void If(ir::If* if_) {
+        if (IsShortCircuit(if_)) {
+            return;
+        }
+
         SCOPED_NESTING();
 
         auto else_if = [](ir::If* i) -> ir::If* {
@@ -294,6 +300,7 @@ class State {
                 auto* expr = b.Call(BindName(c->Func()), std::move(args));
                 if (!call->HasResults() || call->Result()->Usages().IsEmpty()) {
                     Append(b.CallStmt(expr));
+                    return;
                 }
                 Bind(c->Result(), expr);
             },
@@ -534,9 +541,12 @@ class State {
     /// Creates and returns a new, unique name for the given value, or returns the previously
     /// created name.
     /// @return the value's name
-    Symbol BindName(ir::Value* value) {
+    Symbol BindName(Value* value, std::string_view suggested = {}) {
         TINT_ASSERT(IR, value);
         auto& existing = bindings_.GetOrCreate(value, [&] {
+            if (!suggested.empty()) {
+                return b.Symbols().New(suggested);
+            }
             if (auto sym = mod.NameOf(value)) {
                 return b.Symbols().New(sym.NameView());
             }
@@ -554,23 +564,93 @@ class State {
     template <typename T>
     void Bind(ir::Value* value, const T* expr) {
         TINT_ASSERT(IR, value);
-
-        // Determine whether the value should be placed into a let, or inlined in its single
-        // place of usage. Currently a value is inlined if it has a single usage and is unnamed.
-        // TODO(crbug.com/tint/1902): This logic needs to check that the sequence of
-        // side-effecting expressions is not changed by inlining the expression. This needs
-        // fixing.
-        bool create_let = value->Usages().Count() > 1 || mod.NameOf(value).IsValid();
-        if (create_let) {
-            Append(b.Decl(b.Let(BindName(value), expr)));
-        } else {
+        if (CanInline(value)) {
             // Value will be inlined at its place of usage.
             bool added = bindings_.Add(value, expr);
             if (TINT_UNLIKELY(!added)) {
                 TINT_ICE(IR, b.Diagnostics())
                     << "Bind(" << value->TypeInfo().name << ") called twice for same node";
             }
+        } else {
+            Append(b.Decl(b.Let(BindName(value), expr)));
         }
+    }
+
+    /// @returns true if the if the value can be inlined into its single single place
+    /// of usage. Currently a value is inlined if it has a single usage and is unnamed.
+    /// TODO(crbug.com/tint/1902): This logic needs to check that the sequence of side-effecting
+    /// expressions is not changed by inlining the expression. This needs fixing.
+    bool CanInline(Value* val) { return val->Usages().Count() == 1 && !mod.NameOf(val).IsValid(); }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Helpers
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    bool IsShortCircuit(ir::If* i) {
+        if (!i->HasResults()) {
+            return false;
+        }
+        auto* result = i->Result();
+        if (!result->Type()->Is<type::Bool>()) {
+            return {};  // Wrong result type
+        }
+        if (i->Exits().Count() != 2) {
+            return {};  // Doesn't have two exits
+        }
+        if (i->True()->Length() != 1 || i->False()->Length() != 1) {
+            return {};  // True or False blocks contain unsupported instructions
+        }
+
+        auto* cond = i->Condition();
+        auto* true_val = i->True()->Back()->Operands().Front();
+        auto* false_val = i->False()->Back()->Operands().Front();
+        if (IsConstant(false_val, false)) {
+            //  %res = if %cond {
+            //     block {  # true
+            //       exit_if %true_val;
+            //     }
+            //     block {  # false
+            //       exit_if false;
+            //     }
+            //  }
+            //
+            // transform into:
+            //
+            //   res = cond && true_val;
+            //
+            auto* lhs = Expr(cond);
+            auto* rhs = Expr(true_val);
+            Bind(result, b.LogicalAnd(lhs, rhs));
+            return true;
+        }
+        if (IsConstant(true_val, true)) {
+            //  %res = if %cond {
+            //     block {  # true
+            //       exit_if true;
+            //     }
+            //     block {  # false
+            //       exit_if %false_val;
+            //     }
+            //  }
+            //
+            // transform into:
+            //
+            //   res = cond || false_val;
+            //
+            auto* lhs = Expr(cond);
+            auto* rhs = Expr(false_val);
+            Bind(result, b.LogicalOr(lhs, rhs));
+            return true;
+        }
+        return false;
+    }
+
+    bool IsConstant(ir::Value* val, bool value) {
+        if (auto* c = val->As<ir::Constant>()) {
+            if (c->Type()->Is<type::Bool>()) {
+                return c->Value()->ValueAs<bool>() == value;
+            }
+        }
+        return false;
     }
 };
 
