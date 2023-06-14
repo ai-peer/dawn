@@ -106,6 +106,24 @@
       "parentUuid": "a3a14970_176de297",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21aba346_faa09515",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003701
+      },
+      "writtenOn": "2023-06-14T14:32:56Z",
+      "side": 1,
+      "message": "I have starred this CL as we use conan internally for every dependency and have made a package for dawn; our developers are well-aware that things change a lot and quickly (we bump the version with every beta chromium release), nobody uses the private APIs. Having a semi-official install target for the dawn headers would make this kind of solution (which I imagine it\u0027s widespread to some degree) slightly less hacky.\n\nI understand the sentiment of not wanting to have public prebuilt Dawn packages. On the other hand, not everyone wants to (or can) include the whole dawn sub-tree in their project. The situation has got a lot better with the recent inclusion of the python script for cloning deps, but it\u0027s still \u003e~1k files that end up compiled along with the project sources.\nI\u0027ve also had issues with compile flags \"leaking\" from dawn and/or its third_party dependencies (setting those in the CMakeList is a common but not recommended pratice, especially for a library).",
+      "parentUuid": "dcd6bf71_a8c9d29a",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
