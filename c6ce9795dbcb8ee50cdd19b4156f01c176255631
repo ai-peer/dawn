@@ -22,6 +22,30 @@
       },
       "revId": "c6ce9795dbcb8ee50cdd19b4156f01c176255631",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b251fc_02834a77",
+        "filename": "src/dawn/tests/unittests/ContentLessObjectCacheTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-14T00:42:49Z",
+      "side": 1,
+      "message": "Done, using very simple impl of a semaphore to synchronize the tests properly.",
+      "parentUuid": "09022665_29de1525",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "c6ce9795dbcb8ee50cdd19b4156f01c176255631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
