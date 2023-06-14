@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "003839e8_9a24d0cd",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1923,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-14T17:02:56Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "9b798724_ab64db20",
+      "revId": "05dd537e17c998f77d05f56f2cb0161891243620",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8eb6456_a67f50f0",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-06-14T06:31:33Z",
       "side": 1,
       "message": "```suggestion\n        computePassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());\n```",
+      "revId": "05dd537e17c998f77d05f56f2cb0161891243620",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5f2903a_ffaf7ab7",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-14T17:02:56Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "e8eb6456_a67f50f0",
       "revId": "05dd537e17c998f77d05f56f2cb0161891243620",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
