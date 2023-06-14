@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b607407c_09795c15",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-14T00:27:42Z",
+      "side": 1,
+      "message": "Outdated and resolved.",
+      "parentUuid": "187ca9c1_f03b277b",
+      "range": {
+        "startLine": 60,
+        "startChar": 43,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "bad8d6282731a59c3cdfe699892c7af92e9a7f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b38ed507_cdbf17e2",
