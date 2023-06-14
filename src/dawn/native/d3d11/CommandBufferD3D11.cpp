@@ -332,6 +332,8 @@ MaybeError CommandBuffer::Execute() {
 }
 
 MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandContext) {
+    DAWN_ASSERT(commandContext->GetDevice()->IsLockedByCurrentThreadIfNeeded());
+
     ComputePipeline* lastPipeline = nullptr;
     BindGroupTracker bindGroupTracker(commandContext, /*isRenderPass=*/false);
 
@@ -419,6 +421,8 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
 
 MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                                             CommandRecordingContext* commandContext) {
+    DAWN_ASSERT(commandContext->GetDevice()->IsLockedByCurrentThreadIfNeeded());
+
     ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
 
     // Hold ID3D11RenderTargetView ComPtr to make attachments alive.

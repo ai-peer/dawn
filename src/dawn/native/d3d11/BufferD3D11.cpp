@@ -226,6 +226,7 @@ bool Buffer::IsCPUWritableAtCreation() const {
 MaybeError Buffer::MapInternal() {
     DAWN_ASSERT(IsMappable(GetUsage()));
     DAWN_ASSERT(!mMappedData);
+    DAWN_ASSERT(GetDevice()->IsLockedByCurrentThreadIfNeeded());
 
     CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
 
@@ -245,6 +246,7 @@ MaybeError Buffer::MapInternal() {
 
 void Buffer::UnmapInternal() {
     DAWN_ASSERT(mMappedData);
+    DAWN_ASSERT(GetDevice()->IsLockedByCurrentThreadIfNeeded());
 
     CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
     commandContext->GetD3D11DeviceContext()->Unmap(mD3d11NonConstantBuffer.Get(),
@@ -566,6 +568,8 @@ MaybeError Buffer::CopyInternal(CommandRecordingContext* commandContext,
                                 size_t size,
                                 Buffer* destination,
                                 uint64_t destinationOffset) {
+    ASSERT(commandContext->GetDevice()->IsLockedByCurrentThreadIfNeeded());
+
     D3D11_BOX srcBox;
     srcBox.left = sourceOffset;
     srcBox.right = sourceOffset + size;
