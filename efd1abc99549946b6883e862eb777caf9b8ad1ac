@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab2eff1_5dcaadad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T19:21:35Z",
+      "side": 1,
+      "message": "nit: the the",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4aab2e93_9c39f32f",
@@ -14,6 +31,23 @@
       "writtenOn": "2023-06-14T19:14:51Z",
       "side": 1,
       "message": "First pass",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4336d1ca_88f61941",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T19:21:35Z",
+      "side": 1,
+      "message": "Why does this only consider `loop` and not `if` with true/false or `switch` with case blocks?",
       "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -83,6 +117,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "448eabc3_b4588532",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T19:21:35Z",
+      "side": 1,
+      "message": "This bit seem sketchy. Could we do something like add a `Move` call to the block? So you could do something like:\n\n```\nauto* inst \u003d merge-\u003eMoveAfter(ifelse, ifelse-\u003eFalse());\n```\n\nwhich takes all the instruction after the ifelse and moves them to the given block?\n\nAlternatively change the chunk something like:\n\n```\nauto* condition \u003d b.Load(float);\nauto* ifelse \u003d b.If(condition);\nwhile (!merge-\u003eIsEmpty()) {\n  auto* f \u003d merge-\u003eFront();\n  merge-\u003eRemove(front);\n  ifelse-\u003eFalse()-\u003eAppend(front);\n}\nmerge-\u003eAppend(condition);\nmerge-\u003eAppend(ifelse);\n```",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a214c30a_03eb8a41",
         "filename": "src/tint/ir/transform/merge_return.cc",
         "patchSetId": 1
@@ -100,6 +151,23 @@
         "endLine": 229,
         "endChar": 28
       },
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d42ee20_e075eb3a",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T19:21:35Z",
+      "side": 1,
+      "message": "The `Return` instruction adds a usage onto the `Function` it is returning. So, instead of iterating all objects, you can iterate `func-\u003eUsages() looking for `Return` instructions.",
       "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
