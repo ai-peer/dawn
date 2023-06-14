@@ -28,10 +28,7 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
 
     /// @copydoc tint::ir::Value::Destroy
     void Destroy() override {
-        for (uint32_t i = 0; i < operands_.Length(); i++) {
-            operands_[i]->RemoveUsage({this, i});
-        }
-        operands_.Clear();
+        ClearOperands();
         Instruction::Destroy();
     }
 
@@ -48,6 +45,24 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
             value->AddUsage({this, index});
         }
         return;
+    }
+
+    /// Sets the operands to @p operands
+    /// @param operands the new operands for the instruction
+    void SetOperands(utils::VectorRef<ir::Value*> operands) {
+        ClearOperands();
+        operands_ = std::move(operands);
+        for (size_t i = 0; i < operands_.Length(); i++) {
+            operands_[i]->AddUsage({this, static_cast<uint32_t>(i)});
+        }
+    }
+
+    /// Removes all operands from the instruction
+    void ClearOperands() {
+        for (uint32_t i = 0; i < operands_.Length(); i++) {
+            operands_[i]->RemoveUsage({this, i});
+        }
+        operands_.Clear();
     }
 
     /// @returns the operands of the instruction
