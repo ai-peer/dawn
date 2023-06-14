@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce75cfb0_54d74ce6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T08:22:32Z",
+      "side": 1,
+      "message": "\u003e The Vulkan robustness features could potentially help the case where the shader represents the majority the buffer as a runtime array and tint wants to elide calls to arrayLength for bounds checking.\n\nThat\u0027s exactly the case we\u0027re interested about, and Dawn does validate the minBindingSize (fixed size + 1 element of the unsized array). Is there a way to rely on robustness2 to help remove the need for bounds checking of unsized arrays in storage buffers?",
+      "parentUuid": "cf8e0afb_5c050cd5",
+      "revId": "7c0af59904a552f077f7ef078f16da2b4a34b85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bae1787c_e02624e9",
         "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
         "patchSetId": 6
