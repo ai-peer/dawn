@@ -71,6 +71,9 @@ class Switch : public utils::Castable<Switch, ControlInstruction> {
     explicit Switch(Value* cond);
     ~Switch() override;
 
+    /// @copydoc ControlInstruction::ForeachBlock
+    void ForeachBlock(const std::function<void(ir::Block*)>& cb) override;
+
     /// @returns the switch cases
     utils::Vector<Case, 4>& Cases() { return cases_; }
 

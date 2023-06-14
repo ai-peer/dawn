@@ -31,6 +31,7 @@ void Instruction::Destroy() {
         Remove();
     }
     for (auto* result : Results()) {
+        result->SetSource(nullptr);
         result->Destroy();
     }
     alive_ = false;
