@@ -88,6 +88,24 @@
       "parentUuid": "fc546851_ce06e86b",
       "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02304ef5_9176a8ce",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003701
+      },
+      "writtenOn": "2023-06-14T10:54:42Z",
+      "side": 0,
+      "message": "Sure, I can handle both of those.",
+      "parentUuid": "d17dc72c_7bc9291b",
+      "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
