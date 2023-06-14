@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b314789_188a626a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-14T22:12:41Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "127b77daab8d22554507f4bb87279027adb9b816",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb526155_adbf9143",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-14T22:12:41Z",
+      "side": 1,
+      "message": "Nit: this formatting looks weird. Is this intentional?",
+      "revId": "127b77daab8d22554507f4bb87279027adb9b816",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
