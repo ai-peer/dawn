@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7512e61_0a9abef5",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T01:27:11Z",
+      "side": 1,
+      "message": "thinking about it a second time, I think that probably we should not use std::optional and inline what\u0027s needed into MissingBindGroup.\nit\u0027s weird to call TestRenderPassBindGroup when in fact, no bind groups are actually used at all.",
+      "parentUuid": "88a5b83c_323b63b9",
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3038325a_f43a3408",
         "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 4
