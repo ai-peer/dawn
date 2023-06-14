@@ -60,6 +60,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fd6e3ef_23dbe33d",
+        "filename": "src/tint/ir/construct.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-14T10:45:02Z",
+      "side": 1,
+      "message": "If this were `Reserve()` and `SetOperands()` became `AddOperands()`, then I think most of my concerns described above would be alleviated.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 10
+      },
+      "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "417b1b44_ef5f8d98",
         "filename": "src/tint/ir/operand_instruction.h",
         "patchSetId": 1
