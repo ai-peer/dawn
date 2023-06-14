@@ -65,16 +65,17 @@ DawnJSONGenerator(
 
 # Headers only INTERFACE library with generated headers don't work in CMake
 # because the GENERATED property is local to a directory. Instead we make a
-# STATIC library with a placeholder cpp file.
-#
+# STATIC library with no sources.
+# 
 # INTERFACE libraries can only have INTERFACE sources so the sources get added
 # to the dependant's list of sources. If these dependents are in another
 # directory, they don't see the GENERATED property and fail to configure
 # because the file doesn't exist on disk.
-add_library(dawn_headers STATIC ${DAWN_PLACEHOLDER_FILE})
+add_library(dawn_headers STATIC)
 common_compile_options(dawn_headers)
 target_sources(dawn_headers PRIVATE ${DAWN_HEADERS_GEN_SOURCES})
 target_link_libraries(dawn_headers INTERFACE dawn_public_config)
+set_target_properties(dawn_headers PROPERTIES LINKER_LANGUAGE C)
 
 ###############################################################################
 # Dawn C++ headers
@@ -88,13 +89,14 @@ DawnJSONGenerator(
 
 # This headers only library needs to be a STATIC library, see comment for
 # dawn_headers above.
-add_library(dawncpp_headers STATIC ${DAWN_PLACEHOLDER_FILE})
+add_library(dawncpp_headers STATIC)
 common_compile_options(dawncpp_headers)
 target_sources(dawncpp_headers PRIVATE
     "${DAWN_INCLUDE_DIR}/dawn/EnumClassBitmasks.h"
     ${DAWNCPP_HEADERS_GEN_SOURCES}
 )
 target_link_libraries(dawncpp_headers INTERFACE dawn_headers)
+set_target_properties(dawncpp_headers PROPERTIES LINKER_LANGUAGE CXX)
 
 ###############################################################################
 # Dawn C++ wrapper
@@ -106,7 +108,7 @@ DawnJSONGenerator(
     RESULT_VARIABLE "DAWNCPP_GEN_SOURCES"
 )
 
-add_library(dawncpp STATIC ${DAWN_PLACEHOLDER_FILE})
+add_library(dawncpp STATIC)
 common_compile_options(dawncpp)
 target_sources(dawncpp PRIVATE ${DAWNCPP_GEN_SOURCES})
 target_link_libraries(dawncpp PUBLIC dawncpp_headers)
@@ -123,7 +125,7 @@ DawnJSONGenerator(
     RESULT_VARIABLE "DAWNPROC_GEN_SOURCES"
 )
 
-add_library(dawn_proc ${DAWN_PLACEHOLDER_FILE})
+add_library(dawn_proc)
 common_compile_options(dawn_proc)
 target_compile_definitions(dawn_proc PRIVATE "WGPU_IMPLEMENTATION")
 if(BUILD_SHARED_LIBS)
