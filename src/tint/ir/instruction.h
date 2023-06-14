@@ -31,6 +31,18 @@ class Instruction : public utils::Castable<Instruction, Value> {
     /// Destructor
     ~Instruction() override;
 
+    /// @copydoc ir::Value::Destroy
+    /// If the instruction is part of a block, then it will be automatically removed.
+    void Destroy() override;
+
+    /// Set an operand at a given index.
+    /// @param index the operand index
+    /// @param value the value to use
+    virtual void SetOperand(size_t index, ir::Value* value) = 0;
+
+    /// @returns the operands of the instruction
+    virtual utils::VectorRef<ir::Value*> Operands() = 0;
+
     /// Sets the block that owns this instruction
     /// @param block the new owner block
     void SetBlock(ir::Block* block) { block_ = block; }
@@ -49,11 +61,6 @@ class Instruction : public utils::Castable<Instruction, Value> {
     void ReplaceWith(Instruction* replacement);
     /// Removes this instruction from the owning block
     void Remove();
-
-    /// Set an operand at a given index.
-    /// @param index the operand index
-    /// @param value the value to use
-    virtual void SetOperand(size_t index, ir::Value* value) = 0;
 
     /// Pointer to the next instruction in the list
     Instruction* next = nullptr;
