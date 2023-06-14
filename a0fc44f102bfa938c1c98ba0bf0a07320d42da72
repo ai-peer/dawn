@@ -69,6 +69,24 @@
       "parentUuid": "362eb71c_8044d406",
       "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "697c7fb6_0f39e380",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-14T17:30:44Z",
+      "side": 1,
+      "message": "+1 to using BuildFormatTable() and the metadata to get Compat-specific messages.\n\nWould this handle the case for D3D11 where we might want both Compat (FL11.0) and Core (FL11.1) devices? I assume it will just pull the compat flag out of the Device and should all just work?",
+      "parentUuid": "12f3f766_a811cdcd",
+      "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
