@@ -16,6 +16,92 @@
       "message": "PTAL.",
       "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c281ad_ff6861ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-14T10:36:04Z",
+      "side": 1,
+      "message": "Sorry but not entirely convinced this change is a net positive.",
+      "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25cf3999_00f6e790",
+        "filename": "src/tint/ir/binary.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-14T10:36:04Z",
+      "side": 1,
+      "message": "I think this pattern is a little fragile.\n\n`Resize()` will grow the vector with zero-initialized values. You\u0027re then assigning to all the operands. If you forget to assign to all the operands, you\u0027ll have nullptrs, which you decided shouldn\u0027t be validated by the Validator - so we\u0027re increasing the risk of introducing untracked nullptr operands.\n\nYou\u0027re also using named offsets, but then making assumptions that `kRhsOperandOffset` is the largest offset. If `kRhsOperandOffset \u003d\u003d 0` and `kLhsOperandOffset \u003d\u003d 1`, then you\u0027re going to be resizing to the wrong size.\n\nGiven that `Binary` derives from `utils::Castable\u003cBinary, OperandInstruction\u003c2\u003e\u003e`, we\u0027re guaranteed to have space for 2 elements without a heap allocation.\n\nAll in all, I think `Resize()` here doesn\u0027t actually give you any benefits, and adds some minor possibility of bugs.\n\nThe `AddOperand()` pattern ensured there were no nullptrs, and removed the need for a `Resize()` call.\n\nFor variable-length operand instructions, this pattern makes a lot more sense to prevent repeat heap allocations.",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 36
+      },
+      "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "417b1b44_ef5f8d98",
+        "filename": "src/tint/ir/operand_instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-14T10:36:04Z",
+      "side": 1,
+      "message": "mutating parameters, eh?\nnit: given the name, I\u0027d make a function-scope `uint32_t idx \u003d start_idx`.",
+      "range": {
+        "startLine": 55,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1098733_e615e97f",
+        "filename": "src/tint/ir/operand_instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-14T10:36:04Z",
+      "side": 1,
+      "message": "I\u0027m still concerned about the overhead of an enforced virtual method call per operand. Validating operands in the validator could obtain all the operands in a single virtual call.",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 65
+      },
+      "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
