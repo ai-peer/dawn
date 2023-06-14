@@ -227,6 +227,24 @@
       "parentUuid": "2e7f849c_83d85565",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a36420b9_3f89c5c0",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:44:29Z",
+      "side": 1,
+      "message": "Ah gotcha, that might be a reason to keep the code as it is now, using Validate methods to get booleans but it\u0027s a bit ugly. I don\u0027t really see a better way :/\n\nThat said, this should be changed to be done only once at adapter creation with [1].",
+      "parentUuid": "5edb7c80_c7345f36",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
