@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa6f0462_bd876a24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003701
+      },
+      "writtenOn": "2023-06-14T12:47:50Z",
+      "side": 1,
+      "message": "I\u0027m wondering if this is an issue with the Visual Studio generator \u0026 the header libraries having no sources.\nI would normally use interface libraries for these, but I don\u0027t think there\u0027s a workaround to the problem described there with CMake 3.13",
+      "parentUuid": "1573c9c9_aaf91c4f",
+      "revId": "752d4cfde2275eb2ba49bc65915b0999033f1932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb44a0d_f051f493",
