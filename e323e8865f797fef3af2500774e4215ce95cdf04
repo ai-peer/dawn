@@ -245,6 +245,24 @@
       "parentUuid": "5edb7c80_c7345f36",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53f1ffa_33ca51b5",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-14T13:51:18Z",
+      "side": 1,
+      "message": "Sorry for making this annoying, but I thought this validate method have to called every time when creating a device from the adapter to get proper message, or if we cached the valid features in AdapterBase and only check the cache when creating device we will just lost the reason why a feature is not supported in the cached features list and have to report a general error message...",
+      "parentUuid": "a36420b9_3f89c5c0",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
