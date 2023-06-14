@@ -33,6 +33,24 @@
       "message": "Should this have a corresponding `HasValue` so you don\u0027t have to null check the result of Value?",
       "revId": "51d9181cd48832535c8b62a2f9749fc707d079f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14b2d1c9_54e25666",
+        "filename": "src/tint/ir/return.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T18:52:00Z",
+      "side": 1,
+      "message": "Could do, but `if (ret-\u003eValue())` is more concise than `if (ret-\u003eHasValue())` so I don\u0027t really mind the null check here?",
+      "parentUuid": "04cc1636_59a8d0f1",
+      "revId": "51d9181cd48832535c8b62a2f9749fc707d079f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
