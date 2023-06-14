@@ -45,6 +45,7 @@
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
 #include "src/tint/ir/unary.h"
+#include "src/tint/ir/undef_value.h"
 #include "src/tint/ir/user_call.h"
 #include "src/tint/ir/value.h"
 #include "src/tint/ir/var.h"
@@ -222,6 +223,11 @@ class Builder {
     auto Values(ARGS&&... args) {
         return utils::Vector{Value(std::forward<ARGS>(args))...};
     }
+
+    /// Creates an undefined value for a given type
+    /// @param type the type
+    /// @returns the undefined value for `type`
+    UndefValue* Undef(const type::Type* type) { return ir.values.Create<UndefValue>(type); }
 
     /// Creates an op for `lhs kind rhs`
     /// @param kind the kind of operation

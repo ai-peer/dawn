@@ -12,31 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/return.h"
+#ifndef SRC_TINT_IR_UNDEF_VALUE_H_
+#define SRC_TINT_IR_UNDEF_VALUE_H_
 
-#include <utility>
-
-#include "src/tint/ir/function.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Return);
+#include "src/tint/ir/value.h"
 
 namespace tint::ir {
 
-Return::Return(Function* func) : func_(func) {
-    TINT_ASSERT_OR_RETURN(IR, func_);
+/// An undefined value in the IR.
+class UndefValue final : public utils::Castable<UndefValue, Value> {
+  public:
+    /// Constructor
+    /// @param type the type of the undefined value
+    explicit UndefValue(const type::Type* type);
+    ~UndefValue() override;
 
-    func_->AddUsage({this, 0u});
-}
+    /// @returns the type of the undefined value
+    const type::Type* Type() override { return type_; }
 
-Return::Return(Function* func, ir::Value* arg) : func_(func) {
-    TINT_ASSERT_OR_RETURN(IR, func_);
-    TINT_ASSERT_OR_RETURN(IR, arg);
-
-    func_->AddUsage({this, 0u});
-
-    AddOperand(arg);
-}
-
-Return::~Return() = default;
-
+  private:
+    const type::Type* type_ = nullptr;
+};
 }  // namespace tint::ir
+
+#endif  // SRC_TINT_IR_UNDEF_VALUE_H_
