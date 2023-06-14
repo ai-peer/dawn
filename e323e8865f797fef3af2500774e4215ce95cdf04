@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be8bf29c_b8fe05ce",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:22:09Z",
+      "side": 1,
+      "message": "Ah ok, sorry for the back and forth. I agree that it\u0027s not ideal that we need these steps to happen but also don\u0027t have them in the adapter. What about putting it in an Adapter::Create() method, such that the constructor of the adapter doesn\u0027t have fancy logic, but we also can\u0027t create an adapter without these steps (because the constructor would become private)?\n\nAll three solutions would work though.",
+      "parentUuid": "16fbf59e_367bd1e1",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08941104_8e8d6178",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "A point is that the error of `ValidateFeatureSupportedWithToggles` is used to provide informative error message (\"xxx feature require toggle xxx\") when user creating devices. Most other usage of this function don\u0027t need the error, but I thought if we need this error message then we should keep this validatation function and just reuse it?",
       "parentUuid": "fc987625_01ec5289",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7f849c_83d85565",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:22:09Z",
+      "side": 1,
+      "message": "IMHO we could just remove the message. It\u0027s only useful for DXC and F16, and we\u0027re looking at how to ship DXC anyway so it won\u0027t be needed for too long.",
+      "parentUuid": "2062c87a_282ffe39",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
