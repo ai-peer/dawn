@@ -43,6 +43,7 @@
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
 #include "src/tint/ir/transform/block_decorated_structs.h"
+#include "src/tint/ir/undef_value.h"
 #include "src/tint/ir/user_call.h"
 #include "src/tint/ir/var.h"
 #include "src/tint/switch.h"
@@ -332,6 +333,7 @@ void Disassembler::EmitValue(Value* val) {
         [&](ir::RuntimeValue* rv) { out_ << "%" << IdOf(rv); },
         [&](ir::BlockParam* p) { out_ << "%" << IdOf(p) << ":" << p->Type()->FriendlyName(); },
         [&](ir::FunctionParam* p) { out_ << "%" << IdOf(p); },
+        [&](ir::UndefValue*) { out_ << "undef"; },
         [&](Default) { out_ << "Unknown value: " << val->TypeInfo().name; });
 }
 
@@ -492,8 +494,8 @@ void Disassembler::EmitIf(If* i) {
     out_ << "if ";
     EmitOperand(i, i->Condition(), If::kConditionOperandOffset);
 
-    bool has_true = i->True()->HasBranchTarget();
-    bool has_false = i->False()->HasBranchTarget();
+    bool has_true = !i->True()->IsEmpty();
+    bool has_false = !i->False()->IsEmpty();
 
     out_ << " [";
     if (has_true) {
@@ -530,14 +532,14 @@ void Disassembler::EmitIf(If* i) {
 
 void Disassembler::EmitLoop(Loop* l) {
     utils::Vector<std::string, 3> parts;
-    if (l->Initializer()->HasBranchTarget()) {
+    if (!l->Initializer()->IsEmpty()) {
         parts.Push("i: %b" + std::to_string(IdOf(l->Initializer())));
     }
-    if (l->Body()->HasBranchTarget()) {
+    if (!l->Body()->IsEmpty()) {
         parts.Push("b: %b" + std::to_string(IdOf(l->Body())));
     }
 
-    if (l->Continuing()->HasBranchTarget()) {
+    if (!l->Continuing()->IsEmpty()) {
         parts.Push("c: %b" + std::to_string(IdOf(l->Continuing())));
     }
     SourceMarker sm(this);
@@ -546,7 +548,7 @@ void Disassembler::EmitLoop(Loop* l) {
 
     EmitLine();
 
-    if (l->Initializer()->HasBranchTarget()) {
+    if (!l->Initializer()->IsEmpty()) {
         ScopedIndent si(indent_size_);
         Indent() << "# Initializer block";
         EmitLine();
@@ -554,7 +556,7 @@ void Disassembler::EmitLoop(Loop* l) {
         EmitLine();
     }
 
-    if (l->Body()->HasBranchTarget()) {
+    if (!l->Body()->IsEmpty()) {
         ScopedIndent si(indent_size_);
         Indent() << "# Body block";
         EmitLine();
@@ -562,7 +564,7 @@ void Disassembler::EmitLoop(Loop* l) {
         EmitLine();
     }
 
-    if (l->Continuing()->HasBranchTarget()) {
+    if (!l->Continuing()->IsEmpty()) {
         ScopedIndent si(indent_size_);
         Indent() << "# Continuing block";
         EmitLine();

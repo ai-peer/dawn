@@ -52,6 +52,9 @@ class If : public utils::Castable<If, ControlInstruction> {
     If(Value* cond, ir::Block* t, ir::Block* f);
     ~If() override;
 
+    /// @copydoc ControlInstruction::ForeachBlock
+    void ForeachBlock(const std::function<void(ir::Block*)>& cb) override;
+
     /// @returns the if condition
     Value* Condition() { return operands_[kConditionOperandOffset]; }
 
