@@ -263,6 +263,24 @@
       "parentUuid": "a36420b9_3f89c5c0",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7ca031_fba824c2",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:59:08Z",
+      "side": 1,
+      "message": "Wee can change the check in adapter to be:\n\n```\nfor (requestedFeatures : ...) {\n  if (!supportedFeatures[requestedFeatures]) {\n    // The list of features has been created with ValidateFeatureSupportedWithToggles\n    // so we call it to get the error messages and expect it to return an error.\n    return ValidateFeatureSupportedWithToggles(...);\n    \n    // Or alternatively if we want to assert\n    DAWN_TRY(ValidateFeatureSupportedWithToggles);\n    \n    UNREACHABLE()\n  }\n\n}\n```",
+      "parentUuid": "c53f1ffa_33ca51b5",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
