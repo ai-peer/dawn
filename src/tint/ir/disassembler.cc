@@ -42,6 +42,7 @@
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
 #include "src/tint/ir/transform/block_decorated_structs.h"
+#include "src/tint/ir/undef_value.h"
 #include "src/tint/ir/user_call.h"
 #include "src/tint/ir/var.h"
 #include "src/tint/switch.h"
@@ -341,6 +342,7 @@ void Disassembler::EmitValue(Value* val) {
         [&](ir::Instruction* i) { out_ << "%" << IdOf(i); },
         [&](ir::BlockParam* p) { out_ << "%" << IdOf(p) << ":" << p->Type()->FriendlyName(); },
         [&](ir::FunctionParam* p) { out_ << "%" << IdOf(p); },
+        [&](ir::UndefValue*) { out_ << "undef"; },
         [&](Default) { out_ << "Unknown value: " << val->TypeInfo().name; });
 }
 
