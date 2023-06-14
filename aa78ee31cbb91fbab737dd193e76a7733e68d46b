@@ -88,6 +88,24 @@
       "parentUuid": "dcd6bf71_a8c9d29a",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12a5f9e6_cb47b9eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T14:00:04Z",
+      "side": 1,
+      "message": "If you just want the minimal dependencies to build you just need the ones in https://github.com/dj2/Radiant/tree/main/third_party.\n\nTo link, you probably want something like https://github.com/dj2/Radiant/blob/main/src/CMakeLists.txt#L89 or https://github.com/dj2/Dusk/blob/main/src/example_04/CMakeLists.txt#L32 depending on if you\u0027re C or CPP.\n\nThe difference between the two is, if you\u0027re using CPP then Dawn provides the GLFW integration in webgpu_glfw. If you aren\u0027t then you have to integrate with GLFW or your own windowing library yourself.",
+      "parentUuid": "a3a14970_176de297",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
