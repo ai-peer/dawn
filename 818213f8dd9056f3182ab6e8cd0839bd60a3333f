@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "843f80ae_9911f73d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Will remove the UndefValue stuff when `nullptr` is valid as an operand.",
+      "revId": "818213f8dd9056f3182ab6e8cd0839bd60a3333f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

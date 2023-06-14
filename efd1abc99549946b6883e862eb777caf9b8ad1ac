@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "677acd1c_e14944fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fab2eff1_5dcaadad",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4aab2e93_9c39f32f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5216d74c_ebc67a1a",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "We\u0027re looking for non-merge blocks. Any `MultiInBlock` owned by an `If`/`Switch` is definitely a merge block. It\u0027s only `Loop` where a `MultiInBlock` might be a non-merge block.",
+      "parentUuid": "4336d1ca_88f61941",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cdb601f_188dc76b",
         "filename": "src/tint/ir/transform/merge_return.cc",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2023-06-14T19:14:51Z",
       "side": 1,
       "message": "`func` and `returns` is only used by this function, so suggest passing by parameter to reduce state scope.\n\n`void Process(Function* func, utils::VectorRef\u003cReturn*\u003e returns) {`",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "922d205f_d55354f1",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cdb601f_188dc76b",
       "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +136,30 @@
       "writtenOn": "2023-06-14T19:14:51Z",
       "side": 1,
       "message": "You could name this to help with readability.\n\n`ir-\u003eSetName(flag, \"return_flag\");`\n\nor something",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 12
+      },
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f02b37_a42dc25e",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74b76291_754fa742",
       "range": {
         "startLine": 88,
         "startChar": 8,
@@ -132,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9753088_a5b55ac0",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Yeah, I like your second chunk. We can make a `Block::Move()` if this becomes a common thing.",
+      "parentUuid": "448eabc3_b4588532",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a214c30a_03eb8a41",
@@ -145,6 +241,30 @@
       "writtenOn": "2023-06-14T19:14:51Z",
       "side": 1,
       "message": "Looks like we\u0027re using recursion? If you have a long sequential list of `If`, `Loop` or `Switch`, are we in danger of stack overflowing?",
+      "range": {
+        "startLine": 229,
+        "startChar": 16,
+        "endLine": 229,
+        "endChar": 28
+      },
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb87939_a395355d",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Ack.\n\nAs discussed, will fix this if we don\u0027t go with Proposal B.",
+      "parentUuid": "a214c30a_03eb8a41",
       "range": {
         "startLine": 229,
         "startChar": 16,
@@ -172,6 +292,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65769a8d_adb0a7da",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d42ee20_e075eb3a",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c1f16f7_a9458546",
@@ -185,6 +323,24 @@
       "writtenOn": "2023-06-14T19:25:46Z",
       "side": 1,
       "message": "nit: can use hte with pattern here and in other tests\n\n```\nauto sb \u003d b.With(func-\u003eStartTarget());\nsb.Add(ty.i32(), in, 1_i);\nsb.Return(func, add);\n```",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203494a0_8edb422e",
+        "filename": "src/tint/ir/transform/merge_return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-14T22:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c1f16f7_a9458546",
       "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
