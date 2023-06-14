@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1573c9c9_aaf91c4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T12:05:39Z",
+      "side": 1,
+      "message": "LGTM, thanks a lot for splitting the CL.\n\nThe kokoro failure looks odd, it\u0027s only on MSVC2019. `LINK : fatal error LNK1181: cannot open input file \u0027src\\dawn\\dawncpp_headers.lib\u0027`.  I can see the line where it says it\u0027s linking that `.lib` file, so not sure if this is Kokoro being flaky or actually something wrong.",
+      "revId": "752d4cfde2275eb2ba49bc65915b0999033f1932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb44a0d_f051f493",
