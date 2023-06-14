@@ -87,6 +87,24 @@
       "parentUuid": "12f3f766_a811cdcd",
       "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc21abd_50784032",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-14T18:25:02Z",
+      "side": 1,
+      "message": "Ok, so I uploaded a work in progress version. please take a look.\n\nIn this version there\u0027s an enum \"UnsupportedReason\". If it\u0027s \"UnsupportedReason::None\" then it\u0027s supported.  I need to add the error messages\n\nAnother solution would be a `const char* unsupportedReason` where `unsupportedReason \u003d\u003d nullptr` means supported. Then it would be easier to add new messages because no need to have a enum.\n\nwdyt?",
+      "parentUuid": "697c7fb6_0f39e380",
+      "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
