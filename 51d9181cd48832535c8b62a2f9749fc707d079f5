@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a6e75fe_5d2bc788",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T18:47:19Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "51d9181cd48832535c8b62a2f9749fc707d079f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cc1636_59a8d0f1",
+        "filename": "src/tint/ir/return.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T18:47:19Z",
+      "side": 1,
+      "message": "Should this have a corresponding `HasValue` so you don\u0027t have to null check the result of Value?",
+      "revId": "51d9181cd48832535c8b62a2f9749fc707d079f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
