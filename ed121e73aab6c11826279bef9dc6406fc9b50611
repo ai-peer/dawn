@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "306e63e9_202a96d1",
+        "filename": "src/tint/ir/binary.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T12:13:48Z",
+      "side": 1,
+      "message": "The thing I like about this over `AddOperand` is it\u0027s very obvious what slots each operand is going into. The names are explicit, so changing the order here doesn\u0027t accidentally change the order in the operand list.\n\nWe could add a `kMaxOperands` and use that for the `Resize` if desired and have it in the header files which would also work.",
+      "parentUuid": "25cf3999_00f6e790",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 36
+      },
+      "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fd6e3ef_23dbe33d",
         "filename": "src/tint/ir/construct.cc",
         "patchSetId": 1
@@ -117,6 +141,30 @@
       "writtenOn": "2023-06-14T10:36:04Z",
       "side": 1,
       "message": "I\u0027m still concerned about the overhead of an enforced virtual method call per operand. Validating operands in the validator could obtain all the operands in a single virtual call.",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 65
+      },
+      "revId": "ed121e73aab6c11826279bef9dc6406fc9b50611",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "126ee103_deb35776",
+        "filename": "src/tint/ir/operand_instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T12:13:48Z",
+      "side": 1,
+      "message": "Sure, but then we have to check before every use for `nullptr`s. I don\u0027t think the assuming not null is a safe way to go. With this, we have a very limited place when we can have `nullptr` in the operand list, specifically var initializers.",
+      "parentUuid": "e1098733_e615e97f",
       "range": {
         "startLine": 67,
         "startChar": 4,
