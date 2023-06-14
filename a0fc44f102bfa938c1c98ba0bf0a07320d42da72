@@ -105,6 +105,24 @@
       "parentUuid": "697c7fb6_0f39e380",
       "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d96038_0eb9475d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T18:59:04Z",
+      "side": 1,
+      "message": "another idea:\n\n```\nstruct RequiresFeature {\n  wgpu::FeatureName feature;\n};\n\nstruct CompatibilityMode {};\n\nusing UnsupportedReason \u003d std::variant\u003c/* is supported */ std::monostate, RequiresFeature, CompatibilityMode\u003e\n```\n\nthis way validating the format can say something like `\"%s requires %s\", format, feature` and we don\u0027t need to manually do the messages for each one",
+      "parentUuid": "dfc21abd_50784032",
+      "revId": "a0fc44f102bfa938c1c98ba0bf0a07320d42da72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
