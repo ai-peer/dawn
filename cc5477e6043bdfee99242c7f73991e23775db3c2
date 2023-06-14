@@ -539,6 +539,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e9cadfe_7699442e",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:04:32Z",
+      "side": 1,
+      "message": "mostly I was convinced because the assumption that objects are always removed from the cache strictly before they are deleted is already an assumption that we make today - so relying on it is no worse; and switching to weakrefs will make it less fragile and easier to reason about as an improvement. And, I\u0027d expect it to be roughly a drop in replacement of the current TryGetRef\n\nso overall LGTM, though I didn\u0027t fully look at the tests yet",
+      "parentUuid": "ce0f4d1e_6c44c8aa",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "cc5477e6043bdfee99242c7f73991e23775db3c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94f43bbc_3880c11a",

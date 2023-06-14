@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ca1574_2a732d93",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:04:32Z",
+      "side": 1,
+      "message": "is \u003cfunctional\u003e used in this class?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd8ef93_1ac2bde2",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:04:32Z",
+      "side": 1,
+      "message": "Device.h is included everywhere so we should try to keep it smaller if possible.\n\n\nYou *might* be able to only declare something like this in the header:\n\n```\ntemplate \u003ctypename RefCountedT, typename BlueprintT, typename CreateFn\u003e\ndecltype(std::declval\u003cCreateFn\u003e()())\nGetOrCreate(ContentLessObjectCache\u003cRefCountedT, BlueprintT\u003e\u0026 cache,\n            BlueprintT* blueprint,\n            CreateFn createFn);\n```\n\nand then define it in the cpp\n\n```\ntemplate \u003ctypename RefCountedT, typename BlueprintT, typename CreateFn\u003e\ndecltype(std::declval\u003cCreateFn\u003e()())\nDeviceBase::GetOrCreate(ContentLessObjectCache\u003cRefCountedT, BlueprintT\u003e\u0026 cache,\n                        BlueprintT* blueprint,\n                        CreateFn createFn) {\n   ...\n}\n```\n\nAlso, I think this function can be private, not public",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 235,
+        "endChar": 40
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58730bf3_257f60bc",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:04:32Z",
+      "side": 1,
+      "message": "nit: this ASSERT should probably be done before other calls to result.Get()",
+      "range": {
+        "startLine": 265,
+        "startChar": 8,
+        "endLine": 265,
+        "endChar": 40
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96d1bbd7_48a74d64",
+        "filename": "src/dawn/tests/unittests/ContentLessObjectCacheTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:04:32Z",
+      "side": 1,
+      "message": "also, insert+insert\n\nand insert+find\n\nMay not need locking - like for insert+insert you can have N threads all create different objects with the same hash and insert them.\n\nThen you should be able to observe they all got the same result after the Insert - the same one that succeeded the Insert",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
