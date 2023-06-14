@@ -68,6 +68,47 @@
       "parentUuid": "c4369d54_cddf4316",
       "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a5b83c_323b63b9",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T00:09:41Z",
+      "side": 1,
+      "message": "I also don\u0027t like multiple boolean args like this.\n\nTestRenderPassBindGroup(nullptr, ...) is used in one test\n\ncould you instead make the block at [1] do:\n```\nif (bindGroup !\u003d nullptr) {\n            renderPassEncoder.SetBindGroup(0, bindGroup, count, offsets);\nelse {\n            renderPassEncoder.SetBindGroup(0, nullptr);\n}\n```\n\nthen, make the MissingBindGroup test do the test without this helper?\n\n\nOr, have this function be `TestRenderPassBindGroup(std::optional\u003cwgpu::BindGroup\u003e bindGroup, ...` and MissingBindGroup test can use std::nullopt ?",
+      "parentUuid": "621720f9_23ea8df1",
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3038325a_f43a3408",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1844,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T00:09:41Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1839,
+        "startChar": 8,
+        "endLine": 1844,
+        "endChar": 9
+      },
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
