@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3fad977_f9dc364b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003701
+      },
+      "writtenOn": "2023-06-14T13:11:33Z",
+      "side": 1,
+      "message": "Just to confirm the above, the behaviour described in the comment was fixed with CMake 3.20 (see https://cmake.org/cmake/help/latest/prop_sf/GENERATED.html)",
+      "parentUuid": "aa6f0462_bd876a24",
+      "revId": "752d4cfde2275eb2ba49bc65915b0999033f1932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb44a0d_f051f493",
