@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3186fb3b_c4362807",
+        "filename": "docs/dawn/features/msaa_render_to_single_samples.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f74612a2_77145234",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 230
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "842835e2_cd7bc047",
@@ -749,6 +773,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8d762f8_356ecda6",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "oh I see. And there is only ever one color attachment in this case so we\u0027re not checking that the sample count matches across all attachments.\n\nShould this be in the `else` block above then? [3]\n\nThis raises another question though.\nShould DawnRenderPassDescriptorRenderToSingleSampled instead be a chained struct on wgpu::RenderPassColorAttachment ?\ni.e. can you have one attachment that is explicit sample count of 4, and another that has an implicit sample count of 4? - or is that going to be incompatible with the Vulkan subpass to load the attachment?",
+      "parentUuid": "1a245bfc_e0450aa5",
+      "range": {
+        "startLine": 176,
+        "startChar": 13,
+        "endLine": 176,
+        "endChar": 50
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de06ede3_85178b4c",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -778,6 +826,24 @@
       "side": 1,
       "message": "I realized this enforcement is not needed. When we use a draw call to blit a view of the resolve target to the MSAA attachment, we currently only require that the view is 2D and has only 1 layer (for easier handling in the fragment shader, so we could treat the input texture as `texture_2d`).\n\nBut technically the view cannot be anything other than 2D. Because when the client creates a render pass, the validation layer already checks that the color attachment must be 2D (or called `renderable texture view` from WebGPU spec).",
       "parentUuid": "de06ede3_85178b4c",
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a211b87a_d3def144",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6a774f5a_86eb2115",
       "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -970,6 +1036,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b79940ab_7f1c4532",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "sure",
+      "parentUuid": "b4926003_4b30e5b8",
+      "range": {
+        "startLine": 975,
+        "startChar": 0,
+        "endLine": 975,
+        "endChar": 78
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "161795bf_9224edaf",
@@ -1030,6 +1120,30 @@
       "side": 1,
       "message": "Done. Actually integer textures are not resolvable (per WebGPU spec), hence they cannot be used as resolve target either. Thus are not supported by this feature.\n\nAlready updated the feature doc.",
       "parentUuid": "e0f2bd84_752593cf",
+      "range": {
+        "startLine": 1110,
+        "startChar": 8,
+        "endLine": 1112,
+        "endChar": 9
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f0c7716_296030ac",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "86a6fc9a_ec8be7d1",
       "range": {
         "startLine": 1110,
         "startChar": 8,
@@ -1147,6 +1261,30 @@
       "side": 1,
       "message": "What happens if an user (not us) later binds the color attachment as an input texture in the same render pass?\n\nThat would pass the validation because TextureBinding+Resolve is allowed, wouldn\u0027t it?\n\nThis hijacking was used because I want that only the 1st texture binding is allowed, but not the subsequent texture bindings (made by users). Technically, the 1st texture binding is special and should not be treated as `TextureBinding` for the purpose of validation. It should also be enough for the backend to know what to do with the resource transitions in this special binding.",
       "parentUuid": "7f51bd57_68682b71",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 66
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9edf732_949c5785",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "That\u0027s a great point - we should add a validation test case specifically for this situation so we don\u0027t regress correctness in the future.\n\nSo, if we need to make a special type of TextureBinding, then we can do it similar to `wgpu::BufferBindingType kInternalStorageBufferBinding`. This is a binding type that\u0027s in the bind group layout layout. This way, here when you switch on `bindingInfo.bindingType`, you can handle `case (BindingInfoType) kInternalTextureBindingLoadFromResolve` and do `TextureViewUsedAs(view, kInternalTextureUsageLoadFromResolve)`\n\nYou\u0027ll also to gate the internal texture binding usage so it can only be used in the internal version of CreateBindGroupLayout(... /* allowInternalBinding\u003d*/true)\n\nwdyt?",
+      "parentUuid": "09f28208_9d4e1a79",
       "range": {
         "startLine": 119,
         "startChar": 0,

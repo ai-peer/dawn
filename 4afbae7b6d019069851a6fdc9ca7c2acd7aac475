@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b10a8c_ad624187",
+        "filename": "docs/dawn/features/msaa_render_to_single_samples.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "do we need the new usage (maybe for some other backend?)\n\nFor Metal, it seems like it would be sufficient to say that if you would like to use this texture in an implicit multi-sampled render pass, you must create it with both RenderAttachment and TextureBinding usages and sample count 1 (validation happens in BeginRenderPass)",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 199
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e3c37c_7f0849f8",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "typo \n```suggestion\n    wgpu::TextureFormat depthStencilFormat,\n```",
+      "range": {
+        "startLine": 55,
+        "startChar": 24,
+        "endLine": 55,
+        "endChar": 42
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807cc676_e5a327b1",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "these are the defaults; shouldn\u0027t be necessary to specify",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 54
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7659ba71_9836f245",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8a0721_e792e4d0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "s/having/with",
+      "range": {
+        "startLine": 300,
+        "startChar": 25,
+        "endLine": 300,
+        "endChar": 31
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db1f10fc_2551d9e0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "more clear to hoist the null check out so it\u0027s not both setting the count and validating the descriptor\n\n```suggestion\n    if (msaaRenderToSingleSampledDesc) {\n         DAWN_TRY(ValidateMSAARenderToSingleSampledDescriptor(\n            device, descriptor, msaaRenderToSingleSampledDesc));\n         *implicitSampleCount \u003d msaaRenderToSingleSampledDesc-\u003eimplicitSampleCount\n    } else {\n         *implicitSampleCount \u003d 0;\n    }\n```",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 497,
+        "endChar": 81
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "391d9e88_acabb485",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T05:43:37Z",
+      "side": 1,
+      "message": "for tests like this, it\u0027s nice to have two cases: one that works with the correct usage, and one that does not with the incorrect usage. That way you can see in a single contained test that the validation rule is correct.\n\nditto for other tests",
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
