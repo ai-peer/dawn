@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5a6ab47_4b25c1b0",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:13:01Z",
+      "side": 1,
+      "message": "oh - I think this happened due to my suggestion. Because it didn\u0027t seem like it should be allowed to create an adapter without doing all of those three steps; they should be part of every construction.\n\nThough I was thinking that DawnTogglesDescriptor would be an argument to AdapterBase. so it would do all of creating TogglesState, inheriting, and backend overrides.",
+      "parentUuid": "4e7df550_3cee6f47",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08941104_8e8d6178",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
