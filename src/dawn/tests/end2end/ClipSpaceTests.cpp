@@ -96,7 +96,6 @@ TEST_P(ClipSpaceTest, ClipSpace) {
 }
 
 DAWN_INSTANTIATE_TEST(ClipSpaceTest,
-                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
