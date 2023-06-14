@@ -70,6 +70,24 @@
       "parentUuid": "72bde926_5bd6cdeb",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a14970_176de297",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T13:54:50Z",
+      "side": 1,
+      "message": "Thank you for the patience, I kind of forgot about this thread :/ We need to write better documentation on how to use Dawn, but you should be able to Fetch Dawn with a single commit then use https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/tools/fetch_dawn_dependencies.py to get all you need. Then in CMake add-subdirectory and link against webgpu_dawn https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CMakeLists.txt;drc\u003dfb59c57a1e1d26397a46c4da25200f840fc7a660;l\u003d687 We should definitely make this better documented.\n\nThat said I\u0027m not a CMake expert and don\u0027t exactly understand the discussion about shared libraries. Are you not linking Dawn statically? Otherwise I think it should be sufficient to copy over libwebgpu_dawn.so\n\nIn general we\u0027d like to avoid having install targets for everything because we don\u0027t think Dawn is a good fit to use in a package manager, and making CMake install targets useful would incentivize package maintainers to create packages.",
+      "parentUuid": "dcd6bf71_a8c9d29a",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
