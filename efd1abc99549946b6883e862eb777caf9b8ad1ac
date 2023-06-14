@@ -170,6 +170,23 @@
       "message": "The `Return` instruction adds a usage onto the `Function` it is returning. So, instead of iterating all objects, you can iterate `func-\u003eUsages() looking for `Return` instructions.",
       "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c1f16f7_a9458546",
+        "filename": "src/tint/ir/transform/merge_return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-14T19:25:46Z",
+      "side": 1,
+      "message": "nit: can use hte with pattern here and in other tests\n\n```\nauto sb \u003d b.With(func-\u003eStartTarget());\nsb.Add(ty.i32(), in, 1_i);\nsb.Return(func, add);\n```",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
