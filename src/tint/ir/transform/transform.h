@@ -19,6 +19,7 @@
 
 #include <utility>
 
+#include "src/tint/builtin/address_space.h"
 #include "src/tint/utils/castable.h"
 
 // Forward declarations
@@ -41,6 +42,16 @@ class Transform : public utils::Castable<Transform, tint::transform::Transform> 
     /// @param inputs optional extra transform-specific input data
     /// @param outputs optional extra transform-specific output data
     virtual void Run(ir::Module* module, const DataMap& inputs, DataMap& outputs) const = 0;
+
+  protected:
+    /// Alias to builtin::AddressSpace::kStorage
+    static constexpr auto storage = builtin::AddressSpace::kStorage;
+    /// Alias to builtin::AddressSpace::kUniform
+    static constexpr auto uniform = builtin::AddressSpace::kUniform;
+    /// Alias to builtin::AddressSpace::kPrivate
+    static constexpr auto private_ = builtin::AddressSpace::kPrivate;
+    /// Alias to builtin::AddressSpace::kFunction
+    static constexpr auto function = builtin::AddressSpace::kFunction;
 };
 
 }  // namespace tint::ir::transform

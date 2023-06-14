@@ -1,0 +1,269 @@
+// Copyright 2023 The Tint Authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#include "src/tint/ir/transform/merge_return.h"
+
+#include <utility>
+
+#include "src/tint/ir/builder.h"
+#include "src/tint/ir/module.h"
+#include "src/tint/switch.h"
+
+TINT_INSTANTIATE_TYPEINFO(tint::ir::transform::MergeReturn);
+
+using namespace tint::number_suffixes;  // NOLINT
+
+namespace tint::ir::transform {
+
+MergeReturn::MergeReturn() = default;
+
+MergeReturn::~MergeReturn() = default;
+
+/// PIMPL state for the transform, for a single function.
+struct MergeReturn::State {
+    /// The IR module.
+    Module* ir = nullptr;
+    /// The IR builder.
+    Builder b{*ir};
+    /// The type manager.
+    type::Manager& ty{ir->Types()};
+    /// The function being processed.
+    Function* func = nullptr;
+    /// The return instructions in this function.
+    utils::Slice<Return*> returns;
+    /// The "is returning" flag.
+    Var* flag = nullptr;
+    /// The return value.
+    Var* return_val = nullptr;
+
+    /// A set of merge blocks that have already been processed.
+    utils::Hashset<Block*, 8> processed_merges;
+
+    /// The final merge block that will contain the unique return instruction.
+    Block* final_merge = nullptr;
+
+    /// Constructor
+    /// @param mod the module
+    /// @param f the function
+    explicit State(Module* mod, Function* f) : ir(mod), func(f) {}
+
+    /// Get the nearest non-merge parent block of `block`.
+    /// @param block the block
+    /// @returns the enclosing non-merge block
+    Block* GetEnclosingNonMergeBlock(Block* block) {
+        while (block->Is<MultiInBlock>()) {
+            auto* parent = block->Parent();
+            if (auto* loop = parent->As<Loop>()) {
+                if (block != loop->Merge()) {
+                    break;
+                }
+            }
+            block = parent->Block();
+        }
+        return block;
+    }
+
+    /// Process the function.
+    void Process() {
+        // If there are no returns, or just a single return at the end of the function (potentially
+        // inside a nested merge block), then nothing needs to be done.
+        if (returns.Length() == 0 ||
+            (returns.Length() == 1 &&
+             GetEnclosingNonMergeBlock(returns[0]->Block()) == func->StartTarget())) {
+            return;
+        }
+
+        // Create a boolean variable that can be used to check whether the function is returning.
+        flag = b.Var(ty.ptr<function, bool>());
+        flag->SetInitializer(b.Constant(false));
+        func->StartTarget()->Prepend(flag);
+
+        // Create a variable to hold the return value if needed.
+        if (!func->ReturnType()->Is<type::Void>()) {
+            return_val = b.Var(ty.ptr(function, func->ReturnType()));
+            func->StartTarget()->Prepend(return_val);
+        }
+
+        // Process all of the return instructions in the function.
+        for (auto* ret : returns) {
+            ProcessReturn(ret);
+        }
+
+        // Add the unique return instruction here to the final merge block.
+        TINT_ASSERT(Transform, final_merge != nullptr);
+        if (return_val) {
+            auto* retval = final_merge->Append(b.Load(return_val));
+            final_merge->Append(b.Return(func, retval));
+        } else {
+            final_merge->Append(b.Return(func));
+        }
+    }
+
+    /// Process a return instruction.
+    /// @param ret the return instruction
+    void ProcessReturn(Return* ret) {
+        // Set the "is returning" flag to `true`, and record the return value if present.
+        b.Store(flag, b.Constant(true))->InsertBefore(ret);
+        if (return_val) {
+            b.Store(return_val, ret->Value())->InsertBefore(ret);
+        }
+
+        // Exit from the containing block, which will recursively insert conditionals into the
+        // containing merge blocks as necessary, eventually inserting a unique return instruction.
+        ExitFromBlock(ret->Block());
+        ret->Remove();
+        if (ret->Value()) {
+            ret->Value()->RemoveUsage({ret, 0u});
+        }
+    }
+
+    /// Process a merge block by wrapping its existing instructions (if any) in a conditional such
+    /// that they will only execute if we are not returning.
+    /// @param merge the merge block to process
+    void ProcessMerge(MultiInBlock* merge) {
+        if (processed_merges.Contains(merge)) {
+            return;
+        }
+        processed_merges.Add(merge);
+
+        // If the merge block was empty, we just need to exit from it.
+        if (merge->IsEmpty()) {
+            ExitFromBlock(merge);
+            return;
+        }
+
+        // If the block only contains an exit_{if,loop,switch}, we can skip adding a conditional
+        // around its contents and just recurse into the parent merge block.
+        if (merge->Length() == 1 && merge->Branch()->IsAnyOf<ExitIf, ExitLoop, ExitSwitch>()) {
+            tint::Switch(
+                merge->Branch(),  //
+                [&](If* ifelse) { ProcessMerge(ifelse->Merge()); },
+                [&](Loop* loop) { ProcessMerge(loop->Merge()); },
+                [&](Switch* swtch) { ProcessMerge(swtch->Merge()); });
+            return;
+        }
+
+        // Wrap the existing contents of the merge block in a conditional so that it will only
+        // execute if the "is returning" flag is `false`.
+        auto* condition = merge->Prepend(b.Load(flag));
+        auto* ifelse = b.If(condition);
+        ifelse->InsertAfter(condition);
+
+        // Move all pre-existing instructions to the new false block.
+        auto* next = ifelse->next;
+        while (next) {
+            auto* to_move = next;
+            next = next->next;
+            to_move->Remove();
+            ifelse->False()->Append(to_move);
+        }
+
+        utils::Vector<Value*, 4> block_args_from_true;
+        utils::Vector<BlockParam*, 4> merge_block_params;
+        if (auto* exitif = ifelse->False()->Back()->As<ExitIf>()) {
+            // If the previous terminator was an exit_if, we need replace it with one that exits to
+            // the new merge block, and propagate the original basic block arguments if any.
+            // The exit_if from the `true` block will just pass undef values to the merge block.
+            utils::Vector<Value*, 4> block_args_from_false;
+            for (auto* arg : exitif->Args()) {
+                block_args_from_true.Push(b.Undef(arg->Type()));
+                block_args_from_false.Push(arg);
+                merge_block_params.Push(b.BlockParam(arg->Type()));
+            }
+            exitif->ReplaceWith(b.ExitIf(ifelse, block_args_from_false));
+        } else {
+            // If this merge block was the final merge block of the function, it won't have a branch
+            // yet. Add an `exit_if` to the new merge block, and record the new merge block as the
+            // new final merge block.
+            if (merge == final_merge) {
+                ifelse->False()->Append(b.ExitIf(ifelse));
+                final_merge = ifelse->Merge();
+            }
+        }
+
+        // Exit from the `true` block to the new merge block.
+        ifelse->True()->Append(b.ExitIf(ifelse, block_args_from_true));
+
+        // Exit from the new merge block, which will recursively process the parent merge.
+        ifelse->Merge()->SetParams(merge_block_params);
+        ExitFromBlock(ifelse->Merge(), merge_block_params);
+
+        // We never need to process the merge that we've just added, as it only exits.
+        processed_merges.Add(ifelse->Merge());
+    }
+
+    /// Add an exit_{if,loop,switch} instruction to `block`, and process the target merge block.
+    /// @param block the block to exit from
+    /// @param args the optional basic block arguments
+    void ExitFromBlock(Block* block, utils::VectorRef<Value*> args = utils::Empty) {
+        // Helper to get the block arguments for an instruction that is exiting to `merge`.
+        auto block_args = [&](auto* merge) -> utils::Vector<Value*, 4> {
+            // If arguments were explicitly provided, use those.
+            if (!args.IsEmpty()) {
+                return args;
+            }
+
+            // Otherwise, we will pass a list of `undef` values.
+            utils::Vector<Value*, 4> undef_args;
+            for (auto* param : merge->Params()) {
+                undef_args.Push(b.Undef(param->Type()));
+            }
+            return undef_args;
+        };
+
+        auto* parent_control_flow = GetEnclosingNonMergeBlock(block)->Parent();
+        tint::Switch(
+            parent_control_flow,
+            [&](If* ifelse) {
+                ProcessMerge(ifelse->Merge());
+                block->Append(b.ExitIf(ifelse, block_args(ifelse->Merge())));
+            },
+            [&](Loop* loop) {
+                ProcessMerge(loop->Merge());
+                block->Append(b.ExitLoop(loop, block_args(loop->Merge())));
+            },
+            [&](Switch* swtch) {
+                ProcessMerge(swtch->Merge());
+                block->Append(b.ExitSwitch(swtch, block_args(swtch->Merge())));
+            },
+            [&](Default) {
+                // This is the top-level merge block, so just record it so that we can add the
+                // unique return instruction to it later.
+                final_merge = block;
+            });
+    }
+};
+
+void MergeReturn::Run(Module* ir, const DataMap&, DataMap&) const {
+    Builder builder(*ir);
+
+    // Find all return instructions.
+    utils::Hashmap<Function*, utils::Vector<Return*, 4>, 4> function_to_returns;
+    for (auto* inst : ir->values.Objects()) {
+        if (auto* ret = inst->As<Return>(); ret && ret->Block()) {
+            auto& returns = function_to_returns.GetOrCreate(
+                ret->Func(), [&]() { return utils::VectorRef<Return*>{}; });
+            returns.Push(ret);
+        }
+    }
+
+    // Process each function.
+    for (auto f : function_to_returns) {
+        State state(ir, f.key);
+        state.returns = f.value.Slice();
+        state.Process();
+    }
+}
+
+}  // namespace tint::ir::transform

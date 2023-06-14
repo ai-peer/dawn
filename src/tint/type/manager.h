@@ -325,7 +325,7 @@ class Manager final {
     /// @returns the pointer type
     const type::Pointer* ptr(builtin::AddressSpace address_space,
                              const type::Type* subtype,
-                             builtin::Access access);
+                             builtin::Access access = builtin::Access::kReadWrite);
 
     /// @tparam SPACE the address space
     /// @tparam T the storage type
