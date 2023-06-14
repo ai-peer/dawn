@@ -36,4 +36,13 @@ If::If(Value* cond, ir::Block* t, ir::Block* f) : true_(t), false_(f) {
 
 If::~If() = default;
 
+void If::ForeachBlock(const std::function<void(ir::Block*)>& cb) {
+    if (true_) {
+        cb(true_);
+    }
+    if (false_) {
+        cb(false_);
+    }
+}
+
 }  // namespace tint::ir

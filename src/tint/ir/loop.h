@@ -63,6 +63,9 @@ class Loop : public utils::Castable<Loop, ControlInstruction> {
     Loop(ir::Block* i, ir::MultiInBlock* b, ir::MultiInBlock* c);
     ~Loop() override;
 
+    /// @copydoc ControlInstruction::ForeachBlock
+    void ForeachBlock(const std::function<void(ir::Block*)>& cb) override;
+
     /// @returns the switch initializer block
     ir::Block* Initializer() { return initializer_; }
 

@@ -55,6 +55,30 @@ class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
         }
         return out;
     }
+
+    /// @returns true if the predicate function returns true for any of the elements of the set
+    /// @param pred a function-like with the signature `bool(T)`
+    template <typename PREDICATE>
+    bool Any(PREDICATE&& pred) const {
+        for (const auto& it : *this) {
+            if (pred(it)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// @returns false if the predicate function returns false for any of the elements of the set
+    /// @param pred a function-like with the signature `bool(T)`
+    template <typename PREDICATE>
+    bool All(PREDICATE&& pred) const {
+        for (const auto& it : *this) {
+            if (!pred(it)) {
+                return false;
+            }
+        }
+        return true;
+    }
 };
 
 }  // namespace tint::utils

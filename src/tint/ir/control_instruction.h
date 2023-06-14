@@ -20,6 +20,11 @@
 #include "src/tint/ir/branch.h"
 #include "src/tint/ir/operand_instruction.h"
 
+// Forward declarations
+namespace tint::ir {
+class Block;
+}  // namespace tint::ir
+
 namespace tint::ir {
 
 /// Base class of instructions that perform branches to two or more blocks, owned by the
@@ -28,6 +33,10 @@ class ControlInstruction : public utils::Castable<ControlInstruction, OperandIns
   public:
     /// Destructor
     ~ControlInstruction() override;
+
+    /// Calls @p cb for each block owned by this control instruction
+    /// @param cb the function to call once for each block
+    virtual void ForeachBlock(const std::function<void(ir::Block*)>& cb) = 0;
 
     /// Sets the results of the control instruction
     /// @param values the new result values
