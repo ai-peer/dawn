@@ -16,6 +16,46 @@
       "message": "Ready for review",
       "revId": "8cf670735ae06afd4fb7a3da0412e905bd2c04b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa93b80_f2d4f36d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T09:46:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8cf670735ae06afd4fb7a3da0412e905bd2c04b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c75f9204_0e9e931d",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T09:46:29Z",
+      "side": 1,
+      "message": "filed_type is a bit overloaded, because it could also be float vs. string. Maybe optionality(member)?",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "8cf670735ae06afd4fb7a3da0412e905bd2c04b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
