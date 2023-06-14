@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01115542_c6c9b6df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T21:02:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "09a767965e67d949e1c60f2f7ed17d6a71f0fe69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25dbd37d_2443d834",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T21:02:04Z",
+      "side": 1,
+      "message": "seems like this should actually be UNREACHABLE() ?",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 31
+      },
+      "revId": "09a767965e67d949e1c60f2f7ed17d6a71f0fe69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
