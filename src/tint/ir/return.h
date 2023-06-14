@@ -42,6 +42,10 @@ class Return : public utils::Castable<Return, Branch> {
     /// @returns the function being returned
     Function* Func() { return func_; }
 
+    ir::Value* Value() { return Operands()[0]; }
+
+    void SetValue(ir::Value* val) { SetOperand(0, val); }
+
   private:
     Function* func_ = nullptr;
 };

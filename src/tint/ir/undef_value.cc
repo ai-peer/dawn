@@ -12,31 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ir/return.h"
+#include "src/tint/ir/undef_value.h"
 
-#include <utility>
-
-#include "src/tint/ir/function.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::ir::Return);
+TINT_INSTANTIATE_TYPEINFO(tint::ir::UndefValue);
 
 namespace tint::ir {
 
-Return::Return(Function* func) : func_(func) {
-    TINT_ASSERT_OR_RETURN(IR, func_);
-
-    func_->AddUsage({this, 0u});
+UndefValue::UndefValue(const type::Type* type) : type_(type) {
+    TINT_ASSERT(IR, type_ != nullptr);
 }
 
-Return::Return(Function* func, ir::Value* arg) : func_(func) {
-    TINT_ASSERT_OR_RETURN(IR, func_);
-    TINT_ASSERT_OR_RETURN(IR, arg);
-
-    func_->AddUsage({this, 0u});
-
-    AddOperand(arg);
-}
-
-Return::~Return() = default;
+UndefValue::~UndefValue() = default;
 
 }  // namespace tint::ir
