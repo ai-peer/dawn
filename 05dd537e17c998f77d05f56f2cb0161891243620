@@ -16,6 +16,40 @@
       "message": "Thanks for the suggestions, Corentin and Austin. I feel like there are upsides and downsides for either solution. Maybe this one is slightly better and let\u0027s move on?",
       "revId": "05dd537e17c998f77d05f56f2cb0161891243620",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b798724_ab64db20",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1923,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:31:33Z",
+      "side": 1,
+      "message": "```suggestion\n        renderPassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());\n```",
+      "revId": "05dd537e17c998f77d05f56f2cb0161891243620",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8eb6456_a67f50f0",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:31:33Z",
+      "side": 1,
+      "message": "```suggestion\n        computePassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());\n```",
+      "revId": "05dd537e17c998f77d05f56f2cb0161891243620",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

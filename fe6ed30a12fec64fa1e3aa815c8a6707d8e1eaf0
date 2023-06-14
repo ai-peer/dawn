@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45f7aea4_7525c983",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:31:33Z",
+      "side": 1,
+      "message": "this level of duplication is fine with me since it removes the need to have the extra bools\n\narguably, it makes the test a lot more clear about what it is teating",
+      "parentUuid": "4ab57e11_0a0277f6",
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3038325a_f43a3408",
@@ -137,6 +155,30 @@
       "writtenOn": "2023-06-14T00:09:41Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 1839,
+        "startChar": 8,
+        "endLine": 1844,
+        "endChar": 9
+      },
+      "revId": "fe6ed30a12fec64fa1e3aa815c8a6707d8e1eaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f969301_24d22f32",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1844,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-14T06:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3038325a_f43a3408",
       "range": {
         "startLine": 1839,
         "startChar": 8,
