@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16fbf59e_367bd1e1",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-14T06:21:25Z",
+      "side": 1,
+      "message": "Yes I think adapter inheriting instance toggles is a critical path, although in some test it may be unnecessary?\nIn the latest patchset I change it back again, but I can still change it if we decide to handle the descriptor in AdapterBase ctor.",
+      "parentUuid": "c5a6ab47_4b25c1b0",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08941104_8e8d6178",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
@@ -104,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a477ea_29d9cc6f",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-14T06:21:25Z",
+      "side": 1,
+      "message": "Removed. They were used in some unittests.",
+      "parentUuid": "28d13f8d_cef3cb56",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc987625_01ec5289",
@@ -117,6 +153,24 @@
       "writtenOn": "2023-06-13T12:40:44Z",
       "side": 1,
       "message": "We should avoid using error handling for things that aren\u0027t errors. Here a boolean would be sufficient. Also see [1]",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2062c87a_282ffe39",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-14T06:21:25Z",
+      "side": 1,
+      "message": "A point is that the error of `ValidateFeatureSupportedWithToggles` is used to provide informative error message (\"xxx feature require toggle xxx\") when user creating devices. Most other usage of this function don\u0027t need the error, but I thought if we need this error message then we should keep this validatation function and just reuse it?",
+      "parentUuid": "fc987625_01ec5289",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

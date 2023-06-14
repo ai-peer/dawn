@@ -177,6 +177,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c27637e_380a858b",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-14T06:21:25Z",
+      "side": 1,
+      "message": "Bring back this helper function as the AdapterBase ctor don\u0027t do the inheritance now. Will remove it again if we decide to handle the toggles descriptor within AdapterBase ctor.",
+      "parentUuid": "33fd86af_8ec20232",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 223,
+        "endChar": 0
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "704220a6_07e28b20",
