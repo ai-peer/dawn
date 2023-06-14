@@ -26,6 +26,15 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
     /// Destructor
     ~OperandInstruction() override = default;
 
+    /// @copydoc tint::ir::Value::Destroy
+    void Destroy() override {
+        for (uint32_t i = 0; i < operands_.Length(); i++) {
+            operands_[i]->RemoveUsage({this, i});
+        }
+        operands_.Clear();
+        Instruction::Destroy();
+    }
+
     /// Set an operand at a given index.
     /// @param index the operand index
     /// @param value the value to use
@@ -40,6 +49,9 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N>, Instruc
         }
         return;
     }
+
+    /// @returns the operands of the instruction
+    utils::VectorRef<ir::Value*> Operands() override { return operands_; }
 
   protected:
     /// Append a new operand to the operand list for this instruction.
