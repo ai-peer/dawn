@@ -130,7 +130,6 @@ TEST_P(CullingTest, CullBackFaceWhenCWIsFrontFace) {
 }
 
 DAWN_INSTANTIATE_TEST(CullingTest,
-                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),

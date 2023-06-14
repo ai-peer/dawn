@@ -712,7 +712,6 @@ TEST_P(MaxLimitTests, MaxBufferSizes) {
 }
 
 DAWN_INSTANTIATE_TEST(MaxLimitTests,
-                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),

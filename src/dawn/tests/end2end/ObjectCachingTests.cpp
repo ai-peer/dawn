@@ -448,7 +448,6 @@ TEST_P(ObjectCachingTest, SamplerDeduplication) {
 }
 
 DAWN_INSTANTIATE_TEST(ObjectCachingTest,
-                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),

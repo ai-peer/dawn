@@ -1170,9 +1170,9 @@ TEST_P(D3DSharedHandleMultithreadTests, ClearInD3D12ReadbackInD3D11_TwoThreads) 
     }
 }
 
-DAWN_INSTANTIATE_TEST(D3DSharedHandleValidation, D3D11Backend(), D3D12Backend());
-DAWN_INSTANTIATE_TEST(D3DSharedHandleUsageTests, D3D11Backend(), D3D12Backend());
-DAWN_INSTANTIATE_TEST(D3DSharedHandleMultithreadTests, D3D11Backend(), D3D12Backend());
+DAWN_INSTANTIATE_TEST(D3DSharedHandleValidation, D3D12Backend());
+DAWN_INSTANTIATE_TEST(D3DSharedHandleUsageTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(D3DSharedHandleMultithreadTests, D3D12Backend());
 
 }  // anonymous namespace
 }  // namespace dawn

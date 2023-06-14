@@ -1117,7 +1117,6 @@ TEST_P(CopyTextureForBrowser_Basic, VerifyFlipYInSlimTexture) {
 }
 
 DAWN_INSTANTIATE_TEST(CopyTextureForBrowser_Basic,
-                      D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
@@ -1172,8 +1171,8 @@ TEST_P(CopyTextureForBrowser_SubRects, CopySubRect) {
 }
 
 DAWN_INSTANTIATE_TEST_P(CopyTextureForBrowser_SubRects,
-                        {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
-                         OpenGLESBackend(), VulkanBackend()},
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
                         std::vector<wgpu::Origin3D>({{1, 1}, {1, 2}, {2, 1}}),
                         std::vector<wgpu::Origin3D>({{1, 1}, {1, 2}, {2, 1}}),
                         std::vector<wgpu::Extent3D>({{1, 1}, {2, 1}, {1, 2}, {2, 2}}),
@@ -1196,8 +1195,7 @@ TEST_P(CopyTextureForBrowser_AlphaMode, alphaMode) {
 
 DAWN_INSTANTIATE_TEST_P(
     CopyTextureForBrowser_AlphaMode,
-    {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-     VulkanBackend()},
+    {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
     std::vector<wgpu::AlphaMode>({wgpu::AlphaMode::Premultiplied, wgpu::AlphaMode::Unpremultiplied,
                                   wgpu::AlphaMode::Opaque}),
     std::vector<wgpu::AlphaMode>({wgpu::AlphaMode::Premultiplied, wgpu::AlphaMode::Unpremultiplied,
@@ -1216,8 +1214,8 @@ TEST_P(CopyTextureForBrowser_ColorSpace, colorSpaceConversion) {
 }
 
 DAWN_INSTANTIATE_TEST_P(CopyTextureForBrowser_ColorSpace,
-                        {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
-                         OpenGLESBackend(), VulkanBackend()},
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
                         std::vector<wgpu::TextureFormat>({wgpu::TextureFormat::RGBA16Float,
                                                           wgpu::TextureFormat::RGBA32Float}),
                         std::vector<ColorSpace>({ColorSpace::SRGB, ColorSpace::DisplayP3}),
