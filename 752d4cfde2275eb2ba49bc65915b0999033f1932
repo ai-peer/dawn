@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3bab126_cc634924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T09:54:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "752d4cfde2275eb2ba49bc65915b0999033f1932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb44a0d_f051f493",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T09:54:17Z",
+      "side": 1,
+      "message": "u-nit: stray whitespace.",
+      "revId": "752d4cfde2275eb2ba49bc65915b0999033f1932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

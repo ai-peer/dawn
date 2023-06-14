@@ -70,6 +70,24 @@
       "parentUuid": "882c843f_6733e92f",
       "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d17dc72c_7bc9291b",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-14T09:54:17Z",
+      "side": 0,
+      "message": "This comment comes from https://dawn-review.googlesource.com/c/dawn/+/19280\n\nIt seems that with CMake 3.12 we should be able to set a policy that lets us override `option()` calls in third_party projects. But let\u0027s do that in a separate CL. Erin are you interested in looking at this or would you like one of us to try it?\n\nLikewise for adding CONFIGURE_DEPENDS to DawnJSONGenerator.",
+      "parentUuid": "fc546851_ce06e86b",
+      "revId": "8ab22d45da518d74ba300723e2580ed8b983ef0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
