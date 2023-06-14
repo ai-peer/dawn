@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if(DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
+if(DAWN_ENABLE_WINDOWING_GLFW)
 
-add_library(dawn_glfw STATIC ${DAWN_PLACEHOLDER_FILE})
+add_library(dawn_glfw STATIC)
 common_compile_options(dawn_glfw)
 target_sources(dawn_glfw PRIVATE
     "utils.cpp"
