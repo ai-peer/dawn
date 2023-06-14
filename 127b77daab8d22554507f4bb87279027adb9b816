@@ -50,6 +50,24 @@
       "message": "Nit: this formatting looks weird. Is this intentional?",
       "revId": "127b77daab8d22554507f4bb87279027adb9b816",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08d9e0e1_dd493a12",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-14T23:46:39Z",
+      "side": 1,
+      "message": "It looks weird to me too. It\u0027s what `git cl format` did. I tried fixing it, `git cl format` puts it back to this. So I guess if you want it fixed you\u0027ll need to get someone update `git cl format`? 🤷‍♂️",
+      "parentUuid": "fb526155_adbf9143",
+      "revId": "127b77daab8d22554507f4bb87279027adb9b816",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
