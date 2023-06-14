@@ -124,6 +124,24 @@
       "parentUuid": "dcd6bf71_a8c9d29a",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d1bd39d_64442ae4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-06-14T16:29:03Z",
+      "side": 1,
+      "message": "Ah, great to hear about the python script. I haven\u0027t noticed but, that indeed helps my use case as well!",
+      "parentUuid": "21aba346_faa09515",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
