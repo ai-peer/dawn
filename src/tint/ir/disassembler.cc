@@ -341,7 +341,13 @@ void Disassembler::EmitValue(Value* val) {
         [&](ir::Instruction* i) { out_ << "%" << IdOf(i); },
         [&](ir::BlockParam* p) { out_ << "%" << IdOf(p) << ":" << p->Type()->FriendlyName(); },
         [&](ir::FunctionParam* p) { out_ << "%" << IdOf(p); },
-        [&](Default) { out_ << "Unknown value: " << val->TypeInfo().name; });
+        [&](Default) {
+            if (val == nullptr) {
+                out_ << "undef";
+            } else {
+                out_ << "Unknown value: " << val->TypeInfo().name;
+            }
+        });
 }
 
 void Disassembler::EmitInstructionName(std::string_view name, Instruction* inst) {
