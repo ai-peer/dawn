@@ -39,6 +39,30 @@
       },
       "revId": "0226b7cef6153806b4a0247d175adabfdf7a99e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee9d904e_b48328e4",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T20:40:52Z",
+      "side": 1,
+      "message": "Maybe just leave it the way it was then? It\u0027s the normal usage pattern for ConsumedError, and it\u0027ll be needed if we ever put code after it (like if we move the Destroy calls after it)",
+      "parentUuid": "63d3a0b4_8e6fc667",
+      "range": {
+        "startLine": 208,
+        "startChar": 17,
+        "endLine": 208,
+        "endChar": 30
+      },
+      "revId": "0226b7cef6153806b4a0247d175adabfdf7a99e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
