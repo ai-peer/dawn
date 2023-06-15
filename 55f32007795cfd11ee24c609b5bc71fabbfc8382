@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "424cc8f8_01514cc7",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 19
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T23:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97ea1c21_938014fc",
+      "range": {
+        "startLine": 17,
+        "startChar": 103,
+        "endLine": 17,
+        "endChar": 105
+      },
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7e4db3f_8b6a7b6b",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-15T22:08:29Z",
       "side": 1,
       "message": "Should this be `{{namespace}}`?",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b877366_8fb7b0f1",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T23:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7e4db3f_8b6a7b6b",
       "range": {
         "startLine": 32,
         "startChar": 11,
