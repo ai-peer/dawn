@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "797609aa_2475ed0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "This is a great cleanup! Bunch of comments.",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50102816_2ff354ed",
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9961add0_ee2388b5",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "I worry we might one day :/",
+      "parentUuid": "50102816_2ff354ed",
+      "range": {
+        "startLine": 6,
+        "startChar": 55,
+        "endLine": 6,
+        "endChar": 87
+      },
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747cd1fc_49b1e478",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 15
@@ -54,6 +95,210 @@
       "writtenOn": "2023-06-15T02:05:53Z",
       "side": 1,
       "message": "I should also include\n\n\u003e dawn::native::Instance::EnumerateAdapters is a Dawn native-only API that may be used to synchronously get a list of adapters according to the RequestAdapterOptions.... and then also describe how it treats the various options, like powerPreference and forceFallbackAdapter",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d225a9f6_7abef9b0",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Any reason these are defined in the header instead of dawn.json? Type safety seems nice but also sharing with upstream webgpu.h eventually would be nice.",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "203289d1_60118f48",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Maybe we could add the forward declaration in webgpu_cpp_chained_struct directly so we don\u0027t need to copy it everywhere. And maybe change it to a variable template? https://en.cppreference.com/w/cpp/language/variable_template",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994c7d13_0b26d195",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "trick! we can do return std::tie(ComputeAdapterTypeRank(a), ComputeBackendTypeRank(a)) \u003c (same for b).",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "550e0390_fe0ec4ff",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c93694_324cce73",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Why do we extract these instead of using FindInChain? It seems it would avoid the need for conditional compilation etc.",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf8b084_0ae98d4d",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "I wonder if we could just have a function that does creation from LUIDs and recreate the DXGIAdapter from it (so that we can cache requests using RequestAdapterOptionsIDXGIAdapter as well, see below)",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bff7c34_0da24dbb",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Doesn\u0027t [1] say that this should return the same adapter if multiple calls are done with the same adapter?",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09596d5_18b2b181",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Opinion about having a PhysicalDevice::Create -\u003e ResultOrError to avoid the double call to ConumedErrorAndWarnOnce?",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e2790b_cf2659d2",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Question: would it be worth making this return a span?",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d385483_67566597",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "nit: kICDCount?",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acfe21dc_39c3d0d5",
+        "filename": "src/dawn/tests/end2end/PhysicalDeviceDiscoveryTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Didn\u0027t review yet.",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b0ecff_61b3e7d9",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-15T15:48:16Z",
+      "side": 1,
+      "message": "Why was this be separated out?",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
