@@ -32,12 +32,11 @@ TEST_F(IR_LoadTest, Create) {
     auto* inst = b.Load(var);
 
     ASSERT_TRUE(inst->Is<Load>());
-    ASSERT_EQ(inst->From(), var);
+    ASSERT_EQ(inst->From(), var->Result());
+    EXPECT_EQ(inst->Result()->Type(), store_type);
 
-    EXPECT_EQ(inst->Type(), store_type);
-
-    ASSERT_TRUE(inst->From()->Is<ir::Var>());
-    EXPECT_EQ(inst->From(), var);
+    ASSERT_TRUE(inst->From()->Source()->Is<ir::Var>());
+    EXPECT_EQ(inst->From()->Source(), var);
 }
 
 TEST_F(IR_LoadTest, Usage) {
@@ -54,9 +53,8 @@ TEST_F(IR_LoadTest, Results) {
 
     EXPECT_TRUE(inst->HasResults());
     EXPECT_FALSE(inst->HasMultiResults());
-
-    auto results = inst->Results();
-    EXPECT_EQ(results[0], inst);
+    EXPECT_TRUE(inst->Result()->Is<RuntimeValue>());
+    EXPECT_EQ(inst->Result()->Source(), inst);
 }
 
 TEST_F(IR_LoadTest, Fail_NonPtr_Builder) {
