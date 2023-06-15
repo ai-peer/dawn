@@ -16,6 +16,115 @@
       "message": "Nice cleanup! Took a while to make sure it seemed right ^_^\n\nDo we have CTS tests for this already or in flight? The integration is complicated enough it would be nice to have run basic CTS tests against it before landing (but not strictly necessary)",
       "revId": "137821092f280b09bb129592acca9c899b43f251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77d3f27a_4a1a92e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-15T22:28:11Z",
+      "side": 1,
+      "message": "Sorry took a while to remind myself of how all this stuff worked again 😅",
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e451f52_c9426018",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-15T22:28:11Z",
+      "side": 1,
+      "message": "I guess this is an existing thing, but looking at this it feels like it would make sense to make `Create*PipelineAsync` return `void` instead of a `MaybeError` which then needs to be handled here by adding a callback task when we could just do that within the helper?\n\nOr maybe as a more generalized approach, right now we have `CreateUninitialized*PipelineImpl`, but not a frontend version. Looking at both the pipeline implementations, it seems like that logic, which is all just validation and then creating the object, could be factored out (into something like `CreateUninitialized*Pipeline`) and both the async and non-async versions could use it?\n\nExample:\n\n```\nResultOrError\u003cRef\u003cComputePipelineBase\u003e\u003e DeviceBase::CreateUninitializedComputePipeline() {\n    DAWN_TRY(ValidateIsAlive());\n    if (IsValidationEnabled()) {\n        DAWN_TRY(ValidateComputePipelineDescriptor(this, descriptor));\n    }\n\n    Ref\u003cPipelineLayoutBase\u003e layoutRef;\n    ComputePipelineDescriptor appliedDescriptor;\n    DAWN_TRY_ASSIGN(layoutRef, \n                    ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(\n                                   this, *descriptor, \u0026appliedDescriptor));\n\n    return CreateUninitializedComputePipelineImpl(\u0026appliedDescriptor);\n}\n\nResultOrError\u003cRef\u003cComputePipelineBase\u003e\u003e DeviceBase::CreateUninitializedComputePipeline() {\n    Ref\u003cComputePipelineBase\u003e uninitializedComputePipeline;\n    DAWN_TRY_ASSIGN(uninitializedComputePipeline,\n                    CreateUninitializedComputePipeline(descriptor));\n    \u003ccache lookup logic\u003e\n    DAWN_TRY(uninitializedComputePipeline-\u003eInitialize());\n    return\n        AddOrGetCachedComputePipeline(std::move(uninitializedComputePipeline));\n}\n\nvoid DeviceBase::CreateComputePipelineAsync() {\n    auto pipelineOrError \u003d CreateUninitializedComputePipeline();\n    \u003ccache lookup logic\u003e\n    if (pipelineOrError.IsError()) {\n        AddComputePipelineAsyncCallbackTask(\n            pipelineOrError.AcquireError(), callback, userdata);\n    }\n    \u003casync initialize logic\u003e\n}\n```\n\n(Got a bit lazy with the example towards the end but hopefully that gets the idea across?)",
+      "range": {
+        "startLine": 1149,
+        "startChar": 4,
+        "endLine": 1154,
+        "endChar": 5
+      },
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ab2623f_3b8bed65",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-15T22:28:11Z",
+      "side": 1,
+      "message": "nit. existing extra whitespace",
+      "range": {
+        "startLine": 1640,
+        "startChar": 3,
+        "endLine": 1640,
+        "endChar": 4
+      },
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e17891d2_436360fb",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-15T22:28:11Z",
+      "side": 1,
+      "message": "nit. existing typo",
+      "range": {
+        "startLine": 490,
+        "startChar": 83,
+        "endLine": 490,
+        "endChar": 88
+      },
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c69fc3_d26b1375",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-15T22:28:11Z",
+      "side": 1,
+      "message": "Outdated comment.",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 59
+      },
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
