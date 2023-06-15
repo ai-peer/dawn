@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684e5798_56f6bcc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T02:05:53Z",
+      "side": 1,
+      "message": "this is a pretty big CL. I could split it per-backend - though not sure if that would be helpful? it would require keeping the deprecated per-backend paths around instead of switching them all out at once",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50102816_2ff354ed",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T02:05:53Z",
+      "side": 1,
+      "message": "will we need instance extensions..?",
+      "range": {
+        "startLine": 6,
+        "startChar": 55,
+        "endLine": 6,
+        "endChar": 87
+      },
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747cd1fc_49b1e478",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T02:05:53Z",
+      "side": 1,
+      "message": "I should also include\n\n\u003e dawn::native::Instance::EnumerateAdapters is a Dawn native-only API that may be used to synchronously get a list of adapters according to the RequestAdapterOptions.... and then also describe how it treats the various options, like powerPreference and forceFallbackAdapter",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
