@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b993d00_8c4dccc0",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T23:14:55Z",
+      "side": 1,
+      "message": "No, but it seems better to have the cache be attached to an Instance than static. I\u0027m sure other cases like this will come up too.",
+      "parentUuid": "074de13d_b6d21107",
+      "range": {
+        "startLine": 6,
+        "startChar": 55,
+        "endLine": 6,
+        "endChar": 87
+      },
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747cd1fc_49b1e478",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 15
@@ -220,6 +244,24 @@
       "side": 1,
       "message": "Kai was thinking that some of these structs would be defined in their own headers. Especially for structs that might have OS-specific things that need OS-specific headers.\n\nlike how there\u0027s vulkan.h, vulkan_core.h, vulkan_android.h, vulkan_fuchsia.h, etc.",
       "parentUuid": "d225a9f6_7abef9b0",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f28e14e_39700dae",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T23:14:55Z",
+      "side": 1,
+      "message": "I think I\u0027d like to have webgpu.h and webgpu_dawn.h at least. Everything dawn-specific including extended enum and SType values could be defined outside webgpu.h, and potentially standardized and moved in over time.",
+      "parentUuid": "c093d623_bf0af4f0",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -377,6 +419,24 @@
       "side": 1,
       "message": "I changed this to internally have a map of LUID -\u003e physical device; is that what you meant?\n(map because std::less is already defined for integer pairs, and std::hash is not)",
       "parentUuid": "0bf8b084_0ae98d4d",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4035db96_ed4d6221",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T23:14:55Z",
+      "side": 1,
+      "message": "I thought maybe the suggestion was to have `RequestAdapterOptionsIDXGIAdapter` hold a LUID instead of an adapter?\n\nBTW LUID appears to be defined as 64-bit (despite being defined using non-fixed-size types ULONG+LONG) so you could just cram it into a (u)int64_t",
+      "parentUuid": "5c43b2bc_0da262ad",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

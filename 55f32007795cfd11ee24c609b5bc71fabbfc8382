@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c272c6c_fc0c2203",
+        "filename": "dawn.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T23:14:55Z",
+      "side": 1,
+      "message": "Maybe this can be core? webgpu.h already has an enum of all of the backend types.",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97ea1c21_938014fc",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 19
@@ -91,6 +108,57 @@
         "endLine": 32,
         "endChar": 15
       },
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951a1c42_5c7232c6",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T23:14:55Z",
+      "side": 1,
+      "message": "In principle I think this could be an array (of multiple GL implementations)",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e5a097_2df21f73",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T23:14:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure this behavior is good, for a few reasons:\n- You can\u0027t do this except by passing options\u003dnull, which means it\u0027s not possible to pass any other options while also requesting all adapters\n- (minor) an application which assumes it won\u0027t get any compat adapters will break when it starts getting compat adapters, e.g. if it switches from wgpu-native to dawn",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b242c82b_53d25d78",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T23:14:55Z",
+      "side": 1,
+      "message": "This seems unreachable?",
       "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
