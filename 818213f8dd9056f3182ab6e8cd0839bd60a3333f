@@ -33,6 +33,24 @@
       "message": "Should this part be removed now since the returns are gathered in `Process` from Usages?",
       "revId": "818213f8dd9056f3182ab6e8cd0839bd60a3333f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c33238_52a88446",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-15T21:13:11Z",
+      "side": 1,
+      "message": "Whoops, yes, done.",
+      "parentUuid": "6adb5059_d1dff985",
+      "revId": "818213f8dd9056f3182ab6e8cd0839bd60a3333f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
