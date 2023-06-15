@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f27b4a9_04e60c1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-15T12:12:13Z",
+      "side": 1,
+      "message": "The overhead is pretty minimal. My concern is from something like `Load(Value*, value*)` if we happen to flip the `AddOperand(to)` and `AddOperand(from)` I don\u0027t think we\u0027d catch that in unittesting at the moment.\n\nThose can be pretty subtle, and are easy to miss in testing. It also makes it obvious from looking at the constructor which index you care about by reading the single add operand line instead of having to count the number of `AddOperand` calls. So, makes it easier to keep these the same as the numbers used in `SetOperand`.",
+      "parentUuid": "b51a5328_ae932ae5",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 38
+      },
+      "revId": "91791f6d2e587d57957761de197330a772aa77d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "475b9abe_3f8f1726",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-06-15T11:20:31Z",
       "side": 1,
       "message": "`AddOperand` below already does the check for each index, so this one is redundant.\n\nAlternatively, we could copy the body of `AddOperand` into the loop below to avoid the overhead of checking at each index.",
+      "revId": "91791f6d2e587d57957761de197330a772aa77d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9083bf_ad8b4ef5",
+        "filename": "src/tint/ir/operand_instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-15T12:12:13Z",
+      "side": 1,
+      "message": "Removed from here, `AddOperand` should cover it.",
+      "parentUuid": "2b6197aa_6dd09c50",
       "revId": "91791f6d2e587d57957761de197330a772aa77d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
