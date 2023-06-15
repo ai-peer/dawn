@@ -92,7 +92,7 @@ class Function : public utils::Castable<Function, Value> {
         return_.builtin = builtin;
     }
     /// @returns the return builtin attribute
-    std::optional<enum ReturnBuiltin> ReturnBuiltin() { return return_.builtin; }
+    std::optional<enum ReturnBuiltin>& ReturnBuiltin() { return return_.builtin; }
 
     /// Sets the return location
     /// @param loc the location to set
@@ -101,7 +101,7 @@ class Function : public utils::Castable<Function, Value> {
         return_.location = {loc, interp};
     }
     /// @returns the return location
-    std::optional<Location> ReturnLocation() { return return_.location; }
+    std::optional<Location>& ReturnLocation() { return return_.location; }
 
     /// Sets the return as invariant
     /// @param val the invariant value to set
