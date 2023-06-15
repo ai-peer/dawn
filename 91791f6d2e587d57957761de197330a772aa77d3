@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe544d6_4eae3fd5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-15T15:24:43Z",
+      "side": 1,
+      "message": "OK. I feel like it wouldn\u0027t be too hard to add unit tests coverage to check this\ne.g. `EXPECT_EQ(access-\u003eOperands()[Access:kObjectOperandOffset], access-\u003eObject());`\n\nBut I also think what you\u0027ve done is fine to land.",
+      "parentUuid": "8f27b4a9_04e60c1f",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 38
+      },
+      "revId": "91791f6d2e587d57957761de197330a772aa77d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "475b9abe_3f8f1726",
