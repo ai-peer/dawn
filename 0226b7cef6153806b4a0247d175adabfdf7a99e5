@@ -16,6 +16,29 @@
       "message": "still LGTM",
       "revId": "0226b7cef6153806b4a0247d175adabfdf7a99e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d3a0b4_8e6fc667",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T20:06:05Z",
+      "side": 1,
+      "message": "oh, the return bool here is tagged [[nodiscard]] \n\nyou may need to DAWN_UNUSED it to make the compiler happy",
+      "range": {
+        "startLine": 208,
+        "startChar": 17,
+        "endLine": 208,
+        "endChar": 30
+      },
+      "revId": "0226b7cef6153806b4a0247d175adabfdf7a99e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
