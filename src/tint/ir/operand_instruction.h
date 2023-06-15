@@ -44,11 +44,21 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N, R>, Inst
     }
 
     /// @returns true if the instruction has result values
-    bool HasResults() { return !results_.IsEmpty(); }
+    bool HasResults() override { return !results_.IsEmpty(); }
     /// @returns true if the instruction has multiple values
-    bool HasMultiResults() { return results_.Length() > 1; }
+    bool HasMultiResults() override { return results_.Length() > 1; }
+
+    /// @returns the first result. Returns `nullptr` if there are no results, or if ther are
+    /// multi-results
+    Value* Result() override {
+        if (!HasResults() || HasMultiResults()) {
+            return nullptr;
+        }
+        return results_[0];
+    }
+
     /// @returns the result values for this instruction
-    utils::VectorRef<Value*> Results() { return results_; }
+    utils::VectorRef<Value*> Results() override { return results_; }
 
   protected:
     /// Append a new operand to the operand list for this instruction.
