@@ -63,6 +63,30 @@
       },
       "revId": "0226b7cef6153806b4a0247d175adabfdf7a99e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31928da_414622e1",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T20:46:39Z",
+      "side": 1,
+      "message": "either way is fine; sorry for the back and forth\n\nin some other places, we do it like this:\n\nDAWN_UNUSED(ConsumedError(ValidateTextureDescriptor(this, desc)));\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;l\u003d1528?q\u003dGetDevice%20ConsumedError%20DAWN_UNUSED",
+      "parentUuid": "ee9d904e_b48328e4",
+      "range": {
+        "startLine": 208,
+        "startChar": 17,
+        "endLine": 208,
+        "endChar": 30
+      },
+      "revId": "0226b7cef6153806b4a0247d175adabfdf7a99e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
