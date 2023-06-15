@@ -92,8 +92,10 @@ class GeneratorImplIr {
 
     /// Get the result ID of the type `ty`, emitting a type declaration instruction if necessary.
     /// @param ty the type to get the ID for
+    /// @param addrspace the optional address space that this type is being used for
     /// @returns the result ID of the type
-    uint32_t Type(const type::Type* ty);
+    uint32_t Type(const type::Type* ty,
+                  builtin::AddressSpace addrspace = builtin::AddressSpace::kUndefined);
 
     /// Get the result ID of the value `value`, emitting its instruction if necessary.
     /// @param value the value to get the ID for
@@ -112,8 +114,11 @@ class GeneratorImplIr {
 
     /// Emit a struct type.
     /// @param id the result ID to use
+    /// @param addrspace the optional address space that this type is being used for
     /// @param str the struct type to emit
-    void EmitStructType(uint32_t id, const type::Struct* str);
+    void EmitStructType(uint32_t id,
+                        const type::Struct* str,
+                        builtin::AddressSpace addrspace = builtin::AddressSpace::kUndefined);
 
     /// Emit a function.
     /// @param func the function to emit
