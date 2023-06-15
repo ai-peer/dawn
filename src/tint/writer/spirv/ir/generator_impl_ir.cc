@@ -42,6 +42,7 @@
 #include "src/tint/ir/transform/add_empty_entry_point.h"
 #include "src/tint/ir/transform/block_decorated_structs.h"
 #include "src/tint/ir/transform/merge_return.h"
+#include "src/tint/ir/transform/shader_io.h"
 #include "src/tint/ir/transform/var_for_dynamic_index.h"
 #include "src/tint/ir/user_call.h"
 #include "src/tint/ir/validate.h"
@@ -74,18 +75,59 @@ void Sanitize(ir::Module* module) {
     manager.Add<ir::transform::AddEmptyEntryPoint>();
     manager.Add<ir::transform::BlockDecoratedStructs>();
     manager.Add<ir::transform::MergeReturn>();
+    manager.Add<ir::transform::ShaderIO>();
     manager.Add<ir::transform::VarForDynamicIndex>();
+
+    data.Add<ir::transform::ShaderIO::Config>(
+        ir::transform::ShaderIO::Config(ir::transform::ShaderIO::Backend::kSpirv));
 
     transform::DataMap outputs;
     manager.Run(module, data, outputs);
+}
+
+SpvBuiltIn Builtin(builtin::BuiltinValue builtin) {
+    switch (builtin) {
+        case builtin::BuiltinValue::kPointSize:
+            return SpvBuiltInPointSize;
+        case builtin::BuiltinValue::kFragDepth:
+            return SpvBuiltInFragDepth;
+        case builtin::BuiltinValue::kFrontFacing:
+            return SpvBuiltInFrontFacing;
+        case builtin::BuiltinValue::kGlobalInvocationId:
+            return SpvBuiltInGlobalInvocationId;
+        case builtin::BuiltinValue::kInstanceIndex:
+            return SpvBuiltInInstanceIndex;
+        case builtin::BuiltinValue::kLocalInvocationId:
+            return SpvBuiltInLocalInvocationId;
+        case builtin::BuiltinValue::kLocalInvocationIndex:
+            return SpvBuiltInLocalInvocationIndex;
+        case builtin::BuiltinValue::kNumWorkgroups:
+            return SpvBuiltInNumWorkgroups;
+        case builtin::BuiltinValue::kPosition:
+            return SpvBuiltInPosition;
+        case builtin::BuiltinValue::kSampleIndex:
+            return SpvBuiltInSampleId;
+        case builtin::BuiltinValue::kSampleMask:
+            return SpvBuiltInSampleMask;
+        case builtin::BuiltinValue::kVertexIndex:
+            return SpvBuiltInVertexIndex;
+        case builtin::BuiltinValue::kWorkgroupId:
+            return SpvBuiltInWorkgroupId;
+        case builtin::BuiltinValue::kUndefined:
+            return SpvBuiltInMax;
+    }
 }
 
 SpvStorageClass StorageClass(builtin::AddressSpace addrspace) {
     switch (addrspace) {
         case builtin::AddressSpace::kFunction:
             return SpvStorageClassFunction;
+        case builtin::AddressSpace::kIn:
+            return SpvStorageClassInput;
         case builtin::AddressSpace::kPrivate:
             return SpvStorageClassPrivate;
+        case builtin::AddressSpace::kOut:
+            return SpvStorageClassOutput;
         case builtin::AddressSpace::kStorage:
             return SpvStorageClassStorageBuffer;
         case builtin::AddressSpace::kUniform:
@@ -289,6 +331,24 @@ void GeneratorImplIr::EmitStructType(uint32_t id, const type::Struct* str) {
             spv::Op::OpMemberDecorate,
             {operands[0], member->Index(), U32Operand(SpvDecorationOffset), member->Offset()});
 
+        // Generate shader IO decorations.
+        const auto& attrs = member->Attributes();
+        if (attrs.location) {
+            module_.PushAnnot(
+                spv::Op::OpMemberDecorate,
+                {operands[0], member->Index(), U32Operand(SpvDecorationLocation), *attrs.location});
+            // TODO: emit interpolation
+        }
+        if (attrs.builtin) {
+            module_.PushAnnot(spv::Op::OpMemberDecorate,
+                              {operands[0], member->Index(), U32Operand(SpvDecorationBuiltIn),
+                               Builtin(*attrs.builtin)});
+        }
+        if (attrs.invariant) {
+            module_.PushAnnot(spv::Op::OpMemberDecorate,
+                              {operands[0], member->Index(), U32Operand(SpvDecorationInvariant)});
+        }
+
         // Emit matrix layout decorations if necessary.
         if (auto* matrix_type = get_nested_matrix_type(member->Type())) {
             const uint32_t effective_row_count = (matrix_type->rows() == 2) ? 2 : 4;
@@ -399,8 +459,17 @@ void GeneratorImplIr::EmitEntryPoint(ir::Function* func, uint32_t id) {
     }
 
     // TODO(jrprice): Add the interface list of all referenced global variables.
-    module_.PushEntryPoint(spv::Op::OpEntryPoint,
-                           {U32Operand(stage), id, ir_->NameOf(func).Name()});
+    OperandList operands = {U32Operand(stage), id, ir_->NameOf(func).Name()};
+    if (ir_->root_block) {
+        for (auto* global : *ir_->root_block) {
+            auto* var = global->As<ir::Var>();
+            if (var && (var->Type()->AddressSpace() == builtin::AddressSpace::kIn ||
+                        var->Type()->AddressSpace() == builtin::AddressSpace::kOut)) {
+                operands.push_back(Value(var));
+            }
+        }
+    }
+    module_.PushEntryPoint(spv::Op::OpEntryPoint, operands);
 }
 
 void GeneratorImplIr::EmitRootBlock(ir::Block* root_block) {
@@ -895,6 +964,11 @@ void GeneratorImplIr::EmitVar(ir::Var* var) {
             }
             break;
         }
+        case builtin::AddressSpace::kIn: {
+            TINT_ASSERT(Writer, !current_function_);
+            module_.PushType(spv::Op::OpVariable, {ty, id, U32Operand(SpvStorageClassInput)});
+            break;
+        }
         case builtin::AddressSpace::kPrivate: {
             TINT_ASSERT(Writer, !current_function_);
             OperandList operands = {ty, id, U32Operand(SpvStorageClassPrivate)};
@@ -903,6 +977,11 @@ void GeneratorImplIr::EmitVar(ir::Var* var) {
                 operands.push_back(Value(var->Initializer()));
             }
             module_.PushType(spv::Op::OpVariable, operands);
+            break;
+        }
+        case builtin::AddressSpace::kOut: {
+            TINT_ASSERT(Writer, !current_function_);
+            module_.PushType(spv::Op::OpVariable, {ty, id, U32Operand(SpvStorageClassOutput)});
             break;
         }
         case builtin::AddressSpace::kStorage:
