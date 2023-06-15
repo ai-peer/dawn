@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a6502e0_ecc4e25d",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "for these at least, I\u0027ve been thinking if we can have request adapter say that it respects the options as best-effort. So if the impl doesn\u0027t understand your sType, it\u0027s fine and it\u0027s as-if it were never there. So at least for this one-off case we don\u0027t need instance extensions. IDK if that\u0027s a good idea long term though.",
+      "parentUuid": "9961add0_ee2388b5",
+      "range": {
+        "startLine": 6,
+        "startChar": 55,
+        "endLine": 6,
+        "endChar": 87
+      },
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747cd1fc_49b1e478",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 15
@@ -119,6 +143,24 @@
       "writtenOn": "2023-06-15T02:05:53Z",
       "side": 1,
       "message": "I should also include\n\n\u003e dawn::native::Instance::EnumerateAdapters is a Dawn native-only API that may be used to synchronously get a list of adapters according to the RequestAdapterOptions.... and then also describe how it treats the various options, like powerPreference and forceFallbackAdapter",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f490e1c_eb7ed7a1",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "747cd1fc_49b1e478",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -142,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c093d623_bf0af4f0",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "Kai was thinking that some of these structs would be defined in their own headers. Especially for structs that might have OS-specific things that need OS-specific headers.\n\nlike how there\u0027s vulkan.h, vulkan_core.h, vulkan_android.h, vulkan_fuchsia.h, etc.",
+      "parentUuid": "d225a9f6_7abef9b0",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "203289d1_60118f48",
         "filename": "include/dawn/native/OpenGLBackend.h",
         "patchSetId": 15
@@ -153,6 +213,24 @@
       "writtenOn": "2023-06-15T15:48:16Z",
       "side": 1,
       "message": "Maybe we could add the forward declaration in webgpu_cpp_chained_struct directly so we don\u0027t need to copy it everywhere. And maybe change it to a variable template? https://en.cppreference.com/w/cpp/language/variable_template",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39717c4c_53102b1b",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "Moved to new ChainUtils.h, and made it a variable template",
+      "parentUuid": "203289d1_60118f48",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -170,6 +248,24 @@
       "writtenOn": "2023-06-15T15:48:16Z",
       "side": 1,
       "message": "trick! we can do return std::tie(ComputeAdapterTypeRank(a), ComputeBackendTypeRank(a)) \u003c (same for b).",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eb4671b_2e101a6b",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "994c7d13_0b26d195",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -208,6 +304,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bc2f6af_6f9b5232",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "no idea why I did this. moved FindInChain to the backends",
+      "parentUuid": "91c93694_324cce73",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bf8b084_0ae98d4d",
@@ -221,6 +335,24 @@
       "writtenOn": "2023-06-15T15:48:16Z",
       "side": 1,
       "message": "I wonder if we could just have a function that does creation from LUIDs and recreate the DXGIAdapter from it (so that we can cache requests using RequestAdapterOptionsIDXGIAdapter as well, see below)",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c43b2bc_0da262ad",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "I changed this to internally have a map of LUID -\u003e physical device; is that what you meant?\n(map because std::less is already defined for integer pairs, and std::hash is not)",
+      "parentUuid": "0bf8b084_0ae98d4d",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -244,6 +376,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef48ab9d_bdc853ae",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "I think this should do that? because it\u0027s doing GetOrCreatePhysicalDeviceFromIDXGIAdapter so it\u0027ll return the same one.",
+      "parentUuid": "9bff7c34_0da24dbb",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b09596d5_18b2b181",
         "filename": "src/dawn/native/opengl/BackendGL.cpp",
         "patchSetId": 15
@@ -255,6 +405,24 @@
       "writtenOn": "2023-06-15T15:48:16Z",
       "side": 1,
       "message": "Opinion about having a PhysicalDevice::Create -\u003e ResultOrError to avoid the double call to ConumedErrorAndWarnOnce?",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8bbbcb9_e5fd9277",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b09596d5_18b2b181",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -278,6 +446,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93253ae1_ead3a525",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "how would it work for other backends where there may be N physical devices, and we would like to return a non-contiguous subset of them?\n\nalso, probably less possible now that d3d contains a map of LUID -\u003e physical device",
+      "parentUuid": "e7e2790b_cf2659d2",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d385483_67566597",
         "filename": "src/dawn/native/vulkan/BackendVk.h",
         "patchSetId": 15
@@ -289,6 +475,24 @@
       "writtenOn": "2023-06-15T15:48:16Z",
       "side": 1,
       "message": "nit: kICDCount?",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d305115f_eb6f8e00",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d385483_67566597",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -312,6 +516,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f156216_0b9e60e4",
+        "filename": "src/dawn/tests/end2end/PhysicalDeviceDiscoveryTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "Note: these are mostly copy-pasted and basically the same as the existing tests, but using EnumerateAdapters(newOptions) instead of DiscoverAdapters(deprecatedOptions)",
+      "parentUuid": "acfe21dc_39c3d0d5",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06b0ecff_61b3e7d9",
         "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
         "patchSetId": 15
@@ -323,6 +545,24 @@
       "writtenOn": "2023-06-15T15:48:16Z",
       "side": 1,
       "message": "Why was this be separated out?",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4915e51d_04e96354",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T22:08:35Z",
+      "side": 1,
+      "message": "it\u0027s dawn::native::Adapter instead of wgpu::Adapter, which has overloads for both the C and the c++ descriptor - so with nullptr it can\u0027t choose the right overload. I made nullptr work though by adding another overload for nullptr_t.",
+      "parentUuid": "06b0ecff_61b3e7d9",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
