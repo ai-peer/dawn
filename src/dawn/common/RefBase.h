@@ -134,6 +134,9 @@ class RefBase {
         return &mValue;
     }
 
+  protected:
+    T mValue;
+
   private:
     // Friend is needed so that instances of RefBase<U> can call Reference and Release on
     // RefBase<T>.
@@ -160,8 +163,6 @@ class RefBase {
             mValue = value;
         }
     }
-
-    T mValue;
 };
 
 }  // namespace dawn
