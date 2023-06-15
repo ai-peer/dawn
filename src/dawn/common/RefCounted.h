@@ -17,11 +17,25 @@
 
 #include <atomic>
 #include <cstdint>
+#include <mutex>
 #include <type_traits>
+#include <utility>
 
+#include "dawn/common/Assert.h"
 #include "dawn/common/RefBase.h"
 
 namespace dawn {
+namespace detail {
+class WeakRefData;
+}  // namespace detail
+
+class RefCounted;
+template <typename T>
+class Ref;
+
+class WeakRefCounted;
+template <typename T>
+class WeakRef;
 
 class RefCount {
   public:
@@ -43,9 +57,6 @@ class RefCount {
   private:
     std::atomic<uint64_t> mRefCount;
 };
-
-template <typename T>
-class Ref;
 
 class RefCounted {
   public:
@@ -78,6 +89,8 @@ class RefCounted {
     void APIRelease() { ReleaseAndLockBeforeDestroy(); }
 
   protected:
+    friend class detail::WeakRefData;
+
     virtual ~RefCounted();
 
     void ReleaseAndLockBeforeDestroy();
@@ -101,6 +114,103 @@ template <typename T>
 class Ref : public RefBase<T*, RefCountedTraits<T>> {
   public:
     using RefBase<T*, RefCountedTraits<T>>::RefBase;
+    WeakRef<T> GetWeakRef();
+};
+
+namespace detail {
+
+class WeakRefData : public RefCounted {
+  public:
+    explicit WeakRefData(RefCounted* value);
+
+    void Invalidate();
+    bool IsValid() const;
+
+    // Tries to return a valid Ref to `mValue` if it's internal refcount is not already 0. If the
+    // internal refcount has already reached 0, returns nullptr instead.
+    template <typename T>
+    friend Ref<T> TryGetRefFromData(WeakRefData* data) {
+        std::lock_guard<std::mutex> lock(data->mMutex);
+        if (!data->mIsValid || !data->mValue->mRefCount.TryIncrement()) {
+            return nullptr;
+        }
+        return AcquireRef(static_cast<T*>(data->mValue));
+    }
+
+  private:
+    std::mutex mMutex;
+    bool mIsValid = true;
+    RefCounted* mValue;
+};
+
+}  // namespace detail
+
+// Class that should be extended to enable WeakRefs for the type.
+class WeakRefCounted : public RefCounted {
+  public:
+    WeakRefCounted();
+
+    template <typename T>
+    friend WeakRef<T> GetWeakRef(T* object) {
+        return WeakRef<T>(object->mWeakRef.Get());
+    }
+
+  protected:
+    void DeleteThis() override;
+
+  private:
+    Ref<detail::WeakRefData> mWeakRef;
+};
+
+template <typename T>
+class WeakRef {
+  public:
+    WeakRef() {}
+
+    // Constructors from nullptr.
+    // NOLINTNEXTLINE(runtime/explicit)
+    constexpr WeakRef(std::nullptr_t) : WeakRef() {}
+
+    // Constructors from a RefBase<U>, where U can also equal T.
+    template <typename U, typename = typename std::is_convertible<U, T>::type>
+    WeakRef(const WeakRef<U>& other) : mWeakRef(other.mWeakRef) {}
+    template <typename U, typename = typename std::is_convertible<U, T>::type>
+    WeakRef<T>& operator=(const WeakRef<U>& other) {
+        mWeakRef = other.mWeakRef;
+        return *this;
+    }
+    template <typename U, typename = typename std::is_convertible<U, T>::type>
+    WeakRef(WeakRef<U>&& other) : mWeakRef(std::move(other.mWeakRef)) {}
+    template <typename U, typename = typename std::is_convertible<U, T>::type>
+    WeakRef<T>& operator=(WeakRef<U>&& other) {
+        if (&other != this) {
+            mWeakRef = std::move(other.mWeakRef);
+        }
+        return *this;
+    }
+
+    // Getting on a WeakRef returns a Ref, not a raw pointer because a raw pointer could become
+    // invalid after being retrieved.
+    Ref<T> Get() {
+        if (mWeakRef != nullptr) {
+            return TryGetRefFromData<T>(mWeakRef.Get());
+        }
+        return nullptr;
+    }
+
+    bool IsValid() const { return mWeakRef != nullptr && mWeakRef->IsValid(); }
+
+  private:
+    friend class WeakRefCounted;
+    // Friend is needed so that we can access the data ref in conversions.
+    template <typename U>
+    friend class WeakRef;
+
+    // Constructor from data is only allowed by the WeakRefCounted class because the "original" data
+    // is always alive at that point.
+    explicit WeakRef(detail::WeakRefData* weakRef) : mWeakRef(weakRef) {}
+
+    Ref<detail::WeakRefData> mWeakRef = nullptr;
 };
 
 template <typename T>
@@ -108,6 +218,15 @@ Ref<T> AcquireRef(T* pointee) {
     Ref<T> ref;
     ref.Acquire(pointee);
     return ref;
+}
+
+template <typename T>
+WeakRef<T> Ref<T>::GetWeakRef() {
+    if constexpr (std::is_convertible<T*, WeakRefCounted*>::value) {
+        return GetWeakRef<T>(this->mValue);
+    } else {
+        UNREACHABLE();
+    }
 }
 
 }  // namespace dawn

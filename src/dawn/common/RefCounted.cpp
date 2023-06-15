@@ -144,4 +144,27 @@ void RefCounted::LockAndDeleteThis() {
     DeleteThis();
 }
 
+namespace detail {
+
+WeakRefData::WeakRefData(RefCounted* value) : mValue(value) {}
+
+void WeakRefData::Invalidate() {
+    std::lock_guard<std::mutex> lock(mMutex);
+    mIsValid = false;
+    mValue = nullptr;
+}
+
+bool WeakRefData::IsValid() const {
+    return mIsValid;
+}
+
+}  // namespace detail
+
+WeakRefCounted::WeakRefCounted() : mWeakRef(AcquireRef(new detail::WeakRefData(this))) {}
+
+void WeakRefCounted::DeleteThis() {
+    mWeakRef->Invalidate();
+    RefCounted::DeleteThis();
+}
+
 }  // namespace dawn
