@@ -22,6 +22,9 @@
 #include "dawn/common/RefBase.h"
 
 namespace dawn {
+namespace detail {
+class WeakRefData;
+}  // namespace detail
 
 class RefCount {
   public:
@@ -78,6 +81,8 @@ class RefCounted {
     void APIRelease() { ReleaseAndLockBeforeDestroy(); }
 
   protected:
+    friend class detail::WeakRefData;
+
     virtual ~RefCounted();
 
     void ReleaseAndLockBeforeDestroy();
@@ -101,6 +106,11 @@ template <typename T>
 class Ref : public RefBase<T*, RefCountedTraits<T>> {
   public:
     using RefBase<T*, RefCountedTraits<T>>::RefBase;
+
+    template <typename = typename std::is_convertible<T, WeakRefCounted*>>
+    WeakRef<std::remove_pointer_t<T>> GetWeakRef() {
+        return GetWeakRef(mValue);
+    }
 };
 
 template <typename T>
