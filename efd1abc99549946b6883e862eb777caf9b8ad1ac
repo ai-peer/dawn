@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6e73082_4cb935e5",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-15T23:12:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5216d74c_ebc67a1a",
+      "revId": "efd1abc99549946b6883e862eb777caf9b8ad1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cdb601f_188dc76b",
