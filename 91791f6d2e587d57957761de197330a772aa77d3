@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b51a5328_ae932ae5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-15T11:20:31Z",
+      "side": 1,
+      "message": "Since `AddOperand{s}` is private and only used in the constructors, can\u0027t we just rely on unit tests this to make sure stuff gets added in the right place, instead of incurring this overhead every time an instruction is constructed?\n\nThe counter to that is that maybe we\u0027ll want `AddOperand` to be public in the future for variable length arg instructions, e.g. to add a new argument to a call instruction.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 38
+      },
+      "revId": "91791f6d2e587d57957761de197330a772aa77d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "475b9abe_3f8f1726",
@@ -14,6 +37,23 @@
       "writtenOn": "2023-06-15T02:58:22Z",
       "side": 1,
       "message": "PTAL.",
+      "revId": "91791f6d2e587d57957761de197330a772aa77d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6197aa_6dd09c50",
+        "filename": "src/tint/ir/operand_instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-15T11:20:31Z",
+      "side": 1,
+      "message": "`AddOperand` below already does the check for each index, so this one is redundant.\n\nAlternatively, we could copy the body of `AddOperand` into the loop below to avoid the overhead of checking at each index.",
       "revId": "91791f6d2e587d57957761de197330a772aa77d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
