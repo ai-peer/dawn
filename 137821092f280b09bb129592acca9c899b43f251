@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0775d927_61d78167",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T21:50:59Z",
+      "side": 1,
+      "message": "Nice cleanup! Took a while to make sure it seemed right ^_^\n\nDo we have CTS tests for this already or in flight? The integration is complicated enough it would be nice to have run basic CTS tests against it before landing (but not strictly necessary)",
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
