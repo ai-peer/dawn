@@ -68,6 +68,24 @@
       "parentUuid": "fb526155_adbf9143",
       "revId": "127b77daab8d22554507f4bb87279027adb9b816",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cf1106a_224f1e65",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-15T02:15:31Z",
+      "side": 1,
+      "message": "not sure :-/\n\nmaybe it\u0027s the `if (type var \u003d expr) {` syntax that it doesn\u0027t like? you could try swapping to a std::visit pattern to see if that makes it happier. It would also let us static_assert that all possible types of the variant are handled.",
+      "parentUuid": "08d9e0e1_dd493a12",
+      "revId": "127b77daab8d22554507f4bb87279027adb9b816",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
