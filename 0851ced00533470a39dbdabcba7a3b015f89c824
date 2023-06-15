@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7ceda18_521df3b8",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-15T22:08:29Z",
+      "side": 1,
+      "message": "I had been considering if we could get rid of the instance (if I remove ProcessEvents), though it sounds like that isn\u0027t possible because it needs to hold PhysicalDevices.",
+      "parentUuid": "9961add0_ee2388b5",
+      "range": {
+        "startLine": 6,
+        "startChar": 55,
+        "endLine": 6,
+        "endChar": 87
+      },
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747cd1fc_49b1e478",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 15
