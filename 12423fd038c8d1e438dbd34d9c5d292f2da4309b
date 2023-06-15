@@ -797,6 +797,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3245702_23372a29",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-15T22:16:09Z",
+      "side": 1,
+      "message": "Including the chained struct in each attachment\u0027s struct is what vulkan extension does anw. But for initial implementation, I think it\u0027s simpler to support global implicit sample count for all color attachments.\n\nYou are right that right now, only one color attachment is supported, so whether it\u0027s global or included in individual attachment doesn\u0027t matter. But I think in future, if we ever support multiple attachments, it\u0027s also simpler to support global implicit sample count instead of allowing mixing implicit \u0026 explicit.\n\nIf you think that it is beneficial if we ever support general use cases of mixing implicit \u0026 explicit sample counts. I can do a change to include the chained struct in the individual attachment instead.\n\nwdyt?",
+      "parentUuid": "f8d762f8_356ecda6",
+      "range": {
+        "startLine": 176,
+        "startChar": 13,
+        "endLine": 176,
+        "endChar": 50
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de06ede3_85178b4c",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -1285,6 +1309,30 @@
       "side": 1,
       "message": "That\u0027s a great point - we should add a validation test case specifically for this situation so we don\u0027t regress correctness in the future.\n\nSo, if we need to make a special type of TextureBinding, then we can do it similar to `wgpu::BufferBindingType kInternalStorageBufferBinding`. This is a binding type that\u0027s in the bind group layout layout. This way, here when you switch on `bindingInfo.bindingType`, you can handle `case (BindingInfoType) kInternalTextureBindingLoadFromResolve` and do `TextureViewUsedAs(view, kInternalTextureUsageLoadFromResolve)`\n\nYou\u0027ll also to gate the internal texture binding usage so it can only be used in the internal version of CreateBindGroupLayout(... /* allowInternalBinding\u003d*/true)\n\nwdyt?",
       "parentUuid": "09f28208_9d4e1a79",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 66
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0dc4167_9c140031",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-15T22:16:09Z",
+      "side": 1,
+      "message": "Done. This is a bit tricky. Because when creating BindGroupLayout, there is no way to specify a custom binding type for the texture, the only customizable one is texture\u0027s sampleType or viewDimension.\n\nSo I added a special enum value kInternalResolveAttachmentSampleType, this will be compatible with shader\u0027s floating point sample type. PTAL.",
+      "parentUuid": "d9edf732_949c5785",
       "range": {
         "startLine": 119,
         "startChar": 0,

@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16533131_db214b9c",
+        "filename": "docs/dawn/features/msaa_render_to_single_samples.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-15T22:16:09Z",
+      "side": 1,
+      "message": "But for vulkan, it is different. We don\u0027t use `TextureBinding` usage, instead a special enum value is required when creating the texture if the underlying backend\u0027s implementation uses VK MSAA render to single sampled extension. See VK_IMAGE_CREATE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT.\n\nUnless we are OK with that special vk flag always being included in every texture\u0027s creation. So it\u0027s ok for client to not explicitly specify anything. Shahbaz already said that the vk flag should be cheap though.\n\nIn the design doc, I originally planned to add a chained struct to TextureDescriptor to specify that this texture would be used in a MSAA render to single sampled render pass. However, I realized an extended usage flag would be simpler.",
+      "parentUuid": "e0b10a8c_ad624187",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 199
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59e3c37c_7f0849f8",
         "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
         "patchSetId": 7
@@ -60,6 +84,30 @@
       "writtenOn": "2023-06-14T05:43:37Z",
       "side": 1,
       "message": "these are the defaults; shouldn\u0027t be necessary to specify",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 54
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2af07a41_8deca502",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-15T22:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "807cc676_e5a327b1",
       "range": {
         "startLine": 100,
         "startChar": 4,
@@ -110,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8578a147_b7b192ef",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-15T22:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df8a0721_e792e4d0",
+      "range": {
+        "startLine": 300,
+        "startChar": 25,
+        "endLine": 300,
+        "endChar": 31
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db1f10fc_2551d9e0",
@@ -133,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00bfc9f6_86afd046",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-15T22:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db1f10fc_2551d9e0",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 497,
+        "endChar": 81
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "391d9e88_acabb485",
@@ -146,6 +242,24 @@
       "writtenOn": "2023-06-14T05:43:37Z",
       "side": 1,
       "message": "for tests like this, it\u0027s nice to have two cases: one that works with the correct usage, and one that does not with the incorrect usage. That way you can see in a single contained test that the validation rule is correct.\n\nditto for other tests",
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55718d5e_b4d4a21c",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-15T22:16:09Z",
+      "side": 1,
+      "message": "Done. I just feel like the correct cases are already handled in the end2end tests. Seems redundant to handle here.",
+      "parentUuid": "391d9e88_acabb485",
       "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
