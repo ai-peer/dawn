@@ -787,6 +787,8 @@ if(${TINT_BUILD_IR})
     ir/operand_instruction.h
     ir/return.cc
     ir/return.h
+    ir/runtime_value.cc
+    ir/runtime_value.h
     ir/store.cc
     ir/store.h
     ir/switch.cc
