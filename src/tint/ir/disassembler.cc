@@ -38,6 +38,7 @@
 #include "src/tint/ir/multi_in_block.h"
 #include "src/tint/ir/next_iteration.h"
 #include "src/tint/ir/return.h"
+#include "src/tint/ir/runtime_value.h"
 #include "src/tint/ir/store.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
@@ -285,11 +286,13 @@ void Disassembler::EmitFunction(Function* func) {
     EmitLine();
 }
 
+void Disassembler::EmitValueWithType(Instruction* val) {
+    EmitValueWithType(val->Result());
+}
+
 void Disassembler::EmitValueWithType(Value* val) {
     EmitValue(val);
-    if (auto* i = val->As<ir::Instruction>(); i->Type() != nullptr) {
-        out_ << ":" << i->Type()->FriendlyName();
-    }
+    out_ << ":" << val->Type()->FriendlyName();
 }
 
 void Disassembler::EmitValue(Value* val) {
@@ -338,7 +341,7 @@ void Disassembler::EmitValue(Value* val) {
             };
             emit(constant->Value());
         },
-        [&](ir::Instruction* i) { out_ << "%" << IdOf(i); },
+        [&](ir::RuntimeValue* rv) { out_ << "%" << IdOf(rv); },
         [&](ir::BlockParam* p) { out_ << "%" << IdOf(p) << ":" << p->Type()->FriendlyName(); },
         [&](ir::FunctionParam* p) { out_ << "%" << IdOf(p); },
         [&](Default) { out_ << "Unknown value: " << val->TypeInfo().name; });

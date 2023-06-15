@@ -21,7 +21,9 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::RuntimeValue);
 
 namespace tint::ir {
 
-RuntimeValue::RuntimeValue(const type::Type* type) : type_(type) {}
+RuntimeValue::RuntimeValue(const type::Type* type) : type_(type) {
+    TINT_ASSERT(IR, type_ != nullptr);
+}
 
 RuntimeValue::~RuntimeValue() = default;
 
