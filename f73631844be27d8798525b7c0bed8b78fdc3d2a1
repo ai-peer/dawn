@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bbcd5b0_944180c0",
+        "filename": "dawn.json",
+        "patchSetId": 23
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-16T21:04:35Z",
+      "side": 1,
+      "message": "This will require the user to pack the LUID into uint64_t themselves. Probably best to take the LUID in the canonical ULONG+LONG form here?",
+      "revId": "f73631844be27d8798525b7c0bed8b78fdc3d2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "240af98b_c6ac8e06",
+        "filename": "src/dawn/native/d3d/BackendD3D.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-16T21:04:35Z",
+      "side": 1,
+      "message": "I think this shadows Windows\u0027s typedef of LUID. Not sure if this is a problem?",
+      "revId": "f73631844be27d8798525b7c0bed8b78fdc3d2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
