@@ -52,6 +52,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa660d0_b4e003be",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-16T11:16:24Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8468b53_ae17e678",
@@ -101,6 +124,24 @@
       "side": 1,
       "message": "Can\u0027t we suppress just on nvidia?",
       "parentUuid": "1fc64bdb_1917f177",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ec202a_a25476cc",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-16T11:16:24Z",
+      "side": 1,
+      "message": "This is what [1] aims to do. Unfortunately it fails trybots, although PS3 can pass.",
+      "parentUuid": "ba5d956f_6d7ff71f",
       "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
