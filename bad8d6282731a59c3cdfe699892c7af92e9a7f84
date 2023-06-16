@@ -192,6 +192,24 @@
       "message": "What tells use that the",
       "revId": "bad8d6282731a59c3cdfe699892c7af92e9a7f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f94a52f_78a12a43",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Unfinished comment?",
+      "parentUuid": "408533f6_c4643ef2",
+      "revId": "bad8d6282731a59c3cdfe699892c7af92e9a7f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

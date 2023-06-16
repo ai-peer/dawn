@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ed7b88_d203d4bb",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Nope, good catch! Probably a remnant when I initially tried to add a `FindOrCreate` to this, ultimately deciding to do that specifically on the `Device` side instead.",
+      "parentUuid": "28ca1574_2a732d93",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "244362a3_7d28727c",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-06-14T13:38:19Z",
       "side": 1,
       "message": "nit: Maybe we should erase that entry if TryGetRef fails.",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "396dbfc9_3e5a089b",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Hmm, if `TryGetRef` fails, the object should be removing itself from the cache. Although it probably wouldn\u0027t hurt too much to we remove it here, it **could** potentially hide a bug if we are forgetting to remove cached objects when their refcounts go to zero. Also intuitively a `Find` operation feels like it should be `const` operation w.r.t to the cache, so removing an element in it is probably doing too much for the semantics.",
+      "parentUuid": "244362a3_7d28727c",
       "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d58fc00_b47c746b",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Done. Basically just took Quyen\u0027s comment and put it into the code :D",
+      "parentUuid": "d6b38026_b805678d",
+      "range": {
+        "startLine": 67,
+        "startChar": 55,
+        "endLine": 67,
+        "endChar": 75
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c839ef69_5d190531",
@@ -77,6 +143,24 @@
       "writtenOn": "2023-06-14T13:38:19Z",
       "side": 1,
       "message": "optional nit: This assert could potentially be in ContentLessObjectCache\u0027s destructor.\n\nTurns out that\u0027s already the case so this can be removed!",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba925b3_460aaa64",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c839ef69_5d190531",
       "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +182,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29600c87_c9ede8ec",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Agreed! Ideally that class would be the one responsible for removing objects from the cache also so that we don\u0027t leak invalidated WeakRefs.",
+      "parentUuid": "0143746e_87146587",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbd8ef93_1ac2bde2",
@@ -111,6 +213,30 @@
       "writtenOn": "2023-06-14T06:04:32Z",
       "side": 1,
       "message": "Device.h is included everywhere so we should try to keep it smaller if possible.\n\n\nYou *might* be able to only declare something like this in the header:\n\n```\ntemplate \u003ctypename RefCountedT, typename BlueprintT, typename CreateFn\u003e\ndecltype(std::declval\u003cCreateFn\u003e()())\nGetOrCreate(ContentLessObjectCache\u003cRefCountedT, BlueprintT\u003e\u0026 cache,\n            BlueprintT* blueprint,\n            CreateFn createFn);\n```\n\nand then define it in the cpp\n\n```\ntemplate \u003ctypename RefCountedT, typename BlueprintT, typename CreateFn\u003e\ndecltype(std::declval\u003cCreateFn\u003e()())\nDeviceBase::GetOrCreate(ContentLessObjectCache\u003cRefCountedT, BlueprintT\u003e\u0026 cache,\n                        BlueprintT* blueprint,\n                        CreateFn createFn) {\n   ...\n}\n```\n\nAlso, I think this function can be private, not public",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 235,
+        "endChar": 40
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d26750b8_01484277",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Good point about it being private! I actually decided to just move it entirely into `Device.cpp` and make it a free template function there (which essentially accomplishes both goals). As a compromise though, I needed to make `CachedObject::SetIsCachedReference` public. I feel like that is reasonable for now. I am hoping that with the `WeakRef` changes, that I am going to be able to revamp the `CachedObject` class a bit more as a whole anyways!",
+      "parentUuid": "dbd8ef93_1ac2bde2",
       "range": {
         "startLine": 232,
         "startChar": 4,
@@ -144,6 +270,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a74cbbf_69c054aa",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58730bf3_257f60bc",
+      "range": {
+        "startLine": 265,
+        "startChar": 8,
+        "endLine": 265,
+        "endChar": 40
+      },
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96d1bbd7_48a74d64",
@@ -157,6 +307,24 @@
       "writtenOn": "2023-06-14T06:04:32Z",
       "side": 1,
       "message": "also, insert+insert\n\nand insert+find\n\nMay not need locking - like for insert+insert you can have N threads all create different objects with the same hash and insert them.\n\nThen you should be able to observe they all got the same result after the Insert - the same one that succeeded the Insert",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c528b27c_afa37bea",
+        "filename": "src/dawn/tests/unittests/ContentLessObjectCacheTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-16T00:02:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96d1bbd7_48a74d64",
       "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
