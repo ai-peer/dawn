@@ -83,6 +83,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f70a008_dd6934e3",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:45:29Z",
+      "side": 1,
+      "message": "Whoops you\u0027re right that the object will remove the WeakRef so all is good!",
+      "parentUuid": "396dbfc9_3e5a089b",
+      "revId": "4bcfbd033ffaec09e7ec568d6ff2a7b85ac40779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6b38026_b805678d",
