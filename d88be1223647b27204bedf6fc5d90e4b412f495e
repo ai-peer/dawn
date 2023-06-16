@@ -16,6 +16,46 @@
       "message": "The failures are not related to this CL but caused by test framework.\n\nPTAL, thanks!",
       "revId": "d88be1223647b27204bedf6fc5d90e4b412f495e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a09acf7f_4f2c6696",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:13:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d88be1223647b27204bedf6fc5d90e4b412f495e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c04868_567860fe",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:13:31Z",
+      "side": 1,
+      "message": "```suggestion\n    // Override the decision if it is not applicable or robustImageAccess2 is false.\n```",
+      "range": {
+        "startLine": 556,
+        "startChar": 38,
+        "endLine": 556,
+        "endChar": 40
+      },
+      "revId": "d88be1223647b27204bedf6fc5d90e4b412f495e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
