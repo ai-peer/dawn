@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "875c7590_7576abdf",
+        "filename": "dawn.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T20:22:02Z",
+      "side": 1,
+      "message": "second thought - I do think it should be an extension struct, otherwise to avoid porting hazards, we have to make backendType best effort when applications probably want it to be a hard requirement if they\u0027re using it.",
+      "parentUuid": "9dbae865_5aa21f83",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97ea1c21_938014fc",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 19
