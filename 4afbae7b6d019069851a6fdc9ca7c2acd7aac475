@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2b9cee_d9620917",
+        "filename": "docs/dawn/features/msaa_render_to_single_samples.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-16T21:42:10Z",
+      "side": 1,
+      "message": "Done. Removed the extra usage flag. Instead we will require that if a texture is intended to be used in an implicit MSAA render pass, then it must have TextureBinding usage (generally used by most backends, only vulkan doesn\u0027t use it but will always have the special creation flag VK_IMAGE_CREATE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT if available).",
+      "parentUuid": "c34f4855_28992787",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 199
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59e3c37c_7f0849f8",
