@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6fc4fd3_be74466b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-16T18:33:49Z",
+      "side": 1,
+      "message": "+2, but now I\u0027m a contributor, so removing my vote",
+      "revId": "cc16ba5fd2adbc284d0648c95dae88a8e9c887e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
