@@ -371,6 +371,24 @@
       "parentUuid": "215b1d91_d345c999",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b84fac3_9713ff7d",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-16T16:31:07Z",
+      "side": 1,
+      "message": "Oops... Sorry if I get it wrong and that is quiet a long time ago, but I thought we agreed to allow device override the adapter toggles if they are not forced, especially the \"DisallowUnsafeAPIs\" toggles.\n\nPlease refer to our original conversion https://dawn-review.googlesource.com/c/dawn/+/122021/comment/745e3c2f_40a8cacc/\n, and the conversion between me and Austin https://dawn-review.googlesource.com/c/dawn/+/123960/comment/59a4a6b4_c5df45dd/.\n\nAnyway, we can change this behavior if we decide to do so.",
+      "parentUuid": "d4e528da_650c2435",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

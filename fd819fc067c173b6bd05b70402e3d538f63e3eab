@@ -39,6 +39,30 @@
       },
       "revId": "fd819fc067c173b6bd05b70402e3d538f63e3eab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3530d6d0_9d85eb73",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-16T16:31:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e4559b0_2ed535aa",
+      "range": {
+        "startLine": 97,
+        "startChar": 87,
+        "endLine": 97,
+        "endChar": 89
+      },
+      "revId": "fd819fc067c173b6bd05b70402e3d538f63e3eab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
