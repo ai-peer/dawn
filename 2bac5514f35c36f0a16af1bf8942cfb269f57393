@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60f89bed_63f0f440",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T11:13:38Z",
+      "side": 1,
+      "message": "nit: DAWN_SUPPRESS_IF, UNSUPPORTED is meant to tag something expected.",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8468b53_ae17e678",
         "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 5
