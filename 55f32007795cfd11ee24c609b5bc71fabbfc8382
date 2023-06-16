@@ -183,6 +183,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00b0a8d_2f4756ee",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-16T17:20:29Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "2b92bf19_f7cc56ec",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20e5a097_2df21f73",
