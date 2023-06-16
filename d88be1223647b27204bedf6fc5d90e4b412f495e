@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6136aa70_fb87b101",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-16T04:44:12Z",
+      "side": 1,
+      "message": "The failures are not related to this CL but caused by test framework.\n\nPTAL, thanks!",
+      "revId": "d88be1223647b27204bedf6fc5d90e4b412f495e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
