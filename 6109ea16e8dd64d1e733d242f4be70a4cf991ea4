@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "6109ea16e8dd64d1e733d242f4be70a4cf991ea4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bcd2a10_2a05d224",
+        "filename": "src/tint/ir/operand_instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-16T12:18:09Z",
+      "side": 1,
+      "message": "Not default - it\u0027s the minimum number of operands before we spill to heap allocations.",
+      "range": {
+        "startLine": 23,
+        "startChar": 18,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "6109ea16e8dd64d1e733d242f4be70a4cf991ea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
