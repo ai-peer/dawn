@@ -50,6 +50,42 @@
       "message": "Bikeshedding: Maybe `s/RuntimeValue/InstructionResult/` ?",
       "revId": "859161669fdbc40561509c6683e688efa6d0b621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4969d4b4_d1cff55d",
+        "filename": "src/tint/ir/runtime_value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-16T00:22:52Z",
+      "side": 1,
+      "message": "That\u0027s possible, but it means we have to cast in order to call `Source`, or we make it virtual on Value.",
+      "parentUuid": "f66560eb_7d4a7b74",
+      "revId": "859161669fdbc40561509c6683e688efa6d0b621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3f019a3_3a75ea0f",
+        "filename": "src/tint/ir/runtime_value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-16T00:22:52Z",
+      "side": 1,
+      "message": "We could change to that if desired. This was originally called `Temp` but then got bike shedded to `Runtime` before the instruction/value merge.",
+      "parentUuid": "a292984c_e00b5556",
+      "revId": "859161669fdbc40561509c6683e688efa6d0b621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
