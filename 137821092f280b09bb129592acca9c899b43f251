@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32f10ead_337dfaf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-16T17:19:44Z",
+      "side": 1,
+      "message": "Yeah, I think that seems right.",
+      "parentUuid": "2ebd96f7_bc54da2a",
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e451f52_c9426018",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 6
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "Great idea! done",
       "parentUuid": "3e451f52_c9426018",
+      "range": {
+        "startLine": 1149,
+        "startChar": 4,
+        "endLine": 1154,
+        "endChar": 5
+      },
+      "revId": "137821092f280b09bb129592acca9c899b43f251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf9b331_f75304dc",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-16T17:19:44Z",
+      "side": 1,
+      "message": "I had a vague feeling this could be improved too but didn\u0027t know how to do it since it was unfamiliar. Good cleanup, thanks Loko!",
+      "parentUuid": "1777f9c5_ac5f4bda",
       "range": {
         "startLine": 1149,
         "startChar": 4,
