@@ -50,6 +50,24 @@
       "message": "Why was D3D11 removed from this test and the one below?",
       "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fc64bdb_1917f177",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-16T11:11:26Z",
+      "side": 1,
+      "message": "Otherwise trybots would fail on NV. I bisected to this test.",
+      "parentUuid": "e8468b53_ae17e678",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
