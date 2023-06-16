@@ -167,6 +167,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b92bf19_f7cc56ec",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T17:13:15Z",
+      "side": 1,
+      "message": "also, the app could call it multiple times with different getProc if they really want multiple impls\n\nsame for the DXGI adapter one. I thought about making it multiple, but it seems equivalent and simpler to push that burden on the caller since it doesn\u0027t seem particularly common",
+      "parentUuid": "759fa39a_505831f8",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20e5a097_2df21f73",
         "filename": "src/dawn/native/Instance.cpp",
         "patchSetId": 19
