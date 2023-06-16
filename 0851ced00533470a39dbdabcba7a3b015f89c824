@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4695096f_14788190",
+        "filename": "docs/dawn/features/adapter_options.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T20:20:10Z",
+      "side": 1,
+      "message": "well we can have a lazy refcounted static which holds onto the instance so it\u0027s magically there behind your back - it\u0027s probably possible",
+      "parentUuid": "8b993d00_8c4dccc0",
+      "range": {
+        "startLine": 6,
+        "startChar": 55,
+        "endLine": 6,
+        "endChar": 87
+      },
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747cd1fc_49b1e478",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 15
@@ -491,6 +515,24 @@
       "side": 1,
       "message": "Either way for the RequestAdapterOptionsIDXGIAdapter TBH. +1 to using uint64_t if we can.",
       "parentUuid": "4035db96_ed4d6221",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc2bbec_9c16827d",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T20:20:10Z",
+      "side": 1,
+      "message": "ah, made it hold a LUID - I forgot I could do whatever since I\u0027m adding a new extension struct. I was making it match the old ones exactly",
+      "parentUuid": "3fb70a17_3354dffd",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9dbae865_5aa21f83",
+        "filename": "dawn.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T20:20:10Z",
+      "side": 1,
+      "message": "core meaning inside the main \"request adapter options\" ? if so, we need a BackendType::Undefined meaning you don\u0027t care.\n\nor core meaning just in upstream webgpu.h header? probably yes - and Emscripten can implement it by giving you no adapters unless you ask for \"WebGPU\" ? a little wonky but probably fine\n\nregardless, would be nice to get this refactor in first and then see about upstreaming",
+      "parentUuid": "3c272c6c_fc0c2203",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97ea1c21_938014fc",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 19
@@ -218,6 +236,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff5cb7e_e308b222",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T20:20:10Z",
+      "side": 1,
+      "message": "good points. I made this return only core adapters then",
+      "parentUuid": "20e5a097_2df21f73",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b242c82b_53d25d78",
@@ -231,6 +267,24 @@
       "writtenOn": "2023-06-15T23:14:55Z",
       "side": 1,
       "message": "This seems unreachable?",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27218786_501a0dda",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T20:20:10Z",
+      "side": 1,
+      "message": "changed to ASSERT",
+      "parentUuid": "b242c82b_53d25d78",
       "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
