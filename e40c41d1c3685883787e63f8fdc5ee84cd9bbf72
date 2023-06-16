@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ac0cc9_e3c469d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-16T07:09:13Z",
+      "side": 1,
+      "message": "The bot failures are not related to this CL.\n\nPTAL, thanks!",
+      "revId": "e40c41d1c3685883787e63f8fdc5ee84cd9bbf72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
