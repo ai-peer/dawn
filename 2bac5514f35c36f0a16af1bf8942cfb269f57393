@@ -33,6 +33,23 @@
       "message": "BTW, PS3 and PS5 are functionally same, but PS3 can pass, while PS5 fails. Both the pass and fail can be stably reproduced on the trybots. PS3 simply removes `D3D11Backend()`, and PS5 skips the test using `DAWN_TEST_UNSUPPORTED_IF(IsD3D11() \u0026\u0026 IsNvidia());`. It\u0027s really wired.",
       "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8468b53_ae17e678",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:46:30Z",
+      "side": 1,
+      "message": "Why was D3D11 removed from this test and the one below?",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
