@@ -37,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1197d9dd_2768a64b",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T14:59:18Z",
+      "side": 1,
+      "message": "nit: ASSERT() (here and in other places) but also we could just add an ASSERT in commandContext-\u003eGetD3D11DeviceContext1() and other similar getters imho instead of all the asserts in this CL.",
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d5d8a2f_93775e45",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T14:59:18Z",
+      "side": 1,
+      "message": "Why is this one needed?",
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "408588b4_6befa122",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 4
