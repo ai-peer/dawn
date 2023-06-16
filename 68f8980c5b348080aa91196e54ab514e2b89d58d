@@ -94,6 +94,30 @@
       },
       "revId": "68f8980c5b348080aa91196e54ab514e2b89d58d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30780258_9a232312",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-16T21:19:19Z",
+      "side": 1,
+      "message": "Good catch, though!",
+      "parentUuid": "44869920_51edd395",
+      "range": {
+        "startLine": 369,
+        "startChar": 25,
+        "endLine": 369,
+        "endChar": 48
+      },
+      "revId": "68f8980c5b348080aa91196e54ab514e2b89d58d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
