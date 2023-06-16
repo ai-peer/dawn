@@ -1,0 +1,377 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c7c92d_ea91b8ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d60145ca_a8b690e0",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "since `join_v` is the only one use directly, perhaps name it ConcatStringViews, then name `join` as ConcatStringViewsImpl or something like that",
+      "range": {
+        "startLine": 61,
+        "startChar": 22,
+        "endLine": 61,
+        "endChar": 28
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba1cfb48_242ac72c",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "```suggestion\n// Load the texel value and write to storage buffer.\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 12,
+        "endLine": 116,
+        "endChar": 17
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2795dca3_fe71f46b",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "`packTexelCount` texels ?",
+      "range": {
+        "startLine": 117,
+        "startChar": 42,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "659d78b1_549e525d",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "should this be less than?\n\n```suggestion\n    if (coord0.x + 4u \u003c srcBoundary.x) {\n```",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 36
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360c07c1_c31a6a90",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "```suggestion\n        // Otherwise, srcExtent.x is not a multiple of 4 and this thread is at right edge of the texture\n```",
+      "range": {
+        "startLine": 149,
+        "startChar": 43,
+        "endLine": 149,
+        "endChar": 51
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c4e80e_e31ac467",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "```suggestion\nconstexpr std::string_view kPackR8SnormToU32 \u003d R\"(\n```\n?",
+      "range": {
+        "startLine": 165,
+        "startChar": 34,
+        "endLine": 165,
+        "endChar": 35
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c402aa3_40146f6f",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "should this be less than?\n\n```suggestion\n    if (coord0.x + 4u \u003c srcBoundary.x) {\n```",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 36
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7fdb547_57205375",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "```suggestion\n        // Otherwise, srcExtent.x is not a multiple of 4 and this thread is at right edge of the texture\n```",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 51
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43145ea9_c727de9c",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "the constexpr concat here is amazing and makes reading this code great",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 61
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce44acd_2cf52e88",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "? \n\nwhat does this comment refer to?\n\nIs it suggesting that we could use the same shader for these two formats (I think we can)?\n\nmaybe here we should comment that the depth aspect is not copyable, so we know that it is always stencil. We should check the aspect to be sure though",
+      "range": {
+        "startLine": 339,
+        "startChar": 56,
+        "endLine": 339,
+        "endChar": 81
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76326b3f_7abbd2df",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "unit: unnecessary newline",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d15aea33_ab86cb83",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "nit: combine these ifs, and dedent",
+      "range": {
+        "startLine": 1362,
+        "startChar": 12,
+        "endLine": 1363,
+        "endChar": 91
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f64aa188_f2d25c83",
+        "filename": "src/dawn/native/InternalPipelineStore.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "this is clever, but I\u0027m a little worried we\u0027ll add some internal formats that start at 0xF.... or something, and the hash will break\n\ninstead, how about we pack the format and the bool into a uint64_t, then hash that?\nOr, just start passing the dimension here directly anyway since we\u0027ll need it for 1D as well.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 87
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1abdf974_c4cfac29",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "DisableSnormRead appears to be unused except to produce this UNREACHABLE.\n\nremove it now?",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 79
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897632b7_0cfa8460",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "ANGLE is where we enable it though; does it work on other backends?",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0530ddb5_7e03b87c",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "you could add the backends in duplicate with `FooBackend({\"use_blit_for_snorm_texture_to_buffer_copy\"})` to test further the correctness of the blit path on other backends as well",
+      "range": {
+        "startLine": 1406,
+        "startChar": 22,
+        "endLine": 1407,
+        "endChar": 61
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

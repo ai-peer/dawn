@@ -16,6 +16,24 @@
       "message": "Seems that we don\u0027t have test coverage for copying 1D texture yet.\nIs it valid to create e2D texture array view from 1D texture? If not, to support 1D texture copy, we need to add a set of shaders for 1D as well (and tests... so could be another CL).",
       "revId": "54948b877d75c4954e6fd835278e70a0a1d956e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30435622_fd39772b",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T00:26:39Z",
+      "side": 1,
+      "message": "No, I\u0027m fairly sure that\u0027s not valid. \n\nCan definitely be another CL.\n\nBetter to throw a validation error here instead of an ASSERT for now",
+      "parentUuid": "58a738d3_60add746",
+      "revId": "54948b877d75c4954e6fd835278e70a0a1d956e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
