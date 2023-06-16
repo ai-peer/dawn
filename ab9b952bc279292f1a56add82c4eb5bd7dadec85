@@ -201,6 +201,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d1b0b6_f2be6772",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-16T08:46:23Z",
+      "side": 1,
+      "message": "Rename this to `InstanceBase::CreateAdapter`, similar to `AdapterBase::CreateDevice`.",
+      "parentUuid": "6c27637e_380a858b",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 223,
+        "endChar": 0
+      },
+      "revId": "ab9b952bc279292f1a56add82c4eb5bd7dadec85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "704220a6_07e28b20",

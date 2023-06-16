@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cd99a85_a7b01198",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-16T08:46:23Z",
+      "side": 1,
+      "message": "Currently we have `ResultOrError\u003cRef\u003cDeviceBase\u003e\u003e AdapterBase::CreateDevice(*togglesDesc)`, which do the device toggles inheritance and set up. I thought we can just have a similar `Ref\u003cAdapterBase\u003e InstanceBase::CreateAdapter`?",
+      "parentUuid": "be8bf29c_b8fe05ce",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08941104_8e8d6178",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
@@ -102,6 +120,24 @@
       "writtenOn": "2023-06-13T12:40:44Z",
       "side": 1,
       "message": "[1] We could query the features only once on initialization and cache them on the AdapterBase. This would allow moving the implementation of APIHasFeature and APIEnumerateFeatures to the adapter.",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dcf50f5_f2c759c7",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-16T08:46:23Z",
+      "side": 1,
+      "message": "Done. Cache the features supported with adapter toggles into the AdapterBase and move the implementation of APIHasFeature and APIEnumerateFeatures to the adapter.",
+      "parentUuid": "08941104_8e8d6178",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -119,6 +155,24 @@
       "writtenOn": "2023-06-13T12:40:44Z",
       "side": 1,
       "message": "With [1] we don\u0027t really need to have this validation anymore, and ValidateFeatureSupportedWithToggles becomes \"IsFeatureSupported\" or maybe even we only need PhysicalDevice::GetSupportedFeatures(Toggles) -\u003e FeatureSet",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f8fcc7c_5d829431",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-16T08:46:23Z",
+      "side": 1,
+      "message": "We need this validation when creating devices for generating informative error message.\nBy the way, we can not use the cached adapter supported features set to do this validation not only because the error message, but also we agree that device toggles can override adapter toggles, which may allow device use some features that are not supported by adapter toggles. For example, we can create a device with \"AllowUnsafeAPIs\" toggle and requiring experimental features, from a \"safe\" adapter that disable \"AllowUnsafeAPIs\" toggle and not support experimental features.",
+      "parentUuid": "d4234299_3d70cba0",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -279,6 +333,24 @@
       "side": 1,
       "message": "Wee can change the check in adapter to be:\n\n```\nfor (requestedFeatures : ...) {\n  if (!supportedFeatures[requestedFeatures]) {\n    // The list of features has been created with ValidateFeatureSupportedWithToggles\n    // so we call it to get the error messages and expect it to return an error.\n    return ValidateFeatureSupportedWithToggles(...);\n    \n    // Or alternatively if we want to assert\n    DAWN_TRY(ValidateFeatureSupportedWithToggles);\n    \n    UNREACHABLE()\n  }\n\n}\n```",
       "parentUuid": "c53f1ffa_33ca51b5",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "215b1d91_d345c999",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-16T08:46:23Z",
+      "side": 1,
+      "message": "As we want to allow devices toggles override adapter toggles, a device may allow requiring features that not supported by the adapter, so we can not use the adapter-cached features set to do this validation.",
+      "parentUuid": "5f7ca031_fba824c2",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
