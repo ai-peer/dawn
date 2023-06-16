@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c34f4855_28992787",
+        "filename": "docs/dawn/features/msaa_render_to_single_samples.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "\u003e TL;DR, yes always put the usage flag and make sure the extension is not exposed on non-tilers.\n\nSounds like we should always add it if the vulkan ext is available. \n\nAs for potentially not exposing the extension at all, we can consider it. will graphite have a fallback path that is just as efficient as Dawn performing the load itself?",
+      "parentUuid": "16533131_db214b9c",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 199
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59e3c37c_7f0849f8",
         "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
         "patchSetId": 7
@@ -61,6 +85,30 @@
       "writtenOn": "2023-06-14T05:43:37Z",
       "side": 1,
       "message": "typo \n```suggestion\n    wgpu::TextureFormat depthStencilFormat,\n```",
+      "range": {
+        "startLine": 55,
+        "startChar": 24,
+        "endLine": 55,
+        "endChar": 42
+      },
+      "revId": "4afbae7b6d019069851a6fdc9ca7c2acd7aac475",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21bbddf_90442b93",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59e3c37c_7f0849f8",
       "range": {
         "startLine": 55,
         "startChar": 24,

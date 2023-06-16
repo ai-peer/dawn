@@ -821,6 +821,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3097456b_a7ab798f",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "I think it makes sense to do it on the individual attachment - since it has similar complexity to the current implementation, but lets us provide more flexibility if its needed in the future.",
+      "parentUuid": "b3245702_23372a29",
+      "range": {
+        "startLine": 176,
+        "startChar": 13,
+        "endLine": 176,
+        "endChar": 50
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de06ede3_85178b4c",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -1333,6 +1357,30 @@
       "side": 1,
       "message": "Done. This is a bit tricky. Because when creating BindGroupLayout, there is no way to specify a custom binding type for the texture, the only customizable one is texture\u0027s sampleType or viewDimension.\n\nSo I added a special enum value kInternalResolveAttachmentSampleType, this will be compatible with shader\u0027s floating point sample type. PTAL.",
       "parentUuid": "d9edf732_949c5785",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 66
+      },
+      "revId": "12423fd038c8d1e438dbd34d9c5d292f2da4309b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "429cdd95_08be182e",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "looks good!",
+      "parentUuid": "c0dc4167_9c140031",
       "range": {
         "startLine": 119,
         "startChar": 0,

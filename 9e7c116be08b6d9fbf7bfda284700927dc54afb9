@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca4c8f9_13d4b5f5",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "do you need both?\n\nI would think something like:\n```\nwgpu::TextureSampleType sampleType \u003d bindingInfo.texture.sampleType;\nif (sampleType \u003d\u003d kInternalResolveAttachmentSampleType) {\n  sampleType \u003d wgpu::TextureSampleType::UnfilterableFloat;\n}\nSampleTypeBit requiredType \u003d SampleTypeToSampleTypeBit(sampleType);\n```\n\nthis way it always matches UnfilterableFloat sample type.\n\nI think Unfilterable is OK since you\u0027re only using textureLoad in the shader",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 88
+      },
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50927d26_67542ab8",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "here, and for `kInternalStorageBufferBinding`\n\nI wonder if a better way to write this would be:\n\n```suggestion\n        // The kInternalResolveAttachmentSampleType is used internally and not a value\n        // in wgpu::TextureSampleType.\n        switch (texture.sampleType) {\n          case kInternalResolveAttachmentSampleType:\n            break;\n          default:\n            DAWN_TRY(ValidateTextureSampleType(texture.sampleType));\n        }\n```\n\nIf the user happens to pass 0xFFFFFFFF directly, they\u0027ll get the message about internal sample types which may be surprising to them since they have no idea what that is. This way, we get the normal validation message that 0xFFFFFFFF is not a valid sample type.\n\nAlso, we should be able to have a unittest that specifically this BindGroupLayout creation path hits the validation error if you just do device.CreateBindGroupLayout with 0xFFFFFFFF using the normal API.",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ececafd8_18187d16",
+        "filename": "src/dawn/native/CachedMultisampleAttachment.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "unit: whitespace after the namespace",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5943429_901f9a98",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "nit: comment about why we permit this",
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb84b752_1f72e7d5",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "ditto re `Float | UnfilterableFloat`\n\nyou should be able to write validation tests of the binding type depending which one it is:\n\nif it is Float, then you can make a pipeline that uses a shader that does both textureLoad and textureSample\n\nif it is UnfilterableFloat, then you can make a pipeline that uses a shader that does textureLoad, but textureSample is invalid.\n\nSee dawn/tests/white_box/InternalStorageBufferBindingTests.cpp for an example of how you can use the internal sample type in CreateBindGroupLayout",
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f300f41d_c210db60",
+        "filename": "src/dawn/native/webgpu_absl_format.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "we could grab the device from the attachment state and then check device-\u003eHasFeature(Feature::MSAARenderToSingleSampled)) before including this part of the string.\n\nI\u0027m worried now that WebGPU developers will start seeing msaaRenderToSingleSampled in message, and have no way to know what it is and how to configure it.",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 0
+      },
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66949533_2018966a",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "clarify that this is testing that drawn contents are preserved through a Load+Store to the implicit sample count attachment.",
+      "range": {
+        "startLine": 1234,
+        "startChar": 0,
+        "endLine": 1234,
+        "endChar": 19
+      },
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f71d150_4f7953a2",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "perhaps the first pass should NOT use implicit sample count. That way we\u0027re sure the single sampled results are used and it\u0027s not persisted MSAA samples that are resolved in the second render pass.",
+      "range": {
+        "startLine": 1252,
+        "startChar": 0,
+        "endLine": 1252,
+        "endChar": 53
+      },
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a06ee5_42596c6c",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T18:09:54Z",
+      "side": 1,
+      "message": "ditto: don\u0027t use implicit sample count for the clear?",
+      "range": {
+        "startLine": 1299,
+        "startChar": 0,
+        "endLine": 1299,
+        "endChar": 44
+      },
+      "revId": "9e7c116be08b6d9fbf7bfda284700927dc54afb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
