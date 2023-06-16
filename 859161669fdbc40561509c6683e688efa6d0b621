@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "859161669fdbc40561509c6683e688efa6d0b621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f66560eb_7d4a7b74",
+        "filename": "src/tint/ir/runtime_value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-16T00:00:03Z",
+      "side": 1,
+      "message": "Should `Value::{SetSource,Source}` move into this class now? Presumably only `RuntimeValue` objects have a source instruction?",
+      "revId": "859161669fdbc40561509c6683e688efa6d0b621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a292984c_e00b5556",
+        "filename": "src/tint/ir/runtime_value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-16T00:00:03Z",
+      "side": 1,
+      "message": "Bikeshedding: Maybe `s/RuntimeValue/InstructionResult/` ?",
+      "revId": "859161669fdbc40561509c6683e688efa6d0b621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
