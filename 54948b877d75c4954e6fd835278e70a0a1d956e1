@@ -34,6 +34,24 @@
       "parentUuid": "58a738d3_60add746",
       "revId": "54948b877d75c4954e6fd835278e70a0a1d956e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df259b7_f16271a5",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30435622_fd39772b",
+      "revId": "54948b877d75c4954e6fd835278e70a0a1d956e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cbb2047_6d723c5c",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d60145ca_a8b690e0",
+      "range": {
+        "startLine": 61,
+        "startChar": 22,
+        "endLine": 61,
+        "endChar": 28
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbdc6c47_e1c2d0ee",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1162746d_54e69b4a",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbdc6c47_e1c2d0ee",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba1cfb48_242ac72c",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "```suggestion\n// Load the texel value and write to storage buffer.\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 12,
+        "endLine": 116,
+        "endChar": 17
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "122a31f1_63f2aa06",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1cfb48_242ac72c",
       "range": {
         "startLine": 116,
         "startChar": 12,
@@ -104,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce963159_0e50989e",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2795dca3_fe71f46b",
+      "range": {
+        "startLine": 117,
+        "startChar": 42,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "659d78b1_549e525d",
@@ -117,6 +207,30 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "should this be less than?\n\n```suggestion\n    if (coord0.x + 4u \u003c srcBoundary.x) {\n```",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 36
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f3d35d1_129b9bf7",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "coord0, 1, 2, 3 \u003c srcBoundary.x\ncoord4 is like coord0 + len, so it is \"\u003c\u003d\"\n\nBut yeah we don\u0027t need to access coord4 afterwards, so `if (coord0.x + 4u \u003c\u003d srcBoundary.x)` is better",
+      "parentUuid": "659d78b1_549e525d",
       "range": {
         "startLine": 141,
         "startChar": 0,
@@ -150,6 +264,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3589ad_fb2b3c22",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "360c07c1_c31a6a90",
+      "range": {
+        "startLine": 149,
+        "startChar": 43,
+        "endLine": 149,
+        "endChar": 51
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08c4e80e_e31ac467",
@@ -163,6 +301,30 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "```suggestion\nconstexpr std::string_view kPackR8SnormToU32 \u003d R\"(\n```\n?",
+      "range": {
+        "startLine": 165,
+        "startChar": 34,
+        "endLine": 165,
+        "endChar": 35
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c526a02b_f772c6a0",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08c4e80e_e31ac467",
       "range": {
         "startLine": 165,
         "startChar": 34,
@@ -196,6 +358,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f0e3bc6_78d60222",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Ditto",
+      "parentUuid": "7c402aa3_40146f6f",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 36
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7fdb547_57205375",
@@ -209,6 +395,30 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "```suggestion\n        // Otherwise, srcExtent.x is not a multiple of 4 and this thread is at right edge of the texture\n```",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 51
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d9159a_e041d9e5",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7fdb547_57205375",
       "range": {
         "startLine": 182,
         "startChar": 43,
@@ -289,6 +499,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08205962_8df9f4d8",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "497ce854_18681729",
+      "range": {
+        "startLine": 339,
+        "startChar": 56,
+        "endLine": 339,
+        "endChar": 81
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76326b3f_7abbd2df",
@@ -306,6 +540,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06d63b34_e9b4fee2",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76326b3f_7abbd2df",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d15aea33_ab86cb83",
@@ -319,6 +571,30 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "nit: combine these ifs, and dedent",
+      "range": {
+        "startLine": 1362,
+        "startChar": 12,
+        "endLine": 1363,
+        "endChar": 91
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f06eaac_c1abe93a",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d15aea33_ab86cb83",
       "range": {
         "startLine": 1362,
         "startChar": 12,
@@ -376,6 +652,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fd881e6_e70fc2b7",
+        "filename": "src/dawn/native/InternalPipelineStore.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e1aa751_42e723d1",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 87
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1abdf974_c4cfac29",
@@ -389,6 +689,30 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "DisableSnormRead appears to be unused except to produce this UNREACHABLE.\n\nremove it now?",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 79
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60346095_16ff1103",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/opengl/PhysicalDeviceGL.cpp;l\u003d229?q\u003dphysicaldeviceGL.cpp\u0026ss\u003dchromium\n\n```\nbool supportsSnormRead \u003d\n        gl.IsAtLeastGL(4, 4) || gl.IsGLExtensionSupported(\"GL_EXT_render_snorm\");\n```\n\ndirect glReadPixels copy seems to be available on some opengl device. Instead of removing \"disable_snorm_read\", looks like we need to set \"use_blit_for_snorm_texture_to_buffer_copy\" based on supportsSnormRead state.\n\n`deviceToggles-\u003eDefault(Toggle::UseBlitForSnormTextureToBufferCopy, gl.GetVersion().IsES() || !supportsSnormRead);`\n\nAnd then remove dawn tests skipping on \"disable_snorm_read\" (because snorm t2b copy is now available with the blit path)",
+      "parentUuid": "1abdf974_c4cfac29",
       "range": {
         "startLine": 586,
         "startChar": 0,
@@ -434,6 +758,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53bdf00_619e81fe",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "It works on my local linux opengles backend. Only angle + swiftshader is failing. refine the suppression",
+      "parentUuid": "4c0c8fe7_8e9e0589",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0530ddb5_7e03b87c",
@@ -447,6 +789,30 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "you could add the backends in duplicate with `FooBackend({\"use_blit_for_snorm_texture_to_buffer_copy\"})` to test further the correctness of the blit path on other backends as well",
+      "range": {
+        "startLine": 1406,
+        "startChar": 22,
+        "endLine": 1407,
+        "endChar": 61
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e7540b_6417d391",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0530ddb5_7e03b87c",
       "range": {
         "startLine": 1406,
         "startChar": 22,
