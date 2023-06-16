@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c89f46f_f7905629",
+        "filename": "dawn.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-16T20:50:05Z",
+      "side": 1,
+      "message": "Core meaning both, and yes to all of the things you said about it.\n\nI don\u0027t think it\u0027s that much of a porting hazard to make it a hard requirement. If you\u0027re trying to write portable code and you ask for d3d12, you\u0027ll immediately know you\u0027ve done something non-portable.",
+      "parentUuid": "875c7590_7576abdf",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97ea1c21_938014fc",
         "filename": "docs/dawn/features/adapter_options.md",
         "patchSetId": 19
