@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10361d65_40922af5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-16T12:18:42Z",
+      "side": 1,
+      "message": "Guys, I was hoping to bounce some ideas off from you for the error of [dawn_end2end_wire_tests on Intel GPU on Windows](https://chromium-swarm.appspot.com/task?id\u003d62dbf23edd592710):\n\n```\n[8512:10252:ERROR:test_launcher.cc(1254)] Failed to get out-of-band test success data, dumping full stdio below:\n```\n\nMultithreadTests don\u0027t run with use_wire. See [1]. So this CL shouldn\u0027t impact it. It looks likely that all test cases ran as expected, but `test_runner` had problem parsing the output of the test child process. Hopefully you could have some other findings I am missing.",
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408588b4_6befa122",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-16T12:18:42Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 45
+      },
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
