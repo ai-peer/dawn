@@ -16,6 +16,23 @@
       "message": "Guys, I need your help to understand the failed bots log.\n\nI first found these \"no test result\" errors:\n```\nStill waiting for the following processes to finish:\n\t\".\\dawn_end2end_tests.exe\" --cfi-diag\u003d0 --exclusive-device-type-preference\u003ddiscrete,integrated --gtest_flagfile\u003d\"C:\\b\\s\\w\\it93daq5xk\\scoped_dir3176_472628318\\8b228221-bfab-46b7-a36d-c265e12bb9de.tmp\" --single-process-tests --test-launcher-bot-mode --test-launcher-output\u003d\"C:\\b\\s\\w\\it93daq5xk\\scoped_dir3176_472628318\\3176_2138497129\\test_results.xml\" --test-launcher-retries-left\u003d0 --test-launcher-retry-limit\u003d0 --test-launcher-summary-output\u003d\"C:\\b\\s\\w\\iobdxaqjll\\output.json\" --use-gpu-in-tests\n[3176:10184:ERROR:test_launcher.cc(1293)] no test result for TextureZeroInitTest.CopyMultipleTextureArrayLayersToBufferSource/D3D12_NVIDIA_GeForce_GTX_1660_e_nonzero_clear_resources_on_creation_for_testing_d_use_d3d12_render_pass\n[3176:10184:ERROR:test_launcher.cc(1293)] no test result for TextureZeroInitTest.CopyMultipleTextureArrayLayersToBufferSource/OpenGLES_ANGLE_NVIDIA_NVIDIA_GeForce_GTX_1660_Direct3D11_vs_5_0_ps_5_0_D3D11_27_21_14_5638_e_nonzero_clear_resources_on_creation_for_testing_compat\n[3176:10184:ERROR:test_launcher.cc(1293)] no test result for TextureZeroInitTest.CopyMultipleTextureArrayLayersToBufferSource/Vulkan_GeForce_GTX_1660_e_nonzero_clear_resources_on_creation_for_testing\n```\n\nHowever the \"test result\" can in fact be found in the same log below:\n```\n[14763/15382] TextureZeroInitTest.CopyTextureToBufferSource/OpenGLES_ANGLE_NVIDIA_NVIDIA_GeForce_GTX_1660_Direct3D11_vs_5_0_ps_5_0_D3D11_27_21_14_5638_e_nonzero_clear_resources_on_creation_for_testing_compat (2 ms)\n[14764/15382] TextureZeroInitTest.CopyTextureToBufferSource/Vulkan_GeForce_GTX_1660_e_nonzero_clear_resources_on_creation_for_testing (51 ms)\n[14765/15382] TextureZeroInitTest.CopyMultipleTextureArrayLayersToBufferSource/D3D12_NVIDIA_GeForce_GTX_1660_e_nonzero_clear_resources_on_creation_for_testing (24 ms)\n[ RUN      ] TextureZeroInitTest.CopyMultipleTextureArrayLayersToBufferSource/D3D12_NVIDIA_GeForce_GTX_1660_e_nonzero_clear_resources_on_creation_for_testing_d_use_d3d12_render_pass\n[       OK ] TextureZeroInitTest.CopyMultipleTextureArrayLayersToBufferSource/D3D12_NVIDIA_GeForce_GTX_1660_e_nonzero_clear_resources_on_creation_for_testing_d_use_d3d12_render_pass (22 ms)\n[14766/15382] TextureZeroInitTest.CopyMultipleTextureArrayLayersToBufferSource/D3D12_NVIDIA_GeForce_GTX_1660_e_nonzero_clear_resources_on_creation_for_testing_d_use_d3d12_render_pass (SKIPPED)\n```\n\nDoes that mean the case runs longer than expected?\n\nRefer to this [log](https://chromium-swarm.appspot.com/task?id\u003d62db5aaf0ba21510\u0026w\u003dtrue).",
       "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aebe8691_668585c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-16T07:59:24Z",
+      "side": 1,
+      "message": "BTW, PS3 and PS5 are functionally same, but PS3 can pass, while PS5 fails. Both the pass and fail can be stably reproduced on the trybots. PS3 simply removes `D3D11Backend()`, and PS5 skips the test using `DAWN_TEST_UNSUPPORTED_IF(IsD3D11() \u0026\u0026 IsNvidia());`. It\u0027s really wired.",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
