@@ -43,6 +43,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbdc6c47_e1c2d0ee",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T17:48:10Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba1cfb48_242ac72c",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 12
@@ -250,6 +267,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "497ce854_18681729",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T17:48:10Z",
+      "side": 1,
+      "message": "Ah. I put this here to remind me to check if format is converted based on aspect to be depth-only or stencil-only, and forget to remove.\n\nYour suggestion sounds good",
+      "parentUuid": "bce44acd_2cf52e88",
+      "range": {
+        "startLine": 339,
+        "startChar": 56,
+        "endLine": 339,
+        "endChar": 81
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76326b3f_7abbd2df",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 12
@@ -371,6 +412,24 @@
       "writtenOn": "2023-06-16T00:26:39Z",
       "side": 1,
       "message": "ANGLE is where we enable it though; does it work on other backends?",
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c0c8fe7_8e9e0589",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-16T17:48:10Z",
+      "side": 1,
+      "message": "Turns out this can be removed now after I fixed something else.",
+      "parentUuid": "897632b7_0cfa8460",
       "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
