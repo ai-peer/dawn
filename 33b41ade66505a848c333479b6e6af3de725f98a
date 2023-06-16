@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "33b41ade66505a848c333479b6e6af3de725f98a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac7256e_fa70f911",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-16T20:30:48Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "33b41ade66505a848c333479b6e6af3de725f98a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
