@@ -353,6 +353,24 @@
       "parentUuid": "5f7ca031_fba824c2",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e528da_650c2435",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:53:40Z",
+      "side": 1,
+      "message": "Sorry you want to have device be able to override adapter level toggles? This seems wrong because the adapter toggles could change how the adapter is initialized so a device overriding them would be incorrect. Am I missing something?",
+      "parentUuid": "215b1d91_d345c999",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
