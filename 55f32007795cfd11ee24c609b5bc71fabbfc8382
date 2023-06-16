@@ -131,6 +131,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "759fa39a_505831f8",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:42:56Z",
+      "side": 1,
+      "message": "Can\u0027t we discover a single GL driver at the moment though?",
+      "parentUuid": "951a1c42_5c7232c6",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20e5a097_2df21f73",
         "filename": "src/dawn/native/Instance.cpp",
         "patchSetId": 19

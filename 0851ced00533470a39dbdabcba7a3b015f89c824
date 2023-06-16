@@ -266,6 +266,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee508aa9_82502f95",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:42:56Z",
+      "side": 1,
+      "message": "MMMh ok, that would be a big change to our generators but maybe doable.",
+      "parentUuid": "8f28e14e_39700dae",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "203289d1_60118f48",
@@ -349,6 +367,24 @@
       "writtenOn": "2023-06-15T15:48:16Z",
       "side": 1,
       "message": "[1]",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb21247_4da0c775",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "550e0390_fe0ec4ff",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -443,6 +479,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fb70a17_3354dffd",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:42:56Z",
+      "side": 1,
+      "message": "Either way for the RequestAdapterOptionsIDXGIAdapter TBH. +1 to using uint64_t if we can.",
+      "parentUuid": "4035db96_ed4d6221",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bff7c34_0da24dbb",
         "filename": "src/dawn/native/d3d/BackendD3D.cpp",
         "patchSetId": 15
@@ -472,6 +526,24 @@
       "side": 1,
       "message": "I think this should do that? because it\u0027s doing GetOrCreatePhysicalDeviceFromIDXGIAdapter so it\u0027ll return the same one.",
       "parentUuid": "9bff7c34_0da24dbb",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99b79a3a_953e7609",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:42:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ef48ab9d_bdc853ae",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -546,6 +618,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33722711_126958e3",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:42:56Z",
+      "side": 1,
+      "message": "Ah nevermind I forgot to discard this comment, sorry about that!",
+      "parentUuid": "93253ae1_ead3a525",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d385483_67566597",
@@ -612,6 +702,24 @@
       "side": 1,
       "message": "Note: these are mostly copy-pasted and basically the same as the existing tests, but using EnumerateAdapters(newOptions) instead of DiscoverAdapters(deprecatedOptions)",
       "parentUuid": "acfe21dc_39c3d0d5",
+      "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3819948_64f6d725",
+        "filename": "src/dawn/tests/end2end/PhysicalDeviceDiscoveryTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T10:42:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2f156216_0b9e60e4",
       "revId": "0851ced00533470a39dbdabcba7a3b015f89c824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
