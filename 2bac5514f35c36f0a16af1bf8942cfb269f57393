@@ -180,6 +180,24 @@
       "parentUuid": "ba5d956f_6d7ff71f",
       "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb3056c_02a2638c",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-16T14:36:55Z",
+      "side": 1,
+      "message": "It should work as in the test should be suppressed and not even started. There must be some other issue. We really want to keep testing on D3D11 and just suppress on Nvidia.",
+      "parentUuid": "47ec202a_a25476cc",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
