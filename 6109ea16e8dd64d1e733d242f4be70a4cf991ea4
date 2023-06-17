@@ -39,6 +39,30 @@
       },
       "revId": "6109ea16e8dd64d1e733d242f4be70a4cf991ea4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ab5f76_5173f64a",
+        "filename": "src/tint/ir/operand_instruction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-17T14:56:51Z",
+      "side": 1,
+      "message": "done in followup.",
+      "parentUuid": "7bcd2a10_2a05d224",
+      "range": {
+        "startLine": 23,
+        "startChar": 18,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "6109ea16e8dd64d1e733d242f4be70a4cf991ea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
