@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b52424_e7dda265",
+        "filename": "src/tint/ir/instruction_result.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-17T16:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d15426_d40aed58",
+      "revId": "ae1b4ae756ff5fd40a7eb1d3b20b72148ac6e947",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "009d3e46_3f2f6a5e",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-17T15:40:51Z",
       "side": 1,
       "message": "ubernit: `s/Runtime value/An instruction result/`",
+      "revId": "ae1b4ae756ff5fd40a7eb1d3b20b72148ac6e947",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ef9af9_eba71349",
+        "filename": "src/tint/ir/instruction_result.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-17T16:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "009d3e46_3f2f6a5e",
       "revId": "ae1b4ae756ff5fd40a7eb1d3b20b72148ac6e947",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
