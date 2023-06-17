@@ -158,6 +158,24 @@
       "parentUuid": "1f3d86ac_0a509fef",
       "revId": "859161669fdbc40561509c6683e688efa6d0b621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c249bc_bf815731",
+        "filename": "src/tint/ir/runtime_value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-17T17:08:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d94587e_f852161e",
+      "revId": "859161669fdbc40561509c6683e688efa6d0b621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
