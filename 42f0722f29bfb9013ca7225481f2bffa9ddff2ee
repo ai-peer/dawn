@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fb119d3_af100cc9",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 65
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-19T21:46:13Z",
+      "side": 1,
+      "message": "This seems off. Consider something like:\n```\nloop {\n  if (cond) {\n    return;\n  }\n  continue;\n}\n```\nBecause the `continue` instruction immediately following the `if{return}` is a branch, it\u0027s not wrapped in a conditional and then you continue around the loop instead of exiting.\n\ne.g. it becomes something like:\n```\nloop {\n  if (cond) {\n    continue_execution \u003d false;\n    exit_if;\n  }\n  continue;\n}\n```",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 21
+      },
+      "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc5a62f2_b85aad80",
         "filename": "src/tint/ir/transform/merge_return.cc",
         "patchSetId": 65
