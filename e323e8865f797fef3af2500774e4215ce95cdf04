@@ -425,6 +425,24 @@
       "parentUuid": "e4807ce7_6d7c828b",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf88710_b416141f",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-19T08:11:19Z",
+      "side": 1,
+      "message": "Maybe in future we can mark toggles as overridable/non-overridable? But that would add more complexity...\n\nA related unit test that adapter can override instance\u0027s toggles (especially the `AllowUnsafeAPIs`) already implemented in [2]. I am now adding the toggles override test for devices.",
+      "parentUuid": "a7755804_1a79cfc9",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
