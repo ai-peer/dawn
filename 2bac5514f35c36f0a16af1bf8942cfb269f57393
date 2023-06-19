@@ -216,6 +216,24 @@
       "parentUuid": "deb3056c_02a2638c",
       "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b520e662_df629fb5",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-19T07:43:56Z",
+      "side": 1,
+      "message": "Ok that\u0027s really weird. Can you file an issue for this and CC aleino@nvidia.com? It seems like it could be some state going wrong in the driver based on ???",
+      "parentUuid": "51e839b7_8e831158",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
