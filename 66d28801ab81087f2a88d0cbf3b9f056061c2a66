@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38947918_0167a730",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-19T07:09:24Z",
+      "side": 1,
+      "message": "Great, that would be simpler and clearer. I unnecessarily worried about the lock scope.",
+      "parentUuid": "1197d9dd_2768a64b",
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d5d8a2f_93775e45",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 4
@@ -101,6 +119,24 @@
       "writtenOn": "2023-06-16T14:59:18Z",
       "side": 1,
       "message": "Why is this one needed?",
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b33ba0_d6f3fc0d",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-19T07:09:24Z",
+      "side": 1,
+      "message": "Otherwise we could run into the ASSERT we are adding.\n\n```\n\u003e\tdawn_end2end_tests.exe!dawn::BreakPoint() Line 31\tC++\n \tdawn_end2end_tests.exe!dawn::HandleAssertionFailure(const char * file, const char * function, int line, const char * condition) Line 69\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::CommandRecordingContext::GetD3D11DeviceContext1() Line 95\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Buffer::WriteInternal(dawn::native::d3d11::CommandRecordingContext * commandContext, unsigned __int64 offset, const void * data, unsigned __int64 size) Line 494\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Buffer::ClearInternal(dawn::native::d3d11::CommandRecordingContext * commandContext, unsigned char clearValue, unsigned __int64 offset, unsigned __int64 size) Line 453\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Buffer::Initialize(bool mappedAtCreation) Line 211\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Buffer::Create(dawn::native::d3d11::Device * device, const dawn::native::BufferDescriptor * descriptor) Line 140\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Device::CreateBufferImpl(const dawn::native::BufferDescriptor * descriptor) Line 237\tC++\n \tdawn_end2end_tests.exe!dawn::native::DeviceBase::CreateBuffer(const dawn::native::BufferDescriptor * descriptor) Line 1566\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::CommandRecordingContext::Intialize(dawn::native::d3d11::Device * device) Line 64\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Device::Initialize(const dawn::native::DeviceDescriptor * descriptor) Line 125\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::Device::Create(dawn::native::AdapterBase * adapter, const dawn::native::DeviceDescriptor * descriptor, const dawn::native::TogglesState \u0026 deviceToggles) Line 100\tC++\n \tdawn_end2end_tests.exe!dawn::native::d3d11::PhysicalDevice::CreateDeviceImpl(dawn::native::AdapterBase * adapter, const dawn::native::DeviceDescriptor * descriptor, const dawn::native::TogglesState \u0026 deviceToggles) Line 236\tC++\n \tdawn_end2end_tests.exe!dawn::native::PhysicalDeviceBase::CreateDevice(dawn::native::AdapterBase * adapter, const dawn::native::DeviceDescriptor * descriptor, const dawn::native::TogglesState \u0026 deviceToggles) Line 65\tC++\n \tdawn_end2end_tests.exe!dawn::native::AdapterBase::CreateDevice(const dawn::native::DeviceDescriptor * descriptor) Line 163\tC++\n \tdawn_end2end_tests.exe!dawn::native::AdapterBase::APICreateDevice(const dawn::native::DeviceDescriptor * descriptor) Line 115\tC++\n \tdawn_end2end_tests.exe!dawn::native::Adapter::CreateDevice(const WGPUDeviceDescriptor * deviceDescriptor) Line 112\tC++\n \tdawn_end2end_tests.exe!dawn::native::Adapter::CreateDevice(const wgpu::DeviceDescriptor * deviceDescriptor) Line 108\tC++\n \tdawn_end2end_tests.exe!dawn::DawnTestBase::CreateDeviceImpl(std::Cr::basic_string\u003cchar,std::Cr::char_traits\u003cchar\u003e,std::Cr::allocator\u003cchar\u003e\u003e isolationKey, const WGPUDeviceDescriptor * descriptor) Line 1043\tC++\n \tdawn_end2end_tests.exe!dawn::DawnTestBase::DawnTestBase::\u003clambda_2\u003e::operator()(WGPUAdapterImpl * adapter, const WGPUDeviceDescriptor * descriptor, void(*)(WGPURequestDeviceStatus, WGPUDeviceImpl *, const char *, void *) callback, void * userdata) Line 739\tC++\n \tdawn_end2end_tests.exe!dawn::DawnTestBase::DawnTestBase::\u003clambda_2\u003e::__invoke(WGPUAdapterImpl * adapter, const WGPUDeviceDescriptor * descriptor, void(*)(WGPURequestDeviceStatus, WGPUDeviceImpl *, const char *, void *) callback, void * userdata) Line 727\tC++\n \tdawn_proc.dll!wgpuAdapterRequestDevice(WGPUAdapterImpl * adapter, const WGPUDeviceDescriptor * descriptor, void(*)(WGPURequestDeviceStatus, WGPUDeviceImpl *, const char *, void *) callback, void * userdata) Line 43\tC\n \tdawn_end2end_tests.exe!wgpu::Adapter::RequestDevice(const wgpu::DeviceDescriptor * descriptor, void(*)(WGPURequestDeviceStatus, WGPUDeviceImpl *, const char *, void *) callback, void * userdata) Line 1987\tC++\n \tdawn_end2end_tests.exe!dawn::DawnTestBase::CreateDevice(std::Cr::basic_string\u003cchar,std::Cr::char_traits\u003cchar\u003e,std::Cr::allocator\u003cchar\u003e\u003e isolationKey) Line 1063\tC++\n \tdawn_end2end_tests.exe!dawn::DawnTestBase::SetUp() Line 1130\tC++\n \tdawn_end2end_tests.exe!dawn::DawnTestWithParams\u003cAdapterTestParam\u003e::SetUp() Line 719\tC++\n\n```",
+      "parentUuid": "4d5d8a2f_93775e45",
       "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
