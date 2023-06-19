@@ -34,6 +34,24 @@
       "parentUuid": "3b87e853_34fd6e5d",
       "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92a388d_41a56591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-06-19T16:07:16Z",
+      "side": 1,
+      "message": "I suspect that it crashes in the destructor of EGLImageValidationTests.",
+      "parentUuid": "3b87e853_34fd6e5d",
+      "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
