@@ -52,6 +52,24 @@
       "parentUuid": "3b87e853_34fd6e5d",
       "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ad0cc5_353b5161",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-19T16:10:07Z",
+      "side": 1,
+      "message": "That doesn\u0027t make sense. The test was skipped so it didn\u0027t do anything. And the next test in the same `EGLImageValidationTests` test fixture also was skipped without crashing.\n\n```\n[15554/15562] EGLImageValidationTests.InvalidTextureUsage/OpenGLES_ANGLE_Intel_Intel_R_UHD_Graphics_630_Direct3D11_vs_5_0_ps_5_0_D3D11_31_0_101_2111__compat (SKIPPED)\n```",
+      "parentUuid": "e92a388d_41a56591",
+      "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
