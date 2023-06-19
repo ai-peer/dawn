@@ -16,6 +16,24 @@
       "message": "What\u0027s the use case for `Value::Destroy()` now that `InstructionResult` has been split from `Instruction`? Just for debugging?\n\n`Instruction::Destroy()` seems like the more useful thing to me.",
       "revId": "552d1f33ee5cf5498fe6a558ffc2e3d9ef86a9ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb279e3_6dbe79b6",
+        "filename": "src/tint/ir/value.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T17:00:00Z",
+      "side": 1,
+      "message": "The next change up adds `Instruction::Destroy()`, which calls this. Typically the instruction is constructed with the result value (the builder usually creates them together).\nUnless we reuse the result\u0027s value (which we could), it seems hygienic to destroy them together.",
+      "parentUuid": "6d82da26_585960b2",
+      "revId": "552d1f33ee5cf5498fe6a558ffc2e3d9ef86a9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
