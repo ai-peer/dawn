@@ -1553,6 +1553,7 @@ if(TINT_BUILD_TESTS)
       ir/unary_test.cc
       ir/user_call_test.cc
       ir/validate_test.cc
+      ir/value_test.cc
       ir/var_test.cc
     )
   endif()
