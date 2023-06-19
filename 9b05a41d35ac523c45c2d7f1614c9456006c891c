@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22de0250_39c0fa6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T15:13:31Z",
+      "side": 1,
+      "message": "heh, looks like a difference in clang-format versions. Yay",
+      "revId": "9b05a41d35ac523c45c2d7f1614c9456006c891c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
