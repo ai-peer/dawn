@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35b854b0_544fd2b5",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 64
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T20:29:41Z",
+      "side": 1,
+      "message": "Unlike an empty if-block, which insta-exits, this loops back to the body.",
+      "parentUuid": "dd974aa0_d4ae58f7",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8eae0fc4_8fbaf39c",
         "filename": "src/tint/ir/multi_in_block.h",
         "patchSetId": 64
