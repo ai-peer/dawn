@@ -16,6 +16,23 @@
       "message": "Tint side LGTM",
       "revId": "79d02e92e52b712ea145298ec434a63f90e707e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35303eae_82be075a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-19T10:26:08Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "79d02e92e52b712ea145298ec434a63f90e707e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
