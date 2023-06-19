@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39acf8b0_acf577cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-19T16:46:59Z",
+      "side": 1,
+      "message": "LGTM with nit for an extra assert",
+      "revId": "16c4c7f8e6f5c5aff02a37825fa09a4c63aeb13d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df618f56_a50ac76a",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4698,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-19T16:46:59Z",
+      "side": 1,
+      "message": "nit: I\u0027d assert that i is in range.",
+      "revId": "16c4c7f8e6f5c5aff02a37825fa09a4c63aeb13d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6efb4aaa_a9dd71e9",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4722,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-19T16:46:59Z",
+      "side": 1,
+      "message": "Fair.\nIt avoids having to generate 0 in a swizzle which is not (yet) a WGSL feature.",
+      "revId": "16c4c7f8e6f5c5aff02a37825fa09a4c63aeb13d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
