@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50852b56_586ad321",
+        "filename": "src/tint/builtin/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T11:20:48Z",
+      "side": 1,
+      "message": "These `static_assert`s have put me on an adventure in FP / compiler research this morning.\n\n---\n\n[cppreference](https://en.cppreference.com/w/cpp/types/numeric_limits) says:\n\n\u003e The value of `std::numeric_limits\u003cT\u003e::has_infinity` is true for all types `T` capable of representing the positive infinity as a distinct special value. This constant is meaningful for all floating-point types and is guaranteed to be true if `std::numeric_limits\u003cT\u003e::is_iec559 \u003d\u003d true`.\n\n\u003e The value of `std::numeric_limits\u003cT\u003e::has_quiet_NaN` is true for all types `T` capable of representing the special value \"Quiet Not-A-Number\". This constant is meaningful for all floating-point types and is guaranteed to be true if `std::numeric_limits\u003cT\u003e::is_iec559 \u003d\u003d true`.\n\n---\n\nSo we\u0027re asserting that the **types** support infinities and NaN, but the CL says we\u0027re asserting `const-eval depends on inf and NaN support`. Const-eval is a runtime thing, so we need to also consider compiler flags and runtime flags.\n\nLet\u0027s assume that we\u0027re only interested in Clang.\n\nClang has a bunch of compiler flags for [`Controlling Floating Point Behavior`](https://clang.llvm.org/docs/UsersManual.html#controlling-floating-point-behavior). The interesting flags are: `no_honor_nans` and `no_honor_infinities`. [The `Floating Point Models` table](https://clang.llvm.org/docs/UsersManual.html#id14) say both NaNs and infinities may **not** be honoured with `-ffast-math`.\n\nSure enough, [these static_asserts do not fire with `-ffast-math` enabled](https://godbolt.org/z/6fGns1Kx5), and I know most games studios will enable `-ffast-math` by default.\n\nFor runtime behaviour, we need to also consider fp-control registers, which are clearly CPU \u0026 OS dependent. X86 / X64 have the [`_MCW_IC` mask which can be `_IC_AFFINE` or `_IC_PROJECTIVE`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/control87-controlfp-control87-2?view\u003dmsvc-170). Documentation for what these flags actually mean is almost non-existent, but I believe `_IC_PROJECTIVE` has only a single representation for infinity (e.g. no sign to differentiate). Fun.\n\n\n\nSo what do we do with all this information? Probably nothing.\n\nWe already have unit tests in place that check we produce errors for infinities and NaNs. Assuming we run the unit tests on the same environment that we run the code in production then we should be good. Folks that change fp-control flags are taking their actions into their own hands (SwiftShader actually does this - which is really questionable behaviour if this isn\u0027t restored before returning to the caller).\n\nThese asserts seem fine, but clearly aren\u0027t going to prevent stuff being broken with compiler flags or runtime fp-control changes.",
+      "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f705d4_5c9bde07",
+        "filename": "src/tint/builtin/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T11:20:48Z",
+      "side": 1,
+      "message": "Should we also not check for subnormal support with [`std::numeric_limits\u003cT\u003e::has_denorm`](https://en.cppreference.com/w/cpp/types/numeric_limits/has_denorm)? I presume FTZ is something we want to avoid?\n\nOr does the WGSL spec not define const-eval behaviour of subnormals?",
+      "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
