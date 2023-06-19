@@ -124,6 +124,24 @@
       "parentUuid": "23e4daca_e0b31f68",
       "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d326304_1c413498",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-19T18:14:47Z",
+      "side": 1,
+      "message": "There is also another CL from Intel engineer that encountered unexplainable failures in `use-wire` tests. In his case the tests are unexpectedly skipped: https://dawn-review.googlesource.com/c/dawn/+/137205\n\nNot sure that CL would have the same root cause.",
+      "parentUuid": "23e4daca_e0b31f68",
+      "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
