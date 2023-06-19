@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1b63c4_447f24d4",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-19T07:39:57Z",
+      "side": 1,
+      "message": "It\u0027s weird, I would assume the device to be locked during initialization. But maybe not?",
+      "revId": "90efdacbc89dafba5c407133fa7dc47b97a3a910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
