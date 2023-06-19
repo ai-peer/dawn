@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3931141f_a223ad48",
+        "filename": "src/tint/builtin/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-19T14:21:58Z",
+      "side": 1,
+      "message": "You dug deeper than I did.  :-)\n\nYes, the unit tests are the stronger statement.\nBut I also don\u0027t want the unit tests to be seen as going further than the intent of the feature code itself.\nI\u0027d be open to strengthening the comments in the code.  Merely having the infinite and NaN values is strictly weaker than what we need, like you say.\n\nHopefully a future SWE will come back to these notes if in doubt.",
+      "parentUuid": "50852b56_586ad321",
+      "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60f705d4_5c9bde07",
         "filename": "src/tint/builtin/number.h",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-19T11:20:48Z",
       "side": 1,
       "message": "Should we also not check for subnormal support with [`std::numeric_limits\u003cT\u003e::has_denorm`](https://en.cppreference.com/w/cpp/types/numeric_limits/has_denorm)? I presume FTZ is something we want to avoid?\n\nOr does the WGSL spec not define const-eval behaviour of subnormals?",
+      "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ed5eef_a39c64af",
+        "filename": "src/tint/builtin/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-19T14:21:58Z",
+      "side": 1,
+      "message": "WGSL spec doesn\u0027t say anything about const-eval behaviour of subnormals.  That\u0027s new territory.  I think that *might* be controversial.\n\nECMAScript doesn\u0027t say much, but one statement implies that implementations might not have to support denormals.  (\"Subnormal\" does not appear. \"denormal\" appears three times.)\n\n\u003e If an implementation does not support denormalized values, the value of Number.MIN_VALUE must be the smallest non-zero positive value that can actually be represented by the implementation.",
+      "parentUuid": "60f705d4_5c9bde07",
       "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
