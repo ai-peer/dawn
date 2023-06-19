@@ -157,12 +157,10 @@ tint_symbol_1 = struct @align(4), @block {
 }
 
 TEST_F(IR_BlockDecoratedStructsTest, RuntimeArray_InStruct) {
-    utils::Vector<const type::StructMember*, 4> members;
-    members.Push(ty.Get<type::StructMember>(mod.symbols.New(), ty.i32(), 0u, 0u, 4u, 4u,
-                                            type::StructMemberAttributes{}));
-    members.Push(ty.Get<type::StructMember>(mod.symbols.New(), ty.runtime_array(ty.i32()), 1u, 4u,
-                                            4u, 4u, type::StructMemberAttributes{}));
-    auto* structure = ty.Get<type::Struct>(mod.symbols.New(), members, 4u, 8u, 8u);
+    auto* structure = ty.Struct(mod.symbols.New(), {
+                                                       {mod.symbols.New(), ty.i32()},
+                                                       {mod.symbols.New(), ty.array<i32>()},
+                                                   });
 
     auto* buffer = b.Var(ty.ptr(storage, structure, builtin::Access::kReadWrite));
     buffer->SetBindingPoint(0, 0);
@@ -182,14 +180,14 @@ TEST_F(IR_BlockDecoratedStructsTest, RuntimeArray_InStruct) {
     mod.functions.Push(func);
 
     auto* expect = R"(
-tint_symbol_2 = struct @align(4) {
-  tint_symbol:i32 @offset(0)
-  tint_symbol_1:array<i32> @offset(4)
+tint_symbol = struct @align(4) {
+  tint_symbol_1:i32 @offset(0)
+  tint_symbol_2:array<i32> @offset(4)
 }
 
 tint_symbol_3 = struct @align(4), @block {
-  tint_symbol:i32 @offset(0)
-  tint_symbol_1:array<i32> @offset(4)
+  tint_symbol_1:i32 @offset(0)
+  tint_symbol_2:array<i32> @offset(4)
 }
 
 # Root block
@@ -214,12 +212,10 @@ tint_symbol_3 = struct @align(4), @block {
 }
 
 TEST_F(IR_BlockDecoratedStructsTest, StructUsedElsewhere) {
-    utils::Vector<const type::StructMember*, 4> members;
-    members.Push(ty.Get<type::StructMember>(mod.symbols.New(), ty.i32(), 0u, 0u, 4u, 4u,
-                                            type::StructMemberAttributes{}));
-    members.Push(ty.Get<type::StructMember>(mod.symbols.New(), ty.i32(), 1u, 4u, 4u, 4u,
-                                            type::StructMemberAttributes{}));
-    auto* structure = ty.Get<type::Struct>(mod.symbols.New(), members, 4u, 8u, 8u);
+    auto* structure = ty.Struct(mod.symbols.New(), {
+                                                       {mod.symbols.New(), ty.i32()},
+                                                       {mod.symbols.New(), ty.i32()},
+                                                   });
 
     auto* buffer = b.Var(ty.ptr(storage, structure, builtin::Access::kReadWrite));
     buffer->SetBindingPoint(0, 0);
@@ -234,24 +230,24 @@ TEST_F(IR_BlockDecoratedStructsTest, StructUsedElsewhere) {
     mod.functions.Push(func);
 
     auto* expect = R"(
-tint_symbol_2 = struct @align(4) {
-  tint_symbol:i32 @offset(0)
-  tint_symbol_1:i32 @offset(4)
+tint_symbol = struct @align(4) {
+  tint_symbol_1:i32 @offset(0)
+  tint_symbol_2:i32 @offset(4)
 }
 
 tint_symbol_4 = struct @align(4), @block {
-  tint_symbol_3:tint_symbol_2 @offset(0)
+  tint_symbol_3:tint_symbol @offset(0)
 }
 
 # Root block
 %b1 = block {
   %1:ptr<storage, tint_symbol_4, read_write> = var @binding_point(0, 0)
-  %2:ptr<private, tint_symbol_2, read_write> = var
+  %2:ptr<private, tint_symbol, read_write> = var
 }
 
 %foo = func():void -> %b2 {
   %b2 = block {
-    %4:ptr<storage, tint_symbol_2, read_write> = access %1, 0u
+    %4:ptr<storage, tint_symbol, read_write> = access %1, 0u
     store %4, %2
     ret
   }

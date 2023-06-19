@@ -162,4 +162,20 @@ const type::Pointer* Manager::ptr(builtin::AddressSpace address_space,
     return Get<type::Pointer>(address_space, subtype, access);
 }
 
+const type::Struct* Manager::Struct(Symbol name, utils::VectorRef<StructMemberDesc> md) {
+    utils::Vector<const type::StructMember*, 4> members;
+    uint32_t current_size = 0u;
+    uint32_t max_align = 0u;
+    for (const auto& m : md) {
+        auto offset = utils::RoundUp(m.type->Align(), current_size);
+        members.Push(Get<type::StructMember>(m.name, m.type, members.Length(), offset,
+                                             m.type->Align(), m.type->Size(),
+                                             std::move(m.attributes)));
+        current_size = offset + m.type->Size();
+        max_align = std::max(max_align, m.type->Align());
+    }
+    return Get<type::Struct>(name, members, max_align, utils::RoundUp(max_align, current_size),
+                             current_size);
+}
+
 }  // namespace tint::type
