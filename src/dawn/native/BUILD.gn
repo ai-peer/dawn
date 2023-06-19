@@ -14,10 +14,18 @@
 
 import("../../../scripts/dawn_overrides_with_defaults.gni")
 
+import("//build/config/win/visual_studio_version.gni")
 import("//build_overrides/build.gni")
 import("${dawn_root}/generator/dawn_generator.gni")
 import("${dawn_root}/scripts/dawn_component.gni")
 import("${dawn_root}/scripts/dawn_features.gni")
+
+if (is_win && dawn_enable_d3d12 && dawn_allow_build_dxc) {
+  copy("copy_dxil_dll") {
+    sources = [ "$windows_sdk_path/Redist/D3D/$target_cpu/dxil.dll" ]
+    outputs = [ "$root_out_dir/{{source_file_part}}" ]
+  }
+}
 
 # The VVLs are an optional dependency, only use it if the path has been set.
 enable_vulkan_validation_layers = dawn_enable_vulkan_validation_layers &&
@@ -487,6 +495,7 @@ source_set("sources") {
     if (is_win && dawn_allow_build_dxc) {
       deps += [ "${dawn_root}/third_party/gn/dxc:dxcompiler" ]
       defines += [ "DAWN_BUILD_DXC" ]
+      data_deps += [ ":copy_dxil_dll" ]
     }
     libs += [ "dxguid.lib" ]
     sources += [
