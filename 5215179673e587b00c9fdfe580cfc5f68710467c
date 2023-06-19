@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fee170a_f482db16",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 64
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T20:32:03Z",
+      "side": 1,
+      "message": "Ignore that. Draft comment auto published on CL push.\n\nI understand, and agree. Will do as a followup.",
+      "parentUuid": "35b854b0_544fd2b5",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8eae0fc4_8fbaf39c",
         "filename": "src/tint/ir/multi_in_block.h",
         "patchSetId": 64
@@ -55,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e035e963_77ef2abb",
+        "filename": "src/tint/ir/multi_in_block.h",
+        "patchSetId": 64
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T20:32:03Z",
+      "side": 1,
+      "message": "The majority of blocks still don\u0027t use parameters: Function-blocks, if-blocks, case-blocks.\nWe could fold them together, but it\u0027s a bit of a waste of memory.",
+      "parentUuid": "8eae0fc4_8fbaf39c",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b94a1b67_ba46625f",
         "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
         "patchSetId": 64
@@ -66,6 +102,24 @@
       "writtenOn": "2023-06-19T20:08:15Z",
       "side": 1,
       "message": "Is the `!block-Back()-\u003eIs\u003cir::Branch\u003e` part still needed as would we not actually add an `unreachable` instruction now?",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1e01cc_efb9da87",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 64
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-19T20:32:03Z",
+      "side": 1,
+      "message": "Done. Required fixing up broken tests, so good shout.",
+      "parentUuid": "b94a1b67_ba46625f",
       "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
