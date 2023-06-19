@@ -443,6 +443,24 @@
       "parentUuid": "a7755804_1a79cfc9",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0274d63e_13e680b8",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-19T11:19:45Z",
+      "side": 1,
+      "message": "Add test for overriding `AllowUnsafeAPIs` and more in [3]. Add more comments in [4].",
+      "parentUuid": "caf88710_b416141f",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
