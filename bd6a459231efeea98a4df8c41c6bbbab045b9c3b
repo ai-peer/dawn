@@ -725,6 +725,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e97b55c7_6d04a506",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-19T19:23:50Z",
+      "side": 1,
+      "message": "We should remove this UNREACHABLE, though, no? Since we\u0027ll be able to support it on either path.\n\nBTW, GL_EXT_render_snorm has 12% support on desktop, and \u003c1% support on ES, so it wouldn\u0027t be a big loss to remove support for it and just use the compute blit everywhere.",
+      "parentUuid": "60346095_16ff1103",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 79
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "897632b7_0cfa8460",
         "filename": "src/dawn/tests/end2end/CopyTests.cpp",
         "patchSetId": 12

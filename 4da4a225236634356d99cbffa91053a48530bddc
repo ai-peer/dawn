@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76560685_f7c27b7d",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-19T19:23:50Z",
+      "side": 1,
+      "message": "Wording nit: suggest \"For SNORM texture formats, Dawn translates CopyTextureToBuffer command to a compute shader pass\" or similar. (If this indeed needs to stay.)",
+      "revId": "4da4a225236634356d99cbffa91053a48530bddc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
