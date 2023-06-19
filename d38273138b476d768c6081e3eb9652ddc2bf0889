@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "348f2075_8deaa3af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-19T16:51:03Z",
+      "side": 1,
+      "message": "Bonus: this fixes https://bugs.chromium.org/p/tint/issues/detail?id\u003d1690 \n\nI\u0027ve already mentioned this CL in the bg.",
+      "revId": "d38273138b476d768c6081e3eb9652ddc2bf0889",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
