@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd974aa0_d4ae58f7",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 64
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-19T20:08:15Z",
+      "side": 1,
+      "message": "nit: it would be nice, if possible (and in a followup) if we could remove these dead continue blocks similar to dropping dead if false blocks.",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eae0fc4_8fbaf39c",
+        "filename": "src/tint/ir/multi_in_block.h",
+        "patchSetId": 64
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-19T20:08:15Z",
+      "side": 1,
+      "message": "Is this even still needed? Can it just be deleted at this point?",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b94a1b67_ba46625f",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 64
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-19T20:08:15Z",
+      "side": 1,
+      "message": "Is the `!block-Back()-\u003eIs\u003cir::Branch\u003e` part still needed as would we not actually add an `unreachable` instruction now?",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
