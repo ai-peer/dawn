@@ -198,6 +198,24 @@
       "parentUuid": "47ec202a_a25476cc",
       "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51e839b7_8e831158",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-19T06:01:39Z",
+      "side": 1,
+      "message": "Removing `D3D11Backend()` for the test can pass as you can see by comparing PS6 and PS7. There must be some mysterious bugs in the driver or Dawn.",
+      "parentUuid": "deb3056c_02a2638c",
+      "revId": "2bac5514f35c36f0a16af1bf8942cfb269f57393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
