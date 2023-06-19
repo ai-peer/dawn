@@ -407,6 +407,24 @@
       "parentUuid": "5b84fac3_9713ff7d",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7755804_1a79cfc9",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-19T07:56:55Z",
+      "side": 1,
+      "message": "Yeah I\u0027m starting to get confused as well :/ Current code sounds good based on this requirement, but can we have a comment in the code why we\u0027re doing this, and a test that shows that it works with enable-unsafe-apis?",
+      "parentUuid": "e4807ce7_6d7c828b",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
