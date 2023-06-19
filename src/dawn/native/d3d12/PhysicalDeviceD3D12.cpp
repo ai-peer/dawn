@@ -473,13 +473,21 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
         Toggle::D3D12UseTempBufferInDepthStencilTextureAndBufferCopyWithNonZeroBufferOffset,
         GetDeviceInfo().programmableSamplePositionsTier == 0);
 
-    // Check DXC for use_dxc toggle, and default to use FXC
+    // Check for use_dxc toggle
     // TODO(dawn:1495): When implementing adapter toggles, promote UseDXC as adapter toggle, and do
     // the validation when creating adapters.
+#ifdef DAWN_BUILD_DXC
+    // By default, use DXC is shader model >= 6.0, otherwise we use FXC
+    DAWN_ASSERT(GetBackend()->IsDXCAvailable() && "DXC dlls were built, but are not available");
+    const bool default_use_dxc = GetDeviceInfo().shaderModel >= 60;
+    deviceToggles->Default(Toggle::UseDXC, default_use_dxc);
+#else
+    // Default to using FXC
     if (!GetBackend()->IsDXCAvailable()) {
         deviceToggles->ForceSet(Toggle::UseDXC, false);
     }
     deviceToggles->Default(Toggle::UseDXC, false);
+#endif
 
     // Disable optimizations when using FXC
     // See https://crbug.com/dawn/1203
@@ -605,7 +613,7 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
             Toggle::D3D12UseTempBufferInTextureToTextureCopyBetweenDifferentDimensions, true);
     }
 
-    // Polyfill reflect builtin for vec2<f32> on Intel device in usng FXC.
+    // Polyfill reflect builtin for vec2<f32> on Intel device if using FXC.
     // See https://crbug.com/tint/1798 for more information.
     if (gpu_info::IsIntel(vendorId) && !deviceToggles->IsEnabled(Toggle::UseDXC)) {
         deviceToggles->Default(Toggle::D3D12PolyfillReflectVec2F32, true);
