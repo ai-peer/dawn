@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f6ea4b9_60734798",
+        "filename": "src/tint/ir/exit_loop.cc",
+        "patchSetId": 65
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-19T21:42:54Z",
+      "side": 1,
+      "message": "If we\u0027re going to track exits, we should probably auto-remove them when the exit instruction is destroyed.\n\nNot really a new problem though.",
+      "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b225994a_ccdd3c5a",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 65
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-19T21:42:54Z",
+      "side": 1,
+      "message": "Why did this change to nullptr? Don\u0027t we still want to emit this as a let if it\u0027s named, or if side-effecting stuff means that we can\u0027t inline it?",
+      "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50cb79a1_1d3c1706",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 65
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-19T21:42:54Z",
+      "side": 1,
+      "message": "This vector is not used.",
+      "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5a62f2_b85aad80",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 65
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-19T21:42:54Z",
+      "side": 1,
+      "message": "This builder is unused (`State` creates its own one).",
+      "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
