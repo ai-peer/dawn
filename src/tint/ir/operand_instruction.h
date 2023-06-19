@@ -15,6 +15,8 @@
 #ifndef SRC_TINT_IR_OPERAND_INSTRUCTION_H_
 #define SRC_TINT_IR_OPERAND_INSTRUCTION_H_
 
+#include <utility>
+
 #include "src/tint/ir/instruction.h"
 #include "src/tint/ir/instruction_result.h"
 
@@ -29,6 +31,12 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N, R>, Inst
     /// Destructor
     ~OperandInstruction() override = default;
 
+    /// @copydoc tint::ir::Value::Destroy
+    void Destroy() override {
+        ClearOperands();
+        Instruction::Destroy();
+    }
+
     /// Set an operand at a given index.
     /// @param index the operand index
     /// @param value the value to use
@@ -42,6 +50,27 @@ class OperandInstruction : public utils::Castable<OperandInstruction<N, R>, Inst
             value->AddUsage({this, index});
         }
     }
+
+    /// Sets the operands to @p operands
+    /// @param operands the new operands for the instruction
+    void SetOperands(utils::VectorRef<ir::Value*> operands) {
+        ClearOperands();
+        operands_ = std::move(operands);
+        for (size_t i = 0; i < operands_.Length(); i++) {
+            operands_[i]->AddUsage({this, static_cast<uint32_t>(i)});
+        }
+    }
+
+    /// Removes all operands from the instruction
+    void ClearOperands() {
+        for (uint32_t i = 0; i < operands_.Length(); i++) {
+            operands_[i]->RemoveUsage({this, i});
+        }
+        operands_.Clear();
+    }
+
+    /// @returns the operands of the instruction
+    utils::VectorRef<ir::Value*> Operands() override { return operands_; }
 
     /// @returns true if the instruction has result values
     bool HasResults() override { return !results_.IsEmpty(); }
