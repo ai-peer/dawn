@@ -106,6 +106,24 @@
       "parentUuid": "7e8464af_66ecb517",
       "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c77bcd08_17477e84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-06-19T18:02:01Z",
+      "side": 1,
+      "message": "Yes, weird indeed.\nI can repro when logged in on the bot, when I run the whole suite.\nHowever, running under WinDbg there is no crash.\nAlso nothing in EventViewer.\nSo, maybe there is actually no crash.\nJust it reaches here https://source.chromium.org/chromium/chromium/src/+/main:base/test/launcher/test_launcher.cc;l\u003d1293;drc\u003d3fcb204e1768589281fe2fa2ba1c33ffb1a55600 somehow and unless something is reported in test result, the harness thinks it\u0027s crash by default.\nMaybe some kind on hash collision on test names?",
+      "parentUuid": "23e4daca_e0b31f68",
+      "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
