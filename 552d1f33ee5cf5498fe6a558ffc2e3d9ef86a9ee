@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d82da26_585960b2",
+        "filename": "src/tint/ir/value.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-19T15:13:53Z",
+      "side": 1,
+      "message": "What\u0027s the use case for `Value::Destroy()` now that `InstructionResult` has been split from `Instruction`? Just for debugging?\n\n`Instruction::Destroy()` seems like the more useful thing to me.",
+      "revId": "552d1f33ee5cf5498fe6a558ffc2e3d9ef86a9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
