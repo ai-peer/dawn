@@ -1,0 +1,31 @@
+# See cmake/modules/HCT.cmake
+template("add_hlsl_hctgen") {
+  assert(defined(invoker.mode), "must set 'mode' in $target_name")
+  assert(defined(invoker.output), "must set 'output' in $target_name")
+
+  action(target_name) {
+    if (defined(invoker.build_dir) && invoker.build_dir) {
+      # TODO(amaiorano): See HCT.cmake
+    }
+    if (defined(invoker.code_tag) && invoker.code_tag) {
+      # TODO(amaiorano): See HCT.cmake
+    }
+
+    script = "${invoker.dawn_dxc_dir}/utils/hct/hctgen.py"
+    inputs = [
+      "${invoker.dawn_dxc_dir}/utils/hct/gen_intrin_main.txt",
+      "${invoker.dawn_dxc_dir}/utils/hct/hctdb.py",
+      "${invoker.dawn_dxc_dir}/utils/hct/hctdb_instrhelp.py",
+    ]
+    gen_output = "$target_gen_dir" + invoker.output
+    outputs = [ gen_output ]
+    args = [
+      "--force-lf",  # Always?
+      "${invoker.mode}",
+      "--output",
+      rebase_path(gen_output, root_build_dir),
+    ]
+
+    # TODO(amaiorano) Make sure both build_dir and code_tag aren't true
+  }
+}

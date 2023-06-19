@@ -1,0 +1,21 @@
+# built_target_action() is like action, except that it runs a built target.
+template("built_target_action") {
+  assert(defined(invoker.target), "must set 'target'")
+  assert(defined(invoker.outputs), "must set 'outputs'")
+  assert(defined(invoker.args), "must set 'args'")
+  assert(!defined(invoker.sources), "use 'inputs' instead of 'sources'")
+
+  action(target_name) {
+    forward_variables_from(invoker,
+    [
+      "depfile",
+      "inputs",
+      "outputs",
+    ])
+    
+    exe = get_label_info(invoker.target, "root_out_dir") + "/" + get_label_info(invoker.target, "name")
+    deps = [ invoker.target ]
+    script = "build/run_built_binary.py"
+    args = [ "", rebase_path(exe, root_build_dir) ] + invoker.args
+  }
+}
