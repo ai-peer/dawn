@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd9537f_0c023a70",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 68
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-20T13:52:03Z",
+      "side": 1,
+      "message": "No, because that\u0027s happening at the top-level, and `ProcessFunctionBlockReturn` has the logic to deal with this (hence why I said that you could add the same logic to `ProcessNestedReturn` to fix it). If you take that same test but nest it inside some other control flow, you\u0027ll see the issue.",
+      "parentUuid": "601b2efd_f68e3eaf",
+      "revId": "0bc209df014a285906101141b575cc03fe137b61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6d5f275b_f4975be4",
