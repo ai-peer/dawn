@@ -32,7 +32,8 @@ class AdapterBase : public RefCounted {
   public:
     AdapterBase(Ref<PhysicalDeviceBase> physicalDevice,
                 FeatureLevel featureLevel,
-                const TogglesState& requiredAdapterToggles);
+                const TogglesState& requiredAdapterToggles,
+                wgpu::PowerPreference powerPreference = wgpu::PowerPreference::Undefined);
     ~AdapterBase() override;
 
     // WebGPU API
@@ -59,6 +60,8 @@ class AdapterBase : public RefCounted {
 
     FeatureLevel GetFeatureLevel() const;
 
+    wgpu::PowerPreference GetPowerPreference() const;
+
   private:
     Ref<PhysicalDeviceBase> mPhysicalDevice;
     FeatureLevel mFeatureLevel;
@@ -69,6 +72,7 @@ class AdapterBase : public RefCounted {
 
     // Adapter toggles state.
     TogglesState mTogglesState;
+    wgpu::PowerPreference mPowerPreference;
 };
 
 std::vector<Ref<AdapterBase>> SortAdapters(std::vector<Ref<AdapterBase>> adapters,
