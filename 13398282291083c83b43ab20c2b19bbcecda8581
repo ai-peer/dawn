@@ -33,6 +33,24 @@
       "message": "This test is for the `undef` arg case, so this should be `nullptr`.",
       "revId": "13398282291083c83b43ab20c2b19bbcecda8581",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c404ef_d383d358",
+        "filename": "src/tint/ir/transform/merge_return_test.cc",
+        "patchSetId": 69
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T15:41:08Z",
+      "side": 1,
+      "message": "Ack. Will do as followup to unblock you and Dan.",
+      "parentUuid": "2fe6e945_a54ffe35",
+      "revId": "13398282291083c83b43ab20c2b19bbcecda8581",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
