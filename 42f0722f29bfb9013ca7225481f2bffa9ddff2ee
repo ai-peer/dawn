@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3918d37d_91567f75",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 65
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T09:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50cb79a1_1d3c1706",
+      "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fb119d3_af100cc9",
@@ -172,6 +190,24 @@
       "writtenOn": "2023-06-19T21:42:54Z",
       "side": 1,
       "message": "This builder is unused (`State` creates its own one).",
+      "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6425d525_f678ead1",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 65
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T09:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc5a62f2_b85aad80",
       "revId": "42f0722f29bfb9013ca7225481f2bffa9ddff2ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
