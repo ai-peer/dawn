@@ -747,6 +747,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ed77bf_8ac6063b",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-20T19:45:36Z",
+      "side": 1,
+      "message": "12% on opengl desktop sounds like some amount to keep this to me. (And prefer less code change in this CL at this stage.).\n\nIf not removing disable_snorm_read, I think this should stay here. When \"disable_snorm_read\" is on, gl backend use compute blit path. copyTextureToBuffer is translated to compute dispatch in frontend command encoder, so it shouldn\u0027t hit here on the backend.",
+      "parentUuid": "e97b55c7_6d04a506",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 79
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "897632b7_0cfa8460",
