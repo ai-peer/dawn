@@ -61,6 +61,8 @@ class AdapterBase : public RefCounted {
 
     FeatureLevel GetFeatureLevel() const;
 
+    wgpu::PowerPreference GetPowerPreference() const;
+
   private:
     Ref<PhysicalDeviceBase> mPhysicalDevice;
     FeatureLevel mFeatureLevel;

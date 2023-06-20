@@ -712,6 +712,7 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
         adapterOptions.nextInChain = &adapterToggles;
         adapterOptions.backendType = gCurrentTest->mParam.adapterProperties.backendType;
         adapterOptions.compatibilityMode = gCurrentTest->mParam.adapterProperties.compatibilityMode;
+        adapterOptions.powerPreference = gCurrentTest->GetPowerPreference();
 
         // Find the adapter that exactly matches our adapter properties.
         const auto& adapters = gTestEnv->GetInstance()->EnumerateAdapters(&adapterOptions);
@@ -1712,6 +1713,10 @@ void DawnTestBase::ResolveDeferredExpectationsNow() {
     for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
         mReadbackSlots[i].buffer.Unmap();
     }
+}
+
+wgpu::PowerPreference DawnTestBase::GetPowerPreference() const {
+    return wgpu::PowerPreference::Undefined;
 }
 
 bool utils::RGBA8::operator==(const utils::RGBA8& other) const {

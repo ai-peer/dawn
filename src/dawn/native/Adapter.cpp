@@ -199,6 +199,10 @@ FeatureLevel AdapterBase::GetFeatureLevel() const {
     return mFeatureLevel;
 }
 
+wgpu::PowerPreference AdapterBase::GetPowerPreference() const {
+    return mPowerPreference;
+}
+
 std::vector<Ref<AdapterBase>> SortAdapters(std::vector<Ref<AdapterBase>> adapters,
                                            const RequestAdapterOptions* options) {
     const bool highPerformance =

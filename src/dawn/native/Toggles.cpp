@@ -450,6 +450,13 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Create D3D12 heap with D3D12_HEAP_FLAG_CREATE_NOT_ZEROED when it is supported. It is safe "
       "because in Dawn we always clear the resources manually when needed.",
       "https://crbug.com/dawn/484", ToggleStage::Device}},
+    {Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy,
+     {"d3d12_use_intel_max_performance_throttle_policy",
+      "Create D3D12 command queue with 'Max Performance' Throttle Policy through Intel Throttle "
+      "Policy extension so that all the commands will be executed with 'Maximum Performance' "
+      "performance throttle policy on an adapter requested with 'HighPerformance' power preference "
+      "on the Intel GPUs that support Intel Throttle Policy extension.",
+      "https://crbug.com/dawn/1516", ToggleStage::Device}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "
