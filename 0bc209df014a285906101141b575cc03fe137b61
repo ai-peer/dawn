@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d767f531_e4b43c38",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 68
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-20T13:54:30Z",
+      "side": 1,
+      "message": "Or take `IfElse_Nested` and remove the `middle_true.Store(global, 1_i);` from the builder, that also causes it.",
+      "parentUuid": "ffd9537f_0c023a70",
+      "revId": "0bc209df014a285906101141b575cc03fe137b61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6d5f275b_f4975be4",
