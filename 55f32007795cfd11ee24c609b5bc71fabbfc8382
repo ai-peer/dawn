@@ -108,6 +108,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "459b09d9_80615397",
+        "filename": "dawn.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-20T01:31:55Z",
+      "side": 1,
+      "message": "ok I made an [upstream pr](https://github.com/webgpu-native/webgpu-headers/pull/195) and will do a follow-up CL to derisk in case someone doesn\u0027t like the idea",
+      "parentUuid": "ed520727_aa2423b0",
+      "revId": "55f32007795cfd11ee24c609b5bc71fabbfc8382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97ea1c21_938014fc",
