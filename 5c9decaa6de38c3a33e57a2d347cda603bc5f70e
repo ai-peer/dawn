@@ -16,6 +16,23 @@
       "message": "Hey Ben, my local implementation of this feature was getting a little overwhelming so I wanted to start merging things in smaller pieces. Lmk if you have any issue with this.",
       "revId": "5c9decaa6de38c3a33e57a2d347cda603bc5f70e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb2ea23f_74132a18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T13:34:16Z",
+      "side": 1,
+      "message": "Sorry for the delay in reviewing. Looks great!\nKokoro is failing because you also need to add the new files to `CMakeList.txt`.",
+      "revId": "5c9decaa6de38c3a33e57a2d347cda603bc5f70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
