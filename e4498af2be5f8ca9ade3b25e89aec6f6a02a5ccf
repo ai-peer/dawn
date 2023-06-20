@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "753f2574_1c76514f",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T16:32:02Z",
+      "side": 1,
+      "message": "Added a comment",
+      "parentUuid": "78502035_bc70594e",
+      "revId": "e4498af2be5f8ca9ade3b25e89aec6f6a02a5ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf5115b8_86fec01c",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7f63218_ae8318c6",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T16:32:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf5115b8_86fec01c",
+      "revId": "e4498af2be5f8ca9ade3b25e89aec6f6a02a5ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "487c3b95_aefb8d68",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-06-20T15:23:58Z",
       "side": 1,
       "message": "Why is this marked as thinking it\u0027s unreachable?",
+      "revId": "e4498af2be5f8ca9ade3b25e89aec6f6a02a5ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e3f48ed_890714f8",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T16:32:02Z",
+      "side": 1,
+      "message": "Because MSVC sucks.",
+      "parentUuid": "487c3b95_aefb8d68",
       "revId": "e4498af2be5f8ca9ade3b25e89aec6f6a02a5ccf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
