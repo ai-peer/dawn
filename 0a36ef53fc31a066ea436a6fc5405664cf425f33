@@ -33,6 +33,24 @@
       "message": "Is this because the original was wrong?",
       "revId": "0a36ef53fc31a066ea436a6fc5405664cf425f33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a14647d9_cb5be0cf",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T12:51:37Z",
+      "side": 1,
+      "message": "Was baked into the test as `64`. This looks correct now.",
+      "parentUuid": "50eb5637_435d1c87",
+      "revId": "0a36ef53fc31a066ea436a6fc5405664cf425f33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
