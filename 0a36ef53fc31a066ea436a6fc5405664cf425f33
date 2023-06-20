@@ -16,6 +16,23 @@
       "message": "PTAL. Not perfect, but I think this is better?",
       "revId": "0a36ef53fc31a066ea436a6fc5405664cf425f33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50eb5637_435d1c87",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-20T00:21:30Z",
+      "side": 1,
+      "message": "Is this because the original was wrong?",
+      "revId": "0a36ef53fc31a066ea436a6fc5405664cf425f33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
