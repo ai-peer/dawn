@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb31bc58_fd608362",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 69
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-20T15:30:57Z",
+      "side": 1,
+      "message": "Ship it.",
+      "revId": "13398282291083c83b43ab20c2b19bbcecda8581",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe6e945_a54ffe35",
+        "filename": "src/tint/ir/transform/merge_return_test.cc",
+        "patchSetId": 69
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-20T15:30:57Z",
+      "side": 1,
+      "message": "This test is for the `undef` arg case, so this should be `nullptr`.",
+      "revId": "13398282291083c83b43ab20c2b19bbcecda8581",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
