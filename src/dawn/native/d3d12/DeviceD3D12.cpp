@@ -32,6 +32,7 @@
 #include "dawn/native/d3d12/CommandBufferD3D12.h"
 #include "dawn/native/d3d12/ComputePipelineD3D12.h"
 #include "dawn/native/d3d12/FenceD3D12.h"
+#include "dawn/native/d3d12/IntelExtensionD3D12.h"
 #include "dawn/native/d3d12/PhysicalDeviceD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
@@ -79,9 +80,17 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     D3D12_COMMAND_QUEUE_DESC queueDesc = {};
     queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
     queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
-    DAWN_TRY(
-        CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
-                     "D3D12 create command queue"));
+    if (IsToggleEnabled(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy)) {
+        IntelExtension* intelExtension = ToBackend(GetPhysicalDevice())->GetOrLoadIntelExtension();
+        ASSERT(intelExtension != nullptr);
+        DAWN_TRY(CheckHRESULT(intelExtension->CreateCommandQueueWithMaxPerformanceThrottlePolicy(
+                                  &queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+                              "D3D12 create command queue"));
+    } else {
+        DAWN_TRY(
+            CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+                         "D3D12 create command queue"));
+    }
 
     if ((HasFeature(Feature::TimestampQuery) || HasFeature(Feature::TimestampQueryInsidePasses)) &&
         !IsToggleEnabled(Toggle::DisableTimestampQueryConversion)) {

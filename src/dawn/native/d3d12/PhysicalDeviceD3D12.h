@@ -15,8 +15,9 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_PHYSICALDEVICED3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_PHYSICALDEVICED3D12_H_
 
-#include "dawn/native/PhysicalDevice.h"
+#include <memory>
 
+#include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/d3d/PhysicalDeviceD3D.h"
 #include "dawn/native/d3d12/D3D12Info.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
@@ -24,6 +25,7 @@
 namespace dawn::native::d3d12 {
 
 class Backend;
+class IntelExtension;
 
 class PhysicalDevice : public d3d::PhysicalDevice {
   public:
@@ -37,6 +39,8 @@ class PhysicalDevice : public d3d::PhysicalDevice {
     const D3D12DeviceInfo& GetDeviceInfo() const;
     Backend* GetBackend() const;
     ComPtr<ID3D12Device> GetDevice() const;
+
+    IntelExtension* GetOrLoadIntelExtension();
 
   private:
     using Base = d3d::PhysicalDevice;
@@ -62,9 +66,14 @@ class PhysicalDevice : public d3d::PhysicalDevice {
     MaybeError InitializeDebugLayerFilters();
     void CleanUpDebugLayerFilters();
 
+    TogglesState ApplyTogglesAboutIntelExtension(AdapterBase* adapter,
+                                                 const TogglesState& originalToggles);
+
     ComPtr<ID3D12Device> mD3d12Device;
 
     D3D12DeviceInfo mDeviceInfo = {};
+
+    std::optional<std::unique_ptr<IntelExtension>> mIntelExtension;
 };
 
 }  // namespace dawn::native::d3d12
