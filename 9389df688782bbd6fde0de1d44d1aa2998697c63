@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "341f65f1_fcce7511",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-20T13:20:25Z",
+      "side": 1,
+      "message": "Submitting without CQ, as there appears to be a bug with `clang-format` where partial formatting gives a different result to formatting the whole file.",
+      "revId": "9389df688782bbd6fde0de1d44d1aa2998697c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
