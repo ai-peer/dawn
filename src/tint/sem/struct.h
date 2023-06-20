@@ -50,7 +50,7 @@ class Struct final : public utils::Castable<Struct, type::Struct> {
     /// @param size_no_padding size of the members without the end of structure alignment padding
     Struct(const ast::Struct* declaration,
            Symbol name,
-           utils::VectorRef<const StructMember*> members,
+           utils::VectorRef<StructMember*> members,
            uint32_t align,
            uint32_t size,
            uint32_t size_no_padding);

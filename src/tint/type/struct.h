@@ -64,7 +64,7 @@ class Struct : public utils::Castable<Struct, Type> {
     /// @param size_no_padding size of the members without the end of structure
     /// alignment padding
     Struct(Symbol name,
-           utils::VectorRef<const StructMember*> members,
+           utils::VectorRef<type::StructMember*> members,
            uint32_t align,
            uint32_t size,
            uint32_t size_no_padding);
@@ -80,7 +80,9 @@ class Struct : public utils::Castable<Struct, Type> {
     Symbol Name() const { return name_; }
 
     /// @returns the members of the structure
-    utils::VectorRef<const StructMember*> Members() const { return members_; }
+    utils::VectorRef<const StructMember*> Members() const {
+        return utils::VectorRef<StructMember*>(members_).ReinterpretCast<const StructMember*>();
+    }
 
     /// @param name the member name to look for
     /// @returns the member with the given name, or nullptr if it was not found.
@@ -171,7 +173,7 @@ class Struct : public utils::Castable<Struct, Type> {
 
   private:
     const Symbol name_;
-    const utils::Vector<const StructMember*, 4> members_;
+    const utils::Vector<StructMember*, 4> members_;
     const uint32_t align_;
     const uint32_t size_;
     const uint32_t size_no_padding_;

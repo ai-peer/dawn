@@ -165,7 +165,7 @@ const type::Pointer* Manager::ptr(builtin::AddressSpace address_space,
 }
 
 const type::Struct* Manager::Struct(Symbol name, utils::VectorRef<StructMemberDesc> md) {
-    utils::Vector<const type::StructMember*, 4> members;
+    utils::Vector<type::StructMember*, 4> members;
     uint32_t current_size = 0u;
     uint32_t max_align = 0u;
     for (const auto& m : md) {

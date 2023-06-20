@@ -30,7 +30,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::type::StructMember);
 namespace tint::type {
 namespace {
 
-type::Flags FlagsFrom(utils::VectorRef<const StructMember*> members) {
+type::Flags FlagsFrom(utils::VectorRef<StructMember*> members) {
     type::Flags flags{
         Flag::kConstructable,
         Flag::kCreationFixedFootprint,
@@ -53,7 +53,7 @@ type::Flags FlagsFrom(utils::VectorRef<const StructMember*> members) {
 }  // namespace
 
 Struct::Struct(Symbol name,
-               utils::VectorRef<const StructMember*> members,
+               utils::VectorRef<StructMember*> members,
                uint32_t align,
                uint32_t size,
                uint32_t size_no_padding)
@@ -172,7 +172,7 @@ const Type* Struct::Element(uint32_t index) const {
 Struct* Struct::Clone(CloneContext& ctx) const {
     auto sym = ctx.dst.st->Register(name_.Name());
 
-    utils::Vector<const StructMember*, 4> members;
+    utils::Vector<StructMember*, 4> members;
     for (const auto& mem : members_) {
         members.Push(mem->Clone(ctx));
     }

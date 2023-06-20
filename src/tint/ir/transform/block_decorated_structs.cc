@@ -59,14 +59,19 @@ void BlockDecoratedStructs::Run(Module* ir, const DataMap&, DataMap&) const {
         auto* store_ty = ptr->StoreType();
 
         bool wrapped = false;
-        utils::Vector<const type::StructMember*, 4> members;
+        utils::Vector<type::StructMember*, 4> members;
 
         // Build the member list for the block-decorated structure.
         if (auto* str = store_ty->As<type::Struct>(); str && !str->HasFixedFootprint()) {
             // We know the original struct will only ever be used as the store type of a buffer, so
             // just redeclare it as a block-decorated struct.
+            // TODO(jrprice): When types are mutable, we can just set the block flag directly.
+            type::CloneContext clone_context{
+                /* src */ {&ir->symbols},
+                /* dst */ {&ir->symbols, &ir->Types()},
+            };
             for (auto* member : str->Members()) {
-                members.Push(member);
+                members.Push(member->Clone(clone_context));
             }
         } else {
             // The original struct might be used in other places, so create a new block-decorated

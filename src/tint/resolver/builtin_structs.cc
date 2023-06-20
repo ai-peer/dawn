@@ -38,7 +38,7 @@ type::Struct* BuildStruct(ProgramBuilder& b,
                           std::initializer_list<NameAndType> member_names_and_types) {
     uint32_t offset = 0;
     uint32_t max_align = 0;
-    utils::Vector<const type::StructMember*, 4> members;
+    utils::Vector<type::StructMember*, 4> members;
     for (auto& m : member_names_and_types) {
         uint32_t align = std::max<uint32_t>(m.type->Align(), 1);
         uint32_t size = m.type->Size();

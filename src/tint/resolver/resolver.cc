@@ -4013,7 +4013,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         }
     }
 
-    utils::Vector<const sem::StructMember*, 8> sem_members;
+    utils::Vector<sem::StructMember*, 8> sem_members;
     sem_members.Reserve(str->members.Length());
 
     // Calculate the effective size and alignment of each field, and the overall size of the
