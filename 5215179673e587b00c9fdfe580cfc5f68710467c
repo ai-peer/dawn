@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddef9ce7_9d34644e",
+        "filename": "src/tint/ir/multi_in_block.h",
+        "patchSetId": 64
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-20T00:13:19Z",
+      "side": 1,
+      "message": "Right, the loop continue and body still end up being multiinblock",
+      "parentUuid": "e035e963_77ef2abb",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b94a1b67_ba46625f",
