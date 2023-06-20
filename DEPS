@@ -213,6 +213,12 @@ deps = {
     'condition': 'dawn_node',
   },
 
+  # Intel Cmd Throttle Policy Extension
+  'third_party/IntelExtension/CmdThrottleExtension': {
+    'url': '{github_git}/GameTechDev/CmdThrottlePolicy.git@03ee839dc95de2702f6d67ffa03c2cc34caf1aa1',
+    'condition': 'host_os == "win"',
+  },
+
   'tools/golang': {
     'packages': [{
       'package': 'infra/3pp/tools/go/${{platform}}',

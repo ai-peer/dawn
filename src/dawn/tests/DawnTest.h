@@ -304,6 +304,8 @@ class DawnTestBase {
     // mDeferredExpectations get too big.
     void ResolveDeferredExpectationsNow();
 
+    virtual wgpu::PowerPreference GetPowerPreference() const;
+
   protected:
     wgpu::Device device;
     wgpu::Queue queue;
