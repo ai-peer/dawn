@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "332330de_181a4644",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "LGTM too, still haven\u0027t reviewed tests. Thank you for your patience.",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fa2be2_eb9dd852",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "Maybe this should return an error instead of silently working.",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6027efc_b67e5b3e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "u-nit: IMHO validation would be more clear if we had this code block check the usage.\n\nRight now things are peppered a bit everywhere in a way that\u0027s hard to follow. It\u0027s tested so probably ok, but still it will be hard to revisit.",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98afbfb_0ab3fa8b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "We should probably do `if (device-\u003eCOnsumedError(...))` since the only errors we expect are internal errors or OOM errors that should cause a device loss.",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af4da72f_a3094cf7",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "Could we restructure this very hot code to more clearly show the fast paths?\n\n```\nif readOnly || singleUse {return {}}\n\nif (isLoadedResolveTexture) {return {};}\n\nreturn DAWN_VALIDATION_ERROR ...\n```",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487f8ca0_d3a5d765",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "This is fairly hot code as well, I\u0027d love to not need this, but don\u0027t see a better way :/ I wonder if we could somehow not add the pass usages to the tracker so that we can avoid all these changes and just skip validation for the bindgroup used in the blit. But then how do we ensure resource transitions and refcounting? I need to think about this more unless you have an idea?",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38dd2296_e304091b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "nit: GetOrCreate maybe?",
+      "range": {
+        "startLine": 870,
+        "startChar": 45,
+        "endLine": 870,
+        "endChar": 48
+      },
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c332b658_43e7d37b",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "How important is this caching? Could it be done another way? I\u0027m asking because ideally TextureBase should be mostly a leaf node of the object graph and have not too much logic. Textures are super core to Dawn and the more complex they are, the more complex all of Dawn needs to be.",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "007b4259_d713856c",
+        "filename": "src/dawn/native/dawn_platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-20T15:27:50Z",
+      "side": 1,
+      "message": "Why does this use three bits?",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
