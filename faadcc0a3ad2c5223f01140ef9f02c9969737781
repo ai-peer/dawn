@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4fddf3e_19d1725d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-20T02:15:26Z",
+      "side": 1,
+      "message": "Now all the tests pass on the bots.\n\nPTAL, thanks!",
+      "revId": "faadcc0a3ad2c5223f01140ef9f02c9969737781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
