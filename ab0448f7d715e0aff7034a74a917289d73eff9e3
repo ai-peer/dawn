@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40b5b2c2_66da0b93",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-20T17:27:46Z",
+      "side": 1,
+      "message": "Right now the caching is done in a way that the implicit MSAA texture will be deallocated if the last single-sampled texture using it is deallocated.\n\nIf we don\u0027t store the cached msaa texture\u0027s ref here, I\u0027m not sure what is better way to trigger the deallocation. Besides the `TextureBase` class, who else knows about its destruction/destroy to trigger the MSAA texture\u0027s deallocation? Do you have any suggestion?",
+      "parentUuid": "c332b658_43e7d37b",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "007b4259_d713856c",
         "filename": "src/dawn/native/dawn_platform.h",
         "patchSetId": 19
