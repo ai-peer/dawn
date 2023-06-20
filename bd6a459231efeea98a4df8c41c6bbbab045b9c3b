@@ -869,6 +869,30 @@
       },
       "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d37d8d_cb941480",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-20T21:26:47Z",
+      "side": 1,
+      "message": "you could add even more, but OK to do in another CL to avoid adding to much to this one",
+      "parentUuid": "d8e7540b_6417d391",
+      "range": {
+        "startLine": 1406,
+        "startChar": 22,
+        "endLine": 1407,
+        "endChar": 61
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

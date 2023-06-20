@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a939d674_e8b8b828",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-20T21:26:47Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "156cdd8e40eae22007d53c80c5ee43973a279535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701e6341_80900e36",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-20T21:26:47Z",
+      "side": 1,
+      "message": "should be able to use `HasToggleEnabled`\n\nalso, please expand the comment to describe more",
+      "range": {
+        "startLine": 877,
+        "startChar": 3,
+        "endLine": 884,
+        "endChar": 5
+      },
+      "revId": "156cdd8e40eae22007d53c80c5ee43973a279535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
