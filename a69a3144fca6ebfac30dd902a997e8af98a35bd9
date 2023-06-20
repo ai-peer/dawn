@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "739cc10f_c8320323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-20T15:14:53Z",
+      "side": 1,
+      "message": "This CL is rebased, please take a look, thanks",
+      "revId": "a69a3144fca6ebfac30dd902a997e8af98a35bd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
