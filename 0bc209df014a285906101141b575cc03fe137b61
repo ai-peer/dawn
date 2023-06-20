@@ -16,6 +16,41 @@
       "message": "`Return` seems wrong here too, since it may have a value. Consider:\n```\n  if %condC [t: %b7, f: %b8] {\n    # True block\n    %b7 \u003d block {\n      ret 1i\n    }\n  }\n\n  ret 2i\n```\n\nIf this is at the top-level if the function, you always wrap the return value in a conditional (in `ProcessFunctionBlockReturn`), so it works fine. When this is nested inside some other control flow, that doesn\u0027t happen. So you end up with this:\n\n```\n  if %condC [t: %b7, f: %b8] {\n    # True block\n    %b7 \u003d block {\n      store %continue_execution, false\n      store %return value, 1i\n      exit_if\n    }\n  }\n\n  store %continue_execution, false\n  store %return_value, 2i\n  exit_if\n```\ni.e. you unconditionally overwrite the return value coming from the inner return.\n\nMaybe this can be solved by just giving `ProcessNestedReturn` the same logic as `ProcessFunctionBlockReturn`, to create the `if(continue_execution)` if there\u0027s a return value.",
       "revId": "0bc209df014a285906101141b575cc03fe137b61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601b2efd_f68e3eaf",
+        "filename": "src/tint/ir/transform/merge_return.cc",
+        "patchSetId": 68
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-20T13:43:55Z",
+      "side": 1,
+      "message": "Isn\u0027t this case covered by `IR_MergeReturnTest.IfElse_OneSideReturns_WithValue` (see [1]) ?",
+      "parentUuid": "4c90c810_33a811c8",
+      "revId": "0bc209df014a285906101141b575cc03fe137b61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d5f275b_f4975be4",
+        "filename": "src/tint/ir/transform/merge_return_test.cc",
+        "patchSetId": 68
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-20T13:43:55Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0bc209df014a285906101141b575cc03fe137b61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
