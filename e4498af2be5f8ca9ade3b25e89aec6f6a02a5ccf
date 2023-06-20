@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f17775_b49ec0ea",
+        "filename": "src/tint/utils/hashmap_base.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-20T15:05:24Z",
+      "side": 0,
+      "message": "Was this intentional?",
+      "revId": "e4498af2be5f8ca9ade3b25e89aec6f6a02a5ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
