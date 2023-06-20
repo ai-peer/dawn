@@ -178,6 +178,24 @@
       "parentUuid": "e11442b3_50f8ded1",
       "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b186f3f_b174ddde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-06-20T17:00:58Z",
+      "side": 1,
+      "message": "So, I think dawn_end2end_tests produce too much output and some buffer somewhere overflows. But, I found a workaround - to reduce GTest batch size.\nWorks for the other CL as well.\nI\u0027ll upload a CL.",
+      "parentUuid": "4c9b5147_b06dcc7a",
+      "revId": "77cfb0647e233043ee6c60c600ce4a0ae21dc497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
