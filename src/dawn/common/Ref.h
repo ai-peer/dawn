@@ -15,10 +15,23 @@
 #ifndef SRC_DAWN_COMMON_REF_H_
 #define SRC_DAWN_COMMON_REF_H_
 
+#include <mutex>
+#include <type_traits>
+
 #include "dawn/common/RefBase.h"
+#include "dawn/common/RefCounted.h"
 
 namespace dawn {
+
+template <typename T>
+class Ref;
+
+template <typename T>
+class WeakRef;
+
 namespace detail {
+
+class WeakRefCountedBase;
 
 template <typename T>
 struct RefCountedTraits {
@@ -27,12 +40,41 @@ struct RefCountedTraits {
     static void Release(T* value) { value->Release(); }
 };
 
+// Indirection layer to provide external ref-counting for WeakRefs.
+class RefCountedData : public RefCounted {
+  public:
+    explicit RefCountedData(RefCounted* value);
+    void Invalidate();
+
+    // Tries to return a valid Ref to `mValue` if it's internal refcount is not already 0. If the
+    // internal refcount has already reached 0, returns nullptr instead.
+    template <typename T>
+    Ref<T> TryGetRef() {
+        std::lock_guard<std::mutex> lock(mMutex);
+        if (!mValue || !mValue->mRefCount.TryIncrement()) {
+            return nullptr;
+        }
+        return AcquireRef(static_cast<T*>(mValue));
+    }
+
+  private:
+    std::mutex mMutex;
+    RefCounted* mValue = nullptr;
+};
+
 }  // namespace detail
 
 template <typename T>
 class Ref : public RefBase<T*, detail::RefCountedTraits<T>> {
   public:
     using RefBase<T*, detail::RefCountedTraits<T>>::RefBase;
+
+    template <
+        typename U = T,
+        typename = typename std::enable_if<std::is_base_of_v<detail::WeakRefCountedBase, U>>::type>
+    WeakRef<T> GetWeakRef() {
+        return WeakRef<T>(this->Get());
+    }
 };
 
 }  // namespace dawn
