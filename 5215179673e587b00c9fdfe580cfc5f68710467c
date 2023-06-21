@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7946877_f290ecbf",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 64
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-21T14:15:58Z",
+      "side": 1,
+      "message": "We\u0027ll have to discuss this - it has some fairly complex interactions with `InboundSiblingBranches` which I\u0027m not sure how we\u0027d tackle.",
+      "parentUuid": "5fee170a_f482db16",
+      "revId": "5215179673e587b00c9fdfe580cfc5f68710467c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8eae0fc4_8fbaf39c",
