@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daaec23a_e0cc4d31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-21T21:22:27Z",
+      "side": 1,
+      "message": "Rolling this CL into Chrome doesn\u0027t break it, nor will Chrome build DXC. For that, some changes will need to be made to Chrome (see https://chromium-review.googlesource.com/c/chromium/src/+/4634339),",
+      "revId": "7af31cb2f444520773385a1a38ae6c9e8a942efa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
