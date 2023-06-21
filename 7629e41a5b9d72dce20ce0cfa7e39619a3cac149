@@ -16,6 +16,40 @@
       "message": "PTAL. This is the only one I could think of for `var`. If the result is set, then result will `ASSERT` on a `nullptr` type. If the result is provided then the `var` will `ASSERT` on a non-pointer type. So, they\u0027re covered by construction.\n\nThere is no way to add or remove results, and the `var` always adds a `result`.",
       "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6acb13_66024e60",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-21T08:22:57Z",
+      "side": 1,
+      "message": "```suggestion\n    /// Appends and returns the instruction @p val to the current block. If there is no current block bound, then @p val is just returned.\n```",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68114cf_bc218ccd",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-21T08:22:57Z",
+      "side": 1,
+      "message": "This is highlighting that this API is a bit fragile.\nWhat do you think about changing `Builder::With()` to return a new `BlockBuilder` which holds this method, and all the others we use `Append` with? `BlockBuilder` could then have an LLVM-style `SetInsertionPoint(Block*)` and `SetInsertionPoint(Instruction* after)` to repoint where new instructions are placed.\n\nWould require maintaining a whole mirror of the methods. :/",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
