@@ -21,6 +21,10 @@
 
 namespace dawn {
 
+namespace detail {
+class RefCountedData;
+}  // namespace detail
+
 class RefCount {
   public:
     // Create a refcount with a payload. The refcount starts initially at one.
@@ -69,6 +73,7 @@ class RefCounted {
 
     // Tries to return a valid Ref to `object` if it's internal refcount is not already 0. If the
     // internal refcount has already reached 0, returns nullptr instead.
+    // TODO(lokokung) Remove this once ContentLessObjectCache is converted to use WeakRefs.
     template <typename T, typename = typename std::is_convertible<T, RefCounted>>
     friend Ref<T> TryGetRef(T* object) {
         // Since this is called on the RefCounted class directly, and can race with destruction, we
@@ -86,6 +91,9 @@ class RefCounted {
     void APIRelease() { ReleaseAndLockBeforeDestroy(); }
 
   protected:
+    // Friend class is needed to access the RefCount to TryIncrement.
+    friend class detail::RefCountedData;
+
     virtual ~RefCounted();
 
     void ReleaseAndLockBeforeDestroy();
