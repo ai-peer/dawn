@@ -276,7 +276,11 @@ void Disassembler::EmitFunction(Function* func) {
 }
 
 void Disassembler::EmitValueWithType(Instruction* val) {
-    EmitValueWithType(val->Result());
+    if (val->Result()) {
+        EmitValueWithType(val->Result());
+    } else {
+        out_ << "<null>";
+    }
 }
 
 void Disassembler::EmitValueWithType(Value* val) {

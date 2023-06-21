@@ -47,6 +47,7 @@
 #include "src/tint/switch.h"
 #include "src/tint/type/bool.h"
 #include "src/tint/type/pointer.h"
+#include "src/tint/utils/predicates.h"
 #include "src/tint/utils/scoped_assignment.h"
 
 namespace tint::ir {
@@ -158,6 +159,7 @@ class Validator {
                          std::string("root block: invalid instruction: ") + inst->TypeInfo().name);
                 continue;
             }
+            CheckVar(var);
         }
     }
 
@@ -194,7 +196,7 @@ class Validator {
             [&](Switch*) {},                     //
             [&](Swizzle*) {},                    //
             [&](Unary*) {},                      //
-            [&](Var*) {},                        //
+            [&](Var* var) { CheckVar(var); },    //
             [&](Default) {
                 AddError(std::string("missing validation of: ") + inst->TypeInfo().name);
             });
@@ -308,6 +310,12 @@ class Validator {
         }
         if (if_->Condition() && !if_->Condition()->Type()->Is<type::Bool>()) {
             AddError(if_, If::kConditionOperandOffset, "if: condition must be a `bool` type");
+        }
+    }
+
+    void CheckVar(Var* var) {
+        if (var->Results().Any(utils::IsNull)) {
+            AddError(var, "var: result is a nullptr");
         }
     }
 };  // namespace
