@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e111ebe_770362a9",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T23:48:10Z",
+      "side": 1,
+      "message": "I believe you should be able to move this to a different file now that it\u0027s more separated",
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d26910_924dfc5d",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T23:48:10Z",
+      "side": 1,
+      "message": "nit: maybe call it IsValidNotThreadSafeForTesting or something scary",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 54
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64efde59_a79da314",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T23:48:10Z",
+      "side": 1,
+      "message": "all it \"Upgrade\" or \"Promote\"\n\nGet sounds like it is a cheap operation",
+      "range": {
+        "startLine": 214,
+        "startChar": 11,
+        "endLine": 214,
+        "endChar": 14
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d66e9784_bf23cfee",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T23:48:10Z",
+      "side": 1,
+      "message": "ditto: IsValidNotThreadSafeForTesting",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 79
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b896e3_9323efae",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T23:48:10Z",
+      "side": 1,
+      "message": "why not have this as a member function on WeakRefCounted\u003cT\u003e ?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 1
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
