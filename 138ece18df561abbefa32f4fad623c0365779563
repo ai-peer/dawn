@@ -70,6 +70,24 @@
       "parentUuid": "fc2a17bc_06904604",
       "revId": "138ece18df561abbefa32f4fad623c0365779563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b11b02e0_558c1f27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-21T12:49:49Z",
+      "side": 1,
+      "message": "Great.\n\nI think the previous fails were due to the test infra bug fixed by Yuly\u0027s CL: https://chromium-review.googlesource.com/c/chromium/src/+/4629689",
+      "parentUuid": "fc2a17bc_06904604",
+      "revId": "138ece18df561abbefa32f4fad623c0365779563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
