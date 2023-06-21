@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "404a821f_c77e06eb",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-21T14:16:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "63a9bf88_d7e14fb4",
+      "revId": "d640c7923c2db9701aee94276c5f2595526a6dd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a852cad_88e19d2f",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Not sure if you\u0027re actually asking for action here.",
       "parentUuid": "6a852cad_88e19d2f",
+      "revId": "d640c7923c2db9701aee94276c5f2595526a6dd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f715e078_b659ec91",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-21T14:16:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7816b6b7_b446c21a",
       "revId": "d640c7923c2db9701aee94276c5f2595526a6dd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
