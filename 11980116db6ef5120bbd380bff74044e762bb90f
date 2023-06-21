@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8f71444_a4dbe5f5",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-21T21:01:52Z",
+      "side": 1,
+      "message": "I think those R32* limitations are only for read/write storage textures. Both GLES and D3D11 have similar constraints in that case, and a similar workaround (bind RGBA to R32 and swizzle in the shader).\n\nHowever, WebGPU doesn\u0027t support readwrite storage textures, so the above limitation shouldn\u0027t be a problem. That said, RW storage textures are very interesting for Dawn-native in order to implement extended (Photoshop-style) blend modes, so we should look at a generalized way to expose them that (hopefully) works on Compat as well.",
+      "parentUuid": "5738a0af_1e666f66",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60286ea8_13b48b2c",
         "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 1
