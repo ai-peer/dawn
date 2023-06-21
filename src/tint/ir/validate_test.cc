@@ -532,5 +532,59 @@ note: # Disassembly
 )");
 }
 
+TEST_F(IR_ValidateTest, Var_RootBlock_NullResult) {
+    auto* v = mod.instructions.Create<ir::Var>(nullptr);
+    b.RootBlock()->Append(v);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:3:12 error: var: result is a nullptr
+  <null> = var
+           ^^^
+
+:2:1 note: In block
+%b1 = block {
+^^^^^^^^^^^
+
+note: # Disassembly
+# Root block
+%b1 = block {
+  <null> = var
+}
+
+)");
+}
+
+TEST_F(IR_ValidateTest, Var_Function_NullResult) {
+    auto* v = mod.instructions.Create<ir::Var>(nullptr);
+
+    auto* f = b.Function("my_func", ty.void_());
+    mod.functions.Push(f);
+
+    auto sb = b.With(f->StartTarget());
+    sb.Append(v);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:3:14 error: var: result is a nullptr
+    <null> = var
+             ^^^
+
+:2:3 note: In block
+  %b1 = block {
+  ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    <null> = var
+    ret
+  }
+}
+
+)");
+}
+
 }  // namespace
 }  // namespace tint::ir
