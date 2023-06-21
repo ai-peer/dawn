@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb825bce_da7327c2",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T04:02:20Z",
+      "side": 1,
+      "message": "casing\n\n```suggestion\n    native::Adapter CreateNullAdapter(native::Instance* instance,\n```",
+      "range": {
+        "startLine": 42,
+        "startChar": 20,
+        "endLine": 42,
+        "endChar": 37
+      },
+      "revId": "58d72d95ef9d57cae68f21ac8a11b18d9639af93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
