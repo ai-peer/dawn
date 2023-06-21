@@ -18,7 +18,8 @@
 namespace tint::ir {
 namespace {
 
-using namespace tint::number_suffixes;  // NOLINT
+using namespace tint::number_suffixes;        // NOLINT
+using namespace tint::builtin::fluent_types;  // NOLINT
 
 using IR_OperandInstructionTest = IRTestHelper;
 
@@ -38,6 +39,32 @@ TEST_F(IR_OperandInstructionTest, Destroy) {
     EXPECT_EQ(inst->Block(), nullptr);
     EXPECT_TRUE(lhs->Usages().IsEmpty());
     EXPECT_TRUE(rhs->Usages().IsEmpty());
+    EXPECT_FALSE(inst->Result()->Alive());
+}
+
+TEST_F(IR_OperandInstructionTest, ClearOperands_WithNullOperand) {
+    auto* block = b.Block();
+    // The var initializer is a nullptr
+    auto* inst = b.Var(ty.ptr<private_, f32>());
+    block->Append(inst);
+
+    inst->Destroy();
+    EXPECT_EQ(inst->Block(), nullptr);
+    EXPECT_FALSE(inst->Result()->Alive());
+}
+
+TEST_F(IR_OperandInstructionTest, SetOperands_WithNullOperand) {
+    auto* block = b.Block();
+    // The var initializer is a nullptr
+    auto* inst = b.Var(ty.ptr<private_, f32>());
+    utils::Vector<Value*, 1> ops;
+    ops.Push(nullptr);
+
+    inst->SetOperands(ops);
+    block->Append(inst);
+
+    inst->Destroy();
+    EXPECT_EQ(inst->Block(), nullptr);
     EXPECT_FALSE(inst->Result()->Alive());
 }
 
