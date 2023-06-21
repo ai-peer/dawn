@@ -16,6 +16,23 @@
       "message": "LGTM2",
       "revId": "397f65b3501d1a852a26d9e4d4577cc87ef7e8ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d931f3bc_ea180331",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-21T19:09:20Z",
+      "side": 1,
+      "message": "Austin, turns out your +1 is not sticky. Still need a LGTM from you",
+      "revId": "397f65b3501d1a852a26d9e4d4577cc87ef7e8ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
