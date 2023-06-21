@@ -34,7 +34,7 @@ class Materialize final : public utils::Castable<Materialize, ValueExpression> {
     /// @param constant the constant value of this expression or nullptr
     Materialize(const ValueExpression* expr,
                 const Statement* statement,
-                const type::Type* type,
+                type::Type* type,
                 const constant::Value* constant);
 
     /// Destructor

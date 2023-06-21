@@ -62,8 +62,8 @@ class Struct final : public utils::Castable<Struct, type::Struct> {
     const ast::Struct* Declaration() const { return declaration_; }
 
     /// @returns the members of the structure
-    utils::VectorRef<const StructMember*> Members() const {
-        return Base::Members().ReinterpretCast<const StructMember*>();
+    utils::VectorRef<StructMember*> Members() const {
+        return Base::Members().ReinterpretCast<StructMember*>();
     }
 
   private:
@@ -85,7 +85,7 @@ class StructMember final : public utils::Castable<StructMember, type::StructMemb
     /// @param attributes the optional attributes
     StructMember(const ast::StructMember* declaration,
                  Symbol name,
-                 const type::Type* type,
+                 type::Type* type,
                  uint32_t index,
                  uint32_t offset,
                  uint32_t align,

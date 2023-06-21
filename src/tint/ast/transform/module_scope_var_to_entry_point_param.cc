@@ -50,7 +50,7 @@ bool ShouldRun(const Program* program) {
 }
 
 // Returns `true` if `type` is or contains a matrix type.
-bool ContainsMatrix(const type::Type* type) {
+bool ContainsMatrix(type::Type* type) {
     type = type->UnwrapRef();
     if (type->Is<type::Matrix>()) {
         return true;
@@ -80,7 +80,7 @@ struct ModuleScopeVarToEntryPointParam::State {
     /// and add it to the global declarations now, so that they precede new global
     /// declarations that need to reference them.
     /// @param ty the type to clone
-    void CloneStructTypes(const type::Type* ty) {
+    void CloneStructTypes(type::Type* ty) {
         if (auto* str = ty->As<sem::Struct>()) {
             if (!cloned_structs_.emplace(str).second) {
                 // The struct has already been cloned.

@@ -82,7 +82,7 @@ uint32_t pipeline_stage_to_execution_model(ast::PipelineStage stage) {
 /// one or more levels of an arrays inside of `type`.
 /// @param type the given type, which must not be null
 /// @returns the nested matrix type, or nullptr if none
-const type::Matrix* GetNestedMatrixType(const type::Type* type) {
+type::Matrix* GetNestedMatrixType(type::Type* type) {
     while (auto* arr = type->As<type::Array>()) {
         type = arr->ElemType();
     }
@@ -232,7 +232,7 @@ uint32_t builtin_to_glsl_method(const sem::Builtin* builtin) {
 }
 
 /// @return the vector element type if ty is a vector, otherwise return ty.
-const type::Type* ElementTypeOf(const type::Type* ty) {
+type::Type* ElementTypeOf(type::Type* ty) {
     if (auto* v = ty->As<type::Vector>()) {
         return v->type();
     }
@@ -1105,7 +1105,7 @@ uint32_t Builder::GenerateIdentifierExpression(const ast::IdentifierExpression* 
     return 0;
 }
 
-uint32_t Builder::GenerateLoad(const type::Reference* type, uint32_t id) {
+uint32_t Builder::GenerateLoad(type::Reference* type, uint32_t id) {
     auto type_id = GenerateTypeIfNeeded(type->StoreType());
     auto result = result_op();
     auto result_id = std::get<uint32_t>(result);
@@ -1115,7 +1115,7 @@ uint32_t Builder::GenerateLoad(const type::Reference* type, uint32_t id) {
     return result_id;
 }
 
-uint32_t Builder::GenerateLoadIfNeeded(const type::Type* type, uint32_t id) {
+uint32_t Builder::GenerateLoadIfNeeded(type::Type* type, uint32_t id) {
     if (auto* ref = type->As<type::Reference>()) {
         return GenerateLoad(ref, id);
     }
@@ -1395,7 +1395,7 @@ uint32_t Builder::GenerateValueConstructorOrConversion(const sem::Call* call,
     });
 }
 
-uint32_t Builder::GenerateCastOrCopyOrPassthrough(const type::Type* to_type,
+uint32_t Builder::GenerateCastOrCopyOrPassthrough(type::Type* to_type,
                                                   const ast::Expression* from_expr,
                                                   bool is_global_init) {
     // This should not happen as we rely on constant folding to obviate
@@ -1407,7 +1407,7 @@ uint32_t Builder::GenerateCastOrCopyOrPassthrough(const type::Type* to_type,
         return 0;
     }
 
-    auto elem_type_of = [](const type::Type* t) -> const type::Type* {
+    auto elem_type_of = [](type::Type* t) -> type::Type* {
         if (t->Is<type::Scalar>()) {
             return t;
         }
@@ -1630,29 +1630,29 @@ uint32_t Builder::GenerateConstantIfNeeded(const constant::Value* constant) {
 
     return Switch(
         ty,  //
-        [&](const type::Bool*) {
+        [&](type::Bool*) {
             bool val = constant->ValueAs<bool>();
             return GenerateConstantIfNeeded(ScalarConstant::Bool(val));
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             auto val = constant->ValueAs<f32>();
             return GenerateConstantIfNeeded(ScalarConstant::F32(val.value));
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             auto val = constant->ValueAs<f16>();
             return GenerateConstantIfNeeded(ScalarConstant::F16(val.value));
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             auto val = constant->ValueAs<i32>();
             return GenerateConstantIfNeeded(ScalarConstant::I32(val.value));
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             auto val = constant->ValueAs<u32>();
             return GenerateConstantIfNeeded(ScalarConstant::U32(val.value));
         },
-        [&](const type::Vector* v) { return composite(v->Width()); },
-        [&](const type::Matrix* m) { return composite(m->columns()); },
-        [&](const type::Array* a) {
+        [&](type::Vector* v) { return composite(v->Width()); },
+        [&](type::Matrix* m) { return composite(m->columns()); },
+        [&](type::Array* a) {
             auto count = a->ConstantCount();
             if (!count) {
                 TINT_ICE(Writer, builder_.Diagnostics()) << type::Array::kErrExpectedConstantCount;
@@ -1660,7 +1660,7 @@ uint32_t Builder::GenerateConstantIfNeeded(const constant::Value* constant) {
             }
             return composite(count.value());
         },
-        [&](const type::Struct* s) { return composite(s->Members().Length()); },
+        [&](type::Struct* s) { return composite(s->Members().Length()); },
         [&](Default) {
             TINT_ICE(Writer, builder_.Diagnostics())
                 << "unhandled constant type: " + ty->FriendlyName();
@@ -1742,7 +1742,7 @@ uint32_t Builder::GenerateConstantIfNeeded(const ScalarConstant& constant) {
     return result_id;
 }
 
-uint32_t Builder::GenerateConstantNullIfNeeded(const type::Type* type) {
+uint32_t Builder::GenerateConstantNullIfNeeded(type::Type* type) {
     auto type_id = GenerateTypeIfNeeded(type);
     if (type_id == 0) {
         return 0;
@@ -1757,7 +1757,7 @@ uint32_t Builder::GenerateConstantNullIfNeeded(const type::Type* type) {
     });
 }
 
-uint32_t Builder::GenerateConstantVectorSplatIfNeeded(const type::Vector* type, uint32_t value_id) {
+uint32_t Builder::GenerateConstantVectorSplatIfNeeded(type::Vector* type, uint32_t value_id) {
     auto type_id = GenerateTypeIfNeeded(type);
     if (type_id == 0 || value_id == 0) {
         return 0;
@@ -1852,7 +1852,7 @@ uint32_t Builder::GenerateShortCircuitBinaryExpression(const ast::BinaryExpressi
     return result_id;
 }
 
-uint32_t Builder::GenerateSplat(uint32_t scalar_id, const type::Type* vec_type) {
+uint32_t Builder::GenerateSplat(uint32_t scalar_id, type::Type* vec_type) {
     // Create a new vector to splat scalar into
     auto splat_vector = result_op();
     auto* splat_vector_type = builder_.create<type::Pointer>(builtin::AddressSpace::kFunction,
@@ -1878,7 +1878,7 @@ uint32_t Builder::GenerateSplat(uint32_t scalar_id, const type::Type* vec_type) 
 
 uint32_t Builder::GenerateMatrixAddOrSub(uint32_t lhs_id,
                                          uint32_t rhs_id,
-                                         const type::Matrix* type,
+                                         type::Matrix* type,
                                          spv::Op op) {
     // Example addition of two matrices:
     // %31 = OpLoad %mat3v4float %m34
@@ -3230,7 +3230,7 @@ bool Builder::GenerateAtomicBuiltin(const sem::Call* call,
     }
 }
 
-uint32_t Builder::GenerateSampledImage(const type::Type* texture_type,
+uint32_t Builder::GenerateSampledImage(type::Type* texture_type,
                                        Operand texture_operand,
                                        Operand sampler_operand) {
     // DepthTexture is always declared as SampledTexture.
@@ -3588,7 +3588,7 @@ bool Builder::GenerateVariableDeclStatement(const ast::VariableDeclStatement* st
     return GenerateFunctionVariable(stmt->variable);
 }
 
-uint32_t Builder::GenerateTypeIfNeeded(const type::Type* type) {
+uint32_t Builder::GenerateTypeIfNeeded(type::Type* type) {
     if (type == nullptr) {
         TINT_ICE(Writer, builder_.Diagnostics()) << "attempting to generate type from null type";
         return 0;
@@ -3632,49 +3632,49 @@ uint32_t Builder::GenerateTypeIfNeeded(const type::Type* type) {
         auto id = std::get<uint32_t>(result);
         bool ok = Switch(
             type,
-            [&](const type::Array* arr) {  //
+            [&](type::Array* arr) {  //
                 return GenerateArrayType(arr, result);
             },
-            [&](const type::Bool*) {
+            [&](type::Bool*) {
                 module_.PushType(spv::Op::OpTypeBool, {result});
                 return true;
             },
-            [&](const type::F32*) {
+            [&](type::F32*) {
                 module_.PushType(spv::Op::OpTypeFloat, {result, Operand(32u)});
                 return true;
             },
-            [&](const type::F16*) {
+            [&](type::F16*) {
                 module_.PushType(spv::Op::OpTypeFloat, {result, Operand(16u)});
                 return true;
             },
-            [&](const type::I32*) {
+            [&](type::I32*) {
                 module_.PushType(spv::Op::OpTypeInt, {result, Operand(32u), Operand(1u)});
                 return true;
             },
-            [&](const type::Matrix* mat) {  //
+            [&](type::Matrix* mat) {  //
                 return GenerateMatrixType(mat, result);
             },
-            [&](const type::Pointer* ptr) {  //
+            [&](type::Pointer* ptr) {  //
                 return GeneratePointerType(ptr, result);
             },
-            [&](const type::Reference* ref) {  //
+            [&](type::Reference* ref) {  //
                 return GenerateReferenceType(ref, result);
             },
-            [&](const type::Struct* str) {  //
+            [&](type::Struct* str) {  //
                 return GenerateStructType(str, result);
             },
-            [&](const type::U32*) {
+            [&](type::U32*) {
                 module_.PushType(spv::Op::OpTypeInt, {result, Operand(32u), Operand(0u)});
                 return true;
             },
-            [&](const type::Vector* vec) {  //
+            [&](type::Vector* vec) {  //
                 return GenerateVectorType(vec, result);
             },
-            [&](const type::Void*) {
+            [&](type::Void*) {
                 module_.PushType(spv::Op::OpTypeVoid, {result});
                 return true;
             },
-            [&](const type::StorageTexture* tex) {
+            [&](type::StorageTexture* tex) {
                 if (!GenerateTextureType(tex, result)) {
                     return false;
                 }
@@ -3691,8 +3691,8 @@ uint32_t Builder::GenerateTypeIfNeeded(const type::Type* type) {
                     id;
                 return true;
             },
-            [&](const type::Texture* tex) { return GenerateTextureType(tex, result); },
-            [&](const type::Sampler* s) {
+            [&](type::Texture* tex) { return GenerateTextureType(tex, result); },
+            [&](type::Sampler* s) {
                 module_.PushType(spv::Op::OpTypeSampler, {result});
 
                 // Register both of the sampler type names. In SPIR-V they're the same
@@ -3719,7 +3719,7 @@ uint32_t Builder::GenerateTypeIfNeeded(const type::Type* type) {
     });
 }
 
-bool Builder::GenerateTextureType(const type::Texture* texture, const Operand& result) {
+bool Builder::GenerateTextureType(type::Texture* texture, const Operand& result) {
     if (TINT_UNLIKELY(texture->Is<type::ExternalTexture>())) {
         TINT_ICE(Writer, builder_.Diagnostics())
             << "Multiplanar external texture transform was not run.";
@@ -3772,15 +3772,13 @@ bool Builder::GenerateTextureType(const type::Texture* texture, const Operand& r
 
     uint32_t type_id = Switch(
         texture,
-        [&](const type::DepthTexture*) {
+        [&](type::DepthTexture*) { return GenerateTypeIfNeeded(builder_.create<type::F32>()); },
+        [&](type::DepthMultisampledTexture*) {
             return GenerateTypeIfNeeded(builder_.create<type::F32>());
         },
-        [&](const type::DepthMultisampledTexture*) {
-            return GenerateTypeIfNeeded(builder_.create<type::F32>());
-        },
-        [&](const type::SampledTexture* t) { return GenerateTypeIfNeeded(t->type()); },
-        [&](const type::MultisampledTexture* t) { return GenerateTypeIfNeeded(t->type()); },
-        [&](const type::StorageTexture* t) { return GenerateTypeIfNeeded(t->type()); },
+        [&](type::SampledTexture* t) { return GenerateTypeIfNeeded(t->type()); },
+        [&](type::MultisampledTexture* t) { return GenerateTypeIfNeeded(t->type()); },
+        [&](type::StorageTexture* t) { return GenerateTypeIfNeeded(t->type()); },
         [&](Default) { return 0u; });
     if (type_id == 0u) {
         return false;
@@ -3799,7 +3797,7 @@ bool Builder::GenerateTextureType(const type::Texture* texture, const Operand& r
     return true;
 }
 
-bool Builder::GenerateArrayType(const type::Array* arr, const Operand& result) {
+bool Builder::GenerateArrayType(type::Array* arr, const Operand& result) {
     auto elem_type = GenerateTypeIfNeeded(arr->ElemType());
     if (elem_type == 0) {
         return false;
@@ -3829,7 +3827,7 @@ bool Builder::GenerateArrayType(const type::Array* arr, const Operand& result) {
     return true;
 }
 
-bool Builder::GenerateMatrixType(const type::Matrix* mat, const Operand& result) {
+bool Builder::GenerateMatrixType(type::Matrix* mat, const Operand& result) {
     auto* col_type = builder_.create<type::Vector>(mat->type(), mat->rows());
     auto col_type_id = GenerateTypeIfNeeded(col_type);
     if (has_error()) {
@@ -3841,7 +3839,7 @@ bool Builder::GenerateMatrixType(const type::Matrix* mat, const Operand& result)
     return true;
 }
 
-bool Builder::GeneratePointerType(const type::Pointer* ptr, const Operand& result) {
+bool Builder::GeneratePointerType(type::Pointer* ptr, const Operand& result) {
     auto subtype_id = GenerateTypeIfNeeded(ptr->StoreType());
     if (subtype_id == 0) {
         return false;
@@ -3858,7 +3856,7 @@ bool Builder::GeneratePointerType(const type::Pointer* ptr, const Operand& resul
     return true;
 }
 
-bool Builder::GenerateReferenceType(const type::Reference* ref, const Operand& result) {
+bool Builder::GenerateReferenceType(type::Reference* ref, const Operand& result) {
     auto subtype_id = GenerateTypeIfNeeded(ref->StoreType());
     if (subtype_id == 0) {
         return false;
@@ -3875,7 +3873,7 @@ bool Builder::GenerateReferenceType(const type::Reference* ref, const Operand& r
     return true;
 }
 
-bool Builder::GenerateStructType(const type::Struct* struct_type, const Operand& result) {
+bool Builder::GenerateStructType(type::Struct* struct_type, const Operand& result) {
     auto struct_id = std::get<uint32_t>(result);
 
     if (struct_type->Name().IsValid()) {
@@ -3910,7 +3908,7 @@ bool Builder::GenerateStructType(const type::Struct* struct_type, const Operand&
 
 uint32_t Builder::GenerateStructMember(uint32_t struct_id,
                                        uint32_t idx,
-                                       const type::StructMember* member) {
+                                       type::StructMember* member) {
     module_.PushDebug(spv::Op::OpMemberName,
                       {Operand(struct_id), Operand(idx), Operand(member->Name().Name())});
 
@@ -3939,7 +3937,7 @@ uint32_t Builder::GenerateStructMember(uint32_t struct_id,
     return GenerateTypeIfNeeded(member->Type());
 }
 
-bool Builder::GenerateVectorType(const type::Vector* vec, const Operand& result) {
+bool Builder::GenerateVectorType(type::Vector* vec, const Operand& result) {
     auto type_id = GenerateTypeIfNeeded(vec->type());
     if (has_error()) {
         return false;

@@ -32,7 +32,7 @@ class Constant : public utils::Castable<Constant, Value> {
     const constant::Value* Value() { return value_; }
 
     /// @returns the type of the constant
-    const type::Type* Type() override { return value_->Type(); }
+    type::Type* Type() override { return value_->Type(); }
 
   private:
     const constant::Value* const value_ = nullptr;

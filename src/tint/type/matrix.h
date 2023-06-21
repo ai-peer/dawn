@@ -32,7 +32,7 @@ class Matrix final : public utils::Castable<Matrix, Type> {
     /// Constructor
     /// @param column_type the type of a column of the matrix
     /// @param columns the number of columns in the matrix
-    Matrix(const Vector* column_type, uint32_t columns);
+    Matrix(Vector* column_type, uint32_t columns);
 
     /// Destructor
     ~Matrix() override;
@@ -42,14 +42,14 @@ class Matrix final : public utils::Castable<Matrix, Type> {
     bool Equals(const UniqueNode& other) const override;
 
     /// @returns the type of the matrix
-    const Type* type() const { return subtype_; }
+    Type* type() const { return subtype_; }
     /// @returns the number of rows in the matrix
     uint32_t rows() const { return rows_; }
     /// @returns the number of columns in the matrix
     uint32_t columns() const { return columns_; }
 
     /// @returns the column-vector type of the matrix
-    const Vector* ColumnType() const { return column_type_; }
+    Vector* ColumnType() const { return column_type_; }
 
     /// @returns the name for this type that closely resembles how it would be
     /// declared in WGSL.
@@ -66,19 +66,18 @@ class Matrix final : public utils::Castable<Matrix, Type> {
     uint32_t ColumnStride() const;
 
     /// @copydoc Type::Elements
-    TypeAndCount Elements(const Type* type_if_invalid = nullptr,
-                          uint32_t count_if_invalid = 0) const override;
+    TypeAndCount Elements(Type* type_if_invalid = nullptr, uint32_t count_if_invalid = 0) override;
 
     /// @copydoc Type::Element
-    const Vector* Element(uint32_t index) const override;
+    Vector* Element(uint32_t index) override;
 
     /// @param ctx the clone context
     /// @returns a clone of this type
     Matrix* Clone(CloneContext& ctx) const override;
 
   private:
-    const Type* const subtype_;
-    const Vector* const column_type_;
+    Type* const subtype_;
+    Vector* const column_type_;
     const uint32_t rows_;
     const uint32_t columns_;
 };

@@ -43,7 +43,7 @@ Type::Type(size_t hash, type::Flags flags) : Base(hash), flags_(flags) {
 
 Type::~Type() = default;
 
-const Type* Type::UnwrapPtr() const {
+Type* Type::UnwrapPtr() {
     auto* type = this;
     while (auto* ptr = type->As<Pointer>()) {
         type = ptr->StoreType();
@@ -51,7 +51,7 @@ const Type* Type::UnwrapPtr() const {
     return type;
 }
 
-const Type* Type::UnwrapRef() const {
+Type* Type::UnwrapRef() {
     auto* type = this;
     if (auto* ref = type->As<Reference>()) {
         type = ref->StoreType();
@@ -181,7 +181,7 @@ bool Type::HoldsAbstract() const {
         });
 }
 
-uint32_t Type::ConversionRank(const Type* from, const Type* to) {
+uint32_t Type::ConversionRank(Type* from, Type* to) {
     if (from->UnwrapRef() == to) {
         return 0;
     }
@@ -241,17 +241,17 @@ uint32_t Type::ConversionRank(const Type* from, const Type* to) {
         [&](Default) { return kNoConversion; });
 }
 
-TypeAndCount Type::Elements(const Type* type_if_invalid /* = nullptr */,
-                            uint32_t count_if_invalid /* = 0 */) const {
+TypeAndCount Type::Elements(Type* type_if_invalid /* = nullptr */,
+                            uint32_t count_if_invalid /* = 0 */) {
     return {type_if_invalid, count_if_invalid};
 }
 
-const Type* Type::Element(uint32_t /* index */) const {
+Type* Type::Element(uint32_t /* index */) {
     return nullptr;
 }
 
-const Type* Type::DeepestElement() const {
-    const Type* ty = this;
+Type* Type::DeepestElement() {
+    Type* ty = this;
     while (true) {
         auto [el, n] = ty->Elements();
         if (!el) {
@@ -261,12 +261,12 @@ const Type* Type::DeepestElement() const {
     }
 }
 
-const Type* Type::Common(utils::VectorRef<const Type*> types) {
+Type* Type::Common(utils::VectorRef<Type*> types) {
     const auto count = types.Length();
     if (count == 0) {
         return nullptr;
     }
-    const auto* common = types[0];
+    auto* common = types[0];
     for (size_t i = 1; i < count; i++) {
         auto* ty = types[i];
         if (ty == common) {

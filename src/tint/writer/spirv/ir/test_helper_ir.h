@@ -73,7 +73,7 @@ class SpvGeneratorTestHelperBase : public BASE {
     /// Helper to make a scalar type corresponding to the element type `type`.
     /// @param type the element type
     /// @returns the scalar type
-    const type::Type* MakeScalarType(TestElementType type) {
+    type::Type* MakeScalarType(TestElementType type) {
         switch (type) {
             case kBool:
                 return ty.bool_();
@@ -92,7 +92,7 @@ class SpvGeneratorTestHelperBase : public BASE {
     /// Helper to make a vector type corresponding to the element type `type`.
     /// @param type the element type
     /// @returns the vector type
-    const type::Type* MakeVectorType(TestElementType type) { return ty.vec2(MakeScalarType(type)); }
+    type::Type* MakeVectorType(TestElementType type) { return ty.vec2(MakeScalarType(type)); }
 
     /// Helper to make a scalar value with the scalar type `type`.
     /// @param type the element type

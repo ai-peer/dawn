@@ -18,7 +18,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::BlockParam);
 
 namespace tint::ir {
 
-BlockParam::BlockParam(const type::Type* ty) : type_(ty) {
+BlockParam::BlockParam(type::Type* ty) : type_(ty) {
     TINT_ASSERT(IR, type_ != nullptr);
 }
 

@@ -63,7 +63,7 @@ class ConstEval {
     using Result = utils::Result<const constant::Value*>;
 
     /// Typedef for a constant evaluation function
-    using Function = Result (ConstEval::*)(const type::Type* result_ty,
+    using Function = Result (ConstEval::*)(type::Type* result_ty,
                                            utils::VectorRef<const constant::Value*>,
                                            const Source&);
 
@@ -80,38 +80,36 @@ class ConstEval {
     /// @param ty the target type - must be an array or struct
     /// @param args the input arguments
     /// @return the constructed value, or null if the value cannot be calculated
-    Result ArrayOrStructCtor(const type::Type* ty, utils::VectorRef<const constant::Value*> args);
+    Result ArrayOrStructCtor(type::Type* ty, utils::VectorRef<const constant::Value*> args);
 
     /// @param ty the target type
     /// @param value the value being converted
     /// @param source the source location
     /// @return the bit-cast of the given expression to the given type, or null if the value cannot
     ///         be calculated
-    Result Bitcast(const type::Type* ty, const constant::Value* value, const Source& source);
+    Result Bitcast(type::Type* ty, const constant::Value* value, const Source& source);
 
     /// @param ty the target type
     /// @param obj the object being indexed
     /// @param idx the index expression
     /// @return the result of the index, or null if the value cannot be calculated
-    Result Index(const type::Type* ty,
-                 const sem::ValueExpression* obj,
-                 const sem::ValueExpression* idx);
+    Result Index(type::Type* ty, const sem::ValueExpression* obj, const sem::ValueExpression* idx);
 
     /// @param ty the result type
     /// @param lit the literal AST node
     /// @return the constant value of the literal
-    Result Literal(const type::Type* ty, const ast::LiteralExpression* lit);
+    Result Literal(type::Type* ty, const ast::LiteralExpression* lit);
 
     /// @param obj the object being accessed
     /// @param member the member
     /// @return the result of the member access, or null if the value cannot be calculated
-    Result MemberAccess(const sem::ValueExpression* obj, const type::StructMember* member);
+    Result MemberAccess(const sem::ValueExpression* obj, type::StructMember* member);
 
     /// @param ty the result type
     /// @param vector the vector being swizzled
     /// @param indices the swizzle indices
     /// @return the result of the swizzle, or null if the value cannot be calculated
-    Result Swizzle(const type::Type* ty,
+    Result Swizzle(type::Type* ty,
                    const sem::ValueExpression* vector,
                    utils::VectorRef<uint32_t> indices);
 
@@ -120,7 +118,7 @@ class ConstEval {
     /// @param value the value being converted
     /// @param source the source location
     /// @return the converted value, or null if the value cannot be calculated
-    Result Convert(const type::Type* ty, const constant::Value* value, const Source& source);
+    Result Convert(type::Type* ty, const constant::Value* value, const Source& source);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Constant value evaluation methods, to be indirectly called via the intrinsic table
@@ -131,7 +129,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the converted value, or null if the value cannot be calculated
-    Result Conv(const type::Type* ty,
+    Result Conv(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -140,7 +138,7 @@ class ConstEval {
     /// @param args the input arguments (no arguments provided)
     /// @param source the source location
     /// @return the constructed value, or null if the value cannot be calculated
-    Result Zero(const type::Type* ty,
+    Result Zero(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -149,7 +147,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the constructed value, or null if the value cannot be calculated
-    Result Identity(const type::Type* ty,
+    Result Identity(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -158,7 +156,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the constructed value, or null if the value cannot be calculated
-    Result VecSplat(const type::Type* ty,
+    Result VecSplat(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -167,7 +165,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the constructed value, or null if the value cannot be calculated
-    Result VecInitS(const type::Type* ty,
+    Result VecInitS(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -176,7 +174,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the constructed value, or null if the value cannot be calculated
-    Result VecInitM(const type::Type* ty,
+    Result VecInitM(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -185,7 +183,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the constructed value, or null if the value cannot be calculated
-    Result MatInitS(const type::Type* ty,
+    Result MatInitS(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -194,7 +192,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the constructed value, or null if the value cannot be calculated
-    Result MatInitV(const type::Type* ty,
+    Result MatInitV(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -207,7 +205,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpComplement(const type::Type* ty,
+    Result OpComplement(type::Type* ty,
                         utils::VectorRef<const constant::Value*> args,
                         const Source& source);
 
@@ -216,7 +214,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpUnaryMinus(const type::Type* ty,
+    Result OpUnaryMinus(type::Type* ty,
                         utils::VectorRef<const constant::Value*> args,
                         const Source& source);
 
@@ -225,7 +223,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpNot(const type::Type* ty,
+    Result OpNot(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -238,7 +236,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpPlus(const type::Type* ty,
+    Result OpPlus(type::Type* ty,
                   utils::VectorRef<const constant::Value*> args,
                   const Source& source);
 
@@ -247,7 +245,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpMinus(const type::Type* ty,
+    Result OpMinus(type::Type* ty,
                    utils::VectorRef<const constant::Value*> args,
                    const Source& source);
 
@@ -256,7 +254,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpMultiply(const type::Type* ty,
+    Result OpMultiply(type::Type* ty,
                       utils::VectorRef<const constant::Value*> args,
                       const Source& source);
 
@@ -265,7 +263,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpMultiplyMatVec(const type::Type* ty,
+    Result OpMultiplyMatVec(type::Type* ty,
                             utils::VectorRef<const constant::Value*> args,
                             const Source& source);
 
@@ -274,7 +272,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpMultiplyVecMat(const type::Type* ty,
+    Result OpMultiplyVecMat(type::Type* ty,
                             utils::VectorRef<const constant::Value*> args,
                             const Source& source);
 
@@ -283,7 +281,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpMultiplyMatMat(const type::Type* ty,
+    Result OpMultiplyMatMat(type::Type* ty,
                             utils::VectorRef<const constant::Value*> args,
                             const Source& source);
 
@@ -292,7 +290,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpDivide(const type::Type* ty,
+    Result OpDivide(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -301,7 +299,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpModulo(const type::Type* ty,
+    Result OpModulo(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -310,7 +308,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpEqual(const type::Type* ty,
+    Result OpEqual(type::Type* ty,
                    utils::VectorRef<const constant::Value*> args,
                    const Source& source);
 
@@ -319,7 +317,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpNotEqual(const type::Type* ty,
+    Result OpNotEqual(type::Type* ty,
                       utils::VectorRef<const constant::Value*> args,
                       const Source& source);
 
@@ -328,7 +326,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpLessThan(const type::Type* ty,
+    Result OpLessThan(type::Type* ty,
                       utils::VectorRef<const constant::Value*> args,
                       const Source& source);
 
@@ -337,7 +335,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpGreaterThan(const type::Type* ty,
+    Result OpGreaterThan(type::Type* ty,
                          utils::VectorRef<const constant::Value*> args,
                          const Source& source);
 
@@ -346,7 +344,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpLessThanEqual(const type::Type* ty,
+    Result OpLessThanEqual(type::Type* ty,
                            utils::VectorRef<const constant::Value*> args,
                            const Source& source);
 
@@ -355,7 +353,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpGreaterThanEqual(const type::Type* ty,
+    Result OpGreaterThanEqual(type::Type* ty,
                               utils::VectorRef<const constant::Value*> args,
                               const Source& source);
 
@@ -364,7 +362,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpLogicalAnd(const type::Type* ty,
+    Result OpLogicalAnd(type::Type* ty,
                         utils::VectorRef<const constant::Value*> args,
                         const Source& source);
 
@@ -373,7 +371,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpLogicalOr(const type::Type* ty,
+    Result OpLogicalOr(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -382,7 +380,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpAnd(const type::Type* ty,
+    Result OpAnd(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -391,7 +389,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpOr(const type::Type* ty,
+    Result OpOr(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -400,7 +398,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpXor(const type::Type* ty,
+    Result OpXor(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -409,7 +407,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpShiftLeft(const type::Type* ty,
+    Result OpShiftLeft(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -418,7 +416,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result OpShiftRight(const type::Type* ty,
+    Result OpShiftRight(type::Type* ty,
                         utils::VectorRef<const constant::Value*> args,
                         const Source& source);
 
@@ -431,16 +429,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result abs(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result abs(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// acos builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result acos(const type::Type* ty,
+    Result acos(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -449,7 +445,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result acosh(const type::Type* ty,
+    Result acosh(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -458,25 +454,21 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result all(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result all(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// any builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result any(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result any(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// asin builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result asin(const type::Type* ty,
+    Result asin(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -485,7 +477,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result asinh(const type::Type* ty,
+    Result asinh(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -494,7 +486,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result atan(const type::Type* ty,
+    Result atan(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -503,7 +495,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result atanh(const type::Type* ty,
+    Result atanh(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -512,7 +504,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result atan2(const type::Type* ty,
+    Result atan2(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -521,7 +513,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result ceil(const type::Type* ty,
+    Result ceil(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -530,7 +522,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result clamp(const type::Type* ty,
+    Result clamp(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -539,16 +531,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result cos(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result cos(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// cosh builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result cosh(const type::Type* ty,
+    Result cosh(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -557,7 +547,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result countLeadingZeros(const type::Type* ty,
+    Result countLeadingZeros(type::Type* ty,
                              utils::VectorRef<const constant::Value*> args,
                              const Source& source);
 
@@ -566,7 +556,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result countOneBits(const type::Type* ty,
+    Result countOneBits(type::Type* ty,
                         utils::VectorRef<const constant::Value*> args,
                         const Source& source);
 
@@ -575,7 +565,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result countTrailingZeros(const type::Type* ty,
+    Result countTrailingZeros(type::Type* ty,
                               utils::VectorRef<const constant::Value*> args,
                               const Source& source);
 
@@ -584,7 +574,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result cross(const type::Type* ty,
+    Result cross(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -593,7 +583,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
-    Result degrees(const type::Type* ty,
+    Result degrees(type::Type* ty,
                    utils::VectorRef<const constant::Value*> args,
                    const Source& source);
 
@@ -602,7 +592,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
-    Result determinant(const type::Type* ty,
+    Result determinant(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -611,7 +601,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
-    Result distance(const type::Type* ty,
+    Result distance(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -620,25 +610,21 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result dot(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result dot(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// exp builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result exp(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result exp(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// exp2 builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result exp2(const type::Type* ty,
+    Result exp2(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -647,7 +633,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result extractBits(const type::Type* ty,
+    Result extractBits(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -656,7 +642,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result faceForward(const type::Type* ty,
+    Result faceForward(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -665,7 +651,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result firstLeadingBit(const type::Type* ty,
+    Result firstLeadingBit(type::Type* ty,
                            utils::VectorRef<const constant::Value*> args,
                            const Source& source);
 
@@ -674,7 +660,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result firstTrailingBit(const type::Type* ty,
+    Result firstTrailingBit(type::Type* ty,
                             utils::VectorRef<const constant::Value*> args,
                             const Source& source);
 
@@ -683,7 +669,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result floor(const type::Type* ty,
+    Result floor(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -692,16 +678,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result fma(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result fma(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// fract builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result fract(const type::Type* ty,
+    Result fract(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -710,7 +694,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result frexp(const type::Type* ty,
+    Result frexp(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -719,7 +703,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result insertBits(const type::Type* ty,
+    Result insertBits(type::Type* ty,
                       utils::VectorRef<const constant::Value*> args,
                       const Source& source);
 
@@ -728,7 +712,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result inverseSqrt(const type::Type* ty,
+    Result inverseSqrt(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -737,7 +721,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result ldexp(const type::Type* ty,
+    Result ldexp(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -746,7 +730,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result length(const type::Type* ty,
+    Result length(type::Type* ty,
                   utils::VectorRef<const constant::Value*> args,
                   const Source& source);
 
@@ -755,16 +739,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result log(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result log(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// log2 builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result log2(const type::Type* ty,
+    Result log2(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -773,16 +755,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result max(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result max(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// min builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result min(const type::Type* ty,  // NOLINT(build/include_what_you_use)  -- confused by min
+    Result min(type::Type* ty,  // NOLINT(build/include_what_you_use)  -- confused by min
                utils::VectorRef<const constant::Value*> args,
                const Source& source);
 
@@ -791,16 +771,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result mix(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result mix(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// modf builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result modf(const type::Type* ty,
+    Result modf(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -809,7 +787,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result normalize(const type::Type* ty,
+    Result normalize(type::Type* ty,
                      utils::VectorRef<const constant::Value*> args,
                      const Source& source);
 
@@ -818,7 +796,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result pack2x16float(const type::Type* ty,
+    Result pack2x16float(type::Type* ty,
                          utils::VectorRef<const constant::Value*> args,
                          const Source& source);
 
@@ -827,7 +805,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result pack2x16snorm(const type::Type* ty,
+    Result pack2x16snorm(type::Type* ty,
                          utils::VectorRef<const constant::Value*> args,
                          const Source& source);
 
@@ -836,7 +814,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result pack2x16unorm(const type::Type* ty,
+    Result pack2x16unorm(type::Type* ty,
                          utils::VectorRef<const constant::Value*> args,
                          const Source& source);
 
@@ -845,7 +823,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result pack4x8snorm(const type::Type* ty,
+    Result pack4x8snorm(type::Type* ty,
                         utils::VectorRef<const constant::Value*> args,
                         const Source& source);
 
@@ -854,7 +832,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result pack4x8unorm(const type::Type* ty,
+    Result pack4x8unorm(type::Type* ty,
                         utils::VectorRef<const constant::Value*> args,
                         const Source& source);
 
@@ -863,16 +841,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result pow(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result pow(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// radians builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
-    Result radians(const type::Type* ty,
+    Result radians(type::Type* ty,
                    utils::VectorRef<const constant::Value*> args,
                    const Source& source);
 
@@ -881,7 +857,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
-    Result reflect(const type::Type* ty,
+    Result reflect(type::Type* ty,
                    utils::VectorRef<const constant::Value*> args,
                    const Source& source);
 
@@ -890,7 +866,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
-    Result refract(const type::Type* ty,
+    Result refract(type::Type* ty,
                    utils::VectorRef<const constant::Value*> args,
                    const Source& source);
 
@@ -899,7 +875,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result reverseBits(const type::Type* ty,
+    Result reverseBits(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -908,7 +884,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result round(const type::Type* ty,
+    Result round(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -917,7 +893,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result saturate(const type::Type* ty,
+    Result saturate(type::Type* ty,
                     utils::VectorRef<const constant::Value*> args,
                     const Source& source);
 
@@ -926,7 +902,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result select_bool(const type::Type* ty,
+    Result select_bool(type::Type* ty,
                        utils::VectorRef<const constant::Value*> args,
                        const Source& source);
 
@@ -935,7 +911,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result select_boolvec(const type::Type* ty,
+    Result select_boolvec(type::Type* ty,
                           utils::VectorRef<const constant::Value*> args,
                           const Source& source);
 
@@ -944,7 +920,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result sign(const type::Type* ty,
+    Result sign(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -953,16 +929,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result sin(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result sin(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// sinh builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result sinh(const type::Type* ty,
+    Result sinh(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -971,7 +945,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result smoothstep(const type::Type* ty,
+    Result smoothstep(type::Type* ty,
                       utils::VectorRef<const constant::Value*> args,
                       const Source& source);
 
@@ -980,7 +954,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result step(const type::Type* ty,
+    Result step(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -989,7 +963,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result sqrt(const type::Type* ty,
+    Result sqrt(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -998,16 +972,14 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result tan(const type::Type* ty,
-               utils::VectorRef<const constant::Value*> args,
-               const Source& source);
+    Result tan(type::Type* ty, utils::VectorRef<const constant::Value*> args, const Source& source);
 
     /// tanh builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result tanh(const type::Type* ty,
+    Result tanh(type::Type* ty,
                 utils::VectorRef<const constant::Value*> args,
                 const Source& source);
 
@@ -1016,7 +988,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result transpose(const type::Type* ty,
+    Result transpose(type::Type* ty,
                      utils::VectorRef<const constant::Value*> args,
                      const Source& source);
 
@@ -1025,7 +997,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result trunc(const type::Type* ty,
+    Result trunc(type::Type* ty,
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
@@ -1034,7 +1006,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result unpack2x16float(const type::Type* ty,
+    Result unpack2x16float(type::Type* ty,
                            utils::VectorRef<const constant::Value*> args,
                            const Source& source);
 
@@ -1043,7 +1015,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result unpack2x16snorm(const type::Type* ty,
+    Result unpack2x16snorm(type::Type* ty,
                            utils::VectorRef<const constant::Value*> args,
                            const Source& source);
 
@@ -1052,7 +1024,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result unpack2x16unorm(const type::Type* ty,
+    Result unpack2x16unorm(type::Type* ty,
                            utils::VectorRef<const constant::Value*> args,
                            const Source& source);
 
@@ -1061,7 +1033,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result unpack4x8snorm(const type::Type* ty,
+    Result unpack4x8snorm(type::Type* ty,
                           utils::VectorRef<const constant::Value*> args,
                           const Source& source);
 
@@ -1070,7 +1042,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result unpack4x8unorm(const type::Type* ty,
+    Result unpack4x8unorm(type::Type* ty,
                           utils::VectorRef<const constant::Value*> args,
                           const Source& source);
 
@@ -1079,7 +1051,7 @@ class ConstEval {
     /// @param args the input arguments
     /// @param source the source location
     /// @return the result value, or null if the value cannot be calculated
-    Result quantizeToF16(const type::Type* ty,
+    Result quantizeToF16(type::Type* ty,
                          utils::VectorRef<const constant::Value*> args,
                          const Source& source);
 
@@ -1099,10 +1071,10 @@ class ConstEval {
     /// @param v the scalar value
     /// @return the constant value with the same type and value
     template <typename T>
-    ConstEval::Result CreateScalar(const Source& source, const type::Type* t, T v);
+    ConstEval::Result CreateScalar(const Source& source, type::Type* t, T v);
 
     /// ZeroValue returns a Constant for the zero-value of the type `type`.
-    const constant::Value* ZeroValue(const type::Type* type);
+    const constant::Value* ZeroValue(type::Type* type);
 
     /// Adds two Number<T>s
     /// @param source the source location
@@ -1297,91 +1269,91 @@ class ConstEval {
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto AddFunc(const Source& source, const type::Type* elem_ty);
+    auto AddFunc(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Sub, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto SubFunc(const Source& source, const type::Type* elem_ty);
+    auto SubFunc(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Mul, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto MulFunc(const Source& source, const type::Type* elem_ty);
+    auto MulFunc(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Div, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto DivFunc(const Source& source, const type::Type* elem_ty);
+    auto DivFunc(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Mod, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto ModFunc(const Source& source, const type::Type* elem_ty);
+    auto ModFunc(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Dot2, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto Dot2Func(const Source& source, const type::Type* elem_ty);
+    auto Dot2Func(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Dot3, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto Dot3Func(const Source& source, const type::Type* elem_ty);
+    auto Dot3Func(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Dot4, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto Dot4Func(const Source& source, const type::Type* elem_ty);
+    auto Dot4Func(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Det2, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto Det2Func(const Source& source, const type::Type* elem_ty);
+    auto Det2Func(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Det3, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto Det3Func(const Source& source, const type::Type* elem_ty);
+    auto Det3Func(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Det4, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto Det4Func(const Source& source, const type::Type* elem_ty);
+    auto Det4Func(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls Clamp, and creates a Constant with its result of type
     /// `elem_ty` if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto ClampFunc(const Source& source, const type::Type* elem_ty);
+    auto ClampFunc(const Source& source, type::Type* elem_ty);
 
     /// Returns a callable that calls SqrtFunc, and creates a Constant with its
     /// result of type `elem_ty` if successful, or returns Failure otherwise.
     /// @param source the source location
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
-    auto SqrtFunc(const Source& source, const type::Type* elem_ty);
+    auto SqrtFunc(const Source& source, type::Type* elem_ty);
 
     /// Returns the dot product of v1 and v2.
     /// @param source the source location
@@ -1395,7 +1367,7 @@ class ConstEval {
     /// @param ty the return type
     /// @param c0 the constant to calculate the length of
     /// @returns the length of c0
-    Result Length(const Source& source, const type::Type* ty, const constant::Value* c0);
+    Result Length(const Source& source, type::Type* ty, const constant::Value* c0);
 
     /// Returns the product of v1 and v2
     /// @param source the source location
@@ -1404,7 +1376,7 @@ class ConstEval {
     /// @param v2 rhs value
     /// @returns the product of v1 and v2
     Result Mul(const Source& source,
-               const type::Type* ty,
+               type::Type* ty,
                const constant::Value* v1,
                const constant::Value* v2);
 
@@ -1415,7 +1387,7 @@ class ConstEval {
     /// @param v2 rhs value
     /// @returns the difference between v2 and v1
     Result Sub(const Source& source,
-               const type::Type* ty,
+               type::Type* ty,
                const constant::Value* v1,
                const constant::Value* v2);
 

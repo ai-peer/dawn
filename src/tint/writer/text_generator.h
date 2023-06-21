@@ -185,13 +185,11 @@ class TextGenerator {
 
     /// @returns the resolved type of the ast::Expression `expr`
     /// @param expr the expression
-    const type::Type* TypeOf(const ast::Expression* expr) const { return builder_.TypeOf(expr); }
+    type::Type* TypeOf(const ast::Expression* expr) const { return builder_.TypeOf(expr); }
 
     /// @returns the resolved type of the ast::TypeDecl `type_decl`
     /// @param type_decl the type
-    const type::Type* TypeOf(const ast::TypeDecl* type_decl) const {
-        return builder_.TypeOf(type_decl);
-    }
+    type::Type* TypeOf(const ast::TypeDecl* type_decl) const { return builder_.TypeOf(type_decl); }
 
     /// @returns a new LineWriter, used for buffering and writing a line to
     /// the end of #current_buffer_.

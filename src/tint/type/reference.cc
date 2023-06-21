@@ -24,9 +24,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::type::Reference);
 
 namespace tint::type {
 
-Reference::Reference(builtin::AddressSpace address_space,
-                     const Type* subtype,
-                     builtin::Access access)
+Reference::Reference(builtin::AddressSpace address_space, Type* subtype, builtin::Access access)
     : Base(utils::Hash(utils::TypeInfo::Of<Reference>().full_hashcode,
                        address_space,
                        subtype,

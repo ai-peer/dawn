@@ -205,11 +205,11 @@ class SemHelper {
 
     /// @returns the type name of the given semantic type, unwrapping references.
     /// @param ty the type to look up
-    std::string TypeNameOf(const type::Type* ty) const;
+    std::string TypeNameOf(type::Type* ty) const;
 
     /// @returns the type name of the given semantic type, without unwrapping references.
     /// @param ty the type to look up
-    std::string RawTypeNameOf(const type::Type* ty) const;
+    std::string RawTypeNameOf(type::Type* ty) const;
 
     /// Raises an error diagnostic that the expression @p got was expected to be a
     /// sem::ValueExpression, but the expression evaluated to something different.

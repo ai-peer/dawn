@@ -49,7 +49,7 @@ class MemberAccessorExpression : public utils::Castable<MemberAccessorExpression
     /// @param has_side_effects whether this expression may have side effects
     /// @param root_ident the (optional) root identifier for this expression
     MemberAccessorExpression(const ast::MemberAccessorExpression* declaration,
-                             const type::Type* type,
+                             type::Type* type,
                              EvaluationStage stage,
                              const Statement* statement,
                              const constant::Value* constant,
@@ -77,11 +77,11 @@ class StructMemberAccess final
     /// @param has_side_effects whether this expression may have side effects
     /// @param root_ident the (optional) root identifier for this expression
     StructMemberAccess(const ast::MemberAccessorExpression* declaration,
-                       const type::Type* type,
+                       type::Type* type,
                        const Statement* statement,
                        const constant::Value* constant,
                        const ValueExpression* object,
-                       const type::StructMember* member,
+                       type::StructMember* member,
                        bool has_side_effects,
                        const Variable* root_ident = nullptr);
 
@@ -89,10 +89,10 @@ class StructMemberAccess final
     ~StructMemberAccess() override;
 
     /// @returns the structure member
-    type::StructMember const* Member() const { return member_; }
+    type::StructMember* Member() const { return member_; }
 
   private:
-    type::StructMember const* const member_;
+    type::StructMember* const member_;
 };
 
 /// Swizzle holds the semantic information for a ast::MemberAccessorExpression
@@ -109,7 +109,7 @@ class Swizzle final : public utils::Castable<Swizzle, MemberAccessorExpression> 
     /// @param has_side_effects whether this expression may have side effects
     /// @param root_ident the (optional) root identifier for this expression
     Swizzle(const ast::MemberAccessorExpression* declaration,
-            const type::Type* type,
+            type::Type* type,
             const Statement* statement,
             const constant::Value* constant,
             const ValueExpression* object,

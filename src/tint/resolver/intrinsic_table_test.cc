@@ -1027,7 +1027,7 @@ TEST_F(IntrinsicTableTest, MatchTypeConversion_RuntimeEval) {
 
 TEST_F(IntrinsicTableTest, Err257Arguments) {  // crbug.com/1323605
     auto* f32 = create<type::F32>();
-    utils::Vector<const type::Type*, 0> arg_tys;
+    utils::Vector<type::Type*, 0> arg_tys;
     arg_tys.Resize(257, f32);
     auto result = table->Lookup(builtin::Function::kAbs, std::move(arg_tys),
                                 sem::EvaluationStage::kConstant, Source{});

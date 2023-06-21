@@ -214,7 +214,7 @@ struct Robustness::State {
         auto* obj_type = expr->Object()->Type();
         return Switch(
             obj_type->UnwrapRef(),  //
-            [&](const type::Vector* vec) -> const Expression* {
+            [&](type::Vector* vec) -> const Expression* {
                 if (expr->Index()->ConstantValue() || expr->Index()->Is<sem::Swizzle>()) {
                     // Index and size is constant.
                     // Validation will have rejected any OOB accesses.
@@ -222,7 +222,7 @@ struct Robustness::State {
                 }
                 return b.Expr(u32(vec->Width() - 1u));
             },
-            [&](const type::Matrix* mat) -> const Expression* {
+            [&](type::Matrix* mat) -> const Expression* {
                 if (expr->Index()->ConstantValue()) {
                     // Index and size is constant.
                     // Validation will have rejected any OOB accesses.
@@ -230,7 +230,7 @@ struct Robustness::State {
                 }
                 return b.Expr(u32(mat->columns() - 1u));
             },
-            [&](const type::Array* arr) -> const Expression* {
+            [&](type::Array* arr) -> const Expression* {
                 if (arr->Count()->Is<type::RuntimeArrayCount>()) {
                     // Size is unknown until runtime.
                     // Must clamp, even if the index is constant.
@@ -612,7 +612,7 @@ struct Robustness::State {
     Action ActionFor(const sem::ValueExpression* expr) {
         return Switch(
             expr->Type(),  //
-            [&](const type::Reference* t) { return ActionFor(t->AddressSpace()); },
+            [&](type::Reference* t) { return ActionFor(t->AddressSpace()); },
             [&](Default) { return cfg.value_action; });
     }
 
@@ -642,7 +642,7 @@ struct Robustness::State {
     }
 
     /// @returns the vector width of @p ty, or 1 if @p ty is not a vector
-    static uint32_t WidthOf(const type::Type* ty) {
+    static uint32_t WidthOf(type::Type* ty) {
         if (auto* vec = ty->As<type::Vector>()) {
             return vec->Width();
         }

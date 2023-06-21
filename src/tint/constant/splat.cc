@@ -20,7 +20,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::constant::Splat);
 
 namespace tint::constant {
 
-Splat::Splat(const type::Type* t, const constant::Value* e, size_t n) : type(t), el(e), count(n) {}
+Splat::Splat(type::Type* t, const constant::Value* e, size_t n) : type(t), el(e), count(n) {}
 
 Splat::~Splat() = default;
 

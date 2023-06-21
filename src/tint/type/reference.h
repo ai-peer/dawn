@@ -30,7 +30,7 @@ class Reference final : public utils::Castable<Reference, Type> {
     /// @param address_space the address space of the reference
     /// @param subtype the pointee type
     /// @param access the resolved access control of the reference
-    Reference(builtin::AddressSpace address_space, const Type* subtype, builtin::Access access);
+    Reference(builtin::AddressSpace address_space, Type* subtype, builtin::Access access);
 
     /// Destructor
     ~Reference() override;
@@ -40,7 +40,7 @@ class Reference final : public utils::Castable<Reference, Type> {
     bool Equals(const UniqueNode& other) const override;
 
     /// @returns the pointee type
-    const Type* StoreType() const { return subtype_; }
+    Type* StoreType() const { return subtype_; }
 
     /// @returns the address space of the reference
     builtin::AddressSpace AddressSpace() const { return address_space_; }
@@ -57,7 +57,7 @@ class Reference final : public utils::Castable<Reference, Type> {
     Reference* Clone(CloneContext& ctx) const override;
 
   private:
-    Type const* const subtype_;
+    Type* const subtype_;
     builtin::AddressSpace const address_space_;
     builtin::Access const access_;
 };

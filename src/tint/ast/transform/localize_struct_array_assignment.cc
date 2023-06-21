@@ -183,7 +183,7 @@ struct LocalizeStructArrayAssignment::State {
     // Returns the type and address space of the originating variable of the lhs
     // of the assignment statement.
     // See https://www.w3.org/TR/WGSL/#originating-variable-section
-    std::pair<const type::Type*, builtin::AddressSpace> GetOriginatingTypeAndAddressSpace(
+    std::pair<type::Type*, builtin::AddressSpace> GetOriginatingTypeAndAddressSpace(
         const AssignmentStatement* assign_stmt) {
         auto* root_ident = src->Sem().GetVal(assign_stmt->lhs)->RootIdentifier();
         if (TINT_UNLIKELY(!root_ident)) {
@@ -195,17 +195,17 @@ struct LocalizeStructArrayAssignment::State {
 
         return Switch(
             root_ident->Type(),  //
-            [&](const type::Reference* ref) {
+            [&](type::Reference* ref) {
                 return std::make_pair(ref->StoreType(), ref->AddressSpace());
             },
-            [&](const type::Pointer* ptr) {
+            [&](type::Pointer* ptr) {
                 return std::make_pair(ptr->StoreType(), ptr->AddressSpace());
             },
             [&](Default) {
                 TINT_ICE(Transform, b.Diagnostics())
                     << "Expecting to find variable of type pointer or reference on lhs "
                        "of assignment statement";
-                return std::pair<const type::Type*, builtin::AddressSpace>{};
+                return std::pair<type::Type*, builtin::AddressSpace>{};
             });
     }
 };

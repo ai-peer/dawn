@@ -138,8 +138,8 @@ struct CombineSamplers::State {
     /// @param sampler the texture variable of interest
     /// @returns the newly-created type
     Type CreateCombinedASTTypeFor(const sem::Variable* texture, const sem::Variable* sampler) {
-        const type::Type* texture_type = texture->Type()->UnwrapRef();
-        const type::DepthTexture* depth = texture_type->As<type::DepthTexture>();
+        type::Type* texture_type = texture->Type()->UnwrapRef();
+        type::DepthTexture* depth = texture_type->As<type::DepthTexture>();
         if (depth && !sampler) {
             return ctx.dst->ty.sampled_texture(depth->dim(), ctx.dst->ty.f32());
         } else {

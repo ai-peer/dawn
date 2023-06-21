@@ -25,15 +25,15 @@ class BlockParam : public utils::Castable<BlockParam, Value> {
   public:
     /// Constructor
     /// @param type the type of the var
-    explicit BlockParam(const type::Type* type);
+    explicit BlockParam(type::Type* type);
     ~BlockParam() override;
 
     /// @returns the type of the var
-    const type::Type* Type() override { return type_; }
+    type::Type* Type() override { return type_; }
 
   private:
     /// the result type of the instruction
-    const type::Type* type_ = nullptr;
+    type::Type* const type_ = nullptr;
 };
 
 }  // namespace tint::ir

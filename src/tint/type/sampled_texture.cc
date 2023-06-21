@@ -25,7 +25,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::type::SampledTexture);
 
 namespace tint::type {
 
-SampledTexture::SampledTexture(TextureDimension dim, const Type* type)
+SampledTexture::SampledTexture(TextureDimension dim, Type* type)
     : Base(utils::Hash(utils::TypeInfo::Of<SampledTexture>().full_hashcode, dim, type), dim),
       type_(type) {
     TINT_ASSERT(Type, type_);

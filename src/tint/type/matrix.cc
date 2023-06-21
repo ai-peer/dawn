@@ -25,7 +25,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::type::Matrix);
 
 namespace tint::type {
 
-Matrix::Matrix(const Vector* column_type, uint32_t columns)
+Matrix::Matrix(Vector* column_type, uint32_t columns)
     : Base(utils::Hash(utils::TypeInfo::Of<Vector>().full_hashcode, columns, column_type),
            type::Flags{
                Flag::kConstructable,
@@ -69,12 +69,12 @@ uint32_t Matrix::ColumnStride() const {
     return column_type_->Align();
 }
 
-TypeAndCount Matrix::Elements(const Type* /* type_if_invalid = nullptr */,
-                              uint32_t /* count_if_invalid = 0 */) const {
+TypeAndCount Matrix::Elements(Type* /* type_if_invalid = nullptr */,
+                              uint32_t /* count_if_invalid = 0 */) {
     return {column_type_, columns_};
 }
 
-const Vector* Matrix::Element(uint32_t index) const {
+Vector* Matrix::Element(uint32_t index) {
     return index < columns_ ? column_type_ : nullptr;
 }
 

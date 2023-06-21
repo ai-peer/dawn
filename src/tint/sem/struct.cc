@@ -35,7 +35,7 @@ Struct::~Struct() = default;
 
 StructMember::StructMember(const ast::StructMember* declaration,
                            Symbol name,
-                           const type::Type* type,
+                           type::Type* type,
                            uint32_t index,
                            uint32_t offset,
                            uint32_t align,

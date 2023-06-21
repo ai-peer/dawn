@@ -137,8 +137,8 @@ class ScopedBitCast {
   public:
     ScopedBitCast(GeneratorImpl* generator,
                   utils::StringStream& stream,
-                  const type::Type* curr_type,
-                  const type::Type* target_type)
+                  type::Type* curr_type,
+                  type::Type* target_type)
         : s(stream) {
         auto* target_vec_type = target_type->As<type::Vector>();
 
@@ -362,7 +362,7 @@ bool GeneratorImpl::Generate() {
     return true;
 }
 
-bool GeneratorImpl::EmitTypeDecl(const type::Type* ty) {
+bool GeneratorImpl::EmitTypeDecl(type::Type* ty) {
     if (auto* str = ty->As<type::Struct>()) {
         if (!EmitStructType(current_buffer_, str)) {
             return false;
@@ -506,7 +506,7 @@ bool GeneratorImpl::EmitBinary(utils::StringStream& out, const ast::BinaryExpres
         return true;
     };
 
-    auto signed_type_of = [&](const type::Type* ty) -> const type::Type* {
+    auto signed_type_of = [&](type::Type* ty) -> type::Type* {
         if (ty->is_integer_scalar()) {
             return builder_.create<type::I32>();
         } else if (auto* v = ty->As<type::Vector>()) {
@@ -515,7 +515,7 @@ bool GeneratorImpl::EmitBinary(utils::StringStream& out, const ast::BinaryExpres
         return {};
     };
 
-    auto unsigned_type_of = [&](const type::Type* ty) -> const type::Type* {
+    auto unsigned_type_of = [&](type::Type* ty) -> type::Type* {
         if (ty->is_integer_scalar()) {
             return builder_.create<type::U32>();
         } else if (auto* v = ty->As<type::Vector>()) {
@@ -818,7 +818,7 @@ bool GeneratorImpl::EmitTypeInitializer(utils::StringStream& out,
 
     bool ok = Switch(
         type,
-        [&](const type::Array*) {
+        [&](type::Array*) {
             if (!EmitType(out, type, "")) {
                 return false;
             }
@@ -826,7 +826,7 @@ bool GeneratorImpl::EmitTypeInitializer(utils::StringStream& out,
             terminator = "}";
             return true;
         },
-        [&](const type::Struct*) {
+        [&](type::Struct*) {
             out << "{";
             terminator = "}";
             return true;
@@ -1620,44 +1620,44 @@ bool GeneratorImpl::EmitContinue(const ast::ContinueStatement*) {
     return true;
 }
 
-bool GeneratorImpl::EmitZeroValue(utils::StringStream& out, const type::Type* type) {
+bool GeneratorImpl::EmitZeroValue(utils::StringStream& out, type::Type* type) {
     return Switch(
         type,
-        [&](const type::Bool*) {
+        [&](type::Bool*) {
             out << "false";
             return true;
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             out << "0.0h";
             return true;
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             out << "0.0f";
             return true;
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             out << "0";
             return true;
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             out << "0u";
             return true;
         },
-        [&](const type::Vector* vec) {  //
+        [&](type::Vector* vec) {  //
             return EmitZeroValue(out, vec->type());
         },
-        [&](const type::Matrix* mat) {
+        [&](type::Matrix* mat) {
             if (!EmitType(out, mat, "")) {
                 return false;
             }
             ScopedParen sp(out);
             return EmitZeroValue(out, mat->type());
         },
-        [&](const type::Array*) {
+        [&](type::Array*) {
             out << "{}";
             return true;
         },
-        [&](const type::Struct*) {
+        [&](type::Struct*) {
             out << "{}";
             return true;
         },
@@ -1671,27 +1671,27 @@ bool GeneratorImpl::EmitZeroValue(utils::StringStream& out, const type::Type* ty
 bool GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value* constant) {
     return Switch(
         constant->Type(),  //
-        [&](const type::Bool*) {
+        [&](type::Bool*) {
             out << (constant->ValueAs<AInt>() ? "true" : "false");
             return true;
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             PrintF32(out, constant->ValueAs<f32>());
             return true;
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             PrintF16(out, constant->ValueAs<f16>());
             return true;
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             PrintI32(out, constant->ValueAs<i32>());
             return true;
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             out << constant->ValueAs<AInt>() << "u";
             return true;
         },
-        [&](const type::Vector* v) {
+        [&](type::Vector* v) {
             if (!EmitType(out, v, "")) {
                 return false;
             }
@@ -1715,7 +1715,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
             }
             return true;
         },
-        [&](const type::Matrix* m) {
+        [&](type::Matrix* m) {
             if (!EmitType(out, m, "")) {
                 return false;
             }
@@ -1732,7 +1732,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
             }
             return true;
         },
-        [&](const type::Array* a) {
+        [&](type::Array* a) {
             if (!EmitType(out, a, "")) {
                 return false;
             }
@@ -1762,7 +1762,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
 
             return true;
         },
-        [&](const type::Struct* s) {
+        [&](type::Struct* s) {
             if (!EmitStructType(&helpers_, s)) {
                 return false;
             }
@@ -2033,11 +2033,11 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
 
             bool ok = Switch(
                 type,  //
-                [&](const type::Struct*) {
+                [&](type::Struct*) {
                     out << " [[stage_in]]";
                     return true;
                 },
-                [&](const type::Texture*) {
+                [&](type::Texture*) {
                     uint32_t binding = get_binding_index(param);
                     if (binding == kInvalidBindingIndex) {
                         return false;
@@ -2045,7 +2045,7 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
                     out << " [[texture(" << binding << ")]]";
                     return true;
                 },
-                [&](const type::Sampler*) {
+                [&](type::Sampler*) {
                     uint32_t binding = get_binding_index(param);
                     if (binding == kInvalidBindingIndex) {
                         return false;
@@ -2053,7 +2053,7 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
                     out << " [[sampler(" << binding << ")]]";
                     return true;
                 },
-                [&](const type::Pointer* ptr) {
+                [&](type::Pointer* ptr) {
                     switch (ptr->AddressSpace()) {
                         case builtin::AddressSpace::kWorkgroup: {
                             auto& allocations = workgroup_allocations_[func_name];
@@ -2547,7 +2547,7 @@ bool GeneratorImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
 }
 
 bool GeneratorImpl::EmitType(utils::StringStream& out,
-                             const type::Type* type,
+                             type::Type* type,
                              const std::string& name,
                              bool* name_printed /* = nullptr */) {
     if (name_printed) {
@@ -2556,7 +2556,7 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
 
     return Switch(
         type,
-        [&](const type::Atomic* atomic) {
+        [&](type::Atomic* atomic) {
             if (atomic->Type()->Is<type::I32>()) {
                 out << "atomic_int";
                 return true;
@@ -2569,7 +2569,7 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
                 << "unhandled atomic type " << atomic->Type()->FriendlyName();
             return false;
         },
-        [&](const type::Array* arr) {
+        [&](type::Array* arr) {
             out << ArrayType() << "<";
             if (!EmitType(out, arr->ElemType(), "")) {
                 return false;
@@ -2590,30 +2590,30 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             out << ">";
             return true;
         },
-        [&](const type::Bool*) {
+        [&](type::Bool*) {
             out << "bool";
             return true;
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             out << "half";
             return true;
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             out << "float";
             return true;
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             out << "int";
             return true;
         },
-        [&](const type::Matrix* mat) {
+        [&](type::Matrix* mat) {
             if (!EmitType(out, mat->type(), "")) {
                 return false;
             }
             out << mat->columns() << "x" << mat->rows();
             return true;
         },
-        [&](const type::Pointer* ptr) {
+        [&](type::Pointer* ptr) {
             if (ptr->Access() == builtin::Access::kRead) {
                 out << "const ";
             }
@@ -2630,17 +2630,17 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             }
             return true;
         },
-        [&](const type::Sampler*) {
+        [&](type::Sampler*) {
             out << "sampler";
             return true;
         },
-        [&](const type::Struct* str) {
+        [&](type::Struct* str) {
             // The struct type emits as just the name. The declaration would be
             // emitted as part of emitting the declared types.
             out << StructName(str);
             return true;
         },
-        [&](const type::Texture* tex) {
+        [&](type::Texture* tex) {
             if (TINT_UNLIKELY(tex->Is<type::ExternalTexture>())) {
                 TINT_ICE(Writer, diagnostics_)
                     << "Multiplanar external texture transform was not run.";
@@ -2684,15 +2684,15 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
 
             return Switch(
                 tex,
-                [&](const type::DepthTexture*) {
+                [&](type::DepthTexture*) {
                     out << "float, access::sample";
                     return true;
                 },
-                [&](const type::DepthMultisampledTexture*) {
+                [&](type::DepthMultisampledTexture*) {
                     out << "float, access::read";
                     return true;
                 },
-                [&](const type::StorageTexture* storage) {
+                [&](type::StorageTexture* storage) {
                     if (!EmitType(out, storage->type(), "")) {
                         return false;
                     }
@@ -2709,14 +2709,14 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
                     }
                     return true;
                 },
-                [&](const type::MultisampledTexture* ms) {
+                [&](type::MultisampledTexture* ms) {
                     if (!EmitType(out, ms->type(), "")) {
                         return false;
                     }
                     out << ", access::read";
                     return true;
                 },
-                [&](const type::SampledTexture* sampled) {
+                [&](type::SampledTexture* sampled) {
                     if (!EmitType(out, sampled->type(), "")) {
                         return false;
                     }
@@ -2728,11 +2728,11 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
                     return false;
                 });
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             out << "uint";
             return true;
         },
-        [&](const type::Vector* vec) {
+        [&](type::Vector* vec) {
             if (vec->Packed()) {
                 out << "packed_";
             }
@@ -2742,7 +2742,7 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             out << vec->Width();
             return true;
         },
-        [&](const type::Void*) {
+        [&](type::Void*) {
             out << "void";
             return true;
         },
@@ -2754,7 +2754,7 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
 }
 
 bool GeneratorImpl::EmitTypeAndName(utils::StringStream& out,
-                                    const type::Type* type,
+                                    type::Type* type,
                                     const std::string& name) {
     bool name_printed = false;
     if (!EmitType(out, type, name, &name_printed)) {
@@ -2789,7 +2789,7 @@ bool GeneratorImpl::EmitAddressSpace(utils::StringStream& out, builtin::AddressS
     return false;
 }
 
-bool GeneratorImpl::EmitStructType(TextBuffer* b, const type::Struct* str) {
+bool GeneratorImpl::EmitStructType(TextBuffer* b, type::Struct* str) {
     auto it = emitted_structs_.emplace(str);
     if (!it.second) {
         return true;
@@ -3083,26 +3083,26 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
     return true;
 }
 
-GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const type::Type* ty) {
+GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(type::Type* ty) {
     return Switch(
         ty,
 
         // https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf
         // 2.1 Scalar Data Types
-        [&](const type::U32*) {
+        [&](type::U32*) {
             return SizeAndAlign{4, 4};
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             return SizeAndAlign{4, 4};
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             return SizeAndAlign{4, 4};
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             return SizeAndAlign{2, 2};
         },
 
-        [&](const type::Vector* vec) {
+        [&](type::Vector* vec) {
             auto num_els = vec->Width();
             auto* el_ty = vec->type();
             SizeAndAlign el_size_align = MslPackedTypeSizeAndAlign(el_ty);
@@ -3124,7 +3124,7 @@ GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const type:
             return SizeAndAlign{};
         },
 
-        [&](const type::Matrix* mat) {
+        [&](type::Matrix* mat) {
             // https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf
             // 2.3 Matrix Data Types
             auto cols = mat->columns();
@@ -3168,7 +3168,7 @@ GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const type:
             return SizeAndAlign{};
         },
 
-        [&](const type::Array* arr) {
+        [&](type::Array* arr) {
             if (TINT_UNLIKELY(!arr->IsStrideImplicit())) {
                 TINT_ICE(Writer, diagnostics_)
                     << "arrays with explicit strides should not exist past the SPIR-V reader";
@@ -3184,14 +3184,14 @@ GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const type:
             return SizeAndAlign{};
         },
 
-        [&](const type::Struct* str) {
+        [&](type::Struct* str) {
             // TODO(crbug.com/tint/650): There's an assumption here that MSL's
             // default structure size and alignment matches WGSL's. We need to
             // confirm this.
             return SizeAndAlign{str->Size(), str->Align()};
         },
 
-        [&](const type::Atomic* atomic) { return MslPackedTypeSizeAndAlign(atomic->Type()); },
+        [&](type::Atomic* atomic) { return MslPackedTypeSizeAndAlign(atomic->Type()); },
 
         [&](Default) {
             TINT_UNREACHABLE(Writer, diagnostics_) << "Unhandled type " << ty->TypeInfo().name;

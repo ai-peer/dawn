@@ -38,7 +38,7 @@ struct AccessToReplace {
     // The index of the first dynamic index.
     uint32_t first_dynamic_index = 0;
     // The object type that corresponds to the source of the first dynamic index.
-    const type::Type* dynamic_index_source_type = nullptr;
+    type::Type* dynamic_index_source_type = nullptr;
 };
 
 // A partial access chain that uses constant indices to get to an object that will be

@@ -363,7 +363,7 @@ class GeneratorImpl : public TextGenerator {
     /// @param name_printed (optional) if not nullptr and an array was printed
     /// then the boolean is set to true.
     void EmitType(utils::StringStream& out,
-                  const type::Type* type,
+                  type::Type* type,
                   builtin::AddressSpace address_space,
                   builtin::Access access,
                   const std::string& name,
@@ -375,7 +375,7 @@ class GeneratorImpl : public TextGenerator {
     /// @param access the access control type of the variable
     /// @param name the name to emit
     void EmitTypeAndName(utils::StringStream& out,
-                         const type::Type* type,
+                         type::Type* type,
                          builtin::AddressSpace address_space,
                          builtin::Access access,
                          const std::string& name);
@@ -395,7 +395,7 @@ class GeneratorImpl : public TextGenerator {
     /// Emits the zero value for the given type
     /// @param out the output stream
     /// @param type the type to emit the value for
-    void EmitZeroValue(utils::StringStream& out, const type::Type* type);
+    void EmitZeroValue(utils::StringStream& out, type::Type* type);
     /// Handles generating a 'var' declaration
     /// @param var the variable to generate
     void EmitVar(const ast::Var* var);
@@ -428,8 +428,7 @@ class GeneratorImpl : public TextGenerator {
     };
 
     /// The map key for two semantic types.
-    using BinaryOperandType =
-        utils::UnorderedKeyWrapper<std::tuple<const type::Type*, const type::Type*>>;
+    using BinaryOperandType = utils::UnorderedKeyWrapper<std::tuple<type::Type*, type::Type*>>;
 
     /// CallBuiltinHelper will call the builtin helper function, creating it
     /// if it hasn't been built already. If the builtin needs to be built then
@@ -452,13 +451,13 @@ class GeneratorImpl : public TextGenerator {
     /// Create a uint type corresponding to the given bool or bool vector type.
     /// @param type the bool or bool vector type to convert
     /// @returns the corresponding uint type
-    type::Type* BoolTypeToUint(const type::Type* type);
+    type::Type* BoolTypeToUint(type::Type* type);
 
     TextBuffer helpers_;  // Helper functions emitted at the top of the output
     std::function<void()> emit_continuing_;
     std::unordered_map<const sem::Builtin*, std::string> builtins_;
-    std::unordered_map<const type::Vector*, std::string> dynamic_vector_write_;
-    std::unordered_map<const type::Vector*, std::string> int_dot_funcs_;
+    std::unordered_map<type::Vector*, std::string> dynamic_vector_write_;
+    std::unordered_map<type::Vector*, std::string> int_dot_funcs_;
     std::unordered_map<BinaryOperandType, std::string> float_modulo_funcs_;
     std::unordered_set<const type::Struct*> emitted_structs_;
     bool requires_oes_sample_variables_ = false;

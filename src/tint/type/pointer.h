@@ -30,7 +30,7 @@ class Pointer final : public utils::Castable<Pointer, Type> {
     /// @param address_space the address space of the pointer
     /// @param subtype the pointee type
     /// @param access the resolved access control of the reference
-    Pointer(builtin::AddressSpace address_space, const Type* subtype, builtin::Access access);
+    Pointer(builtin::AddressSpace address_space, Type* subtype, builtin::Access access);
 
     /// Destructor
     ~Pointer() override;
@@ -40,7 +40,7 @@ class Pointer final : public utils::Castable<Pointer, Type> {
     bool Equals(const UniqueNode& other) const override;
 
     /// @returns the pointee type
-    const Type* StoreType() const { return subtype_; }
+    Type* StoreType() const { return subtype_; }
 
     /// @returns the address space of the pointer
     builtin::AddressSpace AddressSpace() const { return address_space_; }
@@ -57,7 +57,7 @@ class Pointer final : public utils::Castable<Pointer, Type> {
     Pointer* Clone(CloneContext& ctx) const override;
 
   private:
-    Type const* const subtype_;
+    Type* const subtype_;
     builtin::AddressSpace const address_space_;
     builtin::Access const access_;
 };

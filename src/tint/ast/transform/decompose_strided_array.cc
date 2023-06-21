@@ -33,7 +33,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::DecomposeStridedArray);
 namespace tint::ast::transform {
 namespace {
 
-using DecomposedArrays = std::unordered_map<const type::Array*, Symbol>;
+using DecomposedArrays = std::unordered_map<type::Array*, Symbol>;
 
 bool ShouldRun(const Program* program) {
     for (auto* node : program->ASTNodes().Objects()) {
@@ -67,7 +67,7 @@ Transform::ApplyResult DecomposeStridedArray::Apply(const Program* src,
 
     // Maps an array type in the source program to the name of the struct wrapper
     // type in the target program.
-    std::unordered_map<const type::Array*, Symbol> decomposed;
+    std::unordered_map<type::Array*, Symbol> decomposed;
 
     // Find and replace all arrays with a @stride attribute with a array that has
     // the @stride removed. If the source array stride does not match the natural

@@ -89,7 +89,7 @@ class Manager final {
     /// @param type the composite type
     /// @param elements the composite elements
     /// @returns the value pointer
-    const constant::Value* Composite(const type::Type* type,
+    const constant::Value* Composite(type::Type* type,
                                      utils::VectorRef<const constant::Value*> elements);
 
     /// Constructs a splat constant.
@@ -97,7 +97,7 @@ class Manager final {
     /// @param element the splat element
     /// @param n the number of elements
     /// @returns the value pointer
-    const constant::Splat* Splat(const type::Type* type, const constant::Value* element, size_t n);
+    const constant::Splat* Splat(type::Type* type, const constant::Value* element, size_t n);
 
     /// @param value the constant value
     /// @return a Scalar holding the i32 value @p value

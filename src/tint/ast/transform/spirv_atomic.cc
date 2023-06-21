@@ -155,7 +155,7 @@ struct SpirvAtomic::State {
     }
 
   private:
-    ForkedStruct& Fork(const type::Struct* str) {
+    ForkedStruct& Fork(type::Struct* str) {
         auto& forked = forked_structs[str];
         if (!forked.name.IsValid()) {
             forked.name = b.Symbols().New(str->Name().Name() + "_atomic");
@@ -194,13 +194,13 @@ struct SpirvAtomic::State {
         }
     }
 
-    Type AtomicTypeFor(const type::Type* ty) {
+    Type AtomicTypeFor(type::Type* ty) {
         return Switch(
             ty,  //
-            [&](const type::I32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
-            [&](const type::U32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
-            [&](const type::Struct* str) { return b.ty(Fork(str).name); },
-            [&](const type::Array* arr) {
+            [&](type::I32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
+            [&](type::U32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
+            [&](type::Struct* str) { return b.ty(Fork(str).name); },
+            [&](type::Array* arr) {
                 if (arr->Count()->Is<type::RuntimeArrayCount>()) {
                     return b.ty.array(AtomicTypeFor(arr->ElemType()));
                 }
@@ -214,11 +214,11 @@ struct SpirvAtomic::State {
                 }
                 return b.ty.array(AtomicTypeFor(arr->ElemType()), u32(count.value()));
             },
-            [&](const type::Pointer* ptr) {
+            [&](type::Pointer* ptr) {
                 return b.ty.ptr(ptr->AddressSpace(), AtomicTypeFor(ptr->StoreType()),
                                 ptr->Access());
             },
-            [&](const type::Reference* ref) { return AtomicTypeFor(ref->StoreType()); },
+            [&](type::Reference* ref) { return AtomicTypeFor(ref->StoreType()); },
             [&](Default) {
                 TINT_ICE(Transform, b.Diagnostics()) << "unhandled type: " << ty->FriendlyName();
                 return Type{};

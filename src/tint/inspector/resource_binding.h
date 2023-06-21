@@ -114,7 +114,7 @@ ResourceBinding::TextureDimension TypeTextureDimensionToResourceBindingTextureDi
 /// Infer ResourceBinding::SampledKind for a given type::Type
 /// @param base_type internal type to infer from
 /// @returns the publicly visible equivalent
-ResourceBinding::SampledKind BaseTypeToSampledKind(const type::Type* base_type);
+ResourceBinding::SampledKind BaseTypeToSampledKind(type::Type* base_type);
 
 /// Convert from internal builtin::TexelFormat to public
 /// ResourceBinding::TexelFormat

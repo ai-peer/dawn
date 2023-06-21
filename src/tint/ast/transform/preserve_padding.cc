@@ -97,9 +97,7 @@ struct PreservePadding::State {
     /// @param lhs the lhs expression (in the destination program)
     /// @param rhs the rhs expression (in the destination program)
     /// @returns the statement that performs the assignment
-    const Statement* MakeAssignment(const type::Type* ty,
-                                    const Expression* lhs,
-                                    const Expression* rhs) {
+    const Statement* MakeAssignment(type::Type* ty, const Expression* lhs, const Expression* rhs) {
         if (!HasPadding(ty)) {
             // No padding - use a regular assignment.
             return b.Assign(lhs, rhs);
@@ -134,7 +132,7 @@ struct PreservePadding::State {
 
         return Switch(
             ty,  //
-            [&](const type::Array* arr) {
+            [&](type::Array* arr) {
                 // Call a helper function that uses a loop to assigns each element separately.
                 return call_helper([&]() {
                     utils::Vector<const Statement*, 8> body;
@@ -148,7 +146,7 @@ struct PreservePadding::State {
                     return body;
                 });
             },
-            [&](const type::Matrix* mat) {
+            [&](type::Matrix* mat) {
                 // Call a helper function that assigns each column separately.
                 return call_helper([&]() {
                     utils::Vector<const Statement*, 4> body;
@@ -160,7 +158,7 @@ struct PreservePadding::State {
                     return body;
                 });
             },
-            [&](const type::Struct* str) {
+            [&](type::Struct* str) {
                 // Call a helper function that assigns each member separately.
                 return call_helper([&]() {
                     utils::Vector<const Statement*, 8> body;
@@ -182,24 +180,24 @@ struct PreservePadding::State {
     /// Checks if a type contains padding bytes.
     /// @param ty the type to check
     /// @returns true if `ty` (or any of its contained types) have padding bytes
-    bool HasPadding(const type::Type* ty) {
+    bool HasPadding(type::Type* ty) {
         return Switch(
             ty,  //
-            [&](const type::Array* arr) {
+            [&](type::Array* arr) {
                 auto* elem_ty = arr->ElemType();
                 if (elem_ty->Size() % elem_ty->Align() > 0) {
                     return true;
                 }
                 return HasPadding(elem_ty);
             },
-            [&](const type::Matrix* mat) {
+            [&](type::Matrix* mat) {
                 auto* col_ty = mat->ColumnType();
                 if (mat->ColumnStride() > col_ty->Size()) {
                     return true;
                 }
                 return HasPadding(col_ty);
             },
-            [&](const type::Struct* str) {
+            [&](type::Struct* str) {
                 uint32_t current_offset = 0;
                 for (auto* member : str->Members()) {
                     if (member->Offset() > current_offset) {
@@ -235,7 +233,7 @@ struct PreservePadding::State {
     /// Flag to track whether we have already enabled the full pointer parameters extension.
     bool ext_enabled = false;
     /// Map of semantic types to their assignment helper functions.
-    utils::Hashmap<const type::Type*, Symbol, 8> helpers;
+    utils::Hashmap<type::Type*, Symbol, 8> helpers;
 };
 
 Transform::ApplyResult PreservePadding::Apply(const Program* program,

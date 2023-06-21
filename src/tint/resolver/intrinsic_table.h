@@ -53,9 +53,9 @@ class IntrinsicTable {
     /// UnaryOperator describes a resolved unary operator
     struct UnaryOperator {
         /// The result type of the unary operator
-        const type::Type* result = nullptr;
+        type::Type* result = nullptr;
         /// The type of the parameter of the unary operator
-        const type::Type* parameter = nullptr;
+        type::Type* parameter = nullptr;
         /// The constant evaluation function
         ConstEval::Function const_eval_fn = nullptr;
     };
@@ -63,11 +63,11 @@ class IntrinsicTable {
     /// BinaryOperator describes a resolved binary operator
     struct BinaryOperator {
         /// The result type of the binary operator
-        const type::Type* result = nullptr;
+        type::Type* result = nullptr;
         /// The type of LHS parameter of the binary operator
-        const type::Type* lhs = nullptr;
+        type::Type* lhs = nullptr;
         /// The type of RHS parameter of the binary operator
-        const type::Type* rhs = nullptr;
+        type::Type* rhs = nullptr;
         /// The constant evaluation function
         ConstEval::Function const_eval_fn = nullptr;
     };
@@ -93,7 +93,7 @@ class IntrinsicTable {
     /// @param source the source of the builtin call
     /// @return the semantic builtin if found, otherwise nullptr
     virtual Builtin Lookup(builtin::Function type,
-                           utils::VectorRef<const type::Type*> args,
+                           utils::VectorRef<type::Type*> args,
                            sem::EvaluationStage earliest_eval_stage,
                            const Source& source) = 0;
 
@@ -111,7 +111,7 @@ class IntrinsicTable {
     /// @return the operator call target signature. If the operator was not found
     ///         UnaryOperator::result will be nullptr.
     virtual UnaryOperator Lookup(ast::UnaryOp op,
-                                 const type::Type* arg,
+                                 type::Type* arg,
                                  sem::EvaluationStage earliest_eval_stage,
                                  const Source& source) = 0;
 
@@ -131,8 +131,8 @@ class IntrinsicTable {
     /// @return the operator call target signature. If the operator was not found
     ///         BinaryOperator::result will be nullptr.
     virtual BinaryOperator Lookup(ast::BinaryOp op,
-                                  const type::Type* lhs,
-                                  const type::Type* rhs,
+                                  type::Type* lhs,
+                                  type::Type* rhs,
                                   sem::EvaluationStage earliest_eval_stage,
                                   const Source& source,
                                   bool is_compound) = 0;
@@ -151,8 +151,8 @@ class IntrinsicTable {
     /// @param source the source of the call
     /// @return a sem::ValueConstructor, sem::ValueConversion or nullptr if nothing matched
     virtual CtorOrConv Lookup(CtorConvIntrinsic type,
-                              const type::Type* template_arg,
-                              utils::VectorRef<const type::Type*> args,
+                              type::Type* template_arg,
+                              utils::VectorRef<type::Type*> args,
                               sem::EvaluationStage earliest_eval_stage,
                               const Source& source) = 0;
 };

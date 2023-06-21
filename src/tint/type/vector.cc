@@ -24,7 +24,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::type::Vector);
 
 namespace tint::type {
 
-Vector::Vector(Type const* subtype, uint32_t width, bool packed /* = false */)
+Vector::Vector(Type* subtype, uint32_t width, bool packed /* = false */)
     : Base(utils::Hash(utils::TypeInfo::Of<Vector>().full_hashcode, width, subtype, packed),
            type::Flags{
                Flag::kConstructable,
@@ -77,12 +77,12 @@ Vector* Vector::Clone(CloneContext& ctx) const {
     return ctx.dst.mgr->Get<Vector>(subtype, width_, packed_);
 }
 
-TypeAndCount Vector::Elements(const Type* /* type_if_invalid = nullptr */,
-                              uint32_t /* count_if_invalid = 0 */) const {
+TypeAndCount Vector::Elements(Type* /* type_if_invalid = nullptr */,
+                              uint32_t /* count_if_invalid = 0 */) {
     return {subtype_, width_};
 }
 
-const Type* Vector::Element(uint32_t index) const {
+Type* Vector::Element(uint32_t index) {
     return index < width_ ? subtype_ : nullptr;
 }
 

@@ -44,7 +44,7 @@ MultiInBlock* Builder::MultiInBlock() {
 }
 
 Function* Builder::Function(std::string_view name,
-                            const type::Type* return_type,
+                            type::Type* return_type,
                             Function::PipelineStage stage,
                             std::optional<std::array<uint32_t, 3>> wg_size) {
     auto* ir_func = ir.values.Create<ir::Function>(return_type, stage, wg_size);
@@ -72,15 +72,15 @@ ir::Discard* Builder::Discard() {
     return Append(ir.instructions.Create<ir::Discard>());
 }
 
-ir::Var* Builder::Var(const type::Pointer* type) {
+ir::Var* Builder::Var(type::Pointer* type) {
     return Append(ir.instructions.Create<ir::Var>(InstructionResult(type)));
 }
 
-ir::BlockParam* Builder::BlockParam(const type::Type* type) {
+ir::BlockParam* Builder::BlockParam(type::Type* type) {
     return ir.values.Create<ir::BlockParam>(type);
 }
 
-ir::FunctionParam* Builder::FunctionParam(const type::Type* type) {
+ir::FunctionParam* Builder::FunctionParam(type::Type* type) {
     return ir.values.Create<ir::FunctionParam>(type);
 }
 

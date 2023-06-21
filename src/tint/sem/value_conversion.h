@@ -26,16 +26,16 @@ class ValueConversion final : public utils::Castable<ValueConversion, CallTarget
     /// @param type the target type of the cast
     /// @param parameter the type cast parameter
     /// @param stage the earliest evaluation stage for the expression
-    ValueConversion(const type::Type* type, sem::Parameter* parameter, EvaluationStage stage);
+    ValueConversion(type::Type* type, sem::Parameter* parameter, EvaluationStage stage);
 
     /// Destructor
     ~ValueConversion() override;
 
     /// @returns the cast source type
-    const type::Type* Source() const { return Parameters()[0]->Type(); }
+    type::Type* Source() const { return Parameters()[0]->Type(); }
 
     /// @returns the cast target type
-    const type::Type* Target() const { return ReturnType(); }
+    type::Type* Target() const { return ReturnType(); }
 };
 
 }  // namespace tint::sem

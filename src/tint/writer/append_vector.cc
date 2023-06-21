@@ -45,9 +45,7 @@ VectorConstructorInfo AsVectorConstructor(const sem::ValueExpression* expr) {
     return {};
 }
 
-const sem::ValueExpression* Zero(ProgramBuilder& b,
-                                 const type::Type* ty,
-                                 const sem::Statement* stmt) {
+const sem::ValueExpression* Zero(ProgramBuilder& b, type::Type* ty, const sem::Statement* stmt) {
     const ast::Expression* expr = nullptr;
     if (ty->Is<type::I32>()) {
         expr = b.Expr(0_i);
@@ -75,7 +73,7 @@ const sem::Call* AppendVector(ProgramBuilder* b,
                               const ast::Expression* vector_ast,
                               const ast::Expression* scalar_ast) {
     uint32_t packed_size;
-    const type::Type* packed_el_sem_ty;
+    type::Type* packed_el_sem_ty;
     auto* vector_sem = b->Sem().GetVal(vector_ast);
     auto* scalar_sem = b->Sem().GetVal(scalar_ast);
     auto* vector_ty = vector_sem->Type()->UnwrapRef();
@@ -89,10 +87,8 @@ const sem::Call* AppendVector(ProgramBuilder* b,
 
     auto packed_el_ast_ty = Switch(
         packed_el_sem_ty,  //
-        [&](const type::I32*) { return b->ty.i32(); },
-        [&](const type::U32*) { return b->ty.u32(); },
-        [&](const type::F32*) { return b->ty.f32(); },
-        [&](const type::Bool*) { return b->ty.bool_(); },
+        [&](type::I32*) { return b->ty.i32(); }, [&](type::U32*) { return b->ty.u32(); },
+        [&](type::F32*) { return b->ty.f32(); }, [&](type::Bool*) { return b->ty.bool_(); },
         [&](Default) {
             TINT_UNREACHABLE(Writer, b->Diagnostics())
                 << "unsupported vector element type: " << packed_el_sem_ty->TypeInfo().name;

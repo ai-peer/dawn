@@ -55,7 +55,7 @@ class Variable : public utils::Castable<Variable, Node> {
     /// @param access the variable access control type
     /// @param constant_value the constant value for the variable. May be null
     Variable(const ast::Variable* declaration,
-             const type::Type* type,
+             type::Type* type,
              EvaluationStage stage,
              builtin::AddressSpace address_space,
              builtin::Access access,
@@ -68,7 +68,7 @@ class Variable : public utils::Castable<Variable, Node> {
     const ast::Variable* Declaration() const { return declaration_; }
 
     /// @returns the canonical type for the variable
-    const type::Type* Type() const { return type_; }
+    type::Type* Type() const { return type_; }
 
     /// @returns the evaluation stage for an expression of this variable type
     EvaluationStage Stage() const { return stage_; }
@@ -98,7 +98,7 @@ class Variable : public utils::Castable<Variable, Node> {
 
   private:
     const ast::Variable* const declaration_;
-    const type::Type* const type_;
+    type::Type* const type_;
     const EvaluationStage stage_;
     const builtin::AddressSpace address_space_;
     const builtin::Access access_;
@@ -119,7 +119,7 @@ class LocalVariable final : public utils::Castable<LocalVariable, Variable> {
     /// @param statement the statement that declared this local variable
     /// @param constant_value the constant value for the variable. May be null
     LocalVariable(const ast::Variable* declaration,
-                  const type::Type* type,
+                  type::Type* type,
                   EvaluationStage stage,
                   builtin::AddressSpace address_space,
                   builtin::Access access,
@@ -160,7 +160,7 @@ class GlobalVariable final : public utils::Castable<GlobalVariable, Variable> {
     /// Note, a GlobalVariable generally doesn't have a `location` in WGSL, as it isn't allowed by
     /// the spec. The location maybe attached by transforms such as CanonicalizeEntryPointIO.
     GlobalVariable(const ast::Variable* declaration,
-                   const type::Type* type,
+                   type::Type* type,
                    EvaluationStage stage,
                    builtin::AddressSpace address_space,
                    builtin::Access access,
@@ -204,7 +204,7 @@ class Parameter final : public utils::Castable<Parameter, Variable> {
     /// @param location the location value, if set
     Parameter(const ast::Parameter* declaration,
               uint32_t index,
-              const type::Type* type,
+              type::Type* type,
               builtin::AddressSpace address_space,
               builtin::Access access,
               const ParameterUsage usage = ParameterUsage::kNone,

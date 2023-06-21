@@ -45,7 +45,7 @@ class Array final : public utils::Castable<Array, Type> {
     /// @param implicit_stride the number of bytes from the start of one element
     /// of the array to the start of the next element, if there was no `@stride`
     /// attribute applied.
-    Array(Type const* element,
+    Array(Type* element,
           const ArrayCount* count,
           uint32_t align,
           uint32_t size,
@@ -57,7 +57,7 @@ class Array final : public utils::Castable<Array, Type> {
     bool Equals(const UniqueNode& other) const override;
 
     /// @return the array element type
-    Type const* ElemType() const { return element_; }
+    Type* ElemType() const { return element_; }
 
     /// @returns the number of elements in the array.
     const ArrayCount* Count() const { return count_; }
@@ -98,18 +98,17 @@ class Array final : public utils::Castable<Array, Type> {
     std::string FriendlyName() const override;
 
     /// @copydoc Type::Elements
-    TypeAndCount Elements(const Type* type_if_invalid = nullptr,
-                          uint32_t count_if_invalid = 0) const override;
+    TypeAndCount Elements(Type* type_if_invalid = nullptr, uint32_t count_if_invalid = 0) override;
 
     /// @copydoc Type::Element
-    const Type* Element(uint32_t index) const override;
+    Type* Element(uint32_t index) override;
 
     /// @param ctx the clone context
     /// @returns a clone of this type
     Array* Clone(CloneContext& ctx) const override;
 
   private:
-    Type const* const element_;
+    Type* const element_;
     const ArrayCount* count_;
     const uint32_t align_;
     const uint32_t size_;

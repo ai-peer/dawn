@@ -74,17 +74,16 @@ void AppendResourceBindings(std::vector<ResourceBinding>* dest,
     dest->insert(dest->end(), orig.begin(), orig.end());
 }
 
-std::tuple<ComponentType, CompositionType> CalculateComponentAndComposition(
-    const type::Type* type) {
+std::tuple<ComponentType, CompositionType> CalculateComponentAndComposition(type::Type* type) {
     // entry point in/out variables must of numeric scalar or vector types.
     TINT_ASSERT(Inspector, type->is_numeric_scalar_or_vector());
 
     ComponentType componentType = Switch(
         type->DeepestElement(),  //
-        [&](const type::F32*) { return ComponentType::kF32; },
-        [&](const type::F16*) { return ComponentType::kF16; },
-        [&](const type::I32*) { return ComponentType::kI32; },
-        [&](const type::U32*) { return ComponentType::kU32; },
+        [&](type::F32*) { return ComponentType::kF32; },
+        [&](type::F16*) { return ComponentType::kF16; },
+        [&](type::I32*) { return ComponentType::kI32; },
+        [&](type::U32*) { return ComponentType::kU32; },
         [&](Default) {
             tint::diag::List diagnostics;
             TINT_UNREACHABLE(Inspector, diagnostics) << "unhandled component type";
@@ -271,14 +270,14 @@ std::map<OverrideId, Scalar> Inspector::GetOverrideDefaultValues() {
             if (auto* value = global->Initializer()->ConstantValue()) {
                 result[override_id] = Switch(
                     value->Type(),  //
-                    [&](const type::I32*) { return Scalar(value->ValueAs<i32>()); },
-                    [&](const type::U32*) { return Scalar(value->ValueAs<u32>()); },
-                    [&](const type::F32*) { return Scalar(value->ValueAs<f32>()); },
-                    [&](const type::F16*) {
+                    [&](type::I32*) { return Scalar(value->ValueAs<i32>()); },
+                    [&](type::U32*) { return Scalar(value->ValueAs<u32>()); },
+                    [&](type::F32*) { return Scalar(value->ValueAs<f32>()); },
+                    [&](type::F16*) {
                         // Default value of f16 override is also stored as float scalar.
                         return Scalar(static_cast<float>(value->ValueAs<f16>()));
                     },
-                    [&](const type::Bool*) { return Scalar(value->ValueAs<bool>()); });
+                    [&](type::Bool*) { return Scalar(value->ValueAs<bool>()); });
                 continue;
             }
         }
@@ -606,7 +605,7 @@ const ast::Function* Inspector::FindEntryPointByName(const std::string& name) {
 }
 
 void Inspector::AddEntryPointInOutVariables(std::string name,
-                                            const type::Type* type,
+                                            type::Type* type,
                                             utils::VectorRef<const ast::Attribute*> attributes,
                                             std::optional<uint32_t> location,
                                             std::vector<StageVariable>& variables) const {
@@ -645,7 +644,7 @@ void Inspector::AddEntryPointInOutVariables(std::string name,
 }
 
 bool Inspector::ContainsBuiltin(builtin::BuiltinValue builtin,
-                                const type::Type* type,
+                                type::Type* type,
                                 utils::VectorRef<const ast::Attribute*> attributes) const {
     auto* unwrapped_type = type->UnwrapRef();
 
@@ -732,7 +731,7 @@ std::vector<ResourceBinding> Inspector::GetSampledTextureResourceBindingsImpl(
         auto* texture_type = var->Type()->UnwrapRef()->As<type::Texture>();
         entry.dim = TypeTextureDimensionToResourceBindingTextureDimension(texture_type->dim());
 
-        const type::Type* base_type = nullptr;
+        type::Type* base_type = nullptr;
         if (multisampled_only) {
             base_type = texture_type->As<type::MultisampledTexture>()->type();
         } else {
@@ -849,7 +848,7 @@ void Inspector::GenerateSamplerTargets() {
 }
 
 std::tuple<InterpolationType, InterpolationSampling> Inspector::CalculateInterpolationData(
-    const type::Type* type,
+    type::Type* type,
     utils::VectorRef<const ast::Attribute*> attributes) const {
     auto* interpolation_attribute = ast::GetAttribute<ast::InterpolateAttribute>(attributes);
     if (type->is_integer_scalar_or_vector()) {

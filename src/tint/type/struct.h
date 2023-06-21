@@ -80,8 +80,8 @@ class Struct : public utils::Castable<Struct, Type> {
     Symbol Name() const { return name_; }
 
     /// @returns the members of the structure
-    utils::VectorRef<const StructMember*> Members() const {
-        return utils::VectorRef<StructMember*>(members_).ReinterpretCast<const StructMember*>();
+    utils::VectorRef<StructMember*> Members() const {
+        return utils::VectorRef<StructMember*>(members_);
     }
 
     /// @param name the member name to look for
@@ -153,19 +153,18 @@ class Struct : public utils::Castable<Struct, Type> {
     std::string Layout() const;
 
     /// @param concrete the conversion-rank ordered concrete versions of this abstract structure.
-    void SetConcreteTypes(utils::VectorRef<const Struct*> concrete) { concrete_types_ = concrete; }
+    void SetConcreteTypes(utils::VectorRef<Struct*> concrete) { concrete_types_ = concrete; }
 
     /// @returns the conversion-rank ordered concrete versions of this abstract structure, or an
     /// empty vector if this structure is not abstract.
     /// @note only structures returned by builtins may be abstract (e.g. modf, frexp)
-    utils::VectorRef<const Struct*> ConcreteTypes() const { return concrete_types_; }
+    utils::VectorRef<Struct*> ConcreteTypes() const { return concrete_types_; }
 
     /// @copydoc Type::Elements
-    TypeAndCount Elements(const Type* type_if_invalid = nullptr,
-                          uint32_t count_if_invalid = 0) const override;
+    TypeAndCount Elements(Type* type_if_invalid = nullptr, uint32_t count_if_invalid = 0) override;
 
     /// @copydoc Type::Element
-    const Type* Element(uint32_t index) const override;
+    Type* Element(uint32_t index) override;
 
     /// @param ctx the clone context
     /// @returns a clone of this type
@@ -180,7 +179,7 @@ class Struct : public utils::Castable<Struct, Type> {
     type::StructFlags struct_flags_;
     std::unordered_set<builtin::AddressSpace> address_space_usage_;
     std::unordered_set<PipelineStageUsage> pipeline_stage_uses_;
-    utils::Vector<const Struct*, 2> concrete_types_;
+    utils::Vector<Struct*, 2> concrete_types_;
 };
 
 /// Attributes that can be applied to the StructMember
@@ -209,7 +208,7 @@ class StructMember : public utils::Castable<StructMember, Node> {
     /// @param size the byte size of the member
     /// @param attributes the optional attributes
     StructMember(Symbol name,
-                 const type::Type* type,
+                 type::Type* type,
                  uint32_t index,
                  uint32_t offset,
                  uint32_t align,
@@ -224,13 +223,13 @@ class StructMember : public utils::Castable<StructMember, Node> {
 
     /// Sets the owning structure to `s`
     /// @param s the new structure owner
-    void SetStruct(const Struct* s) { struct_ = s; }
+    void SetStruct(Struct* s) { struct_ = s; }
 
     /// @returns the structure that owns this member
-    const type::Struct* Struct() const { return struct_; }
+    type::Struct* Struct() const { return struct_; }
 
     /// @returns the type of the member
-    const type::Type* Type() const { return type_; }
+    type::Type* Type() const { return type_; }
 
     /// @returns the member index
     uint32_t Index() const { return index_; }
@@ -253,8 +252,8 @@ class StructMember : public utils::Castable<StructMember, Node> {
 
   private:
     const Symbol name_;
-    const type::Struct* struct_;
-    const type::Type* type_;
+    type::Struct* struct_;
+    type::Type* const type_;
     const uint32_t index_;
     const uint32_t offset_;
     const uint32_t align_;

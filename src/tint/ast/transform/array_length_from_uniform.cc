@@ -146,7 +146,7 @@ struct ArrayLengthFromUniform::State {
             //                             array_stride
             const Expression* total_size = total_storage_buffer_size;
             auto* storage_buffer_type = storage_buffer_sem->Type()->UnwrapRef();
-            const type::Array* array_type = nullptr;
+            type::Array* array_type = nullptr;
             if (auto* str = storage_buffer_type->As<type::Struct>()) {
                 // The variable is a struct, so subtract the byte offset of the array
                 // member.

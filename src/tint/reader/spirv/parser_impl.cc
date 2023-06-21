@@ -2532,7 +2532,7 @@ const Type* ParserImpl::GetHandleTypeForSpirvHandle(const spvtools::opt::Instruc
             }
         }
 
-        const type::TextureDimension dim =
+        type::TextureDimension dim =
             enum_converter_.ToDim(image_type->dim(), image_type->is_arrayed());
         if (dim == type::TextureDimension::kNone) {
             return nullptr;

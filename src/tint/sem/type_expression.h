@@ -33,16 +33,16 @@ class TypeExpression : public utils::Castable<TypeExpression, Expression> {
     /// @param type the type that this expression resolved to
     TypeExpression(const ast::Expression* declaration,
                    const Statement* statement,
-                   const type::Type* type);
+                   type::Type* type);
 
     /// Destructor
     ~TypeExpression() override;
 
     /// @return the type that the expression resolved to
-    const type::Type* Type() const { return type_; }
+    type::Type* Type() const { return type_; }
 
   private:
-    type::Type const* const type_;
+    type::Type* const type_;
 };
 
 }  // namespace tint::sem

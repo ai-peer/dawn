@@ -97,20 +97,20 @@ void ProgramBuilder::AssertNotMoved() const {
     }
 }
 
-const type::Type* ProgramBuilder::TypeOf(const ast::Expression* expr) const {
+type::Type* ProgramBuilder::TypeOf(const ast::Expression* expr) const {
     return tint::Switch(
         Sem().Get(expr),  //
         [](const sem::ValueExpression* e) { return e->Type(); },
         [](const sem::TypeExpression* e) { return e->Type(); });
 }
 
-const type::Type* ProgramBuilder::TypeOf(const ast::Variable* var) const {
+type::Type* ProgramBuilder::TypeOf(const ast::Variable* var) const {
     auto* sem = Sem().Get(var);
     return sem ? sem->Type() : nullptr;
 }
 
-const type::Type* ProgramBuilder::TypeOf(const ast::TypeDecl* type_decl) const {
-    return Sem().Get(type_decl);
+type::Type* ProgramBuilder::TypeOf(const ast::TypeDecl* type_decl) const {
+    return const_cast<type::Type*>(Sem().Get(type_decl));
 }
 
 ProgramBuilder::TypesBuilder::TypesBuilder(ProgramBuilder* pb) : builder(pb) {}

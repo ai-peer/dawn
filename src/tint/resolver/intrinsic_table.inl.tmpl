@@ -192,14 +192,14 @@ class {{$class}} : public TypeMatcher {
   /// @param state the MatchState
   /// @param type the type to match
   /// @returns the canonicalized type on match, otherwise nullptr
-  const type::Type* Match(MatchState& state,
-                         const type::Type* type) const override;
+  type::Type* Match(MatchState& state,
+                    type::Type* type) const override;
   /// @param state the MatchState
   /// @return a string representation of the matcher.
   std::string String(MatchState* state) const override;
 };
 
-const type::Type* {{$class}}::Match(MatchState& state, const type::Type* ty) const {
+type::Type* {{$class}}::Match(MatchState& state, type::Type* ty) const {
 {{- range .TemplateParams }}
 {{-   template "DeclareLocalTemplateParam" . }}
 {{- end  }}
@@ -247,14 +247,14 @@ class {{$class}} : public TypeMatcher {
   /// @param state the MatchState
   /// @param type the type to match
   /// @returns the canonicalized type on match, otherwise nullptr
-  const type::Type* Match(MatchState& state,
-                         const type::Type* type) const override;
+  type::Type* Match(MatchState& state,
+                    type::Type* type) const override;
   /// @param state the MatchState
   /// @return a string representation of the matcher.
   std::string String(MatchState* state) const override;
 };
 
-const type::Type* {{$class}}::Match(MatchState& state, const type::Type* ty) const {
+type::Type* {{$class}}::Match(MatchState& state, type::Type* ty) const {
 {{- range .PrecedenceSortedTypes }}
   if (match_{{.Name}}(state, ty)) {
     return build_{{.Name}}(state);
@@ -402,7 +402,7 @@ Matchers::~Matchers() = default;
 {{-                     define "DeclareLocalTemplateParam"                   -}}
 {{- /* ------------------------------------------------------------------ */ -}}
 {{-   if      IsTemplateTypeParam . }}
-  const type::Type* {{.Name}} = nullptr;
+  type::Type* {{.Name}} = nullptr;
 {{-   else if IsTemplateNumberParam . }}
   Number {{.Name}} = Number::invalid;
 {{-   else if IsTemplateEnumParam . }}

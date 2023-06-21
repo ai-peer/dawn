@@ -56,11 +56,11 @@ class FunctionParam : public utils::Castable<FunctionParam, Value> {
 
     /// Constructor
     /// @param type the type of the var
-    explicit FunctionParam(const type::Type* type);
+    explicit FunctionParam(type::Type* type);
     ~FunctionParam() override;
 
     /// @returns the type of the var
-    const type::Type* Type() override { return type_; }
+    type::Type* Type() override { return type_; }
 
     /// Sets the builtin information. Note, it is currently an error if the builtin is already set.
     /// @param val the builtin to set
@@ -94,7 +94,7 @@ class FunctionParam : public utils::Castable<FunctionParam, Value> {
     std::optional<struct BindingPoint> BindingPoint() { return binding_point_; }
 
   private:
-    const type::Type* type_ = nullptr;
+    type::Type* const type_ = nullptr;
     std::optional<enum FunctionParam::Builtin> builtin_;
     std::optional<struct Location> location_;
     std::optional<struct BindingPoint> binding_point_;

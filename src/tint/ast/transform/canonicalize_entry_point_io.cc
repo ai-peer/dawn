@@ -218,7 +218,7 @@ struct CanonicalizeEntryPointIO::State {
     /// @param attrs the attributes to apply to the shader input
     /// @returns an expression which evaluates to the value of the shader input
     const Expression* AddInput(std::string name,
-                               const type::Type* type,
+                               type::Type* type,
                                std::optional<uint32_t> location,
                                utils::Vector<const Attribute*, 8> attrs) {
         auto ast_type = CreateASTTypeFor(ctx, type);
@@ -291,7 +291,7 @@ struct CanonicalizeEntryPointIO::State {
     /// @param attrs the attributes to apply to the shader output
     /// @param value the value of the shader output
     void AddOutput(std::string name,
-                   const type::Type* type,
+                   type::Type* type,
                    std::optional<uint32_t> location,
                    utils::Vector<const Attribute*, 8> attrs,
                    const Expression* value) {
@@ -391,7 +391,7 @@ struct CanonicalizeEntryPointIO::State {
     /// function.
     /// @param inner_ret_type the original function return type
     /// @param original_result the result object produced by the original function
-    void ProcessReturnType(const type::Type* inner_ret_type, Symbol original_result) {
+    void ProcessReturnType(type::Type* inner_ret_type, Symbol original_result) {
         // Do not add interpolation attributes on fragment output
         bool do_interpolate = func_ast->PipelineStage() != PipelineStage::kFragment;
         if (auto* str = inner_ret_type->As<sem::Struct>()) {
@@ -802,7 +802,7 @@ struct CanonicalizeEntryPointIO::State {
     /// @returns the converted value which can be assigned to the GLSL builtin
     const Expression* ToGLSLBuiltin(builtin::BuiltinValue builtin,
                                     const Expression* value,
-                                    const type::Type*& type) {
+                                    type::Type*& type) {
         switch (builtin) {
             case builtin::BuiltinValue::kVertexIndex:
             case builtin::BuiltinValue::kInstanceIndex:

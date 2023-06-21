@@ -1748,7 +1748,7 @@ TEST_P(Expr_Binary_Test_Invalid_VectorMatrixMultiply, All) {
 
     ast::Type lhs_type;
     ast::Type rhs_type;
-    const type::Type* result_type = nullptr;
+    type::Type* result_type = nullptr;
     bool is_valid_expr;
 
     if (vec_by_mat) {

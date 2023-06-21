@@ -46,7 +46,7 @@ ResourceBinding::TextureDimension TypeTextureDimensionToResourceBindingTextureDi
     return ResourceBinding::TextureDimension::kNone;
 }
 
-ResourceBinding::SampledKind BaseTypeToSampledKind(const type::Type* base_type) {
+ResourceBinding::SampledKind BaseTypeToSampledKind(type::Type* base_type) {
     if (!base_type) {
         return ResourceBinding::SampledKind::kUnknown;
     }

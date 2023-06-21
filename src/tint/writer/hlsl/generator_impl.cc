@@ -410,7 +410,7 @@ bool GeneratorImpl::Generate() {
 }
 
 bool GeneratorImpl::EmitDynamicVectorAssignment(const ast::AssignmentStatement* stmt,
-                                                const type::Vector* vec) {
+                                                type::Vector* vec) {
     auto name = utils::GetOrCreate(dynamic_vector_write_, vec, [&]() -> std::string {
         std::string fn;
         {
@@ -484,7 +484,7 @@ bool GeneratorImpl::EmitDynamicVectorAssignment(const ast::AssignmentStatement* 
 }
 
 bool GeneratorImpl::EmitDynamicMatrixVectorAssignment(const ast::AssignmentStatement* stmt,
-                                                      const type::Matrix* mat) {
+                                                      type::Matrix* mat) {
     auto name = utils::GetOrCreate(dynamic_matrix_vector_write_, mat, [&]() -> std::string {
         std::string fn;
         {
@@ -550,7 +550,7 @@ bool GeneratorImpl::EmitDynamicMatrixVectorAssignment(const ast::AssignmentState
 }
 
 bool GeneratorImpl::EmitDynamicMatrixScalarAssignment(const ast::AssignmentStatement* stmt,
-                                                      const type::Matrix* mat) {
+                                                      type::Matrix* mat) {
     auto* lhs_row_access = stmt->lhs->As<ast::IndexAccessorExpression>();
     auto* lhs_col_access = lhs_row_access->object->As<ast::IndexAccessorExpression>();
 
@@ -707,7 +707,7 @@ bool GeneratorImpl::EmitAssign(const ast::AssignmentStatement* stmt) {
         }
         // BUG(crbug.com/tint/1333): work around assignment of vector to matrices
         // with dynamic indices
-        const auto* lhs_access_type = TypeOf(lhs_access->object)->UnwrapRef();
+        auto* lhs_access_type = TypeOf(lhs_access->object)->UnwrapRef();
         if (auto* mat = lhs_access_type->As<type::Matrix>()) {
             auto* lhs_index_sem = builder_.Sem().GetVal(lhs_access->index);
             if (!lhs_index_sem->ConstantValue()) {
@@ -2951,7 +2951,7 @@ bool GeneratorImpl::EmitFunction(const ast::Function* func) {
             }
             first = false;
 
-            auto const* type = v->Type();
+            auto* type = v->Type();
             auto address_space = builtin::AddressSpace::kUndefined;
             auto access = builtin::Access::kUndefined;
 
@@ -3350,30 +3350,30 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out,
                                  bool is_variable_initializer) {
     return Switch(
         constant->Type(),  //
-        [&](const type::Bool*) {
+        [&](type::Bool*) {
             out << (constant->ValueAs<AInt>() ? "true" : "false");
             return true;
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             PrintF32(out, constant->ValueAs<f32>());
             return true;
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             // emit a f16 scalar with explicit float16_t type declaration.
             out << "float16_t(";
             PrintF16(out, constant->ValueAs<f16>());
             out << ")";
             return true;
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             out << constant->ValueAs<AInt>();
             return true;
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             out << constant->ValueAs<AInt>() << "u";
             return true;
         },
-        [&](const type::Vector* v) {
+        [&](type::Vector* v) {
             if (auto* splat = constant->As<constant::Splat>()) {
                 {
                     ScopedParen sp(out);
@@ -3405,7 +3405,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out,
             }
             return true;
         },
-        [&](const type::Matrix* m) {
+        [&](type::Matrix* m) {
             if (!EmitType(out, m, builtin::AddressSpace::kUndefined, builtin::Access::kUndefined,
                           "")) {
                 return false;
@@ -3423,7 +3423,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out,
             }
             return true;
         },
-        [&](const type::Array* a) {
+        [&](type::Array* a) {
             if (constant->AllZero()) {
                 out << "(";
                 if (!EmitType(out, a, builtin::AddressSpace::kUndefined,
@@ -3455,7 +3455,7 @@ bool GeneratorImpl::EmitConstant(utils::StringStream& out,
 
             return true;
         },
-        [&](const type::Struct* s) {
+        [&](type::Struct* s) {
             if (!EmitStructType(&helpers_, s)) {
                 return false;
             }
@@ -3542,30 +3542,30 @@ bool GeneratorImpl::EmitLiteral(utils::StringStream& out, const ast::LiteralExpr
         });
 }
 
-bool GeneratorImpl::EmitValue(utils::StringStream& out, const type::Type* type, int value) {
+bool GeneratorImpl::EmitValue(utils::StringStream& out, type::Type* type, int value) {
     return Switch(
         type,
-        [&](const type::Bool*) {
+        [&](type::Bool*) {
             out << (value == 0 ? "false" : "true");
             return true;
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             out << value << ".0f";
             return true;
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             out << "float16_t(" << value << ".0h)";
             return true;
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             out << value;
             return true;
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             out << value << "u";
             return true;
         },
-        [&](const type::Vector* vec) {
+        [&](type::Vector* vec) {
             if (!EmitType(out, type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite,
                           "")) {
                 return false;
@@ -3581,7 +3581,7 @@ bool GeneratorImpl::EmitValue(utils::StringStream& out, const type::Type* type, 
             }
             return true;
         },
-        [&](const type::Matrix* mat) {
+        [&](type::Matrix* mat) {
             if (!EmitType(out, type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite,
                           "")) {
                 return false;
@@ -3597,13 +3597,13 @@ bool GeneratorImpl::EmitValue(utils::StringStream& out, const type::Type* type, 
             }
             return true;
         },
-        [&](const type::Struct*) {
+        [&](type::Struct*) {
             out << "(";
             TINT_DEFER(out << ")" << value);
             return EmitType(out, type, builtin::AddressSpace::kUndefined,
                             builtin::Access::kUndefined, "");
         },
-        [&](const type::Array*) {
+        [&](type::Array*) {
             out << "(";
             TINT_DEFER(out << ")" << value);
             return EmitType(out, type, builtin::AddressSpace::kUndefined,
@@ -3616,7 +3616,7 @@ bool GeneratorImpl::EmitValue(utils::StringStream& out, const type::Type* type, 
         });
 }
 
-bool GeneratorImpl::EmitZeroValue(utils::StringStream& out, const type::Type* type) {
+bool GeneratorImpl::EmitZeroValue(utils::StringStream& out, type::Type* type) {
     return EmitValue(out, type, 0);
 }
 
@@ -3979,7 +3979,7 @@ bool GeneratorImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
 }
 
 bool GeneratorImpl::EmitType(utils::StringStream& out,
-                             const type::Type* type,
+                             type::Type* type,
                              builtin::AddressSpace address_space,
                              builtin::Access access,
                              const std::string& name,
@@ -4008,8 +4008,8 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
 
     return Switch(
         type,
-        [&](const type::Array* ary) {
-            const type::Type* base_type = ary;
+        [&](type::Array* ary) {
+            type::Type* base_type = ary;
             std::vector<uint32_t> sizes;
             while (auto* arr = base_type->As<type::Array>()) {
                 if (TINT_UNLIKELY(arr->Count()->Is<type::RuntimeArrayCount>())) {
@@ -4042,23 +4042,23 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             }
             return true;
         },
-        [&](const type::Bool*) {
+        [&](type::Bool*) {
             out << "bool";
             return true;
         },
-        [&](const type::F32*) {
+        [&](type::F32*) {
             out << "float";
             return true;
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             out << "float16_t";
             return true;
         },
-        [&](const type::I32*) {
+        [&](type::I32*) {
             out << "int";
             return true;
         },
-        [&](const type::Matrix* mat) {
+        [&](type::Matrix* mat) {
             if (mat->type()->Is<type::F16>()) {
                 // Use matrix<type, N, M> for f16 matrix
                 out << "matrix<";
@@ -4081,12 +4081,12 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             out << mat->columns() << "x" << mat->rows();
             return true;
         },
-        [&](const type::Pointer*) {
+        [&](type::Pointer*) {
             TINT_ICE(Writer, diagnostics_) << "Attempting to emit pointer type. These should have "
                                               "been removed with the SimplifyPointers transform";
             return false;
         },
-        [&](const type::Sampler* sampler) {
+        [&](type::Sampler* sampler) {
             out << "Sampler";
             if (sampler->IsComparison()) {
                 out << "Comparison";
@@ -4094,11 +4094,11 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             out << "State";
             return true;
         },
-        [&](const type::Struct* str) {
+        [&](type::Struct* str) {
             out << StructName(str);
             return true;
         },
-        [&](const type::Texture* tex) {
+        [&](type::Texture* tex) {
             if (TINT_UNLIKELY(tex->Is<type::ExternalTexture>())) {
                 TINT_ICE(Writer, diagnostics_)
                     << "Multiplanar external texture transform was not run.";
@@ -4167,11 +4167,11 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             }
             return true;
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             out << "uint";
             return true;
         },
-        [&](const type::Vector* vec) {
+        [&](type::Vector* vec) {
             auto width = vec->Width();
             if (vec->type()->Is<type::F32>() && width >= 1 && width <= 4) {
                 out << "float" << width;
@@ -4191,10 +4191,10 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
             }
             return true;
         },
-        [&](const type::Atomic* atomic) {
+        [&](type::Atomic* atomic) {
             return EmitType(out, atomic->Type(), address_space, access, name);
         },
-        [&](const type::Void*) {
+        [&](type::Void*) {
             out << "void";
             return true;
         },
@@ -4205,7 +4205,7 @@ bool GeneratorImpl::EmitType(utils::StringStream& out,
 }
 
 bool GeneratorImpl::EmitTypeAndName(utils::StringStream& out,
-                                    const type::Type* type,
+                                    type::Type* type,
                                     builtin::AddressSpace address_space,
                                     builtin::Access access,
                                     const std::string& name) {
@@ -4385,7 +4385,7 @@ bool GeneratorImpl::CallBuiltinHelper(utils::StringStream& out,
                         decl << ", ";
                     }
                     auto param_name = "param_" + std::to_string(parameter_names.size());
-                    const auto* ty = param->Type();
+                    auto* ty = param->Type();
                     if (auto* ptr = ty->As<type::Pointer>()) {
                         decl << "inout ";
                         ty = ptr->StoreType();

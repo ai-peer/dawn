@@ -19,7 +19,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::sem::Materialize);
 namespace tint::sem {
 Materialize::Materialize(const ValueExpression* expr,
                          const Statement* statement,
-                         const type::Type* type,
+                         type::Type* type,
                          const constant::Value* constant)
     : Base(/* declaration */ expr->Declaration(),
            /* type */ type,

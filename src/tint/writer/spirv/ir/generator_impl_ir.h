@@ -88,12 +88,12 @@ class GeneratorImplIr {
     /// Get the result ID of the OpConstantNull instruction for `type`, emitting it if necessary.
     /// @param type the type to get the ID for
     /// @returns the result ID of the OpConstantNull instruction
-    uint32_t ConstantNull(const type::Type* type);
+    uint32_t ConstantNull(type::Type* type);
 
     /// Get the result ID of the type `ty`, emitting a type declaration instruction if necessary.
     /// @param ty the type to get the ID for
     /// @returns the result ID of the type
-    uint32_t Type(const type::Type* ty);
+    uint32_t Type(type::Type* ty);
 
     /// Get the result ID of the value `value`, emitting its instruction if necessary.
     /// @param value the value to get the ID for
@@ -113,7 +113,7 @@ class GeneratorImplIr {
     /// Emit a struct type.
     /// @param id the result ID to use
     /// @param str the struct type to emit
-    void EmitStructType(uint32_t id, const type::Struct* str);
+    void EmitStructType(uint32_t id, type::Struct* str);
 
     /// Emit a function.
     /// @param func the function to emit
@@ -229,7 +229,7 @@ class GeneratorImplIr {
     };
 
     /// The map of types to their result IDs.
-    utils::Hashmap<const type::Type*, uint32_t, 8> types_;
+    utils::Hashmap<type::Type*, uint32_t, 8> types_;
 
     /// The map of function types to their result IDs.
     utils::Hashmap<FunctionType, uint32_t, 8, FunctionType::Hasher> function_types_;
@@ -238,7 +238,7 @@ class GeneratorImplIr {
     utils::Hashmap<const constant::Value*, uint32_t, 16> constants_;
 
     /// The map of types to the result IDs of their OpConstantNull instructions.
-    utils::Hashmap<const type::Type*, uint32_t, 4> constant_nulls_;
+    utils::Hashmap<type::Type*, uint32_t, 4> constant_nulls_;
 
     /// The map of non-constant values to their result IDs.
     utils::Hashmap<ir::Value*, uint32_t, 8> values_;

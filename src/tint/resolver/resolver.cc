@@ -237,7 +237,7 @@ sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
 }
 
 sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
-    const type::Type* ty = nullptr;
+    type::Type* ty = nullptr;
 
     // If the variable has a declared type, resolve it.
     if (v->type) {
@@ -305,7 +305,7 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
 }
 
 sem::Variable* Resolver::Override(const ast::Override* v) {
-    const type::Type* ty = nullptr;
+    type::Type* ty = nullptr;
 
     // If the variable has a declared type, resolve it.
     if (v->type) {
@@ -406,7 +406,7 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
 }
 
 sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
-    const type::Type* ty = nullptr;
+    type::Type* ty = nullptr;
 
     // If the variable has a declared type, resolve it.
     if (c->type) {
@@ -482,7 +482,7 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
 }
 
 sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
-    const type::Type* storage_ty = nullptr;
+    type::Type* storage_ty = nullptr;
 
     // If the variable has a declared type, resolve it.
     if (auto ty = var->type) {
@@ -1230,7 +1230,7 @@ sem::Statement* Resolver::Statement(const ast::Statement* stmt) {
         });
 }
 
-sem::CaseStatement* Resolver::CaseStatement(const ast::CaseStatement* stmt, const type::Type* ty) {
+sem::CaseStatement* Resolver::CaseStatement(const ast::CaseStatement* stmt, type::Type* ty) {
     auto* sem =
         builder_->create<sem::CaseStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
@@ -1721,9 +1721,7 @@ bool Resolver::AliasAnalysis(const sem::Call* call) {
     return true;
 }
 
-const type::Type* Resolver::ConcreteType(const type::Type* ty,
-                                         const type::Type* target_ty,
-                                         const Source& source) {
+type::Type* Resolver::ConcreteType(type::Type* ty, type::Type* target_ty, const Source& source) {
     auto i32 = [&] { return builder_->create<type::I32>(); };
     auto f32 = [&] { return builder_->create<type::F32>(); };
     auto i32v = [&](uint32_t width) { return builder_->create<type::Vector>(i32(), width); };
@@ -1734,24 +1732,22 @@ const type::Type* Resolver::ConcreteType(const type::Type* ty,
 
     return Switch(
         ty,  //
-        [&](const type::AbstractInt*) { return target_ty ? target_ty : i32(); },
-        [&](const type::AbstractFloat*) { return target_ty ? target_ty : f32(); },
-        [&](const type::Vector* v) {
+        [&](type::AbstractInt*) { return target_ty ? target_ty : i32(); },
+        [&](type::AbstractFloat*) { return target_ty ? target_ty : f32(); },
+        [&](type::Vector* v) {
             return Switch(
                 v->type(),  //
-                [&](const type::AbstractInt*) { return target_ty ? target_ty : i32v(v->Width()); },
-                [&](const type::AbstractFloat*) {
-                    return target_ty ? target_ty : f32v(v->Width());
-                });
+                [&](type::AbstractInt*) { return target_ty ? target_ty : i32v(v->Width()); },
+                [&](type::AbstractFloat*) { return target_ty ? target_ty : f32v(v->Width()); });
         },
-        [&](const type::Matrix* m) {
+        [&](type::Matrix* m) {
             return Switch(m->type(),  //
-                          [&](const type::AbstractFloat*) {
+                          [&](type::AbstractFloat*) {
                               return target_ty ? target_ty : f32m(m->columns(), m->rows());
                           });
         },
-        [&](const type::Array* a) -> const type::Type* {
-            const type::Type* target_el_ty = nullptr;
+        [&](type::Array* a) -> type::Type* {
+            type::Type* target_el_ty = nullptr;
             if (auto* target_arr_ty = As<type::Array>(target_ty)) {
                 target_el_ty = target_arr_ty->ElemType();
             }
@@ -1760,7 +1756,7 @@ const type::Type* Resolver::ConcreteType(const type::Type* ty,
             }
             return nullptr;
         },
-        [&](const type::Struct* s) -> const type::Type* {
+        [&](type::Struct* s) -> type::Type* {
             if (auto tys = s->ConcreteTypes(); !tys.IsEmpty()) {
                 return target_ty ? target_ty : tys[0];
             }
@@ -1796,7 +1792,7 @@ const sem::ValueExpression* Resolver::Load(const sem::ValueExpression* expr) {
 }
 
 const sem::ValueExpression* Resolver::Materialize(const sem::ValueExpression* expr,
-                                                  const type::Type* target_type /* = nullptr */) {
+                                                  type::Type* target_type /* = nullptr */) {
     if (!expr) {
         // Allow for Materialize(ValueExpression(blah)), where failures pass through Materialize()
         return nullptr;
@@ -1849,7 +1845,7 @@ template <size_t N>
 bool Resolver::MaybeMaterializeAndLoadArguments(utils::Vector<const sem::ValueExpression*, N>& args,
                                                 const sem::CallTarget* target) {
     for (size_t i = 0, n = std::min(args.Length(), target->Parameters().Length()); i < n; i++) {
-        const auto* param_ty = target->Parameters()[i]->Type();
+        auto* param_ty = target->Parameters()[i]->Type();
         if (ShouldMaterializeArgument(param_ty)) {
             auto* materialized = Materialize(args[i], param_ty);
             if (!materialized) {
@@ -1868,14 +1864,12 @@ bool Resolver::MaybeMaterializeAndLoadArguments(utils::Vector<const sem::ValueEx
     return true;
 }
 
-bool Resolver::ShouldMaterializeArgument(const type::Type* parameter_ty) const {
+bool Resolver::ShouldMaterializeArgument(type::Type* parameter_ty) const {
     const auto* param_el_ty = parameter_ty->DeepestElement();
     return param_el_ty && !param_el_ty->Is<type::AbstractNumeric>();
 }
 
-bool Resolver::Convert(const constant::Value*& c,
-                       const type::Type* target_ty,
-                       const Source& source) {
+bool Resolver::Convert(const constant::Value*& c, type::Type* target_ty, const Source& source) {
     auto r = const_eval_.Convert(target_ty, c, source);
     if (!r) {
         return false;
@@ -1917,11 +1911,9 @@ sem::ValueExpression* Resolver::IndexAccessor(const ast::IndexAccessorExpression
     auto* obj_ty = obj_raw_ty->UnwrapRef();
     auto* ty = Switch(
         obj_ty,  //
-        [&](const type::Array* arr) { return arr->ElemType(); },
-        [&](const type::Vector* vec) { return vec->type(); },
-        [&](const type::Matrix* mat) {
-            return builder_->create<type::Vector>(mat->type(), mat->rows());
-        },
+        [&](type::Array* arr) { return arr->ElemType(); },
+        [&](type::Vector* vec) { return vec->type(); },
+        [&](type::Matrix* mat) { return builder_->create<type::Vector>(mat->type(), mat->rows()); },
         [&](Default) {
             AddError("cannot index type '" + sem_.TypeNameOf(obj_ty) + "'", expr->source);
             return nullptr;
@@ -2028,7 +2020,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
 
     // ctor_or_conv is a helper for building either a sem::ValueConstructor or
     // sem::ValueConversion call for a CtorConvIntrinsic with an optional template argument type.
-    auto ctor_or_conv = [&](CtorConvIntrinsic ty, const type::Type* template_arg) -> sem::Call* {
+    auto ctor_or_conv = [&](CtorConvIntrinsic ty, type::Type* template_arg) -> sem::Call* {
         auto arg_tys = utils::Transform(args, [](auto* arg) { return arg->Type(); });
         auto entry = intrinsic_table_->Lookup(ty, template_arg, arg_tys, args_stage, expr->source);
         if (!entry.target) {
@@ -2061,8 +2053,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
 
     // arr_or_str_init is a helper for building a sem::ValueConstructor for an array or structure
     // constructor call target.
-    auto arr_or_str_init = [&](const type::Type* ty,
-                               const sem::CallTarget* call_target) -> sem::Call* {
+    auto arr_or_str_init = [&](type::Type* ty, const sem::CallTarget* call_target) -> sem::Call* {
         if (!MaybeMaterializeAndLoadArguments(args, call_target)) {
             return nullptr;
         }
@@ -2093,29 +2084,29 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                                            current_statement_, value, has_side_effects);
     };
 
-    auto ty_init_or_conv = [&](const type::Type* type) {
+    auto ty_init_or_conv = [&](type::Type* type) {
         return Switch(
             type,  //
-            [&](const type::I32*) { return ctor_or_conv(CtorConvIntrinsic::kI32, nullptr); },
-            [&](const type::U32*) { return ctor_or_conv(CtorConvIntrinsic::kU32, nullptr); },
-            [&](const type::F16*) {
+            [&](type::I32*) { return ctor_or_conv(CtorConvIntrinsic::kI32, nullptr); },
+            [&](type::U32*) { return ctor_or_conv(CtorConvIntrinsic::kU32, nullptr); },
+            [&](type::F16*) {
                 return validator_.CheckF16Enabled(expr->source)
                            ? ctor_or_conv(CtorConvIntrinsic::kF16, nullptr)
                            : nullptr;
             },
-            [&](const type::F32*) { return ctor_or_conv(CtorConvIntrinsic::kF32, nullptr); },
-            [&](const type::Bool*) { return ctor_or_conv(CtorConvIntrinsic::kBool, nullptr); },
-            [&](const type::Vector* v) {
+            [&](type::F32*) { return ctor_or_conv(CtorConvIntrinsic::kF32, nullptr); },
+            [&](type::Bool*) { return ctor_or_conv(CtorConvIntrinsic::kBool, nullptr); },
+            [&](type::Vector* v) {
                 if (v->Packed()) {
                     TINT_ASSERT(Resolver, v->Width() == 3u);
                     return ctor_or_conv(CtorConvIntrinsic::kPackedVec3, v->type());
                 }
                 return ctor_or_conv(VectorCtorConvIntrinsic(v->Width()), v->type());
             },
-            [&](const type::Matrix* m) {
+            [&](type::Matrix* m) {
                 return ctor_or_conv(MatrixCtorConvIntrinsic(m->columns(), m->rows()), m->type());
             },
-            [&](const type::Array* arr) -> sem::Call* {
+            [&](type::Array* arr) -> sem::Call* {
                 auto* call_target = array_ctors_.GetOrCreate(
                     ArrayConstructorSig{{arr, args.Length(), args_stage}},
                     [&]() -> sem::ValueConstructor* {
@@ -2142,7 +2133,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 }
                 return call;
             },
-            [&](const type::Struct* str) -> sem::Call* {
+            [&](type::Struct* str) -> sem::Call* {
                 auto* call_target = struct_ctors_.GetOrCreate(
                     StructConstructorSig{{str, args.Length(), args_stage}},
                     [&]() -> sem::ValueConstructor* {
@@ -2185,7 +2176,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         if (!el_ty) {
             AddError("cannot infer common array element type from constructor arguments",
                      expr->source);
-            utils::Hashset<const type::Type*, 8> types;
+            utils::Hashset<type::Type*, 8> types;
             for (size_t i = 0; i < args.Length(); i++) {
                 if (types.Add(args[i]->Type())) {
                     AddNote("argument " + std::to_string(i) + " is of type '" +
@@ -2503,7 +2494,7 @@ type::Type* Resolver::BuiltinType(builtin::Builtin builtin_ty, const ast::Identi
             return nullptr;
         }
 
-        const type::ArrayCount* el_count =
+        type::ArrayCount* el_count =
             ast_count ? ArrayCount(ast_count) : builder_->create<type::RuntimeArrayCount>();
         if (!el_count) {
             return nullptr;
@@ -2865,11 +2856,10 @@ type::Type* Resolver::BuiltinType(builtin::Builtin builtin_ty, const ast::Identi
     return nullptr;
 }
 
-size_t Resolver::NestDepth(const type::Type* ty) const {
+size_t Resolver::NestDepth(type::Type* ty) const {
     return Switch(
         ty,  //
-        [](const type::Vector*) { return size_t{1}; },
-        [](const type::Matrix*) { return size_t{2}; },
+        [](type::Vector*) { return size_t{1}; }, [](type::Matrix*) { return size_t{2}; },
         [&](Default) {
             if (auto d = nest_depth_.Get(ty)) {
                 return *d;
@@ -3135,7 +3125,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                 variable->AddUser(user);
                 return user;
             },
-            [&](const type::Type* ty) -> sem::TypeExpression* {
+            [&](type::Type* ty) -> sem::TypeExpression* {
                 if (!TINT_LIKELY(CheckNotTemplated("type", ident))) {
                     return nullptr;
                 }
@@ -3246,7 +3236,7 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
 
     auto* root_ident = object->RootIdentifier();
 
-    const type::Type* ty = nullptr;
+    type::Type* ty = nullptr;
 
     // Object may be a side-effecting expression (e.g. function call).
     bool has_side_effects = object->HasSideEffects();
@@ -3255,10 +3245,10 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
 
     return Switch(
         storage_ty,  //
-        [&](const type::Struct* str) -> sem::ValueExpression* {
+        [&](type::Struct* str) -> sem::ValueExpression* {
             auto symbol = expr->member->symbol;
 
-            const type::StructMember* member = nullptr;
+            type::StructMember* member = nullptr;
             for (auto* m : str->Members()) {
                 if (m->Name() == symbol) {
                     member = m;
@@ -3287,7 +3277,7 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
                                                              has_side_effects, root_ident);
         },
 
-        [&](const type::Vector* vec) -> sem::ValueExpression* {
+        [&](type::Vector* vec) -> sem::ValueExpression* {
             std::string s = expr->member->symbol.Name();
             auto size = s.size();
             utils::Vector<uint32_t, 4> swizzle;
@@ -3458,7 +3448,7 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
     }
     auto* expr_ty = expr->Type();
 
-    const type::Type* ty = nullptr;
+    type::Type* ty = nullptr;
     const sem::Variable* root_ident = nullptr;
     const constant::Value* value = nullptr;
     auto stage = sem::EvaluationStage::kRuntime;
@@ -3648,7 +3638,7 @@ utils::Result<sem::WorkgroupSize> Resolver::WorkgroupAttribute(
 
     auto values = attr->Values();
     utils::Vector<const sem::ValueExpression*, 3> args;
-    utils::Vector<const type::Type*, 3> arg_tys;
+    utils::Vector<type::Type*, 3> arg_tys;
 
     constexpr const char* kErrBadExpr =
         "workgroup_size argument must be a constant or override-expression of type "
@@ -3843,7 +3833,7 @@ type::Type* Resolver::TypeDecl(const ast::TypeDecl* named_type) {
     return result;
 }
 
-const type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_expr) {
+type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_expr) {
     // Evaluate the constant array count expression.
     const auto* count_sem = Materialize(ValueExpression(count_expr));
     if (!count_sem) {
@@ -3886,7 +3876,7 @@ const type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_expr) 
 }
 
 bool Resolver::ArrayAttributes(utils::VectorRef<const ast::Attribute*> attributes,
-                               const type::Type* el_ty,
+                               type::Type* el_ty,
                                uint32_t& explicit_stride) {
     if (!validator_.NoDuplicateAttributes(attributes)) {
         return false;
@@ -3924,7 +3914,7 @@ bool Resolver::ArrayAttributes(utils::VectorRef<const ast::Attribute*> attribute
 type::Array* Resolver::Array(const Source& array_source,
                              const Source& el_source,
                              const Source& count_source,
-                             const type::Type* el_ty,
+                             type::Type* el_ty,
                              const type::ArrayCount* el_count,
                              uint32_t explicit_stride) {
     uint32_t el_align = el_ty->Align();
@@ -4301,7 +4291,7 @@ sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
         auto& behaviors = current_statement_->Behaviors();
         behaviors = sem::Behavior::kReturn;
 
-        const type::Type* value_ty = nullptr;
+        type::Type* value_ty = nullptr;
         if (auto* value = stmt->value) {
             const auto* expr = Load(ValueExpression(value));
             if (!expr) {
@@ -4343,7 +4333,7 @@ sem::SwitchStatement* Resolver::SwitchStatement(const ast::SwitchStatement* stmt
 
         // Determine the common type across all selectors and the switch expression
         // This must materialize to an integer scalar (non-abstract).
-        utils::Vector<const type::Type*, 8> types;
+        utils::Vector<type::Type*, 8> types;
         types.Push(cond_ty);
         for (auto* case_stmt : stmt->body) {
             for (auto* sel : case_stmt->selectors) {

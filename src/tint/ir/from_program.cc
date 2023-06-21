@@ -858,7 +858,7 @@ class Impl {
     struct AccessorInfo {
         Value* object = nullptr;
         Value* result = nullptr;
-        const type::Type* result_type = nullptr;
+        type::Type* result_type = nullptr;
         utils::Vector<Value*, 1> indices;
     };
 
@@ -919,7 +919,7 @@ class Impl {
     Value* GenerateAccess(const AccessorInfo& info) {
         // The access result type should match the source result type. If the source is a pointer,
         // we generate a pointer.
-        const type::Type* ty = nullptr;
+        type::Type* ty = nullptr;
         if (auto* ptr = info.object->Type()->As<type::Pointer>();
             ptr && !info.result_type->Is<type::Pointer>()) {
             ty = builder_.ir.Types().ptr(ptr->AddressSpace(), info.result_type, ptr->Access());

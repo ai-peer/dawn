@@ -49,10 +49,10 @@ bool ShouldRun(const Program* program) {
     for (auto* var : program->AST().GlobalVariables()) {
         if (Switch(
                 program->Sem().Get(var)->Type()->UnwrapRef(),
-                [&](const type::SampledTexture* tex) {
+                [&](type::SampledTexture* tex) {
                     return tex->dim() == type::TextureDimension::k1d;
                 },
-                [&](const type::StorageTexture* storage_tex) {
+                [&](type::StorageTexture* storage_tex) {
                     return storage_tex->dim() == type::TextureDimension::k1d;
                 })) {
             return true;
@@ -96,7 +96,7 @@ struct Texture1DTo2D::State {
         ctx.ReplaceAll([&](const Variable* v) -> const Variable* {
             const Variable* r = Switch(
                 sem.Get(v)->Type()->UnwrapRef(),
-                [&](const type::SampledTexture* tex) -> const Variable* {
+                [&](type::SampledTexture* tex) -> const Variable* {
                     if (tex->dim() == type::TextureDimension::k1d) {
                         auto type = ctx.dst->ty.sampled_texture(type::TextureDimension::k2d,
                                                                 CreateASTTypeFor(ctx, tex->type()));
@@ -105,7 +105,7 @@ struct Texture1DTo2D::State {
                         return nullptr;
                     }
                 },
-                [&](const type::StorageTexture* storage_tex) -> const Variable* {
+                [&](type::StorageTexture* storage_tex) -> const Variable* {
                     if (storage_tex->dim() == type::TextureDimension::k1d) {
                         auto type = ctx.dst->ty.storage_texture(type::TextureDimension::k2d,
                                                                 storage_tex->texel_format(),

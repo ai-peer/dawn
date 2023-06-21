@@ -154,41 +154,41 @@ uint32_t GeneratorImplIr::Constant(const constant::Value* constant) {
         auto* ty = constant->Type();
         Switch(
             ty,  //
-            [&](const type::Bool*) {
+            [&](type::Bool*) {
                 module_.PushType(
                     constant->ValueAs<bool>() ? spv::Op::OpConstantTrue : spv::Op::OpConstantFalse,
                     {Type(ty), id});
             },
-            [&](const type::I32*) {
+            [&](type::I32*) {
                 module_.PushType(spv::Op::OpConstant, {Type(ty), id, constant->ValueAs<u32>()});
             },
-            [&](const type::U32*) {
+            [&](type::U32*) {
                 module_.PushType(spv::Op::OpConstant,
                                  {Type(ty), id, U32Operand(constant->ValueAs<i32>())});
             },
-            [&](const type::F32*) {
+            [&](type::F32*) {
                 module_.PushType(spv::Op::OpConstant, {Type(ty), id, constant->ValueAs<f32>()});
             },
-            [&](const type::F16*) {
+            [&](type::F16*) {
                 module_.PushType(
                     spv::Op::OpConstant,
                     {Type(ty), id, U32Operand(constant->ValueAs<f16>().BitsRepresentation())});
             },
-            [&](const type::Vector* vec) {
+            [&](type::Vector* vec) {
                 OperandList operands = {Type(ty), id};
                 for (uint32_t i = 0; i < vec->Width(); i++) {
                     operands.push_back(Constant(constant->Index(i)));
                 }
                 module_.PushType(spv::Op::OpConstantComposite, operands);
             },
-            [&](const type::Matrix* mat) {
+            [&](type::Matrix* mat) {
                 OperandList operands = {Type(ty), id};
                 for (uint32_t i = 0; i < mat->columns(); i++) {
                     operands.push_back(Constant(constant->Index(i)));
                 }
                 module_.PushType(spv::Op::OpConstantComposite, operands);
             },
-            [&](const type::Array* arr) {
+            [&](type::Array* arr) {
                 TINT_ASSERT(Writer, arr->ConstantCount());
                 OperandList operands = {Type(ty), id};
                 for (uint32_t i = 0; i < arr->ConstantCount(); i++) {
@@ -203,7 +203,7 @@ uint32_t GeneratorImplIr::Constant(const constant::Value* constant) {
     });
 }
 
-uint32_t GeneratorImplIr::ConstantNull(const type::Type* type) {
+uint32_t GeneratorImplIr::ConstantNull(type::Type* type) {
     return constant_nulls_.GetOrCreate(type, [&]() {
         auto id = module_.NextId();
         module_.PushType(spv::Op::OpConstantNull, {Type(type), id});
@@ -211,37 +211,37 @@ uint32_t GeneratorImplIr::ConstantNull(const type::Type* type) {
     });
 }
 
-uint32_t GeneratorImplIr::Type(const type::Type* ty) {
+uint32_t GeneratorImplIr::Type(type::Type* ty) {
     return types_.GetOrCreate(ty, [&]() {
         auto id = module_.NextId();
         Switch(
             ty,  //
-            [&](const type::Void*) { module_.PushType(spv::Op::OpTypeVoid, {id}); },
-            [&](const type::Bool*) { module_.PushType(spv::Op::OpTypeBool, {id}); },
-            [&](const type::I32*) {
+            [&](type::Void*) { module_.PushType(spv::Op::OpTypeVoid, {id}); },
+            [&](type::Bool*) { module_.PushType(spv::Op::OpTypeBool, {id}); },
+            [&](type::I32*) {
                 module_.PushType(spv::Op::OpTypeInt, {id, 32u, 1u});
             },
-            [&](const type::U32*) {
+            [&](type::U32*) {
                 module_.PushType(spv::Op::OpTypeInt, {id, 32u, 0u});
             },
-            [&](const type::F32*) {
+            [&](type::F32*) {
                 module_.PushType(spv::Op::OpTypeFloat, {id, 32u});
             },
-            [&](const type::F16*) {
+            [&](type::F16*) {
                 module_.PushCapability(SpvCapabilityFloat16);
                 module_.PushCapability(SpvCapabilityUniformAndStorageBuffer16BitAccess);
                 module_.PushCapability(SpvCapabilityStorageBuffer16BitAccess);
                 module_.PushCapability(SpvCapabilityStorageInputOutput16);
                 module_.PushType(spv::Op::OpTypeFloat, {id, 16u});
             },
-            [&](const type::Vector* vec) {
+            [&](type::Vector* vec) {
                 module_.PushType(spv::Op::OpTypeVector, {id, Type(vec->type()), vec->Width()});
             },
-            [&](const type::Matrix* mat) {
+            [&](type::Matrix* mat) {
                 module_.PushType(spv::Op::OpTypeMatrix,
                                  {id, Type(mat->ColumnType()), mat->columns()});
             },
-            [&](const type::Array* arr) {
+            [&](type::Array* arr) {
                 if (arr->ConstantCount()) {
                     auto* count = ir_->constant_values.Get(u32(arr->ConstantCount().value()));
                     module_.PushType(spv::Op::OpTypeArray,
@@ -253,12 +253,12 @@ uint32_t GeneratorImplIr::Type(const type::Type* ty) {
                 module_.PushAnnot(spv::Op::OpDecorate,
                                   {id, U32Operand(SpvDecorationArrayStride), arr->Stride()});
             },
-            [&](const type::Pointer* ptr) {
+            [&](type::Pointer* ptr) {
                 module_.PushType(
                     spv::Op::OpTypePointer,
                     {id, U32Operand(StorageClass(ptr->AddressSpace())), Type(ptr->StoreType())});
             },
-            [&](const type::Struct* str) { EmitStructType(id, str); },
+            [&](type::Struct* str) { EmitStructType(id, str); },
             [&](Default) {
                 TINT_ICE(Writer, diagnostics_) << "unhandled type: " << ty->FriendlyName();
             });
@@ -281,10 +281,10 @@ uint32_t GeneratorImplIr::Label(ir::Block* block) {
     return block_labels_.GetOrCreate(block, [&]() { return module_.NextId(); });
 }
 
-void GeneratorImplIr::EmitStructType(uint32_t id, const type::Struct* str) {
+void GeneratorImplIr::EmitStructType(uint32_t id, type::Struct* str) {
     // Helper to return `type` or a potentially nested array element type within `type` as a matrix
     // type, or nullptr if no such matrix type is present.
-    auto get_nested_matrix_type = [&](const type::Type* type) {
+    auto get_nested_matrix_type = [&](type::Type* type) {
         while (auto* arr = type->As<type::Array>()) {
             type = arr->ElemType();
         }

@@ -65,8 +65,7 @@ Transform::ApplyResult VectorizeMatrixConversions::Apply(const Program* src,
     ProgramBuilder b;
     CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
 
-    using HelperFunctionKey =
-        utils::UnorderedKeyWrapper<std::tuple<const type::Matrix*, const type::Matrix*>>;
+    using HelperFunctionKey = utils::UnorderedKeyWrapper<std::tuple<type::Matrix*, type::Matrix*>>;
 
     std::unordered_map<HelperFunctionKey, Symbol> matrix_convs;
 

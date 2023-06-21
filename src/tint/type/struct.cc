@@ -126,7 +126,7 @@ std::string Struct::Layout() const {
            << align << ") size(" << std::setw(size_w) << size << ") */   " << s << ";\n";
     };
 
-    print_struct_begin_line(Align(), Size(), UnwrapRef()->FriendlyName());
+    print_struct_begin_line(Align(), Size(), FriendlyName());
 
     for (size_t i = 0; i < Members().Length(); ++i) {
         auto* const m = Members()[i];
@@ -160,12 +160,12 @@ std::string Struct::Layout() const {
     return ss.str();
 }
 
-TypeAndCount Struct::Elements(const Type* type_if_invalid /* = nullptr */,
-                              uint32_t /* count_if_invalid = 0 */) const {
+TypeAndCount Struct::Elements(Type* type_if_invalid /* = nullptr */,
+                              uint32_t /* count_if_invalid = 0 */) {
     return {type_if_invalid, static_cast<uint32_t>(members_.Length())};
 }
 
-const Type* Struct::Element(uint32_t index) const {
+Type* Struct::Element(uint32_t index) {
     return index < members_.Length() ? members_[index]->Type() : nullptr;
 }
 
@@ -180,7 +180,7 @@ Struct* Struct::Clone(CloneContext& ctx) const {
 }
 
 StructMember::StructMember(Symbol name,
-                           const type::Type* type,
+                           type::Type* type,
                            uint32_t index,
                            uint32_t offset,
                            uint32_t align,

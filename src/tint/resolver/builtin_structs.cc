@@ -30,7 +30,7 @@ namespace {
 
 struct NameAndType {
     std::string_view name;
-    const type::Type* type;
+    type::Type* type;
 };
 
 type::Struct* BuildStruct(ProgramBuilder& b,
@@ -81,16 +81,16 @@ constexpr std::array kModfVecAbstractNames{
     builtin::Builtin::kModfResultVec4Abstract,
 };
 
-type::Struct* CreateModfResult(ProgramBuilder& b, const type::Type* ty) {
+type::Struct* CreateModfResult(ProgramBuilder& b, type::Type* ty) {
     return Switch(
         ty,
-        [&](const type::F32*) {
+        [&](type::F32*) {
             return BuildStruct(b, builtin::Builtin::kModfResultF32, {{"fract", ty}, {"whole", ty}});
         },  //
-        [&](const type::F16*) {
+        [&](type::F16*) {
             return BuildStruct(b, builtin::Builtin::kModfResultF16, {{"fract", ty}, {"whole", ty}});
         },
-        [&](const type::AbstractFloat*) {
+        [&](type::AbstractFloat*) {
             auto* abstract = BuildStruct(b, builtin::Builtin::kModfResultAbstract,
                                          {{"fract", ty}, {"whole", ty}});
             auto* f32 = b.create<type::F32>();
@@ -101,19 +101,19 @@ type::Struct* CreateModfResult(ProgramBuilder& b, const type::Type* ty) {
             });
             return abstract;
         },
-        [&](const type::Vector* vec) {
+        [&](type::Vector* vec) {
             auto width = vec->Width();
             return Switch(
                 vec->type(),  //
-                [&](const type::F32*) {
+                [&](type::F32*) {
                     return BuildStruct(b, kModfVecF32Names[width - 2],
                                        {{"fract", vec}, {"whole", vec}});
                 },
-                [&](const type::F16*) {
+                [&](type::F16*) {
                     return BuildStruct(b, kModfVecF16Names[width - 2],
                                        {{"fract", vec}, {"whole", vec}});
                 },
-                [&](const type::AbstractFloat*) {
+                [&](type::AbstractFloat*) {
                     auto* vec_f32 = b.create<type::Vector>(b.create<type::F32>(), width);
                     auto* vec_f16 = b.create<type::Vector>(b.create<type::F16>(), width);
                     auto* abstract = BuildStruct(b, kModfVecAbstractNames[width - 2],
@@ -153,18 +153,18 @@ constexpr std::array kFrexpVecAbstractNames{
     builtin::Builtin::kFrexpResultVec3Abstract,
     builtin::Builtin::kFrexpResultVec4Abstract,
 };
-type::Struct* CreateFrexpResult(ProgramBuilder& b, const type::Type* ty) {
+type::Struct* CreateFrexpResult(ProgramBuilder& b, type::Type* ty) {
     return Switch(
         ty,  //
-        [&](const type::F32*) {
+        [&](type::F32*) {
             auto* i32 = b.create<type::I32>();
             return BuildStruct(b, builtin::Builtin::kFrexpResultF32, {{"fract", ty}, {"exp", i32}});
         },
-        [&](const type::F16*) {
+        [&](type::F16*) {
             auto* i32 = b.create<type::I32>();
             return BuildStruct(b, builtin::Builtin::kFrexpResultF16, {{"fract", ty}, {"exp", i32}});
         },
-        [&](const type::AbstractFloat*) {
+        [&](type::AbstractFloat*) {
             auto* f32 = b.create<type::F32>();
             auto* f16 = b.create<type::F16>();
             auto* i32 = b.create<type::I32>();
@@ -177,21 +177,21 @@ type::Struct* CreateFrexpResult(ProgramBuilder& b, const type::Type* ty) {
             });
             return abstract;
         },
-        [&](const type::Vector* vec) {
+        [&](type::Vector* vec) {
             auto width = vec->Width();
             return Switch(
                 vec->type(),  //
-                [&](const type::F32*) {
+                [&](type::F32*) {
                     auto* vec_i32 = b.create<type::Vector>(b.create<type::I32>(), width);
                     return BuildStruct(b, kFrexpVecF32Names[width - 2],
                                        {{"fract", ty}, {"exp", vec_i32}});
                 },
-                [&](const type::F16*) {
+                [&](type::F16*) {
                     auto* vec_i32 = b.create<type::Vector>(b.create<type::I32>(), width);
                     return BuildStruct(b, kFrexpVecF16Names[width - 2],
                                        {{"fract", ty}, {"exp", vec_i32}});
                 },
-                [&](const type::AbstractFloat*) {
+                [&](type::AbstractFloat*) {
                     auto* vec_f32 = b.create<type::Vector>(b.create<type::F32>(), width);
                     auto* vec_f16 = b.create<type::Vector>(b.create<type::F16>(), width);
                     auto* vec_i32 = b.create<type::Vector>(b.create<type::I32>(), width);
@@ -218,14 +218,14 @@ type::Struct* CreateFrexpResult(ProgramBuilder& b, const type::Type* ty) {
         });
 }
 
-type::Struct* CreateAtomicCompareExchangeResult(ProgramBuilder& b, const type::Type* ty) {
+type::Struct* CreateAtomicCompareExchangeResult(ProgramBuilder& b, type::Type* ty) {
     return Switch(
         ty,  //
-        [&](const type::I32*) {
+        [&](type::I32*) {
             return BuildStruct(b, builtin::Builtin::kAtomicCompareExchangeResultI32,
                                {{"old_value", ty}, {"exchanged", b.create<type::Bool>()}});
         },
-        [&](const type::U32*) {
+        [&](type::U32*) {
             return BuildStruct(b, builtin::Builtin::kAtomicCompareExchangeResultU32,
                                {{"old_value", ty}, {"exchanged", b.create<type::Bool>()}});
         },

@@ -28,7 +28,7 @@ class SampledTexture final : public utils::Castable<SampledTexture, Texture> {
     /// Constructor
     /// @param dim the dimensionality of the texture
     /// @param type the data type of the sampled texture
-    SampledTexture(TextureDimension dim, const Type* type);
+    SampledTexture(TextureDimension dim, Type* type);
 
     /// Destructor
     ~SampledTexture() override;
@@ -49,7 +49,7 @@ class SampledTexture final : public utils::Castable<SampledTexture, Texture> {
     SampledTexture* Clone(CloneContext& ctx) const override;
 
   private:
-    const Type* const type_;
+    Type* const type_;
 };
 
 }  // namespace tint::type

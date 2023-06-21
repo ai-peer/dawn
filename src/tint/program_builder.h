@@ -3548,7 +3548,7 @@ class ProgramBuilder {
     /// @param expr the AST expression
     /// @return the resolved semantic type for the expression, or nullptr if the
     /// expression has no resolved type.
-    const type::Type* TypeOf(const ast::Expression* expr) const;
+    type::Type* TypeOf(const ast::Expression* expr) const;
 
     /// Helper for returning the resolved semantic type of the variable `var`.
     /// @note As the Resolver is run when the Program is built, this will only be
@@ -3556,7 +3556,7 @@ class ProgramBuilder {
     /// @param var the AST variable
     /// @return the resolved semantic type for the variable, or nullptr if the
     /// variable has no resolved type.
-    const type::Type* TypeOf(const ast::Variable* var) const;
+    type::Type* TypeOf(const ast::Variable* var) const;
 
     /// Helper for returning the resolved semantic type of the AST type
     /// declaration `type_decl`.
@@ -3565,7 +3565,7 @@ class ProgramBuilder {
     /// @param type_decl the AST type declaration
     /// @return the resolved semantic type for the type declaration, or nullptr if
     /// the type declaration has no resolved type.
-    const type::Type* TypeOf(const ast::TypeDecl* type_decl) const;
+    type::Type* TypeOf(const ast::TypeDecl* type_decl) const;
 
     /// Wraps the ast::Expression in a statement. This is used by tests that
     /// construct a partial AST and require the Resolver to reach these

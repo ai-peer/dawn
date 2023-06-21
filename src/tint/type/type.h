@@ -52,7 +52,7 @@ using Flags = utils::EnumSet<Flag>;
 /// TypeAndCount holds a type and count
 struct TypeAndCount {
     /// The type
-    const Type* type = nullptr;
+    Type* type = nullptr;
     /// The count
     uint32_t count = 0;
 };
@@ -75,12 +75,11 @@ class Type : public utils::Castable<Type, UniqueNode> {
     /// declared in WGSL.
     virtual std::string FriendlyName() const = 0;
 
-    /// @returns the inner most pointee type if this is a pointer, `this`
-    /// otherwise
-    const Type* UnwrapPtr() const;
+    /// @returns the inner most pointee type if this is a pointer, `this` otherwise
+    Type* UnwrapPtr();
 
     /// @returns the inner type if this is a reference, `this` otherwise
-    const Type* UnwrapRef() const;
+    Type* UnwrapRef();
 
     /// @returns the size in bytes of the type. This may include tail padding.
     /// @note opaque types will return a size of 0.
@@ -176,7 +175,7 @@ class Type : public utils::Castable<Type, UniqueNode> {
     /// @returns the rank value for converting from type `from` to type `to`, or #kNoConversion if
     /// the implicit conversion is not allowed.
     /// @see https://www.w3.org/TR/WGSL/#conversion-rank
-    static uint32_t ConversionRank(const Type* from, const Type* to);
+    static uint32_t ConversionRank(Type* from, Type* to);
 
     /// @param type_if_invalid the type to return if this type has no child elements.
     /// @param count_if_invalid the count to return if this type has no child elements, or the
@@ -193,8 +192,7 @@ class Type : public utils::Castable<Type, UniqueNode> {
     ///  * Elements() of `array<f32>` returns `[f32, count_if_invalid]`.
     ///  * Elements() of `struct S { a : f32, b : i32 }` returns `[count_if_invalid, 2]`.
     ///  * Elements() of `struct S { a : i32, b : i32 }` also returns `[count_if_invalid, 2]`.
-    virtual TypeAndCount Elements(const Type* type_if_invalid = nullptr,
-                                  uint32_t count_if_invalid = 0) const;
+    virtual TypeAndCount Elements(Type* type_if_invalid = nullptr, uint32_t count_if_invalid = 0);
 
     /// @param index the i'th element index to return
     /// @returns The child element with the given index, or nullptr if the element does not exist.
@@ -206,7 +204,7 @@ class Type : public utils::Castable<Type, UniqueNode> {
     ///  * Element(0) of `f32` returns `nullptr`.
     ///  * Element(3) of `vec3<f32>` returns `nullptr`.
     ///  * Element(3) of `struct S { a : f32, b : i32 }` returns `nullptr`.
-    virtual const Type* Element(uint32_t index) const;
+    virtual Type* Element(uint32_t index);
 
     /// @returns the most deeply nested element of the type. For non-composite types,
     /// DeepestElement() will return this type. Examples:
@@ -215,13 +213,13 @@ class Type : public utils::Castable<Type, UniqueNode> {
     ///  * Element() of `mat3x2<f32>` returns `f32`.
     ///  * Element() of `array<vec3<f32>, 5>` returns `f32`.
     ///  * Element() of `struct S { a : f32, b : i32 }` returns `S`.
-    const Type* DeepestElement() const;
+    Type* DeepestElement();
 
     /// @param types the list of types
     /// @returns the lowest-ranking type that all types in `types` can be implicitly converted to,
     ///          or nullptr if there is no consistent common type across all types in `types`.
     /// @see https://www.w3.org/TR/WGSL/#conversion-rank
-    static const Type* Common(utils::VectorRef<const Type*> types);
+    static Type* Common(utils::VectorRef<Type*> types);
 
   protected:
     /// Constructor
@@ -230,7 +228,7 @@ class Type : public utils::Castable<Type, UniqueNode> {
     Type(size_t hash, type::Flags flags);
 
     /// The flags of this type.
-    const type::Flags flags_;
+    type::Flags flags_;
 };
 
 }  // namespace tint::type

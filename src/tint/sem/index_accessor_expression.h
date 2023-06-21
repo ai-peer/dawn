@@ -37,7 +37,7 @@ class IndexAccessorExpression final
     /// @param has_side_effects whether this expression may have side effects
     /// @param root_ident the (optional) root identifier for this expression
     IndexAccessorExpression(const ast::IndexAccessorExpression* declaration,
-                            const type::Type* type,
+                            type::Type* type,
                             EvaluationStage stage,
                             const ValueExpression* object,
                             const ValueExpression* index,

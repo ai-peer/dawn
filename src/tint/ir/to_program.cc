@@ -424,11 +424,11 @@ class State {
     const ast::Expression* Constant(ir::Constant* c) {
         return tint::Switch(
             c->Type(),  //
-            [&](const type::I32*) { return b.Expr(c->Value()->ValueAs<i32>()); },
-            [&](const type::U32*) { return b.Expr(c->Value()->ValueAs<u32>()); },
-            [&](const type::F32*) { return b.Expr(c->Value()->ValueAs<f32>()); },
-            [&](const type::F16*) { return b.Expr(c->Value()->ValueAs<f16>()); },
-            [&](const type::Bool*) { return b.Expr(c->Value()->ValueAs<bool>()); },
+            [&](type::I32*) { return b.Expr(c->Value()->ValueAs<i32>()); },
+            [&](type::U32*) { return b.Expr(c->Value()->ValueAs<u32>()); },
+            [&](type::F32*) { return b.Expr(c->Value()->ValueAs<f32>()); },
+            [&](type::F16*) { return b.Expr(c->Value()->ValueAs<f16>()); },
+            [&](type::Bool*) { return b.Expr(c->Value()->ValueAs<bool>()); },
             [&](Default) {
                 UNHANDLED_CASE(c);
                 return b.Expr("<error>");
@@ -448,19 +448,17 @@ class State {
     /// @param ty the type::Type
     /// @return an ast::Type from @p ty.
     /// @note May be a semantically-invalid placeholder type on error.
-    ast::Type Type(const type::Type* ty) {
+    ast::Type Type(type::Type* ty) {
         return tint::Switch(
-            ty,                                              //
-            [&](const type::Void*) { return ast::Type{}; },  //
-            [&](const type::I32*) { return b.ty.i32(); },    //
-            [&](const type::U32*) { return b.ty.u32(); },    //
-            [&](const type::F16*) { return b.ty.f16(); },    //
-            [&](const type::F32*) { return b.ty.f32(); },    //
-            [&](const type::Bool*) { return b.ty.bool_(); },
-            [&](const type::Matrix* m) {
-                return b.ty.mat(Type(m->type()), m->columns(), m->rows());
-            },
-            [&](const type::Vector* v) {
+            ty,                                        //
+            [&](type::Void*) { return ast::Type{}; },  //
+            [&](type::I32*) { return b.ty.i32(); },    //
+            [&](type::U32*) { return b.ty.u32(); },    //
+            [&](type::F16*) { return b.ty.f16(); },    //
+            [&](type::F32*) { return b.ty.f32(); },    //
+            [&](type::Bool*) { return b.ty.bool_(); },
+            [&](type::Matrix* m) { return b.ty.mat(Type(m->type()), m->columns(), m->rows()); },
+            [&](type::Vector* v) {
                 auto el = Type(v->type());
                 if (v->Packed()) {
                     TINT_ASSERT(IR, v->Width() == 3u);
@@ -469,7 +467,7 @@ class State {
                     return b.ty.vec(el, v->Width());
                 }
             },
-            [&](const type::Array* a) {
+            [&](type::Array* a) {
                 auto el = Type(a->ElemType());
                 utils::Vector<const ast::Attribute*, 1> attrs;
                 if (!a->IsStrideImplicit()) {
@@ -485,26 +483,26 @@ class State {
                 }
                 return b.ty.array(el, u32(count.value()), std::move(attrs));
             },
-            [&](const type::Struct* s) { return b.ty(s->Name().NameView()); },
-            [&](const type::Atomic* a) { return b.ty.atomic(Type(a->Type())); },
-            [&](const type::DepthTexture* t) { return b.ty.depth_texture(t->dim()); },
-            [&](const type::DepthMultisampledTexture* t) {
+            [&](type::Struct* s) { return b.ty(s->Name().NameView()); },
+            [&](type::Atomic* a) { return b.ty.atomic(Type(a->Type())); },
+            [&](type::DepthTexture* t) { return b.ty.depth_texture(t->dim()); },
+            [&](type::DepthMultisampledTexture* t) {
                 return b.ty.depth_multisampled_texture(t->dim());
             },
-            [&](const type::ExternalTexture*) { return b.ty.external_texture(); },
-            [&](const type::MultisampledTexture* t) {
+            [&](type::ExternalTexture*) { return b.ty.external_texture(); },
+            [&](type::MultisampledTexture* t) {
                 auto el = Type(t->type());
                 return b.ty.multisampled_texture(t->dim(), el);
             },
-            [&](const type::SampledTexture* t) {
+            [&](type::SampledTexture* t) {
                 auto el = Type(t->type());
                 return b.ty.sampled_texture(t->dim(), el);
             },
-            [&](const type::StorageTexture* t) {
+            [&](type::StorageTexture* t) {
                 return b.ty.storage_texture(t->dim(), t->texel_format(), t->access());
             },
-            [&](const type::Sampler* s) { return b.ty.sampler(s->kind()); },
-            [&](const type::Pointer* p) {
+            [&](type::Sampler* s) { return b.ty.sampler(s->kind()); },
+            [&](type::Pointer* p) {
                 // Note: type::Pointer always has an inferred access, but WGSL only allows an
                 // explicit access in the 'storage' address space.
                 auto el = Type(p->StoreType());
@@ -514,7 +512,7 @@ class State {
                                   : builtin::Access::kUndefined;
                 return b.ty.ptr(address_space, el, access);
             },
-            [&](const type::Reference*) {
+            [&](type::Reference*) {
                 TINT_ICE(IR, b.Diagnostics()) << "reference types should never appear in the IR";
                 return b.ty.i32();
             },

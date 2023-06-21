@@ -40,97 +40,95 @@ Manager& Manager::operator=(Manager&& rhs) = default;
 
 Manager::~Manager() = default;
 
-const type::Void* Manager::void_() {
+type::Void* Manager::void_() {
     return Get<type::Void>();
 }
 
-const type::Bool* Manager::bool_() {
+type::Bool* Manager::bool_() {
     return Get<type::Bool>();
 }
 
-const type::I32* Manager::i32() {
+type::I32* Manager::i32() {
     return Get<type::I32>();
 }
 
-const type::U32* Manager::u32() {
+type::U32* Manager::u32() {
     return Get<type::U32>();
 }
 
-const type::F32* Manager::f32() {
+type::F32* Manager::f32() {
     return Get<type::F32>();
 }
 
-const type::F16* Manager::f16() {
+type::F16* Manager::f16() {
     return Get<type::F16>();
 }
 
-const type::AbstractFloat* Manager::AFloat() {
+type::AbstractFloat* Manager::AFloat() {
     return Get<type::AbstractFloat>();
 }
 
-const type::AbstractInt* Manager::AInt() {
+type::AbstractInt* Manager::AInt() {
     return Get<type::AbstractInt>();
 }
 
-const type::Vector* Manager::vec(const type::Type* inner, uint32_t size) {
+type::Vector* Manager::vec(type::Type* inner, uint32_t size) {
     return Get<type::Vector>(inner, size);
 }
 
-const type::Vector* Manager::vec2(const type::Type* inner) {
+type::Vector* Manager::vec2(type::Type* inner) {
     return vec(inner, 2);
 }
 
-const type::Vector* Manager::vec3(const type::Type* inner) {
+type::Vector* Manager::vec3(type::Type* inner) {
     return vec(inner, 3);
 }
 
-const type::Vector* Manager::vec4(const type::Type* inner) {
+type::Vector* Manager::vec4(type::Type* inner) {
     return vec(inner, 4);
 }
 
-const type::Matrix* Manager::mat(const type::Type* inner, uint32_t cols, uint32_t rows) {
+type::Matrix* Manager::mat(type::Type* inner, uint32_t cols, uint32_t rows) {
     return Get<type::Matrix>(vec(inner, rows), cols);
 }
 
-const type::Matrix* Manager::mat2x2(const type::Type* inner) {
+type::Matrix* Manager::mat2x2(type::Type* inner) {
     return mat(inner, 2, 2);
 }
 
-const type::Matrix* Manager::mat2x3(const type::Type* inner) {
+type::Matrix* Manager::mat2x3(type::Type* inner) {
     return mat(inner, 2, 3);
 }
 
-const type::Matrix* Manager::mat2x4(const type::Type* inner) {
+type::Matrix* Manager::mat2x4(type::Type* inner) {
     return mat(inner, 2, 4);
 }
 
-const type::Matrix* Manager::mat3x2(const type::Type* inner) {
+type::Matrix* Manager::mat3x2(type::Type* inner) {
     return mat(inner, 3, 2);
 }
 
-const type::Matrix* Manager::mat3x3(const type::Type* inner) {
+type::Matrix* Manager::mat3x3(type::Type* inner) {
     return mat(inner, 3, 3);
 }
 
-const type::Matrix* Manager::mat3x4(const type::Type* inner) {
+type::Matrix* Manager::mat3x4(type::Type* inner) {
     return mat(inner, 3, 4);
 }
 
-const type::Matrix* Manager::mat4x2(const type::Type* inner) {
+type::Matrix* Manager::mat4x2(type::Type* inner) {
     return mat(inner, 4, 2);
 }
 
-const type::Matrix* Manager::mat4x3(const type::Type* inner) {
+type::Matrix* Manager::mat4x3(type::Type* inner) {
     return mat(inner, 4, 3);
 }
 
-const type::Matrix* Manager::mat4x4(const type::Type* inner) {
+type::Matrix* Manager::mat4x4(type::Type* inner) {
     return mat(inner, 4, 4);
 }
 
-const type::Array* Manager::array(const type::Type* elem_ty,
-                                  uint32_t count,
-                                  uint32_t stride /* = 0*/) {
+type::Array* Manager::array(type::Type* elem_ty, uint32_t count, uint32_t stride /* = 0*/) {
     uint32_t implicit_stride = utils::RoundUp(elem_ty->Align(), elem_ty->Size());
     if (stride == 0) {
         stride = implicit_stride;
@@ -145,7 +143,7 @@ const type::Array* Manager::array(const type::Type* elem_ty,
                             /* implicit stride */ implicit_stride);
 }
 
-const type::Array* Manager::runtime_array(const type::Type* elem_ty, uint32_t stride /* = 0 */) {
+type::Array* Manager::runtime_array(type::Type* elem_ty, uint32_t stride /* = 0 */) {
     if (stride == 0) {
         stride = elem_ty->Align();
     }
@@ -158,13 +156,13 @@ const type::Array* Manager::runtime_array(const type::Type* elem_ty, uint32_t st
         /* implicit stride */ elem_ty->Align());
 }
 
-const type::Pointer* Manager::ptr(builtin::AddressSpace address_space,
-                                  const type::Type* subtype,
-                                  builtin::Access access /* = builtin::Access::kReadWrite */) {
+type::Pointer* Manager::ptr(builtin::AddressSpace address_space,
+                            type::Type* subtype,
+                            builtin::Access access /* = builtin::Access::kReadWrite */) {
     return Get<type::Pointer>(address_space, subtype, access);
 }
 
-const type::Struct* Manager::Struct(Symbol name, utils::VectorRef<StructMemberDesc> md) {
+type::Struct* Manager::Struct(Symbol name, utils::VectorRef<StructMemberDesc> md) {
     utils::Vector<type::StructMember*, 4> members;
     uint32_t current_size = 0u;
     uint32_t max_align = 0u;

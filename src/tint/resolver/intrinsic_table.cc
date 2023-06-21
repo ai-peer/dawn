@@ -126,7 +126,7 @@ class TemplateState {
     /// template type is replaced with `ty`, and `ty` is returned.
     /// If none of the above applies, then `ty` is a type mismatch for the template type, and
     /// nullptr is returned.
-    const type::Type* Type(size_t idx, const type::Type* ty) {
+    type::Type* Type(size_t idx, type::Type* ty) {
         if (idx >= types_.Length()) {
             types_.Resize(idx + 1);
         }
@@ -158,7 +158,7 @@ class TemplateState {
     }
 
     /// Type returns the template type with index `idx`, or nullptr if the type was not defined.
-    const type::Type* Type(size_t idx) const {
+    type::Type* Type(size_t idx) const {
         if (idx >= types_.Length()) {
             return nullptr;
         }
@@ -166,7 +166,7 @@ class TemplateState {
     }
 
     /// SetType replaces the template type with index `idx` with type `ty`.
-    void SetType(size_t idx, const type::Type* ty) {
+    void SetType(size_t idx, type::Type* ty) {
         if (idx >= types_.Length()) {
             types_.Resize(idx + 1);
         }
@@ -185,7 +185,7 @@ class TemplateState {
     size_t Count() const { return types_.Length() + numbers_.Length(); }
 
   private:
-    utils::Vector<const type::Type*, 4> types_;
+    utils::Vector<type::Type*, 4> types_;
     utils::Vector<Number, 2> numbers_;
 };
 
@@ -226,7 +226,7 @@ class MatchState {
     /// `ty`. If the type matches, the canonical expected type is returned. If the
     /// type `ty` does not match, then nullptr is returned.
     /// @note: The matcher indices are progressed on calling.
-    const type::Type* Type(const type::Type* ty);
+    type::Type* Type(type::Type* ty);
 
     /// Num uses the next NumMatcher from the matcher indices to match the number
     /// `num`. If the number matches, the canonical expected number is returned.
@@ -260,7 +260,7 @@ class TypeMatcher {
     /// Match may define and refine the template types and numbers in state.
     /// @param type the type to match
     /// @returns the canonicalized type on match, otherwise nullptr
-    virtual const type::Type* Match(MatchState& state, const type::Type* type) const = 0;
+    virtual type::Type* Match(MatchState& state, type::Type* type) const = 0;
 
     /// @return a string representation of the matcher. Used for printing error
     /// messages when no overload is found.
@@ -293,7 +293,7 @@ class TemplateTypeMatcher : public TypeMatcher {
     /// Constructor
     explicit TemplateTypeMatcher(size_t index) : index_(index) {}
 
-    const type::Type* Match(MatchState& state, const type::Type* type) const override {
+    type::Type* Match(MatchState& state, type::Type* type) const override {
         if (type->Is<Any>()) {
             return state.templates.Type(index_);
         }
@@ -356,65 +356,65 @@ enum class OverloadFlag {
 // An enum set of OverloadFlag, used by OperatorInfo
 using OverloadFlags = utils::EnumSet<OverloadFlag>;
 
-bool match_bool(MatchState&, const type::Type* ty) {
+bool match_bool(MatchState&, type::Type* ty) {
     return ty->IsAnyOf<Any, type::Bool>();
 }
 
-const type::AbstractFloat* build_fa(MatchState& state) {
+type::AbstractFloat* build_fa(MatchState& state) {
     return state.builder.create<type::AbstractFloat>();
 }
 
-bool match_fa(MatchState& state, const type::Type* ty) {
+bool match_fa(MatchState& state, type::Type* ty) {
     return (state.earliest_eval_stage <= sem::EvaluationStage::kConstant) &&
            ty->IsAnyOf<Any, type::AbstractNumeric>();
 }
 
-const type::AbstractInt* build_ia(MatchState& state) {
+type::AbstractInt* build_ia(MatchState& state) {
     return state.builder.create<type::AbstractInt>();
 }
 
-bool match_ia(MatchState& state, const type::Type* ty) {
+bool match_ia(MatchState& state, type::Type* ty) {
     return (state.earliest_eval_stage <= sem::EvaluationStage::kConstant) &&
            ty->IsAnyOf<Any, type::AbstractInt>();
 }
 
-const type::Bool* build_bool(MatchState& state) {
+type::Bool* build_bool(MatchState& state) {
     return state.builder.create<type::Bool>();
 }
 
-const type::F16* build_f16(MatchState& state) {
+type::F16* build_f16(MatchState& state) {
     return state.builder.create<type::F16>();
 }
 
-bool match_f16(MatchState&, const type::Type* ty) {
+bool match_f16(MatchState&, type::Type* ty) {
     return ty->IsAnyOf<Any, type::F16, type::AbstractNumeric>();
 }
 
-const type::F32* build_f32(MatchState& state) {
+type::F32* build_f32(MatchState& state) {
     return state.builder.create<type::F32>();
 }
 
-bool match_f32(MatchState&, const type::Type* ty) {
+bool match_f32(MatchState&, type::Type* ty) {
     return ty->IsAnyOf<Any, type::F32, type::AbstractNumeric>();
 }
 
-const type::I32* build_i32(MatchState& state) {
+type::I32* build_i32(MatchState& state) {
     return state.builder.create<type::I32>();
 }
 
-bool match_i32(MatchState&, const type::Type* ty) {
+bool match_i32(MatchState&, type::Type* ty) {
     return ty->IsAnyOf<Any, type::I32, type::AbstractInt>();
 }
 
-const type::U32* build_u32(MatchState& state) {
+type::U32* build_u32(MatchState& state) {
     return state.builder.create<type::U32>();
 }
 
-bool match_u32(MatchState&, const type::Type* ty) {
+bool match_u32(MatchState&, type::Type* ty) {
     return ty->IsAnyOf<Any, type::U32, type::AbstractInt>();
 }
 
-bool match_vec(MatchState&, const type::Type* ty, Number& N, const type::Type*& T) {
+bool match_vec(MatchState&, type::Type* ty, Number& N, type::Type*& T) {
     if (ty->Is<Any>()) {
         N = Number::any;
         T = ty;
@@ -430,7 +430,7 @@ bool match_vec(MatchState&, const type::Type* ty, Number& N, const type::Type*& 
 }
 
 template <uint32_t N>
-bool match_vec(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_vec(MatchState&, type::Type* ty, type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -445,12 +445,12 @@ bool match_vec(MatchState&, const type::Type* ty, const type::Type*& T) {
     return false;
 }
 
-const type::Vector* build_vec(MatchState& state, Number N, const type::Type* el) {
+type::Vector* build_vec(MatchState& state, Number N, type::Type* el) {
     return state.builder.create<type::Vector>(el, N.Value());
 }
 
 template <uint32_t N>
-const type::Vector* build_vec(MatchState& state, const type::Type* el) {
+type::Vector* build_vec(MatchState& state, type::Type* el) {
     return state.builder.create<type::Vector>(el, N);
 }
 
@@ -462,7 +462,7 @@ constexpr auto build_vec2 = build_vec<2>;
 constexpr auto build_vec3 = build_vec<3>;
 constexpr auto build_vec4 = build_vec<4>;
 
-bool match_packedVec3(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_packedVec3(MatchState&, type::Type* ty, type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -477,11 +477,11 @@ bool match_packedVec3(MatchState&, const type::Type* ty, const type::Type*& T) {
     return false;
 }
 
-const type::Vector* build_packedVec3(MatchState& state, const type::Type* el) {
+type::Vector* build_packedVec3(MatchState& state, type::Type* el) {
     return state.builder.create<type::Vector>(el, 3u, /* packed */ true);
 }
 
-bool match_mat(MatchState&, const type::Type* ty, Number& M, Number& N, const type::Type*& T) {
+bool match_mat(MatchState&, type::Type* ty, Number& M, Number& N, type::Type*& T) {
     if (ty->Is<Any>()) {
         M = Number::any;
         N = Number::any;
@@ -498,7 +498,7 @@ bool match_mat(MatchState&, const type::Type* ty, Number& M, Number& N, const ty
 }
 
 template <uint32_t C, uint32_t R>
-bool match_mat(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_mat(MatchState&, type::Type* ty, type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -512,13 +512,13 @@ bool match_mat(MatchState&, const type::Type* ty, const type::Type*& T) {
     return false;
 }
 
-const type::Matrix* build_mat(MatchState& state, Number C, Number R, const type::Type* T) {
+type::Matrix* build_mat(MatchState& state, Number C, Number R, type::Type* T) {
     auto* column_type = state.builder.create<type::Vector>(T, R.Value());
     return state.builder.create<type::Matrix>(column_type, C.Value());
 }
 
 template <uint32_t C, uint32_t R>
-const type::Matrix* build_mat(MatchState& state, const type::Type* T) {
+type::Matrix* build_mat(MatchState& state, type::Type* T) {
     auto* column_type = state.builder.create<type::Vector>(T, R);
     return state.builder.create<type::Matrix>(column_type, C);
 }
@@ -543,7 +543,7 @@ constexpr auto match_mat4x2 = match_mat<4, 2>;
 constexpr auto match_mat4x3 = match_mat<4, 3>;
 constexpr auto match_mat4x4 = match_mat<4, 4>;
 
-bool match_array(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_array(MatchState&, type::Type* ty, type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -558,7 +558,7 @@ bool match_array(MatchState&, const type::Type* ty, const type::Type*& T) {
     return false;
 }
 
-const type::Array* build_array(MatchState& state, const type::Type* el) {
+type::Array* build_array(MatchState& state, type::Type* el) {
     return state.builder.create<type::Array>(
         el,
         /* count */ state.builder.create<type::RuntimeArrayCount>(),
@@ -568,7 +568,7 @@ const type::Array* build_array(MatchState& state, const type::Type* el) {
         /* stride_implicit */ 0u);
 }
 
-bool match_ptr(MatchState&, const type::Type* ty, Number& S, const type::Type*& T, Number& A) {
+bool match_ptr(MatchState&, type::Type* ty, Number& S, type::Type*& T, Number& A) {
     if (ty->Is<Any>()) {
         S = Number::any;
         T = ty;
@@ -585,12 +585,12 @@ bool match_ptr(MatchState&, const type::Type* ty, Number& S, const type::Type*& 
     return false;
 }
 
-const type::Pointer* build_ptr(MatchState& state, Number S, const type::Type* T, Number& A) {
+type::Pointer* build_ptr(MatchState& state, Number S, type::Type* T, Number& A) {
     return state.builder.create<type::Pointer>(static_cast<builtin::AddressSpace>(S.Value()), T,
                                                static_cast<builtin::Access>(A.Value()));
 }
 
-bool match_atomic(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_atomic(MatchState&, type::Type* ty, type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -603,22 +603,22 @@ bool match_atomic(MatchState&, const type::Type* ty, const type::Type*& T) {
     return false;
 }
 
-const type::Atomic* build_atomic(MatchState& state, const type::Type* T) {
+type::Atomic* build_atomic(MatchState& state, type::Type* T) {
     return state.builder.create<type::Atomic>(T);
 }
 
-bool match_sampler(MatchState&, const type::Type* ty) {
+bool match_sampler(MatchState&, type::Type* ty) {
     if (ty->Is<Any>()) {
         return true;
     }
     return ty->Is([](const type::Sampler* s) { return s->kind() == type::SamplerKind::kSampler; });
 }
 
-const type::Sampler* build_sampler(MatchState& state) {
+type::Sampler* build_sampler(MatchState& state) {
     return state.builder.create<type::Sampler>(type::SamplerKind::kSampler);
 }
 
-bool match_sampler_comparison(MatchState&, const type::Type* ty) {
+bool match_sampler_comparison(MatchState&, type::Type* ty) {
     if (ty->Is<Any>()) {
         return true;
     }
@@ -626,14 +626,11 @@ bool match_sampler_comparison(MatchState&, const type::Type* ty) {
         [](const type::Sampler* s) { return s->kind() == type::SamplerKind::kComparisonSampler; });
 }
 
-const type::Sampler* build_sampler_comparison(MatchState& state) {
+type::Sampler* build_sampler_comparison(MatchState& state) {
     return state.builder.create<type::Sampler>(type::SamplerKind::kComparisonSampler);
 }
 
-bool match_texture(MatchState&,
-                   const type::Type* ty,
-                   type::TextureDimension dim,
-                   const type::Type*& T) {
+bool match_texture(MatchState&, type::Type* ty, type::TextureDimension dim, type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -649,14 +646,12 @@ bool match_texture(MatchState&,
 
 #define JOIN(a, b) a##b
 
-#define DECLARE_SAMPLED_TEXTURE(suffix, dim)                                        \
-    bool JOIN(match_texture_, suffix)(MatchState & state, const type::Type* ty,     \
-                                      const type::Type*& T) {                       \
-        return match_texture(state, ty, dim, T);                                    \
-    }                                                                               \
-    const type::SampledTexture* JOIN(build_texture_, suffix)(MatchState & state,    \
-                                                             const type::Type* T) { \
-        return state.builder.create<type::SampledTexture>(dim, T);                  \
+#define DECLARE_SAMPLED_TEXTURE(suffix, dim)                                                  \
+    bool JOIN(match_texture_, suffix)(MatchState & state, type::Type * ty, type::Type * &T) { \
+        return match_texture(state, ty, dim, T);                                              \
+    }                                                                                         \
+    type::SampledTexture* JOIN(build_texture_, suffix)(MatchState & state, type::Type * T) {  \
+        return state.builder.create<type::SampledTexture>(dim, T);                            \
     }
 
 DECLARE_SAMPLED_TEXTURE(1d, type::TextureDimension::k1d)
@@ -668,9 +663,9 @@ DECLARE_SAMPLED_TEXTURE(cube_array, type::TextureDimension::kCubeArray)
 #undef DECLARE_SAMPLED_TEXTURE
 
 bool match_texture_multisampled(MatchState&,
-                                const type::Type* ty,
+                                type::Type* ty,
                                 type::TextureDimension dim,
-                                const type::Type*& T) {
+                                type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -685,31 +680,31 @@ bool match_texture_multisampled(MatchState&,
 }
 
 #define DECLARE_MULTISAMPLED_TEXTURE(suffix, dim)                                            \
-    bool JOIN(match_texture_multisampled_, suffix)(MatchState & state, const type::Type* ty, \
-                                                   const type::Type*& T) {                   \
+    bool JOIN(match_texture_multisampled_, suffix)(MatchState & state, type::Type * ty,      \
+                                                   type::Type * &T) {                        \
         return match_texture_multisampled(state, ty, dim, T);                                \
     }                                                                                        \
-    const type::MultisampledTexture* JOIN(build_texture_multisampled_, suffix)(              \
-        MatchState & state, const type::Type* T) {                                           \
+    type::MultisampledTexture* JOIN(build_texture_multisampled_, suffix)(MatchState & state, \
+                                                                         type::Type * T) {   \
         return state.builder.create<type::MultisampledTexture>(dim, T);                      \
     }
 
 DECLARE_MULTISAMPLED_TEXTURE(2d, type::TextureDimension::k2d)
 #undef DECLARE_MULTISAMPLED_TEXTURE
 
-bool match_texture_depth(MatchState&, const type::Type* ty, type::TextureDimension dim) {
+bool match_texture_depth(MatchState&, type::Type* ty, type::TextureDimension dim) {
     if (ty->Is<Any>()) {
         return true;
     }
     return ty->Is([&](const type::DepthTexture* t) { return t->dim() == dim; });
 }
 
-#define DECLARE_DEPTH_TEXTURE(suffix, dim)                                              \
-    bool JOIN(match_texture_depth_, suffix)(MatchState & state, const type::Type* ty) { \
-        return match_texture_depth(state, ty, dim);                                     \
-    }                                                                                   \
-    const type::DepthTexture* JOIN(build_texture_depth_, suffix)(MatchState & state) {  \
-        return state.builder.create<type::DepthTexture>(dim);                           \
+#define DECLARE_DEPTH_TEXTURE(suffix, dim)                                         \
+    bool JOIN(match_texture_depth_, suffix)(MatchState & state, type::Type * ty) { \
+        return match_texture_depth(state, ty, dim);                                \
+    }                                                                              \
+    type::DepthTexture* JOIN(build_texture_depth_, suffix)(MatchState & state) {   \
+        return state.builder.create<type::DepthTexture>(dim);                      \
     }
 
 DECLARE_DEPTH_TEXTURE(2d, type::TextureDimension::k2d)
@@ -718,7 +713,7 @@ DECLARE_DEPTH_TEXTURE(cube, type::TextureDimension::kCube)
 DECLARE_DEPTH_TEXTURE(cube_array, type::TextureDimension::kCubeArray)
 #undef DECLARE_DEPTH_TEXTURE
 
-bool match_texture_depth_multisampled_2d(MatchState&, const type::Type* ty) {
+bool match_texture_depth_multisampled_2d(MatchState&, type::Type* ty) {
     if (ty->Is<Any>()) {
         return true;
     }
@@ -732,7 +727,7 @@ type::DepthMultisampledTexture* build_texture_depth_multisampled_2d(MatchState& 
 }
 
 bool match_texture_storage(MatchState&,
-                           const type::Type* ty,
+                           type::Type* ty,
                            type::TextureDimension dim,
                            Number& F,
                            Number& A) {
@@ -751,17 +746,17 @@ bool match_texture_storage(MatchState&,
     return false;
 }
 
-#define DECLARE_STORAGE_TEXTURE(suffix, dim)                                                       \
-    bool JOIN(match_texture_storage_, suffix)(MatchState & state, const type::Type* ty, Number& F, \
-                                              Number& A) {                                         \
-        return match_texture_storage(state, ty, dim, F, A);                                        \
-    }                                                                                              \
-    const type::StorageTexture* JOIN(build_texture_storage_, suffix)(MatchState & state, Number F, \
-                                                                     Number A) {                   \
-        auto format = static_cast<TexelFormat>(F.Value());                                         \
-        auto access = static_cast<Access>(A.Value());                                              \
-        auto* T = type::StorageTexture::SubtypeFor(format, state.builder.Types());                 \
-        return state.builder.create<type::StorageTexture>(dim, format, access, T);                 \
+#define DECLARE_STORAGE_TEXTURE(suffix, dim)                                                   \
+    bool JOIN(match_texture_storage_, suffix)(MatchState & state, type::Type * ty, Number & F, \
+                                              Number & A) {                                    \
+        return match_texture_storage(state, ty, dim, F, A);                                    \
+    }                                                                                          \
+    type::StorageTexture* JOIN(build_texture_storage_, suffix)(MatchState & state, Number F,   \
+                                                               Number A) {                     \
+        auto format = static_cast<TexelFormat>(F.Value());                                     \
+        auto access = static_cast<Access>(A.Value());                                          \
+        auto* T = type::StorageTexture::SubtypeFor(format, state.builder.Types());             \
+        return state.builder.create<type::StorageTexture>(dim, format, access, T);             \
     }
 
 DECLARE_STORAGE_TEXTURE(1d, type::TextureDimension::k1d)
@@ -770,25 +765,25 @@ DECLARE_STORAGE_TEXTURE(2d_array, type::TextureDimension::k2dArray)
 DECLARE_STORAGE_TEXTURE(3d, type::TextureDimension::k3d)
 #undef DECLARE_STORAGE_TEXTURE
 
-bool match_texture_external(MatchState&, const type::Type* ty) {
+bool match_texture_external(MatchState&, type::Type* ty) {
     return ty->IsAnyOf<Any, type::ExternalTexture>();
 }
 
-const type::ExternalTexture* build_texture_external(MatchState& state) {
+type::ExternalTexture* build_texture_external(MatchState& state) {
     return state.builder.create<type::ExternalTexture>();
 }
 
 // Builtin types starting with a _ prefix cannot be declared in WGSL, so they
 // can only be used as return types. Because of this, they must only match Any,
 // which is used as the return type matcher.
-bool match_modf_result(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_modf_result(MatchState&, type::Type* ty, type::Type*& T) {
     if (!ty->Is<Any>()) {
         return false;
     }
     T = ty;
     return true;
 }
-bool match_modf_result_vec(MatchState&, const type::Type* ty, Number& N, const type::Type*& T) {
+bool match_modf_result_vec(MatchState&, type::Type* ty, Number& N, type::Type*& T) {
     if (!ty->Is<Any>()) {
         return false;
     }
@@ -796,14 +791,14 @@ bool match_modf_result_vec(MatchState&, const type::Type* ty, Number& N, const t
     T = ty;
     return true;
 }
-bool match_frexp_result(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_frexp_result(MatchState&, type::Type* ty, type::Type*& T) {
     if (!ty->Is<Any>()) {
         return false;
     }
     T = ty;
     return true;
 }
-bool match_frexp_result_vec(MatchState&, const type::Type* ty, Number& N, const type::Type*& T) {
+bool match_frexp_result_vec(MatchState&, type::Type* ty, Number& N, type::Type*& T) {
     if (!ty->Is<Any>()) {
         return false;
     }
@@ -812,7 +807,7 @@ bool match_frexp_result_vec(MatchState&, const type::Type* ty, Number& N, const 
     return true;
 }
 
-bool match_atomic_compare_exchange_result(MatchState&, const type::Type* ty, const type::Type*& T) {
+bool match_atomic_compare_exchange_result(MatchState&, type::Type* ty, type::Type*& T) {
     if (ty->Is<Any>()) {
         T = ty;
         return true;
@@ -820,25 +815,25 @@ bool match_atomic_compare_exchange_result(MatchState&, const type::Type* ty, con
     return false;
 }
 
-const type::Struct* build_modf_result(MatchState& state, const type::Type* el) {
+type::Struct* build_modf_result(MatchState& state, type::Type* el) {
     return CreateModfResult(state.builder, el);
 }
 
-const type::Struct* build_modf_result_vec(MatchState& state, Number& n, const type::Type* el) {
+type::Struct* build_modf_result_vec(MatchState& state, Number& n, type::Type* el) {
     auto* vec = state.builder.create<type::Vector>(el, n.Value());
     return CreateModfResult(state.builder, vec);
 }
 
-const type::Struct* build_frexp_result(MatchState& state, const type::Type* el) {
+type::Struct* build_frexp_result(MatchState& state, type::Type* el) {
     return CreateFrexpResult(state.builder, el);
 }
 
-const type::Struct* build_frexp_result_vec(MatchState& state, Number& n, const type::Type* el) {
+type::Struct* build_frexp_result_vec(MatchState& state, Number& n, type::Type* el) {
     auto* vec = state.builder.create<type::Vector>(el, n.Value());
     return CreateFrexpResult(state.builder, vec);
 }
 
-const type::Struct* build_atomic_compare_exchange_result(MatchState& state, const type::Type* ty) {
+type::Struct* build_atomic_compare_exchange_result(MatchState& state, type::Type* ty) {
     return CreateAtomicCompareExchangeResult(state.builder, ty);
 }
 
@@ -911,7 +906,7 @@ struct IntrinsicPrototype {
     /// Parameter describes a single parameter
     struct Parameter {
         /// Parameter type
-        const type::Type* const type;
+        type::Type* const type;
         /// Parameter usage
         ParameterUsage const usage = ParameterUsage::kNone;
     };
@@ -930,7 +925,7 @@ struct IntrinsicPrototype {
     };
 
     const OverloadInfo* overload = nullptr;
-    type::Type const* return_type = nullptr;
+    type::Type* return_type = nullptr;
     utils::Vector<Parameter, kNumFixedParams> parameters;
 };
 
@@ -956,25 +951,25 @@ class Impl : public IntrinsicTable {
     explicit Impl(ProgramBuilder& builder);
 
     Builtin Lookup(builtin::Function builtin_type,
-                   utils::VectorRef<const type::Type*> args,
+                   utils::VectorRef<type::Type*> args,
                    sem::EvaluationStage earliest_eval_stage,
                    const Source& source) override;
 
     UnaryOperator Lookup(ast::UnaryOp op,
-                         const type::Type* arg,
+                         type::Type* arg,
                          sem::EvaluationStage earliest_eval_stage,
                          const Source& source) override;
 
     BinaryOperator Lookup(ast::BinaryOp op,
-                          const type::Type* lhs,
-                          const type::Type* rhs,
+                          type::Type* lhs,
+                          type::Type* rhs,
                           sem::EvaluationStage earliest_eval_stage,
                           const Source& source,
                           bool is_compound) override;
 
     CtorOrConv Lookup(CtorConvIntrinsic type,
-                      const type::Type* template_arg,
-                      utils::VectorRef<const type::Type*> args,
+                      type::Type* template_arg,
+                      utils::VectorRef<type::Type*> args,
                       sem::EvaluationStage earliest_eval_stage,
                       const Source& source) override;
 
@@ -1020,7 +1015,7 @@ class Impl : public IntrinsicTable {
     ///          IntrinsicPrototype::return_type.
     IntrinsicPrototype MatchIntrinsic(const IntrinsicInfo& intrinsic,
                                       const char* intrinsic_name,
-                                      utils::VectorRef<const type::Type*> args,
+                                      utils::VectorRef<type::Type*> args,
                                       sem::EvaluationStage earliest_eval_stage,
                                       TemplateState templates,
                                       const OnNoMatch& on_no_match) const;
@@ -1033,7 +1028,7 @@ class Impl : public IntrinsicTable {
     ///                  template as `f32`.
     /// @returns the evaluated Candidate information.
     Candidate ScoreOverload(const OverloadInfo* overload,
-                            utils::VectorRef<const type::Type*> args,
+                            utils::VectorRef<type::Type*> args,
                             sem::EvaluationStage earliest_eval_stage,
                             const TemplateState& templates) const;
 
@@ -1049,7 +1044,7 @@ class Impl : public IntrinsicTable {
     /// @returns the resolved Candidate.
     Candidate ResolveCandidate(Candidates&& candidates,
                                const char* intrinsic_name,
-                               utils::VectorRef<const type::Type*> args,
+                               utils::VectorRef<type::Type*> args,
                                TemplateState templates) const;
 
     /// Match constructs a new MatchState
@@ -1073,7 +1068,7 @@ class Impl : public IntrinsicTable {
 
     /// Raises an error when no overload is a clear winner of overload resolution
     void ErrAmbiguousOverload(const char* intrinsic_name,
-                              utils::VectorRef<const type::Type*> args,
+                              utils::VectorRef<type::Type*> args,
                               TemplateState templates,
                               utils::VectorRef<Candidate> candidates) const;
 
@@ -1089,8 +1084,8 @@ class Impl : public IntrinsicTable {
 /// @return a string representing a call to a builtin with the given argument
 /// types.
 std::string CallSignature(const char* intrinsic_name,
-                          utils::VectorRef<const type::Type*> args,
-                          const type::Type* template_arg = nullptr) {
+                          utils::VectorRef<type::Type*> args,
+                          type::Type* template_arg = nullptr) {
     utils::StringStream ss;
     ss << intrinsic_name;
     if (template_arg) {
@@ -1123,7 +1118,7 @@ std::string TemplateNumberMatcher::String(MatchState* state) const {
 Impl::Impl(ProgramBuilder& b) : builder(b) {}
 
 Impl::Builtin Impl::Lookup(builtin::Function builtin_type,
-                           utils::VectorRef<const type::Type*> args,
+                           utils::VectorRef<type::Type*> args,
                            sem::EvaluationStage earliest_eval_stage,
                            const Source& source) {
     const char* intrinsic_name = builtin::str(builtin_type);
@@ -1179,7 +1174,7 @@ Impl::Builtin Impl::Lookup(builtin::Function builtin_type,
 }
 
 IntrinsicTable::UnaryOperator Impl::Lookup(ast::UnaryOp op,
-                                           const type::Type* arg,
+                                           type::Type* arg,
                                            sem::EvaluationStage earliest_eval_stage,
                                            const Source& source) {
     auto [intrinsic_index, intrinsic_name] = [&]() -> std::pair<size_t, const char*> {
@@ -1225,8 +1220,8 @@ IntrinsicTable::UnaryOperator Impl::Lookup(ast::UnaryOp op,
 }
 
 IntrinsicTable::BinaryOperator Impl::Lookup(ast::BinaryOp op,
-                                            const type::Type* lhs,
-                                            const type::Type* rhs,
+                                            type::Type* lhs,
+                                            type::Type* rhs,
                                             sem::EvaluationStage earliest_eval_stage,
                                             const Source& source,
                                             bool is_compound) {
@@ -1304,8 +1299,8 @@ IntrinsicTable::BinaryOperator Impl::Lookup(ast::BinaryOp op,
 }
 
 IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
-                                        const type::Type* template_arg,
-                                        utils::VectorRef<const type::Type*> args,
+                                        type::Type* template_arg,
+                                        utils::VectorRef<type::Type*> args,
                                         sem::EvaluationStage earliest_eval_stage,
                                         const Source& source) {
     auto name = str(type);
@@ -1383,7 +1378,7 @@ IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
 
 IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
                                         const char* intrinsic_name,
-                                        utils::VectorRef<const type::Type*> args,
+                                        utils::VectorRef<type::Type*> args,
                                         sem::EvaluationStage earliest_eval_stage,
                                         TemplateState templates,
                                         const OnNoMatch& on_no_match) const {
@@ -1423,7 +1418,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
     }
 
     // Build the return type
-    const type::Type* return_type = nullptr;
+    type::Type* return_type = nullptr;
     if (auto* indices = match.overload->return_matcher_indices) {
         Any any;
         return_type =
@@ -1440,7 +1435,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
 }
 
 Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
-                                    utils::VectorRef<const type::Type*> args,
+                                    utils::VectorRef<type::Type*> args,
                                     sem::EvaluationStage earliest_eval_stage,
                                     const TemplateState& in_templates) const {
     // Penalty weights for overload mismatching.
@@ -1554,7 +1549,7 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
 
 Impl::Candidate Impl::ResolveCandidate(Impl::Candidates&& candidates,
                                        const char* intrinsic_name,
-                                       utils::VectorRef<const type::Type*> args,
+                                       utils::VectorRef<type::Type*> args,
                                        TemplateState templates) const {
     utils::Vector<uint32_t, kNumFixedParams> best_ranks;
     best_ranks.Resize(args.Length(), 0xffffffff);
@@ -1706,7 +1701,7 @@ void Impl::PrintCandidates(utils::StringStream& ss,
     }
 }
 
-const type::Type* MatchState::Type(const type::Type* ty) {
+type::Type* MatchState::Type(type::Type* ty) {
     MatcherIndex matcher_index = *matcher_indices_++;
     auto* matcher = matchers.type[matcher_index];
     return matcher->Match(*this, ty);
@@ -1731,7 +1726,7 @@ std::string MatchState::NumName() {
 }
 
 void Impl::ErrAmbiguousOverload(const char* intrinsic_name,
-                                utils::VectorRef<const type::Type*> args,
+                                utils::VectorRef<type::Type*> args,
                                 TemplateState templates,
                                 utils::VectorRef<Candidate> candidates) const {
     utils::StringStream ss;

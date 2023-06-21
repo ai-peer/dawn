@@ -59,7 +59,7 @@ Transform::ApplyResult VectorizeScalarMatrixInitializers::Apply(const Program* s
     ProgramBuilder b;
     CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
 
-    std::unordered_map<const type::Matrix*, Symbol> scalar_inits;
+    std::unordered_map<type::Matrix*, Symbol> scalar_inits;
 
     ctx.ReplaceAll([&](const CallExpression* expr) -> const CallExpression* {
         auto* call = src->Sem().Get(expr)->UnwrapMaterialize()->As<sem::Call>();

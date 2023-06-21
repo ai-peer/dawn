@@ -137,7 +137,7 @@ struct AtomicKey {
     };
 };
 
-bool IntrinsicDataTypeFor(const type::Type* ty, DecomposeMemoryAccess::Intrinsic::DataType& out) {
+bool IntrinsicDataTypeFor(type::Type* ty, DecomposeMemoryAccess::Intrinsic::DataType& out) {
     if (ty->Is<type::I32>()) {
         out = DecomposeMemoryAccess::Intrinsic::DataType::kI32;
         return true;
@@ -220,7 +220,7 @@ bool IntrinsicDataTypeFor(const type::Type* ty, DecomposeMemoryAccess::Intrinsic
 /// @returns a DecomposeMemoryAccess::Intrinsic attribute that can be applied to a stub function to
 /// load the type @p ty from the uniform or storage buffer with name @p buffer.
 DecomposeMemoryAccess::Intrinsic* IntrinsicLoadFor(ProgramBuilder* builder,
-                                                   const type::Type* ty,
+                                                   type::Type* ty,
                                                    builtin::AddressSpace address_space,
                                                    const Symbol& buffer) {
     DecomposeMemoryAccess::Intrinsic::DataType type;
@@ -235,7 +235,7 @@ DecomposeMemoryAccess::Intrinsic* IntrinsicLoadFor(ProgramBuilder* builder,
 /// @returns a DecomposeMemoryAccess::Intrinsic attribute that can be applied to a stub function to
 /// store the type @p ty to the storage buffer with name @p buffer.
 DecomposeMemoryAccess::Intrinsic* IntrinsicStoreFor(ProgramBuilder* builder,
-                                                    const type::Type* ty,
+                                                    type::Type* ty,
                                                     const Symbol& buffer) {
     DecomposeMemoryAccess::Intrinsic::DataType type;
     if (!IntrinsicDataTypeFor(ty, type)) {
@@ -250,7 +250,7 @@ DecomposeMemoryAccess::Intrinsic* IntrinsicStoreFor(ProgramBuilder* builder,
 /// the atomic op and the type @p ty.
 DecomposeMemoryAccess::Intrinsic* IntrinsicAtomicFor(ProgramBuilder* builder,
                                                      builtin::Function ity,
-                                                     const type::Type* ty,
+                                                     type::Type* ty,
                                                      const Symbol& buffer) {
     auto op = DecomposeMemoryAccess::Intrinsic::Op::kAtomicLoad;
     switch (ity) {
@@ -307,7 +307,7 @@ DecomposeMemoryAccess::Intrinsic* IntrinsicAtomicFor(ProgramBuilder* builder,
 struct BufferAccess {
     sem::GlobalVariable const* var = nullptr;  // Storage or uniform buffer variable
     Offset const* offset = nullptr;            // The byte offset on var
-    type::Type const* type = nullptr;          // The type of the access
+    type::Type* type = nullptr;                // The type of the access
     operator bool() const { return var; }      // Returns true if valid
 };
 
@@ -462,9 +462,7 @@ struct DecomposeMemoryAccess::State {
     /// @param buffer the symbol of the storage or uniform buffer variable, owned by the target
     /// ProgramBuilder.
     /// @return the name of the function that performs the load
-    Symbol LoadFunc(const type::Type* el_ty,
-                    builtin::AddressSpace address_space,
-                    const Symbol& buffer) {
+    Symbol LoadFunc(type::Type* el_ty, builtin::AddressSpace address_space, const Symbol& buffer) {
         return utils::GetOrCreate(load_funcs, LoadStoreKey{el_ty, buffer}, [&] {
             utils::Vector params{b.Param("offset", b.ty.u32())};
 
@@ -544,7 +542,7 @@ struct DecomposeMemoryAccess::State {
     /// @param el_ty the storage buffer element type
     /// @param buffer the symbol of the storage buffer variable, owned by the target ProgramBuilder.
     /// @return the name of the function that performs the store
-    Symbol StoreFunc(const type::Type* el_ty, const Symbol& buffer) {
+    Symbol StoreFunc(type::Type* el_ty, const Symbol& buffer) {
         return utils::GetOrCreate(store_funcs, LoadStoreKey{el_ty, buffer}, [&] {
             utils::Vector params{
                 b.Param("offset", b.ty.u32()),
@@ -562,7 +560,7 @@ struct DecomposeMemoryAccess::State {
             } else {
                 auto body = Switch<utils::Vector<const Statement*, 8>>(
                     el_ty,  //
-                    [&](const type::Array* arr_ty) {
+                    [&](type::Array* arr_ty) {
                         // fn store_func(buffer : buf_ty, offset : u32, value : el_ty) {
                         //   var array = value; // No dynamic indexing on constant arrays
                         //   for (var i = 0u; i < array_count; i = i + 1) {
@@ -595,7 +593,7 @@ struct DecomposeMemoryAccess::State {
 
                         return utils::Vector{b.Decl(array), for_loop};
                     },
-                    [&](const type::Matrix* mat_ty) {
+                    [&](type::Matrix* mat_ty) {
                         auto* vec_ty = mat_ty->ColumnType();
                         Symbol store = StoreFunc(vec_ty, buffer);
                         utils::Vector<const Statement*, 4> stmts;
@@ -607,7 +605,7 @@ struct DecomposeMemoryAccess::State {
                         }
                         return stmts;
                     },
-                    [&](const type::Struct* str) {
+                    [&](type::Struct* str) {
                         utils::Vector<const Statement*, 8> stmts;
                         for (auto* member : str->Members()) {
                             auto* offset = b.Add("offset", u32(member->Offset()));
@@ -633,9 +631,7 @@ struct DecomposeMemoryAccess::State {
     /// @param intrinsic the atomic intrinsic
     /// @param buffer the symbol of the storage buffer variable, owned by the target ProgramBuilder.
     /// @return the name of the function that performs the load
-    Symbol AtomicFunc(const type::Type* el_ty,
-                      const sem::Builtin* intrinsic,
-                      const Symbol& buffer) {
+    Symbol AtomicFunc(type::Type* el_ty, const sem::Builtin* intrinsic, const Symbol& buffer) {
         auto op = intrinsic->Type();
         return utils::GetOrCreate(atomic_funcs, AtomicKey{el_ty, op, buffer}, [&] {
             // The first parameter to all WGSL atomics is the expression to the

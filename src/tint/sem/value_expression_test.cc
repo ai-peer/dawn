@@ -25,9 +25,9 @@ namespace {
 
 class MockConstant : public constant::Value {
   public:
-    explicit MockConstant(const type::Type* ty) : type(ty) {}
+    explicit MockConstant(type::Type* ty) : type(ty) {}
     ~MockConstant() override {}
-    const type::Type* Type() const override { return type; }
+    type::Type* Type() const override { return type; }
     const constant::Value* Index(size_t) const override { return {}; }
     size_t NumElements() const override { return 0; }
     bool AllZero() const override { return {}; }
@@ -39,7 +39,7 @@ class MockConstant : public constant::Value {
     std::variant<std::monostate, AInt, AFloat> InternalValue() const override { return {}; }
 
   private:
-    const type::Type* type;
+    type::Type* type;
 };
 
 using ValueExpressionTest = TestHelper;

@@ -475,7 +475,7 @@ void GeneratorImpl::EmitFloatModulo(utils::StringStream& out, const ast::BinaryE
                                                     builtin::Access::kUndefined, fn_name);
                                     {
                                         ScopedParen sp(decl);
-                                        const auto* ty = TypeOf(expr->lhs)->UnwrapRef();
+                                        auto* ty = TypeOf(expr->lhs)->UnwrapRef();
                                         EmitTypeAndName(decl, ty, builtin::AddressSpace::kUndefined,
                                                         builtin::Access::kUndefined, "lhs");
                                         decl << ", ";
@@ -1180,7 +1180,7 @@ void GeneratorImpl::EmitTextureCall(utils::StringStream& out,
 
     auto* texture_type = TypeOf(texture)->UnwrapRef()->As<type::Texture>();
 
-    auto emit_signed_int_type = [&](const type::Type* ty) {
+    auto emit_signed_int_type = [&](type::Type* ty) {
         uint32_t width = ty->Elements().count;
         if (width > 1) {
             out << "ivec" << width;
@@ -1189,7 +1189,7 @@ void GeneratorImpl::EmitTextureCall(utils::StringStream& out,
         }
     };
 
-    auto emit_unsigned_int_type = [&](const type::Type* ty) {
+    auto emit_unsigned_int_type = [&](type::Type* ty) {
         uint32_t width = ty->Elements().count;
         if (width > 1) {
             out << "uvec" << width;
@@ -1685,7 +1685,7 @@ void GeneratorImpl::EmitFunction(const ast::Function* func) {
             }
             first = false;
 
-            auto const* type = v->Type();
+            auto* type = v->Type();
 
             if (auto* ptr = type->As<type::Pointer>()) {
                 // Transform pointer parameters in to `inout` parameters.
@@ -2079,12 +2079,12 @@ void GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
 void GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value* constant) {
     Switch(
         constant->Type(),  //
-        [&](const type::Bool*) { out << (constant->ValueAs<AInt>() ? "true" : "false"); },
-        [&](const type::F32*) { PrintF32(out, constant->ValueAs<f32>()); },
-        [&](const type::F16*) { PrintF16(out, constant->ValueAs<f16>()); },
-        [&](const type::I32*) { PrintI32(out, constant->ValueAs<i32>()); },
-        [&](const type::U32*) { out << constant->ValueAs<AInt>() << "u"; },
-        [&](const type::Vector* v) {
+        [&](type::Bool*) { out << (constant->ValueAs<AInt>() ? "true" : "false"); },
+        [&](type::F32*) { PrintF32(out, constant->ValueAs<f32>()); },
+        [&](type::F16*) { PrintF16(out, constant->ValueAs<f16>()); },
+        [&](type::I32*) { PrintI32(out, constant->ValueAs<i32>()); },
+        [&](type::U32*) { out << constant->ValueAs<AInt>() << "u"; },
+        [&](type::Vector* v) {
             EmitType(out, v, builtin::AddressSpace::kUndefined, builtin::Access::kUndefined, "");
 
             ScopedParen sp(out);
@@ -2101,7 +2101,7 @@ void GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
                 EmitConstant(out, constant->Index(i));
             }
         },
-        [&](const type::Matrix* m) {
+        [&](type::Matrix* m) {
             EmitType(out, m, builtin::AddressSpace::kUndefined, builtin::Access::kUndefined, "");
 
             ScopedParen sp(out);
@@ -2113,7 +2113,7 @@ void GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
                 EmitConstant(out, constant->Index(column_idx));
             }
         },
-        [&](const type::Array* a) {
+        [&](type::Array* a) {
             EmitType(out, a, builtin::AddressSpace::kUndefined, builtin::Access::kUndefined, "");
 
             ScopedParen sp(out);
@@ -2132,7 +2132,7 @@ void GeneratorImpl::EmitConstant(utils::StringStream& out, const constant::Value
                 EmitConstant(out, constant->Index(i));
             }
         },
-        [&](const type::Struct* s) {
+        [&](type::Struct* s) {
             EmitStructType(&helpers_, s);
 
             out << StructName(s);
@@ -2180,7 +2180,7 @@ void GeneratorImpl::EmitLiteral(utils::StringStream& out, const ast::LiteralExpr
         [&](Default) { diagnostics_.add_error(diag::System::Writer, "unknown literal type"); });
 }
 
-void GeneratorImpl::EmitZeroValue(utils::StringStream& out, const type::Type* type) {
+void GeneratorImpl::EmitZeroValue(utils::StringStream& out, type::Type* type) {
     if (type->Is<type::Bool>()) {
         out << "false";
     } else if (type->Is<type::F32>()) {
@@ -2488,7 +2488,7 @@ void GeneratorImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
 }
 
 void GeneratorImpl::EmitType(utils::StringStream& out,
-                             const type::Type* type,
+                             type::Type* type,
                              builtin::AddressSpace address_space,
                              builtin::Access access,
                              const std::string& name,
@@ -2515,7 +2515,7 @@ void GeneratorImpl::EmitType(utils::StringStream& out,
     }
 
     if (auto* ary = type->As<type::Array>()) {
-        const type::Type* base_type = ary;
+        type::Type* base_type = ary;
         std::vector<uint32_t> sizes;
         while (auto* arr = base_type->As<type::Array>()) {
             if (arr->Count()->Is<type::RuntimeArrayCount>()) {
@@ -2657,7 +2657,7 @@ void GeneratorImpl::EmitType(utils::StringStream& out,
 }
 
 void GeneratorImpl::EmitTypeAndName(utils::StringStream& out,
-                                    const type::Type* type,
+                                    type::Type* type,
                                     builtin::AddressSpace address_space,
                                     builtin::Access access,
                                     const std::string& name) {
@@ -2786,7 +2786,7 @@ void GeneratorImpl::CallBuiltinHelper(utils::StringStream& out,
                         decl << ", ";
                     }
                     auto param_name = "param_" + std::to_string(parameter_names.size());
-                    const auto* ty = param->Type();
+                    auto* ty = param->Type();
                     if (auto* ptr = ty->As<type::Pointer>()) {
                         decl << "inout ";
                         ty = ptr->StoreType();
@@ -2822,7 +2822,7 @@ void GeneratorImpl::CallBuiltinHelper(utils::StringStream& out,
     }
 }
 
-type::Type* GeneratorImpl::BoolTypeToUint(const type::Type* type) {
+type::Type* GeneratorImpl::BoolTypeToUint(type::Type* type) {
     auto* u32 = builder_.create<type::U32>();
     if (type->Is<type::Bool>()) {
         return u32;

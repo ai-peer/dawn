@@ -102,7 +102,7 @@ class GeneratorImpl : public TextGenerator {
     /// Handles generating a declared type
     /// @param ty the declared type to generate
     /// @returns true if the declared type was emitted
-    bool EmitTypeDecl(const type::Type* ty);
+    bool EmitTypeDecl(type::Type* ty);
     /// Handles an index accessor expression
     /// @param out the output of the expression stream
     /// @param expr the expression to emit
@@ -321,7 +321,7 @@ class GeneratorImpl : public TextGenerator {
     /// @param name_printed (optional) if not nullptr and an array was printed
     /// @returns true if the type is emitted
     bool EmitType(utils::StringStream& out,
-                  const type::Type* type,
+                  type::Type* type,
                   const std::string& name,
                   bool* name_printed = nullptr);
     /// Handles generating type and name
@@ -329,7 +329,7 @@ class GeneratorImpl : public TextGenerator {
     /// @param type the type to generate
     /// @param name the name to emit
     /// @returns true if the type is emitted
-    bool EmitTypeAndName(utils::StringStream& out, const type::Type* type, const std::string& name);
+    bool EmitTypeAndName(utils::StringStream& out, type::Type* type, const std::string& name);
     /// Handles generating a address space
     /// @param out the output of the type stream
     /// @param sc the address space to generate
@@ -340,7 +340,7 @@ class GeneratorImpl : public TextGenerator {
     /// @param buffer the text buffer that the type declaration will be written to
     /// @param str the struct to generate
     /// @returns true if the struct is emitted
-    bool EmitStructType(TextBuffer* buffer, const type::Struct* str);
+    bool EmitStructType(TextBuffer* buffer, type::Struct* str);
     /// Handles a unary op expression
     /// @param out the output of the expression stream
     /// @param expr the expression to emit
@@ -358,7 +358,7 @@ class GeneratorImpl : public TextGenerator {
     /// @param out the output of the expression stream
     /// @param type the type to emit the value for
     /// @returns true if the zero value was successfully emitted.
-    bool EmitZeroValue(utils::StringStream& out, const type::Type* type);
+    bool EmitZeroValue(utils::StringStream& out, type::Type* type);
 
     /// Handles generating a builtin name
     /// @param builtin the semantic info for the builtin
@@ -411,14 +411,14 @@ class GeneratorImpl : public TextGenerator {
 
     /// @returns the MSL packed type size and alignment in bytes for the given
     /// type.
-    SizeAndAlign MslPackedTypeSizeAndAlign(const type::Type* ty);
+    SizeAndAlign MslPackedTypeSizeAndAlign(type::Type* ty);
 
     std::function<bool()> emit_continuing_;
 
     /// Name of atomicCompareExchangeWeak() helper for the given pointer storage
     /// class and struct return type
     using ACEWKeyType =
-        utils::UnorderedKeyWrapper<std::tuple<builtin::AddressSpace, const type::Struct*>>;
+        utils::UnorderedKeyWrapper<std::tuple<builtin::AddressSpace, type::Struct*>>;
     std::unordered_map<ACEWKeyType, std::string> atomicCompareExchangeWeak_;
 
     /// Unique name of the 'TINT_INVARIANT' preprocessor define.
@@ -438,9 +438,9 @@ class GeneratorImpl : public TextGenerator {
     std::unordered_map<std::string, std::vector<uint32_t>> workgroup_allocations_;
 
     std::unordered_map<const sem::Builtin*, std::string> builtins_;
-    std::unordered_map<const type::Type*, std::string> unary_minus_funcs_;
+    std::unordered_map<type::Type*, std::string> unary_minus_funcs_;
     std::unordered_map<uint32_t, std::string> int_dot_funcs_;
-    std::unordered_set<const type::Struct*> emitted_structs_;
+    std::unordered_set<type::Struct*> emitted_structs_;
 };
 
 }  // namespace tint::writer::msl

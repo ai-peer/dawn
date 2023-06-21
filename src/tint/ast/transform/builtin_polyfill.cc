@@ -38,7 +38,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::BuiltinPolyfill::Config);
 namespace tint::ast::transform {
 
 /// BinaryOpSignature is tuple of a binary op, LHS type and RHS type
-using BinaryOpSignature = std::tuple<BinaryOp, const type::Type*, const type::Type*>;
+using BinaryOpSignature = std::tuple<BinaryOp, type::Type*, type::Type*>;
 
 /// PIMPL state for the transform
 struct BuiltinPolyfill::State {
@@ -154,7 +154,7 @@ struct BuiltinPolyfill::State {
     /// Polyfill builtins.
     utils::Hashmap<const sem::Builtin*, Symbol, 8> builtin_polyfills;
     /// Polyfill f32 conversion to i32 or u32 (or vectors of)
-    utils::Hashmap<const type::Type*, Symbol, 2> f32_conv_polyfills;
+    utils::Hashmap<type::Type*, Symbol, 2> f32_conv_polyfills;
     // Tracks whether the chromium_experimental_full_ptr_parameters extension has been enabled.
     bool has_full_ptr_params = false;
     /// True if the transform has made changes (i.e. the program needs cloning)
@@ -167,7 +167,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `acosh` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol acosh(const type::Type* ty) {
+    Symbol acosh(type::Type* ty) {
         auto name = b.Symbols().New("tint_acosh");
         uint32_t width = WidthOf(ty);
 
@@ -206,7 +206,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `asinh` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol asinh(const type::Type* ty) {
+    Symbol asinh(type::Type* ty) {
         auto name = b.Symbols().New("tint_sinh");
 
         // return log(x + sqrt(x*x + 1));
@@ -221,7 +221,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `atanh` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol atanh(const type::Type* ty) {
+    Symbol atanh(type::Type* ty) {
         auto name = b.Symbols().New("tint_atanh");
         uint32_t width = WidthOf(ty);
 
@@ -260,7 +260,7 @@ struct BuiltinPolyfill::State {
     /// (scalar or vector)
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol clampInteger(const type::Type* ty) {
+    Symbol clampInteger(type::Type* ty) {
         auto name = b.Symbols().New("tint_clamp");
 
         b.Func(name,
@@ -280,7 +280,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `countLeadingZeros` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol countLeadingZeros(const type::Type* ty) {
+    Symbol countLeadingZeros(type::Type* ty) {
         auto name = b.Symbols().New("tint_count_leading_zeros");
         uint32_t width = WidthOf(ty);
 
@@ -338,7 +338,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `countTrailingZeros` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol countTrailingZeros(const type::Type* ty) {
+    Symbol countTrailingZeros(type::Type* ty) {
         auto name = b.Symbols().New("tint_count_trailing_zeros");
         uint32_t width = WidthOf(ty);
 
@@ -397,7 +397,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `extractBits` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol extractBits(const type::Type* ty) {
+    Symbol extractBits(type::Type* ty) {
         auto name = b.Symbols().New("tint_extract_bits");
         uint32_t width = WidthOf(ty);
 
@@ -455,7 +455,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `firstLeadingBit` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol firstLeadingBit(const type::Type* ty) {
+    Symbol firstLeadingBit(type::Type* ty) {
         auto name = b.Symbols().New("tint_first_leading_bit");
         uint32_t width = WidthOf(ty);
 
@@ -527,7 +527,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `firstTrailingBit` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol firstTrailingBit(const type::Type* ty) {
+    Symbol firstTrailingBit(type::Type* ty) {
         auto name = b.Symbols().New("tint_first_trailing_bit");
         uint32_t width = WidthOf(ty);
 
@@ -586,7 +586,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `insertBits` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol insertBits(const type::Type* ty) {
+    Symbol insertBits(type::Type* ty) {
         auto name = b.Symbols().New("tint_insert_bits");
         uint32_t width = WidthOf(ty);
 
@@ -694,7 +694,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `reflect` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol reflect(const type::Type* ty) {
+    Symbol reflect(type::Type* ty) {
         auto name = b.Symbols().New("tint_reflect");
 
         // WGSL polyfill function:
@@ -721,7 +721,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `saturate` builtin
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol saturate(const type::Type* ty) {
+    Symbol saturate(type::Type* ty) {
         auto name = b.Symbols().New("tint_saturate");
         auto body = utils::Vector{
             b.Return(b.Call("clamp", "v", b.Call(T(ty), 0_a), b.Call(T(ty), 1_a))),
@@ -738,7 +738,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `sign` builtin when the element type is integer
     /// @param ty the parameter and return type for the function
     /// @return the polyfill function name
-    Symbol sign_int(const type::Type* ty) {
+    Symbol sign_int(type::Type* ty) {
         const uint32_t width = WidthOf(ty);
         auto zero = [&] { return ScalarOrVector(width, 0_a); };
 
@@ -787,7 +787,7 @@ struct BuiltinPolyfill::State {
     /// with scalar calls.
     /// @param vec the vector type
     /// @return the polyfill function name
-    Symbol quantizeToF16(const type::Vector* vec) {
+    Symbol quantizeToF16(type::Vector* vec) {
         auto name = b.Symbols().New("tint_quantizeToF16");
         utils::Vector<const Expression*, 4> args;
         for (uint32_t i = 0; i < vec->Width(); i++) {
@@ -807,7 +807,7 @@ struct BuiltinPolyfill::State {
     /// Builds the polyfill function for the `workgroupUniformLoad` builtin.
     /// @param type the type being loaded
     /// @return the polyfill function name
-    Symbol workgroupUniformLoad(const type::Type* type) {
+    Symbol workgroupUniformLoad(type::Type* type) {
         if (!has_full_ptr_params) {
             b.Enable(builtin::Extension::kChromiumExperimentalFullPtrParameters);
             has_full_ptr_params = true;
@@ -832,7 +832,7 @@ struct BuiltinPolyfill::State {
     /// @param source the type of the value being converted
     /// @param target the target conversion type
     /// @return the polyfill function name
-    Symbol ConvF32ToIU32(const type::Type* source, const type::Type* target) {
+    Symbol ConvF32ToIU32(type::Type* source, type::Type* target) {
         struct Limits {
             AFloat low_condition;
             AInt low_limit;
@@ -1039,10 +1039,10 @@ struct BuiltinPolyfill::State {
     }
 
     /// @returns the AST type for the given sem type
-    Type T(const type::Type* ty) { return CreateASTTypeFor(ctx, ty); }
+    Type T(type::Type* ty) { return CreateASTTypeFor(ctx, ty); }
 
     /// @returns 1 if `ty` is not a vector, otherwise the vector width
-    uint32_t WidthOf(const type::Type* ty) const {
+    uint32_t WidthOf(type::Type* ty) const {
         if (auto* v = ty->As<type::Vector>()) {
             return v->Width();
         }

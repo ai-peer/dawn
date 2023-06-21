@@ -27,11 +27,11 @@ SemHelper::SemHelper(ProgramBuilder* builder) : builder_(builder) {}
 
 SemHelper::~SemHelper() = default;
 
-std::string SemHelper::TypeNameOf(const type::Type* ty) const {
+std::string SemHelper::TypeNameOf(type::Type* ty) const {
     return RawTypeNameOf(ty->UnwrapRef());
 }
 
-std::string SemHelper::RawTypeNameOf(const type::Type* ty) const {
+std::string SemHelper::RawTypeNameOf(type::Type* ty) const {
     return ty->FriendlyName();
 }
 

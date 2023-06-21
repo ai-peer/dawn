@@ -14,6 +14,7 @@
 
 #include "src/tint/sem/info.h"
 
+#include "src/tint/ast/type_decl.h"
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/statement.h"

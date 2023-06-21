@@ -115,20 +115,20 @@ bool Program::IsValid() const {
     return is_valid_;
 }
 
-const type::Type* Program::TypeOf(const ast::Expression* expr) const {
+type::Type* Program::TypeOf(const ast::Expression* expr) const {
     return tint::Switch(
         Sem().Get(expr),  //
         [](const sem::ValueExpression* ty_expr) { return ty_expr->Type(); },
         [](const sem::TypeExpression* ty_expr) { return ty_expr->Type(); });
 }
 
-const type::Type* Program::TypeOf(const ast::Variable* var) const {
+type::Type* Program::TypeOf(const ast::Variable* var) const {
     auto* sem = Sem().Get(var);
     return sem ? sem->Type() : nullptr;
 }
 
-const type::Type* Program::TypeOf(const ast::TypeDecl* type_decl) const {
-    return Sem().Get(type_decl);
+type::Type* Program::TypeOf(const ast::TypeDecl* type_decl) const {
+    return const_cast<type::Type*>(Sem().Get(type_decl));
 }
 
 void Program::AssertNotMoved() const {

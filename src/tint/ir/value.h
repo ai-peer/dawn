@@ -57,7 +57,7 @@ class Value : public utils::Castable<Value> {
     ~Value() override;
 
     /// @returns the type of the value
-    virtual const type::Type* Type() { return nullptr; }
+    virtual type::Type* Type() { return nullptr; }
 
     /// Destroys the Value. Once called, the Value must not be used again.
     /// The Value must not be in use by any instruction.

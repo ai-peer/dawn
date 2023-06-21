@@ -155,22 +155,22 @@ bool IsTypeCompatible(AttributeWGSLType wgslType, VertexFormatType vertexFormatT
     }
 }
 
-AttributeWGSLType WGSLTypeOf(const type::Type* ty) {
+AttributeWGSLType WGSLTypeOf(type::Type* ty) {
     return Switch(
         ty,
-        [](const type::I32*) -> AttributeWGSLType {
+        [](type::I32*) -> AttributeWGSLType {
             return {BaseWGSLType::kI32, 1};
         },
-        [](const type::U32*) -> AttributeWGSLType {
+        [](type::U32*) -> AttributeWGSLType {
             return {BaseWGSLType::kU32, 1};
         },
-        [](const type::F32*) -> AttributeWGSLType {
+        [](type::F32*) -> AttributeWGSLType {
             return {BaseWGSLType::kF32, 1};
         },
-        [](const type::F16*) -> AttributeWGSLType {
+        [](type::F16*) -> AttributeWGSLType {
             return {BaseWGSLType::kF16, 1};
         },
-        [](const type::Vector* vec) -> AttributeWGSLType {
+        [](type::Vector* vec) -> AttributeWGSLType {
             return {WGSLTypeOf(vec->type()).base_type, vec->Width()};
         },
         [](Default) -> AttributeWGSLType {
@@ -278,7 +278,7 @@ struct VertexPulling::State {
         /// A builder that builds the expression that resolves to the (transformed) input location
         std::function<const Expression*()> expr;
         /// The store type of the location variable
-        const type::Type* type;
+        type::Type* type;
     };
 
     /// The source program

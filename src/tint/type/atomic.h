@@ -26,7 +26,7 @@ class Atomic final : public utils::Castable<Atomic, Type> {
   public:
     /// Constructor
     /// @param subtype the atomic type
-    explicit Atomic(const type::Type* subtype);
+    explicit Atomic(type::Type* subtype);
 
     /// Destructor
     ~Atomic() override;
@@ -36,7 +36,7 @@ class Atomic final : public utils::Castable<Atomic, Type> {
     bool Equals(const type::UniqueNode& other) const override;
 
     /// @returns the atomic type
-    const type::Type* Type() const { return subtype_; }
+    type::Type* Type() const { return subtype_; }
 
     /// @returns the name for this type that closely resembles how it would be
     /// declared in WGSL.
@@ -53,7 +53,7 @@ class Atomic final : public utils::Castable<Atomic, Type> {
     Atomic* Clone(CloneContext& ctx) const override;
 
   private:
-    type::Type const* const subtype_;
+    type::Type* const subtype_;
 };
 
 }  // namespace tint::type

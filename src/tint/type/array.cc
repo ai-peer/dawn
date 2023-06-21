@@ -54,7 +54,7 @@ const char* const Array::kErrExpectedConstantCount =
     "array size is an override-expression, when expected a constant-expression.\n"
     "Was the SubstituteOverride transform run?";
 
-Array::Array(const Type* element,
+Array::Array(Type* element,
              const ArrayCount* count,
              uint32_t align,
              uint32_t size,
@@ -105,8 +105,8 @@ uint32_t Array::Size() const {
     return size_;
 }
 
-TypeAndCount Array::Elements(const Type* /* type_if_invalid = nullptr */,
-                             uint32_t count_if_invalid /* = 0 */) const {
+TypeAndCount Array::Elements(Type* /* type_if_invalid = nullptr */,
+                             uint32_t count_if_invalid /* = 0 */) {
     uint32_t n = count_if_invalid;
     if (auto* const_count = count_->As<ConstantArrayCount>()) {
         n = const_count->value;
@@ -114,7 +114,7 @@ TypeAndCount Array::Elements(const Type* /* type_if_invalid = nullptr */,
     return {element_, n};
 }
 
-const Type* Array::Element(uint32_t index) const {
+Type* Array::Element(uint32_t index) {
     if (auto* count = count_->As<ConstantArrayCount>()) {
         return index < count->value ? element_ : nullptr;
     }

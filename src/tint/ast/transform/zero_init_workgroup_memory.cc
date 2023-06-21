@@ -290,8 +290,7 @@ struct ZeroInitWorkgroupMemory::State {
     /// @param ty the expression type
     /// @param get_expr a function that builds the AST nodes for the expression.
     /// @returns true on success, false on failure
-    [[nodiscard]] bool BuildZeroingStatements(const type::Type* ty,
-                                              const BuildZeroingExpr& get_expr) {
+    [[nodiscard]] bool BuildZeroingStatements(type::Type* ty, const BuildZeroingExpr& get_expr) {
         if (CanTriviallyZero(ty)) {
             auto var = get_expr(1u);
             if (!var) {
@@ -437,7 +436,7 @@ struct ZeroInitWorkgroupMemory::State {
     /// then the type needs to be initialized by decomposing the initialization into multiple
     /// sub-initializations.
     /// @param ty the type to inspect
-    bool CanTriviallyZero(const type::Type* ty) {
+    bool CanTriviallyZero(type::Type* ty) {
         if (ty->Is<type::Atomic>()) {
             return false;
         }
