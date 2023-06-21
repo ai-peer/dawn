@@ -771,6 +771,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1854a053_9b91689c",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-06-21T18:51:01Z",
+      "side": 1,
+      "message": "Oh I see, so this UNREACHABLE is truly unreachable now. I misunderstood. We were hitting this before when a platform didn\u0027t support the SNORM readback extension. I guess it\u0027s safe to leave in to check that it\u0027s truly unreachable.\n\n(It does also fire UNREACHABLE for compressed texture readback, which should be protected by validation now, IIRC.)",
+      "parentUuid": "55ed77bf_8ac6063b",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 79
+      },
+      "revId": "bd6a459231efeea98a4df8c41c6bbbab045b9c3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "897632b7_0cfa8460",
