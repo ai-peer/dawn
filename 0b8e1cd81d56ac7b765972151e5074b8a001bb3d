@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cc7c527_16867403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-21T21:20:45Z",
+      "side": 1,
+      "message": "This is the big one. I apologize for its size, but it\u0027s not really possible to make it smaller. Apart from third_party/gn/dxc/BUILD.gn, which is 2000 lines long, there are a few helper .gni files that it uses.\n\nIt\u0027s not of particular use, but in case you\u0027re wondering, the way I wrote this was using a fork of Dawn on my GitHub so that I could [push many small commits](https://github.com/amaiorano/dawn/commits/add-dxc).",
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
