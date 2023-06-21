@@ -16,6 +16,24 @@
       "message": "Rolling this CL into Chrome doesn\u0027t break it, nor will Chrome build DXC. For that, some changes will need to be made to Chrome (see https://chromium-review.googlesource.com/c/chromium/src/+/4634339),",
       "revId": "7af31cb2f444520773385a1a38ae6c9e8a942efa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a388712a_903169a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-21T21:32:57Z",
+      "side": 1,
+      "message": "Actually, see: https://chromium-review.googlesource.com/c/chromium/src/+/4633008\n\n(I didn\u0027t have the Gerrit hook that adds Change-Ids, and it seems the Chromium Gerrit doesn\u0027t check, nor does it add one automatically if one isn\u0027t present).",
+      "parentUuid": "daaec23a_e0cc4d31",
+      "revId": "7af31cb2f444520773385a1a38ae6c9e8a942efa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
