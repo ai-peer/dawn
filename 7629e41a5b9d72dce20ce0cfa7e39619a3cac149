@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a18f475_9dfa11fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-21T02:09:10Z",
+      "side": 1,
+      "message": "PTAL. This is the only one I could think of for `var`. If the result is set, then result will `ASSERT` on a `nullptr` type. If the result is provided then the `var` will `ASSERT` on a non-pointer type. So, they\u0027re covered by construction.\n\nThere is no way to add or remove results, and the `var` always adds a `result`.",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
