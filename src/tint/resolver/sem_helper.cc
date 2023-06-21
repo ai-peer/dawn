@@ -37,7 +37,7 @@ std::string SemHelper::RawTypeNameOf(type::Type* ty) const {
 
 type::Type* SemHelper::TypeOf(const ast::Expression* expr) const {
     auto* sem = GetVal(expr);
-    return sem ? const_cast<type::Type*>(sem->Type()) : nullptr;
+    return sem ? sem->Type() : nullptr;
 }
 
 std::string SemHelper::Describe(const sem::Expression* expr) const {

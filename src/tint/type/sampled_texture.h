@@ -38,7 +38,7 @@ class SampledTexture final : public utils::Castable<SampledTexture, Texture> {
     bool Equals(const UniqueNode& other) const override;
 
     /// @returns the subtype of the sampled texture
-    Type* type() const { return const_cast<Type*>(type_); }
+    Type* type() const { return type_; }
 
     /// @returns the name for this type that closely resembles how it would be
     /// declared in WGSL.

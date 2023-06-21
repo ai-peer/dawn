@@ -280,8 +280,7 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kUndefined,
-                                      const_cast<type::Type*>(ty), v->source)) {
+    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kUndefined, ty, v->source)) {
         AddNote("while instantiating 'let' " + v->name->symbol.Name(), v->source);
         return nullptr;
     }
@@ -342,8 +341,7 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kUndefined,
-                                      const_cast<type::Type*>(ty), v->source)) {
+    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kUndefined, ty, v->source)) {
         AddNote("while instantiating 'override' " + v->name->symbol.Name(), v->source);
         return nullptr;
     }
@@ -461,8 +459,7 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kUndefined,
-                                      const_cast<type::Type*>(ty), c->source)) {
+    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kUndefined, ty, c->source)) {
         AddNote("while instantiating 'const' " + c->name->symbol.Name(), c->source);
         return nullptr;
     }
@@ -775,8 +772,7 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param,
     if (auto* ptr = ty->As<type::Pointer>()) {
         // For MSL, we push module-scope variables into the entry point as pointer
         // parameters, so we also need to handle their store type.
-        if (!ApplyAddressSpaceUsageToType(
-                ptr->AddressSpace(), const_cast<type::Type*>(ptr->StoreType()), param->source)) {
+        if (!ApplyAddressSpaceUsageToType(ptr->AddressSpace(), ptr->StoreType(), param->source)) {
             add_note();
             return nullptr;
         }
@@ -995,7 +991,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
 
         func->AddParameter(p);
 
-        auto* p_ty = const_cast<type::Type*>(p->Type());
+        auto* p_ty = p->Type();
         if (auto* str = p_ty->As<type::Struct>()) {
             switch (decl->PipelineStage()) {
                 case ast::PipelineStage::kVertex:
@@ -1562,7 +1558,7 @@ type::Type* Resolver::Type(const ast::Expression* ast) {
     if (!type_expr) {
         return nullptr;
     }
-    return const_cast<type::Type*>(type_expr->Type());
+    return type_expr->Type();
 }
 
 sem::BuiltinEnumExpression<builtin::AddressSpace>* Resolver::AddressSpaceExpression(
@@ -2465,7 +2461,7 @@ type::Type* Resolver::BuiltinType(builtin::Builtin builtin_ty, const ast::Identi
         if (TINT_UNLIKELY(!ty)) {
             return nullptr;
         }
-        return vec(const_cast<type::Type*>(ty), n);
+        return vec(ty, n);
     };
     auto mat_t = [&](uint32_t num_columns, uint32_t num_rows) -> type::Matrix* {
         auto* tmpl_ident = templated_identifier(1);
@@ -2476,7 +2472,7 @@ type::Type* Resolver::BuiltinType(builtin::Builtin builtin_ty, const ast::Identi
         if (TINT_UNLIKELY(!ty)) {
             return nullptr;
         }
-        return mat(const_cast<type::Type*>(ty), num_columns, num_rows);
+        return mat(ty, num_columns, num_rows);
     };
     auto array = [&]() -> type::Array* {
         utils::UniqueVector<const sem::GlobalVariable*, 4> transitively_referenced_overrides;
@@ -2563,7 +2559,7 @@ type::Type* Resolver::BuiltinType(builtin::Builtin builtin_ty, const ast::Identi
         if (TINT_UNLIKELY(!store_ty_expr)) {
             return nullptr;
         }
-        auto* store_ty = const_cast<type::Type*>(store_ty_expr->Type());
+        auto* store_ty = store_ty_expr->Type();
 
         auto access = DefaultAccessForAddressSpace(address_space);
         if (tmpl_ident->arguments.Length() > 2) {
@@ -4260,7 +4256,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
             }
         }
 
-        const_cast<sem::StructMember*>(sem_members[i])->SetStruct(out);
+        sem_members[i]->SetStruct(out);
     }
 
     auto stage = current_function_ ? current_function_->Declaration()->PipelineStage()
@@ -4586,7 +4582,7 @@ sem::Statement* Resolver::IncrementDecrementStatement(
 bool Resolver::ApplyAddressSpaceUsageToType(builtin::AddressSpace address_space,
                                             type::Type* ty,
                                             const Source& usage) {
-    ty = const_cast<type::Type*>(ty->UnwrapRef());
+    ty = ty->UnwrapRef();
 
     if (auto* str = ty->As<sem::Struct>()) {
         if (str->AddressSpaceUsage().count(address_space)) {
@@ -4598,8 +4594,7 @@ bool Resolver::ApplyAddressSpaceUsageToType(builtin::AddressSpace address_space,
         for (auto* member : str->Members()) {
             auto decl = member->Declaration();
             if (decl &&
-                !ApplyAddressSpaceUsageToType(
-                    address_space, const_cast<type::Type*>(member->Type()), decl->type->source)) {
+                !ApplyAddressSpaceUsageToType(address_space, member->Type(), decl->type->source)) {
                 utils::StringStream err;
                 err << "while analyzing structure member " << sem_.TypeNameOf(str) << "."
                     << member->Name().Name();
@@ -4626,8 +4621,7 @@ bool Resolver::ApplyAddressSpaceUsageToType(builtin::AddressSpace address_space,
                 return false;
             }
         }
-        return ApplyAddressSpaceUsageToType(address_space, const_cast<type::Type*>(arr->ElemType()),
-                                            usage);
+        return ApplyAddressSpaceUsageToType(address_space, arr->ElemType(), usage);
     }
 
     if (builtin::IsHostShareable(address_space) && !validator_.IsHostShareable(ty)) {
