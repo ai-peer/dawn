@@ -34,6 +34,24 @@
       "parentUuid": "6d82da26_585960b2",
       "revId": "552d1f33ee5cf5498fe6a558ffc2e3d9ef86a9ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caaf4be2_1d113629",
+        "filename": "src/tint/ir/value.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-21T14:16:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ccb279e3_6dbe79b6",
+      "revId": "552d1f33ee5cf5498fe6a558ffc2e3d9ef86a9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
