@@ -461,6 +461,24 @@
       "parentUuid": "caf88710_b416141f",
       "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e64ab8_3a7762c6",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0274d63e_13e680b8",
+      "revId": "e323e8865f797fef3af2500774e4215ce95cdf04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

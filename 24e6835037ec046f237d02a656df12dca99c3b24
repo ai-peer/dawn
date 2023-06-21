@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "396cc015_014300e5",
+        "filename": "dawn.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120c91d8_26294734",
+      "range": {
+        "startLine": 184,
+        "startChar": 48,
+        "endLine": 184,
+        "endChar": 71
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4726ca37_8a590657",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-06-20T19:08:41Z",
       "side": 1,
       "message": "it may be possible to move all device-level defaults to adapter-level defaults so we can get some simplification by deleting SetupBackendDeviceToggles.\n\ncould be a follow-up though",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 0
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c51512_7c958340",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "This will change the inheritance logic. That would work if no device-level default have dependency to other device-level toggles state. Let\u0027s leave this as a follow up, and I will check them.",
+      "parentUuid": "4726ca37_8a590657",
       "range": {
         "startLine": 232,
         "startChar": 4,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db015b57_a982b860",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "396d22fd_fc16d47e",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 47
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0637f416_3e2239da",
@@ -117,6 +189,30 @@
       "writtenOn": "2023-06-20T19:08:41Z",
       "side": 1,
       "message": "pass backend type in the adapter options, instead of looping through all",
+      "range": {
+        "startLine": 221,
+        "startChar": 12,
+        "endLine": 232,
+        "endChar": 50
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "653c3375_dcefd2b9",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0637f416_3e2239da",
       "range": {
         "startLine": 221,
         "startChar": 12,
@@ -150,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc2c731_7d558c07",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a49f164f_4156262d",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 47
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05ddfd0c_626f03c6",
@@ -163,6 +283,30 @@
       "writtenOn": "2023-06-20T19:08:41Z",
       "side": 1,
       "message": "pass backend type in the adapter options, instead of looping through all",
+      "range": {
+        "startLine": 382,
+        "startChar": 4,
+        "endLine": 389,
+        "endChar": 5
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7524ee99_77f82d0d",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05ddfd0c_626f03c6",
       "range": {
         "startLine": 382,
         "startChar": 4,
@@ -196,6 +340,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "037a3bb2_cf1cf588",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aac5ffed_7ca0d8d6",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 47
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d78a6c98_7abe4244",
@@ -209,6 +377,30 @@
       "writtenOn": "2023-06-20T19:08:41Z",
       "side": 1,
       "message": "pass backend type in the adapter options, instead of looping through all",
+      "range": {
+        "startLine": 434,
+        "startChar": 6,
+        "endLine": 442,
+        "endChar": 5
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01c7d1e5_3d028ec5",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d78a6c98_7abe4244",
       "range": {
         "startLine": 434,
         "startChar": 6,
@@ -242,6 +434,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b2019e1_2f9e7a23",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d61d8153_bd6e8320",
+      "range": {
+        "startLine": 560,
+        "startChar": 0,
+        "endLine": 560,
+        "endChar": 47
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5af938a_cb5ce8d1",
@@ -255,6 +471,30 @@
       "writtenOn": "2023-06-20T19:08:41Z",
       "side": 1,
       "message": "pass backend type in the adapter options, instead of looping through all",
+      "range": {
+        "startLine": 565,
+        "startChar": 4,
+        "endLine": 574,
+        "endChar": 38
+      },
+      "revId": "24e6835037ec046f237d02a656df12dca99c3b24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93a8a305_bdd6898b",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5af938a_cb5ce8d1",
       "range": {
         "startLine": 565,
         "startChar": 4,

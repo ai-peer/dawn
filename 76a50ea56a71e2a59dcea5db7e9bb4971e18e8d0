@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97dbe817_81f2e696",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "356d86a7_f03122aa",
+      "revId": "76a50ea56a71e2a59dcea5db7e9bb4971e18e8d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b44eecf_96924913",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-19T11:19:45Z",
       "side": 1,
       "message": "[3]: Added the tests for device overriding instance toggle (`AllowUnsafeAPIs`) and adapter toggle (`UseDXC`) here and below.",
+      "revId": "76a50ea56a71e2a59dcea5db7e9bb4971e18e8d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a02ca7a_ce9d6beb",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-06-21T04:00:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5b44eecf_96924913",
       "revId": "76a50ea56a71e2a59dcea5db7e9bb4971e18e8d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
