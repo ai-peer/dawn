@@ -178,18 +178,13 @@ TEST_F(IR_BlockDecoratedStructsTest, RuntimeArray_InStruct) {
     mod.functions.Push(func);
 
     auto* expect = R"(
-MyStruct = struct @align(4) {
-  i:i32 @offset(0)
-  arr:array<i32> @offset(4)
-}
-
-tint_symbol = struct @align(4), @block {
+MyStruct = struct @align(4), @block {
   i:i32 @offset(0)
   arr:array<i32> @offset(4)
 }
 
 %b1 = block {  # root
-  %1:ptr<storage, tint_symbol, read_write> = var @binding_point(0, 0)
+  %1:ptr<storage, MyStruct, read_write> = var @binding_point(0, 0)
 }
 
 %foo = func():void -> %b2 {

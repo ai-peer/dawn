@@ -58,39 +58,26 @@ void BlockDecoratedStructs::Run(Module* ir, const DataMap&, DataMap&) const {
         auto* ptr = var->Result()->Type()->As<type::Pointer>();
         auto* store_ty = ptr->StoreType();
 
-        bool wrapped = false;
-        utils::Vector<type::StructMember*, 4> members;
-
-        // Build the member list for the block-decorated structure.
         if (auto* str = store_ty->As<type::Struct>(); str && !str->HasFixedFootprint()) {
             // We know the original struct will only ever be used as the store type of a buffer, so
-            // just redeclare it as a block-decorated struct.
-            // TODO(jrprice): When types are mutable, we can just set the block flag directly.
-            type::CloneContext clone_context{
-                /* src */ {&ir->symbols},
-                /* dst */ {&ir->symbols, &ir->Types()},
-            };
-            for (auto* member : str->Members()) {
-                members.Push(member->Clone(clone_context));
-            }
-        } else {
-            // The original struct might be used in other places, so create a new block-decorated
-            // struct that wraps the original struct.
-            members.Push(ir->Types().Get<type::StructMember>(
-                /* name */ ir->symbols.New(),
-                /* type */ store_ty,
-                /* index */ 0u,
-                /* offset */ 0u,
-                /* align */ store_ty->Align(),
-                /* size */ store_ty->Size(),
-                /* attributes */ type::StructMemberAttributes{}));
-            wrapped = true;
+            // just mark it as a block-decorated struct.
+            str->SetStructFlag(type::kBlock);
+            continue;
         }
 
-        // Create the block-decorated struct.
+        // The original struct might be used in other places, so create a new block-decorated struct
+        // that wraps the original struct.
+        auto* member = ir->Types().Get<type::StructMember>(
+            /* name */ ir->symbols.New(),
+            /* type */ store_ty,
+            /* index */ 0u,
+            /* offset */ 0u,
+            /* align */ store_ty->Align(),
+            /* size */ store_ty->Size(),
+            /* attributes */ type::StructMemberAttributes{});
         auto* block_struct = ir->Types().Get<type::Struct>(
             /* name */ ir->symbols.New(),
-            /* members */ members,
+            /* members */ utils::Vector{member},
             /* align */ store_ty->Align(),
             /* size */ utils::RoundUp(store_ty->Align(), store_ty->Size()),
             /* size_no_padding */ store_ty->Size());
@@ -102,16 +89,11 @@ void BlockDecoratedStructs::Run(Module* ir, const DataMap&, DataMap&) const {
         new_var->SetBindingPoint(var->BindingPoint()->group, var->BindingPoint()->binding);
         var->ReplaceWith(new_var);
 
-        // Replace uses of the old variable.
+        // Replace all uses of the old variable with a member accessor on the new variable.
         var->Result()->ReplaceAllUsesWith([&](Usage use) -> Value* {
-            if (wrapped) {
-                // The structure has been wrapped, so replace all uses of the old variable with a
-                // member accessor on the new variable.
-                auto* access = builder.Access(var->Result()->Type(), new_var, 0_u);
-                access->InsertBefore(use.instruction);
-                return access->Result();
-            }
-            return new_var->Result();
+            auto* access = builder.Access(var->Result()->Type(), new_var, 0_u);
+            access->InsertBefore(use.instruction);
+            return access->Result();
         });
     }
 }
