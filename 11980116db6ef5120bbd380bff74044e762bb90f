@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5738a0af_1e666f66",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T15:45:34Z",
+      "side": 1,
+      "message": "Jie, for now, let\u0027s do what you suggested and pass compatibility mode into utils::TextureFormatSupportsStorageTexture.\n\nWe can expand the list as needed.\n\nit appears only R32* formats are supported.\nThough, in D3D11, it looks like it could be emulated\n\nSee: https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm#5.3.9.5%20Limitations%20on%20Typed%20UAVs",
+      "parentUuid": "689cd683_47e73047",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60286ea8_13b48b2c",
         "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 1
