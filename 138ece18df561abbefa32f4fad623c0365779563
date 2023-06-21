@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7bbc304_b90d3d2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-21T12:02:39Z",
+      "side": 1,
+      "message": "It looks we don\u0027t need to skip any tests now thanks to Yuly\u0027s fix. Shall we have a try to turn the bots on?",
+      "revId": "138ece18df561abbefa32f4fad623c0365779563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
