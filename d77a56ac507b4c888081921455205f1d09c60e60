@@ -33,6 +33,23 @@
       "message": "🟨 warning: no results found for \u0027webgpu:api,validation,gpu_external_texture_expiration:import_and_use_in_different_task:sourceType\u003d\"VideoFrame\"\u0027 with tags [chromeos]",
       "revId": "d77a56ac507b4c888081921455205f1d09c60e60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5587a71d_d8b76505",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-21T12:55:01Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,gpu_external_texture_expiration:import_and_use_in_different_task:sourceType\u003d\"VideoFrame\"\u0027 with tags [chromeos]",
+      "revId": "d77a56ac507b4c888081921455205f1d09c60e60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
