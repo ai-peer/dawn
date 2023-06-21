@@ -16,6 +16,24 @@
       "message": "It looks we don\u0027t need to skip any tests now thanks to Yuly\u0027s fix. Shall we have a try to turn the bots on?",
       "revId": "138ece18df561abbefa32f4fad623c0365779563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9b5a9b2_c638c00b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-21T12:28:57Z",
+      "side": 1,
+      "message": "Turn which bots on? But if Yuly\u0027s CL fixes it then we should add the tests (thanks Yuly!)",
+      "parentUuid": "d7bbc304_b90d3d2a",
+      "revId": "138ece18df561abbefa32f4fad623c0365779563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
