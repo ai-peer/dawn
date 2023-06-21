@@ -85,6 +85,12 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
             DAWN_TRY(ValidateBufferBindingType(buffer.type));
         }
 
+        if (buffer.type == wgpu::BufferBindingType::Storage) {
+            DAWN_INVALID_IF(entry.visibility == wgpu::ShaderStage::Vertex),
+                            "Read-write storage buffer bindings cannot be used with a visibility "
+                            "of %s. Maybe use read-only storage buffer instead", entry.visibility);
+        }
+
         if (buffer.type == wgpu::BufferBindingType::Storage ||
             buffer.type == kInternalStorageBufferBinding) {
             allowedStages &= ~wgpu::ShaderStage::Vertex;
