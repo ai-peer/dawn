@@ -16,6 +16,24 @@
       "message": "It\u0027s weird, I would assume the device to be locked during initialization. But maybe not?",
       "revId": "90efdacbc89dafba5c407133fa7dc47b97a3a910",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04277ffa_499ed62f",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-21T05:18:16Z",
+      "side": 1,
+      "message": "Currently it seems we don\u0027t lock in frontend for device creation\u0026initialization. It\u0027s more of backend specific if needed.",
+      "parentUuid": "5a1b63c4_447f24d4",
+      "revId": "90efdacbc89dafba5c407133fa7dc47b97a3a910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

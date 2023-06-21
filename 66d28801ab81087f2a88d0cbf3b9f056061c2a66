@@ -161,6 +161,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e7ccceb_4f335801",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-21T05:18:16Z",
+      "side": 1,
+      "message": "Music to my ears. Thanks Yuly. It has worked.",
+      "parentUuid": "0b1dc3f8_ee70afc3",
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1197d9dd_2768a64b",
@@ -249,6 +267,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7863d94b_35d2aa24",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-21T05:18:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f9b33ba0_d6f3fc0d",
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "408588b4_6befa122",
@@ -262,6 +298,30 @@
       "writtenOn": "2023-06-16T12:18:42Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 45
+      },
+      "revId": "66d28801ab81087f2a88d0cbf3b9f056061c2a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "913828ad_4f036c04",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-21T05:18:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "408588b4_6befa122",
       "range": {
         "startLine": 75,
         "startChar": 1,
