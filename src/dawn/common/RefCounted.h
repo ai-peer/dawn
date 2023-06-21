@@ -21,6 +21,10 @@
 
 namespace dawn {
 
+namespace detail {
+class RefCountedData;
+}  // namespace detail
+
 class RefCount {
   public:
     // Create a refcount with a payload. The refcount starts initially at one.
@@ -87,6 +91,9 @@ class RefCounted {
     void APIRelease() { ReleaseAndLockBeforeDestroy(); }
 
   protected:
+    // Friend class is needed to access the RefCount to TryIncrement.
+    friend class detail::RefCountedData;
+
     virtual ~RefCounted();
 
     void ReleaseAndLockBeforeDestroy();
