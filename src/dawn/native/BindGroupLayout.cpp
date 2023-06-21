@@ -69,12 +69,9 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
     DAWN_TRY(ValidateShaderStage(entry.visibility));
 
     int bindingMemberCount = 0;
-    BindingInfoType bindingType;
-    wgpu::ShaderStage allowedStages = kAllStages;
 
     if (entry.buffer.type != wgpu::BufferBindingType::Undefined) {
         bindingMemberCount++;
-        bindingType = BindingInfoType::Buffer;
         const BufferBindingLayout& buffer = entry.buffer;
 
         // The kInternalStorageBufferBinding is used internally and not a value
@@ -85,21 +82,21 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
             DAWN_TRY(ValidateBufferBindingType(buffer.type));
         }
 
-        if (buffer.type == wgpu::BufferBindingType::Storage ||
-            buffer.type == kInternalStorageBufferBinding) {
-            allowedStages &= ~wgpu::ShaderStage::Vertex;
+        if (buffer.type == wgpu::BufferBindingType::Storage) {
+            DAWN_INVALID_IF(entry.visibility == wgpu::ShaderStage::Vertex,
+                            "Read-write storage buffer bindings cannot be used with a visibility "
+                            "of %s. Maybe use read-only storage buffer instead.",
+                            entry.visibility);
         }
     }
 
     if (entry.sampler.type != wgpu::SamplerBindingType::Undefined) {
         bindingMemberCount++;
-        bindingType = BindingInfoType::Sampler;
         DAWN_TRY(ValidateSamplerBindingType(entry.sampler.type));
     }
 
     if (entry.texture.sampleType != wgpu::TextureSampleType::Undefined) {
         bindingMemberCount++;
-        bindingType = BindingInfoType::Texture;
         const TextureBindingLayout& texture = entry.texture;
         DAWN_TRY(ValidateTextureSampleType(texture.sampleType));
 
@@ -121,7 +118,6 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
 
     if (entry.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
         bindingMemberCount++;
-        bindingType = BindingInfoType::StorageTexture;
         const StorageTextureBindingLayout& storageTexture = entry.storageTexture;
         DAWN_TRY(ValidateStorageTextureAccess(storageTexture.access));
         DAWN_TRY(ValidateStorageTextureFormat(device, storageTexture.format));
@@ -133,7 +129,10 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
         }
 
         if (storageTexture.access == wgpu::StorageTextureAccess::WriteOnly) {
-            allowedStages &= ~wgpu::ShaderStage::Vertex;
+            DAWN_INVALID_IF(entry.visibility == wgpu::ShaderStage::Vertex,
+                            "Write-only storage texture bindings cannot be used with "
+                            "a visibility of %s.",
+                            entry.visibility);
         }
     }
 
@@ -141,7 +140,6 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
     FindInChain(entry.nextInChain, &externalTextureBindingLayout);
     if (externalTextureBindingLayout != nullptr) {
         bindingMemberCount++;
-        bindingType = BindingInfoType::ExternalTexture;
     }
 
     DAWN_INVALID_IF(bindingMemberCount == 0,
@@ -151,10 +149,6 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
     DAWN_INVALID_IF(bindingMemberCount != 1,
                     "BindGroupLayoutEntry had more than one of buffer, sampler, texture, "
                     "storageTexture, or externalTexture set");
-
-    DAWN_INVALID_IF(!IsSubset(entry.visibility, allowedStages),
-                    "%s bindings cannot be used with a visibility of %s. Only %s are allowed.",
-                    bindingType, entry.visibility, allowedStages);
 
     return {};
 }
