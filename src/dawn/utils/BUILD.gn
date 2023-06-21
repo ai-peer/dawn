@@ -32,6 +32,8 @@ static_library("utils") {
     "ComboRenderPipelineDescriptor.cpp",
     "ComboRenderPipelineDescriptor.h",
     "PlatformDebugLogger.h",
+    "Signal.cpp",
+    "Signal.h",
     "SystemUtils.cpp",
     "SystemUtils.h",
     "TerribleCommandBuffer.cpp",

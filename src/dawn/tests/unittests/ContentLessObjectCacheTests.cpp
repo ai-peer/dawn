@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "dawn/common/ContentLessObjectCache.h"
+#include "dawn/utils/Signal.h"
 #include "gtest/gtest.h"
 
 namespace dawn {
@@ -27,6 +28,7 @@ namespace {
 
 using ::testing::Test;
 using ::testing::Types;
+using utils::Signal;
 
 class BlueprintT {
   public:
@@ -153,26 +155,6 @@ TYPED_TEST(ContentLessObjectCacheTest, EraseDuplicate) {
     cache.Erase(object2.Get());
     EXPECT_FALSE(cache.Empty());
 }
-
-// Helper struct that basically acts as a semaphore to allow for flow control in multiple threads.
-struct Signal {
-    std::mutex mutex;
-    std::condition_variable cv;
-    bool signaled = false;
-
-    void Fire() {
-        std::lock_guard<std::mutex> lock(mutex);
-        signaled = true;
-        cv.notify_one();
-    }
-    void Wait() {
-        std::unique_lock<std::mutex> lock(mutex);
-        while (!signaled) {
-            cv.wait(lock);
-        }
-        signaled = false;
-    }
-};
 
 // Inserting and finding elements should respect the results from the insert call.
 TYPED_TEST(ContentLessObjectCacheTest, InsertingAndFinding) {
