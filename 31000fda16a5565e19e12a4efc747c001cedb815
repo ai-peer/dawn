@@ -73,6 +73,30 @@
       },
       "revId": "31000fda16a5565e19e12a4efc747c001cedb815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4711cd_e0a10fa5",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-21T11:50:44Z",
+      "side": 1,
+      "message": "If only we had some sort of `Undef` instruction. Otherwise ... no, it\u0027s a `nullptr` so there is nothing to attach too.",
+      "parentUuid": "2e943023_f5bd7085",
+      "range": {
+        "startLine": 542,
+        "startChar": 2,
+        "endLine": 542,
+        "endChar": 7
+      },
+      "revId": "31000fda16a5565e19e12a4efc747c001cedb815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
