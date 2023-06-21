@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e667e5f2_caf2f68a",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-21T10:56:20Z",
+      "side": 1,
+      "message": "Like with var, could check:\n- Results().Length() \u003d\u003d 1\n- Result()-\u003eAlive() \u003d\u003d true\n- Result()-\u003eSource() \u003d\u003d b\n- Operands().Length() \u003d\u003d 2u\n- LHS()-\u003eAlive()\n- RHS()-\u003eAlive()\n- LHS()-\u003eUsages() contains {b, 0u}\n- RHS()-\u003eUsages() contains {b, 1u}\n\nCould validate that types all match a valid overload of the binary op using the intrinsic table too?\n\nAnd like I mentioned with var, eventually the same generic checking that the LHS and RHS are \"in scope\", and that binary instruction is Alive().",
+      "revId": "31000fda16a5565e19e12a4efc747c001cedb815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b15f472_53350cb3",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 1
