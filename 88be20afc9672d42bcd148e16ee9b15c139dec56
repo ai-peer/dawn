@@ -33,6 +33,24 @@
       "message": "this was already assigned on 682?",
       "revId": "88be20afc9672d42bcd148e16ee9b15c139dec56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e847466b_1e9ea554",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-21T19:24:11Z",
+      "side": 1,
+      "message": "Good spot. Done.",
+      "parentUuid": "1f67798f_41253d35",
+      "revId": "88be20afc9672d42bcd148e16ee9b15c139dec56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
