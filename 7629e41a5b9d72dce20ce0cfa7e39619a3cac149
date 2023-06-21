@@ -50,6 +50,23 @@
       "message": "This is highlighting that this API is a bit fragile.\nWhat do you think about changing `Builder::With()` to return a new `BlockBuilder` which holds this method, and all the others we use `Append` with? `BlockBuilder` could then have an LLVM-style `SetInsertionPoint(Block*)` and `SetInsertionPoint(Instruction* after)` to repoint where new instructions are placed.\n\nWould require maintaining a whole mirror of the methods. :/",
       "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ea9ccb_fb002b03",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-21T10:51:18Z",
+      "side": 1,
+      "message": "We could also check that:\n- there is only one result\n- Result()-\u003eAlive() \u003d\u003d true\n- Result()-\u003eSource() \u003d\u003d var\n- Result()-\u003eType() is a pointer\n- var-\u003eOperands().Length() \u003d\u003d 1\n\nIf the var has an non-null initializer:\n- Initializer()-\u003eAlive() \u003d\u003d true\n- Initializer()-\u003eType() \u003d\u003d Result()-\u003eType()-\u003eUnwrapPtr()\n- Initializer()-\u003eUsages() contains {var, 0u}\n\nPresumably we\u0027ll eventually also have generic code to validate that each instruction itself is `Alive()` and, that all of their operands are \"in scope\", but that doesn\u0027t have to happen here.",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
