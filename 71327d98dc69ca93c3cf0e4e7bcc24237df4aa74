@@ -16,6 +16,23 @@
       "message": "lgtm",
       "revId": "71327d98dc69ca93c3cf0e4e7bcc24237df4aa74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d46abae_d31bd6c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-21T23:08:15Z",
+      "side": 1,
+      "message": "could you give it CR+2?",
+      "revId": "71327d98dc69ca93c3cf0e4e7bcc24237df4aa74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
