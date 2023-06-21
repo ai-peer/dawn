@@ -34,6 +34,24 @@
       "parentUuid": "d7bbc304_b90d3d2a",
       "revId": "138ece18df561abbefa32f4fad623c0365779563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc2a17bc_06904604",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-21T12:39:44Z",
+      "side": 1,
+      "message": "All currently enabled dawn_end2end_tests on Nvidia can pass on trybots now according the latest PS of this CL. Shall we land it? Hopefully it won\u0027t break FYI bots.",
+      "parentUuid": "a9b5a9b2_c638c00b",
+      "revId": "138ece18df561abbefa32f4fad623c0365779563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
