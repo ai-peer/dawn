@@ -142,6 +142,24 @@
       "parentUuid": "21aba346_faa09515",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ebe70e_946a81ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-21T13:06:33Z",
+      "side": 1,
+      "message": "Sorry for being dense CMake-wise, I\u0027m still trying to understand how this works and would be used: because of Dawn\u0027s C++ API (webgpu_cpp.h but also DawnNative.h), how convenient would pre-builts generated with CMake install be? It seems like you\u0027d need to use the exact same compiler and flags etc to get the ABI to be compatible? Is that ok for your use cases?\n\nAlso if we need to add install targets, then we should add minimal ones, so just webgpu_dawn and the include/dawn headers?",
+      "parentUuid": "9d1bd39d_64442ae4",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
