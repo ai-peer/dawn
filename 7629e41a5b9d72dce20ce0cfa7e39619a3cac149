@@ -54,6 +54,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afe687ce_b7e6ce9f",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-21T11:49:04Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s worth it at this point. Seems like an added complexity for no benefit yet?",
+      "parentUuid": "f68114cf_bc218ccd",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97db8b83_6a8a50ec",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-21T11:49:04Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "2f6acb13_66024e60",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7ea9ccb_fb002b03",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2023-06-21T10:51:18Z",
       "side": 1,
       "message": "We could also check that:\n- there is only one result\n- Result()-\u003eAlive() \u003d\u003d true\n- Result()-\u003eSource() \u003d\u003d var\n- Result()-\u003eType() is a pointer\n- var-\u003eOperands().Length() \u003d\u003d 1\n\nIf the var has an non-null initializer:\n- Initializer()-\u003eAlive() \u003d\u003d true\n- Initializer()-\u003eType() \u003d\u003d Result()-\u003eType()-\u003eUnwrapPtr()\n- Initializer()-\u003eUsages() contains {var, 0u}\n\nPresumably we\u0027ll eventually also have generic code to validate that each instruction itself is `Alive()` and, that all of their operands are \"in scope\", but that doesn\u0027t have to happen here.",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894d7112_b42d2d6c",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-21T11:49:04Z",
+      "side": 1,
+      "message": "For `Result()-\u003eType()` is a pointer, currently that\u0027s required by the constructor, so I didn\u0027t check it. Would we prefer to check _everything_ regardless of what the constructor and setters validate?",
+      "parentUuid": "c7ea9ccb_fb002b03",
       "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
