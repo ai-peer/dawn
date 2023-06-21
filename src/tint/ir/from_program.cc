@@ -701,8 +701,16 @@ class Impl {
                 SetTerminator(builder_.ExitLoop(loop_inst));
             }
 
-            if (NeedTerminator()) {
-                SetTerminator(builder_.Continue(loop_inst));
+            {
+                TINT_SCOPED_ASSIGNMENT(current_block_, loop_inst->Body());
+
+                EmitStatements(stmt->body->statements);
+
+                // The current block didn't `break`, `return` or `continue`, go to the continuing
+                // block.
+                if (NeedTerminator()) {
+                    SetTerminator(builder_.Continue(loop_inst));
+                }
             }
         }
     }
