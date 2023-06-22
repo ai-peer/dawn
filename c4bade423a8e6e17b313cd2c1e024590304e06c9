@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b43546af_5d90f8aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T18:17:43Z",
+      "side": 1,
+      "message": "Looks great! Only a couple of nits.",
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "de8cf10f_c05624f3",
         "filename": "src/tint/resolver/attribute_validation_test.cc",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "writtenOn": "2023-06-22T18:02:46Z",
       "side": 1,
       "message": "I made the unusual choice of adding this function to enable the needed extension instead of enabling via a constructor or SetUp() because there are future tests that inherit from TestWithParams that do not use params (which are not allowed to call GetParams()). I would need to change all those tests to inherit from ResolverTest instead if I wanted to enable the extension in the test constructor.",
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5edc41f2_afe30ca9",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T18:17:43Z",
+      "side": 1,
+      "message": "This is fine.",
+      "parentUuid": "de8cf10f_c05624f3",
       "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -48,6 +83,70 @@
       "writtenOn": "2023-06-22T18:04:04Z",
       "side": 1,
       "message": "Accidental add. Will Fix.",
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f01803_bd8367e0",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2048,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T18:17:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ba9d73d0_935899c5",
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c424c0_84b0d9ee",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T18:17:43Z",
+      "side": 1,
+      "message": "Can use `Is\u003cast::LocationAttribute\u003e(pipeline_io_attribute)`, which also handled nullptr.",
+      "range": {
+        "startLine": 1186,
+        "startChar": 21,
+        "endLine": 1186,
+        "endChar": 72
+      },
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9595b0bc_22a95e3c",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2212,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T18:17:43Z",
+      "side": 1,
+      "message": "Please use `0xffffffff` or use `std::numeric_limits\u003cuint32_t\u003e::max()`. Some compilers might get grumpy about this.",
+      "range": {
+        "startLine": 2212,
+        "startChar": 29,
+        "endLine": 2212,
+        "endChar": 31
+      },
       "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
