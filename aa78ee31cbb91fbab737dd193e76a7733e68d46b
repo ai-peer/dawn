@@ -160,6 +160,24 @@
       "parentUuid": "9d1bd39d_64442ae4",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3b2c85_e22fe180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003701
+      },
+      "writtenOn": "2023-06-22T11:50:24Z",
+      "side": 1,
+      "message": "Yes, we have all this stuff behind a package manager, so projects would only consume packages with compatible build flags. Our package manager also generates some CMake glue which sets up paths to headers and compiled libraries.\n\nAs for install targets, at least for our usecase just a minimal target for headers would be enough (so that we know for sure we\u0027re not including private APIs)",
+      "parentUuid": "49ebe70e_946a81ad",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
