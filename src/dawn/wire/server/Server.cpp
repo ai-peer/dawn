@@ -43,17 +43,8 @@ Server::~Server() {
     DestroyAllObjects(mProcs);
 }
 
-WireResult Server::InjectTexture(WGPUTexture texture,
-                                 uint32_t id,
-                                 uint32_t generation,
-                                 uint32_t deviceId,
-                                 uint32_t deviceGeneration) {
+WireResult Server::InjectTexture(WGPUTexture texture, uint32_t id, uint32_t generation) {
     ASSERT(texture != nullptr);
-    Known<WGPUDevice> device;
-    WIRE_TRY(DeviceObjects().Get(deviceId, &device));
-    if (device->generation != deviceGeneration) {
-        return WireResult::FatalError;
-    }
 
     Known<WGPUTexture> data;
     WIRE_TRY(TextureObjects().Allocate(&data, ObjectHandle{id, generation}));
@@ -69,17 +60,8 @@ WireResult Server::InjectTexture(WGPUTexture texture,
     return WireResult::Success;
 }
 
-WireResult Server::InjectSwapChain(WGPUSwapChain swapchain,
-                                   uint32_t id,
-                                   uint32_t generation,
-                                   uint32_t deviceId,
-                                   uint32_t deviceGeneration) {
+WireResult Server::InjectSwapChain(WGPUSwapChain swapchain, uint32_t id, uint32_t generation) {
     ASSERT(swapchain != nullptr);
-    Known<WGPUDevice> device;
-    WIRE_TRY(DeviceObjects().Get(deviceId, &device));
-    if (device->generation != deviceGeneration) {
-        return WireResult::FatalError;
-    }
 
     Known<WGPUSwapChain> data;
     WIRE_TRY(SwapChainObjects().Allocate(&data, ObjectHandle{id, generation}));
