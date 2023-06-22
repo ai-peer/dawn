@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "424abdbc_457abd80",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T10:15:01Z",
+      "side": 1,
+      "message": "No, it\u0027s not silently working. When we encounter sampleType \u003d kInternalResolveAttachmentSampleType:\n- if allowInternalBinding is true, then this is valid, so we exit the switch.\n- otherwise, fallthrough to the below `ValidateTextureSampleType` call which will report \"invalid sampleType\" error. I have a test for that.",
+      "parentUuid": "98fa2be2_eb9dd852",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6027efc_b67e5b3e",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 19
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-20T15:27:50Z",
       "side": 1,
       "message": "u-nit: IMHO validation would be more clear if we had this code block check the usage.\n\nRight now things are peppered a bit everywhere in a way that\u0027s hard to follow. It\u0027s tested so probably ok, but still it will be hard to revisit.",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cf8f391_29d0a52d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T10:15:01Z",
+      "side": 1,
+      "message": "Done. Moved all of these validations into `ValidateColorAttachmentRenderToSingleSampled` function:\n- texture\u0027s usage.\n- format\u0027s supportsResolveTarget.\n- resolveTarget must be null.",
+      "parentUuid": "b6027efc_b67e5b3e",
       "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c80ca9_3f18d0dd",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T10:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d98afbfb_0ab3fa8b",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af4da72f_a3094cf7",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-06-20T15:27:50Z",
       "side": 1,
       "message": "Could we restructure this very hot code to more clearly show the fast paths?\n\n```\nif readOnly || singleUse {return {}}\n\nif (isLoadedResolveTexture) {return {};}\n\nreturn DAWN_VALIDATION_ERROR ...\n```",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f14a5b37_27ab891f",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T10:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af4da72f_a3094cf7",
       "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da9a48ac_0df9f162",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T10:15:01Z",
+      "side": 1,
+      "message": "How about we think about a better/cleaner approach in a follow-up patch?",
+      "parentUuid": "487f8ca0_d3a5d765",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38dd2296_e304091b",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 19
@@ -116,6 +206,30 @@
       "writtenOn": "2023-06-20T15:27:50Z",
       "side": 1,
       "message": "nit: GetOrCreate maybe?",
+      "range": {
+        "startLine": 870,
+        "startChar": 45,
+        "endLine": 870,
+        "endChar": 48
+      },
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72592cd8_12b42b82",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T10:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38dd2296_e304091b",
       "range": {
         "startLine": 870,
         "startChar": 45,
@@ -174,6 +288,24 @@
       "writtenOn": "2023-06-20T15:27:50Z",
       "side": 1,
       "message": "Why does this use three bits?",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39dc9ae2_9f8084ea",
+        "filename": "src/dawn/native/dawn_platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T10:15:01Z",
+      "side": 1,
+      "message": "I just chose a random constant not used by the official enum values. I have changed it to 0x80000000. Is it good enough?",
+      "parentUuid": "007b4259_d713856c",
       "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
