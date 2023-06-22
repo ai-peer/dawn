@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3872181_1eef4609",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T13:39:47Z",
+      "side": 1,
+      "message": "Why didn\u0027t this inline?",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a02f45b_25ee6a47",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T13:39:47Z",
+      "side": 1,
+      "message": "This seems like something we could detect in the future. All control paths here return, so this is dead code.",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c58087d_af190902",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T13:39:47Z",
+      "side": 1,
+      "message": "For loop with a function call in init, cond, cont?",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7edb472b_77dbf495",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2531,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T13:39:47Z",
+      "side": 1,
+      "message": "loop with var in body used in continuing:\n\n```\nvar b \u003d 1;\nloop {\n  var a \u003d 1;\n  if (b \u003d\u003d 4) {\n     return;\n  }\n  \n  continuing {\n    b +\u003d 1;\n  }\n}\n```\n\n(These scoping rules caused problems previously)",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
