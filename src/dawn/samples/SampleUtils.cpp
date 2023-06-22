@@ -202,15 +202,83 @@ wgpu::Device CreateCppDawnDevice() {
             procs = dawn::wire::client::GetProcs();
             s2cBuf->SetHandler(wireClient);
 
-            auto deviceReservation = wireClient->ReserveDevice();
-            wireServer->InjectDevice(backendDevice, deviceReservation.id,
-                                     deviceReservation.generation);
-            cDevice = deviceReservation.device;
+            // Make and inject an instance
+            apiInstance = api.GetNewInstance();
+            auto instanceReservation = mWireClient->ReserveInstance();
+            api.InstanceReference(apiInstance);
+            mWireServer->InjectInstance(apiInstance, instanceReservation.id,
+                                        instanceReservation.generation);
+
+            // Request an adapter
+            WGPUAdapter adapter;
+            wgpuInstanceRequestAdapter(
+                instanceReservation.instance, nullptr,
+                [](WGPURequestAdapterStatus status, WGPUAdapter cAdapter, const char*,
+                   void* userdata) {
+                    if (status == WGPURequestAdapterStatus_Success) {
+                        *static_cast<WGPUAdapter*>(userdata) = cAdapter;
+                    }
+                },
+                &adapter);
+
+            // Mock a fake response to requestAdapter
+            apiAdapter = api.GetNewAdapter();
+            api.OnInstanceRequestAdapter(
+                apiInstance, nullptr,
+                [&](WGPURequestAdapterStatus status, WGPUAdapter adapter, void*) {
+                    if (status == WGPURequestAdapterStatus_Success) {
+                        WGPUAdapterProperties properties = {};
+                        properties.vendorName = "";
+                        properties.architecture = "";
+                        properties.name = "";
+                        properties.driverDescription = "";
+                        api.AdapterGetProperties(adapter, &properties);
+
+                        WGPUSupportedLimits limits = {};
+                        api.AdapterGetLimits(adapter, &limits);
+
+                        api.AdapterEnumerateFeatures(adapter, nullptr);
+                    }
+                },
+                nullptr);
+            FlushClient();
+            FlushServer();
+
+            // Request a device
+            WGPUDevice device;
+            wgpuAdapterRequestDevice(
+                adapter, nullptr,
+                [](WGPURequestDeviceStatus status, WGPUDevice cDevice, const char*,
+                   void* userdata) {
+                    if (status == WGPURequestDeviceStatus_Success) {
+                        *static_cast<WGPUDevice*>(userdata) = cDevice;
+                    }
+                },
+                &device);
+
+            // Mock a fake response to requestDevice
+            apiDevice = api.GetNewDevice();
+            api.OnAdapterRequestDevice(
+                apiAdapter, nullptr,
+                [&](WGPURequestDeviceStatus status, WGPUDevice device, void*) {
+                    if (status == WGPURequestDeviceStatus_Success) {
+                        WGPUSupportedLimits limits = {};
+                        api.DeviceGetLimits(device, &limits);
+
+                        api.DeviceEnumerateFeatures(device, nullptr);
+
+                        api.OnDeviceSetUncapturedErrorCallback(device, nullptr, nullptr);
+                        api.OnDeviceSetLoggingCallback(device, nullptr, nullptr);
+                        api.OnDeviceSetDeviceLostCallback(device, nullptr, nullptr);
+                    }
+                },
+                nullptr);
+            FlushClient();
+            FlushServer();
 
             auto swapChainReservation = wireClient->ReserveSwapChain(cDevice, &swapChainDesc);
             wireServer->InjectSwapChain(backendSwapChain, swapChainReservation.id,
-                                        swapChainReservation.generation, deviceReservation.id,
-                                        deviceReservation.generation);
+                                        swapChainReservation.generation);
             swapChain = wgpu::SwapChain::Acquire(swapChainReservation.swapchain);
         } break;
     }
