@@ -16,6 +16,69 @@
       "message": "This re-lands https://dawn-review.googlesource.com/c/dawn/+/135740\n\nThe original error causing revert looks like the same test infra bug.\n\n```\n[ RUN      ] EGLImageUsageTests.ClearR8EGLImage/OpenGLES_ANGLE_Intel_Intel_R_UHD_Graphics_630_Direct3D11_vs_5_0_ps_5_0_D3D11_31_0_101_2111__compat\nInfo: Test unsupported: UsesWire()\n..\\..\\third_party\\dawn\\src\\dawn\\tests\\white_box\\EGLImageWrappingTests.cpp(351): Skipped\n\nStack trace:\n\tdawn::`anonymous namespace\u0027::EGLImageUsageTests_ClearR8EGLImage_Test::TestBody [0x00007FF6BBB6CDB6+166] (o:\\third_party\\dawn\\src\\dawn\\tests\\white_box\\EGLImageWrappingTests.cpp:351)\n\n[  SKIPPED ] EGLImageUsageTests.ClearR8EGLImage/OpenGLES_ANGLE_Intel_Intel_R_UHD_Graphics_630_Direct3D11_vs_5_0_ps_5_0_D3D11_31_0_101_2111__compat (2 ms)\n[15541/15543] EGLImageUsageTests.ClearR8EGLImage/OpenGLES_ANGLE_Intel_Intel_R_UHD_Graphics_630_Direct3D11_vs_5_0_ps_5_0_D3D11_31_0_101_2111__compat (CRASHED)\n```\n\nAs you can, the SKIPPED case was wrongly seen as CRASHED.",
       "revId": "a1c20b5395c4e577628581c1edd0fafb2d5f11af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa325644_fbf8390c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T18:02:01Z",
+      "side": 1,
+      "message": "LGTM with some comments",
+      "revId": "a1c20b5395c4e577628581c1edd0fafb2d5f11af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81b6e51_d6aec134",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T18:02:01Z",
+      "side": 1,
+      "message": "nit: maybe have the TextureView encompass all mip levels? since we pass the mipLevel into CreateD3D11DepthStencilView below. Then, we\u0027d be able to allocate a TextureView per array layer, and not per-subresource",
+      "range": {
+        "startLine": 420,
+        "startChar": 10,
+        "endLine": 421,
+        "endChar": 69
+      },
+      "revId": "a1c20b5395c4e577628581c1edd0fafb2d5f11af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "414015c0_c011d3b2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T18:02:01Z",
+      "side": 1,
+      "message": "nit: hoist this out of the loops",
+      "range": {
+        "startLine": 427,
+        "startChar": 16,
+        "endLine": 433,
+        "endChar": 17
+      },
+      "revId": "a1c20b5395c4e577628581c1edd0fafb2d5f11af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
