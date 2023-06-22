@@ -193,18 +193,35 @@ class Validator {
             }
         }
 
-        for (auto* op : inst->Operands()) {
+        auto ops = inst->Operands();
+        for (size_t i = 0; i < ops.Length(); ++i) {
+            auto* op = ops[i];
+            if (!op) {
+                continue;
+            }
+
             // Note, a `nullptr` is a valid operand in some cases, like `var` so we can't just check
             // for `nullptr` here.
-            if (op && !op->Alive()) {
+            if (!op->Alive()) {
                 AddError(inst, "instruction has undefined operand");
+            }
+
+            bool found = false;
+            for (auto& usage : op->Usages()) {
+                if (usage.instruction == inst && usage.operand_index == i) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                AddError(inst, i, "instruction operand missing usage");
             }
         }
 
         tint::Switch(
             inst,                                        //
             [&](Access* a) { CheckAccess(a); },          //
-            [&](Binary*) {},                             //
+            [&](Binary* b) { CheckBinary(b); },          //
             [&](Call* c) { CheckCall(c); },              //
             [&](If* if_) { CheckIf(if_); },              //
             [&](Load*) {},                               //
@@ -302,6 +319,18 @@ class Validator {
         }
     }
 
+    void CheckBinary(ir::Binary* b) {
+        if (b->LHS() == nullptr) {
+            AddError(b, "binary: left operand is undefined");
+        }
+        if (b->RHS() == nullptr) {
+            AddError(b, "binary: right operand is undefined");
+        }
+        if (b->Result() == nullptr) {
+            AddError(b, "binary: result is undefined");
+        }
+    }
+
     void CheckTerminator(ir::Terminator* b) {
         tint::Switch(
             b,                           //
@@ -324,7 +353,7 @@ class Validator {
 
     void CheckIf(If* if_) {
         if (!if_->Condition()) {
-            AddError(if_, "if: condition is nullptr");
+            AddError(if_, "if: condition is undefined");
         }
         if (if_->Condition() && !if_->Condition()->Type()->Is<type::Bool>()) {
             AddError(if_, If::kConditionOperandOffset, "if: condition must be a `bool` type");
@@ -333,7 +362,7 @@ class Validator {
 
     void CheckVar(Var* var) {
         if (var->Result() == nullptr) {
-            AddError(var, "var: result is a nullptr");
+            AddError(var, "var: result is undefined");
         }
 
         if (var->Result() && var->Initializer()) {
