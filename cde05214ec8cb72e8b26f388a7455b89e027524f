@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3436e292_ed1c971f",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-22T20:02:18Z",
+      "side": 1,
+      "message": "`Usages()` is a hashset, so you can just use `Contains()` to do this check instead of looping over everything.",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 215,
+        "endChar": 13
+      },
+      "revId": "cde05214ec8cb72e8b26f388a7455b89e027524f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
