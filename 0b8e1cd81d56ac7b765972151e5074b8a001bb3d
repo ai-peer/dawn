@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ca3c987_c66ef5a1",
+        "filename": "DEPS",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T13:48:27Z",
+      "side": 1,
+      "message": "This is a DEPS variable, not a GN variable, so they are not the same. Note that the same is done for `dawn_standalone`.",
+      "parentUuid": "1d751b2d_b69f0375",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 31
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "747da544_f8ef007d",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-22T10:58:11Z",
       "side": 1,
       "message": "Are these scoped to this file, or do they leak into a more global scope?\nIf it\u0027s the latter, then maybe `dawn_dxc_llvm_target_triple` and same below.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b3a63b3_3cd2719f",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T13:48:27Z",
+      "side": 1,
+      "message": "Variables do not leak out of GN files. The only way to see them is to import the file, but this isn\u0027t normally done with BUILD.gn files, only with .gni files. So we can leave as is.",
+      "parentUuid": "747da544_f8ef007d",
       "range": {
         "startLine": 27,
         "startChar": 0,
@@ -100,6 +148,30 @@
       "writtenOn": "2023-06-22T10:58:11Z",
       "side": 1,
       "message": "Instead of the number suffixed names, how about a sourceset per `$dawn_dxc_dir/lib/` subdirectory?",
+      "range": {
+        "startLine": 1252,
+        "startChar": 22,
+        "endLine": 1252,
+        "endChar": 46
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7be815a_33319672",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T13:48:27Z",
+      "side": 1,
+      "message": "The idea was to have one sourceset for all the files, but because of filename collisions, I\u0027m forced to split them out this way. There isn\u0027t much gained by splitting them across each lib. Do you feel strongly about this?",
+      "parentUuid": "96c7b80c_5a9798d2",
       "range": {
         "startLine": 1252,
         "startChar": 22,
