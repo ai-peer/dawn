@@ -128,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ac5029d_6dae990d",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-06-22T19:04:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63c424c0_84b0d9ee",
+      "range": {
+        "startLine": 1186,
+        "startChar": 21,
+        "endLine": 1186,
+        "endChar": 72
+      },
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9595b0bc_22a95e3c",
@@ -141,6 +165,30 @@
       "writtenOn": "2023-06-22T18:17:43Z",
       "side": 1,
       "message": "Please use `0xffffffff` or use `std::numeric_limits\u003cuint32_t\u003e::max()`. Some compilers might get grumpy about this.",
+      "range": {
+        "startLine": 2212,
+        "startChar": 29,
+        "endLine": 2212,
+        "endChar": 31
+      },
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb58802_f81fe357",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2212,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-06-22T19:04:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9595b0bc_22a95e3c",
       "range": {
         "startLine": 2212,
         "startChar": 29,

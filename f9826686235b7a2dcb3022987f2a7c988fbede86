@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ab68e9_3913c17a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-06-22T19:04:47Z",
+      "side": 1,
+      "message": "Will have Kokoro issues resolved shortly.",
+      "revId": "f9826686235b7a2dcb3022987f2a7c988fbede86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
