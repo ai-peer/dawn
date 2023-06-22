@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63ad2f8c_11a180ed",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-22T18:43:24Z",
+      "side": 1,
+      "message": "\u003e The usages is tested already in the binary_test.\n\nUsage tracking is tested for `SetOperand()`, but that doesn\u0027t mean you can\u0027t screw this up. e.g.\n```\nauto* add \u003d b.Add(ty, lhs, rhs);\nlhs-\u003eRemoveUsage({add, 0u});\n```\nThis will remove the usage from `lhs`, but the operand will still be present in the `add` instruction.\n\nSame thing is possible with var initializers in the previous CL.",
+      "parentUuid": "9bee1c6f_cbfae1d0",
+      "revId": "31000fda16a5565e19e12a4efc747c001cedb815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b15f472_53350cb3",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 1
