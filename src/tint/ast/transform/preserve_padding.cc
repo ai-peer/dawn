@@ -119,7 +119,7 @@ struct PreservePadding::State {
         const char* kValueParamName = "value";
         auto call_helper = [&](auto&& body) {
             EnableExtension();
-            auto helper = helpers.GetOrCreate(ty, [&]() {
+            auto helper = helpers.GetOrCreate(ty, [&] {
                 auto helper_name = b.Symbols().New("assign_and_preserve_padding");
                 utils::Vector<const Parameter*, 2> params = {
                     b.Param(kDestParamName,

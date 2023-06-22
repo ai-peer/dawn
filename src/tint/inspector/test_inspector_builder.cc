@@ -353,7 +353,7 @@ Inspector& InspectorBuilder::Build() {
         return *inspector_;
     }
     program_ = std::make_unique<Program>(std::move(*this));
-    [&]() {
+    [&] {
         ASSERT_TRUE(program_->IsValid()) << diag::Formatter().format(program_->Diagnostics());
     }();
     inspector_ = std::make_unique<Inspector>(program_.get());

@@ -122,7 +122,7 @@ struct ModuleScopeVarToEntryPointParam::State {
         auto* ty = var->Type()->UnwrapRef();
 
         // Helper to create an AST node for the store type of the variable.
-        auto store_type = [&]() { return CreateASTTypeFor(ctx, ty); };
+        auto store_type = [&] { return CreateASTTypeFor(ctx, ty); };
 
         builtin::AddressSpace sc = var->AddressSpace();
         switch (sc) {
@@ -401,7 +401,7 @@ struct ModuleScopeVarToEntryPointParam::State {
             // threadgroup memory arguments.
             Symbol workgroup_parameter_symbol;
             StructMemberList workgroup_parameter_members;
-            auto workgroup_param = [&]() {
+            auto workgroup_param = [&] {
                 if (!workgroup_parameter_symbol.IsValid()) {
                     workgroup_parameter_symbol = ctx.dst->Sym();
                 }
