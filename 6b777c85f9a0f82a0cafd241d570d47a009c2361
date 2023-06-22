@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "851bd042_7eb31081",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-22T04:22:58Z",
+      "side": 1,
+      "message": "PTAL. I mentioned this in my previous patch.",
+      "revId": "6b777c85f9a0f82a0cafd241d570d47a009c2361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
