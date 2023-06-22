@@ -45,9 +45,8 @@ TEST_F(WireInjectSwapChainTests, CallAfterReserveInject) {
 
     WGPUSwapChain apiSwapchain = api.GetNewSwapChain();
     EXPECT_CALL(api, SwapChainReference(apiSwapchain));
-    ASSERT_TRUE(GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id,
-                                                 reservation.generation, reservation.deviceId,
-                                                 reservation.deviceGeneration));
+    ASSERT_TRUE(
+        GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id, reservation.generation));
 
     wgpuSwapChainPresent(reservation.swapchain);
     EXPECT_CALL(api, SwapChainPresent(apiSwapchain));
@@ -69,14 +68,12 @@ TEST_F(WireInjectSwapChainTests, InjectExistingID) {
 
     WGPUSwapChain apiSwapchain = api.GetNewSwapChain();
     EXPECT_CALL(api, SwapChainReference(apiSwapchain));
-    ASSERT_TRUE(GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id,
-                                                 reservation.generation, reservation.deviceId,
-                                                 reservation.deviceGeneration));
+    ASSERT_TRUE(
+        GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id, reservation.generation));
 
     // ID already in use, call fails.
-    ASSERT_FALSE(GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id,
-                                                  reservation.generation, reservation.deviceId,
-                                                  reservation.deviceGeneration));
+    ASSERT_FALSE(
+        GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id, reservation.generation));
 }
 
 // Test that the server only borrows the swapchain and does a single reference-release
@@ -86,9 +83,8 @@ TEST_F(WireInjectSwapChainTests, InjectedSwapChainLifetime) {
     // Injecting the swapchain adds a reference
     WGPUSwapChain apiSwapchain = api.GetNewSwapChain();
     EXPECT_CALL(api, SwapChainReference(apiSwapchain));
-    ASSERT_TRUE(GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id,
-                                                 reservation.generation, reservation.deviceId,
-                                                 reservation.deviceGeneration));
+    ASSERT_TRUE(
+        GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id, reservation.generation));
 
     // Releasing the swapchain removes a single reference.
     wgpuSwapChainRelease(reservation.swapchain);
@@ -132,9 +128,8 @@ TEST_F(WireInjectSwapChainTests, SwapChainTextureReflection) {
 
     WGPUSwapChain apiSwapchain = api.GetNewSwapChain();
     EXPECT_CALL(api, SwapChainReference(apiSwapchain));
-    ASSERT_TRUE(GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id,
-                                                 reservation.generation, reservation.deviceId,
-                                                 reservation.deviceGeneration));
+    ASSERT_TRUE(
+        GetWireServer()->InjectSwapChain(apiSwapchain, reservation.id, reservation.generation));
 
     WGPUTexture tex = wgpuSwapChainGetCurrentTexture(reservation.swapchain);
     WGPUTexture apiTex = api.GetNewTexture();

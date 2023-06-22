@@ -68,16 +68,80 @@ void WireTest::SetUp() {
 
     dawnProcSetProcs(&dawn::wire::client::GetProcs());
 
-    auto deviceReservation = mWireClient->ReserveDevice();
-    EXPECT_CALL(api, DeviceReference(mockDevice));
-    mWireServer->InjectDevice(mockDevice, deviceReservation.id, deviceReservation.generation);
+    // Make and inject an instance
+    apiInstance = api.GetNewInstance();
+    auto instanceReservation = mWireClient->ReserveInstance();
+    EXPECT_CALL(api, InstanceReference(apiInstance));
+    mWireServer->InjectInstance(apiInstance, instanceReservation.id,
+                                instanceReservation.generation);
 
-    device = deviceReservation.device;
-    apiDevice = mockDevice;
+    // Request an adapter
+    WGPUAdapter adapter;
+    wgpuInstanceRequestAdapter(
+        instanceReservation.instance, nullptr,
+        [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {
+            *static_cast<WGPUAdapter*>(userdata) = cAdapter;
+        },
+        &adapter);
 
-    // The GetQueue is done on WireClient startup so we expect it now.
-    queue = wgpuDeviceGetQueue(device);
-    apiQueue = api.GetNewQueue();
+    // Mock a fake response to requestAdapter
+    apiAdapter = api.GetNewAdapter();
+    EXPECT_CALL(api, OnInstanceRequestAdapter(apiInstance, nullptr, _, _))
+        .WillOnce(InvokeWithoutArgs([&]() {
+            EXPECT_CALL(api, AdapterGetProperties(apiAdapter, _))
+                .WillOnce(WithArg<1>(Invoke([&](WGPUAdapterProperties* properties) {
+                    *properties = {};
+                    properties->vendorName = "";
+                    properties->architecture = "";
+                    properties->name = "";
+                    properties->driverDescription = "";
+                })));
+
+            EXPECT_CALL(api, AdapterGetLimits(apiAdapter, NotNull()))
+                .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
+                    *limits = {};
+                    return true;
+                })));
+
+            EXPECT_CALL(api, AdapterEnumerateFeatures(apiAdapter, _))
+                .WillOnce(Return(0))
+                .WillOnce(Return(0));
+            api.CallInstanceRequestAdapterCallback(apiInstance, WGPURequestAdapterStatus_Success,
+                                                   apiAdapter, nullptr);
+        }));
+    FlushClient();
+    FlushServer();
+
+    // Request a device
+    wgpuAdapterRequestDevice(
+        adapter, nullptr,
+        [](WGPURequestDeviceStatus, WGPUDevice cDevice, const char*, void* userdata) {
+            *static_cast<WGPUDevice*>(userdata) = cDevice;
+        },
+        &device);
+
+    // Mock a fake response to requestDevice
+    apiDevice = api.GetNewDevice();
+    EXPECT_CALL(api, OnAdapterRequestDevice(apiAdapter, _, _, _)).WillOnce(InvokeWithoutArgs([&]() {
+        EXPECT_CALL(api, DeviceGetLimits(apiDevice, NotNull()))
+            .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
+                *limits = {};
+                return true;
+            })));
+
+        EXPECT_CALL(api, DeviceEnumerateFeatures(apiDevice, _))
+            .WillOnce(Return(0))
+            .WillOnce(Return(0));
+
+        EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, NotNull(), NotNull()));
+        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, NotNull(), NotNull()));
+        EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, NotNull(), NotNull()));
+
+        api.CallAdapterRequestDeviceCallback(apiAdapter, WGPURequestDeviceStatus_Success, apiDevice,
+                                             nullptr);
+    }));
+    FlushClient();
+    FlushServer();
     EXPECT_CALL(api, DeviceGetQueue(apiDevice)).WillOnce(Return(apiQueue));
     FlushClient();
 }
