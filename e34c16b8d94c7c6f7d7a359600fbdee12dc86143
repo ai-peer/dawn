@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067dc71d_e52af6b1",
+        "filename": "src/dawn/tests/unittests/wire/WireCreatePipelineAsyncTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-22T08:55:22Z",
+      "side": 1,
+      "message": "How come this can\u0027t use the WireTest base? Does it have to do with the mocks? If it\u0027s not possible, could we add some comment/documentation to justify why this test can\u0027t use the other infra?",
+      "range": {
+        "startLine": 384,
+        "startChar": 4,
+        "endLine": 401,
+        "endChar": 0
+      },
+      "revId": "e34c16b8d94c7c6f7d7a359600fbdee12dc86143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
