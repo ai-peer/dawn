@@ -128,7 +128,7 @@ void GPUQueue::writeTexture(Napi::Env env,
                             interop::GPUExtent3D size) {
     wgpu::ImageCopyTexture dst{};
     Converter::BufferSource src{};
-    wgpu::TextureDataLayout layout{};
+    wgpu::ImageDataLayout layout{};
     wgpu::Extent3D sz{};
     Converter conv(env);
     if (!conv(dst, destination) ||    //

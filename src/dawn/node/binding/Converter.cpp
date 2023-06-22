@@ -173,7 +173,7 @@ bool Converter::Convert(BufferSource& out, interop::BufferSource in) {
     return false;
 }
 
-bool Converter::Convert(wgpu::TextureDataLayout& out, const interop::GPUImageDataLayout& in) {
+bool Converter::Convert(wgpu::ImageDataLayout& out, const interop::GPUImageDataLayout& in) {
     out = {};
     return Convert(out.bytesPerRow, in.bytesPerRow) && Convert(out.offset, in.offset) &&
            Convert(out.rowsPerImage, in.rowsPerImage);

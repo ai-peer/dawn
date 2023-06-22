@@ -121,7 +121,7 @@ class Converter {
 
     [[nodiscard]] bool Convert(BufferSource& out, interop::BufferSource in);
 
-    [[nodiscard]] bool Convert(wgpu::TextureDataLayout& out, const interop::GPUImageDataLayout& in);
+    [[nodiscard]] bool Convert(wgpu::ImageDataLayout& out, const interop::GPUImageDataLayout& in);
 
     [[nodiscard]] bool Convert(wgpu::TextureFormat& out, const interop::GPUTextureFormat& in);
 
