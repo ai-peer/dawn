@@ -324,6 +324,30 @@
       },
       "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77f01a77_2e68dcfc",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T15:26:00Z",
+      "side": 1,
+      "message": "\u003e It might also be slightly easier to update with a new roll (scan for changes in directory / sourceset X).\n\nThis is what I ended up thinking as well.",
+      "parentUuid": "c1b5bb76_378e8fc8",
+      "range": {
+        "startLine": 1252,
+        "startChar": 22,
+        "endLine": 1252,
+        "endChar": 46
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
