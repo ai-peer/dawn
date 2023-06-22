@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "61855c9b_2e19d00c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d75f1e4_7acbec72",
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4d041016_7cd63405",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 18
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75fd671_9fc85e70",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:33Z",
+      "side": 1,
+      "message": "I went for option 2. Thanks!",
+      "parentUuid": "ee305d03_26fb3ba1",
+      "range": {
+        "startLine": 464,
+        "startChar": 4,
+        "endLine": 465,
+        "endChar": 67
+      },
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30945f42_35b5a0cc",
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3825f7b_647060ee",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:33Z",
+      "side": 1,
+      "message": "Perfect, and I applied this to `data_deps` just below.",
+      "parentUuid": "30945f42_35b5a0cc",
+      "range": {
+        "startLine": 169,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 9
+      },
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "783b091c_a0dc05d7",
@@ -94,6 +160,24 @@
       "writtenOn": "2023-06-22T17:32:34Z",
       "side": 1,
       "message": "copy_dxc_binary is getting this from \n `$windows_sdk_path/bin/$windows_sdk_version/$target_cpu/dxil.dll`\n\nwhat is the difference between the paths?",
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e969d5a7_1ad79fc5",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:33Z",
+      "side": 1,
+      "message": "The only difference is that the Redist directory contains only the files that would normally be part of the redistributable installer. I got this Redist path from ANGLE: https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/BUILD.gn;l\u003d349?q\u003d%2FRedist%2FD3D%2F\u0026ss\u003dchromium\n\nBut, for consistency with what\u0027s in the Dawn repo, I\u0027ll go with `$windows_sdk_path/bin/$windows_sdk_version/$target_cpu/dxil.dll`",
+      "parentUuid": "783b091c_a0dc05d7",
       "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
