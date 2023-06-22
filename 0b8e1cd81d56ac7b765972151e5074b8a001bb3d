@@ -16,6 +16,98 @@
       "message": "This is the big one. I apologize for its size, but it\u0027s not really possible to make it smaller. Apart from third_party/gn/dxc/BUILD.gn, which is 2000 lines long, there are a few helper .gni files that it uses.\n\nIt\u0027s not of particular use, but in case you\u0027re wondering, the way I wrote this was using a fork of Dawn on my GitHub so that I could [push many small commits](https://github.com/amaiorano/dawn/commits/add-dxc).",
       "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d751b2d_b69f0375",
+        "filename": "DEPS",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T10:58:11Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand why we need this set to `True` here and in `build_overrides/dawn.gni`. It doesn\u0027t look wrong, but I just don\u0027t understand it.",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 31
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747da544_f8ef007d",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T10:58:11Z",
+      "side": 1,
+      "message": "Are these scoped to this file, or do they leak into a more global scope?\nIf it\u0027s the latter, then maybe `dawn_dxc_llvm_target_triple` and same below.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5313b90_4d18cc19",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T10:58:11Z",
+      "side": 1,
+      "message": "Inconsistent prefixing. `dawn_dxc_disable_asserts_debug` or strip `dawn_` from the above?",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 27
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c7b80c_5a9798d2",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T10:58:11Z",
+      "side": 1,
+      "message": "Instead of the number suffixed names, how about a sourceset per `$dawn_dxc_dir/lib/` subdirectory?",
+      "range": {
+        "startLine": 1252,
+        "startChar": 22,
+        "endLine": 1252,
+        "endChar": 46
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
