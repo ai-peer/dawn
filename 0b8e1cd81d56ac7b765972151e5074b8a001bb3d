@@ -204,6 +204,30 @@
       },
       "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e86af6_16cd56ec",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T14:57:40Z",
+      "side": 1,
+      "message": "It\u0027s also worth noting that these \"source sets\" are actually compiled as static libs, and they _must_ be so, otherwise unreferenced globals are not stripped, which results in global \"option\" vars being constructed before DllMain runs, that results in crashes because the global allocator hasn\u0027t been initialized yet. DXC relies on these being static libs. The reason I mention this here is that one of the downsides to using static_libs with GN is that it makes builds take longer, since it cannot parallelize source building as much. So splitting this up into many static libs may impact total build time.",
+      "parentUuid": "e7be815a_33319672",
+      "range": {
+        "startLine": 1252,
+        "startChar": 22,
+        "endLine": 1252,
+        "endChar": 46
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
