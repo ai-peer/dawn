@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7ccda79_449e02fd",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T15:32:11Z",
+      "side": 1,
+      "message": "Could split the function into a public and private impl. But I don\u0027t care all that much right now. If I hit the issue of calling append on a non-block-associated builder, I\u0027ll likely make a CL to address it.",
+      "parentUuid": "f53aa482_a0980755",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7ea9ccb_fb002b03",
