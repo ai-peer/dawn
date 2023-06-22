@@ -69,6 +69,24 @@
       "parentUuid": "54b83747_b1793c30",
       "revId": "7af31cb2f444520773385a1a38ae6c9e8a942efa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28e57bab_cbe6afd4",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T15:27:49Z",
+      "side": 1,
+      "message": "Weird - gerrit usually highlights the characters that changed in the line.\nThanks. My dyslexic brain really couldn\u0027t see that. 😊",
+      "parentUuid": "73f145e0_40ecdc74",
+      "revId": "7af31cb2f444520773385a1a38ae6c9e8a942efa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
