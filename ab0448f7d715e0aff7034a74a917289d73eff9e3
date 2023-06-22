@@ -313,6 +313,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ab4b9af_784023d6",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T17:05:34Z",
+      "side": 1,
+      "message": "ok let me try to transiently allocate MSAA texture for each render pass without caching. We can implement a caching solution in a follow-up patch.",
+      "parentUuid": "61d39b1d_a483c19d",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "007b4259_d713856c",
         "filename": "src/dawn/native/dawn_platform.h",
         "patchSetId": 19
