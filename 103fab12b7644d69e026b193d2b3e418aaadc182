@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d75f1e4_7acbec72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T17:32:34Z",
+      "side": 1,
+      "message": "bug?",
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d041016_7cd63405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T17:32:34Z",
+      "side": 1,
+      "message": "LGTM with some nits",
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee305d03_26fb3ba1",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T17:32:34Z",
+      "side": 1,
+      "message": "ASSERTS aren\u0027t enabled in release so bad things would happen in the odd case someone moved the dll or it got corrupted or something.\n\nI think we could either:\n - keep a fallback to FXC here if we can\u0027t get DXC, and log an error that DXC is supposed to be there\n - dawn::native::d3d12::Backend::Initialize return an error if DAWN_BUILD_DXC and it wasn\u0027t available - so we fail to start up the backend entirely.",
+      "range": {
+        "startLine": 464,
+        "startChar": 4,
+        "endLine": 465,
+        "endChar": 67
+      },
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30945f42_35b5a0cc",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T17:32:34Z",
+      "side": 1,
+      "message": "I think the idiomatic way to do this is:\n\n```suggestion\n        if (!defined(deps)) {\n            deps \u003d []\n        }\n        deps +\u003d [\n          \"$dawn_root/third_party/gn/dxc:copy_dxil_dll\",\n          \"$dawn_root/third_party/gn/dxc:dxc\",\n          \"$dawn_root/third_party/gn/dxc:dxcompiler\",\n        ]\n```",
+      "range": {
+        "startLine": 169,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 9
+      },
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "783b091c_a0dc05d7",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-22T17:32:34Z",
+      "side": 1,
+      "message": "copy_dxc_binary is getting this from \n `$windows_sdk_path/bin/$windows_sdk_version/$target_cpu/dxil.dll`\n\nwhat is the difference between the paths?",
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
