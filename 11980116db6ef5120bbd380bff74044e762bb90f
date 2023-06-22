@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2947c6a_71254456",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-22T12:51:14Z",
+      "side": 1,
+      "message": "So let\u0027s only exclude RG32_* formats for compatible mode which are unsupported by GLES. How does that sound?",
+      "parentUuid": "f8f71444_a4dbe5f5",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60286ea8_13b48b2c",
         "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 1
@@ -119,6 +137,24 @@
       "writtenOn": "2023-06-04T07:40:16Z",
       "side": 1,
       "message": "[1]",
+      "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10704a7b_ce147ba4",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-22T12:51:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "60286ea8_13b48b2c",
       "revId": "11980116db6ef5120bbd380bff74044e762bb90f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
