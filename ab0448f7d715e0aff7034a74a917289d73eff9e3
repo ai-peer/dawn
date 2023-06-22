@@ -277,6 +277,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c8f8b03_ea7f27fd",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-22T16:06:23Z",
+      "side": 1,
+      "message": "I\u0027ve been wondering if we could get away with not caching since we can create the attachment with TransientAttachment (which could be free), and eventually hope that our GPU memory allocators can reuse memory mid-frame.",
+      "parentUuid": "40b5b2c2_66da0b93",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "007b4259_d713856c",
         "filename": "src/dawn/native/dawn_platform.h",
         "patchSetId": 19
@@ -306,6 +324,24 @@
       "side": 1,
       "message": "I just chose a random constant not used by the official enum values. I have changed it to 0x80000000. Is it good enough?",
       "parentUuid": "007b4259_d713856c",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb505cc_1271912e",
+        "filename": "src/dawn/native/dawn_platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-22T16:06:23Z",
+      "side": 1,
+      "message": "Probably 0x10000000 since the 31 \u003c\u003c 1 bit is already used for againAsRenderAttachment,",
+      "parentUuid": "39dc9ae2_9f8084ea",
       "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
