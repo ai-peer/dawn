@@ -806,7 +806,7 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
         utils::RGBA8(62, 180, 84, 90),
     };
 
-    wgpu::TextureDataLayout dataLayout = {};
+    wgpu::ImageDataLayout dataLayout = {};
     dataLayout.bytesPerRow = textureDesc.size.width * sizeof(utils::RGBA8);
 
     queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(utils::RGBA8),
