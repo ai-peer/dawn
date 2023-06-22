@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8684fe_a7a221ec",
+        "filename": "project.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000687
+      },
+      "writtenOn": "2023-06-22T22:58:13Z",
+      "side": 1,
+      "message": "I don\u0027t see request to create new references in linked bug. Why do you want to grant it?\n\nPermission scope: https://gerrit-review.googlesource.com/Documentation/access-control.html#category_create\n\nIf you want to allow new CL creation, you need to use refs/for/*; see https://gerrit-review.googlesource.com/Documentation/user-upload.html#push_create",
+      "revId": "bf02df5b5d573299e7b5379e0947c61222a6e189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "97318464_67bc299d",
