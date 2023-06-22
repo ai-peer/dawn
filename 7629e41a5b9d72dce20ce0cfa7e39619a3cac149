@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f53aa482_a0980755",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T15:03:57Z",
+      "side": 1,
+      "message": "We can\u0027t as we depend on `Append` being a passthrough. It\u0027s _always_ called when you create an instruction.",
+      "parentUuid": "86228f7a_d76e3a70",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7ea9ccb_fb002b03",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 1
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "For `Result()-\u003eType()` is a pointer, currently that\u0027s required by the constructor, so I didn\u0027t check it. Would we prefer to check _everything_ regardless of what the constructor and setters validate?",
       "parentUuid": "c7ea9ccb_fb002b03",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c771db80_93ae63eb",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T15:03:57Z",
+      "side": 1,
+      "message": "Did some, skipped some.\n\nSkipped:\n * Only one result, there is no way to add a second result outside if a ForTesting method to force it.\n * Result()-\u003eType() is a pointer, this is ASSERT\u0027d by the constructor and you can\u0027t replace the result after construction\n * var-\u003eOperands().Length() \u003d\u003d 1, there is no way to add an operand outside of the class itself, so this could only be done inside var with a `ForTesting` method.\n * The initializer usage is tested in the var tests",
+      "parentUuid": "894d7112_b42d2d6c",
       "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
