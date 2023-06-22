@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb45854_fc2bf180",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-22T15:04:59Z",
+      "side": 1,
+      "message": "Because it\u0027s named",
+      "parentUuid": "d3872181_1eef4609",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a02f45b_25ee6a47",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-22T13:39:47Z",
       "side": 1,
       "message": "This seems like something we could detect in the future. All control paths here return, so this is dead code.",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e80cc212_b7850d9e",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-22T15:04:59Z",
+      "side": 1,
+      "message": "Ack. It\u0027s something I think should be done with a `RemoveUnreachableCode` transformm.",
+      "parentUuid": "2a02f45b_25ee6a47",
       "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcb58fd8_98e9b25c",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-22T15:04:59Z",
+      "side": 1,
+      "message": "Added in https://dawn-review.googlesource.com/c/dawn/+/138580",
+      "parentUuid": "7c58087d_af190902",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7edb472b_77dbf495",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-06-22T13:39:47Z",
       "side": 1,
       "message": "loop with var in body used in continuing:\n\n```\nvar b \u003d 1;\nloop {\n  var a \u003d 1;\n  if (b \u003d\u003d 4) {\n     return;\n  }\n  \n  continuing {\n    b +\u003d 1;\n  }\n}\n```\n\n(These scoping rules caused problems previously)",
+      "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ecf2830_be3e5f67",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2531,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-22T15:04:59Z",
+      "side": 1,
+      "message": "Added in https://dawn-review.googlesource.com/c/dawn/+/138580",
+      "parentUuid": "7edb472b_77dbf495",
       "revId": "47e0b064cf4618926233642bc1f29b3a7b2bf923",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
