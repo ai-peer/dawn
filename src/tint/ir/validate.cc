@@ -204,7 +204,7 @@ class Validator {
         tint::Switch(
             inst,                                        //
             [&](Access* a) { CheckAccess(a); },          //
-            [&](Binary*) {},                             //
+            [&](Binary* b) { CheckBinary(b); },          //
             [&](Call* c) { CheckCall(c); },              //
             [&](If* if_) { CheckIf(if_); },              //
             [&](Load*) {},                               //
@@ -302,6 +302,18 @@ class Validator {
         }
     }
 
+    void CheckBinary(ir::Binary* b) {
+        if (b->LHS() == nullptr) {
+            AddError(b, "binary: left operand is undefined");
+        }
+        if (b->RHS() == nullptr) {
+            AddError(b, "binary: right operand is undefined");
+        }
+        if (b->Result() == nullptr) {
+            AddError(b, "binary: result is undefined");
+        }
+    }
+
     void CheckTerminator(ir::Terminator* b) {
         tint::Switch(
             b,                           //
@@ -324,7 +336,7 @@ class Validator {
 
     void CheckIf(If* if_) {
         if (!if_->Condition()) {
-            AddError(if_, "if: condition is nullptr");
+            AddError(if_, "if: condition is undefined");
         }
         if (if_->Condition() && !if_->Condition()->Type()->Is<type::Bool>()) {
             AddError(if_, If::kConditionOperandOffset, "if: condition must be a `bool` type");
@@ -333,7 +345,7 @@ class Validator {
 
     void CheckVar(Var* var) {
         if (var->Result() == nullptr) {
-            AddError(var, "var: result is a nullptr");
+            AddError(var, "var: result is undefined");
         }
 
         if (var->Result() && var->Initializer()) {
