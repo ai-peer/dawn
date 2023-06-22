@@ -202,15 +202,9 @@ wgpu::Device CreateCppDawnDevice() {
             procs = dawn::wire::client::GetProcs();
             s2cBuf->SetHandler(wireClient);
 
-            auto deviceReservation = wireClient->ReserveDevice();
-            wireServer->InjectDevice(backendDevice, deviceReservation.id,
-                                     deviceReservation.generation);
-            cDevice = deviceReservation.device;
-
             auto swapChainReservation = wireClient->ReserveSwapChain(cDevice, &swapChainDesc);
             wireServer->InjectSwapChain(backendSwapChain, swapChainReservation.id,
-                                        swapChainReservation.generation, deviceReservation.id,
-                                        deviceReservation.generation);
+                                        swapChainReservation.generation);
             swapChain = wgpu::SwapChain::Acquire(swapChainReservation.swapchain);
         } break;
     }

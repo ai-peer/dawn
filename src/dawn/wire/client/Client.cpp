@@ -106,16 +106,6 @@ ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device,
     return result;
 }
 
-ReservedDevice Client::ReserveDevice() {
-    Device* device = Make<Device>(nullptr);
-
-    ReservedDevice result;
-    result.device = ToAPI(device);
-    result.id = device->GetWireId();
-    result.generation = device->GetWireGeneration();
-    return result;
-}
-
 ReservedInstance Client::ReserveInstance() {
     Instance* instance = Make<Instance>();
 

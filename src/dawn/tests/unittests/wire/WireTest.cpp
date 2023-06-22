@@ -68,11 +68,6 @@ void WireTest::SetUp() {
 
     dawnProcSetProcs(&dawn::wire::client::GetProcs());
 
-    auto deviceReservation = mWireClient->ReserveDevice();
-    EXPECT_CALL(api, DeviceReference(mockDevice));
-    mWireServer->InjectDevice(mockDevice, deviceReservation.id, deviceReservation.generation);
-
-    device = deviceReservation.device;
     apiDevice = mockDevice;
 
     // The GetQueue is done on WireClient startup so we expect it now.
