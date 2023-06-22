@@ -295,6 +295,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61d39b1d_a483c19d",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-06-22T16:31:41Z",
+      "side": 1,
+      "message": "Memoryless texture is not supported on x86 Mac. And I think x86 is still occupying a lot of Mac devices. Without caching, this would be a major memory regression compare to the 2 passes work-around existing in graphite.",
+      "parentUuid": "5c8f8b03_ea7f27fd",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "007b4259_d713856c",
         "filename": "src/dawn/native/dawn_platform.h",
         "patchSetId": 19
