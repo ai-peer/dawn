@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86228f7a_d76e3a70",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T11:09:28Z",
+      "side": 1,
+      "message": "When can we assert in `Append()` that `current_block_` is not null? At least that would save a bit of head-scratching.",
+      "parentUuid": "afe687ce_b7e6ce9f",
+      "revId": "7629e41a5b9d72dce20ce0cfa7e39619a3cac149",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7ea9ccb_fb002b03",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 1
