@@ -33,6 +33,23 @@
       "message": "I made the unusual choice of adding this function to enable the needed extension instead of enabling via a constructor or SetUp() because there are future tests that inherit from TestWithParams that do not use params (which are not allowed to call GetParams()). I would need to change all those tests to inherit from ResolverTest instead if I wanted to enable the extension in the test constructor.",
       "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba9d73d0_935899c5",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2048,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-06-22T18:04:04Z",
+      "side": 1,
+      "message": "Accidental add. Will Fix.",
+      "revId": "c4bade423a8e6e17b313cd2c1e024590304e06c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
