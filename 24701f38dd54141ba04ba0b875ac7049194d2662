@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e5313c6_fbdf683f",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:23Z",
+      "side": 1,
+      "message": "Good catch. This was from earlier experiments. Cleaned up.",
+      "parentUuid": "c6c619aa_5eda5435",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 11
+      },
+      "revId": "24701f38dd54141ba04ba0b875ac7049194d2662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1004a02b_0283c606",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-22T17:02:55Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 321,
+        "startChar": 4,
+        "endLine": 321,
+        "endChar": 11
+      },
+      "revId": "24701f38dd54141ba04ba0b875ac7049194d2662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad999d5_ea718435",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1004a02b_0283c606",
       "range": {
         "startLine": 321,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ef98faf_0b3482d4",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a80d974_23ee98e4",
+      "range": {
+        "startLine": 1047,
+        "startChar": 2,
+        "endLine": 1049,
+        "endChar": 15
+      },
+      "revId": "24701f38dd54141ba04ba0b875ac7049194d2662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eb26c48_b7408b32",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-06-22T17:02:55Z",
       "side": 1,
       "message": "include a message on this assert",
+      "range": {
+        "startLine": 1177,
+        "startChar": 9,
+        "endLine": 1177,
+        "endChar": 11
+      },
+      "revId": "24701f38dd54141ba04ba0b875ac7049194d2662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43625f31_ce03b3a7",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eb26c48_b7408b32",
       "range": {
         "startLine": 1177,
         "startChar": 9,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c7df52c_5f7a4a10",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:23Z",
+      "side": 1,
+      "message": "Good point, done.",
+      "parentUuid": "2ea96ab0_6337d61c",
+      "range": {
+        "startLine": 1178,
+        "startChar": 2,
+        "endLine": 1184,
+        "endChar": 3
+      },
+      "revId": "24701f38dd54141ba04ba0b875ac7049194d2662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b63d3b76_4587a539",
@@ -129,6 +249,24 @@
       "writtenOn": "2023-06-22T17:02:55Z",
       "side": 1,
       "message": "potentially may be able to use [//build/compiled_action.gni](https://source.chromium.org/chromium/chromium/src/+/main:build/compiled_action.gni;l\u003d19?q\u003dcompiled_action%20f:gni%3F\u0026ss\u003dchromium%2Fchromium%2Fsrc) instead of your own scripts here\n\nor //build/gn_run_binary.py\n\nalthough, then this stuff will only work if `dawn_has_build`",
+      "revId": "24701f38dd54141ba04ba0b875ac7049194d2662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "813f9619_4a65d3df",
+        "filename": "third_party/gn/dxc/build/run_built_binary.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:25:23Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ll keep as is for now, but perhaps we can move these to a common location for both Dawn and Chrome builds.",
+      "parentUuid": "b63d3b76_4587a539",
       "revId": "24701f38dd54141ba04ba0b875ac7049194d2662",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
