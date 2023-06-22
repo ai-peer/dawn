@@ -103,7 +103,7 @@ struct ExpandCompoundAssignment::State {
             //     foo.bar += rhs;
             // After:
             //     foo.bar = foo.bar + rhs;
-            new_lhs = [&]() { return ctx.Clone(lhs); };
+            new_lhs = [&] { return ctx.Clone(lhs); };
         } else if (index_accessor && is_vec(index_accessor->object)) {
             // This is the case for vector component via an array accessor. We need
             // to capture a pointer to the vector and also the index value.

@@ -2303,7 +2303,7 @@ void GeneratorImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
     }
 
     if (emit_as_loop) {
-        auto emit_continuing = [&]() { current_buffer_->Append(cont_buf); };
+        auto emit_continuing = [&] { current_buffer_->Append(cont_buf); };
 
         TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
         line() << "while (true) {";
@@ -2360,7 +2360,7 @@ void GeneratorImpl::EmitWhile(const ast::WhileStatement* stmt) {
         EmitExpression(cond_buf, cond);
     }
 
-    auto emit_continuing = [&]() {};
+    auto emit_continuing = [&] {};
     TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
 
     // If the whilehas a multi-statement conditional, then we cannot emit this
