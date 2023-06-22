@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bee1c6f_cbfae1d0",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T18:20:35Z",
+      "side": 1,
+      "message": "The usages is tested already in the binary_test. The alive and source for result should be covered by the generic code added with the var cl. The LHS and RHS alive should also be covered by the generic code for instruciton now.",
+      "parentUuid": "e667e5f2_caf2f68a",
+      "revId": "31000fda16a5565e19e12a4efc747c001cedb815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b15f472_53350cb3",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-21T08:14:48Z",
       "side": 1,
       "message": "Bit weird that we\u0027re scanning \u0027all\u0027 the results, when we know a \u0027var\u0027 only has one.",
+      "revId": "31000fda16a5565e19e12a4efc747c001cedb815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce3af19_61792f85",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-22T18:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b15f472_53350cb3",
       "revId": "31000fda16a5565e19e12a4efc747c001cedb815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
