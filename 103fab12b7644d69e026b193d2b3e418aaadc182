@@ -180,6 +180,24 @@
       "parentUuid": "783b091c_a0dc05d7",
       "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b11fc8_f9c3cf90",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T19:32:49Z",
+      "side": 1,
+      "message": "Just to add, I verified and the files in both paths (for each arch) in the SDK are exactly the same.",
+      "parentUuid": "e969d5a7_1ad79fc5",
+      "revId": "103fab12b7644d69e026b193d2b3e418aaadc182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
