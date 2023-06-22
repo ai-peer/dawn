@@ -51,6 +51,24 @@
       "message": "CRLF change?",
       "revId": "7af31cb2f444520773385a1a38ae6c9e8a942efa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73f145e0_40ecdc74",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T15:25:25Z",
+      "side": 1,
+      "message": "No, it\u0027s not obvious at first glance, but I just fixed a typo and grammar:\n\ns/in usng/if using",
+      "parentUuid": "54b83747_b1793c30",
+      "revId": "7af31cb2f444520773385a1a38ae6c9e8a942efa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
