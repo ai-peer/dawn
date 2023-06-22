@@ -228,6 +228,30 @@
       },
       "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3f4a4e_d7c70130",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-22T15:23:44Z",
+      "side": 1,
+      "message": "I went ahead and split up the source_sets.",
+      "parentUuid": "48e86af6_16cd56ec",
+      "range": {
+        "startLine": 1252,
+        "startChar": 22,
+        "endLine": 1252,
+        "endChar": 46
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
