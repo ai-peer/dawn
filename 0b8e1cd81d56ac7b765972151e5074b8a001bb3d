@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c723fc3a_47a0c75b",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T15:24:58Z",
+      "side": 1,
+      "message": "ack, thanks",
+      "parentUuid": "7b3a63b3_3cd2719f",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5313b90_4d18cc19",
@@ -268,6 +292,30 @@
       "side": 1,
       "message": "Aside from the ?? about `_1`, `_2` suffixes, having them split by \"module\" likely means we can more easily omit all the frontend code when we build the DXIL emitter (e.g. just drop the use of sourceset `dxc_clang_lib_frontend`).\n\nIt might also be slightly easier to update with a new roll (scan for changes in directory / sourceset X).\n\nI don\u0027t feel strongly, but it does feel like a cleaner approach.",
       "parentUuid": "48e86af6_16cd56ec",
+      "range": {
+        "startLine": 1252,
+        "startChar": 22,
+        "endLine": 1252,
+        "endChar": 46
+      },
+      "revId": "0b8e1cd81d56ac7b765972151e5074b8a001bb3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b5bb76_378e8fc8",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-22T15:24:58Z",
+      "side": 1,
+      "message": "ace, thanks",
+      "parentUuid": "8ebd948b_92796a96",
       "range": {
         "startLine": 1252,
         "startChar": 22,
