@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f61a7f4_fa537d29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-22T04:27:42Z",
+      "side": 1,
+      "message": "PTAL. Thanks!",
+      "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137639bd_e4bbef24",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-22T04:27:42Z",
+      "side": 1,
+      "message": "In the spec, we need to validate this new enum in CreateRenderPipeline and DrawXX APIs. But I think currently we don\u0027t need to validate kMaxBindGroupPlusVertexBuffers. Because it equals to 24, which is greater than kMaxBindGroups (4) + kMaxVertexBuffers (8). So, it is definitely safe.\n\nBut I put an ASSERT here in case this is not true in future. Then we need to validate at that time.",
+      "range": {
+        "startLine": 498,
+        "startChar": 4,
+        "endLine": 499,
+        "endChar": 82
+      },
+      "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
