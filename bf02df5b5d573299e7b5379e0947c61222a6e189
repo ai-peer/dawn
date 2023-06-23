@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e4e7e69c_c147fb82",
+        "filename": "project.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003161
+      },
+      "writtenOn": "2023-06-23T20:51:59Z",
+      "side": 1,
+      "message": "My bad, I confused references. It also seems like I shouldn\u0027t be granting owners-override so I\u0027m abandoning this change.",
+      "parentUuid": "7d8684fe_a7a221ec",
+      "revId": "bf02df5b5d573299e7b5379e0947c61222a6e189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "97318464_67bc299d",
         "filename": "project.config",
         "patchSetId": 2
