@@ -16,6 +16,57 @@
       "message": "PTAL",
       "revId": "519914e110fb8c34d9ac65c5d7e7ec3fb6ac3a08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e38f1a5b_8379681c",
+        "filename": "src/tint/writer/ir_text_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-23T14:28:46Z",
+      "side": 1,
+      "message": "Nit: `Result()` ?",
+      "revId": "519914e110fb8c34d9ac65c5d7e7ec3fb6ac3a08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71df1470_6c0c46bd",
+        "filename": "src/tint/writer/msl/generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-23T14:28:46Z",
+      "side": 1,
+      "message": "Nit: MSL",
+      "revId": "519914e110fb8c34d9ac65c5d7e7ec3fb6ac3a08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed056d4c_be362093",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-23T14:28:46Z",
+      "side": 1,
+      "message": "Nit: MSL",
+      "revId": "519914e110fb8c34d9ac65c5d7e7ec3fb6ac3a08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
