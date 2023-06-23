@@ -196,6 +196,24 @@
       "parentUuid": "8e3b2c85_e22fe180",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca197e0_476ebaa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-23T00:54:19Z",
+      "side": 1,
+      "message": "It looks like you\u0027re adding every tint file to the installed headers? Do you need them all or just the generators, or inspector? (or even just the content of include/tint)?",
+      "parentUuid": "af81d944_6b6a9f71",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
