@@ -347,6 +347,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f99ad6_8b72d2cf",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-23T16:40:27Z",
+      "side": 1,
+      "message": "Thank you!",
+      "parentUuid": "4abe9c6a_918f7da7",
+      "revId": "ab0448f7d715e0aff7034a74a917289d73eff9e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "007b4259_d713856c",

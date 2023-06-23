@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5045aeec_eb71f941",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-23T16:40:27Z",
+      "side": 1,
+      "message": "u-nit: this code doesn\u0027t need the internals of the TextureBase anymore, so it could be moved into BlitToColorWithDraw.",
+      "revId": "6651fb44e5b98e52a290c7e364674394c6bc8d59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
