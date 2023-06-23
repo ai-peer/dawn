@@ -33,6 +33,23 @@
       "message": "It seems like it\u0027s not working though...",
       "revId": "ca284339965427d262a05ecf2ac512938b4b97c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae71aed_921cc700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-23T16:17:27Z",
+      "side": 1,
+      "message": "This can\u0027t work because we support version of macOS where the rename hasn\u0027t happened yet.",
+      "revId": "ca284339965427d262a05ecf2ac512938b4b97c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
