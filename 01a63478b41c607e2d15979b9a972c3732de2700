@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d22af9_f32fc26a",
+        "filename": "src/tint/writer/ast_text_generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-23T14:22:38Z",
+      "side": 1,
+      "message": "Nit: 2023",
+      "revId": "01a63478b41c607e2d15979b9a972c3732de2700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3483b865_d96ed3a0",
+        "filename": "src/tint/writer/ast_text_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-23T14:22:38Z",
+      "side": 1,
+      "message": "Nit: \u0027tis 2023 now",
+      "revId": "01a63478b41c607e2d15979b9a972c3732de2700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

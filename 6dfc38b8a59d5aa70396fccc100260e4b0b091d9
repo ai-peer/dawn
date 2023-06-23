@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac56055a_3fc4c6db",
+        "filename": "src/tint/writer/text_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-23T14:22:38Z",
+      "side": 0,
+      "message": "Why aren\u0027t these methods left in the base class? Feels like the IR writers will want them too?",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 50
+      },
+      "revId": "6dfc38b8a59d5aa70396fccc100260e4b0b091d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
