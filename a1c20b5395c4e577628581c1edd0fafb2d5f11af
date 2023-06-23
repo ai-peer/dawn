@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64c1f0dd_95a67cdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-23T06:41:06Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "aa325644_fbf8390c",
+      "revId": "a1c20b5395c4e577628581c1edd0fafb2d5f11af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d81b6e51_d6aec134",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2da9fd7_fb7926be",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-23T06:41:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d81b6e51_d6aec134",
+      "range": {
+        "startLine": 420,
+        "startChar": 10,
+        "endLine": 421,
+        "endChar": 69
+      },
+      "revId": "a1c20b5395c4e577628581c1edd0fafb2d5f11af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "414015c0_c011d3b2",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-06-22T18:02:01Z",
       "side": 1,
       "message": "nit: hoist this out of the loops",
+      "range": {
+        "startLine": 427,
+        "startChar": 16,
+        "endLine": 433,
+        "endChar": 17
+      },
+      "revId": "a1c20b5395c4e577628581c1edd0fafb2d5f11af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff36d54e_7bcb3e23",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-23T06:41:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "414015c0_c011d3b2",
       "range": {
         "startLine": 427,
         "startChar": 16,
