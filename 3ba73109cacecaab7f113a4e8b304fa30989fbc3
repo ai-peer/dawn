@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de6cf63_e18aceaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-23T16:45:20Z",
+      "side": 1,
+      "message": "LGTM with comments.",
+      "revId": "3ba73109cacecaab7f113a4e8b304fa30989fbc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5bff79a_1944bca4",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-23T16:45:20Z",
+      "side": 1,
+      "message": "I think the check for `kInternalStorageBufferBinding` disappeared.",
+      "revId": "3ba73109cacecaab7f113a4e8b304fa30989fbc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abdaa640_2a5e9879",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-23T16:45:20Z",
+      "side": 1,
+      "message": "nit: This isn\u0027t always a possible fix and also we have conventions for error messages in https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md (\"Read-write storage buffer binding is used with a visibility (%s) that contains %s (note that read-only storage buffer bindings are allowed).\", entry.visibility, wgpu::ShaderStage::Vertex)",
+      "range": {
+        "startLine": 88,
+        "startChar": 36,
+        "endLine": 88,
+        "endChar": 79
+      },
+      "revId": "3ba73109cacecaab7f113a4e8b304fa30989fbc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a86da6e9_a50cc8d5",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-23T16:45:20Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3ba73109cacecaab7f113a4e8b304fa30989fbc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
