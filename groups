@@ -1,6 +1,7 @@
 # UUID                                  	Group Name
 #
 21b8b413a824fc9d475f4cbf4ce44ba6a4f02cf8	chromium-branch-creators
+752da8d029d427567aa8c12c344fe402d8bdff51	chrome-branch-day@chops-service-accounts.iam.gserviceaccount.com
 cria:project-dawn-admins                	cria/project-dawn-admins
 cria:project-dawn-committers            	cria/project-dawn-committers
 cria:project-dawn-tryjob-access         	cria/project-dawn-tryjob-access
@@ -8,5 +9,6 @@ d88594eff8d639cb82d00cdda77f3ec69a8463a0	dawn-scoped@luci-project-accounts.iam.g
 global:Change-Owner                     	Change Owner
 mdb:chrome-active-sheriffs              	mdb/chrome-active-sheriffs
 mdb:chrome-git-admins                   	mdb/chrome-git-admins
+mdb:chrome-release                      	mdb/chrome-release
 mdb:kokoro                              	mdb/kokoro
 mdb:kokoro-dedicated                    	mdb/kokoro-dedicated
