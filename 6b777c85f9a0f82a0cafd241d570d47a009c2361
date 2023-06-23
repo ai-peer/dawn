@@ -56,6 +56,30 @@
       },
       "revId": "6b777c85f9a0f82a0cafd241d570d47a009c2361",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71d6f8eb_aae9b045",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-23T06:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf4fbfac_b2fbd066",
+      "range": {
+        "startLine": 1828,
+        "startChar": 20,
+        "endLine": 1828,
+        "endChar": 35
+      },
+      "revId": "6b777c85f9a0f82a0cafd241d570d47a009c2361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
