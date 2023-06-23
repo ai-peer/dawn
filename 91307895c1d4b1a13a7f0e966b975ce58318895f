@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b12123_5386215f",
+        "filename": "src/dawn/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-23T17:45:02Z",
+      "side": 0,
+      "message": "I don\u0027t think it\u0027s sufficient to remove this. We need to make the device some other way. First by making an instance, then making an adapter, then finally making a device.\n\nThis is quite a lot so I looked into it a bit.\n\nProbably something like:\n\n```suggestion\n    // Make and inject an instance\n    apiInstance \u003d api.GetNewInstance();\n    auto instanceReservation \u003d mWireClient-\u003eReserveInstance();\n    EXPECT_CALL(api, InstanceReference(apiInstance));\n    mWireServer-\u003eInjectInstance(apiInstance, instanceReservation.id,\n                                instanceReservation.generation);\n\n    // Request an adapter\n    WGPUAdapter adapter;\n    wgpuInstanceRequestAdapter(\n        instanceReservation.instance, nullptr,\n        [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {\n            *static_cast\u003cWGPUAdapter*\u003e(userdata) \u003d cAdapter;\n        },\n        \u0026adapter);\n\n    // Mock a fake response to requestAdapter\n    apiAdapter \u003d api.GetNewAdapter();\n    EXPECT_CALL(api, OnInstanceRequestAdapter(apiInstance, nullptr, _, _))\n        .WillOnce(InvokeWithoutArgs([\u0026]() {\n            EXPECT_CALL(api, AdapterGetProperties(apiAdapter, _))\n                .WillOnce(WithArg\u003c1\u003e(Invoke([\u0026](WGPUAdapterProperties* properties) {\n                    *properties \u003d {};\n                    properties-\u003evendorName \u003d \"\";\n                    properties-\u003earchitecture \u003d \"\";\n                    properties-\u003ename \u003d \"\";\n                    properties-\u003edriverDescription \u003d \"\";\n                })));\n\n            EXPECT_CALL(api, AdapterGetLimits(apiAdapter, NotNull()))\n                .WillOnce(WithArg\u003c1\u003e(Invoke([\u0026](WGPUSupportedLimits* limits) {\n                    *limits \u003d {};\n                    return true;\n                })));\n\n            EXPECT_CALL(api, AdapterEnumerateFeatures(apiAdapter, _))\n                .WillOnce(Return(0))\n                .WillOnce(Return(0));\n            api.CallInstanceRequestAdapterCallback(apiInstance, WGPURequestAdapterStatus_Success,\n                                                   apiAdapter, nullptr);\n        }));\n    FlushClient();\n    FlushServer();\n\n    // Request a device\n    wgpuAdapterRequestDevice(\n        adapter, nullptr,\n        [](WGPURequestDeviceStatus, WGPUDevice cDevice, const char*, void* userdata) {\n            *static_cast\u003cWGPUDevice*\u003e(userdata) \u003d cDevice;\n        },\n        \u0026device);\n\n    // Mock a fake response to requestDevice\n    apiDevice \u003d api.GetNewDevice();\n    EXPECT_CALL(api, OnAdapterRequestDevice(apiAdapter, _, _, _)).WillOnce(InvokeWithoutArgs([\u0026]() {\n        EXPECT_CALL(api, DeviceGetLimits(apiDevice, NotNull()))\n            .WillOnce(WithArg\u003c1\u003e(Invoke([\u0026](WGPUSupportedLimits* limits) {\n                *limits \u003d {};\n                return true;\n            })));\n\n        EXPECT_CALL(api, DeviceEnumerateFeatures(apiDevice, _))\n            .WillOnce(Return(0))\n            .WillOnce(Return(0));\n\n        EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, NotNull(), NotNull()));\n        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, NotNull(), NotNull()));\n        EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, NotNull(), NotNull()));\n\n        api.CallAdapterRequestDeviceCallback(apiAdapter, WGPURequestDeviceStatus_Success, apiDevice,\n                                             nullptr);\n    }));\n    FlushClient();\n    FlushServer();\n```\n\nThe same pattern (without mocks) probably needs to be done other places as well - like SampleUtils.cpp",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "91307895c1d4b1a13a7f0e966b975ce58318895f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
