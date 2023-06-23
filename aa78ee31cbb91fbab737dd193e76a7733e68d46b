@@ -250,6 +250,24 @@
       "parentUuid": "a546271e_cbe59913",
       "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05723833_d0c8b9ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-06-23T16:47:52Z",
+      "side": 1,
+      "message": "I removed a couple of libraries and header files that I thought were not from the public API. But I\u0027m still not sure. Maybe the glfw library would be useful for a lot of people",
+      "parentUuid": "a5a5a647_a1225d32",
+      "revId": "aa78ee31cbb91fbab737dd193e76a7733e68d46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
