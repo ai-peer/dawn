@@ -190,11 +190,22 @@ TEST_F(MslGeneratorImplIrTest, EmitType_Matrix_F16) {
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(utils::TrimSpace(generator_.result()), "half2x3");
 }
-
 TEST_F(MslGeneratorImplIrTest, EmitType_U32) {
     generator_.EmitType(generator_.line(), ty.u32());
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(utils::TrimSpace(generator_.result()), "uint");
+}
+
+TEST_F(MslGeneratorImplIrTest, EmitType_Atomic_U32) {
+    generator_.EmitType(generator_.line(), ty.atomic<u32>());
+    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
+    EXPECT_EQ(utils::TrimSpace(generator_.result()), "atomic_uint");
+}
+
+TEST_F(MslGeneratorImplIrTest, EmitType_Atomic_I32) {
+    generator_.EmitType(generator_.line(), ty.atomic<i32>());
+    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
+    EXPECT_EQ(utils::TrimSpace(generator_.result()), "atomic_int");
 }
 
 TEST_F(MslGeneratorImplIrTest, EmitType_Vector) {
