@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfc22f1_43a7041f",
+        "filename": "src/tint/writer/ir_text_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-24T14:38:54Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/138900",
+      "parentUuid": "c62ee6a9_dc881345",
+      "revId": "519914e110fb8c34d9ac65c5d7e7ec3fb6ac3a08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71df1470_6c0c46bd",
