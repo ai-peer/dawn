@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "557916b7_a5384b6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-25T15:37:55Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "9d74aef6f6c4f578f381f8d77c45c186e67c6576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfdee9b9_04c45aef",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-25T15:37:55Z",
+      "side": 1,
+      "message": "There were no existing tests for these, so this is based on what the old code would do.",
+      "revId": "9d74aef6f6c4f578f381f8d77c45c186e67c6576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
