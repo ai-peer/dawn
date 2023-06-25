@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c316c69_a4912ae6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-25T15:38:19Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "5cdfdf752ae6aa4fc99956018f69b66a33acfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2cf132a_878800f6",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-25T15:38:19Z",
+      "side": 1,
+      "message": "No existing tests, these are based on current behaviour.",
+      "revId": "5cdfdf752ae6aa4fc99956018f69b66a33acfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
