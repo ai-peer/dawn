@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "681570dc_1b709202",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir_type_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-25T15:36:25Z",
+      "side": 0,
+      "message": "This was a bit weird as it didn\u0027t actually use a runtime array to test runtime arrays ...",
+      "revId": "a6e6a44cb1704433a05542111e043948ef74d58c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
