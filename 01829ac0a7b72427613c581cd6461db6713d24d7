@@ -94,6 +94,30 @@
       },
       "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e4b87a1_b660d5df",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T14:03:15Z",
+      "side": 1,
+      "message": "If we do find it is too slow, there\u0027s no reason we couldn\u0027t have it behind a `tint_unittest` command line flag, which is enabled for CQ / Kokoro as you suggest.\nTo do that though, we need the test output to be parsable.",
+      "parentUuid": "4c901131_ab41466f",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 42
+      },
+      "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
