@@ -22,6 +22,30 @@
       },
       "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58b6b69_773b7339",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T11:48:45Z",
+      "side": 1,
+      "message": "The problem is, you need enough support to run through Generate, which currently doesn\u0027t exist. (This `EmitFunction` is really just a stub to make sure things work).\n\nFor testing `EmitType` and `EmitConstant` it\u0027s a lot simpler to call directly into the emit function.",
+      "parentUuid": "d568bf82_326c4919",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 42
+      },
+      "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
