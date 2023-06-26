@@ -121,6 +121,11 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
      {"msaa-render-to-single-sampled",
       "Support multisampled rendering on single-sampled attachments efficiently.",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=1710", FeatureInfo::FeatureState::Stable}},
+    {Feature::CompatSampleMask,
+     {"compat-sample-mask",
+      "Support usage of sample_mask builtins in shaders on compat opengl backend with the "
+      "GL_OES_sample_variables extension",
+      "https://bugs.chromium.org/p/dawn/issues/detail?id=1836", FeatureInfo::FeatureState::Stable}},
 }};
 
 Feature FromAPIFeature(wgpu::FeatureName feature) {
@@ -173,6 +178,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::Float32Filterable;
         case wgpu::FeatureName::MSAARenderToSingleSampled:
             return Feature::MSAARenderToSingleSampled;
+        case wgpu::FeatureName::CompatSampleMask:
+            return Feature::CompatSampleMask;
     }
     return Feature::InvalidEnum;
 }
@@ -221,6 +228,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::Float32Filterable;
         case Feature::MSAARenderToSingleSampled:
             return wgpu::FeatureName::MSAARenderToSingleSampled;
+        case Feature::CompatSampleMask:
+            return wgpu::FeatureName::CompatSampleMask;
 
         case Feature::EnumCount:
             break;

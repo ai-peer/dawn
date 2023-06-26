@@ -137,56 +137,6 @@ TEST_F(CompatValidationTest, CanNotCreatePipelineWithDifferentPerTargetBlendStat
     }
 }
 
-TEST_F(CompatValidationTest, CanNotUseFragmentShaderWithSampleMask) {
-    wgpu::ShaderModule moduleSampleMaskOutput = utils::CreateShaderModule(device, R"(
-        @vertex fn vs() -> @builtin(position) vec4f {
-            return vec4f(1);
-        }
-        struct Output {
-            @builtin(sample_mask) mask_out: u32,
-            @location(0) color : vec4f,
-        }
-        @fragment fn fsWithoutSampleMaskUsage() -> @location(0) vec4f {
-            return vec4f(1.0, 1.0, 1.0, 1.0);
-        }
-        @fragment fn fsWithSampleMaskUsage() -> Output {
-            var o: Output;
-            // We need to make sure this sample_mask isn't optimized out even its value equals "no op".
-            o.mask_out = 0xFFFFFFFFu;
-            o.color = vec4f(1.0, 1.0, 1.0, 1.0);
-            return o;
-        }
-    )");
-
-    // Check we can use a fragment shader that doesn't use sample_mask from
-    // the same module as one that does.
-    {
-        utils::ComboRenderPipelineDescriptor descriptor;
-        descriptor.vertex.module = moduleSampleMaskOutput;
-        descriptor.vertex.entryPoint = "vs";
-        descriptor.cFragment.module = moduleSampleMaskOutput;
-        descriptor.cFragment.entryPoint = "fsWithoutSampleMaskUsage";
-        descriptor.multisample.count = 4;
-        descriptor.multisample.alphaToCoverageEnabled = false;
-
-        device.CreateRenderPipeline(&descriptor);
-    }
-
-    // Check we can not use a fragment shader that uses sample_mask.
-    {
-        utils::ComboRenderPipelineDescriptor descriptor;
-        descriptor.vertex.module = moduleSampleMaskOutput;
-        descriptor.vertex.entryPoint = "vs";
-        descriptor.cFragment.module = moduleSampleMaskOutput;
-        descriptor.cFragment.entryPoint = "fsWithSampleMaskUsage";
-        descriptor.multisample.count = 4;
-        descriptor.multisample.alphaToCoverageEnabled = false;
-
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
-                            testing::HasSubstr("sample_mask"));
-    }
-}
-
 constexpr const char* kRenderTwoTexturesOneBindgroupWGSL = R"(
     @vertex
     fn vs(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
@@ -968,6 +918,74 @@ TEST_F(CompatCompressedTextureToBufferCopyValidationTests, CanNotCopyCompressedT
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyTextureToBuffer(&source, &destination, &descriptor.size);
         ASSERT_DEVICE_ERROR(encoder.Finish(), testing::HasSubstr("cannot be used"));
+    }
+}
+
+class CompatSampleMaskValidationTests : public CompatValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        std::vector<wgpu::FeatureName> requiredFeatures;
+        if (adapter.HasFeature(wgpu::FeatureName::CompatSampleMask)) {
+            requiredFeatures.push_back(wgpu::FeatureName::CompatSampleMask);
+        }
+        descriptor.requiredFeatures = requiredFeatures.data();
+        descriptor.requiredFeaturesCount = requiredFeatures.size();
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+TEST_F(CompatSampleMaskValidationTests, CanNotUseFragmentShaderWithSampleMask) {
+    wgpu::ShaderModule moduleSampleMaskOutput = utils::CreateShaderModule(device, R"(
+        @vertex fn vs() -> @builtin(position) vec4f {
+            return vec4f(1);
+        }
+        struct Output {
+            @builtin(sample_mask) mask_out: u32,
+            @location(0) color : vec4f,
+        }
+        @fragment fn fsWithoutSampleMaskUsage() -> @location(0) vec4f {
+            return vec4f(1.0, 1.0, 1.0, 1.0);
+        }
+        @fragment fn fsWithSampleMaskUsage() -> Output {
+            var o: Output;
+            // We need to make sure this sample_mask isn't optimized out even its value equals "no op".
+            o.mask_out = 0xFFFFFFFFu;
+            o.color = vec4f(1.0, 1.0, 1.0, 1.0);
+            return o;
+        }
+    )");
+
+    // Check we can use a fragment shader that doesn't use sample_mask from
+    // the same module as one that does.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = moduleSampleMaskOutput;
+        descriptor.vertex.entryPoint = "vs";
+        descriptor.cFragment.module = moduleSampleMaskOutput;
+        descriptor.cFragment.entryPoint = "fsWithoutSampleMaskUsage";
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = false;
+
+        device.CreateRenderPipeline(&descriptor);
+    }
+
+    // Check we can not use a fragment shader that uses sample_mask.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = moduleSampleMaskOutput;
+        descriptor.vertex.entryPoint = "vs";
+        descriptor.cFragment.module = moduleSampleMaskOutput;
+        descriptor.cFragment.entryPoint = "fsWithSampleMaskUsage";
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = false;
+
+        if (device.HasFeature(wgpu::FeatureName::CompatSampleMask)) {
+            device.CreateRenderPipeline(&descriptor);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
+                                testing::HasSubstr("sample_mask"));
+        }
     }
 }
 
