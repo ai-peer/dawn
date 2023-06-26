@@ -437,15 +437,6 @@ void GeneratorImplIr::EmitConstant(utils::StringStream& out, ir::Constant* c) {
 }
 
 void GeneratorImplIr::EmitConstant(utils::StringStream& out, const constant::Value* c) {
-    auto emit_values = [&](uint32_t count) {
-        for (size_t i = 0; i < count; i++) {
-            if (i > 0) {
-                out << ", ";
-            }
-            EmitConstant(out, c->Index(i));
-        }
-    };
-
     tint::Switch(
         c->Type(),  //
         [&](const type::Bool*) { out << (c->ValueAs<bool>() ? "true" : "false"); },
@@ -456,17 +447,16 @@ void GeneratorImplIr::EmitConstant(utils::StringStream& out, const constant::Val
         [&](const type::Vector* v) {
             EmitType(out, v);
 
-            ScopedParen sp(out);
             if (auto* splat = c->As<constant::Splat>()) {
+                ScopedParen sp(out);
                 EmitConstant(out, splat->el);
-                return;
+            } else {
+                EmitParenList(out, v->Width(), [&](size_t i) { EmitConstant(out, c->Index(i)); });
             }
-            emit_values(v->Width());
         },
         [&](const type::Matrix* m) {
             EmitType(out, m);
-            ScopedParen sp(out);
-            emit_values(m->columns());
+            EmitParenList(out, m->columns(), [&](size_t i) { EmitConstant(out, c->Index(i)); });
         },
         [&](const type::Array* a) {
             EmitType(out, a);
@@ -483,7 +473,7 @@ void GeneratorImplIr::EmitConstant(utils::StringStream& out, const constant::Val
                                        type::Array::kErrExpectedConstantCount);
                 return;
             }
-            emit_values(*count);
+            EmitList(out, *count, [&](size_t i) { EmitConstant(out, c->Index(i)); });
         },
         [&](Default) { UNHANDLED_CASE(c); });
 }

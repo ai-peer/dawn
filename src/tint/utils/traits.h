@@ -64,6 +64,8 @@ template <typename R, typename C, typename... ARGS>
 struct SignatureOf<R (C::*)(ARGS...)> {
     /// The signature of the function-like object `F`
     using type = Signature<typename std::decay<R>::type, typename std::decay<ARGS>::type...>;
+    /// The object that holds the method.
+    using object = C;
 };
 
 /// SignatureOf specialization for a non-static, const method.
@@ -71,6 +73,8 @@ template <typename R, typename C, typename... ARGS>
 struct SignatureOf<R (C::*)(ARGS...) const> {
     /// The signature of the function-like object `F`
     using type = Signature<typename std::decay<R>::type, typename std::decay<ARGS>::type...>;
+    /// The object that holds the method.
+    using object = C;
 };
 
 /// SignatureOfT is an alias to `typename SignatureOf<F>::type`.

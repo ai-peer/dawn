@@ -154,6 +154,137 @@ class TextGenerator {
     /// @returns the list of diagnostics raised by the generator.
     const diag::List& Diagnostics() const { return diagnostics_; }
 
+    /// Callback invokes the callback function @p callback with the arguments @p args.
+    /// @param callback a static function or non-static member function of signature:
+    /// `void(ARGS...)`
+    /// @param args the arguments to pass to the callback function
+    template <typename CALLBACK, typename... ARGS>
+    void Callback(CALLBACK&& callback, ARGS&&... args) {
+        if constexpr (std::is_member_function_pointer_v<CALLBACK>) {
+            using object = typename utils::traits::SignatureOf<CALLBACK>::object;
+            auto* self = static_cast<object*>(this);
+            (self->*callback)(std::forward<ARGS>(args)...);
+        } else {
+            callback(std::forward<ARGS>(args)...);
+        }
+    }
+
+    /// Callback invokes the callback function @p callback with the arguments @p args, prepending
+    /// the output string stream argument @p out if the callback expects it.
+    /// @param callback a static function or non-static member function of signature:
+    /// `void(utils::StringStream&, ARGS...)` or `void(ARGS...)`.
+    /// @param out the output string stream
+    /// @param args the arguments to pass to the callback function
+    template <typename CALLBACK, typename... ARGS>
+    void CallbackWithOut(CALLBACK&& callback, utils::StringStream& out, ARGS&&... args) {
+        if constexpr (std::is_same_v<utils::traits::ParameterType<CALLBACK, 0>,
+                                     utils::StringStream>) {
+            Callback(std::forward<CALLBACK>(callback), out, std::forward<ARGS>(args)...);
+        } else {
+            Callback(std::forward<CALLBACK>(callback), std::forward<ARGS>(args)...);
+        }
+    }
+
+    /// Emits a comma separated list of elements to @p out. Each element is emitted with the
+    /// callback function @p emit_element.
+    /// @param out the output string stream
+    /// @param elements the vector of elements to emit
+    /// @param emit_element a callback function of signature:
+    /// `void(utils::StringStream&, T)` or `void(T)`.
+    /// @note @p emit_element may be a member function of a class derived from this class.
+    template <typename T, typename EMIT_ELEMENT>
+    void EmitList(utils::StringStream& out,
+                  utils::VectorRef<T> elements,
+                  EMIT_ELEMENT&& emit_element) {
+        for (auto* el : elements) {
+            if (&el != &elements.Front()) {
+                out << ", ";
+            }
+            CallbackWithOut(std::forward<EMIT_ELEMENT>(emit_element), out, el);
+        }
+    }
+
+    /// Emits a comma separated list of elements to @p out. Each element is emitted with the
+    /// callback function @p emit_element.
+    /// @param out the output string stream
+    /// @param elements the list of elements to emit
+    /// @param emit_element a callback function of signature:
+    /// `void(utils::StringStream&, T)` or `void(T)`.
+    /// @note @p emit_element may be a member function of a class derived from this class.
+    template <typename T, typename EMIT_ELEMENT>
+    void EmitList(utils::StringStream& out,
+                  std::initializer_list<T> elements,
+                  EMIT_ELEMENT&& emit_element) {
+        bool first = true;
+        for (auto* el : elements) {
+            if (!first) {
+                out << ", ";
+            }
+            first = false;
+            CallbackWithOut(std::forward<EMIT_ELEMENT>(emit_element), out, el);
+        }
+    }
+
+    /// Emits a comma separated list of elements to @p out. Each element is emitted with the
+    /// callback function @p emit_element.
+    /// @param out the output string stream
+    /// @param count the number of elements
+    /// @param emit_element a callback function of signature:
+    /// `void(utils::StringStream&, size_t)` or `void(size_t)`.
+    /// @note @p emit_element may be a member function of a class derived from this class.
+    template <typename EMIT_ELEMENT>
+    void EmitList(utils::StringStream& out, size_t count, EMIT_ELEMENT&& emit_element) {
+        for (size_t i = 0; i < count; i++) {
+            if (i > 0) {
+                out << ", ";
+            }
+            CallbackWithOut(std::forward<EMIT_ELEMENT>(emit_element), out, i);
+        }
+    }
+
+    /// A wrapper for EmitList, which wraps the output in parentheses.
+    /// @see EmitList
+    /// @param out the output string stream
+    /// @param elements the vector of elements to emit
+    /// @param emit_element a callback function of signature:
+    /// `void(utils::StringStream&, T)` or `void(T)`.
+    /// @note @p emit_element may be a member function of a class derived from this class.
+    template <typename T, typename EMIT_ELEMENT>
+    void EmitParenList(utils::StringStream& out,
+                       utils::VectorRef<T> elements,
+                       EMIT_ELEMENT&& emit_element) {
+        ScopedParen paren(out);
+        EmitList(out, elements, std::forward<EMIT_ELEMENT>(emit_element));
+    }
+
+    /// A wrapper for EmitList, which wraps the output in parentheses.
+    /// @see EmitList
+    /// @param out the output string stream
+    /// @param elements the list of elements to emit
+    /// @param emit_element a callback function of signature:
+    /// `void(utils::StringStream&, T)` or `void(T)`.
+    /// @note @p emit_element may be a member function of a class derived from this class.
+    template <typename T, typename EMIT_ELEMENT>
+    void EmitParenList(utils::StringStream& out,
+                       std::initializer_list<T> elements,
+                       EMIT_ELEMENT&& emit_element) {
+        ScopedParen paren(out);
+        EmitList(out, elements, std::forward<EMIT_ELEMENT>(emit_element));
+    }
+
+    /// A wrapper for EmitList, which wraps the output in parentheses.
+    /// @see EmitList
+    /// @param out the output string stream
+    /// @param count the number of elements
+    /// @param emit_element a callback function of signature:
+    /// `void(utils::StringStream&, size_t)` or `void(size_t)`.
+    /// @note @p emit_element may be a member function of a class derived from this class.
+    template <typename EMIT_ELEMENT>
+    void EmitParenList(utils::StringStream& out, size_t count, EMIT_ELEMENT&& emit_element) {
+        ScopedParen paren(out);
+        EmitList(out, count, std::forward<EMIT_ELEMENT>(emit_element));
+    }
+
   protected:
     /// Helper for writing a '(' on construction and a ')' destruction.
     struct ScopedParen {
