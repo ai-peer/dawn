@@ -70,6 +70,30 @@
       },
       "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c901131_ab41466f",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T13:32:32Z",
+      "side": 1,
+      "message": "I don\u0027t think we want to run the MSL compiler after every unit test, that would be way to slow. We should have integration tests which do run the compiler which get run on CQ.",
+      "parentUuid": "c0bf209d_31c639ad",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 42
+      },
+      "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
