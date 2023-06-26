@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "30f3636b80a7eab0de98115a5bd11f7be66a1feb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c5275b_2f5dbe8f",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T09:01:11Z",
+      "side": 1,
+      "message": "nit: this switch is growing large. Suggest pulling out the multi-line case to separate methods to keep the function size down.",
+      "revId": "30f3636b80a7eab0de98115a5bd11f7be66a1feb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
