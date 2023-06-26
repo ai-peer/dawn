@@ -166,7 +166,8 @@ class GlobalVariable final : public utils::Castable<GlobalVariable, Variable> {
                    builtin::Access access,
                    const constant::Value* constant_value,
                    std::optional<sem::BindingPoint> binding_point = std::nullopt,
-                   std::optional<uint32_t> location = std::nullopt);
+                   std::optional<uint32_t> location = std::nullopt,
+                   std::optional<uint32_t> index = std::nullopt);
 
     /// Destructor
     ~GlobalVariable() override;
@@ -188,6 +189,7 @@ class GlobalVariable final : public utils::Castable<GlobalVariable, Variable> {
 
     tint::OverrideId override_id_;
     std::optional<uint32_t> location_;
+    std::optional<uint32_t> index_;
 };
 
 /// Parameter is a function parameter
