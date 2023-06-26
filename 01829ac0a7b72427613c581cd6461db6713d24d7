@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d568bf82_326c4919",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T08:48:09Z",
+      "side": 1,
+      "message": "As discussed on SPIR-V writer changes, I\u0027d lean away from exposing the individual methods for unit testing. Testing the methods in isolation rarely accurately represent the production behaviour - they exclude backend transforms and often require state preambles which are difficult to maintain.\nTesting just `Generate()` does produce more output, but the additional surrounding code can highlight bugs, and more importantly, the whole output can usually be validated.\n\nI\u0027ll approve what you have, but I\u0027d like us to move away from this pattern.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 42
+      },
+      "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
