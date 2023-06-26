@@ -33,6 +33,24 @@
       "message": "There were no tests for matrix, so these are based on the old code behaviour.",
       "revId": "6122c98666cb443398e280dc6d3416d4b3408f68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bdc578f_10f262f9",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T09:12:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b469fdbc_bfe5cfbe",
+      "revId": "6122c98666cb443398e280dc6d3416d4b3408f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
