@@ -16,6 +16,160 @@
       "message": "I needed the ability to clear these optional fields, which can\u0027t be done with the existing setters. If making these getters return references is too gross I can either:\n1. Add `ClearWorkgroup`/`ClearBuiltin`/etc methods to clear the optional fields\n2. Change the existing setters to take a `std::optional`",
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8274f626_a0059ee8",
+        "filename": "src/tint/ir/function.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "I think I\u0027d prefer the `ClearWorkgroup` method to returning a ref. Or adding an override which takes an `optional`.",
+      "parentUuid": "b412a7f1_800ac8c7",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "088dbe0d_96086a50",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "TINT_SCOPED_ASSIGNMENT instead of assign and then DEFER?",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3a13e0_377fa316",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "I wonder if it would be useful to make `Return` allow a `nullptr` in the second param and treat that is no return value? Then this would just be a one liner instead of the whole if-dance.",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f546a53_d54cff7a",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "```\nif (func-\u003eReturnType()-\u003eIs\u003ctype::Void\u003e()) {\n   return backend-\u003eFinalizeOutputs();\n}\n```",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1050f7fe_7352afc2",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "Would it be useful to pull the name `Symbol` generation out to a helper as it\u0027s the same between input and output?",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4e9536_ae2afaab",
+        "filename": "src/tint/ir/transform/shader_io_spirv.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "nit: `and global variables for them`",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df069e69_01e4bbd3",
+        "filename": "src/tint/ir/transform/shader_io_spirv.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "This one and the one on line 108 both have the same prefix as their usage in the `ir-\u003eSetName` call just, minus the `Struct`",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb5bb731_a5505b5d",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "invert and `continue` ?",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a49cdf_c606c52e",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T21:51:30Z",
+      "side": 1,
+      "message": "ditto, invert and continue?",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
