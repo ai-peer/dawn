@@ -51,6 +51,24 @@
       "parentUuid": "20f26e81_503fc27b",
       "revId": "fcdc8d5bf92226ed7211714563c6d80044b4292f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f4b0883_9787f69e",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T14:18:06Z",
+      "side": 1,
+      "message": "Moved out to separate change",
+      "parentUuid": "c1226e67_2140b2d4",
+      "revId": "fcdc8d5bf92226ed7211714563c6d80044b4292f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
