@@ -46,6 +46,30 @@
       },
       "revId": "bad04c9db8ec7f43b50ef88641e259e34c928af2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f53f3d_44a1ff24",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-26T20:02:12Z",
+      "side": 1,
+      "message": "Hmm, I guess I don\u0027t feel that strongly regarding this, but it should be cheap to create an error pipeline and the behavior would be slightly more consistent in those cases. Fine to leave as is for now.",
+      "parentUuid": "dd740c6b_fd9450a7",
+      "range": {
+        "startLine": 1872,
+        "startChar": 4,
+        "endLine": 1872,
+        "endChar": 22
+      },
+      "revId": "bad04c9db8ec7f43b50ef88641e259e34c928af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
