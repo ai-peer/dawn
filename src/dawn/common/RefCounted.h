@@ -19,8 +19,6 @@
 #include <cstdint>
 #include <type_traits>
 
-#include "dawn/common/RefBase.h"
-
 namespace dawn {
 
 class RefCount {
@@ -44,8 +42,18 @@ class RefCount {
     std::atomic<uint64_t> mRefCount;
 };
 
+// Forwward declaration for Ref needed until TryGetRef can be removed with WeakRefs.
+// TODO(lokokung) Remove once WeakRef implementation is complete with cache.
 template <typename T>
 class Ref;
+
+// TODO(lokokung) Move to Ref.h once TryGetRef can be removed.
+template <typename T>
+Ref<T> AcquireRef(T* pointee) {
+    Ref<T> ref;
+    ref.Acquire(pointee);
+    return ref;
+}
 
 class RefCounted {
   public:
@@ -89,26 +97,6 @@ class RefCounted {
 
     RefCount mRefCount;
 };
-
-template <typename T>
-struct RefCountedTraits {
-    static constexpr T* kNullValue = nullptr;
-    static void Reference(T* value) { value->Reference(); }
-    static void Release(T* value) { value->Release(); }
-};
-
-template <typename T>
-class Ref : public RefBase<T*, RefCountedTraits<T>> {
-  public:
-    using RefBase<T*, RefCountedTraits<T>>::RefBase;
-};
-
-template <typename T>
-Ref<T> AcquireRef(T* pointee) {
-    Ref<T> ref;
-    ref.Acquire(pointee);
-    return ref;
-}
 
 }  // namespace dawn
 
