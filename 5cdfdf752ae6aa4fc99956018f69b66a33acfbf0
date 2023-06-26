@@ -74,6 +74,30 @@
       },
       "revId": "5cdfdf752ae6aa4fc99956018f69b66a33acfbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee11fa4a_20226797",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-26T17:12:44Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1969 to investigate",
+      "parentUuid": "071d081f_4723ad16",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 10
+      },
+      "revId": "5cdfdf752ae6aa4fc99956018f69b66a33acfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
