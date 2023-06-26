@@ -1462,7 +1462,8 @@
             {"value": 1006, "name": "timestamp query inside passes", "tags": ["dawn"]},
             {"value": 1007, "name": "implicit device synchronization", "tags": ["dawn", "native"]},
             {"value": 1008, "name": "surface capabilities", "tags": ["dawn"]},
-            {"value": 1009, "name": "transient attachments", "tags": ["dawn"]}
+            {"value": 1009, "name": "transient attachments", "tags": ["dawn"]},
+            {"value": 1010, "name": "compat sample mask", "tags": ["dawn"]}
         ]
     },
     "filter mode": {

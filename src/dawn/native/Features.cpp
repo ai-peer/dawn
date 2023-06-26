@@ -117,6 +117,11 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
       "Support transient attachments that allow render pass operations to stay in tile memory, "
       "avoiding VRAM traffic and potentially avoiding VRAM allocation for the textures.",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=1695", FeatureInfo::FeatureState::Stable}},
+    {Feature::CompatSampleMask,
+     {"compat-sample-mask",
+      "Support usage of sample_mask builtins in shaders on compat opengl backend with the "
+      "GL_OES_sample_variables extension",
+      "https://bugs.chromium.org/p/dawn/issues/detail?id=1836", FeatureInfo::FeatureState::Stable}},
 }};
 
 Feature FromAPIFeature(wgpu::FeatureName feature) {
@@ -167,6 +172,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::TransientAttachments;
         case wgpu::FeatureName::Float32Filterable:
             return Feature::Float32Filterable;
+        case wgpu::FeatureName::CompatSampleMask:
+            return Feature::CompatSampleMask;
     }
     return Feature::InvalidEnum;
 }
@@ -213,6 +220,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::TransientAttachments;
         case Feature::Float32Filterable:
             return wgpu::FeatureName::Float32Filterable;
+        case Feature::CompatSampleMask:
+            return wgpu::FeatureName::CompatSampleMask;
 
         case Feature::EnumCount:
             break;

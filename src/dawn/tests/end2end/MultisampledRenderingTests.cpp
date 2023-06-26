@@ -760,11 +760,26 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMas
     VerifyResolveTarget(kHalfGreenHalfRed, mResolveTexture, 0, 0, kMSAACoverage);
 }
 
+class MultisampledRenderingWithSampleMaskTest : public MultisampledRenderingTest {
+  protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> requiredFeatures = {};
+        if (IsCompatibilityMode()) {
+            if (SupportsFeatures({wgpu::FeatureName::CompatSampleMask})) {
+                requiredFeatures.push_back(wgpu::FeatureName::CompatSampleMask);
+            }
+        }
+        return requiredFeatures;
+    }
+};
+
 // Test using one multisampled color attachment with resolve target can render correctly
 // with non-default sample mask and shader-output mask.
-TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOutputMask) {
-    // sample_mask is not supported in compat.
-    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+TEST_P(MultisampledRenderingWithSampleMaskTest,
+       ResolveInto2DTextureWithSampleMaskAndShaderOutputMask) {
+    if (IsCompatibilityMode()) {
+        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::CompatSampleMask}));
+    }
 
     // TODO(crbug.com/dawn/673): Work around or enforce via validation that sample variables are not
     // supported on some platforms.
@@ -819,9 +834,11 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOut
 
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default
 // shader-output mask.
-TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithShaderOutputMask) {
-    // sample_mask is not supported in compat.
-    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+TEST_P(MultisampledRenderingWithSampleMaskTest,
+       ResolveIntoMultipleResolveTargetsWithShaderOutputMask) {
+    if (IsCompatibilityMode()) {
+        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::CompatSampleMask}));
+    }
 
     // TODO(dawn:1550) Fails on ARM-based Android devices.
     DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsARM());
@@ -1198,6 +1215,21 @@ TEST_P(MultisampledRenderingWithTransientAttachmentTest, ResolveTransientAttachm
 }
 
 DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
+                      D3D11Backend(),
+                      D3D12Backend(),
+                      D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
+                      D3D12Backend({}, {"use_d3d12_render_pass"}),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend(),
+                      VulkanBackend({"always_resolve_into_zero_level_and_layer"}),
+                      MetalBackend({"emulate_store_and_msaa_resolve"}),
+                      MetalBackend({"always_resolve_into_zero_level_and_layer"}),
+                      MetalBackend({"always_resolve_into_zero_level_and_layer",
+                                    "emulate_store_and_msaa_resolve"}));
+
+DAWN_INSTANTIATE_TEST(MultisampledRenderingWithSampleMaskTest,
                       D3D11Backend(),
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),

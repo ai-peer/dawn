@@ -50,6 +50,9 @@ enum class Feature {
     SurfaceCapabilities,
     TransientAttachments,
 
+    // Compat
+    CompatSampleMask,
+
     EnumCount,
     InvalidEnum = EnumCount,
     FeatureMin = TextureCompressionBC,
