@@ -156,6 +156,10 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (mFunctions.IsGLExtensionSupported("GL_AMD_gpu_shader_half_float")) {
         EnableFeature(Feature::ShaderF16);
     }
+
+    if (mFunctions.IsGLExtensionSupported("GL_OES_sample_variables")) {
+        EnableFeature(Feature::CompatSampleMask);
+    }
 }
 
 namespace {

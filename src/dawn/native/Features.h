@@ -51,6 +51,9 @@ enum class Feature {
     TransientAttachments,
     MSAARenderToSingleSampled,
 
+    // Compat
+    CompatSampleMask,
+
     EnumCount,
     InvalidEnum = EnumCount,
     FeatureMin = TextureCompressionBC,
