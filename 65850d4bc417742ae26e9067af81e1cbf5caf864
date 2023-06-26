@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73abf6ea_94b4717e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-26T21:12:30Z",
+      "side": 1,
+      "message": "Just realizing: do we need to have an internal dawn feature name implementation (like this) to make graphite available cross-platform, before WebGPU standardized these feature names for compat?",
+      "revId": "65850d4bc417742ae26e9067af81e1cbf5caf864",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
