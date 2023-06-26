@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "09b1846802ded75de01de0cb8c8db32347b4a1b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6062b4_cf002fce",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T10:41:56Z",
+      "side": 1,
+      "message": "Generating comma-separated lists is really common. I\u0027ve been thinking about helpers for this for a months and this finally motivated me to write them: https://dawn-review.googlesource.com/c/dawn/+/139060.",
+      "range": {
+        "startLine": 440,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 6
+      },
+      "revId": "09b1846802ded75de01de0cb8c8db32347b4a1b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
