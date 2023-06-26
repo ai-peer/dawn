@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b412a7f1_800ac8c7",
+        "filename": "src/tint/ir/function.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-26T20:29:57Z",
+      "side": 1,
+      "message": "I needed the ability to clear these optional fields, which can\u0027t be done with the existing setters. If making these getters return references is too gross I can either:\n1. Add `ClearWorkgroup`/`ClearBuiltin`/etc methods to clear the optional fields\n2. Change the existing setters to take a `std::optional`",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
