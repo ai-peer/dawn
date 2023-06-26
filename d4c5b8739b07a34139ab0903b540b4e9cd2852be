@@ -16,6 +16,52 @@
       "message": "PTAL",
       "revId": "d4c5b8739b07a34139ab0903b540b4e9cd2852be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e68a3e2_86adc3b3",
+        "filename": "src/tint/type/manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T08:57:15Z",
+      "side": 1,
+      "message": "```suggestion\n    /// @returns an atomic type with the element type @p inner\n```",
+      "range": {
+        "startLine": 162,
+        "startChar": 19,
+        "endLine": 162,
+        "endChar": 23
+      },
+      "revId": "d4c5b8739b07a34139ab0903b540b4e9cd2852be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea134929_68f2ad1d",
+        "filename": "src/tint/type/manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T08:57:15Z",
+      "side": 1,
+      "message": "```suggestion\n    /// @returns the atomic type\n```",
+      "range": {
+        "startLine": 166,
+        "startChar": 21,
+        "endLine": 166,
+        "endChar": 27
+      },
+      "revId": "d4c5b8739b07a34139ab0903b540b4e9cd2852be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
