@@ -64,7 +64,13 @@ class Value : public utils::Castable<Value> {
     virtual void Destroy();
 
     /// @returns true if the Value has not been destroyed with Destroy()
-    bool Alive() const { return alive_; }
+    bool Alive() const { return !flags_.Contains(Flag::kDead); }
+
+    /// @returns true if the Value can be inlined into its place of usage
+    bool CanInline() const { return flags_.Contains(Flag::kCanInline); }
+
+    /// @param value true if the Value can be inlined into its place of usage
+    void SetCanInline(bool value = true) { flags_.Set(Flag::kCanInline, value); }
 
     /// Adds a usage of this value.
     /// @param u the usage
@@ -91,8 +97,18 @@ class Value : public utils::Castable<Value> {
     Value();
 
   private:
+    /// Flags applied to an Value
+    enum class Flag {
+        /// The value has been destroyed
+        kDead,
+        /// The value can be inlined into its place of usage
+        kCanInline,
+    };
+
     utils::Hashset<Usage, 4, Usage::Hasher> uses_;
-    bool alive_ = true;
+
+    /// Bitset of value flags
+    utils::EnumSet<Flag> flags_;
 };
 }  // namespace tint::ir
 

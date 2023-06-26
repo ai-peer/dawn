@@ -144,6 +144,7 @@ class State {
     }
 
     StatementList Statements(ir::Block* block) {
+        MarkInlinable(block);
         StatementList stmts;
         if (block) {
             TINT_SCOPED_ASSIGNMENT(statements_, &stmts);
@@ -152,6 +153,42 @@ class State {
             }
         }
         return stmts;
+    }
+
+    void MarkInlinable(ir::Block* block) {
+        utils::UniqueVector<ir::Value*, 32> pending;
+        for (auto* inst = block->Front(); inst; inst = inst->next) {
+            for (auto* result : inst->Results()) {
+                result->SetCanInline(false);
+            }
+
+            bool sequenced = inst->Sequenced();
+            for (auto* operand : utils::Reverse(inst->Operands())) {
+                if (pending.Contains(operand)) {
+                    if (pending.TryPop(operand)) {
+                        operand->SetCanInline(true);
+                        sequenced = true;
+                    } else {
+                        for (size_t i = 0; i < pending.Length(); i++) {
+                            if (pending[i] == operand) {
+                                pending.Erase(0, i + 1);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (inst->Results().Length() == 1) {
+                auto* result = inst->Result();
+                if (result->Usages().Count() == 1 && !mod.NameOf(result).IsValid()) {
+                    if (sequenced) {
+                        pending.Add(result);
+                    } else {
+                        result->SetCanInline(true);
+                    }
+                }
+            }
+        }
     }
 
     void Append(const ast::Statement* inst) { statements_->Push(inst); }
@@ -214,6 +251,7 @@ class State {
 
         StatementList body_stmts;
         {
+            MarkInlinable(l->Body());
             TINT_SCOPED_ASSIGNMENT(statements_, &body_stmts);
             for (auto* inst : *l->Body()) {
                 if (body_stmts.IsEmpty()) {
@@ -615,7 +653,7 @@ class State {
     template <typename T>
     void Bind(ir::Value* value, const T* expr) {
         TINT_ASSERT(IR, value);
-        if (CanInline(value)) {
+        if (value->CanInline()) {
             // Value will be inlined at its place of usage.
             bool added = bindings_.Add(value, expr);
             if (TINT_UNLIKELY(!added)) {
@@ -626,12 +664,6 @@ class State {
             Append(b.Decl(b.Let(BindName(value), expr)));
         }
     }
-
-    /// @returns true if the if the value can be inlined into its single place
-    /// of usage. Currently a value is inlined if it has a single usage and is unnamed.
-    /// TODO(crbug.com/tint/1902): This logic needs to check that the sequence of side-effecting
-    /// expressions is not changed by inlining the expression. This needs fixing.
-    bool CanInline(Value* val) { return val->Usages().Count() == 1 && !mod.NameOf(val).IsValid(); }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Helpers

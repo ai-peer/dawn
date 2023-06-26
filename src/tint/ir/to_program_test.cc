@@ -15,52 +15,46 @@
 #include <string>
 
 #include "src/tint/ir/disassembler.h"
-#include "src/tint/ir/ir_test_helper.h"
 #include "src/tint/ir/to_program.h"
+#include "src/tint/ir/to_program_test.h"
 #include "src/tint/utils/string.h"
 #include "src/tint/writer/wgsl/generator.h"
 
-#if !TINT_BUILD_WGSL_WRITER
-#error "to_program_test.cc requires both the WGSL writer to be enabled"
-#endif
-
-namespace tint::ir {
-namespace {
+namespace tint::ir::test {
 
 using namespace tint::number_suffixes;        // NOLINT
 using namespace tint::builtin::fluent_types;  // NOLINT
 
-class IRToProgramTest : public IRTestHelper {
-  public:
-    void Test(std::string_view expected_wgsl) {
-        tint::ir::Disassembler d{mod};
-        auto disassembly = d.Disassemble();
+void IRToProgramTest::Test(std::string_view expected_wgsl) {
+    tint::ir::Disassembler d{mod};
+    auto disassembly = d.Disassemble();
 
-        auto output_program = ToProgram(mod);
-        if (!output_program.IsValid()) {
-            FAIL() << output_program.Diagnostics().str() << std::endl  //
-                   << "IR:" << std::endl                               //
-                   << disassembly << std::endl                         //
-                   << "AST:" << std::endl                              //
-                   << Program::printer(&output_program) << std::endl;
-        }
-
-        ASSERT_TRUE(output_program.IsValid()) << output_program.Diagnostics().str();
-
-        auto output = writer::wgsl::Generate(&output_program, {});
-        ASSERT_TRUE(output.success) << output.error;
-
-        auto expected = std::string(utils::TrimSpace(expected_wgsl));
-        if (!expected.empty()) {
-            expected = "\n" + expected + "\n";
-        }
-        auto got = std::string(utils::TrimSpace(output.wgsl));
-        if (!got.empty()) {
-            got = "\n" + got + "\n";
-        }
-        EXPECT_EQ(expected, got) << "IR:" << std::endl << disassembly;
+    auto output_program = ToProgram(mod);
+    if (!output_program.IsValid()) {
+        FAIL() << output_program.Diagnostics().str() << std::endl  //
+               << "IR:" << std::endl                               //
+               << disassembly << std::endl                         //
+               << "AST:" << std::endl                              //
+               << Program::printer(&output_program) << std::endl;
     }
-};
+
+    ASSERT_TRUE(output_program.IsValid()) << output_program.Diagnostics().str();
+
+    auto output = writer::wgsl::Generate(&output_program, {});
+    ASSERT_TRUE(output.success) << output.error;
+
+    auto expected = std::string(utils::TrimSpace(expected_wgsl));
+    if (!expected.empty()) {
+        expected = "\n" + expected + "\n";
+    }
+    auto got = std::string(utils::TrimSpace(output.wgsl));
+    if (!got.empty()) {
+        got = "\n" + got + "\n";
+    }
+    EXPECT_EQ(expected, got) << "IR:" << std::endl << disassembly;
+}
+
+namespace {
 
 TEST_F(IRToProgramTest, EmptyModule) {
     Test("");
@@ -533,16 +527,18 @@ TEST_F(IRToProgramTest, BinaryOp_LogicalAnd_Param_3_a_bc) {
     mod.functions.Push(fn);
 
     b.With(fn->Block(), [&] {
-        auto* if1 = b.If(pb);
+        auto* if1 = b.If(pa);
         if1->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if1->True(), [&] { b.ExitIf(if1, pc); });
-        b.With(if1->False(), [&] { b.ExitIf(if1, false); });
+        b.With(if1->True(), [&] {
+            auto* if2 = b.If(pb);
+            if2->SetResults(b.InstructionResult(ty.bool_()));
+            b.With(if2->True(), [&] { b.ExitIf(if2, pc); });
+            b.With(if2->False(), [&] { b.ExitIf(if2, false); });
 
-        auto* if2 = b.If(pa);
-        if2->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if2->True(), [&] { b.ExitIf(if2, if1->Result(0)); });
-        b.With(if2->False(), [&] { b.ExitIf(if2, false); });
-        b.Return(fn, if2->Result(0));
+            b.ExitIf(if1, if2->Result(0));
+        });
+        b.With(if1->False(), [&] { b.ExitIf(if1, false); });
+        b.Return(fn, if1->Result(0));
     });
 
     Test(R"(
@@ -625,18 +621,20 @@ TEST_F(IRToProgramTest, BinaryOp_LogicalAnd_Let_3_a_bc) {
     mod.functions.Push(fn);
 
     b.With(fn->Block(), [&] {
-        auto* if1 = b.If(pb);
+        auto* if1 = b.If(pa);
         if1->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if1->True(), [&] { b.ExitIf(if1, pc); });
+        b.With(if1->True(), [&] {
+            auto* if2 = b.If(pb);
+            if2->SetResults(b.InstructionResult(ty.bool_()));
+            b.With(if2->True(), [&] { b.ExitIf(if2, pc); });
+            b.With(if2->False(), [&] { b.ExitIf(if2, false); });
+
+            b.ExitIf(if1, if2->Result(0));
+        });
         b.With(if1->False(), [&] { b.ExitIf(if1, false); });
 
-        auto* if2 = b.If(pa);
-        if2->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if2->True(), [&] { b.ExitIf(if2, if1->Result(0)); });
-        b.With(if2->False(), [&] { b.ExitIf(if2, false); });
-
-        mod.SetName(if2->Result(0), "l");
-        b.Return(fn, if2->Result(0));
+        mod.SetName(if1->Result(0), "l");
+        b.Return(fn, if1->Result(0));
     });
 
     Test(R"(
@@ -749,17 +747,19 @@ TEST_F(IRToProgramTest, BinaryOp_LogicalAnd_Call_3_a_bc) {
     mod.functions.Push(fn);
 
     b.With(fn->Block(), [&] {
-        auto* if1 = b.If(b.Call(ty.bool_(), fn_b));
+        auto* if1 = b.If(b.Call(ty.bool_(), fn_a));
         if1->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if1->True(), [&] { b.ExitIf(if1, b.Call(ty.bool_(), fn_c)); });
+        b.With(if1->True(), [&] {
+            auto* if2 = b.If(b.Call(ty.bool_(), fn_b));
+            if2->SetResults(b.InstructionResult(ty.bool_()));
+            b.With(if2->True(), [&] { b.ExitIf(if2, b.Call(ty.bool_(), fn_c)); });
+            b.With(if2->False(), [&] { b.ExitIf(if2, false); });
+
+            b.ExitIf(if1, if2->Result(0));
+        });
         b.With(if1->False(), [&] { b.ExitIf(if1, false); });
 
-        auto* if2 = b.If(b.Call(ty.bool_(), fn_a));
-        if2->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if2->True(), [&] { b.ExitIf(if2, if1->Result(0)); });
-        b.With(if2->False(), [&] { b.ExitIf(if2, false); });
-
-        b.Return(fn, if2->Result(0));
+        b.Return(fn, if1->Result(0));
     });
 
     Test(R"(
@@ -850,17 +850,19 @@ TEST_F(IRToProgramTest, BinaryOp_LogicalOr_Param_3_a_bc) {
     mod.functions.Push(fn);
 
     b.With(fn->Block(), [&] {
-        auto* if1 = b.If(pb);
+        auto* if1 = b.If(pa);
         if1->SetResults(b.InstructionResult(ty.bool_()));
         b.With(if1->True(), [&] { b.ExitIf(if1, true); });
-        b.With(if1->False(), [&] { b.ExitIf(if1, pc); });
+        b.With(if1->False(), [&] {
+            auto* if2 = b.If(pb);
+            if2->SetResults(b.InstructionResult(ty.bool_()));
+            b.With(if2->True(), [&] { b.ExitIf(if2, true); });
+            b.With(if2->False(), [&] { b.ExitIf(if2, pc); });
 
-        auto* if2 = b.If(pa);
-        if2->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if2->True(), [&] { b.ExitIf(if2, true); });
-        b.With(if2->False(), [&] { b.ExitIf(if2, if1->Result(0)); });
+            b.ExitIf(if1, if2->Result(0));
+        });
 
-        b.Return(fn, if2->Result(0));
+        b.Return(fn, if1->Result(0));
     });
 
     Test(R"(
@@ -943,18 +945,20 @@ TEST_F(IRToProgramTest, BinaryOp_LogicalOr_Let_3_a_bc) {
     mod.functions.Push(fn);
 
     b.With(fn->Block(), [&] {
-        auto* if1 = b.If(pb);
+        auto* if1 = b.If(pa);
         if1->SetResults(b.InstructionResult(ty.bool_()));
         b.With(if1->True(), [&] { b.ExitIf(if1, true); });
-        b.With(if1->False(), [&] { b.ExitIf(if1, pc); });
+        b.With(if1->False(), [&] {
+            auto* if2 = b.If(pb);
+            if2->SetResults(b.InstructionResult(ty.bool_()));
+            b.With(if2->True(), [&] { b.ExitIf(if2, true); });
+            b.With(if2->False(), [&] { b.ExitIf(if2, pc); });
 
-        auto* if2 = b.If(pa);
-        if2->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if2->True(), [&] { b.ExitIf(if2, true); });
-        b.With(if2->False(), [&] { b.ExitIf(if2, if1->Result(0)); });
+            b.ExitIf(if1, if2->Result(0));
+        });
 
-        mod.SetName(if2->Result(0), "l");
-        b.Return(fn, if2->Result(0));
+        mod.SetName(if1->Result(0), "l");
+        b.Return(fn, if1->Result(0));
     });
 
     Test(R"(
@@ -1067,17 +1071,19 @@ TEST_F(IRToProgramTest, BinaryOp_LogicalOr_Call_3_a_bc) {
     mod.functions.Push(fn);
 
     b.With(fn->Block(), [&] {
-        auto* if1 = b.If(b.Call(ty.bool_(), fn_b));
+        auto* if1 = b.If(b.Call(ty.bool_(), fn_a));
         if1->SetResults(b.InstructionResult(ty.bool_()));
         b.With(if1->True(), [&] { b.ExitIf(if1, true); });
-        b.With(if1->False(), [&] { b.ExitIf(if1, b.Call(ty.bool_(), fn_c)); });
+        b.With(if1->False(), [&] {
+            auto* if2 = b.If(b.Call(ty.bool_(), fn_b));
+            if2->SetResults(b.InstructionResult(ty.bool_()));
+            b.With(if2->True(), [&] { b.ExitIf(if2, true); });
+            b.With(if2->False(), [&] { b.ExitIf(if2, b.Call(ty.bool_(), fn_c)); });
 
-        auto* if2 = b.If(b.Call(ty.bool_(), fn_a));
-        if2->SetResults(b.InstructionResult(ty.bool_()));
-        b.With(if2->True(), [&] { b.ExitIf(if2, true); });
-        b.With(if2->False(), [&] { b.ExitIf(if2, if1->Result(0)); });
+            b.ExitIf(if1, if2->Result(0));
+        });
 
-        b.Return(fn, if2->Result(0));
+        b.Return(fn, if1->Result(0));
     });
 
     Test(R"(
@@ -2510,4 +2516,4 @@ fn f() {
 }
 
 }  // namespace
-}  // namespace tint::ir
+}  // namespace tint::ir::test
