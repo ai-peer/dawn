@@ -33,6 +33,24 @@
       "message": "Seems unrelated?",
       "revId": "fcdc8d5bf92226ed7211714563c6d80044b4292f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1226e67_2140b2d4",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T14:08:05Z",
+      "side": 1,
+      "message": "My presubmit script runs `clang-format` on the whole project. I\u0027m not sure why this wasn\u0027t caught by the presubmits for https://dawn-review.googlesource.com/c/dawn/+/138620",
+      "parentUuid": "20f26e81_503fc27b",
+      "revId": "fcdc8d5bf92226ed7211714563c6d80044b4292f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
