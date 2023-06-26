@@ -33,6 +33,47 @@
       "message": "No existing tests, these are based on current behaviour.",
       "revId": "5cdfdf752ae6aa4fc99956018f69b66a33acfbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d0f8ca_04550f27",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T09:17:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b2cf132a_878800f6",
+      "revId": "5cdfdf752ae6aa4fc99956018f69b66a33acfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "071d081f_4723ad16",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T09:17:11Z",
+      "side": 1,
+      "message": "After discussions with John Stiles, it\u0027s possible that the standard MSL array type  (`array\u003ctypename T, size_t N\u003e`) might suffice. IIRC we didn\u0027t use this because the MSL version we were originally targeting had holes. I think we bumped our baseline since then, so it might be possible to remove `tint_array`.",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 10
+      },
+      "revId": "5cdfdf752ae6aa4fc99956018f69b66a33acfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
