@@ -46,6 +46,30 @@
       },
       "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0bf209d_31c639ad",
+        "filename": "src/tint/writer/msl/ir/generator_impl_ir.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-26T13:14:42Z",
+      "side": 1,
+      "message": "\u003e The problem is, you need enough support to run through Generate, which currently doesn\u0027t exist. (This EmitFunction is really just a stub to make sure things work).\n\nSure - I\u0027m not asking for changes until you have enough in place to use Generate.\n\n\u003e For testing EmitType and EmitConstant it\u0027s a lot simpler to call directly into the emit function.\n\nI appreciate that, but both type and constant emission have failed MSL compilation before in the past, and our unit tests didn\u0027t catch this because they just check for a string literal that is effectively mirrored in the implementation. Emitting a variable declaration is not a huge amount of additional test code (once supported), and ensuring that the emitted MSL is always parsable without error would be a more robust way to build up new writers.",
+      "parentUuid": "d58b6b69_773b7339",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 42
+      },
+      "revId": "01829ac0a7b72427613c581cd6461db6713d24d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
