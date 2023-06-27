@@ -184,6 +184,7 @@ class Validator {
     void CheckInstruction(Instruction* inst) {
         if (!inst->Alive()) {
             AddError(inst, "destroyed instruction found in instruction list");
+            return;
         }
         if (inst->Result()) {
             if (inst->Result()->Source() == nullptr) {
