@@ -34,6 +34,24 @@
       "parentUuid": "48518d7e_1b6d6969",
       "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c4d152_7a788cfb",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T14:05:18Z",
+      "side": 1,
+      "message": "K, `Sequenced` is probably fine then. Or something like `Pinned` or `Fenced` ?",
+      "parentUuid": "339f50b9_81bf32a6",
+      "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
