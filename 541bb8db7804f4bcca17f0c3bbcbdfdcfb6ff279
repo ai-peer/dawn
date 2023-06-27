@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9505a83c_d5fccb62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T13:45:26Z",
+      "side": 1,
+      "message": "lgtm w/ nit",
+      "revId": "541bb8db7804f4bcca17f0c3bbcbdfdcfb6ff279",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f3f971_11f3469e",
+        "filename": "src/tint/ir/to_program_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T13:45:26Z",
+      "side": 1,
+      "message": "```suggestion\n#error \"to_program_test.h requires the WGSL writer to be enabled\"\n```",
+      "revId": "541bb8db7804f4bcca17f0c3bbcbdfdcfb6ff279",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
