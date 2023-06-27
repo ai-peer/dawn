@@ -311,6 +311,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24bb2176_b9561f0c",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T23:38:05Z",
+      "side": 1,
+      "message": "What\u0027s the proposal here? That passing a nullptr to `Builder::Return` will have it create a return without an operand, or that a no-value `Return` should always hold a nullptr operand?",
+      "parentUuid": "2cf78498_e44b253d",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f546a53_d54cff7a",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15
