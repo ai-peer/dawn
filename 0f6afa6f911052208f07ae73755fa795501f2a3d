@@ -52,6 +52,24 @@
       "parentUuid": "339f50b9_81bf32a6",
       "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4519b8a9_14ddfbe2",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T14:13:16Z",
+      "side": 1,
+      "message": "`Pinned` - they\u0027re free to move W.R.T unsequenced instructions, and I\u0027d expect a pinned one couldn\u0027t move at all.\n`Fenced` - a fence is a different beast, usually operating on some memory. We might want to move to this sort of model in the future (a proper dependency graph), but this sufficed for now.\n\nOpen to more suggestions.",
+      "parentUuid": "87c4d152_7a788cfb",
+      "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
