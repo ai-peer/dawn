@@ -70,6 +70,24 @@
       "parentUuid": "b8196499_3c2d5ed1",
       "revId": "90efdacbc89dafba5c407133fa7dc47b97a3a910",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4e7b92_e88f9322",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-06-27T01:23:31Z",
+      "side": 1,
+      "message": "Thanks Austin.",
+      "parentUuid": "3702a70f_5deeec4f",
+      "revId": "90efdacbc89dafba5c407133fa7dc47b97a3a910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
