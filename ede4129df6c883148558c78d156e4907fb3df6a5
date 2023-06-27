@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f98f7df_c56d4e66",
+        "filename": "src/tint/utils/enum_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T14:11:05Z",
+      "side": 1,
+      "message": "Yes, that would be better. I read it as your returning something with `this` `set` which is then odd followed by `so`.",
+      "parentUuid": "c0e8a731_8cdc57d6",
+      "revId": "ede4129df6c883148558c78d156e4907fb3df6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bee29e7_d9788170",
         "filename": "src/tint/utils/enum_set.h",
         "patchSetId": 2
