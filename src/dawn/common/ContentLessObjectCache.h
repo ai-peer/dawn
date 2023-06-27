@@ -23,20 +23,70 @@
 
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
+#include "dawn/common/WeakRef.h"
+#include "dawn/common/WeakRefCounted.h"
 
 namespace dawn {
+
+template <typename RefCountedT, typename BlueprintT>
+class ContentLessObjectCache;
+
+namespace detail {
+
+template <typename RefCountedT, typename BlueprintT>
+struct WeakRefFuncs {
+    struct HashFunc {
+        size_t operator()(const WeakRef<RefCountedT>& weakref) const {
+            Ref<RefCountedT> ref = weakref->Promote();
+            if (ref.Get() == nullptr) {
+                return 0;
+            }
+            return BlueprintT::HashFunc(ref.Get());
+        }
+    };
+
+    struct EqualityFunc {
+        bool operator()(const WeakRef<RefCountedT>& a, const WeakRef<RefCountedT>& b) const {
+            Ref<RefCountedT> aRef = a->Promote();
+            Ref<RefCountedT> bRef = b->Promote();
+            if (aRef.Get() == nullptr || bRef.Get() == nullptr) {
+                return false;
+            }
+            return BlueprintT::EqualityFunc(aRef.Get(), bRef.Get());
+        }
+    };
+};
+
+}  // namespace detail
+
+// Classes need to extend this type if they want to be cacheable via the ContentLessObjectCache.
+template <typename RefCountedT, typename BlueprintT = RefCountedT>
+class ContentLessObjectCacheable : public WeakRefCounted<RefCountedT> {
+  protected:
+    ~ContentLessObjectCacheable() override {
+        Ref<ContentLessObjectCache<RefCountedT, BlueprintT>> cache = mCache.Promote();
+        if (cache.Get() != nullptr) {
+            cache->Erase(this);
+        }
+    }
+
+  private:
+    // WeakRef to the owning cache if we were inserted at any point.
+    WeakRef<ContentLessObjectCache<RefCountedT, BlueprintT>> mCache = nullptr;
+};
 
 // The ContentLessObjectCache stores raw pointers to living Refs without adding to their refcounts.
 // This means that any RefCountedT that is inserted into the cache needs to make sure that their
 // DeleteThis function erases itself from the cache. Otherwise, the cache can grow indefinitely via
 // leaked pointers to deleted Refs.
 template <typename RefCountedT>
-class ContentLessObjectCache {
+class ContentLessObjectCache : public RefCounted,
+                               public WeakRefCounted<ContentLessObjectCache<RefCountedT>> {
   public:
     // The dtor asserts that the cache is empty to aid in finding pointer leaks that can be possible
     // if the RefCountedT doesn't correctly implement the DeleteThis function to erase itself from
     // the cache.
-    ~ContentLessObjectCache() { ASSERT(Empty()); }
+    ~ContentLessObjectCache() override { ASSERT(Empty()); }
 
     // Inserts the object into the cache returning a pair where the first is a Ref to the inserted
     // or existing object, and the second is a bool that is true if we inserted `object` and false
@@ -96,6 +146,10 @@ class ContentLessObjectCache {
                        typename RefCountedT::HashFunc,
                        typename RefCountedT::EqualityFunc>
         mCache;
+    std::unordered_set<WeakRef<RefCountedT>,
+                       typename detail::WeakRefFuncs<RefCountedT, BlueprintT>::HashFunc,
+                       typename detail::WeakRefFuncs<RefCountedT, BlueprintT>::EqualityFunc>
+        mCache2;
 };
 
 }  // namespace dawn
