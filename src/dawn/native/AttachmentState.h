@@ -19,6 +19,7 @@
 #include <bitset>
 
 #include "dawn/common/Constants.h"
+#include "dawn/common/ContentLessObjectCache.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
 #include "dawn/native/CachedObject.h"
@@ -31,7 +32,9 @@ namespace dawn::native {
 
 class DeviceBase;
 
-class AttachmentState final : public ObjectBase, public CachedObject {
+class AttachmentState final : public ObjectBase,
+                              public CachedObject,
+                              public ContentLessObjectCacheable<AttachmentState> {
   public:
     // Note: Descriptors must be validated before the AttachmentState is constructed.
     explicit AttachmentState(DeviceBase* device, const RenderBundleEncoderDescriptor* descriptor);

@@ -43,7 +43,7 @@ class WeakRefData : public RefCounted {
 class WeakRefSupportBase {
   protected:
     explicit WeakRefSupportBase(Ref<detail::WeakRefData> data);
-    ~WeakRefSupportBase();
+    virtual ~WeakRefSupportBase();
 
   private:
     template <typename T>
