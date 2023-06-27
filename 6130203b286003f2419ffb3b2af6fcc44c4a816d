@@ -16,6 +16,23 @@
       "message": "PTAL. Requested cleanup.",
       "revId": "6130203b286003f2419ffb3b2af6fcc44c4a816d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27060b4e_4c8a4dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T18:11:38Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "6130203b286003f2419ffb3b2af6fcc44c4a816d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
