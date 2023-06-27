@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f9ea19_f41ebc66",
+        "filename": "src/tint/ir/call.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T21:58:02Z",
+      "side": 1,
+      "message": "Isn\u0027t this a bit broad? This makes `bitcast, `convert`, and `construct` sequenced, which seems unnecessary.",
+      "revId": "71ea39cd1eab512de27e669df45070d27f0b6b1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
