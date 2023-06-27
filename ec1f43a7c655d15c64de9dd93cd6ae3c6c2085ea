@@ -33,6 +33,24 @@
       "message": "This and below looks unrelated to the CL description. Did changes get squashed?",
       "revId": "ec1f43a7c655d15c64de9dd93cd6ae3c6c2085ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f585870e_da89de8f",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3070,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-06-27T17:43:20Z",
+      "side": 1,
+      "message": "Anything you see in the CL not directly in the transform are unimplemented things I found while writing the new transform tests. They are required to run and pass the test (and I think they are needed to get the feature functional anyway). I could pull these into a separate CL if you\u0027d like.",
+      "parentUuid": "9ef8c288_5813c0d5",
+      "revId": "ec1f43a7c655d15c64de9dd93cd6ae3c6c2085ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
