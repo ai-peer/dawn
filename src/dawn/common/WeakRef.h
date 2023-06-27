@@ -17,6 +17,7 @@
 
 #include <utility>
 
+#include "dawn/common/Log.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/WeakRefSupport.h"
 
@@ -49,12 +50,17 @@ class WeakRef {
         return *this;
     }
 
+    // Constructor from explicit WeakRefSupport<T>* is allowed.
+    // NOLINTNEXTLINE(runtime/explicit)
+    WeakRef(WeakRefSupport<T>* support) : mData(support->mData) {}
+
     // Promotes a WeakRef to a Ref. Access to the raw pointer is not allowed because a raw pointer
     // could become invalid after being retrieved.
-    Ref<T> Promote() {
+    Ref<T> Promote() const {
         if (mData != nullptr) {
             return AcquireRef(static_cast<T*>(mData->TryGetRef().Detach()));
         }
+        DAWN_DEBUG() << "mData in WeakRef was nullptr";
         return nullptr;
     }
 

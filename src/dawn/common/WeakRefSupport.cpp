@@ -16,13 +16,19 @@
 
 #include <utility>
 
+#include "dawn/common/Log.h"
+
 namespace dawn::detail {
 
 WeakRefData::WeakRefData(RefCounted* value) : mValue(value) {}
 
 Ref<RefCounted> WeakRefData::TryGetRef() {
     std::lock_guard<std::mutex> lock(mMutex);
+    if (!mValue) {
+        DAWN_DEBUG() << "mValue was nullptr";
+    }
     if (!mValue || !mValue->mRefCount.TryIncrement()) {
+        DAWN_DEBUG() << "Either mValue was invalidated, or failed to increment";
         return nullptr;
     }
     return AcquireRef(mValue);
@@ -30,6 +36,7 @@ Ref<RefCounted> WeakRefData::TryGetRef() {
 
 void WeakRefData::Invalidate() {
     std::lock_guard<std::mutex> lock(mMutex);
+    DAWN_DEBUG() << "Invalidating: " << mValue;
     mValue = nullptr;
 }
 
