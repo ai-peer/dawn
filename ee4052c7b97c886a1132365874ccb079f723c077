@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "ee4052c7b97c886a1132365874ccb079f723c077",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8888a8e8_15f88e71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-27T15:33:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ee4052c7b97c886a1132365874ccb079f723c077",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1753cdf2_08d40a47",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-27T15:33:55Z",
+      "side": 1,
+      "message": "Why do we need this default?",
+      "revId": "ee4052c7b97c886a1132365874ccb079f723c077",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
