@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8631f9c8_ec59fe89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T17:26:43Z",
+      "side": 1,
+      "message": "James for `CanonicalizeEntryPointIO` review.",
+      "revId": "ec1f43a7c655d15c64de9dd93cd6ae3c6c2085ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef8c288_5813c0d5",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3070,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T17:26:43Z",
+      "side": 1,
+      "message": "This and below looks unrelated to the CL description. Did changes get squashed?",
+      "revId": "ec1f43a7c655d15c64de9dd93cd6ae3c6c2085ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
