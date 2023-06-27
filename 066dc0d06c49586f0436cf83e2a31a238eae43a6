@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c671e21b_b25e2269",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T13:54:24Z",
+      "side": 1,
+      "message": "I guess i can buy the convenience argument. LGTM w/ nit on the `@return` text.",
+      "revId": "066dc0d06c49586f0436cf83e2a31a238eae43a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
