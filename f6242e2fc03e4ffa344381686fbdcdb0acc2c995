@@ -79,6 +79,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0af7640a_e57d308f",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T14:40:47Z",
+      "side": 1,
+      "message": "I\u0027d prefer not as this limits the things that can go in there instead of having to check the entire list and ignore a whole bunch.",
+      "parentUuid": "2ff7351b_2fc6c692",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "088dbe0d_96086a50",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15
@@ -255,6 +279,30 @@
       "writtenOn": "2023-06-27T10:24:40Z",
       "side": 1,
       "message": "We probably should add the `Function*` to `Block`.",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 49
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d297be3e_83ab248e",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T14:40:47Z",
+      "side": 1,
+      "message": "+1, was thinking the same thing.",
+      "parentUuid": "c253fd27_b0e41e70",
       "range": {
         "startLine": 535,
         "startChar": 0,
