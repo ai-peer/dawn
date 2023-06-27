@@ -70,6 +70,24 @@
       "parentUuid": "87c4d152_7a788cfb",
       "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468b8e30_8748fbdd",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T14:23:22Z",
+      "side": 1,
+      "message": "Hm, the can move with respect non-tagged items is the tricky bit, I don\u0027t really get that with sequenced either. I\u0027m tempted to think `Barrier`, but also that seems unmoveable.\n\nIn SPIRV-Tools, this is called a `NonCombinatorial` instruction. Apparently Combinatorial Instructions is the state of art for these.",
+      "parentUuid": "4519b8a9_14ddfbe2",
+      "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
