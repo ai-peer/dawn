@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56ce5658_347a4947",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-27T20:34:09Z",
+      "side": 1,
+      "message": "It\u0027s not _quite_ what it represents. Expanded the comment for it. I still think `pending` is about as good as I can think of for a name, for something that\u0027s quite hard to describe.",
+      "parentUuid": "f0b20257_5ca6931c",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddfb33c4_732e7518",
         "filename": "src/tint/ir/to_program.cc",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-27T15:37:31Z",
       "side": 1,
       "message": "`for (auto* inst : *block)`",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75af0874_bf5af7ef",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-27T20:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddfb33c4_732e7518",
       "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8ebad0_d52a79a3",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-27T20:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2d60338_46c3dec4",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e34a182_eb02d88c",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-06-27T15:24:42Z",
       "side": 1,
       "message": "Dan pointed out that this is incorrectly named. Should be `BinaryOpUnsequencedRHSThenSequencedLHS`",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7963c22_6b0586b1",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-27T20:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e34a182_eb02d88c",
       "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "937d08b8_a7d6c447",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-27T20:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4de362bf_9edc6053",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d20093b1_32e2356f",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-06-27T15:37:31Z",
       "side": 1,
       "message": "Technically `x` could have been inlined here.",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29437fbd_8ab12385",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-27T20:34:09Z",
+      "side": 1,
+      "message": "I don\u0027t think so? It would then evaluate as `z`, `x`, `y`.",
+      "parentUuid": "d20093b1_32e2356f",
       "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
