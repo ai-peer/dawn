@@ -113,11 +113,11 @@ TEST(UniqueVectorTest, Erase) {
 
     unique_vec.Erase(1);
 
-    EXPECT_EQ(unique_vec[0], 3);
+    EXPECT_EQ(unique_vec[0], 0);
     EXPECT_EQ(unique_vec[1], 1);
     EXPECT_EQ(unique_vec[2], 6);
-    EXPECT_FALSE(unique_vec.Contains(0));
-    EXPECT_TRUE(unique_vec.Contains(3));
+    EXPECT_TRUE(unique_vec.Contains(0));
+    EXPECT_FALSE(unique_vec.Contains(3));
     EXPECT_FALSE(unique_vec.Contains(2));
     EXPECT_FALSE(unique_vec.Contains(5));
     EXPECT_TRUE(unique_vec.Contains(1));
@@ -127,10 +127,10 @@ TEST(UniqueVectorTest, Erase) {
 
     unique_vec.Erase(2);
 
-    EXPECT_EQ(unique_vec[0], 3);
+    EXPECT_EQ(unique_vec[0], 0);
     EXPECT_EQ(unique_vec[1], 1);
-    EXPECT_FALSE(unique_vec.Contains(0));
-    EXPECT_TRUE(unique_vec.Contains(3));
+    EXPECT_TRUE(unique_vec.Contains(0));
+    EXPECT_FALSE(unique_vec.Contains(3));
     EXPECT_FALSE(unique_vec.Contains(2));
     EXPECT_FALSE(unique_vec.Contains(5));
     EXPECT_TRUE(unique_vec.Contains(1));

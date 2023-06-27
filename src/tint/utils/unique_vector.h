@@ -62,7 +62,7 @@ struct UniqueVector {
     /// @param count the number of elements to remove
     void Erase(size_t start, size_t count = 1) {
         for (size_t i = 0; i < count; i++) {
-            set.Remove(vector[i]);
+            set.Remove(vector[start + i]);
         }
         vector.Erase(start, count);
     }
