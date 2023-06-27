@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5eeaaf2_28b0fb42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T21:45:12Z",
+      "side": 1,
+      "message": "Approving, but it seems like we could consolidate a bunch of code here.",
+      "revId": "3c3c7d9fb0b58491174c592e766f8ea529d1f150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf561463_73b343cc",
