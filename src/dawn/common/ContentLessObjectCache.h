@@ -20,68 +20,233 @@
 #include <type_traits>
 #include <unordered_set>
 #include <utility>
+#include <variant>
 
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
+#include "dawn/common/WeakRef.h"
+#include "dawn/common/WeakRefSupport.h"
 
 namespace dawn {
 
-// The ContentLessObjectCache stores raw pointers to living Refs without adding to their refcounts.
-// This means that any RefCountedT that is inserted into the cache needs to make sure that their
-// DeleteThis function erases itself from the cache. Otherwise, the cache can grow indefinitely via
-// leaked pointers to deleted Refs.
 template <typename RefCountedT>
-class ContentLessObjectCache {
-  public:
-    // The dtor asserts that the cache is empty to aid in finding pointer leaks that can be possible
-    // if the RefCountedT doesn't correctly implement the DeleteThis function to erase itself from
-    // the cache.
-    ~ContentLessObjectCache() { ASSERT(Empty()); }
+class ContentLessObjectCache;
 
-    // Inserts the object into the cache returning a pair where the first is a Ref to the inserted
-    // or existing object, and the second is a bool that is true if we inserted `object` and false
-    // otherwise.
-    std::pair<Ref<RefCountedT>, bool> Insert(RefCountedT* object) {
+namespace detail {
+
+// Tagged-type to force special path for EqualityFunc when dealing with Erase. When erasing, we only
+// care about pointer equality, not value equality. This is also particularly important because
+// trying to promote on the Erase path can cause failures as the object's last ref could've been
+// dropped already.
+template <typename RefCountedT>
+struct ForErase {
+    explicit ForErase(RefCountedT* value) : mValue(value) {}
+    RefCountedT* mValue;
+};
+
+// The cache always holds WeakRefs internally, however, to enable lookups using pointers and special
+// Erase equality, we use a variant type to branch.
+template <typename RefCountedT>
+using ContentLessObjectCacheKey =
+    std::variant<RefCountedT*, WeakRef<RefCountedT>, ForErase<RefCountedT>>;
+
+enum class KeyType : size_t { Pointer = 0, WeakRef = 1, ForErase = 2 };
+
+template <typename RefCountedT>
+struct ContentLessObjectCacheHashVisitor {
+    using BaseHashFunc = RefCountedT::HashFunc;
+
+    size_t operator()(const RefCountedT* ptr) const { return BaseHashFunc()(ptr); }
+    size_t operator()(const WeakRef<RefCountedT>& weakref) const {
+        Ref<RefCountedT> ref = weakref.Promote();
+        if (ref.Get() == nullptr) {
+            return 0;
+        }
+        return BaseHashFunc()(ref.Get());
+    }
+    size_t operator()(const ForErase<RefCountedT>& forErase) const {
+        return BaseHashFunc()(forErase.mValue);
+    }
+};
+
+template <typename RefCountedT>
+struct ContentLessObjectCacheKeyFuncs {
+    static_assert(
+        std::is_same_v<RefCountedT*,
+                       std::variant_alternative_t<static_cast<size_t>(KeyType::Pointer),
+                                                  ContentLessObjectCacheKey<RefCountedT>>>);
+    static_assert(
+        std::is_same_v<WeakRef<RefCountedT>,
+                       std::variant_alternative_t<static_cast<size_t>(KeyType::WeakRef),
+                                                  ContentLessObjectCacheKey<RefCountedT>>>);
+    static_assert(
+        std::is_same_v<ForErase<RefCountedT>,
+                       std::variant_alternative_t<static_cast<size_t>(KeyType::ForErase),
+                                                  ContentLessObjectCacheKey<RefCountedT>>>);
+
+    struct HashFunc {
+        size_t operator()(const ContentLessObjectCacheKey<RefCountedT>& key) const {
+            return std::visit(ContentLessObjectCacheHashVisitor<RefCountedT>(), key);
+        }
+    };
+
+    using BaseEqualityFunc = RefCountedT::EqualityFunc;
+    struct EqualityFunc {
+        bool operator()(const ContentLessObjectCacheKey<RefCountedT>& a,
+                        const ContentLessObjectCacheKey<RefCountedT>& b) const {
+            // First check if we are in the erasing scenario. We need to determine this early
+            // because we handle the actual equality differently.
+            bool erasing = std::holds_alternative<ForErase<RefCountedT>>(a) ||
+                           std::holds_alternative<ForErase<RefCountedT>>(b);
+            RefCountedT* aPtr = nullptr;
+            RefCountedT* bPtr = nullptr;
+
+            Ref<RefCountedT> aRef;
+            switch (static_cast<KeyType>(a.index())) {
+                case KeyType::Pointer:
+                    aPtr = std::get<RefCountedT*>(a);
+                    break;
+                case KeyType::WeakRef:
+                    if (erasing) {
+                        aPtr = std::get<WeakRef<RefCountedT>>(a).UnsafeGet();
+                    } else {
+                        aRef = std::get<WeakRef<RefCountedT>>(a).Promote();
+                        aPtr = aRef.Get();
+                    }
+                    break;
+                case KeyType::ForErase:
+                    aPtr = std::get<ForErase<RefCountedT>>(a).mValue;
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+            if (aPtr == nullptr) {
+                return false;
+            }
+
+            Ref<RefCountedT> bRef;
+            switch (static_cast<KeyType>(b.index())) {
+                case KeyType::Pointer:
+                    bPtr = std::get<RefCountedT*>(b);
+                    break;
+                case KeyType::WeakRef:
+                    if (erasing) {
+                        bPtr = std::get<WeakRef<RefCountedT>>(b).UnsafeGet();
+                    } else {
+                        bRef = std::get<WeakRef<RefCountedT>>(b).Promote();
+                        bPtr = bRef.Get();
+                    }
+                    break;
+                case KeyType::ForErase:
+                    bPtr = std::get<ForErase<RefCountedT>>(b).mValue;
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+            if (bPtr == nullptr) {
+                return false;
+            }
+
+            if (erasing) {
+                return aPtr == bPtr;
+            }
+            return BaseEqualityFunc()(aPtr, bPtr);
+        }
+    };
+};
+
+// Placeholding base class for cacheable types to enable easier compile-time verifications.
+class ContentLessObjectCacheableBase {};
+
+}  // namespace detail
+
+// Classes need to extend this type if they want to be cacheable via the ContentLessObjectCache. It
+// is also assumed that the type already extends RefCounted in some way. Otherwise, this helper
+// class does not work.
+template <typename RefCountedT>
+class ContentLessObjectCacheable : public detail::ContentLessObjectCacheableBase,
+                                   public WeakRefSupport<RefCountedT> {
+  public:
+    // Currently, any cacheables should call Uncache in their DeleteThis override. This is important
+    // because otherwise, the objects may be leaked in the internal set.
+    void Uncache() {
+        Ref<ContentLessObjectCache<RefCountedT>> cache = mCache.Promote();
+        if (cache.Get() != nullptr) {
+            cache->Erase(static_cast<RefCountedT*>(this));
+        }
+    }
+
+  protected:
+    // The dtor asserts that the cache isn't set to ensure that we were Uncache-d or never cached.
+    ~ContentLessObjectCacheable() override { ASSERT(mCache.UnsafeGet() == nullptr); }
+
+  private:
+    friend class ContentLessObjectCache<RefCountedT>;
+
+    // WeakRef to the owning cache if we were inserted at any point. This is set via the
+    // Insert/Erase functions on the cache.
+    WeakRef<ContentLessObjectCache<RefCountedT>> mCache = nullptr;
+};
+
+template <typename RefCountedT>
+class ContentLessObjectCache : public RefCounted,
+                               public WeakRefSupport<ContentLessObjectCache<RefCountedT>> {
+    static_assert(std::is_base_of_v<detail::ContentLessObjectCacheableBase, RefCountedT>,
+                  "Type must be cacheable to use with ContentLessObjectCache.");
+    static_assert(std::is_base_of_v<RefCounted, RefCountedT>,
+                  "Type must be refcounted to use with ContentLessObjectCache.");
+
+  public:
+    // The dtor asserts that the cache is empty to aid in finding pointer leaks that can be
+    // possible if the RefCountedT doesn't correctly implement the DeleteThis function to Uncache.
+    ~ContentLessObjectCache() override { ASSERT(Empty()); }
+
+    // Inserts the object into the cache returning a pair where the first is a Ref to the
+    // inserted or existing object, and the second is a bool that is true if we inserted
+    // `object` and false otherwise.
+    std::pair<Ref<RefCountedT>, bool> Insert(Ref<RefCountedT> obj) {
         std::lock_guard<std::mutex> lock(mMutex);
-        auto [it, inserted] = mCache.insert(object);
+        WeakRef<RefCountedT> weakref = obj.GetWeakRef();
+        auto [it, inserted] = mCache.insert(weakref);
         if (inserted) {
-            return {object, inserted};
+            obj->mCache = this;
+            return {obj, inserted};
         } else {
-            // We need to check that the found instance isn't about to be destroyed. If it is, we
-            // actually want to remove the old instance from the cache and insert this one. This can
-            // happen if the last ref of the current instance in the cache hit is already in the
-            // process of being removed but hasn't completed yet.
-            Ref<RefCountedT> ref = TryGetRef(static_cast<RefCountedT*>(*it));
+            // Try to promote the found WeakRef to a Ref. If promotion fails, remove the old Key
+            // and insert this one.
+            Ref<RefCountedT> ref = std::get<WeakRef<RefCountedT>>(*it).Promote();
             if (ref != nullptr) {
                 return {ref, false};
             } else {
                 mCache.erase(it);
-                auto result = mCache.insert(object);
+                auto result = mCache.insert(weakref);
                 ASSERT(result.second);
-                return {object, true};
+                obj->mCache = this;
+                return {obj, true};
             }
         }
     }
 
-    // Returns a valid Ref<T> if the underlying RefCounted object's refcount has not reached 0.
-    // Otherwise, returns nullptr.
+    // Returns a valid Ref<T> if we can Promote the underlying WeakRef. Returns nullptr otherwise.
     Ref<RefCountedT> Find(RefCountedT* blueprint) {
         std::lock_guard<std::mutex> lock(mMutex);
         auto it = mCache.find(blueprint);
         if (it != mCache.end()) {
-            return TryGetRef(static_cast<RefCountedT*>(*it));
+            return std::get<WeakRef<RefCountedT>>(*it).Promote();
         }
         return nullptr;
     }
 
     // Erases the object from the cache if it exists and are pointer equal. Otherwise does not
     // modify the cache.
-    void Erase(RefCountedT* object) {
+    void Erase(RefCountedT* obj) {
         std::lock_guard<std::mutex> lock(mMutex);
-        auto it = mCache.find(object);
-        if (*it == object) {
-            mCache.erase(it);
+        auto it = mCache.find(detail::ForErase<RefCountedT>(obj));
+        if (it == mCache.end()) {
+            return;
         }
+        obj->mCache = nullptr;
+        mCache.erase(it);
     }
 
     // Returns true iff the cache is empty.
@@ -92,9 +257,9 @@ class ContentLessObjectCache {
 
   private:
     std::mutex mMutex;
-    std::unordered_set<RefCountedT*,
-                       typename RefCountedT::HashFunc,
-                       typename RefCountedT::EqualityFunc>
+    std::unordered_set<detail::ContentLessObjectCacheKey<RefCountedT>,
+                       typename detail::ContentLessObjectCacheKeyFuncs<RefCountedT>::HashFunc,
+                       typename detail::ContentLessObjectCacheKeyFuncs<RefCountedT>::EqualityFunc>
         mCache;
 };
 
