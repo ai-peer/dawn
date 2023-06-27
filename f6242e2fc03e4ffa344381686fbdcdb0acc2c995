@@ -275,6 +275,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d8490a9_ecc317aa",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T21:51:47Z",
+      "side": 1,
+      "message": "You might want to create a return instruction that has a placeholder value that you\u0027ll later replace with `SetOperand()`.\n\nYou might return `undef` at the end of a function if you know that all other control flow paths already return (but validation or a particular backend still requires the final return).",
+      "parentUuid": "5555a5b4_7faa867e",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f546a53_d54cff7a",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15

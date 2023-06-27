@@ -22,6 +22,30 @@
       },
       "revId": "115b1a4dbf627814014c29c758b071a0b40423c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c59f1616_45d99ac0",
+        "filename": "src/tint/ir/transform/shader_io_spirv.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T21:51:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a620c91_02fb01a4",
+      "range": {
+        "startLine": 72,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 40
+      },
+      "revId": "115b1a4dbf627814014c29c758b071a0b40423c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
