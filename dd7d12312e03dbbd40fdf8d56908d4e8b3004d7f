@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "043be693_d0051766",
+        "filename": "src/tint/ir/value.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-06-27T20:33:59Z",
+      "side": 1,
+      "message": "I removed these after discussing with @jrprice@google.com. There\u0027s no good reason for them to be external to `ToProgram` right now.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "dd7d12312e03dbbd40fdf8d56908d4e8b3004d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
