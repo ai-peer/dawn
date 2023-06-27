@@ -21,6 +21,7 @@
 #include "src/tint/ir/access.h"
 #include "src/tint/ir/binary.h"
 #include "src/tint/ir/block.h"
+#include "src/tint/ir/break_if.h"
 #include "src/tint/ir/call.h"
 #include "src/tint/ir/constant.h"
 #include "src/tint/ir/continue.h"
@@ -144,6 +145,7 @@ class State {
     }
 
     StatementList Statements(ir::Block* block) {
+        MarkInlinable(block);
         StatementList stmts;
         if (block) {
             TINT_SCOPED_ASSIGNMENT(statements_, &stmts);
@@ -154,12 +156,71 @@ class State {
         return stmts;
     }
 
+    void MarkInlinable(ir::Block* block) {
+        // An ordered list of possibly-inlinable values returned by sequenced instructions
+        utils::UniqueVector<ir::Value*, 32> pending;
+
+        // Walk the instructions of the block starting with the first.
+        for (auto* inst = block->Front(); inst; inst = inst->next) {
+            // Clear the can-inline flag on all the results.
+            for (auto* result : inst->Results()) {
+                result->SetCanInline(false);
+            }
+
+            // Is the instruction sequenced?
+            bool sequenced = inst->Sequenced();
+
+            // Walk the instruction's operands starting with the right-most.
+            for (auto* operand : utils::Reverse(inst->Operands())) {
+                if (pending.Contains(operand)) {  // Operand is in 'pending'
+                    if (pending.TryPop(operand)) {
+                        // Operand was the last sequenced value to be added to 'pending'
+                        // This operand can be inlined as it does not change the sequencing order.
+                        operand->SetCanInline(true);
+                        sequenced = true;  // Inherit the 'sequenced' flag from the inlined value
+                    } else {
+                        // Operand was in 'pending', but was not the last sequenced value to be
+                        // added. Inlining this operand would break the sequencing order, so must be
+                        // emitted as a let. All preceding pending values must also be emitted as a
+                        // let to prevent them being inlined and breaking the sequencing order.
+                        // Remove all the values in pending upto and including 'operand'.
+                        for (size_t i = 0; i < pending.Length(); i++) {
+                            if (pending[i] == operand) {
+                                pending.Erase(0, i + 1);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Check to see if the result of this instruction is a candidate for inlining.
+            // Zero or multiple return value instructions cannot be inlined.
+            if (inst->Results().Length() == 1) {
+                auto* result = inst->Result();
+                // Only values with a single usage can be inlined.
+                // Named values are not inlined, as we want to emit the name for a let.
+                if (result->Usages().Count() == 1 && !mod.NameOf(result).IsValid()) {
+                    if (sequenced) {
+                        // The value comes from a sequenced instruction. We need to ensure
+                        // instruction ordering so add it to 'pending'.
+                        pending.Add(result);
+                    } else {
+                        // The value comes from an unsequenced instruction. Just inline.
+                        result->SetCanInline(true);
+                    }
+                }
+            }
+        }
+    }
+
     void Append(const ast::Statement* inst) { statements_->Push(inst); }
 
     void Instruction(ir::Instruction* inst) {
         tint::Switch(
             inst,                                       //
-            [&](ir::Binary* u) { Binary(u); },          //
+            [&](ir::Binary* i) { Binary(i); },          //
+            [&](ir::BreakIf* i) { BreakIf(i); },        //
             [&](ir::Call* i) { Call(i); },              //
             [&](ir::ExitIf*) {},                        //
             [&](ir::ExitSwitch* i) { ExitSwitch(i); },  //
@@ -214,6 +275,7 @@ class State {
 
         StatementList body_stmts;
         {
+            MarkInlinable(l->Body());
             TINT_SCOPED_ASSIGNMENT(statements_, &body_stmts);
             for (auto* inst : *l->Body()) {
                 if (body_stmts.IsEmpty()) {
@@ -292,6 +354,8 @@ class State {
     }
 
     void ExitLoop(const ir::ExitLoop*) { Append(b.Break()); }
+
+    void BreakIf(ir::BreakIf* i) { Append(b.BreakIf(Expr(i->Condition()))); }
 
     void Return(ir::Return* ret) {
         if (ret->Args().IsEmpty()) {
@@ -615,7 +679,7 @@ class State {
     template <typename T>
     void Bind(ir::Value* value, const T* expr) {
         TINT_ASSERT(IR, value);
-        if (CanInline(value)) {
+        if (value->CanInline()) {
             // Value will be inlined at its place of usage.
             bool added = bindings_.Add(value, expr);
             if (TINT_UNLIKELY(!added)) {
@@ -626,12 +690,6 @@ class State {
             Append(b.Decl(b.Let(BindName(value), expr)));
         }
     }
-
-    /// @returns true if the if the value can be inlined into its single place
-    /// of usage. Currently a value is inlined if it has a single usage and is unnamed.
-    /// TODO(crbug.com/tint/1902): This logic needs to check that the sequence of side-effecting
-    /// expressions is not changed by inlining the expression. This needs fixing.
-    bool CanInline(Value* val) { return val->Usages().Count() == 1 && !mod.NameOf(val).IsValid(); }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Helpers
