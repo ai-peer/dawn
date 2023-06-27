@@ -143,6 +143,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2720430_23fd6900",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T21:38:22Z",
+      "side": 1,
+      "message": "I was under the impression that some of the transforms would be using builtins that go beyond the WGSL-permitted builtins (e.g. point size). In which case the limits don\u0027t give you all that much.\nAnyway, not one to block this change.",
+      "parentUuid": "f63c2bfd_0d11de4a",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "088dbe0d_96086a50",
@@ -178,6 +202,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88baa331_dfa081c6",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T21:38:22Z",
+      "side": 1,
+      "message": "Interesting. I\u0027ll take a look at this. Don\u0027t let this block your change.",
+      "parentUuid": "6e06648d_f171c2a6",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c3a13e0_377fa316",
@@ -209,6 +251,24 @@
       "side": 1,
       "message": "How can you distinguish between no return value vs return `undef`? Now, if we had an explicit `UndefValue`... 😊",
       "parentUuid": "3c3a13e0_377fa316",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5555a5b4_7faa867e",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T21:38:22Z",
+      "side": 1,
+      "message": "Why would you return undef?",
+      "parentUuid": "77dae441_ef898fd3",
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -519,6 +579,30 @@
       "side": 1,
       "message": "Could do, but that\u0027s potentially a bunch of overhead whenever you add/remove an instruction from a block. e.g. that instruction may contain a control instruction, so you have to recursively update the Function* parent for every block inside it.",
       "parentUuid": "d297be3e_83ab248e",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 49
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fc3b95_5ab30cdf",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T21:38:22Z",
+      "side": 1,
+      "message": "The alternative is a helper on `Instruction` and `Block` to do the parent / block walking like what you\u0027re doing.\nWe\u0027d need to have the function\u0027s block be a new class derived from `Block` (`FunctionBlock`?) which has a pointer back to the owning function.",
+      "parentUuid": "2e8b2f2a_6211d3a1",
       "range": {
         "startLine": 535,
         "startChar": 0,
