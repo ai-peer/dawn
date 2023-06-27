@@ -15,6 +15,7 @@
 #include "dawn/native/AttachmentState.h"
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectContentHasher.h"
@@ -122,10 +123,8 @@ AttachmentState::AttachmentState(const AttachmentState& blueprint)
     SetContentHash(blueprint.GetContentHash());
 }
 
-AttachmentState::~AttachmentState() {
-    if (IsCachedReference()) {
-        GetDevice()->UncacheAttachmentState(this);
-    }
+void AttachmentState::DeleteThis() {
+    Uncache();
 }
 
 bool AttachmentState::EqualityFunc::operator()(const AttachmentState* a,

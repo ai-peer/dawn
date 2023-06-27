@@ -321,6 +321,7 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
 }
 
 void DeviceBase::WillDropLastExternalRef() {
+    DAWN_DEBUG();
     {
         // This will be invoked by API side, so we need to lock.
         // Note: we cannot hold the lock when flushing the callbacks so have to limit the scope of
@@ -855,11 +856,6 @@ ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         });
 }
 
-void DeviceBase::UncacheBindGroupLayout(BindGroupLayoutBase* obj) {
-    ASSERT(obj->IsCachedReference());
-    mCaches->bindGroupLayouts.Erase(obj);
-}
-
 // Private function used at initialization
 ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateEmptyBindGroupLayout() {
     BindGroupLayoutDescriptor desc = {};
@@ -919,11 +915,6 @@ Ref<RenderPipelineBase> DeviceBase::AddOrGetCachedRenderPipeline(
     } else {
         return std::move(cachedPipeline);
     }
-}
-
-void DeviceBase::UncacheComputePipeline(ComputePipelineBase* obj) {
-    ASSERT(obj->IsCachedReference());
-    mCaches->computePipelines.Erase(obj);
 }
 
 ResultOrError<Ref<TextureViewBase>> DeviceBase::CreateImplicitMSAARenderTextureViewFor(
@@ -996,16 +987,6 @@ ResultOrError<Ref<PipelineLayoutBase>> DeviceBase::GetOrCreatePipelineLayout(
                        });
 }
 
-void DeviceBase::UncachePipelineLayout(PipelineLayoutBase* obj) {
-    ASSERT(obj->IsCachedReference());
-    mCaches->pipelineLayouts.Erase(obj);
-}
-
-void DeviceBase::UncacheRenderPipeline(RenderPipelineBase* obj) {
-    ASSERT(obj->IsCachedReference());
-    mCaches->renderPipelines.Erase(obj);
-}
-
 ResultOrError<Ref<SamplerBase>> DeviceBase::GetOrCreateSampler(
     const SamplerDescriptor* descriptor) {
     SamplerBase blueprint(this, descriptor, ApiObjectBase::kUntrackedByDevice);
@@ -1019,11 +1000,6 @@ ResultOrError<Ref<SamplerBase>> DeviceBase::GetOrCreateSampler(
         result->SetContentHash(blueprintHash);
         return result;
     });
-}
-
-void DeviceBase::UncacheSampler(SamplerBase* obj) {
-    ASSERT(obj->IsCachedReference());
-    mCaches->samplers.Erase(obj);
 }
 
 ResultOrError<Ref<ShaderModuleBase>> DeviceBase::GetOrCreateShaderModule(
@@ -1055,11 +1031,6 @@ ResultOrError<Ref<ShaderModuleBase>> DeviceBase::GetOrCreateShaderModule(
         });
 }
 
-void DeviceBase::UncacheShaderModule(ShaderModuleBase* obj) {
-    ASSERT(obj->IsCachedReference());
-    mCaches->shaderModules.Erase(obj);
-}
-
 Ref<AttachmentState> DeviceBase::GetOrCreateAttachmentState(AttachmentState* blueprint) {
     return GetOrCreate(mCaches->attachmentStates, blueprint, [&]() -> Ref<AttachmentState> {
         Ref<AttachmentState> attachmentState = AcquireRef(new AttachmentState(*blueprint));
@@ -1083,11 +1054,6 @@ Ref<AttachmentState> DeviceBase::GetOrCreateAttachmentState(
     const RenderPassDescriptor* descriptor) {
     AttachmentState blueprint(this, descriptor);
     return GetOrCreateAttachmentState(&blueprint);
-}
-
-void DeviceBase::UncacheAttachmentState(AttachmentState* obj) {
-    ASSERT(obj->IsCachedReference());
-    mCaches->attachmentStates.Erase(obj);
 }
 
 Ref<PipelineCacheBase> DeviceBase::GetOrCreatePipelineCache(const CacheKey& key) {

@@ -14,6 +14,7 @@
 
 #include "dawn/tests/unittests/native/mocks/DawnMockTest.h"
 
+#include "dawn/common/Log.h"
 #include "dawn/dawn_proc.h"
 
 namespace dawn::native {

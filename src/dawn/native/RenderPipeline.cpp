@@ -18,6 +18,7 @@
 #include <cmath>
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
@@ -797,6 +798,8 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
 
     // Initialize the cache key to include the cache type and device information.
     StreamIn(&mCacheKey, CacheKey::Type::RenderPipeline, device->GetCacheKey());
+
+    DAWN_DEBUG() << "RenderPipelineBase: " << this;
 }
 
 RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
@@ -807,10 +810,8 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
 RenderPipelineBase::~RenderPipelineBase() = default;
 
 void RenderPipelineBase::DestroyImpl() {
-    if (IsCachedReference()) {
-        // Do not uncache the actual cached object if we are a blueprint.
-        GetDevice()->UncacheRenderPipeline(this);
-    }
+    DAWN_DEBUG() << "RenderPipelineBase::DestroyImpl: " << this;
+    Uncache();
 
     // Remove reference to the attachment state so that we don't have lingering references to
     // it preventing it from being uncached in the device.

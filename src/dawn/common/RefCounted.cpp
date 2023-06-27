@@ -22,6 +22,7 @@
 #endif
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
 
 namespace dawn {
 
@@ -121,10 +122,12 @@ uint64_t RefCounted::GetRefCountPayload() const {
 }
 
 void RefCounted::Reference() {
+    DAWN_DEBUG() << "Reference: " << this;
     mRefCount.Increment();
 }
 
 void RefCounted::Release() {
+    DAWN_DEBUG() << "Release: " << this;
     if (mRefCount.Decrement()) {
         DeleteThis();
     }
