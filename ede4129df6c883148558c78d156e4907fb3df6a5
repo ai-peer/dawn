@@ -123,6 +123,24 @@
       "parentUuid": "1649d43b_79889d21",
       "revId": "ede4129df6c883148558c78d156e4907fb3df6a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa430afe_dbc3796d",
+        "filename": "src/tint/utils/enum_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T14:06:03Z",
+      "side": 1,
+      "message": "Ya, saw the usage, it\u0027s just call to `Set(foo, false)` which doesn\u0027t actually set anything to false that I found odd.",
+      "parentUuid": "61fb70a1_9094616d",
+      "revId": "ede4129df6c883148558c78d156e4907fb3df6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
