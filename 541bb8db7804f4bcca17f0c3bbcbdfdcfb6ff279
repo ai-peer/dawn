@@ -33,6 +33,24 @@
       "message": "```suggestion\n#error \"to_program_test.h requires the WGSL writer to be enabled\"\n```",
       "revId": "541bb8db7804f4bcca17f0c3bbcbdfdcfb6ff279",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33d7176a_98301bcc",
+        "filename": "src/tint/ir/to_program_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T13:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07f3f971_11f3469e",
+      "revId": "541bb8db7804f4bcca17f0c3bbcbdfdcfb6ff279",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
