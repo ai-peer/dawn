@@ -51,7 +51,7 @@ class WeakRef {
 
     // Promotes a WeakRef to a Ref. Access to the raw pointer is no allowed because a raw pointer
     // could become invalid after being retrieved.
-    Ref<T> Promote() {
+    Ref<T> Promote() const {
         if (mData != nullptr) {
             return mData->template TryGetRef<T>();
         }
