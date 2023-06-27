@@ -51,6 +51,24 @@
       "message": "we are missing `Kokoro` vote. We\u0027ll need to get someone from cria/project-dawn-committers to approve (we should alos ask for vote permission too).",
       "revId": "9ce9e83f63ae56442900574c2b16e965588c3651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4bd36d_e4fa3c77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T18:14:37Z",
+      "side": 1,
+      "message": "Fine by me.",
+      "parentUuid": "8b068189_8bf07fad",
+      "revId": "9ce9e83f63ae56442900574c2b16e965588c3651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
