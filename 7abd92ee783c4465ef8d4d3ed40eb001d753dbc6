@@ -16,6 +16,116 @@
       "message": "Sending out for review but note that some of the unit tests are failing on Windows because I guess MSVC doesn\u0027t have `\u003cexperimental/type_traits\u003e`. Maybe I can just disable those tests on Windows for now?",
       "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe180e41_7a84622b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-27T21:43:33Z",
+      "side": 1,
+      "message": "mm I feel iffy about including \u003cexperimental\u003e - is there a way we can do without it?",
+      "parentUuid": "f08bf771_92f17090",
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25f8854e_0196c6bf",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-27T21:43:33Z",
+      "side": 1,
+      "message": "should it be called \"WeakRefData\" or \"WeakRefTargetData\" or something? because this class is for WeakRef, not for RefCounted\n\ncan it go in WeakRef.h?",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a5c51a_1f6427b4",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-27T21:43:33Z",
+      "side": 1,
+      "message": "not sure but idea -\n\ndo we need detail::WeakRefCountedBase?\n\nmaybe, we could have\n\n`WeakRef\u003cT\u003e WeakRefCounted\u003cT\u003e::GetWeakRef()`\n\nthen, I think we don\u0027t need the is_base_of check here, and you could do both:\n```\n// if T inherits WeakRefCounted\u003cT\u003e\nT* bar \u003d ...;\nWeakRef\u003cT\u003e weak_bar \u003d bar-\u003eGetWeakRef();\n\n// via Ref\u003cT\u003e::operator-\u003e returning T*\nRef\u003cT\u003e foo \u003d ...;\nWeakRef\u003cT\u003e weak_foo \u003d foo-\u003eGetWeakRef();\n```",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d9fd8c_f560b383",
+        "filename": "src/dawn/common/WeakRefCounted.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-27T21:43:33Z",
+      "side": 1,
+      "message": "it\u0027s odd that the constructor acquires the ref. It\u0027s probably better to have AcquireRef happen at the caller, and take Ref\u003c\u003e as the argument instead",
+      "range": {
+        "startLine": 19,
+        "startChar": 77,
+        "endLine": 19,
+        "endChar": 93
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f003df85_c8f51a37",
+        "filename": "src/dawn/common/WeakRefCounted.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-27T21:43:33Z",
+      "side": 1,
+      "message": "unit: \"WeakRefCounted\" makes it seem like it is also Refcounted which in fact it\u0027s not. Maybe we can use a different name like \"WeakRefSupport\" or \"SupportsWeakRef\" or \"WeakRefTarget\" or IDK",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
