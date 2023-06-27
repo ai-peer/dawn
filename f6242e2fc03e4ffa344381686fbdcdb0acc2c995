@@ -38,6 +38,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8fd8cdf_0e05639b",
+        "filename": "src/tint/ir/function.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T10:24:40Z",
+      "side": 1,
+      "message": "`ClearWorkgroupSize` works for me.",
+      "parentUuid": "8274f626_a0059ee8",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ff7351b_2fc6c692",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T10:24:40Z",
+      "side": 1,
+      "message": "Maybe we should kill `FunctionParam::Builtin` and `Function::ReturnBuiltin` and just use `builtin::BuiltinValue`?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "088dbe0d_96086a50",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15
@@ -140,6 +181,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa461195_a7d000cb",
+        "filename": "src/tint/ir/transform/shader_io_spirv.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T10:24:40Z",
+      "side": 1,
+      "message": "I don\u0027t think this is doing anything.\nSuggest replacing `ShaderIOSpirv::State` with a `tint::ir::transform::\u003canonymous\u003e::StateImpl` struct in the .cc file.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d749ec7e_77002e0e",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T10:24:40Z",
+      "side": 1,
+      "message": "argh, I didn\u0027t notice this coming back after the value / instruction split.\nMaybe we should subclass `ir::InstructionValue` with a class that has a pointer type.",
+      "range": {
+        "startLine": 528,
+        "startChar": 24,
+        "endLine": 528,
+        "endChar": 66
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb5bb731_a5505b5d",
         "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
         "patchSetId": 15
@@ -151,6 +238,29 @@
       "writtenOn": "2023-06-26T21:51:30Z",
       "side": 1,
       "message": "invert and `continue` ?",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c253fd27_b0e41e70",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T10:24:40Z",
+      "side": 1,
+      "message": "We probably should add the `Function*` to `Block`.",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 49
+      },
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
