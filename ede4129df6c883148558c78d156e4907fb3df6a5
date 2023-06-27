@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0e8a731_8cdc57d6",
+        "filename": "src/tint/utils/enum_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T14:08:38Z",
+      "side": 1,
+      "message": "It\u0027s the same comment on all the methods above.\nI usually nit pick over comments like this but I find `return this set so calls can be chained` a more readable than the suggestion? Is it the `set` that\u0027s causing confusion? Would `@returns this EnumSet so calls can be chained` be better?",
+      "parentUuid": "13517002_f8be0774",
+      "revId": "ede4129df6c883148558c78d156e4907fb3df6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bee29e7_d9788170",
         "filename": "src/tint/utils/enum_set.h",
         "patchSetId": 2
