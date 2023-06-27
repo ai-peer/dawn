@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d9bebbc_d65c293d",
+        "filename": "src/tint/utils/enum_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T17:31:25Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/139220/",
+      "parentUuid": "5f98f7df_c56d4e66",
+      "revId": "ede4129df6c883148558c78d156e4907fb3df6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bee29e7_d9788170",
