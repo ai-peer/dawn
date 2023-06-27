@@ -16,6 +16,24 @@
       "message": "Isn\u0027t this a bit broad? This makes `bitcast, `convert`, and `construct` sequenced, which seems unnecessary.",
       "revId": "71ea39cd1eab512de27e669df45070d27f0b6b1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a4a4e4f_a617670e",
+        "filename": "src/tint/ir/call.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T21:59:30Z",
+      "side": 1,
+      "message": "True. Safer to have more sequenced than unsequenced, but yes, we should constrain this.\nI\u0027ll tighten this up as a followup.",
+      "parentUuid": "82f9ea19_f41ebc66",
+      "revId": "71ea39cd1eab512de27e669df45070d27f0b6b1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
