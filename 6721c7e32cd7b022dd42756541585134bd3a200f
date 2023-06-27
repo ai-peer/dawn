@@ -75,6 +75,24 @@
       "parentUuid": "107c1ab0_7cd2eb98",
       "revId": "6721c7e32cd7b022dd42756541585134bd3a200f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7f8026_e5563039",
+        "filename": "docs/dawn/features/compat_sample_mask.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-06-27T22:47:51Z",
+      "side": 1,
+      "message": "Actually no one asks for it. I grabbed it from the \"WebGPU/Compat design options / evaluation\" as my main focus is to add compat missing feature.\n\nIf spec isn\u0027t settled down and no one is asking for the feature, we can hold off the implementations.",
+      "parentUuid": "88903478_6eda672c",
+      "revId": "6721c7e32cd7b022dd42756541585134bd3a200f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
