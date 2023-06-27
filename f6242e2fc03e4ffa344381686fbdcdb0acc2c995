@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73881b97_5f8dd86e",
+        "filename": "src/tint/ir/function.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Added `ClearWorkgroupSize`, `ClearBuiltin`, etc.",
+      "parentUuid": "e8fd8cdf_0e05639b",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ff7351b_2fc6c692",
@@ -103,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f63c2bfd_0d11de4a",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Didn\u0027t change this one yet. I don\u0027t really care either way, and I\u0027m not sure which of you feels strongest :-)",
+      "parentUuid": "0af7640a_e57d308f",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "088dbe0d_96086a50",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15
@@ -114,6 +156,24 @@
       "writtenOn": "2023-06-26T21:51:30Z",
       "side": 1,
       "message": "TINT_SCOPED_ASSIGNMENT instead of assign and then DEFER?",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e06648d_f171c2a6",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Apparently `TINT_SCOPED_ASSIGNMENT` doesn\u0027t work for unique_ptr?\n\nUsed it for the function pointer though.",
+      "parentUuid": "088dbe0d_96086a50",
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77dae441_ef898fd3",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "How can you distinguish between no return value vs return `undef`? Now, if we had an explicit `UndefValue`... 😊",
+      "parentUuid": "3c3a13e0_377fa316",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f546a53_d54cff7a",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15
@@ -148,6 +226,24 @@
       "writtenOn": "2023-06-26T21:51:30Z",
       "side": 1,
       "message": "```\nif (func-\u003eReturnType()-\u003eIs\u003ctype::Void\u003e()) {\n   return backend-\u003eFinalizeOutputs();\n}\n```",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc374e0_fec08c26",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Pulled the `Finalize*` steps out to the main function instead. Feels better there anyway.",
+      "parentUuid": "5f546a53_d54cff7a",
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +267,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d48f6f6e_cf16860f",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Not sure whether that\u0027s better or not, since it\u0027s a one liner and we only do it twice.",
+      "parentUuid": "1050f7fe_7352afc2",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a4e9536_ae2afaab",
         "filename": "src/tint/ir/transform/shader_io_spirv.cc",
         "patchSetId": 15
@@ -182,6 +296,24 @@
       "writtenOn": "2023-06-26T21:51:30Z",
       "side": 1,
       "message": "nit: `and global variables for them`",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcc0e891_e6320e2b",
+        "filename": "src/tint/ir/transform/shader_io_spirv.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a4e9536_ae2afaab",
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -203,6 +335,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d9cf06_2a98dc91",
+        "filename": "src/tint/ir/transform/shader_io_spirv.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Pulled the common stuff out into a lambda.",
+      "parentUuid": "df069e69_01e4bbd3",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa461195_a7d000cb",
@@ -216,6 +366,30 @@
       "writtenOn": "2023-06-27T10:24:40Z",
       "side": 1,
       "message": "I don\u0027t think this is doing anything.\nSuggest replacing `ShaderIOSpirv::State` with a `tint::ir::transform::\u003canonymous\u003e::StateImpl` struct in the .cc file.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8673c8f9_2d2beff6",
+        "filename": "src/tint/ir/transform/shader_io_spirv.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Had to make `ShaderIO::BackendState` public for this to work, but OK, done.",
+      "parentUuid": "aa461195_a7d000cb",
       "range": {
         "startLine": 36,
         "startChar": 0,
@@ -268,6 +442,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "841e6c09_b455b3c8",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb5bb731_a5505b5d",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c253fd27_b0e41e70",
         "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
         "patchSetId": 15
@@ -313,6 +505,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e8b2f2a_6211d3a1",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Could do, but that\u0027s potentially a bunch of overhead whenever you add/remove an instruction from a block. e.g. that instruction may contain a control instruction, so you have to recursively update the Function* parent for every block inside it.",
+      "parentUuid": "d297be3e_83ab248e",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 49
+      },
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58a49cdf_c606c52e",
@@ -326,6 +542,24 @@
       "writtenOn": "2023-06-26T21:51:30Z",
       "side": 1,
       "message": "ditto, invert and continue?",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ac4d41e_442dca8a",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T20:39:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58a49cdf_c606c52e",
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
