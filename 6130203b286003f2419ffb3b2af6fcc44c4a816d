@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b26c2a53_e218cf77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T17:54:57Z",
+      "side": 1,
+      "message": "PTAL. Requested cleanup.",
+      "revId": "6130203b286003f2419ffb3b2af6fcc44c4a816d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
