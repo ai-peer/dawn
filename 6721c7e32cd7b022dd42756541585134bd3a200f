@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a18300_3e23bdc0",
+        "filename": "docs/dawn/features/compat_sample_mask.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-27T20:45:08Z",
+      "side": 1,
+      "message": "nit: it lets you use sample_mask on other backends in compat mode too. It should be sufficient to say it lets you use the builtin in compatibility mode without mentioning GL",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 13
+      },
+      "revId": "6721c7e32cd7b022dd42756541585134bd3a200f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b66107_8e090e14",
+        "filename": "docs/dawn/features/compat_sample_mask.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-27T20:45:08Z",
+      "side": 1,
+      "message": "we should figure out and describe what happens when you use the feature in WebGPU core.\n - is it exposed at all?\n - is it invalid to try to enable it?\n \nas well as have tests for these things.\nI\u0027m not sure how we will specify it (+Kai). My intuition though is that it will NOT be exposed in core, so it will be a validation error to try to enable it in core.",
+      "revId": "6721c7e32cd7b022dd42756541585134bd3a200f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
