@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ffd90ef_742d353e",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-27T23:28:25Z",
+      "side": 1,
+      "message": "Should we be validating operand types for these operations?\n\ne.g. complement requires integer scalar or vector, negation requires numeric scalar or vector\n\nAlso result type should equal operand type",
+      "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
