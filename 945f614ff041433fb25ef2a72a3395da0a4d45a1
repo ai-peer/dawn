@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "613bbe2b_9a24adbd",
+        "filename": "src/tint/utils/unique_vector_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T13:37:12Z",
+      "side": 1,
+      "message": "Can you add a test where you re-add the removed item so we can see the unique vector lets it back in?",
+      "revId": "945f614ff041433fb25ef2a72a3395da0a4d45a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
