@@ -85,6 +85,71 @@ TEST(UniqueVectorTest, AddDuplicates) {
     EXPECT_EQ(unique_vec[2], 2);
 }
 
+TEST(UniqueVectorTest, Erase) {
+    UniqueVector<int, 4> unique_vec;
+    unique_vec.Add(0);
+    unique_vec.Add(3);
+    unique_vec.Add(2);
+    unique_vec.Add(5);
+    unique_vec.Add(1);
+    unique_vec.Add(6);
+    EXPECT_EQ(unique_vec.Length(), 6u);
+    EXPECT_EQ(unique_vec.IsEmpty(), false);
+
+    unique_vec.Erase(2, 2);
+
+    EXPECT_EQ(unique_vec[0], 0);
+    EXPECT_EQ(unique_vec[1], 3);
+    EXPECT_EQ(unique_vec[2], 1);
+    EXPECT_EQ(unique_vec[3], 6);
+    EXPECT_TRUE(unique_vec.Contains(0));
+    EXPECT_TRUE(unique_vec.Contains(3));
+    EXPECT_FALSE(unique_vec.Contains(2));
+    EXPECT_FALSE(unique_vec.Contains(5));
+    EXPECT_TRUE(unique_vec.Contains(1));
+    EXPECT_TRUE(unique_vec.Contains(6));
+    EXPECT_EQ(unique_vec.Length(), 4u);
+    EXPECT_EQ(unique_vec.IsEmpty(), false);
+
+    unique_vec.Erase(1);
+
+    EXPECT_EQ(unique_vec[0], 0);
+    EXPECT_EQ(unique_vec[1], 1);
+    EXPECT_EQ(unique_vec[2], 6);
+    EXPECT_TRUE(unique_vec.Contains(0));
+    EXPECT_FALSE(unique_vec.Contains(3));
+    EXPECT_FALSE(unique_vec.Contains(2));
+    EXPECT_FALSE(unique_vec.Contains(5));
+    EXPECT_TRUE(unique_vec.Contains(1));
+    EXPECT_TRUE(unique_vec.Contains(6));
+    EXPECT_EQ(unique_vec.Length(), 3u);
+    EXPECT_EQ(unique_vec.IsEmpty(), false);
+
+    unique_vec.Erase(2);
+
+    EXPECT_EQ(unique_vec[0], 0);
+    EXPECT_EQ(unique_vec[1], 1);
+    EXPECT_TRUE(unique_vec.Contains(0));
+    EXPECT_FALSE(unique_vec.Contains(3));
+    EXPECT_FALSE(unique_vec.Contains(2));
+    EXPECT_FALSE(unique_vec.Contains(5));
+    EXPECT_TRUE(unique_vec.Contains(1));
+    EXPECT_FALSE(unique_vec.Contains(6));
+    EXPECT_EQ(unique_vec.Length(), 2u);
+    EXPECT_EQ(unique_vec.IsEmpty(), false);
+
+    unique_vec.Erase(0, 2);
+
+    EXPECT_FALSE(unique_vec.Contains(0));
+    EXPECT_FALSE(unique_vec.Contains(3));
+    EXPECT_FALSE(unique_vec.Contains(2));
+    EXPECT_FALSE(unique_vec.Contains(5));
+    EXPECT_FALSE(unique_vec.Contains(1));
+    EXPECT_FALSE(unique_vec.Contains(6));
+    EXPECT_EQ(unique_vec.Length(), 0u);
+    EXPECT_EQ(unique_vec.IsEmpty(), true);
+}
+
 TEST(UniqueVectorTest, AsVector) {
     UniqueVector<int, 4> unique_vec;
     unique_vec.Add(0);
