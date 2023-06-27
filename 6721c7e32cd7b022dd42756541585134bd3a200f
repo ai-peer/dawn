@@ -57,6 +57,24 @@
       "parentUuid": "48b66107_8e090e14",
       "revId": "6721c7e32cd7b022dd42756541585134bd3a200f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88903478_6eda672c",
+        "filename": "docs/dawn/features/compat_sample_mask.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-06-27T22:42:48Z",
+      "side": 1,
+      "message": "sample_mask exists in core, so iiuc this extension doesn\u0027t exist in core. We shouldn\u0027t expose it on non-compat adapters, though if we did it would be a no-op.\n\nThis also gets potentially complicated with shader extensions. The WGSL group still hasn\u0027t agreed on how features will be added to shaders. Of course we may also have this problem with compat generally (do you say at the top of the shader, please validate this works in compat?) but we can\u0027t do much until the group figures this out.\n\nNot sure about it being a Toggle, can Toggles be unavailable on some hardware?\nIt could be behind an general \"unsafe\" toggle or the toggle could say \"expose if available\" - if there\u0027s a way to query whether it\u0027s available.\n\nAll that said I think a feature makes sense regardless of what it\u0027s for, as long as the feature itself is not exposed unless you set the right Toggle.\n\nJust out of curiosity, _is_ this for Graphite?",
+      "parentUuid": "107c1ab0_7cd2eb98",
+      "revId": "6721c7e32cd7b022dd42756541585134bd3a200f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
