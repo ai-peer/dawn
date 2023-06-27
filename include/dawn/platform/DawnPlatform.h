@@ -93,6 +93,18 @@ class DAWN_PLATFORM_EXPORT Platform {
                                    const uint64_t* argValues,
                                    unsigned char flags);
 
+    virtual void HistogramCustomCounts(const char* name,
+                                       int sample,
+                                       int min,
+                                       int max,
+                                       int bucketCount);
+
+    virtual void HistogramEnumeration(const char* name, int sample, int boundaryValue);
+
+    virtual void HistogramSparse(const char* name, int sample);
+
+    virtual void HistogramBoolean(const char* name, bool sample);
+
     // The returned CachingInterface is expected to outlive the device which uses it to persistently
     // cache objects.
     virtual CachingInterface* GetCachingInterface();

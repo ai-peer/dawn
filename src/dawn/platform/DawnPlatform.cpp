@@ -53,6 +53,30 @@ uint64_t Platform::AddTraceEvent(char phase,
     return 0;
 }
 
+void Platform::HistogramCustomCounts(const char* name,
+                                     int sample,
+                                     int min,
+                                     int max,
+                                     int bucketCount) {
+    // Cannot be called if histogram is disabled
+    ASSERT(false);
+}
+
+void Platform::HistogramEnumeration(const char* name, int sample, int boundaryValue) {
+    // Cannot be called if histogram is disabled
+    ASSERT(false);
+}
+
+void Platform::HistogramSparse(const char* name, int sample) {
+    // Cannot be called if histogram is disabled
+    ASSERT(false);
+}
+
+void Platform::HistogramBoolean(const char* name, bool sample) {
+    // Cannot be called if histogram is disabled
+    ASSERT(false);
+}
+
 dawn::platform::CachingInterface* Platform::GetCachingInterface() {
     return nullptr;
 }
