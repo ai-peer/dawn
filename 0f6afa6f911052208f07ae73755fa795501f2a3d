@@ -16,6 +16,24 @@
       "message": "Is `Sequenced` an LLVM name? `Orderered`  might be a bit clearer? My brain doesn\u0027t really think of instructions as sequenced so much as ordered. (Also makes more sense with the comment in that an `Ordered` instruction can not be `reordered with other instructions`",
       "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339f50b9_81bf32a6",
+        "filename": "src/tint/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T14:00:54Z",
+      "side": 1,
+      "message": "I tried to use a different term than ordered, as instructions are implicitly ordered in the block. It\u0027s just that some of those instructions cannot be moved before or after other instructions without changing the semantics of the program.\n`Sequenced` seemed to match the description of what I was after, without conflicting with the natural ordering in a block.",
+      "parentUuid": "48518d7e_1b6d6969",
+      "revId": "0f6afa6f911052208f07ae73755fa795501f2a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
