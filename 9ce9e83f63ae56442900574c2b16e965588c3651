@@ -16,6 +16,24 @@
       "message": "I don\u0027t seem to have permissions to submit this change.",
       "revId": "9ce9e83f63ae56442900574c2b16e965588c3651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b068189_8bf07fad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003161
+      },
+      "writtenOn": "2023-06-27T06:21:59Z",
+      "side": 1,
+      "message": "Is there a reason why dawn repos aren\u0027t owned by git admins? Should we add mdb/chrome-git-admins to cria/project-dawn-admins?",
+      "parentUuid": "cab17ae5_2406c090",
+      "revId": "9ce9e83f63ae56442900574c2b16e965588c3651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
