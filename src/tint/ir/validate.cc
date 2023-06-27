@@ -223,7 +223,7 @@ class Validator {
             [&](Switch*) {},                             //
             [&](Swizzle*) {},                            //
             [&](Terminator* b) { CheckTerminator(b); },  //
-            [&](Unary*) {},                              //
+            [&](Unary* u) { CheckUnary(u); },            //
             [&](Var* var) { CheckVar(var); },            //
             [&](Default) {
                 AddError(std::string("missing validation of: ") + inst->TypeInfo().name);
@@ -321,6 +321,15 @@ class Validator {
         }
         if (b->Result() == nullptr) {
             AddError(b, "binary: result is undefined");
+        }
+    }
+
+    void CheckUnary(ir::Unary* u) {
+        if (u->Val() == nullptr) {
+            AddError(u, Unary::kValueOperandOffset, "unary: value operand is undefined");
+        }
+        if (u->Result() == nullptr) {
+            AddError(u, "unary: result is undefined");
         }
     }
 
