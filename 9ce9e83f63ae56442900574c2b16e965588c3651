@@ -69,6 +69,24 @@
       "parentUuid": "8b068189_8bf07fad",
       "revId": "9ce9e83f63ae56442900574c2b16e965588c3651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f4d7c00_f58c35ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T18:15:52Z",
+      "side": 1,
+      "message": "`Kokoro` should only really apply to the `main` branch of the dawn repo. We should fix this.",
+      "parentUuid": "7069f5a3_3d45a25a",
+      "revId": "9ce9e83f63ae56442900574c2b16e965588c3651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
