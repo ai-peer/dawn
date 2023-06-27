@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <string>
 #include <utility>
 
 #include "gmock/gmock.h"
@@ -21,6 +22,7 @@
 #include "src/tint/type/matrix.h"
 #include "src/tint/type/pointer.h"
 #include "src/tint/type/struct.h"
+#include "src/tint/utils/string.h"
 
 namespace tint::ir {
 namespace {
@@ -616,19 +618,12 @@ TEST_F(IR_ValidateTest, Instruction_AppendedDead) {
     v->Destroy();
     v->InsertBefore(ret);
 
-    auto res = ir::Validate(mod);
-    ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), R"(:3:41 error: destroyed instruction found in instruction list
-    %2:ptr<function, f32, read_write> = var
-                                        ^^^
+    auto addr = utils::ToString(v);
+    auto arrows = std::string(addr.length(), '^');
 
-:2:3 note: In block
-  %b1 = block {
-  ^^^^^^^^^^^
-
-:3:41 error: instruction result source is undefined
-    %2:ptr<function, f32, read_write> = var
-                                        ^^^
+    std::string expected = R"(:3:5 error: destroyed instruction found in instruction list
+    <destroyed tint::ir::Var $ADDRESS>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^$ARROWS^
 
 :2:3 note: In block
   %b1 = block {
@@ -637,11 +632,18 @@ TEST_F(IR_ValidateTest, Instruction_AppendedDead) {
 note: # Disassembly
 %my_func = func():void -> %b1 {
   %b1 = block {
-    %2:ptr<function, f32, read_write> = var
+    <destroyed tint::ir::Var $ADDRESS>
     ret
   }
 }
-)");
+)";
+
+    expected = utils::ReplaceAll(expected, "$ADDRESS", addr);
+    expected = utils::ReplaceAll(expected, "$ARROWS", arrows);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), expected);
 }
 
 TEST_F(IR_ValidateTest, Instruction_NullSource) {
