@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b293774a_cb4883a8",
+        "filename": "src/tint/utils/enum_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T13:41:16Z",
+      "side": 1,
+      "message": "```suggestion\n    /// @return this, allows calls can be chained\n```\n\nMaybe? I find the current one hard to parse",
+      "revId": "ede4129df6c883148558c78d156e4907fb3df6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bee29e7_d9788170",
+        "filename": "src/tint/utils/enum_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T13:41:16Z",
+      "side": 1,
+      "message": "Not sure I understand the usecase for this, if you already know which one you want because you\u0027re passing the boolean, why not just call the right one? (Part of it is I find the usage confusing, I\u0027d expect `Set(foo, false)` to set `foo` to `false`, not remove foo. It seems like it would be better to just do this at the call site to make it clear what is happening?",
+      "revId": "ede4129df6c883148558c78d156e4907fb3df6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
