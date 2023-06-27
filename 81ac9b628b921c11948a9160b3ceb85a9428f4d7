@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0b20257_5ca6931c",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T15:37:31Z",
+      "side": 1,
+      "message": "maybe `requires_sequencing` instead of `pending`?",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddfb33c4_732e7518",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T15:37:31Z",
+      "side": 1,
+      "message": "`for (auto* inst : *block)`",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2d60338_46c3dec4",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T15:37:31Z",
+      "side": 1,
+      "message": "```\nif (!pending.Contains(operand)) {\n   continue;\n}\n```",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e34a182_eb02d88c",
         "filename": "src/tint/ir/to_program_inlining_test.cc",
         "patchSetId": 8
@@ -14,6 +65,40 @@
       "writtenOn": "2023-06-27T15:24:42Z",
       "side": 1,
       "message": "Dan pointed out that this is incorrectly named. Should be `BinaryOpUnsequencedRHSThenSequencedLHS`",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de362bf_9edc6053",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T15:37:31Z",
+      "side": 1,
+      "message": "Why is this considered sequenced?",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d20093b1_32e2356f",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-27T15:37:31Z",
+      "side": 1,
+      "message": "Technically `x` could have been inlined here.",
       "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
