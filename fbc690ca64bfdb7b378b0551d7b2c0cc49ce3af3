@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88021d53_59efc722",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-27T05:24:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e111ebe_770362a9",
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82d26910_924dfc5d",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-06-21T23:48:10Z",
       "side": 1,
       "message": "nit: maybe call it IsValidNotThreadSafeForTesting or something scary",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 54
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d2446fa_be807b8d",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-27T05:24:20Z",
+      "side": 1,
+      "message": "Removed entirely since it can be tested by calling `Promote`.",
+      "parentUuid": "82d26910_924dfc5d",
       "range": {
         "startLine": 142,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3d67fcd_8daa4477",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-27T05:24:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64efde59_a79da314",
+      "range": {
+        "startLine": 214,
+        "startChar": 11,
+        "endLine": 214,
+        "endChar": 14
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d66e9784_bf23cfee",
@@ -87,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb237a30_6f7c8770",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-27T05:24:20Z",
+      "side": 1,
+      "message": "ditto: removed.",
+      "parentUuid": "d66e9784_bf23cfee",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 79
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02b896e3_9323efae",
@@ -100,6 +190,30 @@
       "writtenOn": "2023-06-21T23:48:10Z",
       "side": 1,
       "message": "why not have this as a member function on WeakRefCounted\u003cT\u003e ?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 1
+      },
+      "revId": "fbc690ca64bfdb7b378b0551d7b2c0cc49ce3af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b00d5890_7b94e146",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-27T05:24:20Z",
+      "side": 1,
+      "message": "Moved into `Ref` because only there is the typing explicit enough. Otherwise, we would need to make all backend object classes (`T`) extend `WeakRefCounted\u003cT\u003e` for it to work properly.",
+      "parentUuid": "02b896e3_9323efae",
       "range": {
         "startLine": 231,
         "startChar": 0,
