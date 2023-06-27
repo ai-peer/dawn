@@ -51,7 +51,7 @@ class WeakRef {
 
     // Promotes a WeakRef to a Ref. Access to the raw pointer is not allowed because a raw pointer
     // could become invalid after being retrieved.
-    Ref<T> Promote() {
+    Ref<T> Promote() const {
         if (mData != nullptr) {
             return AcquireRef(static_cast<T*>(mData->TryGetRef().Detach()));
         }
