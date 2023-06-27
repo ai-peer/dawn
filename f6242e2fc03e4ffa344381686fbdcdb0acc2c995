@@ -293,6 +293,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cf78498_e44b253d",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-27T21:58:10Z",
+      "side": 1,
+      "message": "\u003e You might want to create a return instruction that has a placeholder value that you\u0027ll later replace with `SetOperand()`.\n\nSeems fine to convert a no-return to a return-with-value.\n\n\u003e You might return `undef` at the end of a function if you know that all other control flow paths already return (but validation or a particular backend still requires the final return).\n\nAgain, if the backend has to figure out _something_ to return for the undef case, it seems fine to treat the `nullptr` as `undef` if the function has a non-void type?",
+      "parentUuid": "4d8490a9_ecc317aa",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f546a53_d54cff7a",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15
