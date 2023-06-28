@@ -420,16 +420,16 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
 
     ComPtr<ID3D11Resource> d3d11Resource;
     if (descriptor->GetType() == ExternalImageType::DXGISharedHandle) {
-        const d3d::ExternalImageDescriptorDXGISharedHandle* sharedHandleDescriptor =
+        const auto* sharedHandleDescriptor =
             static_cast<const d3d::ExternalImageDescriptorDXGISharedHandle*>(descriptor);
         DAWN_TRY(
             CheckHRESULT(mD3d11Device5->OpenSharedResource1(sharedHandleDescriptor->sharedHandle,
                                                             IID_PPV_ARGS(&d3d11Resource)),
                          "D3D11 OpenSharedResource1"));
     } else {
-        const d3d::ExternalImageDescriptorD3D11Texture* d3d11Texture2DDescriptor =
+        const auto* d3d11TextureDescriptor =
             static_cast<const d3d::ExternalImageDescriptorD3D11Texture*>(descriptor);
-        DAWN_TRY(CheckHRESULT(d3d11Texture2DDescriptor->texture.As(&d3d11Resource),
+        DAWN_TRY(CheckHRESULT(d3d11TextureDescriptor->texture.As(&d3d11Resource),
                               "Cannot get ID3D11Resource from texture"));
         ComPtr<ID3D11Device> textureDevice;
         d3d11Resource->GetDevice(textureDevice.GetAddressOf());
