@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7109b74_ac2481f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Added gating macros. Lmk if that\u0027s still not ok.",
+      "parentUuid": "91dac445_1fa73948",
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25f8854e_0196c6bf",
@@ -139,6 +157,30 @@
       "side": 1,
       "message": "\"RefCountedDataForWeakRef\" ? \n\nthis name no one really needs to type outside the implementation of the class, so it could be longer and more descriptive",
       "parentUuid": "527a4c7d_c68f2541",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31c327fc_09c63635",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Ah, Corentin was right! I\u0027m not sure why I wasn\u0027t able to get it to compile before anymore, but was able to move it accordingly!",
+      "parentUuid": "17c4c661_77c1758f",
       "range": {
         "startLine": 44,
         "startChar": 6,
@@ -244,6 +286,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e744e3e6_9a9f8bd0",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Closing unless there\u0027s any other issues with this!",
+      "parentUuid": "e4709ac7_da089c46",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e26b5434_414840b2",
@@ -257,6 +323,30 @@
       "writtenOn": "2023-06-28T15:13:38Z",
       "side": 1,
       "message": "nit: WeakRef",
+      "range": {
+        "startLine": 34,
+        "startChar": 27,
+        "endLine": 34,
+        "endChar": 34
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "450e9eff_5cac7506",
+        "filename": "src/dawn/common/WeakRef.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e26b5434_414840b2",
       "range": {
         "startLine": 34,
         "startChar": 27,
@@ -290,6 +380,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9a762d_1750368c",
+        "filename": "src/dawn/common/WeakRefCounted.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12d9fd8c_f560b383",
+      "range": {
+        "startLine": 19,
+        "startChar": 77,
+        "endLine": 19,
+        "endChar": 93
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f003df85_c8f51a37",
@@ -303,6 +417,30 @@
       "writtenOn": "2023-06-27T21:43:33Z",
       "side": 1,
       "message": "unit: \"WeakRefCounted\" makes it seem like it is also Refcounted which in fact it\u0027s not. Maybe we can use a different name like \"WeakRefSupport\" or \"SupportsWeakRef\" or \"WeakRefTarget\" or IDK",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "510416b2_f5bb4926",
+        "filename": "src/dawn/common/WeakRefCounted.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f003df85_c8f51a37",
       "range": {
         "startLine": 44,
         "startChar": 6,

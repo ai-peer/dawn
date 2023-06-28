@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "897cca73_59667836",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19836291_d15c5000",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "057201b9_fcca6c57",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-28T15:13:38Z",
       "side": 1,
       "message": "[1]",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92616009_9c37f191",
+        "filename": "src/dawn/common/WeakRef.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "057201b9_fcca6c57",
       "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e88c6b_dda8f90e",
+        "filename": "src/dawn/tests/unittests/WeakRefTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Added gating macros.",
+      "parentUuid": "1004bbbb_062ada4f",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cc0daf1_2fbe0392",
@@ -82,6 +136,30 @@
       "writtenOn": "2023-06-28T15:13:38Z",
       "side": 1,
       "message": "existing nit: maybe call it \"SimpleSemaphore\" since that\u0027s what it is intended to be",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 12
+      },
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804aa0fa_93f675e6",
+        "filename": "src/dawn/utils/Signal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cc0daf1_2fbe0392",
       "range": {
         "startLine": 25,
         "startChar": 6,
