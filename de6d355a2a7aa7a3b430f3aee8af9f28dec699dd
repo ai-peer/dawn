@@ -189,6 +189,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4b5097_b25e1da7",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-28T15:52:22Z",
+      "side": 1,
+      "message": "That\u0027s great!",
+      "parentUuid": "fe433a74_747cfddd",
+      "range": {
+        "startLine": 498,
+        "startChar": 4,
+        "endLine": 499,
+        "endChar": 82
+      },
+      "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cea881eb_59a1dc36",
