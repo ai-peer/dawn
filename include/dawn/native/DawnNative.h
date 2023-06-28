@@ -256,6 +256,7 @@ enum ExternalImageType {
     DmaBuf,
     IOSurface,
     DXGISharedHandle,
+    D3D11Texture2D,
     EGLImage,
     AHardwareBuffer,
 };
