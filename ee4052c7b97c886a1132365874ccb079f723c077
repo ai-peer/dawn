@@ -67,6 +67,24 @@
       "message": "Why do we need this default?",
       "revId": "ee4052c7b97c886a1132365874ccb079f723c077",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b442aff1_5a1e9f82",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-28T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1753cdf2_08d40a47",
+      "revId": "ee4052c7b97c886a1132365874ccb079f723c077",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
