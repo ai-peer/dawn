@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3321b5b6_37af66c6",
+        "filename": "src/tint/writer/spirv/ir/test_helper_ir.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-28T16:57:37Z",
+      "side": 1,
+      "message": "Nope, remove the `.h`",
+      "parentUuid": "6b0c5d56_a56fa10c",
+      "revId": "cd13bf52b1a167e64662c5815cd3e5e163430d8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63352df9_79b0b2dd",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-28T16:52:49Z",
       "side": 1,
       "message": "Should this be calling `IRIsValid()` since it appears to have been removed from the tests?",
+      "revId": "cd13bf52b1a167e64662c5815cd3e5e163430d8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "677a9b2d_5b048b0e",
+        "filename": "src/tint/writer/spirv/ir/test_helper_ir.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-28T16:57:37Z",
+      "side": 1,
+      "message": "No, we already validate the IR in `generator_.Generate()` so `IRIsValid()` is no longer necessary. I plan to remove it once all the tests are moved over.",
+      "parentUuid": "63352df9_79b0b2dd",
       "revId": "cd13bf52b1a167e64662c5815cd3e5e163430d8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
