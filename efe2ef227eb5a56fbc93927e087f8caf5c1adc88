@@ -33,6 +33,24 @@
       "message": "Should we be validating operand types for these operations?\n\ne.g. complement requires integer scalar or vector, negation requires numeric scalar or vector\n\nAlso result type should equal operand type",
       "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e52cd3cf_10a3a6a7",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:05:39Z",
+      "side": 1,
+      "message": "Yea, I\u0027m not sure. Is it worth it to validate _everything_? It will make validation slower, but is more comprehensive. Or, is it better to validate things as we find we get them wrong? I\u0027m guessing some of the common mistakes (and thinking about them for the if/switch/loop and their exits).\n\nBut, do we want to check everything we possibly can in here? Or keep it more minimal?",
+      "parentUuid": "4ffd90ef_742d353e",
+      "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
