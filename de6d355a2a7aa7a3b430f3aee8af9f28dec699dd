@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "35abebeb_8068e289",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-28T05:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c15d56f8_a9e24fd7",
+      "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1f61a7f4_fa537d29",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -125,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15236946_6cce0dfd",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-28T05:07:22Z",
+      "side": 1,
+      "message": "Changed ASSERT to static_assert. \n\nKai, do you mean that we still need an ASSERT in Adapter? I think actual limits by the adapter is only useful for Apple, which is 31 and we limit current kMaxBindGroupsPlusVertexBuffer to 24, per my understanding. Please correct me if I am wrong. What do we need to do for that? Do you have any detailed suggestions? Maybe we can do that in the next patch if needed.",
+      "parentUuid": "72b52d38_03729871",
+      "range": {
+        "startLine": 498,
+        "startChar": 4,
+        "endLine": 499,
+        "endChar": 82
+      },
+      "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cea881eb_59a1dc36",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
@@ -136,6 +178,24 @@
       "writtenOn": "2023-06-22T12:34:26Z",
       "side": 1,
       "message": "ditto",
+      "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "569a9f29_7bc91f60",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1711,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-06-28T05:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea881eb_59a1dc36",
       "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
