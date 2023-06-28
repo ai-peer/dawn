@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4100b98_f85ee3ae",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-28T17:10:20Z",
+      "side": 1,
+      "message": "Nope. Attempting to use operands and results from a destructed instruction leads to OOBs accesses. Once an instruction is destructed, `Alive()` is the only method you should use.",
+      "parentUuid": "7db4a8b0_1785dcb4",
+      "revId": "55cf301c5c3ecf983db4f8d6f8dad00dcb76f18b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b639cdb5_f00f7553",
         "filename": "src/tint/ir/validate_test.cc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-28T01:22:12Z",
       "side": 1,
       "message": "This seems much less useful then printing out the instruction?",
+      "revId": "55cf301c5c3ecf983db4f8d6f8dad00dcb76f18b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2413134_672d2b28",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-28T17:10:20Z",
+      "side": 1,
+      "message": "See my other comment.",
+      "parentUuid": "b639cdb5_f00f7553",
       "revId": "55cf301c5c3ecf983db4f8d6f8dad00dcb76f18b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
