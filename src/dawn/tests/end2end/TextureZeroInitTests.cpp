@@ -1904,7 +1904,9 @@ DAWN_INSTANTIATE_TEST(
     MetalBackend({"nonzero_clear_resources_on_creation_for_testing",
                   "use_blit_for_buffer_to_depth_texture_copy",
                   "use_blit_for_buffer_to_stencil_texture_copy"}),
-    VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
+    VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+    VulkanBackend({"use_blit_for_buffer_to_stencil_texture_copy",
+                   "nonzero_clear_resources_on_creation_for_testing"}));
 
 class CompressedTextureZeroInitTest : public TextureZeroInitTest {
   protected:
