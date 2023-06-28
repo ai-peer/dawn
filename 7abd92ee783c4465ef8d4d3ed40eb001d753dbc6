@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91dac445_1fa73948",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T00:01:27Z",
+      "side": 1,
+      "message": "It\u0027s only in the tests though? I wasn\u0027t able to find another way to write these tests because the point is that the failure cases do not compile. Plus according to https://stackoverflow.com/questions/36418570/what-compiler-option-library-do-i-need-to-use-detect-or-t-type-trait (which was posted in 2017?), it seems like GCC and Clang shouldn\u0027t be a problem?\n\nMy take here is that some testing is better than none.",
+      "parentUuid": "fe180e41_7a84622b",
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25f8854e_0196c6bf",
         "filename": "src/dawn/common/Ref.h",
         "patchSetId": 5
@@ -61,6 +79,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "527a4c7d_c68f2541",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T00:01:27Z",
+      "side": 1,
+      "message": "I am unable to put it in `WeakRef.h` because of circular deps on `Ref` and `AcquireRef` in the implementation of `TryGetRef` below. I agree the naming is sort of confusing, but I was worried that having something named `WeakRef*` in here would also be more confusing.",
+      "parentUuid": "25f8854e_0196c6bf",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20a5c51a_1f6427b4",
         "filename": "src/dawn/common/Ref.h",
         "patchSetId": 5
@@ -72,6 +114,30 @@
       "writtenOn": "2023-06-27T21:43:33Z",
       "side": 1,
       "message": "not sure but idea -\n\ndo we need detail::WeakRefCountedBase?\n\nmaybe, we could have\n\n`WeakRef\u003cT\u003e WeakRefCounted\u003cT\u003e::GetWeakRef()`\n\nthen, I think we don\u0027t need the is_base_of check here, and you could do both:\n```\n// if T inherits WeakRefCounted\u003cT\u003e\nT* bar \u003d ...;\nWeakRef\u003cT\u003e weak_bar \u003d bar-\u003eGetWeakRef();\n\n// via Ref\u003cT\u003e::operator-\u003e returning T*\nRef\u003cT\u003e foo \u003d ...;\nWeakRef\u003cT\u003e weak_foo \u003d foo-\u003eGetWeakRef();\n```",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e329191a_6672abf8",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T00:01:27Z",
+      "side": 1,
+      "message": "The problem with putting `GetWeakRef()` on `WeakRefCounted` is that depending on when `WeakRefCounted` is extended from, you will never be able to get a type that is further down the hierarchy. Example:\n\n```\nclass BindGroupLayoutBase : public WeakRefCounted\u003cBindGroupLayoutBase\u003e {}\n\nclass BindGroupLayoutVk : public BindGroupLayoutBase {}\n\nBindGroupLayoutVk* x \u003d ...;\nRef\u003cBindGroupLayoutVk\u003e xRef \u003d AcquireRef(x);\n\n// These both will not work because you are implicitly trying to downcast:\nWeakRef\u003cBindGroupLayoutVk\u003e weakref \u003d x-\u003eGetWeakRef();\nWeakRef\u003cBindGroupLayoutVk\u003e weakref \u003d xRef-\u003eGetWeakRef();\n\n// Only this will work:\nWeakRef\u003cBindGroupLayoutBase\u003e weakref \u003d x-\u003eGetWeakRef();\n```\n\nWhile this isn\u0027t necessarily problematic w.r.t the cache, I feel like it isn\u0027t ergonomic to use. Intuitively you should be able to get a WeakRef of the type anywhere in the hierarchy as long as you are only upcasting. In order to fix this, you could go into all lowest types `D` and extend `WeakRefCounted\u003cD\u003e` on them, but that also feels very limiting and clunky to use.",
+      "parentUuid": "20a5c51a_1f6427b4",
       "range": {
         "startLine": 72,
         "startChar": 4,
