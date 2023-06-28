@@ -22,6 +22,30 @@
       },
       "revId": "8dd8be737ece0dcca0479c89a1d13e3922c959ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d8df2c_96f5e487",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T18:28:05Z",
+      "side": 1,
+      "message": "Maybe, but it still makes the text description a lot nicer to see `left` instead of `0`.",
+      "parentUuid": "a2e11003_f1cfb112",
+      "range": {
+        "startLine": 365,
+        "startChar": 33,
+        "endLine": 365,
+        "endChar": 98
+      },
+      "revId": "8dd8be737ece0dcca0479c89a1d13e3922c959ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
