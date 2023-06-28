@@ -537,7 +537,7 @@ TEST_F(IR_ValidateTest, If_ConditionIsNullptr) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), R"(:3:8 error: if: condition is undefined
+    EXPECT_EQ(res.Failure().str(), R"(:3:8 error: if: condition operand is undefined
     if undef [t: %b2, f: %b3] {  # if_1
        ^^^^^
 
@@ -723,9 +723,9 @@ TEST_F(IR_ValidateTest, Instruction_DeadOperand) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().str(), R"(:3:41 error: instruction has undefined operand
+    EXPECT_EQ(res.Failure().str(), R"(:3:46 error: instruction has operand which is not alive
     %2:ptr<function, f32, read_write> = var, %3
-                                        ^^^
+                                             ^^
 
 :2:3 note: In block
   %b1 = block {
@@ -850,6 +850,63 @@ note: # Disassembly
 %my_func = func():void -> %b1 {
   %b1 = block {
     undef = add 3i, 2i
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, Unary_Value_Nullptr) {
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto sb = b.With(f->Block());
+    sb.Negation(ty.i32(), nullptr);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:3:23 error: unary: value operand is undefined
+    %2:i32 = negation undef
+                      ^^^^^
+
+:2:3 note: In block
+  %b1 = block {
+  ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32 = negation undef
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, Unary_Result_Nullptr) {
+    auto* bin =
+        mod.instructions.Create<ir::Unary>(nullptr, ir::Unary::Kind::kNegation, b.Constant(2_i));
+
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto sb = b.With(f->Block());
+    sb.Append(bin);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:3:5 error: instruction result is undefined
+    undef = negation 2i
+    ^^^^^
+
+:2:3 note: In block
+  %b1 = block {
+  ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    undef = negation 2i
     ret
   }
 }

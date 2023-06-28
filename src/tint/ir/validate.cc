@@ -153,7 +153,28 @@ class Validator {
         diagnostics_.add_note(tint::diag::System::IR, std::move(note), src);
     }
 
-    // std::string Name(Value* v) { return mod_.NameOf(v).Name(); }
+    template <typename FUNC>
+    void CheckOperandNotNull(ir::Instruction* inst,
+                             ir::Value* operand,
+                             size_t idx,
+                             std::string_view name,
+                             FUNC&& cb) {
+        if (operand == nullptr) {
+            AddError(inst, idx, std::string(name) + ": " + cb(idx) + " operand is undefined");
+        }
+    }
+
+    template <typename FUNC>
+    void CheckOperandsNotNull(ir::Instruction* inst,
+                              size_t start_operand,
+                              size_t end_operand,
+                              std::string_view name,
+                              FUNC&& cb) {
+        auto operands = inst->Operands();
+        for (size_t i = start_operand; i <= end_operand; i++) {
+            CheckOperandNotNull(inst, operands[i], i, name, cb);
+        }
+    }
 
     void CheckRootBlock(Block* blk) {
         if (!blk) {
@@ -223,7 +244,7 @@ class Validator {
             // Note, a `nullptr` is a valid operand in some cases, like `var` so we can't just check
             // for `nullptr` here.
             if (!op->Alive()) {
-                AddError(inst, "instruction has undefined operand");
+                AddError(inst, i, "instruction has operand which is not alive");
             }
 
             if (!op->Usages().Contains({inst, i})) {
@@ -243,7 +264,7 @@ class Validator {
             [&](Switch*) {},                             //
             [&](Swizzle*) {},                            //
             [&](Terminator* b) { CheckTerminator(b); },  //
-            [&](Unary*) {},                              //
+            [&](Unary* u) { CheckUnary(u); },            //
             [&](Var* var) { CheckVar(var); },            //
             [&](Default) {
                 AddError(std::string("missing validation of: ") + inst->TypeInfo().name);
@@ -333,12 +354,15 @@ class Validator {
     }
 
     void CheckBinary(ir::Binary* b) {
-        if (b->LHS() == nullptr) {
-            AddError(b, Binary::kLhsOperandOffset, "binary: left operand is undefined");
-        }
-        if (b->RHS() == nullptr) {
-            AddError(b, Binary::kRhsOperandOffset, "binary: right operand is undefined");
-        }
+        CheckOperandsNotNull(b, Binary::kLhsOperandOffset, Binary::kRhsOperandOffset, "binary",
+                             [](size_t err_idx) {
+                                 return (err_idx == Binary::kLhsOperandOffset) ? "left" : "right";
+                             });
+    }
+
+    void CheckUnary(ir::Unary* u) {
+        CheckOperandNotNull(u, u->Val(), Unary::kValueOperandOffset, "unary",
+                            [](size_t) { return "value"; });
     }
 
     void CheckTerminator(ir::Terminator* b) {
@@ -362,9 +386,9 @@ class Validator {
     }
 
     void CheckIf(If* if_) {
-        if (!if_->Condition()) {
-            AddError(if_, If::kConditionOperandOffset, "if: condition is undefined");
-        }
+        CheckOperandNotNull(if_, if_->Condition(), If::kConditionOperandOffset, "if",
+                            [](size_t) { return "condition"; });
+
         if (if_->Condition() && !if_->Condition()->Type()->Is<type::Bool>()) {
             AddError(if_, If::kConditionOperandOffset, "if: condition must be a `bool` type");
         }
