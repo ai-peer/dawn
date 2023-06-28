@@ -51,6 +51,24 @@
       "parentUuid": "4ffd90ef_742d353e",
       "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff00e1f0_01bf07e2",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T13:52:41Z",
+      "side": 1,
+      "message": "Added a check for result type matching value type.",
+      "parentUuid": "e52cd3cf_10a3a6a7",
+      "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
