@@ -69,6 +69,24 @@
       "parentUuid": "e52cd3cf_10a3a6a7",
       "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30654a01_a34b7a5c",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T18:37:13Z",
+      "side": 1,
+      "message": "I\u0027m going to land this as is for now. We\u0027re having separate discussions about integrating the intrinsics into to IR, so that work would allow the checking that the types are correct for the call.",
+      "parentUuid": "ff00e1f0_01bf07e2",
+      "revId": "efe2ef227eb5a56fbc93927e087f8caf5c1adc88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
