@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e7849e3_5c9325d6",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T18:32:22Z",
+      "side": 1,
+      "message": "I can see emitting the pointer and other information in the validation error message, but we can emit the disassembly mostly as it should look, so it\u0027s strange that we aren\u0027t.\n\nLike, I may want to see where the result was used to figure out if this destroyed instruction was incorrectly distroyed, or was distroyed but forgotten to be removed from the module. We can still print out the result ID as it\u0027s based on the pointer which still exists, the result is just marked Destroyed.",
+      "parentUuid": "53c400e8_528fce6c",
+      "revId": "55cf301c5c3ecf983db4f8d6f8dad00dcb76f18b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b639cdb5_f00f7553",
         "filename": "src/tint/ir/validate_test.cc",
         "patchSetId": 2
