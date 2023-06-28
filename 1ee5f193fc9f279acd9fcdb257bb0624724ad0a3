@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d18db9c_fe8b89d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-06-28T18:35:04Z",
+      "side": 1,
+      "message": "lgtm % nits",
+      "revId": "1ee5f193fc9f279acd9fcdb257bb0624724ad0a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d302d5f_d145c61e",
+        "filename": "include/dawn/native/D3DBackend.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-06-28T18:35:04Z",
+      "side": 1,
+      "message": "nit: instead of \"DXGID3D11Texture2D\" just \"D3D11Texture\" or \"D3D11Texture2D\" is sufficient and less verbose - I\u0027ll defer to Dawn folks on \"D3D11Texture\" vs \"D3D11Texture2D\" - I prefer \"D3D11Texture\" since other texture types (1D or 3D) don\u0027t make sense in an external image anyway.",
+      "range": {
+        "startLine": 59,
+        "startChar": 49,
+        "endLine": 59,
+        "endChar": 67
+      },
+      "revId": "1ee5f193fc9f279acd9fcdb257bb0624724ad0a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4e751a_70086b2e",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-06-28T18:35:04Z",
+      "side": 1,
+      "message": "nit: just D3D11Texture maybe depending on the resolution to the previous comment?",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 18
+      },
+      "revId": "1ee5f193fc9f279acd9fcdb257bb0624724ad0a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff3657a6_c9b6fe49",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-06-28T18:35:04Z",
+      "side": 1,
+      "message": "nit: D3D11 device",
+      "range": {
+        "startLine": 438,
+        "startChar": 17,
+        "endLine": 438,
+        "endChar": 23
+      },
+      "revId": "1ee5f193fc9f279acd9fcdb257bb0624724ad0a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
