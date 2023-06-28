@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5de4c78f_c3c47806",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-28T14:08:15Z",
+      "side": 1,
+      "message": "Don\u0027t we need to clear if there are multiple results too? e.g. an if that returns multiple things.",
+      "revId": "c58c3e4a330cdcfe2c2022d478284c1151218c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "738a55b8_050ff482",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-28T14:08:15Z",
+      "side": 1,
+      "message": "Why is the load being inlined here? That seems unsafe? Same below.",
+      "revId": "c58c3e4a330cdcfe2c2022d478284c1151218c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
