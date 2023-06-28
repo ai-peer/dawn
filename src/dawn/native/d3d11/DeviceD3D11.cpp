@@ -407,22 +407,29 @@ ResultOrError<Ref<d3d::Fence>> Device::CreateFence(
 }
 
 ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExternalImageDXGIImplImpl(
-    const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
+    const ExternalImageDescriptor* descriptor) {
     // ExternalImageDXGIImpl holds a weak reference to the device. If the device is destroyed before
     // the image is created, the image will have a dangling reference to the device which can cause
     // a use-after-free.
     DAWN_TRY(ValidateIsAlive());
 
-    DAWN_INVALID_IF(descriptor->sharedHandle != nullptr && descriptor->texture,
-                    "sharedHandle and texture cannot be both non-null");
+    DAWN_INVALID_IF(descriptor->GetType() != ExternalImageType::DXGISharedHandle &&
+                        descriptor->GetType() != ExternalImageType::D3D11Texture2D,
+                    "descriptor is not an ExternalImageDescriptorDXGISharedHandle or "
+                    "ExternalImageDescriptorDXGID3D11Texture2D");
 
     ComPtr<ID3D11Resource> d3d11Resource;
-    if (descriptor->sharedHandle != nullptr) {
-        DAWN_TRY(CheckHRESULT(mD3d11Device5->OpenSharedResource1(descriptor->sharedHandle,
-                                                                 IID_PPV_ARGS(&d3d11Resource)),
-                              "D3D11 OpenSharedResource1"));
+    if (descriptor->GetType() == ExternalImageType::DXGISharedHandle) {
+        const d3d::ExternalImageDescriptorDXGISharedHandle* sharedHandleDescriptor =
+            static_cast<const d3d::ExternalImageDescriptorDXGISharedHandle*>(descriptor);
+        DAWN_TRY(
+            CheckHRESULT(mD3d11Device5->OpenSharedResource1(sharedHandleDescriptor->sharedHandle,
+                                                            IID_PPV_ARGS(&d3d11Resource)),
+                         "D3D11 OpenSharedResource1"));
     } else {
-        DAWN_TRY(CheckHRESULT(descriptor->texture.As(&d3d11Resource),
+        const d3d::ExternalImageDescriptorDXGID3D11Texture2D d3d11Texture2DDescriptor =
+            static_cast<const d3d::ExternalImageDescriptorDXGID3D11Texture2D*>(descriptor);
+        DAWN_TRY(CheckHRESULT(d3d11Texture2DDescriptor->texture.As(&d3d11Resource),
                               "Cannot get ID3D11Resource from texture"));
     }
 

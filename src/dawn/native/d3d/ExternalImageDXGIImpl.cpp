@@ -160,7 +160,7 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
 }
 
 void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
-                                      d3d::ExternalImageDXGIFenceDescriptor* signalFence) {
+                                      ExternalImageDXGIFenceDescriptor* signalFence) {
     auto deviceLock(GetScopedDeviceLock());
 
     if (!IsInList()) {

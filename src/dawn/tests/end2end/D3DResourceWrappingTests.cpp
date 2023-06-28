@@ -491,7 +491,7 @@ class D3DSharedHandleUsageTests : public D3DResourceTestBase {
 
     void ExpectPixelRGBA8EQ(ID3D11Texture2D* d3d11Texture,
                             const wgpu::Color& color,
-                            const native::d3d::ExternalImageDXGIFenceDescriptor* waitFence) {
+                            const native::ExternalImageDXGIFenceDescriptor* waitFence) {
         D3D11_TEXTURE2D_DESC texture2DDesc;
         d3d11Texture->GetDesc(&texture2DDesc);
 
