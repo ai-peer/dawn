@@ -471,12 +471,6 @@ crbug.com/dawn/0000 [ qualcomm ] webgpu:api,operation,render_pipeline,sample_mas
 crbug.com/tint/1947 [ android-t ] webgpu:shader,execution,memory_model,coherence:corr:memType="atomic_storage";testType="inter_workgroup" [ RetryOnFailure ]
 
 ################################################################################
-# CTS Async destroy tests
-################################################################################
-crbug.com/1457970 webgpu:api,validation,state,device_lost,destroy:createComputePipelineAsync:* [ Failure ]
-crbug.com/1457970 webgpu:api,validation,state,device_lost,destroy:createRenderPipelineAsync:* [ Failure ]
-
-################################################################################
 # untriaged Android failures
 ################################################################################
 crbug.com/dawn/0000 [ android-r ] webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes:initMethod="WriteTexture";checkMethod="PartialCopyT2B";format="r16float";dimension="1d" [ Failure ]
