@@ -260,186 +260,158 @@ class Builder {
     /// Creates an op for `lhs kind rhs`
     /// @param kind the kind of operation
     /// @param type the result type of the binary expression
-    /// @param lhs the left-hand-side of the operation
-    /// @param rhs the right-hand-side of the operation
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Binary(enum Binary::Kind kind, const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Append(ir.instructions.Create<ir::Binary>(InstructionResult(type), kind,
-                                                         Value(std::forward<LHS>(lhs)),
-                                                         Value(std::forward<RHS>(rhs))));
+    template <typename... ARGS>
+    ir::Binary* Binary(enum Binary::Kind kind, const type::Type* type, ARGS&&... args) {
+        static_assert(sizeof...(args) == 2, "Binary() requires exactly two arguments");
+        auto values = Values(std::forward<ARGS>(args)...);
+        return Append(ir.instructions.Create<ir::Binary>(InstructionResult(type), kind, values[0],
+                                                         values[1]));
     }
 
     /// Creates an And operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* And(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kAnd, type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* And(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kAnd, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Or operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Or(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kOr, type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Or(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kOr, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Xor operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Xor(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kXor, type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Xor(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kXor, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Equal operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Equal(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kEqual, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Equal(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kEqual, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an NotEqual operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* NotEqual(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kNotEqual, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* NotEqual(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kNotEqual, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an LessThan operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* LessThan(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kLessThan, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* LessThan(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kLessThan, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an GreaterThan operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* GreaterThan(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kGreaterThan, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* GreaterThan(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kGreaterThan, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an LessThanEqual operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* LessThanEqual(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kLessThanEqual, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* LessThanEqual(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kLessThanEqual, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an GreaterThanEqual operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* GreaterThanEqual(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kGreaterThanEqual, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* GreaterThanEqual(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kGreaterThanEqual, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an ShiftLeft operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* ShiftLeft(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kShiftLeft, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* ShiftLeft(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kShiftLeft, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an ShiftRight operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* ShiftRight(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kShiftRight, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* ShiftRight(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kShiftRight, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Add operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Add(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kAdd, type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Add(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kAdd, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Subtract operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Subtract(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kSubtract, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Subtract(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kSubtract, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Multiply operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Multiply(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kMultiply, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Multiply(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kMultiply, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Divide operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Divide(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kDivide, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Divide(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kDivide, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an Modulo operation
     /// @param type the result type of the expression
-    /// @param lhs the lhs of the add
-    /// @param rhs the rhs of the add
+    /// @param args the arguments used to construct the operation
     /// @returns the operation
-    template <typename LHS, typename RHS>
-    ir::Binary* Modulo(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(ir::Binary::Kind::kModulo, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+    template <typename... ARGS>
+    ir::Binary* Modulo(const type::Type* type, ARGS&&... args) {
+        return Binary(ir::Binary::Kind::kModulo, type, std::forward<ARGS>(args)...);
     }
 
     /// Creates an op for `kind val`
