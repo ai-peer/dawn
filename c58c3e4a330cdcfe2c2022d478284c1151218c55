@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "143d1c46_0b325e7c",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-28T14:39:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5de4c78f_c3c47806",
+      "revId": "c58c3e4a330cdcfe2c2022d478284c1151218c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "738a55b8_050ff482",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-28T14:08:15Z",
       "side": 1,
       "message": "Why is the load being inlined here? That seems unsafe? Same below.",
+      "revId": "c58c3e4a330cdcfe2c2022d478284c1151218c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25322c27_069af4bd",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-28T14:39:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "738a55b8_050ff482",
       "revId": "c58c3e4a330cdcfe2c2022d478284c1151218c55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
