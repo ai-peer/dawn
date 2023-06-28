@@ -222,6 +222,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4709ac7_da089c46",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-28T18:37:08Z",
+      "side": 1,
+      "message": "No, those ctors allow for the upcasting, but this example would be a downcasting case, i.e. trying to cast a `WeakRef\u003cBindGroupLayoutBase\u003e` to a `WeakRef\u003cBindGroupLayoutVk\u003e`.",
+      "parentUuid": "8e1d894c_e989024d",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e26b5434_414840b2",
         "filename": "src/dawn/common/WeakRef.h",
         "patchSetId": 5
