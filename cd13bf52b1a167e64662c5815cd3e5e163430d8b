@@ -16,6 +16,40 @@
       "message": "PTAL. If this looks OK I\u0027ll migrate the rest of the tests in a follow-up change.\n\nAlso the next CL adds a macro to make it even nicer (and gives more useful output), but I know macros are controversial so I split that out of this change.",
       "revId": "cd13bf52b1a167e64662c5815cd3e5e163430d8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0c5d56_a56fa10c",
+        "filename": "src/tint/writer/spirv/ir/test_helper_ir.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T16:52:49Z",
+      "side": 1,
+      "message": "Do you actually need both of these?",
+      "revId": "cd13bf52b1a167e64662c5815cd3e5e163430d8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63352df9_79b0b2dd",
+        "filename": "src/tint/writer/spirv/ir/test_helper_ir.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T16:52:49Z",
+      "side": 1,
+      "message": "Should this be calling `IRIsValid()` since it appears to have been removed from the tests?",
+      "revId": "cd13bf52b1a167e64662c5815cd3e5e163430d8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
