@@ -16,6 +16,23 @@
       "message": "Hi Corentin or Austin, PTAL. Thanks",
       "revId": "51ef34c622e484c28dbf7ffb8bc3eb22b7af6c2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "517bec88_58f060f1",
+        "filename": "include/dawn/native/D3DBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-28T15:10:49Z",
+      "side": 1,
+      "message": "nit: I think we\u0027d usually make a new structure instead of having one or the other like this. So an ExternalImageDescriptorD3D11Texture2D. It would have its own type enum that the backend switches over to do the correct cast.",
+      "revId": "51ef34c622e484c28dbf7ffb8bc3eb22b7af6c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
