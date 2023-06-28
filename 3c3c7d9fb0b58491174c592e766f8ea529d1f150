@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b81d7631_c62a018f",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:03:33Z",
+      "side": 1,
+      "message": "Probably, this got built sort of in parallel. I\u0027ll look at updating to use the newer operand access methods.",
+      "parentUuid": "bf561463_73b343cc",
+      "range": {
+        "startLine": 741,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 56
+      },
+      "revId": "3c3c7d9fb0b58491174c592e766f8ea529d1f150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c676db5e_fcf7a8ef",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2023-06-27T21:43:56Z",
       "side": 1,
       "message": "You have the ability to iterate over all the operands and all the results. Seems like we could just have a `CheckNoUndefined(ir::Instruction*)` helper which we\u0027d use for 99% of all the instruction types?",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 5
+      },
+      "revId": "3c3c7d9fb0b58491174c592e766f8ea529d1f150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2f64bf_67247235",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:03:33Z",
+      "side": 1,
+      "message": "Probably, now that we have the ability to iterate them. Will look at reducing some of this in a followup.",
+      "parentUuid": "c676db5e_fcf7a8ef",
       "range": {
         "startLine": 315,
         "startChar": 0,
