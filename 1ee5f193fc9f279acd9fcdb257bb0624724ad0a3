@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "660929e0_c1be29e5",
+        "filename": "include/dawn/native/D3DBackend.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-28T18:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d302d5f_d145c61e",
+      "range": {
+        "startLine": 59,
+        "startChar": 49,
+        "endLine": 59,
+        "endChar": 67
+      },
+      "revId": "1ee5f193fc9f279acd9fcdb257bb0624724ad0a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f4e751a_70086b2e",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c8c760_8ff97974",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-28T18:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f4e751a_70086b2e",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 18
+      },
+      "revId": "1ee5f193fc9f279acd9fcdb257bb0624724ad0a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff3657a6_c9b6fe49",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-06-28T18:35:04Z",
       "side": 1,
       "message": "nit: D3D11 device",
+      "range": {
+        "startLine": 438,
+        "startChar": 17,
+        "endLine": 438,
+        "endChar": 23
+      },
+      "revId": "1ee5f193fc9f279acd9fcdb257bb0624724ad0a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b55f983_523a57a4",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-28T18:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff3657a6_c9b6fe49",
       "range": {
         "startLine": 438,
         "startChar": 17,
