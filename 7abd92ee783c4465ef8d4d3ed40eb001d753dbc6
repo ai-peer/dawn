@@ -103,6 +103,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "943c553d_e56c7432",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-28T13:17:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand the circular dependency, WeakRef.h includes Ref.h so it should have access to Ref and AcquireRef?\n\n+1 for WeakRef in the name, `WeakRefData/Proxy`?",
+      "parentUuid": "527a4c7d_c68f2541",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20a5c51a_1f6427b4",
         "filename": "src/dawn/common/Ref.h",
         "patchSetId": 5

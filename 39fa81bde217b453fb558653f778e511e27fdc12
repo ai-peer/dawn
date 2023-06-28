@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda1a54d_71b06757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-28T13:17:58Z",
+      "side": 1,
+      "message": "Looks pretty good overall!",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19836291_d15c5000",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-28T13:17:58Z",
+      "side": 1,
+      "message": "u-nit: we could split this method between a private type-unsafe one in the .cpp and a type-safe one public one in the header. Or better, this is not meant to be used directly so it could just return a Ref\u003cRefCounted\u003e and let the WeakRef deal with the type safety.",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1004bbbb_062ada4f",
+        "filename": "src/dawn/tests/unittests/WeakRefTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-28T13:17:58Z",
+      "side": 1,
+      "message": "That\u0027s pretty cool but IDK that we can rely on it even in tests. Is there a feature availability macro we can gate this on?",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
