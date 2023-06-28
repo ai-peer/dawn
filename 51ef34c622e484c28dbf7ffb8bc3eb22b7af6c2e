@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed17d4a0_3a98fc96",
+        "filename": "include/dawn/native/D3DBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-28T18:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "517bec88_58f060f1",
+      "revId": "51ef34c622e484c28dbf7ffb8bc3eb22b7af6c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88af7745_340d54ea",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-06-28T16:20:52Z",
       "side": 1,
       "message": "you should be able to call GetDevice to validate the texture actually belongs to the device\n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicechild-getdevice",
+      "revId": "51ef34c622e484c28dbf7ffb8bc3eb22b7af6c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "867d64a2_636f1d63",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-28T18:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88af7745_340d54ea",
       "revId": "51ef34c622e484c28dbf7ffb8bc3eb22b7af6c2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
