@@ -2230,9 +2230,7 @@ TEST_F(IRToProgramTest, For_CallInInitCondCont) {
             i->SetInitializer(n_0);
 
             b.With(loop->Body(), [&] {
-                auto* load = b.Load(i);
-                auto* call = b.Call(ty.i32(), fn_n, 1_i);
-                auto* if_ = b.If(b.LessThan(ty.bool_(), load, call));
+                auto* if_ = b.If(b.LessThan(ty.bool_(), b.Load(i), b.Call(ty.i32(), fn_n, 1_i)));
                 b.With(if_->True(), [&] { b.ExitIf(if_); });
                 b.With(if_->False(), [&] { b.ExitLoop(loop); });
             });
@@ -2497,17 +2495,12 @@ TEST_F(IRToProgramTest, Loop_VarsDeclaredOutsideAndInside) {
             auto* var_a = b.Var("a", ty.ptr<function, i32>());
             var_a->SetInitializer(b.Constant(2_i));
 
-            auto* body_load_a = b.Load(var_a);
-            auto* body_load_b = b.Load(var_b);
-            auto* if_ = b.If(b.Equal(ty.bool_(), body_load_a, body_load_b));
+            auto* if_ = b.If(b.Equal(ty.bool_(), b.Load(var_a), b.Load(var_b)));
             b.With(if_->True(), [&] { b.Return(f); });
             b.With(if_->False(), [&] { b.ExitIf(if_); });
 
-            b.With(loop->Continuing(), [&] {
-                auto* cont_load_a = b.Load(var_a);
-                auto* cont_load_b = b.Load(var_b);
-                b.Store(var_b, b.Add(ty.i32(), cont_load_a, cont_load_b));
-            });
+            b.With(loop->Continuing(),
+                   [&] { b.Store(var_b, b.Add(ty.i32(), b.Load(var_a), b.Load(var_b))); });
         });
     });
 
