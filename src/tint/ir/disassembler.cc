@@ -294,11 +294,13 @@ void Disassembler::EmitFunction(Function* func) {
 }
 
 void Disassembler::EmitValueWithType(Instruction* val) {
+    SourceMarker sm(this);
     if (val->Result()) {
         EmitValueWithType(val->Result());
     } else {
         out_ << "undef";
     }
+    sm.StoreResult(Usage{val, 0});
 }
 
 void Disassembler::EmitValueWithType(Value* val) {
@@ -514,8 +516,16 @@ void Disassembler::EmitOperandList(Instruction* inst,
 
 void Disassembler::EmitIf(If* i) {
     SourceMarker sm(this);
-    if (i->Result()) {
-        EmitValueWithType(i->Result());
+    if (i->HasResults()) {
+        auto res = i->Results();
+        for (size_t idx = 0; idx < res.Length(); ++i) {
+            if (idx > 0) {
+                out_ << ", ";
+            }
+            SourceMarker rs(this);
+            EmitValueWithType(res[idx]);
+            rs.StoreResult(Usage{i, idx});
+        }
         out_ << " = ";
     }
     out_ << "if ";
