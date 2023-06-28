@@ -167,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe433a74_747cfddd",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-28T11:22:14Z",
+      "side": 1,
+      "message": "I think the normalization added to Limits.cpp fixes the same concern Kai had in a different way. LGTM",
+      "parentUuid": "15236946_6cce0dfd",
+      "range": {
+        "startLine": 498,
+        "startChar": 4,
+        "endLine": 499,
+        "endChar": 82
+      },
+      "revId": "de6d355a2a7aa7a3b430f3aee8af9f28dec699dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cea881eb_59a1dc36",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1

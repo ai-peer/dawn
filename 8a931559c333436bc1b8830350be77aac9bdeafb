@@ -16,6 +16,23 @@
       "message": "Thanks for your review, Corentin and Kai. Please take another look.",
       "revId": "8a931559c333436bc1b8830350be77aac9bdeafb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40a90f21_bf1f6995",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-28T11:22:14Z",
+      "side": 1,
+      "message": "LGTM still",
+      "revId": "8a931559c333436bc1b8830350be77aac9bdeafb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
