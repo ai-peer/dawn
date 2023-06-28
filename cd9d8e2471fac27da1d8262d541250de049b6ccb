@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38020cb_440b1bb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003161
+      },
+      "writtenOn": "2023-06-28T21:25:54Z",
+      "side": 1,
+      "message": "`Kokoro+1` is thrown out by the copy-condition. @bclayton@google.com can you approve this again?",
+      "revId": "cd9d8e2471fac27da1d8262d541250de049b6ccb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
