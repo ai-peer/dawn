@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82a0f55d_5777282f",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:01:32Z",
+      "side": 1,
+      "message": "`pending_resolution` ? Just a pending ... what. Pending is very vague",
+      "parentUuid": "56ce5658_347a4947",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddfb33c4_732e7518",
         "filename": "src/tint/ir/to_program.cc",
         "patchSetId": 8
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "I don\u0027t think so? It would then evaluate as `z`, `x`, `y`.",
       "parentUuid": "d20093b1_32e2356f",
+      "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03725d31_31f77ee4",
+        "filename": "src/tint/ir/to_program_inlining_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:01:32Z",
+      "side": 1,
+      "message": "Ack, misread the ordering above.",
+      "parentUuid": "29437fbd_8ab12385",
       "revId": "81ac9b628b921c11948a9160b3ceb85a9428f4d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
