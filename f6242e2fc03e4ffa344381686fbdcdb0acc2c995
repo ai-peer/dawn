@@ -329,6 +329,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a167ea4_b1a3e3f6",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:18:19Z",
+      "side": 1,
+      "message": "My idea was passing `nullptr` would create a no-operand return. So, you can\u0027t do the pretend a `undef` return trick, you\u0027d have to make a zero value or something to return (which I think would be fine?)",
+      "parentUuid": "24bb2176_b9561f0c",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f546a53_d54cff7a",
         "filename": "src/tint/ir/transform/shader_io.cc",
         "patchSetId": 15
@@ -393,6 +411,24 @@
       "side": 1,
       "message": "Not sure whether that\u0027s better or not, since it\u0027s a one liner and we only do it twice.",
       "parentUuid": "1050f7fe_7352afc2",
+      "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a1e9fcf_a75d0e89",
+        "filename": "src/tint/ir/transform/shader_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:18:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d48f6f6e_cf16860f",
       "revId": "f6242e2fc03e4ffa344381686fbdcdb0acc2c995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
