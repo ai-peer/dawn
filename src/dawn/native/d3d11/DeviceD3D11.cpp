@@ -413,10 +413,18 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     // a use-after-free.
     DAWN_TRY(ValidateIsAlive());
 
+    DAWN_INVALID_IF(descriptor->sharedHandle != nullptr && descriptor->texture,
+                    "sharedHandle and texture cannot be both non-null");
+
     ComPtr<ID3D11Resource> d3d11Resource;
-    DAWN_TRY(CheckHRESULT(
-        mD3d11Device5->OpenSharedResource1(descriptor->sharedHandle, IID_PPV_ARGS(&d3d11Resource)),
-        "D3D11 OpenSharedResource1"));
+    if (descriptor->sharedHandle != nullptr) {
+        DAWN_TRY(CheckHRESULT(mD3d11Device5->OpenSharedResource1(descriptor->sharedHandle,
+                                                                 IID_PPV_ARGS(&d3d11Resource)),
+                              "D3D11 OpenSharedResource1"));
+    } else {
+        DAWN_TRY(CheckHRESULT(descriptor->texture.As(&d3d11Resource),
+                              "Cannot get ID3D11Resource from texture"));
+    }
 
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
     DAWN_TRY(

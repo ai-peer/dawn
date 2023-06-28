@@ -54,6 +54,11 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorDXGISharedHandle : ExternalImag
 
     // Note: SharedHandle must be a handle to a texture object.
     HANDLE sharedHandle = nullptr;
+
+    // Texture is used for creating ExternalImageDXGI with d3d11 backend. It must be an
+    // ID3D11Texture2D object and created from the ID3D11Device used by the WGPUDevice. Note:
+    // sharedHandle and texture cannot be both non-null.
+    Microsoft::WRL::ComPtr<IUnknown> texture;
 };
 
 struct DAWN_NATIVE_EXPORT ExternalImageDXGIFenceDescriptor {
