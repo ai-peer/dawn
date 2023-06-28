@@ -127,6 +127,30 @@
       },
       "revId": "3c3c7d9fb0b58491174c592e766f8ea529d1f150",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cda7734_9455c7ee",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-28T01:32:25Z",
+      "side": 1,
+      "message": "Although, in that case we get worse error messages. This is nice because the error specifes lhs or rhs. Yes, it does underline in the following lines but having the explict `the lhs is nullptr` is also nice.",
+      "parentUuid": "4b2f64bf_67247235",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 5
+      },
+      "revId": "3c3c7d9fb0b58491174c592e766f8ea529d1f150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
