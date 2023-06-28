@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2e11003_f1cfb112",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-28T18:19:21Z",
+      "side": 1,
+      "message": "Given that you\u0027re emitting the disassembly with squiggles which literally points as the operand, the callback does feel a little unnecessary.",
+      "range": {
+        "startLine": 365,
+        "startChar": 33,
+        "endLine": 365,
+        "endChar": 98
+      },
+      "revId": "8dd8be737ece0dcca0479c89a1d13e3922c959ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
