@@ -264,7 +264,7 @@ class Validator {
             [&](Switch*) {},                             //
             [&](Swizzle*) {},                            //
             [&](Terminator* b) { CheckTerminator(b); },  //
-            [&](Unary*) {},                              //
+            [&](Unary* u) { CheckUnary(u); },            //
             [&](Var* var) { CheckVar(var); },            //
             [&](Default) {
                 AddError(std::string("missing validation of: ") + inst->TypeInfo().name);
@@ -358,6 +358,11 @@ class Validator {
                              [](size_t err_idx) {
                                  return (err_idx == Binary::kLhsOperandOffset) ? "left" : "right";
                              });
+    }
+
+    void CheckUnary(ir::Unary* u) {
+        CheckOperandNotNull(u, u->Val(), Unary::kValueOperandOffset, "unary",
+                            [](size_t) { return "value"; });
     }
 
     void CheckTerminator(ir::Terminator* b) {
