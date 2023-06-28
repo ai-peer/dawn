@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "c369164135230c95738616bb19f1a22e0e9f27a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5dd20c3_ffcaff0e",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-28T14:37:45Z",
+      "side": 1,
+      "message": "Nit: `Add()` returns a `bool` that tells you whether there was already an entry, so could do this all in one.\n```\nif (!seen_functions.Add(...)) {\n  // we\u0027ve seen it before\n}\n```",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 33
+      },
+      "revId": "c369164135230c95738616bb19f1a22e0e9f27a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
