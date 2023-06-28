@@ -791,7 +791,8 @@ DAWN_INSTANTIATE_TEST(QueueWriteTextureTests,
                                     "use_blit_for_buffer_to_stencil_texture_copy"}),
                       OpenGLBackend(),
                       OpenGLESBackend(),
-                      VulkanBackend());
+                      VulkanBackend(),
+                      VulkanBackend({"use_blit_for_buffer_to_stencil_texture_copy"}));
 
 }  // anonymous namespace
 }  // namespace dawn

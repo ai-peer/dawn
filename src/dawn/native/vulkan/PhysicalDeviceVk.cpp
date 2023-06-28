@@ -565,6 +565,11 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // By default try to skip robustness transform on textures according to the Vulkan extension
     // VK_EXT_robustness2.
     deviceToggles->Default(Toggle::VulkanUseImageRobustAccess2, true);
+
+    if (gpu_info::IsQualcomm(GetVendorId())) {
+        // Workaround stencil texture issues on Qualcomm. crbug.com/dawn/1890.
+        deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);
+    }
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,
