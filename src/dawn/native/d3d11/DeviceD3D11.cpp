@@ -407,16 +407,39 @@ ResultOrError<Ref<d3d::Fence>> Device::CreateFence(
 }
 
 ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExternalImageDXGIImplImpl(
-    const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
+    const ExternalImageDescriptor* descriptor) {
     // ExternalImageDXGIImpl holds a weak reference to the device. If the device is destroyed before
     // the image is created, the image will have a dangling reference to the device which can cause
     // a use-after-free.
     DAWN_TRY(ValidateIsAlive());
 
+    DAWN_INVALID_IF(descriptor->GetType() != ExternalImageType::DXGISharedHandle &&
+                        descriptor->GetType() != ExternalImageType::D3D11Texture,
+                    "descriptor is not an ExternalImageDescriptorDXGISharedHandle or "
+                    "ExternalImageDescriptorD3D11Texture");
+
     ComPtr<ID3D11Resource> d3d11Resource;
-    DAWN_TRY(CheckHRESULT(
-        mD3d11Device5->OpenSharedResource1(descriptor->sharedHandle, IID_PPV_ARGS(&d3d11Resource)),
-        "D3D11 OpenSharedResource1"));
+    if (descriptor->GetType() == ExternalImageType::DXGISharedHandle) {
+        const auto* sharedHandleDescriptor =
+            static_cast<const d3d::ExternalImageDescriptorDXGISharedHandle*>(descriptor);
+        DAWN_TRY(
+            CheckHRESULT(mD3d11Device5->OpenSharedResource1(sharedHandleDescriptor->sharedHandle,
+                                                            IID_PPV_ARGS(&d3d11Resource)),
+                         "D3D11 OpenSharedResource1"));
+        if (sharedHandleDescriptor->textureLUID.LowPart != 0 ||
+            sharedHandleDescriptor->textureLUID.HighPart != 0) {
+        }
+    } else {
+        const auto* d3d11TextureDescriptor =
+            static_cast<const d3d::ExternalImageDescriptorD3D11Texture*>(descriptor);
+        DAWN_TRY(CheckHRESULT(d3d11TextureDescriptor->texture.As(&d3d11Resource),
+                              "Cannot get ID3D11Resource from texture"));
+        ComPtr<ID3D11Device> textureDevice;
+        d3d11Resource->GetDevice(textureDevice.GetAddressOf());
+        DAWN_INVALID_IF(textureDevice.Get() != mD3d11Device.Get(),
+                        "The D3D11 device of the texture and the D3D11 device of the WebGPU device "
+                        "must be same.");
+    }
 
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
     DAWN_TRY(
