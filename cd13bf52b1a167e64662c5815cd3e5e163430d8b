@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2174b242_337adfef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-28T16:26:34Z",
+      "side": 1,
+      "message": "PTAL. If this looks OK I\u0027ll migrate the rest of the tests in a follow-up change.\n\nAlso the next CL adds a macro to make it even nicer (and gives more useful output), but I know macros are controversial so I split that out of this change.",
+      "revId": "cd13bf52b1a167e64662c5815cd3e5e163430d8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
