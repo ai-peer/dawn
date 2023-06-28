@@ -34,6 +34,24 @@
       "parentUuid": "82f9ea19_f41ebc66",
       "revId": "71ea39cd1eab512de27e669df45070d27f0b6b1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04fa8158_cd046768",
+        "filename": "src/tint/ir/call.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-28T15:43:14Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1971",
+      "parentUuid": "0a4a4e4f_a617670e",
+      "revId": "71ea39cd1eab512de27e669df45070d27f0b6b1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
