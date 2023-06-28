@@ -127,6 +127,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17c4c661_77c1758f",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-28T15:13:38Z",
+      "side": 1,
+      "message": "\"RefCountedDataForWeakRef\" ? \n\nthis name no one really needs to type outside the implementation of the class, so it could be longer and more descriptive",
+      "parentUuid": "527a4c7d_c68f2541",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20a5c51a_1f6427b4",
         "filename": "src/dawn/common/Ref.h",
         "patchSetId": 5
@@ -167,6 +191,53 @@
         "startChar": 4,
         "endLine": 77,
         "endChar": 5
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1d894c_e989024d",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-28T15:13:38Z",
+      "side": 1,
+      "message": "don\u0027t the constructors you\u0027ve made at [1] allow you to construct a derived WeakRef from the base one?",
+      "parentUuid": "e329191a_6672abf8",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e26b5434_414840b2",
+        "filename": "src/dawn/common/WeakRef.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-28T15:13:38Z",
+      "side": 1,
+      "message": "nit: WeakRef",
+      "range": {
+        "startLine": 34,
+        "startChar": 27,
+        "endLine": 34,
+        "endChar": 34
       },
       "revId": "7abd92ee783c4465ef8d4d3ed40eb001d753dbc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"

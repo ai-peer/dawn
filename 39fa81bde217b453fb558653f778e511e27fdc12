@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "057201b9_fcca6c57",
+        "filename": "src/dawn/common/WeakRef.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-28T15:13:38Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1004bbbb_062ada4f",
         "filename": "src/dawn/tests/unittests/WeakRefTests.cpp",
         "patchSetId": 6
@@ -48,6 +65,29 @@
       "writtenOn": "2023-06-28T13:17:58Z",
       "side": 1,
       "message": "That\u0027s pretty cool but IDK that we can rely on it even in tests. Is there a feature availability macro we can gate this on?",
+      "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc0daf1_2fbe0392",
+        "filename": "src/dawn/utils/Signal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-28T15:13:38Z",
+      "side": 1,
+      "message": "existing nit: maybe call it \"SimpleSemaphore\" since that\u0027s what it is intended to be",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 12
+      },
       "revId": "39fa81bde217b453fb558653f778e511e27fdc12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
