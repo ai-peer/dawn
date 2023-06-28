@@ -303,6 +303,9 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // For OpenGL ES, use compute shader blit to emulate snorm texture to buffer copies.
     deviceToggles->Default(Toggle::UseBlitForSnormTextureToBufferCopy,
                            gl.GetVersion().IsES() || !supportsSnormRead);
+
+    // For OpenGL ES, use compute shader blit to emulate bgra8unorm texture to buffer copies.
+    deviceToggles->Default(Toggle::UseBlitForBGRA8UnormTextureToBufferCopy, !supportsBGRARead);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,
