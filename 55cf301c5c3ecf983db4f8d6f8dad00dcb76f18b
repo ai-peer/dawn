@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53c400e8_528fce6c",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-28T17:58:29Z",
+      "side": 1,
+      "message": "It could, yes, but it\u0027s easier to treat a destroyed instruction as destroyed. Just don\u0027t use it.\nThe information printed is as useful (if not more so) than what we had before - the return values and operands are not to be trusted. The type name could be the sugar\u0027d version, but it\u0027s just as useful to a developer. Much like the Resolver ICE diagnostics, the pointer is extremely useful to help debug.",
+      "parentUuid": "27339776_dc08ca51",
+      "revId": "55cf301c5c3ecf983db4f8d6f8dad00dcb76f18b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b639cdb5_f00f7553",
         "filename": "src/tint/ir/validate_test.cc",
         "patchSetId": 2
