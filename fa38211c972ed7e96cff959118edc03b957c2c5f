@@ -105,6 +105,24 @@
       "parentUuid": "7075ba1e_9987e76d",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e02ed510_95881523",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-29T14:58:10Z",
+      "side": 1,
+      "message": "I though the plan was that in debug mode, we will validate before and after every transform. And since the backends start by running a bunch of transforms, they will be validating the incoming IR.",
+      "parentUuid": "9645f230_e7386f07",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
