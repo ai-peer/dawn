@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4cb3538b_a3167425",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-29T18:19:10Z",
+      "side": 1,
+      "message": "Right, the order isn\u0027t tested when you do this. The order does matter, so I\u0027ve switched to `R(\"...\")` for these tests.",
+      "parentUuid": "45c52aa6_810d457f",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 80
+      },
+      "revId": "1ef20ba577d4a974c5b009bf8c5c5ab010c61e20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "db64a9d0_615a0bc4",
         "filename": "src/tint/writer/spirv/ir/generator_impl_ir_function_test.cc",
         "patchSetId": 1
@@ -77,6 +101,30 @@
       "writtenOn": "2023-06-29T16:22:09Z",
       "side": 1,
       "message": "Where does the indentation come from here? Is there some long `%` id out of the expected-window?",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 15
+      },
+      "revId": "1ef20ba577d4a974c5b009bf8c5c5ab010c61e20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaed890f_e835e342",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_function_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-29T18:19:10Z",
+      "side": 1,
+      "message": "I believe the SPIR-V disassembler has a fixed amount of indentation, so you always have it even if no instructions hit the left-hand margin.",
+      "parentUuid": "08af92a3_40e8b85c",
       "range": {
         "startLine": 175,
         "startChar": 0,
