@@ -309,6 +309,30 @@
       },
       "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d3034ec_1373e674",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:46:32Z",
+      "side": 1,
+      "message": "Sorry, gerrit hid this in the code review windowing.",
+      "parentUuid": "013b1c5a_6a993973",
+      "range": {
+        "startLine": 96,
+        "startChar": 52,
+        "endLine": 96,
+        "endChar": 79
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
