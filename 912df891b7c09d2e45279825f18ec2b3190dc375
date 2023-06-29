@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b464f177_59ae6da9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-06-29T00:03:19Z",
+      "side": 1,
+      "message": "note: this CL includes the changes from https://dawn-review.googlesource.com/c/dawn/+/136625 as they must both go in at the same time.",
+      "revId": "912df891b7c09d2e45279825f18ec2b3190dc375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
