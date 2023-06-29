@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e5cd90_4763d97a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-06-29T19:10:49Z",
+      "side": 1,
+      "message": "Might be unnecessary, but you can parameterize the tests. For example, we used to have both keyed mutex and fence synchronization tests - see the before version here: https://dawn-review.googlesource.com/c/dawn/+/129300/13/src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+      "parentUuid": "438bc1da_ee100412",
+      "revId": "1eb5d95bdd94d45e30c00db54d361b13057ef157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ecd333_d5b1100b",
