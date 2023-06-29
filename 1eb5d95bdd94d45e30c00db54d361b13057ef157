@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bd7385c_2bd18a04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T17:52:24Z",
+      "side": 1,
+      "message": "LGTM though I imagine you may also want more than just validation tests - like that creating and wrapping the image actually can be rendered to/used on the gpu.\n\notherwise we risk breaking actual usage on the GPU",
+      "revId": "1eb5d95bdd94d45e30c00db54d361b13057ef157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ecd333_d5b1100b",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T17:52:24Z",
+      "side": 1,
+      "message": "nit: you could `switch` on the type, handle each one, and put DAWN_INVALID_IF in the `default:` case",
+      "revId": "1eb5d95bdd94d45e30c00db54d361b13057ef157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
