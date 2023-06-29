@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbd91723_f8da9492",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T22:47:13Z",
+      "side": 1,
+      "message": "nit: old description",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 58
+      },
+      "revId": "b7add72767763021b05f4377f7fade2882c853a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be358c0c_45b27784",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T22:47:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b7add72767763021b05f4377f7fade2882c853a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a672b9e4_6d770211",
+        "filename": "src/dawn/platform/metrics/Histogram.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T22:47:13Z",
+      "side": 1,
+      "message": "why not dispatch directly to the platform obj in the macros?",
+      "revId": "b7add72767763021b05f4377f7fade2882c853a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
