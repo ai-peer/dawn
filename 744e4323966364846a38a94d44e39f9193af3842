@@ -16,6 +16,24 @@
       "message": "Why did this and `Switch` below change? Seems unrelated? (And various places below where value was pulled out)",
       "revId": "744e4323966364846a38a94d44e39f9193af3842",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6cd8ce_8d884344",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T09:41:45Z",
+      "side": 1,
+      "message": "Just to ensure that we don\u0027t accidentally introduce non-determinism between the evaluation of `Value()` and `Block()`.\nThe point of this change is to prevent non-determinism. It would be ironic if the internal helpers also had non-determinism.",
+      "parentUuid": "b0c0708c_de85e5f6",
+      "revId": "744e4323966364846a38a94d44e39f9193af3842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
