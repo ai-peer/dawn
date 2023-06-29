@@ -159,6 +159,24 @@
       "parentUuid": "626f8b00_fd1712ff",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab614044_66123812",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T15:29:47Z",
+      "side": 1,
+      "message": "I\u0027d prefer if it was in ToProgram for consistency. It\u0027s running it before it runs transforms, which happens to be 0 transforms at the moment.",
+      "parentUuid": "8a7862b0_465eb43d",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
