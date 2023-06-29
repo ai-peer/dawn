@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "438bc1da_ee100412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-29T19:01:38Z",
+      "side": 1,
+      "message": "Except small part validation code is different, importing NT handle and D3D11Texture share the same code. In theory D3DSharedHandleUsageTests should cover reset of the code. I checked D3DSharedHandleUsageTests, and didn\u0027t find a good way to share those tests for External Image D3D11Texture.",
+      "parentUuid": "5bd7385c_2bd18a04",
+      "revId": "1eb5d95bdd94d45e30c00db54d361b13057ef157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ecd333_d5b1100b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-29T17:52:24Z",
       "side": 1,
       "message": "nit: you could `switch` on the type, handle each one, and put DAWN_INVALID_IF in the `default:` case",
+      "revId": "1eb5d95bdd94d45e30c00db54d361b13057ef157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ade4fe_241fadba",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-29T19:01:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8ecd333_d5b1100b",
       "revId": "1eb5d95bdd94d45e30c00db54d361b13057ef157",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
