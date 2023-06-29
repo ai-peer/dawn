@@ -67,6 +67,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "313add40_d41e1b46",
+        "filename": "include/dawn/platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T16:44:39Z",
+      "side": 1,
+      "message": "I\u0027d agree it\u0027s worth adding some comments. We did it for the more recent caching interface, and neglected to document for the trace events a long time ago.\n\nyou could have a separate histogram interface, like the caching interface or worker pool but I\u0027m not sure it\u0027s as necessary to have the extra indirections in this case. I don\u0027t feel very strongly about it though",
+      "parentUuid": "4f159884_f1368ff0",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3accbb3_a85c2304",
+        "filename": "src/dawn/platform/metrics/Histogram.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T16:44:39Z",
+      "side": 1,
+      "message": "I\u0027m not sure we need to have the same condition to enable it. For event tracing, every event has a timestamp, so we can\u0027t actually report them without a valid timestamp.\n\nFor the histograms, It\u0027s probably sufficient to call the virtual method and give it a default no-op implementation?\n\nI suppose it\u0027s different for times vs other counts/booleans. Maybe the dependency on `MonotonicallyIncreasingTime` can be part of the scoped timer class?",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 5
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a15a168d_e0302859",
         "filename": "src/dawn/platform/metrics/Histogram.h",
         "patchSetId": 5
@@ -84,6 +131,23 @@
         "endLine": 43,
         "endChar": 0
       },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e25fe50_c8249bc3",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T16:44:39Z",
+      "side": 1,
+      "message": "we could name it HistogramMacros.h to match the casing of the rest of the Dawn files",
       "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +224,30 @@
       "side": 1,
       "message": "This isn\u0027t arbitrary, but exactly how it\u0027s defined in Chromium\u0027s histogram_macros.h.",
       "parentUuid": "98bb287f_530e9dc0",
+      "range": {
+        "startLine": 25,
+        "startChar": 64,
+        "endLine": 25,
+        "endChar": 67
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b13a830b_b68059ee",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T16:44:39Z",
+      "side": 1,
+      "message": "we don\u0027t actually have to exactly copy the exact form of Chromium\u0027s though - just need a compatible interface\n\nlike given these are implicitly millisecond times, we could name it DAWN_HISTOGRAM_MS_TIMES, etc. mentioned in chat - it would also let us have versions of microseconds precision too",
+      "parentUuid": "21528f68_8455a880",
       "range": {
         "startLine": 25,
         "startChar": 64,
