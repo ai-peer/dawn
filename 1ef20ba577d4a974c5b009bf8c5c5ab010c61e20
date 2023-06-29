@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d535b0_fa667e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T16:22:09Z",
+      "side": 1,
+      "message": "Looks great, thank you for this work!",
+      "revId": "1ef20ba577d4a974c5b009bf8c5c5ab010c61e20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45c52aa6_810d457f",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T16:22:09Z",
+      "side": 1,
+      "message": "This pattern is checking that each line is found, but not in any specific order, right? Do we care about order of these? if so would it be better to `R\"(...)\"` the lines? You can use `utils::TrimSpace()` to remove any newlines at the front / back of the expected string, so that you can format nicely.",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 80
+      },
+      "revId": "1ef20ba577d4a974c5b009bf8c5c5ab010c61e20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db64a9d0_615a0bc4",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_function_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T16:22:09Z",
+      "side": 1,
+      "message": "no request for change, but I\u0027ve been using single-line `With()` blocks for this sort of thing in other tests. It\u0027s not too hard to read.",
+      "range": {
+        "startLine": 25,
+        "startChar": 33,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "1ef20ba577d4a974c5b009bf8c5c5ab010c61e20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08af92a3_40e8b85c",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_function_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T16:22:09Z",
+      "side": 1,
+      "message": "Where does the indentation come from here? Is there some long `%` id out of the expected-window?",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 15
+      },
+      "revId": "1ef20ba577d4a974c5b009bf8c5c5ab010c61e20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
