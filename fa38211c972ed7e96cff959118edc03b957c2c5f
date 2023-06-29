@@ -141,6 +141,24 @@
       "parentUuid": "e02ed510_95881523",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7862b0_465eb43d",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:15:39Z",
+      "side": 1,
+      "message": "I think I agree with everything you\u0027ve said, but unlike other backends, `ToProgram` doesn\u0027t actually run any transforms. So in keeping with `we will validate before and after every transform` - and there are no transforms - we should probably validate in the fuzzer logic, no?",
+      "parentUuid": "626f8b00_fd1712ff",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
