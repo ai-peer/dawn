@@ -123,6 +123,24 @@
       "parentUuid": "9645f230_e7386f07",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626f8b00_fd1712ff",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T15:00:25Z",
+      "side": 1,
+      "message": "Right (I was grouping the `tint` command into the test-harness bit, which maybe a bit broad, heh).\n\nEither way, we should have ToProgram work the same as the Generators to be consistent.",
+      "parentUuid": "e02ed510_95881523",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
