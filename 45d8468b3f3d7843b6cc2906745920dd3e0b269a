@@ -33,6 +33,24 @@
       "message": "```suggestion\n            for (size_t i \u003d 0; i \u003c c-\u003eNumElements(); i++) {\n```",
       "revId": "45d8468b3f3d7843b6cc2906745920dd3e0b269a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8b6d23e_aaf5e76f",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:11:26Z",
+      "side": 1,
+      "message": "You\u0027re then calling the virtual function `NumElements()` for each iteration. That\u0027s unnecessarily costly.",
+      "parentUuid": "2dd9db73_16aad7eb",
+      "revId": "45d8468b3f3d7843b6cc2906745920dd3e0b269a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
