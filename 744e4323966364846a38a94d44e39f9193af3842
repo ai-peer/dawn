@@ -34,6 +34,24 @@
       "parentUuid": "b0c0708c_de85e5f6",
       "revId": "744e4323966364846a38a94d44e39f9193af3842",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0da4e9_d969505d",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T13:06:00Z",
+      "side": 1,
+      "message": "K, figured it didn\u0027t matter here as the instructions are already evaluated and in the current block.",
+      "parentUuid": "5b6cd8ce_8d884344",
+      "revId": "744e4323966364846a38a94d44e39f9193af3842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
