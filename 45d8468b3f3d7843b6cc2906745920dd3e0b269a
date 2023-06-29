@@ -69,6 +69,24 @@
       "parentUuid": "f8b6d23e_aaf5e76f",
       "revId": "45d8468b3f3d7843b6cc2906745920dd3e0b269a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "393d7eaf_704080d3",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:26:17Z",
+      "side": 1,
+      "message": "\u003e I assumed `n` was used elsewhere and spent time looking for it.\n\nI think you mean declared elsewhere? The main reason for this pattern is for the tight scoping and that it *can\u0027t* be used anywhere else.\n\nIt\u0027s a very common coding pattern. It exists in our codebase already, and a search in a large mono-repo for `i \u003d 0, n \u003d` produces over 10k hits - so I\u0027m fairly confident that this isn\u0027t something that I made up for fun. I\u0027d rather keep this as-is.",
+      "parentUuid": "4c5548bd_16434eaf",
+      "revId": "45d8468b3f3d7843b6cc2906745920dd3e0b269a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
