@@ -22,6 +22,29 @@
       },
       "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a1aac9_aad58cf5",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T10:38:01Z",
+      "side": 1,
+      "message": "`HasContinuing()` for symmetry above?",
+      "range": {
+        "startLine": 421,
+        "startChar": 16,
+        "endLine": 421,
+        "endChar": 37
+      },
+      "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
