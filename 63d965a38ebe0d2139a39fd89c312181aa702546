@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f78ac3e_066f98de",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T14:20:56Z",
+      "side": 1,
+      "message": "Tests for:\n* An `if`\u0027s `True` block cannot be empty (must have a terminator)\n* An `if`\u0027s `False` block can be empty.\n* A `loop`\u0027s `Initializer` block can be empty.\n* A `loop`\u0027s `Body` block cannot be empty (must have a terminator)\n* A `loop`\u0027s `Continuing` block can be empty.",
+      "parentUuid": "2136157d_85c48d7f",
+      "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58a1aac9_aad58cf5",
         "filename": "src/tint/ir/validate.cc",
         "patchSetId": 2
@@ -120,6 +138,30 @@
       "side": 1,
       "message": "Possibly, but will do in a followup. Even looking at it now, `HasInitializer` doesn\u0027t do what I expected it to do, so the above is changed.",
       "parentUuid": "58a1aac9_aad58cf5",
+      "range": {
+        "startLine": 421,
+        "startChar": 16,
+        "endLine": 421,
+        "endChar": 37
+      },
+      "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf17465_090ffad9",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T14:20:56Z",
+      "side": 1,
+      "message": "I\u0027m happy to remove `HasInitializer()`. You asked for it in an earlier code review, but `Initializer()-\u003eIsEmpty()` is as explicit as you can get.",
+      "parentUuid": "9e74ac0a_4cc47fd4",
       "range": {
         "startLine": 421,
         "startChar": 16,
