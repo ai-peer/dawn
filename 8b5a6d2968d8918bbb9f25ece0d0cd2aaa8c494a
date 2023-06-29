@@ -16,6 +16,29 @@
       "message": "LGTM!",
       "revId": "8b5a6d2968d8918bbb9f25ece0d0cd2aaa8c494a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc80120_4bd2820f",
+        "filename": "src/dawn/tests/unittests/WeakRefTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T15:18:42Z",
+      "side": 1,
+      "message": "endif needs to be after the closing namespace, I think that\u0027s why MSVC is unhappy",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 6
+      },
+      "revId": "8b5a6d2968d8918bbb9f25ece0d0cd2aaa8c494a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
