@@ -33,6 +33,24 @@
       "message": "can you add a variant in the tests that forces the toggle on?\n\ncurrently it\u0027s only forced on for Metal\n\nhttps://source.chromium.org/search?q\u003d%22use_blit_for_depth_texture_to_texture_copy_to_nonzero_subresource%22\u0026sq\u003d",
       "revId": "5702552c789479e110e15eac99f7d51a9fe271df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97921e6d_3078ea03",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-06-29T02:16:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "993af8cd_cf499d22",
+      "revId": "5702552c789479e110e15eac99f7d51a9fe271df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

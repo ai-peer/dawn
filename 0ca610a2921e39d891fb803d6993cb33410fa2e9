@@ -34,6 +34,24 @@
       "parentUuid": "f47072ed_88e14421",
       "revId": "0ca610a2921e39d891fb803d6993cb33410fa2e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a73b0d0_3088987e",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-06-29T02:16:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e7cb4f5_494ac16d",
+      "revId": "0ca610a2921e39d891fb803d6993cb33410fa2e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
