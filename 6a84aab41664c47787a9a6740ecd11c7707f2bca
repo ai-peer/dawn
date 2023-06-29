@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890eb9d5_36b33a56",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-29T15:36:06Z",
+      "side": 1,
+      "message": "If the source is going to be emitted as an actual WGSL pointer (e.g. function parameter), you\u0027ll need to deref and then take the address of the result.\n\nAlthough it looks like pointer generation for function parameters isn\u0027t implemented yet, so I guess defer that until it\u0027s supported.",
+      "revId": "6a84aab41664c47787a9a6740ecd11c7707f2bca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
