@@ -142,7 +142,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     if (heapType == D3D12_HEAP_TYPE_READBACK) {
         bufferUsage |= D3D12_RESOURCE_STATE_COPY_DEST;
         mFixedResourceState = true;
-        mLastUsage = wgpu::BufferUsage::CopyDst;
+        mLastState = D3D12_RESOURCE_STATE_COPY_DEST;
     }
 
     // D3D12 requires buffers on the UPLOAD heap to have the D3D12_RESOURCE_STATE_GENERIC_READ
@@ -150,7 +150,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     if (heapType == D3D12_HEAP_TYPE_UPLOAD) {
         bufferUsage |= D3D12_RESOURCE_STATE_GENERIC_READ;
         mFixedResourceState = true;
-        mLastUsage = wgpu::BufferUsage::CopySrc;
+        mLastState = D3D12_RESOURCE_STATE_GENERIC_READ;
     }
 
     DAWN_TRY_ASSIGN(
@@ -207,12 +207,15 @@ bool Buffer::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandCon
 
     // Resources in upload and readback heaps must be kept in the COPY_SOURCE/DEST state
     if (mFixedResourceState) {
-        ASSERT(mLastUsage == newUsage);
+        ASSERT((mLastState == D3D12_RESOURCE_STATE_COPY_DEST &&
+                newUsage == wgpu::BufferUsage::CopyDst) ||
+               (mLastState == D3D12_RESOURCE_STATE_GENERIC_READ &&
+                newUsage == wgpu::BufferUsage::CopySrc));
         return false;
     }
 
-    D3D12_RESOURCE_STATES lastState = D3D12BufferUsage(mLastUsage);
     D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
+    D3D12_RESOURCE_STATES lastState = mLastState;
 
     // If the transition is from-UAV-to-UAV, then a UAV barrier is needed.
     // If one of the usages isn't UAV, then other barriers are used.
@@ -224,16 +227,16 @@ bool Buffer::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandCon
         barrier->Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
         barrier->UAV.pResource = GetD3D12Resource();
 
-        mLastUsage = newUsage;
+        mLastState = newState;
         return true;
     }
 
     // We can skip transitions to already current usages.
-    if (IsSubset(newUsage, mLastUsage)) {
+    if (IsSubset(newState, mLastState)) {
         return false;
     }
 
-    mLastUsage = newUsage;
+    mLastState = newState;
 
     // The COMMON state represents a state where no write operations can be pending, which makes
     // it possible to transition to and from some states without synchronizaton (i.e. without an
@@ -261,13 +264,6 @@ bool Buffer::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandCon
     // state. This goes unchecked here because it should not be allowed through render/compute
     // pass validation.
     if (lastState == D3D12_RESOURCE_STATE_COMMON) {
-        return false;
-    }
-
-    // TODO(crbug.com/dawn/1024): The before and after states must be different. Remove this
-    // workaround and use D3D12 states instead of WebGPU usages to manage the tracking of
-    // barrier state.
-    if (lastState == newState) {
         return false;
     }
 
