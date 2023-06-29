@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "722e0d26_9bb0d94d",
+        "filename": "src/dawn/common/WeakRefSupport.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-06-29T22:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5509ded_33cc6603",
+      "range": {
+        "startLine": 34,
+        "startChar": 78,
+        "endLine": 34,
+        "endChar": 82
+      },
+      "revId": "8b5a6d2968d8918bbb9f25ece0d0cd2aaa8c494a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dc80120_4bd2820f",
