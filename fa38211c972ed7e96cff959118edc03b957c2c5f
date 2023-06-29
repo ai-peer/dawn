@@ -177,6 +177,24 @@
       "parentUuid": "8a7862b0_465eb43d",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29848835_07b1e63c",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:51:07Z",
+      "side": 1,
+      "message": "Okay, I buy that argument (it\u0027s effectively the same argument as `%let \u003d access %constant`). Will do. 😊",
+      "parentUuid": "ab614044_66123812",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
