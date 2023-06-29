@@ -101,6 +101,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e073e11_98ad4d4c",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T17:56:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f78ac3e_066f98de",
+      "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58a1aac9_aad58cf5",
