@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_DEVICED3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_DEVICED3D11_H_
 
+#include <map>
 #include <memory>
 #include <vector>
 

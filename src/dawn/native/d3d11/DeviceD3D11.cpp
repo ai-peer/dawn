@@ -428,6 +428,10 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
                          "D3D11 OpenSharedResource1"));
         if (sharedHandleDescriptor->textureLUID.LowPart != 0 ||
             sharedHandleDescriptor->textureLUID.HighPart != 0) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 22d89831a2 (wip)
         }
     } else {
         const auto* d3d11TextureDescriptor =
