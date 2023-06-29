@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab5063a_4226a1e2",
+        "filename": "include/dawn/platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T21:14:54Z",
+      "side": 1,
+      "message": "Added comments to all macros, and function declarations. I agree it\u0027s much better.",
+      "parentUuid": "313add40_d41e1b46",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3accbb3_a85c2304",
@@ -102,6 +126,30 @@
       "writtenOn": "2023-06-29T16:44:39Z",
       "side": 1,
       "message": "I\u0027m not sure we need to have the same condition to enable it. For event tracing, every event has a timestamp, so we can\u0027t actually report them without a valid timestamp.\n\nFor the histograms, It\u0027s probably sufficient to call the virtual method and give it a default no-op implementation?\n\nI suppose it\u0027s different for times vs other counts/booleans. Maybe the dependency on `MonotonicallyIncreasingTime` can be part of the scoped timer class?",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 5
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa91819_4bc45a9a",
+        "filename": "src/dawn/platform/metrics/Histogram.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T21:14:54Z",
+      "side": 1,
+      "message": "I agree, and removed these conditions, and made the default implementation no-op. It\u0027s much cleaner now, and simplified the unit tests.",
+      "parentUuid": "a3accbb3_a85c2304",
       "range": {
         "startLine": 29,
         "startChar": 4,
@@ -135,6 +183,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c852cf7a_9af214d8",
+        "filename": "src/dawn/platform/metrics/Histogram.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T21:14:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a15a168d_e0302859",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e25fe50_c8249bc3",
@@ -148,6 +220,24 @@
       "writtenOn": "2023-06-29T16:44:39Z",
       "side": 1,
       "message": "we could name it HistogramMacros.h to match the casing of the rest of the Dawn files",
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe8260a_accaf467",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T21:14:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e25fe50_c8249bc3",
       "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -183,6 +273,24 @@
       "side": 1,
       "message": "Again, I\u0027m avoiding copy-pasting the docs from Chromium\u0027s histogram_macros.h, which is extensive. I can add a link to it a the top of the file.",
       "parentUuid": "a3634ffe_a531c5c9",
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff110dc3_239b74ab",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T21:14:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71442dc7_c4d5a585",
       "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -258,6 +366,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc0ab3e_96cf6ba3",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T21:14:54Z",
+      "side": 1,
+      "message": "I think it\u0027s important that these mostly match the ones from Chrome, so I left the names, but I renamed all the arg names so that it\u0027s much clearer. Note that in Chrome, they use time::milliseconds(), etc. to make clear what the units are. Maybe we can add something similar to Dawn in the future.",
+      "parentUuid": "b13a830b_b68059ee",
+      "range": {
+        "startLine": 25,
+        "startChar": 64,
+        "endLine": 25,
+        "endChar": 67
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d40e970f_46f14e8e",
@@ -295,6 +427,30 @@
       "side": 1,
       "message": "Copied from Chromium\u0027s histogram_macros.h.",
       "parentUuid": "d40e970f_46f14e8e",
+      "range": {
+        "startLine": 41,
+        "startChar": 60,
+        "endLine": 41,
+        "endChar": 68
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88152407_e1a4488c",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T21:14:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b30450d_e3fc311a",
       "range": {
         "startLine": 41,
         "startChar": 60,
