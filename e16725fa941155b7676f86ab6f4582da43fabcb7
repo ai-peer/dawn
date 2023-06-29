@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f159884_f1368ff0",
+        "filename": "include/dawn/platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T15:20:50Z",
+      "side": 1,
+      "message": "\u003e If I didn\u0027t know what you\u0027re working on, I\u0027d struggle to understand what these methods do. Could do with comments.\n\nAll of this is based off of what exists in the Chromium source, which is the best documentation. It didn\u0027t seem necessary to copy all of their comments (see histogram_macros.h in chromium source).\n\n\u003e Would it be preferable to have a single method on Platform to return a Histogram (or maybe Telemetry) interface? It means you can bundle all the telemetry stuff in one place, you could DAWN_PLATFORM_EXPORT the interface, and wouldn\u0027t necessarily need to create a new derived class to enable / disable this stuff.\n\nThis isn\u0027t a new class. This class is the Platform class that exists precisely for this purpose -- that is, so that Chrome can implement certain parts (see AddEvent). This implementation is what Austin suggested.",
+      "parentUuid": "2634a8c4_642e97d5",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a15a168d_e0302859",
         "filename": "src/dawn/platform/metrics/Histogram.h",
         "patchSetId": 5
@@ -83,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71442dc7_c4d5a585",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T15:20:50Z",
+      "side": 1,
+      "message": "Again, I\u0027m avoiding copy-pasting the docs from Chromium\u0027s histogram_macros.h, which is extensive. I can add a link to it a the top of the file.",
+      "parentUuid": "a3634ffe_a531c5c9",
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98bb287f_530e9dc0",
         "filename": "src/dawn/platform/metrics/histogram_macros.h",
         "patchSetId": 5
@@ -94,6 +136,30 @@
       "writtenOn": "2023-06-29T15:10:05Z",
       "side": 1,
       "message": "Rather arbitrary. Should we create some documented `constexpr` constants for these?",
+      "range": {
+        "startLine": 25,
+        "startChar": 64,
+        "endLine": 25,
+        "endChar": 67
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21528f68_8455a880",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T15:20:50Z",
+      "side": 1,
+      "message": "This isn\u0027t arbitrary, but exactly how it\u0027s defined in Chromium\u0027s histogram_macros.h.",
+      "parentUuid": "98bb287f_530e9dc0",
       "range": {
         "startLine": 25,
         "startChar": 64,
@@ -129,6 +195,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b30450d_e3fc311a",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T15:20:50Z",
+      "side": 1,
+      "message": "Copied from Chromium\u0027s histogram_macros.h.",
+      "parentUuid": "d40e970f_46f14e8e",
+      "range": {
+        "startLine": 41,
+        "startChar": 60,
+        "endLine": 41,
+        "endChar": 68
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "286c5acb_2117cfc3",
         "filename": "src/dawn/platform/metrics/histogram_macros.h",
         "patchSetId": 5
@@ -140,6 +230,30 @@
       "writtenOn": "2023-06-29T15:10:05Z",
       "side": 1,
       "message": "Is this to avoid the virtual call overhead?",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 86
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7692eaf3_ec4f7672",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T15:20:50Z",
+      "side": 1,
+      "message": "Yes. Also, it means I can avoid including the platform header in this file.",
+      "parentUuid": "286c5acb_2117cfc3",
       "range": {
         "startLine": 91,
         "startChar": 4,
@@ -163,6 +277,30 @@
       "writtenOn": "2023-06-29T15:10:05Z",
       "side": 1,
       "message": "Why isn\u0027t `MonotonicallyIncreasingTime` declared on the base `Platform` class?\nIf you did put all the telemetry stuff in a new class or interface, this could go in there?",
+      "range": {
+        "startLine": 96,
+        "startChar": 52,
+        "endLine": 96,
+        "endChar": 79
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "013b1c5a_6a993973",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-29T15:20:50Z",
+      "side": 1,
+      "message": "It _is_ declared on the Platform class, see `include\\dawn\\platform\\DawnPlatform.h`.",
+      "parentUuid": "1c6e6d28_9e26fe9a",
       "range": {
         "startLine": 96,
         "startChar": 52,
