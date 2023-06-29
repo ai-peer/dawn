@@ -16,6 +16,161 @@
       "message": "Once this change lands and rolls into Chromium, we can then land this CL: https://chromium-review.googlesource.com/c/chromium/src/+/4655091",
       "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2634a8c4_642e97d5",
+        "filename": "include/dawn/platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:10:05Z",
+      "side": 1,
+      "message": "If I didn\u0027t know what you\u0027re working on, I\u0027d struggle to understand what these methods do. Could do with comments.\n\nWould it be preferable to have a single method on `Platform` to return a `Histogram` (or maybe `Telemetry`) interface? It means you can bundle all the telemetry stuff in one place, you could `DAWN_PLATFORM_EXPORT` the interface, and wouldn\u0027t necessarily need to create a new derived class to enable / disable this stuff.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a15a168d_e0302859",
+        "filename": "src/dawn/platform/metrics/Histogram.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:10:05Z",
+      "side": 1,
+      "message": "Could do with documentation.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3634ffe_a531c5c9",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:10:05Z",
+      "side": 1,
+      "message": "Again, docs would be great for all these macros. I wouldn\u0027t know what to do with these by just looking at them.",
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98bb287f_530e9dc0",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:10:05Z",
+      "side": 1,
+      "message": "Rather arbitrary. Should we create some documented `constexpr` constants for these?",
+      "range": {
+        "startLine": 25,
+        "startChar": 64,
+        "endLine": 25,
+        "endChar": 67
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40e970f_46f14e8e",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:10:05Z",
+      "side": 1,
+      "message": "could do with units",
+      "range": {
+        "startLine": 41,
+        "startChar": 60,
+        "endLine": 41,
+        "endChar": 68
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286c5acb_2117cfc3",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:10:05Z",
+      "side": 1,
+      "message": "Is this to avoid the virtual call overhead?",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 86
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c6e6d28_9e26fe9a",
+        "filename": "src/dawn/platform/metrics/histogram_macros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T15:10:05Z",
+      "side": 1,
+      "message": "Why isn\u0027t `MonotonicallyIncreasingTime` declared on the base `Platform` class?\nIf you did put all the telemetry stuff in a new class or interface, this could go in there?",
+      "range": {
+        "startLine": 96,
+        "startChar": 52,
+        "endLine": 96,
+        "endChar": 79
+      },
+      "revId": "e16725fa941155b7676f86ab6f4582da43fabcb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
