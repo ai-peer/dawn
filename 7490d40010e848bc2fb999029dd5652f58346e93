@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "647acd8a_4ef936d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-29T12:13:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7490d40010e848bc2fb999029dd5652f58346e93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a54c38d_e1dfcc7d",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-29T12:13:44Z",
+      "side": 1,
+      "message": "nit: `ASSERT(mLastState \u003d\u003d D3D12BufferUsage(newUsage))`?",
+      "revId": "7490d40010e848bc2fb999029dd5652f58346e93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
