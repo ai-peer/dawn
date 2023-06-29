@@ -87,6 +87,24 @@
       "parentUuid": "52e3a665_ad7ef131",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9645f230_e7386f07",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T14:56:33Z",
+      "side": 1,
+      "message": "They both do already. So, we should either remove the validation from them and put back into the test harness, or add it to ToProgram so we\u0027re consistent.",
+      "parentUuid": "7075ba1e_9987e76d",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
