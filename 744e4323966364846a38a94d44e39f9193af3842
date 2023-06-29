@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c0708c_de85e5f6",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T02:25:27Z",
+      "side": 1,
+      "message": "Why did this and `Switch` below change? Seems unrelated? (And various places below where value was pulled out)",
+      "revId": "744e4323966364846a38a94d44e39f9193af3842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
