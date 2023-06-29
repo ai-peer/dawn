@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24897c55_a35cb388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T16:52:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7ed20f3d0299aec44ba005ad3b8359445ba2ecd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d0d9081_84864e6b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T16:52:20Z",
+      "side": 1,
+      "message": "for readability, we could have a helper now like `ShouldUseTextureToBufferBlit`",
+      "range": {
+        "startLine": 1364,
+        "startChar": 16,
+        "endLine": 1380,
+        "endChar": 97
+      },
+      "revId": "7ed20f3d0299aec44ba005ad3b8359445ba2ecd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

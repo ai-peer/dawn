@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e08497f_b9c2be11",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-06-29T16:52:20Z",
+      "side": 0,
+      "message": "delete this toggle entirely now?",
+      "range": {
+        "startLine": 560,
+        "startChar": 0,
+        "endLine": 560,
+        "endChar": 68
+      },
+      "revId": "d5a2cf419f7c921a873cc6fcad0c0977f2801598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
