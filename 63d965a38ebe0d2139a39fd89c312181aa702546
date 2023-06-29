@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e18f0f1_fe518372",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T10:36:18Z",
+      "side": 1,
+      "message": "```suggestion\n    // True block is assumed to have instructions\n```",
+      "range": {
+        "startLine": 546,
+        "startChar": 7,
+        "endLine": 546,
+        "endChar": 31
+      },
+      "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
