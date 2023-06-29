@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "820ff6fd_444509e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T14:52:47Z",
+      "side": 1,
+      "message": "Nope. It needs hooking up to GN builds which this CL doesn\u0027t do.",
+      "parentUuid": "4d6fbf5c_337fbde9",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "213aae51_95765153",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "It would probably be better if `ToProgram` did validation? This would be similar to the generators which validate.",
       "parentUuid": "213aae51_95765153",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7075ba1e_9987e76d",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T14:52:47Z",
+      "side": 1,
+      "message": "Sounds like a good idea to me. Will do as a followup.\n\n\u003e It would probably be better if `ToProgram` did validation? This would be similar to the generators which validate.\n\nWhy will the generators validate?",
+      "parentUuid": "52e3a665_ad7ef131",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
