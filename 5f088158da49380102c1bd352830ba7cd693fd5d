@@ -60,6 +60,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "28f54bde_bb683158",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T18:22:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6cf052a_623e24ee",
+      "range": {
+        "startLine": 41,
+        "startChar": 50,
+        "endLine": 42,
+        "endChar": 52
+      },
+      "revId": "5f088158da49380102c1bd352830ba7cd693fd5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "eb1e9df5_a45e4aad",
         "filename": "docs/tint/ir.md",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2023-06-29T14:55:22Z",
       "side": 1,
       "message": "not yet they don\u0027t.",
+      "range": {
+        "startLine": 89,
+        "startChar": 50,
+        "endLine": 89,
+        "endChar": 54
+      },
+      "revId": "5f088158da49380102c1bd352830ba7cd693fd5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef029697_21237d41",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T18:22:33Z",
+      "side": 1,
+      "message": "Technically they do, just none of them have dependencies yet I believe.",
+      "parentUuid": "eb1e9df5_a45e4aad",
       "range": {
         "startLine": 89,
         "startChar": 50,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28e3c21_487cecf8",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T18:22:33Z",
+      "side": 1,
+      "message": "If we did this in a `!NDEBUG` I think that would be ok? It would be nice not to require the renamer if possible, but only requiring it in debug builds seems ok",
+      "parentUuid": "66b401fc_990c5695",
+      "range": {
+        "startLine": 105,
+        "startChar": 47,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "5f088158da49380102c1bd352830ba7cd693fd5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8945e3fc_dcabcde9",
@@ -117,6 +189,30 @@
       "writtenOn": "2023-06-29T14:55:22Z",
       "side": 1,
       "message": "I think this contradicts what you wrote above?",
+      "range": {
+        "startLine": 112,
+        "startChar": 62,
+        "endLine": 113,
+        "endChar": 40
+      },
+      "revId": "5f088158da49380102c1bd352830ba7cd693fd5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0146f1ce_f703394f",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T18:22:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8945e3fc_dcabcde9",
       "range": {
         "startLine": 112,
         "startChar": 62,
@@ -150,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5525151_0c2b5bf0",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T18:22:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e47acfb_21153156",
+      "range": {
+        "startLine": 120,
+        "startChar": 33,
+        "endLine": 120,
+        "endChar": 41
+      },
+      "revId": "5f088158da49380102c1bd352830ba7cd693fd5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdebdbe3_890d7197",
@@ -163,6 +283,24 @@
       "writtenOn": "2023-06-29T14:55:22Z",
       "side": 1,
       "message": "Could do with details on what exits you are permitted to have in each of the three blocks.",
+      "revId": "5f088158da49380102c1bd352830ba7cd693fd5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90a324d3_865a0edd",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T18:22:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdebdbe3_890d7197",
       "revId": "5f088158da49380102c1bd352830ba7cd693fd5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
