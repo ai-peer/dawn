@@ -34,6 +34,24 @@
       "parentUuid": "890eb9d5_36b33a56",
       "revId": "6a84aab41664c47787a9a6740ecd11c7707f2bca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0761c720_e150ef9d",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-29T16:09:52Z",
+      "side": 1,
+      "message": "Ack. Good spot. Will fix in followup. I\u0027m currently just trying to get the fuzzer to progress as far as I can. I\u0027ll make sure this gets addressed soon.",
+      "parentUuid": "310b0f51_1a1e80f2",
+      "revId": "6a84aab41664c47787a9a6740ecd11c7707f2bca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
