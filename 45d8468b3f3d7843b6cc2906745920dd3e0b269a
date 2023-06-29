@@ -87,6 +87,24 @@
       "parentUuid": "4c5548bd_16434eaf",
       "revId": "45d8468b3f3d7843b6cc2906745920dd3e0b269a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da3122c_d1f08efa",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T15:34:44Z",
+      "side": 1,
+      "message": "sounds good.",
+      "parentUuid": "393d7eaf_704080d3",
+      "revId": "45d8468b3f3d7843b6cc2906745920dd3e0b269a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
