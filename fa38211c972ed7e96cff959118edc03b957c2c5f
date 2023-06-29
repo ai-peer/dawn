@@ -33,6 +33,24 @@
       "message": "Should we validate the IR here? I don\u0027t either `FromProgram` or `ToProgram` validate.",
       "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e3a665_ad7ef131",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T14:01:40Z",
+      "side": 1,
+      "message": "It would probably be better if `ToProgram` did validation? This would be similar to the generators which validate.",
+      "parentUuid": "213aae51_95765153",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
