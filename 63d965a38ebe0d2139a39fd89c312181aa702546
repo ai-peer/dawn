@@ -170,6 +170,30 @@
       },
       "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3391a7f0_0345934a",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-06-29T14:41:16Z",
+      "side": 1,
+      "message": "Sure, the problem is it doesn\u0027t check `IsEmpty`, it checks that it ends in terminator.",
+      "parentUuid": "3bf17465_090ffad9",
+      "range": {
+        "startLine": 421,
+        "startChar": 16,
+        "endLine": 421,
+        "endChar": 37
+      },
+      "revId": "63d965a38ebe0d2139a39fd89c312181aa702546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
