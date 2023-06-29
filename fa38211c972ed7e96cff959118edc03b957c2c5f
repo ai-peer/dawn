@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6fbf5c_337fbde9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-29T13:57:05Z",
+      "side": 1,
+      "message": "Will this start running automatically? We should probably fill in the last few bits of WGSL support in `FromProgram` before this fuzzer starts running.\n\nDoes it need to be in the GN build? I forget which fuzzers run with ClusterFuzz vs oss-fuzz, but I think the ClusterFuzz ones need to be in GN?",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213aae51_95765153",
+        "filename": "src/tint/fuzzers/tint_ir_roundtrip_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-29T13:57:05Z",
+      "side": 1,
+      "message": "Should we validate the IR here? I don\u0027t either `FromProgram` or `ToProgram` validate.",
+      "revId": "fa38211c972ed7e96cff959118edc03b957c2c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
