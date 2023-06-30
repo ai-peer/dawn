@@ -470,8 +470,12 @@ void Disassembler::EmitInstruction(Instruction* inst) {
             EmitInstructionName("access", a);
             out_ << " ";
             EmitOperand(a, a->Object(), Access::kObjectOperandOffset);
-            out_ << ", ";
-            EmitOperandList(a, a->Indices(), Access::kIndicesOperandOffset);
+            if (a->Indices().IsEmpty()) {
+                out_ << "  # named constant";
+            } else {
+                out_ << ", ";
+                EmitOperandList(a, a->Indices(), Access::kIndicesOperandOffset);
+            }
             EmitLine();
         },
         [&](Swizzle* s) {

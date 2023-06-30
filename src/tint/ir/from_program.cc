@@ -1087,11 +1087,18 @@ class Impl {
                     return;
                 }
 
+                auto* value = init.Get();
+                if (value->Is<ir::Constant>()) {
+                    // Create a no-index access to give the let an instruction
+                    auto* access = current_block_->Append(builder_.Access(value->Type(), value));
+                    value = access->Result();
+                }
+
                 // Store the results of the initialization
-                scopes_.Set(l->name->symbol, init.Get());
+                scopes_.Set(l->name->symbol, value);
 
                 // Record the original name of the let
-                builder_.ir.SetName(init.Get(), l->name->symbol.Name());
+                builder_.ir.SetName(value, l->name->symbol.Name());
             },
             [&](const ast::Override*) {
                 add_error(var->source,
