@@ -16,6 +16,24 @@
       "message": "LGTM with a question: does Swiftshader not build at all for iOS?",
       "revId": "7c766fa0512af1a3caa1915453b113d99594b736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c63dcb24_55e583c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000140
+      },
+      "writtenOn": "2023-06-30T19:25:11Z",
+      "side": 1,
+      "message": "The issue I hit was with swiftshader\u0027s dependency on vulkan. After chatting with cwallez@, it seemed like disabling swiftshader would be simplest if we didn\u0027t expect to use it. (Corentin, please correct me if that\u0027s wrong).",
+      "parentUuid": "43819b60_7b657993",
+      "revId": "7c766fa0512af1a3caa1915453b113d99594b736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
