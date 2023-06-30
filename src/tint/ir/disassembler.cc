@@ -36,11 +36,13 @@
 #include "src/tint/ir/instruction_result.h"
 #include "src/tint/ir/let.h"
 #include "src/tint/ir/load.h"
+#include "src/tint/ir/load_vector_element.h"
 #include "src/tint/ir/loop.h"
 #include "src/tint/ir/multi_in_block.h"
 #include "src/tint/ir/next_iteration.h"
 #include "src/tint/ir/return.h"
 #include "src/tint/ir/store.h"
+#include "src/tint/ir/store_vector_element.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
 #include "src/tint/ir/unreachable.h"
@@ -438,6 +440,26 @@ void Disassembler::EmitInstruction(Instruction* inst) {
             EmitValue(s->To());
             out_ << ", ";
             EmitValue(s->From());
+            EmitLine();
+        },
+        [&](LoadVectorElement* l) {
+            EmitValueWithType(l);
+            out_ << " = ";
+            EmitInstructionName("load_vector_element", l);
+            out_ << " ";
+            EmitValue(l->From());
+            out_ << " ";
+            EmitValue(l->Index());
+            EmitLine();
+        },
+        [&](StoreVectorElement* s) {
+            EmitInstructionName("store_vector_element", s);
+            out_ << " ";
+            EmitValue(s->To());
+            out_ << " ";
+            EmitValue(s->Index());
+            out_ << " ";
+            EmitValue(s->Value());
             EmitLine();
         },
         [&](UserCall* uc) {
