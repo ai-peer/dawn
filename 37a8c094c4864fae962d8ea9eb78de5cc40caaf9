@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23c6b42b_32b18e62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-30T12:18:16Z",
+      "side": 1,
+      "message": "Snap: https://dawn-review.googlesource.com/c/dawn/+/139860\n\nLet\u0027s land yours. I\u0027ll rebase mine after to see if there\u0027s any differences.",
+      "revId": "37a8c094c4864fae962d8ea9eb78de5cc40caaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
