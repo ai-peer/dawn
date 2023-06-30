@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7689c6c8_e9a3e243",
+        "filename": "src/tint/builtin/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-30T22:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3931141f_a223ad48",
+      "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60f705d4_5c9bde07",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Apparently we have been poking in the same space independently, https://github.com/gpuweb/gpuweb/issues/4190. Currently the spec text for frexp (which the AF CTS testing depends on) is somewhat silent on what do about subnormals. What is decided will have significant impact on CTS testing either way.",
       "parentUuid": "93ed5eef_a39c64af",
+      "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f3e95f_a2ecc793",
+        "filename": "src/tint/builtin/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-30T22:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cc7debaf_894d9888",
       "revId": "8b5250e422da844f66e5e6b83e747dab994d2b63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
