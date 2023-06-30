@@ -87,6 +87,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         if (options.disable_image_robustness) {
             config.texture_action = ast::transform::Robustness::Action::kIgnore;
         }
+        config.ignore_unsized_array = options.disable_unsize_array_robustness;
         data.Add<ast::transform::Robustness::Config>(config);
     }
 
