@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f824e01_45b5d6f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-06-30T16:06:03Z",
+      "side": 1,
+      "message": "Hi Corentin or Austin, any other comments? could you please +2? thanks",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
