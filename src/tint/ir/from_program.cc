@@ -1080,18 +1080,28 @@ class Impl {
                 builder_.ir.SetName(val, v->name->symbol.Name());
             },
             [&](const ast::Let* l) {
-                // A `let` doesn't exist as a standalone item in the IR, it's just the result of
-                // the initializer.
+                auto* last_stmt = current_block_->Back();
+
                 auto init = EmitExpression(l->initializer);
                 if (!init) {
                     return;
                 }
 
+                auto* value = init.Get();
+                if (current_block_->Back() == last_stmt) {
+                    // Emitting the let's initalizer didn't create an instruction.
+                    // Create a no-index access to give the let an instruction. This gives the let a
+                    // place of declaration and name, which preserves runtime semantics of the let,
+                    // and can be used by consumers of the IR to produce a variable or debug info.
+                    auto* access = current_block_->Append(builder_.Access(value->Type(), value));
+                    value = access->Result();
+                }
+
                 // Store the results of the initialization
-                scopes_.Set(l->name->symbol, init.Get());
+                scopes_.Set(l->name->symbol, value);
 
                 // Record the original name of the let
-                builder_.ir.SetName(init.Get(), l->name->symbol.Name());
+                builder_.ir.SetName(value, l->name->symbol.Name());
             },
             [&](const ast::Override*) {
                 add_error(var->source,
