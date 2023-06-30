@@ -1571,6 +1571,7 @@ if(TINT_BUILD_TESTS)
       ir/from_program_builtin_test.cc
       ir/from_program_call_test.cc
       ir/from_program_function_test.cc
+      ir/from_program_let_test.cc
       ir/from_program_literal_test.cc
       ir/from_program_materialize_test.cc
       ir/from_program_store_test.cc
