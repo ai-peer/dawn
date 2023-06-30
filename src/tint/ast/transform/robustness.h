@@ -81,8 +81,22 @@ class Robustness final : public utils::Castable<Robustness, Transform> {
         /// Robustness action for variables in the 'workgroup' address space
         Action workgroup_action = Action::kDefault;
 
-        /// Bindings that should always be applied Actions::kIgnore on.
+        /// Bindings that should always be applied Actions::kIgnore on
         std::unordered_set<tint::sem::BindingPoint> bindings_ignored;
+
+        /// If we should ignore unsized array access with unsigned integer index in robustness
+        /// transform.
+        /// TODO(tint:1890): properly handle signed integer indices. Consider below storage buffer:
+        ///
+        /// struct contents {
+        ///     a: int,
+        ///     b : array<int>,
+        /// }
+        /// var<storage> buf : contents;
+        ///
+        /// Then accessing buf.b[-1] will be undefined behaviour, and VK_EXT_robustness2 won't
+        /// protect against it because it's still within the bounds.
+        bool ignore_unsized_array_access_with_uint_index = false;
     };
 
     /// Constructor
