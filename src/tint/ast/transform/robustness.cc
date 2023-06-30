@@ -66,6 +66,14 @@ struct Robustness::State {
                     if (IsIgnoredResourceBinding(expr->Object()->RootIdentifier())) {
                         return;
                     }
+                    if (cfg.disable_unsized_array_index_clamping &&
+                        IsIndexAccessingUnsizedArray(expr)) {
+                        // Ensure the index is always unsigned integer as using a negative index is
+                        // an undefined behavior in SPIRV.
+                        auto* uint_index = GetUintIndex(expr);
+                        ctx.Replace(expr->Declaration()->index, uint_index);
+                        return;
+                    }
                     switch (ActionFor(expr)) {
                         case Action::kPredicate:
                             PredicateIndexAccessor(expr);
@@ -343,10 +351,7 @@ struct Robustness::State {
 
         auto* expr_sem = expr->Unwrap()->As<sem::IndexAccessorExpression>();
 
-        auto idx = ctx.Clone(expr->Declaration()->index);
-        if (expr_sem->Index()->Type()->is_signed_integer_scalar()) {
-            idx = b.Call<u32>(idx);  // u32(idx)
-        }
+        auto idx = GetUintIndex(expr_sem);
         auto* clamped_idx = b.Call(builtin::Function::kMin, idx, max);
         ctx.Replace(expr->Declaration()->index, clamped_idx);
     }
@@ -692,6 +697,21 @@ struct Robustness::State {
         }
         sem::BindingPoint bindingPoint = *globalVariable->BindingPoint();
         return cfg.bindings_ignored.find(bindingPoint) != cfg.bindings_ignored.cend();
+    }
+
+    /// @returns true if the expression is an IndexAccessorExpression whose object is an array with
+    /// RuntimeCount.
+    bool IsIndexAccessingUnsizedArray(const sem::IndexAccessorExpression* expr) {
+        auto* array_type = expr->Object()->Type()->UnwrapRef()->As<type::Array>();
+        return array_type != nullptr && array_type->Count()->Is<type::RuntimeArrayCount>();
+    }
+
+    const ast::Expression* GetUintIndex(const sem::IndexAccessorExpression* expr) {
+        auto* idx = ctx.Clone(expr->Declaration()->index);
+        if (expr->Index()->Type()->is_signed_integer_scalar()) {
+            idx = b.Call<u32>(idx);  // u32(idx)
+        }
+        return idx;
     }
 };
 
