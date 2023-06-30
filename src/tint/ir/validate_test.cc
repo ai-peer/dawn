@@ -19,6 +19,7 @@
 #include "src/tint/ir/builder.h"
 #include "src/tint/ir/ir_test_helper.h"
 #include "src/tint/ir/validate.h"
+#include "src/tint/type/array.h"
 #include "src/tint/type/matrix.h"
 #include "src/tint/type/pointer.h"
 #include "src/tint/type/struct.h"
@@ -120,34 +121,6 @@ note: # Disassembly
 )");
 }
 
-TEST_F(IR_ValidateTest, Valid_Access_Value) {
-    auto* f = b.Function("my_func", ty.void_());
-    auto* obj = b.FunctionParam(ty.mat3x2<f32>());
-    f->SetParams({obj});
-
-    b.With(f->Block(), [&] {
-        b.Access(ty.f32(), obj, 1_u, 0_u);
-        b.Return(f);
-    });
-
-    auto res = ir::Validate(mod);
-    EXPECT_TRUE(res) << res.Failure().str();
-}
-
-TEST_F(IR_ValidateTest, Valid_Access_Ptr) {
-    auto* f = b.Function("my_func", ty.void_());
-    auto* obj = b.FunctionParam(ty.ptr<private_, mat3x2<f32>>());
-    f->SetParams({obj});
-
-    b.With(f->Block(), [&] {
-        b.Access(ty.ptr<private_, f32>(), obj, 1_u, 0_u);
-        b.Return(f);
-    });
-
-    auto res = ir::Validate(mod);
-    EXPECT_TRUE(res) << res.Failure().str();
-}
-
 TEST_F(IR_ValidateTest, Access_NegativeIndex) {
     auto* f = b.Function("my_func", ty.void_());
     auto* obj = b.FunctionParam(ty.vec3<f32>());
@@ -214,7 +187,7 @@ note: # Disassembly
 
 TEST_F(IR_ValidateTest, Access_OOB_Index_Ptr) {
     auto* f = b.Function("my_func", ty.void_());
-    auto* obj = b.FunctionParam(ty.ptr<private_, mat3x2<f32>>());
+    auto* obj = b.FunctionParam(ty.ptr<private_, array<array<f32, 2>, 3>>());
     f->SetParams({obj});
 
     b.With(f->Block(), [&] {
@@ -225,7 +198,7 @@ TEST_F(IR_ValidateTest, Access_OOB_Index_Ptr) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:3:55 error: access: index out of bounds for type ptr<vec2<f32>>
+              R"(:3:55 error: access: index out of bounds for type ptr<array<f32, 2>>
     %3:ptr<private, f32, read_write> = access %2, 1u, 3u
                                                       ^^
 
@@ -238,7 +211,7 @@ TEST_F(IR_ValidateTest, Access_OOB_Index_Ptr) {
                                                       ^^
 
 note: # Disassembly
-%my_func = func(%2:ptr<private, mat3x2<f32>, read_write>):void -> %b1 {
+%my_func = func(%2:ptr<private, array<array<f32, 2>, 3>, read_write>):void -> %b1 {
   %b1 = block {
     %3:ptr<private, f32, read_write> = access %2, 1u, 3u
     ret
@@ -434,11 +407,10 @@ TEST_F(IR_ValidateTest, Access_Incorrect_Type_Ptr_Ptr) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(
-        res.Failure().str(),
-        R"(:3:40 error: access: result of access chain is type ptr<f32> but instruction type is ptr<i32>
+    EXPECT_EQ(res.Failure().str(),
+              R"(:3:55 error: access: cannot obtain address of vector element
     %3:ptr<private, i32, read_write> = access %2, 1u, 1u
-                                       ^^^^^^
+                                                      ^^
 
 :2:3 note: In block
   %b1 = block {
@@ -456,7 +428,7 @@ note: # Disassembly
 
 TEST_F(IR_ValidateTest, Access_Incorrect_Type_Ptr_Value) {
     auto* f = b.Function("my_func", ty.void_());
-    auto* obj = b.FunctionParam(ty.ptr<private_, mat3x2<f32>>());
+    auto* obj = b.FunctionParam(ty.ptr<private_, array<array<f32, 2>, 3>>());
     f->SetParams({obj});
 
     b.With(f->Block(), [&] {
@@ -477,6 +449,68 @@ TEST_F(IR_ValidateTest, Access_Incorrect_Type_Ptr_Value) {
   ^^^^^^^^^^^
 
 note: # Disassembly
+%my_func = func(%2:ptr<private, array<array<f32, 2>, 3>, read_write>):void -> %b1 {
+  %b1 = block {
+    %3:f32 = access %2, 1u, 1u
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, Access_IndexVectorPtr) {
+    auto* f = b.Function("my_func", ty.void_());
+    auto* obj = b.FunctionParam(ty.ptr<private_, vec3<f32>>());
+    f->SetParams({obj});
+
+    b.With(f->Block(), [&] {
+        b.Access(ty.f32(), obj, 1_u);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:3:25 error: access: cannot obtain address of vector element
+    %3:f32 = access %2, 1u
+                        ^^
+
+:2:3 note: In block
+  %b1 = block {
+  ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func(%2:ptr<private, vec3<f32>, read_write>):void -> %b1 {
+  %b1 = block {
+    %3:f32 = access %2, 1u
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, Access_IndexVectorPtr_ViaMatrixPtr) {
+    auto* f = b.Function("my_func", ty.void_());
+    auto* obj = b.FunctionParam(ty.ptr<private_, mat3x2<f32>>());
+    f->SetParams({obj});
+
+    b.With(f->Block(), [&] {
+        b.Access(ty.f32(), obj, 1_u, 1_u);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:3:29 error: access: cannot obtain address of vector element
+    %3:f32 = access %2, 1u, 1u
+                            ^^
+
+:2:3 note: In block
+  %b1 = block {
+  ^^^^^^^^^^^
+
+note: # Disassembly
 %my_func = func(%2:ptr<private, mat3x2<f32>, read_write>):void -> %b1 {
   %b1 = block {
     %3:f32 = access %2, 1u, 1u
@@ -484,6 +518,34 @@ note: # Disassembly
   }
 }
 )");
+}
+
+TEST_F(IR_ValidateTest, Access_IndexVector) {
+    auto* f = b.Function("my_func", ty.void_());
+    auto* obj = b.FunctionParam(ty.vec3<f32>());
+    f->SetParams({obj});
+
+    b.With(f->Block(), [&] {
+        b.Access(ty.f32(), obj, 1_u);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_TRUE(res) << res.Failure().str();
+}
+
+TEST_F(IR_ValidateTest, Access_IndexVector_ViaMatrix) {
+    auto* f = b.Function("my_func", ty.void_());
+    auto* obj = b.FunctionParam(ty.mat3x2<f32>());
+    f->SetParams({obj});
+
+    b.With(f->Block(), [&] {
+        b.Access(ty.f32(), obj, 1_u, 1_u);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_TRUE(res) << res.Failure().str();
 }
 
 TEST_F(IR_ValidateTest, Block_TerminatorInMiddle) {
