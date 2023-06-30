@@ -491,43 +491,29 @@ class Impl {
     }
 
     void EmitIncrementDecrement(const ast::IncrementDecrementStatement* stmt) {
-        auto lhs = EmitExpression(stmt->lhs);
-        if (!lhs) {
-            return;
-        }
+        auto* one = program_->TypeOf(stmt->lhs)->UnwrapRef()->is_signed_integer_scalar()
+                        ? builder_.Constant(1_i)
+                        : builder_.Constant(1_u);
 
-        // Load from the LHS.
-        auto* lhs_value = builder_.Load(lhs.Get());
-        current_block_->Append(lhs_value);
-
-        auto* ty = lhs_value->Result()->Type();
-
-        auto* rhs =
-            ty->is_signed_integer_scalar() ? builder_.Constant(1_i) : builder_.Constant(1_u);
-
-        Binary* inst = nullptr;
-        if (stmt->increment) {
-            inst = builder_.Add(ty, lhs_value, rhs);
-        } else {
-            inst = builder_.Subtract(ty, lhs_value, rhs);
-        }
-        current_block_->Append(inst);
-
-        auto store = builder_.Store(lhs.Get(), inst);
-        current_block_->Append(store);
+        EmitCompoundAssignment(stmt->lhs, one,
+                               stmt->increment ? ast::BinaryOp::kAdd : ast::BinaryOp::kSubtract);
     }
 
     void EmitCompoundAssignment(const ast::CompoundAssignmentStatement* stmt) {
-        auto lhs = EmitExpression(stmt->lhs);
-        if (!lhs) {
-            return;
-        }
-
         auto rhs = EmitExpression(stmt->rhs);
         if (!rhs) {
             return;
         }
 
+        EmitCompoundAssignment(stmt->lhs, rhs.Get(), stmt->op);
+    }
+
+    void EmitCompoundAssignment(const ast::Expression* lhs_expr, ir::Value* rhs, ast::BinaryOp op) {
+        auto lhs = EmitExpression(lhs_expr);
+        if (!lhs) {
+            return;
+        }
+
         // Load from the LHS.
         auto* lhs_value = builder_.Load(lhs.Get());
         current_block_->Append(lhs_value);
@@ -535,36 +521,36 @@ class Impl {
         auto* ty = lhs_value->Result()->Type();
 
         Binary* inst = nullptr;
-        switch (stmt->op) {
+        switch (op) {
             case ast::BinaryOp::kAnd:
-                inst = builder_.And(ty, lhs_value, rhs.Get());
+                inst = builder_.And(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kOr:
-                inst = builder_.Or(ty, lhs_value, rhs.Get());
+                inst = builder_.Or(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kXor:
-                inst = builder_.Xor(ty, lhs_value, rhs.Get());
+                inst = builder_.Xor(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kShiftLeft:
-                inst = builder_.ShiftLeft(ty, lhs_value, rhs.Get());
+                inst = builder_.ShiftLeft(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kShiftRight:
-                inst = builder_.ShiftRight(ty, lhs_value, rhs.Get());
+                inst = builder_.ShiftRight(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kAdd:
-                inst = builder_.Add(ty, lhs_value, rhs.Get());
+                inst = builder_.Add(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kSubtract:
-                inst = builder_.Subtract(ty, lhs_value, rhs.Get());
+                inst = builder_.Subtract(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kMultiply:
-                inst = builder_.Multiply(ty, lhs_value, rhs.Get());
+                inst = builder_.Multiply(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kDivide:
-                inst = builder_.Divide(ty, lhs_value, rhs.Get());
+                inst = builder_.Divide(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kModulo:
-                inst = builder_.Modulo(ty, lhs_value, rhs.Get());
+                inst = builder_.Modulo(ty, lhs_value, rhs);
                 break;
             case ast::BinaryOp::kLessThanEqual:
             case ast::BinaryOp::kGreaterThanEqual:
