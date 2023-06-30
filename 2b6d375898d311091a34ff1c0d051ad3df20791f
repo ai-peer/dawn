@@ -16,6 +16,40 @@
       "message": "This change has a few additional fixes for IR terminators in unit tests. PTAL",
       "revId": "2b6d375898d311091a34ff1c0d051ad3df20791f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb3ed8f_87cffdb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-30T21:13:30Z",
+      "side": 1,
+      "message": "LGTM with a question about `continue` without `Continuing`. The SPIR-V backend currently assumes there\u0027s a continuing block if there are any `continue` statements.",
+      "revId": "2b6d375898d311091a34ff1c0d051ad3df20791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fd6079_3642a4cf",
+        "filename": "src/tint/ir/to_program_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-06-30T21:13:30Z",
+      "side": 1,
+      "message": "If there\u0027s a `continue`, does there need to be a `Continuing` block? Or are we assuming it\u0027s just an implicit `NextIteration` when not present?",
+      "revId": "2b6d375898d311091a34ff1c0d051ad3df20791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
