@@ -1319,6 +1319,89 @@ fn f() {
 })");
 }
 
+TEST_F(IRToProgramRoundtripTest, CompoundAssign_ArrayOfMatrixAccess_123456) {
+    Test(R"(
+fn e(i : i32) -> i32 {
+  return i;
+}
+
+fn f() {
+  var v : array<mat3x4<f32>, 5u>;
+  v[e(1i)][e(2i)][e(3i)] += v[e(4i)][e(5i)][e(6i)];
+}
+)",
+         R"(fn e(i : i32) -> i32 {
+  return i;
+}
+
+fn f() {
+  var v : array<mat3x4<f32>, 5u>;
+  let v_1 = &(v[e(1i)][e(2i)]);
+  let v_2 = e(3i);
+  let v_3 = v[e(4i)][e(5i)][e(6i)];
+  (*(v_1))[v_2] = ((*(v_1))[v_2] + v_3);
+})");
+}
+
+TEST_F(IRToProgramRoundtripTest, CompoundAssign_ArrayOfMatrixAccess_261345) {
+    Test(R"(
+fn e(i : i32) -> i32 {
+  return i;
+}
+
+fn f() {
+  var v : array<mat3x4<f32>, 5u>;
+  let v_2 = e(2i);
+  let v_3 = e(6i);
+  v[e(1i)][v_2][e(3i)] += v[e(4i)][e(5i)][v_3];
+}
+)",
+         R"(fn e(i : i32) -> i32 {
+  return i;
+}
+
+fn f() {
+  var v : array<mat3x4<f32>, 5u>;
+  let v_2 = e(2i);
+  let v_3 = e(6i);
+  let v_1 = &(v[e(1i)][v_2]);
+  let v_4 = e(3i);
+  let v_5 = v[e(4i)][e(5i)][v_3];
+  (*(v_1))[v_4] = ((*(v_1))[v_4] + v_5);
+})");
+}
+
+TEST_F(IRToProgramRoundtripTest, CompoundAssign_ArrayOfMatrixAccess_532614) {
+    Test(R"(
+fn e(i : i32) -> i32 {
+  return i;
+}
+
+fn f() {
+  var v : array<mat3x4<f32>, 5u>;
+  let v_2 = e(5i);
+  let v_3 = e(3i);
+  let v_4 = e(2i);
+  let v_5 = e(6i);
+  v[e(1i)][v_4][v_3] += v[e(4i)][v_2][v_5];
+}
+)",
+         R"(fn e(i : i32) -> i32 {
+  return i;
+}
+
+fn f() {
+  var v : array<mat3x4<f32>, 5u>;
+  let v_2 = e(5i);
+  let v_3 = e(3i);
+  let v_4 = e(2i);
+  let v_5 = e(6i);
+  let v_1 = &(v[e(1i)][v_4]);
+  let v_6 = v[e(4i)][v_2][v_5];
+  (*(v_1))[v_3] = ((*(v_1))[v_3] + v_6);
+})");
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // let
 ////////////////////////////////////////////////////////////////////////////////
