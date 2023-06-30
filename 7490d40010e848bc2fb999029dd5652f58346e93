@@ -50,6 +50,24 @@
       "message": "nit: `ASSERT(mLastState \u003d\u003d D3D12BufferUsage(newUsage))`?",
       "revId": "7490d40010e848bc2fb999029dd5652f58346e93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40120b6e_2887c08e",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-06-30T00:22:50Z",
+      "side": 1,
+      "message": "Oh we cannot do that because D3D12BufferUsage(newUsage) \u003d\u003d D3D12_RESOURCE_STATE_COPY_SOURCE while mLastState \u003d\u003d D3D12_RESOURCE_STATE_GENERIC_READ.",
+      "parentUuid": "4a54c38d_e1dfcc7d",
+      "revId": "7490d40010e848bc2fb999029dd5652f58346e93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
