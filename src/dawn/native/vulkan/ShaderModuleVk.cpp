@@ -177,6 +177,7 @@ ShaderModule::~ShaderModule() = default;
     X(bool, useZeroInitializeWorkgroupMemoryExtension)                                           \
     X(bool, clampFragDepth)                                                                      \
     X(bool, disableImageRobustness)                                                              \
+    X(bool, disableUnsizeArrayRobustnessOnBuffer)                                                \
     X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)
 
 DAWN_MAKE_CACHE_REQUEST(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);
@@ -264,6 +265,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
     req.clampFragDepth = clampFragDepth;
     req.disableImageRobustness = GetDevice()->IsToggleEnabled(Toggle::VulkanUseImageRobustAccess2);
+    req.disableUnsizeArrayRobustnessOnBuffer =
+        GetDevice()->IsToggleEnabled(Toggle::VulkanUseBufferRobustAccess2);
     req.tracePlatform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
 
@@ -336,6 +339,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             options.binding_remapper_options = r.bindingRemapper;
             options.external_texture_options = r.externalTextureOptions;
             options.disable_image_robustness = r.disableImageRobustness;
+            options.disable_unsize_array_robustness_on_buffer =
+                r.disableUnsizeArrayRobustnessOnBuffer;
 
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General,
                          "tint::writer::spirv::Generate()");
