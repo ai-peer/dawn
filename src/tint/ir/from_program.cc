@@ -82,6 +82,7 @@
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/function.h"
+#include "src/tint/sem/index_accessor_expression.h"
 #include "src/tint/sem/load.h"
 #include "src/tint/sem/materialize.h"
 #include "src/tint/sem/member_accessor_expression.h"
@@ -509,16 +510,26 @@ class Impl {
     }
 
     void EmitCompoundAssignment(const ast::Expression* lhs_expr, ir::Value* rhs, ast::BinaryOp op) {
+        auto b = builder_.With(current_block_);
+        if (auto access = AsVectorElementAccess(lhs_expr)) {
+            // Compound assignment of vector element needs to use LoadVectorElement() and
+            // StoreVectorElement().
+            auto* load = b.LoadVectorElement(access->vector, access->index);
+            auto* ty = load->Result()->Type();
+            auto* inst = b.Append(BinaryOp(ty, load->Result(), rhs, op));
+            b.StoreVectorElement(access->vector, access->index, inst);
+            return;
+        }
+
         auto lhs = EmitExpression(lhs_expr);
         if (!lhs) {
             return;
         }
 
-        // Load from the LHS.
-        auto* load = current_block_->Append(builder_.Load(lhs.Get()));
+        auto* load = b.Load(lhs.Get());
         auto* ty = load->Result()->Type();
-        auto* inst = current_block_->Append(BinaryOp(ty, load->Result(), rhs, op));
-        current_block_->Append(builder_.Store(lhs.Get(), inst));
+        auto* inst = b.Append(BinaryOp(ty, load->Result(), rhs, op));
+        b.Store(lhs.Get(), inst);
     }
 
     void EmitBlock(const ast::BlockStatement* block) {
@@ -1322,6 +1333,40 @@ class Impl {
         }
         TINT_UNREACHABLE(IR, diagnostics_);
         return nullptr;
+    }
+
+    struct VectorElementAccess {
+        ir::Value* vector = nullptr;
+        ir::Value* index = nullptr;
+    };
+
+    std::optional<VectorElementAccess> AsVectorElementAccess(const ast::Expression* expr) {
+        auto* access = expr->As<ast::AccessorExpression>();
+        if (!access) {
+            return std::nullopt;
+        }
+
+        if (!program_->TypeOf(access->object)->UnwrapRef()->Is<type::Vector>()) {
+            return std::nullopt;
+        }
+
+        // Vector accessors need to use LoadVectorElement / StoreVectorElement
+        auto vec = EmitExpression(access->object);
+        if (!vec) {
+            return std::nullopt;
+        }
+
+        return tint::Switch(
+            program_->Sem().Get(access),
+            [&](const sem::Swizzle* s) {
+                return VectorElementAccess{vec.Get(), builder_.Constant(s->Indices()[0])};
+            },
+            [&](const sem::IndexAccessorExpression* i) -> std::optional<VectorElementAccess> {
+                if (auto idx = EmitExpression(i->Index()->Declaration())) {
+                    return VectorElementAccess{vec.Get(), idx.Get()};
+                }
+                return std::nullopt;
+            });
     }
 };
 

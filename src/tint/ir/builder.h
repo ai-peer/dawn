@@ -39,12 +39,14 @@
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/instruction_result.h"
 #include "src/tint/ir/load.h"
+#include "src/tint/ir/load_vector_element.h"
 #include "src/tint/ir/loop.h"
 #include "src/tint/ir/module.h"
 #include "src/tint/ir/multi_in_block.h"
 #include "src/tint/ir/next_iteration.h"
 #include "src/tint/ir/return.h"
 #include "src/tint/ir/store.h"
+#include "src/tint/ir/store_vector_element.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
 #include "src/tint/ir/unary.h"
@@ -575,6 +577,32 @@ class Builder {
         auto* to_val = Value(std::forward<TO>(to));
         auto* from_val = Value(std::forward<FROM>(from));
         return Append(ir.instructions.Create<ir::Store>(to_val, from_val));
+    }
+
+    /// Creates a store vector element instruction
+    /// @param to the vector pointer expression being stored too
+    /// @param index the new vector element index
+    /// @param value the new vector element expression
+    /// @returns the instruction
+    template <typename TO, typename INDEX, typename VALUE>
+    ir::StoreVectorElement* StoreVectorElement(TO&& to, INDEX&& index, VALUE&& value) {
+        CheckForNonDeterministicEvaluation<TO, INDEX, VALUE>();
+        auto* to_val = Value(std::forward<TO>(to));
+        auto* index_val = Value(std::forward<INDEX>(index));
+        auto* value_val = Value(std::forward<VALUE>(value));
+        return Append(ir.instructions.Create<ir::StoreVectorElement>(to_val, index_val, value_val));
+    }
+
+    /// Creates a load vector element instruction
+    /// @param from the vector pointer expression being loaded from
+    /// @param index the new vector element index
+    /// @returns the instruction
+    template <typename FROM, typename INDEX>
+    ir::LoadVectorElement* LoadVectorElement(FROM&& from, INDEX&& index) {
+        CheckForNonDeterministicEvaluation<FROM, INDEX>();
+        auto* from_val = Value(std::forward<FROM>(from));
+        auto* index_val = Value(std::forward<INDEX>(index));
+        return Append(ir.instructions.Create<ir::LoadVectorElement>(from_val, index_val));
     }
 
     /// Creates a new `var` declaration
