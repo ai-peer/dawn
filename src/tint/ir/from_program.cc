@@ -511,16 +511,26 @@ class Impl {
     }
 
     void EmitCompoundAssignment(const ast::Expression* lhs_expr, ir::Value* rhs, ast::BinaryOp op) {
+        auto b = builder_.With(current_block_);
+        if (auto access = AsVectorRefElementAccess(lhs_expr)) {
+            // Compound assignment of vector element needs to use LoadVectorElement() and
+            // StoreVectorElement().
+            auto* load = b.LoadVectorElement(access->vector, access->index);
+            auto* ty = load->Result()->Type();
+            auto* inst = b.Append(BinaryOp(ty, load->Result(), rhs, op));
+            b.StoreVectorElement(access->vector, access->index, inst);
+            return;
+        }
+
         auto lhs = EmitExpression(lhs_expr);
         if (!lhs) {
             return;
         }
 
-        // Load from the LHS.
-        auto* load = current_block_->Append(builder_.Load(lhs.Get()));
+        auto* load = b.Load(lhs.Get());
         auto* ty = load->Result()->Type();
-        auto* inst = current_block_->Append(BinaryOp(ty, load->Result(), rhs, op));
-        current_block_->Append(builder_.Store(lhs.Get(), inst));
+        auto* inst = b.Append(BinaryOp(ty, load->Result(), rhs, op));
+        b.Store(lhs.Get(), inst);
     }
 
     void EmitBlock(const ast::BlockStatement* block) {
@@ -831,49 +841,57 @@ class Impl {
 
         // Walk the access expressions from right to left.
         while (true) {
-            auto res = tint::Switch(
-                expr,  //
-                [&](const sem::IndexAccessorExpression* access) -> Result {
-                    auto idx = EmitExpression(access->Index()->Declaration());
-                    if (!idx) {
-                        return kFailure;
-                    }
-                    indices.Push(idx.Get());
-                    expr = access->Object();
-                    return kNext;
-                },
-                [&](const sem::StructMemberAccess* access) -> Result {
-                    indices.Push(builder_.Constant(u32(access->Member()->Index())));
-                    expr = access->Object();
-                    return kNext;
-                },
-                [&](const sem::Swizzle* access) -> Result {
-                    // A single element access is just treated as an accessor.
-                    if (access->Indices().Length() == 1) {
-                        indices.Push(builder_.Constant(u32(access->Indices()[0])));
+            Result res;
+            if (auto vec_access = AsVectorRefElementAccess(expr)) {
+                // Vector reference accesses need to map to LoadVectorElement()
+                auto* load = builder_.LoadVectorElement(vec_access->vector, vec_access->index);
+                current_block_->Append(load);
+                res = end_chain(load->Result());
+            } else {
+                res = tint::Switch(
+                    expr,  //
+                    [&](const sem::IndexAccessorExpression* access) -> Result {
+                        auto idx = EmitExpression(access->Index()->Declaration());
+                        if (!idx) {
+                            return kFailure;
+                        }
+                        indices.Push(idx.Get());
                         expr = access->Object();
                         return kNext;
-                    }
+                    },
+                    [&](const sem::StructMemberAccess* access) -> Result {
+                        indices.Push(builder_.Constant(u32(access->Member()->Index())));
+                        expr = access->Object();
+                        return kNext;
+                    },
+                    [&](const sem::Swizzle* access) -> Result {
+                        // A single element access is just treated as an accessor.
+                        if (access->Indices().Length() == 1) {
+                            indices.Push(builder_.Constant(u32(access->Indices()[0])));
+                            expr = access->Object();
+                            return kNext;
+                        }
 
-                    auto vec = EmitExpression(access->Object()->Declaration());
-                    if (!vec) {
-                        return kFailure;
-                    }
+                        auto vec = EmitExpression(access->Object()->Declaration());
+                        if (!vec) {
+                            return kFailure;
+                        }
 
-                    // The ir::Access needs to stop at the swizzle, so construct this and end the
-                    // access chain.
-                    auto* ty = access->Type()->Clone(clone_ctx_.type_ctx);
-                    auto* swizzle = builder_.Swizzle(ty, vec.Get(), access->Indices());
-                    current_block_->Append(swizzle);
-                    return end_chain(swizzle->Result());
-                },
-                [&](Default) -> Result {
-                    auto root = EmitExpression(expr->Declaration());
-                    if (!root) {
-                        return kFailure;
-                    }
-                    return end_chain(root.Get());
-                });
+                        // The ir::Access needs to stop at the swizzle, so construct this and end
+                        // the access chain.
+                        auto* ty = access->Type()->Clone(clone_ctx_.type_ctx);
+                        auto* swizzle = builder_.Swizzle(ty, vec.Get(), access->Indices());
+                        current_block_->Append(swizzle);
+                        return end_chain(swizzle->Result());
+                    },
+                    [&](Default) -> Result {
+                        auto root = EmitExpression(expr->Declaration());
+                        if (!root) {
+                            return kFailure;
+                        }
+                        return end_chain(root.Get());
+                    });
+            }
 
             if (auto* status = std::get_if<Status>(&res)) {
                 switch (*status) {
@@ -924,7 +942,7 @@ class Impl {
             });
 
         // If this expression maps to sem::Load, insert a load instruction to get the result.
-        if (result && sem->Is<sem::Load>()) {
+        if (result && result.Get()->Type()->Is<type::Pointer>() && sem->Is<sem::Load>()) {
             auto* load = builder_.Load(result.Get());
             current_block_->Append(load);
             return load->Result();
@@ -1272,6 +1290,50 @@ class Impl {
         }
         TINT_UNREACHABLE(IR, diagnostics_);
         return nullptr;
+    }
+
+    struct VectorRefElementAccess {
+        ir::Value* vector = nullptr;
+        ir::Value* index = nullptr;
+    };
+
+    std::optional<VectorRefElementAccess> AsVectorRefElementAccess(const ast::Expression* expr) {
+        return AsVectorRefElementAccess(program_->Sem().Get<sem::ValueExpression>(expr));
+    }
+
+    std::optional<VectorRefElementAccess> AsVectorRefElementAccess(
+        const sem::ValueExpression* expr) {
+        auto* access = As<sem::AccessorExpression>(expr);
+        if (!access) {
+            return std::nullopt;
+        }
+
+        auto* ref = access->Object()->Type()->As<type::Reference>();
+        if (!ref) {
+            return std::nullopt;
+        }
+
+        if (!ref->StoreType()->Is<type::Vector>()) {
+            return std::nullopt;
+        }
+
+        return tint::Switch(
+            access,
+            [&](const sem::Swizzle* s) -> std::optional<VectorRefElementAccess> {
+                if (auto vec = EmitExpression(access->Object()->Declaration())) {
+                    return VectorRefElementAccess{vec.Get(),
+                                                  builder_.Constant(u32(s->Indices()[0]))};
+                }
+                return std::nullopt;
+            },
+            [&](const sem::IndexAccessorExpression* i) -> std::optional<VectorRefElementAccess> {
+                if (auto vec = EmitExpression(access->Object()->Declaration())) {
+                    if (auto idx = EmitExpression(i->Index()->Declaration())) {
+                        return VectorRefElementAccess{vec.Get(), idx.Get()};
+                    }
+                }
+                return std::nullopt;
+            });
     }
 };
 
