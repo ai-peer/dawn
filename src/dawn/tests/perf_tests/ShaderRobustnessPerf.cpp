@@ -380,6 +380,9 @@ using DimInner = uint32_t;
 using DimBOuter = uint32_t;
 DAWN_TEST_PARAM_STRUCT(ShaderRobustnessParams, MatMulMethod, DimAOuter, DimInner, DimBOuter);
 
+// TODO(dawn:1890): Define this value in Common/Constants.h
+constexpr static uint32_t kResloveBufferOffsetAlignment = 256u;
+
 // Test the execution time of matrix multiplication (A [dimAOuter, dimInner] * B [dimInner,
 // dimBOuter]) on the GPU and see the difference between robustness on and off.
 class ShaderRobustnessPerf : public DawnPerfTestWithParams<ShaderRobustnessParams> {
@@ -401,6 +404,11 @@ class ShaderRobustnessPerf : public DawnPerfTestWithParams<ShaderRobustnessParam
     uint32_t mDimAOuter;
     uint32_t mDimInner;
     uint32_t mDimBOuter;
+
+    wgpu::QuerySet mTimestampQuerySet;
+    wgpu::Buffer mResolveBuffer;
+
+    wgpu::Buffer mReadbackBuffer;
 };
 
 void ShaderRobustnessPerf::SetUp() {
@@ -471,12 +479,29 @@ void ShaderRobustnessPerf::SetUp() {
                                           {2, dst, 0, byteDstSize},
                                           {3, uniformBuffer, 0, sizeof(uniformData)},
                                       });
+
+    wgpu::QuerySetDescriptor querySetDescriptor;
+    querySetDescriptor.count = 2;
+    querySetDescriptor.type = wgpu::QueryType::Timestamp;
+    mTimestampQuerySet = device.CreateQuerySet(&querySetDescriptor);
+
+    wgpu::BufferDescriptor resolveBufferDescriptor;
+    resolveBufferDescriptor.size = kResloveBufferOffsetAlignment + sizeof(uint64_t);
+    resolveBufferDescriptor.usage =
+        wgpu::BufferUsage::QueryResolve | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    mResolveBuffer = device.CreateBuffer(&resolveBufferDescriptor);
+
+    wgpu::BufferDescriptor readbackBufferDescriptor;
+    readbackBufferDescriptor.size = 2 * sizeof(uint64_t);
+    readbackBufferDescriptor.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead;
+    mReadbackBuffer = device.CreateBuffer(&readbackBufferDescriptor);
 }
 
 void ShaderRobustnessPerf::Step() {
     wgpu::CommandBuffer commands;
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.WriteTimestamp(mTimestampQuerySet, 0);
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
         pass.SetPipeline(mPipeline);
         pass.SetBindGroup(0, mBindGroup);
@@ -486,10 +511,36 @@ void ShaderRobustnessPerf::Step() {
         }
         pass.End();
 
+        encoder.WriteTimestamp(mTimestampQuerySet, 1);
+
+        encoder.ResolveQuerySet(mTimestampQuerySet, 0, 1, mResolveBuffer, 0);
+        encoder.ResolveQuerySet(mTimestampQuerySet, 1, 1, mResolveBuffer,
+                                kResloveBufferOffsetAlignment);
+        encoder.CopyBufferToBuffer(mResolveBuffer, 0, mReadbackBuffer, 0, sizeof(uint64_t));
+        encoder.CopyBufferToBuffer(mResolveBuffer, kResloveBufferOffsetAlignment, mReadbackBuffer,
+                                   sizeof(uint64_t), sizeof(uint64_t));
+
         commands = encoder.Finish();
     }
 
     queue.Submit(1, &commands);
+
+    bool done = false;
+    mReadbackBuffer.MapAsync(
+        wgpu::MapMode::Read, 0, sizeof(uint64_t) * 2,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done);
+    while (!done) {
+        WaitABit();
+    }
+    const uint64_t* readbackValues =
+        static_cast<const uint64_t*>(mReadbackBuffer.GetConstMappedRange());
+    double gpuTimeElapsed = (readbackValues[1] - readbackValues[0]) / 1e9;
+    SetGPUTime(gpuTimeElapsed);
+
+    mReadbackBuffer.Unmap();
 }
 
 TEST_P(ShaderRobustnessPerf, Run) {
