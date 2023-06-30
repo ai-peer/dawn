@@ -16,6 +16,13 @@
 
 #include "src/tint/debug.h"
 #include "src/tint/ir/block.h"
+#include "src/tint/ir/continue.h"
+#include "src/tint/ir/exit_if.h"
+#include "src/tint/ir/exit_loop.h"
+#include "src/tint/ir/exit_switch.h"
+#include "src/tint/ir/next_iteration.h"
+#include "src/tint/ir/return.h"
+#include "src/tint/ir/unreachable.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Instruction);
 
@@ -58,6 +65,34 @@ void Instruction::ReplaceWith(Instruction* replacement) {
 void Instruction::Remove() {
     TINT_ASSERT_OR_RETURN(IR, Block() != nullptr);
     Block()->Remove(this);
+}
+
+std::string_view Instruction::FriendlyNameOf(const tint::utils::TypeInfo& ti) {
+    if (&ti == &utils::TypeInfo::Of<ir::Continue>()) {
+        return "continue";
+    }
+    if (&ti == &utils::TypeInfo::Of<ir::ExitIf>()) {
+        return "exit_if";
+    }
+    if (&ti == &utils::TypeInfo::Of<ir::ExitLoop>()) {
+        return "exit_loop";
+    }
+    if (&ti == &utils::TypeInfo::Of<ir::ExitSwitch>()) {
+        return "exit_switch";
+    }
+    if (&ti == &utils::TypeInfo::Of<ir::Exit>()) {
+        return "any exit";
+    }
+    if (&ti == &utils::TypeInfo::Of<ir::NextIteration>()) {
+        return "next_iteration";
+    }
+    if (&ti == &utils::TypeInfo::Of<ir::Return>()) {
+        return "return";
+    }
+    if (&ti == &utils::TypeInfo::Of<ir::Unreachable>()) {
+        return "unreachable";
+    }
+    return ti.name;
 }
 
 }  // namespace tint::ir

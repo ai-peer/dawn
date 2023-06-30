@@ -49,6 +49,7 @@
 #include "src/tint/type/bool.h"
 #include "src/tint/type/pointer.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/string.h"
 
 namespace tint::ir {
 namespace {
@@ -200,13 +201,20 @@ class Validator {
             AddError("function '" + Name(func) + "' added to module multiple times");
         }
 
-        CheckBlock(func->Block());
+        CheckBlock<ir::Return, ir::Unreachable>(func->Block());
     }
 
+    template <typename... PERMITTED_EXITS>
     void CheckBlock(Block* blk) {
         TINT_SCOPED_ASSIGNMENT(current_block_, blk);
 
-        if (!blk->HasTerminator()) {
+        if (blk->HasTerminator()) {
+            if (!blk->Terminator()->IsAnyOf<ir::Unreachable, PERMITTED_EXITS...>()) {
+                utils::Vector exits{Instruction::FriendlyNameOf<PERMITTED_EXITS>()...};
+                AddError(blk->Terminator(),
+                         "block: must end with one of: " + utils::Join(exits, ", "));
+            }
+        } else {
             AddError(blk, "block: does not end in a terminator instruction");
         }
 
@@ -407,26 +415,26 @@ class Validator {
             AddError(if_, If::kConditionOperandOffset, "if: condition must be a `bool` type");
         }
 
-        CheckBlock(if_->True());
+        CheckBlock<Exit, Continue, Return, Unreachable>(if_->True());
         if (!if_->False()->IsEmpty()) {
-            CheckBlock(if_->False());
+            CheckBlock<Exit, Continue, Return, Unreachable>(if_->False());
         }
     }
 
     void CheckLoop(Loop* l) {
         if (!l->Initializer()->IsEmpty()) {
-            CheckBlock(l->Initializer());
+            CheckBlock<NextIteration>(l->Initializer());
         }
-        CheckBlock(l->Body());
+        CheckBlock<Continue, ExitLoop, Return, Unreachable>(l->Body());
 
         if (!l->Continuing()->IsEmpty()) {
-            CheckBlock(l->Continuing());
+            CheckBlock<NextIteration, BreakIf>(l->Continuing());
         }
     }
 
     void CheckSwitch(Switch* s) {
         for (auto& cse : s->Cases()) {
-            CheckBlock(cse.block);
+            CheckBlock<ExitSwitch, Return, Unreachable>(cse.block);
         }
     }
 
