@@ -66,6 +66,9 @@ struct Robustness::State {
                     if (IsIgnoredResourceBinding(expr->Object()->RootIdentifier())) {
                         return;
                     }
+                    if (cfg.ignore_unsized_array && IsIndexAccessingUnsizedArray(expr)) {
+                        return;
+                    }
                     switch (ActionFor(expr)) {
                         case Action::kPredicate:
                             PredicateIndexAccessor(expr);
@@ -692,6 +695,13 @@ struct Robustness::State {
         }
         sem::BindingPoint bindingPoint = *globalVariable->BindingPoint();
         return cfg.bindings_ignored.find(bindingPoint) != cfg.bindings_ignored.cend();
+    }
+
+    /// @returns true if the expression is an IndexAccessorExpression whose object is an array with
+    /// RuntimeCount.
+    bool IsIndexAccessingUnsizedArray(const sem::IndexAccessorExpression* expr) {
+        const type::Array* array_type = expr->Object()->Type()->UnwrapRef()->As<type::Array>();
+        return array_type != nullptr && array_type->Count()->Is<type::RuntimeArrayCount>();
     }
 };
 

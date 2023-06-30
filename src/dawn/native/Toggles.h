@@ -101,6 +101,7 @@ enum class Toggle {
     VulkanClearGen12TextureWithCCSAmbiguateOnCreation,
     D3D12UseRootSignatureVersion1_1,
     VulkanUseImageRobustAccess2,
+    VulkanUseBufferRobustAccess2,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,

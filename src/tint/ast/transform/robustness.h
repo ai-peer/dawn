@@ -81,8 +81,11 @@ class Robustness final : public utils::Castable<Robustness, Transform> {
         /// Robustness action for variables in the 'workgroup' address space
         Action workgroup_action = Action::kDefault;
 
-        /// Bindings that should always be applied Actions::kIgnore on.
+        /// Bindings that should always be applied Actions::kIgnore on
         std::unordered_set<tint::sem::BindingPoint> bindings_ignored;
+
+        /// If we should ignore unsized arrays in robustness transform
+        bool ignore_unsized_array = false;
     };
 
     /// Constructor
