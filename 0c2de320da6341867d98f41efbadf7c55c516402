@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a04153_3f0b505b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-30T13:51:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22cf6fdf_c3828114",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-30T13:51:51Z",
+      "side": 1,
+      "message": "nit: Unsized",
+      "range": {
+        "startLine": 270,
+        "startChar": 15,
+        "endLine": 270,
+        "endChar": 21
+      },
+      "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
