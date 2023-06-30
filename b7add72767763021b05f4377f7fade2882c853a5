@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "06e00353_1c39a692",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-30T13:27:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbd91723_f8da9492",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 58
+      },
+      "revId": "b7add72767763021b05f4377f7fade2882c853a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "be358c0c_45b27784",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -54,6 +78,24 @@
       "writtenOn": "2023-06-29T22:47:13Z",
       "side": 1,
       "message": "why not dispatch directly to the platform obj in the macros?",
+      "revId": "b7add72767763021b05f4377f7fade2882c853a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0dccd3_dd3adafa",
+        "filename": "src/dawn/platform/metrics/Histogram.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-06-30T13:27:02Z",
+      "side": 1,
+      "message": "Yeah, I based this off of EventTracer.h/cpp, where I figured the goal was to keep the Platform type hidden from the header. But I guess it doesn\u0027t really matter as HistogramMacros.h should only be included by internal source files where the Platform object is already defined.",
+      "parentUuid": "a672b9e4_6d770211",
       "revId": "b7add72767763021b05f4377f7fade2882c853a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
