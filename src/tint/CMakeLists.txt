@@ -791,6 +791,8 @@ if(${TINT_BUILD_IR})
     ir/instruction.h
     ir/instruction_result.cc
     ir/instruction_result.h
+    ir/let.cc
+    ir/let.h
     ir/load.cc
     ir/load.h
     ir/location.h
@@ -1571,6 +1573,7 @@ if(TINT_BUILD_TESTS)
       ir/from_program_builtin_test.cc
       ir/from_program_call_test.cc
       ir/from_program_function_test.cc
+      ir/from_program_let_test.cc
       ir/from_program_literal_test.cc
       ir/from_program_materialize_test.cc
       ir/from_program_store_test.cc
@@ -1583,6 +1586,7 @@ if(TINT_BUILD_TESTS)
       ir/instruction_result_test.cc
       ir/instruction_test.cc
       ir/ir_test_helper.h
+      ir/let_test.cc
       ir/load_test.cc
       ir/loop_test.cc
       ir/module_test.cc
