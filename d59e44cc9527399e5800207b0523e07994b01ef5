@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f696413c_afa7e07c",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-06-30T21:55:07Z",
+      "side": 1,
+      "message": "are there f16 overloads of these that we should be testing?",
+      "revId": "d59e44cc9527399e5800207b0523e07994b01ef5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
