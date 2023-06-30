@@ -82,6 +82,7 @@
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/function.h"
+#include "src/tint/sem/index_accessor_expression.h"
 #include "src/tint/sem/load.h"
 #include "src/tint/sem/materialize.h"
 #include "src/tint/sem/member_accessor_expression.h"
@@ -509,67 +510,90 @@ class Impl {
     }
 
     void EmitCompoundAssignment(const ast::Expression* lhs_expr, ir::Value* rhs, ast::BinaryOp op) {
+        if (auto* access = lhs_expr->As<ast::AccessorExpression>()) {
+            if (program_->TypeOf(access->object)->UnwrapRef()->Is<type::Vector>()) {
+                // Vector accessors need to use LoadVectorElement / StoreVectorElement
+                auto vec = EmitExpression(access->object);
+                if (!vec) {
+                    return;
+                }
+
+                auto index = tint::Switch(
+                    program_->Sem().Get(access),
+                    [&](const sem::Swizzle* s) -> utils::Result<ir::Value*> {
+                        return builder_.Constant(s->Indices()[0]);
+                    },
+                    [&](const sem::IndexAccessorExpression* i) {
+                        return EmitExpression(i->Index()->Declaration());
+                    });
+                if (!index) {
+                    return;
+                }
+
+                // Extract the element.
+                auto* load =
+                    current_block_->Append(builder_.LoadVectorElement(vec.Get(), index.Get()));
+                auto* ty = load->Result()->Type();
+                auto* inst = current_block_->Append(BinaryOp(ty, load->Result(), rhs, op));
+
+                current_block_->Append(builder_.StoreVectorElement(vec.Get(), index.Get(), inst));
+            }
+        }
+
         auto lhs = EmitExpression(lhs_expr);
         if (!lhs) {
             return;
         }
 
         // Load from the LHS.
-        auto* lhs_value = builder_.Load(lhs.Get());
-        current_block_->Append(lhs_value);
+        auto* load = current_block_->Append(builder_.Load(lhs.Get()));
+        auto* ty = load->Result()->Type();
+        auto* inst = current_block_->Append(BinaryOp(ty, load->Result(), rhs, op));
+        current_block_->Append(builder_.Store(lhs.Get(), inst));
+    }
 
-        auto* ty = lhs_value->Result()->Type();
-
-        Binary* inst = nullptr;
+    ir::Binary* BinaryOp(const type::Type* ty, ir::Value* lhs, ir::Value* rhs, ast::BinaryOp op) {
         switch (op) {
             case ast::BinaryOp::kAnd:
-                inst = builder_.And(ty, lhs_value, rhs);
-                break;
+                return builder_.And(ty, lhs, rhs);
             case ast::BinaryOp::kOr:
-                inst = builder_.Or(ty, lhs_value, rhs);
-                break;
+                return builder_.Or(ty, lhs, rhs);
             case ast::BinaryOp::kXor:
-                inst = builder_.Xor(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kShiftLeft:
-                inst = builder_.ShiftLeft(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kShiftRight:
-                inst = builder_.ShiftRight(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kAdd:
-                inst = builder_.Add(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kSubtract:
-                inst = builder_.Subtract(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kMultiply:
-                inst = builder_.Multiply(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kDivide:
-                inst = builder_.Divide(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kModulo:
-                inst = builder_.Modulo(ty, lhs_value, rhs);
-                break;
-            case ast::BinaryOp::kLessThanEqual:
-            case ast::BinaryOp::kGreaterThanEqual:
-            case ast::BinaryOp::kGreaterThan:
-            case ast::BinaryOp::kLessThan:
-            case ast::BinaryOp::kNotEqual:
+                return builder_.Xor(ty, lhs, rhs);
             case ast::BinaryOp::kEqual:
+                return builder_.Equal(ty, lhs, rhs);
+            case ast::BinaryOp::kNotEqual:
+                return builder_.NotEqual(ty, lhs, rhs);
+            case ast::BinaryOp::kLessThan:
+                return builder_.LessThan(ty, lhs, rhs);
+            case ast::BinaryOp::kGreaterThan:
+                return builder_.GreaterThan(ty, lhs, rhs);
+            case ast::BinaryOp::kLessThanEqual:
+                return builder_.LessThanEqual(ty, lhs, rhs);
+            case ast::BinaryOp::kGreaterThanEqual:
+                return builder_.GreaterThanEqual(ty, lhs, rhs);
+            case ast::BinaryOp::kShiftLeft:
+                return builder_.ShiftLeft(ty, lhs, rhs);
+            case ast::BinaryOp::kShiftRight:
+                return builder_.ShiftRight(ty, lhs, rhs);
+            case ast::BinaryOp::kAdd:
+                return builder_.Add(ty, lhs, rhs);
+            case ast::BinaryOp::kSubtract:
+                return builder_.Subtract(ty, lhs, rhs);
+            case ast::BinaryOp::kMultiply:
+                return builder_.Multiply(ty, lhs, rhs);
+            case ast::BinaryOp::kDivide:
+                return builder_.Divide(ty, lhs, rhs);
+            case ast::BinaryOp::kModulo:
+                return builder_.Modulo(ty, lhs, rhs);
             case ast::BinaryOp::kLogicalAnd:
             case ast::BinaryOp::kLogicalOr:
-                TINT_ICE(IR, diagnostics_) << "invalid compound assignment";
-                return;
+                TINT_ICE(IR, diagnostics_) << "short circuit op should have already been handled";
+                return nullptr;
             case ast::BinaryOp::kNone:
                 TINT_ICE(IR, diagnostics_) << "missing binary operand type";
-                return;
+                return nullptr;
         }
-        current_block_->Append(inst);
-
-        auto store = builder_.Store(lhs.Get(), inst);
-        current_block_->Append(store);
     }
 
     void EmitBlock(const ast::BlockStatement* block) {
@@ -1223,63 +1247,9 @@ class Impl {
         auto* sem = program_->Sem().Get(expr);
         auto* ty = sem->Type()->Clone(clone_ctx_.type_ctx);
 
-        Binary* inst = nullptr;
-        switch (expr->op) {
-            case ast::BinaryOp::kAnd:
-                inst = builder_.And(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kOr:
-                inst = builder_.Or(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kXor:
-                inst = builder_.Xor(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kEqual:
-                inst = builder_.Equal(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kNotEqual:
-                inst = builder_.NotEqual(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kLessThan:
-                inst = builder_.LessThan(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kGreaterThan:
-                inst = builder_.GreaterThan(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kLessThanEqual:
-                inst = builder_.LessThanEqual(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kGreaterThanEqual:
-                inst = builder_.GreaterThanEqual(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kShiftLeft:
-                inst = builder_.ShiftLeft(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kShiftRight:
-                inst = builder_.ShiftRight(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kAdd:
-                inst = builder_.Add(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kSubtract:
-                inst = builder_.Subtract(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kMultiply:
-                inst = builder_.Multiply(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kDivide:
-                inst = builder_.Divide(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kModulo:
-                inst = builder_.Modulo(ty, lhs.Get(), rhs.Get());
-                break;
-            case ast::BinaryOp::kLogicalAnd:
-            case ast::BinaryOp::kLogicalOr:
-                TINT_ICE(IR, diagnostics_) << "short circuit op should have already been handled";
-                return utils::Failure;
-            case ast::BinaryOp::kNone:
-                TINT_ICE(IR, diagnostics_) << "missing binary operand type";
-                return utils::Failure;
+        Binary* inst = BinaryOp(ty, lhs.Get(), rhs.Get(), expr->op);
+        if (!inst) {
+            return utils::Failure;
         }
 
         current_block_->Append(inst);

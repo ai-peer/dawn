@@ -791,6 +791,8 @@ if(${TINT_BUILD_IR})
     ir/instruction_result.h
     ir/load.cc
     ir/load.h
+    ir/load_vector_element.cc
+    ir/load_vector_element.h
     ir/location.h
     ir/loop.cc
     ir/loop.h
@@ -806,6 +808,8 @@ if(${TINT_BUILD_IR})
     ir/return.h
     ir/store.cc
     ir/store.h
+    ir/store_vector_element.cc
+    ir/store_vector_element.h
     ir/switch.cc
     ir/switch.h
     ir/swizzle.cc
@@ -1578,6 +1582,7 @@ if(TINT_BUILD_TESTS)
       ir/instruction_test.cc
       ir/ir_test_helper.h
       ir/load_test.cc
+      ir/load_vector_element_test.cc
       ir/loop_test.cc
       ir/module_test.cc
       ir/multi_in_block_test.cc
@@ -1586,6 +1591,7 @@ if(TINT_BUILD_TESTS)
       ir/program_test_helper.h
       ir/return_test.cc
       ir/store_test.cc
+      ir/store_vector_element_test.cc
       ir/switch_test.cc
       ir/swizzle_test.cc
       ir/transform/add_empty_entry_point_test.cc
