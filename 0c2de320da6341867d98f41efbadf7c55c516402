@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5124f8ac_4842e2e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-06-30T18:18:59Z",
+      "side": 1,
+      "message": "It\u0027s worth thinking about another aspect, but I\u0027m not sure it affects the correctness of the change.\n\n\nIndices should not be allowed to be too large. If they are bigger than INT_MAX, then backends might treat them as negative. \n\nThe robustness clamping code first converts the index to u32, then uses \u0027min\u0027.  That\u0027s believed to be safe.  (The max buffer size is limited to make sure there are never more than INT_MAX elements in a runtime-sized array.)\n\nIf robustness is not applied, then negative indices are able to pass through to the backend.\n\nIn LLVM and SPIR-V array indices are considered to be *signed*.\nThere was a long discussion related to this in WGSL: https://github.com/gpuweb/gpuweb/issues/1135 \n\nSo let\u0027s split cases:\n- A negative index is passed to the backend.  \n    - If the runtime-sized array is the only thing in the buffer, then RBA2 will catch the problem.  That\u0027s good.\n    - If the runtime-sized array is not the first field in the buffer, then the code may access the wrong data still inside the buffer.  Backends will treat that as undefined behaviour. \n- A large unsigned index is passed to the backend.    If it\u0027s below INT_MAX, then RBA2 handles it. If it\u0027s above INT_MAX, then it\u0027s treated as a negative index.\n\n\nSo I think this ends up with the same concern I posted earlier.\nThis change is only safe if the runtime-sized array is the only thing in the buffer.",
+      "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22cf6fdf_c3828114",
         "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 3
