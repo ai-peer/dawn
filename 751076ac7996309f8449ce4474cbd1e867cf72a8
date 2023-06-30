@@ -16,6 +16,69 @@
       "message": "PTAL, thanks!",
       "revId": "751076ac7996309f8449ce4474cbd1e867cf72a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca3b2ca_04eac7a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-30T14:28:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "751076ac7996309f8449ce4474cbd1e867cf72a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5bac50_38f7b282",
+        "filename": "src/dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-30T14:28:55Z",
+      "side": 1,
+      "message": "nit: Resolve",
+      "range": {
+        "startLine": 384,
+        "startChar": 26,
+        "endLine": 384,
+        "endChar": 55
+      },
+      "revId": "751076ac7996309f8449ce4474cbd1e867cf72a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834918a5_315e028a",
+        "filename": "src/dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-06-30T14:28:55Z",
+      "side": 1,
+      "message": "nit: If we resolved the two queries in one call we wouldn\u0027t need to add the offset alignment IIRC.",
+      "range": {
+        "startLine": 519,
+        "startChar": 1,
+        "endLine": 522,
+        "endChar": 0
+      },
+      "revId": "751076ac7996309f8449ce4474cbd1e867cf72a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
