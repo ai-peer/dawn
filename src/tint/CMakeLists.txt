@@ -389,6 +389,8 @@ list(APPEND TINT_LIB_SRCS
   ast/transform/expand_compound_assignment.h
   ast/transform/first_index_offset.cc
   ast/transform/first_index_offset.h
+  ast/transform/fold_trivial_lets.cc
+  ast/transform/fold_trivial_lets.h
   ast/transform/for_loop_to_loop.cc
   ast/transform/for_loop_to_loop.h
   ast/transform/localize_struct_array_assignment.cc
