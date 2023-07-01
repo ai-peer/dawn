@@ -16,6 +16,241 @@
       "message": "ping",
       "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79792f3c_77b73208",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "\"A value is a result, ..., or a result computed by an instruction\"\n\nWhat does the first \"result\" refer to here, if not an instruction result? Is that for function param + block param?",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 39,
+        "endChar": 35
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b251f3_c89a196e",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "s/when/are",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 36
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0de3cc1_e4dfd1f3",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "`FromProgram`",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 21
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e33413d_2b805dc0",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "Nit: conversion",
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21c9bfe6_e9c81a7e",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "\"are internal\"",
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a104a3b5_8ce94f05",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "\"block\u0027s\"?\n\"block of\"?",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 20
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65a7de5_90664e0b",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "I think Ben is proposing we don\u0027t allow this in the body, and instead say that a non-empty `Continuing` block is an implicit `NextIteration`.",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 15
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5911f8_a737bc9f",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "Should this should \"real\" IR here? e.g.\n```\n%t0:i32 \u003d add b, %c\n%t1:i32 \u003d mul 4u, %k\n%t2:i32 \u003d sub %t0, %t1\n%v0:ptr\u003cfunction, i32, read_writer\u003e: var %t2\n```",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 15
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6edfb90_c32c8fbe",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "\"are converted\"",
+      "range": {
+        "startLine": 221,
+        "startChar": 46,
+        "endLine": 221,
+        "endChar": 60
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c9c3e7a_169d3bf1",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "Nit: s/then/the/",
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84da4e6_74923059",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-01T11:21:51Z",
+      "side": 1,
+      "message": "As discussed on chat, `BlockParam` is for the `MultiInBlock` cases, which are loop body and loop continuing. We\u0027re not passing stuff to the \"parent instruction\" in those cases, just to another block.",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 31
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
