@@ -53,6 +53,7 @@ class BlobCache;
 class CallbackTaskManager;
 class DynamicUploader;
 class ErrorScopeStack;
+class SharedTextureMemory;
 class OwnedCompilationMessages;
 struct CallbackTask;
 struct InternalPipelineStore;
@@ -285,6 +286,9 @@ class DeviceBase : public RefCountedWithExternalCount {
         const RenderBundleEncoderDescriptor* descriptor);
     RenderPipelineBase* APICreateRenderPipeline(const RenderPipelineDescriptor* descriptor);
     ExternalTextureBase* APICreateExternalTexture(const ExternalTextureDescriptor* descriptor);
+    SharedTextureMemoryBase* APIImportSharedTextureMemory(
+        const SharedTextureMemoryDescriptor* descriptor);
+    SharedFenceBase* APIImportSharedFence(const SharedFenceDescriptor* descriptor);
     SamplerBase* APICreateSampler(const SamplerDescriptor* descriptor);
     ShaderModuleBase* APICreateShaderModule(const ShaderModuleDescriptor* descriptor);
     ShaderModuleBase* APICreateErrorShaderModule(const ShaderModuleDescriptor* descriptor,
@@ -520,6 +524,10 @@ class DeviceBase : public RefCountedWithExternalCount {
         const ComputePipelineDescriptor* descriptor) = 0;
     virtual Ref<RenderPipelineBase> CreateUninitializedRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) = 0;
+    virtual ResultOrError<Ref<SharedTextureMemoryBase>> ImportSharedTextureMemoryImpl(
+        const SharedTextureMemoryDescriptor* descriptor);
+    virtual ResultOrError<Ref<SharedFenceBase>> ImportSharedFenceImpl(
+        const SharedFenceDescriptor* descriptor);
     virtual void SetLabelImpl();
 
     virtual ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsageImpl(
