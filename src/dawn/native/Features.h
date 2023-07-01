@@ -53,6 +53,22 @@ enum class Feature {
     DualSourceBlending,
     D3D11MultithreadProtected,
 
+    SharedTextureMemoryVkDedicatedAllocation,
+    SharedTextureMemoryAHardwareBuffer,
+    SharedTextureMemoryDmaBuf,
+    SharedTextureMemoryOpaqueFD,
+    SharedTextureMemoryZirconHandle,
+    SharedTextureMemoryDXGISharedHandle,
+    SharedTextureMemoryD3D11Texture2D,
+    SharedTextureMemoryIOSurface,
+    SharedTextureMemoryEGLImage,
+
+    SharedFenceVkSemaphoreOpaqueFD,
+    SharedFenceVkSemaphoreSyncFD,
+    SharedFenceVkSemaphoreZirconHandle,
+    SharedFenceDXGISharedHandle,
+    SharedFenceMTLSharedEvent,
+
     EnumCount,
     InvalidEnum = EnumCount,
     FeatureMin = TextureCompressionBC,
