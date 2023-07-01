@@ -51,6 +51,22 @@ enum class Feature {
     TransientAttachments,
     MSAARenderToSingleSampled,
 
+    SharedTextureMemoryVkDedicatedAllocation,
+    SharedTextureMemoryAHardwareBuffer,
+    SharedTextureMemoryDmaBuf,
+    SharedTextureMemoryOpaqueFD,
+    SharedTextureMemoryZirconHandle,
+    SharedTextureMemoryDXGISharedHandle,
+    SharedTextureMemoryD3D11Texture2D,
+    SharedTextureMemoryIOSurface,
+    SharedTextureMemoryEGLImage,
+
+    SharedFenceVkSemaphoreOpaqueFD,
+    SharedFenceVkSemaphoreSyncFD,
+    SharedFenceVkSemaphoreZirconHandle,
+    SharedFenceDXGISharedHandle,
+    SharedFenceMTLSharedEvent,
+
     EnumCount,
     InvalidEnum = EnumCount,
     FeatureMin = TextureCompressionBC,
