@@ -106,6 +106,26 @@ D3D11_BLEND D3DBlendFactor(wgpu::BlendFactor blendFactor) {
     }
 }
 
+// When a blend factor is defined for the alpha channel, any of the factors that don't
+// explicitly state that they apply to alpha should be treated as their explicitly-alpha
+// equivalents. See: https://github.com/gpuweb/gpuweb/issues/65
+D3D11_BLEND D3DBlendAlphaFactor(wgpu::BlendFactor factor) {
+    switch (factor) {
+        case wgpu::BlendFactor::Src:
+            return D3D11_BLEND_SRC_ALPHA;
+        case wgpu::BlendFactor::OneMinusSrc:
+            return D3D11_BLEND_INV_SRC_ALPHA;
+        case wgpu::BlendFactor::Dst:
+            return D3D11_BLEND_DEST_ALPHA;
+        case wgpu::BlendFactor::OneMinusDst:
+            return D3D11_BLEND_INV_DEST_ALPHA;
+
+        // Other blend factors translate to the same D3D11 enum as the color blend factors.
+        default:
+            return D3DBlendFactor(factor);
+    }
+}
+
 D3D11_BLEND_OP D3DBlendOperation(wgpu::BlendOperation blendOperation) {
     switch (blendOperation) {
         case wgpu::BlendOperation::Add:
@@ -230,10 +250,6 @@ void RenderPipeline::ApplyDepthStencilState(CommandRecordingContext* commandCont
     d3dDeviceContext1->OMSetDepthStencilState(mDepthStencilState.Get(), stencilReference);
 }
 
-bool RenderPipeline::GetUsesVertexOrInstanceIndex() const {
-    return mUsesVertexOrInstanceIndex;
-}
-
 void RenderPipeline::SetLabelImpl() {
     SetDebugName(ToBackend(GetDevice()), mRasterizerState.Get(), "Dawn_RenderPipeline", GetLabel());
     SetDebugName(ToBackend(GetDevice()), mInputLayout.Get(), "Dawn_RenderPipeline", GetLabel());
@@ -334,8 +350,8 @@ MaybeError RenderPipeline::InitializeBlendState() {
             }
             rtBlendDesc.DestBlend = D3DBlendFactor(descriptor->blend->color.dstFactor);
             rtBlendDesc.BlendOp = D3DBlendOperation(descriptor->blend->color.operation);
-            rtBlendDesc.SrcBlendAlpha = D3DBlendFactor(descriptor->blend->alpha.srcFactor);
-            rtBlendDesc.DestBlendAlpha = D3DBlendFactor(descriptor->blend->alpha.dstFactor);
+            rtBlendDesc.SrcBlendAlpha = D3DBlendAlphaFactor(descriptor->blend->alpha.srcFactor);
+            rtBlendDesc.DestBlendAlpha = D3DBlendAlphaFactor(descriptor->blend->alpha.dstFactor);
             rtBlendDesc.BlendOpAlpha = D3DBlendOperation(descriptor->blend->alpha.operation);
         }
         rtBlendDesc.RenderTargetWriteMask = D3DColorWriteMask(descriptor->writeMask);
@@ -414,8 +430,8 @@ MaybeError RenderPipeline::InitializeShaders() {
                                   shaderBlob.Data(), shaderBlob.Size(), nullptr, &mVertexShader),
                               "D3D11 create vertex shader"));
         DAWN_TRY(InitializeInputLayout(shaderBlob));
-        mUsesVertexOrInstanceIndex =
-            compiledShader[SingleShaderStage::Vertex].usesVertexOrInstanceIndex;
+        mUsesVertexIndex = compiledShader[SingleShaderStage::Vertex].usesVertexIndex;
+        mUsesInstanceIndex = compiledShader[SingleShaderStage::Vertex].usesInstanceIndex;
     }
 
     if (GetStageMask() & wgpu::ShaderStage::Fragment) {

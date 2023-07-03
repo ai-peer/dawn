@@ -15,29 +15,31 @@
 #ifndef SRC_TINT_IR_STORE_H_
 #define SRC_TINT_IR_STORE_H_
 
-#include "src/tint/ir/instruction.h"
+#include "src/tint/ir/operand_instruction.h"
 #include "src/tint/utils/castable.h"
 
 namespace tint::ir {
 
-/// An instruction in the IR.
-class Store : public utils::Castable<Store, Instruction> {
+/// A store instruction in the IR.
+class Store : public utils::Castable<Store, OperandInstruction<2, 0>> {
   public:
+    /// The offset in Operands() for the `to` value
+    static constexpr size_t kToOperandOffset = 0;
+
+    /// The offset in Operands() for the `from` value
+    static constexpr size_t kFromOperandOffset = 1;
+
     /// Constructor
     /// @param to the value to store too
     /// @param from the value being stored from
     Store(Value* to, Value* from);
-    Store(const Store& inst) = delete;
-    Store(Store&& inst) = delete;
     ~Store() override;
 
-    Store& operator=(const Store& inst) = delete;
-    Store& operator=(Store&& inst) = delete;
+    /// @returns the value being stored too
+    Value* To() { return operands_[kToOperandOffset]; }
 
-    /// the value being stored to
-    Value* to = nullptr;
-    /// the value being stored
-    Value* from = nullptr;
+    /// @returns the value being stored
+    Value* From() { return operands_[kFromOperandOffset]; }
 };
 
 }  // namespace tint::ir

@@ -17,9 +17,11 @@
 
 #include <array>
 #include <optional>
+#include <utility>
 
-#include "src/tint/ir/flow_node.h"
-#include "src/tint/symbol.h"
+#include "src/tint/ir/function_param.h"
+#include "src/tint/ir/location.h"
+#include "src/tint/ir/value.h"
 #include "src/tint/type/type.h"
 
 // Forward declarations
@@ -31,7 +33,7 @@ class FunctionTerminator;
 namespace tint::ir {
 
 /// An IR representation of a function
-class Function : public utils::Castable<Function, FlowNode> {
+class Function : public utils::Castable<Function, Value> {
   public:
     /// The pipeline stage for an entry point
     enum class PipelineStage {
@@ -45,58 +47,112 @@ class Function : public utils::Castable<Function, FlowNode> {
         kVertex,
     };
 
-    /// Attributes attached to return types
-    enum class ReturnAttribute {
-        /// No return attribute
-        kNone,
-        /// Location attribute
-        kLocation,
+    /// Builtin attached to return types
+    enum class ReturnBuiltin {
         /// Builtin Position attribute
         kPosition,
         /// Builtin FragDepth attribute
         kFragDepth,
         /// Builtin SampleMask
         kSampleMask,
-        /// Invariant attribute
-        kInvariant,
     };
 
     /// Constructor
-    /// @param n the function name
     /// @param rt the function return type
     /// @param stage the function stage
     /// @param wg_size the workgroup_size
-    Function(Symbol n,
-             type::Type* rt,
+    Function(const type::Type* rt,
              PipelineStage stage = PipelineStage::kUndefined,
              std::optional<std::array<uint32_t, 3>> wg_size = {});
     ~Function() override;
 
-    /// The function name
-    Symbol name;
+    /// Sets the function stage
+    /// @param stage the stage to set
+    void SetStage(PipelineStage stage) { pipeline_stage_ = stage; }
 
-    /// The pipeline stage for the function, `kUndefined` if the function is not an entry point
-    PipelineStage pipeline_stage = PipelineStage::kUndefined;
+    /// @returns the function pipeline stage
+    PipelineStage Stage() { return pipeline_stage_; }
 
-    /// If this is a `compute` entry point, holds the workgroup size information
-    std::optional<std::array<uint32_t, 3>> workgroup_size;
+    /// Sets the workgroup size
+    /// @param x the x size
+    /// @param y the y size
+    /// @param z the z size
+    void SetWorkgroupSize(uint32_t x, uint32_t y, uint32_t z) { workgroup_size_ = {x, y, z}; }
 
-    /// The function return type
-    const type::Type* return_type = nullptr;
-    /// The function return attributes if any
-    utils::Vector<ReturnAttribute, 1> return_attributes;
-    /// If the return attribute is `kLocation` this stores the location value.
-    std::optional<uint32_t> return_location;
+    /// Clears the workgroup size.
+    void ClearWorkgroupSize() { workgroup_size_ = {}; }
 
-    /// The start target is the first block in a function.
-    Block* start_target = nullptr;
-    /// The end target is the end of the function. It is used as the branch target if a return is
-    /// encountered in the function.
-    FunctionTerminator* end_target = nullptr;
+    /// @returns the workgroup size information
+    std::optional<std::array<uint32_t, 3>> WorkgroupSize() { return workgroup_size_; }
+
+    /// @returns the return type for the function
+    const type::Type* ReturnType() { return return_.type; }
+
+    /// Sets the return attributes
+    /// @param builtin the builtin to set
+    void SetReturnBuiltin(ReturnBuiltin builtin) {
+        TINT_ASSERT(IR, !return_.builtin.has_value());
+        return_.builtin = builtin;
+    }
+    /// @returns the return builtin attribute
+    std::optional<enum ReturnBuiltin> ReturnBuiltin() { return return_.builtin; }
+    /// Clears the return builtin attribute.
+    void ClearReturnBuiltin() { return_.builtin = {}; }
+
+    /// Sets the return location
+    /// @param loc the location to set
+    /// @param interp the interpolation
+    void SetReturnLocation(uint32_t loc, std::optional<builtin::Interpolation> interp) {
+        return_.location = {loc, interp};
+    }
+    /// @returns the return location
+    std::optional<Location> ReturnLocation() { return return_.location; }
+    /// Clears the return location attribute.
+    void ClearReturnLocation() { return_.location = {}; }
+
+    /// Sets the return as invariant
+    /// @param val the invariant value to set
+    void SetReturnInvariant(bool val) { return_.invariant = val; }
+    /// @returns the return invariant value
+    bool ReturnInvariant() { return return_.invariant; }
+
+    /// Sets the function parameters
+    /// @param params the function parameters
+    void SetParams(utils::VectorRef<FunctionParam*> params);
+
+    /// Sets the function parameters
+    /// @param params the function parameters
+    void SetParams(std::initializer_list<FunctionParam*> params);
+
+    /// @returns the function parameters
+    const utils::VectorRef<FunctionParam*> Params() { return params_; }
+
+    /// Sets the root block for the function
+    /// @param target the root block
+    void SetBlock(Block* target) {
+        TINT_ASSERT(IR, target != nullptr);
+        block_ = target;
+    }
+    /// @returns the function root block
+    ir::Block* Block() { return block_; }
+
+  private:
+    PipelineStage pipeline_stage_;
+    std::optional<std::array<uint32_t, 3>> workgroup_size_;
+
+    struct {
+        const type::Type* type = nullptr;
+        std::optional<enum ReturnBuiltin> builtin;
+        std::optional<Location> location;
+        bool invariant = false;
+    } return_;
+
+    utils::Vector<FunctionParam*, 1> params_;
+    ir::Block* block_ = nullptr;
 };
 
 utils::StringStream& operator<<(utils::StringStream& out, Function::PipelineStage value);
-utils::StringStream& operator<<(utils::StringStream& out, Function::ReturnAttribute value);
+utils::StringStream& operator<<(utils::StringStream& out, enum Function::ReturnBuiltin value);
 
 }  // namespace tint::ir
 

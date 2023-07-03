@@ -174,7 +174,9 @@ BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
 
     if (mUsage & wgpu::BufferUsage::CopyDst) {
         if (device->IsToggleEnabled(Toggle::UseBlitForDepth16UnormTextureToBufferCopy) ||
-            device->IsToggleEnabled(Toggle::UseBlitForDepth32FloatTextureToBufferCopy)) {
+            device->IsToggleEnabled(Toggle::UseBlitForDepth32FloatTextureToBufferCopy) ||
+            device->IsToggleEnabled(Toggle::UseBlitForStencilTextureToBufferCopy) ||
+            device->IsToggleEnabled(Toggle::UseBlitForSnormTextureToBufferCopy)) {
             mUsage |= kInternalStorageBuffer;
         }
     }

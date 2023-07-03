@@ -35,6 +35,8 @@ MaybeError InitializeDebugLayerFilters(ComPtr<ID3D11Device> d3d11Device) {
     static D3D11_MESSAGE_ID kDenyIds[] = {
         // D3D11 Debug layer warns no RTV set, however it is allowed.
         D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET,
+        // D3D11 Debug layer warns SetPrivateData() with same name more than once.
+        D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS,
     };
 
     // Filter out info/message and only create errors from warnings or worse.
@@ -71,7 +73,15 @@ bool PhysicalDevice::SupportsExternalImages() const {
 }
 
 bool PhysicalDevice::SupportsFeatureLevel(FeatureLevel featureLevel) const {
-    return featureLevel == FeatureLevel::Compatibility;
+    // TODO(dawn:1820): compare D3D11 feature levels with Dawn feature levels.
+    switch (featureLevel) {
+        case FeatureLevel::Core: {
+            return mFeatureLevel >= D3D_FEATURE_LEVEL_11_1;
+        }
+        case FeatureLevel::Compatibility: {
+            return true;
+        }
+    }
 }
 
 const DeviceInfo& PhysicalDevice::GetDeviceInfo() const {
@@ -123,8 +133,15 @@ MaybeError PhysicalDevice::InitializeImpl() {
 }
 
 void PhysicalDevice::InitializeSupportedFeaturesImpl() {
+    EnableFeature(Feature::Depth32FloatStencil8);
+    EnableFeature(Feature::DepthClipControl);
     EnableFeature(Feature::TextureCompressionBC);
     EnableFeature(Feature::SurfaceCapabilities);
+
+    // To import multi planar textures, we need to at least tier 2 support.
+    if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
+        EnableFeature(Feature::MultiPlanarFormats);
+    }
 }
 
 MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
@@ -145,6 +162,7 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
     uint32_t maxUAVsAllStages = mFeatureLevel == D3D_FEATURE_LEVEL_11_1
                                     ? D3D11_1_UAV_SLOT_COUNT
                                     : D3D11_PS_CS_UAV_REGISTER_COUNT;
+    mUAVSlotCount = maxUAVsAllStages;
     ASSERT(maxUAVsAllStages / 4 > limits->v1.maxStorageTexturesPerShaderStage);
     ASSERT(maxUAVsAllStages / 4 > limits->v1.maxStorageBuffersPerShaderStage);
     uint32_t maxUAVsPerStage = maxUAVsAllStages / 2;
@@ -161,9 +179,10 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
     limits->v1.maxSamplersPerShaderStage = D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT;
     limits->v1.maxColorAttachments = D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT;
 
-    // TODO(dawn:1721): support dynamic uniform buffers and storage buffers?
-    limits->v1.maxDynamicUniformBuffersPerPipelineLayout = 0;
-    limits->v1.maxDynamicStorageBuffersPerPipelineLayout = 0;
+    limits->v1.maxDynamicUniformBuffersPerPipelineLayout =
+        limits->v1.maxUniformBuffersPerShaderStage;
+    limits->v1.maxDynamicStorageBuffersPerPipelineLayout =
+        limits->v1.maxStorageBuffersPerShaderStage;
 
     // https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/sm5-attributes-numthreads
     limits->v1.maxComputeWorkgroupSizeX = D3D11_CS_THREAD_GROUP_MAX_X;
@@ -181,8 +200,18 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
 
     // Max number of "constants" where each constant is a 16-byte float4
     limits->v1.maxUniformBufferBindingSize = D3D11_REQ_CONSTANT_BUFFER_ELEMENT_COUNT * 16;
-    // D3D11 has no documented limit on the size of a storage buffer binding.
-    limits->v1.maxStorageBufferBindingSize = kAssumedMaxBufferSize;
+
+    if (gpu_info::IsQualcomm(GetVendorId())) {
+        // limit of number of texels in a buffer == (1 << 27)
+        // D3D11_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP
+        // This limit doesn't apply to a raw buffer, but only applies to
+        // typed, or structured buffer. so this could be a QC driver bug.
+        limits->v1.maxStorageBufferBindingSize = uint64_t(1)
+                                                 << D3D11_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP;
+    } else {
+        limits->v1.maxStorageBufferBindingSize = kAssumedMaxBufferSize;
+    }
+
     // D3D11 has no documented limit on the buffer size.
     limits->v1.maxBufferSize = kAssumedMaxBufferSize;
 
@@ -195,9 +224,16 @@ MaybeError PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     return {};
 }
 
+void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adpterToggles) const {
+    // D3D11 must use FXC, not DXC.
+    adpterToggles->ForceSet(Toggle::UseDXC, false);
+}
+
 void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
     // D3D11 can only clear RTV with float values.
     deviceToggles->Default(Toggle::ApplyClearBigIntegerColorValueWithDraw, true);
+    // TODO(dawn:1848): Support depth-stencil texture write.
+    deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,

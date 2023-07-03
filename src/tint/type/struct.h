@@ -15,11 +15,11 @@
 #ifndef SRC_TINT_TYPE_STRUCT_H_
 #define SRC_TINT_TYPE_STRUCT_H_
 
-#include <stdint.h>
-
+#include <cstdint>
 #include <optional>
 #include <string>
 #include <unordered_set>
+#include <utility>
 
 #include "src/tint/builtin/address_space.h"
 #include "src/tint/builtin/interpolation.h"
@@ -44,6 +44,14 @@ enum class PipelineStageUsage {
     kComputeInput,
     kComputeOutput,
 };
+
+enum StructFlag {
+    /// The structure is a block-decorated structure (for SPIR-V or GLSL).
+    kBlock,
+};
+
+/// An alias to utils::EnumSet<StructFlag>
+using StructFlags = utils::EnumSet<StructFlag>;
 
 /// Struct holds the Type information for structures.
 class Struct : public utils::Castable<Struct, Type> {
@@ -94,6 +102,13 @@ class Struct : public utils::Castable<Struct, Type> {
     /// alignment padding
     uint32_t SizeNoPadding() const { return size_no_padding_; }
 
+    /// @returns the structure flags
+    type::StructFlags StructFlags() const { return struct_flags_; }
+
+    /// Set a structure flag.
+    /// @param flag the flag to set
+    void SetStructFlag(StructFlag flag) { struct_flags_.Add(flag); }
+
     /// Adds the AddressSpace usage to the structure.
     /// @param usage the storage usage
     void AddUsage(builtin::AddressSpace usage) { address_space_usage_.emplace(usage); }
@@ -143,6 +158,13 @@ class Struct : public utils::Castable<Struct, Type> {
     /// @note only structures returned by builtins may be abstract (e.g. modf, frexp)
     utils::VectorRef<const Struct*> ConcreteTypes() const { return concrete_types_; }
 
+    /// @copydoc Type::Elements
+    TypeAndCount Elements(const Type* type_if_invalid = nullptr,
+                          uint32_t count_if_invalid = 0) const override;
+
+    /// @copydoc Type::Element
+    const Type* Element(uint32_t index) const override;
+
     /// @param ctx the clone context
     /// @returns a clone of this type
     Struct* Clone(CloneContext& ctx) const override;
@@ -153,6 +175,7 @@ class Struct : public utils::Castable<Struct, Type> {
     const uint32_t align_;
     const uint32_t size_;
     const uint32_t size_no_padding_;
+    type::StructFlags struct_flags_;
     std::unordered_set<builtin::AddressSpace> address_space_usage_;
     std::unordered_set<PipelineStageUsage> pipeline_stage_uses_;
     utils::Vector<const Struct*, 2> concrete_types_;
@@ -162,6 +185,8 @@ class Struct : public utils::Castable<Struct, Type> {
 struct StructMemberAttributes {
     /// The value of a `@location` attribute
     std::optional<uint32_t> location;
+    /// The value of a `@index` attribute
+    std::optional<uint32_t> index;
     /// The value of a `@builtin` attribute
     std::optional<builtin::BuiltinValue> builtin;
     /// The values of a `@interpolate` attribute
@@ -220,6 +245,10 @@ class StructMember : public utils::Castable<StructMember, Node> {
     /// @returns the optional attributes
     const StructMemberAttributes& Attributes() const { return attributes_; }
 
+    /// Set the attributes of the struct member.
+    /// @param attributes the new attributes
+    void SetAttributes(StructMemberAttributes&& attributes) { attributes_ = std::move(attributes); }
+
     /// @param ctx the clone context
     /// @returns a clone of this struct member
     StructMember* Clone(CloneContext& ctx) const;
@@ -232,7 +261,7 @@ class StructMember : public utils::Castable<StructMember, Node> {
     const uint32_t offset_;
     const uint32_t align_;
     const uint32_t size_;
-    const StructMemberAttributes attributes_;
+    StructMemberAttributes attributes_;
 };
 
 }  // namespace tint::type

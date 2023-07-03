@@ -586,7 +586,7 @@ bool match_ptr(MatchState&, const type::Type* ty, Number& S, const type::Type*& 
 }
 
 const type::Pointer* build_ptr(MatchState& state, Number S, const type::Type* T, Number& A) {
-    return state.builder.create<type::Pointer>(T, static_cast<builtin::AddressSpace>(S.Value()),
+    return state.builder.create<type::Pointer>(static_cast<builtin::AddressSpace>(S.Value()), T,
                                                static_cast<builtin::Access>(A.Value()));
 }
 
@@ -1362,7 +1362,7 @@ IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
         }
         auto eval_stage = match.overload->const_eval_fn ? sem::EvaluationStage::kConstant
                                                         : sem::EvaluationStage::kRuntime;
-        auto* target = constructors.GetOrCreate(match, [&]() {
+        auto* target = constructors.GetOrCreate(match, [&] {
             return builder.create<sem::ValueConstructor>(match.return_type, std::move(params),
                                                          eval_stage);
         });
@@ -1370,7 +1370,7 @@ IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
     }
 
     // Conversion.
-    auto* target = converters.GetOrCreate(match, [&]() {
+    auto* target = converters.GetOrCreate(match, [&] {
         auto param = builder.create<sem::Parameter>(
             nullptr, 0u, match.parameters[0].type, builtin::AddressSpace::kUndefined,
             builtin::Access::kUndefined, match.parameters[0].usage);

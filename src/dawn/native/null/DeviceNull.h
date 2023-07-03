@@ -122,6 +122,8 @@ class Device final : public DeviceBase {
 
     float GetTimestampPeriodInNS() const override;
 
+    bool IsResolveTextureBlitWithDrawSupported() const override;
+
     void ForceEventualFlushOfCommands() override;
 
   private:
@@ -193,6 +195,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
     MaybeError ValidateFeatureSupportedWithTogglesImpl(wgpu::FeatureName feature,
                                                        const TogglesState& toggles) const override;
 
+    void SetupBackendAdapterToggles(TogglesState* adapterToggles) const override;
     void SetupBackendDeviceToggles(TogglesState* deviceToggles) const override;
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(AdapterBase* adapter,
                                                     const DeviceDescriptor* descriptor,
@@ -311,7 +314,7 @@ class SwapChain final : public SwapChainBase {
     Ref<Texture> mTexture;
 
     MaybeError PresentImpl() override;
-    ResultOrError<Ref<TextureViewBase>> GetCurrentTextureViewImpl() override;
+    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() override;
     void DetachFromSurfaceImpl() override;
 };
 

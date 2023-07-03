@@ -19,7 +19,7 @@
 
 namespace tint::writer::spirv {
 
-std::string Disassemble(const std::vector<uint32_t>& data) {
+std::string Disassemble(const std::vector<uint32_t>& data, uint32_t options /* = 0u */) {
     std::string spv_errors;
     spv_target_env target_env = SPV_ENV_UNIVERSAL_1_0;
 
@@ -49,7 +49,7 @@ std::string Disassemble(const std::vector<uint32_t>& data) {
     tools.SetMessageConsumer(msg_consumer);
 
     std::string result;
-    if (!tools.Disassemble(data, &result, SPV_BINARY_TO_TEXT_OPTION_NO_HEADER)) {
+    if (!tools.Disassemble(data, &result, SPV_BINARY_TO_TEXT_OPTION_NO_HEADER | options)) {
         return "*** Invalid SPIR-V ***\n" + spv_errors;
     }
     return result;
@@ -63,14 +63,14 @@ std::string DumpModule(Module& module) {
     BinaryWriter writer;
     writer.WriteHeader(module.IdBound());
     writer.WriteModule(&module);
-    return Disassemble(writer.result());
+    return Disassemble(writer.Result());
 }
 
 std::string DumpInstruction(const Instruction& inst) {
     BinaryWriter writer;
     writer.WriteHeader(kDefaultMaxIdBound);
     writer.WriteInstruction(inst);
-    return Disassemble(writer.result());
+    return Disassemble(writer.Result());
 }
 
 std::string DumpInstructions(const InstructionList& insts) {
@@ -79,7 +79,7 @@ std::string DumpInstructions(const InstructionList& insts) {
     for (const auto& inst : insts) {
         writer.WriteInstruction(inst);
     }
-    return Disassemble(writer.result());
+    return Disassemble(writer.Result());
 }
 
 }  // namespace tint::writer::spirv

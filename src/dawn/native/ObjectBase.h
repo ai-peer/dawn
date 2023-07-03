@@ -19,6 +19,7 @@
 #include <string>
 
 #include "dawn/common/LinkedList.h"
+#include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 #include "dawn/native/Forward.h"
 
@@ -87,6 +88,7 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     ~ApiObjectBase() override;
 
     virtual ObjectType GetType() const = 0;
+    void SetLabel(std::string label);
     const std::string& GetLabel() const;
 
     virtual void FormatLabel(absl::FormatSink* s) const;

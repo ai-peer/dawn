@@ -158,7 +158,7 @@ class TypedefType(Type):
 class NativeType(Type):
     def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data, native=True)
-        self.is_wire_transparent = True
+        self.is_wire_transparent = json_data.get('wire transparent', True)
 
 
 # Methods and structures are both "records", so record members correspond to
@@ -705,6 +705,13 @@ def as_cType(c_prefix, name):
         return c_prefix + name.CamelCase()
 
 
+def as_cReturnType(c_prefix, typ):
+    if typ.category != 'bitmask':
+        return as_cType(c_prefix, typ.name)
+    else:
+        return as_cType(c_prefix, typ.name) + 'Flags'
+
+
 def as_cppType(name):
     if name.native:
         return name.concatcase()
@@ -819,15 +826,9 @@ def as_formatType(typ):
 
 def c_methods(params, typ):
     return typ.methods + [
-        x for x in [
-            Method(Name('reference'), params['types']['void'], [], False,
-                   {'tags': ['dawn', 'emscripten']}),
-            Method(Name('release'), params['types']['void'], [], False,
-                   {'tags': ['dawn', 'emscripten']}),
-        ] if item_is_enabled(params['enabled_tags'], x.json_data)
-        and not item_is_disabled(params['disabled_tags'], x.json_data)
+        Method(Name('reference'), params['types']['void'], [], False, {}),
+        Method(Name('release'), params['types']['void'], [], False, {}),
     ]
-
 
 def get_c_methods_sorted_by_name(api_params):
     unsorted = [(as_MethodSuffix(typ.name, method.name), typ, method) \
@@ -882,6 +883,7 @@ def make_base_render_params(metadata):
             'as_MethodSuffix': as_MethodSuffix,
             'as_cProc': as_cProc,
             'as_cType': lambda name: as_cType(c_prefix, name),
+            'as_cReturnType': lambda typ: as_cReturnType(c_prefix, typ),
             'as_cppType': as_cppType,
             'as_jsEnumValue': as_jsEnumValue,
             'convert_cType_to_cppType': convert_cType_to_cppType,

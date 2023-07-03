@@ -18,6 +18,7 @@
 #include <cstdint>
 #include <iterator>
 
+#include "src/tint/debug.h"
 #include "src/tint/utils/bitcast.h"
 #include "src/tint/utils/castable.h"
 #include "src/tint/utils/traits.h"
@@ -94,7 +95,8 @@ struct CanReinterpretSlice<MODE, T, T> {
 ///  * `FROM` and `TO` are pointers to CastableBase (or derived), and the pointee type of `TO` is of
 ///     the same type as, or is an ancestor of the pointee type of `FROM`.
 template <ReinterpretMode MODE, typename TO, typename FROM>
-static constexpr bool CanReinterpretSlice = detail::CanReinterpretSlice<MODE, TO, FROM>::value;
+static constexpr bool CanReinterpretSlice =
+    utils::detail::CanReinterpretSlice<MODE, TO, FROM>::value;
 
 /// A slice represents a contigious array of elements of type T.
 template <typename T>
@@ -116,6 +118,15 @@ struct Slice {
 
     /// Constructor
     Slice(EmptyType) {}  // NOLINT
+
+    /// Copy constructor with covariance / const conversion
+    /// @param other the vector to copy
+    /// @see CanReinterpretSlice for rules about conversion
+    template <typename U,
+              typename = std::enable_if_t<CanReinterpretSlice<ReinterpretMode::kSafe, T, U>>>
+    Slice(const Slice<U>& other) {  // NOLINT(runtime/explicit)
+        *this = other.template Reinterpret<T, ReinterpretMode::kSafe>();
+    }
 
     /// Constructor
     /// @param d pointer to the first element in the slice
@@ -150,27 +161,68 @@ struct Slice {
     /// @return true if the slice length is zero
     bool IsEmpty() const { return len == 0; }
 
-    /// Index operator
-    /// @param i the element index. Must be less than `len`.
-    /// @returns a reference to the i'th element.
-    T& operator[](size_t i) { return data[i]; }
+    /// @return the length of the slice
+    size_t Length() const { return len; }
+
+    /// Create a new slice that represents an offset into this slice
+    /// @param offset the number of elements to offset
+    /// @return the new slice
+    Slice<T> Offset(size_t offset) const {
+        if (offset > len) {
+            offset = len;
+        }
+        return Slice(data + offset, len - offset, cap - offset);
+    }
+
+    /// Create a new slice that represents a truncated version of this slice
+    /// @param length the new length
+    /// @return a new slice that is truncated to `length` elements
+    Slice<T> Truncate(size_t length) const {
+        if (length > len) {
+            length = len;
+        }
+        return Slice(data, length, length);
+    }
 
     /// Index operator
     /// @param i the element index. Must be less than `len`.
     /// @returns a reference to the i'th element.
-    const T& operator[](size_t i) const { return data[i]; }
+    T& operator[](size_t i) {
+        TINT_ASSERT(Utils, i < Length());
+        return data[i];
+    }
+
+    /// Index operator
+    /// @param i the element index. Must be less than `len`.
+    /// @returns a reference to the i'th element.
+    const T& operator[](size_t i) const {
+        TINT_ASSERT(Utils, i < Length());
+        return data[i];
+    }
 
     /// @returns a reference to the first element in the vector
-    T& Front() { return data[0]; }
+    T& Front() {
+        TINT_ASSERT(Utils, !IsEmpty());
+        return data[0];
+    }
 
     /// @returns a reference to the first element in the vector
-    const T& Front() const { return data[0]; }
+    const T& Front() const {
+        TINT_ASSERT(Utils, !IsEmpty());
+        return data[0];
+    }
 
     /// @returns a reference to the last element in the vector
-    T& Back() { return data[len - 1]; }
+    T& Back() {
+        TINT_ASSERT(Utils, !IsEmpty());
+        return data[len - 1];
+    }
 
     /// @returns a reference to the last element in the vector
-    const T& Back() const { return data[len - 1]; }
+    const T& Back() const {
+        TINT_ASSERT(Utils, !IsEmpty());
+        return data[len - 1];
+    }
 
     /// @returns a pointer to the first element in the vector
     T* begin() { return data; }

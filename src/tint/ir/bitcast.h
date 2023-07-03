@@ -23,16 +23,17 @@ namespace tint::ir {
 /// A bitcast instruction in the IR.
 class Bitcast : public utils::Castable<Bitcast, Call> {
   public:
+    /// The offset in Operands() for the value
+    static constexpr size_t kValueOperandOffset = 0;
+
     /// Constructor
-    /// @param type the result type
+    /// @param result the result value
     /// @param val the value being bitcast
-    Bitcast(const type::Type* type, Value* val);
-    Bitcast(const Bitcast& inst) = delete;
-    Bitcast(Bitcast&& inst) = delete;
+    Bitcast(InstructionResult* result, Value* val);
     ~Bitcast() override;
 
-    Bitcast& operator=(const Bitcast& inst) = delete;
-    Bitcast& operator=(Bitcast&& inst) = delete;
+    /// @returns the operand value
+    Value* Val() { return operands_[kValueOperandOffset]; }
 };
 
 }  // namespace tint::ir

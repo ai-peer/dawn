@@ -23,16 +23,14 @@ namespace tint::ir {
 /// A constructor instruction in the IR.
 class Construct : public utils::Castable<Construct, Call> {
   public:
-    /// Constructor
-    /// @param type the result type
-    /// @param args the constructor arguments
-    Construct(const type::Type* type, utils::VectorRef<Value*> args);
-    Construct(const Construct& inst) = delete;
-    Construct(Construct&& inst) = delete;
-    ~Construct() override;
+    /// The base offset in Operands() for the args
+    static constexpr size_t kArgsOperandOffset = 0;
 
-    Construct& operator=(const Construct& inst) = delete;
-    Construct& operator=(Construct&& inst) = delete;
+    /// Constructor
+    /// @param result the result value
+    /// @param args the constructor arguments
+    explicit Construct(InstructionResult* result, utils::VectorRef<Value*> args = utils::Empty);
+    ~Construct() override;
 };
 
 }  // namespace tint::ir

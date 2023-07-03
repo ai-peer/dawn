@@ -17,32 +17,43 @@
 
 #include "src/tint/builtin/access.h"
 #include "src/tint/builtin/address_space.h"
-#include "src/tint/ir/instruction.h"
+#include "src/tint/ir/binding_point.h"
+#include "src/tint/ir/operand_instruction.h"
+#include "src/tint/type/pointer.h"
 #include "src/tint/utils/castable.h"
+#include "src/tint/utils/vector.h"
 
 namespace tint::ir {
 
-/// An instruction in the IR.
-class Var : public utils::Castable<Var, Instruction> {
+/// A var instruction in the IR.
+class Var : public utils::Castable<Var, OperandInstruction<1, 1>> {
   public:
+    /// The offset in Operands() for the initializer
+    static constexpr size_t kInitializerOperandOffset = 0;
+
     /// Constructor
-    /// @param type the type of the var
-    explicit Var(const type::Type* type);
-    Var(const Var& inst) = delete;
-    Var(Var&& inst) = delete;
+    /// @param result the result value
+    explicit Var(InstructionResult* result);
     ~Var() override;
 
-    Var& operator=(const Var& inst) = delete;
-    Var& operator=(Var&& inst) = delete;
+    /// Sets the var initializer
+    /// @param initializer the initializer
+    void SetInitializer(Value* initializer);
+    /// @returns the initializer
+    Value* Initializer() { return operands_[kInitializerOperandOffset]; }
 
-    /// @returns the type of the var
-    const type::Type* Type() const override { return type; }
+    /// Sets the binding point
+    /// @param group the group
+    /// @param binding the binding
+    void SetBindingPoint(uint32_t group, uint32_t binding) { binding_point_ = {group, binding}; }
+    /// @returns the binding points if `Attributes` contains `kBindingPoint`
+    std::optional<struct BindingPoint> BindingPoint() { return binding_point_; }
 
-    /// the result type of the instruction
-    const type::Type* type = nullptr;
+    /// Destroys this instruction along with any assignment instructions, if the var is never read.
+    void DestroyIfOnlyAssigned();
 
-    /// The optional initializer
-    Value* initializer = nullptr;
+  private:
+    std::optional<struct BindingPoint> binding_point_;
 };
 
 }  // namespace tint::ir

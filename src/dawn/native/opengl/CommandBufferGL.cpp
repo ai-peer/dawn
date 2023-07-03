@@ -238,10 +238,10 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
 
   private:
     void ApplyBindGroup(const OpenGLFunctions& gl,
-                        BindGroupIndex index,
+                        BindGroupIndex groupIndex,
                         BindGroupBase* group,
                         const ityp::vector<BindingIndex, uint64_t>& dynamicOffsets) {
-        const auto& indices = ToBackend(mPipelineLayout)->GetBindingIndexInfo()[index];
+        const auto& indices = ToBackend(mPipelineLayout)->GetBindingIndexInfo()[groupIndex];
 
         for (BindingIndex bindingIndex{0}; bindingIndex < group->GetLayout()->GetBindingCount();
              ++bindingIndex) {
@@ -439,10 +439,6 @@ Extent3D ComputeTextureCopyExtent(const TextureCopy& textureCopy, const Extent3D
     return validTextureCopyExtent;
 }
 
-bool TextureFormatIsSnorm(wgpu::TextureFormat format) {
-    return format == wgpu::TextureFormat::RGBA8Snorm || format == wgpu::TextureFormat::RG8Snorm ||
-           format == wgpu::TextureFormat::R8Snorm;
-}
 }  // namespace
 
 CommandBuffer::CommandBuffer(CommandEncoder* encoder, const CommandBufferDescriptor* descriptor)
@@ -541,8 +537,6 @@ MaybeError CommandBuffer::Execute() {
                     dst.aspect == Aspect::Stencil,
                     "Copies to stencil textures are unsupported on the OpenGL backend.");
 
-                ASSERT(dst.aspect == Aspect::Color);
-
                 buffer->EnsureDataInitialized();
                 SubresourceRange range = GetSubresourcesAffectedByCopy(dst, copy->copySize);
                 if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
@@ -584,11 +578,10 @@ MaybeError CommandBuffer::Execute() {
                 const GLFormat& format = texture->GetGLFormat();
                 GLenum target = texture->GetGLTarget();
 
-                // TODO(crbug.com/dawn/667): Implement validation in WebGPU/Compat to
-                // avoid this codepath. OpenGL does not support readback from non-renderable
-                // texture formats.
+                // For SNORM texture formats, Dawn translates CopyTextureToBuffer command to a
+                // compute shader pass.
                 if (formatInfo.isCompressed ||
-                    (TextureFormatIsSnorm(formatInfo.format) &&
+                    (formatInfo.IsSnorm() &&
                      GetDevice()->IsToggleEnabled(Toggle::DisableSnormRead))) {
                     UNREACHABLE();
                 }

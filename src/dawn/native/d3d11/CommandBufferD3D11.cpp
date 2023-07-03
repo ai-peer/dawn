@@ -33,6 +33,7 @@
 #include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/Forward.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
+#include "dawn/native/d3d11/QuerySetD3D11.h"
 #include "dawn/native/d3d11/RenderPipelineD3D11.h"
 #include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/native/d3d11/UtilsD3D11.h"
@@ -283,7 +284,17 @@ MaybeError CommandBuffer::Execute() {
             }
 
             case Command::ResolveQuerySet: {
-                return DAWN_UNIMPLEMENTED_ERROR("ResolveQuerySet unimplemented");
+                ResolveQuerySetCmd* cmd = mCommands.NextCommand<ResolveQuerySetCmd>();
+                QuerySet* querySet = ToBackend(cmd->querySet.Get());
+                uint32_t firstQuery = cmd->firstQuery;
+                uint32_t queryCount = cmd->queryCount;
+                Buffer* destination = ToBackend(cmd->destination.Get());
+                uint64_t destinationOffset = cmd->destinationOffset;
+
+                DAWN_TRY(querySet->Resolve(commandContext, firstQuery, queryCount, destination,
+                                           destinationOffset));
+                destination->MarkUsedInPendingCommands();
+                break;
             }
 
             case Command::WriteTimestamp: {
@@ -308,7 +319,7 @@ MaybeError CommandBuffer::Execute() {
             case Command::InsertDebugMarker:
             case Command::PopDebugGroup:
             case Command::PushDebugGroup: {
-                HandleDebugCommands(commandContext, type);
+                HandleDebugCommands(commandContext, &mCommands, type);
                 break;
             }
 
@@ -322,7 +333,7 @@ MaybeError CommandBuffer::Execute() {
 
 MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandContext) {
     ComputePipeline* lastPipeline = nullptr;
-    BindGroupTracker bindGroupTracker(commandContext);
+    BindGroupTracker bindGroupTracker(commandContext, /*isRenderPass=*/false);
 
     Command type;
     while (mCommands.NextCommandId(&type)) {
@@ -393,7 +404,7 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
             case Command::InsertDebugMarker:
             case Command::PopDebugGroup:
             case Command::PushDebugGroup: {
-                HandleDebugCommands(commandContext, type);
+                HandleDebugCommands(commandContext, &mCommands, type);
                 break;
             }
 
@@ -420,7 +431,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     for (ColorAttachmentIndex i :
          IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
         TextureView* colorTextureView = ToBackend(renderPass->colorAttachments[i].view.Get());
-        DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i], colorTextureView->CreateD3D11RenderTargetView());
+        DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i], colorTextureView->CreateD3D11RenderTargetView(
+                                                       colorTextureView->GetBaseMipLevel()));
         d3d11RenderTargetViewPtrs[i] = d3d11RenderTargetViews[i].Get();
         if (renderPass->colorAttachments[i].loadOp == wgpu::LoadOp::Clear) {
             std::array<float, 4> clearColor =
@@ -440,7 +452,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
         TextureView* depthStencilTextureView =
             ToBackend(renderPass->depthStencilAttachment.view.Get());
         DAWN_TRY_ASSIGN(d3d11DepthStencilView,
-                        depthStencilTextureView->CreateD3D11DepthStencilView(false, false));
+                        depthStencilTextureView->CreateD3D11DepthStencilView(
+                            attachmentInfo->depthReadOnly, attachmentInfo->stencilReadOnly,
+                            depthStencilTextureView->GetBaseMipLevel()));
         UINT clearFlags = 0;
         if (attachmentFormat.HasDepth() &&
             renderPass->depthStencilAttachment.depthLoadOp == wgpu::LoadOp::Clear) {
@@ -462,14 +476,14 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                                             d3d11DepthStencilView.Get());
 
     // Set viewport
-    D3D11_VIEWPORT viewport;
-    viewport.TopLeftX = 0;
-    viewport.TopLeftY = 0;
-    viewport.Width = renderPass->width;
-    viewport.Height = renderPass->height;
-    viewport.MinDepth = 0.0f;
-    viewport.MaxDepth = 1.0f;
-    d3d11DeviceContext1->RSSetViewports(1, &viewport);
+    D3D11_VIEWPORT defautViewport;
+    defautViewport.TopLeftX = 0;
+    defautViewport.TopLeftY = 0;
+    defautViewport.Width = renderPass->width;
+    defautViewport.Height = renderPass->height;
+    defautViewport.MinDepth = 0.0f;
+    defautViewport.MaxDepth = 1.0f;
+    d3d11DeviceContext1->RSSetViewports(1, &defautViewport);
 
     // Set scissor
     D3D11_RECT scissor;
@@ -480,7 +494,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     d3d11DeviceContext1->RSSetScissorRects(1, &scissor);
 
     RenderPipeline* lastPipeline = nullptr;
-    BindGroupTracker bindGroupTracker(commandContext);
+    BindGroupTracker bindGroupTracker(commandContext, /*isRenderPass=*/true);
     VertexBufferTracker vertexBufferTracker(commandContext);
     std::array<float, 4> blendColor = {0.0f, 0.0f, 0.0f, 0.0f};
     uint32_t stencilReference = 0;
@@ -523,7 +537,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DAWN_TRY(bindGroupTracker.Apply());
                 vertexBufferTracker.Apply(lastPipeline);
 
-                if (lastPipeline->GetUsesVertexOrInstanceIndex()) {
+                if (lastPipeline->UsesVertexIndex() || lastPipeline->UsesInstanceIndex()) {
                     // Copy StartVertexLocation and StartInstanceLocation into the uniform buffer
                     // for built-in variables.
                     uint64_t offset =
@@ -549,7 +563,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 DAWN_TRY(bindGroupTracker.Apply());
                 vertexBufferTracker.Apply(lastPipeline);
 
-                if (lastPipeline->GetUsesVertexOrInstanceIndex()) {
+                if (lastPipeline->UsesVertexIndex() || lastPipeline->UsesInstanceIndex()) {
                     // Copy StartVertexLocation and StartInstanceLocation into the uniform buffer
                     // for built-in variables.
                     uint64_t offset =
@@ -612,7 +626,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             case Command::InsertDebugMarker:
             case Command::PopDebugGroup:
             case Command::PushDebugGroup: {
-                HandleDebugCommands(commandContext, type);
+                HandleDebugCommands(commandContext, iter, type);
                 break;
             }
 
@@ -658,7 +672,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                     d3d11DeviceContext->ResolveSubresource(
                         resolveTexture->GetD3D11Resource(), dstSubresource,
                         colorTexture->GetD3D11Resource(), srcSubresource,
-                        resolveTexture->GetD3D11Format());
+                        d3d::DXGITextureFormat(attachment.resolveTarget->GetFormat().format));
                 }
 
                 return {};
@@ -720,11 +734,17 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             }
 
             case Command::BeginOcclusionQuery: {
-                return DAWN_UNIMPLEMENTED_ERROR("BeginOcclusionQuery unimplemented.");
+                BeginOcclusionQueryCmd* cmd = mCommands.NextCommand<BeginOcclusionQueryCmd>();
+                QuerySet* querySet = ToBackend(cmd->querySet.Get());
+                querySet->BeginQuery(commandContext->GetD3D11DeviceContext(), cmd->queryIndex);
+                break;
             }
 
             case Command::EndOcclusionQuery: {
-                return DAWN_UNIMPLEMENTED_ERROR("EndOcclusionQuery unimplemented.");
+                EndOcclusionQueryCmd* cmd = mCommands.NextCommand<EndOcclusionQueryCmd>();
+                QuerySet* querySet = ToBackend(cmd->querySet.Get());
+                querySet->EndQuery(commandContext->GetD3D11DeviceContext(), cmd->queryIndex);
+                break;
             }
 
             case Command::WriteTimestamp:
@@ -740,24 +760,26 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     UNREACHABLE();
 }
 
-void CommandBuffer::HandleDebugCommands(CommandRecordingContext* commandContext, Command command) {
+void CommandBuffer::HandleDebugCommands(CommandRecordingContext* commandContext,
+                                        CommandIterator* iter,
+                                        Command command) {
     switch (command) {
         case Command::InsertDebugMarker: {
-            InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
-            std::wstring label = UTF8ToWStr(mCommands.NextData<char>(cmd->length + 1));
+            InsertDebugMarkerCmd* cmd = iter->NextCommand<InsertDebugMarkerCmd>();
+            std::wstring label = UTF8ToWStr(iter->NextData<char>(cmd->length + 1));
             commandContext->GetD3DUserDefinedAnnotation()->SetMarker(label.c_str());
             break;
         }
 
         case Command::PopDebugGroup: {
-            std::ignore = mCommands.NextCommand<PopDebugGroupCmd>();
+            std::ignore = iter->NextCommand<PopDebugGroupCmd>();
             commandContext->GetD3DUserDefinedAnnotation()->EndEvent();
             break;
         }
 
         case Command::PushDebugGroup: {
-            PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
-            std::wstring label = UTF8ToWStr(mCommands.NextData<char>(cmd->length + 1));
+            PushDebugGroupCmd* cmd = iter->NextCommand<PushDebugGroupCmd>();
+            std::wstring label = UTF8ToWStr(iter->NextData<char>(cmd->length + 1));
             commandContext->GetD3DUserDefinedAnnotation()->BeginEvent(label.c_str());
             break;
         }
@@ -770,21 +792,17 @@ MaybeError CommandBuffer::RecordFirstIndexOffset(RenderPipeline* renderPipeline,
                                                  CommandRecordingContext* commandContext,
                                                  uint32_t firstVertex,
                                                  uint32_t firstInstance) {
-    if (!renderPipeline->GetUsesVertexOrInstanceIndex()) {
-        // Vertex and instance index are not used in shader, so we don't need to update the uniform
-        // buffer. The original value in the uniform buffer will not be used, so we don't need to
-        // clear it.
-        return {};
+    constexpr uint32_t kFirstVertexOffset = 0;
+    constexpr uint32_t kFirstInstanceOffset = 1;
+
+    if (renderPipeline->UsesVertexIndex()) {
+        commandContext->WriteUniformBuffer(kFirstVertexOffset, firstVertex);
+    }
+    if (renderPipeline->UsesInstanceIndex()) {
+        commandContext->WriteUniformBuffer(kFirstInstanceOffset, firstInstance);
     }
 
-    // TODO(dawn:1705): only update the uniform buffer when the value changes.
-    uint32_t data[4] = {
-        firstVertex,
-        firstInstance,
-    };
-    DAWN_TRY(commandContext->GetUniformBuffer()->Write(commandContext, 0, data, sizeof(data)));
-
-    return {};
+    return commandContext->FlushUniformBuffer();
 }
 
 MaybeError CommandBuffer::RecordNumWorkgroupsForDispatch(ComputePipeline* computePipeline,
@@ -796,14 +814,10 @@ MaybeError CommandBuffer::RecordNumWorkgroupsForDispatch(ComputePipeline* comput
         return {};
     }
 
-    uint32_t data[4] = {
-        dispatchCmd->x,
-        dispatchCmd->y,
-        dispatchCmd->z,
-    };
-    DAWN_TRY(commandContext->GetUniformBuffer()->Write(commandContext, 0, data, sizeof(data)));
-
-    return {};
+    commandContext->WriteUniformBuffer(/*offset=*/0, dispatchCmd->x);
+    commandContext->WriteUniformBuffer(/*offset=*/1, dispatchCmd->y);
+    commandContext->WriteUniformBuffer(/*offset=*/2, dispatchCmd->z);
+    return commandContext->FlushUniformBuffer();
 }
 
 }  // namespace dawn::native::d3d11

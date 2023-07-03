@@ -31,6 +31,11 @@ constexpr uint32_t kStrideComputeDefault = 0xFFFF'FFFEul;
 
 constexpr wgpu::TextureFormat kDefaultFormat = wgpu::TextureFormat::RGBA8Unorm;
 
+bool IsSnorm(wgpu::TextureFormat format) {
+    return format == wgpu::TextureFormat::RGBA8Snorm || format == wgpu::TextureFormat::RG8Snorm ||
+           format == wgpu::TextureFormat::R8Snorm;
+}
+
 class CopyTests {
   protected:
     struct TextureSpec {
@@ -56,8 +61,16 @@ class CopyTests {
             for (uint32_t y = 0; y < layout.mipSize.height; ++y) {
                 for (uint32_t x = 0; x < layout.mipSize.width * bytesPerTexelBlock; ++x) {
                     uint32_t i = x + y * layout.bytesPerRow;
-                    textureData[byteOffsetPerSlice + i] =
-                        static_cast<uint8_t>((x + 1 + (layer + 1) * y) % 256);
+                    uint8_t v = static_cast<uint8_t>((x + 1 + (layer + 1) * y) % 256);
+                    if (v == 0x80u) {
+                        // Some texture copy is implemented via textureLoad from compute pass.
+                        // For 8 bit Snorm texture when read in shader, 0x80 (-128) becomes 0x81
+                        // (-127) As Snorm value range mapped to [-1, 1]. To avoid failure in buffer
+                        // comparison stage, simply avoid writing 0x81 instead of 0x80 to the
+                        // texture.
+                        v = 0x81u;
+                    }
+                    textureData[byteOffsetPerSlice + i] = v;
                 }
             }
         }
@@ -107,8 +120,9 @@ class CopyTests {
             rowsPerImage = overrideRowsPerImage;
         }
 
+        // Align with 4 byte, not actually "minimum" but is needed when check buffer content.
         uint32_t totalDataSize =
-            utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, copyExtent, format);
+            Align(utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, copyExtent, format), 4);
         return {totalDataSize, 0, bytesPerRow, rowsPerImage};
     }
     static void CopyTextureData(uint32_t bytesPerTexelBlock,
@@ -133,14 +147,35 @@ class CopyTests {
     }
 };
 
-class CopyTests_T2B : public CopyTests, public DawnTest {
+namespace {
+using TextureFormat = wgpu::TextureFormat;
+DAWN_TEST_PARAM_STRUCT(CopyTextureFormatParams, TextureFormat);
+}  // namespace
+
+class CopyTests_T2B : public CopyTests, public DawnTestWithParams<CopyTextureFormatParams> {
   protected:
-    void DoTest(const TextureSpec& textureSpec,
+    void SetUp() override {
+        DawnTestWithParams<CopyTextureFormatParams>::SetUp();
+
+        // TODO(dawn:1877): Snorm copy failing ANGLE Swiftshader, need further investigation.
+        DAWN_SUPPRESS_TEST_IF(IsSnorm(GetParam().mTextureFormat) && IsANGLESwiftShader());
+    }
+    static BufferSpec MinimumBufferSpec(uint32_t width, uint32_t height, uint32_t depth = 1) {
+        return CopyTests::MinimumBufferSpec(width, height, depth, GetParam().mTextureFormat);
+    }
+    static BufferSpec MinimumBufferSpec(wgpu::Extent3D copyExtent,
+                                        uint32_t overrideBytesPerRow = kStrideComputeDefault,
+                                        uint32_t overrideRowsPerImage = kStrideComputeDefault) {
+        return CopyTests::MinimumBufferSpec(copyExtent, overrideBytesPerRow, overrideRowsPerImage,
+                                            GetParam().mTextureFormat);
+    }
+
+    void DoTest(TextureSpec& textureSpec,
                 const BufferSpec& bufferSpec,
                 const wgpu::Extent3D& copySize,
                 wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D) {
-        // TODO(crbug.com/dawn/818): support testing arbitrary formats
-        ASSERT_EQ(kDefaultFormat, textureSpec.format);
+        wgpu::TextureFormat format = GetParam().mTextureFormat;
+        textureSpec.format = format;
 
         const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
         // Create a texture that is `width` x `height` with (`level` + 1) mip levels.
@@ -159,8 +194,7 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
             utils::GetTextureDataCopyLayoutForTextureAtLevel(
                 textureSpec.format, textureSpec.textureSize, textureSpec.copyLevel, dimension);
 
-        // Initialize the source texture
-        std::vector<utils::RGBA8> textureArrayData = GetExpectedTextureDataRGBA8(copyLayout);
+        std::vector<uint8_t> textureArrayData = GetExpectedTextureData(copyLayout);
         {
             wgpu::ImageCopyTexture imageCopyTexture =
                 utils::CreateImageCopyTexture(texture, textureSpec.copyLevel, {0, 0, 0});
@@ -202,19 +236,20 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
         }
 
         const wgpu::Extent3D copySizePerLayer = {copySize.width, copySize.height, copyDepth};
-        // Texels in single layer.
-        const uint32_t texelCountInCopyRegion = utils::GetTexelCountInCopyRegion(
-            bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, copySizePerLayer, textureSpec.format);
         const uint32_t maxArrayLayer = textureSpec.copyOrigin.z + copyLayer;
-        std::vector<utils::RGBA8> expected(texelCountInCopyRegion);
+        std::vector<uint8_t> expected(utils::RequiredBytesInCopy(
+            bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, copySizePerLayer, textureSpec.format));
+
         for (uint32_t layer = textureSpec.copyOrigin.z; layer < maxArrayLayer; ++layer) {
             // Copy the data used to create the upload buffer in the specified copy region to have
             // the same format as the expected buffer data.
-            std::fill(expected.begin(), expected.end(), utils::RGBA8());
-            const uint32_t texelIndexOffset = copyLayout.texelBlocksPerImage * layer;
+            std::fill(expected.begin(), expected.end(), 0x00);
+
+            const uint32_t texelIndexOffset = copyLayout.bytesPerImage * layer;
             const uint32_t expectedTexelArrayDataStartIndex =
-                texelIndexOffset + (textureSpec.copyOrigin.x +
-                                    textureSpec.copyOrigin.y * copyLayout.texelBlocksPerRow);
+                texelIndexOffset +
+                bytesPerTexel * (textureSpec.copyOrigin.x +
+                                 textureSpec.copyOrigin.y * copyLayout.texelBlocksPerRow);
 
             CopyTextureData(bytesPerTexel,
                             textureArrayData.data() + expectedTexelArrayDataStartIndex,
@@ -222,8 +257,8 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
                             copyLayout.rowsPerImage, expected.data(), bufferSpec.bytesPerRow,
                             bufferSpec.rowsPerImage);
 
-            EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<const uint32_t*>(expected.data()), buffer,
-                                       bufferOffset, static_cast<uint32_t>(expected.size()))
+            EXPECT_BUFFER_U8_RANGE_EQ(reinterpret_cast<const uint8_t*>(expected.data()), buffer,
+                                      bufferOffset, expected.size())
                 << "Texture to Buffer copy failed copying region [(" << textureSpec.copyOrigin.x
                 << ", " << textureSpec.copyOrigin.y << ", " << textureSpec.copyOrigin.z << "), ("
                 << textureSpec.copyOrigin.x + copySize.width << ", "
@@ -816,6 +851,9 @@ TEST_P(CopyTests_T2B, TextureMipAligned) {
 // Test that copying mips when one dimension is 256-byte aligned and another dimension reach one
 // works
 TEST_P(CopyTests_T2B, TextureMipDimensionReachOne) {
+    // TODO(dawn:1873): suppress
+    DAWN_SUPPRESS_TEST_IF(IsSnorm(GetParam().mTextureFormat) && (IsOpenGL() || IsOpenGLES()));
+
     constexpr uint32_t mipLevelCount = 4;
     constexpr uint32_t kWidth = 256 << mipLevelCount;
     constexpr uint32_t kHeight = 2;
@@ -836,6 +874,14 @@ TEST_P(CopyTests_T2B, TextureMipDimensionReachOne) {
 
 // Test that copying mips without 256-byte aligned sizes works
 TEST_P(CopyTests_T2B, TextureMipUnaligned) {
+    // TODO(dawn:1880): suppress failing on Windows Intel Vulkan backend with
+    // "use_blit_for_snorm_texture_to_buffer_copy" toggle on. This toggle is only turned on for this
+    // backend in the test so the defect won't impact the production code directly. But something is
+    // wrong with the specific hardware.
+    DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("use_blit_for_snorm_texture_to_buffer_copy") &&
+                          IsSnorm(GetParam().mTextureFormat) && IsVulkan() && IsIntel() &&
+                          IsWindows());
+
     constexpr uint32_t kWidth = 259;
     constexpr uint32_t kHeight = 127;
 
@@ -1186,6 +1232,37 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
 }
 
+// Testing a series of params for 1D texture texture-to-buffer-copy.
+TEST_P(CopyTests_T2B, Texture1D) {
+    // TODO(dawn:1705): support 1d texture.
+    DAWN_SUPPRESS_TEST_IF(IsD3D11());
+    struct Param {
+        uint32_t textureWidth;
+        uint32_t copyWidth;
+        uint32_t copyOrigin;
+    };
+    constexpr Param params[] = {
+        {256, 256, 0}, {256, 16, 128}, {256, 16, 0},  {8, 8, 0},
+        {8, 1, 7},     {259, 259, 0},  {259, 255, 3},
+    };
+
+    constexpr uint32_t bufferOffsets[] = {0, 16, 256};
+
+    for (const auto& p : params) {
+        for (const uint32_t offset : bufferOffsets) {
+            TextureSpec textureSpec;
+            textureSpec.copyOrigin = {p.copyOrigin, 0, 0};
+            textureSpec.textureSize = {p.textureWidth, 1, 1};
+
+            BufferSpec bufferSpec = MinimumBufferSpec(p.copyWidth, 1, 1);
+            bufferSpec.offset = offset;
+            bufferSpec.size += offset;
+
+            DoTest(textureSpec, bufferSpec, {p.copyWidth, 1, 1}, wgpu::TextureDimension::e1D);
+        }
+    }
+}
+
 // Test that copying whole 3D texture in one texture-to-buffer-copy works.
 TEST_P(CopyTests_T2B, Texture3DFull) {
     constexpr uint32_t kWidth = 256;
@@ -1319,6 +1396,9 @@ TEST_P(CopyTests_T2B, Texture3DCopyHeightIsOneCopyWidthIsSmall) {
 
 // Test that copying texture 3D array mips with 256-byte aligned sizes works
 TEST_P(CopyTests_T2B, Texture3DMipAligned) {
+    // TODO(dawn:1872): suppress
+    DAWN_SUPPRESS_TEST_IF(IsSnorm(GetParam().mTextureFormat) && (IsOpenGL() || IsOpenGLES()));
+
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 64u;
@@ -1338,6 +1418,9 @@ TEST_P(CopyTests_T2B, Texture3DMipAligned) {
 
 // Test that copying texture 3D array mips with 256-byte unaligned sizes works
 TEST_P(CopyTests_T2B, Texture3DMipUnaligned) {
+    // TODO(dawn:1872): suppress
+    DAWN_SUPPRESS_TEST_IF(IsSnorm(GetParam().mTextureFormat) && (IsOpenGL() || IsOpenGLES()));
+
     constexpr uint32_t kWidth = 261;
     constexpr uint32_t kHeight = 123;
     constexpr uint32_t kDepth = 69u;
@@ -1355,13 +1438,30 @@ TEST_P(CopyTests_T2B, Texture3DMipUnaligned) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(CopyTests_T2B,
-                      D3D11Backend(),
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(CopyTests_T2B,
+                        {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
+                         OpenGLESBackend(), VulkanBackend(),
+                         VulkanBackend({"use_blit_for_snorm_texture_to_buffer_copy"})},
+                        // TODO(dawn:818): expand test coverage and compatibility on texture formats
+                        // Some tests failing on format = {RG32Float/Uint/Sint,
+                        // RGBA16/32/Uint/Sint/Float} For reasons like "Offset is not a multiple of
+                        // the texel block byte size" Affected tests include: OffsetBufferUnaligned
+                        // OffsetBufferUnalignedSmallBytesPerRow
+                        // RowsPerImageShouldNotCauseBufferOOBIfDepthOrArrayLayersIsOne
+                        // BytesPerRowShouldNotCauseBufferOOBIfCopyHeightIsOne
+                        // Texture3DNoSplitRowDataWithEmptyFirstRow
+                        // Texture3DSplitRowDataWithoutEmptyFirstRow
+                        // Texture3DCopyHeightIsOneCopyWidthIsTiny
+                        {
+                            wgpu::TextureFormat::R8Unorm,
+                            wgpu::TextureFormat::RG8Unorm,
+                            wgpu::TextureFormat::RGBA8Unorm,
+
+                            // Testing OpenGL compat Toggle::UseBlitForSnormTextureToBufferCopy
+                            wgpu::TextureFormat::R8Snorm,
+                            wgpu::TextureFormat::RG8Snorm,
+                            wgpu::TextureFormat::RGBA8Snorm,
+                        });
 
 // Test that copying an entire texture with 256-byte aligned dimensions works
 TEST_P(CopyTests_B2T, FullTextureAligned) {
@@ -2201,7 +2301,8 @@ TEST_P(CopyTests_T2T, CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4Bytes) {
     constexpr std::array<uint32_t, 3> kTestTextureLayer = {1u, 3u, 5u};
 
     for (wgpu::TextureFormat format : kFormats) {
-        if (HasToggleEnabled("disable_snorm_read") &&
+        // TODO(dawn:1877): Snorm copy failing ANGLE Swiftshader, need further investigation.
+        if (IsANGLESwiftShader() &&
             (format == wgpu::TextureFormat::RG8Snorm || format == wgpu::TextureFormat::R8Snorm)) {
             continue;
         }
@@ -2596,6 +2697,11 @@ TEST_P(CopyToDepthStencilTextureAfterDestroyingBigBufferTests, DoTest) {
     DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Stencil8 &&
                              (IsOpenGL() || IsOpenGLES()));
 
+    // TODO(dawn:1848): support depth-stencil texture write on D3D11.
+    DAWN_TEST_UNSUPPORTED_IF(
+        GetParam().mTextureFormat == wgpu::TextureFormat::Stencil8 &&
+        GetParam().mInitializationMethod == InitializationMethod::WriteTexture && IsD3D11());
+
     wgpu::TextureFormat format = GetParam().mTextureFormat;
 
     const uint32_t texelBlockSize = utils::GetTexelBlockSizeInBytes(format);
@@ -2771,8 +2877,6 @@ class T2TCopyFromDirtyHeapTests : public DawnTest {
     }
 
     wgpu::Buffer GetUploadBufferAndExpectedData(std::vector<uint32_t>* expectedData) {
-        const uint32_t kBytesPerRow =
-            Align(kBytesPerBlock * kTextureSize, kTextureBytesPerRowAlignment);
         const size_t kBufferSize =
             kBytesPerRow * (kTextureSize - 1) + kTextureSize * kBytesPerBlock;
 
