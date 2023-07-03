@@ -16,6 +16,24 @@
       "message": "Would it be sufficient to introduce a cast to an unsigned integer? Negative numbers would necessarily be OOB so that\u0027s ok? (would need confirmation from Tint folks ofc)",
       "revId": "af2816815691e9783a88984d7ed943c9cc3ed0d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7529ecc0_24cbb3bb",
+        "filename": "src/tint/ast/transform/robustness.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-03T11:53:28Z",
+      "side": 1,
+      "message": "Yeah, I think that would work.",
+      "parentUuid": "c5d99b40_7b68181d",
+      "revId": "af2816815691e9783a88984d7ed943c9cc3ed0d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
