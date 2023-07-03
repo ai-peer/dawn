@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "5d2eb11c8bb04aedca1e9b7f8fbe5d0abb1a4ef6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54d2c458_f0d86924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-03T09:57:12Z",
+      "side": 1,
+      "message": "Thank you for the cleanup!",
+      "revId": "5d2eb11c8bb04aedca1e9b7f8fbe5d0abb1a4ef6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "826d8490_5bc7ec04",
+        "filename": "src/dawn/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-03T09:57:12Z",
+      "side": 1,
+      "message": "very optional nit: this is a mouthful, I think I\u0027d have gone with QueryResolveAlignment, WDYT?",
+      "revId": "5d2eb11c8bb04aedca1e9b7f8fbe5d0abb1a4ef6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
