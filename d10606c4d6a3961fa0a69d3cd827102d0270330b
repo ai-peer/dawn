@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a90fd4f2_e93ea911",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-03T12:46:17Z",
+      "side": 1,
+      "message": "Jumping on the review to unblock during NA holidays LGTM",
+      "revId": "d10606c4d6a3961fa0a69d3cd827102d0270330b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73c0d4e1_e489b506",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-03T12:46:17Z",
+      "side": 1,
+      "message": "Note to self, we can likely remove the weak framework now that Chromium requires macOS 10.11 or above.",
+      "revId": "d10606c4d6a3961fa0a69d3cd827102d0270330b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
