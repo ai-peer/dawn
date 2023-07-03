@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aed23736_a047d84d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-03T15:41:14Z",
+      "side": 1,
+      "message": "Some fantastic perf wins!",
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3645a07c_c1aae7cd",
+        "filename": "src/tint/ast/transform/fold_trivial_lets.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-03T15:41:14Z",
+      "side": 1,
+      "message": "Could safely bump this higher for fewer spills",
+      "range": {
+        "startLine": 55,
+        "startChar": 57,
+        "endLine": 55,
+        "endChar": 58
+      },
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b742a114_ab5761d5",
+        "filename": "src/tint/ast/transform/fold_trivial_lets.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-03T15:41:14Z",
+      "side": 1,
+      "message": "Suggest a `TINT_ASSERT` that `itr-\u003eremaining_uses \u003e 0`",
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df96eada_030d93ec",
+        "filename": "src/tint/ast/transform/fold_trivial_lets.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-03T15:41:14Z",
+      "side": 1,
+      "message": "`we can` had me scratching my head. IIUC you can `fold_lets` if `num_users \u003e 1` without changing the behaviour of the program, but you run the risk of duplicating expensive arithmetic. A rewording to explain why you can / can\u0027t would be good.",
+      "range": {
+        "startLine": 89,
+        "startChar": 28,
+        "endLine": 90,
+        "endChar": 43
+      },
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e000357_bc1496b6",
+        "filename": "src/tint/ast/transform/fold_trivial_lets_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-03T15:41:14Z",
+      "side": 1,
+      "message": "nit: without optimisations, this theoretically could be a pessimism as we\u0027ve gone from one load to three. I really hope this doesn\u0027t actually affect any backends though.",
+      "range": {
+        "startLine": 124,
+        "startChar": 6,
+        "endLine": 124,
+        "endChar": 13
+      },
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4fa5159_0072509c",
+        "filename": "src/tint/ast/transform/fold_trivial_lets_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-03T15:41:14Z",
+      "side": 1,
+      "message": "While trying to figure out logic around the `num_users \u003d\u003d 1`, I locally played with the following tests:\n\n```\nfn f(a : i32, b : i32, c : i32) -\u003e i32 {\n  let x \u003d (a * b) + c;\n  let y \u003d x;\n  return y;\n}\n```\n\n```\nfn f(a : i32, b : i32, c : i32) -\u003e i32 {\n  let x \u003d (a * b) + c;\n  let y \u003d x;\n  let z \u003d y + y;\n  return z;\n}\n```\n\n```\nfn f(a : i32, b : i32, c : i32) -\u003e i32 {\n  let x \u003d (a * b) + c;\n  let y \u003d x;\n  let z \u003d x + y;\n  return z;\n}\n```\n\nI don\u0027t know if you think these more precisely test the `num_users` logic.",
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
