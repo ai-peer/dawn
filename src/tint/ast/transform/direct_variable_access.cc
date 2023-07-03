@@ -832,8 +832,8 @@ struct DirectVariableAccess::State {
                         auto& symbols = *variant.ptr_param_symbols.Find(param);
                         if (symbols.base_ptr.IsValid()) {
                             auto base_ptr_ty =
-                                b.ty.pointer(CreateASTTypeFor(ctx, incoming_shape->root.type),
-                                             incoming_shape->root.address_space);
+                                b.ty.ptr(incoming_shape->root.address_space,
+                                         CreateASTTypeFor(ctx, incoming_shape->root.type));
                             params.Push(b.Param(symbols.base_ptr, base_ptr_ty));
                         }
                         if (symbols.indices.IsValid()) {
@@ -868,7 +868,7 @@ struct DirectVariableAccess::State {
     /// indices.
     void TransformCall(const sem::Call* call) {
         // Register a custom handler for the specific call expression
-        ctx.Replace(call->Declaration(), [this, call]() {
+        ctx.Replace(call->Declaration(), [this, call] {
             auto target_variant = clone_state->current_variant->calls.Find(call);
             if (!target_variant) {
                 // The current variant does not need to transform this call.

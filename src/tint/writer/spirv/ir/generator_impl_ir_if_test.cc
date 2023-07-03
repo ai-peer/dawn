@@ -20,128 +20,271 @@ namespace tint::writer::spirv {
 namespace {
 
 TEST_F(SpvGeneratorImplTest, If_TrueEmpty_FalseEmpty) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.Function("foo", ty.void_());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        b.With(i->True(), [&] {  //
+            b.ExitIf(i);
+        });
+        b.With(i->False(), [&] {  //
+            b.ExitIf(i);
+        });
+        b.Return(func);
+    });
 
-    auto* i = b.CreateIf(b.Constant(true));
-    b.Branch(i->true_.target->As<ir::Block>(), i->merge.target);
-    b.Branch(i->false_.target->As<ir::Block>(), i->merge.target);
-    b.Branch(i->merge.target->As<ir::Block>(), func->end_target);
-
-    b.Branch(func->start_target, i);
-
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%7 = OpTypeBool
-%6 = OpConstantTrue %7
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpSelectionMerge %5 None
-OpBranchConditional %6 %5 %5
-%5 = OpLabel
-OpReturn
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpSelectionMerge %5 None
+               OpBranchConditional %true %5 %5
+          %5 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 TEST_F(SpvGeneratorImplTest, If_FalseEmpty) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.Function("foo", ty.void_());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        b.With(i->True(), [&] {
+            b.Add(ty.i32(), 1_i, 1_i);
+            b.ExitIf(i);
+        });
+        b.With(i->False(), [&] {  //
+            b.ExitIf(i);
+        });
+        b.Return(func);
+    });
 
-    auto* i = b.CreateIf(b.Constant(true));
-    b.Branch(i->false_.target->As<ir::Block>(), i->merge.target);
-    b.Branch(i->merge.target->As<ir::Block>(), func->end_target);
-
-    auto* true_block = i->true_.target->As<ir::Block>();
-    true_block->instructions.Push(
-        b.Add(mod.types.Get<type::I32>(), b.Constant(1_i), b.Constant(1_i)));
-    b.Branch(true_block, i->merge.target);
-
-    b.Branch(func->start_target, i);
-
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%8 = OpTypeBool
-%7 = OpConstantTrue %8
-%10 = OpTypeInt 32 1
-%11 = OpConstant %10 1
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpSelectionMerge %5 None
-OpBranchConditional %7 %6 %5
-%6 = OpLabel
-%9 = OpIAdd %10 %11 %11
-OpBranch %5
-%5 = OpLabel
-OpReturn
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpSelectionMerge %5 None
+               OpBranchConditional %true %6 %5
+          %6 = OpLabel
+          %9 = OpIAdd %int %int_1 %int_1
+               OpBranch %5
+          %5 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 TEST_F(SpvGeneratorImplTest, If_TrueEmpty) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.Function("foo", ty.void_());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        b.With(i->True(), [&] {  //
+            b.ExitIf(i);
+        });
+        b.With(i->False(), [&] {
+            b.Add(ty.i32(), 1_i, 1_i);
+            b.ExitIf(i);
+        });
+        b.Return(func);
+    });
 
-    auto* i = b.CreateIf(b.Constant(true));
-    b.Branch(i->true_.target->As<ir::Block>(), i->merge.target);
-    b.Branch(i->merge.target->As<ir::Block>(), func->end_target);
-
-    auto* false_block = i->false_.target->As<ir::Block>();
-    false_block->instructions.Push(
-        b.Add(mod.types.Get<type::I32>(), b.Constant(1_i), b.Constant(1_i)));
-    b.Branch(false_block, i->merge.target);
-
-    b.Branch(func->start_target, i);
-
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%8 = OpTypeBool
-%7 = OpConstantTrue %8
-%10 = OpTypeInt 32 1
-%11 = OpConstant %10 1
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpSelectionMerge %5 None
-OpBranchConditional %7 %5 %6
-%6 = OpLabel
-%9 = OpIAdd %10 %11 %11
-OpBranch %5
-%5 = OpLabel
-OpReturn
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpSelectionMerge %5 None
+               OpBranchConditional %true %5 %6
+          %6 = OpLabel
+          %9 = OpIAdd %int %int_1 %int_1
+               OpBranch %5
+          %5 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 TEST_F(SpvGeneratorImplTest, If_BothBranchesReturn) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
+    auto* func = b.Function("foo", ty.void_());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        b.With(i->True(), [&] {  //
+            b.Return(func);
+        });
+        b.With(i->False(), [&] {  //
+            b.Return(func);
+        });
+        b.Unreachable();
+    });
 
-    auto* i = b.CreateIf(b.Constant(true));
-    b.Branch(i->true_.target->As<ir::Block>(), func->end_target);
-    b.Branch(i->false_.target->As<ir::Block>(), func->end_target);
-    i->merge.target->As<ir::Block>()->branch.target = nullptr;
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpSelectionMerge %5 None
+               OpBranchConditional %true %5 %5
+          %5 = OpLabel
+               OpReturn
+               OpFunctionEnd
+)");
+}
 
-    b.Branch(func->start_target, i);
+TEST_F(SpvGeneratorImplTest, If_Phi_SingleValue) {
+    auto* func = b.Function("foo", ty.i32());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        i->SetResults(b.InstructionResult(ty.i32()));
+        b.With(i->True(), [&] {  //
+            b.ExitIf(i, 10_i);
+        });
+        b.With(i->False(), [&] {  //
+            b.ExitIf(i, 20_i);
+        });
+        b.Return(func, i);
+    });
 
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%9 = OpTypeBool
-%8 = OpConstantTrue %9
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpSelectionMerge %5 None
-OpBranchConditional %8 %6 %7
-%6 = OpLabel
-OpReturn
-%7 = OpLabel
-OpReturn
-%5 = OpLabel
-OpUnreachable
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpSelectionMerge %5 None
+               OpBranchConditional %true %6 %7
+          %6 = OpLabel
+               OpBranch %5
+          %7 = OpLabel
+               OpBranch %5
+          %5 = OpLabel
+         %10 = OpPhi %int %int_10 %6 %int_20 %7
+               OpReturnValue %10
+               OpFunctionEnd
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, If_Phi_SingleValue_TrueReturn) {
+    auto* func = b.Function("foo", ty.i32());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        i->SetResults(b.InstructionResult(ty.i32()));
+        b.With(i->True(), [&] {  //
+            b.Return(func, 42_i);
+        });
+        b.With(i->False(), [&] {  //
+            b.ExitIf(i, 20_i);
+        });
+        b.Return(func, i);
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST("%17 = OpUndef %int");
+    EXPECT_INST(R"(
+               OpSelectionMerge %11 None
+               OpBranchConditional %true %12 %13
+         %12 = OpLabel
+               OpStore %continue_execution %false
+               OpStore %return_value %int_42
+               OpBranch %11
+         %13 = OpLabel
+               OpBranch %11
+         %11 = OpLabel
+         %16 = OpPhi %int %17 %12 %int_20 %13
+         %19 = OpLoad %bool %continue_execution
+               OpSelectionMerge %20 None
+               OpBranchConditional %19 %21 %20
+         %21 = OpLabel
+               OpStore %return_value %16
+               OpBranch %20
+         %20 = OpLabel
+         %22 = OpLoad %int %return_value
+               OpReturnValue %22
+               OpFunctionEnd
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, If_Phi_SingleValue_FalseReturn) {
+    auto* func = b.Function("foo", ty.i32());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        i->SetResults(b.InstructionResult(ty.i32()));
+        b.With(i->True(), [&] {  //
+            b.ExitIf(i, 10_i);
+        });
+        b.With(i->False(), [&] {  //
+            b.Return(func, 42_i);
+        });
+        b.Return(func, i);
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST("%18 = OpUndef %int");
+    EXPECT_INST(R"(
+               OpSelectionMerge %11 None
+               OpBranchConditional %true %12 %13
+         %12 = OpLabel
+               OpBranch %11
+         %13 = OpLabel
+               OpStore %continue_execution %false
+               OpStore %return_value %int_42
+               OpBranch %11
+         %11 = OpLabel
+         %16 = OpPhi %int %int_10 %12 %18 %13
+         %19 = OpLoad %bool %continue_execution
+               OpSelectionMerge %20 None
+               OpBranchConditional %19 %21 %20
+         %21 = OpLabel
+               OpStore %return_value %16
+               OpBranch %20
+         %20 = OpLabel
+         %22 = OpLoad %int %return_value
+               OpReturnValue %22
+               OpFunctionEnd
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, If_Phi_MultipleValue_0) {
+    auto* func = b.Function("foo", ty.i32());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        b.With(i->True(), [&] {  //
+            b.ExitIf(i, 10_i, true);
+        });
+        b.With(i->False(), [&] {  //
+            b.ExitIf(i, 20_i, false);
+        });
+        b.Return(func, i->Result(0));
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpSelectionMerge %5 None
+               OpBranchConditional %true %6 %7
+          %6 = OpLabel
+               OpBranch %5
+          %7 = OpLabel
+               OpBranch %5
+          %5 = OpLabel
+         %10 = OpPhi %int %int_10 %6 %int_20 %7
+         %13 = OpPhi %bool %true %6 %false %7
+               OpReturnValue %10
+               OpFunctionEnd
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, If_Phi_MultipleValue_1) {
+    auto* func = b.Function("foo", ty.bool_());
+    b.With(func->Block(), [&] {
+        auto* i = b.If(true);
+        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        b.With(i->True(), [&] {  //
+            b.ExitIf(i, 10_i, true);
+        });
+        b.With(i->False(), [&] {  //
+            b.ExitIf(i, 20_i, false);
+        });
+        b.Return(func, i->Result(1));
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpSelectionMerge %5 None
+               OpBranchConditional %true %6 %7
+          %6 = OpLabel
+               OpBranch %5
+          %7 = OpLabel
+               OpBranch %5
+          %5 = OpLabel
+         %10 = OpPhi %int %int_10 %6 %int_20 %7
+         %13 = OpPhi %bool %true %6 %false %7
+               OpReturnValue %13
+               OpFunctionEnd
 )");
 }
 

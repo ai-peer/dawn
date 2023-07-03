@@ -12,55 +12,68 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "gmock/gmock.h"
+#include "gtest/gtest-spi.h"
 #include "src/tint/ir/builder.h"
 #include "src/tint/ir/instruction.h"
-#include "src/tint/ir/test_helper.h"
+#include "src/tint/ir/ir_test_helper.h"
 
 namespace tint::ir {
 namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
 
-using IR_InstructionTest = TestHelper;
+using IR_UnaryTest = IRTestHelper;
 
-TEST_F(IR_InstructionTest, CreateComplement) {
-    Module mod;
-    Builder b{mod};
-    const auto* inst = b.Complement(b.ir.types.Get<type::I32>(), b.Constant(4_i));
+TEST_F(IR_UnaryTest, CreateComplement) {
+    auto* inst = b.Complement(mod.Types().i32(), 4_i);
 
     ASSERT_TRUE(inst->Is<Unary>());
-    EXPECT_EQ(inst->kind, Unary::Kind::kComplement);
+    EXPECT_EQ(inst->Kind(), Unary::Kind::kComplement);
 
     ASSERT_TRUE(inst->Val()->Is<Constant>());
-    auto lhs = inst->Val()->As<Constant>()->value;
+    auto lhs = inst->Val()->As<Constant>()->Value();
     ASSERT_TRUE(lhs->Is<constant::Scalar<i32>>());
     EXPECT_EQ(4_i, lhs->As<constant::Scalar<i32>>()->ValueAs<i32>());
 }
 
-TEST_F(IR_InstructionTest, CreateNegation) {
-    Module mod;
-    Builder b{mod};
-    const auto* inst = b.Negation(b.ir.types.Get<type::I32>(), b.Constant(4_i));
+TEST_F(IR_UnaryTest, CreateNegation) {
+    auto* inst = b.Negation(mod.Types().i32(), 4_i);
 
     ASSERT_TRUE(inst->Is<Unary>());
-    EXPECT_EQ(inst->kind, Unary::Kind::kNegation);
+    EXPECT_EQ(inst->Kind(), Unary::Kind::kNegation);
 
     ASSERT_TRUE(inst->Val()->Is<Constant>());
-    auto lhs = inst->Val()->As<Constant>()->value;
+    auto lhs = inst->Val()->As<Constant>()->Value();
     ASSERT_TRUE(lhs->Is<constant::Scalar<i32>>());
     EXPECT_EQ(4_i, lhs->As<constant::Scalar<i32>>()->ValueAs<i32>());
 }
 
-TEST_F(IR_InstructionTest, Unary_Usage) {
-    Module mod;
-    Builder b{mod};
-    const auto* inst = b.Negation(b.ir.types.Get<type::I32>(), b.Constant(4_i));
+TEST_F(IR_UnaryTest, Usage) {
+    auto* inst = b.Negation(mod.Types().i32(), 4_i);
 
-    EXPECT_EQ(inst->kind, Unary::Kind::kNegation);
+    EXPECT_EQ(inst->Kind(), Unary::Kind::kNegation);
 
     ASSERT_NE(inst->Val(), nullptr);
-    ASSERT_EQ(inst->Val()->Usage().Length(), 1u);
-    EXPECT_EQ(inst->Val()->Usage()[0], inst);
+    EXPECT_THAT(inst->Val()->Usages(), testing::UnorderedElementsAre(Usage{inst, 0u}));
+}
+
+TEST_F(IR_UnaryTest, Result) {
+    auto* inst = b.Negation(mod.Types().i32(), 4_i);
+    EXPECT_TRUE(inst->HasResults());
+    EXPECT_FALSE(inst->HasMultiResults());
+    EXPECT_TRUE(inst->Result()->Is<InstructionResult>());
+    EXPECT_EQ(inst->Result()->Source(), inst);
+}
+
+TEST_F(IR_UnaryTest, Fail_NullType) {
+    EXPECT_FATAL_FAILURE(
+        {
+            Module mod;
+            Builder b{mod};
+            b.Negation(nullptr, 1_i);
+        },
+        "");
 }
 
 }  // namespace

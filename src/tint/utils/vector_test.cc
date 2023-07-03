@@ -81,6 +81,10 @@ static_assert(std::is_same_v<VectorCommonType<const C2a*, C2b*>, const C1*>);
 static_assert(std::is_same_v<VectorCommonType<C2a*, const C2b*>, const C1*>);
 static_assert(std::is_same_v<VectorCommonType<const C2a*, const C2b*>, const C1*>);
 
+static_assert(IsVectorLike<Vector<int, 3>>);
+static_assert(IsVectorLike<VectorRef<int>>);
+static_assert(!IsVectorLike<int>);
+
 ////////////////////////////////////////////////////////////////////////////////
 // TintVectorTest
 ////////////////////////////////////////////////////////////////////////////////
@@ -145,6 +149,70 @@ TEST(TintVectorTest, Push_NoSmallArray) {
     EXPECT_EQ(vec[0], "one");
     EXPECT_EQ(vec[1], "two");
     EXPECT_TRUE(AllExternallyHeld(vec));
+}
+
+TEST(TintVectorTest, Erase_Front) {
+    Vector<std::string, 3> vec;
+    vec.Push("one");
+    vec.Push("two");
+    vec.Push("three");
+    vec.Push("four");
+    EXPECT_EQ(vec.Length(), 4u);
+
+    vec.Erase(0);
+    EXPECT_EQ(vec.Length(), 3u);
+    EXPECT_EQ(vec[0], "two");
+    EXPECT_EQ(vec[1], "three");
+    EXPECT_EQ(vec[2], "four");
+
+    vec.Erase(0, 1);
+    EXPECT_EQ(vec.Length(), 2u);
+    EXPECT_EQ(vec[0], "three");
+    EXPECT_EQ(vec[1], "four");
+
+    vec.Erase(0, 2);
+    EXPECT_EQ(vec.Length(), 0u);
+}
+
+TEST(TintVectorTest, Erase_Mid) {
+    Vector<std::string, 5> vec;
+    vec.Push("one");
+    vec.Push("two");
+    vec.Push("three");
+    vec.Push("four");
+    vec.Push("five");
+    EXPECT_EQ(vec.Length(), 5u);
+
+    vec.Erase(1);
+    EXPECT_EQ(vec.Length(), 4u);
+    EXPECT_EQ(vec[0], "one");
+    EXPECT_EQ(vec[1], "three");
+    EXPECT_EQ(vec[2], "four");
+    EXPECT_EQ(vec[3], "five");
+
+    vec.Erase(1, 2);
+    EXPECT_EQ(vec.Length(), 2u);
+    EXPECT_EQ(vec[0], "one");
+    EXPECT_EQ(vec[1], "five");
+}
+
+TEST(TintVectorTest, Erase_Back) {
+    Vector<std::string, 3> vec;
+    vec.Push("one");
+    vec.Push("two");
+    vec.Push("three");
+    vec.Push("four");
+    EXPECT_EQ(vec.Length(), 4u);
+
+    vec.Erase(3);
+    EXPECT_EQ(vec.Length(), 3u);
+    EXPECT_EQ(vec[0], "one");
+    EXPECT_EQ(vec[1], "two");
+    EXPECT_EQ(vec[2], "three");
+
+    vec.Erase(1, 2);
+    EXPECT_EQ(vec.Length(), 1u);
+    EXPECT_EQ(vec[0], "one");
 }
 
 TEST(TintVectorTest, InferTN_1CString) {
@@ -1106,6 +1174,54 @@ TEST(TintVectorTest, RepeatMoveAssignRef_WithSpill) {
     EXPECT_TRUE(AllExternallyHeld(vec));
 }
 
+TEST(TintVectorTest, CopyAssignSlice_N2_to_N2) {
+    std::string data[] = {"hello", "world"};
+    Slice<std::string> slice(data);
+    Vector<std::string, 2> vec_b;
+    vec_b = slice;
+    EXPECT_EQ(vec_b.Length(), 2u);
+    EXPECT_EQ(vec_b.Capacity(), 2u);
+    EXPECT_EQ(vec_b[0], "hello");
+    EXPECT_EQ(vec_b[1], "world");
+    EXPECT_TRUE(AllInternallyHeld(vec_b));
+}
+
+TEST(TintVectorTest, CopyAssignSlice_N2_to_N1) {
+    std::string data[] = {"hello", "world"};
+    Slice<std::string> slice(data);
+    Vector<std::string, 1> vec_b;
+    vec_b = slice;
+    EXPECT_EQ(vec_b.Length(), 2u);
+    EXPECT_EQ(vec_b.Capacity(), 2u);
+    EXPECT_EQ(vec_b[0], "hello");
+    EXPECT_EQ(vec_b[1], "world");
+    EXPECT_TRUE(AllExternallyHeld(vec_b));
+}
+
+TEST(TintVectorTest, CopyAssignSlice_N2_to_N3) {
+    std::string data[] = {"hello", "world"};
+    Slice<std::string> slice(data);
+    Vector<std::string, 3> vec_b;
+    vec_b = slice;
+    EXPECT_EQ(vec_b.Length(), 2u);
+    EXPECT_EQ(vec_b.Capacity(), 3u);
+    EXPECT_EQ(vec_b[0], "hello");
+    EXPECT_EQ(vec_b[1], "world");
+    EXPECT_TRUE(AllInternallyHeld(vec_b));
+}
+
+TEST(TintVectorTest, CopyAssignSlice_N2_to_N0) {
+    std::string data[] = {"hello", "world"};
+    Slice<std::string> slice(data);
+    Vector<std::string, 0> vec_b;
+    vec_b = slice;
+    EXPECT_EQ(vec_b.Length(), 2u);
+    EXPECT_EQ(vec_b.Capacity(), 2u);
+    EXPECT_EQ(vec_b[0], "hello");
+    EXPECT_EQ(vec_b[1], "world");
+    EXPECT_TRUE(AllExternallyHeld(vec_b));
+}
+
 TEST(TintVectorTest, Index) {
     Vector<std::string, 2> vec{"hello", "world"};
     static_assert(!std::is_const_v<std::remove_reference_t<decltype(vec[0])>>);
@@ -1819,6 +1935,24 @@ TEST(TintVectorTest, All) {
     EXPECT_FALSE(vec.All(Ne(7)));
     EXPECT_TRUE(vec.All(Ne(8)));
     EXPECT_FALSE(vec.All(Ne(9)));
+}
+
+TEST(TintVectorTest, Slice) {
+    Vector<std::string, 3> vec{"hello", "world"};
+    auto slice = vec.Slice();
+    static_assert(std::is_same_v<decltype(slice), Slice<std::string>>);
+    EXPECT_EQ(slice.data, &vec[0]);
+    EXPECT_EQ(slice.len, 2u);
+    EXPECT_EQ(slice.cap, 3u);
+}
+
+TEST(TintVectorTest, SliceConst) {
+    const Vector<std::string, 3> vec{"hello", "world"};
+    auto slice = vec.Slice();
+    static_assert(std::is_same_v<decltype(slice), Slice<const std::string>>);
+    EXPECT_EQ(slice.data, &vec[0]);
+    EXPECT_EQ(slice.len, 2u);
+    EXPECT_EQ(slice.cap, 3u);
 }
 
 TEST(TintVectorTest, ostream) {

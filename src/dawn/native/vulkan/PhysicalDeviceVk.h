@@ -17,7 +17,7 @@
 
 #include "dawn/native/PhysicalDevice.h"
 
-#include "dawn/common/RefCounted.h"
+#include "dawn/common/Ref.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/vulkan/VulkanInfo.h"
 
@@ -45,6 +45,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
     bool IsAndroidQualcomm() const;
     bool IsIntelMesa() const;
 
+    uint32_t GetDefaultComputeSubgroupSize() const;
+
   private:
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
@@ -53,14 +55,19 @@ class PhysicalDevice : public PhysicalDeviceBase {
     MaybeError ValidateFeatureSupportedWithTogglesImpl(wgpu::FeatureName feature,
                                                        const TogglesState& toggles) const override;
 
+    void SetupBackendAdapterToggles(TogglesState* adapterToggles) const override;
     void SetupBackendDeviceToggles(TogglesState* deviceToggles) const override;
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(AdapterBase* adapter,
                                                     const DeviceDescriptor* descriptor,
                                                     const TogglesState& deviceToggles) override;
 
+    uint32_t FindDefaultComputeSubgroupSize() const;
+
     VkPhysicalDevice mVkPhysicalDevice;
     Ref<VulkanInstance> mVulkanInstance;
     VulkanDeviceInfo mDeviceInfo = {};
+
+    uint32_t mDefaultComputeSubgroupSize = 0;
 };
 
 }  // namespace dawn::native::vulkan

@@ -28,11 +28,14 @@ class Constant : public utils::Castable<Constant, Value> {
     explicit Constant(const constant::Value* val);
     ~Constant() override;
 
-    /// @returns the type of the constant
-    const type::Type* Type() const override { return value->Type(); }
+    /// @returns the constants value
+    const constant::Value* Value() { return value_; }
 
-    /// The constants value
-    const constant::Value* const value;
+    /// @returns the type of the constant
+    const type::Type* Type() override { return value_->Type(); }
+
+  private:
+    const constant::Value* const value_ = nullptr;
 };
 
 }  // namespace tint::ir

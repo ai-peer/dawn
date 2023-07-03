@@ -20,6 +20,7 @@
 #include "src/tint/constant/value.h"
 #include "src/tint/diagnostic/diagnostic.h"
 #include "src/tint/ir/constant.h"
+#include "src/tint/symbol.h"
 #include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/vector.h"
 #include "src/tint/writer/spirv/binary_writer.h"
@@ -28,16 +29,36 @@
 
 // Forward declarations
 namespace tint::ir {
+class Access;
 class Binary;
+class Bitcast;
 class Block;
-class If;
+class BlockParam;
+class BuiltinCall;
+class Construct;
+class ControlInstruction;
+class Convert;
+class ExitIf;
+class ExitLoop;
+class ExitSwitch;
 class Function;
+class If;
+class Load;
+class Loop;
 class Module;
+class MultiInBlock;
 class Store;
+class Switch;
+class Swizzle;
+class Terminator;
+class Unary;
+class UserCall;
 class Value;
 class Var;
 }  // namespace tint::ir
 namespace tint::type {
+class Struct;
+class Texture;
 class Type;
 }  // namespace tint::type
 
@@ -59,7 +80,7 @@ class GeneratorImplIr {
     spirv::Module& Module() { return module_; }
 
     /// @returns the generated SPIR-V binary data
-    const std::vector<uint32_t>& Result() const { return writer_.result(); }
+    const std::vector<uint32_t>& Result() const { return writer_.Result(); }
 
     /// @returns the list of diagnostics raised by the generator
     diag::List Diagnostics() const { return diagnostics_; }
@@ -67,59 +88,163 @@ class GeneratorImplIr {
     /// Get the result ID of the constant `constant`, emitting its instruction if necessary.
     /// @param constant the constant to get the ID for
     /// @returns the result ID of the constant
-    uint32_t Constant(const ir::Constant* constant);
+    uint32_t Constant(ir::Constant* constant);
 
     /// Get the result ID of the type `ty`, emitting a type declaration instruction if necessary.
     /// @param ty the type to get the ID for
+    /// @param addrspace the optional address space that this type is being used for
     /// @returns the result ID of the type
-    uint32_t Type(const type::Type* ty);
-
-    /// Get the result ID of the value `value`, emitting its instruction if necessary.
-    /// @param value the value to get the ID for
-    /// @returns the result ID of the value
-    uint32_t Value(const ir::Value* value);
-
-    /// Get the ID of the label for `block`.
-    /// @param block the block to get the label ID for
-    /// @returns the ID of the block's label
-    uint32_t Label(const ir::Block* block);
-
-    /// Emit a function.
-    /// @param func the function to emit
-    void EmitFunction(const ir::Function* func);
-
-    /// Emit entry point declarations for a function.
-    /// @param func the function to emit entry point declarations for
-    /// @param id the result ID of the function declaration
-    void EmitEntryPoint(const ir::Function* func, uint32_t id);
-
-    /// Emit a block.
-    /// @param block the block to emit
-    void EmitBlock(const ir::Block* block);
-
-    /// Emit an `if` flow node.
-    /// @param i the if node to emit
-    void EmitIf(const ir::If* i);
-
-    /// Emit a binary instruction.
-    /// @param binary the binary instruction to emit
-    /// @returns the result ID of the instruction
-    uint32_t EmitBinary(const ir::Binary* binary);
-
-    /// Emit a store instruction.
-    /// @param store the store instruction to emit
-    void EmitStore(const ir::Store* store);
-
-    /// Emit a var instruction.
-    /// @param var the var instruction to emit
-    /// @returns the result ID of the instruction
-    uint32_t EmitVar(const ir::Var* var);
+    uint32_t Type(const type::Type* ty,
+                  builtin::AddressSpace addrspace = builtin::AddressSpace::kUndefined);
 
   private:
+    /// Convert a builtin to the corresponding SPIR-V enum value, taking into account the target
+    /// address space. Adds any capabilities needed for the builtin.
+    /// @param builtin the builtin to convert
+    /// @param addrspace the address space the builtin is being used in
+    /// @returns the enum value of the corresponding SPIR-V builtin
+    uint32_t Builtin(builtin::BuiltinValue builtin, builtin::AddressSpace addrspace);
+
+    /// Convert a texel format to the corresponding SPIR-V enum value, adding required capabilities.
+    /// @param format the format to convert
+    /// @returns the enum value of the corresponding SPIR-V texel format
+    uint32_t TexelFormat(const builtin::TexelFormat format);
+
     /// Get the result ID of the constant `constant`, emitting its instruction if necessary.
     /// @param constant the constant to get the ID for
     /// @returns the result ID of the constant
     uint32_t Constant(const constant::Value* constant);
+
+    /// Get the result ID of the OpConstantNull instruction for `type`, emitting it if necessary.
+    /// @param type the type to get the ID for
+    /// @returns the result ID of the OpConstantNull instruction
+    uint32_t ConstantNull(const type::Type* type);
+
+    /// Get the ID of the label for `block`.
+    /// @param block the block to get the label ID for
+    /// @returns the ID of the block's label
+    uint32_t Label(ir::Block* block);
+
+    /// Get the result ID of the value `value`, emitting its instruction if necessary.
+    /// @param value the value to get the ID for
+    /// @returns the result ID of the value
+    uint32_t Value(ir::Value* value);
+
+    /// Get the result ID of the instruction result `value`, emitting its instruction if necessary.
+    /// @param inst the instruction to get the ID for
+    /// @returns the result ID of the instruction
+    uint32_t Value(ir::Instruction* inst);
+
+    /// Get the result ID of the OpUndef instruction with type `ty`, emitting it if necessary.
+    /// @param ty the type of the undef value
+    /// @returns the result ID of the instruction
+    uint32_t Undef(const type::Type* ty);
+
+    /// Emit a struct type.
+    /// @param id the result ID to use
+    /// @param addrspace the optional address space that this type is being used for
+    /// @param str the struct type to emit
+    void EmitStructType(uint32_t id,
+                        const type::Struct* str,
+                        builtin::AddressSpace addrspace = builtin::AddressSpace::kUndefined);
+
+    /// Emit a texture type.
+    /// @param id the result ID to use
+    /// @param texture the texture type to emit
+    void EmitTextureType(uint32_t id, const type::Texture* texture);
+
+    /// Emit a function.
+    /// @param func the function to emit
+    void EmitFunction(ir::Function* func);
+
+    /// Emit entry point declarations for a function.
+    /// @param func the function to emit entry point declarations for
+    /// @param id the result ID of the function declaration
+    void EmitEntryPoint(ir::Function* func, uint32_t id);
+
+    /// Emit a block, including the initial OpLabel, OpPhis and instructions.
+    /// @param block the block to emit
+    void EmitBlock(ir::Block* block);
+
+    /// Emit all OpPhi nodes for incoming branches to @p block.
+    /// @param block the block to emit the OpPhis for
+    void EmitIncomingPhis(ir::MultiInBlock* block);
+
+    /// Emit all instructions of @p block.
+    /// @param block the block's instructions to emit
+    void EmitBlockInstructions(ir::Block* block);
+
+    /// Emit the root block.
+    /// @param root_block the root block to emit
+    void EmitRootBlock(ir::Block* root_block);
+
+    /// Emit an `if` flow node.
+    /// @param i the if node to emit
+    void EmitIf(ir::If* i);
+
+    /// Emit an access instruction
+    /// @param access the access instruction to emit
+    void EmitAccess(ir::Access* access);
+
+    /// Emit a binary instruction.
+    /// @param binary the binary instruction to emit
+    void EmitBinary(ir::Binary* binary);
+
+    /// Emit a bitcast instruction.
+    /// @param bitcast the bitcast instruction to emit
+    void EmitBitcast(ir::Bitcast* bitcast);
+
+    /// Emit a builtin function call instruction.
+    /// @param call the builtin call instruction to emit
+    void EmitBuiltinCall(ir::BuiltinCall* call);
+
+    /// Emit a construct instruction.
+    /// @param construct the construct instruction to emit
+    void EmitConstruct(ir::Construct* construct);
+
+    /// Emit a convert instruction.
+    /// @param convert the convert instruction to emit
+    void EmitConvert(ir::Convert* convert);
+
+    /// Emit a load instruction.
+    /// @param load the load instruction to emit
+    void EmitLoad(ir::Load* load);
+
+    /// Emit a loop instruction.
+    /// @param loop the loop instruction to emit
+    void EmitLoop(ir::Loop* loop);
+
+    /// Emit a store instruction.
+    /// @param store the store instruction to emit
+    void EmitStore(ir::Store* store);
+
+    /// Emit a switch instruction.
+    /// @param swtch the switch instruction to emit
+    void EmitSwitch(ir::Switch* swtch);
+
+    /// Emit a swizzle instruction.
+    /// @param swizzle the swizzle instruction to emit
+    void EmitSwizzle(ir::Swizzle* swizzle);
+
+    /// Emit a unary instruction.
+    /// @param unary the unary instruction to emit
+    void EmitUnary(ir::Unary* unary);
+
+    /// Emit a user call instruction.
+    /// @param call the user call instruction to emit
+    void EmitUserCall(ir::UserCall* call);
+
+    /// Emit a var instruction.
+    /// @param var the var instruction to emit
+    void EmitVar(ir::Var* var);
+
+    /// Emit a terminator instruction.
+    /// @param term the terminator instruction to emit
+    void EmitTerminator(ir::Terminator* term);
+
+    /// Emit the OpPhis for the given flow control instruction.
+    /// @param inst the flow control instruction
+    void EmitExitPhis(ir::ControlInstruction* inst);
 
     ir::Module* ir_;
     spirv::Module module_;
@@ -151,25 +276,6 @@ class GeneratorImplIr {
         }
     };
 
-    /// ConstantHasher provides a hash function for a constant::Value pointer, hashing the value
-    /// instead of the pointer itself.
-    struct ConstantHasher {
-        /// @param c the constant::Value pointer to create a hash for
-        /// @return the hash value
-        inline std::size_t operator()(const constant::Value* c) const { return c->Hash(); }
-    };
-
-    /// ConstantEquals provides an equality function for two constant::Value pointers, comparing
-    /// their values instead of the pointers.
-    struct ConstantEquals {
-        /// @param a the first constant::Value pointer to compare
-        /// @param b the second constant::Value pointer to compare
-        /// @return the hash value
-        inline bool operator()(const constant::Value* a, const constant::Value* b) const {
-            return a->Equal(b);
-        }
-    };
-
     /// The map of types to their result IDs.
     utils::Hashmap<const type::Type*, uint32_t, 8> types_;
 
@@ -177,16 +283,37 @@ class GeneratorImplIr {
     utils::Hashmap<FunctionType, uint32_t, 8, FunctionType::Hasher> function_types_;
 
     /// The map of constants to their result IDs.
-    utils::Hashmap<const constant::Value*, uint32_t, 16, ConstantHasher, ConstantEquals> constants_;
+    utils::Hashmap<const constant::Value*, uint32_t, 16> constants_;
 
-    /// The map of instructions to their result IDs.
-    utils::Hashmap<const ir::Instruction*, uint32_t, 8> instructions_;
+    /// The map of types to the result IDs of their OpConstantNull instructions.
+    utils::Hashmap<const type::Type*, uint32_t, 4> constant_nulls_;
+
+    /// The map of types to the result IDs of their OpUndef instructions.
+    utils::Hashmap<const type::Type*, uint32_t, 4> undef_values_;
+
+    /// The map of non-constant values to their result IDs.
+    utils::Hashmap<ir::Value*, uint32_t, 8> values_;
 
     /// The map of blocks to the IDs of their label instructions.
-    utils::Hashmap<const ir::Block*, uint32_t, 8> block_labels_;
+    utils::Hashmap<ir::Block*, uint32_t, 8> block_labels_;
+
+    /// The map of extended instruction set names to their result IDs.
+    utils::Hashmap<std::string_view, uint32_t, 2> imports_;
 
     /// The current function that is being emitted.
     Function current_function_;
+
+    /// The merge block for the current if statement
+    uint32_t if_merge_label_ = 0;
+
+    /// The header block for the current loop statement
+    uint32_t loop_header_label_ = 0;
+
+    /// The merge block for the current loop statement
+    uint32_t loop_merge_label_ = 0;
+
+    /// The merge block for the current switch statement
+    uint32_t switch_merge_label_ = 0;
 
     bool zero_init_workgroup_memory_ = false;
 };

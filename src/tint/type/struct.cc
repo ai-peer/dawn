@@ -116,7 +116,7 @@ std::string Struct::Layout() const {
            << ") */ struct " << struct_name << " {\n";
     };
 
-    auto print_struct_end_line = [&]() {
+    auto print_struct_end_line = [&] {
         ss << "/*                         " << std::setw(offset_w + size_w + align_w) << " "
            << "*/ };";
     };
@@ -158,6 +158,15 @@ std::string Struct::Layout() const {
     print_struct_end_line();
 
     return ss.str();
+}
+
+TypeAndCount Struct::Elements(const Type* type_if_invalid /* = nullptr */,
+                              uint32_t /* count_if_invalid = 0 */) const {
+    return {type_if_invalid, static_cast<uint32_t>(members_.Length())};
+}
+
+const Type* Struct::Element(uint32_t index) const {
+    return index < members_.Length() ? members_[index]->Type() : nullptr;
 }
 
 Struct* Struct::Clone(CloneContext& ctx) const {

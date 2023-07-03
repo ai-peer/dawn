@@ -21,6 +21,7 @@ vars = {
   # https://chrome-infra-packages.appspot.com/p/infra/3pp/tools/ninja
   'dawn_ninja_version': 'version:2@1.11.1.chromium.6',
   'dawn_go_version': 'version:2@1.18.4',
+  'dawn_build_dxc': True,
 
   'node_darwin_arm64_sha': '31859fc1fa0994a95f44f09c367d6ff63607cfde',
   'node_darwin_x64_sha': '16dfd094763b71988933a31735f9dea966f9abd6',
@@ -44,7 +45,7 @@ deps = {
     'url': '{chromium_git}/chromium/src/buildtools@2ff42d2008f09f65de12e70c6ff0ad58ddb090ad',
     'condition': 'dawn_standalone',
   },
-  'buildtools/clang_format/script': {
+  'third_party/clang-format/script': {
     'url': '{chromium_git}/external/github.com/llvm/llvm-project/clang/tools/clang-format.git@8b525d2747f2584fc35d8c7e612e66f377858df7',
     'condition': 'dawn_standalone',
   },
@@ -136,17 +137,17 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@8fdb164b45a06e3efc3b4b45bfb0d705043ad0d0',
+    'url': '{chromium_git}/angle/angle@574d163f57c44d287dbf101b300726d1b8e54b8d',
     'condition': 'dawn_standalone',
   },
 
   'third_party/swiftshader': {
-    'url': '{swiftshader_git}/SwiftShader@f549d5e6c6635ec8b75fb544a6bdc9f48bfb1dd3',
+    'url': '{swiftshader_git}/SwiftShader@222e07b368b179529b7dddf9069bc83e56988e8e',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@e7ec2c32c984c9ca76865098e8824cc532a64ec1',
+    'url': '{chromium_git}/vulkan-deps@e21365bc917016355dd2a3a2fcc8ffd56e3a27d5',
     'condition': 'dawn_standalone',
   },
 
@@ -160,9 +161,19 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
+  'third_party/dxc': {
+    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@5e080a772910f147cc447fc34e8eb489f0761144',
+    'condition': 'dawn_build_dxc',
+  },
+  'third_party/dxheaders': {
+    # The non-Windows build of DXC depends on DirectX-Headers, and at a specific commit (not ToT)
+    'url': '{chromium_git}/external/github.com/microsoft/DirectX-Headers@980971e835876dc0cde415e8f9bc646e64667bf7',
+    'condition': 'dawn_build_dxc and host_os != "win"',
+  },
+
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@4fd26fe4abb31b74e8b5cc9ea6ff0e36970eb7bf',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@82a512494491d0e22a166d5291c86a4bf5a27172',
     'condition': 'build_with_chromium',
   },
 
@@ -176,7 +187,7 @@ deps = {
     'condition': 'dawn_node',
   },
   'third_party/gpuweb': {
-    'url': '{github_git}/gpuweb/gpuweb.git@2e75d5e68e80e4c28575c7836ee00ca22cf4ca63',
+    'url': '{github_git}/gpuweb/gpuweb.git@913189072715569b8ad60e5c2e38e501273bd5b0',
     'condition': 'dawn_node',
   },
 

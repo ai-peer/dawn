@@ -14,7 +14,9 @@
 
 #include "dawn/native/d3d12/SwapChainD3D12.h"
 
+#if defined(DAWN_USE_WINDOWS_UI)
 #include <windows.ui.xaml.media.dxinterop.h>
+#endif  // defined(DAWN_USE_WINDOWS_UI)
 
 #include <utility>
 
@@ -89,7 +91,7 @@ MaybeError SwapChain::PresentImpl() {
     return {};
 }
 
-ResultOrError<Ref<TextureViewBase>> SwapChain::GetCurrentTextureViewImpl() {
+ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
     Device* device = ToBackend(GetDevice());
 
     // Synchronously wait until previous operations on the next swapchain buffer are finished.
@@ -103,7 +105,7 @@ ResultOrError<Ref<TextureViewBase>> SwapChain::GetCurrentTextureViewImpl() {
     TextureDescriptor descriptor = GetSwapChainBaseTextureDescriptor(this);
     DAWN_TRY_ASSIGN(mApiTexture,
                     Texture::Create(ToBackend(GetDevice()), &descriptor, mBuffers[mCurrentBuffer]));
-    return mApiTexture->CreateView();
+    return mApiTexture;
 }
 
 MaybeError SwapChain::DetachAndWaitForDeallocation() {

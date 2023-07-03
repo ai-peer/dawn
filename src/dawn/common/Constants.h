@@ -18,11 +18,14 @@
 #include <cstddef>
 #include <cstdint>
 
+namespace dawn {
+
 static constexpr uint32_t kMaxBindGroups = 4u;
 static constexpr uint32_t kMaxBindingsPerBindGroup = 1000u;
 static constexpr uint8_t kMaxVertexAttributes = 16u;
 static constexpr uint8_t kMaxVertexBuffers = 8u;
 static constexpr uint32_t kMaxVertexBufferArrayStride = 2048u;
+static constexpr uint32_t kMaxBindGroupsPlusVertexBuffers = 24u;
 static constexpr uint32_t kNumStages = 3;
 static constexpr uint8_t kMaxColorAttachments = 8u;
 static constexpr uint32_t kTextureBytesPerRowAlignment = 256u;
@@ -63,5 +66,7 @@ static constexpr uint8_t kUniformsPerExternalTexture = 1u;
 
 // Wire buffer alignments.
 static constexpr size_t kWireBufferAlignment = 8u;
+
+}  // namespace dawn
 
 #endif  // SRC_DAWN_COMMON_CONSTANTS_H_

@@ -53,12 +53,11 @@ class Texture final : public d3d::Texture {
                                                            std::vector<Ref<d3d::Fence>> waitFences,
                                                            bool isSwapChainTexture,
                                                            bool isInitialized);
-    DXGI_FORMAT GetD3D11Format() const;
     ID3D11Resource* GetD3D11Resource() const;
 
     D3D11_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(const Format& format,
-                                                   const SubresourceRange& range) const;
-    D3D11_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor(const SubresourceRange& range,
+                                                   const SubresourceRange& singleLevelRange) const;
+    D3D11_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor(const SubresourceRange& singleLevelRange,
                                                    bool depthReadOnly,
                                                    bool stencilReadOnly) const;
     MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
@@ -128,12 +127,13 @@ class TextureView final : public TextureViewBase {
   public:
     static Ref<TextureView> Create(TextureBase* texture, const TextureViewDescriptor* descriptor);
 
-    DXGI_FORMAT GetD3D11Format() const;
     ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceView() const;
-    ResultOrError<ComPtr<ID3D11RenderTargetView>> CreateD3D11RenderTargetView() const;
+    ResultOrError<ComPtr<ID3D11RenderTargetView>> CreateD3D11RenderTargetView(
+        uint32_t mipLevel = 0u) const;
     ResultOrError<ComPtr<ID3D11DepthStencilView>> CreateD3D11DepthStencilView(
         bool depthReadOnly,
-        bool stencilReadOnly) const;
+        bool stencilReadOnly,
+        uint32_t mipLevel = 0u) const;
     ResultOrError<ComPtr<ID3D11UnorderedAccessView>> CreateD3D11UnorderedAccessView() const;
 
   private:

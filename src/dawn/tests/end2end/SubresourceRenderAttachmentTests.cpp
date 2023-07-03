@@ -46,7 +46,7 @@ class SubresourceRenderAttachmentTest : public DawnTest {
         float expectedDepth = 0.3f;
         uint8_t expectedStencil = 7;
 
-        utils::ComboRenderPassDescriptor renderPass = [&]() {
+        utils::ComboRenderPassDescriptor renderPass = [&] {
             switch (type) {
                 case Type::Color: {
                     utils::ComboRenderPassDescriptor renderPass({renderTargetView});
@@ -175,6 +175,7 @@ TEST_P(SubresourceRenderAttachmentTest, StencilTexture) {
 }
 
 DAWN_INSTANTIATE_TEST(SubresourceRenderAttachmentTest,
+                      D3D11Backend(),
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_render_pass"}),
                       MetalBackend(),

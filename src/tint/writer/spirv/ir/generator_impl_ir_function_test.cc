@@ -17,127 +17,285 @@
 namespace tint::writer::spirv {
 namespace {
 
-TEST_F(SpvGeneratorImplTest, Function_Empty) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
-    b.Branch(func->start_target, func->end_target);
+using namespace tint::builtin::fluent_types;  // NOLINT
+using namespace tint::number_suffixes;        // NOLINT
 
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpName %1 "foo"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpReturn
-OpFunctionEnd
+TEST_F(SpvGeneratorImplTest, Function_Empty) {
+    auto* func = b.Function("foo", ty.void_());
+    b.With(func->Block(), [&] {  //
+        b.Return(func);
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+        %foo = OpFunction %void None %3
+          %4 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 // Test that we do not emit the same function type more than once.
 TEST_F(SpvGeneratorImplTest, Function_DeduplicateType) {
-    auto* func = b.CreateFunction(mod.symbols.Register("foo"), mod.types.Get<type::Void>());
-    b.Branch(func->start_target, func->end_target);
+    auto* func_a = b.Function("func_a", ty.void_());
+    b.With(func_a->Block(), [&] {  //
+        b.Return(func_a);
+    });
+    auto* func_b = b.Function("func_b", ty.void_());
+    b.With(func_b->Block(), [&] {  //
+        b.Return(func_b);
+    });
+    auto* func_c = b.Function("func_c", ty.void_());
+    b.With(func_c->Block(), [&] {  //
+        b.Return(func_c);
+    });
 
-    generator_.EmitFunction(func);
-    generator_.EmitFunction(func);
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpTypes(), R"(%2 = OpTypeVoid
-%3 = OpTypeFunction %2
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               ; Types, variables and constants
+       %void = OpTypeVoid
+          %3 = OpTypeFunction %void
+
+               ; Function func_a
+     %func_a = OpFunction %void None %3
+          %4 = OpLabel
+               OpReturn
+               OpFunctionEnd
+
+               ; Function func_b
+     %func_b = OpFunction %void None %3
+          %6 = OpLabel
+               OpReturn
+               OpFunctionEnd
+
+               ; Function func_c
+     %func_c = OpFunction %void None %3
+          %8 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Compute) {
-    auto* func = b.CreateFunction(mod.symbols.Register("main"), mod.types.Get<type::Void>(),
-                                  ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
-    b.Branch(func->start_target, func->end_target);
+    auto* func =
+        b.Function("main", ty.void_(), ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
+    b.With(func->Block(), [&] {  //
+        b.Return(func);
+    });
 
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpEntryPoint GLCompute %1 "main"
-OpExecutionMode %1 LocalSize 32 4 1
-OpName %1 "main"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpReturn
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpEntryPoint GLCompute %main "main"
+               OpExecutionMode %main LocalSize 32 4 1
+
+               ; Debug Information
+               OpName %main "main"  ; id %1
+
+               ; Types, variables and constants
+       %void = OpTypeVoid
+          %3 = OpTypeFunction %void
+
+               ; Function main
+       %main = OpFunction %void None %3
+          %4 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Fragment) {
-    auto* func = b.CreateFunction(mod.symbols.Register("main"), mod.types.Get<type::Void>(),
-                                  ir::Function::PipelineStage::kFragment);
-    b.Branch(func->start_target, func->end_target);
+    auto* func = b.Function("main", ty.void_(), ir::Function::PipelineStage::kFragment);
+    b.With(func->Block(), [&] {  //
+        b.Return(func);
+    });
 
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpEntryPoint Fragment %1 "main"
-OpExecutionMode %1 OriginUpperLeft
-OpName %1 "main"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpReturn
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpEntryPoint Fragment %main "main"
+               OpExecutionMode %main OriginUpperLeft
+
+               ; Debug Information
+               OpName %main "main"  ; id %1
+
+               ; Types, variables and constants
+       %void = OpTypeVoid
+          %3 = OpTypeFunction %void
+
+               ; Function main
+       %main = OpFunction %void None %3
+          %4 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Vertex) {
-    auto* func = b.CreateFunction(mod.symbols.Register("main"), mod.types.Get<type::Void>(),
-                                  ir::Function::PipelineStage::kVertex);
-    b.Branch(func->start_target, func->end_target);
+    auto* func = b.Function("main", ty.void_(), ir::Function::PipelineStage::kVertex);
+    b.With(func->Block(), [&] {  //
+        b.Return(func);
+    });
 
-    generator_.EmitFunction(func);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpEntryPoint Vertex %1 "main"
-OpName %1 "main"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpReturn
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpEntryPoint Vertex %main "main"
+
+               ; Debug Information
+               OpName %main "main"  ; id %1
+
+               ; Types, variables and constants
+       %void = OpTypeVoid
+          %3 = OpTypeFunction %void
+
+               ; Function main
+       %main = OpFunction %void None %3
+          %4 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
 }
 
 TEST_F(SpvGeneratorImplTest, Function_EntryPoint_Multiple) {
-    auto* f1 = b.CreateFunction(mod.symbols.Register("main1"), mod.types.Get<type::Void>(),
-                                ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
-    b.Branch(f1->start_target, f1->end_target);
+    auto* f1 = b.Function("main1", ty.void_(), ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
+    b.With(f1->Block(), [&] {  //
+        b.Return(f1);
+    });
 
-    auto* f2 = b.CreateFunction(mod.symbols.Register("main2"), mod.types.Get<type::Void>(),
-                                ir::Function::PipelineStage::kCompute, {{8, 2, 16}});
-    b.Branch(f2->start_target, f2->end_target);
+    auto* f2 = b.Function("main2", ty.void_(), ir::Function::PipelineStage::kCompute, {{8, 2, 16}});
+    b.With(f2->Block(), [&] {  //
+        b.Return(f2);
+    });
 
-    auto* f3 = b.CreateFunction(mod.symbols.Register("main3"), mod.types.Get<type::Void>(),
-                                ir::Function::PipelineStage::kFragment);
-    b.Branch(f3->start_target, f3->end_target);
+    auto* f3 = b.Function("main3", ty.void_(), ir::Function::PipelineStage::kFragment);
+    b.With(f3->Block(), [&] {  //
+        b.Return(f3);
+    });
 
-    generator_.EmitFunction(f1);
-    generator_.EmitFunction(f2);
-    generator_.EmitFunction(f3);
-    EXPECT_EQ(DumpModule(generator_.Module()), R"(OpEntryPoint GLCompute %1 "main1"
-OpEntryPoint GLCompute %5 "main2"
-OpEntryPoint Fragment %7 "main3"
-OpExecutionMode %1 LocalSize 32 4 1
-OpExecutionMode %5 LocalSize 8 2 16
-OpExecutionMode %7 OriginUpperLeft
-OpName %1 "main1"
-OpName %5 "main2"
-OpName %7 "main3"
-%2 = OpTypeVoid
-%3 = OpTypeFunction %2
-%1 = OpFunction %2 None %3
-%4 = OpLabel
-OpReturn
-OpFunctionEnd
-%5 = OpFunction %2 None %3
-%6 = OpLabel
-OpReturn
-OpFunctionEnd
-%7 = OpFunction %2 None %3
-%8 = OpLabel
-OpReturn
-OpFunctionEnd
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+               OpEntryPoint GLCompute %main1 "main1"
+               OpEntryPoint GLCompute %main2 "main2"
+               OpEntryPoint Fragment %main3 "main3"
+               OpExecutionMode %main1 LocalSize 32 4 1
+               OpExecutionMode %main2 LocalSize 8 2 16
+               OpExecutionMode %main3 OriginUpperLeft
+
+               ; Debug Information
+               OpName %main1 "main1"  ; id %1
+               OpName %main2 "main2"  ; id %5
+               OpName %main3 "main3"  ; id %7
+
+               ; Types, variables and constants
+       %void = OpTypeVoid
+          %3 = OpTypeFunction %void
+
+               ; Function main1
+      %main1 = OpFunction %void None %3
+          %4 = OpLabel
+               OpReturn
+               OpFunctionEnd
+
+               ; Function main2
+      %main2 = OpFunction %void None %3
+          %6 = OpLabel
+               OpReturn
+               OpFunctionEnd
+
+               ; Function main3
+      %main3 = OpFunction %void None %3
+          %8 = OpLabel
+               OpReturn
+               OpFunctionEnd
 )");
+}
+
+TEST_F(SpvGeneratorImplTest, Function_ReturnValue) {
+    auto* func = b.Function("foo", ty.i32());
+    b.With(func->Block(), [&] {  //
+        b.Return(func, 42_i);
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+          %3 = OpTypeFunction %int
+     %int_42 = OpConstant %int 42
+       %void = OpTypeVoid
+          %8 = OpTypeFunction %void
+
+               ; Function foo
+        %foo = OpFunction %int None %3
+          %4 = OpLabel
+               OpReturnValue %int_42
+               OpFunctionEnd
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, Function_Parameters) {
+    auto* i32 = ty.i32();
+    auto* x = b.FunctionParam("x", i32);
+    auto* y = b.FunctionParam("y", i32);
+    auto* func = b.Function("foo", i32);
+    func->SetParams({x, y});
+
+    b.With(func->Block(), [&] {
+        auto* result = b.Add(i32, x, y);
+        b.Return(func, result);
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST(R"(
+          %5 = OpTypeFunction %int %int %int
+       %void = OpTypeVoid
+         %10 = OpTypeFunction %void
+
+               ; Function foo
+        %foo = OpFunction %int None %5
+          %x = OpFunctionParameter %int
+          %y = OpFunctionParameter %int
+          %6 = OpLabel
+          %7 = OpIAdd %int %x %y
+               OpReturnValue %7
+               OpFunctionEnd
+)");
+}
+
+TEST_F(SpvGeneratorImplTest, Function_Call) {
+    auto* i32 = ty.i32();
+    auto* x = b.FunctionParam("x", i32);
+    auto* y = b.FunctionParam("y", i32);
+    auto* foo = b.Function("foo", i32);
+    foo->SetParams({x, y});
+
+    b.With(foo->Block(), [&] {
+        auto* result = b.Add(i32, x, y);
+        b.Return(foo, result);
+    });
+
+    auto* bar = b.Function("bar", ty.void_());
+    b.With(bar->Block(), [&] {
+        auto* result = b.Call(i32, foo, 2_i, 3_i);
+        b.Return(bar);
+        mod.SetName(result, "result");
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST("%result = OpFunctionCall %int %foo %int_2 %int_3");
+}
+
+TEST_F(SpvGeneratorImplTest, Function_Call_Void) {
+    auto* foo = b.Function("foo", ty.void_());
+    b.With(foo->Block(), [&] {  //
+        b.Return(foo);
+    });
+
+    auto* bar = b.Function("bar", ty.void_());
+    b.With(bar->Block(), [&] {
+        auto* result = b.Call(ty.void_(), foo);
+        b.Return(bar);
+        mod.SetName(result, "result");
+    });
+
+    ASSERT_TRUE(Generate()) << Error() << output_;
+    EXPECT_INST("%result = OpFunctionCall %void %foo");
 }
 
 }  // namespace

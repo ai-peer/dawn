@@ -85,9 +85,11 @@ set(ENABLE_DESKTOP_GL OFF)
 set(ENABLE_VULKAN OFF)
 set(USE_WAYLAND OFF)
 set(USE_X11 OFF)
+set(USE_WINDOWS_UI OFF)
 set(BUILD_SAMPLES OFF)
 if (WIN32)
     set(ENABLE_D3D11 ON)
+    set(USE_WINDOWS_UI ON)
     set(ENABLE_D3D12 ON)
     if (NOT WINDOWS_STORE)
         # Enable Vulkan in win32 compilation only
@@ -132,6 +134,8 @@ option_if_not_defined(DAWN_ENABLE_VULKAN "Enable compilation of the Vulkan backe
 option_if_not_defined(DAWN_ALWAYS_ASSERT "Enable assertions on all build types" OFF)
 option_if_not_defined(DAWN_USE_WAYLAND "Enable support for Wayland surface" ${USE_WAYLAND})
 option_if_not_defined(DAWN_USE_X11 "Enable support for X11 surface" ${USE_X11})
+option_if_not_defined(DAWN_USE_GLFW "Enable compilation of the GLFW windowing utils" ${DAWN_SUPPORTS_GLFW_FOR_WINDOWING})
+option_if_not_defined(DAWN_USE_WINDOWS_UI "Enable support for Windows UI surface" ${USE_WINDOWS_UI})
 
 option_if_not_defined(DAWN_BUILD_SAMPLES "Enables building Dawn's samples" ${BUILD_SAMPLES})
 option_if_not_defined(DAWN_BUILD_NODE_BINDINGS "Enables building Dawn's NodeJS bindings" OFF)
@@ -152,6 +156,10 @@ endif()
 option_if_not_defined(TINT_BUILD_SAMPLES "Build samples" ${DAWN_BUILD_SAMPLES})
 option_if_not_defined(TINT_BUILD_DOCS "Build documentation" ON)
 option_if_not_defined(TINT_DOCS_WARN_AS_ERROR "When building documentation, treat warnings as errors" OFF)
+
+if (NOT DAWN_USE_GLFW AND (TINT_BUILD_SAMPLES OR DAWN_BUILD_SAMPLES))
+  message(SEND_ERROR "Dawn samples require GLFW")
+endif()
 
 option_if_not_defined(TINT_BUILD_SPV_READER "Build the SPIR-V input reader" ${DAWN_ENABLE_VULKAN})
 option_if_not_defined(TINT_BUILD_WGSL_READER "Build the WGSL input reader" ON)
@@ -281,6 +289,7 @@ message(STATUS "Dawn build Null backend: ${DAWN_ENABLE_NULL}")
 message(STATUS "Dawn build with asserts in all configurations: ${DAWN_ALWAYS_ASSERT}")
 message(STATUS "Dawn build Wayland support: ${DAWN_USE_WAYLAND}")
 message(STATUS "Dawn build X11 support: ${DAWN_USE_X11}")
+message(STATUS "Dawn build Windows UI support: ${DAWN_USE_WINDOWS_UI}")
 
 message(STATUS "Dawn build samples: ${DAWN_BUILD_SAMPLES}")
 message(STATUS "Dawn build Node bindings: ${DAWN_BUILD_NODE_BINDINGS}")
@@ -434,6 +443,9 @@ if (DAWN_USE_WAYLAND)
 endif()
 if (DAWN_USE_X11)
     target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_X11")
+endif()
+if (DAWN_USE_WINDOWS_UI)
+    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_WINDOWS_UI")
 endif()
 if (WIN32)
     target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
@@ -592,21 +604,22 @@ function(tint_default_compile_options TARGET)
       /EHsc
       /W4
       /WX
-      /wd4068
-      /wd4127
-      /wd4244
-      /wd4267
-      /wd4324
-      /wd4458
-      /wd4514
-      /wd4571
-      /wd4625
-      /wd4626
-      /wd4710
-      /wd4774
-      /wd4820
-      /wd5026
-      /wd5027
+      /wd4068 # unknown pragma
+      /wd4127 # conditional expression is constant
+      /wd4244 # 'conversion' conversion from 'type1' to 'type2', possible loss of data
+      /wd4267 # 'var' : conversion from 'size_t' to 'type', possible loss of data
+      /wd4324 # 'struct_name' : structure was padded due to __declspec(align())
+      /wd4459 # declaration of 'identifier' hides global declaration
+      /wd4458 # declaration of 'identifier' hides class member
+      /wd4514 # 'function' : unreferenced inline function has been removed
+      /wd4571 # catch(...) semantics changed since Visual C++ 7.1; structured exceptions (SEH) are no longer caught
+      /wd4625 # 'derived class' : copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
+      /wd4626 # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
+      /wd4710 # 'function' : function not inlined
+      /wd4774 # 'function' : format string 'string' requires an argument of type 'type', but variadic argument number has type 'type'
+      /wd4820 # 'bytes' bytes padding added after construct 'member_name'
+      /wd5026 # 'type': move constructor was implicitly defined as deleted
+      /wd5027 # 'type': move assignment operator was implicitly defined as deleted
     )
 
     # When building with clang-cl on Windows, try to match our clang build

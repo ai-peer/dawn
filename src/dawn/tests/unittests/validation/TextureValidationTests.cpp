@@ -625,7 +625,7 @@ TEST_F(TextureValidationTest, TextureFormatNotSupportTextureUsageStorage) {
 
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         descriptor.format = format;
-        if (utils::TextureFormatSupportsStorageTexture(format)) {
+        if (utils::TextureFormatSupportsStorageTexture(format, UseCompatibilityMode())) {
             device.CreateTexture(&descriptor);
         } else {
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
@@ -755,7 +755,6 @@ TEST_F(CompressedTextureFormatsValidationTests, TextureUsage) {
     wgpu::TextureUsage invalidUsages[] = {
         wgpu::TextureUsage::RenderAttachment,
         wgpu::TextureUsage::StorageBinding,
-        wgpu::TextureUsage::Present,
     };
     for (wgpu::TextureFormat format : utils::kCompressedFormats) {
         for (wgpu::TextureUsage usage : invalidUsages) {

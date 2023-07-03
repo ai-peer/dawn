@@ -15,9 +15,12 @@
 #ifndef SRC_TINT_IR_MODULE_H_
 #define SRC_TINT_IR_MODULE_H_
 
+#include <memory>
 #include <string>
 
-#include "src/tint/constant/value.h"
+#include "src/tint/constant/manager.h"
+#include "src/tint/ir/block.h"
+#include "src/tint/ir/constant.h"
 #include "src/tint/ir/function.h"
 #include "src/tint/ir/instruction.h"
 #include "src/tint/ir/value.h"
@@ -36,10 +39,10 @@ class Module {
     ProgramID prog_id_;
 
     /// Map of value to pre-declared identifier
-    utils::Hashmap<const Value*, Symbol, 32> value_to_id_;
+    utils::Hashmap<Value*, Symbol, 32> value_to_id_;
 
     /// Map of pre-declared identifier to value
-    utils::Hashmap<Symbol, const Value*, 32> id_to_value_;
+    utils::Hashmap<Symbol, Value*, 32> id_to_value_;
 
   public:
     /// Constructor
@@ -55,19 +58,38 @@ class Module {
     /// @returns a reference to this module
     Module& operator=(Module&& o);
 
+    /// @param inst the instruction
+    /// @return the name of the given instruction, or an invalid symbol if the instruction is not
+    /// named. Requires that the instruction only has a single return value.
+    Symbol NameOf(Instruction* inst);
+
     /// @param value the value
     /// @return the name of the given value, or an invalid symbol if the value is not named.
-    Symbol NameOf(const Value* value) const;
+    Symbol NameOf(Value* value);
+
+    /// @param inst the instruction to set the name of
+    /// @param name the desired name of the value. May be suffixed on collision.
+    /// @return the unique symbol of the given value
+    /// @note requires the instruction be a single result instruction.
+    Symbol SetName(Instruction* inst, std::string_view name);
 
     /// @param value the value to name.
     /// @param name the desired name of the value. May be suffixed on collision.
     /// @return the unique symbol of the given value.
-    Symbol SetName(const Value* value, std::string_view name);
+    Symbol SetName(Value* value, std::string_view name);
 
-    /// The flow node allocator
-    utils::BlockAllocator<FlowNode> flow_nodes;
-    /// The constant allocator
-    utils::BlockAllocator<constant::Value> constants;
+    /// @return the type manager for the module
+    type::Manager& Types() { return constant_values.types; }
+
+    /// The block allocator
+    utils::BlockAllocator<Block> blocks;
+
+    /// The constant value manager
+    constant::Manager constant_values;
+
+    /// The instruction allocator
+    utils::BlockAllocator<Instruction> instructions;
+
     /// The value allocator
     utils::BlockAllocator<Value> values;
 
@@ -77,11 +99,14 @@ class Module {
     /// The block containing module level declarations, if any exist.
     Block* root_block = nullptr;
 
-    /// The type manager for the module
-    type::Manager types;
-
     /// The symbol table for the module
     SymbolTable symbols{prog_id_};
+
+    /// The map of constant::Value to their ir::Constant.
+    utils::Hashmap<const constant::Value*, ir::Constant*, 16> constants;
+
+    /// If the module generated a validation error, will store the file for the disassembly text.
+    std::unique_ptr<Source::File> disassembly_file;
 };
 
 }  // namespace tint::ir

@@ -23,10 +23,10 @@
 #include <utility>
 #include <vector>
 
+#include "src/tint/debug.h"
 #include "src/tint/utils/bitcast.h"
 #include "src/tint/utils/compiler_macros.h"
 #include "src/tint/utils/slice.h"
-#include "src/tint/utils/string.h"
 #include "src/tint/utils/string_stream.h"
 
 namespace tint::utils {
@@ -135,6 +135,10 @@ class Vector {
     /// @param other the vector reference to copy
     Vector(const VectorRef<T>& other) { Copy(other.slice_); }  // NOLINT(runtime/explicit)
 
+    /// Copy constructor from an immutable slice
+    /// @param other the slice to copy
+    Vector(const Slice<T>& other) { Copy(other); }  // NOLINT(runtime/explicit)
+
     /// Destructor
     ~Vector() { ClearAndFree(); }
 
@@ -196,15 +200,29 @@ class Vector {
         return *this;
     }
 
-    /// Index operator
-    /// @param i the element index. Must be less than `len`.
-    /// @returns a reference to the i'th element.
-    T& operator[](size_t i) { return impl_.slice[i]; }
+    /// Assignment operator for Slice
+    /// @param other the slice to copy
+    /// @returns this vector so calls can be chained
+    Vector& operator=(const Slice<T>& other) {
+        Copy(other);
+        return *this;
+    }
 
     /// Index operator
     /// @param i the element index. Must be less than `len`.
     /// @returns a reference to the i'th element.
-    const T& operator[](size_t i) const { return impl_.slice[i]; }
+    T& operator[](size_t i) {
+        TINT_ASSERT(Utils, i < Length());
+        return impl_.slice[i];
+    }
+
+    /// Index operator
+    /// @param i the element index. Must be less than `len`.
+    /// @returns a reference to the i'th element.
+    const T& operator[](size_t i) const {
+        TINT_ASSERT(Utils, i < Length());
+        return impl_.slice[i];
+    }
 
     /// @return the number of elements in the vector
     size_t Length() const { return impl_.slice.len; }
@@ -303,10 +321,30 @@ class Vector {
     /// Removes and returns the last element from the vector.
     /// @returns the popped element
     T Pop() {
+        TINT_ASSERT(Utils, !IsEmpty());
         auto& el = impl_.slice.data[--impl_.slice.len];
         auto val = std::move(el);
         el.~T();
         return val;
+    }
+
+    /// Removes @p count elements from the vector
+    /// @param start the index of the first element to remove
+    /// @param count the number of elements to remove
+    void Erase(size_t start, size_t count = 1) {
+        TINT_ASSERT(Utils, start < Length());
+        TINT_ASSERT(Utils, (start + count) <= Length());
+        // Shuffle
+        for (size_t i = start + count; i < impl_.slice.len; i++) {
+            auto& src = impl_.slice.data[i];
+            auto& dst = impl_.slice.data[i - count];
+            dst = std::move(src);
+        }
+        // Pop
+        for (size_t i = 0; i < count; i++) {
+            auto& el = impl_.slice.data[--impl_.slice.len];
+            el.~T();
+        }
     }
 
     /// Sort sorts the vector in-place using the predicate function @p pred
@@ -403,6 +441,9 @@ class Vector {
 
     /// @returns the internal slice of the vector
     utils::Slice<T> Slice() { return impl_.slice; }
+
+    /// @returns the internal slice of the vector
+    utils::Slice<const T> Slice() const { return impl_.slice; }
 
   private:
     /// Friend class (differing specializations of this class)
@@ -558,7 +599,7 @@ struct VectorCommonType</*IS_CASTABLE*/ true, Ts...> {
 /// Helper for determining the Vector element type (`T`) from the vector's constuctor arguments
 template <typename... Ts>
 using VectorCommonType =
-    typename detail::VectorCommonType<IsCastable<std::remove_pointer_t<Ts>...>, Ts...>::type;
+    typename utils::detail::VectorCommonType<IsCastable<std::remove_pointer_t<Ts>...>, Ts...>::type;
 
 /// Deduction guide for Vector
 template <typename... Ts>
@@ -587,12 +628,9 @@ Vector(Ts...) -> Vector<VectorCommonType<Ts...>, sizeof...(Ts)>;
 /// Aside from this move pattern, a VectorRef provides an immutable reference to the Vector.
 template <typename T>
 class VectorRef {
-    /// The slice type used by this vector reference
-    using Slice = utils::Slice<T>;
-
     /// @returns an empty slice.
-    static Slice& EmptySlice() {
-        static Slice empty;
+    static utils::Slice<T>& EmptySlice() {
+        static utils::Slice<T> empty;
         return empty;
     }
 
@@ -608,7 +646,7 @@ class VectorRef {
 
     /// Constructor from a Slice
     /// @param slice the slice
-    VectorRef(Slice& slice)  // NOLINT(runtime/explicit)
+    VectorRef(utils::Slice<T>& slice)  // NOLINT(runtime/explicit)
         : slice_(slice) {}
 
     /// Constructor from a Vector
@@ -621,7 +659,7 @@ class VectorRef {
     /// @param vector the vector to create a reference of
     template <size_t N>
     VectorRef(const Vector<T, N>& vector)  // NOLINT(runtime/explicit)
-        : slice_(const_cast<Slice&>(vector.impl_.slice)) {}
+        : slice_(const_cast<utils::Slice<T>&>(vector.impl_.slice)) {}
 
     /// Constructor from a moved Vector
     /// @param vector the vector being moved
@@ -689,6 +727,9 @@ class VectorRef {
         return {slice_.template Reinterpret<U, ReinterpretMode::kUnsafe>()};
     }
 
+    /// @returns the internal slice of the vector
+    utils::Slice<T> Slice() { return slice_; }
+
     /// @returns true if the vector is empty.
     bool IsEmpty() const { return slice_.len == 0; }
 
@@ -724,7 +765,7 @@ class VectorRef {
     friend class VectorRef;
 
     /// The slice of the vector being referenced.
-    Slice& slice_;
+    utils::Slice<T>& slice_;
     /// Whether the slice data is passed by r-value reference, and can be moved.
     bool can_move_ = false;
 };
@@ -758,7 +799,7 @@ Vector<T, N> ToVector(const std::vector<T>& vector) {
 /// @param vec the vector
 /// @return the stream so calls can be chained
 template <typename T, size_t N>
-inline utils::StringStream& operator<<(utils::StringStream& o, const utils::Vector<T, N>& vec) {
+inline StringStream& operator<<(StringStream& o, const Vector<T, N>& vec) {
     o << "[";
     bool first = true;
     for (auto& el : vec) {
@@ -766,7 +807,7 @@ inline utils::StringStream& operator<<(utils::StringStream& o, const utils::Vect
             o << ", ";
         }
         first = false;
-        o << ToString(el);
+        o << el;
     }
     o << "]";
     return o;
@@ -777,7 +818,7 @@ inline utils::StringStream& operator<<(utils::StringStream& o, const utils::Vect
 /// @param vec the vector reference
 /// @return the stream so calls can be chained
 template <typename T>
-inline utils::StringStream& operator<<(utils::StringStream& o, utils::VectorRef<T> vec) {
+inline StringStream& operator<<(StringStream& o, VectorRef<T> vec) {
     o << "[";
     bool first = true;
     for (auto& el : vec) {
@@ -785,11 +826,39 @@ inline utils::StringStream& operator<<(utils::StringStream& o, utils::VectorRef<
             o << ", ";
         }
         first = false;
-        o << ToString(el);
+        o << el;
     }
     o << "]";
     return o;
 }
+
+namespace detail {
+
+/// IsVectorLike<T>::value is true if T is a utils::Vector or utils::VectorRef.
+template <typename T>
+struct IsVectorLike {
+    /// Non-specialized form of IsVectorLike defaults to false
+    static constexpr bool value = false;
+};
+
+/// IsVectorLike specialization for utils::Vector
+template <typename T, size_t N>
+struct IsVectorLike<utils::Vector<T, N>> {
+    /// True for the IsVectorLike specialization of utils::Vector
+    static constexpr bool value = true;
+};
+
+/// IsVectorLike specialization for utils::VectorRef
+template <typename T>
+struct IsVectorLike<utils::VectorRef<T>> {
+    /// True for the IsVectorLike specialization of utils::VectorRef
+    static constexpr bool value = true;
+};
+}  // namespace detail
+
+/// True if T is a Vector<T, N> or VectorRef<T>
+template <typename T>
+static constexpr bool IsVectorLike = utils::detail::IsVectorLike<T>::value;
 
 }  // namespace tint::utils
 

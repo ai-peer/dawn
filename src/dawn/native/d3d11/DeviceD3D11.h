@@ -42,7 +42,6 @@ class Device final : public d3d::Device {
     ID3D11Device5* GetD3D11Device5() const;
 
     CommandRecordingContext* GetPendingCommandContext(SubmitMode submitMode = SubmitMode::Normal);
-    MaybeError PreparePendingCommandContext();
 
     const DeviceInfo& GetDeviceInfo() const;
 
@@ -82,6 +81,8 @@ class Device final : public d3d::Device {
         const d3d::ExternalImageDXGIFenceDescriptor* descriptor) override;
     ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> CreateExternalImageDXGIImplImpl(
         const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) override;
+
+    uint32_t GetUAVSlotCount() const;
 
   private:
     using Base = d3d::Device;

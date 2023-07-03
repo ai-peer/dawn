@@ -226,6 +226,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     }
 
     if (mDeviceInfo.HasExt(DeviceExt::ShaderIntegerDotProduct) &&
+        mDeviceInfo.shaderIntegerDotProductFeatures.shaderIntegerDotProduct == VK_TRUE &&
         mDeviceInfo.shaderIntegerDotProductProperties
                 .integerDotProduct4x8BitPackedSignedAccelerated == VK_TRUE &&
         mDeviceInfo.shaderIntegerDotProductProperties
@@ -421,14 +422,26 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
         return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for framebufferDepthSampleCounts");
     }
 
-    if (mDeviceInfo.HasExt(DeviceExt::Maintenance3)) {
+    limits->v1.maxBufferSize = kAssumedMaxBufferSize;
+    if (mDeviceInfo.HasExt(DeviceExt::Maintenance4)) {
+        limits->v1.maxBufferSize = mDeviceInfo.propertiesMaintenance4.maxBufferSize;
+    } else if (mDeviceInfo.HasExt(DeviceExt::Maintenance3)) {
         limits->v1.maxBufferSize = mDeviceInfo.propertiesMaintenance3.maxMemoryAllocationSize;
-        if (mDeviceInfo.propertiesMaintenance3.maxMemoryAllocationSize <
-            baseLimits.v1.maxBufferSize) {
-            return DAWN_INTERNAL_ERROR("Insufficient Vulkan maxBufferSize limit");
+    }
+    if (limits->v1.maxBufferSize < baseLimits.v1.maxBufferSize) {
+        return DAWN_INTERNAL_ERROR("Insufficient Vulkan maxBufferSize limit");
+    }
+
+    if (mDeviceInfo.HasExt(DeviceExt::SubgroupSizeControl)) {
+        mDefaultComputeSubgroupSize = FindDefaultComputeSubgroupSize();
+        if (mDefaultComputeSubgroupSize > 0) {
+            // According to VK_EXT_subgroup_size_control, for compute shaders we must ensure
+            // computeInvocationsPerWorkgroup <= maxComputeWorkgroupSubgroups x computeSubgroupSize
+            limits->v1.maxComputeInvocationsPerWorkgroup =
+                std::min(limits->v1.maxComputeInvocationsPerWorkgroup,
+                         mDeviceInfo.subgroupSizeControlProperties.maxComputeWorkgroupSubgroups *
+                             mDefaultComputeSubgroupSize);
         }
-    } else {
-        limits->v1.maxBufferSize = kAssumedMaxBufferSize;
     }
 
     // Using base limits for:
@@ -448,6 +461,8 @@ bool PhysicalDevice::SupportsExternalImages() const {
 bool PhysicalDevice::SupportsFeatureLevel(FeatureLevel) const {
     return true;
 }
+
+void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adpterToggles) const {}
 
 void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
     // TODO(crbug.com/dawn/857): tighten this workaround when this issue is fixed in both
@@ -485,6 +500,21 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
         }
     }
 
+    if (IsIntelMesa() && (gpu_info::IsIntelGen12LP(GetVendorId(), GetDeviceId()) ||
+                          gpu_info::IsIntelGen12HP(GetVendorId(), GetDeviceId()))) {
+        // Intel Mesa driver has a bug where vkCmdCopyQueryPoolResults fails to write overlapping
+        // queries to a same buffer after the buffer is accessed by a compute shader with correct
+        // resource barriers, which may caused by flush and memory coherency issue on Intel Gen12
+        // GPUs. Workaround for it to clear the buffer before vkCmdCopyQueryPoolResults on Mesa
+        // driver version < 23.1.3.
+        const gpu_info::DriverVersion kBuggyDriverVersion = {21, 2, 0, 0};
+        const gpu_info::DriverVersion kFixedDriverVersion = {23, 1, 3, 0};
+        if (gpu_info::CompareIntelMesaDriverVersion(GetDriverVersion(), kBuggyDriverVersion) >= 0 &&
+            gpu_info::CompareIntelMesaDriverVersion(GetDriverVersion(), kFixedDriverVersion) < 0) {
+            deviceToggles->Default(Toggle::ClearBufferBeforeResolveQueries, true);
+        }
+    }
+
     // The environment can request to various options for depth-stencil formats that could be
     // unavailable. Override the decision if it is not applicable.
     bool supportsD32s8 = IsDepthStencilFormatSupported(VK_FORMAT_D32_SFLOAT_S8_UINT);
@@ -509,8 +539,11 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     deviceToggles->Default(Toggle::VulkanUseS8, true);
 
     // The environment can only request to use VK_KHR_zero_initialize_workgroup_memory when the
-    // extension is available. Override the decision if it is no applicable.
-    if (!GetDeviceInfo().HasExt(DeviceExt::ZeroInitializeWorkgroupMemory)) {
+    // extension is available. Override the decision if it is not applicable or
+    // zeroInitializeWorkgroupMemoryFeatures.shaderZeroInitializeWorkgroupMemory == VK_FALSE.
+    if (!GetDeviceInfo().HasExt(DeviceExt::ZeroInitializeWorkgroupMemory) ||
+        GetDeviceInfo().zeroInitializeWorkgroupMemoryFeatures.shaderZeroInitializeWorkgroupMemory ==
+            VK_FALSE) {
         deviceToggles->ForceSet(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension, false);
     }
     // By default try to initialize workgroup memory with OpConstantNull according to the Vulkan
@@ -522,6 +555,16 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // In particular, enable rasterizer discard if the depth-stencil stage is a no-op, and skip
     // insertion of the placeholder fragment shader.
     deviceToggles->Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline, true);
+
+    // The environment can only request to use VK_EXT_robustness2 when the extension is available.
+    // Override the decision if it is not applicable or robustImageAccess2 is false.
+    if (!GetDeviceInfo().HasExt(DeviceExt::Robustness2) ||
+        GetDeviceInfo().robustness2Features.robustImageAccess2 == VK_FALSE) {
+        deviceToggles->ForceSet(Toggle::VulkanUseImageRobustAccess2, false);
+    }
+    // By default try to skip robustness transform on textures according to the Vulkan extension
+    // VK_EXT_robustness2.
+    deviceToggles->Default(Toggle::VulkanUseImageRobustAccess2, true);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,
@@ -550,6 +593,36 @@ bool PhysicalDevice::IsIntelMesa() const {
         return mDeviceInfo.driverProperties.driverID == VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR;
     }
     return false;
+}
+
+uint32_t PhysicalDevice::FindDefaultComputeSubgroupSize() const {
+    if (!mDeviceInfo.HasExt(DeviceExt::SubgroupSizeControl)) {
+        return 0;
+    }
+
+    const VkPhysicalDeviceSubgroupSizeControlPropertiesEXT& ext =
+        mDeviceInfo.subgroupSizeControlProperties;
+
+    if (ext.minSubgroupSize == ext.maxSubgroupSize) {
+        return 0;
+    }
+
+    // At the moment, only Intel devices support varying subgroup sizes and 16, which is the
+    // next value after the minimum of 8, is the sweet spot according to [1]. Hence the
+    // following heuristics, which may need to be adjusted in the future for other
+    // architectures, or if a specific API is added to let client code select the size.
+    //
+    // [1] https://bugs.freedesktop.org/show_bug.cgi?id=108875
+    uint32_t subgroupSize = ext.minSubgroupSize * 2;
+    if (subgroupSize <= ext.maxSubgroupSize) {
+        return subgroupSize;
+    } else {
+        return ext.minSubgroupSize;
+    }
+}
+
+uint32_t PhysicalDevice::GetDefaultComputeSubgroupSize() const {
+    return mDefaultComputeSubgroupSize;
 }
 
 }  // namespace dawn::native::vulkan

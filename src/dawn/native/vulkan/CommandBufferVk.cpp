@@ -255,24 +255,24 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
                 case TextureComponentType::Float: {
                     const std::array<float, 4> appliedClearColor =
                         ConvertToFloatColor(attachmentInfo.clearColor);
-                    for (uint32_t i = 0; i < 4; ++i) {
-                        clearValues[attachmentCount].color.float32[i] = appliedClearColor[i];
+                    for (uint32_t j = 0; j < 4; ++j) {
+                        clearValues[attachmentCount].color.float32[j] = appliedClearColor[j];
                     }
                     break;
                 }
                 case TextureComponentType::Uint: {
                     const std::array<uint32_t, 4> appliedClearColor =
                         ConvertToUnsignedIntegerColor(attachmentInfo.clearColor);
-                    for (uint32_t i = 0; i < 4; ++i) {
-                        clearValues[attachmentCount].color.uint32[i] = appliedClearColor[i];
+                    for (uint32_t j = 0; j < 4; ++j) {
+                        clearValues[attachmentCount].color.uint32[j] = appliedClearColor[j];
                     }
                     break;
                 }
                 case TextureComponentType::Sint: {
                     const std::array<int32_t, 4> appliedClearColor =
                         ConvertToSignedIntegerColor(attachmentInfo.clearColor);
-                    for (uint32_t i = 0; i < 4; ++i) {
-                        clearValues[attachmentCount].color.int32[i] = appliedClearColor[i];
+                    for (uint32_t j = 0; j < 4; ++j) {
+                        clearValues[attachmentCount].color.int32[j] = appliedClearColor[j];
                     }
                     break;
                 }
@@ -767,7 +767,11 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                 auto endIt =
                     querySet->GetQueryAvailability().begin() + cmd->firstQuery + cmd->queryCount;
                 bool hasUnavailableQueries = std::find(startIt, endIt, false) != endIt;
-                if (hasUnavailableQueries) {
+                // Workaround for resolving overlapping queries to a same buffer on Intel Gen12 GPUs
+                // due to Mesa driver issue.
+                // See http://crbug.com/dawn/1823 for more information.
+                bool clearNeeded = device->IsToggleEnabled(Toggle::ClearBufferBeforeResolveQueries);
+                if (hasUnavailableQueries || clearNeeded) {
                     destination->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
                     device->fn.CmdFillBuffer(commands, destination->GetHandle(),
                                              cmd->destinationOffset,
@@ -850,7 +854,6 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
 
                 Buffer* dstBuffer = ToBackend(write->buffer.Get());
                 uint8_t* data = mCommands.NextData<uint8_t>(size);
-                Device* device = ToBackend(GetDevice());
 
                 UploadHandle uploadHandle;
                 DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
@@ -1114,7 +1117,7 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
     // on our infra).
     ClampFragDepthArgs clampFragDepthArgs = {0.0f, 1.0f};
     bool clampFragDepthArgsDirty = true;
-    auto ApplyClampFragDepthArgs = [&]() {
+    auto ApplyClampFragDepthArgs = [&] {
         if (!clampFragDepthArgsDirty || lastPipeline == nullptr) {
             return;
         }

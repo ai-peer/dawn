@@ -21,7 +21,7 @@
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Constants.h"
 #include "dawn/native/BindGroupLayout.h"
-#include "dawn/native/ChainUtils_autogen.h"
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/CompilationMessages.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectContentHasher.h"
@@ -419,8 +419,16 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
                 layoutInfo.texture.multisampled, shaderInfo.texture.multisampled);
 
             // TODO(dawn:563): Provide info about the sample types.
-            DAWN_INVALID_IF(!(SampleTypeToSampleTypeBit(layoutInfo.texture.sampleType) &
-                              shaderInfo.texture.compatibleSampleTypes),
+            SampleTypeBit requiredType;
+            if (layoutInfo.texture.sampleType == kInternalResolveAttachmentSampleType) {
+                // If the layout's texture's sample type is kInternalResolveAttachmentSampleType,
+                // then the shader's compatible sample types must contain float.
+                requiredType = SampleTypeBit::UnfilterableFloat;
+            } else {
+                requiredType = SampleTypeToSampleTypeBit(layoutInfo.texture.sampleType);
+            }
+
+            DAWN_INVALID_IF(!(shaderInfo.texture.compatibleSampleTypes & requiredType),
                             "The sample type in the shader is not compatible with the "
                             "sample type of the layout.");
 
@@ -523,7 +531,7 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
     // error in metadata.infringedLimits. This is to delay the emission of these validation
     // errors until the entry point is used.
 #define DelayedInvalidIf(invalid, ...)                                              \
-    ([&]() {                                                                        \
+    ([&] {                                                                          \
         if (invalid) {                                                              \
             metadata->infringedLimitErrors.push_back(absl::StrFormat(__VA_ARGS__)); \
         }                                                                           \
@@ -980,16 +988,11 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
 
     ASSERT(wgslDesc != nullptr);
 
-    const char* code = wgslDesc->code ? wgslDesc->code : wgslDesc->source;
-    DAWN_INVALID_IF(code == nullptr,
-                    "At least one of ShaderModuleWGSLDescriptor.source or "
-                    "ShaderModuleWGSLDescriptor.code must be set.");
-
-    auto tintSource = std::make_unique<TintSource>("", code);
+    auto tintSource = std::make_unique<TintSource>("", wgslDesc->code);
 
     if (device->IsToggleEnabled(Toggle::DumpShaders)) {
         std::ostringstream dumpedMsg;
-        dumpedMsg << "// Dumped WGSL:" << std::endl << code;
+        dumpedMsg << "// Dumped WGSL:" << std::endl << wgslDesc->code;
         device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
     }
 
@@ -1106,14 +1109,7 @@ ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
         mOriginalSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
     } else if (wgslDesc) {
         mType = Type::Wgsl;
-        if (wgslDesc->code) {
-            mWgsl = std::string(wgslDesc->code);
-        } else {
-            device->EmitDeprecationWarning(
-                "ShaderModuleWGSLDescriptor.source is deprecated, use "
-                "ShaderModuleWGSLDescriptor.code instead.");
-            mWgsl = std::string(wgslDesc->source);
-        }
+        mWgsl = std::string(wgslDesc->code);
     }
 }
 

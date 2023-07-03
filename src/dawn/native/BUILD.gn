@@ -65,12 +65,6 @@ config("internal") {
   ]
 }
 
-config("weak_framework") {
-  if (is_mac && dawn_enable_metal) {
-    weak_frameworks = [ "Metal.framework" ]
-  }
-}
-
 # Config that adds the @executable_path rpath if needed so that Swiftshader or the Vulkan loader are found.
 config("vulkan_rpath") {
   if (is_mac && dawn_enable_vulkan &&
@@ -203,10 +197,12 @@ source_set("sources") {
     "BindingInfo.h",
     "BlitBufferToDepthStencil.cpp",
     "BlitBufferToDepthStencil.h",
-    "BlitDepthStencilToBuffer.cpp",
-    "BlitDepthStencilToBuffer.h",
+    "BlitColorToColorWithDraw.cpp",
+    "BlitColorToColorWithDraw.h",
     "BlitDepthToDepth.cpp",
     "BlitDepthToDepth.h",
+    "BlitTextureToBuffer.cpp",
+    "BlitTextureToBuffer.h",
     "Blob.cpp",
     "Blob.h",
     "BlobCache.cpp",
@@ -226,6 +222,7 @@ source_set("sources") {
     "CachedObject.h",
     "CallbackTaskManager.cpp",
     "CallbackTaskManager.h",
+    "ChainUtils.h",
     "CommandAllocator.cpp",
     "CommandAllocator.h",
     "CommandBuffer.cpp",
@@ -463,6 +460,8 @@ source_set("sources") {
       "d3d11/PipelineLayoutD3D11.h",
       "d3d11/PlatformFunctionsD3D11.cpp",
       "d3d11/PlatformFunctionsD3D11.h",
+      "d3d11/QuerySetD3D11.cpp",
+      "d3d11/QuerySetD3D11.h",
       "d3d11/QueueD3D11.cpp",
       "d3d11/QueueD3D11.h",
       "d3d11/RenderPipelineD3D11.cpp",
@@ -481,6 +480,11 @@ source_set("sources") {
   }
 
   if (dawn_enable_d3d12) {
+    if (is_win && dawn_build_dxc) {
+      deps += [ "$dawn_root/third_party/gn/dxc:dxcompiler" ]
+      defines += [ "DAWN_BUILD_DXC" ]
+      data_deps += [ "$dawn_root/third_party/gn/dxc:copy_dxil_dll" ]
+    }
     libs += [ "dxguid.lib" ]
     sources += [
       "d3d12/BackendD3D12.cpp",
@@ -562,11 +566,16 @@ source_set("sources") {
 
   if (dawn_enable_metal) {
     frameworks = [
-      "Cocoa.framework",
       "IOKit.framework",
       "IOSurface.framework",
-      "QuartzCore.framework",
+      "Metal.framework",
     ]
+    if (is_mac) {
+      frameworks += [
+        "QuartzCore.framework",
+        "Cocoa.framework",
+      ]
+    }
     sources += [
       "Surface_metal.mm",
       "metal/BackendMTL.h",
@@ -841,10 +850,7 @@ dawn_component("native") {
   ]
   sources = [ "DawnNative.cpp" ]
   configs = [ ":internal" ]
-  public_configs = [
-    ":weak_framework",
-    ":vulkan_rpath",
-  ]
+  public_configs = [ ":vulkan_rpath" ]
 
   if (dawn_enable_d3d11 || dawn_enable_d3d12) {
     sources += [ "d3d/D3DBackend.cpp" ]
