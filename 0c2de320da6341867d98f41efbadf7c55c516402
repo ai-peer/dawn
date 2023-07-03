@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7330dd72_b4b24781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-03T07:51:36Z",
+      "side": 1,
+      "message": "Hi David,\n\nThanks for your comments here! Since there are problems with signed integer indexing, I suggest in this CL we just skip robustness transform on unsized arrays with an unsigned integer index, then we won\u0027t meet the issues you mentioned about using signed integer as indices. What do you think?",
+      "parentUuid": "5124f8ac_4842e2e5",
+      "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22cf6fdf_c3828114",
         "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 3
@@ -65,6 +83,30 @@
       "writtenOn": "2023-06-30T13:51:51Z",
       "side": 1,
       "message": "nit: Unsized",
+      "range": {
+        "startLine": 270,
+        "startChar": 15,
+        "endLine": 270,
+        "endChar": 21
+      },
+      "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9237d178_c4796c10",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-03T07:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22cf6fdf_c3828114",
       "range": {
         "startLine": 270,
         "startChar": 15,
