@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22726f70_c05b8d7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-03T09:55:36Z",
+      "side": 1,
+      "message": "LGTM too, yeah we can disable Swiftshader there, it\u0027s disabled on Android too anyway.\n\nDo we have trybots that can check there is not compilation regression? We wouldn\u0027t add it to all commits, but at least to Dawn rolls so that we don\u0027t have to go through the roll revert dance for an iOS compilation failure.",
+      "revId": "8509fcc7bb26e6f35ee02e537fef786f47727e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
