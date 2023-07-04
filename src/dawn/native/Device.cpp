@@ -567,6 +567,7 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
 
     // TODO(lokokung) Update call sites that take the c-string to take string_view.
     const std::string messageStr = error->GetFormattedMessage();
+    dawn::ErrorLog() << messageStr;
     if (type == InternalErrorType::DeviceLost) {
         // The device was lost, schedule the application callback's executation.
         // Note: we don't invoke the callbacks directly here because it could cause re-entrances ->
