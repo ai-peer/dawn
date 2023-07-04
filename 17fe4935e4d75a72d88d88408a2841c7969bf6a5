@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1d8ce2_bdbb033e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003701
+      },
+      "writtenOn": "2023-07-04T14:28:55Z",
+      "side": 1,
+      "message": "Any update on this? I have tried various workarounds but none seem to work. Seems like an issue of the VS2019 generator.",
+      "revId": "17fe4935e4d75a72d88d88408a2841c7969bf6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
