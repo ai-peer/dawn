@@ -15,9 +15,12 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_DEVICED3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_DEVICED3D11_H_
 
+#include <map>
 #include <memory>
 #include <vector>
 
+#include "dawn/common/NonCopyable.h"
+#include "dawn/common/RefCounted.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/native/d3d/DeviceD3D.h"
 #include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
@@ -88,6 +91,9 @@ class Device final : public d3d::Device {
     using Base = d3d::Device;
     using Base::Base;
 
+    class ExternalImageDXGIImpl;
+    class KeyedMutexTexture;
+
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
     ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(
@@ -135,6 +141,13 @@ class Device final : public d3d::Device {
     ComPtr<ID3D11Device5> mD3d11Device5;
     CommandRecordingContext mPendingCommands;
     SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
+
+    struct CompareLUID {
+        bool operator()(const ::LUID& lhs, const ::LUID& rhs) const {
+            return memcmp(&lhs, &rhs, sizeof(::LUID)) < 0;
+        }
+    };
+    std::map<::LUID, Ref<KeyedMutexTexture>, CompareLUID> mKeyedMutexTextures;
 };
 
 }  // namespace dawn::native::d3d11
