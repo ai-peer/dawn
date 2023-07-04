@@ -62,6 +62,9 @@ class RefCounted {
     uint64_t GetRefCountForTesting() const;
     uint64_t GetRefCountPayload() const;
 
+    // Returns true if the refcount is 1.
+    bool IsUnique() const;
+
     void Reference();
     // Release() is called by internal code, so it's assumed that there is already a thread
     // synchronization in place for destruction.
