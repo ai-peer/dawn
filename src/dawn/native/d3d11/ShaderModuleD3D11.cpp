@@ -156,10 +156,18 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     req.hlsl.inputProgram = GetTintProgram();
     req.hlsl.entryPointName = programmableStage.entryPoint.c_str();
     req.hlsl.stage = stage;
-    // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the firstIndex in the default
-    // space(0)
-    req.hlsl.firstIndexOffsetRegisterSpace = 0;
-    req.hlsl.firstIndexOffsetShaderRegister = PipelineLayout::kNumWorkgroupsConstantBufferSlot;
+    // Put the firstIndex into the unused space to avoid conflicting with any existing binding.
+    req.hlsl.firstIndexOffsetRegisterSpace = kMaxBindGroups;
+    req.hlsl.firstIndexOffsetShaderRegister = 0;
+    // Remap to the desired space and binding, [0, kFirstIndexOffsetConstantBufferSlot].
+    {
+        tint::writer::BindingPoint srcBindingPoint{kMaxBindGroups, 0};
+        // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the firstIndex in the
+        // default space(0)
+        tint::writer::BindingPoint dstBindingPoint{
+            0u, PipelineLayout::kFirstIndexOffsetConstantBufferSlot};
+        bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
+    }
 
     req.hlsl.usesNumWorkgroups = entryPoint.usesNumWorkgroups;
     // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the numWorkgroups in the default
