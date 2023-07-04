@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fbac3d0_f40496eb",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dac497b1_8f9561d6",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28e3bf45_afc24919",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c9a5f3_f59e12f1",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28e3bf45_afc24919",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb5a2bc1_5c221d69",
@@ -82,6 +118,24 @@
       "writtenOn": "2023-07-04T15:43:30Z",
       "side": 1,
       "message": "[a2]",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8bf030a_854b8552",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb5a2bc1_5c221d69",
       "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "080d548c_a100bdaf",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7a99e74_3f7e49ea",
+      "range": {
+        "startLine": 566,
+        "startChar": 48,
+        "endLine": 566,
+        "endChar": 75
+      },
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c395285_5f6989f4",
@@ -122,6 +200,24 @@
       "writtenOn": "2023-07-04T15:43:30Z",
       "side": 1,
       "message": "[a3]",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fce315f_b4598944",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c395285_5f6989f4",
       "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +239,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1bbaad7_0fd52d4d",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Right now, chrome will set it on the device from ANGLE or Dawn. So I haven\u0027t consider if dawn should do that conditionally. I will talk with Quyen, and probably do it in a follow up cl.",
+      "parentUuid": "2d8ad427_65c660e6",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3495caf6_ba4026cc",
@@ -160,6 +274,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a50a16f_f28d8525",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3495caf6_ba4026cc",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ccf5e06_b44435b3",
@@ -173,6 +305,30 @@
       "writtenOn": "2023-07-04T15:43:30Z",
       "side": 1,
       "message": "nit: not technically \"Texture\" maybe \"ExternalImage\"?",
+      "range": {
+        "startLine": 1253,
+        "startChar": 11,
+        "endLine": 1253,
+        "endChar": 18
+      },
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c8e876b_2929df65",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-04T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ccf5e06_b44435b3",
       "range": {
         "startLine": 1253,
         "startChar": 11,
