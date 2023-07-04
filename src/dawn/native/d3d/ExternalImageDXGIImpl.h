@@ -42,15 +42,15 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
     ExternalImageDXGIImpl(Device* backendDevice,
                           ComPtr<IUnknown> d3dResource,
                           const TextureDescriptor* textureDescriptor);
-    ~ExternalImageDXGIImpl();
+    virtual ~ExternalImageDXGIImpl();
 
     ExternalImageDXGIImpl(const ExternalImageDXGIImpl&) = delete;
     ExternalImageDXGIImpl& operator=(const ExternalImageDXGIImpl&) = delete;
 
     bool IsValid() const;
 
-    WGPUTexture BeginAccess(const ExternalImageDXGIBeginAccessDescriptor* descriptor);
-    void EndAccess(WGPUTexture texture, ExternalImageDXGIFenceDescriptor* signalFence);
+    virtual WGPUTexture BeginAccess(const ExternalImageDXGIBeginAccessDescriptor* descriptor);
+    virtual void EndAccess(WGPUTexture texture, ExternalImageDXGIFenceDescriptor* signalFence);
 
     // This method should only be called by internal code. Don't call this from D3D12Backend side,
     // or without locking.
