@@ -90,7 +90,161 @@ void AppendDebugLayerMessagesToError(ID3D11InfoQueue* infoQueue,
     infoQueue->ClearStoredMessages();
 }
 
+bool IsSameHandle(HANDLE handle, HANDLE other) {
+    using PFN_COMPARE_OBJECT_HANDLES =
+        BOOL(WINAPI*)(HANDLE hFirstObjectHandle, HANDLE hSecondObjectHandle);
+    static PFN_COMPARE_OBJECT_HANDLES compare_object_handles_fn =
+        []() -> PFN_COMPARE_OBJECT_HANDLES {
+        HMODULE kernelbase_module = ::GetModuleHandle(L"kernelbase.dll");
+        if (!kernelbase_module) {
+            return nullptr;
+        }
+        PFN_COMPARE_OBJECT_HANDLES fn = reinterpret_cast<PFN_COMPARE_OBJECT_HANDLES>(
+            ::GetProcAddress(kernelbase_module, "CompareObjectHandles"));
+        return fn;
+    }();
+    if (compare_object_handles_fn) {
+        return compare_object_handles_fn(handle, other);
+    }
+    // CompareObjectHandles isn't available before Windows 10. Return true in that
+    // case since there's no other way to check if the handles refer to the same
+    // D3D11 texture and IsSameHandle is only used as a sanity test.
+    return true;
+}
+
+static constexpr ::LUID kNullToken = {0, 0};
+
+bool operator!=(const ::LUID& lhs, const ::LUID& rhs) {
+    return memcmp(&lhs, &rhs, sizeof(::LUID)) != 0;
+}
+
 }  // namespace
+
+class Device::KeyedMutexTexture : public dawn::RefCounted, NonCopyable {
+  public:
+    static ResultOrError<Ref<KeyedMutexTexture>> Create(
+        const ComPtr<ID3D11Device5>& d3d11Device5,
+        const d3d::ExternalImageDescriptorDXGISharedHandle* descriptor) {
+        ComPtr<ID3D11Resource> d3d11Resource;
+        DAWN_TRY(CheckHRESULT(d3d11Device5->OpenSharedResource1(descriptor->sharedHandle,
+                                                                IID_PPV_ARGS(&d3d11Resource)),
+                              "D3D11 OpenSharedResource1"));
+
+        ComPtr<IDXGIKeyedMutex> keyedMutex;
+        DAWN_TRY(
+            CheckHRESULT(d3d11Resource.As(&keyedMutex),
+                         "D3D11 OpenSharedResource1: shared handle is not a keyed mutex texture"));
+        HANDLE sharedHandle = NULL;
+        // Duplicate the shared handle to make sure the handle is valid after the
+        // original shared handle is closed.
+        if (!::DuplicateHandle(GetCurrentProcess(), descriptor->sharedHandle, GetCurrentProcess(),
+                               &sharedHandle, 0, FALSE, DUPLICATE_SAME_ACCESS)) {
+            return DAWN_DEVICE_LOST_ERROR("Failed to duplicate shared handle");
+        }
+
+        return AcquireRef(new KeyedMutexTexture(descriptor->token, sharedHandle,
+                                                std::move(d3d11Resource), std::move(keyedMutex)));
+    }
+
+    const ::LUID& GetToken() const { return mToken; }
+    HANDLE GetSharedHandle() const { return mSharedHandle; }
+    ID3D11Resource* GetTexture() const { return mTexture.Get(); }
+
+    MaybeError BeginAccess() {
+        mKeyedMutexAcquired++;
+        if (mKeyedMutexAcquired == 1) {
+            DAWN_TRY(CheckHRESULT(mKeyedMutex->AcquireSync(kKey, INFINITE),
+                                  "D3D11: failed to acquire keyed mutex"));
+        }
+        return {};
+    }
+
+    MaybeError EndAccess() {
+        mKeyedMutexAcquired--;
+        if (mKeyedMutexAcquired == 0) {
+            DAWN_TRY(CheckHRESULT(mKeyedMutex->ReleaseSync(kKey),
+                                  "D3D11: failed to release keyed mutex"));
+        }
+        return {};
+    }
+
+  private:
+    KeyedMutexTexture(const LUID& token,
+                      HANDLE sharedHandle,
+                      ComPtr<ID3D11Resource> texture,
+                      ComPtr<IDXGIKeyedMutex> keyedMutex)
+        : mToken(token),
+          mSharedHandle(sharedHandle),
+          mTexture(std::move(texture)),
+          mKeyedMutex(std::move(keyedMutex)) {
+        ASSERT(mToken != kNullToken);
+        ASSERT(mSharedHandle != nullptr);
+        ASSERT(mTexture != nullptr);
+        ASSERT(mKeyedMutex != nullptr);
+    }
+
+    ~KeyedMutexTexture() override {
+        ::CloseHandle(mSharedHandle);
+        if (mKeyedMutexAcquired > 0) {
+            mKeyedMutex->ReleaseSync(kKey);
+        }
+    }
+
+    // Chrome use 0 as the key value.
+    static constexpr UINT64 kKey = 0;
+
+    const ::LUID mToken;
+    const HANDLE mSharedHandle;
+    const ComPtr<ID3D11Resource> mTexture;
+    const ComPtr<IDXGIKeyedMutex> mKeyedMutex;
+    int32_t mKeyedMutexAcquired = 0;
+};
+
+class Device::ExternalImageDXGIImpl : public d3d::ExternalImageDXGIImpl {
+  public:
+    using Base = d3d::ExternalImageDXGIImpl;
+    ExternalImageDXGIImpl(Device* device,
+                          ComPtr<ID3D11Resource> d3d11Resource,
+                          const TextureDescriptor* descriptor,
+                          Ref<KeyedMutexTexture> keyedMutexTexture)
+        : Base(device, std::move(d3d11Resource), descriptor),
+          mKeyedMutexTexture(std::move(keyedMutexTexture)) {}
+
+    ~ExternalImageDXGIImpl() override {
+        if (mKeyedMutexTexture != nullptr) {
+            ASSERT(!mKeyedMutexTexture->IsUnique());
+            auto* keyedMutexTexture = mKeyedMutexTexture.Get();
+            // Release the reference to the keyed mutex texture.
+            mKeyedMutexTexture = nullptr;
+            // If the keyed mutex texture is only referenced by the mKeyedMutexTextures, remove it
+            // from the map.
+            if (keyedMutexTexture->IsUnique()) {
+                ToBackend(mBackendDevice)->mKeyedMutexTextures.erase(keyedMutexTexture->GetToken());
+            }
+        }
+    }
+
+    WGPUTexture BeginAccess(
+        const d3d::ExternalImageDXGIBeginAccessDescriptor* descriptor) override {
+        if (mKeyedMutexTexture != nullptr) {
+            if (mBackendDevice->ConsumedError(mKeyedMutexTexture->BeginAccess())) {
+                return nullptr;
+            }
+        }
+        return Base::BeginAccess(descriptor);
+    }
+
+    void EndAccess(WGPUTexture texture,
+                   d3d::ExternalImageDXGIFenceDescriptor* signalFence) override {
+        Base::EndAccess(texture, signalFence);
+        if (mKeyedMutexTexture != nullptr) {
+            std::ignore = mBackendDevice->ConsumedError(mKeyedMutexTexture->EndAccess());
+        }
+    }
+
+  private:
+    Ref<KeyedMutexTexture> mKeyedMutexTexture;
+};
 
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
@@ -413,11 +567,31 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     // a use-after-free.
     DAWN_TRY(ValidateIsAlive());
 
+    Ref<KeyedMutexTexture> keyedMutexTexture;
     ComPtr<ID3D11Resource> d3d11Resource;
     switch (descriptor->GetType()) {
         case ExternalImageType::DXGISharedHandle: {
             const auto* sharedHandleDescriptor =
                 static_cast<const d3d::ExternalImageDescriptorDXGISharedHandle*>(descriptor);
+
+            if (sharedHandleDescriptor->token != kNullToken) {
+                Ref<KeyedMutexTexture>& keyedMutexTextureRef =
+                    mKeyedMutexTextures[sharedHandleDescriptor->token];
+                // If the texture has been imported, the imported texture will be reused.
+                if (keyedMutexTextureRef != nullptr) {
+                    DAWN_INVALID_IF(!IsSameHandle(keyedMutexTextureRef->GetSharedHandle(),
+                                                  sharedHandleDescriptor->sharedHandle),
+                                    "The keyed mutex texture has a different shared handle.");
+                } else {
+                    DAWN_TRY_ASSIGN(
+                        keyedMutexTextureRef,
+                        KeyedMutexTexture::Create(mD3d11Device5, sharedHandleDescriptor));
+                }
+                keyedMutexTexture = keyedMutexTextureRef;
+                d3d11Resource = keyedMutexTexture->GetTexture();
+                break;
+            }
+
             DAWN_TRY(CheckHRESULT(
                 mD3d11Device5->OpenSharedResource1(sharedHandleDescriptor->sharedHandle,
                                                    IID_PPV_ARGS(&d3d11Resource)),
@@ -461,8 +635,9 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
             this, d3d::DXGITextureFormat(textureDescriptor->format)));
     }
 
-    return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d11Resource),
-                                                        textureDescriptor);
+    auto impl = std::make_unique<ExternalImageDXGIImpl>(
+        this, std::move(d3d11Resource), textureDescriptor, std::move(keyedMutexTexture));
+    return std::unique_ptr<d3d::ExternalImageDXGIImpl>(std::move(impl));
 }
 
 bool Device::MayRequireDuplicationOfIndirectParameters() const {
