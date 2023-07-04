@@ -16,6 +16,24 @@
       "message": "This passes Dawn toggles into adapter enumeration.\nBut it has a peculiar behaviour:  When no flags are passed in Dawn still enables f16 on my Mac, which seems wrong.  It should be off by default, shouldn\u0027t i?",
       "revId": "ac4ad0b4044822561f669f1d52b15cfa129af0fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c11d0b7_b4b2fa0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-07-04T22:45:51Z",
+      "side": 1,
+      "message": "Ben wrote:\n\n\n\u003e It\u0027s actually always enabled for run-cts :\nhttps://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/cmd/run-cts/main.go#251\n\nSo this is all working as intended.  I can forcibly disable unsafe APIs for dawn-node with --flag\u003ddisable-dawn-features\u003dallow_unsafe_apis",
+      "parentUuid": "306af902_d9d6c2e9",
+      "revId": "ac4ad0b4044822561f669f1d52b15cfa129af0fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
