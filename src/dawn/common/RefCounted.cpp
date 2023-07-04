@@ -120,6 +120,10 @@ uint64_t RefCounted::GetRefCountPayload() const {
     return mRefCount.GetPayload();
 }
 
+bool RefCounted::IsUnique() const {
+    return mRefCount.GetValueForTesting() == 1;
+}
+
 void RefCounted::Reference() {
     mRefCount.Increment();
 }
