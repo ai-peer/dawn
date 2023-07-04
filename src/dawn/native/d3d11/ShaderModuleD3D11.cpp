@@ -159,13 +159,25 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the firstIndex in the default
     // space(0)
     req.hlsl.firstIndexOffsetRegisterSpace = 0;
-    req.hlsl.firstIndexOffsetShaderRegister = PipelineLayout::kNumWorkgroupsConstantBufferSlot;
+    // Use the never-used 'kMaxBindingsPerBindGroup' to avoid conflicting with any existing
+    // bindings.
+    req.hlsl.firstIndexOffsetShaderRegister = kMaxBindingsPerBindGroup;
 
     req.hlsl.usesNumWorkgroups = entryPoint.usesNumWorkgroups;
     // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the numWorkgroups in the default
     // space(0)
     req.hlsl.numWorkgroupsRegisterSpace = 0;
-    req.hlsl.numWorkgroupsShaderRegister = PipelineLayout::kNumWorkgroupsConstantBufferSlot;
+    // Use the never-used 'kMaxBindingsPerBindGroup' to avoid conflicting with any existing
+    // bindings.
+    req.hlsl.numWorkgroupsShaderRegister = kMaxBindingsPerBindGroup;
+
+    // Remap from the interim 'kMaxBindingsPerBindGroup' to the actual
+    // 'kReservedConstantBufferSlot'.
+    {
+        tint::writer::BindingPoint srcBindingPoint{0u, kMaxBindingsPerBindGroup};
+        tint::writer::BindingPoint dstBindingPoint{0u, PipelineLayout::kReservedConstantBufferSlot};
+        bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
+    }
 
     req.hlsl.bindingRemapper = std::move(bindingRemapper);
 

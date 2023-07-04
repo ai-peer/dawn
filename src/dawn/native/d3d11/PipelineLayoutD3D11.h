@@ -38,8 +38,6 @@ class PipelineLayout final : public PipelineLayoutBase {
     // constant buffer slot reserved for index offsets and num workgroups.
     static constexpr uint32_t kReservedConstantBufferSlot =
         D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT - 1;
-    static constexpr uint32_t kFirstIndexOffsetConstantBufferSlot = kReservedConstantBufferSlot;
-    static constexpr uint32_t kNumWorkgroupsConstantBufferSlot = kReservedConstantBufferSlot;
 
     static ResultOrError<Ref<PipelineLayout>> Create(Device* device,
                                                      const PipelineLayoutDescriptor* descriptor);
