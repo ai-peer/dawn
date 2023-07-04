@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "193987a3_b186636c",
+        "filename": "src/tint/ast/transform/fold_trivial_lets.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-04T17:58:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3645a07c_c1aae7cd",
+      "range": {
+        "startLine": 55,
+        "startChar": 57,
+        "endLine": 55,
+        "endChar": 58
+      },
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b742a114_ab5761d5",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1024a22b_2d0c757a",
+        "filename": "src/tint/ast/transform/fold_trivial_lets.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-04T17:58:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b742a114_ab5761d5",
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df96eada_030d93ec",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-07-03T15:41:14Z",
       "side": 1,
       "message": "`we can` had me scratching my head. IIUC you can `fold_lets` if `num_users \u003e 1` without changing the behaviour of the program, but you run the risk of duplicating expensive arithmetic. A rewording to explain why you can / can\u0027t would be good.",
+      "range": {
+        "startLine": 89,
+        "startChar": 28,
+        "endLine": 90,
+        "endChar": 43
+      },
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ace35519_1049378f",
+        "filename": "src/tint/ast/transform/fold_trivial_lets.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-04T17:58:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df96eada_030d93ec",
       "range": {
         "startLine": 89,
         "startChar": 28,
@@ -117,6 +183,24 @@
       "writtenOn": "2023-07-03T15:41:14Z",
       "side": 1,
       "message": "While trying to figure out logic around the `num_users \u003d\u003d 1`, I locally played with the following tests:\n\n```\nfn f(a : i32, b : i32, c : i32) -\u003e i32 {\n  let x \u003d (a * b) + c;\n  let y \u003d x;\n  return y;\n}\n```\n\n```\nfn f(a : i32, b : i32, c : i32) -\u003e i32 {\n  let x \u003d (a * b) + c;\n  let y \u003d x;\n  let z \u003d y + y;\n  return z;\n}\n```\n\n```\nfn f(a : i32, b : i32, c : i32) -\u003e i32 {\n  let x \u003d (a * b) + c;\n  let y \u003d x;\n  let z \u003d x + y;\n  return z;\n}\n```\n\nI don\u0027t know if you think these more precisely test the `num_users` logic.",
+      "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e909ac9f_cd4b0bc6",
+        "filename": "src/tint/ast/transform/fold_trivial_lets_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-04T17:58:21Z",
+      "side": 1,
+      "message": "Adopted these and added a couple more tests that cover side effecting expressions.",
+      "parentUuid": "c4fa5159_0072509c",
       "revId": "e36c74978f53a2f28b3ce8995ca390656a8bffde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
