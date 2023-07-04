@@ -552,6 +552,10 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     const d3d::ExternalImageDescriptorDXGISharedHandle* sharedHandleDescriptor =
         static_cast<const d3d::ExternalImageDescriptorDXGISharedHandle*>(descriptor);
 
+    DAWN_INVALID_IF(
+        sharedHandleDescriptor->token.LowPart != 0 || sharedHandleDescriptor->token.HighPart != 0,
+        "keyed mutex is not supported");
+
     Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource;
     DAWN_TRY(CheckHRESULT(GetD3D12Device()->OpenSharedHandle(sharedHandleDescriptor->sharedHandle,
                                                              IID_PPV_ARGS(&d3d12Resource)),
