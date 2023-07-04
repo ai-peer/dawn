@@ -16,8 +16,6 @@
 #define SRC_DAWN_NATIVE_OPENGL_DEVICEGL_H_
 
 #include <memory>
-#include <queue>
-#include <utility>
 
 #include "dawn/native/dawn_platform.h"
 
@@ -55,8 +53,6 @@ class Device final : public DeviceBase {
 
     const GLFormat& GetGLFormat(const Format& format);
 
-    void SubmitFenceSync();
-
     MaybeError ValidateEGLImageCanBeWrapped(const TextureDescriptor* descriptor, ::EGLImage image);
     TextureBase* CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
                                                ::EGLImage image);
@@ -88,12 +84,6 @@ class Device final : public DeviceBase {
         virtual ~Context() {}
         virtual void MakeCurrent() = 0;
     };
-
-    // TODO(dawn:1413) move these methods to the opengl::Queue.
-    void ForceEventualFlushOfCommands();
-    bool HasPendingCommands() const;
-    ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials();
-    MaybeError WaitForIdleForDestruction();
 
   private:
     Device(AdapterBase* adapter,
@@ -138,12 +128,8 @@ class Device final : public DeviceBase {
 
     const OpenGLFunctions mGL;
 
-    std::queue<std::pair<GLsync, ExecutionSerial>> mFencesInFlight;
-
     GLFormatTable mFormatTable;
     std::unique_ptr<Context> mContext = nullptr;
-    // Has pending GL commands which are not associated with a fence.
-    mutable bool mHasPendingCommands = false;
 };
 
 }  // namespace dawn::native::opengl
