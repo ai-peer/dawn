@@ -16,6 +16,171 @@
       "message": "Hi Corentin or Austin, any other comments? could you please +2? thanks",
       "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf7b3725_c4bfe99c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac497b1_8f9561d6",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "I\u0027m wondering if we could switch on D3D12 vs. D3D11 here when setting mD3D11Device/Context to avoid the need to query devices from textures etc. below in [a1] [a2] and [a3]",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e3bf45_afc24919",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "[a1]",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb5a2bc1_5c221d69",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "[a2]",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7a99e74_3f7e49ea",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "Why did this need to change?",
+      "range": {
+        "startLine": 566,
+        "startChar": 48,
+        "endLine": 566,
+        "endChar": 75
+      },
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c395285_5f6989f4",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "[a3]",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d8ad427_65c660e6",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "Should this be done by Dawn internally when ImplicitDeviceSynchronization is used? Or did we decide to not go this route?",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3495caf6_ba4026cc",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ccf5e06_b44435b3",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T15:43:30Z",
+      "side": 1,
+      "message": "nit: not technically \"Texture\" maybe \"ExternalImage\"?",
+      "range": {
+        "startLine": 1253,
+        "startChar": 11,
+        "endLine": 1253,
+        "endChar": 18
+      },
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
