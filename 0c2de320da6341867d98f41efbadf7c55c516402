@@ -132,6 +132,24 @@
       "message": "This is too loose.\n\nConsider this storage buffer:\n\nstruct contents {\n       a: int,\n       b: array\u003cint\u003e,\n}\n  \nvar\u003cstorage\u003e buf: contents;\n\nThen accessing    buf.b[-1]  will be undefined behaviour, and robustness2 will not protect against it because it\u0027s still within the bounds.",
       "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6196330_c935a720",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-04T11:38:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "821c4e94_9eaf9d77",
+      "revId": "0c2de320da6341867d98f41efbadf7c55c516402",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

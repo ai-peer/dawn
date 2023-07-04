@@ -16,6 +16,52 @@
       "message": "Dawn still LGTM",
       "revId": "a2602aa8bc999ac428c263fb5273a3749c73ff5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc78d1b3_2e9ebf39",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-04T11:38:23Z",
+      "side": 1,
+      "message": "Please add unit tests for `cfg.disable_unsized_array_index_clamping \u003d\u003d true` with a `i32`, `u32` and `abstract-int` typed index.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 21
+      },
+      "revId": "a2602aa8bc999ac428c263fb5273a3749c73ff5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7faa2b4d_3f811706",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-04T11:38:23Z",
+      "side": 1,
+      "message": "nit: It\u0027s a bit unintuitive to have a index-accessor as the input and the **index expression** as the return value. I\u0027d recommend `CastToU32(const sem::Expression* expr)` and pass `expr-\u003eIndex()`. That way the method is simpler and the usages are slightly less confusing.",
+      "range": {
+        "startLine": 709,
+        "startChar": 27,
+        "endLine": 709,
+        "endChar": 39
+      },
+      "revId": "a2602aa8bc999ac428c263fb5273a3749c73ff5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
