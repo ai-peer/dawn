@@ -14,6 +14,7 @@
 
 #include "dawn/native/d3d11/ShaderModuleD3D11.h"
 
+#include <algorithm>
 #include <string>
 #include <utility>
 
@@ -110,6 +111,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     bindingRemapper.allow_collisions = true;
 
     const BindingInfoArray& moduleBindingInfo = entryPoint.bindings;
+    uint32_t maxSrcBindingNumber = kMaxBindingsPerBindGroup;
 
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayout* groupLayout = ToBackend(layout->GetBindGroupLayout(group));
@@ -135,6 +137,10 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
         // req.hlsl.externalTextureOptions, and then map them to the final slots with
         // bindingRemapper.
         for (const auto& [_, expansion] : groupLayout->GetExternalTextureBindingExpansionMap()) {
+            maxSrcBindingNumber =
+                std::max(maxSrcBindingNumber, static_cast<uint32_t>(expansion.plane1));
+            maxSrcBindingNumber =
+                std::max(maxSrcBindingNumber, static_cast<uint32_t>(expansion.params));
             uint32_t plane1Slot = indices[groupLayout->GetBindingIndex(expansion.plane1)];
             uint32_t paramsSlot = indices[groupLayout->GetBindingIndex(expansion.params)];
             bindingRemapper.binding_points.emplace(
@@ -159,7 +165,16 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the firstIndex in the default
     // space(0)
     req.hlsl.firstIndexOffsetRegisterSpace = 0;
-    req.hlsl.firstIndexOffsetShaderRegister = PipelineLayout::kNumWorkgroupsConstantBufferSlot;
+    // Use 'maxSrcBindingNumber' to avoid conflicting with any existing bindings.
+    req.hlsl.firstIndexOffsetShaderRegister = maxSrcBindingNumber;
+    // Remap from the interim 'maxSrcBindingNumber' to the actual
+    // 'kFirstIndexOffsetConstantBufferSlot'.
+    {
+        tint::writer::BindingPoint srcBindingPoint{0u, maxSrcBindingNumber};
+        tint::writer::BindingPoint dstBindingPoint{
+            0u, PipelineLayout::kFirstIndexOffsetConstantBufferSlot};
+        bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
+    }
 
     req.hlsl.usesNumWorkgroups = entryPoint.usesNumWorkgroups;
     // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the numWorkgroups in the default
