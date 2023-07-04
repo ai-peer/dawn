@@ -17,15 +17,25 @@
 
 #include "dawn/native/Queue.h"
 
+#include <queue>
+#include <utility>
+
+#include "dawn/native/opengl/opengl_platform.h"
+
 namespace dawn::native::opengl {
 
 class Device;
 
 class Queue final : public QueueBase {
   public:
-    Queue(Device* device, const QueueDescriptor* descriptor);
+    static ResultOrError<Ref<Queue>> Create(Device* device, const QueueDescriptor* descriptor);
+
+    void OnGLUsed();
+    void SubmitFenceSync();
 
   private:
+    Queue(Device* device, const QueueDescriptor* descriptor);
+
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
     MaybeError WriteBufferImpl(BufferBase* buffer,
                                uint64_t bufferOffset,
@@ -40,6 +50,11 @@ class Queue final : public QueueBase {
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
+
+    std::queue<std::pair<GLsync, ExecutionSerial>> mFencesInFlight;
+
+    // Has pending GL commands which are not associated with a fence.
+    bool mHasPendingCommands = false;
 };
 
 }  // namespace dawn::native::opengl
