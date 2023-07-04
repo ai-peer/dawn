@@ -25,7 +25,6 @@
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/binary_expression.h"
 #include "src/tint/ast/binding_attribute.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/bool_literal_expression.h"
 #include "src/tint/ast/break_if_statement.h"
 #include "src/tint/ast/break_statement.h"
@@ -1636,36 +1635,37 @@ class ProgramBuilder {
     }
 
     /// @param expr the expression for the bitcast
-    /// @return an `ast::BitcastExpression` of type `ty`, with the values of
+    /// @return a bitcast call of type `ty`, with the values of
     /// `expr` converted to `ast::Expression`s using `Expr()`
     template <typename T, typename EXPR>
-    const ast::BitcastExpression* Bitcast(EXPR&& expr) {
+    const ast::CallExpression* Bitcast(EXPR&& expr) {
         return Bitcast(ty.Of<T>(), std::forward<EXPR>(expr));
     }
 
     /// @param type the type to cast to
     /// @param expr the expression for the bitcast
-    /// @return an `ast::BitcastExpression` of @p type constructed with the values
+    /// @return a bitcast call of @p type constructed with the values
     /// `expr`.
     template <typename EXPR>
-    const ast::BitcastExpression* Bitcast(ast::Type type, EXPR&& expr) {
+    const ast::CallExpression* Bitcast(ast::Type type, EXPR&& expr) {
         return Bitcast(source_, type, Expr(std::forward<EXPR>(expr)));
     }
 
     /// @param source the source information
     /// @param type the type to cast to
     /// @param expr the expression for the bitcast
-    /// @return an `ast::BitcastExpression` of @p type constructed with the values
+    /// @return a bitcast call of @p type constructed with the values
     /// `expr`.
     template <typename EXPR>
-    const ast::BitcastExpression* Bitcast(const Source& source, ast::Type type, EXPR&& expr) {
-        return create<ast::BitcastExpression>(source, type, Expr(std::forward<EXPR>(expr)));
+    const ast::CallExpression* Bitcast(const Source& source, ast::Type type, EXPR&& expr) {
+        return Call(source, Ident(builtin::Function::kBitcast, type),
+                    Expr(std::forward<EXPR>(expr)));
     }
 
     /// @param type the vector type
     /// @param size the vector size
     /// @param args the arguments for the vector constructor
-    /// @return an `ast::CallExpression` of a `size`-element vector of
+    /// @return a bitcast call of a `size`-element vector of
     /// type `type`, constructed with the values @p args.
     template <typename... ARGS>
     const ast::CallExpression* vec(ast::Type type, uint32_t size, ARGS&&... args) {

@@ -20,7 +20,6 @@
 #include <utility>
 
 #include "source/opt/build_module.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/id_attribute.h"
 #include "src/tint/ast/interpolate_attribute.h"

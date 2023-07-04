@@ -20,7 +20,6 @@
 
 #include "src/tint/ast/alias.h"
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/continue_statement.h"
@@ -1400,14 +1399,16 @@ bool Validator::Statements(utils::VectorRef<const ast::Statement*> stmts) const 
     return true;
 }
 
-bool Validator::Bitcast(const ast::BitcastExpression* cast, const type::Type* to) const {
-    auto* from = sem_.TypeOf(cast->expr)->UnwrapRef();
+bool Validator::Bitcast(const type::Type* to,
+                        const ast::Expression* expr,
+                        const Source& source) const {
+    auto* from = sem_.TypeOf(expr)->UnwrapRef();
     if (!from->is_numeric_scalar_or_vector()) {
-        AddError("'" + sem_.TypeNameOf(from) + "' cannot be bitcast", cast->expr->source);
+        AddError("'" + sem_.TypeNameOf(from) + "' cannot be bitcast", expr->source);
         return false;
     }
     if (!to->is_numeric_scalar_or_vector()) {
-        AddError("cannot bitcast to '" + sem_.TypeNameOf(to) + "'", cast->type->source);
+        AddError("cannot bitcast to '" + sem_.TypeNameOf(to) + "'", source);
         return false;
     }
 
@@ -1421,7 +1422,7 @@ bool Validator::Bitcast(const ast::BitcastExpression* cast, const type::Type* to
     if (width(from) != width(to)) {
         AddError(
             "cannot bitcast from '" + sem_.TypeNameOf(from) + "' to '" + sem_.TypeNameOf(to) + "'",
-            cast->source);
+            source);
         return false;
     }
 

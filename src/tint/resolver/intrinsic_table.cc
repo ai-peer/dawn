@@ -956,6 +956,7 @@ class Impl : public IntrinsicTable {
     explicit Impl(ProgramBuilder& builder);
 
     Builtin Lookup(builtin::Function builtin_type,
+                   const type::Type* template_arg,
                    utils::VectorRef<const type::Type*> args,
                    sem::EvaluationStage earliest_eval_stage,
                    const Source& source) override;
@@ -1123,6 +1124,7 @@ std::string TemplateNumberMatcher::String(MatchState* state) const {
 Impl::Impl(ProgramBuilder& b) : builder(b) {}
 
 Impl::Builtin Impl::Lookup(builtin::Function builtin_type,
+                           const type::Type* template_arg,
                            utils::VectorRef<const type::Type*> args,
                            sem::EvaluationStage earliest_eval_stage,
                            const Source& source) {
@@ -1131,7 +1133,8 @@ Impl::Builtin Impl::Lookup(builtin::Function builtin_type,
     // Generates an error when no overloads match the provided arguments
     auto on_no_match = [&](utils::VectorRef<Candidate> candidates) {
         utils::StringStream ss;
-        ss << "no matching call to " << CallSignature(intrinsic_name, args) << std::endl;
+        ss << "no matching call to " << CallSignature(intrinsic_name, args, template_arg)
+           << std::endl;
         if (!candidates.IsEmpty()) {
             ss << std::endl
                << candidates.Length() << " candidate function"
@@ -1141,9 +1144,15 @@ Impl::Builtin Impl::Lookup(builtin::Function builtin_type,
         builder.Diagnostics().add_error(diag::System::Resolver, ss.str(), source);
     };
 
+    // If a template type was provided, then close the 0'th type with this.
+    TemplateState templates;
+    if (template_arg) {
+        templates.Type(0, template_arg);
+    }
+
     // Resolve the intrinsic overload
     auto match = MatchIntrinsic(kBuiltins[static_cast<size_t>(builtin_type)], intrinsic_name, args,
-                                earliest_eval_stage, TemplateState{}, on_no_match);
+                                earliest_eval_stage, templates, on_no_match);
     if (!match.overload) {
         return {};
     }

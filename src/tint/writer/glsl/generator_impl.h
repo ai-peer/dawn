@@ -22,7 +22,6 @@
 #include <utility>
 
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/continue_statement.h"
 #include "src/tint/ast/discard_statement.h"
@@ -108,14 +107,14 @@ class GeneratorImpl : public ASTTextGenerator {
     /// @param out the output of the expression stream
     /// @param expr the binary expression
     void EmitBinary(utils::StringStream& out, const ast::BinaryExpression* expr);
-    /// Handles generating a bitcast expression
-    /// @param out the output of the expression stream
-    /// @param expr the expression
-    void EmitVectorRelational(utils::StringStream& out, const ast::BinaryExpression* expr);
     /// Handles generating a vector relational expression
     /// @param out the output of the expression stream
     /// @param expr the expression
-    void EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr);
+    void EmitVectorRelational(utils::StringStream& out, const ast::BinaryExpression* expr);
+    /// Handles generating a bitcast expression
+    /// @param out the output of the expression stream
+    /// @param call the bitcast call
+    void EmitBitcast(utils::StringStream& out, const sem::Call* call);
     /// Emits a list of statements
     /// @param stmts the statement list
     void EmitStatements(utils::VectorRef<const ast::Statement*> stmts);

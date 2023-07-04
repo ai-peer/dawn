@@ -18,7 +18,6 @@
 #include <array>
 
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/builtin_attribute.h"
 #include "src/tint/ast/call_statement.h"

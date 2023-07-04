@@ -33,7 +33,6 @@
 namespace tint::ast {
 class IndexAccessorExpression;
 class BinaryExpression;
-class BitcastExpression;
 class CallExpression;
 class CallStatement;
 class CaseStatement;
@@ -198,11 +197,12 @@ class Validator {
     /// @returns true on success, false otherwise.
     bool Assignment(const ast::Statement* a, const type::Type* rhs_ty) const;
 
-    /// Validates a bitcase
-    /// @param cast the bitcast expression
+    /// Validates a bitcast
     /// @param to the destination type
+    /// @param expr the expression being cast
+    /// @param source the source of the bitcast call
     /// @returns true on success, false otherwise
-    bool Bitcast(const ast::BitcastExpression* cast, const type::Type* to) const;
+    bool Bitcast(const type::Type* to, const ast::Expression* expr, const Source& source) const;
 
     /// Validates a break statement
     /// @param stmt the break statement to validate

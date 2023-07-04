@@ -92,8 +92,6 @@ list(APPEND TINT_LIB_SRCS
   ast/binary_expression.h
   ast/binding_attribute.cc
   ast/binding_attribute.h
-  ast/bitcast_expression.cc
-  ast/bitcast_expression.h
   ast/block_statement.cc
   ast/block_statement.h
   ast/bool_literal_expression.cc
@@ -927,7 +925,6 @@ if(TINT_BUILD_TESTS)
     ast/assignment_statement_test.cc
     ast/binary_expression_test.cc
     ast/binding_attribute_test.cc
-    ast/bitcast_expression_test.cc
     ast/block_statement_test.cc
     ast/bool_literal_expression_test.cc
     ast/break_if_statement_test.cc

@@ -19,7 +19,6 @@
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/binary_expression.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_if_statement.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/compound_assignment_statement.h"

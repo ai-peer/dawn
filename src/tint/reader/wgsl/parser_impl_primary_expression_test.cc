@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/test_helper.h"
 #include "src/tint/reader/wgsl/parser_impl_test_helper.h"
 
@@ -219,83 +218,6 @@ TEST_F(ParserImplTest, PrimaryExpression_Cast) {
 
     ASSERT_EQ(call->args.Length(), 1u);
     ASSERT_TRUE(call->args[0]->Is<ast::IntLiteralExpression>());
-}
-
-TEST_F(ParserImplTest, PrimaryExpression_Bitcast) {
-    auto p = parser("bitcast<f32>(1)");
-
-    auto e = p->primary_expression();
-    EXPECT_TRUE(e.matched);
-    EXPECT_FALSE(e.errored);
-    EXPECT_FALSE(p->has_error()) << p->error();
-    ASSERT_NE(e.value, nullptr);
-    ASSERT_TRUE(e->Is<ast::BitcastExpression>());
-
-    auto* c = e->As<ast::BitcastExpression>();
-
-    ast::CheckIdentifier(c->type, "f32");
-
-    ASSERT_TRUE(c->expr->Is<ast::IntLiteralExpression>());
-}
-
-TEST_F(ParserImplTest, PrimaryExpression_Bitcast_MissingGreaterThan) {
-    auto p = parser("bitcast<f32(1)");
-    auto e = p->primary_expression();
-    EXPECT_FALSE(e.matched);
-    EXPECT_TRUE(e.errored);
-    EXPECT_EQ(e.value, nullptr);
-    ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:8: missing closing '>' for bitcast expression");
-}
-
-TEST_F(ParserImplTest, PrimaryExpression_Bitcast_MissingType) {
-    auto p = parser("bitcast<>(1)");
-    auto e = p->primary_expression();
-    EXPECT_FALSE(e.matched);
-    EXPECT_TRUE(e.errored);
-    EXPECT_EQ(e.value, nullptr);
-    ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:9: invalid type for bitcast expression");
-}
-
-TEST_F(ParserImplTest, PrimaryExpression_Bitcast_MissingLeftParen) {
-    auto p = parser("bitcast<f32>1)");
-    auto e = p->primary_expression();
-    EXPECT_FALSE(e.matched);
-    EXPECT_TRUE(e.errored);
-    EXPECT_EQ(e.value, nullptr);
-    ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:13: expected '('");
-}
-
-TEST_F(ParserImplTest, PrimaryExpression_Bitcast_MissingRightParen) {
-    auto p = parser("bitcast<f32>(1");
-    auto e = p->primary_expression();
-    EXPECT_FALSE(e.matched);
-    EXPECT_TRUE(e.errored);
-    EXPECT_EQ(e.value, nullptr);
-    ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:15: expected ')'");
-}
-
-TEST_F(ParserImplTest, PrimaryExpression_Bitcast_MissingExpression) {
-    auto p = parser("bitcast<f32>()");
-    auto e = p->primary_expression();
-    EXPECT_FALSE(e.matched);
-    EXPECT_TRUE(e.errored);
-    EXPECT_EQ(e.value, nullptr);
-    ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:14: unable to parse expression");
-}
-
-TEST_F(ParserImplTest, PrimaryExpression_bitcast_InvalidExpression) {
-    auto p = parser("bitcast<f32>(if (a) {})");
-    auto e = p->primary_expression();
-    EXPECT_FALSE(e.matched);
-    EXPECT_TRUE(e.errored);
-    EXPECT_EQ(e.value, nullptr);
-    ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:14: unable to parse expression");
 }
 
 }  // namespace

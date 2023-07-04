@@ -17,7 +17,6 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest-spi.h"
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/builtin_texture_helper_test.h"
 #include "src/tint/ast/call_statement.h"

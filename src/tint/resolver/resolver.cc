@@ -23,7 +23,6 @@
 #include "src/tint/ast/alias.h"
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/attribute.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/continue_statement.h"
@@ -1499,7 +1498,6 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
             expr,  //
             [&](const ast::IndexAccessorExpression* array) { return IndexAccessor(array); },
             [&](const ast::BinaryExpression* bin_op) { return Binary(bin_op); },
-            [&](const ast::BitcastExpression* bitcast) { return Bitcast(bitcast); },
             [&](const ast::CallExpression* call) { return Call(call); },
             [&](const ast::IdentifierExpression* ident) { return Identifier(ident); },
             [&](const ast::LiteralExpression* literal) { return Literal(literal); },
@@ -1980,39 +1978,6 @@ sem::ValueExpression* Resolver::IndexAccessor(const ast::IndexAccessorExpression
     return sem;
 }
 
-sem::ValueExpression* Resolver::Bitcast(const ast::BitcastExpression* expr) {
-    auto* inner = Load(Materialize(sem_.GetVal(expr->expr)));
-    if (!inner) {
-        return nullptr;
-    }
-    auto* ty = Type(expr->type);
-    if (!ty) {
-        return nullptr;
-    }
-    if (!validator_.Bitcast(expr, ty)) {
-        return nullptr;
-    }
-
-    auto stage = inner->Stage();
-    if (stage == sem::EvaluationStage::kConstant && skip_const_eval_.Contains(expr)) {
-        stage = sem::EvaluationStage::kNotEvaluated;
-    }
-
-    const constant::Value* value = nullptr;
-    if (stage == sem::EvaluationStage::kConstant) {
-        if (auto r = const_eval_.Bitcast(ty, inner->ConstantValue(), expr->source)) {
-            value = r.Get();
-        } else {
-            return nullptr;
-        }
-    }
-
-    auto* sem = builder_->create<sem::ValueExpression>(expr, ty, stage, current_statement_,
-                                                       std::move(value), inner->HasSideEffects());
-    sem->Behaviors() = inner->Behaviors();
-    return sem;
-}
-
 sem::Call* Resolver::Call(const ast::CallExpression* expr) {
     // A CallExpression can resolve to one of:
     // * A function call.
@@ -2235,7 +2200,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 sem_.Get(ast_node),  //
                 [&](type::Type* t) { return ty_init_or_conv(t); },
                 [&](sem::Function* f) -> sem::Call* {
-                    if (!TINT_LIKELY(CheckNotTemplated("function", ident))) {
+                    if (TINT_UNLIKELY(!CheckNotTemplated("function", ident))) {
                         return nullptr;
                     }
                     return FunctionCall(expr, f, args, arg_behaviors);
@@ -2251,10 +2216,27 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         }
 
         if (auto f = resolved->BuiltinFunction(); f != builtin::Function::kNone) {
-            if (!TINT_LIKELY(CheckNotTemplated("builtin", ident))) {
-                return nullptr;
+            const type::Type* template_arg = nullptr;
+            if (f == builtin::Function::kBitcast) {
+                auto* template_ident = ident->As<ast::TemplatedIdentifier>();
+                if (TINT_UNLIKELY(!template_ident)) {
+                    AddError("expected '<' for 'bitcast'", Source{ident->source.range.end});
+                    return nullptr;
+                }
+                if (TINT_UNLIKELY(template_ident->arguments.Length() != 1)) {
+                    AddError("'bitcast' requires 1 template argument", ident->source);
+                    return nullptr;
+                }
+                template_arg = Type(template_ident->arguments[0]);
+                if (!template_arg) {
+                    return nullptr;
+                }
+            } else {
+                if (TINT_UNLIKELY(!CheckNotTemplated("builtin", ident))) {
+                    return nullptr;
+                }
             }
-            return BuiltinCall(expr, f, args);
+            return BuiltinCall(expr, f, template_arg, args);
         }
 
         if (auto b = resolved->BuiltinType(); b != builtin::Builtin::kUndefined) {
@@ -2326,6 +2308,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
 template <size_t N>
 sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
                                  builtin::Function builtin_type,
+                                 const type::Type* template_arg,
                                  utils::Vector<const sem::ValueExpression*, N>& args) {
     auto arg_stage = sem::EvaluationStage::kConstant;
     for (auto* arg : args) {
@@ -2335,7 +2318,8 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     IntrinsicTable::Builtin builtin;
     {
         auto arg_tys = utils::Transform(args, [](auto* arg) { return arg->Type(); });
-        builtin = intrinsic_table_->Lookup(builtin_type, arg_tys, arg_stage, expr->source);
+        builtin =
+            intrinsic_table_->Lookup(builtin_type, template_arg, arg_tys, arg_stage, expr->source);
         if (!builtin.sem) {
             return nullptr;
         }
@@ -3155,13 +3139,13 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                 return user;
             },
             [&](const type::Type* ty) -> sem::TypeExpression* {
-                if (!TINT_LIKELY(CheckNotTemplated("type", ident))) {
+                if (TINT_UNLIKELY(!CheckNotTemplated("type", ident))) {
                     return nullptr;
                 }
                 return builder_->create<sem::TypeExpression>(expr, current_statement_, ty);
             },
             [&](const sem::Function* fn) -> sem::FunctionExpression* {
-                if (!TINT_LIKELY(CheckNotTemplated("function", ident))) {
+                if (TINT_UNLIKELY(!CheckNotTemplated("function", ident))) {
                     return nullptr;
                 }
                 return builder_->create<sem::FunctionExpression>(expr, current_statement_, fn);

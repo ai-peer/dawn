@@ -23,7 +23,6 @@
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/binary_expression.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/continue_statement.h"
 #include "src/tint/ast/discard_statement.h"
@@ -119,9 +118,9 @@ class GeneratorImpl : public ASTTextGenerator {
     bool EmitBinary(utils::StringStream& out, const ast::BinaryExpression* expr);
     /// Handles generating a bitcast expression
     /// @param out the output of the expression stream
-    /// @param expr the bitcast expression
+    /// @param call the bitcast call
     /// @returns true if the bitcast was emitted
-    bool EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr);
+    bool EmitBitcast(utils::StringStream& out, const sem::Call* call);
     /// Handles a block statement
     /// @param stmt the statement to emit
     /// @returns true if the statement was emitted successfully

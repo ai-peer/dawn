@@ -355,8 +355,7 @@ class DependencyScanner {
                             }
                         }
                     },
-                    [&](const ast::CallExpression* call) { TraverseExpression(call->target); },
-                    [&](const ast::BitcastExpression* cast) { TraverseExpression(cast->type); });
+                    [&](const ast::CallExpression* call) { TraverseExpression(call->target); });
                 return ast::TraverseAction::Descend;
             });
         }

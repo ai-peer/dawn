@@ -516,6 +516,16 @@ class ConstEval {
                  utils::VectorRef<const constant::Value*> args,
                  const Source& source);
 
+    /// bitcast builtin
+    /// @param ty the target type
+    /// @param args the input arguments
+    /// @param source the source location
+    /// @return the bit-cast of the given expression to the given type, or null if the value cannot
+    ///         be calculated
+    Result bitcast(const type::Type* ty,
+                   utils::VectorRef<const constant::Value*> args,
+                   const Source& source);
+
     /// ceil builtin
     /// @param ty the expression type
     /// @param args the input arguments

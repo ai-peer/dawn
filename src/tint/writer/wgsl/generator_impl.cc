@@ -118,7 +118,6 @@ void GeneratorImpl::EmitExpression(utils::StringStream& out, const ast::Expressi
         expr,  //
         [&](const ast::IndexAccessorExpression* a) { EmitIndexAccessor(out, a); },
         [&](const ast::BinaryExpression* b) { EmitBinary(out, b); },
-        [&](const ast::BitcastExpression* b) { EmitBitcast(out, b); },
         [&](const ast::CallExpression* c) { EmitCall(out, c); },
         [&](const ast::IdentifierExpression* i) { EmitIdentifier(out, i); },
         [&](const ast::LiteralExpression* l) { EmitLiteral(out, l); },
@@ -160,15 +159,6 @@ void GeneratorImpl::EmitMemberAccessor(utils::StringStream& out,
     }
 
     out << "." << expr->member->symbol.Name();
-}
-
-void GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr) {
-    out << "bitcast<";
-    EmitExpression(out, expr->type);
-
-    out << ">(";
-    EmitExpression(out, expr->expr);
-    out << ")";
 }
 
 void GeneratorImpl::EmitCall(utils::StringStream& out, const ast::CallExpression* expr) {

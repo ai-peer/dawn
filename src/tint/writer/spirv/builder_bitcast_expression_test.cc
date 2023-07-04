@@ -30,7 +30,7 @@ TEST_F(BuilderTest, Bitcast) {
     spirv::Builder& b = Build();
 
     b.PushFunctionForTesting();
-    EXPECT_EQ(b.GenerateBitcastExpression(bitcast), 1u);
+    EXPECT_EQ(b.GenerateExpression(bitcast), 1u);
 
     EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeInt 32 0
 %3 = OpTypeFloat 32
@@ -49,7 +49,7 @@ TEST_F(BuilderTest, Bitcast_DuplicateType) {
     spirv::Builder& b = Build();
 
     b.PushFunctionForTesting();
-    EXPECT_EQ(b.GenerateBitcastExpression(bitcast), 1u);
+    EXPECT_EQ(b.GenerateExpression(bitcast), 1u);
 
     EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeFloat 32
 %3 = OpConstant %2 2.4000001

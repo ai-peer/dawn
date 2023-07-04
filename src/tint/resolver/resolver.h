@@ -41,7 +41,6 @@
 namespace tint::ast {
 class IndexAccessorExpression;
 class BinaryExpression;
-class BitcastExpression;
 class CallExpression;
 class CallStatement;
 class CaseStatement;
@@ -196,7 +195,6 @@ class Resolver {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     sem::ValueExpression* IndexAccessor(const ast::IndexAccessorExpression*);
     sem::ValueExpression* Binary(const ast::BinaryExpression*);
-    sem::ValueExpression* Bitcast(const ast::BitcastExpression*);
     sem::Call* Call(const ast::CallExpression*);
     sem::Function* Function(const ast::Function*);
     template <size_t N>
@@ -208,6 +206,7 @@ class Resolver {
     template <size_t N>
     sem::Call* BuiltinCall(const ast::CallExpression*,
                            builtin::Function,
+                           const type::Type* template_arg,
                            utils::Vector<const sem::ValueExpression*, N>& args);
     sem::ValueExpression* Literal(const ast::LiteralExpression*);
     sem::ValueExpression* MemberAccessor(const ast::MemberAccessorExpression*);

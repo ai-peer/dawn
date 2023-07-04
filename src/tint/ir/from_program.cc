@@ -23,7 +23,6 @@
 #include "src/tint/ast/alias.h"
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/binary_expression.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/block_statement.h"
 #include "src/tint/ast/bool_literal_expression.h"
 #include "src/tint/ast/break_if_statement.h"
@@ -1017,7 +1016,6 @@ class Impl {
             expr,  //
             [&](const ast::AccessorExpression* a) { return EmitAccess(a); },
             [&](const ast::BinaryExpression* b) { return EmitBinary(b); },
-            [&](const ast::BitcastExpression* b) { return EmitBitcast(b); },
             [&](const ast::CallExpression* c) { return EmitCall(c); },
             [&](const ast::IdentifierExpression* i) -> utils::Result<Value*> {
                 auto* v = scopes_.Get(i->identifier->symbol);
@@ -1293,20 +1291,6 @@ class Impl {
         return inst->Result();
     }
 
-    utils::Result<Value*> EmitBitcast(const ast::BitcastExpression* expr) {
-        auto val = EmitExpression(expr->expr);
-        if (!val) {
-            return utils::Failure;
-        }
-
-        auto* sem = program_->Sem().Get(expr);
-        auto* ty = sem->Type()->Clone(clone_ctx_.type_ctx);
-        auto* inst = builder_.Bitcast(ty, val.Get());
-
-        current_block_->Append(inst);
-        return inst->Result();
-    }
-
     void EmitCall(const ast::CallStatement* stmt) { (void)EmitCall(stmt->expr); }
 
     utils::Result<Value*> EmitCall(const ast::CallExpression* expr) {
@@ -1349,7 +1333,11 @@ class Impl {
 
         // If this is a builtin function, emit the specific builtin value
         if (auto* b = sem->Target()->As<sem::Builtin>()) {
-            inst = builder_.Call(ty, b->Type(), args);
+            if (b->Type() == builtin::Function::kBitcast) {
+                inst = builder_.Bitcast(b->ReturnType(), args[0]);
+            } else {
+                inst = builder_.Call(ty, b->Type(), args);
+            }
         } else if (sem->Target()->As<sem::ValueConstructor>()) {
             inst = builder_.Construct(ty, std::move(args));
         } else if (sem->Target()->Is<sem::ValueConversion>()) {

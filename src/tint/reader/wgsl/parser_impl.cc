@@ -17,7 +17,6 @@
 #include <limits>
 
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_if_statement.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/call_statement.h"
@@ -2034,8 +2033,7 @@ Maybe<const ast::BlockStatement*> ParserImpl::continuing_statement() {
 }
 
 // primary_expression
-//   : BITCAST LESS_THAN type_specifier GREATER_THAN paren_expression
-//   | const_literal
+//   : const_literal
 //   | IDENT argument_expression_list?
 //   | paren_expression
 //
@@ -2043,22 +2041,6 @@ Maybe<const ast::BlockStatement*> ParserImpl::continuing_statement() {
 // with `argument_expression_list`.
 Maybe<const ast::Expression*> ParserImpl::primary_expression() {
     auto& t = peek();
-
-    if (match(Token::Type::kBitcast)) {
-        const char* use = "bitcast expression";
-
-        auto type = expect_template_arg_block(use, [&] { return expect_type(use); });
-        if (type.errored) {
-            return Failure::kErrored;
-        }
-
-        auto params = expect_paren_expression();
-        if (params.errored) {
-            return Failure::kErrored;
-        }
-
-        return builder_.Bitcast(t.source(), type.value, params.value);
-    }
 
     auto lit = const_literal();
     if (lit.errored) {

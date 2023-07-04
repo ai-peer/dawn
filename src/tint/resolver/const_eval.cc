@@ -2217,6 +2217,12 @@ ConstEval::Result ConstEval::atan2(const type::Type* ty,
     return TransformElements(builder, ty, transform, args[0], args[1]);
 }
 
+ConstEval::Result ConstEval::bitcast(const type::Type* ty,
+                                     utils::VectorRef<const constant::Value*> args,
+                                     const Source& source) {
+    return Bitcast(ty, args[0], source);
+}
+
 ConstEval::Result ConstEval::ceil(const type::Type* ty,
                                   utils::VectorRef<const constant::Value*> args,
                                   const Source& source) {

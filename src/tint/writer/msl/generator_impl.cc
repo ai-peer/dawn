@@ -362,14 +362,16 @@ bool GeneratorImpl::EmitIndexAccessor(utils::StringStream& out,
     return true;
 }
 
-bool GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr) {
+bool GeneratorImpl::EmitBitcast(utils::StringStream& out, const sem::Call* call) {
+    auto* expr = call->Arguments()[0];
+
     out << "as_type<";
-    if (!EmitType(out, TypeOf(expr)->UnwrapRef())) {
+    if (!EmitType(out, call->Type()->UnwrapRef())) {
         return false;
     }
 
     out << ">(";
-    if (!EmitExpression(out, expr->expr)) {
+    if (!EmitExpression(out, expr->Declaration())) {
         return false;
     }
 
@@ -1801,7 +1803,6 @@ bool GeneratorImpl::EmitExpression(utils::StringStream& out, const ast::Expressi
         expr,  //
         [&](const ast::IndexAccessorExpression* a) { return EmitIndexAccessor(out, a); },
         [&](const ast::BinaryExpression* b) { return EmitBinary(out, b); },
-        [&](const ast::BitcastExpression* b) { return EmitBitcast(out, b); },
         [&](const ast::CallExpression* c) { return EmitCall(out, c); },
         [&](const ast::IdentifierExpression* i) { return EmitIdentifier(out, i); },
         [&](const ast::LiteralExpression* l) { return EmitLiteral(out, l); },

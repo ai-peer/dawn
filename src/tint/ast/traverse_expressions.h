@@ -18,7 +18,6 @@
 #include <vector>
 
 #include "src/tint/ast/binary_expression.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/call_expression.h"
 #include "src/tint/ast/index_accessor_expression.h"
 #include "src/tint/ast/literal_expression.h"
@@ -125,10 +124,6 @@ bool TraverseExpressions(const Expression* root, diag::List& diags, CALLBACK&& c
             },
             [&](const BinaryExpression* bin_op) {
                 push_pair(bin_op->lhs, bin_op->rhs, p.depth + 1);
-                return true;
-            },
-            [&](const BitcastExpression* bitcast) {
-                push_single(bitcast->expr, p.depth + 1);
                 return true;
             },
             [&](const CallExpression* call) {

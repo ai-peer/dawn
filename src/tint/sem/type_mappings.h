@@ -26,7 +26,6 @@ class CastableBase;
 namespace tint::ast {
 class AccessorExpression;
 class BinaryExpression;
-class BitcastExpression;
 class BuiltinAttribute;
 class CallExpression;
 class Expression;
@@ -91,7 +90,6 @@ struct TypeMappings {
     type::Type* operator()(ast::TypeDecl*);
     ValueExpression* operator()(ast::AccessorExpression*);
     ValueExpression* operator()(ast::BinaryExpression*);
-    ValueExpression* operator()(ast::BitcastExpression*);
     ValueExpression* operator()(ast::CallExpression*);
     ValueExpression* operator()(ast::LiteralExpression*);
     ValueExpression* operator()(ast::PhonyExpression*);

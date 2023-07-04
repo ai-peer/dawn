@@ -19,7 +19,6 @@
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/binary_expression.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_if_statement.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/compound_assignment_statement.h"
@@ -76,10 +75,6 @@ class GeneratorImpl : public ASTTextGenerator {
     /// @param out the output stream
     /// @param op the binary operator
     void EmitBinaryOp(utils::StringStream& out, const ast::BinaryOp op);
-    /// Handles generating a bitcast expression
-    /// @param out the output stream
-    /// @param expr the bitcast expression
-    void EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr);
     /// Handles a block statement
     /// @param stmt the statement to emit
     void EmitBlock(const ast::BlockStatement* stmt);

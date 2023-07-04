@@ -501,7 +501,6 @@ uint32_t Builder::GenerateExpression(const sem::Expression* expr) {
         expr->Declaration(),  //
         [&](const ast::AccessorExpression* a) { return GenerateAccessorExpression(a); },
         [&](const ast::BinaryExpression* b) { return GenerateBinaryExpression(b); },
-        [&](const ast::BitcastExpression* b) { return GenerateBitcastExpression(b); },
         [&](const ast::CallExpression* c) { return GenerateCallExpression(c); },
         [&](const ast::IdentifierExpression* i) { return GenerateIdentifierExpression(i); },
         [&](const ast::LiteralExpression* l) { return GenerateLiteralIfNeeded(l); },
@@ -2247,6 +2246,10 @@ uint32_t Builder::GenerateBuiltinCall(const sem::Call* call, const sem::Builtin*
         return 0;
     }
 
+    if (builtin->Type() == builtin::Function::kBitcast) {
+        return GenerateBitcastExpression(call);
+    }
+
     if (builtin->IsFineDerivative() || builtin->IsCoarseDerivative()) {
         module_.PushCapability(SpvCapabilityDerivativeControl);
     }
@@ -3261,23 +3264,25 @@ uint32_t Builder::GenerateSampledImage(const type::Type* texture_type,
     return std::get<uint32_t>(sampled_image);
 }
 
-uint32_t Builder::GenerateBitcastExpression(const ast::BitcastExpression* expr) {
+uint32_t Builder::GenerateBitcastExpression(const sem::Call* call) {
+    auto* expr = call->Arguments()[0];
     auto result = result_op();
     auto result_id = std::get<uint32_t>(result);
 
-    auto result_type_id = GenerateTypeIfNeeded(TypeOf(expr));
+    auto* to_type = call->Type()->UnwrapRef();
+    auto* from_type = expr->Type()->UnwrapRef();
+
+    auto result_type_id = GenerateTypeIfNeeded(to_type);
     if (result_type_id == 0) {
         return 0;
     }
 
-    auto val_id = GenerateExpression(expr->expr);
+    auto val_id = GenerateExpression(expr);
     if (val_id == 0) {
         return 0;
     }
 
     // Bitcast does not allow same types, just emit a CopyObject
-    auto* to_type = TypeOf(expr)->UnwrapRef();
-    auto* from_type = TypeOf(expr->expr)->UnwrapRef();
     if (to_type == from_type) {
         if (!push_function_inst(spv::Op::OpCopyObject,
                                 {Operand(result_type_id), result, Operand(val_id)})) {

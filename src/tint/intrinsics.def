@@ -594,6 +594,8 @@ match workgroup
 @must_use @const fn atan2<T: fa_f32_f16, N: num>(vec<N, T>, vec<N, T>) -> vec<N, T>
 @must_use @const fn atanh<T: fa_f32_f16>(@test_value(0.5) T) -> T
 @must_use @const fn atanh<N: num, T: fa_f32_f16>(@test_value(0.5) vec<N, T>) -> vec<N, T>
+@must_use @const fn bitcast<T: fiu32, S: fiu32>(S) -> T
+@must_use @const fn bitcast<T: vec2<f32> >(vec2<u32>) -> T
 @must_use @const fn ceil<T: fa_f32_f16>(@test_value(1.5) T) -> T
 @must_use @const fn ceil<N: num, T: fa_f32_f16>(@test_value(1.5) vec<N, T>) -> vec<N, T>
 @must_use @const fn clamp<T: fia_fiu32_f16>(T, T, T) -> T

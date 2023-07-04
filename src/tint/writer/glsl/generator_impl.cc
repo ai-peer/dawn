@@ -354,9 +354,10 @@ void GeneratorImpl::EmitIndexAccessor(utils::StringStream& out,
     out << "]";
 }
 
-void GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr) {
-    auto* src_type = TypeOf(expr->expr)->UnwrapRef();
-    auto* dst_type = TypeOf(expr)->UnwrapRef();
+void GeneratorImpl::EmitBitcast(utils::StringStream& out, const sem::Call* call) {
+    auto* expr = call->Arguments()[0];
+    auto* src_type = expr->Type()->UnwrapRef();
+    auto* dst_type = call->Type()->UnwrapRef();
 
     if (!dst_type->is_integer_scalar_or_vector() && !dst_type->is_float_scalar_or_vector()) {
         diagnostics_.add_error(diag::System::Writer,
@@ -365,7 +366,7 @@ void GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpr
     }
 
     if (src_type == dst_type) {
-        return EmitExpression(out, expr->expr);
+        return EmitExpression(out, expr->Declaration());
     }
 
     if (src_type->is_float_scalar_or_vector() && dst_type->is_signed_integer_scalar_or_vector()) {
@@ -383,7 +384,7 @@ void GeneratorImpl::EmitBitcast(utils::StringStream& out, const ast::BitcastExpr
         EmitType(out, dst_type, builtin::AddressSpace::kUndefined, builtin::Access::kReadWrite, "");
     }
     ScopedParen sp(out);
-    EmitExpression(out, expr->expr);
+    EmitExpression(out, expr->Declaration());
 }
 
 void GeneratorImpl::EmitAssign(const ast::AssignmentStatement* stmt) {
@@ -691,6 +692,8 @@ void GeneratorImpl::EmitBuiltinCall(utils::StringStream& out,
         EmitTextureCall(out, call, builtin);
     } else if (builtin->Type() == builtin::Function::kCountOneBits) {
         EmitCountOneBitsCall(out, expr);
+    } else if (builtin->Type() == builtin::Function::kBitcast) {
+        EmitBitcast(out, call);
     } else if (builtin->Type() == builtin::Function::kSelect) {
         EmitSelectCall(out, expr, builtin);
     } else if (builtin->Type() == builtin::Function::kDot) {
@@ -1626,7 +1629,6 @@ void GeneratorImpl::EmitExpression(utils::StringStream& out, const ast::Expressi
         expr,  //
         [&](const ast::IndexAccessorExpression* a) { EmitIndexAccessor(out, a); },
         [&](const ast::BinaryExpression* b) { EmitBinary(out, b); },
-        [&](const ast::BitcastExpression* b) { EmitBitcast(out, b); },
         [&](const ast::CallExpression* c) { EmitCall(out, c); },
         [&](const ast::IdentifierExpression* i) { EmitIdentifier(out, i); },
         [&](const ast::LiteralExpression* l) { EmitLiteral(out, l); },

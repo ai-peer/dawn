@@ -23,7 +23,6 @@
 
 #include "spirv/unified1/spirv.h"
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/continue_statement.h"
 #include "src/tint/ast/discard_statement.h"
@@ -274,7 +273,7 @@ class Builder {
     /// Generates a bitcast expression
     /// @param expr the expression to generate
     /// @returns the expression ID on success or 0 otherwise
-    uint32_t GenerateBitcastExpression(const ast::BitcastExpression* expr);
+    uint32_t GenerateBitcastExpression(const sem::Call* expr);
     /// Generates a short circuting binary expression
     /// @param expr the expression to generate
     /// @returns teh expression ID on success or 0 otherwise

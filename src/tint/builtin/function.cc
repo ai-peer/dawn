@@ -58,6 +58,9 @@ Function ParseFunction(std::string_view name) {
     if (name == "atanh") {
         return Function::kAtanh;
     }
+    if (name == "bitcast") {
+        return Function::kBitcast;
+    }
     if (name == "ceil") {
         return Function::kCeil;
     }
@@ -396,6 +399,8 @@ const char* str(Function i) {
             return "atan2";
         case Function::kAtanh:
             return "atanh";
+        case Function::kBitcast:
+            return "bitcast";
         case Function::kCeil:
             return "ceil";
         case Function::kClamp:

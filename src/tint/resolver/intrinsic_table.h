@@ -83,6 +83,7 @@ class IntrinsicTable {
     /// Lookup looks for the builtin overload with the given signature, raising an error diagnostic
     /// if the builtin was not found.
     /// @param type the builtin type
+    /// @param template_arg the optional template argument
     /// @param args the argument types passed to the builtin function
     /// @param earliest_eval_stage the the earliest evaluation stage that a call to
     ///        the builtin can be made. This can alter the overloads considered.
@@ -93,6 +94,7 @@ class IntrinsicTable {
     /// @param source the source of the builtin call
     /// @return the semantic builtin if found, otherwise nullptr
     virtual Builtin Lookup(builtin::Function type,
+                           const type::Type* template_arg,
                            utils::VectorRef<const type::Type*> args,
                            sem::EvaluationStage earliest_eval_stage,
                            const Source& source) = 0;
