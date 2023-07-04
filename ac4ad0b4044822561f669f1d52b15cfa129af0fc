@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "306af902_d9d6c2e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-07-04T22:40:34Z",
+      "side": 1,
+      "message": "This passes Dawn toggles into adapter enumeration.\nBut it has a peculiar behaviour:  When no flags are passed in Dawn still enables f16 on my Mac, which seems wrong.  It should be off by default, shouldn\u0027t i?",
+      "revId": "ac4ad0b4044822561f669f1d52b15cfa129af0fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
