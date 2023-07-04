@@ -257,6 +257,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e3a567_6f1ddab7",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-04T17:07:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c1bbaad7_0fd52d4d",
+      "revId": "b72f69420d10ab432caefe5098798b6a9a93ac47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3495caf6_ba4026cc",
