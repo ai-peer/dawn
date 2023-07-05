@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c2693e_7473cea2",
+        "filename": "src/dawn/tests/unittests/MutexTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-05T16:10:38Z",
+      "side": 1,
+      "message": "\"If death tests are supported, behaves the same as EXPECT_DEATH. Otherwise, verifies nothing.\"\n\nwill this simply deadlock then since it will presumably call Lock without an assertion?\n\nperhaps we need to skip the whole test if death tests are not supported",
+      "revId": "ea6d23e47230add7aab7c718670f400d0410e3ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
