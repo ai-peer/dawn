@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "685d5682_c7fad04f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-05T07:56:48Z",
+      "side": 1,
+      "message": "Excellent. Thank you for all the changes and your patience. This is really important to get right 😊",
+      "revId": "7cc035115d05704c1bc76a6924549b602c45b884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
