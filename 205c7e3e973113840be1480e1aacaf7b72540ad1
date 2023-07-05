@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77438707_2ad6c9fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000140
+      },
+      "writtenOn": "2023-07-05T13:50:11Z",
+      "side": 1,
+      "message": "Could you please take another look, Corentin? I\u0027d like to make sure that you\u0027re ok with the changes I needed to make to resolve conflicts when I rebased.",
+      "revId": "205c7e3e973113840be1480e1aacaf7b72540ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
