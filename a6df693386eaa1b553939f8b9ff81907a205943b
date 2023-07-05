@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca4f216_3252cb08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-05T19:37:43Z",
+      "side": 1,
+      "message": "I couldn\u0027t override dawn_build_dxc var in Chromium - it needed to be a GN arg",
+      "revId": "a6df693386eaa1b553939f8b9ff81907a205943b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
