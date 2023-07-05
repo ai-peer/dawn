@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "43e7aea4_23c819f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000140
+      },
+      "writtenOn": "2023-07-05T16:07:05Z",
+      "side": 1,
+      "message": "Sorry, I missed your comment when I cq+2\u0027d earlier. I\u0027ve pulled this out of the cq while we discuss here.\n\nWhile these don\u0027t appear to be a problem for me at the moment I agree that they should be updated, too, and I\u0027ve made this change in the latest patchset. Thanks for flagging!",
+      "parentUuid": "d02715c1_c242009c",
+      "revId": "d10606c4d6a3961fa0a69d3cd827102d0270330b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "73c0d4e1_e489b506",
         "filename": "src/dawn/native/BUILD.gn",
         "patchSetId": 2
