@@ -16,6 +16,23 @@
       "message": "Hi Corentin, Austin, PTAL. Thanks",
       "revId": "fc8a3508d5409cbb2b4d1ef32b558c5de819eed6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6fe3bf_bb4b7094",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-05T12:53:53Z",
+      "side": 1,
+      "message": "LGTM assuming you checked with Quyen that this is the plan for D3D11 implicit synchronization.",
+      "revId": "fc8a3508d5409cbb2b4d1ef32b558c5de819eed6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
