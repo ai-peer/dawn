@@ -16,6 +16,23 @@
       "message": "Could you please take another look, Corentin? I\u0027d like to make sure that you\u0027re ok with the changes I needed to make to resolve conflicts when I rebased.",
       "revId": "205c7e3e973113840be1480e1aacaf7b72540ad1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe2d69a_95329f66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-05T13:59:04Z",
+      "side": 1,
+      "message": "Still LGTM!",
+      "revId": "205c7e3e973113840be1480e1aacaf7b72540ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
