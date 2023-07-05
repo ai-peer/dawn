@@ -34,6 +34,24 @@
       "parentUuid": "79439133_2d55d6d9",
       "revId": "09bde286897d601467a671e5dd86e94355ee4f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb3e3a1_7c71ecb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-05T13:23:45Z",
+      "side": 1,
+      "message": "Sorry. Maybe I didn\u0027t express my idea correctly in the meeting. I wish we can handle it in dawn, otherwise, we need at least two LUID maps. One for dawn device, one for angle. And we will need more maps in chromium. if we want to import webcam textures into dawn for webgpu as well. or we need to make pixel copy for each begin access. When the webcam refactor is done, we can remove them.",
+      "parentUuid": "cc42821c_8bb9c3ac",
+      "revId": "09bde286897d601467a671e5dd86e94355ee4f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
