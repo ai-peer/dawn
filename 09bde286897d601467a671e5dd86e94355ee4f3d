@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79439133_2d55d6d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-05T12:59:53Z",
+      "side": 1,
+      "message": "Uuh I thought that when we discussed this, we agreed that we didn\u0027t need to handle the LUID thing at first in D3D11, and that would wait for after the refactor of the whole ExternalImage thing so that we could require that Chromium imports each D3D11Texture only once in Dawn.",
+      "revId": "09bde286897d601467a671e5dd86e94355ee4f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
