@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf4e6d79_7feacafa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-05T15:55:42Z",
+      "side": 1,
+      "message": "Not sure if people\u0027s opinions on whether or not this should land have changed since post-v1 planning, but I\u0027ve rebased and updated with Dawn\u0027s `PhysicalDevice` refactoring, and renamed the backend type.\n\nOne other potential use case for this, aside from debugging, is that some folks on our team have Linux workstations that can\u0027t support F16 (hardware GPU and SwiftShader both lacking the necessary Vulkan features). The interpreter gives a way to run F16 CTS tests on any platform, since it trivially supports F16 (to the extent that Tint itself does).",
+      "revId": "249822082f5ae70592614f3511947eb0050e4214",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
