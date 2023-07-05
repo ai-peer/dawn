@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6713da6_668a1d11",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-05T06:02:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc78d1b3_2e9ebf39",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 21
+      },
+      "revId": "a2602aa8bc999ac428c263fb5273a3749c73ff5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7faa2b4d_3f811706",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-07-04T11:38:23Z",
       "side": 1,
       "message": "nit: It\u0027s a bit unintuitive to have a index-accessor as the input and the **index expression** as the return value. I\u0027d recommend `CastToU32(const sem::Expression* expr)` and pass `expr-\u003eIndex()`. That way the method is simpler and the usages are slightly less confusing.",
+      "range": {
+        "startLine": 709,
+        "startChar": 27,
+        "endLine": 709,
+        "endChar": 39
+      },
+      "revId": "a2602aa8bc999ac428c263fb5273a3749c73ff5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd9f3c23_7cb80db1",
+        "filename": "src/tint/ast/transform/robustness.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-05T06:02:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7faa2b4d_3f811706",
       "range": {
         "startLine": 709,
         "startChar": 27,
