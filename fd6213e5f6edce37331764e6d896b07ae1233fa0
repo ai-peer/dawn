@@ -16,6 +16,24 @@
       "message": "LGTM.\n\nFWIW I think devices automatically inherit toggles from the adapter, so you probably /could/ just put all the toggles on the adapter rather than doing both:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Adapter.cpp;l\u003d131?ss\u003dchromium\n\nBut this is fine too.",
       "revId": "fd6213e5f6edce37331764e6d896b07ae1233fa0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70d828d7_10b62982",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-07-05T16:20:52Z",
+      "side": 1,
+      "message": "I clearly don\u0027t really know what I\u0027m doing.  :-)\n\nI found the togglestage enum order confusing:  instance -\u003e adapter -\u003e device\n\nI\u0027m ok with the redundancy I guess.",
+      "parentUuid": "b1cb63e2_3f7c16fe",
+      "revId": "fd6213e5f6edce37331764e6d896b07ae1233fa0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
