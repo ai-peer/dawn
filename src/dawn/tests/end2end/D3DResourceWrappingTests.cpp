@@ -1122,14 +1122,6 @@ class D3DExternalImageMultithreadTests : public D3DExternalImageUsageTests {
         D3DExternalImageUsageTests::SetUp();
         // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
-
-        if (IsD3D11() && IsD3D11Texture()) {
-            // For this configuration, the d3d1Device will be used from more than one thread.
-            auto d3d11Device = dawn::native::d3d11::GetD3D11Device(device.Get());
-            ComPtr<ID3D11Multithread> multithread;
-            d3d11Device.As(&multithread);
-            multithread->SetMultithreadProtected(TRUE);
-        }
     }
 };
 

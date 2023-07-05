@@ -119,6 +119,13 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     DAWN_TRY(CheckHRESULT(mFence->CreateSharedHandle(nullptr, GENERIC_ALL, nullptr, &mFenceHandle),
                           "D3D11: creating fence shared handle"));
 
+    // Enable multithreaded protection, so ID3D11DeviceContext can be used in multiple threads.
+    if (HasFeature(Feature::ImplicitDeviceSynchronization)) {
+        ComPtr<ID3D11Multithread> multithread;
+        DAWN_TRY(CheckHRESULT(mD3d11Device.As(&multithread), "D3D11: getting ID3D11Multithread"));
+        multithread->SetMultithreadProtected(TRUE);
+    }
+
     // Create the fence event.
     mFenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
 
