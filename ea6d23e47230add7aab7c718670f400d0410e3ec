@@ -34,6 +34,24 @@
       "parentUuid": "30c2693e_7473cea2",
       "revId": "ea6d23e47230add7aab7c718670f400d0410e3ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "237833a8_4f23492a",
+        "filename": "src/dawn/tests/unittests/MutexTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-05T16:27:32Z",
+      "side": 1,
+      "message": "ah, thank you for checking!",
+      "parentUuid": "941b6693_bf0b8a1e",
+      "revId": "ea6d23e47230add7aab7c718670f400d0410e3ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
