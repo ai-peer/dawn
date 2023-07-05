@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d02715c1_c242009c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-05T15:32:16Z",
+      "side": 1,
+      "message": "there are some ASSERT_DEATH\n\nwill it be a problem?\nhttps://source.chromium.org/search?q\u003df:dawn%20ASSERT_DEATH\u0026sq\u003d\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "revId": "d10606c4d6a3961fa0a69d3cd827102d0270330b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "73c0d4e1_e489b506",
         "filename": "src/dawn/native/BUILD.gn",
         "patchSetId": 2
