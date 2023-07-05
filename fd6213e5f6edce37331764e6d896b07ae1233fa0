@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1cb63e2_3f7c16fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-05T12:00:24Z",
+      "side": 1,
+      "message": "LGTM.\n\nFWIW I think devices automatically inherit toggles from the adapter, so you probably /could/ just put all the toggles on the adapter rather than doing both:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Adapter.cpp;l\u003d131?ss\u003dchromium\n\nBut this is fine too.",
+      "revId": "fd6213e5f6edce37331764e6d896b07ae1233fa0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
