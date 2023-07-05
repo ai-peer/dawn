@@ -33,6 +33,24 @@
       "message": "LGTM assuming you checked with Quyen that this is the plan for D3D11 implicit synchronization.",
       "revId": "fc8a3508d5409cbb2b4d1ef32b558c5de819eed6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b174f00_7e718db7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-05T14:19:02Z",
+      "side": 1,
+      "message": "Just realized this CL is not necessary. If ImplicitDeviceSynchronization is enabled, the device will be locked when the d3d11 device context is used.",
+      "parentUuid": "0a6fe3bf_bb4b7094",
+      "revId": "fc8a3508d5409cbb2b4d1ef32b558c5de819eed6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
