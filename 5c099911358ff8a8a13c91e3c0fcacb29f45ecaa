@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bba23fcf_7b4bf204",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-05T19:46:51Z",
+      "side": 1,
+      "message": "Ah I clicked submit too soon. Let me fix this and the other one in a new CL. Thanks for the review!",
+      "parentUuid": "8c458e66_f55a0d3a",
+      "revId": "5c099911358ff8a8a13c91e3c0fcacb29f45ecaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "560e5bae_56b35b70",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 3
