@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "701bbb64_6a95d371",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-05T12:21:07Z",
+      "side": 1,
+      "message": "There\u0027s a `Split()` function in `src/tint/utils/string.h`, but it doesn\u0027t drop empty strings.",
+      "revId": "f271641f91aa0587e6027832aa2e395236a7b098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2424ef0_3ed4e384",
+        "filename": "src/dawn/node/binding/Split.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-05T12:21:07Z",
+      "side": 1,
+      "message": "nit: rm",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 5
+      },
+      "revId": "f271641f91aa0587e6027832aa2e395236a7b098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
