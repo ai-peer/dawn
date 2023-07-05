@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c22d72_3d7a71fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-07-05T19:48:46Z",
+      "side": 1,
+      "message": "Austin, PTAL.\nNeeded to unblock vulkan-deps-\u003eChromium roll.",
+      "revId": "3619798ec900fa20e805de1ddc19458ddb30c0ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
