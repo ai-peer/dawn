@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca783e6_4c86fbde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-05T19:42:15Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "5c099911358ff8a8a13c91e3c0fcacb29f45ecaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c458e66_f55a0d3a",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-05T19:42:15Z",
+      "side": 1,
+      "message": "Not new to this patch, but could you explain somewhere why these use `texture_2d_array\u003c\u003e` and not `texture_2d\u003c\u003e` bindings?",
+      "revId": "5c099911358ff8a8a13c91e3c0fcacb29f45ecaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560e5bae_56b35b70",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-05T19:42:15Z",
+      "side": 1,
+      "message": "Nit: I wonder if all these checks could be refactored into a `NeedsInternalTextureBindingUsage()` helper that returns true/false.\n\nThen we only need a single call to:\n\n```\nif (NeedsInternalTextureBinding(device)) {\n  if (mInternalUsage \u0026 wgpu::TextureUsage::CopySrc) {\n     AddInternalUsage(wgpu::TextureUsage::TextureBinding);\n  }\n}\n```\n\n(Or if there\u0027s overlap with the ShouldUseTextureToBufferBlit(), you could use/refactor that too.)\n\nCould also do a similar `NeedsInternalRenderAttachmentUsage()` for the write case.",
+      "revId": "5c099911358ff8a8a13c91e3c0fcacb29f45ecaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
