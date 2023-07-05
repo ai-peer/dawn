@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f553e6c_cf3a3930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-07-05T15:02:29Z",
+      "side": 1,
+      "message": "Probably the bigger issue is that the strings have to be nul-terminated.\nI had thought of doing a strcpy and writing 0 bytes to the places where delimiters are, but I didn\u0027t want to write new code. :-)",
+      "parentUuid": "701bbb64_6a95d371",
+      "revId": "f271641f91aa0587e6027832aa2e395236a7b098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2424ef0_3ed4e384",
