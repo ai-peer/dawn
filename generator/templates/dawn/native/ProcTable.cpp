@@ -177,11 +177,11 @@ namespace {{native_namespace}} {
 
     static {{Prefix}}ProcTable gProcTable = {
         {% for function in by_category["function"] %}
-            Native{{as_cppType(function.name)}},
+           .{{as_varName(function.name)}} =  Native{{as_cppType(function.name)}},
         {% endfor %}
         {% for type in by_category["object"] %}
             {% for method in c_methods(type) %}
-                Native{{as_MethodSuffix(type.name, method.name)}},
+                .{{as_varName(type.name, method.name)}} = Native{{as_MethodSuffix(type.name, method.name)}},
             {% endfor %}
         {% endfor %}
     };
