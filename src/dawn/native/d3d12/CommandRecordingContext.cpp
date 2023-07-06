@@ -65,7 +65,8 @@ MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
     return {};
 }
 
-MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
+MaybeError CommandRecordingContext::ExecuteCommandList(Device* device,
+                                                       ID3D12CommandQueue* commandQueue) {
     if (IsOpen()) {
         // Shared textures must be transitioned to common state after the last usage in order
         // for them to be used by other APIs like D3D11. We ensure this by transitioning to the
@@ -95,12 +96,12 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
             GetSystemTimeAsFileTime(&fileTimeNonPrecise);
             GetSystemTime(&systemTimeNonPrecise);
             // Query CPU and GPU timestamps at almost the same time
-            device->GetCommandQueue()->GetClockCalibration(&gpuTimestamp, &cpuTimestamp);
+            commandQueue->GetClockCalibration(&gpuTimestamp, &cpuTimestamp);
 
             uint64_t gpuFrequency;
             uint64_t cpuFrequency;
             LARGE_INTEGER cpuFrequencyLargeInteger;
-            device->GetCommandQueue()->GetTimestampFrequency(&gpuFrequency);
+            commandQueue->GetTimestampFrequency(&gpuFrequency);
             QueryPerformanceFrequency(&cpuFrequencyLargeInteger);  // Supported since Windows 2000
             cpuFrequency = cpuFrequencyLargeInteger.QuadPart;
 
@@ -122,7 +123,7 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
         }
 
         ID3D12CommandList* d3d12CommandList = GetCommandList();
-        device->GetCommandQueue()->ExecuteCommandLists(1, &d3d12CommandList);
+        commandQueue->ExecuteCommandLists(1, &d3d12CommandList);
 
         for (Texture* texture : mSharedTextures) {
             DAWN_TRY(texture->SynchronizeImportedTextureAfterUse());
