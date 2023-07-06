@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "036b9a9a_25d060aa",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-06T18:06:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24242b4b_e539d667",
+      "range": {
+        "startLine": 354,
+        "startChar": 5,
+        "endLine": 354,
+        "endChar": 48
+      },
+      "revId": "04369dbe18900e83440b49c5922c37bc5905bfa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adae0d95_9c41132c",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-07-06T15:12:08Z",
       "side": 1,
       "message": "nit: \"CopySrcNeedsInternalTextureBindingUsage\" ?",
+      "range": {
+        "startLine": 372,
+        "startChar": 5,
+        "endLine": 372,
+        "endChar": 46
+      },
+      "revId": "04369dbe18900e83440b49c5922c37bc5905bfa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c3ddd2_d36df365",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-06T18:06:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adae0d95_9c41132c",
       "range": {
         "startLine": 372,
         "startChar": 5,
