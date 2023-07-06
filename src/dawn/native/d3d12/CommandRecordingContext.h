@@ -40,7 +40,7 @@ class CommandRecordingContext {
     bool NeedsSubmit() const;
     void SetNeedsSubmit();
 
-    MaybeError ExecuteCommandList(Device* device);
+    MaybeError ExecuteCommandList(Device* device, ID3D12CommandQueue* commandQueue);
 
     void TrackHeapUsage(Heap* heap, ExecutionSerial serial);
 
