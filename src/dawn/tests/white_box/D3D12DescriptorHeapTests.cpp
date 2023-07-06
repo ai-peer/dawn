@@ -244,7 +244,7 @@ TEST_P(D3D12DescriptorHeapTests, PoolHeapsInMultipleSubmits) {
         // CheckPassedSerials() will update the last internally completed serial.
         EXPECT_TRUE(mD3DQueue->CheckPassedSerials().IsSuccess());
         // NextSerial() will increment the last internally submitted serial.
-        EXPECT_TRUE(mD3DDevice->NextSerial().IsSuccess());
+        EXPECT_TRUE(mD3DQueue->NextSerial().IsSuccess());
     }
 
     // Repeat up to |kFrameDepth| again but ensure heaps are the same in the expected order
@@ -256,7 +256,7 @@ TEST_P(D3D12DescriptorHeapTests, PoolHeapsInMultipleSubmits) {
         EXPECT_TRUE(heaps.front() == heap);
         heaps.pop_front();
         EXPECT_TRUE(mD3DQueue->CheckPassedSerials().IsSuccess());
-        EXPECT_TRUE(mD3DDevice->NextSerial().IsSuccess());
+        EXPECT_TRUE(mD3DQueue->NextSerial().IsSuccess());
     }
 
     EXPECT_TRUE(heaps.empty());
@@ -1051,7 +1051,7 @@ TEST_P(D3D12DescriptorHeapTests, InvalidateAllocationAfterSerial) {
 
     EXPECT_TRUE(gpuAllocator->IsAllocationStillValid(gpuHeapDescAllocation));
 
-    EXPECT_TRUE(d3dDevice->NextSerial().IsSuccess());
+    EXPECT_TRUE(mD3DQueue->NextSerial().IsSuccess());
 
     EXPECT_FALSE(gpuAllocator->IsAllocationStillValid(gpuHeapDescAllocation));
 }
