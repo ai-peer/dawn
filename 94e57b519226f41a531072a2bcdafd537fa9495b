@@ -16,6 +16,24 @@
       "message": "I feel like we shouldn\u0027t duplicate the token based shared handle deduplication (pun unintended) logic from Chromium in Dawn. We want to get rid of that in Chromium once we migrate the camera process from using GMBs to using SharedImageInterface.\n\nThe basic aim is to prevent having multiple ExternalImageDXGIs for the same keyed mutex backed texture. The way to do that in Chromium is to cache state in DXGISharedHandleManager which uses a unique token as a key. In addition, we have a map of WGPUDevice to DawnExternalImageState (which contains ExternalImageDXGI) in the D3DImageBacking.\n\nIIUC we could move that map i.e. the dawn_external_image_cache_ that lives in D3DImageBacking currently to DXGISharedHandleState and as a result we\u0027ll get the intended behavior for free.",
       "revId": "94e57b519226f41a531072a2bcdafd537fa9495b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca58ee53_600292d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-06T13:59:57Z",
+      "side": 1,
+      "message": "I tried this idea this morning, and found out it is too complex. With your suggestion DXGISharedHandleManager will be used for importing both keyed mutex texture and non keyed mutex texture, and it have to support importing for ANGLE, dawn d3d11 and dawn d3d12. So probably it has to use a ID3D11Device* as key instead of WGPUDevice. Not sure how it will work for Dawn D3D12 backend. The code will be complex and difficult to manage.\nAnd when webcam stops using keyed mutex, it will be really hard to change it back.",
+      "parentUuid": "44e85b63_3955fcd0",
+      "revId": "94e57b519226f41a531072a2bcdafd537fa9495b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
