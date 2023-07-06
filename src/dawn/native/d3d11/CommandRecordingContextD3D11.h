@@ -40,14 +40,14 @@ class Device;
 
 class CommandRecordingContext {
   public:
-    MaybeError Intialize(Device* device);
+    MaybeError Initialize(Device* device);
 
     void Release();
     bool IsOpen() const;
     bool NeedsSubmit() const;
     void SetNeedsSubmit();
 
-    MaybeError ExecuteCommandList(Device* device);
+    MaybeError ExecuteCommandList();
 
     ID3D11Device* GetD3D11Device() const;
     ID3D11DeviceContext* GetD3D11DeviceContext() const;
