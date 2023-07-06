@@ -178,11 +178,11 @@ namespace dawn::wire::client {
     {% set Prefix = metadata.proc_table_prefix %}
     static {{Prefix}}ProcTable gProcTable = {
         {% for function in by_category["function"] %}
-            Client{{as_cppType(function.name)}},
+            .{{as_varName(function.name)}} = Client{{as_cppType(function.name)}},
         {% endfor %}
         {% for type in by_category["object"] %}
             {% for method in c_methods(type) %}
-                Client{{as_MethodSuffix(type.name, method.name)}},
+                .{{as_varName(type.name, method.name)}} = Client{{as_MethodSuffix(type.name, method.name)}},
             {% endfor %}
         {% endfor %}
     };
