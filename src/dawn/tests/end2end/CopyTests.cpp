@@ -154,6 +154,10 @@ DAWN_TEST_PARAM_STRUCT(CopyTextureFormatParams, TextureFormat);
 
 class CopyTests_T2B : public CopyTests, public DawnTestWithParams<CopyTextureFormatParams> {
   protected:
+    struct TextureSpec : CopyTests::TextureSpec {
+        TextureSpec() { format = GetParam().mTextureFormat; }
+    };
+
     void SetUp() override {
         DawnTestWithParams<CopyTextureFormatParams>::SetUp();
 
@@ -170,13 +174,10 @@ class CopyTests_T2B : public CopyTests, public DawnTestWithParams<CopyTextureFor
                                             GetParam().mTextureFormat);
     }
 
-    void DoTest(TextureSpec& textureSpec,
+    void DoTest(const TextureSpec& textureSpec,
                 const BufferSpec& bufferSpec,
                 const wgpu::Extent3D& copySize,
                 wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D) {
-        wgpu::TextureFormat format = GetParam().mTextureFormat;
-        textureSpec.format = format;
-
         const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
         // Create a texture that is `width` x `height` with (`level` + 1) mip levels.
         wgpu::TextureDescriptor descriptor;
@@ -1034,14 +1035,14 @@ TEST_P(CopyTests_T2B, StrideSpecialCases) {
 // take effect. If rowsPerImage takes effect, it looks like the copy may go past the end of the
 // buffer.
 TEST_P(CopyTests_T2B, RowsPerImageShouldNotCauseBufferOOBIfDepthOrArrayLayersIsOne) {
+    constexpr uint32_t kWidth = 250;
+    constexpr uint32_t kHeight = 3;
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, 1};
+    const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
+
     // Check various offsets to cover each code path in the 2D split code in TextureCopySplitter.
-    for (uint32_t offset : {0, 4, 64}) {
-        constexpr uint32_t kWidth = 250;
-        constexpr uint32_t kHeight = 3;
-
-        TextureSpec textureSpec;
-        textureSpec.textureSize = {kWidth, kHeight, 1};
-
+    for (uint32_t offset : {0u, bytesPerTexel, bytesPerTexel * 8u}) {
         BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kHeight);
         bufferSpec.rowsPerImage = 2 * kHeight;
         bufferSpec.offset = offset;
@@ -1055,15 +1056,16 @@ TEST_P(CopyTests_T2B, RowsPerImageShouldNotCauseBufferOOBIfDepthOrArrayLayersIsO
 // take effect. If bytesPerRow takes effect, it looks like the copy may go past the end of the
 // buffer.
 TEST_P(CopyTests_T2B, BytesPerRowShouldNotCauseBufferOOBIfCopyHeightIsOne) {
+    constexpr uint32_t kWidth = 250;
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, 1, 1};
+    const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
+
     // Check various offsets to cover each code path in the 2D split code in TextureCopySplitter.
-    for (uint32_t offset : {0, 4, 100}) {
-        constexpr uint32_t kWidth = 250;
-
-        TextureSpec textureSpec;
-        textureSpec.textureSize = {kWidth, 1, 1};
-
+    for (uint32_t offset : {0u, bytesPerTexel, bytesPerTexel * 25u}) {
         BufferSpec bufferSpec = MinimumBufferSpec(kWidth, 1);
-        bufferSpec.bytesPerRow = 1280;  // the default bytesPerRow is 1024.
+        bufferSpec.bytesPerRow =
+            Align(kWidth * bytesPerTexel + 99, 256);  // the default bytesPerRow is 1024.
         bufferSpec.offset = offset;
         bufferSpec.size += offset;
         DoTest(textureSpec, bufferSpec, {kWidth, 1, 1});
@@ -1299,16 +1301,17 @@ TEST_P(CopyTests_T2B, Texture3DNoSplitRowDataWithEmptyFirstRow) {
 
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
+    const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
     BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kHeight, kDepth);
 
     // The tests below are designed to test TextureCopySplitter for 3D textures on D3D12.
     // Base: no split for a row + no empty first row
-    bufferSpec.offset = 60;
+    bufferSpec.offset = Align(60u, bytesPerTexel);
     bufferSpec.size += bufferSpec.offset;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D);
 
     // This test will cover: no split for a row + empty first row
-    bufferSpec.offset = 260;
+    bufferSpec.offset = Align(260u, bytesPerTexel);
     bufferSpec.size += bufferSpec.offset;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D);
 }
@@ -1320,11 +1323,12 @@ TEST_P(CopyTests_T2B, Texture3DSplitRowDataWithoutEmptyFirstRow) {
 
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
+    const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
     BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kHeight, kDepth);
 
     // The test below is designed to test TextureCopySplitter for 3D textures on D3D12.
     // This test will cover: split for a row + no empty first row for both split regions
-    bufferSpec.offset = 260;
+    bufferSpec.offset = Align(260u, bytesPerTexel);
     bufferSpec.size += bufferSpec.offset;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D);
 }
@@ -1357,16 +1361,17 @@ TEST_P(CopyTests_T2B, Texture3DCopyHeightIsOneCopyWidthIsTiny) {
 
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
+    const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
     BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kHeight, kDepth);
 
     // The tests below are designed to test TextureCopySplitter for 3D textures on D3D12.
     // Base: no split for a row, no empty row, and copy height is 1
-    bufferSpec.offset = 60;
+    bufferSpec.offset = Align(60u, bytesPerTexel);
     bufferSpec.size += bufferSpec.offset;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D);
 
     // This test will cover: no split for a row + empty first row, and copy height is 1
-    bufferSpec.offset = 260;
+    bufferSpec.offset = Align(260u, bytesPerTexel);
     bufferSpec.size += bufferSpec.offset;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D);
 }
@@ -1461,6 +1466,27 @@ DAWN_INSTANTIATE_TEST_P(CopyTests_T2B,
                             wgpu::TextureFormat::R8Snorm,
                             wgpu::TextureFormat::RG8Snorm,
                             wgpu::TextureFormat::RGBA8Snorm,
+
+                            wgpu::TextureFormat::R8Uint,
+                            wgpu::TextureFormat::R8Sint,
+
+                            wgpu::TextureFormat::R16Uint,
+                            wgpu::TextureFormat::R16Sint,
+                            wgpu::TextureFormat::R16Float,
+
+                            wgpu::TextureFormat::R32Uint,
+                            wgpu::TextureFormat::R32Sint,
+                            wgpu::TextureFormat::R32Float,
+
+                            wgpu::TextureFormat::RG32Float,
+                            wgpu::TextureFormat::RG32Uint,
+                            wgpu::TextureFormat::RG32Sint,
+
+                            wgpu::TextureFormat::RGBA16Uint,
+                            wgpu::TextureFormat::RGBA16Sint,
+                            wgpu::TextureFormat::RGBA16Float,
+
+                            wgpu::TextureFormat::RGBA32Float,
                         });
 
 // Test that copying an entire texture with 256-byte aligned dimensions works
