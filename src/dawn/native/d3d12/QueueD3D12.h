@@ -28,8 +28,9 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_QUEUED3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_QUEUED3D12_H_
 
-#include "dawn/native/Queue.h"
+#include <memory>
 
+#include "dawn/native/Queue.h"
 #include "dawn/native/d3d12/CommandRecordingContext.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
@@ -39,12 +40,23 @@ class Device;
 
 class Queue final : public QueueBase {
   public:
-    static Ref<Queue> Create(Device* device, const QueueDescriptor* descriptor);
+    static ResultOrError<Ref<Queue>> Create(Device* device, const QueueDescriptor* descriptor);
+
+    void Destroy();
+
+    MaybeError NextSerial();
+    MaybeError WaitForSerial(ExecutionSerial serial);
+    ResultOrError<CommandRecordingContext*> GetPendingCommandContext(
+        SubmitMode submitMode = SubmitMode::Normal);
+    ID3D12CommandQueue* GetCommandQueue() const;
+    ID3D12SharingContract* GetSharingContract() const;
+    MaybeError SubmitPendingCommands();
 
   private:
     Queue(Device* device, const QueueDescriptor* descriptor);
+    ~Queue() override;
 
-    void Initialize();
+    MaybeError Initialize();
 
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
     bool HasPendingCommands() const override;
@@ -54,6 +66,15 @@ class Queue final : public QueueBase {
 
     // Dawn API
     void SetLabelImpl() override;
+
+    ComPtr<ID3D12Fence> mFence;
+    HANDLE mFenceEvent = nullptr;
+
+    CommandRecordingContext mPendingCommands;
+    ComPtr<ID3D12CommandQueue> mCommandQueue;
+    ComPtr<ID3D12SharingContract> mD3d12SharingContract;
+
+    std::unique_ptr<CommandAllocatorManager> mCommandAllocatorManager;
 };
 
 }  // namespace dawn::native::d3d12
