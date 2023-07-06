@@ -76,15 +76,17 @@ class Device final : public d3d::Device {
     MaybeError TickImpl() override;
 
     ID3D12Device* GetD3D12Device() const;
-    ComPtr<ID3D12CommandQueue> GetCommandQueue() const;
-    ID3D12SharingContract* GetSharingContract() const;
 
     ComPtr<ID3D12CommandSignature> GetDispatchIndirectSignature() const;
     ComPtr<ID3D12CommandSignature> GetDrawIndirectSignature() const;
     ComPtr<ID3D12CommandSignature> GetDrawIndexedIndirectSignature() const;
 
+<<<<<<< HEAD
     CommandAllocatorManager* GetCommandAllocatorManager() const;
     MutexProtected<ResidencyManager>& GetResidencyManager() const;
+=======
+    ResidencyManager* GetResidencyManager() const;
+>>>>>>> 35a85a42d0 (D3D12 move to queue stuff)
 
     const PlatformFunctions* GetFunctions() const;
 
@@ -98,12 +100,7 @@ class Device final : public d3d::Device {
 
     const D3D12DeviceInfo& GetDeviceInfo() const;
 
-    MaybeError NextSerial();
-    MaybeError WaitForSerial(ExecutionSerial serial);
-
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
-
-    MaybeError ExecutePendingCommandContext();
 
     MaybeError CopyFromStagingToBufferImpl(BufferBase* source,
                                            uint64_t sourceOffset,
@@ -179,6 +176,7 @@ class Device final : public d3d::Device {
     // Dawn APIs
     void SetLabelImpl() override;
 
+<<<<<<< HEAD
     // TODO(dawn:1413) move these methods to the d3d12::Queue.
     void ForceEventualFlushOfCommands();
     bool HasPendingCommands() const;
@@ -188,6 +186,9 @@ class Device final : public d3d::Device {
     // Those DXC methods are needed by d3d12::ShaderModule
     ComPtr<IDxcLibrary> GetDxcLibrary() const;
     ComPtr<IDxcCompiler3> GetDxcCompiler() const;
+
+=======
+>>>>>>> 35a85a42d0 (D3D12 move to queue stuff)
 
   private:
     using Base = d3d::Device;
@@ -244,17 +245,15 @@ class Device final : public d3d::Device {
 
     MaybeError CreateZeroBuffer();
 
-    ComPtr<ID3D12Fence> mFence;
-    HANDLE mFenceEvent = nullptr;
+    Ref<Queue> mQueue;
 
     ComPtr<ID3D12Device> mD3d12Device;  // Device is owned by adapter and will not be outlived.
-    ComPtr<ID3D12CommandQueue> mCommandQueue;
-    ComPtr<ID3D12SharingContract> mD3d12SharingContract;
 
     ComPtr<ID3D12CommandSignature> mDispatchIndirectSignature;
     ComPtr<ID3D12CommandSignature> mDrawIndirectSignature;
     ComPtr<ID3D12CommandSignature> mDrawIndexedIndirectSignature;
 
+<<<<<<< HEAD
     CommandRecordingContext mPendingCommands;
 
     MutexProtected<SerialQueue<ExecutionSerial, ComPtr<IUnknown>>> mUsedComObjectRefs;
@@ -262,6 +261,12 @@ class Device final : public d3d::Device {
     std::unique_ptr<CommandAllocatorManager> mCommandAllocatorManager;
     std::unique_ptr<MutexProtected<ResourceAllocatorManager>> mResourceAllocatorManager;
     std::unique_ptr<MutexProtected<ResidencyManager>> mResidencyManager;
+=======
+    SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
+
+    std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
+    std::unique_ptr<ResidencyManager> mResidencyManager;
+>>>>>>> 35a85a42d0 (D3D12 move to queue stuff)
 
     static constexpr uint32_t kMaxSamplerDescriptorsPerBindGroup = 3 * kMaxSamplersPerShaderStage;
     static constexpr uint32_t kMaxViewDescriptorsPerBindGroup =
