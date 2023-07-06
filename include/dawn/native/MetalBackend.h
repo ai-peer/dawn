@@ -44,16 +44,10 @@ struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptions
 using AdapterDiscoveryOptions = PhysicalDeviceDiscoveryOptions;
 
 struct DAWN_NATIVE_EXPORT ExternalImageMTLSharedEventDescriptor {
-    // Shared event handle `id<MTLSharedEvent>`.
+    // Shared event handle `MTLSharedEvent`.
     // This never passes ownership to the callee (when used as an input
     // parameter) or to the caller (when used as a return value or output parameter).
-#ifdef __OBJC__
-    id<MTLSharedEvent> sharedEvent = nil;
-    static_assert(sizeof(id<MTLSharedEvent>) == sizeof(void*));
-    static_assert(alignof(id<MTLSharedEvent>) == alignof(void*));
-#else
-    void* sharedEvent = nullptr;
-#endif
+    void* sharedEvent;
 
     // The value that was previously signaled on this event and should be waited on.
     uint64_t signaledValue = 0;
