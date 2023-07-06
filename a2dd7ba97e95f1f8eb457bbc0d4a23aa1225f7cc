@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50be3354_52aa8e35",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-06T01:03:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1477ccaa_4e0de656",
+      "range": {
+        "startLine": 139,
+        "startChar": 42,
+        "endLine": 139,
+        "endChar": 53
+      },
+      "revId": "a2dd7ba97e95f1f8eb457bbc0d4a23aa1225f7cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c8f2d08_909cede2",
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "1c8f2d08_909cede2",
+      "range": {
+        "startLine": 167,
+        "startChar": 45,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "a2dd7ba97e95f1f8eb457bbc0d4a23aa1225f7cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72510e49_0b539443",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-06T01:03:08Z",
+      "side": 1,
+      "message": "Good idea. That would be much simpler. Thanks!",
+      "parentUuid": "81fdb611_2791e5bf",
       "range": {
         "startLine": 167,
         "startChar": 45,
