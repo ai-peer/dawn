@@ -31,6 +31,7 @@
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/Forward.h"
 #include "dawn/native/d3d12/HeapD3D12.h"
+#include "dawn/native/d3d12/QueueD3D12.h"
 #include "dawn/native/d3d12/ResourceAllocatorManagerD3D12.h"
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/TextureCopySplitter.h"
@@ -333,23 +334,24 @@ void Texture::DestroyImpl() {
 }
 
 ResultOrError<ExecutionSerial> Texture::EndAccess() {
-    Device* device = ToBackend(GetDevice());
+    Queue* queue = ToBackend(GetDevice()->GetQueue());
+
     // Synchronize if texture access wasn't synchronized already due to ExecuteCommandLists.
     if (!mSignalFenceValue.has_value()) {
         // Needed to ensure that command allocator doesn't get destroyed before pending commands
         // are submitted due to calling NextSerial(). No-op if there are no pending commands.
-        DAWN_TRY(device->ExecutePendingCommandContext());
+        DAWN_TRY(queue->SubmitPendingCommands());
         // If there were pending commands that used this texture mSignalFenceValue will be set,
         // but if it's still not set, generate a signal fence after waiting on wait fences.
         if (!mSignalFenceValue.has_value()) {
             DAWN_TRY(SynchronizeImportedTextureBeforeUse());
             DAWN_TRY(SynchronizeImportedTextureAfterUse());
         }
-        DAWN_TRY(device->NextSerial());
+        DAWN_TRY(queue->NextSerial());
         ASSERT(mSignalFenceValue.has_value());
     }
     ExecutionSerial ret = mSignalFenceValue.value();
-    ASSERT(ret <= device->GetLastSubmittedCommandSerial());
+    ASSERT(ret <= queue->GetLastSubmittedCommandSerial());
     // Explicitly call reset() since std::move() on optional doesn't make it std::nullopt.
     mSignalFenceValue.reset();
     return ret;
@@ -392,10 +394,10 @@ MaybeError Texture::SynchronizeImportedTextureBeforeUse() {
     // Perform the wait only on the first call.
     Device* device = ToBackend(GetDevice());
     for (Ref<d3d::Fence>& fence : mWaitFences) {
-        DAWN_TRY(CheckHRESULT(
-                     device->GetCommandQueue()->Wait(
-                         static_cast<Fence*>(fence.Get())->GetD3D12Fence(), fence->GetFenceValue()),
-                     "D3D12 fence wait"););
+        ID3D12CommandQueue* commandQueue = ToBackend(device->GetQueue())->GetCommandQueue();
+        DAWN_TRY(CheckHRESULT(commandQueue->Wait(static_cast<Fence*>(fence.Get())->GetD3D12Fence(),
+                                                 fence->GetFenceValue()),
+                              "D3D12 fence wait"););
         // Keep D3D12 fence alive since we'll clear the waitFences list below.
         device->ReferenceUntilUnused(static_cast<Fence*>(fence.Get())->GetD3D12Fence());
     }
@@ -410,15 +412,15 @@ MaybeError Texture::SynchronizeImportedTextureAfterUse() {
     // If we know we're dealing with a swapbuffer texture, inform PIX we've
     // "presented" the texture so it can determine frame boundaries and use its
     // contents for the UI.
-    Device* device = ToBackend(GetDevice());
+    Queue* queue = ToBackend(GetDevice()->GetQueue());
     if (mSwapChainTexture) {
-        ID3D12SharingContract* d3dSharingContract = device->GetSharingContract();
+        ID3D12SharingContract* d3dSharingContract = queue->GetSharingContract();
         if (d3dSharingContract != nullptr) {
             d3dSharingContract->Present(mResourceAllocation.GetD3D12Resource(), 0, 0);
         }
     }
     // NextSerial() will be called after this - this is also checked in EndAccess().
-    mSignalFenceValue = device->GetPendingCommandSerial();
+    mSignalFenceValue = queue->GetPendingCommandSerial();
     return {};
 }
 
