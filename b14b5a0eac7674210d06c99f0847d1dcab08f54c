@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67fd81bc_4c48a750",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-07T12:40:40Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\nSorry for missing this part......",
+      "revId": "b14b5a0eac7674210d06c99f0847d1dcab08f54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
