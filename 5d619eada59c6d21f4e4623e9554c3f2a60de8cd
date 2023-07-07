@@ -56,6 +56,30 @@
       },
       "revId": "5d619eada59c6d21f4e4623e9554c3f2a60de8cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fdff4bb_e7b8e70f",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-07T01:11:34Z",
+      "side": 1,
+      "message": "Sounds fair, thanks!",
+      "parentUuid": "752bd8a4_0b9a507f",
+      "range": {
+        "startLine": 164,
+        "startChar": 51,
+        "endLine": 164,
+        "endChar": 68
+      },
+      "revId": "5d619eada59c6d21f4e4623e9554c3f2a60de8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
