@@ -66,10 +66,15 @@ ExternalImageDXGIImpl::ExternalImageDXGIImpl(Device* backendDevice,
                              textureDescriptor->nextInChain)
                              ->internalUsage;
     }
+
+    // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
+    // TODO(dawn:1906): remove the mDXGIKeyedMutex when it is not used in chrome.
+    mD3DResource.As(&mDXGIKeyedMutex);
 }
 
 ExternalImageDXGIImpl::~ExternalImageDXGIImpl() {
     ASSERT(mBackendDevice->IsLockedByCurrentThreadIfNeeded());
+    mDXGIKeyedMutexReleaser.reset();
     DestroyInternal();
 }
 
@@ -105,7 +110,8 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
 
     // Ensure the texture usage is allowed
     if (!IsSubset(descriptor->usage, static_cast<WGPUTextureUsageFlags>(mUsage))) {
-        dawn::ErrorLog() << "Texture usage is not valid for external image";
+        dawn::ErrorLog() << "Texture usage is not valid for external image 0x" << std::hex
+                         << (int)mUsage << " vs 0x" << std::hex << (int)descriptor->usage;
         return nullptr;
     }
 
@@ -150,6 +156,17 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
             ->CreateD3DExternalTexture(&textureDescriptor, mD3DResource, std::move(waitFences),
                                        descriptor->isSwapChainTexture, descriptor->isInitialized);
 
+    if (mDXGIKeyedMutex && mAccessCount == 0) {
+        HRESULT hr = mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireKey, INFINITE);
+        if (FAILED(hr)) {
+            dawn::ErrorLog() << "Failed to acquire keyed mutex for external image: 0x" << std::hex
+                             << hr;
+            return nullptr;
+        }
+        mDXGIKeyedMutexReleaser.emplace(mDXGIKeyedMutex);
+    }
+    ++mAccessCount;
+
     return ToAPI(texture.Detach());
 }
 
@@ -175,6 +192,11 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
     }
     signalFence->fenceHandle = ToBackend(mBackendDevice.Get())->GetFenceHandle();
     signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
+
+    --mAccessCount;
+    if (mDXGIKeyedMutexReleaser && mAccessCount == 0) {
+        mDXGIKeyedMutexReleaser.reset();
+    }
 }
 
 }  // namespace dawn::native::d3d
