@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982ff6c1_881d7336",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-07-07T22:09:42Z",
+      "side": 1,
+      "message": "Test CL, shouldn\u0027t actually be submitted.",
+      "revId": "3ed063434ef284bd41ed65f1ca41bf65501749e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
