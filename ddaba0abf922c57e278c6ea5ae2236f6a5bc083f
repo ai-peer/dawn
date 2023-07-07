@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793a76f9_375263c7",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-07T12:28:44Z",
+      "side": 1,
+      "message": "I don\u0027t think this is right. At runtime, the result when `low \u003e high` is either `min(max())` or median-of-3, not zero. So I\u0027d just change this to be\n```\nif (!use_runtime_semantics) {\n  return utils::Failure;\n}\n```\nand fall-through to the `min(max())` implementation below when using runtime semantics.",
+      "revId": "ddaba0abf922c57e278c6ea5ae2236f6a5bc083f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
