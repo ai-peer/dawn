@@ -26,6 +26,10 @@
 #include "dawn/native/d3d/TextureD3D.h"
 
 namespace dawn::native::d3d {
+namespace {
+// Chrome uses 0 as acquire key.
+constexpr UINT64 kDXGIKeyedMutexAcquireKey = 0;
+}
 
 MaybeError ValidateTextureDescriptorCanBeWrapped(const TextureDescriptor* descriptor) {
     DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
@@ -66,6 +70,10 @@ ExternalImageDXGIImpl::ExternalImageDXGIImpl(Device* backendDevice,
                              textureDescriptor->nextInChain)
                              ->internalUsage;
     }
+
+    // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
+    // TODO(dawn:1906): remove the mDXGIKeyedMutex when it is not used in chrome.
+    mD3DResource.As(&mDXGIKeyedMutex);
 }
 
 ExternalImageDXGIImpl::~ExternalImageDXGIImpl() {
@@ -134,6 +142,14 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
         internalDesc.internalUsage = mUsageInternal;
     }
 
+    if (mDXGIKeyedMutex) {
+        HRESULT hr = mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireKey, INFINITE);
+        if (FAILED(hr)) {
+            dawn::ErrorLog() << "Failed to acquire keyed mutex for external image";
+            return nullptr;
+        }
+    }
+
     std::vector<Ref<Fence>> waitFences;
     for (const d3d::ExternalImageDXGIFenceDescriptor& fenceDescriptor : descriptor->waitFences) {
         Ref<Fence> fence;
@@ -175,6 +191,14 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
     }
     signalFence->fenceHandle = ToBackend(mBackendDevice.Get())->GetFenceHandle();
     signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
+
+    if (mDXGIKeyedMutex) {
+        HRESULT hr = mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
+        if (FAILED(hr)) {
+            dawn::ErrorLog() << "Failed to release keyed mutex for external image";
+            return;
+        }
+    }
 }
 
 }  // namespace dawn::native::d3d
