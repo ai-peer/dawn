@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbcf09c_3cbf921a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-07T19:34:39Z",
+      "side": 1,
+      "message": "See https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8776370414107816033/+/u/generate_build_files__with_patch_/stdout\n\nERROR at //third_party/dawn/third_party/dxc/lib/TableGen/Record.cpp:22:11: Include not allowed.\n#include \"llvm/Support/DataTypes.h\"\n          ^-----------------------\nIt is not in any dependency of\n  //third_party/dawn/third_party/gn/dxc:TableGen\nThe include file is in the target(s):\n  //third_party/dawn/third_party/gn/dxc:DataTypes-header\nwhich should somehow be reachable.\n___________________\nERROR at //third_party/dawn/third_party/dxc/utils/TableGen/FixedLenDecoderEmitter.cpp:22:11: Include not allowed.\n#include \"llvm/Support/DataTypes.h\"\n          ^-----------------------\nIt is not in any dependency of\n  //third_party/dawn/third_party/gn/dxc:llvm-tblgen\nThe include file is in the target(s):\n  //third_party/dawn/third_party/gn/dxc:DataTypes-header\nwhich should somehow be reachable.",
+      "revId": "1e95340ac363ae1028445d821c1283132656f3a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
