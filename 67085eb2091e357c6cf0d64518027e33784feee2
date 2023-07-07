@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b23b6dc_3d7248fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-07T13:12:06Z",
+      "side": 1,
+      "message": "Looks great to me. Adding Antonio to look over the changes to const-eval, as he wrote most of that.",
+      "revId": "67085eb2091e357c6cf0d64518027e33784feee2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c989a2e3_bcc08a2a",
+        "filename": "src/tint/resolver/bitcast_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-07T13:12:06Z",
+      "side": 1,
+      "message": "Please can you add a couple of basic tests to ensure that a bitcast to NaN or Inf fails?",
+      "revId": "67085eb2091e357c6cf0d64518027e33784feee2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f64a15_d92331dc",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-07T13:12:06Z",
+      "side": 1,
+      "message": "```suggestion\n    // Buffer holding the bits from source value, result value reinterpreted from it.\n```",
+      "range": {
+        "startLine": 1461,
+        "startChar": 63,
+        "endLine": 1461,
+        "endChar": 76
+      },
+      "revId": "67085eb2091e357c6cf0d64518027e33784feee2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1d4daf_b76f7924",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-07T13:12:06Z",
+      "side": 1,
+      "message": "nit: snake_case",
+      "range": {
+        "startLine": 1468,
+        "startChar": 9,
+        "endLine": 1468,
+        "endChar": 27
+      },
+      "revId": "67085eb2091e357c6cf0d64518027e33784feee2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
