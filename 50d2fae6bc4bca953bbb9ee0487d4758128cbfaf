@@ -16,6 +16,23 @@
       "message": "Hi Corentin and Austin, PTAL. Thanks",
       "revId": "50d2fae6bc4bca953bbb9ee0487d4758128cbfaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41fc6a87_340c7d49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-07T13:48:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "50d2fae6bc4bca953bbb9ee0487d4758128cbfaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
