@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5f48512_28c19159",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-10T18:44:51Z",
+      "side": 1,
+      "message": "nit: drop `no-op` it isn\u0027t a no-op when you\u0027re going back to ast as it creates a let node.",
+      "revId": "9f8cc819ed5124a5215f3f9c3b941101ab051426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec565c5_e8d56353",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-10T18:44:51Z",
+      "side": 1,
+      "message": "We do don\u0027t this check anywhere else, why does let need it?",
+      "revId": "9f8cc819ed5124a5215f3f9c3b941101ab051426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c3dc91_24bce24f",
+        "filename": "src/tint/ir/let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-10T18:44:51Z",
+      "side": 1,
+      "message": "We\u0027ve removed most of these asserts from other classes in favour of having the validator check them.",
+      "revId": "9f8cc819ed5124a5215f3f9c3b941101ab051426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
