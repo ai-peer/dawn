@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc1236d_b619db4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-10T09:21:45Z",
+      "side": 1,
+      "message": "It seems that the Kokoro failed with a SPIRV-Tools issue and David has been fixing it\nhttps://github.com/KhronosGroup/SPIRV-Tools/pull/5306",
+      "revId": "f9a2ca9453bf533f2a83ba174ecc3347bddd7c9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
