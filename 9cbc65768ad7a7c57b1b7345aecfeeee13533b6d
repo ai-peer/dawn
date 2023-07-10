@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a269a9_799c9cb5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟦 note: all 124 tests now pass",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f392d8a1_fafc6443",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:util,texture,texel_data:ufloat_texel_data_in_shader:*\u0027",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aa982d3_10aae18f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:util,texture,texel_data:unorm_texel_data_in_shader:format\u003d\"bgra8unorm-srgb\"\u0027",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60523ddc_9a4577aa",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:util,texture,texel_data:unorm_texel_data_in_shader:format\u003d\"rgba8unorm-srgb\"\u0027",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ba92c8_22185274",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,configure:usage:*\u0027 with tags [ubuntu, webgpu-adapter-default]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "400ac54c_8cfdbd98",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,abs:f32:inputSource\u003d\"storage_rw\";vectorize\u003d4\u0027 with tags [amd-0x67ef, dawn-backend-validation]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e85f070_90f58a96",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:*\u0027 with tags [android-r, dawn-backend-validation, webgpu-adapter-default]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e5ec172_a4a56c0d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:*\u0027 with tags [android-r, dawn-no-backend-validation, webgpu-adapter-default]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1e5a65f_1c35ff5e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:alpha\u003d\"none\";orientation\u003d\"flipY\";srcDoFlipYDuringCopy\u003dfalse;dstPremultiplied\u003dtrue\u0027 with tags [dawn-backend-validation, webgpu-adapter-default, win10]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a329bc_9b5d926b",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:alpha\u003d\"none\";orientation\u003d\"flipY\";srcDoFlipYDuringCopy\u003dtrue;dstPremultiplied\u003dfalse\u0027 with tags [dawn-backend-validation, webgpu-adapter-default, win10]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0dbf42a_d173efc4",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:*\u0027 with tags [android-r]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571b1e92_b7c9d002",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T18:34:07Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:*\u0027 with tags [android-t]",
+      "revId": "9cbc65768ad7a7c57b1b7345aecfeeee13533b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
