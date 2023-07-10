@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47dc77d_16a54420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003746
+      },
+      "writtenOn": "2023-07-10T06:04:26Z",
+      "side": 1,
+      "message": "jiawei@\n\nPTAL\n\nI have run `git cl presubmit` before uploading the patch, why are there still multiple errors caught in kokoro?",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
