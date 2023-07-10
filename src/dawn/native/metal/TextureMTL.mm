@@ -328,7 +328,7 @@ MTLPixelFormat MetalPixelFormat(const DeviceBase* device, wgpu::TextureFormat fo
         case wgpu::TextureFormat::Depth32FloatStencil8:
             return MTLPixelFormatDepth32Float_Stencil8;
         case wgpu::TextureFormat::Depth16Unorm:
-            if (@available(macOS 10.12, iOS 13.0, *)) {
+            if (@available(macOS 10.15, iOS 13.0, *)) {
                 return MTLPixelFormatDepth16Unorm;
             }
             UNREACHABLE();
@@ -816,19 +816,17 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
 }
 
 void Texture::SynchronizeTextureBeforeUse(CommandRecordingContext* commandContext) {
-    if (@available(macOS 10.14, *)) {
-        if (!mWaitEvents.empty()) {
-            // There may be an open blit encoder from a copy command or writeBuffer.
-            // Wait events are only allowed if there is no encoder open.
-            commandContext->EndBlit();
-        }
-        auto commandBuffer = commandContext->GetCommands();
-        // Consume the wait events on the texture. They will be empty after this loop.
-        for (auto waitEvent : std::move(mWaitEvents)) {
-            id rawEvent = *waitEvent.sharedEvent;
-            id<MTLSharedEvent> sharedEvent = static_cast<id<MTLSharedEvent>>(rawEvent);
-            [commandBuffer encodeWaitForEvent:sharedEvent value:waitEvent.signaledValue];
-        }
+    if (!mWaitEvents.empty()) {
+        // There may be an open blit encoder from a copy command or writeBuffer.
+        // Wait events are only allowed if there is no encoder open.
+        commandContext->EndBlit();
+    }
+    auto commandBuffer = commandContext->GetCommands();
+    // Consume the wait events on the texture. They will be empty after this loop.
+    for (auto waitEvent : std::move(mWaitEvents)) {
+        id rawEvent = *waitEvent.sharedEvent;
+        id<MTLSharedEvent> sharedEvent = static_cast<id<MTLSharedEvent>>(rawEvent);
+        [commandBuffer encodeWaitForEvent:sharedEvent value:waitEvent.signaledValue];
     }
 }
 
