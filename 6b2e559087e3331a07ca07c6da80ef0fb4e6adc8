@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a43aaa9_7d9f552a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T07:56:20Z",
+      "side": 1,
+      "message": "nit: from",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e47dc77d_16a54420",
@@ -32,6 +55,74 @@
       "side": 1,
       "message": "Hello,\n\nAccording to https://source.cloud.google.com/results/invocations/bb6814c7-59fd-4760-8688-b9467dfd0a0b/targets/dawn%2Flinux%2Fcmake-gcc-release%2Fpresubmit/log, the failure is not related to this CL:\n\nTraceback (most recent call last):\n  File \"/dawn/src/third_party/vulkan-deps/spirv-tools/src/utils/generate_registry_tables.py\", line 90, in \u003cmodule\u003e\n    main()\n  File \"/dawn/src/third_party/vulkan-deps/spirv-tools/src/utils/generate_registry_tables.py\", line 82, in main\n    registry \u003d xml.etree.ElementTree.fromstring(xml_in.read())\n  File \"/usr/lib/python3.6/encodings/ascii.py\", line 26, in decode\n    return codecs.ascii_decode(input, self.errors)[0]\nUnicodeDecodeError: \u0027ascii\u0027 codec can\u0027t decode byte 0xc3 in position 7365: ordinal not in range(128)\nthird_party/spirv-tools/source/CMakeFiles/core_tables.dir/build.make:93: recipe for target \u0027third_party/spirv-tools/generators.inc\u0027 failed\n\nHi Corentin, could you take a look?",
       "parentUuid": "e47dc77d_16a54420",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "266fd046_d3656839",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T07:56:20Z",
+      "side": 1,
+      "message": "Thank you for the contribution! Left some comments. Other reviewers: I checked that Ho Cheung signed the CLA.",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e074fc_fc8801d1",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T07:56:20Z",
+      "side": 1,
+      "message": "We might be able to remove this annotation now that we require macOS 10.15 or later since we are guaranteed to support the required ObjC methods.",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d73972aa_a3c42545",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T07:56:20Z",
+      "side": 1,
+      "message": "Likewise, for this and other @available(10.13/10.14) checks in all files we could just remove them I think.",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcfe1b71_074f0b72",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T07:56:20Z",
+      "side": 1,
+      "message": "I think we can keep 10.14 here as well",
       "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
