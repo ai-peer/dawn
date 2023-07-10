@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t this break the evaluation order?\n`array2d[foo()][bar()]`\nIn any case we\u0027re missing test coverage for this sort of thing.",
       "revId": "a57d1202ce45324c4a7ba03db55ef4a570eb6f72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a3ad70_8aa16986",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T15:40:14Z",
+      "side": 1,
+      "message": "Argh, you\u0027re probably right. Will fix and add tests.",
+      "parentUuid": "58552655_9bfa747e",
+      "revId": "a57d1202ce45324c4a7ba03db55ef4a570eb6f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
