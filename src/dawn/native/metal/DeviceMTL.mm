@@ -148,8 +148,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     if (mCommandQueue == nil) {
         return DAWN_INTERNAL_ERROR("Failed to allocate MTLCommandQueue.");
     }
-
-    if (@available(macOS 10.14, *)) {
+    if (@available(macOS 10.15, *)) {
         mMtlSharedEvent.Acquire([*mMtlDevice newSharedEvent]);
     }
 
@@ -168,7 +167,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
                                    // value is, the more we can trust the measured value.
         mKalmanInfo->P = 1.0f;
 
-        if (@available(macos 10.15, iOS 14.0, *)) {
+        if (@available(macOS 10.15, iOS 14.0, *)) {
             // Sample CPU timestamp and GPU timestamp for first time at device creation
             [*mMtlDevice sampleTimestamps:&mCpuTimestamp gpuTimestamp:&mGpuTimestamp];
         }
@@ -276,7 +275,7 @@ MaybeError Device::TickImpl() {
     // Just run timestamp period calculation when timestamp feature is enabled and timestamp
     // conversion is not disabled.
     if (mIsTimestampQueryEnabled && !IsToggleEnabled(Toggle::DisableTimestampQueryConversion)) {
-        if (@available(macos 10.15, iOS 14.0, *)) {
+        if (@available(macOS 10.15, iOS 14.0, *)) {
             UpdateTimestampPeriod(GetMTLDevice(), mKalmanInfo.get(), &mCpuTimestamp, &mGpuTimestamp,
                                   &mTimestampPeriod);
         }
@@ -353,7 +352,7 @@ MaybeError Device::SubmitPendingCommandBuffer() {
 
     TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                              uint64_t(pendingSerial));
-    if (@available(macOS 10.14, *)) {
+    if (@available(macOS 10.15, *)) {
         id rawEvent = *mMtlSharedEvent;
         id<MTLSharedEvent> sharedEvent = static_cast<id<MTLSharedEvent>>(rawEvent);
         [*pendingCommands encodeSignalEvent:sharedEvent value:static_cast<uint64_t>(pendingSerial)];
