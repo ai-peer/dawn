@@ -812,6 +812,7 @@ Extent3D TextureBase::GetMipLevelSingleSubresourceVirtualSize(uint32_t level) co
 
     extent.height = std::max(mSize.height >> level, 1u);
     if (mDimension == wgpu::TextureDimension::e2D) {
+        extent.depthOrArrayLayers = mSize.depthOrArrayLayers;
         return extent;
     }
 
