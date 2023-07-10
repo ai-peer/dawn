@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a0d07f8_a163ab00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T13:46:11Z",
+      "side": 1,
+      "message": "Kokoro bots have got past the `Generate tables based on the SPIR-V XML registry` step. Manually applying `Kokoro +1` as this is blocking CLs from landing.",
+      "revId": "2369cc182efa1dc13cd1bc388c63e76c5c540eba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
