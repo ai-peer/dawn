@@ -33,6 +33,24 @@
       "message": "nit: Could you add a TODO(crbug.com/1234617) to revisit after requestDevice can return already lost devices?\n\nhttps://bugs.chromium.org/p/chromium/issues/detail?id\u003d1234617",
       "revId": "c051b80b381acd761f0947cd862a5331f269f1b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94e69a0a_a679eae3",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1003826
+      },
+      "writtenOn": "2023-07-10T21:50:27Z",
+      "side": 1,
+      "message": "Ah I see",
+      "parentUuid": "bf880319_66911d63",
+      "revId": "c051b80b381acd761f0947cd862a5331f269f1b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
