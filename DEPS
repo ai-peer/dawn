@@ -146,7 +146,11 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
+<<<<<<< PATCH SET (471af5 Revert "Roll vulkan-deps from df22aa218f6a to 100962e2a241 ()
+    'url': '{chromium_git}/vulkan-deps@df22aa218f6a30f857c705374f06cbe539ff2270',
+=======
     'url': '{chromium_git}/vulkan-deps@c421d230f1c16eae7fc83ca8c3bf82e0b702d1c4',
+>>>>>>> BASE      (9cbc65 More robust shallow clone in fetch script)
     'condition': 'dawn_standalone',
   },
 
