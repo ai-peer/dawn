@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f943d85a_04b19af0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003746
+      },
+      "writtenOn": "2023-07-10T08:51:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a43aaa9_7d9f552a",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e47dc77d_16a54420",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -93,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0607faf9_670bdce2",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003746
+      },
+      "writtenOn": "2023-07-10T08:51:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c9e074fc_fc8801d1",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d73972aa_a3c42545",
@@ -110,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "172231ce_6fc7445c",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1003746
+      },
+      "writtenOn": "2023-07-10T08:51:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d73972aa_a3c42545",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcfe1b71_074f0b72",
@@ -123,6 +183,24 @@
       "writtenOn": "2023-07-10T07:56:20Z",
       "side": 1,
       "message": "I think we can keep 10.14 here as well",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06983852_4a49cf3d",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003746
+      },
+      "writtenOn": "2023-07-10T08:51:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfe1b71_074f0b72",
       "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
