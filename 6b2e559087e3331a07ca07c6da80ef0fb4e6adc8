@@ -16,6 +16,24 @@
       "message": "jiawei@\n\nPTAL\n\nI have run `git cl presubmit` before uploading the patch, why are there still multiple errors caught in kokoro?",
       "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ee94825_e3f3d89f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-10T06:16:23Z",
+      "side": 1,
+      "message": "Hello,\n\nAccording to https://source.cloud.google.com/results/invocations/bb6814c7-59fd-4760-8688-b9467dfd0a0b/targets/dawn%2Flinux%2Fcmake-gcc-release%2Fpresubmit/log, the failure is not related to this CL:\n\nTraceback (most recent call last):\n  File \"/dawn/src/third_party/vulkan-deps/spirv-tools/src/utils/generate_registry_tables.py\", line 90, in \u003cmodule\u003e\n    main()\n  File \"/dawn/src/third_party/vulkan-deps/spirv-tools/src/utils/generate_registry_tables.py\", line 82, in main\n    registry \u003d xml.etree.ElementTree.fromstring(xml_in.read())\n  File \"/usr/lib/python3.6/encodings/ascii.py\", line 26, in decode\n    return codecs.ascii_decode(input, self.errors)[0]\nUnicodeDecodeError: \u0027ascii\u0027 codec can\u0027t decode byte 0xc3 in position 7365: ordinal not in range(128)\nthird_party/spirv-tools/source/CMakeFiles/core_tables.dir/build.make:93: recipe for target \u0027third_party/spirv-tools/generators.inc\u0027 failed\n\nHi Corentin, could you take a look?",
+      "parentUuid": "e47dc77d_16a54420",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
