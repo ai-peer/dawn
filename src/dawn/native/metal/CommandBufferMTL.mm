@@ -1133,23 +1133,16 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
 
             case Command::PopDebugGroup: {
                 mCommands.NextCommand<PopDebugGroupCmd>();
-
-                if (@available(macos 10.13, *)) {
-                    [commandContext->GetCommands() popDebugGroup];
-                }
+                [commandContext->GetCommands() popDebugGroup];
                 break;
             }
 
             case Command::PushDebugGroup: {
                 PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
                 char* label = mCommands.NextData<char>(cmd->length + 1);
-
-                if (@available(macos 10.13, *)) {
-                    NSRef<NSString> mtlLabel =
-                        AcquireNSRef([[NSString alloc] initWithUTF8String:label]);
-                    [commandContext->GetCommands() pushDebugGroup:mtlLabel.Get()];
-                }
-
+                NSRef<NSString> mtlLabel =
+                    AcquireNSRef([[NSString alloc] initWithUTF8String:label]);
+                [commandContext->GetCommands() pushDebugGroup:mtlLabel.Get()];
                 break;
             }
 

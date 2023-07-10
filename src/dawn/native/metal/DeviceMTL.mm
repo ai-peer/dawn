@@ -149,9 +149,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
         return DAWN_INTERNAL_ERROR("Failed to allocate MTLCommandQueue.");
     }
 
-    if (@available(macOS 10.14, *)) {
-        mMtlSharedEvent.Acquire([*mMtlDevice newSharedEvent]);
-    }
+    mMtlSharedEvent.Acquire([*mMtlDevice newSharedEvent]);
 
     DAWN_TRY(mCommandContext.PrepareNextCommandBuffer(*mCommandQueue));
 
@@ -353,11 +351,9 @@ MaybeError Device::SubmitPendingCommandBuffer() {
 
     TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                              uint64_t(pendingSerial));
-    if (@available(macOS 10.14, *)) {
-        id rawEvent = *mMtlSharedEvent;
-        id<MTLSharedEvent> sharedEvent = static_cast<id<MTLSharedEvent>>(rawEvent);
-        [*pendingCommands encodeSignalEvent:sharedEvent value:static_cast<uint64_t>(pendingSerial)];
-    }
+    id rawEvent = *mMtlSharedEvent;
+    id<MTLSharedEvent> sharedEvent = static_cast<id<MTLSharedEvent>>(rawEvent);
+    [*pendingCommands encodeSignalEvent:sharedEvent value:static_cast<uint64_t>(pendingSerial)];
     [*pendingCommands commit];
 
     return mCommandContext.PrepareNextCommandBuffer(*mCommandQueue);
