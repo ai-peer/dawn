@@ -65,6 +65,7 @@
 #include "src/tint/ast/var.h"
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/ast/while_statement.h"
+#include "src/tint/ir/access.h"
 #include "src/tint/ir/block_param.h"
 #include "src/tint/ir/builder.h"
 #include "src/tint/ir/exit_if.h"
@@ -82,6 +83,7 @@
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/function.h"
+#include "src/tint/sem/index_accessor_expression.h"
 #include "src/tint/sem/load.h"
 #include "src/tint/sem/materialize.h"
 #include "src/tint/sem/member_accessor_expression.h"
@@ -97,9 +99,11 @@
 #include "src/tint/type/struct.h"
 #include "src/tint/type/void.h"
 #include "src/tint/utils/defer.h"
+#include "src/tint/utils/predicates.h"
 #include "src/tint/utils/result.h"
 #include "src/tint/utils/reverse.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/transform.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 
@@ -856,150 +860,101 @@ class Impl {
         SetTerminator(builder_.BreakIf(current_control->As<ir::Loop>(), cond.Get()));
     }
 
-    struct AccessorInfo {
-        Value* object = nullptr;
-        Value* result = nullptr;
-        const type::Type* result_type = nullptr;
-        utils::Vector<Value*, 1> indices;
-    };
-
     utils::Result<Value*> EmitAccess(const ast::AccessorExpression* expr) {
-        std::vector<const ast::Expression*> accessors;
-        const ast::Expression* object = expr;
+        // Note: Load instruction emission is handled by the caller
+        return EmitAccess(program_->Sem().Get(expr)->UnwrapLoad());
+    }
+
+    utils::Result<Value*> EmitAccess(const sem::ValueExpression* expr) {
+        enum Status { kFailure, kNext };
+        using Result = std::variant<Status, Value*>;
+
+        // access_ty is the type of the ir::Value* to be returned.
+        const type::Type* access_ty = expr->Type()->Clone(clone_ctx_.type_ctx);
+        if (auto* ref = access_ty->As<type::Reference>()) {
+            access_ty = mod.Types().ptr(ref->AddressSpace(), ref->StoreType(), ref->Access());
+        }
+
+        // Access chain indices from right-to-left.
+        // These are reversed before constructing in the ir::Access.
+        utils::Vector<std::function<Value*()>, 8> indices;
+
+        // Constructs and returns the ir::Access if 'indices' is non-empty, otherwise returns 'root'
+        auto end_chain = [&](ir::Value* root) -> Result {
+            if (indices.IsEmpty()) {
+                // No indices? Just return the root value.
+                return root;
+            }
+            // Reverse the index builders
+            indices.Reverse();
+            // Build the index values
+            auto index_values = utils::Transform(indices, [](auto&& fn) { return fn(); });
+            if (index_values.Any(utils::IsNull)) {
+                return kFailure;
+            }
+            // Build the access
+            auto* access = builder_.Access(access_ty, root, std::move(index_values));
+            current_block_->Append(access);
+            return access->Result();
+        };
+
+        // Walk the access expressions from right to left.
         while (true) {
-            if (program_->Sem().GetVal(object)->ConstantValue()) {
-                break;  // Reached a constant expression. Stop traversal.
-            }
-            if (auto* array = object->As<ast::IndexAccessorExpression>()) {
-                accessors.push_back(object);
-                object = array->object;
-            } else if (auto* member = object->As<ast::MemberAccessorExpression>()) {
-                accessors.push_back(object);
-                object = member->object;
-            } else {
-                break;
-            }
-        }
-
-        AccessorInfo info;
-        {
-            auto res = EmitExpression(object);
-            if (!res) {
-                return utils::Failure;
-            }
-            info.object = res.Get();
-        }
-        info.result_type =
-            program_->Sem().Get(expr)->Type()->UnwrapRef()->Clone(clone_ctx_.type_ctx);
-
-        // The AST chain is `inside-out` compared to what we need, which means the list it generates
-        // is backwards. We need to operate on the list in reverse order to have the correct access
-        // chain.
-        for (auto* accessor : utils::Reverse(accessors)) {
-            bool ok = tint::Switch(
-                accessor,
-                [&](const ast::IndexAccessorExpression* idx) {
-                    return GenerateIndexAccessor(idx, info);
+            auto res = tint::Switch(
+                expr,  //
+                [&](const sem::IndexAccessorExpression* access) -> Result {
+                    indices.Push([this, access] {  //
+                        auto index = EmitExpression(access->Index()->Declaration());
+                        return index ? index.Get() : nullptr;
+                    });
+                    expr = access->Object();
+                    return kNext;
                 },
-                [&](const ast::MemberAccessorExpression* member) {
-                    return GenerateMemberAccessor(member, info);
+                [&](const sem::StructMemberAccess* access) -> Result {
+                    auto* idx = builder_.Constant(u32(access->Member()->Index()));
+                    indices.Push([idx] { return idx; });
+                    expr = access->Object();
+                    return kNext;
                 },
-                [&](Default) {
-                    TINT_ICE(Writer, diagnostics_)
-                        << "invalid accessor in list: " + std::string(accessor->TypeInfo().name);
-                    return false;
-                });
-            if (!ok) {
-                return utils::Failure;
-            }
-        }
-
-        if (!info.indices.IsEmpty()) {
-            info.result = GenerateAccess(info);
-        }
-        return info.result;
-    }
-
-    Value* GenerateAccess(const AccessorInfo& info) {
-        // The access result type should match the source result type. If the source is a pointer,
-        // we generate a pointer.
-        const type::Type* ty = nullptr;
-        if (auto* ptr = info.object->Type()->As<type::Pointer>();
-            ptr && !info.result_type->Is<type::Pointer>()) {
-            ty = builder_.ir.Types().ptr(ptr->AddressSpace(), info.result_type, ptr->Access());
-        } else {
-            ty = info.result_type;
-        }
-
-        auto* a = builder_.Access(ty, info.object, info.indices);
-        current_block_->Append(a);
-        return a->Result();
-    }
-
-    bool GenerateIndexAccessor(const ast::IndexAccessorExpression* expr, AccessorInfo& info) {
-        auto res = EmitExpression(expr->index);
-        if (!res) {
-            return false;
-        }
-
-        info.indices.Push(res.Get());
-        return true;
-    }
-
-    bool GenerateMemberAccessor(const ast::MemberAccessorExpression* expr, AccessorInfo& info) {
-        auto* expr_sem = program_->Sem().Get(expr)->Unwrap();
-
-        return tint::Switch(
-            expr_sem,  //
-            [&](const sem::StructMemberAccess* access) {
-                uint32_t idx = access->Member()->Index();
-                info.indices.Push(builder_.Constant(u32(idx)));
-                return true;
-            },
-            [&](const sem::Swizzle* swizzle) {
-                auto& indices = swizzle->Indices();
-
-                // A single element swizzle is just treated as an accessor.
-                if (indices.Length() == 1) {
-                    info.indices.Push(builder_.Constant(u32(indices[0])));
-                    return true;
-                }
-
-                // Store the result type away, this will be the result of the swizzle, but the
-                // intermediate steps need different result types.
-                auto* result_type = info.result_type;
-
-                // Emit any preceding member/index accessors
-                if (!info.indices.IsEmpty()) {
-                    // The access chain is being split, the initial part of than will have a
-                    // resulting type that matches the object being swizzled.
-                    info.result_type = swizzle->Object()->Type()->Clone(clone_ctx_.type_ctx);
-                    info.object = GenerateAccess(info);
-                    info.indices.Clear();
-
-                    // If the sub-accessor generated a pointer result, make sure a load is emitted
-                    if (auto* ptr = info.object->Type()->As<type::Pointer>()) {
-                        auto* load = builder_.Load(info.object);
-                        info.result_type = ptr->StoreType();
-                        info.object = load->Result();
-                        current_block_->Append(load);
+                [&](const sem::Swizzle* access) -> Result {
+                    // A single element access is just treated as an accessor.
+                    if (access->Indices().Length() == 1) {
+                        auto* idx = builder_.Constant(u32(access->Indices()[0]));
+                        indices.Push([idx] { return idx; });
+                        expr = access->Object();
+                        return kNext;
                     }
+
+                    auto vec = EmitExpression(access->Object()->Declaration());
+                    if (!vec) {
+                        return kFailure;
+                    }
+
+                    // The ir::Access needs to stop at the swizzle, so construct this and end the
+                    // access chain.
+                    auto* ty = access->Type()->Clone(clone_ctx_.type_ctx);
+                    auto* swizzle = builder_.Swizzle(ty, vec.Get(), access->Indices());
+                    current_block_->Append(swizzle);
+                    return end_chain(swizzle->Result());
+                },
+                [&](Default) -> Result {
+                    auto root = EmitExpression(expr->Declaration());
+                    if (!root) {
+                        return kFailure;
+                    }
+                    return end_chain(root.Get());
+                });
+
+            if (auto* status = std::get_if<Status>(&res)) {
+                switch (*status) {
+                    case kNext:
+                        continue;
+                    case kFailure:
+                        return utils::Failure;
                 }
-
-                auto* val = builder_.Swizzle(swizzle->Type()->Clone(clone_ctx_.type_ctx),
-                                             info.object, std::move(indices));
-                current_block_->Append(val);
-                info.result = val->Result();
-
-                info.object = info.result;
-                info.result_type = result_type;
-                return true;
-            },
-            [&](Default) {
-                TINT_ICE(IR, diagnostics_)
-                    << "unhandled member index type: " << expr_sem->TypeInfo().name;
-                return false;
-            });
+            }
+            return std::get<ir::Value*>(res);
+        }
     }
 
     utils::Result<Value*> EmitExpression(const ast::Expression* expr) {
