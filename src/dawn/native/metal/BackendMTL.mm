@@ -146,14 +146,12 @@ MaybeError API_AVAILABLE(macos(10.13))
 MaybeError GetDevicePCIInfo(id<MTLDevice> device, PCIIDs* ids) {
     // [device registryID] is introduced on macOS 10.13+, otherwise workaround to get vendor
     // id by vendor name on old macOS
-    if (@available(macos 10.13, *)) {
-        auto result = GetDeviceIORegistryPCIInfo(device, ids);
-        if (result.IsError()) {
-            dawn::WarningLog() << "GetDeviceIORegistryPCIInfo failed: "
-                               << result.AcquireError()->GetFormattedMessage();
-        } else if (ids->vendorId != 0) {
-            return result;
-        }
+    auto result = GetDeviceIORegistryPCIInfo(device, ids);
+    if (result.IsError()) {
+        dawn::WarningLog() << "GetDeviceIORegistryPCIInfo failed: "
+                           << result.AcquireError()->GetFormattedMessage();
+    } else if (ids->vendorId != 0) {
+        return result;
     }
 
     return GetVendorIdFromVendors(device, ids);
@@ -275,10 +273,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
         {
             bool haveStoreAndMSAAResolve = false;
 #if DAWN_PLATFORM_IS(MACOS)
-            if (@available(macOS 10.12, *)) {
-                haveStoreAndMSAAResolve =
-                    [*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
-            }
+            haveStoreAndMSAAResolve =
+                [*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
 #elif DAWN_PLATFORM_IS(IOS)
             haveStoreAndMSAAResolve = [*mDevice supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily3_v2];
 #endif
@@ -413,10 +409,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
         if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
             EnableFeature(Feature::TextureCompressionBC);
         }
-        if (@available(macOS 10.14, *)) {
-            if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1]) {
-                EnableFeature(Feature::Float32Filterable);
-            }
+        if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1]) {
+            EnableFeature(Feature::Float32Filterable);
         }
 #endif
 #if DAWN_PLATFORM_IS(IOS)
@@ -610,10 +604,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
         }
 
 #if DAWN_PLATFORM_IS(MACOS)
-        if (@available(macOS 10.14, *)) {
-            if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1]) {
-                return MTLGPUFamily::Mac2;
-            }
+        if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1]) {
+            return MTLGPUFamily::Mac2;
         }
         if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
             return MTLGPUFamily::Mac1;
