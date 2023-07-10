@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee770a3_0c86c6af",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-10T14:32:55Z",
+      "side": 1,
+      "message": "Looks like you\u0027ve changed the order of evaluation of the LHS and RHS here?\n\nIf that\u0027s true, also looks like we\u0027re missing test coverage for compound assignment in FromProgram.",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 63
+      },
+      "revId": "abea5f0ec67c56b735d3af829aeb8dd31d877316",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
