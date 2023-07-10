@@ -16,6 +16,24 @@
       "message": "The updates to the tests in here seem like they\u0027re all making the IR more difficult to read. Some of them, like this one, are really weird `access true`.\n\nThis seems like, if it\u0027s the direction you want to go, it would be better to introduce an actual `let` instruction into the IR instead of faking it with an `access` instruction.",
       "revId": "93d520fb9989d9d5f18cac16e782edada67929cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7709ff56_a284b179",
+        "filename": "src/tint/ir/from_program_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-10T16:36:54Z",
+      "side": 1,
+      "message": "Okay, I can do that.",
+      "parentUuid": "4f6dd4df_b6050ee4",
+      "revId": "93d520fb9989d9d5f18cac16e782edada67929cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
