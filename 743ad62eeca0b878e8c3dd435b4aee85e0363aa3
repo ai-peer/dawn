@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cc9eed2_4980d797",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T10:18:15Z",
+      "side": 1,
+      "message": "Thank you for the iteration. LGTM with the nits.",
+      "revId": "743ad62eeca0b878e8c3dd435b4aee85e0363aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e82b4d4_fe89e8a9",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T10:18:15Z",
+      "side": 1,
+      "message": "The `MaybeError` is the return value and should be kept ^^",
+      "revId": "743ad62eeca0b878e8c3dd435b4aee85e0363aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25e8aa9_5f8d1524",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T10:18:15Z",
+      "side": 1,
+      "message": "nit: Here we can\u0027t remove the @available because of the iOS version, so we might as well keep the lowest possible macOS version IMHO. Otherwise someone looking at the code might wonder what happened in 10.15 that enabled these features when it\u0027s just that it\u0027s enabled as soon as Metal is available, in macOS 10.11.\n\nditto below",
+      "revId": "743ad62eeca0b878e8c3dd435b4aee85e0363aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840cd409_9e5e28d0",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T10:18:15Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "743ad62eeca0b878e8c3dd435b4aee85e0363aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "949e9b86_4bd7f5fd",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T10:18:15Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "743ad62eeca0b878e8c3dd435b4aee85e0363aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
