@@ -816,7 +816,7 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
 }
 
 void Texture::SynchronizeTextureBeforeUse(CommandRecordingContext* commandContext) {
-    if (@available(macOS 10.14, *)) {
+    if (@available(macOS 10.15, *)) {
         if (!mWaitEvents.empty()) {
             // There may be an open blit encoder from a copy command or writeBuffer.
             // Wait events are only allowed if there is no encoder open.
