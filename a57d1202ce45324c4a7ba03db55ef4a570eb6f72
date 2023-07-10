@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58552655_9bfa747e",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-10T14:42:34Z",
+      "side": 1,
+      "message": "Doesn\u0027t this break the evaluation order?\n`array2d[foo()][bar()]`\nIn any case we\u0027re missing test coverage for this sort of thing.",
+      "revId": "a57d1202ce45324c4a7ba03db55ef4a570eb6f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
