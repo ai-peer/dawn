@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26765912_5efc1dd1",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T19:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5f48512_28c19159",
+      "revId": "9f8cc819ed5124a5215f3f9c3b941101ab051426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ec565c5_e8d56353",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19d0e799_bbbcdfe5",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T19:02:23Z",
+      "side": 1,
+      "message": "Because we infer the result type from the value here. It avoids a potential NPE.",
+      "parentUuid": "3ec565c5_e8d56353",
+      "revId": "9f8cc819ed5124a5215f3f9c3b941101ab051426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87c3dc91_24bce24f",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-10T18:44:51Z",
       "side": 1,
       "message": "We\u0027ve removed most of these asserts from other classes in favour of having the validator check them.",
+      "revId": "9f8cc819ed5124a5215f3f9c3b941101ab051426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c50dba5_e7dd89f3",
+        "filename": "src/tint/ir/let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-10T19:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87c3dc91_24bce24f",
       "revId": "9f8cc819ed5124a5215f3f9c3b941101ab051426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
