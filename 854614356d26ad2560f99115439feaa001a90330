@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d37267_76e9e640",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-07-10T23:59:51Z",
+      "side": 1,
+      "message": "LGTM. Rebasing to retrigger Kokoro (failure is unrelated to this change)",
+      "revId": "854614356d26ad2560f99115439feaa001a90330",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

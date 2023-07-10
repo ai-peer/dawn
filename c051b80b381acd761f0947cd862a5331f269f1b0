@@ -51,6 +51,24 @@
       "parentUuid": "bf880319_66911d63",
       "revId": "c051b80b381acd761f0947cd862a5331f269f1b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7588f6a8_aa4c0435",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-07-10T23:59:51Z",
+      "side": 1,
+      "message": "I am pretty sure it is going to remain nullable. It\u0027s not nullable in the JS API, but that\u0027s because in JS the Promise can _reject_ in which case you don\u0027t get a GPUDevice object. The C API would return a null device in these cases.",
+      "parentUuid": "94e69a0a_a679eae3",
+      "revId": "c051b80b381acd761f0947cd862a5331f269f1b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
