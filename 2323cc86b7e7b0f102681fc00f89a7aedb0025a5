@@ -600,6 +600,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32fa8dd_383d1aeb",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T10:39:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a801291c_87e21ade",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e65159e_d0430488",
@@ -647,6 +665,24 @@
       "writtenOn": "2023-03-16T11:23:56Z",
       "side": 1,
       "message": "Take required toggles of earlier stage as well to do the toggles overriding.\n\nFor example, instance toggle `UseDXC` may be enabled in the parameter of this test cases, and we should also take it into the required device toggles.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "847a59d5_364f5746",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-10T10:39:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8881cb85_d10473b8",
       "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
