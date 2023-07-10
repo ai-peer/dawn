@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec1af9d_ae5ce076",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-10T19:06:56Z",
+      "side": 1,
+      "message": "LGTM. I still think this should be off for the normal production case, but we\u0027ll see how this plays out.",
+      "revId": "7ec59ca2f3aaceba21130f1bf6ec78586a41912a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
