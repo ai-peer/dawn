@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "915840a2_e4cd9ad6",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2107,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T23:05:54Z",
+      "side": 1,
+      "message": "would be nice if the `note` pointed at the control instruction that had the return types.",
+      "range": {
+        "startLine": 2104,
+        "startChar": 0,
+        "endLine": 2107,
+        "endChar": 17
+      },
+      "revId": "b438d4e907c6dfa0fa47de68a8e69b1418266b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
