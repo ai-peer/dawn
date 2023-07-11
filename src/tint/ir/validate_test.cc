@@ -1761,7 +1761,7 @@ TEST_F(IR_ValidateTest, ExitSwitch_NotInParentSwitch) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:10:9 error: exit_switch: switch not found in parent control instructions
+              R"(:10:9 error: exit: switch not found in parent control instructions
         exit_switch  # switch_1
         ^^^^^^^^^^^
 
@@ -1843,7 +1843,7 @@ TEST_F(IR_ValidateTest, ExitSwitch_InvalidJumpOverSwitch) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:7:13 error: exit_switch: switch target jumps over other control instructions
+              R"(:7:13 error: exit: switch target jumps over other control instructions
             exit_switch  # switch_1
             ^^^^^^^^^^^
 
@@ -1894,7 +1894,7 @@ TEST_F(IR_ValidateTest, ExitSwitch_InvalidJumpOverLoop) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:7:13 error: exit_switch: switch target jumps over other control instructions
+              R"(:7:13 error: exit: switch target jumps over other control instructions
             exit_switch  # switch_1
             ^^^^^^^^^^^
 
@@ -1917,6 +1917,394 @@ note: # Disassembly
           }
         }
         exit_switch  # switch_1
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitLoop) {
+    auto* loop = b.Loop();
+    loop->Continuing()->Append(b.NextIteration(loop));
+    loop->Body()->Append(b.ExitLoop(loop));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    EXPECT_TRUE(res) << res.Failure().str();
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_NullLoop) {
+    auto* loop = b.Loop();
+    loop->Continuing()->Append(b.NextIteration(loop));
+    loop->Body()->Append(mod.instructions.Create<ExitLoop>(nullptr));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:5:9 error: exit: control instruction is undefined
+        exit_loop  # undef
+        ^^^^^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # body
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    loop [b: %b2, c: %b3] {  # loop_1
+      %b2 = block {  # body
+        exit_loop  # undef
+      }
+      %b3 = block {  # continuing
+        next_iteration %b2
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_LessOperandsThenLoopParams) {
+    auto* loop = b.Loop();
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    loop->SetResults(utils::Vector{r1, r2});
+
+    loop->Continuing()->Append(b.NextIteration(loop));
+    loop->Body()->Append(b.ExitLoop(loop, 1_i));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(
+        res.Failure().str(),
+        R"(:5:9 error: exit: args count (1) does not match control instruction result count (2)
+        exit_loop 1i  # loop_1
+        ^^^^^^^^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # body
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32, %3:f32 = loop [b: %b2, c: %b3] {  # loop_1
+      %b2 = block {  # body
+        exit_loop 1i  # loop_1
+      }
+      %b3 = block {  # continuing
+        next_iteration %b2
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_MoreOperandsThenLoopParams) {
+    auto* loop = b.Loop();
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    loop->SetResults(utils::Vector{r1, r2});
+
+    loop->Continuing()->Append(b.NextIteration(loop));
+    loop->Body()->Append(b.ExitLoop(loop, 1_i, 2_f, 3_i));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(
+        res.Failure().str(),
+        R"(:5:9 error: exit: args count (3) does not match control instruction result count (2)
+        exit_loop 1i, 2.0f, 3i  # loop_1
+        ^^^^^^^^^^^^^^^^^^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # body
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32, %3:f32 = loop [b: %b2, c: %b3] {  # loop_1
+      %b2 = block {  # body
+        exit_loop 1i, 2.0f, 3i  # loop_1
+      }
+      %b3 = block {  # continuing
+        next_iteration %b2
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_WithResult) {
+    auto* loop = b.Loop();
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    loop->SetResults(utils::Vector{r1, r2});
+
+    loop->Continuing()->Append(b.NextIteration(loop));
+    loop->Body()->Append(b.ExitLoop(loop, 1_i, 2_f));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_TRUE(res) << res.Failure().str();
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_IncorrectResultType) {
+    auto* loop = b.Loop();
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    loop->SetResults(utils::Vector{r1, r2});
+
+    loop->Continuing()->Append(b.NextIteration(loop));
+    loop->Body()->Append(b.ExitLoop(loop, 1_i, 2_i));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(
+        res.Failure().str(),
+        R"(:5:23 error: exit: argument type (tint::type::F32) does not match control instruction type (tint::type::I32)
+        exit_loop 1i, 2i  # loop_1
+                      ^^
+
+:4:7 note: In block
+      %b2 = block {  # body
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32, %3:f32 = loop [b: %b2, c: %b3] {  # loop_1
+      %b2 = block {  # body
+        exit_loop 1i, 2i  # loop_1
+      }
+      %b3 = block {  # continuing
+        next_iteration %b2
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_NotInParentLoop) {
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto* loop = b.Loop();
+    loop->Continuing()->Append(b.NextIteration(loop));
+    loop->Body()->Append(b.Return(f));
+
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+
+    auto* if_ = sb.Append(b.If(true));
+    b.With(if_->True(), [&] { b.ExitLoop(loop); });
+    sb.Append(b.Return(f));
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:13:9 error: exit: loop not found in parent control instructions
+        exit_loop  # loop_1
+        ^^^^^^^^^
+
+:12:7 note: In block
+      %b4 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    loop [b: %b2, c: %b3] {  # loop_1
+      %b2 = block {  # body
+        ret
+      }
+      %b3 = block {  # continuing
+        next_iteration %b2
+      }
+    }
+    if true [t: %b4] {  # if_1
+      %b4 = block {  # true
+        exit_loop  # loop_1
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_JumpsOverIfs) {
+    // loop {
+    //   if (true) {
+    //    if (false) {
+    //       break;
+    //     }
+    //   }
+    //   break;
+    // }
+    auto* loop = b.Loop();
+    loop->Continuing()->Append(b.NextIteration(loop));
+
+    auto* f = b.Function("my_func", ty.void_());
+
+    b.With(loop->Body(), [&] {
+        auto* if_ = b.If(true);
+        b.With(if_->True(), [&] {
+            auto* inner_if_ = b.If(false);
+            b.With(inner_if_->True(), [&] { b.ExitLoop(loop); });
+            b.Return(f);
+        });
+        b.ExitLoop(loop);
+    });
+
+    auto sb = b.With(f->Block());
+    sb.Append(loop);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    EXPECT_TRUE(res) << res.Failure().str();
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_InvalidJumpOverSwitch) {
+    auto* loop = b.Loop();
+    loop->Continuing()->Append(b.NextIteration(loop));
+
+    b.With(loop->Body(), [&] {
+        auto* inner = b.Switch(false);
+        b.ExitLoop(loop);
+
+        auto* inner_def = b.Case(inner, {Switch::CaseSelector{}});
+        b.With(inner_def, [&] { b.ExitLoop(loop); });
+    });
+
+    auto* f = b.Function("my_func", ty.void_());
+
+    b.With(f->Block(), [&] {
+        b.Append(loop);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:7:13 error: exit: loop target jumps over other control instructions
+            exit_loop  # loop_1
+            ^^^^^^^^^
+
+:6:11 note: In block
+          %b4 = block {  # case
+          ^^^^^^^^^^^
+
+:5:9 note: first control instruction jumped
+        switch false [c: (default, %b4)] {  # switch_1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    loop [b: %b2, c: %b3] {  # loop_1
+      %b2 = block {  # body
+        switch false [c: (default, %b4)] {  # switch_1
+          %b4 = block {  # case
+            exit_loop  # loop_1
+          }
+        }
+        exit_loop  # loop_1
+      }
+      %b3 = block {  # continuing
+        next_iteration %b2
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitLoop_InvalidJumpOverLoop) {
+    auto* outer_loop = b.Loop();
+
+    outer_loop->Continuing()->Append(b.NextIteration(outer_loop));
+
+    b.With(outer_loop->Body(), [&] {
+        auto* loop = b.Loop();
+        b.With(loop->Body(), [&] { b.ExitLoop(outer_loop); });
+        b.ExitLoop(outer_loop);
+    });
+
+    auto* f = b.Function("my_func", ty.void_());
+
+    b.With(f->Block(), [&] {
+        b.Append(outer_loop);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:7:13 error: exit: loop target jumps over other control instructions
+            exit_loop  # loop_1
+            ^^^^^^^^^
+
+:6:11 note: In block
+          %b4 = block {  # body
+          ^^^^^^^^^^^
+
+:5:9 note: first control instruction jumped
+        loop [b: %b4] {  # loop_2
+        ^^^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    loop [b: %b2, c: %b3] {  # loop_1
+      %b2 = block {  # body
+        loop [b: %b4] {  # loop_2
+          %b4 = block {  # body
+            exit_loop  # loop_1
+          }
+        }
+        exit_loop  # loop_1
+      }
+      %b3 = block {  # continuing
+        next_iteration %b2
       }
     }
     ret
