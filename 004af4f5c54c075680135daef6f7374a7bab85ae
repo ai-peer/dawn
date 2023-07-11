@@ -68,6 +68,24 @@
       "parentUuid": "af727b02_49d58557",
       "revId": "004af4f5c54c075680135daef6f7374a7bab85ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47da621f_c41c31e6",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-11T20:14:41Z",
+      "side": 1,
+      "message": "And that CopyTextureToBuffer command encoder frontend doesn\u0027t have texture view dimension info. So we need to detect backend type, if it\u0027s OpenGL compat, then retrieve mTarget (GL_TEXTURE_2D_ARRAY) info from TextureGL to know if it\u0027s a texture_2d or texture_2d_array to decide which shader to use.",
+      "parentUuid": "0d026c05_26470eb1",
+      "revId": "004af4f5c54c075680135daef6f7374a7bab85ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
