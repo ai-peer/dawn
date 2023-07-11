@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7145ef38_c6c719fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-11T18:57:46Z",
+      "side": 1,
+      "message": "Post-landing LGTM",
+      "revId": "004af4f5c54c075680135daef6f7374a7bab85ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d459577b_f59a50bf",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-11T18:57:46Z",
+      "side": 1,
+      "message": "Hmm. I\u0027m not sure this is true in Compat.",
+      "revId": "004af4f5c54c075680135daef6f7374a7bab85ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af727b02_49d58557",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-11T18:57:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is true in Compat. OpenGLES has no texture views, so textures must be used in views of the same type as the underlying texture, and there is now validation in the front-end to check this. Since we\u0027re behind the front-end here, we may be hiding from the problem. If you\u0027re creating a texture2d and expecting it to bind to a texture_2d_array, that\u0027s likely only working due to the copy path.\n\nThere is a copy path that will force the texture_2d to be internally copied to a texture_2d_array, but the copy path was only a stopgap and will probably go away.\n\nIf you could, would try changing mUseCopy \u003d true to an assert(false) here:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/opengl/TextureGL.cpp;l\u003d580?q\u003dTextureView%20mUseCopy\u0026ss\u003dchromium\n\nand see if the tests still pass on the OpenGLES backend?",
+      "revId": "004af4f5c54c075680135daef6f7374a7bab85ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
