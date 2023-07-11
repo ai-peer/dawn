@@ -523,6 +523,8 @@ if (tint_build_ir) {
       "ir/transform/add_empty_entry_point.h",
       "ir/transform/block_decorated_structs.cc",
       "ir/transform/block_decorated_structs.h",
+      "ir/transform/builtin_polyfill_spirv.cc",
+      "ir/transform/builtin_polyfill_spirv.h",
       "ir/transform/demote_to_helper.cc",
       "ir/transform/demote_to_helper.h",
       "ir/transform/merge_return.cc",
@@ -1882,6 +1884,7 @@ if (tint_build_unittests) {
       sources = [
         "ir/transform/add_empty_entry_point_test.cc",
         "ir/transform/block_decorated_structs_test.cc",
+        "ir/transform/builtin_polyfill_spirv_test.cc",
         "ir/transform/demote_to_helper_test.cc",
         "ir/transform/merge_return_test.cc",
         "ir/transform/shader_io_test.cc",

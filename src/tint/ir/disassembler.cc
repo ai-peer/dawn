@@ -701,11 +701,13 @@ void Disassembler::EmitTerminator(Terminator* b) {
 }
 
 void Disassembler::EmitValueList(utils::Slice<Value* const> values) {
+    bool need_comma = false;
     for (auto* v : values) {
-        if (v != values.Front()) {
+        if (need_comma) {
             out_ << ", ";
         }
         EmitValue(v);
+        need_comma = true;
     }
 }
 
