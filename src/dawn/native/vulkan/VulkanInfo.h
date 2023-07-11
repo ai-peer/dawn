@@ -50,6 +50,7 @@ struct VulkanDeviceKnobs {
     VkPhysicalDeviceFeatures features;
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR shaderFloat16Int8Features;
     VkPhysicalDevice16BitStorageFeaturesKHR _16BitStorageFeatures;
+    VkPhysicalDeviceTimelineSemaphoreFeaturesKHR timelineSemaphoreFeatures;
     VkPhysicalDeviceSubgroupSizeControlFeaturesEXT subgroupSizeControlFeatures;
     VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR zeroInitializeWorkgroupMemoryFeatures;
     VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR shaderIntegerDotProductFeatures;
