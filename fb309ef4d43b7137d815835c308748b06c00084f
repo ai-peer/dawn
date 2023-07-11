@@ -16,6 +16,24 @@
       "message": "I find `undefined` a bit confusing. \nMaybe `exit has no parent control instruction`",
       "revId": "fb309ef4d43b7137d815835c308748b06c00084f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e505207b_15c49139",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-11T23:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd79d77_fde8ab4f",
+      "revId": "fb309ef4d43b7137d815835c308748b06c00084f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
