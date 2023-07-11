@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc38905_43ae8804",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-07-11T23:01:05Z",
+      "side": 1,
+      "message": "Don\u0027t actually want to submit this, was verifying that the bot worked properly with the WebGPU gardener rotation (it does :D)",
+      "revId": "1c8655bb86b417d3922cb48dd3593ddebec62ebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
