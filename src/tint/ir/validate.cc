@@ -489,10 +489,10 @@ class Validator {
         }
 
         tint::Switch(
-            e,                                       //
-            [&](ir::ExitIf* i) { CheckExitIf(i); },  //
-            [&](ir::ExitLoop*) {},                   //
-            [&](ir::ExitSwitch*) {},                 //
+            e,                                               //
+            [&](ir::ExitIf* i) { CheckExitIf(i); },          //
+            [&](ir::ExitLoop*) {},                           //
+            [&](ir::ExitSwitch* s) { CheckExitSwitch(s); },  //
             [&](Default) {
                 AddError(std::string("missing validation of exit: ") + e->TypeInfo().name);
             });
@@ -502,6 +502,25 @@ class Validator {
         if (control_stack_.Back() != e->If()) {
             AddError(e, "exit_if: if target jumps over other control instructions");
             AddNote(control_stack_.Back(), "first control instruction jumped");
+        }
+    }
+
+    void CheckExitSwitch(ExitSwitch* s) {
+        bool found = false;
+        for (auto it = control_stack_.rbegin(); it != control_stack_.rend(); ++it) {
+            if (*it == s->ControlInstruction()) {
+                found = true;
+                break;
+            }
+            // A exit switch can step over if instructions, but no others.
+            if (!(*it)->Is<ir::If>()) {
+                AddError(s, "exit_switch: switch target jumps over other control instructions");
+                AddNote(*it, "first control instruction jumped");
+                return;
+            }
+        }
+        if (!found) {
+            AddError(s, "exit_switch: switch not found in parent control instructions");
         }
     }
 };
