@@ -325,6 +325,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57e09c29_79cb3874",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T14:16:31Z",
+      "side": 1,
+      "message": "Having a **single** continue-loop terminator for the body seems like a simpler pattern.\n\nIf you allow both `Continue` and `NextIteration` in a loop body, then can you mix them?\n\nIs it valid to use `NextIteration` if the loop has a `Continuing` block?\n\nIf you add a `Continuing` block to a loop, presumably you\u0027ll want to find and replace all the `NextIteration`s with `Continue`s?\n\nJust feels like a bigger bag of special case rules than just saying the body has to `Continue` or exit, and the `Continuing` block, if omitted, defaults to `NextIteration`.",
+      "parentUuid": "13c4c496_dd1e47b9",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 15
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae5911f8_a737bc9f",
         "filename": "docs/tint/ir.md",
         "patchSetId": 2
