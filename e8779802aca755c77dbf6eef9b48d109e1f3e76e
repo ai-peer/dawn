@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "657efd77_34d4bf6e",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-11T21:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42184b29_43f88a88",
+      "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "027a5ba2_9d014300",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0272cd58_7e518270",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-11T21:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "027a5ba2_9d014300",
+      "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dff592f4_edda9b38",
@@ -82,6 +118,24 @@
       "writtenOn": "2023-07-11T14:29:53Z",
       "side": 1,
       "message": "Do we need this to be a WeakRef and not just a raw pointer? The cache should outlive all objects it contains because the Device should destroy the cache after it calls DestroyImpl on all known objects.",
+      "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a90f9fc3_e0ba5c5f",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-11T21:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dff592f4_edda9b38",
       "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
