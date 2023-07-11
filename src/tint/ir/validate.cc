@@ -33,6 +33,7 @@
 #include "src/tint/ir/exit_switch.h"
 #include "src/tint/ir/function.h"
 #include "src/tint/ir/if.h"
+#include "src/tint/ir/intrinsic_call.h"
 #include "src/tint/ir/let.h"
 #include "src/tint/ir/load.h"
 #include "src/tint/ir/loop.h"
@@ -280,13 +281,14 @@ class Validator {
 
     void CheckCall(Call* call) {
         tint::Switch(
-            call,                  //
-            [&](Bitcast*) {},      //
-            [&](BuiltinCall*) {},  //
-            [&](Construct*) {},    //
-            [&](Convert*) {},      //
-            [&](Discard*) {},      //
-            [&](UserCall*) {},     //
+            call,                    //
+            [&](Bitcast*) {},        //
+            [&](BuiltinCall*) {},    //
+            [&](IntrinsicCall*) {},  //
+            [&](Construct*) {},      //
+            [&](Convert*) {},        //
+            [&](Discard*) {},        //
+            [&](UserCall*) {},       //
             [&](Default) {
                 AddError(std::string("missing validation of call: ") + call->TypeInfo().name);
             });
