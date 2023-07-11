@@ -93,6 +93,7 @@ enum class DeviceExt {
     DriverProperties,
     ImageFormatList,
     ShaderFloat16Int8,
+    TimelineSemaphore,
 
     // Promoted to 1.3
     ShaderIntegerDotProduct,

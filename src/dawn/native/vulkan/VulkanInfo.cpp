@@ -243,6 +243,11 @@ ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const PhysicalDevice& device) {
                               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES);
         }
 
+        if (info.extensions[DeviceExt::TimelineSemaphore]) {
+            featuresChain.Add(&info.timelineSemaphoreFeatures,
+                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR);
+        }
+
         if (info.extensions[DeviceExt::SubgroupSizeControl]) {
             featuresChain.Add(&info.subgroupSizeControlFeatures,
                               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT);

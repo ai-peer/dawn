@@ -48,10 +48,27 @@ class ServiceImplementationFD : public ServiceImplementation {
             return false;
         }
 
+#if DAWN_PLATFORM_IS(LINUX_DESKTOP)
+        // Require timeline semaphores on Desktop Linux.
+        if (deviceInfo.timelineSemaphoreFeatures.timelineSemaphore != VK_TRUE) {
+            return false;
+        }
+#endif
+
         VkPhysicalDeviceExternalSemaphoreInfoKHR semaphoreInfo;
         semaphoreInfo.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
         semaphoreInfo.pNext = nullptr;
         semaphoreInfo.handleType = kHandleType;
+
+#if DAWN_PLATFORM_IS(LINUX_DESKTOP)
+        VkSemaphoreTypeCreateInfoKHR timelineInfo;
+        timelineInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR;
+        timelineInfo.pNext = nullptr;
+        timelineInfo.semaphoreType = VK_SEMAPHORE_TYPE_TIMELINE_KHR;
+        timelineInfo.initialValue = 0;
+
+        semaphoreInfo.pNext = &timelineInfo;
+#endif
 
         VkExternalSemaphorePropertiesKHR semaphoreProperties;
         semaphoreProperties.sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR;
@@ -78,6 +95,16 @@ class ServiceImplementationFD : public ServiceImplementation {
         info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
         info.pNext = nullptr;
         info.flags = 0;
+
+#if DAWN_PLATFORM_IS(LINUX_DESKTOP)
+        VkSemaphoreTypeCreateInfoKHR timelineInfo;
+        timelineInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR;
+        timelineInfo.pNext = nullptr;
+        timelineInfo.semaphoreType = VK_SEMAPHORE_TYPE_TIMELINE_KHR;
+        timelineInfo.initialValue = 0;
+
+        info.pNext = &timelineInfo;
+#endif
 
         DAWN_TRY(CheckVkSuccess(
             mDevice->fn.CreateSemaphore(mDevice->GetVkDevice(), &info, nullptr, &*semaphore),
@@ -109,6 +136,16 @@ class ServiceImplementationFD : public ServiceImplementation {
         exportSemaphoreInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
         exportSemaphoreInfo.pNext = nullptr;
         exportSemaphoreInfo.handleTypes = kHandleType;
+
+#if DAWN_PLATFORM_IS(LINUX_DESKTOP)
+        VkSemaphoreTypeCreateInfoKHR timelineInfo;
+        timelineInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR;
+        timelineInfo.pNext = nullptr;
+        timelineInfo.semaphoreType = VK_SEMAPHORE_TYPE_TIMELINE_KHR;
+        timelineInfo.initialValue = 0;
+
+        exportSemaphoreInfo.pNext = &timelineInfo;
+#endif
 
         VkSemaphoreCreateInfo semaphoreCreateInfo;
         semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
