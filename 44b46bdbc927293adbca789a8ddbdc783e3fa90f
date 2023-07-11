@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d2b69d_c562ef64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-11T13:51:31Z",
+      "side": 1,
+      "message": "While this is shorter, I don\u0027t think it\u0027s simpler. The need to store things into a function which gets emitted later makes this a lot more confusing compared to determining the correct walk order from the beginning.",
+      "revId": "44b46bdbc927293adbca789a8ddbdc783e3fa90f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
