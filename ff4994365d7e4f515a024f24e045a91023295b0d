@@ -421,6 +421,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae96c1da_c70c2864",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-11T14:32:49Z",
+      "side": 1,
+      "message": "I believe that\u0027s what I said above? You can only use `NextIteration` into the loop body to skip having a continuing block with `NextIteration`. Otherwise you `Continue` to a continuing block which exists with `NextIteration` in it.",
+      "parentUuid": "dccd4d62_f70b22b3",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 15
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae5911f8_a737bc9f",
         "filename": "docs/tint/ir.md",
         "patchSetId": 2
