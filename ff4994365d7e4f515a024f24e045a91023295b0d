@@ -397,6 +397,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dccd4d62_f70b22b3",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T14:25:29Z",
+      "side": 1,
+      "message": "That\u0027s what I sketched in https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/ir/loop.h",
+      "parentUuid": "7f4eaaef_51a31c19",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 15
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae5911f8_a737bc9f",
         "filename": "docs/tint/ir.md",
         "patchSetId": 2
