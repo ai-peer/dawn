@@ -3,6 +3,80 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a32d533_41bbdb59",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:40:05Z",
+      "side": 1,
+      "message": "nit: comment needs an update",
+      "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb36755_669a5ca0",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:40:05Z",
+      "side": 1,
+      "message": "We have a helper method for this! https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.h;drc\u003db5879ac034aff8319e34c3645280bcf242cff6ac;l\u003d103\n\nNote that it should be the PhysicalSize since this is for CopyB2T that works in blocks for compressed textures.",
+      "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213cf2af_3da8b71f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:40:05Z",
+      "side": 1,
+      "message": "Is this a constraint in D3D11 or just in D3D12?",
+      "range": {
+        "startLine": 401,
+        "startChar": 60,
+        "endLine": 401,
+        "endChar": 88
+      },
+      "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dacac9e9_6a3fe352",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:40:05Z",
+      "side": 1,
+      "message": "We could extract the computation of the byteLength and the resizing of the data outside of the loop since the baseMipLevel is guaranteed to be larger than all the other ones.",
+      "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4270026a_4d376482",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 4
@@ -20,6 +94,23 @@
         "endLine": 407,
         "endChar": 35
       },
+      "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4ef3503_17468787",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:40:05Z",
+      "side": 1,
+      "message": "nit: can be extracted out of the loop as well",
       "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
