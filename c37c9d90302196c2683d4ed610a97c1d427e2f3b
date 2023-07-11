@@ -16,6 +16,24 @@
       "message": "I think you can just do:\n\n`for (auto ctrl : utils::Reverse(control_stack_)) {`",
       "revId": "c37c9d90302196c2683d4ed610a97c1d427e2f3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05c575f0_c6d4ea46",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-11T23:53:19Z",
+      "side": 1,
+      "message": "Done. Wasn\u0027t sure if that would reverse in place, create a new list that is reversed or create an iterator that goes in reverse",
+      "parentUuid": "77b21f3f_2398f2e0",
+      "revId": "c37c9d90302196c2683d4ed610a97c1d427e2f3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
