@@ -22,6 +22,30 @@
       },
       "revId": "56343feb6de0794f2869b1c6a90c59ff28e052a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0230e05_7aae78f6",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T13:29:21Z",
+      "side": 1,
+      "message": "Opps. I meant to delete this. Something somewhere was already doing this for me, and I was ending up with twice the `OpName`s. I\u0027ll clean up with a followup.",
+      "parentUuid": "971145fd_c9059727",
+      "range": {
+        "startLine": 1578,
+        "startChar": 0,
+        "endLine": 1580,
+        "endChar": 8
+      },
+      "revId": "56343feb6de0794f2869b1c6a90c59ff28e052a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
