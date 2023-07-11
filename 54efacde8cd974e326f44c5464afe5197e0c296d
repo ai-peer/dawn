@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fff6be7f_634aa7ea",
+        "filename": "src/tint/resolver/builtin_structs.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-11T21:34:26Z",
+      "side": 0,
+      "message": "Trouble is we don\u0027t have a diagnostic list to put them in anymore. I could make them `TINT_ASSERTS`?",
+      "parentUuid": "5672d768_3b7986a0",
+      "revId": "54efacde8cd974e326f44c5464afe5197e0c296d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff78f434_4357b6a2",
         "filename": "src/tint/resolver/builtin_structs.cc",
         "patchSetId": 2
