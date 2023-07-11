@@ -50,6 +50,24 @@
       "message": "I\u0027m not sure this is true in Compat. OpenGLES has no texture views, so textures must be used in views of the same type as the underlying texture, and there is now validation in the front-end to check this. Since we\u0027re behind the front-end here, we may be hiding from the problem. If you\u0027re creating a texture2d and expecting it to bind to a texture_2d_array, that\u0027s likely only working due to the copy path.\n\nThere is a copy path that will force the texture_2d to be internally copied to a texture_2d_array, but the copy path was only a stopgap and will probably go away.\n\nIf you could, would try changing mUseCopy \u003d true to an assert(false) here:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/opengl/TextureGL.cpp;l\u003d580?q\u003dTextureView%20mUseCopy\u0026ss\u003dchromium\n\nand see if the tests still pass on the OpenGLES backend?",
       "revId": "004af4f5c54c075680135daef6f7374a7bab85ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d026c05_26470eb1",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-11T19:48:32Z",
+      "side": 1,
+      "message": "Thanks for the extra info about 2d array texture on compat. I wasn\u0027t aware of that.\n\nI tried adding DAWN_ASSERT(false) for the branch and test various CopyTests_T2B tests which include 2d texture and 2d texture array tests. And yes on windows OpenGLES_ANGLE_NVIDIA_NVIDIA_Quadro_RTX_4000_Direct3D11 fail the assert for blit path formats (R8Snorm). (On Linux it didn\u0027t fail as well but I think that is because the native opengl driver is above version 4.3)\n\nmUseCopy leads to another copy on unsupported format. So the easiest solution would be just add another version of shader for texture_2d, to match the texture view type and avoid this copy.\n\nI will put up a followup CL.",
+      "parentUuid": "af727b02_49d58557",
+      "revId": "004af4f5c54c075680135daef6f7374a7bab85ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
