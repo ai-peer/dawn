@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97128431_0442a54a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T21:46:02Z",
+      "side": 1,
+      "message": "Partial review. LGTM so far, but I\u0027m tired so will continue tomorrow.",
+      "revId": "1b11cb560d7d5da0083d8db43946cb7312386afa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb62557_6f2e161b",
+        "filename": "src/tint/ir/transform/demote_to_helper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T21:46:02Z",
+      "side": 1,
+      "message": "Would be good to consolidate this with `tint::sem::Builtin::HasSideEffects()`, somehow.",
+      "revId": "1b11cb560d7d5da0083d8db43946cb7312386afa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
