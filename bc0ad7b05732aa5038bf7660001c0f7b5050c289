@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc5f863_cc91fd44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-11T20:24:19Z",
+      "side": 1,
+      "message": "Hi Austin or Corentin, PTAL. Thanks",
+      "revId": "bc0ad7b05732aa5038bf7660001c0f7b5050c289",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
