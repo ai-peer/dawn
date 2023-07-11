@@ -22,9 +22,44 @@
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementation.h"
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
 
+#if DAWN_PLATFORM_IS(LINUX_DESKTOP)
+#include <linux/version.h>
+#include <sys/ioctl.h>
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 7, 0)
+#include <linux/sync_file.h>
+#else
+#include <linux/ioctl.h>
+#include <linux/types.h>
+
+struct sync_file_info {
+    char name[32];
+    __s32 status;
+    __u32 flags;
+    __u32 num_fences;
+    __u32 pad;
+    __u64 sync_fence_info;
+};
+
+#define SYNC_IOC_MAGIC '>'
+
+#define SYNC_IOC_FILE_INFO _IOWR(SYNC_IOC_MAGIC, 4, struct sync_file_info)
+#endif  // LINUX_VERSION_CODE >= KERNEL_VERSION(4, 7, 0)
+
+static VkExternalSemaphoreHandleTypeFlagBits GetExternalHandleType(int fd) {
+    struct sync_fence_info fence_info = {};
+
+    if (ioctl(fd, SYNC_IOC_FILE_INFO, &fence_info) >= 0) {
+        return VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR;
+    }
+
+    return VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
+}
+#endif  // DAWN_PLATFORM_IS(LINUX_DESKTOP)
+
 static constexpr VkExternalSemaphoreHandleTypeFlagBits kHandleType =
 #if DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
-    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT;
+    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR;
 #else
     VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
 #endif
@@ -73,6 +108,14 @@ class ServiceImplementationFD : public ServiceImplementation {
     ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle) override {
         DAWN_INVALID_IF(handle < 0, "Importing a semaphore with an invalid handle.");
 
+#if DAWN_PLATFORM_IS(LINUX_DESKTOP)
+        // On Linux, this might either be an opaque FD handle or a sync_file. Try to detect the
+        // correct external handle type.
+        VkExternalSemaphoreHandleTypeFlagBits handleType = GetExternalHandleType(handle);
+#else
+        VkExternalSemaphoreHandleTypeFlagBits handleType = kHandleType;
+#endif
+
         VkSemaphore semaphore = VK_NULL_HANDLE;
         VkSemaphoreCreateInfo info;
         info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
@@ -87,8 +130,11 @@ class ServiceImplementationFD : public ServiceImplementation {
         importSemaphoreFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
         importSemaphoreFdInfo.pNext = nullptr;
         importSemaphoreFdInfo.semaphore = semaphore;
-        importSemaphoreFdInfo.flags = 0;
-        importSemaphoreFdInfo.handleType = kHandleType;
+        importSemaphoreFdInfo.flags =
+            (handleType == VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR)
+                ? VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR
+                : 0;
+        importSemaphoreFdInfo.handleType = handleType;
         importSemaphoreFdInfo.fd = handle;
 
         MaybeError status = CheckVkSuccess(
