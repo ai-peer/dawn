@@ -16,6 +16,23 @@
       "message": "PS8 should be able to fix multiple compile errors in trybots in PS7\n\nPlease review PS8, thank you",
       "revId": "b3b3a8fdabce6e8508158ee88778c54845b38c2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d539ddf_266cb05b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T09:46:33Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "b3b3a8fdabce6e8508158ee88778c54845b38c2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
