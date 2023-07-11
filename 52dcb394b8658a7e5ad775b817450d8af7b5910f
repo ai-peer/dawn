@@ -16,6 +16,24 @@
       "message": "Can we emit the lhs and rhs in the callers and pass in the results. Would remove the need for passing in a function to handle the emission order and make it clearer how things get emitted.",
       "revId": "52dcb394b8658a7e5ad775b817450d8af7b5910f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9253efda_cf5f7a06",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T21:42:27Z",
+      "side": 1,
+      "message": "As discussed, this is structured this way so I can insert some logic into `EmitCompoundAssignment` in https://dawn-review.googlesource.com/c/dawn/+/139924.\nThe order of evaluation makes this tricky as we need to conditionally operate on the LHS expression before evaluating the RHS.",
+      "parentUuid": "81228a30_5b771860",
+      "revId": "52dcb394b8658a7e5ad775b817450d8af7b5910f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
