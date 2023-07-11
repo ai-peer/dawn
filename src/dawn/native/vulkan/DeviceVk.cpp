@@ -351,6 +351,24 @@ MaybeError Device::SubmitPendingCommands() {
     submitInfo.signalSemaphoreCount = mRecordingContext.signalSemaphores.size();
     submitInfo.pSignalSemaphores = AsVkArray(mRecordingContext.signalSemaphores.data());
 
+    VkTimelineSemaphoreSubmitInfoKHR timelineSubmitInfo;
+    std::vector<uint64_t> waitValues, signalValues;
+    if (mDeviceInfo.timelineSemaphoreFeatures.timelineSemaphore) {
+        // Allow fence-like semaphores (i.e. timeline semaphores where the only values are 0 and 1)
+        // to be waited on or signalled.
+        waitValues.resize(mRecordingContext.waitSemaphores.size(), 1);
+        signalValues.resize(mRecordingContext.signalSemaphores.size(), 1);
+
+        timelineSubmitInfo.sType = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR;
+        timelineSubmitInfo.pNext = nullptr;
+        timelineSubmitInfo.waitSemaphoreValueCount = static_cast<uint32_t>(waitValues.size());
+        timelineSubmitInfo.pWaitSemaphoreValues = waitValues.data();
+        timelineSubmitInfo.signalSemaphoreValueCount = static_cast<uint32_t>(signalValues.size());
+        timelineSubmitInfo.pSignalSemaphoreValues = signalValues.data();
+
+        submitInfo.pNext = &timelineSubmitInfo;
+    }
+
     VkFence fence = VK_NULL_HANDLE;
     DAWN_TRY_ASSIGN(fence, GetUnusedFence());
     DAWN_TRY_WITH_CLEANUP(
@@ -437,6 +455,13 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
 
     if (IsRobustnessEnabled()) {
         usedKnobs.features.robustBufferAccess = VK_TRUE;
+    }
+
+    if (mDeviceInfo.HasExt(DeviceExt::TimelineSemaphore)) {
+        ASSERT(usedKnobs.HasExt(DeviceExt::TimelineSemaphore));
+
+        usedKnobs.timelineSemaphoreFeatures = mDeviceInfo.timelineSemaphoreFeatures;
+        featuresChain.Add(&usedKnobs.timelineSemaphoreFeatures);
     }
 
     if (mDeviceInfo.HasExt(DeviceExt::SubgroupSizeControl)) {
