@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b726487b_4a2a357f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-11T10:47:24Z",
+      "side": 1,
+      "message": "LGTM, Dan for +2",
+      "revId": "e16a4abab54464392b4b5b88d78d2cfbcf861885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb3af6b_92f8a350",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-11T10:47:24Z",
+      "side": 1,
+      "message": "Nit: You could just use `expr_sem-\u003eUnwrapLoad()`",
+      "range": {
+        "startLine": 866,
+        "startChar": 0,
+        "endLine": 871,
+        "endChar": 36
+      },
+      "revId": "e16a4abab54464392b4b5b88d78d2cfbcf861885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
