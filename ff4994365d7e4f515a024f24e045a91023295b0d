@@ -373,6 +373,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f4eaaef_51a31c19",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T14:23:43Z",
+      "side": 1,
+      "message": "Maybe we\u0027re not aligned with what `NextIteration` means then.\nI have been assuming that `NextIteration` was a branch back to the loop body and `Continue` was a branch to the loop continuing.",
+      "parentUuid": "10facc20_e47ceadb",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 15
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae5911f8_a737bc9f",
         "filename": "docs/tint/ir.md",
         "patchSetId": 2
