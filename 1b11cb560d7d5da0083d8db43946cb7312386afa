@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76ff06e0_240ac06f",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-11T21:59:38Z",
+      "side": 1,
+      "message": "I\u0027m wondering if we should break this up and have a target per transform. Then the backends can depend on the targets they actually care about. Otherwise we end up adding all transforms to all backends even if they don\u0027t need them.\n\nNothing for this CL, but something we many want to keep in mind.",
+      "revId": "1b11cb560d7d5da0083d8db43946cb7312386afa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2e39f9d_01ad8646",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-11T21:59:38Z",
+      "side": 1,
+      "message": "maybe `ir::TerminateInvocation` to be consistent with the rest of the items in this switch?",
+      "revId": "1b11cb560d7d5da0083d8db43946cb7312386afa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4cb62557_6f2e161b",
         "filename": "src/tint/ir/transform/demote_to_helper.cc",
         "patchSetId": 1
