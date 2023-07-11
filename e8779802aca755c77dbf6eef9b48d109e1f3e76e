@@ -16,6 +16,74 @@
       "message": "Hmm, I\u0027m not sure what caused the error in the windows build... Sending it out for review to see if anyone else knows, and hopefully not something that\u0027s a dealbreaker.",
       "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcaaa140_276db0ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:29:53Z",
+      "side": 1,
+      "message": "I tried really hard to find ways to simplify this, but couldn\u0027t. Thank you for pushing through this, it must have been challenging to come up with that solution!",
+      "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42184b29_43f88a88",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:29:53Z",
+      "side": 1,
+      "message": "u-nit: we might be able to factor this code in a lambda that returns a pair, so that we can do\n\n```\nauto [aPtr, aRef] \u003d ExtractKey(erasing, a);\nauto [bPtr, bRef] \u003d ExtractKey(erasing, b);\n\nif (aPtr \u003d\u003d bPtr) {\n  return true;\n}\nif (erasing) {\n  return false;\n}\nreturn BaseEqualityFunc()(aPtr, bPtr); // Cannot be nullptr?\n```",
+      "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027a5ba2_9d014300",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:29:53Z",
+      "side": 1,
+      "message": "u-nit: is it possible to split this into its own file so we don\u0027t need to include ContentLessObjectCache and all its dependencies in all of Dawn?",
+      "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dff592f4_edda9b38",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T14:29:53Z",
+      "side": 1,
+      "message": "Do we need this to be a WeakRef and not just a raw pointer? The cache should outlive all objects it contains because the Device should destroy the cache after it calls DestroyImpl on all known objects.",
+      "revId": "e8779802aca755c77dbf6eef9b48d109e1f3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
