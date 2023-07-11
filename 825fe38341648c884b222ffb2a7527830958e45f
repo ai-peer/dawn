@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f343d5ef_5e17fe79",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-11T21:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddcff338_03825621",
+      "revId": "825fe38341648c884b222ffb2a7527830958e45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41819c0b_58701aff",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "594de30e_e442b010",
+        "filename": "src/dawn/common/ContentLessObjectCacheable.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-11T21:57:12Z",
+      "side": 1,
+      "message": "It\u0027s done in `Erase`. Added comment about it.",
+      "parentUuid": "41819c0b_58701aff",
+      "range": {
+        "startLine": 49,
+        "startChar": 45,
+        "endLine": 49,
+        "endChar": 71
+      },
+      "revId": "825fe38341648c884b222ffb2a7527830958e45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22b59118_0927fedf",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-07-11T21:46:17Z",
       "side": 1,
       "message": "```suggestion\n    // Pointer to the owning cache if we were inserted at any point. This is set via the\n```",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "825fe38341648c884b222ffb2a7527830958e45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39fca8b0_2a92767a",
+        "filename": "src/dawn/common/ContentLessObjectCacheable.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-11T21:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22b59118_0927fedf",
       "range": {
         "startLine": 54,
         "startChar": 7,
