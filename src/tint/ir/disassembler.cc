@@ -744,25 +744,29 @@ void Disassembler::EmitTerminator(Terminator* b) {
 }
 
 void Disassembler::EmitValueList(utils::Slice<Value* const> values) {
+    bool need_comma = false;
     for (auto* v : values) {
-        if (v != values.Front()) {
+        if (need_comma) {
             out_ << ", ";
         }
         EmitValue(v);
+        need_comma = true;
     }
 }
 
 void Disassembler::EmitValueList(Instruction* inst, utils::Slice<Value* const> values) {
+    bool need_comma = false;
     auto len = values.Length();
     for (size_t i = 0; i < len; ++i) {
         auto* v = values[i];
-        if (v != values.Front()) {
+        if (need_comma) {
             out_ << ", ";
         }
 
         SourceMarker sm(this);
         EmitValue(v);
         sm.Store(Usage{inst, static_cast<uint32_t>(i)});
+        need_comma = true;
     }
 }
 
