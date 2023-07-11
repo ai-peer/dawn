@@ -34,6 +34,24 @@
       "parentUuid": "58552655_9bfa747e",
       "revId": "a57d1202ce45324c4a7ba03db55ef4a570eb6f72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4654cf2_2fea3420",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T10:02:24Z",
+      "side": 1,
+      "message": "Done. I\u0027m not massively keen on the use of `std::function`, but I\u0027m assuming that once we migrate to using `ast::TraverseExpressions` a lot of the complexity here will just fall away as we\u0027d be building leaf up. I first have to figure out how we\u0027d deal with short-circuiting operators.",
+      "parentUuid": "86a3ad70_8aa16986",
+      "revId": "a57d1202ce45324c4a7ba03db55ef4a570eb6f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
