@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b21f3f_2398f2e0",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T23:01:59Z",
+      "side": 1,
+      "message": "I think you can just do:\n\n`for (auto ctrl : utils::Reverse(control_stack_)) {`",
+      "revId": "c37c9d90302196c2683d4ed610a97c1d427e2f3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
