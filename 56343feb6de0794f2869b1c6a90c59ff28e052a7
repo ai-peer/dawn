@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971145fd_c9059727",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-11T11:20:58Z",
+      "side": 1,
+      "message": "Why was this commented out?",
+      "range": {
+        "startLine": 1578,
+        "startChar": 0,
+        "endLine": 1580,
+        "endChar": 8
+      },
+      "revId": "56343feb6de0794f2869b1c6a90c59ff28e052a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
