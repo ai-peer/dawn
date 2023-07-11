@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09d509fe_ae807fb1",
+        "filename": "src/tint/resolver/builtin_structs.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-11T22:54:08Z",
+      "side": 0,
+      "message": "Did the TINT_ASSERT.",
+      "parentUuid": "fff6be7f_634aa7ea",
+      "revId": "54efacde8cd974e326f44c5464afe5197e0c296d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff78f434_4357b6a2",
         "filename": "src/tint/resolver/builtin_structs.cc",
         "patchSetId": 2
