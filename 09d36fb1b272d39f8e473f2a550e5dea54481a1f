@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbaa72cf_f02b81da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-11T14:17:52Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "parentUuid": "8d22e23d_0183e9ac",
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6806cf46_f412c411",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-07-11T11:02:54Z",
       "side": 1,
       "message": "nit: using `ComputeRequiredBytesInCopy()` to compute buffer size?",
+      "range": {
+        "startLine": 400,
+        "startChar": 27,
+        "endLine": 400,
+        "endChar": 37
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66fbbd43_3788de04",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-11T14:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6806cf46_f412c411",
       "range": {
         "startLine": 400,
         "startChar": 27,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d47cc5b_b6e5190e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-11T14:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6f2f39b_753368f1",
+      "range": {
+        "startLine": 401,
+        "startChar": 12,
+        "endLine": 401,
+        "endChar": 32
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dae3ac8_82e55e25",
@@ -104,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1f8febb_d7feb354",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-11T14:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dae3ac8_82e55e25",
+      "range": {
+        "startLine": 402,
+        "startChar": 12,
+        "endLine": 402,
+        "endChar": 39
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b70e598d_f6066eba",
@@ -117,6 +207,30 @@
       "writtenOn": "2023-07-11T11:02:54Z",
       "side": 1,
       "message": "I assume code in the else block is not changed, right?",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 411,
+        "endChar": 90
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec3406a_408dc516",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-11T14:17:52Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "b70e598d_f6066eba",
       "range": {
         "startLine": 410,
         "startChar": 12,
