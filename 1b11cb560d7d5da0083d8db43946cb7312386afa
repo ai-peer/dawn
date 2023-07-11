@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed9882d6_7cbca312",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-11T22:54:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2e39f9d_01ad8646",
+      "revId": "1b11cb560d7d5da0083d8db43946cb7312386afa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cb62557_6f2e161b",
