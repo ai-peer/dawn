@@ -109,6 +109,12 @@ constexpr SkippedMessage kSkippedMessages[] = {
      "(usage: SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
      "SYNC_FRAGMENT_SHADER_SHADER_SAMPLED_READ, read_barriers: VkPipelineStageFlags2(0)"},
 
+    // http://crbug.com/dawn/1879
+    {"SYNC-HAZARD-READ-AFTER-WRITE",
+     "Access info (usage: SYNC_COPY_TRANSFER_READ, prior_usage: SYNC_COPY_TRANSFER_WRITE, "
+     "write_barriers: SYNC_COPY_TRANSFER_WRITE|SYNC_RESOLVE_TRANSFER_WRITE|"
+     "SYNC_BLIT_TRANSFER_WRITE|SYNC_CLEAR_TRANSFER_WRITE, command: vkCmdCopyBufferToImage"},
+
     // http://anglebug.com/7513
     {"VUID-VkGraphicsPipelineCreateInfo-pStages-06896",
      "contains fragment shader state, but stages"},
