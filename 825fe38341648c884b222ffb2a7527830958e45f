@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddcff338_03825621",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-11T21:46:17Z",
+      "side": 1,
+      "message": "I\u0027d add a comment about why it\u0027s safe to use Unsafe here for *both* `a` and `b`",
+      "revId": "825fe38341648c884b222ffb2a7527830958e45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41819c0b_58701aff",
+        "filename": "src/dawn/common/ContentLessObjectCacheable.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-11T21:46:17Z",
+      "side": 1,
+      "message": "Should mCache be set to nullptr inside Uncache() ?",
+      "range": {
+        "startLine": 49,
+        "startChar": 45,
+        "endLine": 49,
+        "endChar": 71
+      },
+      "revId": "825fe38341648c884b222ffb2a7527830958e45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b59118_0927fedf",
+        "filename": "src/dawn/common/ContentLessObjectCacheable.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-11T21:46:17Z",
+      "side": 1,
+      "message": "```suggestion\n    // Pointer to the owning cache if we were inserted at any point. This is set via the\n```",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "825fe38341648c884b222ffb2a7527830958e45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
