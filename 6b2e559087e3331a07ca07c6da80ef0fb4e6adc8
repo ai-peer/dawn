@@ -100,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ab433a_0ec6423e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-11T06:24:43Z",
+      "side": 1,
+      "message": "I think the error should be fixed now. You can have another try on Kokoro.",
+      "parentUuid": "9ee94825_e3f3d89f",
+      "revId": "6b2e559087e3331a07ca07c6da80ef0fb4e6adc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9e074fc_fc8801d1",
