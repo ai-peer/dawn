@@ -16,6 +16,23 @@
       "message": "Hi Austin or Corentin, PTAL. Thanks",
       "revId": "bc0ad7b05732aa5038bf7660001c0f7b5050c289",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6103f254_b18da211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-11T20:28:30Z",
+      "side": 1,
+      "message": "why have the default versus explicitly setting it to the proc table you want it to be?",
+      "revId": "bc0ad7b05732aa5038bf7660001c0f7b5050c289",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
