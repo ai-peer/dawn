@@ -349,6 +349,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10facc20_e47ceadb",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-11T14:19:56Z",
+      "side": 1,
+      "message": "I think you can define it as NextIteration can only come as the last item in a loop body. If you want to continue from elsewhere, use `Continue` and then add a Continuing block which just does NextIteration.",
+      "parentUuid": "57e09c29_79cb3874",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 15
+      },
+      "revId": "ff4994365d7e4f515a024f24e045a91023295b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae5911f8_a737bc9f",
         "filename": "docs/tint/ir.md",
         "patchSetId": 2
