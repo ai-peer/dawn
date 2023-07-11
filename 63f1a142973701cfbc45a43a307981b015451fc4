@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e3da50_bacd4ea4",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-11T14:44:27Z",
+      "side": 1,
+      "message": "```suggestion\n%2:i32 \u003d sub %0, %1\n```",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 21
+      },
+      "revId": "63f1a142973701cfbc45a43a307981b015451fc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
