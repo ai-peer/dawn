@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "2ea5fb80621616f809cc8cab347f1ef210832643",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13941b24_29aebf1a",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-11T21:04:46Z",
+      "side": 1,
+      "message": "`FriendlyName()`?",
+      "range": {
+        "startLine": 486,
+        "startChar": 49,
+        "endLine": 486,
+        "endChar": 64
+      },
+      "revId": "2ea5fb80621616f809cc8cab347f1ef210832643",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
