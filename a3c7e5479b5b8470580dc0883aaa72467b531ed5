@@ -33,6 +33,57 @@
       "message": "This patch addresses https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1302#c15",
       "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f54c3e7_ba75ce60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T09:58:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d301fc44_ca200d56",
+        "filename": "src/dawn/tests/perf_tests/VulkanZeroInitializeWorkgroupMemoryPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T09:58:38Z",
+      "side": 1,
+      "message": "u-nit: we could take advantage of WGSL constant evaluation to do:\n```\n  const kWorkgroupSize \u003d )\" \u003c\u003c workgroupSize \u003c\u003c R\"(;\n  const kWorkgroupArraySize \u003d )\" \u003c\u003c workgroupArraySize \u003c\u003c R\"(;\n  const kLoopLength \u003d kWorkgroupArraySize / kWorkgroupSize;\n  ```\nand use these variables in the shader.",
+      "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b1620a_9a5728e6",
+        "filename": "src/dawn/tests/perf_tests/VulkanZeroInitializeWorkgroupMemoryPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-11T09:58:38Z",
+      "side": 1,
+      "message": "u-nit: We could use the auto layout.",
+      "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
