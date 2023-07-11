@@ -372,22 +372,59 @@ class Validator {
     }
 
     void CheckTerminator(ir::Terminator* b) {
+        if (!b->Args().IsEmpty()) {
+            CheckOperandsNotNull(b, 0, b->Args().Length() - 1, "terminator");
+        }
+
         tint::Switch(
-            b,                           //
-            [&](ir::BreakIf*) {},        //
-            [&](ir::Continue*) {},       //
-            [&](ir::ExitIf*) {},         //
-            [&](ir::ExitLoop*) {},       //
-            [&](ir::ExitSwitch*) {},     //
-            [&](ir::NextIteration*) {},  //
+            b,                                   //
+            [&](ir::BreakIf*) {},                //
+            [&](ir::Continue*) {},               //
+            [&](ir::Exit* e) { CheckExit(e); },  //
+            [&](ir::NextIteration*) {},          //
             [&](ir::Return* ret) {
                 if (ret->Func() == nullptr) {
-                    AddError("return: null function");
+                    AddError("return: undefined function");
                 }
             },
             [&](ir::Unreachable*) {},  //
             [&](Default) {
                 AddError(std::string("missing validation of terminator: ") + b->TypeInfo().name);
+            });
+    }
+
+    void CheckExit(ir::Exit* e) {
+        if (e->ControlInstruction() == nullptr) {
+            AddError(e, "exit: control instruction is undefined");
+            return;
+        }
+
+        auto results = e->ControlInstruction()->Results();
+        auto args = e->Args();
+        if (results.Length() != args.Length()) {
+            AddError(e, std::string("exit: args count (") + std::to_string(args.Length()) +
+                            ") does not match if result count (" +
+                            std::to_string(results.Length()) + ")");
+            return;
+        }
+
+        for (size_t i = 0; i < results.Length(); ++i) {
+            if (results[i] && args[i] && results[i]->Type() != args[i]->Type()) {
+                AddError(e, i,
+                         std::string("exit: argument type (") +
+                             results[i]->Type()->TypeInfo().name +
+                             ") does not match control instruction type (" +
+                             args[i]->Type()->TypeInfo().name + ")");
+            }
+        }
+
+        tint::Switch(
+            e,                                       //
+            [&](ir::ExitIf* i) { CheckExitIf(i); },  //
+            [&](ir::ExitLoop*) {},                   //
+            [&](ir::ExitSwitch*) {},                 //
+            [&](Default) {
+                AddError(std::string("missing validation of exit: ") + e->TypeInfo().name);
             });
     }
 
@@ -421,6 +458,8 @@ class Validator {
         }
     }
 
+    void CheckExitIf(ExitIf*) {}
+
     void CheckVar(Var* var) {
         if (var->Result() && var->Initializer()) {
             if (var->Initializer()->Type() != var->Result()->Type()->UnwrapPtr()) {
@@ -428,7 +467,7 @@ class Validator {
             }
         }
     }
-};  // namespace
+};
 
 }  // namespace
 

@@ -633,6 +633,45 @@ note: # Disassembly
 )");
 }
 
+TEST_F(IR_ValidateTest, If_NullResult) {
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.Return(f));
+    if_->False()->Append(b.Return(f));
+
+    if_->SetResults(utils::Vector<InstructionResult*, 1>{nullptr});
+
+    f->Block()->Append(if_);
+    f->Block()->Append(b.Return(f));
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:3:5 error: instruction result is undefined
+    undef = if true [t: %b2, f: %b3] {  # if_1
+    ^^^^^
+
+:2:3 note: In block
+  %b1 = block {
+  ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    undef = if true [t: %b2, f: %b3] {  # if_1
+      %b2 = block {  # true
+        ret
+      }
+      %b3 = block {  # false
+        ret
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
 TEST_F(IR_ValidateTest, Loop_OnlyBody) {
     auto* f = b.Function("my_func", ty.void_());
 
@@ -1047,6 +1086,388 @@ note: # Disassembly
 %my_func = func():void -> %b1 {
   %b1 = block {
     %2:f32 = complement 2i
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf) {
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.ExitIf(if_));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    EXPECT_TRUE(res) << res.Failure().str();
+}
+
+TEST_F(IR_ValidateTest, ExitIf_NullIf) {
+    auto* if_ = b.If(true);
+    if_->True()->Append(mod.instructions.Create<ExitIf>(nullptr));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:5:9 error: exit: control instruction is undefined
+        exit_if  # undef
+        ^^^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if  # undef
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_NullOperands) {
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.ExitIf(if_, nullptr));
+
+    if_->SetResults(b.InstructionResult(ty.i32()));
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(), R"(:5:17 error: terminator: operand is undefined
+        exit_if undef  # if_1
+                ^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32 = if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if undef  # if_1
+      }
+      # implicit false block: exit_if undef
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_LessOperandsThenIfParams) {
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.ExitIf(if_, 1_i));
+
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    if_->SetResults(utils::Vector{r1, r2});
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:5:9 error: exit: args count (1) does not match if result count (2)
+        exit_if 1i  # if_1
+        ^^^^^^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32, %3:f32 = if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if 1i  # if_1
+      }
+      # implicit false block: exit_if undef, undef
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_MoreOperandsThenIfParams) {
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.ExitIf(if_, 1_i, 2_f, 3_i));
+
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    if_->SetResults(utils::Vector{r1, r2});
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:5:9 error: exit: args count (3) does not match if result count (2)
+        exit_if 1i, 2.0f, 3i  # if_1
+        ^^^^^^^^^^^^^^^^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32, %3:f32 = if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if 1i, 2.0f, 3i  # if_1
+      }
+      # implicit false block: exit_if undef, undef
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_WithResult) {
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.ExitIf(if_, 1_i, 2_f));
+
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    if_->SetResults(utils::Vector{r1, r2});
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_TRUE(res) << res.Failure().str();
+}
+
+TEST_F(IR_ValidateTest, ExitIf_IncorrectResultType) {
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.ExitIf(if_, 1_i, 2_i));
+
+    auto* r1 = b.InstructionResult(ty.i32());
+    auto* r2 = b.InstructionResult(ty.f32());
+    if_->SetResults(utils::Vector{r1, r2});
+
+    auto* f = b.Function("my_func", ty.void_());
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.Return(f);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(
+        res.Failure().str(),
+        R"(:5:21 error: exit: argument type (tint::type::F32) does not match control instruction type (tint::type::I32)
+        exit_if 1i, 2i  # if_1
+                    ^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    %2:i32, %3:f32 = if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if 1i, 2i  # if_1
+      }
+      # implicit false block: exit_if undef, undef
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_NotInParentIf) {
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto* if_ = b.If(true);
+    if_->True()->Append(b.Return(f));
+
+    auto sb = b.With(f->Block());
+    sb.Append(if_);
+    sb.ExitIf(if_);
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:5:9 error: exit_if: not contained inside parent if instruction
+        exit_if undef  # if_1
+                ^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if  # undef
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_InvalidJumpsOverIf) {
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto* if_inner = b.If(true);
+
+    auto* if_outer = b.If(true);
+    b.With(if_outer->True(), [&] {
+        b.Append(if_inner);
+        b.ExitIf(if_outer);
+    });
+
+    b.With(if_inner->True(), [&] { b.ExitIf(if_outer); });
+
+    b.With(f->Block(), [&] {
+        b.Append(if_outer);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:5:9 error: exit_if: jumps to wrong if
+        exit_if undef  # if_1
+                ^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if  # undef
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_InvalidJumpOverSwitch) {
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto* switch_inner = b.Switch(1_i);
+
+    auto* if_outer = b.If(true);
+    b.With(if_outer->True(), [&] {
+        b.Append(switch_inner);
+        b.ExitIf(if_outer);
+    });
+
+    auto* c = b.Case(switch_inner, {Switch::CaseSelector{b.Constant(1_i)}});
+    b.With(c, [&] { b.ExitIf(if_outer); });
+
+    b.With(f->Block(), [&] {
+        b.Append(if_outer);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:5:9 error: exit_if: jumps over switch
+        exit_if undef  # if_1
+                ^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if  # undef
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidateTest, ExitIf_InvalidJumpOverLoop) {
+    auto* f = b.Function("my_func", ty.void_());
+
+    auto* loop = b.Loop();
+
+    auto* if_outer = b.If(true);
+    b.With(if_outer->True(), [&] {
+        b.Append(loop);
+        b.ExitIf(if_outer);
+    });
+
+    b.With(loop->Body(), [&] { b.ExitIf(if_outer); });
+
+    b.With(f->Block(), [&] {
+        b.Append(if_outer);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_FALSE(res);
+    EXPECT_EQ(res.Failure().str(),
+              R"(:5:9 error: exit_if: jumps over loop
+        exit_if undef  # if_1
+                ^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # true
+      ^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void -> %b1 {
+  %b1 = block {
+    if true [t: %b2] {  # if_1
+      %b2 = block {  # true
+        exit_if  # undef
+      }
+    }
     ret
   }
 }

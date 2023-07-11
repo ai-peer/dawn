@@ -99,18 +99,27 @@ std::string_view Disassembler::IdOf(Value* value) {
 }
 
 std::string_view Disassembler::NameOf(If* inst) {
-    TINT_ASSERT(IR, inst);
+    if (!inst) {
+        return "undef";
+    }
+
     return if_names_.GetOrCreate(inst, [&] { return "if_" + std::to_string(if_names_.Count()); });
 }
 
 std::string_view Disassembler::NameOf(Loop* inst) {
-    TINT_ASSERT(IR, inst);
+    if (!inst) {
+        return "undef";
+    }
+
     return loop_names_.GetOrCreate(inst,
                                    [&] { return "loop_" + std::to_string(loop_names_.Count()); });
 }
 
 std::string_view Disassembler::NameOf(Switch* inst) {
-    TINT_ASSERT(IR, inst);
+    if (!inst) {
+        return "undef";
+    }
+
     return switch_names_.GetOrCreate(
         inst, [&] { return "switch_" + std::to_string(switch_names_.Count()); });
 }
@@ -304,6 +313,11 @@ void Disassembler::EmitValueWithType(Instruction* val) {
 }
 
 void Disassembler::EmitValueWithType(Value* val) {
+    if (!val) {
+        out_ << "undef";
+        return;
+    }
+
     EmitValue(val);
     out_ << ":" << val->Type()->FriendlyName();
 }
@@ -668,7 +682,7 @@ void Disassembler::EmitTerminator(Terminator* b) {
 
     if (!b->Args().IsEmpty()) {
         out_ << " ";
-        EmitValueList(b->Args());
+        EmitValueList(b, b->Args());
     }
     sm.Store(b);
 
@@ -678,6 +692,7 @@ void Disassembler::EmitTerminator(Terminator* b) {
         [&](ir::ExitSwitch* e) { out_ << "  # " << NameOf(e->Switch()); },  //
         [&](ir::ExitLoop* e) { out_ << "  # " << NameOf(e->Loop()); }       //
     );
+
     EmitLine();
 }
 
@@ -690,8 +705,22 @@ void Disassembler::EmitValueList(utils::Slice<Value* const> values) {
     }
 }
 
+void Disassembler::EmitValueList(Instruction* inst, utils::Slice<Value* const> values) {
+    auto len = values.Length();
+    for (size_t i = 0; i < len; ++i) {
+        auto* v = values[i];
+        if (v != values.Front()) {
+            out_ << ", ";
+        }
+
+        SourceMarker sm(this);
+        EmitValue(v);
+        sm.Store(Usage{inst, static_cast<uint32_t>(i)});
+    }
+}
+
 void Disassembler::EmitArgs(Call* call) {
-    EmitValueList(call->Args());
+    EmitValueList(call, call->Args());
 }
 
 void Disassembler::EmitBinary(Binary* b) {
