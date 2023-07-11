@@ -42,6 +42,7 @@
 #include "src/tint/ir/store.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
+#include "src/tint/ir/terminate_invocation.h"
 #include "src/tint/ir/unary.h"
 #include "src/tint/ir/unreachable.h"
 #include "src/tint/ir/user_call.h"
@@ -387,7 +388,8 @@ class Validator {
                     AddError("return: null function");
                 }
             },
-            [&](ir::Unreachable*) {},  //
+            [&](ir::TerminateInvocation*) {},  //
+            [&](ir::Unreachable*) {},          //
             [&](Default) {
                 AddError(std::string("missing validation of terminator: ") + b->TypeInfo().name);
             });
