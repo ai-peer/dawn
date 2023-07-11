@@ -48,6 +48,7 @@
 #include "src/tint/ir/store.h"
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/swizzle.h"
+#include "src/tint/ir/terminate_invocation.h"
 #include "src/tint/ir/unary.h"
 #include "src/tint/ir/unreachable.h"
 #include "src/tint/ir/user_call.h"
@@ -760,6 +761,10 @@ class Builder {
         return Append(ir.instructions.Create<ir::Swizzle>(InstructionResult(type), obj_val,
                                                           utils::Vector<uint32_t, 4>(indices)));
     }
+
+    /// Creates a terminate invocation instruction
+    /// @returns the instruction
+    ir::TerminateInvocation* TerminateInvocation();
 
     /// Creates an unreachable instruction
     /// @returns the instruction
