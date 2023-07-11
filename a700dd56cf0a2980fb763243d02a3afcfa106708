@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4270026a_4d376482",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-11T14:26:54Z",
+      "side": 1,
+      "message": "nit:\n\n`DAWN_TRY_ASSIGN(byteLength, ComputeRequiredBytesInCopy(...));`",
+      "range": {
+        "startLine": 407,
+        "startChar": 21,
+        "endLine": 407,
+        "endChar": 35
+      },
+      "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
