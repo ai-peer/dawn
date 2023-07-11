@@ -16,6 +16,115 @@
       "message": "PTAL",
       "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d22e23d_0183e9ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-11T11:02:54Z",
+      "side": 1,
+      "message": "lgtm with several nits.",
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6806cf46_f412c411",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-11T11:02:54Z",
+      "side": 1,
+      "message": "nit: using `ComputeRequiredBytesInCopy()` to compute buffer size?",
+      "range": {
+        "startLine": 400,
+        "startChar": 27,
+        "endLine": 400,
+        "endChar": 37
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6f2f39b_753368f1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-11T11:02:54Z",
+      "side": 1,
+      "message": "nit: move it out of the loop to avoid re-allocations.",
+      "range": {
+        "startLine": 401,
+        "startChar": 12,
+        "endLine": 401,
+        "endChar": 32
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dae3ac8_82e55e25",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-11T11:02:54Z",
+      "side": 1,
+      "message": "nit: move it out of the loop.",
+      "range": {
+        "startLine": 402,
+        "startChar": 12,
+        "endLine": 402,
+        "endChar": 39
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70e598d_f6066eba",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-11T11:02:54Z",
+      "side": 1,
+      "message": "I assume code in the else block is not changed, right?",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 411,
+        "endChar": 90
+      },
+      "revId": "09d36fb1b272d39f8e473f2a550e5dea54481a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
