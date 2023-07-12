@@ -16,6 +16,23 @@
       "message": "This CL should avoid the extra copy for cases where texture being GL_TEXTURE_2D. I also saw 2 more scenarios where the mUseCopy path is triggered.\n\n- When mipLevel \u003e 1, I don\u0027t think this is evitable.\n- For depth and stencil textures, when texture array layer \u003e 1, seems texture gl target is still default to GL_TEXTURE_2D. This might be a potential future optimization.",
       "revId": "5cafb8e6ad946b26df4f829597258c7bad363a57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d60de0_95812d17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-12T22:12:41Z",
+      "side": 1,
+      "message": "The win-dawn-rel failure looks like dawn:1503.\nUsing texture_2d instead of texture_2d_array seems to trigger this issue which avoids the extra mUseCopy. If I force set to use texture_2d_array triggering the extra copy, the readback works fine. Something is wrong there.",
+      "revId": "5cafb8e6ad946b26df4f829597258c7bad363a57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
