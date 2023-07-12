@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e914dd1c_6e5e2cb1",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T17:23:00Z",
+      "side": 1,
+      "message": "Could also validate that the index is in bounds if it\u0027s a constant?",
+      "revId": "d00813a637629564dfb6180401a7cf9eccd87d98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e8b0c4c_98d958c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T17:23:00Z",
+      "side": 1,
+      "message": "LGTM. Would love to revert all the `VarForDynamicIndex` changes when we can express backend capabilities to the validator.",
+      "revId": "6598e20d1fe4503073cc75bdd41bd822754147ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
