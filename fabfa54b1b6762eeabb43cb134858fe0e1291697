@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53fd790_717e1116",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T12:06:01Z",
+      "side": 1,
+      "message": "Nit: Maybe `RequiresDerivativeUniformity`, since this list doesn\u0027t include other functions that require uniformity control flow like `workgroupBarrier`?",
+      "revId": "fabfa54b1b6762eeabb43cb134858fe0e1291697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
