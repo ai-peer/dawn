@@ -22,6 +22,7 @@
 #include "src/tint/lang/glsl/writer/version.h"
 #include "src/tint/lang/wgsl/sem/sampler_texture_pair.h"
 #include "tint/external_texture_options.h"
+#include "tint/texture_builtins_from_uniform_options.h"
 
 namespace tint::glsl::writer {
 
@@ -66,6 +67,8 @@ struct Options {
     /// Options used in the binding mappings for external textures
     ExternalTextureOptions external_texture_options = {};
 
+    TextureBuiltinsFromUniformOptions texture_builtins_from_uniform = {};
+
     /// The GLSL version to emit
     Version version;
 
@@ -74,6 +77,7 @@ struct Options {
                  allow_collisions,
                  disable_workgroup_init,
                  external_texture_options,
+                 texture_builtins_from_uniform,
                  version);
 };
 

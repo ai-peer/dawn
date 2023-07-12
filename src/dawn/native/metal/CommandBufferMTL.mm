@@ -416,6 +416,8 @@ struct StorageBufferLengthTracker {
             return;
         }
 
+        // TODO: watch
+
         uint32_t bufferCount =
             ToBackend(pipeline->GetLayout())->GetBufferBindingCount(SingleShaderStage::Compute);
         bufferCount = Align(bufferCount, 4);

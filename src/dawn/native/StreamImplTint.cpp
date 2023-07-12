@@ -26,6 +26,17 @@ void StreamInTintObject(const OBJECT& object, stream::Sink* sink) {
     tint::ForeachField(object, [&](auto& field) { StreamIn(sink, field); });
 }
 
+// TODO: make a foreachfield returning foreachfield for read?
+
+// template <typename OBJECT>
+// MaybeError StreamOutTintObject(OBJECT* object, Source* sink) {
+//     tint::ForeachField(object, [&](auto& field) {
+//         DAWN_TRY(StreamOut(field, sink));
+//     });
+
+//     return {};
+// }
+
 }  // namespace
 
 // static
@@ -47,6 +58,15 @@ template <>
 void stream::Stream<tint::BindingPoint>::Write(stream::Sink* sink,
                                                const tint::BindingPoint& point) {
     StreamInTintObject(point, sink);
+}
+
+// static
+template <>
+MaybeError stream::Stream<tint::BindingPoint>::Read(Source* s, tint::BindingPoint* point) {
+    // temp
+    DAWN_TRY(StreamOut(s, &point->group));
+    DAWN_TRY(StreamOut(s, &point->binding));
+    return {};
 }
 
 // static
@@ -110,6 +130,42 @@ void stream::Stream<tint::ArrayLengthFromUniformOptions>::Write(
     const tint::ArrayLengthFromUniformOptions& options) {
     StreamInTintObject(options, sink);
 }
+
+// static
+template <>
+void stream::Stream<tint::TextureBuiltinsFromUniformOptions>::Write(
+    stream::Sink* sink,
+    const tint::TextureBuiltinsFromUniformOptions& options) {
+    StreamInTintObject(options, sink);
+}
+
+// // static
+// template <>
+// void stream::Stream<tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo>::Write(
+//     stream::Sink* sink,
+//     const tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo& data) {
+//     // StreamInTintObject(data, sink);
+//     for (auto& e : data) {
+//         StreamIn(sink, e);
+//     }
+// }
+
+// // static
+// MaybeError stream::Stream<tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo>::Read(
+//     stream::Source* s,
+//     tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo* b) {
+//     size_t size;
+//     DAWN_TRY(StreamOut(s, &size));
+//     if (size > 0) {
+//         const void* ptr;
+//         DAWN_TRY(s->Read(&ptr, size));
+//         *b = CreateBlob(size);
+//         memcpy(b->Data(), ptr, size);
+//     } else {
+//         *b = Blob();
+//     }
+//     return {};
+// }
 
 // static
 template <>
