@@ -1504,6 +1504,85 @@ fn f() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Phony Assignment
+////////////////////////////////////////////////////////////////////////////////
+TEST_F(IRToProgramRoundtripTest, PhonyAssign_PrivateVar) {
+    Test(R"(
+var<private> p : i32;
+
+fn f() {
+  _ = p;
+}
+)");
+}
+
+TEST_F(IRToProgramRoundtripTest, PhonyAssign_FunctionVar) {
+    Test(R"(
+fn f() {
+  var i : i32;
+  _ = i;
+}
+)");
+}
+
+TEST_F(IRToProgramRoundtripTest, PhonyAssign_FunctionLet) {
+    Test(R"(
+fn f() {
+  let i : i32 = 42i;
+  _ = i;
+}
+)",
+         R"(
+fn f() {
+  let i = 42i;
+}
+)");
+}
+
+TEST_F(IRToProgramRoundtripTest, PhonyAssign_HandleVar) {
+    Test(R"(
+@group(0) @binding(0) var t : texture_2d<f32>;
+
+fn f() {
+  _ = t;
+}
+)");
+}
+
+TEST_F(IRToProgramRoundtripTest, PhonyAssign_Constant) {
+    Test(R"(
+fn f() {
+  _ = 42i;
+}
+)",
+         R"(
+fn f() {
+}
+)");
+}
+
+TEST_F(IRToProgramRoundtripTest, PhonyAssign_Call) {
+    Test(R"(
+fn v() -> i32 {
+  return 42;
+}
+
+fn f() {
+  _ = v();
+}
+)",
+         R"(
+fn v() -> i32 {
+  return 42i;
+}
+
+fn f() {
+  v();
+}
+)");
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // let
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramRoundtripTest, LetUsedOnce) {
