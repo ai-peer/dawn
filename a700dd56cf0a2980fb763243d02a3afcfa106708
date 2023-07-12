@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff9e4d24_4c8ae786",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-12T10:20:19Z",
+      "side": 1,
+      "message": "I was suggesting using Physical because it seems likely that we\u0027d use the samecode path for compressed textures eventually. But maybe we can do that at that time.",
+      "parentUuid": "2f9b3099_7aac0dbf",
+      "revId": "a700dd56cf0a2980fb763243d02a3afcfa106708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "213cf2af_3da8b71f",
