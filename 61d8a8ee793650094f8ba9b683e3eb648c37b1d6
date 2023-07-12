@@ -33,6 +33,24 @@
       "message": "This should be behind a build spirv flag.",
       "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ef50a6_6310e24e",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T15:25:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf248cf0_321f4695",
+      "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
