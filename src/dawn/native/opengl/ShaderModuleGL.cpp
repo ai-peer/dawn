@@ -63,6 +63,7 @@ using BindingMap = std::unordered_map<tint::BindingPoint, tint::BindingPoint>;
     X(SingleShaderStage, stage)                                                                  \
     X(tint::ExternalTextureOptions, externalTextureOptions)                                      \
     X(BindingMap, glBindings)                                                                    \
+    X(tint::TextureBuiltinsFromUniformOptions, textureBuiltinsFromUniform)                       \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                       \
     X(opengl::OpenGLVersion::Standard, glVersionStandard)                                        \
@@ -72,10 +73,15 @@ using BindingMap = std::unordered_map<tint::BindingPoint, tint::BindingPoint>;
 DAWN_MAKE_CACHE_REQUEST(GLSLCompilationRequest, GLSL_COMPILATION_REQUEST_MEMBERS);
 #undef GLSL_COMPILATION_REQUEST_MEMBERS
 
-#define GLSL_COMPILATION_MEMBERS(X)  \
-    X(std::string, glsl)             \
-    X(bool, needsPlaceholderSampler) \
+#define GLSL_COMPILATION_MEMBERS(X)                                                      \
+    X(std::string, glsl)                                                                 \
+    X(bool, needsPlaceholderSampler)                                                     \
+    X(bool, needsInternalUniformBuffer)                                                  \
+    X(tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo, bindingPointToData) \
     X(opengl::CombinedSamplerInfo, combinedSamplerInfo)
+
+// DAWN_SERIALIZABLE for tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo to get stream
+// read?
 
 DAWN_SERIALIZABLE(struct, GLSLCompilation, GLSL_COMPILATION_MEMBERS){};
 #undef GLSL_COMPILATION_MEMBERS
@@ -138,15 +144,31 @@ MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult,
     return {};
 }
 
-ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
-                                                  const ProgrammableStage& programmableStage,
-                                                  SingleShaderStage stage,
-                                                  CombinedSamplerInfo* combinedSamplers,
-                                                  const PipelineLayout* layout,
-                                                  bool* needsPlaceholderSampler) const {
+ResultOrError<GLuint> ShaderModule::CompileShader(
+    const OpenGLFunctions& gl,
+    const ProgrammableStage& programmableStage,
+    SingleShaderStage stage,
+    CombinedSamplerInfo* combinedSamplers,
+    const PipelineLayout* layout,
+    bool* needsPlaceholderSampler,
+    bool* needsTextureBuiltinUniformBuffer,
+    tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo* bindingPointToData) const {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
 
     const OpenGLVersion& version = ToBackend(GetDevice())->GetGL().GetVersion();
+
+    // std::optional<tint::ast::transform::TextureBuiltinsFromUniform::Config>
+    //     textureBuiltinsFromUniform;
+    // uint32_t builtin_value_index = 0;
+    // auto getTextureBindingMap = [&] {
+    //     if (!textureBuiltinsFromUniform) {
+    //         textureBuiltinsFromUniform = {};
+    //         textureBuiltinsFromUniform->ubo_binding = {kMaxBindGroups + 1, 0};
+    //     }
+    //     return textureBuiltinsFromUniform.value();
+    // };
+
+    // Internal ubo binding should remap as well.
 
     using tint::BindingPoint;
     // Since (non-Vulkan) GLSL does not support descriptor sets, generate a
@@ -168,8 +190,36 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             if (srcBindingPoint != dstBindingPoint) {
                 glBindings.emplace(srcBindingPoint, dstBindingPoint);
             }
+
+            // // auto bindingInfo = bgl->GetBindingInfo(bindingIndex);
+            // if (bindingInfo.bindingType == BindingInfoType::Texture ||
+            //     bindingInfo.bindingType == BindingInfoType::StorageTexture) {
+            //     textureBuiltinsFromUniform.bindpoint_to_index.emplace(dstBindingPoint,
+            //                                                           builtin_value_index++);
+
+            //     // // push data type
+            //     // textureBuiltinsFromUniform.needed_data_types.emplace_back(
+            //     //     tint::TextureBuiltinsFromUniformOptions::DataType::TextureNumLevels);
+            //     // textureBuiltinsFromUniform.needed_data_types.emplace_back(
+            //     //     tint::TextureBuiltinsFromUniformOptions::DataType::TextureNumSamples);
+            // }
         }
     }
+
+    // Texture Builtins from uniforms transform
+    tint::TextureBuiltinsFromUniformOptions textureBuiltinsFromUniform;
+    textureBuiltinsFromUniform.ubo_binding = {kMaxBindGroups + 1, 0};
+    // Remap the internal ubo binding as well.
+    glBindings.emplace(textureBuiltinsFromUniform.ubo_binding,
+                       BindingPoint{0, layout->GetInternalUniformBinding()});
+    // glBindings.emplace(textureBuiltinsFromUniform.ubo_binding, BindingPoint{0, 5}); // temp test
+
+    // // ? For each texture binding in bindgrouplayout?
+    // for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask()) {
+    //     // if bind group is texture?
+    //     const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(group);
+    //     GLuint shaderIndex = layout->GetBindingIndexInfo()[group][bindingIndex];
+    // }
 
     std::optional<tint::ast::transform::SubstituteOverride::Config> substituteOverrideConfig;
     if (!programmableStage.metadata->overrides.empty()) {
@@ -184,6 +234,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
     req.entryPointName = programmableStage.entryPoint;
     req.externalTextureOptions = BuildExternalTextureTransformBindings(layout);
     req.glBindings = std::move(glBindings);
+    req.textureBuiltinsFromUniform = std::move(textureBuiltinsFromUniform);
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
     req.limits = LimitsForCompilationRequest::Create(limits.v1);
     req.glVersionStandard = version.GetStandard();
@@ -208,9 +259,16 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
                     std::move(r.substituteOverrideConfig).value());
             }
 
+            // if (!r.textureBuiltinsFromUniform.needed_data_types.empty()) {
+            // transformManager.Add<tint::ast::transform::TextureBuiltinsFromUniform>();
+            // transformInputs.Add<tint::ast::transform::TextureBuiltinsFromUniform::Config>(
+            //     std::move(r.textureBuiltinsFromUniform));
+            // }
+
             tint::Program program;
+            tint::ast::transform::DataMap transformOutputs;
             DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, r.inputProgram,
-                                                   transformInputs, nullptr, nullptr));
+                                                   transformInputs, &transformOutputs, nullptr));
 
             if (r.stage == SingleShaderStage::Compute) {
                 // Validate workgroup size after program runs transforms.
@@ -263,13 +321,15 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             }
             tintOptions.binding_points = std::move(r.glBindings);
             tintOptions.allow_collisions = true;
+            tintOptions.texture_builtins_from_uniform = r.textureBuiltinsFromUniform;
 
             auto result = tint::glsl::writer::Generate(&program, tintOptions, r.entryPointName);
             DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
                             result.error);
 
-            return GLSLCompilation{
-                {std::move(result.glsl), needsPlaceholderSampler, std::move(combinedSamplerInfo)}};
+            return GLSLCompilation{{std::move(result.glsl), needsPlaceholderSampler,
+                                    result.needs_internal_uniform_buffer, result.bindpoint_to_data,
+                                    std::move(combinedSamplerInfo)}};
         });
 
     if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
@@ -301,6 +361,24 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
 
     GetDevice()->GetBlobCache()->EnsureStored(compilationResult);
     *needsPlaceholderSampler = compilationResult->needsPlaceholderSampler;
+    *needsTextureBuiltinUniformBuffer = compilationResult->needsInternalUniformBuffer;
+
+    *bindingPointToData = std::move(compilationResult->bindingPointToData);
+
+    // temp (wgsl returned binding numder, not binding index)
+    // TODO: then dawn bindingPointToData can be dawn object instead of tint object (and don't need
+    // stream)
+    // for (const auto& e : compilationResult->bindingPointToData) {
+    //     tint::BindingPoint bindingPoint = e.first;
+
+    //     const BindGroupLayoutBase* bgl =
+    //         layout->GetBindGroupLayout(BindGroupIndex{bindingPoint.group});
+    //     bindingPoint.binding =
+    //         static_cast<uint32_t>(bgl->GetBindingIndex(BindingNumber{bindingPoint.binding}));
+
+    //     bindingPointToData->emplace(bindingPoint, e.second);
+    // }
+
     *combinedSamplers = std::move(compilationResult->combinedSamplerInfo);
     return shader;
 }

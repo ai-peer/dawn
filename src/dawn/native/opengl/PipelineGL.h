@@ -19,6 +19,8 @@
 
 #include "dawn/native/Pipeline.h"
 
+#include "include/tint/texture_builtins_from_uniform_options.h"
+
 #include "dawn/native/PerStage.h"
 #include "dawn/native/opengl/opengl_platform.h"
 
@@ -31,6 +33,8 @@ namespace dawn::native::opengl {
 struct OpenGLFunctions;
 class PipelineLayout;
 class Sampler;
+class Buffer;
+class TextureView;
 
 class PipelineGL {
   public:
@@ -47,6 +51,11 @@ class PipelineGL {
     const std::vector<GLuint>& GetTextureUnitsForTextureView(GLuint index) const;
     GLuint GetProgramHandle() const;
 
+    void UpdateTextureBuiltinsUniformData(const OpenGLFunctions& gl,
+                                          const TextureView* view,
+                                          BindGroupIndex groupIndex,
+                                          BindingIndex bindingIndex);
+
   protected:
     void ApplyNow(const OpenGLFunctions& gl);
     MaybeError InitializeBase(const OpenGLFunctions& gl,
@@ -62,6 +71,15 @@ class PipelineGL {
     // TODO(enga): This could live on the Device, or elsewhere, but currently it makes Device
     // destruction complex as it requires the sampler to be destroyed before the sampler cache.
     Ref<Sampler> mPlaceholderSampler;
+
+    GLuint mInternalUniformBufferBinding;
+
+    bool mNeedsTextureBuiltinUniformBuffer;
+    tint::TextureBuiltinsFromUniformOptions::BindingPointDataInfo mBindingPointBuiltinsDataInfo;
+
+  public:
+    // TODO: <binding, {offset in uniform buffer, datatype}>
+    Ref<Buffer> mTextureBuiltinsBuffer;
 };
 
 }  // namespace dawn::native::opengl
