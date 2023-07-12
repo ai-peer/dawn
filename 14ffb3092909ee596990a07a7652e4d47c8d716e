@@ -34,6 +34,24 @@
       "parentUuid": "0117478b_29ea0fff",
       "revId": "14ffb3092909ee596990a07a7652e4d47c8d716e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f45c5c_b8b09bba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T15:12:46Z",
+      "side": 1,
+      "message": "Can you update the description (should be able to just use the edit button in gerrit) with this context please?",
+      "parentUuid": "08d6ae56_b959101f",
+      "revId": "14ffb3092909ee596990a07a7652e4d47c8d716e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
