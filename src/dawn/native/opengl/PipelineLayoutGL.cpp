@@ -59,6 +59,7 @@ PipelineLayout::PipelineLayout(Device* device, const PipelineLayoutDescriptor* d
 
                 case BindingInfoType::Texture:
                 case BindingInfoType::ExternalTexture:
+                    // TODO: track textures binding for textureNumLevels/Samples emulation?
                     mIndexInfo[group][bindingIndex] = sampledTextureIndex;
                     sampledTextureIndex++;
                     break;
@@ -89,6 +90,11 @@ size_t PipelineLayout::GetNumSamplers() const {
 
 size_t PipelineLayout::GetNumSampledTextures() const {
     return mNumSampledTextures;
+}
+
+uint32_t PipelineLayout::GetTextureBuiltinsUniformBinding() const {
+    // temp
+    return 0;
 }
 
 }  // namespace dawn::native::opengl

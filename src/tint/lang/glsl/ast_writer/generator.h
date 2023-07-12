@@ -28,6 +28,7 @@
 #include "src/tint/lang/wgsl/sem/sampler_texture_pair.h"
 #include "src/tint/writer/external_texture_options.h"
 #include "src/tint/writer/text.h"
+#include "src/tint/writer/texture_builtins_from_uniform_options.h"
 
 // Forward declarations
 namespace tint {
@@ -80,11 +81,14 @@ struct Options {
     /// The GLSL version to emit
     Version version;
 
+    TextureBuiltinsFromUniformOptions texture_builtins_from_uniform = {};
+
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(disable_robustness,
                  allow_collisions,
                  disable_workgroup_init,
                  external_texture_options,
+                 texture_builtins_from_uniform,
                  version);
 };
 

@@ -65,6 +65,7 @@
 #include "src/tint/lang/wgsl/ast/transform/single_entry_point.h"
 #include "src/tint/lang/wgsl/ast/transform/std140.h"
 #include "src/tint/lang/wgsl/ast/transform/texture_1d_to_2d.h"
+#include "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h"
 #include "src/tint/lang/wgsl/ast/transform/unshadow.h"
 #include "src/tint/lang/wgsl/ast/transform/zero_init_workgroup_memory.h"
 #include "src/tint/lang/wgsl/ast/variable_decl_statement.h"
@@ -224,6 +225,12 @@ SanitizedResult Sanitize(const Program* in,
     manager.Add<ast::transform::DemoteToHelper>();
 
     manager.Add<ast::transform::RemovePhonies>();
+
+    auto& texture_builtins_from_uniform = options.texture_builtins_from_uniform;
+    ast::transform::TextureBuiltinsFromUniform::Config texture_builtins_from_uniform_cfg(
+        texture_builtins_from_uniform.ubo_binding);
+    texture_builtins_from_uniform_cfg.bindpoint_to_index =
+        texture_builtins_from_uniform.bindpoint_to_index;
 
     data.Add<ast::transform::CombineSamplers::BindingInfo>(options.binding_map,
                                                            options.placeholder_binding_point);
