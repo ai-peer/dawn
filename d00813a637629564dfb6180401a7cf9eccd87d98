@@ -16,6 +16,24 @@
       "message": "Could also validate that the index is in bounds if it\u0027s a constant?",
       "revId": "d00813a637629564dfb6180401a7cf9eccd87d98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85fdffb2_7dd38bdb",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:35:39Z",
+      "side": 1,
+      "message": "Good idea. Will do as a followup.",
+      "parentUuid": "e914dd1c_6e5e2cb1",
+      "revId": "d00813a637629564dfb6180401a7cf9eccd87d98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
