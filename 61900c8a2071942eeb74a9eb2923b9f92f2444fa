@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708c40dd_890a67a9",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T14:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b2b3c5f_abd78fa3",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0aff81f2_5e530148",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ba48fe_42453f17",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T14:59:38Z",
+      "side": 1,
+      "message": "No, we need to scan further to find the arrays.",
+      "parentUuid": "0aff81f2_5e530148",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62a65fda_9b7553b1",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-12T13:41:56Z",
       "side": 1,
       "message": "Could also do:\n\n```\nCheckOperandsNotNull(l,\n                     LoadVectorElement::kFromOperandOffset, \n                     LoadVectorElement::kIndexOperandOffset,\n                     \"load_vector_element\");\n```",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f128012_537a49f7",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T14:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62a65fda_9b7553b1",
       "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e5cdf4_12cc17ad",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T14:59:38Z",
+      "side": 1,
+      "message": "This is on the result, not the operand.",
+      "parentUuid": "96f623b2_db330f8c",
+      "range": {
+        "startLine": 445,
+        "startChar": 38,
+        "endLine": 445,
+        "endChar": 40
+      },
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69e08715_529760f9",
@@ -88,6 +166,24 @@
       "writtenOn": "2023-07-12T13:41:56Z",
       "side": 1,
       "message": "Could also do:\n\n```\nCheckOperandsNotNull(s,\n                     StoreVectorElement::kToOperandOffset,\n                     StoreVectorElement::kValueOperandOffset,\n                     \"store_vector_element\");\n```",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "705db41e_67356f89",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T14:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69e08715_529760f9",
       "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +211,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ec1bbf_e5929dbb",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T14:59:38Z",
+      "side": 1,
+      "message": "The check is for the `value` matching the element type of the `to` vector. I think this is correct.",
+      "parentUuid": "11adaf93_c34899ae",
+      "range": {
+        "startLine": 461,
+        "startChar": 52,
+        "endLine": 461,
+        "endChar": 71
+      },
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c566cb32_fe69c441",
@@ -128,6 +248,24 @@
       "writtenOn": "2023-07-12T13:41:56Z",
       "side": 1,
       "message": "This seems like it was checking something different, can we re-write the input to get the same output string?",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31da6611_342a0c62",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T14:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c566cb32_fe69c441",
       "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
