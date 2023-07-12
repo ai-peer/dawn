@@ -21,6 +21,8 @@
 #include <unordered_set>
 #include <utility>
 
+#include "include/tint/texture_builtins_from_uniform_options.h"
+
 #include "src/tint/lang/core/builtin/builtin_value.h"
 #include "src/tint/lang/glsl/writer/version.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -53,6 +55,12 @@ struct SanitizedResult {
 
     /// The sanitized program.
     Program program;
+
+    /// True if the shader needs a UBO of buffer (for e.g. texture builtins).
+    /// ??? not sure if this is still needed, since GL is reading back from transform output data
+    bool needs_internal_uniform_buffer = false;
+
+    TextureBuiltinsFromUniformOptions::BindingPointDataInfo bindpoint_to_data;
 };
 
 /// Sanitize a program in preparation for generating GLSL.

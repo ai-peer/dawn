@@ -43,6 +43,8 @@ Result Generate(const Program* program, const Options& options, const std::strin
     result.success = impl->Diagnostics().empty();
     result.error = impl->Diagnostics().str();
     result.glsl = impl->Result();
+    result.needs_internal_uniform_buffer = sanitized_result.needs_internal_uniform_buffer;
+    result.bindpoint_to_data = std::move(sanitized_result.bindpoint_to_data);
 
     // Collect the list of entry points in the sanitized program.
     for (auto* func : sanitized_result.program.AST().Functions()) {

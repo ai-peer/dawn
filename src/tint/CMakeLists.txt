@@ -386,6 +386,8 @@ list(APPEND TINT_LIB_SRCS
   lang/wgsl/ast/transform/substitute_override.h
   lang/wgsl/ast/transform/texture_1d_to_2d.cc
   lang/wgsl/ast/transform/texture_1d_to_2d.h
+  lang/wgsl/ast/transform/texture_builtins_from_uniform.cc
+  lang/wgsl/ast/transform/texture_builtins_from_uniform.h
   lang/wgsl/ast/transform/transform.cc
   lang/wgsl/ast/transform/transform.h
   lang/wgsl/ast/transform/truncate_interstage_variables.cc
@@ -1454,6 +1456,7 @@ if(TINT_BUILD_TESTS)
       lang/wgsl/ast/transform/substitute_override_test.cc
       lang/wgsl/ast/transform/test_helper.h
       lang/wgsl/ast/transform/texture_1d_to_2d_test.cc
+      lang/wgsl/ast/transform/texture_builtins_from_uniform_test.cc
       lang/wgsl/ast/transform/truncate_interstage_variables_test.cc
       lang/wgsl/ast/transform/unshadow_test.cc
       lang/wgsl/ast/transform/var_for_dynamic_index_test.cc
