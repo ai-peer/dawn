@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6f9ec6_11759037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T15:21:46Z",
+      "side": 1,
+      "message": "lgtm. Over to Corentin for approval.",
+      "revId": "855b8fafe59de34302d082fcdebe8c253d657ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
