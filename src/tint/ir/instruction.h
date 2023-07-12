@@ -86,6 +86,16 @@ class Instruction : public utils::Castable<Instruction> {
     /// Removes this instruction from the owning block
     void Remove();
 
+    /// @return the name used by disassembly for the given instruction
+    template <typename T>
+    static std::string_view FriendlyNameOf() {
+        return FriendlyNameOf(utils::TypeInfo::Of<T>());
+    }
+
+    /// @param ti the type information for the instruction
+    /// @return the name used by disassembly for an instruction with the given TypeInfo
+    static std::string_view FriendlyNameOf(const utils::TypeInfo& ti);
+
     /// @param idx the index of the result
     /// @returns the result with index @p idx, or `nullptr` if there are no results or the index is
     /// out of bounds.

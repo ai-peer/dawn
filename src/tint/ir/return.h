@@ -15,6 +15,7 @@
 #ifndef SRC_TINT_IR_RETURN_H_
 #define SRC_TINT_IR_RETURN_H_
 
+#include "src/tint/ir/function.h"
 #include "src/tint/ir/terminator.h"
 #include "src/tint/utils/castable.h"
 

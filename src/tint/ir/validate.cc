@@ -51,6 +51,7 @@
 #include "src/tint/type/pointer.h"
 #include "src/tint/utils/reverse.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/string.h"
 
 namespace tint::ir {
 namespace {
@@ -204,13 +205,19 @@ class Validator {
             AddError("function '" + Name(func) + "' added to module multiple times");
         }
 
-        CheckBlock(func->Block());
+        CheckBlock<ir::Return, ir::Unreachable>(func->Block());
     }
 
+    template <typename... ALLOWED_TERMINATORS>
     void CheckBlock(Block* blk) {
         TINT_SCOPED_ASSIGNMENT(current_block_, blk);
 
-        if (!blk->HasTerminator()) {
+        if (blk->HasTerminator()) {
+            if (!blk->Terminator()->IsAnyOf<ir::Unreachable, ALLOWED_TERMINATORS...>()) {
+                AddError(blk->Terminator(), "block: incorrect terminator: " +
+                                                std::string(blk->Terminator()->FriendlyName()));
+            }
+        } else {
             AddError(blk, "block: does not end in a terminator instruction");
         }
 
@@ -408,9 +415,9 @@ class Validator {
         control_stack_.Push(if_);
         TINT_DEFER(control_stack_.Pop());
 
-        CheckBlock(if_->True());
+        CheckBlock<Exit, Continue, Return, Unreachable>(if_->True());
         if (!if_->False()->IsEmpty()) {
-            CheckBlock(if_->False());
+            CheckBlock<Exit, Continue, Return, Unreachable>(if_->False());
         }
     }
 
@@ -419,12 +426,12 @@ class Validator {
         TINT_DEFER(control_stack_.Pop());
 
         if (!l->Initializer()->IsEmpty()) {
-            CheckBlock(l->Initializer());
+            CheckBlock<NextIteration>(l->Initializer());
         }
-        CheckBlock(l->Body());
+        CheckBlock<Continue, ExitLoop, Return, Unreachable>(l->Body());
 
         if (!l->Continuing()->IsEmpty()) {
-            CheckBlock(l->Continuing());
+            CheckBlock<NextIteration, BreakIf>(l->Continuing());
         }
     }
 
@@ -433,7 +440,7 @@ class Validator {
         TINT_DEFER(control_stack_.Pop());
 
         for (auto& cse : s->Cases()) {
-            CheckBlock(cse.block);
+            CheckBlock<Exit, Continue, Return, Unreachable>(cse.block);
         }
     }
 
