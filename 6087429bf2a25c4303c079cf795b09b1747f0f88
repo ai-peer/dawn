@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfdce1d8_09a3ebac",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T15:25:34Z",
+      "side": 1,
+      "message": "Opps. Done.",
+      "parentUuid": "7afe0533_2a0327b4",
+      "revId": "6087429bf2a25c4303c079cf795b09b1747f0f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35cf71b4_7bee4f59",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a892f1d_f5fae613",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T15:25:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35cf71b4_7bee4f59",
+      "revId": "6087429bf2a25c4303c079cf795b09b1747f0f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61d04230_b76859b6",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-12T15:11:52Z",
       "side": 1,
       "message": "This one too should use `b` now instead of `current_block_`",
+      "revId": "6087429bf2a25c4303c079cf795b09b1747f0f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506bed0c_b4fc684e",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-12T15:25:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61d04230_b76859b6",
       "revId": "6087429bf2a25c4303c079cf795b09b1747f0f88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
