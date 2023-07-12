@@ -26,6 +26,7 @@
 #include "src/tint/lang/wgsl/ast/transform/renamer.h"
 #include "src/tint/lang/wgsl/ast/transform/single_entry_point.h"
 #include "src/tint/lang/wgsl/ast/transform/substitute_override.h"
+#include "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h"
 #include "src/tint/lang/wgsl/ast/transform/vertex_pulling.h"
 #include "src/tint/lang/wgsl/helpers/flatten_bindings.h"
 #include "src/tint/lang/wgsl/inspector/inspector.h"

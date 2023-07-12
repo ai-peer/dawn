@@ -22,6 +22,7 @@
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Pipeline.h"
+#include "dawn/native/opengl/BufferGL.h"
 #include "dawn/native/opengl/Forward.h"
 #include "dawn/native/opengl/OpenGLFunctions.h"
 #include "dawn/native/opengl/PipelineLayoutGL.h"
@@ -50,13 +51,14 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
     // Create an OpenGL shader for each stage and gather the list of combined samplers.
     PerStage<CombinedSamplerInfo> combinedSamplers;
     bool needsPlaceholderSampler = false;
+    bool needsTextureBuiltinUniformBuffer = false;
     std::vector<GLuint> glShaders;
     for (SingleShaderStage stage : IterateStages(activeStages)) {
         const ShaderModule* module = ToBackend(stages[stage].module.Get());
         GLuint shader;
-        DAWN_TRY_ASSIGN(shader,
-                        module->CompileShader(gl, stages[stage], stage, &combinedSamplers[stage],
-                                              layout, &needsPlaceholderSampler));
+        DAWN_TRY_ASSIGN(shader, module->CompileShader(
+                                    gl, stages[stage], stage, &combinedSamplers[stage], layout,
+                                    &needsPlaceholderSampler, &needsTextureBuiltinUniformBuffer));
         gl.AttachShader(mProgram, shader);
         glShaders.push_back(shader);
     }
@@ -68,6 +70,13 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
         ASSERT(desc.mipmapFilter == wgpu::MipmapFilterMode::Nearest);
         mPlaceholderSampler =
             ToBackend(layout->GetDevice()->GetOrCreateSampler(&desc).AcquireSuccess());
+    }
+
+    if (needsTextureBuiltinUniformBuffer) {
+        // BufferDescriptor desc = {};
+        // // TODO: size?
+        // mTextureBuiltinsBuffer = ToBackend(
+        //     layout->GetDevice()->CreateBuffer(&desc).AcquireSuccess());
     }
 
     // Link all the shaders together.
@@ -171,6 +180,10 @@ void PipelineGL::ApplyNow(const OpenGLFunctions& gl) {
     for (GLuint unit : mPlaceholderSamplerUnits) {
         ASSERT(mPlaceholderSampler.Get() != nullptr);
         gl.BindSampler(unit, mPlaceholderSampler->GetNonFilteringHandle());
+    }
+
+    if (mTextureBuiltinsBuffer.Get() != nullptr) {
+        gl.BindBuffer(kMaxBindGroups + 1, mTextureBuiltinsBuffer->GetHandle());
     }
 }
 

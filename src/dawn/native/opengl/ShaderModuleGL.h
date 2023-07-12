@@ -78,7 +78,8 @@ class ShaderModule final : public ShaderModuleBase {
                                         SingleShaderStage stage,
                                         CombinedSamplerInfo* combinedSamplers,
                                         const PipelineLayout* layout,
-                                        bool* needsPlaceholderSampler) const;
+                                        bool* needsPlaceholderSampler,
+                                        bool* needsTextureBuiltinUniformBuffer) const;
 
   private:
     ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
