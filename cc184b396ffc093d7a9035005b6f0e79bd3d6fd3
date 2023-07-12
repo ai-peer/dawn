@@ -16,6 +16,24 @@
       "message": "Should these ASSERT intrinsic-\u003eIs\u003cir::IntrinsicCall\u003e to make sure we got the right call back?",
       "revId": "cc184b396ffc093d7a9035005b6f0e79bd3d6fd3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b01bf49_760a43fd",
+        "filename": "src/tint/ir/intrinsic_call_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T15:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0be0303d_a3b765ec",
+      "revId": "cc184b396ffc093d7a9035005b6f0e79bd3d6fd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
