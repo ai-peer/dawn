@@ -113,6 +113,14 @@ void stream::Stream<tint::ArrayLengthFromUniformOptions>::Write(
 
 // static
 template <>
+void stream::Stream<tint::TextureBuiltinsFromUniformOptions>::Write(
+    stream::Sink* sink,
+    const tint::TextureBuiltinsFromUniformOptions& options) {
+    StreamInTintObject(options, sink);
+}
+
+// static
+template <>
 void stream::Stream<tint::BindingRemapperOptions>::Write(
     stream::Sink* sink,
     const tint::BindingRemapperOptions& options) {

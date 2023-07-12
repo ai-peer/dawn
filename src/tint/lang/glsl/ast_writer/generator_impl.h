@@ -53,6 +53,10 @@ struct SanitizedResult {
 
     /// The sanitized program.
     Program program;
+
+    /// True if the shader needs a UBO of buffer (for e.g. texture builtins).
+    /// ??? not sure if this is still needed, since GL is reading back from transform output data
+    bool needs_internal_uniform_buffer = false;
 };
 
 /// Sanitize a program in preparation for generating GLSL.

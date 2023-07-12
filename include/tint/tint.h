@@ -34,6 +34,7 @@
 #include "tint/binding_point.h"
 #include "tint/binding_remapper_options.h"
 #include "tint/external_texture_options.h"
+#include "tint/texture_builtins_from_uniform_options.h"
 
 #if TINT_BUILD_SPV_READER
 #include "src/tint/lang/spirv/reader/parser.h"
