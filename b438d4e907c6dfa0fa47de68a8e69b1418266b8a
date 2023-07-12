@@ -22,6 +22,30 @@
       },
       "revId": "b438d4e907c6dfa0fa47de68a8e69b1418266b8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "777625f5_fdb61c28",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2107,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T00:38:04Z",
+      "side": 1,
+      "message": "Will do as a followup as it effects the other tests as well.",
+      "parentUuid": "915840a2_e4cd9ad6",
+      "range": {
+        "startLine": 2104,
+        "startChar": 0,
+        "endLine": 2107,
+        "endChar": 17
+      },
+      "revId": "b438d4e907c6dfa0fa47de68a8e69b1418266b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
