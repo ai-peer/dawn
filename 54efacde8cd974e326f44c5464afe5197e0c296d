@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abfc368_28b3183f",
+        "filename": "src/tint/resolver/builtin_structs.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T14:33:55Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "09d509fe_ae807fb1",
+      "revId": "54efacde8cd974e326f44c5464afe5197e0c296d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff78f434_4357b6a2",
@@ -67,6 +85,24 @@
       "writtenOn": "2023-07-11T21:23:07Z",
       "side": 0,
       "message": "Ditto",
+      "revId": "54efacde8cd974e326f44c5464afe5197e0c296d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb1a1e9a_87bdf2b6",
+        "filename": "src/tint/resolver/builtin_structs.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T14:33:55Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ff78f434_4357b6a2",
       "revId": "54efacde8cd974e326f44c5464afe5197e0c296d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
