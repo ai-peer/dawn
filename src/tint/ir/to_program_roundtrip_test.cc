@@ -2629,6 +2629,19 @@ fn f() {
 )");
 }
 
+TEST_F(IRToProgramRoundtripTest, Loop_BreakIf_EmptyBody) {
+    Test(R"(
+fn f() {
+  loop {
+
+    continuing {
+      break if false;
+    }
+  }
+}
+)");
+}
+
 TEST_F(IRToProgramRoundtripTest, Loop_BreakIf_NotFalse) {
     Test(R"(
 fn f() {
@@ -2676,7 +2689,14 @@ fn f() {
 )",
          R"(
 fn f() {
-  while(false) {
+  loop {
+    if (!(false)) {
+      break;
+    }
+
+    continuing {
+      break if false;
+    }
   }
 }
 )");
