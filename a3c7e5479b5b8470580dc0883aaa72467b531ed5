@@ -103,6 +103,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3acd5893_dd775f2c",
+        "filename": "src/dawn/tests/perf_tests/VulkanZeroInitializeWorkgroupMemoryPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-12T01:54:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d301fc44_ca200d56",
+      "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97b1620a_9a5728e6",
@@ -116,6 +134,24 @@
       "writtenOn": "2023-07-11T09:58:38Z",
       "side": 1,
       "message": "u-nit: We could use the auto layout.",
+      "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a3feed_7b474e1b",
+        "filename": "src/dawn/tests/perf_tests/VulkanZeroInitializeWorkgroupMemoryPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-12T01:54:44Z",
+      "side": 1,
+      "message": "Oh I am using dynamic buffer offset here to let the shader write into different parts of the buffer so I cannot use auto layout here.",
+      "parentUuid": "97b1620a_9a5728e6",
       "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
