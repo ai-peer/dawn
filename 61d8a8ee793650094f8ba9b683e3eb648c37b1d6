@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "205ddb6f_c1efad1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:56:53Z",
+      "side": 1,
+      "message": "lgtm, passing to Ben for the +2.",
+      "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf248cf0_321f4695",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:56:53Z",
+      "side": 1,
+      "message": "This should be behind a build spirv flag.",
+      "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
