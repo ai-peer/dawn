@@ -104,6 +104,30 @@
       },
       "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c580a8e5_a029147e",
+        "filename": "src/tint/ir/access.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T17:42:00Z",
+      "side": 1,
+      "message": "I didn\u0027t add them here for the benefits of inlining, I implemented them here because it didn\u0027t seem like it was worth the effort of also editing all the .cc files.\n\nI can move them if that\u0027s what you\u0027d prefer.",
+      "parentUuid": "edef8fa2_e1074f45",
+      "range": {
+        "startLine": 46,
+        "startChar": 36,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
