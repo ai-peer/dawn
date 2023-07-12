@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b2b3c5f_abd78fa3",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 1,
+      "message": "Can we do a followup to change the rest of this method (really only here) and the others below where `b \u003d builder_.With(current_block_)` was added to use it through the methods?",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aff81f2_5e530148",
+        "filename": "src/tint/ir/transform/var_for_dynamic_index.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 1,
+      "message": "Should this be a `kStop` return? the old code would immediately return if a non-const index was found",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a65fda_9b7553b1",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 1,
+      "message": "Could also do:\n\n```\nCheckOperandsNotNull(l,\n                     LoadVectorElement::kFromOperandOffset, \n                     LoadVectorElement::kIndexOperandOffset,\n                     \"load_vector_element\");\n```",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f623b2_db330f8c",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 1,
+      "message": "```suggestion\n                    AddResultError(l, LoadVectorElement::kFromOperandOffset, \"result type does not match vector pointer element type\");\n```",
+      "range": {
+        "startLine": 445,
+        "startChar": 38,
+        "endLine": 445,
+        "endChar": 40
+      },
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69e08715_529760f9",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 1,
+      "message": "Could also do:\n\n```\nCheckOperandsNotNull(s,\n                     StoreVectorElement::kToOperandOffset,\n                     StoreVectorElement::kValueOperandOffset,\n                     \"store_vector_element\");\n```",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11adaf93_c34899ae",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 1,
+      "message": "You\u0027re checking `kToOperandOffset` but setting the error on `kValueOperandOffset` is that intentional?",
+      "range": {
+        "startLine": 461,
+        "startChar": 52,
+        "endLine": 461,
+        "endChar": 71
+      },
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c566cb32_fe69c441",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 1,
+      "message": "This seems like it was checking something different, can we re-write the input to get the same output string?",
+      "revId": "61900c8a2071942eeb74a9eb2923b9f92f2444fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

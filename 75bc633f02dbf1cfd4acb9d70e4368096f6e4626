@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56bf119e_140611b2",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:41:56Z",
+      "side": 0,
+      "message": "Why drop the `access:` prefix?",
+      "revId": "75bc633f02dbf1cfd4acb9d70e4368096f6e4626",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
