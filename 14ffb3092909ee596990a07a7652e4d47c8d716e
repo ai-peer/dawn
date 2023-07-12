@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0117478b_29ea0fff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:43:28Z",
+      "side": 1,
+      "message": "Can you provide some context as to what this is fixing? Are you seeing an error while building? What are the build flags? (Is there a corresponding bug at crbug.com/dawn for this?)",
+      "revId": "14ffb3092909ee596990a07a7652e4d47c8d716e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
