@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e292471_a0ff67ad",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T13:12:02Z",
+      "side": 1,
+      "message": "Is this permanent or should it have a `TODO(crbug/YYY): correctly handle diagnostics`?",
+      "revId": "fabfa54b1b6762eeabb43cb134858fe0e1291697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c53fd790_717e1116",
         "filename": "src/tint/ir/to_program.cc",
         "patchSetId": 1
