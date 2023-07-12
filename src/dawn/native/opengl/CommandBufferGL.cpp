@@ -335,6 +335,16 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                             }
                         }
                     }
+
+                    // // TODO: write textureNumLevels, textureNumSamples data to ubo
+                    // // get ubo binding (from shader module)
+                    // view->GetLevelCount();
+                    // view->GetTexture()->GetSampleCount();
+
+                    // mBindingData.bindings[bindingIndex];
+
+                    mPipeline->UpdateTextureBuiltinsUniformData(gl, view, groupIndex, bindingIndex);
+
                     break;
                 }
 
