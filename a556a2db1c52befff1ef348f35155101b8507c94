@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b3adf2_1d257ab1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:22:33Z",
+      "side": 1,
+      "message": "+2, but please can I land https://dawn-review.googlesource.com/c/dawn/+/139924? I\u0027ve had to non-trivially rebase it three times already today.",
+      "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace52909_68d6613e",
+        "filename": "src/tint/ir/access.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:22:33Z",
+      "side": 1,
+      "message": "nit: You\u0027re always going to be calling the method using virtual dispatch, so putting these in the .cc file probably makes sense",
+      "range": {
+        "startLine": 46,
+        "startChar": 36,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
