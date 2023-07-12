@@ -14,7 +14,7 @@
 
 if (${DAWN_BUILD_BENCHMARKS})
   add_executable(dawn_benchmarks
-    "BGLCreation.cpp"
+    "DawnObjectCreation.cpp"
     "NullDeviceSetup.cpp"
     "NullDeviceSetup.h"
   )

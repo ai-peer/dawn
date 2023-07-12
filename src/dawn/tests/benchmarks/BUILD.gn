@@ -27,7 +27,7 @@ test("dawn_benchmarks") {
     "//third_party/google_benchmark:benchmark_main",
   ]
   sources = [
-    "BGLCreation.cpp",
+    "DawnObjectCreation.cpp",
     "NullDeviceSetup.cpp",
     "NullDeviceSetup.h",
   ]
