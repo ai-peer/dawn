@@ -1375,7 +1375,15 @@ TEST_F(IR_ValidateTest, ExitIf_NotInParentIf) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:8:5 error: exit-if: found outside all control instructions
+              R"(:8:5 error: block: incorrect terminator: exit-if
+    exit_if  # if_1
+    ^^^^^^^
+
+:2:3 note: In block
+  %b1 = block {
+  ^^^^^^^^^^^
+
+:8:5 error: exit-if: found outside all control instructions
     exit_if  # if_1
     ^^^^^^^
 
@@ -1523,7 +1531,15 @@ TEST_F(IR_ValidateTest, ExitIf_InvalidJumpOverLoop) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:7:13 error: exit-if: if target jumps over other control instructions
+              R"(:7:13 error: block: incorrect terminator: exit-if
+            exit_if  # if_1
+            ^^^^^^^
+
+:6:11 note: In block
+          %b3 = block {  # body
+          ^^^^^^^^^^^
+
+:7:13 error: exit-if: if target jumps over other control instructions
             exit_if  # if_1
             ^^^^^^^
 
@@ -1894,7 +1910,15 @@ TEST_F(IR_ValidateTest, ExitSwitch_InvalidJumpOverLoop) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:7:13 error: exit-switch: switch target jumps over other control instructions
+              R"(:7:13 error: block: incorrect terminator: exit-switch
+            exit_switch  # switch_1
+            ^^^^^^^^^^^
+
+:6:11 note: In block
+          %b3 = block {  # body
+          ^^^^^^^^^^^
+
+:7:13 error: exit-switch: switch target jumps over other control instructions
             exit_switch  # switch_1
             ^^^^^^^^^^^
 
@@ -2329,7 +2353,15 @@ TEST_F(IR_ValidateTest, ExitLoop_InvalidInsideContinuing) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:8:9 error: exit-loop: loop exit jumps out of continuing block
+              R"(:8:9 error: block: incorrect terminator: exit-loop
+        exit_loop  # loop_1
+        ^^^^^^^^^
+
+:7:7 note: In block
+      %b3 = block {  # continuing
+      ^^^^^^^^^^^
+
+:8:9 error: exit-loop: loop exit jumps out of continuing block
         exit_loop  # loop_1
         ^^^^^^^^^
 
@@ -2427,7 +2459,15 @@ TEST_F(IR_ValidateTest, ExitLoop_InvalidInsideInitializer) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().str(),
-              R"(:5:9 error: exit-loop: loop exit not permitted in loop initializer
+              R"(:5:9 error: block: incorrect terminator: exit-loop
+        exit_loop  # loop_1
+        ^^^^^^^^^
+
+:4:7 note: In block
+      %b2 = block {  # initializer
+      ^^^^^^^^^^^
+
+:5:9 error: exit-loop: loop exit not permitted in loop initializer
         exit_loop  # loop_1
         ^^^^^^^^^
 
