@@ -1382,6 +1382,9 @@ void GeneratorImplIr::EmitIntrinsicCall(ir::IntrinsicCall* call) {
 
     spv::Op op = spv::Op::Max;
     switch (call->Kind()) {
+        case ir::IntrinsicCall::Kind::kSpirvDot:
+            op = spv::Op::OpDot;
+            break;
         case ir::IntrinsicCall::Kind::kSpirvSelect:
             op = spv::Op::OpSelect;
             break;
