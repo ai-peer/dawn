@@ -30,7 +30,7 @@ class Module;
 
 /// If set to 1 then the transform::Manager will dump the WGSL of the program
 /// before and after each transform. Helpful for debugging bad output.
-#define TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM 0
+#define TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM 1
 
 #if TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
 #include <iostream>

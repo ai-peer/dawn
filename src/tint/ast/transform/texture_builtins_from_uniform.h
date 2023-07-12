@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_AST_TRANSFORM_ARRAY_LENGTH_FROM_UNIFORM_H_
-#define SRC_TINT_AST_TRANSFORM_ARRAY_LENGTH_FROM_UNIFORM_H_
+#ifndef SRC_TINT_TEXTURE_BUILTINS_FROM_UNIFORM_H_
+#define SRC_TINT_TEXTURE_BUILTINS_FROM_UNIFORM_H_
 
 #include <unordered_map>
 #include <unordered_set>
@@ -52,14 +52,15 @@ namespace tint::ast::transform {
 ///
 /// @note Depends on the following transforms to have been run first:
 /// * SimplifyPointers
-class ArrayLengthFromUniform final : public utils::Castable<ArrayLengthFromUniform, Transform> {
+class TextureBuiltinsFromUniform final
+    : public utils::Castable<TextureBuiltinsFromUniform, Transform> {
   public:
     /// Constructor
-    ArrayLengthFromUniform();
+    TextureBuiltinsFromUniform();
     /// Destructor
-    ~ArrayLengthFromUniform() override;
+    ~TextureBuiltinsFromUniform() override;
 
-    /// Configuration options for the ArrayLengthFromUniform transform.
+    /// Configuration options for the TextureBuiltinsFromUniform transform.
     struct Config final : public utils::Castable<Config, Data> {
         /// Constructor
         /// @param ubo_bp the binding point to use for the generated uniform buffer.
@@ -80,9 +81,6 @@ class ArrayLengthFromUniform final : public utils::Castable<ArrayLengthFromUnifo
 
         /// The mapping from binding point to the index for the buffer size lookup.
         std::unordered_map<sem::BindingPoint, uint32_t> bindpoint_to_size_index;
-
-        // /// The mapping from binding point to the index for the textureNumLevels lookup.
-        // std::unordered_map<sem::BindingPoint, uint32_t> bindpoint_to_num_levels_index;
     };
 
     /// Information produced about what the transform did.
@@ -114,4 +112,4 @@ class ArrayLengthFromUniform final : public utils::Castable<ArrayLengthFromUnifo
 
 }  // namespace tint::ast::transform
 
-#endif  // SRC_TINT_AST_TRANSFORM_ARRAY_LENGTH_FROM_UNIFORM_H_
+#endif  // SRC_TINT_TEXTURE_BUILTINS_FROM_UNIFORM_H_
