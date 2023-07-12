@@ -102,12 +102,67 @@ struct ArrayLengthFromUniform::State {
                 // Emit an array<vec4<u32>, N>, where N is 1/4 number of elements.
                 // We do this because UBOs require an element stride that is 16-byte
                 // aligned.
-                auto* buffer_size_struct = b.Structure(
-                    b.Sym(), utils::Vector{
-                                 b.Member(kBufferSizeMemberName,
-                                          b.ty.array(b.ty.vec4(b.ty.u32()),
-                                                     u32((max_buffer_size_index / 4) + 1))),
-                             });
+                auto* new_member = b.Member(
+                    kBufferSizeMemberName,
+                    b.ty.array(b.ty.vec4(b.ty.u32()), u32((max_buffer_size_index / 4) + 1)));
+
+                // First search for the global variable with the same binding point
+                for (auto* var : ctx.src->AST().Globals<Var>()) {
+                    if (var->HasBindingPoint()) {
+                        auto* global_sem = ctx.src->Sem().Get<sem::GlobalVariable>(var);
+                        sem::BindingPoint binding_point = *global_sem->BindingPoint();
+                        if (binding_point == cfg->ubo_binding) {
+                            // This ubo_binding struct already exists.
+                            // which is added by other *FromUniform transforms.
+                            // Replace it with a new struct including the new_member.
+                            // Then remove the old structure global declaration.
+                            
+                            auto* ty = global_sem->Type()->UnwrapRef();
+                            auto* str = ty->As<sem::Struct>();
+                            utils::Vector<const StructMember*, 4> new_members(
+                                ctx.Clone(str->Declaration()->members));
+                            new_members.Push(new_member);
+                            // new_members.Push(ctx.Clone(new_member));
+
+                            // auto new_str_sym = b.Symbols().New();
+                            auto* new_str = b.Structure(b.Symbols().New(), new_members,
+                                                        ctx.Clone(str->Declaration()->attributes));
+                            // b.Structure(b.Symbols().New(), new_members,
+                            // ctx.Clone(str->Declaration()->attributes));
+
+                            // auto* new_str_sem = src->Sem().Get<sem::Struct>(new_str);
+                            // auto* new_str_sem = src->Sem().Get(new_str);
+
+                            ctx.Replace(var->As<Variable>()->type.expr, b.Expr(new_str->name->symbol));
+                            // ctx.Replace(buffer_size_ubo->type.expr, b.Expr(new_str_sem->Name()));
+                            // ctx.Replace(buffer_size_ubo->type.expr,
+                            // b.Expr(new_str->As<type::Struct>()));
+                            // ctx.Replace(buffer_size_ubo->type.expr,
+                            // b.Expr(new_str->As<type::Struct>()->As<Type>()));
+                            // ctx.Replace(buffer_size_ubo->type.expr, b.Expr(new_str->Type());
+                            // ctx.Replace(buffer_size_ubo->type.expr, b.Expr(new_str_sem->Type()));
+                            // ctx.Replace(buffer_size_ubo->type.expr,
+                            // b.Expr(new_str_sem->As<type::Struct>()));
+                            // ctx.Replace(buffer_size_ubo->type.expr,
+                            // b.Expr(ctx.Clone(new_str->name)));
+                            // ctx.Replace(buffer_size_ubo->type.expr, b.ty(new_str_sym)->symbol);
+                            // ctx.Replace(buffer_size_ubo->type.expr,
+                            // b.Expr(ctx.Clone(new_str->name->symbol)));
+
+                            ctx.Remove(ctx.src->AST().GlobalDeclarations(), str->Declaration());
+
+                            buffer_size_ubo = var->As<Variable>();
+                            return buffer_size_ubo;
+                            // return ctx.Clone(buffer_size_ubo);
+                        }
+                    }
+                }
+
+                // Global variable with the same ubo_binding doesn't exist
+                // Emit a new struct and a global variable at this ubo_binding.
+                auto* buffer_size_struct = b.Structure(b.Sym(), utils::Vector{
+                                                                    new_member,
+                                                                });
                 buffer_size_ubo = b.GlobalVar(b.Sym(), b.ty.Of(buffer_size_struct),
                                               builtin::AddressSpace::kUniform,
                                               b.Group(AInt(cfg->ubo_binding.group)),
@@ -115,6 +170,8 @@ struct ArrayLengthFromUniform::State {
             }
             return buffer_size_ubo;
         };
+
+        get_ubo();
 
         std::unordered_set<uint32_t> used_size_indices;
 

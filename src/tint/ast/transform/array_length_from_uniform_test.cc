@@ -145,6 +145,51 @@ fn main() {
     EXPECT_EQ(std::unordered_set<uint32_t>({0}), val->used_size_indices);
 }
 
+TEST_F(ArrayLengthFromUniformTest, BasicExistingBindingPoint) {
+    auto* src = R"(
+struct tint_symbol {
+  texture_num_samples : array<vec4<u32>, 1u>,
+}
+@group(1) @binding(30) var<uniform> tint_symbol_1 : tint_symbol;
+
+@group(0) @binding(0) var<storage, read> sb : array<i32>;
+
+@compute @workgroup_size(1)
+fn main() {
+  var len : u32 = arrayLength(&sb);
+}
+)";
+
+    auto* expect = R"(
+struct tint_symbol_2 {
+  texture_num_samples : array<vec4<u32>, 1u>,
+  buffer_size : array<vec4<u32>, 1u>,
+}
+
+@group(1) @binding(30) var<uniform> tint_symbol_1 : tint_symbol_2;
+
+@group(0) @binding(0) var<storage, read> sb : array<i32>;
+
+@compute @workgroup_size(1)
+fn main() {
+  var len : u32 = (tint_symbol_1.buffer_size[0u][0u] / 4u);
+}
+)";
+
+    ArrayLengthFromUniform::Config cfg({1, 30u});
+    cfg.bindpoint_to_size_index.emplace(sem::BindingPoint{0, 0}, 0);
+
+    Transform::DataMap data;
+    data.Add<ArrayLengthFromUniform::Config>(std::move(cfg));
+
+    auto got = Run<Unshadow, SimplifyPointers, ArrayLengthFromUniform>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+    auto* val = got.data.Get<ArrayLengthFromUniform::Result>();
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(std::unordered_set<uint32_t>({0}), val->used_size_indices);
+}
+
 TEST_F(ArrayLengthFromUniformTest, BasicInStruct) {
     auto* src = R"(
 struct SB {
