@@ -966,9 +966,17 @@ class State {
             if (value->Type()->Is<type::Pointer>()) {
                 expr = ToPtrKind(expr, ptr_kind, PtrKind::kPtr);
             }
-            Symbol name = NameFor(value);
-            Append(b.Decl(b.Let(name, expr)));
-            Bind(value, name, PtrKind::kPtr);
+            auto mod_name = mod.NameOf(value);
+            if (value->Usages().IsEmpty() && !mod_name.IsValid()) {
+                // Value has no usages and no name.
+                // Assign to a phony. These support more data types than a 'let', and avoids
+                // allocation of unused names.
+                Append(b.Assign(b.Phony(), expr));
+            } else {
+                Symbol name = NameFor(value, mod_name.NameView());
+                Append(b.Decl(b.Let(name, expr)));
+                Bind(value, name, PtrKind::kPtr);
+            }
             return;
         }
 
