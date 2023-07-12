@@ -1250,6 +1250,10 @@ TEST_F(IR_ValidateTest, ExitIf_LessOperandsThenIfParams) {
       %b2 = block {  # true
       ^^^^^^^^^^^
 
+:3:5 note: control instruction
+    %2:i32, %3:f32 = if true [t: %b2] {  # if_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 note: # Disassembly
 %my_func = func():void -> %b1 {
   %b1 = block {
@@ -1289,6 +1293,10 @@ TEST_F(IR_ValidateTest, ExitIf_MoreOperandsThenIfParams) {
 :4:7 note: In block
       %b2 = block {  # true
       ^^^^^^^^^^^
+
+:3:5 note: control instruction
+    %2:i32, %3:f32 = if true [t: %b2] {  # if_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
@@ -1346,6 +1354,10 @@ TEST_F(IR_ValidateTest, ExitIf_IncorrectResultType) {
 :4:7 note: In block
       %b2 = block {  # true
       ^^^^^^^^^^^
+
+:3:5 note: control instruction
+    %2:i32, %3:f32 = if true [t: %b2] {  # if_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
@@ -1631,6 +1643,10 @@ TEST_F(IR_ValidateTest, ExitSwitch_LessOperandsThenSwitchParams) {
       %b2 = block {  # case
       ^^^^^^^^^^^
 
+:3:5 note: control instruction
+    %2:i32, %3:f32 = switch true [c: (default, %b2)] {  # switch_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 note: # Disassembly
 %my_func = func():void -> %b1 {
   %b1 = block {
@@ -1670,6 +1686,10 @@ TEST_F(IR_ValidateTest, ExitSwitch_MoreOperandsThenSwitchParams) {
 :4:7 note: In block
       %b2 = block {  # case
       ^^^^^^^^^^^
+
+:3:5 note: control instruction
+    %2:i32, %3:f32 = switch true [c: (default, %b2)] {  # switch_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
@@ -1728,6 +1748,10 @@ TEST_F(IR_ValidateTest, ExitSwitch_IncorrectResultType) {
 :4:7 note: In block
       %b2 = block {  # case
       ^^^^^^^^^^^
+
+:3:5 note: control instruction
+    %2:i32, %3:f32 = switch true [c: (default, %b2)] {  # switch_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
@@ -2002,6 +2026,10 @@ TEST_F(IR_ValidateTest, ExitLoop_LessOperandsThenLoopParams) {
       %b2 = block {  # body
       ^^^^^^^^^^^
 
+:3:5 note: control instruction
+    %2:i32, %3:f32 = loop [b: %b2, c: %b3] {  # loop_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 note: # Disassembly
 %my_func = func():void -> %b1 {
   %b1 = block {
@@ -2044,6 +2072,10 @@ TEST_F(IR_ValidateTest, ExitLoop_MoreOperandsThenLoopParams) {
 :4:7 note: In block
       %b2 = block {  # body
       ^^^^^^^^^^^
+
+:3:5 note: control instruction
+    %2:i32, %3:f32 = loop [b: %b2, c: %b3] {  # loop_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
@@ -2105,6 +2137,10 @@ TEST_F(IR_ValidateTest, ExitLoop_IncorrectResultType) {
 :4:7 note: In block
       %b2 = block {  # body
       ^^^^^^^^^^^
+
+:3:5 note: control instruction
+    %2:i32, %3:f32 = loop [b: %b2, c: %b3] {  # loop_1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 note: # Disassembly
 %my_func = func():void -> %b1 {
