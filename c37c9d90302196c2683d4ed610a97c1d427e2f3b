@@ -34,6 +34,24 @@
       "parentUuid": "77b21f3f_2398f2e0",
       "revId": "c37c9d90302196c2683d4ed610a97c1d427e2f3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aee30ffe_5f0dd883",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T11:16:37Z",
+      "side": 1,
+      "message": "Just iterator sugar.",
+      "parentUuid": "05c575f0_c6d4ea46",
+      "revId": "c37c9d90302196c2683d4ed610a97c1d427e2f3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
