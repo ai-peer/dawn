@@ -437,6 +437,8 @@ list(APPEND TINT_LIB_SRCS
   ast/transform/substitute_override.h
   ast/transform/texture_1d_to_2d.cc
   ast/transform/texture_1d_to_2d.h
+  ast/transform/texture_builtins_from_uniform.cc
+  ast/transform/texture_builtins_from_uniform.h
   ast/transform/transform.cc
   ast/transform/transform.h
   ast/transform/truncate_interstage_variables.cc
@@ -1449,6 +1451,7 @@ if(TINT_BUILD_TESTS)
       ast/transform/substitute_override_test.cc
       ast/transform/test_helper.h
       ast/transform/texture_1d_to_2d_test.cc
+      ast/transform/texture_builtins_from_uniform_tests.cc
       ast/transform/truncate_interstage_variables_test.cc
       ast/transform/unshadow_test.cc
       ast/transform/var_for_dynamic_index_test.cc
