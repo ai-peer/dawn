@@ -128,6 +128,30 @@
       },
       "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "577e2a8a_add79331",
+        "filename": "src/tint/ir/access.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:46:32Z",
+      "side": 1,
+      "message": "Meh, don\u0027t worry about it.",
+      "parentUuid": "c580a8e5_a029147e",
+      "range": {
+        "startLine": 46,
+        "startChar": 36,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
