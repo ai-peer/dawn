@@ -154,6 +154,24 @@
       "parentUuid": "97b1620a_9a5728e6",
       "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0a4bb0_0c992e28",
+        "filename": "src/dawn/tests/perf_tests/VulkanZeroInitializeWorkgroupMemoryPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-12T10:21:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "21a3feed_7b474e1b",
+      "revId": "a3c7e5479b5b8470580dc0883aaa72467b531ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
