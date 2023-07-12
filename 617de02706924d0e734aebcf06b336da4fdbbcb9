@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bacf252a_0cd44e08",
+        "filename": "src/tint/ast/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-07-12T18:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4da4b92c_9f530fc4",
+      "revId": "617de02706924d0e734aebcf06b336da4fdbbcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53d80245_aa5fe7bc",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-07-12T17:34:22Z",
       "side": 1,
       "message": "Needs a `std::nullopt` for the index member to satisfy Kokoro.",
+      "revId": "617de02706924d0e734aebcf06b336da4fdbbcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "507d5b2e_4ce659f0",
+        "filename": "src/tint/ast/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-07-12T18:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53d80245_aa5fe7bc",
       "revId": "617de02706924d0e734aebcf06b336da4fdbbcb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
