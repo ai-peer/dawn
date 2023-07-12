@@ -80,6 +80,30 @@
       },
       "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edef8fa2_e1074f45",
+        "filename": "src/tint/ir/access.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:32:41Z",
+      "side": 1,
+      "message": "My point is, you\u0027re almost never going to get the benefit of inlining.\nYou\u0027re adding duplicate implementations to every .cc file that includes these files which the linker then needs to deduplicate. It\u0027s a relatively minor cost, but the same argument could be made for all method implementations we put in .cc files.",
+      "parentUuid": "57b8e3e3_a273e7d9",
+      "range": {
+        "startLine": 46,
+        "startChar": 36,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
