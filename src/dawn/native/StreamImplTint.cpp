@@ -83,6 +83,14 @@ void stream::Stream<tint::ast::transform::SubstituteOverride::Config>::Write(
 
 // static
 template <>
+void stream::Stream<tint::ast::transform::TextureBuiltinsFromUniform::Config>::Write(
+    stream::Sink* sink,
+    const tint::ast::transform::TextureBuiltinsFromUniform::Config& cfg) {
+    StreamInTintObject(cfg, sink);
+}
+
+// static
+template <>
 void stream::Stream<tint::OverrideId>::Write(stream::Sink* sink, const tint::OverrideId& id) {
     StreamInTintObject(id, sink);
 }

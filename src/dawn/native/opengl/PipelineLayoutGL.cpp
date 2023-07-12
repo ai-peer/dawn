@@ -59,6 +59,7 @@ PipelineLayout::PipelineLayout(Device* device, const PipelineLayoutDescriptor* d
 
                 case BindingInfoType::Texture:
                 case BindingInfoType::ExternalTexture:
+                    // TODO: track textures binding for textureNumLevels/Samples emulation?
                     mIndexInfo[group][bindingIndex] = sampledTextureIndex;
                     sampledTextureIndex++;
                     break;
