@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7afe0533_2a0327b4",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T15:11:52Z",
+      "side": 1,
+      "message": "Should this `i` be `index` and `index` on line `552` removed?",
+      "revId": "6087429bf2a25c4303c079cf795b09b1747f0f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35cf71b4_7bee4f59",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T15:11:52Z",
+      "side": 1,
+      "message": "James changed this in one of his other CLs (probably due to the fact taht IDs can repeat which throws off the adding of the `,`).\n\nShould use a `bool` instead of checking front.",
+      "revId": "6087429bf2a25c4303c079cf795b09b1747f0f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d04230_b76859b6",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T15:11:52Z",
+      "side": 1,
+      "message": "This one too should use `b` now instead of `current_block_`",
+      "revId": "6087429bf2a25c4303c079cf795b09b1747f0f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
