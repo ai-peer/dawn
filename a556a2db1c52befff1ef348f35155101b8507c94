@@ -56,6 +56,30 @@
       },
       "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b8e3e3_a273e7d9",
+        "filename": "src/tint/ir/access.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T17:25:27Z",
+      "side": 1,
+      "message": "They\u0027re short and simple, not sure it\u0027s worth the effort to move to the .cc?",
+      "parentUuid": "ace52909_68d6613e",
+      "range": {
+        "startLine": 46,
+        "startChar": 36,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "a556a2db1c52befff1ef348f35155101b8507c94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
