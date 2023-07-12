@@ -31,6 +31,7 @@ namespace dawn::native::opengl {
 struct OpenGLFunctions;
 class PipelineLayout;
 class Sampler;
+class Buffer;
 
 class PipelineGL {
   public:
@@ -62,6 +63,13 @@ class PipelineGL {
     // TODO(enga): This could live on the Device, or elsewhere, but currently it makes Device
     // destruction complex as it requires the sampler to be destroyed before the sampler cache.
     Ref<Sampler> mPlaceholderSampler;
+
+    GLuint mInternalUniformBufferBinding;
+
+  public:
+    bool mNeedsTextureBuiltinUniformBuffer;
+    // TODO: <binding, {offset in uniform buffer, datatype}>
+    Ref<Buffer> mTextureBuiltinsBuffer;
 };
 
 }  // namespace dawn::native::opengl

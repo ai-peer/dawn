@@ -335,6 +335,29 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                             }
                         }
                     }
+
+                    // // if needed to pass in (result from ShaderModuleGL transform, if
+                    // textureNumLevels used in shader)
+
+                    // // TODO: write textureNumLevels, textureNumSamples data to ubo
+                    // // get ubo binding (from shader module)
+                    // view->GetLevelCount();
+                    // view->GetTexture()->GetSampleCount();
+
+                    // // if (mPipeline->)
+                    // // gl.BindBuffer(GL_UNIFORM_BUFFER,
+                    // //               mPipeline->mTextureBuiltinsBuffer->GetHandle());
+                    // gl.BindBufferBase(GL_UNIFORM_BUFFER,
+                    //               mPipeline->mTextureBuiltinsBuffer->GetHandle(), kMaxBindGroups
+                    //               + 1);
+                    // // gl.BufferSubData(GL_UNIFORM_BUFFER, offset, size, data);
+
+                    // // TODO: find binding, Update data
+
+                    // gl.UniformBlockBinding(GL_UNIFORM_BUFFER, kMaxBindGroups + 1, 0);
+
+                    // gl.BindBuffer(GL_UNIFORM_BUFFER, 0);
+
                     break;
                 }
 
