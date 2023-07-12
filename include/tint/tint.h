@@ -31,6 +31,7 @@
 #include "src/tint/lang/wgsl/helpers/flatten_bindings.h"
 #include "src/tint/lang/wgsl/inspector/inspector.h"
 #include "tint/array_length_from_uniform_options.h"
+#include "tint/texture_builtins_from_uniform_options.h"
 #include "tint/binding_point.h"
 #include "tint/binding_remapper_options.h"
 #include "tint/external_texture_options.h"

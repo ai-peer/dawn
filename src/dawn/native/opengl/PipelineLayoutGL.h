@@ -38,6 +38,9 @@ class PipelineLayout final : public PipelineLayoutBase {
     size_t GetNumSamplers() const;
     size_t GetNumSampledTextures() const;
 
+    // Get uniform location?
+    uint32_t GetTextureBuiltinsUniformBinding() const;
+
   private:
     ~PipelineLayout() override = default;
     BindingIndexInfo mIndexInfo;

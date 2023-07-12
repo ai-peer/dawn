@@ -58,6 +58,10 @@ struct Result {
 
     /// The list of entry points in the generated GLSL.
     std::vector<std::pair<std::string, ast::PipelineStage>> entry_points;
+
+    bool needs_internal_uniform_buffer = false;
+
+    // size
 };
 
 /// Generate GLSL for a program, according to a set of configuration options.
