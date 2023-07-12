@@ -18,7 +18,8 @@
 
 /// If set to 1 then the transform::Manager will dump the WGSL of the program
 /// before and after each transform. Helpful for debugging bad output.
-#define TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM 0
+// #define TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM 0
+#define TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM 1
 
 #if TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
 #include <iostream>
@@ -37,7 +38,9 @@ Program Manager::Run(const Program* program, const DataMap& inputs, DataMap& out
     auto print_program = [&](const char* msg, const Transform* transform) {
         auto wgsl = Program::printer(program);
         std::cout << "=========================================================" << std::endl;
-        std::cout << "== " << msg << " " << transform->TypeInfo().name << ":" << std::endl;
+        std::cout << "== " << msg << " "
+                  << (transform ? transform->TypeInfo().name : "transform manager") << ":"
+                  << std::endl;
         std::cout << "=========================================================" << std::endl;
         std::cout << wgsl << std::endl;
         if (!program->IsValid()) {
@@ -51,7 +54,7 @@ Program Manager::Run(const Program* program, const DataMap& inputs, DataMap& out
 
     std::optional<Program> output;
 
-    TINT_IF_PRINT_PROGRAM(print_program("Input of", this));
+    // TINT_IF_PRINT_PROGRAM(print_program("Input of", nullptr));
 
     for (const auto& transform : transforms_) {
         if (auto result = transform->Apply(program, inputs, outputs)) {
@@ -65,12 +68,12 @@ Program Manager::Run(const Program* program, const DataMap& inputs, DataMap& out
 
             TINT_IF_PRINT_PROGRAM(print_program("Output of", transform.get()));
         } else {
-            TINT_IF_PRINT_PROGRAM(std::cout << "Skipped " << transform->TypeInfo().name
-                                            << std::endl);
+            // TINT_IF_PRINT_PROGRAM(std::cout << "Skipped " << transform->TypeInfo().name
+            //                                 << std::endl);
         }
     }
 
-    TINT_IF_PRINT_PROGRAM(print_program("Final output of", this));
+    TINT_IF_PRINT_PROGRAM(print_program("Final output of", nullptr));
 
     if (!output) {
         ProgramBuilder b;
