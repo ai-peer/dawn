@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "856c4ffd_94b3a717",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:46:10Z",
+      "side": 1,
+      "message": "+2. Some suggestions for the diagnostics.",
+      "revId": "bf0edd33d93863034af9297d11de04eadb8dd87b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2efe27df_09cf7e28",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:46:10Z",
+      "side": 1,
+      "message": "Suggest: `invalid terminator for block`",
+      "range": {
+        "startLine": 217,
+        "startChar": 52,
+        "endLine": 217,
+        "endChar": 72
+      },
+      "revId": "bf0edd33d93863034af9297d11de04eadb8dd87b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4d3a3af_a68706d9",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:46:10Z",
+      "side": 1,
+      "message": "nit: I find the first error and note far less useful than what\u0027s below. Maybe we could check whether the terminator already has an error associated with it before adding this one?",
+      "range": {
+        "startLine": 1534,
+        "startChar": 18,
+        "endLine": 1540,
+        "endChar": 21
+      },
+      "revId": "bf0edd33d93863034af9297d11de04eadb8dd87b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "483f9536_0a20a978",
+        "filename": "src/tint/ir/validate_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-12T17:46:10Z",
+      "side": 1,
+      "message": "It\u0027s not really the if _target_. Isn\u0027t it the `if-exit`?",
+      "range": {
+        "startLine": 1542,
+        "startChar": 25,
+        "endLine": 1542,
+        "endChar": 31
+      },
+      "revId": "bf0edd33d93863034af9297d11de04eadb8dd87b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
