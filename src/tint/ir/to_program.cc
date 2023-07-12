@@ -64,6 +64,7 @@
 #include "src/tint/type/sampler.h"
 #include "src/tint/type/texture.h"
 #include "src/tint/utils/hashmap.h"
+#include "src/tint/utils/math.h"
 #include "src/tint/utils/predicates.h"
 #include "src/tint/utils/reverse.h"
 #include "src/tint/utils/scoped_assignment.h"
@@ -932,8 +933,13 @@ class State {
         auto n = structs_.GetOrCreate(s, [&] {
             auto members = utils::Transform<8>(s->Members(), [&](const type::StructMember* m) {
                 auto ty = Type(m->Type());
-                // TODO(crbug.com/tint/1902): Emit structure member attributes
                 utils::Vector<const ast::Attribute*, 2> attrs;
+                if (m->Type()->Align() != m->Align()) {
+                    attrs.Push(b.MemberAlign(u32(m->Align())));
+                }
+                if (m->Type()->Size() != m->Size()) {
+                    attrs.Push(b.MemberSize(u32(m->Size())));
+                }
                 return b.Member(m->Name().NameView(), ty, std::move(attrs));
             });
 
