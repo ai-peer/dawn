@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef1562e6_e6ac400b",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-12T15:26:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "db77e1e7_6a761129",
+      "revId": "a326098af4206625a26f79d59021ea03b83e204f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9e2d8c0_5bc3a318",
