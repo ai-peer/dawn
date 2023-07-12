@@ -33,6 +33,23 @@
       "message": "Thanks for reviewing!",
       "revId": "8c53ad7359fbc23a2d4e43fa2addd1adc97bd75d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "620135b3_02fb7151",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-12T13:42:11Z",
+      "side": 1,
+      "message": "```\n[  2%] Generate tables based on the SPIR-V XML registry.\nTraceback (most recent call last):\n  File \"/dawn/src/third_party/vulkan-deps/spirv-tools/src/utils/generate_registry_tables.py\", line 90, in \u003cmodule\u003e\n    main()\n  File \"/dawn/src/third_party/vulkan-deps/spirv-tools/src/utils/generate_registry_tables.py\", line 82, in main\n    registry \u003d xml.etree.ElementTree.fromstring(xml_in.read())\n  File \"/usr/lib/python3.6/encodings/ascii.py\", line 26, in decode\n    return codecs.ascii_decode(input, self.errors)[0]\nUnicodeDecodeError: \u0027ascii\u0027 codec can\u0027t decode byte 0xc3 in position 7365: ordinal not in range(128)\nthird_party/spirv-tools/source/CMakeFiles/core_tables.dir/build.make:93: recipe for target \u0027third_party/spirv-tools/generators.inc\u0027 failed\nmake[2]: *** [third_party/spirv-tools/generators.inc] Error 1\nCMakeFiles/Makefile2:2381: recipe for target \u0027third_party/spirv-tools/source/CMakeFiles/core_tables.dir/all\u0027 failed\nmake[1]: *** [third_party/spirv-tools/source/CMakeFiles/core_tables.dir/all] Error 2\nmake[1]: *** Waiting for unfinished jobs....\n[  2%] Building CXX object src/tint/CMakeFiles/tint_diagnostic_utils.dir/diagnostic/diagnostic.cc.o\n```\n\nThe Kokoro error looks irrelevant to my changes, right?\nPlease advice how to solve this problem, thanks!",
+      "revId": "8c53ad7359fbc23a2d4e43fa2addd1adc97bd75d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
