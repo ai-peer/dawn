@@ -16,6 +16,24 @@
       "message": "Can you provide some context as to what this is fixing? Are you seeing an error while building? What are the build flags? (Is there a corresponding bug at crbug.com/dawn for this?)",
       "revId": "14ffb3092909ee596990a07a7652e4d47c8d716e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d6ae56_b959101f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-07-12T14:31:19Z",
+      "side": 1,
+      "message": "The issue is\n  `option_if_not_defined(DAWN_USE_GLFW \"Enable compilation of the GLFW windowing utils\" ${DAWN_SUPPORTS_GLFW_FOR_WINDOWING})`\nWhen `DAWN_SUPPORTS_GLFW_FOR_WINDOWING` is undefined, this gives me:\n\u003e CMake Error at externals/dawn/CMakeLists.txt:137 (option_if_not_defined):\n\u003e  option_if_not_defined Function invoked with incorrect arguments for\n\u003e  function named: option_if_not_defined\n\nso set a default value, same as the other variables (eg. `USE_WAYLAND`).\n\nI\u0027m running CMake through a gradle project. `cppFlags \u0027-std\u003dc++17\u0027`, no additional arguments. I don\u0027t know what build flags gradle might be adding. But the same error can be reproduced on Windows by commenting out line 114 and running CMake directly.",
+      "parentUuid": "0117478b_29ea0fff",
+      "revId": "14ffb3092909ee596990a07a7652e4d47c8d716e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
