@@ -104,6 +104,47 @@ fn f(i : i32, u : u32) -> i32 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Struct declaration
+////////////////////////////////////////////////////////////////////////////////
+TEST_F(IRToProgramRoundtripTest, StructDecl_Scalars) {
+    Test(R"(
+struct S {
+  a : i32,
+  b : u32,
+  c : f32,
+}
+
+var<private> v : S;
+)");
+}
+
+TEST_F(IRToProgramRoundtripTest, StructDecl_Align) {
+    Test(R"(
+struct S {
+  a : i32,
+  @align(32u)
+  b : u32,
+  c : f32,
+}
+
+var<private> v : S;
+)");
+}
+
+TEST_F(IRToProgramRoundtripTest, StructDecl_Size) {
+    Test(R"(
+struct S {
+  a : i32,
+  @size(32u)
+  b : u32,
+  c : f32,
+}
+
+var<private> v : S;
+)");
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // Function Call
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramRoundtripTest, FnCall_NoArgs_NoRet) {
