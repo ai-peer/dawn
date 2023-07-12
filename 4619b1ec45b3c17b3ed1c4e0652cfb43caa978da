@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6082739b_d8c8dba9",
+        "filename": "src/tint/ir/validate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-12T12:26:39Z",
+      "side": 1,
+      "message": "We should also validate that the `ExitLoop` instruction is not nested anywhere inside a `Continuing` block. WGSL has this restriction, which it inherits from SPIR-V.",
+      "revId": "4619b1ec45b3c17b3ed1c4e0652cfb43caa978da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
