@@ -286,12 +286,13 @@ INSTANTIATE_TEST_SUITE_P(
         BinaryTestCase{kF16, ir::Binary::Kind::kGreaterThanEqual, "OpFOrdGreaterThanEqual", "bool"},
         BinaryTestCase{kF16, ir::Binary::Kind::kLessThan, "OpFOrdLessThan", "bool"},
         BinaryTestCase{kF16, ir::Binary::Kind::kLessThanEqual, "OpFOrdLessThanEqual", "bool"}));
-INSTANTIATE_TEST_SUITE_P(SpvGeneratorImplTest_Binary_Bool,
-                         Comparison,
-                         testing::Values(BinaryTestCase{kBool, ir::Binary::Kind::kEqual,
-                                                        "OpLogicalEqual", "bool"},
-                                         BinaryTestCase{kBool, ir::Binary::Kind::kNotEqual,
-                                                        "OpLogicalNotEqual", "bool"}));
+INSTANTIATE_TEST_SUITE_P(
+    SpvGeneratorImplTest_Binary_Bool,
+    Comparison,
+    testing::Values(BinaryTestCase{kBool, ir::Binary::Kind::kEqual, "OpLogicalEqual", "bool"},
+                    BinaryTestCase{kBool, ir::Binary::Kind::kNotEqual, "OpLogicalNotEqual", "bool"},
+                    BinaryTestCase{kBool, ir::Binary::Kind::kAnd, "OpLogicalAnd", "bool"},
+                    BinaryTestCase{kBool, ir::Binary::Kind::kOr, "OpLogicalOr", "bool"}));
 
 TEST_F(SpvGeneratorImplTest, Binary_Chain) {
     auto* func = b.Function("foo", ty.void_());
