@@ -1020,11 +1020,19 @@ void GeneratorImplIr::EmitBinary(ir::Binary* binary) {
         }
 
         case ir::Binary::Kind::kAnd: {
-            op = spv::Op::OpBitwiseAnd;
+            if (ty->is_integer_scalar_or_vector()) {
+                op = spv::Op::OpBitwiseAnd;
+            } else {
+                op = spv::Op::OpLogicalAnd;
+            }
             break;
         }
         case ir::Binary::Kind::kOr: {
-            op = spv::Op::OpBitwiseOr;
+            if (ty->is_integer_scalar_or_vector()) {
+                op = spv::Op::OpBitwiseOr;
+            } else {
+                op = spv::Op::OpLogicalOr;
+            }
             break;
         }
         case ir::Binary::Kind::kXor: {
