@@ -16,6 +16,299 @@
       "message": "Kokoro is now passed, please take a look, thanks",
       "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "438e7f5d_75dc452f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "Looking very good. Just a few minor nits and suggestions.",
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f71a6ea_b16dc405",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "nit: As this comment describes a function, I would say \"Pushes bits...\".",
+      "range": {
+        "startLine": 1471,
+        "startChar": 7,
+        "endLine": 1471,
+        "endChar": 12
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e732699e_b68dfd23",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "Can we use `std::byte{...}` instead?",
+      "range": {
+        "startLine": 1474,
+        "startChar": 24,
+        "endLine": 1474,
+        "endChar": 46
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba5f860_467a491c",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "Instead of this, the lambda `push_dst_element` can simply return a bool result. In other words:\n\n```\nauto push_dst_element \u003d [\u0026](size_t offset) {\n...\n        Switch(\n            dst_el_ty,\n            [\u0026](const type::U32*) {  //\n                auto r \u003d CreateScalar(source, dst_el_ty, u32(v));\n                if (!r) {\n                    return false;\n                els.Push(r.Get());\n               \n...\n```\n\n(Note that there\u0027s no need for an \u0027else\u0027 branch anymore with early return here).\n\nThen below:\n\n```\n    for (size_t i \u003d 0; i \u003c dst_count; i++) {\n        if (!push_dst_element(i * dst_el_ty-\u003eSize())) {\n            return utils::Failure;\n        }\n    }\n```",
+      "range": {
+        "startLine": 1512,
+        "startChar": 4,
+        "endLine": 1512,
+        "endChar": 24
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43a93340_26e60ba3",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "\"Reinterprets\"",
+      "range": {
+        "startLine": 1514,
+        "startChar": 7,
+        "endLine": 1514,
+        "endChar": 20
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6134e76_d579e4fa",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "See my comment above - return false from this lambda instead.",
+      "range": {
+        "startLine": 1531,
+        "startChar": 16,
+        "endLine": 1533,
+        "endChar": 24
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b6122b1_1b92cb3d",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "No need for else branch here.",
+      "range": {
+        "startLine": 1574,
+        "startChar": 4,
+        "endLine": 1574,
+        "endChar": 12
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99b1717_6bc17248",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "nit: the two generated functions both have \"tint_bitcast\" as their name. Can we more descriptive names, like:\n\ntint_bitcast_to_f16\ntint_bitcast_from_f16\n\nThis will help readability of the generated code.",
+      "range": {
+        "startLine": 384,
+        "startChar": 49,
+        "endLine": 384,
+        "endChar": 61
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e0bd92a_97f71f70",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "In the HLSL writer, you are checking the result of these calls and returning empty string. Then at the call site, if it returns empty string, you return false. Please let\u0027s do the same here.",
+      "range": {
+        "startLine": 387,
+        "startChar": 20,
+        "endLine": 387,
+        "endChar": 35
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60aee864_5a257ec8",
+        "filename": "src/tint/writer/glsl/generator_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "nit: we usually just use \"funcs\" instead of \"polyfills\" when naming these variables.",
+      "range": {
+        "startLine": 465,
+        "startChar": 55,
+        "endLine": 465,
+        "endChar": 73
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1c85612_d94f7d4d",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "nit: Since we\u0027re using early outs in each branch, we can get rid of the \"else\". This will also remove the very last \"else\" and un-nest the code in that last else branch.",
+      "range": {
+        "startLine": 700,
+        "startChar": 7,
+        "endLine": 701,
+        "endChar": 10
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148fe470_8b1a9b96",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "Same comment as for the GLSL writer, can we give each one of these a better name?",
+      "range": {
+        "startLine": 717,
+        "startChar": 61,
+        "endLine": 717,
+        "endChar": 73
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "448b6989_e2d91763",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-13T15:59:20Z",
+      "side": 1,
+      "message": "As I wrote above, you can remove this \"else\" altogether and un-nest the code just below.",
+      "range": {
+        "startLine": 780,
+        "startChar": 4,
+        "endLine": 780,
+        "endChar": 12
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
