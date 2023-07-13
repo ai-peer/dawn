@@ -27,13 +27,18 @@ dawn_component("platform") {
     "DawnPlatform.cpp",
     "WorkerThread.cpp",
     "WorkerThread.h",
+    "metrics/HistogramLoggingPlatform.cpp",
+    "metrics/HistogramLoggingPlatform.h",
     "metrics/HistogramMacros.h",
     "tracing/EventTracer.cpp",
     "tracing/EventTracer.h",
     "tracing/TraceEvent.h",
   ]
 
-  deps = [ "${dawn_root}/src/dawn/common" ]
+  deps = [
+    "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/utils",
+  ]
 
   public_deps = [
     # DawnPlatform.h has #include "dawn/webgpu.h"
