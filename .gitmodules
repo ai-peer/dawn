@@ -110,3 +110,11 @@
 	path = third_party/protobuf
 	url = https://chromium.googlesource.com/external/github.com/protocolbuffers/protobuf.git
 	gclient-condition = dawn_standalone
+[submodule "third_party/partition_allocator"]
+	path = third_party/partition_allocator
+	url = https://chromium.googlesource.com/chromium/src/base/allocator/partition_allocator.git
+	gclient-condition = dawn_standalone
+[submodule "third_party/lss"]
+	path = third_party/lss
+	url = https://chromium.googlesource.com/linux-syscall-support.git
+	gclient-condition = dawn_standalone and (checkout_android or checkout_linux)

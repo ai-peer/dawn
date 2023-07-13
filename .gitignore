@@ -29,11 +29,13 @@
 /third_party/libc++/src
 /third_party/libc++abi/src
 /third_party/llvm-build
+/third_party/lss
 /third_party/markupsafe
 /third_party/ninja
 /third_party/node
 /third_party/node-addon-api
 /third_party/node-api-headers
+/third_party/partition_allocator
 /third_party/protobuf
 /third_party/swiftshader
 /third_party/vulkan-deps
