@@ -106,6 +106,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3f8bf81_a9522d48",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-13T18:30:05Z",
+      "side": 1,
+      "message": "Adding to Antonio\u0027s comment:\nMight not be obvious, but `Switch` can return values from the cases. So `bool ok \u003d Switch(...` is quite a common pattern.",
+      "parentUuid": "0ba5f860_467a491c",
+      "range": {
+        "startLine": 1512,
+        "startChar": 4,
+        "endLine": 1512,
+        "endChar": 24
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43a93340_26e60ba3",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 10
