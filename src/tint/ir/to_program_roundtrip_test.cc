@@ -168,9 +168,9 @@ fn b() -> i32 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Builtin Call
+// Core Builtin Call
 ////////////////////////////////////////////////////////////////////////////////
-TEST_F(IRToProgramRoundtripTest, BuiltinCall_Stmt) {
+TEST_F(IRToProgramRoundtripTest, CoreBuiltinCall_Stmt) {
     Test(R"(
 fn f() {
   workgroupBarrier();
@@ -178,7 +178,7 @@ fn f() {
 )");
 }
 
-TEST_F(IRToProgramRoundtripTest, BuiltinCall_Expr) {
+TEST_F(IRToProgramRoundtripTest, CoreBuiltinCall_Expr) {
     Test(R"(
 fn f(a : i32, b : i32) {
   var i : i32 = max(a, b);
@@ -186,7 +186,7 @@ fn f(a : i32, b : i32) {
 )");
 }
 
-TEST_F(IRToProgramRoundtripTest, BuiltinCall_PhonyAssignment) {
+TEST_F(IRToProgramRoundtripTest, CoreBuiltinCall_PhonyAssignment) {
     Test(R"(
 fn f(a : i32, b : i32) {
   _ = max(a, b);
@@ -194,7 +194,7 @@ fn f(a : i32, b : i32) {
 )");
 }
 
-TEST_F(IRToProgramRoundtripTest, BuiltinCall_UnusedLet) {
+TEST_F(IRToProgramRoundtripTest, CoreBuiltinCall_UnusedLet) {
     Test(R"(
 fn f(a : i32, b : i32) {
   let unused = max(a, b);
@@ -202,7 +202,7 @@ fn f(a : i32, b : i32) {
 )");
 }
 
-TEST_F(IRToProgramRoundtripTest, BuiltinCall_PtrArg) {
+TEST_F(IRToProgramRoundtripTest, CoreBuiltinCall_PtrArg) {
     Test(R"(
 var<workgroup> v : bool;
 
@@ -212,7 +212,7 @@ fn foo() -> bool {
 )");
 }
 
-TEST_F(IRToProgramRoundtripTest, BuiltinCall_DisableDerivativeUniformity) {
+TEST_F(IRToProgramRoundtripTest, CoreBuiltinCall_DisableDerivativeUniformity) {
     Test(R"(
 fn f(in : f32) {
   let x = dpdx(in);
