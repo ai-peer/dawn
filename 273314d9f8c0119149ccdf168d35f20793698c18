@@ -16,6 +16,23 @@
       "message": "That was fast! Thank you, Austin!",
       "revId": "273314d9f8c0119149ccdf168d35f20793698c18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1d54b4_ffeb6887",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-13T15:24:05Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "273314d9f8c0119149ccdf168d35f20793698c18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
