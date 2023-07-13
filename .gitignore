@@ -6,6 +6,7 @@
 /.gclient_entries
 /.gclient_previous_custom_vars
 /.gclient_previous_sync_commits
+/base/allocator/partition_allocator
 /build
 /buildtools
 /testing
@@ -24,6 +25,7 @@
 /third_party/jinja2
 /third_party/jsoncpp
 /third_party/llvm-build
+/third_party/lss
 /third_party/markupsafe
 /third_party/ninja
 /third_party/node

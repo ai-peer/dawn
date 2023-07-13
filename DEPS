@@ -221,6 +221,17 @@ deps = {
     'url': '{chromium_git}/external/github.com/protocolbuffers/protobuf.git@fde7cf7358ec7cd69e8db9be4f1fa6a5c431386a',
     'condition': 'dawn_standalone',
   },
+
+  # Dependencies for PartitionAlloc.
+  # Doc: https://docs.google.com/document/d/1wz45t0alQthsIU9P7_rQcfQyqnrBMXzrOjSzdQo-V
+  'base/allocator/partition_allocator': {
+    'url': '{chromium_git}/chromium/src/base/allocator/partition_allocator.git@600e8bf5c286ea07e0aa812da04b069de5da32d4',
+    'condition': 'dawn_standalone',
+  },
+  'third_party/lss': {
+    'url': '{chromium_git}/linux-syscall-support.git@ce877209e11aa69dcfffbd53ef90ea1d07136521',
+    'condition': 'dawn_standalone and (checkout_android or checkout_linux)',
+  },
 }
 
 hooks = [
