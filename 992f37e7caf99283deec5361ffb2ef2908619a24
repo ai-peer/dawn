@@ -16,6 +16,23 @@
       "message": "Needs +2 again 😐",
       "revId": "992f37e7caf99283deec5361ffb2ef2908619a24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "407083b2_55830b11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003806
+      },
+      "writtenOn": "2023-07-13T23:37:42Z",
+      "side": 1,
+      "message": "Oh wait, I can do that now",
+      "revId": "992f37e7caf99283deec5361ffb2ef2908619a24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
