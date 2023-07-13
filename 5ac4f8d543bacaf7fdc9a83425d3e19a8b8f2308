@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e106e2bc_075ec124",
+        "filename": "src/tint/ir/to_program.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-13T00:01:37Z",
+      "side": 1,
+      "message": "What about all of the shader IO attributes in `m-\u003eAttributes()`?",
+      "revId": "5ac4f8d543bacaf7fdc9a83425d3e19a8b8f2308",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
