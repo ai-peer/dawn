@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d502ce_32915fab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-13T22:30:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "72ef9dec440686c3062c98b354c68491abd78c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2540bbc9_b611f47a",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-13T22:30:18Z",
+      "side": 1,
+      "message": "nit: this is in the global namespace - perhaps put it in one like ::dawn::detail ? or ::dawn::platform::detail ?",
+      "revId": "72ef9dec440686c3062c98b354c68491abd78c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
