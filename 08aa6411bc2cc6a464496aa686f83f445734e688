@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "328b619e_68137a6d",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-13T15:41:20Z",
+      "side": 1,
+      "message": "It feels like a layering violation for the generic backend code to depend on a particular backend. I don\u0027t see many other #includes that do this in src/dawn/native.\n\nI think it might be better to simply do the same check as the GL backend when constructing the target (see below).",
+      "revId": "08aa6411bc2cc6a464496aa686f83f445734e688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2510e4b3_4c8f9d2e",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-13T15:41:20Z",
+      "side": 1,
+      "message": "Actually I think desktop GL has glTextureView(), so it\u0027s only GLES that\u0027s problematic. Also, we may remove the copy workaround in the GL backend at some point, so I\u0027d prefer this comment just refer to the restriction. Something like:\n\n\"OpenGLES does not support texture views, so it requires that the texture view dimension match that of the underlying texture. For OpenGLES, we need to match the shader texture view binding with the src texture target.\"\n\n(Although, if we simply check for GetArrayLayers() (see below), perhaps we don\u0027t need a comment at all.)",
+      "revId": "08aa6411bc2cc6a464496aa686f83f445734e688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa1cb4d_7706b7f9",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-07-13T15:41:20Z",
+      "side": 1,
+      "message": "I think it might be better to simply do the same check as the GL backend when constructing the target. Something like:\n\n           if (src.texture-\u003eGetArrayLayers() \u003e 1) {\n              textureViewDimension \u003d wgpu::TextureViewDimension::e2DArray;\n           } else {\n              textureViewDimension \u003d wgpu::TextureViewDimension::e2D;\n           }\n           \nWould that work?",
+      "revId": "08aa6411bc2cc6a464496aa686f83f445734e688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
