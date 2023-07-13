@@ -87,11 +87,14 @@ class Texture final : public d3d::Texture {
 
     static ResultOrError<Ref<Texture>> CreateStaging(Device* device,
                                                      const TextureDescriptor* descriptor);
+    static ResultOrError<Ref<Texture>> CreateInterim(Device* device,
+                                                     const TextureDescriptor* descriptor);
 
     Texture(Device* device,
             const TextureDescriptor* descriptor,
             TextureState state,
-            bool isStaging);
+            bool isStaging,
+            bool isInterim);
     ~Texture() override;
 
     template <typename T>
@@ -127,6 +130,7 @@ class Texture final : public d3d::Texture {
                              uint32_t rowsPerImage);
 
     const bool mIsStaging = false;
+    const bool mIsInterim = false;
     ComPtr<ID3D11Resource> mD3d11Resource;
 };
 
