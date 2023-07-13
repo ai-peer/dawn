@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41ad2bd2_9ab537bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002296
+      },
+      "writtenOn": "2023-07-13T13:49:47Z",
+      "side": 1,
+      "message": "\u003e Gerrit rejected submission of this CL with error: Failed to submit 2 changes due to the following problems:\nChange 140960: submit requirement \u0027Code-Review\u0027 is unsatisfied.\n\n\u003e Hint: rebasing CL in Gerrit UI and re-submitting usually works\n\nThis CL is not chained to 140960, does the \"Submitted together\" thing has a significance with Dawn\u0027s gerrit? I don\u0027t have an option to rebase as it suggests.",
+      "revId": "9ea369080ed812e68a1801c32bd4c9bf9e158734",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
