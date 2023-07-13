@@ -103,6 +103,24 @@
       "message": "Still can\u0027t submit this CL. It looks Kokoro is still red having both +1 and -1.",
       "revId": "8c53ad7359fbc23a2d4e43fa2addd1adc97bd75d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bc74c9e_7e06a825",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-13T00:44:46Z",
+      "side": 1,
+      "message": "should be ok now",
+      "parentUuid": "8a25e29f_7bceee56",
+      "revId": "8c53ad7359fbc23a2d4e43fa2addd1adc97bd75d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
