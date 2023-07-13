@@ -63,6 +63,30 @@ Aspect D3D11Aspect(Aspect aspect) {
     return aspect;
 }
 
+wgpu::TextureFormat UncompressedTextureFormat(wgpu::TextureFormat format) {
+    switch (format) {
+        case wgpu::TextureFormat::BC1RGBAUnorm:
+        case wgpu::TextureFormat::BC1RGBAUnormSrgb:
+        case wgpu::TextureFormat::BC4RSnorm:
+        case wgpu::TextureFormat::BC4RUnorm:
+            return wgpu::TextureFormat::RGBA16Uint;
+
+        case wgpu::TextureFormat::BC2RGBAUnorm:
+        case wgpu::TextureFormat::BC2RGBAUnormSrgb:
+        case wgpu::TextureFormat::BC3RGBAUnorm:
+        case wgpu::TextureFormat::BC3RGBAUnormSrgb:
+        case wgpu::TextureFormat::BC5RGSnorm:
+        case wgpu::TextureFormat::BC5RGUnorm:
+        case wgpu::TextureFormat::BC6HRGBFloat:
+        case wgpu::TextureFormat::BC6HRGBUfloat:
+        case wgpu::TextureFormat::BC7RGBAUnorm:
+        case wgpu::TextureFormat::BC7RGBAUnormSrgb:
+            return wgpu::TextureFormat::RGBA32Uint;
+        default:
+            UNREACHABLE();
+    }
+}
+
 }  // namespace
 
 MaybeError ValidateTextureCanBeWrapped(ID3D11Resource* d3d11Resource,
@@ -119,8 +143,8 @@ MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFo
 
 // static
 ResultOrError<Ref<Texture>> Texture::Create(Device* device, const TextureDescriptor* descriptor) {
-    Ref<Texture> texture = AcquireRef(
-        new Texture(device, descriptor, TextureState::OwnedInternal, /*isStaging=*/false));
+    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, TextureState::OwnedInternal,
+                                                  /*isStaging=*/false, /*isInterim*/ false));
     DAWN_TRY(texture->InitializeAsInternalTexture());
     return std::move(texture);
 }
@@ -129,16 +153,24 @@ ResultOrError<Ref<Texture>> Texture::Create(Device* device, const TextureDescrip
 ResultOrError<Ref<Texture>> Texture::Create(Device* device,
                                             const TextureDescriptor* descriptor,
                                             ComPtr<ID3D11Resource> d3d11Texture) {
-    Ref<Texture> dawnTexture = AcquireRef(
-        new Texture(device, descriptor, TextureState::OwnedExternal, /*isStaging=*/false));
+    Ref<Texture> dawnTexture = AcquireRef(new Texture(
+        device, descriptor, TextureState::OwnedExternal, /*isStaging=*/false, /*isInterim*/ false));
     DAWN_TRY(dawnTexture->InitializeAsSwapChainTexture(std::move(d3d11Texture)));
     return std::move(dawnTexture);
 }
 
 ResultOrError<Ref<Texture>> Texture::CreateStaging(Device* device,
                                                    const TextureDescriptor* descriptor) {
-    Ref<Texture> texture = AcquireRef(
-        new Texture(device, descriptor, TextureState::OwnedInternal, /*isStaging=*/true));
+    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, TextureState::OwnedInternal,
+                                                  /*isStaging=*/true, /*isInterim*/ false));
+    DAWN_TRY(texture->InitializeAsInternalTexture());
+    return std::move(texture);
+}
+
+ResultOrError<Ref<Texture>> Texture::CreateInterim(Device* device,
+                                                   const TextureDescriptor* descriptor) {
+    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, TextureState::OwnedInternal,
+                                                  /*isStaging=*/false, /*isInterim*/ true));
     DAWN_TRY(texture->InitializeAsInternalTexture());
     return std::move(texture);
 }
@@ -150,8 +182,8 @@ ResultOrError<Ref<Texture>> Texture::CreateExternalImage(Device* device,
                                                          std::vector<Ref<d3d::Fence>> waitFences,
                                                          bool isSwapChainTexture,
                                                          bool isInitialized) {
-    Ref<Texture> dawnTexture = AcquireRef(
-        new Texture(device, descriptor, TextureState::OwnedExternal, /*isStaging=*/false));
+    Ref<Texture> dawnTexture = AcquireRef(new Texture(
+        device, descriptor, TextureState::OwnedExternal, /*isStaging=*/false, /*isInterim*/ false));
 
     DAWN_TRY(dawnTexture->InitializeAsExternalTexture(std::move(d3dTexture), std::move(waitFences),
                                                       isSwapChainTexture));
@@ -250,7 +282,8 @@ MaybeError Texture::InitializeAsInternalTexture() {
     }
 
     // Staging texture is used internally, so we don't need to clear it.
-    if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) && !mIsStaging) {
+    if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
+        (!mIsStaging && !mIsInterim)) {
         CommandRecordingContext* commandContext = device->GetPendingCommandContext();
         DAWN_TRY(Clear(commandContext, GetAllSubresources(), TextureBase::ClearValue::NonZero));
     }
@@ -289,8 +322,12 @@ MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
 Texture::Texture(Device* device,
                  const TextureDescriptor* descriptor,
                  TextureState state,
-                 bool isStaging)
-    : Base(device, descriptor, state), mIsStaging(isStaging) {}
+                 bool isStaging,
+                 bool isInterim)
+    : Base(device, descriptor, state), mIsStaging(isStaging), mIsInterim(isInterim) {
+    // Must not be both.
+    ASSERT(!isStaging || !isInterim);
+}
 
 Texture::~Texture() = default;
 
@@ -379,32 +416,58 @@ MaybeError Texture::Clear(CommandRecordingContext* commandContext,
                           const SubresourceRange& range,
                           TextureBase::ClearValue clearValue) {
     bool isRenderable = GetInternalUsage() & wgpu::TextureUsage::RenderAttachment;
+    const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
 
     if (!isRenderable) {
         if (GetFormat().isCompressed) {
-            // TODO(dawn:1802): Support clearing compressed textures.
-            return DAWN_UNIMPLEMENTED_ERROR("Clearing compressed textures");
-        }
-        const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
-        Extent3D writeSize = GetMipLevelSubresourceVirtualSize(range.baseMipLevel);
-        uint32_t bytesPerRow = blockInfo.byteSize * writeSize.width;
+            // Create a staging texture, which is all the same except that the format is
+            // uncompressed and renderable.
+            TextureDescriptor desc = {};
+            desc.label = "CopyUncompressedTextureToCompressedTexureInterim";
+            desc.dimension = GetDimension();
+            desc.size = {GetSize().width / blockInfo.width, GetSize().height / blockInfo.height,
+                         GetSize().depthOrArrayLayers};
+            desc.format = UncompressedTextureFormat(GetFormat().format);
+            desc.mipLevelCount = GetNumMipLevels();
+            desc.sampleCount = GetSampleCount();
 
-        uint32_t rowsPerImage = writeSize.height;
-        uint64_t byteLength;
-        DAWN_TRY_ASSIGN(byteLength, ComputeRequiredBytesInCopy(blockInfo, writeSize, bytesPerRow,
-                                                               rowsPerImage));
+            Ref<Texture> interimTexture;
+            DAWN_TRY_ASSIGN(interimTexture, CreateInterim(ToBackend(GetDevice()), &desc));
+            DAWN_TRY(interimTexture->Clear(commandContext, range, clearValue));
 
-        std::vector<uint8_t> clearData(byteLength, clearValue == ClearValue::Zero ? 0 : 1);
-        SubresourceRange writeRange = range;
-        writeRange.levelCount = 1;
-        for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
-             ++level) {
-            writeRange.baseMipLevel = level;
-            writeSize = GetMipLevelSubresourceVirtualSize(level);
-            bytesPerRow = blockInfo.byteSize * writeSize.width;
-            rowsPerImage = writeSize.height;
-            DAWN_TRY(WriteInternal(commandContext, writeRange, {0, 0, 0}, writeSize,
-                                   clearData.data(), bytesPerRow, rowsPerImage));
+            // Copy from the staging texture to the dest texture.
+            for (uint32_t layer = range.baseArrayLayer;
+                 layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                for (uint32_t mipLevel = range.baseMipLevel;
+                     mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
+                    uint32_t subresource = interimTexture->GetSubresourceIndex(
+                        mipLevel, layer, D3D11Aspect(range.aspects));
+                    commandContext->GetD3D11DeviceContext1()->CopySubresourceRegion(
+                        GetD3D11Resource(), subresource, 0, 0, 0,
+                        interimTexture->GetD3D11Resource(), subresource, nullptr);
+                }
+            }
+        } else {
+            Extent3D writeSize = GetMipLevelSubresourceVirtualSize(range.baseMipLevel);
+            uint32_t bytesPerRow = blockInfo.byteSize * writeSize.width;
+
+            uint32_t rowsPerImage = writeSize.height;
+            uint64_t byteLength;
+            DAWN_TRY_ASSIGN(byteLength, ComputeRequiredBytesInCopy(blockInfo, writeSize,
+                                                                   bytesPerRow, rowsPerImage));
+
+            std::vector<uint8_t> clearData(byteLength, clearValue == ClearValue::Zero ? 0 : 1);
+            SubresourceRange writeRange = range;
+            writeRange.levelCount = 1;
+            for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
+                 ++level) {
+                writeRange.baseMipLevel = level;
+                writeSize = GetMipLevelSubresourceVirtualSize(level);
+                bytesPerRow = blockInfo.byteSize * writeSize.width;
+                rowsPerImage = writeSize.height;
+                DAWN_TRY(WriteInternal(commandContext, writeRange, {0, 0, 0}, writeSize,
+                                       clearData.data(), bytesPerRow, rowsPerImage));
+            }
         }
     } else {
         ID3D11DeviceContext* d3d11DeviceContext = commandContext->GetD3D11DeviceContext();
@@ -462,7 +525,14 @@ MaybeError Texture::Clear(CommandRecordingContext* commandContext,
                         clearValue == TextureBase::ClearValue::Zero ? 0u : 1u);
                 } else {
                     static constexpr std::array<float, 4> kZero = {0.0f, 0.0f, 0.0f, 0.0f};
-                    static constexpr std::array<float, 4> kNonZero = {1.0f, 1.0f, 1.0f, 1.0f};
+                    float clearValueOne = 1.0f;
+                    // Ensure value 1 per byte rather than per component.
+                    for (uint32_t i = 0; i < blockInfo.byteSize / GetFormat().componentCount - 1;
+                         ++i) {
+                        clearValueOne = clearValueOne * 256.0f + 1.0f;
+                    }
+                    std::array<float, 4> kNonZero = {clearValueOne, clearValueOne, clearValueOne,
+                                                     clearValueOne};
 
                     ComPtr<ID3D11RenderTargetView> d3d11RTV;
                     DAWN_TRY_ASSIGN(d3d11RTV, view->CreateD3D11RenderTargetView(mipLevel));
@@ -475,7 +545,7 @@ MaybeError Texture::Clear(CommandRecordingContext* commandContext,
         }
     }
 
-    if (clearValue == TextureBase::ClearValue::Zero) {
+    if (clearValue == TextureBase::ClearValue::Zero && (!mIsStaging && !mIsInterim)) {
         SetIsSubresourceContentInitialized(true, range);
         GetDevice()->IncrementLazyClearCountForTesting();
     }
@@ -585,7 +655,8 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
     ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
     const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(subresources.aspects).block;
     const bool hasStencil = GetFormat().HasStencil();
-    const uint32_t bytesPerRow = blockInfo.byteSize * size.width;
+    const uint32_t bytesPerRow = blockInfo.byteSize * (size.width / blockInfo.width);
+    const uint32_t rowsPerImage = size.height / blockInfo.height;
 
     if (GetDimension() == wgpu::TextureDimension::e2D) {
         for (uint32_t layer = 0; layer < subresources.layerCount; ++layer) {
@@ -602,7 +673,7 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
             if (dstBytesPerRow == bytesPerRow && mappedResource.RowPitch == bytesPerRow) {
                 // If there is no padding in the rows, we can upload the whole image
                 // in one read.
-                DAWN_TRY(callback(pSrcData, dstOffset, dstBytesPerRow * size.height));
+                DAWN_TRY(callback(pSrcData, dstOffset, dstBytesPerRow * rowsPerImage));
             } else if (hasStencil) {
                 // We need to read texel by texel for depth-stencil formats.
                 std::vector<uint8_t> depthOrStencilData(size.width * blockInfo.byteSize);
@@ -622,7 +693,7 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
                     default:
                         UNREACHABLE();
                 }
-                for (uint32_t y = 0; y < size.height; ++y) {
+                for (uint32_t y = 0; y < rowsPerImage; ++y) {
                     // Filter the depth/stencil data out.
                     uint8_t* src = pSrcData;
                     uint8_t* dst = depthOrStencilData.data();
@@ -638,7 +709,7 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
                 }
             } else {
                 // Otherwise, we need to read each row separately.
-                for (uint32_t y = 0; y < size.height; ++y) {
+                for (uint32_t y = 0; y < rowsPerImage; ++y) {
                     DAWN_TRY(callback(pSrcData, dstOffset, bytesPerRow));
                     dstOffset += dstBytesPerRow;
                     pSrcData += mappedResource.RowPitch;
