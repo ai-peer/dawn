@@ -33,6 +33,24 @@
       "message": "The win-dawn-rel failure looks like dawn:1503.\nUsing texture_2d instead of texture_2d_array seems to trigger this issue which avoids the extra mUseCopy. If I force set to use texture_2d_array triggering the extra copy, the readback works fine. Something is wrong there.",
       "revId": "5cafb8e6ad946b26df4f829597258c7bad363a57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6949e565_74d35e41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-13T18:00:11Z",
+      "side": 1,
+      "message": "suppressed",
+      "parentUuid": "13d60de0_95812d17",
+      "revId": "5cafb8e6ad946b26df4f829597258c7bad363a57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

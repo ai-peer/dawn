@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3445d95d_3f51f85c",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-13T18:00:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "328b619e_68137a6d",
+      "revId": "08aa6411bc2cc6a464496aa686f83f445734e688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2510e4b3_4c8f9d2e",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6231a4c_7fb3879c",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-13T18:00:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2510e4b3_4c8f9d2e",
+      "revId": "08aa6411bc2cc6a464496aa686f83f445734e688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fa1cb4d_7706b7f9",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-13T15:41:20Z",
       "side": 1,
       "message": "I think it might be better to simply do the same check as the GL backend when constructing the target. Something like:\n\n           if (src.texture-\u003eGetArrayLayers() \u003e 1) {\n              textureViewDimension \u003d wgpu::TextureViewDimension::e2DArray;\n           } else {\n              textureViewDimension \u003d wgpu::TextureViewDimension::e2D;\n           }\n           \nWould that work?",
+      "revId": "08aa6411bc2cc6a464496aa686f83f445734e688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dde08739_297af7a2",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-07-13T18:00:11Z",
+      "side": 1,
+      "message": "You are right. The core problem is to split texture_2d and texture_2d_array cases, regardless of backend.",
+      "parentUuid": "0fa1cb4d_7706b7f9",
       "revId": "08aa6411bc2cc6a464496aa686f83f445734e688",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
