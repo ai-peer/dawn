@@ -26,6 +26,8 @@ target_sources(dawn_platform PRIVATE
     "DawnPlatform.cpp"
     "WorkerThread.cpp"
     "WorkerThread.h"
+    "metrics/HistogramLoggingPlatform.cpp"
+    "metrics/HistogramLoggingPlatform.h"
     "metrics/HistogramMacros.h"
     "tracing/EventTracer.cpp"
     "tracing/EventTracer.h"
