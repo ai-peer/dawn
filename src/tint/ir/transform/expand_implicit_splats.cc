@@ -34,6 +34,7 @@ void ExpandImplicitSplats::Run(ir::Module* ir, const DataMap&, DataMap&) const {
 
     // Find the instructions that needs to be modified.
     utils::Vector<Binary*, 4> binary_worklist;
+    utils::Vector<CoreBuiltinCall*, 4> builtin_worklist;
     for (auto* inst : ir->instructions.Objects()) {
         if (!inst->Alive()) {
             continue;
@@ -56,6 +57,16 @@ void ExpandImplicitSplats::Run(ir::Module* ir, const DataMap&, DataMap&) const {
                 if (binary->LHS()->Type()->Is<type::Scalar>() ||
                     binary->RHS()->Type()->Is<type::Scalar>()) {
                     binary_worklist.Push(binary);
+                }
+            }
+        } else if (auto* builtin = inst->As<CoreBuiltinCall>()) {
+            // A mix builtin call that mixes vector and scalar operands needs to have the scalar
+            // operand replaced with an explicit vector constructor.
+            if (builtin->Func() == builtin::Function::kMix) {
+                if (builtin->Result()->Type()->Is<type::Vector>()) {
+                    if (builtin->Args()[2]->Type()->Is<type::Scalar>()) {
+                        builtin_worklist.Push(builtin);
+                    }
                 }
             }
         }
@@ -100,6 +111,19 @@ void ExpandImplicitSplats::Run(ir::Module* ir, const DataMap&, DataMap&) const {
             } else if (binary->RHS()->Type()->Is<type::Scalar>()) {
                 expand_operand(binary, Binary::kRhsOperandOffset);
             }
+        }
+    }
+
+    // Replace scalar arguments to builtin calls that produce vectors.
+    for (auto* builtin : builtin_worklist) {
+        switch (builtin->Func()) {
+            case builtin::Function::kMix:
+                // Expand the scalar argument into an explicitly constructed vector.
+                expand_operand(builtin, CoreBuiltinCall::kArgsOperandOffset + 2);
+                break;
+            default:
+                TINT_ASSERT(Transform, false && "unhandled builtin call");
+                break;
         }
     }
 }
