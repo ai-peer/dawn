@@ -22,6 +22,30 @@
       },
       "revId": "d05ee67818363ccc6e5386542aaa6dd69db814c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f829ef2d_46632652",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-14T14:25:36Z",
+      "side": 1,
+      "message": "Yeah I considered that. It felt like unnecessary extra effort at this stage as you\u0027d have to find and replace all other usages of the types (e.g. function parameters, var decls), and replacing types requires replacing the decl and all of it\u0027s uses. But maybe this will be easier in the future.",
+      "parentUuid": "c6e28c47_21c1ccfd",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 0
+      },
+      "revId": "d05ee67818363ccc6e5386542aaa6dd69db814c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
