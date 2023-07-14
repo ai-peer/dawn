@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f57ca8f3_3f1e7aa7",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-14T14:30:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a58f90c8_c75d8a96",
+      "range": {
+        "startLine": 263,
+        "startChar": 30,
+        "endLine": 263,
+        "endChar": 31
+      },
+      "revId": "e7b4b94ff513653dbcba085a917a90f962ddb189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8c5b152c_98a8d597",
         "filename": "src/tint/ir/transform/builtin_polyfill_spirv.h",
         "patchSetId": 4
@@ -77,6 +101,30 @@
       "writtenOn": "2023-07-14T14:07:54Z",
       "side": 1,
       "message": "This doesn\u0027t look right. Shouldn\u0027t it be `f32`?",
+      "range": {
+        "startLine": 605,
+        "startChar": 7,
+        "endLine": 605,
+        "endChar": 16
+      },
+      "revId": "e7b4b94ff513653dbcba085a917a90f962ddb189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d614f95_6918bed1",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-14T14:30:12Z",
+      "side": 1,
+      "message": "Great spot, fixed.",
+      "parentUuid": "02439dce_9b231869",
       "range": {
         "startLine": 605,
         "startChar": 7,
