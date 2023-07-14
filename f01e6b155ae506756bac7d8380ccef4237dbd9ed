@@ -22,6 +22,30 @@
       },
       "revId": "f01e6b155ae506756bac7d8380ccef4237dbd9ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f57fee_bfcda2c3",
+        "filename": "src/tint/ir/validator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-14T17:46:22Z",
+      "side": 1,
+      "message": "Yea I wasn\u0027t sure if it woudl be useful. It\u0027s nice to just say `ir::Validate(mod)` and have it do the right thing, could see a similar `spirv::ir::Validate(mod)` which does something similar.\n\nThe work it doesn\u0027t isn\u0027t that much though, just creates a validator and calls IsValid so I haven\u0027t decided if it\u0027s worth it or not.",
+      "parentUuid": "a9bb6207_094ff172",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 57
+      },
+      "revId": "f01e6b155ae506756bac7d8380ccef4237dbd9ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
