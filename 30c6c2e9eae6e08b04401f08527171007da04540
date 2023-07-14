@@ -16,6 +16,23 @@
       "message": "@amaiorano@google.com for +2, as he mentioned that this might break DXC until fixes roll in.",
       "revId": "30c6c2e9eae6e08b04401f08527171007da04540",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "770d15bb_b9c3c9c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-14T18:05:29Z",
+      "side": 1,
+      "message": "Assuming this rolls up to a version of libc++ that doesn\u0027t break DXC, as discussed offline, I\u0027m good with this.",
+      "revId": "30c6c2e9eae6e08b04401f08527171007da04540",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
