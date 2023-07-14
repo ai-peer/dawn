@@ -702,6 +702,13 @@ if(${TINT_BUILD_WGSL_WRITER})
     lang/wgsl/ast_writer/generator_impl.cc
     lang/wgsl/ast_writer/generator_impl.h
   )
+
+  if(${TINT_BUILD_IR})
+    list(APPEND TINT_LIB_SRCS
+      ir/transform/rename_conflicts_wgsl.cc
+      ir/transform/rename_conflicts_wgsl.h
+  )
+  endif()
 endif()
 
 if(${TINT_BUILD_MSL_WRITER})
@@ -1365,6 +1372,12 @@ if(TINT_BUILD_TESTS)
         lang/spirv/writer/generator_impl_ir_var_test.cc
         lang/spirv/writer/test_helper_ir.h
       )
+
+      if (${TINT_BUILD_WGSL_WRITER})
+        list(APPEND TINT_TEST_SRCS
+          ir/transform/rename_conflicts_wgsl_test.cc
+        )
+      endif()
     endif()
   endif()
 
