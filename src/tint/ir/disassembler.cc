@@ -97,7 +97,16 @@ std::string_view Disassembler::IdOf(Value* value) {
     TINT_ASSERT(IR, value);
     return value_ids_.GetOrCreate(value, [&] {
         if (auto sym = mod_.NameOf(value)) {
-            return sym.Name();
+            if (ids_.Add(sym.Name())) {
+                return sym.Name();
+            }
+            auto prefix = sym.Name() + "_";
+            for (size_t i = 1;; i++) {
+                auto name = prefix + std::to_string(i);
+                if (ids_.Add(name)) {
+                    return name;
+                }
+            }
         }
         return std::to_string(value_ids_.Count());
     });

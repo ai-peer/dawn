@@ -681,6 +681,8 @@ if(${TINT_BUILD_SPV_WRITER})
       ir/transform/builtin_polyfill_spirv.h
       ir/transform/merge_return.cc
       ir/transform/merge_return.h
+      ir/transform/rename_shadowing_decls.cc
+      ir/transform/rename_shadowing_decls.h
       ir/transform/shader_io_spirv.cc
       ir/transform/shader_io_spirv.h
       ir/transform/var_for_dynamic_index.cc

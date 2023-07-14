@@ -536,6 +536,12 @@ if (tint_build_ir) {
       ":libtint_utils_src",
     ]
 
+    if (tint_build_wgsl_writer) {
+      sources += [
+        "ir/transform/rename_shadowing_decls.cc",
+        "ir/transform/rename_shadowing_decls.h",
+      ]
+    }
     if (tint_build_spv_writer) {
       sources += [
         "ir/transform/builtin_polyfill_spirv.cc",
