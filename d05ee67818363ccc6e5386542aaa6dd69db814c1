@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6e28c47_21c1ccfd",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-14T13:58:45Z",
+      "side": 1,
+      "message": "Might be that we want to exclude these types from the SPIR-V dialect.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 0
+      },
+      "revId": "d05ee67818363ccc6e5386542aaa6dd69db814c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
