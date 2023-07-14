@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04290958_09e13068",
+        "filename": "src/dawn/tests/benchmarks/DawnObjectCreation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-14T21:39:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6e5550e_bc0c44db",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 24
+      },
+      "revId": "536032c4b579eef133bec27e0076514a9dff5c10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4745b6b_5a8b4e99",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a9bb24_93ec477e",
+        "filename": "src/dawn/tests/benchmarks/DawnObjectCreation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-14T21:39:54Z",
+      "side": 1,
+      "message": "I don\u0027t think it does. I haven\u0027t seen any failures with it, and IIUC, the entire function is ran inside a separate thread so each thread would already have its own copy of the vector.",
+      "parentUuid": "d4745b6b_5a8b4e99",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 44
+      },
+      "revId": "536032c4b579eef133bec27e0076514a9dff5c10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c293d36_017348fe",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-07-14T20:13:24Z",
       "side": 1,
       "message": "clear not necessary since it will be delete at the end of the scope?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 17
+      },
+      "revId": "536032c4b579eef133bec27e0076514a9dff5c10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ce67cb_af700959",
+        "filename": "src/dawn/tests/benchmarks/DawnObjectCreation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-14T21:39:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c293d36_017348fe",
       "range": {
         "startLine": 66,
         "startChar": 0,
