@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0842627_fa11c513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-14T18:22:33Z",
+      "side": 1,
+      "message": "Just two more comments, but I\u0027m going to +2 this so that you can submit when the comments have been addressed. Thank you very much for this excellent work!",
+      "revId": "51d68d02f3cc33faad567cfedcf1ec86f21d239b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59059cd_c5de10a9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-14T18:22:33Z",
+      "side": 1,
+      "message": "I\u0027m not sure these `bool` casts are needed. You should be able to just `return r;`.",
+      "range": {
+        "startLine": 1534,
+        "startChar": 23,
+        "endLine": 1534,
+        "endChar": 27
+      },
+      "revId": "51d68d02f3cc33faad567cfedcf1ec86f21d239b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

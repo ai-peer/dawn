@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fc29416_f1ef6c60",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-14T18:22:33Z",
+      "side": 1,
+      "message": "Looks like it should be fine to use the non-braced initializer: `std::byte(...)`:\n\nhttps://godbolt.org/z/bYjKbMrn7",
+      "parentUuid": "03993f22_8cae8c1a",
+      "range": {
+        "startLine": 1474,
+        "startChar": 24,
+        "endLine": 1474,
+        "endChar": 46
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ba5f860_467a491c",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 10
@@ -425,6 +449,30 @@
       "side": 1,
       "message": "While `GeneratorImpl::EmitBitcast` in the HLSL writer returns bool value, `GeneratorImpl::EmitBitcast` in the GLSL writer returns void. \n`GeneratorImpl::EmitTypeAndName` in the GLSL writer also returns void, and seems never fail?\nSo I think we don\u0027t need to do so for GLSL writer.",
       "parentUuid": "6e0bd92a_97f71f70",
+      "range": {
+        "startLine": 387,
+        "startChar": 20,
+        "endLine": 387,
+        "endChar": 35
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8431e3_045c3f16",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-14T18:22:33Z",
+      "side": 1,
+      "message": "Yeah, I see what you mean. Our GLSL backend should be updated to propagate errors properly, like the other backends. Okay, I guess we\u0027ll leave this as-is for now.",
+      "parentUuid": "fc01033c_db968beb",
       "range": {
         "startLine": 387,
         "startChar": 20,
