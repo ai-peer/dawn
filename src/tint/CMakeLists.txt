@@ -685,6 +685,8 @@ if(${TINT_BUILD_SPV_WRITER})
       ir/transform/handle_matrix_arithmetic.h
       ir/transform/merge_return.cc
       ir/transform/merge_return.h
+      ir/transform/rename_conflicts_wgsl.cc
+      ir/transform/rename_conflicts_wgsl.h
       ir/transform/shader_io_spirv.cc
       ir/transform/shader_io_spirv.h
       ir/transform/var_for_dynamic_index.cc
@@ -1362,6 +1364,12 @@ if(TINT_BUILD_TESTS)
         writer/spirv/ir/generator_impl_ir_var_test.cc
         writer/spirv/ir/test_helper_ir.h
       )
+
+      if (${TINT_BUILD_WGSL_WRITER})
+        list(APPEND TINT_TEST_SRCS
+          ir/transform/rename_conflicts_wgsl_test.cc
+        )
+      endif()
     endif()
   endif()
 
