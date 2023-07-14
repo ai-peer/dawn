@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6120cd03_4c236049",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-14T01:09:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "536032c4b579eef133bec27e0076514a9dff5c10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e5550e_bc0c44db",
+        "filename": "src/dawn/tests/benchmarks/DawnObjectCreation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-14T01:09:09Z",
+      "side": 1,
+      "message": "nit: is it really necessary to call this \"Dawn\" object creation? it\u0027s already in the dawn namespace, in src/dawn, in the dawn_benchmarks executable, etc",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 24
+      },
+      "revId": "536032c4b579eef133bec27e0076514a9dff5c10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
