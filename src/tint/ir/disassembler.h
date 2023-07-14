@@ -150,6 +150,7 @@ class Disassembler {
     utils::StringStream out_;
     utils::Hashmap<Block*, size_t, 32> block_ids_;
     utils::Hashmap<Value*, std::string, 32> value_ids_;
+    utils::Hashset<std::string, 32> ids_;
     uint32_t indent_size_ = 0;
     bool in_function_ = false;
 
