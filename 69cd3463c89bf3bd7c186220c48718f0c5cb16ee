@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f584ada2_fcd01be9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f71a6ea_b16dc405",
+      "range": {
+        "startLine": 1471,
+        "startChar": 7,
+        "endLine": 1471,
+        "endChar": 12
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e732699e_b68dfd23",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-07-13T15:59:20Z",
       "side": 1,
       "message": "Can we use `std::byte{...}` instead?",
+      "range": {
+        "startLine": 1474,
+        "startChar": 24,
+        "endLine": 1474,
+        "endChar": 46
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03993f22_8cae8c1a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "I am afraid that there will be an error of narrowing down the integer type (uint32 to byte) if not using static_cast",
+      "parentUuid": "e732699e_b68dfd23",
       "range": {
         "startLine": 1474,
         "startChar": 24,
@@ -128,6 +176,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ffc500_ef9db8f0",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done, thanks for the hint",
+      "parentUuid": "e3f8bf81_a9522d48",
+      "range": {
+        "startLine": 1512,
+        "startChar": 4,
+        "endLine": 1512,
+        "endChar": 24
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43a93340_26e60ba3",
@@ -141,6 +213,30 @@
       "writtenOn": "2023-07-13T15:59:20Z",
       "side": 1,
       "message": "\"Reinterprets\"",
+      "range": {
+        "startLine": 1514,
+        "startChar": 7,
+        "endLine": 1514,
+        "endChar": 20
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da8f0940_1c5cdede",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a93340_26e60ba3",
       "range": {
         "startLine": 1514,
         "startChar": 7,
@@ -174,6 +270,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e748f16a_d0ee1d8f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6134e76_d579e4fa",
+      "range": {
+        "startLine": 1531,
+        "startChar": 16,
+        "endLine": 1533,
+        "endChar": 24
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b6122b1_1b92cb3d",
@@ -197,6 +317,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d57622ca_f233ef0e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b6122b1_1b92cb3d",
+      "range": {
+        "startLine": 1574,
+        "startChar": 4,
+        "endLine": 1574,
+        "endChar": 12
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d99b1717_6bc17248",
@@ -210,6 +354,30 @@
       "writtenOn": "2023-07-13T15:59:20Z",
       "side": 1,
       "message": "nit: the two generated functions both have \"tint_bitcast\" as their name. Can we more descriptive names, like:\n\ntint_bitcast_to_f16\ntint_bitcast_from_f16\n\nThis will help readability of the generated code.",
+      "range": {
+        "startLine": 384,
+        "startChar": 49,
+        "endLine": 384,
+        "endChar": 61
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df1ba606_2fb3a326",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d99b1717_6bc17248",
       "range": {
         "startLine": 384,
         "startChar": 49,
@@ -245,6 +413,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc01033c_db968beb",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "While `GeneratorImpl::EmitBitcast` in the HLSL writer returns bool value, `GeneratorImpl::EmitBitcast` in the GLSL writer returns void. \n`GeneratorImpl::EmitTypeAndName` in the GLSL writer also returns void, and seems never fail?\nSo I think we don\u0027t need to do so for GLSL writer.",
+      "parentUuid": "6e0bd92a_97f71f70",
+      "range": {
+        "startLine": 387,
+        "startChar": 20,
+        "endLine": 387,
+        "endChar": 35
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60aee864_5a257ec8",
         "filename": "src/tint/writer/glsl/generator_impl.h",
         "patchSetId": 10
@@ -256,6 +448,30 @@
       "writtenOn": "2023-07-13T15:59:20Z",
       "side": 1,
       "message": "nit: we usually just use \"funcs\" instead of \"polyfills\" when naming these variables.",
+      "range": {
+        "startLine": 465,
+        "startChar": 55,
+        "endLine": 465,
+        "endChar": 73
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42192de1_715d48cc",
+        "filename": "src/tint/writer/glsl/generator_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60aee864_5a257ec8",
       "range": {
         "startLine": 465,
         "startChar": 55,
@@ -289,6 +505,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be334fde_5bfb0518",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1c85612_d94f7d4d",
+      "range": {
+        "startLine": 700,
+        "startChar": 7,
+        "endLine": 701,
+        "endChar": 10
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "148fe470_8b1a9b96",
@@ -312,6 +552,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df339ae_43ebe250",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "148fe470_8b1a9b96",
+      "range": {
+        "startLine": 717,
+        "startChar": 61,
+        "endLine": 717,
+        "endChar": 73
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "448b6989_e2d91763",
@@ -325,6 +589,30 @@
       "writtenOn": "2023-07-13T15:59:20Z",
       "side": 1,
       "message": "As I wrote above, you can remove this \"else\" altogether and un-nest the code just below.",
+      "range": {
+        "startLine": 780,
+        "startChar": 4,
+        "endLine": 780,
+        "endChar": 12
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c8cdb8d_c1acdbde",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-14T06:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "448b6989_e2d91763",
       "range": {
         "startLine": 780,
         "startChar": 4,
