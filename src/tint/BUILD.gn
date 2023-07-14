@@ -536,6 +536,12 @@ if (tint_build_ir) {
       ":libtint_utils_src",
     ]
 
+    if (tint_build_wgsl_writer) {
+      sources += [
+        "ir/transform/rename_conflicts_wgsl.cc",
+        "ir/transform/rename_conflicts_wgsl.h",
+      ]
+    }
     if (tint_build_spv_writer) {
       sources += [
         "ir/transform/builtin_polyfill_spirv.cc",
@@ -1912,6 +1918,10 @@ if (tint_build_unittests) {
           "ir/transform/shader_io_spirv_test.cc",
           "ir/transform/var_for_dynamic_index_test.cc",
         ]
+      }
+
+      if (tint_build_wgsl_writer) {
+        sources += [ "ir/transform/rename_conflicts_test.cc" ]
       }
     }
   }
