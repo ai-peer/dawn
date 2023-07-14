@@ -33,6 +33,24 @@
       "message": "nit: this is in the global namespace - perhaps put it in one like ::dawn::detail ? or ::dawn::platform::detail ?",
       "revId": "72ef9dec440686c3062c98b354c68491abd78c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e71fd1_1dfe0e87",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-14T15:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2540bbc9_b611f47a",
+      "revId": "72ef9dec440686c3062c98b354c68491abd78c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
