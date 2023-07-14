@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a58f90c8_c75d8a96",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-14T14:07:54Z",
+      "side": 1,
+      "message": "suggest increasing to 8",
+      "range": {
+        "startLine": 263,
+        "startChar": 30,
+        "endLine": 263,
+        "endChar": 31
+      },
+      "revId": "e7b4b94ff513653dbcba085a917a90f962ddb189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c5b152c_98a8d597",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-14T14:07:54Z",
+      "side": 1,
+      "message": "These should eventually live in a common / the root SPIR-V directory.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 6
+      },
+      "revId": "e7b4b94ff513653dbcba085a917a90f962ddb189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02439dce_9b231869",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-14T14:07:54Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right. Shouldn\u0027t it be `f32`?",
+      "range": {
+        "startLine": 605,
+        "startChar": 7,
+        "endLine": 605,
+        "endChar": 16
+      },
+      "revId": "e7b4b94ff513653dbcba085a917a90f962ddb189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
