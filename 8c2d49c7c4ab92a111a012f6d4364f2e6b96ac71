@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19a446b3_8908d4ef",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-07-14T01:11:09Z",
+      "side": 1,
+      "message": "Would we be able to replace this entirely? Having kHandleType be statically set to OPAQUE_FD seems error-prone if we\u0027re actually on a system where it could be one or the other.\n\nMaybe we can replace kHandleType with GetExternalHandleType?\n\n```\n#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)\nstatic VkExternalSemaphoreHandleTypeFlagBits GetExternalHandleType(int) {\n    return VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR;\n}\n#else  // (if this is even used)\nstatic VkExternalSemaphoreHandleTypeFlagBits GetExternalHandleType(int) {\n    return VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;\n}\n#endif  // DAWN_PLATFORM_IS(LINUX_DESKTOP)\n```\n\n... But I don\u0027t know if we still need kHandleType distinct from GetExternalHandleType in other places. It does seem to still be used, but I don\u0027t know if those are correct. If they are correct, then instead I think we should rename kHandleType to be more specific about when it is used, if possible.",
+      "revId": "8c2d49c7c4ab92a111a012f6d4364f2e6b96ac71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
