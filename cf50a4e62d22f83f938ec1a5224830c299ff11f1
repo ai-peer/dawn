@@ -16,6 +16,23 @@
       "message": "I think this looks good but I don\u0027t remember the context on how it integrates with Chrome. May require review from Austin",
       "revId": "cf50a4e62d22f83f938ec1a5224830c299ff11f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea5eb79e_b4692e0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-17T21:40:35Z",
+      "side": 1,
+      "message": "LGTM but we should add a test in src/dawn/tests/white_box/VulkanImageWrappingTests.cpp that you can use multiple separate textures in one submit, and then wait on both their semaphores",
+      "revId": "cf50a4e62d22f83f938ec1a5224830c299ff11f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
