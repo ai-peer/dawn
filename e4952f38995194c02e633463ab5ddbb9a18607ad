@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f1a6a8_099cdd5b",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T13:23:43Z",
+      "side": 0,
+      "message": "Why is this removed, if there is a variable declared in the initializer will it needs to be added to the scope so it gets removed correctly at the end of the funcion, no?",
+      "revId": "e4952f38995194c02e633463ab5ddbb9a18607ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
