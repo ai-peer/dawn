@@ -196,6 +196,9 @@ namespace dawn::wire::client {
                 , std::make_pair(&{{Prefix}}ProcTable::{{as_varName(type.name, method.name)}}, Client{{as_MethodSuffix(type.name, method.name)}})
             {% endfor %}
         {% endfor %}
+        {% for type in by_category["structure"] if type.has_free_members_function %}
+            , std::make_pair(&{{Prefix}}ProcTable::{{as_varName(type.name)}}FreeMembers, Client{{as_MethodSuffix(type.name, Name("free members"))}})
+        {% endfor %}
     );
 
     const {{Prefix}}ProcTable& GetProcs() {

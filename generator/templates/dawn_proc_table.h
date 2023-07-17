@@ -30,6 +30,11 @@ typedef struct {{Prefix}}ProcTable {
         {% endfor %}
 
     {% endfor %}
+
+    {% for type in by_category["structure"] if type.has_free_members_function %}
+        {{as_cProc(type.name, Name("free members"))}} {{as_varName(type.name, Name("free members"))}};
+    {% endfor %}
+
 } {{Prefix}}ProcTable;
 
 #endif  // DAWN_{{Prefix.upper()}}_PROC_TABLE_H_
