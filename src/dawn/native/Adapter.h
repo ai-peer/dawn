@@ -78,6 +78,8 @@ class AdapterBase : public RefCounted {
 std::vector<Ref<AdapterBase>> SortAdapters(std::vector<Ref<AdapterBase>> adapters,
                                            const RequestAdapterOptions* options);
 
+void APIAdapterPropertiesFreeMembers(WGPUAdapterProperties);
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_ADAPTER_H_

@@ -61,3 +61,10 @@ void {{prefix}}ProcSetProcs(const {{Prefix}}ProcTable* procs_) {
     {% endfor %}
 
 {% endfor %}
+
+// Out struct free functions
+{% for type in by_category["structure"] if type.has_free_members_function %}
+    void {{as_cMethod(type.name, Name("free members"))}}({{as_cType(type.name)}} {{as_varName(type.name)}}) {
+        procs.{{as_varName(type.name, Name("free members"))}}({{as_varName(type.name)}});
+    }
+{% endfor %}

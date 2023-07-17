@@ -11,6 +11,9 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
+
+#include <utility>
+
 {% set api = metadata.api.lower() %}
 {% if 'dawn' in enabled_tags %}
     #include "dawn/{{api}}_cpp.h"
@@ -98,6 +101,50 @@ namespace {{metadata.namespace}} {
             reinterpret_cast<{{decorate("", as_cType(arg.type.name), arg)}}>({{as_varName(arg.name)}})
         {%- endif -%}
     {%- endmacro -%}
+
+    {% for type in by_category["structure"] if type.has_free_members_function %}
+        // {{as_cppType(type.name)}}
+        {{as_cppType(type.name)}}::~{{as_cppType(type.name)}}() {
+            if (
+                {%- for member in type.members if member.annotation != 'value' %}
+                    {% if not loop.first %} || {% endif -%}
+                    this->{{member.name.camelCase()}} != nullptr
+                {%- endfor -%}
+            ) {
+                {{as_cMethod(type.name, Name("free members"))}}(
+                    *reinterpret_cast<{{as_cType(type.name)}}*>(this));
+                {% for member in type.members if member.annotation != 'value' %}
+                    this->{{member.name.camelCase()}} = nullptr;
+                {% endfor %}
+            }
+        }
+
+        {{as_cppType(type.name)}}::{{as_cppType(type.name)}}({{as_cppType(type.name)}}&& rhs)
+        : {% for member in type.members %}
+            {%- set memberName = member.name.camelCase() -%}
+            {{memberName}}(rhs.{{memberName}}){% if not loop.last %},{{"\n      "}}{% endif %}
+        {% endfor -%}
+        {
+            {% for member in type.members %}
+                rhs.{{member.name.camelCase()}} = {};
+            {% endfor %}
+        }
+
+        {{as_cppType(type.name)}}& {{as_cppType(type.name)}}::operator=({{as_cppType(type.name)}}&& rhs) {
+            if (&rhs == this) {
+                return *this;
+            }
+            this->~{{as_cppType(type.name)}}();
+            {% for member in type.members %}
+                this->{{member.name.camelCase()}} = std::move(rhs.{{member.name.camelCase()}});
+            {% endfor %}
+            {% for member in type.members %}
+                rhs.{{member.name.camelCase()}} = {};
+            {% endfor %}
+            return *this;
+        }
+
+    {% endfor %}
 
     {% for type in by_category["object"] %}
         {% set CppType = as_cppType(type.name) %}
