@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7aef14c_4127539e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-07-17T21:36:00Z",
+      "side": 1,
+      "message": "I think this looks good but I don\u0027t remember the context on how it integrates with Chrome. May require review from Austin",
+      "revId": "cf50a4e62d22f83f938ec1a5224830c299ff11f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
