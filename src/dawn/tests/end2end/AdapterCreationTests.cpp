@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include <memory>
+#include <string>
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
@@ -244,6 +245,69 @@ TEST_F(AdapterCreationTest, GetInstance) {
     EXPECT_EQ(adapter != nullptr, anyAdapterAvailable);
 
     EXPECT_EQ(adapter.GetInstance().Get(), instance.Get());
+}
+
+// Test that calling AdapterGetProperties returns separate allocations for strings.
+// However, the string contents are equivalent.
+TEST_F(AdapterCreationTest, PropertiesUnique) {
+    wgpu::RequestAdapterOptions options = {};
+
+    MockCallback<WGPURequestAdapterCallback> cb;
+
+    WGPUAdapter cAdapter = nullptr;
+    EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this))
+        .WillOnce(SaveArg<1>(&cAdapter));
+    instance.RequestAdapter(&options, cb.Callback(), cb.MakeUserdata(this));
+
+    wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
+    EXPECT_EQ(adapter != nullptr, anyAdapterAvailable);
+    if (!adapter) {
+        return;
+    }
+
+    wgpu::AdapterProperties properties1;
+    wgpu::AdapterProperties properties2;
+    adapter.GetProperties(&properties1);
+    adapter.GetProperties(&properties2);
+
+    EXPECT_NE(properties1.vendorName, properties2.vendorName);
+    EXPECT_STREQ(properties1.vendorName, properties2.vendorName);
+    EXPECT_NE(properties1.architecture, properties2.architecture);
+    EXPECT_STREQ(properties1.architecture, properties2.architecture);
+    EXPECT_NE(properties1.name, properties2.name);
+    EXPECT_STREQ(properties1.name, properties2.name);
+    EXPECT_NE(properties1.driverDescription, properties2.driverDescription);
+    EXPECT_STREQ(properties1.driverDescription, properties2.driverDescription);
+}
+
+// Test that the adapter properties can outlive the adapter.
+TEST_F(AdapterCreationTest, PropertiesOutliveAdapter) {
+    wgpu::RequestAdapterOptions options = {};
+
+    MockCallback<WGPURequestAdapterCallback> cb;
+
+    WGPUAdapter cAdapter = nullptr;
+    EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this))
+        .WillOnce(SaveArg<1>(&cAdapter));
+    instance.RequestAdapter(&options, cb.Callback(), cb.MakeUserdata(this));
+
+    wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
+    EXPECT_EQ(adapter != nullptr, anyAdapterAvailable);
+    if (!adapter) {
+        return;
+    }
+
+    wgpu::AdapterProperties properties;
+    adapter.GetProperties(&properties);
+
+    // Release the adapter.
+    adapter = nullptr;
+
+    // Copy the properties to std::string, this should not be a use-after-free.
+    std::string vendorName = properties.vendorName;
+    std::string architecture = properties.architecture;
+    std::string name = properties.name;
+    std::string driverDescription = properties.driverDescription;
 }
 
 }  // anonymous namespace

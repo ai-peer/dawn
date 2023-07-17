@@ -99,6 +99,38 @@ namespace {{metadata.namespace}} {
         {%- endif -%}
     {%- endmacro -%}
 
+    {% for type in by_category["structure"] if type.has_free_members_function %}
+        // {{as_cppType(type.name)}}
+        {{as_cppType(type.name)}}::~{{as_cppType(type.name)}}() {
+            {{as_cMethod(type.name, Name("free members"))}}(
+                *reinterpret_cast<{{as_cType(type.name)}}*>(this));
+        }
+
+        {{as_cppType(type.name)}}::{{as_cppType(type.name)}}({{as_cppType(type.name)}}&& rhs)
+        : {% for member in type.members %}
+            {% set memberName = member.name.camelCase() %}
+            {{memberName}}(rhs.{{memberName}}){% if not loop.last %}, {% endif %}
+        {% endfor %}
+        {
+            {% for member in type.members %}
+                rhs.{{member.name.camelCase()}} = {};
+            {% endfor %}
+        }
+
+        {{as_cppType(type.name)}}& {{as_cppType(type.name)}}::operator=({{as_cppType(type.name)}}&& rhs) {
+            if (&rhs == this) {
+                return *this;
+            }
+            {% for member in type.members %}
+                {% set memberName = member.name.camelCase() %}
+                this->{{memberName}} = rhs.{{memberName}};
+                rhs.{{memberName}} = {};
+            {% endfor %}
+            return *this;
+        }
+
+    {% endfor %}
+
     {% for type in by_category["object"] %}
         {% set CppType = as_cppType(type.name) %}
         {% set CType = as_cType(type.name) %}

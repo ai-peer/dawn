@@ -287,7 +287,7 @@ class DawnTestBase {
     struct PrintToStringParamName {
         explicit PrintToStringParamName(const char* test);
         std::string SanitizeParamName(std::string paramName,
-                                      const wgpu::AdapterProperties& properties,
+                                      const TestAdapterProperties& properties,
                                       size_t index) const;
 
         template <class ParamType>
@@ -581,7 +581,7 @@ class DawnTestBase {
 
     virtual wgpu::RequiredLimits GetRequiredLimits(const wgpu::SupportedLimits&);
 
-    const wgpu::AdapterProperties& GetAdapterProperties() const;
+    const TestAdapterProperties& GetAdapterProperties() const;
 
     wgpu::SupportedLimits GetAdapterLimits();
     wgpu::SupportedLimits GetSupportedLimits();

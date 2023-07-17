@@ -178,6 +178,12 @@ extern "C" {
     {% endfor %}
 
 {% endfor %}
+
+// Out struct free functions
+{% for type in by_category["structure"] if type.has_free_members_function %}
+    typedef void (*{{as_cProc(type.name, Name("free members"))}})({{as_cType(type.name)}} {{as_varName(type.name)}}) {{API}}_FUNCTION_ATTRIBUTE;
+{% endfor %}
+
 #endif  // !defined({{API}}_SKIP_PROCS)
 
 #if !defined({{API}}_SKIP_DECLARATIONS)
@@ -204,6 +210,12 @@ extern "C" {
     {% endfor %}
 
 {% endfor %}
+
+// Out struct free functions
+{% for type in by_category["structure"] if type.has_free_members_function %}
+    {{API}}_EXPORT void {{as_cMethod(type.name, Name("free members"))}}({{as_cType(type.name)}} {{as_varName(type.name)}}) {{API}}_FUNCTION_ATTRIBUTE;
+{% endfor %}
+
 #endif  // !defined({{API}}_SKIP_DECLARATIONS)
 
 #ifdef __cplusplus

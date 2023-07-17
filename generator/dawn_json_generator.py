@@ -273,6 +273,15 @@ class StructureType(Record, Type):
     def output(self):
         return self.chained == "out" or self.extensible == "out"
 
+    @property
+    def has_free_members_function(self):
+        if not self.output:
+            return False
+        for m in self.members:
+            if m.annotation != 'value':
+                return True
+        return False
+
 
 class ConstantDefinition():
     def __init__(self, is_enabled, name, json_data):
