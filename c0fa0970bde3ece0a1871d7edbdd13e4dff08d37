@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a37d88_da2dc4a1",
+        "filename": "src/tint/ir/transform/rename_conflicts_wgsl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T13:42:50Z",
+      "side": 1,
+      "message": "Why remove from the scope if there is  shadow? Don\u0027t we want to keep the shadow in the scope in case there is further shadowing?",
+      "revId": "c0fa0970bde3ece0a1871d7edbdd13e4dff08d37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
