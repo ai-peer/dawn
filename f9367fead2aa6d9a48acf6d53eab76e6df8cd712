@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc2013c_38f6b26e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-17T09:35:42Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am committing this CL",
+      "revId": "f9367fead2aa6d9a48acf6d53eab76e6df8cd712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

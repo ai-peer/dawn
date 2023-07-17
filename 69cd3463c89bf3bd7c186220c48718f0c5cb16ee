@@ -153,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa276805_1b415cfe",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-07-17T09:35:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fc29416_f1ef6c60",
+      "range": {
+        "startLine": 1474,
+        "startChar": 24,
+        "endLine": 1474,
+        "endChar": 46
+      },
+      "revId": "69cd3463c89bf3bd7c186220c48718f0c5cb16ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ba5f860_467a491c",
