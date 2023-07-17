@@ -33,6 +33,24 @@
       "message": "This is more then just `Find`. It\u0027s fixing constructs and finding binary instructions.",
       "revId": "1678385509cb2ff7fefa9971144635076ba592a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bba734a_43fcbe52",
+        "filename": "src/tint/ir/transform/expand_implicit_splats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-17T17:09:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91d49f5d_1c87888d",
+      "revId": "1678385509cb2ff7fefa9971144635076ba592a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
