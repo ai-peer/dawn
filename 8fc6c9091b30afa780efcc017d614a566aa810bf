@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e09b18b7_bff6aa55",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-17T12:57:34Z",
+      "side": 1,
+      "message": "This [test case](https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/tests/end2end/NonzeroTextureCreationTests.cpp;drc\u003d7a6604d0564b56cce77b72ae759b3773a756423c;l\u003d244) assumes this.\nAs a result, we need to clear with value 0x0101 for wgpu::TextureFormat::RGBA16Uint, , and 0x01010101 for wgpu::TextureFormat::RGBA32Uint.",
+      "parentUuid": "6f837ae2_26c403d3",
+      "range": {
+        "startLine": 562,
+        "startChar": 40,
+        "endLine": 562,
+        "endChar": 76
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d2cf446_2d8668ef",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -77,6 +101,30 @@
       "writtenOn": "2023-07-17T11:48:53Z",
       "side": 1,
       "message": "This is not easy to read. Do you mean\n`*reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x01010101;`?",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 25
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16b2522c_fc78a130",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-17T12:57:34Z",
+      "side": 1,
+      "message": "Yes. Also could be 0x0101.",
+      "parentUuid": "7d2cf446_2d8668ef",
       "range": {
         "startLine": 563,
         "startChar": 0,
