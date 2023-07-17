@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e347d4db_926272cb",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-17T18:38:51Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "9553175a_07e39502",
+      "range": {
+        "startLine": 112,
+        "startChar": 44,
+        "endLine": 112,
+        "endChar": 53
+      },
+      "revId": "f48516a8870cd7cbd91dca8462895ec906f409a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1aa8f04f_6ed76e5e",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-07-14T01:42:02Z",
       "side": 1,
       "message": "I\u0027m realizing that this is going to capture the time for both successful and unsuccessful creations. Invalid programs could skew results because we\u0027ll get a bunch of times for CreateShaderModuleUS that fail to parse and never hit the backend. \n\nMaybe for this one we have separate metrics for CreateShaderModuleImpl and ValidateAndParseShaderModule ?",
+      "revId": "f48516a8870cd7cbd91dca8462895ec906f409a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1321007a_15270df6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-17T18:38:51Z",
+      "side": 1,
+      "message": "As discussed offline, now scoped to CreateShaderModuleImpl, and we log the time even if it fails, on the assumption that development-time events will be dwarfed by real-world usage.",
+      "parentUuid": "1aa8f04f_6ed76e5e",
       "revId": "f48516a8870cd7cbd91dca8462895ec906f409a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a322a44_bdbf25da",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-17T18:38:51Z",
+      "side": 1,
+      "message": "As discussed offline, will leave as-is.",
+      "parentUuid": "3e1bd27d_e1dec8d9",
+      "range": {
+        "startLine": 1062,
+        "startChar": 12,
+        "endLine": 1063,
+        "endChar": 55
+      },
+      "revId": "f48516a8870cd7cbd91dca8462895ec906f409a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6697ca10_c56b5f84",
@@ -77,6 +143,24 @@
       "writtenOn": "2023-07-14T01:42:02Z",
       "side": 1,
       "message": "same here, we\u0027re timing both success and failure. Perhaps we should log them separately, or only log the successful ones. The time of success is the time that actually impacts real applications.\n\nThe time of failures is questionably useful - maybe for identifying if the driver is choking on some input, and then giving up.\n\nIf we do add some of these if success, log, otherwise don\u0027t - then it starts becoming a lot more valuable to have a wrapper around ComputePipelineBase::Initialize that does that error checking and histogram logging for you.",
+      "revId": "f48516a8870cd7cbd91dca8462895ec906f409a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbdaa5de_4b25d5cd",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1625,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-17T18:38:51Z",
+      "side": 1,
+      "message": "As discussed offline, will leave as-is.",
+      "parentUuid": "6697ca10_c56b5f84",
       "revId": "f48516a8870cd7cbd91dca8462895ec906f409a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
