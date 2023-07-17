@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8f23ed5_e279c291",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-17T17:10:08Z",
+      "side": 1,
+      "message": "Yeah, the builtin struct stuff is really just a part of the intrinsic table, which currently lives in the resolver subdirectory. When we do the intrinsic table refactor that we\u0027ve been talking about then it\u0027ll move out to wherever the intrinsic table stuff lives.",
+      "parentUuid": "c95be7ac_b01651ed",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7f2048c_a084e409",
         "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-17T15:13:06Z",
       "side": 1,
       "message": "What happens if this returns nullptr?",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddc1d96c_f9ce3362",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-17T17:10:08Z",
+      "side": 1,
+      "message": "You\u0027ll get an `undef` argument to the intrinsic, which the validator will reject. I\u0027ve added a `TINT_ASSERT` as well.",
+      "parentUuid": "f7f2048c_a084e409",
       "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0cb4e2e_13bf5010",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-17T17:10:08Z",
+      "side": 1,
+      "message": "`call` is assigned in all switch cases except `default`, which returns from this function.",
+      "parentUuid": "e4f8ff8c_f2487596",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72ee57a1_852df754",
         "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2023-07-17T15:13:06Z",
       "side": 1,
       "message": "Why did this change?",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb1bdbc_28eee83e",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-17T17:10:08Z",
+      "side": 1,
+      "message": "It was wrong before - we were emitting the original type instead of the de-duped type. This just happened to work for the other de-duped types.",
+      "parentUuid": "72ee57a1_852df754",
       "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
