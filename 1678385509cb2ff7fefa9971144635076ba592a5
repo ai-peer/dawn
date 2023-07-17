@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b99d44b1_65fb14cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T13:57:14Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "1678385509cb2ff7fefa9971144635076ba592a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91d49f5d_1c87888d",
+        "filename": "src/tint/ir/transform/expand_implicit_splats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T13:57:14Z",
+      "side": 1,
+      "message": "This is more then just `Find`. It\u0027s fixing constructs and finding binary instructions.",
+      "revId": "1678385509cb2ff7fefa9971144635076ba592a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
