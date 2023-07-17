@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9efcf15a_613800f2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-17T16:46:26Z",
+      "side": 1,
+      "message": "I think it should be reasonable to make Texture::Copy handle blocks. You can look at the texture format and get the block size. uncompressed textures have a block size of 1.",
+      "parentUuid": "a54a02b7_4d905ded",
+      "range": {
+        "startLine": 446,
+        "startChar": 15,
+        "endLine": 446,
+        "endChar": 20
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f837ae2_26c403d3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
