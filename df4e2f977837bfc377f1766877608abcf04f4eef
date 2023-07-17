@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c95be7ac_b01651ed",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T15:13:06Z",
+      "side": 1,
+      "message": "This feels off to me, I don\u0027t think the IR should be able to see the resolver?",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f2048c_a084e409",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T15:13:06Z",
+      "side": 1,
+      "message": "What happens if this returns nullptr?",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f8ff8c_f2487596",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T15:13:06Z",
+      "side": 1,
+      "message": "what happens if call is nullptr?",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72ee57a1_852df754",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T15:13:06Z",
+      "side": 1,
+      "message": "Why did this change?",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
