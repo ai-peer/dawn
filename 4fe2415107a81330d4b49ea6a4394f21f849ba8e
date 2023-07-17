@@ -33,6 +33,24 @@
       "message": "Should there be And and Or tests for i32 and u32? or are they elsewhere in the file?",
       "revId": "4fe2415107a81330d4b49ea6a4394f21f849ba8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ef72fc_05b4f2b1",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_binary_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-17T14:46:12Z",
+      "side": 1,
+      "message": "They\u0027re in with the `Arithmetic_Bitwise` test case (see line 90). TBH I probably should\u0027ve put the bool cases there too.",
+      "parentUuid": "82c68268_66184dbf",
+      "revId": "4fe2415107a81330d4b49ea6a4394f21f849ba8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
