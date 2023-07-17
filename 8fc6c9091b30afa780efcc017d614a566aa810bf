@@ -20,6 +20,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "344adc8b_f7dfacfc",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-17T16:59:42Z",
+      "side": 1,
+      "message": "nit: this could be an `enum class Kind {Normal, Staging, Interim}`, or a list of flags `enum class Flags {Staging, NoLazyClear}` (using [this](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Subresource.h;l\u003d42?q\u003dSubresource.h) to turn the enum into a nice bitmask)",
+      "range": {
+        "startLine": 329,
+        "startChar": 39,
+        "endLine": 329,
+        "endChar": 83
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5638ea6a_14f92f8e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-17T16:59:42Z",
+      "side": 1,
+      "message": "The way this code is reentrant is a bit difficult to follow . What do you think of doing the following?\n\n 1. Split Clear() into per-case helper functions:\n \n```\nClear() // calls into\nClearCompressed(TextureBase::ClearValue) // What we care about here\nClearNonRenderableColor(float4 clearColor); // Or ClearNonRenderable(ClearValue) if it also needs to handle depth-stencil.\nClearRenderable(ClearValue)\n\nstruct ClearValue {\n   float4 clearColor;\n   float clearDepth;\n   uint clearStencil;\n}\n```\n\n 2. Interim becomes just an \"Internal\" flag which means we don\u0027t need to do any lazy clearing. (and we could combine Staging and Internal into a single bitmask, there are likely to be more flags in the future)\n 3. Implement ClearCompressed as something like\n \n```\nRef\u003cTexture\u003e interimTexture \u003d CreateInternal(desc);\nClearValue clearValue \u003d { { 0x01010101, ... }, ... };\ninterimTexture-\u003eClearRenderable(clearColor);\n\n// The copy there either with the current code, but we could also use Texture::Copy.\n```",
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c25da56e_0329862a",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
