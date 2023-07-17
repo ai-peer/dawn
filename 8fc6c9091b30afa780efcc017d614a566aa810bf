@@ -16,6 +16,75 @@
       "message": "PTAL",
       "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c25da56e_0329862a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-17T11:48:53Z",
+      "side": 1,
+      "message": "Is it possible to use Texture::Copy() or share some code with it?",
+      "range": {
+        "startLine": 446,
+        "startChar": 15,
+        "endLine": 446,
+        "endChar": 20
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f837ae2_26c403d3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-17T11:48:53Z",
+      "side": 1,
+      "message": "nit: why? could you please explain it?",
+      "range": {
+        "startLine": 562,
+        "startChar": 40,
+        "endLine": 562,
+        "endChar": 76
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2cf446_2d8668ef",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-17T11:48:53Z",
+      "side": 1,
+      "message": "This is not easy to read. Do you mean\n`*reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x01010101;`?",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 25
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
