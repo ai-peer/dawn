@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05f23d6d_59ab3423",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-17T16:27:30Z",
+      "side": 1,
+      "message": "nit: slight preference for listing files instead of globbing because glob is less consistent in general and doesn\u0027t know when to rerun cmake because a new file was added.",
+      "revId": "26cbe76b2e4141e948e078a257799ff8a641d9fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb66274_c575ff1b",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-17T16:27:30Z",
+      "side": 1,
+      "message": "We could have a macro/function for this since it is always the same. That macro could even copy headers automatically based on the target\u0027s source list, if the headers are in \u003cgen\u003e/include or include/",
+      "revId": "26cbe76b2e4141e948e078a257799ff8a641d9fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d675e49_f9387b39",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-17T16:27:30Z",
+      "side": 1,
+      "message": "I think only libtint should need to be installed, the rest of the targets aren\u0027t part of Dawn\u0027s dependencies. Also no need to export its headers.",
+      "revId": "26cbe76b2e4141e948e078a257799ff8a641d9fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
