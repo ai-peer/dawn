@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69fc60bb_b083b9a5",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T18:04:57Z",
+      "side": 1,
+      "message": "is builtin_structs generated from the table? Can we move it to builtin/ ahead of this cl landing to keep the layering making sense?  (I\u0027m actually surprised GN is allowing this include, does `gn check` pass?)",
+      "parentUuid": "c8f23ed5_e279c291",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7f2048c_a084e409",
         "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "You\u0027ll get an `undef` argument to the intrinsic, which the validator will reject. I\u0027ve added a `TINT_ASSERT` as well.",
       "parentUuid": "f7f2048c_a084e409",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d525c38_ff1f2c5b",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T18:04:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ddc1d96c_f9ce3362",
       "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -106,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69d1926_eb24a45e",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T18:04:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f0cb4e2e_13bf5010",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72ee57a1_852df754",
@@ -137,6 +191,24 @@
       "side": 1,
       "message": "It was wrong before - we were emitting the original type instead of the de-duped type. This just happened to work for the other de-duped types.",
       "parentUuid": "72ee57a1_852df754",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225a73e8_9e339230",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T18:04:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8fb1bdbc_28eee83e",
       "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
