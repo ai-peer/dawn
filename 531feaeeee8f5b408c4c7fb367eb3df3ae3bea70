@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf67e8eb_97c7177a",
+        "filename": "src/tint/writer/spirv/ir/generator_impl_ir_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-17T14:57:02Z",
+      "side": 1,
+      "message": "Maybe add a vector factor test to show it doesn\u0027t expand? The Builtin_3arg just tests it is a Mix, but not the params.",
+      "revId": "531feaeeee8f5b408c4c7fb367eb3df3ae3bea70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
