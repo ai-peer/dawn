@@ -16,6 +16,24 @@
       "message": "Why remove from the scope if there is  shadow? Don\u0027t we want to keep the shadow in the scope in case there is further shadowing?",
       "revId": "c0fa0970bde3ece0a1871d7edbdd13e4dff08d37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87c662e8_5482ad6a",
+        "filename": "src/tint/ir/transform/rename_conflicts_wgsl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-18T14:15:20Z",
+      "side": 1,
+      "message": "Because it\u0027s renamed with a new, unique symbol. There\u0027s no possibility it can shadow.",
+      "parentUuid": "70a37d88_da2dc4a1",
+      "revId": "c0fa0970bde3ece0a1871d7edbdd13e4dff08d37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
