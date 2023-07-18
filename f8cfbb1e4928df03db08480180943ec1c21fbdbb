@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87f2bf03_e18c715a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T08:31:31Z",
+      "side": 1,
+      "message": "The idea of the restructuring was in part to move this logic to the ClearCompressed so we can just tell ClearRenderable(0x0101010101) so there is less special casing in this function.",
+      "revId": "f8cfbb1e4928df03db08480180943ec1c21fbdbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
