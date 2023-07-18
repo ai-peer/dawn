@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4861a847_0eebe085",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-18T12:37:39Z",
+      "side": 1,
+      "message": "LGTM with Corentin and Austin\u0027s comments addressed.",
+      "revId": "f8cfbb1e4928df03db08480180943ec1c21fbdbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dbbb3356_5b88f631",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 7
