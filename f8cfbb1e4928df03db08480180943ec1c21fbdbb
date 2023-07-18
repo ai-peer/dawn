@@ -75,6 +75,29 @@
       "parentUuid": "30e573c4_54c1fe20",
       "revId": "f8cfbb1e4928df03db08480180943ec1c21fbdbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ca156d4_d6224202",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T12:28:32Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 485,
+        "startChar": 1,
+        "endLine": 496,
+        "endChar": 52
+      },
+      "revId": "f8cfbb1e4928df03db08480180943ec1c21fbdbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
