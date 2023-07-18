@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1cdc5d3_cdab25af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-18T14:25:26Z",
+      "side": 1,
+      "message": "There are a bunch of places where it pushes duplicate scopes (like, Switch pushes a scope and then the case statements also push scopes, so the switch scope isn\u0027t used at all). Do we care that this is pushing a bunch of unused scopes now?",
+      "revId": "7d64e45f2964505e97cf982a4d33b0d38ac17da0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71a18b9_9ad0cc67",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-18T14:25:26Z",
+      "side": 1,
+      "message": "Does this need to be removed?",
+      "revId": "7d64e45f2964505e97cf982a4d33b0d38ac17da0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
