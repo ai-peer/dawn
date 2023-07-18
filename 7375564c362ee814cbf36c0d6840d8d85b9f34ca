@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db48483_0478623e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-18T16:01:00Z",
+      "side": 1,
+      "message": "I do wonder if we should just not have these in the IR, but it\u0027s easy to support them for now.",
+      "revId": "7375564c362ee814cbf36c0d6840d8d85b9f34ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
