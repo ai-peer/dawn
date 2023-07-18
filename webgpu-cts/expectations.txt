@@ -68,7 +68,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-06-28 09:02:36PM
+# Last rolled: 2023-07-18 07:29:17AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -579,46 +579,7 @@ crbug.com/dawn/1899 [ qualcomm ] webgpu:api,operation,command_buffer,queries,occ
 ################################################################################
 # Atomics tests fail with workgroupSize=2 on Android Arm (Pixel 6)
 ################################################################################
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="u32" [ Failure ]
+crbug.com/dawn/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,* [ Failure ]
 
 ################################################################################
 # matCx3 and array_of_matCx3...use_struct=2 causes device lost on Android Qualcomm (Pixel 4)
@@ -646,7 +607,6 @@ crbug.com/dawn/1901 [ android-t ] webgpu:shader,execution,zero_init:compute,zero
 ################################################################################
 crbug.com/dawn/1903 [ android-r dawn-backend-validation qualcomm ] webgpu:api,validation,capability_checks,limits,maxInterStageShaderComponents:* [ Failure ]
 crbug.com/dawn/1903 [ android-r dawn-no-backend-validation qualcomm ] webgpu:api,validation,capability_checks,limits,maxInterStageShaderComponents:* [ Failure ]
-
 
 ################################################################################
 # untriaged Android failures
@@ -950,3 +910,16 @@ crbug.com/dawn/0000 [ ventura ] webgpu:web_platform,copyToTexture,canvas:copy_co
 crbug.com/dawn/0000 [ intel-0x9bc5 ubuntu webgpu-adapter-default ] webgpu:web_platform,copyToTexture,video:* [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation no-asan no-clang-coverage nvidia release-x64 target-cpu-64 webgpu-adapter-default win ] webgpu:web_platform,canvas,configure:format:canvasType="onscreen";format="rg16sint" [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:canvasType="offscreen";srcAndDstInSameGPUDevice=false;dstColorFormat="rgba8unorm";srcAlphaMode="premultiplied";dstAlphaMode="premultiplied";srcDoFlipYDuringCopy=true [ Failure ]
+
+crbug.com/dawn/0000 [ mac ] webgpu:shader,validation,expression,call,builtin,abs:values:stage="constant";type={"kind":"abstract-float","_size":8};* [ Failure ]
+crbug.com/dawn/0000 [ win ] webgpu:shader,validation,expression,call,builtin,abs:values:stage="constant";type={"kind":"abstract-float","_size":8};* [ Failure ]
+crbug.com/dawn/0000 [ linux ] webgpu:shader,validation,expression,call,builtin,abs:values:stage="constant";type={"kind":"abstract-float","_size":8};* [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_basic:workgroupSize=1;dispatchSize=16;mapId="remap";scalarType="u32" [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_basic:workgroupSize=1;dispatchSize=4;mapId="remap";scalarType="u32" [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_basic:workgroupSize=1;dispatchSize=8;mapId="remap";scalarType="u32" [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange:exchange_storage_basic:workgroupSize=1;dispatchSize=16;mapId="remap";scalarType="u32" [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange:exchange_storage_basic:workgroupSize=1;dispatchSize=4;mapId="remap";scalarType="u32" [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange:exchange_storage_basic:workgroupSize=1;dispatchSize=8;mapId="remap";scalarType="u32" [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,clamp:f32:inputSource="const";vectorize=3 [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="matrix";shadowingMode="module-scope";isAtomic=false [ Failure ]
+crbug.com/dawn/0000 [ android-r ] webgpu:shader,validation,expression,call,builtin,abs:values:stage="constant";type={"kind":"abstract-float","_size":8};* [ Failure ]
