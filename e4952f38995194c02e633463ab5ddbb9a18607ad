@@ -16,6 +16,24 @@
       "message": "Why is this removed, if there is a variable declared in the initializer will it needs to be added to the scope so it gets removed correctly at the end of the funcion, no?",
       "revId": "e4952f38995194c02e633463ab5ddbb9a18607ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be220b54_4e1a22b2",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-18T14:14:05Z",
+      "side": 0,
+      "message": "See the other comment.",
+      "parentUuid": "04f1a6a8_099cdd5b",
+      "revId": "e4952f38995194c02e633463ab5ddbb9a18607ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d519518_d2ea4190",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-18T14:14:05Z",
+      "side": 1,
+      "message": "It is. `ControlStackScope` now also pushes `scopes_`, as it inherits from it.",
+      "parentUuid": "ae064455_2547f434",
+      "revId": "46fdaea1610f67160311d8670de9a1af6eb50793",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12bae165_411c573e",
