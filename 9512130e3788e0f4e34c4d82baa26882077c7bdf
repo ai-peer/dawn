@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccae6879_451439b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-07-18T16:05:32Z",
+      "side": 1,
+      "message": "With this, we should be able to build DXC in Chrome (haven\u0027t tried it yet, but I will)",
+      "revId": "9512130e3788e0f4e34c4d82baa26882077c7bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
