@@ -23,14 +23,9 @@
 #include <vector>
 
 #include "dawn/native/vulkan/DeviceVk.h"
-#include "dawn/tests/white_box/VulkanImageWrappingTests.h"
+#include "dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.h"
 
 namespace dawn::native::vulkan {
-
-ExternalImageDescriptorVkForTesting::ExternalImageDescriptorVkForTesting()
-    : ExternalImageDescriptorVk(ExternalImageType::DmaBuf) {}
-ExternalImageExportInfoVkForTesting::ExternalImageExportInfoVkForTesting()
-    : ExternalImageExportInfoVk(ExternalImageType::DmaBuf) {}
 
 class ExternalSemaphoreDmaBuf : public VulkanImageWrappingTestBackend::ExternalSemaphore {
   public:
@@ -85,7 +80,7 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
         mDeviceVk = native::vulkan::ToBackend(native::FromAPI(device.Get()));
     }
 
-    ~VulkanImageWrappingTestBackendDmaBuf() {
+    ~VulkanImageWrappingTestBackendDmaBuf() override {
         if (mGbmDevice != nullptr) {
             gbm_device_destroy(mGbmDevice);
             mGbmDevice = nullptr;
@@ -96,8 +91,10 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
         // Even though this backend doesn't decide on creation whether the image should use
         // dedicated allocation, it still supports all options of NeedsDedicatedAllocation so we
         // test them.
-        return !params.useDedicatedAllocation ||
-               mDeviceVk->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation);
+        return (mDeviceVk->GetDeviceInfo().HasExt(DeviceExt::ExternalMemoryFD) &&
+                mDeviceVk->GetDeviceInfo().HasExt(DeviceExt::ImageDrmFormatModifier)) &&
+               (!params.useDedicatedAllocation ||
+                mDeviceVk->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation));
     }
 
     std::unique_ptr<ExternalTexture> CreateTexture(uint32_t width,
@@ -199,11 +196,10 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
     native::vulkan::Device* mDeviceVk;
 };
 
-// static
-std::unique_ptr<VulkanImageWrappingTestBackend> VulkanImageWrappingTestBackend::Create(
-    const wgpu::Device& device) {
+std::unique_ptr<VulkanImageWrappingTestBackend> CreateDMABufBackend(const wgpu::Device& device) {
     auto backend = std::make_unique<VulkanImageWrappingTestBackendDmaBuf>(device);
     backend->CreateGbmDevice();
+
     return backend;
 }
 
