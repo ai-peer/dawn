@@ -51,6 +51,24 @@
       "message": "Missing semicolon (says Kokoro).",
       "revId": "46fdaea1610f67160311d8670de9a1af6eb50793",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8389886_259a6871",
+        "filename": "src/tint/ir/program_test_helper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-18T14:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12bae165_411c573e",
+      "revId": "46fdaea1610f67160311d8670de9a1af6eb50793",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
