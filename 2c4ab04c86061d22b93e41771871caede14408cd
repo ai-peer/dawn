@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf43dff7_c67fd1f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001221
+      },
+      "writtenOn": "2023-07-18T22:08:35Z",
+      "side": 1,
+      "message": "Please take a look. If there\u0027s a better place in the .gn files to put this logic, please let me know.",
+      "revId": "2c4ab04c86061d22b93e41771871caede14408cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
