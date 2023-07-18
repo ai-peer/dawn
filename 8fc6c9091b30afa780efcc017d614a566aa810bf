@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d0fed7_b907bfdc",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T11:22:51Z",
+      "side": 1,
+      "message": "Looks much better, done.",
+      "parentUuid": "344adc8b_f7dfacfc",
+      "range": {
+        "startLine": 329,
+        "startChar": 39,
+        "endLine": 329,
+        "endChar": 83
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5638ea6a_14f92f8e",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-07-17T16:59:42Z",
       "side": 1,
       "message": "The way this code is reentrant is a bit difficult to follow . What do you think of doing the following?\n\n 1. Split Clear() into per-case helper functions:\n \n```\nClear() // calls into\nClearCompressed(TextureBase::ClearValue) // What we care about here\nClearNonRenderableColor(float4 clearColor); // Or ClearNonRenderable(ClearValue) if it also needs to handle depth-stencil.\nClearRenderable(ClearValue)\n\nstruct ClearValue {\n   float4 clearColor;\n   float clearDepth;\n   uint clearStencil;\n}\n```\n\n 2. Interim becomes just an \"Internal\" flag which means we don\u0027t need to do any lazy clearing. (and we could combine Staging and Internal into a single bitmask, there are likely to be more flags in the future)\n 3. Implement ClearCompressed as something like\n \n```\nRef\u003cTexture\u003e interimTexture \u003d CreateInternal(desc);\nClearValue clearValue \u003d { { 0x01010101, ... }, ... };\ninterimTexture-\u003eClearRenderable(clearColor);\n\n// The copy there either with the current code, but we could also use Texture::Copy.\n```",
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "599bf2cf_ee3e4184",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T11:22:51Z",
+      "side": 1,
+      "message": "Good idea, thanks!\nI have modified accordingly, although not sure I fully understood all of them.\nOne thing in doubt is the proposed `struct ClearValue`. It seems I still need the original `TextureBase::ClearValue`, it would be used in each per-case helper function like this:\n```\n...\n           if (clearValue \u003d\u003d TextureBase::ClearValue::Zero \u0026\u0026\n                IsSubresourceContentInitialized(\n                    SubresourceRange::SingleMipAndLayer(level, layer, range.aspects))) {\n                // Skip lazy clears if already initialized.\n                continue;\n            }\n...\n```",
+      "parentUuid": "5638ea6a_14f92f8e",
       "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9da07da_0112e675",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T11:22:51Z",
+      "side": 1,
+      "message": "Thanks for being considerate.\nAs far as I can see it, in essential the code that could be shared would just be:\n```\n        commandContext-\u003eGetD3D11DeviceContext1()-\u003eCopySubresourceRegion(\n            ToBackend(dst.texture)-\u003eGetD3D11Resource(), dstSubresource, dst.origin.x, dst.origin.y,\n            dst.texture-\u003eGetDimension() \u003d\u003d wgpu::TextureDimension::e3D ? dst.origin.z : 0,\n            ToBackend(src.texture)-\u003eGetD3D11Resource(), srcSubresource,\n            isWholeSubresource ? nullptr : \u0026srcBox);\n```\nAt present, probably it wouldn\u0027t be worth the introduced complexity including some branches of \u0027interim\u0027, and splitting of \u0027Copy\u0027 and \u0027CopyInternal\u0027.\n\nAnyway, just let me know if you have strong preference on this.",
+      "parentUuid": "aa08ab64_0d40f78b",
+      "range": {
+        "startLine": 446,
+        "startChar": 15,
+        "endLine": 446,
+        "endChar": 20
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f34b9c04_250d3ca4",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -166,6 +232,30 @@
       "writtenOn": "2023-07-18T01:49:51Z",
       "side": 1,
       "message": "Do we need to check it with uncompressed non-renderable formats at[1]?",
+      "range": {
+        "startLine": 454,
+        "startChar": 24,
+        "endLine": 454,
+        "endChar": 67
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f54f0b8_88a2de2e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T11:22:51Z",
+      "side": 1,
+      "message": "Good catch, done, thanks!",
+      "parentUuid": "f34b9c04_250d3ca4",
       "range": {
         "startLine": 454,
         "startChar": 24,
@@ -189,6 +279,30 @@
       "writtenOn": "2023-07-18T01:49:51Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 496,
+        "startChar": 25,
+        "endLine": 496,
+        "endChar": 38
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7b149b_511b93b2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T11:22:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "60c066e8_6d58aa9d",
       "range": {
         "startLine": 496,
         "startChar": 25,
@@ -272,6 +386,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c49bf816_152fec41",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T11:22:51Z",
+      "side": 1,
+      "message": "Simply translated the comment to code to make it self-explanatory.",
+      "parentUuid": "383ad9d2_f20860ff",
+      "range": {
+        "startLine": 562,
+        "startChar": 40,
+        "endLine": 562,
+        "endChar": 76
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d2cf446_2d8668ef",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -331,6 +469,30 @@
       "side": 1,
       "message": "In that case, I think a switch or a value table would be more readable.\n\n```suggestion\nswitch(bytesPerComponent) {\n  case 1:\n    *reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x01;\n    break;\n  case 2:\n    *reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x0101;\n    break;\n  case 4:\n    *reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x01010101;\n    break;  \n}\n\n// or\n\nconstexpr int32_t kOneValues[] {\n 0x01, 0x0101, 0x010101, 0x01010101,\n};\n*reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d kOneValues[bytesPerComponent];\n```",
       "parentUuid": "16b2522c_fc78a130",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 25
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc00c200_1d7b1d02",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-18T11:22:51Z",
+      "side": 1,
+      "message": "Sounds good.\nOne thing to clarify here is that it shouldn\u0027t be `reinterpret_cast`. We need the type conversion keeping the values arithmetically same. For example we should use float 1.0f for uint 1u.",
+      "parentUuid": "0d2e9254_ee26dd7b",
       "range": {
         "startLine": 563,
         "startChar": 0,
