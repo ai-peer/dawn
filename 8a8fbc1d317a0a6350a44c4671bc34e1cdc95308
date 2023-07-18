@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd351aea_4a05590a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-18T19:22:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8a8fbc1d317a0a6350a44c4671bc34e1cdc95308",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f909e2ce_ae501ad0",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-18T19:22:38Z",
+      "side": 1,
+      "message": "nit: could be \n```suggestion\n        testTextures \u003d {};\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 9
+      },
+      "revId": "8a8fbc1d317a0a6350a44c4671bc34e1cdc95308",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
