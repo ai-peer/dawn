@@ -371,7 +371,7 @@ hooks = [
   {
     'name': 'clang_format_mac_arm64',
     'pattern': '.',
-    'condition': 'dawn_standalone and host_os == "mac" and host_cpu == "arm64"',
+    'condition': 'isoawn_standalone and host_os == "mac" and host_cpu == "arm64"',
     'action': [ 'download_from_google_storage',
                 '--no_resume',
                 '--no_auth',
@@ -497,7 +497,7 @@ hooks = [
   {
     'name': 'configure_siso',
     'pattern': '.',
-    'condition': 'checkout_siso',
+    'condition': 'checkout_siso and dawn_standalone',
     'action': ['python3',
                'build/config/siso/configure_siso.py',
                '--rbe_instance',
