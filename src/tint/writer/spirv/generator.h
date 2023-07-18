@@ -68,7 +68,7 @@ struct Options {
 
 #if TINT_BUILD_IR
     /// Set to `true` to generate SPIR-V via the Tint IR instead of from the AST.
-    bool use_tint_ir = false;
+    bool use_tint_ir = true;
 #endif
 
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
