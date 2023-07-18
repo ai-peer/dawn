@@ -40,11 +40,17 @@ struct ForErase {
     RefCountedT* mValue;
 };
 
+// All cached WeakRefs must have an immutable hash value determined at insertion. This ensures that
+// even if the last ref of the cached value is dropped, we still get the same hash in the set for
+// erasing.
+template <typename RefCountedT>
+using WeakRefAndHash = std::pair<WeakRef<RefCountedT>, size_t>;
+
 // The cache always holds WeakRefs internally, however, to enable lookups using pointers and special
 // Erase equality, we use a variant type to branch.
 template <typename RefCountedT>
 using ContentLessObjectCacheKey =
-    std::variant<RefCountedT*, WeakRef<RefCountedT>, ForErase<RefCountedT>>;
+    std::variant<RefCountedT*, WeakRefAndHash<RefCountedT>, ForErase<RefCountedT>>;
 
 enum class KeyType : size_t { Pointer = 0, WeakRef = 1, ForErase = 2 };
 
@@ -53,13 +59,7 @@ struct ContentLessObjectCacheHashVisitor {
     using BaseHashFunc = typename RefCountedT::HashFunc;
 
     size_t operator()(const RefCountedT* ptr) const { return BaseHashFunc()(ptr); }
-    size_t operator()(const WeakRef<RefCountedT>& weakref) const {
-        Ref<RefCountedT> ref = weakref.Promote();
-        if (ref.Get() == nullptr) {
-            return 0;
-        }
-        return BaseHashFunc()(ref.Get());
-    }
+    size_t operator()(const WeakRefAndHash<RefCountedT>& weakref) const { return weakref.second; }
     size_t operator()(const ForErase<RefCountedT>& forErase) const {
         return BaseHashFunc()(forErase.mValue);
     }
@@ -72,7 +72,7 @@ struct ContentLessObjectCacheKeyFuncs {
                        std::variant_alternative_t<static_cast<size_t>(KeyType::Pointer),
                                                   ContentLessObjectCacheKey<RefCountedT>>>);
     static_assert(
-        std::is_same_v<WeakRef<RefCountedT>,
+        std::is_same_v<WeakRefAndHash<RefCountedT>,
                        std::variant_alternative_t<static_cast<size_t>(KeyType::WeakRef),
                                                   ContentLessObjectCacheKey<RefCountedT>>>);
     static_assert(
@@ -111,9 +111,9 @@ struct ContentLessObjectCacheKeyFuncs {
                         break;
                     case KeyType::WeakRef:
                         if (erasing) {
-                            xPtr = std::get<WeakRef<RefCountedT>>(x).UnsafeGet();
+                            xPtr = std::get<WeakRefAndHash<RefCountedT>>(x).first.UnsafeGet();
                         } else {
-                            xRef = std::get<WeakRef<RefCountedT>>(x).Promote();
+                            xRef = std::get<WeakRefAndHash<RefCountedT>>(x).first.Promote();
                             xPtr = xRef.Get();
                         }
                         break;
@@ -158,7 +158,8 @@ class ContentLessObjectCache {
     // `object` and false otherwise.
     std::pair<Ref<RefCountedT>, bool> Insert(Ref<RefCountedT> obj) {
         std::lock_guard<std::mutex> lock(mMutex);
-        WeakRef<RefCountedT> weakref = obj.GetWeakRef();
+        detail::WeakRefAndHash<RefCountedT> weakref =
+            std::make_pair(obj.GetWeakRef(), typename RefCountedT::HashFunc()(obj.Get()));
         auto [it, inserted] = mCache.insert(weakref);
         if (inserted) {
             obj->mCache = this;
@@ -166,7 +167,8 @@ class ContentLessObjectCache {
         } else {
             // Try to promote the found WeakRef to a Ref. If promotion fails, remove the old Key
             // and insert this one.
-            Ref<RefCountedT> ref = std::get<WeakRef<RefCountedT>>(*it).Promote();
+            Ref<RefCountedT> ref =
+                std::get<detail::WeakRefAndHash<RefCountedT>>(*it).first.Promote();
             if (ref != nullptr) {
                 return {ref, false};
             } else {
@@ -184,7 +186,7 @@ class ContentLessObjectCache {
         std::lock_guard<std::mutex> lock(mMutex);
         auto it = mCache.find(blueprint);
         if (it != mCache.end()) {
-            return std::get<WeakRef<RefCountedT>>(*it).Promote();
+            return std::get<detail::WeakRefAndHash<RefCountedT>>(*it).first.Promote();
         }
         return nullptr;
     }
