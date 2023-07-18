@@ -39,6 +39,30 @@
       },
       "revId": "43a799e43aa1eae812ee3b95999b16d4242a99ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23078a36_18e51515",
+        "filename": "src/dawn/tests/benchmarks/NullDeviceSetup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-18T20:28:40Z",
+      "side": 1,
+      "message": "Updated it to only notify when all the threads are done, but making it into an atomic doesn\u0027t add anything for us because regardless we need to acquire the lock for the condvar. (Reference also explicitly says that even if the shared var, `mNumDoneThreads` in this case, is atomic, it must still be modified while owning the lock: https://en.cppreference.com/w/cpp/thread/condition_variable).",
+      "parentUuid": "afb8b12e_88be930b",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 25
+      },
+      "revId": "43a799e43aa1eae812ee3b95999b16d4242a99ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
