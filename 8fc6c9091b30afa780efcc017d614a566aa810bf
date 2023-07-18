@@ -131,6 +131,76 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa08ab64_0d40f78b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-18T01:49:51Z",
+      "side": 1,
+      "message": "It is just a suggestion. If it doesn\u0027t make thing simple, I am fine with current code.",
+      "parentUuid": "9efcf15a_613800f2",
+      "range": {
+        "startLine": 446,
+        "startChar": 15,
+        "endLine": 446,
+        "endChar": 20
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34b9c04_250d3ca4",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-18T01:49:51Z",
+      "side": 1,
+      "message": "Do we need to check it with uncompressed non-renderable formats at[1]?",
+      "range": {
+        "startLine": 454,
+        "startChar": 24,
+        "endLine": 454,
+        "endChar": 67
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c066e8_6d58aa9d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-18T01:49:51Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 496,
+        "startChar": 25,
+        "endLine": 496,
+        "endChar": 38
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f837ae2_26c403d3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -178,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "383ad9d2_f20860ff",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-18T01:49:51Z",
+      "side": 1,
+      "message": "Please update comment with your explanation. thanks",
+      "parentUuid": "e09b18b7_bff6aa55",
+      "range": {
+        "startLine": 562,
+        "startChar": 40,
+        "endLine": 562,
+        "endChar": 76
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d2cf446_2d8668ef",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -213,6 +307,30 @@
       "side": 1,
       "message": "Yes. Also could be 0x0101.",
       "parentUuid": "7d2cf446_2d8668ef",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 25
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d2e9254_ee26dd7b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-18T01:49:51Z",
+      "side": 1,
+      "message": "In that case, I think a switch or a value table would be more readable.\n\n```suggestion\nswitch(bytesPerComponent) {\n  case 1:\n    *reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x01;\n    break;\n  case 2:\n    *reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x0101;\n    break;\n  case 4:\n    *reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d 0x01010101;\n    break;  \n}\n\n// or\n\nconstexpr int32_t kOneValues[] {\n 0x01, 0x0101, 0x010101, 0x01010101,\n};\n*reinterpret_cast\u003cint32_t*\u003e(clearValueOne) \u003d kOneValues[bytesPerComponent];\n```",
+      "parentUuid": "16b2522c_fc78a130",
       "range": {
         "startLine": 563,
         "startChar": 0,
