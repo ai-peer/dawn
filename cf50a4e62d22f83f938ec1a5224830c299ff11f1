@@ -33,6 +33,24 @@
       "message": "LGTM but we should add a test in src/dawn/tests/white_box/VulkanImageWrappingTests.cpp that you can use multiple separate textures in one submit, and then wait on both their semaphores",
       "revId": "cf50a4e62d22f83f938ec1a5224830c299ff11f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52fd03b_2edcd71a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003766
+      },
+      "writtenOn": "2023-07-18T10:22:59Z",
+      "side": 1,
+      "message": "Added test and validated that the test hangs without the patch but succeeds with the patch.",
+      "parentUuid": "ea5eb79e_b4692e0a",
+      "revId": "cf50a4e62d22f83f938ec1a5224830c299ff11f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
