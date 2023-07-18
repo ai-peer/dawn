@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95c38610_ca6d0d13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-18T15:58:25Z",
+      "side": 1,
+      "message": "Sorry for the churn. This tests exactly what it did before, but it makes the next few CLs a lot simpler.",
+      "revId": "baa95c77089e797939fdec1fa0b38e2dac216747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
