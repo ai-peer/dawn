@@ -501,6 +501,30 @@
       },
       "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4b9872e_5dd3f5cb",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T12:13:11Z",
+      "side": 1,
+      "message": "Then something like this could work I believe:\n\n```\nconstexpr float kOneValues[] {\n 0x01f, 0x0101f, 0x010101f, 0x01010101f,\n};\nfloat clearValueOne \u003d kOneValues[bytesPerComponent];\n```",
+      "parentUuid": "fc00c200_1d7b1d02",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 25
+      },
+      "revId": "8fc6c9091b30afa780efcc017d614a566aa810bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

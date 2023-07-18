@@ -57,6 +57,24 @@
       "parentUuid": "87f2bf03_e18c715a",
       "revId": "f8cfbb1e4928df03db08480180943ec1c21fbdbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d3ff77_108e940f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T12:13:11Z",
+      "side": 1,
+      "message": "Mmmh maybe we could add a bool skipIfInitialized to the struct? But yeah it makes this a bit less minimal.",
+      "parentUuid": "30e573c4_54c1fe20",
+      "revId": "f8cfbb1e4928df03db08480180943ec1c21fbdbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
