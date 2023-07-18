@@ -292,8 +292,6 @@ libtint_source_set("libtint_program_src") {
     "clone_context.cc",
     "program.cc",
     "program_builder.cc",
-    "resolver/builtin_structs.cc",
-    "resolver/builtin_structs.h",
     "resolver/const_eval.cc",
     "resolver/const_eval.h",
     "resolver/ctor_conv_intrinsic.cc",
@@ -845,6 +843,8 @@ libtint_source_set("libtint_builtins_src") {
     "builtin/interpolation_type.h",
     "builtin/number.cc",
     "builtin/number.h",
+    "builtin/struct.cc",
+    "builtin/struct.h",
     "builtin/texel_format.cc",
     "builtin/texel_format.h",
   ]
@@ -1676,6 +1676,7 @@ if (tint_build_unittests) {
       "builtin/interpolation_sampling_test.cc",
       "builtin/interpolation_type_test.cc",
       "builtin/number_test.cc",
+      "builtin/struct_test.cc",
       "builtin/texel_format_test.cc",
     ]
     deps = [ ":libtint_builtins_src" ]

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/resolver/builtin_structs.h"
+#include "src/tint/builtin/struct.h"
 
 #include <algorithm>
 #include <string>
@@ -31,7 +31,7 @@
 #include "src/tint/type/vector.h"
 #include "src/tint/utils/string.h"
 
-namespace tint::resolver {
+namespace tint::builtin {
 
 constexpr std::array kModfVecF32Names{
     builtin::Builtin::kModfResultVec2F32,
@@ -80,12 +80,12 @@ type::Struct* CreateModfResult(type::Manager& types, SymbolTable& symbols, const
                     return abstract;
                 },
                 [&](Default) {
-                    TINT_ASSERT(Resolver, false && "unhandled modf type");
+                    TINT_ASSERT(Builtin, false && "unhandled modf type");
                     return nullptr;
                 });
         },
         [&](Default) {
-            TINT_ASSERT(Resolver, false && "unhandled modf type");
+            TINT_ASSERT(Builtin, false && "unhandled modf type");
             return nullptr;
         });
 }
@@ -146,12 +146,12 @@ type::Struct* CreateFrexpResult(type::Manager& types, SymbolTable& symbols, cons
                     return abstract;
                 },
                 [&](Default) {
-                    TINT_ASSERT(Resolver, false && "unhandled frexp type");
+                    TINT_ASSERT(Builtin, false && "unhandled frexp type");
                     return nullptr;
                 });
         },
         [&](Default) {
-            TINT_ASSERT(Resolver, false && "unhandled frexp type");
+            TINT_ASSERT(Builtin, false && "unhandled frexp type");
             return nullptr;
         });
 }
@@ -171,9 +171,9 @@ type::Struct* CreateAtomicCompareExchangeResult(type::Manager& types,
         [&](const type::I32*) { return build(builtin::Builtin::kAtomicCompareExchangeResultI32); },
         [&](const type::U32*) { return build(builtin::Builtin::kAtomicCompareExchangeResultU32); },
         [&](Default) {
-            TINT_ASSERT(Resolver, false && "unhandled atomic_compare_exchange type");
+            TINT_ASSERT(Builtin, false && "unhandled atomic_compare_exchange type");
             return nullptr;
         });
 }
 
-}  // namespace tint::resolver
+}  // namespace tint::builtin

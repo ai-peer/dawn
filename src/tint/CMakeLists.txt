@@ -237,6 +237,8 @@ list(APPEND TINT_LIB_SRCS
   builtin/fluent_types.h
   builtin/number.cc
   builtin/number.h
+  builtin/struct.cc
+  builtin/struct.h
   clone_context.cc
   clone_context.h
   constant/clone_context.h
@@ -269,8 +271,6 @@ list(APPEND TINT_LIB_SRCS
   reflection.h
   reader/reader.cc
   reader/reader.h
-  resolver/builtin_structs.cc
-  resolver/builtin_structs.h
   resolver/const_eval.cc
   resolver/const_eval.h
   resolver/dependency_graph.cc
@@ -1009,6 +1009,7 @@ if(TINT_BUILD_TESTS)
     ast/while_statement_test.cc
     ast/workgroup_attribute_test.cc
     builtin/number_test.cc
+    builtin/struct_test.cc
     clone_context_test.cc
     constant/composite_test.cc
     constant/manager_test.cc

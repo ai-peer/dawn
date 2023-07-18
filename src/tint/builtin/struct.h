@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_RESOLVER_BUILTIN_STRUCTS_H_
-#define SRC_TINT_RESOLVER_BUILTIN_STRUCTS_H_
+#ifndef SRC_TINT_BUILTIN_STRUCT_H_
+#define SRC_TINT_BUILTIN_STRUCT_H_
 
 // Forward declarations
 namespace tint {
@@ -25,7 +25,7 @@ class Struct;
 class Type;
 }  // namespace tint::type
 
-namespace tint::resolver {
+namespace tint::builtin {
 
 /**
  * @param types the type manager
@@ -55,6 +55,6 @@ type::Struct* CreateAtomicCompareExchangeResult(type::Manager& types,
                                                 SymbolTable& symbols,
                                                 const type::Type* ty);
 
-}  // namespace tint::resolver
+}  // namespace tint::builtin
 
-#endif  // SRC_TINT_RESOLVER_BUILTIN_STRUCTS_H_
+#endif  // SRC_TINT_BUILTIN_STRUCT_H_
