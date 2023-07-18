@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d55f1d07_853e28c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003766
+      },
+      "writtenOn": "2023-07-18T11:00:57Z",
+      "side": 1,
+      "message": "Seems like CI was aborted because of a commit message update (?)",
+      "revId": "9ec00985ee331ad75407d57efe922b2d0625629f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
