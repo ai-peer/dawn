@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b4c23ae_5708e9de",
+        "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-18T15:20:46Z",
+      "side": 1,
+      "message": "Moving to builtin SGTM.",
+      "parentUuid": "69fc60bb_b083b9a5",
+      "revId": "df4e2f977837bfc377f1766877608abcf04f4eef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7f2048c_a084e409",
         "filename": "src/tint/ir/transform/builtin_polyfill_spirv.cc",
         "patchSetId": 1
