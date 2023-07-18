@@ -33,7 +33,8 @@ struct ExternalImageExportInfoVkForTesting;
 
 class VulkanImageWrappingTestBackend {
   public:
-    static std::unique_ptr<VulkanImageWrappingTestBackend> Create(const wgpu::Device& device);
+    static std::unique_ptr<VulkanImageWrappingTestBackend> Create(const wgpu::Device& device,
+                                                                  const TestParams params);
     virtual ~VulkanImageWrappingTestBackend() = default;
 
     class ExternalTexture : NonCopyable {
@@ -49,12 +50,27 @@ class VulkanImageWrappingTestBackend {
     // backends. The DAWN_TEST_PARAM_STRUCT is not declared here because it is unnecessary but also
     // because it declares a bunch of functions that would cause ODR violations.
     struct TestParams {
+        ExternalImageType externalImageType = ExternalImageType::OpaqueFD;
         bool useDedicatedAllocation = false;
         bool detectDedicatedAllocation = false;
     };
     void SetParam(const TestParams& params);
     const TestParams& GetParam() const;
     virtual bool SupportsTestParams(const TestParams& params) const = 0;
+    virtual bool Supported() const = 0;
+
+    struct ExternalImageDescriptorVkForTesting : public ExternalImageDescriptorVk {
+      public:
+        ExternalImageDescriptorVkForTesting()
+            : ExternalImageDescriptorVk(GetParam().mExternalImageType) {}
+    };
+
+    struct ExternalImageExportInfoVkForTesting : public ExternalImageExportInfoVk {
+      public:
+        ExternalImageExportInfoVkForTesting()
+            : ExternalImageExportInfoVk(GetParam().mExternalImageType) {}
+        std::vector<std::unique_ptr<VulkanImageWrappingTestBackend::ExternalSemaphore>> semaphores;
+    };
 
     virtual std::unique_ptr<ExternalTexture> CreateTexture(uint32_t width,
                                                            uint32_t height,
@@ -74,12 +90,12 @@ class VulkanImageWrappingTestBackend {
 
 struct ExternalImageDescriptorVkForTesting : public ExternalImageDescriptorVk {
   public:
-    ExternalImageDescriptorVkForTesting();
+    ExternalImageDescriptorVkForTesting(ExternalImageType type);
 };
 
 struct ExternalImageExportInfoVkForTesting : public ExternalImageExportInfoVk {
   public:
-    ExternalImageExportInfoVkForTesting();
+    ExternalImageExportInfoVkForTesting(ExternalImageType type);
     std::vector<std::unique_ptr<VulkanImageWrappingTestBackend::ExternalSemaphore>> semaphores;
 };
 

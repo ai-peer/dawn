@@ -19,6 +19,8 @@
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/tests/white_box/VulkanImageWrappingTests.h"
+#include "dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.h"
+#include "dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
@@ -61,10 +63,21 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
         mBackend = VulkanImageWrappingTestBackend::Create(device);
 
         VulkanImageWrappingTestBackend::TestParams params;
+        params.externalImageType = GetParam().mExternalImageType;
         params.useDedicatedAllocation = GetParam().mUseDedicatedAllocation;
         params.detectDedicatedAllocation = GetParam().mDetectDedicatedAllocation;
-        DAWN_TEST_UNSUPPORTED_IF(!mBackend->SupportsTestParams(params));
-        mBackend->SetParam(params);
+
+        switch (GetParam().mExternalImageType) {
+            case ExternalImageType::OpaqueFD:
+                mBackend = CreateOpaqueFDBackend(device, params);
+                break;
+            case ExternalImageType::DmaBuf:
+                mBackend = CreateDMABufBackend(device, params);
+                break;
+            default:
+                UNREACHABLE();
+        }
+        DAWN_TEST_UNSUPPORTED_IF(!mBackend);
 
         defaultDescriptor.dimension = wgpu::TextureDimension::e2D;
         defaultDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
@@ -95,7 +108,7 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
                                   std::vector<std::unique_ptr<ExternalSemaphore>> semaphores,
                                   bool isInitialized = true,
                                   bool expectValid = true) {
-        ExternalImageDescriptorVkForTesting descriptor;
+        ExternalImageDescriptorVkForTesting descriptor(GetParam().mExternalImageType);
         return WrapVulkanImage(dawnDevice, textureDescriptor, externalTexture,
                                std::move(semaphores), descriptor.releasedOldLayout,
                                descriptor.releasedNewLayout, isInitialized, expectValid);
@@ -109,7 +122,7 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
                                   VkImageLayout releasedNewLayout,
                                   bool isInitialized = true,
                                   bool expectValid = true) {
-        ExternalImageDescriptorVkForTesting descriptor;
+        ExternalImageDescriptorVkForTesting descriptor(GetParam().mExternalImageType);
         descriptor.cTextureDescriptor =
             reinterpret_cast<const WGPUTextureDescriptor*>(textureDescriptor);
         descriptor.isInitialized = isInitialized;
