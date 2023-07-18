@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd0c185_3409ce56",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T10:34:10Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f382404_600a8093",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T10:34:10Z",
+      "side": 1,
+      "message": "nit: I think these no longer need to be defined in the header with the recent changes?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 6
+      },
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab7a61f_afc525da",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T10:34:10Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 98,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac865686_c38358f0",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T10:34:10Z",
+      "side": 1,
+      "message": "Can\u0027t we fold Supported in SupportsTestParams and then keep using it in [1] to suppress the test if it is not supported? This way the factory functions never return nullptr, and it\u0027s the fixture that checks if it needs to skip.",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56dc6124_f0e54a8d",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T10:34:10Z",
+      "side": 1,
+      "message": "u-nit: empty lines are not balance, maybe this one should be moved between the } and the #endif",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d7e90e_692af556",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T10:34:10Z",
+      "side": 1,
+      "message": "nit: no need for the full qualifier here I think. And also this is `VulkanImageWrappingTestBackendOpaqueFD`",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 47
+      },
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f620a54_bae7c208",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-18T10:34:10Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
