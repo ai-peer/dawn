@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6629f0_e273eb48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-18T15:58:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "43a799e43aa1eae812ee3b95999b16d4242a99ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb8b12e_88be930b",
+        "filename": "src/dawn/tests/benchmarks/NullDeviceSetup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-18T15:58:04Z",
+      "side": 1,
+      "message": "nit: I think you could have mNumDoneThreads be an atomic.\n\nthen fetch_add and only notify after all the threads are done.",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 25
+      },
+      "revId": "43a799e43aa1eae812ee3b95999b16d4242a99ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
