@@ -275,9 +275,31 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     }
 
 #if DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
-    // TODO(chromium:1258986): Precisely enable the feature by querying the device's format
-    // features.
     EnableFeature(Feature::MultiPlanarFormats);
+#else
+    constexpr VkFormat multiplanarFormats[] = {
+        VK_FORMAT_G8_B8R8_2PLANE_420_UNORM,
+    };
+
+    bool allMultiplanarFormatsSupported = true;
+    for (const auto multiplanarFormat : multiplanarFormats) {
+        VkFormatProperties multiplanarProps;
+        mVulkanInstance->GetFunctions().GetPhysicalDeviceFormatProperties(
+            mVkPhysicalDevice, multiplanarFormat, &multiplanarProps);
+
+        if (!(multiplanarProps.optimalTilingFeatures & VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT) ||
+            !(multiplanarProps.optimalTilingFeatures &
+              VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT) ||
+            !(multiplanarProps.optimalTilingFeatures & VK_FORMAT_FEATURE_TRANSFER_SRC_BIT) ||
+            !(multiplanarProps.optimalTilingFeatures & VK_FORMAT_FEATURE_TRANSFER_DST_BIT)) {
+            allMultiplanarFormatsSupported = false;
+        }
+    }
+
+    if (allMultiplanarFormatsSupported) {
+        EnableFeature(Feature::MultiPlanarFormats);
+    }
+
 #endif  // DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
 
     EnableFeature(Feature::SurfaceCapabilities);
