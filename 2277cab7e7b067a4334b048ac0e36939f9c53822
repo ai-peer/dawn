@@ -16,6 +16,24 @@
       "message": "Sorry for missing that.",
       "revId": "2277cab7e7b067a4334b048ac0e36939f9c53822",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dea53d8_43f90120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003366
+      },
+      "writtenOn": "2023-07-18T15:07:07Z",
+      "side": 1,
+      "message": "Np. Thank you for trying Siso! \nFeel free to ask questions in go/chrome-build-chat.",
+      "parentUuid": "d7c21966_41bfce3e",
+      "revId": "2277cab7e7b067a4334b048ac0e36939f9c53822",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
