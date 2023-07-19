@@ -39,6 +39,30 @@
       },
       "revId": "8a8fbc1d317a0a6350a44c4671bc34e1cdc95308",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb1d1b84_167562f2",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003766
+      },
+      "writtenOn": "2023-07-19T06:22:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f909e2ce_ae501ad0",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 9
+      },
+      "revId": "8a8fbc1d317a0a6350a44c4671bc34e1cdc95308",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
