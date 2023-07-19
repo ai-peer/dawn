@@ -16,6 +16,97 @@
       "message": "PTAL",
       "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339129b0_38f7ba1a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T13:03:28Z",
+      "side": 1,
+      "message": "nit: no need for `struct`",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 6
+      },
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3013ab52_56ff2cb8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T13:03:28Z",
+      "side": 1,
+      "message": "Likewise this could be split off to its own method.",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f42a27_1916e128",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T13:03:28Z",
+      "side": 1,
+      "message": "Why do we need to copy the whole texture back and forth and not just write the part that interests us in staging then copy it in the correct place in the texture?\n\nAlso any way we could reuse Texture::Write for the staging? For example by adding a componentSize to WriteInternal?",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d8cb140_10507d54",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T13:03:28Z",
+      "side": 1,
+      "message": "Wou",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82c53af5_3a5ee46e",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T13:03:28Z",
+      "side": 1,
+      "message": "We have IntelGen9 as well to make the suppression even more specific. Do we have any idea why this fails?",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
