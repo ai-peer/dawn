@@ -1,0 +1,8 @@
+# This file defines which warnings should be ignored while running clang's
+# control flow integrity sanitizer, as run by the cfi_flags build target.
+
+[cfi-unrelated-cast|cfi-derived-cast]
+
+# WeakRefSupport helpers, cast is actually safe.
+# See https://stackoverflow.com/questions/73172193/can-you-static-cast-this-to-a-derived-class-in-a-base-class-constructor-then-u
+src:*src/common/WeakRefSupport.h

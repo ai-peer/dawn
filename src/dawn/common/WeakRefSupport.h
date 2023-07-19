@@ -34,6 +34,10 @@ class WeakRefData : public RefCounted {
     // internal refcount has already reached 0, returns nullptr instead.
     Ref<RefCounted> TryGetRef();
 
+    // Returns the raw pointer to the RefCounted. In general, this is an unsafe operation because
+    // the RefCounted can become invalid after being retrieved.
+    RefCounted* UnsafeGet() const;
+
   private:
     std::mutex mMutex;
     RefCounted* mValue = nullptr;
@@ -43,7 +47,7 @@ class WeakRefData : public RefCounted {
 class WeakRefSupportBase {
   protected:
     explicit WeakRefSupportBase(Ref<detail::WeakRefData> data);
-    ~WeakRefSupportBase();
+    virtual ~WeakRefSupportBase();
 
   private:
     template <typename T>
@@ -58,6 +62,11 @@ class WeakRefSupportBase {
 template <typename T>
 class WeakRefSupport : public detail::WeakRefSupportBase {
   public:
+    // Note that the static cast below fails CFI builds and is currently exceptioned under
+    // [cfi-unrelated-cast|cfi-derived-cast] in tools/cfi/ignores.txt (root directory dependent on
+    // chromium build or not). The cast itself is actually safe according to
+    // https://stackoverflow.com/questions/73172193/can-you-static-cast-this-to-a-derived-class-in-a-base-class-constructor-then-u,
+    // and the failure is a false-positive.
     WeakRefSupport()
         : WeakRefSupportBase(AcquireRef(new detail::WeakRefData(static_cast<T*>(this)))) {}
 };
