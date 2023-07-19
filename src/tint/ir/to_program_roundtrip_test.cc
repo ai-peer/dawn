@@ -37,7 +37,7 @@ class IRToProgramRoundtripTest : public ProgramTestHelper {
         ASSERT_TRUE(input_program.IsValid()) << input_program.Diagnostics().str();
 
         auto ir_module = FromProgram(&input_program);
-        ASSERT_TRUE(ir_module);
+        ASSERT_TRUE(ir_module) << (ir_module ? "" : ir_module.Failure());
 
         tint::ir::Disassembler d{ir_module.Get()};
         auto disassembly = d.Disassemble();
