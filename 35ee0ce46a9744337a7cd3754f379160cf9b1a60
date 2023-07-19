@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc201082_7ba0f3a5",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-19T17:58:02Z",
+      "side": 1,
+      "message": "I was more concered about things like `IR_FromProgramAccessorTest.Accessor_Multiple` in which there are two accesses emitted in a row:\n\n```\n%test_function \u003d @compute @workgroup_size(1, 1, 1) func():void -\u003e %b1 {            \n  %b1 \u003d block {                                                                                     \n    %a:vec3\u003cu32\u003e \u003d let vec3\u003cu32\u003e(0u)                                                                \n    %b:u32 \u003d access %a, 2u                                                                          \n    %c:u32 \u003d access %a, 1u                                                                          \n    ret                                                                                             \n  }                                                                                                 \n} \n```\n\nSo, the object is named and it\u0027s the same name in both cases.",
+      "parentUuid": "1ce82dd1_8b44e07c",
+      "range": {
+        "startLine": 877,
+        "startChar": 0,
+        "endLine": 885,
+        "endChar": 9
+      },
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d0f6b02_21761039",
         "filename": "src/tint/ir/from_program.cc",
         "patchSetId": 12
@@ -89,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e7164f0_b2b72d9e",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-19T17:58:02Z",
+      "side": 1,
+      "message": "hahahahaha ... no.\n\nI tried that initially and went down the horrible rat hole of making types non-const, eventually got very sad and this was easier. Non-const\u0027ing types has a lot of ripples.",
+      "parentUuid": "1d0f6b02_21761039",
+      "range": {
+        "startLine": 901,
+        "startChar": 0,
+        "endLine": 903,
+        "endChar": 53
+      },
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d07365e8_9852df06",
         "filename": "src/tint/ir/from_program.cc",
         "patchSetId": 12
@@ -100,6 +148,30 @@
       "writtenOn": "2023-07-19T17:47:00Z",
       "side": 1,
       "message": "I\u0027m going to have to scratch my head over this a bit.",
+      "range": {
+        "startLine": 970,
+        "startChar": 0,
+        "endLine": 974,
+        "endChar": 0
+      },
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "084fc980_5ef162ec",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-19T17:58:02Z",
+      "side": 1,
+      "message": "We can VC if you\u0027d like me to explain it.",
+      "parentUuid": "d07365e8_9852df06",
       "range": {
         "startLine": 970,
         "startChar": 0,
