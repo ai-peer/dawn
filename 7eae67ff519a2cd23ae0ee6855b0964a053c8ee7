@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5beda9ba_66780c32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Thanks for reviewing. Picking this up again, PTAL patch set 12, thanks!",
+      "revId": "7eae67ff519a2cd23ae0ee6855b0964a053c8ee7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

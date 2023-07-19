@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ea4713_001d2b34",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dd0c185_3409ce56",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f382404_600a8093",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-07-18T10:34:10Z",
       "side": 1,
       "message": "nit: I think these no longer need to be defined in the header with the recent changes?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 6
+      },
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc9986a_f85328dd",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Still needs to be in the header because wrapImage() function implementation in VulkanImageWrappingTests_OpaqueFD and VulkanImageWrappingTests_DmaBuf needs to know these structures.",
+      "parentUuid": "6f382404_600a8093",
       "range": {
         "startLine": 62,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4256ad6a_3d6acfa2",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cab7a61f_afc525da",
+      "range": {
+        "startLine": 98,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac865686_c38358f0",
@@ -81,6 +147,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cb782f_5116f443",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac865686_c38358f0",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56dc6124_f0e54a8d",
@@ -94,6 +178,24 @@
       "writtenOn": "2023-07-18T10:34:10Z",
       "side": 1,
       "message": "u-nit: empty lines are not balance, maybe this one should be moved between the } and the #endif",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c709a41c_f94d816f",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done. Balanced the empty line by aligning with VulkanImageWrappingTests.h",
+      "parentUuid": "56dc6124_f0e54a8d",
       "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +223,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af50236_0993e1b0",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Yes, and it hits a compiler error...",
+      "parentUuid": "72d7e90e_692af556",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 47
+      },
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f620a54_bae7c208",
@@ -134,6 +260,24 @@
       "writtenOn": "2023-07-18T10:34:10Z",
       "side": 1,
       "message": "ditto",
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d1a21d_5d16b9fc",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f620a54_bae7c208",
       "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

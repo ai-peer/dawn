@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "016fca27_ed14d635",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "781db75f_21980a7d",
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "810a86df_03102ad7",
@@ -83,6 +101,30 @@
       "writtenOn": "2023-04-03T09:48:46Z",
       "side": 1,
       "message": "nit: Maybe test for the backend being supported before asking it whether the specific params are supported. Or we could have the Create method return nullptr if the backend is not supported.",
+      "range": {
+        "startLine": 101,
+        "startChar": 74,
+        "endLine": 101,
+        "endChar": 97
+      },
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da0ee42_bddfea08",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "810a86df_03102ad7",
       "range": {
         "startLine": 101,
         "startChar": 74,
@@ -110,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f618a208_be0534ba",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeecd185_9d249c02",
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec0865ca_7a7c5fd3",
@@ -123,6 +183,24 @@
       "writtenOn": "2023-04-03T09:48:46Z",
       "side": 1,
       "message": "[1] We shouldn\u0027t need to expose everything in headers and instead could just have a CreateDMABufImageWrappingBackend -\u003e unique_ptr\u003cVulkanImageWrappingTestBackend\u003e similarly to how we do the memory services, am I missing something?",
+      "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e2c0c9a_294710b0",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-19T01:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec0865ca_7a7c5fd3",
       "revId": "f14ddcefbf895eebebdc9d9428eea02c747aff39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
