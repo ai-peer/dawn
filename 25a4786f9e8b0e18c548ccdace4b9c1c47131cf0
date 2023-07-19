@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84fbf65e_2793b090",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-19T10:54:40Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "parentUuid": "ad269a0e_fbe15914",
+      "revId": "25a4786f9e8b0e18c548ccdace4b9c1c47131cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da7b9d71_58d179a6",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-19T10:05:19Z",
       "side": 1,
       "message": "nit: maybe we could extend this comment slightly to explain that this is for a test, etc.",
+      "revId": "25a4786f9e8b0e18c548ccdace4b9c1c47131cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9128d22f_f3af63cc",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-19T10:54:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da7b9d71_58d179a6",
       "revId": "25a4786f9e8b0e18c548ccdace4b9c1c47131cf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
