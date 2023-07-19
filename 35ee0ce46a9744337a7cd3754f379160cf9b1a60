@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5feaa43c_6966126d",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-19T17:47:00Z",
+      "side": 1,
+      "message": "nit: `accessor`",
+      "range": {
+        "startLine": 874,
+        "startChar": 62,
+        "endLine": 874,
+        "endChar": 69
+      },
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce82dd1_8b44e07c",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-19T17:47:00Z",
+      "side": 1,
+      "message": "Is the `preceeding_inst` stuff there to ensure that you don\u0027t append to the access for something like:\n\n```\nvar v : array\u003carray\u003ci32, 5\u003e, 5\u003e;\nlet p \u003d \u0026v[i];   // create access: %p \u003d access %v\nlet a \u003d (*p)[i]; // append access: %p \u003d access %v, i\nreturn *p;       // oh noes!     : %p \u003d access %v, i\n```\n\nIf so, you might be able to simplify this by simply checking whether `obj` is named. With the recent `ir::Let` changes, the value is guaranteed to be named if its used as a let. If it\u0027s unnamed, then the expression is a sub-expression, and you know it\u0027s safe to append to the access.",
+      "range": {
+        "startLine": 877,
+        "startChar": 0,
+        "endLine": 885,
+        "endChar": 9
+      },
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0f6b02_21761039",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-19T17:47:00Z",
+      "side": 1,
+      "message": "Why create a new `InstructionResult` each append? Can\u0027t you just update the type of the existing result?",
+      "range": {
+        "startLine": 901,
+        "startChar": 0,
+        "endLine": 903,
+        "endChar": 53
+      },
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d07365e8_9852df06",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-07-19T17:47:00Z",
+      "side": 1,
+      "message": "I\u0027m going to have to scratch my head over this a bit.",
+      "range": {
+        "startLine": 970,
+        "startChar": 0,
+        "endLine": 974,
+        "endChar": 0
+      },
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
