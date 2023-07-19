@@ -52,6 +52,24 @@
       "parentUuid": "45736b09_54e8d246",
       "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11c01288_aed48673",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000896
+      },
+      "writtenOn": "2023-07-19T15:19:30Z",
+      "side": 0,
+      "message": "I have been informed that the fix for DXC wrt libc++ just landed upstream, so in theory we could roll the buildtools DEPS to ToT\n\nThat being said, if siso isn\u0027t required for reclient/rbe usage, then it might make the most sense to remove it from Dawn for now, until I finish getting the bots migrated.",
+      "parentUuid": "9c8d88c1_ae301c9b",
+      "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
