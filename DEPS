@@ -45,8 +45,6 @@ vars = {
   # reclient CIPD package version
   'reclient_version': 're_client_version:0.108.0.7cdbbe9-gomaip',
 
-  # Fetch siso CIPD package
-  'checkout_siso': False,
   # siso CIPD package version.
   'siso_version': 'git_revision:06bae0e9d7265e972358b23f77d9867930061db0',
 }
@@ -252,7 +250,7 @@ deps = {
       }
     ],
     'dep_type': 'cipd',
-    'condition': 'checkout_siso and dawn_standalone',
+    'condition': 'dawn_standalone',
   },
 
   # Misc dependencies inherited from Tint
@@ -497,7 +495,7 @@ hooks = [
   {
     'name': 'configure_siso',
     'pattern': '.',
-    'condition': 'checkout_siso and dawn_standalone',
+    'condition': 'dawn_standalone',
     'action': ['python3',
                'build/config/siso/configure_siso.py',
                '--rbe_instance',
