@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0465b673_a379d9a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-19T19:47:23Z",
+      "side": 1,
+      "message": "Approving to get the bulk of this in.\nI believe `EmitAccess` and `EmitExpression` can be significantly simplified, but let\u0027s iterate.",
+      "revId": "35ee0ce46a9744337a7cd3754f379160cf9b1a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b52cf347_d9bd7992",
