@@ -68,7 +68,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-06-28 09:02:36PM
+# Last rolled: 2023-07-19 11:26:35PM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -646,7 +646,6 @@ crbug.com/dawn/1901 [ android-t ] webgpu:shader,execution,zero_init:compute,zero
 ################################################################################
 crbug.com/dawn/1903 [ android-r dawn-backend-validation qualcomm ] webgpu:api,validation,capability_checks,limits,maxInterStageShaderComponents:* [ Failure ]
 crbug.com/dawn/1903 [ android-r dawn-no-backend-validation qualcomm ] webgpu:api,validation,capability_checks,limits,maxInterStageShaderComponents:* [ Failure ]
-
 
 ################################################################################
 # untriaged Android failures
