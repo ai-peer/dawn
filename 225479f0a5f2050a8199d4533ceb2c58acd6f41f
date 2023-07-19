@@ -34,6 +34,24 @@
       "parentUuid": "52741ea6_130ff2ae",
       "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8d88c1_ae301c9b",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000896
+      },
+      "writtenOn": "2023-07-19T15:06:58Z",
+      "side": 0,
+      "message": "At this point does it make the most sense to just remove all of the references from siso for now?\n\nThe reason there is a not a newer buildtools version here is because Dawn currently cannot roll this DEP too far ahead, because there is ongoing effort to integrate DXC, which is not compatible with newer versions of libc++ (there is an upstream fix for this under review).",
+      "parentUuid": "45736b09_54e8d246",
+      "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
