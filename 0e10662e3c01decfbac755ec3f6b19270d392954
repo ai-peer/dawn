@@ -77,6 +77,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "723ed042_617a459c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-19T14:01:31Z",
+      "side": 1,
+      "message": "[1] For d3d11, we can only copy the whole texture data including both depth and stencil. However, the data to be written from the client just have either depth or stencil. To avoid over-writing the other aspect with uninitialized data, we have to read the both to the staging texture.\n\n[2] I am afraid not, as ID3D11DeviceContext::UpdateSubresource doesn\u0027t work with depth-stencil textures.\n\u003e A resource cannot be used as a destination if:\n\u003e the resource is created with immutable or dynamic usage.\n\u003e the resource is created as a depth-stencil resource.\n\u003e the resource is created with multisampling capability (see DXGI_SAMPLE_DESC).",
+      "parentUuid": "56f42a27_1916e128",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d8cb140_10507d54",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 4
