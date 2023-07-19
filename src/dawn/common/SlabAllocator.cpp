@@ -34,7 +34,12 @@ SlabAllocatorImpl::IndexLinkNode::IndexLinkNode(Index index, Index nextIndex)
 SlabAllocatorImpl::Slab::Slab(char allocation[], IndexLinkNode* head)
     : allocation(allocation), freeList(head), prev(nullptr), next(nullptr), blocksInUse(0) {}
 
-SlabAllocatorImpl::Slab::Slab(Slab&& rhs) = default;
+SlabAllocatorImpl::Slab::Slab(Slab&& rhs)
+    : allocation(std::move(rhs.allocation)),
+      freeList(rhs.freeList.load()),
+      prev(std::move(rhs.prev)),
+      next(std::move(rhs.next)),
+      blocksInUse(rhs.blocksInUse.load()) {}
 
 SlabAllocatorImpl::SentinelSlab::SentinelSlab() : Slab(nullptr, nullptr) {}
 
@@ -109,36 +114,53 @@ bool SlabAllocatorImpl::IsNodeInSlab(Slab* slab, IndexLinkNode* node) const {
     return node >= firstNode && node <= lastNode && node->index < mBlocksPerSlab;
 }
 
-void SlabAllocatorImpl::PushFront(Slab* slab, IndexLinkNode* node) const {
+void SlabAllocatorImpl::PushFront(Slab* slab, IndexLinkNode* node) {
     ASSERT(IsNodeInSlab(slab, node));
 
-    IndexLinkNode* head = slab->freeList;
-    if (head == nullptr) {
-        node->nextIndex = kInvalidIndex;
-    } else {
-        ASSERT(IsNodeInSlab(slab, head));
-        node->nextIndex = head->index;
-    }
-    slab->freeList = node;
+    IndexLinkNode* head = slab->freeList.load(std::memory_order_relaxed);
+    bool success = false;
+    do {
+        if (head == nullptr) {
+            node->nextIndex = kInvalidIndex;
+        } else {
+            ASSERT(IsNodeInSlab(slab, head));
+            node->nextIndex = head->index;
+        }
+        success = slab->freeList.compare_exchange_weak(head, node, std::memory_order_relaxed);
+    } while (!success);
 
-    ASSERT(slab->blocksInUse != 0);
-    slab->blocksInUse--;
+    // Slab was in the full list, but we can now move it to the recycled list.
+    if (slab->blocksInUse-- == mBlocksPerSlab) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        slab->Splice();
+        mRecycledSlabs.Prepend(slab);
+    }
 }
 
-SlabAllocatorImpl::IndexLinkNode* SlabAllocatorImpl::PopFront(Slab* slab) const {
-    ASSERT(slab->freeList != nullptr);
+SlabAllocatorImpl::IndexLinkNode* SlabAllocatorImpl::PopFront(Slab* slab) {
+    IndexLinkNode* head = slab->freeList.load(std::memory_order_relaxed);
+    bool success = false;
+    do {
+        if (head == nullptr) {
+            return nullptr;
+        }
 
-    IndexLinkNode* head = slab->freeList;
-    if (head->nextIndex == kInvalidIndex) {
-        slab->freeList = nullptr;
-    } else {
-        ASSERT(IsNodeInSlab(slab, head));
-        slab->freeList = OffsetFrom(head, head->nextIndex - head->index);
-        ASSERT(IsNodeInSlab(slab, slab->freeList));
+        IndexLinkNode* next = nullptr;
+        if (head->nextIndex != kInvalidIndex) {
+            ASSERT(IsNodeInSlab(slab, head));
+            next = OffsetFrom(head, head->nextIndex - head->index);
+            ASSERT(IsNodeInSlab(slab, next));
+        }
+        success = slab->freeList.compare_exchange_weak(head, next, std::memory_order_relaxed);
+    } while (!success);
+
+    // If this is the last available block, move full slab to the full list, so allocate can always
+    // return quickly.
+    if (++(slab->blocksInUse) == mBlocksPerSlab) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        slab->Splice();
+        mFullSlabs.Prepend(slab);
     }
-
-    ASSERT(slab->blocksInUse < mBlocksPerSlab);
-    slab->blocksInUse++;
     return head;
 }
 
@@ -170,18 +192,11 @@ void SlabAllocatorImpl::Slab::Splice() {
 }
 
 void* SlabAllocatorImpl::Allocate() {
-    if (mAvailableSlabs.next == nullptr) {
-        GetNewSlab();
-    }
-
-    Slab* slab = mAvailableSlabs.next;
+    Slab* slab = GetNextSlab();
     IndexLinkNode* node = PopFront(slab);
-    ASSERT(node != nullptr);
-
-    // Move full slabs to a separate list, so allocate can always return quickly.
-    if (slab->blocksInUse == mBlocksPerSlab) {
-        slab->Splice();
-        mFullSlabs.Prepend(slab);
+    while (node == nullptr) {
+        slab = GetNextSlab();
+        node = PopFront(slab);
     }
 
     return ObjectFromNode(node);
@@ -195,20 +210,20 @@ void SlabAllocatorImpl::Deallocate(void* ptr) {
     Slab* slab = reinterpret_cast<Slab*>(static_cast<char*>(firstAllocation) - mSlabBlocksOffset);
     ASSERT(slab != nullptr);
 
-    bool slabWasFull = slab->blocksInUse == mBlocksPerSlab;
-
-    ASSERT(slab->blocksInUse != 0);
+    ASSERT(slab->blocksInUse.load() != 0);
     PushFront(slab, node);
-
-    if (slabWasFull) {
-        // Slab is in the full list. Move it to the recycled list.
-        ASSERT(slab->freeList != nullptr);
-        slab->Splice();
-        mRecycledSlabs.Prepend(slab);
-    }
 
     // TODO(crbug.com/dawn/825): Occasionally prune slabs if |blocksInUse == 0|.
     // Doing so eagerly hurts performance.
+}
+
+SlabAllocatorImpl::Slab* SlabAllocatorImpl::GetNextSlab() {
+    std::lock_guard<std::mutex> lock(mMutex);
+    if (mAvailableSlabs.next != nullptr) {
+        return mAvailableSlabs.next;
+    }
+    GetNewSlab();
+    return mAvailableSlabs.next;
 }
 
 void SlabAllocatorImpl::GetNewSlab() {

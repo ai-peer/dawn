@@ -15,7 +15,9 @@
 #ifndef SRC_DAWN_COMMON_SLABALLOCATOR_H_
 #define SRC_DAWN_COMMON_SLABALLOCATOR_H_
 
+#include <atomic>
 #include <cstdint>
+#include <mutex>
 #include <type_traits>
 #include <utility>
 
@@ -86,10 +88,10 @@ class SlabAllocatorImpl {
         void Splice();
 
         char* allocation;
-        IndexLinkNode* freeList;
+        std::atomic<IndexLinkNode*> freeList;
         Slab* prev;
         Slab* next;
-        Index blocksInUse;
+        std::atomic<Index> blocksInUse;
     };
 
     SlabAllocatorImpl(Index blocksPerSlab, uint32_t objectSize, uint32_t objectAlignment);
@@ -118,8 +120,13 @@ class SlabAllocatorImpl {
 
     // The Slab stores a linked-list of free allocations.
     // PushFront/PopFront adds/removes an allocation from the free list.
-    void PushFront(Slab* slab, IndexLinkNode* node) const;
-    IndexLinkNode* PopFront(Slab* slab) const;
+    void PushFront(Slab* slab, IndexLinkNode* node);
+    IndexLinkNode* PopFront(Slab* slab);
+
+    // Returns the current available slab, allocating one if necessary. Note that in a multithreaded
+    // scenario, the returned slab is not guaranteed to have an available node, so it may be
+    // necessary to call this again should PopFront on the slab fail and return nullptr.
+    Slab* GetNextSlab();
 
     // Replace the current slab with a new one, and chain the old one off of it.
     // Both slabs may still be used for for allocation/deallocation, but older slabs
@@ -158,6 +165,7 @@ class SlabAllocatorImpl {
         void Prepend(Slab* slab);
     };
 
+    std::mutex mMutex;
     SentinelSlab mAvailableSlabs;  // Available slabs to service allocations.
     SentinelSlab mFullSlabs;       // Full slabs. Stored here so we can skip checking them.
     SentinelSlab mRecycledSlabs;   // Recycled slabs. Not immediately added to |mAvailableSlabs| so
