@@ -95,6 +95,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d140248e_3747b59c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T14:05:52Z",
+      "side": 1,
+      "message": "For [1] ok, this is the same limitation as D3D12. We could have an optimization to avoid the copy to the staging if the whole subresource is written.\n\n[2] Gotcha. It seems this is the only Write to a staging texture for now so we can\u0027t reuse code.",
+      "parentUuid": "723ed042_617a459c",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d8cb140_10507d54",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 4
