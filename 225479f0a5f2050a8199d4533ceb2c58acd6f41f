@@ -16,6 +16,24 @@
       "message": "ah, it\u0027s too old?",
       "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45736b09_54e8d246",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003366
+      },
+      "writtenOn": "2023-07-19T03:02:47Z",
+      "side": 0,
+      "message": "Siso requires a build config file under `//build/config/siso`\nIf the `build` is synced with chromium/src, it may work as is.\n\nHowever, we haven\u0027t prepared dedicated config for dawn, yet. \nSo it might be too early to try Siso on dawn project now.",
+      "parentUuid": "52741ea6_130ff2ae",
+      "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
