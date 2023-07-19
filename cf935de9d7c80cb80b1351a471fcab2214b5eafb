@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7b3524e_15cca1a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-19T22:30:37Z",
+      "side": 1,
+      "message": "[I did propose `lang/wgsl/parser`](https://docs.google.com/presentation/d/192vgSYnjt9FENAyTFaglXrBJvZJk3lSnoJuKxohYRU4/edit#slide\u003did.g25a352a26a8_0_224), but we can move it again if we agree that\u0027s a better name.",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "cf935de9d7c80cb80b1351a471fcab2214b5eafb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
