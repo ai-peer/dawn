@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c2a3a2_1f09f121",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T10:00:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b70bc02_bfb90cb3",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T10:00:45Z",
+      "side": 1,
+      "message": "Why? Isn\u0027t [1] sufficient?",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "167ebb67_781ecad0",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T10:00:45Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d9d2a9_01138ae2",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T10:00:45Z",
+      "side": 1,
+      "message": "This struct doesn\u0027t seem to do anything now. Previously it was so that the test backend could pass the correct type, but now the type is just forwarded in the constructor so we could remove the struct.",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f76bd4_a34fab31",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T10:00:45Z",
+      "side": 1,
+      "message": "Can\u0027t this be done in the constructor so we just go `return std::make_unique ...`",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49967e5f_b8c7cdd7",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T10:00:45Z",
+      "side": 1,
+      "message": "Doesn\u0027t just return std::make_unique ... work?",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

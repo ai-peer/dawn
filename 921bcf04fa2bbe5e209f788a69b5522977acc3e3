@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "113f9187_2e19ef5d",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-19T10:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2fc9986a_f85328dd",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 6
+      },
+      "revId": "921bcf04fa2bbe5e209f788a69b5522977acc3e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cab7a61f_afc525da",
