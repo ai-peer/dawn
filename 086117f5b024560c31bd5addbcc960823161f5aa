@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58133c0e_2c73835f",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-20T06:18:13Z",
+      "side": 1,
+      "message": "Done. Swiftshader DmaBuf fails to createGBMDevice. Made changes in DmaBuf backend cpp file to handle this.",
+      "parentUuid": "4b70bc02_bfb90cb3",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "167ebb67_781ecad0",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-07-19T10:00:45Z",
       "side": 1,
       "message": "[1]",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0347863_e77623fe",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-20T06:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "167ebb67_781ecad0",
       "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65175e7c_8b243891",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-20T06:18:13Z",
+      "side": 1,
+      "message": "Unfortunately, Constructors of ExternalImageDescriptorVk(type) and ExternalImageExportInfoVk(type) are protected functions. So we still need these helper structures to set ExternalImageType.",
+      "parentUuid": "83d9d2a9_01138ae2",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9f76bd4_a34fab31",
         "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
         "patchSetId": 15
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6dd6e24_0cffe83f",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-20T06:18:13Z",
+      "side": 1,
+      "message": "(Combined with [1])\nThe bots results shows that for DmaBuf backend, swiftshader fails to createGbmDevice() which crash the bots. So I changed CreateGbmDevice() to return bool and move it to SupportsTestParams().",
+      "parentUuid": "a9f76bd4_a34fab31",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49967e5f_b8c7cdd7",
         "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
         "patchSetId": 15
@@ -99,6 +171,24 @@
       "writtenOn": "2023-07-19T10:00:45Z",
       "side": 1,
       "message": "Doesn\u0027t just return std::make_unique ... work?",
+      "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c4d1c56_72519be9",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-07-20T06:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49967e5f_b8c7cdd7",
       "revId": "086117f5b024560c31bd5addbcc960823161f5aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
