@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1df082c_b1d17bfe",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T08:31:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "339129b0_38f7ba1a",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 6
+      },
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3013ab52_56ff2cb8",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-07-19T13:03:28Z",
       "side": 1,
       "message": "Likewise this could be split off to its own method.",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6afed98_632ed7b2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T08:31:10Z",
+      "side": 1,
+      "message": "Split to `WriteDepthStencilInternal()`.",
+      "parentUuid": "3013ab52_56ff2cb8",
       "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +153,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e643d953_412fee66",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T08:31:10Z",
+      "side": 1,
+      "message": "We could improve to avoid the copy if the texture only has the stencil aspect, in this case clients can only write to the stencil aspect, so we don\u0027t need to copy the depth aspect.",
+      "parentUuid": "d140248e_3747b59c",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dc1d50a_f4bae407",
@@ -124,6 +184,30 @@
       "writtenOn": "2023-07-19T14:29:06Z",
       "side": 1,
       "message": "Can we skip this copy, if we know the whole texture will be overwrite or the dest texture is uninitialized, we need to clear it anyway?",
+      "range": {
+        "startLine": 728,
+        "startChar": 8,
+        "endLine": 728,
+        "endChar": 58
+      },
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e371811_0f2911ce",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T08:31:10Z",
+      "side": 1,
+      "message": "Good point. We can check if the other aspect has valid data, and skip the copy otherwise.",
+      "parentUuid": "2dc1d50a_f4bae407",
       "range": {
         "startLine": 728,
         "startChar": 8,
@@ -153,6 +237,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a311dab_584b346e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T08:31:10Z",
+      "side": 1,
+      "message": "Sorry, what does that mean?",
+      "parentUuid": "0d8cb140_10507d54",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82c53af5_3a5ee46e",
         "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
         "patchSetId": 4
@@ -164,6 +266,24 @@
       "writtenOn": "2023-07-19T13:03:28Z",
       "side": 1,
       "message": "We have IntelGen9 as well to make the suppression even more specific. Do we have any idea why this fails?",
+      "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f80ab37_c36f45cc",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T08:31:10Z",
+      "side": 1,
+      "message": "Good to know, thanks!\nIt runs into a driver crash. I will fill a bug to the driver team.",
+      "parentUuid": "82c53af5_3a5ee46e",
       "revId": "0e10662e3c01decfbac755ec3f6b19270d392954",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
