@@ -71,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "870421ba_08ce519d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "D3D11 can only copy the all aspects actually, so it doesn\u0027t count here. Anyway Using `CombinedDepthStencil` here would be less misleading.",
+      "parentUuid": "f37874fe_22b18139",
+      "range": {
+        "startLine": 777,
+        "startChar": 32,
+        "endLine": 777,
+        "endChar": 53
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13240e05_8024482a",
@@ -94,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab524a07_1794df4c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "13240e05_8024482a",
+      "range": {
+        "startLine": 781,
+        "startChar": 37,
+        "endLine": 781,
+        "endChar": 57
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f951ca52_a5f2d72a",
@@ -107,6 +155,30 @@
       "writtenOn": "2023-07-20T10:55:28Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 783,
+        "startChar": 26,
+        "endLine": 783,
+        "endChar": 30
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c09c1537_d51e1b44",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f951ca52_a5f2d72a",
       "range": {
         "startLine": 783,
         "startChar": 26,
@@ -142,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbb769d9_87260131",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "Not sure I understand you correctly. Per my understanding, here we only write the desired aspect and keep the other aspect as it is. So we don\u0027t need to mark the other aspect as initialized.",
+      "parentUuid": "494ae94e_78ffc8dc",
+      "range": {
+        "startLine": 804,
+        "startChar": 21,
+        "endLine": 804,
+        "endChar": 27
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d29a08f_49d5e029",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -153,6 +249,30 @@
       "writtenOn": "2023-07-20T10:55:28Z",
       "side": 1,
       "message": "all aspects?",
+      "range": {
+        "startLine": 818,
+        "startChar": 28,
+        "endLine": 818,
+        "endChar": 49
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d09843_aa616880",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1d29a08f_49d5e029",
       "range": {
         "startLine": 818,
         "startChar": 28,
@@ -186,6 +306,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9191ed7_a9369646",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e2b08a7f_9dd9f819",
+      "range": {
+        "startLine": 822,
+        "startChar": 33,
+        "endLine": 822,
+        "endChar": 53
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42a8480d_eca4e179",
@@ -209,6 +353,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1153e25a_218e021d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "Good point. We\u0027d better split `Copy` and use `CopyInternal` here instead.",
+      "parentUuid": "42a8480d_eca4e179",
+      "range": {
+        "startLine": 824,
+        "startChar": 4,
+        "endLine": 824,
+        "endChar": 54
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae88c7ce_33428b7d",
@@ -222,6 +390,30 @@
       "writtenOn": "2023-07-20T10:55:28Z",
       "side": 1,
       "message": "Should we ASSERT() src.aspect and dst.aspect cover all aspects of the texture? Since we can not copy depth or stencil individually. Is there test or use case wants to just copy one aspect of a DepthStencil texture?",
+      "range": {
+        "startLine": 978,
+        "startChar": 4,
+        "endLine": 978,
+        "endChar": 10
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91fd095b_cfe860ce",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T13:42:49Z",
+      "side": 1,
+      "message": "The validation layer should be covering that, as the [spec](https://www.w3.org/TR/webgpu/#dom-gpucommandencoder-copytexturetotexture) says:\n```\nIf srcTexture.format is a depth-stencil format:\n\nsource.aspect and destination.aspect must both refer to all aspects of srcTexture.format and dstTexture.format, respectively.\n```",
+      "parentUuid": "ae88c7ce_33428b7d",
       "range": {
         "startLine": 978,
         "startChar": 4,
