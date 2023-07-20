@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_SHAREDFENCE_H_
 #define SRC_DAWN_NATIVE_SHAREDFENCE_H_
 
+#include "dawn/native/Error.h"
 #include "dawn/native/ObjectBase.h"
 
 namespace dawn::native {
@@ -30,8 +31,14 @@ class SharedFenceBase : public ApiObjectBase {
 
     void APIExportInfo(SharedFenceExportInfo* info) const;
 
+  protected:
+    SharedFenceBase(DeviceBase* device, const char* label);
+
   private:
+    MaybeError ExportInfo(SharedFenceExportInfo* info) const;
+
     void DestroyImpl() override;
+    virtual MaybeError ExportInfoImpl(SharedFenceExportInfo* info) const;
 
     SharedFenceBase(DeviceBase* device,
                     const SharedFenceDescriptor* descriptor,

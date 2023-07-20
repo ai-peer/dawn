@@ -21,6 +21,7 @@
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/metal/BufferMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
+#include "dawn/native/metal/SharedTextureMemoryMTL.h"
 #include "dawn/native/metal/UtilsMetal.h"
 
 #include <CoreVideo/CVPixelBuffer.h>
@@ -742,6 +743,22 @@ ResultOrError<Ref<Texture>> Texture::CreateFromIOSurface(
 }
 
 // static
+ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
+    SharedTextureMemory* memory,
+    const TextureDescriptor* descriptor) {
+    ExternalImageDescriptorIOSurface ioSurfaceImageDesc;
+    ioSurfaceImageDesc.isInitialized = false;  // Initialized state is set on memory.BeginAccess.
+    ioSurfaceImageDesc.cTextureDescriptor = ToAPI(descriptor);
+
+    Ref<Texture> texture;
+    DAWN_TRY_ASSIGN(
+        texture, Texture::CreateFromIOSurface(ToBackend(memory->GetDevice()), &ioSurfaceImageDesc,
+                                              memory->GetIOSurface(), {}));
+    texture->mSharedTextureMemory = Ref<SharedTextureMemoryBase>(memory).GetWeakRef();
+    return texture;
+}
+
+// static
 Ref<Texture> Texture::CreateWrapping(Device* device,
                                      const TextureDescriptor* descriptor,
                                      NSPRef<id<MTLTexture>> wrapped) {
@@ -816,7 +833,12 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
 }
 
 void Texture::SynchronizeTextureBeforeUse(CommandRecordingContext* commandContext) {
-    if (@available(macOS 10.14, *)) {
+    if (@available(macOS 10.14, iOS 12.0, *)) {
+        Ref<SharedTextureMemory> memory = ToBackend(mSharedTextureMemory.Promote());
+        if (memory != nullptr) {
+            memory->SynchronizeBeforeUse(commandContext);
+        }
+
         if (!mWaitEvents.empty()) {
             // There may be an open blit encoder from a copy command or writeBuffer.
             // Wait events are only allowed if there is no encoder open.

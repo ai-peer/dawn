@@ -678,6 +678,8 @@ source_set("white_box_tests_sources") {
     "white_box/InternalResourceUsageTests.cpp",
     "white_box/InternalStorageBufferBindingTests.cpp",
     "white_box/QueryInternalShaderTests.cpp",
+    "white_box/SharedTextureMemoryTests.cpp",
+    "white_box/SharedTextureMemoryTests.h",
   ]
 
   if (dawn_enable_d3d11) {
@@ -701,6 +703,7 @@ source_set("white_box_tests_sources") {
       "white_box/GPUTimestampCalibrationTests.h",
       "white_box/GPUTimestampCalibrationTests_Metal.mm",
       "white_box/MetalAutoreleasePoolTests.mm",
+      "white_box/SharedTextureMemoryTests_metal.mm",
     ]
   }
 

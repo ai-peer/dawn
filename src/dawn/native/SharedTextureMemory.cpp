@@ -14,7 +14,11 @@
 
 #include "dawn/native/SharedTextureMemory.h"
 
+#include <utility>
+
+#include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/SharedFence.h"
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
@@ -29,7 +33,20 @@ SharedTextureMemoryBase* SharedTextureMemoryBase::MakeError(
 SharedTextureMemoryBase::SharedTextureMemoryBase(DeviceBase* device,
                                                  const SharedTextureMemoryDescriptor* descriptor,
                                                  ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag, descriptor->label) {}
+    : ApiObjectBase(device, tag, descriptor->label), mProperties() {}
+
+SharedTextureMemoryBase::SharedTextureMemoryBase(DeviceBase* device,
+                                                 const char* label,
+                                                 const SharedTextureMemoryProperties& properties)
+    : ApiObjectBase(device, label), mProperties(properties) {
+    const Format& internalFormat = device->GetValidInternalFormat(properties.format);
+    if (!internalFormat.supportsStorageUsage) {
+        ASSERT(!(mProperties.usage & wgpu::TextureUsage::StorageBinding));
+    }
+    if (!internalFormat.isRenderable) {
+        ASSERT(!(mProperties.usage & wgpu::TextureUsage::RenderAttachment));
+    }
+}
 
 ObjectType SharedTextureMemoryBase::GetType() const {
     return ObjectType::SharedTextureMemory;
@@ -38,21 +55,170 @@ ObjectType SharedTextureMemoryBase::GetType() const {
 void SharedTextureMemoryBase::DestroyImpl() {}
 
 void SharedTextureMemoryBase::APIGetProperties(SharedTextureMemoryProperties* properties) const {
-    DAWN_UNUSED(GetDevice()->ConsumedError(DAWN_UNIMPLEMENTED_ERROR("Not implemented")));
+    if (GetDevice()->ConsumedError([&]() -> MaybeError {
+            DAWN_TRY(ValidateSTypes(properties->nextInChain, {}));
+            DAWN_TRY(GetDevice()->ValidateObject(this));
+            return {};
+        }())) {
+        properties->usage = wgpu::TextureUsage::None;
+        properties->size = {0, 0, 0};
+        properties->format = wgpu::TextureFormat::Undefined;
+        return;
+    }
+    properties->usage = mProperties.usage;
+    properties->size = mProperties.size;
+    properties->format = mProperties.format;
 }
 
 TextureBase* SharedTextureMemoryBase::APICreateTexture(const TextureDescriptor* descriptor) {
-    DAWN_UNUSED(GetDevice()->ConsumedError(DAWN_UNIMPLEMENTED_ERROR("Not implemented")));
-    return TextureBase::MakeError(GetDevice(), descriptor);
+    Ref<TextureBase> result;
+    if (GetDevice()->ConsumedError(CreateTexture(descriptor), &result,
+                                   InternalErrorType::OutOfMemory, "calling %s.CreateTexture(%s).",
+                                   this, descriptor)) {
+        return TextureBase::MakeError(GetDevice(), descriptor);
+    }
+    return result.Detach();
+}
+
+ResultOrError<Ref<TextureBase>> SharedTextureMemoryBase::CreateTexture(
+    const TextureDescriptor* descriptor) {
+    DAWN_TRY(GetDevice()->ValidateIsAlive());
+    DAWN_TRY(GetDevice()->ValidateObject(this));
+
+    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
+                    "Texture dimension (%s) is not %s.", descriptor->dimension,
+                    wgpu::TextureDimension::e2D);
+
+    DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",
+                    descriptor->mipLevelCount);
+
+    DAWN_INVALID_IF(descriptor->size.depthOrArrayLayers != 1, "Array layer count (%u) is not 1.",
+                    descriptor->size.depthOrArrayLayers);
+
+    DAWN_INVALID_IF(descriptor->sampleCount != 1, "Sample count (%u) is not 1.",
+                    descriptor->sampleCount);
+
+    DAWN_INVALID_IF(descriptor->size != mProperties.size,
+                    "SharedTextureMemory size (%s) doesn't match descriptor size (%s).",
+                    &mProperties.size, &descriptor->size);
+
+    DAWN_INVALID_IF(descriptor->format != mProperties.format,
+                    "SharedTextureMemory format (%s) doesn't match descriptor format (%s).",
+                    mProperties.format, descriptor->format);
+
+    DAWN_TRY(
+        ValidateTextureDescriptor(GetDevice(), descriptor, AllowMultiPlanarTextureFormat::Yes));
+
+    return CreateTextureImpl(descriptor);
+}
+
+ResultOrError<Ref<TextureBase>> SharedTextureMemoryBase::CreateTextureImpl(
+    const TextureDescriptor* descriptor) {
+    return DAWN_UNIMPLEMENTED_ERROR("Not implemented");
 }
 
 void SharedTextureMemoryBase::APIBeginAccess(TextureBase* texture,
                                              const BeginAccessDescriptor* descriptor) {
-    DAWN_UNUSED(GetDevice()->ConsumedError(DAWN_UNIMPLEMENTED_ERROR("Not implemented")));
+    DAWN_UNUSED(GetDevice()->ConsumedError(BeginAccess(texture, descriptor),
+                                           "calling %s.BeginAccess(%s).", this, texture));
+}
+
+MaybeError SharedTextureMemoryBase::BeginAccess(TextureBase* texture,
+                                                const BeginAccessDescriptor* descriptor) {
+    DAWN_INVALID_IF(mCurrentAccess != nullptr,
+                    "Cannot begin access with %s on %s which is currently accessed by %s.", texture,
+                    this, mCurrentAccess.Get());
+    mCurrentAccess = texture;
+
+    ASSERT(mBeginFences.empty());
+    for (size_t i = 0; i < descriptor->fenceCount; ++i) {
+        mBeginFences.push_back({descriptor->fences[i], descriptor->signaledValues[i]});
+    }
+
+    DAWN_TRY(GetDevice()->ValidateIsAlive());
+    DAWN_TRY(GetDevice()->ValidateObject(texture));
+    for (size_t i = 0; i < descriptor->fenceCount; ++i) {
+        DAWN_TRY(GetDevice()->ValidateObject(descriptor->fences[i]));
+    }
+
+    Ref<SharedTextureMemoryBase> memory = texture->QuerySharedTextureMemory();
+    DAWN_INVALID_IF(memory.Get() != this, "%s was created from %s and cannot be used with %s.",
+                    texture, memory.Get(), this);
+
+    DAWN_INVALID_IF(texture->GetFormat().IsMultiPlanar() & !descriptor->initialized,
+                    "BeginAccess on %s with multiplanar format (%s) must be initialized.", texture,
+                    texture->GetFormat().format);
+
+    DAWN_TRY(BeginAccessImpl(texture, descriptor));
+    if (!texture->IsError()) {
+        texture->SetIsSubresourceContentInitialized(descriptor->initialized,
+                                                    texture->GetAllSubresources());
+    }
+    return {};
+}
+
+MaybeError SharedTextureMemoryBase::BeginAccessImpl(TextureBase* texture,
+                                                    const BeginAccessDescriptor*) {
+    return DAWN_UNIMPLEMENTED_ERROR("Not implemented");
 }
 
 void SharedTextureMemoryBase::APIEndAccess(TextureBase* texture, EndAccessState* state) {
-    DAWN_UNUSED(GetDevice()->ConsumedError(DAWN_UNIMPLEMENTED_ERROR("Not implemented")));
+    DAWN_UNUSED(GetDevice()->ConsumedError(EndAccess(texture, state), "calling %s.EndAccess(%s).",
+                                           this, texture));
+}
+
+MaybeError SharedTextureMemoryBase::EndAccess(TextureBase* texture, EndAccessState* state) {
+    DAWN_INVALID_IF(mCurrentAccess != texture,
+                    "Cannot end access with %s on %s which is currently accessed by %s.", texture,
+                    this, mCurrentAccess.Get());
+    mCurrentAccess = nullptr;
+
+    // Call the rest of the EndAccess implementation. This is separated out because
+    // writing the output state must happen regardless of whether or not EndAccessInternal
+    // succeeds.
+    MaybeError error = EndAccessInternal(texture, state);
+
+    // If any begin fences were never acquired, forward them to the end fences.
+    for (auto& fence : mBeginFences) {
+        mEndFences.push_back(std::move(fence));
+    }
+    mBeginFences.clear();
+
+    // Copy the fences to the output state.
+    if (size_t fenceCount = mEndFences.size()) {
+        auto* fences = new SharedFenceBase*[fenceCount];
+        uint64_t* signaledValues = new uint64_t[fenceCount];
+        for (size_t i = 0; i < fenceCount; ++i) {
+            fences[i] = mEndFences[i].object.Get();
+            signaledValues[i] = mEndFences[i].signaledValue;
+        }
+
+        state->fenceCount = fenceCount;
+        state->fences = fences;
+        state->signaledValues = signaledValues;
+    } else {
+        state->fenceCount = 0;
+        state->fences = nullptr;
+        state->signaledValues = nullptr;
+    }
+    state->initialized = texture->IsError() ||
+                         texture->IsSubresourceContentInitialized(texture->GetAllSubresources());
+    return error;
+}
+
+MaybeError SharedTextureMemoryBase::EndAccessInternal(TextureBase* texture, EndAccessState* state) {
+    DAWN_TRY(GetDevice()->ValidateObject(texture));
+
+    Ref<SharedTextureMemoryBase> memory = texture->QuerySharedTextureMemory();
+    DAWN_INVALID_IF(memory.Get() != this, "%s was created from %s and cannot be used with %s.",
+                    texture, memory.Get(), this);
+
+    DAWN_TRY(EndAccessImpl(texture));
+    return {};
+}
+
+MaybeError SharedTextureMemoryBase::EndAccessImpl(TextureBase* texture) {
+    return DAWN_UNIMPLEMENTED_ERROR("Not implemented");
 }
 
 }  // namespace dawn::native

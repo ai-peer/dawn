@@ -27,6 +27,7 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/PassResourceUsage.h"
 #include "dawn/native/PhysicalDevice.h"
+#include "dawn/native/SharedTextureMemory.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 
 namespace dawn::native {
@@ -894,6 +895,10 @@ TextureViewBase* TextureBase::APICreateView(const TextureViewDescriptor* descrip
 
 bool TextureBase::IsImplicitMSAARenderTextureViewSupported() const {
     return (GetUsage() & wgpu::TextureUsage::TextureBinding) != 0;
+}
+
+Ref<SharedTextureMemoryBase> TextureBase::QuerySharedTextureMemory() {
+    return mSharedTextureMemory.Promote();
 }
 
 void TextureBase::APIDestroy() {
