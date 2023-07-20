@@ -392,9 +392,12 @@ void DeviceBase::DestroyObjects() {
     // since AttachmentStates are cached by the device, objects that hold references to
     // AttachmentStates should make sure to un-ref them in their Destroy operation so that we
     // can destroy the frontend cache.
+    //
+    // Note that SharedFence is not in this list because they should be useable even after
+    // device destruction.
 
     // clang-format off
-        static constexpr std::array<ObjectType, 18> kObjectTypeDependencyOrder = {
+        static constexpr std::array<ObjectType, 19> kObjectTypeDependencyOrder = {
             ObjectType::ComputePassEncoder,
             ObjectType::RenderPassEncoder,
             ObjectType::RenderBundleEncoder,
@@ -408,6 +411,7 @@ void DeviceBase::DestroyObjects() {
             ObjectType::BindGroup,
             ObjectType::BindGroupLayout,
             ObjectType::ShaderModule,
+            ObjectType::SharedTextureMemory,
             ObjectType::ExternalTexture,
             ObjectType::Texture,  // Note that Textures own the TextureViews.
             ObjectType::QuerySet,
@@ -1362,8 +1366,12 @@ ExternalTextureBase* DeviceBase::APICreateExternalTexture(
 SharedTextureMemoryBase* DeviceBase::APIImportSharedTextureMemory(
     const SharedTextureMemoryDescriptor* descriptor) {
     Ref<SharedTextureMemoryBase> result = nullptr;
-    if (ConsumedError(ImportSharedTextureMemoryImpl(descriptor), &result,
-                      "calling %s.ImportSharedTextureMemory(%s).", this, descriptor)) {
+    if (ConsumedError(
+            [&]() -> ResultOrError<Ref<SharedTextureMemoryBase>> {
+                DAWN_TRY(ValidateIsAlive());
+                return ImportSharedTextureMemoryImpl(descriptor);
+            }(),
+            &result, "calling %s.ImportSharedTextureMemory(%s).", this, descriptor)) {
         return SharedTextureMemoryBase::MakeError(this, descriptor);
     }
     return result.Detach();
@@ -1376,8 +1384,12 @@ ResultOrError<Ref<SharedTextureMemoryBase>> DeviceBase::ImportSharedTextureMemor
 
 SharedFenceBase* DeviceBase::APIImportSharedFence(const SharedFenceDescriptor* descriptor) {
     Ref<SharedFenceBase> result = nullptr;
-    if (ConsumedError(ImportSharedFenceImpl(descriptor), &result,
-                      "calling %s.ImportSharedFence(%s).", this, descriptor)) {
+    if (ConsumedError(
+            [&]() -> ResultOrError<Ref<SharedFenceBase>> {
+                DAWN_TRY(ValidateIsAlive());
+                return ImportSharedFenceImpl(descriptor);
+            }(),
+            &result, "calling %s.ImportSharedFence(%s).", this, descriptor)) {
         return SharedFenceBase::MakeError(this, descriptor);
     }
     return result.Detach();
