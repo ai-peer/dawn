@@ -88,6 +88,24 @@
       "parentUuid": "11c01288_aed48673",
       "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5c634a_a57a23e4",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-07-20T14:47:26Z",
+      "side": 0,
+      "message": "I have sent up a CL to remove Siso from our DEPS, https://dawn-review.googlesource.com/c/dawn/+/142300",
+      "parentUuid": "3471261c_8caba3cb",
+      "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
