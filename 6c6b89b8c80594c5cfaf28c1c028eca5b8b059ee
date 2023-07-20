@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aed32e78_377359ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-20T03:42:17Z",
+      "side": 1,
+      "message": "PTAL. I didn\u0027t move `program_id` as it\u0027s needed by `symbol` so I think it should land wherever symbol lands with a new name.",
+      "revId": "6c6b89b8c80594c5cfaf28c1c028eca5b8b059ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
