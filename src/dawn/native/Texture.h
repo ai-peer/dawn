@@ -17,12 +17,15 @@
 
 #include <vector>
 
+#include "dawn/common/StackContainer.h"
+#include "dawn/common/WeakRef.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
+#include "dawn/native/SharedFence.h"
 #include "dawn/native/Subresource.h"
 
 #include "dawn/native/dawn_platform.h"
@@ -59,6 +62,7 @@ class TextureBase : public ApiObjectBase {
   public:
     enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
     enum class ClearValue { Zero, NonZero };
+    using PendingFenceList = StackVector<FenceAndSignalValue, 1>;
 
     static TextureBase* MakeError(DeviceBase* device, const TextureDescriptor* descriptor);
 
@@ -115,6 +119,17 @@ class TextureBase : public ApiObjectBase {
 
     bool IsImplicitMSAARenderTextureViewSupported() const;
 
+    // Begin an access scope on `memory`. Passing a list of fences that should be waited on before
+    // use.
+    void BeginAccessScope(SharedTextureMemoryBase* memory,
+                          const SharedTextureMemoryBeginAccessDescriptor* descriptor);
+    // End an access scope on `memory`, writing out any fences that have not yet been acquired.
+    void EndAccessScope(SharedTextureMemoryBase* memory, PendingFenceList* fences);
+    // Acquire the begin fences for the current access scope on `memory`.
+    void AcquireBeginFences(SharedTextureMemoryBase* memory, PendingFenceList* fences);
+
+    Ref<SharedTextureMemoryBase> QuerySharedTextureMemory();
+
     // Dawn API
     TextureViewBase* APICreateView(const TextureViewDescriptor* descriptor = nullptr);
     void APIDestroy();
@@ -133,6 +148,16 @@ class TextureBase : public ApiObjectBase {
 
     void DestroyImpl() override;
     void AddInternalUsage(wgpu::TextureUsage usage);
+
+    struct AccessScope {
+        SharedTextureMemoryBase* memory;
+        PendingFenceList pendingBeginFences;
+    };
+    // Associative list mapping memory -> PendingFenceList.
+    StackVector<AccessScope, 1> mAccessScopes;
+
+    // The shared texture memory the texture was created from. May be null.
+    WeakRef<SharedTextureMemoryBase> mSharedTextureMemory;
 
   private:
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, ObjectBase::ErrorTag tag);
