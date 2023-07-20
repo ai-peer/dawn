@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c9bf51a_1ff954c7",
+        "filename": "src/tint/lang/spirv/writer/generator_impl_ir.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-20T14:23:36Z",
+      "side": 1,
+      "message": "Note: Nvidia linux drivers would crash for the vector overload of this. We might need to polyfill.",
+      "range": {
+        "startLine": 1311,
+        "startChar": 26,
+        "endLine": 1311,
+        "endChar": 41
+      },
+      "revId": "09bc865253258e6b035557fd3ea80f1d8d8572d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
