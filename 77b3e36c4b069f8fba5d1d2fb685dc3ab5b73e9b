@@ -16,6 +16,46 @@
       "message": "@enga@chromium.org Would you take a look?",
       "revId": "77b3e36c4b069f8fba5d1d2fb685dc3ab5b73e9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd8ddea_f76210b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-20T17:27:04Z",
+      "side": 1,
+      "message": "LGTM; sorry for the delay",
+      "revId": "77b3e36c4b069f8fba5d1d2fb685dc3ab5b73e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8aa16ba_cadf006d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-20T17:27:04Z",
+      "side": 1,
+      "message": "is this TODO still relevant now that we have the `ClearCompressed` path?",
+      "range": {
+        "startLine": 498,
+        "startChar": 5,
+        "endLine": 499,
+        "endChar": 30
+      },
+      "revId": "77b3e36c4b069f8fba5d1d2fb685dc3ab5b73e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
