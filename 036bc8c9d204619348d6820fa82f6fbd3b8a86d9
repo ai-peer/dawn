@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aa0529c_88645561",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-20T19:22:35Z",
+      "side": 1,
+      "message": "I happened upon a way to do this, which I think is nicer in the raw ptr case",
+      "revId": "036bc8c9d204619348d6820fa82f6fbd3b8a86d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
