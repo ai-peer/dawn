@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc571d33_c63100ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-20T21:03:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8ce070605f7c9f27691d7760556d24ec28697b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7aac7c0_5854a046",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-20T21:03:13Z",
+      "side": 1,
+      "message": "instead of the bug, can you link to a doc?\nlike https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/dawn_internal_usages.md\n\nyou can add placeholder documentation for now",
+      "range": {
+        "startLine": 128,
+        "startChar": 7,
+        "endLine": 128,
+        "endChar": 61
+      },
+      "revId": "8ce070605f7c9f27691d7760556d24ec28697b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a57122_73f9aadb",
+        "filename": "src/dawn/wire/SupportedFeatures.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-20T21:03:13Z",
+      "side": 1,
+      "message": "I think it could probably be supported here; will the feature require any native-only types?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 48
+      },
+      "revId": "8ce070605f7c9f27691d7760556d24ec28697b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
