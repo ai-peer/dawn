@@ -70,6 +70,24 @@
       "parentUuid": "9c8d88c1_ae301c9b",
       "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3471261c_8caba3cb",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003366
+      },
+      "writtenOn": "2023-07-20T02:19:57Z",
+      "side": 0,
+      "message": "As you said, Siso isn\u0027t requirement for Reclient migration from Goma.\nSo I agree to removing the Siso reference for now.",
+      "parentUuid": "11c01288_aed48673",
+      "revId": "225479f0a5f2050a8199d4533ceb2c58acd6f41f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
