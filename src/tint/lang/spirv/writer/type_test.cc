@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "src/tint/lang/base/type/type.h"
 #include "src/tint/lang/base/type/bool.h"
 #include "src/tint/lang/base/type/depth_multisampled_texture.h"
 #include "src/tint/lang/base/type/depth_texture.h"
@@ -21,10 +22,9 @@
 #include "src/tint/lang/base/type/multisampled_texture.h"
 #include "src/tint/lang/base/type/sampled_texture.h"
 #include "src/tint/lang/base/type/storage_texture.h"
-#include "src/tint/lang/base/type/type.h"
 #include "src/tint/lang/base/type/u32.h"
 #include "src/tint/lang/base/type/void.h"
-#include "src/tint/lang/spirv/writer/test_helper_ir.h"
+#include "src/tint/lang/spirv/writer/test_helper.h"
 
 namespace tint::writer::spirv {
 namespace {
