@@ -30,14 +30,30 @@ SharedFenceBase::SharedFenceBase(DeviceBase* device,
                                  ObjectBase::ErrorTag tag)
     : ApiObjectBase(device, tag, descriptor->label) {}
 
+SharedFenceBase::SharedFenceBase(DeviceBase* device, const char* label)
+    : ApiObjectBase(device, label) {}
+
 ObjectType SharedFenceBase::GetType() const {
     return ObjectType::SharedFence;
 }
 
 void SharedFenceBase::APIExportInfo(SharedFenceExportInfo* info) const {
-    DAWN_UNUSED(GetDevice()->ConsumedError(DAWN_UNIMPLEMENTED_ERROR("Not implemented")));
+    DAWN_UNUSED(GetDevice()->ConsumedError(ExportInfo(info)));
 }
 
 void SharedFenceBase::DestroyImpl() {}
+
+MaybeError SharedFenceBase::ExportInfo(SharedFenceExportInfo* info) const {
+    // Set the type to undefined. It will be overrwritten to the actual type
+    // as long as no error occurs.
+    info->type = wgpu::SharedFenceType::Undefined;
+
+    DAWN_TRY(GetDevice()->ValidateObject(this));
+    return ExportInfoImpl(info);
+}
+
+MaybeError SharedFenceBase::ExportInfoImpl(SharedFenceExportInfo* info) const {
+    return DAWN_UNIMPLEMENTED_ERROR("Not implemented");
+}
 
 }  // namespace dawn::native
