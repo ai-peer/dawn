@@ -16,6 +16,29 @@
       "message": "Hi Corentin,\nCould you please take a look?\n\n+ Thomas/Bartek/Dana FYI.",
       "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91e4608_e1913e24",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-20T12:15:17Z",
+      "side": 1,
+      "message": "This is a new root directory, and we already have too many. Can we put this under `third_party`?",
+      "range": {
+        "startLine": 227,
+        "startChar": 3,
+        "endLine": 227,
+        "endChar": 37
+      },
+      "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
