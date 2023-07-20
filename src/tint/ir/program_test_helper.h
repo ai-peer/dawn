@@ -23,6 +23,7 @@
 #include "src/tint/core/string_stream.h"
 #include "src/tint/ir/disassembler.h"
 #include "src/tint/ir/from_program.h"
+#include "src/tint/ir/validator.h"
 #include "src/tint/lang/base/builtin/number.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 
@@ -46,7 +47,14 @@ class ProgramTestHelperBase : public BASE, public ProgramBuilder {
             ASSERT_TRUE(program->IsValid()) << formatter.format(program->Diagnostics());
         }();
 
-        return FromProgram(program.get());
+        auto result = FromProgram(program.get());
+        if (result) {
+            auto validated = ir::Validate(result.Get());
+            if (!validated) {
+                return validated.Failure().str();
+            }
+        }
+        return result;
     }
 
     /// @param mod the module
