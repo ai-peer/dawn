@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b20e04f6_462e86ef",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "Is it possible caller will call this method with `subresources.aspects \u003d\u003d Aspect::Depth|Aspect::Stencil`?",
+      "range": {
+        "startLine": 767,
+        "startChar": 29,
+        "endLine": 767,
+        "endChar": 64
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37874fe_22b18139",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "otherRange.aspects or all aspects?",
+      "range": {
+        "startLine": 777,
+        "startChar": 32,
+        "endLine": 777,
+        "endChar": 53
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13240e05_8024482a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "otherRange.aspects or all aspects?",
+      "range": {
+        "startLine": 781,
+        "startChar": 37,
+        "endLine": 781,
+        "endChar": 57
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f951ca52_a5f2d72a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 783,
+        "startChar": 26,
+        "endLine": 783,
+        "endChar": 30
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "494ae94e_78ffc8dc",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "I am not sure whether we clear the other aspect, if the copy at[1] is not called?\nWe can clear it, so the  other aspect of the texture can be marked as initialized.",
+      "range": {
+        "startLine": 804,
+        "startChar": 21,
+        "endLine": 804,
+        "endChar": 27
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d29a08f_49d5e029",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "all aspects?",
+      "range": {
+        "startLine": 818,
+        "startChar": 28,
+        "endLine": 818,
+        "endChar": 49
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2b08a7f_9dd9f819",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "all aspects?",
+      "range": {
+        "startLine": 822,
+        "startChar": 33,
+        "endLine": 822,
+        "endChar": 53
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a8480d_eca4e179",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "For non depth or stencil formats, `Texture::WriteInternal()` only write data to the texture, but not set content initialized state with `SetIsSubresourceContentInitialized(true, range)` However `Texture::WriteDepthStencilInternal()` uses `TextureCopy()`, it does set content initialized state. should them have same behavior?",
+      "range": {
+        "startLine": 824,
+        "startChar": 4,
+        "endLine": 824,
+        "endChar": 54
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae88c7ce_33428b7d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T10:55:28Z",
+      "side": 1,
+      "message": "Should we ASSERT() src.aspect and dst.aspect cover all aspects of the texture? Since we can not copy depth or stencil individually. Is there test or use case wants to just copy one aspect of a DepthStencil texture?",
+      "range": {
+        "startLine": 978,
+        "startChar": 4,
+        "endLine": 978,
+        "endChar": 10
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
