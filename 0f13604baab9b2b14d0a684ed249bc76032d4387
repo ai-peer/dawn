@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4d834d_0460d41d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-07-20T09:52:21Z",
+      "side": 1,
+      "message": "Hi Corentin,\nCould you please take a look?\n\n+ Thomas/Bartek/Dana FYI.",
+      "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
