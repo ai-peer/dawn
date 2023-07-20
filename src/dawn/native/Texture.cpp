@@ -27,6 +27,7 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/PassResourceUsage.h"
 #include "dawn/native/PhysicalDevice.h"
+#include "dawn/native/SharedTextureMemory.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 
 namespace dawn::native {
@@ -796,6 +797,10 @@ MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
     DAWN_INVALID_IF(mState == TextureState::Destroyed, "Destroyed texture %s used in a submit.",
                     this);
+
+    Ref<SharedTextureMemoryBase> memory = mSharedTextureMemory.Promote();
+    DAWN_INVALID_IF(memory != nullptr && !memory->CheckCurrentAccess(this),
+                    "%s without current access to %s used in a submit.", this, memory.Get());
     return {};
 }
 
@@ -895,6 +900,52 @@ TextureViewBase* TextureBase::APICreateView(const TextureViewDescriptor* descrip
 
 bool TextureBase::IsImplicitMSAARenderTextureViewSupported() const {
     return (GetUsage() & wgpu::TextureUsage::TextureBinding) != 0;
+}
+
+void TextureBase::BeginAccessScope(SharedTextureMemoryBase* memory,
+                                   const SharedTextureMemoryBeginAccessDescriptor* descriptor) {
+    PendingFenceList fences;
+    for (size_t i = 0; i < descriptor->fenceCount; ++i) {
+        fences->push_back({descriptor->fences[i], descriptor->signaledValues[i]});
+    }
+    mAccessScopes->emplace_back(memory, fences);
+}
+
+// Helper for use in AcquireBeginFences / EndAccessScope. Finds the latest AccessScope for `memory`.
+template <typename AccessScope, size_t N>
+static auto FindAccessScope(SharedTextureMemoryBase* memory, StackVector<AccessScope, N>& scopes) {
+    // Likely case where there is only one access scope.
+    if (DAWN_LIKELY(scopes->size() == 1 && scopes[0].memory == memory)) {
+        return scopes->begin();
+    }
+
+    // Search from the back, the most recently pushed scope.
+    for (auto it = scopes->rbegin(); it != scopes->rend(); ++it) {
+        if (it->memory == memory) {
+            return (++it).base();
+        }
+    }
+    return scopes->end();
+}
+
+void TextureBase::AcquireBeginFences(SharedTextureMemoryBase* memory, PendingFenceList* fences) {
+    auto it = FindAccessScope(memory, mAccessScopes);
+    if (it != mAccessScopes->end()) {
+        *fences = it->pendingBeginFences;
+        it->pendingBeginFences->clear();
+    }
+}
+
+void TextureBase::EndAccessScope(SharedTextureMemoryBase* memory, PendingFenceList* fences) {
+    auto it = FindAccessScope(memory, mAccessScopes);
+    if (it != mAccessScopes->end()) {
+        *fences = it->pendingBeginFences;
+        mAccessScopes->erase(it);
+    }
+}
+
+Ref<SharedTextureMemoryBase> TextureBase::QuerySharedTextureMemory() {
+    return mSharedTextureMemory.Promote();
 }
 
 void TextureBase::APIDestroy() {

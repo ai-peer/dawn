@@ -394,7 +394,7 @@ void DeviceBase::DestroyObjects() {
     // can destroy the frontend cache.
 
     // clang-format off
-        static constexpr std::array<ObjectType, 18> kObjectTypeDependencyOrder = {
+        static constexpr std::array<ObjectType, 19> kObjectTypeDependencyOrder = {
             ObjectType::ComputePassEncoder,
             ObjectType::RenderPassEncoder,
             ObjectType::RenderBundleEncoder,
@@ -408,6 +408,7 @@ void DeviceBase::DestroyObjects() {
             ObjectType::BindGroup,
             ObjectType::BindGroupLayout,
             ObjectType::ShaderModule,
+            ObjectType::SharedTextureMemory,
             ObjectType::ExternalTexture,
             ObjectType::Texture,  // Note that Textures own the TextureViews.
             ObjectType::QuerySet,
