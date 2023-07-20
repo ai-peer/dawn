@@ -16,6 +16,23 @@
       "message": "PTAL. I wasn\u0027t sure if your slide was to split utils into a bunch of folders, or if it was just saying what the things in core were. I went for just a straight move without creating folders as it seemed like we\u0027d end up with a lot of folders with 1-2 files in them which didn\u0027t seem great.",
       "revId": "d6f131430a59bc1f4786fcea8e1b25f075af1b4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20bd7909_161ebccf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-20T09:07:30Z",
+      "side": 1,
+      "message": "To match the proposal, this needs splitting up further. Happy to do in steps though",
+      "revId": "d6f131430a59bc1f4786fcea8e1b25f075af1b4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
