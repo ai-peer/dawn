@@ -15,7 +15,13 @@
 #ifndef SRC_DAWN_NATIVE_SHAREDTEXTUREMEMORY_H_
 #define SRC_DAWN_NATIVE_SHAREDTEXTUREMEMORY_H_
 
+#include <vector>
+
+#include "dawn/common/WeakRefSupport.h"
+#include "dawn/native/Error.h"
 #include "dawn/native/ObjectBase.h"
+#include "dawn/native/SharedFence.h"
+#include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
 
@@ -25,7 +31,8 @@ struct SharedTextureMemoryEndAccessState;
 struct SharedTextureMemoryProperties;
 struct TextureDescriptor;
 
-class SharedTextureMemoryBase : public ApiObjectBase {
+class SharedTextureMemoryBase : public ApiObjectBase,
+                                public WeakRefSupport<SharedTextureMemoryBase> {
   public:
     using BeginAccessDescriptor = SharedTextureMemoryBeginAccessDescriptor;
     using EndAccessState = SharedTextureMemoryEndAccessState;
@@ -40,8 +47,41 @@ class SharedTextureMemoryBase : public ApiObjectBase {
 
     ObjectType GetType() const override;
 
-  private:
+    bool CheckCurrentAccess(const TextureBase* texture) const;
+
+  protected:
+    SharedTextureMemoryBase(DeviceBase* device,
+                            const char* label,
+                            const SharedTextureMemoryProperties& properties);
     void DestroyImpl() override;
+
+    struct FenceAndSignalValue {
+        Ref<SharedFenceBase> object;
+        uint64_t signaledValue;
+    };
+
+    const SharedTextureMemoryProperties mProperties;
+
+    Ref<TextureBase> mCurrentAccess;
+    std::vector<FenceAndSignalValue> mBeginFences;
+    std::vector<FenceAndSignalValue> mEndFences;
+
+  private:
+    ResultOrError<Ref<TextureBase>> CreateTexture(const TextureDescriptor* descriptor);
+    MaybeError BeginAccess(TextureBase* texture, const BeginAccessDescriptor* descriptor);
+    MaybeError EndAccess(TextureBase* texture, EndAccessState* state);
+    MaybeError EndAccessInternal(TextureBase* texture, EndAccessState* state);
+
+    virtual ResultOrError<Ref<TextureBase>> CreateTextureImpl(const TextureDescriptor* descriptor);
+
+    // BeginAccessImpl validates the operation in valid on the backend, and performs any
+    // backend specific operations. It does NOT need to acquire begin fences; that is done in the
+    // frontend in BeginAccess.
+    virtual MaybeError BeginAccessImpl(TextureBase* texture,
+                                       const BeginAccessDescriptor* descriptor);
+    // EndAccessImpl validates the operation is valid on the backend, and appends any end fences
+    // to mEndFences.
+    virtual MaybeError EndAccessImpl(TextureBase* texture);
 
     SharedTextureMemoryBase(DeviceBase* device,
                             const SharedTextureMemoryDescriptor* descriptor,
