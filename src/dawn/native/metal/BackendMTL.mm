@@ -531,6 +531,11 @@ class PhysicalDevice : public PhysicalDeviceBase {
         EnableFeature(Feature::BGRA8UnormStorage);
         EnableFeature(Feature::SurfaceCapabilities);
         EnableFeature(Feature::MSAARenderToSingleSampled);
+
+        EnableFeature(Feature::SharedTextureMemoryIOSurface);
+        if (@available(macOS 10.14, iOS 12.0, *)) {
+            EnableFeature(Feature::SharedFenceMTLSharedEvent);
+        }
     }
 
     void InitializeVendorArchitectureImpl() override {
