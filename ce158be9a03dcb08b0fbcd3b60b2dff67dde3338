@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c04c0b_3bd25999",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1001001
+      },
+      "writtenOn": "2023-07-20T22:18:16Z",
+      "side": 1,
+      "message": "This needs to be `download_remoteexec_cfg and dawn_standalone`.\n\nWithout the `dawn_standalone` clause, rolling this into chromium/src breaks checkouts with download_remoteexec_cfg enabled (because the code in third_party/dawn/buildtools doesn\u0027t get checked out in a chromium build).",
+      "revId": "ce158be9a03dcb08b0fbcd3b60b2dff67dde3338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
