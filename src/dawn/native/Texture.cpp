@@ -27,6 +27,7 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/PassResourceUsage.h"
 #include "dawn/native/PhysicalDevice.h"
+#include "dawn/native/SharedTextureMemory.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 
 namespace dawn::native {
@@ -338,14 +339,6 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
                         "be exactly %s",
                         usage, kTransientAttachment, kAllowedTransientUsage);
     }
-
-    // Only allows simple readonly texture usages.
-    constexpr wgpu::TextureUsage kValidMultiPlanarUsages =
-        wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc;
-    DAWN_INVALID_IF(format->IsMultiPlanar() && !IsSubset(usage, kValidMultiPlanarUsages),
-                    "The texture usage (%s) is incompatible with the multi-planar format (%s).",
-                    usage, format->format);
-
     return {};
 }
 
@@ -398,9 +391,11 @@ bool CopySrcNeedsInternalTextureBindingUsage(const DeviceBase* device, const For
 
 }  // anonymous namespace
 
-MaybeError ValidateTextureDescriptor(const DeviceBase* device,
-                                     const TextureDescriptor* descriptor,
-                                     AllowMultiPlanarTextureFormat allowMultiPlanar) {
+MaybeError ValidateTextureDescriptor(
+    const DeviceBase* device,
+    const TextureDescriptor* descriptor,
+    AllowMultiPlanarTextureFormat allowMultiPlanar,
+    std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage) {
     DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
                                  wgpu::SType::DawnTextureInternalUsageDescriptor));
 
@@ -437,6 +432,21 @@ MaybeError ValidateTextureDescriptor(const DeviceBase* device,
     }
 
     DAWN_TRY(ValidateTextureUsage(device, descriptor, usage, format));
+    if (!allowedSharedTextureMemoryUsage) {
+        // Legacy path
+        // Only allows simple readonly texture usages.
+        constexpr wgpu::TextureUsage kValidMultiPlanarUsages =
+            wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc;
+        DAWN_INVALID_IF(format->IsMultiPlanar() && !IsSubset(usage, kValidMultiPlanarUsages),
+                        "The texture usage (%s) is incompatible with the multi-planar format (%s).",
+                        usage, format->format);
+    } else {
+        DAWN_INVALID_IF(
+            !IsSubset(usage, *allowedSharedTextureMemoryUsage),
+            "The texture usage (%s) is not a subset of the shared texture memory usage (%s).",
+            usage, *allowedSharedTextureMemoryUsage);
+    }
+
     DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
     DAWN_TRY(ValidateSampleCount(descriptor, usage, format));
 
@@ -796,6 +806,10 @@ MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
     DAWN_INVALID_IF(mState == TextureState::Destroyed, "Destroyed texture %s used in a submit.",
                     this);
+
+    Ref<SharedTextureMemoryBase> memory = mSharedTextureMemory.Promote();
+    DAWN_INVALID_IF(memory != nullptr && !memory->CheckCurrentAccess(this),
+                    "%s without current access to %s used in a submit.", this, memory.Get());
     return {};
 }
 
@@ -895,6 +909,10 @@ TextureViewBase* TextureBase::APICreateView(const TextureViewDescriptor* descrip
 
 bool TextureBase::IsImplicitMSAARenderTextureViewSupported() const {
     return (GetUsage() & wgpu::TextureUsage::TextureBinding) != 0;
+}
+
+Ref<SharedTextureMemoryBase> TextureBase::QuerySharedTextureMemory() {
+    return mSharedTextureMemory.Promote();
 }
 
 void TextureBase::APIDestroy() {

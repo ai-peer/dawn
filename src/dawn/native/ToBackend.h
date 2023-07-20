@@ -99,6 +99,11 @@ struct ToBackendTraits<ShaderModuleBase, BackendTraits> {
 };
 
 template <typename BackendTraits>
+struct ToBackendTraits<SharedTextureMemoryBase, BackendTraits> {
+    using BackendType = typename BackendTraits::SharedTextureMemoryType;
+};
+
+template <typename BackendTraits>
 struct ToBackendTraits<TextureBase, BackendTraits> {
     using BackendType = typename BackendTraits::TextureType;
 };
