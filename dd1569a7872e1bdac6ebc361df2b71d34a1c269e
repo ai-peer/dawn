@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d423acd5_929a9cc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T14:48:09Z",
+      "side": 1,
+      "message": "LGTM. Thanks",
+      "revId": "dd1569a7872e1bdac6ebc361df2b71d34a1c269e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c3c5c6_5f2309a8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-20T14:48:09Z",
+      "side": 1,
+      "message": "Could you please add a comment about the CopyInternal(), especially the differences compared to Copy(). \n\nIt would be nice if you can also add comments for other *Internal() methods. Sorry I didn\u0027t add comments when I added them first. 😞 thanks",
+      "range": {
+        "startLine": 154,
+        "startChar": 22,
+        "endLine": 154,
+        "endChar": 34
+      },
+      "revId": "dd1569a7872e1bdac6ebc361df2b71d34a1c269e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
