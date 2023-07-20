@@ -17,6 +17,7 @@
 
 #include <vector>
 
+#include "dawn/common/WeakRef.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
 #include "dawn/native/Error.h"
@@ -115,6 +116,8 @@ class TextureBase : public ApiObjectBase {
 
     bool IsImplicitMSAARenderTextureViewSupported() const;
 
+    Ref<SharedTextureMemoryBase> QuerySharedTextureMemory();
+
     // Dawn API
     TextureViewBase* APICreateView(const TextureViewDescriptor* descriptor = nullptr);
     void APIDestroy();
@@ -133,6 +136,9 @@ class TextureBase : public ApiObjectBase {
 
     void DestroyImpl() override;
     void AddInternalUsage(wgpu::TextureUsage usage);
+
+    // The shared texture memory the texture was created from. May be null.
+    WeakRef<SharedTextureMemoryBase> mSharedTextureMemory;
 
   private:
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, ObjectBase::ErrorTag tag);
