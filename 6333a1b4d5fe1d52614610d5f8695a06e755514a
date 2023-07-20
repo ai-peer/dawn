@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea761ba7_b9a1d2ac",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-20T11:10:06Z",
+      "side": 1,
+      "message": "No, the specs requires a single aspect:\n\n```\nIf any of the following conditions are unsatisfied, generate a validation error and stop.\n...\ndestination.aspect must refer to a single aspect of texture.format.\n...\n```",
+      "parentUuid": "b20e04f6_462e86ef",
+      "range": {
+        "startLine": 767,
+        "startChar": 29,
+        "endLine": 767,
+        "endChar": 64
+      },
+      "revId": "6333a1b4d5fe1d52614610d5f8695a06e755514a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f37874fe_22b18139",
