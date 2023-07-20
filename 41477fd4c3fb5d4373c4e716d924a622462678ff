@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b80e8d3_ab04bfb7",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-20T12:17:52Z",
+      "side": 1,
+      "message": "note: these emit functions are almost identical to the original change. The only differences are:\n* Moved into `EmitExpression::Emitter`\n* `impl.` prefixes to access the `Impl` members.\n* `Bind()` instead of `expr_to_result_.Add()`",
+      "revId": "41477fd4c3fb5d4373c4e716d924a622462678ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
