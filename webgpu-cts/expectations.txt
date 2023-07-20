@@ -68,7 +68,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-06-28 09:02:36PM
+# Last rolled: 2023-07-20 06:25:50PM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -578,46 +578,7 @@ crbug.com/dawn/1899 [ qualcomm ] webgpu:api,operation,command_buffer,queries,occ
 ################################################################################
 # Atomics tests fail with workgroupSize=2 on Android Arm (Pixel 6)
 ################################################################################
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAdd:add_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicMax:max_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicOr:or_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=16;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=1;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=4;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicSub:sub_workgroup:workgroupSize=2;dispatchSize=8;scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=16;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=1;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=4;mapId="remap";scalarKind="u32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="i32" [ Failure ]
-crbug.com/tint/1974 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarKind="u32" [ Failure ]
+crbug.com/tint/1975 [ android-t ] webgpu:shader,execution,expression,call,builtin,atomics,* [ Failure ]
 
 ################################################################################
 # matCx3 and array_of_matCx3...use_struct=2 causes device lost on Android Qualcomm (Pixel 4)
@@ -636,16 +597,10 @@ crbug.com/dawn/1900 [ android-r dawn-backend-validation ] webgpu:shader,executio
 crbug.com/dawn/1900 [ android-r dawn-no-backend-validation ] webgpu:shader,execution,zero_init:* [ Failure ]
 
 ################################################################################
-# Workgroup zero init tests timing out on Android Arm (Pixel 6)
-################################################################################
-crbug.com/dawn/1901 [ android-t ] webgpu:shader,execution,zero_init:compute,zero_init:storageClass="workgroup";* [ Failure ]
-
-################################################################################
 # maxInterStageShaderComponents limit tests fail with CreateGraphicsPipelines fail with <Unknown VkResult> on Android Qualcomm (Pixel 4)
 ################################################################################
 crbug.com/dawn/1903 [ android-r dawn-backend-validation qualcomm ] webgpu:api,validation,capability_checks,limits,maxInterStageShaderComponents:* [ Failure ]
 crbug.com/dawn/1903 [ android-r dawn-no-backend-validation qualcomm ] webgpu:api,validation,capability_checks,limits,maxInterStageShaderComponents:* [ Failure ]
-
 
 ################################################################################
 # untriaged Android failures
@@ -689,14 +644,12 @@ crbug.com/dawn/0000 [ amd-0x67ef ] webgpu:shader,execution,expression,call,built
 crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,step:f32:inputSource="const";vectorize=3 [ Failure ]
 crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,expression,call,builtin,step:f32:inputSource="const";vectorize=4 [ RetryOnFailure ]
 crbug.com/dawn/0000 [ amd-0x67ef ] webgpu:shader,execution,expression,call,builtin,unpack2x16snorm:unpack:inputSource="storage_rw" [ Failure ]
-crbug.com/dawn/0000 [ android-r dawn-backend-validation ] webgpu:shader,execution,robust_access:linear_memory:storageClass="private";access="read";containerType="vector";shadowingMode="function-scope";isAtomic=false [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-backend-validation webgpu-adapter-default ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:* [ Failure ]
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation webgpu-adapter-default ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:* [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:alpha="none";orientation="flipY";srcDoFlipYDuringCopy=false;dstPremultiplied=true [ Failure ]
 crbug.com/dawn/0000 [ ventura ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_bitmaprenderer_context_canvas:canvasType="offscreen";dstColorFormat="rg8unorm";dstAlphaMode="opaque";srcDoFlipYDuringCopy=true [ Failure ]
 crbug.com/dawn/0000 [ android-r ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:* [ Failure ]
 crbug.com/dawn/0000 [ android-t ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:* [ Failure ]
-crbug.com/dawn/0000 [ android-r ] webgpu:shader,execution,robust_access:linear_memory:storageClass="private";access="read";containerType="vector";shadowingMode="none";isAtomic=false [ Failure ]
 
 # New flakes. Please triage:
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm webgpu-adapter-default ] webgpu:api,operation,render_pipeline,overrides:precision:isAsync=true [ RetryOnFailure ]
@@ -892,7 +845,6 @@ crbug.com/dawn/0000 [ intel-0x3e9b ventura ] webgpu:shader,execution,expression,
 crbug.com/dawn/0000 [ intel-0x9bc5 ubuntu ] webgpu:shader,execution,expression,call,builtin,unpack4x8unorm:unpack:inputSource="uniform" [ Failure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 ubuntu ] webgpu:shader,execution,expression,call,builtin,unpack4x8unorm:unpack:inputSource="uniform" [ Failure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 win10 ] webgpu:shader,execution,expression,call,builtin,unpack4x8unorm:unpack:inputSource="uniform" [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:identifiers:ident="bitcast" [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstPremultiplied=false [ Failure ]
 crbug.com/dawn/0000 [ ventura ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_bitmaprenderer_context_canvas:canvasType="offscreen";dstColorFormat="bgra8unorm";dstAlphaMode="opaque";srcDoFlipYDuringCopy=false [ Failure ]
 crbug.com/dawn/0000 [ ventura ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_bitmaprenderer_context_canvas:canvasType="offscreen";dstColorFormat="bgra8unorm";dstAlphaMode="opaque";srcDoFlipYDuringCopy=true [ Failure ]
@@ -948,3 +900,20 @@ crbug.com/dawn/0000 [ ventura ] webgpu:web_platform,copyToTexture,canvas:copy_co
 crbug.com/dawn/0000 [ intel-0x9bc5 ubuntu webgpu-adapter-default ] webgpu:web_platform,copyToTexture,video:* [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation no-asan no-clang-coverage nvidia release-x64 target-cpu-64 webgpu-adapter-default win ] webgpu:web_platform,canvas,configure:format:canvasType="onscreen";format="rg16sint" [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:canvasType="offscreen";srcAndDstInSameGPUDevice=false;dstColorFormat="rgba8unorm";srcAlphaMode="premultiplied";dstAlphaMode="premultiplied";srcDoFlipYDuringCopy=true [ Failure ]
+
+crbug.com/dawn/0000 [ mac ] webgpu:shader,validation,expression,call,builtin,atan:values:* [ Failure ]
+crbug.com/dawn/0000 [ mac ] webgpu:shader,validation,expression,call,builtin,modf:values:stage="override";* [ Failure ]
+crbug.com/dawn/0000 [ mac ] webgpu:shader,validation,expression,call,builtin,tan:values:* [ Failure ]
+
+crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,atan2:values:stage="override";* [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,clamp:values:* [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:alias_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:function_const_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:function_let_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:function_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:function_param_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:function_var_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:module_const_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:module_var_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:override_name:ident="bitcast" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,validation,parse,identifiers:struct_name:ident="bitcast" [ Failure ]
