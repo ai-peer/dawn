@@ -267,8 +267,6 @@ list(APPEND TINT_LIB_SRCS
   lang/wgsl/program/program.cc
   lang/wgsl/program/program.h
   reflection.h
-  reader/reader.cc
-  reader/reader.h
   resolver/const_eval.cc
   resolver/const_eval.h
   resolver/dependency_graph.cc
