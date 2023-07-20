@@ -29,7 +29,6 @@
 #include "src/tint/lang/wgsl/ast/transform/vertex_pulling.h"
 #include "src/tint/lang/wgsl/helpers/flatten_bindings.h"
 #include "src/tint/lang/wgsl/inspector/inspector.h"
-#include "src/tint/reader/reader.h"
 #include "src/tint/transform/manager.h"
 #include "src/tint/utils/diagnostic/printer.h"
 #include "src/tint/utils/text/unicode.h"

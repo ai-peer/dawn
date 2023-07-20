@@ -953,15 +953,6 @@ libtint_source_set("libtint_constant_src") {
   ]
 }
 
-libtint_source_set("libtint_reader_src") {
-  sources = [
-    "reader/reader.cc",
-    "reader/reader.h",
-  ]
-
-  public_deps = [ ":libtint_program_src" ]
-}
-
 libtint_source_set("libtint_spv_reader_src") {
   sources = [
     "lang/spirv/reader/attributes.h",
@@ -991,7 +982,6 @@ libtint_source_set("libtint_spv_reader_src") {
     ":libtint_ast_transform_src",
     ":libtint_builtins_src",
     ":libtint_program_src",
-    ":libtint_reader_src",
     ":libtint_sem_src",
     ":libtint_symbols_src",
     ":libtint_transform_manager_src",
@@ -1119,7 +1109,6 @@ libtint_source_set("libtint_wgsl_reader_src") {
     ":libtint_ast_src",
     ":libtint_builtins_src",
     ":libtint_program_src",
-    ":libtint_reader_src",
     ":libtint_symbols_src",
     ":libtint_type_src",
     ":libtint_utils_src",
