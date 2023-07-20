@@ -33,6 +33,24 @@
       "message": "The original goal was to be non-recursive. While this is smaller, it\u0027s still recursive in the calls to process. Seems like this will have the same issues the original was attempting to solve?",
       "revId": "41477fd4c3fb5d4373c4e716d924a622462678ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ea956e8_9af2ee89",
+        "filename": "src/tint/ir/from_program.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-20T14:01:51Z",
+      "side": 1,
+      "message": "Mis-understood what was happening. The inner `Process` calls get pushed onto the queue instead of being executed. They\u0027ll run when the task is processed, keeping the stack depth the same.",
+      "parentUuid": "7623035e_1550777e",
+      "revId": "41477fd4c3fb5d4373c4e716d924a622462678ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
