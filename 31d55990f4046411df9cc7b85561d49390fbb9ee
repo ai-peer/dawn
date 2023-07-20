@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad846fb5_385711a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-20T02:55:50Z",
+      "side": 1,
+      "message": "PTAL. The slides didn\u0027t show a folder for `builtin` but that seemed like it would dump a lot of stuff into `lang/base` so I moved it as `lang/base/builtin` which I think was what was intended.",
+      "revId": "31d55990f4046411df9cc7b85561d49390fbb9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
