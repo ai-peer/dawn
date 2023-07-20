@@ -25,7 +25,7 @@
 #include "src/tint/ir/builder.h"
 #include "src/tint/ir/validator.h"
 #include "src/tint/lang/spirv/ast_writer/spv_dump.h"
-#include "src/tint/lang/spirv/writer/generator_impl_ir.h"
+#include "src/tint/lang/spirv/writer/writer.h"
 
 namespace tint::writer::spirv {
 
