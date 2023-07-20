@@ -27,6 +27,7 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/PassResourceUsage.h"
 #include "dawn/native/PhysicalDevice.h"
+#include "dawn/native/SharedTextureMemory.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 
 namespace dawn::native {
@@ -796,6 +797,10 @@ MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
     DAWN_INVALID_IF(mState == TextureState::Destroyed, "Destroyed texture %s used in a submit.",
                     this);
+
+    Ref<SharedTextureMemoryBase> memory = mSharedTextureMemory.Promote();
+    DAWN_INVALID_IF(memory != nullptr && !memory->CheckCurrentAccess(this),
+                    "%s without current access to %s used in a submit.", this, memory.Get());
     return {};
 }
 
@@ -895,6 +900,10 @@ TextureViewBase* TextureBase::APICreateView(const TextureViewDescriptor* descrip
 
 bool TextureBase::IsImplicitMSAARenderTextureViewSupported() const {
     return (GetUsage() & wgpu::TextureUsage::TextureBinding) != 0;
+}
+
+Ref<SharedTextureMemoryBase> TextureBase::QuerySharedTextureMemory() {
+    return mSharedTextureMemory.Promote();
 }
 
 void TextureBase::APIDestroy() {
