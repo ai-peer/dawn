@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1554fe16_e285aea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-21T21:31:10Z",
+      "side": 1,
+      "message": "Approving as I don\u0027t want you to have to rebase again, and I\u0027m only curious about the binding collision.",
+      "revId": "07a9a492819c6407bd2878b14f5a431b96493ffd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c74fd69_76dba5d3",
