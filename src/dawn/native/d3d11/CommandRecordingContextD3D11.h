@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/d3d/d3d_platform.h"
@@ -43,6 +44,15 @@ class CommandRecordingContext {
     Buffer* GetUniformBuffer() const;
     Device* GetDevice() const;
 
+    struct ScopedCriticalSection : NonMovable {
+        explicit ScopedCriticalSection(ComPtr<ID3D11Multithread>);
+        ~ScopedCriticalSection();
+
+      private:
+        ComPtr<ID3D11Multithread> mD3D11Multithread;
+    };
+    ScopedCriticalSection EnterScopedCriticalSection();
+
     // Write the built-in variable value to the uniform buffer.
     void WriteUniformBuffer(uint32_t offset, uint32_t element);
     MaybeError FlushUniformBuffer();
@@ -52,7 +62,8 @@ class CommandRecordingContext {
     bool mNeedsSubmit = false;
     ComPtr<ID3D11Device> mD3D11Device;
     ComPtr<ID3D11DeviceContext4> mD3D11DeviceContext4;
-    ComPtr<ID3DUserDefinedAnnotation> mD3D11UserDefinedAnnotation;
+    ComPtr<ID3D11Multithread> mD3D11Multithread;
+    ComPtr<ID3DUserDefinedAnnotation> mD3DUserDefinedAnnotation;
 
     // The maximum number of builtin elements is 4 (vec4). It must be multiple of 4.
     static constexpr size_t kMaxNumBuiltinElements = 4;
