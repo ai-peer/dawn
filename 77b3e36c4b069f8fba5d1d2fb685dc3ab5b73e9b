@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8bfbbc_a2f473e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-21T00:47:58Z",
+      "side": 1,
+      "message": "No worries, thanks anyway!",
+      "parentUuid": "3bd8ddea_f76210b8",
+      "revId": "77b3e36c4b069f8fba5d1d2fb685dc3ab5b73e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8aa16ba_cadf006d",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-07-20T17:27:04Z",
       "side": 1,
       "message": "is this TODO still relevant now that we have the `ClearCompressed` path?",
+      "range": {
+        "startLine": 498,
+        "startChar": 5,
+        "endLine": 499,
+        "endChar": 30
+      },
+      "revId": "77b3e36c4b069f8fba5d1d2fb685dc3ab5b73e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2176e33_c919e5e1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-21T00:47:58Z",
+      "side": 1,
+      "message": "Yes, it\u0027s still relevant.\nTake the non-renderable `RGBA8Snorm` for example, We could clear an interim renderable`RGBA8Unorm` first and then copy it to `RGBA8Snorm`. Just similar to what we do with the compressed textures. It would be slightly better in sense of \"GPU-to-GPU VS CPU-to-GPU\". Let\u0027s see if we will need to this going forward.",
+      "parentUuid": "d8aa16ba_cadf006d",
       "range": {
         "startLine": 498,
         "startChar": 5,
