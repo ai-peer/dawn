@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "280febf4_78e43438",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-21T08:56:03Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "fa698ccaf86cebc5ef0f311b25061f8f7f476966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc163e7f_98aca4ac",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-21T08:56:03Z",
+      "side": 1,
+      "message": "And this can be const again! Feel free to CQ after this ^^",
+      "revId": "fa698ccaf86cebc5ef0f311b25061f8f7f476966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
