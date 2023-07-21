@@ -34,6 +34,24 @@
       "parentUuid": "b6c04c0b_3bd25999",
       "revId": "ce158be9a03dcb08b0fbcd3b60b2dff67dde3338",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64803e14_b3a2ef3b",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1003496
+      },
+      "writtenOn": "2023-07-21T01:05:34Z",
+      "side": 1,
+      "message": "Yeah. \"gclient sync\" doesn\u0027t work because of crrev.com/c/142300:\n```\n________ running \u0027python3 buildtools/reclient_cfgs/fetch_reclient_cfgs.py --rbe_instance projects/rbe-chrome-untrusted/instances/default_instance --reproxy_cfg_template reproxy.cfg.template --rewrapper_cfg_project  --quiet --hook\u0027 in \u0027/usr/local/google/home/tasak/Workspace/chromium/local/workspace0/src/third_party/dawn\u0027\npython3: can\u0027t open file \u0027/usr/local/google/home/tasak/Workspace/chromium/local/workspace0/src/third_party/dawn/buildtools/reclient_cfgs/fetch_reclient_cfgs.py\u0027: [Errno 2] No such file or directory\nError: Command \u0027python3 buildtools/reclient_cfgs/fetch_reclient_cfgs.py --rbe_instance projects/rbe-chrome-untrusted/instances/default_instance --reproxy_cfg_template reproxy.cfg.template --rewrapper_cfg_project  --quiet --hook\u0027 returned non-zero exit status 2 in /usr/local/google/home/tasak/Workspace/chromium/local/workspace0/src/third_party/dawn\npython3: can\u0027t open file \u0027/usr/local/google/home/tasak/Workspace/chromium/local/workspace0/src/third_party/dawn/buildtools/reclient_cfgs/fetch_reclient_cfgs.py\u0027: [Errno 2] No such file or directory\n```",
+      "parentUuid": "fc104a9d_adc69ffd",
+      "revId": "ce158be9a03dcb08b0fbcd3b60b2dff67dde3338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
