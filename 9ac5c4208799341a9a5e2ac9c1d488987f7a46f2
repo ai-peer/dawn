@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c068c78_29e3fb6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-21T04:01:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9ac5c4208799341a9a5e2ac9c1d488987f7a46f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b931c620_edf2d885",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-21T04:01:06Z",
+      "side": 1,
+      "message": "I don\u0027t think this will ever get reached because you have UNREACHABLE\n\nif you actually do want a fallback, omit the UNREACHABLE",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 57
+      },
+      "revId": "9ac5c4208799341a9a5e2ac9c1d488987f7a46f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
