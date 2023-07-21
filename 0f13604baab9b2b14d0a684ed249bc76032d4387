@@ -87,6 +87,30 @@
       },
       "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6796118_b9d5a5a2",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-07-21T16:38:53Z",
+      "side": 1,
+      "message": "I would be in favor of this too.\n\n---\n\n\u003e +1 on third_party/ let\u0027s discuss offline maybe?\n\nYes, let\u0027s do it new week.\n\n---\n\nI took a closer look into how the `partition_alloc` library is defined:\n- It does not declare any include_dir as a public config.\n- All its path are relative to the top-level dir. e.g. `//base/allocator/partition_allocator/xxx\n- There are many includes with `nogncheck`, because partition_alloc is in the private deps on some target.\n\nIf I wanted to fix this, I would make a patch along the lines of:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4706118\n\n----\n\nOnce it is done, Dawn would expose in `\u003cdawn\u003e/build_overrides/dawn.gni`\n```\ndawn_partition_allocator_dir \u003d \"//third_party/partition_allocator\"\n```\nand add a dependency on `${dawn_partition_allocator_dir}:partition_allocator`\n\nChrome would override in in `\u003cchrome\u003e/build_overrides/dawn.gni`\n```\ndawn_partition_allocator_dir \u003d \"//base/allocator/partition_allocator\"\n```",
+      "parentUuid": "bd797211_c463ef46",
+      "range": {
+        "startLine": 227,
+        "startChar": 3,
+        "endLine": 227,
+        "endChar": 37
+      },
+      "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
