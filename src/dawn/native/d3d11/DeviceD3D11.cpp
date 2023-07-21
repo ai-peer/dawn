@@ -156,10 +156,9 @@ MaybeError Device::TickImpl() {
 
     if (mPendingCommands.IsOpen() && mPendingCommands.NeedsSubmit()) {
         DAWN_TRY(ExecutePendingCommandContext());
+        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
         DAWN_TRY(NextSerial());
     }
-
-    DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
     return {};
 }
@@ -220,6 +219,14 @@ void Device::ForceEventualFlushOfCommands() {}
 
 MaybeError Device::ExecutePendingCommandContext() {
     return mPendingCommands.ExecuteCommandList(this);
+}
+
+void Device::OnEnterMutexCriticalSection() {
+    mPendingCommands.GetD3D11Multithread()->Enter();
+}
+
+void Device::OnLeaveMutexCriticalSection() {
+    mPendingCommands.GetD3D11Multithread()->Leave();
 }
 
 ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(
