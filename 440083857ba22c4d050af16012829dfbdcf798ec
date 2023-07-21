@@ -33,6 +33,24 @@
       "message": "Why did this move? Isn\u0027t struct part of type?",
       "revId": "440083857ba22c4d050af16012829dfbdcf798ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "116a7d64_869daaff",
+        "filename": "src/tint/lang/base/type/struct.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-21T08:36:09Z",
+      "side": 1,
+      "message": "I think you\u0027re seeing the move of a rebase.",
+      "parentUuid": "0d425f3a_1de2ea9e",
+      "revId": "440083857ba22c4d050af16012829dfbdcf798ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
