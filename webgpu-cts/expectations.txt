@@ -704,7 +704,6 @@ crbug.com/dawn/0000 [ dawn-backend-validation nvidia-0x2184 webgpu-adapter-defau
 crbug.com/dawn/0000 [ dawn-backend-validation nvidia-0x2184 webgpu-adapter-default win10 ] webgpu:api,validation,state,device_lost,destroy:createView,2d,uncompressed_format:format="bgra8unorm-srgb";* [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-backend-validation qualcomm ] webgpu:shader,execution,expression,binary,f32_matrix_subtraction:matrix_compound:inputSource="const";cols=4;rows=4 [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation qualcomm ] webgpu:shader,execution,expression,unary,f32_conversion:f32_mat:inputSource="const";cols=3;rows=4 [ RetryOnFailure ]
-crbug.com/dawn/0000 [ dawn-no-backend-validation qualcomm ] webgpu:shader,execution,expression,unary,f32_conversion:i32:inputSource="const";vectorize=4 [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-backend-validation webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstPremultiplied=true [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoFrame";videoName="four-colors-h264-bt601.mp4" [ RetryOnFailure ]
 
