@@ -34,6 +34,23 @@
       "parentUuid": "80459abe_751feff5",
       "revId": "07a9a492819c6407bd2878b14f5a431b96493ffd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c390410_815d0eec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-07-21T20:32:20Z",
+      "side": 1,
+      "message": "Never mind, it\u0027s good now. PTAL when you\u0027ve got the time. Thanks!",
+      "revId": "07a9a492819c6407bd2878b14f5a431b96493ffd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
