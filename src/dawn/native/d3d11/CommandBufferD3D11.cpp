@@ -105,6 +105,8 @@ Ref<CommandBuffer> CommandBuffer::Create(CommandEncoder* encoder,
 MaybeError CommandBuffer::Execute() {
     CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
 
+    auto scopedCriticalSection = commandContext->EnterScopedCriticalSection();
+
     auto LazyClearSyncScope = [commandContext](const SyncScopeResourceUsage& scope) -> MaybeError {
         for (size_t i = 0; i < scope.textures.size(); i++) {
             Texture* texture = ToBackend(scope.textures[i]);

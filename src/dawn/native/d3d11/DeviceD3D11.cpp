@@ -156,10 +156,9 @@ MaybeError Device::TickImpl() {
 
     if (mPendingCommands.IsOpen() && mPendingCommands.NeedsSubmit()) {
         DAWN_TRY(ExecutePendingCommandContext());
+        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
         DAWN_TRY(NextSerial());
     }
-
-    DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
     return {};
 }
