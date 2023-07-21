@@ -51,6 +51,29 @@
       "message": "Never mind, it\u0027s good now. PTAL when you\u0027ve got the time. Thanks!",
       "revId": "07a9a492819c6407bd2878b14f5a431b96493ffd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c74fd69_76dba5d3",
+        "filename": "test/tint/shader_io/fragment_output_index.wgsl.expected.dxc.hlsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-21T21:23:31Z",
+      "side": 1,
+      "message": "So what happens if you have:\n\n```\nstruct FragOutput {\n  @location(0) @index(0) color : vec4\u003cf32\u003e,\n  @location(0) @index(1) blend : vec4\u003cf32\u003e,\n  @location(1)           blah  : vec4\u003cf32\u003e,\n};\n```\n\nIs that legal? If so, is it remapped somehow to avoid collision?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "07a9a492819c6407bd2878b14f5a431b96493ffd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
