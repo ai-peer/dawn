@@ -16,6 +16,23 @@
       "message": "Rebased, PTAL, thanks!",
       "revId": "cd936a41b0935e1186c033eaa2f3c8f7c0043525",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4627e0c_2ad24470",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-21T04:04:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cd936a41b0935e1186c033eaa2f3c8f7c0043525",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
