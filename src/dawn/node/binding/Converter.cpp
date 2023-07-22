@@ -1660,6 +1660,7 @@ bool Converter::Convert(interop::GPUFeatureName& out, wgpu::FeatureName in) {
         case wgpu::FeatureName::ImplicitDeviceSynchronization:
         case wgpu::FeatureName::SurfaceCapabilities:
         case wgpu::FeatureName::TransientAttachments:
+        case wgpu::FeatureName::MSAARenderToSingleSampled:
         case wgpu::FeatureName::Undefined:
             return false;
     }
@@ -1750,7 +1751,6 @@ bool Converter::Convert(wgpu::ComputePipelineDescriptor& out,
 
 bool Converter::Convert(wgpu::RenderPipelineDescriptor& out,
                         const interop::GPURenderPipelineDescriptor& in) {
-    wgpu::RenderPipelineDescriptor desc{};
     return Convert(out.label, in.label) &&                //
            Convert(out.layout, in.layout) &&              //
            Convert(out.vertex, in.vertex) &&              //

@@ -237,19 +237,18 @@ interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::re
 }
 
 interop::GPUTextureFormat GPU::getPreferredCanvasFormat(Napi::Env) {
-    UNIMPLEMENTED();
+    return interop::GPUTextureFormat::kRgba8Unorm;
 }
 
 interop::Interface<interop::WGSLLanguageFeatures> GPU::getWgslLanguageFeatures(Napi::Env env) {
-    // TODO(crbug.com/dawn/1777)
     struct Features : public interop::WGSLLanguageFeatures {
         ~Features() = default;
         bool has(Napi::Env, std::string) {
-            UNIMPLEMENTED();
+            // TODO(crbug.com/dawn/1777)
             return false;
         }
         std::vector<std::string> keys(Napi::Env) {
-            UNIMPLEMENTED();
+            // TODO(crbug.com/dawn/1777)
             return {};
         }
     };
