@@ -36,6 +36,7 @@ namespace dawn::native::d3d11 {
 
 class CommandRecordingContext;
 class Device;
+class TextureView;
 
 MaybeError ValidateTextureCanBeWrapped(ID3D11Resource* d3d11Resource,
                                        const TextureDescriptor* descriptor);
@@ -81,6 +82,10 @@ class Texture final : public d3d::Texture {
     static MaybeError Copy(CommandRecordingContext* commandContext, CopyTextureToTextureCmd* copy);
 
     ResultOrError<ExecutionSerial> EndAccess() override;
+
+    ResultOrError<ComPtr<ID3D11ShaderResourceView>> GetStencilSRV(
+        CommandRecordingContext* commandContext,
+        const TextureView* view);
 
   private:
     using Base = d3d::Texture;
@@ -160,6 +165,7 @@ class Texture final : public d3d::Texture {
 
     const Kind mKind = Kind::Normal;
     ComPtr<ID3D11Resource> mD3d11Resource;
+    Ref<Texture> mTextureForStencilView;
 };
 
 class TextureView final : public TextureViewBase {

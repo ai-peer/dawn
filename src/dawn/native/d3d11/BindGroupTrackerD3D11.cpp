@@ -351,7 +351,12 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
             case BindingInfoType::Texture: {
                 TextureView* view = ToBackend(group->GetBindingAsTextureView(bindingIndex));
                 ComPtr<ID3D11ShaderResourceView> srv;
-                DAWN_TRY_ASSIGN(srv, view->CreateD3D11ShaderResourceView());
+                if (view->GetAspects() == Aspect::Stencil) {
+                    DAWN_TRY_ASSIGN(
+                        srv, ToBackend(view->GetTexture())->GetStencilSRV(mCommandContext, view));
+                } else {
+                    DAWN_TRY_ASSIGN(srv, view->CreateD3D11ShaderResourceView());
+                }
                 if (bindingVisibility & wgpu::ShaderStage::Vertex) {
                     deviceContext1->VSSetShaderResources(bindingSlot, 1, srv.GetAddressOf());
                 }
