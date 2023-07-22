@@ -25,22 +25,25 @@ namespace wgpu::binding {
 ////////////////////////////////////////////////////////////////////////////////
 // wgpu::bindings::GPURenderPipeline
 ////////////////////////////////////////////////////////////////////////////////
-GPURenderPipeline::GPURenderPipeline(wgpu::RenderPipeline pipeline)
-    : pipeline_(std::move(pipeline)) {}
+GPURenderPipeline::GPURenderPipeline(wgpu::RenderPipelineDescriptor& desc,
+                                     wgpu::RenderPipeline pipeline)
+    : pipeline_(std::move(pipeline)), label_(desc.label ? desc.label : "") {}
 
 interop::Interface<interop::GPUBindGroupLayout> GPURenderPipeline::getBindGroupLayout(
     Napi::Env env,
     uint32_t index) {
+    wgpu::BindGroupLayoutDescriptor desc{};
     return interop::GPUBindGroupLayout::Create<GPUBindGroupLayout>(
-        env, pipeline_.GetBindGroupLayout(index));
+        env, desc, pipeline_.GetBindGroupLayout(index));
 }
 
 std::string GPURenderPipeline::getLabel(Napi::Env) {
-    UNIMPLEMENTED();
+    return label_;
 }
 
 void GPURenderPipeline::setLabel(Napi::Env, std::string value) {
-    UNIMPLEMENTED();
+    pipeline_.SetLabel(value.c_str());
+    label_ = value;
 }
 
 }  // namespace wgpu::binding
