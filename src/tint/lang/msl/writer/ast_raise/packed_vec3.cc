@@ -191,8 +191,12 @@ struct PackedVec3::State {
                                 tint::Vector<const ast::Attribute*, 4> attributes;
                                 if (auto* sem_mem = member->As<sem::StructMember>()) {
                                     for (auto* attr : sem_mem->Declaration()->attributes) {
-                                        if (attr->IsAnyOf<ast::StructMemberAlignAttribute,
-                                                          ast::StructMemberOffsetAttribute>()) {
+                                        if (attr->Is<ast::StructMemberOffsetAttribute>()) {
+                                            // Don't copy the offset attribute.
+                                            // It'll be replaced by an align attribute below.
+                                            continue;
+                                        }
+                                        if (attr->Is<ast::StructMemberAlignAttribute>()) {
                                             needs_align = false;
                                         }
                                         attributes.Push(ctx.Clone(attr));
