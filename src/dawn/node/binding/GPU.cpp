@@ -237,20 +237,22 @@ interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::re
 }
 
 interop::GPUTextureFormat GPU::getPreferredCanvasFormat(Napi::Env) {
-    UNIMPLEMENTED();
+#if defined(__ANDROID__)
+    return interop::GPUTextureFormat::kBgra8Unorm;
+#else
+    return interop::GPUTextureFormat::kRgba8Unorm;
+#endif  // defined(__ANDROID__)
 }
 
 interop::Interface<interop::WGSLLanguageFeatures> GPU::getWgslLanguageFeatures(Napi::Env env) {
     // TODO(crbug.com/dawn/1777)
     struct Features : public interop::WGSLLanguageFeatures {
         ~Features() = default;
-        bool has(Napi::Env, std::string) {
-            UNIMPLEMENTED();
-            return false;
+        bool has(Napi::Env env, std::string) {
+            UNIMPLEMENTED(env, {});
         }
-        std::vector<std::string> keys(Napi::Env) {
-            UNIMPLEMENTED();
-            return {};
+        std::vector<std::string> keys(Napi::Env env) {
+            UNIMPLEMENTED(env, {});
         }
     };
     return interop::WGSLLanguageFeatures::Create<Features>(env);
