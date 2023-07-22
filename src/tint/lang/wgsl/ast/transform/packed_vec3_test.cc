@@ -4217,6 +4217,69 @@ struct S {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(PackedVec3Test, StructMember_ExistingMemberAttributes_ExplicitOffset2) {
+    // Test that the we do not add an @align attribute if @offset is present.
+
+    // struct S {
+    //   @offset(0)
+    //   v : vec3<f32>,
+    // }
+    // struct T {
+    //   @offset(0)
+    //   s : array<S, 2>,
+    //   u : u32,
+    // }
+    // @group(0) @binding(0) var<uniform> P : T;
+    ProgramBuilder b;
+    b.Structure("S", utils::Vector{
+                         b.Member("v", b.ty.vec3<f32>(), utils::Vector{b.MemberOffset(AInt(0))}),
+                     });
+    b.Structure("T", utils::Vector{
+                         b.Member("s", b.ty.array(b.ty("S"), b.Expr(AInt(2))),
+                                  utils::Vector{b.MemberOffset(AInt(0))}),
+                         b.Member("u", b.ty.u32(), utils::Vector{b.MemberOffset(AInt(32))}),
+                     });
+    b.GlobalVar("P", builtin::AddressSpace::kStorage, b.ty("T"),
+                utils::Vector{b.Group(AInt(0)), b.Binding(AInt(0))});
+    Program src(std::move(b));
+
+    auto* expect =
+        R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct S_tint_packed_vec3 {
+  /* @offset(0) */
+  v : __packed_vec3<f32>,
+}
+
+struct T_tint_packed_vec3 {
+  /* @offset(0) */
+  s : array<S_tint_packed_vec3, 2u>,
+  /* @offset(32) */
+  u : u32,
+}
+
+struct S {
+  /* @offset(0) */
+  v : vec3<f32>,
+}
+
+struct T {
+  /* @offset(0) */
+  s : array<S, 2>,
+  /* @offset(32) */
+  u : u32,
+}
+
+@group(0) @binding(0) var<storage> P : T_tint_packed_vec3;
+)";
+
+    Transform::DataMap data;
+    auto got = Run<PackedVec3>(std::move(src), data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 TEST_F(PackedVec3Test, StructValueConstructor_ViaIndexAccessor) {
     auto* src = R"(
 struct S {
