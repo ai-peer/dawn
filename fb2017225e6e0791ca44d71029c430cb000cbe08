@@ -324,6 +324,30 @@
       },
       "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708a9d96_ec20b8b2",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-24T22:36:30Z",
+      "side": 1,
+      "message": "Personally, I like to to make it only NonCopyable. This code confused me at the first look. I have to check the spec, etc to understand it.\n\nBut since the Mutex::AutoLock already implemented in this way. Keep they same is OK to me too.",
+      "parentUuid": "fb04f91f_45d528be",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
