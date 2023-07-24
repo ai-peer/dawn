@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f451b38d_57413661",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-07-24T22:22:14Z",
+      "side": 1,
+      "message": "(Typed this before Peng replied)\n\nEven if we don\u0027t acquire the D3D11 internal mutex explicitly via ID3D11Multithread::Enter/Leave, it will be implicitly acquired in any immediate context calls, so there\u0027s no thread safety concern just potential excessive locking (and maybe not even that since the other places the immediate context is used are usually to make a single call e.g. signaling the fence).\n\nRe: Guard\u003cT\u003e - that seems like a larger change we should defer to a later CL.",
+      "parentUuid": "3fb2b7d2_720c74db",
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c676fa59_129d10e0",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 5
@@ -108,6 +126,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "c676fa59_129d10e0",
+      "range": {
+        "startLine": 49,
+        "startChar": 26,
+        "endLine": 49,
+        "endChar": 65
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5835539f_cfa6a307",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-07-24T22:22:14Z",
+      "side": 1,
+      "message": "Done - this is now behind D3D11MultithreadProtected feature.",
+      "parentUuid": "7574f04d_914a9646",
       "range": {
         "startLine": 49,
         "startChar": 26,
@@ -250,6 +292,30 @@
       "side": 1,
       "message": "I see. I realized NonMovable is also NonCopyable. So in this case, it should be fine. Just the dawn has to be compiled with compiler with `copy elision` supported. If the compiler doesn\u0027t support it, it shouldn\u0027t compile probably.\n\nFYI, https://en.wikipedia.org/wiki/Copy_elision , the behavior depends on the compiler and compiler flags. I created a small test and got below results.\n\nhttps://paste.googleplex.com/4934662416760832",
       "parentUuid": "4e21c6ca_74b6367f",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb04f91f_45d528be",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-07-24T22:22:14Z",
+      "side": 1,
+      "message": "https://en.cppreference.com/w/cpp/language/copy_elision explains the conditions under which RVO is required by the spec - it\u0027s not really optional for the compiler in the way we\u0027re using it.\n\nStill it might be better to not rely on obscure details of RVO for the intended behavior - we actually want something like STACK_ALLOCATED I presume. I can change it to NonCopyable for now if needed.",
+      "parentUuid": "11645a15_c531c760",
       "range": {
         "startLine": 47,
         "startChar": 4,
