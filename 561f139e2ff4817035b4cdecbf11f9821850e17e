@@ -51,6 +51,24 @@
       "message": "do we need this file, or only the chromium side version of ignores.txt?",
       "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5091a4fb_e30d8119",
+        "filename": "tools/cfi/ignores.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-24T23:19:44Z",
+      "side": 1,
+      "message": "IIUC, we don\u0027t actually have any CI bots that are building Dawn standalone with CFI, but in theory if we ever did, this would be needed. (Though I think we would also need the `dawn/native` exceptions as well to really make it work.)\n\nI just added it here for completeness for now.",
+      "parentUuid": "fdda9f80_8846c976",
+      "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
