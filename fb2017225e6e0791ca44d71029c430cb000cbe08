@@ -39,6 +39,30 @@
       },
       "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf4266ba_5e7feba0",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-07-24T18:26:16Z",
+      "side": 1,
+      "message": "Partly because I was cargo-culting the coding style for other scoped object types in Dawn and the one I looked at was Mutex::AutoLock.\n\nHowever, I do think NonMovable is a better choice than moveable since we don\u0027t want this to be passed around and have a longer lifetime than the calling function\u0027s scope - similar to AutoLock (although std::unique_ptr does allow you to get around that).\n\nStruct vs class is a minor stylistic choice - again lifted that from Mutex::AutoLock.\n\nThat being said, I\u0027m open to making it moveable if needed.",
+      "parentUuid": "5ddd6a2a_9936d646",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
