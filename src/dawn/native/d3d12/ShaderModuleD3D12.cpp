@@ -32,6 +32,7 @@
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "dawn/platform/metrics/CacheMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
 #include "tint/tint.h"
@@ -238,8 +239,11 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
 
     CacheResult<d3d::CompiledShader> compiledShader;
     MaybeError compileError = [&]() -> MaybeError {
-        DAWN_TRY_LOAD_OR_RUN(compiledShader, device, std::move(req), d3d::CompiledShader::FromBlob,
-                             d3d::CompileShader);
+        DAWN_TRY_LOAD_OR_RUN(
+            compiledShader, device, std::move(req),
+            SCOPED_DAWN_CACHE_HIT_FROM_BLOB(device->GetPlatform(), "D3D.CompileShader",
+                                            d3d::CompiledShader::FromBlob),
+            d3d::CompileShader);
         return {};
     }();
 
