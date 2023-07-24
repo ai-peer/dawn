@@ -16,6 +16,23 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "fe97ea97c77323e7dc96576bae6647e299fd6201",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f300dec_d08332cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T21:43:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fe97ea97c77323e7dc96576bae6647e299fd6201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
