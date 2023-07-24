@@ -16,6 +16,131 @@
       "message": "Ping @cwallez@chromium.org\nCould you please take a look?",
       "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b3a8d6f_55321cd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T13:01:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28044605_b3f9676b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T13:01:13Z",
+      "side": 1,
+      "message": "nit: can be declared just before it is used, once in the if, once at the end of the function.",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf6c550_ceaa88ab",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T13:01:13Z",
+      "side": 1,
+      "message": "nit: Copy",
+      "range": {
+        "startLine": 761,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 20
+      },
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c58b29f_358062b2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T13:01:13Z",
+      "side": 1,
+      "message": "Maybe we could assert that the copy size is the whole subresource size to make it clear that DS subresources can only be written to completely and not partially. (and comment that)",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260094b0_283e5fe3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T13:01:13Z",
+      "side": 1,
+      "message": "What if it is a depth only texture?",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9536de68_446983a2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T13:01:13Z",
+      "side": 1,
+      "message": "Maybe this whole logic could be:\n\n```\nASSERT(Subresource Size is the Write Size);\n\notherAspect \u003d GetFormat().aspects \u0026 ~subresources.aspects;\nASSERT(OneOrZeroBits(otherAspects));\n\n// We need to copy the texture over if the other aspect is present and initialized so that it is preserved during the write.\nbool shouldCopyExistingData \u003d otherAspect \u0026\u0026 IsSubresourceContentInitialized(otherRange);\n```",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20eed88a_fea2f89f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T13:01:13Z",
+      "side": 1,
+      "message": "Where is the subresource written to marked as initialized?",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
