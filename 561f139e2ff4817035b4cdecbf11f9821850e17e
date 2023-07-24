@@ -34,6 +34,23 @@
       "parentUuid": "74d43f0c_df6a9f8f",
       "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdda9f80_8846c976",
+        "filename": "tools/cfi/ignores.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T22:51:43Z",
+      "side": 1,
+      "message": "do we need this file, or only the chromium side version of ignores.txt?",
+      "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
