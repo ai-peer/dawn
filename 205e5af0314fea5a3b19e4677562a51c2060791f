@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dcf012_4eda920a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T23:47:58Z",
+      "side": 1,
+      "message": "it\u0027s a bit odd to add the enums to be backends when they aren\u0027t used yet. wouldn\u0027t it be better to add them when we have an end2end test for it, and the feature is enabled on a particular backend?",
+      "revId": "205e5af0314fea5a3b19e4677562a51c2060791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c6d079b_681066b2",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T23:47:58Z",
+      "side": 1,
+      "message": "unit: it would be more precise to test just color.srcFactor set to one of the dual-source blend factors, and leave the others as something that is always supported;\n\nIt\u0027s probably fine to not do all of them (color.dstFactor, alpha.srcFactor, alpha.dstFactor) though you can if you like. Full testing could be left to the CTS",
+      "range": {
+        "startLine": 594,
+        "startChar": 8,
+        "endLine": 597,
+        "endChar": 60
+      },
+      "revId": "205e5af0314fea5a3b19e4677562a51c2060791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
