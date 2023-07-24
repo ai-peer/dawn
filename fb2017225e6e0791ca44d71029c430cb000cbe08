@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da9288b_93c96d17",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-07-24T22:46:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f451b38d_57413661",
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c676fa59_129d10e0",
@@ -173,6 +191,30 @@
       "writtenOn": "2023-07-24T18:51:25Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 168,
+        "startChar": 11,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93237e2f_8753fd5a",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-07-24T22:46:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "724b6da2_70d94469",
       "range": {
         "startLine": 168,
         "startChar": 11,
@@ -340,6 +382,30 @@
       "side": 1,
       "message": "Personally, I like to to make it only NonCopyable. This code confused me at the first look. I have to check the spec, etc to understand it.\n\nBut since the Mutex::AutoLock already implemented in this way. Keep they same is OK to me too.",
       "parentUuid": "fb04f91f_45d528be",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6406265e_26178677",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-07-24T22:46:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "708a9d96_ec20b8b2",
       "range": {
         "startLine": 47,
         "startChar": 4,
