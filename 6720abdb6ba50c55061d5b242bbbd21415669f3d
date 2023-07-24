@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ca3691c_296da63f",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-24T22:09:25Z",
+      "side": 1,
+      "message": "I\u0027d prefer it if we were consistent. If crashing is what you want to avoid, what do you think about changing `UNIMPLEMENTED()` to raise a JS exception and return? It might need to take a second arg for the return value (if any).",
+      "parentUuid": "23820353_4d4939f0",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "841b1f61_b138fe63",
         "filename": "src/dawn/node/binding/GPU.cpp",
         "patchSetId": 3
