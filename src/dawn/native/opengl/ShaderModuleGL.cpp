@@ -26,6 +26,7 @@
 #include "dawn/native/stream/BlobSource.h"
 #include "dawn/native/stream/ByteVectorSink.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "dawn/platform/metrics/CacheMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
 #include "tint/tint.h"
@@ -67,7 +68,8 @@ using BindingMap = std::unordered_map<tint::writer::BindingPoint, tint::writer::
     X(LimitsForCompilationRequest, limits)                                                       \
     X(opengl::OpenGLVersion::Standard, glVersionStandard)                                        \
     X(uint32_t, glVersionMajor)                                                                  \
-    X(uint32_t, glVersionMinor)
+    X(uint32_t, glVersionMinor)                                                                  \
+    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)
 
 DAWN_MAKE_CACHE_REQUEST(GLSLCompilationRequest, GLSL_COMPILATION_REQUEST_MEMBERS);
 #undef GLSL_COMPILATION_REQUEST_MEMBERS
@@ -189,10 +191,13 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
     req.glVersionStandard = version.GetStandard();
     req.glVersionMajor = version.GetMajor();
     req.glVersionMinor = version.GetMinor();
+    req.platform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
 
     CacheResult<GLSLCompilation> compilationResult;
     DAWN_TRY_LOAD_OR_RUN(
-        compilationResult, GetDevice(), std::move(req), GLSLCompilation::FromBlob,
+        compilationResult, GetDevice(), std::move(req),
+        SCOPED_DAWN_CACHE_HIT_FROM_BLOB(GetDevice()->GetPlatform(), "OpenGL.TintGLSLGenerate",
+                                        GLSLCompilation::FromBlob),
         [](GLSLCompilationRequest r) -> ResultOrError<GLSLCompilation> {
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
@@ -264,7 +269,11 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             tintOptions.binding_points = std::move(r.glBindings);
             tintOptions.allow_collisions = true;
 
-            auto result = tint::writer::glsl::Generate(&program, tintOptions, r.entryPointName);
+            auto result = [&]() {
+                dawn::platform::Platform* platform = r.platform.UnsafeGetValue();
+                SCOPED_DAWN_CACHE_MISS_TIMER(platform, "OpenGL.TintGLSLGenerate");
+                return tint::writer::glsl::Generate(&program, tintOptions, r.entryPointName);
+            }();
             DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
                             result.error);
 

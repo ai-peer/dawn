@@ -31,6 +31,7 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "dawn/platform/metrics/CacheMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 #include "tint/tint.h"
 
@@ -178,7 +179,7 @@ ShaderModule::~ShaderModule() = default;
     X(bool, clampFragDepth)                                                                      \
     X(bool, disableImageRobustness)                                                              \
     X(bool, disableRuntimeSizedArrayIndexClamping)                                               \
-    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)
+    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)
 
 DAWN_MAKE_CACHE_REQUEST(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);
 #undef SPIRV_COMPILATION_REQUEST_MEMBERS
@@ -269,7 +270,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     // transform as unsized arrays can only be declared on storage address space.
     req.disableRuntimeSizedArrayIndexClamping =
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseBufferRobustAccess2);
-    req.tracePlatform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
+    req.platform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
 
     const CombinedLimits& limits = GetDevice()->GetLimits();
@@ -277,7 +278,9 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
     CacheResult<CompiledSpirv> compilation;
     DAWN_TRY_LOAD_OR_RUN(
-        compilation, GetDevice(), std::move(req), CompiledSpirv::FromBlob,
+        compilation, GetDevice(), std::move(req),
+        SCOPED_DAWN_CACHE_HIT_FROM_BLOB(GetDevice()->GetPlatform(), "Vulkan.TintSPIRVGenerate",
+                                        CompiledSpirv::FromBlob),
         [](SpirvCompilationRequest r) -> ResultOrError<CompiledSpirv> {
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
@@ -304,7 +307,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             tint::Program program;
             tint::transform::DataMap transformOutputs;
             {
-                TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "RunTransforms");
+                TRACE_EVENT0(r.platform.UnsafeGetValue(), General, "RunTransforms");
                 DAWN_TRY_ASSIGN(program,
                                 RunTransforms(&transformManager, r.inputProgram, transformInputs,
                                               &transformOutputs, nullptr));
@@ -344,9 +347,13 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             options.disable_runtime_sized_array_index_clamping =
                 r.disableRuntimeSizedArrayIndexClamping;
 
-            TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General,
-                         "tint::writer::spirv::Generate()");
-            auto tintResult = tint::writer::spirv::Generate(&program, options);
+            TRACE_EVENT0(r.platform.UnsafeGetValue(), General, "tint::writer::spirv::Generate()");
+            auto tintResult = [&]() {
+                dawn::platform::Platform* platform = r.platform.UnsafeGetValue();
+                SCOPED_DAWN_CACHE_MISS_TIMER(platform, "Vulkan.TintSPIRVGenerate");
+                return tint::writer::spirv::Generate(&program, options);
+            }();
+
             DAWN_INVALID_IF(!tintResult.success, "An error occured while generating SPIR-V: %s.",
                             tintResult.error);
 
