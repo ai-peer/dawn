@@ -96,7 +96,7 @@ DAWN_SERIALIZABLE(struct,
 #define D3D_COMPILATION_REQUEST_MEMBERS(X)     \
     X(HlslCompilationRequest, hlsl)            \
     X(D3DBytecodeCompilationRequest, bytecode) \
-    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)
+    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)
 
 DAWN_MAKE_CACHE_REQUEST(D3DCompilationRequest, D3D_COMPILATION_REQUEST_MEMBERS);
 #undef D3D_COMPILATION_REQUEST_MEMBERS
