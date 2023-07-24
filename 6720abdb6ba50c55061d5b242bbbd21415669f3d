@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11828dea_5a885cc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-24T20:33:42Z",
+      "side": 1,
+      "message": "A very nice set of improvements, thank you!\nA few comments. Adding @cwallez@chromium.org for secondary reviewer",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46703af4_9f7df1a5",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-24T20:33:42Z",
+      "side": 1,
+      "message": "Given that this isn\u0027t actually implemented, I think it would be preferable to keep the `UNIMPLEMENTED()` call. That way it fails hard and fast, and you\u0027re not left wondering why something didn\u0027t work.\nKeep the TODO comment though.",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "841b1f61_b138fe63",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-24T20:33:42Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 251,
+        "startChar": 12,
+        "endLine": 251,
+        "endChar": 13
+      },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c096f7fd_f9612bac",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-24T20:33:42Z",
+      "side": 1,
+      "message": "A bit misleading? Why is this better than `UNIMPLEMENTED()` ?",
+      "range": {
+        "startLine": 148,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 38
+      },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31abcc0_484cf25c",
+        "filename": "src/dawn/node/binding/GPURenderBundle.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-24T20:33:42Z",
+      "side": 1,
+      "message": "Can drop the `explicit` when you have two or more args.\nHere and elsewhere",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
