@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9daaa6e1_9c0940d8",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-24T21:57:06Z",
+      "side": 1,
+      "message": "FYI, for come cases, calling `Enter()` \u0026 `Leave()` is not necessary, if you don\u0027t call them, all D3D11DeviceContext methods should acquire the internal lock by themselves. For `CommandBuffer::Execute()` case, we would like to make it  uninterruptible. For example, other thread may overwrite state of D3D11DeviceContext which could be need by a draw operation.",
+      "parentUuid": "3fb2b7d2_720c74db",
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c676fa59_129d10e0",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 5
@@ -48,6 +66,30 @@
       "writtenOn": "2023-07-24T20:40:02Z",
       "side": 1,
       "message": "can we have a different feature for it? SetMultithreadProtected pertains only to the device context here, which is a very d3d11-specific thing.",
+      "range": {
+        "startLine": 49,
+        "startChar": 26,
+        "endLine": 49,
+        "endChar": 65
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7574f04d_914a9646",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-24T21:57:06Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "c676fa59_129d10e0",
       "range": {
         "startLine": 49,
         "startChar": 26,
@@ -165,6 +207,30 @@
       "writtenOn": "2023-07-24T20:40:02Z",
       "side": 1,
       "message": "I think at [1], it\u0027s not moved; return-value-optimization (RVO) will construct it at the caller",
+      "parentUuid": "4e21c6ca_74b6367f",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ef7903_b721ac47",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-24T21:57:06Z",
+      "side": 1,
+      "message": "I see. I realized NonMovable is also NonCopyable. So in this case, it should be fine. Just the dawn has to be compiled with compiler with `copy elision` supported. If the compiler doesn\u0027t support it, it shouldn\u0027t compile probably.\n\nFYI, https://en.wikipedia.org/wiki/Copy_elision , the behavior depends on the compiler and compiler flags. I created a small test and got below results.\n\nhttps://paste.googleplex.com/4934662416760832",
       "parentUuid": "4e21c6ca_74b6367f",
       "range": {
         "startLine": 47,
