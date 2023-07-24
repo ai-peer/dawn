@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d43f0c_df6a9f8f",
+        "filename": "src/dawn/common/WeakRefSupport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T17:21:23Z",
+      "side": 1,
+      "message": "I\u0027m trying to see if there\u0027s another way to make the analyzer happy. I believe that what we\u0027re doing here is correct, but it\u0027s still slightly unsafe if the constructor of WeakRefData tries to do something with `this` more than just store it.\n\nI think potentially a better way to make it happy would be to simply pass `this` into the WeakRefData constructor - so it would store a WeakRefSupportBase* instead of a RefCounted*. Then, perform the casts only inside UnsafeGet / TryGetRef which happen well after construction when the RefCounted base type has definitely been fully constructed.",
+      "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
