@@ -37,6 +37,7 @@ struct D3D12DeviceInfo {
     bool supportsCastingFullyTypedFormat;
     uint32_t programmableSamplePositionsTier;
     bool supportsRootSignatureVersion1_1;
+    bool supportsHeapFlagCreateNotZeroed;
 };
 
 ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const PhysicalDevice& physicalDevice);

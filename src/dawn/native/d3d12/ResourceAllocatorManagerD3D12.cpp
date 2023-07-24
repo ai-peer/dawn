@@ -322,10 +322,15 @@ ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(dev
                             ? mDevice->GetDeviceInfo().resourceHeapTier
                             : 1;
 
+    D3D12_HEAP_FLAGS createNotZeroedHeapFlag =
+        mDevice->IsToggleEnabled(Toggle::D3D12CreateNotZeroedHeap)
+            ? D3D12_HEAP_FLAG_CREATE_NOT_ZEROED
+            : D3D12_HEAP_FLAG_NONE;
     for (uint32_t i = 0; i < ResourceHeapKind::EnumCount; i++) {
         const ResourceHeapKind resourceHeapKind = static_cast<ResourceHeapKind>(i);
+        D3D12_HEAP_FLAGS heapFlags = GetD3D12HeapFlags(resourceHeapKind) | createNotZeroedHeapFlag;
         mHeapAllocators[i] = std::make_unique<HeapAllocator>(
-            mDevice, GetD3D12HeapType(resourceHeapKind), GetD3D12HeapFlags(resourceHeapKind),
+            mDevice, GetD3D12HeapType(resourceHeapKind), heapFlags,
             GetMemorySegment(device, GetD3D12HeapType(resourceHeapKind)));
         mPooledHeapAllocators[i] =
             std::make_unique<PooledResourceMemoryAllocator>(mHeapAllocators[i].get());
@@ -565,11 +570,14 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedR
     // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
     // provided to CreateCommittedResource.
     ComPtr<ID3D12Resource> committedResource;
-    DAWN_TRY(CheckOutOfMemoryHRESULT(
-        mDevice->GetD3D12Device()->CreateCommittedResource(
-            &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage,
-            optimizedClearValue, IID_PPV_ARGS(&committedResource)),
-        "ID3D12Device::CreateCommittedResource"));
+    D3D12_HEAP_FLAGS heapFlag = mDevice->IsToggleEnabled(Toggle::D3D12CreateNotZeroedHeap)
+                                    ? D3D12_HEAP_FLAG_CREATE_NOT_ZEROED
+                                    : D3D12_HEAP_FLAG_NONE;
+    DAWN_TRY(
+        CheckOutOfMemoryHRESULT(mDevice->GetD3D12Device()->CreateCommittedResource(
+                                    &heapProperties, heapFlag, &resourceDescriptor, initialUsage,
+                                    optimizedClearValue, IID_PPV_ARGS(&committedResource)),
+                                "ID3D12Device::CreateCommittedResource"));
 
     // When using CreateCommittedResource, D3D12 creates an implicit heap that contains the
     // resource allocation. Because Dawn's memory residency management occurs at the resource

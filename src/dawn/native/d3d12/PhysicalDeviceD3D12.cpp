@@ -501,6 +501,10 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     deviceToggles->Default(Toggle::D3D12UseRootSignatureVersion1_1,
                            GetDeviceInfo().supportsRootSignatureVersion1_1);
 
+    // By default use D3D12_HEAP_FLAG_CREATE_NOT_ZEROED when possible
+    deviceToggles->Default(Toggle::D3D12CreateNotZeroedHeap,
+                           GetDeviceInfo().supportsHeapFlagCreateNotZeroed);
+
     uint32_t deviceId = GetDeviceId();
     uint32_t vendorId = GetVendorId();
 
