@@ -20,6 +20,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fb2b7d2_720c74db",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T20:40:02Z",
+      "side": 1,
+      "message": "I think the scope needs to be acquired in more places than here.\n\nFor example, queue writeTexture/writeBuffer also call GetPendingCommandContext and touch the d3d11DeviceContext as well as several other callsites (d3d11::Device::NextSerial, etc.)\n\nInstead, I think we should change GetPendingCommandContext to return a wrapper around the CommandRecordingContext like Guard\u003cCommandRecordingContext\u003e which manages Enter/Leave and provides deref operators to get the `CommandRecordingContext*`. This way, we ensure we take care of every callsite.\n\n\nSoon, we will need a Guard\u003cT\u003e class which also holds other mutexes. It should be possible to generalize it for any mutex that is [BasicLockable](https://en.cppreference.com/w/cpp/named_req/BasicLockable). Perhaps something sort of like the following?\n\n```c++\ntemplate \u003ctypename T, typename Mutex\u003e\nclass Guard : public NonMovable {\n  public:\n    Guard(T* obj, Mutex\u0026 mutex) : mLockGuard(mutex), mObj(obj) {}\n\n    T* operator-\u003e() { return mObj; }\n    T\u0026 operator*() { return *mObj; }\n    const T* operator-\u003e() const { return mObj; }\n    const T\u0026 operator*() const { return *mObj; }\n\n  private:\n    std::lock_guard\u003cMutex\u003e mLockGuard;\n    T* const mObj;\n};\n\nGuard\u003cCommandRecordingContext, CommandRecordingContext::Mutex\u003e\nDevice::GetPendingCommandContext() {\n  return Guard\u003cCommandRecordingContext, CommandRecordingContext::Mutex\u003e(\n     \u0026mPendingCommands, mPendingCommands.GetMutex());\n};\n\n\nclass CommandRecordingContext {\n  public:\n    class Mutex {\n      public:\n        // implement BasicLockable; calls mD3D11Multithread Enter/Leave\n        void lock();\n        void unlock();\n\n      private:\n        ComPtr\u003cID3D11Multithread\u003e mD3D11Multithread;\n    };\n\n    Mutex\u0026 GetMutex() {\n      return mMutex;\n    }\n\n  private:\n    Mutex mMutex;\n};\n```",
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c676fa59_129d10e0",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T20:40:02Z",
+      "side": 1,
+      "message": "can we have a different feature for it? SetMultithreadProtected pertains only to the device context here, which is a very d3d11-specific thing.",
+      "range": {
+        "startLine": 49,
+        "startChar": 26,
+        "endLine": 49,
+        "endChar": 65
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "724b6da2_70d94469",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 5
@@ -102,6 +142,30 @@
       "side": 1,
       "message": "If it is not moveable, I think `Leave()` will be called at [1], when the temp ScopedCriticalSection is out of scope (return from `EnterScopedCriticalSection()`). And `Leave()` will be called again later, when the copy of the `ScopedCriticalSection` is dstroyed, right?",
       "parentUuid": "bf4266ba_5e7feba0",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11645a15_c531c760",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T20:40:02Z",
+      "side": 1,
+      "message": "I think at [1], it\u0027s not moved; return-value-optimization (RVO) will construct it at the caller",
+      "parentUuid": "4e21c6ca_74b6367f",
       "range": {
         "startLine": 47,
         "startChar": 4,
