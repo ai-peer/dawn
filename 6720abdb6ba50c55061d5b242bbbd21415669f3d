@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23820353_4d4939f0",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-07-24T20:45:03Z",
+      "side": 1,
+      "message": "that\u0027s fair. my main goal here is to reduce the surface that can cause an instance to crash from c++. would you be okay with raising a js exception?",
+      "parentUuid": "46703af4_9f7df1a5",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "841b1f61_b138fe63",
         "filename": "src/dawn/node/binding/GPU.cpp",
         "patchSetId": 3
