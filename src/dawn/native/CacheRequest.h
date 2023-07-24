@@ -88,7 +88,8 @@ class CacheRequestImpl {
     friend auto LoadOrRun(DeviceBase* device,
                           Request&& r,
                           CacheHitFn cacheHitFn,
-                          CacheMissFn cacheMissFn) {
+                          CacheMissFn cacheMissFn,
+                          std::string_view cacheFnName = "") {
         // Get return types and check that CacheMissReturnType can be cast to a raw function
         // pointer. This means it's not a std::function or lambda that captures additional data.
         using CacheHitReturnType = decltype(cacheHitFn(std::declval<Blob>()));

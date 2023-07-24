@@ -26,6 +26,7 @@
 #include "dawn/native/d3d/PlatformFunctions.h"
 #include "dawn/native/d3d/UtilsD3D.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "dawn/platform/metrics/CacheMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
 #include "tint/tint.h"
@@ -243,7 +244,11 @@ MaybeError TranslateToHLSL(d3d::HlslCompilationRequest r,
         std::move(r.bindingPointsIgnoredInRobustnessTransform);
 
     TRACE_EVENT0(tracePlatform.UnsafeGetValue(), General, "tint::writer::hlsl::Generate");
-    auto result = tint::writer::hlsl::Generate(&transformedProgram, options);
+    auto result = [&]() {
+        dawn::platform::Platform* platform = r.platform.UnsafeGetValue();
+        SCOPED_DAWN_CACHE_MISS_TIMER(platform, "D3D.CompileShader.TintHLSLGenerate");
+        return tint::writer::hlsl::Generate(&transformedProgram, options);
+    }();
     DAWN_INVALID_IF(!result.success, "An error occured while generating HLSL: %s", result.error);
 
     compiledShader->usesVertexIndex = usesVertexIndex;
@@ -328,16 +333,22 @@ ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r) {
         case d3d::Compiler::DXC: {
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "CompileShaderDXC");
             ComPtr<IDxcBlob> compiledDXCShader;
-            DAWN_TRY_ASSIGN(compiledDXCShader, CompileShaderDXC(r.bytecode, remappedEntryPoint,
-                                                                compiledShader.hlslSource));
+            {
+                SCOPED_DAWN_CACHE_MISS_TIMER(platform, "D3D.CompileShader.CompileShaderDXC");
+                DAWN_TRY_ASSIGN(compiledDXCShader, CompileShaderDXC(r.bytecode, remappedEntryPoint,
+                                                                    compiledShader.hlslSource));
+            }
             compiledShader.shaderBlob = CreateBlob(std::move(compiledDXCShader));
             break;
         }
         case d3d::Compiler::FXC: {
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "CompileShaderFXC");
             ComPtr<ID3DBlob> compiledFXCShader;
-            DAWN_TRY_ASSIGN(compiledFXCShader, CompileShaderFXC(r.bytecode, remappedEntryPoint,
-                                                                compiledShader.hlslSource));
+            {
+                SCOPED_DAWN_CACHE_MISS_TIMER(platform, "D3D.CompileShader.CompileShaderFXC");
+                DAWN_TRY_ASSIGN(compiledFXCShader, CompileShaderFXC(r.bytecode, remappedEntryPoint,
+                                                                    compiledShader.hlslSource));
+            }
             compiledShader.shaderBlob = CreateBlob(std::move(compiledFXCShader));
             break;
         }
