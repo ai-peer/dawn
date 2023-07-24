@@ -27,6 +27,7 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/VisitableMembers.h"
+#include "dawn/platform/metrics/HistogramMacros.h"
 
 namespace dawn::native {
 
@@ -88,7 +89,9 @@ class CacheRequestImpl {
     friend auto LoadOrRun(DeviceBase* device,
                           Request&& r,
                           CacheHitFn cacheHitFn,
-                          CacheMissFn cacheMissFn) {
+                          CacheMissFn cacheMissFn,
+                          const char* cacheHitMetricName = nullptr,
+                          const char* cacheMissMetricName = nullptr) {
         // Get return types and check that CacheMissReturnType can be cast to a raw function
         // pointer. This means it's not a std::function or lambda that captures additional data.
         using CacheHitReturnType = decltype(cacheHitFn(std::declval<Blob>()));
@@ -109,6 +112,7 @@ class CacheRequestImpl {
         using ReturnType = ResultOrError<CacheResultType>;
 
         CacheKey key = r.CreateCacheKey(device);
+        platform::metrics::DawnHistogramTimer cacheHitTimer(device->GetPlatform());
         Blob blob = device->GetBlobCache()->Load(key);
 
         if (!blob.Empty()) {
@@ -117,10 +121,12 @@ class CacheRequestImpl {
 
             if constexpr (!detail::IsResultOrError<CacheHitReturnType>::value) {
                 // If the result type is not a ResultOrError, return it.
+                cacheHitTimer.RecordMicroseconds(cacheHitMetricName);
                 return ReturnType(CacheResultType::CacheHit(std::move(key), std::move(result)));
             } else {
                 // Otherwise, if the value is a success, also return it.
                 if (DAWN_LIKELY(result.IsSuccess())) {
+                    cacheHitTimer.RecordMicroseconds(cacheHitMetricName);
                     return ReturnType(
                         CacheResultType::CacheHit(std::move(key), result.AcquireSuccess()));
                 }
@@ -129,8 +135,10 @@ class CacheRequestImpl {
             }
         }
         // Cache miss, or the CacheHitFn failed.
+        platform::metrics::DawnHistogramTimer cacheMissTimer(device->GetPlatform());
         auto result = cacheMissFn(std::move(r));
         if (DAWN_LIKELY(result.IsSuccess())) {
+            cacheMissTimer.RecordMicroseconds(cacheMissMetricName);
             return ReturnType(CacheResultType::CacheMiss(std::move(key), result.AcquireSuccess()));
         }
         return ReturnType(result.AcquireError());
