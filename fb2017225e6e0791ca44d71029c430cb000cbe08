@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ddd6a2a_9936d646",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-24T18:16:00Z",
+      "side": 1,
+      "message": "why use struct and NonMovable?",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
