@@ -501,6 +501,11 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     deviceToggles->Default(Toggle::D3D12UseRootSignatureVersion1_1,
                            GetDeviceInfo().supportsRootSignatureVersion1_1);
 
+    // By default support creating MSAA textures with 64KB
+    // (D3D12_SMALL_MSAA_RESOURCE_PLACEMENT_ALIGNMENT) alignment.
+    deviceToggles->Default(Toggle::D3D12SupportMSAA64KBAlignedTexture,
+                           GetDeviceInfo().supportsMSAA64KBAlignedTexture);
+
     uint32_t deviceId = GetDeviceId();
     uint32_t vendorId = GetVendorId();
 
