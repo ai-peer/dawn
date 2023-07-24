@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d288710_bc778ffd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T21:07:52Z",
+      "side": 1,
+      "message": "Thank you for the all the changes! A couple comments but it looks good overall!",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c04437_022398d6",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T21:07:52Z",
+      "side": 1,
+      "message": "This seems like it could be done now.",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8aced23_3d325020",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T21:07:52Z",
+      "side": 1,
+      "message": "Can we have some TODO here? The result would depend on the OS and I believe that only on Android will the answer be RGBA8Unorm. Other OSes prefer BGRA for swapchains.",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46703af4_9f7df1a5",
@@ -72,6 +123,80 @@
         "endLine": 251,
         "endChar": 13
       },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47230854_6607e9d4",
+        "filename": "src/dawn/node/binding/GPUBindGroup.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T21:07:52Z",
+      "side": 1,
+      "message": "nit: this could be a const reference. Ditto in other files.",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae0c294_c6e0f9ec",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T21:07:52Z",
+      "side": 1,
+      "message": "There\u0027s a lot of similar changes for each of the objects. I wonder if we could eventually (as a follow-up, or an issue tracking the work) a DawnObject\u003cHandleType\u003e with a (HandleType, const char* label) constructor that takes care of get/SetLabel etc.",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a22cb50_6063fcba",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T21:07:52Z",
+      "side": 1,
+      "message": "The async resolution happens after the call to `GPUDevice::createRenderPipelineAsync` and the `descriptor-\u003elabel` pointer could be invalid after the end of the call. We could store the label explicitly as an `std::string` in the `Context` and then pass it in new constructor for the compute/render pipeline.",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "361d86ce_185abe05",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-24T21:07:52Z",
+      "side": 1,
+      "message": "A descriptor should be available from GPUDeviceDescriptor.defaultQueue that contains the label.",
       "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
