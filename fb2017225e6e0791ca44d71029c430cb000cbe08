@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd253416_a731c779",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-24T22:06:41Z",
+      "side": 1,
+      "message": "I see - so basically, if you don\u0027t do Enter/Leave then it will still be safe if the command aren\u0027t stateful; just potentially have aggressive acquiring of the lock.\n\nin that case, it\u0027s fine to not add some Guard wrapper class for this if you think it\u0027s not necessary in the other places for performance.",
+      "parentUuid": "9daaa6e1_9c0940d8",
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c676fa59_129d10e0",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 5
