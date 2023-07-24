@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4516c108_7c1dad90",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1747,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-24T15:56:33Z",
+      "side": 1,
+      "message": "Nit: delete if unneeded?",
+      "revId": "3a5f4f19c8e4b3a2beef08c27a981a0995dd020e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498959aa_69b74e02",
+        "filename": "src/tint/lang/wgsl/ast/transform/manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-24T15:56:33Z",
+      "side": 1,
+      "message": "This cast and the \"unhandled transform type\" error are no longer necessary.",
+      "revId": "3a5f4f19c8e4b3a2beef08c27a981a0995dd020e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
