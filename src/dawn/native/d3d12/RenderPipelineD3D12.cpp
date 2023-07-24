@@ -113,6 +113,14 @@ D3D12_BLEND D3D12Blend(wgpu::BlendFactor factor) {
             return D3D12_BLEND_BLEND_FACTOR;
         case wgpu::BlendFactor::OneMinusConstant:
             return D3D12_BLEND_INV_BLEND_FACTOR;
+        case wgpu::BlendFactor::Src1:
+            return D3D12_BLEND_SRC1_COLOR;
+        case wgpu::BlendFactor::OneMinusSrc1:
+            return D3D12_BLEND_INV_SRC1_COLOR;
+        case wgpu::BlendFactor::Src1Alpha:
+            return D3D12_BLEND_SRC1_ALPHA;
+        case wgpu::BlendFactor::OneMinusSrc1Alpha:
+            return D3D12_BLEND_INV_SRC1_ALPHA;
     }
 }
 

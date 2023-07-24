@@ -578,6 +578,29 @@ TEST_F(RenderPipelineValidationTest, BlendOperationAndBlendFactors) {
     }
 }
 
+// Tests that enums enabled by the DualSourceBlending feature are not valid when the feature is not
+// enabled.
+TEST_F(RenderPipelineValidationTest, DualSourceBlendingEnumsInvalid) {
+    std::array<wgpu::BlendFactor, 4> kBlendFactors = {
+        wgpu::BlendFactor::Src1, wgpu::BlendFactor::OneMinusSrc1, wgpu::BlendFactor::Src1Alpha,
+        wgpu::BlendFactor::OneMinusSrc1Alpha};
+
+    for (wgpu::BlendFactor blendFactor : kBlendFactors) {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.cTargets[0].blend = &descriptor.cBlends[0];
+        descriptor.cBlends[0].color.srcFactor = blendFactor;
+        descriptor.cBlends[0].color.dstFactor = blendFactor;
+        descriptor.cBlends[0].alpha.srcFactor = blendFactor;
+        descriptor.cBlends[0].alpha.dstFactor = blendFactor;
+        descriptor.cBlends[0].color.operation = wgpu::BlendOperation::Add;
+        descriptor.cBlends[0].alpha.operation = wgpu::BlendOperation::Add;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
+
 /// Tests that the sample count of the render pipeline must be valid.
 TEST_F(RenderPipelineValidationTest, SampleCount) {
     {
@@ -2228,6 +2251,40 @@ TEST_F(MSAARenderToSingleSampledPipelineDescriptorValidationTest,
         encoder.Finish(),
         testing::HasSubstr(
             "includes writable usage and another usage in the same synchronization scope"));
+}
+
+class DualSourceBlendingFeatureTest : public RenderPipelineValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DualSourceBlending};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeaturesCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Tests that enums associated with the DualSourceBlending feature are valid when the feature is
+// enabled.
+TEST_F(DualSourceBlendingFeatureTest, FeatureEnumsValidWithFeatureEnabled) {
+    std::array<wgpu::BlendFactor, 4> kBlendFactors = {
+        wgpu::BlendFactor::Src1, wgpu::BlendFactor::OneMinusSrc1, wgpu::BlendFactor::Src1Alpha,
+        wgpu::BlendFactor::OneMinusSrc1Alpha};
+
+    for (wgpu::BlendFactor blendFactor : kBlendFactors) {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.cTargets[0].blend = &descriptor.cBlends[0];
+        descriptor.cBlends[0].color.srcFactor = blendFactor;
+        descriptor.cBlends[0].color.dstFactor = blendFactor;
+        descriptor.cBlends[0].alpha.srcFactor = blendFactor;
+        descriptor.cBlends[0].alpha.dstFactor = blendFactor;
+        descriptor.cBlends[0].color.operation = wgpu::BlendOperation::Add;
+        descriptor.cBlends[0].alpha.operation = wgpu::BlendOperation::Add;
+        device.CreateRenderPipeline(&descriptor);
+    }
 }
 
 }  // anonymous namespace
