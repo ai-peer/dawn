@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "724b6da2_70d94469",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-24T18:51:25Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 168,
+        "startChar": 11,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ddd6a2a_9936d646",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 5
@@ -55,6 +78,30 @@
       "side": 1,
       "message": "Partly because I was cargo-culting the coding style for other scoped object types in Dawn and the one I looked at was Mutex::AutoLock.\n\nHowever, I do think NonMovable is a better choice than moveable since we don\u0027t want this to be passed around and have a longer lifetime than the calling function\u0027s scope - similar to AutoLock (although std::unique_ptr does allow you to get around that).\n\nStruct vs class is a minor stylistic choice - again lifted that from Mutex::AutoLock.\n\nThat being said, I\u0027m open to making it moveable if needed.",
       "parentUuid": "5ddd6a2a_9936d646",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "fb2017225e6e0791ca44d71029c430cb000cbe08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e21c6ca_74b6367f",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-24T18:51:25Z",
+      "side": 1,
+      "message": "If it is not moveable, I think `Leave()` will be called at [1], when the temp ScopedCriticalSection is out of scope (return from `EnterScopedCriticalSection()`). And `Leave()` will be called again later, when the copy of the `ScopedCriticalSection` is dstroyed, right?",
+      "parentUuid": "bf4266ba_5e7feba0",
       "range": {
         "startLine": 47,
         "startChar": 4,
