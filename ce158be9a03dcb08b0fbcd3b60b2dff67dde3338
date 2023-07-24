@@ -52,6 +52,24 @@
       "parentUuid": "fc104a9d_adc69ffd",
       "revId": "ce158be9a03dcb08b0fbcd3b60b2dff67dde3338",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b8c80f_e8e8cd03",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-07-24T14:45:49Z",
+      "side": 1,
+      "message": "This has been fixed by https://dawn-review.googlesource.com/c/dawn/+/142401",
+      "parentUuid": "64803e14_b3a2ef3b",
+      "revId": "ce158be9a03dcb08b0fbcd3b60b2dff67dde3338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
