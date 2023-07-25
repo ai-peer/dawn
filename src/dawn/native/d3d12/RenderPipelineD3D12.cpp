@@ -30,6 +30,7 @@
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
 #include "dawn/native/d3d12/TextureD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
+#include "dawn/platform/metrics/CacheMacros.h"
 
 namespace dawn::native::d3d12 {
 namespace {
@@ -406,17 +407,26 @@ MaybeError RenderPipeline::Initialize() {
         descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = blob.Size();
     }
 
-    HRESULT result = device->GetD3D12Device()->CreateGraphicsPipelineState(
-        &descriptorD3D12, IID_PPV_ARGS(&mPipelineState));
+    // We don't use the scoped cache histogram counters for the cache hit here so that we can
+    // condition on whether it fails appropriately.
+    auto* d3d12Device = device->GetD3D12Device();
+    dawn::platform::Platform* platform = device->GetPlatform();
+    double start = platform->MonotonicallyIncreasingTime();
+    HRESULT result =
+        d3d12Device->CreateGraphicsPipelineState(&descriptorD3D12, IID_PPV_ARGS(&mPipelineState));
+    double elapsed = platform->MonotonicallyIncreasingTime() - start;
     if (cacheHit && result == D3D12_ERROR_DRIVER_VERSION_MISMATCH) {
         // See dawn:1878 where it is possible for the PSO creation to fail with this error.
         cacheHit = false;
         descriptorD3D12.CachedPSO.pCachedBlob = nullptr;
         descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = 0;
-        result = device->GetD3D12Device()->CreateGraphicsPipelineState(
-            &descriptorD3D12, IID_PPV_ARGS(&mPipelineState));
+        start = platform->MonotonicallyIncreasingTime();
+        result = d3d12Device->CreateGraphicsPipelineState(&descriptorD3D12,
+                                                          IID_PPV_ARGS(&mPipelineState));
+        elapsed = platform->MonotonicallyIncreasingTime() - start;
     }
     DAWN_TRY(CheckHRESULT(result, "D3D12 create graphics pipeline state"));
+    int elapsedMS = static_cast<int>(elapsed * 1'000.0);
 
     if (!cacheHit) {
         // Cache misses, need to get pipeline cached blob and store.
@@ -424,6 +434,9 @@ MaybeError RenderPipeline::Initialize() {
         DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
                               "D3D12 render pipeline state get cached blob"));
         device->StoreCachedBlob(GetCacheKey(), CreateBlob(std::move(d3dBlob)));
+        DAWN_CACHE_MISS_HISTOGRAM_TIMES(platform, "D3D12.CreateGraphicsPipelineState", elapsedMS);
+    } else {
+        DAWN_CACHE_HIT_HISTOGRAM_TIMES(platform, "D3D12.CreateGraphicsPipelineState", elapsedMS);
     }
 
     SetLabelImpl();
