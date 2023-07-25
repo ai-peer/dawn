@@ -74,6 +74,30 @@
       },
       "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab501568_bac57496",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-25T10:10:28Z",
+      "side": 1,
+      "message": "The original code was using `if (v !\u003d values.Front()) {` as the condition for adding a comma, but because the same value can appear in the list multiple times you\u0027d end up not commas in between duplicated values.\n\nBut my change to fix this became obsolete when rebased on top of the changes you made anyway.",
+      "parentUuid": "fc911c8b_d9159505",
+      "range": {
+        "startLine": 704,
+        "startChar": 0,
+        "endLine": 711,
+        "endChar": 5
+      },
+      "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
