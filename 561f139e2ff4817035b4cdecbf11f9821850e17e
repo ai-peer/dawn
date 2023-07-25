@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba68c969_1cbd4395",
+        "filename": "src/dawn/common/WeakRefSupport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003976
+      },
+      "writtenOn": "2023-07-25T19:20:10Z",
+      "side": 1,
+      "message": "You can add `__attribute__((no_sanitize(\"cfi-derived-cast\")))` to this function instead of adding an entry to the Chrome ignorelist.",
+      "parentUuid": "0e4485fb_8988ef6b",
+      "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdda9f80_8846c976",
