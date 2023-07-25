@@ -52,6 +52,26 @@ class TransformTestBase : public BASE {
         EXPECT_TRUE(res) << res.Failure().str();
     }
 
+    /// Transforms the module, using the transforms `TRANSFORMS`.
+    template <typename... TRANSFORMS>
+    void Run(TRANSFORMS... transforms) {
+        // Validate the input IR.
+        {
+            auto res = ir::Validate(mod);
+            EXPECT_TRUE(res) << res.Failure().str();
+            if (!res) {
+                return;
+            }
+        }
+
+        // Run the transforms.
+        (transforms(&mod), ...);
+
+        // Validate the output IR.
+        auto res = ir::Validate(mod);
+        EXPECT_TRUE(res) << res.Failure().str();
+    }
+
     /// @returns the transformed module as a disassembled string
     std::string str() {
         ir::Disassembler dis(mod);

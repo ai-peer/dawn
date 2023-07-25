@@ -40,6 +40,12 @@ class Transform : public utils::Castable<Transform> {
     virtual void Run(ir::Module* module) const = 0;
 };
 
+/// Run the transform called @p name on the module @p ir using the function @p transform.
+/// @param ir the module to transform
+/// @param name the name of the transform
+/// @param transform the transform function
+void RunTransform(Module* ir, const char* name, std::function<void()> transform);
+
 }  // namespace tint::ir::transform
 
 #endif  // SRC_TINT_LANG_CORE_IR_TRANSFORM_TRANSFORM_H_

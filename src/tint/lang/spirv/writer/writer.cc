@@ -97,7 +97,8 @@ void Sanitize(ir::Module* module) {
     ir::transform::HandleMatrixArithmetic{}.Run(module);
     ir::transform::MergeReturn{}.Run(module);
     ir::transform::ShaderIOSpirv{}.Run(module);
-    ir::transform::VarForDynamicIndex{}.Run(module);
+
+    ir::transform::VarForDynamicIndex(module);
 }
 
 SpvStorageClass StorageClass(builtin::AddressSpace addrspace) {
