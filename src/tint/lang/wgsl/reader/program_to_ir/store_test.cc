@@ -23,19 +23,25 @@ namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
 
-using IR_FromProgramMaterializeTest = ProgramTestHelper;
+using ProgramToIRStoreTest = ProgramTestHelper;
 
-TEST_F(IR_FromProgramMaterializeTest, EmitExpression_MaterializedCall) {
-    auto* expr = Return(Call("trunc", 2.5_f));
+TEST_F(ProgramToIRStoreTest, EmitStatement_Assign) {
+    GlobalVar("a", ty.u32(), builtin::AddressSpace::kPrivate);
 
-    Func("test_function", {}, ty.f32(), expr, utils::Empty);
+    auto* expr = Assign("a", 4_u);
+    WrapInFunction(expr);
 
     auto m = Build();
     ASSERT_TRUE(m) << (!m ? m.Failure() : "");
 
-    EXPECT_EQ(Disassemble(m.Get()), R"(%test_function = func():f32 -> %b1 {
-  %b1 = block {
-    ret 2.0f
+    EXPECT_EQ(Disassemble(m.Get()), R"(%b1 = block {  # root
+  %a:ptr<private, u32, read_write> = var
+}
+
+%test_function = @compute @workgroup_size(1, 1, 1) func():void -> %b2 {
+  %b2 = block {
+    store %a, 4u
+    ret
   }
 }
 )");
