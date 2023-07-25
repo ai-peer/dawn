@@ -51,6 +51,29 @@
       "parentUuid": "bf248cf0_321f4695",
       "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc911c8b_d9159505",
+        "filename": "src/tint/ir/disassembler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T08:24:56Z",
+      "side": 1,
+      "message": "Why was this change needed?",
+      "range": {
+        "startLine": 704,
+        "startChar": 0,
+        "endLine": 711,
+        "endChar": 5
+      },
+      "revId": "61d8a8ee793650094f8ba9b683e3eb648c37b1d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
