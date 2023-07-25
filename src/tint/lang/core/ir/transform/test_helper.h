@@ -28,6 +28,8 @@
 
 namespace tint::ir::transform {
 
+using TransformFunc = std::function<Result<SuccessType, diag::List>(Module*)>;
+
 /// Helper class for testing IR transforms.
 template <typename BASE>
 class TransformTestBase : public BASE {
@@ -50,6 +52,21 @@ class TransformTestBase : public BASE {
         // Validate the output IR.
         auto res = ir::Validate(mod);
         EXPECT_TRUE(res) << res.Failure().str();
+    }
+
+    /// Transforms the module, using @p transform.
+    /// @param transform_func the transform to run
+    void Run(std::function<Result<SuccessType, std::string>(Module*)> transform_func) {
+        // Run the transform.
+        auto result = transform_func(&mod);
+        EXPECT_TRUE(result) << result.Failure();
+        if (!result) {
+            return;
+        }
+
+        // Validate the output IR.
+        auto valid = ir::Validate(mod);
+        EXPECT_TRUE(valid) << valid.Failure().str();
     }
 
     /// @returns the transformed module as a disassembled string
