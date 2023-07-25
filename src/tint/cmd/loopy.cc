@@ -19,8 +19,8 @@
 #include "tint/tint.h"
 
 #if TINT_BUILD_IR
-#include "src/tint/lang/core/ir/from_program.h"
 #include "src/tint/lang/core/ir/module.h"
+#include "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.h"
 #endif  // TINT_BUILD_IR
 
 namespace {
@@ -378,7 +378,7 @@ int main(int argc, const char** argv) {
             loop_count = options.loop_count;
         }
         for (uint32_t i = 0; i < loop_count; ++i) {
-            auto result = tint::ir::FromProgram(program.get());
+            auto result = tint::wgsl::reader::ProgramToIR(program.get());
             if (!result) {
                 std::cerr << "Failed to build IR from program: " << result.Failure() << std::endl;
             }
