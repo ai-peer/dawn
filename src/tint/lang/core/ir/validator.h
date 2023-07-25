@@ -45,6 +45,12 @@ struct Success {};
 /// @returns true on success, an error result otherwise
 utils::Result<Success, diag::List> Validate(Module& mod);
 
+/// Validates the module @p ir and dumps its contents if required by the build configuration.
+/// @param ir the module to transform
+/// @param msg the msg to accompany the output
+/// @returns true if the module is valid, false otherwise
+utils::Result<Success, diag::List> ValidateAndDumpIfNeeded(Module& ir, const char* msg);
+
 /// The core IR validator.
 class Validator {
   public:
