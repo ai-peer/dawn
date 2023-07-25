@@ -112,7 +112,7 @@ class CacheRequestImpl {
         using ReturnType = ResultOrError<CacheResultType>;
 
         CacheKey key = r.CreateCacheKey(device);
-        platform::metrics::DawnHistogramTimer cacheHitTimer(device->GetPlatform());
+        platform::metrics::DawnHistogramTimer cacheTimer(device->GetPlatform());
         Blob blob = device->GetBlobCache()->Load(key);
 
         if (!blob.Empty()) {
@@ -121,12 +121,12 @@ class CacheRequestImpl {
 
             if constexpr (!detail::IsResultOrError<CacheHitReturnType>::value) {
                 // If the result type is not a ResultOrError, return it.
-                cacheHitTimer.RecordMicroseconds(cacheHitMetricName);
+                cacheTimer.RecordMicroseconds(cacheHitMetricName);
                 return ReturnType(CacheResultType::CacheHit(std::move(key), std::move(result)));
             } else {
                 // Otherwise, if the value is a success, also return it.
                 if (DAWN_LIKELY(result.IsSuccess())) {
-                    cacheHitTimer.RecordMicroseconds(cacheHitMetricName);
+                    cacheTimer.RecordMicroseconds(cacheHitMetricName);
                     return ReturnType(
                         CacheResultType::CacheHit(std::move(key), result.AcquireSuccess()));
                 }
@@ -135,10 +135,10 @@ class CacheRequestImpl {
             }
         }
         // Cache miss, or the CacheHitFn failed.
-        platform::metrics::DawnHistogramTimer cacheMissTimer(device->GetPlatform());
+        cacheTimer.Reset();
         auto result = cacheMissFn(std::move(r));
         if (DAWN_LIKELY(result.IsSuccess())) {
-            cacheMissTimer.RecordMicroseconds(cacheMissMetricName);
+            cacheTimer.RecordMicroseconds(cacheMissMetricName);
             return ReturnType(CacheResultType::CacheMiss(std::move(key), result.AcquireSuccess()));
         }
         return ReturnType(result.AcquireError());
