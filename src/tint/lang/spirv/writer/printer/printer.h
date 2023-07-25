@@ -15,6 +15,7 @@
 #ifndef SRC_TINT_LANG_SPIRV_WRITER_PRINTER_PRINTER_H_
 #define SRC_TINT_LANG_SPIRV_WRITER_PRINTER_PRINTER_H_
 
+#include <string>
 #include <vector>
 
 #include "src/tint/lang/core/builtin/address_space.h"
