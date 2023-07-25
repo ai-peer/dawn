@@ -112,7 +112,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
                 case Writer::kMSL: {
                     // Remap resource numbers to a flat namespace.
                     if (auto flattened = tint::writer::FlattenBindings(&program)) {
-                        tint::writer::msl::Generate(&flattened.value(), {});
+                        tint::msl::writer::Generate(&flattened.value(), {});
                     }
                     break;
                 }

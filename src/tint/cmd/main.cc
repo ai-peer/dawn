@@ -55,7 +55,7 @@
 #include "src/tint/lang/core/ir/disassembler.h"  // nogncheck
 #include "src/tint/lang/core/ir/from_program.h"  // nogncheck
 #include "src/tint/lang/core/ir/module.h"        // nogncheck
-#endif                                 // TINT_BUILD_IR
+#endif                                           // TINT_BUILD_IR
 
 #if TINT_BUILD_SPV_WRITER
 #define SPV_WRITER_ONLY(x) x
@@ -619,7 +619,7 @@ bool GenerateMsl(const tint::Program* program, const Options& options) {
     }
 
     // TODO(jrprice): Provide a way for the user to set non-default options.
-    tint::writer::msl::Options gen_options;
+    tint::msl::writer::Options gen_options;
 #if TINT_BUILD_IR
     gen_options.use_tint_ir = options.use_ir;
 #endif
@@ -632,7 +632,7 @@ bool GenerateMsl(const tint::Program* program, const Options& options) {
         tint::writer::BindingPoint{0, 0}, 0);
     gen_options.array_length_from_uniform.bindpoint_to_size_index.emplace(
         tint::writer::BindingPoint{0, 1}, 1);
-    auto result = tint::writer::msl::Generate(input_program, gen_options);
+    auto result = tint::msl::writer::Generate(input_program, gen_options);
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
         std::cerr << "Failed to generate: " << result.error << std::endl;
