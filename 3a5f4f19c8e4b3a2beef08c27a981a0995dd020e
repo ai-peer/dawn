@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dfaca4c_f7d55668",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1747,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T09:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4516c108_7c1dad90",
+      "revId": "3a5f4f19c8e4b3a2beef08c27a981a0995dd020e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "498959aa_69b74e02",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-24T15:56:33Z",
       "side": 1,
       "message": "This cast and the \"unhandled transform type\" error are no longer necessary.",
+      "revId": "3a5f4f19c8e4b3a2beef08c27a981a0995dd020e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ef7ecdf_35a08704",
+        "filename": "src/tint/lang/wgsl/ast/transform/manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T09:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "498959aa_69b74e02",
       "revId": "3a5f4f19c8e4b3a2beef08c27a981a0995dd020e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
