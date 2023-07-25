@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9404c8_e94efee1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-25T23:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75b77ec4_9cc47699",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "3090d92aded54019e6f35c02f9b17a402ca0aa41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e8666f9_a4e463fe",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-25T17:11:18Z",
       "side": 1,
       "message": "here and the other backends, what if we make a timer helper for this callsite, something like:\n\n```\nmetrics::HistogramTimer timer(device-\u003eGetPlatform());\n\n\u003cmeasured code\u003e\n\nif (compilerError.IsSuccess()) {\n  if (compiledShader.IsCached()) {\n    // I think the names should be suffixed with the units to make it clear\n    // It also is consistent with the existing metrics: CreateComputePipelineUS\n    timer.ReportMicroseconds(\"D3D12.CompileShaderUS.CacheHit\");\n  } else {\n    timer.ReportMicroseconds(\"D3D12.CompileShaderUS.CacheMiss\");\n  }\n}\n```\n\n(such a timer looks like it would be useful for your next CL too.)\n\nI think this is a better comparison, because it\u0027s more clearly measuring Hit/Miss for the entire compilation request here.\n\nFor one, this doesn\u0027t record the metric if there\u0027s an error. I don\u0027t think errors are important for the timing metrics because we don\u0027t care about erroneous applications being fast. Recording stats about what errors occur could be useful (but not for this CL).\n\nSecondly, the code in this CL looks like it\u0027s measuring\n - deserialization time from blob, vs.\n - time for tint::hlsl::writer::Generate\n - time for CompileShaderDXC\n - time for CompileShaderFXC\n\nwhich I don\u0027t think are directly comparable because:\n - the cache hit time is probably also largely determined by the key generation and load from Chromium\u0027s cache, as well as deserialization time\n - the cache miss time is all of HLSL generation + Transforms + CompiledShader[DXC/FXC]; we\u0027re measuring some of those, separately - when I think what we care about is all of it together. IIUC, the transforms time is known to be non-trivial\n\nthe individual timings for CompileShaderDXC/CompileShaderFXC are still likely important, but I don\u0027t think the \"CacheMiss\" nature of them needs to be recorded. HLSL generation is also likely important, but I think should include the transforms (measure all of TranslateToHLSL). These would be great to have to inform impact of DXC vs. FXC, improvements due to Tint\u0027s IR, etc. But not strictly needed for evaluating the cache. Great to add them; OK to not do it now if inconvenient.",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 0
+      },
+      "revId": "3090d92aded54019e6f35c02f9b17a402ca0aa41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "836cd310_2ac5892c",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-25T23:44:43Z",
+      "side": 1,
+      "message": "Updated the timing bounds a bit overall. I did not include the cache key generation because that happens regardless of hit/miss. But IIUC, this should now include the cache read and deserialization for the hit case, and the entire other path for the miss case. This should also filter out all the errors.",
+      "parentUuid": "7e8666f9_a4e463fe",
       "range": {
         "startLine": 240,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8faf69ff_cc8f3597",
+        "filename": "src/dawn/platform/metrics/CacheMacros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-25T23:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68997174_073542c3",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "3090d92aded54019e6f35c02f9b17a402ca0aa41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b83ed60_fdbab670",
@@ -93,6 +165,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4af519_03567a25",
+        "filename": "src/dawn/platform/metrics/CacheMacros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-25T23:44:43Z",
+      "side": 1,
+      "message": "I wanted to make sure that the prefix/suffixes wouldn\u0027t be forgotten by accident, but updated now.",
+      "parentUuid": "7b83ed60_fdbab670",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 36
+      },
+      "revId": "3090d92aded54019e6f35c02f9b17a402ca0aa41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c483c69_0c69dcd4",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-07-25T17:11:18Z",
       "side": 1,
       "message": "I *think* for these, we want to be using the microsecond timings, instead of the millisecond timings. That might need to be re-evaluated if we get the data back and it\u0027s out of range - but the data Antonio collected so far suggest that microsecond times are good",
+      "range": {
+        "startLine": 39,
+        "startChar": 16,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "3090d92aded54019e6f35c02f9b17a402ca0aa41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ea967dd_21e04cff",
+        "filename": "src/dawn/platform/metrics/CacheMacros.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-25T23:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c483c69_0c69dcd4",
       "range": {
         "startLine": 39,
         "startChar": 16,
