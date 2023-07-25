@@ -35,6 +35,75 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c46404_a6a46667",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 63
+      },
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b60946_4f66825e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "[4]",
+      "range": {
+        "startLine": 683,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 49
+      },
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2e08324_82239973",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 704,
+        "startChar": 8,
+        "endLine": 704,
+        "endChar": 27
+      },
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28044605_b3f9676b",
@@ -52,6 +121,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb2c8f03_ff6c6f0c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28044605_b3f9676b",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf6c550_ceaa88ab",
@@ -65,6 +152,30 @@
       "writtenOn": "2023-07-24T13:01:13Z",
       "side": 1,
       "message": "nit: Copy",
+      "range": {
+        "startLine": 761,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 20
+      },
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "145d2e8b_f6484fe4",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf6c550_ceaa88ab",
       "range": {
         "startLine": 761,
         "startChar": 15,
@@ -94,6 +205,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a875d61d_c1f17628",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "The whole subresource check is covered in `CopyInternal` [2], and also [4]. Shall we do that here as well?",
+      "parentUuid": "6c58b29f_358062b2",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "260094b0_283e5fe3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 9
@@ -105,6 +234,24 @@
       "writtenOn": "2023-07-24T13:01:13Z",
       "side": 1,
       "message": "What if it is a depth only texture?",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa19461_6430667c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "Depth only textures never reach `Texture::WriteDepthStencilInternal`. This is ensured by [1].",
+      "parentUuid": "260094b0_283e5fe3",
       "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +273,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da20ad38_965aedad",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "Looks cool, thanks!",
+      "parentUuid": "9536de68_446983a2",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20eed88a_fea2f89f",
@@ -139,6 +304,47 @@
       "writtenOn": "2023-07-24T13:01:13Z",
       "side": 1,
       "message": "Where is the subresource written to marked as initialized?",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7d6669_e2cca9f1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "It\u0027s done in [3].",
+      "parentUuid": "20eed88a_fea2f89f",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "432445c6_a5f7e903",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T01:52:12Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 1035,
+        "startChar": 3,
+        "endLine": 1035,
+        "endChar": 80
+      },
       "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
