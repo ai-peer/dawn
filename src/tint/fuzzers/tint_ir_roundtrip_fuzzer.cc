@@ -17,10 +17,10 @@
 #include <unordered_set>
 
 #include "src/tint/fuzzers/apply_substitute_overrides.h"
-#include "src/tint/lang/core/ir/from_program.h"
 #include "src/tint/lang/core/ir/to_program.h"
 #include "src/tint/lang/wgsl/ast_writer/generator.h"
 #include "src/tint/lang/wgsl/reader/parser_impl.h"
+#include "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.h"
 
 [[noreturn]] void TintInternalCompilerErrorReporter(const tint::diag::List& diagnostics) {
     auto printer = tint::diag::Printer::create(stderr, true);
@@ -71,7 +71,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         return 0;
     }
 
-    auto ir = tint::ir::FromProgram(&src);
+    auto ir = tint::wgsl::reader::ProgramToIR(&src);
     if (!ir) {
         std::cerr << ir.Failure() << std::endl;
         __builtin_trap();

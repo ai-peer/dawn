@@ -19,9 +19,9 @@
 #include "src/tint/lang/msl/ast_writer/generator_impl.h"
 
 #if TINT_BUILD_IR
-#include "src/tint/lang/core/ir/from_program.h"          // nogncheck
-#include "src/tint/lang/msl/writer/generator_impl_ir.h"  // nogncheck
-#endif                                                   // TINT_BUILD_IR
+#include "src/tint/lang/msl/writer/generator_impl_ir.h"             // nogncheck
+#include "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.h"  // nogncheck
+#endif                                                              // TINT_BUILD_IR
 
 namespace tint::writer::msl {
 
@@ -44,7 +44,7 @@ Result Generate(const Program* program, const Options& options) {
 #if TINT_BUILD_IR
     if (options.use_tint_ir) {
         // Convert the AST program to an IR module.
-        auto converted = ir::FromProgram(program);
+        auto converted = wgsl::reader::ProgramToIR(program);
         if (!converted) {
             result.error = "IR converter: " + converted.Failure();
             return result;
