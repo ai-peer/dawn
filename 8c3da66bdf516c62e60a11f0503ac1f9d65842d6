@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc741de_a6ef281c",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 2142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-25T21:51:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b038d99_fca29c50",
+      "range": {
+        "startLine": 2142,
+        "startChar": 35,
+        "endLine": 2142,
+        "endChar": 37
+      },
+      "revId": "8c3da66bdf516c62e60a11f0503ac1f9d65842d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b11b0a72_b73c3e23",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-25T21:43:48Z",
       "side": 1,
       "message": "This doesn\u0027t look right",
+      "range": {
+        "startLine": 20,
+        "startChar": 41,
+        "endLine": 20,
+        "endChar": 47
+      },
+      "revId": "8c3da66bdf516c62e60a11f0503ac1f9d65842d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eda1172_7b082f13",
+        "filename": "src/tint/fuzzers/tint_ast_clone_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-25T21:51:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b11b0a72_b73c3e23",
       "range": {
         "startLine": 20,
         "startChar": 41,
