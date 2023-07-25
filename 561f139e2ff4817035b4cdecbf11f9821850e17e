@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3894a681_eaf39291",
+        "filename": "src/dawn/common/WeakRefSupport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-25T19:59:17Z",
+      "side": 1,
+      "message": "Thanks so much! This helped a lot! I wasn\u0027t easily able to find documentation on this so was wondering if adding some comments in the `ignore.txt` file for future issues would be worthwhile!",
+      "parentUuid": "ba68c969_1cbd4395",
+      "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdda9f80_8846c976",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "IIUC, we don\u0027t actually have any CI bots that are building Dawn standalone with CFI, but in theory if we ever did, this would be needed. (Though I think we would also need the `dawn/native` exceptions as well to really make it work.)\n\nI just added it here for completeness for now.",
       "parentUuid": "fdda9f80_8846c976",
+      "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa937304_a73e321f",
+        "filename": "tools/cfi/ignores.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-25T19:59:17Z",
+      "side": 1,
+      "message": "Removed changes now that the suppression is local to the function using the attributes.",
+      "parentUuid": "5091a4fb_e30d8119",
       "revId": "561f139e2ff4817035b4cdecbf11f9821850e17e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
