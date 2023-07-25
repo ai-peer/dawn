@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7417758_c79109bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-25T18:25:36Z",
+      "side": 1,
+      "message": "that works too\n\nI think you could use UNREACHABLE since it indeed shouldn\u0027t be possible to reach. Validation should catch usage of any of the enums since none of the backends expose the feature as supported yet.",
+      "parentUuid": "6cec9cf0_d7c6e52d",
+      "revId": "205e5af0314fea5a3b19e4677562a51c2060791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c6d079b_681066b2",
