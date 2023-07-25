@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b8b49d9_4205396e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-07-25T19:37:10Z",
+      "side": 1,
+      "message": "Thanks for the tip. I made that change.",
+      "parentUuid": "c7417758_c79109bb",
+      "revId": "205e5af0314fea5a3b19e4677562a51c2060791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c6d079b_681066b2",
@@ -84,6 +102,30 @@
       "writtenOn": "2023-07-24T23:47:58Z",
       "side": 1,
       "message": "unit: it would be more precise to test just color.srcFactor set to one of the dual-source blend factors, and leave the others as something that is always supported;\n\nIt\u0027s probably fine to not do all of them (color.dstFactor, alpha.srcFactor, alpha.dstFactor) though you can if you like. Full testing could be left to the CTS",
+      "range": {
+        "startLine": 594,
+        "startChar": 8,
+        "endLine": 597,
+        "endChar": 60
+      },
+      "revId": "205e5af0314fea5a3b19e4677562a51c2060791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c33383c5_17993f0c",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-07-25T19:37:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c6d079b_681066b2",
       "range": {
         "startLine": 594,
         "startChar": 8,
