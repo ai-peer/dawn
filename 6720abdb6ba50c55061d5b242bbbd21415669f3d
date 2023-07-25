@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a003ddb3_afa00c13",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-25T10:40:28Z",
+      "side": 1,
+      "message": "Sounds good, we can improve later if need be.",
+      "parentUuid": "f3fbab50_7720ac25",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46703af4_9f7df1a5",
@@ -306,6 +324,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb463773_2c37d301",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-25T10:40:28Z",
+      "side": 1,
+      "message": "Unfortunately it\u0027s not safe, the descriptors are tree of structures pointing at each other but don\u0027t have RAII semantics (because webgpu_cpp.h is just a thin wrapper around webgpu.h, a C API). The allocation for the label lives as long as conv IIRC so it still becomes invalid after the end of the function. That\u0027s why I think the easiest solution would be to add an `std::string label` to the `Context`.",
+      "parentUuid": "da629fb3_4e9d8923",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "361d86ce_185abe05",
         "filename": "src/dawn/node/binding/GPUQueue.cpp",
         "patchSetId": 3
@@ -335,6 +371,24 @@
       "side": 1,
       "message": "i\u0027m not sure what i\u0027m looking for here. Are you saying that Device::GetQueue() should have a descriptor on it? or something else?",
       "parentUuid": "361d86ce_185abe05",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9276494_57e256d5",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-25T10:40:28Z",
+      "side": 1,
+      "message": "As part of the GPUDeviceDescriptor given to requestDevice there is a GPUQueueDescriptor (GPUDeviceDescriptor.defaultQueue) which contains a label. We should forward the label to the default queue when creating it. I think the changes needed are along the lines of:\n\n - In `GPUAdapter::requestDevice`:\n   - Fill in the defaultQueue part of `desc`\n   - Pass `desc` to the `GPUDevice::Create`\n - In `GPUDevice`:\n   - Move the creation of the `GPUQueue` for the default queue from `GPUDevice::getQueue` to `GPUDevice::GPUDevice`\n   - Pass the defaultQueue descriptor to `GPUQueue::GPUQueue`.\n - In `GPUQueue`:\n   - Use that descriptor to set the `label_`.\n\nFeel free to defer / delegate that.",
+      "parentUuid": "67ace0d0_108a479b",
       "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
