@@ -17,7 +17,7 @@
 namespace dawn::platform::metrics {
 
 DawnHistogramTimer::DawnHistogramTimer(Platform* platform)
-    : mPlatform(platform), mConstructed(platform->MonotonicallyIncreasingTime()) {}
+    : mPlatform(platform), mConstructed(mPlatform->MonotonicallyIncreasingTime()) {}
 
 void DawnHistogramTimer::RecordMicroseconds(const char* name) {
     if (mPlatform == nullptr || name == nullptr || mConstructed == 0) {
