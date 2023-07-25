@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942d4833_7a2ccdbf",
+        "filename": "src/dawn/node/binding/GPUBindGroupLayout.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T08:17:06Z",
+      "side": 1,
+      "message": "can be dropped",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "37cd2cb0f03e9f1e883fe0f3af38ec96357c2afd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a322412d_077f5be1",
+        "filename": "src/dawn/node/binding/GPUComputePipeline.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T08:17:06Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "37cd2cb0f03e9f1e883fe0f3af38ec96357c2afd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e74caa51_412ea0d6",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T08:17:06Z",
+      "side": 1,
+      "message": "This doesn\u0027t look safe. Argument evaluation order is not defined in C++, and varies between compilers (and might vary for a single compiler based on optimization).\nFor the first argument you\u0027re using the allocation held by `ctx`.\nHere, the third argument to the call, you\u0027re releasing `ctx`.",
+      "range": {
+        "startLine": 399,
+        "startChar": 8,
+        "endLine": 399,
+        "endChar": 21
+      },
+      "revId": "37cd2cb0f03e9f1e883fe0f3af38ec96357c2afd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

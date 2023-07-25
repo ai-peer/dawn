@@ -181,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "172e7e36_8a7642de",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T08:17:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "841b1f61_b138fe63",
+      "range": {
+        "startLine": 251,
+        "startChar": 12,
+        "endLine": 251,
+        "endChar": 13
+      },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47230854_6607e9d4",
@@ -328,6 +352,30 @@
       "writtenOn": "2023-07-24T20:33:42Z",
       "side": 1,
       "message": "A bit misleading? Why is this better than `UNIMPLEMENTED()` ?",
+      "range": {
+        "startLine": 148,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 38
+      },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d304b8_b44cbdcc",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-25T08:17:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c096f7fd_f9612bac",
       "range": {
         "startLine": 148,
         "startChar": 4,
