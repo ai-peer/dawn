@@ -18,10 +18,10 @@
 #include "src/tint/lang/core/ir/if.h"
 #include "src/tint/lang/core/ir/loop.h"
 #include "src/tint/lang/core/ir/multi_in_block.h"
-#include "src/tint/lang/core/ir/program_test_helper.h"
 #include "src/tint/lang/core/ir/switch.h"
 #include "src/tint/lang/wgsl/ast/case_selector.h"
 #include "src/tint/lang/wgsl/ast/int_literal_expression.h"
+#include "src/tint/lang/wgsl/helpers/ir_test_helper.h"
 
 namespace tint::wgsl::reader {
 namespace {

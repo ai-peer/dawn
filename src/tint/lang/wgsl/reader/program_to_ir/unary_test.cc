@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/program_test_helper.h"
+#include "src/tint/lang/wgsl/helpers/ir_test_helper.h"
 
 #include "src/tint/lang/core/constant/scalar.h"
 #include "src/tint/lang/wgsl/ast/case_selector.h"
