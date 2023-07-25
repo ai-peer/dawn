@@ -52,7 +52,7 @@ void Sanitize(ir::Module*) {}
     TINT_UNIMPLEMENTED(Writer, diagnostics_) \
         << "unhandled case in Switch(): " << (object_ptr ? object_ptr->TypeInfo().name : "<null>")
 
-GeneratorImplIr::GeneratorImplIr(ir::Module* module) : IRTextGenerator(module) {}
+GeneratorImplIr::GeneratorImplIr(ir::Module* module) : ir_(module) {}
 
 GeneratorImplIr::~GeneratorImplIr() = default;
 
