@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3fbab50_7720ac25",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-07-25T01:36:30Z",
+      "side": 1,
+      "message": "looks like chrome\u0027s impl just returns rgba or bgra depending on androidness, so that\u0027s probably good enough here?",
+      "parentUuid": "b8aced23_3d325020",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46703af4_9f7df1a5",
@@ -122,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "905ae0dd_baac03f3",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-07-25T01:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ca3691c_296da63f",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "841b1f61_b138fe63",
@@ -168,6 +204,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8da5cd5_1b91a722",
+        "filename": "src/dawn/node/binding/GPUBindGroup.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-07-25T01:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47230854_6607e9d4",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dae0c294_c6e0f9ec",
@@ -202,6 +262,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da629fb3_4e9d8923",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-07-25T01:36:30Z",
+      "side": 1,
+      "message": "i took a slightly different approach and initialized the descriptor directly inside the context, instead of stack allocating one and then copying it, so i think it should be safe now?",
+      "parentUuid": "3a22cb50_6063fcba",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "361d86ce_185abe05",
@@ -215,6 +293,24 @@
       "writtenOn": "2023-07-24T21:07:52Z",
       "side": 1,
       "message": "A descriptor should be available from GPUDeviceDescriptor.defaultQueue that contains the label.",
+      "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ace0d0_108a479b",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-07-25T01:36:30Z",
+      "side": 1,
+      "message": "i\u0027m not sure what i\u0027m looking for here. Are you saying that Device::GetQueue() should have a descriptor on it? or something else?",
+      "parentUuid": "361d86ce_185abe05",
       "revId": "6720abdb6ba50c55061d5b242bbbd21415669f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
