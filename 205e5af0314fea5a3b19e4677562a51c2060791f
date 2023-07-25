@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cec9cf0_d7c6e52d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-07-25T18:24:08Z",
+      "side": 1,
+      "message": "You\u0027re right, but also it doesn\u0027t seem like it can be addressed without some churn. I get a warning-error if I remove the new enums from the backend switch cases - and I\u0027d have to change a bunch of return types if I instead returned UNIMPLEMENTED for these. \n\nWhat I think I\u0027ll do is leave this CL to sit until I can add test coverage to it.",
+      "parentUuid": "f1dcf012_4eda920a",
+      "revId": "205e5af0314fea5a3b19e4677562a51c2060791f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c6d079b_681066b2",
