@@ -17,7 +17,7 @@
 namespace dawn::platform::metrics {
 
 DawnHistogramTimer::DawnHistogramTimer(Platform* platform)
-    : mPlatform(platform), mConstructed(platform->MonotonicallyIncreasingTime()) {}
+    : mPlatform(platform), mConstructed(mPlatform->MonotonicallyIncreasingTime()) {}
 
 void DawnHistogramTimer::RecordMicroseconds(const char* name) {
     if (name == nullptr || mConstructed == 0) {
@@ -27,6 +27,10 @@ void DawnHistogramTimer::RecordMicroseconds(const char* name) {
     int elapsedUS =
         static_cast<int>((mPlatform->MonotonicallyIncreasingTime() - mConstructed) * 1'000'000.0);
     mPlatform->HistogramCustomCountsHPC(name, elapsedUS, 1, 1'000'000, 50);
+}
+
+void DawnHistogramTimer::Reset() {
+    mConstructed = mPlatform->MonotonicallyIncreasingTime();
 }
 
 }  // namespace dawn::platform::metrics
