@@ -105,6 +105,9 @@ class Printer {
                   builtin::AddressSpace addrspace = builtin::AddressSpace::kUndefined);
 
   private:
+    /// @returns true on successful sanitization; false otherwise
+    bool Sanitize();
+
     /// Convert a builtin to the corresponding SPIR-V enum value, taking into account the target
     /// address space. Adds any capabilities needed for the builtin.
     /// @param builtin the builtin to convert
