@@ -88,18 +88,6 @@ using namespace tint::number_suffixes;  // NOLINT
 
 constexpr uint32_t kWriterVersion = 1;
 
-void Sanitize(ir::Module* module) {
-    ir::transform::AddEmptyEntryPoint{}.Run(module);
-    ir::transform::BlockDecoratedStructs{}.Run(module);
-    ir::transform::BuiltinPolyfillSpirv{}.Run(module);
-    ir::transform::DemoteToHelper{}.Run(module);
-    ir::transform::ExpandImplicitSplats{}.Run(module);
-    ir::transform::HandleMatrixArithmetic{}.Run(module);
-    ir::transform::MergeReturn{}.Run(module);
-    ir::transform::ShaderIOSpirv{}.Run(module);
-    ir::transform::VarForDynamicIndex{}.Run(module);
-}
-
 SpvStorageClass StorageClass(builtin::AddressSpace addrspace) {
     switch (addrspace) {
         case builtin::AddressSpace::kHandle:
@@ -165,15 +153,41 @@ const type::Type* DedupType(const type::Type* ty, type::Manager& types) {
 Printer::Printer(ir::Module* module, bool zero_init_workgroup_mem)
     : ir_(module), zero_init_workgroup_memory_(zero_init_workgroup_mem) {}
 
+bool Printer::Sanitize() {
+#define RUN_TRANSFORM(name)                     \
+    do {                                        \
+        auto result = ir::transform::name(ir_); \
+        if (!result) {                          \
+            diagnostics_.add(result.Failure()); \
+            return false;                       \
+        }                                       \
+    } while (false)
+
+    ir::transform::AddEmptyEntryPoint{}.Run(ir_);
+    ir::transform::BlockDecoratedStructs{}.Run(ir_);
+    ir::transform::BuiltinPolyfillSpirv{}.Run(ir_);
+    ir::transform::DemoteToHelper{}.Run(ir_);
+    ir::transform::ExpandImplicitSplats{}.Run(ir_);
+    ir::transform::HandleMatrixArithmetic{}.Run(ir_);
+    ir::transform::MergeReturn{}.Run(ir_);
+    ir::transform::ShaderIOSpirv{}.Run(ir_);
+
+    RUN_TRANSFORM(VarForDynamicIndex);
+
+    return true;
+}
+
 bool Printer::Generate() {
-    auto valid = ir::Validate(*ir_);
+    // Run the IR transformations to prepare for SPIR-V emission.
+    if (!Sanitize()) {
+        return false;
+    }
+
+    auto valid = ir::ValidateAndDumpIfNeeded(*ir_, "SPIR-V writer");
     if (!valid) {
         diagnostics_ = valid.Failure();
         return false;
     }
-
-    // Run the IR transformations to prepare for SPIR-V emission.
-    Sanitize(ir_);
 
     // TODO(crbug.com/tint/1906): Check supported extensions.
 
