@@ -445,7 +445,7 @@ class GeneratorImpl : public utils::TextGenerator {
     type::Type* BoolTypeToUint(const type::Type* type);
 
     /// @copydoc utils::TextWrtiter::UniqueIdentifier
-    std::string UniqueIdentifier(const std::string& prefix= "") override;
+    std::string UniqueIdentifier(const std::string& prefix = "") override;
 
     /// Alias for builder_.TypeOf(ptr)
     template <typename T>

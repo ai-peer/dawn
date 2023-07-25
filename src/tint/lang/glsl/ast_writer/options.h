@@ -15,6 +15,7 @@
 #ifndef SRC_TINT_LANG_GLSL_AST_WRITER_OPTIONS_H_
 #define SRC_TINT_LANG_GLSL_AST_WRITER_OPTIONS_H_
 
+#include <string>
 #include <unordered_map>
 
 #include "src/tint/lang/core/builtin/access.h"
