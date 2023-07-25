@@ -15,6 +15,8 @@
 #ifndef SRC_TINT_LANG_SPIRV_WRITER_WRITER_H_
 #define SRC_TINT_LANG_SPIRV_WRITER_WRITER_H_
 
+#include <string>
+
 #include "src/tint/lang/spirv/writer/options.h"
 #include "src/tint/lang/spirv/writer/result.h"
 #include "src/tint/utils/result/result.h"
