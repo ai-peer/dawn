@@ -19,6 +19,8 @@
 
 #include "dawn/native/opengl/UtilsEGL.h"
 
+#define EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE 0x33AF
+
 namespace dawn::native::opengl {
 
 ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions& egl,
@@ -73,6 +75,8 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
         EGL_CONTEXT_MINOR_VERSION,
         minor,
         EGL_CONTEXT_OPENGL_ROBUST_ACCESS,  // Core in EGL 1.5
+        EGL_TRUE,
+        EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE,
         EGL_TRUE,
         EGL_NONE,
     };
