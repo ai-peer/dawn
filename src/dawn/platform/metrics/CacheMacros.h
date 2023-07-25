@@ -21,6 +21,13 @@
 
 #include "dawn/platform/metrics/HistogramMacros.h"
 
+// Short cache timings - up to 10 seconds.
+#define DAWN_CACHE_HIT_HISTOGRAM_TIMES(platform, name, sample_ms) \
+    DAWN_HISTOGRAM_TIMES(platform, "CacheHit." name, sample_ms)
+
+#define DAWN_CACHE_MISS_HISTOGRAM_TIMES(platform, name, sample_ms) \
+    DAWN_HISTOGRAM_TIMES(platform, "CacheMiss." name, sample_ms)
+
 // Scoped class which logs time for a cache hit.
 #define SCOPED_DAWN_CACHE_HIT_TIMER(platform, name) \
     SCOPED_DAWN_HISTOGRAM_TIMER(platform, "CacheHit." name)

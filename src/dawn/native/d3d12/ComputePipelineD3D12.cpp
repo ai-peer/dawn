@@ -25,6 +25,7 @@
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
+#include "dawn/platform/metrics/CacheMacros.h"
 
 namespace dawn::native::d3d12 {
 
@@ -76,17 +77,25 @@ MaybeError ComputePipeline::Initialize() {
         d3dDesc.CachedPSO.CachedBlobSizeInBytes = blob.Size();
     }
 
+    // We don't use the scoped cache histogram counters for the cache hit here so that we can
+    // condition on whether it fails appropriately.
     auto* d3d12Device = device->GetD3D12Device();
+    dawn::platform::Platform* platform = device->GetPlatform();
+    double start = platform->MonotonicallyIncreasingTime();
     HRESULT result =
         d3d12Device->CreateComputePipelineState(&d3dDesc, IID_PPV_ARGS(&mPipelineState));
+    double elapsed = platform->MonotonicallyIncreasingTime() - start;
     if (cacheHit && result == D3D12_ERROR_DRIVER_VERSION_MISMATCH) {
         // See dawn:1878 where it is possible for the PSO creation to fail with this error.
         cacheHit = false;
         d3dDesc.CachedPSO.pCachedBlob = nullptr;
         d3dDesc.CachedPSO.CachedBlobSizeInBytes = 0;
+        start = platform->MonotonicallyIncreasingTime();
         result = d3d12Device->CreateComputePipelineState(&d3dDesc, IID_PPV_ARGS(&mPipelineState));
+        elapsed = platform->MonotonicallyIncreasingTime() - start;
     }
     DAWN_TRY(CheckHRESULT(result, "D3D12 creating pipeline state"));
+    int elapsedMS = static_cast<int>(elapsed * 1'000.0);
 
     if (!cacheHit) {
         // Cache misses, need to get pipeline cached blob and store.
@@ -94,6 +103,9 @@ MaybeError ComputePipeline::Initialize() {
         DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
                               "D3D12 compute pipeline state get cached blob"));
         device->StoreCachedBlob(GetCacheKey(), CreateBlob(std::move(d3dBlob)));
+        DAWN_CACHE_MISS_HISTOGRAM_TIMES(platform, "D3D12.CreateGraphicsPipelineState");
+    } else {
+        DAWN_CACHE_HIT_HISTOGRAM_TIMES(platform, "D3D12.CreateGraphicsPipelineState");
     }
 
     SetLabelImpl();

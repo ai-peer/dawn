@@ -28,6 +28,7 @@
 #include "dawn/native/vulkan/TextureVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
+#include "dawn/platform/metrics/CacheMacros.h"
 
 namespace dawn::native::vulkan {
 
@@ -554,10 +555,20 @@ MaybeError RenderPipeline::Initialize() {
 
     // Try to see if we have anything in the blob cache.
     Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
-    DAWN_TRY(
-        CheckVkSuccess(device->fn.CreateGraphicsPipelines(device->GetVkDevice(), cache->GetHandle(),
-                                                          1, &createInfo, nullptr, &*mHandle),
-                       "CreateGraphicsPipelines"));
+    if (cache->CacheHit()) {
+        SCOPED_DAWN_CACHE_HIT_TIMER(GetDevice()->GetPlatform(), "Vulkan.CreateGraphicsPipelines");
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateGraphicsPipelines(device->GetVkDevice(), cache->GetHandle(), 1,
+                                               &createInfo, nullptr, &*mHandle),
+            "CreateGraphicsPipelines"));
+    } else {
+        SCOPED_DAWN_CACHE_MISS_TIMER(GetDevice()->GetPlatform(), "Vulkan.CreateGraphicsPipelines");
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateGraphicsPipelines(device->GetVkDevice(), cache->GetHandle(), 1,
+                                               &createInfo, nullptr, &*mHandle),
+            "CreateGraphicsPipelines"));
+    }
+
     // TODO(dawn:549): Flush is currently in the same thread, but perhaps deferrable.
     DAWN_TRY(cache->FlushIfNeeded());
 
