@@ -55,7 +55,7 @@ Function* Builder::Function(std::string_view name,
 }
 
 ir::Loop* Builder::Loop() {
-    return Append(ir.instructions.Create<ir::Loop>(Block(), MultiInBlock(), MultiInBlock()));
+    return Insert(ir.instructions.Create<ir::Loop>(Block(), MultiInBlock(), MultiInBlock()));
 }
 
 Block* Builder::Case(ir::Switch* s, utils::VectorRef<Switch::CaseSelector> selectors) {
@@ -70,11 +70,11 @@ Block* Builder::Case(ir::Switch* s, std::initializer_list<Switch::CaseSelector> 
 }
 
 ir::Discard* Builder::Discard() {
-    return Append(ir.instructions.Create<ir::Discard>());
+    return Insert(ir.instructions.Create<ir::Discard>());
 }
 
 ir::Var* Builder::Var(const type::Pointer* type) {
-    return Append(ir.instructions.Create<ir::Var>(InstructionResult(type)));
+    return Insert(ir.instructions.Create<ir::Var>(InstructionResult(type)));
 }
 
 ir::Var* Builder::Var(std::string_view name, const type::Pointer* type) {
@@ -98,11 +98,11 @@ ir::FunctionParam* Builder::FunctionParam(std::string_view name, const type::Typ
 }
 
 ir::TerminateInvocation* Builder::TerminateInvocation() {
-    return Append(ir.instructions.Create<ir::TerminateInvocation>());
+    return Insert(ir.instructions.Create<ir::TerminateInvocation>());
 }
 
 ir::Unreachable* Builder::Unreachable() {
-    return Append(ir.instructions.Create<ir::Unreachable>());
+    return Insert(ir.instructions.Create<ir::Unreachable>());
 }
 
 const type::Type* Builder::VectorPtrElementType(const type::Type* type) {
