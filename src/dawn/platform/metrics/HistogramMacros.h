@@ -207,9 +207,13 @@ class DawnHistogramTimer {
     // the recording function is called.
     void RecordMicroseconds(const char* name);
 
+    // Resets the effective start timer. Useful to reuse the same timer instead of constructing a
+    // new one when dealing with conditional scopes.
+    void Reset();
+
   private:
     dawn::platform::Platform* const mPlatform;
-    const double mConstructed;
+    double mConstructed;
 };
 
 }  // namespace dawn::platform::metrics
