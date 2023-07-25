@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d75f77_7b994f42",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-25T09:15:16Z",
+      "side": 1,
+      "message": "Can\u0027t we just remove the \"Str()\"? I don\u0027t see why they are needed.",
+      "revId": "72151de4723ffb4f7979793d96e3b590bb9e118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
