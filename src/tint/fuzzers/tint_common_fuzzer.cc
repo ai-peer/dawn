@@ -35,10 +35,10 @@
 #include "src/tint/lang/wgsl/ast/module.h"
 #include "src/tint/lang/wgsl/helpers/flatten_bindings.h"
 #include "src/tint/lang/wgsl/program/program.h"
-#include "src/tint/lang/wgsl/sem/binding_point.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
 #include "src/tint/utils/diagnostic/formatter.h"
 #include "src/tint/utils/math/hash.h"
+#include "tint/binding_point.h"
 
 namespace tint::fuzzers {
 
@@ -246,7 +246,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
         // Gather external texture binding information
         // Collect next valid binding number per group
         std::unordered_map<uint32_t, uint32_t> group_to_next_binding_number;
-        std::vector<sem::BindingPoint> ext_tex_bps;
+        std::vector<BindingPoint> ext_tex_bps;
         for (auto* var : program.AST().GlobalVariables()) {
             if (auto* sem_var = program.Sem().Get(var)->As<sem::GlobalVariable>()) {
                 if (auto bp = sem_var->BindingPoint()) {
