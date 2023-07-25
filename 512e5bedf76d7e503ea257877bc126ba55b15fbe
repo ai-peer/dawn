@@ -241,6 +241,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f9d0d52_2235fba5",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-25T13:58:31Z",
+      "side": 1,
+      "message": "Got it. Assert added for the size check. Thanks!",
+      "parentUuid": "61300111_d0e7f74e",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "260094b0_283e5fe3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 9
