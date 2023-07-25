@@ -223,6 +223,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61300111_d0e7f74e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-25T09:42:20Z",
+      "side": 1,
+      "message": "Probably, to make it clear why we don\u0027t check that the whole subresource is copied to for the computation of `shouldCopyExistingDataFirst`",
+      "parentUuid": "a875d61d_c1f17628",
+      "revId": "512e5bedf76d7e503ea257877bc126ba55b15fbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "260094b0_283e5fe3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 9
