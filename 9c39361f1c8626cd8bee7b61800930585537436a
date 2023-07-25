@@ -33,6 +33,24 @@
       "message": "nit: I think we should call this \"use msaa 64kb...\" instead of \"support\"\n\nalso, I believe we should ForceSet this and the root signature one to false if it is not supported. The developer shouldn\u0027t be able to override them to true if the device doesn\u0027t have support.",
       "revId": "9c39361f1c8626cd8bee7b61800930585537436a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a956ae_319fd3c9",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-25T05:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c26e389b_958f1c05",
+      "revId": "9c39361f1c8626cd8bee7b61800930585537436a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
