@@ -24,7 +24,6 @@
 
 #include "src/tint/utils/diagnostic/formatter.h"
 #include "src/tint/utils/diagnostic/printer.h"
-#include "src/tint/utils/text/string.h"
 
 namespace tint::cmd {
 namespace {

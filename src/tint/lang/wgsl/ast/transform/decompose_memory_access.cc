@@ -38,7 +38,7 @@
 #include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/memory/block_allocator.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 

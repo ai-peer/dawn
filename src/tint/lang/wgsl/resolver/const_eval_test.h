@@ -25,7 +25,7 @@
 #include "src/tint/lang/core/type/test_helper.h"
 #include "src/tint/lang/wgsl/resolver/resolver_test_helper.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::resolver {
 

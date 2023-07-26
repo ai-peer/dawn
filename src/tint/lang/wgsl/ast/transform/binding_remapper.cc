@@ -23,7 +23,7 @@
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/sem/function.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::BindingRemapper);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::BindingRemapper::Remappings);

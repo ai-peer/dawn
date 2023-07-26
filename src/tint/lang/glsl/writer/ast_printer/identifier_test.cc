@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/lang/glsl/writer/ast_printer/test_helper.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 #include "gmock/gmock.h"
 

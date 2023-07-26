@@ -19,7 +19,7 @@
 
 #include "src/tint/lang/core/builtin/function.h"
 #include "src/tint/utils/ice/ice.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::spirv::reader {
 

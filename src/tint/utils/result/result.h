@@ -19,7 +19,7 @@
 #include <variant>
 
 #include "src/tint/utils/ice/ice.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 #include "src/tint/utils/traits/traits.h"
 
 namespace tint {

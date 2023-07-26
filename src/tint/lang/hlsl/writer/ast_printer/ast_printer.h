@@ -28,7 +28,7 @@
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/utils/containers/scope_stack.h"
 #include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/text/text_generator.h"
+#include "src/tint/utils/text/generator.h"
 #include "tint/array_length_from_uniform_options.h"
 #include "tint/binding_point.h"
 
@@ -549,8 +549,16 @@ class ASTPrinter : public tint::TextGenerator {
                            const sem::Builtin* builtin,
                            F&& build);
 
-    /// @copydoc tint::TextWrtiter::UniqueIdentifier
-    std::string UniqueIdentifier(const std::string& prefix = "") override;
+    /// @param s the structure
+    /// @returns the name of the structure, taking special care of builtin structures that start
+    /// with double underscores. If the structure is a builtin, then the returned name will be a
+    /// unique name without the leading underscores.
+    std::string StructName(const type::Struct* s);
+
+    /// @return a new, unique identifier with the given prefix.
+    /// @param prefix optional prefix to apply to the generated identifier. If empty "tint_symbol"
+    /// will be used.
+    std::string UniqueIdentifier(const std::string& prefix = "");
 
     /// Alias for builder_.TypeOf(ptr)
     template <typename T>

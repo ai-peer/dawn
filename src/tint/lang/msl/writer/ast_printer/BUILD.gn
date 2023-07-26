@@ -1,0 +1,85 @@
+# Copyright 2023 The Tint Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../../../../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("ast_printer") {
+  sources = [
+    "ast_printer.cc",
+    "ast_printer.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/core/constant",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/msl/writer:common",
+    "${tint_src_dir}/lang/msl/writer:printer_support",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/ast/transform",
+    "${tint_src_dir}/lang/wgsl/helpers",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/lang/wgsl/sem",
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/diagnostic",
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/rtti",
+    "${tint_src_dir}/utils/string",
+    "${tint_src_dir}/utils/text",
+  ]
+}
+
+tint_unittests_source_set("unittests") {
+  sources = [
+    "array_accessor_test.cc",
+    "assign_test.cc",
+    "ast_printer_test.cc",
+    "binary_test.cc",
+    "bitcast_test.cc",
+    "block_test.cc",
+    "break_test.cc",
+    "builtin_test.cc",
+    "builtin_texture_test.cc",
+    "call_test.cc",
+    "case_test.cc",
+    "cast_test.cc",
+    "const_assert_test.cc",
+    "constructor_test.cc",
+    "continue_test.cc",
+    "discard_test.cc",
+    "function_test.cc",
+    "identifier_test.cc",
+    "if_test.cc",
+    "import_test.cc",
+    "loop_test.cc",
+    "member_accessor_test.cc",
+    "module_constant_test.cc",
+    "return_test.cc",
+    "sanitizer_test.cc",
+    "switch_test.cc",
+    "test_helper.h",
+    "type_test.cc",
+    "unary_op_test.cc",
+    "variable_decl_statement_test.cc",
+  ]
+  deps = [
+    ":ast_printer",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/ast:test_helper",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/utils/string",
+  ]
+}

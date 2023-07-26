@@ -1,0 +1,68 @@
+# Copyright 2023 The Tint Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../../../../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("transform") {
+  sources = [
+    "add_empty_entry_point.cc",
+    "add_empty_entry_point.h",
+    "block_decorated_structs.cc",
+    "block_decorated_structs.h",
+    "builtin_polyfill_spirv.cc",
+    "builtin_polyfill_spirv.h",
+    "demote_to_helper.cc",
+    "demote_to_helper.h",
+    "expand_implicit_splats.cc",
+    "expand_implicit_splats.h",
+    "handle_matrix_arithmetic.cc",
+    "handle_matrix_arithmetic.h",
+    "merge_return.cc",
+    "merge_return.h",
+    "shader_io.cc",
+    "shader_io.h",
+    "shader_io_spirv.cc",
+    "shader_io_spirv.h",
+    "var_for_dynamic_index.cc",
+    "var_for_dynamic_index.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/core/ir",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/rtti",
+  ]
+}
+
+tint_unittests_source_set("unittests") {
+  sources = [
+    "add_empty_entry_point_test.cc",
+    "block_decorated_structs_test.cc",
+    "builtin_polyfill_spirv_test.cc",
+    "demote_to_helper_test.cc",
+    "expand_implicit_splats_test.cc",
+    "handle_matrix_arithmetic_test.cc",
+    "merge_return_test.cc",
+    "shader_io_spirv_test.cc",
+    "test_helper.h",
+    "var_for_dynamic_index_test.cc",
+  ]
+  deps = [
+    ":transform",
+    "${tint_src_dir}/lang/core/ir",
+  ]
+}

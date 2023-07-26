@@ -21,7 +21,7 @@
 
 #include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/diagnostic/printer.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::diag {
 namespace {

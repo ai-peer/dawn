@@ -160,16 +160,9 @@ std::string_view ToString(Function::PipelineStage value);
 /// @param value the Function::PipelineStage
 /// @returns @p out so calls can be chained
 template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, Function::PipelineStage value) {
-    return out << ToString(value);
-}
+auto& operator<<(STREAM& out, Function::PipelineStage value) {}
 
 /// @param value the enum value
-/// @returns the string for the given enum value
-std::string_view ToString(enum Function::ReturnBuiltin value);
-
-/// @param out the stream to write to
-/// @param value the Function::ReturnBuiltin
 /// @returns @p out so calls can be chained
 template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
 auto& operator<<(STREAM& out, enum Function::ReturnBuiltin value) {

@@ -28,7 +28,7 @@
 #include "src/tint/lang/wgsl/sem/statement.h"
 #include "src/tint/lang/wgsl/sem/struct.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::ModuleScopeVarToEntryPointParam);
 

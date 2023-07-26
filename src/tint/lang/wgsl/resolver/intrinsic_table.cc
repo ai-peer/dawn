@@ -41,7 +41,7 @@
 #include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/math/math.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::resolver {
 namespace {

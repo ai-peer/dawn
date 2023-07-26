@@ -1,0 +1,108 @@
+# Copyright 2023 The Tint Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../../../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("reader") {
+  sources = [
+    "attributes.h",
+    "construct.cc",
+    "construct.h",
+    "entry_point_info.cc",
+    "entry_point_info.h",
+    "enum_converter.cc",
+    "enum_converter.h",
+    "fail_stream.h",
+    "function.cc",
+    "function.h",
+    "namer.cc",
+    "namer.h",
+    "parser.cc",
+    "parser.h",
+    "parser_impl.cc",
+    "parser_impl.h",
+    "parser_type.cc",
+    "parser_type.h",
+    "usage.cc",
+    "usage.h",
+  ]
+  deps = [
+    "${tint_spirv_tools_dir}/:spvtools_opt",
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/ast/transform",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/lang/wgsl/sem",
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/diagnostic",
+    "${tint_src_dir}/utils/ice",
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/math",
+    "${tint_src_dir}/utils/memory",
+    "${tint_src_dir}/utils/rtti",
+    "${tint_src_dir}/utils/string",
+  ]
+  public_configs = [ "${tint_spirv_tools_dir}/:spvtools_internal_config" ]
+}
+
+tint_unittests_source_set("unittests") {
+  sources = [
+    "enum_converter_test.cc",
+    "fail_stream_test.cc",
+    "function_arithmetic_test.cc",
+    "function_bit_test.cc",
+    "function_call_test.cc",
+    "function_cfg_test.cc",
+    "function_composite_test.cc",
+    "function_conversion_test.cc",
+    "function_decl_test.cc",
+    "function_glsl_std_450_test.cc",
+    "function_logical_test.cc",
+    "function_memory_test.cc",
+    "function_misc_test.cc",
+    "function_var_test.cc",
+    "namer_test.cc",
+    "parser_impl_barrier_test.cc",
+    "parser_impl_constant_test.cc",
+    "parser_impl_convert_member_decoration_test.cc",
+    "parser_impl_convert_type_test.cc",
+    "parser_impl_function_decl_test.cc",
+    "parser_impl_get_decorations_test.cc",
+    "parser_impl_handle_test.cc",
+    "parser_impl_import_test.cc",
+    "parser_impl_module_var_test.cc",
+    "parser_impl_named_types_test.cc",
+    "parser_impl_test.cc",
+    "parser_impl_test_helper.cc",
+    "parser_impl_test_helper.h",
+    "parser_impl_user_name_test.cc",
+    "parser_test.cc",
+    "parser_type_test.cc",
+    "spirv_tools_helpers_test.cc",
+    "spirv_tools_helpers_test.h",
+    "usage_test.cc",
+  ]
+  deps = [
+    ":reader",
+    "${tint_spirv_tools_dir}/:spvtools_opt",
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/rtti",
+    "${tint_src_dir}/utils/string",
+  ]
+}

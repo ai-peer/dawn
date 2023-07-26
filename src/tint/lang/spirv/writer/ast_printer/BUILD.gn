@@ -1,0 +1,103 @@
+# Copyright 2023 The Tint Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../../../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("ast_writer") {
+  sources = [
+    "binary_writer.cc",
+    "binary_writer.h",
+    "builder.cc",
+    "builder.h",
+    "function.cc",
+    "function.h",
+    "generator.cc",
+    "generator.h",
+    "generator_impl.cc",
+    "generator_impl.h",
+    "instruction.cc",
+    "instruction.h",
+    "module.cc",
+    "module.h",
+    "operand.cc",
+    "operand.h",
+    "scalar_constant.h",
+    "spv_dump.cc",
+    "spv_dump.h",
+  ]
+
+  deps = [
+    "${tint_spirv_tools_dir}/:spvtools",
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/core/constant",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/ast/transform",
+    "${tint_src_dir}/lang/wgsl/helpers",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/lang/wgsl/sem",
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/math",
+    "${tint_src_dir}/utils/reflection",
+    "${tint_src_dir}/utils/rtti",
+    "${tint_src_dir}/utils/string",
+  ]
+}
+
+tint_unittests_source_set("unittests") {
+  sources = [
+    "binary_writer_test.cc",
+    "builder_accessor_expression_test.cc",
+    "builder_assign_test.cc",
+    "builder_binary_expression_test.cc",
+    "builder_bitcast_expression_test.cc",
+    "builder_block_test.cc",
+    "builder_builtin_test.cc",
+    "builder_builtin_texture_test.cc",
+    "builder_call_test.cc",
+    "builder_const_assert_test.cc",
+    "builder_constructor_expression_test.cc",
+    "builder_discard_test.cc",
+    "builder_entry_point_test.cc",
+    "builder_format_conversion_test.cc",
+    "builder_function_attribute_test.cc",
+    "builder_function_test.cc",
+    "builder_function_variable_test.cc",
+    "builder_global_variable_test.cc",
+    "builder_ident_expression_test.cc",
+    "builder_if_test.cc",
+    "builder_literal_test.cc",
+    "builder_loop_test.cc",
+    "builder_return_test.cc",
+    "builder_switch_test.cc",
+    "builder_test.cc",
+    "builder_type_test.cc",
+    "builder_unary_op_expression_test.cc",
+    "instruction_test.cc",
+    "module_test.cc",
+    "operand_test.cc",
+    "scalar_constant_test.cc",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/ast:test_helper",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/utils/string",
+  ]
+}

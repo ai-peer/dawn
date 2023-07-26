@@ -26,7 +26,7 @@
 #include "src/tint/lang/wgsl/sem/value_constructor.h"
 #include "src/tint/lang/wgsl/sem/value_conversion.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/unicode.h"
+#include "src/tint/utils/unicode/unicode.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::Renamer);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::Renamer::Data);

@@ -1,0 +1,82 @@
+# Copyright 2023 The Tint Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../../../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("ast_writer") {
+  sources = [
+    "generator.cc",
+    "generator.h",
+    "generator_impl.cc",
+    "generator_impl.h",
+  ]
+
+  deps = [
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/lang/wgsl/sem",
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/math",
+    "${tint_src_dir}/utils/rtti",
+    "${tint_src_dir}/utils/string",
+    "${tint_src_dir}/utils/text",
+    "${tint_src_dir}/utils/strconv",
+  ]
+}
+
+tint_unittests_source_set("unittests") {
+  sources = [
+    "generator_impl_alias_type_test.cc",
+    "generator_impl_array_accessor_test.cc",
+    "generator_impl_assign_test.cc",
+    "generator_impl_binary_test.cc",
+    "generator_impl_bitcast_test.cc",
+    "generator_impl_block_test.cc",
+    "generator_impl_break_test.cc",
+    "generator_impl_call_test.cc",
+    "generator_impl_case_test.cc",
+    "generator_impl_cast_test.cc",
+    "generator_impl_const_assert_test.cc",
+    "generator_impl_constructor_test.cc",
+    "generator_impl_continue_test.cc",
+    "generator_impl_diagnostic_test.cc",
+    "generator_impl_discard_test.cc",
+    "generator_impl_enable_test.cc",
+    "generator_impl_function_test.cc",
+    "generator_impl_global_decl_test.cc",
+    "generator_impl_identifier_test.cc",
+    "generator_impl_if_test.cc",
+    "generator_impl_literal_test.cc",
+    "generator_impl_loop_test.cc",
+    "generator_impl_member_accessor_test.cc",
+    "generator_impl_return_test.cc",
+    "generator_impl_switch_test.cc",
+    "generator_impl_test.cc",
+    "generator_impl_type_test.cc",
+    "generator_impl_unary_op_test.cc",
+    "generator_impl_variable_decl_statement_test.cc",
+    "generator_impl_variable_test.cc",
+    "test_helper.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/utils/string",
+  ]
+}
