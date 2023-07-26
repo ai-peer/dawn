@@ -70,15 +70,10 @@ if (TINT_BUILD_IR)
   )
 endif(TINT_BUILD_IR)
 
-if (TINT_BUILD_SPV_READER)
-  tint_target_add_external_dependencies("lang/spirv/writer/common:test"
-    "spirv-tools"
-  )
-endif(TINT_BUILD_SPV_READER)
-
 if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
   tint_target_add_external_dependencies("lang/spirv/writer/common:test"
     "spirv-headers"
+    "spirv-tools"
   )
 endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
 
