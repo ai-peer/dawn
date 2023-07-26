@@ -60,7 +60,7 @@
 # WebGPU Backend Validation
 # tags: [ dawn-backend-validation dawn-no-backend-validation ]
 # WebGPU Adapter
-# tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
+# tags: [ webgpu-adapter-default webgpu-adapter-swiftshader webgpu-adapter-d3d11 ]
 # WebGPU Compat Mode
 # tags: [ webgpu-compat webgpu-not-compat ]
 # Clang coverage
