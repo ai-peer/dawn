@@ -20,6 +20,31 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("cli") {
+  sources = [
+    "cli.cc",
+    "cli.h",
+  ]
+  deps = [
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/memory",
+    "${tint_src_dir}/utils/result",
+    "${tint_src_dir}/utils/strconv",
+    "${tint_src_dir}/utils/text",
+  ]
+}
+
+tint_unittests_source_set("unittests") {
+  testonly = true
+  sources = [ "cli_test.cc" ]
+  deps = [
+    "${tint_src_dir}/utils/cli",
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/text",
+  ]
+}
