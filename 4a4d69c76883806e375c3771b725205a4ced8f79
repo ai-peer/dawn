@@ -16,6 +16,24 @@
       "message": "Nit: `s/spirv/wgsl/` here and below",
       "revId": "4a4d69c76883806e375c3771b725205a4ced8f79",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30886244_8b095159",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-26T20:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3411fa49_7cb209bf",
+      "revId": "4a4d69c76883806e375c3771b725205a4ced8f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
