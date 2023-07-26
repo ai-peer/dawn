@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f775143c_8fb4fc3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T00:30:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6cf8b22_c356cb03",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T00:30:19Z",
+      "side": 1,
+      "message": "uunit bikeshedding:\n\nmaybe this ought to be called something more general, like \"CompileToMSL\"\n\nTintMSLGenerate sounds like it is literally tint::writer::msl::Generate which it is not. ditto for the other backends",
+      "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a35abf_8d8ef156",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T00:30:19Z",
+      "side": 1,
+      "message": "or mConstructed \u003d\u003d 0\n\nit returns 0 when not implemented",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 23,
+        "endChar": 23
+      },
+      "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5108e1b3_46cfbec8",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T00:30:19Z",
+      "side": 1,
+      "message": "maybe leave a TODO\n\nit\u0027d be nice to not duplicate the constants, but I don\u0027t see a simple way to do it right now",
+      "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
