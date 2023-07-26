@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f80b357_e4de6792",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-26T05:06:26Z",
+      "side": 1,
+      "message": "Thanks for reviewing!\n\nLanding with another fix found by the CTS[5].",
+      "revId": "fed30ce826bfe34f87ea3469b50c21d6266d7989",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b3e7a2_b03f8346",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-26T05:06:26Z",
+      "side": 1,
+      "message": "[5]",
+      "range": {
+        "startLine": 793,
+        "startChar": 0,
+        "endLine": 793,
+        "endChar": 72
+      },
+      "revId": "fed30ce826bfe34f87ea3469b50c21d6266d7989",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
