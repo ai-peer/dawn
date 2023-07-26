@@ -16,6 +16,7 @@
 #define SRC_TINT_LANG_WGSL_AST_INT_LITERAL_EXPRESSION_H_
 
 #include "src/tint/lang/wgsl/ast/literal_expression.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::ast {
 
@@ -55,11 +56,18 @@ class IntLiteralExpression final : public utils::Castable<IntLiteralExpression, 
     const Suffix suffix;
 };
 
+/// @param IntLiteralExpression::Suffix the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(IntLiteralExpression::Suffix value);
+
 /// Writes the integer literal suffix to the stream.
 /// @param out the stream to write to
 /// @param suffix the suffix to write
 /// @returns out so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, IntLiteralExpression::Suffix suffix);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, IntLiteralExpression::Suffix suffix) {
+    return out << ToString(suffix);
+}
 
 }  // namespace tint::ast
 

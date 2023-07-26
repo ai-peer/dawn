@@ -26,7 +26,7 @@
 #include "src/tint/lang/wgsl/sem/module.h"
 #include "src/tint/lang/wgsl/sem/statement.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::ModuleScopeVarToEntryPointParam);
 
@@ -205,8 +205,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                 break;
             }
             default: {
-                TINT_ICE(Transform, ctx.dst->Diagnostics())
-                    << "unhandled module-scope address space (" << sc << ")";
+                TINT_ICE() << "unhandled module-scope address space (" << sc << ")";
                 break;
             }
         }
@@ -241,8 +240,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                 break;
             }
             default: {
-                TINT_ICE(Transform, ctx.dst->Diagnostics())
-                    << "unhandled module-scope address space (" << sc << ")";
+                TINT_ICE() << "unhandled module-scope address space (" << sc << ")";
             }
         }
 

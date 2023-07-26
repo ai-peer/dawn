@@ -15,7 +15,8 @@
 #ifndef SRC_TINT_LANG_CORE_TYPE_TEXTURE_DIMENSION_H_
 #define SRC_TINT_LANG_CORE_TYPE_TEXTURE_DIMENSION_H_
 
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::type {
 
@@ -37,10 +38,18 @@ enum class TextureDimension {
     kCubeArray,
 };
 
+/// @param dim the texture dimensions
+/// @returns the string for the given enumerator
+std::string_view ToString(type::TextureDimension dim);
+
+/// Writes the TextureDimension to the stream.
 /// @param out the stream to write to
-/// @param dim the type::TextureDimension
-/// @return the stream so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, type::TextureDimension dim);
+/// @param dim the texture dimensions to write
+/// @returns out so calls can be chained
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, type::TextureDimension dim) {
+    return out << ToString(dim);
+}
 
 }  // namespace tint::type
 

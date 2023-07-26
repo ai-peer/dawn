@@ -46,7 +46,7 @@
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/memory/bitcast.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 
@@ -320,7 +320,7 @@ const constant::ScalarBase* ScalarConvert(const constant::Scalar<T>* scalar,
             return ctx.builder.constants.Get<constant::Scalar<TO>>(target_ty,
                                                                    static_cast<TO>(scalar->value));
         }
-        TINT_UNREACHABLE(Resolver, ctx.builder.Diagnostics()) << "Expression is not constant";
+        TINT_UNREACHABLE() << "Expression is not constant";
         return nullptr;
     });
     TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
@@ -355,14 +355,14 @@ const constant::Value* ConvertInternal(const constant::Value* root_value,
         auto next = pending.Pop();
 
         if (auto* build = std::get_if<ActionBuildSplat>(&next)) {
-            TINT_ASSERT(Resolver, value_stack.Length() >= 1);
+            TINT_ASSERT(value_stack.Length() >= 1);
             auto* el = value_stack.Pop();
             value_stack.Push(ctx.builder.constants.Splat(build->type, el, build->count));
             continue;
         }
 
         if (auto* build = std::get_if<ActionBuildComposite>(&next)) {
-            TINT_ASSERT(Resolver, value_stack.Length() >= build->count);
+            TINT_ASSERT(value_stack.Length() >= build->count);
             // Take build->count elements off the top of value_stack
             // Note: The values are ordered with the first composite value at the top of the stack.
             utils::Vector<const constant::Value*, 32> elements;
@@ -421,7 +421,7 @@ const constant::Value* ConvertInternal(const constant::Value* root_value,
                     // default materialization type.
                     for (size_t i = 1; i < members.Length(); i++) {
                         if (members[i]->Type() != target_el_ty) {
-                            TINT_ICE(Resolver, ctx.builder.Diagnostics())
+                            TINT_ICE()
                                 << "inconsistent target struct member types for SplatConvert";
                             return false;
                         }
@@ -443,7 +443,7 @@ const constant::Value* ConvertInternal(const constant::Value* root_value,
 
                 if (auto* str = convert->target_ty->As<type::Struct>()) {
                     if (TINT_UNLIKELY(str->Members().Length() != el_count)) {
-                        TINT_ICE(Resolver, ctx.builder.Diagnostics())
+                        TINT_ICE()
                             << "const-eval conversion of structure has mismatched element counts";
                         return false;
                     }
@@ -468,7 +468,7 @@ const constant::Value* ConvertInternal(const constant::Value* root_value,
         }
     }
 
-    TINT_ASSERT(Resolver, value_stack.Length() == 1);
+    TINT_ASSERT(value_stack.Length() == 1);
     return value_stack.Pop();
 }
 
@@ -567,7 +567,7 @@ ConstEval::ConstEval(ProgramBuilder& b, bool use_runtime_semantics /* = false */
 template <typename T>
 ConstEval::Result ConstEval::CreateScalar(const Source& source, const type::Type* t, T v) {
     static_assert(IsNumber<T> || std::is_same_v<T, bool>, "T must be a Number or bool");
-    TINT_ASSERT(Resolver, t->Is<type::Scalar>());
+    TINT_ASSERT(t->Is<type::Scalar>());
 
     if constexpr (IsFloatingPoint<T>) {
         if (!std::isfinite(v.value)) {
@@ -622,7 +622,7 @@ const constant::Value* ConstEval::ZeroValue(const type::Type* type) {
         [&](Default) -> const constant::Value* {
             return ZeroTypeDispatch(type, [&](auto zero) -> const constant::Value* {
                 auto el = CreateScalar(Source{}, type, zero);
-                TINT_ASSERT(Resolver, el);
+                TINT_ASSERT(el);
                 return el.Get();
             });
         });
@@ -1174,7 +1174,7 @@ ConstEval::Result ConstEval::Dot(const Source& source,
                                  const constant::Value* v1,
                                  const constant::Value* v2) {
     auto* vec_ty = v1->Type()->As<type::Vector>();
-    TINT_ASSERT(Resolver, vec_ty);
+    TINT_ASSERT(vec_ty);
     auto* elem_ty = vec_ty->type();
     switch (vec_ty->Width()) {
         case 2:
@@ -1193,7 +1193,7 @@ ConstEval::Result ConstEval::Dot(const Source& source,
                 v1->Index(0), v1->Index(1), v1->Index(2), v1->Index(3),  //
                 v2->Index(0), v2->Index(1), v2->Index(2), v2->Index(3));
     }
-    TINT_ICE(Resolver, builder.Diagnostics()) << "Expected vector";
+    TINT_ICE() << "Expected vector";
     return utils::Failure;
 }
 
@@ -1471,14 +1471,14 @@ ConstEval::Result ConstEval::Bitcast(const type::Type* ty,
     auto src_el_ty = src_elements.type;
     auto src_count = src_elements.count;
 
-    TINT_ASSERT(Resolver, dst_count * dst_el_ty->Size() == src_count * src_el_ty->Size());
+    TINT_ASSERT(dst_count * dst_el_ty->Size() == src_count * src_el_ty->Size());
     uint32_t total_bitwidth = dst_count * dst_el_ty->Size();
     // Buffer holding the bits from source value, result value reinterpreted from it.
     utils::Vector<std::byte, 16> buffer;
     buffer.Reserve(total_bitwidth);
 
     // Ensure elements are of 32-bit or 16-bit numerical scalar type.
-    TINT_ASSERT(Resolver, (src_el_ty->IsAnyOf<type::F32, type::I32, type::U32, type::F16>()));
+    TINT_ASSERT((src_el_ty->IsAnyOf<type::F32, type::I32, type::U32, type::F16>()));
     // Pushes bits from source value into the buffer.
     auto push_src_element_bits = [&](const constant::Value* element) {
         auto push_32_bits = [&](uint32_t v) {
@@ -1567,7 +1567,7 @@ ConstEval::Result ConstEval::Bitcast(const type::Type* ty,
             });
     };
 
-    TINT_ASSERT(Resolver, (buffer.Length() == total_bitwidth));
+    TINT_ASSERT((buffer.Length() == total_bitwidth));
     for (size_t i = 0; i < dst_count; i++) {
         if (!push_dst_element(i * dst_el_ty->Size())) {
             return utils::Failure;
@@ -1917,7 +1917,7 @@ ConstEval::Result ConstEval::OpLogicalAnd(const type::Type* ty,
                                           const Source& source) {
     // Due to short-circuiting, this function is only called if lhs is true, so we only return the
     // value of the rhs.
-    TINT_ASSERT(Resolver, args[0]->ValueAs<bool>());
+    TINT_ASSERT(args[0]->ValueAs<bool>());
     return CreateScalar(source, ty, args[1]->ValueAs<bool>());
 }
 
@@ -1926,7 +1926,7 @@ ConstEval::Result ConstEval::OpLogicalOr(const type::Type* ty,
                                          const Source& source) {
     // Due to short-circuiting, this function is only called if lhs is false, so we only only return
     // the value of the rhs.
-    TINT_ASSERT(Resolver, !args[0]->ValueAs<bool>());
+    TINT_ASSERT(!args[0]->ValueAs<bool>());
     return CreateScalar(source, ty, args[1]->ValueAs<bool>());
 }
 
@@ -2073,8 +2073,7 @@ ConstEval::Result ConstEval::OpShiftLeft(const type::Type* ty,
     };
 
     if (TINT_UNLIKELY(!args[1]->Type()->DeepestElement()->Is<type::U32>())) {
-        TINT_ICE(Resolver, builder.Diagnostics())
-            << "Element type of rhs of ShiftLeft must be a u32";
+        TINT_ICE() << "Element type of rhs of ShiftLeft must be a u32";
         return utils::Failure;
     }
 
@@ -2141,8 +2140,7 @@ ConstEval::Result ConstEval::OpShiftRight(const type::Type* ty,
     };
 
     if (TINT_UNLIKELY(!args[1]->Type()->DeepestElement()->Is<type::U32>())) {
-        TINT_ICE(Resolver, builder.Diagnostics())
-            << "Element type of rhs of ShiftLeft must be a u32";
+        TINT_ICE() << "Element type of rhs of ShiftLeft must be a u32";
         return utils::Failure;
     }
 
@@ -2509,7 +2507,7 @@ ConstEval::Result ConstEval::determinant(const type::Type* ty,
                                            me(0, 2), me(1, 2), me(2, 2), me(3, 2),  //
                                            me(0, 3), me(1, 3), me(2, 3), me(3, 3));
         }
-        TINT_ICE(Resolver, builder.Diagnostics()) << "Unexpected number of matrix rows";
+        TINT_ICE() << "Unexpected number of matrix rows";
         return utils::Failure;
     };
     auto r = calculate();
@@ -2829,9 +2827,8 @@ ConstEval::Result ConstEval::frexp(const type::Type* ty,
                 };
             },
             [&](Default) {
-                TINT_ICE(Resolver, builder.Diagnostics())
-                    << "unhandled element type for frexp() const-eval: "
-                    << s->Type()->FriendlyName();
+                TINT_ICE() << "unhandled element type for frexp() const-eval: "
+                           << s->Type()->FriendlyName();
                 return FractExp{utils::Failure, utils::Failure};
             });
     };

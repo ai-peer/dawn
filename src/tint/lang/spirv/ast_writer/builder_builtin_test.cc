@@ -18,7 +18,7 @@
 #include "src/tint/lang/spirv/ast_writer/test_helper.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
 #include "src/tint/lang/wgsl/ast/stage_attribute.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::writer::spirv {
 namespace {

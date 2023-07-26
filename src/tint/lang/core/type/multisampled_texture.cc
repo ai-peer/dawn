@@ -16,10 +16,10 @@
 
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
-#include "src/tint/utils/debug/debug.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
+#include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::type::MultisampledTexture);
 
@@ -28,7 +28,7 @@ namespace tint::type {
 MultisampledTexture::MultisampledTexture(TextureDimension dim, const Type* type)
     : Base(utils::Hash(utils::TypeInfo::Of<MultisampledTexture>().full_hashcode, dim, type), dim),
       type_(type) {
-    TINT_ASSERT(Type, type_);
+    TINT_ASSERT(type_);
 }
 
 MultisampledTexture::~MultisampledTexture() = default;

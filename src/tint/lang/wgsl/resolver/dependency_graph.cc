@@ -69,8 +69,8 @@
 #include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/memory/block_allocator.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
+#include "src/tint/utils/string/string.h"
 
 #define TINT_DUMP_DEPENDENCY_GRAPH 0
 
@@ -127,7 +127,7 @@ using GlobalMap = utils::Hashmap<Symbol, Global*, 16>;
 
 /// Raises an ICE that a global ast::Node type was not handled by this system.
 void UnhandledNode(diag::List& diagnostics, const ast::Node* node) {
-    TINT_ICE(Resolver, diagnostics) << "unhandled node type: " << node->TypeInfo().name;
+    TINT_ICE() << "unhandled node type: " << node->TypeInfo().name;
 }
 
 /// Raises an error diagnostic with the given message and source.
@@ -781,8 +781,7 @@ struct DependencyAnalysis {
 
             if (TINT_UNLIKELY(!stack.IsEmpty())) {
                 // Each stack.push() must have a corresponding stack.pop_back().
-                TINT_ICE(Resolver, diagnostics_)
-                    << "stack not empty after returning from TraverseDependencies()";
+                TINT_ICE() << "stack not empty after returning from TraverseDependencies()";
             }
         }
     }
@@ -795,9 +794,8 @@ struct DependencyAnalysis {
         if (TINT_LIKELY(info)) {
             return *info;
         }
-        TINT_ICE(Resolver, diagnostics_)
-            << "failed to find dependency info for edge: '" << NameOf(from->node) << "' -> '"
-            << NameOf(to->node) << "'";
+        TINT_ICE() << "failed to find dependency info for edge: '" << NameOf(from->node) << "' -> '"
+                   << NameOf(to->node) << "'";
         return {};
     }
 
@@ -916,8 +914,7 @@ std::string ResolvedIdentifier::String(diag::List& diagnostics) const {
                 return "parameter '" + n->name->symbol.Name() + "'";
             },
             [&](Default) {
-                TINT_UNREACHABLE(Resolver, diagnostics)
-                    << "unhandled ast::Node: " << node->TypeInfo().name;
+                TINT_UNREACHABLE() << "unhandled ast::Node: " << node->TypeInfo().name;
                 return "<unknown>";
             });
     }
@@ -949,7 +946,7 @@ std::string ResolvedIdentifier::String(diag::List& diagnostics) const {
         return "unresolved identifier '" + unresolved->name + "'";
     }
 
-    TINT_UNREACHABLE(Resolver, diagnostics) << "unhandled ResolvedIdentifier";
+    TINT_UNREACHABLE() << "unhandled ResolvedIdentifier";
     return "<unknown>";
 }
 

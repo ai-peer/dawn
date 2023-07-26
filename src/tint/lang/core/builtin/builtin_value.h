@@ -23,7 +23,7 @@
 #ifndef SRC_TINT_LANG_CORE_BUILTIN_BUILTIN_VALUE_H_
 #define SRC_TINT_LANG_CORE_BUILTIN_BUILTIN_VALUE_H_
 
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::builtin {
 
@@ -45,10 +45,17 @@ enum class BuiltinValue {
     kWorkgroupId,
 };
 
+/// @param BuiltinValue the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(BuiltinValue value);
+
 /// @param out the stream to write to
 /// @param value the BuiltinValue
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, BuiltinValue value);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, BuiltinValue value) {
+    return o << ToString(value);
+}
 
 /// ParseBuiltinValue parses a BuiltinValue from a string.
 /// @param str the string to parse

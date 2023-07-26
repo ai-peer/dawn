@@ -23,7 +23,7 @@
 #ifndef SRC_TINT_LANG_CORE_BUILTIN_ADDRESS_SPACE_H_
 #define SRC_TINT_LANG_CORE_BUILTIN_ADDRESS_SPACE_H_
 
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::builtin {
 
@@ -41,10 +41,17 @@ enum class AddressSpace {
     kWorkgroup,
 };
 
+/// @param AddressSpace the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(AddressSpace value);
+
 /// @param out the stream to write to
 /// @param value the AddressSpace
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, AddressSpace value);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, AddressSpace value) {
+    return o << ToString(value);
+}
 
 /// ParseAddressSpace parses a AddressSpace from a string.
 /// @param str the string to parse

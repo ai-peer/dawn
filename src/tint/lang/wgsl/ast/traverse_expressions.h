@@ -148,8 +148,8 @@ bool TraverseExpressions(const Expression* root, diag::List& diags, CALLBACK&& c
                                                PhonyExpression>()))) {
                     return true;  // Leaf expression
                 }
-                TINT_ICE(AST, diags)
-                    << "unhandled expression type: " << (expr ? expr->TypeInfo().name : "<null>");
+                TINT_ICE() << "unhandled expression type: "
+                           << (expr ? expr->TypeInfo().name : "<null>");
                 return false;
             });
         if (!ok) {

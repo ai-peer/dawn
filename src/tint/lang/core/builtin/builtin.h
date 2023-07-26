@@ -23,7 +23,7 @@
 #ifndef SRC_TINT_LANG_CORE_BUILTIN_BUILTIN_H_
 #define SRC_TINT_LANG_CORE_BUILTIN_BUILTIN_H_
 
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::builtin {
 
@@ -128,10 +128,17 @@ enum class Builtin {
     kVec4U,
 };
 
+/// @param Builtin the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(Builtin value);
+
 /// @param out the stream to write to
 /// @param value the Builtin
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, Builtin value);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, Builtin value) {
+    return o << ToString(value);
+}
 
 /// ParseBuiltin parses a Builtin from a string.
 /// @param str the string to parse

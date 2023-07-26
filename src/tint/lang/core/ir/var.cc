@@ -14,7 +14,7 @@
 
 #include "src/tint/lang/core/ir/var.h"
 #include "src/tint/lang/core/ir/store.h"
-#include "src/tint/utils/debug/debug.h"
+#include "src/tint/utils/ice/ice.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Var);
 
@@ -22,7 +22,7 @@ namespace tint::ir {
 
 Var::Var(InstructionResult* result) {
     if (result && result->Type()) {
-        TINT_ASSERT(IR, result->Type()->Is<type::Pointer>());
+        TINT_ASSERT(result->Type()->Is<type::Pointer>());
     }
 
     // Default to no initializer.

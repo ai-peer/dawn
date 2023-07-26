@@ -24,7 +24,7 @@
 #include "src/tint/lang/wgsl/sem/member_accessor_expression.h"
 #include "src/tint/lang/wgsl/sem/statement.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
-#include "src/tint/utils/text/unicode.h"
+#include "src/tint/utils/unicode/unicode.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::TruncateInterstageVariables);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::TruncateInterstageVariables::Config);
@@ -86,10 +86,9 @@ Transform::ApplyResult TruncateInterstageVariables::Apply(const Program* src,
         // This transform is run after CanonicalizeEntryPointIO transform,
         // So it is guaranteed that entry point inputs are already grouped in a struct.
         if (TINT_UNLIKELY(!str)) {
-            TINT_ICE(Transform, ctx.dst->Diagnostics())
-                << "Entrypoint function return type is non-struct.\n"
-                << "TruncateInterstageVariables transform needs to run after "
-                   "CanonicalizeEntryPointIO transform.";
+            TINT_ICE() << "Entrypoint function return type is non-struct.\n"
+                       << "TruncateInterstageVariables transform needs to run after "
+                          "CanonicalizeEntryPointIO transform.";
             continue;
         }
 

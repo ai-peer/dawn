@@ -47,10 +47,17 @@ enum class {{$enum}} {
 {{-   end }}
 };
 
+/// @param {{$enum}} the enum value
+/// @returns the string for the given enum value
+std::string_view ToString({{$enum}} value);
+
 /// @param out the stream to write to
 /// @param value the {{$enum}}
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, {{$enum}} value);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, {{$enum}} value) {
+    return o << ToString(value);
+}
 
 /// Parse{{$enum}} parses a {{$enum}} from a string.
 /// @param str the string to parse
@@ -94,16 +101,16 @@ constexpr const char* k{{$enum}}Strings[] = {
 {{- /* provided sem.Enum.                                                 */ -}}
 {{- /* ------------------------------------------------------------------ */ -}}
 {{- $enum := Eval "EnumName" $ -}}
-    utils::StringStream& operator<<(utils::StringStream& out, {{$enum}} value) {
+std::string_view ToString({{$enum}} value) {
     switch (value) {
         case {{$enum}}::kUndefined:
-            return out << "undefined";
+            return "undefined";
 {{-   range $entry := $.Entries }}
         case {{template "EnumCase" $entry}}:
-            return out << "{{$entry.Name}}";
+            return "{{$entry.Name}}";
 {{-   end }}
     }
-    return out << "<unknown>";
+    return "<unknown>";
 }
 {{- end -}}
 

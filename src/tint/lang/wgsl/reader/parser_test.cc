@@ -26,7 +26,7 @@ using ParserTest = testing::Test;
 TEST_F(ParserTest, Empty) {
     Source::File file("test.wgsl", "");
     auto program = Parse(&file);
-    auto errs = diag::Formatter().format(program.Diagnostics());
+    auto errs = program.Diagnostics().str();
     ASSERT_TRUE(program.IsValid()) << errs;
 }
 
@@ -38,7 +38,7 @@ fn main() -> @location(0) vec4<f32> {
 }
 )");
     auto program = Parse(&file);
-    auto errs = diag::Formatter().format(program.Diagnostics());
+    auto errs = program.Diagnostics().str();
     ASSERT_TRUE(program.IsValid()) << errs;
 
     ASSERT_EQ(1u, program.AST().Functions().Length());
@@ -51,7 +51,7 @@ fn main() ->  {  // missing return type
 })");
 
     auto program = Parse(&file);
-    auto errs = diag::Formatter().format(program.Diagnostics());
+    auto errs = program.Diagnostics().str();
     ASSERT_FALSE(program.IsValid()) << errs;
     EXPECT_EQ(errs,
               R"(test.wgsl:2:15 error: unable to determine function return type

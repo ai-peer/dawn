@@ -1,0 +1,125 @@
+# Copyright 2023 The Tint Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../../../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("reader") {
+  sources = [
+    "classify_template_args.cc",
+    "classify_template_args.h",
+    "lexer.cc",
+    "lexer.h",
+    "parser.cc",
+    "parser.h",
+    "parser_impl.cc",
+    "parser_impl.h",
+    "parser_impl_detail.h",
+    "token.cc",
+    "token.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/diagnostic",
+    "${tint_src_dir}/utils/ice",
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/string",
+    "${tint_src_dir}/utils/unicode",
+    "${tint_src_dir}/utils/strconv",
+  ]
+}
+
+tint_unittests_source_set("unittests") {
+  sources = [
+    "classify_template_args_test.cc",
+    "lexer_test.cc",
+    "parser_impl_additive_expression_test.cc",
+    "parser_impl_argument_expression_list_test.cc",
+    "parser_impl_assignment_stmt_test.cc",
+    "parser_impl_bitwise_expression_test.cc",
+    "parser_impl_break_stmt_test.cc",
+    "parser_impl_bug_cases_test.cc",
+    "parser_impl_call_stmt_test.cc",
+    "parser_impl_compound_stmt_test.cc",
+    "parser_impl_const_literal_test.cc",
+    "parser_impl_continue_stmt_test.cc",
+    "parser_impl_continuing_stmt_test.cc",
+    "parser_impl_core_lhs_expression_test.cc",
+    "parser_impl_diagnostic_attribute_test.cc",
+    "parser_impl_diagnostic_control_test.cc",
+    "parser_impl_diagnostic_directive_test.cc",
+    "parser_impl_enable_directive_test.cc",
+    "parser_impl_error_msg_test.cc",
+    "parser_impl_error_resync_test.cc",
+    "parser_impl_expression_test.cc",
+    "parser_impl_for_stmt_test.cc",
+    "parser_impl_function_attribute_list_test.cc",
+    "parser_impl_function_attribute_test.cc",
+    "parser_impl_function_decl_test.cc",
+    "parser_impl_function_header_test.cc",
+    "parser_impl_global_constant_decl_test.cc",
+    "parser_impl_global_decl_test.cc",
+    "parser_impl_global_variable_decl_test.cc",
+    "parser_impl_if_stmt_test.cc",
+    "parser_impl_increment_decrement_stmt_test.cc",
+    "parser_impl_lhs_expression_test.cc",
+    "parser_impl_loop_stmt_test.cc",
+    "parser_impl_math_expression_test.cc",
+    "parser_impl_multiplicative_expression_test.cc",
+    "parser_impl_param_list_test.cc",
+    "parser_impl_paren_expression_test.cc",
+    "parser_impl_primary_expression_test.cc",
+    "parser_impl_relational_expression_test.cc",
+    "parser_impl_require_directive_test.cc",
+    "parser_impl_reserved_keyword_test.cc",
+    "parser_impl_shift_expression_test.cc",
+    "parser_impl_singular_expression_test.cc",
+    "parser_impl_statement_test.cc",
+    "parser_impl_statements_test.cc",
+    "parser_impl_struct_attribute_decl_test.cc",
+    "parser_impl_struct_body_decl_test.cc",
+    "parser_impl_struct_decl_test.cc",
+    "parser_impl_struct_member_attribute_decl_test.cc",
+    "parser_impl_struct_member_attribute_test.cc",
+    "parser_impl_struct_member_test.cc",
+    "parser_impl_switch_body_test.cc",
+    "parser_impl_switch_stmt_test.cc",
+    "parser_impl_test.cc",
+    "parser_impl_test_helper.cc",
+    "parser_impl_test_helper.h",
+    "parser_impl_type_alias_test.cc",
+    "parser_impl_type_decl_test.cc",
+    "parser_impl_unary_expression_test.cc",
+    "parser_impl_variable_attribute_list_test.cc",
+    "parser_impl_variable_attribute_test.cc",
+    "parser_impl_variable_decl_test.cc",
+    "parser_impl_variable_ident_decl_test.cc",
+    "parser_impl_variable_qualifier_test.cc",
+    "parser_impl_variable_stmt_test.cc",
+    "parser_impl_while_stmt_test.cc",
+    "parser_test.cc",
+    "token_test.cc",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/core/builtin",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/ast:test_helper",
+    "${tint_src_dir}/utils/string",
+  ]
+}

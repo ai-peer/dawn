@@ -25,7 +25,7 @@
 
 #include <string>
 
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::builtin {
 
@@ -37,10 +37,17 @@ enum class InterpolationSampling {
     kSample,
 };
 
+/// @param InterpolationSampling the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(InterpolationSampling value);
+
 /// @param out the stream to write to
 /// @param value the InterpolationSampling
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, InterpolationSampling value);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, InterpolationSampling value) {
+    return o << ToString(value);
+}
 
 /// ParseInterpolationSampling parses a InterpolationSampling from a string.
 /// @param str the string to parse

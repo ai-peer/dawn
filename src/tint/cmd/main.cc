@@ -46,9 +46,10 @@
 #include "src/tint/utils/cli/cli.h"
 #include "src/tint/utils/command/command.h"
 #include "src/tint/utils/containers/transform.h"
+#include "src/tint/utils/diagnostic/printer.h"
 #include "src/tint/utils/macros/defer.h"
-#include "src/tint/utils/text/string.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
+#include "src/tint/utils/string/string.h"
 #include "tint/tint.h"
 
 #if TINT_BUILD_IR
@@ -814,7 +815,7 @@ EShLanguage pipeline_stage_to_esh_language(tint::ast::PipelineStage stage) {
         case tint::ast::PipelineStage::kCompute:
             return EShLangCompute;
         default:
-            TINT_ASSERT(AST, false);
+            TINT_UNREACHABLE();
             return EShLangVertex;
     }
 }

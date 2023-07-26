@@ -33,7 +33,7 @@
 #include "src/tint/utils/containers/scope_stack.h"
 #include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::wgsl::writer::RenameConflicts);
 
@@ -261,9 +261,7 @@ struct RenameConflicts::State {
             [&](ir::Value* value) { ir->SetName(value, new_name); },
             [&](type::Struct* str) { str->SetName(new_name); },
             [&](Default) {
-                diag::List diags;
-                TINT_ICE(Transform, diags)
-                    << "unhandled type for renaming: " << thing->TypeInfo().name;
+                TINT_ICE() << "unhandled type for renaming: " << thing->TypeInfo().name;
             });
     }
 

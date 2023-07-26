@@ -16,10 +16,10 @@
 
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
-#include "src/tint/utils/debug/debug.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
+#include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::type::DepthMultisampledTexture);
 
@@ -34,7 +34,7 @@ bool IsValidDepthDimension(TextureDimension dim) {
 
 DepthMultisampledTexture::DepthMultisampledTexture(TextureDimension dim)
     : Base(utils::Hash(utils::TypeInfo::Of<DepthMultisampledTexture>().full_hashcode, dim), dim) {
-    TINT_ASSERT(Type, IsValidDepthDimension(dim));
+    TINT_ASSERT(IsValidDepthDimension(dim));
 }
 
 DepthMultisampledTexture::~DepthMultisampledTexture() = default;

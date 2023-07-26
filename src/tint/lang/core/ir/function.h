@@ -91,7 +91,7 @@ class Function : public utils::Castable<Function, Value> {
     /// Sets the return attributes
     /// @param builtin the builtin to set
     void SetReturnBuiltin(ReturnBuiltin builtin) {
-        TINT_ASSERT(IR, !return_.builtin.has_value());
+        TINT_ASSERT(!return_.builtin.has_value());
         return_.builtin = builtin;
     }
     /// @returns the return builtin attribute
@@ -130,7 +130,7 @@ class Function : public utils::Castable<Function, Value> {
     /// Sets the root block for the function
     /// @param target the root block
     void SetBlock(Block* target) {
-        TINT_ASSERT(IR, target != nullptr);
+        TINT_ASSERT(target != nullptr);
         block_ = target;
     }
     /// @returns the function root block
@@ -151,8 +151,29 @@ class Function : public utils::Castable<Function, Value> {
     ir::Block* block_ = nullptr;
 };
 
-utils::StringStream& operator<<(utils::StringStream& out, Function::PipelineStage value);
-utils::StringStream& operator<<(utils::StringStream& out, enum Function::ReturnBuiltin value);
+/// @param Function::PipelineStage the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(Function::PipelineStage value);
+
+/// @param out the stream to write to
+/// @param value the Function::PipelineStage
+/// @returns `out` so calls can be chained
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, Function::PipelineStage value) {
+    return o << ToString(value);
+}
+
+/// @param Function::ReturnBuiltin the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(enum Function::ReturnBuiltin value);
+
+/// @param out the stream to write to
+/// @param value the Function::ReturnBuiltin
+/// @returns `out` so calls can be chained
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, enum Function::ReturnBuiltin value) {
+    return o << ToString(value);
+}
 
 }  // namespace tint::ir
 

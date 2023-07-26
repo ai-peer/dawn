@@ -41,7 +41,7 @@
 #include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/math/math.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::resolver {
 namespace {
@@ -1430,7 +1430,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
         return_type =
             Match(match.templates, match.overload, indices, earliest_eval_stage).Type(&any);
         if (TINT_UNLIKELY(!return_type)) {
-            TINT_ICE(Resolver, builder.Diagnostics()) << "MatchState.Match() returned null";
+            TINT_ICE() << "MatchState.Match() returned null";
             return {};
         }
     } else {
@@ -1764,7 +1764,7 @@ void Impl::ErrAmbiguousOverload(const char* intrinsic_name,
             ss << std::endl;
         }
     }
-    TINT_ICE(Resolver, builder.Diagnostics()) << ss.str();
+    TINT_ICE() << ss.str();
 }
 
 }  // namespace

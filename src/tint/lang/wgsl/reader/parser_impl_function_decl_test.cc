@@ -15,7 +15,7 @@
 #include "src/tint/lang/wgsl/ast/test_helper.h"
 #include "src/tint/lang/wgsl/ast/workgroup_attribute.h"
 #include "src/tint/lang/wgsl/reader/parser_impl_test_helper.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::reader::wgsl {
 namespace {

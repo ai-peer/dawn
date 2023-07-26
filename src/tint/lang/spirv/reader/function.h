@@ -28,7 +28,7 @@
 #include "src/tint/lang/spirv/reader/construct.h"
 #include "src/tint/lang/spirv/reader/parser_impl.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::reader::spirv {
 
@@ -1159,7 +1159,7 @@ class FunctionEmitter {
     /// @return the built StatementBuilder
     template <typename T, typename... ARGS>
     T* AddStatementBuilder(ARGS&&... args) {
-        TINT_ASSERT(Reader, !statements_stack_.IsEmpty());
+        TINT_ASSERT(!statements_stack_.IsEmpty());
         return statements_stack_.Back().AddStatementBuilder<T>(std::forward<ARGS>(args)...);
     }
 

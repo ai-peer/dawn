@@ -65,7 +65,7 @@ class FunctionParam : public utils::Castable<FunctionParam, Value> {
     /// Sets the builtin information. Note, it is currently an error if the builtin is already set.
     /// @param val the builtin to set
     void SetBuiltin(FunctionParam::Builtin val) {
-        TINT_ASSERT(IR, !builtin_.has_value());
+        TINT_ASSERT(!builtin_.has_value());
         builtin_ = val;
     }
     /// @returns the builtin set for the parameter
@@ -105,7 +105,17 @@ class FunctionParam : public utils::Castable<FunctionParam, Value> {
     bool invariant_ = false;
 };
 
-utils::StringStream& operator<<(utils::StringStream& out, enum FunctionParam::Builtin value);
+/// @param FunctionParam::Builtin the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(enum FunctionParam::Builtin value);
+
+/// @param out the stream to write to
+/// @param value the FunctionParam::Builtin
+/// @returns `out` so calls can be chained
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, enum FunctionParam::Builtin value) {
+    return o << ToString(value);
+}
 
 }  // namespace tint::ir
 

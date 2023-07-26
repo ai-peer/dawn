@@ -187,9 +187,8 @@ struct LocalizeStructArrayAssignment::State {
         const AssignmentStatement* assign_stmt) {
         auto* root_ident = src->Sem().GetVal(assign_stmt->lhs)->RootIdentifier();
         if (TINT_UNLIKELY(!root_ident)) {
-            TINT_ICE(Transform, b.Diagnostics())
-                << "Unable to determine originating variable for lhs of assignment "
-                   "statement";
+            TINT_ICE() << "Unable to determine originating variable for lhs of assignment "
+                          "statement";
             return {};
         }
 
@@ -202,9 +201,8 @@ struct LocalizeStructArrayAssignment::State {
                 return std::make_pair(ptr->StoreType(), ptr->AddressSpace());
             },
             [&](Default) {
-                TINT_ICE(Transform, b.Diagnostics())
-                    << "Expecting to find variable of type pointer or reference on lhs "
-                       "of assignment statement";
+                TINT_ICE() << "Expecting to find variable of type pointer or reference on lhs "
+                              "of assignment statement";
                 return std::pair<const type::Type*, builtin::AddressSpace>{};
             });
     }

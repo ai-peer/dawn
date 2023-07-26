@@ -17,7 +17,7 @@
 #include <utility>
 
 #include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/text/symbol_table.h"
+#include "src/tint/utils/symbol/table.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::sem::CallTarget);
 
@@ -34,7 +34,7 @@ CallTarget::CallTarget(const type::Type* return_type,
     for (auto* param : parameters) {
         AddParameter(param);
     }
-    TINT_ASSERT(Semantic, return_type);
+    TINT_ASSERT(return_type);
 }
 
 CallTarget::CallTarget(const CallTarget&) = default;

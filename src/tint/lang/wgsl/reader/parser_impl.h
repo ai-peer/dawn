@@ -26,6 +26,7 @@
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/reader/parser_impl_detail.h"
 #include "src/tint/lang/wgsl/reader/token.h"
+#include "src/tint/utils/diagnostic/formatter.h"
 
 namespace tint::ast {
 class BreakStatement;
@@ -122,7 +123,7 @@ class ParserImpl {
         /// return type will always be a pointer to a non-pointer type. #errored
         /// must be false to call.
         inline typename wgsl::detail::OperatorArrow<T>::type operator->() {
-            TINT_ASSERT(Reader, !errored);
+            TINT_ASSERT(!errored);
             return wgsl::detail::OperatorArrow<T>::ptr(value);
         }
 
@@ -184,7 +185,7 @@ class ParserImpl {
         /// return type will always be a pointer to a non-pointer type. #errored
         /// must be false to call.
         inline typename wgsl::detail::OperatorArrow<T>::type operator->() {
-            TINT_ASSERT(Reader, !errored);
+            TINT_ASSERT(!errored);
             return wgsl::detail::OperatorArrow<T>::ptr(value);
         }
 

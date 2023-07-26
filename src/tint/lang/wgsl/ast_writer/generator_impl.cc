@@ -73,8 +73,8 @@
 #include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/math/math.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/float_to_string.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/strconv/float_to_string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::writer::wgsl {
 
@@ -109,7 +109,7 @@ void GeneratorImpl::Generate() {
             [&](const ast::Function* func) { return EmitFunction(func); },
             [&](const ast::Variable* var) { return EmitVariable(Line(), var); },
             [&](const ast::ConstAssert* ca) { return EmitConstAssert(ca); },
-            [&](Default) { TINT_UNREACHABLE(Writer, diagnostics_); });
+            [&](Default) { TINT_UNREACHABLE(); });
         if (decl != program_->AST().GlobalDeclarations().Back()) {
             Line();
         }
@@ -422,9 +422,7 @@ void GeneratorImpl::EmitVariable(utils::StringStream& out, const ast::Variable* 
         },
         [&](const ast::Let*) { out << "let"; }, [&](const ast::Override*) { out << "override"; },
         [&](const ast::Const*) { out << "const"; },
-        [&](Default) {
-            TINT_ICE(Writer, diagnostics_) << "unhandled variable type " << v->TypeInfo().name;
-        });
+        [&](Default) { TINT_ICE() << "unhandled variable type " << v->TypeInfo().name; });
 
     out << " " << v->name->symbol.Name();
 
@@ -529,8 +527,7 @@ void GeneratorImpl::EmitAttributes(utils::StringStream& out,
                 out << "internal(" << internal->InternalName() << ")";
             },
             [&](Default) {
-                TINT_ICE(Writer, diagnostics_)
-                    << "Unsupported attribute '" << attr->TypeInfo().name << "'";
+                TINT_ICE() << "Unsupported attribute '" << attr->TypeInfo().name << "'";
             });
     }
 }

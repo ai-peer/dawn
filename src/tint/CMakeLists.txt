@@ -562,10 +562,10 @@ list(APPEND TINT_LIB_SRCS
   utils/text/string.h
   utils/text/string_stream.cc
   utils/text/string_stream.h
-  utils/text/symbol.cc
-  utils/text/symbol.h
-  utils/text/symbol_table.cc
-  utils/text/symbol_table.h
+  utils/symbol/symbol.cc
+  utils/symbol/symbol.h
+  utils/symbol/table.cc
+  utils/symbol/table.h
   utils/text/text_generator.cc
   utils/text/text_generator.h
   utils/traits/traits.h
@@ -1130,7 +1130,6 @@ if(TINT_BUILD_TESTS)
     utils/containers/unique_allocator_test.cc
     utils/containers/unique_vector_test.cc
     utils/containers/vector_test.cc
-    utils/debug/debug_test.cc
     utils/diagnostic/diagnostic_test.cc
     utils/diagnostic/formatter_test.cc
     utils/diagnostic/printer_test.cc
@@ -1151,8 +1150,8 @@ if(TINT_BUILD_TESTS)
     utils/text/float_to_string_test.cc
     utils/text/string_stream_test.cc
     utils/text/string_test.cc
-    utils/text/symbol_table_test.cc
-    utils/text/symbol_test.cc
+    utils/symbol/table_test.cc
+    utils/symbol/symbol_test.cc
     utils/text/unicode_test.cc
     utils/traits/traits_test.cc
   )

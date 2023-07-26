@@ -25,7 +25,7 @@
 
 #include <string>
 
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::builtin {
 
@@ -37,10 +37,17 @@ enum class InterpolationType {
     kPerspective,
 };
 
+/// @param InterpolationType the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(InterpolationType value);
+
 /// @param out the stream to write to
 /// @param value the InterpolationType
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, InterpolationType value);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, InterpolationType value) {
+    return o << ToString(value);
+}
 
 /// ParseInterpolationType parses a InterpolationType from a string.
 /// @param str the string to parse

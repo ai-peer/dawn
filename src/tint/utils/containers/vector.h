@@ -24,19 +24,15 @@
 #include <vector>
 
 #include "src/tint/utils/containers/slice.h"
-#include "src/tint/utils/debug/debug.h"
+#include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/macros/compiler.h"
+#include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/memory/bitcast.h"
-#include "src/tint/utils/text/string_stream.h"
-
-namespace tint::utils {
 
 /// Forward declarations
+namespace tint::utils {
 template <typename>
 class VectorRef;
-template <typename>
-class VectorRef;
-
 }  // namespace tint::utils
 
 namespace tint::utils {
@@ -216,7 +212,7 @@ class Vector {
     /// @param i the element index. Must be less than `len`.
     /// @returns a reference to the i'th element.
     T& operator[](size_t i) {
-        TINT_ASSERT(Utils, i < Length());
+        TINT_ASSERT(i < Length());
         return impl_.slice[i];
     }
 
@@ -224,7 +220,7 @@ class Vector {
     /// @param i the element index. Must be less than `len`.
     /// @returns a reference to the i'th element.
     const T& operator[](size_t i) const {
-        TINT_ASSERT(Utils, i < Length());
+        TINT_ASSERT(i < Length());
         return impl_.slice[i];
     }
 
@@ -325,7 +321,7 @@ class Vector {
     /// Removes and returns the last element from the vector.
     /// @returns the popped element
     T Pop() {
-        TINT_ASSERT(Utils, !IsEmpty());
+        TINT_ASSERT(!IsEmpty());
         auto& el = impl_.slice.data[--impl_.slice.len];
         auto val = std::move(el);
         el.~T();
@@ -337,7 +333,7 @@ class Vector {
     /// @param element the element to insert
     template <typename EL>
     void Insert(size_t before, EL&& element) {
-        TINT_ASSERT(Utils, before <= Length());
+        TINT_ASSERT(before <= Length());
         size_t n = Length();
         Resize(Length() + 1);
         // Shuffle
@@ -354,8 +350,8 @@ class Vector {
     /// @param start the index of the first element to remove
     /// @param count the number of elements to remove
     void Erase(size_t start, size_t count = 1) {
-        TINT_ASSERT(Utils, start < Length());
-        TINT_ASSERT(Utils, (start + count) <= Length());
+        TINT_ASSERT(start < Length());
+        TINT_ASSERT((start + count) <= Length());
         // Shuffle
         for (size_t i = start + count; i < impl_.slice.len; i++) {
             auto& src = impl_.slice.data[i];
@@ -802,6 +798,47 @@ class VectorRef {
     bool can_move_ = false;
 };
 
+/// Prints the vector @p vec to @p o
+/// @param o the stream to write to
+/// @param vec the vector
+/// @return the stream so calls can be chained
+template <typename STREAM,
+          typename T,
+          size_t N,
+          typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, const Vector<T, N>& vec) {
+    o << "[";
+    bool first = true;
+    for (auto& el : vec) {
+        if (!first) {
+            o << ", ";
+        }
+        first = false;
+        o << el;
+    }
+    o << "]";
+    return o;
+}
+
+/// Prints the vector @p vec to @p o
+/// @param o the stream to write to
+/// @param vec the vector reference
+/// @return the stream so calls can be chained
+template <typename STREAM, typename T, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, VectorRef<T> vec) {
+    o << "[";
+    bool first = true;
+    for (auto& el : vec) {
+        if (!first) {
+            o << ", ";
+        }
+        first = false;
+        o << el;
+    }
+    o << "]";
+    return o;
+}
+
 /// Helper for converting a Vector to a std::vector.
 /// @note This helper exists to help code migration. Avoid if possible.
 template <typename T, size_t N>
@@ -826,43 +863,33 @@ Vector<T, N> ToVector(const std::vector<T>& vector) {
     return out;
 }
 
-/// Prints the vector @p vec to @p o
-/// @param o the stream to write to
-/// @param vec the vector
-/// @return the stream so calls can be chained
+/// Hasher specialization for utils::Vector
 template <typename T, size_t N>
-inline StringStream& operator<<(StringStream& o, const Vector<T, N>& vec) {
-    o << "[";
-    bool first = true;
-    for (auto& el : vec) {
-        if (!first) {
-            o << ", ";
+struct Hasher<utils::Vector<T, N>> {
+    /// @param vector the Vector to hash
+    /// @returns a hash of the Vector
+    size_t operator()(const utils::Vector<T, N>& vector) const {
+        auto hash = Hash(vector.Length());
+        for (auto& el : vector) {
+            hash = HashCombine(hash, el);
         }
-        first = false;
-        o << el;
+        return hash;
     }
-    o << "]";
-    return o;
-}
+};
 
-/// Prints the vector @p vec to @p o
-/// @param o the stream to write to
-/// @param vec the vector reference
-/// @return the stream so calls can be chained
+/// Hasher specialization for utils::VectorRef
 template <typename T>
-inline StringStream& operator<<(StringStream& o, VectorRef<T> vec) {
-    o << "[";
-    bool first = true;
-    for (auto& el : vec) {
-        if (!first) {
-            o << ", ";
+struct Hasher<utils::VectorRef<T>> {
+    /// @param vector the VectorRef reference to hash
+    /// @returns a hash of the Vector
+    size_t operator()(const utils::VectorRef<T>& vector) const {
+        auto hash = Hash(vector.Length());
+        for (auto& el : vector) {
+            hash = HashCombine(hash, el);
         }
-        first = false;
-        o << el;
+        return hash;
     }
-    o << "]";
-    return o;
-}
+};
 
 namespace detail {
 

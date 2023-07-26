@@ -16,6 +16,8 @@
 #define SRC_TINT_LANG_WGSL_SEM_BEHAVIOR_H_
 
 #include "src/tint/utils/containers/enum_set.h"
+#include "src/tint/utils/string/stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::sem {
 
@@ -31,11 +33,18 @@ enum class Behavior {
 /// Behaviors is a set of Behavior
 using Behaviors = utils::EnumSet<Behavior>;
 
+/// @param behavior the behavior
+/// @returns the string for the given enumerator
+std::string_view ToString(Behavior behavior);
+
 /// Writes the Behavior to the stream.
 /// @param out the stream to write to
 /// @param behavior the Behavior to write
 /// @returns out so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, Behavior behavior);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, Behavior behavior) {
+    return out << ToString(behavior);
+}
 
 }  // namespace tint::sem
 

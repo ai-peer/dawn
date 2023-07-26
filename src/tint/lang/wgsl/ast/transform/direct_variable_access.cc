@@ -32,7 +32,7 @@
 #include "src/tint/lang/wgsl/sem/variable.h"
 #include "src/tint/utils/containers/reverse.h"
 #include "src/tint/utils/macros/scoped_assignment.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::DirectVariableAccess);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::DirectVariableAccess::Config);
@@ -1103,7 +1103,7 @@ struct DirectVariableAccess::State {
                 continue;
             }
 
-            TINT_ICE(Transform, b.Diagnostics()) << "unhandled variant for access chain";
+            TINT_ICE() << "unhandled variant for access chain";
             break;
         }
         return ss.str();
@@ -1151,7 +1151,7 @@ struct DirectVariableAccess::State {
             return b.MemberAccessor(expr, ctx.Clone(*member));
         }
 
-        TINT_ICE(Transform, b.Diagnostics()) << "unhandled variant type for access chain";
+        TINT_ICE() << "unhandled variant type for access chain";
         return nullptr;
     }
 
