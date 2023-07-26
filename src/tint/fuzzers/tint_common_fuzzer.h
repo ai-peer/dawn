@@ -32,13 +32,13 @@ namespace tint::fuzzers {
 //                            that are potentially valid for Generate*Options
 //                            functions.
 /// Generates random set of options for SPIRV generation
-void GenerateSpirvOptions(DataBuilder* b, writer::spirv::Options* options);
+void GenerateSpirvOptions(DataBuilder* b, spirv::writer::Options* options);
 
 /// Generates random set of options for WGSL generation
-void GenerateWgslOptions(DataBuilder* b, writer::wgsl::Options* options);
+void GenerateWgslOptions(DataBuilder* b, wgsl::writer::Options* options);
 
 /// Generates random set of options for HLSL generation
-void GenerateHlslOptions(DataBuilder* b, writer::hlsl::Options* options);
+void GenerateHlslOptions(DataBuilder* b, hlsl::writer::Options* options);
 
 /// Generates random set of options for MSL generation
 void GenerateMslOptions(DataBuilder* b, msl::writer::Options* options);
@@ -106,13 +106,13 @@ class CommonFuzzer {
     const std::string& GetGeneratedMsl() const { return generated_msl_; }
 
     /// @param options SPIR-V emission options
-    void SetOptionsSpirv(const writer::spirv::Options& options) { options_spirv_ = options; }
+    void SetOptionsSpirv(const spirv::writer::Options& options) { options_spirv_ = options; }
 
     /// @param options WGSL emission options
-    void SetOptionsWgsl(const writer::wgsl::Options& options) { options_wgsl_ = options; }
+    void SetOptionsWgsl(const wgsl::writer::Options& options) { options_wgsl_ = options; }
 
     /// @param options HLSL emission options
-    void SetOptionsHlsl(const writer::hlsl::Options& options) { options_hlsl_ = options; }
+    void SetOptionsHlsl(const hlsl::writer::Options& options) { options_hlsl_ = options; }
 
     /// @param options MSL emission options
     void SetOptionsMsl(const msl::writer::Options& options) { options_msl_ = options; }
@@ -131,9 +131,9 @@ class CommonFuzzer {
     std::string generated_hlsl_;
     std::string generated_msl_;
 
-    writer::spirv::Options options_spirv_;
-    writer::wgsl::Options options_wgsl_;
-    writer::hlsl::Options options_hlsl_;
+    spirv::writer::Options options_spirv_;
+    wgsl::writer::Options options_wgsl_;
+    hlsl::writer::Options options_hlsl_;
     msl::writer::Options options_msl_;
 
 #if TINT_BUILD_WGSL_READER

@@ -165,10 +165,10 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
 /// @returns true on success
 bool GenerateSpirv(const tint::Program* program) {
 #if TINT_BUILD_SPV_WRITER
-    tint::writer::spirv::Options gen_options;
+    tint::spirv::writer::Options gen_options;
     gen_options.external_texture_options.bindings_map =
         tint::cmd::GenerateExternalTextureBindings(program);
-    auto result = tint::writer::spirv::Generate(program, gen_options);
+    auto result = tint::spirv::writer::Generate(program, gen_options);
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
         std::cerr << "Failed to generate: " << result.error << std::endl;
@@ -187,8 +187,8 @@ bool GenerateSpirv(const tint::Program* program) {
 /// @returns true on success
 bool GenerateWgsl(const tint::Program* program) {
 #if TINT_BUILD_WGSL_WRITER
-    tint::writer::wgsl::Options gen_options;
-    auto result = tint::writer::wgsl::Generate(program, gen_options);
+    tint::wgsl::writer::Options gen_options;
+    auto result = tint::wgsl::writer::Generate(program, gen_options);
     if (!result.success) {
         std::cerr << "Failed to generate: " << result.error << std::endl;
         return false;
@@ -243,10 +243,10 @@ bool GenerateMsl(const tint::Program* program) {
 /// @returns true on success
 bool GenerateHlsl(const tint::Program* program) {
 #if TINT_BUILD_HLSL_WRITER
-    tint::writer::hlsl::Options gen_options;
+    tint::hlsl::writer::Options gen_options;
     gen_options.external_texture_options.bindings_map =
         tint::cmd::GenerateExternalTextureBindings(program);
-    auto result = tint::writer::hlsl::Generate(program, gen_options);
+    auto result = tint::hlsl::writer::Generate(program, gen_options);
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
         std::cerr << "Failed to generate: " << result.error << std::endl;
@@ -266,10 +266,10 @@ bool GenerateHlsl(const tint::Program* program) {
 /// @returns true on success
 bool GenerateGlsl(const tint::Program* program) {
 #if TINT_BUILD_GLSL_WRITER
-    tint::writer::glsl::Options gen_options;
+    tint::glsl::writer::Options gen_options;
     gen_options.external_texture_options.bindings_map =
         tint::cmd::GenerateExternalTextureBindings(program);
-    auto result = tint::writer::glsl::Generate(program, gen_options, "");
+    auto result = tint::glsl::writer::Generate(program, gen_options, "");
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
         std::cerr << "Failed to generate: " << result.error << std::endl;
@@ -295,7 +295,7 @@ int main(int argc, const char** argv) {
 
 #if TINT_BUILD_WGSL_WRITER
     tint::Program::printer = [](const tint::Program* program) {
-        auto result = tint::writer::wgsl::Generate(program, {});
+        auto result = tint::wgsl::writer::Generate(program, {});
         if (!result.error.empty()) {
             return "error: " + result.error;
         }

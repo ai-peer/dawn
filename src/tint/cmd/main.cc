@@ -29,11 +29,6 @@
 #include "glslang/Public/ShaderLang.h"
 #endif  // TINT_BUILD_GLSL_WRITER
 
-#if TINT_BUILD_SYNTAX_TREE_WRITER
-#include "src/tint/lang/wgsl/syntax_tree_writer/generator.h"  // nogncheck
-
-#endif  // TINT_BUILD_SYNTAX_TREE_WRITER
-
 #if TINT_BUILD_SPV_READER || TINT_BUILD_SPV_WRITER
 #include "spirv-tools/libspirv.hpp"
 #endif  // TINT_BUILD_SPV_READER || TINT_BUILD_SPV_WRITER
@@ -507,7 +502,7 @@ std::string Disassemble(const std::vector<uint32_t>& data) {
 bool GenerateSpirv(const tint::Program* program, const Options& options) {
 #if TINT_BUILD_SPV_WRITER
     // TODO(jrprice): Provide a way for the user to set non-default options.
-    tint::writer::spirv::Options gen_options;
+    tint::spirv::writer::Options gen_options;
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
     gen_options.external_texture_options.bindings_map =
@@ -515,7 +510,7 @@ bool GenerateSpirv(const tint::Program* program, const Options& options) {
 #if TINT_BUILD_IR
     gen_options.use_tint_ir = options.use_ir;
 #endif
-    auto result = tint::writer::spirv::Generate(program, gen_options);
+    auto result = tint::spirv::writer::Generate(program, gen_options);
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
         std::cerr << "Failed to generate: " << result.error << std::endl;
@@ -566,8 +561,8 @@ bool GenerateSpirv(const tint::Program* program, const Options& options) {
 bool GenerateWgsl(const tint::Program* program, const Options& options) {
 #if TINT_BUILD_WGSL_WRITER
     // TODO(jrprice): Provide a way for the user to set non-default options.
-    tint::writer::wgsl::Options gen_options;
-    auto result = tint::writer::wgsl::Generate(program, gen_options);
+    tint::wgsl::writer::Options gen_options;
+    auto result = tint::wgsl::writer::Generate(program, gen_options);
     if (!result.success) {
         std::cerr << "Failed to generate: " << result.error << std::endl;
         return false;
@@ -688,13 +683,13 @@ bool GenerateMsl(const tint::Program* program, const Options& options) {
 bool GenerateHlsl(const tint::Program* program, const Options& options) {
 #if TINT_BUILD_HLSL_WRITER
     // TODO(jrprice): Provide a way for the user to set non-default options.
-    tint::writer::hlsl::Options gen_options;
+    tint::hlsl::writer::Options gen_options;
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
     gen_options.external_texture_options.bindings_map =
         tint::cmd::GenerateExternalTextureBindings(program);
     gen_options.root_constant_binding_point = options.hlsl_root_constant_binding_point;
-    auto result = tint::writer::hlsl::Generate(program, gen_options);
+    auto result = tint::hlsl::writer::Generate(program, gen_options);
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
         std::cerr << "Failed to generate: " << result.error << std::endl;
@@ -831,11 +826,11 @@ bool GenerateGlsl(const tint::Program* program, const Options& options) {
     }
 
     auto generate = [&](const tint::Program* prg, const std::string entry_point_name) -> bool {
-        tint::writer::glsl::Options gen_options;
+        tint::glsl::writer::Options gen_options;
         gen_options.disable_robustness = !options.enable_robustness;
         gen_options.external_texture_options.bindings_map =
             tint::cmd::GenerateExternalTextureBindings(prg);
-        auto result = tint::writer::glsl::Generate(prg, gen_options, entry_point_name);
+        auto result = tint::glsl::writer::Generate(prg, gen_options, entry_point_name);
         if (!result.success) {
             tint::cmd::PrintWGSL(std::cerr, *prg);
             std::cerr << "Failed to generate: " << result.error << std::endl;
@@ -910,7 +905,7 @@ int main(int argc, const char** argv) {
 
 #if TINT_BUILD_WGSL_WRITER
     tint::Program::printer = [](const tint::Program* program) {
-        auto result = tint::writer::wgsl::Generate(program, {});
+        auto result = tint::wgsl::writer::Generate(program, {});
         if (!result.error.empty()) {
             return "error: " + result.error;
         }
@@ -1033,12 +1028,13 @@ int main(int argc, const char** argv) {
 
 #if TINT_BUILD_SYNTAX_TREE_WRITER
     if (options.dump_ast) {
-        tint::writer::syntax_tree::Options gen_options;
-        auto result = tint::writer::syntax_tree::Generate(program.get(), gen_options);
+        tint::wgsl::writer::Options gen_options;
+        gen_options.use_syntax_tree_writer = true;
+        auto result = tint::wgsl::writer::Generate(program.get(), gen_options);
         if (!result.success) {
             std::cerr << "Failed to dump AST: " << result.error << std::endl;
         } else {
-            std::cout << result.ast << std::endl;
+            std::cout << result.wgsl << std::endl;
         }
     }
 #endif  // TINT_BUILD_SYNTAX_TREE_WRITER
