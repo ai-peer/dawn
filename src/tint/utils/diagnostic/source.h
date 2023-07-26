@@ -193,14 +193,18 @@ class Source {
     const File* file = nullptr;
 };
 
+/// @returns
+std::string ToString(const Source& source);
+/// @returns
+std::string ToString(const Source::FileContent& content);
+
 /// Writes the Source::Location to the stream.
 /// @param out the stream to write to
 /// @param loc the location to write
 /// @returns out so calls can be chained
 template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
 auto& operator<<(STREAM& out, const Source::Location& loc) {
-    out << loc.line << ":" << loc.column;
-    return out;
+    return out << loc.line << ":" << loc.column;
 }
 
 /// Writes the Source::Range to the stream.
@@ -209,15 +213,17 @@ auto& operator<<(STREAM& out, const Source::Location& loc) {
 /// @returns out so calls can be chained
 template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
 auto& operator<<(STREAM& out, const Source::Range& range) {
-    out << "[" << range.begin << ", " << range.end << "]";
-    return out;
+    return out << "[" << range.begin << ", " << range.end << "]";
 }
 
 /// Writes the Source to the stream.
 /// @param out the stream to write to
 /// @param source the source to write
 /// @returns out so calls can be chained
-StringStream& operator<<(StringStream& out, const Source& source);
+template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, const Source& source) {
+    return out << ToString(source);
+}
 
 /// Writes the Source::FileContent to the stream.
 /// @param out the stream to write to
@@ -225,8 +231,7 @@ StringStream& operator<<(StringStream& out, const Source& source);
 /// @returns out so calls can be chained
 template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
 auto& operator<<(STREAM& out, const Source::FileContent& content) {
-    out << content.data;
-    return out;
+    return content.data;
 }
 
 }  // namespace tint

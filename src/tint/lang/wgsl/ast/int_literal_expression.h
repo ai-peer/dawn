@@ -16,6 +16,7 @@
 #define SRC_TINT_LANG_WGSL_AST_INT_LITERAL_EXPRESSION_H_
 
 #include "src/tint/lang/wgsl/ast/literal_expression.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::ast {
 

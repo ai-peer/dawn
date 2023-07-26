@@ -17,7 +17,7 @@
 
 #include <string>
 
-#include "src/tint/utils/generation_id.h"
+#include "src/tint/utils/id/generation.h"
 
 namespace tint {
 

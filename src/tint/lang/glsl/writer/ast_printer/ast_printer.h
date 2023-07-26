@@ -22,12 +22,12 @@
 #include <utility>
 
 #include "src/tint/lang/core/builtin/builtin_value.h"
-#include "src/tint/lang/glsl/writer/version.h"
+#include "src/tint/lang/glsl/writer/common/version.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/utils/containers/scope_stack.h"
 #include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/text/string_stream.h"
-#include "src/tint/utils/text/text_generator.h"
+#include "src/tint/utils/generator/text.h"
 
 // Forward declarations
 namespace tint::sem {
@@ -439,8 +439,16 @@ class ASTPrinter : public tint::TextGenerator {
     /// @returns the corresponding uint type
     type::Type* BoolTypeToUint(const type::Type* type);
 
-    /// @copydoc tint::TextWrtiter::UniqueIdentifier
-    std::string UniqueIdentifier(const std::string& prefix = "") override;
+    /// @param s the structure
+    /// @returns the name of the structure, taking special care of builtin structures that start
+    /// with double underscores. If the structure is a builtin, then the returned name will be a
+    /// unique name without the leading underscores.
+    std::string StructName(const type::Struct* s);
+
+    /// @return a new, unique identifier with the given prefix.
+    /// @param prefix optional prefix to apply to the generated identifier. If empty "tint_symbol"
+    /// will be used.
+    std::string UniqueIdentifier(const std::string& prefix = "");
 
     /// Alias for builder_.TypeOf(ptr)
     template <typename T>
