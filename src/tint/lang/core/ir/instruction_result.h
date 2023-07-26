@@ -16,7 +16,7 @@
 #define SRC_TINT_LANG_CORE_IR_INSTRUCTION_RESULT_H_
 
 #include "src/tint/lang/core/ir/value.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::ir {
 

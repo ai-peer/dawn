@@ -17,7 +17,7 @@
 #include "src/tint/lang/wgsl/reader/reader.h"
 #include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.h"
 #include "src/tint/lang/wgsl/writer/writer.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 #if !TINT_BUILD_WGSL_READER || !TINT_BUILD_WGSL_WRITER
 #error "ir_roundtrip_test.cc requires both the WGSL reader and writer to be enabled"

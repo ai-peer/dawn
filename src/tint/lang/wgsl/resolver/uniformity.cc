@@ -42,7 +42,7 @@
 #include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/memory/block_allocator.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 // Set to `1` to dump the uniformity graph for each function in graphviz format.
 #define TINT_DUMP_UNIFORMITY_GRAPH 0

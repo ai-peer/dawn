@@ -17,7 +17,7 @@
 #include <vector>
 
 #include "gmock/gmock.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint {
 namespace {

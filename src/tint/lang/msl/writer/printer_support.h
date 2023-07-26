@@ -22,6 +22,7 @@
 #include "src/tint/lang/core/builtin/interpolation.h"
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::msl::writer {
 
