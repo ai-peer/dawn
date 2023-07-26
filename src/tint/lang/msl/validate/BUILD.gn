@@ -20,6 +20,20 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+if (tint_build_msl_writer) {
+  libtint_source_set("validate") {
+    sources = [
+      "msl.cc",
+      "val.h",
+    ]
+    deps = [
+      "${tint_src_dir}/lang/wgsl/ast",
+      "${tint_src_dir}/lang/wgsl/program",
+      "${tint_src_dir}/utils/command",
+      "${tint_src_dir}/utils/file",
+    ]
+  }
+}
