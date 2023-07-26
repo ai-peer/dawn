@@ -21,7 +21,6 @@
 #include <utility>
 #include <vector>
 
-#include "src/tint/lang/wgsl/ast/builder.h"
 #include "src/tint/utils/containers/hashmap.h"
 #include "src/tint/utils/containers/hashset.h"
 #include "src/tint/utils/containers/vector.h"
@@ -36,6 +35,7 @@
 
 // Forward declarations
 namespace tint::ast {
+class Builder;
 class FunctionList;
 class Node;
 struct Type;

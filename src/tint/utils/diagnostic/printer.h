@@ -16,9 +16,7 @@
 #define SRC_TINT_UTILS_DIAGNOSTIC_PRINTER_H_
 
 #include <memory>
-#include <string>
-
-#include "src/tint/utils/text/string_stream.h"
+#include <sstream>
 
 namespace tint::diag {
 
@@ -74,7 +72,7 @@ class StringPrinter : public Printer {
     void write(const std::string& str, const Style&) override;
 
   private:
-    StringStream stream;
+    std::stringstream stream;
 };
 
 }  // namespace tint::diag
