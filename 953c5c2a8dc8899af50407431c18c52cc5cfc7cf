@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb281b01_599f8d86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-26T22:17:08Z",
+      "side": 1,
+      "message": "I can test some other possible variants of the bug to be sure!\n\nI originally tried to keep the first resolve on the original pass, but that was failing as well, which is why I opted to break all of them out into separate resolves.\n\nThinking about it now, though, I realize that the heuristic I\u0027m using is wrong give that\u0027s the case. I\u0027m checking that the number of resolves \u003e 1, but I should be checking for the number of color targets \u003e 1 and number of resolves \u003e\u003d 1, otherwise a pass with multiple color targets that only resolves one of them will hit the same bug.",
+      "parentUuid": "ec4927d9_8ceefb9e",
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3004e75_b66faa95",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2023-07-26T22:05:48Z",
       "side": 1,
       "message": "nit: transformResolveToStore is slightly better IMO. Suppressing could mean that resolve is simply disabled and the store op keeps using discard",
+      "range": {
+        "startLine": 204,
+        "startChar": 33,
+        "endLine": 204,
+        "endChar": 54
+      },
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5bf8db3_57dfe744",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-26T22:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3004e75_b66faa95",
       "range": {
         "startLine": 204,
         "startChar": 33,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0528d9f6_28ef49bc",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-26T22:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88499b59_a8231651",
+      "range": {
+        "startLine": 374,
+        "startChar": 78,
+        "endLine": 374,
+        "endChar": 79
+      },
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc7aa325_45e29bf1",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-07-26T22:05:48Z",
       "side": 1,
       "message": "uunit:\n\n```suggestion\n            createInfo.attachmentCount \u003d attachments.size();\n```",
+      "range": {
+        "startLine": 391,
+        "startChar": 41,
+        "endLine": 391,
+        "endChar": 42
+      },
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88662d1_d996e8db",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-26T22:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc7aa325_45e29bf1",
       "range": {
         "startLine": 391,
         "startChar": 41,
