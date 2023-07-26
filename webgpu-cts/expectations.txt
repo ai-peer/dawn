@@ -60,7 +60,7 @@
 # WebGPU Backend Validation
 # tags: [ dawn-backend-validation dawn-no-backend-validation ]
 # WebGPU Adapter
-# tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
+# tags: [ webgpu-adapter-default webgpu-adapter-swiftshader webgpu-adapter-d3d11 ]
 # WebGPU Compat Mode
 # tags: [ webgpu-compat webgpu-not-compat ]
 # Clang coverage
@@ -90,6 +90,65 @@ crbug.com/1344876 [ mac webgpu-adapter-swiftshader ] webgpu:web_platform,copyToT
 crbug.com/1344876 [ webgpu-adapter-swiftshader win ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_2d_context_canvas:* [ Skip ]
 crbug.com/1344876 [ mac webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gl_context_canvas:* [ Skip ]
 crbug.com/1344876 [ webgpu-adapter-swiftshader win ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gl_context_canvas:* [ Skip ]
+
+################################################################################
+# primitive_restart can't be turned off on D3D11
+# KEEP
+################################################################################
+crbug.com/dawn/1907 [ webgpu-adapter-d3d11 win ] webgpu:api,operation,vertex_state,index_format:primitive_restart:* [ Skip ]
+
+################################################################################
+# FXC sm5.0 specfic bugs
+# KEEP
+################################################################################
+crbug.com/dawn/1911 [ webgpu-adapter-d3d11 win ] webgpu:shader,execution,expression,call,builtin,atomics,* [ Skip ]
+crbug.com/dawn/1911 [ webgpu-adapter-d3d11 win ] webgpu:shader,execution,flow_control,* [ Skip ]
+crbug.com/dawn/1911 [ webgpu-adapter-d3d11 win ] webgpu:shader,execution,zero_init:compute,zero_init:* [ Skip ]
+
+################################################################################
+# Intel failures on D3D11
+# KEEP
+################################################################################
+crbug.com/dawn/1942 [ webgpu-adapter-d3d11 win intel ] webgpu:api,operation,command_buffer,image_copy:origins_and_extents:initMethod="WriteTexture";checkMethod="FullCopyT2B";format="rgba32uint";dimension="2d" [ Skip ]
+crbug.com/dawn/1942 [ webgpu-adapter-d3d11 win intel ] webgpu:api,operation,command_buffer,image_copy:origins_and_extents:initMethod="WriteTexture";checkMethod="FullCopyT2B";format="rgba32sint";dimension="2d" [ Skip ]
+crbug.com/dawn/1942 [ webgpu-adapter-d3d11 win intel ] webgpu:api,operation,command_buffer,image_copy:origins_and_extents:initMethod="CopyB2T";checkMethod="FullCopyT2B";format="rgba32uint";dimension="2d" [ Skip ]
+crbug.com/dawn/1942 [ webgpu-adapter-d3d11 win intel ] webgpu:api,operation,command_buffer,image_copy:origins_and_extents:initMethod="CopyB2T";checkMethod="FullCopyT2B";format="rgba32sint";dimension="2d" [ Skip ]
+crbug.com/dawn/1943 [ webgpu-adapter-d3d11 win intel ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;* [ Skip ]
+crbug.com/dawn/1844 [ webgpu-adapter-d3d11 win intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";* [ Skip ]
+
+################################################################################
+# Intel Gen9 spcific failures on D3D11
+# KEEP
+################################################################################
+crbug.com/dawn/1941 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="stencil8" [ Skip ]
+crbug.com/dawn/1944 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:api,operation,memory_sync,texture,same_subresource:ww:boundary="command-buffer";first={"op":"storage","in":"compute-pass-encoder"};second={"op":"attachment-store","in":"command-encoder"} [ Skip ]
+crbug.com/dawn/1945 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:api,validation,error_scope:simple:errorType="out-of-memory";* [ Skip ]
+crbug.com/dawn/1946 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:shader,execution,expression,binary,u32_arithmetic:subtraction_vector_scalar_compound:inputSource="const";* [ Skip ]
+crbug.com/dawn/1946 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:shader,execution,expression,binary,bitwise_shift:shift_left_concrete_compound:type="i32";inputSource="const";vectorize="_undef_" [ Skip ]
+crbug.com/dawn/1946 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:shader,execution,expression,binary,bitwise_shift:shift_left_concrete_compound:type="u32";inputSource="const";vectorize="_undef_" [ Skip ]
+crbug.com/dawn/1947 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:shader,execution,expression,binary,i32_arithmetic:subtraction:inputSource="const";vectorize=4 [ Skip ]
+crbug.com/dawn/1947 [ webgpu-adapter-d3d11 win intel-gen-9 ] webgpu:shader,execution,expression,binary,i32_arithmetic:subtraction_compound:inputSource="const";vectorize=4 [ Skip ]
+
+################################################################################
+# Intel Gen12 spcific failures on D3D11
+# KEEP
+################################################################################
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="r16float";dstFormat="r16float";* [ Skip ]
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg16float";dstFormat="rg16float";* [ Skip ]
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rgba16float";dstFormat="rgba16float";* [ Skip ]
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg11b10ufloat";dstFormat="rg11b10ufloat";* [ Skip ]
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="r16float";dstFormat="r16float";* [ Skip ]
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="rg16float";dstFormat="rg16float";* [ Skip ]
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="rgba16float";dstFormat="rgba16float";* [ Skip ]
+crbug.com/dawn/1935 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="rg11b10ufloat";dstFormat="rg11b10ufloat";* [ Skip ]
+crbug.com/dawn/1948 [ webgpu-adapter-d3d11 win intel-gen-12 ] webgpu:shader,execution,expression,call,builtin,unpack4x8unorm:unpack:* [ Skip ]
+
+################################################################################
+# Untriaged Nvidia failures on D3D11
+# KEEP
+################################################################################
+crbug.com/dawn/0000 [ webgpu-adapter-d3d11 win nvidia ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="rgba8unorm-srgb";* [ Skip ]
+crbug.com/dawn/0000 [ webgpu-adapter-d3d11 win nvidia ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="bgra8unorm-srgb";* [ Skip ]
 
 ################################################################################
 # external_texture failures
