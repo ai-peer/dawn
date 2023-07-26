@@ -1,0 +1,78 @@
+
+import("{{Repeat "../" .Depth}}../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+{{- Eval "SourceSetIfNotEmpty" ($.Project.Target $ "lib")}}
+{{- Eval "SourceSetIfNotEmpty" ($.Project.Target $ "cmd")}}
+{{- Eval "SourceSetIfNotEmpty" ($.Project.Target $ "test")}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a GN source set if it contains any files
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "SourceSetIfNotEmpty"}}
+{{-   if len $.Files}}{{Eval "SourceSet" $}}{{end}}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a GN source set
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "SourceSet"}}
+
+{{  if      eq $.Kind "lib"  }}libtint_source_set("{{$.Directory.Name}}") {
+{{- else if eq $.Kind "cmd"  }}executable("{{$.Directory.Name}}") {
+{{- else if eq $.Kind "test" }}tint_unittests_source_set("unittests") {
+{{- else                     }}{{Error $.Kind}}
+{{- end                      }}
+  sources = [
+{{- range $File := $.Files}}
+{{-   if not $File.Condition}}
+    "{{TrimPrefix (TrimPrefix $File.Name $.Directory.Path) "/"}}",
+{{-   end}}
+{{- end}}
+  ]
+{{- range $File := $.Files}}
+{{-   if $File.Condition}}
+    if ({{$File.Condition}}) {
+      sources += ["{{TrimPrefix (TrimPrefix $File.Name $.Directory.Path) "/"}}"]
+    }
+{{-   end}}
+{{- end}}
+  deps = [
+{{- range $Dep := $.Dependencies}}
+    "{{Eval "TargetPath" $Dep}}",
+{{- end}}
+{{- range $Dep := index $.Config "GNAdditionalDependencies"}}
+    "{{$Dep}}",
+{{- end}}
+  ]
+{{- if $Cfgs := index $.Config "GNPublicConfigs"}}
+  public_configs = [
+{{-   range $Cfg := $Cfgs}}
+    "{{$Cfg}}",
+{{-   end}}
+  ]
+{{- end}}
+}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a GN target path
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "TargetPath"}}
+{{-   $Path := printf "${tint_src_dir}%v" (TrimPrefix $.Directory.Path "src/tint") }}
+{{-   if      eq $.Kind "lib"  }}{{$Path}}
+{{-   else if eq $.Kind "test" }}{{$Path}}:unittests
+{{-   else                     }}{{$Path}}:{{$.Kind}}
+{{-   end}}
+{{- end}}
+

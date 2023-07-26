@@ -14,8 +14,8 @@
 
 #include <iostream>
 
-#include "src/tint/cmd/generate_external_texture_bindings.h"
-#include "src/tint/cmd/helper.h"
+#include "src/tint/cmd/common/generate_external_texture_bindings.h"
+#include "src/tint/cmd/common/helper.h"
 #include "tint/tint.h"
 
 #if TINT_BUILD_IR
@@ -350,7 +350,7 @@ int main(int argc, const char** argv) {
 
             uint32_t loop_count = options.loop_count;
             for (uint32_t i = 0; i < loop_count; ++i) {
-                program = std::make_unique<tint::Program>(tint::spirv::reader::Parse(data, {}));
+                program = std::make_unique<tint::Program>(tint::spirv::reader::Read(data, {}));
             }
 #else
             std::cerr << "Tint not built with the SPIR-V reader enabled" << std::endl;

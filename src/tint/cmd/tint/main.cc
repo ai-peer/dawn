@@ -33,8 +33,8 @@
 #include "spirv-tools/libspirv.hpp"
 #endif  // TINT_BUILD_SPV_READER || TINT_BUILD_SPV_WRITER
 
-#include "src/tint/cmd/generate_external_texture_bindings.h"
-#include "src/tint/cmd/helper.h"
+#include "src/tint/cmd/common/generate_external_texture_bindings.h"
+#include "src/tint/cmd/common/helper.h"
 #include "src/tint/lang/hlsl/validate/val.h"
 #include "src/tint/lang/msl/validate/val.h"
 #include "src/tint/lang/wgsl/ast/module.h"
