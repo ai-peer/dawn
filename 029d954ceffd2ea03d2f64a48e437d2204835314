@@ -60,6 +60,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee68d6f4_f16dd5cf",
+        "filename": "src/tint/lang/spirv/writer/printer/access_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-26T13:05:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure where else they\u0027d live at this point? This at least keeps them along side the printer which is the main source of their output?",
+      "parentUuid": "50b22b8a_1008a577",
+      "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33c89d89_442b8691",
         "filename": "src/tint/lang/spirv/writer/printer/test_helper.h",
         "patchSetId": 5
@@ -71,6 +89,24 @@
       "writtenOn": "2023-07-26T11:05:17Z",
       "side": 1,
       "message": "Which is it? As above, most of the tests here are actually testing the full `Writer`, not just the `Printer`.",
+      "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42cd34c5_ea321a78",
+        "filename": "src/tint/lang/spirv/writer/printer/test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-26T13:05:28Z",
+      "side": 1,
+      "message": "There is no `Writer`. The writer file is just a `Generate` call. This is the `Printer` I haven\u0027t been updating the variable names during the moves as it becomes too many moving parts if you\u0027re also renaming all the `writer`, `gen`, `g`, `b` variables we have everywhere.",
+      "parentUuid": "33c89d89_442b8691",
       "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
