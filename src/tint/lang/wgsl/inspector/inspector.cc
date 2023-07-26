@@ -57,7 +57,7 @@
 #include "src/tint/utils/containers/unique_vector.h"
 #include "src/tint/utils/math/math.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::inspector {
 
