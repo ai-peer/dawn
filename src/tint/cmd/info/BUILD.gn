@@ -20,6 +20,23 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+executable("info") {
+  sources = [ "main.cc" ]
+  deps = [
+    "${tint_src_dir}/cmd/common",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/inspector",
+    "${tint_src_dir}/utils/command",
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/text",
+  ]
+
+  if (tint_build_spv_reader || tint_build_spv_writer) {
+    deps += [ "${tint_spirv_tools_dir}:spvtools_headers" ]
+  }
+}
