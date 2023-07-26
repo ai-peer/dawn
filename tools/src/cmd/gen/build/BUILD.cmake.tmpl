@@ -1,0 +1,95 @@
+{{- range $subdir := $.Subdirectories }}
+include({{$subdir.Path}}/BUILD.cmake)
+{{- end }}
+
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "lib")}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "cmd")}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "test")}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a CMake target if it contains any files
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "TargetIfNotEmpty"}}
+{{-   if len $.Files}}{{Eval "Target" $}}{{end}}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a CMake target
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Target"}}
+
+{{  $name := Eval "TargetPath" $}}
+{{-      if eq $.Kind "lib"  }}add_library({{$name}} STATIC
+{{- else if eq $.Kind "cmd"  }}add_executable({{$name}}
+{{- else if eq $.Kind "test" }}target_sources(tint_unittests PRIVATE
+{{- end                      }}
+{{- range $File := $.Files}}
+{{-   if not $File.Condition}}
+  "{{$File.Path}}"
+{{-   end}}
+{{- end}}
+)
+
+{{- range $File := $.Files}}
+{{-   if $File.Condition}}
+if ({{Eval "Expression" $File.Condition}})
+  target_sources({{$name}} PRIVATE
+    "{{$File.Path}}"
+  )
+endif()
+{{-   end}}
+{{- end}}
+
+target_link_libraries({{$name}}
+{{-   range $Dep := $.Dependencies}}
+{{-     if ne $Dep.Kind "test"}}
+  {{Eval "TargetPath" $Dep}}
+{{-     end}}
+{{-   end}}
+)
+
+{{       if eq $.Kind "lib"   }}tint_default_compile_options({{$name}})
+{{- else if eq $.Kind "bench" }}tint_bench_compile_options({{$name}})
+{{- else if eq $.Kind "cmd"   }}tint_cmd_compile_options({{$name}})
+{{- end                       }}
+
+
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits the CMake library name of a target
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "TargetPath"}}
+{{-   if eq $.Kind "test"  }}tint_unittests
+{{-   else                 }}
+{{- $name := Replace (Replace (print $.Name) "/" "_") ":" "_"}}
+{{-     if eq $.Kind "lib"  }}lib_{{end}}
+{{-     if eq $name  "tint" }}tint
+{{-     else                }}tint_{{$name}}
+{{-     end}}
+{{-   end}}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a CMake conditional expression
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Expression"}}
+{{- $expr := $ }}
+{{- $expr = Replace $expr "!"  "NOT "}}
+{{- $expr = Replace $expr "&&" " AND "}}
+{{- $expr = Replace $expr "||" " OR "}}
+{{- ToUpper $expr}}
+{{- end}}
+
