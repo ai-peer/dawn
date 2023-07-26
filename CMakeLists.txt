@@ -461,6 +461,7 @@ set(CMAKE_CXX_STANDARD "17")
 set(TINT_LIB_FUZZING_ENGINE_LINK_OPTIONS "" CACHE STRING "Used by OSS-Fuzz to control, via link options, which fuzzing engine should be used")
 
 set(TINT_ROOT_SOURCE_DIR ${PROJECT_SOURCE_DIR})
+set(TINT_SPIRV_HEADERS_DIR ${DAWN_SPIRV_HEADERS_DIR})
 
 # CMake < 3.15 sets /W3 in CMAKE_CXX_FLAGS. Remove it if it's there.
 # See https://gitlab.kitware.com/cmake/cmake/-/issues/18317
@@ -472,10 +473,6 @@ endif()
 
 if (${TINT_CHECK_CHROMIUM_STYLE})
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -add-plugin -Xclang find-bad-constructs")
-endif()
-
-if (${TINT_BUILD_SPV_READER})
-  include_directories("${DAWN_THIRD_PARTY_DIR}/vulkan-deps/spirv-tools/include")
 endif()
 
 if((CMAKE_CXX_COMPILER_ID STREQUAL "Clang") AND (CMAKE_CXX_SIMULATE_ID STREQUAL "MSVC"))
@@ -495,17 +492,6 @@ endif()
 # Enable msbuild multiprocessor builds
 if (MSVC AND NOT COMPILER_IS_CLANG_CL)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
-endif()
-
-set(TINT_OS_CC_SUFFIX "other")
-if (NOT TINT_BUILD_AS_OTHER_OS)
-  if(UNIX OR APPLE)
-    set(TINT_OS_CC_SUFFIX "posix")
-    set(TINT_OS_CC_SUFFIX "posix")
-  elseif(WIN32)
-    set(TINT_OS_CC_SUFFIX "windows")
-    set(TINT_OS_CC_SUFFIX "windows")
-  endif()
 endif()
 
 if(${TINT_BUILD_DOCS})
@@ -536,121 +522,6 @@ if(${TINT_BUILD_DOCS})
   endif(DOXYGEN_FOUND)
 endif()
 
-function(tint_core_compile_options TARGET)
-  target_include_directories(${TARGET} PUBLIC "${TINT_ROOT_SOURCE_DIR}")
-  target_include_directories(${TARGET} PUBLIC "${TINT_ROOT_SOURCE_DIR}/include")
-
-  if (${TINT_BUILD_SPV_READER} OR ${TINT_BUILD_SPV_WRITER})
-    target_include_directories(${TARGET} PUBLIC
-        "${DAWN_THIRD_PARTY_DIR}/spirv-headers/include")
-  endif()
-
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_SPV_READER=$<BOOL:${TINT_BUILD_SPV_READER}>)
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_WGSL_READER=$<BOOL:${TINT_BUILD_WGSL_READER}>)
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_GLSL_WRITER=$<BOOL:${TINT_BUILD_GLSL_WRITER}>)
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_HLSL_WRITER=$<BOOL:${TINT_BUILD_HLSL_WRITER}>)
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_MSL_WRITER=$<BOOL:${TINT_BUILD_MSL_WRITER}>)
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_SPV_WRITER=$<BOOL:${TINT_BUILD_SPV_WRITER}>)
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_WGSL_WRITER=$<BOOL:${TINT_BUILD_WGSL_WRITER}>)
-  target_compile_definitions(${TARGET} PUBLIC
-      -DTINT_BUILD_SYNTAX_TREE_WRITER=$<BOOL:${TINT_BUILD_SYNTAX_TREE_WRITER}>)
-  target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_IR=$<BOOL:${TINT_BUILD_IR}>)
-
-  common_compile_options(${TARGET})
-endfunction()
-
-function(tint_default_compile_options TARGET)
-  tint_core_compile_options(${TARGET})
-
-  set(COMMON_GNU_OPTIONS
-    -Wall
-    -Werror
-    -Wextra
-    -Wno-documentation-unknown-command
-    -Wno-padded
-    -Wno-switch-enum
-    -Wno-unknown-pragmas
-  )
-
-  set(COMMON_CLANG_OPTIONS
-    -Wno-c++98-compat
-    -Wno-c++98-compat-pedantic
-    -Wno-format-pedantic
-    -Wno-poison-system-directories
-    -Wno-return-std-move-in-c++11
-    -Wno-unknown-warning-option
-    -Wno-undefined-var-template
-    -Wno-unsafe-buffer-usage
-    -Wno-used-but-marked-unused
-    -Weverything
-  )
-
-  if (COMPILER_IS_LIKE_GNU)
-    target_compile_options(${TARGET} PRIVATE
-      -pedantic-errors
-      ${COMMON_GNU_OPTIONS}
-    )
-
-    if (COMPILER_IS_CLANG)
-      target_compile_options(${TARGET} PRIVATE
-        ${COMMON_CLANG_OPTIONS}
-      )
-    endif()
-  endif(COMPILER_IS_LIKE_GNU)
-
-  if (MSVC)
-    # Specify /EHs for exception handling.
-    target_compile_options(${TARGET} PRIVATE
-      /bigobj
-      /EHsc
-      /W4
-      /WX
-      /wd4068 # unknown pragma
-      /wd4127 # conditional expression is constant
-      /wd4244 # 'conversion' conversion from 'type1' to 'type2', possible loss of data
-      /wd4267 # 'var' : conversion from 'size_t' to 'type', possible loss of data
-      /wd4324 # 'struct_name' : structure was padded due to __declspec(align())
-      /wd4459 # declaration of 'identifier' hides global declaration
-      /wd4458 # declaration of 'identifier' hides class member
-      /wd4514 # 'function' : unreferenced inline function has been removed
-      /wd4571 # catch(...) semantics changed since Visual C++ 7.1; structured exceptions (SEH) are no longer caught
-      /wd4625 # 'derived class' : copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
-      /wd4626 # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
-      /wd4710 # 'function' : function not inlined
-      /wd4774 # 'function' : format string 'string' requires an argument of type 'type', but variadic argument number has type 'type'
-      /wd4820 # 'bytes' bytes padding added after construct 'member_name'
-      /wd5026 # 'type': move constructor was implicitly defined as deleted
-      /wd5027 # 'type': move assignment operator was implicitly defined as deleted
-    )
-
-    # When building with clang-cl on Windows, try to match our clang build
-    # options as much as possible.
-    if (COMPILER_IS_CLANG_CL)
-      target_compile_options(${TARGET} PRIVATE
-        ${COMMON_GNU_OPTIONS}
-        ${COMMON_CLANG_OPTIONS}
-        # Disable warnings that are usually disabled in downstream deps for
-        # gcc/clang, but aren't for clang-cl.
-        -Wno-global-constructors
-        -Wno-zero-as-null-pointer-constant
-        -Wno-shorten-64-to-32
-        -Wno-shadow-field-in-constructor
-        -Wno-reserved-id-macro
-        -Wno-language-extension-token
-      )
-    endif()
-  endif()
-
-  if (TINT_RANDOMIZE_HASHES)
-    if(NOT DEFINED TINT_HASH_SEED)
-        string(RANDOM LENGTH 16 ALPHABET "0123456789abcdef" seed)
-        set(TINT_HASH_SEED "0x${seed}" CACHE STRING "Tint hash seed value")
-        message("Using TINT_HASH_SEED: ${TINT_HASH_SEED}")
-    endif()
-    target_compile_definitions(${TARGET} PUBLIC "-DTINT_HASH_SEED=${TINT_HASH_SEED}")
-  endif()
-endfunction()
-
 ################################################################################
 # Run on all subdirectories
 ################################################################################
@@ -670,15 +541,6 @@ add_subdirectory(src/dawn)
 ################################################################################
 # Samples
 ################################################################################
-
-if (TINT_BUILD_SAMPLES)
-  add_subdirectory(src/tint/cmd)
-endif()
-
-if (TINT_BUILD_FUZZERS)
-  add_subdirectory(src/tint/fuzzers)
-endif()
-
 add_custom_target(tint-lint
   COMMAND ./tools/lint
   WORKING_DIRECTORY ${TINT_ROOT_SOURCE_DIR}

@@ -67,7 +67,9 @@ endfunction()
 function(add_tint_spirv_tools_fuzzer NAME)
   set(FUZZER_TARGET_SOURCES ${NAME}.cc ${FUZZER_SOURCES})
   configure_spirv_tools_fuzzer_target(${NAME} "${FUZZER_TARGET_SOURCES}")
-  target_link_libraries(${NAME} libtint-fuzz)
+  target_link_libraries(${NAME} PRIVATE
+    libtint-fuzz
+  )
   target_compile_definitions(tint_spirv_tools_fuzzer PUBLIC CUSTOM_MUTATOR)
   target_compile_definitions(tint_spirv_tools_fuzzer PRIVATE TARGET_FUZZER)
 endfunction()
