@@ -130,7 +130,7 @@ func writeWGSLFile(tmpl string, funcs template.Functions) (string, error) {
 		return "", fmt.Errorf("failed to create benchmark WGSL test file: %w", err)
 	}
 	defer wgslFile.Close()
-	if err := template.Run(tmpl, wgslFile, funcs); err != nil {
+	if err := template.Run(tmpl, wgslFile, nil, funcs); err != nil {
 		return "", fmt.Errorf("template error:\n%w", err)
 	}
 	return path, nil
