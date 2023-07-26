@@ -23,3 +23,34 @@
 import("../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("api") {
+  sources = [
+    "tint.cc",
+    "tint.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/wgsl/reader",
+    "${tint_src_dir}/lang/wgsl/writer",
+  ]
+
+  if (tint_build_glsl_writer) {
+    deps += [ "${tint_src_dir}/lang/glsl/writer" ]
+  }
+
+  if (tint_build_hlsl_writer) {
+    deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
+  }
+
+  if (tint_build_msl_writer) {
+    deps += [ "${tint_src_dir}/lang/msl/writer" ]
+  }
+
+  if (tint_build_spv_reader) {
+    deps += [ "${tint_src_dir}/lang/spirv/reader" ]
+  }
+
+  if (tint_build_spv_writer) {
+    deps += [ "${tint_src_dir}/lang/spirv/writer" ]
+  }
+}
