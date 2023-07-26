@@ -200,7 +200,8 @@ MaybeError TransitionAndClearForSyncScope(Device* device,
 
 MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
                                  Device* device,
-                                 BeginRenderPassCmd* renderPass) {
+                                 BeginRenderPassCmd* renderPass,
+                                 bool suppressResolves) {
     VkCommandBuffer commands = recordingContext->commandBuffer;
 
     // Query a VkRenderPass from the cache
@@ -212,10 +213,16 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
              IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
             const auto& attachmentInfo = renderPass->colorAttachments[i];
 
+            wgpu::StoreOp storeOp = attachmentInfo.storeOp;
+
             bool hasResolveTarget = attachmentInfo.resolveTarget != nullptr;
+            if (hasResolveTarget && suppressResolves) {
+                storeOp = wgpu::StoreOp::Store;
+                hasResolveTarget = false;
+            }
 
             query.SetColor(i, attachmentInfo.view->GetFormat().format, attachmentInfo.loadOp,
-                           attachmentInfo.storeOp, hasResolveTarget);
+                           storeOp, hasResolveTarget);
         }
 
         if (renderPass->attachmentState->HasDepthStencilAttachment()) {
@@ -292,14 +299,17 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
             attachmentCount++;
         }
 
-        for (ColorAttachmentIndex i :
-             IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
-            if (renderPass->colorAttachments[i].resolveTarget != nullptr) {
-                TextureView* view = ToBackend(renderPass->colorAttachments[i].resolveTarget.Get());
+        if (!suppressResolves) {
+            for (ColorAttachmentIndex i :
+                 IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+                if (renderPass->colorAttachments[i].resolveTarget != nullptr) {
+                    TextureView* view =
+                        ToBackend(renderPass->colorAttachments[i].resolveTarget.Get());
 
-                attachments[attachmentCount] = view->GetHandle();
+                    attachments[attachmentCount] = view->GetHandle();
 
-                attachmentCount++;
+                    attachmentCount++;
+                }
             }
         }
 
@@ -337,6 +347,78 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
     beginInfo.pClearValues = clearValues.data();
 
     device->fn.CmdBeginRenderPass(commands, &beginInfo, VK_SUBPASS_CONTENTS_INLINE);
+
+    return {};
+}
+
+// Performs an empty render pass for each resolve required as a workaround for
+// https://crbug.com/dawn/1550
+MaybeError RecordResolveWorkaroundPasses(CommandRecordingContext* recordingContext,
+                                         Device* device,
+                                         BeginRenderPassCmd* renderPass) {
+    VkCommandBuffer commands = recordingContext->commandBuffer;
+
+    for (ColorAttachmentIndex i :
+         IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+        const auto& attachmentInfo = renderPass->colorAttachments[i];
+        if (attachmentInfo.resolveTarget != nullptr) {
+            // Build a render pass with a single resolved color target and query from the cache
+            VkRenderPass renderPassVK = VK_NULL_HANDLE;
+            RenderPassCacheQuery query;
+            query.SetColor(0, attachmentInfo.view->GetFormat().format, wgpu::LoadOp::Load,
+                           attachmentInfo.storeOp, true /* hasResolveTarget */);
+            query.SetSampleCount(renderPass->attachmentState->GetSampleCount());
+            DAWN_TRY_ASSIGN(renderPassVK, device->GetRenderPassCache()->GetRenderPass(query));
+
+            // Create a framebuffer that will be used once for the render pass/
+            std::array<VkImageView, 2> attachments;
+
+            TextureView* view = ToBackend(attachmentInfo.view.Get());
+            ASSERT(view != nullptr);
+
+            TextureView* resolveView = ToBackend(attachmentInfo.resolveTarget.Get());
+            ASSERT(resolveView != nullptr);
+
+            attachments[0] = view->GetHandle();
+            attachments[1] = resolveView->GetHandle();
+
+            VkFramebufferCreateInfo createInfo;
+            createInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+            createInfo.pNext = nullptr;
+            createInfo.flags = 0;
+            createInfo.renderPass = renderPassVK;
+            createInfo.attachmentCount = 2;
+            createInfo.pAttachments = AsVkArray(attachments.data());
+            createInfo.width = renderPass->width;
+            createInfo.height = renderPass->height;
+            createInfo.layers = 1;
+
+            VkFramebuffer framebuffer = VK_NULL_HANDLE;
+            DAWN_TRY(CheckVkSuccess(device->fn.CreateFramebuffer(device->GetVkDevice(), &createInfo,
+                                                                 nullptr, &*framebuffer),
+                                    "CreateFramebuffer"));
+
+            // We don't reuse VkFramebuffers so mark the framebuffer for deletion as soon as the
+            // commands currently being recorded are finished.
+            device->GetFencedDeleter()->DeleteWhenUnused(framebuffer);
+
+            // Begin and immediately end the pass to force a resolve.
+            VkRenderPassBeginInfo beginInfo;
+            beginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+            beginInfo.pNext = nullptr;
+            beginInfo.renderPass = renderPassVK;
+            beginInfo.framebuffer = framebuffer;
+            beginInfo.renderArea.offset.x = 0;
+            beginInfo.renderArea.offset.y = 0;
+            beginInfo.renderArea.extent.width = renderPass->width;
+            beginInfo.renderArea.extent.height = renderPass->height;
+            beginInfo.clearValueCount = 0;
+            beginInfo.pClearValues = nullptr;
+
+            device->fn.CmdBeginRenderPass(commands, &beginInfo, VK_SUBPASS_CONTENTS_INLINE);
+            device->fn.CmdEndRenderPass(commands);
+        }
+    }
 
     return {};
 }
@@ -1057,7 +1139,23 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
     Device* device = ToBackend(GetDevice());
     VkCommandBuffer commands = recordingContext->commandBuffer;
 
-    DAWN_TRY(RecordBeginRenderPass(recordingContext, device, renderPassCmd));
+    bool needsMultiResolveWorkaround = false;  // https://crbug.com/dawn/1550
+    if (device->IsToggleEnabled(Toggle::VulkanSplitMultipleResolves)) {
+        uint32_t resolveCount = 0;
+        for (ColorAttachmentIndex i :
+             IterateBitSet(renderPassCmd->attachmentState->GetColorAttachmentsMask())) {
+            if (renderPassCmd->colorAttachments[i].resolveTarget != nullptr) {
+                if (resolveCount) {
+                    needsMultiResolveWorkaround = true;
+                    break;
+                }
+                resolveCount++;
+            }
+        }
+    }
+
+    DAWN_TRY(RecordBeginRenderPass(recordingContext, device, renderPassCmd,
+                                   needsMultiResolveWorkaround));
 
     // If required, track depth/stencil textures used as render pass attachments.
     if (device->IsToggleEnabled(
@@ -1286,6 +1384,12 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
                 }
 
                 device->fn.CmdEndRenderPass(commands);
+
+                if (needsMultiResolveWorkaround) {
+                    DAWN_TRY(
+                        RecordResolveWorkaroundPasses(recordingContext, device, renderPassCmd));
+                }
+
                 return {};
             }
 
