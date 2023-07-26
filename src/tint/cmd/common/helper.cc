@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/cmd/helper.h"
+#include "src/tint/cmd/common/helper.h"
 
 #include <iostream>
 #include <utility>
@@ -129,7 +129,7 @@ ProgramInfo LoadProgramInfo(const LoadProgramOptions& opts) {
                 exit(1);
             }
             program = std::make_unique<tint::Program>(
-                tint::spirv::reader::Parse(data, opts.spirv_reader_options));
+                tint::spirv::reader::Read(data, opts.spirv_reader_options));
             break;
 #else
             std::cerr << "Tint not built with the SPIR-V reader enabled" << std::endl;
@@ -154,7 +154,7 @@ ProgramInfo LoadProgramInfo(const LoadProgramOptions& opts) {
                 exit(1);
             }
             program = std::make_unique<tint::Program>(
-                tint::spirv::reader::Parse(data, opts.spirv_reader_options));
+                tint::spirv::reader::Read(data, opts.spirv_reader_options));
             break;
 #else
             std::cerr << "Tint not built with the SPIR-V reader enabled" << std::endl;
