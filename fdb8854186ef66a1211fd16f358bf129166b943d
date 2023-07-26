@@ -22,6 +22,30 @@
       },
       "revId": "fdb8854186ef66a1211fd16f358bf129166b943d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69a481e5_c249073b",
+        "filename": "src/tint/lang/core/ir/transform/test_helper.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-26T22:15:15Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "61dd6173_4d3d159e",
+      "range": {
+        "startLine": 31,
+        "startChar": 50,
+        "endLine": 31,
+        "endChar": 54
+      },
+      "revId": "fdb8854186ef66a1211fd16f358bf129166b943d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
