@@ -21,6 +21,7 @@ import (
 	"io"
 	"io/ioutil"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"text/template"
 	"unicode"
@@ -35,7 +36,7 @@ type Functions map[string]interface{}
 // funcs are the functions provided to the template.
 // See https://golang.org/pkg/text/template/ for documentation on the template
 // syntax.
-func Run(tmpl string, w io.Writer, funcs Functions) error {
+func Run(tmpl string, w io.Writer, data any, funcs Functions) error {
 	g := generator{
 		template: template.New("<template>"),
 	}
@@ -53,12 +54,18 @@ func Run(tmpl string, w io.Writer, funcs Functions) error {
 		"Iterate":    iterate,
 		"Map":        newMap,
 		"PascalCase": pascalCase,
+		"ToUpper":    strings.ToUpper,
+		"ToLower":    strings.ToLower,
+		"Repeat":     strings.Repeat,
 		"Split":      strings.Split,
 		"Title":      strings.Title,
 		"TrimLeft":   strings.TrimLeft,
 		"TrimPrefix": strings.TrimPrefix,
 		"TrimRight":  strings.TrimRight,
 		"TrimSuffix": strings.TrimSuffix,
+		"Replace":    strings.ReplaceAll,
+		"Index":      index,
+		"Error":      func(err any) string { panic(err); return "<error>" },
 	}
 
 	// Append custom functions
@@ -70,7 +77,7 @@ func Run(tmpl string, w io.Writer, funcs Functions) error {
 		return err
 	}
 
-	return g.template.Execute(w, nil)
+	return g.template.Execute(w, data)
 }
 
 type generator struct {
@@ -194,4 +201,28 @@ func pascalCase(s string) string {
 		}
 	}
 	return b.String()
+}
+
+func index(obj any, indices ...any) (any, error) {
+	v := reflect.ValueOf(obj)
+	for _, idx := range indices {
+		for v.Kind() == reflect.Interface || v.Kind() == reflect.Pointer {
+			v = v.Elem()
+		}
+		if !v.IsValid() || v.IsZero() || v.IsNil() {
+			return nil, nil
+		}
+		switch v.Kind() {
+		case reflect.Array, reflect.Slice:
+			v = v.Index(idx.(int))
+		case reflect.Map:
+			v = v.MapIndex(reflect.ValueOf(idx))
+		default:
+			return nil, fmt.Errorf("cannot index %T (%v)", obj, v.Kind())
+		}
+	}
+	if !v.IsValid() || v.IsZero() || v.IsNil() {
+		return nil, nil
+	}
+	return v.Interface(), nil
 }
