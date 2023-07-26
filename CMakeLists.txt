@@ -670,15 +670,6 @@ add_subdirectory(src/dawn)
 ################################################################################
 # Samples
 ################################################################################
-
-if (TINT_BUILD_SAMPLES)
-  add_subdirectory(src/tint/cmd)
-endif()
-
-if (TINT_BUILD_FUZZERS)
-  add_subdirectory(src/tint/fuzzers)
-endif()
-
 add_custom_target(tint-lint
   COMMAND ./tools/lint
   WORKING_DIRECTORY ${TINT_ROOT_SOURCE_DIR}
