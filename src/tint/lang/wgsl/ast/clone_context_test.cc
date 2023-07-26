@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <unordered_set>
 #include <string>
+#include <unordered_set>
 
 #include "gtest/gtest-spi.h"
 #include "src/tint/lang/wgsl/ast/clone_context.h"

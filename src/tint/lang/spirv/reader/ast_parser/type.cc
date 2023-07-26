@@ -25,8 +25,8 @@
 #include "src/tint/utils/containers/unique_allocator.h"
 #include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
+#include "src/tint/utils/string/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::spirv::reader::Type);
 TINT_INSTANTIATE_TYPEINFO(tint::spirv::reader::Void);

@@ -21,6 +21,8 @@ if (tint_build_unittests) {
   import("//testing/test.gni")
 }
 
+import("tint.gni")
+
 ###############################################################################
 # Common - Configs, etc. shared across targets
 ###############################################################################
@@ -114,50 +116,6 @@ group("abseil") {
   } else {
     public_deps = [ "${dawn_root}/third_party/gn/abseil-cpp:strings" ]
   }
-}
-
-###############################################################################
-# Helper library for IO operations
-# Only to be used by tests and sample executable
-###############################################################################
-source_set("tint_utils_io") {
-  sources = [
-    "utils/command/command.h",
-    "utils/file/tmpfile.h",
-  ]
-
-  if (is_linux || is_mac) {
-    sources += [ "utils/command/command_posix.cc" ]
-    sources += [ "utils/file/tmpfile_posix.cc" ]
-  } else if (is_win) {
-    sources += [ "utils/command/command_windows.cc" ]
-    sources += [ "utils/file/tmpfile_windows.cc" ]
-  } else {
-    sources += [ "utils/command/command_other.cc" ]
-    sources += [ "utils/file/tmpfile_other.cc" ]
-  }
-
-  deps = [ ":libtint_utils_src" ]
-}
-
-###############################################################################
-# Helper library for validating generated shaders
-# As this depends on tint_utils_io, this is only to be used by tests and sample
-# executable
-###############################################################################
-source_set("tint_val") {
-  sources = [
-    "lang/hlsl/validate/hlsl.cc",
-    "lang/hlsl/validate/val.h",
-    "lang/msl/validate/msl.cc",
-    "lang/msl/validate/val.h",
-  ]
-  deps = [
-    ":libtint_ast_src",
-    ":libtint_program_src",
-    ":libtint_utils_src",
-    ":tint_utils_io",
-  ]
 }
 
 ###############################################################################
@@ -1366,58 +1324,53 @@ if (tint_build_ir) {
 
 source_set("libtint") {
   public_deps = [
-    ":libtint_ast_src",
-    ":libtint_ast_transform_base_src",
-    ":libtint_ast_transform_src",
-    ":libtint_constant_src",
-    ":libtint_initializer_src",
-    ":libtint_inspector_src",
-    ":libtint_program_src",
-    ":libtint_sem_src",
-    ":libtint_symbols_src",
-    ":libtint_type_src",
-    ":libtint_utils_src",
-    ":libtint_writer_src",
+    "${tint_src_dir}/utils/unicode",
+    "${tint_src_dir}/utils/strconv",
+    "${tint_src_dir}/lang/core/constant",
+    "${tint_src_dir}/lang/core/type",
+    "${tint_src_dir}/lang/wgsl/ast/transform",
+    "${tint_src_dir}/lang/wgsl/inspector",
+    "${tint_src_dir}/lang/wgsl/sem",
   ]
 
   if (tint_build_spv_reader) {
-    public_deps += [ ":libtint_spv_reader_src" ]
+    public_deps += [ "${tint_src_dir}/lang/spirv/reader" ]
   }
 
   if (tint_build_spv_writer) {
-    public_deps += [ ":libtint_spv_writer_src" ]
+    public_deps += [ "${tint_src_dir}/lang/spirv/writer" ]
   }
 
   if (tint_build_wgsl_reader) {
-    public_deps += [ ":libtint_wgsl_reader_src" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
   }
 
   if (tint_build_wgsl_writer) {
-    public_deps += [ ":libtint_wgsl_writer_src" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
   }
 
   if (tint_build_msl_writer) {
-    public_deps += [ ":libtint_msl_writer_src" ]
+    public_deps += [ "${tint_src_dir}/lang/msl/writer" ]
   }
 
   if (tint_build_hlsl_writer) {
-    public_deps += [ ":libtint_hlsl_writer_src" ]
+    public_deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
   }
 
   if (tint_build_glsl_writer) {
-    public_deps += [ ":libtint_glsl_writer_src" ]
+    public_deps += [ "${tint_src_dir}/lang/glsl/writer" ]
   }
 
   if (tint_build_syntax_tree_writer) {
-    public_deps += [ ":libtint_syntax_tree_writer_src" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/syntax_tree_writer" ]
   }
 
   if (tint_build_ir) {
     assert(!build_with_chromium,
            "tint_build_ir cannot be used when building Chromium")
     public_deps += [
-      ":libtint_ir_src",
-      ":libtint_wgsl_writer_ir_to_program_src",
+      "${tint_src_dir}/lang/core/ir",
+      "${tint_src_dir}/lang/wgsl/writer/ir_to_program",
     ]
   }
 
@@ -1505,18 +1458,6 @@ if (tint_build_unittests) {
       sources = [ "test_main.cc" ]
       configs += [ ":tint_unittests_config" ]
       deps += [ ":libtint" ]
-
-      if (tint_build_hlsl_writer) {
-        deps += [ ":tint_unittests_hlsl_writer_src" ]
-      }
-
-      if (tint_build_msl_writer) {
-        deps += [ ":tint_unittests_msl_writer_ast_printer_src" ]
-      }
-
-      if (tint_build_spv_reader) {
-        deps += [ ":tint_unittests_spv_reader_src" ]
-      }
     }
   }
 
@@ -2515,12 +2456,9 @@ if (tint_build_unittests) {
 
   if (build_with_chromium) {
     tint_unittests_source_set("tint_unittests_fuzzer_src") {
-      sources = [ "fuzzers/random_generator_test.cc" ]
+      sources = [ "${tint_src_dir}/fuzzers/random_generator_test.cc" ]
 
-      deps = [
-        ":tint_unittests_core_src",
-        "fuzzers:tint_fuzzer_common_src",
-      ]
+      deps = [ "${tint_src_dir}/fuzzers:tint_fuzzer_common_src" ]
     }
   }
 
@@ -2528,69 +2466,66 @@ if (tint_build_unittests) {
     testonly = true
 
     deps = [
-      ":libtint_wgsl_reader_src",
-      ":libtint_wgsl_writer_src",
-      ":tint_unittests_ast_src",
-      ":tint_unittests_ast_transform_src",
-      ":tint_unittests_builtins_src",
-      ":tint_unittests_cmd_src",
-      ":tint_unittests_constant_src",
-      ":tint_unittests_core_src",
-      ":tint_unittests_diagnostic_src",
-      ":tint_unittests_inspector_src",
-      ":tint_unittests_resolver_src",
-      ":tint_unittests_sem_src",
-      ":tint_unittests_symbols_src",
-      ":tint_unittests_type_src",
-      ":tint_unittests_utils_src",
-      ":tint_unittests_writer_src",
+      "${tint_src_dir}/cmd:unittests",
+      "${tint_src_dir}/lang/core/builtin:unittests",
+      "${tint_src_dir}/lang/core/constant:unittests",
+      "${tint_src_dir}/lang/core/type:unittests",
+      "${tint_src_dir}/lang/wgsl:unittests",
+      "${tint_src_dir}/utils/cli:unittests",
+      "${tint_src_dir}/utils/command:unittests",
+      "${tint_src_dir}/utils/containers:unittests",
+      "${tint_src_dir}/utils/diagnostic:unittests",
+      "${tint_src_dir}/utils/file:unittests",
+      "${tint_src_dir}/utils/id:unittests",
+      "${tint_src_dir}/utils/macros:unittests",
+      "${tint_src_dir}/utils/math:unittests",
+      "${tint_src_dir}/utils/memory:unittests",
+      "${tint_src_dir}/utils/reflection:unittests",
+      "${tint_src_dir}/utils/result:unittests",
+      "${tint_src_dir}/utils/rtti:unittests",
+      "${tint_src_dir}/utils/text:unittests",
+      "${tint_src_dir}/utils/traits:unittests",
     ]
 
     if (tint_build_spv_reader) {
-      deps += [ ":tint_unittests_spv_reader_src" ]
+      deps += [ "${tint_src_dir}/lang/spirv/reader:unittests" ]
     }
 
     if (tint_build_spv_writer) {
-      deps += [ ":tint_unittests_spv_writer_src" ]
+      deps += [ "${tint_src_dir}/lang/spirv/writer:unittests" ]
     }
 
     if (tint_build_wgsl_reader) {
-      deps += [ ":tint_unittests_wgsl_reader_src" ]
+      deps += [ "${tint_src_dir}/lang/wgsl/reader:unittests" ]
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ ":tint_unittests_wgsl_writer_src" ]
+      deps += [ "${tint_src_dir}/lang/wgsl/writer:unittests" ]
     }
 
     if (tint_build_msl_writer) {
-      deps += [
-        ":tint_unittests_msl_writer_ast_printer_src",
-        ":tint_unittests_msl_writer_printer_src",
-      ]
+      deps += [ "${tint_src_dir}/lang/msl/writer:unittests" ]
     }
 
     if (tint_build_hlsl_writer) {
-      deps += [ ":tint_unittests_hlsl_writer_src" ]
+      deps += [ "${tint_src_dir}/lang/hlsl/writer:unittests" ]
     }
 
     if (tint_build_glsl_writer) {
-      deps += [ ":tint_unittests_glsl_writer_src" ]
+      deps += [ "${tint_src_dir}/lang/glsl/writer:unittests" ]
     }
 
     if (tint_build_ir) {
-      deps += [
-        ":tint_unittests_ir_src",
-        ":tint_unittests_ir_transform_src",
-      ]
+      deps += [ "${tint_src_dir}/lang/core/ir:unittests" ]
 
       if (tint_build_wgsl_reader) {
-        deps += [ ":tint_unittests_wgsl_reader_program_to_ir_src" ]
+        deps += [ "${tint_src_dir}/lang/wgsl/reader/program_to_ir:unittests" ]
       }
       if (tint_build_wgsl_writer) {
-        deps += [ ":tint_unittests_wgsl_writer_ir_to_program_src" ]
+        deps += [ "${tint_src_dir}/lang/wgsl/writer/ir_to_program:unittests" ]
       }
       if (tint_build_wgsl_reader && tint_build_wgsl_writer) {
-        deps += [ ":tint_unittests_wgsl_ir_roundtrip_src" ]
+        deps += [ "${tint_src_dir}/lang/wgsl:ir_roundtrip_unittest" ]
       }
     }
 

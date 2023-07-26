@@ -17,7 +17,7 @@
 #include <sstream>
 
 #include "gmock/gmock.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 #include "src/tint/utils/containers/transform.h"  // Used by ToStringList()
 

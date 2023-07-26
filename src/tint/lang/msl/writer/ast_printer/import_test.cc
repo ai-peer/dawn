@@ -14,7 +14,7 @@
 
 #include "src/tint/lang/msl/writer/ast_printer/test_helper.h"
 #include "src/tint/lang/wgsl/sem/call.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::msl::writer {
 namespace {
