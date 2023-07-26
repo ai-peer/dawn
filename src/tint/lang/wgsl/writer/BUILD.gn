@@ -20,6 +20,24 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("writer") {
+  sources = [
+    "options.cc",
+    "options.h",
+    "output.cc",
+    "output.h",
+    "writer.cc",
+    "writer.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/wgsl/program",
+    "${tint_src_dir}/lang/wgsl/writer/ast_printer",
+    "${tint_src_dir}/lang/wgsl/writer/syntax_tree_printer",
+    "${tint_src_dir}/utils/reflection",
+    "${tint_src_dir}/utils/result",
+  ]
+}
