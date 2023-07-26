@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec4927d9_8ceefb9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T22:05:48Z",
+      "side": 1,
+      "message": "some questions on details:\n\ndo we know if it specifically multiple resolves that are the problem? for example it could be something like resolves using a non-zero color attachment index don\u0027t work - in which case this workaround wouldn\u0027t catch the case where there is only 1 color attachment at index 2. If this is the case, then a better name might be \"VulkanAlwaysResolveUsingColorAttachmentZero\"\n\nif it is specifically that it doesn\u0027t work when there are multiple, then I think we can make the workaround slightly better by keeping 1 resolve happening in the original render pass, and doing the rest of the resolves in separate passes. I think the memory bandwidth savings would be valuable, especially in the case when there are just 2 resolve attachments.\nIn this world, I think that \"VulkanUseAtMostOneResolveAttachmentPerRenderPass\" would be a marginally better name as it\u0027s more descriptive about how the splitting happens",
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3004e75_b66faa95",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T22:05:48Z",
+      "side": 1,
+      "message": "nit: transformResolveToStore is slightly better IMO. Suppressing could mean that resolve is simply disabled and the store op keeps using discard",
+      "range": {
+        "startLine": 204,
+        "startChar": 33,
+        "endLine": 204,
+        "endChar": 54
+      },
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88499b59_a8231651",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T22:05:48Z",
+      "side": 1,
+      "message": "nit: trailing `/`",
+      "range": {
+        "startLine": 374,
+        "startChar": 78,
+        "endLine": 374,
+        "endChar": 79
+      },
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc7aa325_45e29bf1",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T22:05:48Z",
+      "side": 1,
+      "message": "uunit:\n\n```suggestion\n            createInfo.attachmentCount \u003d attachments.size();\n```",
+      "range": {
+        "startLine": 391,
+        "startChar": 41,
+        "endLine": 391,
+        "endChar": 42
+      },
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
