@@ -20,6 +20,24 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("writer") {
+  sources = [
+    "output.cc",
+    "output.h",
+    "writer.cc",
+    "writer.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/hlsl/writer/common",
+    "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/utils/result",
+  ]
+
+  if (tint_build_hlsl_writer) {
+    deps += [ "${tint_src_dir}/lang/hlsl/writer/ast_printer" ]
+  }
+}

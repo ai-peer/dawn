@@ -20,6 +20,29 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("math") {
+  sources = [
+    "crc32.h",
+    "hash.h",
+    "math.cc",
+    "math.h",
+  ]
+  deps = []
+}
+
+tint_unittests_source_set("unittests") {
+  testonly = true
+  sources = [
+    "crc32_test.cc",
+    "hash_test.cc",
+    "math_test.cc",
+  ]
+  deps = [
+    "${tint_src_dir}/utils/containers",
+    "${tint_src_dir}/utils/math",
+  ]
+}
