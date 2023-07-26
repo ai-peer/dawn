@@ -435,6 +435,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Disable index clamping on the runtime-sized arrays on buffers in Tint robustness transform "
       "when VK_EXT_robustness2 is supported and robustBufferAccess2 == VK_TRUE.",
       "https://crbug.com/tint/1890", ToggleStage::Device}},
+    {Toggle::VulkanSplitMultipleResolves,
+     {"vulkan_split_multiple_resolves",
+      "When multiple resolve targets are used in a render pass, splits the resolve step into a "
+      "separate render pass. "
+      "This workaround is enabled by default on ARM Mali drivers.",
+      "https://crbug.com/dawn/1550", ToggleStage::Device}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "

@@ -101,6 +101,7 @@ enum class Toggle {
     D3D12UseRootSignatureVersion1_1,
     VulkanUseImageRobustAccess2,
     VulkanUseBufferRobustAccess2,
+    VulkanSplitMultipleResolves,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
