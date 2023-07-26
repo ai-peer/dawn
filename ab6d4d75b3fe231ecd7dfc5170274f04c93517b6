@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3b75ba_30d9eb14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T22:08:53Z",
+      "side": 1,
+      "message": "sigh. swiftshader is 1.0 ?",
+      "revId": "ab6d4d75b3fe231ecd7dfc5170274f04c93517b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
