@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f59f31a_76cce939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-26T22:30:56Z",
+      "side": 1,
+      "message": "Fixed the heuristic in the latest patch.",
+      "parentUuid": "bb281b01_599f8d86",
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3004e75_b66faa95",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 4
