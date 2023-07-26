@@ -23,14 +23,18 @@
 #include <vector>
 
 #include "src/tint/lang/core/builtin/access.h"
-#include "src/tint/lang/wgsl/program/program_builder.h"
+#include "src/tint/lang/wgsl/ast/expression.h"
+#include "src/tint/lang/wgsl/ast/statement.h"
 #include "src/tint/lang/wgsl/reader/parser/detail.h"
 #include "src/tint/lang/wgsl/reader/parser/token.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
+#include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/diagnostic/formatter.h"
 
 namespace tint::ast {
+class Attribute;
 class BreakStatement;
+class CaseSelector;
 class CallStatement;
 class ContinueStatement;
 class IfStatement;

@@ -33,7 +33,7 @@
 #include "src/tint/utils/containers/scope_stack.h"
 #include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::wgsl::writer::RenameConflicts);
 

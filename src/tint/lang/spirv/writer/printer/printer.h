@@ -22,13 +22,13 @@
 #include "src/tint/lang/core/builtin/texel_format.h"
 #include "src/tint/lang/core/constant/value.h"
 #include "src/tint/lang/core/ir/constant.h"
-#include "src/tint/lang/spirv/writer/binary_writer.h"
-#include "src/tint/lang/spirv/writer/function.h"
-#include "src/tint/lang/spirv/writer/module.h"
+#include "src/tint/lang/spirv/writer/common/binary_writer.h"
+#include "src/tint/lang/spirv/writer/common/function.h"
+#include "src/tint/lang/spirv/writer/common/module.h"
 #include "src/tint/utils/containers/hashmap.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/text/symbol.h"
+#include "src/tint/utils/symbol/symbol.h"
 
 // Forward declarations
 namespace tint::ir {
