@@ -29,6 +29,8 @@ tint_add_target("lang/msl/writer/common"
 )
 
 tint_target_add_dependencies("lang/msl/writer/common"
+  "api/common"
+  "api/options"
   "lang/core"
   "lang/core/type"
   "utils/containers"
