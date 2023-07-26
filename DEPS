@@ -160,7 +160,7 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@a09773110c4a3c83a5421e342675c06c911df92e',
+    'url': '{chromium_git}/angle/angle@58cb5c8396a330ed6d81257b17dea63dc018825f',
     'condition': 'dawn_standalone',
   },
 
@@ -185,7 +185,7 @@ deps = {
   },
 
   'third_party/dxc': {
-    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@3c06afb9895ec96be079fa1ce73869e3e870e2eb',
+    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@b97f9b9388072cf0581c4e0e5ea8d9d586203b1b',
   },
   'third_party/dxheaders': {
     # The non-Windows build of DXC depends on DirectX-Headers, and at a specific commit (not ToT)
