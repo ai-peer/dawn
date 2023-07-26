@@ -19,7 +19,7 @@
 
 #include "src/tint/lang/wgsl/sem/struct.h"
 #include "src/tint/utils/text/string_stream.h"
-#include "src/tint/utils/text/text_generator.h"
+#include "src/tint/utils/generator/text.h"
 
 // Forward declarations
 namespace tint {

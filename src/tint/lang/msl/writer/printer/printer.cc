@@ -36,7 +36,7 @@
 #include "src/tint/lang/core/type/u32.h"
 #include "src/tint/lang/core/type/vector.h"
 #include "src/tint/lang/core/type/void.h"
-#include "src/tint/lang/msl/writer/printer_support.h"
+#include "src/tint/lang/msl/writer/common/printer_support.h"
 #include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/rtti/switch.h"
 
@@ -198,7 +198,7 @@ void Printer::EmitAtomicType(StringStream& out, const type::Atomic* atomic) {
         out << "atomic_uint";
         return;
     }
-    TINT_ICE();
+    TINT_ICE() << "unhandled atomic type " << atomic->Type()->FriendlyName();
 }
 
 void Printer::EmitArrayType(StringStream& out, const type::Array* arr) {
