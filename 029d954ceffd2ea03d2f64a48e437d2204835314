@@ -94,6 +94,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "382e978d_ee59b284",
+        "filename": "src/tint/lang/spirv/writer/printer/access_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-26T14:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ae5e548_fab3954e",
+      "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33c89d89_442b8691",
