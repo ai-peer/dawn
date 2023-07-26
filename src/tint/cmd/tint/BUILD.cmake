@@ -75,10 +75,13 @@ if (TINT_BUILD_SPV_READER)
   tint_target_add_dependencies("cmd/tint:cmd"
     "lang/spirv/reader"
   )
+endif(TINT_BUILD_SPV_READER)
+
+if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
   tint_target_add_external_dependencies("cmd/tint:cmd"
     "spirv-tools"
   )
-endif(TINT_BUILD_SPV_READER)
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
 
 if (TINT_BUILD_SPV_WRITER)
   tint_target_add_dependencies("cmd/tint:cmd"

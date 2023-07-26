@@ -99,11 +99,11 @@ tint_target_add_dependencies("lang/spirv/writer/ast_printer:test"
   "utils/text"
 )
 
-if (TINT_BUILD_SPV_READER)
+if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
   tint_target_add_external_dependencies("lang/spirv/writer/ast_printer:test"
     "spirv-tools"
   )
-endif(TINT_BUILD_SPV_READER)
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
 
 if (TINT_BUILD_SPV_WRITER)
   tint_target_add_dependencies("lang/spirv/writer/ast_printer:test"
