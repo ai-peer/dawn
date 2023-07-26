@@ -19,7 +19,7 @@
 #include <string>
 
 #include "src/tint/utils/containers/vector.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::spirv::reader {
 

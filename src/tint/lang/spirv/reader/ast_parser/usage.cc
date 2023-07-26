@@ -14,7 +14,7 @@
 
 #include "src/tint/lang/spirv/reader/ast_parser/usage.h"
 
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::spirv::reader {
 

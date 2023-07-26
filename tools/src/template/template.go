@@ -35,7 +35,7 @@ type Functions map[string]interface{}
 // funcs are the functions provided to the template.
 // See https://golang.org/pkg/text/template/ for documentation on the template
 // syntax.
-func Run(tmpl string, w io.Writer, funcs Functions) error {
+func Run(tmpl string, w io.Writer, data any, funcs Functions) error {
 	g := generator{
 		template: template.New("<template>"),
 	}
@@ -53,6 +53,7 @@ func Run(tmpl string, w io.Writer, funcs Functions) error {
 		"Iterate":    iterate,
 		"Map":        newMap,
 		"PascalCase": pascalCase,
+		"Repeat":     strings.Repeat,
 		"Split":      strings.Split,
 		"Title":      strings.Title,
 		"TrimLeft":   strings.TrimLeft,
@@ -70,7 +71,7 @@ func Run(tmpl string, w io.Writer, funcs Functions) error {
 		return err
 	}
 
-	return g.template.Execute(w, nil)
+	return g.template.Execute(w, data)
 }
 
 type generator struct {

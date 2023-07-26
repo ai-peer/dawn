@@ -24,7 +24,7 @@
 #include "src/tint/lang/wgsl/resolver/resolve.h"
 #include "src/tint/lang/wgsl/sem/function.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::BindingRemapper);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::BindingRemapper::Remappings);

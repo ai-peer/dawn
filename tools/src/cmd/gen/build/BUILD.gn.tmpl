@@ -1,0 +1,48 @@
+
+import("{{Repeat "../" .Depth}}../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+{{- $lib   := $.Project.Target $ "lib"   }}
+{{- $tests := $.Project.Target $ "tests" }}
+
+libtint_source_set("{{$.Name}}") {
+  sources = [
+{{- range $file := $lib.Files.List}}
+    "{{TrimPrefix (TrimPrefix $file $.Path) "/"}}",
+{{- end}}
+  ]
+  deps = [
+{{- range $dep := $lib.Dependencies}}
+    "{{Eval "TargetPath" $dep}}",
+{{- end}}
+  ]
+}
+
+tint_unittests_source_set("unittests") {
+  sources = [
+{{- range $file := $tests.Files.List}}
+    "{{TrimPrefix (TrimPrefix $file $.Path) "/"}}",
+{{- end}}
+  ]
+  deps = [
+{{- range $dep := $tests.Dependencies}}
+    "{{Eval "TargetPath" $dep}}",
+{{- end}}
+  ]
+}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a GN target path
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "TargetPath"}}
+{{-   $path := printf "${tint_src_dir}%v" (TrimPrefix $.Directory.Path "src/tint") }}
+{{-   if      eq $.Kind "lib"  }}{{$path}}
+{{-   else if eq $.Kind "test" }}{{$path}}:unittests
+{{-   else                     }}{{$path}}:{{$.Kind}}
+{{-   end}}
+{{- end}}
+
