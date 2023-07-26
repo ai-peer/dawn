@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3411fa49_7cb209bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-26T20:40:00Z",
+      "side": 1,
+      "message": "Nit: `s/spirv/wgsl/` here and below",
+      "revId": "4a4d69c76883806e375c3771b725205a4ced8f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
