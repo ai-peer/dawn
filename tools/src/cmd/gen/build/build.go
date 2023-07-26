@@ -437,13 +437,14 @@ func emitBuildFiles(p *Project) error {
 
 			// Format the output if it's a GN file.
 			if path.Ext(outputName) == ".gn" {
+				unformatted := w.String()
 				gn := exec.Command("gn", "format", "--stdin")
-				gn.Stdin = bytes.NewReader(w.Bytes())
+				gn.Stdin = bytes.NewReader([]byte(unformatted))
 				w.Reset()
 				gn.Stdout = w
 				gn.Stderr = w
 				if err := gn.Run(); err != nil {
-					return nil, fmt.Errorf("gn format failed: %w\n%v", err, w.String())
+					return nil, fmt.Errorf("%v\ngn format failed: %w\n%v", unformatted, err, w.String())
 				}
 			}
 
