@@ -20,6 +20,7 @@
 #include <variant>
 
 #include "src/tint/utils/diagnostic/source.h"
+#include "src/tint/utils/text/string_stream.h"
 
 namespace tint::wgsl::reader {
 

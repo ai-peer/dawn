@@ -16,6 +16,7 @@
 
 #include "src/tint/lang/wgsl/ast/helper_test.h"
 #include "src/tint/lang/wgsl/ast/stage_attribute.h"
+#include "src/tint/lang/wgsl/ast/helper_test.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 

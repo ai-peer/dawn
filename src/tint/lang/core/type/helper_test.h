@@ -20,6 +20,7 @@
 #include "gtest/gtest.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
+#include "src/tint/utils/diagnostic/formatter.h"
 
 namespace tint::type {
 

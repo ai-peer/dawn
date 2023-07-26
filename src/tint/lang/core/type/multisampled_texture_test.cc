@@ -19,6 +19,7 @@
 #include "src/tint/lang/core/type/helper_test.h"
 #include "src/tint/lang/core/type/sampled_texture.h"
 #include "src/tint/lang/core/type/storage_texture.h"
+#include "src/tint/lang/core/type/helper_test.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 
 namespace tint::type {
