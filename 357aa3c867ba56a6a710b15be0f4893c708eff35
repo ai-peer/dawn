@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a6b6c22_dbdda46b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-26T14:48:44Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "357aa3c867ba56a6a710b15be0f4893c708eff35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b2eab9_e602cedc",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-26T14:48:44Z",
+      "side": 1,
+      "message": "optional nit: We could take a single name and add .CacheHit .CacheMiss in here. WDYT?",
+      "revId": "357aa3c867ba56a6a710b15be0f4893c708eff35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
