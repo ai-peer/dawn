@@ -425,9 +425,6 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargets) {
     // TODO(dawn:462): Issue in the D3D12 validation layers.
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsNvidia() && IsBackendValidationEnabled());
 
-    // TODO(dawn:1550) Fails on ARM-based Android devices.
-    DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsARM());
-
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForRenderAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForRenderAttachment(kColorFormat, 1);
@@ -668,9 +665,6 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) 
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default sample
 // mask.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMask) {
-    // TODO(dawn:1550) Fails on ARM-based Android devices.
-    DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsARM());
-
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForRenderAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForRenderAttachment(kColorFormat, 1);
@@ -839,9 +833,6 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithShaderOut
     // sample_mask is not supported in compat.
     DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
 
-    // TODO(dawn:1550) Fails on ARM-based Android devices.
-    DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsARM());
-
     // TODO(crbug.com/dawn/673): Work around or enforce via validation that sample variables are not
     // supported on some platforms.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_sample_variables"));
@@ -956,9 +947,6 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverage) {
 // alphaToCoverage. The alphaToCoverage mask is computed based on the alpha
 // component of the first color render attachment.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithAlphaToCoverage) {
-    // TODO(dawn:1550) Fails on ARM-based Android devices.
-    DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsARM());
-
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForRenderAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForRenderAttachment(kColorFormat, 1);
@@ -1396,6 +1384,7 @@ DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
                       OpenGLESBackend(),
                       VulkanBackend(),
                       VulkanBackend({"always_resolve_into_zero_level_and_layer"}),
+                      VulkanBackend({"vulkan_split_multiple_resolves"}),
                       MetalBackend({"emulate_store_and_msaa_resolve"}),
                       MetalBackend({"always_resolve_into_zero_level_and_layer"}),
                       MetalBackend({"always_resolve_into_zero_level_and_layer",
