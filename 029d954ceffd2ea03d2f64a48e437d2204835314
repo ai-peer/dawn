@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b75489_b400cdb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-26T11:05:17Z",
+      "side": 1,
+      "message": "Mostly looks good but not sure about the tests, which are currently more than just printer tests.",
+      "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f31c61ce_59e59304",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-26T11:05:17Z",
+      "side": 1,
+      "message": "I assume we\u0027ll move all of these to `printer` once we get rid of `ast_printer`.",
+      "range": {
+        "startLine": 1004,
+        "startChar": 0,
+        "endLine": 1013,
+        "endChar": 34
+      },
+      "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b22b8a_1008a577",
+        "filename": "src/tint/lang/spirv/writer/printer/access_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-26T11:05:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure that these tests should be moved into `printer`. Most of these tests (except maybe `type_test.cc`) are set up to test the whole writer (at Ben\u0027s request), which includes transforms + printer.",
+      "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c89d89_442b8691",
+        "filename": "src/tint/lang/spirv/writer/printer/test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-26T11:05:17Z",
+      "side": 1,
+      "message": "Which is it? As above, most of the tests here are actually testing the full `Writer`, not just the `Printer`.",
+      "revId": "029d954ceffd2ea03d2f64a48e437d2204835314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
