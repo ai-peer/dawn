@@ -1,0 +1,119 @@
+
+import("{{Repeat "../" .Depth}}../../../tint_overrides_with_defaults.gni")
+
+import("${tint_src_dir}/tint.gni")
+
+{{- Eval "SourceSetIfNotEmpty" ($.Project.Target $ "lib")}}
+{{- Eval "SourceSetIfNotEmpty" ($.Project.Target $ "cmd")}}
+{{- Eval "SourceSetIfNotEmpty" ($.Project.Target $ "test")}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a GN source set if it contains any files
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "SourceSetIfNotEmpty"}}
+{{-   if $}}
+{{-     if len $.SourceFiles}}{{Eval "SourceSet" $}}{{end}}
+{{-   end}}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a GN source set
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "SourceSet"}}
+
+{{  if      eq $.Kind "lib"  -}}
+libtint_source_set("{{$.Directory.Name}}") {
+{{- else if eq $.Kind "cmd"  -}}
+executable("{{$.Directory.Name}}") {
+{{- else if eq $.Kind "test" -}}
+tint_unittests_source_set("unittests") {
+  testonly = true
+{{- else                     }}{{Error $.Kind}}
+{{- end                      }}
+  sources = [
+{{- range $File := $.UnconditionalSourceFiles}}
+    "{{TrimPrefix $File.Name $.Directory.Path}}",
+{{- end}}
+  ]
+  deps = [
+{{- /* Emit unconditional dependencies */}}
+{{- range $Dep := $.UnconditionalDependencies}}
+    "{{Eval "Dependency" $Dep}}",
+{{- end}}
+
+{{- /* Emit unconditional external dependencies */}}
+{{- range $Dep := $.UnconditionalExternalDependencies}}
+    "{{Eval "ExternalDependencyTarget" $Dep}}",
+{{- end}}
+  ]
+
+
+{{- /* Emit conditional source files and dependencies */}}
+{{-   range $Cond := $.Conditionals}}
+{{/*   newline */}}
+  if ({{$Cond.Condition}}) {
+{{-     if $Cond.SourceFiles}}
+    sources += [
+{{-       range $File := $Cond.SourceFiles}}
+      "{{TrimPrefix $File.Name $.Directory.Path}}",
+{{-       end}}
+    ]
+{{-     end}}
+{{-     if or $Cond.InternalDependencies $Cond.ExternalDependencies}}
+    deps += [
+{{-       range $Dep := $Cond.InternalDependencies}}
+      "{{Eval "Dependency" $Dep}}",
+{{-       end}}
+{{-       range $Dep := $Cond.ExternalDependencies}}
+      "{{Eval "ExternalDependencyTarget" $Dep}}",
+{{-       end}}
+    ]
+{{-     end}}
+  }
+{{-   end}}
+
+{{- if $.ExternalDependencyMap.Contains "spirv-opt-internal"}}
+  public_configs = [ "${tint_spirv_tools_dir}/:spvtools_internal_config" ]
+{{- end}}
+}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a dependency target name
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Dependency"}}
+{{-   $Path := printf "${tint_src_dir}/%v" $.Directory.Path}}
+{{-   if      eq $.Kind "lib"  }}{{$Path}}
+{{-   else if eq $.Kind "test" }}{{$Path}}:unittests
+{{-   else                     }}{{$Path}}:{{$.Kind}}
+{{-   end}}
+{{- end}}
+
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits an external dependency target name
+-- External target names are declared in tools/src/cmd/gen/build/externals.json
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "ExternalDependencyTarget"}}
+{{-        if eq $.Name "abseil"             -}}${tint_src_dir}:abseil
+{{-   else if eq $.Name "spirv-tools"        -}}${tint_spirv_tools_dir}:spvtools_headers
+{{-   else if eq $.Name "spirv-opt-internal" -}}${tint_spirv_tools_dir}:spvtools_opt
+{{-   else if eq $.Name "spirv-headers"      -}}${tint_spirv_headers_dir}:spv_headers
+{{-   else if eq $.Name "glslang"            -}}${tint_glslang_dir}:glslang_lib_sources
+{{-   else if eq $.Name "glslang-res-limits" -}}${tint_glslang_dir}:glslang_default_resource_limits_sources
+{{-   else                                   -}}{{Error (printf "unhandled external dependency '%v'" $)}}
+{{-   end}}
+{{- end}}
+
