@@ -22,8 +22,8 @@
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/wgsl/ast/function.h"
 #include "src/tint/lang/wgsl/sem/info.h"
-#include "src/tint/utils/generation_id.h"
-#include "src/tint/utils/text/symbol_table.h"
+#include "src/tint/utils/id/generation.h"
+#include "src/tint/utils/symbol/table.h"
 
 // Forward Declarations
 namespace tint::ast {

@@ -16,6 +16,7 @@
 #include "src/tint/lang/spirv/reader/ast_parser/function.h"
 #include "src/tint/lang/spirv/reader/ast_parser/helper_test.h"
 #include "src/tint/lang/spirv/reader/ast_parser/spirv_tools_helpers_test.h"
+#include "src/tint/lang/spirv/reader/ast_parser/helper_test.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
 #include "src/tint/lang/wgsl/sem/call.h"
 

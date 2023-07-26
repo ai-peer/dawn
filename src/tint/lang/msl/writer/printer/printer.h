@@ -22,7 +22,7 @@
 #include "src/tint/lang/core/type/texture.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/text/string_stream.h"
-#include "src/tint/utils/text/text_generator.h"
+#include "src/tint/utils/generator/text.h"
 
 namespace tint::msl::writer {
 
@@ -100,8 +100,16 @@ class Printer : public tint::TextGenerator {
     std::string array_template_name_;
 
   private:
-    /// @copydoc tint::TextWrtiter::UniqueIdentifier
-    std::string UniqueIdentifier(const std::string& prefix = "") override;
+    /// @param s the structure
+    /// @returns the name of the structure, taking special care of builtin structures that start
+    /// with double underscores. If the structure is a builtin, then the returned name will be a
+    /// unique name without the leading underscores.
+    std::string StructName(const type::Struct* s);
+
+    /// @return a new, unique identifier with the given prefix.
+    /// @param prefix optional prefix to apply to the generated identifier. If empty "tint_symbol"
+    /// will be used.
+    std::string UniqueIdentifier(const std::string& prefix = "");
 
     ir::Module* const ir_;
 

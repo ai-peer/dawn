@@ -18,6 +18,7 @@
 #include "src/tint/lang/wgsl/ast/discard_statement.h"
 #include "src/tint/lang/wgsl/ast/helper_test.h"
 #include "src/tint/lang/wgsl/ast/if_statement.h"
+#include "src/tint/lang/wgsl/ast/helper_test.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 

@@ -14,6 +14,7 @@
 
 #include "src/tint/lang/wgsl/ast/helper_test.h"
 #include "src/tint/lang/wgsl/ast/id_attribute.h"
+#include "src/tint/lang/wgsl/ast/helper_test.h"
 #include "src/tint/lang/wgsl/reader/parser/helper_test.h"
 
 namespace tint::wgsl::reader {
