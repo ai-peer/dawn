@@ -20,6 +20,17 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("common") {
+  sources = [
+    "options.cc",
+    "options.h",
+  ]
+  deps = [
+    "${tint_src_dir}/utils/macros",
+    "${tint_src_dir}/utils/reflection",
+  ]
+}
