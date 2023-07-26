@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "350d41b15c3f40db286c35d6f00d1541e201ab62",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b662f5_7c46470b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-26T14:30:02Z",
+      "side": 1,
+      "message": "LGTM but is there a very brief explanation of what needs to be fixed? We could add it to the comments and the commit message.",
+      "revId": "350d41b15c3f40db286c35d6f00d1541e201ab62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
