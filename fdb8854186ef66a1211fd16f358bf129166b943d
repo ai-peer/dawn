@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61dd6173_4d3d159e",
+        "filename": "src/tint/lang/core/ir/transform/test_helper.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-26T21:38:55Z",
+      "side": 1,
+      "message": "What does this `bool` represent? `Result` already holds the success / fail state. Recommend adding to `result.h`:\n\n```\n/// Empty structure used as the default SUCCESS_TYPE for a Result.\nstruct SuccessType {};\n\nstatic constexpr const SuccessType Success;\n```\n\nAnd using this as the default template argument for `Result`.",
+      "range": {
+        "startLine": 31,
+        "startChar": 50,
+        "endLine": 31,
+        "endChar": 54
+      },
+      "revId": "fdb8854186ef66a1211fd16f358bf129166b943d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
