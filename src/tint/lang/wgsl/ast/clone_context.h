@@ -30,14 +30,14 @@
 #include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/rtti/castable.h"
-#include "src/tint/utils/text/symbol.h"
+#include "src/tint/utils/symbol/symbol.h"
 #include "src/tint/utils/traits/traits.h"
 
-// Forward declarations
-namespace tint {
-class CloneContext;
-class Program;
-class ProgramBuilder;
+    // Forward declarations
+    namespace tint {
+    class CloneContext;
+    class Program;
+    class ProgramBuilder;
 }  // namespace tint
 namespace tint::ast {
 class FunctionList;

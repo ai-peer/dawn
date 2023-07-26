@@ -16,8 +16,6 @@
 
 #include <utility>
 
-#include "src/tint/lang/wgsl/program/program_builder.h"
-
 TINT_INSTANTIATE_TYPEINFO(tint::ast::WhileStatement);
 
 namespace tint::ast {

@@ -19,6 +19,8 @@
 
 #include "src/tint/lang/wgsl/ast/clone_context.h"
 #include "src/tint/lang/wgsl/ast/node_id.h"
+#include "src/tint/utils/diagnostic/source.h"
+#include "src/tint/utils/id/generation.h"
 
 namespace tint::ast {
 
