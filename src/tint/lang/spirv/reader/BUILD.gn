@@ -20,6 +20,21 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("reader") {
+  sources = [
+    "reader.cc",
+    "reader.h",
+  ]
+  deps = [
+    "${tint_src_dir}/lang/spirv/reader/common",
+    "${tint_src_dir}/lang/wgsl/program",
+  ]
+
+  if (tint_build_spv_reader) {
+    deps += [ "${tint_src_dir}/lang/spirv/reader/ast_parser" ]
+  }
+}
