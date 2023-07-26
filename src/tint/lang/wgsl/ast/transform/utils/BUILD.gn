@@ -20,6 +20,16 @@
 # Do not modify this file directly
 ################################################################################
 
-import("../../../tint_overrides_with_defaults.gni")
+import("../../../../../../../tint_overrides_with_defaults.gni")
 
 import("${tint_src_dir}/tint.gni")
+
+libtint_source_set("utils") {
+  sources = []
+  deps = []
+}
+
+tint_unittests_source_set("unittests") {
+  sources = []
+  deps = []
+}
