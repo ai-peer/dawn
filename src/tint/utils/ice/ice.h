@@ -20,7 +20,7 @@
 #include <utility>
 
 #include "src/tint/utils/macros/compiler.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint {
 

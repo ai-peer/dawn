@@ -1282,9 +1282,6 @@ TEST_F(CloneContextTest, GenerationIDs_Clone_ObjectNotOwnedByDst) {
         },
         R"(internal compiler error: TINT_ASSERT_GENERATION_IDS_EQUAL_IF_VALID(dst, out))");
 }
-
-}  // namespace
-
 TINT_INSTANTIATE_TYPEINFO(Node);
 TINT_INSTANTIATE_TYPEINFO(Replaceable);
 TINT_INSTANTIATE_TYPEINFO(Replacement);
