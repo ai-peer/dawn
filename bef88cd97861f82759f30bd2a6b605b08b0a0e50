@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62366ede_a4b58bc8",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-26T01:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6cf8b22_c356cb03",
+      "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84a35abf_8d8ef156",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05c28300_aca535b2",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-26T01:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84a35abf_8d8ef156",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 23,
+        "endChar": 23
+      },
+      "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5108e1b3_46cfbec8",
@@ -71,6 +113,24 @@
       "writtenOn": "2023-07-26T00:30:19Z",
       "side": 1,
       "message": "maybe leave a TODO\n\nit\u0027d be nice to not duplicate the constants, but I don\u0027t see a simple way to do it right now",
+      "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb127e4_27c945ec",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-26T01:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5108e1b3_46cfbec8",
       "revId": "bef88cd97861f82759f30bd2a6b605b08b0a0e50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
