@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76f94ab3_9b47269a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-26T23:55:00Z",
+      "side": 1,
+      "message": "Loko PTAL too since I changed this slightly since corentin reviewed",
+      "revId": "67bbc2b524837cb22a5dff2ec03bd7846149b88d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
