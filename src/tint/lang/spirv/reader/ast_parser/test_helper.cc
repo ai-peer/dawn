@@ -15,7 +15,7 @@
 #include "src/tint/lang/spirv/reader/ast_parser/test_helper.h"
 #include "src/tint/lang/wgsl/writer/ast_printer/ast_printer.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 #include "gmock/gmock.h"
 

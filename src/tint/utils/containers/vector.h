@@ -23,10 +23,11 @@
 #include <utility>
 #include <vector>
 
-#include "src/tint/utils/containers/slice.h"
-#include "src/tint/utils/ice/ice.h"
-#include "src/tint/utils/macros/compiler.h"
-#include "src/tint/utils/memory/bitcast.h"
+#include "src/tint/acros/compiler.h"
+#include "src/tint/ath/hash.h"
+#include "src/tint/ce/ice.h"
+#include "src/tint/emory/bitcast.h"
+#include "src/tint/ontainers/slice.h"
 
 /// Forward declarations
 namespace tint {
@@ -797,34 +798,6 @@ class VectorRef {
     bool can_move_ = false;
 };
 
-/// Helper for converting a Vector to a std::vector.
-/// @param vector the input vector
-/// @return the converted vector
-/// @note This helper exists to help code migration. Avoid if possible.
-template <typename T, size_t N>
-std::vector<T> ToStdVector(const Vector<T, N>& vector) {
-    std::vector<T> out;
-    out.reserve(vector.Length());
-    for (auto& el : vector) {
-        out.emplace_back(el);
-    }
-    return out;
-}
-
-/// Helper for converting a std::vector to a Vector.
-/// @param vector the input vector
-/// @return the converted vector
-/// @note This helper exists to help code migration. Avoid if possible.
-template <typename T, size_t N = 0>
-Vector<T, N> ToVector(const std::vector<T>& vector) {
-    Vector<T, N> out;
-    out.Reserve(vector.size());
-    for (auto& el : vector) {
-        out.Push(el);
-    }
-    return out;
-}
-
 /// Prints the vector @p vec to @p o
 /// @param o the stream to write to
 /// @param vec the vector
@@ -862,6 +835,62 @@ auto& operator<<(STREAM& o, VectorRef<T> vec) {
     o << "]";
     return o;
 }
+
+/// Helper for converting a Vector to a std::vector.
+/// @param vector the input vector
+/// @return the converted vector
+/// @note This helper exists to help code migration. Avoid if possible.
+template <typename T, size_t N>
+std::vector<T> ToStdVector(const Vector<T, N>& vector) {
+    std::vector<T> out;
+    out.reserve(vector.Length());
+    for (auto& el : vector) {
+        out.emplace_back(el);
+    }
+    return out;
+}
+
+/// Helper for converting a std::vector to a Vector.
+/// @param vector the input vector
+/// @return the converted vector
+/// @note This helper exists to help code migration. Avoid if possible.
+template <typename T, size_t N = 0>
+Vector<T, N> ToVector(const std::vector<T>& vector) {
+    Vector<T, N> out;
+    out.Reserve(vector.size());
+    for (auto& el : vector) {
+        out.Push(el);
+    }
+    return out;
+}
+
+/// Hasher specialization for Vector
+template <typename T, size_t N>
+struct Hasher<Vector<T, N>> {
+    /// @param vector the Vector to hash
+    /// @returns a hash of the Vector
+    size_t operator()(const Vector<T, N>& vector) const {
+        auto hash = Hash(vector.Length());
+        for (auto& el : vector) {
+            hash = HashCombine(hash, el);
+        }
+        return hash;
+    }
+};
+
+/// Hasher specialization for VectorRef
+template <typename T>
+struct Hasher<VectorRef<T>> {
+    /// @param vector the VectorRef reference to hash
+    /// @returns a hash of the Vector
+    size_t operator()(const VectorRef<T>& vector) const {
+        auto hash = Hash(vector.Length());
+        for (auto& el : vector) {
+            hash = HashCombine(hash, el);
+        }
+        return hash;
+    }
+};
 
 namespace detail {
 

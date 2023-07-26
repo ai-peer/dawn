@@ -28,7 +28,7 @@
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/math/math.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::VertexPulling);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::VertexPulling::Config);
@@ -669,7 +669,7 @@ struct VertexPulling::State {
                                          b.Call("unpack2x16float", load_next_u32()));
         }
 
-        TINT_UNREACHABLE();
+        TINT_UNREACHABLE() << "format " << static_cast<int>(format);
         return nullptr;
     }
 

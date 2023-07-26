@@ -20,7 +20,7 @@
 #include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.h"
 #include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program_test.h"
 #include "src/tint/lang/wgsl/writer/writer.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::wgsl::writer {
 namespace {

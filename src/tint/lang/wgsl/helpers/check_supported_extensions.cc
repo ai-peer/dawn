@@ -19,7 +19,7 @@
 #include "src/tint/lang/wgsl/ast/module.h"
 #include "src/tint/utils/containers/hashset.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::writer {
 
