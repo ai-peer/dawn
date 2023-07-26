@@ -44,10 +44,13 @@ if (TINT_BUILD_SPV_READER)
   tint_target_add_dependencies("cmd/common"
     "lang/spirv/reader"
   )
+endif(TINT_BUILD_SPV_READER)
+
+if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
   tint_target_add_external_dependencies("cmd/common"
     "spirv-tools"
   )
-endif(TINT_BUILD_SPV_READER)
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
 
 tint_add_target("cmd/common:test"
   cmd/common/generate_external_texture_bindings_test.cc
