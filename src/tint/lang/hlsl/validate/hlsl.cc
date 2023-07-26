@@ -18,7 +18,7 @@
 
 #include "src/tint/utils/command/command.h"
 #include "src/tint/utils/file/tmpfile.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 #ifdef _WIN32
 #include <Windows.h>

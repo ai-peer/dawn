@@ -16,6 +16,7 @@
 
 #include "src/tint/lang/core/constant/helper_test.h"
 #include "src/tint/lang/core/constant/scalar.h"
+#include "src/tint/lang/core/constant/helper_test.h"
 
 namespace tint::constant {
 namespace {

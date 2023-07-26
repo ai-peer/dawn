@@ -41,7 +41,7 @@
 #include "src/tint/lang/core/type/u32.h"
 #include "src/tint/lang/core/type/vector.h"
 #include "src/tint/lang/core/type/void.h"
-#include "src/tint/lang/msl/writer/printer_support.h"
+#include "src/tint/lang/msl/writer/common/printer_support.h"
 #include "src/tint/lang/wgsl/ast/alias.h"
 #include "src/tint/lang/wgsl/ast/bool_literal_expression.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
@@ -85,7 +85,7 @@
 #include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/rtti/switch.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::msl::writer {
 namespace {

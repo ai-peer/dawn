@@ -23,7 +23,7 @@
 #include "src/tint/lang/core/type/storage_texture.h"
 #include "src/tint/lang/core/type/struct.h"
 #include "src/tint/lang/msl/writer/printer/helper_test.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::msl::writer {
 namespace {

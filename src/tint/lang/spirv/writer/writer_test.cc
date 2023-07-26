@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/spirv/writer/helper_test.h"
+#include "src/tint/lang/spirv/writer/common/helper_test.h"
 
 #include "gmock/gmock.h"
 

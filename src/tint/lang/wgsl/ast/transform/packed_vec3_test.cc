@@ -25,7 +25,7 @@
 #include "src/tint/lang/wgsl/resolver/resolve.h"
 #include "src/tint/lang/wgsl/sem/struct.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::ast::transform {
 namespace {

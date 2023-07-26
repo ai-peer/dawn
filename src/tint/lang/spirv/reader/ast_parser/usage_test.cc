@@ -17,7 +17,7 @@
 
 #include "gmock/gmock.h"
 #include "src/tint/lang/spirv/reader/ast_parser/helper_test.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::spirv::reader {
 namespace {

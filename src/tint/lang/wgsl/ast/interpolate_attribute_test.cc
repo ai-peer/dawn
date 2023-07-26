@@ -17,7 +17,7 @@
 #include <string>
 
 #include "src/tint/lang/wgsl/ast/helper_test.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::ast {
 namespace {

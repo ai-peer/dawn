@@ -14,7 +14,7 @@
 
 #include "src/tint/lang/wgsl/ast/call_statement.h"
 #include "src/tint/lang/wgsl/writer/ast_printer/helper_test.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 #include "gmock/gmock.h"
 

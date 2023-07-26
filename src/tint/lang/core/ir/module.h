@@ -27,10 +27,10 @@
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/diagnostic/source.h"
-#include "src/tint/utils/generation_id.h"
+#include "src/tint/utils/id/generation.h"
 #include "src/tint/utils/memory/block_allocator.h"
 #include "src/tint/utils/result/result.h"
-#include "src/tint/utils/text/symbol_table.h"
+#include "src/tint/utils/symbol/table.h"
 
 namespace tint::ir {
 

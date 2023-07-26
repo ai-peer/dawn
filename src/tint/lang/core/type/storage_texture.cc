@@ -19,7 +19,7 @@
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/core/type/u32.h"
 #include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::type::StorageTexture);
 

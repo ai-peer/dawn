@@ -28,7 +28,7 @@
 #include "src/tint/lang/spirv/reader/ast_parser/attributes.h"
 #include "src/tint/lang/spirv/reader/ast_parser/construct.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 namespace tint::spirv::reader {
 

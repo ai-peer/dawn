@@ -21,7 +21,7 @@
 #include "src/tint/lang/wgsl/reader/reader.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
 #include "src/tint/lang/wgsl/resolver/uniformity.h"
-#include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/string/stream.h"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"

@@ -15,6 +15,7 @@
 #include "gtest/gtest-spi.h"
 #include "src/tint/lang/wgsl/ast/helper_test.h"
 #include "src/tint/lang/wgsl/ast/return_statement.h"
+#include "src/tint/lang/wgsl/ast/helper_test.h"
 
 namespace tint {
 namespace {

@@ -24,7 +24,7 @@
 
 #include "gtest/gtest-spi.h"
 #include "src/tint/lang/core/builtin/diagnostic_severity.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/string/string.h"
 
 namespace tint::builtin {
 namespace {
