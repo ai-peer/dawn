@@ -79,12 +79,11 @@ Result<int8_t, ParseNumberError> ParseInt8(std::string_view str);
 /// @returns the string @p str parsed as a uint8_t
 Result<uint8_t, ParseNumberError> ParseUint8(std::string_view str);
 
-TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
-
 /// @param str the string
 /// @returns the string @p str parsed as a the number @p T
 template <typename T>
 inline Result<T, ParseNumberError> ParseNumber(std::string_view str) {
+    TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
     if constexpr (std::is_same_v<T, float>) {
         return ParseFloat(str);
     }
@@ -122,9 +121,8 @@ inline Result<T, ParseNumberError> ParseNumber(std::string_view str) {
         return ParseUint8(str);
     }
     return ParseNumberError::kUnparsable;
+    TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
 }
-
-TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
 
 }  // namespace tint
 
