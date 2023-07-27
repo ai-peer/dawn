@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b6fb3e_8c295e3e",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T19:55:13Z",
+      "side": 1,
+      "message": "I think the attachments, default to undefined so it shouldn\u0027t be necessary to explicitly set it\n\n```suggestion\n        for (uint32_t i \u003d firstAttachmentLocation; i \u003c numColorAttachments + firstAttachmentLocation; ++i) {\n            pipelineDescriptor.cTargets[i].format \u003d kColorFormat;\n        }\n\n```",
+      "range": {
+        "startLine": 316,
+        "startChar": 8,
+        "endLine": 324,
+        "endChar": 0
+      },
+      "revId": "957204bfc4b6bb36db7289cc6f3ff27bfc946f5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

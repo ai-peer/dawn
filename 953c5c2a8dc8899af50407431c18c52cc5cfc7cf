@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c626de_516b762c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T19:55:13Z",
+      "side": 1,
+      "message": "great, then I think a more descriptive name for this toggle is vulkan_resolve_with_multiple_attachments_in_separate_pass\n\nlooks like you\u0027ve fixed one GPU and broke the other though.. 😂\n\nI\u0027m realizing this workaround could have been done in the frontend (CommandEncoder::ApplyRenderPassWorkarounds) which has some benefits:\n - might fix the problem on QCOM? AlwaysResolveIntoZeroLevelAndLayer is a workaround we use there. It looks like the tests might be failing because we need to apply your current workaround first, then apply AlwaysResolveIntoZeroLevelAndLayer.\n - you don\u0027t have to deal with the Vulkan render pass cache and VkFramebuffer creation manually - fewer conceptual things overall\n\nwhat do you think?",
+      "parentUuid": "ae1317a8_6bb24c37",
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3004e75_b66faa95",
