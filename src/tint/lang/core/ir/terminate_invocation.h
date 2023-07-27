@@ -20,7 +20,7 @@
 namespace tint::ir {
 
 /// An terminate invocation instruction in the IR.
-class TerminateInvocation : public utils::Castable<TerminateInvocation, Terminator> {
+class TerminateInvocation : public tint::Castable<TerminateInvocation, Terminator> {
   public:
     ~TerminateInvocation() override;
 

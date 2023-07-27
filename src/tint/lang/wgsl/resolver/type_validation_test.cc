@@ -100,8 +100,8 @@ TEST_F(ResolverTypeValidationTest, GlobalVariableFunctionVariableNotUnique_Pass)
     // }
     // var a: f32 = 2.1;
 
-    Func("my_func", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("my_func", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(Var("a", ty.f32(), Expr(2_f))),
          });
 
@@ -152,14 +152,14 @@ TEST_F(ResolverTypeValidationTest, RedeclaredIdentifierDifferentFunctions_Pass) 
 
     auto* var1 = Var("a", ty.f32(), Expr(1_f));
 
-    Func("func0", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("func0", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(Source{{12, 34}}, var0),
              Return(),
          });
 
-    Func("func1", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("func1", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(Source{{13, 34}}, var1),
              Return(),
          });
@@ -335,7 +335,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_OverElementCountLimit) {
 TEST_F(ResolverTypeValidationTest, ArraySize_StorageBufferLargeArray) {
     // var<storage> a : array<f32, 65536>;
     GlobalVar("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, 65536_a)),
-              builtin::AddressSpace::kStorage, utils::Vector{Binding(0_u), Group(0_u)});
+              builtin::AddressSpace::kStorage, tint::Vector{Binding(0_u), Group(0_u)});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
@@ -344,10 +344,10 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NestedStorageBufferLargeArray) {
     //  a : array<f32, 65536>,
     // }
     // var<storage> a : S;
-    Structure("S", utils::Vector{Member(Source{{12, 34}}, "a",
-                                        ty.array(Source{{12, 20}}, ty.f32(), 65536_a))});
+    Structure("S", tint::Vector{Member(Source{{12, 34}}, "a",
+                                       ty.array(Source{{12, 20}}, ty.f32(), 65536_a))});
     GlobalVar("a", ty(Source{{12, 30}}, "S"), builtin::AddressSpace::kStorage,
-              utils::Vector{Binding(0_u), Group(0_u)});
+              tint::Vector{Binding(0_u), Group(0_u)});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
@@ -356,8 +356,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_TooBig_ImplicitStride) {
     //   @offset(800000) a : f32
     // }
     // var<private> a : array<S, 65535>;
-    Structure("S", utils::Vector{Member(Source{{12, 34}}, "a", ty.f32(),
-                                        utils::Vector{MemberOffset(800000_a)})});
+    Structure("S", tint::Vector{Member(Source{{12, 34}}, "a", ty.f32(),
+                                       tint::Vector{MemberOffset(800000_a)})});
     GlobalVar("a", ty.array(ty(Source{{12, 30}}, "S"), Expr(Source{{12, 34}}, 65535_a)),
               builtin::AddressSpace::kPrivate);
     EXPECT_FALSE(r()->Resolve());
@@ -368,7 +368,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_TooBig_ImplicitStride) {
 TEST_F(ResolverTypeValidationTest, ArraySize_TooBig_ExplicitStride) {
     // var<private> a : @stride(8000000) array<f32, 65535>;
     GlobalVar("a",
-              ty.array(ty.f32(), Expr(Source{{12, 34}}, 65535_a), utils::Vector{Stride(8000000)}),
+              ty.array(ty.f32(), Expr(Source{{12, 34}}, 65535_a), tint::Vector{Stride(8000000)}),
               builtin::AddressSpace::kPrivate);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -404,7 +404,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_InStruct) {
     //   a : array<f32, size>
     // };
     Override("size", Expr(10_i));
-    Structure("S", utils::Vector{Member("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))});
+    Structure("S", tint::Vector{Member("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               "12:34 error: array with an 'override' element count can only be used as the store "
@@ -417,8 +417,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionVar_Explicit)
     //   var a : array<f32, size>;
     // }
     Override("size", Expr(10_i));
-    Func("f", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("f", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(Var("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))),
          });
     EXPECT_FALSE(r()->Resolve());
@@ -433,8 +433,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionLet_Explicit)
     //   var a : array<f32, size>;
     // }
     Override("size", Expr(10_i));
-    Func("f", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("f", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(Var("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))),
          });
     EXPECT_FALSE(r()->Resolve());
@@ -451,8 +451,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionVar_Implicit)
     // }
     Override("size", Expr(10_i));
     GlobalVar("w", ty.array(ty.f32(), "size"), builtin::AddressSpace::kWorkgroup);
-    Func("f", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("f", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(Var("a", Expr(Source{{12, 34}}, "w"))),
          });
     EXPECT_FALSE(r()->Resolve());
@@ -469,8 +469,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionLet_Implicit)
     // }
     Override("size", Expr(10_i));
     GlobalVar("w", ty.array(ty.f32(), "size"), builtin::AddressSpace::kWorkgroup);
-    Func("f", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("f", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(Let("a", Expr(Source{{12, 34}}, "w"))),
          });
     EXPECT_FALSE(r()->Resolve());
@@ -501,8 +501,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_Param) {
     // fn f(a : array<f32, size>) {
     // }
     Override("size", Expr(10_i));
-    Func("f", utils::Vector{Param("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))}, ty.void_(),
-         utils::Empty);
+    Func("f", tint::Vector{Param("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))}, ty.void_(),
+         tint::Empty);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: type of function parameter must be constructible");
 }
@@ -512,7 +512,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_ReturnType) {
     // fn f() -> array<f32, size> {
     // }
     Override("size", Expr(10_i));
-    Func("f", utils::Empty, ty.array(Source{{12, 34}}, ty.f32(), "size"), utils::Empty);
+    Func("f", tint::Empty, ty.array(Source{{12, 34}}, ty.f32(), "size"), tint::Empty);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: function return type must be a constructible type");
 }
@@ -576,11 +576,11 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayInFunction_Fail) {
 
     auto* var = Var(Source{{56, 78}}, "a", ty.array(Source{{12, 34}}, ty.i32()));
 
-    Func("func", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("func", tint::Empty, ty.void_(),
+         tint::Vector{
              Decl(var),
          },
-         utils::Vector{
+         tint::Vector{
              Stage(ast::PipelineStage::kVertex),
          });
 
@@ -595,7 +595,7 @@ TEST_F(ResolverTypeValidationTest, Struct_Member_VectorNoType) {
     //   a: vec3;
     // };
 
-    Structure("S", utils::Vector{
+    Structure("S", tint::Vector{
                        Member("a", ty.vec3<Infer>(Source{{12, 34}})),
                    });
 
@@ -607,7 +607,7 @@ TEST_F(ResolverTypeValidationTest, Struct_Member_MatrixNoType) {
     // struct S {
     //   a: mat3x3;
     // };
-    Structure("S", utils::Vector{
+    Structure("S", tint::Vector{
                        Member("a", ty.mat3x3<Infer>(Source{{12, 34}})),
                    });
 
@@ -624,10 +624,10 @@ TEST_F(ResolverTypeValidationTest, Struct_TooBig) {
     //   b: array<Bar, 65535>;
     // }
 
-    Structure(Source{{10, 34}}, "Bar", utils::Vector{Member("a", ty.array<f32, 10000>())});
+    Structure(Source{{10, 34}}, "Bar", tint::Vector{Member("a", ty.array<f32, 10000>())});
     Structure(Source{{12, 34}}, "Foo",
-              utils::Vector{Member("a", ty.array(ty(Source{{12, 30}}, "Bar"), Expr(65535_a))),
-                            Member("b", ty.array(ty("Bar"), Expr(65535_a)))});
+              tint::Vector{Member("a", ty.array(ty(Source{{12, 30}}, "Bar"), Expr(65535_a))),
+                           Member("b", ty.array(ty("Bar"), Expr(65535_a)))});
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -641,9 +641,9 @@ TEST_F(ResolverTypeValidationTest, Struct_MemberOffset_TooBig) {
     //   c: f32;
     // };
 
-    Structure("Foo", utils::Vector{
-                         Member("z", ty.f32(), utils::Vector{MemberSize(2147483647_a)}),
-                         Member("y", ty.f32(), utils::Vector{MemberSize(2147483647_a)}),
+    Structure("Foo", tint::Vector{
+                         Member("z", ty.f32(), tint::Vector{MemberSize(2147483647_a)}),
+                         Member("y", ty.f32(), tint::Vector{MemberSize(2147483647_a)}),
                          Member(Source{{12, 34}}, "a", ty.array<f32, 65535>()),
                          Member("c", ty.f32()),
                      });
@@ -659,7 +659,7 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayIsLast_Pass) {
     //   rt: array<f32>;
     // };
 
-    Structure("Foo", utils::Vector{
+    Structure("Foo", tint::Vector{
                          Member("vf", ty.f32()),
                          Member("rt", ty.array<f32>()),
                      });
@@ -672,7 +672,7 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayInArray) {
     //   rt : array<array<f32>, 4u>;
     // };
 
-    Structure("Foo", utils::Vector{
+    Structure("Foo", tint::Vector{
                          Member("rt", ty.array(ty.array(Source{{12, 34}}, ty.f32()), 4_u)),
                      });
 
@@ -687,7 +687,7 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayInStructInArray) {
     // };
     // var<private> a : array<Foo, 4>;
 
-    Structure("Foo", utils::Vector{Member("rt", ty.array<f32>())});
+    Structure("Foo", tint::Vector{Member("rt", ty.array<f32>())});
     GlobalVar("v", ty.array(ty(Source{{12, 34}}, "Foo"), 4_u), builtin::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve()) << r()->error();
@@ -703,10 +703,10 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayInStructInStruct) {
     //   inner : Foo;
     // };
 
-    auto* foo = Structure("Foo", utils::Vector{
+    auto* foo = Structure("Foo", tint::Vector{
                                      Member("rt", ty.array<f32>()),
                                  });
-    Structure("Outer", utils::Vector{
+    Structure("Outer", tint::Vector{
                            Member(Source{{12, 34}}, "inner", ty.Of(foo)),
                        });
 
@@ -722,7 +722,7 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayIsNotLast_Fail) {
     //   vf: f32;
     // };
 
-    Structure("Foo", utils::Vector{
+    Structure("Foo", tint::Vector{
                          Member(Source{{12, 34}}, "rt", ty.array<f32>()),
                          Member("vf", ty.f32()),
                      });
@@ -760,16 +760,16 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayAsParameter_Fail) {
 
     auto* param = Param(Source{{56, 78}}, "a", ty.array(Source{{12, 34}}, ty.i32()));
 
-    Func("func", utils::Vector{param}, ty.void_(),
-         utils::Vector{
+    Func("func", tint::Vector{param}, ty.void_(),
+         tint::Vector{
              Return(),
          });
 
-    Func("main", utils::Empty, ty.void_(),
-         utils::Vector{
+    Func("main", tint::Empty, ty.void_(),
+         tint::Vector{
              Return(),
          },
-         utils::Vector{
+         tint::Vector{
              Stage(ast::PipelineStage::kVertex),
          });
 
@@ -785,8 +785,8 @@ TEST_F(ResolverTypeValidationTest, PtrToRuntimeArrayAsPointerParameter_Fail) {
     auto* param = Param("a", ty.ptr(Source{{56, 78}}, builtin::AddressSpace::kWorkgroup,
                                     ty.array(Source{{12, 34}}, ty.i32())));
 
-    Func("func", utils::Vector{param}, ty.void_(),
-         utils::Vector{
+    Func("func", tint::Vector{param}, ty.void_(),
+         tint::Vector{
              Return(),
          });
 
@@ -801,8 +801,8 @@ TEST_F(ResolverTypeValidationTest, PtrToRuntimeArrayAsParameter_Fail) {
 
     auto* param = Param(Source{{56, 78}}, "a", ty.array(Source{{12, 34}}, ty.i32()));
 
-    Func("func", utils::Vector{param}, ty.void_(),
-         utils::Vector{
+    Func("func", tint::Vector{param}, ty.void_(),
+         tint::Vector{
              Return(),
          });
 
@@ -820,7 +820,7 @@ TEST_F(ResolverTypeValidationTest, AliasRuntimeArrayIsNotLast_Fail) {
     //}
 
     auto* alias = Alias("RTArr", ty.array<u32>());
-    Structure("s", utils::Vector{
+    Structure("s", tint::Vector{
                        Member(Source{{12, 34}}, "b", ty.Of(alias)),
                        Member("a", ty.u32()),
                    });
@@ -838,7 +838,7 @@ TEST_F(ResolverTypeValidationTest, AliasRuntimeArrayIsLast_Pass) {
     //}
 
     auto* alias = Alias("RTArr", ty.array<u32>());
-    Structure("s", utils::Vector{
+    Structure("s", tint::Vector{
                        Member("a", ty.u32()),
                        Member("b", ty.Of(alias)),
                    });
@@ -857,7 +857,7 @@ TEST_F(ResolverTypeValidationTest, ArrayOfNonStorableType) {
 
 TEST_F(ResolverTypeValidationTest, ArrayOfNonStorableTypeWithStride) {
     auto ptr_ty = ty.ptr<uniform, u32>(Source{{12, 34}});
-    GlobalVar("arr", ty.array(ptr_ty, 4_i, utils::Vector{Stride(16)}),
+    GlobalVar("arr", ty.array(ptr_ty, 4_i, tint::Vector{Stride(16)}),
               builtin::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
@@ -1049,8 +1049,8 @@ TEST_P(StorageTextureDimensionTest, All) {
     // var a : texture_storage_*<r32uint, write>;
     auto& params = GetParam();
 
-    auto st = ty(Source{{12, 34}}, params.name, utils::ToString(builtin::TexelFormat::kR32Uint),
-                 utils::ToString(builtin::Access::kWrite));
+    auto st = ty(Source{{12, 34}}, params.name, tint::ToString(builtin::TexelFormat::kR32Uint),
+                 tint::ToString(builtin::Access::kWrite));
 
     GlobalVar("a", st, Group(0_a), Binding(0_a));
 
@@ -1500,7 +1500,7 @@ TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, Struct_UseWithTemplateArgs) 
     // };
     // var<private> v : S<true>;
 
-    Structure(Source{{56, 78}}, "S", utils::Vector{Member("i", ty.i32())});
+    Structure(Source{{56, 78}}, "S", tint::Vector{Member("i", ty.i32())});
     GlobalVar("v", builtin::AddressSpace::kPrivate, ty(Source{{12, 34}}, "S", true));
 
     EXPECT_FALSE(r()->Resolve());

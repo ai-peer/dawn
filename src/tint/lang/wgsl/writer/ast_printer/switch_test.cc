@@ -30,9 +30,9 @@ TEST_F(WgslASTPrinterTest, Emit_Switch) {
     auto* def = Case(DefaultCaseSelector(), def_body);
 
     auto* case_body = Block(create<ast::BreakStatement>());
-    auto* case_stmt = Case(utils::Vector{CaseSelector(5_i)}, case_body);
+    auto* case_stmt = Case(tint::Vector{CaseSelector(5_i)}, case_body);
 
-    utils::Vector body{
+    tint::Vector body{
         case_stmt,
         def,
     };
@@ -62,10 +62,10 @@ TEST_F(WgslASTPrinterTest, Emit_Switch_MixedDefault) {
     GlobalVar("cond", ty.i32(), builtin::AddressSpace::kPrivate);
 
     auto* def_body = Block(create<ast::BreakStatement>());
-    auto* def = Case(utils::Vector{CaseSelector(5_i), DefaultCaseSelector()}, def_body);
+    auto* def = Case(tint::Vector{CaseSelector(5_i), DefaultCaseSelector()}, def_body);
 
     auto* cond = Expr("cond");
-    auto* s = Switch(cond, utils::Vector{def});
+    auto* s = Switch(cond, tint::Vector{def});
     WrapInFunction(s);
 
     ASTPrinter& gen = Build();

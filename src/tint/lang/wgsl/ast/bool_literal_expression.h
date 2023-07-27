@@ -23,7 +23,7 @@ namespace tint::ast {
 
 /// A boolean literal
 class BoolLiteralExpression final
-    : public utils::Castable<BoolLiteralExpression, LiteralExpression> {
+    : public tint::Castable<BoolLiteralExpression, LiteralExpression> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node

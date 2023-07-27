@@ -28,8 +28,8 @@ namespace {
 using WgslASTPrinterTest = TestHelper;
 
 TEST_F(WgslASTPrinterTest, Emit_Function) {
-    auto* func = Func("my_func", utils::Empty, ty.void_(),
-                      utils::Vector{
+    auto* func = Func("my_func", tint::Empty, ty.void_(),
+                      tint::Vector{
                           Return(),
                       });
 
@@ -46,12 +46,12 @@ TEST_F(WgslASTPrinterTest, Emit_Function) {
 
 TEST_F(WgslASTPrinterTest, Emit_Function_WithParams) {
     auto* func = Func("my_func",
-                      utils::Vector{
+                      tint::Vector{
                           Param("a", ty.f32()),
                           Param("b", ty.i32()),
                       },
                       ty.void_(),
-                      utils::Vector{
+                      tint::Vector{
                           Return(),
                       });
 
@@ -67,11 +67,11 @@ TEST_F(WgslASTPrinterTest, Emit_Function_WithParams) {
 }
 
 TEST_F(WgslASTPrinterTest, Emit_Function_WithAttribute_WorkgroupSize) {
-    auto* func = Func("my_func", utils::Empty, ty.void_(),
-                      utils::Vector{
+    auto* func = Func("my_func", tint::Empty, ty.void_(),
+                      tint::Vector{
                           Return(),
                       },
-                      utils::Vector{
+                      tint::Vector{
                           Stage(ast::PipelineStage::kCompute),
                           WorkgroupSize(2_i, 4_i, 6_i),
                       });
@@ -89,11 +89,11 @@ TEST_F(WgslASTPrinterTest, Emit_Function_WithAttribute_WorkgroupSize) {
 }
 
 TEST_F(WgslASTPrinterTest, Emit_Function_WithAttribute_MustUse) {
-    auto* func = Func("my_func", utils::Empty, ty.i32(),
-                      utils::Vector{
+    auto* func = Func("my_func", tint::Empty, ty.i32(),
+                      tint::Vector{
                           Return(1_i),
                       },
-                      utils::Vector{
+                      tint::Vector{
                           MustUse(),
                       });
 
@@ -111,11 +111,11 @@ TEST_F(WgslASTPrinterTest, Emit_Function_WithAttribute_MustUse) {
 
 TEST_F(WgslASTPrinterTest, Emit_Function_WithAttribute_WorkgroupSize_WithIdent) {
     GlobalConst("height", ty.i32(), Expr(2_i));
-    auto* func = Func("my_func", utils::Empty, ty.void_(),
-                      utils::Vector{
+    auto* func = Func("my_func", tint::Empty, ty.void_(),
+                      tint::Vector{
                           Return(),
                       },
-                      utils::Vector{
+                      tint::Vector{
                           Stage(ast::PipelineStage::kCompute),
                           WorkgroupSize(2_i, "height"),
                       });
@@ -135,15 +135,15 @@ TEST_F(WgslASTPrinterTest, Emit_Function_WithAttribute_WorkgroupSize_WithIdent) 
 TEST_F(WgslASTPrinterTest, Emit_Function_EntryPoint_Parameters) {
     auto vec4 = ty.vec4<f32>();
     auto* coord = Param("coord", vec4,
-                        utils::Vector{
+                        tint::Vector{
                             Builtin(builtin::BuiltinValue::kPosition),
                         });
     auto* loc1 = Param("loc1", ty.f32(),
-                       utils::Vector{
+                       tint::Vector{
                            Location(1_a),
                        });
-    auto* func = Func("frag_main", utils::Vector{coord, loc1}, ty.void_(), utils::Empty,
-                      utils::Vector{
+    auto* func = Func("frag_main", tint::Vector{coord, loc1}, ty.void_(), tint::Empty,
+                      tint::Vector{
                           Stage(ast::PipelineStage::kFragment),
                       });
 
@@ -159,14 +159,14 @@ TEST_F(WgslASTPrinterTest, Emit_Function_EntryPoint_Parameters) {
 }
 
 TEST_F(WgslASTPrinterTest, Emit_Function_EntryPoint_ReturnValue) {
-    auto* func = Func("frag_main", utils::Empty, ty.f32(),
-                      utils::Vector{
+    auto* func = Func("frag_main", tint::Empty, ty.f32(),
+                      tint::Vector{
                           Return(1_f),
                       },
-                      utils::Vector{
+                      tint::Vector{
                           Stage(ast::PipelineStage::kFragment),
                       },
-                      utils::Vector{
+                      tint::Vector{
                           Location(1_a),
                       });
 
@@ -199,7 +199,7 @@ TEST_F(WgslASTPrinterTest, Emit_Function_Multiple_EntryPoint_With_Same_ModuleVar
     //   return;
     // }
 
-    auto* s = Structure("Data", utils::Vector{
+    auto* s = Structure("Data", tint::Vector{
                                     Member("d", ty.f32()),
                                 });
 
@@ -209,12 +209,12 @@ TEST_F(WgslASTPrinterTest, Emit_Function_Multiple_EntryPoint_With_Same_ModuleVar
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("a", utils::Empty, ty.void_(),
-             utils::Vector{
+        Func("a", tint::Empty, ty.void_(),
+             tint::Vector{
                  Decl(var),
                  Return(),
              },
-             utils::Vector{
+             tint::Vector{
                  Stage(ast::PipelineStage::kCompute),
                  WorkgroupSize(1_i),
              });
@@ -223,12 +223,12 @@ TEST_F(WgslASTPrinterTest, Emit_Function_Multiple_EntryPoint_With_Same_ModuleVar
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("b", utils::Empty, ty.void_(),
-             utils::Vector{
+        Func("b", tint::Empty, ty.void_(),
+             tint::Vector{
                  Decl(var),
                  Return(),
              },
-             utils::Vector{
+             tint::Vector{
                  Stage(ast::PipelineStage::kCompute),
                  WorkgroupSize(1_i),
              });

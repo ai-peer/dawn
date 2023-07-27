@@ -30,7 +30,7 @@ enum class SamplerKind {
 /// @param out the stream to write to
 /// @param kind the SamplerKind
 /// @return the stream so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, SamplerKind kind);
+tint::StringStream& operator<<(tint::StringStream& out, SamplerKind kind);
 
 }  // namespace tint::type
 

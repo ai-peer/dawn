@@ -142,9 +142,9 @@ TEST_P(ResolverExpressionKindTest, Test) {
     Symbol sym;
     std::function<void(const sem::Expression*)> check_expr;
 
-    utils::Vector<const ast::Parameter*, 2> fn_params;
-    utils::Vector<const ast::Statement*, 2> fn_stmts;
-    utils::Vector<const ast::Attribute*, 2> fn_attrs;
+    tint::Vector<const ast::Parameter*, 2> fn_params;
+    tint::Vector<const ast::Statement*, 2> fn_stmts;
+    tint::Vector<const ast::Attribute*, 2> fn_attrs;
 
     switch (GetParam().def) {
         case Def::kAccess: {
@@ -194,7 +194,7 @@ TEST_P(ResolverExpressionKindTest, Test) {
         }
         case Def::kFunction: {
             sym = Sym("FUNCTION");
-            auto* fn = Func(kDefSource, sym, utils::Empty, ty.i32(), Return(1_i));
+            auto* fn = Func(kDefSource, sym, tint::Empty, ty.i32(), Return(1_i));
             check_expr = [fn](const sem::Expression* expr) {
                 ASSERT_NE(expr, nullptr);
                 auto* fn_expr = expr->As<sem::FunctionExpression>();
@@ -239,7 +239,7 @@ TEST_P(ResolverExpressionKindTest, Test) {
         }
         case Def::kStruct: {
             sym = Sym("STRUCT");
-            auto* s = Structure(kDefSource, sym, utils::Vector{Member("m", ty.i32())});
+            auto* s = Structure(kDefSource, sym, tint::Vector{Member("m", ty.i32())});
             check_expr = [s](const sem::Expression* expr) {
                 ASSERT_NE(expr, nullptr);
                 auto* ty_expr = expr->As<sem::TypeExpression>();
@@ -291,8 +291,8 @@ TEST_P(ResolverExpressionKindTest, Test) {
             break;
         case Use::kAddressSpace:
             Enable(builtin::Extension::kChromiumExperimentalFullPtrParameters);
-            Func(Symbols().New(), utils::Vector{Param("p", ty("ptr", expr, ty.f32()))}, ty.void_(),
-                 utils::Empty);
+            Func(Symbols().New(), tint::Vector{Param("p", ty("ptr", expr, ty.f32()))}, ty.void_(),
+                 tint::Empty);
             break;
         case Use::kCallExpr:
             fn_stmts.Push(Decl(Var("v", Call(expr))));
@@ -305,15 +305,15 @@ TEST_P(ResolverExpressionKindTest, Test) {
             break;
         case Use::kBuiltinValue:
             Func(Symbols().New(),
-                 utils::Vector{Param("p", ty.vec4<f32>(), utils::Vector{Builtin(expr)})},
-                 ty.void_(), utils::Empty, utils::Vector{Stage(ast::PipelineStage::kFragment)});
+                 tint::Vector{Param("p", ty.vec4<f32>(), tint::Vector{Builtin(expr)})}, ty.void_(),
+                 tint::Empty, tint::Vector{Stage(ast::PipelineStage::kFragment)});
             break;
         case Use::kFunctionReturnType:
-            Func(Symbols().New(), utils::Empty, ty(expr), Return(Call(sym)));
+            Func(Symbols().New(), tint::Empty, ty(expr), Return(Call(sym)));
             break;
         case Use::kInterpolationSampling: {
             fn_params.Push(Param("p", ty.vec4<f32>(),
-                                 utils::Vector{
+                                 tint::Vector{
                                      Location(0_a),
                                      Interpolate(builtin::InterpolationType::kLinear, expr),
                                  }));
@@ -322,7 +322,7 @@ TEST_P(ResolverExpressionKindTest, Test) {
         }
         case Use::kInterpolationType: {
             fn_params.Push(Param("p", ty.vec4<f32>(),
-                                 utils::Vector{
+                                 tint::Vector{
                                      Location(0_a),
                                      Interpolate(expr, builtin::InterpolationSampling::kCenter),
                                  }));
@@ -330,7 +330,7 @@ TEST_P(ResolverExpressionKindTest, Test) {
             break;
         }
         case Use::kMemberType:
-            Structure(Symbols().New(), utils::Vector{Member("m", ty(expr))});
+            Structure(Symbols().New(), tint::Vector{Member("m", ty(expr))});
             break;
         case Use::kTexelFormat:
             GlobalVar(Symbols().New(), ty("texture_storage_2d", ty(expr), "write"), Group(0_u),

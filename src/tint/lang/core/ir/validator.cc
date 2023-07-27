@@ -71,7 +71,7 @@ void Validator::DisassembleIfNeeded() {
     mod_.disassembly_file = std::make_unique<Source::File>("", dis_.Disassemble());
 }
 
-utils::Result<Success, diag::List> Validator::IsValid() {
+tint::Result<Success, diag::List> Validator::IsValid() {
     CheckRootBlock(mod_.root_block);
 
     for (auto* func : mod_.functions) {
@@ -521,7 +521,7 @@ void Validator::CheckReturn(Return* ret) {
 
 void Validator::CheckControlsAllowingIf(Exit* exit, Instruction* control) {
     bool found = false;
-    for (auto ctrl : utils::Reverse(control_stack_)) {
+    for (auto ctrl : tint::Reverse(control_stack_)) {
         if (ctrl == control) {
             found = true;
             break;
@@ -621,7 +621,7 @@ const type::Type* Validator::GetVectorPtrElementType(Instruction* inst, size_t i
     return nullptr;
 }
 
-utils::Result<Success, diag::List> Validate(Module& mod) {
+tint::Result<Success, diag::List> Validate(Module& mod) {
     Validator v(mod);
     return v.IsValid();
 }

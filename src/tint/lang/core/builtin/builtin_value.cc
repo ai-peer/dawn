@@ -70,7 +70,7 @@ BuiltinValue ParseBuiltinValue(std::string_view str) {
     return BuiltinValue::kUndefined;
 }
 
-utils::StringStream& operator<<(utils::StringStream& out, BuiltinValue value) {
+tint::StringStream& operator<<(tint::StringStream& out, BuiltinValue value) {
     switch (value) {
         case BuiltinValue::kUndefined:
             return out << "undefined";

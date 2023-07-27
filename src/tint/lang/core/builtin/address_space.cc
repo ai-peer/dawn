@@ -55,7 +55,7 @@ AddressSpace ParseAddressSpace(std::string_view str) {
     return AddressSpace::kUndefined;
 }
 
-utils::StringStream& operator<<(utils::StringStream& out, AddressSpace value) {
+tint::StringStream& operator<<(tint::StringStream& out, AddressSpace value) {
     switch (value) {
         case AddressSpace::kUndefined:
             return out << "undefined";

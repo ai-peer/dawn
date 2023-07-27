@@ -58,7 +58,7 @@ DiagnosticSeverity ParseDiagnosticSeverity(std::string_view str) {
     return DiagnosticSeverity::kUndefined;
 }
 
-utils::StringStream& operator<<(utils::StringStream& out, DiagnosticSeverity value) {
+tint::StringStream& operator<<(tint::StringStream& out, DiagnosticSeverity value) {
     switch (value) {
         case DiagnosticSeverity::kUndefined:
             return out << "undefined";

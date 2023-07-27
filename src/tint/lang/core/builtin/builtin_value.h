@@ -48,7 +48,7 @@ enum class BuiltinValue {
 /// @param out the stream to write to
 /// @param value the BuiltinValue
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, BuiltinValue value);
+tint::StringStream& operator<<(tint::StringStream& out, BuiltinValue value);
 
 /// ParseBuiltinValue parses a BuiltinValue from a string.
 /// @param str the string to parse

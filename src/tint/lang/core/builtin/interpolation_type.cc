@@ -42,7 +42,7 @@ InterpolationType ParseInterpolationType(std::string_view str) {
     return InterpolationType::kUndefined;
 }
 
-utils::StringStream& operator<<(utils::StringStream& out, InterpolationType value) {
+tint::StringStream& operator<<(tint::StringStream& out, InterpolationType value) {
     switch (value) {
         case InterpolationType::kUndefined:
             return out << "undefined";

@@ -107,11 +107,11 @@ TEST_F(ResolverControlBlockValidationTest, SwitchWithTwoDefault_OneInCase_Fail) 
     // }
     auto* var = Var("a", ty.i32(), Expr(2_i));
 
-    auto* block = Block(
-        Decl(var),                                                                           //
-        Switch("a",                                                                          //
-               Case(utils::Vector{CaseSelector(1_i), DefaultCaseSelector(Source{{9, 2}})}),  //
-               DefaultCase(Source{{12, 34}})));
+    auto* block =
+        Block(Decl(var),                                                                          //
+              Switch("a",                                                                         //
+                     Case(tint::Vector{CaseSelector(1_i), DefaultCaseSelector(Source{{9, 2}})}),  //
+                     DefaultCase(Source{{12, 34}})));
 
     WrapInFunction(block);
 
@@ -130,8 +130,8 @@ TEST_F(ResolverControlBlockValidationTest, SwitchWithTwoDefault_SameCase) {
     auto* block =
         Block(Decl(var),   //
               Switch("a",  //
-                     Case(utils::Vector{DefaultCaseSelector(Source{{9, 2}}), CaseSelector(1_i),
-                                        DefaultCaseSelector(Source{{12, 34}})})));
+                     Case(tint::Vector{DefaultCaseSelector(Source{{9, 2}}), CaseSelector(1_i),
+                                       DefaultCaseSelector(Source{{12, 34}})})));
 
     WrapInFunction(block);
 
@@ -148,11 +148,11 @@ TEST_F(ResolverControlBlockValidationTest, SwitchWithTwoDefault_DifferentMultiCa
     // }
     auto* var = Var("a", ty.i32(), Expr(2_i));
 
-    auto* block = Block(
-        Decl(var),   //
-        Switch("a",  //
-               Case(utils::Vector{CaseSelector(1_i), DefaultCaseSelector(Source{{9, 2}})}),
-               Case(utils::Vector{DefaultCaseSelector(Source{{12, 34}}), CaseSelector(2_i)})));
+    auto* block =
+        Block(Decl(var),   //
+              Switch("a",  //
+                     Case(tint::Vector{CaseSelector(1_i), DefaultCaseSelector(Source{{9, 2}})}),
+                     Case(tint::Vector{DefaultCaseSelector(Source{{12, 34}}), CaseSelector(2_i)})));
 
     WrapInFunction(block);
 
@@ -336,7 +336,7 @@ TEST_F(ResolverControlBlockValidationTest, NonUniqueCaseSelectorValueUint_Fail) 
     auto* block = Block(Decl(var),   //
                         Switch("a",  //
                                Case(CaseSelector(0_u)),
-                               Case(utils::Vector{
+                               Case(tint::Vector{
                                    CaseSelector(Source{{12, 34}}, 2_u),
                                    CaseSelector(3_u),
                                    CaseSelector(Source{{56, 78}}, 2_u),
@@ -362,7 +362,7 @@ TEST_F(ResolverControlBlockValidationTest, NonUniqueCaseSelectorValueSint_Fail) 
     auto* block = Block(Decl(var),   //
                         Switch("a",  //
                                Case(CaseSelector(Source{{12, 34}}, -10_i)),
-                               Case(utils::Vector{
+                               Case(tint::Vector{
                                    CaseSelector(0_i),
                                    CaseSelector(1_i),
                                    CaseSelector(2_i),
@@ -457,8 +457,8 @@ TEST_F(ResolverControlBlockValidationTest, SwitchCase_Expression_Multiple) {
         Block(Decl(var),                             //
               Switch("a",                            //
                      DefaultCase(Source{{12, 34}}),  //
-                     Case(utils::Vector{CaseSelector(Add(5_u, 6_u)), CaseSelector(Add(7_u, 9_u)),
-                                        CaseSelector(Mul(2_u, 4_u))})));
+                     Case(tint::Vector{CaseSelector(Add(5_u, 6_u)), CaseSelector(Add(7_u, 9_u)),
+                                       CaseSelector(Mul(2_u, 4_u))})));
     WrapInFunction(block);
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -512,8 +512,8 @@ TEST_F(ResolverControlBlockValidationTest, NonUniqueCaseSelectorSameCase_BothExp
 
     auto* block = Block(Decl(var),   //
                         Switch("a",  //
-                               Case(utils::Vector{CaseSelector(Source{{56, 78}}, Add(5_i, 5_i)),
-                                                  CaseSelector(Source{{12, 34}}, Add(6_i, 4_i))}),
+                               Case(tint::Vector{CaseSelector(Source{{56, 78}}, Add(5_i, 5_i)),
+                                                 CaseSelector(Source{{12, 34}}, Add(6_i, 4_i))}),
                                DefaultCase()));
     WrapInFunction(block);
 
@@ -533,8 +533,8 @@ TEST_F(ResolverControlBlockValidationTest, NonUniqueCaseSelectorSame_Case_Expres
 
     auto* block = Block(Decl(var),   //
                         Switch("a",  //
-                               Case(utils::Vector{CaseSelector(Source{{56, 78}}, Add(5_i, 5_i)),
-                                                  CaseSelector(Source{{12, 34}}, 10_i)}),
+                               Case(tint::Vector{CaseSelector(Source{{56, 78}}, Add(5_i, 5_i)),
+                                                 CaseSelector(Source{{12, 34}}, 10_i)}),
                                DefaultCase()));
     WrapInFunction(block);
 
@@ -564,7 +564,7 @@ TEST_F(ResolverControlBlockValidationTest, Switch_OverrideCondition_Fail) {
 constexpr size_t kMaxSwitchCaseSelectors = 16383;
 
 TEST_F(ResolverControlBlockValidationTest, Switch_MaxSelectors_Valid) {
-    utils::Vector<const ast::CaseStatement*, 0> cases;
+    tint::Vector<const ast::CaseStatement*, 0> cases;
     for (size_t i = 0; i < kMaxSwitchCaseSelectors - 1; ++i) {
         cases.Push(Case(CaseSelector(Expr(i32(i)))));
     }
@@ -578,7 +578,7 @@ TEST_F(ResolverControlBlockValidationTest, Switch_MaxSelectors_Valid) {
 }
 
 TEST_F(ResolverControlBlockValidationTest, Switch_MaxSelectors_Invalid) {
-    utils::Vector<const ast::CaseStatement*, 0> cases;
+    tint::Vector<const ast::CaseStatement*, 0> cases;
     for (size_t i = 0; i < kMaxSwitchCaseSelectors; ++i) {
         cases.Push(Case(CaseSelector(Expr(i32(i)))));
     }

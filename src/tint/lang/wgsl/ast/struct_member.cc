@@ -25,7 +25,7 @@ StructMember::StructMember(GenerationID pid,
                            const Source& src,
                            const Identifier* n,
                            Type ty,
-                           utils::VectorRef<const Attribute*> attrs)
+                           tint::VectorRef<const Attribute*> attrs)
 
     : Base(pid, nid, src), name(n), type(ty), attributes(std::move(attrs)) {
     TINT_ASSERT(AST, name);

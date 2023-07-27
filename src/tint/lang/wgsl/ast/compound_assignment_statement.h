@@ -23,7 +23,7 @@ namespace tint::ast {
 
 /// A compound assignment statement
 class CompoundAssignmentStatement final
-    : public utils::Castable<CompoundAssignmentStatement, Statement> {
+    : public tint::Castable<CompoundAssignmentStatement, Statement> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node

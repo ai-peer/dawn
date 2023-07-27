@@ -22,7 +22,7 @@ namespace tint::ast {
 
 /// An increment or decrement statement
 class IncrementDecrementStatement final
-    : public utils::Castable<IncrementDecrementStatement, Statement> {
+    : public tint::Castable<IncrementDecrementStatement, Statement> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node

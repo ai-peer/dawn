@@ -25,7 +25,7 @@ class ControlInstruction;
 namespace tint::ir {
 
 /// The base class for all exit terminators.
-class Exit : public utils::Castable<Exit, Terminator> {
+class Exit : public tint::Castable<Exit, Terminator> {
   public:
     ~Exit() override;
 

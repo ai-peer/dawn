@@ -21,7 +21,7 @@
 namespace tint::ir {
 
 /// A constructor instruction in the IR.
-class Construct : public utils::Castable<Construct, Call> {
+class Construct : public tint::Castable<Construct, Call> {
   public:
     /// The base offset in Operands() for the args
     static constexpr size_t kArgsOperandOffset = 0;
@@ -29,7 +29,7 @@ class Construct : public utils::Castable<Construct, Call> {
     /// Constructor
     /// @param result the result value
     /// @param args the constructor arguments
-    explicit Construct(InstructionResult* result, utils::VectorRef<Value*> args = utils::Empty);
+    explicit Construct(InstructionResult* result, tint::VectorRef<Value*> args = tint::Empty);
     ~Construct() override;
 
     /// @returns the friendly name for the instruction

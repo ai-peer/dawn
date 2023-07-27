@@ -29,7 +29,7 @@ StorageTexture::StorageTexture(TextureDimension dim,
                                builtin::TexelFormat format,
                                builtin::Access access,
                                Type* subtype)
-    : Base(utils::Hash(utils::TypeInfo::Of<StorageTexture>().full_hashcode, dim, format, access),
+    : Base(tint::Hash(tint::TypeInfo::Of<StorageTexture>().full_hashcode, dim, format, access),
            dim),
       texel_format_(format),
       access_(access),
@@ -45,7 +45,7 @@ bool StorageTexture::Equals(const UniqueNode& other) const {
 }
 
 std::string StorageTexture::FriendlyName() const {
-    utils::StringStream out;
+    tint::StringStream out;
     out << "texture_storage_" << dim() << "<" << texel_format_ << ", " << access_ << ">";
     return out.str();
 }

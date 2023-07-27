@@ -39,10 +39,10 @@ namespace tint {
 class Program {
   public:
     /// ASTNodeAllocator is an alias to BlockAllocator<ast::Node>
-    using ASTNodeAllocator = utils::BlockAllocator<ast::Node>;
+    using ASTNodeAllocator = tint::BlockAllocator<ast::Node>;
 
     /// SemNodeAllocator is an alias to BlockAllocator<sem::Node>
-    using SemNodeAllocator = utils::BlockAllocator<sem::Node>;
+    using SemNodeAllocator = tint::BlockAllocator<sem::Node>;
 
     /// Constructor
     Program();

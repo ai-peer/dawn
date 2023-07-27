@@ -29,7 +29,7 @@ namespace tint::ir {
 /// A block that can be the target of multiple branches.
 /// MultiInBlocks maintain a list of inbound branches and a number of BlockParam parameters, used to
 /// pass values from the branch source to this target.
-class MultiInBlock : public utils::Castable<MultiInBlock, Block> {
+class MultiInBlock : public tint::Castable<MultiInBlock, Block> {
   public:
     /// Constructor
     MultiInBlock();
@@ -37,17 +37,17 @@ class MultiInBlock : public utils::Castable<MultiInBlock, Block> {
 
     /// Sets the params to the block
     /// @param params the params for the block
-    void SetParams(utils::VectorRef<BlockParam*> params);
+    void SetParams(tint::VectorRef<BlockParam*> params);
 
     /// Sets the params to the block
     /// @param params the params for the block
     void SetParams(std::initializer_list<BlockParam*> params);
 
     /// @returns the params to the block
-    const utils::Vector<BlockParam*, 2>& Params() { return params_; }
+    const tint::Vector<BlockParam*, 2>& Params() { return params_; }
 
     /// @returns branches made to this block by sibling blocks
-    const utils::VectorRef<ir::Terminator*> InboundSiblingBranches() {
+    const tint::VectorRef<ir::Terminator*> InboundSiblingBranches() {
         return inbound_sibling_branches_;
     }
 
@@ -56,8 +56,8 @@ class MultiInBlock : public utils::Castable<MultiInBlock, Block> {
     void AddInboundSiblingBranch(ir::Terminator* branch);
 
   private:
-    utils::Vector<BlockParam*, 2> params_;
-    utils::Vector<ir::Terminator*, 2> inbound_sibling_branches_;
+    tint::Vector<BlockParam*, 2> params_;
+    tint::Vector<ir::Terminator*, 2> inbound_sibling_branches_;
 };
 
 }  // namespace tint::ir

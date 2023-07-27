@@ -25,7 +25,7 @@ enum class PipelineStage { kNone = -1, kVertex, kFragment, kCompute };
 /// @param out the stream to write to
 /// @param stage the PipelineStage
 /// @return the stream so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, PipelineStage stage);
+tint::StringStream& operator<<(tint::StringStream& out, PipelineStage stage);
 
 }  // namespace tint::ast
 

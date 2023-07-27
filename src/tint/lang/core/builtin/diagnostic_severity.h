@@ -44,7 +44,7 @@ enum class DiagnosticSeverity {
 /// @param out the stream to write to
 /// @param value the DiagnosticSeverity
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, DiagnosticSeverity value);
+tint::StringStream& operator<<(tint::StringStream& out, DiagnosticSeverity value);
 
 /// ParseDiagnosticSeverity parses a DiagnosticSeverity from a string.
 /// @param str the string to parse

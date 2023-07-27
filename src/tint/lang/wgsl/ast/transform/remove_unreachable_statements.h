@@ -25,7 +25,7 @@ namespace tint::ast::transform {
 /// RemoveUnreachableStatements is a Transform that removes all statements
 /// marked as unreachable.
 class RemoveUnreachableStatements final
-    : public utils::Castable<RemoveUnreachableStatements, Transform> {
+    : public tint::Castable<RemoveUnreachableStatements, Transform> {
   public:
     /// Constructor
     RemoveUnreachableStatements();

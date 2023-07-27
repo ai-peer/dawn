@@ -116,7 +116,7 @@ void ASTPrinter::Generate() {
     }
 }
 
-void ASTPrinter::EmitDiagnosticControl(utils::StringStream& out,
+void ASTPrinter::EmitDiagnosticControl(tint::StringStream& out,
                                        const ast::DiagnosticControl& diagnostic) {
     out << "diagnostic(" << diagnostic.severity << ", " << diagnostic.rule_name->String() << ")";
 }
@@ -149,7 +149,7 @@ void ASTPrinter::EmitTypeDecl(const ast::TypeDecl* ty) {
         });
 }
 
-void ASTPrinter::EmitExpression(utils::StringStream& out, const ast::Expression* expr) {
+void ASTPrinter::EmitExpression(tint::StringStream& out, const ast::Expression* expr) {
     Switch(
         expr,  //
         [&](const ast::IndexAccessorExpression* a) { EmitIndexAccessor(out, a); },
@@ -164,7 +164,7 @@ void ASTPrinter::EmitExpression(utils::StringStream& out, const ast::Expression*
         [&](Default) { diagnostics_.add_error(diag::System::Writer, "unknown expression type"); });
 }
 
-void ASTPrinter::EmitIndexAccessor(utils::StringStream& out,
+void ASTPrinter::EmitIndexAccessor(tint::StringStream& out,
                                    const ast::IndexAccessorExpression* expr) {
     bool paren_lhs =
         !expr->object
@@ -182,7 +182,7 @@ void ASTPrinter::EmitIndexAccessor(utils::StringStream& out,
     out << "]";
 }
 
-void ASTPrinter::EmitMemberAccessor(utils::StringStream& out,
+void ASTPrinter::EmitMemberAccessor(tint::StringStream& out,
                                     const ast::MemberAccessorExpression* expr) {
     bool paren_lhs =
         !expr->object
@@ -198,7 +198,7 @@ void ASTPrinter::EmitMemberAccessor(utils::StringStream& out,
     out << "." << expr->member->symbol.Name();
 }
 
-void ASTPrinter::EmitBitcast(utils::StringStream& out, const ast::BitcastExpression* expr) {
+void ASTPrinter::EmitBitcast(tint::StringStream& out, const ast::BitcastExpression* expr) {
     out << "bitcast<";
     EmitExpression(out, expr->type);
 
@@ -207,7 +207,7 @@ void ASTPrinter::EmitBitcast(utils::StringStream& out, const ast::BitcastExpress
     out << ")";
 }
 
-void ASTPrinter::EmitCall(utils::StringStream& out, const ast::CallExpression* expr) {
+void ASTPrinter::EmitCall(tint::StringStream& out, const ast::CallExpression* expr) {
     EmitExpression(out, expr->target);
     out << "(";
 
@@ -224,7 +224,7 @@ void ASTPrinter::EmitCall(utils::StringStream& out, const ast::CallExpression* e
     out << ")";
 }
 
-void ASTPrinter::EmitLiteral(utils::StringStream& out, const ast::LiteralExpression* lit) {
+void ASTPrinter::EmitLiteral(tint::StringStream& out, const ast::LiteralExpression* lit) {
     Switch(
         lit,  //
         [&](const ast::BoolLiteralExpression* l) { out << (l->value ? "true" : "false"); },
@@ -244,11 +244,11 @@ void ASTPrinter::EmitLiteral(utils::StringStream& out, const ast::LiteralExpress
         [&](Default) { diagnostics_.add_error(diag::System::Writer, "unknown literal type"); });
 }
 
-void ASTPrinter::EmitIdentifier(utils::StringStream& out, const ast::IdentifierExpression* expr) {
+void ASTPrinter::EmitIdentifier(tint::StringStream& out, const ast::IdentifierExpression* expr) {
     EmitIdentifier(out, expr->identifier);
 }
 
-void ASTPrinter::EmitIdentifier(utils::StringStream& out, const ast::Identifier* ident) {
+void ASTPrinter::EmitIdentifier(tint::StringStream& out, const ast::Identifier* ident) {
     if (auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>()) {
         if (!tmpl_ident->attributes.IsEmpty()) {
             EmitAttributes(out, tmpl_ident->attributes);
@@ -317,7 +317,7 @@ void ASTPrinter::EmitFunction(const ast::Function* func) {
     }
 }
 
-void ASTPrinter::EmitImageFormat(utils::StringStream& out, const builtin::TexelFormat fmt) {
+void ASTPrinter::EmitImageFormat(tint::StringStream& out, const builtin::TexelFormat fmt) {
     switch (fmt) {
         case builtin::TexelFormat::kUndefined:
             diagnostics_.add_error(diag::System::Writer, "unknown image format");
@@ -334,14 +334,14 @@ void ASTPrinter::EmitStructType(const ast::Struct* str) {
     }
     Line() << "struct " << str->name->symbol.Name() << " {";
 
-    utils::Hashset<std::string_view, 8> member_names;
+    tint::Hashset<std::string_view, 8> member_names;
     for (auto* mem : str->members) {
         member_names.Add(mem->name->symbol.NameView());
     }
     size_t padding_idx = 0;
     auto new_padding_name = [&] {
         while (true) {
-            auto name = "padding_" + utils::ToString(padding_idx++);
+            auto name = "padding_" + tint::ToString(padding_idx++);
             if (member_names.Add(name)) {
                 return name;
             }
@@ -362,7 +362,7 @@ void ASTPrinter::EmitStructType(const ast::Struct* str) {
         // TODO(crbug.com/tint/798) move the @offset attribute handling to the transform::Wgsl
         // sanitizer.
         if (auto* mem_sem = program_->Sem().Get(mem)) {
-            offset = utils::RoundUp(mem_sem->Align(), offset);
+            offset = tint::RoundUp(mem_sem->Align(), offset);
             if (uint32_t padding = mem_sem->Offset() - offset) {
                 add_padding(padding);
                 offset += padding;
@@ -373,13 +373,13 @@ void ASTPrinter::EmitStructType(const ast::Struct* str) {
         // Offset attributes no longer exist in the WGSL spec, but are emitted
         // by the SPIR-V reader and are consumed by the Resolver(). These should not
         // be emitted, but instead struct padding fields should be emitted.
-        utils::Vector<const ast::Attribute*, 4> attributes_sanitized;
+        tint::Vector<const ast::Attribute*, 4> attributes_sanitized;
         attributes_sanitized.Reserve(mem->attributes.Length());
         for (auto* attr : mem->attributes) {
             if (attr->Is<ast::StructMemberOffsetAttribute>()) {
                 auto l = Line();
                 l << "/* ";
-                EmitAttributes(l, utils::Vector{attr});
+                EmitAttributes(l, tint::Vector{attr});
                 l << " */";
             } else {
                 attributes_sanitized.Push(attr);
@@ -400,7 +400,7 @@ void ASTPrinter::EmitStructType(const ast::Struct* str) {
     Line() << "}";
 }
 
-void ASTPrinter::EmitVariable(utils::StringStream& out, const ast::Variable* v) {
+void ASTPrinter::EmitVariable(tint::StringStream& out, const ast::Variable* v) {
     if (!v->attributes.IsEmpty()) {
         EmitAttributes(out, v->attributes);
         out << " ";
@@ -440,8 +440,8 @@ void ASTPrinter::EmitVariable(utils::StringStream& out, const ast::Variable* v) 
     out << ";";
 }
 
-void ASTPrinter::EmitAttributes(utils::StringStream& out,
-                                utils::VectorRef<const ast::Attribute*> attrs) {
+void ASTPrinter::EmitAttributes(tint::StringStream& out,
+                                tint::VectorRef<const ast::Attribute*> attrs) {
     bool first = true;
     for (auto* attr : attrs) {
         if (!first) {
@@ -535,7 +535,7 @@ void ASTPrinter::EmitAttributes(utils::StringStream& out,
     }
 }
 
-void ASTPrinter::EmitBinary(utils::StringStream& out, const ast::BinaryExpression* expr) {
+void ASTPrinter::EmitBinary(tint::StringStream& out, const ast::BinaryExpression* expr) {
     out << "(";
 
     EmitExpression(out, expr->lhs);
@@ -547,7 +547,7 @@ void ASTPrinter::EmitBinary(utils::StringStream& out, const ast::BinaryExpressio
     out << ")";
 }
 
-void ASTPrinter::EmitBinaryOp(utils::StringStream& out, const ast::BinaryOp op) {
+void ASTPrinter::EmitBinaryOp(tint::StringStream& out, const ast::BinaryOp op) {
     switch (op) {
         case ast::BinaryOp::kAnd:
             out << "&";
@@ -609,7 +609,7 @@ void ASTPrinter::EmitBinaryOp(utils::StringStream& out, const ast::BinaryOp op) 
     }
 }
 
-void ASTPrinter::EmitUnaryOp(utils::StringStream& out, const ast::UnaryOpExpression* expr) {
+void ASTPrinter::EmitUnaryOp(tint::StringStream& out, const ast::UnaryOpExpression* expr) {
     switch (expr->op) {
         case ast::UnaryOp::kAddressOf:
             out << "&";
@@ -641,7 +641,7 @@ void ASTPrinter::EmitBlock(const ast::BlockStatement* stmt) {
     Line() << "}";
 }
 
-void ASTPrinter::EmitBlockHeader(utils::StringStream& out, const ast::BlockStatement* stmt) {
+void ASTPrinter::EmitBlockHeader(tint::StringStream& out, const ast::BlockStatement* stmt) {
     if (!stmt->attributes.IsEmpty()) {
         EmitAttributes(out, stmt->attributes);
         out << " ";
@@ -679,13 +679,13 @@ void ASTPrinter::EmitStatement(const ast::Statement* stmt) {
         });
 }
 
-void ASTPrinter::EmitStatements(utils::VectorRef<const ast::Statement*> stmts) {
+void ASTPrinter::EmitStatements(tint::VectorRef<const ast::Statement*> stmts) {
     for (auto* s : stmts) {
         EmitStatement(s);
     }
 }
 
-void ASTPrinter::EmitStatementsWithIndent(utils::VectorRef<const ast::Statement*> stmts) {
+void ASTPrinter::EmitStatementsWithIndent(tint::VectorRef<const ast::Statement*> stmts) {
     ScopedIndent si(this);
     EmitStatements(stmts);
 }
@@ -873,14 +873,14 @@ void ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
                 case 0:  // No initializer
                     break;
                 case 1:  // Single line initializer statement
-                    out << utils::TrimSuffix(init_buf.lines[0].content, ";");
+                    out << tint::TrimSuffix(init_buf.lines[0].content, ";");
                     break;
                 default:  // Block initializer statement
                     for (size_t i = 1; i < init_buf.lines.size(); i++) {
                         // Indent all by the first line
                         init_buf.lines[i].indent += current_buffer_->current_indent;
                     }
-                    out << utils::TrimSuffix(init_buf.String(), "\n");
+                    out << tint::TrimSuffix(init_buf.String(), "\n");
                     break;
             }
 
@@ -896,14 +896,14 @@ void ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
                 case 0:  // No continuing
                     break;
                 case 1:  // Single line continuing statement
-                    out << utils::TrimSuffix(cont_buf.lines[0].content, ";");
+                    out << tint::TrimSuffix(cont_buf.lines[0].content, ";");
                     break;
                 default:  // Block continuing statement
                     for (size_t i = 1; i < cont_buf.lines.size(); i++) {
                         // Indent all by the first line
                         cont_buf.lines[i].indent += current_buffer_->current_indent;
                     }
-                    out << utils::TrimSuffix(cont_buf.String(), "\n");
+                    out << tint::TrimSuffix(cont_buf.String(), "\n");
                     break;
             }
         }

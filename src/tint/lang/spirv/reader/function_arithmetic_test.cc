@@ -309,7 +309,7 @@ TEST_P(SpvBinaryArithTest, EmitExpression) {
     ASSERT_TRUE(p->BuildAndParseInternalModuleExceptFunctions()) << p->error() << "\n" << assembly;
     auto fe = p->function_emitter(100);
     EXPECT_TRUE(fe.EmitBody()) << p->error();
-    utils::StringStream ss;
+    tint::StringStream ss;
     ss << "let x_1 = (" << GetParam().ast_lhs << " " << GetParam().ast_op << " "
        << GetParam().ast_rhs << ");";
     auto ast_body = fe.ast_body();
@@ -348,7 +348,7 @@ TEST_P(SpvBinaryArithGeneralTest, EmitExpression) {
     ASSERT_TRUE(p->BuildAndParseInternalModuleExceptFunctions()) << p->error() << "\n" << assembly;
     auto fe = p->function_emitter(100);
     EXPECT_TRUE(fe.EmitBody()) << p->error();
-    utils::StringStream ss;
+    tint::StringStream ss;
     ss << "let x_1 = " << GetParam().expected << ";";
     auto ast_body = fe.ast_body();
     auto got = test::ToString(p->program(), ast_body);
