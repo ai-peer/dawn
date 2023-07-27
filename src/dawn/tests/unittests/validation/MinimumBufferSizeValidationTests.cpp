@@ -24,6 +24,8 @@
 namespace dawn {
 namespace {
 
+using testing::Not;
+
 // Helper for describing bindings throughout the tests
 struct BindingDescriptor {
     uint32_t group;
@@ -418,8 +420,8 @@ TEST_F(MinBufferSizeBindGroupCreationTests, LayoutEquality) {
             {{0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform, false, size}});
     };
 
-    EXPECT_EQ(MakeLayout(0).Get(), MakeLayout(0).Get());
-    EXPECT_NE(MakeLayout(0).Get(), MakeLayout(4).Get());
+    EXPECT_THAT(MakeLayout(0), InternalBindGroupLayoutEq(MakeLayout(0)));
+    EXPECT_THAT(MakeLayout(0), Not(InternalBindGroupLayoutEq(MakeLayout(4))));
 }
 
 // The check between the bindgroup binding sizes and the required pipeline sizes at draw time

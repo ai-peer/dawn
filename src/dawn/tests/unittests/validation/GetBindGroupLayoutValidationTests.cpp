@@ -14,11 +14,14 @@
 
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 
+#include "dawn/native/BindGroupLayout.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
 namespace dawn {
 namespace {
+
+using testing::Not;
 
 class GetBindGroupLayoutTests : public ValidationTest {
   protected:
@@ -86,16 +89,20 @@ TEST_F(GetBindGroupLayoutTests, SameObject) {
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
 
     // The same value is returned for the same index.
-    EXPECT_EQ(pipeline.GetBindGroupLayout(0).Get(), pipeline.GetBindGroupLayout(0).Get());
+    EXPECT_THAT(pipeline.GetBindGroupLayout(0),
+                InternalBindGroupLayoutEq(pipeline.GetBindGroupLayout(0)));
 
     // Matching bind group layouts at different indices are the same object.
-    EXPECT_EQ(pipeline.GetBindGroupLayout(0).Get(), pipeline.GetBindGroupLayout(1).Get());
+    EXPECT_THAT(pipeline.GetBindGroupLayout(0),
+                InternalBindGroupLayoutEq(pipeline.GetBindGroupLayout(1)));
 
     // BGLs with different bindings types are different objects.
-    EXPECT_NE(pipeline.GetBindGroupLayout(2).Get(), pipeline.GetBindGroupLayout(3).Get());
+    EXPECT_THAT(pipeline.GetBindGroupLayout(2),
+                Not(InternalBindGroupLayoutEq(pipeline.GetBindGroupLayout(3))));
 
     // BGLs with different visibilities are different objects.
-    EXPECT_NE(pipeline.GetBindGroupLayout(0).Get(), pipeline.GetBindGroupLayout(2).Get());
+    EXPECT_THAT(pipeline.GetBindGroupLayout(0),
+                Not(InternalBindGroupLayoutEq(pipeline.GetBindGroupLayout(2))));
 }
 
 // Test that default BindGroupLayouts cannot be used in the creation of a new PipelineLayout

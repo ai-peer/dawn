@@ -19,6 +19,7 @@
 #include <string>
 
 #include "dawn/common/Log.h"
+#include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/webgpu_cpp.h"
 #include "gmock/gmock.h"
@@ -88,6 +89,12 @@
         mLastWarningCount = warningsAfter;                                                         \
     } while (0)
 #define EXPECT_DEPRECATION_WARNING(statement) EXPECT_DEPRECATION_WARNINGS(statement, 1)
+
+// Gmock matcher helpers that may be used throughout other tests.
+MATCHER_P(InternalBindGroupLayoutEq, other, "") {
+    return dawn::native::FromAPI(arg.Get())->GetInternalBindGroupLayout() ==
+           dawn::native::FromAPI(other.Get())->GetInternalBindGroupLayout();
+}
 
 namespace dawn::utils {
 class WireHelper;
