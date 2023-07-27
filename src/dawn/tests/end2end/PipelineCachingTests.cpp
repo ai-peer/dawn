@@ -541,7 +541,9 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
                            device.CreateRenderPipeline(&desc));
     }
 
-    // Cache should hit for the shaders, but not for the pipeline: different layout.
+    // Cache should hit for the shaders, but not for the pipeline: different layout. On Vulkan, the
+    // pipeline actually hits the cache as well because the layout actually resolves to be identical
+    // since the second binding isn't actually used in the shader.
     {
         wgpu::Device device = CreateDevice();
         utils::ComboRenderPipelineDescriptor desc;
@@ -559,11 +561,18 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
                                 {1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
                             }),
                     });
-        EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
-                           device.CreateRenderPipeline(&desc));
+        if (IsVulkan()) {
+            EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule + counts.pipeline), Add(0),
+                               device.CreateRenderPipeline(&desc));
+        } else {
+            EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
+                               device.CreateRenderPipeline(&desc));
+        }
     }
 
-    // Cache should hit for the shaders, but not for the pipeline: different layout (dynamic).
+    // Cache should hit for the shaders, but not for the pipeline: different layout (dynamic). On
+    // Vulkan, the pipeline actually hits the cache as well because the dynamic-ness is not
+    // explicitly recorded in Vulkan backing BGL since it is not needed.
     {
         wgpu::Device device = CreateDevice();
         utils::ComboRenderPipelineDescriptor desc;
@@ -580,8 +589,13 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
                                                         wgpu::BufferBindingType::Uniform, true},
                                                    }),
                     });
-        EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
-                           device.CreateRenderPipeline(&desc));
+        if (IsVulkan()) {
+            EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule + counts.pipeline), Add(0),
+                               device.CreateRenderPipeline(&desc));
+        } else {
+            EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
+                               device.CreateRenderPipeline(&desc));
+        }
     }
 
     // Cache should not hit for the fragment shader, but should hit for the pipeline.
