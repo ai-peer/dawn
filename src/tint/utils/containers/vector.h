@@ -27,16 +27,11 @@
 #include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/memory/bitcast.h"
-#include "src/tint/utils/text/string_stream.h"
-
-namespace tint::utils {
 
 /// Forward declarations
+namespace tint::utils {
 template <typename>
 class VectorRef;
-template <typename>
-class VectorRef;
-
 }  // namespace tint::utils
 
 namespace tint::utils {
@@ -834,8 +829,11 @@ Vector<T, N> ToVector(const std::vector<T>& vector) {
 /// @param o the stream to write to
 /// @param vec the vector
 /// @return the stream so calls can be chained
-template <typename T, size_t N>
-inline StringStream& operator<<(StringStream& o, const Vector<T, N>& vec) {
+template <typename STREAM,
+          typename T,
+          size_t N,
+          typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, const Vector<T, N>& vec) {
     o << "[";
     bool first = true;
     for (auto& el : vec) {
@@ -853,8 +851,8 @@ inline StringStream& operator<<(StringStream& o, const Vector<T, N>& vec) {
 /// @param o the stream to write to
 /// @param vec the vector reference
 /// @return the stream so calls can be chained
-template <typename T>
-inline StringStream& operator<<(StringStream& o, VectorRef<T> vec) {
+template <typename STREAM, typename T, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, VectorRef<T> vec) {
     o << "[";
     bool first = true;
     for (auto& el : vec) {

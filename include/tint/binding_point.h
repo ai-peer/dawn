@@ -65,7 +65,8 @@ struct BindingPoint {
 /// @param o the stream to write to
 /// @param bp the BindingPoint
 /// @return the stream so calls can be chained
-inline utils::StringStream& operator<<(utils::StringStream& o, const BindingPoint& bp) {
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& o, const BindingPoint& bp) {
     return o << "[group: " << bp.group << ", binding: " << bp.binding << "]";
 }
 
