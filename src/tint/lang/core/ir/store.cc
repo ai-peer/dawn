@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/lang/core/ir/store.h"
-#include "src/tint/utils/debug/debug.h"
+#include "src/tint/utils/ice/ice.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Store);
 

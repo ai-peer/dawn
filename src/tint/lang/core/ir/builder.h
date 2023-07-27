@@ -265,7 +265,7 @@ class Builder {
                 return in;  /// Pass-through
             } else if constexpr (is_instruction) {
                 /// Extract the first result from the instruction
-                TINT_ASSERT(IR, in->HasResults() && !in->HasMultiResults());
+                TINT_ASSERT(in->HasResults() && !in->HasMultiResults());
                 return in->Result();
             }
         } else if constexpr (is_numeric) {
@@ -664,7 +664,7 @@ class Builder {
     ir::Let* Let(std::string_view name, VALUE&& value) {
         auto* val = Value(std::forward<VALUE>(value));
         if (TINT_UNLIKELY(!val)) {
-            TINT_ASSERT(IR, val);
+            TINT_ASSERT(val);
             return nullptr;
         }
         auto* let = Append(ir.instructions.Create<ir::Let>(InstructionResult(val->Type()), val));
