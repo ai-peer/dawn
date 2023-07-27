@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56961c4_4de09e9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-27T22:24:38Z",
+      "side": 1,
+      "message": "I forgot we had a spot in the frontend to do this! I updated the change to make use of that and I think it\u0027s a win in terms of simplicity. Let\u0027s see if the CQ says it fixed the QCOM issue too. 😊\n\nIn light of that, renamed the toggle to resolve_multiple_attachments_in_separate_passes",
+      "parentUuid": "37c626de_516b762c",
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3004e75_b66faa95",

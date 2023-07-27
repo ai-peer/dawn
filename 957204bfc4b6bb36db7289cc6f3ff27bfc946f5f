@@ -22,6 +22,30 @@
       },
       "revId": "957204bfc4b6bb36db7289cc6f3ff27bfc946f5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d1d4ab_5e03f562",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-27T22:24:38Z",
+      "side": 1,
+      "message": "You know, I thought so too? But this failed with a validation error saying it didn\u0027t match the render pass unless I explicitly set it to undefined.",
+      "parentUuid": "17b6fb3e_8c295e3e",
+      "range": {
+        "startLine": 316,
+        "startChar": 8,
+        "endLine": 324,
+        "endChar": 0
+      },
+      "revId": "957204bfc4b6bb36db7289cc6f3ff27bfc946f5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
