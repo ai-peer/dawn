@@ -2165,9 +2165,7 @@ const result = (one == 0) && (1111111111111111111111111111111i == 0);
     auto program = wgsl::reader::Parse(file.get());
     EXPECT_FALSE(program.IsValid());
 
-    diag::Formatter::Style style;
-    style.print_newline_at_end = false;
-    auto error = diag::Formatter(style).format(program.Diagnostics());
+    auto error = program.Diagnostics().str();
     EXPECT_EQ(error, R"(test:3:31 error: value cannot be represented as 'i32'
 const result = (one == 0) && (1111111111111111111111111111111i == 0);
                               ^
@@ -2186,9 +2184,7 @@ const result = (one == 1) || (1111111111111111111111111111111i == 0);
     auto program = wgsl::reader::Parse(file.get());
     EXPECT_FALSE(program.IsValid());
 
-    diag::Formatter::Style style;
-    style.print_newline_at_end = false;
-    auto error = diag::Formatter(style).format(program.Diagnostics());
+    auto error = program.Diagnostics().str();
     EXPECT_EQ(error, R"(test:3:31 error: value cannot be represented as 'i32'
 const result = (one == 1) || (1111111111111111111111111111111i == 0);
                               ^
@@ -2398,7 +2394,7 @@ const result = )");
     if (should_pass) {
         diag::Formatter::Style style;
         style.print_newline_at_end = false;
-        auto error = diag::Formatter(style).format(program.Diagnostics());
+        auto error = program.Diagnostics().str();
 
         EXPECT_TRUE(program.IsValid()) << error;
     } else {
