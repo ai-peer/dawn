@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7ffb23c_e0a2eaea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T23:00:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e093afe_f44eef14",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T23:00:37Z",
+      "side": 1,
+      "message": "nit: things beginning with \"API\" are for the public API, which means the pointer this is returning is owned by the callee. We\u0027re leaking it.\n\nInstead, call the non-API version which returns a Ref\u003cRenderPassEncoder\u003e - no more leak :)",
+      "range": {
+        "startLine": 1356,
+        "startChar": 59,
+        "endLine": 1356,
+        "endChar": 62
+      },
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
