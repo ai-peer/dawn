@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e37aac_6b0eb84e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-07-27T16:35:40Z",
+      "side": 1,
+      "message": "I wonder if Rubber Stamper can work for this.",
+      "revId": "3c01bc73e3826544f79f2f39b5f7b274f76990da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
