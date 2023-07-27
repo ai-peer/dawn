@@ -147,7 +147,7 @@ class Module final : public utils::Castable<Module, Node> {
     /// * #global_declarations_
     /// * #type_decls_
     /// * #functions_
-    void BinGlobalDeclaration(const tint::ast::Node* decl, diag::List& diags);
+    void BinGlobalDeclaration(const tint::ast::Node* decl);
 
     utils::Vector<const Node*, 64> global_declarations_;
     utils::Vector<const TypeDecl*, 16> type_decls_;

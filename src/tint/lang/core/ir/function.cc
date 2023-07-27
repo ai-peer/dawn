@@ -24,7 +24,7 @@ Function::Function(const type::Type* rt,
                    PipelineStage stage,
                    std::optional<std::array<uint32_t, 3>> wg_size)
     : pipeline_stage_(stage), workgroup_size_(wg_size) {
-    TINT_ASSERT(IR, rt != nullptr);
+    TINT_ASSERT(rt != nullptr);
 
     return_.type = rt;
 }
@@ -33,12 +33,12 @@ Function::~Function() = default;
 
 void Function::SetParams(utils::VectorRef<FunctionParam*> params) {
     params_ = std::move(params);
-    TINT_ASSERT(IR, !params_.Any(utils::IsNull));
+    TINT_ASSERT(!params_.Any(utils::IsNull));
 }
 
 void Function::SetParams(std::initializer_list<FunctionParam*> params) {
     params_ = params;
-    TINT_ASSERT(IR, !params_.Any(utils::IsNull));
+    TINT_ASSERT(!params_.Any(utils::IsNull));
 }
 
 utils::StringStream& operator<<(utils::StringStream& out, Function::PipelineStage value) {

@@ -25,7 +25,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Continue);
 namespace tint::ir {
 
 Continue::Continue(ir::Loop* loop, utils::VectorRef<Value*> args) : loop_(loop) {
-    TINT_ASSERT(IR, loop_);
+    TINT_ASSERT(loop_);
 
     AddOperands(Continue::kArgsOperandOffset, std::move(args));
 
