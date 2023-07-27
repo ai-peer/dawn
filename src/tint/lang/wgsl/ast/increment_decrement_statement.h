@@ -43,7 +43,7 @@ class IncrementDecrementStatement final
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const IncrementDecrementStatement* Clone(CloneContext* ctx) const override;
+    const IncrementDecrementStatement* Clone(CloneContext& ctx) const override;
 
     /// The LHS expression.
     const Expression* const lhs;

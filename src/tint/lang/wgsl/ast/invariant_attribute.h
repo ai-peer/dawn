@@ -38,7 +38,7 @@ class InvariantAttribute final : public utils::Castable<InvariantAttribute, Attr
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const InvariantAttribute* Clone(CloneContext* ctx) const override;
+    const InvariantAttribute* Clone(CloneContext& ctx) const override;
 };
 
 }  // namespace tint::ast

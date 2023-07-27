@@ -42,7 +42,7 @@ class AssignmentStatement final : public utils::Castable<AssignmentStatement, St
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const AssignmentStatement* Clone(CloneContext* ctx) const override;
+    const AssignmentStatement* Clone(CloneContext& ctx) const override;
 
     /// left side expression
     const Expression* const lhs;

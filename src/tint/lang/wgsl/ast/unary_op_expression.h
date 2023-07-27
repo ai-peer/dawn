@@ -42,7 +42,7 @@ class UnaryOpExpression final : public utils::Castable<UnaryOpExpression, Expres
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const UnaryOpExpression* Clone(CloneContext* ctx) const override;
+    const UnaryOpExpression* Clone(CloneContext& ctx) const override;
 
     /// The op
     const UnaryOp op;

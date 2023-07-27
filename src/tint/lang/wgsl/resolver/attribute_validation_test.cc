@@ -2305,7 +2305,7 @@ class TestAttribute : public utils::Castable<TestAttribute, ast::InternalAttribu
     TestAttribute(GenerationID pid, ast::NodeID nid, const ast::IdentifierExpression* dep)
         : Base(pid, nid, utils::Vector{dep}) {}
     std::string InternalName() const override { return "test_attribute"; }
-    const Cloneable* Clone(CloneContext*) const override { return nullptr; }
+    const Node* Clone(ast::CloneContext&) const override { return nullptr; }
 };
 
 using InternalAttributeDepsTest = ResolverTest;

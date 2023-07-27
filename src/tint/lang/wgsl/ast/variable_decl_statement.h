@@ -40,7 +40,7 @@ class VariableDeclStatement final : public utils::Castable<VariableDeclStatement
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const VariableDeclStatement* Clone(CloneContext* ctx) const override;
+    const VariableDeclStatement* Clone(CloneContext& ctx) const override;
 
     /// The variable
     const Variable* const variable;

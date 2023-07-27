@@ -53,7 +53,7 @@ class StructMemberOffsetAttribute final
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const StructMemberOffsetAttribute* Clone(CloneContext* ctx) const override;
+    const StructMemberOffsetAttribute* Clone(CloneContext& ctx) const override;
 
     /// The offset expression
     const Expression* const expr;

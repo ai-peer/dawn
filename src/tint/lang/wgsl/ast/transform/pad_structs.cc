@@ -20,6 +20,7 @@
 
 #include "src/tint/lang/wgsl/ast/disable_validation_attribute.h"
 #include "src/tint/lang/wgsl/ast/parameter.h"
+#include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/sem/call.h"
 #include "src/tint/lang/wgsl/sem/module.h"
@@ -35,7 +36,7 @@ namespace {
 
 void CreatePadding(utils::Vector<const StructMember*, 8>* new_members,
                    utils::Hashset<const StructMember*, 8>* padding_members,
-                   ProgramBuilder* b,
+                   ast::Builder* b,
                    uint32_t bytes) {
     const size_t count = bytes / 4u;
     padding_members->Reserve(count);
@@ -56,7 +57,7 @@ PadStructs::~PadStructs() = default;
 
 Transform::ApplyResult PadStructs::Apply(const Program* src, const DataMap&, DataMap&) const {
     ProgramBuilder b;
-    CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
     auto& sem = src->Sem();
 
     std::unordered_map<const Struct*, const Struct*> replaced_structs;

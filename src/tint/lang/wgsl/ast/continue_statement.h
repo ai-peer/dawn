@@ -35,7 +35,7 @@ class ContinueStatement final : public utils::Castable<ContinueStatement, Statem
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const ContinueStatement* Clone(CloneContext* ctx) const override;
+    const ContinueStatement* Clone(CloneContext& ctx) const override;
 };
 
 }  // namespace tint::ast

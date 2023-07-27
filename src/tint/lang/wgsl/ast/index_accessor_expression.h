@@ -42,7 +42,7 @@ class IndexAccessorExpression final
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const IndexAccessorExpression* Clone(CloneContext* ctx) const override;
+    const IndexAccessorExpression* Clone(CloneContext& ctx) const override;
 
     /// the index expression
     const Expression* const index;

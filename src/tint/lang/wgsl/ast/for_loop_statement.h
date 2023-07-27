@@ -49,7 +49,7 @@ class ForLoopStatement final : public utils::Castable<ForLoopStatement, Statemen
     /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const ForLoopStatement* Clone(CloneContext* ctx) const override;
+    const ForLoopStatement* Clone(CloneContext& ctx) const override;
 
     /// The initializer statement
     const Statement* const initializer;
