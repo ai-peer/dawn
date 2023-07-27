@@ -26,6 +26,7 @@ namespace tint::utils {
 /// Empty structure used as the default FAILURE_TYPE for a Result.
 struct FailureType {};
 
+/// An instance of FailureType which can be used as a generic failure value by Result
 static constexpr const FailureType Failure;
 
 /// Result is a helper for functions that need to return a value, or an failure value.
