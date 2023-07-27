@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae1317a8_6bb24c37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-27T17:47:29Z",
+      "side": 1,
+      "message": "Alright, I think we\u0027re good now. PT(Another)L!\n\nAdded two new tests: One has multiple MSAA targets, but only resolves one of them. This test is affected by the driver but, and the workaround is confirmed to fix it.\n\nThe second test is the scenario you suggested: A single MSAA target, but at a location other than zero. This test is passing without the workaround, but it still strikes me as a good one to have!",
+      "parentUuid": "8f59f31a_76cce939",
+      "revId": "953c5c2a8dc8899af50407431c18c52cc5cfc7cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3004e75_b66faa95",
