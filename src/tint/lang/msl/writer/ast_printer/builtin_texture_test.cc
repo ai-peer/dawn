@@ -280,12 +280,12 @@ TEST_P(MslGeneratorBuiltinTextureTest, Call) {
     auto* stmt = param.returns_value ? static_cast<const ast::Statement*>(Assign(Phony(), call))
                                      : static_cast<const ast::Statement*>(CallStmt(call));
 
-    Func("main", utils::Empty, ty.void_(), utils::Vector{stmt},
-         utils::Vector{Stage(ast::PipelineStage::kFragment)});
+    Func("main", tint::Empty, ty.void_(), tint::Vector{stmt},
+         tint::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASTPrinter& gen = Build();
 
-    utils::StringStream out;
+    tint::StringStream out;
     ASSERT_TRUE(gen.EmitExpression(out, call)) << gen.Diagnostics();
 
     auto expected = expected_texture_overload(param.overload);

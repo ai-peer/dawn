@@ -67,7 +67,7 @@ class ScopeStack {
 
     /// Return the top scope of the stack.
     /// @returns the top scope of the stack
-    const utils::Hashmap<K, V, 4>& Top() const { return stack_.Back(); }
+    const tint::Hashmap<K, V, 4>& Top() const { return stack_.Back(); }
 
     /// Clear the scope stack.
     void Clear() {
@@ -76,7 +76,7 @@ class ScopeStack {
     }
 
   private:
-    utils::Vector<utils::Hashmap<K, V, 4>, 8> stack_ = {{}};
+    tint::Vector<tint::Hashmap<K, V, 4>, 8> stack_ = {{}};
 };
 
 }  // namespace tint

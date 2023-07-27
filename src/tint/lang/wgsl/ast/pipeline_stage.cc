@@ -16,7 +16,7 @@
 
 namespace tint::ast {
 
-utils::StringStream& operator<<(utils::StringStream& out, PipelineStage stage) {
+tint::StringStream& operator<<(tint::StringStream& out, PipelineStage stage) {
     switch (stage) {
         case PipelineStage::kNone: {
             out << "none";

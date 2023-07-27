@@ -24,8 +24,8 @@ using WgslASTPrinterTest = TestHelper;
 TEST_F(WgslASTPrinterTest, Emit_Discard) {
     auto* stmt = Discard();
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{stmt},
-         utils::Vector{Stage(ast::PipelineStage::kFragment)});
+    Func("F", tint::Empty, ty.void_(), tint::Vector{stmt},
+         tint::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASTPrinter& gen = Build();
 

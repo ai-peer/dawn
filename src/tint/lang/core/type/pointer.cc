@@ -27,7 +27,7 @@ namespace tint::type {
 
 Pointer::Pointer(builtin::AddressSpace address_space, const Type* subtype, builtin::Access access)
     : Base(
-          utils::Hash(utils::TypeInfo::Of<Pointer>().full_hashcode, address_space, subtype, access),
+          tint::Hash(tint::TypeInfo::Of<Pointer>().full_hashcode, address_space, subtype, access),
           type::Flags{}),
       subtype_(subtype),
       address_space_(address_space),
@@ -45,7 +45,7 @@ bool Pointer::Equals(const UniqueNode& other) const {
 }
 
 std::string Pointer::FriendlyName() const {
-    utils::StringStream out;
+    tint::StringStream out;
     out << "ptr<";
     if (address_space_ != builtin::AddressSpace::kUndefined) {
         out << address_space_ << ", ";

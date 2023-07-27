@@ -24,7 +24,7 @@ namespace tint::ir {
 
 CoreBuiltinCall::CoreBuiltinCall(InstructionResult* result,
                                  builtin::Function func,
-                                 utils::VectorRef<Value*> arguments)
+                                 tint::VectorRef<Value*> arguments)
     : Base(result, arguments), func_(func) {
     TINT_ASSERT(IR, func != builtin::Function::kNone);
     TINT_ASSERT(IR, func != builtin::Function::kTintMaterialize);

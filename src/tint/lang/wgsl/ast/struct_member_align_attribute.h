@@ -25,7 +25,7 @@ namespace tint::ast {
 
 /// A struct member align attribute
 class StructMemberAlignAttribute final
-    : public utils::Castable<StructMemberAlignAttribute, Attribute> {
+    : public tint::Castable<StructMemberAlignAttribute, Attribute> {
   public:
     /// constructor
     /// @param pid the identifier of the program that owns this node

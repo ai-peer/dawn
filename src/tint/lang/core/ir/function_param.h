@@ -26,7 +26,7 @@
 namespace tint::ir {
 
 /// A function parameter in the IR.
-class FunctionParam : public utils::Castable<FunctionParam, Value> {
+class FunctionParam : public tint::Castable<FunctionParam, Value> {
   public:
     /// Builtin attribute
     enum class Builtin {
@@ -105,7 +105,7 @@ class FunctionParam : public utils::Castable<FunctionParam, Value> {
     bool invariant_ = false;
 };
 
-utils::StringStream& operator<<(utils::StringStream& out, enum FunctionParam::Builtin value);
+tint::StringStream& operator<<(tint::StringStream& out, enum FunctionParam::Builtin value);
 
 }  // namespace tint::ir
 

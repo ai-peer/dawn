@@ -60,7 +60,7 @@ class Printer(object):
 
 
 class UtilsSlicePrinter(Printer):
-    '''Printer for tint::utils::Slice<T>'''
+    '''Printer for tint::Slice<T>'''
 
     def __init__(self, val):
         super(UtilsSlicePrinter, self).__init__(val)
@@ -99,11 +99,11 @@ class UtilsSlicePrinter(Printer):
 
 
 pp_set.add_printer('UtilsSlicePrinter',
-                   '^tint::utils::Slice<.*>$', UtilsSlicePrinter)
+                   '^tint::Slice<.*>$', UtilsSlicePrinter)
 
 
 class UtilsVectorPrinter(Printer):
-    '''Printer for tint::utils::Vector<T, N>'''
+    '''Printer for tint::Vector<T, N>'''
 
     def __init__(self, val):
         super(UtilsVectorPrinter, self).__init__(val)
@@ -132,11 +132,11 @@ class UtilsVectorPrinter(Printer):
 
 
 pp_set.add_printer(
-    'UtilsVector', '^tint::utils::Vector<.*>$', UtilsVectorPrinter)
+    'UtilsVector', '^tint::Vector<.*>$', UtilsVectorPrinter)
 
 
 class UtilsVectorRefPrinter(Printer):
-    '''Printer for tint::utils::VectorRef<T>'''
+    '''Printer for tint::VectorRef<T>'''
 
     def __init__(self, val):
         super(UtilsVectorRefPrinter, self).__init__(val)
@@ -162,7 +162,7 @@ class UtilsVectorRefPrinter(Printer):
 
 
 pp_set.add_printer(
-    'UtilsVector', '^tint::utils::VectorRef<.*>$', UtilsVectorRefPrinter)
+    'UtilsVector', '^tint::VectorRef<.*>$', UtilsVectorRefPrinter)
 
 
 class UtilsHashmapBasePrinter(Printer):
@@ -216,7 +216,7 @@ class UtilsHashsetPrinter(UtilsHashmapBasePrinter):
 
 
 pp_set.add_printer(
-    'UtilsHashset', '^tint::utils::Hashset<.*>$', UtilsHashsetPrinter)
+    'UtilsHashset', '^tint::Hashset<.*>$', UtilsHashsetPrinter)
 
 
 class UtilsHashmapPrinter(UtilsHashmapBasePrinter):
@@ -232,7 +232,7 @@ class UtilsHashmapPrinter(UtilsHashmapBasePrinter):
 
 
 pp_set.add_printer(
-    'UtilsHashmap', '^tint::utils::Hashmap<.*>$', UtilsHashmapPrinter)
+    'UtilsHashmap', '^tint::Hashmap<.*>$', UtilsHashmapPrinter)
 
 
 gdb.printing.register_pretty_printer(gdb, pp_set, replace=_DEBUGGING)

@@ -38,7 +38,7 @@ CoreDiagnosticRule ParseCoreDiagnosticRule(std::string_view str) {
     return CoreDiagnosticRule::kUndefined;
 }
 
-utils::StringStream& operator<<(utils::StringStream& out, CoreDiagnosticRule value) {
+tint::StringStream& operator<<(tint::StringStream& out, CoreDiagnosticRule value) {
     switch (value) {
         case CoreDiagnosticRule::kUndefined:
             return out << "undefined";
@@ -59,7 +59,7 @@ ChromiumDiagnosticRule ParseChromiumDiagnosticRule(std::string_view str) {
     return ChromiumDiagnosticRule::kUndefined;
 }
 
-utils::StringStream& operator<<(utils::StringStream& out, ChromiumDiagnosticRule value) {
+tint::StringStream& operator<<(tint::StringStream& out, ChromiumDiagnosticRule value) {
     switch (value) {
         case ChromiumDiagnosticRule::kUndefined:
             return out << "undefined";

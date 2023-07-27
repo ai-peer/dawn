@@ -146,51 +146,51 @@ class ProgramBuilder {
     template <typename T>
     static constexpr const bool IsIdentifierLike = std::is_same_v<T, Symbol> ||     // Symbol
                                                    std::is_enum_v<T> ||             // Enum
-                                                   utils::traits::IsStringLike<T>;  // String
+                                                   tint::traits::IsStringLike<T>;  // String
 
     /// A helper used to disable overloads if the first type in `TYPES` is a Source. Used to avoid
     /// ambiguities in overloads that take a Source as the first parameter and those that
     /// perfectly-forward the first argument.
     template <typename... TYPES>
-    using DisableIfSource = utils::traits::EnableIf<
-        !IsSource<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
+    using DisableIfSource = tint::traits::EnableIf<
+        !IsSource<tint::traits::Decay<tint::traits::NthTypeOf<0, TYPES..., void>>>>;
 
     /// A helper used to disable overloads if the first type in `TYPES` is a scalar type. Used to
     /// avoid ambiguities in overloads that take a scalar as the first parameter and those that
     /// perfectly-forward the first argument.
     template <typename... TYPES>
-    using DisableIfScalar = utils::traits::EnableIf<
-        !IsScalar<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
+    using DisableIfScalar = tint::traits::EnableIf<
+        !IsScalar<tint::traits::Decay<tint::traits::NthTypeOf<0, TYPES..., void>>>>;
 
     /// A helper used to enable overloads if the first type in `TYPES` is a scalar type. Used to
     /// avoid ambiguities in overloads that take a scalar as the first parameter and those that
     /// perfectly-forward the first argument.
     template <typename... TYPES>
-    using EnableIfScalar = utils::traits::EnableIf<
-        IsScalar<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
+    using EnableIfScalar = tint::traits::EnableIf<
+        IsScalar<tint::traits::Decay<tint::traits::NthTypeOf<0, TYPES..., void>>>>;
 
-    /// A helper used to disable overloads if the first type in `TYPES` is a utils::Vector or
-    /// utils::VectorRef.
+    /// A helper used to disable overloads if the first type in `TYPES` is a tint::Vector or
+    /// tint::VectorRef.
     template <typename... TYPES>
-    using DisableIfVectorLike = utils::traits::EnableIf<
-        !utils::IsVectorLike<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
+    using DisableIfVectorLike = tint::traits::EnableIf<
+        !tint::IsVectorLike<tint::traits::Decay<tint::traits::NthTypeOf<0, TYPES..., void>>>>;
 
     /// A helper used to enable overloads if the first type in `TYPES` is identifier-like.
     template <typename... TYPES>
-    using EnableIfIdentifierLike = utils::traits::EnableIf<
-        IsIdentifierLike<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
+    using EnableIfIdentifierLike = tint::traits::EnableIf<
+        IsIdentifierLike<tint::traits::Decay<tint::traits::NthTypeOf<0, TYPES..., void>>>>;
 
     /// A helper used to disable overloads if the first type in `TYPES` is Infer or an abstract
     /// numeric.
     template <typename... TYPES>
-    using DisableIfInferOrAbstract = utils::traits::EnableIf<
-        !IsInferOrAbstract<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
+    using DisableIfInferOrAbstract = tint::traits::EnableIf<
+        !IsInferOrAbstract<tint::traits::Decay<tint::traits::NthTypeOf<0, TYPES..., void>>>>;
 
     /// A helper used to enable overloads if the first type in `TYPES` is Infer or an abstract
     /// numeric.
     template <typename... TYPES>
-    using EnableIfInferOrAbstract = utils::traits::EnableIf<
-        IsInferOrAbstract<utils::traits::Decay<utils::traits::NthTypeOf<0, TYPES..., void>>>>;
+    using EnableIfInferOrAbstract = tint::traits::EnableIf<
+        IsInferOrAbstract<tint::traits::Decay<tint::traits::NthTypeOf<0, TYPES..., void>>>>;
 
     /// VarOptions is a helper for accepting an arbitrary number of order independent options for
     /// constructing an ast::Var.
@@ -205,7 +205,7 @@ class ProgramBuilder {
         const ast::Expression* address_space = nullptr;
         const ast::Expression* access = nullptr;
         const ast::Expression* initializer = nullptr;
-        utils::Vector<const ast::Attribute*, 4> attributes;
+        tint::Vector<const ast::Attribute*, 4> attributes;
 
       private:
         void Set(ProgramBuilder&, ast::Type t) { type = t; }
@@ -220,7 +220,7 @@ class ProgramBuilder {
             }
         }
         void Set(ProgramBuilder&, const ast::Expression* c) { initializer = c; }
-        void Set(ProgramBuilder&, utils::VectorRef<const ast::Attribute*> l) {
+        void Set(ProgramBuilder&, tint::VectorRef<const ast::Attribute*> l) {
             attributes = std::move(l);
         }
         void Set(ProgramBuilder&, const ast::Attribute* a) { attributes.Push(a); }
@@ -232,7 +232,7 @@ class ProgramBuilder {
         template <typename... ARGS>
         explicit LetOptions(ARGS&&... args) {
             static constexpr bool has_init =
-                (utils::traits::IsTypeOrDerived<utils::traits::PtrElTy<ARGS>, ast::Expression> ||
+                (tint::traits::IsTypeOrDerived<tint::traits::PtrElTy<ARGS>, ast::Expression> ||
                  ...);
             static_assert(has_init, "Let() must be constructed with an initializer expression");
             (Set(std::forward<ARGS>(args)), ...);
@@ -241,12 +241,12 @@ class ProgramBuilder {
 
         ast::Type type;
         const ast::Expression* initializer = nullptr;
-        utils::Vector<const ast::Attribute*, 4> attributes;
+        tint::Vector<const ast::Attribute*, 4> attributes;
 
       private:
         void Set(ast::Type t) { type = t; }
         void Set(const ast::Expression* c) { initializer = c; }
-        void Set(utils::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
+        void Set(tint::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
         void Set(const ast::Attribute* a) { attributes.Push(a); }
     };
 
@@ -256,7 +256,7 @@ class ProgramBuilder {
         template <typename... ARGS>
         explicit ConstOptions(ARGS&&... args) {
             static constexpr bool has_init =
-                (utils::traits::IsTypeOrDerived<utils::traits::PtrElTy<ARGS>, ast::Expression> ||
+                (tint::traits::IsTypeOrDerived<tint::traits::PtrElTy<ARGS>, ast::Expression> ||
                  ...);
             static_assert(has_init, "Const() must be constructed with an initializer expression");
             (Set(std::forward<ARGS>(args)), ...);
@@ -265,12 +265,12 @@ class ProgramBuilder {
 
         ast::Type type;
         const ast::Expression* initializer = nullptr;
-        utils::Vector<const ast::Attribute*, 4> attributes;
+        tint::Vector<const ast::Attribute*, 4> attributes;
 
       private:
         void Set(ast::Type t) { type = t; }
         void Set(const ast::Expression* c) { initializer = c; }
-        void Set(utils::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
+        void Set(tint::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
         void Set(const ast::Attribute* a) { attributes.Push(a); }
     };
 
@@ -285,21 +285,21 @@ class ProgramBuilder {
 
         ast::Type type;
         const ast::Expression* initializer = nullptr;
-        utils::Vector<const ast::Attribute*, 4> attributes;
+        tint::Vector<const ast::Attribute*, 4> attributes;
 
       private:
         void Set(ast::Type t) { type = t; }
         void Set(const ast::Expression* c) { initializer = c; }
-        void Set(utils::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
+        void Set(tint::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
         void Set(const ast::Attribute* a) { attributes.Push(a); }
     };
 
   public:
     /// ASTNodeAllocator is an alias to BlockAllocator<ast::Node>
-    using ASTNodeAllocator = utils::BlockAllocator<ast::Node>;
+    using ASTNodeAllocator = tint::BlockAllocator<ast::Node>;
 
     /// SemNodeAllocator is an alias to BlockAllocator<sem::Node>
-    using SemNodeAllocator = utils::BlockAllocator<sem::Node>;
+    using SemNodeAllocator = tint::BlockAllocator<sem::Node>;
 
     /// Constructor
     ProgramBuilder();
@@ -443,7 +443,7 @@ class ProgramBuilder {
     /// @param args the arguments to pass to the constructor
     /// @returns the node pointer
     template <typename T, typename... ARGS>
-    utils::traits::EnableIfIsType<T, ast::Node>* create(const Source& source, ARGS&&... args) {
+    tint::traits::EnableIfIsType<T, ast::Node>* create(const Source& source, ARGS&&... args) {
         AssertNotMoved();
         return ast_nodes_.Create<T>(id_, AllocateNodeID(), source, std::forward<ARGS>(args)...);
     }
@@ -455,7 +455,7 @@ class ProgramBuilder {
     /// destructed.
     /// @returns the node pointer
     template <typename T>
-    utils::traits::EnableIfIsType<T, ast::Node>* create() {
+    tint::traits::EnableIfIsType<T, ast::Node>* create() {
         AssertNotMoved();
         return ast_nodes_.Create<T>(id_, AllocateNodeID(), source_);
     }
@@ -469,9 +469,9 @@ class ProgramBuilder {
     /// @param args the remaining arguments to pass to the constructor
     /// @returns the node pointer
     template <typename T, typename ARG0, typename... ARGS>
-    utils::traits::EnableIf</* T is ast::Node and ARG0 is not Source */
-                            utils::traits::IsTypeOrDerived<T, ast::Node> &&
-                                !utils::traits::IsTypeOrDerived<ARG0, Source>,
+    tint::traits::EnableIf</* T is ast::Node and ARG0 is not Source */
+                            tint::traits::IsTypeOrDerived<T, ast::Node> &&
+                                !tint::traits::IsTypeOrDerived<ARG0, Source>,
                             T>*
     create(ARG0&& arg0, ARGS&&... args) {
         AssertNotMoved();
@@ -484,8 +484,8 @@ class ProgramBuilder {
     /// @param args the arguments to pass to the constructor
     /// @returns the node pointer
     template <typename T, typename... ARGS>
-    utils::traits::EnableIf<utils::traits::IsTypeOrDerived<T, sem::Node> &&
-                                !utils::traits::IsTypeOrDerived<T, type::Node>,
+    tint::traits::EnableIf<tint::traits::IsTypeOrDerived<T, sem::Node> &&
+                                !tint::traits::IsTypeOrDerived<T, type::Node>,
                             T>*
     create(ARGS&&... args) {
         AssertNotMoved();
@@ -499,7 +499,7 @@ class ProgramBuilder {
     /// @param args the arguments to pass to the constructor
     /// @returns the new, or existing node
     template <typename T, typename... ARGS>
-    utils::traits::EnableIfIsType<T, type::Node>* create(ARGS&&... args) {
+    tint::traits::EnableIfIsType<T, type::Node>* create(ARGS&&... args) {
         AssertNotMoved();
         return constants.types.Get<T>(std::forward<ARGS>(args)...);
     }
@@ -538,7 +538,7 @@ class ProgramBuilder {
                   typename = DisableIfSource<NAME>,
                   typename = std::enable_if_t<!std::is_same_v<std::decay_t<NAME>, ast::Type>>>
         ast::Type operator()(NAME&& name, ARGS&&... args) const {
-            if constexpr (utils::traits::IsTypeOrDerived<utils::traits::PtrElTy<NAME>,
+            if constexpr (tint::traits::IsTypeOrDerived<tint::traits::PtrElTy<NAME>,
                                                          ast::Expression>) {
                 static_assert(sizeof...(ARGS) == 0);
                 return {name};
@@ -1002,7 +1002,7 @@ class ProgramBuilder {
         /// @param attrs the optional attributes for the array
         /// @return an array of type `T`
         ast::Type array(ast::Type subtype,
-                        utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
+                        tint::VectorRef<const ast::Attribute*> attrs = tint::Empty) const {
             return array(builder->source_, subtype, std::move(attrs));
         }
 
@@ -1012,10 +1012,10 @@ class ProgramBuilder {
         /// @return an array of type `T`
         ast::Type array(const Source& source,
                         ast::Type subtype,
-                        utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
+                        tint::VectorRef<const ast::Attribute*> attrs = tint::Empty) const {
             return ast::Type{builder->Expr(
                 builder->create<ast::TemplatedIdentifier>(source, builder->Sym("array"),
-                                                          utils::Vector{
+                                                          tint::Vector{
                                                               subtype.expr,
                                                           },
                                                           std::move(attrs)))};
@@ -1028,7 +1028,7 @@ class ProgramBuilder {
         template <typename COUNT, typename = DisableIfVectorLike<COUNT>>
         ast::Type array(ast::Type subtype,
                         COUNT&& n,
-                        utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
+                        tint::VectorRef<const ast::Attribute*> attrs = tint::Empty) const {
             return array(builder->source_, subtype, std::forward<COUNT>(n), std::move(attrs));
         }
 
@@ -1041,10 +1041,10 @@ class ProgramBuilder {
         ast::Type array(const Source& source,
                         ast::Type subtype,
                         COUNT&& n,
-                        utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
+                        tint::VectorRef<const ast::Attribute*> attrs = tint::Empty) const {
             return ast::Type{builder->Expr(
                 builder->create<ast::TemplatedIdentifier>(source, builder->Sym("array"),
-                                                          utils::Vector{
+                                                          tint::Vector{
                                                               subtype.expr,
                                                               builder->Expr(std::forward<COUNT>(n)),
                                                           },
@@ -1071,18 +1071,18 @@ class ProgramBuilder {
         /// @return a inferred-size or runtime-sized array of type `T`
         template <typename T, int N = 0, typename = DisableIfInferOrAbstract<T>>
         ast::Type array(const Source& source,
-                        utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
+                        tint::VectorRef<const ast::Attribute*> attrs = tint::Empty) const {
             if constexpr (N == 0) {
                 return ast::Type{builder->Expr(builder->create<ast::TemplatedIdentifier>(
                     source, builder->Sym("array"),
-                    utils::Vector<const ast::Expression*, 1>{
+                    tint::Vector<const ast::Expression*, 1>{
                         Of<T>().expr,
                     },
                     std::move(attrs)))};
             } else {
                 return ast::Type{builder->Expr(builder->create<ast::TemplatedIdentifier>(
                     source, builder->Sym("array"),
-                    utils::Vector{
+                    tint::Vector{
                         Of<T>().expr,
                         builder->Expr(builder->source_, tint::u32(N)),
                     },
@@ -1093,7 +1093,7 @@ class ProgramBuilder {
         /// @param attrs the optional attributes for the array
         /// @return an array of size `N` of type `T`
         template <typename T, int N = 0, typename = DisableIfInferOrAbstract<T>>
-        ast::Type array(utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
+        ast::Type array(tint::VectorRef<const ast::Attribute*> attrs = tint::Empty) const {
             return array<T, N>(builder->source_, std::move(attrs));
         }
 
@@ -1426,7 +1426,7 @@ class ProgramBuilder {
     /// @return a Symbol with the given enum value
     template <typename ENUM, typename = std::enable_if_t<std::is_enum_v<std::decay_t<ENUM>>>>
     Symbol Sym(ENUM&& enumerator) {
-        return Sym(utils::ToString(enumerator));
+        return Sym(tint::ToString(enumerator));
     }
 
     /// @return nullptr
@@ -1436,7 +1436,7 @@ class ProgramBuilder {
     /// @return an ast::Identifier with the given symbol
     template <typename IDENTIFIER>
     const ast::Identifier* Ident(IDENTIFIER&& identifier) {
-        if constexpr (utils::traits::IsTypeOrDerived<utils::traits::PtrElTy<IDENTIFIER>,
+        if constexpr (tint::traits::IsTypeOrDerived<tint::traits::PtrElTy<IDENTIFIER>,
                                                      ast::Identifier>) {
             return identifier;  // Passthrough
         } else {
@@ -1471,12 +1471,12 @@ class ProgramBuilder {
             return create<ast::Identifier>(source, Sym(std::forward<IDENTIFIER>(identifier)));
         }
         return create<ast::TemplatedIdentifier>(source, Sym(std::forward<IDENTIFIER>(identifier)),
-                                                std::move(arg_exprs), utils::Empty);
+                                                std::move(arg_exprs), tint::Empty);
     }
 
     /// @param expr the expression
     /// @return expr (passthrough)
-    template <typename T, typename = utils::traits::EnableIfIsType<T, ast::Expression>>
+    template <typename T, typename = tint::traits::EnableIfIsType<T, ast::Expression>>
     const T* Expr(const T* expr) {
         return expr;
     }
@@ -1595,7 +1595,7 @@ class ProgramBuilder {
     /// @param list the list to append too
     /// @param arg the arg to create
     template <size_t N, typename ARG>
-    void Append(utils::Vector<const ast::Expression*, N>& list, ARG&& arg) {
+    void Append(tint::Vector<const ast::Expression*, N>& list, ARG&& arg) {
         list.Push(Expr(std::forward<ARG>(arg)));
     }
 
@@ -1605,33 +1605,33 @@ class ProgramBuilder {
     /// @param arg0 the first argument
     /// @param args the rest of the arguments
     template <size_t N, typename ARG0, typename... ARGS>
-    void Append(utils::Vector<const ast::Expression*, N>& list, ARG0&& arg0, ARGS&&... args) {
+    void Append(tint::Vector<const ast::Expression*, N>& list, ARG0&& arg0, ARGS&&... args) {
         Append(list, std::forward<ARG0>(arg0));
         Append(list, std::forward<ARGS>(args)...);
     }
 
-    /// @return utils::EmptyType
-    utils::EmptyType ExprList() { return utils::Empty; }
+    /// @return tint::EmptyType
+    tint::EmptyType ExprList() { return tint::Empty; }
 
     /// @param args the list of expressions
     /// @return the list of expressions converted to `ast::Expression`s using
     /// `Expr()`,
     template <typename... ARGS, typename = DisableIfVectorLike<ARGS...>>
     auto ExprList(ARGS&&... args) {
-        return utils::Vector<const ast::Expression*, sizeof...(ARGS)>{Expr(args)...};
+        return tint::Vector<const ast::Expression*, sizeof...(ARGS)>{Expr(args)...};
     }
 
     /// @param list the list of expressions
     /// @return `list`
     template <typename T, size_t N>
-    utils::Vector<T, N> ExprList(utils::Vector<T, N>&& list) {
+    tint::Vector<T, N> ExprList(tint::Vector<T, N>&& list) {
         return std::move(list);
     }
 
     /// @param list the list of expressions
     /// @return `list`
-    utils::VectorRef<const ast::Expression*> ExprList(
-        utils::VectorRef<const ast::Expression*> list) {
+    tint::VectorRef<const ast::Expression*> ExprList(
+        tint::VectorRef<const ast::Expression*> list) {
         return list;
     }
 
@@ -1691,7 +1691,7 @@ class ProgramBuilder {
     /// @return an `ast::Enable` enabling the given extension.
     const ast::Enable* Enable(builtin::Extension extension) {
         auto* ext = create<ast::Extension>(extension);
-        auto* enable = create<ast::Enable>(utils::Vector{ext});
+        auto* enable = create<ast::Enable>(tint::Vector{ext});
         AST().AddEnable(enable);
         return enable;
     }
@@ -1702,7 +1702,7 @@ class ProgramBuilder {
     /// @return an `ast::Enable` enabling the given extension.
     const ast::Enable* Enable(const Source& source, builtin::Extension extension) {
         auto* ext = create<ast::Extension>(source, extension);
-        auto* enable = create<ast::Enable>(source, utils::Vector{ext});
+        auto* enable = create<ast::Enable>(source, tint::Vector{ext});
         AST().AddEnable(enable);
         return enable;
     }
@@ -1808,7 +1808,7 @@ class ProgramBuilder {
     template <typename NAME>
     const ast::Parameter* Param(NAME&& name,
                                 ast::Type type,
-                                utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+                                tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return Param(source_, std::forward<NAME>(name), type, std::move(attributes));
     }
 
@@ -1821,7 +1821,7 @@ class ProgramBuilder {
     const ast::Parameter* Param(const Source& source,
                                 NAME&& name,
                                 ast::Type type,
-                                utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+                                tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::Parameter>(source, Ident(std::forward<NAME>(name)), type,
                                       std::move(attributes));
     }
@@ -2374,7 +2374,7 @@ class ProgramBuilder {
                                                         OBJECT&& object,
                                                         MEMBER&& member) {
         static_assert(
-            !utils::traits::IsType<utils::traits::PtrElTy<MEMBER>, ast::TemplatedIdentifier>,
+            !tint::traits::IsType<tint::traits::PtrElTy<MEMBER>, ast::TemplatedIdentifier>,
             "it is currently invalid for a structure to hold a templated member");
         return create<ast::MemberAccessorExpression>(source, Expr(std::forward<OBJECT>(object)),
                                                      Ident(std::forward<MEMBER>(member)));
@@ -2489,14 +2489,14 @@ class ProgramBuilder {
     /// @param attributes the optional function attributes
     /// @param return_type_attributes the optional function return type attributes
     /// @returns the function pointer
-    template <typename NAME, typename BODY = utils::VectorRef<const ast::Statement*>>
+    template <typename NAME, typename BODY = tint::VectorRef<const ast::Statement*>>
     const ast::Function* Func(
         NAME&& name,
-        utils::VectorRef<const ast::Parameter*> params,
+        tint::VectorRef<const ast::Parameter*> params,
         ast::Type type,
         BODY&& body,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty,
-        utils::VectorRef<const ast::Attribute*> return_type_attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty,
+        tint::VectorRef<const ast::Attribute*> return_type_attributes = tint::Empty) {
         return Func(source_, std::forward<NAME>(name), std::move(params), type,
                     std::forward<BODY>(body), std::move(attributes),
                     std::move(return_type_attributes));
@@ -2512,18 +2512,18 @@ class ProgramBuilder {
     /// @param attributes the optional function attributes
     /// @param return_type_attributes the optional function return type attributes
     /// @returns the function pointer
-    template <typename NAME, typename BODY = utils::VectorRef<const ast::Statement*>>
+    template <typename NAME, typename BODY = tint::VectorRef<const ast::Statement*>>
     const ast::Function* Func(
         const Source& source,
         NAME&& name,
-        utils::VectorRef<const ast::Parameter*> params,
+        tint::VectorRef<const ast::Parameter*> params,
         ast::Type type,
         BODY&& body,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty,
-        utils::VectorRef<const ast::Attribute*> return_type_attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty,
+        tint::VectorRef<const ast::Attribute*> return_type_attributes = tint::Empty) {
         const ast::BlockStatement* block = nullptr;
-        using BODY_T = utils::traits::PtrElTy<BODY>;
-        if constexpr (utils::traits::IsTypeOrDerived<BODY_T, ast::BlockStatement> ||
+        using BODY_T = tint::traits::PtrElTy<BODY>;
+        if constexpr (tint::traits::IsTypeOrDerived<BODY_T, ast::BlockStatement> ||
                       std::is_same_v<BODY_T, std::nullptr_t>) {
             block = body;
         } else {
@@ -2643,8 +2643,8 @@ class ProgramBuilder {
     template <typename NAME>
     const ast::Struct* Structure(
         NAME&& name,
-        utils::VectorRef<const ast::StructMember*> members,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::StructMember*> members,
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return Structure(source_, std::forward<NAME>(name), std::move(members),
                          std::move(attributes));
     }
@@ -2659,8 +2659,8 @@ class ProgramBuilder {
     const ast::Struct* Structure(
         const Source& source,
         NAME&& name,
-        utils::VectorRef<const ast::StructMember*> members,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::StructMember*> members,
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         auto* type = create<ast::Struct>(source, Ident(std::forward<NAME>(name)),
                                          std::move(members), std::move(attributes));
         AST().AddTypeDecl(type);
@@ -2676,7 +2676,7 @@ class ProgramBuilder {
     const ast::StructMember* Member(
         NAME&& name,
         ast::Type type,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return Member(source_, std::forward<NAME>(name), type, std::move(attributes));
     }
 
@@ -2691,7 +2691,7 @@ class ProgramBuilder {
         const Source& source,
         NAME&& name,
         ast::Type type,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::StructMember>(source, Ident(std::forward<NAME>(name)), type,
                                          std::move(attributes));
     }
@@ -2704,7 +2704,7 @@ class ProgramBuilder {
     template <typename NAME>
     const ast::StructMember* Member(uint32_t offset, NAME&& name, ast::Type type) {
         return create<ast::StructMember>(source_, Ident(std::forward<NAME>(name)), type,
-                                         utils::Vector<const ast::Attribute*, 1>{
+                                         tint::Vector<const ast::Attribute*, 1>{
                                              MemberOffset(AInt(offset)),
                                          });
     }
@@ -2714,8 +2714,8 @@ class ProgramBuilder {
     /// @param attributes the optional attributes of the block
     /// @returns the block statement pointer
     const ast::BlockStatement* Block(
-        utils::VectorRef<const ast::Statement*> statements,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Statement*> statements,
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return Block(source_, std::move(statements), std::move(attributes));
     }
 
@@ -2726,8 +2726,8 @@ class ProgramBuilder {
     /// @returns the block statement pointer
     const ast::BlockStatement* Block(
         const Source& source,
-        utils::VectorRef<const ast::Statement*> statements,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Statement*> statements,
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::BlockStatement>(source, std::move(statements), std::move(attributes));
     }
 
@@ -2749,10 +2749,10 @@ class ProgramBuilder {
     const ast::BlockStatement* Block(const Source& source, STATEMENTS&&... statements) {
         return create<ast::BlockStatement>(
             source,
-            utils::Vector<const ast::Statement*, sizeof...(statements)>{
+            tint::Vector<const ast::Statement*, sizeof...(statements)>{
                 std::forward<STATEMENTS>(statements)...,
             },
-            utils::Empty);
+            tint::Empty);
     }
 
     /// A wrapper type for the Else statement used to create If statements.
@@ -2779,7 +2779,7 @@ class ProgramBuilder {
                                CONDITION&& condition,
                                const ast::BlockStatement* body,
                                const ElseStmt else_stmt = ElseStmt(),
-                               utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+                               tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::IfStatement>(source, Expr(std::forward<CONDITION>(condition)), body,
                                         else_stmt.stmt, std::move(attributes));
     }
@@ -2795,7 +2795,7 @@ class ProgramBuilder {
     const ast::IfStatement* If(CONDITION&& condition,
                                const ast::BlockStatement* body,
                                const ElseStmt else_stmt = ElseStmt(),
-                               utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+                               tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::IfStatement>(Expr(std::forward<CONDITION>(condition)), body,
                                         else_stmt.stmt, std::move(attributes));
     }
@@ -2910,7 +2910,7 @@ class ProgramBuilder {
         const Source& source,
         const ast::BlockStatement* body,
         const ast::BlockStatement* continuing = nullptr,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::LoopStatement>(source, body, continuing, std::move(attributes));
     }
 
@@ -2922,7 +2922,7 @@ class ProgramBuilder {
     const ast::LoopStatement* Loop(
         const ast::BlockStatement* body,
         const ast::BlockStatement* continuing = nullptr,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::LoopStatement>(body, continuing, std::move(attributes));
     }
 
@@ -2942,7 +2942,7 @@ class ProgramBuilder {
         COND&& cond,
         const ast::Statement* cont,
         const ast::BlockStatement* body,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::ForLoopStatement>(source, init, Expr(std::forward<COND>(cond)), cont,
                                              body, std::move(attributes));
     }
@@ -2961,7 +2961,7 @@ class ProgramBuilder {
         COND&& cond,
         const ast::Statement* cont,
         const ast::BlockStatement* body,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::ForLoopStatement>(init, Expr(std::forward<COND>(cond)), cont, body,
                                              std::move(attributes));
     }
@@ -2977,7 +2977,7 @@ class ProgramBuilder {
         const Source& source,
         COND&& cond,
         const ast::BlockStatement* body,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::WhileStatement>(source, Expr(std::forward<COND>(cond)), body,
                                            std::move(attributes));
     }
@@ -2991,7 +2991,7 @@ class ProgramBuilder {
     const ast::WhileStatement* While(
         COND&& cond,
         const ast::BlockStatement* body,
-        utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
+        tint::VectorRef<const ast::Attribute*> attributes = tint::Empty) {
         return create<ast::WhileStatement>(Expr(std::forward<COND>(cond)), body,
                                            std::move(attributes));
     }
@@ -3022,9 +3022,9 @@ class ProgramBuilder {
                                        Cases&&... cases) {
         return create<ast::SwitchStatement>(
             source, Expr(std::forward<ExpressionInit>(condition)),
-            utils::Vector<const ast::CaseStatement*, sizeof...(cases)>{
+            tint::Vector<const ast::CaseStatement*, sizeof...(cases)>{
                 std::forward<Cases>(cases)...},
-            utils::Empty, utils::Empty);
+            tint::Empty, tint::Empty);
     }
 
     /// Creates a ast::SwitchStatement with input expression and cases
@@ -3038,9 +3038,9 @@ class ProgramBuilder {
     const ast::SwitchStatement* Switch(ExpressionInit&& condition, Cases&&... cases) {
         return create<ast::SwitchStatement>(
             Expr(std::forward<ExpressionInit>(condition)),
-            utils::Vector<const ast::CaseStatement*, sizeof...(cases)>{
+            tint::Vector<const ast::CaseStatement*, sizeof...(cases)>{
                 std::forward<Cases>(cases)...},
-            utils::Empty, utils::Empty);
+            tint::Empty, tint::Empty);
     }
 
     /// Creates a ast::SwitchStatement with input expression, cases, and optional attributes
@@ -3054,9 +3054,9 @@ class ProgramBuilder {
     const ast::SwitchStatement* Switch(
         const Source& source,
         ExpressionInit&& condition,
-        utils::VectorRef<const ast::CaseStatement*> cases,
-        utils::VectorRef<const ast::Attribute*> stmt_attributes = utils::Empty,
-        utils::VectorRef<const ast::Attribute*> body_attributes = utils::Empty) {
+        tint::VectorRef<const ast::CaseStatement*> cases,
+        tint::VectorRef<const ast::Attribute*> stmt_attributes = tint::Empty,
+        tint::VectorRef<const ast::Attribute*> body_attributes = tint::Empty) {
         return create<ast::SwitchStatement>(source, Expr(std::forward<ExpressionInit>(condition)),
                                             cases, std::move(stmt_attributes),
                                             std::move(body_attributes));
@@ -3071,9 +3071,9 @@ class ProgramBuilder {
     template <typename ExpressionInit, typename = DisableIfSource<ExpressionInit>>
     const ast::SwitchStatement* Switch(
         ExpressionInit&& condition,
-        utils::VectorRef<const ast::CaseStatement*> cases,
-        utils::VectorRef<const ast::Attribute*> stmt_attributes = utils::Empty,
-        utils::VectorRef<const ast::Attribute*> body_attributes = utils::Empty) {
+        tint::VectorRef<const ast::CaseStatement*> cases,
+        tint::VectorRef<const ast::Attribute*> stmt_attributes = tint::Empty,
+        tint::VectorRef<const ast::Attribute*> body_attributes = tint::Empty) {
         return create<ast::SwitchStatement>(Expr(std::forward<ExpressionInit>(condition)), cases,
                                             std::move(stmt_attributes), std::move(body_attributes));
     }
@@ -3082,7 +3082,7 @@ class ProgramBuilder {
     /// @param selectors list of selectors
     /// @param body the case body
     /// @returns the case statement pointer
-    const ast::CaseStatement* Case(utils::VectorRef<const ast::CaseSelector*> selectors,
+    const ast::CaseStatement* Case(tint::VectorRef<const ast::CaseSelector*> selectors,
                                    const ast::BlockStatement* body = nullptr) {
         return Case(source_, std::move(selectors), body);
     }
@@ -3093,7 +3093,7 @@ class ProgramBuilder {
     /// @param body the case body
     /// @returns the case statement pointer
     const ast::CaseStatement* Case(const Source& source,
-                                   utils::VectorRef<const ast::CaseSelector*> selectors,
+                                   tint::VectorRef<const ast::CaseSelector*> selectors,
                                    const ast::BlockStatement* body = nullptr) {
         return create<ast::CaseStatement>(source, std::move(selectors), body ? body : Block());
     }
@@ -3104,7 +3104,7 @@ class ProgramBuilder {
     /// @returns the case statement pointer
     const ast::CaseStatement* Case(const ast::CaseSelector* selector,
                                    const ast::BlockStatement* body = nullptr) {
-        return Case(utils::Vector{selector}, body ? body : Block());
+        return Case(tint::Vector{selector}, body ? body : Block());
     }
 
     /// Convenience function that creates a 'default' ast::CaseStatement
@@ -3120,7 +3120,7 @@ class ProgramBuilder {
     /// @returns the case statement pointer
     const ast::CaseStatement* DefaultCase(const Source& source,
                                           const ast::BlockStatement* body = nullptr) {
-        return Case(source, utils::Vector{DefaultCaseSelector(source)}, body);
+        return Case(source, tint::Vector{DefaultCaseSelector(source)}, body);
     }
 
     /// Convenience function that creates a case selector
@@ -3414,7 +3414,7 @@ class ProgramBuilder {
     template <typename NAME>
     const ast::DiagnosticRuleName* DiagnosticRuleName(NAME&& name) {
         static_assert(
-            !utils::traits::IsType<utils::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
+            !tint::traits::IsType<tint::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
             "it is invalid for a diagnostic rule name to be templated");
         auto* name_ident = Ident(std::forward<NAME>(name));
         return create<ast::DiagnosticRuleName>(name_ident->source, name_ident);
@@ -3427,10 +3427,10 @@ class ProgramBuilder {
     template <typename CATEGORY, typename NAME, typename = DisableIfSource<CATEGORY>>
     const ast::DiagnosticRuleName* DiagnosticRuleName(CATEGORY&& category, NAME&& name) {
         static_assert(
-            !utils::traits::IsType<utils::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
+            !tint::traits::IsType<tint::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
             "it is invalid for a diagnostic rule name to be templated");
         static_assert(
-            !utils::traits::IsType<utils::traits::PtrElTy<CATEGORY>, ast::TemplatedIdentifier>,
+            !tint::traits::IsType<tint::traits::PtrElTy<CATEGORY>, ast::TemplatedIdentifier>,
             "it is invalid for a diagnostic rule category to be templated");
         auto* category_ident = Ident(std::forward<CATEGORY>(category));
         auto* name_ident = Ident(std::forward<NAME>(name));
@@ -3446,7 +3446,7 @@ class ProgramBuilder {
     template <typename NAME>
     const ast::DiagnosticRuleName* DiagnosticRuleName(const Source& source, NAME&& name) {
         static_assert(
-            !utils::traits::IsType<utils::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
+            !tint::traits::IsType<tint::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
             "it is invalid for a diagnostic rule name to be templated");
         auto* name_ident = Ident(std::forward<NAME>(name));
         return create<ast::DiagnosticRuleName>(source, name_ident);
@@ -3462,10 +3462,10 @@ class ProgramBuilder {
                                                       CATEGORY&& category,
                                                       NAME&& name) {
         static_assert(
-            !utils::traits::IsType<utils::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
+            !tint::traits::IsType<tint::traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
             "it is invalid for a diagnostic rule name to be templated");
         static_assert(
-            !utils::traits::IsType<utils::traits::PtrElTy<CATEGORY>, ast::TemplatedIdentifier>,
+            !tint::traits::IsType<tint::traits::PtrElTy<CATEGORY>, ast::TemplatedIdentifier>,
             "it is invalid for a diagnostic rule category to be templated");
         auto* category_ident = Ident(std::forward<CATEGORY>(category));
         auto* name_ident = Ident(std::forward<NAME>(name));
@@ -3589,9 +3589,9 @@ class ProgramBuilder {
     /// @param args a mix of ast::Expression, ast::Statement, ast::Variables.
     /// @returns the function
     template <typename... ARGS,
-              typename = utils::traits::EnableIf<(CanWrapInStatement<ARGS>::value && ...)>>
+              typename = tint::traits::EnableIf<(CanWrapInStatement<ARGS>::value && ...)>>
     const ast::Function* WrapInFunction(ARGS&&... args) {
-        utils::Vector stmts{
+        tint::Vector stmts{
             WrapInStatement(std::forward<ARGS>(args))...,
         };
         return WrapInFunction(std::move(stmts));
@@ -3599,7 +3599,7 @@ class ProgramBuilder {
     /// @param stmts a list of ast::Statement that will be wrapped by a function,
     /// so that each statement is reachable by the Resolver.
     /// @returns the function
-    const ast::Function* WrapInFunction(utils::VectorRef<const ast::Statement*> stmts);
+    const ast::Function* WrapInFunction(tint::VectorRef<const ast::Statement*> stmts);
 
     /// The constants manager
     constant::Manager constants;

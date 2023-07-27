@@ -42,7 +42,7 @@ class IRToProgramTest : public ir::IRTestHelper {
 #define EXPECT_WGSL(expected_wgsl)                                        \
     do {                                                                  \
         if (auto got = Run(); got.err.empty()) {                          \
-            auto expected = std::string(utils::TrimSpace(expected_wgsl)); \
+            auto expected = std::string(tint::TrimSpace(expected_wgsl)); \
             if (!expected.empty()) {                                      \
                 expected = "\n" + expected + "\n";                        \
             }                                                             \

@@ -28,8 +28,8 @@ TEST_F(WgslASTPrinterTest, Emit_Loop) {
     auto* continuing = Block();
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
-         utils::Vector{Stage(ast::PipelineStage::kFragment)});
+    Func("F", tint::Empty, ty.void_(), tint::Vector{l},
+         tint::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASTPrinter& gen = Build();
 
@@ -50,8 +50,8 @@ TEST_F(WgslASTPrinterTest, Emit_LoopWithContinuing) {
     auto* continuing = Block(CallStmt(Call("a_statement")));
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
-         utils::Vector{Stage(ast::PipelineStage::kFragment)});
+    Func("F", tint::Empty, ty.void_(), tint::Vector{l},
+         tint::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASTPrinter& gen = Build();
 
@@ -76,8 +76,8 @@ TEST_F(WgslASTPrinterTest, Emit_LoopWithContinuing_BreakIf) {
     auto* continuing = Block(CallStmt(Call("a_statement")), BreakIf(true));
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
-         utils::Vector{Stage(ast::PipelineStage::kFragment)});
+    Func("F", tint::Empty, ty.void_(), tint::Vector{l},
+         tint::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASTPrinter& gen = Build();
 

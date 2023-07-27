@@ -74,7 +74,7 @@ class StringPrinter : public Printer {
     void write(const std::string& str, const Style&) override;
 
   private:
-    utils::StringStream stream;
+    tint::StringStream stream;
 };
 
 }  // namespace tint::diag

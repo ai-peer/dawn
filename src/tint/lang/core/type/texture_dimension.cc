@@ -16,7 +16,7 @@
 
 namespace tint::type {
 
-utils::StringStream& operator<<(utils::StringStream& out, type::TextureDimension dim) {
+tint::StringStream& operator<<(tint::StringStream& out, type::TextureDimension dim) {
     switch (dim) {
         case type::TextureDimension::kNone:
             out << "None";

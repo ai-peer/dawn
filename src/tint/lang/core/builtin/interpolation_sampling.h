@@ -40,7 +40,7 @@ enum class InterpolationSampling {
 /// @param out the stream to write to
 /// @param value the InterpolationSampling
 /// @returns `out` so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, InterpolationSampling value);
+tint::StringStream& operator<<(tint::StringStream& out, InterpolationSampling value);
 
 /// ParseInterpolationSampling parses a InterpolationSampling from a string.
 /// @param str the string to parse

@@ -23,7 +23,7 @@ namespace tint::ast {
 
 /// A float literal
 class FloatLiteralExpression final
-    : public utils::Castable<FloatLiteralExpression, LiteralExpression> {
+    : public tint::Castable<FloatLiteralExpression, LiteralExpression> {
   public:
     /// Literal suffix
     enum class Suffix {
@@ -61,7 +61,7 @@ class FloatLiteralExpression final
 /// @param out the stream to write to
 /// @param suffix the suffix to write
 /// @returns out so calls can be chained
-utils::StringStream& operator<<(utils::StringStream& out, FloatLiteralExpression::Suffix suffix);
+tint::StringStream& operator<<(tint::StringStream& out, FloatLiteralExpression::Suffix suffix);
 
 }  // namespace tint::ast
 

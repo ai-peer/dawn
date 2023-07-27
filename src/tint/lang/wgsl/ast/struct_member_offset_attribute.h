@@ -33,7 +33,7 @@ namespace tint::ast {
 /// `@align(n)` attributes, so this is what we do, keeping all the layout
 /// logic in one place.
 class StructMemberOffsetAttribute final
-    : public utils::Castable<StructMemberOffsetAttribute, Attribute> {
+    : public tint::Castable<StructMemberOffsetAttribute, Attribute> {
   public:
     /// constructor
     /// @param pid the identifier of the program that owns this node

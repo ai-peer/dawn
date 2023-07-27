@@ -24,7 +24,7 @@ namespace tint::ir {
 
 IntrinsicCall::IntrinsicCall(InstructionResult* result,
                              enum Kind kind,
-                             utils::VectorRef<Value*> arguments)
+                             tint::VectorRef<Value*> arguments)
     : kind_(kind) {
     AddOperands(IntrinsicCall::kArgsOperandOffset, std::move(arguments));
     AddResult(result);
@@ -32,7 +32,7 @@ IntrinsicCall::IntrinsicCall(InstructionResult* result,
 
 IntrinsicCall::~IntrinsicCall() = default;
 
-utils::StringStream& operator<<(utils::StringStream& out, enum IntrinsicCall::Kind kind) {
+tint::StringStream& operator<<(tint::StringStream& out, enum IntrinsicCall::Kind kind) {
     switch (kind) {
         case IntrinsicCall::Kind::kSpirvArrayLength:
             out << "spirv.array_length";
