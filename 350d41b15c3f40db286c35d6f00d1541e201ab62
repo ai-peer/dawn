@@ -33,6 +33,24 @@
       "message": "LGTM but is there a very brief explanation of what needs to be fixed? We could add it to the comments and the commit message.",
       "revId": "350d41b15c3f40db286c35d6f00d1541e201ab62",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81eb2698_288b83d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-27T01:14:49Z",
+      "side": 1,
+      "message": "Thanks, done!",
+      "parentUuid": "57b662f5_7c46470b",
+      "revId": "350d41b15c3f40db286c35d6f00d1541e201ab62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
