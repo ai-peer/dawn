@@ -69,6 +69,93 @@
       "parentUuid": "b6caf707_b5b46239",
       "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda04ecf_fee54c60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T22:51:19Z",
+      "side": 1,
+      "message": "darn. thanks for the explanation.\n\nI think it should be possible to do a GPU blit. It would basically be the inverse of [BlitR8ToStencil](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/BlitBufferToDepthStencil.cpp;l\u003d316?q\u003dBlitR8ToStencil\u0026sq\u003d)\n\nYou\u0027ll perform 8 draws, one for each bit, setting the stencilReadMask appropriately so the corresponding bit is set. (0b00000001, 0b00000010, 0b00000100, ...) If the stencil test *passes*, that means that that bit is indeed set in the source stencil texture. You can set the bit accordingly in the R8 output texture by using Blend operation Add, and returning a fragment color equal to the bit mask. Effectively, you\u0027ll accumulate the R8 output one bit at a time.\n\nthe current thing works though - so feel free to address this as a follow-up.",
+      "parentUuid": "ec4415e8_7c34a4cf",
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb30a6fb_714806a1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T22:51:19Z",
+      "side": 1,
+      "message": "why not add this usage when you create `mTextureForStencilSampling` instead? It doesn\u0027t need to be done for all Interm textures",
+      "range": {
+        "startLine": 286,
+        "startChar": 4,
+        "endLine": 291,
+        "endChar": 0
+      },
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab68619c_ad06f91e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T22:51:19Z",
+      "side": 1,
+      "message": "typo: component",
+      "range": {
+        "startLine": 1116,
+        "startChar": 38,
+        "endLine": 1116,
+        "endChar": 48
+      },
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33df3505_984672a9",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T22:51:19Z",
+      "side": 1,
+      "message": "this is a slight deuplication of some existing code to create ID3D11ShaderResourceView\n\nInstead, you could use a change mTextureForStencilSampling to a Ref\u003cTextureViewBase\u003e, \n\nThen this function would simply `return mTextureViewForStencilSampling-\u003eCreateD3D11ShaderResourceView()`.\n\nYou can still update it above using `mTextureViewForStencilSampling-\u003eGetTexture()-\u003eWriteInternal(...)`",
+      "range": {
+        "startLine": 1125,
+        "startChar": 4,
+        "endLine": 1136,
+        "endChar": 55
+      },
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
