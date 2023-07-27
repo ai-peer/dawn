@@ -82,8 +82,15 @@ class IntrinsicCall : public utils::Castable<IntrinsicCall, Call> {
     enum Kind kind_;
 };
 
+/// @param kind the enum value
+/// @returns the string for the given enum value
+std::string_view ToString(enum IntrinsicCall::Kind kind);
+
 /// Emits the name of the intrinsic type.
-utils::StringStream& operator<<(utils::StringStream& out, enum IntrinsicCall::Kind kind);
+template <typename STREAM, typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, enum IntrinsicCall::Kind kind) {
+    return out << ToString(kind);
+}
 
 }  // namespace tint::ir
 
