@@ -16,6 +16,24 @@
       "message": "Should this be in `writer/raise/` instead?",
       "revId": "d596912d561c3ead41a5f93bbbc82d0c8d23b880",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97e9210_632813cb",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/rename_conflicts.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-27T12:12:35Z",
+      "side": 1,
+      "message": "Yes, baby steps.",
+      "parentUuid": "a3889e09_27d03a34",
+      "revId": "d596912d561c3ead41a5f93bbbc82d0c8d23b880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
