@@ -78,7 +78,7 @@
 #include "src/tint/lang/wgsl/sem/value_conversion.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
 #include "src/tint/utils/containers/map.h"
-#include "src/tint/utils/debug/debug.h"
+#include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/rtti/switch.h"
@@ -307,8 +307,7 @@ void ASTPrinter::Generate() {
                 RecordExtension(enable);
             },
             [&](Default) {
-                TINT_ICE(Writer, diagnostics_)
-                    << "unhandled module-scope declaration: " << decl->TypeInfo().name;
+                TINT_ICE() << "unhandled module-scope declaration: " << decl->TypeInfo().name;
             });
     }
 
@@ -376,8 +375,8 @@ void ASTPrinter::EmitBitcast(utils::StringStream& out, const ast::BitcastExpress
         // Source type must be vec2<f16> or vec4<f16>, since type f16 and vec3<f16> can only have
         // identity bitcast.
         auto* src_vec = src_type->As<type::Vector>();
-        TINT_ASSERT(Writer, src_vec);
-        TINT_ASSERT(Writer, ((src_vec->Width() == 2u) || (src_vec->Width() == 4u)));
+        TINT_ASSERT(src_vec);
+        TINT_ASSERT(((src_vec->Width() == 2u) || (src_vec->Width() == 4u)));
         std::string fn = utils::GetOrCreate(
             bitcast_funcs_, BinaryOperandType{{src_type, dst_type}}, [&]() -> std::string {
                 TextBuffer b;
@@ -430,8 +429,8 @@ void ASTPrinter::EmitBitcast(utils::StringStream& out, const ast::BitcastExpress
     } else if (dst_type->DeepestElement()->Is<type::F16>()) {
         // Destination type must be vec2<f16> or vec4<f16>.
         auto* dst_vec = dst_type->As<type::Vector>();
-        TINT_ASSERT(Writer, dst_vec);
-        TINT_ASSERT(Writer, ((dst_vec->Width() == 2u) || (dst_vec->Width() == 4u)));
+        TINT_ASSERT(dst_vec);
+        TINT_ASSERT(((dst_vec->Width() == 2u) || (dst_vec->Width() == 4u)));
         std::string fn = utils::GetOrCreate(
             bitcast_funcs_, BinaryOperandType{{src_type, dst_type}}, [&]() -> std::string {
                 TextBuffer b;
@@ -453,9 +452,9 @@ void ASTPrinter::EmitBitcast(utils::StringStream& out, const ast::BitcastExpress
                     ScopedIndent si(&b);
                     if (auto src_vec = src_type->As<type::Vector>()) {
                         // Source vector type must be vec2<f32/i32/u32>, destination type vec4<f16>.
-                        TINT_ASSERT(Writer, (src_vec->DeepestElement()
-                                                 ->IsAnyOf<type::I32, type::U32, type::F32>()));
-                        TINT_ASSERT(Writer, (src_vec->Width() == 2u));
+                        TINT_ASSERT((
+                            src_vec->DeepestElement()->IsAnyOf<type::I32, type::U32, type::F32>()));
+                        TINT_ASSERT((src_vec->Width() == 2u));
                         {
                             auto s = Line(&b);
                             s << "uvec2 r = ";
@@ -471,7 +470,7 @@ void ASTPrinter::EmitBitcast(utils::StringStream& out, const ast::BitcastExpress
                         Line(&b) << "return f16vec4(v_xy.x, v_xy.y, v_zw.x, v_zw.y);";
                     } else {
                         // Source scalar type must be f32/i32/u32, destination type vec2<f16>.
-                        TINT_ASSERT(Writer, (src_type->IsAnyOf<type::I32, type::U32, type::F32>()));
+                        TINT_ASSERT((src_type->IsAnyOf<type::I32, type::U32, type::F32>()));
                         {
                             auto s = Line(&b);
                             s << "uint r = ";
@@ -573,7 +572,7 @@ void ASTPrinter::EmitBitwiseBoolOp(utils::StringStream& out, const ast::BinaryEx
     } else if (TINT_LIKELY(expr->op == ast::BinaryOp::kOr)) {
         out << " | ";
     } else {
-        TINT_ICE(Writer, diagnostics_) << "unexpected binary op: " << FriendlyName(expr->op);
+        TINT_ICE() << "unexpected binary op: " << FriendlyName(expr->op);
         return;
     }
 
@@ -699,7 +698,7 @@ void ASTPrinter::EmitBinary(utils::StringStream& out, const ast::BinaryExpressio
         case ast::BinaryOp::kLogicalAnd:
         case ast::BinaryOp::kLogicalOr: {
             // These are both handled above.
-            TINT_UNREACHABLE(Writer, diagnostics_);
+            TINT_UNREACHABLE();
             return;
         }
         case ast::BinaryOp::kEqual:
@@ -787,8 +786,7 @@ void ASTPrinter::EmitCall(utils::StringStream& out, const ast::CallExpression* e
         [&](const sem::ValueConversion* conv) { EmitValueConversion(out, call, conv); },
         [&](const sem::ValueConstructor* ctor) { EmitValueConstructor(out, call, ctor); },
         [&](Default) {
-            TINT_ICE(Writer, diagnostics_)
-                << "unhandled call target: " << call->Target()->TypeInfo().name;
+            TINT_ICE() << "unhandled call target: " << call->Target()->TypeInfo().name;
         });
 }
 
@@ -1019,7 +1017,7 @@ void ASTPrinter::EmitWorkgroupAtomicCall(utils::StringStream& out,
             break;
     }
 
-    TINT_UNREACHABLE(Writer, diagnostics_) << "unsupported atomic builtin: " << builtin->Type();
+    TINT_UNREACHABLE() << "unsupported atomic builtin: " << builtin->Type();
 }
 
 void ASTPrinter::EmitArrayLength(utils::StringStream& out, const ast::CallExpression* expr) {
@@ -1168,7 +1166,7 @@ void ASTPrinter::EmitDotCall(utils::StringStream& out,
 void ASTPrinter::EmitModfCall(utils::StringStream& out,
                               const ast::CallExpression* expr,
                               const sem::Builtin* builtin) {
-    TINT_ASSERT(Writer, expr->args.Length() == 1);
+    TINT_ASSERT(expr->args.Length() == 1);
     CallBuiltinHelper(out, expr, builtin,
                       [&](TextBuffer* b, const std::vector<std::string>& params) {
                           // Emit the builtin return type unique to this overload. This does not
@@ -1189,7 +1187,7 @@ void ASTPrinter::EmitModfCall(utils::StringStream& out,
 void ASTPrinter::EmitFrexpCall(utils::StringStream& out,
                                const ast::CallExpression* expr,
                                const sem::Builtin* builtin) {
-    TINT_ASSERT(Writer, expr->args.Length() == 1);
+    TINT_ASSERT(expr->args.Length() == 1);
     CallBuiltinHelper(out, expr, builtin,
                       [&](TextBuffer* b, const std::vector<std::string>& params) {
                           // Emit the builtin return type unique to this overload. This does not
@@ -1270,8 +1268,7 @@ void ASTPrinter::EmitBarrierCall(utils::StringStream& out, const sem::Builtin* b
     } else if (builtin->Type() == builtin::Function::kStorageBarrier) {
         out << "{ barrier(); memoryBarrierBuffer(); }";
     } else {
-        TINT_UNREACHABLE(Writer, diagnostics_)
-            << "unexpected barrier builtin type " << builtin::str(builtin->Type());
+        TINT_UNREACHABLE() << "unexpected barrier builtin type " << builtin::str(builtin->Type());
     }
 }
 
@@ -1302,7 +1299,7 @@ void ASTPrinter::EmitTextureCall(utils::StringStream& out,
 
     auto* texture = arg(Usage::kTexture);
     if (TINT_UNLIKELY(!texture)) {
-        TINT_ICE(Writer, diagnostics_) << "missing texture argument";
+        TINT_ICE() << "missing texture argument";
         return;
     }
 
@@ -1487,7 +1484,7 @@ void ASTPrinter::EmitTextureCall(utils::StringStream& out,
 
     auto* param_coords = arg(Usage::kCoords);
     if (TINT_UNLIKELY(!param_coords)) {
-        TINT_ICE(Writer, diagnostics_) << "missing coords argument";
+        TINT_ICE() << "missing coords argument";
         return;
     }
 
@@ -1578,9 +1575,9 @@ void ASTPrinter::EmitTextureCall(utils::StringStream& out,
         }
     }
     if (TINT_UNLIKELY(wgsl_ret_width > glsl_ret_width)) {
-        TINT_ICE(Writer, diagnostics_)
-            << "WGSL return width (" << wgsl_ret_width << ") is wider than GLSL return width ("
-            << glsl_ret_width << ") for " << builtin->Type();
+        TINT_ICE() << "WGSL return width (" << wgsl_ret_width
+                   << ") is wider than GLSL return width (" << glsl_ret_width << ") for "
+                   << builtin->Type();
         return;
     }
 }
@@ -1874,8 +1871,7 @@ void ASTPrinter::EmitGlobalVariable(const ast::Variable* global) {
                         "unhandled address space " + utils::ToString(sem->AddressSpace()));
                     return;
                 default: {
-                    TINT_ICE(Writer, diagnostics_)
-                        << "unhandled address space " << sem->AddressSpace();
+                    TINT_ICE() << "unhandled address space " << sem->AddressSpace();
                     break;
                 }
             }
@@ -1891,8 +1887,7 @@ void ASTPrinter::EmitGlobalVariable(const ast::Variable* global) {
             // Constants are embedded at their use
         },
         [&](Default) {
-            TINT_ICE(Writer, diagnostics_)
-                << "unhandled global variable type " << global->TypeInfo().name;
+            TINT_ICE() << "unhandled global variable type " << global->TypeInfo().name;
         });
 }
 
@@ -1900,7 +1895,7 @@ void ASTPrinter::EmitUniformVariable(const ast::Var* var, const sem::Variable* s
     auto* type = sem->Type()->UnwrapRef();
     auto* str = type->As<type::Struct>();
     if (TINT_UNLIKELY(!str)) {
-        TINT_ICE(Writer, builder_.Diagnostics()) << "storage variable must be of struct type";
+        TINT_ICE() << "storage variable must be of struct type";
         return;
     }
     auto bp = *sem->As<sem::GlobalVariable>()->BindingPoint();
@@ -1919,7 +1914,7 @@ void ASTPrinter::EmitStorageVariable(const ast::Var* var, const sem::Variable* s
     auto* type = sem->Type()->UnwrapRef();
     auto* str = type->As<type::Struct>();
     if (TINT_UNLIKELY(!str)) {
-        TINT_ICE(Writer, builder_.Diagnostics()) << "storage variable must be of struct type";
+        TINT_ICE() << "storage variable must be of struct type";
         return;
     }
     auto bp = *sem->As<sem::GlobalVariable>()->BindingPoint();
@@ -1945,8 +1940,7 @@ void ASTPrinter::EmitHandleVariable(const ast::Var* var, const sem::Variable* se
         out << "layout(";
         switch (storage->texel_format()) {
             case builtin::TexelFormat::kBgra8Unorm:
-                TINT_ICE(Writer, diagnostics_)
-                    << "bgra8unorm should have been polyfilled to rgba8unorm";
+                TINT_ICE() << "bgra8unorm should have been polyfilled to rgba8unorm";
                 break;
             case builtin::TexelFormat::kR32Uint:
                 out << "r32ui";
@@ -1997,7 +1991,7 @@ void ASTPrinter::EmitHandleVariable(const ast::Var* var, const sem::Variable* se
                 out << "rgba32f";
                 break;
             case builtin::TexelFormat::kUndefined:
-                TINT_ICE(Writer, diagnostics_) << "invalid texel format";
+                TINT_ICE() << "invalid texel format";
                 return;
         }
         out << ") ";
@@ -2174,7 +2168,7 @@ void ASTPrinter::EmitEntryPointFunction(const ast::Function* func) {
             if (TINT_UNLIKELY(!type->Is<type::Struct>())) {
                 // ICE likely indicates that the CanonicalizeEntryPointIO transform was
                 // not run, or a builtin parameter was added after it was run.
-                TINT_ICE(Writer, diagnostics_) << "Unsupported non-struct entry point parameter";
+                TINT_ICE() << "Unsupported non-struct entry point parameter";
             }
 
             if (!first) {
@@ -2541,10 +2535,7 @@ void ASTPrinter::EmitMemberAccessor(utils::StringStream& out,
         [&](const sem::StructMemberAccess* member_access) {
             out << member_access->Member()->Name().Name();
         },
-        [&](Default) {
-            TINT_ICE(Writer, diagnostics_)
-                << "unknown member access type: " << sem->TypeInfo().name;
-        });
+        [&](Default) { TINT_ICE() << "unknown member access type: " << sem->TypeInfo().name; });
 }
 
 void ASTPrinter::EmitReturn(const ast::ReturnStatement* stmt) {
@@ -2587,8 +2578,7 @@ void ASTPrinter::EmitStatement(const ast::Statement* stmt) {
                     // Constants are embedded at their use
                 },
                 [&](Default) {  //
-                    TINT_ICE(Writer, diagnostics_)
-                        << "unknown variable type: " << v->variable->TypeInfo().name;
+                    TINT_ICE() << "unknown variable type: " << v->variable->TypeInfo().name;
                 });
         },
         [&](const ast::ConstAssert*) {
@@ -2686,7 +2676,7 @@ void ASTPrinter::EmitType(utils::StringStream& out,
     } else if (type->Is<type::I32>()) {
         out << "int";
     } else if (auto* mat = type->As<type::Matrix>()) {
-        TINT_ASSERT(Writer, (mat->type()->IsAnyOf<type::F32, type::F16>()));
+        TINT_ASSERT((mat->type()->IsAnyOf<type::F32, type::F16>()));
         if (mat->type()->Is<type::F16>()) {
             out << "f16";
         }
@@ -2695,14 +2685,14 @@ void ASTPrinter::EmitType(utils::StringStream& out,
             out << "x" << mat->rows();
         }
     } else if (TINT_UNLIKELY(type->Is<type::Pointer>())) {
-        TINT_ICE(Writer, diagnostics_) << "Attempting to emit pointer type. These should have been "
-                                          "removed with the SimplifyPointers transform";
+        TINT_ICE() << "Attempting to emit pointer type. These should have been removed with the "
+                      "SimplifyPointers transform";
     } else if (type->Is<type::Sampler>()) {
     } else if (auto* str = type->As<type::Struct>()) {
         out << StructName(str);
     } else if (auto* tex = type->As<type::Texture>()) {
         if (TINT_UNLIKELY(tex->Is<type::ExternalTexture>())) {
-            TINT_ICE(Writer, diagnostics_) << "Multiplanar external texture transform was not run.";
+            TINT_ICE() << "Multiplanar external texture transform was not run.";
             return;
         }
 
@@ -2726,7 +2716,7 @@ void ASTPrinter::EmitType(utils::StringStream& out,
         } else if (TINT_LIKELY(subtype->Is<type::U32>())) {
             out << "u";
         } else {
-            TINT_ICE(Writer, diagnostics_) << "Unsupported texture type";
+            TINT_ICE() << "Unsupported texture type";
             return;
         }
 
@@ -2752,8 +2742,7 @@ void ASTPrinter::EmitType(utils::StringStream& out,
                 out << "CubeArray";
                 break;
             default:
-                TINT_UNREACHABLE(Writer, diagnostics_)
-                    << "unexpected TextureDimension " << tex->dim();
+                TINT_UNREACHABLE() << "unexpected TextureDimension " << tex->dim();
                 return;
         }
         if (tex->Is<type::DepthTexture>()) {

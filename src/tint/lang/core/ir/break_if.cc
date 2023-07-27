@@ -25,7 +25,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::BreakIf);
 namespace tint::ir {
 
 BreakIf::BreakIf(Value* condition, ir::Loop* loop, utils::VectorRef<Value*> args) : loop_(loop) {
-    TINT_ASSERT(IR, loop_);
+    TINT_ASSERT(loop_);
 
     AddOperand(BreakIf::kConditionOperandOffset, condition);
     AddOperands(BreakIf::kArgsOperandOffset, std::move(args));

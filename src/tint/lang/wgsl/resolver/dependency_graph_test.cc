@@ -1193,7 +1193,7 @@ TEST_P(ResolverDependencyGraphResolveToBuiltinFunc, Resolve) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->BuiltinFunction(), builtin) << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->BuiltinFunction(), builtin) << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Types,
@@ -1232,8 +1232,7 @@ TEST_P(ResolverDependencyGraphResolveToBuiltinType, Resolve) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->BuiltinType(), builtin::ParseBuiltin(name))
-        << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->BuiltinType(), builtin::ParseBuiltin(name)) << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Types,
@@ -1272,7 +1271,7 @@ TEST_P(ResolverDependencyGraphResolveToAccess, Resolve) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->Access(), builtin::ParseAccess(name)) << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->Access(), builtin::ParseAccess(name)) << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Types,
@@ -1311,8 +1310,7 @@ TEST_P(ResolverDependencyGraphResolveToAddressSpace, Resolve) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->AddressSpace(), builtin::ParseAddressSpace(name))
-        << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->AddressSpace(), builtin::ParseAddressSpace(name)) << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Types,
@@ -1351,8 +1349,7 @@ TEST_P(ResolverDependencyGraphResolveToBuiltinValue, Resolve) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->BuiltinValue(), builtin::ParseBuiltinValue(name))
-        << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->BuiltinValue(), builtin::ParseBuiltinValue(name)) << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Types,
@@ -1392,7 +1389,7 @@ TEST_P(ResolverDependencyGraphResolveToInterpolationSampling, Resolve) {
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
     EXPECT_EQ(resolved->InterpolationSampling(), builtin::ParseInterpolationSampling(name))
-        << resolved->String(Diagnostics());
+        << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Types,
@@ -1432,7 +1429,7 @@ TEST_P(ResolverDependencyGraphResolveToInterpolationType, Resolve) {
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
     EXPECT_EQ(resolved->InterpolationType(), builtin::ParseInterpolationType(name))
-        << resolved->String(Diagnostics());
+        << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(
@@ -1474,8 +1471,7 @@ TEST_P(ResolverDependencyGraphResolveToTexelFormat, Resolve) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->TexelFormat(), builtin::ParseTexelFormat(name))
-        << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->TexelFormat(), builtin::ParseTexelFormat(name)) << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Types,
@@ -1556,7 +1552,7 @@ TEST_P(ResolverDependencyGraphShadowKindTest, ShadowedByGlobalVar) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->Node(), decl) << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->Node(), decl) << resolved->String();
 }
 
 TEST_P(ResolverDependencyGraphShadowKindTest, ShadowedByStruct) {
@@ -1573,7 +1569,7 @@ TEST_P(ResolverDependencyGraphShadowKindTest, ShadowedByStruct) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->Node(), decl) << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->Node(), decl) << resolved->String();
 }
 
 TEST_P(ResolverDependencyGraphShadowKindTest, ShadowedByFunc) {
@@ -1588,7 +1584,7 @@ TEST_P(ResolverDependencyGraphShadowKindTest, ShadowedByFunc) {
 
     auto resolved = Build().resolved_identifiers.Get(ident);
     ASSERT_TRUE(resolved);
-    EXPECT_EQ(resolved->Node(), decl) << resolved->String(Diagnostics());
+    EXPECT_EQ(resolved->Node(), decl) << resolved->String();
 }
 
 INSTANTIATE_TEST_SUITE_P(Access,
