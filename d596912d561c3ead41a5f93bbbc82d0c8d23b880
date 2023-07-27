@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3889e09_27d03a34",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/rename_conflicts.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-27T11:00:18Z",
+      "side": 1,
+      "message": "Should this be in `writer/raise/` instead?",
+      "revId": "d596912d561c3ead41a5f93bbbc82d0c8d23b880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
