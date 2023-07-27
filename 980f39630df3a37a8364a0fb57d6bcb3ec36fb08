@@ -33,6 +33,24 @@
       "message": "do we really need to copy to a new texture?\n\nI asked microsoft folks, and they said that in D3D11, D24_UNORM_S8_UINT can have a view created with X24_TYPELESS_G8_UINT. I\u0027d assume you can do likewise with D32_FLOAT_S8X24_UINT --\u003e DXGI_FORMAT_X32_TYPELESS_G8X24_UINT.\n\nthen you can bind that to the shader and use textureLoad",
       "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6caf707_b5b46239",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-27T01:15:49Z",
+      "side": 1,
+      "message": "Good to know that, thanks! Let me have a try.",
+      "parentUuid": "ba5a5ade_ab42c836",
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
