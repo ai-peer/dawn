@@ -33,7 +33,7 @@ void MultiInBlock::SetParams(std::initializer_list<BlockParam*> params) {
 }
 
 void MultiInBlock::AddInboundSiblingBranch(ir::Terminator* node) {
-    TINT_ASSERT(IR, node != nullptr);
+    TINT_ASSERT(node != nullptr);
 
     if (node) {
         inbound_sibling_branches_.Push(node);

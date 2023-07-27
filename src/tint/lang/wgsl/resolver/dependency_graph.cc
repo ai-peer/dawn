@@ -126,8 +126,8 @@ struct Global {
 using GlobalMap = utils::Hashmap<Symbol, Global*, 16>;
 
 /// Raises an ICE that a global ast::Node type was not handled by this system.
-void UnhandledNode(diag::List& diagnostics, const ast::Node* node) {
-    TINT_ICE(Resolver, diagnostics) << "unhandled node type: " << node->TypeInfo().name;
+void UnhandledNode(const ast::Node* node) {
+    TINT_ICE() << "unhandled node type: " << node->TypeInfo().name;
 }
 
 /// Raises an error diagnostic with the given message and source.
@@ -196,7 +196,7 @@ class DependencyScanner {
                 // Enable directives do not affect the dependency graph.
             },
             [&](const ast::ConstAssert* assertion) { TraverseExpression(assertion->condition); },
-            [&](Default) { UnhandledNode(diagnostics_, global->node); });
+            [&](Default) { UnhandledNode(global->node); });
     }
 
   private:
@@ -320,7 +320,7 @@ class DependencyScanner {
             [&](Default) {
                 if (TINT_UNLIKELY((!stmt->IsAnyOf<ast::BreakStatement, ast::ContinueStatement,
                                                   ast::DiscardStatement>()))) {
-                    UnhandledNode(diagnostics_, stmt);
+                    UnhandledNode(stmt);
                 }
             });
     }
@@ -345,7 +345,8 @@ class DependencyScanner {
 
         utils::Vector<const ast::Expression*, 8> pending{root_expr};
         while (!pending.IsEmpty()) {
-            ast::TraverseExpressions(pending.Pop(), diagnostics_, [&](const ast::Expression* expr) {
+            auto* next = pending.Pop();
+            bool ok = ast::TraverseExpressions(next, [&](const ast::Expression* expr) {
                 Switch(
                     expr,
                     [&](const ast::IdentifierExpression* e) {
@@ -360,6 +361,10 @@ class DependencyScanner {
                     [&](const ast::BitcastExpression* cast) { TraverseExpression(cast->type); });
                 return ast::TraverseAction::Descend;
             });
+            if (!ok) {
+                AddError(diagnostics_, "TraverseExpressions failed", next->source);
+                return;
+            }
         }
     }
 
@@ -436,7 +441,7 @@ class DependencyScanner {
             return;
         }
 
-        UnhandledNode(diagnostics_, attr);
+        UnhandledNode(attr);
     }
 
     /// The type of builtin that a symbol could represent.
@@ -638,7 +643,7 @@ struct DependencyAnalysis {
             [&](const ast::Enable*) { return Symbol(); },
             [&](const ast::ConstAssert*) { return Symbol(); },
             [&](Default) {
-                UnhandledNode(diagnostics_, node);
+                UnhandledNode(node);
                 return Symbol{};
             });
     }
@@ -662,7 +667,7 @@ struct DependencyAnalysis {
             [&](const ast::Variable* v) { return v->Kind(); },        //
             [&](const ast::ConstAssert*) { return "const_assert"; },  //
             [&](Default) {
-                UnhandledNode(diagnostics_, node);
+                UnhandledNode(node);
                 return "<error>";
             });
     }
@@ -781,8 +786,7 @@ struct DependencyAnalysis {
 
             if (TINT_UNLIKELY(!stack.IsEmpty())) {
                 // Each stack.push() must have a corresponding stack.pop_back().
-                TINT_ICE(Resolver, diagnostics_)
-                    << "stack not empty after returning from TraverseDependencies()";
+                TINT_ICE() << "stack not empty after returning from TraverseDependencies()";
             }
         }
     }
@@ -795,9 +799,8 @@ struct DependencyAnalysis {
         if (TINT_LIKELY(info)) {
             return *info;
         }
-        TINT_ICE(Resolver, diagnostics_)
-            << "failed to find dependency info for edge: '" << NameOf(from->node) << "' -> '"
-            << NameOf(to->node) << "'";
+        TINT_ICE() << "failed to find dependency info for edge: '" << NameOf(from->node) << "' -> '"
+                   << NameOf(to->node) << "'";
         return {};
     }
 
@@ -890,7 +893,7 @@ bool DependencyGraph::Build(const ast::Module& module,
     return da.Run(module);
 }
 
-std::string ResolvedIdentifier::String(diag::List& diagnostics) const {
+std::string ResolvedIdentifier::String() const {
     if (auto* node = Node()) {
         return Switch(
             node,
@@ -916,8 +919,7 @@ std::string ResolvedIdentifier::String(diag::List& diagnostics) const {
                 return "parameter '" + n->name->symbol.Name() + "'";
             },
             [&](Default) {
-                TINT_UNREACHABLE(Resolver, diagnostics)
-                    << "unhandled ast::Node: " << node->TypeInfo().name;
+                TINT_UNREACHABLE() << "unhandled ast::Node: " << node->TypeInfo().name;
                 return "<unknown>";
             });
     }
@@ -949,7 +951,7 @@ std::string ResolvedIdentifier::String(diag::List& diagnostics) const {
         return "unresolved identifier '" + unresolved->name + "'";
     }
 
-    TINT_UNREACHABLE(Resolver, diagnostics) << "unhandled ResolvedIdentifier";
+    TINT_UNREACHABLE() << "unhandled ResolvedIdentifier";
     return "<unknown>";
 }
 
