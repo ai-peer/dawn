@@ -16,6 +16,23 @@
       "message": "I wonder if Rubber Stamper can work for this.",
       "revId": "3c01bc73e3826544f79f2f39b5f7b274f76990da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02903dfb_05bcbc04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-27T16:40:56Z",
+      "side": 1,
+      "message": "it does",
+      "revId": "3c01bc73e3826544f79f2f39b5f7b274f76990da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
