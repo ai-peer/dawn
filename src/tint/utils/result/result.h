@@ -20,6 +20,7 @@
 
 #include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/text/string_stream.h"
+#include "src/tint/utils/traits/traits.h"
 
 namespace tint::utils {
 
@@ -157,8 +158,11 @@ struct [[nodiscard]] Result {
 /// @param out the stream to write to
 /// @param res the result
 /// @return the stream so calls can be chained
-template <typename SUCCESS, typename FAILURE>
-inline utils::StringStream& operator<<(utils::StringStream& out, Result<SUCCESS, FAILURE> res) {
+template <typename STREAM,
+          typename SUCCESS,
+          typename FAILURE,
+          typename = utils::traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, Result<SUCCESS, FAILURE> res) {
     return res ? (out << "success: " << res.Get()) : (out << "failure: " << res.Failure());
 }
 
