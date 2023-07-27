@@ -531,6 +531,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
         EnableFeature(Feature::BGRA8UnormStorage);
         EnableFeature(Feature::SurfaceCapabilities);
         EnableFeature(Feature::MSAARenderToSingleSampled);
+        EnableFeature(Feature::DualSourceBlending);
     }
 
     void InitializeVendorArchitectureImpl() override {
