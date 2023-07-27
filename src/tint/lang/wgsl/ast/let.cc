@@ -30,7 +30,7 @@ Let::Let(GenerationID pid,
          const Expression* init,
          utils::VectorRef<const Attribute*> attrs)
     : Base(pid, nid, src, n, ty, init, std::move(attrs)) {
-    TINT_ASSERT(AST, init != nullptr);
+    TINT_ASSERT(init != nullptr);
 }
 
 Let::~Let() = default;
