@@ -25,7 +25,7 @@ namespace tint::ir {
 
 NextIteration::NextIteration(ir::Loop* loop, VectorRef<Value*> args /* = tint::Empty */)
     : loop_(loop) {
-    TINT_ASSERT(IR, loop_);
+    TINT_ASSERT(loop_);
 
     AddOperands(NextIteration::kArgsOperandOffset, std::move(args));
 
