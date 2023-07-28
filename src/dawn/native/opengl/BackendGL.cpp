@@ -46,12 +46,14 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
 
     void* (*getProc)(const char* name) = nullptr;
     EGLDisplay display = EGL_NO_DISPLAY;
+    bool useTextureShareGroupANGLE = false;
 
     const RequestAdapterOptionsGetGLProc* glGetProcOptions = nullptr;
     FindInChain(options->nextInChain, &glGetProcOptions);
     if (glGetProcOptions) {
         getProc = glGetProcOptions->getProc;
         display = glGetProcOptions->display;
+        useTextureShareGroupANGLE = glGetProcOptions->useTextureShareGroupANGLE;
     }
 
     if (getProc == nullptr) {
@@ -92,7 +94,8 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     }
 
     std::unique_ptr<ContextEGL> context;
-    if (GetInstance()->ConsumedErrorAndWarnOnce(ContextEGL::Create(egl, api, display), &context)) {
+    if (GetInstance()->ConsumedErrorAndWarnOnce(
+            ContextEGL::Create(egl, api, display, useTextureShareGroupANGLE), &context)) {
         return {};
     }
 
@@ -101,14 +104,16 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     EGLContext prevContext = egl.GetCurrentContext();
 
     context->MakeCurrent();
-    auto physicalDevices = DiscoverPhysicalDevicesWithProcs(getProc, display);
+    auto physicalDevices =
+        DiscoverPhysicalDevicesWithProcs(getProc, display, useTextureShareGroupANGLE);
     egl.MakeCurrent(display, prevDrawSurface, prevReadSurface, prevContext);
     return physicalDevices;
 }
 
 std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevicesWithProcs(
     void* (*getProc)(const char*),
-    EGLDisplay display) {
+    EGLDisplay display,
+    bool useTextureShareGroupANGLE) {
     // TODO(cwallez@chromium.org): For now only create a single OpenGL physicalDevice because don't
     // know how to handle MakeCurrent.
     if (mPhysicalDevice != nullptr && mGetProc != getProc) {
@@ -118,7 +123,8 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevicesWithProcs(
     }
     if (mPhysicalDevice == nullptr) {
         if (GetInstance()->ConsumedErrorAndWarnOnce(
-                PhysicalDevice::Create(GetInstance(), GetType(), getProc, display),
+                PhysicalDevice::Create(GetInstance(), GetType(), getProc, display,
+                                       useTextureShareGroupANGLE),
                 &mPhysicalDevice)) {
             return {};
         }

@@ -29,6 +29,7 @@ struct DAWN_NATIVE_EXPORT RequestAdapterOptionsGetGLProc : wgpu::ChainedStruct {
 
     void* (*getProc)(const char*);
     EGLDisplay display;
+    bool useTextureShareGroupANGLE;
 };
 
 struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptions
