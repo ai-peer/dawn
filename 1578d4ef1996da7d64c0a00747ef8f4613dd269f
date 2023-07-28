@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca30e411_8d51102b",
+        "filename": "src/tint/utils/result/result.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-28T09:45:03Z",
+      "side": 1,
+      "message": "Could default this to `SuccessType`",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 31
+      },
+      "revId": "1578d4ef1996da7d64c0a00747ef8f4613dd269f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
