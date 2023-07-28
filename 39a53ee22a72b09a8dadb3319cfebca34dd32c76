@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e71df0f_9ad4bcf3",
+        "filename": "src/tint/lang/core/ir/transform/std140.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T20:31:13Z",
+      "side": 1,
+      "message": "Done in a follow up",
+      "parentUuid": "e165249d_9267dd22",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 19
+      },
+      "revId": "39a53ee22a72b09a8dadb3319cfebca34dd32c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03031d0d_f4972f0e",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6102fe2e_2ff81ab5",
+        "filename": "src/tint/lang/core/ir/transform/std140.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T20:31:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03031d0d_f4972f0e",
+      "range": {
+        "startLine": 295,
+        "startChar": 57,
+        "endLine": 295,
+        "endChar": 67
+      },
+      "revId": "39a53ee22a72b09a8dadb3319cfebca34dd32c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dd9d81a_e37c4b45",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-28T10:54:07Z",
       "side": 1,
       "message": "Room for optimization here - could just resolve to the single column as the index is constant.",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 33
+      },
+      "revId": "39a53ee22a72b09a8dadb3319cfebca34dd32c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0faaff9_c03de0df",
+        "filename": "src/tint/lang/core/ir/transform/std140_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T20:31:13Z",
+      "side": 1,
+      "message": "Discussed offline - we could do but it complicates the transform and most Vulkan devices now support `uniformBufferStandardLayout` anyway. Can reconsider in the future if needed.",
+      "parentUuid": "4dd9d81a_e37c4b45",
       "range": {
         "startLine": 352,
         "startChar": 0,
