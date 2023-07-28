@@ -16,6 +16,24 @@
       "message": "Nothing to do here, but should these AST node sources still be including `program_builder.h`, or should they include `ast/builder.h`, or neither?",
       "revId": "004a21fa30a7b8fa8e39e58090d03d9e021cb4e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7e43c39_b190019e",
+        "filename": "src/tint/lang/wgsl/ast/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-28T23:45:40Z",
+      "side": 1,
+      "message": "Well observed.\nIt has to be ProgramBuilder here, because that\u0027s what the CloneContext uses in this CL. In the next CL we split that class in two, and the includes are changed.",
+      "parentUuid": "88c3ac8d_bad54f36",
+      "revId": "004a21fa30a7b8fa8e39e58090d03d9e021cb4e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
