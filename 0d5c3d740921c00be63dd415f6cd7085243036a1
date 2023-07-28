@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689bfa93_c8337ed0",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-28T02:43:37Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1105,
+        "startChar": 16,
+        "endLine": 1105,
+        "endChar": 27
+      },
+      "revId": "0d5c3d740921c00be63dd415f6cd7085243036a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd56710_4e59dde6",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-28T02:43:37Z",
+      "side": 1,
+      "message": "Can we move those code into[1]? and then we don\u0027t need copy to and from the stagingData.",
+      "range": {
+        "startLine": 1115,
+        "startChar": 0,
+        "endLine": 1117,
+        "endChar": 91
+      },
+      "revId": "0d5c3d740921c00be63dd415f6cd7085243036a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52bbe11b_b5e817ac",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-28T02:43:37Z",
+      "side": 1,
+      "message": "add `break;`?",
+      "range": {
+        "startLine": 1177,
+        "startChar": 73,
+        "endLine": 1177,
+        "endChar": 74
+      },
+      "revId": "0d5c3d740921c00be63dd415f6cd7085243036a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3e6d20_af95ad2a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-28T02:43:37Z",
+      "side": 1,
+      "message": "add `break;`?",
+      "range": {
+        "startLine": 1199,
+        "startChar": 76,
+        "endLine": 1199,
+        "endChar": 77
+      },
+      "revId": "0d5c3d740921c00be63dd415f6cd7085243036a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
