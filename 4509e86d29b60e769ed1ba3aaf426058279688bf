@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c265a43_5b990c66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-28T20:24:39Z",
+      "side": 1,
+      "message": "PTAL! this is just a skeleton of it for now",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23268a14_0b547893",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-28T20:24:39Z",
+      "side": 1,
+      "message": "note: this object might be renamed to something else like \"shared texture backing\"",
+      "range": {
+        "startLine": 1461,
+        "startChar": 5,
+        "endLine": 1461,
+        "endChar": 26
+      },
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eeff1e6_5c487457",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1499,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-28T20:24:39Z",
+      "side": 1,
+      "message": "these may go on the texture instead, but I\u0027ll re-evaluate once I have a working implementation on all the backends",
+      "range": {
+        "startLine": 1486,
+        "startChar": 12,
+        "endLine": 1499,
+        "endChar": 13
+      },
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "737abfd9_4984d80e",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1820,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-28T20:24:39Z",
+      "side": 1,
+      "message": "I\u0027m separating these new enums so that once things are not experimental, I can give them a contiguous range.",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7dbf934_09e03d3d",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 3017,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-28T20:24:39Z",
+      "side": 1,
+      "message": "ditto: I\u0027m separating these new enums so that once things are not experimental, I can give them a contiguous range.",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
