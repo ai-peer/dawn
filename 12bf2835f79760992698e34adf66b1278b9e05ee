@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7615753b_3a49eb11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Bunch of nits but nothing important.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a21504_89569d58",
+        "filename": "src/tint/lang/core/ir/access.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: Never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44965f8_fe08759e",
+        "filename": "src/tint/lang/core/ir/binary.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dd3b1ae_3c90707c",
+        "filename": "src/tint/lang/core/ir/bitcast.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750d1a5f_0fd0590e",
+        "filename": "src/tint/lang/core/ir/builtin_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2330ad3_e65c0d16",
+        "filename": "src/tint/lang/core/ir/construct.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f36dd20_8239ff5c",
+        "filename": "src/tint/lang/core/ir/convert.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3762e3a1_b2780930",
+        "filename": "src/tint/lang/core/ir/discard.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ae966c_8e86cc78",
+        "filename": "src/tint/lang/core/ir/discard.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f42dec7_9b8bbd22",
+        "filename": "src/tint/lang/core/ir/intrinsic_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9f9c28_56ba3265",
+        "filename": "src/tint/lang/core/ir/let.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83809534_b686086c",
+        "filename": "src/tint/lang/core/ir/load.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: the second check is the validators job now.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a493ba2_172f8e00",
+        "filename": "src/tint/lang/core/ir/load_vector_element.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07c6f0b_ef112350",
+        "filename": "src/tint/lang/core/ir/store.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa9e6aa_c8311ec4",
+        "filename": "src/tint/lang/core/ir/store_vector_element.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c6ed7b_a20fe197",
+        "filename": "src/tint/lang/core/ir/unary.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd836cc8_aa38dde5",
+        "filename": "src/tint/lang/core/ir/user_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e14f2264_39c9fbd4",
+        "filename": "src/tint/lang/wgsl/ast/transform/utils/get_insertion_point_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e9b2ed_1f7789e4",
+        "filename": "src/tint/utils/containers/hashset.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T11:22:00Z",
+      "side": 1,
+      "message": "Nit: never actually used.",
+      "revId": "12bf2835f79760992698e34adf66b1278b9e05ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
