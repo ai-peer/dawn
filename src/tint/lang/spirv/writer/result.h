@@ -31,12 +31,6 @@ struct Result {
     /// Copy constructor
     Result(const Result&);
 
-    /// True if generation was successful.
-    bool success = false;
-
-    /// The errors generated during code generation, if any.
-    std::string error;
-
     /// The generated SPIR-V.
     std::vector<uint32_t> spirv;
 };
