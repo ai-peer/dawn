@@ -17,6 +17,7 @@
 
 #include "src/tint/lang/spirv/writer/options.h"
 #include "src/tint/lang/spirv/writer/result.h"
+#include "src/tint/utils/result/result.h"
 
 // Forward declarations
 namespace tint {
@@ -26,12 +27,11 @@ class Program;
 namespace tint::spirv::writer {
 
 /// Generate SPIR-V for a program, according to a set of configuration options.
-/// The result will contain the SPIR-V, as well as success status and diagnostic
-/// information.
+/// The result will contain the SPIR-V or an error string.
 /// @param program the program to translate to SPIR-V
 /// @param options the configuration options to use when generating SPIR-V
-/// @returns the resulting SPIR-V and supplementary information
-Result Generate(const Program* program, const Options& options);
+/// @returns the resulting SPIR-V and supplementary information, or an error string
+tint::Result<Result, std::string> Generate(const Program* program, const Options& options);
 
 }  // namespace tint::spirv::writer
 
