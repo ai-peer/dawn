@@ -58,9 +58,10 @@ uint32_t GetVendorIdFromVendors(const char* vendor) {
 ResultOrError<Ref<PhysicalDevice>> PhysicalDevice::Create(InstanceBase* instance,
                                                           wgpu::BackendType backendType,
                                                           void* (*getProc)(const char*),
-                                                          EGLDisplay display) {
+                                                          EGLDisplay display,
+                                                          bool useTextureShareGroupANGLE) {
     Ref<PhysicalDevice> physicalDevice =
-        AcquireRef(new PhysicalDevice(instance, backendType, display));
+        AcquireRef(new PhysicalDevice(instance, backendType, display, useTextureShareGroupANGLE));
     DAWN_TRY(physicalDevice->InitializeGLFunctions(getProc));
     DAWN_TRY(physicalDevice->Initialize());
     return physicalDevice;
@@ -68,8 +69,11 @@ ResultOrError<Ref<PhysicalDevice>> PhysicalDevice::Create(InstanceBase* instance
 
 PhysicalDevice::PhysicalDevice(InstanceBase* instance,
                                wgpu::BackendType backendType,
-                               EGLDisplay display)
-    : PhysicalDeviceBase(instance, backendType), mDisplay(display) {}
+                               EGLDisplay display,
+                               bool useTextureShareGroupANGLE)
+    : PhysicalDeviceBase(instance, backendType),
+      mDisplay(display),
+      mUseTextureShareGroupANGLE(useTextureShareGroupANGLE) {}
 
 MaybeError PhysicalDevice::InitializeGLFunctions(void* (*getProc)(const char*)) {
     // Use getProc to populate the dispatch table
@@ -316,7 +320,8 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* ada
     EGLenum api =
         GetBackendType() == wgpu::BackendType::OpenGL ? EGL_OPENGL_API : EGL_OPENGL_ES_API;
     std::unique_ptr<Device::Context> context;
-    DAWN_TRY_ASSIGN(context, ContextEGL::Create(mEGLFunctions, api, mDisplay));
+    DAWN_TRY_ASSIGN(context,
+                    ContextEGL::Create(mEGLFunctions, api, mDisplay, mUseTextureShareGroupANGLE));
     return Device::Create(adapter, descriptor, mFunctions, std::move(context), deviceToggles);
 }
 
