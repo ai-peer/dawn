@@ -16,6 +16,24 @@
       "message": "This seems like it\u0027s more confusing then useful. Currently all test files are _test.* files. Otherwise, they don\u0027t end in `_test`. This makes it very obvious which files contain actual tests. Moving the test helpers to match that pattern makes it more confusing which files actually contain tests and which are just helper code.",
       "revId": "518540b943def42e8e679718932632fefa762c5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ee880d_47e97d89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-28T22:28:46Z",
+      "side": 1,
+      "message": "Your same argument extends to test helper code vs production code.\nI want a way to distinguish test code from production code. If you\u0027re opposed to a consistent file name pattern, what\u0027s your opinion on moving all the tests to a separate directory? e.g subdirectory or parallel tree?",
+      "parentUuid": "9dd34466_5dc9cd23",
+      "revId": "518540b943def42e8e679718932632fefa762c5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
