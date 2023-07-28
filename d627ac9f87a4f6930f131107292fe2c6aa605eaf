@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19ee276f_30d7fbdb",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-07-28T22:25:23Z",
+      "side": 1,
+      "message": "You\u0027ll want to wait on submitting this until it\u0027s available then. Builders get very unhappy if they\u0027re told to use a non-existent recipe.",
+      "parentUuid": "f5aa96d6_5a3cd646",
+      "range": {
+        "startLine": 453,
+        "startChar": 16,
+        "endLine": 453,
+        "endChar": 31
+      },
+      "revId": "d627ac9f87a4f6930f131107292fe2c6aa605eaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c779cf4_d1ec2ddf",
         "filename": "infra/config/global/main.star",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-28T21:45:27Z",
       "side": 1,
       "message": "I copied this. Is it OK to use? Where do service accounts get created?",
+      "range": {
+        "startLine": 466,
+        "startChar": 23,
+        "endLine": 466,
+        "endChar": 100
+      },
+      "revId": "d627ac9f87a4f6930f131107292fe2c6aa605eaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93dd900a_ae245f59",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-07-28T22:25:23Z",
+      "side": 1,
+      "message": "The service account was requested here https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1351537\n\nThere was also some follow-up work to give it the necessary permissions, although I don\u0027t think most of it is relevant for Dawn:\nhttps://bugs.chromium.org/p/chromium/issues/detail?id\u003d1353126\nhttps://bugs.chromium.org/p/chromium/issues/detail?id\u003d1356304\nhttps://bugs.chromium.org/p/chromium/issues/detail?id\u003d1377015\n\nI\u0027m okay with re-using it for now, although probably best to have one created specific to this in the longer term.",
+      "parentUuid": "6c779cf4_d1ec2ddf",
       "range": {
         "startLine": 466,
         "startChar": 23,
