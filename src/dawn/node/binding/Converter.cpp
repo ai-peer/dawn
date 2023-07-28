@@ -1661,6 +1661,8 @@ bool Converter::Convert(interop::GPUFeatureName& out, wgpu::FeatureName in) {
         case wgpu::FeatureName::SurfaceCapabilities:
         case wgpu::FeatureName::TransientAttachments:
         case wgpu::FeatureName::MSAARenderToSingleSampled:
+        case wgpu::FeatureName::DualSourceBlending:
+        case wgpu::FeatureName::D3D11MultithreadProtected:
         case wgpu::FeatureName::Undefined:
             return false;
     }
