@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06463b0_687657df",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-28T18:23:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86eccda3_dd1d8b8d",
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e093afe_f44eef14",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0fe2f87_c2d6bcf4",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-28T18:23:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e093afe_f44eef14",
+      "range": {
+        "startLine": 1356,
+        "startChar": 59,
+        "endLine": 1356,
+        "endChar": 62
+      },
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "711ee663_3b9099b1",
@@ -88,6 +130,24 @@
       "writtenOn": "2023-07-28T10:10:32Z",
       "side": 1,
       "message": "Would it work to have kUniformData be an std::array\u003cwgpu::Color, 2\u003e?",
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5522713_9805c82d",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-28T18:23:28Z",
+      "side": 1,
+      "message": "I\u0027d have to reinterpret_cast it to a float* to pass it to EncodeRenderPassForTest, which doesn\u0027t feel great. Plus this is the pattern that every other test in the file uses, so I\u0027d prefer the consistency.\n\nI did update the second new test, because I didn\u0027t see initially that there\u0027s an EncodeRenderPassForTest overload where you can pass a single color directly.",
+      "parentUuid": "711ee663_3b9099b1",
       "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
