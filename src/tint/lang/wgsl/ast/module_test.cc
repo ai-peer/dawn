@@ -16,6 +16,7 @@
 #include "gtest/gtest-spi.h"
 #include "src/tint/lang/wgsl/ast/test_helper.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
+#include "src/tint/lang/wgsl/resolver/resolve.h"
 
 namespace tint::ast {
 namespace {
@@ -23,7 +24,7 @@ namespace {
 using ModuleTest = TestHelper;
 
 TEST_F(ModuleTest, Creation) {
-    EXPECT_EQ(Program(std::move(*this)).AST().Functions().Length(), 0u);
+    EXPECT_EQ(resolver::Resolve(*this).AST().Functions().Length(), 0u);
 }
 
 TEST_F(ModuleTest, LookupFunction) {
@@ -93,7 +94,7 @@ TEST_F(ModuleTest, CloneOrder) {
         b.Func("F", {}, b.ty.void_(), {});
         b.Alias("A", b.ty.u32());
         b.GlobalVar("V", b.ty.i32(), builtin::AddressSpace::kPrivate);
-        return Program(std::move(b));
+        return resolver::Resolve(b);
     }();
 
     // Clone the program, using ReplaceAll() to create new module-scope
