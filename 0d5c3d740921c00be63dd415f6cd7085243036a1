@@ -119,6 +119,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "514d4ae4_d0e0b14b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-07-28T11:20:07Z",
+      "side": 1,
+      "message": "I forgot the callback could be called multiple times for one Read() call. In that case, it is OK to use the stagingData.",
+      "parentUuid": "51c81f0f_b905afc3",
+      "range": {
+        "startLine": 1115,
+        "startChar": 0,
+        "endLine": 1117,
+        "endChar": 91
+      },
+      "revId": "0d5c3d740921c00be63dd415f6cd7085243036a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52bbe11b_b5e817ac",
