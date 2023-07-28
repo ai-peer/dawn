@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc4a4f7_d8c2648c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-28T10:10:32Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86eccda3_dd1d8b8d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-28T10:10:32Z",
+      "side": 1,
+      "message": "optional u-nit: we could count the number of resolve attachments only here, then do a GetColorAttachmentsMask().count() to have the number of attachments. The computation of splitResolvesIntoSeparatePasses would be outside the loop and very marginally simpler.",
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e093afe_f44eef14",
@@ -37,6 +71,23 @@
         "endLine": 1356,
         "endChar": 62
       },
+      "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711ee663_3b9099b1",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-28T10:10:32Z",
+      "side": 1,
+      "message": "Would it work to have kUniformData be an std::array\u003cwgpu::Color, 2\u003e?",
       "revId": "c2f9584e95918a30729491789acaac4ca2b1eba8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
