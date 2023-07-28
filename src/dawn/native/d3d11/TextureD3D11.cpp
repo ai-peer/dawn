@@ -1083,26 +1083,24 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(
     // TODO(dawn:1705): Improve to only sync as few as possible.
     const auto range = view->GetSubresourceRange();
     const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
-    Extent3D size = GetMipLevelSubresourceVirtualSize(range.baseMipLevel);
-    uint32_t bytesPerRow = blockInfo.byteSize * size.width;
-    uint32_t rowsPerImage = size.height;
-    uint64_t byteLength;
-    DAWN_TRY_ASSIGN(byteLength,
-                    ComputeRequiredBytesInCopy(blockInfo, size, bytesPerRow, rowsPerImage));
-
-    std::vector<uint8_t> stagingData(byteLength);
     for (uint32_t layer = range.baseArrayLayer; layer < range.baseArrayLayer + range.layerCount;
          ++layer) {
         for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
              ++level) {
-            size = GetMipLevelSubresourceVirtualSize(level);
-            bytesPerRow = blockInfo.byteSize * size.width;
-            rowsPerImage = size.height;
+            const Extent3D size = GetMipLevelSubresourceVirtualSize(level);
+            const uint32_t bytesPerRow = blockInfo.byteSize * size.width;
+            const uint32_t rowsPerImage = size.height;
             auto singleRange = SubresourceRange::MakeSingle(range.aspects, layer, level);
 
             Texture::ReadCallback callback = [&](const uint8_t* data, uint64_t offset,
                                                  uint64_t length) -> MaybeError {
-                std::memcpy(static_cast<uint8_t*>(stagingData.data()) + offset, data, length);
+                ASSERT(offset % bytesPerRow == 0u);
+                ASSERT(length % bytesPerRow == 0u);
+
+                Origin3D origin = {0u, static_cast<uint32_t>(offset / bytesPerRow), 0u};
+                Extent3D extent = {size.width, static_cast<uint32_t>(length / bytesPerRow), 1u};
+                DAWN_TRY(mTextureForStencilSampling->WriteInternal(
+                    commandContext, singleRange, origin, extent, data, bytesPerRow, rowsPerImage));
                 return {};
             };
 
@@ -1111,10 +1109,6 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(
                 "Sampling the stencil component is rather slow now.");
             DAWN_TRY(Read(commandContext, singleRange, {0, 0, 0}, size, bytesPerRow, rowsPerImage,
                           callback));
-
-            DAWN_TRY(mTextureForStencilSampling->WriteInternal(commandContext, singleRange,
-                                                               {0, 0, 0}, size, stagingData.data(),
-                                                               bytesPerRow, rowsPerImage));
         }
     }
 
