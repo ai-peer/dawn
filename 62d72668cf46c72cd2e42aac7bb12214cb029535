@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d9e7a59_32e861b8",
+        "filename": "src/tint/lang/core/builtin/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T13:20:24Z",
+      "side": 1,
+      "message": "Not sure you meant to add this in this CL, since it isn\u0027t included from the base `BUILD.gn` yet?",
+      "revId": "62d72668cf46c72cd2e42aac7bb12214cb029535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
