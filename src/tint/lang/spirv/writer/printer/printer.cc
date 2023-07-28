@@ -50,6 +50,7 @@
 #include "src/tint/lang/core/ir/transform/handle_matrix_arithmetic.h"
 #include "src/tint/lang/core/ir/transform/merge_return.h"
 #include "src/tint/lang/core/ir/transform/shader_io_spirv.h"
+#include "src/tint/lang/core/ir/transform/std140.h"
 #include "src/tint/lang/core/ir/transform/var_for_dynamic_index.h"
 #include "src/tint/lang/core/ir/unreachable.h"
 #include "src/tint/lang/core/ir/user_call.h"
@@ -171,6 +172,7 @@ bool Printer::Sanitize() {
     ir::transform::HandleMatrixArithmetic{}.Run(ir_);
     ir::transform::MergeReturn{}.Run(ir_);
     ir::transform::ShaderIOSpirv{}.Run(ir_);
+    ir::transform::Std140{}.Run(ir_);
 
     RUN_TRANSFORM(VarForDynamicIndex);
 
