@@ -16,6 +16,24 @@
       "message": "still LGTM, I\u0027ll just land this",
       "revId": "4c07749433f61cabbb202b24f3490322fd75add6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a06fcc6_87faa6bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-28T00:55:46Z",
+      "side": 1,
+      "message": "Nice, thanks!",
+      "parentUuid": "157d6d50_57ac9a0f",
+      "revId": "4c07749433f61cabbb202b24f3490322fd75add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
