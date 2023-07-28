@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd5335fd_c787985b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-28T03:17:09Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 884,
+        "startChar": 1,
+        "endLine": 884,
+        "endChar": 90
+      },
+      "revId": "4f0131bb907ed912c7995c0f007cc60f4bd7314a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

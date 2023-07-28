@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af2eb800_a696d0cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-28T03:17:09Z",
+      "side": 1,
+      "message": "A really smart idea of GPU blit, thanks!\nLet\u0027s see if we will need to improve with it moving forward.",
+      "parentUuid": "fda04ecf_fee54c60",
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb30a6fb_714806a1",
@@ -102,6 +120,30 @@
       "writtenOn": "2023-07-27T22:51:19Z",
       "side": 1,
       "message": "why not add this usage when you create `mTextureForStencilSampling` instead? It doesn\u0027t need to be done for all Interm textures",
+      "range": {
+        "startLine": 286,
+        "startChar": 4,
+        "endLine": 291,
+        "endChar": 0
+      },
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8ebcc0_f3c135a1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-28T03:17:09Z",
+      "side": 1,
+      "message": "Sounds good!\nIt seems I was in blackout thinking about how to add the usage.",
+      "parentUuid": "fb30a6fb_714806a1",
       "range": {
         "startLine": 286,
         "startChar": 4,
@@ -135,6 +177,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e71c8b4_bb20cef2",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-28T03:17:09Z",
+      "side": 1,
+      "message": "Thanks for catching it!",
+      "parentUuid": "ab68619c_ad06f91e",
+      "range": {
+        "startLine": 1116,
+        "startChar": 38,
+        "endLine": 1116,
+        "endChar": 48
+      },
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33df3505_984672a9",
@@ -148,6 +214,30 @@
       "writtenOn": "2023-07-27T22:51:19Z",
       "side": 1,
       "message": "this is a slight deuplication of some existing code to create ID3D11ShaderResourceView\n\nInstead, you could use a change mTextureForStencilSampling to a Ref\u003cTextureViewBase\u003e, \n\nThen this function would simply `return mTextureViewForStencilSampling-\u003eCreateD3D11ShaderResourceView()`.\n\nYou can still update it above using `mTextureViewForStencilSampling-\u003eGetTexture()-\u003eWriteInternal(...)`",
+      "range": {
+        "startLine": 1125,
+        "startChar": 4,
+        "endLine": 1136,
+        "endChar": 55
+      },
+      "revId": "980f39630df3a37a8364a0fb57d6bcb3ec36fb08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb931390_dd0e3aa4",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-28T03:17:09Z",
+      "side": 1,
+      "message": "Great, it would be better with less duplication.\nOne minor thing is that probably we should still keep Ref to the texture rather than a view, as conceptually there could various mipmap level views.",
+      "parentUuid": "33df3505_984672a9",
       "range": {
         "startLine": 1125,
         "startChar": 4,
