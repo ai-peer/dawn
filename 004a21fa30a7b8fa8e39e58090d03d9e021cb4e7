@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88c3ac8d_bad54f36",
+        "filename": "src/tint/lang/wgsl/ast/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-28T13:27:08Z",
+      "side": 1,
+      "message": "Nothing to do here, but should these AST node sources still be including `program_builder.h`, or should they include `ast/builder.h`, or neither?",
+      "revId": "004a21fa30a7b8fa8e39e58090d03d9e021cb4e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
