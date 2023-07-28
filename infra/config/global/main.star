@@ -444,6 +444,35 @@ luci.builder(
     service_account = "dawn-try-builder@chops-service-accounts.iam.gserviceaccount.com",
 )
 
+luci.builder(
+    name = "cts-roller",
+    bucket = "ci",
+    # TODO(crbug.com/dawn/1940) make this run only night once working
+    schedule = "with 1m interval",
+    executable = luci.recipe(
+        name = "dawn_cts_roller",
+        cipd_package = "infra/recipe_bundles/chromium.googlesource.com/chromium/tools/build",
+        cipd_version = "refs/heads/main",
+    ),
+    dimensions = {
+        "cpu": "x86-64",
+        "os": os.LINUX.dimension,
+        "pool": "luci.flex.ci",
+    },
+    properties = {
+        "repo_name": "dawn",
+        "runhooks": True,
+    },
+    service_account = "chromium-automated-expectation@chops-service-accounts.iam.gserviceaccount.com",
+)
+
+luci.console_view_entry(
+    console_view = "ci",
+    builder = "ci/cts-roller",
+    category = "cron|roll",
+    short_name = "cts",
+)
+
 #                        name, clang, debug, cpu(, fuzzer)
 dawn_standalone_builder("linux-clang-dbg-x64", True, True, "x64")
 dawn_standalone_builder("linux-clang-dbg-x86", True, True, "x86")
