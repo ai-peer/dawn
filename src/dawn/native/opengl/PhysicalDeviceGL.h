@@ -25,7 +25,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
   public:
     static ResultOrError<Ref<PhysicalDevice>> Create(InstanceBase* instance,
                                                      wgpu::BackendType backendType,
-                                                     void* (*getProc)(const char*));
+                                                     void* (*getProc)(const char*),
+                                                     EGLDisplay display);
 
     ~PhysicalDevice() override = default;
 
@@ -35,7 +36,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
   private:
     PhysicalDevice(InstanceBase* instance, wgpu::BackendType backendType);
-    MaybeError InitializeGLFunctions(void* (*getProc)(const char*));
+    MaybeError InitializeGLFunctions(void* (*getProc)(const char*), EGLDisplay display);
 
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
@@ -51,6 +52,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
                                                     const TogglesState& deviceToggles) override;
 
     OpenGLFunctions mFunctions;
+    EGLDisplay mDisplay;
     EGLFunctions mEGLFunctions;
 };
 

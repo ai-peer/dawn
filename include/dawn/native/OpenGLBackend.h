@@ -15,6 +15,7 @@
 #ifndef INCLUDE_DAWN_NATIVE_OPENGLBACKEND_H_
 #define INCLUDE_DAWN_NATIVE_OPENGLBACKEND_H_
 
+typedef void* EGLDisplay;
 typedef void* EGLImage;
 
 #include "dawn/native/DawnNative.h"
@@ -27,6 +28,7 @@ struct DAWN_NATIVE_EXPORT RequestAdapterOptionsGetGLProc : wgpu::ChainedStruct {
     RequestAdapterOptionsGetGLProc();
 
     void* (*getProc)(const char*);
+    EGLDisplay display;
 };
 
 struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptions
@@ -34,6 +36,7 @@ struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptions
     explicit PhysicalDeviceDiscoveryOptions(WGPUBackendType type);
 
     void* (*getProc)(const char*);
+    EGLDisplay display;
 };
 
 struct DAWN_NATIVE_EXPORT ExternalImageDescriptorEGLImage : ExternalImageDescriptor {
