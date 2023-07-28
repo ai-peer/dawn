@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd34466_5dc9cd23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-28T22:10:12Z",
+      "side": 1,
+      "message": "This seems like it\u0027s more confusing then useful. Currently all test files are _test.* files. Otherwise, they don\u0027t end in `_test`. This makes it very obvious which files contain actual tests. Moving the test helpers to match that pattern makes it more confusing which files actually contain tests and which are just helper code.",
+      "revId": "518540b943def42e8e679718932632fefa762c5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
