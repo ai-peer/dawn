@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51c81f0f_b905afc3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-07-28T07:20:15Z",
+      "side": 1,
+      "message": "It would be like https://dawn-review.googlesource.com/c/dawn/+/143580, if you prefer that.",
+      "parentUuid": "e74fed28_9a0f0fe6",
+      "range": {
+        "startLine": 1115,
+        "startChar": 0,
+        "endLine": 1117,
+        "endChar": 91
+      },
+      "revId": "0d5c3d740921c00be63dd415f6cd7085243036a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52bbe11b_b5e817ac",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 4
