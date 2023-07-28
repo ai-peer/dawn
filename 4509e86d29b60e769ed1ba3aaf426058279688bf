@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29cd37bf_fe3c0ebf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-07-28T22:57:28Z",
+      "side": 1,
+      "message": "I probably don\u0027t know enough about the interop stuff anymore to review but so far the skeleton all looks reasonable. Main thing that comes to mind is how BeginAccess/EndAccess coordinate with usage outside Dawn, but I haven\u0027t read your big design doc yet so the answers are probably there",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23268a14_0b547893",
