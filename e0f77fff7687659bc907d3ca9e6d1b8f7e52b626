@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "239d8554_70984e25",
+        "filename": "src/tint/lang/spirv/writer/result.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-29T09:42:01Z",
+      "side": 1,
+      "message": "nit: Recommend renaming to `Output` to avoid confusion with two things called `Result`",
+      "revId": "e0f77fff7687659bc907d3ca9e6d1b8f7e52b626",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
