@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d9960b_69abca70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7933e276_444d0ead",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "dawn.json is growing quite large, I wonder if we could break it up eventually.",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23268a14_0b547893",
@@ -83,6 +117,115 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4608b2c_b037dbaf",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "ditto uint32_t",
+      "range": {
+        "startLine": 1579,
+        "startChar": 43,
+        "endLine": 1579,
+        "endChar": 46
+      },
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f814735_dd56a581",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "Should this be \"shared texture\"? Ditto in other places.",
+      "range": {
+        "startLine": 1635,
+        "startChar": 5,
+        "endLine": 1635,
+        "endChar": 21
+      },
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06065994_4a83158a",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "There\u0027s also this idea about using a more powerful combination of layout + last used stages like https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/vulkan/vk_helpers.h;l\u003d1740;drc\u003d6ffd0d20684d7222db482b3438233426419d2ffa but that\u0027s more long term.",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e00f04_303a7f6d",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1702,
+        "startChar": 40,
+        "endLine": 1702,
+        "endChar": 43
+      },
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7138030a_24139ef7",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1769,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "I believe handles are uint32_t in Zircon",
+      "range": {
+        "startLine": 1769,
+        "startChar": 40,
+        "endLine": 1769,
+        "endChar": 43
+      },
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "737abfd9_4984d80e",
         "filename": "dawn.json",
         "patchSetId": 6
@@ -111,6 +254,57 @@
       "writtenOn": "2023-07-28T20:24:39Z",
       "side": 1,
       "message": "ditto: I\u0027m separating these new enums so that once things are not experimental, I can give them a contiguous range.",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7bb6f29_195fe75e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "Validation will be backend-specific, how do you plan on doing this? (Surface.cpp does something already but it doesn\u0027t seem like it will scale a lot given the number of different descriptors here).",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c22eb6a_eda71879",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "Heh, maybe we should have X macros for these eventually.",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b14f01c_01b9458e",
+        "filename": "src/dawn/native/Forward.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-07-29T21:03:14Z",
+      "side": 1,
+      "message": "nit: alphabetical order maybe",
       "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
