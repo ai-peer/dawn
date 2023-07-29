@@ -16,6 +16,24 @@
       "message": "nit: Recommend renaming to `Output` to avoid confusion with two things called `Result`",
       "revId": "e0f77fff7687659bc907d3ca9e6d1b8f7e52b626",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2897fe03_816661e6",
+        "filename": "src/tint/lang/spirv/writer/result.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-29T11:38:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "239d8554_70984e25",
+      "revId": "e0f77fff7687659bc907d3ca9e6d1b8f7e52b626",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
