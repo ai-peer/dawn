@@ -33,6 +33,24 @@
       "message": "This gives the impression that `end` is inclusive, when it\u0027s not",
       "revId": "363f68d886ebfdc6e68cede40b6e569dc8d3757a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6bb61a_71b6eb14",
+        "filename": "src/tint/lang/core/ir/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-29T11:37:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98e06796_d0e45c69",
+      "revId": "363f68d886ebfdc6e68cede40b6e569dc8d3757a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
