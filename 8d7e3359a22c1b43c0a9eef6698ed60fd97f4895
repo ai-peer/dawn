@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d5809ac_f7a2627d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-29T11:43:49Z",
+      "side": 1,
+      "message": "I\u0027ve left access control remapping for now as it\u0027s only used by D3D, complicates this transform, and I\u0027m not entirely convinced that we need to be done in a transform anyway.",
+      "revId": "8d7e3359a22c1b43c0a9eef6698ed60fd97f4895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
