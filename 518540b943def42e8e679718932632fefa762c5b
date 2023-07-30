@@ -52,6 +52,24 @@
       "parentUuid": "17ee880d_47e97d89",
       "revId": "518540b943def42e8e679718932632fefa762c5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbeccc2b_744fd4e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-30T08:08:15Z",
+      "side": 1,
+      "message": "I considered trying to cover the existing set of names with multiple rules, but this adds more complexity, and is fragile.\nFor example, should `latest_version.h` be treated as test code?\n\n`_test.*` is essentially a \u0027soft\u0027 double file extension (similar to `blah.test.cc` - but isn\u0027t going to break toolchains that can\u0027t cope with double dots).\n\nI\u0027m not inventing this pattern. I\u0027m shamelessly stealing the pattern from Go: https://pkg.go.dev/cmd/go#hdr-Test_packages\n\nAs a compromise, how about I keep the `test_blah`, but add the `_test` suffixes to keep the rule simple? So:\n\n`test_helper.h` would be `test_helper_test.h`",
+      "parentUuid": "67f31b05_e04273f0",
+      "revId": "518540b943def42e8e679718932632fefa762c5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
