@@ -34,6 +34,24 @@
       "parentUuid": "9dd34466_5dc9cd23",
       "revId": "518540b943def42e8e679718932632fefa762c5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67f31b05_e04273f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-30T01:33:13Z",
+      "side": 1,
+      "message": "It seems like the distinction between test and prod code is made by the `test_` in the filename? Files with `test` in the name are test related. Files ending in `_test` contain test code.",
+      "parentUuid": "17ee880d_47e97d89",
+      "revId": "518540b943def42e8e679718932632fefa762c5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
