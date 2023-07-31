@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6561d0b7_1abe7e19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-31T17:02:13Z",
+      "side": 1,
+      "message": "LGTM! Pretty much exactly what I expected with a couple of questions.",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200122a9_80c871d2",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-31T17:02:13Z",
+      "side": 1,
+      "message": "Does this need to be a CachedObject? I would have thought with this change only the internal object would be cached?",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ef7e9c6_f6726fbe",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-31T17:02:13Z",
+      "side": 1,
+      "message": "Something that\u0027s not really clear from this CL is how frequently these proxy methods are used? I would think that overall we\u0027d generally want to work with the internal object as much as possible (This object should only be necessary for validation). So I would have expected to see a few more methods that had been updated to accept the BGLInternalBase object instead.\n\nThat said, it\u0027s already a big CL so if there is anything that can reasonably be done in that direction it could wait for a followup.",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3b41526_7d339ed9",
+        "filename": "src/dawn/native/d3d11/BindGroupLayoutD3D11.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-31T17:02:13Z",
+      "side": 1,
+      "message": "I like that this pattern removes the need for all the backend implementations to have any knowledge of the pipelineCompatibilityTokens!",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
