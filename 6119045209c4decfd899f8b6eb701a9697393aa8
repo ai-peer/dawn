@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ac335b_706cb444",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-31T16:16:06Z",
+      "side": 0,
+      "message": "Why did this test in particular get removed? I don\u0027t see that it moved anywhere.",
+      "revId": "6119045209c4decfd899f8b6eb701a9697393aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eead884b_a3a676b4",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-31T16:16:06Z",
+      "side": 0,
+      "message": "Don\u0027t the tests need to be instantiated somewhere? Or do they automatically get picked up because they\u0027re validation tests now?",
+      "revId": "6119045209c4decfd899f8b6eb701a9697393aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
