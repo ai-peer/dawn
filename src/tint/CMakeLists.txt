@@ -651,16 +651,16 @@ endif()
 
 if(${TINT_BUILD_SPV_WRITER})
   list(APPEND TINT_LIB_SRCS
-    lang/spirv/writer/binary_writer.cc
-    lang/spirv/writer/binary_writer.h
-    lang/spirv/writer/function.cc
-    lang/spirv/writer/function.h
-    lang/spirv/writer/instruction.cc
-    lang/spirv/writer/instruction.h
-    lang/spirv/writer/module.cc
-    lang/spirv/writer/module.h
-    lang/spirv/writer/operand.cc
-    lang/spirv/writer/operand.h
+    lang/spirv/writer/common/binary_writer.cc
+    lang/spirv/writer/common/binary_writer.h
+    lang/spirv/writer/common/function.cc
+    lang/spirv/writer/common/function.h
+    lang/spirv/writer/common/instruction.cc
+    lang/spirv/writer/common/instruction.h
+    lang/spirv/writer/common/module.cc
+    lang/spirv/writer/common/module.h
+    lang/spirv/writer/common/operand.cc
+    lang/spirv/writer/common/operand.h
     lang/spirv/writer/writer.cc
     lang/spirv/writer/writer.h
     lang/spirv/writer/ast_printer/builder.cc
@@ -1367,12 +1367,12 @@ if(TINT_BUILD_TESTS)
       lang/spirv/writer/ast_printer/scalar_constant_test.cc
       lang/spirv/writer/ast_printer/test_helper.h
       lang/spirv/writer/ast_printer/unary_op_expression_test.cc
-      lang/spirv/writer/binary_writer_test.cc
-      lang/spirv/writer/instruction_test.cc
-      lang/spirv/writer/module_test.cc
-      lang/spirv/writer/operand_test.cc
-      lang/spirv/writer/spv_dump.cc
-      lang/spirv/writer/spv_dump.h
+      lang/spirv/writer/common/binary_writer_test.cc
+      lang/spirv/writer/common/instruction_test.cc
+      lang/spirv/writer/common/module_test.cc
+      lang/spirv/writer/common/operand_test.cc
+      lang/spirv/writer/common/spv_dump.cc
+      lang/spirv/writer/common/spv_dump.h
     )
 
     if(${TINT_BUILD_IR})
@@ -1384,26 +1384,26 @@ if(TINT_BUILD_TESTS)
         lang/core/ir/transform/shader_io_spirv_test.cc
         lang/core/ir/transform/std140_test.cc
         lang/core/ir/transform/var_for_dynamic_index_test.cc
-        lang/spirv/writer/access_test.cc
-        lang/spirv/writer/atomic_builtin_test.cc
-        lang/spirv/writer/binary_test.cc
-        lang/spirv/writer/bitcast_test.cc
-        lang/spirv/writer/builtin_test.cc
-        lang/spirv/writer/constant_test.cc
-        lang/spirv/writer/construct_test.cc
-        lang/spirv/writer/convert_test.cc
-        lang/spirv/writer/discard_test.cc
-        lang/spirv/writer/function_test.cc
-        lang/spirv/writer/if_test.cc
-        lang/spirv/writer/let_test.cc
-        lang/spirv/writer/loop_test.cc
-        lang/spirv/writer/switch_test.cc
-        lang/spirv/writer/swizzle_test.cc
-        lang/spirv/writer/test_helper.h
-        lang/spirv/writer/texture_builtin_test.cc
-        lang/spirv/writer/type_test.cc
-        lang/spirv/writer/unary_test.cc
-        lang/spirv/writer/var_test.cc
+        lang/spirv/writer/common/access_test.cc
+        lang/spirv/writer/common/atomic_builtin_test.cc
+        lang/spirv/writer/common/binary_test.cc
+        lang/spirv/writer/common/bitcast_test.cc
+        lang/spirv/writer/common/builtin_test.cc
+        lang/spirv/writer/common/constant_test.cc
+        lang/spirv/writer/common/construct_test.cc
+        lang/spirv/writer/common/convert_test.cc
+        lang/spirv/writer/common/discard_test.cc
+        lang/spirv/writer/common/function_test.cc
+        lang/spirv/writer/common/if_test.cc
+        lang/spirv/writer/common/let_test.cc
+        lang/spirv/writer/common/loop_test.cc
+        lang/spirv/writer/common/switch_test.cc
+        lang/spirv/writer/common/swizzle_test.cc
+        lang/spirv/writer/common/test_helper.h
+        lang/spirv/writer/common/texture_builtin_test.cc
+        lang/spirv/writer/common/type_test.cc
+        lang/spirv/writer/common/unary_test.cc
+        lang/spirv/writer/common/var_test.cc
         lang/spirv/writer/writer_test.cc
       )
     endif()
