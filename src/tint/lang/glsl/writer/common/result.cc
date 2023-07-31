@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/glsl/writer/result.h"
+#include "src/tint/lang/glsl/writer/common/result.h"
 
 namespace tint::glsl::writer {
 
