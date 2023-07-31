@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "071a7906_689d4ab9",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-31T18:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ca82cef_378ba9a7",
+      "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "073ae4c1_e8a71503",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95b6b86_b5d81477",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-31T18:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "073ae4c1_e8a71503",
+      "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2f1a246_67ab4f0f",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-31T14:57:37Z",
       "side": 1,
       "message": "Why did this switch stream writers?",
+      "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db291788_7248b27d",
+        "filename": "src/tint/utils/diagnostic/printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-31T18:43:45Z",
+      "side": 1,
+      "message": "To break a circular dependency.\nIts also one of the few places where we probably want to use `std::stringstream`, as if we\u0027re emitting numbers as part of a diagnostic, there\u0027s no good reason to ignore the user\u0027s locale.",
+      "parentUuid": "a2f1a246_67ab4f0f",
       "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
