@@ -51,6 +51,24 @@
       "message": "Don\u0027t the tests need to be instantiated somewhere? Or do they automatically get picked up because they\u0027re validation tests now?",
       "revId": "6119045209c4decfd899f8b6eb701a9697393aa8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0758b26e_f547c7ae",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-07-31T22:23:07Z",
+      "side": 0,
+      "message": "yea, because they are TEST_F instead of TEST_P now",
+      "parentUuid": "eead884b_a3a676b4",
+      "revId": "6119045209c4decfd899f8b6eb701a9697393aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
