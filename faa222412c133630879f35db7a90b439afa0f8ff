@@ -52,6 +52,24 @@
       "parentUuid": "3699879f_f25cc2f5",
       "revId": "faa222412c133630879f35db7a90b439afa0f8ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4ee88b_71cd8e22",
+        "filename": "src/tint/utils/symbol/table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-31T18:39:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01bc6e88_66574cd5",
+      "revId": "faa222412c133630879f35db7a90b439afa0f8ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
