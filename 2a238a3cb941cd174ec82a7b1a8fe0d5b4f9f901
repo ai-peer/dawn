@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ab2da4_3f19c4ee",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 2067,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-31T15:17:20Z",
+      "side": 1,
+      "message": "Why have these test files moved? They\u0027re not really \"common\" in any sense that I can think of, they\u0027re testing the `writer`.",
+      "revId": "2a238a3cb941cd174ec82a7b1a8fe0d5b4f9f901",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
