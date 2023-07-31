@@ -16,6 +16,24 @@
       "message": "This should be call `Table` to match the file name.",
       "revId": "faa222412c133630879f35db7a90b439afa0f8ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3699879f_f25cc2f5",
+        "filename": "src/tint/utils/symbol/table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-31T16:45:24Z",
+      "side": 1,
+      "message": "I\u0027d agree, if the namespace were `tint::utils::symbol`, or `tint::symbol`, but we dropped them. Would you prefer `tint/utils/symbol/symbol_table.h`? I was trying to remove the redundant duplication in the path.",
+      "parentUuid": "2720c94f_08f4313a",
+      "revId": "faa222412c133630879f35db7a90b439afa0f8ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
