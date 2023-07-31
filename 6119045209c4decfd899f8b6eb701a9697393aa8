@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9cd8473_5555616d",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-31T20:27:40Z",
+      "side": 0,
+      "message": "I removed the test because it doesn\u0027t actually unit test what it claims. It\u0027s hard to actually test what it claims which is why I didn\u0027t immediately add an equivalent.",
+      "parentUuid": "94ac335b_706cb444",
+      "revId": "6119045209c4decfd899f8b6eb701a9697393aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eead884b_a3a676b4",
