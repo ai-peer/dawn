@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5586a5e0_9f6f0eff",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-31T15:22:53Z",
+      "side": 1,
+      "message": "Not used by `ast_printer`, so can stay in `writer/`.",
+      "range": {
+        "startLine": 1216,
+        "startChar": 0,
+        "endLine": 1217,
+        "endChar": 39
+      },
+      "revId": "c8fd2f5572c00d888cb8708d3444c54efca1afb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
