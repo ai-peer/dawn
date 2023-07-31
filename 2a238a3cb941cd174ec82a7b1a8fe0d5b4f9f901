@@ -16,6 +16,24 @@
       "message": "Why have these test files moved? They\u0027re not really \"common\" in any sense that I can think of, they\u0027re testing the `writer`.",
       "revId": "2a238a3cb941cd174ec82a7b1a8fe0d5b4f9f901",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523164ec_2778f0fe",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 2067,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-07-31T16:35:22Z",
+      "side": 1,
+      "message": "Fair point. I\u0027ll move them back.",
+      "parentUuid": "41ab2da4_3f19c4ee",
+      "revId": "2a238a3cb941cd174ec82a7b1a8fe0d5b4f9f901",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
