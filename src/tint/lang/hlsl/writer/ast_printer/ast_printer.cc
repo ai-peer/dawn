@@ -340,6 +340,7 @@ bool ASTPrinter::Generate() {
                 builtin::Extension::kChromiumExperimentalDp4A,
                 builtin::Extension::kChromiumExperimentalFullPtrParameters,
                 builtin::Extension::kChromiumExperimentalPushConstant,
+                builtin::Extension::kChromiumExperimentalSubgroups,
                 builtin::Extension::kF16,
                 builtin::Extension::kChromiumInternalDualSourceBlending,
             })) {
@@ -1200,6 +1201,9 @@ bool ASTPrinter::EmitBuiltinCall(StringStream& out,
     }
     if (builtin->IsDP4a()) {
         return EmitDP4aCall(out, expr, builtin);
+    }
+    if (builtin->IsSubgroup()) {
+        return EmitSubgroupCall(out, expr, builtin);
     }
 
     auto name = generate_builtin_name(builtin);
@@ -2485,6 +2489,18 @@ bool ASTPrinter::EmitBarrierCall(StringStream& out, const sem::Builtin* builtin)
         out << "DeviceMemoryBarrierWithGroupSync()";
     } else {
         TINT_UNREACHABLE() << "unexpected barrier builtin type " << builtin::str(builtin->Type());
+        return false;
+    }
+    return true;
+}
+
+bool ASTPrinter::EmitSubgroupCall(StringStream& out,
+                                  [[maybe_unused]] const ast::CallExpression* expr,
+                                  const sem::Builtin* builtin) {
+    if (builtin->Type() == builtin::Function::kSubgroupBallot) {
+        out << "WaveActiveBallot(true)";
+    } else {
+        TINT_UNREACHABLE() << "unexpected subgroup builtin type " << builtin::str(builtin->Type());
         return false;
     }
     return true;
