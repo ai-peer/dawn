@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2720c94f_08f4313a",
+        "filename": "src/tint/utils/symbol/table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-31T14:50:48Z",
+      "side": 1,
+      "message": "This should be call `Table` to match the file name.",
+      "revId": "faa222412c133630879f35db7a90b439afa0f8ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
