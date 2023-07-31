@@ -90,6 +90,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0ddde454_aa7d70b2",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-07-31T20:56:04Z",
+      "side": 1,
+      "message": "Great! Fully agree that it makes sense to split that up, and glad to hear it\u0027s already the plan.",
+      "parentUuid": "a7db968d_3eecd022",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c3b41526_7d339ed9",
         "filename": "src/dawn/native/d3d11/BindGroupLayoutD3D11.h",
         "patchSetId": 4
