@@ -12,25 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_LANG_HLSL_WRITER_AST_PRINTER_TEST_HELPER_H_
-#define SRC_TINT_LANG_HLSL_WRITER_AST_PRINTER_TEST_HELPER_H_
+#ifndef SRC_TINT_LANG_MSL_WRITER_AST_PRINTER_HELPER_TEST_H_
+#define SRC_TINT_LANG_MSL_WRITER_AST_PRINTER_HELPER_TEST_H_
 
 #include <memory>
 #include <string>
 #include <utility>
 
 #include "gtest/gtest.h"
-#include "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h"
-#include "src/tint/lang/hlsl/writer/options.h"
-#include "src/tint/lang/wgsl/ast/transform/manager.h"
-#include "src/tint/lang/wgsl/ast/transform/renamer.h"
+#include "src/tint/lang/msl/writer/ast_printer/ast_printer.h"
+#include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
 
-namespace tint::hlsl::writer {
+namespace tint::msl::writer {
 
 /// Helper class for testing
-template <typename BODY>
-class TestHelperBase : public BODY, public ProgramBuilder {
+template <typename BASE>
+class TestHelperBase : public BASE, public ProgramBuilder {
   public:
     TestHelperBase() = default;
     ~TestHelperBase() override = default;
@@ -43,7 +41,7 @@ class TestHelperBase : public BODY, public ProgramBuilder {
         return opts;
     }
 
-    /// Builds the program and returns a ASTPrinter from the program.
+    /// Builds and returns a ASTPrinter from the program.
     /// @note The generator is only built once. Multiple calls to Build() will
     /// return the same ASTPrinter without rebuilding.
     /// @return the built generator
@@ -60,9 +58,9 @@ class TestHelperBase : public BODY, public ProgramBuilder {
         return *gen_;
     }
 
-    /// Builds the program, runs the program through the HLSL sanitizer
+    /// Builds the program, runs the program through the transform::Msl sanitizer
     /// and returns a ASTPrinter from the sanitized program.
-    /// @param options The HLSL generator options.
+    /// @param options The MSL generator options.
     /// @note The generator is only built once. Multiple calls to Build() will
     /// return the same ASTPrinter without rebuilding.
     /// @return the built generator
@@ -76,22 +74,9 @@ class TestHelperBase : public BODY, public ProgramBuilder {
         program = std::make_unique<Program>(resolver::Resolve(*this));
         [&] { ASSERT_TRUE(program->IsValid()) << program->Diagnostics().str(); }();
 
-        auto sanitized_result = Sanitize(program.get(), options);
-        [&] {
-            ASSERT_TRUE(sanitized_result.program.IsValid())
-                << sanitized_result.program.Diagnostics().str();
-        }();
-
-        ast::transform::Manager transform_manager;
-        ast::transform::DataMap transform_data;
-        ast::transform::DataMap outputs;
-        transform_data.Add<ast::transform::Renamer::Config>(
-            ast::transform::Renamer::Target::kHlslKeywords,
-            /* preserve_unicode */ true);
-        transform_manager.Add<tint::ast::transform::Renamer>();
-        auto result = transform_manager.Run(&sanitized_result.program, transform_data, outputs);
-        [&] { ASSERT_TRUE(result.IsValid()) << result.Diagnostics().str(); }();
-        *program = std::move(result);
+        auto result = Sanitize(program.get(), options);
+        [&] { ASSERT_TRUE(result.program.IsValid()) << result.program.Diagnostics().str(); }();
+        *program = std::move(result.program);
         gen_ = std::make_unique<ASTPrinter>(program.get());
         return *gen_;
     }
@@ -102,16 +87,11 @@ class TestHelperBase : public BODY, public ProgramBuilder {
   private:
     std::unique_ptr<ASTPrinter> gen_;
 };
-
-/// TestHelper the the base class for HLSL writer unit tests.
-/// Use this form when you don't need to template any further.
 using TestHelper = TestHelperBase<testing::Test>;
 
-/// TestParamHelper the the base class for HLSL unit tests that take a templated
-/// parameter.
 template <typename T>
 using TestParamHelper = TestHelperBase<testing::TestWithParam<T>>;
 
-}  // namespace tint::hlsl::writer
+}  // namespace tint::msl::writer
 
-#endif  // SRC_TINT_LANG_HLSL_WRITER_AST_PRINTER_TEST_HELPER_H_
+#endif  // SRC_TINT_LANG_MSL_WRITER_AST_PRINTER_HELPER_TEST_H_
