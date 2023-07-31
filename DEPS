@@ -160,7 +160,7 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@fb37e0542c7c704ac761be15a1883f56516597fc',
+    'url': '{chromium_git}/angle/angle@99f1178a9e81423515a3e4cb2b3a3c9666fb77b3',
     'condition': 'dawn_standalone',
   },
 
@@ -185,7 +185,7 @@ deps = {
   },
 
   'third_party/dxc': {
-    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@abe45fa59810208deecfe6d524573ef6a5e98b6b',
+    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@0033aa85b55d2a1dcce69d8e3ac1f9a9bb8c4728',
   },
   'third_party/dxheaders': {
     # The non-Windows build of DXC depends on DirectX-Headers, and at a specific commit (not ToT)
@@ -195,7 +195,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@02f3426192fcb2c84f757d2d1887fd982a974dca',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@a7b4cce47e68138c03592895724a2199a361abd7',
     'condition': 'build_with_chromium',
   },
 
