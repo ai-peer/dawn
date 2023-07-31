@@ -12,16 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/msl/writer/options.h"
+#include "src/tint/lang/msl/writer/common/result.h"
 
 namespace tint::msl::writer {
 
-Options::Options() = default;
+Result::Result() = default;
 
-Options::~Options() = default;
+Result::~Result() = default;
 
-Options::Options(const Options&) = default;
-
-Options& Options::operator=(const Options&) = default;
+Result::Result(const Result&) = default;
 
 }  // namespace tint::msl::writer

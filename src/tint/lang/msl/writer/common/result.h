@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_LANG_MSL_WRITER_RESULT_H_
-#define SRC_TINT_LANG_MSL_WRITER_RESULT_H_
+#ifndef SRC_TINT_LANG_MSL_WRITER_COMMON_RESULT_H_
+#define SRC_TINT_LANG_MSL_WRITER_COMMON_RESULT_H_
 
 #include <string>
 #include <unordered_map>
@@ -60,4 +60,4 @@ struct Result {
 
 }  // namespace tint::msl::writer
 
-#endif  // SRC_TINT_LANG_MSL_WRITER_RESULT_H_
+#endif  // SRC_TINT_LANG_MSL_WRITER_COMMON_RESULT_H_
