@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ca82cef_378ba9a7",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-31T14:57:37Z",
+      "side": 1,
+      "message": "nit: move this comment above so the this line so the one below aligns correctly as well.",
+      "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073ae4c1_e8a71503",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-31T14:57:37Z",
+      "side": 1,
+      "message": "Though, this one aligned correctly, so .... no idea.",
+      "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f1a246_67ab4f0f",
+        "filename": "src/tint/utils/diagnostic/printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-31T14:57:37Z",
+      "side": 1,
+      "message": "Why did this switch stream writers?",
+      "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
