@@ -34,6 +34,24 @@
       "parentUuid": "2720c94f_08f4313a",
       "revId": "faa222412c133630879f35db7a90b439afa0f8ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01bc6e88_66574cd5",
+        "filename": "src/tint/utils/symbol/table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-07-31T17:36:58Z",
+      "side": 1,
+      "message": "In that case, yes I\u0027d call it `tint/utils/symbol/symbol_table.h`",
+      "parentUuid": "3699879f_f25cc2f5",
+      "revId": "faa222412c133630879f35db7a90b439afa0f8ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
