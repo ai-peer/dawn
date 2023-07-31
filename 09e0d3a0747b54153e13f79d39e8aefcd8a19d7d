@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1165c21_27772347",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-31T20:47:30Z",
+      "side": 1,
+      "message": "Done. Was planning to do that as part of the stuff in the other response, but just tacked it on here because I agree that it\u0027s a little confusing to still have it here.",
+      "parentUuid": "200122a9_80c871d2",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ef7e9c6_f6726fbe",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-07-31T17:02:13Z",
       "side": 1,
       "message": "Something that\u0027s not really clear from this CL is how frequently these proxy methods are used? I would think that overall we\u0027d generally want to work with the internal object as much as possible (This object should only be necessary for validation). So I would have expected to see a few more methods that had been updated to accept the BGLInternalBase object instead.\n\nThat said, it\u0027s already a big CL so if there is anything that can reasonably be done in that direction it could wait for a followup.",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7db968d_3eecd022",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-31T20:47:30Z",
+      "side": 1,
+      "message": "Yea, so my plan was to just use a proxy for everything here and then go over in follow ups to remove all the proxy calls. I figured it would be easier to review that way since the changes will be more localized with this one being massive but logically simple since it\u0027s just a full-on passthrough.\n\nBut yea, totally agree that the proxy should become more and more simple as I finish cleaning it up!",
+      "parentUuid": "1ef7e9c6_f6726fbe",
       "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
