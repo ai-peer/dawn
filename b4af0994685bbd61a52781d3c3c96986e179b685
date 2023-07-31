@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cc3abab_d353c4bf",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-07-31T15:20:23Z",
+      "side": 1,
+      "message": "I don\u0027t think the result is used in the `ast_printer` sub-directory, I think there\u0027s just an unneeded include. So this can (and I think should) stay in the `writer/` directory.",
+      "range": {
+        "startLine": 1189,
+        "startChar": 0,
+        "endLine": 1190,
+        "endChar": 39
+      },
+      "revId": "b4af0994685bbd61a52781d3c3c96986e179b685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
