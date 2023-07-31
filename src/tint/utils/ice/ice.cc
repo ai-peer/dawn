@@ -18,6 +18,7 @@
 #include <string>
 
 #include "src/tint/utils/debug/debugger.h"
+#include "src/tint/utils/ice/ice.h"
 
 namespace tint {
 namespace {
