@@ -104,6 +104,24 @@
       "parentUuid": "a2f1a246_67ab4f0f",
       "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e65074a_739b948f",
+        "filename": "src/tint/utils/diagnostic/printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-07-31T18:45:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "db291788_7248b27d",
+      "revId": "fdbc1dd3348ddfd045859531b4e89084a0647ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
