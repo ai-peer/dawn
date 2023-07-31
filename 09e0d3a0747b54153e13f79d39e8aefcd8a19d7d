@@ -103,6 +103,24 @@
       "message": "I like that this pattern removes the need for all the backend implementations to have any knowledge of the pipelineCompatibilityTokens!",
       "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46c4610e_83b48142",
+        "filename": "src/dawn/native/d3d11/BindGroupLayoutD3D11.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-07-31T20:48:09Z",
+      "side": 1,
+      "message": "I agree entirely!",
+      "parentUuid": "c3b41526_7d339ed9",
+      "revId": "09e0d3a0747b54153e13f79d39e8aefcd8a19d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
