@@ -464,6 +464,8 @@ DXGI_FORMAT DXGIVertexFormat(wgpu::VertexFormat format) {
             return DXGI_FORMAT_R32G32B32_SINT;
         case wgpu::VertexFormat::Sint32x4:
             return DXGI_FORMAT_R32G32B32A32_SINT;
+        case wgpu::VertexFormat::UnormXYZ10W2:
+            return DXGI_FORMAT_R10G10B10A2_UNORM;
         default:
             UNREACHABLE();
     }

@@ -126,6 +126,8 @@ StringStream& operator<<(StringStream& out, VertexFormat format) {
             return out << "sint32x3";
         case VertexFormat::kSint32x4:
             return out << "sint32x4";
+        case VertexFormat::kUnormXYZ10W2:
+            return out << "unormXYZ10W2";
     }
     return out << "<unknown>";
 }
@@ -223,6 +225,7 @@ VertexFormatType VertexFormatTypeOf(VertexFormat format) {
         case VertexFormat::kSnorm16x4:
         case VertexFormat::kFloat16x4:
         case VertexFormat::kFloat32x4:
+        case VertexFormat::kUnormXYZ10W2:
             return {VertexDataType::kFloat, 4};
     }
     return {VertexDataType::kInvalid, 0};
@@ -668,6 +671,17 @@ struct VertexPulling::State {
             case VertexFormat::kFloat16x4:
                 return b.Call<vec4<f32>>(b.Call("unpack2x16float", load_u32()),
                                          b.Call("unpack2x16float", load_next_u32()));
+            case VertexFormat::kUnormXYZ10W2: {
+                // wzzyyxx, wzzyyxx, wzzyyxx, wzzyyxx
+                auto* u32s = b.Call<vec4<u32>>(load_u32());
+                // ssssssxx, ssssssyy, sssssszz, sssssssw
+                auto* shr = b.Shr(u32s, b.Call<vec4<u32>>(00_u, 10_u, 20_u, 30_u));
+                // 000000xx, 000000yy, 000000zz, 0000000w
+                auto* land = b.And(shr, b.Call<vec4<u32>>(0x3FF_u, 0x3FF_u, 0x3FF_u, 0x3_u));
+                // u32->unorm
+                return b.Div(b.Call<vec4<f32>>(land),
+                             b.Call<vec4<f32>>(1023_f, 1023_f, 1023_f, 3_f));
+            }
         }
 
         TINT_UNREACHABLE();

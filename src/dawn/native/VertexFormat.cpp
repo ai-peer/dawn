@@ -20,7 +20,7 @@
 
 namespace dawn::native {
 
-static constexpr std::array<VertexFormatInfo, 31> sVertexFormatTable = {{
+static constexpr std::array<VertexFormatInfo, 32> sVertexFormatTable = {{
     //
     {wgpu::VertexFormat::Undefined, 0, 0, 0, VertexFormatBaseType::Float},
 
@@ -56,6 +56,7 @@ static constexpr std::array<VertexFormatInfo, 31> sVertexFormatTable = {{
     {wgpu::VertexFormat::Sint32x2, 8, 2, 4, VertexFormatBaseType::Sint},
     {wgpu::VertexFormat::Sint32x3, 12, 3, 4, VertexFormatBaseType::Sint},
     {wgpu::VertexFormat::Sint32x4, 16, 4, 4, VertexFormatBaseType::Sint},
+    {wgpu::VertexFormat::UnormXYZ10W2, 4, 4, 1, VertexFormatBaseType::Float},
     //
 }};
 

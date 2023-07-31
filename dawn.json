@@ -2935,7 +2935,8 @@
             {"value": 27, "name": "sint32"},
             {"value": 28, "name": "sint32x2"},
             {"value": 29, "name": "sint32x3"},
-            {"value": 30, "name": "sint32x4"}
+            {"value": 30, "name": "sint32x4"},
+            {"value": 31, "name": "unormXYZ10W2"}
         ]
     },
     "whole size" : {
