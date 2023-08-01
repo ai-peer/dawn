@@ -2485,7 +2485,7 @@ bool ASTPrinter::EmitBarrierCall(StringStream& out, const sem::Builtin* builtin)
 bool ASTPrinter::EmitTextureCall(StringStream& out,
                                  const sem::Call* call,
                                  const sem::Builtin* builtin) {
-    using Usage = sem::ParameterUsage;
+    using Usage = core::ParameterUsage;
 
     auto& signature = builtin->Signature();
     auto* expr = call->Declaration();
@@ -2720,7 +2720,7 @@ bool ASTPrinter::EmitTextureCall(StringStream& out,
             break;
         case core::Function::kTextureGather:
             out << ".Gather";
-            if (builtin->Parameters()[0]->Usage() == sem::ParameterUsage::kComponent) {
+            if (builtin->Parameters()[0]->Usage() == core::ParameterUsage::kComponent) {
                 switch (call->Arguments()[0]->ConstantValue()->ValueAs<AInt>()) {
                     case 0:
                         out << "Red";
