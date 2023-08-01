@@ -135,6 +135,23 @@
       },
       "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2855e422_589feab3",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003911
+      },
+      "writtenOn": "2023-08-01T08:49:14Z",
+      "side": 1,
+      "message": "I see also `use_allocator_shim_default` in other override files",
+      "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
