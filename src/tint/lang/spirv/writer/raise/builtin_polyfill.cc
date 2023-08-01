@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/transform/builtin_polyfill_spirv.h"
+#include "src/tint/lang/spirv/writer/raise/builtin_polyfill.h"
 
 #include <utility>
 
