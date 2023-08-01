@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_VULKAN_DESCRIPTORSETALLOCATOR_H_
 
 #include <map>
+#include <mutex>
 #include <vector>
 
 #include "dawn/common/SerialQueue.h"
@@ -50,6 +51,7 @@ class DescriptorSetAllocator : public ObjectBase {
     MaybeError AllocateDescriptorPool();
 
     BindGroupLayout* mLayout;
+    std::mutex mMutex;
 
     std::vector<VkDescriptorPoolSize> mPoolSizes;
     SetIndex mMaxSets;
