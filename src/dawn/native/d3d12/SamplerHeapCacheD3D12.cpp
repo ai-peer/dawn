@@ -32,7 +32,7 @@ SamplerHeapCacheEntry::SamplerHeapCacheEntry(std::vector<Sampler*> samplers)
     : mSamplers(std::move(samplers)) {}
 
 SamplerHeapCacheEntry::SamplerHeapCacheEntry(SamplerHeapCache* cache,
-                                             StagingDescriptorAllocator* allocator,
+                                             MutexProtected<StagingDescriptorAllocator>* allocator,
                                              std::vector<Sampler*> samplers,
                                              CPUDescriptorHeapAllocation allocation)
     : mCPUAllocation(std::move(allocation)),
@@ -52,13 +52,14 @@ SamplerHeapCacheEntry::~SamplerHeapCacheEntry() {
     // If this is a blueprint then the CPU allocation cannot exist and has no entry to remove.
     if (mCPUAllocation.IsValid()) {
         mCache->RemoveCacheEntry(this);
-        mAllocator->Deallocate(&mCPUAllocation);
+        (*mAllocator)->Deallocate(&mCPUAllocation);
     }
 
     ASSERT(!mCPUAllocation.IsValid());
 }
 
-bool SamplerHeapCacheEntry::Populate(Device* device, ShaderVisibleDescriptorAllocator* allocator) {
+bool SamplerHeapCacheEntry::Populate(Device* device,
+                                     MutexProtected<ShaderVisibleDescriptorAllocator>& allocator) {
     if (allocator->IsAllocationStillValid(mGPUAllocation)) {
         return true;
     }
@@ -90,7 +91,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE SamplerHeapCacheEntry::GetBaseDescriptor() const {
 
 ResultOrError<Ref<SamplerHeapCacheEntry>> SamplerHeapCache::GetOrCreate(
     const BindGroup* group,
-    StagingDescriptorAllocator* samplerAllocator) {
+    MutexProtected<StagingDescriptorAllocator>* samplerAllocator) {
     const BindGroupLayout* bgl = ToBackend(group->GetLayout()->GetInternalBindGroupLayout());
 
     // If a previously created bindgroup used the same samplers, the backing sampler heap
@@ -120,10 +121,14 @@ ResultOrError<Ref<SamplerHeapCacheEntry>> SamplerHeapCache::GetOrCreate(
     // real entry below.
     samplers = std::move(blueprint.AcquireSamplers());
 
+    uint32_t samplerSizeIncrement = 0;
     CPUDescriptorHeapAllocation allocation;
-    DAWN_TRY_ASSIGN(allocation, samplerAllocator->AllocateCPUDescriptors());
+    DAWN_TRY((*samplerAllocator).Use([&](auto allocator) -> MaybeError {
+        DAWN_TRY_ASSIGN(allocation, allocator->AllocateCPUDescriptors());
+        samplerSizeIncrement = allocator->GetSizeIncrement();
+        return {};
+    }));
 
-    const uint32_t samplerSizeIncrement = samplerAllocator->GetSizeIncrement();
     ID3D12Device* d3d12Device = mDevice->GetD3D12Device();
 
     for (uint32_t i = 0; i < samplers.size(); ++i) {
