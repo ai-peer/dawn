@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_STAGINGDESCRIPTORALLOCATORD3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_STAGINGDESCRIPTORALLOCATORD3D12_H_
 
+#include <mutex>
 #include <vector>
 
 #include "dawn/common/SerialQueue.h"
@@ -67,16 +68,17 @@ class StagingDescriptorAllocator {
 
     Index GetFreeBlockIndicesSize() const;
 
+    std::mutex mMutex;
     std::vector<uint32_t> mAvailableHeaps;  // Indices into the pool.
     std::vector<NonShaderVisibleBuffer> mPool;
 
-    Device* mDevice;
+    Device const* mDevice;
 
-    uint32_t mSizeIncrement;  // Size of the descriptor (in bytes).
-    uint32_t mBlockSize;      // Size of the block of descriptors (in bytes).
-    uint32_t mHeapSize;       // Size of the heap (in number of descriptors).
+    const uint32_t mSizeIncrement;  // Size of the descriptor (in bytes).
+    const uint32_t mBlockSize;      // Size of the block of descriptors (in bytes).
+    const uint32_t mHeapSize;       // Size of the heap (in number of descriptors).
 
-    D3D12_DESCRIPTOR_HEAP_TYPE mHeapType;
+    const D3D12_DESCRIPTOR_HEAP_TYPE mHeapType;
 
     SerialQueue<ExecutionSerial, CPUDescriptorHeapAllocation> mAllocationsToDelete;
 };

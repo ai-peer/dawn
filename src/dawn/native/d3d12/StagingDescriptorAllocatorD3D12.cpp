@@ -43,6 +43,8 @@ StagingDescriptorAllocator::~StagingDescriptorAllocator() {
 }
 
 ResultOrError<CPUDescriptorHeapAllocation> StagingDescriptorAllocator::AllocateCPUDescriptors() {
+    std::lock_guard<std::mutex> lock(mMutex);
+
     if (mAvailableHeaps.empty()) {
         DAWN_TRY(AllocateCPUHeap());
     }
@@ -108,17 +110,15 @@ void StagingDescriptorAllocator::Deallocate(CPUDescriptorHeapAllocation* allocat
     // locality.
     // TODO(dawn:155): Consider more optimization.
     std::vector<Index>& freeBlockIndices = mPool[heapIndex].freeBlockIndices;
+    const D3D12_CPU_DESCRIPTOR_HANDLE heapStart =
+        mPool[heapIndex].heap->GetCPUDescriptorHandleForHeapStart();
+    const D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor = allocation->OffsetFrom(0, 0);
+    const Index blockIndex = (baseDescriptor.ptr - heapStart.ptr) / mBlockSize;
+
+    std::lock_guard<std::mutex> lock(mMutex);
     if (freeBlockIndices.empty()) {
         mAvailableHeaps.emplace_back(heapIndex);
     }
-
-    const D3D12_CPU_DESCRIPTOR_HANDLE heapStart =
-        mPool[heapIndex].heap->GetCPUDescriptorHandleForHeapStart();
-
-    const D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor = allocation->OffsetFrom(0, 0);
-
-    const Index blockIndex = (baseDescriptor.ptr - heapStart.ptr) / mBlockSize;
-
     freeBlockIndices.emplace_back(blockIndex);
 
     // Invalidate the handle in case the developer accidentally uses it again.
@@ -137,11 +137,14 @@ ResultOrError<CPUDescriptorHeapAllocation>
 StagingDescriptorAllocator::AllocateTransientCPUDescriptors() {
     CPUDescriptorHeapAllocation allocation;
     DAWN_TRY_ASSIGN(allocation, AllocateCPUDescriptors());
+
+    std::lock_guard<std::mutex> lock(mMutex);
     mAllocationsToDelete.Enqueue(allocation, mDevice->GetPendingCommandSerial());
     return allocation;
 }
 
 void StagingDescriptorAllocator::Tick(ExecutionSerial completedSerial) {
+    std::lock_guard<std::mutex> lock(mMutex);
     for (CPUDescriptorHeapAllocation& allocation :
          mAllocationsToDelete.IterateUpTo(completedSerial)) {
         Deallocate(&allocation);
