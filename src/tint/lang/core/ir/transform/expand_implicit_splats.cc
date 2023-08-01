@@ -89,7 +89,7 @@ void ExpandImplicitSplats::Run(ir::Module* ir) const {
     // Replace scalar operands to binary instructions that produce vectors.
     for (auto* binary : binary_worklist) {
         auto* result_ty = binary->Result()->Type();
-        if (result_ty->is_float_vector() && binary->Kind() == Binary::Kind::kMultiply) {
+        if (result_ty->is_float_vector() && binary->Kind() == core::BinaryOp::kMultiply) {
             // Use OpVectorTimesScalar for floating point multiply.
             auto* vts = b.Call(result_ty, IntrinsicCall::Kind::kSpirvVectorTimesScalar);
             if (binary->LHS()->Type()->Is<type::Scalar>()) {

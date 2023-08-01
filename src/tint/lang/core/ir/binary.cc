@@ -18,7 +18,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ir::Binary);
 
 namespace tint::ir {
 
-Binary::Binary(InstructionResult* result, enum Kind kind, Value* lhs, Value* rhs) : kind_(kind) {
+Binary::Binary(InstructionResult* result, core::BinaryOp kind, Value* lhs, Value* rhs) : kind_(kind) {
     AddOperand(Binary::kLhsOperandOffset, lhs);
     AddOperand(Binary::kRhsOperandOffset, rhs);
     AddResult(result);

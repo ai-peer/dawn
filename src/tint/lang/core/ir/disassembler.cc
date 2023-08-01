@@ -818,53 +818,57 @@ void Disassembler::EmitBinary(Binary* b) {
     EmitValueWithType(b);
     out_ << " = ";
     switch (b->Kind()) {
-        case Binary::Kind::kAdd:
+        case core::BinaryOp::kAdd:
             out_ << "add";
             break;
-        case Binary::Kind::kSubtract:
+        case core::BinaryOp::kSubtract:
             out_ << "sub";
             break;
-        case Binary::Kind::kMultiply:
+        case core::BinaryOp::kMultiply:
             out_ << "mul";
             break;
-        case Binary::Kind::kDivide:
+        case core::BinaryOp::kDivide:
             out_ << "div";
             break;
-        case Binary::Kind::kModulo:
+        case core::BinaryOp::kModulo:
             out_ << "mod";
             break;
-        case Binary::Kind::kAnd:
+        case core::BinaryOp::kAnd:
             out_ << "and";
             break;
-        case Binary::Kind::kOr:
+        case core::BinaryOp::kOr:
             out_ << "or";
             break;
-        case Binary::Kind::kXor:
+        case core::BinaryOp::kXor:
             out_ << "xor";
             break;
-        case Binary::Kind::kEqual:
+        case core::BinaryOp::kEqual:
             out_ << "eq";
             break;
-        case Binary::Kind::kNotEqual:
+        case core::BinaryOp::kNotEqual:
             out_ << "neq";
             break;
-        case Binary::Kind::kLessThan:
+        case core::BinaryOp::kLessThan:
             out_ << "lt";
             break;
-        case Binary::Kind::kGreaterThan:
+        case core::BinaryOp::kGreaterThan:
             out_ << "gt";
             break;
-        case Binary::Kind::kLessThanEqual:
+        case core::BinaryOp::kLessThanEqual:
             out_ << "lte";
             break;
-        case Binary::Kind::kGreaterThanEqual:
+        case core::BinaryOp::kGreaterThanEqual:
             out_ << "gte";
             break;
-        case Binary::Kind::kShiftLeft:
+        case core::BinaryOp::kShiftLeft:
             out_ << "shiftl";
             break;
-        case Binary::Kind::kShiftRight:
+        case core::BinaryOp::kShiftRight:
             out_ << "shiftr";
+            break;
+        case core::BinaryOp::kLogicalAnd:
+        case core::BinaryOp::kLogicalOr:
+            TINT_ICE() << "logical operations should not exist in the IR";
             break;
     }
     out_ << " ";

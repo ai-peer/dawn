@@ -1127,7 +1127,7 @@ note: # Disassembly
 }
 
 TEST_F(IR_ValidatorTest, Binary_Result_Nullptr) {
-    auto* bin = mod.instructions.Create<ir::Binary>(nullptr, ir::Binary::Kind::kAdd,
+    auto* bin = mod.instructions.Create<ir::Binary>(nullptr, core::BinaryOp::kAdd,
                                                     b.Constant(3_i), b.Constant(2_i));
 
     auto* f = b.Function("my_func", ty.void_());
