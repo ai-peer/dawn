@@ -26,7 +26,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
     static ResultOrError<Ref<PhysicalDevice>> Create(InstanceBase* instance,
                                                      wgpu::BackendType backendType,
                                                      void* (*getProc)(const char*),
-                                                     EGLDisplay display);
+                                                     EGLDisplay display,
+                                                     bool useTextureShareGroupANGLE);
 
     ~PhysicalDevice() override = default;
 
@@ -35,7 +36,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
     bool SupportsFeatureLevel(FeatureLevel featureLevel) const override;
 
   private:
-    PhysicalDevice(InstanceBase* instance, wgpu::BackendType backendType, EGLDisplay display);
+    PhysicalDevice(InstanceBase* instance,
+                   wgpu::BackendType backendType,
+                   EGLDisplay display,
+                   bool useTextureShareGroupANGLE);
     MaybeError InitializeGLFunctions(void* (*getProc)(const char*));
 
     MaybeError InitializeImpl() override;
@@ -53,6 +57,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     OpenGLFunctions mFunctions;
     EGLDisplay mDisplay;
+    bool mUseTextureShareGroupANGLE;
     EGLFunctions mEGLFunctions;
 };
 
