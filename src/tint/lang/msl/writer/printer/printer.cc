@@ -21,6 +21,7 @@
 #include "src/tint/lang/core/ir/constant.h"
 #include "src/tint/lang/core/ir/exit_if.h"
 #include "src/tint/lang/core/ir/if.h"
+#include "src/tint/lang/core/ir/let.h"
 #include "src/tint/lang/core/ir/multi_in_block.h"
 #include "src/tint/lang/core/ir/return.h"
 #include "src/tint/lang/core/ir/unreachable.h"
@@ -173,10 +174,23 @@ void Printer::EmitBlockInstructions(ir::Block* block) {
             inst,                                          //
             [&](ir::ExitIf* e) { EmitExitIf(e); },         //
             [&](ir::If* if_) { EmitIf(if_); },             //
+            [&](ir::Let* l) { EmitLet(l); },               //
             [&](ir::Return* r) { EmitReturn(r); },         //
             [&](ir::Unreachable*) { EmitUnreachable(); },  //
             [&](Default) { TINT_ICE() << "unimplemented instruction: " << inst->TypeInfo().name; });
     }
+}
+
+void Printer::EmitLet(ir::Let* l) {
+    auto name = ir_->NameOf(l);
+    if (name.Name().empty()) {
+        name = ir_->symbols.New("v");
+    }
+
+    auto out = Line();
+    EmitType(out, l->Result()->Type());
+    out << " " << name.Name() << " = " << Expr(l->Value(), PtrKind::kPtr) << ";";
+    Bind(l->Result(), name, PtrKind::kPtr);
 }
 
 void Printer::EmitIf(ir::If* if_) {
