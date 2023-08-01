@@ -128,6 +128,30 @@
       },
       "revId": "87d5bcb5f892d26865abead33af637717d2ac98a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fc0990_6200b0da",
+        "filename": "src/dawn/native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-01T21:07:47Z",
+      "side": 1,
+      "message": "That could work, and Chromium would likely use that if MapRead isn\u0027t specified along with it so that with non-temporal stores the writes would be faster?",
+      "parentUuid": "e682c8c6_47950b1d",
+      "range": {
+        "startLine": 317,
+        "startChar": 8,
+        "endLine": 323,
+        "endChar": 9
+      },
+      "revId": "87d5bcb5f892d26865abead33af637717d2ac98a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
