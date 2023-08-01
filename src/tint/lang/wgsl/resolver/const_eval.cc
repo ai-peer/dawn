@@ -257,8 +257,7 @@ const constant::ScalarBase* ScalarConvert(const constant::Scalar<T>* scalar,
         using FROM = T;
         if constexpr (std::is_same_v<TO, bool>) {
             // [x -> bool]
-            return ctx.builder.constants.Get<constant::Scalar<TO>>(target_ty,
-                                                                   !scalar->IsPositiveZero());
+            return ctx.builder.constants.Get<constant::Scalar<TO>>(target_ty, !scalar->IsZero());
         } else if constexpr (std::is_same_v<FROM, bool>) {
             // [bool -> x]
             return ctx.builder.constants.Get<constant::Scalar<TO>>(target_ty,
