@@ -67,6 +67,25 @@ namespace {{metadata.namespace}} {
         struct {{as_cppType(type.name)}};
     {% endfor %}
 
+
+    // Special class for booleans in order to allow implicit conversions.
+    {% set BoolCppType = as_cppType(types["bool"].name) %}
+    {% set BoolCType = as_cType(types["bool"].name) %}
+    class {{BoolCppType}} {
+      public:
+        {{BoolCppType}}() = default;
+        // NOLINTNEXTLINE(runtime/explicit) allow implicit construction
+        {{BoolCppType}}(bool value) : mValue(static_cast<{{BoolCType}}>(value)) {}
+        // NOLINTNEXTLINE(runtime/explicit) allow implicit construction
+        {{BoolCppType}}({{BoolCType}} value): mValue(value) {}
+
+        constexpr operator bool() const { return static_cast<bool>(mValue); }
+
+      private:
+        // Default to false.
+        {{BoolCType}} mValue = static_cast<{{BoolCType}}>(false);
+    };
+
     {% for typeDef in by_category["typedef"] %}
         // {{as_cppType(typeDef.name)}} is deprecated.
         // Use {{as_cppType(typeDef.type.name)}} instead.
