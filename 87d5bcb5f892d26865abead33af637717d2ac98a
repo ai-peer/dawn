@@ -33,6 +33,29 @@
       "message": "I\u0027ve got the idea from ANGLE:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/vulkan/BufferVk.cpp;l\u003d84\n\nI think VK_MEMORY_PROPERTY_HOST_CACHED_BIT can also help Dawn in the same way.\n\nPTAL, thanks!",
       "revId": "87d5bcb5f892d26865abead33af637717d2ac98a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e682c8c6_47950b1d",
+        "filename": "src/dawn/native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-01T03:11:33Z",
+      "side": 1,
+      "message": "this means though if the application ever reads from it, it will be vey very slow.\n\nCurrently, we have MapWrite return the previous contents of the buffer - so it\u0027s possible the application might actually do this on purpose.\n\nMaybe we could consider having a separate map mode which is MapWriteUncached ?\n+kainino WDYT?",
+      "range": {
+        "startLine": 317,
+        "startChar": 8,
+        "endLine": 323,
+        "endChar": 9
+      },
+      "revId": "87d5bcb5f892d26865abead33af637717d2ac98a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
