@@ -67,6 +67,10 @@ namespace {{metadata.namespace}} {
         struct {{as_cppType(type.name)}};
     {% endfor %}
 
+    // Special aliasing for booleans.
+    {% set BoolType = types["bool"] %}
+    using {{as_cppType(BoolType.name)}} = {{as_cType(BoolType.name)}};
+
     {% for typeDef in by_category["typedef"] %}
         // {{as_cppType(typeDef.name)}} is deprecated.
         // Use {{as_cppType(typeDef.type.name)}} instead.
