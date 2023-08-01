@@ -82,6 +82,8 @@ DescriptorSetAllocator::~DescriptorSetAllocator() {
 }
 
 ResultOrError<DescriptorSetAllocation> DescriptorSetAllocator::Allocate() {
+    std::lock_guard<std::mutex> lock(mMutex);
+
     if (mAvailableDescriptorPoolIndices.empty()) {
         DAWN_TRY(AllocateDescriptorPool());
     }
@@ -112,6 +114,8 @@ void DescriptorSetAllocator::Deallocate(DescriptorSetAllocation* allocationInfo)
     // host execution of the command and the end of the draw/dispatch.
     Device* device = ToBackend(GetDevice());
     const ExecutionSerial serial = device->GetPendingCommandSerial();
+
+    std::lock_guard<std::mutex> lock(mMutex);
     mPendingDeallocations.Enqueue({allocationInfo->poolIndex, allocationInfo->setIndex}, serial);
 
     if (mLastDeallocationSerial != serial) {
@@ -124,6 +128,8 @@ void DescriptorSetAllocator::Deallocate(DescriptorSetAllocation* allocationInfo)
 }
 
 void DescriptorSetAllocator::FinishDeallocation(ExecutionSerial completedSerial) {
+    std::lock_guard<std::mutex> lock(mMutex);
+
     for (const Deallocation& dealloc : mPendingDeallocations.IterateUpTo(completedSerial)) {
         ASSERT(dealloc.poolIndex < mDescriptorPools.size());
 
