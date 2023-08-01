@@ -76,7 +76,6 @@
 {% endfor %}
 
 typedef uint32_t {{API}}Flags;
-#define WEBGPU_BOOL_BEAKING_CHANGE
 typedef uint32_t {{API}}Bool;
 
 {% for type in by_category["object"] %}
