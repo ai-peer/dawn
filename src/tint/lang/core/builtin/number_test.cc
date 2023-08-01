@@ -70,16 +70,22 @@ TEST(NumberTest, Equality) {
     EXPECT_TRUE(10_u == 10_u);
 
     EXPECT_TRUE(0._a == 0._a);
+    EXPECT_TRUE(0._a == -0._a);
+    EXPECT_TRUE(-0._a == 0._a);
     EXPECT_TRUE(-0._a == -0._a);
     EXPECT_TRUE(10._a == 10._a);
     EXPECT_TRUE(-10._a == -10._a);
 
     EXPECT_TRUE(0_f == 0_f);
+    EXPECT_TRUE(0._f == -0._f);
+    EXPECT_TRUE(-0._f == 0._f);
     EXPECT_TRUE(-0_f == -0_f);
     EXPECT_TRUE(10_f == 10_f);
     EXPECT_TRUE(-10_f == -10_f);
 
     EXPECT_TRUE(0_h == 0_h);
+    EXPECT_TRUE(0._h == -0._h);
+    EXPECT_TRUE(-0._h == 0._h);
     EXPECT_TRUE(-0_h == -0_h);
     EXPECT_TRUE(10_h == 10_h);
     EXPECT_TRUE(-10_h == -10_h);
@@ -104,15 +110,15 @@ TEST(NumberTest, Inequality) {
     EXPECT_TRUE(10_u != 11_u);
     EXPECT_TRUE(11_u != 10_u);
 
-    EXPECT_TRUE(0._a != -0._a);
-    EXPECT_TRUE(-0._a != 0._a);
+    EXPECT_FALSE(0._a != -0._a);
+    EXPECT_FALSE(-0._a != 0._a);
     EXPECT_TRUE(10._a != 11._a);
     EXPECT_TRUE(11._a != 10._a);
     EXPECT_TRUE(-10._a != -11._a);
     EXPECT_TRUE(-11._a != -10._a);
 
-    EXPECT_TRUE(0_f != -0_f);
-    EXPECT_TRUE(-0_f != 0_f);
+    EXPECT_FALSE(0_f != -0_f);
+    EXPECT_FALSE(-0_f != 0_f);
     EXPECT_TRUE(-0_f != -1_f);
     EXPECT_TRUE(-1_f != -0_f);
     EXPECT_TRUE(10_f != -10_f);
@@ -120,8 +126,8 @@ TEST(NumberTest, Inequality) {
     EXPECT_TRUE(10_f != 11_f);
     EXPECT_TRUE(-10_f != -11_f);
 
-    EXPECT_TRUE(0_h != -0_h);
-    EXPECT_TRUE(-0_h != 0_h);
+    EXPECT_FALSE(0_h != -0_h);
+    EXPECT_FALSE(-0_h != 0_h);
     EXPECT_TRUE(-0_h != -1_h);
     EXPECT_TRUE(-1_h != -0_h);
     EXPECT_TRUE(10_h != -10_h);
@@ -391,6 +397,10 @@ INSTANTIATE_TEST_SUITE_P(
 
 template <typename T>
 auto Overflow = std::optional<T>{};
+template <typename T>
+auto InvalidOp = std::optional<T>{};  // IEEE 754 Invalid operation exception.
+template <typename T>
+auto DivZero = std::optional<T>{};  // IEEE 754 Division by zero exception.
 
 using BinaryCheckedCase_AInt = std::tuple<std::optional<AInt>, AInt, AInt>;
 using CheckedAddTest_AInt = testing::TestWithParam<BinaryCheckedCase_AInt>;
@@ -692,10 +702,10 @@ std::vector<BinaryCheckedCase_Float> CheckedDivTest_FloatCases() {
         {T(1), T::Highest(), T::Highest()},
         {T(0), T(0), T::Highest()},
         {-T(0), T(0), T::Lowest()},
-        {Overflow<T>, T(123), T(0)},
-        {Overflow<T>, T(123), T(-0)},
-        {Overflow<T>, T(-123), T(0)},
-        {Overflow<T>, T(-123), T(-0)},
+        {Overflow<T>, T(123), T(0.0)},
+        {Overflow<T>, T(123), T(-0.0)},
+        {Overflow<T>, T(-123), T(0.0)},
+        {Overflow<T>, T(-123), T(-0.0)},
     };
 }
 INSTANTIATE_TEST_SUITE_P(CheckedDivTest_Float,
@@ -763,10 +773,10 @@ std::vector<BinaryCheckedCase_Float> CheckedModTest_FloatCases() {
         {T{2}, T{10}, -T{4}},                //
         {-T{1}, -T{10}, -T{3}},              //
         {-T{2}, -T{10}, -T{4}},              //
-        {Overflow<T>, T(123), T(0)},         //
-        {Overflow<T>, T(123), T(-0)},        //
-        {Overflow<T>, T(-123), T(0)},        //
-        {Overflow<T>, T(-123), T(-0)},
+        {Overflow<T>, T(123), T(0.0)},       //
+        {Overflow<T>, T(123), T(-0.0)},      //
+        {Overflow<T>, T(-123), T(0.0)},      //
+        {Overflow<T>, T(-123), T(-0.0)},
     };
 }
 INSTANTIATE_TEST_SUITE_P(CheckedModTest_Float,
@@ -812,6 +822,18 @@ std::vector<BinaryCheckedCase_Float> CheckedPowTest_FloatCases() {
         {Overflow<T>, T(0), T(0)},                 //
         {Overflow<T>, T(0), -T(1)},                //
         {Overflow<T>, T(0), T::Lowest()},          //
+        // Check exceptional cases from IEEE 754 `powr` function
+        // which has its exceptions derived from the formulation
+        // powr(x,y) = exp(y * log(x))
+        {DivZero<T>, T(0.0f), T(-2)},       // (0, less-than-zero)
+        {DivZero<T>, T(-0.0f), T(-2)},      // (0, less-than-zero)
+        {InvalidOp<T>, T(-2), T(5)},        // (less-than-zero, finite)
+        {InvalidOp<T>, T(-2), T(0)},        // (less-than-zero, finite)
+        {InvalidOp<T>, T(-2), T(-5)},       // (less-than-zero, finite)
+        {InvalidOp<T>, T(0.0f), T(0.0f)},   // (0,0)
+        {InvalidOp<T>, T(-0.0f), T(0.0f)},  // (0,0)
+        {InvalidOp<T>, T(0.0f), T(-0.0f)},  // (0,0)
+        {InvalidOp<T>, T(-0.0), T(-0.0f)},  // (0,0)
     };
 }
 INSTANTIATE_TEST_SUITE_P(CheckedPowTest_Float,
