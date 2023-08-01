@@ -311,7 +311,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
         }
         case OutputFormat::kHLSL: {
 #if TINT_BUILD_HLSL_WRITER
-            hlsl::writer::Generate(&program, options_hlsl_);
+            hlsl::writer::Generate(&program, options_hlsl_).Move();
 #endif  // TINT_BUILD_HLSL_WRITER
             break;
         }
