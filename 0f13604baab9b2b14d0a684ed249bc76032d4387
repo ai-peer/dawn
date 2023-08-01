@@ -111,6 +111,30 @@
       },
       "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cadb9d08_091ddca8",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-08-01T07:48:33Z",
+      "side": 1,
+      "message": "I am working on it on; https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1467773\n\nIt will take some time. So, this patch can go back into \"work in progress\".",
+      "parentUuid": "f6796118_b9d5a5a2",
+      "range": {
+        "startLine": 227,
+        "startChar": 3,
+        "endLine": 227,
+        "endChar": 37
+      },
+      "revId": "0f13604baab9b2b14d0a684ed249bc76032d4387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
