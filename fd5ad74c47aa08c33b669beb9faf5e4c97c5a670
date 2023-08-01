@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7832c7e_4c1b8186",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-01T16:29:50Z",
+      "side": 1,
+      "message": "nit: this file doesn\u0027t exist anymore does it?",
+      "revId": "fd5ad74c47aa08c33b669beb9faf5e4c97c5a670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
