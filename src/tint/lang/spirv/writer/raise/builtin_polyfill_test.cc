@@ -25,13 +25,13 @@
 #include "src/tint/lang/core/type/sampled_texture.h"
 #include "src/tint/lang/core/type/storage_texture.h"
 
-namespace tint::ir::transform {
+namespace tint::spirv::writer::raise {
 namespace {
 
 using namespace tint::builtin::fluent_types;  // NOLINT
 using namespace tint::number_suffixes;        // NOLINT
 
-using IR_BuiltinPolyfillSpirvTest = TransformTest;
+using IR_BuiltinPolyfillSpirvTest = ir::transform::TransformTest;
 
 TEST_F(IR_BuiltinPolyfillSpirvTest, ArrayLength) {
     auto* arr = ty.runtime_array(ty.i32());
@@ -2809,4 +2809,4 @@ TEST_F(IR_BuiltinPolyfillSpirvTest, TextureNumLayers_Storage2DArray) {
 }
 
 }  // namespace
-}  // namespace tint::ir::transform
+}  // namespace tint::spirv::writer::raise
