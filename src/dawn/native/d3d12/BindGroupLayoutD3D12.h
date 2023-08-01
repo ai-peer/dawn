@@ -17,6 +17,7 @@
 
 #include <vector>
 
+#include "dawn/common/MutexProtected.h"
 #include "dawn/common/SlabAllocator.h"
 #include "dawn/common/ityp_stack_vec.h"
 #include "dawn/native/BindGroupLayoutInternal.h"
@@ -82,8 +83,8 @@ class BindGroupLayout final : public BindGroupLayoutInternalBase {
 
     SlabAllocator<BindGroup> mBindGroupAllocator;
 
-    StagingDescriptorAllocator* mSamplerAllocator = nullptr;
-    StagingDescriptorAllocator* mViewAllocator = nullptr;
+    MutexProtected<StagingDescriptorAllocator>* mSamplerAllocator = nullptr;
+    MutexProtected<StagingDescriptorAllocator>* mViewAllocator = nullptr;
 };
 
 }  // namespace dawn::native::d3d12
