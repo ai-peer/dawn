@@ -973,7 +973,7 @@ class Impl : public Table {
                           const Source& source,
                           bool is_compound) override;
 
-    CtorOrConv Lookup(resolver::CtorConvIntrinsic type,
+    CtorOrConv Lookup(CtorConv type,
                       const type::Type* template_arg,
                       VectorRef<const type::Type*> args,
                       sem::EvaluationStage earliest_eval_stage,
@@ -1301,7 +1301,7 @@ Table::BinaryOperator Impl::Lookup(core::BinaryOp op,
     };
 }
 
-Table::CtorOrConv Impl::Lookup(resolver::CtorConvIntrinsic type,
+Table::CtorOrConv Impl::Lookup(CtorConv type,
                                const type::Type* template_arg,
                                VectorRef<const type::Type*> args,
                                sem::EvaluationStage earliest_eval_stage,
