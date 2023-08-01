@@ -16,6 +16,75 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e490302d_f92e4d1a",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-01T18:06:57Z",
+      "side": 1,
+      "message": "is it necessary to `useTextureShareGroupANGLE` on initial discovery here?\n\nif not, then we could have `useTextureShareGroupANGLE` be specified by a chained struct on the device descriptor - at [1]",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 5
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dde87e3_4c27cddd",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-01T18:06:57Z",
+      "side": 1,
+      "message": "existing nit: \n\nwe probably need to add similar validation for EGLDisplay. If we\u0027re passing `useTextureShareGroupANGLE` here too (maybe it\u0027s not necessary) then we need to validate it as well. i.e. the GL backend can only discover precisely one tuple of (getProc, display, useTextureShareGroupANGLE)",
+      "range": {
+        "startLine": 117,
+        "startChar": 5,
+        "endLine": 123,
+        "endChar": 5
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b7278b_232cb0fd",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-01T18:06:57Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 318,
+        "startChar": 64,
+        "endLine": 318,
+        "endChar": 98
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
