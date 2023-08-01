@@ -16,6 +16,63 @@
       "message": "PTAL.",
       "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f6b7af_712f2347",
+        "filename": "src/tint/lang/msl/writer/printer/helper_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-01T23:09:08Z",
+      "side": 1,
+      "message": "ubernit: \"@returns the\"",
+      "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71e37597_610924f8",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-01T23:09:08Z",
+      "side": 1,
+      "message": "Could just `TINT_ASSERT_OR_RETURN()`, since the validator ensures that all blocks at least have terminators.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 5
+      },
+      "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d006c0b2_caa090c0",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-01T23:09:08Z",
+      "side": 1,
+      "message": "Nit: \"returns function block\" ? Should that be \"function block\u0027s return\"?",
+      "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
