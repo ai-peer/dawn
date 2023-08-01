@@ -76,7 +76,6 @@
 {% endfor %}
 
 typedef uint32_t {{API}}Flags;
-#define WGPU_BREAKING_CHANGE_BOOL
 typedef uint32_t {{API}}Bool;
 
 {% for type in by_category["object"] %}
