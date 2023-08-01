@@ -33,7 +33,7 @@ TEST_F(MslASTPrinterTest, InvalidProgram) {
 }
 
 TEST_F(MslASTPrinterTest, UnsupportedExtension) {
-    Enable(Source{{12, 34}}, builtin::Extension::kUndefined);
+    Enable(Source{{12, 34}}, core::Extension::kUndefined);
 
     ASTPrinter& gen = Build();
 
@@ -66,7 +66,7 @@ TEST_F(MslASTPrinterTest, HasInvariantAttribute_True) {
     auto* out = Structure("Out", Vector{
                                      Member("pos", ty.vec4<f32>(),
                                             Vector{
-                                                Builtin(builtin::BuiltinValue::kPosition),
+                                                Builtin(core::BuiltinValue::kPosition),
                                                 Invariant(),
                                             }),
                                  });
@@ -104,7 +104,7 @@ TEST_F(MslASTPrinterTest, HasInvariantAttribute_False) {
     auto* out = Structure("Out", Vector{
                                      Member("pos", ty.vec4<f32>(),
                                             Vector{
-                                                Builtin(builtin::BuiltinValue::kPosition),
+                                                Builtin(core::BuiltinValue::kPosition),
                                             }),
                                  });
     Func("vert_main", tint::Empty, ty.Of(out), Vector{Return(Call(ty.Of(out)))},
@@ -131,7 +131,7 @@ vertex Out vert_main() {
 }
 
 TEST_F(MslASTPrinterTest, WorkgroupMatrix) {
-    GlobalVar("m", ty.mat2x2<f32>(), builtin::AddressSpace::kWorkgroup);
+    GlobalVar("m", ty.mat2x2<f32>(), core::AddressSpace::kWorkgroup);
     Func("comp_main", tint::Empty, ty.void_(), Vector{Decl(Let("x", Expr("m")))},
          Vector{
              Stage(ast::PipelineStage::kCompute),
@@ -171,7 +171,7 @@ kernel void comp_main(threadgroup tint_symbol_3* tint_symbol_2 [[threadgroup(0)]
 }
 
 TEST_F(MslASTPrinterTest, WorkgroupMatrixInArray) {
-    GlobalVar("m", ty.array(ty.mat2x2<f32>(), 4_i), builtin::AddressSpace::kWorkgroup);
+    GlobalVar("m", ty.array(ty.mat2x2<f32>(), 4_i), core::AddressSpace::kWorkgroup);
     Func("comp_main", tint::Empty, ty.void_(), Vector{Decl(Let("x", Expr("m")))},
          Vector{
              Stage(ast::PipelineStage::kCompute),
@@ -232,7 +232,7 @@ TEST_F(MslASTPrinterTest, WorkgroupMatrixInStruct) {
     Structure("S2", Vector{
                         Member("s", ty("S1")),
                     });
-    GlobalVar("s", ty("S2"), builtin::AddressSpace::kWorkgroup);
+    GlobalVar("s", ty("S2"), core::AddressSpace::kWorkgroup);
     Func("comp_main", tint::Empty, ty.void_(), Vector{Decl(Let("x", Expr("s")))},
          Vector{
              Stage(ast::PipelineStage::kCompute),
@@ -282,15 +282,15 @@ kernel void comp_main(threadgroup tint_symbol_4* tint_symbol_3 [[threadgroup(0)]
 }
 
 TEST_F(MslASTPrinterTest, WorkgroupMatrix_Multiples) {
-    GlobalVar("m1", ty.mat2x2<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m2", ty.mat2x3<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m3", ty.mat2x4<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m4", ty.mat3x2<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m5", ty.mat3x3<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m6", ty.mat3x4<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m7", ty.mat4x2<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m8", ty.mat4x3<f32>(), builtin::AddressSpace::kWorkgroup);
-    GlobalVar("m9", ty.mat4x4<f32>(), builtin::AddressSpace::kWorkgroup);
+    GlobalVar("m1", ty.mat2x2<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m2", ty.mat2x3<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m3", ty.mat2x4<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m4", ty.mat3x2<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m5", ty.mat3x3<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m6", ty.mat3x4<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m7", ty.mat4x2<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m8", ty.mat4x3<f32>(), core::AddressSpace::kWorkgroup);
+    GlobalVar("m9", ty.mat4x4<f32>(), core::AddressSpace::kWorkgroup);
     Func("main1", tint::Empty, ty.void_(),
          Vector{
              Decl(Let("a1", Expr("m1"))),

@@ -21,8 +21,8 @@
 namespace tint::ir::transform {
 namespace {
 
-using namespace tint::builtin::fluent_types;  // NOLINT
-using namespace tint::number_suffixes;        // NOLINT
+using namespace tint::core::fluent_types;  // NOLINT
+using namespace tint::number_suffixes;     // NOLINT
 
 using IR_ExpandImplicitSplatsTest = TransformTest;
 
@@ -639,7 +639,7 @@ TEST_F(IR_ExpandImplicitSplatsTest, Mix_VectorOperands_ScalarFactor) {
     func->SetParams({arg1, arg2, factor});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.vec4<f32>(), builtin::Function::kMix, arg1, arg2, factor);
+        auto* result = b.Call(ty.vec4<f32>(), core::Function::kMix, arg1, arg2, factor);
         b.Return(func, result);
     });
 
