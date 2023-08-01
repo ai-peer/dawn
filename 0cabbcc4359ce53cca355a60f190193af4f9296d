@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "660a22da_e31afeab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001221
+      },
+      "writtenOn": "2023-08-01T14:55:44Z",
+      "side": 1,
+      "message": "PTAL, sending to you due to you handling https://chromium-review.googlesource.com/c/angle/angle/+/4698494.",
+      "revId": "0cabbcc4359ce53cca355a60f190193af4f9296d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
