@@ -72,11 +72,11 @@ void MutationChangeUnaryOperator::Apply(const NodeIdMap& node_id_map,
 
     const ast::UnaryOpExpression* cloned_replacement;
     switch (static_cast<ast::UnaryOp>(message_.new_operator())) {
-        case ast::UnaryOp::kComplement:
+        case core::UnaryOp::kComplement:
             cloned_replacement =
                 clone_context.dst->Complement(clone_context.Clone(unary_expr_node->expr));
             break;
-        case ast::UnaryOp::kNegation:
+        case core::UnaryOp::kNegation:
             cloned_replacement =
                 clone_context.dst->Negation(clone_context.Clone(unary_expr_node->expr));
             break;
@@ -97,11 +97,11 @@ protobufs::Mutation MutationChangeUnaryOperator::ToMessage() const {
 }
 
 ast::UnaryOp MutationChangeUnaryOperator::ToggleOperator(const ast::UnaryOp& original_op) {
-    if (original_op == ast::UnaryOp::kComplement) {
-        return ast::UnaryOp::kNegation;
+    if (original_op == core::UnaryOp::kComplement) {
+        return core::UnaryOp::kNegation;
     }
-    assert(original_op == ast::UnaryOp::kNegation && "Unexpected operator.");
-    return ast::UnaryOp::kComplement;
+    assert(original_op == core::UnaryOp::kNegation && "Unexpected operator.");
+    return core::UnaryOp::kComplement;
 }
 
 }  // namespace tint::fuzzers::ast_fuzzer
