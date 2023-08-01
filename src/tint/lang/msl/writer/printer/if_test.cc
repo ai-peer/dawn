@@ -171,7 +171,7 @@ void foo() {
 )");
 }
 
-TEST_F(MslPrinterTest, DISABLED_IfWithMultiPhiReturn1) {
+TEST_F(MslPrinterTest, IfWithMultiPhiReturn1) {
     auto* func = b.Function("foo", ty.i32());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
@@ -197,14 +197,14 @@ int foo() {
     tint_symbol_1 = true;
   } else {
     tint_symbol = 20;
-    tint_symbol_1 = true;
+    tint_symbol_1 = false;
   }
   return tint_symbol;
 }
 )");
 }
 
-TEST_F(MslPrinterTest, DISABLED_IfWithMultiPhiReturn2) {
+TEST_F(MslPrinterTest, IfWithMultiPhiReturn2) {
     auto* func = b.Function("foo", ty.bool_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
@@ -230,7 +230,7 @@ bool foo() {
     tint_symbol_1 = true;
   } else {
     tint_symbol = 20;
-    tint_symbol_1 = true;
+    tint_symbol_1 = false;
   }
   return tint_symbol_1;
 }
