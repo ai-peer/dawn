@@ -18,13 +18,13 @@
 
 #include "src/tint/lang/core/ir/transform/helper_test.h"
 
-namespace tint::ir::transform {
+namespace tint::spirv::writer::raise {
 namespace {
 
 using namespace tint::builtin::fluent_types;  // NOLINT
 using namespace tint::number_suffixes;        // NOLINT
 
-using IR_ExpandImplicitSplatsTest = TransformTest;
+using IR_ExpandImplicitSplatsTest = ir::transform::TransformTest;
 
 TEST_F(IR_ExpandImplicitSplatsTest, NoModify_Construct_VectorIdentity) {
     auto* vector = b.FunctionParam("vector", ty.vec2<i32>());
@@ -669,4 +669,4 @@ TEST_F(IR_ExpandImplicitSplatsTest, Mix_VectorOperands_ScalarFactor) {
 }
 
 }  // namespace
-}  // namespace tint::ir::transform
+}  // namespace tint::spirv::writer::raise

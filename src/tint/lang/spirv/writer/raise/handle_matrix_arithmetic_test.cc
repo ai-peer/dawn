@@ -19,13 +19,13 @@
 #include "src/tint/lang/core/ir/transform/helper_test.h"
 #include "src/tint/lang/core/type/matrix.h"
 
-namespace tint::ir::transform {
+namespace tint::spirv::writer::raise {
 namespace {
 
 using namespace tint::builtin::fluent_types;  // NOLINT
 using namespace tint::number_suffixes;        // NOLINT
 
-using IR_HandleMatrixArithmeticTest = TransformTest;
+using IR_HandleMatrixArithmeticTest = ir::transform::TransformTest;
 
 TEST_F(IR_HandleMatrixArithmeticTest, Add_Mat2x3f) {
     auto* arg1 = b.FunctionParam("arg1", ty.mat2x3<f32>());
@@ -571,4 +571,4 @@ TEST_F(IR_HandleMatrixArithmeticTest, Convert_Mat2x2_F16_to_F32) {
 }
 
 }  // namespace
-}  // namespace tint::ir::transform
+}  // namespace tint::spirv::writer::raise
