@@ -67,6 +67,11 @@ namespace {{native_namespace}} {
                     //* Align the first member after ChainedStruct to match the C struct layout.
                     //* It has to be aligned both to its natural and ChainedStruct's alignment.
                     alignas({{namespace}}::{{as_cppType(type.name)}}::kFirstMemberAlignment) {{member_declaration}};
+                {% elif member.type.name.get() == "bool" %}
+                    //* Special case for bool types. Instead of using the C typedef, we use a bit
+                    //* field that matches the size but is a bool so that we can easily translate
+                    //* between the types while keeping all size alignments correct.
+                    bool {{as_varName(member.name)}} : 32 {{render_cpp_default_value(member)}};
                 {% else %}
                     {{member_declaration}};
                 {% endif %}

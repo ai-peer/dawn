@@ -51,8 +51,14 @@ namespace {{native_namespace}} {
         {% endif %}
         {% for member in type.members %}
             {% set memberName = member.name.camelCase() %}
-            static_assert(offsetof({{CppType}}, {{memberName}}) == offsetof({{CType}}, {{memberName}}),
-                    "offsetof mismatch for {{CppType}}::{{memberName}}");
+            //* For non-bool types, we assert the offsets. For bool types, we cannot assert the
+            //* offsets directly because we are using bit-fields to emulate. The assertion of the
+            //* offsets of other members along with the assertion of the type size should guarantee
+            //* the offset of bools.
+            {% if not member.type.name.get() == "bool" %}
+                static_assert(offsetof({{CppType}}, {{memberName}}) == offsetof({{CType}}, {{memberName}}),
+                        "offsetof mismatch for {{CppType}}::{{memberName}}");
+            {% endif %}
         {% endfor %}
 
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
