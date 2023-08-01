@@ -18,7 +18,7 @@
 #include <iostream>
 #include <string>
 
-#include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/validator.h"
 #include "src/tint/lang/msl/writer/printer/printer.h"

@@ -16,8 +16,13 @@
 
 #include "src/tint/lang/core/constant/composite.h"
 #include "src/tint/lang/core/constant/splat.h"
+#include "src/tint/lang/core/ir/binary.h"
 #include "src/tint/lang/core/ir/constant.h"
+#include "src/tint/lang/core/ir/let.h"
+#include "src/tint/lang/core/ir/multi_in_block.h"
+#include "src/tint/lang/core/ir/return.h"
 #include "src/tint/lang/core/ir/validator.h"
+#include "src/tint/lang/core/ir/var.h"
 #include "src/tint/lang/core/type/array.h"
 #include "src/tint/lang/core/type/atomic.h"
 #include "src/tint/lang/core/type/bool.h"
@@ -37,8 +42,10 @@
 #include "src/tint/lang/core/type/vector.h"
 #include "src/tint/lang/core/type/void.h"
 #include "src/tint/lang/msl/writer/printer_support.h"
+#include "src/tint/utils/containers/reverse.h"
 #include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/rtti/switch.h"
+#include "src/tint/utils/text/string_stream.h"
 
 namespace tint::msl::writer {
 namespace {
@@ -96,15 +103,6 @@ std::string Printer::Result() const {
     return ss.str();
 }
 
-void Printer::EmitFunction(ir::Function* func) {
-    {
-        auto out = Line();
-        EmitType(out, func->ReturnType());
-        out << " " << ir_->NameOf(func).Name() << "() {";
-    }
-    Line() << "}";
-}
-
 const std::string& Printer::ArrayTemplateName() {
     if (!array_template_name_.empty()) {
         return array_template_name_;
@@ -130,6 +128,138 @@ const std::string& Printer::ArrayTemplateName() {
     Line();
 
     return array_template_name_;
+}
+
+void Printer::EmitFunction(ir::Function* func) {
+    {
+        auto out = Line();
+
+        // TODO(dsinclair): Emit function stage if any
+        // TODO(dsinclair): Handle return type attributes
+
+        EmitType(out, func->ReturnType());
+        out << " " << ir_->NameOf(func).Name() << "() {";
+
+        // TODO(dsinclair): Emit Function parameters
+    }
+    EmitBlock(func->Block());
+
+    Line() << "}";
+}
+
+void Printer::EmitBlock(ir::Block* block) {
+    if (block->IsEmpty()) {
+        Line() << "/* unreachable */";
+        return;
+    }
+
+    if (block->As<ir::MultiInBlock>()) {
+        // TODO(dsinclair): Emit variables to used by the PHIs.
+    }
+
+    MarkInlinable(block);
+    EmitBlockInstructions(block);
+}
+
+void Printer::EmitBlockInstructions(ir::Block* block) {
+    for (auto* inst : *block) {
+        Switch(
+            inst,                                   //
+            [&](ir::Binary* b) { EmitBinary(b); },  //
+            [&](ir::Let* l) { EmitLet(l); },        //
+            [&](ir::Var* l) { EmitVar(l); },        //
+            [&](ir::Return* r) { EmitReturn(r); },  //
+            [&](Default) { TINT_ICE() << "unimplemented instruction: " << inst->TypeInfo().name; });
+    }
+}
+
+void Printer::EmitVar(ir::Var* var) {
+    auto name = ir_->NameOf(var);
+
+    auto out = Line();
+    EmitType(out, var->Result()->Type());
+    out << " " << name.Name();
+    if (var->Initializer()) {
+        out << " = " << Expr(var->Initializer(), PtrKind::kPtr);
+    }
+    out << ";";
+
+    Bind(var->Result(), name, PtrKind::kPtr);
+}
+
+void Printer::EmitLet(ir::Let* let) {
+    auto name = ir_->NameOf(let);
+    if (name.Name().empty()) {
+        name = ir_->symbols.New("v");
+    }
+
+    auto out = Line();
+    EmitType(out, let->Result()->Type());
+    out << " " << name.Name() << " = " << Expr(let->Value(), PtrKind::kPtr) << ";";
+    Bind(let->Result(), name, PtrKind::kPtr);
+}
+
+void Printer::EmitReturn(ir::Return* r) {
+    auto out = Line();
+
+    out << "return";
+    if (!r->Args().IsEmpty()) {
+        out << " " << Expr(r->Args().Front());
+    }
+    out << ";";
+}
+
+void Printer::EmitBinary(ir::Binary* b) {
+    if (b->Kind() == ir::Binary::Kind::kEqual) {
+        auto* rhs = b->RHS()->As<ir::Constant>();
+        if (rhs && rhs->Type()->Is<type::Bool>() && rhs->Value()->ValueAs<bool>() == false) {
+            // expr == false
+            Bind(b->Result(), "!(" + Expr(b->LHS()) + ")");
+            return;
+        }
+    }
+
+    auto kind = [&] {
+        switch (b->Kind()) {
+            case ir::Binary::Kind::kAdd:
+                return "+";
+            case ir::Binary::Kind::kSubtract:
+                return "-";
+            case ir::Binary::Kind::kMultiply:
+                return "*";
+            case ir::Binary::Kind::kDivide:
+                return "/";
+            case ir::Binary::Kind::kModulo:
+                return "%";
+            case ir::Binary::Kind::kAnd:
+                return "&";
+            case ir::Binary::Kind::kOr:
+                return "|";
+            case ir::Binary::Kind::kXor:
+                return "^";
+            case ir::Binary::Kind::kEqual:
+                return "==";
+            case ir::Binary::Kind::kNotEqual:
+                return "!=";
+            case ir::Binary::Kind::kLessThan:
+                return "<";
+            case ir::Binary::Kind::kGreaterThan:
+                return ">";
+            case ir::Binary::Kind::kLessThanEqual:
+                return "<=";
+            case ir::Binary::Kind::kGreaterThanEqual:
+                return ">=";
+            case ir::Binary::Kind::kShiftLeft:
+                return "<<";
+            case ir::Binary::Kind::kShiftRight:
+                return ">>";
+        }
+    };
+
+    StringStream str;
+    str << "(" << Expr(b->LHS()) << " " << kind() << " " + Expr(b->RHS()) << ")";
+
+    Bind(b->Result(), str.str());
 }
 
 void Printer::EmitAddressSpace(StringStream& out, builtin::AddressSpace sc) {
@@ -308,10 +438,10 @@ void Printer::EmitStructType(const type::Struct* str) {
         return;
     }
 
-    // This does not append directly to the preamble because a struct may require other structs, or
-    // the array template, to get emitted before it. So, the struct emits into a temporary text
-    // buffer, then anything it depends on will emit to the preamble first, and then it copies the
-    // text buffer into the preamble.
+    // This does not append directly to the preamble because a struct may require other structs,
+    // or the array template, to get emitted before it. So, the struct emits into a temporary
+    // text buffer, then anything it depends on will emit to the preamble first, and then it
+    // copies the text buffer into the preamble.
     TextBuffer str_buf;
     Line(&str_buf) << "struct " << StructName(str) << " {";
 
@@ -514,6 +644,185 @@ void Printer::EmitConstant(StringStream& out, const constant::Value* c) {
 
 std::string Printer::UniqueIdentifier(const std::string& prefix /* = "" */) {
     return ir_->symbols.New(prefix).Name();
+}
+
+TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
+
+std::string Printer::Expr(ir::Value* value, PtrKind want_ptr_kind) {
+    using ExprAndPtrKind = std::pair<std::string, PtrKind>;
+
+    auto [expr, got_ptr_kind] = tint::Switch(
+        value,
+        [&](ir::Constant* c) -> ExprAndPtrKind {
+            StringStream str;
+            EmitConstant(str, c);
+            return {str.str(), PtrKind::kRef};
+        },
+        [&](Default) -> ExprAndPtrKind {
+            auto lookup = bindings_.Find(value);
+            if (TINT_UNLIKELY(!lookup)) {
+                TINT_ICE() << "Expr(" << (value ? value->TypeInfo().name : "null")
+                           << ") value has no expression";
+                return {};
+            }
+            return std::visit(
+                [&](auto&& got) -> ExprAndPtrKind {
+                    using T = std::decay_t<decltype(got)>;
+
+                    if constexpr (std::is_same_v<T, VariableValue>) {
+                        return {got.name.Name(), got.ptr_kind};
+                    }
+
+                    if constexpr (std::is_same_v<T, InlinedValue>) {
+                        // Single use (inlined) expression.
+                        // Mark the bindings_ map entry as consumed.
+                        *lookup = ConsumedValue{};
+                        return {got.expr, got.ptr_kind};
+                    }
+
+                    if constexpr (std::is_same_v<T, ConsumedValue>) {
+                        TINT_ICE() << "Expr(" << value->TypeInfo().name
+                                   << ") called twice on the same value";
+                    } else {
+                        TINT_ICE() << "Expr(" << value->TypeInfo().name << ") has unhandled value";
+                    }
+                    return {};
+                },
+                *lookup);
+        });
+
+    if (expr.empty()) {
+        return "<error>";
+    }
+
+    if (value->Type()->Is<type::Pointer>()) {
+        return ToPtrKind(expr, got_ptr_kind, want_ptr_kind);
+    }
+
+    return expr;
+}
+
+TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
+
+std::string Printer::ToPtrKind(const std::string& in, PtrKind got, PtrKind want) {
+    if (want == PtrKind::kRef && got == PtrKind::kPtr) {
+        return "*(" + in + ")";
+    }
+    if (want == PtrKind::kPtr && got == PtrKind::kRef) {
+        return "&(" + in + ")";
+    }
+    return in;
+}
+
+void Printer::Bind(ir::Value* value, const std::string& expr, PtrKind ptr_kind) {
+    TINT_ASSERT(value);
+
+    if (can_inline_.Remove(value)) {
+        // Value will be inlined at its place of usage.
+        if (TINT_LIKELY(bindings_.Add(value, InlinedValue{expr, ptr_kind}))) {
+            return;
+        }
+    } else {
+        auto mod_name = ir_->NameOf(value);
+        if (value->Usages().IsEmpty() && !mod_name.IsValid()) {
+            // Drop phonies. Technically this should never get here if the phonies removal
+            // transform is executed.
+        } else {
+            if (mod_name.Name().empty()) {
+                mod_name = ir_->symbols.New("v");
+            }
+
+            auto out = Line();
+            EmitType(out, value->Type());
+            out << " " << mod_name.Name() << " = ";
+            if (value->Type()->Is<type::Pointer>()) {
+                out << ToPtrKind(expr, ptr_kind, PtrKind::kPtr);
+            } else {
+                out << expr;
+            }
+
+            Bind(value, mod_name, PtrKind::kPtr);
+        }
+        return;
+    }
+
+    TINT_ICE() << "Bind(" << value->TypeInfo().name << ") called twice for same value";
+}
+
+void Printer::Bind(ir::Value* value, Symbol name, PtrKind ptr_kind) {
+    TINT_ASSERT(value);
+
+    bool added = bindings_.Add(value, VariableValue{name, ptr_kind});
+    if (TINT_UNLIKELY(!added)) {
+        TINT_ICE() << "Bind(" << value->TypeInfo().name << ") called twice for same value";
+    }
+}
+
+void Printer::MarkInlinable(ir::Block* block) {
+    // An ordered list of possibly-inlinable values returned by sequenced instructions that have
+    // not yet been marked-for or ruled-out-for inlining.
+    UniqueVector<ir::Value*, 32> pending_resolution;
+
+    // Walk the instructions of the block starting with the first.
+    for (auto* inst : *block) {
+        // Is the instruction sequenced?
+        bool sequenced = inst->Sequenced();
+
+        // Walk the instruction's operands starting with the right-most.
+        auto operands = inst->Operands();
+        for (auto* operand : tint::Reverse(operands)) {
+            if (!pending_resolution.Contains(operand)) {
+                continue;
+            }
+            // Operand is in 'pending_resolution'
+
+            if (pending_resolution.TryPop(operand)) {
+                // Operand was the last sequenced value to be added to 'pending_resolution'
+                // This operand can be inlined as it does not change the sequencing order.
+                can_inline_.Add(operand);
+                sequenced = true;  // Inherit the 'sequenced' flag from the inlined value
+            } else {
+                // Operand was in 'pending_resolution', but was not the last sequenced value to
+                // be added. Inlining this operand would break the sequencing order, so must be
+                // emitted as a let. All preceding pending values must also be emitted as a
+                // let to prevent them being inlined and breaking the sequencing order.
+                // Remove all the values in pending upto and including 'operand'.
+                for (size_t i = 0; i < pending_resolution.Length(); i++) {
+                    if (pending_resolution[i] == operand) {
+                        pending_resolution.Erase(0, i + 1);
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (inst->Results().Length() == 1) {
+            // Instruction has a single result value.
+            // Check to see if the result of this instruction is a candidate for inlining.
+            auto* result = inst->Result();
+            // Only values with a single usage can be inlined.
+            // Named values are not inlined, as we want to emit the name for a let.
+            if (result->Usages().Count() == 1 && !ir_->NameOf(result).IsValid()) {
+                if (sequenced) {
+                    // The value comes from a sequenced instruction. We need to ensure
+                    // instruction ordering so add it to 'pending_resolution'.
+                    pending_resolution.Add(result);
+                } else {
+                    // The value comes from an unsequenced instruction. Just inline.
+                    can_inline_.Add(result);
+                }
+                continue;
+            }
+        }
+
+        // At this point the value has been ruled out for inlining.
+
+        if (sequenced) {
+            // A sequenced instruction with zero or multiple return values cannot be inlined.
+            // All preceding sequenced instructions cannot be inlined past this point.
+            pending_resolution.Clear();
+        }
+    }
 }
 
 }  // namespace tint::msl::writer

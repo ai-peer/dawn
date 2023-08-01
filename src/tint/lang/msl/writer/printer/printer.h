@@ -24,6 +24,14 @@
 #include "src/tint/utils/text/string_stream.h"
 #include "src/tint/utils/text/text_generator.h"
 
+// Forward declarations
+namespace tint::ir {
+class Binary;
+class Let;
+class Return;
+class Var;
+}  // namespace tint::ir
+
 namespace tint::msl::writer {
 
 /// Implementation class for the MSL generator
@@ -43,6 +51,27 @@ class Printer : public tint::TextGenerator {
     /// Emit the function
     /// @param func the function to emit
     void EmitFunction(ir::Function* func);
+
+    /// Emit a block
+    /// @param block the block to emit
+    void EmitBlock(ir::Block* block);
+
+    /// Emit the instructions in a block
+    /// @param block the block with the instructions to emit
+    void EmitBlockInstructions(ir::Block* block);
+
+    /// Emit a binary instruction
+    /// @param b the binary instruction
+    void EmitBinary(ir::Binary* b);
+    /// Emit a var instruction
+    /// @param var the var instruction
+    void EmitVar(ir::Var* var);
+    /// Emit a let instruction
+    /// @param l the let instruction
+    void EmitLet(ir::Let* l);
+    /// Emit a return instruction
+    /// @param r the return instruction
+    void EmitReturn(ir::Return* r);
 
     /// Emit a type
     /// @param out the stream to emit too
@@ -113,6 +142,65 @@ class Printer : public tint::TextGenerator {
     std::string invariant_define_name_;
 
     std::unordered_set<const type::Struct*> emitted_structs_;
+
+    /// The representation for an IR pointer type
+    enum class PtrKind {
+        kPtr,  // IR pointer is represented in a pointer
+        kRef,  // IR pointer is represented in a reference
+    };
+
+    /// The structure for a value held by a 'let', 'var' or parameter.
+    struct VariableValue {
+        Symbol name;  // Name of the variable
+        PtrKind ptr_kind = PtrKind::kRef;
+    };
+
+    /// The structure for an inlined value
+    struct InlinedValue {
+        std::string expr;
+        PtrKind ptr_kind = PtrKind::kRef;
+    };
+
+    /// Empty struct used as a sentinel value to indicate that an string expression has been
+    /// consumed by its single place of usage. Attempting to use this value a second time should
+    /// result in an ICE.
+    struct ConsumedValue {};
+
+    using ValueBinding = std::variant<VariableValue, InlinedValue, ConsumedValue>;
+
+    /// IR values to their representation
+    Hashmap<ir::Value*, ValueBinding, 32> bindings_;
+
+    /// Values that can be inlined.
+    Hashset<ir::Value*, 64> can_inline_;
+
+    /// Returns the expression for the given value
+    /// @param value the value to lookup
+    /// @param want_ptr_kind the pointer information for the return
+    /// @returns the string expression
+    std::string Expr(ir::Value* value, PtrKind want_ptr_kind = PtrKind::kRef);
+
+    /// Returns the given covnerted to the given pointer kind
+    /// @param in the input expression
+    /// @param got the pointer kind we have
+    /// @param want the pointer kind we want
+    std::string ToPtrKind(const std::string& in, PtrKind got, PtrKind want);
+
+    /// Associates an IR value with a result expression
+    /// @param value the IR value
+    /// @param expr the result expression
+    /// @param ptr_kind defines how pointer values are represented by the expression
+    void Bind(ir::Value* value, const std::string& expr, PtrKind ptr_kind = PtrKind::kRef);
+
+    /// Associates an IR value the 'var', 'let' or parameter of the given name
+    /// @param value the IR value
+    /// @param name the name for the value
+    /// @param ptr_kind defines how pointer values are represented by @p expr.
+    void Bind(ir::Value* value, Symbol name, PtrKind ptr_kind);
+
+    /// Marks instructions in a block for inlineability
+    /// @param block the block
+    void MarkInlinable(ir::Block* block);
 };
 
 }  // namespace tint::msl::writer
