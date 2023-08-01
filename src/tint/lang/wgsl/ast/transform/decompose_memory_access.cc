@@ -23,10 +23,10 @@
 #include "src/tint/lang/core/type/array.h"
 #include "src/tint/lang/core/type/atomic.h"
 #include "src/tint/lang/core/type/reference.h"
+#include "src/tint/lang/core/unary_op.h"
 #include "src/tint/lang/wgsl/ast/assignment_statement.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
 #include "src/tint/lang/wgsl/ast/disable_validation_attribute.h"
-#include "src/tint/lang/wgsl/ast/unary_op.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
@@ -585,8 +585,8 @@ struct DecomposeMemoryAccess::State {
                             TINT_ICE() << "unexpected non-constant array count";
                             arr_cnt = 1;
                         }
-                        auto* for_cond = b.create<BinaryExpression>(core::BinaryOp::kLessThan, b.Expr(i),
-                                                                    b.Expr(u32(arr_cnt.value())));
+                        auto* for_cond = b.create<BinaryExpression>(
+                            core::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_cnt.value())));
                         auto* for_cont = b.Assign(i, b.Add(i, 1_u));
                         auto* arr_el = b.IndexAccessor(array, i);
                         auto* el_offset = b.Add(b.Expr("offset"), b.Mul(i, u32(arr_ty->Stride())));
@@ -896,7 +896,7 @@ Transform::ApplyResult DecomposeMemoryAccess::Apply(const Program* src,
         }
 
         if (auto* op = node->As<UnaryOpExpression>()) {
-            if (op->op == UnaryOp::kAddressOf) {
+            if (op->op == core::UnaryOp::kAddressOf) {
                 // &X
                 if (auto access = state.TakeAccess(op->expr)) {
                     // HLSL does not support pointers, so just take the access from the

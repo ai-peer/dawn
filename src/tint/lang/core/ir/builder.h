@@ -351,8 +351,7 @@ class Builder {
     /// @returns the operation
     template <typename LHS, typename RHS>
     ir::Binary* Equal(const type::Type* type, LHS&& lhs, RHS&& rhs) {
-        return Binary(core::BinaryOp::kEqual, type, std::forward<LHS>(lhs),
-                      std::forward<RHS>(rhs));
+        return Binary(core::BinaryOp::kEqual, type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
     /// Creates an NotEqual operation
