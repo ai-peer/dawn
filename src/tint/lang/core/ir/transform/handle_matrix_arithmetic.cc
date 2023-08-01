@@ -70,7 +70,7 @@ void Run(ir::Module* ir) {
         };
 
         // Helper to replace the instruction with a column-wise operation.
-        auto column_wise = [&](enum Binary::Kind op) {
+        auto column_wise = [&](core::BinaryOp op) {
             auto* mat = ty->As<type::Matrix>();
             Vector<Value*, 4> args;
             for (uint32_t col = 0; col < mat->columns(); col++) {
@@ -85,13 +85,13 @@ void Run(ir::Module* ir) {
         };
 
         switch (binary->Kind()) {
-            case Binary::Kind::kAdd:
-                column_wise(Binary::Kind::kAdd);
+            case core::BinaryOp::kAdd:
+                column_wise(core::BinaryOp::kAdd);
                 break;
-            case Binary::Kind::kSubtract:
-                column_wise(Binary::Kind::kSubtract);
+            case core::BinaryOp::kSubtract:
+                column_wise(core::BinaryOp::kSubtract);
                 break;
-            case Binary::Kind::kMultiply:
+            case core::BinaryOp::kMultiply:
                 // Select the SPIR-V intrinsic that corresponds to the operation being performed.
                 if (lhs_ty->Is<type::Matrix>()) {
                     if (rhs_ty->Is<type::Scalar>()) {

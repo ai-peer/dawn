@@ -15,6 +15,7 @@
 #ifndef SRC_TINT_LANG_CORE_IR_BINARY_H_
 #define SRC_TINT_LANG_CORE_IR_BINARY_H_
 
+#include "src/tint/lang/core/binary_op.h"
 #include "src/tint/lang/core/ir/operand_instruction.h"
 #include "src/tint/utils/rtti/castable.h"
 
@@ -29,39 +30,16 @@ class Binary : public Castable<Binary, OperandInstruction<2, 1>> {
     /// The offset in Operands() for the RHS
     static constexpr size_t kRhsOperandOffset = 1;
 
-    /// The kind of instruction.
-    enum class Kind {
-        kAdd,
-        kSubtract,
-        kMultiply,
-        kDivide,
-        kModulo,
-
-        kAnd,
-        kOr,
-        kXor,
-
-        kEqual,
-        kNotEqual,
-        kLessThan,
-        kGreaterThan,
-        kLessThanEqual,
-        kGreaterThanEqual,
-
-        kShiftLeft,
-        kShiftRight
-    };
-
     /// Constructor
     /// @param result the result value
     /// @param kind the kind of binary instruction
     /// @param lhs the lhs of the instruction
     /// @param rhs the rhs of the instruction
-    Binary(InstructionResult* result, enum Kind kind, Value* lhs, Value* rhs);
+    Binary(InstructionResult* result, core::BinaryOp kind, Value* lhs, Value* rhs);
     ~Binary() override;
 
     /// @returns the kind of the binary instruction
-    enum Kind Kind() { return kind_; }
+    core::BinaryOp Kind() { return kind_; }
 
     /// @returns the left-hand-side value for the instruction
     Value* LHS() { return operands_[kLhsOperandOffset]; }
@@ -73,7 +51,7 @@ class Binary : public Castable<Binary, OperandInstruction<2, 1>> {
     std::string_view FriendlyName() override { return "binary"; }
 
   private:
-    enum Kind kind_;
+    core::BinaryOp kind_;
 };
 
 }  // namespace tint::ir
