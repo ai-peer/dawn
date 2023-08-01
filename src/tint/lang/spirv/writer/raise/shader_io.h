@@ -24,14 +24,14 @@ namespace tint::ir {
 class Module;
 }
 
-namespace tint::ir::transform {
+namespace tint::spirv::writer::raise {
 
 /// ShaderIOSpirv is a transform that modifies each entry point function's parameters and return
 /// value to prepare them for SPIR-V codegen.
 /// @param module the module to transform
 /// @returns an error string on failure
-Result<SuccessType, std::string> ShaderIOSpirv(Module* module);
+Result<SuccessType, std::string> ShaderIOSpirv(ir::Module* module);
 
-}  // namespace tint::ir::transform
+}  // namespace tint::spirv::writer::raise
 
 #endif  // SRC_TINT_LANG_SPIRV_WRITER_RAISE_SHADER_IO_H_

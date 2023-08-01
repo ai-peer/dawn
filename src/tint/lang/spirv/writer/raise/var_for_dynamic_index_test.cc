@@ -21,13 +21,13 @@
 #include "src/tint/lang/core/type/matrix.h"
 #include "src/tint/lang/core/type/struct.h"
 
-namespace tint::ir::transform {
+namespace tint::spirv::writer::raise {
 namespace {
 
 using namespace tint::builtin::fluent_types;  // NOLINT
 using namespace tint::number_suffixes;        // NOLINT
 
-using IR_VarForDynamicIndexTest = TransformTest;
+using IR_VarForDynamicIndexTest = ir::transform::TransformTest;
 
 TEST_F(IR_VarForDynamicIndexTest, NoModify_ConstantIndex_ArrayValue) {
     auto* arr = b.FunctionParam(ty.array<i32, 4u>());
@@ -418,4 +418,4 @@ TEST_F(IR_VarForDynamicIndexTest, MultipleAccessesFromSameSource_SkipConstantInd
 }
 
 }  // namespace
-}  // namespace tint::ir::transform
+}  // namespace tint::spirv::writer::raise
