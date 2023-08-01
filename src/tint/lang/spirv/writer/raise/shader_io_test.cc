@@ -15,8 +15,8 @@
 #include <utility>
 
 #include "src/tint/lang/core/ir/transform/helper_test.h"
-#include "src/tint/lang/core/ir/transform/shader_io_spirv.h"
 #include "src/tint/lang/core/type/struct.h"
+#include "src/tint/lang/spirv/writer/raise/shader_io.h"
 
 namespace tint::ir::transform {
 namespace {
