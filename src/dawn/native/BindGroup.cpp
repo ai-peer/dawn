@@ -142,7 +142,8 @@ MaybeError ValidateTextureBinding(DeviceBase* device,
                 texture->GetFormat().GetAspectInfo(aspect).supportedSampleTypes;
             DAWN_TRY(ValidateCanUseAs(texture, wgpu::TextureUsage::TextureBinding, mode));
 
-            DAWN_INVALID_IF(texture->IsMultisampledTexture() != bindingInfo.texture.multisampled,
+            DAWN_INVALID_IF(texture->IsMultisampledTexture() !=
+                                static_cast<bool>(bindingInfo.texture.multisampled),
                             "Sample count (%u) of %s doesn't match expectation (multisampled: %d).",
                             texture->GetSampleCount(), texture, bindingInfo.texture.multisampled);
 
