@@ -102,7 +102,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
 
 #if TINT_BUILD_GLSL_WRITER
                 case Writer::kGLSL: {
-                    tint::glsl::writer::Generate(&program, {}, entry_point);
+                    tint::glsl::writer::Generate(&program, {}, entry_point).Move();
                     break;
                 }
 #endif  // TINT_BUILD_GLSL_WRITER
