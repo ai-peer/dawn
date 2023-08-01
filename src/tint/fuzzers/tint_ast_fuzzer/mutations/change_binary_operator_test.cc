@@ -164,23 +164,23 @@ void CheckMutations(const std::string& lhs_type,
            << " b);\n}\n";
 
     const std::vector<core::BinaryOp> all_operators = {core::BinaryOp::kAnd,
-                                                      core::BinaryOp::kOr,
-                                                      core::BinaryOp::kXor,
-                                                      core::BinaryOp::kLogicalAnd,
-                                                      core::BinaryOp::kLogicalOr,
-                                                      core::BinaryOp::kEqual,
-                                                      core::BinaryOp::kNotEqual,
-                                                      core::BinaryOp::kLessThan,
-                                                      core::BinaryOp::kGreaterThan,
-                                                      core::BinaryOp::kLessThanEqual,
-                                                      core::BinaryOp::kGreaterThanEqual,
-                                                      core::BinaryOp::kShiftLeft,
-                                                      core::BinaryOp::kShiftRight,
-                                                      core::BinaryOp::kAdd,
-                                                      core::BinaryOp::kSubtract,
-                                                      core::BinaryOp::kMultiply,
-                                                      core::BinaryOp::kDivide,
-                                                      core::BinaryOp::kModulo};
+                                                       core::BinaryOp::kOr,
+                                                       core::BinaryOp::kXor,
+                                                       core::BinaryOp::kLogicalAnd,
+                                                       core::BinaryOp::kLogicalOr,
+                                                       core::BinaryOp::kEqual,
+                                                       core::BinaryOp::kNotEqual,
+                                                       core::BinaryOp::kLessThan,
+                                                       core::BinaryOp::kGreaterThan,
+                                                       core::BinaryOp::kLessThanEqual,
+                                                       core::BinaryOp::kGreaterThanEqual,
+                                                       core::BinaryOp::kShiftLeft,
+                                                       core::BinaryOp::kShiftRight,
+                                                       core::BinaryOp::kAdd,
+                                                       core::BinaryOp::kSubtract,
+                                                       core::BinaryOp::kMultiply,
+                                                       core::BinaryOp::kDivide,
+                                                       core::BinaryOp::kModulo};
 
     for (auto new_operator : all_operators) {
         Source::File file("test.wgsl", shader.str());
@@ -233,17 +233,17 @@ TEST(ChangeBinaryOperatorTest, AddSubtract) {
         const core::BinaryOp other_op =
             op == core::BinaryOp::kAdd ? core::BinaryOp::kSubtract : core::BinaryOp::kAdd;
         for (std::string type : {"i32", "vec2<i32>", "vec3<i32>", "vec4<i32>"}) {
-            CheckMutations(
-                type, type, type, op,
-                {other_op, core::BinaryOp::kMultiply, core::BinaryOp::kDivide, core::BinaryOp::kModulo,
-                 core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor});
+            CheckMutations(type, type, type, op,
+                           {other_op, core::BinaryOp::kMultiply, core::BinaryOp::kDivide,
+                            core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+                            core::BinaryOp::kXor});
         }
         for (std::string type : {"u32", "vec2<u32>", "vec3<u32>", "vec4<u32>"}) {
             CheckMutations(
                 type, type, type, op,
-                {other_op, core::BinaryOp::kMultiply, core::BinaryOp::kDivide, core::BinaryOp::kModulo,
-                 core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor,
-                 core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
+                {other_op, core::BinaryOp::kMultiply, core::BinaryOp::kDivide,
+                 core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+                 core::BinaryOp::kXor, core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
         }
         for (std::string type : {"f32", "vec2<f32>", "vec3<f32>", "vec4<f32>"}) {
             CheckMutations(type, type, type, op,
@@ -291,17 +291,17 @@ TEST(ChangeBinaryOperatorTest, AddSubtract) {
 
 TEST(ChangeBinaryOperatorTest, Mul) {
     for (std::string type : {"i32", "vec2<i32>", "vec3<i32>", "vec4<i32>"}) {
-        CheckMutations(
-            type, type, type, core::BinaryOp::kMultiply,
-            {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kDivide,
-             core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor});
+        CheckMutations(type, type, type, core::BinaryOp::kMultiply,
+                       {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kDivide,
+                        core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+                        core::BinaryOp::kXor});
     }
     for (std::string type : {"u32", "vec2<u32>", "vec3<u32>", "vec4<u32>"}) {
         CheckMutations(
             type, type, type, core::BinaryOp::kMultiply,
             {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kDivide,
-             core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor,
-             core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
+             core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+             core::BinaryOp::kXor, core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
     }
     for (std::string type : {"f32", "vec2<f32>", "vec3<f32>", "vec4<f32>"}) {
         CheckMutations(type, type, type, core::BinaryOp::kMultiply,
@@ -337,7 +337,8 @@ TEST(ChangeBinaryOperatorTest, Mul) {
     }
     for (std::string square_matrix_type : {"mat2x2<f32>", "mat3x3<f32>", "mat4x4<f32>"}) {
         CheckMutations(square_matrix_type, square_matrix_type, square_matrix_type,
-                       core::BinaryOp::kMultiply, {core::BinaryOp::kAdd, core::BinaryOp::kSubtract});
+                       core::BinaryOp::kMultiply,
+                       {core::BinaryOp::kAdd, core::BinaryOp::kSubtract});
     }
 
     CheckMutations("vec2<f32>", "mat2x2<f32>", "vec2<f32>", core::BinaryOp::kMultiply, {});
@@ -397,17 +398,17 @@ TEST(ChangeBinaryOperatorTest, Mul) {
 
 TEST(ChangeBinaryOperatorTest, DivideAndModulo) {
     for (std::string type : {"i32", "vec2<i32>", "vec3<i32>", "vec4<i32>"}) {
-        CheckMutations(
-            type, type, type, core::BinaryOp::kDivide,
-            {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kMultiply,
-             core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor});
+        CheckMutations(type, type, type, core::BinaryOp::kDivide,
+                       {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kMultiply,
+                        core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+                        core::BinaryOp::kXor});
     }
     for (std::string type : {"u32", "vec2<u32>", "vec3<u32>", "vec4<u32>"}) {
         CheckMutations(
             type, type, type, core::BinaryOp::kDivide,
             {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kMultiply,
-             core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor,
-             core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
+             core::BinaryOp::kModulo, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+             core::BinaryOp::kXor, core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
     }
     for (std::string type : {"f32", "vec2<f32>", "vec3<f32>", "vec4<f32>"}) {
         CheckMutations(type, type, type, core::BinaryOp::kDivide,
@@ -442,17 +443,17 @@ TEST(ChangeBinaryOperatorTest, DivideAndModulo) {
                         core::BinaryOp::kModulo});
     }
     for (std::string type : {"i32", "vec2<i32>", "vec3<i32>", "vec4<i32>"}) {
-        CheckMutations(
-            type, type, type, core::BinaryOp::kModulo,
-            {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kMultiply,
-             core::BinaryOp::kDivide, core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor});
+        CheckMutations(type, type, type, core::BinaryOp::kModulo,
+                       {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kMultiply,
+                        core::BinaryOp::kDivide, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+                        core::BinaryOp::kXor});
     }
     for (std::string type : {"u32", "vec2<u32>", "vec3<u32>", "vec4<u32>"}) {
         CheckMutations(
             type, type, type, core::BinaryOp::kModulo,
             {core::BinaryOp::kAdd, core::BinaryOp::kSubtract, core::BinaryOp::kMultiply,
-             core::BinaryOp::kDivide, core::BinaryOp::kAnd, core::BinaryOp::kOr, core::BinaryOp::kXor,
-             core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
+             core::BinaryOp::kDivide, core::BinaryOp::kAnd, core::BinaryOp::kOr,
+             core::BinaryOp::kXor, core::BinaryOp::kShiftLeft, core::BinaryOp::kShiftRight});
     }
     for (std::string type : {"f32", "vec2<f32>", "vec3<f32>", "vec4<f32>"}) {
         CheckMutations(type, type, type, core::BinaryOp::kModulo,

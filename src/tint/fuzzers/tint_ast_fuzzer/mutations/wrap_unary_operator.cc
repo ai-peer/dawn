@@ -108,20 +108,20 @@ std::vector<ast::UnaryOp> MutationWrapUnaryOperator::GetValidUnaryWrapper(
 
     const auto* expr_type = expr.Type();
     if (expr_type->is_bool_scalar_or_vector()) {
-        return {ast::UnaryOp::kNot};
+        return {core::UnaryOp::kNot};
     }
 
     if (expr_type->is_signed_integer_scalar_or_vector() ||
         expr_type->is_abstract_integer_scalar_or_vector()) {
-        return {ast::UnaryOp::kNegation, ast::UnaryOp::kComplement};
+        return {core::UnaryOp::kNegation, core::UnaryOp::kComplement};
     }
 
     if (expr_type->is_unsigned_integer_scalar_or_vector()) {
-        return {ast::UnaryOp::kComplement};
+        return {core::UnaryOp::kComplement};
     }
 
     if (expr_type->is_float_scalar_or_vector() || expr_type->is_abstract_float_scalar_or_vector()) {
-        return {ast::UnaryOp::kNegation};
+        return {core::UnaryOp::kNegation};
     }
 
     return {};

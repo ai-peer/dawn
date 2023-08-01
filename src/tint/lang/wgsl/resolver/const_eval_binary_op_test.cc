@@ -782,7 +782,8 @@ INSTANTIATE_TEST_SUITE_P(
                     AbstractFloatVectorCompareCase{core::BinaryOp::kLessThan, false, true},
                     AbstractFloatVectorCompareCase{core::BinaryOp::kLessThanEqual, false, true},
                     AbstractFloatVectorCompareCase{core::BinaryOp::kGreaterThan, true, false},
-                    AbstractFloatVectorCompareCase{core::BinaryOp::kGreaterThanEqual, true, false}));
+                    AbstractFloatVectorCompareCase{core::BinaryOp::kGreaterThanEqual, true,
+                                                   false}));
 
 static std::vector<Case> OpLogicalAndCases() {
     return {

@@ -81,17 +81,17 @@ INSTANTIATE_TEST_SUITE_P(
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_U32,
     Arithmetic_Bitwise,
-    testing::Values(
-        BinaryTestCase{kU32, core::BinaryOp::kAdd, "OpIAdd", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kSubtract, "OpISub", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kMultiply, "OpIMul", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kDivide, "OpUDiv", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kModulo, "OpUMod", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kAnd, "OpBitwiseAnd", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kOr, "OpBitwiseOr", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kXor, "OpBitwiseXor", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kShiftLeft, "OpShiftLeftLogical", "uint"},
-        BinaryTestCase{kU32, core::BinaryOp::kShiftRight, "OpShiftRightLogical", "uint"}));
+    testing::Values(BinaryTestCase{kU32, core::BinaryOp::kAdd, "OpIAdd", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kSubtract, "OpISub", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kMultiply, "OpIMul", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kDivide, "OpUDiv", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kModulo, "OpUMod", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kAnd, "OpBitwiseAnd", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kOr, "OpBitwiseOr", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kXor, "OpBitwiseXor", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kShiftLeft, "OpShiftLeftLogical", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kShiftRight, "OpShiftRightLogical",
+                                   "uint"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_F32,
     Arithmetic_Bitwise,
@@ -291,12 +291,11 @@ INSTANTIATE_TEST_SUITE_P(
         BinaryTestCase{kF16, core::BinaryOp::kGreaterThanEqual, "OpFOrdGreaterThanEqual", "bool"},
         BinaryTestCase{kF16, core::BinaryOp::kLessThan, "OpFOrdLessThan", "bool"},
         BinaryTestCase{kF16, core::BinaryOp::kLessThanEqual, "OpFOrdLessThanEqual", "bool"}));
-INSTANTIATE_TEST_SUITE_P(SpirvWriterTest_Binary_Bool,
-                         Comparison,
-                         testing::Values(BinaryTestCase{kBool, core::BinaryOp::kEqual,
-                                                        "OpLogicalEqual", "bool"},
-                                         BinaryTestCase{kBool, core::BinaryOp::kNotEqual,
-                                                        "OpLogicalNotEqual", "bool"}));
+INSTANTIATE_TEST_SUITE_P(
+    SpirvWriterTest_Binary_Bool,
+    Comparison,
+    testing::Values(BinaryTestCase{kBool, core::BinaryOp::kEqual, "OpLogicalEqual", "bool"},
+                    BinaryTestCase{kBool, core::BinaryOp::kNotEqual, "OpLogicalNotEqual", "bool"}));
 
 TEST_F(SpirvWriterTest, Binary_Chain) {
     auto* func = b.Function("foo", ty.void_());

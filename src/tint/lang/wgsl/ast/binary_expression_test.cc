@@ -34,7 +34,8 @@ TEST_F(BinaryExpressionTest, Creation_WithSource) {
     auto* lhs = Expr("lhs");
     auto* rhs = Expr("rhs");
 
-    auto* r = create<BinaryExpression>(Source{Source::Location{20, 2}}, core::BinaryOp::kEqual, lhs, rhs);
+    auto* r =
+        create<BinaryExpression>(Source{Source::Location{20, 2}}, core::BinaryOp::kEqual, lhs, rhs);
     auto src = r->source;
     EXPECT_EQ(src.range.begin.line, 20u);
     EXPECT_EQ(src.range.begin.column, 2u);

@@ -32,23 +32,23 @@ MutationList MutationFinderChangeBinaryOperators::FindMutations(
     // replaces its operator with some other type-compatible operator.
 
     const std::vector<core::BinaryOp> all_binary_operators = {core::BinaryOp::kAnd,
-                                                             core::BinaryOp::kOr,
-                                                             core::BinaryOp::kXor,
-                                                             core::BinaryOp::kLogicalAnd,
-                                                             core::BinaryOp::kLogicalOr,
-                                                             core::BinaryOp::kEqual,
-                                                             core::BinaryOp::kNotEqual,
-                                                             core::BinaryOp::kLessThan,
-                                                             core::BinaryOp::kGreaterThan,
-                                                             core::BinaryOp::kLessThanEqual,
-                                                             core::BinaryOp::kGreaterThanEqual,
-                                                             core::BinaryOp::kShiftLeft,
-                                                             core::BinaryOp::kShiftRight,
-                                                             core::BinaryOp::kAdd,
-                                                             core::BinaryOp::kSubtract,
-                                                             core::BinaryOp::kMultiply,
-                                                             core::BinaryOp::kDivide,
-                                                             core::BinaryOp::kModulo};
+                                                              core::BinaryOp::kOr,
+                                                              core::BinaryOp::kXor,
+                                                              core::BinaryOp::kLogicalAnd,
+                                                              core::BinaryOp::kLogicalOr,
+                                                              core::BinaryOp::kEqual,
+                                                              core::BinaryOp::kNotEqual,
+                                                              core::BinaryOp::kLessThan,
+                                                              core::BinaryOp::kGreaterThan,
+                                                              core::BinaryOp::kLessThanEqual,
+                                                              core::BinaryOp::kGreaterThanEqual,
+                                                              core::BinaryOp::kShiftLeft,
+                                                              core::BinaryOp::kShiftRight,
+                                                              core::BinaryOp::kAdd,
+                                                              core::BinaryOp::kSubtract,
+                                                              core::BinaryOp::kMultiply,
+                                                              core::BinaryOp::kDivide,
+                                                              core::BinaryOp::kModulo};
 
     for (const auto* node : program.ASTNodes().Objects()) {
         const auto* binary_expr = As<ast::BinaryExpression>(node);

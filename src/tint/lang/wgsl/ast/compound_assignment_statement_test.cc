@@ -78,7 +78,8 @@ TEST_F(CompoundAssignmentStatementTest, Assert_DifferentGenerationID_LHS) {
         {
             ProgramBuilder b1;
             ProgramBuilder b2;
-            b1.create<CompoundAssignmentStatement>(b2.Expr("lhs"), b1.Expr("rhs"), core::BinaryOp::kAdd);
+            b1.create<CompoundAssignmentStatement>(b2.Expr("lhs"), b1.Expr("rhs"),
+                                                   core::BinaryOp::kAdd);
         },
         "internal compiler error");
 }
@@ -88,7 +89,8 @@ TEST_F(CompoundAssignmentStatementTest, Assert_DifferentGenerationID_RHS) {
         {
             ProgramBuilder b1;
             ProgramBuilder b2;
-            b1.create<CompoundAssignmentStatement>(b1.Expr("lhs"), b2.Expr("rhs"), core::BinaryOp::kAdd);
+            b1.create<CompoundAssignmentStatement>(b1.Expr("lhs"), b2.Expr("rhs"),
+                                                   core::BinaryOp::kAdd);
         },
         "internal compiler error");
 }
