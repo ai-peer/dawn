@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b7e0ff_f8e3783c",
+        "filename": "src/tint/lang/core/parameter_usage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-01T21:00:13Z",
+      "side": 1,
+      "message": "Why are these before the include guards?",
+      "revId": "bce6577de806b788366b5728518202ca7aa610da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
