@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2334a2f_9e96aa3e",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-01T20:51:09Z",
+      "side": 1,
+      "message": "Good point -- I don\u0027t think we need to do it on initial discovery. I\u0027ve passed false instead.\n\nBut is there a use case for making useTextureShareGroupANGLE a Device thing? Is there a situation where you want to create two devices on the same Adapter, one with texture sharing and one without? Or is it to avoid passing the flag between Adapter and Device?",
+      "parentUuid": "e490302d_f92e4d1a",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 5
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dde87e3_4c27cddd",
         "filename": "src/dawn/native/opengl/BackendGL.cpp",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-01T18:06:57Z",
       "side": 1,
       "message": "existing nit: \n\nwe probably need to add similar validation for EGLDisplay. If we\u0027re passing `useTextureShareGroupANGLE` here too (maybe it\u0027s not necessary) then we need to validate it as well. i.e. the GL backend can only discover precisely one tuple of (getProc, display, useTextureShareGroupANGLE)",
+      "range": {
+        "startLine": 117,
+        "startChar": 5,
+        "endLine": 123,
+        "endChar": 5
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17cb1d40_f6c89403",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-01T20:51:09Z",
+      "side": 1,
+      "message": "Done.\n\n(As a side note, I\u0027m not even sure this is true anymore. Each Device that PhysicalDevice vends knows how to MakeCurrent() now. So perhaps we could vend a new PhysicalDevice each time. Or keep a cache. That would have to be tested, of course.)",
+      "parentUuid": "5dde87e3_4c27cddd",
       "range": {
         "startLine": 117,
         "startChar": 5,
