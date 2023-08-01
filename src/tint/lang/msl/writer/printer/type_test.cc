@@ -28,8 +28,8 @@
 namespace tint::msl::writer {
 namespace {
 
-using namespace tint::builtin::fluent_types;  // NOLINT
-using namespace tint::number_suffixes;        // NOLINT
+using namespace tint::core::fluent_types;  // NOLINT
+using namespace tint::number_suffixes;     // NOLINT
 
 TEST_F(MslPrinterTest, EmitType_Array) {
     generator_.EmitType(generator_.Line(), ty.array<bool, 4>());
@@ -192,7 +192,7 @@ TEST_F(MslPrinterTest, EmitType_Pointer_Const) {
 }
 
 struct MslAddressSpaceData {
-    builtin::AddressSpace space;
+    core::AddressSpace space;
     std::string result;
 };
 inline std::ostream& operator<<(std::ostream& out, MslAddressSpaceData data) {
@@ -206,12 +206,12 @@ TEST_P(MslAddressSpaceTest, Emit) {}
 INSTANTIATE_TEST_SUITE_P(
     MslPrinterTest,
     MslAddressSpaceTest,
-    testing::Values(MslAddressSpaceData{builtin::AddressSpace::kWorkgroup, "threadgroup"},
-                    MslAddressSpaceData{builtin::AddressSpace::kFunction, "thread"},
-                    MslAddressSpaceData{builtin::AddressSpace::kPrivate, "thread"},
-                    MslAddressSpaceData{builtin::AddressSpace::kHandle, "thread"},
-                    MslAddressSpaceData{builtin::AddressSpace::kStorage, "device"},
-                    MslAddressSpaceData{builtin::AddressSpace::kUniform, "constant"}));
+    testing::Values(MslAddressSpaceData{core::AddressSpace::kWorkgroup, "threadgroup"},
+                    MslAddressSpaceData{core::AddressSpace::kFunction, "thread"},
+                    MslAddressSpaceData{core::AddressSpace::kPrivate, "thread"},
+                    MslAddressSpaceData{core::AddressSpace::kHandle, "thread"},
+                    MslAddressSpaceData{core::AddressSpace::kStorage, "device"},
+                    MslAddressSpaceData{core::AddressSpace::kUniform, "constant"}));
 
 TEST_F(MslPrinterTest, EmitType_Struct) {
     auto* s = ty.Struct(mod.symbols.New("S"), {
@@ -359,7 +359,7 @@ TEST_F(MslPrinterTest, EmitType_Struct_Layout_NonComposites) {
                                    {mod.symbols.Register("z"), ty.f32()}};
 
     auto* s = MkStruct(mod, ty, "S", data);
-    s->AddUsage(builtin::AddressSpace::kStorage);
+    s->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
     // for each field of the structure s.
@@ -471,7 +471,7 @@ TEST_F(MslPrinterTest, EmitType_Struct_Layout_Structures) {
                                                {mod.symbols.Register("c"), ty.f32()},
                                                {mod.symbols.Register("d"), inner_y},
                                                {mod.symbols.Register("e"), ty.f32()}});
-    const_cast<type::Struct*>(s)->AddUsage(builtin::AddressSpace::kStorage);
+    const_cast<type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
 // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
 // for each field of the structure s.
@@ -577,7 +577,7 @@ TEST_F(MslPrinterTest, EmitType_Struct_Layout_ArrayDefaultStride) {
                                                {mod.symbols.Register("d"), array_y},
                                                {mod.symbols.Register("e"), ty.f32()},
                                                {mod.symbols.Register("f"), array_z}});
-    const_cast<type::Struct*>(s)->AddUsage(builtin::AddressSpace::kStorage);
+    const_cast<type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
     // for each field of the structure s.
@@ -674,7 +674,7 @@ TEST_F(MslPrinterTest, EmitType_Struct_Layout_ArrayVec3DefaultStride) {
                                                   {mod.symbols.Register("b"), array},
                                                   {mod.symbols.Register("c"), ty.i32()},
                                               });
-    const_cast<type::Struct*>(s)->AddUsage(builtin::AddressSpace::kStorage);
+    const_cast<type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
     // for each field of the structure s.
@@ -744,7 +744,7 @@ TEST_F(MslPrinterTest, AttemptTintPadSymbolCollision) {
                                    {mod.symbols.Register("tint_pad_21"), ty.f32()}};
 
     auto* s = MkStruct(mod, ty, "S", data);
-    s->AddUsage(builtin::AddressSpace::kStorage);
+    s->AddUsage(core::AddressSpace::kStorage);
 
     auto expect = R"(template<typename T, size_t N>
 struct tint_array {
@@ -908,8 +908,8 @@ TEST_P(MslPrinterStorageTexturesTest, Emit) {
     auto params = GetParam();
 
     auto* f32 = const_cast<type::F32*>(ty.f32());
-    auto s = ty.Get<type::StorageTexture>(params.dim, builtin::TexelFormat::kR32Float,
-                                          builtin::Access::kWrite, f32);
+    auto s = ty.Get<type::StorageTexture>(params.dim, core::TexelFormat::kR32Float,
+                                          core::Access::kWrite, f32);
     generator_.EmitType(generator_.Line(), s);
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(tint::TrimSpace(generator_.Result()), params.result);

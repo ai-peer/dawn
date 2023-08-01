@@ -151,9 +151,8 @@ void VarForDynamicIndex::Run(ir::Module* ir) const {
 
         // Declare a local variable and copy the source object to it.
         auto* local = object_to_local.GetOrCreate(source_object, [&] {
-            auto* decl =
-                builder.Var(ir->Types().ptr(builtin::AddressSpace::kFunction, source_object->Type(),
-                                            builtin::Access::kReadWrite));
+            auto* decl = builder.Var(ir->Types().ptr(
+                core::AddressSpace::kFunction, source_object->Type(), core::Access::kReadWrite));
             decl->SetInitializer(source_object);
             decl->InsertBefore(access);
             return decl->Result();
@@ -174,10 +173,9 @@ void VarForDynamicIndex::Run(ir::Module* ir) const {
             vector_index = indices.Pop();
         }
 
-        ir::Instruction* new_access =
-            builder.Access(ir->Types().ptr(builtin::AddressSpace::kFunction, access_type,
-                                           builtin::Access::kReadWrite),
-                           local, indices);
+        ir::Instruction* new_access = builder.Access(
+            ir->Types().ptr(core::AddressSpace::kFunction, access_type, core::Access::kReadWrite),
+            local, indices);
         new_access->InsertBefore(access);
 
         ir::Instruction* load = nullptr;
