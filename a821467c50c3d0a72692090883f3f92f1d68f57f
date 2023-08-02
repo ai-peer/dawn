@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f0ff76_ba5fc95f",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T18:24:49Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is safe, as you\u0027re modifying `*lookup` and then using `got`, and `got` is an rvalue reference to `*lookup`.\n\nI tried a simplified example of this locally (without the `Hashmap`) and it confirmed my fears. My C++ knowledge is pretty bad though, so maybe there\u0027s something here that makes this fine.",
+      "range": {
+        "startLine": 664,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 56
+      },
+      "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ac4ed67_0d59784e",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T18:24:49Z",
+      "side": 1,
+      "message": "Should there be a `const` qualification here? IIUC this declaration shouldn\u0027t be modified.",
+      "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba677184_638ad88f",
+        "filename": "src/tint/lang/msl/writer/printer/printer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T18:24:49Z",
+      "side": 1,
+      "message": "Nit: \"covnerted\", and probably a missing word here",
+      "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
