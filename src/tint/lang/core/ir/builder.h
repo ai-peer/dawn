@@ -57,10 +57,12 @@
 #include "src/tint/lang/core/ir/user_call.h"
 #include "src/tint/lang/core/ir/value.h"
 #include "src/tint/lang/core/ir/var.h"
+#include "src/tint/lang/core/type/array.h"
 #include "src/tint/lang/core/type/bool.h"
 #include "src/tint/lang/core/type/f16.h"
 #include "src/tint/lang/core/type/f32.h"
 #include "src/tint/lang/core/type/i32.h"
+#include "src/tint/lang/core/type/matrix.h"
 #include "src/tint/lang/core/type/pointer.h"
 #include "src/tint/lang/core/type/u32.h"
 #include "src/tint/lang/core/type/vector.h"
@@ -242,6 +244,21 @@ class Builder {
     template <typename BOOL, typename = std::enable_if_t<std::is_same_v<BOOL, bool>>>
     ir::Constant* Constant(BOOL v) {
         return Constant(ir.constant_values.Get(v));
+    }
+
+    /// Retrieves the inner constant from an ir::Constant
+    /// @param constant the ir constant
+    /// @returns the constant::Value inside the constant
+    const constant::Value* ConstantValue(ir::Constant* constant) { return constant->Value(); }
+
+    /// Creates a new ir::Constant
+    /// @param ty the constant type
+    /// @param values the composite values
+    /// @returns the new constant
+    template <typename... ARGS, typename = DisableIfVectorLike<ARGS...>>
+    ir::Constant* Composite(const type::Type* ty, ARGS&&... values) {
+        return Constant(
+            ir.constant_values.Composite(ty, Vector{ConstantValue(std::forward<ARGS>(values))...}));
     }
 
     /// @param in the input value. One of: nullptr, ir::Value*, ir::Instruction* or a numeric value.
