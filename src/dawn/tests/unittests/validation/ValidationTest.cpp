@@ -176,7 +176,11 @@ ValidationTest::~ValidationTest() {
     mWireHelper.reset();
 
     // Check that all devices were destructed.
-    EXPECT_EQ(mDawnInstance->GetDeviceCountForTesting(), 0u);
+    // Note that if the test is skipped before SetUp is called, mDawnInstance will not get set and
+    // remain nullptr.
+    if (mDawnInstance) {
+        EXPECT_EQ(mDawnInstance->GetDeviceCountForTesting(), 0u);
+    }
 
     gCurrentTest = nullptr;
 }
