@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "64f97f94_56d594c4",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T13:44:01Z",
+      "side": 1,
+      "message": "Good idea, added an item to the transforms list.",
+      "parentUuid": "cbe77d1b_572defb8",
+      "revId": "598209ee2f00a55465b396b7c033b09f2ec94c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0a3fa646_89993462",
         "filename": "src/tint/lang/msl/writer/printer/printer.cc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-02T12:41:45Z",
       "side": 1,
       "message": "Nothing to do here, but maybe we should consider detecting the \"else if\" case at some point to avoid excessive nesting.",
+      "revId": "598209ee2f00a55465b396b7c033b09f2ec94c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cc080d2_a50b49a4",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T13:44:01Z",
+      "side": 1,
+      "message": "Ack, wanted it keep it simple for this version before trying to do the smarter thing.",
+      "parentUuid": "0a3fa646_89993462",
       "revId": "598209ee2f00a55465b396b7c033b09f2ec94c1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
