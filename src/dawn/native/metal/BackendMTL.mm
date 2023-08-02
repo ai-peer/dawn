@@ -531,6 +531,15 @@ class PhysicalDevice : public PhysicalDeviceBase {
         EnableFeature(Feature::BGRA8UnormStorage);
         EnableFeature(Feature::SurfaceCapabilities);
         EnableFeature(Feature::MSAARenderToSingleSampled);
+
+        // SIMD-scoped permute operations is supported by GPU family MTLGPUFamilyMetal3
+        // https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf
+        // Note that supportsFamily: method requires macOS 10.15+ or iOS 13.0+
+        if (@available(macOS 10.15, iOS 13.0, *)) {
+            if ([*mDevice supportsFamily:MTLGPUFamilyMetal3]) {
+                EnableFeature(Feature::ChromiumExperimentalSubgroups);
+            }
+        }
     }
 
     void InitializeVendorArchitectureImpl() override {
