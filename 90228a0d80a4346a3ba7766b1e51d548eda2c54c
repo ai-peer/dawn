@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d8b78c3_03bbc4d6",
+        "filename": "src/tint/lang/msl/writer/printer/helper_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T03:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f6b7af_712f2347",
+      "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71e37597_610924f8",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-08-01T23:09:08Z",
       "side": 1,
       "message": "Could just `TINT_ASSERT_OR_RETURN()`, since the validator ensures that all blocks at least have terminators.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 5
+      },
+      "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8254fda5_f9df2cc6",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T03:04:18Z",
+      "side": 1,
+      "message": "Good catch, I thought I\u0027d removed this as I handle the unreachable instruction in a future CL.",
+      "parentUuid": "71e37597_610924f8",
       "range": {
         "startLine": 152,
         "startChar": 0,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b23a88b4_11b89c76",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T03:04:18Z",
+      "side": 1,
+      "message": "Heh, technically `returns function block` was correct, it\u0027s just horrible. Re-wrote the comment to be clearer.\n\n(returns function block \u003d\u003d the function block which contains the return))",
+      "parentUuid": "d006c0b2_caa090c0",
+      "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cef3c90_9f99f1ca",
         "filename": "src/tint/lang/msl/writer/printer/return_test.cc",
         "patchSetId": 1
@@ -88,6 +148,24 @@
       "writtenOn": "2023-08-01T23:15:26Z",
       "side": 1,
       "message": "Nit: Since `Generate()` already checks if the IR is valid, these `IRIsValid()` checks are redundant and could be removed.",
+      "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd411ef_53b83876",
+        "filename": "src/tint/lang/msl/writer/printer/return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T03:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cef3c90_9f99f1ca",
       "revId": "90228a0d80a4346a3ba7766b1e51d548eda2c54c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
