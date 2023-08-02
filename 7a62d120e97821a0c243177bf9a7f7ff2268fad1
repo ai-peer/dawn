@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0090d3_cad29a04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T15:10:37Z",
+      "side": 1,
+      "message": "Adding Austin as I\u0027m not an owner for .gitignore.",
+      "revId": "7a62d120e97821a0c243177bf9a7f7ff2268fad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
