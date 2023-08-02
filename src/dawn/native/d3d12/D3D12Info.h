@@ -38,6 +38,10 @@ struct D3D12DeviceInfo {
     uint32_t programmableSamplePositionsTier;
     bool supportsRootSignatureVersion1_1;
     bool use64KBAlignedMSAATexture;
+    // Whether the device support wave intrinsics
+    bool supportsSubgroup;
+    uint32_t WaveLaneCountMin;
+    uint32_t WaveLaneCountMax;
 };
 
 ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const PhysicalDevice& physicalDevice);
