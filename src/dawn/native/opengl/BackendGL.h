@@ -37,13 +37,11 @@ class Backend : public BackendConnection {
   private:
     std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevicesWithProcs(
         void* (*getProc)(const char*),
-        EGLDisplay display,
-        bool useTextureShareGroupANGLE);
+        EGLDisplay display);
 
     Ref<PhysicalDevice> mPhysicalDevice = nullptr;
     void* (*mGetProc)(const char*);
     EGLDisplay mDisplay;
-    bool mUseTextureShareGroupANGLE;
     DynamicLib mLibEGL;
 };
 
