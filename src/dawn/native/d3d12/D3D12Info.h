@@ -39,6 +39,10 @@ struct D3D12DeviceInfo {
     bool supportsRootSignatureVersion1_1;
     bool use64KBAlignedMSAATexture;
     bool supportsHeapFlagCreateNotZeroed;
+    // Whether the device support wave intrinsics
+    bool supportsWaveOps;
+    uint32_t waveLaneCountMin;
+    uint32_t waveLaneCountMax;
 };
 
 ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const PhysicalDevice& physicalDevice);
