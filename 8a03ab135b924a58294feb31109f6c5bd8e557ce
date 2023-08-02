@@ -39,6 +39,24 @@
       "message": "Did \"format-on-save\" after a missing `}` change this comment and the one below perchance?",
       "revId": "8a03ab135b924a58294feb31109f6c5bd8e557ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a701dbad_0de8d3ff",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T20:35:30Z",
+      "side": 1,
+      "message": "It did, but I\u0027ve gotten tired of fixing them so I\u0027m leaving them at the \"shorter\" version, heh.",
+      "parentUuid": "5ace9551_aca658e2",
+      "revId": "8a03ab135b924a58294feb31109f6c5bd8e557ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
