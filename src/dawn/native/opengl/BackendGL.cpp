@@ -111,7 +111,7 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevicesWithProcs(
     EGLDisplay display) {
     // TODO(cwallez@chromium.org): For now only create a single OpenGL physicalDevice because don't
     // know how to handle MakeCurrent.
-    if (mPhysicalDevice != nullptr && mGetProc != getProc) {
+    if (mPhysicalDevice != nullptr && (mGetProc != getProc || mDisplay != display)) {
         GetInstance()->ConsumedErrorAndWarnOnce(
             DAWN_VALIDATION_ERROR("The OpenGL backend can only create a single physicalDevice."));
         return {};
@@ -123,6 +123,7 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevicesWithProcs(
             return {};
         }
         mGetProc = getProc;
+        mDisplay = display;
     }
     return {mPhysicalDevice};
 }
