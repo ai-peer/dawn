@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a0c4dbc_de9be6f9",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T19:19:36Z",
+      "side": 1,
+      "message": "FYI I plan to argue that the IR should not have the same auto-zero-initialization semantics that WGSL has, but let\u0027s have that discussion whenever I next remember to bring it up.",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 45
+      },
+      "revId": "8a03ab135b924a58294feb31109f6c5bd8e557ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ace9551_aca658e2",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T19:19:36Z",
+      "side": 1,
+      "message": "Did \"format-on-save\" after a missing `}` change this comment and the one below perchance?",
+      "revId": "8a03ab135b924a58294feb31109f6c5bd8e557ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
