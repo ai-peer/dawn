@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92467e25_c03df24b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T02:57:34Z",
+      "side": 1,
+      "message": "Thoughts? We end up creating constants, so seems like using the builder helper methods would make the code a bit nicer. Just, how strange is it that the printer has a builder?",
+      "revId": "b38686f912622b890feb25be7386036e7695e6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
