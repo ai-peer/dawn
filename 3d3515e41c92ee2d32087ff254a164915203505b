@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf1bf46_c41c54f2",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-02T16:48:47Z",
+      "side": 1,
+      "message": "is it possible to do egl.QueryString for the vendor/version string and detect ANGLE here? then we don\u0027t need to pass in the bool for `useTextureShareGroupANGLE` since it will always be enabled",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "3d3515e41c92ee2d32087ff254a164915203505b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
