@@ -53,6 +53,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     OpenGLFunctions mFunctions;
     EGLDisplay mDisplay;
+    bool mIsANGLE;
     EGLFunctions mEGLFunctions;
 };
 

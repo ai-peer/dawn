@@ -102,6 +102,8 @@ MaybeError PhysicalDevice::InitializeImpl() {
         mAdapterType = wgpu::AdapterType::CPU;
     }
 
+    mIsANGLE = mName.find("ANGLE") != std::string::npos;
+
     return {};
 }
 
@@ -316,7 +318,7 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* ada
     EGLenum api =
         GetBackendType() == wgpu::BackendType::OpenGL ? EGL_OPENGL_API : EGL_OPENGL_ES_API;
     std::unique_ptr<Device::Context> context;
-    DAWN_TRY_ASSIGN(context, ContextEGL::Create(mEGLFunctions, api, mDisplay));
+    DAWN_TRY_ASSIGN(context, ContextEGL::Create(mEGLFunctions, api, mDisplay, mIsANGLE));
     return Device::Create(adapter, descriptor, mFunctions, std::move(context), deviceToggles);
 }
 
