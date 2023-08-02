@@ -22,6 +22,30 @@
       },
       "revId": "3d3515e41c92ee2d32087ff254a164915203505b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "125a5cc9_c6a045c9",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-02T19:20:59Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "baf1bf46_c41c54f2",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "3d3515e41c92ee2d32087ff254a164915203505b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
