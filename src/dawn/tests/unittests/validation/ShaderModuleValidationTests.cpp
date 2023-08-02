@@ -14,8 +14,10 @@
 
 #include <sstream>
 #include <string>
+#include <vector>
 
 #include "dawn/common/Constants.h"
+#include "dawn/native/Features.h"
 #include "dawn/native/ShaderModule.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
@@ -687,14 +689,6 @@ TEST_F(ShaderModuleValidationTest, MissingDecorations) {
     )"));
 }
 
-// Test that WGSL extension used by enable directives must be allowed by WebGPU.
-TEST_F(ShaderModuleValidationTest, ExtensionMustBeAllowed) {
-    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
-enable f16;
-
-@compute @workgroup_size(1) fn main() {})"));
-}
-
 // Test creating an error shader module with device.CreateErrorShaderModule()
 TEST_F(ShaderModuleValidationTest, CreateErrorShaderModule) {
     wgpu::ShaderModuleWGSLDescriptor wgslDesc = {};
@@ -722,6 +716,183 @@ TEST_F(ShaderModuleValidationTest, CreateErrorShaderModule) {
     errorShaderModule.GetCompilationInfo(callback, nullptr);
 
     FlushWire();
+}
+
+class ShaderModuleExtensionValidationTestBase : public ValidationTest {
+  protected:
+    // Skip tests if using Wire, because some features are not supported by the wire and cause the
+    // device creation failed.
+    void SetUp() override {
+        DAWN_SKIP_TEST_IF(UsesWire());
+        ValidationTest::SetUp();
+    }
+
+    // Create the device with the AllowUnsafeAPIs toggle explicitly enabled or disabled, and none or
+    // all valid features required.
+    WGPUDevice CreateTestDeviceWithUnsafeAPIToggleAndFeatures(native::Adapter dawnAdapter,
+                                                              wgpu::DeviceDescriptor descriptor,
+                                                              bool AllowUnsafeAPIs,
+                                                              bool RequireAllFeatures) {
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc{};
+        descriptor.nextInChain = &deviceTogglesDesc;
+        const char* toggle = "allow_unsafe_apis";
+        // Explicitly enable or disable the AllowUnsafeAPIs toggle.
+        if (AllowUnsafeAPIs) {
+            deviceTogglesDesc.enabledToggles = &toggle;
+            deviceTogglesDesc.enabledTogglesCount = 1;
+        } else {
+            deviceTogglesDesc.disabledToggles = &toggle;
+            deviceTogglesDesc.disabledTogglesCount = 1;
+        }
+
+        std::vector<wgpu::FeatureName> requiredFeatures;
+
+        if (RequireAllFeatures) {
+            native::FeaturesInfo featuresInfo;
+            std::vector<const char*> adapterSupportedFeatures = dawnAdapter.GetSupportedFeatures();
+            // Enable all supported features.
+            for (const char* featureName : adapterSupportedFeatures) {
+                wgpu::FeatureName feature = featuresInfo.FeatureNameToAPIEnum(featureName);
+                // Experimental features require the AllowUnsafeAPIs toggle to be enabled, which is
+                // overridden in the device toggle descriptor.
+                if (featuresInfo.GetFeatureInfo(feature)->featureState ==
+                        native::FeatureInfo::FeatureState::Stable ||
+                    AllowUnsafeAPIs) {
+                    requiredFeatures.push_back(feature);
+                }
+            }
+        }
+
+        descriptor.requiredFeatures = requiredFeatures.data();
+        descriptor.requiredFeaturesCount = requiredFeatures.size();
+
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+struct WGSLExtensionInfo {
+    const char* WGSLName;
+    // Is this WGSL extension experimental, i.e. guarded by AllowUnsafeAPIs toggle
+    bool isExperimental;
+    // The WebGPU feature that required to enable this extension, set to nullptr if no feature
+    // required.
+    const char* RequiredFeatureName;
+};
+
+constexpr struct WGSLExtensionInfo kExtensions[] = {
+    {"f16", true, "shader-f16"},
+    {"chromium_experimental_dp4a", true, "chromium-experimental-dp4a"},
+    {"chromium_experimental_subgroups", true, "chromium-experimental-subgroups"},
+    {"chromium_disable_uniformity_analysis", true, nullptr},
+
+    // Currently the following WGSL extensions are not enabled under any situation.
+    /*
+    {"chromium_experimental_full_ptr_parameters", true, nullptr},
+    {"chromium_experimental_push_constant", true, nullptr},
+    {"chromium_internal_dual_source_blending", true, nullptr},
+    {"chromium_internal_relaxed_uniform_layout", true, nullptr},
+    */
+};
+
+// Test validating WGSL extension on safe device with no feature required.
+class ShaderModuleExtensionValidationTestSafeNoFeature
+    : public ShaderModuleExtensionValidationTestBase {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        return CreateTestDeviceWithUnsafeAPIToggleAndFeatures(dawnAdapter, descriptor, false,
+                                                              false);
+    }
+};
+
+TEST_F(ShaderModuleExtensionValidationTestSafeNoFeature,
+       OnlyStableExtensionsRequiringNoFeatureAllowed) {
+    for (auto& extension : kExtensions) {
+        std::string wgsl = std::string("enable ") + extension.WGSLName + R"(;
+
+@compute @workgroup_size(1) fn main() {})";
+
+        // On a safe device with no feature required, only stable extensions requiring no features
+        // are allowed.
+        if (!extension.isExperimental && !extension.RequiredFeatureName) {
+            utils::CreateShaderModule(device, wgsl.c_str());
+        } else {
+            ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, wgsl.c_str()));
+        }
+    }
+}
+
+// Test validating WGSL extension on unsafe device with no feature required.
+class ShaderModuleExtensionValidationTestUnsafeNoFeature
+    : public ShaderModuleExtensionValidationTestBase {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        return CreateTestDeviceWithUnsafeAPIToggleAndFeatures(dawnAdapter, descriptor, true, false);
+    }
+};
+
+TEST_F(ShaderModuleExtensionValidationTestUnsafeNoFeature,
+       OnlyExtensionsRequiringNoFeatureAllowed) {
+    for (auto& extension : kExtensions) {
+        std::string wgsl = std::string("enable ") + extension.WGSLName + R"(;
+
+@compute @workgroup_size(1) fn main() {})";
+
+        // On an unsafe device with no feature required, only extensions requiring no features are
+        // allowed.
+        if (!extension.RequiredFeatureName) {
+            utils::CreateShaderModule(device, wgsl.c_str());
+        } else {
+            ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, wgsl.c_str()));
+        }
+    }
+}
+
+// Test validating WGSL extension on safe device with all features required.
+class ShaderModuleExtensionValidationTestSafeAllFeatures
+    : public ShaderModuleExtensionValidationTestBase {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        return CreateTestDeviceWithUnsafeAPIToggleAndFeatures(dawnAdapter, descriptor, false, true);
+    }
+};
+
+TEST_F(ShaderModuleExtensionValidationTestSafeAllFeatures, OnlyStableExtensionsAllowed) {
+    for (auto& extension : kExtensions) {
+        std::string wgsl = std::string("enable ") + extension.WGSLName + R"(;
+
+@compute @workgroup_size(1) fn main() {})";
+
+        // On a safe device with all feature required, only stable extensions are allowed.
+        if (!extension.isExperimental) {
+            utils::CreateShaderModule(device, wgsl.c_str());
+        } else {
+            ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, wgsl.c_str()));
+        }
+    }
+}
+
+// Test validating WGSL extension on unsafe device with all features required.
+class ShaderModuleExtensionValidationTestUnsafeAllFeatures
+    : public ShaderModuleExtensionValidationTestBase {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        return CreateTestDeviceWithUnsafeAPIToggleAndFeatures(dawnAdapter, descriptor, true, true);
+    }
+};
+
+TEST_F(ShaderModuleExtensionValidationTestUnsafeAllFeatures, AllExtensionsAllowed) {
+    for (auto& extension : kExtensions) {
+        std::string wgsl = std::string("enable ") + extension.WGSLName + R"(;
+
+@compute @workgroup_size(1) fn main() {})";
+
+        // On an unsafe device with all feature required, all extensions are allowed.
+        utils::CreateShaderModule(device, wgsl.c_str());
+    }
 }
 
 }  // anonymous namespace
