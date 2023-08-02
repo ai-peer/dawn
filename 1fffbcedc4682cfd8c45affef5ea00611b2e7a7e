@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b4aae7f_295c9eb3",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-02T15:28:18Z",
+      "side": 1,
+      "message": "I started implementing that, and when I got to the \"GL backend is ANGLE\" check, I realized a simpler variant would be to simply enable the EGL attribute when the backend is ANGLE. This seems simpler, and Geoff tells me there\u0027s no overhead.",
+      "parentUuid": "f31962cc_fec09bde",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 5
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dde87e3_4c27cddd",
         "filename": "src/dawn/native/opengl/BackendGL.cpp",
         "patchSetId": 4
@@ -160,6 +184,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16b45896_b2422d21",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-02T15:28:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "64077d7b_7b379c78",
+      "range": {
+        "startLine": 117,
+        "startChar": 5,
+        "endLine": 123,
+        "endChar": 5
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95b7278b_232cb0fd",
@@ -173,6 +221,30 @@
       "writtenOn": "2023-08-01T18:06:57Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 318,
+        "startChar": 64,
+        "endLine": 318,
+        "endChar": 98
+      },
+      "revId": "1fffbcedc4682cfd8c45affef5ea00611b2e7a7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e04971cb_420cabb8",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-02T15:28:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "95b7278b_232cb0fd",
       "range": {
         "startLine": 318,
         "startChar": 64,
