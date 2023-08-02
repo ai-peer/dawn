@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "978e3ffe_d6464277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-02T20:30:27Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with the details of EGL_ANGLE_display_texture_share_group. We should make sure to test it well.\n\nTake a look at third_party/dawn/src/dawn/tests/white_box/EGLImageWrappingTests.cpp for what was done for EGLImage\n\nwill some synchronization be needed as well to share the textures?",
+      "revId": "03f9d321a4086ff5306e3563dd23912d3e13dbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7e5b052_edbd3195",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-02T20:30:27Z",
+      "side": 1,
+      "message": "nit: unused",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 93
+      },
+      "revId": "03f9d321a4086ff5306e3563dd23912d3e13dbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
