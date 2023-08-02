@@ -16,6 +16,24 @@
       "message": "Need a better way to make these constants. Here and the comment out code, where I haven\u0027t done the work to build the constant yet.",
       "revId": "d6dbfa2c82b70fbb6bc4ba45df0f1f3c3ed44df7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8f68c4_64b6d976",
+        "filename": "src/tint/lang/msl/writer/printer/let_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T00:03:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70a4ca95_e739e8eb",
+      "revId": "d6dbfa2c82b70fbb6bc4ba45df0f1f3c3ed44df7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
