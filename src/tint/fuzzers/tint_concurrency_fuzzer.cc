@@ -81,28 +81,28 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
             switch (static_cast<Writer>(thread_idx % static_cast<size_t>(Writer::kCount))) {
 #if TINT_BUILD_WGSL_WRITER
                 case Writer::kWGSL: {
-                    tint::wgsl::writer::Generate(&program, {});
+                    auto result = tint::wgsl::writer::Generate(&program, {});
                     break;
                 }
 #endif  // TINT_BUILD_WGSL_WRITER
 
 #if TINT_BUILD_SPV_WRITER
                 case Writer::kSPIRV: {
-                    tint::spirv::writer::Generate(&program, {}).Move();
+                    auto result = tint::spirv::writer::Generate(&program, {});
                     break;
                 }
 #endif  // TINT_BUILD_SPV_WRITER
 
 #if TINT_BUILD_HLSL_WRITER
                 case Writer::kHLSL: {
-                    tint::hlsl::writer::Generate(&program, {});
+                    auto result = tint::hlsl::writer::Generate(&program, {});
                     break;
                 }
 #endif  // TINT_BUILD_HLSL_WRITER
 
 #if TINT_BUILD_GLSL_WRITER
                 case Writer::kGLSL: {
-                    tint::glsl::writer::Generate(&program, {}, entry_point);
+                    auto result = tint::glsl::writer::Generate(&program, {}, entry_point);
                     break;
                 }
 #endif  // TINT_BUILD_GLSL_WRITER
@@ -111,7 +111,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
                 case Writer::kMSL: {
                     // Remap resource numbers to a flat namespace.
                     if (auto flattened = tint::writer::FlattenBindings(&program)) {
-                        tint::msl::writer::Generate(&flattened.value(), {});
+                        auto result = tint::msl::writer::Generate(&flattened.value(), {});
                     }
                     break;
                 }
