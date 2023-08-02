@@ -33,6 +33,24 @@
       "message": "why isn\u0027t this handled by Raise?",
       "revId": "b7fbf145f8d5c526a4e4f9f82263cc1588cadbe5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df06080b_4784cd29",
+        "filename": "src/tint/lang/spirv/writer/writer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T19:13:40Z",
+      "side": 1,
+      "message": "`Raise()` is (for me at least) about changing the dialect of the IR to the SPIR-V dialect. I don\u0027t consider binding number remapping to be related to the dialect of the IR being used, rather it\u0027s just something that the user of the Writer API has requested to be changed in the module.\n\nI\u0027m not sure how meaningful this reasoning is, but it seemed logical in my brain.",
+      "parentUuid": "ddf0e7f0_5fe79e07",
+      "revId": "b7fbf145f8d5c526a4e4f9f82263cc1588cadbe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
