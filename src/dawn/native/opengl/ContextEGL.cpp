@@ -15,6 +15,7 @@
 #include "dawn/native/opengl/ContextEGL.h"
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "dawn/native/opengl/UtilsEGL.h"
@@ -27,8 +28,7 @@ namespace dawn::native::opengl {
 
 ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions& egl,
                                                               EGLenum api,
-                                                              EGLDisplay display,
-                                                              bool useTextureShareGroupANGLE) {
+                                                              EGLDisplay display) {
     EGLint renderableType = api == EGL_OPENGL_ES_API ? EGL_OPENGL_ES3_BIT : EGL_OPENGL_BIT;
 
     EGLint major, minor;
@@ -60,6 +60,9 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
         minor = 4;
     }
 
+    std::string version(egl.QueryString(display, EGL_VERSION));
+    bool isANGLE = version.find("ANGLE") != std::string::npos;
+
     const char* extensions = egl.QueryString(display, EGL_EXTENSIONS);
     if (strstr(extensions, "EGL_EXT_create_context_robustness") == nullptr) {
         return DAWN_INTERNAL_ERROR("EGL_EXT_create_context_robustness must be supported");
@@ -73,7 +76,7 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
         EGL_CONTEXT_OPENGL_ROBUST_ACCESS,  // Core in EGL 1.5
         EGL_TRUE,
     };
-    if (useTextureShareGroupANGLE) {
+    if (isANGLE) {
         attrib_list.push_back(EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE);
         attrib_list.push_back(EGL_TRUE);
     }

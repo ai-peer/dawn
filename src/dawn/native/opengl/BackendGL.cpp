@@ -46,14 +46,12 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
 
     void* (*getProc)(const char* name) = nullptr;
     EGLDisplay display = EGL_NO_DISPLAY;
-    bool useTextureShareGroupANGLE = false;
 
     const RequestAdapterOptionsGetGLProc* glGetProcOptions = nullptr;
     FindInChain(options->nextInChain, &glGetProcOptions);
     if (glGetProcOptions) {
         getProc = glGetProcOptions->getProc;
         display = glGetProcOptions->display;
-        useTextureShareGroupANGLE = glGetProcOptions->useTextureShareGroupANGLE;
     }
 
     if (getProc == nullptr) {
@@ -94,8 +92,7 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     }
 
     std::unique_ptr<ContextEGL> context;
-    if (GetInstance()->ConsumedErrorAndWarnOnce(ContextEGL::Create(egl, api, display, false),
-                                                &context)) {
+    if (GetInstance()->ConsumedErrorAndWarnOnce(ContextEGL::Create(egl, api, display), &context)) {
         return {};
     }
 
@@ -104,34 +101,29 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     EGLContext prevContext = egl.GetCurrentContext();
 
     context->MakeCurrent();
-    auto physicalDevices =
-        DiscoverPhysicalDevicesWithProcs(getProc, display, useTextureShareGroupANGLE);
+    auto physicalDevices = DiscoverPhysicalDevicesWithProcs(getProc, display);
     egl.MakeCurrent(display, prevDrawSurface, prevReadSurface, prevContext);
     return physicalDevices;
 }
 
 std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevicesWithProcs(
     void* (*getProc)(const char*),
-    EGLDisplay display,
-    bool useTextureShareGroupANGLE) {
+    EGLDisplay display) {
     // TODO(cwallez@chromium.org): For now only create a single OpenGL physicalDevice because don't
     // know how to handle MakeCurrent.
-    if (mPhysicalDevice != nullptr && (mGetProc != getProc || mDisplay != display ||
-                                       mUseTextureShareGroupANGLE != useTextureShareGroupANGLE)) {
+    if (mPhysicalDevice != nullptr && (mGetProc != getProc || mDisplay != display)) {
         GetInstance()->ConsumedErrorAndWarnOnce(
             DAWN_VALIDATION_ERROR("The OpenGL backend can only create a single physicalDevice."));
         return {};
     }
     if (mPhysicalDevice == nullptr) {
         if (GetInstance()->ConsumedErrorAndWarnOnce(
-                PhysicalDevice::Create(GetInstance(), GetType(), getProc, display,
-                                       useTextureShareGroupANGLE),
+                PhysicalDevice::Create(GetInstance(), GetType(), getProc, display),
                 &mPhysicalDevice)) {
             return {};
         }
         mGetProc = getProc;
         mDisplay = display;
-        mUseTextureShareGroupANGLE = useTextureShareGroupANGLE;
     }
     return {mPhysicalDevice};
 }
