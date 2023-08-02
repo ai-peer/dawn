@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0488c1a3_9e0f3366",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T18:46:50Z",
+      "side": 1,
+      "message": "This was \"borrowed\" from the ir_to_program. We can chat with Ben when he\u0027s back to figure out what\u0027s up.",
+      "parentUuid": "53f0ff76_ba5fc95f",
+      "range": {
+        "startLine": 664,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 56
+      },
+      "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ac4ed67_0d59784e",
         "filename": "src/tint/lang/msl/writer/printer/printer.cc",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2023-08-02T18:24:49Z",
       "side": 1,
       "message": "Should there be a `const` qualification here? IIUC this declaration shouldn\u0027t be modified.",
+      "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87bc61fb_08e3dd7b",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T18:46:50Z",
+      "side": 1,
+      "message": "Makes sense, added. We\u0027ll see what happens as it gets used, heh.",
+      "parentUuid": "9ac4ed67_0d59784e",
       "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +96,24 @@
       "writtenOn": "2023-08-02T18:24:49Z",
       "side": 1,
       "message": "Nit: \"covnerted\", and probably a missing word here",
+      "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "113857f0_7893c1e2",
+        "filename": "src/tint/lang/msl/writer/printer/printer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T18:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba677184_638ad88f",
       "revId": "a821467c50c3d0a72692090883f3f92f1d68f57f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
