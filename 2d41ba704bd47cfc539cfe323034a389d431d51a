@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78d8b77_1a81d509",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-02T15:17:14Z",
+      "side": 1,
+      "message": "Here\u0027s another variant. It just always enables ANGLE texture sharing on ANGLE.\n\nSeems simpler this way. LMK what you think.",
+      "revId": "2d41ba704bd47cfc539cfe323034a389d431d51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
