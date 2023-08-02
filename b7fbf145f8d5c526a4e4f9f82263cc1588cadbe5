@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd42565_16c09c35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T19:04:43Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "b7fbf145f8d5c526a4e4f9f82263cc1588cadbe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf0e7f0_5fe79e07",
+        "filename": "src/tint/lang/spirv/writer/writer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T19:04:43Z",
+      "side": 1,
+      "message": "why isn\u0027t this handled by Raise?",
+      "revId": "b7fbf145f8d5c526a4e4f9f82263cc1588cadbe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
