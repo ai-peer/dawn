@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff6d49ff_a5384d99",
+        "filename": "src/dawn/native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-02T16:36:54Z",
+      "side": 1,
+      "message": "I think it would be valuable if we did some of the ideas in the doc [here](https://docs.google.com/document/d/124IjFnF5GDtGBoVFvSHbsLpZMTb8hfACv64EHdX2H50/edit#heading\u003dh.ofblm0l5zuun) and have Create return something like a `MutexProtectedRef\u003cDescriptorSetAllocator\u003e`\n\nand then MutexProtectedRef will have a -\u003e operator which returns Guard\u003cDescriptorSetAllocator\u003e which holds a std::lock_guard, and gives -\u003e and * operators to return DescriptorSetAllocator* and DescriptorSetAllocator\u0026, respectively\n\nThis way, we\u0027re sure that all uses of the allocator always acquire the mutex, and we don\u0027t need to manually acquire it in the function bodies of Allocate/Deallocate/FinishDeallocation\n\nthis CL LGTM, but I think we should build ^these facilities so we can more safely/easily make parts of Dawn thread safe. We can use thing for SlabAllocator too - though I think it\u0027ll be MutexProtected\u003cSlabAllocator\u003cT\u003e\u003e instead of MutexProtectedRef",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 46
+      },
+      "revId": "19afca87b073718394d95bef3905d8ba86885980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00714e20_10eb2511",
+        "filename": "src/dawn/native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-02T16:36:54Z",
+      "side": 1,
+      "message": "existing nit: make this const so it\u0027s clear it shouldn\u0027t need to be protected by a mutex",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 29
+      },
+      "revId": "19afca87b073718394d95bef3905d8ba86885980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
