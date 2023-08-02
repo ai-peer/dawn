@@ -16,6 +16,24 @@
       "message": "I\u0027m assuming if result failed, then a diagnostic was emitted and the fuzzer will fail in general, yea?",
       "revId": "73aa1ea39e88e5a970a6023bca388d17fd2a09cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfaaf3e2_1d50ad9d",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T17:26:26Z",
+      "side": 1,
+      "message": "If it failed because of an ICE then yes, it\u0027d be caught by the fuzzer\u0027s `InternalCompilerErrorReporter`. If it failed because of some other reason then we don\u0027t fail the fuzzer because that\u0027s usually due to bad input, which isn\u0027t a Tint bug.\n\nAt least, that\u0027s my understanding, and it\u0027s what the existing code does.",
+      "parentUuid": "c1dfb0f3_cb69c57d",
+      "revId": "73aa1ea39e88e5a970a6023bca388d17fd2a09cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
