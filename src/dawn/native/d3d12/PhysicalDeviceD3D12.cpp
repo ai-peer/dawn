@@ -142,6 +142,13 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         }
     }
 
+    // ChromiumExperimentalSubgroups requires SM >= 6.0 and capabilities flags.
+    if (GetBackend()->IsDXCAvailable()) {
+        if (mDeviceInfo.supportsSubgroup) {
+            EnableFeature(Feature::ChromiumExperimentalSubgroups);
+        }
+    }
+
     D3D12_FEATURE_DATA_FORMAT_SUPPORT bgra8unormFormatInfo = {};
     bgra8unormFormatInfo.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
     HRESULT hr = mD3d12Device->CheckFeatureSupport(
