@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3d19ded_72afe456",
+        "filename": "src/tint/lang/core/ir/builder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T18:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c873212d_acfddc48",
+      "range": {
+        "startLine": 254,
+        "startChar": 18,
+        "endLine": 254,
+        "endChar": 30
+      },
+      "revId": "a6bf350387632603871a3211dcbd68b1a9cbc30a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4d6836d_9474ac7c",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-02T18:35:31Z",
       "side": 1,
       "message": "Can\u0027t this whole thing just be implemented as `Bind(l-\u003eResult(), Expr(l-\u003eValue(), PtrKind::kPtr), PtrKind::kPtr);`?\n\nDoesn\u0027t that overload take care of the naming and declaring a thing for you?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 43
+      },
+      "revId": "a6bf350387632603871a3211dcbd68b1a9cbc30a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae53e0de_5e2cb3bd",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-02T18:53:16Z",
+      "side": 1,
+      "message": "Survey says yes, assuming I wasn\u0027t missing a `;` in the Bind code. Good call.",
+      "parentUuid": "b4d6836d_9474ac7c",
       "range": {
         "startLine": 180,
         "startChar": 0,
