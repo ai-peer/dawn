@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe77d1b_572defb8",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T12:41:45Z",
+      "side": 1,
+      "message": "I wonder if it\u0027s worth having a transform that removes all phis (by adding variables as you\u0027re doing here). Then it can be reused by HLSL, GLSL, and WGSL, and keeps the printers simpler.\n\nNothing to change right now though.",
+      "revId": "598209ee2f00a55465b396b7c033b09f2ec94c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a3fa646_89993462",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-02T12:41:45Z",
+      "side": 1,
+      "message": "Nothing to do here, but maybe we should consider detecting the \"else if\" case at some point to avoid excessive nesting.",
+      "revId": "598209ee2f00a55465b396b7c033b09f2ec94c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
