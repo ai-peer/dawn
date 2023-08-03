@@ -24,6 +24,7 @@
 #include "dawn/common/Assert.h"
 #include "dawn/common/CoreFoundationRef.h"
 #include "dawn/native/MetalBackend.h"
+#include "dawn/native/VulkanBackend.h"
 
 namespace dawn {
 namespace {
@@ -158,15 +159,46 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
         textureDesc.nextInChain = &internalDesc;
 
-        native::metal::ExternalImageDescriptorIOSurface descriptor = {};
-        descriptor.cTextureDescriptor =
-            reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
-        descriptor.isInitialized = initialized;
-        descriptor.ioSurface = surface;
+        return WrapIOSurface(textureDesc, surface, initialized);
+    }
 
-        return std::make_unique<PlatformTextureIOSurface>(
-            wgpu::Texture::Acquire(native::metal::WrapIOSurface(mWGPUDevice, &descriptor)),
-            surface);
+    std::unique_ptr<PlatformTextureIOSurface> WrapIOSurface(
+        const wgpu::TextureDescriptor& textureDesc,
+        IOSurfaceRef surface,
+        bool initialized) {
+        auto adapter = wgpuDeviceGetAdapter(mWGPUDevice);
+        WGPUAdapterProperties adapterProps = {};
+        wgpuAdapterGetProperties(adapter, &adapterProps);
+
+        switch (adapterProps.backendType) {
+            case WGPUBackendType_Metal: {
+                native::metal::ExternalImageDescriptorIOSurface descriptor = {};
+                descriptor.cTextureDescriptor =
+                    reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
+                descriptor.isInitialized = initialized;
+                descriptor.ioSurface = surface;
+
+                return std::make_unique<PlatformTextureIOSurface>(
+                    wgpu::Texture::Acquire(native::metal::WrapIOSurface(mWGPUDevice, &descriptor)),
+                    surface);
+            }
+            case WGPUBackendType_Vulkan: {
+                native::vulkan::ExternalImageDescriptorIOSurfaceVk descriptor = {};
+                descriptor.cTextureDescriptor =
+                    reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
+                descriptor.isInitialized = initialized;
+                descriptor.ioSurface = surface;
+
+                return std::make_unique<PlatformTextureIOSurface>(
+                    wgpu::Texture::Acquire(
+                        native::vulkan::WrapVulkanImage(mWGPUDevice, &descriptor)),
+                    surface);
+            }
+            default:
+                UNREACHABLE();
+        }
+
+        return nullptr;
     }
 
     void DestroyVideoTextureForTest(
@@ -179,7 +211,7 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
 
 // static
 std::vector<BackendTestConfig> VideoViewsTestBackend::Backends() {
-    return {MetalBackend()};
+    return {MetalBackend(), VulkanBackend()};
 }
 
 // static
