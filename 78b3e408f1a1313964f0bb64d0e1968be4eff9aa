@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3956cb54_936821de",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-03T23:57:36Z",
+      "side": 1,
+      "message": "I wanted to make the `Use` function private because getting the `Guard` isn\u0027t totally obvious that it is acquiring a lock, so users could potentially do something like the following unintentionally and holding the lock for a lot longer than really needed. By forcing the usage in a lambda, it makes it much more obvious that it\u0027s scoped and limits the critical sections more.\n\n```\n{\n  auto x \u003d mX.Use();\n\n  // unrelated code\n\n  x-\u003efoo();\n\n  // unrelated code\n}\n```\n\nI agree that it\u0027s nicer to have the args in the front also so I changed it for now. It is possible to do something like https://www.cppstories.com/2020/09/variadic-pack-first.html to make it more ergonomic to use and still allow multiple usages in one site, but left it out for now until we find a use for it since we can do it with the first syntax.",
+      "parentUuid": "65e9f305_2ad37ca7",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 0
+      },
+      "revId": "78b3e408f1a1313964f0bb64d0e1968be4eff9aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fce1b5f_800adbda",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "^bump in case you didn\u0027t see it because I sent this before you sent it for review",
       "parentUuid": "4fce1b5f_800adbda",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 80
+      },
+      "revId": "78b3e408f1a1313964f0bb64d0e1968be4eff9aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5766546_035e7fa5",
+        "filename": "src/dawn/tests/unittests/MutexProtectedTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-03T23:57:36Z",
+      "side": 1,
+      "message": "Talked offline about it. The solution we decided on was to use a `Ref\u003cMutex\u003e` when the underlying type is a `Ref`. This way, they are copyable and safe to use across different sites.",
+      "parentUuid": "77aeffde_6869771e",
       "range": {
         "startLine": 45,
         "startChar": 0,
