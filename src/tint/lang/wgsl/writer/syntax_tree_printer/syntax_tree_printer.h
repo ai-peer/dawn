@@ -78,7 +78,7 @@ class SyntaxTreePrinter : public tint::TextGenerator {
     ~SyntaxTreePrinter() override;
 
     /// Generates the result data
-    void Generate();
+    bool Generate();
 
     /// Handles generating a diagnostic control
     /// @param diagnostic the diagnostic control node
