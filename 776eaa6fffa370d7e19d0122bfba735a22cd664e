@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4045749_0afa1965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "LGTM overall.",
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ed1fd1_80600652",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "this function could validate the the layouts are GENERAL since they don\u0027t mean anything for IOSurface",
+      "range": {
+        "startLine": 940,
+        "startChar": 10,
+        "endLine": 940,
+        "endChar": 44
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea372b22_0226638c",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "you can move a lot of this into Texture::CreateFromIOSurface - that way you don\u0027t need to do ConsumedError multiple times",
+      "range": {
+        "startLine": 942,
+        "startChar": 0,
+        "endLine": 963,
+        "endChar": 0
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e0dd07_086ec41d",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "nit: it would be better to noop if the texture is uninitialized. That way, we can avoid the vkQueueWaitForIdle and upload into the IOSurface. We\u0027ll report that the contents are not initialized, and the next use can deal with clearing it.",
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df0b49b_7b005f36",
+        "filename": "src/dawn/native/vulkan/IOSurfaceUtils.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "nit: make it dawn::NonCopyable",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "665fec8d_0878bc23",
+        "filename": "src/dawn/native/vulkan/IOSurfaceUtils.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "what if the size is 1? then it needs to clamp to 1, I think\n\nshould have a test for it\n\nmaybe you can use GetMipLevelSingleSubresourcePhysicalSize with mip level 1 for Plane1. It\u0027s a bit odd but should be the same thing.\n\nalso, I think this function should switch on the format (only r8rg8biplanar for now). Because there are formats like YUV444 where all the planes are the same size",
+      "range": {
+        "startLine": 54,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 30
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f134a0_9e8e465f",
+        "filename": "src/dawn/native/vulkan/IOSurfaceUtils.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "is it possible to implement this part using device-\u003eGetQueue()-\u003eWriteTexture ?\n\nit should handle the dynamic uploader part and memcpy, strides, optimal alignment, etc.",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 221,
+        "endChar": 84
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c599ad_3a1b23e5",
+        "filename": "src/dawn/native/vulkan/IOSurfaceUtils.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "nit: since there will likely be at most two planes, you can use StackVector\u003cStagingBuffer, 2\u003e",
+      "range": {
+        "startLine": 255,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 15
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aad60fdb_6567d0fb",
+        "filename": "src/dawn/native/vulkan/IOSurfaceUtils.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "what is this for?",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 48
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcef5966_b1f57464",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T17:47:43Z",
+      "side": 1,
+      "message": "maybe you should just say there are GENERAL then",
+      "range": {
+        "startLine": 1027,
+        "startChar": 0,
+        "endLine": 1032,
+        "endChar": 39
+      },
+      "revId": "776eaa6fffa370d7e19d0122bfba735a22cd664e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
