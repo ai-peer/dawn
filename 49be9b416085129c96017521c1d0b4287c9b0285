@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e97bee5_d36eb244",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T16:07:12Z",
+      "side": 1,
+      "message": "I believe this is good to review; the failures are because Chrome isn\u0027t setting the proctable, so the destructor of wgpu::AdapterProperties can\u0027t call free members.",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cf0488_ec16546f",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T16:07:12Z",
+      "side": 1,
+      "message": "maybe this should clear members to null too. otherwise if you call WriteTo(\u0026foo); WriteTo(\u0026foo); and the first call fails with an error and never writes anything, then the second call will double-free",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 79
+      },
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
