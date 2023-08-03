@@ -40,6 +40,7 @@ class BufferUploader;
 class FencedDeleter;
 class RenderPassCache;
 class ResourceMemoryAllocator;
+class IOSurfaceWrappingTexture;
 
 class Device final : public DeviceBase {
   public:
@@ -82,6 +83,13 @@ class Device final : public DeviceBase {
                                         VkImageLayout desiredLayout,
                                         ExternalImageExportInfoVk* info,
                                         std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
+
+#if DAWN_PLATFORM_IS(MACOS)
+    TextureBase* ImportTextureFromIOSurface(const ExternalImageDescriptorIOSurfaceVk* descriptor);
+    bool ExportTextureToIOSurface(Texture* texture,
+                                  VkImageLayout desiredLayout,
+                                  ExternalImageExportInfoVk* info);
+#endif
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
