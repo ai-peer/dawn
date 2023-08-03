@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb4b3f67_fe8bf2b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-03T23:53:00Z",
+      "side": 1,
+      "message": "OK, in the end I decided to implement ANGLE texture sharing as a proper Dawn feature. PTAL.\n\n(Sorry for all the detours.)",
+      "revId": "594122da01a13f9fdb6b38e6861ff2c98d68d356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
