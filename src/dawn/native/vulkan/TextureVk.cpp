@@ -32,6 +32,12 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
 
+#if DAWN_PLATFORM_IS(MACOS)
+#include <IOSurface/IOSurface.h>
+
+#include "dawn/native/vulkan/IOSurfaceUtils.h"
+#endif
+
 namespace dawn::native::vulkan {
 
 namespace {
@@ -662,6 +668,26 @@ Ref<Texture> Texture::CreateForSwapChain(Device* device,
     return texture;
 }
 
+#if DAWN_PLATFORM_IS(MACOS)
+// static
+ResultOrError<Texture*> Texture::CreateFromIOSurface(Device* device,
+                                                     const TextureDescriptor* descriptor,
+                                                     IOSurfaceRef iosurface,
+                                                     bool isIOSurfaceInitialized) {
+    DAWN_TRY(ValidateTextureDescriptor(device, descriptor, AllowMultiPlanarTextureFormat::Yes));
+
+    DAWN_TRY(ValidateIOSurfaceCanBeImported(descriptor, iosurface));
+
+    DAWN_INVALID_IF(device->GetValidInternalFormat(descriptor->format).IsMultiPlanar() &&
+                        !isIOSurfaceInitialized,
+                    "External textures with multiplanar formats must be initialized.");
+
+    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
+    DAWN_TRY(texture->InitializeFromIOSurface(iosurface, isIOSurfaceInitialized));
+    return texture.Detach();
+}
+#endif
+
 Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureState state)
     : TextureBase(device, descriptor, state),
       mCombinedAspect(ComputeCombinedAspect(device, GetFormat())),
@@ -975,6 +1001,47 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     return {};
 }
 
+#if DAWN_PLATFORM_IS(MACOS)
+MaybeError Texture::InitializeFromIOSurface(IOSurfaceRef iosurface, bool isIOSurfaceInitialized) {
+    mIOSurface = iosurface;
+
+    // CopySrc/Dst usages are needed for copying from/to IOSurface
+    AddInternalUsage(wgpu::TextureUsage::CopySrc);
+    AddInternalUsage(wgpu::TextureUsage::CopyDst);
+
+    DAWN_TRY(InitializeAsInternalTexture(0));
+
+    if (isIOSurfaceInitialized) {
+        DAWN_TRY(ImportFromIOSurfaceToTexture(iosurface, this));
+
+        SetIsSubresourceContentInitialized(true, GetAllSubresources());
+    }
+
+    return {};
+}
+
+MaybeError Texture::ExportToIOSurface(VkImageLayout desiredLayout,
+                                      VkImageLayout* releasedOldLayout,
+                                      VkImageLayout* releasedNewLayout) {
+    DAWN_INVALID_IF(mIOSurface == nullptr, "Can't export a non-iosurface texture %s.", this);
+
+    DAWN_INVALID_IF(desiredLayout != VK_IMAGE_LAYOUT_UNDEFINED,
+                    "desiredLayout (%d) was not VK_IMAGE_LAYOUT_UNDEFINED", desiredLayout);
+
+    DAWN_TRY(ExportFromTextureToIOSurface(this, mIOSurface.Get()));
+
+    ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
+
+    // Write out the layouts. Note this is not important for IOSurface external image.
+    *releasedOldLayout = VK_IMAGE_LAYOUT_GENERAL;
+    *releasedNewLayout = VK_IMAGE_LAYOUT_GENERAL;
+
+    // Destroy the texture so it can't be used again
+    Destroy();
+    return {};
+}
+#endif  // #if DAWN_PLATFORM_IS(MACOS)
+
 Texture::~Texture() {
     if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
         ToBackend(GetDevice())
@@ -1010,6 +1077,10 @@ void Texture::DestroyImpl() {
 
         mHandle = VK_NULL_HANDLE;
         mExternalAllocation = VK_NULL_HANDLE;
+
+#if DAWN_PLATFORM_IS(MACOS)
+        mIOSurface = nullptr;
+#endif
     }
     // For Vulkan, we currently run the base destruction code after the internal changes because
     // of the dependency on the texture state which the base code overwrites too early.

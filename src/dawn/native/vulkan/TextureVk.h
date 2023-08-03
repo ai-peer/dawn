@@ -26,6 +26,10 @@
 #include "dawn/native/vulkan/external_memory/MemoryService.h"
 #include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
 
+#if DAWN_PLATFORM_IS(MACOS)
+#include "dawn/common/CoreFoundationRef.h"
+#endif
+
 namespace dawn::native::vulkan {
 
 struct CommandRecordingContext;
@@ -64,6 +68,14 @@ class Texture final : public TextureBase {
                                            const TextureDescriptor* descriptor,
                                            VkImage nativeImage);
 
+#if DAWN_PLATFORM_IS(MACOS)
+    // Creates a texture that wraps an IOSurface
+    static ResultOrError<Texture*> CreateFromIOSurface(Device* device,
+                                                       const TextureDescriptor* descriptor,
+                                                       IOSurfaceRef iosurface,
+                                                       bool isIOSurfaceInitialized);
+#endif
+
     VkImage GetHandle() const;
     // Returns the aspects used for tracking of Vulkan state. These can be the combined aspects.
     Aspect GetDisjointVulkanAspects() const;
@@ -101,6 +113,12 @@ class Texture final : public TextureBase {
                                      VkImageLayout* releasedOldLayout,
                                      VkImageLayout* releasedNewLayout);
 
+#if DAWN_PLATFORM_IS(MACOS)
+    MaybeError ExportToIOSurface(VkImageLayout desiredLayout,
+                                 VkImageLayout* releasedOldLayout,
+                                 VkImageLayout* releasedNewLayout);
+#endif
+
     void SetLabelHelper(const char* prefix);
 
     // Dawn API
@@ -114,6 +132,10 @@ class Texture final : public TextureBase {
     MaybeError InitializeFromExternal(const ExternalImageDescriptorVk* descriptor,
                                       external_memory::Service* externalMemoryService);
     void InitializeForSwapChain(VkImage nativeImage);
+
+#if DAWN_PLATFORM_IS(MACOS)
+    MaybeError InitializeFromIOSurface(IOSurfaceRef iosurface, bool isIOSurfaceInitialized);
+#endif
 
     void DestroyImpl() override;
     MaybeError ClearTexture(CommandRecordingContext* recordingContext,
@@ -184,6 +206,10 @@ class Texture final : public TextureBase {
     // This variable, if not Aspect::None, is the combined aspect to use for all transitions.
     const Aspect mCombinedAspect;
     SubresourceStorage<wgpu::TextureUsage> mSubresourceLastUsages;
+
+#if DAWN_PLATFORM_IS(MACOS)
+    CFRef<IOSurfaceRef> mIOSurface = nullptr;
+#endif
 
     bool UseCombinedAspects() const;
 };
