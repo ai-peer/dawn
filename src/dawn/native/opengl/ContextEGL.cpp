@@ -15,9 +15,14 @@
 #include "dawn/native/opengl/ContextEGL.h"
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "dawn/native/opengl/UtilsEGL.h"
+
+#ifndef EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE
+#define EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE 0x33AF
+#endif
 
 namespace dawn::native::opengl {
 
@@ -60,17 +65,27 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
         return DAWN_INTERNAL_ERROR("EGL_EXT_create_context_robustness must be supported");
     }
 
-    EGLint attrib_list[] = {
+    // Enable ANGLE texture sharing on all contexts, except SwiftShader, where
+    // it causes a memory leak. Detect it by the presence of EGL_ANGLE_vulkan_image.
+    bool hasANGLETextureSharing =
+        strstr(extensions, "EGL_ANGLE_display_texture_share_group") != nullptr &&
+        strstr(extensions, "EGL_ANGLE_vulkan_image") == nullptr;
+
+    std::vector<EGLint> attrib_list{
         EGL_CONTEXT_MAJOR_VERSION,
         major,
         EGL_CONTEXT_MINOR_VERSION,
         minor,
         EGL_CONTEXT_OPENGL_ROBUST_ACCESS,  // Core in EGL 1.5
         EGL_TRUE,
-        EGL_NONE,
     };
+    if (hasANGLETextureSharing) {
+        attrib_list.push_back(EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE);
+        attrib_list.push_back(EGL_TRUE);
+    }
+    attrib_list.push_back(EGL_NONE);
 
-    EGLContext context = egl.CreateContext(display, config, EGL_NO_CONTEXT, attrib_list);
+    EGLContext context = egl.CreateContext(display, config, EGL_NO_CONTEXT, attrib_list.data());
     DAWN_TRY(CheckEGL(egl, context != EGL_NO_CONTEXT, "eglCreateContext"));
 
     return std::unique_ptr<ContextEGL>(new ContextEGL(egl, display, context));
