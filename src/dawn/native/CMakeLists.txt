@@ -656,6 +656,11 @@ if (DAWN_ENABLE_VULKAN)
             "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
             "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
         )
+    elseif (APPLE)
+        target_sources(dawn_native PRIVATE
+            "vulkan/IOSurfaceUtils.mm"
+            "vulkan/IOSurfaceUtils.h"
+        )
     endif()
 endif()
 

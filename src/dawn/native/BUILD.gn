@@ -798,6 +798,11 @@ source_set("sources") {
         "vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.cpp",
         "vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.h",
       ]
+    } else if (is_mac) {
+      sources += [
+        "vulkan/IOSurfaceUtils.mm",
+        "vulkan/IOSurfaceUtils.h",
+      ]
     }
 
     if (build_with_chromium && is_fuchsia) {
