@@ -53,9 +53,9 @@ class CommandBuffer final : public CommandBufferBase {
                                                   const TextureCopy& dstCopy,
                                                   const Extent3D& copySize);
 
-    // Need to track depth/stencil textures used by render passes if the
-    // VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass toggle is enabled.
-    std::set<TextureBase*> mRenderPassDepthStencilAttachments;
+    // Need to track if a render pass has already been recorded for the
+    // VulkanSplitCommandBufferOnComputePassAfterRenderPass workaround.
+    bool mHasRecordedRenderPassInCurrentCommandBuffer = false;
 };
 
 }  // namespace dawn::native::vulkan
