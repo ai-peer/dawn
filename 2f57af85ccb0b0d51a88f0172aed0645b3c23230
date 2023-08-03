@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb4c155_d1b08425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-03T09:04:39Z",
+      "side": 1,
+      "message": "Please take a look, thanks!\nThis CL enable Dawn experimental features for subgroup, `chromium-experimental-subgroups` and `chromium-experimental-subgroup-uniform-control-flow`.\nNote that SPIRV execution mode modification for `chromium-experimental-subgroup-uniform-control-flow` is not implemented yet in this CL.",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
