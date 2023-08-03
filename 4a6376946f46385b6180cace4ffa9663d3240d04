@@ -16,6 +16,57 @@
       "message": "PTAL.",
       "revId": "4a6376946f46385b6180cace4ffa9663d3240d04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd5786e_37915e58",
+        "filename": "src/tint/lang/msl/writer/printer/constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-03T22:41:31Z",
+      "side": 1,
+      "message": "Just FYI this isn\u0027t valid at module-scope in MSL so all of these tests will have to change when you\u0027ve implemented the `ModuleScopeVarToEntryPointParam` transform. Simplest would probably be a `b.Let()` inside an otherwise empty function.",
+      "revId": "4a6376946f46385b6180cace4ffa9663d3240d04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed1daa8f_6b506d6b",
+        "filename": "src/tint/lang/msl/writer/printer/helper_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-03T22:41:31Z",
+      "side": 1,
+      "message": "Do you need this? I only needed it for SPIR-V so that I could test a Printer with non-default options (for the SPIR-V backend\u0027s zero-init-workgroup-mem toggle), but I don\u0027t think the MSL printers have any such toggles so all tests would just use `Generate()` without specifying a custom `Printer`?",
+      "revId": "4a6376946f46385b6180cace4ffa9663d3240d04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d7b500_71cd1dd0",
+        "filename": "src/tint/lang/msl/writer/printer/type_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-03T22:41:31Z",
+      "side": 1,
+      "message": "As with the constant tests, you\u0027ll have to change all these at some point down the line because unused module-scope globals won\u0027t get emitted at all, so might make sense to do it now just to save the churn later. Up to you though.",
+      "revId": "4a6376946f46385b6180cace4ffa9663d3240d04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
