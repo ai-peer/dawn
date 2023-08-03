@@ -59,10 +59,34 @@ ResultOrError<Ref<PhysicalDevice>> PhysicalDevice::Create(InstanceBase* instance
                                                           wgpu::BackendType backendType,
                                                           void* (*getProc)(const char*),
                                                           EGLDisplay display) {
+    EGLFunctions egl;
+    egl.Init(getProc);
+
+    EGLenum api = backendType == wgpu::BackendType::OpenGLES ? EGL_OPENGL_ES_API : EGL_OPENGL_API;
+
+    if (display == EGL_NO_DISPLAY) {
+        display = egl.GetCurrentDisplay();
+    }
+
+    if (display == EGL_NO_DISPLAY) {
+        display = egl.GetDisplay(EGL_DEFAULT_DISPLAY);
+    }
+
+    std::unique_ptr<ContextEGL> context;
+    DAWN_TRY_ASSIGN(context, ContextEGL::Create(egl, api, display, false));
+
+    EGLContext prevDrawSurface = egl.GetCurrentSurface(EGL_DRAW);
+    EGLContext prevReadSurface = egl.GetCurrentSurface(EGL_READ);
+    EGLContext prevContext = egl.GetCurrentContext();
+
+    context->MakeCurrent();
+
     Ref<PhysicalDevice> physicalDevice =
         AcquireRef(new PhysicalDevice(instance, backendType, display));
     DAWN_TRY(physicalDevice->InitializeGLFunctions(getProc));
     DAWN_TRY(physicalDevice->Initialize());
+
+    egl.MakeCurrent(display, prevDrawSurface, prevReadSurface, prevContext);
     return physicalDevice;
 }
 
@@ -316,7 +340,8 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* ada
     EGLenum api =
         GetBackendType() == wgpu::BackendType::OpenGL ? EGL_OPENGL_API : EGL_OPENGL_ES_API;
     std::unique_ptr<Device::Context> context;
-    DAWN_TRY_ASSIGN(context, ContextEGL::Create(mEGLFunctions, api, mDisplay));
+    bool isDesktopGL = mName.find("OpenGL 4") != std::string::npos;
+    DAWN_TRY_ASSIGN(context, ContextEGL::Create(mEGLFunctions, api, mDisplay, isDesktopGL));
     return Device::Create(adapter, descriptor, mFunctions, std::move(context), deviceToggles);
 }
 
