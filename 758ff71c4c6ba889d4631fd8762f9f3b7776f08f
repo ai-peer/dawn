@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c170d594_d00fce7e",
+        "filename": "src/dawn/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-03T18:59:22Z",
+      "side": 1,
+      "message": "Oops! Thank for pointing that out. Should have paid closer attention.",
+      "parentUuid": "7af85120_a31e301f",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 39
+      },
+      "revId": "758ff71c4c6ba889d4631fd8762f9f3b7776f08f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6295e67a_07f8efce",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-03T18:47:56Z",
       "side": 1,
       "message": "I\u0027m not sure this suite exercises Compute then Render",
+      "range": {
+        "startLine": 661,
+        "startChar": 0,
+        "endLine": 661,
+        "endChar": 86
+      },
+      "revId": "758ff71c4c6ba889d4631fd8762f9f3b7776f08f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c3e163_9f6e9a8c",
+        "filename": "src/dawn/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-03T18:59:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6295e67a_07f8efce",
       "range": {
         "startLine": 661,
         "startChar": 0,
