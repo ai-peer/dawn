@@ -24,79 +24,145 @@ using namespace tint::number_suffixes;  // NOLINT
 
 TEST_F(MslPrinterTest, Constant_Bool_True) {
     auto* c = b.Constant(true);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("true"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.bool_()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread bool a = true;
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Bool_False) {
     auto* c = b.Constant(false);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("false"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.bool_()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread bool a = false;
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_i32) {
     auto* c = b.Constant(-12345_i);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("-12345"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.i32()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread int a = -12345;
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_u32) {
     auto* c = b.Constant(12345_u);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("12345u"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.u32()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread uint a = 12345u;
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_F32) {
     auto* c = b.Constant(f32((1 << 30) - 4));
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("1073741824.0f"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.f32()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float a = 1073741824.0f;
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_F16) {
     auto* c = b.Constant(f16((1 << 15) - 8));
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("32752.0h"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.f16()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread half a = 32752.0h;
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Vector_Splat) {
     auto* c = b.Splat(ty.vec3<f32>(), 1.5_f, 3);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("float3(1.5f)"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.vec3<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float3 a = float3(1.5f);
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Vector_Composite) {
     auto* c = b.Composite(ty.vec3<f32>(), 1.5_f, 1.0_f, 1.5_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("float3(1.5f, 1.0f, 1.5f)"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.vec3<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float3 a = float3(1.5f, 1.0f, 1.5f);
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Vector_Composite_AnyZero) {
     auto* c = b.Composite(ty.vec3<f32>(), 1.0_f, 0.0_f, 1.5_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("float3(1.0f, 0.0f, 1.5f)"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.vec3<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float3 a = float3(1.0f, 0.0f, 1.5f);
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Vector_Composite_AllZero) {
     auto* c = b.Composite(ty.vec3<f32>(), 0.0_f, 0.0_f, 0.0_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("float3(0.0f)"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.vec3<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float3 a = float3(0.0f);
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Matrix_Splat) {
     auto* c = b.Splat(ty.mat3x2<f32>(), 1.5_f, 3);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string("float3x2(1.5f, 1.5f, 1.5f)"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.mat3x2<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float3x2 a = float3x2(1.5f, 1.5f, 1.5f);
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Matrix_Composite) {
@@ -104,20 +170,30 @@ TEST_F(MslPrinterTest, Constant_Matrix_Composite) {
                           b.Composite(ty.vec2<f32>(), 1.5_f, 1.0_f),  //
                           b.Composite(ty.vec2<f32>(), 1.5_f, 2.0_f),  //
                           b.Composite(ty.vec2<f32>(), 2.5_f, 3.5_f));
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()),
-              std::string("float3x2(float2(1.5f, 1.0f), float2(1.5f, 2.0f), float2(2.5f, 3.5f))"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.mat3x2<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float3x2 a = float3x2(float2(1.5f, 1.0f), float2(1.5f, 2.0f), float2(2.5f, 3.5f));
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Matrix_Composite_AnyZero) {
     auto* c = b.Composite(ty.mat2x2<f32>(),                           //
                           b.Composite(ty.vec2<f32>(), 1.0_f, 0.0_f),  //
                           b.Composite(ty.vec2<f32>(), 1.5_f, 2.5_f));
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()),
-              std::string("float2x2(float2(1.0f, 0.0f), float2(1.5f, 2.5f))"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.mat2x2<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float2x2 a = float2x2(float2(1.0f, 0.0f), float2(1.5f, 2.5f));
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Matrix_Composite_AllZero) {
@@ -125,42 +201,67 @@ TEST_F(MslPrinterTest, Constant_Matrix_Composite_AllZero) {
                           b.Composite(ty.vec2<f32>(), 0.0_f, 0.0_f),  //
                           b.Composite(ty.vec2<f32>(), 0.0_f, 0.0_f),  //
                           b.Composite(ty.vec2<f32>(), 0.0_f, 0.0_f));
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()),
-              std::string("float3x2(float2(0.0f), float2(0.0f), float2(0.0f))"));
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.mat3x2<f32>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(
+thread float3x2 a = float3x2(float2(0.0f), float2(0.0f), float2(0.0f));
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Array_Splat) {
     auto* c = b.Splat(ty.array<f32, 3>(), 1.5_f, 3);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), MetalArray() + R"(
-tint_array<float, 3>{1.5f, 1.5f, 1.5f})");
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.array<f32, 3>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + MetalArray() + R"(
+thread tint_array<float, 3> a = tint_array<float, 3>{1.5f, 1.5f, 1.5f};
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Array_Composite) {
     auto* c = b.Composite(ty.array<f32, 3>(), 1.5_f, 1.0_f, 2.0_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), MetalArray() + R"(
-tint_array<float, 3>{1.5f, 1.0f, 2.0f})");
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.array<f32, 3>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + MetalArray() + R"(
+thread tint_array<float, 3> a = tint_array<float, 3>{1.5f, 1.0f, 2.0f};
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Array_Composite_AnyZero) {
     auto* c = b.Composite(ty.array<f32, 2>(), 1.0_f, 0.0_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), MetalArray() + R"(
-tint_array<float, 2>{1.0f, 0.0f})");
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.array<f32, 2>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + MetalArray() + R"(
+thread tint_array<float, 2> a = tint_array<float, 2>{1.0f, 0.0f};
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Array_Composite_AllZero) {
     auto* c = b.Composite(ty.array<f32, 3>(), 0.0_f, 0.0_f, 0.0_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), MetalArray() + R"(
-tint_array<float, 3>{})");
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, ty.array<f32, 3>()));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + MetalArray() + R"(
+thread tint_array<float, 3> a = tint_array<float, 3>{};
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Struct_Splat) {
@@ -169,14 +270,19 @@ TEST_F(MslPrinterTest, Constant_Struct_Splat) {
                                                   {mod.symbols.Register("b"), ty.f32()},
                                               });
     auto* c = b.Splat(s, 1.5_f, 2);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string(R"(struct S {
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, s));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(struct S {
   float a;
   float b;
 };
 
-S{.a=1.5f, .b=1.5f})"));
+thread S a = S{.a=1.5f, .b=1.5f};
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Struct_Composite) {
@@ -185,14 +291,19 @@ TEST_F(MslPrinterTest, Constant_Struct_Composite) {
                                                   {mod.symbols.Register("b"), ty.f32()},
                                               });
     auto* c = b.Composite(s, 1.5_f, 1.0_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string(R"(struct S {
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, s));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(struct S {
   float a;
   float b;
 };
 
-S{.a=1.5f, .b=1.0f})"));
+thread S a = S{.a=1.5f, .b=1.0f};
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Struct_Composite_AnyZero) {
@@ -201,14 +312,19 @@ TEST_F(MslPrinterTest, Constant_Struct_Composite_AnyZero) {
                                                   {mod.symbols.Register("b"), ty.f32()},
                                               });
     auto* c = b.Composite(s, 1.0_f, 0.0_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string(R"(struct S {
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, s));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(struct S {
   float a;
   float b;
 };
 
-S{.a=1.0f, .b=0.0f})"));
+thread S a = S{.a=1.0f, .b=0.0f};
+)");
 }
 
 TEST_F(MslPrinterTest, Constant_Struct_Composite_AllZero) {
@@ -217,14 +333,19 @@ TEST_F(MslPrinterTest, Constant_Struct_Composite_AllZero) {
                                                   {mod.symbols.Register("b"), ty.f32()},
                                               });
     auto* c = b.Composite(s, 0.0_f, 0.0_f);
-    generator_.EmitConstant(generator_.Line(), c);
-    ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
-    EXPECT_EQ(tint::TrimSpace(generator_.Result()), std::string(R"(struct S {
+    b.Append(b.RootBlock(), [&] {
+        auto* v = b.Var("a", ty.ptr(builtin::AddressSpace::kPrivate, s));
+        v->SetInitializer(c);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_;
+    EXPECT_EQ(output_, MetalHeader() + R"(struct S {
   float a;
   float b;
 };
 
-S{})"));
+thread S a = S{};
+)");
 }
 
 }  // namespace
