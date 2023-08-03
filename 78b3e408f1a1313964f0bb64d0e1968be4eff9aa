@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fce1b5f_800adbda",
+        "filename": "src/dawn/tests/unittests/MutexProtectedTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T06:14:17Z",
+      "side": 1,
+      "message": "drive-by: here, you\u0027re storing Ref\u003c\u003e inside MutexProtected. i.e. MutexProtected\u003cRef\u003cT\u003e\u003e\n\nI\u0027m not sure this will work because MutexProtected itself isn\u0027t copyable, whereas with Ref\u003c\u003e we do usually want it to be copyable (copy performs ref+release).\n\nRef\u003cMutexProtected\u003cstd::unique_ptr\u003cT\u003e\u003e\u003e would work, but it has extra allocations\n```\nRef {\n  MutexProtected\u003cstd::unique_ptr\u003cT\u003e\u003e* mMutexProtectedObj {\n    std::mutex mMutex;\n    std::unique_ptr\u003cT\u003e mObj;\n  }\n}\n\n// deref does ref-\u003emMutexProtectedObj-\u003emObj\n```\n\n^^ two allocations when we just want one.\n\nI can think of three options:\n\nwe could have it placement allocate so that T and the mutex are stored next to each other. this needs care since we\u0027re manually placing memory around which could be risky.\n\n```\ntemplate \u003ctypename T\u003e\nstruct ObjectAndMutex { union { T obj, char uninit; }; std::mutex mutex };\n\ntemplate \u003ctypename T, typename... Args\u003e\nMutexProtectedRef\u003ct\u003e MutexProtectedRef::Create(Args\u0026\u0026.. args) {\n  auto* alloc \u003d new ObjectAndMutex();\n  return MutexProtectedRef(new (\u0026alloc-\u003eobj) T(std::forward\u003cArgs\u003e(args)...));\n}\n```\n\nor, we make DescriptorSetAllocator return a proxy object and make the rest of it private\n\n```\nclass DescriptorSetAllocator : public ObjectBase {\n  public:\n    class Proxy {\n      public:\n        ResultOrError\u003cDescriptorSetAllocation\u003e Allocate();\n        void Deallocate(DescriptorSetAllocation* allocationInfo);\n        void FinishDeallocation(ExecutionSerial completedSerial);\n\n      private:\n        DescriptorSetAllocator* mTarget;\n    };\n\n    Guard\u003cProxy\u003e operator-\u003e();\n   \n  private:    \n    friend class Proxy;\n    ResultOrError\u003cDescriptorSetAllocation\u003e Allocate();\n    void Deallocate(DescriptorSetAllocation* allocationInfo);\n    void FinishDeallocation(ExecutionSerial completedSerial);\n\n    std::mutex mMutex;\n};\n\n```\n\nso, `Ref\u003cDescriptorSetAllocator\u003e foo; foo-\u003eAllocate();` derefing foo first acquires the mutex which gives you `Guard\u003cProxy\u003e`, which then gives you `Proxy*`, which has the methods forward to the wrapped `DescriptorSetAllocator*`\n\n\nor...\n\n```\ntemplate \u003ctypename T\u003e\nclass MutexProtectedCRTP {\n  public:\n   Guard\u003cT\u003e operator-\u003e();\n\n  private:\n   std::mutex mMutex;\n};\n\nclass DescriptorSetAllocator :\n  public ObjectBase,\n  public MutexProtectedCRTP\u003cDescriptorSetAllocator\u003e {\n \n  public:\n    static Ref\u003cMutexProtectedCRTP\u003cDescriptorSetAllocator\u003e\u003e Create(\n        BindGroupLayout* layout,\n        std::map\u003cVkDescriptorType, uint32_t\u003e descriptorCountPerType);\n\n    ResultOrError\u003cDescriptorSetAllocation\u003e Allocate();\n    void Deallocate(DescriptorSetAllocation* allocationInfo);\n    void FinishDeallocation(ExecutionSerial completedSerial);\n};\n```\n\nthis option hosts the object and the mutex in the same allocation via base class, and doesn\u0027t have the proxy object. I think it\u0027s probably the best one! You\u0027ll need to define the ref traits so that Ref/Release on MutexProtectedCRTP cast to the derived type and then perform ref/release.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 80
+      },
+      "revId": "78b3e408f1a1313964f0bb64d0e1968be4eff9aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
