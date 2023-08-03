@@ -16,6 +16,46 @@
       "message": "PTAL!\n\nAustin: I tried to find a better heuristic than this, but then I found that one of the cases triggering the failure was an automatically injected compute pass to clear a buffer for initial use that hadn\u0027t even been referenced by a previous render pass, and IT was causing the same failure! (This is the case that I previously thought was a render pass re-using a previous render passes attachments. I wasn\u0027t aware that Dawn was injecting a compute pass at the time.)\n\nSo while this is possibly a little overly broad, it\u0027s the only thing I\u0027ve found that covers all of the instances of this crash that I\u0027ve encountered.",
       "revId": "f8e6389a8d1be6e1eeb792492d88d8a1176c46bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d396802f_d3186883",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T18:31:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f8e6389a8d1be6e1eeb792492d88d8a1176c46bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7612b639_0cc88324",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T18:31:01Z",
+      "side": 1,
+      "message": "let\u0027s add a configuration to force enable this toggle in GpuMemorySyncTests which hass a [ComputePassToRenderPass test](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/GpuMemorySynchronizationTests.cpp;l\u003d155?q\u003dCompute%20Render%20f:dawn%20f:tests%20f:end2end\u0026ss\u003dchromium%2Fchromium%2Fsrc)\n\ni.e. on instantiation, append  VulkanBackend({\"vulkan_split_command_buffer_on_compute_pass_after_render_pass\"})",
+      "range": {
+        "startLine": 323,
+        "startChar": 7,
+        "endLine": 323,
+        "endChar": 68
+      },
+      "revId": "f8e6389a8d1be6e1eeb792492d88d8a1176c46bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
