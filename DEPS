@@ -49,11 +49,11 @@ vars = {
 deps = {
   # Dependencies required to use GN/Clang in standalone
   'build': {
-    'url': '{chromium_git}/chromium/src/build@1103ef535ca1e100db5d4e59781a4e59369a9818',
+    'url': '{chromium_git}/chromium/src/build@5885d3c24833ad72845a52a1b913a2b8bc651b56',
     'condition': 'dawn_standalone',
   },
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools@f841f2b2fdde3c8dbe069abf83fa78ab430b34a2',
+    'url': '{chromium_git}/chromium/src/buildtools@79ab87fa54614258c4c95891e873223371194525',
     'condition': 'dawn_standalone',
   },
   'third_party/clang-format/script': {
@@ -83,18 +83,6 @@ deps = {
     }],
     'dep_type': 'cipd',
     'condition': 'dawn_standalone and host_os == "win"',
-  },
-
-  # TODO(chromium:1458042): Remove these paths, when chromium builds files
-  # have moved to third_party/lib*/src paths.
-  'buildtools/third_party/libc++/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@0e4617cf8c09a8e2b6704a51a8a0a9560715cf70',
-    'condition': 'dawn_standalone',
-  },
-
-  'buildtools/third_party/libc++abi/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@307bd163607c315d46103ebe1d68aab44bf93986',
-    'condition': 'dawn_standalone',
   },
 
   'third_party/libc++/src': {
