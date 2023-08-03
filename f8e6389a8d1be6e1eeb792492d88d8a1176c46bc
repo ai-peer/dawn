@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53349612_61af0e6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-03T18:16:38Z",
+      "side": 1,
+      "message": "PTAL!\n\nAustin: I tried to find a better heuristic than this, but then I found that one of the cases triggering the failure was an automatically injected compute pass to clear a buffer for initial use that hadn\u0027t even been referenced by a previous render pass, and IT was causing the same failure! (This is the case that I previously thought was a render pass re-using a previous render passes attachments. I wasn\u0027t aware that Dawn was injecting a compute pass at the time.)\n\nSo while this is possibly a little overly broad, it\u0027s the only thing I\u0027ve found that covers all of the instances of this crash that I\u0027ve encountered.",
+      "revId": "f8e6389a8d1be6e1eeb792492d88d8a1176c46bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
