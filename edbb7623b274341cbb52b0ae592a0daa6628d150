@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e923d905_aabb16b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-03T20:32:56Z",
+      "side": 1,
+      "message": "`Bug: chromium:1458042`",
+      "revId": "edbb7623b274341cbb52b0ae592a0daa6628d150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f226eb25_8732ace3",
@@ -32,6 +49,23 @@
       "side": 1,
       "message": "https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8773776221298861169/+/u/compile_with_ninja/stdout\n\nI\u0027m not sure why this is happening\n\nor where `buildtools/third_party/libc++/libc++/new_handler.o` is coming from\n\nlibc++ stuff has been moved to `third_party/libc++/src` and all build files in buildtools have been adjusted to look a the new paths.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4666325",
       "parentUuid": "f226eb25_8732ace3",
+      "revId": "edbb7623b274341cbb52b0ae592a0daa6628d150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0da467a_9d979049",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-03T20:32:56Z",
+      "side": 1,
+      "message": "Needs to be rolled to a newer version (and probably libc++abi too)",
       "revId": "edbb7623b274341cbb52b0ae592a0daa6628d150",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
