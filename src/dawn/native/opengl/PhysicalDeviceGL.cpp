@@ -24,6 +24,12 @@
 #include "dawn/native/opengl/ContextEGL.h"
 #include "dawn/native/opengl/DeviceGL.h"
 
+#if DAWN_PLATFORM_IS(WINDOWS)
+#include <dxgi.h>
+#include "dawn/common/DynamicLib.h"
+#include "dawn/common/WindowsUtils.h"
+#endif
+
 namespace dawn::native::opengl {
 
 namespace {
@@ -50,6 +56,37 @@ uint32_t GetVendorIdFromVendors(const char* vendor) {
         }
     }
     return vendorId;
+}
+
+uint32_t GetDeviceIdFromNameAndVendorId(const std::string& name, uint32_t vendorId) {
+    uint32_t deviceId = 0;
+#if DAWN_PLATFORM_IS(WINDOWS)
+    using PFN_CREATE_DXGI_FACTORY = HRESULT(WINAPI*)(REFIID riid, _COM_Outptr_ void** ppFactory);
+    PFN_CREATE_DXGI_FACTORY createDxgiFactory = nullptr;
+    DynamicLib dxgiLib;
+    if (dxgiLib.Open("dxgi.dll") && dxgiLib.GetProc(&createDxgiFactory, "CreateDXGIFactory")) {
+        IDXGIFactory* factory;
+        if (SUCCEEDED(createDxgiFactory(IID_PPV_ARGS(&factory)))) {
+            uint32_t i = 0;
+            IDXGIAdapter* adapter = nullptr;
+            while (factory->EnumAdapters(i++, &adapter) != DXGI_ERROR_NOT_FOUND) {
+                DXGI_ADAPTER_DESC desc;
+                adapter->GetDesc(&desc);
+                adapter->Release();
+
+                if (desc.VendorId == vendorId &&
+                    name.find(WCharToUTF8(desc.Description)) != std::string::npos) {
+                    deviceId = desc.DeviceId;
+                    break;
+                }
+            }
+            factory->Release();
+        }
+    }
+    dxgiLib.Close();
+#endif
+
+    return deviceId;
 }
 
 }  // anonymous namespace
@@ -118,6 +155,8 @@ MaybeError PhysicalDevice::InitializeImpl() {
     // Workaroud to find vendor id from vendor name
     const char* vendor = reinterpret_cast<const char*>(mFunctions.GetString(GL_VENDOR));
     mVendorId = GetVendorIdFromVendors(vendor);
+    // Workaround to find device id from device name and vendor id
+    mDeviceId = GetDeviceIdFromNameAndVendorId(mName, mVendorId);
 
     mDriverDescription = std::string("OpenGL version ") +
                          reinterpret_cast<const char*>(mFunctions.GetString(GL_VERSION));
