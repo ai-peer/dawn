@@ -650,13 +650,15 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
     EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kYellow, renderPass.color, max, max);
 }
 
-DAWN_INSTANTIATE_TEST(MultipleWriteThenMultipleReadTests,
-                      D3D11Backend(),
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST(
+    MultipleWriteThenMultipleReadTests,
+    D3D11Backend(),
+    D3D12Backend(),
+    MetalBackend(),
+    OpenGLBackend(),
+    OpenGLESBackend(),
+    VulkanBackend(),
+    VulkanBackend({"vulkan_split_command_buffer_on_compute_pass_after_render_pass"}));
 
 }  // anonymous namespace
 }  // namespace dawn
