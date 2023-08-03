@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7af85120_a31e301f",
+        "filename": "src/dawn/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T18:47:56Z",
+      "side": 1,
+      "message": "this one has `GpuMemorySyncTests, RenderPassToComputePass`",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 39
+      },
+      "revId": "758ff71c4c6ba889d4631fd8762f9f3b7776f08f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6295e67a_07f8efce",
+        "filename": "src/dawn/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-03T18:47:56Z",
+      "side": 1,
+      "message": "I\u0027m not sure this suite exercises Compute then Render",
+      "range": {
+        "startLine": 661,
+        "startChar": 0,
+        "endLine": 661,
+        "endChar": 86
+      },
+      "revId": "758ff71c4c6ba889d4631fd8762f9f3b7776f08f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
