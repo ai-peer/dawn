@@ -889,22 +889,13 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
                                             const ComputePassResourceUsage& resourceUsages) {
     Device* device = ToBackend(GetDevice());
 
-    // If required, split the command buffer any time we detect a dpeth/stencil attachment is
-    // used in a compute pass after being used as a render pass attachment in the same command
-    // buffer.
-    if (device->IsToggleEnabled(
-            Toggle::VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass) &&
-        !mRenderPassDepthStencilAttachments.empty()) {
-        for (auto texture : resourceUsages.referencedTextures) {
-            if (texture->GetFormat().HasDepthOrStencil() &&
-                mRenderPassDepthStencilAttachments.find(texture) !=
-                    mRenderPassDepthStencilAttachments.end()) {
-                // Identified a potential crash case, split the command buffer.
-                DAWN_TRY(device->SplitRecordingContext(recordingContext));
-                mRenderPassDepthStencilAttachments.clear();
-                break;
-            }
-        }
+    // If required, split the command buffer any time a compute pass follows a render pass to
+    // work around a Qualcomm bug.
+    if (device->IsToggleEnabled(Toggle::VulkanSplitCommandBufferOnComputePassAfterRenderPass) &&
+        mHasRecordedRenderPassInCurrentCommandBuffer) {
+        // Identified a potential crash case, split the command buffer.
+        DAWN_TRY(device->SplitRecordingContext(recordingContext));
+        mHasRecordedRenderPassInCurrentCommandBuffer = false;
     }
 
     // Write timestamp at the beginning of compute pass if it's set
@@ -1054,17 +1045,11 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
 MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingContext,
                                            BeginRenderPassCmd* renderPassCmd) {
     Device* device = ToBackend(GetDevice());
+
     VkCommandBuffer commands = recordingContext->commandBuffer;
+    mHasRecordedRenderPassInCurrentCommandBuffer = true;
 
     DAWN_TRY(RecordBeginRenderPass(recordingContext, device, renderPassCmd));
-
-    // If required, track depth/stencil textures used as render pass attachments.
-    if (device->IsToggleEnabled(
-            Toggle::VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass) &&
-        renderPassCmd->attachmentState->HasDepthStencilAttachment()) {
-        mRenderPassDepthStencilAttachments.insert(
-            renderPassCmd->depthStencilAttachment.view->GetTexture());
-    }
 
     // Write timestamp at the beginning of render pass if it's set.
     if (renderPassCmd->beginTimestamp.querySet.Get() != nullptr) {
