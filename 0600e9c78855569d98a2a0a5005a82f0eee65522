@@ -68,6 +68,24 @@
       "message": "Geoff, any idea what\u0027s going on here? Should I avoid using the texture sharing extension on Win? Or on SwANGLE?",
       "revId": "0600e9c78855569d98a2a0a5005a82f0eee65522",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f308603d_c4017112",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-03T16:40:38Z",
+      "side": 1,
+      "message": "Geoff suggested avoiding turning on GL texture sharing on platforms with other kinds of texture sharing available. For now I\u0027m avoiding SwiftShader by checkint for EGL_ANGLE_vulkan_image. This seems to avoid the memory leak.",
+      "parentUuid": "14b4f141_9ac1f96b",
+      "revId": "0600e9c78855569d98a2a0a5005a82f0eee65522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
