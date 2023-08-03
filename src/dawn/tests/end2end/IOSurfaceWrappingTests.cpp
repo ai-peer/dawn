@@ -26,6 +26,10 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+#if defined(DAWN_ENABLE_BACKEND_VULKAN)
+#include "dawn/native/VulkanBackend.h"
+#endif
+
 namespace dawn {
 namespace {
 
@@ -97,12 +101,63 @@ class IOSurfaceTestBase : public DawnTest {
     wgpu::Texture WrapIOSurface(const wgpu::TextureDescriptor* descriptor,
                                 IOSurfaceRef ioSurface,
                                 bool isInitialized = true) {
-        native::metal::ExternalImageDescriptorIOSurface externDesc;
-        externDesc.cTextureDescriptor = reinterpret_cast<const WGPUTextureDescriptor*>(descriptor);
-        externDesc.ioSurface = ioSurface;
-        externDesc.isInitialized = isInitialized;
-        WGPUTexture texture = native::metal::WrapIOSurface(device.Get(), &externDesc);
+        wgpu::Adapter adapter = device.GetAdapter();
+        wgpu::AdapterProperties adapterProps = {};
+        adapter.GetProperties(&adapterProps);
+
+        WGPUTexture texture;
+
+        // TODO(dawn:1745): unify the external image API.
+        switch (adapterProps.backendType) {
+            case wgpu::BackendType::Metal: {
+                native::metal::ExternalImageDescriptorIOSurface externDesc;
+                externDesc.cTextureDescriptor =
+                    reinterpret_cast<const WGPUTextureDescriptor*>(descriptor);
+                externDesc.ioSurface = ioSurface;
+                externDesc.isInitialized = isInitialized;
+                texture = native::metal::WrapIOSurface(device.Get(), &externDesc);
+            } break;
+#if defined(DAWN_ENABLE_BACKEND_VULKAN)
+            case wgpu::BackendType::Vulkan: {
+                native::vulkan::ExternalImageDescriptorIOSurfaceVk externDesc;
+                externDesc.cTextureDescriptor =
+                    reinterpret_cast<const WGPUTextureDescriptor*>(descriptor);
+                externDesc.ioSurface = ioSurface;
+                externDesc.isInitialized = isInitialized;
+                texture = native::vulkan::WrapVulkanImage(device.Get(), &externDesc);
+            } break;
+#endif  // #if defined(DAWN_ENABLE_BACKEND_VULKAN)
+            default:
+                UNREACHABLE();
+        }
         return wgpu::Texture::Acquire(texture);
+    }
+
+    // End access to the IOSurface and return whether the texture is initialized
+    bool IOSurfaceEndAccess(wgpu::Texture texture) {
+        wgpu::Adapter adapter = device.GetAdapter();
+        wgpu::AdapterProperties adapterProps = {};
+        adapter.GetProperties(&adapterProps);
+
+        // TODO(dawn:1745): unify the external image API.
+        switch (adapterProps.backendType) {
+            case wgpu::BackendType::Metal: {
+                native::metal::ExternalImageIOSurfaceEndAccessDescriptor endAccessDesc;
+                native::metal::IOSurfaceEndAccess(texture.Get(), &endAccessDesc);
+                return endAccessDesc.isInitialized;
+            }
+#if defined(DAWN_ENABLE_BACKEND_VULKAN)
+            case wgpu::BackendType::Vulkan: {
+                native::vulkan::ExternalImageExportInfoIOSurfaceVk exportInfo;
+                native::vulkan::ExportVulkanImage(texture.Get(), &exportInfo);
+                return exportInfo.isInitialized;
+            }
+#endif  // #if defined(DAWN_ENABLE_BACKEND_VULKAN)
+            default:
+                UNREACHABLE();
+        }
+
+        return false;
     }
 };
 
@@ -367,8 +422,14 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        // Wait for the commands touching the IOSurface to be scheduled
-        native::metal::WaitForCommandsToBeScheduled(device.Get());
+        if (IsMetal()) {
+            // Wait for the commands touching the IOSurface to be scheduled
+            native::metal::WaitForCommandsToBeScheduled(device.Get());
+        } else if (IsVulkan()) {
+            IOSurfaceEndAccess(ioSurfaceTexture);
+        } else {
+            UNREACHABLE();
+        }
 
         // Check the correct data was written
         IOSurfaceLock(ioSurface, kIOSurfaceLockReadOnly, nullptr);
@@ -480,9 +541,7 @@ TEST_P(IOSurfaceUsageTests, UninitializedTextureIsCleared) {
     wgpu::Texture ioSurfaceTexture = WrapIOSurface(&textureDescriptor, ioSurface.get(), false);
     EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), ioSurfaceTexture, 0, 0);
 
-    native::metal::ExternalImageIOSurfaceEndAccessDescriptor endAccessDesc;
-    native::metal::IOSurfaceEndAccess(ioSurfaceTexture.Get(), &endAccessDesc);
-    EXPECT_TRUE(endAccessDesc.isInitialized);
+    EXPECT_TRUE(IOSurfaceEndAccess(ioSurfaceTexture));
 }
 
 // Test that exporting a texture wrapping an IOSurface sets the isInitialized bit to
@@ -516,14 +575,14 @@ TEST_P(IOSurfaceUsageTests, UninitializedOnEndAccess) {
     wgpu::CommandBuffer commandBuffer = encoder.Finish();
     queue.Submit(1, &commandBuffer);
 
-    native::metal::ExternalImageIOSurfaceEndAccessDescriptor endAccessDesc;
-    native::metal::IOSurfaceEndAccess(ioSurfaceTexture.Get(), &endAccessDesc);
-    EXPECT_FALSE(endAccessDesc.isInitialized);
+    EXPECT_FALSE(IOSurfaceEndAccess(ioSurfaceTexture));
 }
 
-// Test that an IOSurface may be imported across multiple devices.
-TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWrite) {
+// Test that an IOSurface may be imported across multiple metal devices.
+TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWriteOnMetalBackend) {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+    // TODO(dawn:1745): Merge platform specific tests once the external image API is unified.
+    DAWN_TEST_UNSUPPORTED_IF(!IsMetal());
 
     ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32RGBA, 4);
     uint32_t data = 0x04030201;
@@ -618,6 +677,138 @@ TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWrite) {
     EXPECT_TRUE(endWriteAccessDesc.isInitialized);
 }
 
+#if defined(DAWN_ENABLE_BACKEND_VULKAN)
+// Fixture to test IOSurface with Vulkan backend.
+class IOSurfaceVulkanTests : public IOSurfaceUsageTests {};
+
+// Test that an IOSurface may be imported across multiple vulkan devices.
+// TODO(dawn:1745): Merge platform specific tests once the external image API is unified.
+TEST_P(IOSurfaceVulkanTests, WriteThenConcurrentReadThenWriteOnVulkanBackend) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32RGBA, 4);
+    uint32_t data = 0x04030201;
+
+    IOSurfaceLock(ioSurface.get(), 0, nullptr);
+    memcpy(IOSurfaceGetBaseAddress(ioSurface.get()), &data, sizeof(data));
+    IOSurfaceUnlock(ioSurface.get(), 0, nullptr);
+
+    // Make additional devices. We will import with the writeDevice, then read it concurrently with
+    // both readDevices.
+    wgpu::Device writeDevice = device;
+    wgpu::Device readDevice1 = CreateDevice();
+    wgpu::Device readDevice2 = CreateDevice();
+
+    wgpu::TextureDescriptor textureDesc;
+    textureDesc.dimension = wgpu::TextureDimension::e2D;
+    textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+    textureDesc.size = {1, 1, 1};
+    textureDesc.sampleCount = 1;
+    textureDesc.mipLevelCount = 1;
+    textureDesc.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
+
+    // Wrap ioSurface
+    native::vulkan::ExternalImageDescriptorIOSurfaceVk writeExternDesc;
+    writeExternDesc.cTextureDescriptor =
+        reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
+    writeExternDesc.ioSurface = ioSurface.get();
+    writeExternDesc.isInitialized = true;
+
+    wgpu::Texture writeTexture = wgpu::Texture::Acquire(
+        native::vulkan::WrapVulkanImage(writeDevice.Get(), &writeExternDesc));
+
+    // Clear the texture to green.
+    {
+        utils::ComboRenderPassDescriptor renderPassDescriptor({writeTexture.CreateView()});
+        renderPassDescriptor.cColorAttachments[0].clearValue = {0.0, 1.0, 0.0, 1.0};
+        wgpu::CommandEncoder encoder = writeDevice.CreateCommandEncoder();
+        encoder.BeginRenderPass(&renderPassDescriptor).End();
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        writeDevice.GetQueue().Submit(1, &commandBuffer);
+    }
+
+    // End access.
+    native::vulkan::ExternalImageExportInfoIOSurfaceVk endWriteAccessDesc;
+    native::vulkan::ExportVulkanImage(writeTexture.Get(), &endWriteAccessDesc);
+    EXPECT_TRUE(endWriteAccessDesc.isInitialized);
+
+    native::vulkan::ExternalImageDescriptorIOSurfaceVk externDesc;
+    externDesc.cTextureDescriptor = reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
+    externDesc.ioSurface = ioSurface.get();
+    externDesc.isInitialized = true;
+
+    // Wrap on two separate devices to read it.
+    wgpu::Texture readTexture1 =
+        wgpu::Texture::Acquire(native::vulkan::WrapVulkanImage(readDevice1.Get(), &externDesc));
+    wgpu::Texture readTexture2 =
+        wgpu::Texture::Acquire(native::vulkan::WrapVulkanImage(readDevice2.Get(), &externDesc));
+
+    // Expect the texture to be green
+    EXPECT_TEXTURE_EQ(readDevice1, utils::RGBA8(0, 255, 0, 255), readTexture1, {0, 0});
+    EXPECT_TEXTURE_EQ(readDevice2, utils::RGBA8(0, 255, 0, 255), readTexture2, {0, 0});
+
+    // End access on both read textures.
+    native::vulkan::ExternalImageExportInfoIOSurfaceVk endReadAccessDesc1;
+    native::vulkan::ExportVulkanImage(readTexture1.Get(), &endReadAccessDesc1);
+    EXPECT_TRUE(endReadAccessDesc1.isInitialized);
+
+    native::vulkan::ExternalImageExportInfoIOSurfaceVk endReadAccessDesc2;
+    native::vulkan::ExportVulkanImage(readTexture2.Get(), &endReadAccessDesc2);
+    EXPECT_TRUE(endReadAccessDesc2.isInitialized);
+
+    // Import again for writing. It should not race with the previous reads.
+    writeExternDesc.isInitialized = true;
+    writeTexture = wgpu::Texture::Acquire(
+        native::vulkan::WrapVulkanImage(writeDevice.Get(), &writeExternDesc));
+
+    // Clear the texture to blue.
+    {
+        utils::ComboRenderPassDescriptor renderPassDescriptor({writeTexture.CreateView()});
+        renderPassDescriptor.cColorAttachments[0].clearValue = {0.0, 0.0, 1.0, 1.0};
+        wgpu::CommandEncoder encoder = writeDevice.CreateCommandEncoder();
+        encoder.BeginRenderPass(&renderPassDescriptor).End();
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        writeDevice.GetQueue().Submit(1, &commandBuffer);
+    }
+    // Finally, expect the contents to be blue now.
+    EXPECT_TEXTURE_EQ(writeDevice, utils::RGBA8(0, 0, 255, 255), writeTexture, {0, 0});
+    native::vulkan::ExportVulkanImage(writeTexture.Get(), &endWriteAccessDesc);
+    EXPECT_TRUE(endWriteAccessDesc.isInitialized);
+}
+
+// Test that if ExternalImageDescriptorIOSurfaceVk's releasedOldLayout & releasedNewLayout are not
+// VK_IMAGE_LAYOUT_GENERAL, the IOSurface will fail to be wrapped.
+TEST_P(IOSurfaceVulkanTests, ImportWithInvalidReleaseLayout) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32RGBA, 4);
+
+    wgpu::TextureDescriptor textureDesc;
+    textureDesc.dimension = wgpu::TextureDimension::e2D;
+    textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+    textureDesc.size = {1, 1, 1};
+    textureDesc.sampleCount = 1;
+    textureDesc.mipLevelCount = 1;
+    textureDesc.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
+
+    // Wrap ioSurface
+    native::vulkan::ExternalImageDescriptorIOSurfaceVk externDesc;
+    externDesc.cTextureDescriptor = reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
+    externDesc.ioSurface = ioSurface.get();
+    externDesc.isInitialized = true;
+
+    externDesc.releasedOldLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+    externDesc.releasedNewLayout = VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL;
+
+    wgpu::Texture texture;
+    ASSERT_DEVICE_ERROR_MSG(texture = wgpu::Texture::Acquire(
+                                native::vulkan::WrapVulkanImage(device.Get(), &externDesc)),
+                            testing::HasSubstr("equal to VK_IMAGE_LAYOUT_GENERAL"));
+    ASSERT_EQ(texture.Get(), nullptr);
+}
+
+#endif  // #if defined(DAWN_ENABLE_BACKEND_VULKAN)
+
 class IOSurfaceMultithreadTests : public IOSurfaceUsageTests {
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
@@ -661,9 +852,7 @@ TEST_P(IOSurfaceMultithreadTests, UninitializedTexturesAreCleared_OnMultipleThre
         wgpu::Texture ioSurfaceTexture = WrapIOSurface(&textureDescriptor, ioSurface.get(), false);
         EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0, 0, 0), ioSurfaceTexture, 0, 0);
 
-        native::metal::ExternalImageIOSurfaceEndAccessDescriptor endAccessDesc;
-        native::metal::IOSurfaceEndAccess(ioSurfaceTexture.Get(), &endAccessDesc);
-        EXPECT_TRUE(endAccessDesc.isInitialized);
+        EXPECT_TRUE(IOSurfaceEndAccess(ioSurfaceTexture));
     });
 }
 
@@ -678,10 +867,11 @@ TEST_P(IOSurfaceMultithreadTests, WrapAndClear_OnMultipleThreads) {
     });
 }
 
-DAWN_INSTANTIATE_TEST(IOSurfaceValidationTests, MetalBackend());
-DAWN_INSTANTIATE_TEST(IOSurfaceTransientAttachmentValidationTests, MetalBackend());
-DAWN_INSTANTIATE_TEST(IOSurfaceUsageTests, MetalBackend());
-DAWN_INSTANTIATE_TEST(IOSurfaceMultithreadTests, MetalBackend());
+DAWN_INSTANTIATE_TEST(IOSurfaceValidationTests, MetalBackend(), VulkanBackend());
+DAWN_INSTANTIATE_TEST(IOSurfaceTransientAttachmentValidationTests, MetalBackend(), VulkanBackend());
+DAWN_INSTANTIATE_TEST(IOSurfaceUsageTests, MetalBackend(), VulkanBackend());
+DAWN_INSTANTIATE_TEST(IOSurfaceVulkanTests, VulkanBackend());
+DAWN_INSTANTIATE_TEST(IOSurfaceMultithreadTests, MetalBackend(), VulkanBackend());
 
 }  // anonymous namespace
 }  // namespace dawn
