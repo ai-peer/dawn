@@ -16,6 +16,7 @@
 
 #include <algorithm>
 #include <memory>
+#include <regex>
 #include <string>
 #include <utility>
 
@@ -50,6 +51,16 @@ uint32_t GetVendorIdFromVendors(const char* vendor) {
         }
     }
     return vendorId;
+}
+
+uint32_t GetDeviceIdFromRender(const std::string& render) {
+    uint32_t deviceId = 0;
+    std::regex regex("\\(0x([[:xdigit:]]+)\\)");
+    std::smatch results;
+    if (std::regex_search(render, results, regex)) {
+        deviceId = static_cast<uint32_t>(std::stoul(results[1], nullptr, 16));
+    }
+    return deviceId;
 }
 
 }  // anonymous namespace
@@ -118,6 +129,8 @@ MaybeError PhysicalDevice::InitializeImpl() {
     // Workaroud to find vendor id from vendor name
     const char* vendor = reinterpret_cast<const char*>(mFunctions.GetString(GL_VENDOR));
     mVendorId = GetVendorIdFromVendors(vendor);
+    // Workaround to find device id from render string
+    mDeviceId = GetDeviceIdFromRender(mName);
 
     mDriverDescription = std::string("OpenGL version ") +
                          reinterpret_cast<const char*>(mFunctions.GetString(GL_VERSION));
