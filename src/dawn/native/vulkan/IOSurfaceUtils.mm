@@ -49,14 +49,11 @@ Extent3D GetTextureAspectSize(TextureBase* texture, Aspect aspect) {
     Extent3D size = texture->GetMipLevelSingleSubresourcePhysicalSize(0);
     switch (aspect) {
         case Aspect::Color:
-            break;
         case Aspect::Plane0:
-            // TODO(dawn:1923): support multiplanar format.
-            UNREACHABLE();
             break;
         case Aspect::Plane1:
-            // TODO(dawn:1923): support multiplanar format.
-            UNREACHABLE();
+            size.width >>= 1;
+            size.height >>= 1;
             break;
         default:
             UNREACHABLE();
