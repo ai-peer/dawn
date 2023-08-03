@@ -45,6 +45,10 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
 
+#if DAWN_PLATFORM_IS(MACOS)
+#include "dawn/native/vulkan/IOSurfaceUtils.h"
+#endif
+
 namespace dawn::native::vulkan {
 
 namespace {
@@ -930,6 +934,67 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
 
     return result;
 }
+
+#if DAWN_PLATFORM_IS(MACOS)
+TextureBase* Device::ImportTextureFromIOSurface(
+    const ExternalImageDescriptorIOSurfaceVk* descriptor) {
+    const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
+
+    // Initial validation
+    if (ConsumedError(ValidateIsAlive())) {
+        return nullptr;
+    }
+    if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor,
+                                                AllowMultiPlanarTextureFormat::Yes))) {
+        return nullptr;
+    }
+    if (ConsumedError(ValidateIOSurfaceCanBeImported(textureDescriptor, descriptor->ioSurface),
+                      "validating that a Vulkan image can be wrapped with %s.",
+                      textureDescriptor)) {
+        return nullptr;
+    }
+    if (GetValidInternalFormat(textureDescriptor->format).IsMultiPlanar() &&
+        !descriptor->isInitialized) {
+        bool consumed = ConsumedError(DAWN_VALIDATION_ERROR(
+            "External textures with multiplanar formats must be initialized."));
+        DAWN_UNUSED(consumed);
+        return nullptr;
+    }
+
+    Texture* result = nullptr;
+    if (ConsumedError(Texture::CreateFromIOSurface(this, textureDescriptor, descriptor->ioSurface,
+                                                   descriptor->isInitialized),
+                      &result)) {
+        // Delete the Texture if it was created
+        if (result != nullptr) {
+            result->Release();
+        }
+        return nullptr;
+    }
+
+    return result;
+}
+
+bool Device::ExportTextureToIOSurface(Texture* texture,
+                                      VkImageLayout desiredLayout,
+                                      ExternalImageExportInfoVk* info) {
+    return !ConsumedError([&]() -> MaybeError {
+        DAWN_TRY(ValidateObject(texture));
+
+        VkImageLayout releasedOldLayout;
+        VkImageLayout releasedNewLayout;
+        DAWN_TRY(texture->ExportToIOSurface(desiredLayout, &releasedOldLayout, &releasedNewLayout));
+
+        info->releasedOldLayout = releasedOldLayout;
+        info->releasedNewLayout = releasedNewLayout;
+        info->isInitialized =
+            texture->IsSubresourceContentInitialized(texture->GetAllSubresources());
+
+        return {};
+    }());
+}
+
+#endif  // #if DAWN_PLATFORM_IS(MACOS)
 
 uint32_t Device::GetComputeSubgroupSize() const {
     return ToBackend(GetPhysicalDevice())->GetDefaultComputeSubgroupSize();

@@ -681,6 +681,10 @@ if (DAWN_ENABLE_OPENGL)
 endif()
 if (DAWN_ENABLE_VULKAN)
     target_sources(dawn_native PRIVATE "vulkan/VulkanBackend.cpp")
+    if (APPLE)
+        target_sources(dawn_native PRIVATE "vulkan/IOSurfaceUtils.h")
+        target_sources(dawn_native PRIVATE "vulkan/IOSurfaceUtils.mm")
+    endif()
 endif()
 
 DawnJSONGenerator(
