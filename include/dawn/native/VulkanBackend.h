@@ -22,6 +22,11 @@
 
 #include "dawn/native/DawnNative.h"
 
+#ifdef __APPLE__
+struct __IOSurface;
+typedef __IOSurface* IOSurfaceRef;
+#endif
+
 namespace dawn::native::vulkan {
 
 DAWN_NATIVE_EXPORT VkInstance GetInstance(WGPUDevice device);
@@ -157,6 +162,29 @@ struct DAWN_NATIVE_EXPORT ExternalImageExportInfoAHardwareBuffer : ExternalImage
 #endif  // __ANDROID__
 
 #endif  // __linux__
+
+#ifdef __APPLE__
+
+// Descriptor for IOSurface image import. Note: this is currently only used for SwiftShader.
+struct DAWN_NATIVE_EXPORT ExternalImageDescriptorIOSurfaceVk : ExternalImageDescriptorVk {
+  public:
+    ExternalImageDescriptorIOSurfaceVk();
+
+    IOSurfaceRef ioSurface;
+
+  protected:
+    using ExternalImageDescriptorVk::ExternalImageDescriptorVk;
+};
+
+// Info struct that is written to in |ExportVulkanImage|.
+struct DAWN_NATIVE_EXPORT ExternalImageExportInfoIOSurfaceVk : ExternalImageExportInfoVk {
+  public:
+    ExternalImageExportInfoIOSurfaceVk();
+
+  private:
+    using ExternalImageExportInfoVk::ExternalImageExportInfoVk;
+};
+#endif  // __APPLE__
 
 // Imports external memory into a Vulkan image. Internally, this uses external memory /
 // semaphore extensions to import the image and wait on the provided synchronizaton

@@ -879,6 +879,11 @@ dawn_component("native") {
   if (dawn_enable_vulkan) {
     sources += [ "vulkan/VulkanBackend.cpp" ]
 
+    if (is_mac) {
+      sources += [ "vulkan/IOSurfaceUtils.h" ]
+      sources += [ "vulkan/IOSurfaceUtils.mm" ]
+    }
+
     if (enable_vulkan_validation_layers) {
       data_deps =
           [ "${dawn_vulkan_validation_layers_dir}:vulkan_validation_layers" ]
