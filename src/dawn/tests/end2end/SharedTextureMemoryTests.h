@@ -39,6 +39,9 @@ namespace dawn {
 
 class SharedTextureMemoryTestBackend {
   public:
+    virtual void SetUp() {}
+    virtual void TearDown() {}
+
     // The name used in gtest parameterization. Names of backends must be unique.
     virtual std::string Name() const = 0;
 
@@ -91,6 +94,7 @@ DAWN_TEST_PARAM_STRUCT(SharedTextureMemoryTestParams, Backend);
 class SharedTextureMemoryNoFeatureTests : public DawnTestWithParams<SharedTextureMemoryTestParams> {
   protected:
     void SetUp() override;
+    void TearDown() override;
 };
 
 class SharedTextureMemoryTests : public DawnTestWithParams<SharedTextureMemoryTestParams> {
@@ -98,6 +102,7 @@ class SharedTextureMemoryTests : public DawnTestWithParams<SharedTextureMemoryTe
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override;
 
     void SetUp() override;
+    void TearDown() override;
 
     wgpu::Device CreateDevice();
 

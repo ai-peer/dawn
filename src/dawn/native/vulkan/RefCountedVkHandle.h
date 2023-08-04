@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,38 +25,36 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
-#define SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_REFCOUNTEDVKHANDLE_H_
+#define SRC_DAWN_NATIVE_VULKAN_REFCOUNTEDVKHANDLE_H_
 
-#include "dawn/common/vulkan_platform.h"
+#include "dawn/common/RefCounted.h"
+#include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/FencedDeleter.h"
 
 namespace dawn::native::vulkan {
 
-#if DAWN_PLATFORM_IS(ANDROID)
-// AHardwareBuffer
-using ExternalMemoryHandle = struct AHardwareBuffer*;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
-#elif DAWN_PLATFORM_IS(FUCHSIA)
-// Really a Zircon vmo handle.
-using ExternalMemoryHandle = zx_handle_t;
-// Really a Zircon event handle.
-using ExternalSemaphoreHandle = zx_handle_t;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = ZX_HANDLE_INVALID;
-#elif DAWN_PLATFORM_IS(POSIX)
-// File descriptor
-using ExternalMemoryHandle = int;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
-#else
-// Generic types so that the Null service can compile, not used for real handles
-using ExternalMemoryHandle = void*;
-using ExternalSemaphoreHandle = void*;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = nullptr;
-#endif
+// RefCountedVkHandle is used to wrap a Vulkan object that is shared between multiple systems.
+// The object is kept alive until all refs are dropped; then it is sent to the fenced deleter
+// for destruction.
+template <typename Handle>
+class RefCountedVkHandle : public RefCounted {
+  public:
+    RefCountedVkHandle(Device* device, Handle handle) : mDevice(device), mHandle(handle) {}
+
+    ~RefCountedVkHandle() override {
+        if (mHandle != VK_NULL_HANDLE) {
+            mDevice->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+        }
+    }
+
+    Handle Get() const { return mHandle; }
+
+  private:
+    Ref<Device> mDevice;
+    Handle mHandle = VK_NULL_HANDLE;
+};
 
 }  // namespace dawn::native::vulkan
 
-#endif  // SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_REFCOUNTEDVKHANDLE_H_

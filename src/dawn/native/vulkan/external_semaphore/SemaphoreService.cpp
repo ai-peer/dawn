@@ -34,10 +34,9 @@
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.h"
 #endif  // DAWN_PLATFORM_IS(FUCHSIA)
 
-// Android, ChromeOS and Linux
-#if DAWN_PLATFORM_IS(LINUX)
+#if DAWN_PLATFORM_IS(POSIX)
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
-#endif  // DAWN_PLATFORM_IS(LINUX)
+#endif  // DAWN_PLATFORM_IS(POSIX)
 
 namespace dawn::native::vulkan::external_semaphore {
 // static
@@ -46,18 +45,19 @@ bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
                            const VulkanFunctions& fn) {
 #if DAWN_PLATFORM_IS(FUCHSIA)
     return CheckZirconHandleSupport(deviceInfo, physicalDevice, fn);
-#elif DAWN_PLATFORM_IS(LINUX)  // Android, ChromeOS and Linux
+#elif DAWN_PLATFORM_IS(POSIX)
     return CheckFDSupport(deviceInfo, physicalDevice, fn);
 #else
     return false;
 #endif
 }
 
-Service::Service(Device* device) {
-#if DAWN_PLATFORM_IS(FUCHSIA)  // Fuchsia
+Service::Service(Device* device, VkExternalSemaphoreHandleTypeFlagBits handleType) {
+#if DAWN_PLATFORM_IS(FUCHSIA)
+    DAWN_ASSERT(handleType == VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA);
     mServiceImpl = CreateZirconHandleService(device);
-#elif DAWN_PLATFORM_IS(LINUX) || DAWN_PLATFORM_IS(CHROMEOS)  // Android, ChromeOS and Linux
-    mServiceImpl = CreateFDService(device);
+#elif DAWN_PLATFORM_IS(POSIX)
+    mServiceImpl = CreateFDService(device, handleType);
 #endif
 }
 

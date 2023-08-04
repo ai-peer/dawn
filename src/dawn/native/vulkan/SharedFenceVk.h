@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,38 +25,52 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
-#define SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
+#define SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
 
-#include "dawn/common/vulkan_platform.h"
+#include <vector>
+
+#include "dawn/common/Platform.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/SharedFence.h"
 
 namespace dawn::native::vulkan {
 
-#if DAWN_PLATFORM_IS(ANDROID)
-// AHardwareBuffer
-using ExternalMemoryHandle = struct AHardwareBuffer*;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
-#elif DAWN_PLATFORM_IS(FUCHSIA)
-// Really a Zircon vmo handle.
-using ExternalMemoryHandle = zx_handle_t;
-// Really a Zircon event handle.
-using ExternalSemaphoreHandle = zx_handle_t;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = ZX_HANDLE_INVALID;
-#elif DAWN_PLATFORM_IS(POSIX)
-// File descriptor
-using ExternalMemoryHandle = int;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
+class Device;
+
+class SharedFence final : public SharedFenceBase {
+  public:
+    static ResultOrError<Ref<SharedFence>> Create(
+        Device* device,
+        const char* label,
+        const SharedFenceVkSemaphoreOpaqueFDDescriptor* descriptor);
+
+    static ResultOrError<Ref<SharedFence>> Create(
+        Device* device,
+        const char* label,
+        const SharedFenceVkSemaphoreSyncFDDescriptor* descriptor);
+
+    static ResultOrError<Ref<SharedFence>> Create(
+        Device* device,
+        const char* label,
+        const SharedFenceVkSemaphoreZirconHandleDescriptor* descriptor);
+
+#if DAWN_PLATFORM_IS(FUCHSIA)
+    using Handle = uint32_t;
 #else
-// Generic types so that the Null service can compile, not used for real handles
-using ExternalMemoryHandle = void*;
-using ExternalSemaphoreHandle = void*;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = nullptr;
+    using Handle = int;
 #endif
+
+  private:
+    SharedFence(Device* device, const char* label, Handle handle);
+    void DestroyImpl() override;
+
+    MaybeError ExportInfoImpl(SharedFenceExportInfo* info) const override;
+
+    wgpu::SharedFenceType mType;
+    Handle mHandle;
+};
 
 }  // namespace dawn::native::vulkan
 
-#endif  // SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
