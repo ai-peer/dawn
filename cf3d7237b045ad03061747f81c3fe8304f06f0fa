@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76494776_95088543",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000687
+      },
+      "writtenOn": "2023-08-04T18:46:09Z",
+      "side": 1,
+      "message": "Please update OWNERS (add all gitlinks to have *; that matches DEPS); and update DEPS to have `git_dependencies \u003d \"SYNC\"`",
+      "revId": "cf3d7237b045ad03061747f81c3fe8304f06f0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
