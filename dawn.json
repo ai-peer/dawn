@@ -1544,7 +1544,6 @@
         "tags": ["dawn", "native"],
         "members": [
             {"name": "memory FD", "type": "int"},
-            {"name": "allocation size", "type": "uint64_t"},
             {"name": "drm modifier", "type": "uint64_t"},
             {"name": "plane count", "type": "size_t"},
             {"name": "plane offsets", "type": "uint64_t", "annotation": "const*", "length": "plane count"},

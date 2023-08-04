@@ -40,6 +40,8 @@
 #include "dawn/native/vulkan/ResourceMemoryAllocatorVk.h"
 #include "dawn/native/vulkan/SamplerVk.h"
 #include "dawn/native/vulkan/ShaderModuleVk.h"
+#include "dawn/native/vulkan/SharedFenceVk.h"
+#include "dawn/native/vulkan/SharedTextureMemoryVk.h"
 #include "dawn/native/vulkan/SwapChainVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -223,6 +225,98 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     return SwapChain::GetSupportedSurfaceUsage(this, surface);
 }
 
+ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
+    const SharedTextureMemoryDescriptor* baseDescriptor) {
+    DAWN_TRY(ValidateSTypes(baseDescriptor->nextInChain,
+                            {{wgpu::SType::SharedTextureMemoryDmaBufDescriptor,
+                              wgpu::SType::SharedTextureMemoryOpaqueFDDescriptor,
+                              wgpu::SType::SharedTextureMemoryZirconHandleDescriptor},
+                             {
+                                 wgpu::SType::SharedTextureMemoryVkImageDescriptor,
+                             }}));
+    const SharedTextureMemoryVkImageDescriptor* vkImageDesc = nullptr;
+    FindInChain(baseDescriptor->nextInChain, &vkImageDesc);
+
+    DAWN_INVALID_IF(vkImageDesc == nullptr,
+                    "SharedTextureMemoryVkImageDescriptor was not chained.");
+    {
+        const SharedTextureMemoryDmaBufDescriptor* descriptor = nullptr;
+        FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+        if (descriptor) {
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryDmaBuf), "%s is not enabled.",
+                            wgpu::FeatureName::SharedTextureMemoryDmaBuf);
+            return SharedTextureMemory::Create(this, baseDescriptor->label, vkImageDesc,
+                                               descriptor);
+        }
+    }
+    {
+        const SharedTextureMemoryOpaqueFDDescriptor* descriptor = nullptr;
+        FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+        if (descriptor) {
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryOpaqueFD), "%s is not enabled.",
+                            wgpu::FeatureName::SharedTextureMemoryOpaqueFD);
+            return SharedTextureMemory::Create(this, baseDescriptor->label, vkImageDesc,
+                                               descriptor);
+        }
+    }
+    {
+        const SharedTextureMemoryZirconHandleDescriptor* descriptor = nullptr;
+        FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+        if (descriptor) {
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryZirconHandle),
+                            "%s is not enabled.",
+                            wgpu::FeatureName::SharedTextureMemoryZirconHandle);
+            return SharedTextureMemory::Create(this, baseDescriptor->label, vkImageDesc,
+                                               descriptor);
+        }
+    }
+    return DAWN_VALIDATION_ERROR("Unsupported memory import.");
+}
+
+ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
+    const SharedFenceDescriptor* baseDescriptor) {
+    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
+                                 wgpu::SType::SharedFenceVkSemaphoreZirconHandleDescriptor,
+                                 wgpu::SType::SharedFenceVkSemaphoreSyncFDDescriptor,
+                                 wgpu::SType::SharedFenceVkSemaphoreOpaqueFDDescriptor));
+    {
+        const SharedFenceVkSemaphoreZirconHandleDescriptor* descriptor = nullptr;
+        FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+        if (descriptor) {
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreZirconHandle),
+                            "%s is not enabled.",
+                            wgpu::FeatureName::SharedFenceVkSemaphoreZirconHandle);
+            return SharedFence::Create(this, baseDescriptor->label, descriptor);
+        }
+    }
+    {
+        const SharedFenceVkSemaphoreSyncFDDescriptor* descriptor = nullptr;
+        FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+        if (descriptor) {
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreSyncFD),
+                            "%s is not enabled.", wgpu::FeatureName::SharedFenceVkSemaphoreSyncFD);
+            return SharedFence::Create(this, baseDescriptor->label, descriptor);
+        }
+    }
+    {
+        const SharedFenceVkSemaphoreOpaqueFDDescriptor* descriptor = nullptr;
+        FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+        if (descriptor) {
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD),
+                            "%s is not enabled.",
+                            wgpu::FeatureName::SharedFenceVkSemaphoreOpaqueFD);
+            return SharedFence::Create(this, baseDescriptor->label, descriptor);
+        }
+    }
+    return DAWN_VALIDATION_ERROR("Unsupported shared fence import.");
+}
+
 MaybeError Device::TickImpl() {
     RecycleCompletedCommands();
 
@@ -331,6 +425,47 @@ MaybeError Device::SubmitPendingCommands() {
         std::vector<VkSemaphore> waitRequirements = texture->AcquireWaitRequirements();
         mRecordingContext.waitSemaphores.insert(mRecordingContext.waitSemaphores.end(),
                                                 waitRequirements.begin(), waitRequirements.end());
+
+        Ref<SharedTextureMemory> memory = ToBackend(texture->QuerySharedTextureMemory());
+        if (memory != nullptr) {
+            SharedTextureMemoryBase::PendingFenceList fences;
+            memory->AcquireBeginFences(texture, &fences);
+
+            for (const auto& fence : fences) {
+                SharedFenceExportInfo baseExportInfo;
+                ExternalSemaphoreHandle handle;
+#if DAWN_PLATFORM_IS(FUCHSIA)
+                SharedFenceVkSemaphoreZirconHandleExportInfo exportInfo = {};
+                baseExportInfo.nextInChain = &exportInfo;
+
+                fence.object->APIExportInfo(&baseExportInfo);
+                ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreZirconHandle);
+                handle = exportInfo.handle;
+#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
+                SharedFenceVkSemaphoreSyncFDExportInfo exportInfo = {};
+                baseExportInfo.nextInChain = &exportInfo;
+
+                fence.object->APIExportInfo(&baseExportInfo);
+                ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreSyncFD);
+                handle = exportInfo.handle;
+#elif DAWN_PLATFORM_IS(LINUX)
+                SharedFenceVkSemaphoreOpaqueFDExportInfo exportInfo = {};
+                baseExportInfo.nextInChain = &exportInfo;
+
+                fence.object->APIExportInfo(&baseExportInfo);
+                ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreOpaqueFD);
+                handle = exportInfo.handle;
+#else
+                UNREACHABLE();
+#endif
+
+                // All semaphores are binary semaphores.
+                ASSERT(fence.signaledValue == 1u);
+                VkSemaphore semaphore;
+                DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
+                mRecordingContext.waitSemaphores.push_back(semaphore);
+            }
+        }
     }
 
     DAWN_TRY(
