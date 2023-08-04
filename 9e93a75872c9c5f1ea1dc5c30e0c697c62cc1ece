@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6e3e224_4b9d1ba7",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:20:58Z",
+      "side": 1,
+      "message": "I don\u0027t think `implicit` exists. It\u0027s just either with `explicit` or not.",
+      "parentUuid": "07ffa079_d6756b59",
+      "revId": "9e93a75872c9c5f1ea1dc5c30e0c697c62cc1ece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "292cb5b7_07d7afe0",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-04T00:52:11Z",
       "side": 1,
       "message": "I feel like other similar situations may come up with other STL items. I guess we just make a best effort, and the user has to use a cast for other cases?",
+      "revId": "9e93a75872c9c5f1ea1dc5c30e0c697c62cc1ece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "928d9d8e_e0141b20",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:20:58Z",
+      "side": 1,
+      "message": "Yea, for now they would have to do a cast, or implement their own specialization in their code.",
+      "parentUuid": "292cb5b7_07d7afe0",
       "revId": "9e93a75872c9c5f1ea1dc5c30e0c697c62cc1ece",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
