@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "723cdadb_b0e562e3",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T16:04:07Z",
+      "side": 1,
+      "message": "I was thinking this as well! it would be good too because now you can do:\n\n```\n{\nwgpu::AdapterProperties p;\np.name \u003d \"hi\";\n}\n// crash!\n```\n\nit means though we need to const_cast in the implementation - which could be wonky.\n\n\noh wait, I see. you mean only make them const in the c++ api but non-const in C in internal wgpu_structs_autogen - that would work",
+      "parentUuid": "2dc42ee0_9d8b4cac",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2fca302_1ae77a9e",
         "filename": "generator/templates/api_cpp.cpp",
         "patchSetId": 5
@@ -65,6 +83,24 @@
       "writtenOn": "2023-08-04T15:30:39Z",
       "side": 1,
       "message": "We run the destructor before moving members? Don\u0027t this mean they will be freed?",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35e109f5_19f4e62d",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T16:04:07Z",
+      "side": 1,
+      "message": "`this` is the receiver of the assignment - so yes - I think that\u0027s what should happen?\n\n```\nwgpu::AdapterProperties p1;\nwgpu::AdapterProperties p2;\n\n\nadapter.GetProperties(\u0026p1);\nadapter.GetProperties(\u0026p2);\n\n// p1 should be freed, and take the contents of p2\np1 \u003d std::move(p2);\n```\n\nI should write a test for it",
+      "parentUuid": "a2fca302_1ae77a9e",
       "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
