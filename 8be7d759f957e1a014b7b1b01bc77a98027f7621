@@ -94,6 +94,30 @@
       },
       "revId": "8be7d759f957e1a014b7b1b01bc77a98027f7621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24df8fed_1eba5cc9",
+        "filename": "third_party/webgpu-cts",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-04T19:56:13Z",
+      "side": 1,
+      "message": "also does this CL block the script update CL?\ni think it would be easier for you to test the script if these changes were merged first? and in the mean time people could do manual gitlink updates along with the script changes?",
+      "parentUuid": "8c0f8d4b_0dd9ad13",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "8be7d759f957e1a014b7b1b01bc77a98027f7621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
