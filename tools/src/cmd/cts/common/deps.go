@@ -66,3 +66,20 @@ func UpdateCTSHashInDeps(deps, newCTSHash string) (newDEPS, oldCTSHash string, e
 
 	return newDEPS, oldCTSHash, nil
 }
+
+// UpdateCTSHashGitlink replaces the CTS hashes in the gitlink with 'newCTSHash'.
+// Returns:
+//
+//	newDEPS    - the new DEPS content
+//	oldCTSHash - the old CTS hash in the 'deps'
+func UpdateCTSGitlink(gitlink, newCTSHash string) (newGitlink, oldCTSHash string, err error) {
+	// Replace the old hash with the new hash in the gitlink.
+	re := regexp.MustCompile(`Subproject commit ([^}]*)`)
+	matches := re.FindStringSubmatch(gitlink)
+	if len(matches) == 0 {
+		return "", "", fmt.Errorf("failed to find a CTS hash in the gitlink file")
+	}
+	oldCTSHash = matches[1]
+	newContent = strings.ReplaceAll(gitlink, oldCTSHash, newCTSHash)
+	return newContent, oldCTSHash, nil
+}
