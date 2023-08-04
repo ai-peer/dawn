@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5e3a862_e64183c9",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T20:49:39Z",
+      "side": 1,
+      "message": "+1, I think if we make the pointers const and provide the necessary ctors to move/create them, then we could add an `ASSERT` after the condition that if any are `!\u003d nullptr` they should all `!\u003d nullptr`.",
+      "parentUuid": "723cdadb_b0e562e3",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2fca302_1ae77a9e",
         "filename": "generator/templates/api_cpp.cpp",
         "patchSetId": 5
@@ -130,6 +148,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c808db6e_6fb5e043",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T20:49:39Z",
+      "side": 1,
+      "message": "Instead of calling dtor explicitly, maybe we could somehow make sure that when we write to an `out` value its always via a move? This would also work better if we make the pointers const above.\n\nThen I don\u0027t think we need to call the dtor here, since the move will do that for us.",
+      "parentUuid": "06cf0488_ec16546f",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 79
+      },
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47008867_fb643332",
         "filename": "generator/templates/dawn_proc.c",
         "patchSetId": 5
@@ -141,6 +183,24 @@
       "writtenOn": "2023-08-04T15:30:39Z",
       "side": 1,
       "message": "I wonder if these should be added as \"function\" category items automatically when parsing the json file so we don\u0027t need to add manual handling for them everywhere.",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc15bf7_b5f2972e",
+        "filename": "generator/templates/dawn_proc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T20:49:39Z",
+      "side": 1,
+      "message": "+1. I think this would be pretty nice. It would also fail on link time if we added a * member type to an out struct that we didn\u0027t implement the `Free*` function for.",
+      "parentUuid": "47008867_fb643332",
       "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
