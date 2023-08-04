@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5bc79f_72d7c521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T15:30:39Z",
+      "side": 1,
+      "message": "LGtm",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc42ee0_9d8b4cac",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T15:30:39Z",
+      "side": 1,
+      "message": "Should we make the pointer members const so that users of the C++ API don\u0027t try to set them to something else and break FreeMembers?",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2fca302_1ae77a9e",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T15:30:39Z",
+      "side": 1,
+      "message": "We run the destructor before moving members? Don\u0027t this mean they will be freed?",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06cf0488_ec16546f",
@@ -37,6 +88,57 @@
         "endLine": 179,
         "endChar": 79
       },
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47008867_fb643332",
+        "filename": "generator/templates/dawn_proc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T15:30:39Z",
+      "side": 1,
+      "message": "I wonder if these should be added as \"function\" category items automatically when parsing the json file so we don\u0027t need to add manual handling for them everywhere.",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cd159a_844cc0f2",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T15:30:39Z",
+      "side": 1,
+      "message": "u-nit: Maybe comment that this single delete is enough because everything is a single allocation.",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb28d75_5bf96e7e",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T15:30:39Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
