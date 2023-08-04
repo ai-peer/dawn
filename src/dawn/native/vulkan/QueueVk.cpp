@@ -358,6 +358,52 @@ MaybeError Queue::SubmitPendingCommands() {
         std::vector<VkSemaphore> waitRequirements = texture->AcquireWaitRequirements();
         mRecordingContext.waitSemaphores.insert(mRecordingContext.waitSemaphores.end(),
                                                 waitRequirements.begin(), waitRequirements.end());
+
+        SharedTextureMemoryContents* contents = texture->GetSharedTextureMemoryContents();
+        if (contents != nullptr) {
+            SharedTextureMemoryBase::PendingFenceList fences;
+            contents->AcquirePendingFences(&fences);
+
+            for (const auto& fence : fences) {
+                SharedFenceExportInfo baseExportInfo;
+                ExternalSemaphoreHandle handle;
+#if DAWN_PLATFORM_IS(FUCHSIA)
+                SharedFenceVkSemaphoreZirconHandleExportInfo exportInfo = {};
+                baseExportInfo.nextInChain = &exportInfo;
+
+                DAWN_TRY(fence.object->ExportInfo(&baseExportInfo));
+                DAWN_ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreZirconHandle);
+                handle = exportInfo.handle;
+#elif DAWN_PLATFORM_IS(LINUX)
+                if (device->HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD)) {
+                    SharedFenceVkSemaphoreOpaqueFDExportInfo exportInfo = {};
+                    baseExportInfo.nextInChain = &exportInfo;
+
+                    DAWN_TRY(fence.object->ExportInfo(&baseExportInfo));
+                    DAWN_ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreOpaqueFD);
+                    handle = exportInfo.handle;
+                } else if (device->HasFeature(Feature::SharedFenceVkSemaphoreSyncFD)) {
+                    SharedFenceVkSemaphoreSyncFDExportInfo exportInfo = {};
+                    baseExportInfo.nextInChain = &exportInfo;
+
+                    DAWN_TRY(fence.object->ExportInfo(&baseExportInfo));
+                    DAWN_ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreSyncFD);
+                    handle = exportInfo.handle;
+                } else {
+                    DAWN_UNREACHABLE();
+                }
+#else
+                DAWN_UNREACHABLE();
+#endif
+
+                // All semaphores are binary semaphores.
+                DAWN_ASSERT(fence.signaledValue == 1u);
+                VkSemaphore semaphore;
+                DAWN_TRY_ASSIGN(semaphore,
+                                device->GetExternalSemaphoreService()->ImportSemaphore(handle));
+                mRecordingContext.waitSemaphores.push_back(semaphore);
+            }
+        }
     }
 
     DAWN_TRY(CheckVkSuccess(device->fn.EndCommandBuffer(mRecordingContext.commandBuffer),

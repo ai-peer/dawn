@@ -37,6 +37,7 @@ namespace dawn {
 void SharedTextureMemoryNoFeatureTests::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     DawnTestWithParams<SharedTextureMemoryTestParams>::SetUp();
+    GetParam().mBackend->SetUp();
 }
 
 std::vector<wgpu::FeatureName> SharedTextureMemoryTests::GetRequiredFeatures() {
@@ -54,6 +55,17 @@ void SharedTextureMemoryTests::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     DawnTestWithParams<SharedTextureMemoryTestParams>::SetUp();
     DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures(GetParam().mBackend->RequiredFeatures()));
+    GetParam().mBackend->SetUp();
+}
+
+void SharedTextureMemoryNoFeatureTests::TearDown() {
+    DawnTestWithParams<SharedTextureMemoryTestParams>::TearDown();
+    GetParam().mBackend->TearDown();
+}
+
+void SharedTextureMemoryTests::TearDown() {
+    DawnTestWithParams<SharedTextureMemoryTestParams>::TearDown();
+    GetParam().mBackend->TearDown();
 }
 
 std::vector<wgpu::SharedTextureMemory> SharedTextureMemoryTestBackend::CreateSharedTextureMemories(
@@ -159,15 +171,15 @@ wgpu::CommandBuffer SharedTextureMemoryTests::MakeFourColorsClearCommandBuffer(
       @fragment fn frag_main(in: FragmentIn) -> @location(0) vec4f {
           if (in.uv.x < 0.5) {
             if (in.uv.y < 0.5) {
-              return vec4f(0.0, 1.0, 0.0, 1.0);
+              return vec4f(0.0, 1.0, 0.0, 0.501);
             } else {
-              return vec4f(1.0, 0.0, 0.0, 1.0);
+              return vec4f(1.0, 0.0, 0.0, 0.501);
             }
           } else {
             if (in.uv.y < 0.5) {
-              return vec4f(0.0, 0.0, 1.0, 1.0);
+              return vec4f(0.0, 0.0, 1.0, 0.501);
             } else {
-              return vec4f(1.0, 1.0, 0.0, 1.0);
+              return vec4f(1.0, 1.0, 0.0, 0.501);
             }
           }
       }
@@ -259,33 +271,61 @@ void SharedTextureMemoryTests::CheckFourColors(wgpu::Device& deviceObj,
     wgpu::Origin3D tr = {3 * colorTarget.GetWidth() / 4, colorTarget.GetHeight() / 4};
     wgpu::Origin3D br = {3 * colorTarget.GetWidth() / 4, 3 * colorTarget.GetHeight() / 4};
 
+    std::array<utils::RGBA8, 4> expectedColors;
+    uint8_t expectedAlpha;
     switch (format) {
+        case wgpu::TextureFormat::RGB10A2Unorm:
+            expectedColors = {
+                utils::RGBA8::kGreen,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlue,
+                utils::RGBA8::kYellow,
+            };
+            expectedAlpha = 0xAA;
+            break;
         case wgpu::TextureFormat::RGBA8Unorm:
         case wgpu::TextureFormat::BGRA8Unorm:
-        case wgpu::TextureFormat::RGB10A2Unorm:
         case wgpu::TextureFormat::RGBA16Float:
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kGreen, colorTarget, tl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, bl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlue, colorTarget, tr, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kYellow, colorTarget, br, {1, 1});
+            expectedColors = {
+                utils::RGBA8::kGreen,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlue,
+                utils::RGBA8::kYellow,
+            };
+            expectedAlpha = 0x80;
             break;
         case wgpu::TextureFormat::RG16Float:
         case wgpu::TextureFormat::RG8Unorm:
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kGreen, colorTarget, tl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, bl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlack, colorTarget, tr, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kYellow, colorTarget, br, {1, 1});
+            expectedColors = {
+                utils::RGBA8::kGreen,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlack,
+                utils::RGBA8::kYellow,
+            };
+            expectedAlpha = 0xFF;
             break;
         case wgpu::TextureFormat::R16Float:
         case wgpu::TextureFormat::R8Unorm:
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlack, colorTarget, tl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, bl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlack, colorTarget, tr, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, br, {1, 1});
+            expectedColors = {
+                utils::RGBA8::kBlack,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlack,
+                utils::RGBA8::kRed,
+            };
+            expectedAlpha = 0xFF;
             break;
         default:
             DAWN_UNREACHABLE();
     }
+    expectedColors[0].a = expectedAlpha;
+    expectedColors[1].a = expectedAlpha;
+    expectedColors[2].a = expectedAlpha;
+    expectedColors[3].a = expectedAlpha;
+
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[0], colorTarget, tl, {1, 1});
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[1], colorTarget, bl, {1, 1});
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[2], colorTarget, tr, {1, 1});
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[3], colorTarget, br, {1, 1});
 }
 
 // Allow tests to be uninstantiated since it's possible no backends are available.
@@ -1192,6 +1232,47 @@ TEST_P(SharedTextureMemoryTests, SeparateDevicesWriteThenConcurrentReadThenWrite
         devices[0].GetQueue().Submit(1, &clearToGrayCommandBuffer0);
     }
 }
+
+class SharedTextureMemoryVulkanTests : public DawnTest {};
+
+// Test that only a single Vulkan fence feature may be enabled at once.
+TEST_P(SharedTextureMemoryVulkanTests, SingleFenceFeature) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    std::vector<wgpu::FeatureName> fenceFeatures;
+
+    wgpu::Adapter adapter(GetAdapter().Get());
+    for (wgpu::FeatureName f : {
+             wgpu::FeatureName::SharedFenceVkSemaphoreOpaqueFD,
+             wgpu::FeatureName::SharedFenceVkSemaphoreSyncFD,
+             wgpu::FeatureName::SharedFenceVkSemaphoreZirconHandle,
+         }) {
+        if (adapter.HasFeature(f)) {
+            fenceFeatures.push_back(f);
+        }
+    }
+
+    // Test that creating a device with each feature is valid.
+    for (wgpu::FeatureName f : fenceFeatures) {
+        wgpu::DeviceDescriptor deviceDesc;
+        deviceDesc.requiredFeatureCount = 1;
+        deviceDesc.requiredFeatures = &f;
+        EXPECT_NE(adapter.CreateDevice(&deviceDesc), nullptr);
+    }
+
+    // Test that any combination of two features is invalid.
+    for (size_t i = 0; i < fenceFeatures.size(); ++i) {
+        for (size_t j = i + 1; j < fenceFeatures.size(); ++j) {
+            wgpu::FeatureName features[] = {fenceFeatures[i], fenceFeatures[j]};
+            wgpu::DeviceDescriptor deviceDesc;
+            deviceDesc.requiredFeatureCount = 2;
+            deviceDesc.requiredFeatures = features;
+            EXPECT_EQ(adapter.CreateDevice(&deviceDesc), nullptr);
+        }
+    }
+}
+
+DAWN_INSTANTIATE_TEST(SharedTextureMemoryVulkanTests, VulkanBackend());
 
 }  // anonymous namespace
 }  // namespace dawn
