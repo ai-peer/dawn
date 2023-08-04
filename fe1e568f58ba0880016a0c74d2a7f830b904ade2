@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "725434da_455456d1",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-08-04T21:41:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4cfdccb6_861cd2e6",
+      "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80ab9079_cf90d04f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-04T21:41:30Z",
       "side": 1,
       "message": "This is the new part.",
+      "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a655611d_c49b2d58",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-08-04T21:41:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80ab9079_cf90d04f",
       "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
