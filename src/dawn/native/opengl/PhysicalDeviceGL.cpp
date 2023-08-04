@@ -352,7 +352,8 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* ada
 
     DAWN_TRY_ASSIGN(context,
                     ContextEGL::Create(mEGLFunctions, api, mDisplay, useANGLETextureSharing));
-    return Device::Create(adapter, descriptor, mFunctions, std::move(context), deviceToggles);
+    return Device::Create(adapter, descriptor, mFunctions, std::move(context), deviceToggles,
+                          useANGLETextureSharing);
 }
 
 bool PhysicalDevice::SupportsFeatureLevel(FeatureLevel featureLevel) const {
