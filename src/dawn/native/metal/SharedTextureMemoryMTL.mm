@@ -106,7 +106,6 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
     : SharedTextureMemoryBase(device, label, properties), mIOSurface(ioSurface) {}
 
 void SharedTextureMemory::DestroyImpl() {
-    SharedTextureMemoryBase::DestroyImpl();
     mIOSurface = nullptr;
 }
 
