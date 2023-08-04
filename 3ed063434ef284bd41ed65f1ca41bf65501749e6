@@ -16,6 +16,23 @@
       "message": "Test CL, shouldn\u0027t actually be submitted.",
       "revId": "3ed063434ef284bd41ed65f1ca41bf65501749e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f076cd_54581724",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-08-04T17:14:41Z",
+      "side": 1,
+      "message": "Is it possible for anyone to abandon this so that the rubber stamper doesn\u0027t try to submit on occasion?",
+      "revId": "3ed063434ef284bd41ed65f1ca41bf65501749e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
