@@ -22,6 +22,54 @@
       },
       "revId": "8be7d759f957e1a014b7b1b01bc77a98027f7621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f473df05_44417803",
+        "filename": "third_party/webgpu-cts",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-04T19:47:43Z",
+      "side": 1,
+      "message": "i have a CL of the simple solution almost ready. but do you mind taking the CL over to test since we\u0027re not familiar with dawn infra and it would be faster?",
+      "parentUuid": "9f729577_a322087d",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "8be7d759f957e1a014b7b1b01bc77a98027f7621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d232a0ba_55d7df41",
+        "filename": "third_party/webgpu-cts",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-04T19:47:43Z",
+      "side": 1,
+      "message": "ah thanks for pointing that out.\n\n\nYea, i think this should be a simple addition.\n\nSince we\u0027re not familiar with how to best test these things",
+      "parentUuid": "9f729577_a322087d",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "8be7d759f957e1a014b7b1b01bc77a98027f7621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
