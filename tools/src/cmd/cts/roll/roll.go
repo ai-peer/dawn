@@ -53,6 +53,7 @@ func init() {
 
 const (
 	depsRelPath          = "DEPS"
+	gitLinkPath          = "third_pary/webgpu-cts"
 	tsSourcesRelPath     = "third_party/gn/webgpu-cts/ts_sources.txt"
 	testListRelPath      = "third_party/gn/webgpu-cts/test_list.txt"
 	cacheListRelPath     = "third_party/gn/webgpu-cts/cache_list.txt"
@@ -192,7 +193,7 @@ func (r *roller) roll(ctx context.Context) error {
 	}
 
 	// Update the DEPS file
-	updatedDEPS, newCTSHash, oldCTSHash, err := r.updateDEPS(ctx, dawnHash)
+	updatedDEPS, updatedGitLink, newCTSHash, oldCTSHash, err := r.updateDEPS(ctx, dawnHash)
 	if err != nil {
 		return err
 	}
@@ -313,6 +314,7 @@ func (r *roller) roll(ctx context.Context) error {
 	// Update the DEPS, expectations, and other generated files.
 	updateExpectationUpdateTimestamp(&ex)
 	generatedFiles[depsRelPath] = updatedDEPS
+	generatedFiles[gitLinkPath] = updatedGitLink
 	generatedFiles[common.RelativeExpectationsPath] = ex.String()
 
 	msg := r.rollCommitMessage(oldCTSHash, newCTSHash, ctsLog, changeID)
@@ -683,21 +685,26 @@ func (r *roller) generateFiles(ctx context.Context) (map[string]string, error) {
 
 // updateDEPS fetches and updates the Dawn DEPS file at 'dawnRef' so that all
 // CTS hashes are changed to the latest CTS hash.
-func (r *roller) updateDEPS(ctx context.Context, dawnRef string) (newDEPS, newCTSHash, oldCTSHash string, err error) {
+func (r *roller) updateDEPS(ctx context.Context, dawnRef string) (newDEPS, newGitLink, newCTSHash, oldCTSHash string, err error) {
 	newCTSHash, err = r.chromium.Hash(ctx, refMain)
 	if err != nil {
-		return "", "", "", err
+		return "", "", "", "", err
 	}
 	deps, err := r.dawn.DownloadFile(ctx, dawnRef, depsRelPath)
 	if err != nil {
-		return "", "", "", err
+		return "", "", "", "", err
 	}
 	newDEPS, oldCTSHash, err = common.UpdateCTSHashInDeps(deps, newCTSHash)
 	if err != nil {
-		return "", "", "", err
+		return "", "", "", "", err
 	}
+	gitlink, err := r.dawn.DownloadFile(cts, dawnRef, gitLinkPath)
+	if err != nil {
+		return "", "", "", "", err
+	}
+	newGitLink, oldCTSHash, err = common.UpdateCTSGitlink(gitlink, newCTSHash)
 
-	return newDEPS, newCTSHash, oldCTSHash, nil
+	return newDEPS, newGitLink, newCTSHash, oldCTSHash, nil
 }
 
 // genTSDepList returns a list of source files, for the CTS checkout at r.ctsDir
