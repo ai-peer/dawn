@@ -83,6 +83,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7496e0c9_8e4e43b1",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T06:09:18Z",
+      "side": 1,
+      "message": "I *think* it should be possible for your traits to return the mutex.\n\nThen we can do `MutexProtected() : mMutex(Traits::CreateMutex()) {}`",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 54
+      },
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92fd2990_bfd8a39d",
         "filename": "src/dawn/common/MutexProtected.h",
         "patchSetId": 4
