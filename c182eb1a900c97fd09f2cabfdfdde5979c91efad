@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dce0fd9_e5b4ad6a",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53d2fc11_0ddce234",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a07c4548_02c209b4",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-08-04T06:07:06Z",
       "side": 1,
       "message": "unused",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b28398ce_8d8f4c1b",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a07c4548_02c209b4",
       "range": {
         "startLine": 51,
         "startChar": 0,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c07dc21_e4213fc4",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e60b6191_e20d32a3",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e21b807_08a101ce",
@@ -115,6 +181,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b43dcb6f_f0dd6d65",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:17:17Z",
+      "side": 1,
+      "message": "It\u0027s intentionally copyable when its a `Ref` type. And by default, the non `Ref` type one is already non-movable because of the `std::mutex`.",
+      "parentUuid": "3e21b807_08a101ce",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0aba259_3e9bf990",
@@ -128,6 +212,24 @@
       "writtenOn": "2023-08-04T10:46:46Z",
       "side": 1,
       "message": "It\u0027d be nice to have comments showing various ways to use a MutexProtected member for future folks that will be using the class.",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da75547d_7239c309",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0aba259_3e9bf990",
       "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +257,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e584319_ab910754",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:17:17Z",
+      "side": 1,
+      "message": "Huh... yea it works! I thought it wouldn\u0027t because `std::mutex` isn\u0027t copyable/movable, but I guess since it\u0027s construction?",
+      "parentUuid": "7496e0c9_8e4e43b1",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 54
+      },
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92fd2990_bfd8a39d",
@@ -168,6 +294,24 @@
       "writtenOn": "2023-08-04T06:07:06Z",
       "side": 1,
       "message": "I think we might eventually want\n\n```\nauto foo \u003d mFoo.Use();\nfoo-\u003eDoSomething();\nfoo-\u003eDoSomethingElse();\n```\n\nwe can add it when needed later though",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd6212a3_c31faa0c",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T21:17:17Z",
+      "side": 1,
+      "message": "Similar to the other comment, but basically I don\u0027t want that to be allowed because it\u0027s not as clearly obvious how long we will be holding the lock for. Instead the same could be achieved via:\n\n```\nmFoo.Use([](auto foo) {\n  foo-\u003eDoSomething();\n  foo-\u003eDoSomethingElse();\n});\n```\n\nWhich makes it very obvious where the critical section of the code is.",
+      "parentUuid": "92fd2990_bfd8a39d",
       "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
