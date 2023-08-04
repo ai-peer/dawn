@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac30859f_8db0005c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T17:24:51Z",
+      "side": 1,
+      "message": "a thought occurred to me - why do we need to implement this in Dawn?\n\nwould it be sufficient to implement it in Chromium\u0027s shared image system?\nChrome can do the readback/upload manually into a wgpu::Texture",
+      "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
