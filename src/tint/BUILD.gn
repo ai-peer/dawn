@@ -1016,6 +1016,8 @@ libtint_source_set("libtint_spv_writer_src") {
     "lang/spirv/writer/common/module.h",
     "lang/spirv/writer/common/operand.cc",
     "lang/spirv/writer/common/operand.h",
+    "lang/spirv/writer/common/spv_dump.cc",
+    "lang/spirv/writer/common/spv_dump.h",
     "lang/spirv/writer/writer.cc",
     "lang/spirv/writer/writer.h",
   ]
@@ -2051,8 +2053,6 @@ if (tint_build_unittests) {
       "lang/spirv/writer/common/instruction_test.cc",
       "lang/spirv/writer/common/module_test.cc",
       "lang/spirv/writer/common/operand_test.cc",
-      "lang/spirv/writer/common/spv_dump.cc",
-      "lang/spirv/writer/common/spv_dump.h",
     ]
 
     deps = [

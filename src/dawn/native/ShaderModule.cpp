@@ -978,6 +978,15 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
         DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowSpirv), "SPIR-V is disallowed.");
 
         std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+#if TINT_BUILD_SPV_WRITER
+        if (device->IsToggleEnabled(Toggle::DumpShaders)) {
+            std::ostringstream dumpedMsg;
+            dumpedMsg << "// Dumped diassembled SPIR-V:" << std::endl
+                      << tint::spirv::writer::Disassemble(spirv);
+            device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        }
+#endif
+
         tint::Program program;
         DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages, spirvOptions));
         parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));

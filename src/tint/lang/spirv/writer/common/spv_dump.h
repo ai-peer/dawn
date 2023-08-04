@@ -18,9 +18,11 @@
 #include <string>
 #include <vector>
 
-#include "src/tint/lang/spirv/writer/common/module.h"
-
 namespace tint::spirv::writer {
+
+class Instruction;
+using InstructionList = std::vector<Instruction>;
+class Module;
 
 /// Disassembles SPIR-V binary data into its textual form.
 /// @param data the SPIR-V binary data
