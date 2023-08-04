@@ -82,9 +82,6 @@ struct ExternalImageExportInfoVk : ExternalImageExportInfo {
     using ExternalImageExportInfo::ExternalImageExportInfo;
 };
 
-// Can't use DAWN_PLATFORM_IS(LINUX) since header included in both Dawn and Chrome
-#ifdef __linux__
-
 // Common properties of external images represented by FDs. On successful import the file
 // descriptor's ownership is transferred to the Dawn implementation and they shouldn't be
 // used outside of Dawn again. TODO(enga): Also transfer ownership in the error case so the
@@ -139,8 +136,6 @@ struct DAWN_NATIVE_EXPORT ExternalImageExportInfoDmaBuf : ExternalImageExportInf
     ExternalImageExportInfoDmaBuf();
 };
 
-#ifdef __ANDROID__
-
 // Descriptor for AHardwareBuffer image import
 struct DAWN_NATIVE_EXPORT ExternalImageDescriptorAHardwareBuffer : ExternalImageDescriptorVk {
   public:
@@ -156,10 +151,6 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorAHardwareBuffer : ExternalImage
 struct DAWN_NATIVE_EXPORT ExternalImageExportInfoAHardwareBuffer : ExternalImageExportInfoFD {
     ExternalImageExportInfoAHardwareBuffer();
 };
-
-#endif  // __ANDROID__
-
-#endif  // __linux__
 
 // Imports external memory into a Vulkan image. Internally, this uses external memory /
 // semaphore extensions to import the image and wait on the provided synchronizaton

@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,38 +25,46 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
-#define SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREMEMORYVK_H_
+#define SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREMEMORYVK_H_
+
+#include <vector>
 
 #include "dawn/common/vulkan_platform.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/SharedTextureMemory.h"
+#include "dawn/native/vulkan/RefCountedVkHandle.h"
 
 namespace dawn::native::vulkan {
 
-#if DAWN_PLATFORM_IS(ANDROID)
-// AHardwareBuffer
-using ExternalMemoryHandle = struct AHardwareBuffer*;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
-#elif DAWN_PLATFORM_IS(FUCHSIA)
-// Really a Zircon vmo handle.
-using ExternalMemoryHandle = zx_handle_t;
-// Really a Zircon event handle.
-using ExternalSemaphoreHandle = zx_handle_t;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = ZX_HANDLE_INVALID;
-#elif DAWN_PLATFORM_IS(POSIX)
-// File descriptor
-using ExternalMemoryHandle = int;
-// File descriptor
-using ExternalSemaphoreHandle = int;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = -1;
-#else
-// Generic types so that the Null service can compile, not used for real handles
-using ExternalMemoryHandle = void*;
-using ExternalSemaphoreHandle = void*;
-const ExternalSemaphoreHandle kNullExternalSemaphoreHandle = nullptr;
-#endif
+class Device;
+
+class SharedTextureMemory final : public SharedTextureMemoryBase {
+  public:
+    static ResultOrError<Ref<SharedTextureMemory>> Create(
+        Device* device,
+        const char* label,
+        const SharedTextureMemoryDmaBufDescriptor* descriptor);
+
+    RefCountedVkHandle<VkDeviceMemory>* GetVkDeviceMemory() const;
+    RefCountedVkHandle<VkImage>* GetVkImage() const;
+    uint32_t GetQueueFamilyIndex() const;
+
+  private:
+    SharedTextureMemory(Device* device,
+                        const char* label,
+                        const SharedTextureMemoryProperties& properties);
+    void DestroyImpl() override;
+
+    ResultOrError<Ref<TextureBase>> CreateTextureImpl(const TextureDescriptor* descriptor) override;
+    MaybeError BeginAccessImpl(TextureBase* texture, const BeginAccessDescriptor*) override;
+    ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture) override;
+
+    Ref<RefCountedVkHandle<VkImage>> mVkImage;
+    Ref<RefCountedVkHandle<VkDeviceMemory>> mVkDeviceMemory;
+    uint32_t mQueueFamilyIndex;
+};
 
 }  // namespace dawn::native::vulkan
 
-#endif  // SRC_DAWN_NATIVE_VULKAN_EXTERNALHANDLE_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREMEMORYVK_H_

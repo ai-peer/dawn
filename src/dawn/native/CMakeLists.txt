@@ -648,6 +648,7 @@ if (DAWN_ENABLE_VULKAN)
         "vulkan/PipelineCacheVk.h"
         "vulkan/PipelineLayoutVk.cpp"
         "vulkan/PipelineLayoutVk.h"
+        "vulkan/RefCountedVkHandle.h"
         "vulkan/QuerySetVk.cpp"
         "vulkan/QuerySetVk.h"
         "vulkan/QueueVk.cpp"
@@ -664,6 +665,10 @@ if (DAWN_ENABLE_VULKAN)
         "vulkan/SamplerVk.h"
         "vulkan/ShaderModuleVk.cpp"
         "vulkan/ShaderModuleVk.h"
+        "vulkan/SharedFenceVk.cpp"
+        "vulkan/SharedFenceVk.h"
+        "vulkan/SharedTextureMemoryVk.cpp"
+        "vulkan/SharedTextureMemoryVk.h"
         "vulkan/StreamImplVk.cpp"
         "vulkan/SwapChainVk.cpp"
         "vulkan/SwapChainVk.h"
@@ -693,21 +698,24 @@ if (DAWN_ENABLE_VULKAN)
     target_link_libraries(dawn_native PUBLIC Vulkan-Headers)
     target_include_directories(dawn_native PRIVATE ${DAWN_VULKAN_UTILITY_LIBRARIES_DIR}/include)
 
+    if (UNIX)
+        target_sources(dawn_native PRIVATE
+            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
+            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
+            "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.cpp"
+            "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.h"
+        )
+    endif()
+
     if (ANDROID)
         target_sources(dawn_native PRIVATE
             "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.cpp"
             "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.h"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
         )
     elseif (UNIX AND NOT APPLE)
         target_sources(dawn_native PRIVATE
             "vulkan/external_memory/MemoryServiceImplementationDmaBuf.cpp"
             "vulkan/external_memory/MemoryServiceImplementationDmaBuf.h"
-            "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.cpp"
-            "vulkan/external_memory/MemoryServiceImplementationOpaqueFD.h"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
-            "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
         )
     endif()
 endif()
