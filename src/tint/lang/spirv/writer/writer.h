@@ -18,6 +18,7 @@
 #include <string>
 
 #include "src/tint/lang/spirv/writer/common/options.h"
+#include "src/tint/lang/spirv/writer/common/spv_dump.h"
 #include "src/tint/lang/spirv/writer/output.h"
 #include "src/tint/utils/result/result.h"
 

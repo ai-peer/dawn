@@ -16,6 +16,7 @@
 
 #include "spirv-tools/libspirv.hpp"
 #include "src/tint/lang/spirv/writer/common/binary_writer.h"
+#include "src/tint/lang/spirv/writer/common/module.h"
 
 namespace tint::spirv::writer {
 
