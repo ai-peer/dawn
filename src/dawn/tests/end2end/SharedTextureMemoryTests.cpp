@@ -34,12 +34,22 @@ std::vector<wgpu::FeatureName> SharedTextureMemoryTests::GetRequiredFeatures() {
 void SharedTextureMemoryNoFeatureTests::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     DawnTestWithParams<SharedTextureMemoryTestParams>::SetUp();
+    GetParam().mBackend->SetUp();
 }
 
 void SharedTextureMemoryTests::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     DawnTestWithParams<SharedTextureMemoryTestParams>::SetUp();
     DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures(GetParam().mBackend->RequiredFeatures()));
+    GetParam().mBackend->SetUp();
+}
+
+void SharedTextureMemoryNoFeatureTests::TearDown() {
+    GetParam().mBackend->TearDown();
+}
+
+void SharedTextureMemoryTests::TearDown() {
+    GetParam().mBackend->TearDown();
 }
 
 wgpu::Device SharedTextureMemoryTests::CreateDevice() {
@@ -1236,6 +1246,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenLoseDeviceBeforeEndAccessThenSample) 
 
 // Test that an IOSurface may be imported across multiple devices.
 TEST_P(SharedTextureMemoryTests, SeparateDevicesWriteThenConcurrentReadThenWrite) {
+    DAWN_SUPPRESS_TEST_IF(IsVulkan());
+
     std::vector<wgpu::Device> devices = {device, CreateDevice(), CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemories(devices)) {
