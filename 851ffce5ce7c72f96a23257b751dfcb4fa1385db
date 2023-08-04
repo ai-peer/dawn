@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b53893a_373413f2",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T05:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a9b7a61_2947b892",
+      "revId": "851ffce5ce7c72f96a23257b751dfcb4fa1385db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56057d3a_9c3fee77",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b85400_ef277437",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 1657,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T05:42:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "56057d3a_9c3fee77",
+      "range": {
+        "startLine": 1657,
+        "startChar": 5,
+        "endLine": 1657,
+        "endChar": 17
+      },
+      "revId": "851ffce5ce7c72f96a23257b751dfcb4fa1385db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "949d0835_1246e528",
@@ -54,6 +96,24 @@
       "writtenOn": "2023-08-04T04:29:07Z",
       "side": 1,
       "message": "You might want to link straight to the doc? With a caveat that the doc might no longer be up to date.",
+      "revId": "851ffce5ce7c72f96a23257b751dfcb4fa1385db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e57884_f7f4fdcb",
+        "filename": "docs/dawn/features/shared_fence.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T05:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "949d0835_1246e528",
       "revId": "851ffce5ce7c72f96a23257b751dfcb4fa1385db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
