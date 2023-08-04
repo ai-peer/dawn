@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "118d070a_6512c8ca",
+        "filename": "DEPS",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T20:20:09Z",
+      "side": 1,
+      "message": "nit: duplicate \"but\" at the end of the line and the beginning of the subsequent one",
+      "range": {
+        "startLine": 50,
+        "startChar": 76,
+        "endLine": 51,
+        "endChar": 7
+      },
+      "revId": "8be7d759f957e1a014b7b1b01bc77a98027f7621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f729577_a322087d",
         "filename": "third_party/webgpu-cts",
         "patchSetId": 9
@@ -110,6 +133,30 @@
       "side": 1,
       "message": "also does this CL block the script update CL?\ni think it would be easier for you to test the script if these changes were merged first? and in the mean time people could do manual gitlink updates along with the script changes?",
       "parentUuid": "8c0f8d4b_0dd9ad13",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "8be7d759f957e1a014b7b1b01bc77a98027f7621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8893c9_0719138a",
+        "filename": "third_party/webgpu-cts",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T20:20:09Z",
+      "side": 1,
+      "message": "sure I can take it over",
+      "parentUuid": "24df8fed_1eba5cc9",
       "range": {
         "startLine": 1,
         "startChar": 0,
