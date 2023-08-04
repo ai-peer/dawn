@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9e9b721_39a359ce",
+        "filename": "src/dawn/native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T22:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff6d49ff_a5384d99",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 46
+      },
+      "revId": "19afca87b073718394d95bef3905d8ba86885980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00714e20_10eb2511",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-02T16:36:54Z",
       "side": 1,
       "message": "existing nit: make this const so it\u0027s clear it shouldn\u0027t need to be protected by a mutex",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 29
+      },
+      "revId": "19afca87b073718394d95bef3905d8ba86885980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05b9b00_4d84a040",
+        "filename": "src/dawn/native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-04T22:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00714e20_10eb2511",
       "range": {
         "startLine": 53,
         "startChar": 4,
