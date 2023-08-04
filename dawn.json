@@ -1623,10 +1623,12 @@
         "chain roots": ["shared texture memory descriptor"],
         "tags": ["dawn", "native"],
         "members": [
-            {"name": "memory FD", "type": "int"},
-            {"name": "allocation size", "type": "uint64_t"},
+            {"name": "width", "type": "uint32_t"},
+            {"name": "height", "type": "uint32_t"},
+            {"name": "drm format", "type": "uint32_t"},
             {"name": "drm modifier", "type": "uint64_t"},
             {"name": "plane count", "type": "size_t"},
+            {"name": "plane FDs", "type": "int", "annotation": "const*", "length": "plane count"},
             {"name": "plane offsets", "type": "uint64_t", "annotation": "const*", "length": "plane count"},
             {"name": "plane strides", "type": "uint32_t", "annotation": "const*", "length": "plane count"}
         ]

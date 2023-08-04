@@ -86,13 +86,17 @@ class ServiceImplementationZirconHandle : public ServiceImplementation {
         importSemaphoreHandleInfo.flags = 0;
         importSemaphoreHandleInfo.handleType =
             VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA;
-        importSemaphoreHandleInfo.handle = handle;
+        // vkImportSemaphoreFdKHR takes ownership, so make a dup of the handle.
+        importSemaphoreHandleInfo.handle = zx_handle_duplicate(handle);
 
         MaybeError status = CheckVkSuccess(mDevice->fn.ImportSemaphoreZirconHandleFUCHSIA(
                                                mDevice->GetVkDevice(), &importSemaphoreHandleInfo),
                                            "vkImportSemaphoreZirconHandleFUCHSIA");
 
         if (status.IsError()) {
+            // Close the dup'ed handle if import failed.
+            zx_status_t status = zx_handle_close(importSemaphoreHandleInfo.handle);
+            DAWN_ASSERT(status == ZX_OK);
             mDevice->fn.DestroySemaphore(mDevice->GetVkDevice(), semaphore, nullptr);
             DAWN_TRY(std::move(status));
         }

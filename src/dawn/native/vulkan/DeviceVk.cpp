@@ -40,10 +40,18 @@
 #include "dawn/native/vulkan/ResourceMemoryAllocatorVk.h"
 #include "dawn/native/vulkan/SamplerVk.h"
 #include "dawn/native/vulkan/ShaderModuleVk.h"
+#include "dawn/native/vulkan/SharedFenceVk.h"
+#include "dawn/native/vulkan/SharedTextureMemoryVk.h"
 #include "dawn/native/vulkan/SwapChainVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
+
+#if DAWN_PLATFORM_IS(FUCHSIA)
+#include <zircon/syscalls.h>
+#elif DAWN_PLATFORM_IS(LINUX)
+#include <unistd.h>
+#endif
 
 namespace dawn::native::vulkan {
 
@@ -135,7 +143,37 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     mResourceMemoryAllocator = std::make_unique<MutexProtected<ResourceMemoryAllocator>>(this);
 
     mExternalMemoryService = std::make_unique<external_memory::Service>(this);
-    mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(this);
+
+    if (uint32_t(HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD)) +
+            uint32_t(HasFeature(Feature::SharedFenceVkSemaphoreSyncFD)) +
+            uint32_t(HasFeature(Feature::SharedFenceVkSemaphoreZirconHandle)) >
+        1) {
+        return DAWN_VALIDATION_ERROR("At most one of %s, %s, and %s may be enabled.",
+                                     wgpu::FeatureName::SharedFenceVkSemaphoreOpaqueFD,
+                                     wgpu::FeatureName::SharedFenceVkSemaphoreSyncFD,
+                                     wgpu::FeatureName::SharedFenceVkSemaphoreZirconHandle);
+    }
+    if (HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD)) {
+        mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
+            this, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR);
+    } else if (HasFeature(Feature::SharedFenceVkSemaphoreSyncFD)) {
+        mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
+            this, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT);
+    } else if (HasFeature(Feature::SharedFenceVkSemaphoreZirconHandle)) {
+        mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
+            this, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA);
+    } else {
+#if DAWN_PLATFORM_IS(FUCHSIA)
+        mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
+            this, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA);
+#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
+        mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
+            this, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT);
+#else
+        mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
+            this, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR);
+#endif
+    }
 
     DAWN_TRY(PrepareRecordingContext());
 
@@ -221,6 +259,66 @@ void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPip
 ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     const Surface* surface) const {
     return SwapChain::GetSupportedSurfaceUsage(this, surface);
+}
+
+ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
+    const SharedTextureMemoryDescriptor* descriptor) {
+    UnpackedSharedTextureMemoryDescriptorChain unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
+
+    wgpu::SType type;
+    DAWN_TRY_ASSIGN(
+        type,
+        (ValidateBranches<BranchList<Branch<SharedTextureMemoryDmaBufDescriptor>>>(unpacked)));
+
+    switch (type) {
+        case wgpu::SType::SharedTextureMemoryDmaBufDescriptor:
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryDmaBuf), "%s is not enabled.",
+                            wgpu::FeatureName::SharedTextureMemoryDmaBuf);
+            return SharedTextureMemory::Create(
+                this, descriptor->label,
+                std::get<const SharedTextureMemoryDmaBufDescriptor*>(unpacked));
+        default:
+            DAWN_UNREACHABLE();
+    }
+}
+
+ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
+    const SharedFenceDescriptor* descriptor) {
+    UnpackedSharedFenceDescriptorChain unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
+
+    wgpu::SType type;
+    DAWN_TRY_ASSIGN(
+        type,
+        (ValidateBranches<BranchList<Branch<SharedFenceVkSemaphoreZirconHandleDescriptor>,
+                                     Branch<SharedFenceVkSemaphoreSyncFDDescriptor>,
+                                     Branch<SharedFenceVkSemaphoreOpaqueFDDescriptor>>>(unpacked)));
+
+    switch (type) {
+        case wgpu::SType::SharedFenceVkSemaphoreZirconHandleDescriptor:
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreZirconHandle),
+                            "%s is not enabled.",
+                            wgpu::FeatureName::SharedFenceVkSemaphoreZirconHandle);
+            return SharedFence::Create(
+                this, descriptor->label,
+                std::get<const SharedFenceVkSemaphoreZirconHandleDescriptor*>(unpacked));
+        case wgpu::SType::SharedFenceVkSemaphoreSyncFDDescriptor:
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreSyncFD),
+                            "%s is not enabled.", wgpu::FeatureName::SharedFenceVkSemaphoreSyncFD);
+            return SharedFence::Create(
+                this, descriptor->label,
+                std::get<const SharedFenceVkSemaphoreSyncFDDescriptor*>(unpacked));
+        case wgpu::SType::SharedFenceVkSemaphoreOpaqueFDDescriptor:
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD),
+                            "%s is not enabled.",
+                            wgpu::FeatureName::SharedFenceVkSemaphoreOpaqueFD);
+            return SharedFence::Create(
+                this, descriptor->label,
+                std::get<const SharedFenceVkSemaphoreOpaqueFDDescriptor*>(unpacked));
+        default:
+            DAWN_UNREACHABLE();
+    }
 }
 
 MaybeError Device::TickImpl() {
@@ -330,6 +428,51 @@ MaybeError Device::SubmitPendingCommands() {
         std::vector<VkSemaphore> waitRequirements = texture->AcquireWaitRequirements();
         mRecordingContext.waitSemaphores.insert(mRecordingContext.waitSemaphores.end(),
                                                 waitRequirements.begin(), waitRequirements.end());
+
+        SharedTextureMemoryContents* contents = texture->GetSharedTextureMemoryContents();
+        if (contents != nullptr) {
+            SharedTextureMemoryBase::PendingFenceList fences;
+            contents->AcquirePendingFences(&fences);
+
+            for (const auto& fence : fences) {
+                SharedFenceExportInfo baseExportInfo;
+                ExternalSemaphoreHandle handle;
+#if DAWN_PLATFORM_IS(FUCHSIA)
+                SharedFenceVkSemaphoreZirconHandleExportInfo exportInfo = {};
+                baseExportInfo.nextInChain = &exportInfo;
+
+                DAWN_TRY(fence.object->ExportInfo(&baseExportInfo));
+                DAWN_ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreZirconHandle);
+                handle = exportInfo.handle;
+#elif DAWN_PLATFORM_IS(LINUX)
+                if (HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD)) {
+                    SharedFenceVkSemaphoreOpaqueFDExportInfo exportInfo = {};
+                    baseExportInfo.nextInChain = &exportInfo;
+
+                    DAWN_TRY(fence.object->ExportInfo(&baseExportInfo));
+                    DAWN_ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreOpaqueFD);
+                    handle = exportInfo.handle;
+                } else if (HasFeature(Feature::SharedFenceVkSemaphoreSyncFD)) {
+                    SharedFenceVkSemaphoreSyncFDExportInfo exportInfo = {};
+                    baseExportInfo.nextInChain = &exportInfo;
+
+                    DAWN_TRY(fence.object->ExportInfo(&baseExportInfo));
+                    DAWN_ASSERT(baseExportInfo.type == wgpu::SharedFenceType::VkSemaphoreSyncFD);
+                    handle = exportInfo.handle;
+                } else {
+                    DAWN_UNREACHABLE();
+                }
+#else
+                DAWN_UNREACHABLE();
+#endif
+
+                // All semaphores are binary semaphores.
+                DAWN_ASSERT(fence.signaledValue == 1u);
+                VkSemaphore semaphore;
+                DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
+                mRecordingContext.waitSemaphores.push_back(semaphore);
+            }
+        }
     }
 
     DAWN_TRY(
@@ -859,6 +1002,19 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
     for (const ExternalSemaphoreHandle& handle : waitHandles) {
         VkSemaphore semaphore = VK_NULL_HANDLE;
         DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
+
+        // The legacy import mechanism transfers ownership to Dawn.
+        // The new import mechanism dups the semaphore handle.
+        // Therefore, on success, because ImportSemaphore has dup'ed the handle,
+        // we need to close the old handle.
+        // TODO(dawn:1745): This entire code path will be deprecated and removed.
+#if DAWN_PLATFORM_IS(FUCHSIA)
+        zx_status_t status = zx_handle_close(handle);
+        DAWN_ASSERT(status == ZX_OK);
+#elif DAWN_PLATFORM_IS(LINUX)
+        int ret = close(handle);
+        DAWN_ASSERT(ret != -1);
+#endif
         outWaitSemaphores->push_back(semaphore);
     }
 

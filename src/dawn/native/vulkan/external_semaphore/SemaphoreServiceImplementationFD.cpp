@@ -22,7 +22,7 @@
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementation.h"
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
 
-static constexpr VkExternalSemaphoreHandleTypeFlagBits kHandleType =
+static constexpr VkExternalSemaphoreHandleTypeFlagBits kDefaultHandleType =
 #if DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
     VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT;
 #else
@@ -33,8 +33,10 @@ namespace dawn::native::vulkan::external_semaphore {
 
 class ServiceImplementationFD : public ServiceImplementation {
   public:
-    explicit ServiceImplementationFD(Device* device)
+    explicit ServiceImplementationFD(Device* device,
+                                     VkExternalSemaphoreHandleTypeFlagBits handleType)
         : ServiceImplementation(device),
+          mHandleType(handleType),
           mSupported(CheckSupport(device->GetDeviceInfo(),
                                   ToBackend(device->GetPhysicalDevice())->GetVkPhysicalDevice(),
                                   device->fn)) {}
@@ -51,7 +53,7 @@ class ServiceImplementationFD : public ServiceImplementation {
         VkPhysicalDeviceExternalSemaphoreInfoKHR semaphoreInfo;
         semaphoreInfo.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
         semaphoreInfo.pNext = nullptr;
-        semaphoreInfo.handleType = kHandleType;
+        semaphoreInfo.handleType = kDefaultHandleType;
 
         VkExternalSemaphorePropertiesKHR semaphoreProperties;
         semaphoreProperties.sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR;
@@ -87,15 +89,19 @@ class ServiceImplementationFD : public ServiceImplementation {
         importSemaphoreFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
         importSemaphoreFdInfo.pNext = nullptr;
         importSemaphoreFdInfo.semaphore = semaphore;
-        importSemaphoreFdInfo.flags = 0;
-        importSemaphoreFdInfo.handleType = kHandleType;
-        importSemaphoreFdInfo.fd = handle;
+        importSemaphoreFdInfo.flags = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT;
+        importSemaphoreFdInfo.handleType = mHandleType;
+        // vkImportSemaphoreFdKHR takes ownership, so make a dup of the handle.
+        importSemaphoreFdInfo.fd = dup(handle);
 
         MaybeError status = CheckVkSuccess(
             mDevice->fn.ImportSemaphoreFdKHR(mDevice->GetVkDevice(), &importSemaphoreFdInfo),
             "vkImportSemaphoreFdKHR");
 
         if (status.IsError()) {
+            // Close the dup'ed handle if import failed.
+            int ret = close(importSemaphoreFdInfo.fd);
+            DAWN_ASSERT(ret != -1);
             mDevice->fn.DestroySemaphore(mDevice->GetVkDevice(), semaphore, nullptr);
             DAWN_TRY(std::move(status));
         }
@@ -108,7 +114,7 @@ class ServiceImplementationFD : public ServiceImplementation {
         VkExportSemaphoreCreateInfoKHR exportSemaphoreInfo;
         exportSemaphoreInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
         exportSemaphoreInfo.pNext = nullptr;
-        exportSemaphoreInfo.handleTypes = kHandleType;
+        exportSemaphoreInfo.handleTypes = mHandleType;
 
         VkSemaphoreCreateInfo semaphoreCreateInfo;
         semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
@@ -129,7 +135,7 @@ class ServiceImplementationFD : public ServiceImplementation {
         semaphoreGetFdInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
         semaphoreGetFdInfo.pNext = nullptr;
         semaphoreGetFdInfo.semaphore = semaphore;
-        semaphoreGetFdInfo.handleType = kHandleType;
+        semaphoreGetFdInfo.handleType = mHandleType;
 
         int fd = -1;
         DAWN_TRY(CheckVkSuccess(
@@ -153,11 +159,14 @@ class ServiceImplementationFD : public ServiceImplementation {
     }
 
   private:
+    const VkExternalSemaphoreHandleTypeFlagBits mHandleType;
     bool mSupported = false;
 };
 
-std::unique_ptr<ServiceImplementation> CreateFDService(Device* device) {
-    return std::make_unique<ServiceImplementationFD>(device);
+std::unique_ptr<ServiceImplementation> CreateFDService(
+    Device* device,
+    VkExternalSemaphoreHandleTypeFlagBits handleType) {
+    return std::make_unique<ServiceImplementationFD>(device, handleType);
 }
 
 bool CheckFDSupport(const VulkanDeviceInfo& deviceInfo,
