@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "375292fe_f3537dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-04T03:04:05Z",
+      "side": 1,
+      "message": "Oh, right:\n\n```\nAssertionError: 1 !\u003d 0 : Error parsing expectations.txt:\n\t566: The tag group contains tags that are part of the same tag set\n  - Tags mac and win are part of the same tag set\n```\n\nThat\u0027s fine, you can just remove the tags entirely. Since the upstream tests are wrong there\u0027s no reason to have tags. If they conflict with other expectations on the same file, just comment those out.",
+      "revId": "dcc60ef67c8092807a2c5f40e3a8dd27478271fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
