@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba6c1b7_74200b96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T06:07:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d2fc11_0ddce234",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T06:07:06Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a07c4548_02c209b4",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T06:07:06Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e21b807_08a101ce",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T06:07:06Z",
+      "side": 1,
+      "message": "make it non-copyable, and non-movable?\n\nwe have dawn::NonMovable base class for that",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92fd2990_bfd8a39d",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-04T06:07:06Z",
+      "side": 1,
+      "message": "I think we might eventually want\n\n```\nauto foo \u003d mFoo.Use();\nfoo-\u003eDoSomething();\nfoo-\u003eDoSomethingElse();\n```\n\nwe can add it when needed later though",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
