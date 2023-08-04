@@ -25,29 +25,36 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
-#define SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_REFCOUNTEDVKHANDLE_H_
+#define SRC_DAWN_NATIVE_VULKAN_REFCOUNTEDVKHANDLE_H_
 
-#include <memory>
-
-#include "dawn/common/vulkan_platform.h"
+#include "dawn/common/RefCounted.h"
+#include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/FencedDeleter.h"
 
 namespace dawn::native::vulkan {
-class Device;
-struct VulkanDeviceInfo;
-struct VulkanFunctions;
+
+// RefCountedVkHandle is used to wrap a Vulkan object that is shared between multiple systems.
+// The object is kept alive until all refs are dropped; then it is sent to the fenced deleter
+// for destruction.
+template <typename Handle>
+class RefCountedVkHandle : public RefCounted {
+  public:
+    RefCountedVkHandle(Device* device, Handle handle) : mDevice(device), mHandle(handle) {}
+
+    ~RefCountedVkHandle() override {
+        if (mHandle != VK_NULL_HANDLE) {
+            mDevice->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+        }
+    }
+
+    Handle Get() const { return mHandle; }
+
+  private:
+    Ref<Device> mDevice;
+    Handle mHandle = VK_NULL_HANDLE;
+};
+
 }  // namespace dawn::native::vulkan
 
-namespace dawn::native::vulkan::external_semaphore {
-class ServiceImplementation;
-
-bool CheckFDSupport(const VulkanDeviceInfo& deviceInfo,
-                    VkPhysicalDevice physicalDevice,
-                    const VulkanFunctions& fn);
-std::unique_ptr<ServiceImplementation> CreateFDService(
-    Device* device,
-    VkExternalSemaphoreHandleTypeFlagBits handleType);
-
-}  // namespace dawn::native::vulkan::external_semaphore
-
-#endif  // SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_REFCOUNTEDVKHANDLE_H_
