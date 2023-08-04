@@ -14,6 +14,7 @@
 
 #include "dawn/tests/end2end/SharedTextureMemoryTests.h"
 
+#include "dawn/common/Log.h"
 #include "dawn/tests/MockCallback.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/TextureUtils.h"
@@ -24,6 +25,7 @@ namespace dawn {
 void SharedTextureMemoryNoFeatureTests::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     DawnTestWithParams<SharedTextureMemoryTestParams>::SetUp();
+    GetParam().mBackend->SetUp();
 }
 
 std::vector<wgpu::FeatureName> SharedTextureMemoryTests::GetRequiredFeatures() {
@@ -41,6 +43,17 @@ void SharedTextureMemoryTests::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     DawnTestWithParams<SharedTextureMemoryTestParams>::SetUp();
     DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures(GetParam().mBackend->RequiredFeatures()));
+    GetParam().mBackend->SetUp();
+}
+
+void SharedTextureMemoryNoFeatureTests::TearDown() {
+    DawnTestWithParams<SharedTextureMemoryTestParams>::TearDown();
+    GetParam().mBackend->TearDown();
+}
+
+void SharedTextureMemoryTests::TearDown() {
+    DawnTestWithParams<SharedTextureMemoryTestParams>::TearDown();
+    GetParam().mBackend->TearDown();
 }
 
 std::vector<wgpu::SharedTextureMemory> SharedTextureMemoryTestBackend::CreateSharedTextureMemories(
@@ -146,15 +159,15 @@ wgpu::CommandBuffer SharedTextureMemoryTests::MakeFourColorsClearCommandBuffer(
       @fragment fn frag_main(in: FragmentIn) -> @location(0) vec4f {
           if (in.uv.x < 0.5) {
             if (in.uv.y < 0.5) {
-              return vec4f(0.0, 1.0, 0.0, 1.0);
+              return vec4f(0.0, 1.0, 0.0, 0.501);
             } else {
-              return vec4f(1.0, 0.0, 0.0, 1.0);
+              return vec4f(1.0, 0.0, 0.0, 0.501);
             }
           } else {
             if (in.uv.y < 0.5) {
-              return vec4f(0.0, 0.0, 1.0, 1.0);
+              return vec4f(0.0, 0.0, 1.0, 0.501);
             } else {
-              return vec4f(1.0, 1.0, 0.0, 1.0);
+              return vec4f(1.0, 1.0, 0.0, 0.501);
             }
           }
       }
@@ -246,33 +259,61 @@ void SharedTextureMemoryTests::CheckFourColors(wgpu::Device& deviceObj,
     wgpu::Origin3D tr = {3 * colorTarget.GetWidth() / 4, colorTarget.GetHeight() / 4};
     wgpu::Origin3D br = {3 * colorTarget.GetWidth() / 4, 3 * colorTarget.GetHeight() / 4};
 
+    std::array<utils::RGBA8, 4> expectedColors;
+    uint8_t expectedAlpha;
     switch (format) {
+        case wgpu::TextureFormat::RGB10A2Unorm:
+            expectedColors = {
+                utils::RGBA8::kGreen,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlue,
+                utils::RGBA8::kYellow,
+            };
+            expectedAlpha = 0xAA;
+            break;
         case wgpu::TextureFormat::RGBA8Unorm:
         case wgpu::TextureFormat::BGRA8Unorm:
-        case wgpu::TextureFormat::RGB10A2Unorm:
         case wgpu::TextureFormat::RGBA16Float:
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kGreen, colorTarget, tl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, bl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlue, colorTarget, tr, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kYellow, colorTarget, br, {1, 1});
+            expectedColors = {
+                utils::RGBA8::kGreen,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlue,
+                utils::RGBA8::kYellow,
+            };
+            expectedAlpha = 0x80;
             break;
         case wgpu::TextureFormat::RG16Float:
         case wgpu::TextureFormat::RG8Unorm:
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kGreen, colorTarget, tl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, bl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlack, colorTarget, tr, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kYellow, colorTarget, br, {1, 1});
+            expectedColors = {
+                utils::RGBA8::kGreen,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlack,
+                utils::RGBA8::kYellow,
+            };
+            expectedAlpha = 0xFF;
             break;
         case wgpu::TextureFormat::R16Float:
         case wgpu::TextureFormat::R8Unorm:
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlack, colorTarget, tl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, bl, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kBlack, colorTarget, tr, {1, 1});
-            EXPECT_TEXTURE_EQ(deviceObj, &utils::RGBA8::kRed, colorTarget, br, {1, 1});
+            expectedColors = {
+                utils::RGBA8::kBlack,
+                utils::RGBA8::kRed,
+                utils::RGBA8::kBlack,
+                utils::RGBA8::kRed,
+            };
+            expectedAlpha = 0xFF;
             break;
         default:
             DAWN_UNREACHABLE();
     }
+    expectedColors[0].a = expectedAlpha;
+    expectedColors[1].a = expectedAlpha;
+    expectedColors[2].a = expectedAlpha;
+    expectedColors[3].a = expectedAlpha;
+
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[0], colorTarget, tl, {1, 1});
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[1], colorTarget, bl, {1, 1});
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[2], colorTarget, tr, {1, 1});
+    EXPECT_TEXTURE_EQ(deviceObj, &expectedColors[3], colorTarget, br, {1, 1});
 }
 
 // Allow tests to be uninstantiated since it's possible no backends are available.
