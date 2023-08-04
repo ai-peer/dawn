@@ -25,29 +25,47 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
-#define SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
+#define SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
 
-#include <memory>
+#include <vector>
 
-#include "dawn/common/vulkan_platform.h"
+#include "dawn/common/Platform.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/SharedFence.h"
+#include "dawn/native/SystemHandle.h"
 
 namespace dawn::native::vulkan {
+
 class Device;
-struct VulkanDeviceInfo;
-struct VulkanFunctions;
+
+class SharedFence final : public SharedFenceBase {
+  public:
+    static ResultOrError<Ref<SharedFence>> Create(
+        Device* device,
+        const char* label,
+        const SharedFenceVkSemaphoreOpaqueFDDescriptor* descriptor);
+
+    static ResultOrError<Ref<SharedFence>> Create(
+        Device* device,
+        const char* label,
+        const SharedFenceVkSemaphoreSyncFDDescriptor* descriptor);
+
+    static ResultOrError<Ref<SharedFence>> Create(
+        Device* device,
+        const char* label,
+        const SharedFenceVkSemaphoreZirconHandleDescriptor* descriptor);
+
+  private:
+    SharedFence(Device* device, const char* label, SystemHandle handle);
+    void DestroyImpl() override;
+
+    MaybeError ExportInfoImpl(SharedFenceExportInfo* info) const override;
+
+    wgpu::SharedFenceType mType;
+    SystemHandle mHandle;
+};
+
 }  // namespace dawn::native::vulkan
 
-namespace dawn::native::vulkan::external_semaphore {
-class ServiceImplementation;
-
-bool CheckFDSupport(const VulkanDeviceInfo& deviceInfo,
-                    VkPhysicalDevice physicalDevice,
-                    const VulkanFunctions& fn);
-std::unique_ptr<ServiceImplementation> CreateFDService(
-    Device* device,
-    VkExternalSemaphoreHandleTypeFlagBits handleType);
-
-}  // namespace dawn::native::vulkan::external_semaphore
-
-#endif  // SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_

@@ -25,29 +25,46 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
-#define SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREMEMORYVK_H_
+#define SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREMEMORYVK_H_
 
-#include <memory>
+#include <vector>
 
 #include "dawn/common/vulkan_platform.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/SharedTextureMemory.h"
+#include "dawn/native/vulkan/RefCountedVkHandle.h"
 
 namespace dawn::native::vulkan {
+
 class Device;
-struct VulkanDeviceInfo;
-struct VulkanFunctions;
+
+class SharedTextureMemory final : public SharedTextureMemoryBase {
+  public:
+    static ResultOrError<Ref<SharedTextureMemory>> Create(
+        Device* device,
+        const char* label,
+        const SharedTextureMemoryDmaBufDescriptor* descriptor);
+
+    RefCountedVkHandle<VkDeviceMemory>* GetVkDeviceMemory() const;
+    RefCountedVkHandle<VkImage>* GetVkImage() const;
+    uint32_t GetQueueFamilyIndex() const;
+
+  private:
+    SharedTextureMemory(Device* device,
+                        const char* label,
+                        const SharedTextureMemoryProperties& properties);
+    void DestroyImpl() override;
+
+    ResultOrError<Ref<TextureBase>> CreateTextureImpl(const TextureDescriptor* descriptor) override;
+    MaybeError BeginAccessImpl(TextureBase* texture, const BeginAccessDescriptor*) override;
+    ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture) override;
+
+    Ref<RefCountedVkHandle<VkImage>> mVkImage;
+    Ref<RefCountedVkHandle<VkDeviceMemory>> mVkDeviceMemory;
+    uint32_t mQueueFamilyIndex;
+};
+
 }  // namespace dawn::native::vulkan
 
-namespace dawn::native::vulkan::external_semaphore {
-class ServiceImplementation;
-
-bool CheckFDSupport(const VulkanDeviceInfo& deviceInfo,
-                    VkPhysicalDevice physicalDevice,
-                    const VulkanFunctions& fn);
-std::unique_ptr<ServiceImplementation> CreateFDService(
-    Device* device,
-    VkExternalSemaphoreHandleTypeFlagBits handleType);
-
-}  // namespace dawn::native::vulkan::external_semaphore
-
-#endif  // SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SERVICEIMPLEMENTATIONFD_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREMEMORYVK_H_
