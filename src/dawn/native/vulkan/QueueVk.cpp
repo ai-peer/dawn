@@ -36,6 +36,7 @@
 #include "dawn/native/vulkan/CommandRecordingContext.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
+#include "dawn/native/vulkan/SharedFenceVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
@@ -361,6 +362,21 @@ MaybeError Queue::SubmitPendingCommands() {
         std::vector<VkSemaphore> waitRequirements = texture->AcquireWaitRequirements();
         mRecordingContext.waitSemaphores.insert(mRecordingContext.waitSemaphores.end(),
                                                 waitRequirements.begin(), waitRequirements.end());
+
+        SharedTextureMemoryContents* contents = texture->GetSharedTextureMemoryContents();
+        if (contents != nullptr) {
+            SharedTextureMemoryBase::PendingFenceList fences;
+            contents->AcquirePendingFences(&fences);
+
+            for (const auto& fence : fences) {
+                // All semaphores are binary semaphores.
+                DAWN_ASSERT(fence.signaledValue == 1u);
+                VkSemaphore semaphore;
+                DAWN_TRY_ASSIGN(semaphore, device->GetExternalSemaphoreService()->ImportSemaphore(
+                                               ToBackend(fence.object)->GetHandle().Get()));
+                mRecordingContext.waitSemaphores.push_back(semaphore);
+            }
+        }
     }
 
     DAWN_TRY(CheckVkSuccess(device->fn.EndCommandBuffer(mRecordingContext.commandBuffer),
