@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a37474_f00aed62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:28:29Z",
+      "side": 1,
+      "message": "Any tests that can already be added in this CL? Also we should expose limits for the min/max subgroup size, are you planning to do it in a follow-up?",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dbb4c155_d1b08425",
@@ -14,6 +31,97 @@
       "writtenOn": "2023-08-03T09:04:39Z",
       "side": 1,
       "message": "Please take a look, thanks!\nThis CL enable Dawn experimental features for subgroup, `chromium-experimental-subgroups` and `chromium-experimental-subgroup-uniform-control-flow`.\nNote that SPIRV execution mode modification for `chromium-experimental-subgroup-uniform-control-flow` is not implemented yet in this CL.",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82c59afa_ee0ba50b",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:28:29Z",
+      "side": 1,
+      "message": "Can we add info about how this is currently only used to investigate the semantic of subgroups and should not be relied upon.",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ba6a6a_09cd9f1b",
+        "filename": "src/dawn/native/d3d12/D3D12Info.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:28:29Z",
+      "side": 1,
+      "message": "nit: supportsWaveOps since we\u0027re in the D3D backend?",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef6dfce_717d02d8",
+        "filename": "src/dawn/native/d3d12/D3D12Info.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:28:29Z",
+      "side": 1,
+      "message": "nit: casing in camelCase?",
+      "range": {
+        "startLine": 43,
+        "startChar": 13,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ce7b0a_f8ec7dac",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:28:29Z",
+      "side": 1,
+      "message": "nit: Could be folded in a single condition.",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b046b3_24df6a4e",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:28:29Z",
+      "side": 1,
+      "message": "Alan, IIRC the subgroup_size_control isn\u0027t required for this experimental extension since the other backends don\u0027t have it?",
       "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
