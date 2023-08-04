@@ -654,6 +654,19 @@ ResultOrError<Texture*> Texture::CreateFromExternal(
 }
 
 // static
+ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
+    SharedTextureMemory* memory,
+    const TextureDescriptor* textureDescriptor) {
+    Ref<Texture> texture = AcquireRef(new Texture(ToBackend(memory->GetDevice()), textureDescriptor,
+                                                  TextureState::OwnedExternal));
+    texture->mSharedTextureMemory = GetWeakRef(static_cast<SharedTextureMemoryBase*>(memory));
+    texture->mHandle = memory->GetVkImage();
+    texture->mExternalAllocation = memory->GetVkDeviceMemory();
+    texture->mExportQueueFamilyIndex = memory->GetQueueFamilyIndex();
+    return texture;
+}
+
+// static
 Ref<Texture> Texture::CreateForSwapChain(Device* device,
                                          const TextureDescriptor* descriptor,
                                          VkImage nativeImage) {
@@ -917,20 +930,19 @@ std::vector<VkSemaphore> Texture::AcquireWaitRequirements() {
     return std::move(mWaitRequirements);
 }
 
-MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
-                                          ExternalSemaphoreHandle* handle,
-                                          VkImageLayout* releasedOldLayout,
-                                          VkImageLayout* releasedNewLayout) {
-    DAWN_INVALID_IF(mExternalState == ExternalState::Released,
-                    "Can't export a signal semaphore from signaled texture %s.", this);
+void Texture::SetPendingAcquire(VkImageLayout pendingAcquireOldLayout,
+                                VkImageLayout pendingAcquireNewLayout) {
+    ASSERT(mSharedTextureMemory.UnsafeGet() != nullptr);
+    mExternalState = ExternalState::PendingAcquire;
+    mLastExternalState = ExternalState::PendingAcquire;
 
-    DAWN_INVALID_IF(mExternalAllocation == VK_NULL_HANDLE,
-                    "Can't export a signal semaphore from destroyed or non-external texture %s.",
-                    this);
+    mPendingAcquireOldLayout = pendingAcquireOldLayout;
+    mPendingAcquireNewLayout = pendingAcquireNewLayout;
+}
 
-    DAWN_INVALID_IF(desiredLayout != VK_IMAGE_LAYOUT_UNDEFINED,
-                    "desiredLayout (%d) was not VK_IMAGE_LAYOUT_UNDEFINED", desiredLayout);
-
+MaybeError Texture::EndAccess(ExternalSemaphoreHandle* handle,
+                              VkImageLayout* releasedOldLayout,
+                              VkImageLayout* releasedNewLayout) {
     // Release the texture
     mExternalState = ExternalState::Released;
 
@@ -969,6 +981,24 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     *releasedNewLayout = targetLayout;
     *handle = mExternalSemaphoreHandle;
     mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
+    return {};
+}
+
+MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
+                                          ExternalSemaphoreHandle* handle,
+                                          VkImageLayout* releasedOldLayout,
+                                          VkImageLayout* releasedNewLayout) {
+    DAWN_INVALID_IF(mExternalState == ExternalState::Released,
+                    "Can't export a signal semaphore from signaled texture %s.", this);
+
+    DAWN_INVALID_IF(mExternalAllocation == VK_NULL_HANDLE,
+                    "Can't export a signal semaphore from destroyed or non-external texture %s.",
+                    this);
+
+    DAWN_INVALID_IF(desiredLayout != VK_IMAGE_LAYOUT_UNDEFINED,
+                    "desiredLayout (%d) was not VK_IMAGE_LAYOUT_UNDEFINED", desiredLayout);
+
+    DAWN_TRY(EndAccess(handle, releasedOldLayout, releasedNewLayout));
 
     // Destroy the texture so it can't be used again
     Destroy();
