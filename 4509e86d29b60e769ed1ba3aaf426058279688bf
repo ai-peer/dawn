@@ -108,6 +108,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "eefe5107_428f9cc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-04T04:29:07Z",
+      "side": 1,
+      "message": "I finally read the design doc. That was more digestible. Great doc!",
+      "parentUuid": "672cedb7_e6b7bbaa",
+      "revId": "4509e86d29b60e769ed1ba3aaf426058279688bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7933e276_444d0ead",
         "filename": "dawn.json",
         "patchSetId": 6

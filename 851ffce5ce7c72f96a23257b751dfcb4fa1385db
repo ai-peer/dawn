@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a9b7a61_2947b892",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-04T04:29:07Z",
+      "side": 1,
+      "message": "Win32 HANDLE is _defined_ as `void*`. I don\u0027t think this one can be improved.",
+      "revId": "851ffce5ce7c72f96a23257b751dfcb4fa1385db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56057d3a_9c3fee77",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 1657,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-04T04:29:07Z",
+      "side": 1,
+      "message": "I left a comment about the name of this too.\nProbably fine to start landing without renaming though, if you want. Just have to finish renames before we start using them in other projects.",
+      "range": {
+        "startLine": 1657,
+        "startChar": 5,
+        "endLine": 1657,
+        "endChar": 17
+      },
+      "revId": "851ffce5ce7c72f96a23257b751dfcb4fa1385db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "949d0835_1246e528",
+        "filename": "docs/dawn/features/shared_fence.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-04T04:29:07Z",
+      "side": 1,
+      "message": "You might want to link straight to the doc? With a caveat that the doc might no longer be up to date.",
+      "revId": "851ffce5ce7c72f96a23257b751dfcb4fa1385db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
