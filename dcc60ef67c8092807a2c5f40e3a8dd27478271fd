@@ -16,6 +16,24 @@
       "message": "Oh, right:\n\n```\nAssertionError: 1 !\u003d 0 : Error parsing expectations.txt:\n\t566: The tag group contains tags that are part of the same tag set\n  - Tags mac and win are part of the same tag set\n```\n\nThat\u0027s fine, you can just remove the tags entirely. Since the upstream tests are wrong there\u0027s no reason to have tags. If they conflict with other expectations on the same file, just comment those out.",
       "revId": "dcc60ef67c8092807a2c5f40e3a8dd27478271fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a646ac98_1d66b053",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003066
+      },
+      "writtenOn": "2023-08-04T09:07:55Z",
+      "side": 1,
+      "message": "We have [this line](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/webgpu-cts/expectations.txt;l\u003d78;drc\u003d08dea3b61076c6b753b29f4b4aa94812d1115bdb) which reads:\n```\n################################################################################\n# copyToTexture failures on Linux\n# Skipped instead of just Crash because of the number of failures\n# KEEP\n################################################################################\ncrbug.com/1236130 [ linux ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:* [ Skip ]\n```\n\nAnd so if I do anything that affects those tests on linux, then I get the presubmit error:\n```\nCommand \u0027[...]/dawn/tools/bin/cts validate\u0027 returned non-zero exit status 1 in [...]dawn\n[...]dawn/webgpu-cts/expectations.txt:78 expectation collides with expectation on line 571\n```\n\nWhat exactly is wrong with having this \"collision\"? There are two reasons why those two sets of tests (that happen to have an intersection) are disabled.\n\nI honestly just don\u0027t know how I\u0027m supposed to accomplish my goal of \"temporarily ignore failures in just this small subset of tests\".",
+      "parentUuid": "375292fe_f3537dce",
+      "revId": "dcc60ef67c8092807a2c5f40e3a8dd27478271fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
