@@ -23,6 +23,7 @@
 #include "dawn/native/ResourceMemoryAllocation.h"
 #include "dawn/native/Texture.h"
 #include "dawn/native/vulkan/ExternalHandle.h"
+#include "dawn/native/vulkan/SharedTextureMemoryVk.h"
 #include "dawn/native/vulkan/external_memory/MemoryService.h"
 #include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
 
@@ -58,6 +59,11 @@ class Texture final : public TextureBase {
         const ExternalImageDescriptorVk* descriptor,
         const TextureDescriptor* textureDescriptor,
         external_memory::Service* externalMemoryService);
+
+    // Create a texture from contents of a SharedTextureMemory.
+    static ResultOrError<Ref<Texture>> CreateFromSharedTextureMemory(
+        SharedTextureMemory* memory,
+        const TextureDescriptor* textureDescriptor);
 
     // Creates a texture that wraps a swapchain-allocated VkImage.
     static Ref<Texture> CreateForSwapChain(Device* device,
@@ -100,6 +106,12 @@ class Texture final : public TextureBase {
                                      ExternalSemaphoreHandle* handle,
                                      VkImageLayout* releasedOldLayout,
                                      VkImageLayout* releasedNewLayout);
+
+    void SetPendingAcquire(VkImageLayout pendingAcquireOldLayout,
+                           VkImageLayout pendingAcquireNewLayout);
+    MaybeError EndAccess(ExternalSemaphoreHandle* handle,
+                         VkImageLayout* releasedOldLayout,
+                         VkImageLayout* releasedNewLayout);
 
     void SetLabelHelper(const char* prefix);
 

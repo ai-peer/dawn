@@ -282,6 +282,56 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
 
     EnableFeature(Feature::SurfaceCapabilities);
     EnableFeature(Feature::TransientAttachments);
+
+    if (mDeviceInfo.HasExt(DeviceExt::ExternalMemoryDmaBuf) &&
+        mDeviceInfo.HasExt(DeviceExt::ImageDrmFormatModifier)) {
+        EnableFeature(Feature::SharedTextureMemoryDmaBuf);
+    }
+    if (mDeviceInfo.HasExt(DeviceExt::ExternalMemoryFD)) {
+        EnableFeature(Feature::SharedTextureMemoryOpaqueFD);
+    }
+
+#if DAWN_PLATFORM_IS(LINUX) || DAWN_PLATFORM_IS(FUSCHIA)
+    for (auto [deviceExt, handleType, feature] : {
+#if DAWN_PLATFORM_IS(FUCHSIA)
+             std::make_tuple(DeviceExt::ExternalMemoryZirconHandle,
+                             VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA,
+                             Feature::SharedTextureMemoryZirconHandle),
+#elif DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
+             std::make_tuple(DeviceExt::ExternalSemaphoreFD,
+                             VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR,
+                             Feature::SharedFenceVkSemaphoreSyncFD),
+#else
+             std::make_tuple(DeviceExt::ExternalSemaphoreFD,
+                             VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR,
+                             Feature::SharedFenceVkSemaphoreOpaqueFD),
+#endif
+         }) {
+        if (!mDeviceInfo.HasExt(deviceExt)) {
+            continue;
+        }
+
+        constexpr VkFlags kRequiredSemaphoreFlags =
+            VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR |
+            VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR;
+
+        VkPhysicalDeviceExternalSemaphoreInfoKHR semaphoreInfo;
+        semaphoreInfo.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
+        semaphoreInfo.pNext = nullptr;
+
+        VkExternalSemaphorePropertiesKHR semaphoreProperties;
+        semaphoreProperties.sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR;
+        semaphoreProperties.pNext = nullptr;
+
+        semaphoreInfo.handleType = handleType;
+        mVulkanInstance->GetFunctions().GetPhysicalDeviceExternalSemaphoreProperties(
+            mVkPhysicalDevice, &semaphoreInfo, &semaphoreProperties);
+
+        if (IsSubset(kRequiredSemaphoreFlags, semaphoreProperties.externalSemaphoreFeatures)) {
+            EnableFeature(feature);
+        }
+    }
+#endif
 }
 
 MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
