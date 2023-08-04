@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfdccb6_861cd2e6",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-08-04T21:41:30Z",
+      "side": 1,
+      "message": "This might be simplified in the future?",
+      "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ab9079_cf90d04f",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-08-04T21:41:30Z",
+      "side": 1,
+      "message": "This is the new part.",
+      "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
