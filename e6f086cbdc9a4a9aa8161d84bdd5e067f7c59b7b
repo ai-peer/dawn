@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7add77_bec08eca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003066
+      },
+      "writtenOn": "2023-08-04T16:21:56Z",
+      "side": 1,
+      "message": "Sorry, I needed to disable even more stuff.",
+      "revId": "e6f086cbdc9a4a9aa8161d84bdd5e067f7c59b7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
