@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "379c2599_4e46505c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:46:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53d2fc11_0ddce234",
@@ -66,6 +83,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e60b6191_e20d32a3",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:46:46Z",
+      "side": 1,
+      "message": "Why is there an mLock in this class? Can we have a comments detailing how things work?",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e21b807_08a101ce",
         "filename": "src/dawn/common/MutexProtected.h",
         "patchSetId": 4
@@ -77,6 +111,23 @@
       "writtenOn": "2023-08-04T06:07:06Z",
       "side": 1,
       "message": "make it non-copyable, and non-movable?\n\nwe have dawn::NonMovable base class for that",
+      "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0aba259_3e9bf990",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-04T10:46:46Z",
+      "side": 1,
+      "message": "It\u0027d be nice to have comments showing various ways to use a MutexProtected member for future folks that will be using the class.",
       "revId": "c182eb1a900c97fd09f2cabfdfdde5979c91efad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
