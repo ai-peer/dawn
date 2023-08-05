@@ -470,7 +470,6 @@ list(APPEND TINT_LIB_SRCS
   lang/wgsl/sem/evaluation_stage.h
   lang/wgsl/sem/expression.cc
   lang/wgsl/sem/expression.h
-  lang/wgsl/sem/external_texture.h
   lang/wgsl/sem/for_loop_statement.cc
   lang/wgsl/sem/for_loop_statement.h
   lang/wgsl/sem/function.cc
