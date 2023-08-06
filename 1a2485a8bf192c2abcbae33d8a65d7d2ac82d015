@@ -16,6 +16,24 @@
       "message": "a thought occurred to me - why do we need to implement this in Dawn?\n\nwould it be sufficient to implement it in Chromium\u0027s shared image system?\nChrome can do the readback/upload manually into a wgpu::Texture",
       "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6590c823_4f024af1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-06T19:32:47Z",
+      "side": 1,
+      "message": "That is another approach. That would work too. But I think implementing in Dawn has some points:\n- Dawn can know that the texture is not initialized or discarded when exporting/ending access thus can skip the readback. Whereas if we implement in chrome, I don\u0027t know there is any way to know that and the readback/upload will always happen.\n- ANGLE can import IOSurface to swiftshader backend and chrome doesn\u0027t need to do anything special in its shared image system. So it would make sense to do the same for Dawn.\n- We can make use of Dawn\u0027s external image\u0027s unit tests.\n\nWDYT?",
+      "parentUuid": "ac30859f_8db0005c",
+      "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
