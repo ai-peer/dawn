@@ -34,6 +34,24 @@
       "parentUuid": "81055e87_736a3882",
       "revId": "9c6395151e54d2b5bf1bb718e1990365e4348943",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "950d2581_0aef0cb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T20:33:09Z",
+      "side": 1,
+      "message": "Not blocking anything yet.\nnote that when vulkan-deps fails and Dawn/Chromium versions of it get too out-of-sync, then other rolls become blocked as well.\n\nfor example, the Dawn-\u003eChromium autoroll may start failing - in which case this would become more urgent.\n\nI don\u0027t think this is the case yet.",
+      "parentUuid": "888cad8b_fba41d29",
+      "revId": "9c6395151e54d2b5bf1bb718e1990365e4348943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
