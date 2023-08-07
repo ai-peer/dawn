@@ -53,6 +53,8 @@ enum class Feature {
     DualSourceBlending,
     D3D11MultithreadProtected,
     ANGLETextureSharing,
+    PixelLocalStorageCoherent,
+    PixelLocalStorageNonCoherent,
 
     SharedTextureMemoryVkDedicatedAllocation,
     SharedTextureMemoryAHardwareBuffer,

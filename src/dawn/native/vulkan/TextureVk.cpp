@@ -582,6 +582,10 @@ VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage
             UNREACHABLE();
             break;
 
+        case wgpu::TextureUsage::PixelLocalPersistentStorage:
+            // TODO(dawn:1704): Support PLS on Vulkan.
+            UNREACHABLE();
+
         case wgpu::TextureUsage::None:
             break;
     }
