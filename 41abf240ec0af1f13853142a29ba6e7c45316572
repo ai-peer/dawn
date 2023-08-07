@@ -16,6 +16,24 @@
       "message": "This is to avoid removal of the instruction being iterated over, right?\nCouldn\u0027t we do the `TINT_DEFER(inst \u003d next);` trick to avoid the vector allocations and double switch?\nAlternatively, we could write a custom iterator that does that internally.",
       "revId": "41abf240ec0af1f13853142a29ba6e7c45316572",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e8777d6_ea0df70a",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-07T12:17:53Z",
+      "side": 1,
+      "message": "Yeah, I should make a helper on `Module` or `Function` that does this, because I\u0027m doing it in almost every transform. Will do as a follow-up for all the transforms together.",
+      "parentUuid": "fb447a20_01093ad0",
+      "revId": "41abf240ec0af1f13853142a29ba6e7c45316572",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
