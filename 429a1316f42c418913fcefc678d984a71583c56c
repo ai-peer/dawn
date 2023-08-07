@@ -80,6 +80,30 @@
       },
       "revId": "429a1316f42c418913fcefc678d984a71583c56c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f2dce4_cb585299",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-07T23:07:13Z",
+      "side": 1,
+      "message": "Right, yea I noticed that it could easily infinite loop. I\u0027m fine with this also, but I figured we could\u0027ve added the appropriate comments to make it clear what we are doing in the generated code if we used the private copy ctor. Thanks for the changes!",
+      "parentUuid": "21dc393b_96882a1c",
+      "range": {
+        "startLine": 125,
+        "startChar": 12,
+        "endLine": 129,
+        "endChar": 24
+      },
+      "revId": "429a1316f42c418913fcefc678d984a71583c56c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
