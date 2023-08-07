@@ -16,6 +16,24 @@
       "message": "No change requested:\nIs the plan to always inline these polyfills? I slightly worry about code explosion, which backends might struggle with. It\u0027s always easier to heuristically inline than extract common code out to functions.\n\nMight want to keep an eye on how much code we\u0027re emitting for various backends, and profile performance with and without function emission.",
       "revId": "be398cc49c8f1ff1594c2d2d05899e595705d874",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0cef9b_b519427d",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-07T14:48:35Z",
+      "side": 1,
+      "message": "Agreed, it\u0027s certainly a lot easier to generate these polyfills inline with the IR, but that doesn\u0027t necessarily mean that we should be.\n\nHappy to go back and add helper functions for any or all of these if we need to.",
+      "parentUuid": "02000d3e_c837e3e1",
+      "revId": "be398cc49c8f1ff1594c2d2d05899e595705d874",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
