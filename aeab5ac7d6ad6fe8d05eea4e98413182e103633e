@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0e328a1_c92d6f01",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-07T10:31:31Z",
+      "side": 0,
+      "message": "Maybe we could add the check that mSize !\u003d 0 in the assert: that\u0027s guaranteed because in MapAtCreation we early out if mSize is 0, but in this function shouldn\u0027t be called in this case.",
+      "revId": "aeab5ac7d6ad6fe8d05eea4e98413182e103633e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
