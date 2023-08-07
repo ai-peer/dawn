@@ -34,6 +34,24 @@
       "parentUuid": "ac30859f_8db0005c",
       "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d890322_5bdd5590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T16:31:59Z",
+      "side": 1,
+      "message": "here are my thoughts - open to discussion!\n\n- For skipping the readback based on initialization state, agree this is better for performance. But - I understand that SwiftShader integration now is intended to be for testing purposes, and doesn\u0027t necessarily need to be very fast. Maybe I\u0027m wrong about this and we\u0027re actually going to ship Chrome software fallback on Graphite-Dawn-Swiftshader?\n- While we definitely could support import like this - it feels deceptive. It\u0027s not a real import and has far different performance characteristics. So, it might be a better layering to put the readback/upload outside of Dawn. We\u0027re working on unifying the import/export APIs and as we do so, I think it would be better if the API had a consistent meaning across backends. If not, applications will be incentived to use a different code path when running on SwiftShader. And if they\u0027re doing that - it seems better that they also manage the readback/upload.\n- IMO Chromium should also have good testing of this too",
+      "parentUuid": "6590c823_4f024af1",
+      "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
