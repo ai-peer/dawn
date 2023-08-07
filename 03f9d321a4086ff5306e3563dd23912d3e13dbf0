@@ -39,6 +39,30 @@
       },
       "revId": "03f9d321a4086ff5306e3563dd23912d3e13dbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3ab5db6_85e3d458",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T18:55:56Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "c7e5b052_edbd3195",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 93
+      },
+      "revId": "03f9d321a4086ff5306e3563dd23912d3e13dbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

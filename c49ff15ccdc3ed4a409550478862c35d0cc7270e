@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acaf6dd6_a5bd2dfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T18:55:56Z",
+      "side": 1,
+      "message": "Added a test suite.\n\nAdded some more robustness: if you request a ContextEGL with useANGLETextureSharing\u003dtrue, not having the EGL extension is an error.\n\nRequesting the FeatureName::ANGLETextureSharing on anything other than ANGLE is an error. (Tests are only run on ANGLE.)",
+      "revId": "c49ff15ccdc3ed4a409550478862c35d0cc7270e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
