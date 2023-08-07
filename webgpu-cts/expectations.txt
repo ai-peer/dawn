@@ -68,7 +68,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-07-26 08:49:40AM
+# Last rolled: 2023-08-07 08:01:38PM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -478,7 +478,6 @@ crbug.com/dawn/0000 [ arm ] webgpu:api,validation,capability_checks,limits,maxBu
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ qualcomm ] webgpu:api,operation,render_pipeline,sample_mask:* [ Skip ]
-
 
 ################################################################################
 # CTS Async destroy tests
