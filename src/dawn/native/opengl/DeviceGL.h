@@ -33,7 +33,7 @@
 #include "dawn/common/windows_with_undefs.h"
 #endif
 
-typedef void* EGLImage;
+using EGLImage = void*;
 
 namespace dawn::native::opengl {
 
@@ -44,7 +44,8 @@ class Device final : public DeviceBase {
                                              const DeviceDescriptor* descriptor,
                                              const OpenGLFunctions& functions,
                                              std::unique_ptr<Context> context,
-                                             const TogglesState& deviceToggles);
+                                             const TogglesState& deviceToggles,
+                                             bool supportsANGLETextureSharing);
     ~Device() override;
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);
@@ -57,9 +58,11 @@ class Device final : public DeviceBase {
 
     void SubmitFenceSync();
 
-    MaybeError ValidateEGLImageCanBeWrapped(const TextureDescriptor* descriptor, ::EGLImage image);
+    MaybeError ValidateTextureCanBeWrapped(const TextureDescriptor* descriptor);
     TextureBase* CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
                                                ::EGLImage image);
+    TextureBase* CreateTextureWrappingGLTexture(const ExternalImageDescriptor* descriptor,
+                                                GLuint texture);
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
@@ -95,7 +98,8 @@ class Device final : public DeviceBase {
            const DeviceDescriptor* descriptor,
            const OpenGLFunctions& functions,
            std::unique_ptr<Context> context,
-           const TogglesState& deviceToggless);
+           const TogglesState& deviceToggless,
+           bool supportsANGLETextureSharing);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
@@ -141,6 +145,7 @@ class Device final : public DeviceBase {
     std::unique_ptr<Context> mContext = nullptr;
     // Has pending GL commands which are not associated with a fence.
     mutable bool mHasPendingCommands = false;
+    bool mSupportsANGLETextureSharing = false;
 };
 
 }  // namespace dawn::native::opengl
