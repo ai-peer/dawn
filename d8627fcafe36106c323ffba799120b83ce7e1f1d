@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0181c309_21cc6f53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T19:40:48Z",
+      "side": 1,
+      "message": "LGTM, some nits",
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99302462_856d6ae4",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T19:40:48Z",
+      "side": 1,
+      "message": "nit: better way is to do `HasFeature(Feature::ANGLETextureSharing)`",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 0
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff53af9_0d31bf9a",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T19:40:48Z",
+      "side": 1,
+      "message": "nit: casing as GetTexture (or just Get())",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f0a75de_b9b22534",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T19:40:48Z",
+      "side": 1,
+      "message": "preferred way is to check features and not the backend\n\n```suggestion\n    std::vector\u003cwgpu::FeatureName\u003e GetRequiredFeatures() override {\n        if (SupportsFeatures({wgpu::FeatureName::ANGLETextureSharing})) {\n          return {\n            wgpu::FeatureName::DawnInternalUsages,\n            wgpu::FeatureName::ANGLETextureSharing,\n          };\n        } \n        return {};\n    }\n\n    void SetUp() override {\n        DawnTest::SetUp();\n        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures(\n          {wgpu::FeatureName::ANGLETextureSharing}));\n    }\n\n```",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "335c18fc_cc70d462",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T19:40:48Z",
+      "side": 1,
+      "message": "nit: put this common to all tests in `SetUp() override`",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 41
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
