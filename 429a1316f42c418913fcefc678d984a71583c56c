@@ -16,6 +16,46 @@
       "message": "PTAL again!",
       "revId": "429a1316f42c418913fcefc678d984a71583c56c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66dd4926_9e7fe268",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-07T22:09:28Z",
+      "side": 1,
+      "message": "Still LGTM with small potential question.",
+      "revId": "429a1316f42c418913fcefc678d984a71583c56c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5797caf1_ed04a47f",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-07T22:09:28Z",
+      "side": 1,
+      "message": "Hmm not sure if it\u0027s possible, but could this be implemented with a (private) copy ctor that copies a default initialized version of the struct? (Ditto for the \u003d operator)",
+      "range": {
+        "startLine": 125,
+        "startChar": 12,
+        "endLine": 129,
+        "endChar": 24
+      },
+      "revId": "429a1316f42c418913fcefc678d984a71583c56c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
