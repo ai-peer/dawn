@@ -69,7 +69,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include <stdbool.h>
 
 {% for constant in by_category["constant"] %}
     #define {{API}}_{{constant.name.SNAKE_CASE()}} {{constant.value}}
