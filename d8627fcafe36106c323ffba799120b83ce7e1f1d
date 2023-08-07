@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaa5d501_63da787c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T20:50:21Z",
+      "side": 1,
+      "message": "Thanks for your review!",
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99302462_856d6ae4",
@@ -41,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d54bb2e_bdd93af9",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T20:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99302462_856d6ae4",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 0
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ff53af9_0d31bf9a",
@@ -54,6 +95,30 @@
       "writtenOn": "2023-08-07T19:40:48Z",
       "side": 1,
       "message": "nit: casing as GetTexture (or just Get())",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d56ed25_06700f9e",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T20:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ff53af9_0d31bf9a",
       "range": {
         "startLine": 49,
         "startChar": 11,
@@ -89,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d069eccc_bb965478",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T20:50:21Z",
+      "side": 1,
+      "message": "Unfortunately, I think there\u0027s a chicken-and-egg problem. On bare metal EGL, iif I allow DawnTest::Setup() to run first, it attempts to create a device with ANGLETextureSharing (because of the GetRequiredFeatures() above), fails and crashes the harness.\n\nIf I ask for SupportedFeatures() first (before DawnTest::SetUp() has run), it fails because it hasn\u0027t yet initialized an adapter.",
+      "parentUuid": "9f0a75de_b9b22534",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "335c18fc_cc70d462",
         "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
         "patchSetId": 23
@@ -100,6 +189,30 @@
       "writtenOn": "2023-08-07T19:40:48Z",
       "side": 1,
       "message": "nit: put this common to all tests in `SetUp() override`",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 41
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ece8d8d_2cff8a4f",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T20:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "335c18fc_cc70d462",
       "range": {
         "startLine": 128,
         "startChar": 4,
