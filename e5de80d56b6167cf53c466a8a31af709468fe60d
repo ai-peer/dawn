@@ -56,6 +56,30 @@
       },
       "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfbc157a_51d31260",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T20:25:12Z",
+      "side": 1,
+      "message": "I think it should be simple to swap it later. if I load the old gitlink, then I have to deal with potential inconsistency between the gitlink and DEPS. Seems simpler to ignore what the old gitlink is and set it to the new hash directly?",
+      "parentUuid": "df37fcc4_3d0a0667",
+      "range": {
+        "startLine": 316,
+        "startChar": 1,
+        "endLine": 316,
+        "endChar": 42
+      },
+      "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
