@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c02374db_d8ec0fcf",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T21:10:22Z",
+      "side": 1,
+      "message": "Done; I made *all* the members const.\nbut is the ASSERT really needed? I don\u0027t see that it gives us much given everything is const now",
+      "parentUuid": "e5e3a862_e64183c9",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2fca302_1ae77a9e",
         "filename": "generator/templates/api_cpp.cpp",
         "patchSetId": 5
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "`this` is the receiver of the assignment - so yes - I think that\u0027s what should happen?\n\n```\nwgpu::AdapterProperties p1;\nwgpu::AdapterProperties p2;\n\n\nadapter.GetProperties(\u0026p1);\nadapter.GetProperties(\u0026p2);\n\n// p1 should be freed, and take the contents of p2\np1 \u003d std::move(p2);\n```\n\nI should write a test for it",
       "parentUuid": "a2fca302_1ae77a9e",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05bd9f53_01b5c724",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T21:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35e109f5_19f4e62d",
       "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -170,6 +206,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ea0ad83_5c8248c6",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T21:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c808db6e_6fb5e043",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 79
+      },
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47008867_fb643332",
@@ -205,6 +265,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c799d9f_125188cc",
+        "filename": "generator/templates/dawn_proc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T21:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bc15bf7_b5f2972e",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05cd159a_844cc0f2",
@@ -222,6 +300,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09d3df2e_6e97bec6",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T21:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05cd159a_844cc0f2",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcb28d75_5bf96e7e",
@@ -235,6 +331,24 @@
       "writtenOn": "2023-08-04T15:30:39Z",
       "side": 1,
       "message": "ditto",
+      "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2878e849_c1fe5071",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T21:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb28d75_5bf96e7e",
       "revId": "49be9b416085129c96017521c1d0b4287c9b0285",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
