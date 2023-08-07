@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f891acff_3fb3ef4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-07T21:10:34Z",
+      "side": 1,
+      "message": "I would expect that `git update-index` is not necessary although i\u0027m not familiar with the gerrit API this script uses.\n\nFor example, skia auto-rollers have a find_and_replace feature where given the file name, it can find the old commit in the file and replace it with the new commit. And this feature works for updating gitlink files.\n\nlooking for the find_and_replace implementation to see what they\u0027re doing...",
+      "parentUuid": "412c5b0b_8ce99678",
+      "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df37fcc4_3d0a0667",
         "filename": "tools/src/cmd/cts/roll/roll.go",
         "patchSetId": 3
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "I think it should be simple to swap it later. if I load the old gitlink, then I have to deal with potential inconsistency between the gitlink and DEPS. Seems simpler to ignore what the old gitlink is and set it to the new hash directly?",
       "parentUuid": "df37fcc4_3d0a0667",
+      "range": {
+        "startLine": 316,
+        "startChar": 1,
+        "endLine": 316,
+        "endChar": 42
+      },
+      "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce4cff5_fe81396a",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-07T21:10:34Z",
+      "side": 1,
+      "message": "sg",
+      "parentUuid": "cfbc157a_51d31260",
       "range": {
         "startLine": 316,
         "startChar": 1,
