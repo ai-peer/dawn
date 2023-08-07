@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f2ae2bd_0659c36a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-07T10:54:23Z",
+      "side": 1,
+      "message": "+2 with one nit on the number tests.",
+      "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cfdccb6_861cd2e6",
@@ -84,6 +101,29 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "80ab9079_cf90d04f",
+      "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dff32a65_9376bb56",
+        "filename": "src/tint/lang/core/builtin/number_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-07T10:54:23Z",
+      "side": 1,
+      "message": "These are all the same `std::nullopt` value. Might be better to change this to a `std::variant\u003cT, Error\u003e`, where `Error` is an enum of the error types, then check the error reason matches.\nThat or just have a single `auto Error \u003d std::optional\u003cT\u003e{};`\n\nEither way, you\u0027d avoid writing a test case that passes for the wrong error reason.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 403,
+        "endChar": 75
+      },
       "revId": "fe1e568f58ba0880016a0c74d2a7f830b904ade2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
