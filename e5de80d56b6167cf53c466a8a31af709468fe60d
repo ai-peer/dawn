@@ -33,6 +33,29 @@
       "message": "actually - Joanna is this sufficient?\n\nIt seems like it\u0027s still necessary to do \n\n`git update-index --add --cacheinfo 160000,9f097553321962196792ea06f5448ce8e17f5c1b,third_party/webgpu-cts`\n\ninstead of simply editing the file. I\u0027m not sure if the roller tool can update commit objects like this since it\u0027s using the Gerrit API to change the contents.\nhttps://chromium.googlesource.com/external/github.com/andygrunwald/go-gerrit/+/HEAD/changes_edit.go#98",
       "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df37fcc4_3d0a0667",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-07T20:22:55Z",
+      "side": 1,
+      "message": "note we want to remove git deps from DEPS eventually, so would eventually have to get `oldCTSHash` from the gitlink rather than from DEPS",
+      "range": {
+        "startLine": 316,
+        "startChar": 1,
+        "endLine": 316,
+        "endChar": 42
+      },
+      "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
