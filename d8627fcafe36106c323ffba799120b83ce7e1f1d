@@ -202,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10f9727e_248fb6f4",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-07T21:02:10Z",
+      "side": 1,
+      "message": "OK, done.\n\nI was thinking about this more like an \"external client\" test, where the client (e.g., Chrome) would check for the EGL extension in their own code before using it, rather than relying on Dawn to do that check.\n\nDoing the check using Dawn means that, if Dawn\u0027s implementation of SupportedFeatures() got broken, this test would just be skipped on all platforms, whereas a test with an external \"client-like\" check would catch the failure.\n\nBut this is probably a super-minor point.",
+      "parentUuid": "23d2f8f5_c8f3ceb6",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "335c18fc_cc70d462",
         "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
         "patchSetId": 23
