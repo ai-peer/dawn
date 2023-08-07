@@ -227,3 +227,17 @@ func (r *Buildbucket) QueryBuild(ctx context.Context, id BuildID) (Build, error)
 	}
 	return toBuild(b), nil
 }
+
+// CancelBuild cancels a build.
+func (r *Buildbucket) CancelBuild(
+	ctx context.Context,
+	id BuildID,
+	reason string) (Build, error) {
+
+	build, err := r.client.CancelBuild(ctx, &bbpb.CancelBuildRequest{
+		Id:              int64(id),
+		SummaryMarkdown: reason,
+	})
+
+	return toBuild(build), err
+}
