@@ -178,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23d2f8f5_c8f3ceb6",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-07T20:52:14Z",
+      "side": 1,
+      "message": "I believe it should work if you check supported features inside GetRequiredFeatures - such that you don\u0027t require anything if it\u0027s not supported.\n\nThis is something we should probably fixup in the test harness, but it does work for other tests",
+      "parentUuid": "d069eccc_bb965478",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "d8627fcafe36106c323ffba799120b83ce7e1f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "335c18fc_cc70d462",
         "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
         "patchSetId": 23
