@@ -20,6 +20,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "106b18de_1c56d2db",
+        "filename": "src/dawn/node/binding/GPUAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-07T10:36:02Z",
+      "side": 1,
+      "message": "Looks like this should go into a separate change, along with the `wgpu::FeatureName` change.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 5
+      },
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec8ce2e_06e9dee6",
+        "filename": "src/dawn/node/cts.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-07T10:36:02Z",
+      "side": 1,
+      "message": "Is the `require` path always relative to the `.js` file?",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c3f360c_70ce3033",
         "filename": "src/dawn/node/cts.js",
         "patchSetId": 2
@@ -31,6 +71,46 @@
       "writtenOn": "2023-08-06T20:14:44Z",
       "side": 1,
       "message": "I\u0027m not sure that we need two separate entrypoints: the CTS can use the same module as other node modules as long as the create method is in the exports.\n\nIn the cmdline mode, the GPUProvider is set to the create method\n\nhttps://github.com/gpuweb/cts/blob/9f097553321962196792ea06f5448ce8e17f5c1b/src/common/runtime/cmdline.ts#L114\nhttps://github.com/gpuweb/cts/blob/9f097553321962196792ea06f5448ce8e17f5c1b/src/common/runtime/cmdline.ts#L95\n\nWhich is then used to create the GPU object to request an adapter..\n\nhttps://github.com/gpuweb/cts/blob/9f097553321962196792ea06f5448ce8e17f5c1b/src/common/util/navigator_gpu.ts#L63\n\nCouldn\u0027t we have dawn.node export:\n\n - all interfaces (like GPUBindGroup, GPUAdapter etc)\n - gpu which is an object that defaults to having no flags. (is there precedent for adding magical environment variables like DAWN_FLAGS here in node modules? It seems dangerous from a security PoV).\n - create which the CTS and whoever else would use.",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e580f11_db63053c",
+        "filename": "src/dawn/node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-07T10:36:02Z",
+      "side": 1,
+      "message": "This isn\u0027t the global object any more (at least not within this context), so I\u0027d suggest giving this a different name. `result`, `api`, `webgpu` or something.",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83b3ab29_3b6c4b2b",
+        "filename": "src/dawn/node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-07T10:36:02Z",
+      "side": 1,
+      "message": "Please document the return object.",
       "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
