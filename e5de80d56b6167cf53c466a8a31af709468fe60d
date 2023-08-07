@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3aee79eb_ab1edf1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-07T21:35:09Z",
+      "side": 1,
+      "message": "skia auto-roller find_and_replace implementation, they don\u0027t do anything special for gitlinks afaict.\nhttp://shortn/_pbOaBGzg8P",
+      "parentUuid": "f891acff_3fb3ef4b",
+      "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df37fcc4_3d0a0667",
         "filename": "tools/src/cmd/cts/roll/roll.go",
         "patchSetId": 3
