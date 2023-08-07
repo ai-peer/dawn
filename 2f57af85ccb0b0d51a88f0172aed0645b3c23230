@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0dd040_433cf345",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-07T10:34:21Z",
+      "side": 1,
+      "message": "Negative validation tests sound good.",
+      "parentUuid": "26194be3_abd3664a",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dbb4c155_d1b08425",
