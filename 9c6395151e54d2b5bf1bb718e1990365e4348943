@@ -16,6 +16,24 @@
       "message": "Joanna - this Skia autoroller appears to not be updating the gitlink correctly",
       "revId": "9c6395151e54d2b5bf1bb718e1990365e4348943",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "888cad8b_fba41d29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-07T20:28:58Z",
+      "side": 1,
+      "message": "thanks for letting me know. I\u0027m looking into the skia auto-roller right now. is this urgent/blocking something?",
+      "parentUuid": "81055e87_736a3882",
+      "revId": "9c6395151e54d2b5bf1bb718e1990365e4348943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
