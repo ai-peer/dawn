@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d39617e_38ceb58f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-08T20:33:18Z",
+      "side": 1,
+      "message": "LGTM with a comment",
+      "revId": "7e2b803127bb4c99b46a6928508a934f3e670e3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b9ddd6d_7135ae32",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-08T20:33:18Z",
+      "side": 1,
+      "message": "I *think* you can just call `CreateDevice()` which is a helper from DawnTestBase. it\u0027ll bottom out at DawnTestBase::CreateDeviceImpl which uses the same descriptor parameters that the original device was created from",
+      "range": {
+        "startLine": 75,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 0
+      },
+      "revId": "7e2b803127bb4c99b46a6928508a934f3e670e3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
