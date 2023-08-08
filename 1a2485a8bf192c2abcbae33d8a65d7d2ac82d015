@@ -52,6 +52,24 @@
       "parentUuid": "6590c823_4f024af1",
       "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6918e84f_9488ac4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-08T11:27:19Z",
+      "side": 1,
+      "message": "\u003e For skipping the readback based on initialization state, agree this is better for performance. But - I understand that SwiftShader integration now is intended to be for testing purposes, and doesn\u0027t necessarily need to be very fast. Maybe I\u0027m wrong about this and we\u0027re actually going to ship Chrome software fallback on Graphite-Dawn-Swiftshader?\n\n- Unfortunately, some chrome\u0027s unit tests rely on `isInitialized` flag to know whether the shared image is cleared by Dawn or not (e.g. IOSurfaceImageBackingFactoryTest.UnclearDawn_SkiaFails [1]). By implementing the upload/readback in chrome, we don\u0027t know that and will always assume that the images are filled/cleared by Dawn.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/iosurface_image_backing_factory_unittest.cc;drc\u003db537cbde0c7c42da2ee730b286bfb1cc7735eb1a;l\u003d458\n\nWe could skip these tests if swiftshader is used. But not sure it\u0027s the best way to do. Or there could be other places in Chrome which rely on knowing exactly whether the images are initialized by Dawn or not.\n\nCC @sunnyps@chromium.org any insights?",
+      "parentUuid": "6d890322_5bdd5590",
+      "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
