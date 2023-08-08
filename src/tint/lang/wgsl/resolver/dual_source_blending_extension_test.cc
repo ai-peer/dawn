@@ -143,5 +143,19 @@ TEST_F(DualSourceBlendingExtensionTests, IndexWithNonZeroLocation) {
     EXPECT_EQ(r()->error(), "12:34 error: index attribute must only be used with @location(0)");
 }
 
+// Using @location(1) while using dual-source blending is not allowed.
+TEST_F(DualSourceBlendingExtensionTests, Location1NotAllowed) {
+    Structure("Output", Vector{
+                            Member("a", ty.vec4<f32>(), Vector{Location(0_a), Index(0_a)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), Index(1_a)}),
+                            Member("c", ty.vec4<f32>(), Vector{Location(Source{{12, 34}}, 1_a)}),
+                        });
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              "12:34 error: Use of @location(1) as an output is not allowed when using the @index "
+              "attribute.");
+}
+
 }  // namespace
 }  // namespace tint::resolver
