@@ -70,6 +70,24 @@
       "parentUuid": "6d890322_5bdd5590",
       "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6a1d938_94468349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-08T11:45:07Z",
+      "side": 1,
+      "message": "I think chrome wants to know that dawn didn\u0027t initialize or discarded the image. So that it avoid using/importing it to another system .e.g. skia.",
+      "parentUuid": "6918e84f_9488ac4a",
+      "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
