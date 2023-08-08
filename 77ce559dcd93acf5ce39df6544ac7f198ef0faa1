@@ -16,6 +16,24 @@
       "message": "I\u0027m rebasing my local dawn CL and when I try to `git rebase` and `git cl upload` I saw\n\n```\n** Presubmit ERRORS: 1 **\nDEPS file indicates git submodule migration is in progress,\nbut the commit objects do not match DEPS entries.\nUpdate the following commit objects with:\n`git update-index --add --cacheinfo 160000,\u003ccommit_rev\u003e,\u003cpath\u003e`\nor DEPS entries:\n\n  build\n  buildtools\n  third_party/angle\n  third_party/dxc\n  third_party/swiftshader\n  third_party/vulkan-deps\n  third_party/vulkan_memory_allocator\n```\n\nAm I supposed to see this? I\u0027m not sure what to do. I tried run `gclient sync`. (I have a standalone `.gclient` file in dawn folder)",
       "revId": "77ce559dcd93acf5ce39df6544ac7f198ef0faa1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e0c437_3cd94c48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-08T12:59:56Z",
+      "side": 1,
+      "message": "i filed https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1471106 on your behalf.\nShrek, could you go there and provide some info requested in the bug?",
+      "parentUuid": "3f0bf9cb_a972ab5c",
+      "revId": "77ce559dcd93acf5ce39df6544ac7f198ef0faa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
