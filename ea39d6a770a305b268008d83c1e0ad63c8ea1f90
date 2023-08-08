@@ -16,6 +16,24 @@
       "message": "Ideally, I think we should try to avoid mutating the IR in the printer. Mutation should occur during `raise`. If the writer does fail, and we need to print the IR disassembly, the mutations are going to make things confusing.\n\nIn all the places we use `ConstantValue()`, we immediately pass that to `Constant()`. We could just as easily have the printer map `tint::Number`s to SPIR-V IDs, and avoid the need to mutate the IR.",
       "revId": "ea39d6a770a305b268008d83c1e0ad63c8ea1f90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "872ef712_447d42b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-08-08T14:42:00Z",
+      "side": 1,
+      "message": "This is also done in other generators to get things like the 0 value. Which, probably, exists, but maybe not. We could do it in raise, but I\u0027m not sure if it\u0027s worth it.\n\nNot sure why the mutations would make the disassembly confusing?",
+      "parentUuid": "033d4b42_fedce826",
+      "revId": "ea39d6a770a305b268008d83c1e0ad63c8ea1f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
