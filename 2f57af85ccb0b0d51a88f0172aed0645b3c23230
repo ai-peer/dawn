@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d07cb1e_383d16ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-08T09:49:00Z",
+      "side": 1,
+      "message": "Add unit tests for WGSL extension validation when creating shader module, test all known WGSL extension including the new-added `chromium_experimental_subgroups` WGSL extension.",
+      "parentUuid": "8c0dd040_433cf345",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dbb4c155_d1b08425",
