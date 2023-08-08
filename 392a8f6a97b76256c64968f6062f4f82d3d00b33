@@ -22,6 +22,30 @@
       },
       "revId": "392a8f6a97b76256c64968f6062f4f82d3d00b33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aa62095_68b0952e",
+        "filename": "src/dawn/tests/white_box/GLTextureWrappingTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-08T14:04:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36d4f5c5_ddcd07fa",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 43
+      },
+      "revId": "392a8f6a97b76256c64968f6062f4f82d3d00b33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
