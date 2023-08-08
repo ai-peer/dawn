@@ -110,6 +110,14 @@ D3D12_RESOURCE_DIMENSION D3D12TextureDimension(wgpu::TextureDimension dimension)
     }
 }
 
+Aspect GetFormatAspectFromAppliedDXGIFormat(const Format& format) {
+    if (format.baseFormat == wgpu::TextureFormat::Stencil8) {
+        ASSERT(d3d::DXGITextureFormat(format.baseFormat) == DXGI_FORMAT_D24_UNORM_S8_UINT);
+        return Aspect::CombinedDepthStencil;
+    }
+    return format.aspects;
+}
+
 }  // namespace
 
 MaybeError ValidateTextureCanBeWrapped(ID3D12Resource* d3d12Resource,
@@ -548,7 +556,7 @@ void Texture::TransitionSubresourceRange(std::vector<D3D12_RESOURCE_BARRIER>* ba
     bool isFullRange = range.baseArrayLayer == 0 && range.baseMipLevel == 0 &&
                        range.layerCount == GetArrayLayers() &&
                        range.levelCount == GetNumMipLevels() &&
-                       range.aspects == GetFormat().aspects;
+                       range.aspects == GetFormatAspectFromAppliedDXGIFormat(GetFormat());
 
     // Use a single transition for all subresources if possible.
     if (isFullRange) {
