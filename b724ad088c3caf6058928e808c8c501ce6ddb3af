@@ -22,6 +22,30 @@
       },
       "revId": "b724ad088c3caf6058928e808c8c501ce6ddb3af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba3f81a_9592c215",
+        "filename": "src/tint/lang/msl/writer/printer/constant_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-08T19:58:22Z",
+      "side": 1,
+      "message": "It saves a lot of lines over all of the tests. It also makes it easier to see what the test is actualy testing, throwing more noise in just makes it harder to pick out the issues. (This is very apparently with the `MetalArray()` helper which writes out a dozen lines of stuff).",
+      "parentUuid": "52e4eda0_7583e856",
+      "range": {
+        "startLine": 321,
+        "startChar": 23,
+        "endLine": 321,
+        "endChar": 42
+      },
+      "revId": "b724ad088c3caf6058928e808c8c501ce6ddb3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
