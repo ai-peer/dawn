@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e7513b_be12cc81",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2023-08-08T16:10:09Z",
+      "side": 1,
+      "message": "Is this just recording the value or will it be used for the WebGPU limit? D3D12 docs indicate this is unreliable, so the WebGPU limit needs to be 128.",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -256,6 +256,24 @@
       "message": "Alan, IIRC the subgroup_size_control isn\u0027t required for this experimental extension since the other backends don\u0027t have it?",
       "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a53de71_a7230c9c",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2023-08-08T16:10:09Z",
+      "side": 1,
+      "message": "Without that extension, Vulkan has a single subgroup size field and it is known to be unreliable. This extension provides the min/max values for subgroup sizing. I think we would require this in the final version which is why I had it listed as a requirement.",
+      "parentUuid": "40b046b3_24df6a4e",
+      "revId": "2f57af85ccb0b0d51a88f0172aed0645b3c23230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
