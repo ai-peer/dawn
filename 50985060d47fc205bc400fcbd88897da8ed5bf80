@@ -33,6 +33,108 @@
       "message": "Is this just recording the value or will it be used for the WebGPU limit? D3D12 docs indicate this is unreliable, so the WebGPU limit needs to be 128.",
       "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f3cd521_1d1a199b",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:51:47Z",
+      "side": 1,
+      "message": "Let\u0027s try to avoid using dawn::native directly if we can avoid it.",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7652aef2_d1bd44e0",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:51:47Z",
+      "side": 1,
+      "message": "nit: Using a template for this seems a bit much. WDYT of using regular inheritance and have each child class call Base::CreateTestDevice(adapter, desc, AllowUnsafeAPIs, RequireAllFeatures)\n\nThat or using additional test parameters with DAWN_PARAMS_STRUCT.",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "235bf81f_4a3165bf",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:51:47Z",
+      "side": 1,
+      "message": "Can\u0027t we skip before calling Base::SetUp()? This way we don\u0027t need the logic at [1]",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2020890b_0937390a",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:51:47Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1220bd3d_0fa16f47",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:51:47Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to explicitly disable that toggle, it should be disabled by default.",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f95e7f6_3fe4b8e2",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:51:47Z",
+      "side": 1,
+      "message": "This should be possible to do by Enumerating the features on the adapter. Why did you have to do it by reaching into dawn::native?",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
