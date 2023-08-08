@@ -22,6 +22,30 @@
       },
       "revId": "1c7f394c2ca3a17d9a969aadd0c5a79f06afcc37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9233adf7_322616a8",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-08T18:53:44Z",
+      "side": 1,
+      "message": "IIUC, it\u0027s because of this line: https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/dawn/src/dawn/native/vulkan/BindGroupLayoutVk.cpp;l\u003d137;bpv\u003d1;bpt\u003d0\n\nBasically, this ctor is being used there as a single argument ctor because we are going from a rhs of `Ref` to a `MutexProtected\u003cRef\u003cT\u003e\u003e`. I could probably change the `Create` function to return a `MutexProtected\u003cRef\u003cT\u003e\u003e` instead, but an implicit conversion from `Ref\u003cT\u003e` to a `MutexProtected\u003cRef\u003cT\u003e\u003e` seemed ergonomic.",
+      "parentUuid": "06601001_6245b3a0",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 67
+      },
+      "revId": "1c7f394c2ca3a17d9a969aadd0c5a79f06afcc37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
