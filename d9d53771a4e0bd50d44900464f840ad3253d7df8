@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d79d9f8f_abc1ef5b",
+        "filename": "tools/src/cmd/tryjob/cancel/cancel.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-08T13:22:05Z",
+      "side": 1,
+      "message": "This is a layering violation. Things under `dawn.googlesource.com/dawn/tools/src/cmd` should be private to that command.\n\n`dawn.googlesource.com/dawn/tools/src` is the place for common utility code.\n\nI\u0027d either move the common code out to utility packages, or make this a `cts` sub-command.",
+      "revId": "d9d53771a4e0bd50d44900464f840ad3253d7df8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
