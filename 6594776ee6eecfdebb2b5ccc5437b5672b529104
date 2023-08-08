@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "6594776ee6eecfdebb2b5ccc5437b5672b529104",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17962f0e_108b262b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:37:47Z",
+      "side": 1,
+      "message": "LGTM overall, nice fix!",
+      "revId": "6594776ee6eecfdebb2b5ccc5437b5672b529104",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012e2f7e_b2928cb3",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-08T17:37:47Z",
+      "side": 1,
+      "message": "nit: At this point I think we can special case the computation of isFullRange like isFullRange \u0026\u003d format !\u003d stencil8 with a suitable comment explaining why. Without looking at the commit message I was very confused as to what this was doing: we are using an aspect that\u0027s never used in the d3d12 backend to prevent isFullRange from being true.",
+      "revId": "6594776ee6eecfdebb2b5ccc5437b5672b529104",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
