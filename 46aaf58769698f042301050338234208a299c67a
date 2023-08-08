@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c5e745_b2b4b2fa",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-08T18:14:48Z",
+      "side": 1,
+      "message": "remove?",
+      "revId": "46aaf58769698f042301050338234208a299c67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5097a2d_7b85fe0f",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-08T18:14:48Z",
+      "side": 1,
+      "message": "This passes the formatter?",
+      "revId": "46aaf58769698f042301050338234208a299c67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "458ac1c4_1a3b0a7c",
+        "filename": "src/tint/lang/core/intrinsic_type_matchers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-08T18:14:48Z",
+      "side": 1,
+      "message": "nit 2023",
+      "revId": "46aaf58769698f042301050338234208a299c67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
