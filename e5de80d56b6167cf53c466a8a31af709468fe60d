@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bac0acc6_e12e6c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-08-08T13:12:49Z",
+      "side": 1,
+      "message": "oh i think you are right `git update-index` is still needed.\n\nif this script making changes with code checked out locally, which i now realize it might be, there is no `third_party/webgpu-cts` file with the commit hash in its content because git just mounts a directory of the submodule there.\n\nif this were just updated based on pure gitiles files, without actually checking out the repo locally, then just rewriting the contents of the `third_party/webgpu-cts` file would work.\n\nso i guess you could update the script to run `git update-index --add --cacheinfo 160000,9f097553321962196792ea06f5448ce8e17f5c1b,third_party/webgpu-cts` for you, or just have `git update-index...` as an extra manual step to run after executing the script.",
+      "parentUuid": "3aee79eb_ab1edf1f",
+      "revId": "e5de80d56b6167cf53c466a8a31af709468fe60d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df37fcc4_3d0a0667",
         "filename": "tools/src/cmd/cts/roll/roll.go",
         "patchSetId": 3
