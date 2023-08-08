@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5d2243_4ee598e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-08T18:32:09Z",
+      "side": 1,
+      "message": "LGTM;\n\nhistorically, we\u0027ve used `T*` and `const T\u0026`, not `T\u0026` for args to convey mutability / immutability (references generally always const).\n\nI\u0027m open to changing that though since\n 1. Chromium style has also changed to prefer T\u0026 now when things are non-null\n 2. too much `(*obj)-\u003eFoo()` would be a lot of bloaty syntax\n 3. At least MutexProtected\u003cT\u003e\u0026 is still accessed using -\u003e, so usage of it still looks pointer-ish",
+      "revId": "694294313663514260c55076ba8d484de604701b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8fb10df_69990956",
+        "filename": "src/dawn/native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-08T18:32:09Z",
+      "side": 1,
+      "message": "could this arg change to be a reference?",
+      "range": {
+        "startLine": 94,
+        "startChar": 3,
+        "endLine": 94,
+        "endChar": 47
+      },
+      "revId": "694294313663514260c55076ba8d484de604701b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1579d98c_faef2c85",
+        "filename": "src/dawn/native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-08T18:32:09Z",
+      "side": 1,
+      "message": "could this be changed to pass a reference?",
+      "range": {
+        "startLine": 140,
+        "startChar": 14,
+        "endLine": 140,
+        "endChar": 30
+      },
+      "revId": "694294313663514260c55076ba8d484de604701b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
