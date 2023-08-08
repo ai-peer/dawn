@@ -88,6 +88,24 @@
       "parentUuid": "6918e84f_9488ac4a",
       "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "281ae71d_ec4a41fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-08T15:52:19Z",
+      "side": 1,
+      "message": "nvm, looks like we can use this function in chrome to determine whether the texture is initialized https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/include/dawn/native/DawnNative.h;drc\u003db537cbde0c7c42da2ee730b286bfb1cc7735eb1a;l\u003d231",
+      "parentUuid": "d6a1d938_94468349",
+      "revId": "1a2485a8bf192c2abcbae33d8a65d7d2ac82d015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
