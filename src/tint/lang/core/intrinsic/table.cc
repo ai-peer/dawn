@@ -32,42 +32,25 @@
 
 namespace tint::core::intrinsic {
 
-const TableData::Number TableData::Number::any{Number::kAny};
-const TableData::Number TableData::Number::invalid{Number::kInvalid};
+const Number Number::any{Number::kAny};
+const Number Number::invalid{Number::kInvalid};
 
-TableData::Any::Any() : Base(0u, type::Flags{}) {}
-TableData::Any::~Any() = default;
+Any::Any() : Base(0u, type::Flags{}) {}
+Any::~Any() = default;
 
-bool TableData::Any::Equals(const type::UniqueNode&) const {
+bool Any::Equals(const type::UniqueNode&) const {
     return false;
 }
 
-std::string TableData::Any::FriendlyName() const {
+std::string Any::FriendlyName() const {
     return "<any>";
 }
 
-type::Type* TableData::Any::Clone(type::CloneContext&) const {
+type::Type* Any::Clone(type::CloneContext&) const {
     return nullptr;
 }
 
 namespace {
-
-// Aliases
-using Any = TableData::Any;
-using Number = TableData::Number;
-using MatcherIndex = TableData::MatcherIndex;
-using TypeMatcher = TableData::TypeMatcher;
-using NumberMatcher = TableData::NumberMatcher;
-using MatchState = TableData::MatchState;
-using TemplateTypeInfo = TableData::TemplateTypeInfo;
-using TemplateNumberInfo = TableData::TemplateNumberInfo;
-using ParameterInfo = TableData::ParameterInfo;
-using IntrinsicInfo = TableData::IntrinsicInfo;
-using OverloadInfo = TableData::OverloadInfo;
-using OverloadFlag = TableData::OverloadFlag;
-using OverloadFlags = TableData::OverloadFlags;
-using TemplateState = TableData::TemplateState;
-constexpr const auto kNoMatcher = TableData::kNoMatcher;
 
 /// The Vector `N` template argument value for arrays of parameters.
 constexpr const size_t kNumFixedParams = decltype(Table::Overload{}.parameters)::static_length;
@@ -107,7 +90,7 @@ class Impl : public Table {
     /// Candidate holds information about an overload evaluated for resolution.
     struct Candidate {
         /// The candidate overload
-        const TableData::OverloadInfo* overload;
+        const OverloadInfo* overload;
         /// The template types and numbers
         TemplateState templates;
         /// The parameter types for the candidate overload
@@ -155,7 +138,7 @@ class Impl : public Table {
     ///                  arguments. For example `vec3<f32>()` would have the first template-type
     ///                  template as `f32`.
     /// @returns the evaluated Candidate information.
-    Candidate ScoreOverload(const TableData::OverloadInfo* overload,
+    Candidate ScoreOverload(const OverloadInfo* overload,
                             VectorRef<const type::Type*> args,
                             EvaluationStage earliest_eval_stage,
                             const TemplateState& templates) const;
@@ -178,15 +161,17 @@ class Impl : public Table {
     /// Match constructs a new MatchState
     /// @param templates the template state used for matcher evaluation
     /// @param overload the overload being evaluated
-    /// @param matcher_indices pointer to a list of matcher indices
+    /// @param type_matcher_indices pointer to a list of type matcher indices
+    /// @param number_matcher_indices pointer to a list of number matcher indices
     MatchState Match(TemplateState& templates,
-                     const TableData::OverloadInfo* overload,
-                     MatcherIndex const* matcher_indices,
+                     const OverloadInfo* overload,
+                     const TypeMatcherIndex* type_matcher_indices,
+                     const NumberMatcherIndex* number_matcher_indices,
                      EvaluationStage earliest_eval_stage) const;
 
     // Prints the overload for emitting diagnostics
     void PrintOverload(StringStream& ss,
-                       const TableData::OverloadInfo* overload,
+                       const OverloadInfo* overload,
                        const char* intrinsic_name) const;
 
     // Prints the list of candidates for emitting diagnostics
@@ -526,10 +511,12 @@ Result<Table::Overload> Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
 
     // Build the return type
     const type::Type* return_type = nullptr;
-    if (auto* indices = match.overload->return_matcher_indices) {
+    if (auto* type_indices = data[match.overload->return_type_matcher_indices]) {
+        auto* number_indices = data[match.overload->return_number_matcher_indices];
         Any any;
-        return_type =
-            Match(match.templates, match.overload, indices, earliest_eval_stage).Type(&any);
+        return_type = Match(match.templates, match.overload, type_indices, number_indices,
+                            earliest_eval_stage)
+                          .Type(&any);
         if (TINT_UNLIKELY(!return_type)) {
             TINT_ICE() << "MatchState.Match() returned null";
             return Failure;
@@ -541,7 +528,7 @@ Result<Table::Overload> Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
     return Table::Overload{match.overload, return_type, std::move(match.parameters)};
 }
 
-Impl::Candidate Impl::ScoreOverload(const TableData::OverloadInfo* overload,
+Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
                                     VectorRef<const type::Type*> args,
                                     EvaluationStage earliest_eval_stage,
                                     const TemplateState& in_templates) const {
@@ -588,9 +575,11 @@ Impl::Candidate Impl::ScoreOverload(const TableData::OverloadInfo* overload,
     // Note that inferred template types are not tested against their matchers at this point.
     auto num_params = std::min(num_parameters, num_arguments);
     for (size_t p = 0; p < num_params; p++) {
-        auto& parameter = overload->parameters[p];
-        auto* indices = parameter.matcher_indices;
-        if (!Match(templates, overload, indices, earliest_eval_stage).Type(args[p]->UnwrapRef())) {
+        auto& parameter = data[overload->parameters + p];
+        auto* type_indices = data[parameter.type_matcher_indices];
+        auto* number_indices = data[parameter.number_matcher_indices];
+        if (!Match(templates, overload, type_indices, number_indices, earliest_eval_stage)
+                 .Type(args[p]->UnwrapRef())) {
             score += kMismatchedParamTypePenalty;
         }
     }
@@ -603,11 +592,12 @@ Impl::Candidate Impl::ScoreOverload(const TableData::OverloadInfo* overload,
         // important here, which can be controlled with the [[precedence(N)]] decorations on the
         // types in intrinsics.def.
         for (size_t ot = 0; ot < overload->num_template_types; ot++) {
-            auto* matcher_index = &overload->template_types[ot].matcher_index;
-            if (*matcher_index != kNoMatcher) {
-                if (auto* template_type = templates.Type(ot)) {
-                    if (auto* ty = Match(templates, overload, matcher_index, earliest_eval_stage)
-                                       .Type(template_type)) {
+            auto* matcher_idx = &data[overload->template_types + ot].matcher_index;
+            if (matcher_idx->IsValid()) {
+                if (auto* type = templates.Type(ot)) {
+                    if (auto* ty =
+                            Match(templates, overload, matcher_idx, nullptr, earliest_eval_stage)
+                                .Type(type)) {
                         // Template type matched one of the types in the template type's matcher.
                         // Replace the template type with this type.
                         templates.SetType(ot, ty);
@@ -625,12 +615,13 @@ Impl::Candidate Impl::ScoreOverload(const TableData::OverloadInfo* overload,
         // inferred number matches the constraints on the overload. Increments `score` if the
         // template numbers do not match their constraint matchers.
         for (size_t on = 0; on < overload->num_template_numbers; on++) {
-            auto* matcher_index = &overload->template_numbers[on].matcher_index;
-            if (*matcher_index != kNoMatcher) {
-                auto template_num = templates.Num(on);
-                if (!template_num.IsValid() ||
-                    !Match(templates, overload, matcher_index, earliest_eval_stage)
-                         .Num(template_num)
+            auto& template_number = data[overload->template_numbers + on];
+            auto* matcher_idx = &template_number.matcher_index;
+            if (matcher_idx->IsValid()) {
+                auto number = templates.Num(on);
+                if (!number.IsValid() ||
+                    !Match(templates, overload, nullptr, matcher_idx, earliest_eval_stage)
+                         .Num(number)
                          .IsValid()) {
                     score += kMismatchedTemplateNumberPenalty;
                 }
@@ -643,10 +634,11 @@ Impl::Candidate Impl::ScoreOverload(const TableData::OverloadInfo* overload,
     if (score == 0) {
         parameters.Reserve(num_params);
         for (size_t p = 0; p < num_params; p++) {
-            auto& parameter = overload->parameters[p];
-            auto* indices = parameter.matcher_indices;
-            auto* ty =
-                Match(templates, overload, indices, earliest_eval_stage).Type(args[p]->UnwrapRef());
+            auto& parameter = data[overload->parameters + p];
+            auto* type_indices = data[parameter.type_matcher_indices];
+            auto* number_indices = data[parameter.number_matcher_indices];
+            auto* ty = Match(templates, overload, type_indices, number_indices, earliest_eval_stage)
+                           .Type(args[p]->UnwrapRef());
             parameters.Emplace(ty, parameter.usage);
         }
     }
@@ -720,15 +712,22 @@ Impl::Candidate Impl::ResolveCandidate(Impl::Candidates&& candidates,
 }
 
 MatchState Impl::Match(TemplateState& templates,
-                       const TableData::OverloadInfo* overload,
-                       MatcherIndex const* matcher_indices,
+                       const OverloadInfo* overload,
+                       const TypeMatcherIndex* type_matcher_indices,
+                       const NumberMatcherIndex* number_matcher_indices,
                        EvaluationStage earliest_eval_stage) const {
-    return MatchState{types,    symbols,         templates,          data,
-                      overload, matcher_indices, earliest_eval_stage};
+    return MatchState{types,
+                      symbols,
+                      templates,
+                      data,
+                      overload,
+                      type_matcher_indices,
+                      number_matcher_indices,
+                      earliest_eval_stage};
 }
 
 void Impl::PrintOverload(StringStream& ss,
-                         const TableData::OverloadInfo* overload,
+                         const OverloadInfo* overload,
                          const char* intrinsic_name) const {
     TemplateState templates;
 
@@ -752,26 +751,30 @@ void Impl::PrintOverload(StringStream& ss,
     }
     if (print_template_type) {
         ss << "<";
-        ss << overload->template_types[0].name;
+        ss << data[overload->template_types].name;
         ss << ">";
     }
     ss << "(";
     for (size_t p = 0; p < overload->num_parameters; p++) {
-        auto& parameter = overload->parameters[p];
+        auto& parameter = data[overload->parameters + p];
         if (p > 0) {
             ss << ", ";
         }
         if (parameter.usage != ParameterUsage::kNone) {
             ss << ToString(parameter.usage) << ": ";
         }
-        auto* indices = parameter.matcher_indices;
-        ss << Match(templates, overload, indices, earliest_eval_stage).TypeName();
+        auto* type_indices = data[parameter.type_matcher_indices];
+        auto* number_indices = data[parameter.number_matcher_indices];
+        ss << Match(templates, overload, type_indices, number_indices, earliest_eval_stage)
+                  .TypeName();
     }
     ss << ")";
-    if (overload->return_matcher_indices) {
+    if (overload->return_type_matcher_indices.IsValid()) {
         ss << " -> ";
-        auto* indices = overload->return_matcher_indices;
-        ss << Match(templates, overload, indices, earliest_eval_stage).TypeName();
+        auto* type_indices = data[overload->return_type_matcher_indices];
+        auto* number_indices = data[overload->return_number_matcher_indices];
+        ss << Match(templates, overload, type_indices, number_indices, earliest_eval_stage)
+                  .TypeName();
     }
 
     bool first = true;
@@ -780,21 +783,24 @@ void Impl::PrintOverload(StringStream& ss,
         first = false;
     };
     for (size_t i = 0; i < overload->num_template_types; i++) {
-        auto& template_type = overload->template_types[i];
-        if (template_type.matcher_index != kNoMatcher) {
+        auto& template_type = data.template_types[(overload->template_types + i).value];
+        if (template_type.matcher_index.IsValid()) {
             separator();
             ss << template_type.name;
-            auto* index = &template_type.matcher_index;
-            ss << " is " << Match(templates, overload, index, earliest_eval_stage).TypeName();
+            auto* type_indices = &template_type.matcher_index;
+            ss << " is "
+               << Match(templates, overload, type_indices, nullptr, earliest_eval_stage).TypeName();
         }
     }
     for (size_t i = 0; i < overload->num_template_numbers; i++) {
-        auto& template_number = overload->template_numbers[i];
-        if (template_number.matcher_index != kNoMatcher) {
+        auto& template_number = data.template_numbers[(overload->template_numbers + i).value];
+        if (template_number.matcher_index.IsValid()) {
             separator();
             ss << template_number.name;
-            auto* index = &template_number.matcher_index;
-            ss << " is " << Match(templates, overload, index, earliest_eval_stage).NumName();
+            auto* number_indices = &template_number.matcher_index;
+            ss << " is "
+               << Match(templates, overload, nullptr, number_indices, earliest_eval_stage)
+                      .NumName();
         }
     }
 }

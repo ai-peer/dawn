@@ -21,28 +21,32 @@ See:
 namespace {{$.Namespace}} {
 namespace {
 
-using IntrinsicInfo = tint::core::intrinsic::TableData::IntrinsicInfo;
-using MatcherIndex = tint::core::intrinsic::TableData::MatcherIndex;
-using MatchState = tint::core::intrinsic::TableData::MatchState;
-using Number = tint::core::intrinsic::TableData::Number;
-using NumberMatcher = tint::core::intrinsic::TableData::NumberMatcher;
-using OverloadFlag = tint::core::intrinsic::TableData::OverloadFlag;
-using OverloadFlags = tint::core::intrinsic::TableData::OverloadFlags;
-using OverloadInfo = tint::core::intrinsic::TableData::OverloadInfo;
-using ParameterInfo = tint::core::intrinsic::TableData::ParameterInfo;
+using IntrinsicInfo = tint::core::intrinsic::IntrinsicInfo;
+using MatchState = tint::core::intrinsic::MatchState;
+using Number = tint::core::intrinsic::Number;
+using NumberMatcher = tint::core::intrinsic::NumberMatcher;
+using NumberMatcherIndex = tint::core::intrinsic::NumberMatcherIndex;
+using NumberMatcherIndicesIndex = tint::core::intrinsic::NumberMatcherIndicesIndex;
+using OverloadFlag = tint::core::intrinsic::OverloadFlag;
+using OverloadFlags = tint::core::intrinsic::OverloadFlags;
+using OverloadInfo = tint::core::intrinsic::OverloadInfo;
+using ParameterIndex = tint::core::intrinsic::ParameterIndex;
+using ParameterInfo = tint::core::intrinsic::ParameterInfo;
 using StringStream = tint::StringStream;
-using TemplateNumberInfo = tint::core::intrinsic::TableData::TemplateNumberInfo;
-using TemplateTypeInfo = tint::core::intrinsic::TableData::TemplateTypeInfo;
+using TemplateNumberIndex = tint::core::intrinsic::TemplateNumberIndex;
+using TemplateNumberInfo = tint::core::intrinsic::TemplateNumberInfo;
+using TemplateTypeIndex = tint::core::intrinsic::TemplateTypeIndex;
+using TemplateTypeInfo = tint::core::intrinsic::TemplateTypeInfo;
 using Type = tint::type::Type;
-using TypeMatcher = tint::core::intrinsic::TableData::TypeMatcher;
+using TypeMatcher = tint::core::intrinsic::TypeMatcher;
+using TypeMatcherIndex = tint::core::intrinsic::TypeMatcherIndex;
+using TypeMatcherIndicesIndex = tint::core::intrinsic::TypeMatcherIndicesIndex;
 
 template<size_t N>
-using TemplateNumberMatcher = tint::core::intrinsic::TableData::TemplateNumberMatcher<N>;
+using TemplateNumberMatcher = tint::core::intrinsic::TemplateNumberMatcher<N>;
 
 template<size_t N>
-using TemplateTypeMatcher = tint::core::intrinsic::TableData::TemplateTypeMatcher<N>;
-
-static constexpr auto kNoMatcher = tint::core::intrinsic::TableData::kNoMatcher;
+using TemplateTypeMatcher = tint::core::intrinsic::TemplateTypeMatcher<N>;
 
 // clang-format off
 
@@ -61,17 +65,23 @@ static constexpr auto kNoMatcher = tint::core::intrinsic::TableData::kNoMatcher;
 {{- with $I.Table -}}
 {{- template "Matchers" $I }}
 
-constexpr MatcherIndex kMatcherIndices[] = {
-{{- range $i, $idx := .MatcherIndices }}
+constexpr TypeMatcherIndex kTypeMatcherIndices[] = {
+{{- range $i, $idx := .TypeMatcherIndices }}
   /* [{{$i}}] */ {{$idx}},
 {{- end }}
 };
 
-// Assert that the MatcherIndex is big enough to index all the matchers, plus
-// kNoMatcher.
-static_assert(static_cast<int>(sizeof(kMatcherIndices) / sizeof(kMatcherIndices[0])) <
-              static_cast<int>(std::numeric_limits<MatcherIndex>::max() - 1),
-              "MatcherIndex is not large enough to index kMatcherIndices");
+static_assert(TypeMatcherIndex::CanIndex(kTypeMatcherIndices),
+              "TypeMatcherIndex is not large enough to index kTypeMatcherIndices");
+
+constexpr NumberMatcherIndex kNumberMatcherIndices[] = {
+{{- range $i, $idx := .NumberMatcherIndices }}
+  /* [{{$i}}] */ {{$idx}},
+{{- end }}
+};
+
+static_assert(NumberMatcherIndex::CanIndex(kNumberMatcherIndices),
+              "NumberMatcherIndex is not large enough to index kNumberMatcherIndices");
 
 constexpr ParameterInfo kParameters[] = {
 {{- range $i, $p := .Parameters }}
@@ -81,56 +91,70 @@ constexpr ParameterInfo kParameters[] = {
 {{-   if $p.Usage }}k{{PascalCase $p.Usage}}
 {{-   else        }}kNone
 {{-   end         }},
-    /* matcher indices */ &kMatcherIndices[{{$p.MatcherIndicesOffset}}],
+    /* type_matcher_indices */ {{$p.TypeMatcherIndicesOffset}},
+    /* number_matcher_indices */ {{$p.NumberMatcherIndicesOffset}},
   },
 {{- end }}
 };
+
+static_assert(ParameterIndex::CanIndex(kParameters),
+              "ParameterIndex is not large enough to index kParameters");
 
 constexpr TemplateTypeInfo kTemplateTypes[] = {
 {{- range $i, $o := .TemplateTypes }}
   {
     /* [{{$i}}] */
     /* name */ "{{$o.Name}}",
-    /* matcher index */
+    /* matcher_index */
 {{-   if ge $o.MatcherIndex 0 }} {{$o.MatcherIndex}}
-{{-   else                    }} kNoMatcher
+{{-   else                    }} TypeMatcherIndex::kInvalid
 {{-   end                     }},
   },
 {{- end }}
 };
+
+static_assert(TemplateTypeIndex::CanIndex(kTemplateTypes),
+              "TemplateTypeIndex is not large enough to index kTemplateTypes");
 
 constexpr TemplateNumberInfo kTemplateNumbers[] = {
 {{- range $i, $o := .TemplateNumbers }}
   {
     /* [{{$i}}] */
     /* name */ "{{$o.Name}}",
-    /* matcher index */
+    /* matcher_index */
 {{-   if ge $o.MatcherIndex 0 }} {{$o.MatcherIndex}}
-{{-   else                    }} kNoMatcher
+{{-   else                    }} NumberMatcherIndex::kInvalid
 {{-   end                     }},
   },
 {{- end }}
 };
 
+static_assert(TemplateNumberIndex::CanIndex(kTemplateNumbers),
+              "TemplateNumberIndex is not large enough to index kTemplateNumbers");
+
 constexpr OverloadInfo kOverloads[] = {
 {{- range $i, $o := .Overloads }}
   {
     /* [{{$i}}] */
-    /* num parameters */ {{$o.NumParameters}},
-    /* num template types */ {{$o.NumTemplateTypes}},
-    /* num template numbers */ {{$o.NumTemplateNumbers}},
-    /* template types */
-{{-   if $o.TemplateTypesOffset }} &kTemplateTypes[{{$o.TemplateTypesOffset}}],
-{{-   else                      }} nullptr,
+    /* num_parameters */ {{$o.NumParameters}},
+    /* num_template_types */ {{$o.NumTemplateTypes}},
+    /* num_template_numbers */ {{$o.NumTemplateNumbers}},
+    /* template_types */
+{{-   if $o.TemplateTypesOffset }} {{$o.TemplateTypesOffset}},
+{{-   else                      }} TemplateTypeIndex::kInvalid
 {{-   end }}
-    /* template numbers */
-{{-   if $o.TemplateNumbersOffset }} &kTemplateNumbers[{{$o.TemplateNumbersOffset}}]
-{{-   else                        }} nullptr
+    /* template_numbers */
+{{-   if $o.TemplateNumbersOffset }} {{$o.TemplateNumbersOffset}}
+{{-   else                        }} TemplateNumberIndex::kInvalid
 {{-   end }},
-    /* parameters */ &kParameters[{{$o.ParametersOffset}}],
-    /* return matcher indices */
-{{-   if $o.ReturnMatcherIndicesOffset }} &kMatcherIndices[{{$o.ReturnMatcherIndicesOffset}}]
-{{-   else                             }} nullptr
+    /* parameters */ {{$o.ParametersOffset}},
+    /* return_type_matcher_indices */
+{{-   if $o.ReturnTypeMatcherIndicesOffset }} {{$o.ReturnTypeMatcherIndicesOffset}}
+{{-   else                             }} TypeMatcherIndicesIndex::kInvalid
+{{-   end }},
+    /* return_number_matcher_indices */
+{{-   if $o.ReturnNumberMatcherIndicesOffset }} {{$o.ReturnNumberMatcherIndicesOffset}}
+{{-   else                             }} NumberMatcherIndicesIndex::kInvalid
 {{-   end }},
     /* flags */ OverloadFlags(OverloadFlag::kIs{{Title $o.Kind}}
 {{-   range $i, $u := $o.CanBeUsedInStage.List -}}
@@ -212,8 +236,13 @@ constexpr IntrinsicInfo kConstructorsAndConverters[] = {
 }  // anonymous namespace
 
 const core::intrinsic::TableData {{$.Name}}{
+  /* template_types */ kTemplateTypes,
+  /* template_numbers */ kTemplateNumbers,
+  /* type_matcher_indices */ kTypeMatcherIndices,
+  /* number_matcher_indices */ kNumberMatcherIndices,
   /* type_matchers */ kTypeMatchers,
   /* number_matchers */ kNumberMatchers,
+  /* parameters */ kParameters,
   /* ctor_conv */ kConstructorsAndConverters,
   /* builtins */ kBuiltins,
   /* binary_plus */ kBinaryOperators[kBinaryOperatorPlus],
