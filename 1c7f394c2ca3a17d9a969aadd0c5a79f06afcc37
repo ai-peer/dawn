@@ -46,6 +46,30 @@
       },
       "revId": "1c7f394c2ca3a17d9a969aadd0c5a79f06afcc37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c42be7ba_2e856d8e",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-08T18:58:23Z",
+      "side": 1,
+      "message": "ah ok - fair enough. similar to other implicit constructors that we allow. like Ref\u003cT\u003e from T*",
+      "parentUuid": "9233adf7_322616a8",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 67
+      },
+      "revId": "1c7f394c2ca3a17d9a969aadd0c5a79f06afcc37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
