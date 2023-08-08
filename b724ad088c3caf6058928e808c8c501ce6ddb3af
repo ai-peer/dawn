@@ -70,6 +70,30 @@
       },
       "revId": "b724ad088c3caf6058928e808c8c501ce6ddb3af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84b786f_851fb012",
+        "filename": "src/tint/lang/msl/writer/printer/constant_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-08T21:00:03Z",
+      "side": 1,
+      "message": "Maybe consider adding an `EXPECT_SUBSTR()` helper that checks for a substring in the output rather than comparing the whole shader? Similar to the `EXPECT_INST()` that I\u0027m using in the SPIR-V tests. That way you reduce the noise without needing to add in the boilerplate stuff, and `fix-tests` still works (kinda).",
+      "parentUuid": "ea133f30_09aba8b6",
+      "range": {
+        "startLine": 321,
+        "startChar": 23,
+        "endLine": 321,
+        "endChar": 42
+      },
+      "revId": "b724ad088c3caf6058928e808c8c501ce6ddb3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
