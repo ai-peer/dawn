@@ -2099,6 +2099,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
         return false;
     }
 
+    auto has_index = false;
     Hashset<std::pair<uint32_t, uint32_t>, 8> locationsAndIndexes;
     for (auto* member : str->Members()) {
         if (auto* r = member->Type()->As<type::Array>()) {
@@ -2144,6 +2145,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                 },
                 [&](const ast::IndexAttribute* index) {
                     index_attribute = index;
+                    has_index = true;
                     return IndexAttribute(index, stage);
                 },
                 [&](const ast::BuiltinAttribute* builtin_attr) {
@@ -2216,6 +2218,13 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                 index = member->Attributes().index.value();
             }
             uint32_t location = member->Attributes().location.value();
+            if (has_index && location == 1) {
+                AddError(
+                    "Use of @location(1) as an output is not allowed when using dual source "
+                    "blending.",
+                    location_attribute->source);
+                return false;
+            }
             std::pair<uint32_t, uint32_t> locationAndIndex(location, index);
             if (!locationsAndIndexes.Add(locationAndIndex)) {
                 StringStream err;
