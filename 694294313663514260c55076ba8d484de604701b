@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23824552_b830de81",
+        "filename": "src/dawn/native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-08T22:27:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8fb10df_69990956",
+      "range": {
+        "startLine": 94,
+        "startChar": 3,
+        "endLine": 94,
+        "endChar": 47
+      },
+      "revId": "694294313663514260c55076ba8d484de604701b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1579d98c_faef2c85",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-08T18:32:09Z",
       "side": 1,
       "message": "could this be changed to pass a reference?",
+      "range": {
+        "startLine": 140,
+        "startChar": 14,
+        "endLine": 140,
+        "endChar": 30
+      },
+      "revId": "694294313663514260c55076ba8d484de604701b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f4323a2_ff3df290",
+        "filename": "src/dawn/native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-08T22:27:40Z",
+      "side": 1,
+      "message": "Done but requires some minor changes to the other ctor to take the reference also.",
+      "parentUuid": "1579d98c_faef2c85",
       "range": {
         "startLine": 140,
         "startChar": 14,
