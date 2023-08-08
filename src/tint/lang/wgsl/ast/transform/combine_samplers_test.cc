@@ -35,6 +35,28 @@ TEST_F(CombineSamplersTest, EmptyModule) {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(CombineSamplersTest, Test) {
+    auto* src = R"(
+@group(0) @binding(0) var t : texture_2d<f32>;
+
+fn f(tex: texture_2d<f32>) -> u32 {
+  return 1u;
+}
+
+fn main() {
+  _ = f(t);
+}
+)";
+    auto* expect = R"(
+)";
+
+    DataMap data;
+    data.Add<CombineSamplers::BindingInfo>(CombineSamplers::BindingMap(), BindingPoint());
+    auto got = Run<CombineSamplers>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 TEST_F(CombineSamplersTest, SimplePair) {
     auto* src = R"(
 @group(0) @binding(0) var t : texture_2d<f32>;
