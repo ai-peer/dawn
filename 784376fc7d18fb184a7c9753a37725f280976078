@@ -16,6 +16,23 @@
       "message": "Thanks for your review, Loko!",
       "revId": "784376fc7d18fb184a7c9753a37725f280976078",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb76e69b_7dabedae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-08T15:35:48Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "784376fc7d18fb184a7c9753a37725f280976078",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
