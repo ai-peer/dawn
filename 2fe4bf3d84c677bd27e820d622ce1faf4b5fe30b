@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0669945c_23268cb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-09T17:31:29Z",
+      "side": 1,
+      "message": "Thanks for the thorough review. I have posted some questions.",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c37829c1_408acbc9",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-08-09T11:23:31Z",
       "side": 1,
       "message": "nit: I don\u0027t think this belongs here - it doesn\u0027t add anything to this class. Suggest removing, and creating a TODO issue.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 60
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e6d8a8_aba997bd",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-09T17:31:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c37829c1_408acbc9",
       "range": {
         "startLine": 27,
         "startChar": 0,
@@ -100,6 +141,30 @@
       "writtenOn": "2023-08-09T11:23:31Z",
       "side": 1,
       "message": "This is a Dawn-specific detail. It\u0027s not something that makes sense for other clients, and if Dawn used the default, then it\u0027s likely to eventually go out of sync.\n\nSuggest using `{}` for the initializer, and let Dawn provide the value.",
+      "range": {
+        "startLine": 39,
+        "startChar": 22,
+        "endLine": 39,
+        "endChar": 68
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7ab975_d445b8ed",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-09T17:31:29Z",
+      "side": 1,
+      "message": "I added a default value here because if it defaults to {0, 0} when not specified it failed the GlslGeneratorBuiltinTextureTest because {0, 0} colliding with some texture binding and it emitted glsl corresponding builtin function (existing only 4**+)\n\nSo looks like when dawn is not the client, tint will need to be able to choose whether to use this option (replace with uniform value), or not (replace with glsl builtin function)\n\nI\u0027m thinking about using a `std::optional\u003cTextureBuiltinsFromUniformOptions\u003e` in `tint::glsl::writer::Options`. If the field is empty, then tint still emits glsl builtin function.\n\nWhat do you think is the best way to change this?",
+      "parentUuid": "02a9e3fb_a959355e",
       "range": {
         "startLine": 39,
         "startChar": 22,
@@ -213,6 +278,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "397e65ea_cfe50f9d",
+        "filename": "src/tint/lang/wgsl/ast/transform/manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-09T17:31:29Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/143220",
+      "parentUuid": "8154310b_f2beb7b7",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9772f41c_8d73f68c",
@@ -266,6 +349,30 @@
       "writtenOn": "2023-08-09T11:23:31Z",
       "side": 1,
       "message": "How does this handle functions that use `textureNumLevels` and `textureNumSamples` with the same texture?",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 22
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d90e7d7e_445c755d",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-09T17:31:29Z",
+      "side": 1,
+      "message": "I find in wgsl spec that `textureNumLevels(t:T)` takes texture type:\n\nT is texture_1d\u003cST\u003e, texture_2d\u003cST\u003e, texture_2d_array\u003cST\u003e, texture_3d\u003cST\u003e, texture_cube\u003cST\u003e, texture_cube_array\u003cST\u003e, texture_depth_2d, texture_depth_2d_array, texture_depth_cube, or texture_depth_cube_array\n\nwhile `textureNumSamples(t:T)` takes texture type:\n\nT is texture_multisampled_2d\u003cST\u003e or texture_depth_multisampled_2d\n\nCan they still share a same texture variable?\n\nIf that\u0027s true, I put a comment later to describe this. Maybe I should move it here.",
+      "parentUuid": "d657e306_ee24514b",
       "range": {
         "startLine": 113,
         "startChar": 12,
@@ -375,6 +482,30 @@
       "writtenOn": "2023-08-09T11:23:31Z",
       "side": 1,
       "message": "Why use an array? You can create scalar fields that aren\u0027t 16 byte aligned, and name them with `b.Symbols().New()` so that the output is more readable.",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 27
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b17f70b_40fa101e",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-09T17:31:29Z",
+      "side": 1,
+      "message": "I follow these steps from arrayLengthFromUniform. Looks like the CL is: https://dawn-review.googlesource.com/c/tint/+/57921\n\nDoes this restriction still apply anymore now?",
+      "parentUuid": "1d9687e0_404401b4",
       "range": {
         "startLine": 269,
         "startChar": 0,
