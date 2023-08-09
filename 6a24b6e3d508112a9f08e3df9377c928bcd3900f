@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ff78d42_a3ec5725",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T17:38:41Z",
+      "side": 1,
+      "message": "just updated ACLs for chrome-release-branchers@google.com\n\nplease try again",
+      "revId": "6a24b6e3d508112a9f08e3df9377c928bcd3900f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
