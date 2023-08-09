@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cee7c2a1_aaf65497",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-09T14:43:10Z",
+      "side": 1,
+      "message": "dawn:1952",
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a09a040_0acdd2fd",
         "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
         "patchSetId": 2
