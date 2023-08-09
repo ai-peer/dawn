@@ -335,6 +335,11 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                             }
                         }
                     }
+
+                    // Some texture builtin function data needs emulation to update into the
+                    // internal uniform buffer.
+                    mPipeline->UpdateTextureBuiltinsUniformData(gl, view, groupIndex, bindingIndex);
+
                     break;
                 }
 

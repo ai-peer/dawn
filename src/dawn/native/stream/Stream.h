@@ -302,6 +302,22 @@ class Stream<std::unordered_map<K, V>> {
             [](const std::pair<K, V>& a, const std::pair<K, V>& b) { return a.first < b.first; });
         StreamIn(sink, ordered);
     }
+    static MaybeError Read(Source* s, std::unordered_map<K, V>* m) {
+        using SizeT = decltype(std::declval<std::vector<std::pair<K, V>>>().size());
+        SizeT size;
+        DAWN_TRY(StreamOut(s, &size));
+        *m = {};
+        m->reserve(size);
+        for (SizeT i = 0; i < size; ++i) {
+            K k;
+            DAWN_TRY(StreamOut(s, &k));
+            V v;
+            DAWN_TRY(StreamOut(s, &v));
+
+            m->emplace(std::move(k), std::move(v));
+        }
+        return {};
+    }
 };
 
 // Helper class to contain the begin/end iterators of an iterable.
