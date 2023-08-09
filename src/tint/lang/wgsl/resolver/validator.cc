@@ -308,6 +308,16 @@ bool Validator::Pointer(const ast::TemplatedIdentifier* a, const type::Pointer* 
 
 bool Validator::StorageTexture(const type::StorageTexture* t, const Source& source) const {
     switch (t->access()) {
+        case core::Access::kReadWrite:
+            if (!enabled_extensions_.Contains(
+                    core::Extension::kChromiumExperimentalReadWriteStorageTexture)) {
+                AddError(
+                    "read-write storage textures require the "
+                    "chromium_experimental_read_write_storage_texture extension to be enabled",
+                    source);
+                return false;
+            }
+            break;
         case core::Access::kWrite:
             break;
         case core::Access::kUndefined:
