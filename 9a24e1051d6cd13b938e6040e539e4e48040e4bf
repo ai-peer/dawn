@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee48739d_af7aeaf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-09T14:37:17Z",
+      "side": 1,
+      "message": "Look good, but also maybe it\u0027s not necessary?",
+      "revId": "9a24e1051d6cd13b938e6040e539e4e48040e4bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd29ee3c_bffee139",
+        "filename": "src/dawn/native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-09T14:37:17Z",
+      "side": 1,
+      "message": "When would these be used on more than one thread at a time? They are only used on submit so shouldn\u0027t need any additional synchronization.",
+      "revId": "9a24e1051d6cd13b938e6040e539e4e48040e4bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
