@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d909b8c_5da0c7d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:55:46Z",
+      "side": 1,
+      "message": "a bunch of suites only run on CI (and CTS rolls too)\n\nAdd Include-Ci-Only-Tests: true to make them run here as well",
+      "revId": "606841e0d29964808ce7104a8de601d82c09ae7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "30a83f9a_301d6c2d",
@@ -14,6 +31,23 @@
       "writtenOn": "2023-08-09T21:38:21Z",
       "side": 1,
       "message": "PTAL! Shouldn\u0027t change the expectations too drastically. Just better organizing them, consolidating multiple entries where it makes sense, giving them issue numbers, and removing one set that I found that didn\u0027t appear to actually be failing anywhere.",
+      "revId": "606841e0d29964808ce7104a8de601d82c09ae7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66fb7602_d02f394b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:55:46Z",
+      "side": 1,
+      "message": "LGTM assuming the CI only test suites are happy",
       "revId": "606841e0d29964808ce7104a8de601d82c09ae7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
