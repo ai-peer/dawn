@@ -16,6 +16,24 @@
       "message": "Aren\u0027t these from X11.so? I think we should also dynamically open that lib, and maybe have a different object so that loading X11 still works if xlib-xcb isn\u0027t present. I know this is a lot more work though :/ One of use could take it over if needed.",
       "revId": "2235dc0dc76e882dc33c6ebdd6fe0daf80f91d21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a613a22_a4af44a0",
+        "filename": "src/dawn/native/XlibXcbFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003176
+      },
+      "writtenOn": "2023-08-09T02:49:26Z",
+      "side": 1,
+      "message": "Ah! Understood, that makes sense - if someone on your side is able/willing to implement that, I\u0027d certainly be happy with that - but otherwise I will plan on updating this CL to use that approach in the coming weeks if you don\u0027t mind it staying open for a bit (or I can send a new one later)",
+      "parentUuid": "6bc9da3e_737bc422",
+      "revId": "2235dc0dc76e882dc33c6ebdd6fe0daf80f91d21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
