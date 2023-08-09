@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcd061cc_521cfd3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T18:13:17Z",
+      "side": 1,
+      "message": "Feedback addressed. Was getting an unusual kokoro error on the first patch. Will address once the run for the current patch has finished.",
+      "revId": "9b3e8508b48478cf74ae87fe1a40f340fe76d37e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

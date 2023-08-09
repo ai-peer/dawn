@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a9b94f_06daea94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T18:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cee7c2a1_aaf65497",
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a09a040_0acdd2fd",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-08-09T14:15:26Z",
       "side": 1,
       "message": "```suggestion\n                // color \u003d vec4\u003cf32\u003e(gammaConversion(color.rgb, gammaDecodeParams), 1);\n```",
+      "range": {
+        "startLine": 384,
+        "startChar": 82,
+        "endLine": 384,
+        "endChar": 84
+      },
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da7bad2c_4806fed1",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T18:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a09a040_0acdd2fd",
       "range": {
         "startLine": 384,
         "startChar": 82,
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ac09cd_1651d273",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T18:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f506fe4_285efb3c",
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3bbbe26_1424bb49",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-08-09T14:15:26Z",
       "side": 1,
       "message": "```suggestion\n                // color \u003d vec4\u003cf32\u003e(gammaConversion(color.rgb, gammaEncodeParams), 1);\n```",
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "962d3f5a_6c37bce0",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T18:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3bbbe26_1424bb49",
       "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
