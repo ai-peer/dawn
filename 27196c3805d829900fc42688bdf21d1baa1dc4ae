@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0725eaf_d50d6da7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T23:22:20Z",
+      "side": 1,
+      "message": "I\u0027ve been informed of more restrictions here. D3D disables all other render target slots when dual source blending is being used, so we\u0027ll be disabling all slots - not just location 1. I\u0027m going to abandon this CL and upload a new one.",
+      "revId": "27196c3805d829900fc42688bdf21d1baa1dc4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
