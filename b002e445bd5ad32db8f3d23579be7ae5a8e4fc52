@@ -16,6 +16,29 @@
       "message": "PTAL, thanks!",
       "revId": "b002e445bd5ad32db8f3d23579be7ae5a8e4fc52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b0a1af7_4ca4844a",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T16:10:08Z",
+      "side": 1,
+      "message": "why do we do this on first use?\n\nI expected that if D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS is set, then all usages, except DEPTH_* are implicitly promotable ([doc](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#common-state-promotion))\n\nI think we should still set state-\u003eisValidToDecay for all simultaneous access resources?\nThis [section](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#state-decay-to-common) says \"Texture resources on any queue type that have the D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS flag set\" decay back to common",
+      "range": {
+        "startLine": 537,
+        "startChar": 23,
+        "endLine": 537,
+        "endChar": 33
+      },
+      "revId": "b002e445bd5ad32db8f3d23579be7ae5a8e4fc52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
