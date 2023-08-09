@@ -228,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06f52032_48aa3823",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-09T14:23:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8552c0b2_b9fd5afb",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f95e7f6_3fe4b8e2",
@@ -259,6 +277,24 @@
       "side": 1,
       "message": "Enumerating the features on the adapter (`Adapter::GetSupportedFeatures()`) can only get a vector of `char*` for the name string of each adapter supported feature, while device descriptor expect `wgpu::FeatureName` enum. If I get it right, we have to use `dawn::native::FeaturesInfo` class to convert the feature name string to enum.\n\nAnd we need to filter out the experimental features when requiring a device with AllowUnsafeAPIs toggle disabled, which also need to query the `dawn::native::FeaturesInfo` to find if a feature is experimental.",
       "parentUuid": "5f95e7f6_3fe4b8e2",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c3e82f_c7892137",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-09T14:23:43Z",
+      "side": 1,
+      "message": "From a wgpu::Adapter you can call EnumerateFeatures: https://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/include/dawn/webgpu_cpp.h;drc\u003d36aded67edbf6d7ade45a9f3bdeb8e29cf303828;l\u003d889\n\nYou can get a wgpu::Adapter with .Get() it\u0027s a bit wonky but should work and is better than looking in dawn::native https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/include/dawn/native/DawnNative.h;drc\u003dcc06e477bc011fd8a770d2250ec74f380da8e77a;l\u003d118\n\nThe EnumerateFeatures call will not list the experimental features if allowUnsafeAPIs is not set so I think this should solve both issues.",
+      "parentUuid": "38615c59_e963534f",
       "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
