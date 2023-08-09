@@ -57,7 +57,6 @@ static constexpr wgpu::TextureUsage kResolveTextureLoadAndStoreUsages =
 
 class TextureBase : public ApiObjectBase {
   public:
-    enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
     enum class ClearValue { Zero, NonZero };
 
     static TextureBase* MakeError(DeviceBase* device, const TextureDescriptor* descriptor);
@@ -83,7 +82,8 @@ class TextureBase : public ApiObjectBase {
     wgpu::TextureUsage GetUsage() const;
     wgpu::TextureUsage GetInternalUsage() const;
 
-    TextureState GetTextureState() const;
+    bool IsDestroyed() const;
+    void SetAccessState(bool hasAccess);
     uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice, Aspect aspect) const;
     bool IsSubresourceContentInitialized(const SubresourceRange& range) const;
     void SetIsSubresourceContentInitialized(bool isInitialized, const SubresourceRange& range);
@@ -128,13 +128,18 @@ class TextureBase : public ApiObjectBase {
     wgpu::TextureUsage APIGetUsage() const;
 
   protected:
-    TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state);
+    TextureBase(DeviceBase* device, const TextureDescriptor* descriptor);
     ~TextureBase() override;
 
     void DestroyImpl() override;
     void AddInternalUsage(wgpu::TextureUsage usage);
 
   private:
+    struct TextureState {
+        bool hasAccess : 1 = true;
+        bool destroyed : 1 = false;
+    };
+
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, ObjectBase::ErrorTag tag);
 
     wgpu::TextureDimension mDimension;
