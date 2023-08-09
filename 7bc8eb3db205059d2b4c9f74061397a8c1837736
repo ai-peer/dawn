@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cecef5d0_e6b3d50f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T05:45:37Z",
+      "side": 1,
+      "message": "giant CL! :o",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c48719_6cb9c6fc",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T05:45:37Z",
+      "side": 1,
+      "message": "arc2 was already removed. don\u0027t need both now",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 629,
+        "endChar": 0
+      },
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b45e952_39c6a0ee",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T05:45:37Z",
+      "side": 1,
+      "message": "I\u0027m just leaking this global, because it\u0027s a lot simpler to write. Do we think this is OK?\n\nalthough; I can probably have it be:\n\n```\nstatic Backend b;\nreturn \u0026b;\n```",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 5
+      },
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
