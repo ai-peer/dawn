@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65db829_19480950",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T22:02:48Z",
+      "side": 1,
+      "message": "Kokoro keeps giving me an error related to a file I\u0027m not changing. Is this maybe related to the file reorganization project? I also see that James is moving the multiplanar transform right now - I think this CL should be ready to merge, but I also don\u0027t mind rebasing later if this is holding anything up.",
+      "revId": "05c595a88c0476dfa4dd569885895d9e6023d601",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
