@@ -16,6 +16,23 @@
       "message": "Feedback addressed. Was getting an unusual kokoro error on the first patch. Will address once the run for the current patch has finished.",
       "revId": "9b3e8508b48478cf74ae87fe1a40f340fe76d37e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d6663a_84708542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-09T18:14:29Z",
+      "side": 1,
+      "message": "Also Corentin requested a dawn e2e test to cover this issue. Will be adding that.",
+      "revId": "9b3e8508b48478cf74ae87fe1a40f340fe76d37e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
