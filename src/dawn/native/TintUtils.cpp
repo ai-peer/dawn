@@ -145,7 +145,7 @@ tint::ExternalTextureOptions BuildExternalTextureTransformBindings(
     const PipelineLayoutBase* layout) {
     tint::ExternalTextureOptions options;
     for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-        const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+        const BindGroupLayoutInternalBase* bgl = layout->GetBindGroupLayout(i);
         for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
             options.bindings_map[{static_cast<uint32_t>(i),
                                   static_cast<uint32_t>(expansion.plane0)}] = {
