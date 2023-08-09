@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d15d835_a4188a16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003841
+      },
+      "writtenOn": "2023-08-09T05:51:46Z",
+      "side": 1,
+      "message": "Rolling 4 dependencies so that `README.chromium` files in the deps also have the `Shipped` field.",
+      "revId": "bdc663c7f0996657f5d8e0665d6c0b29b4545b2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
