@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1396524_e99814ac",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "15dd481925181914229c3e4aa071c94a8399263e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

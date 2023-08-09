@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81147b49_04d99d63",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "I add some comments for this.",
+      "parentUuid": "06e7513b_be12cc81",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f3cd521_1d1a199b",
         "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
         "patchSetId": 9
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-08T17:51:47Z",
       "side": 1,
       "message": "Let\u0027s try to avoid using dawn::native directly if we can avoid it.",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b519c903_83a56add",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "Changed to \"dawn/native/Features.h\".",
+      "parentUuid": "1f3cd521_1d1a199b",
       "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be964dcd_caa4a16a",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7652aef2_d1bd44e0",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "235bf81f_4a3165bf",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf12b21_c72687ae",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "235bf81f_4a3165bf",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2020890b_0937390a",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-08-08T17:51:47Z",
       "side": 1,
       "message": "[1]",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6a3d17_c22a4ec6",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2020890b_0937390a",
       "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8552c0b2_b9fd5afb",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "In ValidationTest, the `AllowUnsafeAPIs` toggle is by default enabled when creating instance in SetUp [2].",
+      "parentUuid": "1220bd3d_0fa16f47",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f95e7f6_3fe4b8e2",
         "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
         "patchSetId": 9
@@ -133,6 +241,24 @@
       "writtenOn": "2023-08-08T17:51:47Z",
       "side": 1,
       "message": "This should be possible to do by Enumerating the features on the adapter. Why did you have to do it by reaching into dawn::native?",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38615c59_e963534f",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-09T08:53:32Z",
+      "side": 1,
+      "message": "Enumerating the features on the adapter (`Adapter::GetSupportedFeatures()`) can only get a vector of `char*` for the name string of each adapter supported feature, while device descriptor expect `wgpu::FeatureName` enum. If I get it right, we have to use `dawn::native::FeaturesInfo` class to convert the feature name string to enum.\n\nAnd we need to filter out the experimental features when requiring a device with AllowUnsafeAPIs toggle disabled, which also need to query the `dawn::native::FeaturesInfo` to find if a feature is experimental.",
+      "parentUuid": "5f95e7f6_3fe4b8e2",
       "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
