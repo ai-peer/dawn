@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d19cb65_b0da2d38",
+        "filename": "src/tint/lang/spirv/reader/ast_parser/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-09T21:11:09Z",
+      "side": 1,
+      "message": "s/Readr/Read/",
+      "revId": "9e84ee218fcca2f6b356f855d8a7266a2f01a941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
