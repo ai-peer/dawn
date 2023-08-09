@@ -122,6 +122,7 @@ class Texture final : public d3d::Texture {
         D3D12_RESOURCE_STATES lastState;
         ExecutionSerial lastDecaySerial;
         bool isValidToDecay;
+        bool isFirstUse;
 
         bool operator==(const StateAndDecay& other) const;
     };
