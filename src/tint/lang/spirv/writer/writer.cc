@@ -57,7 +57,7 @@ Result<Output, std::string> Generate(const Program* program, const Options& opti
         }
 
         // Raise the IR to the SPIR-V dialect.
-        auto raised = raise::Raise(&ir, options.external_texture_options);
+        auto raised = raise::Raise(&ir, options.external_texture_options, options.clamp_frag_depth);
         if (!raised) {
             return std::move(raised.Failure());
         }

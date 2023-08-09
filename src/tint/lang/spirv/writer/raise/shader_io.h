@@ -29,8 +29,9 @@ namespace tint::spirv::writer::raise {
 /// ShaderIO is a transform that modifies each entry point function's parameters and return
 /// value to prepare them for SPIR-V codegen.
 /// @param module the module to transform
+/// @param clamp_frag_depth true if frag_depth builtin outputs shouldn be clamped
 /// @returns an error string on failure
-Result<SuccessType, std::string> ShaderIO(ir::Module* module);
+Result<SuccessType, std::string> ShaderIO(ir::Module* module, bool clamp_frag_depth);
 
 }  // namespace tint::spirv::writer::raise
 

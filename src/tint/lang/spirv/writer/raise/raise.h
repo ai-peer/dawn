@@ -30,9 +30,11 @@ namespace tint::spirv::writer::raise {
 /// Raise a core IR module to the SPIR-V dialect of the IR.
 /// @param module the core IR module to raise to SPIR-V dialect
 /// @param external_texture_options the external texture options
+/// @param clamp_frag_depth true if frag_depth builtin outputs should be clamped
 /// @returns success or an error string
 Result<SuccessType, std::string> Raise(ir::Module* module,
-                                       const ExternalTextureOptions& external_texture_options);
+                                       const ExternalTextureOptions& external_texture_options,
+                                       bool clamp_frag_depth);
 
 }  // namespace tint::spirv::writer::raise
 

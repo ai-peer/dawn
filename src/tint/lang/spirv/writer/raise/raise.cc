@@ -33,7 +33,8 @@
 namespace tint::spirv::writer::raise {
 
 Result<SuccessType, std::string> Raise(ir::Module* module,
-                                       const ExternalTextureOptions& external_texture_options) {
+                                       const ExternalTextureOptions& external_texture_options,
+                                       bool clamp_frag_depth) {
 #define RUN_TRANSFORM(name, ...)         \
     do {                                 \
         auto result = name(__VA_ARGS__); \
@@ -61,7 +62,7 @@ Result<SuccessType, std::string> Raise(ir::Module* module,
     RUN_TRANSFORM(ExpandImplicitSplats, module);
     RUN_TRANSFORM(HandleMatrixArithmetic, module);
     RUN_TRANSFORM(MergeReturn, module);
-    RUN_TRANSFORM(ShaderIO, module);
+    RUN_TRANSFORM(ShaderIO, module, clamp_frag_depth);
     RUN_TRANSFORM(ir::transform::Std140, module);
     RUN_TRANSFORM(VarForDynamicIndex, module);
 
