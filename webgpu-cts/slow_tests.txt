@@ -70,10 +70,13 @@
 # END TAG HEADER
 
 ################################################################################
-# Large and slow tests on intel-gen-9 win10
+# Error scope tests are slow across multiple platforms
 ################################################################################
 crbug.com/1406064 [ intel-gen-9 win10 ] webgpu:api,validation,error_scope:current_scope:errorFilter="out-of-memory";stackDepth=100000 [ Slow ]
 crbug.com/1406064 [ intel-gen-9 win10 ] webgpu:api,validation,error_scope:current_scope:errorFilter="validation";stackDepth=100000 [ Slow ]
+crbug.com/dawn/1960 [ android ] webgpu:api,validation,error_scope:current_scope:errorFilter="out-of-memory";stackDepth=100000 [ Slow ]
+crbug.com/dawn/1960 [ android ] webgpu:api,validation,error_scope:current_scope:errorFilter="validation";stackDepth=100000 [ Slow ]
+crbug.com/dawn/1960 [ intel-0x9bc5 ubuntu ] webgpu:api,validation,error_scope:current_scope:errorFilter="out-of-memory";* [ Slow ]
 
 ################################################################################
 # These tests are slow enough that they fail often on a lot of configurations,
