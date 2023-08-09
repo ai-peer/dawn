@@ -29,7 +29,7 @@ PipelineLayout::PipelineLayout(Device* device, const PipelineLayoutDescriptor* d
     GLuint storageTextureIndex = 0;
 
     for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
-        const BindGroupLayoutBase* bgl = GetBindGroupLayout(group);
+        const BindGroupLayoutInternalBase* bgl = GetBindGroupLayout(group);
         mIndexInfo[group].resize(bgl->GetBindingCount());
 
         for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {

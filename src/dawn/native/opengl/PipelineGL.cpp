@@ -113,7 +113,7 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
 
         bool shouldUseFiltering;
         {
-            const BindGroupLayoutBase* bgl =
+            const BindGroupLayoutInternalBase* bgl =
                 layout->GetBindGroupLayout(combined.textureLocation.group);
             BindingIndex bindingIndex = bgl->GetBindingIndex(combined.textureLocation.binding);
 
@@ -127,7 +127,7 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
             if (combined.usePlaceholderSampler) {
                 mPlaceholderSamplerUnits.push_back(textureUnit);
             } else {
-                const BindGroupLayoutBase* bgl =
+                const BindGroupLayoutInternalBase* bgl =
                     layout->GetBindGroupLayout(combined.samplerLocation.group);
                 BindingIndex bindingIndex = bgl->GetBindingIndex(combined.samplerLocation.binding);
 
