@@ -67,15 +67,6 @@ MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
 
 MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
     if (IsOpen()) {
-        // Shared textures must be transitioned to common state after the last usage in order
-        // for them to be used by other APIs like D3D11. We ensure this by transitioning to the
-        // common state right before command list submission. TransitionUsageNow itself ensures
-        // no unnecessary transitions happen if the resources is already in the common state.
-        for (Texture* texture : mSharedTextures) {
-            DAWN_TRY(texture->SynchronizeImportedTextureBeforeUse());
-            texture->TrackAllUsageAndTransitionNow(this, D3D12_RESOURCE_STATE_COMMON);
-        }
-
         MaybeError error =
             CheckHRESULT(mD3d12CommandList->Close(), "D3D12 closing pending command list");
         if (error.IsError()) {
