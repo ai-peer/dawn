@@ -1,0 +1,474 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37829c1_408acbc9",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this belongs here - it doesn\u0027t add anything to this class. Suggest removing, and creating a TODO issue.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 60
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7e379a9_6a6e02c4",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "needs a comment",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0053ae0_58405848",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t strike me as a data type, but more of a field of data?\nSuggest `Field`, but there might be better names.",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31eea76f_419c241f",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "These need comments. Please describe what the `uint32_t` represents.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 77
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a9e3fb_a959355e",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "This is a Dawn-specific detail. It\u0027s not something that makes sense for other clients, and if Dawn used the default, then it\u0027s likely to eventually go out of sync.\n\nSuggest using `{}` for the initializer, and let Dawn provide the value.",
+      "range": {
+        "startLine": 39,
+        "startChar": 22,
+        "endLine": 39,
+        "endChar": 68
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e49cb5eb_e3ec9d44",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "`#include \"src/tint/utils/reflection/reflection.h\"`",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 16
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a908d1_a091744c",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "likewise. Belongs in a bug, not here.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 99
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41a92383_ef7e817a",
+        "filename": "src/tint/lang/glsl/writer/common/options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Needs a comment",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "779240bb_1658d28f",
+        "filename": "src/tint/lang/glsl/writer/output.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "both need comments",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 78
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8154310b_f2beb7b7",
+        "filename": "src/tint/lang/wgsl/ast/transform/manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Please extract to a separate change.",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9772f41c_8d73f68c",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Please zero-initialize these fields. Uninitialized variable bugs are a security issue, and the initializers are zero-cost when the structure is initialized with values.",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5bb820_7912eb1b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Use tint\u0027s `Hashmap`. It can avoid heap allocations.",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 26
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d657e306_ee24514b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "How does this handle functions that use `textureNumLevels` and `textureNumSamples` with the same texture?",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 22
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539ba20d_9f3b9612",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "If these are mutually exclusive then I\u0027d recommend `std::variant\u003cBindingPoint, const ast::Parameter*\u003e`",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 28
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a951c7bf_f1628047",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "I feel this algorithm is more complex than it needs to be.\n\nFor bubbling up the parameters, I think you only need:\n\n```\n// Describes a new parameter added to a function.\nstruct NewParameter {\n  // The texture parameter index that this new parameter relates to.\n  uint32_t texture_param_idx \u003d 0;\n  // The kind of texture information this parameter holds.\n  TextureBuiltinsFromUniformOptions::DataType field \u003d something;\n  // You could also store a Symbol here to record the name of the new parameter.\n  // This could be used to reuse a new parameter if a texture parameter is used\n  // more than once, instead of creating yet more parameters.\n};\n\n// A list of NewParameter\nusing NewParameters \u003d tint::Vector\u003cNewParameter, 4\u003e;\n\n// A map of function to new parameters added by the transform\nHashmap\u003cconst sem::Function*, NewParameters, 8\u003e new_params;\n```\n\nThen:\n\n* Walk the global declarations in dependency order using `tint::sem::Module::DependencyOrderedDeclarations()`. For each function, examine each of the calls made by walking `sem::Function::DirectCalls()`:\n * If the call is to a texture builtin of interest, and the texture is a module-scope var, then immediately apply the transformation to the call expression using `ctx.Replace()`. Done.\n * If the call is to a texture builtin of interest, and the texture is a parameter, append the new parameter to the function with `ctx.InsertBack()`, record the new parameter in `new_params` and replace the expression with this parameter\u0027s identifier.\n * If the call is to a user function, then check `new_params` to see if new parameters need to handled. Use the `texture_param_idx` to lookup the texture argument, and then either add new parameters to this function, or fetch from the UBO.",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff3b0b18_fb65ec8b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Use tint\u0027s `Vector`",
+      "range": {
+        "startLine": 141,
+        "startChar": 12,
+        "endLine": 141,
+        "endChar": 23
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51d8a257_055c51e8",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "I think this can be moved to a member function",
+      "range": {
+        "startLine": 267,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 32
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d9687e0_404401b4",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Why use an array? You can create scalar fields that aren\u0027t 16 byte aligned, and name them with `b.Symbols().New()` so that the output is more readable.",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 27
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0210c4_be6b7134",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Why not `ctx.InsertAfter()` or `ctx.InsertBack()` on the member vector?",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 96
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd81f84_8df71db3",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "I think this can also be moved to a member function",
+      "range": {
+        "startLine": 325,
+        "startChar": 13,
+        "endLine": 325,
+        "endChar": 30
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1081525_3cfbdca2",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "need comments",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 93
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233c21fe_e8b7362e",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T11:23:31Z",
+      "side": 1,
+      "message": "Please add tests for:\n* Using both `textureNumLevels()` and `textureNumSamples()` on the same module-scope texture.\n* Using both `textureNumLevels()` and `textureNumSamples()` on the same texture parameter.\n* Using `textureNumLevels()` more than once with the same texture parameter.\n* Using `textureNumSamples()` more than once with the same texture parameter.\n* An inner function using `textureNumLevels()` on two texture parameters, called by a function that uses the same texture parameter for both arguments, called by main.",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
