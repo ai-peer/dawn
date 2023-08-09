@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62b71db2_7cb9fb13",
+        "filename": "src/dawn/native/SharedFence.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "I think that if you ExportInfo with the wrong chained struct - you should get an error but still have `info` populated with the real type\n\nthis is tested in SharedTextureMemoryTests.SharedFenceExportInfoInvalidChainedStruct",
+      "parentUuid": "ad58f897_a7e62fe7",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5238ec60_ba63862c",
         "filename": "src/dawn/native/SharedFence.cpp",
         "patchSetId": 18
@@ -65,6 +83,30 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "```suggestion\n    // Set the type to undefined. It will be overwritten to the actual type\n```",
+      "range": {
+        "startLine": 47,
+        "startChar": 45,
+        "endLine": 47,
+        "endChar": 57
+      },
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ad474ec_ce673447",
+        "filename": "src/dawn/native/SharedFence.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5238ec60_ba63862c",
       "range": {
         "startLine": 47,
         "startChar": 45,
@@ -94,6 +136,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "428d50bd_f56d5092",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "I don\u0027t know if we can have null backend unittests. I wasn\u0027t planning on making SharedFence/SharedTextureMemory an exposed feature in the null backend since every usage of them requires backend-specific things",
+      "parentUuid": "0009ff19_9cb46f1e",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ea170ec_68278017",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -105,6 +165,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "u-nit: maybe validate before filling the out struct :)",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b48898f_c63a8ac5",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "It\u0027s actually intentional to set things as much as possible. even in the error case\n\nunlike error monad objects which safely result in cascading errors, who knows what the application is doing with these values. We don\u0027t want to tell developers that they need to check errors whenever writing an output struct - so I think it\u0027s preferable instead that we always attempt to fill out structs with as sensible a thing as we possibly can?\n\nthis is tested in SharedTextureMemoryTests.GetPropertiesInvalidChain and SharedTextureMemoryTests.GetPropertiesErrorMemory",
+      "parentUuid": "8ea170ec_68278017",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -128,6 +206,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f3b9685_f106b2f8",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "IDK - we don\u0027t really disable validation based on the toggle for a bunch of other parts in Dawn. it mostly only does stuff for encoding. If we really want to skip validation, we should find a better way to pull all the frontend validation out entirely (separate proc table?). adding more branches seems worth it only when the performance measurably matters",
+      "parentUuid": "dda3dfab_1e7cd869",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "457fc409_82c95dbe",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -139,6 +235,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "u-nit: We could have block comments to group validation together (check there is a single 2d subresource, check it matches properties).",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6da8b88_3b8dfb55",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "457fc409_82c95dbe",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +270,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "The intent is that these methods will eventually be \u003d 0 right? Since a backend would implement all of them at once WDYT of making it \u003d 0 now?",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f00f560b_b5a4956e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57c324dc_3d3cf88d",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -179,6 +311,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a9e09bb_1ae52cd5",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "we allow multiple access scopes for the purpose of tracking their fences. But only the first access scope is actually valid\n\nconcurrent read also not currently allowed, but something we can add later by loosening validation",
+      "parentUuid": "71617f49_9409ff26",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bbad76b7_c940e463",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -190,6 +340,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "Can we have multiple ongoing accesses for the same texture?",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cf95ba3_bb3036e5",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "cannot have multiple ongoing valid accesses. Subsequent accesses after the first ones are invalid; but we keep tracking their fences so they can be properly forwarded to EndAccess",
+      "parentUuid": "bbad76b7_c940e463",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -213,6 +381,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ada85234_e8e8f3ca",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "move is deleted for StackVector\n\nI think we could switch to absl::InlinedVector at some point though",
+      "parentUuid": "de3dbb1a_b2cb5686",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "828fa8c1_426dfb70",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -224,6 +410,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "This is only used here, and seems slightly weird to be named so similarly to the function. Maybe Record/Acquire/RegisterBeginAccessFences?",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecc4221a_78234958",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "I named it PushAccessFences / PopAccessFences",
+      "parentUuid": "828fa8c1_426dfb70",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -247,6 +451,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "970ae4fc_57b0652a",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "in what way?",
+      "parentUuid": "0445e599_4cdd91ed",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aaa4803b_0d39851c",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -258,6 +480,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "Any reason this is done before all the rest of the validation?",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043efba8_53738c4e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "I thought it simpler to think about it that BeginAccess starts the access scope, regardless of whether or not it was an error - and EndAccess ends it. Otherwise the programmer needs to think about catching errors to know if the scope was *really* opened or not - which determines whether it is necessary to call EndAccess",
+      "parentUuid": "aaa4803b_0d39851c",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -281,6 +521,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88dbbe68_bc300a29",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "as you mentioned elsewhere, we need to get the shared texture memory from the texture in the backends when we acquire to wait on fences",
+      "parentUuid": "e9b3f3c7_0247538c",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "719343de_03a258a5",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -298,6 +556,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c94984a_553788c6",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "named it PopAccessFences",
+      "parentUuid": "719343de_03a258a5",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfbf4b95_04791db1",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -309,6 +585,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "Do we plan to have more than one fence returned eventually?",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8beb9932_63dda049",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "for multiqueue, yes - or if you passed multiple fences into BeginAccess and they were never acquired",
+      "parentUuid": "bfbf4b95_04791db1",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -347,6 +641,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1239f652_383edd5a",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e78a266_0dbc8ff9",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c2e60ae_b095dbc7",
@@ -364,6 +676,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79524eb_826e4872",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c2e60ae_b095dbc7",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2f9c87_b2178277",
@@ -377,6 +707,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "This is pretty hot code, can\u0027t we make the SharedTextureMemory modify the State to use a new `Paused` state?",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6308535f_647e27ec",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "Done. Changing how the state works in a preceding CL.",
+      "parentUuid": "7a2f9c87_b2178277",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -417,6 +765,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dce1b941_4c7bcd64",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "renamed",
+      "parentUuid": "9de52005_defe853c",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99d9c8f7_990bbd52",
         "filename": "src/dawn/native/ToBackend.h",
         "patchSetId": 18
@@ -428,6 +794,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "It might be useful to add SharedFence now as well.",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d2d42f_97b7c975",
+        "filename": "src/dawn/native/ToBackend.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-09T21:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d9c8f7_990bbd52",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
