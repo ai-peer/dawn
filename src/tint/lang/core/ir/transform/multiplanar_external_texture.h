@@ -12,28 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_LANG_SPIRV_WRITER_RAISE_RAISE_H_
-#define SRC_TINT_LANG_SPIRV_WRITER_RAISE_RAISE_H_
+#ifndef SRC_TINT_LANG_CORE_IR_TRANSFORM_MULTIPLANAR_EXTERNAL_TEXTURE_H_
+#define SRC_TINT_LANG_CORE_IR_TRANSFORM_MULTIPLANAR_EXTERNAL_TEXTURE_H_
 
 #include <string>
 
 #include "src/tint/utils/result/result.h"
 #include "tint/external_texture_options.h"
 
-// Forward declarations
+// Forward declarations.
 namespace tint::ir {
 class Module;
 }
 
-namespace tint::spirv::writer::raise {
+namespace tint::ir::transform {
 
-/// Raise a core IR module to the SPIR-V dialect of the IR.
-/// @param module the core IR module to raise to SPIR-V dialect
-/// @param external_texture_options the external texture options
-/// @returns success or an error string
-Result<SuccessType, std::string> Raise(ir::Module* module,
-                                       const ExternalTextureOptions& external_texture_options);
+/// MultiplanarExternalTexture is a transform that... TODO
+/// @param module the module to transform
+/// @param options the external texture options
+/// @returns an error string on failure
+Result<SuccessType, std::string> MultiplanarExternalTexture(Module* module,
+                                                            const ExternalTextureOptions& options);
 
-}  // namespace tint::spirv::writer::raise
+}  // namespace tint::ir::transform
 
-#endif  // SRC_TINT_LANG_SPIRV_WRITER_RAISE_RAISE_H_
+#endif  // SRC_TINT_LANG_CORE_IR_TRANSFORM_MULTIPLANAR_EXTERNAL_TEXTURE_H_
