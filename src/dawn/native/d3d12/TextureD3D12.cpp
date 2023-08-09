@@ -513,6 +513,7 @@ void Texture::TransitionSubresourceRange(std::vector<D3D12_RESOURCE_BARRIER>* ba
     // Update the tracked state.
     state->lastState = newState;
 
+    // All simultaneous-access textures are qualified for an implicit promotion.
     // Destination states that qualify for an implicit promotion for a
     // non-simultaneous-access texture: NON_PIXEL_SHADER_RESOURCE,
     // PIXEL_SHADER_RESOURCE, COPY_SRC, COPY_DEST.
@@ -522,7 +523,8 @@ void Texture::TransitionSubresourceRange(std::vector<D3D12_RESOURCE_BARRIER>* ba
             D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
 
         if (lastState == D3D12_RESOURCE_STATE_COMMON) {
-            if (IsSubset(newState, kD3D12PromotableReadOnlyStates)) {
+            if (IsSubset(newState, kD3D12PromotableReadOnlyStates) ||
+                mD3D12ResourceFlags & D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS) {
                 // Implicit texture state decays can only occur when the texture was implicitly
                 // transitioned to a read-only state. isValidToDecay is needed to differentiate
                 // between resources that were implictly or explicitly transitioned to a
