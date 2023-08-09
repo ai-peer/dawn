@@ -15,9 +15,12 @@
 #ifndef SRC_DAWN_NATIVE_OPENGL_PIPELINEGL_H_
 #define SRC_DAWN_NATIVE_OPENGL_PIPELINEGL_H_
 
+#include <utility>
 #include <vector>
 
 #include "dawn/native/Pipeline.h"
+
+#include "include/tint/texture_builtins_from_uniform_options.h"
 
 #include "dawn/native/PerStage.h"
 #include "dawn/native/opengl/opengl_platform.h"
@@ -31,6 +34,8 @@ namespace dawn::native::opengl {
 struct OpenGLFunctions;
 class PipelineLayout;
 class Sampler;
+class Buffer;
+class TextureView;
 
 class PipelineGL {
   public:
@@ -47,6 +52,15 @@ class PipelineGL {
     const std::vector<GLuint>& GetTextureUnitsForTextureView(GLuint index) const;
     GLuint GetProgramHandle() const;
 
+    void UpdateTextureBuiltinsUniformData(const OpenGLFunctions& gl,
+                                          const TextureView* view,
+                                          BindGroupIndex groupIndex,
+                                          BindingIndex bindingIndex);
+    const Buffer* GetInternalUniformBuffer() const;
+    const std::vector<uint8_t>& GetInternalUniformData() const;
+    const std::pair<size_t, size_t>& GetInternalUniformDataDirtyRange() const;
+    void ResetInternalUniformDataDirtyRange();
+
   protected:
     void ApplyNow(const OpenGLFunctions& gl);
     MaybeError InitializeBase(const OpenGLFunctions& gl,
@@ -62,6 +76,20 @@ class PipelineGL {
     // TODO(enga): This could live on the Device, or elsewhere, but currently it makes Device
     // destruction complex as it requires the sampler to be destroyed before the sampler cache.
     Ref<Sampler> mPlaceholderSampler;
+
+    // Maintain an internal uniform buffer to store extra information needed by shader emulation.
+    GLuint mInternalUniformBufferBinding;
+    bool mNeedsTextureBuiltinUniformBuffer;
+    Ref<Buffer> mTextureBuiltinsBuffer;
+    std::vector<uint8_t> mInternalUniformBufferData;
+    // Tracking dirty mInternalUniformBufferData byte range that needs to call bufferSubData to
+    // update to the mTextureBuiltinsBuffer. Range it represents: [first, second)
+    std::pair<size_t, size_t> mDirtyRange;
+
+    // Reflect info from tint: a map from texture binding point to extra data need to push into the
+    // internal uniform buffer.
+    tint::TextureBuiltinsFromUniformOptions::BindingPointToFieldAndOffset
+        mBindingPointBuiltinsDataInfo;
 };
 
 }  // namespace dawn::native::opengl

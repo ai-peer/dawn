@@ -16,6 +16,7 @@
 
 #include <algorithm>
 #include <cstring>
+#include <utility>
 #include <vector>
 
 #include "dawn/native/BindGroup.h"
@@ -233,6 +234,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
         for (BindGroupIndex index : IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
             ApplyBindGroup(gl, index, mBindGroups[index], mDynamicOffsets[index]);
         }
+        ApplyInternalUniforms(gl);
         AfterApply();
     }
 
@@ -335,6 +337,11 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                             }
                         }
                     }
+
+                    // Some texture builtin function data needs emulation to update into the
+                    // internal uniform buffer.
+                    mPipeline->UpdateTextureBuiltinsUniformData(gl, view, groupIndex, bindingIndex);
+
                     break;
                 }
 
@@ -376,6 +383,29 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                     break;
             }
         }
+    }
+
+    void ApplyInternalUniforms(const OpenGLFunctions& gl) {
+        const Buffer* internalUniformBuffer = mPipeline->GetInternalUniformBuffer();
+        if (!internalUniformBuffer) {
+            return;
+        }
+
+        GLuint internalUniformBufferHandle = internalUniformBuffer->GetHandle();
+        const std::vector<uint8_t>& data = mPipeline->GetInternalUniformData();
+        const std::pair<size_t, size_t>& dirtyRange = mPipeline->GetInternalUniformDataDirtyRange();
+
+        if (dirtyRange.first >= dirtyRange.second) {
+            // Early return if no dirty uniform range needs updating.
+            return;
+        }
+
+        gl.BindBuffer(GL_UNIFORM_BUFFER, internalUniformBufferHandle);
+        gl.BufferSubData(GL_UNIFORM_BUFFER, dirtyRange.first, dirtyRange.second - dirtyRange.first,
+                         data.data() + dirtyRange.first);
+        gl.BindBuffer(GL_UNIFORM_BUFFER, 0);
+
+        mPipeline->ResetInternalUniformDataDirtyRange();
     }
 
     PipelineGL* mPipeline = nullptr;
