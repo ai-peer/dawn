@@ -69,9 +69,9 @@ class StructMember;
 class SwitchStatement;
 class WhileStatement;
 }  // namespace tint::sem
-namespace tint::type {
+namespace tint::core::type {
 class Atomic;
-}  // namespace tint::type
+}  // namespace tint::core::type
 
 namespace tint::resolver {
 
@@ -96,21 +96,23 @@ class Resolver {
 
     /// @param type the given type
     /// @returns true if the given type is a plain type
-    bool IsPlain(const type::Type* type) const { return validator_.IsPlain(type); }
+    bool IsPlain(const core::type::Type* type) const { return validator_.IsPlain(type); }
 
     /// @param type the given type
     /// @returns true if the given type is a fixed-footprint type
-    bool IsFixedFootprint(const type::Type* type) const {
+    bool IsFixedFootprint(const core::type::Type* type) const {
         return validator_.IsFixedFootprint(type);
     }
 
     /// @param type the given type
     /// @returns true if the given type is storable
-    bool IsStorable(const type::Type* type) const { return validator_.IsStorable(type); }
+    bool IsStorable(const core::type::Type* type) const { return validator_.IsStorable(type); }
 
     /// @param type the given type
     /// @returns true if the given type is host-shareable
-    bool IsHostShareable(const type::Type* type) const { return validator_.IsHostShareable(type); }
+    bool IsHostShareable(const core::type::Type* type) const {
+        return validator_.IsHostShareable(type);
+    }
 
     /// @returns the validator for testing
     const Validator* GetValidatorForTesting() const { return &validator_; }
@@ -138,7 +140,7 @@ class Resolver {
     sem::FunctionExpression* FunctionExpression(const ast::Expression* expr);
 
     /// @returns the resolved type from an expression, or nullptr on error
-    type::Type* Type(const ast::Expression* ast);
+    core::type::Type* Type(const ast::Expression* ast);
 
     /// @returns the call of Expression() cast to a
     /// sem::BuiltinEnumExpression<core::AddressSpace>. If the sem::Expression is not a
@@ -154,9 +156,10 @@ class Resolver {
     sem::BuiltinEnumExpression<core::BuiltinValue>* BuiltinValueExpression(
         const ast::Expression* expr);
 
-    /// @returns the call of Expression() cast to a sem::BuiltinEnumExpression<type::TexelFormat>.
-    /// If the sem::Expression is not a sem::BuiltinEnumExpression<type::TexelFormat>, then an error
-    /// diagnostic is raised and nullptr is returned.
+    /// @returns the call of Expression() cast to a
+    /// sem::BuiltinEnumExpression<core::type::TexelFormat>. If the sem::Expression is not a
+    /// sem::BuiltinEnumExpression<core::type::TexelFormat>, then an error diagnostic is raised and
+    /// nullptr is returned.
     sem::BuiltinEnumExpression<core::TexelFormat>* TexelFormatExpression(
         const ast::Expression* expr);
 
@@ -239,7 +242,7 @@ class Resolver {
     /// If `expr` is not of an abstract-numeric type, then Materialize() will just return `expr`.
     /// If `expr` is nullptr, then Materialize() will also return nullptr.
     const sem::ValueExpression* Materialize(const sem::ValueExpression* expr,
-                                            const type::Type* target_type = nullptr);
+                                            const core::type::Type* target_type = nullptr);
 
     /// For each argument in `args`:
     /// * Calls Materialize() passing the argument and the corresponding parameter type.
@@ -252,12 +255,12 @@ class Resolver {
 
     /// @returns true if an argument of an abstract numeric type, passed to a parameter of type
     /// `parameter_ty` should be materialized.
-    bool ShouldMaterializeArgument(const type::Type* parameter_ty) const;
+    bool ShouldMaterializeArgument(const core::type::Type* parameter_ty) const;
 
     /// Converts `c` to `target_ty`
     /// @returns true on success, false on failure.
     bool Convert(const core::constant::Value*& c,
-                 const type::Type* target_ty,
+                 const core::type::Type* target_ty,
                  const Source& source);
 
     /// Transforms `args` to a vector of constants, and converts each constant to the call target's
@@ -274,9 +277,9 @@ class Resolver {
     /// @param source the source of the expression requiring materialization
     /// @returns the concrete (materialized) type for the given type, or nullptr if the type is
     ///          already concrete.
-    const type::Type* ConcreteType(const type::Type* ty,
-                                   const type::Type* target_ty,
-                                   const Source& source);
+    const core::type::Type* ConcreteType(const core::type::Type* ty,
+                                         const core::type::Type* target_ty,
+                                         const Source& source);
 
     // Statement resolving methods
     // Each return true on success, false on failure.
@@ -285,7 +288,7 @@ class Resolver {
     sem::Statement* BreakStatement(const ast::BreakStatement*);
     sem::Statement* BreakIfStatement(const ast::BreakIfStatement*);
     sem::Statement* CallStatement(const ast::CallStatement*);
-    sem::CaseStatement* CaseStatement(const ast::CaseStatement*, const type::Type*);
+    sem::CaseStatement* CaseStatement(const ast::CaseStatement*, const core::type::Type*);
     sem::Statement* CompoundAssignmentStatement(const ast::CompoundAssignmentStatement*);
     sem::Statement* ContinueStatement(const ast::ContinueStatement*);
     sem::Statement* ConstAssert(const ast::ConstAssert*);
@@ -376,12 +379,12 @@ class Resolver {
 
     /// @param named_type the named type to resolve
     /// @returns the resolved semantic type
-    type::Type* TypeDecl(const ast::TypeDecl* named_type);
+    core::type::Type* TypeDecl(const ast::TypeDecl* named_type);
 
     /// Resolves and validates the expression used as the count parameter of an array.
     /// @param count_expr the expression used as the second template parameter to an array<>.
     /// @returns the number of elements in the array.
-    const type::ArrayCount* ArrayCount(const ast::Expression* count_expr);
+    const core::type::ArrayCount* ArrayCount(const ast::Expression* count_expr);
 
     /// Resolves and validates the attributes on an array.
     /// @param attributes the attributes on the array type.
@@ -389,7 +392,7 @@ class Resolver {
     /// @param explicit_stride assigned the specified stride of the array in bytes.
     /// @returns true on success, false on failure
     bool ArrayAttributes(VectorRef<const ast::Attribute*> attributes,
-                         const type::Type* el_ty,
+                         const core::type::Type* el_ty,
                          uint32_t& explicit_stride);
 
     /// Builds and returns the semantic information for an array.
@@ -402,18 +405,18 @@ class Resolver {
     /// @param el_ty the Array element type
     /// @param el_count the number of elements in the array.
     /// @param explicit_stride the explicit byte stride of the array. Zero means implicit stride.
-    type::Array* Array(const Source& array_source,
-                       const Source& el_source,
-                       const Source& count_source,
-                       const type::Type* el_ty,
-                       const type::ArrayCount* el_count,
-                       uint32_t explicit_stride);
+    core::type::Array* Array(const Source& array_source,
+                             const Source& el_source,
+                             const Source& count_source,
+                             const core::type::Type* el_ty,
+                             const core::type::ArrayCount* el_count,
+                             uint32_t explicit_stride);
 
     /// Builds and returns the semantic information for the alias `alias`.
     /// This method does not mark the ast::Alias node, nor attach the generated
     /// semantic information to the AST node.
     /// @returns the aliased type, or nullptr if an error is raised.
-    type::Type* Alias(const ast::Alias* alias);
+    core::type::Type* Alias(const ast::Alias* alias);
 
     /// Builds and returns the semantic information for the structure `str`.
     /// This method does not mark the ast::Struct node, nor attach the generated
@@ -480,7 +483,9 @@ class Resolver {
     /// given type and address space. Used for generating sensible error
     /// messages.
     /// @returns true on success, false on error
-    bool ApplyAddressSpaceUsageToType(core::AddressSpace sc, type::Type* ty, const Source& usage);
+    bool ApplyAddressSpaceUsageToType(core::AddressSpace sc,
+                                      core::type::Type* ty,
+                                      const Source& usage);
 
     /// @param address_space the address space
     /// @returns the default access control for the given address space
@@ -551,22 +556,22 @@ class Resolver {
 
     /// @returns the type::Type for the builtin type @p builtin_ty with the identifier @p ident
     /// @note: Will raise an ICE if @p symbol is not a builtin type.
-    type::Type* BuiltinType(core::Builtin builtin_ty, const ast::Identifier* ident);
+    core::type::Type* BuiltinType(core::Builtin builtin_ty, const ast::Identifier* ident);
 
     /// @returns the nesting depth of @ty as defined in
     /// https://gpuweb.github.io/gpuweb/wgsl/#composite-types
-    size_t NestDepth(const type::Type* ty) const;
+    size_t NestDepth(const core::type::Type* ty) const;
 
     // ArrayConstructorSig represents a unique array constructor signature.
     // It is a tuple of the array type, number of arguments provided and earliest evaluation stage.
-    using ArrayConstructorSig =
-        tint::UnorderedKeyWrapper<std::tuple<const type::Array*, size_t, core::EvaluationStage>>;
+    using ArrayConstructorSig = tint::UnorderedKeyWrapper<
+        std::tuple<const core::type::Array*, size_t, core::EvaluationStage>>;
 
     // StructConstructorSig represents a unique structure constructor signature.
     // It is a tuple of the structure type, number of arguments provided and earliest evaluation
     // stage.
-    using StructConstructorSig =
-        tint::UnorderedKeyWrapper<std::tuple<const type::Struct*, size_t, core::EvaluationStage>>;
+    using StructConstructorSig = tint::UnorderedKeyWrapper<
+        std::tuple<const core::type::Struct*, size_t, core::EvaluationStage>>;
 
     /// ExprEvalStageConstraint describes a constraint on when expressions can be evaluated.
     struct ExprEvalStageConstraint {
@@ -610,7 +615,7 @@ class Resolver {
     Validator validator_;
     core::Extensions enabled_extensions_;
     Vector<sem::Function*, 8> entry_points_;
-    Hashmap<const type::Type*, const Source*, 8> atomic_composite_info_;
+    Hashmap<const core::type::Type*, const Source*, 8> atomic_composite_info_;
     tint::Bitset<0> marked_;
     ExprEvalStageConstraint expr_eval_stage_constraint_;
     std::unordered_map<const sem::Function*, AliasAnalysisInfo> alias_analysis_infos_;
@@ -626,7 +631,7 @@ class Resolver {
     Hashmap<const ast::Expression*, const ast::BinaryExpression*, 8> logical_binary_lhs_to_parent_;
     Hashset<const ast::Expression*, 8> skip_const_eval_;
     IdentifierResolveHint identifier_resolve_hint_;
-    Hashmap<const type::Type*, size_t, 8> nest_depth_;
+    Hashmap<const core::type::Type*, size_t, 8> nest_depth_;
 };
 
 }  // namespace tint::resolver

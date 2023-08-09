@@ -53,9 +53,9 @@ class Table {
     /// UnaryOperator describes a resolved unary operator
     struct UnaryOperator {
         /// The result type of the unary operator
-        const type::Type* result = nullptr;
+        const core::type::Type* result = nullptr;
         /// The type of the parameter of the unary operator
-        const type::Type* parameter = nullptr;
+        const core::type::Type* parameter = nullptr;
         /// The constant evaluation function
         constant::Eval::Function const_eval_fn = nullptr;
     };
@@ -63,11 +63,11 @@ class Table {
     /// BinaryOperator describes a resolved binary operator
     struct BinaryOperator {
         /// The result type of the binary operator
-        const type::Type* result = nullptr;
+        const core::type::Type* result = nullptr;
         /// The type of LHS parameter of the binary operator
-        const type::Type* lhs = nullptr;
+        const core::type::Type* lhs = nullptr;
         /// The type of RHS parameter of the binary operator
-        const type::Type* rhs = nullptr;
+        const core::type::Type* rhs = nullptr;
         /// The constant evaluation function
         constant::Eval::Function const_eval_fn = nullptr;
     };
@@ -93,7 +93,7 @@ class Table {
     /// @param source the source of the builtin call
     /// @return the semantic builtin if found, otherwise nullptr
     virtual Builtin Lookup(core::Function type,
-                           VectorRef<const type::Type*> args,
+                           VectorRef<const core::type::Type*> args,
                            EvaluationStage earliest_eval_stage,
                            const Source& source) = 0;
 
@@ -111,7 +111,7 @@ class Table {
     /// @return the operator call target signature. If the operator was not found
     ///         UnaryOperator::result will be nullptr.
     virtual UnaryOperator Lookup(core::UnaryOp op,
-                                 const type::Type* arg,
+                                 const core::type::Type* arg,
                                  EvaluationStage earliest_eval_stage,
                                  const Source& source) = 0;
 
@@ -131,8 +131,8 @@ class Table {
     /// @return the operator call target signature. If the operator was not found
     ///         BinaryOperator::result will be nullptr.
     virtual BinaryOperator Lookup(core::BinaryOp op,
-                                  const type::Type* lhs,
-                                  const type::Type* rhs,
+                                  const core::type::Type* lhs,
+                                  const core::type::Type* rhs,
                                   EvaluationStage earliest_eval_stage,
                                   const Source& source,
                                   bool is_compound) = 0;
@@ -150,8 +150,8 @@ class Table {
     /// @param source the source of the call
     /// @return a sem::ValueConstructor, sem::ValueConversion or nullptr if nothing matched
     virtual CtorOrConv Lookup(CtorConv type,
-                              const type::Type* template_arg,
-                              VectorRef<const type::Type*> args,
+                              const core::type::Type* template_arg,
+                              VectorRef<const core::type::Type*> args,
                               EvaluationStage earliest_eval_stage,
                               const Source& source) = 0;
 };

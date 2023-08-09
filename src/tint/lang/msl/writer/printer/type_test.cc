@@ -253,15 +253,15 @@ using uint = unsigned int;
 
 struct MemberData {
     Symbol name;
-    const type::Type* type;
+    const core::type::Type* type;
     uint32_t size = 0;
     uint32_t align = 0;
 };
-type::Struct* MkStruct(ir::Module& mod,
-                       type::Manager& ty,
-                       std::string_view name,
-                       VectorRef<MemberData> data) {
-    Vector<const type::StructMember*, 26> members;
+core::type::Struct* MkStruct(ir::Module& mod,
+                             core::type::Manager& ty,
+                             std::string_view name,
+                             VectorRef<MemberData> data) {
+    Vector<const core::type::StructMember*, 26> members;
     uint32_t align = 0;
     uint32_t size = 0;
     for (uint32_t i = 0; i < data.Length(); ++i) {
@@ -271,15 +271,15 @@ type::Struct* MkStruct(ir::Module& mod,
         uint32_t mem_size = d.size == 0 ? d.type->Size() : d.size;
 
         uint32_t offset = tint::RoundUp(mem_align, size);
-        members.Push(ty.Get<type::StructMember>(d.name, d.type, i, offset, mem_align, mem_size,
-                                                type::StructMemberAttributes{}));
+        members.Push(ty.Get<core::type::StructMember>(
+            d.name, d.type, i, offset, mem_align, mem_size, core::type::StructMemberAttributes{}));
 
         align = std::max(align, mem_align);
         size = offset + mem_size;
     }
 
-    return ty.Get<type::Struct>(mod.symbols.New(name), std::move(members), align,
-                                tint::RoundUp(align, size), size);
+    return ty.Get<core::type::Struct>(mod.symbols.New(name), std::move(members), align,
+                                      tint::RoundUp(align, size), size);
 }
 
 TEST_F(MslPrinterTest, EmitType_Struct_Layout_NonComposites) {
@@ -409,7 +409,7 @@ TEST_F(MslPrinterTest, EmitType_Struct_Layout_Structures) {
                                                {mod.symbols.Register("c"), ty.f32()},
                                                {mod.symbols.Register("d"), inner_y},
                                                {mod.symbols.Register("e"), ty.f32()}});
-    const_cast<type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
+    const_cast<core::type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
 // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
 // for each field of the structure s.
@@ -503,7 +503,7 @@ TEST_F(MslPrinterTest, EmitType_Struct_Layout_ArrayDefaultStride) {
                                                {mod.symbols.Register("d"), array_y},
                                                {mod.symbols.Register("e"), ty.f32()},
                                                {mod.symbols.Register("f"), array_z}});
-    const_cast<type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
+    const_cast<core::type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
     // for each field of the structure s.
@@ -588,7 +588,7 @@ TEST_F(MslPrinterTest, EmitType_Struct_Layout_ArrayVec3DefaultStride) {
                                                   {mod.symbols.Register("b"), array},
                                                   {mod.symbols.Register("c"), ty.i32()},
                                               });
-    const_cast<type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
+    const_cast<core::type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
     // for each field of the structure s.
@@ -708,7 +708,7 @@ TEST_F(MslPrinterTest, EmitType_SamplerComparison) {
 }
 
 struct MslDepthTextureData {
-    type::TextureDimension dim;
+    core::type::TextureDimension dim;
     std::string result;
 };
 inline std::ostream& operator<<(std::ostream& out, MslDepthTextureData data) {
@@ -721,7 +721,7 @@ using MslPrinterDepthTexturesTest = MslPrinterTestWithParam<MslDepthTextureData>
 TEST_P(MslPrinterDepthTexturesTest, Emit) {
     auto params = GetParam();
 
-    auto* t = ty.Get<type::DepthTexture>(params.dim);
+    auto* t = ty.Get<core::type::DepthTexture>(params.dim);
     generator_.EmitType(generator_.Line(), t);
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(tint::TrimSpace(generator_.Result()), params.result);
@@ -729,23 +729,24 @@ TEST_P(MslPrinterDepthTexturesTest, Emit) {
 INSTANTIATE_TEST_SUITE_P(
     MslPrinterTest,
     MslPrinterDepthTexturesTest,
-    testing::Values(
-        MslDepthTextureData{type::TextureDimension::k2d, "depth2d<float, access::sample>"},
-        MslDepthTextureData{type::TextureDimension::k2dArray,
-                            "depth2d_array<float, access::sample>"},
-        MslDepthTextureData{type::TextureDimension::kCube, "depthcube<float, access::sample>"},
-        MslDepthTextureData{type::TextureDimension::kCubeArray,
-                            "depthcube_array<float, access::sample>"}));
+    testing::Values(MslDepthTextureData{core::type::TextureDimension::k2d,
+                                        "depth2d<float, access::sample>"},
+                    MslDepthTextureData{core::type::TextureDimension::k2dArray,
+                                        "depth2d_array<float, access::sample>"},
+                    MslDepthTextureData{core::type::TextureDimension::kCube,
+                                        "depthcube<float, access::sample>"},
+                    MslDepthTextureData{core::type::TextureDimension::kCubeArray,
+                                        "depthcube_array<float, access::sample>"}));
 
 TEST_F(MslPrinterTest, EmiType_DepthMultisampledTexture) {
-    auto* t = ty.Get<type::DepthMultisampledTexture>(type::TextureDimension::k2d);
+    auto* t = ty.Get<core::type::DepthMultisampledTexture>(core::type::TextureDimension::k2d);
     generator_.EmitType(generator_.Line(), t);
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(tint::TrimSpace(generator_.Result()), "depth2d_ms<float, access::read>");
 }
 
 struct MslTextureData {
-    type::TextureDimension dim;
+    core::type::TextureDimension dim;
     std::string result;
 };
 inline std::ostream& operator<<(std::ostream& out, MslTextureData data) {
@@ -758,7 +759,7 @@ using MslPrinterSampledtexturesTest = MslPrinterTestWithParam<MslTextureData>;
 TEST_P(MslPrinterSampledtexturesTest, Emit) {
     auto params = GetParam();
 
-    auto* t = ty.Get<type::SampledTexture>(params.dim, ty.f32());
+    auto* t = ty.Get<core::type::SampledTexture>(params.dim, ty.f32());
     generator_.EmitType(generator_.Line(), t);
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(tint::TrimSpace(generator_.Result()), params.result);
@@ -767,23 +768,24 @@ INSTANTIATE_TEST_SUITE_P(
     MslPrinterTest,
     MslPrinterSampledtexturesTest,
     testing::Values(
-        MslTextureData{type::TextureDimension::k1d, "texture1d<float, access::sample>"},
-        MslTextureData{type::TextureDimension::k2d, "texture2d<float, access::sample>"},
-        MslTextureData{type::TextureDimension::k2dArray, "texture2d_array<float, access::sample>"},
-        MslTextureData{type::TextureDimension::k3d, "texture3d<float, access::sample>"},
-        MslTextureData{type::TextureDimension::kCube, "texturecube<float, access::sample>"},
-        MslTextureData{type::TextureDimension::kCubeArray,
+        MslTextureData{core::type::TextureDimension::k1d, "texture1d<float, access::sample>"},
+        MslTextureData{core::type::TextureDimension::k2d, "texture2d<float, access::sample>"},
+        MslTextureData{core::type::TextureDimension::k2dArray,
+                       "texture2d_array<float, access::sample>"},
+        MslTextureData{core::type::TextureDimension::k3d, "texture3d<float, access::sample>"},
+        MslTextureData{core::type::TextureDimension::kCube, "texturecube<float, access::sample>"},
+        MslTextureData{core::type::TextureDimension::kCubeArray,
                        "texturecube_array<float, access::sample>"}));
 
 TEST_F(MslPrinterTest, Emit_TypeMultisampledTexture) {
-    auto* ms = ty.Get<type::MultisampledTexture>(type::TextureDimension::k2d, ty.u32());
+    auto* ms = ty.Get<core::type::MultisampledTexture>(core::type::TextureDimension::k2d, ty.u32());
     generator_.EmitType(generator_.Line(), ms);
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(tint::TrimSpace(generator_.Result()), "texture2d_ms<uint, access::read>");
 }
 
 struct MslStorageTextureData {
-    type::TextureDimension dim;
+    core::type::TextureDimension dim;
     std::string result;
 };
 inline std::ostream& operator<<(std::ostream& out, MslStorageTextureData data) {
@@ -795,22 +797,24 @@ using MslPrinterStorageTexturesTest = MslPrinterTestWithParam<MslStorageTextureD
 TEST_P(MslPrinterStorageTexturesTest, Emit) {
     auto params = GetParam();
 
-    auto* f32 = const_cast<type::F32*>(ty.f32());
-    auto s = ty.Get<type::StorageTexture>(params.dim, core::TexelFormat::kR32Float,
-                                          core::Access::kWrite, f32);
+    auto* f32 = const_cast<core::type::F32*>(ty.f32());
+    auto s = ty.Get<core::type::StorageTexture>(params.dim, core::TexelFormat::kR32Float,
+                                                core::Access::kWrite, f32);
     generator_.EmitType(generator_.Line(), s);
     ASSERT_TRUE(generator_.Diagnostics().empty()) << generator_.Diagnostics().str();
     EXPECT_EQ(tint::TrimSpace(generator_.Result()), params.result);
 }
-INSTANTIATE_TEST_SUITE_P(
-    MslPrinterTest,
-    MslPrinterStorageTexturesTest,
-    testing::Values(
-        MslStorageTextureData{type::TextureDimension::k1d, "texture1d<float, access::write>"},
-        MslStorageTextureData{type::TextureDimension::k2d, "texture2d<float, access::write>"},
-        MslStorageTextureData{type::TextureDimension::k2dArray,
-                              "texture2d_array<float, access::write>"},
-        MslStorageTextureData{type::TextureDimension::k3d, "texture3d<float, access::write>"}));
+INSTANTIATE_TEST_SUITE_P(MslPrinterTest,
+                         MslPrinterStorageTexturesTest,
+                         testing::Values(MslStorageTextureData{core::type::TextureDimension::k1d,
+                                                               "texture1d<float, access::write>"},
+                                         MslStorageTextureData{core::type::TextureDimension::k2d,
+                                                               "texture2d<float, access::write>"},
+                                         MslStorageTextureData{
+                                             core::type::TextureDimension::k2dArray,
+                                             "texture2d_array<float, access::write>"},
+                                         MslStorageTextureData{core::type::TextureDimension::k3d,
+                                                               "texture3d<float, access::write>"}));
 
 }  // namespace
 }  // namespace tint::msl::writer

@@ -42,7 +42,7 @@ using ParameterInfo = tint::core::intrinsic::TableData::ParameterInfo;
 using StringStream = tint::StringStream;
 using TemplateNumberInfo = tint::core::intrinsic::TableData::TemplateNumberInfo;
 using TemplateTypeInfo = tint::core::intrinsic::TableData::TemplateTypeInfo;
-using Type = tint::type::Type;
+using Type = tint::core::type::Type;
 using TypeMatcher = tint::core::intrinsic::TableData::TypeMatcher;
 
 template <size_t N>

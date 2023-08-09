@@ -38,10 +38,10 @@ namespace tint::core::intrinsic {
 const TableData::Number TableData::Number::any{Number::kAny};
 const TableData::Number TableData::Number::invalid{Number::kInvalid};
 
-TableData::Any::Any() : Base(0u, type::Flags{}) {}
+TableData::Any::Any() : Base(0u, core::type::Flags{}) {}
 TableData::Any::~Any() = default;
 
-bool TableData::Any::Equals(const type::UniqueNode&) const {
+bool TableData::Any::Equals(const core::type::UniqueNode&) const {
     return false;
 }
 
@@ -49,7 +49,7 @@ std::string TableData::Any::FriendlyName() const {
     return "<any>";
 }
 
-type::Type* TableData::Any::Clone(type::CloneContext&) const {
+core::type::Type* TableData::Any::Clone(core::type::CloneContext&) const {
     return nullptr;
 }
 
@@ -90,7 +90,7 @@ struct IntrinsicPrototype {
     /// Parameter describes a single parameter
     struct Parameter {
         /// Parameter type
-        const type::Type* const type;
+        const core::type::Type* const type;
         /// Parameter usage
         ParameterUsage const usage = ParameterUsage::kNone;
     };
@@ -109,7 +109,7 @@ struct IntrinsicPrototype {
     };
 
     const TableData::OverloadInfo* overload = nullptr;
-    type::Type const* return_type = nullptr;
+    core::type::Type const* return_type = nullptr;
     Vector<Parameter, kNumFixedParams> parameters;
 };
 
@@ -135,25 +135,25 @@ class Impl : public Table {
     Impl(ProgramBuilder& b, const TableData& d);
 
     Builtin Lookup(core::Function builtin_type,
-                   VectorRef<const type::Type*> args,
+                   VectorRef<const core::type::Type*> args,
                    EvaluationStage earliest_eval_stage,
                    const Source& source) override;
 
     UnaryOperator Lookup(core::UnaryOp op,
-                         const type::Type* arg,
+                         const core::type::Type* arg,
                          EvaluationStage earliest_eval_stage,
                          const Source& source) override;
 
     BinaryOperator Lookup(core::BinaryOp op,
-                          const type::Type* lhs,
-                          const type::Type* rhs,
+                          const core::type::Type* lhs,
+                          const core::type::Type* rhs,
                           EvaluationStage earliest_eval_stage,
                           const Source& source,
                           bool is_compound) override;
 
     CtorOrConv Lookup(CtorConv type,
-                      const type::Type* template_arg,
-                      VectorRef<const type::Type*> args,
+                      const core::type::Type* template_arg,
+                      VectorRef<const core::type::Type*> args,
                       EvaluationStage earliest_eval_stage,
                       const Source& source) override;
 
@@ -199,7 +199,7 @@ class Impl : public Table {
     ///          IntrinsicPrototype::return_type.
     IntrinsicPrototype MatchIntrinsic(const IntrinsicInfo& intrinsic,
                                       const char* intrinsic_name,
-                                      VectorRef<const type::Type*> args,
+                                      VectorRef<const core::type::Type*> args,
                                       EvaluationStage earliest_eval_stage,
                                       TemplateState templates,
                                       const OnNoMatch& on_no_match) const;
@@ -212,7 +212,7 @@ class Impl : public Table {
     ///                  template as `f32`.
     /// @returns the evaluated Candidate information.
     Candidate ScoreOverload(const TableData::OverloadInfo* overload,
-                            VectorRef<const type::Type*> args,
+                            VectorRef<const core::type::Type*> args,
                             EvaluationStage earliest_eval_stage,
                             const TemplateState& templates) const;
 
@@ -228,7 +228,7 @@ class Impl : public Table {
     /// @returns the resolved Candidate.
     Candidate ResolveCandidate(Candidates&& candidates,
                                const char* intrinsic_name,
-                               VectorRef<const type::Type*> args,
+                               VectorRef<const core::type::Type*> args,
                                TemplateState templates) const;
 
     /// Match constructs a new MatchState
@@ -252,7 +252,7 @@ class Impl : public Table {
 
     /// Raises an error when no overload is a clear winner of overload resolution
     void ErrAmbiguousOverload(const char* intrinsic_name,
-                              VectorRef<const type::Type*> args,
+                              VectorRef<const core::type::Type*> args,
                               TemplateState templates,
                               VectorRef<Candidate> candidates) const;
 
@@ -267,8 +267,8 @@ class Impl : public Table {
 /// @return a string representing a call to a builtin with the given argument
 /// types.
 std::string CallSignature(const char* intrinsic_name,
-                          VectorRef<const type::Type*> args,
-                          const type::Type* template_arg = nullptr) {
+                          VectorRef<const core::type::Type*> args,
+                          const core::type::Type* template_arg = nullptr) {
     StringStream ss;
     ss << intrinsic_name;
     if (template_arg) {
@@ -293,7 +293,7 @@ std::string CallSignature(const char* intrinsic_name,
 Impl::Impl(ProgramBuilder& b, const TableData& d) : builder(b), data(d) {}
 
 Impl::Builtin Impl::Lookup(core::Function builtin_type,
-                           VectorRef<const type::Type*> args,
+                           VectorRef<const core::type::Type*> args,
                            EvaluationStage earliest_eval_stage,
                            const Source& source) {
     const char* intrinsic_name = core::str(builtin_type);
@@ -349,7 +349,7 @@ Impl::Builtin Impl::Lookup(core::Function builtin_type,
 }
 
 Table::UnaryOperator Impl::Lookup(core::UnaryOp op,
-                                  const type::Type* arg,
+                                  const core::type::Type* arg,
                                   EvaluationStage earliest_eval_stage,
                                   const Source& source) {
     auto [intrinsic_info, intrinsic_name] = [&]() -> std::pair<const IntrinsicInfo*, const char*> {
@@ -400,8 +400,8 @@ Table::UnaryOperator Impl::Lookup(core::UnaryOp op,
 }
 
 Table::BinaryOperator Impl::Lookup(core::BinaryOp op,
-                                   const type::Type* lhs,
-                                   const type::Type* rhs,
+                                   const core::type::Type* lhs,
+                                   const core::type::Type* rhs,
                                    EvaluationStage earliest_eval_stage,
                                    const Source& source,
                                    bool is_compound) {
@@ -482,8 +482,8 @@ Table::BinaryOperator Impl::Lookup(core::BinaryOp op,
 }
 
 Table::CtorOrConv Impl::Lookup(CtorConv type,
-                               const type::Type* template_arg,
-                               VectorRef<const type::Type*> args,
+                               const core::type::Type* template_arg,
+                               VectorRef<const core::type::Type*> args,
                                EvaluationStage earliest_eval_stage,
                                const Source& source) {
     auto name = str(type);
@@ -561,7 +561,7 @@ Table::CtorOrConv Impl::Lookup(CtorConv type,
 
 IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
                                         const char* intrinsic_name,
-                                        VectorRef<const type::Type*> args,
+                                        VectorRef<const core::type::Type*> args,
                                         EvaluationStage earliest_eval_stage,
                                         TemplateState templates,
                                         const OnNoMatch& on_no_match) const {
@@ -601,7 +601,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
     }
 
     // Build the return type
-    const type::Type* return_type = nullptr;
+    const core::type::Type* return_type = nullptr;
     if (auto* indices = match.overload->return_matcher_indices) {
         Any any;
         return_type =
@@ -611,14 +611,14 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
             return {};
         }
     } else {
-        return_type = builder.create<type::Void>();
+        return_type = builder.create<core::type::Void>();
     }
 
     return IntrinsicPrototype{match.overload, return_type, std::move(match.parameters)};
 }
 
 Impl::Candidate Impl::ScoreOverload(const TableData::OverloadInfo* overload,
-                                    VectorRef<const type::Type*> args,
+                                    VectorRef<const core::type::Type*> args,
                                     EvaluationStage earliest_eval_stage,
                                     const TemplateState& in_templates) const {
     // Penalty weights for overload mismatching.
@@ -732,7 +732,7 @@ Impl::Candidate Impl::ScoreOverload(const TableData::OverloadInfo* overload,
 
 Impl::Candidate Impl::ResolveCandidate(Impl::Candidates&& candidates,
                                        const char* intrinsic_name,
-                                       VectorRef<const type::Type*> args,
+                                       VectorRef<const core::type::Type*> args,
                                        TemplateState templates) const {
     Vector<uint32_t, kNumFixedParams> best_ranks;
     best_ranks.Resize(args.Length(), 0xffffffff);
@@ -745,7 +745,7 @@ Impl::Candidate Impl::ResolveCandidate(Impl::Candidates&& candidates,
         bool some_won = false;   // An argument ranked less than the 'best' overload's argument
         bool some_lost = false;  // An argument ranked more than the 'best' overload's argument
         for (size_t i = 0; i < args.Length(); i++) {
-            auto rank = type::Type::ConversionRank(args[i], candidate.parameters[i].type);
+            auto rank = core::type::Type::ConversionRank(args[i], candidate.parameters[i].type);
             if (best_ranks[i] > rank) {
                 best_ranks[i] = rank;
                 some_won = true;
@@ -886,7 +886,7 @@ void Impl::PrintCandidates(StringStream& ss,
 }
 
 void Impl::ErrAmbiguousOverload(const char* intrinsic_name,
-                                VectorRef<const type::Type*> args,
+                                VectorRef<const core::type::Type*> args,
                                 TemplateState templates,
                                 VectorRef<Candidate> candidates) const {
     StringStream ss;
