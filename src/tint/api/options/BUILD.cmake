@@ -28,6 +28,7 @@ tint_add_target("api/options"
   api/options/binding_remapper.h
   api/options/external_texture.h
   api/options/options.cc
+  api/options/texture_builtins_from_uniform.h
 )
 
 tint_target_add_dependencies("api/options"
