@@ -16,6 +16,24 @@
       "message": "just updated ACLs for chrome-release-branchers@google.com\n\nplease try again",
       "revId": "6a24b6e3d508112a9f08e3df9377c928bcd3900f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500964ae_cc7e2c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003733
+      },
+      "writtenOn": "2023-08-09T17:40:20Z",
+      "side": 1,
+      "message": "Still failure.\nI am requesting the Admin team to add us as a committer. But this probably won\u0027t happen till next branch day.",
+      "parentUuid": "9ff78d42_a3ec5725",
+      "revId": "6a24b6e3d508112a9f08e3df9377c928bcd3900f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
