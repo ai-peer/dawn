@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b53215bd_d6888bfe",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2023-08-09T14:44:05Z",
+      "side": 1,
+      "message": "Thanks for the clarification.",
+      "parentUuid": "81147b49_04d99d63",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f3cd521_1d1a199b",
