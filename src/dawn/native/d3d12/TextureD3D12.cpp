@@ -306,6 +306,10 @@ MaybeError Texture::InitializeAsInternalTexture() {
 MaybeError Texture::InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture) {
     AllocationInfo info;
     info.mMethod = AllocationMethod::kExternal;
+
+    D3D12_RESOURCE_DESC desc = d3d12Texture->GetDesc();
+    mD3D12ResourceFlags = desc.Flags;
+
     // When creating the ResourceHeapAllocation, the resource heap is set to nullptr because the
     // texture is owned externally. The texture's owning entity must remain responsible for
     // memory management.
@@ -322,7 +326,7 @@ Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureSta
           GetFormat().aspects,
           GetArrayLayers(),
           GetNumMipLevels(),
-          {D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON, kMaxExecutionSerial, false}) {}
+          {D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON, kMaxExecutionSerial, false, true}) {}
 
 Texture::~Texture() = default;
 
@@ -465,6 +469,9 @@ void Texture::TransitionSubresourceRange(std::vector<D3D12_RESOURCE_BARRIER>* ba
                                          StateAndDecay* state,
                                          D3D12_RESOURCE_STATES newState,
                                          ExecutionSerial pendingCommandSerial) const {
+    bool isFirstUse = state->isFirstUse;
+    state->isFirstUse = false;
+
     D3D12_RESOURCE_STATES lastState = state->lastState;
 
     // If the transition is from-UAV-to-UAV, then a UAV barrier is needed.
@@ -525,6 +532,13 @@ void Texture::TransitionSubresourceRange(std::vector<D3D12_RESOURCE_BARRIER>* ba
                 // read-only state.
                 state->isValidToDecay = true;
                 state->lastDecaySerial = pendingCommandSerial;
+                return;
+            } else if ((mD3D12ResourceFlags & D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS) &&
+                       isFirstUse) {
+                // All textures with the D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS flag set are
+                // implicitly promoted from D3D12_RESOURCE_STATE_COMMON to the relevant state on
+                // first GPU access.
+                ASSERT(!state->isValidToDecay);
                 return;
             } else if (newState == D3D12_RESOURCE_STATE_COPY_DEST) {
                 state->isValidToDecay = false;
@@ -873,7 +887,7 @@ MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext*
 
 bool Texture::StateAndDecay::operator==(const Texture::StateAndDecay& other) const {
     return lastState == other.lastState && lastDecaySerial == other.lastDecaySerial &&
-           isValidToDecay == other.isValidToDecay;
+           isValidToDecay == other.isValidToDecay && isFirstUse == other.isFirstUse;
 }
 
 // static
