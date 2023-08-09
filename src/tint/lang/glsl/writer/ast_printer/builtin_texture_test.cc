@@ -112,10 +112,10 @@ ExpectedResult expected_texture_overload(ast::test::ValidTextureOverload overloa
         case ValidTextureOverload::kNumLevelsCubeArray:
         case ValidTextureOverload::kNumLevelsDepth2dArray:
         case ValidTextureOverload::kNumLevelsDepthCubeArray:
-            return {"textureQueryLevels"};
+            return {"tint_symbol_2.inner.texture_builtin_values[0u][0u]"};
         case ValidTextureOverload::kNumSamplesDepthMultisampled2d:
         case ValidTextureOverload::kNumSamplesMultisampled2d:
-            return {"textureSamples"};
+            return {"tint_symbol_2.inner.texture_builtin_values[0u][0u]"};
         case ValidTextureOverload::kSample1dF32:
             return R"(texture(Texture_Sampler, vec2(1.0f, 0.5f));)";
         case ValidTextureOverload::kSample2dF32:

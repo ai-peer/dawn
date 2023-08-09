@@ -19,6 +19,7 @@
 #include <utility>
 #include <vector>
 
+#include "include/tint/texture_builtins_from_uniform_options.h"
 #include "src/tint/lang/wgsl/ast/pipeline_stage.h"
 
 namespace tint::glsl::writer {
@@ -39,6 +40,10 @@ struct Output {
 
     /// The list of entry points in the generated GLSL.
     std::vector<std::pair<std::string, ast::PipelineStage>> entry_points;
+
+    bool needs_internal_uniform_buffer = false;
+
+    TextureBuiltinsFromUniformOptions::BindingPointDataInfo bindpoint_to_data;
 };
 
 }  // namespace tint::glsl::writer
