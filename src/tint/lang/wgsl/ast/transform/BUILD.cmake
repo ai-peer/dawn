@@ -111,6 +111,8 @@ tint_add_target("lang/wgsl/ast/transform"
   lang/wgsl/ast/transform/substitute_override.h
   lang/wgsl/ast/transform/texture_1d_to_2d.cc
   lang/wgsl/ast/transform/texture_1d_to_2d.h
+  lang/wgsl/ast/transform/texture_builtins_from_uniform.cc
+  lang/wgsl/ast/transform/texture_builtins_from_uniform.h
   lang/wgsl/ast/transform/transform.cc
   lang/wgsl/ast/transform/transform.h
   lang/wgsl/ast/transform/truncate_interstage_variables.cc
@@ -198,6 +200,7 @@ tint_add_target("lang/wgsl/ast/transform:test"
   lang/wgsl/ast/transform/std140_test.cc
   lang/wgsl/ast/transform/substitute_override_test.cc
   lang/wgsl/ast/transform/texture_1d_to_2d_test.cc
+  lang/wgsl/ast/transform/texture_builtins_from_uniform_test.cc
   lang/wgsl/ast/transform/transform_test.cc
   lang/wgsl/ast/transform/truncate_interstage_variables_test.cc
   lang/wgsl/ast/transform/unshadow_test.cc
