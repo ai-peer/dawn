@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a09a040_0acdd2fd",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T14:15:26Z",
+      "side": 1,
+      "message": "```suggestion\n                // color \u003d vec4\u003cf32\u003e(gammaConversion(color.rgb, gammaDecodeParams), 1);\n```",
+      "range": {
+        "startLine": 384,
+        "startChar": 82,
+        "endLine": 384,
+        "endChar": 84
+      },
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f506fe4_285efb3c",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T14:15:26Z",
+      "side": 1,
+      "message": "```suggestion\n                // color \u003d vec4\u003cf32\u003e(params.gamutConversionMatrix * color.rgb, 1);\n```",
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3bbbe26_1424bb49",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-09T14:15:26Z",
+      "side": 1,
+      "message": "```suggestion\n                // color \u003d vec4\u003cf32\u003e(gammaConversion(color.rgb, gammaEncodeParams), 1);\n```",
+      "revId": "6ce51f36fa1bd99f1d17184c06b00725452e0481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
