@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c219770_b058e06d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-10T01:25:29Z",
+      "side": 1,
+      "message": "may be able to remove this too:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/CommandRecordingContext.cpp;l\u003d76?q\u003dSynchronizeImportedTextureBeforeUse%20f:dawn",
+      "revId": "b002e445bd5ad32db8f3d23579be7ae5a8e4fc52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b0a1af7_4ca4844a",
