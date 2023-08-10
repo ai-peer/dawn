@@ -55,6 +55,10 @@ class SharedTextureMemoryTestBackend {
     std::vector<std::vector<wgpu::SharedTextureMemory>>
     CreatePerDeviceSharedTextureMemoriesFilterByUsage(const std::vector<wgpu::Device>& devices,
                                                       wgpu::TextureUsage requiredUsage);
+
+    // Return true if the test should always use the same device.
+    // Some interop paths require the same underyling backend device.
+    virtual bool UseSameDevice() const { return false; }
 };
 
 inline std::ostream& operator<<(std::ostream& o, SharedTextureMemoryTestBackend* backend) {
@@ -75,6 +79,8 @@ class SharedTextureMemoryTests : public DawnTestWithParams<SharedTextureMemoryTe
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override;
 
     void SetUp() override;
+
+    wgpu::Device CreateDevice();
 
     void UseInRenderPass(wgpu::Device& deviceObj, wgpu::Texture& texture);
     void UseInCopy(wgpu::Device& deviceObj, wgpu::Texture& texture);

@@ -69,6 +69,13 @@ SharedTextureMemoryTestBackend::CreatePerDeviceSharedTextureMemoriesFilterByUsag
     return out;
 }
 
+wgpu::Device SharedTextureMemoryTests::CreateDevice() {
+    if (GetParam().mBackend->UseSameDevice()) {
+        return device;
+    }
+    return DawnTestBase::CreateDevice();
+}
+
 void SharedTextureMemoryTests::UseInRenderPass(wgpu::Device& deviceObj, wgpu::Texture& texture) {
     wgpu::CommandEncoder encoder = deviceObj.CreateCommandEncoder();
     utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView()});
@@ -805,7 +812,8 @@ TEST_P(SharedTextureMemoryTests, TextureAccessOutlivesMemory) {
 // Test that if the texture is uninitialized, it is cleared on first use.
 TEST_P(SharedTextureMemoryTests, UninitializedTextureIsCleared) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
+             device, wgpu::TextureUsage::RenderAttachment)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -838,11 +846,11 @@ TEST_P(SharedTextureMemoryTests, UninitializedTextureIsCleared) {
         memory.BeginAccess(texture, &beginDesc);
 
         // Use the texture on the GPU which should lazy clear it.
-        if (properties.usage & wgpu::TextureUsage::RenderAttachment) {
-            UseInRenderPass(device, texture);
-        } else {
-            ASSERT(properties.usage & wgpu::TextureUsage::CopySrc);
+        if (properties.usage & wgpu::TextureUsage::CopySrc) {
             UseInCopy(device, texture);
+        } else {
+            ASSERT(properties.usage & wgpu::TextureUsage::RenderAttachment);
+            UseInRenderPass(device, texture);
         }
 
         AsNonConst(endState.initialized) = false;  // should be overrwritten

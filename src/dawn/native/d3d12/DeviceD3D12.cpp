@@ -20,6 +20,7 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
@@ -44,6 +45,8 @@
 #include "dawn/native/d3d12/SamplerHeapCacheD3D12.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
 #include "dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
+#include "dawn/native/d3d12/SharedFenceD3D12.h"
+#include "dawn/native/d3d12/SharedTextureMemoryD3D12.h"
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/SwapChainD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
@@ -453,6 +456,38 @@ void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPip
                                                WGPUCreateRenderPipelineAsyncCallback callback,
                                                void* userdata) {
     RenderPipeline::InitializeAsync(std::move(renderPipeline), callback, userdata);
+}
+
+ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
+    const SharedTextureMemoryDescriptor* baseDescriptor) {
+    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
+                                 wgpu::SType::SharedTextureMemoryDXGISharedHandleDescriptor));
+
+    const SharedTextureMemoryDXGISharedHandleDescriptor* descriptor = nullptr;
+    FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+    DAWN_INVALID_IF(descriptor == nullptr,
+                    "SharedTextureMemoryDXGISharedHandleDescriptor must be chained.");
+
+    DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryDXGISharedHandle), "%s is not enabled.",
+                    wgpu::FeatureName::SharedTextureMemoryDXGISharedHandle);
+    return SharedTextureMemory::Create(this, baseDescriptor->label, descriptor);
+}
+
+ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
+    const SharedFenceDescriptor* baseDescriptor) {
+    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
+                                 wgpu::SType::SharedFenceDXGISharedHandleDescriptor));
+
+    const SharedFenceDXGISharedHandleDescriptor* descriptor = nullptr;
+    FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+    DAWN_INVALID_IF(descriptor == nullptr,
+                    "SharedFenceDXGISharedHandleDescriptor must be chained.");
+
+    DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceDXGISharedHandle), "%s is not enabled.",
+                    wgpu::FeatureName::SharedFenceDXGISharedHandle);
+    return SharedFence::Create(this, baseDescriptor->label, descriptor);
 }
 
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,

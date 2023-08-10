@@ -25,6 +25,10 @@ namespace d3d {
 struct RequestAdapterOptionsLUID;
 }
 
+namespace d3d11 {
+struct SharedTextureMemoryD3D11Texture2DDescriptor;
+}
+
 namespace opengl {
 struct RequestAdapterOptionsGetGLProc;
 }
@@ -35,6 +39,10 @@ inline wgpu::SType STypeFor<DawnInstanceDescriptor> = wgpu::SType(WGPUSType_Dawn
 template <>
 inline wgpu::SType STypeFor<d3d::RequestAdapterOptionsLUID> =
     wgpu::SType(WGPUSType_RequestAdapterOptionsLUID);
+
+template <>
+inline wgpu::SType STypeFor<d3d11::SharedTextureMemoryD3D11Texture2DDescriptor> =
+    wgpu::SType(WGPUSType_SharedTextureMemoryD3D11Texture2DDescriptor);
 
 template <>
 inline wgpu::SType STypeFor<opengl::RequestAdapterOptionsGetGLProc> =
