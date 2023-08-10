@@ -69,6 +69,13 @@ SharedTextureMemoryTestBackend::CreatePerDeviceSharedTextureMemoriesFilterByUsag
     return out;
 }
 
+wgpu::Device SharedTextureMemoryTests::CreateDevice() {
+    if (GetParam().mBackend->UseSameDevice()) {
+        return device;
+    }
+    return DawnTestBase::CreateDevice();
+}
+
 void SharedTextureMemoryTests::UseInRenderPass(wgpu::Device& deviceObj, wgpu::Texture& texture) {
     wgpu::CommandEncoder encoder = deviceObj.CreateCommandEncoder();
     utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView()});
@@ -810,7 +817,9 @@ TEST_P(SharedTextureMemoryTests, UninitializedTextureIsCleared) {
         memory.GetProperties(&properties);
 
         // Skipped for multiplanar formats because those must be initialized on import.
-        if (utils::IsMultiPlanarFormat(properties.format)) {
+        // We also need render attachment usage to initially populate the texture.
+        if (utils::IsMultiPlanarFormat(properties.format) ||
+            (properties.usage & wgpu::TextureUsage::RenderAttachment) == 0) {
             continue;
         }
 
@@ -838,11 +847,11 @@ TEST_P(SharedTextureMemoryTests, UninitializedTextureIsCleared) {
         memory.BeginAccess(texture, &beginDesc);
 
         // Use the texture on the GPU which should lazy clear it.
-        if (properties.usage & wgpu::TextureUsage::RenderAttachment) {
-            UseInRenderPass(device, texture);
-        } else {
-            ASSERT(properties.usage & wgpu::TextureUsage::CopySrc);
+        if (properties.usage & wgpu::TextureUsage::CopySrc) {
             UseInCopy(device, texture);
+        } else {
+            ASSERT(properties.usage & wgpu::TextureUsage::RenderAttachment);
+            UseInRenderPass(device, texture);
         }
 
         AsNonConst(endState.initialized) = false;  // should be overrwritten
@@ -1077,6 +1086,9 @@ TEST_P(SharedTextureMemoryTests, RenderThenTextureDestroyBeforeEndAccessThenSamp
 // results.
 // This tests both cases where the device is destroyed, and where the device is lost.
 TEST_P(SharedTextureMemoryTests, RenderThenLoseOrDestroyDeviceBeforeEndAccessThenSample) {
+    // Not supported if using the same device. Not possible to lose one without losing the other.
+    DAWN_TEST_UNSUPPORTED_IF(GetParam().mBackend->UseSameDevice());
+
     auto DoTest = [&](auto DestroyOrLoseDevice) {
         std::vector<wgpu::Device> devices = {CreateDevice(), CreateDevice()};
         auto perDeviceMemories =
@@ -1133,6 +1145,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenLoseOrDestroyDeviceBeforeEndAccessThe
 // Write to the texture, then read from two separate devices concurrently, then write again.
 // Reads should happen strictly after the writes. The final write should wait for the reads.
 TEST_P(SharedTextureMemoryTests, SeparateDevicesWriteThenConcurrentReadThenWrite) {
+    DAWN_TEST_UNSUPPORTED_IF(!GetParam().mBackend->SupportsConcurrentRead());
+
     std::vector<wgpu::Device> devices = {device, CreateDevice(), CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
