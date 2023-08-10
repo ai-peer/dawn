@@ -682,7 +682,15 @@ TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor
     }
 }
 
-TextureBase::~TextureBase() = default;
+TextureBase::~TextureBase() {
+    if (mSharedTextureMemoryState != nullptr) {
+        Ref<SharedTextureMemoryBase> sharedTextureMemory =
+            mSharedTextureMemoryState->GetSharedTextureMemory().Promote();
+        if (sharedTextureMemory != nullptr) {
+            sharedTextureMemory->DeregisterTexture(this);
+        }
+    }
+}
 
 static constexpr Format kUnusedFormat;
 
@@ -835,8 +843,10 @@ MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
     if (DAWN_UNLIKELY(mState.destroyed || !mState.hasAccess)) {
         DAWN_INVALID_IF(mState.destroyed, "Destroyed texture %s used in a submit.", this);
-        DAWN_INVALID_IF(!mState.hasAccess, "%s without current access to %s used in a submit.",
-                        this, mSharedTextureMemory.Promote().Get());
+        DAWN_INVALID_IF(
+            !mState.hasAccess,
+            "%s created from shared texture memory used in a submit does not have current access.",
+            this);
     }
 
     return {};
@@ -940,8 +950,8 @@ bool TextureBase::IsImplicitMSAARenderTextureViewSupported() const {
     return (GetUsage() & wgpu::TextureUsage::TextureBinding) != 0;
 }
 
-Ref<SharedTextureMemoryBase> TextureBase::TryGetSharedTextureMemory() {
-    return mSharedTextureMemory.Promote();
+SharedTextureMemoryState* TextureBase::GetSharedTextureMemoryState() const {
+    return mSharedTextureMemoryState.Get();
 }
 
 void TextureBase::APIDestroy() {

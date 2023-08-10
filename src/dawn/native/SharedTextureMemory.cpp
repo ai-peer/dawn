@@ -162,29 +162,63 @@ void SharedTextureMemoryBase::PushAccessFences(TextureBase* texture,
     for (size_t i = 0; i < descriptor->fenceCount; ++i) {
         fences->push_back({descriptor->fences[i], descriptor->signaledValues[i]});
     }
-    mAccessScopes[texture].push(fences);
+    mPerTextureState[texture]->mAccesses.push(fences);
 }
 
-void SharedTextureMemoryBase::AcquireBeginFences(TextureBase* texture, PendingFenceList* fences) {
-    if (!mAccessScopes[texture].empty()) {
-        auto& current = mAccessScopes[texture].top();
+SharedTextureMemoryState::SharedTextureMemoryState(
+    WeakRef<SharedTextureMemoryBase> sharedTextureMemory)
+    : mSharedTextureMemory(std::move(sharedTextureMemory)) {}
+
+const WeakRef<SharedTextureMemoryBase>& SharedTextureMemoryState::GetSharedTextureMemory() const {
+    return mSharedTextureMemory;
+}
+
+void SharedTextureMemoryState::AcquireBeginFences(PendingFenceList* fences) {
+    if (!mAccesses.empty()) {
+        auto& current = mAccesses.top();
         *fences = current;
         current->clear();
     }
 }
 
-void SharedTextureMemoryBase::SetLastUsageSerial(ExecutionSerial lastUsageSerial) {
+SharedTextureMemoryState* SharedTextureMemoryBase::RegisterTexture(TextureBase* texture) {
+    auto it = mPerTextureState.emplace(texture,
+                                       AcquireRef(new SharedTextureMemoryState(GetWeakRef(this))));
+    ASSERT(it.second);
+    return it.first->second.Get();
+}
+
+void SharedTextureMemoryBase::DeregisterTexture(TextureBase* texture) {
+    size_t count = mPerTextureState.erase(texture);
+    ASSERT(count == 1u);
+}
+
+MaybeError SharedTextureMemoryBase::ValidateTextureCreatedFromSelf(TextureBase* texture) {
+    auto it = mPerTextureState.find(texture);
+    DAWN_INVALID_IF(it == mPerTextureState.end(), "%s was not created from %s.", texture, this);
+    DAWN_INVALID_IF(
+        it->second.Get() != texture->GetSharedTextureMemoryState(),
+        "%s was created from instead of %s.", texture,
+        texture->GetSharedTextureMemoryState()->GetSharedTextureMemory().Promote().Get(), this);
+    return {};
+}
+
+void SharedTextureMemoryBase::AcquireBeginFences(TextureBase* texture, PendingFenceList* fences) {
+    mPerTextureState[texture]->AcquireBeginFences(fences);
+}
+
+void SharedTextureMemoryState::SetLastUsageSerial(ExecutionSerial lastUsageSerial) {
     mLastUsageSerial = lastUsageSerial;
 }
 
-ExecutionSerial SharedTextureMemoryBase::GetLastUsageSerial() const {
+ExecutionSerial SharedTextureMemoryState::GetLastUsageSerial() const {
     return mLastUsageSerial;
 }
 
 void SharedTextureMemoryBase::PopAccessFences(TextureBase* texture, PendingFenceList* fences) {
-    if (!mAccessScopes[texture].empty()) {
-        *fences = mAccessScopes[texture].top();
-        mAccessScopes[texture].pop();
+    if (!mPerTextureState[texture]->mAccesses.empty()) {
+        *fences = mPerTextureState[texture]->mAccesses.top();
+        mPerTextureState[texture]->mAccesses.pop();
     }
 }
 
@@ -209,9 +243,7 @@ MaybeError SharedTextureMemoryBase::BeginAccess(TextureBase* texture,
         DAWN_TRY(GetDevice()->ValidateObject(descriptor->fences[i]));
     }
 
-    Ref<SharedTextureMemoryBase> memory = texture->TryGetSharedTextureMemory();
-    DAWN_INVALID_IF(memory.Get() != this, "%s was created from %s and cannot be used with %s.",
-                    texture, memory.Get(), this);
+    DAWN_TRY(ValidateTextureCreatedFromSelf(texture));
 
     DAWN_INVALID_IF(texture->GetFormat().IsMultiPlanar() && !descriptor->initialized,
                     "BeginAccess on %s with multiplanar format (%s) must be initialized.", texture,
@@ -283,11 +315,7 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemoryBase::EndAccessInternal(
     mCurrentAccess = nullptr;
 
     DAWN_TRY(GetDevice()->ValidateObject(texture));
-
-    Ref<SharedTextureMemoryBase> memory = texture->TryGetSharedTextureMemory();
-    DAWN_INVALID_IF(memory.Get() != this, "%s was created from %s and cannot be used with %s.",
-                    texture, memory.Get(), this);
-
+    DAWN_TRY(ValidateTextureCreatedFromSelf(texture));
     return EndAccessImpl(texture);
 }
 
