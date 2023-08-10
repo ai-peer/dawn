@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d80c637f_4f9a4f34",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T07:46:34Z",
+      "side": 1,
+      "message": "note:  I think we want read-only as well.",
+      "revId": "1a95b6435df40676eee7150af0ff070df4293899",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
