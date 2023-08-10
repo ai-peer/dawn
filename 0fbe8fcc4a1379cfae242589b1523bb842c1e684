@@ -16,6 +16,57 @@
       "message": "Ah... this is massive... Didn\u0027t finish reviewing yet, but sending this batch of comments first. Will continue reviewing tomorrow heh...",
       "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29dfaad2_f9d66e8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Still reviewing frontend a bit. Tests are next.",
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1866f6_b3488dac",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 25
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Note for the future: this validation feels like something that will be very similar in all backends and maybe the backends SharedTextureMemory can say which fence type they support and the frontend does the validation.",
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea76022_e0e4035b",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 25
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "I wonder if instead of this dance we could just cast to the proper fence type. (or dynamic cast + assert)?",
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

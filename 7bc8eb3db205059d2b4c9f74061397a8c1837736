@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "949b5847_ac7f0494",
+        "filename": "src/dawn/native/SharedFence.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Gotcha, I\u0027m extremely slightly uneasy about mixing error cases and success cases in the backends and think we could have a virtual method to ask for the fence type (or a constructor argument), but either way is fine, especially if it\u0027s tested.",
+      "parentUuid": "62b71db2_7cb9fb13",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5238ec60_ba63862c",
@@ -170,6 +188,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "918707f7_1129290b",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Okay",
+      "parentUuid": "428d50bd_f56d5092",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ea170ec_68278017",
@@ -207,6 +243,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03d061ec_74b20af1",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "You\u0027re right and in essence this if very similar to the buffer / texture reflection that don\u0027t do any validation, so we could completely remove the validation instead!",
+      "parentUuid": "9b48898f_c63a8ac5",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dda3dfab_1e7cd869",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -236,6 +290,24 @@
       "side": 1,
       "message": "IDK - we don\u0027t really disable validation based on the toggle for a bunch of other parts in Dawn. it mostly only does stuff for encoding. If we really want to skip validation, we should find a better way to pull all the frontend validation out entirely (separate proc table?). adding more branches seems worth it only when the performance measurably matters",
       "parentUuid": "dda3dfab_1e7cd869",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71813678_200aac7e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9f3b9685_f106b2f8",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -415,6 +487,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6f3320_8b2f6307",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ada85234_e8e8f3ca",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "828fa8c1_426dfb70",
@@ -446,6 +536,24 @@
       "side": 1,
       "message": "I named it PushAccessFences / PopAccessFences",
       "parentUuid": "828fa8c1_426dfb70",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d649ea4_8a60ea36",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ecc4221a_78234958",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -555,6 +663,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9902c244_1350ee78",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88dbbe68_bc300a29",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "719343de_03a258a5",
@@ -586,6 +712,24 @@
       "side": 1,
       "message": "named it PopAccessFences",
       "parentUuid": "719343de_03a258a5",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0543f90_6d543711",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6c94984a_553788c6",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -638,6 +782,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "ditto though I realize now that we need to be able to handle the case where an error texture from this object is used.",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44897508_f33d3ea3",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2af47750_4fc9ead0",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -760,6 +922,24 @@
       "writtenOn": "2023-08-09T16:27:10Z",
       "side": 1,
       "message": "TODO: is this needed.",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c786e3_79331cee",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T14:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "98d60a9a_48adca65",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
