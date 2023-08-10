@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061281ef_10628b3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T13:25:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a870676ed4dfe51e75c5353b4395cc64f412fbb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c8ae74d_c1ec3d0e",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T13:25:41Z",
+      "side": 1,
+      "message": "nit: we should check CanBeUsedInSubmitNow ditto below. This also means that EndAccess() should flush any pending operations if needed.",
+      "range": {
+        "startLine": 603,
+        "startChar": 41,
+        "endLine": 603,
+        "endChar": 52
+      },
+      "revId": "a870676ed4dfe51e75c5353b4395cc64f412fbb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
