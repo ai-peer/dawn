@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "833e76a9_cb4ddc87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-10T17:36:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7c2776a0bda9687c6d856c908630c20aa8407905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be77fe8_7586e8be",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-10T17:36:43Z",
+      "side": 1,
+      "message": "in addition to this assert - perhaps it should be validated on creation in InitializeAsExternalTexture and IniitializeAsSwapChainTexture (is it true for swap chains?)",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 80
+      },
+      "revId": "7c2776a0bda9687c6d856c908630c20aa8407905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aaf1f148_3d21784d",
