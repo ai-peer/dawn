@@ -397,6 +397,9 @@ match u32_texel_format
 
 match write: access.write
 match read_write: access.read_write
+match write_or_read_write
+  : access.write
+  | access.read_write
 
 match function_private_workgroup
   : address_space.function
@@ -851,7 +854,7 @@ match workgroup
 @must_use fn textureSampleLevel<A: iu32, L: iu32>(texture: texture_depth_cube_array,sampler: sampler, coords: vec3<f32>, array_index: A, level: L) -> f32
 @must_use fn textureSampleBaseClampToEdge(texture: texture_2d<f32>, sampler: sampler, coords: vec2<f32>) -> vec4<f32>
 @must_use fn textureSampleBaseClampToEdge(texture: texture_external, sampler: sampler, coords: vec2<f32>) -> vec4<f32>
-fn textureStore<C: iu32>(texture: texture_storage_1d<f32_texel_format, write>, coords: C, value: vec4<f32>)
+fn textureStore<C: iu32, AM: write_or_read_write>(texture: texture_storage_1d<f32_texel_format, AM>, coords: C, value: vec4<f32>)
 fn textureStore<C: iu32>(texture: texture_storage_2d<f32_texel_format, write>, coords: vec2<C>, value: vec4<f32>)
 fn textureStore<C: iu32, A: iu32>(texture: texture_storage_2d_array<f32_texel_format, write>, coords: vec2<C>, array_index: A, value: vec4<f32>)
 fn textureStore<C: iu32>(texture: texture_storage_3d<f32_texel_format, write>, coords: vec3<C>, value: vec4<f32>)
