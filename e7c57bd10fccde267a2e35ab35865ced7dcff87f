@@ -16,6 +16,23 @@
       "message": "PTAL! Build over your CL for this!",
       "revId": "e7c57bd10fccde267a2e35ab35865ced7dcff87f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb929ef9_9e70f688",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-10T17:07:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e7c57bd10fccde267a2e35ab35865ced7dcff87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
