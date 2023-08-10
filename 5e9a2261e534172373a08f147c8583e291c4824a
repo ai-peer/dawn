@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "602f4c30_52fb3680",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "u-nit. // Validate that there is one 2D, single-sampled subresource.",
+      "range": {
+        "startLine": 117,
+        "startChar": 30,
+        "endLine": 117,
+        "endChar": 31
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53815e3_a55cf7bc",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "u-nit. exactly matches (remove the exactly at the end)",
+      "range": {
+        "startLine": 128,
+        "startChar": 33,
+        "endLine": 128,
+        "endChar": 45
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c2016f_48c74522",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 136,
+        "startChar": 84,
+        "endLine": 136,
+        "endChar": 91
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b52ab37c_dc41b5be",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "u-nit. Remove \u0027that\u0027",
+      "range": {
+        "startLine": 141,
+        "startChar": 16,
+        "endLine": 141,
+        "endChar": 20
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7113aa50_b3e72e40",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this still be under `ValidateTextureUsage`? Maybe we could just pass `allowedSharedTextureMemoryUsage` in to it?",
+      "range": {
+        "startLine": 435,
+        "startChar": 4,
+        "endLine": 449,
+        "endChar": 5
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106a4eab_6d63726e",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "Hmm yea maybe this could be a reference and then you could leak just 1 Backend instead of potentially 2 right now?",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 46
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

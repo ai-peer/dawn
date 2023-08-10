@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5615f432_4d1d294d",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "Ah.. took me a while to understand what was happening with this function. I think we should clarify the documentation a bit more to indicate that the 2d vector is by unique `SharedMemoryTexture`, then by `Device`. Intuitively when I saw this I assumed that the first dimension was `Device` since the input was a list of `Device`s.",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 87
+      },
+      "revId": "d47e8c58409e3af68bc5f6b2d8cd1bc5c8697efb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb027df1_68a92d47",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 24
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "We should add labels to all of these with some information about the variant. Otherwise, if one of them fails, it\u0027ll be really hard to figure out which one since the test will just say failed at some line.",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 96,
+        "endChar": 50
+      },
+      "revId": "d47e8c58409e3af68bc5f6b2d8cd1bc5c8697efb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -860,6 +860,30 @@
       },
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "968c3e67_8d5cad6f",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T01:07:22Z",
+      "side": 1,
+      "message": "Hmm, yea I think the alternative is better. Mainly because `GetInstance` is used twice below so we would be leaking 2, whereas a single function scope static doesn\u0027t feel as bad?",
+      "parentUuid": "7b45e952_39c6a0ee",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 5
+      },
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
