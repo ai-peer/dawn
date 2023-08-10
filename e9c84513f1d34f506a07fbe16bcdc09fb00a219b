@@ -16,6 +16,74 @@
       "message": "LGTM",
       "revId": "e9c84513f1d34f506a07fbe16bcdc09fb00a219b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a2fa9c_792e9ea0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-10T18:00:17Z",
+      "side": 1,
+      "message": "Very nice cleanup! LGTM.\n\nDon\u0027t mind the notes I left, they\u0027re more for my own benefit than yours.",
+      "revId": "e9c84513f1d34f506a07fbe16bcdc09fb00a219b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82322685_89dd40ff",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-10T18:00:17Z",
+      "side": 1,
+      "message": "Note to self, and anyone who happens to look back on this review later:\n\nThis bit was slightly confusing to me initially because mLayout is assigned to decriptor-\u003elayout, and then immediately after GetLayout() is called which returns an internal layout. This can make it appear at first glance than the frontend layout isn\u0027t passed in, but mLayout actually is the frontend object, and getLayout() returns the internal object contained within the frontend object. (See [1])\n\nThis feels weird initially, but it makes more sense when you realize that the frontend object is only really used for one validation call (see [2]), so having everything else treat \"Layout\" as the internal object benefits the majority of the codebase.",
+      "revId": "e9c84513f1d34f506a07fbe16bcdc09fb00a219b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1f3316_003e2a69",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-10T18:00:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e9c84513f1d34f506a07fbe16bcdc09fb00a219b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed6251b_3a480cfb",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-10T18:00:17Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "e9c84513f1d34f506a07fbe16bcdc09fb00a219b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
