@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2003e87e_20065cc7",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-10T18:29:03Z",
+      "side": 1,
+      "message": "This is a great summary for it! I basically ran through the same logic. Initially when doing the cleanup I added `GetInternalLayout` over the current `GetLayout`, but as you mentioned, the frontend version is used very sparsely so it made more sense the other way.",
+      "parentUuid": "82322685_89dd40ff",
+      "revId": "e9c84513f1d34f506a07fbe16bcdc09fb00a219b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8c1f3316_003e2a69",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 3
