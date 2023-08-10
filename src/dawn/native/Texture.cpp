@@ -835,8 +835,7 @@ MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
     if (DAWN_UNLIKELY(mState.destroyed || !mState.hasAccess)) {
         DAWN_INVALID_IF(mState.destroyed, "Destroyed texture %s used in a submit.", this);
-        DAWN_INVALID_IF(!mState.hasAccess, "%s without current access to %s used in a submit.",
-                        this, mSharedTextureMemory.Promote().Get());
+        DAWN_INVALID_IF(!mState.hasAccess, "%s used in a submit without current access.", this);
     }
 
     return {};
@@ -940,8 +939,8 @@ bool TextureBase::IsImplicitMSAARenderTextureViewSupported() const {
     return (GetUsage() & wgpu::TextureUsage::TextureBinding) != 0;
 }
 
-Ref<SharedTextureMemoryBase> TextureBase::TryGetSharedTextureMemory() {
-    return mSharedTextureMemory.Promote();
+SharedTextureMemoryState* TextureBase::GetSharedTextureMemoryState() const {
+    return mSharedTextureMemoryState.Get();
 }
 
 void TextureBase::APIDestroy() {

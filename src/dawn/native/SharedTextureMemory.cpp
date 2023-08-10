@@ -162,29 +162,67 @@ void SharedTextureMemoryBase::PushAccessFences(TextureBase* texture,
     for (size_t i = 0; i < descriptor->fenceCount; ++i) {
         fences->push_back({descriptor->fences[i], descriptor->signaledValues[i]});
     }
-    mAccessScopes[texture].push(fences);
+    auto it = mPerTextureState.find(texture);
+    if (it == mPerTextureState.end()) {
+        Ref<SharedTextureMemoryState> state = texture->GetSharedTextureMemoryState();
+        if (state == nullptr || state->GetSharedTextureMemory().Promote().Get() != this) {
+            // Texture was not created from this shared texture memory. It will be
+            // an error. Make a new state to track the fences.
+            state = AcquireRef(new SharedTextureMemoryState(GetWeakRef(this)));
+        }
+        it = mPerTextureState.emplace(texture, std::move(state)).first;
+    }
+    it->second->mAccesses.push(fences);
 }
 
-void SharedTextureMemoryBase::AcquireBeginFences(TextureBase* texture, PendingFenceList* fences) {
-    if (!mAccessScopes[texture].empty()) {
-        auto& current = mAccessScopes[texture].top();
+SharedTextureMemoryState::SharedTextureMemoryState(
+    WeakRef<SharedTextureMemoryBase> sharedTextureMemory)
+    : mSharedTextureMemory(std::move(sharedTextureMemory)) {}
+
+const WeakRef<SharedTextureMemoryBase>& SharedTextureMemoryState::GetSharedTextureMemory() const {
+    return mSharedTextureMemory;
+}
+
+void SharedTextureMemoryState::AcquireBeginFences(PendingFenceList* fences) {
+    if (!mAccesses.empty()) {
+        auto& current = mAccesses.top();
         *fences = current;
         current->clear();
     }
 }
 
-void SharedTextureMemoryBase::SetLastUsageSerial(ExecutionSerial lastUsageSerial) {
+MaybeError SharedTextureMemoryBase::ValidateTextureCreatedFromSelf(TextureBase* texture) {
+    auto* state = texture->GetSharedTextureMemoryState();
+    DAWN_INVALID_IF(state == nullptr, "%s was not created from %s.", texture, this);
+
+    auto* sharedTextureMemory =
+        texture->GetSharedTextureMemoryState()->GetSharedTextureMemory().Promote().Get();
+    DAWN_INVALID_IF(sharedTextureMemory != this, "%s created from %s cannot be used with %s.",
+                    texture, sharedTextureMemory, this);
+    return {};
+}
+
+void SharedTextureMemoryBase::AcquireBeginFences(TextureBase* texture, PendingFenceList* fences) {
+    mPerTextureState[texture]->AcquireBeginFences(fences);
+}
+
+void SharedTextureMemoryState::SetLastUsageSerial(ExecutionSerial lastUsageSerial) {
     mLastUsageSerial = lastUsageSerial;
 }
 
-ExecutionSerial SharedTextureMemoryBase::GetLastUsageSerial() const {
+ExecutionSerial SharedTextureMemoryState::GetLastUsageSerial() const {
     return mLastUsageSerial;
 }
 
 void SharedTextureMemoryBase::PopAccessFences(TextureBase* texture, PendingFenceList* fences) {
-    if (!mAccessScopes[texture].empty()) {
-        *fences = mAccessScopes[texture].top();
-        mAccessScopes[texture].pop();
+    auto it = mPerTextureState.find(texture);
+    if (it == mPerTextureState.end() || it->second->mAccesses.empty()) {
+        return;
+    }
+    *fences = mPerTextureState[texture]->mAccesses.top();
+    mPerTextureState[texture]->mAccesses.pop();
+    if (mPerTextureState[texture]->mAccesses.empty()) {
+        mPerTextureState.erase(it);
     }
 }
 
@@ -196,8 +234,12 @@ void SharedTextureMemoryBase::APIBeginAccess(TextureBase* texture,
 
 MaybeError SharedTextureMemoryBase::BeginAccess(TextureBase* texture,
                                                 const BeginAccessDescriptor* descriptor) {
+    // Push access fences first. Fences should be tracked regardless of whether errors occur.
     PushAccessFences(texture, descriptor);
 
+    // Validate there is not another ongoing access and then set the current access.
+    // This is done first because BeginAccess should acquire access regardless of whether or
+    // not the internals generate an error.
     DAWN_INVALID_IF(mCurrentAccess != nullptr,
                     "Cannot begin access with %s on %s which is currently accessed by %s.", texture,
                     this, mCurrentAccess.Get());
@@ -209,9 +251,7 @@ MaybeError SharedTextureMemoryBase::BeginAccess(TextureBase* texture,
         DAWN_TRY(GetDevice()->ValidateObject(descriptor->fences[i]));
     }
 
-    Ref<SharedTextureMemoryBase> memory = texture->TryGetSharedTextureMemory();
-    DAWN_INVALID_IF(memory.Get() != this, "%s was created from %s and cannot be used with %s.",
-                    texture, memory.Get(), this);
+    DAWN_TRY(ValidateTextureCreatedFromSelf(texture));
 
     DAWN_INVALID_IF(texture->GetFormat().IsMultiPlanar() && !descriptor->initialized,
                     "BeginAccess on %s with multiplanar format (%s) must be initialized.", texture,
@@ -283,11 +323,7 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemoryBase::EndAccessInternal(
     mCurrentAccess = nullptr;
 
     DAWN_TRY(GetDevice()->ValidateObject(texture));
-
-    Ref<SharedTextureMemoryBase> memory = texture->TryGetSharedTextureMemory();
-    DAWN_INVALID_IF(memory.Get() != this, "%s was created from %s and cannot be used with %s.",
-                    texture, memory.Get(), this);
-
+    DAWN_TRY(ValidateTextureCreatedFromSelf(texture));
     return EndAccessImpl(texture);
 }
 

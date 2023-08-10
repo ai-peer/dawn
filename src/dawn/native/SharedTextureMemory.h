@@ -19,6 +19,7 @@
 #include <stack>
 
 #include "dawn/common/StackContainer.h"
+#include "dawn/common/WeakRef.h"
 #include "dawn/common/WeakRefSupport.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/IntegerTypes.h"
@@ -28,6 +29,7 @@
 
 namespace dawn::native {
 
+class SharedTextureMemoryState;
 struct SharedTextureMemoryDescriptor;
 struct SharedTextureMemoryBeginAccessDescriptor;
 struct SharedTextureMemoryEndAccessState;
@@ -51,13 +53,11 @@ class SharedTextureMemoryBase : public ApiObjectBase,
 
     ObjectType GetType() const override;
 
+    // Validate that the texture was created from this SharedTextureMemory.
+    MaybeError ValidateTextureCreatedFromSelf(TextureBase* texture);
+
     // Acquire the begin fences for the current access scope on `texture`.
     void AcquireBeginFences(TextureBase* texture, PendingFenceList* fences);
-
-    // Set the last usage serial. This indicates when the SharedFence exported
-    // from APIEndAccess will complete.
-    void SetLastUsageSerial(ExecutionSerial lastUsageSerial);
-    ExecutionSerial GetLastUsageSerial() const;
 
   protected:
     SharedTextureMemoryBase(DeviceBase* device,
@@ -91,16 +91,41 @@ class SharedTextureMemoryBase : public ApiObjectBase,
     // EndAccessImpl validates the operation is valid on the backend, and returns the end fence.
     virtual ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture) = 0;
 
-    // Begin an access scope on `texture`. Passing a list of fences that should be waited on before
+    // Begin an access scope on `texture`, passing a list of fences that should be waited on before
     // use.
     void PushAccessFences(TextureBase* texture,
                           const SharedTextureMemoryBeginAccessDescriptor* descriptor);
     // End an access scope on `texture`, writing out any fences that have not yet been acquired.
     void PopAccessFences(TextureBase* texture, PendingFenceList* fences);
 
-    // Map of texture -> stack of PendingFenceList.
-    std::map<Ref<TextureBase>, std::stack<PendingFenceList>> mAccessScopes;
+    // Map of texture -> per texture state.
+    std::map<Ref<TextureBase>, Ref<SharedTextureMemoryState>> mPerTextureState;
+};
+
+class SharedTextureMemoryState : public RefCounted {
+  public:
+    using PendingFenceList = SharedTextureMemoryBase::PendingFenceList;
+
+    explicit SharedTextureMemoryState(WeakRef<SharedTextureMemoryBase> sharedTextureMemory);
+
+    // Acquire the begin fences for current access scope.
+    void AcquireBeginFences(PendingFenceList* fences);
+
+    // Set the last usage serial. This indicates when the SharedFence exported
+    // from APIEndAccess will complete.
+    void SetLastUsageSerial(ExecutionSerial lastUsageSerial);
+    ExecutionSerial GetLastUsageSerial() const;
+
+    const WeakRef<SharedTextureMemoryBase>& GetSharedTextureMemory() const;
+
+  private:
+    friend class SharedTextureMemoryBase;
+
+    // Stack of fences pending acquire.
+    std::stack<PendingFenceList> mAccesses;
     ExecutionSerial mLastUsageSerial{0};
+
+    WeakRef<SharedTextureMemoryBase> mSharedTextureMemory;
 };
 
 }  // namespace dawn::native
