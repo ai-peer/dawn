@@ -33,6 +33,8 @@
 #include "dawn/native/d3d12/Forward.h"
 #include "dawn/native/d3d12/HeapD3D12.h"
 #include "dawn/native/d3d12/ResourceAllocatorManagerD3D12.h"
+#include "dawn/native/d3d12/SharedFenceD3D12.h"
+#include "dawn/native/d3d12/SharedTextureMemoryD3D12.h"
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/TextureCopySplitter.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
@@ -202,6 +204,17 @@ ResultOrError<Ref<Texture>> Texture::Create(Device* device,
     Ref<Texture> dawnTexture = AcquireRef(new Texture(device, descriptor));
     DAWN_TRY(dawnTexture->InitializeAsSwapChainTexture(std::move(d3d12Texture)));
     return std::move(dawnTexture);
+}
+
+// static
+ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
+    SharedTextureMemory* memory,
+    const TextureDescriptor* descriptor) {
+    Device* device = ToBackend(memory->GetDevice());
+    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
+    DAWN_TRY(texture->InitializeAsExternalTexture(memory->GetD3DResource(), {}, false));
+    texture->mSharedTextureMemory = GetWeakRef(static_cast<SharedTextureMemoryBase*>(memory));
+    return texture;
 }
 
 MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
@@ -404,6 +417,21 @@ MaybeError Texture::SynchronizeImportedTextureBeforeUse() {
         device->ReferenceUntilUnused(static_cast<Fence*>(fence.Get())->GetD3D12Fence());
     }
     mWaitFences.clear();
+
+    SharedTextureMemoryBase::PendingFenceList fences;
+    Ref<SharedTextureMemoryBase> memory = TryGetSharedTextureMemory();
+    if (memory != nullptr) {
+        memory->AcquireBeginFences(this, &fences);
+        memory->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+    }
+
+    for (const auto& fence : fences) {
+        DAWN_TRY(CheckHRESULT(device->GetCommandQueue()->Wait(
+                                  ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
+                              "D3D12 fence wait"));
+        // Keep D3D12 fence alive until commands complete.
+        device->ReferenceUntilUnused(ToBackend(fence.object)->GetD3DFence());
+    }
     return {};
 }
 
